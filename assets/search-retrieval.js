@@ -1173,7 +1173,7 @@
 
     function fieldedQueryGroups(query, { context = "" } = {}) {
       const rawUppercase = new Set(
-        (String(query || "").match(/\b[A-Z][A-Z0-9.-]{1,7}\b/g) || [])
+        (String(query || "").match(/\b[A-Z][A-Z0-9.-]{1,7}s?\b/g) || [])
           .flatMap(value => queryApi.tokenize(value)),
       );
       return queryApi.tokenize(query).map((source, index) => {

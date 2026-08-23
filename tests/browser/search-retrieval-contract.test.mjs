@@ -395,6 +395,33 @@ test("fielded short acronyms require exact evidence or high-confidence resolutio
   assert.ok(contextual.scores[1] > 0);
 });
 
+test("fielded scoring recognizes a lowercase plural suffix on an uppercase acronym", () => {
+  const apis = loadApis();
+  const catalog = catalogFor([
+    record("rare-earth", "Rare earth elements research", "Materials science and engineering."),
+    record("collision", "Research ecosystems", "General institutional capacity building."),
+  ], apis.query);
+  const engine = apis.retrieval.create(catalog, apis.query, {
+    searchV2: true,
+    searchV2Config: {
+      ...fieldedSearchV2Config(apis),
+      acronym_expansions: { rees: "rare earth elements" },
+    },
+    catalogRole: "parent",
+  });
+  const result = engine.score("REEs", { evidence: true });
+
+  assert.equal(result.queryGroups[0].source, "rees");
+  assert.equal(result.diagnostics.acronymExpansions.length, 1);
+  assert.equal(result.diagnostics.acronymExpansions[0].source, "rees");
+  assert.equal(result.diagnostics.acronymExpansions[0].phrase, "rare earth elements");
+  assert.equal(result.diagnostics.acronymExpansions[0].confidence, 1);
+  assert.equal(result.diagnostics.acronymExpansions[0].basis, "registered unambiguous acronym");
+  assert.ok(result.discoveryScores[0] > 0);
+  assert.equal(result.discoveryScores[1], 0);
+  assert.equal(result.scores[0], 0, "a broad single acronym remains Potential-only");
+});
+
 test("search v2 requires complete substantive coverage for concise technical queries", () => {
   const apis = loadApis();
   const catalog = catalogFor([

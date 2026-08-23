@@ -94,6 +94,37 @@ test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup a
     new Set(["AI"]),
   ).allowed, true);
 
+  const reeDirect = { diagnostics: { acronymExpansions: [{
+    source: "ree",
+    phrase: "rare earth element",
+    confidence: 1,
+  }] } };
+  const reesDirect = { diagnostics: { acronymExpansions: [{
+    source: "rees",
+    phrase: "rare earth elements",
+    confidence: 1,
+  }] } };
+  assert.equal(
+    api.canonicalSemanticQuery("REE separations", reeDirect, null),
+    "rare earth element separations",
+  );
+  assert.match(
+    api.canonicalSemanticQuery("REE", reeDirect, null),
+    /^rare earth element\. Prioritize scientific research/,
+  );
+  assert.match(
+    api.canonicalSemanticQuery("REEs", reesDirect, null),
+    /^rare earth elements\. Prioritize scientific research/,
+  );
+  assert.equal(api.canonicalSemanticQuery("AIM", null, null), "AIM");
+  assert.equal(api.deterministicSafeguard(
+    "REEs",
+    { text: "rare earth elements" },
+    new Set(["REES"]),
+  ).allowed, true);
+  assert.match(source, /post\("embed-query", \{ query: semanticQuery \}\)/);
+  assert.match(source, /query: semanticQuery,[\s\S]*?corpus_sha256/);
+
   const parents = api.strongestParents([
     { parent_id: "p", passage_id: "parent:p", voyage_score: .4 },
     { parent_id: "p", passage_id: "child:c", voyage_score: .8 },

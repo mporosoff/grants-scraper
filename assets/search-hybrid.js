@@ -277,8 +277,8 @@
   }
 
   function shortUppercaseAcronyms(query) {
-    return [...new Set(String(query || "").match(/(?:^|\s|[(/[{:])([A-Z][A-Z0-9]{1,5})(?=$|\s|[)\]/},.:;!?-])/g)
-      ?.map(value => value.replace(/^[^A-Z]*/, "").replace(/[^A-Z0-9].*$/, "")) || [])];
+    return [...new Set(String(query || "").match(/(?:^|\s|[(/[{:])([A-Z][A-Z0-9]{1,5}s?)(?=$|\s|[)\]/},.:;!?-])/g)
+      ?.map(value => value.replace(/^[^A-Z]*/, "").replace(/[^A-Za-z0-9].*$/, "")) || [])];
   }
 
   function identifierTokens(query) {
@@ -293,18 +293,46 @@
     ).test(String(text || ""));
   }
 
-  function resolvedAcronymSet(parentDirect, childDirect) {
+  function resolvedAcronymMap(parentDirect, childDirect) {
     const expansions = [
       ...(parentDirect?.diagnostics?.acronymExpansions || []),
       ...(childDirect?.diagnostics?.acronymExpansions || []),
     ];
-    return new Set(expansions
-      .filter(item => Number(item.confidence || 0) >= .95 && item.phrase)
-      .map(item => String(item.source || "").toUpperCase()));
+    const resolved = new Map();
+    expansions.forEach(item => {
+      if (Number(item.confidence || 0) < .95 || !item.phrase) return;
+      resolved.set(String(item.source || "").toUpperCase(), normalizeText(item.phrase));
+    });
+    return resolved;
+  }
+
+  function resolvedAcronymSet(parentDirect, childDirect) {
+    return new Set(resolvedAcronymMap(parentDirect, childDirect).keys());
+  }
+
+  function canonicalSemanticQuery(query, parentDirect, childDirect) {
+    const resolved = resolvedAcronymMap(parentDirect, childDirect);
+    let canonical = normalizeText(query);
+    const acronymTokens = shortUppercaseAcronyms(query);
+    acronymTokens.forEach(token => {
+      const phrase = resolved.get(token.toUpperCase());
+      if (!phrase) return;
+      const escaped = String(token).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      canonical = canonical.replace(
+        new RegExp(`(^|[^A-Za-z0-9])${escaped}(?=[^A-Za-z0-9]|$)`, "g"),
+        (_match, prefix) => `${prefix}${phrase}`,
+      );
+    });
+    const sourceWords = String(query || "").match(/[A-Za-z0-9]+/g) || [];
+    if (sourceWords.length && sourceWords.every(word => resolved.has(word.toUpperCase()))) {
+      canonical += ". Prioritize scientific research, engineering, and technology development; "
+        + "do not rank policy workshops, training, diplomacy, or administrative programs as topical matches.";
+    }
+    return normalizeText(canonical);
   }
 
   function deterministicSafeguard(query, passage, resolvedAcronyms = new Set()) {
-    const unresolved = shortUppercaseAcronyms(query).filter(token => !resolvedAcronyms.has(token));
+    const unresolved = shortUppercaseAcronyms(query).filter(token => !resolvedAcronyms.has(token.toUpperCase()));
     if (unresolved.some(token => !exactToken(passage.text, token, true))) {
       return { allowed: false, reason: "short_acronym_requires_exact_evidence" };
     }
@@ -509,6 +537,7 @@
         const assets = await loadAssets();
         const parentDirect = parentEngine.score(normalizedQuery, { evidence: true, context });
         const childDirect = childEngine.score(normalizedQuery, { evidence: true, context });
+        const semanticQuery = canonicalSemanticQuery(normalizedQuery, parentDirect, childDirect);
         const bm25 = buildBm25Candidates({
           parentCatalog,
           childCatalog,
@@ -516,7 +545,7 @@
           childDirect,
           corpusById: assets.corpusById,
         });
-        const embedded = await post("embed-query", { query: normalizedQuery });
+        const embedded = await post("embed-query", { query: semanticQuery });
         usage.embedding_requests += 1;
         usage.embedding_tokens += Number(embedded.usage?.total_tokens || 0);
         const semantic = semanticCandidates(
@@ -548,7 +577,7 @@
           };
         }
         const reranked = await post("rerank", {
-          query: normalizedQuery,
+          query: semanticQuery,
           corpus_sha256: assets.manifest.corpus_sha256,
           candidates: guarded.map(item => ({
             passage_id: item.passage_id,
@@ -624,6 +653,7 @@
     semanticCandidates,
     buildBm25Candidates,
     fuseCandidates,
+    canonicalSemanticQuery,
     deterministicSafeguard,
     strongestParents,
     explanationFromPassage,
