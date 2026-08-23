@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "iteration": 3,
+  "created_at": "2026-08-22",
+  "branch": "search-quality-v2",
+  "starting_sha": "cbc5e3166dd9fd45aa23b565b93244425cea4c21",
+  "purpose": "Hash manifest for both permanently spent acceptance experiments before Iteration-3 tuning. These files are immutable historical evidence and must not be regenerated, rewritten, or used as acceptance holdouts again.",
+  "phase4": {
+    "status": "spent_challenge_evidence",
+    "files": {
+      "evaluation/PHASE4_REVIEW.md": {"bytes": 8916, "sha256": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9"},
+      "evaluation/search_v2_release_candidate.json": {"bytes": 4262, "sha256": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab"},
+      "evaluation/search_v2_holdout_results_raw.json": {"bytes": 2244951, "sha256": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919"},
+      "evaluation/search_v2_holdout_truth.json": {"bytes": 21723, "sha256": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1"},
+      "evaluation/search_v2_holdout_results.json": {"bytes": 1469488, "sha256": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7"}
+    }
+  },
+  "phase4b": {
+    "status": "spent_challenge_evidence",
+    "files": {
+      "evaluation/search_v2_release_candidate_v2.json": {"bytes": 14388, "sha256": "4f3400a560209720b96e5f2d50364be6ce1342fa9eb6ef315c49eab2e589db4d"},
+      "evaluation/search_v2_iteration2_holdout_frame.json": {"bytes": 4818, "sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3"},
+      "evaluation/search_v2_iteration2_holdout_results_raw.json": {"bytes": 10903573, "sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5"},
+      "evaluation/search_v2_iteration2_holdout_truth.json": {"bytes": 14395, "sha256": "40eb063659289d2b84bae2dae66513278ebfbd5740b46ccd566fbef010bbac48"},
+      "evaluation/search_v2_iteration2_holdout_results.json": {"bytes": 908039, "sha256": "5e6dee415139dc0c81879ead161fa931211bc583176c0c537df437282d90a15a"},
+      "evaluation/search_v2_phase4b_test_runs.json": {"bytes": 4703, "sha256": "4079bcd6c2d39efae206c4522f3d91bed2c225b2ec07ac9b8cce893228f41694"},
+      "docs/SEARCH_QUALITY_RECOVERY.md": {"bytes": 41524, "sha256": "71970eeb5290e98d43483a7e093fd23fffa64a5a674dec3d16e31b0b38b12d50"}
+    }
+  },
+  "immutability_contract": {
+    "phase4_may_be_used_for_development": true,
+    "phase4b_may_be_used_for_development": true,
+    "either_may_be_rerun_as_acceptance": false,
+    "raw_output_may_be_changed": false,
+    "truth_or_release_decision_may_be_silently_changed": false,
+    "hashes_must_match_at_iteration3_close": true
+  }
+}
