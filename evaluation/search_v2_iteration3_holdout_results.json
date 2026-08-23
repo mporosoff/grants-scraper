@@ -2,8 +2,8 @@
   "schema_version": 1,
   "phase": "4C",
   "iteration": "search-v2-iteration-3",
-  "evaluated_at": "2026-08-23T20:08:25.176Z",
-  "status": "holdout_adjudicated_pending_regression_confirmation",
+  "evaluated_at": "2026-08-23",
+  "status": "adjudicated_holdout_quality_gates_passed",
   "candidate_code_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
   "candidate_behavior_changed_during_phase4c": false,
   "post_holdout_tuning": false,
@@ -11,7 +11,7 @@
   "raw_results": "evaluation/search_v2_iteration3_holdout_results_raw.json",
   "raw_results_sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab",
   "truth": "evaluation/search_v2_iteration3_holdout_truth.json",
-  "truth_sha256": "af0ac0f2f41b5fc422db7c5a6dfedef02659247061f3993cb34c2c0b0c23404b",
+  "truth_sha256": "ac415c66337339cbf859006baf7ec9ad961d99f731c172e11daa70d39cbb84c6",
   "aggregate_metrics": {
     "query_count": 36,
     "positive_query_count": 30,
@@ -35,6 +35,9 @@
     "broader_potential_count": 239,
     "irrelevant_potential_count": 104,
     "hard_negative_potential_count": 12,
+    "acronym_hard_negative_strong_count": 0,
+    "acronym_hard_negative_potential_count": 0,
+    "atomic_coherence_violation_count": 0,
     "broader_only_query_potential_count": 24,
     "maximum_displayed_potential_count": 12,
     "maximum_internal_candidate_count": 297,
@@ -5973,6 +5976,18 @@
       "source_excerpt": "Heliophysics Foundational Research"
     }
   ],
+  "explanation_review": {
+    "strong_result_count": 24,
+    "potential_result_count": 360,
+    "strong_violations": [],
+    "potential_violations": [],
+    "maximum_strong_reason_count": 2,
+    "strong_source_backed": true,
+    "potential_extracts_source_backed": true,
+    "potential_ui_label_present": true,
+    "voyage_score_or_embedding_similarity_shown_as_evidence": false,
+    "private_profile_or_review_only_leakage": false
+  },
   "performance": {
     "cold_first_hybrid_query_ms": 1327.9866,
     "warm_hybrid_p50_ms": 713.2463,
@@ -6000,12 +6015,18 @@
     "zero_broader_misrepresented_as_strong": true,
     "zero_strong_on_zero_anchor_queries": true,
     "zero_strong_on_hard_negatives": true,
+    "acronym_and_identifier_hard_negatives_excluded_from_both_tiers": true,
+    "every_strong_result_uses_one_coherent_atomic_evidence_unit": true,
     "combined_recall_at_20_at_least_0_80": true,
     "combined_recall_at_50_at_least_0_90": true,
     "no_required_anchor_completely_missed": true,
     "potential_display_count_bounded_to_12": true,
     "no_strong_potential_duplicate": true,
-    "provider_run_completed_without_error_or_fallback": true
+    "provider_run_completed_without_error_or_fallback": true,
+    "strong_explanations_source_backed": true,
+    "potential_explanations_extract_public_passages": true,
+    "potential_why_may_be_relevant_label_present": true,
+    "explanation_has_no_semantic_score_or_private_leakage": true
   },
   "all_holdout_quality_gates_pass": true,
   "results": [

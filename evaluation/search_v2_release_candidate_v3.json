@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "phase": "4C",
+  "iteration": 3,
+  "decided_at": "2026-08-23",
+  "decision": "SEARCH V2 ITERATION 3 RELEASE CANDIDATE PASSED",
+  "decision_summary": "PHASE 4C PASSED — PHASE 5 AUTHORIZED",
+  "phase5_authorized": true,
+  "branch": "search-quality-v2",
+  "frozen_candidate_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
+  "decision_package_parent_sha": "94e8a4fb233277e6d236273c9e9670fceebd5f45",
+  "final_branch_head": "recorded_in_the_completion_report_after_the_decision_commit",
+  "candidate_behavior_changed_during_phase4c": false,
+  "post_holdout_tuning": false,
+  "production": {
+    "search_v2_enabled": false,
+    "flag_path": "assets/app-config.js",
+    "deployed": false,
+    "merged_to_main": false
+  },
+  "main": {
+    "start_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "end_sha_before_decision_commit": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "origin_main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "unchanged": true
+  },
+  "immutable_evidence": {
+    "preopen_checkpoint": {
+      "path": "evaluation/search_v2_phase4c_preopen.json",
+      "sha256": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8"
+    },
+    "raw_results": {
+      "path": "evaluation/search_v2_iteration3_holdout_results_raw.json",
+      "sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab",
+      "execution_count": 1,
+      "query_count": 36
+    },
+    "execution_receipt": {
+      "path": "evaluation/search_v2_phase4c_execution.json",
+      "sha256": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12"
+    },
+    "truth": {
+      "path": "evaluation/search_v2_iteration3_holdout_truth.json",
+      "sha256": "ac415c66337339cbf859006baf7ec9ad961d99f731c172e11daa70d39cbb84c6",
+      "key": "query_id,result_id",
+      "reviewed_pair_count": 385
+    },
+    "adjudicated_results": {
+      "path": "evaluation/search_v2_iteration3_holdout_results.json",
+      "sha256": "236b003f45e48287ed0a1f669015df16c8909db58d9511ae92b9e0d4f77b74ff"
+    },
+    "prior_phase4_raw_sha256": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "prior_phase4b_raw_sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5"
+  },
+  "frozen_inputs": {
+    "config_sha256": "e0b4c902a00b578d7d044001c72c230dbf0ce55c919091cf8730f245964d99c9",
+    "catalog_sha256": "fb5dec36f33184572a84d6d9fed76adbb415c6102e2acbed50dc2d6ba22cbff6",
+    "sidecar_sha256": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+    "passage_corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "vector_manifest_sha256": "56fb57090696d3f9537be6a7f092a1565866672297f98f7d255518378109021d",
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2"
+  },
+  "phase4c_metrics": {
+    "query_count": 36,
+    "positive_query_count": 30,
+    "required_anchor_count": 30,
+    "strong_precision_at_10": 1.0,
+    "strong_irrelevant_count": 0,
+    "zero_anchor_strong_count": 0,
+    "strong_required_recall_at_10": 0.766667,
+    "strong_required_recall_at_50": 0.766667,
+    "combined_required_recall_at_10": 1.0,
+    "combined_required_recall_at_20": 1.0,
+    "combined_required_recall_at_50": 1.0,
+    "ndcg_at_10": 0.986089,
+    "required_anchor_misses": [],
+    "all_required_anchor_combined_ranks": 1
+  },
+  "potential_behavior": {
+    "displayed_pair_count": 360,
+    "primary_relevant": 17,
+    "broader_or_adjacent": 239,
+    "irrelevant": 104,
+    "hard_negative_potential_count": 12,
+    "acronym_hard_negative_potential_count": 0,
+    "maximum_displayed_per_query": 12,
+    "maximum_internal_candidate_count": 297,
+    "strong_potential_duplicates": 0,
+    "semantic_results_represented_as_verified_direct_relevance": 0
+  },
+  "explanations": {
+    "phase4c_strong_outputs_reviewed": 24,
+    "phase4c_potential_outputs_reviewed": 360,
+    "strong_source_backed": true,
+    "potential_extractive_and_labeled_may_be_relevant": true,
+    "unsupported_semantic_claims": 0,
+    "private_profile_or_review_only_leakage": 0,
+    "phase3_frame_cases": 42,
+    "phase3_correct_and_useful": 41,
+    "phase3_reviewed_shallow": 1
+  },
+  "regression_status": {
+    "applicable_gates_passed": true,
+    "strong_potential_spent_queries": 52,
+    "strong_potential_spent_combined_recall_at_20": 0.907692,
+    "strong_potential_spent_combined_recall_at_50": 0.953846,
+    "historical_query_count": 37,
+    "historical_top_10_churn": 0,
+    "browser_tests": 179,
+    "focused_python_tests": 62,
+    "live_product_python_tests": 760,
+    "parent_child_cases": 50,
+    "explanation_cases": 42,
+    "no_drift_artifacts": 22,
+    "test_report": "evaluation/search_v2_phase4c_test_runs.json"
+  },
+  "reliability": {
+    "phase4c_provider_errors": 0,
+    "phase4c_provider_fallbacks": 0,
+    "timeout_fallback_test": "passed",
+    "provider_429_fallback_test": "passed",
+    "provider_5xx_fallback_test": "passed",
+    "vector_missing_fallback_test": "passed",
+    "vector_hash_mismatch_fallback_test": "passed",
+    "local_strong_and_bm25_remain_usable": true
+  },
+  "performance_and_cost": {
+    "cold_first_hybrid_query_ms": 1327.9866,
+    "warm_hybrid_p50_ms": 713.2463,
+    "warm_hybrid_p95_ms": 857.1348,
+    "strong_local_p50_ms": 48.2006,
+    "strong_local_p95_ms": 121.8718,
+    "embedding_requests": 36,
+    "rerank_requests": 31,
+    "embedding_tokens": 210,
+    "rerank_tokens": 2267180,
+    "reranked_documents": 8650,
+    "estimated_phase4c_run_cost_usd": 0.113363,
+    "estimated_paid_equivalent_cost_per_1000_searches_usd": 3.148978,
+    "lazy_vector_bytes": 3397632,
+    "phase4c_initial_page_asset_delta_bytes": 0
+  },
+  "gate_outcomes": {
+    "strong_quality": "passed",
+    "overall_discovery": "passed",
+    "potential_behavior": "passed",
+    "explanations": "passed",
+    "regression": "passed",
+    "performance_and_size": "passed",
+    "no_post_holdout_tuning": "passed",
+    "main_untouched": "passed",
+    "search_v2_off": "passed"
+  },
+  "known_limitations": [
+    "Potential is intentionally high-recall and includes adjacent and irrelevant leads; it remains capped at 12 and explicitly requires official-source review.",
+    "Strong recall is 0.766667 on Phase 4C, which is acceptable under the approved product contract because every remaining required anchor appears at Potential rank 1.",
+    "The preregistered broader-only PFAS/produced-water anchor was not displayed; broader-fit recall is not a primary release gate.",
+    "Hybrid search depends on Voyage availability for Potential ranking; the local Strong/BM25 fallback remains usable on provider or vector failure.",
+    "The lazy vector payload is 3,397,632 bytes and warm hybrid latency is approximately 0.71 seconds p50 / 0.86 seconds p95."
+  ],
+  "rollback_path": {
+    "current_state": "search v2 flag remains OFF and the production hybrid proxy setting remains empty",
+    "phase5_requirement": "enablement or deployment requires a separate authorized Phase-5 change with rollback verification"
+  },
+  "next_protocol": {
+    "phase5_authorized": true,
+    "phase4c_may_be_rerun": false,
+    "phase4c_outputs_are_permanently_spent": true,
+    "phase4c_itself_deployed_or_merged": false
+  }
+}

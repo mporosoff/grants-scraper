@@ -748,3 +748,67 @@ Detailed measurements are in
 `evaluation/search_v2_strong_coherence_test_runs.json`.
 
 **STRONG EVIDENCE COHERENCE FIX PASSES — READY FOR PHASE 4C**
+
+## Phase 4C final holdout acceptance
+
+Phase 4C opened the preregistered 36-query Iteration-3 holdout exactly once
+against frozen candidate `f893d43e795a7f70efdf8191e863fb33e286d148`.
+The pre-open frame retained SHA-256
+`7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e`.
+The immutable raw result has SHA-256
+`c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab`;
+the execution receipt records 36 queries, 67 provider requests, zero provider
+errors, and zero fallbacks. A second invocation was refused before any query
+could run. No retrieval, scoring, mapping, prompt, explanation, UI, or
+configuration behavior changed after the holdout was opened.
+
+Exact `(query_id, result_id)` adjudication covers 385 required, expected, and
+displayed pairs. Strong returned 24 results, all primary-relevant: reviewed
+Strong Precision@10 is 1.000, with zero irrelevant or broader-only Strong
+results, zero Strong results on zero-anchor or hard-negative queries, zero
+atomic-coherence violations, and zero acronym/identifier hard-negative results
+in either tier. Strong required-anchor Recall@10 and Recall@50 are 0.767 and are
+informative rather than blocking under the accepted product contract.
+
+The combined Strong + Potential workflow recovered all 30 required anchors at
+combined rank 1. Required-anchor Recall@10, Recall@20, and Recall@50 are all
+1.000, and query-average nDCG@10 is 0.986. Potential displayed 360 exact pairs:
+17 were primary-relevant, 239 broader or adjacent, and 104 irrelevant. This is
+the expected high-recall review surface, not verified direct relevance. The
+display remains capped at 12 per query, Strong/Potential deduplication has zero
+failures, and the two acronym hard negatives return no Potential results. The
+complete-intent hard negative returned 12 Potential leads and no Strong result.
+
+All 24 Strong explanations and 360 Potential extracts are backed by public
+indexed passages. No Voyage score, embedding similarity, unsupported semantic
+claim, private profile text, or review-only text appears as causal evidence.
+The existing 42-pair Phase-3 frame also passes with 41 correct-and-useful cases,
+one reviewed shallow case, and zero unsupported or privacy-leaking cases.
+
+The current Strong + Potential development evaluation over both spent
+acceptance populations remains green: 52 queries, 65 required anchors, Strong
+Precision@10 1.000, combined Recall@20 0.908, and combined Recall@50 0.954.
+Final regression verification passes 179 browser tests, 62 focused Python
+tests, 760 live-product Python tests, the 37-query historical baseline with zero
+top-ten churn, the 50-case parent/child invariant, configuration parity, size
+gates, proxy/vector failure-mode tests, and the 22-artifact no-drift rebuild.
+The inherited closed frozen-measurement modules remain excluded from the
+live-product runner as previously documented.
+
+Phase 4C measured a 1.328-second cold first hybrid query and warm hybrid latency
+of 0.713 seconds p50 / 0.857 seconds p95. The run used 210 embedding tokens and
+2,267,180 reranking tokens, with a paid-equivalent estimate of $0.113363 for the
+36-query run or $3.148978 per 1,000 searches at the published model rates. The
+lazy vector asset remains 3,397,632 bytes and Phase 4C adds zero initial-page
+asset bytes. Timeout, 429/5xx, missing-vector, and vector/hash-mismatch tests all
+preserve the existing local Strong/BM25 fallback.
+
+The acceptance evidence is in
+`evaluation/search_v2_iteration3_holdout_results_raw.json`, exact truth is in
+`evaluation/search_v2_iteration3_holdout_truth.json`, calculated results are in
+`evaluation/search_v2_iteration3_holdout_results.json`, regression receipts are
+in `evaluation/search_v2_phase4c_test_runs.json`, and the release decision is in
+`evaluation/search_v2_release_candidate_v3.json`. Search v2 remains OFF, no
+deployment or merge occurred, and `main` remains unchanged.
+
+**PHASE 4C PASSED — PHASE 5 AUTHORIZED**

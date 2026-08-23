@@ -195,6 +195,35 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
   assert.ok(result.parents.every(item => item.explanation?.excerpt && !/score|similarity/i.test(item.explanation.excerpt)));
 });
 
+test("missing or mismatched vector assets fail closed to the existing local-result fallback", async () => {
+  const baseOptions = {
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentEngine: harness.parentEngine,
+    childEngine: harness.childEngine,
+    proxyUrl: "http://localhost/",
+    manifestUrl: "/manifest",
+    vectorUrl: "/vectors",
+  };
+  const missing = api.createClient({
+    ...baseOptions,
+    fetchImpl: async url => String(url) === "/manifest"
+      ? new Response(JSON.stringify(manifest), { status: 200 })
+      : new Response("", { status: 404 }),
+  });
+  await assert.rejects(missing.search("rare earth recycling"), error => error.code === "vector_asset_missing");
+  assert.equal(missing.usage().fallbacks, 1);
+
+  const mismatched = api.createClient({
+    ...baseOptions,
+    fetchImpl: async url => String(url) === "/manifest"
+      ? new Response(JSON.stringify(manifest), { status: 200 })
+      : new Response(new Uint8Array(vectorBuffer.byteLength), { status: 200 }),
+  });
+  await assert.rejects(mismatched.search("rare earth recycling"), error => error.code === "vector_hash_mismatch");
+  assert.equal(mismatched.usage().fallbacks, 1);
+});
+
 test("hybrid results remain ranked leads without fabricated relevance labels", async () => {
   const fetchImpl = async (url, options = {}) => {
     if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
@@ -256,6 +285,14 @@ test("provider errors and client timeouts fail closed for the existing local-res
   });
   await assert.rejects(failed.search("rare earth recycling"), error => error.code === "provider_unavailable");
   assert.equal(failed.usage().fallbacks, 1);
+
+  const rateLimited = api.createClient({
+    ...baseOptions,
+    fetchImpl: async url => assetResponse(url)
+      || new Response(JSON.stringify({ error: { code: "rate_limited" } }), { status: 429 }),
+  });
+  await assert.rejects(rateLimited.search("rare earth recycling"), error => error.code === "rate_limited");
+  assert.equal(rateLimited.usage().fallbacks, 1);
 
   const timedOut = api.createClient({
     ...baseOptions,

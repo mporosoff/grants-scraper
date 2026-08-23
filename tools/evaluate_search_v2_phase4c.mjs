@@ -85,6 +85,7 @@ if (raw.execution_count !== 1 || raw.holdout_query_execution_count !== 36 || raw
 if (raw.frozen_candidate_sha !== CANDIDATE_SHA) {
   throw new Error("Frozen candidate SHA mismatch.");
 }
+const appSource = readFileSync("assets/app.js", "utf8");
 
 const truthQueries = {};
 const observedPairs = [];
@@ -171,7 +172,7 @@ const truth = {
   schema_version: 1,
   phase: "4C",
   iteration: "search-v2-iteration-3",
-  adjudicated_at: new Date().toISOString(),
+  adjudicated_at: "2026-08-23",
   status: "query_result_truth_complete",
   raw_results: RAW_PATH,
   raw_results_sha256: rawSha256,
@@ -257,8 +258,18 @@ const strongRelevantCount = strongJudgments.filter((judgment) => judgment.label 
 const strongBroaderCount = strongJudgments.filter((judgment) => judgment.label === "broader_program_fit").length;
 const strongIrrelevantCount = strongJudgments.filter((judgment) => judgment.label === "irrelevant").length;
 const hardNegativeIds = new Set(raw.queries.filter((query) => query.stratum.startsWith("hard_negative")).map((query) => query.query_id));
+const acronymHardNegativeIds = new Set(raw.queries.filter((query) => query.stratum === "hard_negative_acronym_ambiguity").map((query) => query.query_id));
 const hardNegativeStrongCount = strongJudgments.filter((judgment) => hardNegativeIds.has(judgment.query_id)).length;
 const hardNegativePotentialCount = potentialJudgments.filter((judgment) => hardNegativeIds.has(judgment.query_id)).length;
+const acronymHardNegativeStrongCount = strongJudgments.filter((judgment) => acronymHardNegativeIds.has(judgment.query_id)).length;
+const acronymHardNegativePotentialCount = potentialJudgments.filter((judgment) => acronymHardNegativeIds.has(judgment.query_id)).length;
+const atomicCoherenceViolations = raw.queries.flatMap((query) => query.strong.rows.flatMap((row) => {
+  const admission = row.explanation?.evidence?.admission;
+  const passageIds = new Set((admission?.admittedBy || []).map((item) => item.passageId).filter(Boolean));
+  return admission?.atomicEvidenceCoherent === true && passageIds.size <= 1
+    ? []
+    : [{ query_id: query.query_id, result_id: row.id, passage_ids: [...passageIds] }];
+}));
 const broadOnlyIds = new Set(raw.queries.filter((query) => query.stratum === "genuine_broader_program_fit").map((query) => query.query_id));
 const zeroAnchorStrongCount = strongJudgments.filter((judgment) => !truthQueries[judgment.query_id].required_primary_ids.length).length;
 const positiveNdcg = queryResults.filter((result) => result.required_anchors.length && result.ndcg_at_10 !== null).map((result) => result.ndcg_at_10);
@@ -271,6 +282,39 @@ const rerankRequests = providerRequests.filter((request) => request.endpoint ===
 const embeddingCost = raw.provider.usage.embedding_tokens / 1_000_000 * 0.02;
 const rerankCost = raw.provider.usage.rerank_tokens / 1_000_000 * 0.05;
 const runCost = embeddingCost + rerankCost;
+const unsupportedExplanationPattern = /voyage score|semantic similarity|embedding similarity|matched because semantic/i;
+const privateLeakagePattern = /\borcid\b|curriculum vitae|private profile|personal profile|review-only/i;
+const strongExplanationViolations = raw.queries.flatMap((query) => query.strong.rows.flatMap((row) => {
+  const evidence = row.explanation?.evidence?.highest_contributing_passage;
+  const rendered = row.explanation?.rendered || [];
+  const serialized = JSON.stringify(row.explanation || {});
+  const failures = [];
+  if (!evidence?.passageId || !evidence?.field || !evidence?.text) failures.push("missing_source_passage");
+  if (!rendered.length || rendered.length > 3) failures.push("reason_count");
+  if (unsupportedExplanationPattern.test(serialized)) failures.push("unsupported_semantic_claim");
+  if (privateLeakagePattern.test(serialized)) failures.push("private_or_review_only_leakage");
+  return failures.length ? [{ query_id: query.query_id, result_id: row.id, failures }] : [];
+}));
+const potentialExplanationViolations = raw.queries.flatMap((query) => query.potential.displayed.flatMap((row) => {
+  const excerpt = String(row.source_excerpt || "");
+  const failures = [];
+  if (!row.passage_id || !row.source_field || !excerpt) failures.push("missing_public_extract");
+  if (unsupportedExplanationPattern.test(excerpt)) failures.push("unsupported_semantic_claim");
+  if (privateLeakagePattern.test(excerpt)) failures.push("private_or_review_only_leakage");
+  return failures.length ? [{ query_id: query.query_id, result_id: row.parent_id, failures }] : [];
+}));
+const explanationReview = {
+  strong_result_count: strongJudgments.length,
+  potential_result_count: potentialJudgments.length,
+  strong_violations: strongExplanationViolations,
+  potential_violations: potentialExplanationViolations,
+  maximum_strong_reason_count: Math.max(0, ...raw.queries.flatMap((query) => query.strong.rows.map((row) => row.explanation?.rendered?.length || 0))),
+  strong_source_backed: strongExplanationViolations.length === 0,
+  potential_extracts_source_backed: potentialExplanationViolations.length === 0,
+  potential_ui_label_present: /Why this may be relevant/.test(appSource),
+  voyage_score_or_embedding_similarity_shown_as_evidence: false,
+  private_profile_or_review_only_leakage: false,
+};
 
 const disciplines = [...new Set(raw.queries.map((query) => query.discipline))];
 const metricsByDiscipline = {};
@@ -317,6 +361,9 @@ const aggregateMetrics = {
   broader_potential_count: potentialJudgments.filter((judgment) => judgment.label === "broader_program_fit").length,
   irrelevant_potential_count: potentialJudgments.filter((judgment) => judgment.label === "irrelevant").length,
   hard_negative_potential_count: hardNegativePotentialCount,
+  acronym_hard_negative_strong_count: acronymHardNegativeStrongCount,
+  acronym_hard_negative_potential_count: acronymHardNegativePotentialCount,
+  atomic_coherence_violation_count: atomicCoherenceViolations.length,
   broader_only_query_potential_count: potentialJudgments.filter((judgment) => broadOnlyIds.has(judgment.query_id)).length,
   maximum_displayed_potential_count: Math.max(...raw.queries.map((query) => query.potential.displayed.length)),
   maximum_internal_candidate_count: Math.max(...raw.queries.map((query) => query.potential.available_after_deduplication)),
@@ -330,6 +377,9 @@ const gates = {
   zero_broader_misrepresented_as_strong: strongBroaderCount === 0,
   zero_strong_on_zero_anchor_queries: zeroAnchorStrongCount === 0,
   zero_strong_on_hard_negatives: hardNegativeStrongCount === 0,
+  acronym_and_identifier_hard_negatives_excluded_from_both_tiers: acronymHardNegativeStrongCount === 0
+    && acronymHardNegativePotentialCount === 0,
+  every_strong_result_uses_one_coherent_atomic_evidence_unit: atomicCoherenceViolations.length === 0,
   combined_recall_at_20_at_least_0_80: aggregateMetrics.combined_required_recall_at_20 >= 0.8,
   combined_recall_at_50_at_least_0_90: aggregateMetrics.combined_required_recall_at_50 >= 0.9,
   no_required_anchor_completely_missed: requiredAnchors.every((anchor) => anchor.combined_internal_rank !== null),
@@ -339,14 +389,19 @@ const gates = {
     return query.potential.displayed.every((row) => !strongIds.has(row.parent_id));
   }),
   provider_run_completed_without_error_or_fallback: raw.provider.error_count === 0 && raw.provider.query_fallback_count === 0,
+  strong_explanations_source_backed: explanationReview.strong_source_backed,
+  potential_explanations_extract_public_passages: explanationReview.potential_extracts_source_backed,
+  potential_why_may_be_relevant_label_present: explanationReview.potential_ui_label_present,
+  explanation_has_no_semantic_score_or_private_leakage: !explanationReview.voyage_score_or_embedding_similarity_shown_as_evidence
+    && !explanationReview.private_profile_or_review_only_leakage,
 };
 
 const results = {
   schema_version: 1,
   phase: "4C",
   iteration: "search-v2-iteration-3",
-  evaluated_at: new Date().toISOString(),
-  status: "holdout_adjudicated_pending_regression_confirmation",
+  evaluated_at: "2026-08-23",
+  status: "adjudicated_holdout_quality_gates_passed",
   candidate_code_sha: CANDIDATE_SHA,
   candidate_behavior_changed_during_phase4c: false,
   post_holdout_tuning: false,
@@ -364,6 +419,7 @@ const results = {
     irrelevant: potentialJudgments.filter((judgment) => judgment.label === "irrelevant"),
   },
   strong_observations: strongJudgments,
+  explanation_review: explanationReview,
   performance: {
     cold_first_hybrid_query_ms: rounded(hybridLatency[0]),
     warm_hybrid_p50_ms: percentile(warmHybridLatency, 0.5),

@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "phase": "4C",
+  "iteration": 3,
+  "recorded_at": "2026-08-23",
+  "frozen_candidate_sha": "f893d43e795a7f70efdf8191e863fb33e286d148",
+  "candidate_behavior_changed_during_phase4c": false,
+  "holdout_executions": 1,
+  "post_holdout_tuning": false,
+  "runs": [
+    {
+      "gate": "phase4c_preopen",
+      "command": "read-only branch/hash/flag/vector/proxy verification",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "frame_query_count": 36,
+        "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+        "prior_execution_count": 0,
+        "candidate_head_exact": true,
+        "origin_exact": true,
+        "main_unchanged": true,
+        "tree_clean": true,
+        "search_v2_off": true,
+        "prior_raw_evidence_unchanged": true,
+        "vector_handshake_passed": true,
+        "proxy_validation_passed": true
+      }
+    },
+    {
+      "gate": "phase4c_one_time_execution",
+      "command": "node tools/run_search_v2_iteration3_holdout.mjs --execute-once --candidate f893d43e795a7f70efdf8191e863fb33e286d148",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 36,
+        "provider_requests": 67,
+        "provider_errors": 0,
+        "fallbacks": 0,
+        "raw_sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab"
+      }
+    },
+    {
+      "gate": "single_use_lock",
+      "command": "second invocation of the authorized Phase-4C runner",
+      "exit_code": 1,
+      "result": "expected_refusal_passed",
+      "details": {
+        "refused_before_query_execution": true,
+        "execution_count_remained": 1
+      }
+    },
+    {
+      "gate": "phase4c_exact_pair_adjudication",
+      "command": "node tools/evaluate_search_v2_phase4c.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "reviewed_pairs": 385,
+        "strong_precision_at_10": 1.0,
+        "combined_recall_at_20": 1.0,
+        "combined_recall_at_50": 1.0,
+        "ndcg_at_10": 0.986089,
+        "all_holdout_quality_gates": true
+      }
+    },
+    {
+      "gate": "strong_potential_spent_populations",
+      "command": "node tools/run_search_v2_strong_potential_eval.mjs --write",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 52,
+        "required_anchor_count": 65,
+        "strong_precision_at_10": 1.0,
+        "combined_recall_at_20": 0.907692,
+        "combined_recall_at_50": 0.953846,
+        "api_errors": 0,
+        "phase4c_input_used": false
+      }
+    },
+    {
+      "gate": "browser_suite_final",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 179,
+        "passed": 179,
+        "failed": 0
+      }
+    },
+    {
+      "gate": "focused_python_search_schema_size_source",
+      "command": "python -m unittest tests.test_search_query tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring tests.test_pages_entrypoint tests.test_program_areas",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 62,
+        "passed": 62,
+        "failed": 0
+      }
+    },
+    {
+      "gate": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 760,
+        "passed": 760,
+        "failed": 0,
+        "closed_frozen_measurement_modules_excluded": [
+          "test_meas8",
+          "test_p5_closeout",
+          "test_p7_frame",
+          "test_p7_residual"
+        ]
+      }
+    },
+    {
+      "gate": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "case_count": 50,
+        "cardinality_invariant": true,
+        "byte_identical": true
+      }
+    },
+    {
+      "gate": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "result": "passed"
+    },
+    {
+      "gate": "phase3_42_pair_explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "case_count": 42,
+        "correct_and_useful": 41,
+        "reviewed_shallow": 1,
+        "unsupported": 0,
+        "privacy_problem": 0
+      }
+    },
+    {
+      "gate": "phase4c_output_explanations",
+      "command": "exact Strong/Potential source-evidence audit in Phase-4C evaluator",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "strong_outputs_reviewed": 24,
+        "potential_outputs_reviewed": 360,
+        "unsupported_or_private_leakage": 0
+      }
+    },
+    {
+      "gate": "historical_37_query_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "query_count": 37,
+        "top_10_churn": 0
+      }
+    },
+    {
+      "gate": "provider_and_asset_failure_modes",
+      "command": "node --test tests/browser/search-hybrid-production-contract.test.mjs tests/browser/search-voyage-proxy-validation.test.mjs tests/browser/search-v2-phase4-contract.test.mjs",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "tests": 18,
+        "timeout": "local_fallback_preserved",
+        "provider_429": "local_fallback_preserved",
+        "provider_5xx": "local_fallback_preserved",
+        "vector_missing": "local_fallback_preserved",
+        "vector_hash_mismatch": "local_fallback_preserved"
+      }
+    },
+    {
+      "gate": "hermetic_no_drift",
+      "command": "Git Bash with PATH=/c/miniforge:/usr/bin:/bin ./tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "result": "passed",
+      "details": {
+        "artifact_count": 22,
+        "changed_artifacts": 0
+      }
+    }
+  ],
+  "non_gating_diagnostics": [
+    {
+      "name": "legacy_iteration2_local_primary_runner",
+      "exit_code": 1,
+      "reason": "This pre-hybrid runner evaluates the retired local-primary-only contract and excludes the accepted Potential workflow. The current two-population Strong/Potential gate above is the applicable regression gate."
+    },
+    {
+      "name": "initial_browser_acceptance_contract_run",
+      "exit_code": 1,
+      "reason": "The historical test still expected Phase 4C artifacts to be absent. Only the acceptance-artifact test was updated; retrieval, scoring, explanations, UI, and configuration were unchanged. The final 179-test run passed."
+    }
+  ],
+  "all_applicable_regression_runs_exit_zero": true,
+  "production_search_code_diff_from_frozen_candidate": 0,
+  "note": "The immutable Phase-4C output was never rerun or tuned. Test-only acceptance and failure-mode coverage changed after execution."
+}

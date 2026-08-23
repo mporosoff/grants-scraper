@@ -153,28 +153,58 @@ test("Phase 4 blocks Phase 5 on the exact adjudicated failures", async () => {
   );
 });
 
-test("Iteration-3 Phase 4C population remains sealed behind an execution lock", async () => {
-  const [frameSource, manifestSource, runnerSource] = await Promise.all([
+test("Iteration-3 Phase 4C execution is frozen to one immutable raw artifact", async () => {
+  const [frameSource, manifestSource, runnerSource, rawSource, receiptSource, truthSource, resultsSource, releaseSource] = await Promise.all([
     source("evaluation/search_v2_iteration3_holdout_frame.json"),
     source("evaluation/search_v2_iteration3_holdout_manifest.json"),
     source("tools/run_search_v2_iteration3_holdout.mjs"),
+    source("evaluation/search_v2_iteration3_holdout_results_raw.json"),
+    source("evaluation/search_v2_phase4c_execution.json"),
+    source("evaluation/search_v2_iteration3_holdout_truth.json"),
+    source("evaluation/search_v2_iteration3_holdout_results.json"),
+    source("evaluation/search_v2_release_candidate_v3.json"),
   ]);
   const frame = JSON.parse(frameSource);
   const manifest = JSON.parse(manifestSource);
+  const raw = JSON.parse(rawSource);
+  const receipt = JSON.parse(receiptSource);
+  const truth = JSON.parse(truthSource);
+  const results = JSON.parse(resultsSource);
+  const release = JSON.parse(releaseSource);
+  // The frame and manifest remain immutable preregistration evidence.
   assert.equal(frame.status, "sealed_never_executed");
   assert.equal(frame.construction_contract.candidate_executions, 0);
   assert.equal(frame.queries.length, 36);
   assert.equal(sha256(frameSource), "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e");
   assert.equal(manifest.frame_sha256, sha256(frameSource));
-  assert.match(runnerSource, /^#!.*\n\nthrow new Error/);
-  assert.doesNotMatch(runnerSource, /loadHarness|rankQuery|search-retrieval/);
-  await assert.rejects(
-    source("evaluation/search_v2_iteration3_holdout_results_raw.json"),
-    error => error?.code === "ENOENT",
+  assert.equal(raw.execution_count, 1);
+  assert.equal(raw.holdout_query_execution_count, 36);
+  assert.equal(raw.frozen_candidate_sha, "f893d43e795a7f70efdf8191e863fb33e286d148");
+  assert.equal(sha256(rawSource), "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab");
+  assert.equal(receipt.execution_count, 1);
+  assert.equal(receipt.raw_sha256, sha256(rawSource));
+  assert.equal(truth.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.execution_count, 1);
+  assert.equal(results.raw_results_sha256, sha256(rawSource));
+  assert.equal(results.aggregate_metrics.strong_precision_at_10, 1);
+  assert.equal(results.aggregate_metrics.strong_irrelevant_count, 0);
+  assert.equal(results.aggregate_metrics.combined_required_recall_at_20, 1);
+  assert.equal(results.aggregate_metrics.combined_required_recall_at_50, 1);
+  assert.equal(results.all_holdout_quality_gates_pass, true);
+  assert.equal(release.decision_summary, "PHASE 4C PASSED — PHASE 5 AUTHORIZED");
+  assert.equal(release.phase5_authorized, true);
+  assert.equal(release.immutable_evidence.raw_results.sha256, sha256(rawSource));
+  assert.equal(release.immutable_evidence.truth.sha256, sha256(truthSource));
+  assert.equal(release.immutable_evidence.adjudicated_results.sha256, sha256(resultsSource));
+  assert.equal(release.production.search_v2_enabled, false);
+  assert.equal(release.main.unchanged, true);
+  assert.match(runnerSource, /await exists\(RAW_PATH\).*await exists\(EXECUTION_PATH\)/s);
+  const attempt = await runNode(
+    "tools/run_search_v2_iteration3_holdout.mjs",
+    ["--execute-once", "--candidate", "f893d43e795a7f70efdf8191e863fb33e286d148"],
   );
-  const attempt = await runNode("tools/run_search_v2_iteration3_holdout.mjs");
   assert.notEqual(attempt.code, 0);
-  assert.match(attempt.stderr, /sealed and has never been executed/);
+  assert.match(attempt.stderr, /already been executed/);
 });
 
 test("Iteration-3 fate and leave-out evidence expose the unresolved architecture gate", async () => {

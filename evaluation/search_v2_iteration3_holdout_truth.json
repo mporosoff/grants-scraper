@@ -2,7 +2,7 @@
   "schema_version": 1,
   "phase": "4C",
   "iteration": "search-v2-iteration-3",
-  "adjudicated_at": "2026-08-23T20:08:25.162Z",
+  "adjudicated_at": "2026-08-23",
   "status": "query_result_truth_complete",
   "raw_results": "evaluation/search_v2_iteration3_holdout_results_raw.json",
   "raw_results_sha256": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab",
