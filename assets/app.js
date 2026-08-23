@@ -20,6 +20,7 @@
   const SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG;
   const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
   const SUBTOPIC_API = globalThis.FUNDING_SUBTOPICS;
+  const HYBRID_SEARCH_API = globalThis.FUNDING_HYBRID_SEARCH;
   const MATCH_EXPLAIN_API = globalThis.FUNDING_MATCH_EXPLAIN;
   const ORCID_API = globalThis.FUNDING_ORCID;
   const PROFILE_API = globalThis.FUNDING_PROFILE;
@@ -128,6 +129,17 @@
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
     searchDiagnostics: null,
+    hybrid: {
+      active: false,
+      pending: false,
+      sequence: 0,
+      cachedQuery: "",
+      cacheReady: false,
+      parents: [],
+      diagnostics: null,
+      usage: null,
+      fallbackReason: "",
+    },
     savedItems: [],
     savedIds: new Set(),
     runtimeCatalog: {
@@ -184,6 +196,7 @@
   let searchEngine = null;
   let childCatalog = null;
   let childSearchEngine = null;
+  let hybridSearchClient = null;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -1040,10 +1053,15 @@
       const a = catalog.opportunities[left.index];
       const b = catalog.opportunities[right.index];
       if (mode === "relevance" && (hasSearchTerms || hasPersonalization)) {
+        const hybridOrder = Number.isInteger(left.hybridRank)
+          && Number.isInteger(right.hybridRank)
+          ? left.hybridRank - right.hybridRank
+          : 0;
         const evidenceOrder = APP_CONFIG?.flags?.searchV2
           ? Number(left.evidenceTier || 99) - Number(right.evidenceTier || 99)
           : 0;
-        return evidenceOrder
+        return hybridOrder
+          || evidenceOrder
           || right.score - left.score
           || compareValues(a.close_date, b.close_date);
       }
@@ -1284,6 +1302,94 @@
       return computeTopicMatches(query, sortMode, retrievalOptions);
     }
     return computeParentMatches(query, sortMode, retrievalOptions);
+  }
+
+  function hybridMatches(parents) {
+    const parentById = new Map(catalog.opportunities.map((record, index) => [recordId(record), index]));
+    const childById = new Map((childCatalog?.opportunities || []).map(record => [
+      String(record.subtopic_id || record.opportunity_id || ""),
+      record,
+    ]));
+    const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
+    return (parents || []).flatMap(item => {
+      const index = parentById.get(String(item.parent_id || ""));
+      if (!Number.isInteger(index)) return [];
+      const record = catalog.opportunities[index];
+      if (rejectedNofoIds.has(recordId(record)) || !recordPassesFilters(record)) return [];
+      const child = item.passage_kind === "publication_eligible_child"
+        ? childById.get(String(item.record_id || "")) || null
+        : null;
+      const childMatch = child ? { record: child } : null;
+      return [{
+        index,
+        score: Number(item.voyage_score || 0),
+        lexicalScore: Number(item.bm25f_raw_score || item.bm25f_score || 0),
+        eligibility: state.profile.active
+          ? applicantFitBonus(record, state.profile.value.applicant_context)
+            + careerFitBonus(record, state.profile.value.career_stage)
+          : 0,
+        evidenceTier: 1,
+        hybridRank: Number(item.hybrid_rank),
+        hybridExplanation: item.explanation || null,
+        bestChild: childMatch,
+        childDroveMatch: Boolean(child),
+        parentAdmitted: false,
+        matchingChildren: childMatch ? [childMatch] : [],
+        matchingChildCount: childMatch ? 1 : 0,
+        profileSources: {},
+      }];
+    });
+  }
+
+  function hybridCanRun(query = state.query, sortMode = state.sort) {
+    return APP_CONFIG?.flags?.searchV2 === true
+      && Boolean(hybridSearchClient?.configured)
+      && Boolean(String(query || "").trim())
+      && sortMode === "relevance";
+  }
+
+  function applyHybridParents(parents) {
+    state.matches = hybridMatches(parents);
+    state.hybrid.active = true;
+    state.searchDiagnostics = {
+      ...(state.searchDiagnostics || {}),
+      hybrid: state.hybrid.diagnostics,
+    };
+  }
+
+  function scheduleHybridSearch(query) {
+    const normalizedQuery = String(query || "").trim();
+    if (!hybridCanRun(normalizedQuery)) return;
+    const sequence = ++state.hybrid.sequence;
+    state.hybrid.pending = true;
+    state.hybrid.active = false;
+    state.hybrid.fallbackReason = "";
+    hybridSearchClient.search(normalizedQuery, { context: "" }).then(result => {
+      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+      state.hybrid.pending = false;
+      state.hybrid.cachedQuery = normalizedQuery;
+      state.hybrid.cacheReady = true;
+      state.hybrid.parents = result.parents || [];
+      state.hybrid.diagnostics = result.diagnostics || null;
+      state.hybrid.usage = result.usage || null;
+      applyHybridParents(state.hybrid.parents);
+      state.page = 1;
+      $("search-status").textContent =
+        `Enhanced ranking complete: ${state.matches.length.toLocaleString()} public opportunities match the current filters.`;
+      renderResults();
+    }).catch(error => {
+      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+      state.hybrid.pending = false;
+      state.hybrid.active = false;
+      state.hybrid.fallbackReason = String(error?.code || "hybrid_unavailable");
+      state.searchDiagnostics = {
+        ...(state.searchDiagnostics || {}),
+        hybrid: { fallback: true, reason: state.hybrid.fallbackReason },
+      };
+      $("search-status").textContent =
+        `Search complete: ${state.matches.length.toLocaleString()} opportunities. Enhanced ranking is temporarily unavailable, so local ranking is shown.`;
+      renderResults();
+    });
   }
 
   function currentDisplayMatches() {
@@ -1594,6 +1700,16 @@
     const search = computeMatches(state.query);
     state.matches = search.matches;
     state.searchDiagnostics = search.diagnostics;
+    state.hybrid.sequence += 1;
+    state.hybrid.pending = false;
+    state.hybrid.active = false;
+    if (hybridCanRun()) {
+      if (state.hybrid.cacheReady && state.hybrid.cachedQuery === state.query) {
+        applyHybridParents(state.hybrid.parents);
+      } else {
+        scheduleHybridSearch(state.query);
+      }
+    }
     if (resetPage) state.page = 1;
     syncStateToUrl();
     if (persistProfile) scheduleProfileSave();
@@ -2019,7 +2135,12 @@
   }
 
   function matchExplanation(match, record) {
-    if (!APP_CONFIG?.flags?.matchExplanations || !MATCH_EXPLAIN_API?.build) return "";
+    if (!APP_CONFIG?.flags?.matchExplanations) return "";
+    if (match.hybridExplanation?.excerpt) {
+      const explanation = match.hybridExplanation;
+      return `<details class="match-explanation match-explanation-v2" data-match-tier="public-source-passage"><summary><span>Why this matched</span><span class="match-explanation-tier">Public source passage</span></summary><ul><li><strong>${escapeHtml(explanation.source_label || "Public source")}: </strong>${escapeHtml(explanation.excerpt)}</li></ul></details>`;
+    }
+    if (!MATCH_EXPLAIN_API?.build) return "";
     if (APP_CONFIG?.flags?.searchV2 && MATCH_EXPLAIN_API?.buildV2) {
       const explanation = MATCH_EXPLAIN_API.buildV2({
         query: state.query,
@@ -2862,6 +2983,12 @@
             : state.ai.mode === "foa-focus"
               ? "Single-FOA focus"
               : "Chat-focused results"
+      : state.hybrid.active
+        ? "Hybrid-ranked public catalog"
+        : state.hybrid.pending
+          ? "Local catalog · enhancing ranking"
+          : state.hybrid.fallbackReason
+            ? "Local BM25F fallback"
       : state.profile.active
         ? "Profile-ranked catalog"
         : "Public catalog";
@@ -3931,11 +4058,7 @@
     $("clear-filters").addEventListener("click", clearFiltersOnly);
     $("sort").addEventListener("change", () => {
       state.sort = $("sort").value;
-      state.matches = computeMatches(state.query, state.sort).matches;
-      state.page = 1;
-      syncStateToUrl();
-      scheduleProfileSave();
-      renderResults();
+      runSearch();
     });
     $("page-prev").addEventListener("click", () => {
       goToResultsPage(state.page - 1);
@@ -4377,6 +4500,9 @@
       if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
         throw new Error("Search v2 could not initialize because its concept contract is missing.");
       }
+      if (APP_CONFIG?.flags?.searchV2 && !HYBRID_SEARCH_API?.createClient) {
+        throw new Error("Search v2 could not initialize because its hybrid search helper is missing.");
+      }
       if (
         APP_CONFIG?.flags?.searchV2
         && Number(MATCH_EXPLAIN_API?.contractVersion || 0) !== 2
@@ -4398,6 +4524,18 @@
           searchV2: APP_CONFIG?.flags?.searchV2 === true,
           searchV2Config: SEARCH_V2_CONFIG,
           catalogRole: "child",
+        });
+      }
+      if (APP_CONFIG?.flags?.searchV2 && childCatalog && childSearchEngine) {
+        hybridSearchClient = HYBRID_SEARCH_API.createClient({
+          parentCatalog: catalog,
+          childCatalog,
+          parentEngine: searchEngine,
+          childEngine: childSearchEngine,
+          proxyUrl: APP_CONFIG?.hybridSearch?.proxyUrl || "",
+          manifestUrl: APP_CONFIG?.hybridSearch?.manifestUrl,
+          vectorUrl: APP_CONFIG?.hybridSearch?.vectorUrl,
+          timeoutMs: APP_CONFIG?.hybridSearch?.timeoutMs,
         });
       }
       if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {

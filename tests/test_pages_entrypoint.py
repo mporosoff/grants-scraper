@@ -263,7 +263,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=search-v2-phase3-20260822"></script>',
+            '<script src="./assets/search-hybrid.js?v=hybrid-voyage-dev-20260823"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/app.js?v=hybrid-voyage-dev-20260823"></script>',
             explorer_html,
         )
         self.assertIn(
