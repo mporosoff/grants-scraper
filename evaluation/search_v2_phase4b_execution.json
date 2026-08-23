@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "status": "one_time_raw_execution_frozen",
+  "execution_count": 1,
+  "raw_results": "evaluation/search_v2_iteration2_holdout_results_raw.json",
+  "raw_results_sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+  "candidate_code_sha": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "candidate_tree_sha": "add6b88b802855fde619b716272b906603664296",
+  "config_sha256": "54ecac7b0b5e07135d601e98f56c100c211993b0eea060cb581e3e64bf532429",
+  "catalog_sha256": "f6168e043fc6e4466edb49dd4fa0f957d09509f9591ee952bda035b423d27f1f",
+  "sidecar_sha256": "e2f45ecdfab26770f2346eaa4a488bb57fcaa3cc17c5d90ed25e30d14727f40d",
+  "holdout_frame_sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+  "holdout_manifest_sha256": "d041445e753aa2f70d96a4f7c6f4874828ef8df32d2fb3c1aaa8289cd25c7942",
+  "post_outcome_tuning_permitted": false
+}

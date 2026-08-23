@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "phase": "4B",
+  "iteration": "search-v2-iteration-2",
+  "adjudicated_at": "2026-08-22",
+  "status": "query_result_truth_complete",
+  "raw_results": "evaluation/search_v2_iteration2_holdout_results_raw.json",
+  "raw_results_sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+  "candidate_code_sha": "daa3355bc68b9fda45037a0a8d2be8c38fad7638",
+  "truth_key": "query_id,result_id",
+  "reviewed_query_ids": [
+    "i2hold_material_01",
+    "i2hold_material_02",
+    "i2hold_material_03",
+    "i2hold_material_04",
+    "i2hold_health_01",
+    "i2hold_health_02",
+    "i2hold_health_03",
+    "i2hold_ag_01",
+    "i2hold_ag_02",
+    "i2hold_energy_01",
+    "i2hold_energy_02",
+    "i2hold_ai_01",
+    "i2hold_ai_02",
+    "i2hold_defense_01",
+    "i2hold_defense_02",
+    "i2hold_space_01",
+    "i2hold_space_02",
+    "i2hold_env_01",
+    "i2hold_env_02",
+    "i2hold_negative_01",
+    "i2hold_negative_02",
+    "i2hold_negative_03",
+    "i2hold_negative_04",
+    "i2hold_acronym_01",
+    "i2hold_acronym_02",
+    "i2hold_child_01",
+    "i2hold_child_02",
+    "i2hold_broader_01"
+  ],
+  "protocol": {
+    "post_outcome_tuning": false,
+    "pre_registered_required_anchors_preserved": true,
+    "required_anchor_labels_changed_to_rescue_retrieval": false,
+    "generic_metadata_may_establish_primary": false,
+    "citation_text_alone_may_establish_primary": false,
+    "broader_fit_counts_as_primary": false,
+    "currentness_required": true
+  },
+  "queries": {
+    "i2hold_material_01": {
+      "query": "dysprosium solvent recovery",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Dysprosium is a rare-earth member; DOE BES Separation Science authoritatively covers solvent-based separation and recovery research.","valid_path":"bounded_authoritative_scope_entailment"},
+        "361526": {"label":"primary_relevant","evidence":"Genesis publishes the Critical Minerals Supply challenge and Extraction and Processing Technologies child; dysprosium recovery is contained in that target-operation scope.","valid_path":"publication_eligible_child_and_authoritative_scope"},
+        "362061": {"label":"primary_relevant","evidence":"NSF CPS explicitly covers separations, critical-mineral recovery, sorbents, interfaces, and scalable chemical processes.","valid_path":"authoritative_parent_scope"}
+      }
+    },
+    "i2hold_material_02": {
+      "query": "neodymium ion-exchange purification",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Neodymium is a rare-earth member and ion exchange/purification is within BES Separation Science.","valid_path":"bounded_authoritative_scope_entailment"},
+        "361526": {"label":"primary_relevant","evidence":"Genesis Critical Minerals Extraction and Processing scope contains rare-earth purification operations.","valid_path":"publication_eligible_child_and_authoritative_scope"},
+        "362061": {"label":"primary_relevant","evidence":"CPS explicitly funds critical-mineral recovery and chemical separations using specialized interfaces and sorbents.","valid_path":"authoritative_parent_scope"}
+      }
+    },
+    "i2hold_material_03": {
+      "query": "lanthanum resource recovery",
+      "required_primary_ids": ["360678", "361526", "362061"],
+      "judgments": {
+        "360678": {"label":"primary_relevant","evidence":"Lanthanum is a rare-earth member and resource recovery is a separation-science operation.","valid_path":"bounded_authoritative_scope_entailment"},
+        "361526": {"label":"primary_relevant","evidence":"Genesis Critical Minerals Extraction and Processing authoritatively contains lanthanum recovery.","valid_path":"publication_eligible_child_and_authoritative_scope"},
+        "362061": {"label":"primary_relevant","evidence":"CPS explicitly includes scalable recovery of critical minerals.","valid_path":"authoritative_parent_scope"}
+      }
+    },
+    "i2hold_material_04": {
+      "query": "critical-metal leaching technology",
+      "required_primary_ids": ["361526", "362061"],
+      "judgments": {
+        "361526": {"label":"primary_relevant","evidence":"Genesis publishes a critical-minerals Extraction and Processing Technologies child; leaching is a bounded extraction/processing operation.","valid_path":"publication_eligible_child_and_authoritative_scope"},
+        "362061": {"label":"primary_relevant","evidence":"CPS funds critical-mineral recovery and chemical-process innovation, which contains leaching technology research.","valid_path":"authoritative_parent_scope"}
+      }
+    },
+    "i2hold_health_01": {
+      "query": "rural obstetric care networks",
+      "required_primary_ids": ["363582"],
+      "judgments": {
+        "363582": {"label":"primary_relevant","evidence":"Rural MOMS explicitly supports collaborative improvement and innovation networks for rural maternity and obstetric care access and delivery.","valid_path":"explicit_parent_evidence"},
+        "363508": {"label":"broader_program_fit","evidence":"RRPD supports rural residency programs, including obstetrics and gynecology, but its published intervention is physician training rather than obstetric care networks.","valid_path":"adjacent_published_scope"}
+      }
+    },
+    "i2hold_health_02": {
+      "query": "rural maternity access innovation",
+      "required_primary_ids": ["363582"],
+      "judgments": {
+        "363582": {"label":"primary_relevant","evidence":"Rural MOMS explicitly funds innovation networks to improve rural maternity access.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_health_03": {
+      "query": "tribal maternal home visiting services",
+      "required_primary_ids": ["363222"],
+      "judgments": {
+        "363222": {"label":"primary_relevant","evidence":"Tribal MIECHV explicitly funds culturally grounded maternal and early-childhood home visiting services for American Indian and Alaska Native families.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_ag_01": {
+      "query": "heat-resilient plant breeding",
+      "required_primary_ids": ["360205"],
+      "judgments": {
+        "360205": {"label":"primary_relevant","evidence":"AFRI authoritative plant-health and production scope covers plant breeding, traits, and abiotic-stress resilience; heat resilience is a bounded abiotic-stress trait.","valid_path":"bounded_authoritative_parent_scope"}
+      }
+    },
+    "i2hold_ag_02": {
+      "query": "crop disease resistance genomics",
+      "required_primary_ids": ["360205"],
+      "judgments": {
+        "360205": {"label":"primary_relevant","evidence":"AFRI Plant Health and Production scope authoritatively covers crop disease resistance, breeding, genetics, and genomics.","valid_path":"bounded_authoritative_parent_scope"}
+      }
+    },
+    "i2hold_energy_01": {
+      "query": "grid-scale storage technology scale-up",
+      "required_primary_ids": ["356623"],
+      "judgments": {
+        "356623": {"label":"primary_relevant","evidence":"SCALEUP explicitly funds pre-commercial scaling of ARPA-E energy technologies, including technologies to store energy and integrate them with broader systems.","valid_path":"authoritative_parent_scope"}
+      }
+    },
+    "i2hold_energy_02": {
+      "query": "seasonal thermal storage commercialization",
+      "required_primary_ids": ["356623"],
+      "judgments": {
+        "356623": {"label":"primary_relevant","evidence":"Subject to SCALEUP applicant and prior-award eligibility, seasonal thermal storage is an energy-storage technology and commercialization-scale project within the published pre-commercial scaling scope.","valid_path":"bounded_authoritative_parent_scope"}
+      }
+    },
+    "i2hold_ai_01": {
+      "query": "composable scientific foundation models",
+      "required_primary_ids": ["361526"],
+      "judgments": {
+        "361526": {"label":"primary_relevant","evidence":"Genesis has an exact publication-eligible Composable and Modular Foundation Models child within AI for Scientific Reasoning.","valid_path":"publication_eligible_child"}
+      }
+    },
+    "i2hold_ai_02": {
+      "query": "adversarially robust AI science workflows",
+      "required_primary_ids": ["361526"],
+      "judgments": {
+        "361526": {"label":"primary_relevant","evidence":"Genesis publishes Cybersecurity for AI-driven Science Workflows and AI for Adversarial Robustness and Resilience children.","valid_path":"publication_eligible_child"}
+      }
+    },
+    "i2hold_defense_01": {
+      "query": "autonomous naval sensing systems",
+      "required_primary_ids": [],
+      "judgments": {
+        "356605": {"label":"broader_program_fit","evidence":"The ONR Long Range BAA is adjacent naval research scope, but the catalog has no publication-eligible child or controlled parent narrative establishing this complete autonomous-sensing intent.","valid_path":"adjacent_published_scope"}
+      }
+    },
+    "i2hold_defense_02": {
+      "query": "hypersonic thermal-protection materials",
+      "required_primary_ids": ["344592"],
+      "judgments": {
+        "344592": {"label":"primary_relevant","evidence":"The publication-eligible ARL Super-Materials child covers structural materials in high-temperature, highly dynamic extreme environments, containing hypersonic thermal-protection materials.","valid_path":"publication_eligible_child"}
+      }
+    },
+    "i2hold_space_01": {
+      "query": "Sun-Earth electrodynamic coupling",
+      "required_primary_ids": ["356536"],
+      "judgments": {
+        "356536": {"label":"primary_relevant","evidence":"Geospace explicitly supports the coupled Sun-Earth system and dynamical and electrodynamical processes.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_space_02": {
+      "query": "upper-atmosphere radiation-belt dynamics",
+      "required_primary_ids": ["356536"],
+      "judgments": {
+        "356536": {"label":"primary_relevant","evidence":"Geospace explicitly covers upper-atmosphere dynamics, the magnetosphere, radiation belts, and their coupling.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_env_01": {
+      "query": "pilot-scale impaired-water purification",
+      "required_primary_ids": ["363375"],
+      "judgments": {
+        "363375": {"label":"primary_relevant","evidence":"DWPR explicitly invites innovative laboratory and pilot-scale treatment research for impaired water and purification technology commercialization.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_env_02": {
+      "query": "coastal-erosion hazard decision tools",
+      "required_primary_ids": ["363537"],
+      "judgments": {
+        "363537": {"label":"primary_relevant","evidence":"The Alaska CESU opportunity explicitly covers coastal erosion, hazard preparedness, actionable science, data, and decision tools.","valid_path":"explicit_parent_evidence"}
+      }
+    },
+    "i2hold_negative_01": {"query":"maternal data workforce symposium","required_primary_ids":[],"judgments":{}},
+    "i2hold_negative_02": {"query":"planetary rare-disease elements","required_primary_ids":[],"judgments":{}},
+    "i2hold_negative_03": {"query":"microgravity oncology instrumentation","required_primary_ids":[],"judgments":{}},
+    "i2hold_negative_04": {"query":"drought diplomacy crop exchange","required_primary_ids":[],"judgments":{}},
+    "i2hold_acronym_01": {"query":"CPS process safety","required_primary_ids":[],"judgments":{}},
+    "i2hold_acronym_02": {
+      "query": "AIM materials intelligence",
+      "required_primary_ids": [],
+      "judgments": {
+        "344592": {"label":"irrelevant","evidence":"The unresolved uppercase AIM acronym was expanded across artificial/machine intelligence program-area text and an unrelated advanced-manufacturing materials child; no authoritative AIM materials-intelligence scope exists.","failure_class":"acronym_and_cross_child_collision"},
+        "362063": {"label":"irrelevant","evidence":"Transport Phenomena contains the ordinary verb 'aim', materials language, and artificial intelligence independently; it does not establish AIM materials intelligence as a funded complete intent.","failure_class":"acronym_and_ordinary_word_collision"}
+      }
+    },
+    "i2hold_child_01": {
+      "query": "agentic chemical manufacturing",
+      "required_primary_ids": ["361526"],
+      "judgments": {
+        "361526": {"label":"primary_relevant","evidence":"Genesis has an exact publication-eligible Agentic AI-Driven Chemical Manufacturing child.","valid_path":"publication_eligible_child"}
+      }
+    },
+    "i2hold_child_02": {
+      "query": "trustworthy scientific software AI",
+      "required_primary_ids": ["361526"],
+      "judgments": {
+        "361526": {"label":"primary_relevant","evidence":"Genesis has an exact publication-eligible Trustworthy AI for Scientific Software child.","valid_path":"publication_eligible_child"}
+      }
+    },
+    "i2hold_broader_01": {
+      "query": "marine ecosystem resilience research",
+      "required_primary_ids": [],
+      "judgments": {
+        "356605": {"label":"broader_program_fit","evidence":"The ONR Long Range BAA is a genuine adjacent naval-research program, but no controlled current child establishes marine ecosystem resilience as contained primary scope.","valid_path":"adjacent_published_scope"},
+        "103313": {"label":"irrelevant","evidence":"The FY2012 NOAA notice describes marine-ecosystem resilience research but its application deadlines closed in 2011; it is not a current opportunity and cannot be presented as primary.","failure_class":"stale_currentness_failure"}
+      }
+    }
+  },
+  "unexpected_visible_result_reviews": [
+    {"key":"i2hold_health_01:363508","label":"broader_program_fit","reason":"Rural obstetrics workforce training is adjacent to, but does not contain, an obstetric care-network intervention."},
+    {"key":"i2hold_acronym_02:344592","label":"irrelevant","reason":"Unresolved AIM acronym and cross-child/program-area collision."},
+    {"key":"i2hold_acronym_02:362063","label":"irrelevant","reason":"Ordinary verb 'aim' plus independent materials and AI wording."},
+    {"key":"i2hold_broader_01:103313","label":"irrelevant","reason":"FY2012 notice with 2011 deadlines is stale despite topical overlap."}
+  ]
+}
