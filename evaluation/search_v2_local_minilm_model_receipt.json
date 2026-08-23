@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "experiment": "local_minilm_cross_encoder_reranker_feasibility",
+  "generated_at": "2026-08-23T11:08:13.815Z",
+  "model": {
+    "id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "license": "apache-2.0",
+    "onnx_file": "onnx/model_quint8_avx2.onnx",
+    "model_file_name": "model_quint8_avx2",
+    "quantization": "dynamic UINT8 weights, AVX2-targeted ONNX export",
+    "maximum_sequence_length": 256
+  },
+  "source": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2/tree/233902d25c440f23af6f7d6e94d2946bac0bee0a",
+  "runtime": {
+    "name": "Transformers.js",
+    "version": "4.2.0",
+    "onnxruntime_node_version": "1.24.3",
+    "node_version": "v24.19.0",
+    "execution_provider": "cpu"
+  },
+  "weights": {
+    "bytes": 23200716,
+    "sha256": "c80a8b34256ea453093d612e3ac48d3d965a0c0a48c7906709af8b8e28461bf9",
+    "committed_to_repository": false
+  },
+  "tokenizer": {
+    "bytes": 712726,
+    "files": [
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/tokenizer.json",
+        "bytes": 711396
+      },
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/tokenizer_config.json",
+        "bytes": 1330
+      }
+    ]
+  },
+  "cache": {
+    "device": "cpu",
+    "initialization_ms": 5771.1587,
+    "rss_before_bytes": 44244992,
+    "rss_after_initialization_bytes": 149987328,
+    "rss_initialization_delta_bytes": 105742336,
+    "cache_bytes_before": 0,
+    "cache_bytes_after": 23914236,
+    "downloaded_bytes_this_run": 23914236,
+    "cache_was_warm": false,
+    "cache_files": [
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/config.json",
+        "bytes": 794
+      },
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/onnx/model_quint8_avx2.onnx",
+        "bytes": 23200716
+      },
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/tokenizer.json",
+        "bytes": 711396
+      },
+      {
+        "path": "cross-encoder/ms-marco-MiniLM-L6-v2/233902d25c440f23af6f7d6e94d2946bac0bee0a/tokenizer_config.json",
+        "bytes": 1330
+      }
+    ],
+    "first_inference_ms": 9.821
+  },
+  "repository_integration": false,
+  "production_code_changed": false,
+  "phase4c_read_or_executed": false
+}

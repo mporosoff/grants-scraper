@@ -429,3 +429,19 @@ Measured over the 52 spent queries, scoring latency is 38.08 ms p50 and 109.08 m
 The machine-readable measurements are `evaluation/search_v2_local_architecture_results.json`, `evaluation/search_v2_local_architecture_leaveout.json`, and `evaluation/search_v2_local_architecture_gate_report.json`. The architecture is retained as bounded experimental evidence on `search-quality-v2`, but it is not authorized for Phase 4C or production.
 
 **LOCAL ARCHITECTURE STILL INSUFFICIENT — INDEXED AUTHORITATIVE TEXT LACKS COMPLETE QUERY VOCABULARY FOR 16 OF 19 AUDITED MISSED ANCHORS**
+
+## Local MiniLM reranker feasibility
+
+A development-only cross-encoder experiment tested whether semantic reranking can repair the remaining vocabulary-gap failures without changing the local BM25F baseline, primary admission, production explanations, or browser assets. The experiment used `cross-encoder/ms-marco-MiniLM-L6-v2` at immutable revision `233902d25c440f23af6f7d6e94d2946bac0bee0a`, Apache-2.0 licensed, with the 23,200,716-byte dynamically quantized UINT8 AVX2 ONNX graph and 712,726 bytes of tokenizer files. Transformers.js 4.2.0 and ONNX Runtime Node 1.24.3 were installed only in a temporary directory; model weights remain outside the repository.
+
+The unchanged BM25F discovery stream supplied the top 20, 30, or 50 authoritative parent/child passages. MiniLM scored query/passage pairs, and each parent inherited only its strongest passage score. Semantic score was never treated as relevance evidence and could not admit a primary result.
+
+At depth 50, required-anchor candidate Recall@10 increased from 0.477 to 0.538, while Recall@50 remained exactly 0.600. Across all 65 required anchors, five moved into the top 10 and one moved out; the known-correct `AI journalism exchange` result regressed from candidate rank 1 to rank 12. Among the 16 vocabulary-gap anchors, nine entered the depth-50 candidate window, six were already BM25F top-10 candidates, and MiniLM promoted only two additional anchors into the top 10. Seven vocabulary-gap anchors remained outside the candidate window and one remained below rank 10. MiniLM therefore mostly reordered candidates already found lexically and did not solve candidate-window recall.
+
+The historical truth set does not fully adjudicate the new semantic top 10: 440 of 501 query/result pairs are unjudged. On judged pairs, Precision@10 moved from 0.492 to 0.574, while the conservative query-average lower bound moved only from 0.073 to 0.081 and 17 known irrelevant results remained in the combined top tens. Across 12 zero-primary hard negatives, semantic top tens contain nine known irrelevant and 109 unjudged pairs. User-visible hard negatives remain unchanged only because semantic score is prohibited from manufacturing primary evidence.
+
+Native CPU performance at depth 50 measured 0.828 seconds p50 and 1.050 seconds p95 including BM25F. Cached initialization took 0.682 seconds and added about 94 MB RSS; the full evaluation process reached about 839 MB RSS. On the same 20-passage query, native CPU reranking measured 0.271 seconds p50, while direct single-thread ONNX Runtime Web/WASM measured 3.323 seconds. WebGPU was unavailable in the Node harness and was not benchmarked. No production asset bytes were added.
+
+Detailed evidence is in `evaluation/search_v2_local_minilm_results.json`, `evaluation/search_v2_local_minilm_runtime_benchmark.json`, `evaluation/search_v2_local_minilm_model_receipt.json`, and `evaluation/search_v2_local_minilm_decision.json`. Phase 4C remains sealed and unexecuted.
+
+**LOCAL MINILM RERANKING DOES NOT JUSTIFY ITS COST/WEIGHT — DISCARD THIS PATH**

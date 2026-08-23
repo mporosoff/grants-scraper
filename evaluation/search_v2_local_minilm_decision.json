@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment": "local_minilm_cross_encoder_reranker_feasibility",
+  "evaluation_date": "2026-08-23",
+  "branch": "search-quality-v2",
+  "starting_sha": "0afc4da7f8eb832d7140694960597fbad4e4f3a8",
+  "recommendation": "LOCAL MINILM RERANKING DOES NOT JUSTIFY ITS COST/WEIGHT — DISCARD THIS PATH",
+  "reason": "At candidate depth 50, MiniLM improved required-anchor Recall@10 from 0.476923 to 0.538462 but did not improve Recall@50 beyond 0.600000. Only two of the 16 vocabulary-gap anchors were newly promoted into the top 10; seven remained outside the candidate window, six were already top-10 BM25F candidates, and one reachable gap anchor remained below rank 10. The modest reranking gain adds a 23.9 MB model/tokenizer download, substantial memory use, and browser-style single-thread WASM latency above three seconds for only 20 passages.",
+  "baseline_unchanged": true,
+  "production_integration": false,
+  "model": {
+    "id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "license": "apache-2.0",
+    "onnx_file": "onnx/model_quint8_avx2.onnx",
+    "quantization": "dynamic UINT8 weights, AVX2-targeted ONNX export",
+    "weights_bytes": 23200716,
+    "tokenizer_bytes": 712726,
+    "total_model_download_bytes": 23914236,
+    "weights_committed": false
+  },
+  "runtime": {
+    "transformers_js": "4.2.0",
+    "onnxruntime_node": "1.24.3",
+    "onnxruntime_web": "1.26.0-dev.20260416-b7804b056c",
+    "node": "v24.19.0",
+    "temporary_development_install_bytes": 393116330,
+    "temporary_development_install_is_not_a_browser_bundle_measurement": true,
+    "cold_download_and_initialization_ms": 5771.1587,
+    "cached_cpu_initialization_ms": 682.1508,
+    "cached_cpu_initialization_rss_delta_bytes": 93696000,
+    "cpu_rss_after_full_evaluation_bytes": 839163904,
+    "cpu_rss_growth_during_evaluation_bytes": 337186816,
+    "webgpu": "unavailable_in_node_harness_not_benchmarked"
+  },
+  "architecture": {
+    "candidate_source": "unchanged local BM25F discovery scores",
+    "candidate_depths": [20, 30, 50],
+    "passage_sources": [
+      "parent_title",
+      "parent_description",
+      "authoritative_program_area",
+      "child_title",
+      "child_summary",
+      "bounded_source_evidence"
+    ],
+    "parent_aggregation": "single strongest semantic parent-or-child passage",
+    "child_count_bonus": 0,
+    "semantic_score_creates_primary_evidence": false,
+    "production_explanation_behavior_changed": false
+  },
+  "quality": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "baseline_visible_primary": {
+      "query_average_precision_at_10": 0.974359,
+      "required_recall_at_10": 0.184615,
+      "required_recall_at_50": 0.184615
+    },
+    "bm25f_candidate_at_depth_50": {
+      "required_recall_at_10": 0.476923,
+      "required_recall_at_50": 0.600000,
+      "precision_at_10_over_judged": 0.492063,
+      "query_average_precision_at_10_conservative_lower_bound": 0.073291
+    },
+    "minilm_candidate_at_depth_50": {
+      "required_recall_at_10": 0.538462,
+      "required_recall_at_50": 0.600000,
+      "precision_at_10_over_judged": 0.573770,
+      "query_average_precision_at_10_conservative_lower_bound": 0.080983,
+      "unjudged_top_10_pairs": 440,
+      "known_irrelevant_top_10_pairs": 17,
+      "precision_conclusion": "Historical truth is too sparse over the newly reranked top 10 to claim a true precision gain."
+    },
+    "required_anchor_top_10_movements_at_depth_50": {
+      "semantic_rescues": 5,
+      "semantic_regressions": 1,
+      "net_gain": 4,
+      "newly_reachable_at_50": 0,
+      "notable_regression": "AI journalism exchange fell from BM25F candidate rank 1 to MiniLM rank 12."
+    },
+    "vocabulary_gap_anchors": {
+      "count": 16,
+      "reachable_at_depth_50": 9,
+      "bm25f_top_10": 6,
+      "minilm_top_10": 8,
+      "semantic_rescues_into_top_10": 2,
+      "semantic_regressions_out_of_top_10": 0,
+      "still_absent_from_depth_50": 7,
+      "still_below_rank_10_after_reranking": 1
+    },
+    "zero_primary_hard_negatives": {
+      "query_count": 12,
+      "visible_primary_behavior_changed": false,
+      "minilm_top_10_known_primary_pairs": 0,
+      "minilm_top_10_known_irrelevant_pairs": 9,
+      "minilm_top_10_unjudged_pairs": 109,
+      "conclusion": "Hard-negative output remains unchanged only because MiniLM is not allowed to create admission evidence; its candidate scores are not safe as an admission rule."
+    }
+  },
+  "performance": {
+    "spent_queries_cpu_native": {
+      "depth_20_total_p50_ms": 379.7911,
+      "depth_20_total_p95_ms": 501.9930,
+      "depth_30_total_p50_ms": 526.7757,
+      "depth_30_total_p95_ms": 667.9860,
+      "depth_50_total_p50_ms": 828.3116,
+      "depth_50_total_p95_ms": 1050.2939
+    },
+    "same_query_20_passage_runtime_comparison": {
+      "native_cpu_warm_p50_ms": 270.9973,
+      "native_cpu_warm_p95_ms": 299.1219,
+      "single_thread_wasm_warm_p50_ms": 3322.5968,
+      "single_thread_wasm_warm_p95_ms": 3323.9703
+    }
+  },
+  "safety": {
+    "phase4c_read_or_executed": false,
+    "phase4c_results_created": false,
+    "main_touched": false,
+    "production_flag_enabled": false,
+    "production_search_code_changed": false,
+    "model_integrated_into_site": false,
+    "paid_api_or_hosted_service_added": false,
+    "vector_database_or_embeddings_index_added": false,
+    "scientific_mappings_added": false,
+    "generated_program_metadata_added": false
+  },
+  "artifacts": {
+    "model_receipt": "evaluation/search_v2_local_minilm_model_receipt.json",
+    "detailed_results": "evaluation/search_v2_local_minilm_results.json",
+    "runtime_benchmark": "evaluation/search_v2_local_minilm_runtime_benchmark.json",
+    "harness": "tools/run_search_v2_minilm_feasibility.mjs"
+  }
+}
