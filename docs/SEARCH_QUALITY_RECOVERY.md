@@ -625,3 +625,54 @@ deployed, search v2 remains off, `main` is unchanged, and Phase 4C remains
 sealed and unauthorized.
 
 **INTENT GATE DOES NOT SOLVE HARD-NEGATIVE PRECISION WITHOUT UNACCEPTABLE RECALL LOSS**
+
+## Strong + Potential product-contract evaluation
+
+The failed Workers AI intent gate has been removed from the live browser and
+Worker path. The proxy now exposes only `/embed-query` and `/rerank`; it no
+longer requires an `AI` binding. Historical intent-gate artifacts remain
+unchanged. The generic word-bounded source repair that distinguishes `ion
+exchange` from `information exchange`, the 1,659 public passages, the lazy
+float16 vectors, their hash handshake, local cosine retrieval, RRF, acronym
+safeguards, Voyage reranking, and strongest-passage parent rollup are retained.
+
+The disabled browser workflow now renders the unchanged conservative local
+matcher as **Strong matches** immediately. It then appends at most 12
+deduplicated hybrid-ranked **Potential matches**. Potential results carry the
+extractive label **Why this may be relevant** and show only the strongest
+existing public indexed passage. They make no primary/broader/reject claim and
+never expose a semantic score as evidence. If hybrid assets or services fail,
+the already-rendered Strong results remain usable; a zero-Strong state is
+presented as a normal search outcome rather than a technical error.
+
+The spent-data evaluation used the same 52 queries and 65 required anchors.
+Combined discovery Recall@10/20/50 is 0.862/0.908/0.954, and query-average
+nDCG@10 is 0.783. No parent appears in both tiers. The Potential display is
+bounded at 12, with 588 displayed pairs overall; 165 have prior exact-pair or
+bounded-review judgments, of which 50 are primary relevant, five are known
+irrelevant, and 110 are broader or otherwise reviewed non-primary. Ten
+zero-anchor queries receive Potential results, which is expected under the
+explicit uncertain-lead contract.
+
+The Strong gate nevertheless remains blocked. The unchanged local matcher
+returns 14 Strong results: 12 primary relevant, one adjudicated broader fit,
+and one newly reviewed irrelevant hard-negative result. Reviewed Strong
+Precision@10 is therefore 0.857, below the desired 0.90 bar. For `health data
+workforce workshop`, it labels the Tribal Colleges and Universities Program
+Strong by coordinating `Cyberinfrastructure Health`, data science, workforce,
+and workshop language across unrelated program tracks. This is a complete-
+intent false claim on a zero-anchor query, not merely an uncertain Potential
+lead. No threshold, query exception, classifier, ontology, or relationship
+mapping was added to conceal it.
+
+Hybrid-only performance returned to 0.614 seconds warm p50 and 0.749 seconds
+warm p95, with a 1.070-second cold first query. The run made 52 embedding and
+49 reranking requests, reranked 12,830 public passages, reported no errors or
+timeouts, and has a nominal published-price estimate of $0.155588, or $2.99
+per 1,000 searches. Detailed evidence is in
+`evaluation/search_v2_strong_potential_results.json`, exact new product truth
+is in `evaluation/search_v2_strong_potential_truth.json`, the sanitized receipt
+is in `evaluation/search_v2_strong_potential_api_receipt.json`, and the decision
+is in `evaluation/search_v2_strong_potential_gate_report.json`.
+
+**STRONG + POTENTIAL WORKFLOW BLOCKED — ONE ZERO-ANCHOR PARTIAL-INTENT RESULT IS STILL LABELED STRONG**
