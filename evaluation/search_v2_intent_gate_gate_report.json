@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T18:20:00Z",
+  "starting_sha": "21deed0d5f9f2256d2ad52ce3c0f3bc6e680d10e",
+  "decision": "INTENT GATE DOES NOT SOLVE HARD-NEGATIVE PRECISION WITHOUT UNACCEPTABLE RECALL LOSS",
+  "phase4c_authorized": false,
+  "production_search_v2_enabled": false,
+  "deployed": false,
+  "retrieval_architecture_changed": false,
+  "judge": {
+    "model": "@cf/meta/llama-3.1-8b-instruct-fast",
+    "operation": "one structured classification request over the top 10 reranked results",
+    "ranking_scores_used": false,
+    "fixed_prompt_for_all_queries": true,
+    "query_specific_examples_or_rules": false,
+    "public_indexed_passages_only": true,
+    "private_profile_or_researcher_data_sent": false,
+    "explanations_generated_by_model": false,
+    "failure_behavior": "preserve the neutral hybrid-ranked list with no fabricated classification"
+  },
+  "development_population": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "sources": ["spent Phase 4", "spent Phase 4B", "existing hard negatives", "existing exact-pair precision review"],
+    "phase4c_read_or_executed": false
+  },
+  "quality": {
+    "hybrid_candidate_required_recall_at_10": 0.846154,
+    "hybrid_candidate_required_recall_at_50": 0.953846,
+    "user_visible_primary_recall_at_10": 0.215385,
+    "user_visible_primary_recall_at_50": 0.215385,
+    "query_average_ndcg_at_10": 0.205037,
+    "primary_precision_at_10_over_reviewed_outputs": 0.303571,
+    "reviewed_primary_output_count": 56,
+    "unreviewed_primary_output_count": 91,
+    "conservative_primary_precision_lower_bound": 0.115646,
+    "visible_primary_count": 147,
+    "visible_broader_count": 89,
+    "hidden_reject_count": 154,
+    "zero_anchor_query_count": 12,
+    "zero_anchor_queries_with_zero_primary": 4,
+    "classification_confusion_exact_truth": {
+      "primary_to_reject": 20,
+      "primary_to_broader": 10,
+      "broader_to_primary": 1,
+      "irrelevant_to_primary": 1
+    }
+  },
+  "hard_negative_findings": {
+    "clean_abstentions": [
+      "health data workforce workshop",
+      "microgravity radiation biology",
+      "CPS process safety",
+      "AIM materials intelligence"
+    ],
+    "false_primary_examples": {
+      "rare Earth observation elements": 4,
+      "BioData Catalyst training": 3,
+      "maternal data workforce symposium": 4,
+      "planetary rare-disease elements": 8,
+      "microgravity oncology instrumentation": 3,
+      "drought diplomacy crop exchange": 4
+    },
+    "acronym_hard_guard_remained_authoritative": true,
+    "interpretation": "the classifier both rejected many required anchors and admitted numerous partial-intent hard-negative candidates"
+  },
+  "reliability": {
+    "query_level_judge_fallback_count": 13,
+    "workers_ai_requests_attempted": 49,
+    "workers_ai_invalid_or_failed_responses": 10,
+    "strict_invalid_response_status": 502,
+    "fabricated_classifications_on_failure": 0
+  },
+  "performance": {
+    "cold_end_to_end_ms": 3213.6418,
+    "warm_end_to_end_p50_ms": 1793.994,
+    "warm_end_to_end_p95_ms": 2335.8799,
+    "judge_p50_ms": 1049.8149,
+    "judge_p95_ms": 1719.5886,
+    "measured_range_within_product_latency_allowance": true
+  },
+  "usage_and_cost": {
+    "voyage_embedding_requests": 52,
+    "voyage_rerank_requests": 49,
+    "voyage_rerank_tokens": 3113055,
+    "voyage_estimated_paid_cost_usd": 0.155657,
+    "workers_ai_requests": 49,
+    "workers_ai_input_tokens": 125254,
+    "workers_ai_output_tokens": 4235,
+    "workers_ai_total_tokens": 129489,
+    "workers_ai_neurons": 663.531633,
+    "workers_ai_daily_free_neuron_fraction": 0.066353,
+    "workers_ai_estimated_cost_within_free_daily_allocation_usd": 0,
+    "workers_ai_equivalent_paid_list_price_usd": 0.007299
+  },
+  "explanations": {
+    "visible_results_checked": 236,
+    "missing": 0,
+    "generated_model_language_exposed": 0,
+    "private_text_exposed": 0,
+    "architecture": "extractive winning public passage and field only"
+  },
+  "asset_deltas_bytes": {
+    "assets/search-hybrid.js": 4001,
+    "assets/app.js": 1357,
+    "workers/search-voyage-proxy/src/index.js": 7427,
+    "data/search-v2-voyage-vectors.f16": 0
+  },
+  "sealed_phase4c": {
+    "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "read_or_executed": false,
+    "result_or_truth_artifact_created": false
+  },
+  "evidence": {
+    "results": "evaluation/search_v2_intent_gate_results.json",
+    "results_sha256": "9dbb84f6827d68216b3481d2fc8692fbcccc4dbb66d49401675008a125247367",
+    "usage": "evaluation/search_v2_intent_gate_usage.json",
+    "usage_sha256": "6f4fd623237e3d2c621a8f37b36ba0bbd149c212d5e3724750990c6da30b9480",
+    "source_fix": "evaluation/search_v2_intent_gate_source_fix.json",
+    "test_runs": "evaluation/search_v2_intent_gate_test_runs.json"
+  },
+  "regression_gates": {
+    "browser": {"passed": 169, "failed": 0, "exit_code": 0},
+    "focused_python": {"passed": 62, "failed": 0, "exit_code": 0},
+    "live_product_python": {"passed": 760, "failed": 0, "exit_code": 0},
+    "parent_child_invariant": {"cases": 50, "exit_code": 0},
+    "explanation_frame": {"cases": 42, "unsupported": 0, "exit_code": 0},
+    "historical_baseline": {"queries": 37, "top_10_churn": 0, "exit_code": 0},
+    "no_drift": {"artifacts": 22, "changed": 0, "exit_code": 0},
+    "size_and_schema": {"passed": true, "exit_code": 0}
+  },
+  "why_blocked": [
+    "visible required-primary recall collapsed from the hybrid candidate ceiling of 0.954 to 0.215",
+    "only 4 of 12 zero-anchor queries returned zero primary results",
+    "reviewed primary precision fell to 0.304",
+    "20 known primaries were rejected and 10 more were downgraded to broader",
+    "10 of 49 judge requests failed strict structured-output validation"
+  ]
+}

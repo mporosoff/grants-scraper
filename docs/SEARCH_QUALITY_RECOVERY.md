@@ -574,3 +574,54 @@ representation defect and the generalized partial-intent precision failure are
 resolved without query-specific tuning.
 
 **HYBRID PRODUCTION IMPLEMENTATION BLOCKED — SPENT HARD NEGATIVES STILL RECEIVE HIGH-RANKED PARTIAL-INTENT RESULTS**
+
+## Final intent/abstention gate experiment
+
+The extraction defect behind the Burma governance collision was repaired at its
+source. The controlled `ion exchange` phrase had matched the suffix of
+`information exchange`, incorrectly deriving `hydrometallurgy`. Word-bounded
+recognizers plus cached-quote revalidation removed five stale evidence hits and
+changed four public passages, including record `363604`, without remerging
+unrelated deadline/currentness fields. Four affected passages were re-embedded;
+the final 1,659-passage corpus and 3,397,632-byte vector asset were then
+revalidated with zero additional API requests.
+
+A final development-only abstention experiment added a strict `/judge` contract
+to the undeployed Worker and tested exactly
+`@cf/meta/llama-3.1-8b-instruct-fast` through Wrangler's local remote binding.
+One fixed prompt classified each reranked top ten as primary, broader, or
+reject. The Worker accepts only exact committed public passages and matching
+parent/type/title/field metadata; private or arbitrary text is rejected. The
+browser uses the model only as a classification gate, never as a ranker or an
+explanation generator. Invalid output preserves the neutral hybrid-ranked list
+without fabricated labels.
+
+The gate failed decisively on the 52 spent queries and 65 required anchors.
+Hybrid candidate Recall@50 remained 0.954, but user-visible primary Recall@10
+and Recall@50 fell to 0.215. Query-average nDCG@10 fell from 0.734 to 0.205.
+Precision over 56 previously adjudicated visible-primary outputs was 0.304 (91
+additional primary outputs remain unjudged, so this is not presented as a fully
+adjudicated population estimate). Only four of 12 zero-anchor queries returned
+zero primary results. Exact-pair confusion included 20 primary-to-reject, 10
+primary-to-broader, one broader-to-primary, and one irrelevant-to-primary
+classification. Several hard negatives still received three to eight primary
+labels.
+
+Reliability was also insufficient: 10 of 49 Workers AI calls failed strict
+structured-output validation, producing 13 query-level neutral fallbacks when
+zero-candidate cases are included. No classifications were fabricated. Judge
+latency was 1.050 seconds p50 and 1.720 seconds p95; warm end-to-end latency was
+1.794 seconds p50 and 2.336 seconds p95. The run used 663.53 Workers AI Neurons
+(6.64% of the documented daily free allocation) plus a nominal $0.155657 of
+Voyage usage at published paid pricing. Extractive explanations remained clean
+for all 236 visible primary/broader results checked, with zero generated-language
+or private-text exposure.
+
+Detailed evidence is in `evaluation/search_v2_intent_gate_results.json`,
+`evaluation/search_v2_intent_gate_usage.json`,
+`evaluation/search_v2_intent_gate_source_fix.json`, and
+`evaluation/search_v2_intent_gate_gate_report.json`. The Worker was not
+deployed, search v2 remains off, `main` is unchanged, and Phase 4C remains
+sealed and unauthorized.
+
+**INTENT GATE DOES NOT SOLVE HARD-NEGATIVE PRECISION WITHOUT UNACCEPTABLE RECALL LOSS**

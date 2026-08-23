@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-23",
+  "starting_sha": "21deed0d5f9f2256d2ad52ce3c0f3bc6e680d10e",
+  "runs": [
+    {
+      "gate": "source_extraction_and_page_contract",
+      "command": "python -m unittest tests.test_program_areas tests.test_pages_entrypoint",
+      "exit_code": 0,
+      "details": {"tests": 19, "passed": 19}
+    },
+    {
+      "gate": "focused_hybrid_worker_contract",
+      "command": "node --test tests/browser/search-voyage-proxy-validation.test.mjs tests/browser/search-hybrid-production-contract.test.mjs",
+      "exit_code": 0,
+      "details": {"tests": 11, "passed": 11}
+    },
+    {
+      "gate": "spent_intent_gate_evaluation",
+      "command": "node tools/run_search_v2_intent_gate_eval.mjs --write",
+      "exit_code": 0,
+      "details": {
+        "query_count": 52,
+        "execution_completed": true,
+        "quality_gate_passed": false,
+        "phase4c_used": false
+      }
+    },
+    {
+      "gate": "incremental_vector_validation",
+      "command": "node tools/build_search_v2_voyage_vectors.mjs --write",
+      "exit_code": 0,
+      "details": {
+        "passage_count": 1659,
+        "reused_passage_count": 1659,
+        "embedded_passage_count": 0,
+        "API_request_count": 0
+      }
+    },
+    {
+      "gate": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "details": {"tests": 169, "passed": 169, "failed": 0}
+    },
+    {
+      "gate": "focused_python_search_schema_size_source",
+      "command": "python -m unittest tests.test_search_query tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring tests.test_pages_entrypoint tests.test_program_areas",
+      "exit_code": 0,
+      "details": {"tests": 62, "passed": 62, "failed": 0}
+    },
+    {
+      "gate": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "details": {"case_count": 50, "cardinality_invariant": true, "byte_identical": true}
+    },
+    {
+      "gate": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "details": {"generated_asset_current": true}
+    },
+    {
+      "gate": "phase3_42_pair_explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "details": {
+        "case_count": 42,
+        "correct_and_useful": 41,
+        "reviewed_shallow": 1,
+        "unsupported": 0,
+        "privacy_problem": 0
+      }
+    },
+    {
+      "gate": "historical_37_query_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "details": {"query_count": 37, "top_10_churn": 0}
+    },
+    {
+      "gate": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "details": {
+        "tests": 760,
+        "passed": 760,
+        "failed": 0,
+        "closed_frozen_measurement_modules_excluded": [
+          "test_meas8",
+          "test_p5_closeout",
+          "test_p7_frame",
+          "test_p7_residual"
+        ]
+      }
+    },
+    {
+      "gate": "no_drift",
+      "command": "Git Bash with PATH=/c/miniforge:/usr/bin:/bin ./tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "details": {"artifact_count": 22, "changed_artifacts": 0}
+    },
+    {
+      "gate": "syntax_json_whitespace_and_secret_checks",
+      "command": "node --check; JSON parse; git diff --check; bounded secret-pattern scan",
+      "exit_code": 0,
+      "details": {
+        "API_key_printed_or_persisted": false,
+        "phase4c_result_artifacts": 0
+      }
+    }
+  ],
+  "all_regression_runs_exit_zero": true,
+  "quality_decision_overrides_regression_status": true,
+  "note": "Green implementation/regression tests do not rescue the failed spent-data relevance and reliability gates."
+}
