@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "evaluated_at": "2026-08-23",
+  "branch": "search-quality-v2",
+  "starting_head": "5f0b5d07de85e414c5c354c8175704837d7d2d9e",
+  "decision": "STRONG EVIDENCE COHERENCE FIX PASSES — READY FOR PHASE 4C",
+  "scope": {
+    "population": "52 spent/development queries and 65 required anchors",
+    "phase4c_read_or_executed": false,
+    "production_flag_enabled": false,
+    "main_modified": false
+  },
+  "pre_change": {
+    "results_sha256": "9d7c73305e3bbbdcc08b43fe9ccc365d9af84e35ac59fa3a6fb230da142a558d",
+    "strong": {
+      "visible_count": 14,
+      "reviewed_pair_count": 14,
+      "reviewed_primary_count": 12,
+      "reviewed_non_primary_count": 2,
+      "known_irrelevant_count": 1,
+      "precision_at_10_over_reviewed": 0.857143,
+      "zero_anchor_visible_count": 1,
+      "required_recall_at_10": 0.184615
+    },
+    "combined": {
+      "required_recall_at_10": 0.861538,
+      "required_recall_at_20": 0.907692,
+      "required_recall_at_50": 0.953846,
+      "query_average_ndcg_at_10": 0.783221
+    }
+  },
+  "implementation": {
+    "candidate_discovery": "unchanged document-level fielded BM25F discovery scores",
+    "strong_admission": "the existing conservative coverage ratio must be satisfied inside one atomic bounded passage",
+    "atomic_parent_unit": "parent title plus one bounded window of at most three consecutive sentences from the same paragraph, one distinct authoritative program-area entry, or one bounded authoritative source-evidence fact",
+    "atomic_child_unit": "publication-eligible child title plus one bounded window of at most three consecutive child-summary sentences or one distinct authoritative program-area entry",
+    "aggregation_prohibited": [
+      "different sibling children",
+      "different program tracks",
+      "different program-area entries",
+      "separate bounded passages"
+    ],
+    "ranking": "unchanged document-level BM25F, phrase, proximity, and coordination score among records that pass Strong admission",
+    "potential_fallback": "unchanged hybrid candidate discovery reads discoveryScores rather than Strong scores",
+    "explanation": "admission evidence and field contributions are restricted to the winning atomic passage",
+    "query_specific_rules_added": 0,
+    "scientific_mappings_added": 0,
+    "models_or_apis_added": 0
+  },
+  "strong_membership_changes": [
+    {
+      "query_id": "hold_health_02",
+      "query": "health data workforce workshop",
+      "result_id": "334326",
+      "title": "Tribal Colleges and Universities Program",
+      "truth": "irrelevant",
+      "before": { "tier": "strong", "rank": 1 },
+      "after": { "tier": "internal_potential_candidate", "visible_rank": null },
+      "reason": "TSETS supplied workshop/workforce while CHAI supplied health/data; no bounded passage covered all four concepts."
+    },
+    {
+      "query_id": "hold_energy_02",
+      "query": "mineral supply chain diplomacy",
+      "result_id": "363316",
+      "title": "U.S.-ASEAN Road to 50: Rising Leaders Forum",
+      "truth": "broader_program_fit",
+      "before": { "tier": "strong", "rank": 3 },
+      "after": { "tier": "potential", "rank": 6, "hybrid_rank_before_deduplication": 8 },
+      "reason": "The administering Public Diplomacy Section identity and the minerals/supply-chain priority list occur in separate bounded passages."
+    },
+    {
+      "query_id": "i2hold_space_02",
+      "query": "upper-atmosphere radiation-belt dynamics",
+      "result_id": "356536",
+      "title": "Geospace Cluster",
+      "truth": "primary_relevant",
+      "before": { "tier": "strong", "rank": 1 },
+      "after": { "tier": "potential", "rank": 2, "hybrid_rank_before_deduplication": 2 },
+      "reason": "The complete five-concept query spans distinct Geospace passages; conservative Strong abstains while hybrid discovery preserves the relevant result."
+    }
+  ],
+  "post_change": {
+    "results_sha256": "3a46a859f8b50f7ae69e36348163ca1c21f0431c7b66c6c74ca4f674a1ff9bfc",
+    "api_receipt_sha256": "28db8a302ebceb172e6e82c2e78c555e80729fa3a70a31f34add606254b1d409",
+    "product_gate_report_sha256": "87c0f0d3b69c5f633b03dbf555302990a763657a88e4d396a42956e99ac7769b",
+    "strong": {
+      "visible_count": 11,
+      "maximum_visible_count": 2,
+      "reviewed_pair_count": 11,
+      "reviewed_primary_count": 11,
+      "reviewed_non_primary_count": 0,
+      "known_irrelevant_count": 0,
+      "precision_at_10_over_reviewed": 1.0,
+      "zero_anchor_query_count": 12,
+      "zero_anchor_visible_count": 0,
+      "required_recall_at_10": 0.169231
+    },
+    "potential": {
+      "displayed_count": 588,
+      "maximum_displayed_count": 12,
+      "known_irrelevant_top_10_count": 5
+    },
+    "combined": {
+      "required_recall_at_10": 0.861538,
+      "required_recall_at_20": 0.907692,
+      "required_recall_at_50": 0.953846,
+      "query_average_ndcg_at_10": 0.773995,
+      "deduplication_failures": 0
+    },
+    "acronym_safeguard": {
+      "query_id": "i2hold_acronym_02",
+      "collision_id": "344592",
+      "appears_in_strong": false,
+      "appears_in_potential": false
+    },
+    "explanations": {
+      "phase3_cases": 42,
+      "correct_and_useful": 41,
+      "reviewed_shallow": 1,
+      "unsupported": 0,
+      "private_or_review_only_leakage": 0
+    }
+  },
+  "performance": {
+    "before": {
+      "strong_local_p50_ms": 29.6469,
+      "strong_local_p95_ms": 80.1193,
+      "warm_hybrid_p50_ms": 613.7198,
+      "warm_hybrid_p95_ms": 749.1084,
+      "estimated_paid_cost_usd": 0.155588
+    },
+    "after": {
+      "cold_first_query_ms": 1174.4392,
+      "strong_local_p50_ms": 33.3392,
+      "strong_local_p95_ms": 79.9463,
+      "warm_hybrid_p50_ms": 638.9536,
+      "warm_hybrid_p95_ms": 777.0505,
+      "requests": 101,
+      "documents_reranked": 12831,
+      "errors": 0,
+      "timeouts": 0,
+      "estimated_paid_cost_usd": 0.155626
+    },
+    "browser_asset_delta_bytes": {
+      "assets/search-retrieval.js": 3518,
+      "all_other_production_assets": 0,
+      "vector_payload": 0
+    }
+  },
+  "gates": {
+    "strong_precision_at_least_0_90": true,
+    "zero_known_irrelevant_strong": true,
+    "zero_strong_on_zero_anchor_queries": true,
+    "acronym_hard_negatives_excluded": true,
+    "combined_recall_at_20_at_least_0_80": true,
+    "combined_recall_at_50_at_least_0_95": true,
+    "no_strong_potential_duplicates": true,
+    "no_material_hybrid_discovery_loss": true,
+    "explanations_source_backed": true,
+    "phase4c_remains_sealed": true
+  }
+}

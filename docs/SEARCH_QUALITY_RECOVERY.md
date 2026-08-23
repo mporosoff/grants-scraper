@@ -681,3 +681,70 @@ is in `evaluation/search_v2_strong_potential_api_receipt.json`, and the decision
 is in `evaluation/search_v2_strong_potential_gate_report.json`.
 
 **STRONG + POTENTIAL WORKFLOW BLOCKED — ONE ZERO-ANCHOR PARTIAL-INTENT RESULT IS STILL LABELED STRONG**
+
+## Strong evidence coherence repair
+
+The accepted Strong + Potential architecture is unchanged. The local fielded
+matcher still supplies conservative Strong results, while BM25F discovery,
+static Voyage vectors, reciprocal-rank fusion, acronym safeguards, Voyage
+reranking, and strongest-passage parent rollup supply deduplicated Potential
+results. No query exception, score threshold, scientific mapping, ontology,
+model, API, proxy route, generated metadata, or production flag was added.
+
+The two reviewed non-primary Strong results shared one generic provenance bug.
+For `health data workforce workshop`, document-level coordination combined the
+TSETS workshop/workforce track with CHAI health/data language under the TCUP
+umbrella. For `mineral supply chain diplomacy`, it combined the administering
+Public Diplomacy Section identity with a separate critical-minerals and
+supply-chain priority passage. The scorer already identified an incomplete
+highest-contributing bounded passage in both cases, but Strong admission used
+the union of query groups found anywhere in the parent record. The complete
+pre-change trace, including deterministic passage IDs, fields, track identity,
+and query-group coverage, is recorded in
+`evaluation/search_v2_strong_coherence_root_causes.json`.
+
+Strong admission now requires the existing conservative substantive-coverage
+rule to pass inside one atomic evidence unit. Parent and publication-eligible
+child title text may accompany a bounded window of at most three consecutive
+sentences from that same record. Authoritative program-area entries and bounded
+source-evidence facts remain distinct units. Matches from sibling children,
+separate program tracks, separate program-area entries, or separate passages
+cannot be unioned into Strong. Document-level BM25F scores remain available for
+candidate discovery and ranking, and Potential continues to consume those
+discovery scores. Extractive Strong evidence is restricted to the winning
+atomic passage.
+
+Across the 52 spent/development queries, exactly three Strong memberships
+changed. The irrelevant TCUP result was removed and remains only an internal
+Potential candidate. The reviewed-broader U.S.-ASEAN forum moved from Strong
+rank 3 to Potential rank 6. The genuinely relevant Geospace Cluster moved from
+Strong rank 1 to Potential rank 2 because its five query concepts span multiple
+passages. This is the intended high-confidence abstention behavior; combined
+Recall@10/20/50 remains unchanged at 0.862/0.908/0.954.
+
+Reviewed Strong Precision@10 is now 1.000 across 11 reviewed Strong pairs.
+There are zero known irrelevant Strong results, zero reviewed broader Strong
+results, and zero Strong results across all 12 zero-anchor hard negatives. The
+short-acronym collision remains absent from both tiers, Potential remains capped
+at 12, and Strong/Potential deduplication has zero failures. The 42-pair
+explanation frame retains 41 correct-and-useful cases, one reviewed shallow
+case, and zero unsupported or private/review-only leakage.
+
+Local Strong latency measured 33.34 ms p50 and 79.95 ms p95, compared with
+29.65/80.12 ms before the repair. Warm end-to-end hybrid latency measured
+638.95 ms p50 and 777.05 ms p95. The validation run made 101 successful Voyage
+requests, reranked 12,831 existing public passages, and has a nominal
+published-price estimate of $0.155626. The implementation adds 3,518 bytes to
+`assets/search-retrieval.js`; every other production asset and the 3,397,632-byte
+vector payload are unchanged.
+
+All regression gates pass: 178 browser tests; 62 focused Python tests; 760
+live-product Python tests; the 50-case parent/child invariant; browser/Python
+configuration parity; the historical 37-query baseline with zero churn; the
+42-pair explanation frame; and the 22-artifact no-drift rebuild. Search v2
+remains off, `main` is unchanged, and Phase 4C remains sealed and unexecuted.
+Detailed measurements are in
+`evaluation/search_v2_strong_coherence_results.json` and
+`evaluation/search_v2_strong_coherence_test_runs.json`.
+
+**STRONG EVIDENCE COHERENCE FIX PASSES — READY FOR PHASE 4C**

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-23",
+  "starting_sha": "5f0b5d07de85e414c5c354c8175704837d7d2d9e",
+  "decision": "STRONG EVIDENCE COHERENCE FIX PASSES — READY FOR PHASE 4C",
+  "runs": [
+    {
+      "gate": "spent_strong_potential_product_evaluation",
+      "command": "node tools/run_search_v2_strong_potential_eval.mjs --write",
+      "exit_code": 0,
+      "details": {
+        "queries": 52,
+        "required_anchors": 65,
+        "voyage_requests": 101,
+        "api_errors": 0,
+        "quality_gate_passed": true,
+        "phase4c_used": false
+      }
+    },
+    {
+      "gate": "browser_suite",
+      "command": "node --test tests/browser/*.test.mjs",
+      "exit_code": 0,
+      "details": { "tests": 178, "passed": 178, "failed": 0 }
+    },
+    {
+      "gate": "focused_python_search_schema_size_source",
+      "command": "python -m unittest tests.test_search_query tests.test_size_budget tests.test_subtopic_records tests.test_p9_scoring tests.test_pages_entrypoint tests.test_program_areas",
+      "exit_code": 0,
+      "details": { "tests": 62, "passed": 62, "failed": 0 }
+    },
+    {
+      "gate": "live_product_python",
+      "command": "python -m tools.run_refresh_validation",
+      "exit_code": 0,
+      "details": {
+        "tests": 760,
+        "passed": 760,
+        "failed": 0,
+        "closed_frozen_measurement_modules_excluded": [
+          "test_meas8",
+          "test_p5_closeout",
+          "test_p7_frame",
+          "test_p7_residual"
+        ]
+      }
+    },
+    {
+      "gate": "parent_child_cardinality_and_normalization",
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "exit_code": 0,
+      "details": { "case_count": 50, "cardinality_invariant": true, "byte_identical": true }
+    },
+    {
+      "gate": "browser_python_config_parity",
+      "command": "node tools/build_search_v2_config.mjs --check",
+      "exit_code": 0,
+      "details": { "generated_asset_current": true }
+    },
+    {
+      "gate": "phase3_42_pair_explanation_frame",
+      "command": "node tools/run_match_explain_v2.mjs",
+      "exit_code": 0,
+      "details": {
+        "case_count": 42,
+        "correct_and_useful": 41,
+        "reviewed_shallow": 1,
+        "unsupported": 0,
+        "privacy_problem": 0
+      }
+    },
+    {
+      "gate": "historical_37_query_baseline",
+      "command": "node tools/query_baseline.mjs --check",
+      "exit_code": 0,
+      "details": { "query_count": 37, "top_10_churn": 0 }
+    },
+    {
+      "gate": "hermetic_no_drift",
+      "command": "Git Bash with PATH=/c/miniforge:/usr/bin:/bin ./tools/verify_no_drift.sh",
+      "exit_code": 0,
+      "details": { "artifact_count": 22, "changed_artifacts": 0 }
+    },
+    {
+      "gate": "syntax_json_whitespace_and_secret_checks",
+      "command": "node --check; JSON parse; git diff --check; bounded credential-pattern scan",
+      "exit_code": 0,
+      "details": {
+        "api_key_printed_or_persisted": false,
+        "phase4c_result_artifacts": 0
+      }
+    }
+  ],
+  "preserved_architecture": {
+    "strong_local_matcher": true,
+    "potential_bm25f_voyage_rrf_rerank": true,
+    "provider_fallback": true,
+    "production_flag_enabled": false,
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2"
+  },
+  "all_runs_exit_zero": true
+}
