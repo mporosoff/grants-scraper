@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T21:12:00.614Z",
+  "generated_at": "2026-08-23T21:34:32.065Z",
   "decision": "STRONG + POTENTIAL WORKFLOW PASSES DEVELOPMENT PRODUCT GATES",
   "blocking_gates": [],
   "gates": {
@@ -39,19 +39,19 @@
       "top_10_reviewed_primary_count": 50,
       "top_10_known_irrelevant_count": 5,
       "top_10_reviewed_non_primary_count": 15,
-      "top_10_unreviewed_count": 324,
-      "reviewed_pair_count": 168,
+      "top_10_unreviewed_count": 325,
+      "reviewed_pair_count": 167,
       "reviewed_primary_count": 51,
       "known_irrelevant_count": 5,
       "reviewed_non_primary_count": 16,
-      "unreviewed_count": 420,
+      "unreviewed_count": 421,
       "zero_anchor_displayed_count": 120
     },
     "combined": {
       "required_recall_at_10": 0.861538,
       "required_recall_at_20": 0.907692,
       "required_recall_at_50": 0.953846,
-      "query_average_ndcg_at_10": 0.770203,
+      "query_average_ndcg_at_10": 0.773995,
       "deduplication_failures": 0,
       "required_anchor_misses_at_50": [
         {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T21:10:00.656Z",
+  "generated_at": "2026-08-23T21:33:28.459Z",
   "status": "written",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
@@ -10,30 +10,30 @@
   "reused_passage_count": 1655,
   "embedded_passage_count": 4,
   "removed_prior_passage_count": 4,
-  "corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
-  "vector_sha256": "1ef8e7f9fa68e5523f7b9f8ee93bd08fa70aba0ed5bfd88992a04156d1c4dc09",
+  "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
   "vector_format": "float16-le",
   "vector_bytes": 3397632,
   "source_hashes": {
     "assets/search-hybrid.js": "6a4ffccd34a31a6ea8c40397584560636c0238d4b8250705c2ab4a7077a7c4b3",
-    "data/opportunities.js": "d6a90aedeeb4cccdea6429a80e02fcbcc5a289aebf15a3bdf3b9ddbc7e95cbd8",
-    "data/subtopics.js": "5f95a155f361fd5c21bcb393c81835eb6d97c06b8e48360a4357f3c8579a4cd1"
+    "data/opportunities.js": "4fd1b5ec3e3aa0f2ef7a1856043e1e85f56ad5ed4beb22cc9fa6a4097494f46b",
+    "data/subtopics.js": "8185a7fc8156b13fdc9a86c1d2d986ee4e608a6447568ab51b21fefc341febbb"
   },
   "API_requests": [
     {
       "batch_index": 0,
       "passage_count": 4,
       "http_status": 200,
-      "request_id": "0142b0be1aead175a842affd541743c6",
+      "request_id": "ff98f865ca69054227c0391e993f6f3d",
       "model": "voyage-4-lite",
-      "usage_total_tokens": 1475,
-      "request_payload_bytes": 7517,
-      "response_payload_bytes": 51074,
-      "latency_ms": 564.2871
+      "usage_total_tokens": 1443,
+      "request_payload_bytes": 7422,
+      "response_payload_bytes": 51069,
+      "latency_ms": 335.4844
     }
   ],
   "API_request_count": 1,
-  "usage_total_tokens": 1475,
+  "usage_total_tokens": 1443,
   "estimated_cost_at_published_paid_pricing_usd": 0.000029,
   "float16_quantization": {
     "vectors_checked": 4,
