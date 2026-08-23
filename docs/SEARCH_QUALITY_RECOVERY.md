@@ -459,3 +459,62 @@ The run completed 52 successful scoring requests after two recorded pre-scoring 
 Detailed results are in `evaluation/search_v2_voyage_reranker_results.json`, the request/usage receipt is `evaluation/search_v2_voyage_api_receipt.json`, the candidate ceiling is `evaluation/search_v2_voyage_candidate_ceiling.json`, and the decision is `evaluation/search_v2_voyage_reranker_decision.json`. Phase 4C remains sealed and unexecuted.
 
 **VOYAGE RERANKING DOES NOT CLEAR THE QUALITY BAR — DISCARD API RERANKING**
+
+## Hybrid Voyage retrieval and reranking feasibility
+
+The follow-up development-only experiment tested the missing stage: semantic
+candidate retrieval. It embedded 1,659 stable public parent/child passages once
+in memory with `voyage-4-lite` (`input_type=document`, 1,024 float dimensions),
+embedded each of the 52 spent queries with `input_type=query`, fused the top 200
+semantic and unchanged BM25F passages with reciprocal-rank fusion, and sent at
+most 300 union passages to `rerank-2.5`. No vectors, model assets, credentials,
+private researcher material, or query/result text were persisted beyond the
+existing bounded evaluation evidence. Semantic scores did not create admission
+evidence and cannot be used in explanations.
+
+Candidate discovery cleared its feasibility gate. BM25F required-anchor recall
+at depths 10/50/100/200 was 0.477/0.600/0.646/0.662; semantic retrieval reached
+0.600/0.769/0.908/0.985; and the union reached
+0.646/0.815/0.908/0.985. Semantic retrieval recovered 21 of the 22 anchors absent
+from BM25F's candidate pool. The sole remaining discovery miss was DOE BES for
+`REE hydrometallurgy`.
+
+Reranking converted the new candidate recall into materially stronger final
+ordering. Across 65 required anchors, Recall@10 rose from 0.477 to 0.877 and
+Recall@50 from 0.600 to 0.985. Query-average nDCG@10 rose from 0.566 to 0.771,
+and Precision@10 over previously judged pairs rose from 0.492 to 0.781. The
+19-anchor Phase-4B audit reached 0.895 Recall@10 and 1.000 Recall@50; the 16
+vocabulary-gap anchors reached 0.875 and 1.000. With all scientific mappings
+still globally absent, leave-family Recall@50 was 1.000 in nine evaluated
+positive families and 0.968 in materials. This is evidence of untuned semantic
+generalization rather than another relationship map.
+
+The result still has important boundaries. Eight anchors remain below rank 10;
+the previously correct NSF child for `secure foundation models` moved from rank
+1 to 28, and `AI journalism exchange` moved from 1 to 14. One known acronym
+collision was newly promoted to rank 1 for `AIM materials intelligence`.
+Nevertheless, the experiment did not show a systematic known-irrelevant
+increase: known irrelevant top-ten placements fell from 17 to six overall and
+from eight to four across the 12 hard-negative queries. Any production design
+must therefore retain exact acronym/identifier checks and deterministic
+complete-intent admission as hard gates after semantic ordering. The historical
+truth is sparse over the newly discovered candidates (447 hybrid top-ten pairs
+remain unjudged), so this is architecture-feasibility evidence, not acceptance.
+
+The run made seven corpus-embedding requests, 52 query-embedding requests, and
+52 successful rerank requests (54 attempts after two transient 429 retries),
+reranking 13,731 passages. It used 395,436 embedding tokens and 3,349,932
+reranking tokens. At published paid pricing, the nominal cost was $0.175406;
+both model-family totals are within the published free-token quantity, although
+the API does not expose the account's remaining balance. The one-time corpus
+build took 10.48 seconds. Per-query component latency was 0.625 seconds p50 and
+0.778 seconds p95. Production browser assets changed by zero bytes.
+
+Detailed evidence is in
+`evaluation/search_v2_hybrid_voyage_results.json`, the sanitized API receipt is
+`evaluation/search_v2_hybrid_voyage_api_receipt.json`, and the interpretation is
+`evaluation/search_v2_hybrid_voyage_decision.json`. Production search code and
+behavior remain unchanged, search v2 remains off, `main` is untouched, and
+Phase 4C remains sealed and unexecuted.
+
+**HYBRID VOYAGE RETRIEVAL + RERANKING CLEARS THE QUALITY BAR — PRODUCTION ARCHITECTURE SHOULD BE CONSIDERED**

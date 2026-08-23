@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "experiment": "hybrid_voyage_embedding_retrieval_plus_rerank_2_5",
+  "status": "completed_local_feasibility_only",
+  "decision": "HYBRID VOYAGE RETRIEVAL + RERANKING CLEARS THE QUALITY BAR — PRODUCTION ARCHITECTURE SHOULD BE CONSIDERED",
+  "decision_basis": {
+    "candidate_stage_passed": true,
+    "candidate_union_required_anchor_recall_at_200": 0.984615,
+    "candidate_union_required_anchor_recall_at_300": 0.984615,
+    "candidate_threshold": 0.9,
+    "reranking_stage_passed": true,
+    "hybrid_required_anchor_recall_at_10": 0.876923,
+    "hybrid_required_anchor_recall_at_50": 0.984615,
+    "hybrid_query_average_ndcg_at_10": 0.770753,
+    "hybrid_precision_at_10_over_judged": 0.780822,
+    "systematic_known_irrelevant_promotion_observed": false
+  },
+  "candidate_retrieval": {
+    "bm25f_required_recall_at_10_50_100_200": [0.476923, 0.6, 0.646154, 0.661538],
+    "semantic_required_recall_at_10_50_100_200": [0.6, 0.769231, 0.907692, 0.984615],
+    "union_required_recall_at_10_50_100_200": [0.646154, 0.815385, 0.907692, 0.984615],
+    "previously_missing_bm25f_anchors": 22,
+    "recovered_by_semantic_at_200": 21,
+    "recovered_by_union_at_300": 21,
+    "only_unrecovered_anchor": {
+      "query_id": "hold_ree_04",
+      "query": "REE hydrometallurgy",
+      "result_id": "360678"
+    },
+    "passage_overlap_jaccard_p50": 0.156379,
+    "passage_overlap_jaccard_p95": 0.294498,
+    "deduplicated_union_passages_p50": 283,
+    "deduplicated_union_passages_p95": 366
+  },
+  "ranking_comparison": {
+    "bm25f": {
+      "required_recall_at_10": 0.476923,
+      "required_recall_at_50": 0.6,
+      "query_average_ndcg_at_10": 0.566137,
+      "precision_at_10_over_judged": 0.492063,
+      "known_irrelevant_top_10_count": 17
+    },
+    "local_minilm": {
+      "required_recall_at_10": 0.538462,
+      "required_recall_at_50": 0.6,
+      "precision_at_10_over_judged": 0.57377,
+      "known_irrelevant_top_10_count": 17
+    },
+    "voyage_rerank_only": {
+      "required_recall_at_10": 0.615385,
+      "required_recall_at_50": 0.661538,
+      "precision_at_10_over_judged": 0.714286,
+      "known_irrelevant_top_10_count": 6
+    },
+    "hybrid_voyage": {
+      "required_recall_at_10": 0.876923,
+      "required_recall_at_50": 0.984615,
+      "query_average_ndcg_at_10": 0.770753,
+      "precision_at_10_over_judged": 0.780822,
+      "known_irrelevant_top_10_count": 6
+    },
+    "phase4b_19_missed_anchor_audit": {
+      "bm25f_recall_at_10": 0.473684,
+      "hybrid_recall_at_10": 0.894737,
+      "hybrid_recall_at_50": 1.0
+    },
+    "vocabulary_gap_16_anchor_audit": {
+      "bm25f_recall_at_10": 0.375,
+      "hybrid_recall_at_10": 0.875,
+      "hybrid_recall_at_50": 1.0
+    }
+  },
+  "leave_family_out_required_recall_at_10_50": {
+    "agriculture": [1.0, 1.0],
+    "ai_computing": [0.75, 1.0],
+    "biology": [1.0, 1.0],
+    "chemistry": [1.0, 1.0],
+    "defense": [1.0, 1.0],
+    "energy": [0.6, 1.0],
+    "environment": [1.0, 1.0],
+    "health": [1.0, 1.0],
+    "materials": [0.870968, 0.967742],
+    "space": [1.0, 1.0]
+  },
+  "leaveout_contract": {
+    "same_untuned_architecture_for_every_family_and_program": true,
+    "active_concept_families": 0,
+    "active_controlled_relationships": 0,
+    "active_source_scope_relationships": 0,
+    "active_authoritative_scope_entailments": 0,
+    "active_broader_program_fits": 0,
+    "aggregate_leave_program_out_required_recall_at_50": 0.984615
+  },
+  "known_limitations": {
+    "required_anchors_below_rank_10": 8,
+    "required_anchors_absent_at_rank_50": 1,
+    "previously_correct_anchors_moved_below_rank_10": [
+      {
+        "query_id": "hold_ai_01",
+        "result_id": "vpr-email:NSF26-015",
+        "bm25f_rank": 1,
+        "hybrid_rank": 28
+      },
+      {
+        "query_id": "hold_ai_02",
+        "result_id": "363370",
+        "bm25f_rank": 1,
+        "hybrid_rank": 14
+      }
+    ],
+    "known_acronym_collision_promoted": {
+      "query_id": "i2hold_acronym_02",
+      "query": "AIM materials intelligence",
+      "result_id": "344592",
+      "hybrid_rank": 1
+    },
+    "truth_coverage_warning": "447 hybrid top-ten query/result pairs remain unjudged, so judged Precision@10 is directional rather than a release acceptance metric."
+  },
+  "hard_negatives": {
+    "query_count": 12,
+    "baseline_known_irrelevant_top_10_count": 8,
+    "hybrid_known_irrelevant_top_10_count": 4,
+    "hybrid_known_primary_top_10_count": 0,
+    "hybrid_unjudged_top_10_count": 113,
+    "interpretation": "No systematic known-irrelevant increase occurred, but exact acronym/identifier and deterministic complete-intent checks must remain hard gates before any semantic rank can become user-visible."
+  },
+  "model_and_runtime": {
+    "embedding_model": "voyage-4-lite",
+    "provider_revision": "not exposed by the real-time embedding API",
+    "embedding_dimension": 1024,
+    "embedding_output_dtype": "float",
+    "embedding_input_types": {
+      "corpus": "document",
+      "query": "query"
+    },
+    "reranking_model": "rerank-2.5",
+    "corpus_passages": 1659,
+    "corpus_embedding_api_calls": 7,
+    "query_embedding_api_calls": 52,
+    "rerank_successful_api_calls": 52,
+    "rerank_total_attempts": 54,
+    "reranked_passages": 13731,
+    "vectors_persisted": false
+  },
+  "performance": {
+    "corpus_embedding_build_ms": 10479.6666,
+    "query_embedding_latency_p50_ms": 146.0128,
+    "query_embedding_latency_p95_ms": 164.7287,
+    "semantic_retrieval_latency_p50_ms": 2.4504,
+    "semantic_retrieval_latency_p95_ms": 9.891,
+    "rerank_latency_p50_ms": 425.8554,
+    "rerank_latency_p95_ms": 589.9363,
+    "end_to_end_component_sum_p50_ms": 624.868,
+    "end_to_end_component_sum_p95_ms": 778.082,
+    "timeouts": 0,
+    "transient_rate_limit_retries": 2
+  },
+  "cost": {
+    "corpus_embedding_tokens": 395242,
+    "query_embedding_tokens": 194,
+    "reranking_tokens": 3349932,
+    "estimated_embedding_cost_at_published_paid_pricing_usd": 0.007909,
+    "estimated_reranking_cost_at_published_paid_pricing_usd": 0.167497,
+    "estimated_total_cost_at_published_paid_pricing_usd": 0.175406,
+    "appears_within_published_free_token_allocation": true,
+    "account_remaining_free_balance_exposed_by_api": false
+  },
+  "integrity": {
+    "starting_head": "5cdf5e5167329edb34f9d37e9fd011f647af5370",
+    "main_sha": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+    "phase4c_frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "phase4c_manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "results_sha256": "3aca2189b6609d3cf6b4eab158859152770dad2c3e599a124cc2cd88a4fa1c84",
+    "api_receipt_sha256": "60569adfe478c751375936d5ad4f1018121f0eceb6b6eeab95a8827ffb2aa005",
+    "production_search_code_diff": 0,
+    "production_search_behavior_changed": false,
+    "search_v2_enabled": false,
+    "phase4c_read_or_executed": false,
+    "phase4c_results_created": false,
+    "api_key_or_auth_headers_persisted": false,
+    "private_data_sent": false,
+    "model_assets_or_vectors_committed": false
+  },
+  "verification": {
+    "harness_syntax_exit_code": 0,
+    "focused_contract_tests": {
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "browser_regression_tests": {
+      "passed": 158,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "json_artifacts_parsed": 3,
+    "json_parse_exit_code": 0,
+    "python_tests": "not rerun because production search code changed by zero bytes and the available Python runtimes do not include pytest",
+    "production_browser_asset_size_delta_bytes": 0
+  },
+  "production_consideration_boundary": [
+    "This is feasibility evidence, not production authorization or a release candidate.",
+    "Any design must preserve deterministic exact acronym/identifier and complete-intent admission as hard gates.",
+    "Embedding and reranker scores may discover and order candidates but may not become source evidence or explanation text.",
+    "A separate architecture, privacy, cost, failure-mode, caching, and acceptance review is required before implementation.",
+    "Phase 4C remains sealed and Phase 5 remains unauthorized."
+  ]
+}
