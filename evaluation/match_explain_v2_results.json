@@ -5,7 +5,7 @@
   "status": "explanation_gates_passed",
   "production_enabled": false,
   "frame": "evaluation/match_explain_v2_frame.json",
-  "frame_sha256": "8370a51302110a4e7688f201b5ab104be72698267b8b98b9e1925f145ce3a258",
+  "frame_sha256": "0f4e8bcf3a5196f1f2b2ed82f6bf6f4d39ea66a8beda932fa8fe569a13471af6",
   "explanation_asset": "assets/match-explain.js",
   "explanation_asset_sha256": "f74f010d62ab460cf13f99d9448795ce8147794c4f821eabcdefcbf9625cf92f",
   "explanation_contract_version": 2,
@@ -133,7 +133,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.0114499902218892
             }
           ],
           "selectedEvidence": [
@@ -251,13 +251,8 @@
               "contribution": 1
             },
             {
-              "type": "lexical_concept",
-              "conceptId": "separations",
-              "contribution": 9.4800698035015
-            },
-            {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.229218444320066
             }
           ],
           "selectedEvidence": [
@@ -377,7 +372,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.229218444320066
             }
           ],
           "selectedEvidence": [
@@ -491,7 +486,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.0114499902218892
             }
           ],
           "selectedEvidence": [
@@ -593,13 +588,8 @@
               "contribution": 1
             },
             {
-              "type": "lexical_concept",
-              "conceptId": "separations",
-              "contribution": 9.4800698035015
-            },
-            {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.229218444320066
             }
           ],
           "selectedEvidence": [
@@ -703,7 +693,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 1.1434050826472848
+              "contribution": 1.229218444320066
             }
           ],
           "selectedEvidence": [
@@ -1167,7 +1157,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 12.011468073969048
+              "contribution": 11.879512981543654
             }
           ],
           "selectedEvidence": [
@@ -1284,18 +1274,8 @@
               "contribution": 1
             },
             {
-              "type": "lexical_concept",
-              "conceptId": "ionic-liquid-extraction",
-              "contribution": 12.40167101903114
-            },
-            {
-              "type": "lexical_concept",
-              "conceptId": "separations",
-              "contribution": 8.450702289112826
-            },
-            {
               "type": "topic_rerank",
-              "contribution": 12.011468073969048
+              "contribution": 12.09728143564183
             }
           ],
           "selectedEvidence": [
@@ -1414,7 +1394,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 8.96613609665638
+              "contribution": 11.566370849486255
             }
           ],
           "selectedEvidence": [
@@ -1480,20 +1460,8 @@
           }
         ],
         "trace": {
-          "admittedBy": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:de-foa-0003600",
-              "role": "application_or_context",
-              "fields": []
-            }
-          ],
+          "admittedBy": [],
           "rankedBy": [
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:de-foa-0003600",
-              "contribution": 11.261472578816457
-            },
             {
               "type": "exact_phrase_or_identifier"
             }
@@ -1548,22 +1516,8 @@
           }
         ],
         "trace": {
-          "admittedBy": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:de-foa-0003612",
-              "role": "application_or_context",
-              "fields": [
-                "citation_source_evidence"
-              ]
-            }
-          ],
+          "admittedBy": [],
           "rankedBy": [
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:de-foa-0003612",
-              "contribution": 12.56387823957213
-            },
             {
               "type": "exact_phrase_or_identifier"
             }
@@ -1665,7 +1619,7 @@
             },
             {
               "type": "topic_rerank",
-              "contribution": 3.169064112377149
+              "contribution": 2.6979393425821696
             },
             {
               "type": "exact_phrase_or_identifier"
@@ -1731,10 +1685,12 @@
             "text": "The subprogram summary provides the matching context: “Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
             "evidence": {
               "path": "explicit_evidence",
-              "conceptId": "catalysis",
+              "conceptId": "catalyst-design",
               "field": "child_summary",
               "terms": [
-                "catalyst"
+                "catalyst",
+                "discovery",
+                "design"
               ],
               "admissionRole": "admission"
             }
@@ -1744,18 +1700,10 @@
           "admittedBy": [
             {
               "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "role": "method",
+              "conceptId": "catalyst-design",
+              "role": "target_and_method",
               "fields": [
                 "child_title",
-                "child_summary"
-              ]
-            },
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:design",
-              "role": "application_or_context",
-              "fields": [
                 "child_summary"
               ]
             }
@@ -1763,13 +1711,8 @@
           "rankedBy": [
             {
               "type": "lexical_concept",
-              "conceptId": "catalysis",
-              "contribution": 6.752898040826243
-            },
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:design",
-              "contribution": 2.1611322222876668
+              "conceptId": "catalyst-design",
+              "contribution": 7.74351816714828
             }
           ],
           "selectedEvidence": [
@@ -1782,10 +1725,12 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "catalysis",
+              "conceptId": "catalyst-design",
               "field": "child_summary",
               "terms": [
-                "catalyst"
+                "catalyst",
+                "discovery",
+                "design"
               ],
               "admissionRole": "admission"
             }
@@ -1806,117 +1751,17 @@
       "source": "catalog_search",
       "query": "catalyst design",
       "result_id": "344592",
-      "result_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
-      "admitted": true,
+      "result_title": "",
+      "admitted": false,
       "expected": {
-        "admitted": true,
-        "tier": "direct",
-        "required_codes": [
-          "child_hierarchy",
-          "field_context"
-        ],
-        "required_text": [
-          "Electrochemistry"
-        ],
-        "human_label": "correct_and_useful"
+        "admitted": false,
+        "human_label": "correct_and_useful",
+        "review_note": "The Electrochemistry child establishes catalysis but not the complete catalyst-design intent; the generalized concise-query contract now rejects the partial match."
       },
-      "explanation": {
-        "contractVersion": 2,
-        "tier": "direct",
-        "label": "Subprogram match",
-        "primary": true,
-        "broadFallback": false,
-        "admissionPath": "explicit_evidence",
-        "reasons": [
-          {
-            "code": "child_hierarchy",
-            "text": "This umbrella opportunity matched through the publication-eligible subprogram “Electrochemistry”.",
-            "evidence": {
-              "path": "explicit_evidence",
-              "field": "child_hierarchy",
-              "childTitle": "Electrochemistry",
-              "childId": "344592:ab-0025",
-              "publicationState": "publishable"
-            }
-          },
-          {
-            "code": "field_context",
-            "text": "The subprogram summary provides the matching context: “This Program supports fundamental electrochemical studies to understand and control the physics and chemistry that govern electrochemical redox reactions and transport of…”.",
-            "evidence": {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "field": "child_summary",
-              "terms": [
-                "electrocatalysi",
-                "catalysi"
-              ],
-              "admissionRole": "admission"
-            }
-          }
-        ],
-        "trace": {
-          "admittedBy": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "role": "method",
-              "fields": [
-                "child_summary",
-                "authoritative_program_area"
-              ]
-            },
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:design",
-              "role": "application_or_context",
-              "fields": []
-            }
-          ],
-          "rankedBy": [
-            {
-              "type": "lexical_concept",
-              "conceptId": "catalysis",
-              "contribution": 10.123015876256773
-            },
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:design",
-              "contribution": 1.1360331501923073
-            },
-            {
-              "type": "topic_rerank",
-              "contribution": 7.192937735782902
-            }
-          ],
-          "selectedEvidence": [
-            {
-              "path": "explicit_evidence",
-              "field": "child_hierarchy",
-              "childTitle": "Electrochemistry",
-              "childId": "344592:ab-0025",
-              "publicationState": "publishable"
-            },
-            {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "field": "child_summary",
-              "terms": [
-                "electrocatalysi",
-                "catalysi"
-              ],
-              "admissionRole": "admission"
-            }
-          ],
-          "childDroveMatch": true,
-          "exactOpportunityNumber": false,
-          "exactTitlePhrase": false,
-          "profileSources": [],
-          "eligibilityContributed": false
-        }
-      },
+      "explanation": null,
       "assertion_failures": [],
       "adjudicated_label": "correct_and_useful",
-      "review_note": null
+      "review_note": "The Electrochemistry child establishes catalysis but not the complete catalyst-design intent; the generalized concise-query contract now rejects the partial match."
     },
     {
       "id": "child_genesis_exact_title",
@@ -2000,17 +1845,8 @@
             },
             {
               "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "role": "method",
-              "fields": [
-                "child_title",
-                "child_summary"
-              ]
-            },
-            {
-              "path": "explicit_evidence",
-              "conceptId": "literal:discovery",
-              "role": "application_or_context",
+              "conceptId": "catalyst-design",
+              "role": "target_and_method",
               "fields": [
                 "child_title",
                 "child_summary"
@@ -2053,13 +1889,8 @@
             },
             {
               "type": "lexical_concept",
-              "conceptId": "catalysis",
-              "contribution": 6.752898040826243
-            },
-            {
-              "type": "lexical_concept",
-              "conceptId": "literal:discovery",
-              "contribution": 2.8303432180629624
+              "conceptId": "catalyst-design",
+              "contribution": 7.74351816714828
             },
             {
               "type": "lexical_concept",
@@ -2271,8 +2102,7 @@
               "conceptId": "catalysis",
               "role": "method",
               "fields": [
-                "parent_description",
-                "citation_source_evidence"
+                "parent_description"
               ]
             }
           ],
@@ -2315,86 +2145,17 @@
       "source": "catalog_search",
       "query": "catalysis",
       "result_id": "360678",
-      "result_title": "FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program",
-      "admitted": true,
+      "result_title": "",
+      "admitted": false,
       "expected": {
-        "admitted": true,
-        "tier": "contextual",
-        "required_codes": [
-          "field_context"
-        ],
-        "required_fields": [
-          "citation_source_evidence"
-        ],
-        "human_label": "correct_and_useful"
+        "admitted": false,
+        "human_label": "correct_and_useful",
+        "review_note": "Citation-source text alone no longer creates primary admission under the Iteration-2 evidence-quality contract."
       },
-      "explanation": {
-        "contractVersion": 2,
-        "tier": "contextual",
-        "label": "Contextual evidence match",
-        "primary": true,
-        "broadFallback": false,
-        "admissionPath": "explicit_evidence",
-        "reasons": [
-          {
-            "code": "field_context",
-            "text": "The official-notice evidence provides the matching context: “Contacts: • Marco Fornari, marc… Full application deadline 2025-11-30 …reactions, particularly with single-site or single-atom catalysts, will not be supported”.",
-            "evidence": {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "field": "citation_source_evidence",
-              "terms": [
-                "catalysi",
-                "catalyst"
-              ],
-              "admissionRole": "admission"
-            }
-          }
-        ],
-        "trace": {
-          "admittedBy": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "role": "method",
-              "fields": [
-                "citation_source_evidence"
-              ]
-            }
-          ],
-          "rankedBy": [
-            {
-              "type": "lexical_concept",
-              "conceptId": "catalysis",
-              "contribution": 11.658071030015673
-            },
-            {
-              "type": "topic_rerank",
-              "contribution": 10.845592840409312
-            }
-          ],
-          "selectedEvidence": [
-            {
-              "path": "explicit_evidence",
-              "conceptId": "catalysis",
-              "field": "citation_source_evidence",
-              "terms": [
-                "catalysi",
-                "catalyst"
-              ],
-              "admissionRole": "admission"
-            }
-          ],
-          "childDroveMatch": false,
-          "exactOpportunityNumber": false,
-          "exactTitlePhrase": false,
-          "profileSources": [],
-          "eligibilityContributed": false
-        }
-      },
+      "explanation": null,
       "assertion_failures": [],
       "adjudicated_label": "correct_and_useful",
-      "review_note": null
+      "review_note": "Citation-source text alone no longer creates primary admission under the Iteration-2 evidence-quality contract."
     },
     {
       "id": "explicit_chemistry_catalysis",
@@ -2440,8 +2201,7 @@
               "conceptId": "catalysis",
               "role": "method",
               "fields": [
-                "parent_description",
-                "citation_source_evidence"
+                "parent_description"
               ]
             }
           ],

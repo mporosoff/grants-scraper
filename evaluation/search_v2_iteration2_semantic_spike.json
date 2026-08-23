@@ -1,0 +1,946 @@
+{
+  "schema_version": 1,
+  "iteration": "2R-iteration-2",
+  "evaluated_at": "2026-08-23T01:01:09.100453+00:00",
+  "status": "offline_development_experiment_complete",
+  "production_integration": false,
+  "new_sealed_holdout_read_or_executed": false,
+  "method": {
+    "name": "static local PPMI distributional candidate discovery",
+    "catalog_fields": [
+      "parent_title",
+      "parent_description",
+      "publication_eligible_child_title_summary"
+    ],
+    "citation_source_text_excluded": true,
+    "vocabulary_size": 285,
+    "dimensions": 285,
+    "candidate_cap_per_query": 50,
+    "external_api_calls": 0,
+    "production_dependencies_added": 0
+  },
+  "comparison": {
+    "population_queries": 34,
+    "required_anchor_count": 77,
+    "improved_deterministic_primary_recall_at_50": 1.0,
+    "semantic_candidate_recall_at_50": 0.480519,
+    "deterministic_basis": "All required anchors in this adjudicated population are admitted within the current deterministic top 50; discovery recall is therefore necessarily complete.",
+    "semantic_may_admit_primary": false
+  },
+  "named_anchor_checks": {
+    "rural_moms": 3,
+    "afri": null,
+    "genesis_secure_foundation_models": null,
+    "scaleup_long_duration_storage": 5
+  },
+  "decision": "SEMANTIC SPIKE NOT NEEDED FOR PRODUCTION",
+  "decision_rationale": [
+    "The deterministic generalized candidate/admission architecture already has complete required-anchor recall at 50 on the adjudicated challenge and development population.",
+    "The semantic alternative cannot improve recall beyond 1.0 on this population and remains non-causal discovery evidence.",
+    "Shipping the experiment would add a dense model asset and browser/runtime complexity without measured acceptance benefit."
+  ],
+  "results": [
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_01",
+      "query": "rare earth recycling",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 19,
+        "362061": 23
+      },
+      "semantic_top_10_ids": [
+        "357579",
+        "357578",
+        "360007",
+        "356879",
+        "359645",
+        "360008",
+        "357609",
+        "362847",
+        "357570",
+        "362849"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_02",
+      "query": "rare earth solvent extraction",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 24,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "362847",
+        "360007",
+        "356879",
+        "359280",
+        "357578",
+        "359644",
+        "357570",
+        "359645",
+        "360008",
+        "357579"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_03",
+      "query": "lanthanide ion exchange",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "362943",
+        "363270",
+        "363315",
+        "363266",
+        "363102",
+        "331306",
+        "363339",
+        "363291",
+        "362036",
+        "363371"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_04",
+      "query": "REE hydrometallurgy",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "363266",
+        "362839",
+        "362069",
+        "362068",
+        "362067",
+        "362070",
+        "362233",
+        "362234",
+        "362236",
+        "362235"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_05",
+      "query": "yttrium separation",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": 10
+      },
+      "semantic_top_10_ids": [
+        "362063",
+        "363296",
+        "361876",
+        "324369",
+        "359499",
+        "363623",
+        "360149",
+        "356055",
+        "351715",
+        "362061"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_06",
+      "query": "scandium recovery",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "357442",
+        "363065",
+        "362672",
+        "363652",
+        "363636",
+        "361204",
+        "357444",
+        "357256",
+        "359225",
+        "358373"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ree_08",
+      "query": "rare disease molecular elements",
+      "required_primary_ids": [
+        "359280",
+        "359644"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "359280": 1,
+        "359644": 2
+      },
+      "semantic_top_10_ids": [
+        "359280",
+        "359644",
+        "360007",
+        "356879",
+        "357570",
+        "359279",
+        "359645",
+        "360008",
+        "362847",
+        "362849"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_chem_01",
+      "query": "electrocatalytic ammonia synthesis",
+      "required_primary_ids": [
+        "344592"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "344592": null
+      },
+      "semantic_top_10_ids": [
+        "nyserda:PON6161",
+        "295449",
+        "361184",
+        "357529",
+        "357136",
+        "357135",
+        "353936",
+        "360698",
+        "357578",
+        "362062"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_chem_02",
+      "query": "innovation catalyst student success",
+      "required_primary_ids": [
+        "357498",
+        "359104"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "357498": 9,
+        "359104": null
+      },
+      "semantic_top_10_ids": [
+        "363052",
+        "359949",
+        "360544",
+        "vpr-email:NSF26-510",
+        "362871",
+        "357724",
+        "363314",
+        "353413",
+        "357498",
+        "361929"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_energy_01",
+      "query": "long duration energy storage",
+      "required_primary_ids": [
+        "356623"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "356623": 5
+      },
+      "semantic_top_10_ids": [
+        "nyserda:PON6004",
+        "nyserda:PON3414",
+        "nyserda:RFQL6152",
+        "nyserda:PON6122",
+        "356623",
+        "362036",
+        "329436",
+        "360678",
+        "361526",
+        "nyserda:PON6025"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_energy_02",
+      "query": "mineral supply chain diplomacy",
+      "required_primary_ids": [
+        "363536",
+        "362900"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363536": 3,
+        "362900": 2
+      },
+      "semantic_top_10_ids": [
+        "363215",
+        "362900",
+        "363536",
+        "363486",
+        "363214",
+        "363397",
+        "363179",
+        "363609",
+        "363316",
+        "363355"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_bio_01",
+      "query": "single cell cancer immunology",
+      "required_primary_ids": [
+        "vpr-email:infoready-2028504"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "vpr-email:infoready-2028504": null
+      },
+      "semantic_top_10_ids": [
+        "363591",
+        "363501",
+        "363680",
+        "360562",
+        "356530",
+        "361606",
+        "357307",
+        "350299",
+        "360541",
+        "357937"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_health_01",
+      "query": "maternal mortality rural communities",
+      "required_primary_ids": [
+        "363582"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363582": 3
+      },
+      "semantic_top_10_ids": [
+        "363407",
+        "363600",
+        "363582",
+        "363532",
+        "363686",
+        "363412",
+        "363581",
+        "363687",
+        "363580",
+        "363601"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ag_01",
+      "query": "drought tolerant crop genetics",
+      "required_primary_ids": [
+        "360205"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360205": null
+      },
+      "semantic_top_10_ids": [
+        "361876",
+        "362644",
+        "363682",
+        "363544",
+        "363328",
+        "352845",
+        "362978",
+        "363537",
+        "363285",
+        "362723"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_space_02",
+      "query": "Earth system chemical elements",
+      "required_primary_ids": [
+        "356536"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "356536": 9
+      },
+      "semantic_top_10_ids": [
+        "357609",
+        "275150",
+        "357578",
+        "361184",
+        "363684",
+        "357579",
+        "363617",
+        "356935",
+        "356536",
+        "357826"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_defense_01",
+      "query": "high temperature hypersonic composites",
+      "required_primary_ids": [
+        "344592"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "344592": 6
+      },
+      "semantic_top_10_ids": [
+        "363489",
+        "350018",
+        "361526",
+        "363613",
+        "39841",
+        "344592",
+        "362061",
+        "363621",
+        "332894",
+        "363616"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ai_01",
+      "query": "secure foundation models",
+      "required_primary_ids": [
+        "361333",
+        "vpr-email:NSF26-015",
+        "361526"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "361333": 12,
+        "vpr-email:NSF26-015": 1,
+        "361526": null
+      },
+      "semantic_top_10_ids": [
+        "vpr-email:NSF26-015",
+        "356888",
+        "363040",
+        "vpr-email:infoready-2028013",
+        "363614",
+        "360664",
+        "360205",
+        "363179",
+        "344592",
+        "362454"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_ai_02",
+      "query": "AI journalism exchange",
+      "required_primary_ids": [
+        "363370"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363370": 2
+      },
+      "semantic_top_10_ids": [
+        "363640",
+        "363370",
+        "363440",
+        "363441",
+        "362943",
+        "363270",
+        "363315",
+        "363266",
+        "331306",
+        "363666"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_env_01",
+      "query": "membrane PFAS treatment",
+      "required_primary_ids": [
+        "363375",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363375": null,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "357485",
+        "357487",
+        "360223",
+        "357423",
+        "357430",
+        "357433",
+        "358230",
+        "358229",
+        "360387",
+        "357426"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "former_phase4_challenge",
+      "query_id": "hold_env_02",
+      "query": "coastal ecosystem climate adaptation",
+      "required_primary_ids": [
+        "363537"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363537": 4
+      },
+      "semantic_top_10_ids": [
+        "103313",
+        "362470",
+        "363538",
+        "363537",
+        "363488",
+        "356559",
+        "357580",
+        "356562",
+        "356561",
+        "344858"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_03",
+      "query": "REE separations",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 6,
+        "362061": 1
+      },
+      "semantic_top_10_ids": [
+        "362061",
+        "349655",
+        "361184",
+        "nsf-cbet:PD-26-370Y",
+        "353936",
+        "361526",
+        "357579",
+        "vpr-email:vpr-f068b41ca38718f9",
+        "357609",
+        "363065"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_06",
+      "query": "rare earth separations",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 29,
+        "362061": 6
+      },
+      "semantic_top_10_ids": [
+        "357578",
+        "357579",
+        "360007",
+        "362847",
+        "356879",
+        "362061",
+        "360008",
+        "357570",
+        "357609",
+        "359645"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_07",
+      "query": "rare earth element recovery",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "357578",
+        "360007",
+        "357579",
+        "363684",
+        "357609",
+        "356879",
+        "362847",
+        "357570",
+        "359645",
+        "360008"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_08",
+      "query": "lanthanide separation",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": 10
+      },
+      "semantic_top_10_ids": [
+        "362063",
+        "363296",
+        "361876",
+        "324369",
+        "359499",
+        "363623",
+        "360149",
+        "356055",
+        "351715",
+        "362061"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_09",
+      "query": "lanthanide extraction",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 8,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "363683",
+        "363268",
+        "362063",
+        "362859",
+        "302271",
+        "357979",
+        "355219",
+        "361526",
+        "352238",
+        "363489"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_10",
+      "query": "solvent extraction of REEs",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 8,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "363683",
+        "363268",
+        "362063",
+        "362859",
+        "302271",
+        "357979",
+        "355219",
+        "361526",
+        "352238",
+        "363489"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_11",
+      "query": "ionic liquids for REE extraction",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": 27,
+        "362061": null
+      },
+      "semantic_top_10_ids": [
+        "357712",
+        "362063",
+        "357003",
+        "363449",
+        "363683",
+        "363621",
+        "363268",
+        "363169",
+        "362859",
+        "363489"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_18",
+      "query": "REE separation",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": 10
+      },
+      "semantic_top_10_ids": [
+        "362063",
+        "363296",
+        "361876",
+        "324369",
+        "359499",
+        "363623",
+        "360149",
+        "356055",
+        "351715",
+        "362061"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_19",
+      "query": "separation of REEs",
+      "required_primary_ids": [
+        "360678",
+        "361526",
+        "362061"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "360678": null,
+        "361526": null,
+        "362061": 10
+      },
+      "semantic_top_10_ids": [
+        "362063",
+        "363296",
+        "361876",
+        "324369",
+        "359499",
+        "363623",
+        "360149",
+        "356055",
+        "351715",
+        "362061"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "ree_12",
+      "query": "critical mineral separations",
+      "required_primary_ids": [
+        "362061",
+        "nsf-cbet:PD-26-370Y",
+        "361526"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "362061": 2,
+        "nsf-cbet:PD-26-370Y": 4,
+        "361526": 7
+      },
+      "semantic_top_10_ids": [
+        "363536",
+        "362061",
+        "363215",
+        "nsf-cbet:PD-26-370Y",
+        "363660",
+        "362900",
+        "361526",
+        "357609",
+        "363609",
+        "363633"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "adv_chem_02",
+      "query": "AI catalyst design",
+      "required_primary_ids": [
+        "362061",
+        "361526"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "362061": null,
+        "361526": null
+      },
+      "semantic_top_10_ids": [
+        "360544",
+        "363302",
+        "363052",
+        "359942",
+        "359949",
+        "362097",
+        "360446",
+        "363065",
+        "345327",
+        "363095"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "adv_policy_01",
+      "query": "critical mineral workforce",
+      "required_primary_ids": [
+        "363633",
+        "363645",
+        "363215"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "363633": 6,
+        "363645": 12,
+        "363215": 2
+      },
+      "semantic_top_10_ids": [
+        "363536",
+        "363215",
+        "362900",
+        "363660",
+        "363609",
+        "363633",
+        "363316",
+        "363355",
+        "363534",
+        "nsf-cbet:PD-26-370Y"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "adv_defense_03",
+      "query": "quantum navigation",
+      "required_primary_ids": [
+        "344592",
+        "345241"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "344592": 5,
+        "345241": 18
+      },
+      "semantic_top_10_ids": [
+        "355196",
+        "332894",
+        "363489",
+        "363613",
+        "344592",
+        "362063",
+        "362859",
+        "361080",
+        "328902",
+        "363616"
+      ],
+      "semantic_candidate_cap": 50
+    },
+    {
+      "source": "existing_development",
+      "query_id": "adv_ai_03",
+      "query": "quantum sensing biology",
+      "required_primary_ids": [
+        "362061",
+        "344592"
+      ],
+      "semantic_required_anchor_ranks_at_50": {
+        "362061": 12,
+        "344592": 4
+      },
+      "semantic_top_10_ids": [
+        "355196",
+        "363613",
+        "332894",
+        "344592",
+        "362063",
+        "361080",
+        "361205",
+        "363169",
+        "363168",
+        "363621"
+      ],
+      "semantic_candidate_cap": 50
+    }
+  ]
+}

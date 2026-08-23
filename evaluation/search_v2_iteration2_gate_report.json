@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "iteration": "phase-2r-iteration-2",
+  "reported_at": "2026-08-22",
+  "decision": "ITERATION 2 DEVELOPMENT GATES PASSED",
+  "recommendation": "READY TO FREEZE CANDIDATE FOR PHASE 3R / PHASE 4B",
+  "phase4b_authorized": false,
+  "phase5_authorized": false,
+  "branch": "search-quality-v2",
+  "starting_sha": "38181e63bc9b19b4fea10494852dd4068ffe2d09",
+  "implementation_freeze_checkpoint": "bf2d3ab6b7aedcdf183c8389acbfd0f4f662f37a",
+  "main_sha_at_start_and_gate": "ef7a0642f6ce66828f01ee280bd5993f66029b2f",
+  "production_search_v2_enabled": false,
+  "failed_phase4_preservation": {
+    "status": "unchanged",
+    "manifest": "evaluation/search_v2_iteration2_challenge.json",
+    "sha256": {
+      "evaluation/search_v2_holdout_results_raw.json": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+      "evaluation/search_v2_holdout_truth.json": "83740bfd4bb5e3ef123a3a1b6e8c353b41c98a357261bce3e5b6b3e359bcebd1",
+      "evaluation/search_v2_holdout_results.json": "1505bc7d435643a40127cc5c5e8bce841135843a8662a466f68a86505704f3e7",
+      "evaluation/PHASE4_REVIEW.md": "0fdd99b6aad1fad35b3b2b4ec7d05efe9a27a9a514589629996c7da0fab7bbc9",
+      "evaluation/search_v2_release_candidate.json": "0edf8c283eff216e445e72101196c2fd038e42708710591a79d5e71e24f2d8ab"
+    }
+  },
+  "new_holdout": {
+    "status": "sealed_never_executed",
+    "query_count": 28,
+    "frame_sha256": "3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3",
+    "candidate_execution_count": 0,
+    "results_artifact_exists": false,
+    "truth_adjudication_exists": false,
+    "runner_lock_test": "passed"
+  },
+  "former_phase4_challenge_before_after": {
+    "before": {
+      "primary_precision_at_10": 0.373,
+      "required_primary_recall_at_10": 0.633,
+      "required_primary_recall_at_50": 0.65,
+      "direct_positive_ndcg_at_10": 0.586,
+      "maximum_visible_primary_count": 213,
+      "confirmed_irrelevant_top_ten_admissions": 43
+    },
+    "after": {
+      "primary_precision_at_10": 1.0,
+      "required_primary_recall_at_10": 1.0,
+      "required_primary_recall_at_50": 1.0,
+      "ndcg_at_10": 0.882691,
+      "direct_positive_ndcg_at_10": 0.91534,
+      "maximum_visible_primary_count": 4,
+      "visible_primary_count": 39,
+      "internal_candidate_discovery_count": 11675,
+      "broader_fit_count": 1,
+      "rejected_partial_intent_count": 11635,
+      "admission_counts": {
+        "direct": 5,
+        "child": 0,
+        "authoritative_scope": 34
+      },
+      "query_time_ms": {
+        "p50": 32.5781,
+        "p95": 183.9217
+      }
+    }
+  },
+  "metrics_by_query_class_source": "evaluation/search_v2_iteration2_results.json",
+  "development_gates": {
+    "development_49_query": "passed_with_25_reviewed_top10_movements",
+    "query_specific_cross_domain": "passed",
+    "meas5_48_query_11_discipline": "passed_with_38_reviewed_top10_movements",
+    "historical_37_query": "passed_zero_top10_churn",
+    "parent_child_cardinality_50_case": "passed",
+    "short_acronym": "passed",
+    "schema_compatibility": "passed",
+    "size_budget": "passed",
+    "no_drift_22_artifacts": "passed"
+  },
+  "development_latency_ms": {
+    "warm_p50": 11.328,
+    "warm_p95": 31.3899,
+    "warm_maximum": 35.9366,
+    "evidence_p50": 23.9514,
+    "evidence_p95": 65.9905
+  },
+  "browser_asset_size": {
+    "baseline_sha": "38181e63bc9b19b4fea10494852dd4068ffe2d09",
+    "combined_delta_bytes": 75445,
+    "files": {
+      "assets/app.js": 229,
+      "assets/search-query.js": 27038,
+      "assets/search-retrieval.js": 12770,
+      "assets/search-v2-config.js": 35408,
+      "assets/match-explain.js": 0
+    },
+    "size_gate": "passed"
+  },
+  "semantic_spike": {
+    "method": "static local PPMI distributional candidate discovery",
+    "queries": 34,
+    "required_anchors": 77,
+    "deterministic_required_anchor_recall_at_50": 1.0,
+    "semantic_candidate_recall_at_50": 0.480519,
+    "production_dependencies_added": 0,
+    "decision": "SEMANTIC SPIKE NOT NEEDED FOR PRODUCTION"
+  },
+  "phase3r": {
+    "status": "explanation_gates_passed",
+    "pairs": 42,
+    "correct_and_useful": 41,
+    "reviewed_shallow": 1,
+    "misleading": 0,
+    "unsupported": 0,
+    "architecture_redesigned": false
+  },
+  "test_runs": [
+    {"name":"former Phase 4 challenge runner","result":"all gates passed","exit_code":0},
+    {"name":"offline semantic candidate spike","result":"experiment completed; not needed for production","exit_code":0},
+    {"name":"generated search-v2 configuration parity","result":"asset current","exit_code":0},
+    {"name":"49-query development frame","result":"all hard gates passed","exit_code":0},
+    {"name":"48-query MEAS-5 frame","result":"all movements reviewed","exit_code":0},
+    {"name":"42-pair explanation frame","result":"explanation gates passed","exit_code":0},
+    {"name":"full browser suite","result":"138 passed","exit_code":0},
+    {"name":"selected Python search/parity/schema/size suites","result":"43 passed","exit_code":0},
+    {"name":"live-product Python validation","result":"756 passed","exit_code":0},
+    {"name":"historical query baseline","result":"37 queries, zero top-10 churn","exit_code":0},
+    {"name":"parent-child scoring invariant","result":"50 cases passed","exit_code":0},
+    {"name":"hermetic no-drift rebuild","result":"22 artifacts unchanged","exit_code":0}
+  ],
+  "frozen_census_note": "The live-product Python runner intentionally excludes the already-closed test_meas8, test_p5_closeout, test_p7_frame, and test_p7_residual frozen-census modules. Their inherited catalog-fixture failures remain documented in docs/SEARCH_QUALITY_RECOVERY.md and were not repaired in this pass.",
+  "remaining_failure_classes": [],
+  "release_actions_taken": {
+    "merged_to_main": false,
+    "deployed": false,
+    "production_flag_enabled": false,
+    "version_or_release_date_created": false,
+    "phase5_started": false
+  }
+}

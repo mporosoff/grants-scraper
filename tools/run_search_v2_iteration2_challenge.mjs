@@ -81,6 +81,7 @@ function admissionCounts(rows) {
 
 function summarize(rows) {
   const positive = rows.filter(row => row.required_primary_ids.length);
+  const directPositive = rows.filter(row => row.stratum === "direct_positive");
   const latencies = rows.map(row => row.latency_ms);
   const sum = (selector, population = rows) => population.length
     ? number(population.reduce((total, row) => total + selector(row), 0) / population.length)
@@ -91,6 +92,7 @@ function summarize(rows) {
     required_primary_recall_at_10: sum(row => row.metrics_at_10.required_primary_recall, positive),
     required_primary_recall_at_50: sum(row => row.metrics_at_50.required_primary_recall, positive),
     ndcg_at_10: sum(row => row.metrics_at_10.ndcg),
+    direct_positive_ndcg_at_10: sum(row => row.metrics_at_10.ndcg, directPositive),
     visible_primary_count: rows.reduce((total, row) => total + row.visible_primary_count, 0),
     internal_candidate_discovery_count: rows.reduce((total, row) => total + row.internal_candidate_count, 0),
     broader_fit_count: rows.reduce((total, row) => total + row.broader_fit_count, 0),

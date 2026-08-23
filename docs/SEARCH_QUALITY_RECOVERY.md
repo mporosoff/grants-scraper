@@ -317,3 +317,60 @@ decision is `evaluation/search_v2_release_candidate.json`. Search v2 remains
 disabled, `main` remains untouched, and Phase 5 is not authorized. Any further
 tuning must be a new iteration with this failed holdout preserved as evidence
 and a newly frozen development/holdout protocol.
+
+## Phase 2R / Iteration 2 outcome
+
+Iteration 2 began from `38181e63bc9b19b4fea10494852dd4068ffe2d09` on `search-quality-v2`. Before retrieval tuning, the failed Phase 4 package was reclassified as permanent development challenge evidence and its five governing artifacts were hashed in `evaluation/search_v2_iteration2_challenge.json`. A new 28-query, cross-discipline acceptance population was then pre-registered in `evaluation/search_v2_iteration2_holdout_frame.json`; its frame hash is `3e94159b9eff8ef424b51ddc46c4cdb3a28243a39aa21374cd3411fb5d4b3cc3`. It has never been executed or adjudicated, has no results artifact, and remains behind a runner lock pending explicit Phase 4B authorization.
+
+The failed challenge clustered into a small number of shared causes: literal query normalization and grouping gaps; query-form-specific rather than concept-family scope rules; lack of generic complete-intent verification; citation and administrative-text collisions; conflation of discovery with primary admission; and rich child or authoritative evidence being ranked in the same pool as weak lexical matches. The detailed 24-query causal table and the dominant clustering of all 43 irrelevant top-ten admissions are in `evaluation/search_v2_iteration2_root_causes.json`. Catalog review confirmed that Rural MOMS, AFRI, SCALEUP, and the Genesis foundation-model children already contain usable authoritative evidence; those failures belonged to retrieval, not ingestion.
+
+The generalized candidate keeps the Phase 2 REE architecture, field weights, title bonuses, Phase 3 explanation contract, and production-off boundary. It adds:
+
+- complete substantive-intent verification for concise technical searches with two to five groups, while keeping the measured forgiving behavior for longer prose queries;
+- bounded, directional, non-transitive concept families with canonical IDs, rationale, observed need, and tests;
+- program scope expressed as verified concept-family coverage at publication-eligible child, controlled program-area, or authoritative parent level;
+- a separate discovery → verification → primary/broader/reject pipeline with diagnostic counts for every stage;
+- evidence tiers that order exact or complete rich authoritative evidence before incomplete lexical score, then retain the existing lexical and child-rollup signals within each tier;
+- citation-source text as discovery/ranking context only, never as the sole basis for primary admission;
+- explicit broader-program fit outside the primary list.
+
+No BM25F, embeddings, query-time AI, telemetry, paid API, or browser model was added. The static configuration is bounded to observed concept families and has no transitive inference.
+
+Two development labels were corrected after source inspection, both as query/result truth changes rather than scoring changes: ECLIPSE is broader rather than primary for `AI catalyst design` because its published scope does not establish AI/ML, and the ONR BAA is broader rather than primary for `autonomous maritime sensing` because the complete phrase is present only in collapsed citation/index text. Truth remains keyed by exact query and result.
+
+### Former Phase 4 challenge results
+
+| Metric | Failed candidate | Iteration 2 |
+| --- | ---: | ---: |
+| Primary Precision@10 | 0.373 | 1.000 |
+| Required-primary Recall@10 | 0.633 | 1.000 |
+| Required-primary Recall@50 | 0.650 | 1.000 |
+| Direct-positive nDCG@10 | 0.586 | 0.915 |
+| Maximum visible primary count | 213 | 4 |
+| Confirmed irrelevant top-ten primaries | 43 | 0 |
+
+All six REE method/material queries recover DOE BES, Genesis, and NSF CPS where the adjudicated scope requires them; NASA/planetary and rare-disease noise remains excluded. Rural MOMS and AFRI are recovered, SCALEUP moves from rank 7 to rank 1, and Genesis moves from rank 30 to rank 3 for `secure foundation models`. Both zero-primary hard negatives now display zero primary results. Across the 24 challenge queries, the candidate displays 39 primary results and one broader fit after considering 11,675 internal candidates and rejecting 11,635 partial-intent candidates. Admissions comprise five direct and 34 authoritative-scope paths. Challenge latency measured 32.58 ms p50 and 183.92 ms p95.
+
+Metrics are reported separately by REE/material hierarchy, health, agriculture, energy, AI/computing, defense, space, environment, and hard negatives in `evaluation/search_v2_iteration2_results.json`; no failing domain is hidden in the aggregate.
+
+### Deterministic and semantic comparison
+
+The authorized offline semantic spike used a local, static PPMI distributional candidate generator over eligible parent and publication-eligible child text. It made no external calls, excluded citation-source text, capped candidates at 50, and could not declare a result primary. Across 34 development/challenge queries and 77 required anchors, deterministic retrieval reached 1.000 required-anchor recall at 50 while the semantic alternative reached 0.481. The decision is **SEMANTIC SPIKE NOT NEEDED FOR PRODUCTION**; no semantic asset or dependency was shipped. Full evidence is in `evaluation/search_v2_iteration2_semantic_spike.json`.
+
+### Iteration 2 development and Phase 3R gates
+
+The 49-query development frame passes all hard gates. Twenty-five top-ten lists moved and every movement has an explicit accepted review. The six query-specific cross-domain checks have no unjudged or non-primary top-ten admissions, with `autonomous maritime sensing` now correctly returning zero primary results under the corrected source-backed truth. The 48-query MEAS-5 frame has 38 reviewed top-ten movements across 11 disciplines; nonzero churn is accepted only where the prior result was demonstrably incomplete or irrelevant. The historical 37-query baseline retains zero top-ten churn, and the 50-case parent/child cardinality invariant remains byte-identical.
+
+Phase 3 was verified, not redesigned. The 42-pair frame retains 41 correct-and-useful explanations, one individually reviewed shallow fail-closed case, and zero misleading, unsupported, overstated, privacy-violating, or non-causal explanations. Semantic similarity is never shown as a match reason.
+
+Final verification passed: 138 browser tests; 43 focused Python search/parity/schema/size tests; 756 live-product Python tests; all size gates; and the 22-artifact hermetic no-drift rebuild. The live-product runner continues to exclude the inherited closed `test_meas8`, `test_p5_closeout`, `test_p7_frame`, and `test_p7_residual` frozen-census modules. Their previously documented catalog-fixture failures were neither rewritten nor repaired in this pass.
+
+The coordinated browser assets grew by 75,445 uncompressed bytes from the failed-candidate starting SHA: 229 bytes in app evidence ordering, 27,038 in query interpretation, 12,770 in retrieval verification/diagnostics, and 35,408 in the generated configuration wrapper; the explanation asset is unchanged. Size gates pass. Warm development scoring measured 11.33 ms p50, 31.39 ms p95, and 35.94 ms maximum; evidence-collecting evaluation measured 23.95 ms p50 and 65.99 ms p95.
+
+Machine-readable outcome and movement review are in `evaluation/search_v2_iteration2_gate_report.json` and `evaluation/search_v2_iteration2_movement_review.json`.
+
+**ITERATION 2 DEVELOPMENT GATES PASSED**
+
+**READY TO FREEZE CANDIDATE FOR PHASE 3R / PHASE 4B**
+
+Phase 4B has not been authorized or executed. Search v2 remains off, `main` remains untouched, nothing was deployed, no release version/date was created, and Phase 5 remains unauthorized.
