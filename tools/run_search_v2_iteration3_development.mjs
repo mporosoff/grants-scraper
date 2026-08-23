@@ -20,7 +20,7 @@ const POPULATIONS = [
     truth: "evaluation/search_v2_iteration2_holdout_truth.json",
   },
 ];
-const OUTPUT = "evaluation/search_v2_iteration3_spent_challenge_raw.json";
+const OUTPUT = "evaluation/search_v2_local_architecture_spent_results.json";
 
 function number(value) {
   return Number(Number(value || 0).toFixed(6));
@@ -191,8 +191,8 @@ async function main() {
   }
   const payload = {
     schema_version: 1,
-    iteration: 3,
-    status: "spent_challenge_development_output_not_acceptance",
+    iteration: "local-search-architecture-reset",
+    status: "spent_challenge_development_output_not_acceptance_or_phase4c",
     generated_at: new Date().toISOString(),
     sealed_phase4c_read_or_executed: false,
     populations,

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "frozen_at": "2026-08-22",
-  "phase": 3,
-  "purpose": "Frozen development truth for deterministic, causal Funding Finder match explanations.",
+  "frozen_at": "2026-08-23",
+  "phase": "local-search-architecture-reset",
+  "purpose": "Verify extractive explanations against the active fielded retrieval classification; cases whose former configured-entailment admission was removed now fail closed.",
   "source_search_contract": "search-v2-track-b-2",
   "relevance_rubric": "evaluation/search_v2_truth.json schema version 2",
   "holdout_status": "sealed_not_executed_or_adjudicated",
@@ -38,21 +38,104 @@
           "exactOpportunityNumber": false,
           "exactTitlePhrase": false,
           "groups": [
-            {"source":"ree","conceptId":"rare-earth-elements","role":"target","matchedTerms":["rare","earth"],"matchedTermContributions":[{"term":"rare","fields":[{"field":"parent_title","admissionEligible":true}]}]},
-            {"source":"separation","conceptId":"separations","role":"method","matchedTerms":["separation"],"matchedTermContributions":[{"term":"separation","fields":[{"field":"parent_title","admissionEligible":true},{"field":"parent_description","admissionEligible":true}]}]}
+            {
+              "source": "ree",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "matchedTerms": [
+                "rare",
+                "earth"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "rare",
+                  "fields": [
+                    {
+                      "field": "parent_title",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "source": "separation",
+              "conceptId": "separations",
+              "role": "method",
+              "matchedTerms": [
+                "separation"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "separation",
+                  "fields": [
+                    {
+                      "field": "parent_title",
+                      "admissionEligible": true
+                    },
+                    {
+                      "field": "parent_description",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            }
           ],
           "admission": {
             "admitted": true,
             "reason": "explicit_evidence",
             "admittedBy": [
-              {"path":"explicit_evidence","conceptId":"rare-earth-elements","role":"target","fields":["parent_title"]},
-              {"path":"explicit_evidence","conceptId":"separations","role":"method","fields":["parent_title","parent_description"]}
+              {
+                "path": "explicit_evidence",
+                "conceptId": "rare-earth-elements",
+                "role": "target",
+                "fields": [
+                  "parent_title"
+                ]
+              },
+              {
+                "path": "explicit_evidence",
+                "conceptId": "separations",
+                "role": "method",
+                "fields": [
+                  "parent_title",
+                  "parent_description"
+                ]
+              }
             ],
-            "rankedBy": [{"type":"lexical_concept","conceptId":"rare-earth-elements"},{"type":"lexical_concept","conceptId":"separations"}],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "rare-earth-elements"
+              },
+              {
+                "type": "lexical_concept",
+                "conceptId": "separations"
+              }
+            ],
             "fieldContributions": [
-              {"conceptId":"rare-earth-elements","term":"rare","field":"parent_title","admissionEligible":true,"aggregateTermContribution":8},
-              {"conceptId":"separations","term":"separation","field":"parent_title","admissionEligible":true,"aggregateTermContribution":7},
-              {"conceptId":"separations","term":"separation","field":"parent_description","admissionEligible":true,"aggregateTermContribution":4}
+              {
+                "conceptId": "rare-earth-elements",
+                "term": "rare",
+                "field": "parent_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 8
+              },
+              {
+                "conceptId": "separations",
+                "term": "separation",
+                "field": "parent_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 7
+              },
+              {
+                "conceptId": "separations",
+                "term": "separation",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 4
+              }
             ]
           }
         }
@@ -71,20 +154,91 @@
         "directEvidence": {
           "schemaVersion": 2,
           "groups": [
-            {"source":"lanthanide","conceptId":"rare-earth-elements","role":"target","matchedTerms":["lanthanide"],"matchedTermContributions":[{"term":"lanthanide","fields":[{"field":"parent_description","admissionEligible":true}]}]},
-            {"source":"recovery","conceptId":"separations","role":"method","matchedTerms":["recovery"],"matchedTermContributions":[{"term":"recovery","fields":[{"field":"parent_description","admissionEligible":true}]}]}
+            {
+              "source": "lanthanide",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "matchedTerms": [
+                "lanthanide"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "lanthanide",
+                  "fields": [
+                    {
+                      "field": "parent_description",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "source": "recovery",
+              "conceptId": "separations",
+              "role": "method",
+              "matchedTerms": [
+                "recovery"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "recovery",
+                  "fields": [
+                    {
+                      "field": "parent_description",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            }
           ],
           "admission": {
             "admitted": true,
             "reason": "explicit_evidence",
             "admittedBy": [
-              {"path":"explicit_evidence","conceptId":"rare-earth-elements","role":"target","fields":["parent_description"]},
-              {"path":"explicit_evidence","conceptId":"separations","role":"method","fields":["parent_description"]}
+              {
+                "path": "explicit_evidence",
+                "conceptId": "rare-earth-elements",
+                "role": "target",
+                "fields": [
+                  "parent_description"
+                ]
+              },
+              {
+                "path": "explicit_evidence",
+                "conceptId": "separations",
+                "role": "method",
+                "fields": [
+                  "parent_description"
+                ]
+              }
             ],
-            "rankedBy": [{"type":"lexical_concept","conceptId":"rare-earth-elements"},{"type":"lexical_concept","conceptId":"separations"}],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "rare-earth-elements"
+              },
+              {
+                "type": "lexical_concept",
+                "conceptId": "separations"
+              }
+            ],
             "fieldContributions": [
-              {"conceptId":"rare-earth-elements","term":"lanthanide","field":"parent_description","admissionEligible":true,"aggregateTermContribution":6},
-              {"conceptId":"separations","term":"recovery","field":"parent_description","admissionEligible":true,"aggregateTermContribution":5}
+              {
+                "conceptId": "rare-earth-elements",
+                "term": "lanthanide",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 6
+              },
+              {
+                "conceptId": "separations",
+                "term": "recovery",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 5
+              }
             ]
           }
         }
@@ -103,20 +257,96 @@
         "directEvidence": {
           "schemaVersion": 2,
           "groups": [
-            {"source":"ree","conceptId":"rare-earth-elements","role":"target","matchedTerms":["lanthanide"],"matchedTermContributions":[{"term":"lanthanide","fields":[{"field":"parent_description","admissionEligible":true}]}]},
-            {"source":"recovery","conceptId":"separations","role":"method","matchedTerms":["recovery"],"matchedTermContributions":[{"term":"recovery","fields":[{"field":"parent_title","admissionEligible":true},{"field":"parent_description","admissionEligible":true}]}]}
+            {
+              "source": "ree",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "matchedTerms": [
+                "lanthanide"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "lanthanide",
+                  "fields": [
+                    {
+                      "field": "parent_description",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "source": "recovery",
+              "conceptId": "separations",
+              "role": "method",
+              "matchedTerms": [
+                "recovery"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "recovery",
+                  "fields": [
+                    {
+                      "field": "parent_title",
+                      "admissionEligible": true
+                    },
+                    {
+                      "field": "parent_description",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            }
           ],
           "admission": {
             "admitted": true,
             "reason": "explicit_evidence",
             "admittedBy": [
-              {"path":"explicit_evidence","conceptId":"rare-earth-elements","role":"target","fields":["parent_description"]},
-              {"path":"explicit_evidence","conceptId":"separations","role":"method","fields":["parent_title","parent_description"]}
+              {
+                "path": "explicit_evidence",
+                "conceptId": "rare-earth-elements",
+                "role": "target",
+                "fields": [
+                  "parent_description"
+                ]
+              },
+              {
+                "path": "explicit_evidence",
+                "conceptId": "separations",
+                "role": "method",
+                "fields": [
+                  "parent_title",
+                  "parent_description"
+                ]
+              }
             ],
-            "rankedBy": [{"type":"lexical_concept","conceptId":"rare-earth-elements"},{"type":"lexical_concept","conceptId":"separations"}],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "rare-earth-elements"
+              },
+              {
+                "type": "lexical_concept",
+                "conceptId": "separations"
+              }
+            ],
             "fieldContributions": [
-              {"conceptId":"rare-earth-elements","term":"lanthanide","field":"parent_description","admissionEligible":true,"aggregateTermContribution":6},
-              {"conceptId":"separations","term":"recovery","field":"parent_title","admissionEligible":true,"aggregateTermContribution":5}
+              {
+                "conceptId": "rare-earth-elements",
+                "term": "lanthanide",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 6
+              },
+              {
+                "conceptId": "separations",
+                "term": "recovery",
+                "field": "parent_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 5
+              }
             ]
           }
         }
@@ -125,16 +355,97 @@
     "child_title": {
       "query": "catalyst design",
       "parent": {
-        "record": {"opportunity_id":"fixture-child-title","opportunity_number":"FIXTURE-004","title":"Annual Science Solicitation","description":"An umbrella research opportunity."},
+        "record": {
+          "opportunity_id": "fixture-child-title",
+          "opportunity_number": "FIXTURE-004",
+          "title": "Annual Science Solicitation",
+          "description": "An umbrella research opportunity."
+        },
         "parentAdmitted": false,
-        "directEvidence": {"schemaVersion":2,"admission":{"admitted":false,"reason":"insufficient_lexical_coverage","admittedBy":[],"rankedBy":[],"fieldContributions":[]}}
-      },
-      "bestChild": {
-        "record": {"subtopic_id":"fixture-child-title:1","parent_id":"fixture-child-title","child_type":"subject","publication_state":"publish","title":"Catalysis Science","summary":"Supports catalyst design and reaction-mechanism research."},
         "directEvidence": {
           "schemaVersion": 2,
-          "groups": [{"source":"catalyst","conceptId":"literal:catalyst","role":"application_or_context","matchedTerms":["catalyst"],"matchedTermContributions":[{"term":"catalyst","fields":[{"field":"child_title","admissionEligible":true},{"field":"child_summary","admissionEligible":true}]}]}],
-          "admission": {"admitted":true,"reason":"explicit_evidence","admittedBy":[{"path":"explicit_evidence","conceptId":"literal:catalyst","role":"application_or_context","fields":["child_title","child_summary"]}],"rankedBy":[{"type":"lexical_concept","conceptId":"literal:catalyst"}],"fieldContributions":[{"conceptId":"literal:catalyst","term":"catalyst","field":"child_title","admissionEligible":true,"aggregateTermContribution":7},{"conceptId":"literal:catalyst","term":"catalyst","field":"child_summary","admissionEligible":true,"aggregateTermContribution":4}]}
+          "admission": {
+            "admitted": false,
+            "reason": "insufficient_lexical_coverage",
+            "admittedBy": [],
+            "rankedBy": [],
+            "fieldContributions": []
+          }
+        }
+      },
+      "bestChild": {
+        "record": {
+          "subtopic_id": "fixture-child-title:1",
+          "parent_id": "fixture-child-title",
+          "child_type": "subject",
+          "publication_state": "publish",
+          "title": "Catalysis Science",
+          "summary": "Supports catalyst design and reaction-mechanism research."
+        },
+        "directEvidence": {
+          "schemaVersion": 2,
+          "groups": [
+            {
+              "source": "catalyst",
+              "conceptId": "literal:catalyst",
+              "role": "application_or_context",
+              "matchedTerms": [
+                "catalyst"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "catalyst",
+                  "fields": [
+                    {
+                      "field": "child_title",
+                      "admissionEligible": true
+                    },
+                    {
+                      "field": "child_summary",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [
+              {
+                "path": "explicit_evidence",
+                "conceptId": "literal:catalyst",
+                "role": "application_or_context",
+                "fields": [
+                  "child_title",
+                  "child_summary"
+                ]
+              }
+            ],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:catalyst"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "literal:catalyst",
+                "term": "catalyst",
+                "field": "child_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 7
+              },
+              {
+                "conceptId": "literal:catalyst",
+                "term": "catalyst",
+                "field": "child_summary",
+                "admissionEligible": true,
+                "aggregateTermContribution": 4
+              }
+            ]
+          }
         }
       },
       "childDroveMatch": true
@@ -142,16 +453,85 @@
     "child_summary": {
       "query": "reactive separations",
       "parent": {
-        "record": {"opportunity_id":"fixture-child-summary","opportunity_number":"FIXTURE-005","title":"Office-wide Research Announcement","description":"An umbrella research opportunity."},
+        "record": {
+          "opportunity_id": "fixture-child-summary",
+          "opportunity_number": "FIXTURE-005",
+          "title": "Office-wide Research Announcement",
+          "description": "An umbrella research opportunity."
+        },
         "parentAdmitted": false,
-        "directEvidence": {"schemaVersion":2,"admission":{"admitted":false,"reason":"insufficient_lexical_coverage","admittedBy":[],"rankedBy":[],"fieldContributions":[]}}
-      },
-      "bestChild": {
-        "record": {"subtopic_id":"fixture-child-summary:1","parent_id":"fixture-child-summary","child_type":"subject","publication_state":"publish","title":"Molecular Transformations","summary":"Supports reactive separations and molecular-level control of coupled reaction and separation processes."},
         "directEvidence": {
           "schemaVersion": 2,
-          "groups": [{"source":"separation","conceptId":"literal:separation","role":"application_or_context","matchedTerms":["separation"],"matchedTermContributions":[{"term":"separation","fields":[{"field":"child_summary","admissionEligible":true}]}]}],
-          "admission": {"admitted":true,"reason":"explicit_evidence","admittedBy":[{"path":"explicit_evidence","conceptId":"literal:separation","role":"application_or_context","fields":["child_summary"]}],"rankedBy":[{"type":"lexical_concept","conceptId":"literal:separation"}],"fieldContributions":[{"conceptId":"literal:separation","term":"separation","field":"child_summary","admissionEligible":true,"aggregateTermContribution":6}]}
+          "admission": {
+            "admitted": false,
+            "reason": "insufficient_lexical_coverage",
+            "admittedBy": [],
+            "rankedBy": [],
+            "fieldContributions": []
+          }
+        }
+      },
+      "bestChild": {
+        "record": {
+          "subtopic_id": "fixture-child-summary:1",
+          "parent_id": "fixture-child-summary",
+          "child_type": "subject",
+          "publication_state": "publish",
+          "title": "Molecular Transformations",
+          "summary": "Supports reactive separations and molecular-level control of coupled reaction and separation processes."
+        },
+        "directEvidence": {
+          "schemaVersion": 2,
+          "groups": [
+            {
+              "source": "separation",
+              "conceptId": "literal:separation",
+              "role": "application_or_context",
+              "matchedTerms": [
+                "separation"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "separation",
+                  "fields": [
+                    {
+                      "field": "child_summary",
+                      "admissionEligible": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [
+              {
+                "path": "explicit_evidence",
+                "conceptId": "literal:separation",
+                "role": "application_or_context",
+                "fields": [
+                  "child_summary"
+                ]
+              }
+            ],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:separation"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "literal:separation",
+                "term": "separation",
+                "field": "child_summary",
+                "admissionEligible": true,
+                "aggregateTermContribution": 6
+              }
+            ]
+          }
         }
       },
       "childDroveMatch": true
@@ -159,13 +539,65 @@
     "review_only_child": {
       "query": "separation science",
       "parent": {
-        "record": {"opportunity_id":"fixture-review-child","opportunity_number":"FIXTURE-006","title":"Annual Solicitation","description":"General information."},
+        "record": {
+          "opportunity_id": "fixture-review-child",
+          "opportunity_number": "FIXTURE-006",
+          "title": "Annual Solicitation",
+          "description": "General information."
+        },
         "parentAdmitted": false,
-        "directEvidence": {"schemaVersion":2,"admission":{"admitted":false,"reason":"insufficient_lexical_coverage","admittedBy":[],"rankedBy":[],"fieldContributions":[]}}
+        "directEvidence": {
+          "schemaVersion": 2,
+          "admission": {
+            "admitted": false,
+            "reason": "insufficient_lexical_coverage",
+            "admittedBy": [],
+            "rankedBy": [],
+            "fieldContributions": []
+          }
+        }
       },
       "bestChild": {
-        "record": {"subtopic_id":"fixture-review-child:rss","parent_id":"fixture-review-child","child_type":"subject","publication_state":"review","title":"Internal Review Separation Science","summary":"A review-only extracted section."},
-        "directEvidence": {"schemaVersion":2,"admission":{"admitted":true,"reason":"explicit_evidence","admittedBy":[{"path":"explicit_evidence","conceptId":"literal:separation","role":"application_or_context","fields":["child_title"]}],"rankedBy":[{"type":"lexical_concept","conceptId":"literal:separation"}],"fieldContributions":[{"conceptId":"literal:separation","term":"separation","field":"child_title","admissionEligible":true,"aggregateTermContribution":6}]}}
+        "record": {
+          "subtopic_id": "fixture-review-child:rss",
+          "parent_id": "fixture-review-child",
+          "child_type": "subject",
+          "publication_state": "review",
+          "title": "Internal Review Separation Science",
+          "summary": "A review-only extracted section."
+        },
+        "directEvidence": {
+          "schemaVersion": 2,
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [
+              {
+                "path": "explicit_evidence",
+                "conceptId": "literal:separation",
+                "role": "application_or_context",
+                "fields": [
+                  "child_title"
+                ]
+              }
+            ],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:separation"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "literal:separation",
+                "term": "separation",
+                "field": "child_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 6
+              }
+            ]
+          }
+        }
       },
       "childDroveMatch": true
     },
@@ -173,85 +605,799 @@
       "query": "catalysis",
       "private_probe": "secret zeolite project",
       "parent": {
-        "record": {"opportunity_id":"fixture-profile","opportunity_number":"FIXTURE-007","title":"Catalysis Science","description":"Supports fundamental catalyst design and reaction-mechanism research."},
+        "record": {
+          "opportunity_id": "fixture-profile",
+          "opportunity_number": "FIXTURE-007",
+          "title": "Catalysis Science",
+          "description": "Supports fundamental catalyst design and reaction-mechanism research."
+        },
         "parentAdmitted": true,
-        "directEvidence": {"schemaVersion":2,"exactTitlePhrase":true,"admission":{"admitted":true,"reason":"explicit_evidence","admittedBy":[{"path":"explicit_evidence","conceptId":"literal:catalysis","role":"application_or_context","fields":["parent_title","parent_description"]}],"rankedBy":[{"type":"lexical_concept","conceptId":"literal:catalysis"}],"fieldContributions":[{"conceptId":"literal:catalysis","term":"catalysi","field":"parent_title","admissionEligible":true,"aggregateTermContribution":7},{"conceptId":"literal:catalysis","term":"catalysi","field":"parent_description","admissionEligible":true,"aggregateTermContribution":4}]}}
+        "directEvidence": {
+          "schemaVersion": 2,
+          "exactTitlePhrase": true,
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [
+              {
+                "path": "explicit_evidence",
+                "conceptId": "literal:catalysis",
+                "role": "application_or_context",
+                "fields": [
+                  "parent_title",
+                  "parent_description"
+                ]
+              }
+            ],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:catalysis"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "literal:catalysis",
+                "term": "catalysi",
+                "field": "parent_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 7
+              },
+              {
+                "conceptId": "literal:catalysis",
+                "term": "catalysi",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 4
+              }
+            ]
+          }
+        }
       },
       "profileSources": {
-        "manual": {"score":2,"privateText":"secret zeolite project"},
-        "cv": {"score":2,"privateText":"secret zeolite project"},
-        "orcid": {"score":2,"privateText":"secret zeolite project"}
+        "manual": {
+          "score": 2,
+          "privateText": "secret zeolite project"
+        },
+        "cv": {
+          "score": 2,
+          "privateText": "secret zeolite project"
+        },
+        "orcid": {
+          "score": 2,
+          "privateText": "secret zeolite project"
+        }
       },
       "eligibility": 2
     },
     "generic_title_rerank": {
       "query": "advanced reactive separations",
       "parent": {
-        "record": {"opportunity_id":"fixture-title-rerank","opportunity_number":"FIXTURE-008","title":"Advanced Research Program","description":"The funded scientific scope includes reactive separations and coupled reaction-separation processes."},
+        "record": {
+          "opportunity_id": "fixture-title-rerank",
+          "opportunity_number": "FIXTURE-008",
+          "title": "Advanced Research Program",
+          "description": "The funded scientific scope includes reactive separations and coupled reaction-separation processes."
+        },
         "parentAdmitted": true,
-        "directEvidence": {"schemaVersion":2,"exactTitlePhrase":false,"admission":{"admitted":true,"reason":"explicit_evidence","admittedBy":[{"path":"explicit_evidence","conceptId":"literal:separation","role":"application_or_context","fields":["parent_description"]}],"rankedBy":[{"type":"lexical_concept","conceptId":"literal:advanced"},{"type":"lexical_concept","conceptId":"literal:separation"}],"fieldContributions":[{"conceptId":"literal:advanced","term":"advanced","field":"parent_title","admissionEligible":true,"aggregateTermContribution":8},{"conceptId":"literal:separation","term":"separation","field":"parent_description","admissionEligible":true,"aggregateTermContribution":5}]}}
+        "directEvidence": {
+          "schemaVersion": 2,
+          "exactTitlePhrase": false,
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [
+              {
+                "path": "explicit_evidence",
+                "conceptId": "literal:separation",
+                "role": "application_or_context",
+                "fields": [
+                  "parent_description"
+                ]
+              }
+            ],
+            "rankedBy": [
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:advanced"
+              },
+              {
+                "type": "lexical_concept",
+                "conceptId": "literal:separation"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "literal:advanced",
+                "term": "advanced",
+                "field": "parent_title",
+                "admissionEligible": true,
+                "aggregateTermContribution": 8
+              },
+              {
+                "conceptId": "literal:separation",
+                "term": "separation",
+                "field": "parent_description",
+                "admissionEligible": true,
+                "aggregateTermContribution": 5
+              }
+            ]
+          }
+        }
       }
     },
     "broader_fit": {
       "query": "REE separations",
-      "broadFallback": {"status":true,"targetExplicit":false,"label":"Transport Phenomena","scope":"Transport Phenomena supports interfacial transport and separation methods adjacent to the proposed work."},
+      "broadFallback": {
+        "status": true,
+        "targetExplicit": false,
+        "label": "Transport Phenomena",
+        "scope": "Transport Phenomena supports interfacial transport and separation methods adjacent to the proposed work."
+      },
       "parent": {
-        "record": {"opportunity_id":"fixture-broad","opportunity_number":"FIXTURE-009","title":"Transport Phenomena","description":"Supports fundamental transport and interfacial phenomena research."},
+        "record": {
+          "opportunity_id": "fixture-broad",
+          "opportunity_number": "FIXTURE-009",
+          "title": "Transport Phenomena",
+          "description": "Supports fundamental transport and interfacial phenomena research."
+        },
         "parentAdmitted": true,
-        "directEvidence": {"schemaVersion":2,"admission":{"admitted":true,"reason":"broad_program_fallback","admittedBy":[{"path":"broad_program_fallback","fields":["parent_description"]}],"rankedBy":[],"fieldContributions":[]}}
+        "directEvidence": {
+          "schemaVersion": 2,
+          "admission": {
+            "admitted": true,
+            "reason": "broad_program_fallback",
+            "admittedBy": [
+              {
+                "path": "broad_program_fallback",
+                "fields": [
+                  "parent_description"
+                ]
+              }
+            ],
+            "rankedBy": [],
+            "fieldContributions": []
+          }
+        }
       }
     },
     "weak_metadata": {
       "query": "REE separation",
       "parent": {
-        "record": {"opportunity_id":"fixture-weak","opportunity_number":"FIXTURE-010","title":"General Science Program","description":"General scientific research.","topic_areas":["Rare earth elements","Separations"]},
+        "record": {
+          "opportunity_id": "fixture-weak",
+          "opportunity_number": "FIXTURE-010",
+          "title": "General Science Program",
+          "description": "General scientific research.",
+          "topic_areas": [
+            "Rare earth elements",
+            "Separations"
+          ]
+        },
         "parentAdmitted": true,
-        "directEvidence": {"schemaVersion":2,"groups":[{"source":"ree","conceptId":"rare-earth-elements","role":"target","matchedTerms":["rare"],"matchedTermContributions":[{"term":"rare","fields":[{"field":"topic_area","admissionEligible":false}]}]}],"admission":{"admitted":true,"reason":"explicit_evidence","admittedBy":[],"rankedBy":[{"type":"topic_rerank"}],"fieldContributions":[{"conceptId":"rare-earth-elements","term":"rare","field":"topic_area","admissionEligible":false,"aggregateTermContribution":5}]}}
+        "directEvidence": {
+          "schemaVersion": 2,
+          "groups": [
+            {
+              "source": "ree",
+              "conceptId": "rare-earth-elements",
+              "role": "target",
+              "matchedTerms": [
+                "rare"
+              ],
+              "matchedTermContributions": [
+                {
+                  "term": "rare",
+                  "fields": [
+                    {
+                      "field": "topic_area",
+                      "admissionEligible": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "admission": {
+            "admitted": true,
+            "reason": "explicit_evidence",
+            "admittedBy": [],
+            "rankedBy": [
+              {
+                "type": "topic_rerank"
+              }
+            ],
+            "fieldContributions": [
+              {
+                "conceptId": "rare-earth-elements",
+                "term": "rare",
+                "field": "topic_area",
+                "admissionEligible": false,
+                "aggregateTermContribution": 5
+              }
+            ]
+          }
+        }
       }
     }
   },
   "cases": [
-    {"id":"scope_ree_cps","source":"catalog_search","query":"REE separations","result_id":"362061","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"forbidden_labels":["Broader program fit"],"human_label":"correct_and_useful"}},
-    {"id":"scope_ree_doe","source":"catalog_search","query":"REE separations","result_id":"360678","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"forbidden_labels":["Broader program fit"],"human_label":"correct_and_useful"}},
-    {"id":"scope_ree_genesis","source":"catalog_search","query":"REE separations","result_id":"361526","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"source_grounded_scope_entailment","required_codes":["child_hierarchy","field_context","controlled_relationship"],"forbidden_labels":["Broader program fit"],"human_label":"correct_and_useful"}},
-    {"id":"scope_phrase_cps","source":"catalog_search","query":"rare earth separations","result_id":"362061","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_phrase_doe","source":"catalog_search","query":"rare earth separations","result_id":"360678","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_phrase_genesis","source":"catalog_search","query":"rare earth separations","result_id":"361526","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"source_grounded_scope_entailment","required_codes":["child_hierarchy","field_context","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_solvent_cps","source":"catalog_search","query":"solvent extraction of REEs","result_id":"362061","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_solvent_doe","source":"catalog_search","query":"solvent extraction of REEs","result_id":"360678","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_solvent_genesis","source":"catalog_search","query":"solvent extraction of REEs","result_id":"361526","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_ionic_cps","source":"catalog_search","query":"ionic liquids for REE extraction","result_id":"362061","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_ionic_doe","source":"catalog_search","query":"ionic liquids for REE extraction","result_id":"360678","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"scope_ionic_genesis","source":"catalog_search","query":"ionic liquids for REE extraction","result_id":"361526","expected":{"admitted":true,"tier":"authoritative_scope","admission_path":"authoritative_scope_entailment","required_codes":["query_interpretation","authoritative_scope","controlled_relationship"],"human_label":"correct_and_useful"}},
-    {"id":"exact_doe_number","source":"catalog_search","query":"DE-FOA-0003600","result_id":"360678","expected":{"admitted":true,"tier":"direct","required_codes":["exact_opportunity_number"],"human_label":"correct_and_useful"}},
-    {"id":"exact_genesis_number","source":"catalog_search","query":"DE-FOA-0003612","result_id":"361526","expected":{"admitted":true,"tier":"direct","required_codes":["exact_opportunity_number"],"human_label":"correct_and_useful"}},
-    {"id":"exact_cps_title","source":"catalog_search","query":"Chemical Process Systems","result_id":"362061","expected":{"admitted":true,"tier":"direct","required_codes":["exact_title"],"human_label":"correct_and_useful"}},
-    {"id":"child_genesis_catalyst","source":"catalog_search","query":"catalyst design","result_id":"361526","expected":{"admitted":true,"tier":"direct","required_codes":["child_hierarchy","field_context"],"required_text":["Electrochemical Energy Conversion Catalyst Discovery and Scale up"],"human_label":"correct_and_useful"}},
-    {"id":"child_army_electrochemistry","source":"catalog_search","query":"catalyst design","result_id":"344592","expected":{"admitted":false,"human_label":"correct_and_useful","review_note":"The Electrochemistry child establishes catalysis but not the complete catalyst-design intent; the generalized concise-query contract now rejects the partial match."}},
-    {"id":"child_genesis_exact_title","source":"catalog_search","query":"Electrochemical Energy Conversion Catalyst Discovery and Scale up","result_id":"361526","expected":{"admitted":true,"tier":"direct","required_codes":["child_hierarchy"],"required_text":["Electrochemical Energy Conversion Catalyst Discovery and Scale up"],"human_label":"correct_and_useful"}},
-    {"id":"child_army_summary","source":"catalog_search","query":"electrochemistry catalyst","result_id":"344592","expected":{"admitted":true,"tier":"direct","required_codes":["child_hierarchy","field_context"],"required_text":["Electrochemistry"],"human_label":"correct_and_useful"}},
-    {"id":"explicit_cps_catalysis","source":"catalog_search","query":"catalysis","result_id":"362061","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"required_fields":["parent_description"],"human_label":"correct_and_useful"}},
-    {"id":"explicit_doe_catalysis","source":"catalog_search","query":"catalysis","result_id":"360678","expected":{"admitted":false,"human_label":"correct_and_useful","review_note":"Citation-source text alone no longer creates primary admission under the Iteration-2 evidence-quality contract."}},
-    {"id":"explicit_chemistry_catalysis","source":"catalog_search","query":"catalysis","result_id":"347749","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"human_label":"correct_and_useful"}},
-    {"id":"negative_nasa_earth","source":"catalog_search","query":"REEs","result_id":"363224","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
-    {"id":"negative_policy_workshop","source":"catalog_search","query":"REE","result_id":"362900","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
-    {"id":"negative_rare_disease","source":"catalog_search","query":"REEs","result_id":"359996","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
-    {"id":"weak_cfd_collision","source":"catalog_search","query":"CFD","result_id":"329436","expected":{"admitted":false,"reason_count":0,"human_label":"correct_and_useful"}},
-    {"id":"fixture_explicit_title","source":"fixture","fixture_id":"explicit_title","expected":{"admitted":true,"tier":"contextual","required_codes":["query_interpretation","field_context"],"required_fields":["parent_title"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_explicit_description","source":"fixture","fixture_id":"explicit_description","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"required_fields":["parent_description"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_expanded_lanthanide","source":"fixture","fixture_id":"expanded_lanthanide","expected":{"admitted":true,"tier":"expanded","required_codes":["query_interpretation","field_context"],"required_text":["lanthanide"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_target_method","source":"fixture","fixture_id":"explicit_title","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"required_concepts":["rare-earth-elements","separations"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_child_title","source":"fixture","fixture_id":"child_title","expected":{"admitted":true,"tier":"direct","required_codes":["child_hierarchy","field_context"],"required_text":["Catalysis Science"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_child_summary","source":"fixture","fixture_id":"child_summary","expected":{"admitted":true,"tier":"direct","required_codes":["child_hierarchy","field_context"],"required_fields":["child_summary"],"required_text":["Molecular Transformations"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_review_child_no_leak","source":"fixture","fixture_id":"review_only_child","expected":{"admitted":true,"tier":"weak_lexical","reason_count":0,"forbidden_text":["Internal Review Separation Science","fixture-review-child:rss"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_manual_profile","source":"fixture","fixture_id":"profile_assisted","profile_source":"manual","expected":{"admitted":true,"required_codes":["profile_contribution"],"forbidden_text":["secret zeolite project"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_cv_profile","source":"fixture","fixture_id":"profile_assisted","profile_source":"cv","expected":{"admitted":true,"required_codes":["profile_contribution"],"forbidden_text":["secret zeolite project"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_orcid_profile","source":"fixture","fixture_id":"profile_assisted","profile_source":"orcid","expected":{"admitted":true,"required_codes":["profile_contribution"],"forbidden_text":["secret zeolite project"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_eligibility_rerank","source":"fixture","fixture_id":"profile_assisted","profile_source":"none","expected":{"admitted":true,"required_codes":["eligibility_contribution"],"forbidden_text":["secret zeolite project"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_generic_title_rerank","source":"fixture","fixture_id":"generic_title_rerank","expected":{"admitted":true,"tier":"contextual","required_codes":["field_context"],"required_fields":["parent_description"],"forbidden_claims":["generic_title_as_direct_scope"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_broader_fit","source":"fixture","fixture_id":"broader_fit","expected":{"admitted":true,"tier":"broader_program","required_codes":["broader_program"],"required_labels":["Broader program fit"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_weak_metadata","source":"fixture","fixture_id":"weak_metadata","expected":{"admitted":true,"tier":"weak_lexical","reason_count":0,"human_label":"correct_but_too_shallow","review_note":"Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."}},
-    {"id":"fixture_exact_number","source":"fixture","fixture_id":"explicit_title","override":{"query":"FIXTURE-001","exactOpportunityNumber":true},"expected":{"admitted":true,"tier":"direct","required_codes":["exact_opportunity_number"],"human_label":"correct_and_useful"}},
-    {"id":"fixture_no_query_echo","source":"fixture","fixture_id":"explicit_description","expected":{"admitted":true,"forbidden_complete_reasons":["Search terms matched: lanthanide, recovery.","Keyword match: lanthanide."],"human_label":"correct_and_useful"}}
+    {
+      "id": "scope_ree_cps",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "362061",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_ree_doe",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "360678",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_ree_genesis",
+      "source": "catalog_search",
+      "query": "REE separations",
+      "result_id": "361526",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_phrase_cps",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "362061",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_phrase_doe",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "360678",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_phrase_genesis",
+      "source": "catalog_search",
+      "query": "rare earth separations",
+      "result_id": "361526",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_solvent_cps",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "362061",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_solvent_doe",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "360678",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_solvent_genesis",
+      "source": "catalog_search",
+      "query": "solvent extraction of REEs",
+      "result_id": "361526",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_ionic_cps",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "362061",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_ionic_doe",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "360678",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "scope_ionic_genesis",
+      "source": "catalog_search",
+      "query": "ionic liquids for REE extraction",
+      "result_id": "361526",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "exact_doe_number",
+      "source": "catalog_search",
+      "query": "DE-FOA-0003600",
+      "result_id": "360678",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "exact_genesis_number",
+      "source": "catalog_search",
+      "query": "DE-FOA-0003612",
+      "result_id": "361526",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "exact_cps_title",
+      "source": "catalog_search",
+      "query": "Chemical Process Systems",
+      "result_id": "362061",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_title"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "child_genesis_catalyst",
+      "source": "catalog_search",
+      "query": "catalyst design",
+      "result_id": "361526",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "fielded_passage"
+        ],
+        "required_text": [
+          "Electrochemical Energy Conversion Catalyst Discovery and Scale up"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "child_army_electrochemistry",
+      "source": "catalog_search",
+      "query": "catalyst design",
+      "result_id": "344592",
+      "expected": {
+        "admitted": false,
+        "human_label": "correct_and_useful",
+        "review_note": "The Electrochemistry child establishes catalysis but not the complete catalyst-design intent; the generalized concise-query contract now rejects the partial match."
+      }
+    },
+    {
+      "id": "child_genesis_exact_title",
+      "source": "catalog_search",
+      "query": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+      "result_id": "361526",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy"
+        ],
+        "required_text": [
+          "Electrochemical Energy Conversion Catalyst Discovery and Scale up"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "child_army_summary",
+      "source": "catalog_search",
+      "query": "electrochemistry catalyst",
+      "result_id": "344592",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "explicit_cps_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "362061",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "fielded_passage"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "explicit_doe_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "360678",
+      "expected": {
+        "admitted": true,
+        "human_label": "correct_and_useful",
+        "review_note": "The local fielded architecture admits this result from the authoritative program-area field, not from collapsed citation-source text."
+      }
+    },
+    {
+      "id": "explicit_chemistry_catalysis",
+      "source": "catalog_search",
+      "query": "catalysis",
+      "result_id": "347749",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "fielded_passage"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "negative_nasa_earth",
+      "source": "catalog_search",
+      "query": "REEs",
+      "result_id": "363224",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "negative_policy_workshop",
+      "source": "catalog_search",
+      "query": "REE",
+      "result_id": "362900",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "negative_rare_disease",
+      "source": "catalog_search",
+      "query": "REEs",
+      "result_id": "359996",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "weak_cfd_collision",
+      "source": "catalog_search",
+      "query": "CFD",
+      "result_id": "329436",
+      "expected": {
+        "admitted": false,
+        "reason_count": 0,
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_explicit_title",
+      "source": "fixture",
+      "fixture_id": "explicit_title",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "query_interpretation",
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_title"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_explicit_description",
+      "source": "fixture",
+      "fixture_id": "explicit_description",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_expanded_lanthanide",
+      "source": "fixture",
+      "fixture_id": "expanded_lanthanide",
+      "expected": {
+        "admitted": true,
+        "tier": "expanded",
+        "required_codes": [
+          "query_interpretation",
+          "field_context"
+        ],
+        "required_text": [
+          "lanthanide"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_target_method",
+      "source": "fixture",
+      "fixture_id": "explicit_title",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_concepts": [
+          "rare-earth-elements",
+          "separations"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_child_title",
+      "source": "fixture",
+      "fixture_id": "child_title",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_text": [
+          "Catalysis Science"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_child_summary",
+      "source": "fixture",
+      "fixture_id": "child_summary",
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "child_hierarchy",
+          "field_context"
+        ],
+        "required_fields": [
+          "child_summary"
+        ],
+        "required_text": [
+          "Molecular Transformations"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_review_child_no_leak",
+      "source": "fixture",
+      "fixture_id": "review_only_child",
+      "expected": {
+        "admitted": true,
+        "tier": "weak_lexical",
+        "reason_count": 0,
+        "forbidden_text": [
+          "Internal Review Separation Science",
+          "fixture-review-child:rss"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_manual_profile",
+      "source": "fixture",
+      "fixture_id": "profile_assisted",
+      "profile_source": "manual",
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_cv_profile",
+      "source": "fixture",
+      "fixture_id": "profile_assisted",
+      "profile_source": "cv",
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_orcid_profile",
+      "source": "fixture",
+      "fixture_id": "profile_assisted",
+      "profile_source": "orcid",
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "profile_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_eligibility_rerank",
+      "source": "fixture",
+      "fixture_id": "profile_assisted",
+      "profile_source": "none",
+      "expected": {
+        "admitted": true,
+        "required_codes": [
+          "eligibility_contribution"
+        ],
+        "forbidden_text": [
+          "secret zeolite project"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_generic_title_rerank",
+      "source": "fixture",
+      "fixture_id": "generic_title_rerank",
+      "expected": {
+        "admitted": true,
+        "tier": "contextual",
+        "required_codes": [
+          "field_context"
+        ],
+        "required_fields": [
+          "parent_description"
+        ],
+        "forbidden_claims": [
+          "generic_title_as_direct_scope"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_broader_fit",
+      "source": "fixture",
+      "fixture_id": "broader_fit",
+      "expected": {
+        "admitted": true,
+        "tier": "broader_program",
+        "required_codes": [
+          "broader_program"
+        ],
+        "required_labels": [
+          "Broader program fit"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_weak_metadata",
+      "source": "fixture",
+      "fixture_id": "weak_metadata",
+      "expected": {
+        "admitted": true,
+        "tier": "weak_lexical",
+        "reason_count": 0,
+        "human_label": "correct_but_too_shallow",
+        "review_note": "Generic topic metadata is insufficient for a causal scientific explanation and should not be dressed up as one."
+      }
+    },
+    {
+      "id": "fixture_exact_number",
+      "source": "fixture",
+      "fixture_id": "explicit_title",
+      "override": {
+        "query": "FIXTURE-001",
+        "exactOpportunityNumber": true
+      },
+      "expected": {
+        "admitted": true,
+        "tier": "direct",
+        "required_codes": [
+          "exact_opportunity_number"
+        ],
+        "human_label": "correct_and_useful"
+      }
+    },
+    {
+      "id": "fixture_no_query_echo",
+      "source": "fixture",
+      "fixture_id": "explicit_description",
+      "expected": {
+        "admitted": true,
+        "forbidden_complete_reasons": [
+          "Search terms matched: lanthanide, recovery.",
+          "Keyword match: lanthanide."
+        ],
+        "human_label": "correct_and_useful"
+      }
+    }
   ]
 }

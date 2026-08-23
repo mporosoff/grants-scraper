@@ -392,3 +392,40 @@ The authoritative decision is `evaluation/search_v2_release_candidate_v2.json`; 
 **PHASE 4B BLOCKED — PHASE 5 NOT AUTHORIZED**
 
 The Phase-4B holdout is permanently spent and must not be rerun as acceptance. If work continues, these outputs become Iteration-3 challenge evidence and a new sealed holdout must be frozen before any tuning.
+
+## Local search architecture reset
+
+The local architecture reset began from `29d94701e13134dcfefb991a5c69a6589c57c273` on `search-quality-v2`. It tested the smallest conventional information-retrieval replacement for the manually configured scientific relationship system. Phase 4C was not opened: its frame remains at SHA-256 `7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e`, its manifest remains at `d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c`, and no Phase-4C result or truth artifact exists.
+
+Before implementation, the 19 Phase-4B missed anchors were audited against the text already present in six authoritative fields. Only one anchor had complete query support in a single passage, one had complete support split across fields, and one had partial support that still depended on a scientific relationship. Sixteen of 19 did not contain enough query-side vocabulary for conventional fielded ranking to establish the complete intent. The detailed query/anchor evidence and post-implementation fate are preserved in `evaluation/search_v2_local_field_feasibility.json`.
+
+The reset replaces collapsed-text scoring and configured scientific entailment with a browser-local fielded passage scorer:
+
+- parent title, publication-eligible child title, child summary, parent description, authoritative program area, and bounded authoritative document scope remain separate scoring fields;
+- BM25-style term saturation and per-field length normalization are combined with field weights, exact phrase bonuses, bounded proximity bonuses, and a cubic query-coordination factor;
+- concise two-to-five-concept searches require complete coordination for primary admission; near-complete coherent evidence may be labeled broader, while partial candidates are rejected;
+- short uppercase acronyms and identifiers require exact indexed evidence or a high-confidence existing acronym expansion, and fuzzy recovery is limited to edit distance one for terms of at least seven characters when exact evidence is absent;
+- a parent inherits only the strongest single matching parent or child passage, with no child-count bonus and no cross-child evidence stitching;
+- candidate discovery, final primary/broader/reject classification, and ranking evidence are recorded separately;
+- `Why this matched` extracts the highest-contributing verified field or passage and never presents a score, fuzzy relationship, or configured entailment as agency language.
+
+All active scientific relationship maps are now empty. Relative to the starting candidate, active configuration was reduced from 25 concept families, three controlled relationships, 11 source-scope relationships, 21 authoritative-scope entailments, one configured broader fit, and 43 query contract cases to zero of each. The retained acronym table is bounded normalization, not a scientific scope map.
+
+This architecture produces a real precision improvement but does not generalize well enough to open Phase 4C. Across both spent acceptance populations (52 queries, 65 required anchors), primary Precision@10 is 0.974, required-primary Recall@10 and Recall@50 are both 0.185, and nDCG@10 is 0.375. Fourteen primaries are visible after 11,857 internal candidates; 92 results are separated as broader fit and 11,751 partial-intent candidates are rejected. Two visible results are irrelevant or unjudged under existing spent-set truth, and the maximum visible-primary count is three.
+
+| Spent population | Precision@10 | Recall@10 / Recall@50 | nDCG@10 | Visible primaries | Non-primary or unjudged primaries |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Phase 4, 24 queries / 38 anchors | 0.944 | 0.105 / 0.105 | 0.236 | 6 | 2 |
+| Phase 4B, 28 queries / 27 anchors | 1.000 | 0.296 / 0.296 | 0.494 | 8 | 0 |
+
+Because every scientific family and program-specific scope map is globally withheld, the same results are also the leave-family/program-out test. Recall@50 is zero for materials (31 anchors), agriculture (three), chemistry (three), defense (two), and biology (one); it is 0.333 for space, 0.400 for energy and environment, 0.500 for AI/computing, and 0.750 for health. Hard negatives produce zero primaries. Three of the 19 Phase-4B missed anchors become visible, while 16 remain rejected.
+
+The result is not a ranking-weight failure. Candidate discovery remains broad, and the scorer ranks rich explicit child passages effectively when the query vocabulary is present. The blocking limitation is source representation: ordinary lexical IR cannot infer material hierarchies, method paraphrases, properties, or program objectives that are absent from the authoritative indexed passages, while relaxing complete-intent coordination would recreate the proven false-positive problem. No query exception, program signature, semantic dependency, paid API, hosted service, query-time model, or new infrastructure was added.
+
+The browser suite passes 145 tests; focused Python search and size suites pass 32 tests; the scoring/no-drift Python group passes 22 tests; the historical 37-query production baseline has zero top-ten churn; the hermetic rebuild preserves all 22 governed artifacts; and the 42-pair explanation frame retains 41 correct-and-useful cases, one reviewed shallow case, and zero unsupported, privacy-leaking, or review-only explanations. The 49-query search-v2 development gate correctly fails this candidate, and 44 of 48 MEAS-5 queries move, so the reset is not a release candidate. The full 827-test Python discovery still has the same 10 failures and one error confined to inherited frozen-census P5/P7/MEAS-8 modules.
+
+Measured over the 52 spent queries, scoring latency is 38.08 ms p50 and 109.08 ms p95. The three coordinated browser assets shrink by 27,286 bytes overall: retrieval grows by 24,852 bytes, the generated configuration wrapper shrinks by 53,047 bytes after removing the mappings, and explanations grow by 909 bytes.
+
+The machine-readable measurements are `evaluation/search_v2_local_architecture_results.json`, `evaluation/search_v2_local_architecture_leaveout.json`, and `evaluation/search_v2_local_architecture_gate_report.json`. The architecture is retained as bounded experimental evidence on `search-quality-v2`, but it is not authorized for Phase 4C or production.
+
+**LOCAL ARCHITECTURE STILL INSUFFICIENT — INDEXED AUTHORITATIVE TEXT LACKS COMPLETE QUERY VOCABULARY FOR 16 OF 19 AUDITED MISSED ANCHORS**

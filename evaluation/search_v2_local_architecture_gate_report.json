@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "evaluation_date": "2026-08-23",
+  "branch": "search-quality-v2",
+  "starting_sha": "29d94701e13134dcfefb991a5c69a6589c57c273",
+  "decision": "LOCAL ARCHITECTURE STILL INSUFFICIENT",
+  "specific_limitation": "Sixteen of the 19 Phase-4B missed anchors lack enough query-side material, method, property, or objective vocabulary in the indexed authoritative passages for conventional fielded retrieval to verify complete intent. Relaxing coordination would recreate the measured partial-intent false positives.",
+  "phase4c_authorized": false,
+  "phase5_authorized": false,
+  "production_search_v2_enabled": false,
+  "main_touched": false,
+  "phase4c": {
+    "frame_sha256": "7fde6b7ccbdab59331c26899f37bdbb8f9ee7e30f8f3632f257e28d27124865e",
+    "manifest_sha256": "d45fcc91a52d01673cf1fa5bc91f25ed26c0c8f92f970e902559ecbda9164c6c",
+    "execution_count": 0,
+    "result_or_truth_artifacts": 0,
+    "status": "sealed_unexecuted"
+  },
+  "spent_holdout_preservation": {
+    "phase4_raw_sha256": "8d4a1d37e0940fde1eefdd3dca7f3fa2a39a40194ce6b083b40eafd4897fb919",
+    "phase4b_raw_sha256": "fef755fb0bfdd2f485bf712478dc3b82623038882f9e961746d79ac599ff8af5",
+    "modified": false
+  },
+  "architecture_before": {
+    "ranking": "collapsed lexical scoring plus evidence tiers and configured concept-family/program-scope verification",
+    "active_manual_relationship_mappings": {
+      "concept_families": 25,
+      "controlled_relationships": 3,
+      "source_scope_relationships": 11,
+      "authoritative_scope_entailments": 21,
+      "broader_program_fits": 1,
+      "query_contract_cases": 43
+    }
+  },
+  "architecture_after": {
+    "ranking": "bm25f_passage_coordination",
+    "fields": [
+      "parent_title",
+      "child_title",
+      "child_summary",
+      "parent_description",
+      "authoritative_program_area",
+      "authoritative_document_scope"
+    ],
+    "signals": [
+      "field-aware BM25 saturation and length normalization",
+      "exact phrase bonus",
+      "bounded term proximity bonus",
+      "cubic substantive-query coordination",
+      "exact short-acronym and identifier handling",
+      "conservative stemming and edit-distance-one fuzzy recovery",
+      "strongest single parent-or-child passage rollup"
+    ],
+    "candidate_and_final_score_separated": true,
+    "child_count_bonus": 0,
+    "cross_child_evidence_stitching": false,
+    "extractive_highest_contributing_passage_explanations": true,
+    "active_manual_relationship_mappings": {
+      "concept_families": 0,
+      "controlled_relationships": 0,
+      "source_scope_relationships": 0,
+      "authoritative_scope_entailments": 0,
+      "broader_program_fits": 0,
+      "query_contract_cases": 0
+    }
+  },
+  "phase4b_19_anchor_feasibility": {
+    "anchor_count": 19,
+    "full_single_passage_text_support": 1,
+    "full_fielded_support_but_not_one_passage": 1,
+    "partial_text_support_relationship_still_required": 1,
+    "insufficient_indexed_text_for_conventional_ranking": 16,
+    "visible_after_implementation": 3,
+    "still_not_primary": 16
+  },
+  "spent_holdout_metrics": {
+    "combined": {
+      "query_count": 52,
+      "required_anchor_count": 65,
+      "primary_precision_at_10": 0.974359,
+      "required_primary_recall_at_10": 0.184615,
+      "required_primary_recall_at_50": 0.184615,
+      "ndcg_at_10": 0.374587,
+      "visible_primary_count": 14,
+      "maximum_visible_primary_count": 3,
+      "internal_candidate_count": 11857,
+      "maximum_internal_candidate_count": 793,
+      "broader_fit_count": 92,
+      "rejected_partial_intent_count": 11751,
+      "irrelevant_or_unjudged_visible_primary_count": 2
+    },
+    "phase4_iteration1": {
+      "query_count": 24,
+      "required_anchor_count": 38,
+      "primary_precision_at_10": 0.944444,
+      "required_primary_recall_at_10": 0.105263,
+      "required_primary_recall_at_50": 0.105263,
+      "ndcg_at_10": 0.235511,
+      "visible_primary_count": 6,
+      "irrelevant_or_unjudged_visible_primary_count": 2
+    },
+    "phase4b_iteration2": {
+      "query_count": 28,
+      "required_anchor_count": 27,
+      "primary_precision_at_10": 1.0,
+      "required_primary_recall_at_10": 0.296296,
+      "required_primary_recall_at_50": 0.296296,
+      "ndcg_at_10": 0.493794,
+      "visible_primary_count": 8,
+      "irrelevant_or_unjudged_visible_primary_count": 0
+    }
+  },
+  "leave_out_metrics": {
+    "methodology": "All scientific relationship and program-specific scope mappings are withheld globally, so every family and program slice uses the same untuned fielded architecture.",
+    "invariant_verified": true,
+    "required_primary_recall_at_50_by_family": {
+      "materials": 0.0,
+      "agriculture": 0.0,
+      "chemistry": 0.0,
+      "defense": 0.0,
+      "biology": 0.0,
+      "space": 0.333333,
+      "energy": 0.4,
+      "environment": 0.4,
+      "ai_computing": 0.5,
+      "health": 0.75
+    },
+    "hard_negative_visible_primary_count": 0,
+    "outcome": "failed_generalization_gate"
+  },
+  "error_analysis": {
+    "false_negatives": "Dominated by absent indexed query vocabulary, including material hierarchies, method paraphrases, properties, and program objectives. Discovery is broad but complete-intent verification cannot ground these relationships in source text.",
+    "false_positives": "Two Phase-4 spent-set visible primaries are irrelevant or unjudged; Phase-4B has none. Strict coordination and exact acronym handling eliminate visible-primary explosions and keep hard negatives at zero.",
+    "ranking_finding": "When complete vocabulary occurs in a rich child or authoritative passage, strongest-passage rollup ranks it effectively; global field-weight tuning is not the owner of the remaining misses."
+  },
+  "explanations": {
+    "frame_cases": 42,
+    "correct_and_useful": 41,
+    "reviewed_shallow": 1,
+    "unsupported": 0,
+    "private_or_review_only_leakage": 0,
+    "contract": "verification evidence only; highest-contributing extractive field or passage"
+  },
+  "performance": {
+    "spent_query_p50_ms": 38.0768,
+    "spent_query_p95_ms": 109.0765,
+    "spent_query_maximum_ms": 150.3437,
+    "asset_bytes": {
+      "search_retrieval_delta": 24852,
+      "generated_config_delta": -53047,
+      "match_explain_delta": 909,
+      "combined_delta": -27286
+    }
+  },
+  "tests": {
+    "browser": {
+      "passed": 145,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "focused_python_search_and_size": {
+      "passed": 32,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "python_scoring_and_no_drift": {
+      "passed": 22,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "historical_query_baseline": {
+      "queries": 37,
+      "top_10_churn": 0,
+      "exit_code": 0
+    },
+    "hermetic_no_drift": {
+      "artifacts": 22,
+      "changed": 0,
+      "exit_code": 0
+    },
+    "search_v2_development_gate": {
+      "queries": 49,
+      "status": "failed_as_expected",
+      "exit_code": 1
+    },
+    "meas5": {
+      "queries": 48,
+      "disciplines": 11,
+      "top_10_movements": 44,
+      "status": "review_required_not_release_ready"
+    },
+    "full_python_discovery": {
+      "tests_run": 827,
+      "failures": 10,
+      "errors": 1,
+      "exit_code": 1,
+      "scope": "unchanged inherited frozen-census P5/P7/MEAS-8 failures"
+    }
+  },
+  "prohibited_changes": {
+    "query_specific_fixes": false,
+    "program_specific_mappings": false,
+    "generated_program_signatures": false,
+    "paid_or_hosted_service": false,
+    "query_time_llm": false,
+    "new_infrastructure": false,
+    "phase4c_opened": false,
+    "production_enabled": false,
+    "deployed": false
+  }
+}
