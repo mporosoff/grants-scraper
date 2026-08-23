@@ -86,6 +86,8 @@ test("spent product metrics expose the observed Strong blocker without hiding di
   assert.equal(metrics.combined.required_recall_at_20, 0.907692);
   assert.equal(metrics.combined.required_recall_at_50, 0.953846);
   assert.equal(metrics.potential.maximum_displayed_count, 12);
+  assert.equal(metrics.potential.top_10_known_irrelevant_count, 5);
+  assert.equal(metrics.potential.top_10_reviewed_primary_count, 49);
   assert.equal(results.quality.acronym_safeguard.appears_in_strong, false);
   assert.deepEqual(gate.blocking_gates, [
     "strong_precision_at_least_0_90",

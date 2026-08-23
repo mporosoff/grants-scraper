@@ -138,6 +138,7 @@ function aggregate(rows) {
   const positiveRows = rows.filter(row => row.required_primary_ids.length);
   const strongReviews = rows.map(row => row.strong.review);
   const potentialReviews = rows.map(row => row.potential.review);
+  const potentialTop10 = rows.flatMap(row => row.potential.rows.slice(0, 10));
   const strongReviewed = strongReviews.reduce((sum, value) => sum + value.reviewed_count, 0);
   const strongPrimary = strongReviews.reduce((sum, value) => sum + value.reviewed_primary_count, 0);
   return {
@@ -165,6 +166,15 @@ function aggregate(rows) {
     potential: {
       displayed_count: rows.reduce((sum, row) => sum + row.potential.ids.length, 0),
       maximum_displayed_count: Math.max(0, ...rows.map(row => row.potential.ids.length)),
+      top_10_pair_count: potentialTop10.length,
+      top_10_reviewed_primary_count: potentialTop10
+        .filter(item => item.existing_truth === "primary_relevant").length,
+      top_10_known_irrelevant_count: potentialTop10
+        .filter(item => item.existing_truth === "irrelevant").length,
+      top_10_reviewed_non_primary_count: potentialTop10
+        .filter(item => ["irrelevant", "broader_program_fit", "reviewed_non_primary"]
+          .includes(item.existing_truth)).length,
+      top_10_unreviewed_count: potentialTop10.filter(item => !item.existing_truth).length,
       reviewed_pair_count: potentialReviews.reduce((sum, value) => sum + value.reviewed_count, 0),
       reviewed_primary_count: potentialReviews.reduce((sum, value) => sum + value.reviewed_primary_count, 0),
       known_irrelevant_count: potentialReviews.reduce((sum, value) => sum + value.known_irrelevant_count, 0),

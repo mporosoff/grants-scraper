@@ -654,6 +654,11 @@ irrelevant, and 110 are broader or otherwise reviewed non-primary. Ten
 zero-anchor queries receive Potential results, which is expected under the
 explicit uncertain-lead contract.
 
+At the requested top-10 cutoff, Potential contains 490 query/result positions:
+49 are reviewed primary relevant, five are known irrelevant, 109 are broader
+or otherwise reviewed non-primary, and 327 remain unreviewed. Those figures are
+reported as review-load evidence, not as verified Potential precision.
+
 The Strong gate nevertheless remains blocked. The unchanged local matcher
 returns 14 Strong results: 12 primary relevant, one adjudicated broader fit,
 and one newly reviewed irrelevant hard-negative result. Reviewed Strong

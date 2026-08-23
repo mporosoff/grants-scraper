@@ -40,6 +40,11 @@
     "potential": {
       "displayed_count": 588,
       "maximum_displayed_count": 12,
+      "top_10_pair_count": 490,
+      "top_10_reviewed_primary_count": 49,
+      "top_10_known_irrelevant_count": 5,
+      "top_10_reviewed_non_primary_count": 114,
+      "top_10_unreviewed_count": 327,
       "reviewed_pair_count": 165,
       "reviewed_primary_count": 50,
       "known_irrelevant_count": 5,
