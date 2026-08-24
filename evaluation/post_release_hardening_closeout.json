@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T11:55:36.6416838Z",
+  "release": "Funding Finder v1.2.1 post-release hardening",
+  "starting_sha": "505af687c9b3620454371de475ffe7c2adb176d6",
+  "final_release_sha": "ad493fa202d422acc1b3bb14534e3ddd7c122e37",
+  "closeout_parent_sha": "ad493fa202d422acc1b3bb14534e3ddd7c122e37",
+  "implementation_shas": {
+    "hardening_operations": "a12dcc878de46a261ddd09b31eb970a0f616e849",
+    "complete_match_explanations": "79eb2ed548203df127d7eaf5dca6d81f85d6a4c1",
+    "generation_aware_refresh_gates": "e210867529f98ceb613e6f19c68f5951cfca2588",
+    "worker_handshake_retry": "913592fd81fce6aabfb1c9ede1a8c4f60d85cf70",
+    "stale_generation_guard": "1e8beb316a26a6f6424638fc181b43dc6e49aee3",
+    "protected_pull_request_publisher": "9fb3649f13ef2d769e25a8d104826b32e2882bff"
+  },
+  "production_generation": {
+    "generated_at": "2026-08-24T11:49:38.828Z",
+    "build_mode": "production_full_rebuild",
+    "model": "voyage-4-lite",
+    "response_model": "voyage-4-lite",
+    "dimension": 1024,
+    "vector_format": "float16-le",
+    "passage_count": 1670,
+    "reused_passage_count": 0,
+    "embedded_passage_count": 1670,
+    "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "worker_allowlist_sha256": "75b353877d21e10ecef0edb127ccafa3b63342323813c3dd5ef59586e2be22af",
+    "api_request_count": 8,
+    "usage_total_tokens": 400338,
+    "estimated_embedding_cost_usd": 0.008007,
+    "model_space_gate": {
+      "prior_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+      "drift_detected": false,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
+      "minimum_cosine_gate": 0.95,
+      "mean_cosine_gate": 0.98,
+      "gross_discontinuity": false,
+      "status": "passed"
+    },
+    "atomic_publication_contract": "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist"
+  },
+  "worker": {
+    "service": "funding-finder-voyage-search",
+    "version_id": "7055f9eb-d5e7-4444-abab-4e1a968af641",
+    "health": {
+      "service": "available",
+      "corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+      "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+      "previous_corpus_supported": true,
+      "budget_state": "available"
+    },
+    "circuit_breaker": "ENHANCED_SEARCH_ENABLED",
+    "daily_token_budgets": {
+      "embed": 50000,
+      "rerank": 25000000
+    },
+    "per_client_requests_per_minute": {
+      "embed": 12,
+      "rerank": 8
+    },
+    "global_requests_per_minute": 600,
+    "retry_after_seconds": 10,
+    "stored_metrics_policy": "daily endpoint aggregates only; no query, passage, researcher, profile, or IP data"
+  },
+  "credentials": {
+    "values_recorded": false,
+    "github_actions_secrets": {
+      "VOYAGE_API_KEY": "present; updated 2026-08-24T08:38:53Z",
+      "CLOUDFLARE_ACCOUNT_ID": "present; updated 2026-08-24T08:58:44Z",
+      "CLOUDFLARE_API_TOKEN": "present; updated 2026-08-24T10:35:53Z; least-privilege account token; expires 2027-08-24",
+      "ANTHROPIC_API_KEY": "present",
+      "VPR_IMAP_USER": "present",
+      "VPR_IMAP_PASS": "present"
+    }
+  },
+  "branch_protection": {
+    "ruleset_id": 21286570,
+    "ruleset_name": "Main release protection",
+    "target": "refs/heads/main",
+    "enforcement": "active",
+    "pull_request_required": true,
+    "required_status_checks": [
+      "python",
+      "browser"
+    ],
+    "strict_status_checks": true,
+    "branch_deletion_blocked": true,
+    "force_push_blocked": true,
+    "bypass_actors": [],
+    "current_user_can_bypass": "never",
+    "workflow_default_permissions": "read",
+    "actions_can_create_and_approve_pull_requests": true,
+    "automation_authority_boundary": "Only the coordinated refresh workflow declares contents, pull-requests, statuses, and issues write permissions. Generated packages are pushed to a unique automation branch and merged through a checked pull request; main has no automation bypass."
+  },
+  "publication_evidence": {
+    "pre_protection_pull_request_proof": {
+      "run_id": 32722375456,
+      "pull_request": 32,
+      "merge_sha": "21c5a956acad38e06406f9d26a7d72a688f1bd48",
+      "python_status": "success",
+      "browser_status": "success",
+      "worker_handshake": "passed_attempt_1",
+      "pages_handshake": "passed"
+    },
+    "protected_manual_dispatch": {
+      "run_id": 32723159791,
+      "event": "workflow_dispatch",
+      "starting_sha": "21c5a956acad38e06406f9d26a7d72a688f1bd48",
+      "status": "success",
+      "pull_request": 33,
+      "pull_request_author": "app/github-actions",
+      "merge_sha": "ad493fa202d422acc1b3bb14534e3ddd7c122e37",
+      "python_status": "success",
+      "browser_status": "success",
+      "stale_generation_guard": "passed",
+      "worker_handshake": "passed_attempt_1",
+      "pages_handshake": "passed",
+      "pages_deployment_run_id": 32723946373,
+      "pages_deployment_status": "success"
+    }
+  },
+  "catalog_correctness": {
+    "record_count": 1457,
+    "catalog_precedence_deduplication": {
+      "source_records_parsed": 44,
+      "source_records_after_deduplication": 41,
+      "normalized_vpr_or_cindy_to_catalog_title_collisions": 0,
+      "normalized_opportunity_number_collisions": 0,
+      "catalog_record_wins": true,
+      "regression_tests": "passed"
+    },
+    "vpr_and_cindy": {
+      "scanned_messages": 164,
+      "required_streams": [
+        "cindy",
+        "vpr"
+      ],
+      "missing_streams": [],
+      "cindy": {
+        "accepted_messages": 2,
+        "parsed_records": 41
+      },
+      "vpr": {
+        "accepted_messages": 3,
+        "parsed_records": 3
+      }
+    },
+    "private_link_enrichment": {
+      "enabled": true,
+      "attempted": 13,
+      "succeeded": 5,
+      "unavailable": 6,
+      "failed": 2,
+      "fields": [
+        "sponsor",
+        "description",
+        "eligibility_text",
+        "close_date",
+        "award_ceiling"
+      ],
+      "failures_preserve_email_fields": true
+    },
+    "deadline_audit": {
+      "exact_2076_date_values": 0,
+      "transport_phenomena": {
+        "opportunity_id": "362063",
+        "opportunity_number": "PD-26-366Y",
+        "close_date": null,
+        "deadlines": [],
+        "rolling": true,
+        "live_card": "Rolling / open until superseded"
+      },
+      "far_future_lifecycle_sentinels_suppressed": true,
+      "legitimate_long_range_dod_notices_retained": true
+    },
+    "email_derived_card_examples": {
+      "pumpprimer_ii": {
+        "close_date": "2026-10-23",
+        "award_ceiling": 65000,
+        "opportunity_url": "https://rochester.infoready4.com/"
+      },
+      "acs_petroleum_research_fund": {
+        "close_date": "2026-09-14",
+        "opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"
+      },
+      "acs_new_directions": {
+        "close_date": "2026-09-14",
+        "award_ceiling": 125000,
+        "opportunity_url": "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"
+      }
+    }
+  },
+  "product_contracts": {
+    "help_and_privacy": {
+      "processing_modes": [
+        "Strong matching runs locally.",
+        "Hosted Potential matching sends the submitted search text and bounded public opportunity passages to the Funding Finder Worker.",
+        "CV text, full profiles, researcher names, and ORCID publication text are not sent to the hosted Potential service.",
+        "User-connected AI sends only explicitly enabled bounded context directly to the selected provider."
+      ],
+      "use_notice": "Funding Finder is an informational research-planning aid, not an official source of record, application or submission system, or legal, financial, compliance, or sponsor guidance."
+    },
+    "sort_and_filter": "Query, currentness, and active filters determine membership; Strong precedes Potential; the selected sort applies within each tier; filter eligibility is applied before bounded retrieval.",
+    "team_match": "Every displayed opportunity must pass the local fit check for every selected researcher. Hosted semantic ranking may reorder but cannot add an ineligible opportunity. Researcher names and publication text are not sent.",
+    "fallback": "Worker errors, timeouts, rate limits, exhausted budgets, mixed assets, or package propagation failures preserve complete local Strong results and show a visible limited or unavailable state.",
+    "opportunity_buttons": {
+      "compact_labels": true,
+      "narrow_card_wrapping": true,
+      "pumpprimer_live_label": "Open opportunity",
+      "agency_live_label": "Open agency notice",
+      "all_sampled_primary_links_visible": true
+    },
+    "match_explanations": {
+      "non_expandable_text_ends_in_complete_sentences_or_phrases": true,
+      "trailing_ellipsis_count_in_live_samples": 0,
+      "regression_tests": "passed"
+    }
+  },
+  "quality_and_performance": {
+    "local_final_gates": {
+      "python_tests": 769,
+      "browser_tests": 216,
+      "query_baseline": "37 queries; zero top-10 churn",
+      "p9_scoring": "50 cases; byte-identical"
+    },
+    "protected_manual_refresh_gates": {
+      "python": "passed",
+      "browser_and_search_package": "passed",
+      "package_integrity": "passed",
+      "phase4c_rerun": false
+    },
+    "spent_development_latency_ms": {
+      "cold_first_query": 1103.3058,
+      "warm_p50": 635.8259,
+      "warm_p95": 811.9902,
+      "maximum": 1103.3058,
+      "cold_target": 3000,
+      "warm_target": 1000,
+      "status": "passed"
+    },
+    "spent_development_quality": {
+      "queries": 52,
+      "strong_precision_at_10_over_reviewed": 1,
+      "combined_required_recall_at_10": 0.861538,
+      "combined_required_recall_at_20": 0.907692,
+      "combined_required_recall_at_50": 0.953846,
+      "query_average_ndcg_at_10": 0.774354,
+      "known_irrelevant_strong_count": 0,
+      "api_errors_or_timeouts": 0,
+      "estimated_cost_usd": 0.155594,
+      "status": "passed"
+    }
+  },
+  "live_smoke": {
+    "funding_finder_version": "v1.2.1",
+    "updated_label": "Aug 24, 2026",
+    "catalog_loaded": true,
+    "transport_phenomena_rolling": true,
+    "transport_phenomena_contains_2076": false,
+    "pumpprimer_link_visible": true,
+    "acs_link_visible": true,
+    "match_explanation_clipped_endings": 0,
+    "team_match_loaded": true,
+    "team_match_add_researcher_controls": 1,
+    "team_match_visible_errors": 0,
+    "worker_health": "available"
+  },
+  "known_limitations": [
+    "Some official sites block automation. The final refresh retained healthy last-known-good records or failed closed; the degraded-source GitHub issue remains the operational alert channel.",
+    "Private-funder enrichment is best effort. ACS challenge pages and Sony HTTP 403 responses can prevent synopsis extraction, so cards preserve email-derived facts and the official link instead of fabricating text.",
+    "The JHU fellowships all-audience source can return HTTP 403 and therefore publishes zero rather than a partial snapshot.",
+    "The repository-wide GitHub setting allowing Actions to create and approve pull requests is enabled by explicit owner approval. Default workflow permissions remain read-only, main has no bypass, and only the coordinated refresh workflow currently requests publication permissions.",
+    "A just-deployed Pages edge may briefly serve a prior HTML/asset combination. The coordinated manifest handshake and fail-closed catalog state prevent mixed release use; the final cache-busted live check loaded the complete catalog."
+  ],
+  "rollback": {
+    "application": "Create a protected pull request that reverts the relevant hardening or release commit; do not force push main.",
+    "enhanced_search": "Set ENHANCED_SEARCH_ENABLED to false through a protected configuration pull request and deploy the Worker to keep local Strong matching available while hosted ranking is disabled.",
+    "generation": "The Worker retains current and immediately previous corpus support; restore a prior coordinated package only through the refresh workflow or a checked pull request.",
+    "automation": "If automated PR publication must be disabled, turn off the refresh schedule or its write permissions and set can_approve_pull_request_reviews to false after confirming no refresh PR is active.",
+    "ruleset": "Modify or disable ruleset 21286570 only as an explicit incident-response action, then restore PR, strict python/browser, deletion, and non-fast-forward rules."
+  },
+  "decision": "V1.2.1 HARDENING RELEASE DEPLOYED AND LIVE-VERIFIED"
+}
