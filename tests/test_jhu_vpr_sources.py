@@ -235,6 +235,72 @@ class VPREmailTests(unittest.TestCase):
         self.assertIn("Engineering and Physical Sciences", record["disciplines"])
         self.assertIn("Environmental and Life Sciences", record["disciplines"])
 
+    def test_private_funder_page_fills_missing_card_details_when_enabled(self):
+        digest = """
+        <p><b><u>External Funding</u></b></p>
+        <p><b>ACS Petroleum Research Fund New Directions</b></p>
+        <p><a href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html">Sponsor website</a></p>
+        <p><b>Deadline:</b> October 23, 2026</p>
+        """
+        page = """
+        <html><head><meta name="description" content="The New Directions program supports innovative petroleum-relevant research that enables investigators to pursue a new scientific direction."></head>
+        <body>
+          <p>Eligibility: Tenured or tenure-track faculty at eligible nonprofit institutions may apply.</p>
+          <p>Maximum award amount: up to $125,000 for a two-year project.</p>
+        </body></html>
+        """
+
+        class Response:
+            url = "https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"
+            headers = {"content-type": "text/html; charset=utf-8"}
+            content = page.encode()
+            text = page
+
+            @staticmethod
+            def raise_for_status():
+                return None
+
+        adapter = VPREmailAdapter()
+        with patch.dict(os.environ, {"VPR_ENRICH_LINKS": "true"}), patch(
+            "scripts.sources.adapters.vpr_email.requests.get",
+            return_value=Response(),
+        ) as fetched:
+            opportunity = list(adapter.parse([{"stream": "vpr", "body": digest}]))[0]
+
+        self.assertIn("innovative petroleum-relevant research", opportunity.description)
+        self.assertIn("Tenured or tenure-track faculty", opportunity.eligibility_text)
+        self.assertEqual(opportunity.award_ceiling, "125000")
+        self.assertEqual(
+            opportunity.agency,
+            "American Chemical Society Petroleum Research Fund",
+        )
+        self.assertEqual(adapter.diagnostics["private_link_enrichment"]["succeeded"], 1)
+        fetched.assert_called_once()
+
+    def test_blocked_private_page_keeps_the_sponsor_and_email_fields(self):
+        digest = """
+        <p><b><u>External Funding</u></b></p>
+        <p><b>ACS Petroleum Research Fund Doctoral New Investigator</b></p>
+        <p><a href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html">Sponsor website</a></p>
+        <p><b>Deadline:</b> October 23, 2026</p>
+        <p><b>Amount:</b> up to $110,000</p>
+        """
+
+        adapter = VPREmailAdapter()
+        with patch.dict(os.environ, {"VPR_ENRICH_LINKS": "true"}), patch(
+            "scripts.sources.adapters.vpr_email.requests.get",
+            side_effect=ValueError("sponsor blocks automated retrieval"),
+        ):
+            opportunity = list(adapter.parse([{"stream": "vpr", "body": digest}]))[0]
+
+        self.assertEqual(
+            opportunity.agency,
+            "American Chemical Society Petroleum Research Fund",
+        )
+        self.assertEqual(opportunity.close_date, "2026-10-23")
+        self.assertEqual(opportunity.award_ceiling, "110000")
+        self.assertEqual(adapter.diagnostics["private_link_enrichment"]["failed"], 1)
+
     def _message(self, sender, subject, body, subtype="plain"):
         message = EmailMessage()
         message["From"] = sender

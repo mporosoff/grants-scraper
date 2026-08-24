@@ -260,6 +260,46 @@ class EnrichmentTests(unittest.TestCase):
         )
         self.assertTrue(merged["status_verification_required"])
 
+    def test_suppresses_open_ended_detail_deadline_and_marks_rolling(self):
+        record = base_record()
+        record["close_date"] = "2076-08-20"
+        record["close_date_note"] = "Full proposals accepted anytime"
+        record["deadlines"][0]["date"] = "2076-08-20"
+        now = datetime(2026, 8, 23, 14, tzinfo=timezone.utc)
+
+        detail = detail_response("Aug 20, 2076 12:00:00 AM EDT")
+        detail["synopsis"]["responseDateDesc"] = (
+            "Full proposals accepted anytime"
+        )
+        entry = compact_detail(record, detail, now)
+        merged = merge_detail(record, entry, now.date())
+
+        self.assertIsNone(entry["deadline"]["date"])
+        self.assertTrue(entry["rolling"])
+        self.assertIsNone(merged["close_date"])
+        self.assertNotIn("2076-08-20", {
+            deadline.get("date") for deadline in merged["deadlines"]
+        })
+        self.assertTrue(merged["rolling"])
+        self.assertFalse(merged["status_verification_required"])
+
+    def test_suppresses_cached_2099_deadline_without_marking_rolling(self):
+        record = base_record()
+        record["close_date"] = "2099-12-31"
+        record["close_date_note"] = "undefined"
+        record["deadlines"][0]["date"] = "2099-12-31"
+        now = datetime(2026, 8, 23, 14, tzinfo=timezone.utc)
+        cached_entry = {
+            "deadline": {"date": "2099-12-31", "note": None},
+            "rolling": False,
+        }
+
+        merged = merge_detail(record, cached_entry, now.date())
+
+        self.assertIsNone(merged["close_date"])
+        self.assertEqual(merged["deadlines"], [])
+        self.assertFalse(merged.get("rolling", False))
+
     def test_reuses_unchanged_cached_detail_without_an_api_call(self):
         record = base_record()
         catalog = {

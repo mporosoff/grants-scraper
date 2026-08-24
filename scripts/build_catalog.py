@@ -299,6 +299,7 @@ ROLLING_RE = re.compile(
     r"(?:an?\s+)?rolling\b)",
     re.I,
 )
+MAX_REAL_CLOSE_DATE_DAYS = 366 * 25
 EARLY_CAREER_RE = re.compile(
     r"\b(early[\s-]?career|new investigator|young investigator|junior faculty|"
     r"postdoctoral|predoctoral|untenured|assistant professor)\b",
@@ -608,6 +609,13 @@ def normalize_element(element, as_of):
     )
     archive_date = iso_date(first(values, "ArchiveDate"))
     close_date = iso_date(first(values, close_field))
+    if close_date:
+        parsed_close = date.fromisoformat(close_date)
+        if (parsed_close - as_of).days > MAX_REAL_CLOSE_DATE_DAYS:
+            # Grants.gov uses dates such as 2076 and 2099 as open-ended
+            # sentinels. They are lifecycle markers, not application
+            # deadlines, and must never be shown or exported as real dates.
+            close_date = None
     detail_page = (
         DETAIL_PAGE.format(opportunity_id=opportunity_id)
         if opportunity_id

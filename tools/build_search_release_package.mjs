@@ -13,6 +13,7 @@ const ROOT = new URL("../", import.meta.url);
 const HYBRID_SOURCE_PATH = "assets/search-hybrid.js";
 const MANIFEST_PATH = "data/search-v2-voyage-manifest.json";
 const VECTOR_PATH = "data/search-v2-voyage-vectors.f16";
+const CANARY_PATH = "data/search-v2-voyage-canaries.json";
 const ALLOWLIST_PATH = "workers/search-voyage-proxy/generated/corpus-allowlist.json";
 const RELEASE_PATH = "data/search-v2-release.json";
 const WORKER_SOURCE_PATH = "workers/search-voyage-proxy/src/index.js";
@@ -73,6 +74,10 @@ function compactGeneration(manifest) {
     model: manifest.model,
     dimension: manifest.dimension,
     model_space_fingerprint: manifest.model_space_fingerprint || null,
+    response_model: manifest.response_model || manifest.model,
+    input_type: manifest.input_type,
+    source_output_dtype: manifest.source_output_dtype,
+    vector_dtype: manifest.dtype,
     published_at: manifest.generated_at,
     passage_count: manifest.passage_count,
     passages: manifest.passages.map(item => ({
@@ -87,6 +92,10 @@ function validateGeneration(generation, label) {
   assertHex(generation.corpus_sha256, `${label} corpus_sha256`);
   if (generation.model !== REQUIRED_MODEL || generation.dimension !== REQUIRED_DIMENSION) {
     throw new Error(`${label} generation uses an incompatible embedding contract.`);
+  }
+  if (label === "current") assertHex(generation.model_space_fingerprint, `${label} model_space_fingerprint`);
+  if (generation.model_space_fingerprint != null) {
+    assertHex(generation.model_space_fingerprint, `${label} model_space_fingerprint`);
   }
   if (!Array.isArray(generation.passages) || generation.passages.length !== generation.passage_count) {
     throw new Error(`${label} generation passage count is inconsistent.`);
@@ -124,13 +133,24 @@ function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
   return allowlist;
 }
 
-async function validateCurrentPackage(manifest, vectorBuffer) {
+async function validateCurrentPackage(manifest, vectorBuffer, canaries) {
   if (manifest.schema_version !== 1 || manifest.model !== REQUIRED_MODEL
     || manifest.dimension !== REQUIRED_DIMENSION || manifest.dtype !== "float16-le") {
     throw new Error("The current semantic manifest uses an unsupported contract.");
   }
   assertHex(manifest.corpus_sha256, "manifest corpus_sha256");
   assertHex(manifest.vector_sha256, "manifest vector_sha256");
+  assertHex(manifest.model_space_fingerprint, "manifest model_space_fingerprint");
+  if (canaries?.model_space_fingerprint !== manifest.model_space_fingerprint
+    || canaries?.model_alias !== manifest.model
+    || canaries?.response_model !== manifest.response_model
+    || canaries?.dimension !== manifest.dimension
+    || canaries?.input_type !== manifest.input_type
+    || canaries?.source_output_dtype !== manifest.source_output_dtype
+    || !Array.isArray(canaries?.canaries)
+    || canaries.canaries.length !== manifest.model_space?.canary_count) {
+    throw new Error("The model-space canary artifact does not match the semantic manifest.");
+  }
   if (vectorBuffer.byteLength !== manifest.vector_bytes
     || vectorBuffer.byteLength !== manifest.passage_count * manifest.dimension * 2) {
     throw new Error("The vector binary size does not match the manifest shape.");
@@ -171,13 +191,14 @@ async function run() {
     ? execFileAsync("git", ["show", `${bootstrapRevision}:${MANIFEST_PATH}`], { cwd: new URL(".", ROOT) })
       .then(({ stdout }) => JSON.parse(stdout))
     : Promise.resolve(null);
-  const [manifest, vectorBuffer, existing, bootstrapPrevious] = await Promise.all([
+  const [manifest, vectorBuffer, canaries, existing, bootstrapPrevious] = await Promise.all([
     readJson(MANIFEST_PATH),
     read(VECTOR_PATH),
+    readJson(CANARY_PATH),
     readJson(ALLOWLIST_PATH, {}),
     bootstrapPromise,
   ]);
-  await validateCurrentPackage(manifest, vectorBuffer);
+  await validateCurrentPackage(manifest, vectorBuffer, canaries);
   const allowlist = buildAllowlist(manifest, existing, bootstrapPrevious);
   const allowlistBytes = jsonBytes(allowlist);
   const sourceHashes = {};
@@ -186,6 +207,7 @@ async function run() {
     "data/subtopics.js",
     MANIFEST_PATH,
     VECTOR_PATH,
+    CANARY_PATH,
     "assets/app.js",
     "assets/search-hybrid.js",
     "assets/search-retrieval.js",
@@ -207,7 +229,7 @@ async function run() {
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + subtopics + manifest + vectors + Worker allowlist",
+    atomic_publication_contract: "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
   };
   const releaseBytes = jsonBytes(release);
 

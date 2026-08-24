@@ -120,6 +120,14 @@ EMAIL_RE = re.compile(
     r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b",
     re.I,
 )
+ROLLING_RE = re.compile(
+    r"\bopen\s+until\s+superseded\b|"
+    r"\b(?:full\s+)?proposals?\s+(?:are\s+)?accepted\s+anytime\b|"
+    r"\bon\s+(?:an?\s+)?rolling\s+basis\b|"
+    r"\brolling\s+(?:deadline|application|applications|submission|submissions)\b",
+    re.I,
+)
+MAX_REAL_CLOSE_DATE_DAYS = 366 * 25
 
 
 def utc_now():
@@ -294,6 +302,8 @@ def normalize(stub, detail):
         or source_record.get("responseDateNote")
         or ""
     )
+    if str(close_note).strip().casefold() in {"undefined", "null", "n/a", "none"}:
+        close_note = ""
     text_blob = " \n ".join(
         str(value)
         for value in [
@@ -312,6 +322,13 @@ def normalize(stub, detail):
         or source_record.get("estApplicationResponseDate")
         or stub.get("closeDate")
     )
+    rolling = bool(ROLLING_RE.search(close_note))
+    parsed_close = parse_grants_date(close_date)
+    if parsed_close and (parsed_close - utc_now().date()).days > MAX_REAL_CLOSE_DATE_DAYS:
+        # Grants.gov's 2076/2099 values represent continuing or otherwise
+        # open-ended records. Keep the notice, but do not publish the sentinel
+        # as an application deadline.
+        close_date = None
     timezone_match = TIMEZONE_RE.search(close_note) or TIMEZONE_RE.search(
         text_blob
     )
@@ -435,13 +452,7 @@ def normalize(stub, detail):
         ),
         "last_updated": source_record.get("lastUpdatedDate"),
         "version": source_record.get("version"),
-        "rolling": bool(
-            re.search(
-                r"\brolling\b|open\s+until\s+superseded",
-                close_note,
-                re.I,
-            )
-        ),
+        "rolling": rolling,
         "has_preliminary_stage": bool(preliminary_mention),
         "preliminary_stage_type": preliminary_mention,
         "preliminary_deadline_text": preliminary_with_date,

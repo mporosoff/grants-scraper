@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T02:10:48.6298681Z",
+  "session": 4,
+  "title": "Model consistency, latency, integration, and catalog correctness",
+  "branch": "post-release-hardening",
+  "starting_commit": "7d0388c410d3fe800722bc3b18d92372a7142c45",
+  "production_generation": {
+    "build_mode": "production_full_rebuild",
+    "model": "voyage-4-lite",
+    "response_model": "voyage-4-lite",
+    "dimension": 1024,
+    "output_type": "float16-le",
+    "passage_count": 1659,
+    "reused_passage_count": 0,
+    "embedded_passage_count": 1659,
+    "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "previous_corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+    "vector_sha256": "68ede28ffed7aeae3dafd01f7860234fd5965a7e7ea00e666bc6385794a778ec",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "worker_allowlist_sha256": "b837ad62c37b15edf38b0f4a31c2b97141d9e43038f11a460722bdac6a929d5f",
+    "production_uniformity_counts": {
+      "model_alias": 1,
+      "response_model": 1,
+      "dimension": 1,
+      "output_type": 1,
+      "build_timestamp": 1,
+      "canary_fingerprint": 1,
+      "corpus_sha": 1,
+      "vector_sha": 1
+    },
+    "embedding_api_requests": 8,
+    "embedding_tokens": 395315,
+    "estimated_embedding_cost_usd": 0.007906
+  },
+  "model_space_gate": {
+    "canary_count": 6,
+    "minimum_cosine_to_prior": 1,
+    "mean_cosine_to_prior": 1,
+    "minimum_cosine_gate": 0.95,
+    "mean_cosine_gate": 0.98,
+    "gross_discontinuity": false,
+    "direct_prior_binary_comparison": {
+      "vector_count": 1659,
+      "minimum_cosine": 0.999962992,
+      "mean_cosine": 0.999999869,
+      "maximum_coordinate_delta": 0.000976563
+    },
+    "status": "passed"
+  },
+  "spent_non_holdout_product_gate": {
+    "query_count": 52,
+    "required_anchor_count": 65,
+    "strong_precision_at_10_over_reviewed": 1,
+    "combined_required_recall_at_10": 0.861538,
+    "combined_required_recall_at_20": 0.907692,
+    "combined_required_recall_at_50": 0.953846,
+    "query_average_ndcg_at_10": 0.774354,
+    "known_irrelevant_strong_count": 0,
+    "api_errors_or_timeouts": 0,
+    "embedding_requests": 52,
+    "rerank_requests": 49,
+    "embedding_tokens": 198,
+    "rerank_tokens": 3111798,
+    "estimated_cost_usd": 0.155594,
+    "phase4c_read_or_executed": false,
+    "status": "passed"
+  },
+  "latency_gate": {
+    "conditions": "52 spent public development queries through the local production Worker harness and live Voyage endpoints on 2026-08-24",
+    "cold_first_query_ms": 1103.3058,
+    "warm_p50_ms": 635.8259,
+    "warm_p95_ms": 811.9902,
+    "maximum_ms": 1103.3058,
+    "cold_target_ms": 3000,
+    "warm_target_ms": 1000,
+    "cold_passed": true,
+    "warm_passed": true
+  },
+  "catalog_correctness": {
+    "catalog_precedence_deduplication": {
+      "normalized_identifiers": true,
+      "canonicalized_titles": true,
+      "audited_current_duplicates_removed": 4,
+      "catalog_record_wins": true
+    },
+    "private_funder_link_enrichment": {
+      "explicit_workflow_switch": "VPR_ENRICH_LINKS=true",
+      "allowlisted_hosts_only": true,
+      "bounded_page_bytes": 1500000,
+      "fields": [
+        "sponsor",
+        "description",
+        "eligibility_text",
+        "close_date",
+        "award_ceiling"
+      ],
+      "failures_preserve_email_fields": true,
+      "known_automated_access_limits": [
+        "ACS Incapsula challenge pages",
+        "Sony HTTP 403 responses"
+      ]
+    },
+    "deadline_audit": {
+      "far_future_dates_reviewed": 19,
+      "grants_gov_lifecycle_sentinels_suppressed": 17,
+      "legitimate_long_range_dod_notices_retained": 2,
+      "transport_phenomena_2076_regression_covered": true,
+      "base_extract_and_detail_cache_paths_covered": true
+    },
+    "opportunity_button": {
+      "primary_label": "Open opportunity",
+      "narrow_card_wrapping": true,
+      "long_source_name_removed_from_primary_button": true
+    }
+  },
+  "acceptance_gates": {
+    "production_generation_uniform": "passed",
+    "canary_fingerprint_recorded_and_validated": "passed",
+    "gross_drift_blocks_publication": "passed",
+    "complete_package_integrity": "passed",
+    "initial_page_excludes_vector_bytes": "passed",
+    "fallback_contract": "passed",
+    "live_product_python": {
+      "tests": 769,
+      "status": "passed"
+    },
+    "browser": {
+      "tests": 214,
+      "status": "passed"
+    },
+    "query_baseline": "37 queries; zero top-10 churn",
+    "p9_scoring": "50 cases; byte-identical",
+    "phase4c_unchanged": true
+  },
+  "phase4c_frozen_hashes": {
+    "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+    "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+    "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7"
+  },
+  "evidence_scope": "Phase 4C remains historical evidence for the accepted architecture at its frozen SHA. The current hardening code was validated only with spent and development evidence; no untouched-holdout rerun is claimed.",
+  "decision": "MODEL CONSISTENCY AND INTEGRATION GATES PASS — READY FOR HARDENING RELEASE"
+}

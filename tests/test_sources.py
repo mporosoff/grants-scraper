@@ -134,6 +134,44 @@ class MergeTests(unittest.TestCase):
         self.assertEqual(stats["external_added"], 0)
         self.assertEqual(stats["dropped_duplicate_identity"], 1)
 
+    def test_catalog_wins_when_email_adds_an_nsf_prefix_to_the_number(self):
+        base_record = {
+            **a_base_record(),
+            "opportunity_number": "26-511",
+            "title": "NSF Small Business Innovation Research Phase I",
+        }
+        email_copy = an_external_record(
+            external_id="NSF26-511",
+            opportunity_number="NSF26-511",
+            title="NEW NSF Small Business Innovation Research Phase I | NSF 26-511",
+        )
+
+        combined, stats = merge_records([base_record], [email_copy])
+
+        self.assertEqual(len(combined), 1)
+        self.assertEqual(combined[0]["source"], "Grants.gov")
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
+
+    def test_catalog_wins_when_email_title_only_adds_sponsor_and_acronym(self):
+        base_record = {
+            **a_base_record(),
+            "opportunity_number": None,
+            "title": "Mathematical Foundations of Artificial Intelligence",
+        }
+        email_copy = an_external_record(
+            external_id="digest-copy",
+            title=(
+                "NSF Mathematical Foundations of Artificial Intelligence "
+                "(MFAI) 24-569"
+            ),
+        )
+
+        combined, stats = merge_records([base_record], [email_copy])
+
+        self.assertEqual(len(combined), 1)
+        self.assertEqual(combined[0]["source"], "Grants.gov")
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
+
 
 class RegistryTests(unittest.TestCase):
     def test_one_broken_adapter_does_not_stop_the_others(self):

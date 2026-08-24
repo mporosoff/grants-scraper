@@ -31,6 +31,8 @@ import requests
 
 from scripts.build_catalog import (
     CATALOG_GLOBAL,
+    MAX_REAL_CLOSE_DATE_DAYS,
+    ROLLING_RE,
     USER_AGENT,
     build_search_index,
     clean_text,
@@ -507,6 +509,7 @@ def compact_detail(record, detail, fetched_at):
             "time": clean_text(normalized.get("deadline_time")),
             "timezone": clean_text(normalized.get("deadline_timezone")),
         },
+        "rolling": bool(normalized.get("rolling")),
         "preliminary_deadline": preliminary,
         "award": {
             "floor": numeric(normalized.get("award_floor")),
@@ -566,8 +569,32 @@ def field_conflict(existing, enriched):
     )
 
 
+def future_sentinel_date(value, as_of):
+    """Return whether a structured date is an open-ended lifecycle sentinel."""
+    parsed = parse_api_date(value)
+    if not parsed:
+        return False
+    return (date.fromisoformat(parsed) - as_of).days > MAX_REAL_CLOSE_DATE_DAYS
+
+
+def suppress_future_sentinel_deadlines(record, as_of):
+    """Remove Grants.gov 2076/2099 placeholders before any detail merge."""
+    if future_sentinel_date(record.get("close_date"), as_of):
+        record["close_date"] = None
+    record["deadlines"] = [
+        deadline
+        for deadline in (record.get("deadlines") or [])
+        if not future_sentinel_date(deadline.get("date"), as_of)
+    ]
+    note = clean_text(record.get("close_date_note"))
+    if note and ROLLING_RE.search(note):
+        record["rolling"] = True
+        record["status_verification_required"] = False
+    return record
+
+
 def merge_detail(record, detail_entry, as_of):
-    output = deepcopy(record)
+    output = suppress_future_sentinel_deadlines(deepcopy(record), as_of)
     output.setdefault("contacts", [])
     if not detail_entry:
         output["detail_enrichment_status"] = "pending"
@@ -643,6 +670,13 @@ def merge_detail(record, detail_entry, as_of):
 
     api_deadline = detail_entry.get("deadline") or {}
     api_date = api_deadline.get("date")
+    if future_sentinel_date(api_date, as_of):
+        api_date = None
+    if detail_entry.get("rolling") or ROLLING_RE.search(
+        api_deadline.get("note") or ""
+    ):
+        output["rolling"] = True
+        output["status_verification_required"] = False
     if field_conflict(output.get("close_date"), api_date):
         output["deadline_conflict"] = {
             "xml": output.get("close_date"),

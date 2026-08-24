@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T21:34:32.065Z",
+  "generated_at": "2026-08-24T01:48:41.037Z",
   "status": "spent_development_product_contract_evaluation_complete",
   "product_contract": {
     "strong": "Existing conservative local deterministic evidence matcher, unchanged.",
@@ -46,7 +46,7 @@
         "required_recall_at_10": 0.861538,
         "required_recall_at_20": 0.907692,
         "required_recall_at_50": 0.953846,
-        "query_average_ndcg_at_10": 0.773995,
+        "query_average_ndcg_at_10": 0.774354,
         "deduplication_failures": 0,
         "required_anchor_misses_at_50": [
           {
@@ -216,7 +216,7 @@
           "required_recall_at_10": 0.870968,
           "required_recall_at_20": 0.935484,
           "required_recall_at_50": 0.967742,
-          "query_average_ndcg_at_10": 0.759273,
+          "query_average_ndcg_at_10": 0.760471,
           "deduplication_failures": 0,
           "required_anchor_misses_at_50": [
             {
@@ -504,31 +504,31 @@
   },
   "performance": {
     "query_count": 52,
-    "cold_first_query_ms": 1132.7343,
-    "warm_p50_ms": 620.9064,
-    "warm_p95_ms": 784.4885,
-    "maximum_ms": 1132.7343,
-    "strong_local_p50_ms": 35.5833,
-    "strong_local_p95_ms": 80.0036,
-    "proxy_p50_ms": 175.006,
-    "proxy_p95_ms": 515.1579,
-    "payload_p50_bytes": 53,
-    "payload_p95_bytes": 437650,
+    "cold_first_query_ms": 1103.3058,
+    "warm_p50_ms": 635.8259,
+    "warm_p95_ms": 811.9902,
+    "maximum_ms": 1103.3058,
+    "strong_local_p50_ms": 35.6693,
+    "strong_local_p95_ms": 82.4952,
+    "proxy_p50_ms": 235.7753,
+    "proxy_p95_ms": 544.3977,
+    "payload_p50_bytes": 67,
+    "payload_p95_bytes": 437743,
     "error_count": 0,
     "timeout_count": 0
   },
   "usage": {
     "embedding_requests": 52,
     "rerank_requests": 49,
-    "embedding_tokens": 194,
-    "rerank_tokens": 3112725,
+    "embedding_tokens": 198,
+    "rerank_tokens": 3111798,
     "fallbacks": 0,
     "failures": 0,
-    "last_latency_ms": 699.8034999999945,
+    "last_latency_ms": 576.8199999999997,
     "request_count": 101,
-    "documents_reranked": 12830,
-    "estimated_paid_cost_usd": 0.15564,
-    "estimated_paid_cost_per_1000_searches_usd": 2.993079
+    "documents_reranked": 12831,
+    "estimated_paid_cost_usd": 0.155594,
+    "estimated_paid_cost_per_1000_searches_usd": 2.99219
   },
   "safety": {
     "population": "two spent holdouts only",
@@ -541,14 +541,14 @@
   "static_assets": {
     "passage_count": 1659,
     "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
-    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "vector_sha256": "68ede28ffed7aeae3dafd01f7860234fd5965a7e7ea00e666bc6385794a778ec",
     "vector_bytes": 3397632
   },
   "git_state": {
-    "branch": "main",
-    "head": "1e0252ae29ae00f492b71f85cd288a6e05dc59db",
-    "main": "1e0252ae29ae00f492b71f85cd288a6e05dc59db",
-    "origin_main": "1e0252ae29ae00f492b71f85cd288a6e05dc59db"
+    "branch": "post-release-hardening",
+    "head": "7d0388c410d3fe800722bc3b18d92372a7142c45",
+    "main": "505af687c9b3620454371de475ffe7c2adb176d6",
+    "origin_main": "505af687c9b3620454371de475ffe7c2adb176d6"
   },
   "rows": [
     {
@@ -829,8 +829,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 50.8651,
-        "hybrid_total": 1132.7343
+        "strong_local": 57.6424,
+        "hybrid_total": 1103.3058
       }
     },
     {
@@ -1058,7 +1058,6 @@
           "347749",
           "nsf-cbet:PD-26-370Y",
           "362681",
-          "351715",
           "362859",
           "359236",
           "360534",
@@ -1084,6 +1083,7 @@
           "357570",
           "356460",
           "357493",
+          "359757",
           "362305",
           "362850",
           "vpr-email:vpr-ea71d76309a706c1",
@@ -1111,8 +1111,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 24.9397,
-        "hybrid_total": 617.839
+        "strong_local": 28.0428,
+        "hybrid_total": 649.1657
       }
     },
     {
@@ -1162,7 +1162,7 @@
           "363684",
           "350018"
         ],
-        "available_after_deduplication": 141,
+        "available_after_deduplication": 142,
         "review": {
           "reviewed_count": 3,
           "reviewed_primary_count": 2,
@@ -1368,13 +1368,13 @@
           "358176",
           "362855",
           "356623",
+          "357334",
           "359280",
           "361820",
           "363210",
           "363396",
           "363449",
-          "358411",
-          "363050"
+          "358411"
         ],
         "required_ranks": {
           "360678": 9,
@@ -1388,13 +1388,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 141,
+        "hybrid_parent_count": 142,
         "union_passage_count": 225,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 19.5204,
-        "hybrid_total": 631.5688
+        "strong_local": 24.6713,
+        "hybrid_total": 557.5328
       }
     },
     {
@@ -1431,20 +1431,20 @@
       },
       "potential": {
         "ids": [
-          "344592",
-          "361526",
           "363618",
-          "363684",
+          "361526",
           "349655",
+          "344592",
           "362061",
-          "357609",
           "362900",
-          "363616",
-          "nsf-cbet:PD-26-370Y",
+          "363684",
           "363215",
-          "351715"
+          "363616",
+          "351715",
+          "356055",
+          "347749"
         ],
-        "available_after_deduplication": 122,
+        "available_after_deduplication": 120,
         "review": {
           "reviewed_count": 2,
           "reviewed_primary_count": 2,
@@ -1460,12 +1460,12 @@
           {
             "rank": 1,
             "hybrid_rank_before_deduplication": 1,
-            "id": "344592",
-            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
-            "passage_id": "child:344592:ab-0006",
-            "passage_kind": "publication_eligible_child",
-            "source_field": "child_summary",
-            "source_excerpt": "This program supports basic research in fundamental microbiology that can help advance needs in Soldier protection and performance. There are two primary research thrusts within this program: (i) Microbial Survival Mechanisms in Challenging and Extreme Environments and (ii) Analysis and Engineering of Microbial Communities.",
+            "id": "363618",
+            "title": "MPS Materials Research Programs (MPS Materials)",
+            "passage_id": "parent:363618",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple materials research programs that advance fundamental understanding of materials, their properties, and their potential applications. The programs covered by this solicitation are: BiomaterialsCeramicsCondensed Matter and Materials…",
             "existing_truth": null
           },
           {
@@ -1482,28 +1482,6 @@
           {
             "rank": 3,
             "hybrid_rank_before_deduplication": 3,
-            "id": "363618",
-            "title": "MPS Materials Research Programs (MPS Materials)",
-            "passage_id": "parent:363618",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple materials research programs that advance fundamental understanding of materials, their properties, and their potential applications. The programs covered by this solicitation are: BiomaterialsCeramicsCondensed Matter and Materials…",
-            "existing_truth": null
-          },
-          {
-            "rank": 4,
-            "hybrid_rank_before_deduplication": 4,
-            "id": "363684",
-            "title": "Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)",
-            "passage_id": "parent:363684",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support…",
-            "existing_truth": null
-          },
-          {
-            "rank": 5,
-            "hybrid_rank_before_deduplication": 5,
             "id": "349655",
             "title": "Division of Materials Research: Topical Materials Research Programs",
             "passage_id": "parent:349655",
@@ -1513,8 +1491,19 @@
             "existing_truth": null
           },
           {
-            "rank": 6,
-            "hybrid_rank_before_deduplication": 6,
+            "rank": 4,
+            "hybrid_rank_before_deduplication": 4,
+            "id": "344592",
+            "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+            "passage_id": "child:344592:ab-0006",
+            "passage_kind": "publication_eligible_child",
+            "source_field": "child_summary",
+            "source_excerpt": "This program supports basic research in fundamental microbiology that can help advance needs in Soldier protection and performance. There are two primary research thrusts within this program: (i) Microbial Survival Mechanisms in Challenging and Extreme Environments and (ii) Analysis and Engineering of Microbial Communities.",
+            "existing_truth": null
+          },
+          {
+            "rank": 5,
+            "hybrid_rank_before_deduplication": 5,
             "id": "362061",
             "title": "Chemical Process Systems (CPS)",
             "passage_id": "parent:362061",
@@ -1524,25 +1513,36 @@
             "existing_truth": "primary_relevant"
           },
           {
-            "rank": 7,
-            "hybrid_rank_before_deduplication": 7,
-            "id": "357609",
-            "title": "Chemical Evolution of the Solid Earth and Volcanology",
-            "passage_id": "parent:357609",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Chemical Evolution of the Solid Earth and Volcanology (CESEV) program aims to advance fundamental knowledge about the origin and evolution of our home planet including its core, mantle, and continental crust. The program encourages a wide range of laboratory, field, experimental, theoretical, and/or computational studies that explore the continuous…",
-            "existing_truth": null
-          },
-          {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 8,
+            "rank": 6,
+            "hybrid_rank_before_deduplication": 6,
             "id": "362900",
             "title": "The 2027 YSEALI Regional Workshop: Securing Supply Chains",
             "passage_id": "parent:362900",
             "passage_kind": "parent",
             "source_field": "parent_description",
             "source_excerpt": "Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals…",
+            "existing_truth": null
+          },
+          {
+            "rank": 7,
+            "hybrid_rank_before_deduplication": 7,
+            "id": "363684",
+            "title": "Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)",
+            "passage_id": "parent:363684",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support…",
+            "existing_truth": null
+          },
+          {
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 8,
+            "id": "363215",
+            "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
+            "passage_id": "parent:363215",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.",
             "existing_truth": null
           },
           {
@@ -1559,28 +1559,6 @@
           {
             "rank": 10,
             "hybrid_rank_before_deduplication": 10,
-            "id": "nsf-cbet:PD-26-370Y",
-            "title": "Energy, Water, and Resource Engineering (EWRE)",
-            "passage_id": "parent:nsf-cbet:PD-26-370Y",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Energy, Water, and Resource Engineering (EWRE) program supports fundamental research to advance energy, water, and resource management and to safeguard health. Better use of domestic resources will make U.S. manufacturing, energy and water systems more efficient and secure. EWRE supports research that creates domestic sources of energy, advances water…",
-            "existing_truth": null
-          },
-          {
-            "rank": 11,
-            "hybrid_rank_before_deduplication": 11,
-            "id": "363215",
-            "title": "Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere",
-            "passage_id": "parent:363215",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.",
-            "existing_truth": null
-          },
-          {
-            "rank": 12,
-            "hybrid_rank_before_deduplication": 12,
             "id": "351715",
             "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
             "passage_id": "parent:351715",
@@ -1588,95 +1566,117 @@
             "source_field": "parent_description",
             "source_excerpt": "Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering…",
             "existing_truth": null
+          },
+          {
+            "rank": 11,
+            "hybrid_rank_before_deduplication": 11,
+            "id": "356055",
+            "title": "Computational and Data-Enabled Science and Engineering",
+            "passage_id": "parent:356055",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis…",
+            "existing_truth": null
+          },
+          {
+            "rank": 12,
+            "hybrid_rank_before_deduplication": 12,
+            "id": "347749",
+            "title": "Division of Chemistry: Disciplinary Research Programs",
+            "passage_id": "parent:347749",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these…",
+            "existing_truth": null
           }
         ]
       },
       "combined": {
         "visible_ids": [
-          "344592",
-          "361526",
           "363618",
-          "363684",
-          "349655",
-          "362061",
-          "357609",
-          "362900",
-          "363616",
-          "nsf-cbet:PD-26-370Y",
-          "363215",
-          "351715"
-        ],
-        "internal_top_50": [
-          "344592",
           "361526",
-          "363618",
-          "363684",
           "349655",
+          "344592",
           "362061",
-          "357609",
           "362900",
-          "363616",
-          "nsf-cbet:PD-26-370Y",
+          "363684",
           "363215",
+          "363616",
           "351715",
           "356055",
-          "357579",
-          "363633",
+          "347749"
+        ],
+        "internal_top_50": [
+          "363618",
+          "361526",
+          "349655",
+          "344592",
+          "362061",
+          "362900",
+          "363684",
+          "363215",
+          "363616",
+          "351715",
+          "356055",
           "347749",
-          "362063",
+          "nsf-cbet:PD-26-370Y",
           "362859",
-          "363070",
+          "363633",
+          "359236",
+          "362063",
+          "357609",
           "363537",
-          "357578",
-          "329436",
+          "357579",
           "357580",
-          "363385",
-          "nyserda:PON6161",
           "356623",
-          "362394",
+          "nyserda:PON6161",
+          "358955",
+          "357578",
           "363065",
-          "363375",
-          "363544",
+          "356559",
           "363609",
-          "363292",
-          "361080",
-          "362396",
-          "vpr-email:vpr-e4ce54abf9b529bf",
+          "356879",
+          "363385",
+          "362850",
+          "363396",
+          "363375",
           "363473",
+          "357570",
+          "vpr-email:infoready-2028013",
           "359650",
-          "362395",
+          "363544",
+          "vpr-email:vpr-e4ce54abf9b529bf",
+          "362394",
+          "vpr-email:vpr-122b30a8725e40bf",
           "363449",
-          "348985",
-          "362755",
-          "363536",
-          "275150",
-          "363302",
-          "vpr-email:vpr-167136617b79dc5d",
           "358022",
-          "362910",
-          "363233",
-          "363611",
-          "352741"
+          "360007",
+          "361080",
+          "275150",
+          "352741",
+          "363302",
+          "363536",
+          "362395"
         ],
         "required_ranks": {
           "360678": null,
           "361526": 2,
-          "362061": 6
+          "362061": 5
         },
         "required_recall_at_10": 0.666667,
         "required_recall_at_20": 0.666667,
         "required_recall_at_50": 0.666667,
-        "ndcg_at_10": 0.463242
+        "ndcg_at_10": 0.477624
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 122,
+        "hybrid_parent_count": 120,
         "union_passage_count": 200,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 19.9109,
-        "hybrid_total": 511.0153
+        "strong_local": 35.1129,
+        "hybrid_total": 612.016
       }
     },
     {
@@ -1957,8 +1957,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 10.511,
-        "hybrid_total": 521.1426
+        "strong_local": 12.6507,
+        "hybrid_total": 467.3558
       }
     },
     {
@@ -2239,8 +2239,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 25.3631,
-        "hybrid_total": 620.5276
+        "strong_local": 25.5781,
+        "hybrid_total": 657.4037
       }
     },
     {
@@ -2282,7 +2282,7 @@
           "362859",
           "357826"
         ],
-        "available_after_deduplication": 166,
+        "available_after_deduplication": 167,
         "review": {
           "reviewed_count": 10,
           "reviewed_primary_count": 0,
@@ -2504,13 +2504,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 166,
-        "union_passage_count": 250,
+        "hybrid_parent_count": 167,
+        "union_passage_count": 251,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 38.3334,
-        "hybrid_total": 670.6152
+        "strong_local": 37.474,
+        "hybrid_total": 654.6791
       }
     },
     {
@@ -2558,7 +2558,7 @@
           "362849",
           "356909"
         ],
-        "available_after_deduplication": 279,
+        "available_after_deduplication": 278,
         "review": {
           "reviewed_count": 4,
           "reviewed_primary_count": 2,
@@ -2785,13 +2785,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 279,
+        "hybrid_parent_count": 278,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 103.8885,
-        "hybrid_total": 702.0415
+        "strong_local": 89.1943,
+        "hybrid_total": 748.739
       }
     },
     {
@@ -3041,7 +3041,6 @@
           "nyserda:RFP6129",
           "353936",
           "356530",
-          "358229",
           "arpa-h:stream",
           "363215",
           "vpr-email:vpr-e4ce54abf9b529bf",
@@ -3049,7 +3048,8 @@
           "356811",
           "vpr-email:NSF26-511",
           "nyserda:PON6220",
-          "nyserda:RFP1"
+          "nyserda:RFP1",
+          "352741"
         ],
         "required_ranks": {
           "344592": 2
@@ -3066,8 +3066,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 16.8761,
-        "hybrid_total": 575.0271
+        "strong_local": 17.8924,
+        "hybrid_total": 553.7074
       }
     },
     {
@@ -3345,8 +3345,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 80.0036,
-        "hybrid_total": 687.4616
+        "strong_local": 82.4952,
+        "hybrid_total": 653.9023
       }
     },
     {
@@ -3623,8 +3623,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 61.3178,
-        "hybrid_total": 784.4885
+        "strong_local": 69.1358,
+        "hybrid_total": 730.3814
       }
     },
     {
@@ -3924,8 +3924,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.2448,
-        "hybrid_total": 517.5655
+        "strong_local": 24.7569,
+        "hybrid_total": 628.8769
       }
     },
     {
@@ -4200,8 +4200,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 66.3961,
-        "hybrid_total": 721.8383
+        "strong_local": 56.9862,
+        "hybrid_total": 967.8541
       }
     },
     {
@@ -4470,8 +4470,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 52.0056,
-        "hybrid_total": 925.0776
+        "strong_local": 50.0031,
+        "hybrid_total": 811.9902
       }
     },
     {
@@ -4746,8 +4746,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 78.6737,
-        "hybrid_total": 664.8073
+        "strong_local": 67.9174,
+        "hybrid_total": 775.3669
       }
     },
     {
@@ -5016,8 +5016,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 109.7987,
-        "hybrid_total": 705.3146
+        "strong_local": 97.7417,
+        "hybrid_total": 747.6311
       }
     },
     {
@@ -5292,8 +5292,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 21.0127,
-        "hybrid_total": 673.0799
+        "strong_local": 25.8015,
+        "hybrid_total": 614.3711
       }
     },
     {
@@ -5335,7 +5335,7 @@
           "347680",
           "vpr-email:infoready-2028504"
         ],
-        "available_after_deduplication": 153,
+        "available_after_deduplication": 154,
         "review": {
           "reviewed_count": 10,
           "reviewed_primary_count": 0,
@@ -5561,13 +5561,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 153,
+        "hybrid_parent_count": 154,
         "union_passage_count": 235,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 16.7812,
-        "hybrid_total": 510.243
+        "strong_local": 18.9547,
+        "hybrid_total": 912.9056
       }
     },
     {
@@ -5842,8 +5842,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 46.4051,
-        "hybrid_total": 636.8938
+        "strong_local": 47.7983,
+        "hybrid_total": 705.1628
       }
     },
     {
@@ -6118,8 +6118,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 40.502,
-        "hybrid_total": 607.9624
+        "strong_local": 35.6693,
+        "hybrid_total": 601.6634
       }
     },
     {
@@ -6169,7 +6169,7 @@
           "363618",
           "363614"
         ],
-        "available_after_deduplication": 244,
+        "available_after_deduplication": 243,
         "review": {
           "reviewed_count": 2,
           "reviewed_primary_count": 2,
@@ -6395,13 +6395,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 244,
+        "hybrid_parent_count": 243,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 35.5833,
-        "hybrid_total": 633.8989
+        "strong_local": 34.6822,
+        "hybrid_total": 607.98
       }
     },
     {
@@ -6451,14 +6451,14 @@
           "363481",
           "363268",
           "362551",
-          "358036",
-          "362270",
-          "363107",
           "361604",
+          "351923",
+          "358882",
+          "360664",
           "363293",
-          "358882"
+          "357725"
         ],
-        "available_after_deduplication": 173,
+        "available_after_deduplication": 175,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 0,
@@ -6540,45 +6540,45 @@
           {
             "rank": 7,
             "hybrid_rank_before_deduplication": 7,
-            "id": "358036",
-            "title": "Findable Accessible Interoperable Reusable Open Science",
-            "passage_id": "parent:358036",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The FAIROS Program seeks to support a broad range of transformative open science activities including but not limited to i.) Research, education, and socio-technical cyberinfrastructure development capacities that advance sustainable multi-disciplinary findable, accessible, interoperable, reusable (FAIR) research data management (RDM) and open science…",
-            "existing_truth": null
-          },
-          {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 8,
-            "id": "362270",
-            "title": "AI3 Action Institute - Artificial Intelligence for American Indians",
-            "passage_id": "parent:362270",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute – Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to…",
-            "existing_truth": null
-          },
-          {
-            "rank": 9,
-            "hybrid_rank_before_deduplication": 9,
-            "id": "363107",
-            "title": "Bridge2AI Network for AI Health Science",
-            "passage_id": "parent:363107",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource,…",
-            "existing_truth": null
-          },
-          {
-            "rank": 10,
-            "hybrid_rank_before_deduplication": 10,
             "id": "361604",
             "title": "National Science Foundation Fostering Interdisciplinary Networks to Develop Emergent and Responsive Solutions Foundry",
             "passage_id": "parent:361604",
             "passage_kind": "parent",
             "source_field": "parent_description",
             "source_excerpt": "The NSF FINDERS FOUNDRY program supports collaboration among K-12 educators, technologists, and researchers to develop innovative solutions to persistent challenges in learning and workforce development. These challenges are identified by K-12 students, families, and educators. The program aims to create and scale evidence-based practices, tools, and…",
+            "existing_truth": null
+          },
+          {
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 8,
+            "id": "351923",
+            "title": "EPSCoR Research Infrastructure Improvement (RII): EPSCoR Research Fellows",
+            "passage_id": "parent:351923",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The Established Program to Stimulate Competitive Research is designed to fulfill the mandate of the National Science Foundation (NSF) to promote scientific progress nationwide. NSF EPSCoR facilitates the establishment of partnerships among academic institutions, government, industry, and non-profit sectors that are designed to promote sustainable…",
+            "existing_truth": null
+          },
+          {
+            "rank": 9,
+            "hybrid_rank_before_deduplication": 9,
+            "id": "358882",
+            "title": "Science of Science: Discovery, Communication and Impact",
+            "passage_id": "parent:358882",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The Science of Science: Discovery, Communication and Impact (SoS: DCI) program is designed to advance theory and knowledge about increasing the public value of scientific activity. Science of Science draws from multiple disciplinary and field perspectives to advance theory and research about scientific discovery, communication and impact. SoS: DCI welcomes…",
+            "existing_truth": null
+          },
+          {
+            "rank": 10,
+            "hybrid_rank_before_deduplication": 10,
+            "id": "360664",
+            "title": "NSF National Innovation Corps Teams (NSF National I-Corps (TM) Teams) program",
+            "passage_id": "parent:360664",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The U.S. National Science Foundation (NSF) continues to develop and nurture a national innovation ecosystem that guides the output of scientific discoveries closer to the development of technologies, products, processes, and services that benefit allAmericans. The goals of the NSF I-Corps™program are to spur translation of foundational research to the…",
             "existing_truth": null
           },
           {
@@ -6595,12 +6595,12 @@
           {
             "rank": 12,
             "hybrid_rank_before_deduplication": 12,
-            "id": "358882",
-            "title": "Science of Science: Discovery, Communication and Impact",
-            "passage_id": "parent:358882",
+            "id": "357725",
+            "title": "EPSCoR Research Infrastructure Improvement Program: EPSCoR Collaborations for Optimizing Research Ecosystems",
+            "passage_id": "parent:357725",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The Science of Science: Discovery, Communication and Impact (SoS: DCI) program is designed to advance theory and knowledge about increasing the public value of scientific activity. Science of Science draws from multiple disciplinary and field perspectives to advance theory and research about scientific discovery, communication and impact. SoS: DCI welcomes…",
+            "source_excerpt": "The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in…",
             "existing_truth": null
           }
         ]
@@ -6614,12 +6614,12 @@
           "363481",
           "363268",
           "362551",
-          "358036",
-          "362270",
-          "363107",
           "361604",
+          "351923",
+          "358882",
+          "360664",
           "363293",
-          "358882"
+          "357725"
         ],
         "internal_top_50": [
           "363370",
@@ -6629,49 +6629,49 @@
           "363481",
           "363268",
           "362551",
+          "361604",
+          "351923",
+          "358882",
+          "360664",
+          "363293",
+          "357725",
           "358036",
           "362270",
-          "363107",
-          "361604",
-          "363293",
-          "358882",
-          "361526",
-          "351923",
-          "360664",
           "361333",
-          "357725",
-          "363594",
-          "363441",
+          "361526",
           "356425",
-          "359949",
-          "363613",
-          "359270",
-          "363645",
-          "355196",
-          "355219",
-          "350469",
-          "363514",
+          "363594",
           "363379",
-          "351404",
+          "363613",
+          "363107",
+          "363645",
+          "363514",
+          "355219",
+          "359949",
           "358403",
-          "346203",
+          "351404",
           "348599",
           "359103",
-          "359666",
-          "361008",
+          "359499",
+          "363378",
+          "344592",
+          "350469",
+          "355196",
+          "346203",
+          "357634",
+          "314743",
           "361238",
           "361249",
           "363179",
-          "344592",
-          "359268",
-          "359499",
-          "363640",
-          "314743",
-          "357634",
+          "359270",
+          "361960",
+          "362036",
+          "363441",
+          "349655",
           "353936",
-          "359269",
-          "359271",
-          "361960"
+          "355439",
+          "358684",
+          "361008"
         ],
         "required_ranks": {
           "363370": 1
@@ -6683,13 +6683,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 174,
+        "hybrid_parent_count": 176,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 45.6728,
-        "hybrid_total": 629.8832
+        "strong_local": 47.2994,
+        "hybrid_total": 777.666
       }
     },
     {
@@ -6757,8 +6757,8 @@
         "safeguard_rejections": 357
       },
       "latency_ms": {
-        "strong_local": 27.3177,
-        "hybrid_total": 178.418
+        "strong_local": 28.6893,
+        "hybrid_total": 180.3107
       }
     },
     {
@@ -7045,8 +7045,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.2518,
-        "hybrid_total": 633.6759
+        "strong_local": 27.1454,
+        "hybrid_total": 635.8259
       }
     },
     {
@@ -7327,8 +7327,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 18.1299,
-        "hybrid_total": 557.8662
+        "strong_local": 19.5539,
+        "hybrid_total": 582.8658
       }
     },
     {
@@ -7570,6 +7570,7 @@
           "357748",
           "363326",
           "360906",
+          "361450",
           "vpr-email:vpr-ea71d76309a706c1",
           "360446",
           "356623",
@@ -7589,8 +7590,7 @@
           "361820",
           "362948",
           "nyserda:PON6161",
-          "nyserda:PON6220",
-          "342475"
+          "nyserda:PON6220"
         ],
         "required_ranks": {
           "360678": 6,
@@ -7609,8 +7609,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 14.904,
-        "hybrid_total": 550.7538
+        "strong_local": 17.5477,
+        "hybrid_total": 567.0046
       }
     },
     {
@@ -7891,8 +7891,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 37.8442,
-        "hybrid_total": 588.1408
+        "strong_local": 36.6215,
+        "hybrid_total": 597.5848
       }
     },
     {
@@ -8170,8 +8170,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 38.8286,
-        "hybrid_total": 589.4679
+        "strong_local": 41.3984,
+        "hybrid_total": 613.3795
       }
     },
     {
@@ -8458,8 +8458,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 41.4192,
-        "hybrid_total": 704.2474
+        "strong_local": 35.6717,
+        "hybrid_total": 701.3913
       }
     },
     {
@@ -8516,7 +8516,7 @@
           "363313",
           "363679"
         ],
-        "available_after_deduplication": 297,
+        "available_after_deduplication": 296,
         "review": {
           "reviewed_count": 0,
           "reviewed_primary_count": 0,
@@ -8741,13 +8741,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 298,
+        "hybrid_parent_count": 297,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 35.8306,
-        "hybrid_total": 710.8058
+        "strong_local": 37.6998,
+        "hybrid_total": 636.7862
       }
     },
     {
@@ -9034,8 +9034,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 45.8321,
-        "hybrid_total": 719.5097
+        "strong_local": 44.8932,
+        "hybrid_total": 714.4314
       }
     },
     {
@@ -9310,8 +9310,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 18.0993,
-        "hybrid_total": 487.6966
+        "strong_local": 19.9655,
+        "hybrid_total": 478.7049
       }
     },
     {
@@ -9586,8 +9586,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 30.5328,
-        "hybrid_total": 681.2589
+        "strong_local": 36.9381,
+        "hybrid_total": 728.8269
       }
     },
     {
@@ -9862,8 +9862,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 54.7795,
-        "hybrid_total": 596.7572
+        "strong_local": 53.3846,
+        "hybrid_total": 746.567
       }
     },
     {
@@ -10138,8 +10138,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 24.2815,
-        "hybrid_total": 525.7856
+        "strong_local": 33.1863,
+        "hybrid_total": 525.0433
       }
     },
     {
@@ -10426,8 +10426,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 75.8609,
-        "hybrid_total": 620.9064
+        "strong_local": 62.5571,
+        "hybrid_total": 697.516
       }
     },
     {
@@ -10461,19 +10461,19 @@
       "potential": {
         "ids": [
           "361526",
-          "363107",
-          "363268",
           "363481",
+          "363268",
+          "363107",
           "362551",
-          "359271",
-          "358036",
-          "361333",
           "344592",
           "351923",
-          "356055",
-          "359269"
+          "358036",
+          "361333",
+          "363613",
+          "357725",
+          "360664"
         ],
-        "available_after_deduplication": 167,
+        "available_after_deduplication": 165,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 1,
@@ -10500,12 +10500,12 @@
           {
             "rank": 2,
             "hybrid_rank_before_deduplication": 2,
-            "id": "363107",
-            "title": "Bridge2AI Network for AI Health Science",
-            "passage_id": "parent:363107",
+            "id": "363481",
+            "title": "U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:",
+            "passage_id": "parent:363481",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource,…",
+            "source_excerpt": "The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages…",
             "existing_truth": null
           },
           {
@@ -10522,12 +10522,12 @@
           {
             "rank": 4,
             "hybrid_rank_before_deduplication": 4,
-            "id": "363481",
-            "title": "U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:",
-            "passage_id": "parent:363481",
+            "id": "363107",
+            "title": "Bridge2AI Network for AI Health Science",
+            "passage_id": "parent:363107",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages…",
+            "source_excerpt": "The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource,…",
             "existing_truth": null
           },
           {
@@ -10544,39 +10544,6 @@
           {
             "rank": 6,
             "hybrid_rank_before_deduplication": 6,
-            "id": "359271",
-            "title": "Development and Testing of a Multi-use Frameworks Playbook for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U01 Clinical Trial Not Allowed)",
-            "passage_id": "parent:359271",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
-            "existing_truth": null
-          },
-          {
-            "rank": 7,
-            "hybrid_rank_before_deduplication": 7,
-            "id": "358036",
-            "title": "Findable Accessible Interoperable Reusable Open Science",
-            "passage_id": "parent:358036",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The FAIROS Program seeks to support a broad range of transformative open science activities including but not limited to i.) Research, education, and socio-technical cyberinfrastructure development capacities that advance sustainable multi-disciplinary findable, accessible, interoperable, reusable (FAIR) research data management (RDM) and open science…",
-            "existing_truth": null
-          },
-          {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 8,
-            "id": "361333",
-            "title": "Pathways to Enable Secure Open-Source Ecosystems",
-            "passage_id": "parent:361333",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed…",
-            "existing_truth": null
-          },
-          {
-            "rank": 9,
-            "hybrid_rank_before_deduplication": 9,
             "id": "344592",
             "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
             "passage_id": "child:344592:ab-0049",
@@ -10586,8 +10553,8 @@
             "existing_truth": null
           },
           {
-            "rank": 10,
-            "hybrid_rank_before_deduplication": 10,
+            "rank": 7,
+            "hybrid_rank_before_deduplication": 7,
             "id": "351923",
             "title": "EPSCoR Research Infrastructure Improvement (RII): EPSCoR Research Fellows",
             "passage_id": "parent:351923",
@@ -10597,25 +10564,58 @@
             "existing_truth": null
           },
           {
-            "rank": 11,
-            "hybrid_rank_before_deduplication": 11,
-            "id": "356055",
-            "title": "Computational and Data-Enabled Science and Engineering",
-            "passage_id": "parent:356055",
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 8,
+            "id": "358036",
+            "title": "Findable Accessible Interoperable Reusable Open Science",
+            "passage_id": "parent:358036",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis…",
+            "source_excerpt": "The FAIROS Program seeks to support a broad range of transformative open science activities including but not limited to i.) Research, education, and socio-technical cyberinfrastructure development capacities that advance sustainable multi-disciplinary findable, accessible, interoperable, reusable (FAIR) research data management (RDM) and open science…",
+            "existing_truth": null
+          },
+          {
+            "rank": 9,
+            "hybrid_rank_before_deduplication": 9,
+            "id": "361333",
+            "title": "Pathways to Enable Secure Open-Source Ecosystems",
+            "passage_id": "parent:361333",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed…",
+            "existing_truth": null
+          },
+          {
+            "rank": 10,
+            "hybrid_rank_before_deduplication": 10,
+            "id": "363613",
+            "title": "Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)",
+            "passage_id": "parent:363613",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring…",
+            "existing_truth": null
+          },
+          {
+            "rank": 11,
+            "hybrid_rank_before_deduplication": 11,
+            "id": "357725",
+            "title": "EPSCoR Research Infrastructure Improvement Program: EPSCoR Collaborations for Optimizing Research Ecosystems",
+            "passage_id": "parent:357725",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The Established Program to Stimulate Competitive Research (EPSCoR) supports the U.S. National Science Foundation (NSF) mission by promoting nationwide scientific progress. Through this program, NSF fosters partnerships among academic institutions, government entities, industry, and non-profits. These collaborations aim to drive long-term improvements in…",
             "existing_truth": null
           },
           {
             "rank": 12,
             "hybrid_rank_before_deduplication": 12,
-            "id": "359269",
-            "title": "Validation Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U54 Clinical Trials Not Allowed)",
-            "passage_id": "parent:359269",
+            "id": "360664",
+            "title": "NSF National Innovation Corps Teams (NSF National I-Corps (TM) Teams) program",
+            "passage_id": "parent:360664",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
+            "source_excerpt": "The U.S. National Science Foundation (NSF) continues to develop and nurture a national innovation ecosystem that guides the output of scientific discoveries closer to the development of technologies, products, processes, and services that benefit allAmericans. The goals of the NSF I-Corps™program are to spur translation of foundational research to the…",
             "existing_truth": null
           }
         ]
@@ -10623,69 +10623,69 @@
       "combined": {
         "visible_ids": [
           "361526",
-          "363107",
-          "363268",
           "363481",
+          "363268",
+          "363107",
           "362551",
-          "359271",
-          "358036",
-          "361333",
           "344592",
           "351923",
-          "356055",
-          "359269"
+          "358036",
+          "361333",
+          "363613",
+          "357725",
+          "360664"
         ],
         "internal_top_50": [
           "361526",
-          "363107",
-          "363268",
           "363481",
+          "363268",
+          "363107",
           "362551",
-          "359271",
-          "358036",
-          "361333",
           "344592",
           "351923",
-          "356055",
-          "359269",
+          "358036",
+          "361333",
+          "363613",
           "357725",
           "360664",
-          "358882",
-          "362638",
           "363526",
-          "363613",
+          "356055",
+          "359271",
           "353936",
-          "359003",
-          "355196",
-          "359270",
-          "361249",
-          "362270",
           "363621",
-          "357634",
-          "358684",
-          "359666",
-          "361318",
+          "358882",
           "361604",
           "351404",
-          "357194",
-          "357195",
+          "355196",
+          "357634",
           "363622",
+          "358684",
+          "359003",
           "356425",
-          "359268",
-          "363594",
-          "363618",
-          "314743",
-          "349655",
-          "363617",
-          "361008",
-          "302271",
-          "347680",
-          "355219",
           "363378",
-          "356316",
+          "363618",
+          "359269",
+          "362270",
+          "363594",
+          "359270",
+          "361318",
           "361915",
-          "362743",
-          "346203"
+          "361249",
+          "362638",
+          "349655",
+          "355219",
+          "314743",
+          "358403",
+          "363614",
+          "359666",
+          "362681",
+          "363617",
+          "363632",
+          "363645",
+          "302271",
+          "346203",
+          "348599",
+          "328573"
         ],
         "required_ranks": {
           "361526": 1
@@ -10697,13 +10697,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 167,
+        "hybrid_parent_count": 165,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 73.833,
-        "hybrid_total": 668.1621
+        "strong_local": 60.019,
+        "hybrid_total": 668.1535
       }
     },
     {
@@ -10972,8 +10972,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 54.9055,
-        "hybrid_total": 674.3027
+        "strong_local": 37.267,
+        "hybrid_total": 683.2032
       }
     },
     {
@@ -11248,8 +11248,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 31.0915,
-        "hybrid_total": 610.6253
+        "strong_local": 29.5406,
+        "hybrid_total": 661.1295
       }
     },
     {
@@ -11291,9 +11291,9 @@
           "363621",
           "357578",
           "350018",
-          "342959",
           "362725",
-          "361234"
+          "361234",
+          "356538"
         ],
         "available_after_deduplication": 80,
         "review": {
@@ -11410,17 +11410,6 @@
           {
             "rank": 10,
             "hybrid_rank_before_deduplication": 10,
-            "id": "342959",
-            "title": "Astronomy and Astrophysics Research Grants",
-            "passage_id": "parent:342959",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The Astronomy and Astrophysics Research Grants (AAG) Program is an inclusive and flexible funding opportunity to support research in the astronomical sciences. The Program provides individual investigator and collaborative research grants for observational, theoretical, laboratory, and archival data studies in astronomy and astrophysics. The Program also…",
-            "existing_truth": null
-          },
-          {
-            "rank": 11,
-            "hybrid_rank_before_deduplication": 11,
             "id": "362725",
             "title": "GlobalX Challenge 26.2: Naval Southern Hemisphere Space Weather and Plasmas (NSHSWP)",
             "passage_id": "parent:362725",
@@ -11430,14 +11419,25 @@
             "existing_truth": null
           },
           {
-            "rank": 12,
-            "hybrid_rank_before_deduplication": 12,
+            "rank": 11,
+            "hybrid_rank_before_deduplication": 11,
             "id": "361234",
             "title": "ROSES25: B.2 Heliophysics Foundational Research",
             "passage_id": "child:361234:b-2",
             "passage_kind": "publication_eligible_child",
             "source_field": "child_summary",
             "source_excerpt": "NASA ROSES program element B.2: Heliophysics Foundational Research.",
+            "existing_truth": null
+          },
+          {
+            "rank": 12,
+            "hybrid_rank_before_deduplication": 12,
+            "id": "356538",
+            "title": "Atmosphere Cluster",
+            "passage_id": "parent:356538",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The Atmosphere Cluster (AC) in the Division of Atmospheric and Geospace Sciences (AGS) supports fundamental studies of atmospheric processes from the Earth’s surface to the stratosphere, and from timescales of nanoseconds to millennia. Core areas of research include the chemical, physical, and dynamical processes in the atmosphere that impact clouds,…",
             "existing_truth": null
           }
         ]
@@ -11453,9 +11453,9 @@
           "363621",
           "357578",
           "350018",
-          "342959",
           "362725",
-          "361234"
+          "361234",
+          "356538"
         ],
         "internal_top_50": [
           "356536",
@@ -11467,7 +11467,6 @@
           "363621",
           "357578",
           "350018",
-          "342959",
           "362725",
           "361234",
           "356538",
@@ -11482,6 +11481,7 @@
           "342747",
           "363622",
           "357609",
+          "357826",
           "360004",
           "345241",
           "359996",
@@ -11490,6 +11490,7 @@
           "363396",
           "360664",
           "356623",
+          "361205",
           "361184",
           "45793",
           "358882",
@@ -11504,7 +11505,6 @@
           "vpr-email:infoready-2028013",
           "363224",
           "nyserda:PON6149",
-          "355499",
           "vpr-email:vpr-02ca89881582e10d",
           "356982",
           "363258"
@@ -11524,8 +11524,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 17.3785,
-        "hybrid_total": 483.8964
+        "strong_local": 19.1537,
+        "hybrid_total": 526.5845
       }
     },
     {
@@ -11800,8 +11800,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 27.5938,
-        "hybrid_total": 595.5037
+        "strong_local": 25.3668,
+        "hybrid_total": 517.8387
       }
     },
     {
@@ -11847,7 +11847,7 @@
           "362644",
           "359966"
         ],
-        "available_after_deduplication": 169,
+        "available_after_deduplication": 168,
         "review": {
           "reviewed_count": 1,
           "reviewed_primary_count": 1,
@@ -12045,7 +12045,6 @@
           "356879",
           "358850",
           "356231",
-          "357658",
           "357800",
           "362302",
           "362358",
@@ -12053,13 +12052,14 @@
           "359198",
           "363448",
           "363224",
-          "363305",
           "357580",
           "361526",
           "363299",
           "357330",
           "361204",
-          "357422"
+          "357422",
+          "362305",
+          "vpr-email:NSF26-511"
         ],
         "required_ranks": {
           "363375": 1
@@ -12071,13 +12071,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 169,
+        "hybrid_parent_count": 168,
         "union_passage_count": 216,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 23.4826,
-        "hybrid_total": 508.9269
+        "strong_local": 35.7244,
+        "hybrid_total": 544.8681
       }
     },
     {
@@ -12364,8 +12364,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 38.7325,
-        "hybrid_total": 833.5687
+        "strong_local": 40.1845,
+        "hybrid_total": 676.7812
       }
     },
     {
@@ -12615,11 +12615,11 @@
           "362454",
           "359000",
           "359270",
+          "357010",
           "359003",
           "359861",
           "362069",
-          "362270",
-          "344608"
+          "362270"
         ],
         "required_ranks": {},
         "required_recall_at_10": null,
@@ -12634,8 +12634,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 52.4248,
-        "hybrid_total": 633.3737
+        "strong_local": 49.5181,
+        "hybrid_total": 642.3218
       }
     },
     {
@@ -12904,8 +12904,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 28.0838,
-        "hybrid_total": 561.1302
+        "strong_local": 24.9073,
+        "hybrid_total": 594.702
       }
     },
     {
@@ -13174,8 +13174,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 16.4963,
-        "hybrid_total": 599.334
+        "strong_local": 29.265,
+        "hybrid_total": 591.434
       }
     },
     {
@@ -13217,7 +13217,7 @@
           "356425",
           "361876"
         ],
-        "available_after_deduplication": 192,
+        "available_after_deduplication": 191,
         "review": {
           "reviewed_count": 10,
           "reviewed_primary_count": 0,
@@ -13439,13 +13439,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 192,
+        "hybrid_parent_count": 191,
         "union_passage_count": 223,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 25.7805,
-        "hybrid_total": 648.9273
+        "strong_local": 20.9666,
+        "hybrid_total": 550.1642
       }
     },
     {
@@ -13504,8 +13504,8 @@
         "safeguard_rejections": 348
       },
       "latency_ms": {
-        "strong_local": 46.8619,
-        "hybrid_total": 201.8521
+        "strong_local": 46.4121,
+        "hybrid_total": 220.9923
       }
     },
     {
@@ -13564,8 +13564,8 @@
         "safeguard_rejections": 318
       },
       "latency_ms": {
-        "strong_local": 42.3515,
-        "hybrid_total": 204.4214
+        "strong_local": 34.3632,
+        "hybrid_total": 211.7171
       }
     },
     {
@@ -13622,7 +13622,7 @@
           "351715",
           "357014"
         ],
-        "available_after_deduplication": 111,
+        "available_after_deduplication": 112,
         "review": {
           "reviewed_count": 0,
           "reviewed_primary_count": 0,
@@ -13847,13 +13847,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 112,
+        "hybrid_parent_count": 113,
         "union_passage_count": 237,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 23.855,
-        "hybrid_total": 597.0233
+        "strong_local": 18.8836,
+        "hybrid_total": 552.0501
       }
     },
     {
@@ -13897,20 +13897,20 @@
       },
       "potential": {
         "ids": [
-          "363107",
           "361333",
+          "363107",
           "363268",
           "363481",
           "358036",
-          "359269",
-          "359270",
           "355439",
           "362551",
+          "359270",
+          "359269",
           "359666",
-          "357195",
-          "357194"
+          "359003",
+          "353936"
         ],
-        "available_after_deduplication": 191,
+        "available_after_deduplication": 189,
         "review": {
           "reviewed_count": 0,
           "reviewed_primary_count": 0,
@@ -13926,23 +13926,23 @@
           {
             "rank": 1,
             "hybrid_rank_before_deduplication": 2,
-            "id": "363107",
-            "title": "Bridge2AI Network for AI Health Science",
-            "passage_id": "parent:363107",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource,…",
-            "existing_truth": null
-          },
-          {
-            "rank": 2,
-            "hybrid_rank_before_deduplication": 3,
             "id": "361333",
             "title": "Pathways to Enable Secure Open-Source Ecosystems",
             "passage_id": "parent:361333",
             "passage_kind": "parent",
             "source_field": "parent_description",
             "source_excerpt": "The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed…",
+            "existing_truth": null
+          },
+          {
+            "rank": 2,
+            "hybrid_rank_before_deduplication": 3,
+            "id": "363107",
+            "title": "Bridge2AI Network for AI Health Science",
+            "passage_id": "parent:363107",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource,…",
             "existing_truth": null
           },
           {
@@ -13981,28 +13981,6 @@
           {
             "rank": 6,
             "hybrid_rank_before_deduplication": 7,
-            "id": "359269",
-            "title": "Validation Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U54 Clinical Trials Not Allowed)",
-            "passage_id": "parent:359269",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
-            "existing_truth": null
-          },
-          {
-            "rank": 7,
-            "hybrid_rank_before_deduplication": 8,
-            "id": "359270",
-            "title": "PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)",
-            "passage_id": "parent:359270",
-            "passage_kind": "parent",
-            "source_field": "parent_description",
-            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
-            "existing_truth": null
-          },
-          {
-            "rank": 8,
-            "hybrid_rank_before_deduplication": 9,
             "id": "355439",
             "title": "NIH Research Software Engineer (RSE) Award (R50 Clinical Trials Not Allowed)",
             "passage_id": "parent:355439",
@@ -14012,14 +13990,36 @@
             "existing_truth": null
           },
           {
-            "rank": 9,
-            "hybrid_rank_before_deduplication": 10,
+            "rank": 7,
+            "hybrid_rank_before_deduplication": 8,
             "id": "362551",
             "title": "NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation",
             "passage_id": "parent:362551",
             "passage_kind": "parent",
             "source_field": "parent_description",
             "source_excerpt": "NSF invests in scientific discoveries, technological breakthroughs, and transformative innovations that strengthen economic growth, enhance security, and improve the lives of Americans and people around the world. Our ability to support that mission requires a robust scientific and engineering (S&E) enterprise in the United States that allows scientists to…",
+            "existing_truth": null
+          },
+          {
+            "rank": 8,
+            "hybrid_rank_before_deduplication": 9,
+            "id": "359270",
+            "title": "PRIMED-AI: Data-to-Model Academic-Industrial Partnerships (D2M-AIP) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (UG3/UH3 Clinical Trial Optional)",
+            "passage_id": "parent:359270",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
+            "existing_truth": null
+          },
+          {
+            "rank": 9,
+            "hybrid_rank_before_deduplication": 10,
+            "id": "359269",
+            "title": "Validation Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U54 Clinical Trials Not Allowed)",
+            "passage_id": "parent:359269",
+            "passage_kind": "parent",
+            "source_field": "parent_description",
+            "source_excerpt": "The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS…",
             "existing_truth": null
           },
           {
@@ -14036,23 +14036,23 @@
           {
             "rank": 11,
             "hybrid_rank_before_deduplication": 12,
-            "id": "357195",
-            "title": "Investigator Initiated Innovation in Computational Genomics and Data Science (R21 Clinical Trial Not Allowed)",
-            "passage_id": "parent:357195",
+            "id": "359003",
+            "title": "Advancing Bioinformatics, Translational Bioinformatics and Computational Biology Research (R01 Clinical Trial Optional)",
+            "passage_id": "parent:359003",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The purpose of this funding opportunity announcement (FOA) is to invite applications for a broad range of research efforts in computational genomics, data science, statistics, and bioinformatics relevant to one or both of basic or clinical genomic science, and broadly applicable to human health and disease. This FOA supports fundamental genomics research…",
+            "source_excerpt": "The National Library of Medicine (NLM) seeks applications for research projects that drive groundbreaking innovation and advanced development in the fields of bioinformatics, translational bioinformatics, and computational biology. The primary goal of this initiative is to support the creation and implementation of cutting-edge methods, tools, and…",
             "existing_truth": null
           },
           {
             "rank": 12,
             "hybrid_rank_before_deduplication": 13,
-            "id": "357194",
-            "title": "Investigator Initiated Innovation in Computational Genomics and Data Science (R01 Clinical Trial Not Allowed)",
-            "passage_id": "parent:357194",
+            "id": "353936",
+            "title": "Mathematical Foundations of Artificial Intelligence",
+            "passage_id": "parent:353936",
             "passage_kind": "parent",
             "source_field": "parent_description",
-            "source_excerpt": "The purpose of this funding opportunity announcement (FOA) is to invite applications for a broad range of research efforts in computational genomics, data science, statistics, and bioinformatics relevant to one or both of basic or clinical genomic science, and broadly applicable to human health and disease. This FOA supports fundamental genomics research…",
+            "source_excerpt": "Machine Learning and Artificial Intelligence (AI) are enabling extraordinary scientific breakthroughs in fields ranging from protein folding, natural language processing, drug synthesis, and recommender systems to the discovery of novel engineering materials and products. These achievements lie at the confluence of mathematics, statistics, engineering and…",
             "existing_truth": null
           }
         ]
@@ -14060,70 +14060,70 @@
       "combined": {
         "visible_ids": [
           "361526",
-          "363107",
           "361333",
+          "363107",
           "363268",
           "363481",
           "358036",
-          "359269",
-          "359270",
           "355439",
           "362551",
+          "359270",
+          "359269",
           "359666",
-          "357195",
-          "357194"
+          "359003",
+          "353936"
         ],
         "internal_top_50": [
           "361526",
-          "363107",
           "361333",
+          "363107",
           "363268",
           "363481",
           "358036",
-          "359269",
-          "359270",
           "355439",
           "362551",
+          "359270",
+          "359269",
           "359666",
-          "357195",
-          "357194",
-          "359268",
           "359003",
           "353936",
-          "362638",
-          "362454",
-          "361604",
-          "362270",
-          "356055",
-          "358882",
-          "359068",
-          "360664",
-          "347680",
+          "357194",
+          "357195",
           "351923",
-          "363293",
-          "361249",
-          "343166",
+          "358882",
+          "360664",
+          "361604",
           "357725",
-          "359949",
+          "359068",
           "363526",
+          "356055",
+          "359268",
+          "362638",
+          "347680",
+          "363293",
           "363613",
-          "347679",
           "355196",
-          "361449",
-          "350469",
+          "362270",
           "363622",
-          "361318",
-          "363620",
-          "363594",
-          "361008",
-          "363623",
-          "357634",
+          "347679",
+          "350469",
+          "361249",
+          "361449",
+          "343166",
           "344592",
           "361915",
-          "351404",
+          "363594",
+          "363379",
+          "363620",
+          "357634",
           "358684",
+          "359949",
+          "361318",
+          "351404",
           "314743",
-          "358004"
+          "363623",
+          "vpr-email:NSF26-015",
+          "355219"
         ],
         "required_ranks": {
           "361526": 1
@@ -14135,13 +14135,13 @@
       },
       "deduplication_overlap": [],
       "internal": {
-        "hybrid_parent_count": 192,
+        "hybrid_parent_count": 190,
         "union_passage_count": 300,
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 77.9365,
-        "hybrid_total": 732.9528
+        "strong_local": 60.9483,
+        "hybrid_total": 795.2444
       }
     },
     {
@@ -14410,8 +14410,8 @@
         "safeguard_rejections": 0
       },
       "latency_ms": {
-        "strong_local": 26.508,
-        "hybrid_total": 699.8296
+        "strong_local": 21.9141,
+        "hybrid_total": 576.8627
       }
     }
   ]

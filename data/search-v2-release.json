@@ -1,27 +1,28 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T21:33:28.459Z",
+  "generated_at": "2026-08-24T01:33:52.510Z",
   "current_corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
   "previous_corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
-  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+  "vector_sha256": "68ede28ffed7aeae3dafd01f7860234fd5965a7e7ea00e666bc6385794a778ec",
   "model": "voyage-4-lite",
   "dimension": 1024,
-  "model_space_fingerprint": null,
+  "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
   "passage_count": 1659,
-  "worker_allowlist_sha256": "11db7213f172bfc6061bb0c6e93b302672b750c6f25d991c57a5f0d5b46efa91",
+  "worker_allowlist_sha256": "b837ad62c37b15edf38b0f4a31c2b97141d9e43038f11a460722bdac6a929d5f",
   "source_hashes": {
     "data/opportunities.js": "4fd1b5ec3e3aa0f2ef7a1856043e1e85f56ad5ed4beb22cc9fa6a4097494f46b",
     "data/subtopics.js": "8185a7fc8156b13fdc9a86c1d2d986ee4e608a6447568ab51b21fefc341febbb",
-    "data/search-v2-voyage-manifest.json": "ff5922f45444ff13a4ffdbfe574de7b535338367a1206bb8ed712914e9226e8a",
-    "data/search-v2-voyage-vectors.f16": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
-    "assets/app.js": "6d4c92f4b5dfc73265f82710d59df60c0640cd23e81f0b867035a4b90dadb1fe",
-    "assets/search-hybrid.js": "90a80220f83dd94aaaaff3318fdcbcdf64b4c46c8381201c202cb6c2bdcd35d3",
+    "data/search-v2-voyage-manifest.json": "febd5cd490d2ccecf34d7c48ca1a3e7ebb601a9bf4659c40ff8c675813ec1d4f",
+    "data/search-v2-voyage-vectors.f16": "68ede28ffed7aeae3dafd01f7860234fd5965a7e7ea00e666bc6385794a778ec",
+    "data/search-v2-voyage-canaries.json": "bf7124962461fdeedbedcc6f770d82fd285a5f38e6c30dd55c16703f7f90e569",
+    "assets/app.js": "d376812e7c1efa7b780469472eb294d8e46641ea8a9571727cd425ee2a3f4219",
+    "assets/search-hybrid.js": "3903b9e646ac9544f7f30916fcda84e31608d7ab16f4f6fed67982662f2cb75a",
     "assets/search-retrieval.js": "c891369e2cb9a0c57026af27dc8b11897041053ed83f72e8b440a4d87fb244bd",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
     "match_explorer.html": "c9ac19411fd2b1308a89bbb283719d82ca4666359d04c39c9cdc729a9368097c",
     "team_match.html": "874fc376d408b19a4e8e35b66f4a2b50b1ae9d36efb5389b6734b2cf6eede500",
-    "workers/search-voyage-proxy/src/index.js": "992d8724bc69f11408f80ff5f6f6e8a6e706aa4dae2fc2e6c3836a917b7f39fe",
+    "workers/search-voyage-proxy/src/index.js": "05b8d1b6990fda493d5bd2a166704ef994af4e646cda7ff913532be3876bb1f3",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
-  "atomic_publication_contract": "catalog + subtopics + manifest + vectors + Worker allowlist"
+  "atomic_publication_contract": "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist"
 }

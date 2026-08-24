@@ -474,6 +474,7 @@
     const endpoint = safeProxyUrl(proxyUrl);
     let assetsPromise = null;
     const resultCache = new Map();
+    const localResultCache = new Map();
     const usage = {
       embedding_requests: 0,
       rerank_requests: 0,
@@ -528,6 +529,9 @@
           || manifest.model !== EMBEDDING_MODEL
           || manifest.dimension !== EMBEDDING_DIMENSION
           || manifest.dtype !== "float16-le"
+          || !/^[a-f0-9]{64}$/.test(String(manifest.model_space_fingerprint || ""))
+          || manifest.model_space?.canary_set_version !== 1
+          || !(manifest.model_space?.canary_count > 0)
           || manifest.passage_count !== corpus.length
           || manifest.corpus_sha256 !== localCorpusHash) {
           throw new HybridSearchError("manifest_corpus_mismatch", "The semantic manifest does not match the current catalog.");
@@ -536,7 +540,8 @@
           || manifest.passages.some((entry, index) => entry.passage_id !== corpus[index].passage_id)) {
           throw new HybridSearchError("manifest_passage_mismatch", "The semantic passage order does not match the current catalog.");
         }
-        const vectorResponse = await fetchImpl(vectorUrl, { cache: "force-cache", credentials: "same-origin" });
+        const versionedVectorUrl = `${vectorUrl}${String(vectorUrl).includes("?") ? "&" : "?"}v=${manifest.vector_sha256}`;
+        const vectorResponse = await fetchImpl(versionedVectorUrl, { cache: "force-cache", credentials: "same-origin" });
         if (!vectorResponse.ok) throw new HybridSearchError("vector_asset_missing", "The semantic vectors are unavailable.");
         const vectorBuffer = await vectorResponse.arrayBuffer();
         if (await sha256Hex(vectorBuffer) !== manifest.vector_sha256) {
@@ -565,14 +570,38 @@
       }
       const started = performance.now();
       try {
-        const assets = await loadAssets();
+        const assetsTask = loadAssets().then(
+          value => ({ value, error: null }),
+          error => ({ value: null, error }),
+        );
         const parentDirect = parentEngine.score(normalizedQuery, { evidence: true, context });
         const childDirect = childEngine.score(normalizedQuery, { evidence: true, context });
         const semanticQuery = canonicalSemanticQuery(normalizedQuery, parentDirect, childDirect);
         const eligible = normalizedParentEligibility(eligibleParentIds);
+        const localSignature = await sha256Hex(JSON.stringify({
+          semantic_query: semanticQuery,
+          eligible_parent_ids: eligible ? [...eligible].sort() : null,
+        }));
+        const locallyCached = localResultCache.get(localSignature);
+        if (locallyCached) return {
+          ...locallyCached,
+          diagnostics: { ...locallyCached.diagnostics, cache_hit: true },
+          usage: { ...usage },
+        };
+        const embeddedTask = post("embed-query", { query: semanticQuery }).then(response => {
+          usage.embedding_requests += 1;
+          usage.embedding_tokens += Number(response.usage?.total_tokens || 0);
+          return { value: response, error: null };
+        }, error => ({ value: null, error }));
+        const [assetState, embeddedState] = await Promise.all([assetsTask, embeddedTask]);
+        if (assetState.error) throw assetState.error;
+        if (embeddedState.error) throw embeddedState.error;
+        const assets = assetState.value;
+        const embedded = embeddedState.value;
         const requestSignature = await sha256Hex(JSON.stringify({
           semantic_query: semanticQuery,
           corpus_sha256: assets.manifest.corpus_sha256,
+          model_space_fingerprint: assets.manifest.model_space_fingerprint,
           eligible_parent_ids: eligible ? [...eligible].sort() : null,
         }));
         const cached = resultCache.get(requestSignature);
@@ -589,9 +618,6 @@
           corpusById: assets.corpusById,
           eligibleParentIds: eligible,
         });
-        const embedded = await post("embed-query", { query: semanticQuery });
-        usage.embedding_requests += 1;
-        usage.embedding_tokens += Number(embedded.usage?.total_tokens || 0);
         const semantic = semanticCandidates(
           assets.corpus,
           assets.vectors,
@@ -624,11 +650,13 @@
             usage: { ...usage },
           };
           resultCache.set(requestSignature, emptyOutcome);
+          localResultCache.set(localSignature, emptyOutcome);
           return emptyOutcome;
         }
         const reranked = await post("rerank", {
           query: semanticQuery,
           corpus_sha256: assets.manifest.corpus_sha256,
+          model_space_fingerprint: assets.manifest.model_space_fingerprint,
           candidates: guarded.map(item => ({
             passage_id: item.passage_id,
             text_sha256: item.text_sha256,
@@ -668,6 +696,7 @@
           usage: { ...usage },
         };
         resultCache.set(requestSignature, outcome);
+        localResultCache.set(localSignature, outcome);
         return outcome;
       } catch (error) {
         usage.failures += 1;

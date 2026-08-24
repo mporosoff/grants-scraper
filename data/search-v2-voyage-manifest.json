@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23T21:33:28.459Z",
+  "generated_at": "2026-08-24T01:33:52.510Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
+  "response_model": "voyage-4-lite",
   "input_type": "document",
   "source_output_dtype": "float",
   "dimension": 1024,
@@ -12,8 +13,32 @@
   "parent_passage_count": 1423,
   "child_passage_count": 236,
   "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
-  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+  "vector_sha256": "68ede28ffed7aeae3dafd01f7860234fd5965a7e7ea00e666bc6385794a778ec",
   "vector_bytes": 3397632,
+  "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+  "model_space": {
+    "canary_set_version": 1,
+    "canary_count": 6,
+    "fingerprint_method": "sha256 of 4-decimal rounded canary embeddings",
+    "comparison_to_prior_generation": {
+      "prior_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+      "drift_detected": false,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
+      "per_canary_cosine": {
+        "carbon-catalysis": 1,
+        "critical-minerals": 1,
+        "rural-health": 1,
+        "quantum-sensing": 1,
+        "maritime-autonomy": 1,
+        "ecosystem-resilience": 1
+      },
+      "minimum_cosine_gate": 0.95,
+      "mean_cosine_gate": 0.98,
+      "gross_discontinuity": false,
+      "status": "passed"
+    }
+  },
   "stable_passage_id_contract": "parent:<opportunity_id> or child:<subtopic_id>",
   "passages": [
     {

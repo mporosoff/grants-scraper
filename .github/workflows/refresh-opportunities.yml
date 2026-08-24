@@ -91,6 +91,7 @@ jobs:
           VPR_SENDER: VPR_Funding_Opps@lists.rochester.edu
           VPR_LOOKBACK_DAYS: "45"
           VPR_REQUIRED_STREAMS: "vpr,cindy"
+          VPR_ENRICH_LINKS: "true"
         run: >-
           python -m scripts.sources merge
           --catalog data/opportunities.js
@@ -152,12 +153,14 @@ jobs:
         shell: bash
         run: |
           candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
           health="$(curl --fail --silent --show-error --max-time 15 \
             -H 'Origin: https://mporosoff.github.io' \
             'https://funding-finder-voyage-search.urochestercheme.workers.dev/health')"
           test "$(jq -r '.service' <<<"$health")" = "available"
           test "$(jq -r '.budget_state' <<<"$health")" = "available"
           test "$(jq -r '.corpus_sha256' <<<"$health")" = "$candidate_sha"
+          test "$(jq -r '.model_space_fingerprint' <<<"$health")" = "$candidate_fingerprint"
       - name: Record the build heartbeat
         shell: bash
         # Scheduled workflows are disabled after 60 days without repository
@@ -177,7 +180,7 @@ jobs:
           # would abort the commit and stop the nightly publishing entirely.
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
           if [ -f data/subtopics.js ]; then
             git add data/subtopics.js
           fi
@@ -207,12 +210,15 @@ jobs:
         shell: bash
         run: |
           candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
           verified=false
           for attempt in $(seq 1 18); do
-            live_sha="$(curl --fail --silent --show-error --max-time 15 \
+            live_release="$(curl --fail --silent --show-error --max-time 15 \
               "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?candidate=${candidate_sha}" \
-              | jq -r '.current_corpus_sha256' 2>/dev/null || true)"
-            if [ "$live_sha" = "$candidate_sha" ]; then
+              || true)"
+            live_sha="$(jq -r '.current_corpus_sha256' <<<"$live_release" 2>/dev/null || true)"
+            live_fingerprint="$(jq -r '.model_space_fingerprint' <<<"$live_release" 2>/dev/null || true)"
+            if [ "$live_sha" = "$candidate_sha" ] && [ "$live_fingerprint" = "$candidate_fingerprint" ]; then
               verified=true
               break
             fi

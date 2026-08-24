@@ -237,16 +237,44 @@ def _norm_title(record: dict) -> str:
     return re.sub(r"[^a-z0-9]+", " ", (record.get("title") or "").casefold()).strip()
 
 
+def _norm_number(value) -> str:
+    number = re.sub(r"[^a-z0-9]+", "", str(value or "").casefold())
+    # VPR digests commonly spell an NSF solicitation as ``NSF26-511`` while
+    # Grants.gov publishes the same identifier as ``26-511``. The sponsor
+    # prefix is presentation, not identity.
+    return re.sub(r"^nsf(?=\d{5,}$)", "", number)
+
+
+def _canonical_title(record: dict) -> str:
+    title = str(record.get("title") or "").strip()
+    title = re.sub(r"^\s*new\s+", "", title, flags=re.I)
+    title = re.sub(
+        r"^\s*(?:u\.?s\.?\s+)?(?:national\s+science\s+foundation|nsf)\s+",
+        "",
+        title,
+        flags=re.I,
+    )
+    title = re.sub(r"\s*\([A-Z][A-Z0-9&/ -]{1,11}\)\s*", " ", title)
+    title = re.sub(
+        r"(?:\s*\|\s*)?(?:NSF\s*)?\d{2}-\d{3,4}\.?\s*$",
+        "",
+        title,
+        flags=re.I,
+    )
+    return re.sub(r"[^a-z0-9]+", " ", title.casefold()).strip()
+
+
 def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], dict]:
     """Combine base (Grants.gov) and external records; base always wins."""
     combined = [normalize_record_facets(dict(record)) for record in base]
     external = [normalize_record_facets(dict(record)) for record in external]
     seen_identity = {record_identity(r) for r in combined}
-    base_titles = {
-        _norm_title(r) for r in combined if r.get("title")
+    base_titles = {_norm_title(r) for r in combined if r.get("title")}
+    canonical_titles = {
+        _canonical_title(r) for r in combined if _canonical_title(r)
     }
     base_numbers = {
-        str(r.get("opportunity_number")).strip().casefold()
+        _norm_number(r.get("opportunity_number"))
         for r in combined if r.get("opportunity_number")
     }
 
@@ -256,15 +284,24 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
         if identity in seen_identity:
             dropped_identity += 1
             continue
-        number = str(record.get("opportunity_number") or "").strip().casefold()
+        number = _norm_number(record.get("opportunity_number"))
+        title = _norm_title(record)
+        canonical_title = _canonical_title(record)
         if (
             (number and number in base_numbers)
-            or _norm_title(record) in base_titles
+            or title in base_titles
+            or (canonical_title and canonical_title in canonical_titles)
         ):
             dropped_crossdup += 1
             continue
         seen_identity.add(identity)
         combined.append(record)
+        if number:
+            base_numbers.add(number)
+        if title:
+            base_titles.add(title)
+        if canonical_title:
+            canonical_titles.add(canonical_title)
         added += 1
 
     combined.sort(

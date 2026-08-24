@@ -138,6 +138,22 @@ class CatalogExtractTests(unittest.TestCase):
 
         self.assertFalse(is_current(values, "posted", date(2026, 7, 25)))
 
+    def test_far_future_lifecycle_sentinel_is_not_an_application_deadline(self):
+        xml = b"""<Grants><OpportunitySynopsisDetail_1_0>
+          <OpportunityID>9001</OpportunityID>
+          <OpportunityNumber>PD-26-366Y</OpportunityNumber>
+          <OpportunityTitle>Transport Phenomena</OpportunityTitle>
+          <CloseDate>08202076</CloseDate>
+          <Description>Proposals are accepted anytime.</Description>
+        </OpportunitySynopsisDetail_1_0></Grants>"""
+
+        records = list(iter_catalog_records(BytesIO(xml), date(2026, 8, 23)))
+
+        self.assertEqual(len(records), 1)
+        self.assertIsNone(records[0]["close_date"])
+        self.assertEqual(records[0]["deadlines"], [])
+        self.assertTrue(records[0]["rolling"])
+
     def test_noi_abbreviation_and_explicit_test_records_are_not_current(self):
         self.assertFalse(is_current({
             "OpportunityTitle": ["NOI: Future research program"],

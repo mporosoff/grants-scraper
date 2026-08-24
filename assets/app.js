@@ -2167,7 +2167,7 @@
     })();
     const recordSourceName =
       record.source && record.source !== "Grants.gov" ? record.source : "Grants.gov";
-    const recordSourceLabel = escapeHtml(recordSourceName);
+    const recordSourceLabel = recordSourceName === "Grants.gov" ? "Grants.gov" : "Source";
     const seen = new Set();
     const links = [];
     if (primaryDocument) {
@@ -2178,7 +2178,7 @@
       links.push(`<a class="source-action primary" data-source-open="agency" href="${escapeAttribute(agencyNotice)}" target="_blank" rel="noopener">Open agency notice ↗</a>`);
     } else if (grantsRecord) {
       seen.add(grantsRecord);
-      links.push(`<a class="source-action primary" data-source-open="grants" href="${escapeAttribute(grantsRecord)}" target="_blank" rel="noopener">Open ${recordSourceLabel} record ↗</a>`);
+      links.push(`<a class="source-action primary" data-source-open="grants" href="${escapeAttribute(grantsRecord)}" target="_blank" rel="noopener">Open opportunity ↗</a>`);
     }
     if (grantsRecord && !seen.has(grantsRecord)) {
       seen.add(grantsRecord);

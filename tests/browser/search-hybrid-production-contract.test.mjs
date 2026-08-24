@@ -199,7 +199,7 @@ test("active parent eligibility constrains BM25, semantic top-k, child passages,
     vectorUrl: "/vectors",
     fetchImpl: async (url, options = {}) => {
       if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
-      if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+      if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
       if (String(url).endsWith("/embed-query")) {
         embedRequests += 1;
         return new Response(JSON.stringify({ embedding: Array.from(queryVector) }), { status: 200 });
@@ -257,7 +257,7 @@ test("hybrid client is lazy, rejects a stale manifest, and sends no browser cred
   const fetchImpl = async (url, options = {}) => {
     requests.push({ url: String(url), options });
     if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
-    if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
     if (String(url).endsWith("/embed-query")) {
       const vectors = api.decodeFloat16(
         vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
@@ -335,7 +335,7 @@ test("missing or mismatched vector assets fail closed to the existing local-resu
 test("hybrid results remain ranked leads without fabricated relevance labels", async () => {
   const fetchImpl = async (url, options = {}) => {
     if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
-    if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
     if (String(url).endsWith("/embed-query")) {
       const vectors = api.decodeFloat16(
         vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
@@ -385,7 +385,7 @@ test("provider errors and client timeouts fail closed for the existing local-res
   };
   const assetResponse = url => {
     if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
-    if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
     return null;
   };
   const failed = api.createClient({
@@ -461,4 +461,21 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   assert.doesNotMatch(source, /\/judge|JUDGE_MODEL|intent_classification/);
   assert.doesNotMatch(appSource, /Matched because semantic similarity|Voyage score/);
   assert.doesNotMatch(appSource, /VOYAGE_API_KEY|Authorization:\s*`Bearer/);
+});
+
+test("cold search overlaps independent work and vectors use an immutable generation URL", () => {
+  const searchBody = source.slice(source.indexOf("async function search"));
+  const ordered = [
+    "const assetsTask = loadAssets()",
+    "const parentDirect = parentEngine.score",
+    "const embeddedTask = post(\"embed-query\"",
+    "Promise.all([assetsTask, embeddedTask])",
+    "semanticCandidates(",
+    "post(\"rerank\"",
+  ].map(fragment => searchBody.indexOf(fragment));
+  ordered.forEach(index => assert.ok(index >= 0, "cold-path stage is present"));
+  assert.deepEqual(ordered, ordered.slice().sort((left, right) => left - right));
+  assert.match(source, /versionedVectorUrl[\s\S]*?v=\$\{manifest\.vector_sha256\}/);
+  assert.match(source, /fetchImpl\(versionedVectorUrl, \{ cache: "force-cache"/);
+  assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16/);
 });

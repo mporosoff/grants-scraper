@@ -12,7 +12,10 @@ import process from "node:process";
 import vm from "node:vm";
 
 import { loadHarness, makeVariantHarness } from "./run_search_diagnosis.mjs";
-import { createHandler } from "../workers/search-voyage-proxy/src/index.js";
+import {
+  createHandler,
+  SearchBudgetCoordinator,
+} from "../workers/search-voyage-proxy/src/index.js";
 
 const ROOT = new URL("../", import.meta.url);
 const RESULTS_PATH = "evaluation/search_v2_hybrid_production_results.json";
@@ -78,6 +81,36 @@ function loadHybridApi(source) {
 function requiredRanks(parents, requiredIds) {
   const ranks = new Map(parents.map((item, index) => [String(item.parent_id), index + 1]));
   return Object.fromEntries(requiredIds.map(id => [id, ranks.get(String(id)) || null]));
+}
+
+function evaluationEnv(apiKey) {
+  const values = new Map();
+  const coordinator = new SearchBudgetCoordinator({
+    storage: {
+      async get(key) { return values.get(key); },
+      async put(key, value) { values.set(key, structuredClone(value)); },
+    },
+  });
+  const limiter = { async limit() { return { success: true }; } };
+  return {
+    VOYAGE_API_KEY: apiKey,
+    ENHANCED_SEARCH_ENABLED: "true",
+    DAILY_EMBED_TOKEN_BUDGET: "50000",
+    DAILY_RERANK_TOKEN_BUDGET: "25000000",
+    PER_CLIENT_EMBED_REQUEST_LIMIT: "12",
+    PER_CLIENT_RERANK_REQUEST_LIMIT: "8",
+    GLOBAL_REQUEST_LIMIT: "600",
+    RATE_LIMIT_RETRY_AFTER_SECONDS: "10",
+    GLOBAL_RATE_LIMITER: limiter,
+    EMBED_RATE_LIMITER: limiter,
+    RERANK_RATE_LIMITER: limiter,
+    BUDGET_COORDINATOR: {
+      idFromName(name) { return name; },
+      get() {
+        return { fetch(url, options) { return coordinator.fetch(new Request(url, options)); } };
+      },
+    },
+  };
 }
 
 function queryMetrics(parents, queryTruth) {
@@ -169,18 +202,21 @@ async function main() {
   const api = loadHybridApi(hybridSource);
   const providerReceipts = [];
   const handler = createHandler({ fetchImpl: globalThis.fetch.bind(globalThis) });
+  const workerEnv = evaluationEnv(apiKey);
   const fetchImpl = async (url, options = {}) => {
     if (String(url) === "https://assets.local/manifest") {
       return new Response(manifestSource, { status: 200, headers: { "Content-Type": "application/json" } });
     }
-    if (String(url) === "https://assets.local/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).startsWith("https://assets.local/vectors?v=")) {
+      return new Response(vectorBuffer, { status: 200 });
+    }
     const request = new Request(url, {
       ...options,
       headers: { ...(options.headers || {}), Origin: "http://localhost:8000" },
     });
     const payloadBytes = Buffer.byteLength(String(options.body || ""), "utf8");
     const started = performance.now();
-    const response = await handler(request, { VOYAGE_API_KEY: apiKey });
+    const response = await handler(request, workerEnv);
     const receipt = await response.clone().json().catch(() => ({}));
     providerReceipts.push({
       endpoint: new URL(String(url)).pathname,

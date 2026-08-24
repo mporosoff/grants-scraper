@@ -12,6 +12,7 @@ const ROOT = new URL("../", import.meta.url);
 const HYBRID_SOURCE_PATH = "assets/search-hybrid.js";
 const MANIFEST_PATH = "data/search-v2-voyage-manifest.json";
 const VECTOR_PATH = "data/search-v2-voyage-vectors.f16";
+const CANARY_PATH = "data/search-v2-voyage-canaries.json";
 const RECEIPT_PATH = "evaluation/search_v2_hybrid_vector_build.json";
 const API_URL = "https://api.voyageai.com/v1/embeddings";
 const MODEL = "voyage-4-lite";
@@ -20,6 +21,18 @@ const DTYPE = "float16-le";
 const BATCH_SIZE = 256;
 const REQUEST_TIMEOUT_MS = 120_000;
 const PRICE_PER_MILLION_TOKENS_USD = 0.02;
+const CANARY_SET_VERSION = 1;
+const CANARY_ROUND_DECIMALS = 4;
+const CANARY_MINIMUM_COSINE = 0.95;
+const CANARY_MEAN_COSINE = 0.98;
+const MODEL_SPACE_CANARIES = Object.freeze([
+  { id: "carbon-catalysis", text: "Catalytic conversion of captured carbon dioxide into durable fuels and chemicals using electrochemical reaction engineering." },
+  { id: "critical-minerals", text: "Rare earth element separation, solvent extraction, ion exchange, recycling, and domestic critical-mineral processing research." },
+  { id: "rural-health", text: "Rural maternal health care networks, obstetric access, clinical outcomes, and community health delivery research." },
+  { id: "quantum-sensing", text: "Quantum sensing, precision measurement, photonics, atomic systems, and navigation technologies for scientific discovery." },
+  { id: "maritime-autonomy", text: "Autonomous maritime sensing, robotics, ocean observation, resilient navigation, and marine engineering." },
+  { id: "ecosystem-resilience", text: "Ecological restoration, watershed resilience, biodiversity monitoring, wildfire recovery, and environmental field science." },
+]);
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -92,6 +105,69 @@ function quantizationCosine(vector, half) {
   return dot / ((Math.sqrt(left) || 1) * (Math.sqrt(right) || 1));
 }
 
+function cosine(leftVector, rightVector) {
+  let dot = 0;
+  let left = 0;
+  let right = 0;
+  for (let index = 0; index < leftVector.length; index += 1) {
+    dot += leftVector[index] * rightVector[index];
+    left += leftVector[index] * leftVector[index];
+    right += rightVector[index] * rightVector[index];
+  }
+  return dot / ((Math.sqrt(left) || 1) * (Math.sqrt(right) || 1));
+}
+
+function roundedEmbedding(vector) {
+  return Array.from(vector, value => Number(value.toFixed(CANARY_ROUND_DECIMALS)));
+}
+
+function canaryFingerprint(canaries) {
+  return sha256(JSON.stringify({
+    canary_set_version: CANARY_SET_VERSION,
+    model: MODEL,
+    dimension: DIMENSION,
+    input_type: "document",
+    output_dtype: "float",
+    rounding_decimals: CANARY_ROUND_DECIMALS,
+    canaries: canaries.map(item => ({ id: item.id, embedding: item.embedding })),
+  }));
+}
+
+function compareCanarySpace(previous, current) {
+  if (!previous?.canaries?.length) return {
+    prior_fingerprint: null,
+    drift_detected: null,
+    minimum_cosine: null,
+    mean_cosine: null,
+    minimum_cosine_gate: CANARY_MINIMUM_COSINE,
+    mean_cosine_gate: CANARY_MEAN_COSINE,
+    gross_discontinuity: false,
+    status: "baseline_established",
+  };
+  const previousById = new Map(previous.canaries.map(item => [item.id, item.embedding]));
+  const similarities = current.map(item => {
+    const prior = previousById.get(item.id);
+    if (!Array.isArray(prior) || prior.length !== DIMENSION) {
+      throw new Error(`Prior model-space canary ${item.id} is missing or malformed.`);
+    }
+    return cosine(prior, item.embedding);
+  });
+  const minimum = Math.min(...similarities);
+  const mean = similarities.reduce((sum, value) => sum + value, 0) / similarities.length;
+  const gross = minimum < CANARY_MINIMUM_COSINE || mean < CANARY_MEAN_COSINE;
+  return {
+    prior_fingerprint: previous.model_space_fingerprint || null,
+    drift_detected: previous.model_space_fingerprint !== canaryFingerprint(current),
+    minimum_cosine: number(minimum),
+    mean_cosine: number(mean),
+    per_canary_cosine: Object.fromEntries(current.map((item, index) => [item.id, number(similarities[index])])),
+    minimum_cosine_gate: CANARY_MINIMUM_COSINE,
+    mean_cosine_gate: CANARY_MEAN_COSINE,
+    gross_discontinuity: gross,
+    status: gross ? "blocked_gross_discontinuity" : "passed",
+  };
+}
+
 async function hybridApi() {
   const source = await readFile(new URL(HYBRID_SOURCE_PATH, ROOT), "utf8");
   const context = {
@@ -110,12 +186,15 @@ async function hybridApi() {
 
 async function existingAsset() {
   try {
-    const manifest = JSON.parse(await readFile(new URL(MANIFEST_PATH, ROOT), "utf8"));
-    const binary = await readFile(new URL(VECTOR_PATH, ROOT));
+    const [manifest, binary, canaries] = await Promise.all([
+      readFile(new URL(MANIFEST_PATH, ROOT), "utf8").then(JSON.parse),
+      readFile(new URL(VECTOR_PATH, ROOT)),
+      readFile(new URL(CANARY_PATH, ROOT), "utf8").then(JSON.parse).catch(() => null),
+    ]);
     const vectors = new Uint16Array(binary.buffer, binary.byteOffset, binary.byteLength / 2);
     if (manifest.model !== MODEL || manifest.dimension !== DIMENSION || manifest.dtype !== DTYPE) return null;
     if (!Array.isArray(manifest.passages) || vectors.length !== manifest.passages.length * DIMENSION) return null;
-    return { manifest, vectors };
+    return { manifest, vectors, canaries };
   } catch {
     return null;
   }
@@ -182,6 +261,7 @@ async function run() {
   });
   const corpusSha = corpusHash(corpus);
   const priorById = new Map((previous?.manifest?.passages || []).map((item, index) => [item.passage_id, { ...item, index }]));
+  const currentPassageIds = new Set(corpus.map(item => item.passage_id));
   const vectorWords = new Uint16Array(corpus.length * DIMENSION);
   const changed = [];
   let reused = 0;
@@ -250,10 +330,41 @@ async function run() {
   }
   const receipts = [];
   const quantizationCosines = [];
+  let canaryArtifact = null;
+  let canaryComparison = null;
+  if (production) {
+    const response = await embed(
+      process.env.VOYAGE_API_KEY,
+      MODEL_SPACE_CANARIES.map(item => item.text),
+      "model-space-canaries",
+    );
+    const canaries = MODEL_SPACE_CANARIES.map((item, index) => ({
+      id: item.id,
+      text_sha256: sha256(item.text),
+      embedding: roundedEmbedding(response.vectors[index]),
+    }));
+    const fingerprint = canaryFingerprint(canaries);
+    canaryComparison = compareCanarySpace(previous?.canaries, canaries);
+    canaryArtifact = {
+      schema_version: 1,
+      generated_at: null,
+      canary_set_version: CANARY_SET_VERSION,
+      model_alias: MODEL,
+      response_model: response.receipt.model,
+      input_type: "document",
+      source_output_dtype: "float",
+      dimension: DIMENSION,
+      rounding_decimals: CANARY_ROUND_DECIMALS,
+      model_space_fingerprint: fingerprint,
+      comparison_to_prior_generation: canaryComparison,
+      canaries,
+    };
+    receipts.push({ ...response.receipt, request_kind: "model_space_canaries" });
+  }
   for (let offset = 0; offset < changed.length; offset += BATCH_SIZE) {
     const batch = changed.slice(offset, offset + BATCH_SIZE);
     const response = await embed(process.env.VOYAGE_API_KEY, batch.map(item => item.passage.text), receipts.length);
-    receipts.push(response.receipt);
+    receipts.push({ ...response.receipt, request_kind: "corpus_passages" });
     response.vectors.forEach((vector, localIndex) => {
       const half = quantize(vector);
       quantizationCosines.push(quantizationCosine(vector, half));
@@ -265,11 +376,17 @@ async function run() {
   const vectorBuffer = Buffer.from(vectorWords.buffer, vectorWords.byteOffset, vectorWords.byteLength);
   const vectorSha = sha256(vectorBuffer);
   const generatedAt = new Date().toISOString();
+  if (canaryArtifact) canaryArtifact.generated_at = generatedAt;
+  const responseModels = [...new Set(receipts.map(item => item.model))];
+  if (production && (responseModels.length !== 1 || responseModels[0] !== MODEL)) {
+    throw new Error(`Production embedding responses are not uniform: ${responseModels.join(", ") || "missing model"}.`);
+  }
   const manifest = {
     schema_version: 1,
     generated_at: generatedAt,
     model: MODEL,
     provider_revision: "not exposed by the real-time embedding API",
+    response_model: responseModels[0] || MODEL,
     input_type: "document",
     source_output_dtype: "float",
     dimension: DIMENSION,
@@ -281,6 +398,13 @@ async function run() {
     corpus_sha256: corpusSha,
     vector_sha256: vectorSha,
     vector_bytes: vectorBuffer.byteLength,
+    model_space_fingerprint: canaryArtifact?.model_space_fingerprint || previous?.manifest?.model_space_fingerprint || null,
+    model_space: canaryArtifact ? {
+      canary_set_version: CANARY_SET_VERSION,
+      canary_count: MODEL_SPACE_CANARIES.length,
+      fingerprint_method: `sha256 of ${CANARY_ROUND_DECIMALS}-decimal rounded canary embeddings`,
+      comparison_to_prior_generation: canaryComparison,
+    } : previous?.manifest?.model_space || null,
     stable_passage_id_contract: "parent:<opportunity_id> or child:<subtopic_id>",
     passages: corpus.map((passage, vector_row) => ({
       passage_id: passage.passage_id,
@@ -299,16 +423,21 @@ async function run() {
     build_mode: production ? "production_full_rebuild" : (force ? "forced_full_rebuild" : "local_incremental"),
     model: MODEL,
     provider_revision: manifest.provider_revision,
+    response_model: manifest.response_model,
     input_type: "document",
     API_key_printed_or_persisted: false,
     passage_count: corpus.length,
     reused_passage_count: reused,
     embedded_passage_count: changed.length,
-    removed_prior_passage_count: Math.max(0, (previous?.manifest?.passage_count || 0) - reused),
+    removed_prior_passage_count: (previous?.manifest?.passages || [])
+      .filter(item => !currentPassageIds.has(item.passage_id)).length,
     corpus_sha256: corpusSha,
     vector_sha256: vectorSha,
     vector_format: DTYPE,
     vector_bytes: vectorBuffer.byteLength,
+    build_timestamp: generatedAt,
+    model_space_fingerprint: manifest.model_space_fingerprint,
+    model_space: manifest.model_space,
     source_hashes: {
       "assets/search-hybrid.js": await sha256File("assets/search-hybrid.js"),
       "data/opportunities.js": await sha256File("data/opportunities.js"),
@@ -329,14 +458,34 @@ async function run() {
     vectors_contain_public_passages_only: true,
     vectors_persist_private_profile_or_researcher_data: false,
     production_reused_vectors: production ? false : null,
+    production_generation_uniform: production ? {
+      model_alias_count: 1,
+      response_model_count: responseModels.length,
+      dimension_count: 1,
+      output_type_count: 1,
+      build_timestamp_count: 1,
+      canary_fingerprint_count: canaryArtifact ? 1 : 0,
+      corpus_sha_count: 1,
+      vector_sha_count: 1,
+    } : null,
   };
 
+  if (production && canaryComparison?.gross_discontinuity) {
+    throw new Error(
+      `Gross embedding-space discontinuity: minimum cosine ${canaryComparison.minimum_cosine}, mean cosine ${canaryComparison.mean_cosine}. Publication blocked after full rebuild.`,
+    );
+  }
+
   if (write) {
-    await Promise.all([
+    const writes = [
       writeFile(new URL(MANIFEST_PATH, ROOT), `${JSON.stringify(manifest, null, 2)}\n`),
       writeFile(new URL(VECTOR_PATH, ROOT), vectorBuffer),
       writeFile(new URL(RECEIPT_PATH, ROOT), `${JSON.stringify(receipt, null, 2)}\n`),
-    ]);
+    ];
+    if (canaryArtifact) writes.push(
+      writeFile(new URL(CANARY_PATH, ROOT), `${JSON.stringify(canaryArtifact, null, 2)}\n`),
+    );
+    await Promise.all(writes);
   }
   process.stdout.write(`${JSON.stringify({
     write,
@@ -348,6 +497,8 @@ async function run() {
     vector_bytes: vectorBuffer.byteLength,
     corpus_sha256: corpusSha,
     vector_sha256: vectorSha,
+    model_space_fingerprint: manifest.model_space_fingerprint,
+    model_space_comparison: canaryComparison,
     quantization: receipt.float16_quantization,
   }, null, 2)}\n`);
 }

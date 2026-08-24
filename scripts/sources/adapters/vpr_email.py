@@ -16,9 +16,10 @@ Flow
 
 Credentials come from environment variables (GitHub Actions secrets), never the
 repo: VPR_IMAP_HOST/USER/PASS/FOLDER, VPR_SENDERS, VPR_SUBJECT_SENDERS,
-VPR_SUBJECT_KEYWORD, VPR_LOOKBACK_DAYS, and VPR_REQUIRED_STREAMS. The default
-required streams are ``vpr,cindy``; a refresh falls back to the last good
-snapshot if either stream disappears or accepted messages stop parsing.
+VPR_SUBJECT_KEYWORD, VPR_LOOKBACK_DAYS, VPR_REQUIRED_STREAMS, and the explicit
+VPR_ENRICH_LINKS switch. The default required streams are ``vpr,cindy``; a
+refresh falls back to the last good snapshot if either stream disappears or
+accepted messages stop parsing.
 
 Parsing the real digests
 ------------------------
@@ -48,6 +49,9 @@ import os
 import re
 from html.parser import HTMLParser
 from typing import Iterable, Optional
+from urllib.parse import urlparse
+
+import requests
 
 from ..base import CanonicalOpportunity, SourceAdapter
 from ..registry import register
@@ -90,7 +94,7 @@ _FIELD_KW = (
     r"internal application deadline|expression of intent deadline|next deadlines"
     r"|program synopsis|number of applications allowed|criteria for selection"
     r"|past ur awardees|past grantees|fields? of interest|sponsor website"
-    r"|grant period|topic/discipline|next steps|deadlines?|eligibility"
+    r"|grant period|award amount|grant amount|amount|topic/discipline|next steps|deadlines?|eligibility"
     r"|competitive|funding|synopsis|topic|note|limited"
 )
 _FIELD_LABEL_RE = re.compile(
@@ -107,7 +111,7 @@ _STRONG_FIELD_RE = re.compile(
 _OPP_NUMBER_RE = re.compile(
     r"\b("
     r"(?:PAR|PA|RFA|NOT|PD)-\d{2}-\d{3,4}"
-    r"|NSF\s?\d{2}-\d{3}"
+    r"|(?:NSF\s?)?\d{2}-\d{3}"
     r"|W911NF\w+|N0001\w+|FA9550\w+"
     r"|NOFO[A-Z0-9]+"
     r")\b"
@@ -122,6 +126,33 @@ _DATE_RE = re.compile(
     r"|\d{1,2}/\d{1,2}/\d{4}"
     r")"
 )
+_ENRICHABLE_PRIVATE_HOSTS = {
+    "acs.org",
+    "damonrunyon.org",
+    "dreyfus.org",
+    "mathersfoundation.org",
+    "nysmarticorridor.com",
+    "simonsfoundation.org",
+    "sloan.org",
+    "sony.com",
+    "wmkeck.org",
+}
+_SPONSOR_BY_HOST = {
+    "acs.org": "American Chemical Society Petroleum Research Fund",
+    "damonrunyon.org": "Damon Runyon Cancer Research Foundation",
+    "dreyfus.org": "Camille and Henry Dreyfus Foundation",
+    "mathersfoundation.org": "G. Harold and Leila Y. Mathers Foundation",
+    "nysmarticorridor.com": "NY SMART I-Corridor",
+    "simonsfoundation.org": "Simons Foundation",
+    "sloan.org": "Alfred P. Sloan Foundation",
+    "sony.com": "Sony Research",
+    "wmkeck.org": "W. M. Keck Foundation",
+}
+_LINK_FETCH_HEADERS = {
+    "User-Agent": "Funding-Finder/1.2.1 (+https://mporosoff.github.io/grants-scraper/)",
+    "Accept": "text/html,application/xhtml+xml",
+}
+_MAX_LINK_PAGE_BYTES = 1_500_000
 
 
 # --------------------------------------------------------------------------- #
@@ -367,6 +398,159 @@ def _money(value: Optional[str]) -> Optional[str]:
     return str(int(n))
 
 
+def _private_host(url: Optional[str]) -> Optional[str]:
+    try:
+        host = (urlparse(str(url or "")).hostname or "").casefold()
+    except ValueError:
+        return None
+    if host.startswith("www."):
+        host = host[4:]
+    return next(
+        (allowed for allowed in _ENRICHABLE_PRIVATE_HOSTS
+         if host == allowed or host.endswith(f".{allowed}")),
+        None,
+    )
+
+
+class _PageMetadata(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.descriptions: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag != "meta":
+            return
+        values = {str(key).casefold(): value for key, value in attrs}
+        name = str(values.get("name") or values.get("property") or "").casefold()
+        content = re.sub(r"\s+", " ", str(values.get("content") or "")).strip()
+        if name in {"description", "og:description", "twitter:description"} and content:
+            self.descriptions.append(content)
+
+
+def _extract_page_enrichment(html: str, title: str = "") -> dict:
+    metadata = _PageMetadata()
+    metadata.feed(html or "")
+    lines = [line["plain"] for line in html_to_lines(html or "")]
+    result: dict = {}
+
+    descriptions = [
+        value for value in metadata.descriptions
+        if 60 <= len(value) <= 2_000
+        and not re.search(r"\b(?:cookie|privacy policy|enable javascript)\b", value, re.I)
+    ]
+    candidates = descriptions + [
+        line for line in lines
+        if 80 <= len(line) <= 2_000
+        and re.search(r"\b(?:program|grant|award|funds?|supports?|invites?|research)\b", line, re.I)
+        and not re.search(r"\b(?:cookie|privacy policy|navigation|subscribe)\b", line, re.I)
+    ]
+    title_terms = {
+        term for term in re.findall(r"[a-z0-9]{4,}", title.casefold())
+        if term not in {"foundation", "funding", "grant", "grants", "program", "research"}
+    }
+    if candidates:
+        def description_score(value):
+            terms = set(re.findall(r"[a-z0-9]{4,}", value.casefold()))
+            overlap = len(title_terms & terms)
+            purpose = int(bool(re.search(
+                r"\b(?:program|grant|collaboration)\b.{0,80}\b(?:supports?|funds?|invites?|provides?)\b|"
+                r"\b(?:supports?|funds?|invites?|provides?)\b.{0,80}\b(?:program|grant|collaboration)\b",
+                value,
+                re.I,
+            )))
+            instructions = int(bool(re.search(
+                r"\b(?:submit|submission|portal|log in|applications should be started)\b",
+                value,
+                re.I,
+            )))
+            specificity = int(bool(re.search(
+                r"\b(?:eligible|award|applicant|investigator|faculty|proposal)\b",
+                value,
+                re.I,
+            )))
+            return overlap, purpose - instructions, specificity, min(len(value), 600)
+
+        selected = max(candidates, key=description_score)
+        if not title_terms or description_score(selected)[0] > 0:
+            result["description"] = selected[:2_000]
+
+    for index, line in enumerate(lines):
+        match = re.match(
+            r"^\s*(?:eligibility|eligible applicants?|who (?:can|may) apply)\s*:?[ \t]*(.*)$",
+            line,
+            re.I,
+        )
+        if not match:
+            continue
+        value = match.group(1).strip()
+        if len(value) < 30 and index + 1 < len(lines):
+            value = f"{value} {lines[index + 1]}".strip()
+        if 20 <= len(value) <= 1_500:
+            result["eligibility_text"] = value.lstrip(" ?�•:-")[:1_500]
+            break
+
+    for line in lines:
+        if not re.search(r"\b(?:deadline|due date|applications? due|proposals? due)\b", line, re.I):
+            continue
+        date_text = _first_date(line)
+        parsed = _iso(date_text)
+        if parsed:
+            result["close_date"] = parsed
+            break
+
+    for line in lines:
+        if not re.search(
+            r"\b(?:award amount|grant amount|maximum award|funding amount|up to)\b",
+            line,
+            re.I,
+        ):
+            continue
+        amount = _money(line)
+        if amount:
+            result["award_ceiling"] = amount
+            break
+    return result
+
+
+def _fetch_page_enrichment(url: str, title: str = "") -> dict:
+    allowed_host = _private_host(url)
+    if not allowed_host:
+        return {}
+    response = requests.get(
+        url,
+        headers=_LINK_FETCH_HEADERS,
+        timeout=12,
+        allow_redirects=True,
+    )
+    response.raise_for_status()
+    if not _private_host(response.url):
+        raise ValueError("private-funder page redirected outside the allowlist")
+    content_type = str(response.headers.get("content-type") or "").casefold()
+    if "html" not in content_type:
+        return {}
+    if len(response.content) > _MAX_LINK_PAGE_BYTES:
+        raise ValueError("private-funder page exceeds the bounded parser size")
+    if "_Incapsula_Resource" in response.text or "Request unsuccessful" in response.text:
+        return {}
+    return _extract_page_enrichment(response.text, title)
+
+
+def _enrich_private_item(item: dict, page_cache: dict[str, dict]) -> tuple[dict, bool]:
+    url = str(item.get("url") or "")
+    host = _private_host(url)
+    if not host:
+        return item, False
+    if url not in page_cache:
+        page_cache[url] = _fetch_page_enrichment(url, str(item.get("title") or ""))
+    enriched = dict(item)
+    page = page_cache[url]
+    for field in ("description", "eligibility_text", "close_date", "award_ceiling"):
+        if not enriched.get(field) and page.get(field):
+            enriched[field] = page[field]
+    enriched["agency"] = enriched.get("agency") or _SPONSOR_BY_HOST.get(host)
+    return enriched, bool(page)
+
+
 def _is_title_line(line: dict, in_fundable: bool) -> bool:
     """A bold, non-field, non-section line inside a fundable section that reads
     like an opportunity heading (not a note, sub-bullet, or prose sentence)."""
@@ -574,7 +758,10 @@ def _build_opportunity(buf: list[dict]) -> Optional[dict]:
     close_date = _iso(close_text)   # None unless it parses to a real date
 
     synopsis = _synopsis(plains)
-    funding = _field_value(plains, ("funding",))
+    funding = _field_value(
+        plains,
+        ("funding", "award amount", "grant amount", "amount"),
+    )
     topic = _field_value(plains, ("topic/discipline", "topic", "fields of interest",
                                   "field of interest"))
 
@@ -756,6 +943,15 @@ class VPREmailAdapter(SourceAdapter):
 
     def parse(self, payload) -> Iterable[CanonicalOpportunity]:
         records = []
+        page_cache: dict[str, dict] = {}
+        enrich_links = str(os.environ.get("VPR_ENRICH_LINKS") or "").casefold() == "true"
+        enrichment = {
+            "enabled": enrich_links,
+            "attempted": 0,
+            "succeeded": 0,
+            "unavailable": 0,
+            "failed": 0,
+        }
         diagnostics = dict(getattr(self, "diagnostics", {}) or {})
         streams = diagnostics.setdefault("streams", {})
         for message in payload or []:
@@ -772,6 +968,28 @@ class VPREmailAdapter(SourceAdapter):
                 "empty_messages": 0,
             })
             items = extract_opportunities(body)
+            if enrich_links:
+                enriched_items = []
+                for item in items:
+                    private_host = _private_host(item.get("url"))
+                    if not private_host:
+                        enriched_items.append(item)
+                        continue
+                    item = dict(item)
+                    item["agency"] = (
+                        item.get("agency")
+                        or _SPONSOR_BY_HOST.get(private_host)
+                    )
+                    enrichment["attempted"] += 1
+                    try:
+                        item, succeeded = _enrich_private_item(item, page_cache)
+                    except (requests.RequestException, ValueError, UnicodeError):
+                        enrichment["failed"] += 1
+                    else:
+                        enrichment["succeeded"] += int(succeeded)
+                        enrichment["unavailable"] += int(not succeeded)
+                    enriched_items.append(item)
+                items = enriched_items
             stats["parsed_records"] += len(items)
             if not items:
                 stats["empty_messages"] += 1
@@ -784,6 +1002,7 @@ class VPREmailAdapter(SourceAdapter):
         )
         diagnostics["parse_failed_streams"] = failed_streams
         diagnostics["parsed_records"] = len(records)
+        diagnostics["private_link_enrichment"] = enrichment
         self.diagnostics = diagnostics
         if failed_streams:
             raise ValueError(
@@ -803,10 +1022,12 @@ class VPREmailAdapter(SourceAdapter):
             external_id=item.get("external_id"),
             opportunity_number=item.get("opportunity_number"),
             url=item.get("url"),
+            agency=item.get("agency"),
             description=item.get("description"),
             close_date=item.get("close_date"),
             deadline_note=item.get("deadline_note"),
             award_ceiling=item.get("award_ceiling"),
+            eligibility_text=item.get("eligibility_text"),
             disciplines=item.get("disciplines") or [],
             additional_deadlines=item.get("additional_deadlines") or [],
             extra=item.get("extra") or {},

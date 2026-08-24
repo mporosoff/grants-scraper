@@ -90,6 +90,7 @@ test("proxy rejects origins, methods, malformed inputs, and non-corpus passages"
   const arbitrary = await handler(request("/rerank", {
     query: "test",
     corpus_sha256: manifest.corpus_sha256,
+    model_space_fingerprint: manifest.model_space_fingerprint,
     candidates: [{ passage_id: first.passage_id, text_sha256: first.text_sha256, text: "private text" }],
   }), env);
   assert.equal(arbitrary.status, 400);
@@ -119,6 +120,7 @@ test("proxy sends only bounded allowlisted public text and exposes no credential
   const reranked = await handler(request("/rerank", {
     query: "public research query",
     corpus_sha256: manifest.corpus_sha256,
+    model_space_fingerprint: manifest.model_space_fingerprint,
     candidates: [{ passage_id: first.passage_id, text_sha256: first.text_sha256, text: first.text }],
   }), env);
   assert.equal(reranked.status, 200);
@@ -152,9 +154,12 @@ test("proxy accepts exactly the current and immediately previous corpus generati
       usage: { total_tokens: 3 },
     }), { status: 200 });
   } });
-  const body = corpusSha => ({
+  const body = generation => ({
     query: "public compatibility test",
-    corpus_sha256: corpusSha,
+    corpus_sha256: generation.corpus_sha256,
+    ...(generation.model_space_fingerprint
+      ? { model_space_fingerprint: generation.model_space_fingerprint }
+      : {}),
     candidates: [{
       passage_id: candidate.passage_id,
       text_sha256: compatible.text_sha256,
@@ -162,11 +167,25 @@ test("proxy accepts exactly the current and immediately previous corpus generati
     }],
   });
   const env = testEnv();
-  const previous = await handler(request("/rerank", body(allowlist.previous.corpus_sha256)), env);
+  const current = await handler(request("/rerank", body(allowlist.current)), env);
+  assert.equal(current.status, 200);
+  const mismatchedFingerprint = body(allowlist.current);
+  mismatchedFingerprint.model_space_fingerprint = "0".repeat(64);
+  assert.equal(
+    (await handler(request("/rerank", mismatchedFingerprint), env)).status,
+    400,
+  );
+  const missingFingerprint = body(allowlist.current);
+  delete missingFingerprint.model_space_fingerprint;
+  assert.equal(
+    (await handler(request("/rerank", missingFingerprint), env)).status,
+    400,
+  );
+  const previous = await handler(request("/rerank", body(allowlist.previous)), env);
   assert.equal(previous.status, 200);
-  const unknown = await handler(request("/rerank", body("f".repeat(64))), env);
+  const unknown = await handler(request("/rerank", body({ corpus_sha256: "f".repeat(64) })), env);
   assert.equal(unknown.status, 400);
-  assert.equal(providerCalls, 1);
+  assert.equal(providerCalls, 2);
 });
 
 test("proxy converts provider failures into clean non-secret errors", async () => {
@@ -244,6 +263,7 @@ test("health metadata is bounded and operational storage contains counters, neve
   assert.deepEqual(await health.json(), {
     service: "available",
     corpus_sha256: allowlist.current.corpus_sha256,
+    model_space_fingerprint: allowlist.current.model_space_fingerprint,
     previous_corpus_supported: true,
     budget_state: "available",
   });

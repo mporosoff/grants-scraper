@@ -9,6 +9,8 @@ const root = new URL("../../", import.meta.url);
 const paths = {
   manifest: new URL("data/search-v2-voyage-manifest.json", root),
   vectors: new URL("data/search-v2-voyage-vectors.f16", root),
+  canaries: new URL("data/search-v2-voyage-canaries.json", root),
+  receipt: new URL("evaluation/search_v2_hybrid_vector_build.json", root),
   release: new URL("data/search-v2-release.json", root),
   allowlist: new URL("workers/search-voyage-proxy/generated/corpus-allowlist.json", root),
   worker: new URL("workers/search-voyage-proxy/src/index.js", root),
@@ -16,9 +18,11 @@ const paths = {
   packageBuilder: new URL("tools/build_search_release_package.mjs", root),
   workflow: new URL(".github/workflows/refresh-opportunities.yml", root),
 };
-const [manifest, vectors, release, allowlist, worker, vectorBuilder, packageBuilder, workflow] = await Promise.all([
+const [manifest, vectors, canaries, receipt, release, allowlist, worker, vectorBuilder, packageBuilder, workflow] = await Promise.all([
   readFile(paths.manifest, "utf8").then(JSON.parse),
   readFile(paths.vectors),
+  readFile(paths.canaries, "utf8").then(JSON.parse),
+  readFile(paths.receipt, "utf8").then(JSON.parse),
   readFile(paths.release, "utf8").then(JSON.parse),
   readFile(paths.allowlist, "utf8").then(JSON.parse),
   readFile(paths.worker, "utf8"),
@@ -37,6 +41,9 @@ test("release manifest, vector binary, and Worker allowlist identify one current
   assert.equal(sha256(vectors), manifest.vector_sha256);
   assert.equal(vectors.byteLength, manifest.vector_bytes);
   assert.equal(allowlist.current.corpus_sha256, manifest.corpus_sha256);
+  assert.equal(release.model_space_fingerprint, manifest.model_space_fingerprint);
+  assert.equal(allowlist.current.model_space_fingerprint, manifest.model_space_fingerprint);
+  assert.equal(canaries.model_space_fingerprint, manifest.model_space_fingerprint);
   assert.equal(allowlist.current.passage_count, manifest.passage_count);
   assert.deepEqual(
     allowlist.current.passages,
@@ -65,6 +72,31 @@ test("production vector builds force every current passage through one model con
   assert.match(vectorBuilder, /model: MODEL,[\s\S]*?input_type: "document",[\s\S]*?output_dimension: DIMENSION/);
   assert.doesNotMatch(workflow, /build_search_v2_voyage_vectors\.mjs --write(?! --production)/);
   assert.match(workflow, /build_search_v2_voyage_vectors\.mjs --production --write/);
+  assert.equal(receipt.build_mode, "production_full_rebuild");
+  assert.equal(receipt.reused_passage_count, 0);
+  assert.equal(receipt.production_reused_vectors, false);
+  assert.equal(receipt.production_generation_uniform.model_alias_count, 1);
+  assert.equal(receipt.production_generation_uniform.response_model_count, 1);
+  assert.equal(receipt.production_generation_uniform.dimension_count, 1);
+  assert.equal(receipt.production_generation_uniform.output_type_count, 1);
+  assert.equal(receipt.production_generation_uniform.build_timestamp_count, 1);
+  assert.equal(receipt.production_generation_uniform.canary_fingerprint_count, 1);
+});
+
+test("fixed public canaries fingerprint and gate the embedding space", () => {
+  assert.equal(canaries.canary_set_version, 1);
+  assert.equal(canaries.model_alias, manifest.model);
+  assert.equal(canaries.response_model, manifest.response_model);
+  assert.equal(canaries.dimension, manifest.dimension);
+  assert.equal(canaries.canaries.length, manifest.model_space.canary_count);
+  assert.match(canaries.model_space_fingerprint, /^[a-f0-9]{64}$/);
+  assert.equal(canaries.comparison_to_prior_generation.status, "passed");
+  assert.equal(canaries.comparison_to_prior_generation.gross_discontinuity, false);
+  assert.ok(canaries.comparison_to_prior_generation.minimum_cosine >= .95);
+  assert.ok(canaries.comparison_to_prior_generation.mean_cosine >= .98);
+  assert.match(vectorBuilder, /Gross embedding-space discontinuity:[\s\S]*Publication blocked after full rebuild/);
+  assert.match(packageBuilder, /model_space_fingerprint/);
+  assert.match(worker, /body\.model_space_fingerprint !== generation\.model_space_fingerprint/);
 });
 
 test("scheduled publication deploys a validated compatibility Worker before one atomic commit", () => {
@@ -79,7 +111,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   ].map(label => workflow.indexOf(label));
   ordered.forEach(index => assert.ok(index >= 0));
   assert.deepEqual(ordered, ordered.slice().sort((left, right) => left - right));
-  assert.match(workflow, /git add[^\n]*search-v2-voyage-manifest\.json[^\n]*search-v2-voyage-vectors\.f16[^\n]*search-v2-release\.json/);
+  assert.match(workflow, /git add[^\n]*search-v2-voyage-manifest\.json[^\n]*search-v2-voyage-vectors\.f16[^\n]*search-v2-voyage-canaries\.json[^\n]*search-v2-release\.json/);
   assert.match(workflow, /git add[^\n]*corpus-allowlist\.json/);
   assert.doesNotMatch(
     workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),

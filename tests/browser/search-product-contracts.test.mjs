@@ -3,8 +3,9 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../../", import.meta.url);
-const [app, hybrid, help, searchPage, teamPage, readme, hosting] = await Promise.all([
+const [app, appCss, hybrid, help, searchPage, teamPage, readme, hosting] = await Promise.all([
   readFile(new URL("assets/app.js", root), "utf8"),
+  readFile(new URL("assets/app.css", root), "utf8"),
   readFile(new URL("assets/search-hybrid.js", root), "utf8"),
   readFile(new URL("assets/site-help.js", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
@@ -70,4 +71,12 @@ test("eligible parent IDs are applied before every bounded retrieval stage", () 
   assert.match(hybrid, /if \(eligible && !eligible\.has\(String\(record\.parent_id\)\)\) return/);
   assert.match(hybrid, /const fused = fuseCandidates\(bm25, semantic\)/);
   assert.match(hybrid, /candidates: guarded\.map/);
+});
+
+test("opportunity actions stay concise and wrap safely on narrow cards", () => {
+  assert.match(app, />Open opportunity ↗<\/a>/);
+  assert.doesNotMatch(app, /Open \$\{recordSourceLabel\} record/);
+  assert.match(appCss, /\.source-action\s*\{[^}]*min-width:\s*0/s);
+  assert.match(appCss, /\.source-action\s*\{[^}]*overflow-wrap:\s*anywhere/s);
+  assert.match(appCss, /\.source-action\s*\{[^}]*white-space:\s*normal/s);
 });

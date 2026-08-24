@@ -4,8 +4,12 @@
     "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
     "model": "voyage-4-lite",
     "dimension": 1024,
-    "model_space_fingerprint": null,
-    "published_at": "2026-08-23T21:33:28.459Z",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "response_model": "voyage-4-lite",
+    "input_type": "document",
+    "source_output_dtype": "float",
+    "vector_dtype": "float16-le",
+    "published_at": "2026-08-24T01:33:52.510Z",
     "passage_count": 1659,
     "passages": [
       {

@@ -19,9 +19,12 @@ function generationHashes(allowlist) {
   const generations = new Map();
   [allowlist?.current, allowlist?.previous].filter(Boolean).forEach(generation => {
     if (!generation.corpus_sha256 || !Array.isArray(generation.passages)) return;
-    generations.set(generation.corpus_sha256, new Map(
-      generation.passages.map(item => [item.passage_id, item.text_sha256]),
-    ));
+    generations.set(generation.corpus_sha256, {
+      model_space_fingerprint: generation.model_space_fingerprint || null,
+      passage_hashes: new Map(
+        generation.passages.map(item => [item.passage_id, item.text_sha256]),
+      ),
+    });
   });
   return generations;
 }
@@ -182,9 +185,16 @@ async function voyageFetch(fetchImpl, url, apiKey, body) {
 }
 
 async function validateCandidates(body, generations) {
-  if (!exactKeys(body, ["query", "corpus_sha256", "candidates"])) return null;
+  if (!body || typeof body !== "object" || Array.isArray(body)) return null;
   const query = cleanQuery(body.query);
-  const passageHashes = generations.get(body.corpus_sha256);
+  const generation = generations.get(body.corpus_sha256);
+  const expectedKeys = generation?.model_space_fingerprint
+    ? ["query", "corpus_sha256", "model_space_fingerprint", "candidates"]
+    : ["query", "corpus_sha256", "candidates"];
+  if (!exactKeys(body, expectedKeys)) return null;
+  if (generation?.model_space_fingerprint
+    && body.model_space_fingerprint !== generation.model_space_fingerprint) return null;
+  const passageHashes = generation?.passage_hashes;
   if (!query || !passageHashes || !Array.isArray(body.candidates) || body.candidates.length < 1
     || body.candidates.length > MAX_CANDIDATES) return null;
   const seen = new Set();
@@ -427,6 +437,7 @@ export function createHandler({ fetchImpl = fetch, allowlist = corpusAllowlist }
         return json(origin, 200, {
           service: "unavailable",
           corpus_sha256: allowlist?.current?.corpus_sha256 || "",
+          model_space_fingerprint: allowlist?.current?.model_space_fingerprint || "",
           previous_corpus_supported: Boolean(allowlist?.previous),
           budget_state: "unavailable",
         });
@@ -436,6 +447,7 @@ export function createHandler({ fetchImpl = fetch, allowlist = corpusAllowlist }
       return json(origin, 200, {
         service: status.ok ? "available" : "unavailable",
         corpus_sha256: allowlist.current.corpus_sha256,
+        model_space_fingerprint: allowlist.current.model_space_fingerprint || "",
         previous_corpus_supported: Boolean(allowlist.previous),
         budget_state: status.ok ? status.body.budget_state : "unavailable",
       });

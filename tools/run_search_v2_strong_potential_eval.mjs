@@ -11,7 +11,10 @@ import process from "node:process";
 import vm from "node:vm";
 
 import { loadHarness, makeVariantHarness, rankQuery } from "./run_search_diagnosis.mjs";
-import { createHandler } from "../workers/search-voyage-proxy/src/index.js";
+import {
+  createHandler,
+  SearchBudgetCoordinator,
+} from "../workers/search-voyage-proxy/src/index.js";
 
 const ROOT = new URL("../", import.meta.url);
 const RESULTS_PATH = "evaluation/search_v2_strong_potential_results.json";
@@ -74,6 +77,36 @@ function loadHybridApi(source) {
   context.globalThis = { crypto: webcrypto, location: { href: "http://localhost/" } };
   vm.runInNewContext(source, context);
   return context.globalThis.FUNDING_HYBRID_SEARCH;
+}
+
+function evaluationEnv(apiKey) {
+  const values = new Map();
+  const coordinator = new SearchBudgetCoordinator({
+    storage: {
+      async get(key) { return values.get(key); },
+      async put(key, value) { values.set(key, structuredClone(value)); },
+    },
+  });
+  const limiter = { async limit() { return { success: true }; } };
+  return {
+    VOYAGE_API_KEY: apiKey,
+    ENHANCED_SEARCH_ENABLED: "true",
+    DAILY_EMBED_TOKEN_BUDGET: "50000",
+    DAILY_RERANK_TOKEN_BUDGET: "25000000",
+    PER_CLIENT_EMBED_REQUEST_LIMIT: "12",
+    PER_CLIENT_RERANK_REQUEST_LIMIT: "8",
+    GLOBAL_REQUEST_LIMIT: "600",
+    RATE_LIMIT_RETRY_AFTER_SECONDS: "10",
+    GLOBAL_RATE_LIMITER: limiter,
+    EMBED_RATE_LIMITER: limiter,
+    RERANK_RATE_LIMITER: limiter,
+    BUDGET_COORDINATOR: {
+      idFromName(name) { return name; },
+      get() {
+        return { fetch(url, options) { return coordinator.fetch(new Request(url, options)); } };
+      },
+    },
+  };
 }
 
 function ranks(ids, required) {
@@ -234,11 +267,14 @@ async function main() {
   const api = loadHybridApi(hybridSource);
   const receipts = [];
   const handler = createHandler({ fetchImpl: globalThis.fetch.bind(globalThis) });
+  const workerEnv = evaluationEnv(apiKey);
   const fetchImpl = async (url, options = {}) => {
     if (String(url) === "https://assets.local/manifest") {
       return new Response(manifestSource, { status: 200, headers: { "Content-Type": "application/json" } });
     }
-    if (String(url) === "https://assets.local/vectors") return new Response(vectorBuffer, { status: 200 });
+    if (String(url).startsWith("https://assets.local/vectors?v=")) {
+      return new Response(vectorBuffer, { status: 200 });
+    }
     const request = new Request(url, {
       ...options,
       headers: { ...(options.headers || {}), Origin: "http://localhost:8000" },
@@ -246,7 +282,7 @@ async function main() {
     const body = String(options.body || "");
     const endpoint = new URL(String(url)).pathname;
     const started = performance.now();
-    const response = await handler(request, { VOYAGE_API_KEY: apiKey });
+    const response = await handler(request, workerEnv);
     const publicReceipt = await response.clone().json().catch(() => ({}));
     receipts.push({
       endpoint,

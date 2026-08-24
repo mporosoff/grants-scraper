@@ -193,6 +193,38 @@ class NormalizeTests(unittest.TestCase):
 
         self.assertTrue(record["rolling"])
 
+    def test_accepted_anytime_sentinel_is_rolling_without_a_fake_deadline(self):
+        record = normalize(
+            {"id": "362063", "oppStatus": "posted", "docType": "synopsis"},
+            {
+                "id": 362063,
+                "synopsis": {
+                    "responseDate": "Aug 20, 2076 12:00:00 AM EDT",
+                    "responseDateDesc": "Proposals accepted anytime",
+                    "synopsisDesc": "Standing Transport Phenomena program.",
+                },
+            },
+        )
+
+        self.assertIsNone(record["close_date"])
+        self.assertTrue(record["rolling"])
+
+    def test_2099_undefined_sentinel_is_omitted_and_requires_verification(self):
+        record = normalize(
+            {"id": "363225", "oppStatus": "posted", "docType": "synopsis"},
+            {
+                "id": 363225,
+                "synopsis": {
+                    "responseDate": "Jan 01, 2099 12:00:00 AM EST",
+                    "responseDateDesc": "undefined",
+                },
+            },
+        )
+
+        self.assertIsNone(record["close_date"])
+        self.assertIsNone(record["close_date_note"])
+        self.assertFalse(record["rolling"])
+
 
 class ArgumentTests(unittest.TestCase):
     def test_default_output_cannot_overwrite_production_catalog(self):
