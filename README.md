@@ -30,8 +30,8 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 The page initially shows no opportunities. One guided workflow combines a
 topic, optional profile/CV context, and optional filters under a single “Find
 funding” action. Users can explicitly save a reusable researcher profile on
-that device; saving it does not launch a competing search. Ordinary retrieval
-uses a local hybrid scorer: BM25 lexical relevance, conservative spelling and
+that device; saving it does not launch a competing search. Strong retrieval
+uses a local fielded scorer: BM25 lexical relevance, conservative spelling and
 scientific-word-form recovery, meaningful coverage for multi-term searches,
 and catalog-topic signals that rerank—but never independently admit—lexical
 candidates. Two-concept searches require both concepts; longer searches use a
@@ -49,6 +49,15 @@ such as “processing” or “critical.” Broad BAAs and umbrella solicitation
 indexed from evidence-backed subprogram text when the official notice provides
 it.
 
+For a non-empty query, a site-managed enhanced-search Worker can add up to 12
+deduplicated Potential matches. It sends the submitted query for one Voyage
+query embedding, then reranks a bounded set of public opportunity passages with
+the site's server-side key. Active filters constrain BM25 and semantic
+candidates before top-k selection. Strong always appears before Potential;
+sorting changes order within each tier without changing membership. This path
+does not send the user's CV, full profile, researcher names, or ORCID
+publication text.
+
 Research descriptions, expertise keywords, CV text, ORCID topics, applicant
 type, and career stage feed a separate profile reranker. With an explicit
 query, that evidence can reorder the query's admitted candidates but cannot
@@ -61,8 +70,9 @@ profile-only admission gate; CV and ORCID terms still rerank the admitted set
 but cannot broaden it. CV/ORCID terms serve as the fallback gate only when the
 manual profile fields are blank.
 
-Ordinary and profile-ranked search make zero AI calls. A user may enter an
-OpenAI or Anthropic key to:
+Local Strong and profile-ranked search make zero model calls. Hosted Potential
+matching does not require a user key. Separately, a user may enter an OpenAI or
+Anthropic key to:
 
 1. expand the search with useful terminology before retrieval, including when
    the ordinary search returned no candidates;
@@ -97,6 +107,12 @@ status and removal control, and never enter GitHub, URLs, exports, or an
 application database. Extracted uploaded-notice text, the shortlist, and chat
 remain page-memory only; notice text is sent only when the user asks a question
 about that document.
+
+Team Match applies its every-researcher evidence gate locally. Enhanced ordering
+may send one bounded, phrase-delimited aggregate of selected research keywords
+and theme labels per unique team recomputation, but it never sends researcher
+names or publication text and cannot add an opportunity that failed local
+full-team fit.
 
 Match-quality controls include `not relevant`, `partial`, `useful`, `strong`,
 and `needs verification` labels with reason codes. After three graded ratings,

@@ -20,8 +20,8 @@
       <section class="help-intro" aria-labelledby="help-start-title">
         <div>
           <span class="help-kicker">Start here</span>
-          <h3 id="help-start-title">Search is free. AI is optional.</h3>
-          <p>Funding Finder searches the current public opportunity catalog in your browser. You do not need an account or API key to search, filter, save, export, use the team matcher, or open official sources.</p>
+          <h3 id="help-start-title">Search is free. Your own AI connection is optional.</h3>
+          <p>Funding Finder searches the current public opportunity catalog. Strong matching and filters run in your browser; the site's hosted semantic service can add Potential matches. You do not need an account or your own API key.</p>
         </div>
         <ol class="help-steps">
           <li><span>1</span><div><strong>Describe what you want to fund</strong><small>Use a topic, method, population, goal, or opportunity number. You may also upload a funding-notice PDF.</small></div></li>
@@ -43,7 +43,7 @@
       <section class="help-section" id="help-search">
         <div class="help-section-heading">
           <span class="help-section-number">01</span>
-          <div><h3>Search the catalog</h3><p>The ordinary search runs locally and makes no AI call.</p></div>
+          <div><h3>Search the catalog</h3><p>Strong matching is local. Potential matching is a site-managed hosted second pass.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
@@ -121,8 +121,8 @@
               <div><h3>What an API key is and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
         </div>
         <div class="help-key-explanation">
-          <p>This is a static public site with no shared AI account. Your provider key authorizes optional model requests and associates any usage charges with your own API account. Local abbreviation and acronym handling is part of normal search and needs no key. A key is needed only for optional AI terminology expansion, AI reranking, result chat, and uploaded-notice chat.</p>
-          <p><strong>Normal catalog search and the Team matcher do not need a key.</strong> Provider billing, credits, rate limits, and model availability are controlled by the provider, not Funding Finder.</p>
+          <p>Your provider key authorizes optional user-connected AI requests and associates those charges with your account. Local abbreviation handling and the site's hosted Potential ranking need no key from you. Your key is used only for optional AI terminology expansion, AI refinement, result chat, and uploaded-notice chat.</p>
+          <p><strong>Catalog search and Team Match do not need your API key.</strong> The hosted Potential service uses a site-managed server-side key. Billing and availability for user-connected tools are controlled by the provider.</p>
         </div>
         <div class="help-provider-grid">
           <article class="help-provider-card">
@@ -165,16 +165,20 @@
       <section class="help-section" id="help-privacy">
         <div class="help-section-heading">
           <span class="help-section-number">06</span>
-          <div><h3>Know what stays local and what is sent</h3><p>You control when optional AI requests happen.</p></div>
+          <div><h3>Know what stays local and what is sent</h3><p>Local search, hosted Potential ranking, and user-connected AI have distinct boundaries.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
             <h4>Stays in this browser</h4>
-            <p>Saved opportunities, profiles, researchers you add, extracted upload text, and chat state stay on the device. Invited-reviewer ratings also stay local until explicitly exported. Original CV and notice files are not retained.</p>
+            <p>Strong matching, exact-identifier and acronym handling, filters, saved opportunities, profiles, researchers you add, extracted upload text, and chat state stay on the device. Invited-reviewer ratings also stay local until explicitly exported. Original CV and notice files are not retained.</p>
           </div>
           <div class="help-card">
-            <h4>Sent only when you use AI</h4>
-            <p>Your key goes directly to the selected provider. Only the bounded search, result, profile/CV, or PDF context needed for that request is sent. Keys are excluded from URLs, exports, GitHub, and the funding catalog.</p>
+            <h4>Hosted Potential matching</h4>
+            <p>The submitted search text is sent to the Funding Finder Worker, which obtains a query embedding and reranks bounded public opportunity passages with the site's server-side key. Your CV, full profile, researcher names, and ORCID publication text are not sent.</p>
+          </div>
+          <div class="help-card">
+            <h4>User-connected AI tools</h4>
+            <p>When you explicitly use AI refinement or chat, your key goes directly to the selected provider with only the bounded result, profile/CV, question, or PDF context enabled for that request. Keys are excluded from URLs, exports, GitHub, and the funding catalog.</p>
           </div>
         </div>
         <p class="help-footnote">A key is tab-only unless you explicitly save it. A saved key remains in this browser profile's local storage until you remove it; anyone with access to that browser profile may be able to use it.</p>
@@ -190,8 +194,12 @@
           <p>Remove restrictive filters, shorten the query to two or three concrete concepts, try a recognized synonym, or browse the public catalog. For an exact solicitation, search its opportunity number or upload its PDF.</p>
         </details>
         <details class="help-faq">
+          <summary>Potential matches are unavailable or limited.</summary>
+          <p>Strong local matches remain complete and usable. The hosted service may be updating, rate limited, over its daily budget, or temporarily unavailable; use the retry action when shown or return later.</p>
+        </details>
+        <details class="help-faq">
           <summary>The AI request failed.</summary>
-          <p>Confirm that the selected provider matches the key, re-enter an expired or revoked key, and check the provider account's billing, credits, usage limits, and service status. Ordinary search remains available.</p>
+          <p>For user-connected refinement or chat, confirm that the selected provider matches the key, re-enter an expired or revoked key, and check the provider account's billing, credits, usage limits, and service status. Strong local search remains available.</p>
         </details>
         <details class="help-faq">
           <summary>A catalog match or extracted fact looks wrong.</summary>

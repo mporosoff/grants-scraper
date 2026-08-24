@@ -70,7 +70,7 @@
       <div class="hero-copy">
         <p class="eyebrow">One search, improved by the context you add</p>
         <h1 id="page-title">Find funding in a few clear steps</h1>
-        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. Funding Finder combines everything into one search. AI is an optional second pass over the results. It is not a separate database.</p>
+        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. Strong matching runs locally; a site-managed semantic service can add Potential matches from the same public catalog. User-connected AI tools are an optional later step.</p>
       </div>
 
       <ol class="workflow-map" aria-label="Suggested funding search steps">
@@ -326,6 +326,7 @@
             <button class="button primary find-button" id="find-funding" type="submit">Find funding</button>
             <span>Free catalog search. No AI key required.</span>
           </div>
+          <p class="privacy-note">Strong matching runs locally. Potential matches use a hosted semantic ranking service and send your search text with public opportunity passages.</p>
           <div class="search-status" id="search-status" aria-live="polite"></div>
 
           <details class="provider-setup">
@@ -337,7 +338,7 @@
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What AI changes:</strong> after you search, AI can expand terminology first, retrieve a fresh candidate set, rerank up to 32 opportunities, explain the best fits, and answer questions about those results. It never replaces or searches outside the funding catalog.</p>
+              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can expand terminology, refine up to 32 existing results, and answer questions about results or an uploaded notice. It never replaces or searches outside the funding catalog.</p>
               <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
               <div class="provider-fields">
                 <label>
@@ -362,7 +363,7 @@
                 <span aria-hidden="true">✦</span>
                 <span id="ai-refine-label">Expand and refine these results with AI</span>
               </button>
-              <p class="cost-note">AI uses two bounded calls: terminology expansion, then reranking of at most 32 results. Ordinary search makes zero AI calls.</p>
+              <p class="cost-note">Your connected AI uses two bounded calls for refinement: terminology expansion, then reranking of at most 32 results. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
               <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
             </div>
           </details>

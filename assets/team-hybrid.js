@@ -2,7 +2,12 @@
   "use strict";
 
   const MAX_QUERY_PHRASES = 24;
-  const MAX_QUERY_CHARS = 560;
+  const SHARED_MAX_QUERY_CHARS = Math.max(
+    1,
+    Number(globalThis.FUNDING_HYBRID_SEARCH?.MAX_QUERY_CHARS || 500),
+  );
+  const CANONICALIZATION_SAFETY_CHARS = 24;
+  const MAX_QUERY_CHARS = Math.max(1, SHARED_MAX_QUERY_CHARS - CANONICALIZATION_SAFETY_CHARS);
 
   function clean(value) {
     return String(value || "").replace(/\s+/g, " ").trim();
@@ -28,17 +33,26 @@
 
   function buildTeamQuery(profiles, themes = []) {
     const members = Array.isArray(profiles) ? profiles : [];
-    const phrases = unique((themes || []).map(theme => theme?.label || theme));
     const memberTerms = members.map(profileTerms);
     const maximumDepth = Math.max(0, ...memberTerms.map(terms => terms.length));
-    for (let depth = 0; depth < maximumDepth && phrases.length < MAX_QUERY_PHRASES; depth += 1) {
+    const candidates = [];
+    memberTerms.forEach(terms => {
+      if (terms[0]) candidates.push(terms[0]);
+    });
+    candidates.push(...unique((themes || []).map(theme => theme?.label || theme)));
+    for (let depth = 1; depth < maximumDepth; depth += 1) {
       memberTerms.forEach(terms => {
-        if (phrases.length < MAX_QUERY_PHRASES && terms[depth]) phrases.push(terms[depth]);
+        if (terms[depth]) candidates.push(terms[depth]);
       });
     }
-    let query = unique(phrases).join("; ");
-    if (query.length > MAX_QUERY_CHARS) query = query.slice(0, MAX_QUERY_CHARS).replace(/[;, ]+$/, "");
-    return query;
+    const phrases = [];
+    unique(candidates).some(phrase => {
+      if (phrases.length >= MAX_QUERY_PHRASES) return true;
+      const next = [...phrases, phrase].join("; ");
+      if (next.length <= MAX_QUERY_CHARS) phrases.push(phrase);
+      return false;
+    });
+    return phrases.join("; ");
   }
 
   function teamSignature(profiles, themes = []) {
@@ -165,6 +179,8 @@
 
   globalThis.FUNDING_TEAM_HYBRID = Object.freeze({
     MAX_QUERY_PHRASES,
+    SHARED_MAX_QUERY_CHARS,
+    CANONICALIZATION_SAFETY_CHARS,
     MAX_QUERY_CHARS,
     buildTeamQuery,
     teamSignature,

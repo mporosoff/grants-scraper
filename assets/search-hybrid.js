@@ -187,12 +187,27 @@
     return Math.sqrt(sum) || 1;
   }
 
-  function semanticCandidates(corpus, vectors, queryVector, depth = SEMANTIC_DEPTH) {
+  function normalizedParentEligibility(parentIds) {
+    if (parentIds == null) return null;
+    return new Set((Array.isArray(parentIds) ? parentIds : [...parentIds])
+      .map(value => String(value || "").trim())
+      .filter(Boolean));
+  }
+
+  function semanticCandidates(
+    corpus,
+    vectors,
+    queryVector,
+    depth = SEMANTIC_DEPTH,
+    eligibleParentIds = null,
+  ) {
     if (queryVector.length !== EMBEDDING_DIMENSION) {
       throw new HybridSearchError("query_vector_shape", "The query embedding has an unexpected size.");
     }
     const queryNorm = vectorNorm(queryVector);
-    const scored = corpus.map((passage, row) => {
+    const eligible = normalizedParentEligibility(eligibleParentIds);
+    const scored = corpus.flatMap((passage, row) => {
+      if (eligible && !eligible.has(String(passage.parent_id))) return [];
       const offset = row * EMBEDDING_DIMENSION;
       let dot = 0;
       let sum = 0;
@@ -201,7 +216,7 @@
         dot += queryVector[column] * value;
         sum += value * value;
       }
-      return { ...passage, semantic_score: dot / (queryNorm * (Math.sqrt(sum) || 1)) };
+      return [{ ...passage, semantic_score: dot / (queryNorm * (Math.sqrt(sum) || 1)) }];
     });
     return scored.sort((left, right) => (
       right.semantic_score - left.semantic_score
@@ -219,20 +234,30 @@
     return Math.max(1e-9, percentile(positive, .9));
   }
 
-  function buildBm25Candidates({ parentCatalog, childCatalog, parentDirect, childDirect, corpusById }) {
+  function buildBm25Candidates({
+    parentCatalog,
+    childCatalog,
+    parentDirect,
+    childDirect,
+    corpusById,
+    eligibleParentIds = null,
+  }) {
     const parentScores = Array.from(parentDirect?.discoveryScores || []);
     const childScores = Array.from(childDirect?.discoveryScores || []);
     const parentScale = scoreScale(parentScores);
     const childScale = scoreScale(childScores);
     const rejected = new Set(parentDirect?.currentnessRejectedIndexes || []);
+    const eligible = normalizedParentEligibility(eligibleParentIds);
     const candidates = [];
     (parentCatalog?.opportunities || []).forEach((record, index) => {
+      if (eligible && !eligible.has(String(record.opportunity_id))) return;
       const score = Number(parentScores[index] || 0);
       const item = corpusById.get(`parent:${record.opportunity_id}`);
       if (!(score > 0) || rejected.has(index) || !item) return;
       candidates.push({ ...item, bm25f_raw_score: score, bm25f_score: score / parentScale });
     });
     (childCatalog?.opportunities || []).forEach((record, index) => {
+      if (eligible && !eligible.has(String(record.parent_id))) return;
       const score = Number(childScores[index] || 0);
       const recordId = String(record.subtopic_id || record.opportunity_id);
       const item = corpusById.get(`child:${recordId}`);
@@ -329,7 +354,7 @@
       canonical += ". Prioritize scientific research, engineering, and technology development; "
         + "do not rank policy workshops, training, diplomacy, or administrative programs as topical matches.";
     }
-    return normalizeText(canonical);
+    return clipped(normalizeText(canonical), MAX_QUERY_CHARS);
   }
 
   function deterministicSafeguard(query, passage, resolvedAcronyms = new Set()) {
@@ -448,6 +473,7 @@
   }) {
     const endpoint = safeProxyUrl(proxyUrl);
     let assetsPromise = null;
+    const resultCache = new Map();
     const usage = {
       embedding_requests: 0,
       rerank_requests: 0,
@@ -532,7 +558,7 @@
       return assetsPromise;
     }
 
-    async function search(query, { context = "" } = {}) {
+    async function search(query, { context = "", eligibleParentIds = null } = {}) {
       const normalizedQuery = normalizeText(query);
       if (!normalizedQuery || normalizedQuery.length > MAX_QUERY_CHARS) {
         throw new HybridSearchError("invalid_query", "The enhanced-search query is empty or too long.");
@@ -543,12 +569,25 @@
         const parentDirect = parentEngine.score(normalizedQuery, { evidence: true, context });
         const childDirect = childEngine.score(normalizedQuery, { evidence: true, context });
         const semanticQuery = canonicalSemanticQuery(normalizedQuery, parentDirect, childDirect);
+        const eligible = normalizedParentEligibility(eligibleParentIds);
+        const requestSignature = await sha256Hex(JSON.stringify({
+          semantic_query: semanticQuery,
+          corpus_sha256: assets.manifest.corpus_sha256,
+          eligible_parent_ids: eligible ? [...eligible].sort() : null,
+        }));
+        const cached = resultCache.get(requestSignature);
+        if (cached) return {
+          ...cached,
+          diagnostics: { ...cached.diagnostics, cache_hit: true },
+          usage: { ...usage },
+        };
         const bm25 = buildBm25Candidates({
           parentCatalog,
           childCatalog,
           parentDirect,
           childDirect,
           corpusById: assets.corpusById,
+          eligibleParentIds: eligible,
         });
         const embedded = await post("embed-query", { query: semanticQuery });
         usage.embedding_requests += 1;
@@ -557,6 +596,8 @@
           assets.corpus,
           assets.vectors,
           Float32Array.from(embedded.embedding || []),
+          SEMANTIC_DEPTH,
+          eligible,
         );
         const resolved = resolvedAcronymSet(parentDirect, childDirect);
         const fused = fuseCandidates(bm25, semantic);
@@ -570,16 +611,20 @@
           return [{ ...passage, exact_identifier: safeguard.exact_identifier === true }];
         }).slice(0, RERANK_DEPTH);
         if (!guarded.length) {
-          return {
+          const emptyOutcome = {
             parents: [],
             diagnostics: {
               bm25_candidates: bm25.length,
               semantic_candidates: semantic.length,
               union_candidates: 0,
               safeguard_rejections: safeguardRejections,
+              eligible_parent_count: eligible?.size ?? null,
+              request_signature: requestSignature,
             },
             usage: { ...usage },
           };
+          resultCache.set(requestSignature, emptyOutcome);
+          return emptyOutcome;
         }
         const reranked = await post("rerank", {
           query: semanticQuery,
@@ -605,7 +650,7 @@
           explanation: explanationFromPassage(passage),
         }));
         usage.last_latency_ms = performance.now() - started;
-        return {
+        const outcome = {
           parents: rankedParents,
           diagnostics: {
             bm25_candidates: Math.min(BM25_DEPTH, bm25.length),
@@ -617,9 +662,13 @@
             corpus_sha256: assets.manifest.corpus_sha256,
             vector_sha256: assets.manifest.vector_sha256,
             latency_ms: usage.last_latency_ms,
+            eligible_parent_count: eligible?.size ?? null,
+            request_signature: requestSignature,
           },
           usage: { ...usage },
         };
+        resultCache.set(requestSignature, outcome);
+        return outcome;
       } catch (error) {
         usage.failures += 1;
         usage.fallbacks += 1;

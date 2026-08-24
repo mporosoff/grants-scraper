@@ -80,11 +80,15 @@ for monitoring, and open or update an owner-facing GitHub issue.
 
 ## Cost boundary
 
-Keyword search, profile ranking, filtering, sorting, pagination, detail
+Strong keyword search, profile ranking, filtering, sorting, pagination, detail
 expansion, citation display, CSV/review export, CV/NOFO parsing, catalog
-matching, and local labeling execute locally and make zero AI calls.
+matching, and local labeling execute locally. For a submitted non-empty query,
+the site-managed enhanced-search Worker may obtain one query embedding and
+rerank bounded public opportunity passages to produce Potential matches. It
+receives the search text and public passages, not CV/profile text, researcher
+names, or ORCID publication text.
 
-AI use is explicit and bounded:
+User-connected AI use is explicit and bounded:
 
 - one call translates a research description into retrieval terms;
 - local search selects at most 32 candidates;
@@ -94,7 +98,8 @@ AI use is explicit and bounded:
 - uploaded-notice chat calls receive a page-marked extract capped at 145,000
   characters, optional matched public catalog metadata, and recent conversation.
 
-This avoids sending the full catalog to a model and avoids model cost for ordinary browsing.
+Neither hosted Potential matching nor user-connected AI sends the full catalog.
+Blank-query browsing, local Strong matching, and filters have no model cost.
 
 ## Public repository and site
 

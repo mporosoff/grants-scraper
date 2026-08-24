@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T01:18:30.7182795Z",
+  "session": 3,
+  "title": "Disclosure, sorting, filtering, and Team Match contracts",
+  "branch": "post-release-hardening",
+  "implementation": {
+    "funding_finder_source_sha256": "6d4c92f4b5dfc73265f82710d59df60c0640cd23e81f0b867035a4b90dadb1fe",
+    "hybrid_client_source_sha256": "90a80220f83dd94aaaaff3318fdcbcdf64b4c46c8381201c202cb6c2bdcd35d3",
+    "team_hybrid_source_sha256": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
+    "help_source_sha256": "654fae93172b18989f0211482c4938a8fe85f5cd6776313d517087434699c161",
+    "release_manifest_sha256": "242ca6d5dd964f1533e45d7011711e51b8894f3ec11c6fac1cc2730d1e10acc0",
+    "retrieval_membership": "normalized query plus active filters and currentness",
+    "sort_contract": "Strong before Potential; selected sort applies within each tier",
+    "cache_identity": "semantic query, catalog generation/corpus, and active filter eligibility; sort excluded",
+    "team_query_limit": {
+      "shared_client_maximum": 500,
+      "canonicalization_safety_margin": 24,
+      "generated_maximum": 476,
+      "truncation": "phrase-boundary round robin"
+    }
+  },
+  "acceptance_gates": {
+    "three_processing_modes_disclosed": "passed",
+    "hosted_request_fields_bounded_to_query_and_public_passages": "passed",
+    "strong_potential_membership_stable_across_sort_modes": "passed",
+    "strong_precedes_potential_for_every_sort": "passed",
+    "parent_filters_applied_before_bm25_and_semantic_top_k": "passed",
+    "child_requires_eligible_parent": "passed",
+    "filtered_recall_canary_361526": "recovered inside single-parent eligible universe",
+    "unchanged_signature_paid_cycles": 0,
+    "substantive_filter_change_paid_cycles": {
+      "embed": 1,
+      "rerank": 1
+    },
+    "team_query_within_shared_contract": "passed",
+    "team_every_member_fit_remains_authoritative": "passed",
+    "complete_package_integrity": "passed",
+    "live_product_python": {
+      "tests": 760,
+      "status": "passed"
+    },
+    "browser": {
+      "tests": 211,
+      "status": "passed"
+    },
+    "query_baseline": "37 queries; zero top-10 churn",
+    "p9_scoring": "50 cases; byte-identical",
+    "phase4c_unchanged": true
+  },
+  "decision": "PRODUCT CONTRACT AND FILTERED RETRIEVAL PASSES — READY FOR FINAL HARDENING"
+}

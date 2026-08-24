@@ -136,7 +136,8 @@
       active: false,
       pending: false,
       sequence: 0,
-      cachedQuery: "",
+      cachedSignature: "",
+      remoteSignature: "",
       cacheReady: false,
       parents: [],
       diagnostics: null,
@@ -1041,6 +1042,50 @@
     return true;
   }
 
+  function hybridFilterState() {
+    return {
+      status: {
+        posted: $("status-posted").checked,
+        forecasted: $("status-forecasted").checked,
+        archived: $("status-archived").checked,
+      },
+      facets: Object.fromEntries(Object.keys(FACETS).sort().map(name => [
+        name,
+        [...state.filters[name]].sort(),
+      ])),
+      deadline: {
+        from: $("deadline-from").value || "",
+        through: $("deadline-to").value || "",
+      },
+      minimum_award: Math.max(0, Number($("award-min").value || 0)),
+      flags: {
+        evidence: $("flag-evidence").checked,
+        preliminary: $("flag-preliminary").checked,
+        limited: $("flag-limited").checked,
+        early_career: $("flag-early-career").checked,
+        no_cost_share: $("flag-no-cost-share").checked,
+      },
+      audience: $("audience-filter")?.value || "all",
+    };
+  }
+
+  function hybridRequestSignature(query = state.query) {
+    return JSON.stringify({
+      semantic_query: HYBRID_SEARCH_API?.normalizeText?.(query) || String(query || "").trim(),
+      catalog_generation: String(catalog.generated_at || ""),
+      filters: hybridFilterState(),
+    });
+  }
+
+  function eligibleHybridParentIds() {
+    const rejectedNofoIds = new Set(state.nofo.rejectedIds || []);
+    return catalog.opportunities
+      .filter(record => !rejectedNofoIds.has(recordId(record)) && recordPassesFilters(record))
+      .map(recordId)
+      .filter(Boolean)
+      .sort();
+  }
+
   function compareValues(a, b, direction = 1) {
     if (a === b) return 0;
     if (a == null || a === "") return 1;
@@ -1347,11 +1392,10 @@
     });
   }
 
-  function hybridCanRun(query = state.query, sortMode = state.sort) {
+  function hybridCanRun(query = state.query) {
     return APP_CONFIG?.flags?.searchV2 === true
       && Boolean(hybridSearchClient?.configured)
-      && Boolean(String(query || "").trim())
-      && sortMode === "relevance";
+      && Boolean(String(query || "").trim());
   }
 
   function hybridFailureCategory(code) {
@@ -1411,9 +1455,14 @@
     const strongIds = new Set(state.strongMatches.map(match => (
       recordId(catalog.opportunities[match.index])
     )));
-    state.potentialMatches = hybridMatches(parents)
-      .filter(match => !strongIds.has(recordId(catalog.opportunities[match.index])))
-      .slice(0, POTENTIAL_MATCH_LIMIT);
+    state.potentialMatches = sortMatches(
+      hybridMatches(parents)
+        .filter(match => !strongIds.has(recordId(catalog.opportunities[match.index])))
+        .slice(0, POTENTIAL_MATCH_LIMIT),
+      true,
+      state.sort,
+      false,
+    );
     state.matches = [...state.strongMatches, ...state.potentialMatches];
     state.hybrid.active = true;
     state.hybrid.fallbackReason = "";
@@ -1428,16 +1477,21 @@
   function scheduleHybridSearch(query) {
     const normalizedQuery = String(query || "").trim();
     if (!hybridCanRun(normalizedQuery)) return;
+    const requestSignature = hybridRequestSignature(normalizedQuery);
+    const eligibleParentIds = eligibleHybridParentIds();
     const sequence = ++state.hybrid.sequence;
     state.hybrid.pending = true;
     state.hybrid.active = false;
     state.hybrid.fallbackReason = "";
     state.hybrid.fallbackCategory = "";
     state.hybrid.retryAfter = 0;
-    hybridSearchClient.search(normalizedQuery, { context: "" }).then(result => {
-      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+    hybridSearchClient.search(normalizedQuery, { context: "", eligibleParentIds }).then(result => {
+      if (sequence !== state.hybrid.sequence
+        || normalizedQuery !== state.query
+        || requestSignature !== hybridRequestSignature(state.query)) return;
       state.hybrid.pending = false;
-      state.hybrid.cachedQuery = normalizedQuery;
+      state.hybrid.cachedSignature = requestSignature;
+      state.hybrid.remoteSignature = String(result.diagnostics?.request_signature || "");
       state.hybrid.cacheReady = true;
       state.hybrid.parents = result.parents || [];
       state.hybrid.diagnostics = result.diagnostics || null;
@@ -1448,7 +1502,9 @@
         + ` · ${state.potentialMatches.length.toLocaleString()} potential ${state.potentialMatches.length === 1 ? "match" : "matches"}.`;
       renderResults();
     }).catch(error => {
-      if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
+      if (sequence !== state.hybrid.sequence
+        || normalizedQuery !== state.query
+        || requestSignature !== hybridRequestSignature(state.query)) return;
       state.hybrid.pending = false;
       state.hybrid.active = false;
       state.hybrid.fallbackReason = String(error?.code || "hybrid_unavailable");
@@ -1784,7 +1840,8 @@
     state.hybrid.fallbackCategory = "";
     state.hybrid.retryAfter = 0;
     if (hybridCanRun()) {
-      if (state.hybrid.cacheReady && state.hybrid.cachedQuery === state.query) {
+      const requestSignature = hybridRequestSignature(state.query);
+      if (state.hybrid.cacheReady && state.hybrid.cachedSignature === requestSignature) {
         applyHybridParents(state.hybrid.parents);
       } else {
         scheduleHybridSearch(state.query);

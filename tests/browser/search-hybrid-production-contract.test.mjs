@@ -156,6 +156,83 @@ test("a cross-track result removed from Strong remains eligible for Potential", 
   ))] > 0);
 });
 
+test("active parent eligibility constrains BM25, semantic top-k, child passages, and reranking", async () => {
+  const eligibleParentIds = ["361526"];
+  const vectors = api.decodeFloat16(
+    vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
+    corpus.length,
+    api.EMBEDDING_DIMENSION,
+  );
+  const targetRow = corpus.findIndex(item => item.parent_id === eligibleParentIds[0]);
+  assert.ok(targetRow >= 0);
+  const queryVector = vectors.slice(
+    targetRow * api.EMBEDDING_DIMENSION,
+    (targetRow + 1) * api.EMBEDDING_DIMENSION,
+  );
+  const semantic = api.semanticCandidates(corpus, vectors, queryVector, 200, eligibleParentIds);
+  assert.ok(semantic.length > 0);
+  assert.ok(semantic.every(item => item.parent_id === eligibleParentIds[0]));
+
+  const query = "rare earth recycling";
+  const parentDirect = harness.parentEngine.score(query, { evidence: true });
+  const childDirect = harness.childEngine.score(query, { evidence: true });
+  const bm25 = api.buildBm25Candidates({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentDirect,
+    childDirect,
+    corpusById: new Map(corpus.map(item => [item.passage_id, item])),
+    eligibleParentIds,
+  });
+  assert.ok(bm25.every(item => item.parent_id === eligibleParentIds[0]));
+
+  let rerankCandidates = [];
+  let embedRequests = 0;
+  let rerankRequests = 0;
+  const client = api.createClient({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentEngine: harness.parentEngine,
+    childEngine: harness.childEngine,
+    proxyUrl: "http://localhost/",
+    manifestUrl: "/manifest",
+    vectorUrl: "/vectors",
+    fetchImpl: async (url, options = {}) => {
+      if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
+      if (String(url) === "/vectors") return new Response(vectorBuffer, { status: 200 });
+      if (String(url).endsWith("/embed-query")) {
+        embedRequests += 1;
+        return new Response(JSON.stringify({ embedding: Array.from(queryVector) }), { status: 200 });
+      }
+      if (String(url).endsWith("/rerank")) {
+        rerankRequests += 1;
+        const body = JSON.parse(options.body);
+        rerankCandidates = body.candidates;
+        return new Response(JSON.stringify({ rankings: body.candidates.map((item, index) => ({
+          index,
+          passage_id: item.passage_id,
+          relevance_score: 1 - index / Math.max(1, body.candidates.length),
+        })) }), { status: 200 });
+      }
+      return new Response("", { status: 404 });
+    },
+  });
+  const outcome = await client.search(query, { eligibleParentIds });
+  const corpusByPassage = new Map(corpus.map(item => [item.passage_id, item]));
+  assert.ok(rerankCandidates.length > 0);
+  assert.ok(rerankCandidates.every(item => corpusByPassage.get(item.passage_id)?.parent_id === "361526"));
+  assert.ok(outcome.parents.every(item => item.parent_id === "361526"));
+  assert.equal(outcome.diagnostics.eligible_parent_count, 1);
+  assert.match(outcome.diagnostics.request_signature, /^[a-f0-9]{64}$/);
+  const cached = await client.search(query, { eligibleParentIds });
+  assert.equal(cached.diagnostics.cache_hit, true);
+  assert.equal(embedRequests, 1, "an unchanged retrieval signature causes no paid request");
+  assert.equal(rerankRequests, 1, "an unchanged retrieval signature causes no paid request");
+  await client.search(query, { eligibleParentIds: [...eligibleParentIds, "362061"] });
+  assert.equal(embedRequests, 2, "a substantive eligibility change causes one new embed");
+  assert.equal(rerankRequests, 2, "a substantive eligibility change causes one new rerank");
+});
+
 test("hybrid client is lazy, rejects a stale manifest, and sends no browser credential", async () => {
   let requests = [];
   const stale = { ...manifest, corpus_sha256: "0".repeat(64) };
@@ -367,7 +444,7 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   );
   assert.match(htmlSource, /assets\/search-hybrid\.js/);
   assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16|search-v2-voyage-manifest\.json/);
-  assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "" \}\)/);
+  assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "", eligibleParentIds \}\)/);
   assert.match(appSource, /No strong matches were found\. Broader Potential matching is temporarily unavailable/);
   assert.ok(appSource.indexOf("state.strongMatches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
   assert.match(appSource, /Why this may be relevant/);

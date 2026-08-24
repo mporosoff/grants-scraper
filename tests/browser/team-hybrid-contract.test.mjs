@@ -11,7 +11,11 @@ const [source, page, appConfig, hybridSource] = await Promise.all([
 ]);
 
 function loadApi() {
-  const context = { globalThis: {}, Map, Set };
+  const context = {
+    globalThis: { FUNDING_HYBRID_SEARCH: { MAX_QUERY_CHARS: 500 } },
+    Map,
+    Set,
+  };
   vm.runInNewContext(source, context);
   return context.globalThis.FUNDING_TEAM_HYBRID;
 }
@@ -31,7 +35,27 @@ test("builds one balanced team query from every selected researcher", () => {
   assert.match(query, /reaction kinetics/);
   assert.match(query, /molecular simulation/);
   assert.doesNotMatch(query, /Researcher A|Researcher B/);
-  assert.match(page, /not researcher names or publication text/);
+  assert.match(page, /Researcher names and publication text are not sent/);
+});
+
+test("team query derives a phrase-boundary limit from the shared client contract", () => {
+  const api = loadApi();
+  const longProfiles = ["alpha", "beta", "gamma", "delta"].map(marker => ({
+    name: `${marker} researcher name must remain private`,
+    key_terms: [
+      `${marker} ${"x".repeat(72)}`,
+      `${marker} ${"y".repeat(72)}`,
+      `${marker} ${"z".repeat(72)}`,
+    ],
+  }));
+  const allPhrases = new Set(longProfiles.flatMap(profile => profile.key_terms));
+  const query = api.buildTeamQuery(longProfiles, [{ label: `theme ${"t".repeat(72)}` }]);
+  assert.equal(api.SHARED_MAX_QUERY_CHARS, 500);
+  assert.equal(api.MAX_QUERY_CHARS, 500 - api.CANONICALIZATION_SAFETY_CHARS);
+  assert.ok(query.length <= api.MAX_QUERY_CHARS);
+  assert.ok(query.split("; ").every(phrase => allPhrases.has(phrase) || phrase.startsWith("theme ")));
+  for (const marker of ["alpha", "beta", "gamma", "delta"]) assert.match(query, new RegExp(marker));
+  assert.doesNotMatch(query, /researcher name must remain private/);
 });
 
 test("uses at most one shared hybrid request per team recomputation", async () => {
