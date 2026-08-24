@@ -61,7 +61,7 @@ jobs:
       - name: Verify the committed search package
         run: node tools/build_search_release_package.mjs --check
       - name: Run the complete Python product gate
-        run: python -m tools.run_refresh_validation
+        run: python tools/run_refresh_validation.py
       - name: Run browser, package, and frozen quality gates
         run: >-
           node --test tests/browser/*.test.mjs &&
