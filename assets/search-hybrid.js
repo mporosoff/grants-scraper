@@ -453,9 +453,23 @@
   function completeSourceSpans(value) {
     const text = normalizeText(value);
     if (!text) return [];
-    const sentences = text.match(/[^.!?]+(?:[.!?](?=\s|$)|$)/g)
-      ?.map(normalizeText)
-      .filter(Boolean) || [];
+    const sentences = [];
+    const boundary = /[.!?](?=\s|$)/g;
+    let start = 0;
+    let match;
+    while ((match = boundary.exec(text))) {
+      const candidate = text.slice(start, match.index + 1).trim();
+      const lastToken = candidate.split(/\s+/).at(-1) || "";
+      const abbreviation = match[0] === "." && (
+        /^(?:[a-z]\.){2,}$/i.test(lastToken)
+        || /^(?:dr|mr|mrs|ms|prof|sr|jr|vs|etc)\.$/i.test(lastToken)
+      );
+      if (abbreviation) continue;
+      if (candidate) sentences.push(candidate);
+      start = match.index + 1;
+    }
+    const remainder = text.slice(start).trim();
+    if (remainder) sentences.push(remainder);
     if (sentences.length > 1) return sentences;
     const phrases = text.split(/\s*;\s*/).map(normalizeText).filter(Boolean);
     return phrases.length > 1 ? phrases : [text];
