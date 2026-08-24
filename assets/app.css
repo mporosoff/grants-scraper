@@ -1251,6 +1251,79 @@ textarea:focus {
   display: block;
 }
 
+.deadline-note {
+  display: block;
+  margin-top: 4px;
+  color: #667588;
+  line-height: 1.4;
+}
+
+.page-field-provenance {
+  margin-top: 14px;
+  padding: 11px 12px;
+  color: #445d55;
+  background: #f3faf7;
+  border: 1px solid #c6e1d4;
+  border-radius: 9px;
+}
+
+.page-field-provenance summary {
+  color: #183f32;
+  font-size: .78rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.page-field-provenance > p {
+  margin: 8px 0;
+  font-size: .7rem;
+}
+
+.page-field-provenance ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.page-field-provenance li {
+  min-width: 0;
+  padding: 9px 10px;
+  background: #fff;
+  border: 1px solid #d7e8e0;
+  border-radius: 8px;
+}
+
+.page-field-provenance li > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 10px;
+}
+
+.page-field-provenance strong,
+.page-field-provenance span,
+.page-field-provenance a {
+  overflow-wrap: anywhere;
+  font-size: .68rem;
+}
+
+.page-field-provenance span {
+  color: #5c756b;
+}
+
+.page-field-provenance blockquote {
+  margin: 6px 0;
+  color: #53695f;
+  font-size: .69rem;
+}
+
+.page-field-provenance a {
+  color: #176247;
+  font-weight: 800;
+}
+
 .review-queue {
   margin-top: 10px;
   padding: 9px 10px;

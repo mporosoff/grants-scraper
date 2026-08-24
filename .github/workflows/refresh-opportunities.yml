@@ -360,6 +360,47 @@ jobs:
       - name: Run a real provider smoke after Pages propagation
         id: pages-worker-smoke
         run: node tools/smoke_search_worker.mjs
+      - name: Resolve recovered refresh alerts
+        if: >-
+          success() &&
+          steps.additional-sources.outcome == 'success' &&
+          steps.document_evidence.outcome == 'success'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const titles = new Set([
+              "Automated Grants.gov refresh failed",
+              "External funding source refresh degraded",
+            ]);
+            const runUrl =
+              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
+              `/actions/runs/${context.runId}`;
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              per_page: 100,
+            });
+            for (const issue of issues.filter(
+              item => !item.pull_request && titles.has(item.title)
+            )) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body:
+                  `Recovered: the refresh completed with all external-source and ` +
+                  `document-evidence layers healthy on ${new Date().toISOString()}.\n\n` +
+                  `Verified run: ${runUrl}`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: "closed",
+                state_reason: "completed",
+              });
+            }
       - name: Alert the project owner about a degraded external source
         if: >-
           always() &&
@@ -390,16 +431,21 @@ jobs:
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              state: "open",
+              state: "all",
+              sort: "updated",
+              direction: "desc",
               per_page: 100,
             });
-            const existing = issues.find(issue => issue.title === title);
+            const existing = issues.find(
+              issue => !issue.pull_request && issue.title === title
+            );
             if (existing) {
-              await github.rest.issues.createComment({
+              await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existing.number,
                 body,
+                state: "open",
               });
             } else {
               await github.rest.issues.create({
@@ -460,16 +506,21 @@ jobs:
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              state: "open",
+              state: "all",
+              sort: "updated",
+              direction: "desc",
               per_page: 100,
             });
-            const existing = issues.find(issue => issue.title === title);
+            const existing = issues.find(
+              issue => !issue.pull_request && issue.title === title
+            );
             if (existing) {
-              await github.rest.issues.createComment({
+              await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existing.number,
                 body,
+                state: "open",
               });
             } else {
               await github.rest.issues.create({

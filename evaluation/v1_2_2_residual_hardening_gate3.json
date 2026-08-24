@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T15:50:12.284Z",
+  "gate": 3,
+  "branch": "v1.2.2-residual-hardening",
+  "starting_sha": "1679425e36027c048c67978562bc08127f0dd0c0",
+  "scope": "data and user-experience trust boundaries",
+  "implementation": {
+    "catalog_payload": "The generated catalog omits a deadline note only when it is byte-for-byte identical to the cited quote, and omits a direct deadline citation only when an evidence reference resolves to the same citation. Rendering resolves shared references and falls back from an omitted note to the cited quote.",
+    "private_page_provenance": "Private-page enrichment records source URL, fetched time, exact excerpt, extraction method, confidence, and status for every published page-derived field. Expanded details expose that provenance. Explicit application, proposal, or submission due dates may become close_date; opening, preliminary, and letter-of-intent dates may not.",
+    "privacy_boundary": "Parameterized search routes do not load third-party analytics. Anonymous first-party usage events contain only session and event category, omit query text, omit credentials, and use an origin-only referrer. Product help and hosting documentation describe browser history, anonymous usage, the network organization, and Cloudflare accurately.",
+    "team_match_trust": "Team Match uses neutral team/researcher metadata and remains intentionally public and indexable. Add Researcher reports the operation it is actually performing, enhanced ordering has separate status text, and native history restoration preserves the dynamic team state and scroll position without forcing a page-top reset.",
+    "refresh_alert_hygiene": "Refresh issues retain one current summary, reopen when the condition recurs, and close only after the general refresh, additional-source, and document-evidence outcomes are all healthy. One obvious promotional spam comment was removed from issue 29; legitimate issue history remains."
+  },
+  "payload_measurement": {
+    "catalog_records": 1457,
+    "raw_bytes_before": 24162953,
+    "raw_bytes_after": 21194347,
+    "raw_bytes_reduced": 2968606,
+    "raw_reduction_requirement_bytes": 1500000,
+    "raw_reduction_requirement_met": true,
+    "gzip_level_9_bytes_before": 3193190,
+    "gzip_level_9_bytes_after": 2882576,
+    "gzip_bytes_reduced": 310614,
+    "brotli_quality_6_bytes_before": 1858266,
+    "brotli_quality_6_bytes_after": 1816318,
+    "brotli_bytes_reduced": 41948,
+    "median_json_parse_ms_before": 105.02,
+    "median_json_parse_ms_after": 88.55,
+    "median_json_parse_ms_reduced": 16.47,
+    "browser_heap_bytes_before_catalog": 5738257,
+    "browser_heap_bytes_after_catalog": 49134688,
+    "browser_heap_catalog_delta_bytes": 43396431,
+    "duplicate_deadline_notes_remaining": 0,
+    "dangling_shared_citation_references": 0,
+    "status": "passed"
+  },
+  "release_package": {
+    "status": "verified",
+    "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+    "passage_count": 1670,
+    "worker_allowlist_sha256": "75b353877d21e10ecef0edb127ccafa3b63342323813c3dd5ef59586e2be22af",
+    "release_file_sha256": "47cb9b8d787027e90c993b8821389e093d766731ee16dc2977840ff0f17ea236"
+  },
+  "verification": {
+    "python_product_gate": {
+      "command": "python -m tools.run_refresh_validation",
+      "tests": 772,
+      "status": "passed"
+    },
+    "browser_contract_gate": {
+      "command": "node --test tests/browser/*.test.mjs",
+      "tests": 240,
+      "status": "passed"
+    },
+    "payload_contracts": {
+      "note_omission_requires_exact_citation_quote": true,
+      "render_fallback_to_quote": true,
+      "shared_citation_resolution": true,
+      "schema_valid": true,
+      "status": "passed"
+    },
+    "provenance_and_date_contracts": {
+      "published_provenance_keys": [
+        "source_url",
+        "fetched_at",
+        "excerpt",
+        "method",
+        "confidence",
+        "status"
+      ],
+      "expanded_details_visible": true,
+      "explicit_submission_deadline_selected": true,
+      "opening_date_rejected_as_close_date": true,
+      "letter_of_intent_date_rejected_as_close_date": true,
+      "status": "passed"
+    },
+    "privacy_capture": {
+      "route_query_canary": "gate3-network-canary",
+      "page_assets_observed": 31,
+      "scripts_observed": 23,
+      "third_party_analytics_requests": 0,
+      "asset_urls_containing_raw_query": 0,
+      "custom_event_query_fields": 0,
+      "custom_event_referrer_policy": "origin",
+      "status": "passed"
+    },
+    "team_match_browser": {
+      "viewport_widths_px": [
+        320,
+        390
+      ],
+      "horizontal_overflow_elements": 0,
+      "results_before_history_navigation": 15,
+      "results_after_history_navigation": 15,
+      "scroll_y_before_history_navigation": 2908,
+      "scroll_y_after_history_navigation": 2908,
+      "native_scroll_restoration": true,
+      "public_indexable_metadata": true,
+      "status": "passed"
+    },
+    "alert_workflow_contracts": {
+      "one_current_summary_per_issue": true,
+      "reopens_on_recurrence": true,
+      "closes_only_after_all_refresh_outcomes_recover": true,
+      "issue_29_open_while_degraded": true,
+      "issue_30_open_while_degraded": true,
+      "promotional_spam_comments_removed": 1,
+      "status": "passed"
+    },
+    "query_baseline": {
+      "command": "node tools/query_baseline.mjs --check",
+      "queries": 37,
+      "top_10_churn": 0,
+      "status": "passed"
+    },
+    "p9_scoring": {
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "cases": 50,
+      "cardinality_invariant": true,
+      "byte_identical": true,
+      "status": "passed"
+    }
+  },
+  "phase4c_artifact_hashes": {
+    "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+    "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+    "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7"
+  },
+  "phase4c_rerun": false,
+  "search_weight_or_relevance_tuning": false,
+  "production_deployment": false,
+  "issue_tracker_mutation": true,
+  "decision": "GATE 3 PASSED — DATA AND USER-EXPERIENCE TRUST BOUNDARIES ARE COMPLETE"
+}

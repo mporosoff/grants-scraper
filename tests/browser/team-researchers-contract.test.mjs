@@ -138,15 +138,19 @@ test("shows an accessible progress state while adding a researcher", () => {
   assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
   assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
   assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
-  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " and finding team matches…"/);
+  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
   assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
   assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
 });
 
-test("starts at the top and omits the catalog-count hero line", () => {
-  assert.match(teamPage, /history\.scrollRestoration = "manual"/);
-  assert.match(teamPage, /window\.addEventListener\("pageshow"/);
-  assert.match(teamPage, /window\.scrollTo\(0, 0\)/);
+test("preserves native scroll restoration and omits the catalog-count hero line", () => {
+  assert.doesNotMatch(teamPage, /history\.scrollRestoration = "manual"/);
+  assert.doesNotMatch(teamPage, /window\.addEventListener\("pageshow"/);
+  assert.doesNotMatch(teamPage, /window\.scrollTo\(0, 0\)/);
+  assert.match(teamPage, /TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch"/);
+  assert.match(teamPage, /window\.addEventListener\("pagehide", saveTeamHistory\)/);
+  assert.match(teamPage, /restoreTeamHistory\(\)/);
+  assert.match(teamPage, /finishHistoryRestore\(\)/);
   assert.doesNotMatch(teamPage, /id="meta-line"/);
   assert.doesNotMatch(teamPage, /department faculty profiles|live graded matching across/);
 });

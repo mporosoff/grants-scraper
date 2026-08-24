@@ -7,24 +7,23 @@
 <meta name="theme-color" content="#001e5f" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Funding Finder Team Match" />
-<meta property="og:title" content="Faculty × Funding | Collaboration Finder" />
-<meta property="og:description" content="Build research teams around funding opportunities that fit multiple faculty members." />
+<meta property="og:title" content="Team Match | Funding Finder" />
+<meta property="og:description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta property="og:url" content="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <meta property="og:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-link-preview.jpg" />
 <meta property="og:image:secure_url" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-link-preview.jpg" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Faculty and funding collaboration finder" />
+<meta property="og:image:alt" content="Funding Finder Team Match" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Faculty × Funding | Collaboration Finder" />
-<meta name="twitter:description" content="Build research teams around funding opportunities that fit multiple faculty members." />
+<meta name="twitter:title" content="Team Match | Funding Finder" />
+<meta name="twitter:description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/faculty-pairing-link-preview.jpg" />
-<meta name="twitter:image:alt" content="Faculty and funding collaboration finder" />
+<meta name="twitter:image:alt" content="Funding Finder Team Match" />
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.crossref.org https://funding-finder-voyage-search.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'" />
-<meta name="robots" content="noindex, nofollow" />
-<title>Research team and funding | collaboration finder</title>
+<title>Team Match | Funding Finder</title>
 <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <link rel="icon" href="./assets/icons/faculty-pairing.ico?v=20260815" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/faculty-pairing-32.png?v=20260815" />
@@ -32,7 +31,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=match-ux-20260821" />
+<link rel="stylesheet" href="./assets/app.css?v=app-1.2.2-gate3" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823" />
 <style>
   :root{
@@ -290,7 +289,7 @@
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
 <script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
-<script src="assets/site-help.js?v=match-ux-20260821"></script>
+<script src="assets/site-help.js?v=app-1.2.2-gate3"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {
@@ -330,6 +329,8 @@
   }
   var MAX = 4;
   var MAX_EXTERNAL = (TEAM_API && TEAM_API.MAX_EXTERNAL) || 4;
+  var TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch";
+  var pendingHistoryScroll = null;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[\u2013\u2014]/g, "-").replace(/[&<>"']/g, function (c) {
@@ -910,6 +911,49 @@
     renderTeam(q);
   }
 
+  function saveTeamHistory() {
+    var previous = history.state && typeof history.state === "object"
+      ? history.state
+      : {};
+    history.replaceState(Object.assign({}, previous, {
+      [TEAM_HISTORY_STATE_KEY]: {
+        selected: selected.slice(0, MAX),
+        themeState: Object.assign({}, themeState),
+        filter: $("filter").value || "",
+        scrollY: Math.max(0, Math.round(window.scrollY || 0))
+      }
+    }), "");
+  }
+
+  function restoreTeamHistory() {
+    var saved = history.state && history.state[TEAM_HISTORY_STATE_KEY];
+    if (!saved || typeof saved !== "object") return;
+    var validExternal = new Set(externalResearchers.map(function (profile) {
+      return externalKey(profile.id);
+    }));
+    selected = (Array.isArray(saved.selected) ? saved.selected : []).filter(function (member) {
+      return names.indexOf(member) !== -1 || validExternal.has(member);
+    }).slice(0, MAX);
+    themeState = saved.themeState && typeof saved.themeState === "object"
+      ? Object.assign({}, saved.themeState)
+      : {};
+    $("filter").value = typeof saved.filter === "string" ? saved.filter : "";
+    pendingHistoryScroll = Number.isFinite(saved.scrollY)
+      ? Math.max(0, saved.scrollY)
+      : null;
+  }
+
+  function finishHistoryRestore() {
+    if (pendingHistoryScroll == null) return;
+    var target = pendingHistoryScroll;
+    pendingHistoryScroll = null;
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        window.scroll({ top: target, left: 0, behavior: "instant" });
+      });
+    });
+  }
+
   function safeStorage() {
     try { return globalThis.localStorage; }
     catch (_error) { return null; }
@@ -1025,7 +1069,7 @@
     if (busy) button.setAttribute("aria-busy", "true");
     else button.removeAttribute("aria-busy");
     $("researcher-picker-status").textContent = busy
-      ? "Adding " + memberName(member) + " and finding team matches…"
+      ? "Adding " + memberName(member) + " to the team…"
       : "";
   }
 
@@ -1298,6 +1342,7 @@
       rebuildResearcherMatches();
       renderExternalStatus(loaded.error, Boolean(loaded.error));
     }
+    restoreTeamHistory();
     if (APP_CONFIG && APP_CONFIG.flags.subtopics) {
       try {
         var sidecar = await SUBTOPIC_API.loadSidecar();
@@ -1373,12 +1418,10 @@
     }
     updateToggles();
     refresh();
+    finishHistoryRestore();
   }
 
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  window.addEventListener("pageshow", function () {
-    window.requestAnimationFrame(function () { window.scrollTo(0, 0); });
-  });
+  window.addEventListener("pagehide", saveTeamHistory);
   init();
 })();
 </script>

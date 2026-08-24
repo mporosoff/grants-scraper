@@ -69,7 +69,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         )
         self.assertIn('rel="apple-touch-icon" sizes="180x180"', team_html)
         self.assertIn('rel="manifest"', team_html)
-        self.assertIn('name="robots" content="noindex, nofollow"', team_html)
+        self.assertNotIn('name="robots" content="noindex', team_html)
+        self.assertIn("<title>Team Match | Funding Finder</title>", team_html)
         self.assertIn('id="add-researcher"', team_html)
         self.assertIn('id="external-researcher-form"', team_html)
         self.assertIn('id="external-name"', team_html)
@@ -226,7 +227,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "search-v2-phase3-20260822"
+        style_version = "app-1.2.2-gate3"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -277,11 +278,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=app-1.2.2-gate2"></script>',
+            '<script src="./assets/app.js?v=app-1.2.2-gate3"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=match-ux-20260821"></script>',
+            '<script src="./assets/site-help.js?v=app-1.2.2-gate3"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)

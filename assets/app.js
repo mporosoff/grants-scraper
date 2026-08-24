@@ -54,6 +54,8 @@
       fetch(USAGE_ENDPOINT, {
         method: "POST",
         body: JSON.stringify({ session: USAGE_SESSION, category: category || "all" }),
+        credentials: "omit",
+        referrerPolicy: "origin",
         keepalive: true,
       }).catch(() => {});
     } catch (_e) { /* never let logging affect the app */ }
@@ -2125,6 +2127,16 @@
     return `<a class="evidence-citation" data-citation-open href="${escapeAttribute(url)}" target="_blank" rel="noopener">${escapeHtml(linkText || `Open ${location}`)} ↗</a>`;
   }
 
+  function deadlineCitation(record, deadline) {
+    if (deadline?.citation) return deadline.citation;
+    const evidenceId = deadline?.evidence_id || deadline?.document_evidence_id;
+    if (!evidenceId) return null;
+    const fact = (record.document_evidence?.facts || []).find(
+      item => item?.id === evidenceId,
+    );
+    return fact?.citation || null;
+  }
+
   function deadlineRows(record) {
     return (record.deadlines || []).map(deadline => {
       const timing = [
@@ -2135,14 +2147,48 @@
       const verification = deadline.confidence === "machine_extracted_needs_verification"
         ? " · verify in the official notice"
         : "";
-      const citation = deadline.citation
-        ? evidenceCitation(deadline.citation, deadline.citation.location)
+      const citationData = deadlineCitation(record, deadline);
+      const note = deadline.note || citationData?.quote || "";
+      const citation = citationData
+        ? evidenceCitation(citationData, citationData.location)
         : "";
       return `<div>
         <dt>${escapeHtml(deadlineKindLabel(deadline.kind))}</dt>
-        <dd>${escapeHtml(timing)}${escapeHtml(verification)}${citation ? `<span class="inline-citation">${citation}</span>` : ""}</dd>
+        <dd>${escapeHtml(timing)}${escapeHtml(verification)}${note ? `<small class="deadline-note">${escapeHtml(note)}</small>` : ""}${citation ? `<span class="inline-citation">${citation}</span>` : ""}</dd>
       </div>`;
     }).join("");
+  }
+
+  function pageFieldProvenance(record) {
+    const labels = {
+      description: "Description",
+      eligibility_text: "Eligibility",
+      close_date: "Application deadline",
+      award_ceiling: "Maximum award",
+    };
+    const entries = Object.entries(record.page_field_provenance || {})
+      .filter(([field, source]) => labels[field] && source?.source_excerpt);
+    if (!entries.length) return "";
+    const rows = entries.map(([field, source]) => {
+      const sourceUrl = safeUrl(source.source_url);
+      const checked = String(source.fetched_at || "").slice(0, 10);
+      const method = String(source.extraction_method || "page text")
+        .replaceAll("_", " ");
+      const status = [source.confidence, source.status]
+        .filter(Boolean)
+        .join(" · ")
+        .replaceAll("_", " ");
+      return `<li>
+        <div><strong>${escapeHtml(labels[field])}</strong><span>${escapeHtml([method, status, checked ? `checked ${formatDate(checked)}` : ""].filter(Boolean).join(" · "))}</span></div>
+        <blockquote>${escapeHtml(source.source_excerpt)}</blockquote>
+        ${sourceUrl ? `<a href="${escapeAttribute(sourceUrl)}" target="_blank" rel="noopener">Open source page ↗</a>` : ""}
+      </li>`;
+    }).join("");
+    return `<details class="page-field-provenance">
+      <summary>Sources for page-derived fields</summary>
+      <p>These values were filled from the linked funder page. Confirm them before acting.</p>
+      <ul>${rows}</ul>
+    </details>`;
   }
 
   function evidenceFacts(record) {
@@ -2563,6 +2609,7 @@
           </dl>
           ${record.close_date_note ? `<p class="description"><strong>Deadline note:</strong> ${escapeHtml(record.close_date_note)}</p>` : ""}
           ${record.preliminary_deadline_text ? `<p class="description"><strong>Potential preliminary deadline:</strong> ${escapeHtml(record.preliminary_deadline_text)} <em>Machine extracted; verify in the official notice.</em></p>` : ""}
+          ${pageFieldProvenance(record)}
         </div>
       </details>
       <div class="card-actions">

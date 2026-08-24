@@ -180,6 +180,10 @@
             <h4>User-connected AI tools</h4>
             <p>When you explicitly use AI refinement or chat, your key goes directly to the selected provider with only the bounded result, profile/CV, question, or PDF context enabled for that request. Keys are excluded from URLs, exports, GitHub, and the funding catalog.</p>
           </div>
+          <div class="help-card">
+            <h4>URLs and anonymous measurement</h4>
+            <p>Search criteria are stored in the page URL so a search can be shared and restored; they may therefore appear in browser history and copied links. A custom anonymous event sends a random session ID and broad usage category, not search text. The usage service aggregates network organization server-side. Cloudflare Web Analytics is loaded only when the page URL has no query parameters.</p>
+          </div>
         </div>
         <p class="help-footnote">A key is tab-only unless you explicitly save it. A saved key remains in this browser profile's local storage until you remove it; anyone with access to that browser profile may be able to use it.</p>
       </section>
