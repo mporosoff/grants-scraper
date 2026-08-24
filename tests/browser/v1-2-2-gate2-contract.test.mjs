@@ -88,7 +88,7 @@ test("workflow metadata preserves Strong, Potential, and AI-candidate provenance
 });
 
 test("AI candidates use the same pagination, save, calendar, chat-jump, and official-link paths", () => {
-  assert.match(searchPage, /assets\/result-workflow\.js\?v=app-1\.2\.2-gate2/);
+  assert.match(searchPage, /assets\/result-workflow\.js\?v=app-1\.3\.0/);
   assert.match(app, /candidateMatches: new Map\(\)/);
   assert.match(app, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(app, /Math\.ceil\(currentDisplayMatches\(\)\.length \/ PAGE_SIZE\)/);

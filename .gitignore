@@ -44,6 +44,9 @@ faculty.csv
 .dev.vars*
 .pnpm-store/
 .wrangler/
+node_modules/
+playwright-report/
+test-results/
 
 # Retired server experiment artifacts may remain in old local checkouts.
 /web/

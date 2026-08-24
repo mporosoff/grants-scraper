@@ -26,6 +26,12 @@ on:
       - "tools/smoke_search_worker.mjs"
       - "workers/search-voyage-proxy/**"
   workflow_dispatch:
+    inputs:
+      premerge_candidate:
+        description: Deploy and smoke a PR candidate before protected merge
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -42,6 +48,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -59,15 +67,28 @@ jobs:
           node --test tests/browser/*.test.mjs &&
           node tools/query_baseline.mjs --check &&
           node tools/p9_scoring_probe.mjs --check
-      - name: Refuse to deploy a superseded main commit
+      - name: Capture and verify the protected main release base
+        id: release-base
         shell: bash
         run: |
+          git fetch --no-tags origin main
           built_from_sha="$(git rev-parse HEAD)"
           current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ] || [ "$built_from_sha" != "$current_main_sha" ]; then
+          if [ -z "$current_main_sha" ]; then
+            echo "::error::Protected main could not be resolved."
+            exit 1
+          fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.premerge_candidate }}" = "true" ]; then
+            candidate_base_sha="$(git merge-base HEAD origin/main)"
+            if [ "$candidate_base_sha" != "$current_main_sha" ]; then
+              echo "::error::The candidate was not built from current protected main."
+              exit 1
+            fi
+          elif [ "$built_from_sha" != "$current_main_sha" ]; then
             echo "::error::Main changed while the committed package was being verified."
             exit 1
           fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
       - name: Capture the active Worker version for rollback
         id: prior-worker
         shell: bash
@@ -80,12 +101,25 @@ jobs:
           prior_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
           echo "Captured the active Worker version for rollback."
+          echo "Prior Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
       - name: Deploy the committed compatibility Worker
         id: worker-deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+      - name: Capture the candidate Worker version
+        id: candidate-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list \
+            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
+          candidate_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          echo "version_id=$candidate_version" >> "$GITHUB_OUTPUT"
+          echo "Candidate Worker version: \`$candidate_version\`" >> "$GITHUB_STEP_SUMMARY"
       - name: Wait for the candidate Worker identity
         id: worker-handshake
         shell: bash
@@ -126,9 +160,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          built_from_sha="$(git rev-parse HEAD)"
           current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ] || [ "$built_from_sha" != "$current_main_sha" ]; then
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
             npx --yes wrangler@4.125.0 rollback \
               "${{ steps.prior-worker.outputs.version_id }}" \
               --config workers/search-voyage-proxy/wrangler.jsonc \
@@ -138,6 +171,7 @@ jobs:
           fi
       - name: Verify Pages serves the exact committed release package
         id: pages-verify
+        if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
         shell: bash
         run: |
           candidate_release="$(jq -S -c . data/search-v2-release.json)"
@@ -158,4 +192,10 @@ jobs:
             exit 1
           fi
       - name: Run a real provider smoke after Pages propagation
+        if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
         run: node tools/smoke_search_worker.mjs
+      - name: Record successful pre-merge candidate smoke
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.premerge_candidate }}
+        run: |
+          echo "Pre-merge candidate Worker smoke passed." >> "$GITHUB_STEP_SUMMARY"
+          echo "Protected main base: \`${{ steps.release-base.outputs.main_sha }}\`" >> "$GITHUB_STEP_SUMMARY"

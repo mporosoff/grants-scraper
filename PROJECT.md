@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Funding Finder v1.2.1 hardening release candidate passes all local and spent-data gates; production deployment and protected-workflow verification are in progress
+**Status:** Funding Finder v1.3.0 has passed residual-hardening Gates 1–3; Gate 4 real-browser validation and protected release verification are in progress
 
-**Next implementation phase:** Complete the v1.2.1 live release and protected refresh proof, then return to post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
+**Next implementation phase:** Complete the v1.3.0 Gate 4 protected release and live verification, then return to post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 

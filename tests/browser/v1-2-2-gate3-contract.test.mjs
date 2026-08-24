@@ -34,7 +34,7 @@ test("parameterized search routes suppress third-party analytics", () => {
   const clean = analyticsLoads("");
   assert.equal(clean.length, 1);
   assert.equal(clean[0].src, "https://static.cloudflareinsights.com/beacon.min.js");
-  assert.match(searchPage, /assets\/analytics\.js\?v=app-1\.2\.2-gate3/);
+  assert.match(searchPage, /assets\/analytics\.js\?v=app-1\.3\.0/);
   assert.doesNotMatch(searchPage, /<script[^>]+static\.cloudflareinsights\.com/);
 });
 

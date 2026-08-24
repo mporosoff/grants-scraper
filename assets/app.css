@@ -1028,7 +1028,7 @@ textarea:focus {
 }
 
 .opportunity-number {
-  color: #7b8899;
+  color: #586a82;
   font-size: .72rem;
   font-weight: 700;
   overflow-wrap: anywhere;
@@ -1131,7 +1131,7 @@ textarea:focus {
 .detail-grid dt {
   display: block;
   margin-bottom: 2px;
-  color: #7a8798;
+  color: #586a82;
   font-size: .65rem;
   font-weight: 800;
   letter-spacing: .04em;
@@ -1154,7 +1154,7 @@ textarea:focus {
 .key-fact small {
   display: block;
   margin-top: 4px;
-  color: #69788c;
+  color: #586a82;
   font-size: .68rem;
   line-height: 1.3;
 }
@@ -2182,7 +2182,7 @@ textarea:focus {
 
 .privacy-note,
 .cost-note {
-  color: #758296;
+  color: #586a82;
   font-size: .69rem;
   line-height: 1.45;
 }
@@ -2196,7 +2196,7 @@ textarea:focus {
   padding: 3px 10px;
   font-size: .72rem;
   font-weight: 700;
-  color: var(--blue);
+  color: var(--blue-dark);
   background: var(--blue-soft, #eef4ff);
   border: 1px solid #bcd8ff;
   border-radius: 999px;
@@ -2670,7 +2670,7 @@ textarea:focus {
 
 footer {
   padding: 24px clamp(18px, 6vw, 98px) 42px;
-  color: #66758a;
+  color: #586a82;
   font-size: .76rem;
   text-align: center;
 }
@@ -3002,6 +3002,10 @@ footer p {
   border-bottom: 1px solid var(--line);
 }
 
+.search-workflow .eyebrow {
+  color: var(--blue-dark);
+}
+
 .workflow-step:last-child {
   border-bottom: 0;
 }
@@ -3099,7 +3103,7 @@ footer p {
 
 .nofo-upload-button small {
   margin-top: 2px;
-  color: var(--muted);
+  color: #586a82;
   font-size: .62rem;
   font-weight: 600;
 }
