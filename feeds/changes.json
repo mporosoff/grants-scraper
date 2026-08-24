@@ -1,8 +1,210 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T10:53:56Z",
+  "generated_at": "2026-08-24T11:16:50Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "5c56154f177eeb5e9dec",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-24T11:07:30.749661Z",
+      "opportunity_id": "363589",
+      "detail": "Deadline 2026-09-23",
+      "record": {
+        "opportunity_id": "363589",
+        "opportunity_number": "O-BJA-2026-172675",
+        "title": "BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-23",
+        "last_updated": "2026-08-13",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Public health"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 2000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363589",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172675",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-23"
+    },
+    {
+      "id": "3b8531dc8b0bb4e18288",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-24T11:07:30.749661Z",
+      "opportunity_id": "363584",
+      "detail": "Deadline 2026-09-23",
+      "record": {
+        "opportunity_id": "363584",
+        "opportunity_number": "O-BJA-2026-172674",
+        "title": "BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-23",
+        "last_updated": "2026-08-13",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 2000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363584",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172674",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-23"
+    },
+    {
+      "id": "2a8671ed5ca13a813ce8",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-24T11:07:30.749661Z",
+      "opportunity_id": "nyserda:PON6121",
+      "detail": "Deadline 2026-09-23",
+      "record": {
+        "opportunity_id": "nyserda:PON6121",
+        "opportunity_number": "PON 6121",
+        "title": "Clean Energy Career Pathways Training",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-23",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Education and workforce",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-23"
+    },
+    {
+      "id": "2718d16607d4b5b173e9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-24T11:07:30.749661Z",
+      "opportunity_id": "363223",
+      "detail": "Deadline 2026-09-23",
+      "record": {
+        "opportunity_id": "363223",
+        "opportunity_number": "EPA-OLEM-OBLR-26-01",
+        "title": "FY27 Brownfields Job Training (JT) Grants",
+        "agency": "Environmental Protection Agency",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-17",
+        "close_date": "2026-09-23",
+        "last_updated": "2026-07-17",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363223",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353934"
+      },
+      "deadline": "2026-09-23"
+    },
+    {
+      "id": "03a0ae9c812b237023af",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-08-24T11:07:30.749661Z",
+      "opportunity_id": "363587",
+      "detail": "Deadline 2026-09-23",
+      "record": {
+        "opportunity_id": "363587",
+        "opportunity_number": "O-BJA-2026-172679",
+        "title": "BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-23",
+        "last_updated": "2026-08-13",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Public health"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 375000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363587",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172679",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-23"
+    },
     {
       "id": "f7b2287043fba7440b68",
       "type": "closed_or_removed",
@@ -578,47 +780,6 @@
       }
     },
     {
-      "id": "5c56154f177eeb5e9dec",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-24T10:47:40.189590Z",
-      "opportunity_id": "363589",
-      "detail": "Deadline 2026-09-23",
-      "record": {
-        "opportunity_id": "363589",
-        "opportunity_number": "O-BJA-2026-172675",
-        "title": "BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program",
-        "agency": "Bureau of Justice Assistance",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-13",
-        "close_date": "2026-09-23",
-        "last_updated": "2026-08-13",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Public health"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": 2000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363589",
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172675",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-23"
-    },
-    {
       "id": "3d9c013dfae9e94caddc",
       "type": "closed_or_removed",
       "label": "Closed or removed",
@@ -692,48 +853,6 @@
       "new_deadline": null
     },
     {
-      "id": "3b8531dc8b0bb4e18288",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-24T10:47:40.189590Z",
-      "opportunity_id": "363584",
-      "detail": "Deadline 2026-09-23",
-      "record": {
-        "opportunity_id": "363584",
-        "opportunity_number": "O-BJA-2026-172674",
-        "title": "BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program",
-        "agency": "Bureau of Justice Assistance",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-13",
-        "close_date": "2026-09-23",
-        "last_updated": "2026-08-13",
-        "version": "Synopsis 1",
-        "topic_areas": [],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": 2000000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363584",
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172674",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-23"
-    },
-    {
       "id": "3a57f0f3ed4000e8653d",
       "type": "deadline_changed",
       "label": "Deadline changed",
@@ -780,40 +899,6 @@
       },
       "old_deadline": "2076-08-19",
       "new_deadline": null
-    },
-    {
-      "id": "2a8671ed5ca13a813ce8",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-24T10:47:40.189590Z",
-      "opportunity_id": "nyserda:PON6121",
-      "detail": "Deadline 2026-09-23",
-      "record": {
-        "opportunity_id": "nyserda:PON6121",
-        "opportunity_number": "PON 6121",
-        "title": "Clean Energy Career Pathways Training",
-        "agency": "NYSERDA",
-        "source": "NYSERDA",
-        "source_type": "State",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-09-23",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [
-          "Education and workforce",
-          "Energy"
-        ],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU",
-        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-23"
     },
     {
       "id": "2918e8a262b3285d227c",
@@ -891,46 +976,6 @@
         "funding_opportunity_url": "https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "2718d16607d4b5b173e9",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-24T10:47:40.189590Z",
-      "opportunity_id": "363223",
-      "detail": "Deadline 2026-09-23",
-      "record": {
-        "opportunity_id": "363223",
-        "opportunity_number": "EPA-OLEM-OBLR-26-01",
-        "title": "FY27 Brownfields Job Training (JT) Grants",
-        "agency": "Environmental Protection Agency",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-07-17",
-        "close_date": "2026-09-23",
-        "last_updated": "2026-07-17",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Education and workforce",
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": null,
-        "award_ceiling": 300000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363223",
-        "funding_opportunity_url": null,
-        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353934"
-      },
-      "deadline": "2026-09-23"
     },
     {
       "id": "25e61c09a8023d76ae81",
@@ -1104,51 +1149,6 @@
       },
       "old_deadline": "2099-01-01",
       "new_deadline": null
-    },
-    {
-      "id": "03a0ae9c812b237023af",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-08-24T10:47:40.189590Z",
-      "opportunity_id": "363587",
-      "detail": "Deadline 2026-09-23",
-      "record": {
-        "opportunity_id": "363587",
-        "opportunity_number": "O-BJA-2026-172679",
-        "title": "BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy",
-        "agency": "Bureau of Justice Assistance",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-13",
-        "close_date": "2026-09-23",
-        "last_updated": "2026-08-13",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Public health"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Federally recognized Native American tribal governments",
-          "Other Native American tribal organizations",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": 375000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363587",
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172679",
-        "primary_document_url": null
-      },
-      "deadline": "2026-09-23"
     },
     {
       "id": "fd84d03a2089b89aa13e",

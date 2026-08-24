@@ -4,8 +4,48 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-24T10:53:56Z</updated>
+  <updated>2026-08-24T11:16:50Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363589"/>
+    <id>urn:funding-finder:change:5c56154f177eeb5e9dec</id>
+    <updated>2026-08-24T11:07:30.749661Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363584"/>
+    <id>urn:funding-finder:change:3b8531dc8b0bb4e18288</id>
+    <updated>2026-08-24T11:07:30.749661Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Clean Energy Career Pathways Training</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU"/>
+    <id>urn:funding-finder:change:2a8671ed5ca13a813ce8</id>
+    <updated>2026-08-24T11:07:30.749661Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: FY27 Brownfields Job Training (JT) Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/363223"/>
+    <id>urn:funding-finder:change:2718d16607d4b5b173e9</id>
+    <updated>2026-08-24T11:07:30.749661Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy</title>
+    <link href="https://www.grants.gov/search-results-detail/363587"/>
+    <id>urn:funding-finder:change:03a0ae9c812b237023af</id>
+    <updated>2026-08-24T11:07:30.749661Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
   <entry>
     <title>Closed or removed: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
     <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
@@ -127,14 +167,6 @@
     <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
-    <title>Closing soon: BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363589"/>
-    <id>urn:funding-finder:change:5c56154f177eeb5e9dec</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
-  </entry>
-  <entry>
     <title>Closed or removed: NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
     <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0"/>
     <id>urn:funding-finder:change:3d9c013dfae9e94caddc</id>
@@ -151,28 +183,12 @@
     <summary>2099-01-01 → not listed</summary>
   </entry>
   <entry>
-    <title>Closing soon: BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363584"/>
-    <id>urn:funding-finder:change:3b8531dc8b0bb4e18288</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
-  </entry>
-  <entry>
     <title>Deadline changed: Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
     <link href="https://www.grants.gov/search-results-detail/363616"/>
     <id>urn:funding-finder:change:3a57f0f3ed4000e8653d</id>
     <updated>2026-08-24T10:47:40.189590Z</updated>
     <category term="deadline_changed"/>
     <summary>2076-08-19 → not listed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Clean Energy Career Pathways Training</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU"/>
-    <id>urn:funding-finder:change:2a8671ed5ca13a813ce8</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
   </entry>
   <entry>
     <title>Deadline changed: Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
@@ -189,14 +205,6 @@
     <updated>2026-08-24T10:47:40.189590Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY27 Brownfields Job Training (JT) Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363223"/>
-    <id>urn:funding-finder:change:2718d16607d4b5b173e9</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
   </entry>
   <entry>
     <title>Deadline changed: Transport Phenomena (TP)</title>
@@ -229,14 +237,6 @@
     <updated>2026-08-24T10:47:40.189590Z</updated>
     <category term="deadline_changed"/>
     <summary>2099-01-01 → not listed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy</title>
-    <link href="https://www.grants.gov/search-results-detail/363587"/>
-    <id>urn:funding-finder:change:03a0ae9c812b237023af</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
   </entry>
   <entry>
     <title>Closing soon: BJS FY 2026 State Justice Statistics Program for Statistical Analysis Centers</title>

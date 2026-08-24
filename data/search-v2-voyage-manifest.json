@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T10:54:18.651Z",
+  "generated_at": "2026-08-24T11:17:17.103Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",
@@ -12,8 +12,8 @@
   "passage_count": 1670,
   "parent_passage_count": 1434,
   "child_passage_count": 236,
-  "corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
-  "vector_sha256": "4a19726cc2e95456fc945027b434803358d84b8ad17780de97059f5b2a263def",
+  "corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+  "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
   "vector_bytes": 3420160,
   "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
   "model_space": {
@@ -78,7 +78,7 @@
       "parent_id": "344592",
       "passage_kind": "publication_eligible_child",
       "record_id": "344592:ab-0006",
-      "text_sha256": "2f5a36039e0813a7e4c195210a8c468ae0ed7a120b8be47eb5b4b2ea56251461",
+      "text_sha256": "130b41c900c90bf127ffae9ae382244cb66cca3ec8c882d8d7a41d04de536f86",
       "vector_row": 4
     },
     {
