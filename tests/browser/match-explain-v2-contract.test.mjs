@@ -40,6 +40,17 @@ test("explanation v2 exposes a structured causal contract", () => {
   assert.ok(result.trace.rankedBy.length > 0);
 });
 
+test("non-expandable Why this matched evidence never ends in a clipped fragment", () => {
+  const input = clone(frame.fixtures.explicit_description);
+  const completeSentence = `The program supports lanthanide recovery and purification from ${"complex feedstocks using selective experimental separations and validated analytical methods ".repeat(4).trim()}.`;
+  input.parent.record.description = `${completeSentence} A second sentence supplies unrelated administrative context.`;
+  const result = explain.buildV2(input);
+  const fieldContext = result.reasons.find(item => item.code === "field_context");
+  assert.ok(fieldContext);
+  assert.doesNotMatch(fieldContext.text, /…|\.{3}/);
+  assert.match(fieldContext.text, /validated analytical methods”\.$/);
+});
+
 test("authoritative scope is explained as a primary admission path, never a broad suggestion", () => {
   const ree = phase2.results.find(item => item.query === "REE separations");
   for (const row of ree.top_results) {

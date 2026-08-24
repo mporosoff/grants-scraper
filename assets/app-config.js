@@ -2,8 +2,8 @@
   "use strict";
 
   const release = Object.freeze({
-    version: "1.2.0",
-    updated: "2026-08-23",
+    version: "1.2.1",
+    updated: "2026-08-24",
   });
   const productionFlags = Object.freeze({
     subtopics: true,

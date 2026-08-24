@@ -218,7 +218,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
         self.assertIn('id="result-label"', explorer_html)
-        search_v2_version = "app-1.2.0"
+        search_v2_version = "app-1.2.1"
         self.assertIn(
             '<script src="./data/opportunities.js?v=catalog-',
             explorer_html,
@@ -251,11 +251,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(
-            'assets/subtopic-runtime.js?v=app-1.2.0-sidecar-cache1',
+            'assets/subtopic-runtime.js?v=app-1.2.1-sidecar-cache1',
             explorer_html,
         )
         self.assertIn(
-            'assets/match-explain.js?v=app-1.2.0',
+            'assets/match-explain.js?v=app-1.2.1',
             explorer_html,
         )
         self.assertIn("data-app-version", explorer_html)
@@ -273,11 +273,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/search-hybrid.js?v=app-1.2.0"></script>',
+            '<script src="./assets/search-hybrid.js?v=app-1.2.1"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=app-1.2.0"></script>',
+            '<script src="./assets/app.js?v=app-1.2.1"></script>',
             explorer_html,
         )
         self.assertIn(

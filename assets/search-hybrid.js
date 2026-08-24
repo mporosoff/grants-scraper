@@ -44,6 +44,39 @@
     return `${cut.slice(0, Math.max(Math.floor(limit * .8), boundary))}…`;
   }
 
+  function completeDisplayText(value, preferredMaximum) {
+    const text = normalizeText(value).replace(/(?:\s*(?:…|\.{3}))+\s*$/g, "").trim();
+    if (!text || text.length <= preferredMaximum) return text;
+    const minimum = Math.min(80, Math.floor(preferredMaximum * .4));
+    const sentenceEnd = /[.!?](?=\s|$)/g;
+    let lastCompleteEnd = 0;
+    let firstCompleteEndAfterMaximum = 0;
+    let match;
+    while ((match = sentenceEnd.exec(text))) {
+      const end = match.index + 1;
+      if (end >= minimum && end <= preferredMaximum) lastCompleteEnd = end;
+      if (end > preferredMaximum) {
+        firstCompleteEndAfterMaximum = end;
+        break;
+      }
+    }
+    if (lastCompleteEnd) return text.slice(0, lastCompleteEnd).trim();
+    if (firstCompleteEndAfterMaximum) return text.slice(0, firstCompleteEndAfterMaximum).trim();
+
+    const prefix = text.slice(0, preferredMaximum + 1);
+    const phraseBoundary = Math.max(
+      prefix.lastIndexOf("; "),
+      prefix.lastIndexOf(": "),
+      prefix.lastIndexOf(" — "),
+      prefix.lastIndexOf(" – "),
+    );
+    if (phraseBoundary >= minimum) return prefix.slice(0, phraseBoundary).trim();
+
+    // An unpunctuated source value is already a single phrase. Preserve it rather
+    // than manufacturing a fragment that the collapsed card cannot expand.
+    return text;
+  }
+
   function labeled(label, values, limit) {
     const text = clipped(uniqueText(values).join("; "), limit);
     return text ? `${label}: ${text}` : "";
@@ -429,7 +462,7 @@
       source_field: field,
       source_label: label,
       title: passage.title || "",
-      excerpt: clipped(passage.values[field].join("; "), 360),
+      excerpt: completeDisplayText(passage.values[field].join("; "), 360),
     };
   }
 

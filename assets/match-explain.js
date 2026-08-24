@@ -102,11 +102,36 @@
   }
 
   function bounded(value, maximum = 180) {
-    const text = cleanText(value);
+    const text = cleanText(value).replace(/(?:\s*(?:…|\.{3}))+\s*$/g, "").trim();
     if (text.length <= maximum) return text;
-    const clipped = text.slice(0, Math.max(0, maximum - 1));
-    const boundary = clipped.lastIndexOf(" ");
-    return `${clipped.slice(0, boundary >= maximum * .6 ? boundary : clipped.length).trim()}…`;
+    const minimum = Math.min(60, Math.floor(maximum * .4));
+    const sentenceEnd = /[.!?](?=\s|$)/g;
+    let lastCompleteEnd = 0;
+    let firstCompleteEndAfterMaximum = 0;
+    let match;
+    while ((match = sentenceEnd.exec(text))) {
+      const end = match.index + 1;
+      if (end >= minimum && end <= maximum) lastCompleteEnd = end;
+      if (end > maximum) {
+        firstCompleteEndAfterMaximum = end;
+        break;
+      }
+    }
+    if (lastCompleteEnd) return text.slice(0, lastCompleteEnd).trim();
+    if (firstCompleteEndAfterMaximum) return text.slice(0, firstCompleteEndAfterMaximum).trim();
+
+    const prefix = text.slice(0, maximum + 1);
+    const phraseBoundary = Math.max(
+      prefix.lastIndexOf("; "),
+      prefix.lastIndexOf(": "),
+      prefix.lastIndexOf(" — "),
+      prefix.lastIndexOf(" – "),
+    );
+    if (phraseBoundary >= minimum) return prefix.slice(0, phraseBoundary).trim();
+
+    // A source value without sentence or clause punctuation is already one phrase.
+    // Keep it whole because the collapsed explanation has no expansion control.
+    return text;
   }
 
   function quoted(value) {

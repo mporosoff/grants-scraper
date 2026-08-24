@@ -69,6 +69,28 @@ test("static public passage asset has an exact corpus/order/hash handshake", asy
   assert.equal(vectorBuffer.byteLength, corpus.length * api.EMBEDDING_DIMENSION * 2);
 });
 
+test("non-expandable public passage explanations use complete sentences or phrases", () => {
+  const longSentence = `The program supports transport research that connects momentum, heat, and mass transfer across ${"multiscale experimental and computational systems ".repeat(8).trim()}.`;
+  const explanation = api.explanationFromPassage({
+    passage_id: "parent:complete-excerpt",
+    passage_kind: "parent",
+    title: "Complete excerpt fixture",
+    values: {
+      parent_description: [`${longSentence} A second complete sentence should not be needed for the card.`],
+    },
+  });
+  assert.equal(explanation.excerpt, longSentence);
+  assert.doesNotMatch(explanation.excerpt, /…|\.{3}$/);
+
+  const phrase = "Transport phenomena across porous media and reactive interfaces without a terminal punctuation mark";
+  assert.equal(api.explanationFromPassage({
+    passage_id: "parent:complete-phrase",
+    passage_kind: "parent",
+    title: "Complete phrase fixture",
+    values: { parent_description: [phrase] },
+  }).excerpt, phrase);
+});
+
 test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup are generic", () => {
   const vectors = api.decodeFloat16(
     vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),

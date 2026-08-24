@@ -7,7 +7,7 @@
   "frame": "evaluation/match_explain_v2_frame.json",
   "frame_sha256": "ac1359ef7c81b3f5995fa13b80d50d37a0a78c77f4b0ea24d81e347df7cd0373",
   "explanation_asset": "assets/match-explain.js",
-  "explanation_asset_sha256": "640cbb7b814d9eb78d6a4d62bd56253cbfa6ca07fe330db7e3d2413ba7d3806f",
+  "explanation_asset_sha256": "4acabacc9a56527feaff3ba62e1797452c7f2a7794a02b1f4ec0183810c2fff1",
   "explanation_contract_version": 2,
   "holdout_status": "sealed_not_executed_or_adjudicated",
   "case_count": 42,
@@ -284,6 +284,7 @@
               "fields": [
                 "parent_title"
               ],
+              "passageId": "parent:360678#parent_title:title",
               "matchedConcepts": []
             }
           ],
@@ -296,6 +297,10 @@
               "type": "query_coordination",
               "ratio": 0,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 0
             }
           ],
           "selectedEvidence": [
@@ -355,6 +360,7 @@
               "fields": [
                 "parent_title"
               ],
+              "passageId": "parent:361526#parent_title:title",
               "matchedConcepts": []
             }
           ],
@@ -367,6 +373,10 @@
               "type": "query_coordination",
               "ratio": 0,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 0
             }
           ],
           "selectedEvidence": [
@@ -426,6 +436,7 @@
               "fields": [
                 "parent_title"
               ],
+              "passageId": "parent:362061#parent_title:title",
               "matchedConcepts": [
                 "literal:chemical",
                 "literal:process",
@@ -436,12 +447,16 @@
           "rankedBy": [
             {
               "type": "bm25f",
-              "score": 12.928623242487141
+              "score": 12.924347581996432
             },
             {
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
             },
             {
               "type": "exact_phrase",
@@ -510,14 +525,15 @@
           },
           {
             "code": "fielded_passage",
-            "text": "The strongest matching publication-eligible subprogram title says: “Electrochemical Energy Conversion Catalyst Discovery and Scale up”.",
+            "text": "The strongest matching subprogram summary says: “Electrochemical Energy Conversion Catalyst Discovery and Scale up. Challenge Area: Designing Materials with Predictable Functionality”.",
             "evidence": {
               "path": "fielded_bm25f",
-              "field": "child_title",
+              "field": "child_summary",
               "terms": [
-                "catalyst"
+                "catalyst",
+                "design"
               ],
-              "span": 1,
+              "span": 7,
               "generatedAgencyWording": false
             }
           }
@@ -526,10 +542,12 @@
           "admittedBy": [
             {
               "path": "fielded_bm25f",
-              "field": "child_title",
+              "field": "child_summary",
               "fields": [
-                "child_title"
+                "child_title",
+                "child_summary"
               ],
+              "passageId": "child:361526:g-12#child_summary:sentences:1-2",
               "matchedConcepts": [
                 "literal:catalyst",
                 "literal:design"
@@ -545,6 +563,15 @@
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
+            },
+            {
+              "type": "proximity",
+              "score": 2.53125,
+              "span": 7
             }
           ],
           "selectedEvidence": [
@@ -557,11 +584,12 @@
             },
             {
               "path": "fielded_bm25f",
-              "field": "child_title",
+              "field": "child_summary",
               "terms": [
-                "catalyst"
+                "catalyst",
+                "design"
               ],
-              "span": 1,
+              "span": 7,
               "generatedAgencyWording": false
             }
           ],
@@ -658,6 +686,7 @@
               "fields": [
                 "child_title"
               ],
+              "passageId": "child:361526:g-12#child_title:title",
               "matchedConcepts": [
                 "literal:electrochemical",
                 "literal:energy",
@@ -678,6 +707,10 @@
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
             },
             {
               "type": "exact_phrase",
@@ -769,7 +802,7 @@
         "reasons": [
           {
             "code": "fielded_passage",
-            "text": "The strongest matching opportunity description says: “It spans reaction engineering and molecular thermodynamics; reactor design; catalysis; electrochemical systems; separations; and process design”.",
+            "text": "The strongest matching opportunity description says: “Chemical Process Systems (CPS). more competitive and secure. Research supported by the CPS program covers the full breadth of chemical and biochemical process innovation”.",
             "evidence": {
               "path": "fielded_bm25f",
               "field": "parent_description",
@@ -787,8 +820,10 @@
               "path": "fielded_bm25f",
               "field": "parent_description",
               "fields": [
+                "parent_title",
                 "parent_description"
               ],
+              "passageId": "parent:362061#parent_description:sentences:4-6",
               "matchedConcepts": [
                 "literal:catalysi"
               ]
@@ -797,12 +832,16 @@
           "rankedBy": [
             {
               "type": "bm25f",
-              "score": 9.203588314155702
+              "score": 9.202167610623047
             },
             {
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
             },
             {
               "type": "exact_phrase",
@@ -858,7 +897,7 @@
         "reasons": [
           {
             "code": "fielded_passage",
-            "text": "The strongest matching named program area says: “catalysis chemical sciences materials science separations quantum science fusion energy advanced computing artificial intelligence biological and environmental research energy…”.",
+            "text": "The strongest matching named program area says: “FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program. catalysis”.",
             "evidence": {
               "path": "fielded_bm25f",
               "field": "authoritative_program_area",
@@ -876,8 +915,10 @@
               "path": "fielded_bm25f",
               "field": "authoritative_program_area",
               "fields": [
+                "parent_title",
                 "authoritative_program_area"
               ],
+              "passageId": "parent:360678#authoritative_program_area:entry:1",
               "matchedConcepts": [
                 "literal:catalysi"
               ]
@@ -886,12 +927,16 @@
           "rankedBy": [
             {
               "type": "bm25f",
-              "score": 5.22773536368513
+              "score": 5.227026285523578
             },
             {
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
             },
             {
               "type": "exact_phrase",
@@ -950,7 +995,7 @@
         "reasons": [
           {
             "code": "fielded_passage",
-            "text": "The strongest matching opportunity description says: “This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function…”.",
+            "text": "The strongest matching opportunity description says: “Division of Chemistry: Disciplinary Research Programs. This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN)”.",
             "evidence": {
               "path": "fielded_bm25f",
               "field": "parent_description",
@@ -968,8 +1013,10 @@
               "path": "fielded_bm25f",
               "field": "parent_description",
               "fields": [
+                "parent_title",
                 "parent_description"
               ],
+              "passageId": "parent:347749#parent_description:sentences:1-3",
               "matchedConcepts": [
                 "literal:catalysi"
               ]
@@ -978,12 +1025,16 @@
           "rankedBy": [
             {
               "type": "bm25f",
-              "score": 8.637643713540132
+              "score": 8.636290958203174
             },
             {
               "type": "query_coordination",
               "ratio": 1,
               "power": 3
+            },
+            {
+              "type": "atomic_evidence_coordination",
+              "ratio": 1
             },
             {
               "type": "exact_phrase",

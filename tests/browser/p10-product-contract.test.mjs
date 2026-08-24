@@ -41,8 +41,8 @@ test("v1.2 production feature flags enable topics, explanations, and hybrid sear
     { ...local.flags },
     { subtopics: true, matchExplanations: true, searchV2: true },
   );
-  assert.equal(local.release.version, "1.2.0");
-  assert.equal(local.release.updated, "2026-08-23");
+  assert.equal(local.release.version, "1.2.1");
+  assert.equal(local.release.updated, "2026-08-24");
   assert.equal(
     production.hybridSearch.proxyUrl,
     "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
@@ -56,8 +56,8 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.match(runtimeSource, /subtopics\.js\?v=\$\{catalogVersion\}/);
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
-  assert.match(mainHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
-  assert.match(teamHtml, /assets\/app-config\.js\?v=app-1\.2\.0/);
+  assert.match(mainHtml, /assets\/app-config\.js\?v=app-1\.2\.1/);
+  assert.match(teamHtml, /assets\/app-config\.js\?v=app-1\.2\.1/);
   assert.match(mainHtml, /connect-src 'self'/);
   assert.match(teamHtml, /connect-src 'self'/);
   for (const page of [mainHtml, teamHtml]) assert.match(page, /data-app-version/);
