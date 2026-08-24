@@ -88,8 +88,10 @@ export function buildNsfRequest(criteria, { limit, offset }) {
     return { url, options: { headers: { Accept: "application/json" } } };
   }
   const params = new URLSearchParams({ rpp: String(limit), offset: String(offset) });
-  if (criteria.program) {
-    if (/^\d{6}$/.test(criteria.program)) params.set("ProgEleCode", criteria.program);
+  if (criteria.program_codes) {
+    params.set("ProgEleCode", criteria.program_codes.join(","));
+  } else if (criteria.program) {
+    if (/^[A-Z0-9]{6}$/i.test(criteria.program)) params.set("ProgEleCode", criteria.program);
     else params.set("fundProgramName", quoted(criteria.program));
   }
   if (criteria.topic) params.set("keyword", allTerms(criteria.topic));

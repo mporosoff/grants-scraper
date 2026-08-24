@@ -90,6 +90,13 @@ test("Phase 1 uses the v1.3.0 runtime and source-specific exact query contracts"
   assert.equal(nsfUrl.searchParams.get("dateEnd"), "12/31/2026");
   const nsfTopic = buildNsfRequest({ topic: "warm dense matter" }, { limit: 5, offset: 0 });
   assert.equal(new URL(nsfTopic.url).searchParams.get("keyword"), "warm AND dense AND matter");
+  const nsfParent = buildNsfRequest({
+    program_codes: ["367Y00", "140100", "764400", "141700", "140300"],
+  }, { limit: 5, offset: 0 });
+  assert.equal(
+    new URL(nsfParent.url).searchParams.get("ProgEleCode"),
+    "367Y00,140100,764400,141700,140300",
+  );
 
   const nih = buildNihRequest({
     core_project_number: "K12GM106997",
@@ -193,6 +200,14 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"])), env)).status, 400);
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), limit: 26 }), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
+  const cbetCodes = [
+    "366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400",
+    "141700", "140300", "723600", "149100", "534200", "534500",
+    "764300", "117900", "140700", "144300", "141500", "140600",
+  ];
+  assert.equal((await handler(workerRequest(query({ program_codes: cbetCodes }, ["NSF"])), env)).status, 200);
+  const tooManyCodes = Array.from({ length: 25 }, (_, index) => String(index + 1).padStart(6, "0"));
+  assert.equal((await handler(workerRequest(query({ program_codes: tooManyCodes }, ["NSF"])), env)).status, 400);
   const tooLarge = workerRequest(query({ topic: "x".repeat(MAX_REQUEST_BYTES) }));
   assert.equal((await handler(tooLarge, env)).status, 413);
 });
