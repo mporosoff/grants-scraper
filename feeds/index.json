@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-24T17:52:55Z",
+  "generated_at": "2026-08-24T19:26:40Z",
   "excluded_noncurrent": 7,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1449
+      "count": 1448
     },
     {
       "title": "Funding Finder | Federal",
@@ -20,7 +20,7 @@
     {
       "title": "Funding Finder | State",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml",
-      "count": 38
+      "count": 37
     },
     {
       "title": "Funding Finder | Agriculture and food",
@@ -60,7 +60,7 @@
     {
       "title": "Funding Finder | Climate change",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/climate-change.xml",
-      "count": 19
+      "count": 18
     },
     {
       "title": "Funding Finder | Community development",
