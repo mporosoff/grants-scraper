@@ -23,6 +23,12 @@ on:
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
+    inputs:
+      premerge_candidate:
+        description: Run only the protected pre-merge Worker candidate smoke
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -35,7 +41,130 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  release-candidate-worker:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.premerge_candidate }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - run: python -m pip install -r requirements.txt
+      - name: Verify the committed search package
+        run: node tools/build_search_release_package.mjs --check
+      - name: Run the complete Python product gate
+        run: python -m tools.run_refresh_validation
+      - name: Run browser, package, and frozen quality gates
+        run: >-
+          node --test tests/browser/*.test.mjs &&
+          node tools/query_baseline.mjs --check &&
+          node tools/p9_scoring_probe.mjs --check
+      - name: Capture and verify the protected main release base
+        id: candidate-base
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          candidate_base_sha="$(git merge-base HEAD origin/main)"
+          if [ -z "$current_main_sha" ] || [ "$candidate_base_sha" != "$current_main_sha" ]; then
+            echo "::error::The candidate was not built from current protected main."
+            exit 1
+          fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Capture the active Worker version for rollback
+        id: candidate-prior-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list \
+            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
+          prior_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+          echo "Prior Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
+      - name: Deploy the pre-merge compatibility Worker
+        id: candidate-worker-deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+      - name: Capture the candidate Worker version
+        id: candidate-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list \
+            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
+          candidate_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          echo "version_id=$candidate_version" >> "$GITHUB_OUTPUT"
+          echo "Candidate Worker version: \`$candidate_version\`" >> "$GITHUB_STEP_SUMMARY"
+      - name: Wait for the candidate Worker identity
+        id: candidate-worker-handshake
+        shell: bash
+        run: |
+          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
+          health=""
+          for attempt in {1..12}; do
+            health="$(curl --fail --silent --show-error --max-time 10 \
+              -H 'Origin: https://mporosoff.github.io' \
+              'https://funding-finder-voyage-search.urochestercheme.workers.dev/health' || true)"
+            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.budget_state // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.corpus_sha256 // empty' <<<"$health" 2>/dev/null)" = "$candidate_sha" \
+              && test "$(jq -r '.model_space_fingerprint // empty' <<<"$health" 2>/dev/null)" = "$candidate_fingerprint"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::The candidate Worker identity did not become available."
+          exit 1
+      - name: Run the corrected real-provider smoke
+        id: candidate-worker-smoke
+        run: node ./tools/smoke_search_worker.mjs
+      - name: Restore the prior Worker if candidate smoke fails
+        if: ${{ always() && steps.candidate-worker-deploy.outcome == 'success' && (steps.candidate-worker-handshake.outcome == 'failure' || steps.candidate-worker-smoke.outcome == 'failure') }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          npx --yes wrangler@4.125.0 rollback
+          "${{ steps.candidate-prior-worker.outputs.version_id }}"
+          --config workers/search-voyage-proxy/wrangler.jsonc
+          --message "Automatic rollback after pre-merge Worker smoke failure"
+      - name: Restore the prior Worker if protected main advanced
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.candidate-base.outputs.main_sha }}" ]; then
+            npx --yes wrangler@4.125.0 rollback \
+              "${{ steps.candidate-prior-worker.outputs.version_id }}" \
+              --config workers/search-voyage-proxy/wrangler.jsonc \
+              --message "Automatic rollback because main advanced after pre-merge Worker smoke"
+            echo "::error::Main advanced after Worker smoke; the prior Worker was restored."
+            exit 1
+          fi
+      - name: Record successful pre-merge candidate smoke
+        run: |
+          echo "Pre-merge candidate Worker smoke passed." >> "$GITHUB_STEP_SUMMARY"
+          echo "Protected main base: \`${{ steps.candidate-base.outputs.main_sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+
   refresh:
+    if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
     runs-on: ubuntu-latest
     timeout-minutes: 75
 
