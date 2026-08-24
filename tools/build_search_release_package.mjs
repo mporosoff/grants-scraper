@@ -209,6 +209,7 @@ async function run() {
     VECTOR_PATH,
     CANARY_PATH,
     "assets/app.js",
+    "assets/result-workflow.js",
     "assets/search-hybrid.js",
     "assets/search-retrieval.js",
     "assets/team-hybrid.js",

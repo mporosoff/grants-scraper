@@ -147,6 +147,7 @@ test("Worker smoke performs the real bounded sequence and fails on provider reje
 test("package-sensitive changes have a bounded deploy-only workflow", () => {
   for (const path of [
     "assets/app.js",
+    "assets/result-workflow.js",
     "assets/search-hybrid.js",
     "assets/search-retrieval.js",
     "assets/team-hybrid.js",

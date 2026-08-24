@@ -9,6 +9,7 @@ on:
       - "assets/app-config.js"
       - "assets/app.js"
       - "assets/match-explain.js"
+      - "assets/result-workflow.js"
       - "assets/search-hybrid.js"
       - "assets/search-retrieval.js"
       - "assets/search-v2-config.js"

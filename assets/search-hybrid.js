@@ -438,7 +438,30 @@
     ));
   }
 
-  function explanationFromPassage(passage) {
+  const EXPLANATION_STOP_WORDS = new Set([
+    "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "in",
+    "is", "it", "of", "on", "or", "prioritize", "record", "records", "research",
+    "scientific", "that", "the", "this", "to", "with",
+  ]);
+
+  function explanationQueryTerms(query) {
+    return uniqueText(
+      normalizeText(query).toLowerCase().match(/[a-z0-9][a-z0-9-]*/g) || [],
+    ).filter(term => term.length > 1 && !EXPLANATION_STOP_WORDS.has(term));
+  }
+
+  function completeSourceSpans(value) {
+    const text = normalizeText(value);
+    if (!text) return [];
+    const sentences = text.match(/[^.!?]+(?:[.!?](?=\s|$)|$)/g)
+      ?.map(normalizeText)
+      .filter(Boolean) || [];
+    if (sentences.length > 1) return sentences;
+    const phrases = text.split(/\s*;\s*/).map(normalizeText).filter(Boolean);
+    return phrases.length > 1 ? phrases : [text];
+  }
+
+  function explanationFromPassage(passage, canonicalQuery = "") {
     if (!passage) return null;
     const preferences = passage.passage_kind === "publication_eligible_child"
       ? [
@@ -453,16 +476,46 @@
           ["bounded_source_evidence", "Public source evidence"],
           ["parent_title", "Opportunity title"],
         ];
-    const selected = preferences.find(([field]) => passage.values?.[field]?.length);
-    if (!selected) return null;
-    const [field, label] = selected;
+    const queryTerms = explanationQueryTerms(canonicalQuery);
+    const queryBigrams = queryTerms.slice(0, -1).map((term, index) => (
+      `${term} ${queryTerms[index + 1]}`
+    ));
+    const candidates = preferences.flatMap(([field, label], fieldIndex) => (
+      (passage.values?.[field] || []).flatMap((value, valueIndex) => (
+        completeSourceSpans(value).map((span, spanIndex) => {
+          const normalizedSpan = normalizeText(span).toLowerCase();
+          const spanTerms = new Set(normalizedSpan.match(/[a-z0-9][a-z0-9-]*/g) || []);
+          const matchedTerms = queryTerms.filter(term => spanTerms.has(term));
+          const matchedBigrams = queryBigrams.filter(phrase => normalizedSpan.includes(phrase));
+          return {
+            field,
+            label,
+            span,
+            fieldIndex,
+            valueIndex,
+            spanIndex,
+            score: matchedTerms.length * 100
+              + matchedTerms.reduce((sum, term) => sum + term.length, 0)
+              + matchedBigrams.length * 30,
+          };
+        })
+      ))
+    ));
+    if (!candidates.length) return null;
+    candidates.sort((left, right) => (
+      right.score - left.score
+      || left.fieldIndex - right.fieldIndex
+      || left.valueIndex - right.valueIndex
+      || left.spanIndex - right.spanIndex
+    ));
+    const selected = candidates[0];
     return {
       passage_id: passage.passage_id,
       passage_kind: passage.passage_kind,
-      source_field: field,
-      source_label: label,
+      source_field: selected.field,
+      source_label: selected.label,
       title: passage.title || "",
-      excerpt: completeDisplayText(passage.values[field].join("; "), 360),
+      excerpt: completeDisplayText(selected.span, 360),
     };
   }
 
@@ -508,6 +561,7 @@
     let assetsPromise = null;
     const resultCache = new Map();
     const localResultCache = new Map();
+    const pendingSearches = new Map();
     const usage = {
       embedding_requests: 0,
       rerank_requests: 0,
@@ -518,10 +572,17 @@
       last_latency_ms: 0,
     };
 
-    async function post(path, body) {
+    async function post(path, body, signal = null) {
       if (!endpoint || !fetchImpl) throw new HybridSearchError("proxy_unconfigured", "Enhanced search is not configured.");
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), Math.max(500, Number(timeoutMs) || DEFAULT_TIMEOUT_MS));
+      let timedOut = false;
+      const abortFromCaller = () => controller.abort();
+      if (signal?.aborted) controller.abort();
+      else signal?.addEventListener?.("abort", abortFromCaller, { once: true });
+      const timer = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, Math.max(500, Number(timeoutMs) || DEFAULT_TIMEOUT_MS));
       try {
         const response = await fetchImpl(new URL(path, endpoint).href, {
           method: "POST",
@@ -532,13 +593,20 @@
           referrerPolicy: "no-referrer",
           signal: controller.signal,
         });
+        if (signal?.aborted) throw new HybridSearchError("request_aborted", "The superseded enhanced-search request was canceled.");
         return await responseJson(response, "proxy_error");
       } catch (error) {
-        if (error?.name === "AbortError") throw new HybridSearchError("proxy_timeout", "Enhanced search timed out.");
+        if (error?.name === "AbortError") {
+          if (signal?.aborted && !timedOut) {
+            throw new HybridSearchError("request_aborted", "The superseded enhanced-search request was canceled.");
+          }
+          throw new HybridSearchError("proxy_timeout", "Enhanced search timed out.");
+        }
         if (error instanceof HybridSearchError) throw error;
         throw new HybridSearchError("proxy_unavailable", "Enhanced search is temporarily unavailable.");
       } finally {
         clearTimeout(timer);
+        signal?.removeEventListener?.("abort", abortFromCaller);
       }
     }
 
@@ -596,7 +664,7 @@
       return assetsPromise;
     }
 
-    async function search(query, { context = "", eligibleParentIds = null } = {}) {
+    async function search(query, { context = "", eligibleParentIds = null, signal = null } = {}) {
       const normalizedQuery = normalizeText(query);
       if (!normalizedQuery || normalizedQuery.length > MAX_QUERY_CHARS) {
         throw new HybridSearchError("invalid_query", "The enhanced-search query is empty or too long.");
@@ -615,13 +683,16 @@
           semantic_query: semanticQuery,
           eligible_parent_ids: eligible ? [...eligible].sort() : null,
         }));
+        const existingPending = pendingSearches.get(localSignature);
+        if (existingPending) return existingPending;
+        const pending = (async () => {
         const locallyCached = localResultCache.get(localSignature);
         if (locallyCached) return {
           ...locallyCached,
           diagnostics: { ...locallyCached.diagnostics, cache_hit: true },
           usage: { ...usage },
         };
-        const embeddedTask = post("embed-query", { query: semanticQuery }).then(response => {
+        const embeddedTask = post("embed-query", { query: semanticQuery }, signal).then(response => {
           usage.embedding_requests += 1;
           usage.embedding_tokens += Number(response.usage?.total_tokens || 0);
           return { value: response, error: null };
@@ -686,6 +757,9 @@
           localResultCache.set(localSignature, emptyOutcome);
           return emptyOutcome;
         }
+        if (signal?.aborted) {
+          throw new HybridSearchError("request_aborted", "The superseded enhanced-search request was canceled.");
+        }
         const reranked = await post("rerank", {
           query: semanticQuery,
           corpus_sha256: assets.manifest.corpus_sha256,
@@ -695,7 +769,7 @@
             text_sha256: item.text_sha256,
             text: item.text,
           })),
-        });
+        }, signal);
         usage.rerank_requests += 1;
         usage.rerank_tokens += Number(reranked.usage?.total_tokens || 0);
         const passages = (reranked.rankings || []).map(item => {
@@ -708,7 +782,7 @@
         const rankedParents = strongestParents(passages).map((passage, index) => ({
           ...passage,
           hybrid_rank: index + 1,
-          explanation: explanationFromPassage(passage),
+          explanation: explanationFromPassage(passage, semanticQuery),
         }));
         usage.last_latency_ms = performance.now() - started;
         const outcome = {
@@ -731,7 +805,17 @@
         resultCache.set(requestSignature, outcome);
         localResultCache.set(localSignature, outcome);
         return outcome;
+        })();
+        pendingSearches.set(localSignature, pending);
+        try {
+          return await pending;
+        } finally {
+          if (pendingSearches.get(localSignature) === pending) {
+            pendingSearches.delete(localSignature);
+          }
+        }
       } catch (error) {
+        if (error?.code === "request_aborted") throw error;
         usage.failures += 1;
         usage.fallbacks += 1;
         if (error instanceof HybridSearchError) throw error;

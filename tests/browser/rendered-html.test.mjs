@@ -85,6 +85,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /assets\/review\.js/);
   assert.match(prototype, /assets\/ai-provider\.js/);
   assert.match(prototype, /assets\/chat-ui\.js/);
+  assert.match(prototype, /assets\/result-workflow\.js/);
   assert.match(prototype, /assets\/search-retrieval\.js/);
   assert.match(prototype, /assets\/app-config\.js/);
   assert.match(prototype, /assets\/subtopic-runtime\.js/);
@@ -115,7 +116,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /function recordIsCurrent/);
   assert.match(script, /function recordIsAvailable/);
   assert.match(script, /record\.archive_date <= asOf/);
-  assert.match(script, /\.map\(id => byId\.get\(id\)\)[\s\S]*?\.filter\(Boolean\)/);
+  assert.match(script, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(script, /status === "archived"/);
   assert.match(script, /Archived included/);
   assert.match(script, /NEW_RELEVANT_MAX_AGE_DAYS = 14/);

@@ -20,7 +20,8 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
     assert.match(source, /Potential/i);
     assert.match(source, /hosted|site-managed/i);
   }
-  assert.match(searchPage, /Strong matching runs locally\. Potential matches use a hosted semantic ranking service and send your search text with public opportunity passages\./);
+  assert.match(searchPage, /Potential matching sends only that search text and eligible public opportunity passages/);
+  assert.match(searchPage, /Profile, CV, and ORCID text are not sent to that service/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
   assert.match(help, /User-connected AI tools/);
   assert.match(teamPage, /Enhanced ordering may send a bounded aggregate of selected research keywords and theme labels/);
@@ -28,7 +29,7 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
 });
 
 test("hosted semantic requests contain only query and bounded public passage fields", () => {
-  assert.match(hybrid, /post\("embed-query", \{ query: semanticQuery \}\)/);
+  assert.match(hybrid, /post\("embed-query", \{ query: semanticQuery \}, signal\)/);
   assert.match(hybrid, /post\("rerank", \{\s*query: semanticQuery,\s*corpus_sha256:[\s\S]*?candidates: guarded\.map/);
   assert.match(hybrid, /passage_id: item\.passage_id,\s*text_sha256: item\.text_sha256,\s*text: item\.text/);
   assert.doesNotMatch(hybrid, /profile_text|cv_text|researcher_name|orcid_text|publication_text/i);
@@ -59,7 +60,7 @@ test("query and filters determine membership while sort only orders within tiers
   ]) assert.match(app, new RegExp(field));
   assert.match(app, /cachedSignature === requestSignature/);
   assert.match(app, /eligibleParentIds = eligibleHybridParentIds\(\)/);
-  assert.match(app, /search\(normalizedQuery, \{ context: "", eligibleParentIds \}\)/);
+  assert.match(app, /search\(normalizedQuery, \{[\s\S]*?context: "",[\s\S]*?eligibleParentIds,[\s\S]*?signal: controller\.signal/);
   assert.match(apply, /sortMatches\([\s\S]*?state\.sort/);
   assert.match(apply, /state\.matches = \[\.\.\.state\.strongMatches, \.\.\.state\.potentialMatches\]/);
 });
