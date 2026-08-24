@@ -1,4 +1,4 @@
-import passageManifest from "../../../data/search-v2-voyage-manifest.json" with { type: "json" };
+import corpusAllowlist from "../generated/corpus-allowlist.json" with { type: "json" };
 
 const VOYAGE_EMBED_URL = "https://api.voyageai.com/v1/embeddings";
 const VOYAGE_RERANK_URL = "https://api.voyageai.com/v1/rerank";
@@ -12,7 +12,17 @@ const MAX_REQUEST_BYTES = 1_100_000;
 const PROVIDER_TIMEOUT_MS = 7_000;
 const QUERY_INSTRUCTION = "Rank public funding opportunities by whether their authoritative scientific or programmatic scope supports the complete research intent. Do not reward partial word overlap when a major query concept is absent.\n\nResearch query: <QUERY>";
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
-const PASSAGE_HASHES = new Map(passageManifest.passages.map(item => [item.passage_id, item.text_sha256]));
+
+function generationHashes(allowlist) {
+  const generations = new Map();
+  [allowlist?.current, allowlist?.previous].filter(Boolean).forEach(generation => {
+    if (!generation.corpus_sha256 || !Array.isArray(generation.passages)) return;
+    generations.set(generation.corpus_sha256, new Map(
+      generation.passages.map(item => [item.passage_id, item.text_sha256]),
+    ));
+  });
+  return generations;
+}
 
 function allowedOrigin(value) {
   if (value === PRODUCTION_ORIGIN) return true;
@@ -122,11 +132,11 @@ async function voyageFetch(fetchImpl, url, apiKey, body) {
   }
 }
 
-async function validateCandidates(body) {
+async function validateCandidates(body, generations) {
   if (!exactKeys(body, ["query", "corpus_sha256", "candidates"])) return null;
   const query = cleanQuery(body.query);
-  if (!query || body.corpus_sha256 !== passageManifest.corpus_sha256
-    || !Array.isArray(body.candidates) || body.candidates.length < 1
+  const passageHashes = generations.get(body.corpus_sha256);
+  if (!query || !passageHashes || !Array.isArray(body.candidates) || body.candidates.length < 1
     || body.candidates.length > MAX_CANDIDATES) return null;
   const seen = new Set();
   for (const candidate of body.candidates) {
@@ -134,7 +144,7 @@ async function validateCandidates(body) {
     if (typeof candidate.passage_id !== "string" || seen.has(candidate.passage_id)) return null;
     if (typeof candidate.text !== "string" || candidate.text.length < 1
       || candidate.text.length > MAX_PASSAGE_CHARS) return null;
-    const allowedHash = PASSAGE_HASHES.get(candidate.passage_id);
+    const allowedHash = passageHashes.get(candidate.passage_id);
     if (!allowedHash || candidate.text_sha256 !== allowedHash) return null;
     seen.add(candidate.passage_id);
   }
@@ -143,7 +153,8 @@ async function validateCandidates(body) {
   return { query, candidates: body.candidates };
 }
 
-export function createHandler({ fetchImpl = fetch } = {}) {
+export function createHandler({ fetchImpl = fetch, allowlist = corpusAllowlist } = {}) {
+  const generations = generationHashes(allowlist);
   return async function handle(request, env) {
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(PRODUCTION_ORIGIN, 403, "origin_forbidden");
@@ -179,7 +190,7 @@ export function createHandler({ fetchImpl = fetch } = {}) {
       }
       if (path === "/rerank") {
         if (!env?.VOYAGE_API_KEY) return error(origin, 503, "service_unconfigured");
-        const validated = await validateCandidates(body);
+        const validated = await validateCandidates(body, generations);
         if (!validated) return error(origin, 400, "invalid_candidates");
         const result = await voyageFetch(fetchImpl, VOYAGE_RERANK_URL, env.VOYAGE_API_KEY, {
           query: QUERY_INSTRUCTION.replace("<QUERY>", validated.query),

@@ -4,13 +4,19 @@ This Worker exposes only two POST endpoints:
 
 - `/embed-query` for a bounded public Funding Finder query;
 - `/rerank` for up to 300 passages whose IDs and SHA-256 hashes match the
-  committed public passage manifest.
+  generated current or immediately previous public corpus allowlist.
 
 The Worker does not log query strings, accept researcher profiles/CVs/ORCID
 data, return documents, or expose the Voyage credential. Browser requests are
 accepted only from `https://mporosoff.github.io` and local HTTP development
 origins. Embedding/reranking failures return bounded error codes so the browser
 can retain the local Strong matches and omit unavailable Potential matches.
+
+`tools/build_search_release_package.mjs` generates the allowlist from the
+validated semantic manifest. The scheduled refresh deploys this compatibility
+Worker before committing the matching catalog, manifest, vectors, and release
+metadata, so old and new browser generations can coexist while Pages updates.
+Every next successful refresh retires the older of the two generations.
 
 ## Local verification
 
@@ -23,7 +29,7 @@ npx wrangler dev
 
 Never commit `.dev.vars` or an API key.
 
-## One-time deployment when separately authorized
+## Deployment
 
 From this directory, authenticate Wrangler, set the encrypted secret, and
 deploy:
@@ -34,7 +40,7 @@ npx wrangler secret put VOYAGE_API_KEY
 npx wrangler deploy
 ```
 
-After deployment, put the resulting Worker base URL in the non-secret browser
-configuration, add that exact HTTPS origin to the page's `connect-src` policy,
-rerun development/acceptance gates, and only then consider enabling search v2.
-This repository session does not run these commands.
+Production deployment is owned by the coordinated refresh workflow after its
+vector, package-integrity, Python, browser, and search-quality gates pass. A
+manual deployment must follow the same order and must never publish a Worker
+that lacks compatibility with the currently live Pages corpus.

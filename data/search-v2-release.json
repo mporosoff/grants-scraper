@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-23T21:33:28.459Z",
+  "current_corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+  "previous_corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+  "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+  "model": "voyage-4-lite",
+  "dimension": 1024,
+  "model_space_fingerprint": null,
+  "passage_count": 1659,
+  "worker_allowlist_sha256": "11db7213f172bfc6061bb0c6e93b302672b750c6f25d991c57a5f0d5b46efa91",
+  "source_hashes": {
+    "data/opportunities.js": "4fd1b5ec3e3aa0f2ef7a1856043e1e85f56ad5ed4beb22cc9fa6a4097494f46b",
+    "data/subtopics.js": "8185a7fc8156b13fdc9a86c1d2d986ee4e608a6447568ab51b21fefc341febbb",
+    "data/search-v2-voyage-manifest.json": "ff5922f45444ff13a4ffdbfe574de7b535338367a1206bb8ed712914e9226e8a",
+    "data/search-v2-voyage-vectors.f16": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "workers/search-voyage-proxy/src/index.js": "e58f304f5b9c444b06c5d90d5f48d49c0afe34ea08cc536d5e307c211110a8ef"
+  },
+  "atomic_publication_contract": "catalog + subtopics + manifest + vectors + Worker allowlist"
+}

@@ -35,7 +35,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
 
     steps:
       - uses: actions/checkout@v6
@@ -121,8 +121,29 @@ jobs:
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
+      - name: Rebuild every production document vector
+        id: semantic-vectors
+        env:
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+        run: node tools/build_search_v2_voyage_vectors.mjs --production --write
+      - name: Build the current/previous Worker compatibility package
+        id: search-package
+        run: node tools/build_search_release_package.mjs --write
+      - name: Verify the complete search package is internally consistent
+        run: node tools/build_search_release_package.mjs --check
       - name: Run regression tests against generated asset
         run: python -m tools.run_refresh_validation
+      - name: Run browser and search-package regression gates
+        run: >-
+          node --test tests/browser/*.test.mjs &&
+          node tools/query_baseline.mjs --check &&
+          node tools/p9_scoring_probe.mjs --check
+      - name: Deploy the compatibility Worker before publishing Pages assets
+        id: worker-deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 deploy --config workers/search-voyage-proxy/wrangler.jsonc
       - name: Record the build heartbeat
         shell: bash
         # Scheduled workflows are disabled after 60 days without repository
@@ -142,7 +163,7 @@ jobs:
           # would abort the commit and stop the nightly publishing entirely.
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json feeds .github/last_build
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
           if [ -f data/subtopics.js ]; then
             git add data/subtopics.js
           fi
@@ -165,6 +186,26 @@ jobs:
               echo "::error::Could not push the refreshed catalog after retries."
               exit 1
             fi
+          fi
+      - name: Verify GitHub Pages serves the coordinated search package
+        if: success()
+        shell: bash
+        run: |
+          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          verified=false
+          for attempt in $(seq 1 18); do
+            live_sha="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?candidate=${candidate_sha}" \
+              | jq -r '.current_corpus_sha256' 2>/dev/null || true)"
+            if [ "$live_sha" = "$candidate_sha" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve candidate corpus ${candidate_sha} within the verification window."
+            exit 1
           fi
       - name: Alert the project owner about a degraded external source
         if: >-

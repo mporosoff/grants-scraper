@@ -167,7 +167,11 @@ async function embed(apiKey, texts, batchIndex) {
 
 async function run() {
   const write = process.argv.includes("--write");
-  const force = process.argv.includes("--force");
+  const production = process.argv.includes("--production");
+  const force = process.argv.includes("--force") || production;
+  if (production && !write) {
+    throw new Error("--production requires --write so a complete generation is published atomically.");
+  }
   const [base, api, previous] = await Promise.all([loadHarness(), hybridApi(), existingAsset()]);
   const harness = makeVariantHarness(base, { searchV2: true });
   const currentness = harness.parentEngine.score("funding research", { evidence: false });
@@ -292,6 +296,7 @@ async function run() {
     schema_version: 1,
     generated_at: generatedAt,
     status: write ? "written" : "dry_run",
+    build_mode: production ? "production_full_rebuild" : (force ? "forced_full_rebuild" : "local_incremental"),
     model: MODEL,
     provider_revision: manifest.provider_revision,
     input_type: "document",
@@ -323,6 +328,7 @@ async function run() {
     },
     vectors_contain_public_passages_only: true,
     vectors_persist_private_profile_or_researcher_data: false,
+    production_reused_vectors: production ? false : null,
   };
 
   if (write) {

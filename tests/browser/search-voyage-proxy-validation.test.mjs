@@ -13,6 +13,10 @@ const [workerSource, wranglerSource] = await Promise.all([
   readFile(new URL("workers/search-voyage-proxy/wrangler.jsonc", root), "utf8"),
 ]);
 const manifest = await readFile(new URL("data/search-v2-voyage-manifest.json", root), "utf8").then(JSON.parse);
+const allowlist = await readFile(
+  new URL("workers/search-voyage-proxy/generated/corpus-allowlist.json", root),
+  "utf8",
+).then(JSON.parse);
 
 function loadHybridApi() {
   const context = { TextEncoder, URL };
@@ -89,6 +93,42 @@ test("proxy sends only bounded allowlisted public text and exposes no credential
   assert.doesNotMatch(JSON.stringify(await reranked.json()), /test-secret|Authorization|Bearer/);
   assert.match(workerSource, /PROVIDER_TIMEOUT_MS\s*=\s*7_000/);
   assert.doesNotMatch(workerSource, /console\.(?:log|error)|researcher|ORCID|CV/);
+});
+
+test("proxy accepts exactly the current and immediately previous corpus generations", async () => {
+  assert.equal(allowlist.current.corpus_sha256, manifest.corpus_sha256);
+  assert.ok(allowlist.previous?.corpus_sha256);
+  assert.notEqual(allowlist.previous.corpus_sha256, allowlist.current.corpus_sha256);
+  const currentById = new Map(corpus.map(item => [item.passage_id, item]));
+  const compatible = allowlist.previous.passages.find(item => {
+    const current = currentById.get(item.passage_id);
+    return current && current.text_sha256 === item.text_sha256;
+  });
+  assert.ok(compatible, "the compatibility window needs one unchanged public passage canary");
+  const candidate = currentById.get(compatible.passage_id);
+  let providerCalls = 0;
+  const handler = createHandler({ fetchImpl: async () => {
+    providerCalls += 1;
+    return new Response(JSON.stringify({
+      model: "rerank-2.5",
+      data: [{ index: 0, relevance_score: .9 }],
+      usage: { total_tokens: 3 },
+    }), { status: 200 });
+  } });
+  const body = corpusSha => ({
+    query: "public compatibility test",
+    corpus_sha256: corpusSha,
+    candidates: [{
+      passage_id: candidate.passage_id,
+      text_sha256: compatible.text_sha256,
+      text: candidate.text,
+    }],
+  });
+  const previous = await handler(request("/rerank", body(allowlist.previous.corpus_sha256)), { VOYAGE_API_KEY: "test" });
+  assert.equal(previous.status, 200);
+  const unknown = await handler(request("/rerank", body("f".repeat(64))), { VOYAGE_API_KEY: "test" });
+  assert.equal(unknown.status, 400);
+  assert.equal(providerCalls, 1);
 });
 
 test("proxy converts provider failures into clean non-secret errors", async () => {

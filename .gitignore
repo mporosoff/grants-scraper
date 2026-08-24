@@ -23,6 +23,7 @@ faculty.csv
 !/data/subtopics.js
 !/data/search-v2-voyage-manifest.json
 !/data/search-v2-voyage-vectors.f16
+!/data/search-v2-release.json
 /GrantsDBExtract*.zip
 
 # Human deployment-review files stay private and out of source control

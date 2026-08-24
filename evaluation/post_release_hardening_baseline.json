@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T00:36:16.336Z",
+  "plan_date": "2026-08-23",
+  "branch": "post-release-hardening",
+  "starting_sha": "505af687c9b3620454371de475ffe7c2adb176d6",
+  "refs": {
+    "main": "505af687c9b3620454371de475ffe7c2adb176d6",
+    "search-quality-v2": "505af687c9b3620454371de475ffe7c2adb176d6",
+    "origin/main": "505af687c9b3620454371de475ffe7c2adb176d6"
+  },
+  "semantic_generation": {
+    "model": "voyage-4-lite",
+    "dimension": 1024,
+    "passage_count": 1659,
+    "corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2"
+  },
+  "artifact_hashes": {
+    "data/opportunities.js": "4fd1b5ec3e3aa0f2ef7a1856043e1e85f56ad5ed4beb22cc9fa6a4097494f46b",
+    "data/subtopics.js": "8185a7fc8156b13fdc9a86c1d2d986ee4e608a6447568ab51b21fefc341febbb",
+    "data/search-v2-voyage-manifest.json": "ff5922f45444ff13a4ffdbfe574de7b535338367a1206bb8ed712914e9226e8a",
+    "data/search-v2-voyage-vectors.f16": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "workers/search-voyage-proxy/src/index.js": "b7ef68b1cd8d47d9e9f385795306ea1dd148d4237426aa20a19f5c3e9b466a53",
+    "assets/search-hybrid.js": "70fc6c08cd4b49a6d568d3f943eec5a5150960bbe44db4fd84db4ba2b55c7b59",
+    "assets/search-query.js": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+    "assets/search-retrieval.js": "c891369e2cb9a0c57026af27dc8b11897041053ed83f72e8b440a4d87fb244bd",
+    "assets/team-hybrid.js": "794739a08149167b17dd3a8459aa307e0403ee2dab17d65902da775ad7fe25a2",
+    "assets/app.js": "21d62103a41636c288eb6a6f8ab6f5cd34f320829284c2492bc66ba16272cc2a",
+    "team_match.html": "1881cd148550850cc04e182b239010d51e4a9ff63b07b238f8bba552bbf83560"
+  },
+  "phase4c_artifact_hashes": {
+    "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+    "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+    "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7"
+  },
+  "gates": {
+    "live_product_python": {
+      "command": "python -m tools.run_refresh_validation",
+      "tests": 760,
+      "status": "passed"
+    },
+    "browser": {
+      "command": "node --test tests/browser/*.test.mjs",
+      "tests": 192,
+      "status": "passed"
+    },
+    "query_baseline": {
+      "command": "node tools/query_baseline.mjs --check",
+      "queries": 37,
+      "status": "passed_zero_top10_churn"
+    },
+    "p9_scoring": {
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "cases": 50,
+      "status": "passed_byte_identical"
+    },
+    "targeted_acronym_and_identifier_canaries": {
+      "queries": [
+        "REE",
+        "REEs",
+        "REE separations",
+        "AIM",
+        "CFD",
+        "exact opportunity numbers"
+      ],
+      "status": "passed"
+    }
+  },
+  "phase4c_policy": "Immutable historical evidence; not rerun by this hardening program.",
+  "decision": "BASELINE PASSES — CONTINUE TO ATOMIC REFRESH IMPLEMENTATION"
+}

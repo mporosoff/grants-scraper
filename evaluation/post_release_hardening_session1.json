@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T00:43:46.685Z",
+  "session": 1,
+  "title": "Atomic catalog, vector, and Worker lifecycle",
+  "starting_sha": "505af687c9b3620454371de475ffe7c2adb176d6",
+  "branch": "post-release-hardening",
+  "implementation": {
+    "production_vector_policy": "full rebuild; incremental reuse remains local-only",
+    "publication_order": [
+      "build catalog and sidecars",
+      "build all production vectors",
+      "build and validate current/previous Worker allowlist",
+      "run Python/browser/search-quality gates",
+      "deploy compatibility Worker",
+      "commit the complete release package",
+      "push main",
+      "verify the candidate corpus on GitHub Pages"
+    ],
+    "current_corpus_sha256": "7f649d8036d5003c2836a4ca2cfea5a62e1e52296c8a66d6f7498a9a5baed9c1",
+    "previous_corpus_sha256": "06d93e73cb9741c859aa6cf643f4f1e6c1b2feef7b995586b55b3943405cb727",
+    "vector_sha256": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
+    "worker_allowlist_sha256": "11db7213f172bfc6061bb0c6e93b302672b750c6f25d991c57a5f0d5b46efa91",
+    "release_manifest_sha256": "879afbc3a2465c3813ad30c4903dbdf6c816f4f47e11e1e8f6ab138314f924a9",
+    "worker_source_sha256": "e58f304f5b9c444b06c5d90d5f48d49c0afe34ea08cc536d5e307c211110a8ef",
+    "workflow_sha256": "d06fa2238e6fddc989e5588f7d14cf2899b4d9df48d8790dee7a7e1410f578d5"
+  },
+  "acceptance_gates": {
+    "complete_package_integrity": "passed",
+    "production_full_rebuild_enforced": "passed",
+    "failed_vector_or_worker_stage_cannot_reach_commit": "passed",
+    "current_corpus_accepted": "passed",
+    "previous_corpus_accepted": "passed",
+    "third_unknown_corpus_rejected": "passed",
+    "catalog_manifest_vector_allowlist_current_sha_aligned": "passed",
+    "deterministic_no_write_package_check": "passed",
+    "live_product_python": {
+      "tests": 760,
+      "status": "passed"
+    },
+    "browser": {
+      "tests": 198,
+      "status": "passed"
+    },
+    "query_baseline": "37 queries; zero top-10 churn",
+    "p9_scoring": "50 cases; byte-identical",
+    "phase4c_unchanged": true
+  },
+  "deferred_live_gates": [
+    "real provider full vector rebuild and usage receipt",
+    "Cloudflare Worker deployment",
+    "GitHub Pages propagation handshake"
+  ],
+  "decision": "ATOMIC REFRESH PACKAGE PASSES — READY FOR PROXY HARDENING"
+}
