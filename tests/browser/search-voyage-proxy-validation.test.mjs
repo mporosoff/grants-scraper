@@ -4,7 +4,10 @@ import test from "node:test";
 import vm from "node:vm";
 
 import { loadHarness, makeVariantHarness } from "../../tools/run_search_diagnosis.mjs";
-import { createHandler } from "../../workers/search-voyage-proxy/src/index.js";
+import {
+  createHandler,
+  SearchBudgetCoordinator,
+} from "../../workers/search-voyage-proxy/src/index.js";
 
 const root = new URL("../../", import.meta.url);
 const hybridSource = await readFile(new URL("assets/search-hybrid.js", root), "utf8");
@@ -45,17 +48,50 @@ function request(path, body, { origin = "http://localhost:8000", method = "POST"
   });
 }
 
+function testEnv(overrides = {}) {
+  const values = new Map();
+  const coordinator = new SearchBudgetCoordinator({
+    storage: {
+      async get(key) { return values.get(key); },
+      async put(key, value) { values.set(key, structuredClone(value)); },
+    },
+  });
+  const limiter = { async limit() { return { success: true }; } };
+  return {
+    VOYAGE_API_KEY: "test-secret",
+    ENHANCED_SEARCH_ENABLED: "true",
+    DAILY_EMBED_TOKEN_BUDGET: "50000",
+    DAILY_RERANK_TOKEN_BUDGET: "25000000",
+    PER_CLIENT_EMBED_REQUEST_LIMIT: "12",
+    PER_CLIENT_RERANK_REQUEST_LIMIT: "8",
+    GLOBAL_REQUEST_LIMIT: "600",
+    RATE_LIMIT_RETRY_AFTER_SECONDS: "10",
+    GLOBAL_RATE_LIMITER: limiter,
+    EMBED_RATE_LIMITER: limiter,
+    RERANK_RATE_LIMITER: limiter,
+    BUDGET_COORDINATOR: {
+      idFromName(name) { return name; },
+      get() {
+        return { fetch(url, options) { return coordinator.fetch(new Request(url, options)); } };
+      },
+    },
+    __budgetValues: values,
+    ...overrides,
+  };
+}
+
 test("proxy rejects origins, methods, malformed inputs, and non-corpus passages", async () => {
   let providerCalls = 0;
   const handler = createHandler({ fetchImpl: async () => { providerCalls += 1; return new Response("{}"); } });
-  assert.equal((await handler(request("/embed-query", { query: "test" }, { origin: "https://evil.example" }), { VOYAGE_API_KEY: "test" })).status, 403);
-  assert.equal((await handler(request("/embed-query", {}, { method: "GET" }), { VOYAGE_API_KEY: "test" })).status, 405);
-  assert.equal((await handler(request("/embed-query", { query: "", extra: true }), { VOYAGE_API_KEY: "test" })).status, 400);
+  const env = testEnv();
+  assert.equal((await handler(request("/embed-query", { query: "test" }, { origin: "https://evil.example" }), env)).status, 403);
+  assert.equal((await handler(request("/embed-query", {}, { method: "GET" }), env)).status, 405);
+  assert.equal((await handler(request("/embed-query", { query: "", extra: true }), env)).status, 400);
   const arbitrary = await handler(request("/rerank", {
     query: "test",
     corpus_sha256: manifest.corpus_sha256,
     candidates: [{ passage_id: first.passage_id, text_sha256: first.text_sha256, text: "private text" }],
-  }), { VOYAGE_API_KEY: "test" });
+  }), env);
   assert.equal(arbitrary.status, 400);
   assert.equal(providerCalls, 0);
 });
@@ -77,13 +113,14 @@ test("proxy sends only bounded allowlisted public text and exposes no credential
       usage: { total_tokens: 5 },
     }), { status: 200 });
   } });
-  const embedded = await handler(request("/embed-query", { query: "public research query" }), { VOYAGE_API_KEY: "test-secret" });
+  const env = testEnv();
+  const embedded = await handler(request("/embed-query", { query: "public research query" }), env);
   assert.equal(embedded.status, 200);
   const reranked = await handler(request("/rerank", {
     query: "public research query",
     corpus_sha256: manifest.corpus_sha256,
     candidates: [{ passage_id: first.passage_id, text_sha256: first.text_sha256, text: first.text }],
-  }), { VOYAGE_API_KEY: "test-secret" });
+  }), env);
   assert.equal(reranked.status, 200);
   assert.equal(upstream.length, 2);
   const rerankBody = JSON.parse(upstream[1].options.body);
@@ -124,20 +161,105 @@ test("proxy accepts exactly the current and immediately previous corpus generati
       text: candidate.text,
     }],
   });
-  const previous = await handler(request("/rerank", body(allowlist.previous.corpus_sha256)), { VOYAGE_API_KEY: "test" });
+  const env = testEnv();
+  const previous = await handler(request("/rerank", body(allowlist.previous.corpus_sha256)), env);
   assert.equal(previous.status, 200);
-  const unknown = await handler(request("/rerank", body("f".repeat(64))), { VOYAGE_API_KEY: "test" });
+  const unknown = await handler(request("/rerank", body("f".repeat(64))), env);
   assert.equal(unknown.status, 400);
   assert.equal(providerCalls, 1);
 });
 
 test("proxy converts provider failures into clean non-secret errors", async () => {
   const handler = createHandler({ fetchImpl: async () => new Response("upstream", { status: 503 }) });
-  const response = await handler(request("/embed-query", { query: "test" }), { VOYAGE_API_KEY: "test-secret" });
+  const response = await handler(request("/embed-query", { query: "test" }), testEnv());
   assert.equal(response.status, 502);
   const body = await response.json();
   assert.deepEqual(body, { error: { code: "provider_invalid_response" } });
   assert.doesNotMatch(JSON.stringify(body), /test-secret|upstream/);
+});
+
+test("missing or invalid budget configuration disables hosted search before provider calls", async () => {
+  let providerCalls = 0;
+  const handler = createHandler({ fetchImpl: async () => {
+    providerCalls += 1;
+    return new Response("{}");
+  } });
+  const missing = await handler(request("/embed-query", { query: "test" }), {
+    VOYAGE_API_KEY: "test",
+    ENHANCED_SEARCH_ENABLED: "true",
+  });
+  assert.equal(missing.status, 503);
+  assert.deepEqual(await missing.json(), { error: { code: "service_unconfigured" } });
+  const disabled = await handler(
+    request("/embed-query", { query: "test" }),
+    testEnv({ ENHANCED_SEARCH_ENABLED: "false" }),
+  );
+  assert.equal(disabled.status, 503);
+  assert.deepEqual(await disabled.json(), { error: { code: "service_disabled" } });
+  assert.equal(providerCalls, 0);
+});
+
+test("forged CORS headers cannot bypass endpoint rate limits", async () => {
+  let providerCalls = 0;
+  const denied = { async limit() { return { success: false }; } };
+  const env = testEnv({ EMBED_RATE_LIMITER: denied });
+  const handler = createHandler({ fetchImpl: async () => {
+    providerCalls += 1;
+    return new Response("{}");
+  } });
+  const response = await handler(request("/embed-query", { query: "test" }, {
+    origin: "https://mporosoff.github.io",
+  }), env);
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get("Retry-After"), "10");
+  assert.deepEqual(await response.json(), { error: { code: "rate_limited" } });
+  assert.equal(providerCalls, 0);
+});
+
+test("daily token exhaustion fails closed before calling Voyage", async () => {
+  let providerCalls = 0;
+  const env = testEnv({ DAILY_EMBED_TOKEN_BUDGET: "2" });
+  const handler = createHandler({ fetchImpl: async () => {
+    providerCalls += 1;
+    return new Response("{}");
+  } });
+  const response = await handler(request("/embed-query", { query: "test" }), env);
+  assert.equal(response.status, 429);
+  assert.equal(response.headers.get("Retry-After"), "10");
+  assert.deepEqual(await response.json(), { error: { code: "budget_limited" } });
+  assert.equal(providerCalls, 0);
+});
+
+test("health metadata is bounded and operational storage contains counters, never query text", async () => {
+  const env = testEnv();
+  const handler = createHandler({ fetchImpl: async () => new Response(JSON.stringify({
+    model: "voyage-4-lite",
+    data: [{ embedding: new Array(1024).fill(0) }],
+    usage: { total_tokens: 2 },
+  }), { status: 200 }) });
+  const query = "private-looking but unstored research phrase";
+  assert.equal((await handler(request("/embed-query", { query }), env)).status, 200);
+  const health = await handler(request("/health", null, { method: "GET" }), env);
+  assert.equal(health.status, 200);
+  assert.deepEqual(await health.json(), {
+    service: "available",
+    corpus_sha256: allowlist.current.corpus_sha256,
+    previous_corpus_supported: true,
+    budget_state: "available",
+  });
+  const stored = JSON.stringify(env.__budgetValues.get("daily"));
+  assert.doesNotMatch(stored, new RegExp(query));
+  assert.match(stored, /provider_input_tokens|latency_histogram|requests/);
+  assert.doesNotMatch(stored, /cf-connecting-ip|candidate|passage|researcher|orcid|cv/i);
+});
+
+test("Cloudflare configuration separates endpoint limits and uses one exact global counter", () => {
+  assert.match(wranglerSource, /"EMBED_RATE_LIMITER"[\s\S]*?"limit": 12/);
+  assert.match(wranglerSource, /"RERANK_RATE_LIMITER"[\s\S]*?"limit": 8/);
+  assert.match(wranglerSource, /"GLOBAL_RATE_LIMITER"[\s\S]*?"limit": 600/);
+  assert.match(wranglerSource, /"BUDGET_COORDINATOR"[\s\S]*?"SearchBudgetCoordinator"/);
+  assert.match(wranglerSource, /"storage": "sqlite"/);
+  assert.match(workerSource, /DAILY_EMBED_TOKEN_BUDGET|DAILY_RERANK_TOKEN_BUDGET|ENHANCED_SEARCH_ENABLED/);
 });
 
 test("proxy exposes no live intent-judge endpoint or Workers AI dependency", async () => {
@@ -151,7 +273,7 @@ test("proxy exposes no live intent-judge endpoint or Workers AI dependency", asy
       field: first.fields[0],
       type: first.passage_kind,
     }],
-  }), { AI: { run: async () => { throw new Error("must not run"); } } });
+  }), testEnv({ AI: { run: async () => { throw new Error("must not run"); } } }));
   assert.equal(response.status, 404);
   assert.deepEqual(await response.json(), { error: { code: "not_found" } });
   assert.doesNotMatch(workerSource, /JUDGE_MODEL|env\?\.AI|AI\.run|judge_/);

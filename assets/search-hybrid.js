@@ -14,10 +14,11 @@
   const DEFAULT_TIMEOUT_MS = 8_000;
 
   class HybridSearchError extends Error {
-    constructor(code, message) {
+    constructor(code, message, options = {}) {
       super(message);
       this.name = "HybridSearchError";
       this.code = code;
+      this.retryAfter = Number(options.retryAfter || 0) || 0;
     }
   }
 
@@ -426,7 +427,11 @@
     } catch {
       throw new HybridSearchError(code, "The enhanced-search service returned an unreadable response.");
     }
-    if (!response.ok) throw new HybridSearchError(payload?.error?.code || code, "Enhanced search is temporarily unavailable.");
+    if (!response.ok) throw new HybridSearchError(
+      payload?.error?.code || code,
+      "Enhanced search is temporarily unavailable.",
+      { retryAfter: Number(response.headers?.get?.("Retry-After") || 0) },
+    );
     return payload;
   }
 

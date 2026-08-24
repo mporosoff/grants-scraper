@@ -67,23 +67,52 @@
     ).map(item => item.result);
   }
 
+  function failureCategory(code) {
+    if (["rate_limited", "budget_limited"].includes(code)) return "limited";
+    if ([
+      "manifest_corpus_mismatch",
+      "manifest_passage_mismatch",
+      "vector_hash_mismatch",
+      "vector_shape_mismatch",
+    ].includes(code)) return "package_mismatch";
+    return "unavailable";
+  }
+
   function createCoordinator({ client } = {}) {
     const searches = new Map();
     let requestCount = 0;
+    let lastState = Object.freeze({
+      enhanced: false,
+      fallback: true,
+      reason: "not_started",
+      reason_category: "unavailable",
+      request_count: 0,
+      cached: false,
+    });
 
     function run({ profiles = [], themes = [] } = {}) {
       const signature = teamSignature(profiles, themes);
-      if (searches.has(signature)) return searches.get(signature);
+      if (searches.has(signature)) return searches.get(signature).then(outcome => {
+        lastState = Object.freeze({ ...outcome, request_count: requestCount, cached: true });
+        return lastState;
+      });
       const query = buildTeamQuery(profiles, themes);
       if (!client?.configured || !query) {
-        const fallback = Promise.resolve(Object.freeze({
+        const fallback = Promise.resolve().then(() => {
+          lastState = Object.freeze({
           signature,
           query,
           rankById: new Map(),
           enhanced: false,
           fallback: true,
+          reason: client?.configured ? "empty_query" : "proxy_unconfigured",
+          reason_category: "unavailable",
+          request_count: requestCount,
+          cached: false,
           diagnostics: {},
-        }));
+          });
+          return lastState;
+        });
         searches.set(signature, fallback);
         return fallback;
       }
@@ -93,23 +122,35 @@
           clean(parent.parent_id),
           Number(parent.hybrid_rank || index + 1),
         ]).filter(([id]) => id));
-        return Object.freeze({
+        lastState = Object.freeze({
           signature,
           query,
           rankById,
           enhanced: true,
           fallback: false,
+          reason: "",
+          reason_category: "",
+          request_count: requestCount,
+          cached: false,
           diagnostics: outcome?.diagnostics || {},
         });
-      }).catch(error => Object.freeze({
-        signature,
-        query,
-        rankById: new Map(),
-        enhanced: false,
-        fallback: true,
-        error: error?.code || "hybrid_unavailable",
-        diagnostics: {},
-      }));
+        return lastState;
+      }).catch(error => {
+        const reason = error?.code || "hybrid_unavailable";
+        lastState = Object.freeze({
+          signature,
+          query,
+          rankById: new Map(),
+          enhanced: false,
+          fallback: true,
+          reason,
+          reason_category: failureCategory(reason),
+          request_count: requestCount,
+          cached: false,
+          diagnostics: {},
+        });
+        return lastState;
+      });
       searches.set(signature, pending);
       return pending;
     }
@@ -117,6 +158,7 @@
     return Object.freeze({
       run,
       requestCount: () => requestCount,
+      state: () => lastState,
       clear: () => searches.clear(),
     });
   }
@@ -127,6 +169,7 @@
     buildTeamQuery,
     teamSignature,
     applyHybridRanking,
+    failureCategory,
     createCoordinator,
   });
 })();

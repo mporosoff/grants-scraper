@@ -130,10 +130,13 @@ jobs:
         id: search-package
         run: node tools/build_search_release_package.mjs --write
       - name: Verify the complete search package is internally consistent
+        id: package-integrity
         run: node tools/build_search_release_package.mjs --check
       - name: Run regression tests against generated asset
+        id: product-regression
         run: python -m tools.run_refresh_validation
       - name: Run browser and search-package regression gates
+        id: browser-regression
         run: >-
           node --test tests/browser/*.test.mjs &&
           node tools/query_baseline.mjs --check &&
@@ -143,7 +146,18 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+        run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+      - name: Verify the deployed Worker recognizes the candidate corpus
+        id: worker-handshake
+        shell: bash
+        run: |
+          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          health="$(curl --fail --silent --show-error --max-time 15 \
+            -H 'Origin: https://mporosoff.github.io' \
+            'https://funding-finder-voyage-search.urochestercheme.workers.dev/health')"
+          test "$(jq -r '.service' <<<"$health")" = "available"
+          test "$(jq -r '.budget_state' <<<"$health")" = "available"
+          test "$(jq -r '.corpus_sha256' <<<"$health")" = "$candidate_sha"
       - name: Record the build heartbeat
         shell: bash
         # Scheduled workflows are disabled after 60 days without repository
@@ -188,6 +202,7 @@ jobs:
             fi
           fi
       - name: Verify GitHub Pages serves the coordinated search package
+        id: pages-verify
         if: success()
         shell: bash
         run: |
@@ -261,14 +276,47 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const fs = require("fs");
             const title = "Automated Grants.gov refresh failed";
             const runUrl =
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
               `/actions/runs/${context.runId}`;
+            const outcomes = [
+              ["semantic vector build", "${{ steps.semantic-vectors.outcome }}"],
+              ["search package build", "${{ steps.search-package.outcome }}"],
+              ["package integrity", "${{ steps.package-integrity.outcome }}"],
+              ["product regression", "${{ steps.product-regression.outcome }}"],
+              ["browser regression", "${{ steps.browser-regression.outcome }}"],
+              ["Worker deployment", "${{ steps.worker-deploy.outcome }}"],
+              ["Worker package handshake", "${{ steps.worker-handshake.outcome }}"],
+              ["Pages handshake", "${{ steps.pages-verify.outcome }}"],
+            ];
+            const failingStage = outcomes.find(([, outcome]) => outcome === "failure")?.[0]
+              || "an earlier catalog/source stage";
+            let candidateCorpus = "not generated";
+            try {
+              candidateCorpus = JSON.parse(fs.readFileSync("data/search-v2-release.json", "utf8"))
+                .current_corpus_sha256;
+            } catch {}
+            let lastLiveCorpus = "unknown";
+            try {
+              const { data } = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: "data/search-v2-release.json",
+                ref: "main",
+              });
+              lastLiveCorpus = JSON.parse(Buffer.from(data.content, "base64").toString("utf8"))
+                .current_corpus_sha256;
+            } catch {}
             const body =
-              `The scheduled opportunity refresh failed on ${new Date().toISOString()}.\n\n` +
-              `Inspect the workflow run: ${runUrl}\n\n` +
-              `The public site continues to serve the last successful catalog and will mark it stale.`;
+              `The scheduled opportunity refresh failed during **${failingStage}** on ` +
+              `${new Date().toISOString()}.\n\n` +
+              `- Workflow: ${runUrl}\n` +
+              `- Last committed live corpus: \`${lastLiveCorpus}\`\n` +
+              `- Candidate corpus: \`${candidateCorpus}\`\n` +
+              `- Public-site state: ${failingStage === "Pages handshake" ? "candidate push completed; Pages propagation was not verified" : "the prior package remains authoritative; no candidate commit was published"}\n\n` +
+              `Fix or rerun the named stage. Do not publish the catalog separately from its vectors and Worker allowlist.`;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,

@@ -142,6 +142,8 @@
       diagnostics: null,
       usage: null,
       fallbackReason: "",
+      fallbackCategory: "",
+      retryAfter: 0,
     },
     savedItems: [],
     savedIds: new Set(),
@@ -1352,6 +1354,59 @@
       && sortMode === "relevance";
   }
 
+  function hybridFailureCategory(code) {
+    if (["rate_limited", "budget_limited"].includes(code)) return "limited";
+    if ([
+      "manifest_corpus_mismatch",
+      "manifest_passage_mismatch",
+      "vector_hash_mismatch",
+      "vector_shape_mismatch",
+    ].includes(code)) return "package_mismatch";
+    return "unavailable";
+  }
+
+  function renderHybridStatus() {
+    const node = $("potential-status");
+    if (!node) return;
+    node.classList.toggle("is-warning", Boolean(state.hybrid.fallbackReason));
+    if (!state.searched || !state.query || !APP_CONFIG?.flags?.searchV2) {
+      node.classList.add("hidden");
+      node.innerHTML = "";
+      return;
+    }
+    let message = "";
+    let retry = false;
+    if (state.hybrid.pending) {
+      message = "Finding broader Potential matches from public opportunity text…";
+    } else if (state.hybrid.active && !state.potentialMatches.length) {
+      message = "Potential matching completed. No additional eligible matches were found.";
+    } else if (state.hybrid.fallbackCategory === "limited") {
+      message = "Strong matches are shown. Broader Potential matching is temporarily limited.";
+      retry = true;
+    } else if (state.hybrid.fallbackCategory === "package_mismatch") {
+      message = "Strong matches are shown. Broader Potential matching is unavailable while the search package updates.";
+    } else if (state.hybrid.fallbackReason) {
+      message = "Strong matches are shown. Broader Potential matching is temporarily unavailable.";
+      retry = !["service_disabled", "service_unconfigured"].includes(state.hybrid.fallbackReason);
+    } else if (state.hybrid.active) {
+      message = "Potential matching completed.";
+    }
+    if (!message) {
+      node.classList.add("hidden");
+      node.innerHTML = "";
+      return;
+    }
+    node.innerHTML = `<span>${escapeHtml(message)}</span>${retry
+      ? '<button class="text-button" id="retry-potential" type="button">Retry potential matches</button>'
+      : ""}`;
+    node.classList.remove("hidden");
+    $("retry-potential")?.addEventListener("click", () => {
+      state.hybrid.cacheReady = false;
+      scheduleHybridSearch(String(state.query));
+      renderResults();
+    });
+  }
+
   function applyHybridParents(parents) {
     const strongIds = new Set(state.strongMatches.map(match => (
       recordId(catalog.opportunities[match.index])
@@ -1361,6 +1416,9 @@
       .slice(0, POTENTIAL_MATCH_LIMIT);
     state.matches = [...state.strongMatches, ...state.potentialMatches];
     state.hybrid.active = true;
+    state.hybrid.fallbackReason = "";
+    state.hybrid.fallbackCategory = "";
+    state.hybrid.retryAfter = 0;
     state.searchDiagnostics = {
       ...(state.searchDiagnostics || {}),
       hybrid: state.hybrid.diagnostics,
@@ -1374,6 +1432,8 @@
     state.hybrid.pending = true;
     state.hybrid.active = false;
     state.hybrid.fallbackReason = "";
+    state.hybrid.fallbackCategory = "";
+    state.hybrid.retryAfter = 0;
     hybridSearchClient.search(normalizedQuery, { context: "" }).then(result => {
       if (sequence !== state.hybrid.sequence || normalizedQuery !== state.query) return;
       state.hybrid.pending = false;
@@ -1392,13 +1452,15 @@
       state.hybrid.pending = false;
       state.hybrid.active = false;
       state.hybrid.fallbackReason = String(error?.code || "hybrid_unavailable");
+      state.hybrid.fallbackCategory = hybridFailureCategory(state.hybrid.fallbackReason);
+      state.hybrid.retryAfter = Math.max(0, Number(error?.retryAfter || 0));
       state.searchDiagnostics = {
         ...(state.searchDiagnostics || {}),
         hybrid: { fallback: true, reason: state.hybrid.fallbackReason },
       };
       $("search-status").textContent = state.strongMatches.length
-        ? `Search complete: ${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match" : "matches"}.`
-        : "No strong matches found. Try adjusting the search terms or filters.";
+        ? `${state.strongMatches.length.toLocaleString()} strong ${state.strongMatches.length === 1 ? "match is" : "matches are"} shown. Broader Potential matching is temporarily unavailable.`
+        : "No strong matches were found. Broader Potential matching is temporarily unavailable.";
       renderResults();
     });
   }
@@ -1718,12 +1780,18 @@
     state.hybrid.sequence += 1;
     state.hybrid.pending = false;
     state.hybrid.active = false;
+    state.hybrid.fallbackReason = "";
+    state.hybrid.fallbackCategory = "";
+    state.hybrid.retryAfter = 0;
     if (hybridCanRun()) {
       if (state.hybrid.cacheReady && state.hybrid.cachedQuery === state.query) {
         applyHybridParents(state.hybrid.parents);
       } else {
         scheduleHybridSearch(state.query);
       }
+    } else if (APP_CONFIG?.flags?.searchV2 && state.query && !hybridSearchClient?.configured) {
+      state.hybrid.fallbackReason = "proxy_unconfigured";
+      state.hybrid.fallbackCategory = "unavailable";
     }
     if (resetPage) state.page = 1;
     syncStateToUrl();
@@ -2957,6 +3025,7 @@
   }
 
   function renderResults() {
+    renderHybridStatus();
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
       $("result-count").textContent = "";
@@ -3031,9 +3100,11 @@
     if (!page.length) {
       const strongPotentialWorkflow = APP_CONFIG?.flags?.searchV2 && Boolean(state.query);
       const waitingForPotential = strongPotentialWorkflow && state.hybrid.pending;
+      const potentialUnavailable = strongPotentialWorkflow && Boolean(state.hybrid.fallbackReason);
+      const potentialCompleted = strongPotentialWorkflow && state.hybrid.active;
       $("results").innerHTML = `<div class="empty-state">
         <h3>${hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
-        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
         ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;

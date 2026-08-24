@@ -132,6 +132,9 @@
 
   .count{margin:16px 0 12px;padding:10px 12px;color:var(--navy);font-size:.88rem;font-weight:750;line-height:1.45;background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:10px;}
   .count:empty{display:none;}
+  .team-hybrid-status{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;padding:10px 12px;color:var(--muted);font-size:.82rem;line-height:1.45;background:#f5f8fb;border:1px solid #cbd9e8;border-radius:10px;}
+  .team-hybrid-status.warning{color:#72510c;background:#fff9ea;border-color:#f0d79c;}
+  .team-hybrid-status button{flex:0 0 auto;padding:6px 9px;color:var(--blue);font-size:.76rem;background:#fff;border:1px solid #b9cbe1;border-radius:8px;}
   .section-label{margin:22px 2px 10px;font-size:.75rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
 
   #view.result-list{padding-top:0;}
@@ -259,6 +262,7 @@
   <div id="selected-terms" class="selected-terms"></div>
   <div id="themes" class="themes"></div>
   <p class="count" id="count"></p>
+  <div class="team-hybrid-status hide" id="team-hybrid-status" role="status" aria-live="polite"></div>
   <div id="view" class="result-list"></div>
 
   <footer class="note">
@@ -309,7 +313,10 @@
   var SEARCH_ENGINE = null;
   var HYBRID_SEARCH_CLIENT = null;
   var TEAM_HYBRID_COORDINATOR = null;
-  var teamHybridState = { signature: "", status: "idle", rankById: new Map() };
+  function idleTeamHybridState() {
+    return { signature: "", status: "idle", rankById: new Map(), reason: "", reasonCategory: "", requestCount: 0, cached: false };
+  }
+  var teamHybridState = idleTeamHybridState();
   var lastHybridProfiles = [];
   var lastHybridThemes = [];
   try {
@@ -777,6 +784,41 @@
       e.fits.map(function (f) { return f.name + " " + reasonText(f); }).join(" ")).toLowerCase();
     return hay.indexOf(q) !== -1;
   }
+  function renderTeamHybridStatus() {
+    var node = $("team-hybrid-status");
+    if (!node || selected.length < 2 || teamHybridState.status === "idle") {
+      if (node) {
+        node.classList.add("hide");
+        node.innerHTML = "";
+      }
+      return;
+    }
+    var message = "";
+    var retry = false;
+    if (teamHybridState.status === "pending") {
+      message = "Finding enhanced ordering for the locally eligible team matches…";
+    } else if (teamHybridState.status === "ready") {
+      message = "Enhanced ordering is applied to the opportunities that fit every selected researcher.";
+    } else if (teamHybridState.reasonCategory === "limited") {
+      message = "Showing the local team-fit order. Enhanced ordering is temporarily limited.";
+      retry = true;
+    } else if (teamHybridState.reasonCategory === "package_mismatch") {
+      message = "Showing the local team-fit order. Enhanced ordering is unavailable while the search package updates.";
+    } else {
+      message = "Showing the local team-fit order. Enhanced ordering is temporarily unavailable.";
+      retry = !["proxy_unconfigured", "service_disabled", "service_unconfigured"].includes(teamHybridState.reason);
+    }
+    node.classList.toggle("warning", teamHybridState.status === "fallback");
+    node.innerHTML = '<span>' + esc(message) + '</span>' + (retry
+      ? '<button id="retry-team-hybrid" type="button">Retry enhanced ordering</button>' : "");
+    node.classList.remove("hide");
+    var retryButton = $("retry-team-hybrid");
+    if (retryButton) retryButton.addEventListener("click", function () {
+      TEAM_HYBRID_COORDINATOR.clear();
+      teamHybridState = idleTeamHybridState();
+      refresh();
+    });
+  }
   function renderTeam(q) {
     $("selected-terms").innerHTML = selected.map(function (member) {
       var kt = memberTerms(member);
@@ -790,6 +832,7 @@
       $("themes").innerHTML = "";
       $("count").textContent = "";
       $("view").innerHTML = '<div class="empty">Pick at least two researchers above to see the calls they could pursue together.</div>';
+      renderTeamHybridStatus();
       return;
     }
     var all = buildShared();
@@ -819,13 +862,28 @@
         (q ? " for that filter." : ". Try a different combination.") + "</div>";
     }
     $("view").innerHTML = html;
+    renderTeamHybridStatus();
     requestTeamHybridRanking(hybridSignature);
   }
 
   function requestTeamHybridRanking(signature) {
-    if (!TEAM_HYBRID_COORDINATOR || !signature || selected.length < 2) return;
+    if (!signature || selected.length < 2) return;
+    if (!TEAM_HYBRID_COORDINATOR) {
+      teamHybridState = {
+        signature: signature,
+        status: "fallback",
+        rankById: new Map(),
+        reason: "proxy_unconfigured",
+        reasonCategory: "unavailable",
+        requestCount: 0,
+        cached: false
+      };
+      renderTeamHybridStatus();
+      return;
+    }
     if (teamHybridState.signature === signature && teamHybridState.status !== "idle") return;
     teamHybridState = { signature: signature, status: "pending", rankById: new Map() };
+    renderTeamHybridStatus();
     TEAM_HYBRID_COORDINATOR.run({
       profiles: lastHybridProfiles,
       themes: lastHybridThemes
@@ -834,8 +892,12 @@
       if (outcome.signature !== currentSignature) return;
       teamHybridState = {
         signature: outcome.signature,
-        status: "ready",
-        rankById: outcome.rankById
+        status: outcome.enhanced ? "ready" : "fallback",
+        rankById: outcome.rankById,
+        reason: outcome.reason || "",
+        reasonCategory: outcome.reason_category || "",
+        requestCount: Number(outcome.request_count || 0),
+        cached: outcome.cached === true
       };
       refresh();
     });
@@ -1101,7 +1163,7 @@
     externalResearchers = result.profiles;
     storageAvailable = result.saved;
     themeState = {};
-    teamHybridState = { signature: "", status: "idle", rankById: new Map() };
+    teamHybridState = idleTeamHybridState();
     rebuildResearcherMatches();
     return result;
   }
@@ -1213,7 +1275,7 @@
     if (i !== -1) selected.splice(i, 1);
     else if (selected.length < MAX) selected.push(member);
     themeState = {};
-    teamHybridState = { signature: "", status: "idle", rankById: new Map() };
+    teamHybridState = idleTeamHybridState();
     updateToggles();
     refresh();
   }

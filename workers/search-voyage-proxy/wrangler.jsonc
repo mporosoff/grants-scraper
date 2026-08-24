@@ -3,5 +3,45 @@
   "name": "funding-finder-voyage-search",
   "main": "src/index.js",
   "compatibility_date": "2026-08-23",
-  "workers_dev": true
+  "workers_dev": true,
+  "vars": {
+    "ENHANCED_SEARCH_ENABLED": "true",
+    "DAILY_EMBED_TOKEN_BUDGET": "50000",
+    "DAILY_RERANK_TOKEN_BUDGET": "25000000",
+    "PER_CLIENT_EMBED_REQUEST_LIMIT": "12",
+    "PER_CLIENT_RERANK_REQUEST_LIMIT": "8",
+    "GLOBAL_REQUEST_LIMIT": "600",
+    "RATE_LIMIT_RETRY_AFTER_SECONDS": "10"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "BUDGET_COORDINATOR",
+        "class_name": "SearchBudgetCoordinator"
+      }
+    ]
+  },
+  "exports": {
+    "SearchBudgetCoordinator": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "ratelimits": [
+    {
+      "name": "EMBED_RATE_LIMITER",
+      "namespace_id": "6202608231",
+      "simple": { "limit": 12, "period": 60 }
+    },
+    {
+      "name": "RERANK_RATE_LIMITER",
+      "namespace_id": "6202608232",
+      "simple": { "limit": 8, "period": 60 }
+    },
+    {
+      "name": "GLOBAL_RATE_LIMITER",
+      "namespace_id": "6202608233",
+      "simple": { "limit": 600, "period": 60 }
+    }
+  ]
 }

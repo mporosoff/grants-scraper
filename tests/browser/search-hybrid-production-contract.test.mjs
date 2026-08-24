@@ -291,6 +291,8 @@ test("hybrid results remain ranked leads without fabricated relevance labels", a
   assert.ok(result.parents.length > 10);
   assert.equal(result.diagnostics.judge, undefined);
   assert.ok(result.parents.every(item => item.explanation?.excerpt));
+  assert.equal(result.usage.embedding_requests, 1);
+  assert.equal(result.usage.rerank_requests, 1);
   assert.equal(result.usage.judge_requests, undefined);
 });
 
@@ -320,9 +322,15 @@ test("provider errors and client timeouts fail closed for the existing local-res
   const rateLimited = api.createClient({
     ...baseOptions,
     fetchImpl: async url => assetResponse(url)
-      || new Response(JSON.stringify({ error: { code: "rate_limited" } }), { status: 429 }),
+      || new Response(JSON.stringify({ error: { code: "rate_limited" } }), {
+        status: 429,
+        headers: { "Retry-After": "10" },
+      }),
   });
-  await assert.rejects(rateLimited.search("rare earth recycling"), error => error.code === "rate_limited");
+  await assert.rejects(
+    rateLimited.search("rare earth recycling"),
+    error => error.code === "rate_limited" && error.retryAfter === 10,
+  );
   assert.equal(rateLimited.usage().fallbacks, 1);
 
   const timedOut = api.createClient({
@@ -340,6 +348,17 @@ test("provider errors and client timeouts fail closed for the existing local-res
   assert.equal(timedOut.usage().fallbacks, 1);
 });
 
+test("Funding Finder visibly distinguishes Potential progress, empty completion, limits, and package failure", () => {
+  assert.match(htmlSource, /id="potential-status"[^>]*role="status"/);
+  assert.match(appSource, /Finding broader Potential matches from public opportunity text/);
+  assert.match(appSource, /Potential matching completed\. No additional eligible matches were found\./);
+  assert.match(appSource, /Broader Potential matching is temporarily unavailable\./);
+  assert.match(appSource, /Broader Potential matching is temporarily limited\./);
+  assert.match(appSource, /unavailable while the search package updates/);
+  assert.match(appSource, /Retry potential matches/);
+  assert.doesNotMatch(appSource, /Voyage (?:failed|error)|corpus_sha256.*potential-status|stack trace/i);
+});
+
 test("production integration is enabled, lazy, extractive, and fail-closed", () => {
   assert.match(configSource, /searchV2:\s*true/);
   assert.match(
@@ -349,7 +368,7 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   assert.match(htmlSource, /assets\/search-hybrid\.js/);
   assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16|search-v2-voyage-manifest\.json/);
   assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "" \}\)/);
-  assert.match(appSource, /No strong matches found\. Try adjusting the search terms or filters/);
+  assert.match(appSource, /No strong matches were found\. Broader Potential matching is temporarily unavailable/);
   assert.ok(appSource.indexOf("state.strongMatches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
   assert.match(appSource, /Why this may be relevant/);
   assert.match(appSource, /Strong match/);

@@ -186,7 +186,14 @@ async function run() {
     "data/subtopics.js",
     MANIFEST_PATH,
     VECTOR_PATH,
+    "assets/app.js",
+    "assets/search-hybrid.js",
+    "assets/search-retrieval.js",
+    "assets/team-hybrid.js",
+    "match_explorer.html",
+    "team_match.html",
     WORKER_SOURCE_PATH,
+    "workers/search-voyage-proxy/wrangler.jsonc",
   ]) sourceHashes[path] = sha256(await read(path));
   const release = {
     schema_version: 1,

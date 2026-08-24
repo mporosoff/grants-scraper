@@ -810,6 +810,31 @@ textarea:focus {
   border-color: #efbcc2;
 }
 
+.potential-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 11px 13px;
+  border: 1px solid #cbd9e8;
+  border-radius: 9px;
+  color: var(--ink-muted);
+  background: #f5f8fb;
+  font-size: .86rem;
+  line-height: 1.45;
+}
+
+.potential-status.is-warning {
+  color: var(--warning);
+  background: var(--warning-bg);
+  border-color: #f2d59d;
+}
+
+.potential-status .text-button {
+  flex: 0 0 auto;
+}
+
 .result-list {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

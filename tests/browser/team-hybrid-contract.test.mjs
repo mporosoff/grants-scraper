@@ -45,12 +45,15 @@ test("uses at most one shared hybrid request per team recomputation", async () =
     },
   };
   const coordinator = api.createCoordinator({ client });
-  await Promise.all([
+  const outcomes = await Promise.all([
     coordinator.run({ profiles, themes }),
     coordinator.run({ profiles, themes }),
   ]);
   assert.equal(requests, 1);
   assert.equal(coordinator.requestCount(), 1);
+  assert.equal(outcomes[0].cached, false);
+  assert.equal(outcomes[1].cached, true);
+  assert.equal(coordinator.state().request_count, 1);
   await coordinator.run({ profiles, themes: [{ label: "A different active theme" }] });
   assert.equal(requests, 2);
 });
@@ -83,6 +86,11 @@ test("provider failure preserves the original local Team Match order", async () 
   const local = [{ d: { id: "fit-a" } }, { d: { id: "fit-b" } }];
   const outcome = await api.createCoordinator({ client }).run({ profiles, themes });
   assert.equal(outcome.fallback, true);
+  assert.equal(outcome.enhanced, false);
+  assert.equal(outcome.reason, "proxy_timeout");
+  assert.equal(outcome.reason_category, "unavailable");
+  assert.equal(outcome.request_count, 1);
+  assert.equal(outcome.cached, false);
   assert.deepEqual(Array.from(api.applyHybridRanking(local, outcome.rankById), item => item.d.id), ["fit-a", "fit-b"]);
 });
 
@@ -98,6 +106,25 @@ test("an unconfigured provider makes no request and preserves local behavior", a
   assert.equal(requests, 0);
   assert.equal(coordinator.requestCount(), 0);
   assert.equal(outcome.fallback, true);
+  assert.equal(outcome.reason, "proxy_unconfigured");
+  assert.equal(outcome.request_count, 0);
+});
+
+test("rate and budget failures are exposed as a nontechnical limited category", async () => {
+  const api = loadApi();
+  for (const code of ["rate_limited", "budget_limited"]) {
+    const client = {
+      configured: true,
+      async search() { throw Object.assign(new Error(code), { code }); },
+    };
+    const outcome = await api.createCoordinator({ client }).run({ profiles, themes });
+    assert.equal(outcome.fallback, true);
+    assert.equal(outcome.reason, code);
+    assert.equal(outcome.reason_category, "limited");
+  }
+  assert.match(page, /Showing the local team-fit order\. Enhanced ordering is temporarily unavailable\./);
+  assert.match(page, /Showing the local team-fit order\. Enhanced ordering is temporarily limited\./);
+  assert.match(page, /Retry enhanced ordering/);
 });
 
 test("Team Match reuses the frozen hybrid client, vector assets, and proxy handshake", () => {

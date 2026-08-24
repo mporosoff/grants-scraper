@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T01:03:59.2357637Z",
+  "session": 2,
+  "title": "Proxy controls and visible fallback states",
+  "branch": "post-release-hardening",
+  "implementation": {
+    "worker_source_sha256": "992d8724bc69f11408f80ff5f6f6e8a6e706aa4dae2fc2e6c3836a917b7f39fe",
+    "wrangler_config_sha256": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812",
+    "release_manifest_sha256": "863a4e7850f810f41ad43f29b7d8f67961d7e8423c10e3887a798fbf96ba0340",
+    "workflow_sha256": "761a823b6340abd2c3e2edfbafdb108f0518c6b0e0918fc0250267cc189154ec",
+    "wrangler_version": "4.125.0",
+    "daily_token_budgets": {
+      "embed": 50000,
+      "rerank": 25000000
+    },
+    "per_client_per_minute": {
+      "embed": 12,
+      "rerank": 8
+    },
+    "global_requests_per_minute": 600,
+    "retry_after_seconds": 10,
+    "circuit_breaker": "ENHANCED_SEARCH_ENABLED",
+    "stored_metrics_policy": "daily endpoint aggregates only; no query, passage, researcher, or IP data"
+  },
+  "acceptance_gates": {
+    "wrangler_dry_run": "passed",
+    "configuration_fails_closed": "passed",
+    "per_endpoint_and_global_rate_limits": "passed",
+    "exact_daily_budget_accounting": "passed",
+    "bounded_retry_after": "passed",
+    "health_handshake_is_bounded": "passed",
+    "no_raw_user_input_or_client_identity_persisted": "passed",
+    "funding_finder_degradation_states_visible": "passed",
+    "team_match_degradation_states_visible": "passed",
+    "normal_query_provider_calls": "one embed and one rerank",
+    "complete_package_integrity": "passed",
+    "live_product_python": {
+      "tests": 760,
+      "status": "passed"
+    },
+    "browser": {
+      "tests": 205,
+      "status": "passed"
+    },
+    "query_baseline": "37 queries; zero top-10 churn",
+    "p9_scoring": "50 cases; byte-identical",
+    "phase4c_unchanged": true
+  },
+  "deferred_live_gates": [
+    "Cloudflare Worker deployment and health handshake",
+    "live aggregate observability review after deployment"
+  ],
+  "decision": "PROXY AND FALLBACK HARDENING PASSES — READY FOR PRODUCT CONTRACT FIXES"
+}

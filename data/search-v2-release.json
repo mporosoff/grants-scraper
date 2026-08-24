@@ -14,7 +14,14 @@
     "data/subtopics.js": "8185a7fc8156b13fdc9a86c1d2d986ee4e608a6447568ab51b21fefc341febbb",
     "data/search-v2-voyage-manifest.json": "ff5922f45444ff13a4ffdbfe574de7b535338367a1206bb8ed712914e9226e8a",
     "data/search-v2-voyage-vectors.f16": "697c84f76e83107e290df9b27168cd14fe6592bff2ae657b22d8eb9ee25fb8c2",
-    "workers/search-voyage-proxy/src/index.js": "e58f304f5b9c444b06c5d90d5f48d49c0afe34ea08cc536d5e307c211110a8ef"
+    "assets/app.js": "a62a34a6ff3feaa4d2a1d6cc752b6329afef32f9c36cba96d651a6c1076cfc8a",
+    "assets/search-hybrid.js": "706ff3dd2e53b725a07477da4095305b73542bd7794d6aba4861a2304e3425e4",
+    "assets/search-retrieval.js": "c891369e2cb9a0c57026af27dc8b11897041053ed83f72e8b440a4d87fb244bd",
+    "assets/team-hybrid.js": "d43f493cbfef73c0380120e610579c26659bacd663cb95e8f897a586c5e4cea5",
+    "match_explorer.html": "cbdbf14236c9156e9e6a061936cab3489eea630373de4f1b18f2d967a4878d2b",
+    "team_match.html": "f1d1cf58a818e4b0a7b6267e7eb5b0df04504925c426cf767f7a58f63ad2b9a4",
+    "workers/search-voyage-proxy/src/index.js": "992d8724bc69f11408f80ff5f6f6e8a6e706aa4dae2fc2e6c3836a917b7f39fe",
+    "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
   "atomic_publication_contract": "catalog + subtopics + manifest + vectors + Worker allowlist"
 }
