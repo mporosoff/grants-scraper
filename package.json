@@ -1,0 +1,16 @@
+{
+  "name": "funding-finder-release-tests",
+  "version": "1.3.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "test:contracts": "node --test tests/browser/*.test.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:a11y": "playwright test tests/e2e/accessibility.spec.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1"
+  }
+}

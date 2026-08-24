@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=search-v2-phase3-20260822">
+  <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
   <link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823">
 </head>
 <body>
@@ -70,7 +70,7 @@
       <div class="hero-copy">
         <p class="eyebrow">One search, improved by the context you add</p>
         <h1 id="page-title">Find funding in a few clear steps</h1>
-        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. Strong matching runs locally; a site-managed semantic service can add Potential matches from the same public catalog. User-connected AI tools are an optional later step.</p>
+        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. A typed topic can use the site-managed service to add Potential matches from the public catalog. Profile, CV, and ORCID context improve local matching and are used by AI only when you explicitly connect and use your own provider.</p>
       </div>
 
       <ol class="workflow-map" aria-label="Suggested funding search steps">
@@ -86,7 +86,7 @@
             <div>
               <p class="eyebrow">Start here</p>
               <h2 id="search-step-heading">What are you looking to fund or review?</h2>
-              <p>Search by topic, method, population, goal, or opportunity number. You can also drop a NOFO, FOA, or other funding-notice PDF into the search box to chat with it. Leave the search blank if your profile or filters provide enough context.</p>
+              <p>Search by topic, method, population, goal, or opportunity number. You can also drop a NOFO, FOA, or other funding-notice PDF into the search box to chat with it. Leave the search blank if your profile or filters provide enough context for local matching; hosted Potential matching requires a typed topic.</p>
             </div>
           </div>
           <div class="search-form nofo-drop-zone" id="nofo-drop-zone">
@@ -326,7 +326,8 @@
             <button class="button primary find-button" id="find-funding" type="submit">Find funding</button>
             <span>Free catalog search. No AI key required.</span>
           </div>
-          <p class="privacy-note">Strong matching runs locally. Potential matches use a hosted semantic ranking service and send your search text with public opportunity passages.</p>
+          <p class="privacy-note"><strong>What leaves this page:</strong> Strong matching, profile, CV, and ORCID relevance run locally. When you type a topic, Potential matching sends only that search text and eligible public opportunity passages to the site-managed semantic service. Profile, CV, and ORCID text are not sent to that service. They are sent to a user-connected AI provider only when you explicitly use an AI tool with that context enabled.</p>
+          <p class="privacy-note"><strong>URLs and anonymous usage:</strong> Search criteria are written to this page's URL, so they may appear in browser history and copied links. A custom anonymous usage event sends a random session ID and broad usage category, never the search text; the service aggregates network organization server-side. Cloudflare Web Analytics is disabled whenever the page URL has query parameters.</p>
           <div class="search-status" id="search-status" aria-live="polite"></div>
 
           <details class="provider-setup">
@@ -338,7 +339,7 @@
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can expand terminology, refine up to 32 existing results, and answer questions about results or an uploaded notice. It never replaces or searches outside the funding catalog.</p>
+              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can use the profile context you enabled, expand terminology, refine up to 32 catalog candidates, and answer questions about results or an uploaded notice. This is an explicit optional provider request; it never replaces or searches outside the funding catalog.</p>
               <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
               <div class="provider-fields">
                 <label>
@@ -414,6 +415,7 @@
         </div>
 
         <div class="active-filters hidden" id="active-filters" aria-label="Active search context"></div>
+        <div class="notice warning hidden" id="topic-layer-warning" role="status" aria-live="polite"></div>
         <div class="notice warning hidden" id="stale-warning"></div>
         <div class="potential-status hidden" id="potential-status" role="status" aria-live="polite"></div>
 
@@ -573,8 +575,8 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./assets/app-config.js?v=app-1.2.1"></script>
-  <script src="./assets/search-v2-config.js?v=app-1.2.1"></script>
+  <script src="./assets/app-config.js?v=app-1.3.0"></script>
+  <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
   <script src="./data/opportunities.js?v=catalog-20260824T114930Z"></script>
   <script src="./assets/orcid.js?v=orcid-2026-08-13"></script>
   <script src="./assets/profile.js?v=audit-2026-08-13"></script>
@@ -584,15 +586,16 @@
   <script src="./assets/credentials.js?v=filters-2026-08-13"></script>
   <script src="./assets/ai-provider.js?v=filters-2026-08-13"></script>
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
+  <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
-  <script src="./assets/search-query.js?v=app-1.2.1"></script>
-  <script src="./assets/search-retrieval.js?v=app-1.2.1"></script>
-  <script src="./assets/subtopic-runtime.js?v=app-1.2.1-sidecar-cache1"></script>
-  <script src="./assets/search-hybrid.js?v=app-1.2.1"></script>
-  <script src="./assets/match-explain.js?v=app-1.2.1"></script>
-  <script src="./assets/site-help.js?v=match-ux-20260821"></script>
+  <script src="./assets/search-query.js?v=app-1.3.0"></script>
+  <script src="./assets/search-retrieval.js?v=app-1.3.0"></script>
+  <script src="./assets/subtopic-runtime.js?v=app-1.3.0-sidecar-cache1"></script>
+  <script src="./assets/search-hybrid.js?v=app-1.3.0"></script>
+  <script src="./assets/match-explain.js?v=app-1.3.0"></script>
+  <script src="./assets/site-help.js?v=app-1.3.0"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=app-1.2.1"></script>
-  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "209e9983c16e4747947cf621792fe833"}'></script><!-- End Cloudflare Web Analytics -->
+  <script src="./assets/app.js?v=app-1.3.0"></script>
+  <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

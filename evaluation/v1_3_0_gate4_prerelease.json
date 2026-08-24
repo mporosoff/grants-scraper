@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "artifact": "Funding Finder v1.3.0 Gate 4 pre-release",
+  "generated_at": "2026-08-24T17:08:03.7261951Z",
+  "last_updated_at": "2026-08-24T17:36:01.9254903Z",
+  "decision": "passed",
+  "release_version": "1.3.0",
+  "repository": "mporosoff/grants-scraper",
+  "branch": "v1.2.2-residual-hardening",
+  "starting_sha": "93d72012195393bac7dea7e1d32c1dbf7bb03247",
+  "branch_head_before_gate4_commit": "93d72012195393bac7dea7e1d32c1dbf7bb03247",
+  "origin_main_sha": "68f688610f16e3b6441c19c9136b3eba55d5fa47",
+  "branch_divergence_from_origin_main": {
+    "behind": 0,
+    "ahead_before_gate4_commit": 4
+  },
+  "browser_toolchain": {
+    "playwright": "1.62.1",
+    "chromium": "151.0.7922.34",
+    "axe_core_playwright": "4.13.0"
+  },
+  "tests": {
+    "python_live_product": {
+      "status": "passed",
+      "count": 772,
+      "excluded_closed_historical_modules": [
+        "test_meas8",
+        "test_p5_closeout",
+        "test_p7_frame",
+        "test_p7_residual"
+      ]
+    },
+    "node_contracts": {
+      "status": "passed",
+      "count": 240
+    },
+    "chromium": {
+      "status": "passed",
+      "count": 11,
+      "funding_finder_scenarios": 5,
+      "team_match_scenarios": 4,
+      "accessibility_scenarios": 2
+    },
+    "accessibility": {
+      "status": "passed",
+      "serious_or_critical_violations": 0,
+      "lower_severity_violations": 0,
+      "incomplete_manual_review_counts": {
+        "funding_initial": 3,
+        "funding_help_open": 1,
+        "funding_strong_potential": 3,
+        "funding_potential_fallback": 3,
+        "team_picker_open": 2,
+        "team_two_person_results": 3,
+        "team_enhanced_fallback": 3
+      },
+      "scope_note": "Automated axe coverage is a bounded release gate, not a WCAG certification. Incomplete checks remain manual-review items."
+    },
+    "query_baseline": {
+      "status": "passed",
+      "queries": 37,
+      "top_10_churn": 0
+    },
+    "p9_scoring": {
+      "status": "passed",
+      "cases": 50,
+      "cardinality_invariant": true,
+      "byte_identical": true
+    },
+    "no_drift": {
+      "status": "passed",
+      "artifacts": 22
+    },
+    "search_release_package": {
+      "status": "verified"
+    }
+  },
+  "production_vector_rebuild": {
+    "status": "passed",
+    "mode": "production_full_rebuild",
+    "passage_count": 1670,
+    "reused_passage_count": 0,
+    "embedded_passage_count": 1670,
+    "api_request_count": 8,
+    "usage_total_tokens": 400338,
+    "estimated_cost_at_published_paid_pricing_usd": 0.008007,
+    "model_space_canary_status": "passed",
+    "minimum_canary_cosine": 1,
+    "mean_canary_cosine": 1,
+    "api_key_printed_or_persisted": false
+  },
+  "gate4_release_vector_work_total": {
+    "full_production_rebuilds": 2,
+    "reason": "The final generation was repeated after the review-driven Worker package fix so the complete release-package generation order remained explicit and used no reused vectors.",
+    "api_request_count": 16,
+    "usage_total_tokens": 800676,
+    "estimated_cost_at_published_paid_pricing_usd": 0.016014
+  },
+  "package": {
+    "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "worker_allowlist_sha256": "70b4e481aa03d9def44f0839d0693acfd1726108a19675bafd0434dd0f35b078",
+    "passage_count": 1670,
+    "file_sha256": {
+      "assets/app.js": "0c89b335995341686683df679f9ccdc8d623274595cd6bddf81711bd7c8361e6",
+      "assets/search-hybrid.js": "956ab78c75897a7228581589367819c1c590df2c498277e83ce335ce77157543",
+      "assets/search-retrieval.js": "c891369e2cb9a0c57026af27dc8b11897041053ed83f72e8b440a4d87fb244bd",
+      "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
+      "assets/match-explain.js": "4acabacc9a56527feaff3ba62e1797452c7f2a7794a02b1f4ec0183810c2fff1",
+      "data/opportunities.js": "2622e411988ebc8101aa1a3aa85bb2bbd749210a807823e9a228f864226b90db",
+      "data/subtopics.js": "1afeb40d31c174de962a40b48cb337354fcfa37e0a19127145489e9196b43919",
+      "data/search-v2-voyage-manifest.json": "4af944a384aea26a81ab11f50a61c7fdefc528741baec4df34ec6af0438a6c45",
+      "data/search-v2-voyage-vectors.f16": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+      "data/search-v2-voyage-canaries.json": "bacf6a410827aa2c86ee6d424425a2263fa7997481ad42312196d4e0ac0be7b4",
+      "data/search-v2-release.json": "c1dcfc96df1611cf9a2226e2208381d0925bbadb9f4cf1590d75484fa96a4795",
+      "workers/search-voyage-proxy/generated/corpus-allowlist.json": "70b4e481aa03d9def44f0839d0693acfd1726108a19675bafd0434dd0f35b078",
+      "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d"
+    }
+  },
+  "phase4c": {
+    "rerun": false,
+    "byte_identical": true,
+    "sha256": {
+      "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+      "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+      "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7",
+      "evaluation/search_v2_iteration3_holdout_results_raw.json": "c8bd5a3b105963b826f406227ca6a0d4664cf80827f4ce2d5adac550088707ab",
+      "evaluation/search_v2_iteration3_holdout_truth.json": "ac415c66337339cbf859006baf7ec9ad961d99f731c172e11daa70d39cbb84c6",
+      "evaluation/search_v2_release_candidate_v3.json": "e3dd6142db52420034faac3d0a25d65141d687e5507166c09ce60ef76b99106a"
+    }
+  },
+  "release_contract": {
+    "strong_potential_architecture_changed": false,
+    "search_ranking_or_model_tuned": false,
+    "phase4c_inspected_or_modified": false
+  }
+}

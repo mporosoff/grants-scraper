@@ -2,7 +2,7 @@
   "use strict";
 
   const release = Object.freeze({
-    version: "1.2.1",
+    version: "1.3.0",
     updated: "2026-08-24",
   });
   const productionFlags = Object.freeze({

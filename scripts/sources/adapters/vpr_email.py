@@ -47,6 +47,7 @@ from __future__ import annotations
 import hashlib
 import os
 import re
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 from typing import Iterable, Optional
 from urllib.parse import urlparse
@@ -427,6 +428,51 @@ class _PageMetadata(HTMLParser):
             self.descriptions.append(content)
 
 
+def _page_submission_deadline(line: str) -> Optional[str]:
+    """Return the date tied to a full application-submission deadline.
+
+    Private funder pages often place opening, nomination, event, and
+    preliminary dates beside the application close. Selecting the first date
+    on such a line silently turns a non-deadline into ``close_date``.
+    """
+    lowered = line.casefold()
+    if not re.search(
+        r"\b(?:applications?|proposals?|submissions?)\b.{0,45}"
+        r"\b(?:due|deadline|close[sd]?|received|submitted)\b|"
+        r"\b(?:application|proposal|submission|sponsor)\s+deadline\b|"
+        r"\bdeadline\s+for\s+(?:applications?|proposals?|submissions?)\b",
+        lowered,
+    ):
+        return None
+    matches = list(_DATE_RE.finditer(line))
+    if not matches:
+        return None
+
+    positive_signals = list(re.finditer(
+        r"\b(?:due|deadline|close[sd]?|received|submitted)\b", line, re.I
+    ))
+    negative_signals = list(re.finditer(
+        r"\b(?:open(?:s|ing)?|nominations? open)\b", line, re.I
+    ))
+
+    def nearest_distance(match, signals, fallback):
+        center = (match.start() + match.end()) / 2
+        return min(
+            (abs(center - ((signal.start() + signal.end()) / 2)) for signal in signals),
+            default=fallback,
+        )
+
+    def date_score(match) -> int:
+        positive_distance = nearest_distance(match, positive_signals, 10_000)
+        negative_distance = nearest_distance(match, negative_signals, 10_000)
+        if positive_distance > 70:
+            return -10_000
+        return int(negative_distance - positive_distance)
+
+    selected = max(matches, key=date_score)
+    return selected.group(1) if date_score(selected) > 0 else None
+
+
 def _extract_page_enrichment(html: str, title: str = "") -> dict:
     metadata = _PageMetadata()
     metadata.feed(html or "")
@@ -434,12 +480,12 @@ def _extract_page_enrichment(html: str, title: str = "") -> dict:
     result: dict = {}
 
     descriptions = [
-        value for value in metadata.descriptions
+        (value, "html_meta_description") for value in metadata.descriptions
         if 60 <= len(value) <= 2_000
         and not re.search(r"\b(?:cookie|privacy policy|enable javascript)\b", value, re.I)
     ]
     candidates = descriptions + [
-        line for line in lines
+        (line, "html_program_text") for line in lines
         if 80 <= len(line) <= 2_000
         and re.search(r"\b(?:program|grant|award|funds?|supports?|invites?|research)\b", line, re.I)
         and not re.search(r"\b(?:cookie|privacy policy|navigation|subscribe)\b", line, re.I)
@@ -470,9 +516,15 @@ def _extract_page_enrichment(html: str, title: str = "") -> dict:
             )))
             return overlap, purpose - instructions, specificity, min(len(value), 600)
 
-        selected = max(candidates, key=description_score)
+        selected, method = max(candidates, key=lambda item: description_score(item[0]))
         if not title_terms or description_score(selected)[0] > 0:
             result["description"] = selected[:2_000]
+            result.setdefault("_field_provenance", {})["description"] = {
+                "source_excerpt": selected[:2_000],
+                "extraction_method": method,
+                "confidence": "medium",
+                "status": "page_extracted",
+            }
 
     for index, line in enumerate(lines):
         match = re.match(
@@ -483,19 +535,31 @@ def _extract_page_enrichment(html: str, title: str = "") -> dict:
         if not match:
             continue
         value = match.group(1).strip()
+        source_excerpt = line
         if len(value) < 30 and index + 1 < len(lines):
             value = f"{value} {lines[index + 1]}".strip()
+            source_excerpt = f"{line} {lines[index + 1]}".strip()
         if 20 <= len(value) <= 1_500:
             result["eligibility_text"] = value.lstrip(" ?�•:-")[:1_500]
+            result.setdefault("_field_provenance", {})["eligibility_text"] = {
+                "source_excerpt": source_excerpt[:2_000],
+                "extraction_method": "labeled_eligibility_text",
+                "confidence": "medium",
+                "status": "page_extracted",
+            }
             break
 
     for line in lines:
-        if not re.search(r"\b(?:deadline|due date|applications? due|proposals? due)\b", line, re.I):
-            continue
-        date_text = _first_date(line)
+        date_text = _page_submission_deadline(line)
         parsed = _iso(date_text)
         if parsed:
             result["close_date"] = parsed
+            result.setdefault("_field_provenance", {})["close_date"] = {
+                "source_excerpt": line[:2_000],
+                "extraction_method": "application_submission_deadline_text",
+                "confidence": "medium",
+                "status": "page_extracted",
+            }
             break
 
     for line in lines:
@@ -508,6 +572,12 @@ def _extract_page_enrichment(html: str, title: str = "") -> dict:
         amount = _money(line)
         if amount:
             result["award_ceiling"] = amount
+            result.setdefault("_field_provenance", {})["award_ceiling"] = {
+                "source_excerpt": line[:2_000],
+                "extraction_method": "labeled_maximum_award_text",
+                "confidence": "medium",
+                "status": "page_extracted",
+            }
             break
     return result
 
@@ -532,7 +602,12 @@ def _fetch_page_enrichment(url: str, title: str = "") -> dict:
         raise ValueError("private-funder page exceeds the bounded parser size")
     if "_Incapsula_Resource" in response.text or "Request unsuccessful" in response.text:
         return {}
-    return _extract_page_enrichment(response.text, title)
+    extracted = _extract_page_enrichment(response.text, title)
+    fetched_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    for provenance in (extracted.get("_field_provenance") or {}).values():
+        provenance["source_url"] = response.url
+        provenance["fetched_at"] = fetched_at
+    return extracted
 
 
 def _enrich_private_item(item: dict, page_cache: dict[str, dict]) -> tuple[dict, bool]:
@@ -544,9 +619,17 @@ def _enrich_private_item(item: dict, page_cache: dict[str, dict]) -> tuple[dict,
         page_cache[url] = _fetch_page_enrichment(url, str(item.get("title") or ""))
     enriched = dict(item)
     page = page_cache[url]
+    filled_provenance = {}
     for field in ("description", "eligibility_text", "close_date", "award_ceiling"):
         if not enriched.get(field) and page.get(field):
             enriched[field] = page[field]
+            provenance = (page.get("_field_provenance") or {}).get(field)
+            if provenance:
+                filled_provenance[field] = dict(provenance)
+    if filled_provenance:
+        extra = dict(enriched.get("extra") or {})
+        extra["page_field_provenance"] = filled_provenance
+        enriched["extra"] = extra
     enriched["agency"] = enriched.get("agency") or _SPONSOR_BY_HOST.get(host)
     return enriched, bool(page)
 

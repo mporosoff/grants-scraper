@@ -1,0 +1,201 @@
+name: Deploy committed search package
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-search-package.yml"
+      - "assets/app-config.js"
+      - "assets/app.js"
+      - "assets/match-explain.js"
+      - "assets/result-workflow.js"
+      - "assets/search-hybrid.js"
+      - "assets/search-retrieval.js"
+      - "assets/search-v2-config.js"
+      - "assets/team-hybrid.js"
+      - "config/search_v2.json"
+      - "data/search-v2-release.json"
+      - "data/search-v2-voyage-canaries.json"
+      - "data/search-v2-voyage-manifest.json"
+      - "data/search-v2-voyage-vectors.f16"
+      - "match_explorer.html"
+      - "team_match.html"
+      - "tools/build_search_release_package.mjs"
+      - "tools/build_search_v2_voyage_vectors.mjs"
+      - "tools/smoke_search_worker.mjs"
+      - "workers/search-voyage-proxy/**"
+  workflow_dispatch:
+    inputs:
+      premerge_candidate:
+        description: Deploy and smoke a PR candidate before protected merge
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: funding-finder-coordinated-release
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: "${{ github.event_name != 'push' || ! startsWith(github.event.head_commit.message, 'chore: refresh Grants.gov catalog') }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - run: python -m pip install -r requirements.txt
+      - name: Verify the committed search package
+        run: node tools/build_search_release_package.mjs --check
+      - name: Run the complete Python product gate
+        run: python -m tools.run_refresh_validation
+      - name: Run browser, package, and frozen quality gates
+        run: >-
+          node --test tests/browser/*.test.mjs &&
+          node tools/query_baseline.mjs --check &&
+          node tools/p9_scoring_probe.mjs --check
+      - name: Capture and verify the protected main release base
+        id: release-base
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          built_from_sha="$(git rev-parse HEAD)"
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ]; then
+            echo "::error::Protected main could not be resolved."
+            exit 1
+          fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.premerge_candidate }}" = "true" ]; then
+            candidate_base_sha="$(git merge-base HEAD origin/main)"
+            if [ "$candidate_base_sha" != "$current_main_sha" ]; then
+              echo "::error::The candidate was not built from current protected main."
+              exit 1
+            fi
+          elif [ "$built_from_sha" != "$current_main_sha" ]; then
+            echo "::error::Main changed while the committed package was being verified."
+            exit 1
+          fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Capture the active Worker version for rollback
+        id: prior-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list \
+            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
+          prior_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+          echo "Captured the active Worker version for rollback."
+          echo "Prior Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
+      - name: Deploy the committed compatibility Worker
+        id: worker-deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+      - name: Capture the candidate Worker version
+        id: candidate-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list \
+            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
+          candidate_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          echo "version_id=$candidate_version" >> "$GITHUB_OUTPUT"
+          echo "Candidate Worker version: \`$candidate_version\`" >> "$GITHUB_STEP_SUMMARY"
+      - name: Wait for the candidate Worker identity
+        id: worker-handshake
+        shell: bash
+        run: |
+          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
+          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
+          health=""
+          for attempt in {1..12}; do
+            health="$(curl --fail --silent --show-error --max-time 10 \
+              -H 'Origin: https://mporosoff.github.io' \
+              'https://funding-finder-voyage-search.urochestercheme.workers.dev/health' || true)"
+            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.budget_state // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.corpus_sha256 // empty' <<<"$health" 2>/dev/null)" = "$candidate_sha" \
+              && test "$(jq -r '.model_space_fingerprint // empty' <<<"$health" 2>/dev/null)" = "$candidate_fingerprint"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::The candidate Worker identity did not become available."
+          exit 1
+      - name: Run a real provider smoke against the candidate Worker
+        id: worker-smoke
+        run: node tools/smoke_search_worker.mjs
+      - name: Restore the prior Worker if pre-publication smoke fails
+        if: ${{ always() && steps.worker-deploy.outcome == 'success' && (steps.worker-handshake.outcome == 'failure' || steps.worker-smoke.outcome == 'failure') }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          npx --yes wrangler@4.125.0 rollback
+          "${{ steps.prior-worker.outputs.version_id }}"
+          --config workers/search-voyage-proxy/wrangler.jsonc
+          --message "Automatic rollback after committed Worker smoke failure"
+      - name: Restore the prior Worker if main advanced after smoke
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            npx --yes wrangler@4.125.0 rollback \
+              "${{ steps.prior-worker.outputs.version_id }}" \
+              --config workers/search-voyage-proxy/wrangler.jsonc \
+              --message "Automatic rollback because main advanced after committed Worker smoke"
+            echo "::error::Main advanced after Worker smoke; the prior Worker was restored."
+            exit 1
+          fi
+      - name: Verify Pages serves the exact committed release package
+        id: pages-verify
+        if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
+        shell: bash
+        run: |
+          candidate_release="$(jq -S -c . data/search-v2-release.json)"
+          verified=false
+          for attempt in $(seq 1 18); do
+            live_release="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?deploy=${GITHUB_SHA}" \
+              || true)"
+            live_release="$(jq -S -c . <<<"$live_release" 2>/dev/null || true)"
+            if [ "$live_release" = "$candidate_release" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the exact committed release package within the verification window."
+            exit 1
+          fi
+      - name: Run a real provider smoke after Pages propagation
+        if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
+        run: node tools/smoke_search_worker.mjs
+      - name: Record successful pre-merge candidate smoke
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.premerge_candidate }}
+        run: |
+          echo "Pre-merge candidate Worker smoke passed." >> "$GITHUB_STEP_SUMMARY"
+          echo "Protected main base: \`${{ steps.release-base.outputs.main_sha }}\`" >> "$GITHUB_STEP_SUMMARY"

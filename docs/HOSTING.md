@@ -8,6 +8,10 @@ https://mporosoff.github.io/grants-scraper/
 
 The application is public and browser-only. Users do not install Python, create an account, choose a faculty record, upload a file, or provide an API key merely to search. A NOFO/FOA PDF upload is an optional page-memory path for document chat.
 
+Team Match is also a public, self-canonical product route and is intentionally
+indexable. Its metadata uses researcher/team language so it does not imply that
+the tool is limited to faculty records.
+
 ## Architecture
 
 ```text
@@ -144,6 +148,16 @@ sent to GitHub or a central database. They are a convenience and evaluation
 boundary, not an institutional credential vault or a local copy of the
 funding catalog. Shared search URLs take precedence over saved profile and
 preference ranking until the user activates them.
+
+Search criteria are serialized into the Funding Finder page URL so browser
+back/forward navigation, refresh, and copied links can restore a search. Those
+criteria can therefore appear in browser history and in any shared URL. A
+custom anonymous usage request contains only a random session identifier and a
+broad usage category; it explicitly uses an origin-only referrer, and the
+Worker resolves network organization server-side for aggregate reporting.
+Cloudflare Web Analytics is loaded only on clean URLs. Funding Finder disables
+that route whenever query parameters are present, so managed search criteria
+are not included in analytics requests.
 
 The AI shortlist, chat, and any extracted uploaded-notice text exist only in
 page memory. The original uploaded PDF is not retained. Its bounded extracted

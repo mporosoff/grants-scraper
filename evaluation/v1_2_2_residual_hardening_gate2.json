@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T15:06:40.386Z",
+  "gate": 2,
+  "branch": "v1.2.2-residual-hardening",
+  "starting_sha": "9a02b0c33cbf242539624e96faf502d75f2a62f1",
+  "scope": "result-workflow correctness and request control",
+  "implementation": {
+    "ai_broadening": "A bounded 32-entry candidate-match map stores the actual expanded-query match objects. Existing Strong/Potential matches preserve their original tier and evidence, newly discovered records receive ai_candidate tier, and shortlist/review rendering resolves against the candidate map without mutating the base result order.",
+    "downstream_tiers": "CSV, result chat, AI refinement, and evaluation export carry workflow_tier plus bounded Potential source-field, source-label, and excerpt metadata. AI system instructions explicitly distinguish conservative Strong matches, broader Potential leads, and AI-expanded candidates.",
+    "potential_explanations": "The extractive explanation selector receives the canonical semantic query and chooses the best matching complete sentence or phrase from the winning public passage fields. It generates no prose, uses no score as evidence, and adds no provider request.",
+    "request_control": "The hybrid client shares pending promises by canonical semantic query plus sorted eligible parent IDs. The application preserves identical pending work across sort/repeated search, briefly debounces filter changes, aborts superseded browser requests where practical, and retains the completed-result cache.",
+    "retry_timing": "Worker Retry-After is bounded to 300 seconds in the browser, converted to an absolute retry time, displayed as a live countdown, and enforced by a disabled retry control and repeated-search guard until expiry.",
+    "profile_boundary": "Hosted Potential requests continue to send an empty private context and only the typed query plus eligible public passages. Page copy now states that profile, CV, and ORCID context stays local unless the user explicitly invokes a connected AI provider."
+  },
+  "release_package": {
+    "status": "verified",
+    "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+    "passage_count": 1670,
+    "worker_allowlist_sha256": "75b353877d21e10ecef0edb127ccafa3b63342323813c3dd5ef59586e2be22af",
+    "release_file_sha256": "e722e46add4ebac0c9ad4aa1e21427d488e820689e7beb1bdd6fabd7c92338b0"
+  },
+  "verification": {
+    "focused_gate2_contracts": {
+      "command": "node --test tests/browser/v1-2-2-gate2-contract.test.mjs tests/browser/search-hybrid-production-contract.test.mjs",
+      "tests": 21,
+      "status": "passed"
+    },
+    "python_product_gate": {
+      "command": "python -m tools.run_refresh_validation",
+      "tests": 769,
+      "status": "passed"
+    },
+    "browser_contract_gate": {
+      "command": "node --test tests/browser/*.test.mjs",
+      "tests": 234,
+      "status": "passed"
+    },
+    "ai_result_contracts": {
+      "synthetic_new_candidate_rendered": true,
+      "actual_candidate_match_object_retained": true,
+      "candidate_map_limit": 32,
+      "pagination_and_action_paths_shared": true,
+      "candidate_review_uses_candidate_set": true,
+      "base_result_ids_and_order_unchanged": true,
+      "status": "passed"
+    },
+    "tier_and_privacy_contracts": {
+      "csv_tiers": [
+        "Strong",
+        "Potential",
+        "AI-candidate"
+      ],
+      "chat_receives_tier": true,
+      "chat_potential_evidence_max_chars": 360,
+      "ai_refinement_receives_tier": true,
+      "evaluation_export_receives_tier": true,
+      "hosted_private_context": "empty",
+      "profile_cv_orcid_sent_to_hosted_service": false,
+      "status": "passed"
+    },
+    "explanation_contracts": {
+      "canonical_query_used": true,
+      "complete_source_span_selected": true,
+      "query_supporting_sentence_fixture": true,
+      "generated_explanations": 0,
+      "semantic_score_as_evidence": 0,
+      "additional_provider_requests": 0,
+      "status": "passed"
+    },
+    "request_cycle_contracts": {
+      "identical_inflight_embed_requests": 1,
+      "identical_inflight_rerank_requests": 1,
+      "sort_changes_reuse_pending": true,
+      "identical_repeated_search_reuses_pending": true,
+      "substantive_eligibility_change_embed_requests": 1,
+      "substantive_eligibility_change_rerank_requests": 1,
+      "filter_debounce_ms": 180,
+      "superseded_request_aborted": true,
+      "aborted_request_counted_as_fallback": false,
+      "status": "passed"
+    },
+    "retry_contracts": {
+      "returned_interval_seconds_fixture": 10,
+      "retry_disabled_during_interval": true,
+      "retry_enabled_at_expiry": true,
+      "repeated_identical_search_blocked_during_interval": true,
+      "status": "passed"
+    },
+    "query_baseline": {
+      "command": "node tools/query_baseline.mjs --check",
+      "queries": 37,
+      "top_10_churn": 0,
+      "status": "passed"
+    },
+    "p9_scoring": {
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "cases": 50,
+      "cardinality_invariant": true,
+      "byte_identical": true,
+      "status": "passed"
+    }
+  },
+  "phase4c_artifact_hashes": {
+    "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+    "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+    "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7"
+  },
+  "phase4c_rerun": false,
+  "search_weight_or_relevance_tuning": false,
+  "production_mutation": false,
+  "decision": "GATE 2 PASSED — RESULT SETS, TIERS, EXPLANATIONS, AND API CYCLES ARE CONSISTENT"
+}

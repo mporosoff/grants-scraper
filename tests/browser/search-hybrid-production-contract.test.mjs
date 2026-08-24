@@ -91,6 +91,24 @@ test("non-expandable public passage explanations use complete sentences or phras
   }).excerpt, phrase);
 });
 
+test("Potential explanations select the complete source span that supports the canonical query", () => {
+  const sourceText = "This program supports general workforce coordination. It funds rare earth recycling and separations research across the supply chain.";
+  const explanation = api.explanationFromPassage({
+    passage_id: "parent:query-aware-excerpt",
+    passage_kind: "parent",
+    title: "Query-aware excerpt fixture",
+    values: { parent_description: [sourceText] },
+  }, "rare earth recycling");
+
+  assert.equal(
+    explanation.excerpt,
+    "It funds rare earth recycling and separations research across the supply chain.",
+  );
+  assert.equal(explanation.source_field, "parent_description");
+  assert.ok(sourceText.includes(explanation.excerpt));
+  assert.doesNotMatch(explanation.excerpt, /score|similarity|semantic/i);
+});
+
 test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup are generic", () => {
   const vectors = api.decodeFloat16(
     vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
@@ -144,7 +162,7 @@ test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup a
     { text: "rare earth elements" },
     new Set(["REES"]),
   ).allowed, true);
-  assert.match(source, /post\("embed-query", \{ query: semanticQuery \}\)/);
+  assert.match(source, /post\("embed-query", \{ query: semanticQuery \}, signal\)/);
   assert.match(source, /query: semanticQuery,[\s\S]*?corpus_sha256/);
 
   const parents = api.strongestParents([
@@ -253,6 +271,94 @@ test("active parent eligibility constrains BM25, semantic top-k, child passages,
   await client.search(query, { eligibleParentIds: [...eligibleParentIds, "362061"] });
   assert.equal(embedRequests, 2, "a substantive eligibility change causes one new embed");
   assert.equal(rerankRequests, 2, "a substantive eligibility change causes one new rerank");
+});
+
+test("identical in-flight searches share one paid semantic cycle", async () => {
+  const vectors = api.decodeFloat16(
+    vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
+    corpus.length,
+    api.EMBEDDING_DIMENSION,
+  );
+  const queryVector = vectors.slice(0, api.EMBEDDING_DIMENSION);
+  let releaseEmbedding;
+  const embeddingGate = new Promise(resolve => { releaseEmbedding = resolve; });
+  let embedRequests = 0;
+  let rerankRequests = 0;
+  const client = api.createClient({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentEngine: harness.parentEngine,
+    childEngine: harness.childEngine,
+    proxyUrl: "http://localhost/",
+    manifestUrl: "/manifest",
+    vectorUrl: "/vectors",
+    fetchImpl: async (url, options = {}) => {
+      if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
+      if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
+      if (String(url).endsWith("/embed-query")) {
+        embedRequests += 1;
+        await embeddingGate;
+        return new Response(JSON.stringify({ embedding: Array.from(queryVector) }), { status: 200 });
+      }
+      if (String(url).endsWith("/rerank")) {
+        rerankRequests += 1;
+        const body = JSON.parse(options.body);
+        return new Response(JSON.stringify({ rankings: body.candidates.map((item, index) => ({
+          index,
+          passage_id: item.passage_id,
+          relevance_score: 1 - index / Math.max(1, body.candidates.length),
+        })) }), { status: 200 });
+      }
+      return new Response("", { status: 404 });
+    },
+  });
+
+  const first = client.search("rare earth recycling", { eligibleParentIds: ["361526", "362061"] });
+  const repeated = client.search("rare earth recycling", { eligibleParentIds: ["362061", "361526"] });
+  releaseEmbedding();
+  const [firstResult, repeatedResult] = await Promise.all([first, repeated]);
+
+  assert.equal(embedRequests, 1);
+  assert.equal(rerankRequests, 1);
+  assert.deepEqual(
+    Array.from(firstResult.parents, item => item.parent_id),
+    Array.from(repeatedResult.parents, item => item.parent_id),
+  );
+});
+
+test("a superseded browser request is aborted without recording a service fallback", async () => {
+  const controller = new AbortController();
+  const client = api.createClient({
+    parentCatalog: harness.parentCatalog,
+    childCatalog: harness.childCatalog,
+    parentEngine: harness.parentEngine,
+    childEngine: harness.childEngine,
+    proxyUrl: "http://localhost/",
+    manifestUrl: "/manifest",
+    vectorUrl: "/vectors",
+    fetchImpl: async (url, options = {}) => {
+      if (String(url) === "/manifest") return new Response(JSON.stringify(manifest), { status: 200 });
+      if (String(url).startsWith("/vectors?v=")) return new Response(vectorBuffer, { status: 200 });
+      if (String(url).endsWith("/embed-query")) {
+        return new Promise((_resolve, reject) => {
+          const rejectAbort = () => {
+            const error = new Error("aborted");
+            error.name = "AbortError";
+            reject(error);
+          };
+          if (options.signal.aborted) rejectAbort();
+          else options.signal.addEventListener("abort", rejectAbort, { once: true });
+        });
+      }
+      return new Response("", { status: 404 });
+    },
+  });
+
+  const pending = client.search("rare earth recycling", { signal: controller.signal });
+  setTimeout(() => controller.abort(), 0);
+  await assert.rejects(pending, error => error.code === "request_aborted");
+  assert.equal(client.usage().fallbacks, 0);
+  assert.equal(client.usage().failures, 0);
 });
 
 test("hybrid client is lazy, rejects a stale manifest, and sends no browser credential", async () => {
@@ -466,9 +572,9 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   );
   assert.match(htmlSource, /assets\/search-hybrid\.js/);
   assert.doesNotMatch(htmlSource, /search-v2-voyage-vectors\.f16|search-v2-voyage-manifest\.json/);
-  assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{ context: "", eligibleParentIds \}\)/);
+  assert.match(appSource, /hybridSearchClient\.search\(normalizedQuery, \{[\s\S]*?context: "",[\s\S]*?eligibleParentIds,[\s\S]*?signal: controller\.signal/);
   assert.match(appSource, /No strong matches were found\. Broader Potential matching is temporarily unavailable/);
-  assert.ok(appSource.indexOf("state.strongMatches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query)"));
+  assert.ok(appSource.indexOf("state.strongMatches = search.matches") < appSource.indexOf("scheduleHybridSearch(state.query"));
   assert.match(appSource, /Why this may be relevant/);
   assert.match(appSource, /Strong match/);
   assert.match(appSource, /Potential match/);

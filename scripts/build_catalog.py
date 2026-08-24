@@ -12,6 +12,7 @@ Run:
 
 import argparse
 from collections import Counter, defaultdict
+from copy import deepcopy
 from datetime import date, datetime, timezone
 from html import unescape
 import json
@@ -965,10 +966,48 @@ def build_catalog(records, generated_at, source_file, deduplicated_count):
     }
 
 
+def compact_catalog_payload(catalog):
+    """Remove deadline evidence duplicated elsewhere in the same record.
+
+    ``document_evidence.facts`` is the authoritative citation store. Deadlines
+    already point back to those facts with ``evidence_id`` or
+    ``document_evidence_id``, so the public asset does not need another full
+    citation object. A deadline note that exactly repeats the citation quote is
+    similarly redundant. Direct citations and distinct notes remain intact.
+    """
+    output = deepcopy(catalog)
+    for record in output.get("opportunities") or []:
+        facts = {
+            str(fact.get("id")): fact
+            for fact in (
+                (record.get("document_evidence") or {}).get("facts") or []
+            )
+            if isinstance(fact, dict) and fact.get("id")
+        }
+        for deadline in record.get("deadlines") or []:
+            if not isinstance(deadline, dict):
+                continue
+            citation = deadline.get("citation") or {}
+            if deadline.get("note") and deadline.get("note") == citation.get("quote"):
+                deadline.pop("note", None)
+            evidence_ref = str(
+                deadline.get("evidence_id")
+                or deadline.get("document_evidence_id")
+                or ""
+            )
+            fact = facts.get(evidence_ref) or {}
+            if citation and citation == fact.get("citation"):
+                deadline.pop("citation", None)
+    return output
+
+
 def write_catalog(catalog, output_path):
     output_path.parent.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(
-        catalog, ensure_ascii=False, separators=(",", ":"), default=str
+        compact_catalog_payload(catalog),
+        ensure_ascii=False,
+        separators=(",", ":"),
+        default=str,
     ).replace("</", "<\\/")
     temporary_path = None
     try:

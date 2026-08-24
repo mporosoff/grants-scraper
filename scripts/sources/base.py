@@ -296,6 +296,31 @@ class CanonicalOpportunity:
             "document_evidence": None,
             "document_search_text": None,
         }
+        page_provenance = {}
+        raw_provenance = self.extra.get("page_field_provenance")
+        if isinstance(raw_provenance, dict):
+            for field_name in (
+                "description",
+                "eligibility_text",
+                "close_date",
+                "award_ceiling",
+            ):
+                entry = raw_provenance.get(field_name)
+                if not isinstance(entry, dict):
+                    continue
+                normalized = {
+                    "source_url": safe_http_url(entry.get("source_url")),
+                    "fetched_at": clean_text(entry.get("fetched_at")),
+                    "source_excerpt": clean_text(entry.get("source_excerpt")),
+                    "extraction_method": clean_text(entry.get("extraction_method")),
+                    "confidence": clean_text(entry.get("confidence")),
+                    "status": clean_text(entry.get("status")),
+                }
+                if all(normalized.values()):
+                    normalized["source_excerpt"] = normalized["source_excerpt"][:2_000]
+                    page_provenance[field_name] = normalized
+        if page_provenance:
+            record["page_field_provenance"] = page_provenance
         return normalize_record_facets(record)
 
 

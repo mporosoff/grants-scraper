@@ -231,6 +231,7 @@ test("forged CORS headers cannot bypass endpoint rate limits", async () => {
   }), env);
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("Retry-After"), "10");
+  assert.equal(response.headers.get("Access-Control-Expose-Headers"), "Retry-After");
   assert.deepEqual(await response.json(), { error: { code: "rate_limited" } });
   assert.equal(providerCalls, 0);
 });
@@ -245,7 +246,76 @@ test("daily token exhaustion fails closed before calling Voyage", async () => {
   const response = await handler(request("/embed-query", { query: "test" }), env);
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("Retry-After"), "10");
+  assert.equal(response.headers.get("Access-Control-Expose-Headers"), "Retry-After");
   assert.deepEqual(await response.json(), { error: { code: "budget_limited" } });
+  assert.equal(providerCalls, 0);
+});
+
+test("budget reservations expire, are pruned, and agree with bounded status", async () => {
+  let now = Date.UTC(2026, 7, 24, 12, 0, 0);
+  const values = new Map();
+  const coordinator = new SearchBudgetCoordinator({
+    storage: {
+      async get(key) { return values.get(key); },
+      async put(key, value) { values.set(key, structuredClone(value)); },
+    },
+  }, { now: () => now });
+  const budgets = { embed: 10, rerank: 20 };
+  const call = payload => coordinator.fetch(new Request("https://budget.internal/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kind: "embed", budgets, ...payload }),
+  }));
+
+  assert.equal((await call({ action: "reserve", amount: 10, reservation_id: "held" })).status, 200);
+  let status = await call({ action: "status" });
+  assert.deepEqual(await status.json(), {
+    budget_state: "exhausted",
+    reserved_tokens: { embed: 10, rerank: 0 },
+    latency_ms: {
+      embed: { p50: null, p95: null },
+      rerank: { p50: null, p95: null },
+    },
+  });
+
+  now += 30_001;
+  status = await call({ action: "status" });
+  assert.equal((await status.json()).budget_state, "available");
+  assert.deepEqual(values.get("daily").reservations, {});
+  assert.equal((await call({ action: "reserve", amount: 10, reservation_id: "replacement" })).status, 200);
+  const reservation = values.get("daily").reservations.replacement;
+  assert.equal(reservation.created_at, now);
+  assert.equal(reservation.expires_at - reservation.created_at, 30_000);
+});
+
+test("public health counts outstanding reservations without exposing histories", async () => {
+  let providerCalls = 0;
+  const env = testEnv({ DAILY_EMBED_TOKEN_BUDGET: "10" });
+  const coordinator = env.BUDGET_COORDINATOR.get();
+  const reserved = await coordinator.fetch("https://budget.internal/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "reserve",
+      kind: "embed",
+      amount: 10,
+      reservation_id: "health-canary",
+      budgets: { embed: 10, rerank: 25000000 },
+    }),
+  });
+  assert.equal(reserved.status, 200);
+  const handler = createHandler({ fetchImpl: async () => {
+    providerCalls += 1;
+    return new Response("{}");
+  } });
+  const health = await handler(request("/health", null, { method: "GET" }), env);
+  assert.equal(health.status, 200);
+  const healthBody = await health.json();
+  assert.equal(healthBody.budget_state, "exhausted");
+  assert.deepEqual(healthBody.reserved_tokens, { embed: 10, rerank: 0 });
+  assert.equal(Object.hasOwn(healthBody, "reservations"), false);
+  const rejected = await handler(request("/embed-query", { query: "test" }), env);
+  assert.equal(rejected.status, 429);
   assert.equal(providerCalls, 0);
 });
 
@@ -266,6 +336,7 @@ test("health metadata is bounded and operational storage contains counters, neve
     model_space_fingerprint: allowlist.current.model_space_fingerprint,
     previous_corpus_supported: true,
     budget_state: "available",
+    reserved_tokens: { embed: 0, rerank: 0 },
   });
   const stored = JSON.stringify(env.__budgetValues.get("daily"));
   assert.doesNotMatch(stored, new RegExp(query));
@@ -280,6 +351,8 @@ test("Cloudflare configuration separates endpoint limits and uses one exact glob
   assert.match(wranglerSource, /"BUDGET_COORDINATOR"[\s\S]*?"SearchBudgetCoordinator"/);
   assert.match(wranglerSource, /"storage": "sqlite"/);
   assert.match(workerSource, /DAILY_EMBED_TOKEN_BUDGET|DAILY_RERANK_TOKEN_BUDGET|ENHANCED_SEARCH_ENABLED/);
+  assert.match(workerSource, /RESERVATION_TTL_MS\s*=\s*30_000/);
+  assert.match(workerSource, /created_at: now[\s\S]*?expires_at: now \+ RESERVATION_TTL_MS/);
 });
 
 test("proxy exposes no live intent-judge endpoint or Workers AI dependency", async () => {

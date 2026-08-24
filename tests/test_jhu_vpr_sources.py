@@ -275,7 +275,106 @@ class VPREmailTests(unittest.TestCase):
             "American Chemical Society Petroleum Research Fund",
         )
         self.assertEqual(adapter.diagnostics["private_link_enrichment"]["succeeded"], 1)
+        record = opportunity.to_record(
+            slug="vpr-email",
+            source="VPR funding digest (limited submissions & foundations)",
+            source_type="Internal",
+        )
+        provenance = record["page_field_provenance"]
+        self.assertEqual(
+            set(provenance),
+            {"description", "eligibility_text", "award_ceiling"},
+        )
+        for field in provenance.values():
+            self.assertEqual(
+                set(field),
+                {
+                    "source_url",
+                    "fetched_at",
+                    "source_excerpt",
+                    "extraction_method",
+                    "confidence",
+                    "status",
+                },
+            )
+            self.assertEqual(field["status"], "page_extracted")
+            self.assertTrue(field["source_excerpt"])
         fetched.assert_called_once()
+
+    def test_private_page_uses_only_explicit_submission_deadline(self):
+        digest = """
+        <p><b><u>External Funding</u></b></p>
+        <p><b>Sloan Research Fellowship</b></p>
+        <p><a href="https://sloan.org/fellowships">Sponsor website</a></p>
+        <p><b>Synopsis:</b> Early-career research fellowship.</p>
+        """
+        page = """
+        <html><head><meta name="description" content="The Sloan fellowship supports early-career researchers pursuing original scientific research across several disciplines."></head>
+        <body>
+          <p>Applications open January 5, 2027 and applications are due March 15, 2027.</p>
+          <p>Preliminary nomination event: February 1, 2027.</p>
+        </body></html>
+        """
+
+        class Response:
+            url = "https://sloan.org/fellowships"
+            headers = {"content-type": "text/html; charset=utf-8"}
+            content = page.encode()
+            text = page
+
+            @staticmethod
+            def raise_for_status():
+                return None
+
+        with patch.dict(os.environ, {"VPR_ENRICH_LINKS": "true"}), patch(
+            "scripts.sources.adapters.vpr_email.requests.get",
+            return_value=Response(),
+        ):
+            opportunity = list(
+                VPREmailAdapter().parse([{"stream": "vpr", "body": digest}])
+            )[0]
+
+        self.assertEqual(opportunity.close_date, "2027-03-15")
+        close_provenance = opportunity.extra["page_field_provenance"]["close_date"]
+        self.assertIn("applications are due", close_provenance["source_excerpt"])
+
+    def test_private_page_does_not_promote_opening_or_preliminary_date(self):
+        digest = """
+        <p><b><u>External Funding</u></b></p>
+        <p><b>Sloan Research Fellowship</b></p>
+        <p><a href="https://sloan.org/fellowships">Sponsor website</a></p>
+        <p><b>Synopsis:</b> Early-career research fellowship.</p>
+        """
+        page = """
+        <html><body>
+          <p>Nominations open September 1, 2026.</p>
+          <p>Letter of intent deadline: October 1, 2026.</p>
+        </body></html>
+        """
+
+        class Response:
+            url = "https://sloan.org/fellowships"
+            headers = {"content-type": "text/html; charset=utf-8"}
+            content = page.encode()
+            text = page
+
+            @staticmethod
+            def raise_for_status():
+                return None
+
+        with patch.dict(os.environ, {"VPR_ENRICH_LINKS": "true"}), patch(
+            "scripts.sources.adapters.vpr_email.requests.get",
+            return_value=Response(),
+        ):
+            opportunity = list(
+                VPREmailAdapter().parse([{"stream": "vpr", "body": digest}])
+            )[0]
+
+        self.assertIsNone(opportunity.close_date)
+        self.assertNotIn(
+            "close_date",
+            opportunity.extra.get("page_field_provenance", {}),
+        )
 
     def test_blocked_private_page_keeps_the_sponsor_and_email_fields(self):
         digest = """

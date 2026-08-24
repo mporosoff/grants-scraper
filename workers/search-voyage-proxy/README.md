@@ -5,8 +5,8 @@ This Worker exposes two POST endpoints and one bounded health endpoint:
 - `/embed-query` for a bounded public Funding Finder query;
 - `/rerank` for up to 300 passages whose IDs and SHA-256 hashes match the
   generated current or immediately previous public corpus allowlist;
-- `GET /health` for service, current-corpus, compatibility-window, and coarse
-  budget availability only.
+- `GET /health` for service, current-corpus, compatibility-window, coarse
+  budget availability, and bounded aggregate reserved-token totals only.
 
 The Worker does not log query strings, accept researcher profiles/CVs/ORCID
 data, return documents, or expose the Voyage credential. Browser requests are
@@ -37,6 +37,11 @@ request counts, provider input tokens, failures, rejection counts, and latency
 histograms. It never receives or stores query strings, passages, researcher
 names, ORCID/CV/profile content, or IP addresses. The per-client IP is used only
 as the ephemeral Cloudflare rate-limit key.
+
+Reservations expire after 30 seconds, safely beyond the seven-second provider
+timeout. Expired reservations are pruned on every coordinator action, and both
+admission decisions and the bounded health state count only unexpired reserved
+tokens.
 
 `ENHANCED_SEARCH_ENABLED=false` is the global semantic-search circuit breaker.
 A missing/invalid budget, rate binding, counter binding, or provider key returns

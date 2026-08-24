@@ -1,0 +1,28 @@
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests/e2e",
+  timeout: 90_000,
+  fullyParallel: false,
+  workers: 1,
+  retries: process.env.CI ? 1 : 0,
+  reporter: [
+    ["line"],
+    ["json", { outputFile: "test-results/playwright-results.json" }],
+  ],
+  outputDir: "test-results/playwright-artifacts",
+  use: {
+    baseURL: "http://127.0.0.1:8765",
+    browserName: "chromium",
+    headless: true,
+    reducedMotion: "reduce",
+    trace: "retain-on-failure",
+    viewport: { width: 1280, height: 900 },
+  },
+  webServer: {
+    command: "node tests/e2e/static-server.mjs",
+    url: "http://127.0.0.1:8765/match_explorer.html",
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
+});

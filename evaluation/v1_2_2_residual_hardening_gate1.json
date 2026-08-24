@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-08-24T14:30:25.487Z",
+  "gate": 1,
+  "branch": "v1.2.2-residual-hardening",
+  "starting_sha": "68f688610f16e3b6441c19c9136b3eba55d5fa47",
+  "scope": "continuity, deployment, and Worker correctness",
+  "implementation": {
+    "funding_finder_sidecar_fallback": "Parent catalog and parent retrieval initialize first. Topic loading is isolated, and failure leaves Strong search, browse, filters, saved items, exports, and official links available while disabling child matching and hosted Potential.",
+    "team_match_sidecar_fallback": "Parent-level local team matching remains available. Topic rollup and hosted enhanced ordering remain disabled after sidecar failure.",
+    "worker_smoke": "Every generation includes its declared model-space fingerprint. The smoke executes health, embed, current rerank, previous rerank, and unknown-corpus rejection without emitting credentials.",
+    "deploy_only_workflow": ".github/workflows/deploy-search-package.yml verifies the committed package and product gates, deploys the Worker, runs the real smoke before and after exact Pages-package propagation, and does not rebuild the catalog or vectors.",
+    "publication_race_control": "Both deployment paths capture the active Worker version, share one deployment concurrency group, recheck main after smoke, and roll back before publication when main advances. Refresh publication also rechecks immediately before PR creation and rolls back on push, PR creation, or merge failure.",
+    "budget_reservations": "Reservations carry created_at and expires_at timestamps with a 30000 ms TTL. Every valid coordinator action prunes expired reservations. Admission and public bounded health status count actual usage plus unexpired aggregate reserved tokens."
+  },
+  "release_package": {
+    "status": "verified",
+    "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
+    "passage_count": 1670,
+    "worker_allowlist_sha256": "75b353877d21e10ecef0edb127ccafa3b63342323813c3dd5ef59586e2be22af",
+    "release_file_sha256": "d1214c4c81025996fe5a4362887d354caa1d781dd1df3c17282b6928e245cdbd"
+  },
+  "verification": {
+    "focused_gate1_contracts": {
+      "command": "node --test tests/browser/search-voyage-proxy-validation.test.mjs tests/browser/v1-2-2-gate1-contract.test.mjs tests/browser/search-product-contracts.test.mjs tests/browser/team-hybrid-contract.test.mjs",
+      "tests": 32,
+      "status": "passed"
+    },
+    "python_product_gate": {
+      "command": "python -m tools.run_refresh_validation",
+      "tests": 769,
+      "status": "passed"
+    },
+    "browser_contract_gate": {
+      "command": "node --test tests/browser/*.test.mjs",
+      "tests": 225,
+      "status": "passed"
+    },
+    "worker_smoke_mock": {
+      "status": "passed",
+      "checks": [
+        "one embed request",
+        "one current-generation rerank",
+        "one previous-generation rerank",
+        "one unknown-corpus rejection",
+        "fingerprint included whenever declared",
+        "provider rejection exits nonzero"
+      ]
+    },
+    "live_worker_smoke": {
+      "command": "node tools/smoke_search_worker.mjs",
+      "status": "passed",
+      "shared_passage_id": "parent:112354",
+      "embed_model": "voyage-4-lite",
+      "embed_tokens": 1,
+      "current_rerank_status": 200,
+      "previous_rerank_status": 200,
+      "unknown_corpus_status": 400,
+      "credential_output": false
+    },
+    "query_baseline": {
+      "command": "node tools/query_baseline.mjs --check",
+      "queries": 37,
+      "top_10_churn": 0,
+      "status": "passed"
+    },
+    "p9_scoring": {
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "cases": 50,
+      "cardinality_invariant": true,
+      "byte_identical": true,
+      "status": "passed"
+    },
+    "workflow_contracts": {
+      "package_sensitive_paths_covered": true,
+      "prior_worker_captured": true,
+      "post_smoke_main_recheck": true,
+      "pre_pr_main_recheck": true,
+      "merge_failure_rollback": true,
+      "exact_pages_release_comparison": true,
+      "status": "passed"
+    },
+    "reservation_contracts": {
+      "expired_reservation_releases_budget": true,
+      "health_and_admission_agree": true,
+      "bounded_aggregate_only": true,
+      "query_or_identity_stored": false,
+      "status": "passed"
+    }
+  },
+  "phase4c_artifact_hashes": {
+    "evaluation/search_v2_phase4c_execution.json": "d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12",
+    "evaluation/search_v2_phase4c_preopen.json": "0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8",
+    "evaluation/search_v2_phase4c_test_runs.json": "ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7"
+  },
+  "phase4c_rerun": false,
+  "production_mutation": false,
+  "decision": "GATE 1 PASSED — LOCAL CONTINUITY AND DEPLOYED SEMANTIC SERVICE VERIFIED"
+}

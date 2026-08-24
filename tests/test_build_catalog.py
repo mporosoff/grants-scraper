@@ -9,6 +9,7 @@ from zipfile import ZipFile
 from scripts.build_catalog import (
     build_catalog,
     clean_text,
+    compact_catalog_payload,
     discover_latest_extract,
     is_current,
     iter_catalog_records,
@@ -29,6 +30,48 @@ FIXTURE = (
 
 
 class CatalogExtractTests(unittest.TestCase):
+    def test_compacts_only_deadline_evidence_duplicated_in_the_same_record(self):
+        citation = {
+            "document_url": "https://example.org/notice.pdf",
+            "quote": "Applications are due September 30, 2026.",
+        }
+        distinct_citation = {
+            "document_url": "https://example.org/other.pdf",
+            "quote": "A separate source quote.",
+        }
+        catalog = {
+            "opportunities": [{
+                "document_evidence": {
+                    "facts": [{"id": "evidence-1", "citation": citation}]
+                },
+                "deadlines": [
+                    {
+                        "evidence_id": "evidence-1",
+                        "note": citation["quote"],
+                        "citation": citation,
+                    },
+                    {
+                        "note": "Keep this distinct note.",
+                        "citation": distinct_citation,
+                    },
+                ],
+            }],
+        }
+
+        compacted = compact_catalog_payload(catalog)
+
+        self.assertNotIn("note", compacted["opportunities"][0]["deadlines"][0])
+        self.assertNotIn("citation", compacted["opportunities"][0]["deadlines"][0])
+        self.assertEqual(
+            compacted["opportunities"][0]["deadlines"][1]["note"],
+            "Keep this distinct note.",
+        )
+        self.assertEqual(
+            compacted["opportunities"][0]["deadlines"][1]["citation"],
+            distinct_citation,
+        )
+        self.assertIn("citation", catalog["opportunities"][0]["deadlines"][0])
+
     def test_free_form_disciplines_are_mapped_to_controlled_values(self):
         raw = (
             "chemistry, computer science, earth systems science, economics, "

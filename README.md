@@ -114,7 +114,13 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
-Funding Finder v1.2.1 hardens this hosted path as one coordinated release
+Funding Finder search criteria are shareable page parameters and can appear in
+browser history or copied links. The custom anonymous usage event sends only a
+random session identifier and broad usage category with an origin-only
+referrer; network organization is aggregated server-side. Cloudflare Web
+Analytics is disabled on every URL that contains query parameters.
+
+Funding Finder v1.3.0 hardens this hosted path as one coordinated release
 package. A catalog refresh now rebuilds every public semantic passage and
 vector, validates fixed embedding-space canaries, deploys a Worker that accepts
 only the current and immediately previous package, and publishes the generated
