@@ -43,6 +43,7 @@ faculty.csv
 .env
 .dev.vars*
 .pnpm-store/
+.wrangler/
 
 # Retired server experiment artifacts may remain in old local checkouts.
 /web/

@@ -880,3 +880,59 @@ remain locally usable, refreshed catalog/evidence/feed data stays in place, and
 the Worker may remain deployed but unused or be disabled separately.
 
 **V1.2.0 DEPLOYED AND LIVE-VERIFIED — SEARCH QUALITY AND TEAM MATCH UPDATE COMPLETE**
+
+## v1.2.1 post-release hardening
+
+The accepted Strong + Potential architecture was hardened without rerunning or
+modifying Phase 4C. Its three frozen evidence files retain SHA-256 values
+`d9ce6dcfb33c519df4fd4ef3e2d888a6fe1529e9faf71b934ee8dc130560ef12`,
+`0b72bf1ff40e33bcb8efe9330db7ec0466f2f3296d763b11b9c60df6a04c55f8`,
+and `ba96ee56ea66e6b9bae0b29488e7e30e0032558dd831535f8b9bfbede24cb0b7`.
+No new untouched-holdout claim is made.
+
+The scheduled release path now creates one atomic package spanning catalog,
+subtopics, semantic manifest, full vector binary, fixed model-space canaries,
+current/previous Worker allowlists, Team Match data, feeds, and evidence. A
+production generation cannot reuse prior passage vectors. The current
+1,659-passage generation uses one `voyage-4-lite` response model, one 1,024
+dimension, one float16 output contract, and model-space fingerprint
+`6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd`.
+All six canaries reproduced at cosine 1.0; the direct old/new vector comparison
+had minimum cosine 0.999962992 and mean 0.999999869.
+
+The hosted proxy now enforces separate embed/rerank rate limits, a global
+request limit, daily token budgets, exact current/previous corpus and
+model-space validation, and fail-closed missing configuration. It records only
+operational counters. Funding Finder and Team Match expose bounded, nontechnical
+fallback states while preserving local Strong/full-team results.
+
+Sort changes retain the Strong/Potential universe and sort within tiers.
+Currentness and filters constrain BM25, semantic top-k, fusion, and reranking
+before candidate truncation. Cache identity includes the semantic query,
+catalog/corpus, and substantive filters but excludes sort. Team Match derives a
+476-character generation ceiling from the shared 500-character client limit
+and uses phrase-boundary round robin without researcher names or publication
+text.
+
+The final spent/development run covered 52 queries and 65 required anchors.
+Strong reviewed precision was 1.000; combined Recall@10/20/50 was
+0.862/0.908/0.954 and nDCG@10 was 0.774. Cold first-use latency was 1.103
+seconds and warm p50/p95 was 0.636/0.812 seconds. It used 198 query-embedding
+tokens and 3,111,798 reranking tokens at a paid-equivalent estimate of
+$0.155594, with no errors, timeouts, or fallbacks. The full vector build used
+395,315 tokens at an estimate of $0.007906.
+
+Catalog correctness was hardened in the same bounded release: catalog records
+win normalized VPR/Cindy duplicates; allowlisted private-funder links can fill
+missing sponsor, description, eligibility, deadline, and amount fields while
+blocked pages preserve email data; Grants.gov 2076/2099 lifecycle sentinels are
+suppressed in both base and cached-detail paths; and narrow-card opportunity
+buttons use a concise wrapping label.
+
+Session evidence is in
+`evaluation/post_release_hardening_session1.json` through
+`evaluation/post_release_hardening_session4.json`. The complete operational
+design, rollback path, and live checklist are in
+`docs/POST_RELEASE_HARDENING.md`.
+
+**MODEL CONSISTENCY AND INTEGRATION GATES PASS — READY FOR HARDENING RELEASE**

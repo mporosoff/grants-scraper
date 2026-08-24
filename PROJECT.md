@@ -1,8 +1,8 @@
 # Funding Finder — Product Plan
 
-**Status:** Funding Finder v1.1.0 is live on `main`; P11 and the P1–P11 topic-layer release path are closed; MEAS-10 remains unperformed post-launch human validation
+**Status:** Funding Finder v1.2.1 hardening release candidate passes all local and spent-data gates; production deployment and protected-workflow verification are in progress
 
-**Next implementation phase:** Post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
+**Next implementation phase:** Complete the v1.2.1 live release and protected refresh proof, then return to post-launch operations and explicitly accepted follow-up work; do not treat MEAS-10, archive/search retention, topic-change feed events, or a SAM.gov adapter as completed or scheduled without their recorded human/product triggers
 
 **Canonical application:** https://mporosoff.github.io/grants-scraper/
 
@@ -10,7 +10,7 @@
 
 **Initial audience:** University of Rochester researchers, with a design that remains useful to any public user
 
-**Last updated:** August 21, 2026
+**Last updated:** August 24, 2026
 
 ---
 
@@ -26,7 +26,11 @@ The product answers three related questions:
 2. **Which of these are most relevant to my work?** Use deterministic keyword, profile, CV, ORCID-publication, and topic evidence first; optionally let AI rerank a bounded candidate set and answer follow-up questions.
 3. **What does this funding notice require?** Drop a NOFO/FOA PDF into the main search box, connect it to a matching catalog record when possible, and ask document-grounded questions with page references.
 
-The system must not make a model call for ordinary search. It must not hide the catalog behind an API key.
+Local Strong matching must not make a model call, and the catalog must never be
+hidden behind an API key. A non-empty query may automatically use the
+site-managed hosted semantic service for bounded Potential matching; that path
+must be disclosed, budgeted, fail closed, and never receive CV/profile text,
+researcher names, or full publication text.
 
 ---
 
@@ -282,6 +286,34 @@ bounded explanations and team-topic evidence, the normal-mode evaluation
 boundary, profile controls, and zero console errors. The highest issue number
 remained #31; the known JHU workbook 403 updated existing degraded-source issue
 #30, while generic failure issue #29 was untouched.
+
+### 2.8 v1.2.1 production hardening
+
+Catalog publication and hosted Potential matching are one release package.
+Every scheduled production refresh rebuilds all current public document
+vectors with one model contract, records a fixed-canary model-space
+fingerprint, generates a current/previous Worker allowlist, runs all product
+gates, deploys the compatibility Worker, and only then commits the complete
+package. A failed vector build, integrity check, Worker deployment, or live
+handshake leaves the prior live package authoritative.
+
+The Worker has separate per-client embed and rerank limits, a global request
+limit, daily token budgets, and a circuit breaker. It stores only operational
+counters and never raw queries, candidate passages, names, profile/CV/ORCID
+content, or publication text. Funding Finder distinguishes successful empty
+Potential matching from service, budget, rate, and package failures. Team Match
+retains local full-team ordering whenever enhanced ordering fails.
+
+Membership is determined by query, currentness, and filters; sort only orders
+within Strong and Potential tiers. Filter eligibility applies before BM25,
+semantic top-k, fusion, and reranking. Team Match derives its bounded aggregate
+query limit from the shared client contract and keeps every selected researcher
+represented where possible without adding names.
+
+The source pipeline also treats Grants.gov 2076/2099 dates as lifecycle
+sentinels, gives catalog records precedence over duplicate VPR/Cindy email
+records, enriches missing private-funder card fields from allowlisted public
+links when possible, and keeps opportunity actions concise on narrow cards.
 
 ---
 

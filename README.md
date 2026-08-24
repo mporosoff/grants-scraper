@@ -114,6 +114,16 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
+Funding Finder v1.2.1 hardens this hosted path as one coordinated release
+package. A catalog refresh now rebuilds every public semantic passage and
+vector, validates fixed embedding-space canaries, deploys a Worker that accepts
+only the current and immediately previous package, and publishes the generated
+assets only after all Python, browser, quality, and Worker-handshake gates pass.
+The Worker enforces separate embedding/reranking request limits, global request
+and daily-token ceilings, and a fail-closed circuit breaker. If enhanced search
+is unavailable, Strong matches and the local Team Match order remain usable and
+the page says that enhanced matching is temporarily unavailable.
+
 Match-quality controls include `not relevant`, `partial`, `useful`, `strong`,
 and `needs verification` labels with reason codes. After three graded ratings,
 an optional local preference model can prioritize future Relevance sorting.
@@ -142,7 +152,9 @@ DOE EERE Exchange are enabled. NASA NSPIRES and UR InfoReady remain disabled
 shells until stable public or permissioned routes exist. It publishes open
 posted and current forecasted records plus a compact BM25 search index to
 `data/opportunities.js`. Past deadlines are rejected for every source, and
-stale undated forecasts are excluded.
+stale undated forecasts are excluded. Grants.gov lifecycle placeholders such
+as 2076 and 2099 are never published as application deadlines; explicit
+"accepted anytime" notices are represented as rolling instead.
 
 An incremental second step enriches only new or changed records through the
 official Grants.gov `fetchOpportunity` detail API. It reconciles structured
@@ -173,6 +185,14 @@ DOE Exchange adapters publish only actual NOFOs, not RFIs, teaming notices, or
 notices of intent, and retain later submission rounds as structured deadlines.
 The source cache also preserves a first-seen date so undated external records
 can participate reliably in feeds and consent-based alerts.
+
+The VPR/Cindy email adapter normalizes NSF solicitation numbers and titles
+before merge, and the catalog record always wins when an email describes an
+opportunity already present in the main catalog. For allowlisted private
+funders, the scheduled refresh follows the supplied sponsor link and fills
+missing sponsor, description, eligibility, deadline, and award fields when the
+public page permits bounded automated retrieval. A blocked or unparseable page
+never removes fields already supplied by the email.
 
 After the final validated merge, `scripts/build_feeds.py` regenerates static
 Atom feeds under `feeds/`. They require no account, backend, or personal data.
@@ -230,6 +250,8 @@ support it.
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
 | `data/link_health.json` | Rotating official-link status, redirect, and last-check state |
+| `data/search-v2-release.json` | Atomic catalog/vector/model-space/Worker release handshake |
+| `data/search-v2-voyage-canaries.json` | Fixed public embedding-space canaries and fingerprint |
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
@@ -248,6 +270,8 @@ support it.
 | `scripts/summarize_phase3_reviews.py` | Private Phase 3 deployment-review aggregator |
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
 | `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
+| `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
+| `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |
