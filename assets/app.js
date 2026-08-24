@@ -203,6 +203,7 @@
   let childCatalog = null;
   let childSearchEngine = null;
   let hybridSearchClient = null;
+  let topicLayerAvailable = APP_CONFIG?.flags?.subtopics !== true;
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -1430,8 +1431,14 @@
     } else if (state.hybrid.fallbackCategory === "package_mismatch") {
       message = "Strong matches are shown. Broader Potential matching is unavailable while the search package updates.";
     } else if (state.hybrid.fallbackReason) {
-      message = "Strong matches are shown. Broader Potential matching is temporarily unavailable.";
-      retry = !["service_disabled", "service_unconfigured"].includes(state.hybrid.fallbackReason);
+      message = state.hybrid.fallbackReason === "topic_layer_unavailable"
+        ? "Strong matches are shown. Broader Potential matching needs the topic layer, which is temporarily unavailable."
+        : "Strong matches are shown. Broader Potential matching is temporarily unavailable.";
+      retry = ![
+        "service_disabled",
+        "service_unconfigured",
+        "topic_layer_unavailable",
+      ].includes(state.hybrid.fallbackReason);
     } else if (state.hybrid.active) {
       message = "Potential matching completed.";
     }
@@ -1847,7 +1854,9 @@
         scheduleHybridSearch(state.query);
       }
     } else if (APP_CONFIG?.flags?.searchV2 && state.query && !hybridSearchClient?.configured) {
-      state.hybrid.fallbackReason = "proxy_unconfigured";
+      state.hybrid.fallbackReason = topicLayerAvailable
+        ? "proxy_unconfigured"
+        : "topic_layer_unavailable";
       state.hybrid.fallbackCategory = "unavailable";
     }
     if (resetPage) state.page = 1;
@@ -4694,16 +4703,30 @@
         catalogRole: "parent",
       });
       if (APP_CONFIG?.flags?.subtopics) {
-        if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
-          throw new Error("The topic search helper did not load. Refresh the page and try again.");
+        try {
+          if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
+            throw new Error("The topic search helper did not load.");
+          }
+          const sidecar = await SUBTOPIC_API.loadSidecar();
+          childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
+          childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY, {
+            searchV2: APP_CONFIG?.flags?.searchV2 === true,
+            searchV2Config: SEARCH_V2_CONFIG,
+            catalogRole: "child",
+          });
+          topicLayerAvailable = true;
+        } catch (_topicError) {
+          childCatalog = null;
+          childSearchEngine = null;
+          hybridSearchClient = null;
+          topicLayerAvailable = false;
+          const topicWarning = $("topic-layer-warning");
+          if (topicWarning) {
+            topicWarning.textContent =
+              "Topic details and hosted Potential matching are temporarily unavailable. Parent-level Strong search, filters, saved opportunities, and exports still work.";
+            topicWarning.classList.remove("hidden");
+          }
         }
-        const sidecar = await SUBTOPIC_API.loadSidecar();
-        childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
-        childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY, {
-          searchV2: APP_CONFIG?.flags?.searchV2 === true,
-          searchV2Config: SEARCH_V2_CONFIG,
-          catalogRole: "child",
-        });
       }
       if (APP_CONFIG?.flags?.searchV2 && childCatalog && childSearchEngine) {
         hybridSearchClient = HYBRID_SEARCH_API.createClient({

@@ -262,6 +262,7 @@
   <div id="selected-terms" class="selected-terms"></div>
   <div id="themes" class="themes"></div>
   <p class="count" id="count"></p>
+  <div class="team-hybrid-status warning hide" id="team-topic-layer-status" role="status" aria-live="polite"></div>
   <div class="team-hybrid-status hide" id="team-hybrid-status" role="status" aria-live="polite"></div>
   <div id="view" class="result-list"></div>
 
@@ -1303,8 +1304,12 @@
         CHILD_CATALOG = RETRIEVAL_API.createChildCatalog(sidecar);
         CHILD_MATCH_ENGINE = MATCHER_API.create(CHILD_CATALOG, M || {}, SEARCH_API);
       } catch (error) {
-        $("view").innerHTML = '<div class="empty">Topic-aware team matching could not initialize. ' + esc(error && error.message || error) + "</div>";
-        return;
+        CHILD_CATALOG = null;
+        CHILD_MATCH_ENGINE = null;
+        HYBRID_SEARCH_CLIENT = null;
+        TEAM_HYBRID_COORDINATOR = null;
+        $("team-topic-layer-status").innerHTML = "<span>Topic details and enhanced ordering are temporarily unavailable. Parent-level team matching still works.</span>";
+        $("team-topic-layer-status").classList.remove("hide");
       }
     }
     if (

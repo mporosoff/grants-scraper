@@ -15,13 +15,13 @@
     "data/search-v2-voyage-manifest.json": "49e007c9054bac41fdec062f161d61ed0603a8738a5ae2730a58c351e514fefc",
     "data/search-v2-voyage-vectors.f16": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
     "data/search-v2-voyage-canaries.json": "8bf2a2cc1f830e65f27d68147b199e9fb93edf4be310ade2b55bfa19004632d5",
-    "assets/app.js": "d376812e7c1efa7b780469472eb294d8e46641ea8a9571727cd425ee2a3f4219",
+    "assets/app.js": "c8921b9b17520e21c53ad9c9a71e21ce6d5fb2d998788026a71b2b9f98df851c",
     "assets/search-hybrid.js": "72d83d69a9e82fc85380ff58226b57026389e35fb928147bbaa700c41bcc8790",
     "assets/search-retrieval.js": "c891369e2cb9a0c57026af27dc8b11897041053ed83f72e8b440a4d87fb244bd",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
-    "match_explorer.html": "0ef870b56dac73749c2097f330707528eeae414f76d7bafc7436e22fc83828dd",
-    "team_match.html": "aac58740a787538f786c6270121b675bd2df6af7b7d555fef1da922f40489b67",
-    "workers/search-voyage-proxy/src/index.js": "05b8d1b6990fda493d5bd2a166704ef994af4e646cda7ff913532be3876bb1f3",
+    "match_explorer.html": "338d51e0375a36541ab21d54e712faadadf3c73575cd9b6bb43dd560eb474804",
+    "team_match.html": "45045c3a6d7560e65ea1a1f1cf6569994c58d3d2071c3d384ef52c41397c519c",
+    "workers/search-voyage-proxy/src/index.js": "41b8962f8cc3c0e2b93e51ca1374591877f27159a63fbd9b6d9eba85f6bf0d77",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
   "atomic_publication_contract": "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist"

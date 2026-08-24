@@ -100,13 +100,13 @@ async function main() {
     throw new Error(`Current embed smoke failed with HTTP ${embed.status}.`);
   }
 
-  async function rerank(generation, includeFingerprint) {
+  async function rerank(generation) {
     const payload = {
       query: "catalysis",
       corpus_sha256: generation.corpus_sha256,
       candidates: [shared],
     };
-    if (includeFingerprint) {
+    if (generation.model_space_fingerprint) {
       payload.model_space_fingerprint = generation.model_space_fingerprint;
     }
     return requestJson(new URL("rerank", worker), {
@@ -116,8 +116,8 @@ async function main() {
     });
   }
 
-  const current = await rerank(allowlist.current, true);
-  const previous = await rerank(allowlist.previous, false);
+  const current = await rerank(allowlist.current);
+  const previous = await rerank(allowlist.previous);
   if (current.status !== 200 || current.body.rankings?.length !== 1) {
     throw new Error(`Current corpus rerank smoke failed with HTTP ${current.status}.`);
   }

@@ -10,6 +10,7 @@ const MAX_CANDIDATES = 300;
 const MAX_PASSAGE_CHARS = 3_000;
 const MAX_REQUEST_BYTES = 1_100_000;
 const PROVIDER_TIMEOUT_MS = 7_000;
+const RESERVATION_TTL_MS = 30_000;
 const QUERY_INSTRUCTION = "Rank public funding opportunities by whether their authoritative scientific or programmatic scope supports the complete research intent. Do not reward partial word overlap when a major query concept is absent.\n\nResearch query: <QUERY>";
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const BUDGET_COORDINATOR_NAME = "funding-finder-global-budget";
@@ -232,6 +233,49 @@ function emptyBudgetState(day) {
   };
 }
 
+function pruneExpiredReservations(state, now) {
+  let changed = false;
+  if (!state.reservations || typeof state.reservations !== "object"
+    || Array.isArray(state.reservations)) {
+    state.reservations = {};
+    changed = true;
+  }
+  Object.entries(state.reservations).forEach(([reservationId, reservation]) => {
+    if (!reservation || !["embed", "rerank"].includes(reservation.kind)
+      || !boundedInteger(reservation.amount)) {
+      delete state.reservations[reservationId];
+      changed = true;
+      return;
+    }
+    let createdAt = Number(reservation.created_at);
+    if (!Number.isFinite(createdAt) || createdAt <= 0 || createdAt > now) {
+      createdAt = now;
+      reservation.created_at = createdAt;
+      changed = true;
+    }
+    const declaredExpiry = Number(reservation.expires_at);
+    const expiresAt = Number.isFinite(declaredExpiry) && declaredExpiry > 0
+      ? Math.min(declaredExpiry, createdAt + RESERVATION_TTL_MS)
+      : createdAt + RESERVATION_TTL_MS;
+    if (reservation.expires_at !== expiresAt) {
+      reservation.expires_at = expiresAt;
+      changed = true;
+    }
+    if (expiresAt <= now) {
+      delete state.reservations[reservationId];
+      changed = true;
+    }
+  });
+  return changed;
+}
+
+function outstandingReservations(state) {
+  return Object.values(state.reservations || {}).reduce((totals, reservation) => {
+    totals[reservation.kind] += reservation.amount;
+    return totals;
+  }, { embed: 0, rerank: 0 });
+}
+
 function latencyBucket(latencyMs) {
   const index = LATENCY_BUCKETS_MS.findIndex(limit => latencyMs <= limit);
   return index < 0 ? LATENCY_BUCKETS_MS.length : index;
@@ -257,8 +301,9 @@ function internalJson(status, payload) {
 }
 
 export class SearchBudgetCoordinator {
-  constructor(ctx) {
+  constructor(ctx, { now = Date.now } = {}) {
     this.ctx = ctx;
+    this.now = now;
   }
 
   async fetch(request) {
@@ -277,9 +322,11 @@ export class SearchBudgetCoordinator {
     };
     if (!budgets.embed || !budgets.rerank) return internalJson(503, { error: "invalid_budget" });
 
-    const today = dayUtc();
+    const now = this.now();
+    const today = dayUtc(now);
     let state = await this.ctx.storage.get("daily");
     if (!state || state.day !== today) state = emptyBudgetState(today);
+    const pruned = pruneExpiredReservations(state, now);
     const metrics = state[kind];
     if (body.action === "rate_rejection") {
       metrics.rate_limit_rejections += 1;
@@ -287,11 +334,18 @@ export class SearchBudgetCoordinator {
       return internalJson(200, { recorded: true });
     }
     if (body.action === "status") {
+      const reservedTokens = outstandingReservations(state);
+      const boundedReservedTokens = {
+        embed: Math.min(reservedTokens.embed, budgets.embed),
+        rerank: Math.min(reservedTokens.rerank, budgets.rerank),
+      };
       const exhausted = ["embed", "rerank"].some(endpoint => (
-        state[endpoint].provider_input_tokens >= budgets[endpoint]
+        state[endpoint].provider_input_tokens + reservedTokens[endpoint] >= budgets[endpoint]
       ));
+      if (pruned) await this.ctx.storage.put("daily", state);
       return internalJson(200, {
         budget_state: exhausted ? "exhausted" : "available",
+        reserved_tokens: boundedReservedTokens,
         latency_ms: {
           embed: {
             p50: percentileFromHistogram(state.embed.latency_histogram, .5),
@@ -309,38 +363,51 @@ export class SearchBudgetCoordinator {
       const reservationId = typeof body.reservation_id === "string" && body.reservation_id.length <= 80
         ? body.reservation_id : "";
       if (!amount || !reservationId || state.reservations[reservationId]) {
+        if (pruned) await this.ctx.storage.put("daily", state);
         return internalJson(400, { error: "invalid_reservation" });
       }
-      const outstanding = Object.values(state.reservations)
-        .filter(item => item.kind === kind)
-        .reduce((sum, item) => sum + item.amount, 0);
+      const outstanding = outstandingReservations(state)[kind];
       if (metrics.provider_input_tokens + outstanding + amount > budgets[kind]) {
         metrics.budget_rejections += 1;
         await this.ctx.storage.put("daily", state);
         return internalJson(429, { error: "budget_exhausted" });
       }
-      state.reservations[reservationId] = { kind, amount };
+      state.reservations[reservationId] = {
+        kind,
+        amount,
+        created_at: now,
+        expires_at: now + RESERVATION_TTL_MS,
+      };
       await this.ctx.storage.put("daily", state);
       return internalJson(200, { reserved: true });
     }
+    if (!["provider_failure", "settle"].includes(body.action)) {
+      if (pruned) await this.ctx.storage.put("daily", state);
+      return internalJson(400, { error: "invalid_action" });
+    }
     const reservation = state.reservations[body.reservation_id];
-    if (!reservation || reservation.kind !== kind) return internalJson(409, { error: "unknown_reservation" });
+    if (!reservation || reservation.kind !== kind) {
+      if (pruned) await this.ctx.storage.put("daily", state);
+      return internalJson(409, { error: "unknown_reservation" });
+    }
     delete state.reservations[body.reservation_id];
     if (body.action === "provider_failure") {
       metrics.provider_failures += 1;
       await this.ctx.storage.put("daily", state);
       return internalJson(200, { recorded: true });
     }
-    if (body.action !== "settle") return internalJson(400, { error: "invalid_action" });
     const actualTokens = boundedInteger(body.actual_tokens, { minimum: 0 }) ?? 0;
     const latencyMs = Math.max(0, Number(body.latency_ms) || 0);
     metrics.requests += 1;
     metrics.provider_input_tokens += actualTokens;
     metrics.latency_histogram[latencyBucket(latencyMs)] += 1;
+    const outstanding = outstandingReservations(state)[kind];
     await this.ctx.storage.put("daily", state);
     return internalJson(200, {
       recorded: true,
-      budget_state: metrics.provider_input_tokens >= budgets[kind] ? "exhausted" : "available",
+      budget_state: metrics.provider_input_tokens + outstanding >= budgets[kind]
+        ? "exhausted"
+        : "available",
     });
   }
 }
@@ -440,6 +507,7 @@ export function createHandler({ fetchImpl = fetch, allowlist = corpusAllowlist }
           model_space_fingerprint: allowlist?.current?.model_space_fingerprint || "",
           previous_corpus_supported: Boolean(allowlist?.previous),
           budget_state: "unavailable",
+          reserved_tokens: { embed: 0, rerank: 0 },
         });
       }
       const status = await budgetCall(env, budgetPayload(config, { action: "status", kind: "embed" }))
@@ -450,6 +518,9 @@ export function createHandler({ fetchImpl = fetch, allowlist = corpusAllowlist }
         model_space_fingerprint: allowlist.current.model_space_fingerprint || "",
         previous_corpus_supported: Boolean(allowlist.previous),
         budget_state: status.ok ? status.body.budget_state : "unavailable",
+        reserved_tokens: status.ok
+          ? status.body.reserved_tokens
+          : { embed: 0, rerank: 0 },
       });
     }
     if (request.method !== "POST") return error(origin, 405, "method_not_allowed");
