@@ -154,13 +154,26 @@ jobs:
         run: |
           candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
           candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
-          health="$(curl --fail --silent --show-error --max-time 15 \
-            -H 'Origin: https://mporosoff.github.io' \
-            'https://funding-finder-voyage-search.urochestercheme.workers.dev/health')"
-          test "$(jq -r '.service' <<<"$health")" = "available"
-          test "$(jq -r '.budget_state' <<<"$health")" = "available"
-          test "$(jq -r '.corpus_sha256' <<<"$health")" = "$candidate_sha"
-          test "$(jq -r '.model_space_fingerprint' <<<"$health")" = "$candidate_fingerprint"
+          health=""
+          for attempt in {1..12}; do
+            health="$(curl --fail --silent --show-error --max-time 10 \
+              -H 'Origin: https://mporosoff.github.io' \
+              'https://funding-finder-voyage-search.urochestercheme.workers.dev/health' || true)"
+            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.budget_state // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.corpus_sha256 // empty' <<<"$health" 2>/dev/null)" = "$candidate_sha" \
+              && test "$(jq -r '.model_space_fingerprint // empty' <<<"$health" 2>/dev/null)" = "$candidate_fingerprint"; then
+              echo "Worker candidate handshake passed on attempt ${attempt}."
+              exit 0
+            fi
+            echo "Worker candidate generation is still propagating (attempt ${attempt}/12)."
+            sleep 5
+          done
+          echo "Expected corpus: $candidate_sha" >&2
+          echo "Observed corpus: $(jq -r '.corpus_sha256 // "unavailable"' <<<"$health" 2>/dev/null)" >&2
+          echo "Expected model fingerprint: $candidate_fingerprint" >&2
+          echo "Observed model fingerprint: $(jq -r '.model_space_fingerprint // "unavailable"' <<<"$health" 2>/dev/null)" >&2
+          exit 1
       - name: Record the build heartbeat
         shell: bash
         # Scheduled workflows are disabled after 60 days without repository
