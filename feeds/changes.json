@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T11:49:25Z",
+  "generated_at": "2026-08-24T17:53:05Z",
   "retention_days": 90,
   "events": [
     {
       "id": "5c56154f177eeb5e9dec",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-24T11:42:39.525172Z",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
       "opportunity_id": "363589",
       "detail": "Deadline 2026-09-23",
       "record": {
@@ -48,7 +48,7 @@
       "id": "3b8531dc8b0bb4e18288",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-24T11:42:39.525172Z",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
       "opportunity_id": "363584",
       "detail": "Deadline 2026-09-23",
       "record": {
@@ -90,7 +90,7 @@
       "id": "2a8671ed5ca13a813ce8",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-24T11:42:39.525172Z",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
       "opportunity_id": "nyserda:PON6121",
       "detail": "Deadline 2026-09-23",
       "record": {
@@ -124,7 +124,7 @@
       "id": "2718d16607d4b5b173e9",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-24T11:42:39.525172Z",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
       "opportunity_id": "363223",
       "detail": "Deadline 2026-09-23",
       "record": {
@@ -161,10 +161,43 @@
       "deadline": "2026-09-23"
     },
     {
+      "id": "23f43714baae76db1dec",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
+      "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-dda9003b9def7103",
+        "opportunity_number": null,
+        "title": "NY THRIVE",
+        "agency": "NY SMART I-Corridor",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Manufacturing",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 50000,
+        "detail_page": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
+        "funding_opportunity_url": "https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/",
+        "primary_document_url": null
+      }
+    },
+    {
       "id": "03a0ae9c812b237023af",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-08-24T11:42:39.525172Z",
+      "changed_at": "2026-08-24T17:45:54.343876Z",
       "opportunity_id": "363587",
       "detail": "Deadline 2026-09-23",
       "record": {

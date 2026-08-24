@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-08-24T11:49:17Z</updated>
+  <updated>2026-08-24T17:52:55Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
@@ -184,15 +184,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
-    <title>NY THRIVE</title>
-    <link href="https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dda9003b9def7103</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>NY SMART I-Corridor</name></author>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>NY SMART I-Corridor | Posted | The Tech Hub Resources &amp; Innovation Vouchers for Enterprises (NY THRIVE) program supports businesses in commercializing new technologies by offering innovation vouchers. These vouchers can be used to access advanced facilities, specialized equipment, maker spaces, and research assistance provided by participating universities, nonprofit organizations, and companies across the region. NY THRIVE is …</summary>
   </entry>
 </feed>

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "current": {
-    "corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
+    "corpus_sha256": "11aace1f8f905ae052367f97811c1746e6a0437a776b91f97a7d3fa04db11e47",
     "model": "voyage-4-lite",
     "dimension": 1024,
     "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
@@ -9,8 +9,8 @@
     "input_type": "document",
     "source_output_dtype": "float",
     "vector_dtype": "float16-le",
-    "published_at": "2026-08-24T17:35:32.876Z",
-    "passage_count": 1670,
+    "published_at": "2026-08-24T17:53:17.377Z",
+    "passage_count": 1669,
     "passages": [
       {
         "passage_id": "child:344592:ab-0001",
@@ -6677,10 +6677,6 @@
         "text_sha256": "fe9555977faac83bd11798509c90bbebe9e1bf94574f1929c7d41cdc3af322ac"
       },
       {
-        "passage_id": "parent:vpr-email:vpr-dda9003b9def7103",
-        "text_sha256": "9a31fde4f35717b823d912d8cd3e4a2f8d10ce246f672f1232f8af85e5884763"
-      },
-      {
         "passage_id": "parent:vpr-email:vpr-e1612e2acba631d2",
         "text_sha256": "7a31b2d2cd56519ab710c2c0f529ef4c7c68cf33441fb52ca5236fe94c941553"
       },
@@ -6695,7 +6691,7 @@
     ]
   },
   "previous": {
-    "corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
+    "corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
     "model": "voyage-4-lite",
     "dimension": 1024,
     "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
@@ -6703,7 +6699,7 @@
     "input_type": "document",
     "source_output_dtype": "float",
     "vector_dtype": "float16-le",
-    "published_at": "2026-08-24T10:54:18.651Z",
+    "published_at": "2026-08-24T17:35:32.876Z",
     "passage_count": 1670,
     "passages": [
       {
@@ -6724,7 +6720,7 @@
       },
       {
         "passage_id": "child:344592:ab-0006",
-        "text_sha256": "2f5a36039e0813a7e4c195210a8c468ae0ed7a120b8be47eb5b4b2ea56251461"
+        "text_sha256": "130b41c900c90bf127ffae9ae382244cb66cca3ec8c882d8d7a41d04de536f86"
       },
       {
         "passage_id": "child:344592:ab-0007",

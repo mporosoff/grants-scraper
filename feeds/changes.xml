@@ -4,13 +4,13 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-24T11:49:25Z</updated>
+  <updated>2026-08-24T17:53:05Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Closing soon: BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program</title>
     <link href="https://www.grants.gov/search-results-detail/363589"/>
     <id>urn:funding-finder:change:5c56154f177eeb5e9dec</id>
-    <updated>2026-08-24T11:42:39.525172Z</updated>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -18,7 +18,7 @@
     <title>Closing soon: BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program</title>
     <link href="https://www.grants.gov/search-results-detail/363584"/>
     <id>urn:funding-finder:change:3b8531dc8b0bb4e18288</id>
-    <updated>2026-08-24T11:42:39.525172Z</updated>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -26,7 +26,7 @@
     <title>Closing soon: Clean Energy Career Pathways Training</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU"/>
     <id>urn:funding-finder:change:2a8671ed5ca13a813ce8</id>
-    <updated>2026-08-24T11:42:39.525172Z</updated>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -34,15 +34,23 @@
     <title>Closing soon: FY27 Brownfields Job Training (JT) Grants</title>
     <link href="https://www.grants.gov/search-results-detail/363223"/>
     <id>urn:funding-finder:change:2718d16607d4b5b173e9</id>
-    <updated>2026-08-24T11:42:39.525172Z</updated>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NY THRIVE</title>
+    <link href="https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/"/>
+    <id>urn:funding-finder:change:23f43714baae76db1dec</id>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
     <title>Closing soon: BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy</title>
     <link href="https://www.grants.gov/search-results-detail/363587"/>
     <id>urn:funding-finder:change:03a0ae9c812b237023af</id>
-    <updated>2026-08-24T11:42:39.525172Z</updated>
+    <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -1597,13 +1605,5 @@
     <updated>2026-08-21T16:38:03.218829Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY26 National Dam Safety Program State Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363603"/>
-    <id>urn:funding-finder:change:6b832a6fa91e7746bff5</id>
-    <updated>2026-08-21T16:38:03.218829Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
   </entry>
 </feed>
