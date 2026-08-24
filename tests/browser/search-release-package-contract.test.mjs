@@ -118,6 +118,13 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   assert.match(workflow, /built_from_sha="\$\(git rev-parse HEAD\)"/);
   assert.match(workflow, /current_main_sha="\$\(git ls-remote origin refs\/heads\/main/);
   assert.match(workflow, /refusing to deploy stale Worker or Pages assets/);
+  assert.match(workflow, /pull-requests: write/);
+  assert.match(workflow, /statuses: write/);
+  assert.match(workflow, /gh api --method POST "repos\/\$\{GITHUB_REPOSITORY\}\/statuses\/\$\{head_sha\}"/);
+  assert.match(workflow, /-f context=python/);
+  assert.match(workflow, /-f context=browser/);
+  assert.match(workflow, /gh pr create/);
+  assert.match(workflow, /gh pr merge "\$pr_url" --squash --delete-branch/);
   assert.doesNotMatch(
     workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),
     /continue-on-error:\s*true/,

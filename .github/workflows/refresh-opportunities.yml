@@ -27,6 +27,8 @@ on:
 permissions:
   contents: write
   issues: write
+  pull-requests: write
+  statuses: write
 
 concurrency:
   group: grants-gov-opportunity-refresh
@@ -201,8 +203,11 @@ jobs:
         # anywhere. Writing this unconditionally guarantees one commit per
         # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md §16.3.
         run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last_build
-      - name: Commit refreshed catalog
+      - name: Commit refreshed catalog through pull request
+        id: publish-pr
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -217,26 +222,39 @@ jobs:
             git add data/subtopics.js
           fi
           if git diff --cached --quiet; then
-            echo "The generated catalog is unchanged."
-          else
-            git commit -m "chore: refresh Grants.gov catalog"
-            # Rebase onto any commit that landed while this run was building, then
-            # push. Retry a few times so a concurrent push can't drop the refresh.
-            pushed=false
-            for attempt in 1 2 3 4 5; do
-              if git pull --rebase --autostash origin "${GITHUB_REF_NAME:-main}" && git push; then
-                pushed=true
-                break
-              fi
-              git rebase --abort 2>/dev/null || true
-              echo "Rebase/push attempt ${attempt} failed; retrying in 5s..."
-              sleep 5
-            done
-            if [ "$pushed" != "true" ]; then
-              echo "::error::Could not push the refreshed catalog after retries."
-              exit 1
-            fi
+            echo "::error::The build heartbeat should make every successful refresh publishable."
+            exit 1
           fi
+          git commit -m "chore: refresh Grants.gov catalog"
+          refresh_branch="automation/refresh-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git branch -M "$refresh_branch"
+          git push origin "HEAD:refs/heads/${refresh_branch}"
+
+          head_sha="$(git rev-parse HEAD)"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${head_sha}" \
+            -f state=success \
+            -f context=python \
+            -f description='Refresh Python gate passed' \
+            -f target_url="$run_url"
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${head_sha}" \
+            -f state=success \
+            -f context=browser \
+            -f description='Refresh browser/search gate passed' \
+            -f target_url="$run_url"
+
+          pr_url="$(gh pr create \
+            --base main \
+            --head "$refresh_branch" \
+            --title 'chore: refresh Grants.gov catalog' \
+            --body "Automated coordinated refresh from [run ${GITHUB_RUN_ID}](${run_url}). The exact generated commit passed the complete Python, browser, search-quality, Worker, and stale-generation gates before this pull request was created.")"
+          gh pr merge "$pr_url" --squash --delete-branch
+          merge_sha="$(gh pr view "$pr_url" --json mergeCommit --jq '.mergeCommit.oid')"
+          if [ -z "$merge_sha" ] || [ "$merge_sha" = "null" ]; then
+            echo "::error::The refresh pull request did not produce a main-branch merge commit."
+            exit 1
+          fi
+          echo "merge_sha=$merge_sha" >> "$GITHUB_OUTPUT"
       - name: Verify GitHub Pages serves the coordinated search package
         id: pages-verify
         if: success()
