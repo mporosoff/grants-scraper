@@ -4,13 +4,13 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-24T17:53:05Z</updated>
+  <updated>2026-08-24T19:26:49Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Closing soon: BJA FY 2026 Harold Rogers Prescription Drug Monitoring Program</title>
     <link href="https://www.grants.gov/search-results-detail/363589"/>
     <id>urn:funding-finder:change:5c56154f177eeb5e9dec</id>
-    <updated>2026-08-24T17:45:54.343876Z</updated>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -18,15 +18,23 @@
     <title>Closing soon: BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program</title>
     <link href="https://www.grants.gov/search-results-detail/363584"/>
     <id>urn:funding-finder:change:3b8531dc8b0bb4e18288</id>
-    <updated>2026-08-24T17:45:54.343876Z</updated>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000yipTDAAY"/>
+    <id>urn:funding-finder:change:333d6e187d53c6430c88</id>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
   </entry>
   <entry>
     <title>Closing soon: Clean Energy Career Pathways Training</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr000012uHhNAAU"/>
     <id>urn:funding-finder:change:2a8671ed5ca13a813ce8</id>
-    <updated>2026-08-24T17:45:54.343876Z</updated>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -34,7 +42,15 @@
     <title>Closing soon: FY27 Brownfields Job Training (JT) Grants</title>
     <link href="https://www.grants.gov/search-results-detail/363223"/>
     <id>urn:funding-finder:change:2718d16607d4b5b173e9</id>
-    <updated>2026-08-24T17:45:54.343876Z</updated>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-23</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy</title>
+    <link href="https://www.grants.gov/search-results-detail/363587"/>
+    <id>urn:funding-finder:change:03a0ae9c812b237023af</id>
+    <updated>2026-08-24T19:19:17.753608Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-09-23</summary>
   </entry>
@@ -45,14 +61,6 @@
     <updated>2026-08-24T17:45:54.343876Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Intellectual Property Enforcement Program: Protecting Public Health, Safety, and the Economy from Counterfeit Goods and Product Piracy</title>
-    <link href="https://www.grants.gov/search-results-detail/363587"/>
-    <id>urn:funding-finder:change:03a0ae9c812b237023af</id>
-    <updated>2026-08-24T17:45:54.343876Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
   </entry>
   <entry>
     <title>Closed or removed: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
@@ -1597,13 +1605,5 @@
     <updated>2026-08-21T16:38:03.218829Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Limited Competition: Social, Behavioral, &amp; Economic (SBE) Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360159"/>
-    <id>urn:funding-finder:change:6c90b1fec23eaffc7944</id>
-    <updated>2026-08-21T16:38:03.218829Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
   </entry>
 </feed>

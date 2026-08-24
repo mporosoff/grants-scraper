@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-24T17:52:55Z</updated>
+  <updated>2026-08-24T19:26:40Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Energy-Focused Air Quality and Health Effects Research</title>
@@ -32,15 +32,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA | Closes 2026-10-21 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
-  </entry>
-  <entry>
-    <title>Net-Zero Resilience Preparation for Municipal and Rural Electric Providers</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000yipTDAAY"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFP6129</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Climate change"/>
-    <summary>NYSERDA | Closes 2026-08-24 | Municipal electric utilities and rural electric cooperatives across New York State play a critical role in the areas they cover. The combined dynamics of a changing climate and the effects of decarbonization present a set of new operating considerations to continue to provide resilient and reliable services. Through RFP 6129, NYSERDA seeks to support the rapid decarbonization and increased resilie…</summary>
   </entry>
   <entry>
     <title>New York State Clean Energy Internship Program</title>
