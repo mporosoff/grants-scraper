@@ -231,6 +231,7 @@ test("forged CORS headers cannot bypass endpoint rate limits", async () => {
   }), env);
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("Retry-After"), "10");
+  assert.equal(response.headers.get("Access-Control-Expose-Headers"), "Retry-After");
   assert.deepEqual(await response.json(), { error: { code: "rate_limited" } });
   assert.equal(providerCalls, 0);
 });
@@ -245,6 +246,7 @@ test("daily token exhaustion fails closed before calling Voyage", async () => {
   const response = await handler(request("/embed-query", { query: "test" }), env);
   assert.equal(response.status, 429);
   assert.equal(response.headers.get("Retry-After"), "10");
+  assert.equal(response.headers.get("Access-Control-Expose-Headers"), "Retry-After");
   assert.deepEqual(await response.json(), { error: { code: "budget_limited" } });
   assert.equal(providerCalls, 0);
 });

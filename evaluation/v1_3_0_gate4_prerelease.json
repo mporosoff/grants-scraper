@@ -2,6 +2,7 @@
   "schema_version": 1,
   "artifact": "Funding Finder v1.3.0 Gate 4 pre-release",
   "generated_at": "2026-08-24T17:08:03.7261951Z",
+  "last_updated_at": "2026-08-24T17:36:01.9254903Z",
   "decision": "passed",
   "release_version": "1.3.0",
   "repository": "mporosoff/grants-scraper",
@@ -88,12 +89,19 @@
     "mean_canary_cosine": 1,
     "api_key_printed_or_persisted": false
   },
+  "gate4_release_vector_work_total": {
+    "full_production_rebuilds": 2,
+    "reason": "The final generation was repeated after the review-driven Worker package fix so the complete release-package generation order remained explicit and used no reused vectors.",
+    "api_request_count": 16,
+    "usage_total_tokens": 800676,
+    "estimated_cost_at_published_paid_pricing_usd": 0.016014
+  },
   "package": {
     "current_corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
     "previous_corpus_sha256": "4d8e00a7ab09ec6a0cac285b4eca84d175c362d6062309712fc13c79d7e01053",
     "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
     "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
-    "worker_allowlist_sha256": "91f5b7940a04afd562eb09cd47cbd64899b901842054d6244daef7e39f1b2df7",
+    "worker_allowlist_sha256": "70b4e481aa03d9def44f0839d0693acfd1726108a19675bafd0434dd0f35b078",
     "passage_count": 1670,
     "file_sha256": {
       "assets/app.js": "0c89b335995341686683df679f9ccdc8d623274595cd6bddf81711bd7c8361e6",
@@ -103,10 +111,12 @@
       "assets/match-explain.js": "4acabacc9a56527feaff3ba62e1797452c7f2a7794a02b1f4ec0183810c2fff1",
       "data/opportunities.js": "2622e411988ebc8101aa1a3aa85bb2bbd749210a807823e9a228f864226b90db",
       "data/subtopics.js": "1afeb40d31c174de962a40b48cb337354fcfa37e0a19127145489e9196b43919",
-      "data/search-v2-voyage-manifest.json": "f6c7e9fd6a769215fdf90651ab6e8104da674f6cec2944786c72d065f4fcdb2b",
+      "data/search-v2-voyage-manifest.json": "4af944a384aea26a81ab11f50a61c7fdefc528741baec4df34ec6af0438a6c45",
       "data/search-v2-voyage-vectors.f16": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
-      "data/search-v2-release.json": "afebc3732eaa75a4e65b165b59680f3051fd5e1101a2b0cfb8b7cdb84c22ee78",
-      "workers/search-voyage-proxy/generated/corpus-allowlist.json": "91f5b7940a04afd562eb09cd47cbd64899b901842054d6244daef7e39f1b2df7"
+      "data/search-v2-voyage-canaries.json": "bacf6a410827aa2c86ee6d424425a2263fa7997481ad42312196d4e0ac0be7b4",
+      "data/search-v2-release.json": "c1dcfc96df1611cf9a2226e2208381d0925bbadb9f4cf1590d75484fa96a4795",
+      "workers/search-voyage-proxy/generated/corpus-allowlist.json": "70b4e481aa03d9def44f0839d0693acfd1726108a19675bafd0434dd0f35b078",
+      "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d"
     }
   },
   "phase4c": {
