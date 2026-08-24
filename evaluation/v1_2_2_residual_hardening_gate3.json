@@ -56,6 +56,14 @@
       "tests": 240,
       "status": "passed"
     },
+    "flag_off_no_drift": {
+      "command": "bash tools/verify_no_drift.sh",
+      "intentional_fingerprint_updates": [
+        "opportunities.js"
+      ],
+      "unrelated_artifact_fingerprint_updates": 0,
+      "status": "passed"
+    },
     "payload_contracts": {
       "note_omission_requires_exact_citation_quote": true,
       "render_fallback_to_quote": true,
