@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-24T11:49:17Z</updated>
+  <updated>2026-08-24T17:52:55Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -382,16 +382,6 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
-    <title>NY THRIVE</title>
-    <link href="https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dda9003b9def7103</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>NY SMART I-Corridor</name></author>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>NY SMART I-Corridor | Posted | The Tech Hub Resources &amp; Innovation Vouchers for Enterprises (NY THRIVE) program supports businesses in commercializing new technologies by offering innovation vouchers. These vouchers can be used to access advanced facilities, specialized equipment, maker spaces, and research assistance provided by participating universities, nonprofit organizations, and companies across the region. NY THRIVE is …</summary>
-  </entry>
-  <entry>
     <title>Project Constellation: Building a Constellation of Outer Space Partners at the UN</title>
     <link href="https://www.grants.gov/search-results-detail/363470"/>
     <id>urn:funding-finder:grants-gov:363470</id>
@@ -674,5 +664,21 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
+  </entry>
+  <entry>
+    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
+    <link href="https://www.grants.gov/search-results-detail/362900"/>
+    <id>urn:funding-finder:grants-gov:362900</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>U.S. Mission to Indonesia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Data science"/>
+    <category term="Energy"/>
+    <category term="Materials science"/>
+    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
 </feed>

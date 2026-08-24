@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T17:35:32.876Z",
+  "generated_at": "2026-08-24T17:53:17.377Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",
@@ -9,12 +9,12 @@
   "dimension": 1024,
   "dtype": "float16-le",
   "byte_order": "little-endian",
-  "passage_count": 1670,
-  "parent_passage_count": 1434,
+  "passage_count": 1669,
+  "parent_passage_count": 1433,
   "child_passage_count": 236,
-  "corpus_sha256": "491be3661afd0203d4f4e47fda2a20e7c4cac360b09e88b6b0514dd212281fc4",
-  "vector_sha256": "41a9e61e1aab34731b4d189e5254910fac06d3b140333585031b129561d54712",
-  "vector_bytes": 3420160,
+  "corpus_sha256": "11aace1f8f905ae052367f97811c1746e6a0437a776b91f97a7d3fa04db11e47",
+  "vector_sha256": "634965528a4b92835bf12173d526e5e51a42136f912a23c555a769784e206ab1",
+  "vector_bytes": 3418112,
   "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
   "model_space": {
     "canary_set_version": 1,
@@ -13370,20 +13370,12 @@
       "vector_row": 1665
     },
     {
-      "passage_id": "parent:vpr-email:vpr-dda9003b9def7103",
-      "parent_id": "vpr-email:vpr-dda9003b9def7103",
-      "passage_kind": "parent",
-      "record_id": "vpr-email:vpr-dda9003b9def7103",
-      "text_sha256": "9a31fde4f35717b823d912d8cd3e4a2f8d10ce246f672f1232f8af85e5884763",
-      "vector_row": 1666
-    },
-    {
       "passage_id": "parent:vpr-email:vpr-e1612e2acba631d2",
       "parent_id": "vpr-email:vpr-e1612e2acba631d2",
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-e1612e2acba631d2",
       "text_sha256": "7a31b2d2cd56519ab710c2c0f529ef4c7c68cf33441fb52ca5236fe94c941553",
-      "vector_row": 1667
+      "vector_row": 1666
     },
     {
       "passage_id": "parent:vpr-email:vpr-e4ce54abf9b529bf",
@@ -13391,7 +13383,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-e4ce54abf9b529bf",
       "text_sha256": "930064815003d8a5422ef84accc761bbc820fae9bb22ed011550ec002fed6a49",
-      "vector_row": 1668
+      "vector_row": 1667
     },
     {
       "passage_id": "parent:vpr-email:vpr-f068b41ca38718f9",
@@ -13399,7 +13391,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-f068b41ca38718f9",
       "text_sha256": "d95566daf301f3eaace1d2de78577a02d436068faed4f507fcf1f390630b96c4",
-      "vector_row": 1669
+      "vector_row": 1668
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-24T11:49:17Z",
+  "generated_at": "2026-08-24T17:52:55Z",
   "excluded_noncurrent": 7,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1450
+      "count": 1449
     },
     {
       "title": "Funding Finder | Federal",
@@ -15,7 +15,7 @@
     {
       "title": "Funding Finder | Internal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml",
-      "count": 21
+      "count": 20
     },
     {
       "title": "Funding Finder | State",
@@ -105,7 +105,7 @@
     {
       "title": "Funding Finder | Manufacturing",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml",
-      "count": 74
+      "count": 73
     },
     {
       "title": "Funding Finder | Materials science",
@@ -145,7 +145,7 @@
     {
       "title": "Funding Finder | Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 177
+      "count": 176
     },
     {
       "title": "Funding Finder | Transportation",
