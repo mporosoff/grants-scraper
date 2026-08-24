@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-23T21:32:08Z</updated>
+  <updated>2026-08-24T10:53:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -98,6 +98,21 @@
     <category term="Infectious disease"/>
     <category term="Cybersecurity"/>
     <summary>Centers for Disease Control-GHC | Closes 2026-10-16 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $500,000 for Year 1, subject to the availability of funds. This NOFO provides operational support through financial and technical resources to the Ghana Health Service (GHS)/Ministry of Health (MoH). The goal is to help them coordinate and improve laboratory capacity so they can deliver hig…</summary>
+  </entry>
+  <entry>
+    <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
+    <link href="https://www.grants.gov/search-results-detail/363612"/>
+    <id>urn:funding-finder:grants-gov:363612</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
   </entry>
   <entry>
     <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
@@ -705,18 +720,5 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
-  </entry>
-  <entry>
-    <title>Blueprint MedTech Translator (UG3/UH3 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358823"/>
-    <id>urn:funding-finder:grants-gov:358823</id>
-    <updated>2025-06-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
 </feed>

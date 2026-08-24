@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-23T21:32:08Z</updated>
+  <updated>2026-08-24T10:53:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -390,14 +390,31 @@
     <summary>National Institutes of Health | Closes 2026-10-15 | This Notice of Funding Opportunity (NOFO) solicits applications that propose to conduct time-sensitive ancillary studies in conjunction with privately or publicly funded, active, ongoing clinical projects (parent projects). The parent project can be an interventional clinical trial, or a clinical study such as an observational study, or a disease-specific repository that will be actively collectin…</summary>
   </entry>
   <entry>
-    <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
-    <link href="https://www.grants.gov/search-results-detail/363612"/>
-    <id>urn:funding-finder:grants-gov:363612</id>
+    <title>Core Research in Biological Sciences (BIO Core)</title>
+    <link href="https://www.grants.gov/search-results-detail/363615"/>
+    <id>urn:funding-finder:grants-gov:363615</id>
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-17 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
+  </entry>
+  <entry>
+    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
+    <link href="https://www.grants.gov/search-results-detail/363616"/>
+    <id>urn:funding-finder:grants-gov:363616</id>
+    <updated>2026-08-17T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
@@ -413,26 +430,22 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
-    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
-    <link href="https://www.grants.gov/search-results-detail/363616"/>
-    <id>urn:funding-finder:grants-gov:363616</id>
+    <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
+    <link href="https://www.grants.gov/search-results-detail/363612"/>
+    <id>urn:funding-finder:grants-gov:363612</id>
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-19 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
-  </entry>
-  <entry>
-    <title>Core Research in Biological Sciences (BIO Core)</title>
-    <link href="https://www.grants.gov/search-results-detail/363615"/>
-    <id>urn:funding-finder:grants-gov:363615</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-21 | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
   </entry>
   <entry>
     <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>

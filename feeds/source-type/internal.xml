@@ -4,8 +4,16 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-08-23T21:32:08Z</updated>
+  <updated>2026-08-24T10:53:47Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
+    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
+    <updated>2026-08-23T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
   <entry>
     <title>W. M. KECK Foundation Research Program</title>
     <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
@@ -44,17 +52,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
     <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-30</summary>
-  </entry>
-  <entry>
-    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
-    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dadbe58144e6e089</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-09</summary>
+    <author><name>Simons Foundation</name></author>
+    <summary>Simons Foundation | Closes 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
     <title>PumpPrimer II Program for SAS and Hajim Tenure-track faculty</title>
@@ -69,24 +68,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
     <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-29</summary>
-  </entry>
-  <entry>
-    <title>NSF Plasma Physics</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-16</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ea71d76309a706c1</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <author><name>Simons Foundation</name></author>
+    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
     <title>NSF DCL Advancing Artificial Intelligence (AI) Agent Ecosystems through the National Science Foundation Pathways to Enable Secure Open-Source Ecosystems (NSF PESOSE) Program | NSF 26-015</title>
@@ -97,14 +80,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-01</summary>
-  </entry>
-  <entry>
-    <title>NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
-    <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-c3bbadc4b31b4e1c</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-10</summary>
   </entry>
   <entry>
     <title>Schmidt Sciences</title>
@@ -119,16 +94,16 @@ we will not consider for support include Covid-19 relat…</summary>
     <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-167136617b79dc5d</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-14</summary>
+    <author><name>American Chemical Society Petroleum Research Fund</name></author>
+    <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
   </entry>
   <entry>
     <title>American Chemical Society, petroleum Research Fund New Directions (ND) Grants</title>
     <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4ce54abf9b529bf</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-14</summary>
+    <author><name>American Chemical Society Petroleum Research Fund</name></author>
+    <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
   </entry>
   <entry>
     <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
@@ -143,8 +118,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <link href="http://www.sloan.org/sloan-research-fellowships/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15 | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
+    <author><name>Alfred P. Sloan Foundation</name></author>
+    <summary>Alfred P. Sloan Foundation | Closes 2026-09-15 | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
 Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
   <entry>
@@ -152,25 +127,8 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <link href="https://www.sony.com/en/SonyInfo/research-award-program/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-122b30a8725e40bf</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-511</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
-  </entry>
-  <entry>
-    <title>NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
-    <link href="https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-512</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
+    <author><name>Sony Research</name></author>
+    <summary>Sony Research | Closes 2026-09-15</summary>
   </entry>
   <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
@@ -208,8 +166,8 @@ a high level of innovation and creativity. The goal is to support the best young
     <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e1612e2acba631d2</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <author><name>American Chemical Society Petroleum Research Fund</name></author>
+    <summary>American Chemical Society Petroleum Research Fund | Posted</summary>
   </entry>
   <entry>
     <title>NIH https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities New PA posted June 1, 2026.</title>
@@ -232,7 +190,9 @@ a high level of innovation and creativity. The goal is to support the best young
     <link href="https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dda9003b9def7103</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <author><name>NY SMART I-Corridor</name></author>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>NY SMART I-Corridor | Posted | The Tech Hub Resources &amp; Innovation Vouchers for Enterprises (NY THRIVE) program supports businesses in commercializing new technologies by offering innovation vouchers. These vouchers can be used to access advanced facilities, specialized equipment, maker spaces, and research assistance provided by participating universities, nonprofit organizations, and companies across the region. NY THRIVE is …</summary>
   </entry>
 </feed>

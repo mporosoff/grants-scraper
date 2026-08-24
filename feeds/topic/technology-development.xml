@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-23T21:32:08Z</updated>
+  <updated>2026-08-24T10:53:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -272,7 +272,7 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2076-08-18 | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
+    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
     <title>2026 SBIR/STTR topics</title>
@@ -360,15 +360,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>U.S. Mission to Armenia | Closes 2026-09-10 | The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
   </entry>
   <entry>
-    <title>NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-511</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04</summary>
-  </entry>
-  <entry>
     <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
     <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
@@ -389,6 +380,16 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <category term="Technology development"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
+  </entry>
+  <entry>
+    <title>NY THRIVE</title>
+    <link href="https://nysmarticorridor.com/new-funding-available-to-connect-businesses-with-cutting-edge-research-assets/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-dda9003b9def7103</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>NY SMART I-Corridor</name></author>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>NY SMART I-Corridor | Posted | The Tech Hub Resources &amp; Innovation Vouchers for Enterprises (NY THRIVE) program supports businesses in commercializing new technologies by offering innovation vouchers. These vouchers can be used to access advanced facilities, specialized equipment, maker spaces, and research assistance provided by participating universities, nonprofit organizations, and companies across the region. NY THRIVE is …</summary>
   </entry>
   <entry>
     <title>Project Constellation: Building a Constellation of Outer Space Partners at the UN</title>
