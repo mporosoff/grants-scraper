@@ -105,6 +105,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
     "Rebuild every production document vector",
     "Build the current/previous Worker compatibility package",
     "Verify the complete search package is internally consistent",
+    "Refuse to deploy a stale generation",
     "Deploy the compatibility Worker before publishing Pages assets",
     "Commit refreshed catalog",
     "Verify GitHub Pages serves the coordinated search package",
@@ -113,6 +114,10 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   assert.deepEqual(ordered, ordered.slice().sort((left, right) => left - right));
   assert.match(workflow, /git add[^\n]*search-v2-voyage-manifest\.json[^\n]*search-v2-voyage-vectors\.f16[^\n]*search-v2-voyage-canaries\.json[^\n]*search-v2-release\.json/);
   assert.match(workflow, /git add[^\n]*corpus-allowlist\.json/);
+  assert.match(workflow, /uses: actions\/checkout@v6[\s\S]*?with:[\s\S]*?ref: main/);
+  assert.match(workflow, /built_from_sha="\$\(git rev-parse HEAD\)"/);
+  assert.match(workflow, /current_main_sha="\$\(git ls-remote origin refs\/heads\/main/);
+  assert.match(workflow, /refusing to deploy stale Worker or Pages assets/);
   assert.doesNotMatch(
     workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),
     /continue-on-error:\s*true/,

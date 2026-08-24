@@ -39,6 +39,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Scheduled events can wait behind another refresh while retaining
+          # the SHA captured when queued. Always build current protected main.
+          ref: main
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
@@ -142,6 +146,21 @@ jobs:
           node --test tests/browser/*.test.mjs &&
           node tools/query_baseline.mjs --check &&
           node tools/p9_scoring_probe.mjs --check
+      - name: Refuse to deploy a stale generation
+        shell: bash
+        run: |
+          built_from_sha="$(git rev-parse HEAD)"
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ]; then
+            echo "::error::Could not resolve the current main SHA." >&2
+            exit 1
+          fi
+          if [ "$built_from_sha" != "$current_main_sha" ]; then
+            echo "::error::Main changed while this generation was building; refusing to deploy stale Worker or Pages assets." >&2
+            echo "Built from: $built_from_sha" >&2
+            echo "Current main: $current_main_sha" >&2
+            exit 1
+          fi
       - name: Deploy the compatibility Worker before publishing Pages assets
         id: worker-deploy
         env:
@@ -209,6 +228,7 @@ jobs:
                 pushed=true
                 break
               fi
+              git rebase --abort 2>/dev/null || true
               echo "Rebase/push attempt ${attempt} failed; retrying in 5s..."
               sleep 5
             done
