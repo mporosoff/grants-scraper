@@ -1,0 +1,41 @@
+{
+  "response": {
+    "award": [
+      {
+        "id": "2605508",
+        "title": "Methodologically Consistent Free-Energy Density Functional Theory for Warm Dense Matter and Non-Ideal Plasmas",
+        "abstractText": "This award supports development of novel methodological and computational tools for understanding and predicting the behavior of plasma and materials under extreme conditions.  Gaining deep understanding of systems as diverse as inertial fusion energy reactors and exotic planets is critically dependent on predicting basic properties of matter across huge temperature and pressure ranges. That poses big challenges for both plasma physics and materials physics.  Building on previous advances by the team from the University of Rochester and the University of Florida, this project will resolve a major logical inconsistency in the currently best combination of the modeling approaches for these systems. The new computational tools will substantively advance the capacity to predict plasma and extreme-condition materials behavior and advance the trustworthiness of the predictions. The project will contribute to the knowledge base for fusion energy technologies and to building a high-tech skilled workforce.\r\n\r\nAb initio molecular dynamics simulation based on the free-energy density functional theory is a key tool to predict properties of matter at extreme conditions of high temperature and density. The warm dense matter regime is a challenge for both standard plasma physics methods and for materials physics methods. The accuracy and reliability of such predictions depends severely on the so-called exchange-correlation (XC) free-energy density functional. This project aims to resolve a logical and methodological inconsistency of best XC-functionals. The project will develop a free-energy XC functional constructed to yield both ground-state structural properties as good as those from the best available semi-local approximations, and generalized Kohn-Sham eigenvalues and orbitals of quality close to those from hybrid approximations.  This unified approach is expected to resolve current discrepancies in descriptions of high energy density matter and to lead to a thermodynamically consistent understanding of non-ideal plasmas.\r\n\r\nThis award reflects NSF's statutory mission and has been deemed worthy of support through evaluation using the Foundation's intellectual merit and broader impacts review criteria.",
+        "agency": "NSF",
+        "awardeeName": "University of Rochester",
+        "ueiNumber": "F27KDXZMF9Y8",
+        "parentUeiNumber": "",
+        "pdPIName": "Valentin V Karasev",
+        "pi": ["Valentin V Karasev vkarasev@lle.rochester.edu"],
+        "piEmail": "vkarasev@lle.rochester.edu",
+        "coPDPI": [
+          "Samuel B Trickey trickey@qtp.ufl.edu",
+          "Suxing Hu shu@lle.rochester.edu"
+        ],
+        "poName": "Vyacheslav (Slava) Lukin",
+        "poEmail": "vlukin@nsf.gov",
+        "fundProgramName": "PLASMA PHYSICS, CONDENSED MATTER & MAT THEORY, Software Institutes",
+        "program": "Materials Under Extreme Conditions, Fusion Enabling Science & Technology, CDS&E",
+        "progEleCode": "124200, 176500, 800400",
+        "progRefCode": "089Z, 160Z, 8084",
+        "orgLongName": "Directorate for Mathematical and Physical Sciences",
+        "orgLongName2": "Division Of Physics",
+        "estimatedTotalAmt": "686056",
+        "fundsObligatedAmt": "686056",
+        "date": "08/06/2026",
+        "startDate": "09/01/2026",
+        "expDate": "08/31/2029",
+        "transType": "Standard Grant"
+      }
+    ],
+    "metadata": {
+      "offset": 0,
+      "rpp": 1,
+      "totalCount": 1
+    }
+  }
+}

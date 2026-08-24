@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "total": 9,
+    "offset": 0,
+    "limit": 100,
+    "sort_field": "project_start_date",
+    "sort_order": "desc",
+    "sorted_by_relevance": false
+  },
+  "results": [
+    {
+      "appl_id": 10273075,
+      "fiscal_year": 2021,
+      "project_num": "2K12GM106997-06",
+      "core_project_num": "K12GM106997",
+      "project_title": "IRACDA at Rochester Partnership to Advance Research and Academic Careers in Deaf Scholars",
+      "abstract_text": "PROJECT SUMMARY/ABSTRACT\nThe primary objective of the Rochester Partnership to Advance Research and Academic Careers of Deaf\n(RPP-DEAF) Scholars is to rigorously train and support the career advancement of deaf and hard of hearing\n(D/HH) post-doctoral Scholars for independent academic careers that support the biomedical research\nenterprise. This is an important unmet national need, because the D/HH community is greatly\nunderrepresented in the biomedical sciences academic workforce. In order to address this disparity, we have\npartnered the faculty and programs of the University of Rochester (UR) with those of the Rochester Institute of\nTechnology (RIT) and its National Technical Institute for the Deaf (NTID). To achieve our program goals, we\nwill pursue four Specific Aims; 1) To provide outstanding program leadership that “mentors the mentors”, builds\ncommunity for D/HH Scholars, and successfully coordinates program recruitment. This goal will be achieved\nthrough (A) special training specific to this IRACDA program (including training in Deaf-aware mentoring\npractices and Deaf culture), (B) training in mentoring diverse learners and (C) advanced mentoring training (for\nresearch mentors) or leadership mentoring training (for program leaders).; 2) To provide individualized,\nmentored teaching experiences and career development activities for all Scholars. Teaching experiences will\nbe provided principally at RIT/NTID, the teaching-intensive partner institution.; 3) To provide individualized,\nmentored research experiences for all Scholars. Research experiences will be provided principally at UR, the\nresearch-intensive partner institution.; and 4) To rigorously, comprehensively and continuously evaluate the\nRPP-DEAF program. We will ensure that RPP-DEAF meets its goals by conducting comprehensive and\nongoing program evaluation of: Scholar Achievement, Faculty Mentorship & Program Leadership; and\nInstitutional Impact. We will recruit three new D/HH scholars per year, with a maximum of a three-year\nappointment, in order to maintain a steady state cohort of 9 D/HH Scholars. Overall, this unique IRACDA\nprogram will equip our Scholars with the comprehensive set of knowledge and skills in research, teaching and\nprofessionalism necessary for successful academic careers - with the goal that all of our Scholars will acheive\nfull-time academic appointments in higher education and/or research institutions. This innovative inter-\ninstitutional partnership is the first of its kind in the world and will begin to address the dearth of D/HH faculty at\nacademic institutions serving the nation's biomedical research needs. A long-term outcome will be the\nattraction of more D/HH Scholars into careers in the biomedical sciences, a field in which D/HH persons are\ngreatly underrepresented.",
+      "project_start_date": "2015-07-01T00:00:00",
+      "project_end_date": "2026-06-30T00:00:00",
+      "award_amount": 1147594,
+      "budget_start": "2021-08-01T00:00:00",
+      "budget_end": "2022-06-30T00:00:00",
+      "opportunity_number": "PAR-19-366",
+      "activity_code": "K12",
+      "funding_mechanism": "Other Research-Related",
+      "principal_investigators": [
+        {
+          "profile_id": 2408952,
+          "first_name": "GERARD",
+          "middle_name": "J.",
+          "last_name": "BUCKLEY",
+          "is_contact_pi": false,
+          "full_name": "GERARD J. BUCKLEY",
+          "title": ""
+        },
+        {
+          "profile_id": 1891753,
+          "first_name": "Stephen",
+          "middle_name": "",
+          "last_name": "Dewhurst",
+          "is_contact_pi": true,
+          "full_name": "Stephen  Dewhurst",
+          "title": "PROFESSOR"
+        }
+      ],
+      "program_officers": [
+        {
+          "first_name": "ANISSA",
+          "middle_name": "F",
+          "last_name": "BROWN",
+          "full_name": "ANISSA F BROWN"
+        }
+      ],
+      "organization": {
+        "org_name": "UNIVERSITY OF ROCHESTER",
+        "dept_type": "MICROBIOLOGY/IMMUN/VIROLOGY",
+        "org_duns": ["041294109"],
+        "org_ueis": ["F27KDXZMF9Y8"],
+        "primary_duns": "041294109",
+        "primary_uei": "F27KDXZMF9Y8",
+        "org_ipf_code": "7047101",
+        "external_org_id": 7047101
+      },
+      "agency_ic_admin": {
+        "code": "GM",
+        "abbreviation": "NIGMS",
+        "name": "National Institute of General Medical Sciences"
+      },
+      "agency_code": "NIH",
+      "project_detail_url": "https://reporter.nih.gov/project-details/10273075"
+    },
+    {
+      "appl_id": 10457449,
+      "fiscal_year": 2022,
+      "project_num": "5K12GM106997-07",
+      "core_project_num": "K12GM106997",
+      "project_title": "IRACDA at Rochester Partnership to Advance Research and Academic Careers in Deaf Scholars",
+      "abstract_text": "PROJECT SUMMARY/ABSTRACT\nThe primary objective of the Rochester Partnership to Advance Research and Academic Careers of Deaf\n(RPP-DEAF) Scholars is to rigorously train and support the career advancement of deaf and hard of hearing\n(D/HH) post-doctoral Scholars for independent academic careers that support the biomedical research\nenterprise. This is an important unmet national need, because the D/HH community is greatly\nunderrepresented in the biomedical sciences academic workforce. In order to address this disparity, we have\npartnered the faculty and programs of the University of Rochester (UR) with those of the Rochester Institute of\nTechnology (RIT) and its National Technical Institute for the Deaf (NTID). To achieve our program goals, we\nwill pursue four Specific Aims; 1) To provide outstanding program leadership that “mentors the mentors”, builds\ncommunity for D/HH Scholars, and successfully coordinates program recruitment. This goal will be achieved\nthrough (A) special training specific to this IRACDA program (including training in Deaf-aware mentoring\npractices and Deaf culture), (B) training in mentoring diverse learners and (C) advanced mentoring training (for\nresearch mentors) or leadership mentoring training (for program leaders).; 2) To provide individualized,\nmentored teaching experiences and career development activities for all Scholars. Teaching experiences will\nbe provided principally at RIT/NTID, the teaching-intensive partner institution.; 3) To provide individualized,\nmentored research experiences for all Scholars. Research experiences will be provided principally at UR, the\nresearch-intensive partner institution.; and 4) To rigorously, comprehensively and continuously evaluate the\nRPP-DEAF program. We will ensure that RPP-DEAF meets its goals by conducting comprehensive and\nongoing program evaluation of: Scholar Achievement, Faculty Mentorship & Program Leadership; and\nInstitutional Impact. We will recruit three new D/HH scholars per year, with a maximum of a three-year\nappointment, in order to maintain a steady state cohort of 9 D/HH Scholars. Overall, this unique IRACDA\nprogram will equip our Scholars with the comprehensive set of knowledge and skills in research, teaching and\nprofessionalism necessary for successful academic careers - with the goal that all of our Scholars will acheive\nfull-time academic appointments in higher education and/or research institutions. This innovative inter-\ninstitutional partnership is the first of its kind in the world and will begin to address the dearth of D/HH faculty at\nacademic institutions serving the nation's biomedical research needs. A long-term outcome will be the\nattraction of more D/HH Scholars into careers in the biomedical sciences, a field in which D/HH persons are\ngreatly underrepresented.",
+      "project_start_date": "2015-07-01T00:00:00",
+      "project_end_date": "2026-06-30T00:00:00",
+      "award_amount": 1145594,
+      "budget_start": "2022-07-01T00:00:00",
+      "budget_end": "2023-06-30T00:00:00",
+      "opportunity_number": "PAR-19-366",
+      "activity_code": "K12",
+      "funding_mechanism": "Other Research-Related",
+      "principal_investigators": [
+        {
+          "profile_id": 2408952,
+          "first_name": "GERARD",
+          "middle_name": "J.",
+          "last_name": "BUCKLEY",
+          "is_contact_pi": false,
+          "full_name": "GERARD J. BUCKLEY",
+          "title": ""
+        },
+        {
+          "profile_id": 1891753,
+          "first_name": "Stephen",
+          "middle_name": "",
+          "last_name": "Dewhurst",
+          "is_contact_pi": true,
+          "full_name": "Stephen  Dewhurst",
+          "title": "PROFESSOR"
+        }
+      ],
+      "program_officers": [
+        {
+          "first_name": "ANISSA",
+          "middle_name": "F",
+          "last_name": "BROWN",
+          "full_name": "ANISSA F BROWN"
+        }
+      ],
+      "organization": {
+        "org_name": "UNIVERSITY OF ROCHESTER",
+        "dept_type": "MICROBIOLOGY/IMMUN/VIROLOGY",
+        "org_duns": ["041294109"],
+        "org_ueis": ["F27KDXZMF9Y8"],
+        "primary_duns": "041294109",
+        "primary_uei": "F27KDXZMF9Y8",
+        "org_ipf_code": "7047101",
+        "external_org_id": 7047101
+      },
+      "agency_ic_admin": {
+        "code": "GM",
+        "abbreviation": "NIGMS",
+        "name": "National Institute of General Medical Sciences"
+      },
+      "agency_code": "NIH",
+      "project_detail_url": "https://reporter.nih.gov/project-details/10457449"
+    }
+  ]
+}
