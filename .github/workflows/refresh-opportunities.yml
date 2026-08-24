@@ -181,10 +181,15 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: "11.19.0"
       - name: Preserve the prior catalog for change detection
         shell: bash
         run: cp data/opportunities.js "$RUNNER_TEMP/opportunities.previous.js"
       - run: python -m pip install -r requirements.txt
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - name: Test live product before refresh
         run: python -m tools.run_refresh_validation
       - name: Test canonical browser application
@@ -277,6 +282,9 @@ jobs:
           node --test tests/browser/*.test.mjs &&
           node tools/query_baseline.mjs --check &&
           node tools/p9_scoring_probe.mjs --check
+      - name: Run real-browser product and accessibility gates
+        id: e2e-regression
+        run: pnpm test:e2e
       - name: Refuse to deploy a stale generation
         shell: bash
         run: |
@@ -436,12 +444,17 @@ jobs:
             -f context=browser \
             -f description='Refresh browser/search gate passed' \
             -f target_url="$run_url"
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${head_sha}" \
+            -f state=success \
+            -f context=e2e \
+            -f description='Refresh Chromium/accessibility gate passed' \
+            -f target_url="$run_url"
 
           if ! pr_url="$(gh pr create \
               --base main \
               --head "$refresh_branch" \
               --title 'chore: refresh Grants.gov catalog' \
-              --body "Automated coordinated refresh from [run ${GITHUB_RUN_ID}](${run_url}). The exact generated commit passed the complete Python, browser, search-quality, Worker, and stale-generation gates before this pull request was created.")"; then
+              --body "Automated coordinated refresh from [run ${GITHUB_RUN_ID}](${run_url}). The exact generated commit passed the complete Python, browser, Chromium/accessibility, search-quality, Worker, and stale-generation gates before this pull request was created.")"; then
             npx --yes wrangler@4.125.0 rollback \
               "${{ steps.prior-worker.outputs.version_id }}" \
               --config workers/search-voyage-proxy/wrangler.jsonc \
@@ -600,6 +613,7 @@ jobs:
               ["package integrity", "${{ steps.package-integrity.outcome }}"],
               ["product regression", "${{ steps.product-regression.outcome }}"],
               ["browser regression", "${{ steps.browser-regression.outcome }}"],
+              ["Chromium/accessibility regression", "${{ steps.e2e-regression.outcome }}"],
               ["Worker deployment", "${{ steps.worker-deploy.outcome }}"],
               ["Worker package handshake", "${{ steps.worker-handshake.outcome }}"],
               ["Worker provider smoke", "${{ steps.worker-smoke.outcome }}"],

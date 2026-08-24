@@ -274,7 +274,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/search-hybrid.js?v=app-1.3.0"></script>',
+            '<script src="./assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>',
             explorer_html,
         )
         self.assertIn(

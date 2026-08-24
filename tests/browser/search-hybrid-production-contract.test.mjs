@@ -109,6 +109,21 @@ test("Potential explanations select the complete source span that supports the c
   assert.doesNotMatch(explanation.excerpt, /score|similarity|semantic/i);
 });
 
+test("Potential explanations preserve initialisms at the start of a source sentence", () => {
+  const sourceText = "The U.S. National Science Foundation supports carbon capture research. A separate sentence discusses workforce development.";
+  const explanation = api.explanationFromPassage({
+    passage_id: "parent:initialism-excerpt",
+    passage_kind: "parent",
+    title: "Initialism excerpt fixture",
+    values: { parent_description: [sourceText] },
+  }, "carbon capture");
+
+  assert.equal(
+    explanation.excerpt,
+    "The U.S. National Science Foundation supports carbon capture research.",
+  );
+});
+
 test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup are generic", () => {
   const vectors = api.decodeFloat16(
     vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
