@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "phase": 1,
+  "title": "NSF + NIH award-data foundation",
+  "generated_at": "2026-08-24T20:15:09.750Z",
+  "roadmap": {
+    "file": "FUNDING_FINDER_FUNDED_AWARDS_AND_ALERTS_PLAN.md",
+    "sha256": "7077c8a144c2be9be4d58a42c12364523d5e19b36f8a8f8d0d9e6eb9be475eec"
+  },
+  "authoritative_base": {
+    "package_version": "1.3.0",
+    "main_sha": "c8083bd3813f7f186e51b7f1aa47bc41fd5c5651"
+  },
+  "scope": {
+    "implemented": [
+      "normalized award contract",
+      "institution identity normalization",
+      "NSF Awards API adapter",
+      "NIH RePORTER V2 adapter",
+      "bounded Award API Worker",
+      "successful per-source Cloudflare Cache API entries",
+      "deterministic source fixtures and contracts",
+      "source and contact provenance"
+    ],
+    "explicitly_not_implemented": [
+      "Funded Awards page",
+      "Funding Finder deep links or navigation",
+      "watchlists or alerts",
+      "DOE award integration",
+      "semantic award vectors",
+      "Funding Finder ranking changes"
+    ],
+    "ranking_files_changed": []
+  },
+  "source_contracts": {
+    "NSF": {
+      "endpoint": "https://api.nsf.gov/services/v1/awards.json",
+      "adapter_version": "1.0.0",
+      "credentials_required": false,
+      "maximum_results_per_request": 25,
+      "topic_behavior": "documented uppercase Boolean AND over source-native keyword search",
+      "exact_program_behavior": "six-digit ProgEleCode",
+      "exact_institution_behavior": "quoted awardeeName followed by normalized identity filtering",
+      "official_award_url": "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=<award_id>",
+      "direct_contact_fields": ["piEmail", "pi", "coPDPI", "poEmail"]
+    },
+    "NIH": {
+      "endpoint": "https://api.reporter.nih.gov/v2/projects/search",
+      "adapter_version": "1.0.0",
+      "credentials_required": false,
+      "maximum_upstream_records_per_request": 100,
+      "maximum_normalized_results_per_request": 25,
+      "exact_core_behavior": "activity, institute/center, and serial components in project_num_split",
+      "grouping_key": "core_project_num",
+      "official_award_url": "API-provided project_detail_url on reporter.nih.gov",
+      "missing_contact_behavior": "email remains null and official_contact_url points to NIH RePORTER"
+    }
+  },
+  "normalized_fields": [
+    "award and source record IDs",
+    "source, agency, and subagency",
+    "program name, codes, opportunity numbers, activity, and mechanism",
+    "title and abstract",
+    "project dates, award year, and source-qualified amount",
+    "institution display and normalized names plus UEI, IPF, and other official identifiers",
+    "principal investigators and program contacts with field-level provenance",
+    "official award URL",
+    "NIH annual support records",
+    "source URL, retrieval time, source record ID, and adapter version"
+  ],
+  "institution_truth": {
+    "identity": "university-of-rochester",
+    "canonical_name": "University of Rochester",
+    "aliases_verified": [
+      "UNIVERSITY OF ROCHESTER",
+      "University of Rochester Medical Center",
+      "University of Rochester School of Medicine and Dentistry"
+    ],
+    "uei": "F27KDXZMF9Y8",
+    "nih_ipf": "7047101"
+  },
+  "live_truth_set": {
+    "checked_at": "2026-08-24T20:15:09.750Z",
+    "request_policy": "bounded official public API calls; NIH requests paced above one second",
+    "NSF": [
+      {
+        "case": "exact known program",
+        "criteria": {"program": "168000"},
+        "source_total_count": 1000,
+        "inspected_result_ids": ["2618177", "2618315", "2618316", "2618265", "2536108"],
+        "passed": true
+      },
+      {
+        "case": "exact award number",
+        "criteria": {"award_id": "2605508"},
+        "source_total_count": 1,
+        "inspected_result_ids": ["2605508"],
+        "passed": true
+      },
+      {
+        "case": "University of Rochester",
+        "criteria": {"institution_id": "university-of-rochester"},
+        "source_total_count": 2661,
+        "inspected_result_ids": ["2618408", "2625134", "2618315", "2605508", "2538828"],
+        "all_inspected_normalized_to_rochester": true,
+        "passed": true
+      },
+      {
+        "case": "PI name",
+        "criteria": {"pi": "John D Kessler"},
+        "source_total_count": 11,
+        "inspected_result_ids": ["2618315", "2241873", "2023514", "1851402", "1634871"],
+        "passed": true
+      },
+      {
+        "case": "topic in abstract",
+        "criteria": {"topic": "warm dense matter"},
+        "source_total_count": 27,
+        "inspected_result_ids": ["2605508", "2611595", "2607313", "2512340", "2521062"],
+        "all_inspected_abstracts_matched": true,
+        "passed": true
+      },
+      {
+        "case": "topic with no result",
+        "criteria": {"topic": "zzzzfundingfinderphase1noresultzzzz"},
+        "source_total_count": 0,
+        "inspected_result_ids": [],
+        "passed": true
+      },
+      {
+        "case": "program officer",
+        "criteria": {"program_officer": "Kandace Binkley"},
+        "source_total_count": 804,
+        "inspected_result_ids": ["2626002", "2618177", "2618315", "2618316", "2618265"],
+        "passed": true
+      }
+    ],
+    "NIH": [
+      {
+        "case": "exact opportunity number",
+        "criteria": {"opportunity_number": "PAR-19-366"},
+        "source_total_count": 55,
+        "raw_records_inspected": 50,
+        "normalized_projects_returned": 5,
+        "passed": true
+      },
+      {
+        "case": "exact core project",
+        "criteria": {"core_project_number": "K12GM106997"},
+        "source_total_count": 9,
+        "raw_records_inspected": 9,
+        "normalized_projects_returned": 1,
+        "annual_support_records": 9,
+        "result_id": "K12GM106997",
+        "passed": true
+      },
+      {
+        "case": "University of Rochester",
+        "criteria": {"institution_id": "university-of-rochester"},
+        "raw_records_inspected": 50,
+        "all_returned_projects_normalized_to_rochester": true,
+        "passed": true
+      },
+      {
+        "case": "contact PI",
+        "criteria": {"pi": "Stephen Dewhurst"},
+        "source_total_count": 118,
+        "raw_records_inspected": 50,
+        "passed": true
+      },
+      {
+        "case": "topic in abstract",
+        "criteria": {"topic": "mitral valve prolapse"},
+        "source_total_count": 192,
+        "representative_result_id": "R01HL174537",
+        "passed": true
+      },
+      {
+        "case": "program official",
+        "criteria": {"program_officer": "ANISSA BROWN"},
+        "source_total_count": 491,
+        "raw_records_inspected": 50,
+        "passed": true
+      },
+      {
+        "case": "multi-year project deduplication",
+        "criteria": {"core_project_number": "K12GM106997"},
+        "raw_application_count": 9,
+        "normalized_project_count": 1,
+        "award_amount_basis": "complete_reporter_history",
+        "passed": true
+      }
+    ]
+  },
+  "contact_provenance": {
+    "NSF_award_2605508": {
+      "principal_investigators": 3,
+      "direct_pi_emails": 3,
+      "program_officers": 1,
+      "direct_program_officer_emails": 1
+    },
+    "NIH_core_K12GM106997": {
+      "api_email_fields_present": 0,
+      "normalized_emails_present": 0,
+      "official_contact_fallback": "https://reporter.nih.gov/project-details/10875475"
+    },
+    "fabricated_contacts": 0
+  },
+  "worker_bounds": {
+    "maximum_request_bytes": 16384,
+    "maximum_sources": 2,
+    "maximum_results_per_source": 25,
+    "maximum_offset": 1000,
+    "maximum_year_span": 50,
+    "source_timeout_ms": 8000,
+    "maximum_source_response_bytes": 6291456,
+    "cache_ttl_seconds": 3600,
+    "cache_scope": "successful per-source responses only",
+    "source_failure_isolated": true,
+    "new_credentials_required": false
+  },
+  "validation": {
+    "phase1_contract_tests": {"passed": 7, "failed": 0},
+    "browser_and_worker_contract_tests": {"passed": 248, "failed": 0},
+    "normal_live_product_python_tests": {"passed": 772, "failed": 0},
+    "bounded_live_truth_cases": {"passed": 14, "failed": 0},
+    "closed_search_or_vector_evaluations_rerun": false
+  },
+  "gate": {
+    "source_results_reproducible": true,
+    "no_fabricated_contacts": true,
+    "correct_institution_resolution": true,
+    "correct_nih_project_grouping": true,
+    "official_source_links": true,
+    "bounded_cache_behavior": true,
+    "source_failure_isolated": true,
+    "no_new_credentials_required": true,
+    "funding_finder_ranking_unchanged": true
+  },
+  "known_limitations": [
+    "Phase 1 commits the data boundary but intentionally does not add or deploy a public Funded Awards page.",
+    "NSF reports capped total counts for broad result sets; each Worker response remains bounded to 25 source records.",
+    "NIH broad searches group the returned, start-date-sorted window of at most 100 annual applications; exact core-project searches mark totals complete only when RePORTER's total fits in that returned window.",
+    "NIH RePORTER did not populate contact email fields in the inspected records, so those emails remain null and the official project URL is retained for contact access."
+  ],
+  "rollback": {
+    "worker": "Set AWARD_API_ENABLED=false or revert workers/award-api; the existing Funding Finder remains independent.",
+    "source": "Remove one source from the requested source list or disable its adapter path; the other source continues independently.",
+    "public_product_impact": "None in Phase 1 because no page, navigation entry, or current-opportunity integration was added."
+  },
+  "decision": "PHASE 1 PASSED — NSF/NIH AWARD DATA NORMALIZED AND VERIFIED"
+}

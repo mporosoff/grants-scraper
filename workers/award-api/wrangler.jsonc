@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "funding-finder-award-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-23",
+  "workers_dev": true,
+  "vars": {
+    "AWARD_API_ENABLED": "true",
+    "CACHE_TTL_SECONDS": "3600",
+    "MAX_SOURCE_RESULTS": "25"
+  }
+}

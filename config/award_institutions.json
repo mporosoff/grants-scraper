@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "institutions": [
+    {
+      "id": "university-of-rochester",
+      "canonical_name": "University of Rochester",
+      "aliases": [
+        "UNIVERSITY OF ROCHESTER",
+        "University of Rochester Medical Center",
+        "University of Rochester School of Medicine and Dentistry"
+      ],
+      "sources": {
+        "NSF": {
+          "search_name": "University of Rochester",
+          "uei": ["F27KDXZMF9Y8"]
+        },
+        "NIH": {
+          "search_names": ["UNIVERSITY OF ROCHESTER"],
+          "uei": ["F27KDXZMF9Y8"],
+          "ipf": ["7047101"]
+        }
+      }
+    }
+  ]
+}
