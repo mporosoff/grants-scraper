@@ -208,9 +208,11 @@
       panel.classList.add("hidden");
       standalone.classList.remove("hidden");
       $("watch-selected-program").classList.add("hidden");
+      $("award-results").classList.add("hidden");
       return;
     }
     panel.classList.remove("hidden");
+    $("award-results").classList.toggle("hidden", !state.selectedLookup);
     standalone.classList.toggle("hidden", Boolean(state.selectedLookup));
     $("selected-opportunity-heading").textContent = state.selectedRecord.title || "Selected opportunity";
     $("selected-opportunity-meta").textContent = [
@@ -442,6 +444,7 @@
     searchState.offset = 0;
     syncUrl(searchState, "push");
     clearRenderedResults();
+    $("award-results").classList.add("hidden");
     setStatus("Selection cleared. Search by research topic or program.");
   }
 
@@ -509,13 +512,7 @@
   }
 
   function hasUrlSearch(params) {
-    return Boolean(
-      state.selectedRecord
-      || params.get("q")
-      || params.get("institution")
-      || params.get("pi")
-      || params.get("program_officer"),
-    );
+    return Boolean(state.selectedRecord && params.get("opportunity"));
   }
 
   function initialize() {

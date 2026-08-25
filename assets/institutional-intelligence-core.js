@@ -4,7 +4,10 @@
   const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
-    "ii_topic", "ii_pi", "ii_year_start", "ii_year_end",
+    "ii_topic", "ii_pi", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
+  ];
+  const LEGACY_SEARCH_PARAMS = [
+    "opportunity", "q", "mode", "agency", "institution", "year_start", "year_end", "pi", "program_officer", "offset",
   ];
   const DOE_PROGRAM_OFFICES = new Map([
     ["bes", "SC-32"],
@@ -58,31 +61,35 @@
 
   function buildAwardRequest(state, limit = 10) {
     const institution = clean(state?.institution, 300);
-    if (!institution) throw new Error("Choose an institution before searching its funded awards.");
     const agency = clean(state?.agency, 10).toUpperCase();
     const sources = sourcesForAgency(agency);
     const criteria = {
-      institution,
       ...programCriterion(agency, state?.program),
     };
+    if (institution) criteria.institution = institution;
     const rorId = clean(state?.ror_id, 100);
-    if (/^https:\/\/ror\.org\/0[a-z0-9]{8}$/i.test(rorId)) criteria.institution_id = rorId;
+    if (institution && /^https:\/\/ror\.org\/0[a-z0-9]{8}$/i.test(rorId)) criteria.institution_id = rorId;
     const topic = clean(state?.topic, 500);
     const pi = clean(state?.pi, 160);
+    const programOfficer = clean(state?.program_officer, 160);
     const yearStart = validYear(state?.year_start);
     const yearEnd = validYear(state?.year_end);
     if (topic) criteria.topic = topic;
     if (pi) criteria.pi = pi;
+    if (programOfficer) criteria.program_officer = programOfficer;
     if (yearStart) criteria.year_start = yearStart;
     if (yearEnd) criteria.year_end = yearEnd;
     if (yearStart && yearEnd && yearEnd < yearStart) {
       throw new Error("The ending year must be the same as or later than the starting year.");
     }
+    if (!institution && !topic && !pi && !programOfficer && !clean(state?.program, 160)) {
+      throw new Error("Enter an institution, topic, program, investigator, or program officer before searching.");
+    }
     return {
       sources,
       criteria,
       limit: sources.includes("DOE") ? Math.min(10, Math.max(1, Number(limit) || 10)) : Math.min(25, Math.max(1, Number(limit) || 10)),
-      offset: 0,
+      offset: Math.max(0, Math.min(1_000, Number(state?.offset) || 0)),
     };
   }
 
@@ -176,23 +183,26 @@
   function stateFromSearch(search) {
     const params = new URLSearchParams(search || "");
     return {
-      open: params.get("ii") === "1" || Boolean(params.get("ii_institution")),
-      institution: clean(params.get("ii_institution"), 300),
+      open: true,
+      institution: clean(params.get("ii_institution") || params.get("institution"), 300),
       ror_id: clean(params.get("ii_ror"), 100),
-      agency: SOURCE_NAMES.includes(clean(params.get("ii_agency"), 10).toUpperCase())
-        ? clean(params.get("ii_agency"), 10).toUpperCase()
+      agency: SOURCE_NAMES.includes(clean(params.get("ii_agency") || params.get("agency"), 10).toUpperCase())
+        ? clean(params.get("ii_agency") || params.get("agency"), 10).toUpperCase()
         : "all",
-      program: clean(params.get("ii_program"), 160),
-      topic: clean(params.get("ii_topic"), 500),
-      pi: clean(params.get("ii_pi"), 160),
-      year_start: /^\d{4}$/.test(params.get("ii_year_start") || "") ? params.get("ii_year_start") : "",
-      year_end: /^\d{4}$/.test(params.get("ii_year_end") || "") ? params.get("ii_year_end") : "",
+      program: clean(params.get("ii_program") || (params.get("mode") === "program" ? params.get("q") : ""), 160),
+      topic: clean(params.get("ii_topic") || (!params.get("mode") || params.get("mode") === "topic" ? params.get("q") : ""), 500),
+      pi: clean(params.get("ii_pi") || params.get("pi") || (params.get("mode") === "pi" ? params.get("q") : ""), 160),
+      program_officer: clean(params.get("ii_program_officer") || params.get("program_officer") || (params.get("mode") === "program_officer" ? params.get("q") : ""), 160),
+      year_start: /^\d{4}$/.test(params.get("ii_year_start") || params.get("year_start") || "") ? (params.get("ii_year_start") || params.get("year_start")) : "",
+      year_end: /^\d{4}$/.test(params.get("ii_year_end") || params.get("year_end") || "") ? (params.get("ii_year_end") || params.get("year_end")) : "",
+      offset: Math.max(0, Math.min(1_000, Number(params.get("ii_offset") || params.get("offset")) || 0)),
     };
   }
 
   function urlForState(href, state) {
     const url = new URL(href, "https://funding-finder.invalid/");
     MANAGED_PARAMS.forEach(key => url.searchParams.delete(key));
+    LEGACY_SEARCH_PARAMS.forEach(key => url.searchParams.delete(key));
     if (state?.open || clean(state?.institution)) url.searchParams.set("ii", "1");
     if (clean(state?.institution)) url.searchParams.set("ii_institution", clean(state.institution, 300));
     if (clean(state?.ror_id)) url.searchParams.set("ii_ror", clean(state.ror_id, 100));
@@ -200,8 +210,10 @@
     if (clean(state?.program)) url.searchParams.set("ii_program", clean(state.program, 160));
     if (clean(state?.topic)) url.searchParams.set("ii_topic", clean(state.topic, 500));
     if (clean(state?.pi)) url.searchParams.set("ii_pi", clean(state.pi, 160));
+    if (clean(state?.program_officer)) url.searchParams.set("ii_program_officer", clean(state.program_officer, 160));
     if (validYear(state?.year_start)) url.searchParams.set("ii_year_start", String(state.year_start));
     if (validYear(state?.year_end)) url.searchParams.set("ii_year_end", String(state.year_end));
+    if (Number(state?.offset) > 0) url.searchParams.set("ii_offset", String(Math.max(0, Math.min(1_000, Number(state.offset)))));
     return url;
   }
 
@@ -213,6 +225,7 @@
       program: clean(plan?.program, 160),
       topic: clean(plan?.topic, 500),
       pi: clean(plan?.pi, 160),
+      program_officer: clean(plan?.program_officer, 160),
       year_start: validYear(plan?.year_start) || "",
       year_end: validYear(plan?.year_end) || "",
     };

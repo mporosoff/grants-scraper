@@ -4,7 +4,7 @@
   const config = globalThis.FUNDING_ALERTS_CONFIG || {};
   const TYPE_LABELS = Object.freeze({
     opportunity: "Watch this opportunity",
-    saved_search: "Alert me to new Strong matches",
+    saved_search: "Save this search as an email alert",
     program: "Watch this program",
   });
   let dialog = null;
