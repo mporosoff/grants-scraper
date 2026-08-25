@@ -249,4 +249,9 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.0\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
+  const askQuestionSource = appSource.slice(
+    appSource.indexOf("async function askQuestion()"),
+    appSource.indexOf("function bindEvents()"),
+  );
+  assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true \}\)/);
 });

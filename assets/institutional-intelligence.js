@@ -546,7 +546,7 @@
         canonical_name: current.institution,
       };
       renderQuestionPlan(next);
-      await runSearch({ historyMode: "push", resolveInstitution: false });
+      await runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
     } catch (error) {
       $("ii-question-plan").textContent = `The question could not be translated: ${error?.message || String(error)} Structured filters remain available without AI.`;
     } finally {
