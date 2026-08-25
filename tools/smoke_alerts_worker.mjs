@@ -12,6 +12,7 @@ assert.equal(payload.schema_version, 1);
 assert.equal(payload.database_ready, true);
 assert.equal(payload.email_provider, "resend");
 assert.equal(payload.email_provider_configured, true);
+assert.equal(payload.email_template_version, "phase5");
 assert.equal(payload.outbound_email_enabled, true);
 
 const preflight = await fetch(`${endpoint}/subscriptions`, {

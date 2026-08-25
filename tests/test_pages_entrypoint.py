@@ -39,6 +39,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             with self.subTest(page="public matcher"):
                 self.assertIn('property="og:title"', page)
                 self.assertIn(f'property="og:image" content="{main_image_url}"', page)
+                self.assertIn(f'property="og:image:url" content="{main_image_url}"', page)
                 self.assertIn(
                     f'property="og:image:secure_url" content="{main_image_url}"',
                     page,
@@ -56,6 +57,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         for page_name, page in (("Team Match", team_html), ("Funded Awards", funded_html)):
             with self.subTest(page=page_name):
                 self.assertIn(f'property="og:image" content="{main_image_url}"', page)
+                self.assertIn(f'property="og:image:url" content="{main_image_url}"', page)
                 self.assertIn(
                     f'property="og:image:secure_url" content="{main_image_url}"',
                     page,
@@ -64,6 +66,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 self.assertIn('property="og:image:width" content="1200"', page)
                 self.assertIn('property="og:image:height" content="630"', page)
                 self.assertIn('name="twitter:card" content="summary_large_image"', page)
+
+        # Parameterized search URLs are meaningful application state. Omitting
+        # a static og:url prevents preview caches from collapsing every shared
+        # search onto a stale bare-page object; rel=canonical remains available
+        # to search engines, and the requested query/hash stays untouched.
+        for page in (index_html, explorer_html, team_html, funded_html):
+            self.assertNotIn('property="og:url"', page)
+            self.assertIn('rel="canonical"', page)
 
         self.assertIn('name="twitter:card" content="summary_large_image"', team_html)
         self.assertIn(

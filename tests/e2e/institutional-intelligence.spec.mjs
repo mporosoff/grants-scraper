@@ -7,6 +7,7 @@ import {
 } from "./helpers.mjs";
 
 async function openInstitutionalIntelligence(page) {
+  await page.goto("/funded_awards.html");
   await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
   await expect(page.locator("#ii-form")).toBeVisible();
 }
@@ -15,7 +16,6 @@ test("ROR aliases resolve to canonical institutions before normalized award quer
   const errors = watchRuntimeErrors(page);
   mockHybrid(page);
   const calls = mockAwards(page);
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   const cases = [
     ["MIT", "Massachusetts Institute of Technology"],
@@ -44,7 +44,6 @@ test("ROR aliases resolve to canonical institutions before normalized award quer
 test("cross-agency summaries, investigator and program drill-downs, and history use authoritative awards", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page);
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
@@ -52,6 +51,9 @@ test("cross-agency summaries, investigator and program drill-downs, and history 
   await expect(page.locator("#ii-metrics")).toContainText("3Projects returned");
   await expect(page.locator("#ii-metrics")).toContainText("3Unique investigators");
   await expect(page.getByRole("link", { name: /Official NSF record/ })).toHaveAttribute("target", "_blank");
+  await expect(page.locator("a[href='mailto:vkarasev@example.edu']")).toBeVisible();
+  await expect(page.locator("a[href='mailto:vlukin@nsf.gov']")).toBeVisible();
+  expect(await page.locator("#ii-ask").evaluate((ask, awards) => Boolean(ask.compareDocumentPosition(awards) & Node.DOCUMENT_POSITION_FOLLOWING), await page.locator("#ii-awards").elementHandle())).toBe(true);
   expect(calls[0].sources).toEqual(["NSF", "NIH", "DOE"]);
 
   await page.locator("[data-ii-pi='Stephen Dewhurst']").click();
@@ -75,7 +77,7 @@ test("institution-only shared URLs restore and execute without an AI key", async
   await page.addInitScript(() => localStorage.removeItem("funding-finder.credentials.v1"));
   mockHybrid(page);
   const calls = mockAwards(page);
-  await page.goto("/match_explorer.html?ii=1&ii_institution=University+of+Virginia&ii_ror=https%3A%2F%2Fror.org%2F0153tk833&ii_topic=catalysis&ii_year_start=2020&ii_year_end=2026");
+  await page.goto("/funded_awards.html?ii=1&ii_institution=University+of+Virginia&ii_ror=https%3A%2F%2Fror.org%2F0153tk833&ii_topic=catalysis&ii_year_start=2020&ii_year_end=2026");
   await expect(page.locator("#institutional-intelligence")).toHaveAttribute("open", "");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(1);
@@ -97,7 +99,6 @@ test("institution-only shared URLs restore and execute without an AI key", async
 test("one unavailable award source does not suppress the other institutional evidence", async ({ page }) => {
   mockHybrid(page);
   mockAwards(page, { failNih: true });
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-institution").fill("MIT");
   await page.locator("#ii-search").click();
@@ -121,7 +122,6 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   });
   mockHybrid(page);
   const calls = mockAwards(page);
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
@@ -141,27 +141,30 @@ test("the natural-language translator reuses the saved Funding Finder provider a
 });
 
 test("key setup inside Institutional Intelligence populates Funding Finder's shared local configuration", async ({ page }) => {
-  await page.addInitScript(() => localStorage.removeItem("funding-finder.credentials.v1"));
+  await page.addInitScript(() => {
+    if (sessionStorage.getItem("ii-key-test-initialized")) return;
+    localStorage.removeItem("funding-finder.credentials.v1");
+    sessionStorage.setItem("ii-key-test-initialized", "1");
+  });
   mockHybrid(page);
   mockAwards(page);
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await page.locator("#ii-provider").selectOption("anthropic");
   await page.locator("#ii-key").fill("sk-ant-shared-test");
   await page.locator("#ii-save-key").click();
   await expect(page.locator("#ii-key-status")).toContainText("shared browser-local provider configuration");
-  await expect(page.locator("#k-provider")).toHaveValue("anthropic");
-  await expect(page.locator("#k-key")).toHaveValue("sk-ant-shared-test");
   const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("funding-finder.credentials.v1")));
   expect(stored).toEqual({ keys: { anthropic: "sk-ant-shared-test" } });
+  await openFundingFinder(page);
+  await expect(page.locator("#k-provider")).toHaveValue("anthropic");
+  await expect(page.locator("#k-key")).toHaveValue("sk-ant-shared-test");
 });
 
 test("Institutional Intelligence fits a narrow mobile viewport", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   mockHybrid(page);
   mockAwards(page);
-  await openFundingFinder(page);
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-institution").fill("MIT");
   await page.locator("#ii-search").click();
@@ -170,4 +173,13 @@ test("Institutional Intelligence fits a narrow mobile viewport", async ({ page }
   const input = await page.locator("#ii-institution").boundingBox();
   expect(input.x).toBeGreaterThanOrEqual(0);
   expect(input.x + input.width).toBeLessThanOrEqual(320);
+});
+
+test("legacy Funding Finder Institutional Intelligence links redirect to Funded Awards", async ({ page }) => {
+  mockHybrid(page);
+  mockAwards(page);
+  await page.goto("/match_explorer.html?ii=1&ii_institution=Massachusetts+Institute+of+Technology&ii_ror=https%3A%2F%2Fror.org%2F042nb2s44");
+  await expect(page).toHaveURL(/funded_awards\.html\?ii=1/);
+  await expect(page.locator("#institutional-intelligence")).toHaveAttribute("open", "");
+  await expect(page.locator("#ii-institution")).toHaveValue("Massachusetts Institute of Technology");
 });

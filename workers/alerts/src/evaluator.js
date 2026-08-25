@@ -19,21 +19,54 @@ function daysBetween(left, right) {
     : null;
 }
 
-function publicUrl(record, env) {
-  const id = recordId(record);
-  const official = String(
-    record?.primary_document_url || record?.funding_opportunity_url || record?.detail_page || "",
-  ).trim();
-  return official || `${String(env.PUBLIC_APP_ORIGIN).replace(/\/$/, "")}/match_explorer.html?focus=${encodeURIComponent(id)}`;
+function safeHttpUrl(value) {
+  try {
+    const url = new URL(String(value || "").trim());
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch { return ""; }
 }
 
-function payloadFor(record, detail, env) {
+function fundingFinderUrl(record, env) {
+  const id = recordId(record);
+  const origin = safeHttpUrl(env.PUBLIC_APP_ORIGIN);
+  if (!origin || !id) return "";
+  const url = new URL("match_explorer.html", origin.endsWith("/") ? origin : `${origin}/`);
+  url.searchParams.set("focus", id);
+  return url.href;
+}
+
+function officialUrl(record) {
+  return safeHttpUrl(
+    record?.primary_document_url || record?.funding_opportunity_url || record?.detail_page,
+  );
+}
+
+function programLabel(record) {
+  return String(
+    LINKS_API.programIdentityForOpportunity(record)?.label
+    || record?.opportunity_number
+    || "",
+  ).replace(/\s+/g, " ").trim().slice(0, 300);
+}
+
+function boundedReason(value, maximum = 320) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maximum) return text;
+  const prefix = text.slice(0, maximum - 1);
+  const boundary = prefix.lastIndexOf(" ");
+  return `${prefix.slice(0, boundary >= Math.floor(maximum * 0.7) ? boundary : maximum - 1).trim()}…`;
+}
+
+function payloadFor(record, detail, env, whyMatched = []) {
   return {
     title: String(record?.title || "Funding opportunity").slice(0, 600),
     agency: String(record?.agency || "").slice(0, 300),
+    program: programLabel(record),
     close_date: String(record?.close_date || "").slice(0, 10),
     detail: String(detail || "").replace(/\s+/g, " ").trim().slice(0, 600),
-    url: publicUrl(record, env),
+    why_matched: whyMatched.slice(0, 2).map(value => boundedReason(value)).filter(Boolean),
+    funding_finder_url: fundingFinderUrl(record, env),
+    official_url: officialUrl(record),
   };
 }
 
@@ -103,12 +136,14 @@ async function evaluateSavedSearch(store, subscription, assets, env, now) {
   if (!changes.length) return 0;
   const asOf = isoDate(now);
   const changedIds = [...new Set(changes.map(event => String(event.opportunity_id || "")).filter(Boolean))];
-  const strongIds = assets.matcher.matchIds(definition, asOf, changedIds);
+  const matchDetails = typeof assets.matcher.matchDetails === "function"
+    ? assets.matcher.matchDetails(definition, asOf, changedIds)
+    : new Map([...assets.matcher.matchIds(definition, asOf, changedIds)].map(id => [id, { reasons: [] }]));
   const prior = await store.qualifications(subscription.id, changedIds);
   const currentById = new Map(assets.catalog.opportunities.map(record => [recordId(record), record]));
   let matched = 0;
   for (const id of changedIds) {
-    const qualifies = strongIds.has(id);
+    const qualifies = matchDetails.has(id);
     const didQualify = prior.get(id) === true;
     if (qualifies && !didQualify) {
       const sourceEvent = changes.find(event => String(event.opportunity_id) === id);
@@ -117,7 +152,7 @@ async function evaluateSavedSearch(store, subscription, assets, env, now) {
         eventKey: `strong:${id}:${sourceEvent?.id || assets.changes.generated_at}`,
         eventKind: "strong_match",
         opportunityId: id,
-        payload: payloadFor(record, "Newly qualifies under the existing Strong-match contract", env),
+        payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons),
       }, now);
       if (inserted) matched += 1;
     }

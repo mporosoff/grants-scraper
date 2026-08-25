@@ -75,7 +75,7 @@
     hideRegistryOptions();
     if (announce) {
       const location = selectedLocation(state.selectedInstitution);
-      $("ii-registry-status").textContent = `Resolved to ${state.selectedInstitution.canonical_name}${location ? ` · ${location}` : ""} via ROR.`;
+      $("ii-registry-status").textContent = `Resolved to ${state.selectedInstitution.canonical_name}${location ? ` · ${location}` : ""} via the Research Organization Registry (ROR).`;
     }
   }
 
@@ -123,7 +123,7 @@
     state.registryController = new AbortController();
     const url = new URL(apiConfig.institutionSearchUrl);
     url.searchParams.set("query", normalized);
-    $("ii-registry-status").textContent = "Searching the open ROR institution registry…";
+    $("ii-registry-status").textContent = "Searching the open Research Organization Registry (ROR)…";
     try {
       const response = await fetch(url.href, {
         headers: { Accept: "application/json" },
@@ -138,15 +138,15 @@
       state.registryAvailable = true;
       renderRegistryOptions(payload.institutions);
       $("ii-registry-status").textContent = payload.institutions.length
-        ? `${payload.institutions.length} ROR matches. Choose the intended institution; exact acronym matches are ranked for this U.S.-agency award corpus.`
-        : "No ROR institution matched that text. You may still submit a complete source-listed institution name.";
+        ? `${payload.institutions.length} Research Organization Registry (ROR) matches. Choose the intended institution; exact acronym matches are ranked for this U.S.-agency award corpus.`
+        : "No Research Organization Registry (ROR) institution matched that text. You may still submit a complete source-listed institution name.";
       return payload.institutions;
     } catch (error) {
       if (error?.name === "AbortError" || sequence !== state.registrySequence) return [];
       state.registryAvailable = false;
       state.registryCandidates = [];
       hideRegistryOptions();
-      $("ii-registry-status").textContent = "ROR autocomplete is temporarily unavailable. A complete institution name can still be sent to the official award sources.";
+      $("ii-registry-status").textContent = "Research Organization Registry (ROR) autocomplete is temporarily unavailable. A complete institution name can still be sent to the official award sources.";
       return [];
     }
   }
@@ -165,10 +165,10 @@
       return state.selectedInstitution;
     }
     if (state.registryAvailable && candidates.length) {
-      throw new Error("Choose the intended ROR suggestion or type the institution’s complete canonical name.");
+      throw new Error("Choose the intended Research Organization Registry (ROR) suggestion or type the institution’s complete canonical name.");
     }
     state.selectedInstitution = { id: "", canonical_name: typed, location: {}, match: { type: "source_text" } };
-    $("ii-registry-status").textContent = "Using the complete typed name as an exact source search because no deterministic ROR match was available.";
+    $("ii-registry-status").textContent = "Using the complete typed name as an exact source search because no deterministic Research Organization Registry (ROR) match was available.";
     return state.selectedInstitution;
   }
 
@@ -203,10 +203,10 @@
     } : null;
     if (value.institution) {
       $("ii-registry-status").textContent = value.ror_id
-        ? `Restored ${value.institution} with its shared ROR identity.`
+        ? `Restored ${value.institution} with its shared Research Organization Registry (ROR) identity.`
         : `Restored ${value.institution} as the shared canonical award-source name.`;
     } else {
-      $("ii-registry-status").textContent = "Type at least two characters to search ROR.";
+      $("ii-registry-status").textContent = "Type at least two characters to search the Research Organization Registry (ROR).";
     }
   }
 
@@ -235,21 +235,41 @@
       .join("");
   }
 
+  function contactLine(person, source, officialUrl) {
+    const name = clean(person?.name, 300) || "Name not listed";
+    const role = clean(person?.role, 160) || "Contact";
+    const email = clean(person?.email, 320);
+    const contactUrl = safeUrl(person?.official_contact_url || officialUrl);
+    const identity = `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)}`;
+    if (email) {
+      return `<li>${identity} · <a href="mailto:${escapeAttribute(email)}">${escapeHtml(email)}</a><span class="ii-contact-provenance">Direct ${escapeHtml(source)} source field</span></li>`;
+    }
+    return contactUrl
+      ? `<li>${identity} · <a href="${escapeAttribute(contactUrl)}" target="_blank" rel="noopener">View on official record ↗</a><span class="ii-contact-provenance">Official ${escapeHtml(source)} record</span></li>`
+      : `<li>${identity} · Email not listed</li>`;
+  }
+
   function awardCard(award) {
     const source = clean(award?.source, 10) || "Source";
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
-    const investigators = (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
+    const investigatorRecords = Array.isArray(award?.principal_investigators) ? award.principal_investigators : [];
+    const programContacts = Array.isArray(award?.program_contacts) ? award.program_contacts : [];
+    const investigators = investigatorRecords
       .map(person => clean(person?.name, 300))
       .filter(Boolean);
     const programs = [clean(award?.program_name, 300), ...(award?.program_codes || []).map(value => clean(value, 100))]
       .filter(Boolean);
     const year = Number(award?.award_year) || "Year not listed";
+    const contacts = [...investigatorRecords, ...programContacts]
+      .map(person => contactLine(person, source, officialUrl))
+      .join("");
     return `<article class="ii-award-card" data-source="${escapeAttribute(source)}">
       <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(year)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
-      <h3>${escapeHtml(title)}</h3>
+      <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.join(", "))}` : ""}</p>
       <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(programs.join(" · ") || award?.subagency || "Not listed")}</p>
+      ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
       <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
       <details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>
     </article>`;
@@ -500,7 +520,7 @@
       const query = clean($("ii-institution").value, 120);
       if (query.length < 2) {
         hideRegistryOptions();
-        $("ii-registry-status").textContent = "Type at least two characters to search ROR.";
+        $("ii-registry-status").textContent = "Type at least two characters to search the Research Organization Registry (ROR).";
         return;
       }
       state.registryTimer = setTimeout(() => fetchRegistry(query), 300);

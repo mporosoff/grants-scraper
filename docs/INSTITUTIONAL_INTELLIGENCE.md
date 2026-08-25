@@ -4,7 +4,7 @@ Checked: 2026-08-25 (America/New_York)
 
 ## Product boundary
 
-Institutional Intelligence is a Funding Finder section in `match_explorer.html`. It is not loaded by Team Match and does not introduce another opportunity or award search system. The browser sends transparent structured filters to the existing Funded Awards Worker, which continues to query and normalize NSF, NIH, and DOE records through the deployed source adapters. No award embeddings, semantic award corpus, reranking, collaborator recommendation, or funding-fit score is involved.
+Institutional Intelligence is a Funded Awards section in `funded_awards.html`. It is not loaded by Funding Finder or Team Match and does not introduce another opportunity or award search system. Legacy Institutional Intelligence URLs on Funding Finder redirect to the corresponding state on Funded Awards. The browser sends transparent structured filters to the existing Funded Awards Worker, which continues to query and normalize NSF, NIH, and DOE records through the deployed source adapters. No award embeddings, semantic award corpus, reranking, collaborator recommendation, or funding-fit score is involved.
 
 Summaries cover only the normalized records returned on the current source-native result page. The interface states that additional source results may exist and links every displayed project to its official sponsor record. It does not treat a first page as an exhaustive institutional portfolio.
 

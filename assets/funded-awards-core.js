@@ -22,6 +22,8 @@
   function standaloneCriterion({ mode, agency, query }) {
     const value = clean(query);
     if (!value) return {};
+    if (mode === "pi") return { pi: value };
+    if (mode === "program_officer") return { program_officer: value };
     if (mode !== "program") return { topic: value };
     const source = clean(agency, 10).toUpperCase();
     if (!SOURCE_NAMES.includes(source)) {
@@ -108,9 +110,12 @@
   }
 
   function canPageForward(payload) {
+    const limit = Number(payload?.pagination?.limit || 0);
+    if (!Number.isFinite(limit) || limit <= 0) return false;
     return (payload?.sources || []).some(source => (
       source.status === "ok"
       && source.has_more === true
+      && Number(source.result_count || 0) >= limit
     ));
   }
 

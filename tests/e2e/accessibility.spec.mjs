@@ -41,17 +41,6 @@ test("Funding Finder has no serious or critical violations across critical state
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   await scan(page, "funding-initial", testInfo);
 
-  await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
-  await page.locator("#ii-institution").fill("MIT");
-  await page.locator("#ii-search").click();
-  await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
-  await scan(page, "funding-institutional-intelligence", testInfo);
-  await page.setViewportSize({ width: 320, height: 720 });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await scan(page, "funding-institutional-intelligence-mobile", testInfo);
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.locator("#institutional-intelligence").evaluate(element => { element.open = false; });
-
   const helpButton = page.getByRole("button", { name: "Help" });
   await helpButton.click();
   const helpDialog = page.getByRole("dialog");
@@ -93,6 +82,20 @@ test("Funding Finder has no serious or critical violations across critical state
   await expect(fallback.locator("#retry-potential")).toBeDisabled();
   await scan(fallback, "funding-potential-fallback", testInfo);
   await fallback.close();
+});
+
+test("Funded Awards Institutional Intelligence has no serious or critical violations", async ({ page }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  mockAwards(page);
+  await page.goto("/funded_awards.html");
+  await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
+  await page.locator("#ii-institution").fill("MIT");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
+  await scan(page, "funded-awards-institutional-intelligence", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
 });
 
 test("Team Match has no serious or critical violations across picker, results, and fallback states", async ({ page, context }, testInfo) => {

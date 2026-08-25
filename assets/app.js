@@ -931,7 +931,7 @@
   function hasManagedUrlState() {
     const params = new URLSearchParams(location.search);
     return [
-      "q", "status", "from", "through", "min_award", "evidence", "preliminary",
+      "q", "focus", "status", "from", "through", "min_award", "evidence", "preliminary",
       "limited", "early_career", "no_cost_share", "sort",
       ...Object.keys(FACETS).map(name => `f_${name}`),
     ].some(key => params.has(key));
@@ -3529,11 +3529,7 @@
     clearAiState();
     $("search-status").textContent = "Search cleared. Add new context when you are ready.";
     clearFiltersOnly();
-    const clearedUrl = new URL(location.pathname, location.origin);
-    for (const [key, value] of new URLSearchParams(location.search)) {
-      if (key === "ii" || key.startsWith("ii_")) clearedUrl.searchParams.append(key, value);
-    }
-    history.replaceState(null, "", clearedUrl);
+    history.replaceState(null, "", new URL(location.pathname, location.origin));
   }
 
   function csvCell(value) {
@@ -4454,7 +4450,17 @@
   }
 
   function loadProviderKey({ announce = false } = {}) {
-    const key = CREDENTIAL_API.loadKey($("k-provider").value);
+    let provider = $("k-provider").value;
+    let key = CREDENTIAL_API.loadKey(provider);
+    if (!key) {
+      const alternative = provider === "anthropic" ? "openai" : "anthropic";
+      const alternativeKey = CREDENTIAL_API.loadKey(alternative);
+      if (alternativeKey) {
+        provider = alternative;
+        key = alternativeKey;
+        $("k-provider").value = provider;
+      }
+    }
     $("k-key").value = key;
     $("k-key").placeholder =
       $("k-provider").value === "anthropic" ? "sk-ant-..." : "sk-...";
@@ -4996,7 +5002,22 @@
     });
   }
 
+  function redirectLegacyInstitutionalIntelligenceUrl() {
+    if (!location.protocol.startsWith("http")) return false;
+    const source = new URLSearchParams(location.search);
+    if (source.get("ii") !== "1" && !source.get("ii_institution")) return false;
+    const target = new URL("./funded_awards.html", location.href);
+    target.search = "";
+    for (const [key, value] of source) {
+      if (key === "ii" || key.startsWith("ii_")) target.searchParams.append(key, value);
+    }
+    target.hash = location.hash;
+    location.replace(target.href);
+    return true;
+  }
+
   async function initialize() {
+    if (redirectLegacyInstitutionalIntelligenceUrl()) return;
     try {
       validateCatalog(catalog);
       if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandGroups) {

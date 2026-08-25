@@ -10,13 +10,14 @@ import { rankRorOrganizations } from "../../workers/award-api/src/ror.js";
 
 const root = new URL("../../", import.meta.url);
 const [
-  aliases, fundedCoreSource, coreSource, appSource, page, teamPage, styles,
+  aliases, fundedCoreSource, coreSource, appSource, page, fundingPage, teamPage, styles,
   credentialsSource, doeForm, fundingAppSource, deploymentSource,
 ] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence.js", root), "utf8"),
+  readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
@@ -174,7 +175,7 @@ test("aggregates returned awards and preserves investigator and program drill-do
 });
 
 test("share URLs round-trip institution and all transparent filters", () => {
-  const url = core.urlForState("https://example.test/match_explorer.html?q=opportunities", {
+  const url = core.urlForState("https://example.test/funded_awards.html?q=opportunities", {
     open: true,
     institution: "University of California, Los Angeles",
     ror_id: "https://ror.org/046rm7j60",
@@ -199,12 +200,15 @@ test("share URLs round-trip institution and all transparent filters", () => {
   });
 });
 
-test("the feature is Funding Finder-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
+test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
   assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
   assert.match(page, /Structured institutional search does not require an AI key/);
   assert.match(page, /assets\/institutional-intelligence\.js/);
+  assert.match(page, /Research Organization Registry \(ROR\)/);
+  assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
+  assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
   assert.match(styles, /@media \(max-width: 520px\)/);
   assert.match(appSource, /credentials\.loadKey\(provider\)/);
@@ -212,7 +216,9 @@ test("the feature is Funding Finder-only, responsive, accessible, no-key capable
   assert.match(appSource, /\$\("k-provider"\)/);
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
-  assert.match(fundingAppSource, /key === "ii" \|\| key\.startsWith\("ii_"\)/);
+  assert.match(fundingAppSource, /redirectLegacyInstitutionalIntelligenceUrl/);
+  assert.match(fundingAppSource, /new URL\("\.\/funded_awards\.html"/);
+  assert.match(appSource, /mailto:\$\{escapeAttribute\(email\)\}/);
   const workerHealthGate = deploymentSource.slice(
     deploymentSource.indexOf("Wait for the Award Worker health contract"),
     deploymentSource.indexOf("Run bounded exact-source smokes"),

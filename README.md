@@ -121,7 +121,7 @@ Eligible Funding Finder cards open it in a new tab only for exact or explicitly
 reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
 title similarity.
 
-Funding Finder also includes Institutional Intelligence for page-bounded factual
+Funded Awards also includes Institutional Intelligence for page-bounded factual
 summaries and drill-downs over those normalized public awards. Its ROR-backed
 typeahead resolves canonical institution names, aliases, and acronyms while the
 existing identity layer retains sponsor-specific UEI/IPF query identifiers.
@@ -254,9 +254,9 @@ support it.
 | Path | Purpose |
 |---|---|
 | `index.html` | Redirects GitHub Pages to the application |
-| `match_explorer.html` | Public opportunity search, Institutional Intelligence, and AI-refinement interface |
+| `match_explorer.html` | Public opportunity search and AI-refinement interface |
 | `team_match.html` | Public multi-researcher opportunity-matching interface |
-| `funded_awards.html` | Public NSF/NIH/DOE historical-award search and current-opportunity deep links |
+| `funded_awards.html` | Public NSF/NIH/DOE historical-award search, Institutional Intelligence, and current-opportunity deep links |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/award-links.js` | Exact NIH and exact/reviewed-parent NSF opportunity-to-award mappings |
 | `assets/funded-awards-core.js` | Source-native award-query, institution-summary, and pagination contracts |
