@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-alerts.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
@@ -32,8 +32,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
+  <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0-phase3">
   <link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823">
+  <link rel="stylesheet" href="./assets/alerts.css?v=phase3-alerts">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -389,6 +390,7 @@
         </details>
         <div class="results-toolbar search-not-started" id="results-toolbar">
           <div class="toolbar-actions">
+            <button class="button secondary" id="alert-new-matches" type="button" disabled>Alert me to new Strong matches</button>
             <button class="button secondary" id="export-csv" type="button">Export CSV</button>
             <button class="button secondary" id="export-ics" type="button">Export deadlines</button>
             <button class="button primary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Chat with your results</button>
@@ -588,8 +590,10 @@
   <script src="./assets/ai-provider.js?v=filters-2026-08-13"></script>
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
   <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
-  <script src="./assets/award-links.js?v=funded-awards-phase2"></script>
-  <script src="./assets/saved.js?v=filters-2026-08-13"></script>
+  <script src="./assets/award-links.js?v=phase3-program-watches"></script>
+  <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
+  <script src="./assets/alerts.js?v=phase3-alerts"></script>
+  <script src="./assets/saved.js?v=phase3-alerts"></script>
   <script src="./assets/search-query.js?v=app-1.3.0"></script>
   <script src="./assets/search-retrieval.js?v=app-1.3.0"></script>
   <script src="./assets/subtopic-runtime.js?v=app-1.3.0-sidecar-cache1"></script>
@@ -597,7 +601,7 @@
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
   <script src="./assets/site-help.js?v=app-1.3.0"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=app-1.3.0"></script>
+  <script src="./assets/app.js?v=app-1.3.0-phase3"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

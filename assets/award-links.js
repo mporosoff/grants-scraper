@@ -10,6 +10,7 @@
       }),
       mapping_basis: "reviewed_parent_program",
       mapping_source_url: "https://www.nsf.gov/funding/opportunities/chemical-process-systems",
+      program_identity: Object.freeze({ id: "nsf:cbet:cps", label: "Chemical Process Systems (CPS)" }),
     }),
     "362062": Object.freeze({
       source: "NSF",
@@ -19,6 +20,7 @@
       }),
       mapping_basis: "reviewed_parent_program",
       mapping_source_url: "https://www.nsf.gov/funding/opportunities/engineering-biological-biomedical-systems",
+      program_identity: Object.freeze({ id: "nsf:cbet:ebbs", label: "Engineering Biological and Biomedical Systems (EBBS)" }),
     }),
     "nsf-cbet:PD-26-370Y": Object.freeze({
       source: "NSF",
@@ -28,6 +30,7 @@
       }),
       mapping_basis: "reviewed_parent_program",
       mapping_source_url: "https://www.nsf.gov/funding/opportunities/energy-water-resource-engineering",
+      program_identity: Object.freeze({ id: "nsf:cbet:ewre", label: "Energy, Water, and Resource Engineering (EWRE)" }),
     }),
     "362063": Object.freeze({
       source: "NSF",
@@ -37,6 +40,7 @@
       }),
       mapping_basis: "reviewed_parent_program",
       mapping_source_url: "https://www.nsf.gov/funding/opportunities/transport-phenomena",
+      program_identity: Object.freeze({ id: "nsf:cbet:tp", label: "Transport Phenomena (TP)" }),
     }),
     "363616": Object.freeze({
       source: "NSF",
@@ -51,6 +55,7 @@
       }),
       mapping_basis: "reviewed_parent_program",
       mapping_source_url: "https://www.nsf.gov/funding/opportunities/engineering-eng-chemical-bioengineering-energy-transport",
+      program_identity: Object.freeze({ id: "nsf:cbet", label: "Chemical, Bioengineering, Energy, and Transport Systems (CBET)" }),
     }),
   });
 
@@ -75,6 +80,60 @@
   function nsfProgramElementCode(opportunityNumber) {
     const match = /^PD-\d{2}-([A-Z0-9]{4})$/i.exec(clean(opportunityNumber));
     return match ? `${match[1].toUpperCase()}00` : "";
+  }
+
+  function exactProgramIdentity(record) {
+    if (!isNsf(record)) return null;
+    const id = opportunityId(record);
+    const reviewed = reviewedMappings[id];
+    if (reviewed?.program_identity) return reviewed.program_identity;
+    const code = nsfProgramElementCode(record?.opportunity_number);
+    if (!code) return null;
+    const specific = Object.values(reviewedMappings).find(mapping => (
+      mapping.program_identity?.id !== "nsf:cbet"
+      && mapping.criteria.program_codes.includes(code)
+    ));
+    return specific?.program_identity || Object.freeze({
+      id: `nsf:program-element:${code}`,
+      label: `NSF program ${code}`,
+    });
+  }
+
+  function programIdentityForOpportunity(record) {
+    // NIH opportunity numbers identify an exact FOA, not a stable program
+    // family across cycles. Until a controlled cross-cycle NIH registry exists,
+    // do not offer a misleading NIH program watch.
+    return exactProgramIdentity(record);
+  }
+
+  function matchesProgramIdentity(programId, record) {
+    const watched = clean(programId).toLowerCase();
+    if (!watched || !isNsf(record)) return false;
+    const direct = exactProgramIdentity(record);
+    if (clean(direct?.id).toLowerCase() === watched) return true;
+    const code = nsfProgramElementCode(record?.opportunity_number);
+    if (!code) return false;
+    if (watched === "nsf:cbet") {
+      return reviewedMappings["363616"].criteria.program_codes.includes(code);
+    }
+    const reviewed = Object.values(reviewedMappings).find(
+      mapping => mapping.program_identity?.id === watched,
+    );
+    if (reviewed) return reviewed.criteria.program_codes.includes(code);
+    return watched === `nsf:program-element:${code}`.toLowerCase();
+  }
+
+  function programIdentityById(programId) {
+    const watched = clean(programId).toLowerCase();
+    const reviewed = Object.values(reviewedMappings).find(
+      mapping => mapping.program_identity?.id === watched,
+    );
+    if (reviewed) return reviewed.program_identity;
+    const match = /^nsf:program-element:([a-z0-9]{6})$/i.exec(watched);
+    return match ? Object.freeze({
+      id: `nsf:program-element:${match[1].toUpperCase()}`,
+      label: `NSF program ${match[1].toUpperCase()}`,
+    }) : null;
   }
 
   function lookupForOpportunity(record) {
@@ -119,7 +178,10 @@
   globalThis.FUNDING_AWARD_LINKS = Object.freeze({
     fundedAwardsHref,
     lookupForOpportunity,
+    matchesProgramIdentity,
     nsfProgramElementCode,
+    programIdentityById,
+    programIdentityForOpportunity,
     reviewedMappings,
   });
 })();

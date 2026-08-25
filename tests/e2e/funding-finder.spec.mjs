@@ -3,12 +3,50 @@ import {
   csvRows,
   downloadText,
   mockHybrid,
+  mockAlerts,
   mockOpenAiBroadening,
   openFundingFinder,
   runFundingSearch,
   waitForHybridSettled,
   watchRuntimeErrors,
 } from "./helpers.mjs";
+
+test("watchlist pursuit state stays local and saved-search alerts send only typed public criteria", async ({ page }) => {
+  mockHybrid(page);
+  const alertCalls = mockAlerts(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const card = page.locator("#results .result-card").first();
+  await card.locator("[data-save]").click();
+  await page.locator("#saved-panel > summary").click();
+  await page.locator("[data-pursuit-status]").selectOption("pursuing");
+  await page.locator("[data-pursuit-note]").fill("Draft due Friday");
+
+  await page.locator("#alert-new-matches").click();
+  const dialog = page.getByRole("dialog", { name: "Alert me to new Strong matches" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText("current Strong matches become the starting baseline");
+  await dialog.locator("#alert-email").fill("researcher@example.edu");
+  await dialog.locator("#alert-submit").click();
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Check your email");
+  expect(alertCalls).toHaveLength(1);
+  expect(alertCalls[0].subscription.definition).toMatchObject({
+    query: "hydrogen catalysis", currentness: "current_only",
+    strong_contract_version: "funding-search-v2-strong-1", include_potential: false,
+  });
+  expect(alertCalls[0].baseline_opportunity_ids).toEqual(expect.any(Array));
+  expect(alertCalls[0].baseline_opportunity_ids.length).toBeGreaterThan(0);
+  const serialized = JSON.stringify(alertCalls[0]);
+  expect(serialized).not.toMatch(/Draft due Friday|profile_text|cv_text|orcid_text|chat|uploaded/i);
+  await page.keyboard.press("Escape");
+  await page.reload();
+  await page.locator("#saved-panel > summary").click();
+  await expect(page.locator("[data-pursuit-status]")).toHaveValue("pursuing");
+  await expect(page.locator("[data-pursuit-note]")).toHaveValue("Draft due Friday");
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
 
 test("Funding Finder loads with a usable catalog and no uncaught runtime errors", async ({ page }) => {
   const errors = watchRuntimeErrors(page);

@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   mockAwards,
+  mockAlerts,
   mockHybrid,
   openFundingFinder,
   runFundingSearch,
@@ -127,4 +128,12 @@ test("the reviewed NSF CBET parent opens its exact current and predecessor progr
     "723600", "149100", "534200", "534500",
     "764300", "117900", "140700", "144300", "141500", "140600",
   ]);
+  const alertCalls = mockAlerts(awardsPage);
+  await expect(awardsPage.locator("#watch-selected-program")).toBeVisible();
+  await awardsPage.locator("#watch-selected-program").click();
+  await expect(awardsPage.getByRole("dialog", { name: "Watch this program" })).toContainText("controlled NSF program identity");
+  await awardsPage.locator("#alert-email").fill("researcher@example.edu");
+  await awardsPage.locator("#alert-submit").click();
+  await expect.poll(() => alertCalls.length).toBe(1);
+  expect(alertCalls[0].subscription.definition).toEqual({ program_id: "nsf:cbet" });
 });

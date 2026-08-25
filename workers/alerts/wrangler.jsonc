@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "funding-finder-alerts",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-24",
+  "workers_dev": true,
+  "vars": {
+    "ALERTS_API_ENABLED": "true",
+    "OUTBOUND_EMAIL_ENABLED": "true",
+    "EMAIL_PROVIDER": "resend",
+    "DAILY_EMAIL_LIMIT": "100",
+    "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io/grants-scraper",
+    "PUBLIC_WORKER_ORIGIN": "https://funding-finder-alerts.urochestercheme.workers.dev",
+    "CATALOG_URL": "https://mporosoff.github.io/grants-scraper/data/opportunities.js",
+    "SUBTOPICS_URL": "https://mporosoff.github.io/grants-scraper/data/subtopics.js",
+    "CHANGES_URL": "https://mporosoff.github.io/grants-scraper/feeds/changes.json"
+  },
+  "d1_databases": [
+    {
+      "binding": "ALERTS_DB",
+      "database_name": "funding-finder-alerts",
+      "database_id": "cae0a60b-b8d1-4cdf-96fe-092db8e2a51d",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": {
+    "crons": ["15 13 * * *"]
+  }
+}

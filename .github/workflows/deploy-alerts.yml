@@ -1,0 +1,154 @@
+name: Deploy Funding Finder alerts
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-alerts.yml"
+      - "assets/alerts-config.js"
+      - "assets/alerts.css"
+      - "assets/alerts.js"
+      - "assets/award-links.js"
+      - "assets/saved.js"
+      - "assets/app.css"
+      - "assets/app.js"
+      - "assets/funded-awards.js"
+      - "match_explorer.html"
+      - "funded_awards.html"
+      - "tools/smoke_alerts_worker.mjs"
+      - "workers/alerts/**"
+permissions:
+  contents: read
+
+concurrency:
+  group: funding-finder-alerts-release
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Verify the bounded Phase 3 contracts
+        run: >-
+          node --check assets/alerts-config.js &&
+          node --check assets/alerts.js &&
+          node --check assets/award-links.js &&
+          node --check assets/saved.js &&
+          node --check assets/app.js &&
+          node --check assets/funded-awards.js &&
+          node --check workers/alerts/src/index.js &&
+          node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs
+      - name: Capture and verify the protected main release base
+        id: release-base
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          built_from_sha="$(git rev-parse HEAD)"
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$built_from_sha" != "$current_main_sha" ]; then
+            echo "::error::Protected main changed while the Alerts release was being verified."
+            exit 1
+          fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Capture the active Alerts Worker version for rollback
+        id: prior-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/alerts/wrangler.jsonc --json 2>/dev/null || true)"
+          prior_version="$(jq -r '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | if . == null then empty
+              else .versions as $versions
+              | (($versions | map(select((.percentage // 0) == 100)) | first)
+                // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+              | .version_id // empty
+              end
+          ' <<<"$deployments" 2>/dev/null || true)"
+          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+      - name: Apply committed D1 migrations
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 d1 migrations apply funding-finder-alerts --remote --config workers/alerts/wrangler.jsonc
+      - name: Deploy the committed Alerts Worker
+        id: worker-deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 deploy --config workers/alerts/wrangler.jsonc
+      - name: Wait for the Alerts Worker health contract
+        id: worker-health
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            health="$(curl --fail --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-alerts.urochestercheme.workers.dev/health' || true)"
+            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
+              && test "$(jq -r '.database_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
+              && test "$(jq -r '.email_provider_configured | tostring' <<<"$health" 2>/dev/null)" = "true" \
+              && test "$(jq -r '.outbound_email_enabled | tostring' <<<"$health" 2>/dev/null)" = "true"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::The Alerts Worker health contract did not become available."
+          exit 1
+      - name: Run bounded Alerts Worker smokes
+        id: worker-smoke
+        run: node tools/smoke_alerts_worker.mjs
+      - name: Verify Pages serves the committed alert surfaces
+        id: pages-verify
+        shell: bash
+        run: |
+          verified=false
+          for attempt in $(seq 1 18); do
+            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/match_explorer.html?deploy=${GITHUB_SHA}" -o /tmp/match_explorer.html || true
+            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/funded_awards.html?deploy=${GITHUB_SHA}" -o /tmp/funded_awards.html || true
+            if cmp -s match_explorer.html /tmp/match_explorer.html && cmp -s funded_awards.html /tmp/funded_awards.html; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the committed alert surfaces within the verification window."
+            exit 1
+          fi
+      - name: Restore the prior Alerts Worker after a failed release smoke
+        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          npx --yes wrangler@4.125.0 rollback
+          "${{ steps.prior-worker.outputs.version_id }}"
+          --config workers/alerts/wrangler.jsonc
+          --message "Automatic rollback after Alerts release failure"
+      - name: Refuse a release if protected main advanced
+        if: ${{ steps.worker-smoke.outcome == 'success' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            if [ -n "${{ steps.prior-worker.outputs.version_id }}" ]; then
+              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/alerts/wrangler.jsonc --message "Automatic rollback because main advanced"
+            fi
+            echo "::error::Protected main advanced during the Alerts release."
+            exit 1
+          fi

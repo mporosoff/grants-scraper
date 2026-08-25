@@ -1234,6 +1234,7 @@
         context = "",
         minimumCoverage: requestedMinimumCoverage = null,
         evidence: collectEvidence = false,
+        candidateIndexes = null,
       } = {},
     ) {
       const groups = fieldedQueryGroups(query, { context });
@@ -1416,7 +1417,12 @@
       }
 
       const normalizedPhrase = queryApi.tokenize(query).join(" ");
-      records.forEach((record, documentId) => {
+      const candidateDocuments = Array.isArray(candidateIndexes)
+        ? [...new Set(candidateIndexes)]
+          .filter(documentId => Number.isInteger(documentId) && documentId >= 0 && documentId < documentCount)
+          .map(documentId => [records[documentId], documentId])
+        : records.map((record, documentId) => [record, documentId]);
+      candidateDocuments.forEach(([record, documentId]) => {
         const groupMatches = groups.map(group => bestGroupMatch(documentId, group));
         const matchedIndexes = groupMatches.flatMap((match, index) => match ? [index] : []);
         lexicalCoverage[documentId] = matchedIndexes.length;
@@ -1735,6 +1741,7 @@
         context = "",
         minimumCoverage: requestedMinimumCoverage = null,
         evidence: collectEvidence = false,
+        candidateIndexes = null,
       } = {},
     ) {
       if (fieldedRankingEnabled) {
@@ -1743,6 +1750,7 @@
           context,
           minimumCoverage: requestedMinimumCoverage,
           evidence: collectEvidence,
+          candidateIndexes,
         });
       }
       const groups = expandedGroups(query, { context });

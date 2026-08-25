@@ -6,6 +6,7 @@
   const linksApi = globalThis.FUNDING_AWARD_LINKS;
   const productApi = globalThis.FUNDING_AWARD_PRODUCT;
   const apiConfig = globalThis.FUNDING_AWARD_API_CONFIG;
+  const alertsApi = globalThis.FUNDING_ALERTS;
   const INSTITUTION_STORAGE_KEY = "funding-finder.awards.institution.v1";
   const MANAGED_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start",
@@ -183,6 +184,7 @@
     if (!state.selectedRecord) {
       panel.classList.add("hidden");
       standalone.classList.remove("hidden");
+      $("watch-selected-program").classList.add("hidden");
       return;
     }
     panel.classList.remove("hidden");
@@ -193,6 +195,11 @@
       state.selectedRecord.opportunity_number || recordId(state.selectedRecord),
     ].filter(Boolean).join(" · ");
     $("selected-mapping-note").textContent = mappingDescription(state.selectedLookup);
+    const programIdentity = linksApi.programIdentityForOpportunity?.(state.selectedRecord) || null;
+    const watchProgram = $("watch-selected-program");
+    watchProgram.classList.toggle("hidden", !programIdentity);
+    watchProgram.dataset.programId = programIdentity?.id || "";
+    watchProgram.dataset.programLabel = programIdentity?.label || "";
     const currentUrl = safeUrl(state.selectedRecord.detail_page || state.selectedRecord.funding_opportunity_url);
     const open = $("open-current-opportunity");
     if (currentUrl) {
@@ -437,6 +444,16 @@
       search({ historyMode: "push", offset: 0, focusResults: true });
     });
     $("clear-opportunity").addEventListener("click", clearSelection);
+    $("watch-selected-program").addEventListener("click", event => {
+      const identity = linksApi.programIdentityById?.(event.currentTarget.dataset.programId);
+      if (!identity || !alertsApi?.open) return;
+      alertsApi.open({
+        type: "program",
+        definition: { program_id: identity.id },
+        summary: `${identity.label} · controlled NSF program identity`,
+        focus: event.currentTarget,
+      });
+    });
     $("clear-award-search").addEventListener("click", clearSearch);
     $("award-previous").addEventListener("click", () => {
       const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - apiConfig.maxResultsPerSource);

@@ -51,6 +51,20 @@ test("keeps a compact snapshot with an official url", () => {
   assert.equal(item.url, "https://x.org/a");
   assert.equal(item.source, "Grants.gov");
   assert.ok(item.saved_at);
+  assert.equal(item.pursuit_status, "saved");
+  assert.equal(item.note, "");
+});
+
+test("pursuit statuses and notes remain in the device-local Saved record", () => {
+  const store = memoryStorage();
+  S.toggle(rec(), store);
+  S.updatePursuit("x1", { pursuit_status: "pursuing", note: "Draft due Friday" }, store);
+  const item = S.load(store)[0];
+  assert.equal(item.pursuit_status, "pursuing");
+  assert.equal(item.note, "Draft due Friday");
+  S.updatePursuit("x1", { pursuit_status: "invalid", note: "x".repeat(3_000) }, store);
+  assert.equal(S.load(store)[0].pursuit_status, "pursuing");
+  assert.equal(S.load(store)[0].note.length, S.MAX_NOTE_LENGTH);
 });
 
 test("dedupes by id and supports remove/clear", () => {
