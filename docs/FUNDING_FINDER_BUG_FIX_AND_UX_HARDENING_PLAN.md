@@ -1019,12 +1019,12 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 
 | Phase | Status | PR | Final `main` SHA | Tests and workflow evidence | Deployment evidence | Notes / known limitations |
 |---|---|---|---|---|---|---|
-| Phase 1 - Front-end correctness | In progress - local gates passed 2026-08-25; protected merge and deployment pending | Pending | Pending | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 final-audit and 9/9 post-review affected-spec reruns | Pending protected workflow and Pages/Worker verification | Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
+| Phase 1 - Front-end correctness | Complete - 2026-08-25 | [Implementation PR #54](https://github.com/mporosoff/grants-scraper/pull/54); [execution-record PR #55](https://github.com/mporosoff/grants-scraper/pull/55) | `058262102435f240bac3ed0079ae251ef002d283` (implementation and deployment) | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 final-audit and 9/9 post-review affected-spec reruns. Protected: [reviewed PR Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32887538551) and [post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32888287988) passed. | [Pages](https://github.com/mporosoff/grants-scraper/actions/runs/32888286698) published exact SHA; [Award deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888287950) version `a3735dbe-0eab-4035-92bd-f66b8e2f2f5c`, rollback `b6b6e9d4-e6bf-4a9b-9611-529ea2ccd7a9`; [Alerts deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888288009) version `ff84d774-40df-43a0-bf54-c866e4f9a844`, rollback `e9346921-bbd3-4988-97cf-8937bdb742f1`; [coordinated search-package publication](https://github.com/mporosoff/grants-scraper/actions/runs/32888287924) version `4e894667-e72b-4cb1-aaa3-a40f4372ac23`, rollback `bb7661b5-d9f1-4df2-8395-384400de39f9`. All health, bounded smoke, and Pages equality gates passed. | Released. Live 390 px checks returned 10 NSF awards and 11 Funding Finder results without overflow or console errors. Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
 | Phase 2 - Alert lifecycle | Not started |  |  |  | Alerts Worker version/health |  |
 | Phase 3 - Institution completeness | Not started |  |  |  | Award Worker version/health |  |
 | Phase 4 - Operational hardening | Not started |  |  |  | All Worker versions and final release |  |
 
-### Phase 1 pre-merge regression evidence
+### Phase 1 regression and verification evidence
 
 - `FF-BUG-001`: `tests/browser/phase1-front-end-hardening-contract.test.mjs` and the Playwright case `missing award values remain missing while explicit zero stays visible`; screenshot attachment `ff-bug-001-missing-values-390px.png` covers the corrected missing-value state.
 - `FF-BUG-011`: `tests/browser/saved-contract.test.mjs`, the Phase 1 contract, and the Playwright case `saved-item write rejection restores durable UI state across every mutation`; screenshot attachment `ff-bug-011-storage-rejection-390px.png` covers the persistence-failure state.
@@ -1032,10 +1032,12 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - `FF-BUG-015`: the Phase 1 contract and the Playwright case `multi-source pagination reports independent source offsets on mobile` verify three unequal source counts at a nonzero offset without a fictitious combined range.
 - `FF-BUG-016`: the Phase 1 contract plus the Playwright cases `partial award results distinguish unsupported and rate-limited sources` and `alert dialog gives bounded recovery guidance for each server error class` verify bounded input/wait/retry/service guidance without backend detail.
 - Mobile and accessibility: 320 px and 390 px Playwright coverage exercises each changed product state; the affected accessibility scans reported zero serious or critical violations, including `funding-saved-storage-error-mobile` and `awards-results-mobile`. Keyboard coverage verifies the alert-dialog focus path and restores focus after dismissal; persistence failure restores focus to the durable saved control.
+- Protected review: the two automated review findings were fixed on the PR head and their threads resolved before merge. Regression coverage now also restores a durable snapshot changed outside the tab before a rejected write and treats an unrecognized `403 origin_not_allowed` as a service failure rather than invalid user input.
+- Post-merge live verification: at 390 px, `funded_awards.html?deploy=058262102435f240bac3ed0079ae251ef002d283` returned 10 live NSF catalysis projects with a truthful single-source `Results 1–10` label and no horizontal overflow. `match_explorer.html?deploy=058262102435f240bac3ed0079ae251ef002d283` returned 11 catalysis results, exposed `#saved-status` as `role="status"` with `aria-live="polite"`, had no horizontal overflow, and logged no console errors.
 
 ### Finding-level completion checklist
 
-- [ ] `FF-BUG-001`
+- [x] `FF-BUG-001`
 - [ ] `FF-BUG-002`
 - [ ] `FF-BUG-003`
 - [ ] `FF-BUG-004`
@@ -1045,12 +1047,12 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - [ ] `FF-BUG-008`
 - [ ] `FF-BUG-009`
 - [ ] `FF-BUG-010`
-- [ ] `FF-BUG-011`
+- [x] `FF-BUG-011`
 - [ ] `FF-BUG-012`
 - [ ] `FF-BUG-013`
-- [ ] `FF-BUG-014`
-- [ ] `FF-BUG-015`
-- [ ] `FF-BUG-016`
+- [x] `FF-BUG-014`
+- [x] `FF-BUG-015`
+- [x] `FF-BUG-016`
 - [ ] `FF-BUG-017`
 - [ ] `FF-BUG-018`
 - [ ] `FF-BUG-019`
