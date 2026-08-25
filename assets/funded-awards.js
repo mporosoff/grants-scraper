@@ -133,8 +133,8 @@
       institution: clean($("award-institution").value),
       year_start: $("year-start").value,
       year_end: $("year-end").value,
-      pi: clean($("award-pi").value),
-      program_officer: clean($("award-program-officer").value),
+      pi: "",
+      program_officer: "",
       offset: Number.parseInt(new URLSearchParams(location.search).get("offset"), 10) || 0,
     };
   }
@@ -145,7 +145,9 @@
     MANAGED_PARAMS.forEach(key => url.searchParams.delete(key));
     if (searchState.opportunity) url.searchParams.set("opportunity", searchState.opportunity);
     if (searchState.query && !searchState.opportunity) url.searchParams.set("q", searchState.query);
-    if (searchState.mode === "program" && !searchState.opportunity) url.searchParams.set("mode", "program");
+    if (["program", "pi", "program_officer"].includes(searchState.mode) && !searchState.opportunity) {
+      url.searchParams.set("mode", searchState.mode);
+    }
     if (searchState.agency && searchState.agency !== "all" && !searchState.opportunity) {
       url.searchParams.set("agency", searchState.agency);
     }
@@ -163,8 +165,18 @@
     const selectedId = clean(params.get("opportunity"));
     state.selectedRecord = selectedId ? findOpportunity(selectedId) : null;
     state.selectedLookup = state.selectedRecord ? linksApi.lookupForOpportunity(state.selectedRecord) : null;
-    $("award-query").value = clean(params.get("q"));
-    $("search-mode").value = params.get("mode") === "program" ? "program" : "topic";
+    const legacyPi = clean(params.get("pi"));
+    const legacyProgramOfficer = clean(params.get("program_officer"));
+    const query = clean(params.get("q")) || legacyPi || legacyProgramOfficer;
+    const requestedMode = clean(params.get("mode"));
+    const validModes = ["topic", "program", "pi", "program_officer"];
+    const inferredMode = !clean(params.get("q")) && legacyPi
+      ? "pi"
+      : !clean(params.get("q")) && legacyProgramOfficer
+        ? "program_officer"
+        : "topic";
+    $("award-query").value = query;
+    $("search-mode").value = validModes.includes(requestedMode) ? requestedMode : inferredMode;
     $("award-agency").value = ["NSF", "NIH", "DOE"].includes(params.get("agency")) ? params.get("agency") : "all";
     const defaultInstitution = loadDefaultInstitution();
     const urlInstitution = clean(params.get("institution"));
@@ -172,8 +184,6 @@
     $("remember-institution").checked = Boolean(defaultInstitution && $("award-institution").value === defaultInstitution);
     $("year-start").value = /^\d{4}$/.test(params.get("year_start") || "") ? params.get("year_start") : "";
     $("year-end").value = /^\d{4}$/.test(params.get("year_end") || "") ? params.get("year_end") : "";
-    $("award-pi").value = clean(params.get("pi"));
-    $("award-program-officer").value = clean(params.get("program_officer"));
     renderSelectedOpportunity();
   }
 
@@ -367,7 +377,7 @@
       : "No results on this page";
   }
 
-  async function search({ historyMode = "replace", offset = null, focusResults = false } = {}) {
+  async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false } = {}) {
     const searchState = formState();
     if (offset !== null) searchState.offset = Math.max(0, Math.min(1_000, offset));
     let requestBody;
@@ -405,6 +415,7 @@
       const suffix = unavailable.length ? ` ${unavailable.join(" and ")} could not be reached; available sources are shown.` : "";
       setStatus(`${payload.results.length.toLocaleString()} funded projects returned.${suffix}`, { error: !response.ok && !payload.results.length });
       if (focusResults) $("award-results-heading").focus({ preventScroll: true });
+      if (scrollResults) $("award-results-heading").scrollIntoView({ block: "start" });
     } catch (error) {
       if (sequence !== state.sequence || error?.name === "AbortError" && controller.signal.aborted && state.abortController !== controller) return;
       $("award-source-status").classList.add("hidden");
@@ -470,18 +481,18 @@
     $("award-previous").addEventListener("click", () => {
       const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
       const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - pageSize);
-      search({ historyMode: "push", offset, focusResults: true });
+      search({ historyMode: "push", offset, focusResults: true, scrollResults: true });
     });
     $("award-next").addEventListener("click", () => {
       const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
       const offset = Number(state.payload?.pagination?.offset || 0) + pageSize;
-      search({ historyMode: "push", offset, focusResults: true });
+      search({ historyMode: "push", offset, focusResults: true, scrollResults: true });
     });
     $("institution-summary").addEventListener("click", event => {
       const button = event.target.closest("[data-award-pi]");
       if (!button) return;
-      $("award-pi").value = clean(button.getAttribute("data-award-pi"));
-      $("award-pi").closest("details").open = true;
+      $("award-query").value = clean(button.getAttribute("data-award-pi"));
+      $("search-mode").value = "pi";
       search({ historyMode: "push", offset: 0, focusResults: true });
     });
     window.addEventListener("popstate", () => {

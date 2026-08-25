@@ -105,11 +105,6 @@
   margin-top: 16px;
 }
 
-.award-filter-grid.two-columns {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 12px;
-}
-
 .award-field {
   display: grid;
   min-width: 0;
@@ -133,7 +128,6 @@
 
 .award-field input:focus,
 .award-field select:focus,
-.advanced-award-fields summary:focus-visible,
 .pi-summary-button:focus-visible {
   outline: 3px solid rgba(0, 102, 253, .24);
   outline-offset: 2px;
@@ -154,20 +148,6 @@
   height: 17px;
   flex: none;
   margin: 1px 0 0;
-}
-
-.advanced-award-fields {
-  margin-top: 15px;
-  border-top: 1px solid #e1e7ee;
-}
-
-.advanced-award-fields summary {
-  width: fit-content;
-  padding-top: 13px;
-  color: var(--blue-dark);
-  font-size: .78rem;
-  font-weight: 800;
-  cursor: pointer;
 }
 
 .award-form-actions {
@@ -579,7 +559,6 @@
 
   .award-search-primary,
   .award-filter-grid,
-  .award-filter-grid.two-columns,
   .award-facts {
     grid-template-columns: 1fr;
   }

@@ -3,6 +3,11 @@
   margin: 26px auto 0;
 }
 
+.awards-main .ii-wrap {
+  width: 100%;
+  margin: 22px 0 0;
+}
+
 .ii-shell {
   overflow: visible;
   background: #fff;
@@ -399,6 +404,10 @@
   font-size: 1.05rem;
 }
 
+.ii-award-card h3 a {
+  color: inherit;
+}
+
 .ii-award-meta,
 .ii-award-program {
   margin-bottom: 8px;
@@ -416,6 +425,39 @@
 .ii-award-actions a {
   font-size: .77rem;
   font-weight: 800;
+}
+
+.ii-award-contacts {
+  margin: 11px 0;
+  padding: 10px 12px;
+  color: #40566f;
+  font-size: .74rem;
+  background: #f6f9fc;
+  border-radius: 8px;
+}
+
+.ii-award-contacts h4 {
+  margin-bottom: 6px;
+  color: var(--navy);
+  font-size: .78rem;
+}
+
+.ii-award-contacts ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.ii-award-contacts a {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.ii-contact-provenance {
+  display: block;
+  color: #617188;
+  font-size: .68rem;
 }
 
 .ii-award-abstract {

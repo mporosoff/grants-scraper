@@ -36,9 +36,10 @@ test("standalone native topic search renders source records, provenance, institu
   expect(calls[0].limit).toBe(10);
 
   await page.locator("[data-award-pi='Stephen Dewhurst']").click();
-  await expect(page).toHaveURL(/pi=Stephen\+Dewhurst/);
+  await expect(page).toHaveURL(/q=Stephen\+Dewhurst/);
+  await expect(page).toHaveURL(/mode=pi/);
   await page.goBack();
-  await expect(page).not.toHaveURL(/pi=/);
+  await expect(page).not.toHaveURL(/mode=pi/);
   await expect(page.locator(".award-card")).toHaveCount(3);
   expect(errors).toEqual([]);
 });
@@ -73,7 +74,7 @@ test("a failed award source degrades independently", async ({ page }) => {
   await expect(page.locator("#award-status")).toContainText("available sources are shown");
 });
 
-test("pagination controls restore their result state after loading clears", async ({ page }) => {
+test("an underfilled normalized page disables Next even when a source reports more raw records", async ({ page }) => {
   mockAwards(page, { hasMoreAtOffsets: [0] });
   await page.goto("/funded_awards.html");
   await page.locator("#award-query").fill("warm dense matter");
@@ -81,17 +82,50 @@ test("pagination controls restore their result state after loading clears", asyn
   await page.locator("#search-awards").click();
   await expect(page.locator(".award-card")).toHaveCount(1);
   await expect(page.locator("#award-previous")).toBeDisabled();
-  await expect(page.locator("#award-next")).toBeEnabled();
+  await expect(page.locator("#award-next")).toBeDisabled();
+});
 
+test("pagination restores controls after loading and scrolls each new page to the results heading", async ({ page }) => {
+  mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
+  await page.goto("/funded_awards.html");
+  await page.locator("#award-query").fill("warm dense matter");
+  await page.locator("#award-agency").selectOption("NSF");
+  await page.locator("#search-awards").click();
+  await expect(page.locator(".award-card")).toHaveCount(25);
+  await expect(page.locator("#award-previous")).toBeDisabled();
+  await expect(page.locator("#award-next")).toBeEnabled();
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   await page.locator("#award-next").click();
   await expect(page).toHaveURL(/offset=25/);
   await expect(page.locator("#award-previous")).toBeEnabled();
   await expect(page.locator("#award-next")).toBeDisabled();
+  await expect.poll(() => page.locator("#award-results-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(120);
+  await expect.poll(() => page.locator("#award-results-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
 
   await page.locator("#award-previous").click();
   await expect(page).not.toHaveURL(/offset=/);
   await expect(page.locator("#award-previous")).toBeDisabled();
   await expect(page.locator("#award-next")).toBeEnabled();
+});
+
+test("principal investigator and program officer are first-class search modes", async ({ page }) => {
+  const calls = mockAwards(page);
+  await page.goto("/funded_awards.html");
+  await expect(page.getByText("Advanced: investigator or program officer")).toHaveCount(0);
+
+  await page.locator("#search-mode").selectOption("pi");
+  await page.locator("#award-query").fill("Stephen Dewhurst");
+  await page.locator("#award-agency").selectOption("NIH");
+  await page.locator("#search-awards").click();
+  await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Stephen Dewhurst");
+  await expect(page).toHaveURL(/mode=pi/);
+
+  await page.locator("#search-mode").selectOption("program_officer");
+  await page.locator("#award-query").fill("Vladimir Lukin");
+  await page.locator("#award-agency").selectOption("NSF");
+  await page.locator("#search-awards").click();
+  await expect.poll(() => calls.at(-1)?.criteria?.program_officer).toBe("Vladimir Lukin");
+  await expect(page).toHaveURL(/mode=program_officer/);
 });
 
 test("institution-only shared URLs execute and restore across browser history", async ({ page }) => {

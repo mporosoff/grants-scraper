@@ -35,7 +35,6 @@
   <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
   <link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823">
   <link rel="stylesheet" href="./assets/alerts.css?v=phase3-alerts">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=institutional-intelligence-1">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -375,129 +374,6 @@
       </form>
     </section>
 
-    <section class="ii-wrap" aria-labelledby="ii-heading">
-      <details class="ii-shell" id="institutional-intelligence">
-        <summary>
-          <span>
-            <strong id="ii-heading">Institutional Intelligence</strong>
-            <small>Explore public NSF, NIH, and DOE awards by institution</small>
-          </span>
-          <span class="summary-action">Search institutions</span>
-        </summary>
-        <div class="ii-body">
-          <div class="ii-intro">
-            <div>
-              <p class="eyebrow">Public award evidence</p>
-              <h2>See who and what an institution’s funders have supported</h2>
-              <p>Choose an institution, then filter normalized NSF, NIH, and DOE award records. Counts and drill-downs describe only the public projects returned by the selected source search; official award records remain authoritative.</p>
-            </div>
-            <p class="ii-registry-note"><strong>Institution identity:</strong> autocomplete uses the open Research Organization Registry (ROR), including its aliases and acronyms. Funding queries keep the award sources’ canonical names and any existing source-specific identifiers.</p>
-          </div>
-
-          <form id="ii-form" class="ii-form" aria-label="Search institutional funded awards">
-            <div class="ii-institution-field">
-              <label for="ii-institution">Institution</label>
-              <div class="ii-combobox">
-                <input id="ii-institution" type="search" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ii-institution-options" aria-describedby="ii-registry-status" placeholder="Try MIT, Caltech, UVA, RIT, UCLA, or a full name">
-                <div class="ii-institution-options hidden" id="ii-institution-options" role="listbox" aria-label="Matching institutions"></div>
-              </div>
-              <p class="ii-field-status" id="ii-registry-status" aria-live="polite">Type at least two characters to search ROR.</p>
-            </div>
-
-            <div class="ii-filter-grid">
-              <label>Agency
-                <select id="ii-agency">
-                  <option value="all">NSF + NIH + DOE</option>
-                  <option value="NSF">NSF</option>
-                  <option value="NIH">NIH</option>
-                  <option value="DOE">DOE Office of Science</option>
-                </select>
-              </label>
-              <label>Program
-                <input id="ii-program" type="text" autocomplete="off" placeholder="Example: BES, Catalysis, R01, or NSF program">
-              </label>
-              <label>Topic
-                <input id="ii-topic" type="search" autocomplete="off" placeholder="Example: catalysis">
-              </label>
-              <label>Investigator
-                <input id="ii-pi" type="search" autocomplete="off" placeholder="Name as listed by sponsor">
-              </label>
-              <label>From year
-                <input id="ii-year-start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2019">
-              </label>
-              <label>Through year
-                <input id="ii-year-end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2026">
-              </label>
-            </div>
-            <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps only to the published PAMS organization identity SC-32.</p>
-            <div class="ii-actions">
-              <button class="button primary" id="ii-search" type="submit">Search funded projects</button>
-              <button class="text-button" id="ii-clear" type="button">Clear institutional search</button>
-            </div>
-          </form>
-
-          <div class="ii-status" id="ii-status" role="status" aria-live="polite">Structured institutional search does not require an AI key.</div>
-          <ul class="ii-source-status hidden" id="ii-source-status" aria-label="Award source status"></ul>
-
-          <section class="ii-output hidden" id="ii-output" aria-labelledby="ii-output-heading" aria-busy="false">
-            <div class="ii-output-heading">
-              <div>
-                <p class="eyebrow">Returned public evidence</p>
-                <h2 id="ii-output-heading">Institutional award summary</h2>
-              </div>
-              <p id="ii-result-scope"></p>
-            </div>
-            <div class="ii-metrics" id="ii-metrics"></div>
-            <div class="ii-drilldowns">
-              <section aria-labelledby="ii-investigators-heading">
-                <h3 id="ii-investigators-heading">Investigators</h3>
-                <div class="ii-facet-list" id="ii-investigators"></div>
-              </section>
-              <section aria-labelledby="ii-programs-heading">
-                <h3 id="ii-programs-heading">Programs</h3>
-                <div class="ii-facet-list" id="ii-programs"></div>
-              </section>
-            </div>
-            <div class="ii-awards" id="ii-awards" aria-live="polite"></div>
-          </section>
-
-          <details class="ii-ask" id="ii-ask">
-            <summary>
-              <span><strong>Optional: Ask about this institution</strong><small>Translate a question into the transparent filters above</small></span>
-              <span id="ii-ai-state">No AI key required for structured search</span>
-            </summary>
-            <div class="ii-ask-body">
-              <label for="ii-question">Question about the selected institution</label>
-              <textarea id="ii-question" rows="3" placeholder="Who at this institution has received awards from DOE BES?"></textarea>
-              <button class="button ai-button" id="ii-ask-button" type="button">Translate question into filters</button>
-              <div class="ii-question-plan hidden" id="ii-question-plan" aria-live="polite"></div>
-
-              <section class="ii-key-setup" id="ii-key-setup" aria-labelledby="ii-key-heading">
-                <h3 id="ii-key-heading">Connect the same optional AI provider used by Funding Finder</h3>
-                <div class="ii-key-fields">
-                  <label>Provider
-                    <select id="ii-provider">
-                      <option value="openai">OpenAI</option>
-                      <option value="anthropic">Anthropic</option>
-                    </select>
-                  </label>
-                  <label>Model
-                    <output id="ii-model">gpt-5.6-luna</output>
-                  </label>
-                  <label>API key
-                    <input id="ii-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
-                  </label>
-                </div>
-                <button class="button secondary" id="ii-save-key" type="button">Save to Funding Finder on this device</button>
-                <p class="credential-status" id="ii-key-status" aria-live="polite"></p>
-              </section>
-              <p class="privacy-note">The key stays in the same browser-local Funding Finder credential store. Only your question, selected public institution, and visible structured filters go directly to the selected provider. Profile, CV, ORCID, saved notes, and documents are not included. Award records, not model text, remain authoritative.</p>
-            </div>
-          </details>
-        </div>
-      </details>
-    </section>
-
     <div class="notice error hidden" id="catalog-error" role="alert"></div>
 
     <div class="workspace">
@@ -715,9 +591,6 @@
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
   <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
   <script src="./assets/award-links.js?v=phase3-program-watches"></script>
-  <script src="./assets/award-api-config.js?v=institutional-intelligence-1"></script>
-  <script src="./assets/funded-awards-core.js?v=institutional-intelligence-1"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=institutional-intelligence-1"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=phase3-alerts"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
@@ -729,7 +602,6 @@
   <script src="./assets/site-help.js?v=app-1.3.0"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
   <script src="./assets/app.js?v=app-1.3.0"></script>
-  <script src="./assets/institutional-intelligence.js?v=institutional-intelligence-1"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

@@ -123,13 +123,23 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.deepEqual(Array.from(doeProgram.sources), ["DOE"]);
   assert.deepEqual(JSON.parse(JSON.stringify(doeProgram.criteria)), { program: "Catalysis" });
   assert.equal(doeProgram.limit, 10);
+  assert.deepEqual(JSON.parse(JSON.stringify(product.buildRequest({
+    mode: "pi", agency: "NSF", query: "Ada Investigator", offset: 0,
+  }, null, 25).criteria)), { pi: "Ada Investigator" });
+  assert.deepEqual(JSON.parse(JSON.stringify(product.buildRequest({
+    mode: "program_officer", agency: "NSF", query: "Alex Officer", offset: 0,
+  }, null, 25).criteria)), { program_officer: "Alex Officer" });
   assert.equal(product.canPageForward({
     sources: [{ status: "ok", has_more: false, total_count: 500, raw_record_count: 25 }],
-    pagination: { offset: 25 },
+    pagination: { offset: 25, limit: 25 },
   }), false, "raw-record totals cannot advance normalized pagination");
   assert.equal(product.canPageForward({
-    sources: [{ status: "ok", has_more: true, total_count: null, raw_record_count: 100 }],
-    pagination: { offset: 25 },
+    sources: [{ status: "ok", has_more: true, result_count: 24, total_count: null, raw_record_count: 100 }],
+    pagination: { offset: 25, limit: 25 },
+  }), false, "an underfilled normalized page is exhausted even if a source reports more raw rows");
+  assert.equal(product.canPageForward({
+    sources: [{ status: "ok", has_more: true, result_count: 25, total_count: null, raw_record_count: 100 }],
+    pagination: { offset: 25, limit: 25 },
   }), true);
   assert.doesNotMatch(coreSource + appSource, /FUNDING_HYBRID_SEARCH|voyage|embedding|vectorUrl/i);
 });
@@ -138,11 +148,14 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(page, /<h1 id="page-title">See what NSF, NIH, and DOE have funded<\/h1>/);
   for (const id of [
     "selected-opportunity", "award-search-form", "award-query", "search-mode",
-    "award-institution", "award-agency", "year-start", "year-end", "award-pi",
-    "award-program-officer", "award-status", "award-source-status",
+    "award-institution", "award-agency", "year-start", "year-end",
+    "award-status", "award-source-status",
     "institution-summary", "award-result-list", "award-pagination",
   ]) assert.match(page, new RegExp(`id="${id}"`));
   assert.match(page, /role="search"/);
+  assert.match(page, /<option value="pi">Principal investigator<\/option>/);
+  assert.match(page, /<option value="program_officer">Program officer<\/option>/);
+  assert.doesNotMatch(page, /Advanced: investigator or program officer/);
   assert.match(page, /role="status" aria-live="polite"/);
   assert.match(page, /funding-finder-award-api\.urochestercheme\.workers\.dev/);
   assert.match(page, /assets\/award-links\.js/);
@@ -156,6 +169,7 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(appSource, /params\.get\("institution"\)/);
   assert.match(appSource, /funding-finder\.awards\.institution\.v1/);
   assert.match(appSource, /other sources remain usable/);
+  assert.match(appSource, /scrollIntoView\(\{ block: "start" \}\)/);
   assert.match(fundingApp, /data-funded-awards=/);
   assert.match(fundingApp, /target="_blank" rel="noopener">View funded awards/);
 });

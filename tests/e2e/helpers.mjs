@@ -89,7 +89,13 @@ export function mockHybrid(page, {
   return calls;
 }
 
-export function mockAwards(target, { failDoe = false, failNih = false, failNsf = false, hasMoreAtOffsets = [] } = {}) {
+export function mockAwards(target, {
+  failDoe = false,
+  failNih = false,
+  failNsf = false,
+  hasMoreAtOffsets = [],
+  resultCountPerSource = 1,
+} = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
@@ -231,16 +237,25 @@ export function mockAwards(target, { failDoe = false, failNih = false, failNsf =
       if (failed) {
         sources.push({ source, status: "unavailable", error: { code: "source_unavailable" } });
       } else {
-        results.push(source === "NSF" ? nsf : source === "NIH" ? nih : doe);
+        const template = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
+        const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, resultCountPerSource));
+        for (let index = 0; index < resultCount; index += 1) {
+          const suffix = body.offset + index;
+          results.push(index === 0 && body.offset === 0 ? template : {
+            ...template,
+            award_id: `${template.award_id}-${suffix}`,
+            source_record_ids: [`${template.source_record_ids[0]}-${suffix}`],
+          });
+        }
         sources.push({
           source,
           status: "ok",
           adapter_version: "1.1.0",
           cache: "miss",
           total_count: null,
-          raw_record_count: 1,
+          raw_record_count: resultCount,
           has_more: hasMoreAtOffsets.includes(body.offset),
-          result_count: 1,
+          result_count: resultCount,
           retrieved_at: retrievedAt,
         });
       }
