@@ -216,11 +216,14 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
   const providerCalls = [];
   await page.route("https://api.openai.com/v1/responses", route => {
-    providerCalls.push(route.request().postDataJSON());
+    const providerCall = route.request().postDataJSON();
+    providerCalls.push(providerCall);
+    const requestedQuestion = JSON.parse(providerCall.input).question;
+    const program = requestedQuestion.includes("CAREER") ? "CAREER" : "MRI";
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({ agency: "NSF", program: "MRI", topic: "", pi: "", year_start: "", year_end: "" }) }),
+      body: JSON.stringify({ output_text: JSON.stringify({ agency: "NSF", program, topic: "", pi: "", year_start: "", year_end: "" }) }),
     });
   });
   mockHybrid(page);
@@ -242,6 +245,12 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   expect(Object.keys(providerInput).sort()).toEqual(["current_filters", "institution", "question"]);
   expect(Object.keys(providerInput.current_filters).sort()).toEqual(["agency", "pi", "program", "program_officer", "topic", "year_end", "year_start"]);
   expect(JSON.stringify(providerInput)).not.toMatch(/profile|cv_text|orcid|saved|pursuit|document/i);
+  await page.locator("#ii-question").fill("What has CAREER Program received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Program: CAREER");
+  await expect.poll(() => calls.at(-1)?.criteria?.program).toBe("CAREER");
+  expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
+  expect(providerCalls).toHaveLength(2);
 });
 
 test("the question translator preserves an explicitly named University of Rochester investigator", async ({ page }) => {

@@ -259,7 +259,7 @@
         if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
-        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|LLC|Inc)\b/i.test(candidate)) continue;
+        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|Program|Programme|Initiative|LLC|Inc)\b/i.test(candidate)) continue;
         const institutionIdentities = [institution, ...(Array.isArray(institutionAliases) ? institutionAliases : [])]
           .map(identityKey)
           .filter(Boolean);
