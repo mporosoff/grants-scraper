@@ -58,6 +58,15 @@ test("Funding Finder loads with a usable catalog and no uncaught runtime errors"
   expect(errors).toEqual([]);
 });
 
+test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
+  mockHybrid(page);
+  await page.goto("/match_explorer.html?focus=361187");
+  const card = page.locator('[data-opportunity-id="361187"]');
+  await expect(card).toBeVisible({ timeout: 30_000 });
+  await expect(card).toHaveClass(/chat-target/);
+  await expect(page.locator("#results-mode")).not.toContainText("Ready when you are");
+});
+
 test("Strong and Potential membership survives sorting, filters trigger one semantic cycle, and core actions work", async ({ page }) => {
   const calls = mockHybrid(page);
   await openFundingFinder(page);

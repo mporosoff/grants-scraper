@@ -931,7 +931,7 @@
   function hasManagedUrlState() {
     const params = new URLSearchParams(location.search);
     return [
-      "q", "status", "from", "through", "min_award", "evidence", "preliminary",
+      "q", "focus", "status", "from", "through", "min_award", "evidence", "preliminary",
       "limited", "early_career", "no_cost_share", "sort",
       ...Object.keys(FACETS).map(name => `f_${name}`),
     ].some(key => params.has(key));
