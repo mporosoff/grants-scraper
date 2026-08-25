@@ -244,9 +244,12 @@ export function mockAwards(target, {
     const sources = [];
     for (const source of body.sources) {
       const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
-      const configuredFailure = sourceFailuresByOffset[`${source}:${body.offset}`]
+      const configuredFailureEntry = sourceFailuresByOffset[`${source}:${body.offset}`]
         || sourceFailures[source]
         || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+      const configuredFailure = typeof configuredFailureEntry === "function"
+        ? configuredFailureEntry({ source, offset: body.offset, body })
+        : configuredFailureEntry;
       if (configuredFailure) {
         sources.push({
           source,

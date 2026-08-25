@@ -107,6 +107,30 @@ test("a later source failure retains already loaded projects and offers a bounde
   await expect(page.getByRole("button", { name: "Retry NSF" })).toBeEnabled();
 });
 
+test("a retry that becomes unsupported retains projects and removes the retry action", async ({ page }) => {
+  mockHybrid(page);
+  let attempts = 0;
+  mockAwards(page, {
+    hasMoreAtOffsets: [0],
+    resultCountPerSource: 25,
+    sourceFailuresByOffset: {
+      "NSF:25": () => attempts++ === 0
+        ? { status: "unavailable", code: "source_unavailable" }
+        : { status: "unsupported", code: "unsupported_filter" },
+    },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-search").click();
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.getByRole("button", { name: "Retry NSF" })).toBeEnabled();
+  await page.getByRole("button", { name: "Retry NSF" }).click();
+  await expect(page.getByRole("button", { name: "Retry NSF" })).toHaveCount(0);
+  await expect(page.locator("#ii-source-status")).toContainText("25 previously loaded NSF projects were retained");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
+});
+
 test("source-specific loading can advance across an empty normalized page within the bound", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page, {

@@ -333,14 +333,17 @@
       schema_version: 1,
       request: { sources: pages.map(page => page.source) },
       results: pages.flatMap(page => page.results),
-      sources: pages.map(page => ({
-        ...(page.error || page.meta),
-        source: page.source,
-        status: page.error ? "unavailable" : page.meta?.status || "unavailable",
-        result_count: page.results.length,
-        retained_count: page.error ? page.results.length : 0,
-        has_more: page.error ? false : page.hasMore,
-      })),
+      sources: pages.map(page => {
+        const status = page.error ? "unavailable" : page.meta?.status || "unavailable";
+        return {
+          ...(page.error || page.meta),
+          source: page.source,
+          status,
+          result_count: page.results.length,
+          retained_count: status === "ok" ? 0 : page.results.length,
+          has_more: page.error ? false : page.hasMore,
+        };
+      }),
       pagination: { limit: 0, offset: 0 },
     };
   }
@@ -531,7 +534,8 @@
       if (sequence !== state.searchSequence) return;
       const next = sourcePage(requestBody, payload);
       if (next.meta.status !== "ok") {
-        page.error = next.meta;
+        page.meta = next.meta;
+        page.error = next.meta.status === "unsupported" ? null : next.meta;
         page.hasMore = false;
       } else {
         const seen = new Set(page.results.map(award => `${award.source}:${award.award_id}`));
