@@ -108,6 +108,16 @@ test("existing institution identities retain source-specific award query identif
   assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
   assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
   assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
+  const mit = resolveInstitution({
+    id: "https://ror.org/042nb2s44",
+    name: "Massachusetts Institute of Technology",
+  });
+  assert.equal(mit.ror_id, "https://ror.org/042nb2s44");
+  assert.equal(mit.sources.NSF.search_name, "Massachusetts Institute of Technology");
+  assert.equal(resolveInstitution({
+    id: "https://ror.org/022kthw22",
+    name: "Massachusetts Institute of Technology",
+  }), null);
 });
 
 test("structured filters reuse the normalized cross-agency award request contract", () => {

@@ -416,6 +416,14 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), limit: 26 }), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"], 25)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ award_id: "DE-SC0020230" }, ["DOE"], 1)), env)).status, 200);
+  assert.equal((await handler(workerRequest(query({
+    institution: "Massachusetts Institute of Technology",
+    institution_id: "https://ror.org/042nb2s44",
+  }, ["NSF"], 10)), env)).status, 200);
+  assert.equal((await handler(workerRequest(query({
+    institution: "Massachusetts Institute of Technology",
+    institution_id: "https://ror.org/022kthw22",
+  }, ["NSF"], 10)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
   const cbetCodes = [
     "366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400",

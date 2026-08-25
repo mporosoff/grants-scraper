@@ -153,7 +153,6 @@ function validateCriteria(value) {
   }
   if (!SEARCH_FIELDS.some(field => field in criteria)) return null;
   if (criteria.program && criteria.program_codes) return null;
-  if (criteria.institution && criteria.institution_id) return null;
   if (criteria.year_start && criteria.year_end) {
     if (criteria.year_end < criteria.year_start || criteria.year_end - criteria.year_start + 1 > MAX_YEAR_SPAN) {
       return null;
