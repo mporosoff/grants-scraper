@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "phase": 3,
+  "generated_at": "2026-08-25T03:05:41Z",
+  "protected_main_base": "12f07d2fde48f2d486fbb617da19a72d2bec35e3",
+  "decision": "PHASE 3 PASSED — PERSONALIZED ALERTS WORK WITHOUT USER ACCOUNTS",
+  "scope": {
+    "included": [
+      "device-local pursuit statuses and notes",
+      "verified opportunity watches",
+      "baselined saved-search Strong alerts",
+      "controlled stable NSF program watches",
+      "weekly digest cadence",
+      "manage and unsubscribe lifecycle",
+      "D1 migrations",
+      "Resend provider abstraction",
+      "bounded rate limits and authenticated bounce/complaint handling"
+    ],
+    "excluded": [
+      "DOE and Phase 4",
+      "award semantic vectors",
+      "opportunity ranking changes",
+      "individual Potential-match email by default",
+      "optional diagnostic infrastructure"
+    ]
+  },
+  "architectural_reuse": {
+    "saved_state": "funding-finder.saved.v1 remains the browser-local store and is extended in place",
+    "strong_matching": "Alerts Worker imports the production search-query, search-retrieval, and search-v2-config modules; an optional candidate-index input limits scheduled scoring to changed public opportunity IDs without changing default ranking",
+    "change_detection": "Scheduled evaluation consumes the existing feeds/changes.json new/material-change contract",
+    "program_identity": "Program watches use reviewed NSF parent mappings or exact NSF program-element identities from assets/award-links.js",
+    "worker_deployment": "Main-only deployment, protected-main race check, newest active rollback version, health, smoke, Pages coherence, and path triggers for every bundled Strong-match module mirror the hardened Award Worker workflow",
+    "failure_isolation": "Alerts and email failures leave Funding Finder, Funded Awards, Saved state, and queued notifications available"
+  },
+  "saved_search_baseline": {
+    "established_at_creation": true,
+    "existing_strong_matches_email": false,
+    "future_new_or_newly_qualifying_strong_matches_email": true,
+    "potential_matches_default": false,
+    "evaluation_scope": "new and materially changed opportunity IDs from the existing change feed"
+  },
+  "privacy": {
+    "browser_local_only": [
+      "pursuit status",
+      "saved notes",
+      "CV text",
+      "full profile text",
+      "ORCID publication text",
+      "uploaded notice text",
+      "AI chat"
+    ],
+    "worker_authorized_fields": [
+      "email address",
+      "verification state",
+      "exact watched opportunity ID and triggers",
+      "controlled watched program ID",
+      "typed query and public filters",
+      "public opportunity IDs for the one-time Strong baseline",
+      "cadence",
+      "bounded notification history"
+    ],
+    "defense": "Browser request construction is allowlisted and Worker validation rejects unexpected or recursively private fields. Verification tokens are stored only as SHA-256 hashes."
+  },
+  "d1": {
+    "database_name": "funding-finder-alerts",
+    "database_id": "cae0a60b-b8d1-4cdf-96fe-092db8e2a51d",
+    "migrations": [
+      "workers/alerts/migrations/0001_phase3_alerts.sql",
+      "workers/alerts/migrations/0002_delivery_claim_lease.sql"
+    ],
+    "remote_migration_applied": true,
+    "tables": [
+      "subscribers",
+      "subscriptions",
+      "subscription_qualifications",
+      "notification_events",
+      "rate_limits",
+      "provider_events",
+      "evaluation_runs",
+      "d1_migrations"
+    ]
+  },
+  "delivery": {
+    "provider": "Resend",
+    "sender": "Funding Finder <notifications@funding.porosoffresearchgroup.com>",
+    "secret_name": "RESEND_API_KEY",
+    "provider_abstraction_mocked_in_ci": true,
+    "event_idempotency": "UNIQUE(subscription_id, event_key) plus Resend Idempotency-Key",
+    "daily_limit": 100,
+    "overflow": "queued",
+    "failure": "failed events retain retry state and are never marked sent",
+    "claim_recovery": "sending events use a 15-minute claim lease; expired claims are retried with the original deterministic Resend idempotency key",
+    "provider_failure_diagnostics": "logs only network-versus-HTTP classification and the numeric HTTP status; provider response bodies, credentials, recipient data, and token data remain excluded",
+    "request_context": "production fetch is resolved inside each Worker invocation so Cloudflare request-scoped I/O is never reused across requests",
+    "bounce_complaint": "authenticated Svix webhooks are idempotent and suppress all future delivery for the subscriber"
+  },
+  "validation": {
+    "node_phase3_contract_tests": {
+      "command": "node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs",
+      "passed": 20,
+      "failed": 0
+    },
+    "protected_browser_contract_tests": {
+      "command": "node --test tests/browser/*.test.mjs",
+      "passed": 271,
+      "failed": 0
+    },
+    "protected_real_browser_tests": {
+      "command": "playwright test",
+      "passed": 19,
+      "failed": 0,
+      "alert_dialog_serious_or_critical_accessibility_violations": 0,
+      "mobile_widths_px": [320, 390]
+    },
+    "protected_python_tests": {
+      "command": "python -m tools.run_refresh_validation",
+      "passed": 773,
+      "failed": 0
+    },
+    "frozen_retrieval_guards": {
+      "query_baseline": "37 queries, zero top-10 churn",
+      "p9_scoring": "50 cases, cardinality invariant and byte-identical",
+      "flag_off_no_drift": "22 artifacts unchanged",
+      "vector_or_corpus_evaluation_rerun": false
+    },
+    "worker_dry_run": "Wrangler 4.125.0 bundled 258.40 KiB / 55.05 KiB gzip without deployment",
+    "remote_d1_migration": "0001_phase3_alerts.sql and 0002_delivery_claim_lease.sql applied successfully; remote list reports no pending migrations",
+    "review_regressions": {
+      "stale_delivery_claim": "expired sending claims are reclaimed and retain the original provider idempotency key",
+      "status_transition": "the existing catalog change feed emits status_changed for non-closing transitions and opportunity/program watches consume it",
+      "deployment_coherence": "Alerts Worker release paths include search-query.js, search-retrieval.js, and search-v2-config.js"
+    }
+  },
+  "live_email": {
+    "status": "passed",
+    "worker_url": "https://funding-finder-alerts.urochestercheme.workers.dev",
+    "cloudflare_account_id": "8cb81e39674e3ea3a2ff449371587dff",
+    "secret_binding_verified": "the user-updated RESEND_API_KEY binding was present on the exact production Worker version and account before the bounded send; no value was read or exposed",
+    "diagnostic_result": "the original failure was a Cloudflare request-scoped fetch reuse error, not a Resend HTTP rejection; request-local fetch resolution fixed the only delivery fault",
+    "bounded_verification_request": "HTTP 202 verification_required",
+    "resend_delivery": "verification message accepted and shown as delivered by Resend",
+    "verification": "completed from the received message; remote D1 records one verified subscriber",
+    "manage": "weekly cadence, pause, and resume returned HTTP 200 from the received-message manage link, including iOS Gmail's same-origin opaque navigation form behavior",
+    "unsubscribe": "completed from the received message; remote D1 records zero active and one inactive subscription",
+    "unsubscribe_confirmation": "You have been successfully unsubscribed from Funding Finder.",
+    "bounded_live_test_worker_version": "0e274827-0c74-48a8-94fa-987d7a5da2fc",
+    "webhook": {
+      "endpoint": "https://funding-finder-alerts.urochestercheme.workers.dev/webhooks/resend",
+      "status": "enabled",
+      "subscribed_events": ["email.bounced", "email.complained", "email.suppressed"],
+      "secret_binding": "RESEND_WEBHOOK_SECRET",
+      "live_failure_event_generated": false,
+      "verification": "production endpoint and subscriptions are configured; authenticated signature, duplicate-event idempotency, and subscriber suppression pass deterministic contract tests"
+    },
+    "key_committed_or_logged": false,
+    "merge_gate": "live gate passed; merge is permitted after protected PR checks"
+  }
+}

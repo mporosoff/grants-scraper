@@ -2245,6 +2245,13 @@ textarea:focus {
   font-weight: 400;
 }
 
+.saved-content { flex: 1; min-width: 0; }
+.saved-item-actions { align-self: flex-start; }
+
+@media (max-width: 560px) {
+  .saved-item { align-items: stretch; flex-direction: column; }
+}
+
 .ai-button {
   width: 100%;
   margin-top: 13px;

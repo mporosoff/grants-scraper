@@ -34,6 +34,7 @@
   const RESULT_WORKFLOW_API = globalThis.FUNDING_RESULT_WORKFLOW;
   const SAVED_API = globalThis.FUNDING_SAVED;
   const AWARD_LINKS_API = globalThis.FUNDING_AWARD_LINKS;
+  const ALERTS_API = globalThis.FUNDING_ALERTS;
   const INITIAL_URL_PARAMS = new URLSearchParams(location.search);
   const EVALUATION_MODE = INITIAL_URL_PARAMS.get("evaluation") === "1";
   let pendingLinkedOpportunityId = INITIAL_URL_PARAMS.get("focus") || "";
@@ -2562,6 +2563,7 @@
         ? "Archived"
         : "Forecasted";
     const fundedAwardsHref = AWARD_LINKS_API?.fundedAwardsHref?.(record) || "";
+    const programIdentity = AWARD_LINKS_API?.programIdentityForOpportunity?.(record) || null;
 
     return `<article class="result-card${assessment ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -2617,6 +2619,8 @@
       <div class="card-actions">
         ${actions.html}
         ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
+        <button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Watch opportunity</button>
+        ${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Watch program</button>` : ""}
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
@@ -3162,9 +3166,24 @@
         item.agency, item.source,
         item.close_date ? `due ${formatDate(item.close_date)}` : "",
       ].filter(Boolean).map(escapeHtml).join(" · ");
+      const id = SAVED_API.idOf(item);
       return `<div class="saved-item">
-        <div><strong>${link}</strong><small>${meta}</small></div>
-        <button type="button" class="text-button" data-remove-saved="${escapeAttribute(SAVED_API.idOf(item))}">Remove</button>
+        <div class="saved-content"><strong>${link}</strong><small>${meta}</small>
+          <div class="pursuit-controls">
+            <label>Pursuit status
+              <select data-pursuit-status="${escapeAttribute(id)}">
+                ${[["saved", "Saved"], ["considering", "Considering"], ["pursuing", "Pursuing"], ["submitted", "Submitted"], ["passed", "Passed"]].map(([value, label]) => `<option value="${value}"${item.pursuit_status === value ? " selected" : ""}>${label}</option>`).join("")}
+              </select>
+            </label>
+            <label>Private note
+              <textarea data-pursuit-note="${escapeAttribute(id)}" rows="2" maxlength="${SAVED_API.MAX_NOTE_LENGTH}" placeholder="Stored only on this device">${escapeHtml(item.note || "")}</textarea>
+            </label>
+          </div>
+        </div>
+        <div class="saved-item-actions">
+          <button type="button" class="text-button" data-watch-opportunity="${escapeAttribute(id)}">Email alert</button>
+          <button type="button" class="text-button" data-remove-saved="${escapeAttribute(id)}">Remove</button>
+        </div>
       </div>`;
     }).join("");
   }
@@ -3190,6 +3209,59 @@
     refreshSavedState([]);
     renderSaved();
     renderResults();
+  }
+
+  function updateSavedPursuit(id, changes) {
+    refreshSavedState(SAVED_API.updatePursuit(id, changes));
+  }
+
+  function openOpportunityAlert(id, focus) {
+    const record = recordById(id);
+    if (!record || !ALERTS_API?.open) return;
+    ALERTS_API.open({
+      type: "opportunity",
+      definition: {
+        opportunity_id: id,
+        triggers: ["deadline_changed", "amended", "closing_reminders", "status_changed"],
+      },
+      summary: `${record.title} · ${record.agency || "Agency not listed"}`,
+      focus,
+    });
+  }
+
+  function openProgramAlert(programId, label, focus) {
+    if (!ALERTS_API?.open || !AWARD_LINKS_API?.programIdentityById?.(programId)) return;
+    ALERTS_API.open({
+      type: "program",
+      definition: { program_id: programId },
+      summary: label || AWARD_LINKS_API.programIdentityById(programId).label,
+      focus,
+    });
+  }
+
+  function savedSearchAlertDefinition() {
+    if (!state.searched || !state.query) return null;
+    return {
+      query: state.query,
+      filters: hybridFilterState(),
+      currentness: "current_only",
+      strong_contract_version: "funding-search-v2-strong-1",
+      include_potential: false,
+    };
+  }
+
+  function openSavedSearchAlert() {
+    const definition = savedSearchAlertDefinition();
+    if (!definition || !ALERTS_API?.open) return;
+    ALERTS_API.open({
+      type: "saved_search",
+      definition,
+      baselineOpportunityIds: state.strongMatches.map(match => (
+        recordId(catalog.opportunities[match.index])
+      )).filter(Boolean),
+      summary: `New Strong matches for “${state.query}” using the current public filters. Browser-local profile, CV, ORCID, documents, and chat are excluded.`,
+      focus: $("alert-new-matches"),
+    });
   }
 
   function paginationItems(currentPage, totalPages) {
@@ -3275,6 +3347,7 @@
   function renderResults() {
     renderHybridStatus();
     if (!state.searched) {
+      if ($("alert-new-matches")) $("alert-new-matches").disabled = true;
       $("results-toolbar").classList.add("search-not-started");
       $("result-count").textContent = "";
       $("result-label").textContent = "Your matches will appear here";
@@ -3301,6 +3374,12 @@
     }
 
     const display = currentDisplayMatches();
+    if ($("alert-new-matches")) {
+      $("alert-new-matches").disabled = !state.query;
+      $("alert-new-matches").title = state.query
+        ? "Email only for future new Strong matches; private profile context is excluded"
+        : "Enter a typed research query before creating a saved-search alert";
+    }
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
@@ -4488,6 +4567,7 @@
       );
     });
     $("export-csv").addEventListener("click", exportCsv);
+    $("alert-new-matches")?.addEventListener("click", openSavedSearchAlert);
     $("clear-saved")?.addEventListener("click", clearSaved);
     document.addEventListener("click", event => {
       const save = event.target.closest("[data-save]");
@@ -4499,7 +4579,21 @@
         return;
       }
       const remove = event.target.closest("[data-remove-saved]");
-      if (remove) { removeSaved(remove.dataset.removeSaved); }
+      if (remove) { removeSaved(remove.dataset.removeSaved); return; }
+      const watchOpportunity = event.target.closest("[data-watch-opportunity]");
+      if (watchOpportunity) { openOpportunityAlert(watchOpportunity.dataset.watchOpportunity, watchOpportunity); return; }
+      const watchProgram = event.target.closest("[data-watch-program]");
+      if (watchProgram) {
+        openProgramAlert(watchProgram.dataset.watchProgram, watchProgram.dataset.watchProgramLabel, watchProgram);
+      }
+    });
+    $("saved-list")?.addEventListener("change", event => {
+      const status = event.target.closest("[data-pursuit-status]");
+      if (status) updateSavedPursuit(status.dataset.pursuitStatus, { pursuit_status: status.value });
+    });
+    $("saved-list")?.addEventListener("input", event => {
+      const note = event.target.closest("[data-pursuit-note]");
+      if (note) updateSavedPursuit(note.dataset.pursuitNote, { note: note.value });
     });
 
     ["research-profile", "expertise-keywords"].forEach(id => {

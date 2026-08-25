@@ -5,13 +5,18 @@
  * search. Stored only in this browser (localStorage key
  * "funding-finder.saved.v1"); nothing is sent anywhere, matching the app's
  * device-local privacy model. A compact snapshot (id, title, agency, source,
- * deadline, official URL) is kept so saved items render without the catalog.
+ * deadline, official URL, pursuit status, and note) is kept so saved items
+ * render without the catalog. Pursuit state and notes never leave this device.
  */
 (() => {
   "use strict";
 
   const STORAGE_KEY = "funding-finder.saved.v1";
   const MAX_SAVED = 500;
+  const MAX_NOTE_LENGTH = 2_000;
+  const PURSUIT_STATUSES = Object.freeze([
+    "saved", "considering", "pursuing", "submitted", "passed",
+  ]);
 
   function storageOrNull(storage) {
     try {
@@ -36,6 +41,7 @@
     const number = cleanString(record.opportunity_number, 200);
     const id = cleanString(record.opportunity_id, 200);
     if (!title || (!number && !id)) return null;
+    const pursuitStatus = cleanString(record.pursuit_status, 24).toLowerCase();
     return {
       opportunity_id: id,
       opportunity_number: number,
@@ -50,6 +56,10 @@
         1000,
       ),
       saved_at: cleanString(record.saved_at, 40) || new Date().toISOString(),
+      pursuit_status: PURSUIT_STATUSES.includes(pursuitStatus)
+        ? pursuitStatus
+        : "saved",
+      note: String(record.note ?? "").replace(/\r\n?/g, "\n").trim().slice(0, MAX_NOTE_LENGTH),
     };
   }
 
@@ -123,6 +133,24 @@
     return items;
   }
 
+  function updatePursuit(id, changes, storage) {
+    const items = load(storage);
+    const item = items.find(existing => idOf(existing) === cleanString(id, 200));
+    if (!item) return items;
+    if (Object.prototype.hasOwnProperty.call(changes || {}, "pursuit_status")) {
+      const status = cleanString(changes.pursuit_status, 24).toLowerCase();
+      if (PURSUIT_STATUSES.includes(status)) item.pursuit_status = status;
+    }
+    if (Object.prototype.hasOwnProperty.call(changes || {}, "note")) {
+      item.note = String(changes.note ?? "")
+        .replace(/\r\n?/g, "\n")
+        .trim()
+        .slice(0, MAX_NOTE_LENGTH);
+    }
+    persist(items, storage);
+    return items;
+  }
+
   function clear(storage) {
     const target = storageOrNull(storage);
     if (target) {
@@ -136,6 +164,7 @@
   }
 
   globalThis.FUNDING_SAVED = Object.freeze({
-    STORAGE_KEY, MAX_SAVED, idOf, sanitizeItem, load, isSaved, toggle, remove, clear,
+    STORAGE_KEY, MAX_SAVED, MAX_NOTE_LENGTH, PURSUIT_STATUSES,
+    idOf, sanitizeItem, load, isSaved, toggle, remove, updatePursuit, clear,
   });
 })();

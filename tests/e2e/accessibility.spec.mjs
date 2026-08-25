@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import {
   addDepartmentResearcher,
   mockAwards,
+  mockAlerts,
   mockHybrid,
   openFundingFinder,
   openTeamMatch,
@@ -52,6 +53,17 @@ test("Funding Finder has no serious or critical violations across critical state
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   await scan(page, "funding-strong-potential", testInfo);
+  mockAlerts(page);
+  await page.locator("#alert-new-matches").click();
+  const alertDialog = page.getByRole("dialog", { name: "Alert me to new Strong matches" });
+  await expect(alertDialog).toBeVisible();
+  await expect(alertDialog.locator("#alert-email")).toBeFocused();
+  await scan(page, "funding-alert-dialog", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.keyboard.press("Escape");
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await expect(page.locator("#alert-new-matches")).toBeFocused();
   const chatButton = page.locator("#open-results-chat");
   await chatButton.click();
   await expect(page.locator("#result-assistant")).toBeVisible();

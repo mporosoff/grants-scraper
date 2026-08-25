@@ -30,6 +30,7 @@ EVENT_LABELS = {
     "new": "New opportunity",
     "deadline_changed": "Deadline changed",
     "amended": "Opportunity amended",
+    "status_changed": "Status changed",
     "closing_soon": "Closing soon",
     "closed_or_removed": "Closed or removed",
 }
@@ -117,6 +118,16 @@ def diff_catalogs(
         if old is None:
             add("new", record, "First appeared in the public catalog")
         else:
+            old_status = old.get("status")
+            new_status = record.get("status")
+            if old_status != new_status:
+                add(
+                    "status_changed",
+                    record,
+                    f"{old_status or 'not listed'} → {new_status or 'not listed'}",
+                    old_status=old_status,
+                    new_status=new_status,
+                )
             old_deadline = old.get("close_date")
             new_deadline = record.get("close_date")
             if old_deadline != new_deadline:

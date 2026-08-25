@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
 const AWARD_WORKER_ORIGIN = "https://funding-finder-award-api.urochestercheme.workers.dev";
+const ALERTS_WORKER_ORIGIN = "https://funding-finder-alerts.urochestercheme.workers.dev";
 
 function corsHeaders(extra = {}) {
   return {
@@ -183,6 +184,28 @@ export function mockAwards(target, { failNih = false, failNsf = false, hasMoreAt
         pagination: { limit: body.limit, offset: body.offset },
       }),
     });
+  });
+  return calls;
+}
+
+export function mockAlerts(target) {
+  const calls = [];
+  target.route(`${ALERTS_WORKER_ORIGIN}/**`, async route => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({ status: 204, headers: corsHeaders() });
+      return;
+    }
+    if (new URL(request.url()).pathname === "/subscriptions" && request.method() === "POST") {
+      calls.push(request.postDataJSON());
+      await route.fulfill({
+        status: 202,
+        headers: corsHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ status: "verification_required" }),
+      });
+      return;
+    }
+    await route.fulfill({ status: 404, headers: corsHeaders({ "Content-Type": "application/json" }), body: "{}" });
   });
   return calls;
 }
