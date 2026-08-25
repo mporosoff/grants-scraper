@@ -224,6 +224,7 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Show awards for investigator Marc D Porosoff."), "Marc D Porosoff");
   assert.equal(core.explicitInvestigator("Who at this institution has received awards from DOE BES?"), "");
   assert.equal(core.explicitInvestigator("Show funding for Basic Energy Sciences."), "");
+  assert.equal(core.explicitInvestigator("What has University of Rochester been funded to do?", "University of Rochester"), "");
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
@@ -265,7 +266,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.0\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
-  assert.match(appSource, /explicitInvestigator\(question\)/);
+  assert.match(appSource, /explicitInvestigator\(question, current\.institution\)/);
   const askQuestionSource = appSource.slice(
     appSource.indexOf("async function askQuestion()"),
     appSource.indexOf("function bindEvents()"),

@@ -231,7 +231,7 @@
     };
   }
 
-  function explicitInvestigator(question) {
+  function explicitInvestigator(question, institution = "") {
     const value = clean(question, 1_000);
     if (!value) return "";
     const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
@@ -244,6 +244,8 @@
       if (match?.[1]) {
         const candidate = clean(match[1], 160).replace(/[.,;:]+$/u, "");
         if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|LLC|Inc)\b/i.test(candidate)) continue;
+        if (identityKey(candidate) === identityKey(institution)) continue;
         return candidate;
       }
     }

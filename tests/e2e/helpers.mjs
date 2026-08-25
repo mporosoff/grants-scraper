@@ -96,6 +96,7 @@ export function mockAwards(target, {
   failNsf = false,
   hasMoreBySource = {},
   hasMoreAtOffsets = [],
+  resultCountBySourceOffset = {},
   resultCountPerSource = 1,
   sourceFailures = {},
   sourceFailuresByOffset = {},
@@ -250,9 +251,11 @@ export function mockAwards(target, {
       } else {
         const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
         const template = { ...baseTemplate, ...(awardOverridesBySource[source] || {}) };
-        const configuredCount = typeof resultCountPerSource === "object"
-          ? resultCountPerSource[source]
-          : resultCountPerSource;
+        const configuredCount = resultCountBySourceOffset[`${source}:${body.offset}`] ?? (
+          typeof resultCountPerSource === "object"
+            ? resultCountPerSource[source]
+            : resultCountPerSource
+        );
         const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {
           const suffix = body.offset + index;

@@ -35,8 +35,10 @@ test("source-specific loading accumulates projects without replacing the current
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
   await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await page.locator("#ii-topic").fill("batteries");
   await page.getByRole("button", { name: "Load more NSF" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  expect(calls.at(-1).criteria.topic).toBe("catalysis");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(50);
   await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
   await expect(page).not.toHaveURL(/ii_offset=/);
@@ -58,6 +60,26 @@ test("a later source failure retains already loaded projects and offers a bounde
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
   await expect(page.locator("#ii-source-status")).toContainText("25 previously loaded NSF projects were retained");
   await expect(page.getByRole("button", { name: "Retry NSF" })).toBeEnabled();
+});
+
+test("source-specific loading can advance across an empty normalized page within the bound", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0, 25] },
+    resultCountBySourceOffset: { "NSF:0": 25, "NSF:25": 0, "NSF:50": 1 },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-search").click();
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(50);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(26);
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
 });
 
 test("ROR aliases resolve to canonical institutions before normalized award queries", async ({ page }) => {

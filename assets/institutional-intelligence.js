@@ -418,6 +418,7 @@
     return {
       source,
       limit: requestBody.limit,
+      request: requestBody,
       nextOffset: meta.status === "ok" ? requestBody.offset + requestBody.limit : requestBody.offset,
       results: payload.results.filter(result => result.source === source),
       meta,
@@ -430,6 +431,7 @@
     return {
       source: requestBody.sources[0],
       limit: requestBody.limit,
+      request: requestBody,
       nextOffset: requestBody.offset,
       results: [],
       meta: null,
@@ -508,11 +510,7 @@
     setBusy(true);
     setStatus(`${page.error ? "Retrying" : "Loading more from"} ${source}…`);
     try {
-      const current = formState();
-      const requestBody = core.buildAwardRequest(
-        { ...current, agency: source, offset: page.nextOffset },
-        page.limit,
-      );
+      const requestBody = { ...page.request, sources: [source], offset: page.nextOffset };
       const payload = await fetchAwardPage(requestBody, state.searchController);
       if (sequence !== state.searchSequence) return;
       const next = sourcePage(requestBody, payload);
@@ -529,8 +527,9 @@
         });
         page.results.push(...added);
         page.meta = next.meta;
+        page.request = next.request;
         page.nextOffset = next.nextOffset;
-        page.hasMore = next.hasMore && added.length > 0 && next.nextOffset <= 1_000;
+        page.hasMore = next.hasMore && next.nextOffset <= 1_000;
         page.error = null;
         state.sourcePages.set(source, page);
         state.payload = combinedPayload();
@@ -705,7 +704,7 @@
         ? { ...translated }
         : {};
       plan.agency = inferQuestionAgency(plan, question);
-      const explicitPi = core.explicitInvestigator(question);
+      const explicitPi = core.explicitInvestigator(question, current.institution);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
       const next = core.sanitizeQuestionPlan(plan, current);
       applyFormState(next);
