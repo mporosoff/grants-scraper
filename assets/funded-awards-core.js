@@ -119,6 +119,7 @@
     canPageForward,
     institutionSummary,
     sourcesForAgency,
+    standaloneCriterion,
     validatePayload,
   });
 })();

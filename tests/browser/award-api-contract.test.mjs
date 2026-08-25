@@ -174,6 +174,7 @@ test("NSF normalization preserves science, institution IDs, direct contacts, and
   assert.match(award.title, /Warm Dense Matter/);
   assert.match(award.abstract, /plasma and materials/);
   assert.equal(award.institution.normalized_name, "University of Rochester");
+  assert.equal(award.institution.identifiers.ror, "https://ror.org/022kthw22");
   assert.equal(award.institution.identifiers.uei, "F27KDXZMF9Y8");
   assert.deepEqual(award.program_codes, ["124200", "176500", "800400", "089Z", "160Z", "8084"]);
   assert.equal(award.total_award, 686056);
@@ -403,6 +404,7 @@ test("Worker validates bounded public requests and exposes no credential require
     schema_version: 1,
     sources: ["NSF", "NIH", "DOE"],
     adapter_versions: ADAPTER_VERSIONS,
+    institution_registry: { source: "ROR", adapter_version: "1.0.0" },
     cache_ttl_seconds: 3600,
     credentials_required: false,
   });

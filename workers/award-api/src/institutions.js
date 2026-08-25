@@ -20,7 +20,7 @@ export function resolveInstitution({ id, name } = {}) {
   const cleanId = cleanText(id, 100);
   const cleanName = cleanText(name, 300);
   const known = cleanId
-    ? identities.find(item => item.id === cleanId)
+    ? identities.find(item => item.id === cleanId || item.ror_id === cleanId)
     : identities.find(item => item.keys.has(identityKey(cleanName)));
   if (known) return known;
   if (!cleanName) return null;
@@ -54,6 +54,7 @@ export function normalizeInstitution(name, identifiers = {}) {
     name: cleanName,
     normalized_name: identity?.canonical_name || cleanName,
     identifiers: {
+      ror: identity?.ror_id || null,
       uei: cleanText(identifiers.uei, 40),
       ipf: cleanText(identifiers.ipf, 40),
       other: cleanText(identifiers.other, 80),

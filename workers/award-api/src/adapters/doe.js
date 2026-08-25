@@ -13,7 +13,7 @@ import {
 import { AwardSourceError, fetchSourceText } from "../http.js";
 import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const DOE_ADAPTER_VERSION = "1.0.0";
+export const DOE_ADAPTER_VERSION = "1.1.0";
 export const DOE_SEARCH_URL = "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx";
 export const DOE_MAX_RESULTS = 10;
 export const DOE_MAX_OFFSET = 100;
@@ -24,6 +24,7 @@ const DOE_ABSTRACT_CONCURRENCY = 2;
 const DOE_ABSTRACT_PAUSE_MS = 125;
 const FORM_PREFIX = "ctl00$MainContent$pnlSearch$";
 const COUNTRY_CLIENT_STATE = "ctl00_MainContent_pnlSearch_rlbCountry_ClientState";
+const ORG_CLIENT_STATE = "ctl00_MainContent_pnlSearch_srchOrgCode_ClientState";
 const SEARCH_EVENT_TARGET = "ctl00$MainContent$pnlSearch";
 const SEARCH_EVENT_ARGUMENT = "CustomSortSelected=False SearchPanelExpanded=True Search";
 const REQUEST_HEADERS = Object.freeze({
@@ -141,6 +142,24 @@ export function buildDoeSearchForm(html, criteria) {
   if (criteria.topic) params.set(`${FORM_PREFIX}txtAbstractKeyword`, criteria.topic);
   if (criteria.opportunity_number) params.set(`${FORM_PREFIX}txtSolNum`, criteria.opportunity_number.toUpperCase());
   if (criteria.program) params.set(`${FORM_PREFIX}txtProgramArea`, criteria.program);
+  if (criteria.program_office) {
+    const code = criteria.program_office.toUpperCase();
+    const $ = load(html);
+    const items = $("#ctl00_MainContent_pnlSearch_srchOrgCode li").toArray();
+    const checkedIndices = items.flatMap((item, index) => {
+      const label = cleanText($(item).find(".rlbText").text(), 300) || "";
+      const sourceCode = /^([A-Z]+-\d+(?:\.\d+)*)\s+-/.exec(label)?.[1];
+      return sourceCode === code || sourceCode?.startsWith(`${code}.`) ? [index] : [];
+    });
+    if (!checkedIndices.length) unsupported();
+    params.set(ORG_CLIENT_STATE, JSON.stringify({
+      isEnabled: true,
+      logEntries: [],
+      selectedIndices: [],
+      checkedIndices,
+      scrollPosition: 0,
+    }));
+  }
   if (criteria._institution) {
     const sourceIdentity = criteria._institution.sources?.DOE || {};
     params.set(`${FORM_PREFIX}txtInstitutionName`, sourceIdentity.search_name || criteria._institution.canonical_name);

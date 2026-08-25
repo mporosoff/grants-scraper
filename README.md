@@ -114,12 +114,21 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
-Funded Awards is the third public surface. It searches public NSF and NIH award
-titles and abstracts through the agencies' native search fields, keeps the two
-sources separate, and preserves direct-field or official-record contact
-provenance. Eligible Funding Finder cards open it in a new tab with an exact NIH
-FOA, exact NSF program element, or explicitly reviewed NSF parent-program group;
-unmapped opportunities are never assigned by fuzzy title similarity.
+Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
+Office of Science awards through the sources' native fields, keeps the adapters
+separate, and preserves direct-field or official-record contact provenance.
+Eligible Funding Finder cards open it in a new tab only for exact or explicitly
+reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
+title similarity.
+
+Funding Finder also includes Institutional Intelligence for page-bounded factual
+summaries and drill-downs over those normalized public awards. Its ROR-backed
+typeahead resolves canonical institution names, aliases, and acronyms while the
+existing identity layer retains sponsor-specific UEI/IPF query identifiers.
+Institution, agency, program, topic, investigator, and year filters work without
+an AI key and are shareable through page URLs. An optional question translator
+uses the same browser-local Funding Finder provider configuration; it only creates
+a transparent filter plan and does not search or rank an award-vector corpus.
 
 Funding Finder search criteria are shareable page parameters and can appear in
 browser history or copied links. The custom anonymous usage event sends only a
@@ -245,12 +254,14 @@ support it.
 | Path | Purpose |
 |---|---|
 | `index.html` | Redirects GitHub Pages to the application |
-| `match_explorer.html` | Public search and AI-refinement interface |
+| `match_explorer.html` | Public opportunity search, Institutional Intelligence, and AI-refinement interface |
 | `team_match.html` | Public multi-researcher opportunity-matching interface |
-| `funded_awards.html` | Public NSF/NIH historical-award search and current-opportunity deep links |
+| `funded_awards.html` | Public NSF/NIH/DOE historical-award search and current-opportunity deep links |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
 | `assets/award-links.js` | Exact NIH and exact/reviewed-parent NSF opportunity-to-award mappings |
 | `assets/funded-awards-core.js` | Source-native award-query, institution-summary, and pagination contracts |
+| `assets/institutional-intelligence-core.js` | Structured institution filters, URL state, and normalized award aggregation |
+| `assets/institutional-intelligence.js` | ROR autocomplete, institutional drill-downs, and optional shared-provider question translation |
 | `assets/search-retrieval.js` | Local BM25 candidate retrieval, fuzzy matching, concept coverage, and topic reranking |
 | `assets/profile-ranking.js` | Weighted profile/CV terms, profile-only concept coverage, eligibility, and career-fit evidence |
 | `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
@@ -289,7 +300,7 @@ support it.
 | `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
 | `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
 | `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
-| `workers/award-api/` | Bounded, source-isolated NSF Awards and NIH RePORTER normalization Worker |
+| `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, and ROR normalization Worker |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |

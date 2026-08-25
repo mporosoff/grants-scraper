@@ -1,0 +1,207 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import vm from "node:vm";
+
+import { buildDoeSearchForm } from "../../workers/award-api/src/adapters/doe.js";
+import { createHandler } from "../../workers/award-api/src/index.js";
+import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
+import { rankRorOrganizations } from "../../workers/award-api/src/ror.js";
+
+const root = new URL("../../", import.meta.url);
+const [
+  aliases, fundedCoreSource, coreSource, appSource, page, teamPage, styles,
+  credentialsSource, doeForm, fundingAppSource,
+] = await Promise.all([
+  readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence.js", root), "utf8"),
+  readFile(new URL("match_explorer.html", root), "utf8"),
+  readFile(new URL("team_match.html", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
+  readFile(new URL("assets/credentials.js", root), "utf8"),
+  readFile(new URL("tests/fixtures/awards/doe_search_form.html", root), "utf8"),
+  readFile(new URL("assets/app.js", root), "utf8"),
+]);
+
+const sandbox = { URL, URLSearchParams };
+vm.createContext(sandbox);
+vm.runInContext(fundedCoreSource, sandbox);
+vm.runInContext(coreSource, sandbox);
+const core = sandbox.FUNDING_INSTITUTIONAL_INTELLIGENCE;
+const env = {
+  AWARD_API_ENABLED: "true",
+  CACHE_TTL_SECONDS: "3600",
+  MAX_SOURCE_RESULTS: "25",
+};
+
+function plain(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function award(overrides = {}) {
+  return {
+    source: "NSF",
+    award_id: "NSF-1",
+    award_year: 2024,
+    program_name: "Catalysis",
+    program_codes: ["140100"],
+    activity_code: null,
+    subagency: "Engineering",
+    principal_investigators: [{ name: "Ada Investigator" }],
+    ...overrides,
+  };
+}
+
+test("ROR acronym and alias metadata deterministically resolves required institutions", () => {
+  const expected = {
+    MIT: ["Massachusetts Institute of Technology", "https://ror.org/042nb2s44"],
+    Caltech: ["California Institute of Technology", "https://ror.org/05dxps055"],
+    UVA: ["University of Virginia", "https://ror.org/0153tk833"],
+    RIT: ["Rochester Institute of Technology", "https://ror.org/00v4yb702"],
+    UCLA: ["University of California, Los Angeles", "https://ror.org/046rm7j60"],
+  };
+  for (const [query, [name, id]] of Object.entries(expected)) {
+    const ranked = rankRorOrganizations(aliases[query].items, query);
+    assert.equal(ranked[0].canonical_name, name);
+    assert.equal(ranked[0].id, id);
+    assert.equal(ranked[0].match.exact, true);
+    assert.equal(core.chooseInstitution(query, ranked).canonical_name, name);
+  }
+});
+
+test("the ROR endpoint is bounded, cached, origin-protected, and independent of award credentials", async () => {
+  const calls = [];
+  const cacheValues = new Map();
+  const cache = {
+    async match(request) { return cacheValues.get(request.url)?.clone(); },
+    async put(request, response) { cacheValues.set(request.url, response.clone()); },
+  };
+  const fetchImpl = async url => {
+    calls.push(String(url));
+    return new Response(JSON.stringify(aliases.MIT), { headers: { "Content-Type": "application/json" } });
+  };
+  const handler = createHandler({ fetchImpl, cache });
+  const request = () => new Request("https://award.test/institutions/search?query=MIT", {
+    headers: { Origin: "http://localhost:8765" },
+  });
+  const first = await handler(request(), env);
+  const firstBody = await first.json();
+  assert.equal(first.status, 200);
+  assert.equal(firstBody.registry.source, "ROR");
+  assert.equal(firstBody.registry.license, "CC0-1.0");
+  assert.equal(firstBody.registry.cache, "miss");
+  assert.equal(firstBody.institutions[0].canonical_name, "Massachusetts Institute of Technology");
+  const second = await handler(request(), env);
+  assert.equal((await second.json()).registry.cache, "hit");
+  assert.equal(calls.length, 1);
+  assert.equal((await handler(new Request("https://award.test/institutions/search?query=MIT", {
+    headers: { Origin: "https://evil.example" },
+  }), env)).status, 403);
+  assert.equal((await handler(new Request("https://award.test/institutions/search?query=M"), env)).status, 400);
+});
+
+test("existing institution identities retain source-specific award query identifiers", () => {
+  const rochester = resolveInstitution({ id: "https://ror.org/022kthw22" });
+  assert.equal(rochester.id, "university-of-rochester");
+  assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
+  assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
+  assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
+});
+
+test("structured filters reuse the normalized cross-agency award request contract", () => {
+  const request = core.buildAwardRequest({
+    institution: "Massachusetts Institute of Technology",
+    ror_id: "https://ror.org/042nb2s44",
+    agency: "all",
+    topic: "catalysis",
+    pi: "Ada Investigator",
+    year_start: 2019,
+    year_end: 2026,
+  });
+  assert.deepEqual(plain(request), {
+    sources: ["NSF", "NIH", "DOE"],
+    criteria: {
+      institution: "Massachusetts Institute of Technology",
+      institution_id: "https://ror.org/042nb2s44",
+      topic: "catalysis",
+      pi: "Ada Investigator",
+      year_start: 2019,
+      year_end: 2026,
+    },
+    limit: 10,
+    offset: 0,
+  });
+  assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
+  assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
+  assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
+    isEnabled: true,
+    logEntries: [],
+    selectedIndices: [],
+    checkedIndices: [1, 2],
+    scrollPosition: 0,
+  });
+});
+
+test("aggregates returned awards and preserves investigator and program drill-down identities", () => {
+  const aggregate = core.aggregateAwards([
+    award(),
+    award({ source: "NIH", award_id: "NIH-1", award_year: 2025, program_name: null, program_codes: ["R01", "GM"], activity_code: "R01", principal_investigators: [{ name: "Ada Investigator" }, { name: "Grace Investigator" }] }),
+    award({ source: "DOE", award_id: "DOE-1", award_year: 2022, program_name: "Catalysis Science", subagency: "Office of Basic Energy Sciences", principal_investigators: [{ name: "Lin Investigator" }] }),
+    award(),
+  ]);
+  assert.equal(aggregate.project_count, 3);
+  assert.equal(aggregate.investigator_count, 3);
+  assert.equal(aggregate.year_start, 2022);
+  assert.equal(aggregate.year_end, 2025);
+  assert.deepEqual(plain(aggregate.investigators.find(item => item.name === "Ada Investigator")), { name: "Ada Investigator", projects: 2 });
+  assert.ok(aggregate.programs.some(item => item.source === "NIH" && item.query === "R01"));
+  assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "BES"));
+});
+
+test("share URLs round-trip institution and all transparent filters", () => {
+  const url = core.urlForState("https://example.test/match_explorer.html?q=opportunities", {
+    open: true,
+    institution: "University of California, Los Angeles",
+    ror_id: "https://ror.org/046rm7j60",
+    agency: "DOE",
+    program: "BES",
+    topic: "catalysis",
+    pi: "Ada Investigator",
+    year_start: 2020,
+    year_end: 2026,
+  });
+  assert.equal(url.searchParams.get("q"), "opportunities");
+  assert.deepEqual(plain(core.stateFromSearch(url.search)), {
+    open: true,
+    institution: "University of California, Los Angeles",
+    ror_id: "https://ror.org/046rm7j60",
+    agency: "DOE",
+    program: "BES",
+    topic: "catalysis",
+    pi: "Ada Investigator",
+    year_start: "2020",
+    year_end: "2026",
+  });
+});
+
+test("the feature is Funding Finder-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
+  assert.match(page, /id="institutional-intelligence"/);
+  assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
+  assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
+  assert.match(page, /Structured institutional search does not require an AI key/);
+  assert.match(page, /assets\/institutional-intelligence\.js/);
+  assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
+  assert.match(styles, /@media \(max-width: 520px\)/);
+  assert.match(appSource, /credentials\.loadKey\(provider\)/);
+  assert.match(appSource, /credentials\.saveKey\(provider, key\)/);
+  assert.match(appSource, /\$\("k-provider"\)/);
+  assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
+  assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
+  assert.match(fundingAppSource, /key === "ii" \|\| key\.startsWith\("ii_"\)/);
+  assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
+  assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
+});

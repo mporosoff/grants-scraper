@@ -1,0 +1,115 @@
+{
+  "MIT": {
+    "items": [
+      {
+        "id": "https://ror.org/04mtcj695",
+        "names": [
+          { "value": "University of Southern Mindanao", "types": ["ror_display"] },
+          { "value": "MIT", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Kabacan", "country_name": "Philippines", "country_code": "PH" } }]
+      },
+      {
+        "id": "https://ror.org/042nb2s44",
+        "names": [
+          { "value": "Massachusetts Institute of Technology", "types": ["ror_display"] },
+          { "value": "MIT", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Cambridge", "country_name": "United States", "country_code": "US" } }]
+      }
+    ]
+  },
+  "Caltech": {
+    "items": [
+      {
+        "id": "https://ror.org/05dxps055",
+        "names": [
+          { "value": "California Institute of Technology", "types": ["ror_display"] },
+          { "value": "Caltech", "types": ["alias"] },
+          { "value": "CIT", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Pasadena", "country_name": "United States", "country_code": "US" } }]
+      }
+    ]
+  },
+  "UVA": {
+    "items": [
+      {
+        "id": "https://ror.org/0432s1v23",
+        "names": [
+          { "value": "University Vascular Associates", "types": ["ror_display"] },
+          { "value": "UVA", "types": ["acronym"] }
+        ],
+        "types": ["healthcare"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Chattanooga", "country_name": "United States", "country_code": "US" } }]
+      },
+      {
+        "id": "https://ror.org/0153tk833",
+        "names": [
+          { "value": "University of Virginia", "types": ["ror_display"] },
+          { "value": "UVA", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Charlottesville", "country_name": "United States", "country_code": "US" } }]
+      }
+    ]
+  },
+  "RIT": {
+    "items": [
+      {
+        "id": "https://ror.org/03zmfa837",
+        "names": [
+          { "value": "Rochester Institute of Technology - Dubai", "types": ["ror_display"] },
+          { "value": "RIT", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Dubai", "country_name": "United Arab Emirates", "country_code": "AE" } }]
+      },
+      {
+        "id": "https://ror.org/00v4yb702",
+        "names": [
+          { "value": "Rochester Institute of Technology", "types": ["ror_display"] },
+          { "value": "RIT", "types": ["acronym"] },
+          { "value": "Rochester Athenaeum and Mechanics Institute", "types": ["alias"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Rochester", "country_name": "United States", "country_code": "US" } }]
+      }
+    ]
+  },
+  "UCLA": {
+    "items": [
+      {
+        "id": "https://ror.org/03qgg3111",
+        "names": [
+          { "value": "Universidad Centroccidental Lisandro Alvarado", "types": ["ror_display"] },
+          { "value": "UCLA", "types": ["acronym"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Barquisimeto", "country_name": "Venezuela", "country_code": "VE" } }]
+      },
+      {
+        "id": "https://ror.org/046rm7j60",
+        "names": [
+          { "value": "University of California, Los Angeles", "types": ["ror_display"] },
+          { "value": "UCLA", "types": ["acronym"] },
+          { "value": "UC Los Angeles", "types": ["alias"] }
+        ],
+        "types": ["education"],
+        "status": "active",
+        "locations": [{ "geonames_details": { "name": "Los Angeles", "country_name": "United States", "country_code": "US" } }]
+      }
+    ]
+  }
+}

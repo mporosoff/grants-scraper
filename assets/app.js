@@ -3529,7 +3529,11 @@
     clearAiState();
     $("search-status").textContent = "Search cleared. Add new context when you are ready.";
     clearFiltersOnly();
-    history.replaceState(null, "", location.pathname);
+    const clearedUrl = new URL(location.pathname, location.origin);
+    for (const [key, value] of new URLSearchParams(location.search)) {
+      if (key === "ii" || key.startsWith("ii_")) clearedUrl.searchParams.append(key, value);
+    }
+    history.replaceState(null, "", clearedUrl);
   }
 
   function csvCell(value) {
