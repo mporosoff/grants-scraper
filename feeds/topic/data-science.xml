@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -119,6 +119,19 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Education Equity Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363700"/>
+    <id>urn:funding-finder:grants-gov:363700</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
@@ -733,16 +746,5 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
-    <link href="https://www.grants.gov/search-results-detail/363268"/>
-    <id>urn:funding-finder:grants-gov:363268</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
 </feed>

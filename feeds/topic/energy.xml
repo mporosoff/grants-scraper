@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,27 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Mission to Australia 2026 Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363708"/>
+    <id>urn:funding-finder:grants-gov:363708</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>U.S. Mission to Australia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Australia | Closes 2026-09-20 | The U.S. Mission to Australia’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests in Australia. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $25,000 to $100,000,…</summary>
+  </entry>
+  <entry>
+    <title>F26AS00105 National Fish Passage Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363699"/>
+    <id>urn:funding-finder:grants-gov:363699</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Fish and Wildlife Service | Closes 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
@@ -666,32 +687,5 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362478"/>
-    <id>urn:funding-finder:grants-gov:362478</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Maritime Administration</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
-  </entry>
-  <entry>
-    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
-    <link href="https://www.grants.gov/search-results-detail/363065"/>
-    <id>urn:funding-finder:grants-gov:363065</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
 </feed>

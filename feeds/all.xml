@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -82,6 +82,14 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-09-28 | The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
+  </entry>
+  <entry>
+    <title>Small Instruments and Modern Equipment for Shared-use Biomedical Research Facilities and Resources (S15 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363695"/>
+    <id>urn:funding-finder:grants-gov:363695</id>
+    <updated>2027-07-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-27 | This Notice of Funding Opportunity (NOFO) invites eligible shared biomedical research facilities to buy new small instruments or scientific equipment. These facilities may include core facilities, biorepositories, model resource facilities, and other research spaces or resources that are shared by multiple researchers. The goal is to help these facilities improve, update, and operate more efficien…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -650,6 +658,14 @@
     <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
+    <title>Appalachian Region Healthcare Support Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363697"/>
+    <id>urn:funding-finder:grants-gov:363697</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <summary>Health Resources and Services Administration | Closes 2027-03-27 | The Appalachian Region Healthcare Support Program provides technical assistance (TA) to help rural healthcare organizations, including critical access hospitals (CAHs), small rural hospitals, rural health clinics, tribal healthcare facilities, and other healthcare organizations located in the rural counties served by the Appalachian Regional Commission (ARC) with planning and implementing health c…</summary>
+  </entry>
+  <entry>
     <title>Drug-Free Communities (DFC) Support Program - NEW (Year 1)</title>
     <link href="https://www.grants.gov/search-results-detail/363353"/>
     <id>urn:funding-finder:grants-gov:363353</id>
@@ -947,24 +963,5 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Education and workforce"/>
     <summary>Centers for Disease Control - NCHHSTP | Closes 2027-02-20 | This NOFO will support the development and dissemination of education, training and technical assistance-emphasizing prevention strategies-for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
-  </entry>
-  <entry>
-    <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
-    <link href="https://www.grants.gov/search-results-detail/363412"/>
-    <id>urn:funding-finder:grants-gov:363412</id>
-    <updated>2026-12-18T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
-  </entry>
-  <entry>
-    <title>Maternal, Infant, and Early Childhood Home Visiting Program (MIECHV)</title>
-    <link href="https://www.grants.gov/search-results-detail/363516"/>
-    <id>urn:funding-finder:grants-gov:363516</id>
-    <updated>2026-12-18T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of the Maternal, Infant, and Early Childhood Home Visiting (MIECHV) Program is to improve maternal and child health, early childhood development, and family well-being by providing pregnant women and families with young children voluntary, evidence-based home visiting services.</summary>
   </entry>
 </feed>

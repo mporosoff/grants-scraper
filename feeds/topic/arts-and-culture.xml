@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -167,6 +167,27 @@
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
+    <title>Mission Australia APS, 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/363709"/>
+    <id>urn:funding-finder:grants-gov:363709</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>U.S. Mission to New Zealand</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>U.S. Mission to New Zealand | Closes 2026-09-20 | The U.S. Mission to Australia’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests in Australia. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $25,000 to $100,000,…</summary>
+  </entry>
+  <entry>
+    <title>U.S. Mission to Australia 2026 Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363708"/>
+    <id>urn:funding-finder:grants-gov:363708</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>U.S. Mission to Australia</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>U.S. Mission to Australia | Closes 2026-09-20 | The U.S. Mission to Australia’s Public Diplomacy Section (PDS) announces an open competition to implement projects that advance U.S. economic, commercial, and security interests in Australia. This Annual Program Statement (APS) outlines strategic goals, expected outcomes, target audiences, eligibility criteria, and application guidelines for cooperative agreements ranging from $25,000 to $100,000,…</summary>
+  </entry>
+  <entry>
     <title>HIV/AIDS Clinical Trials Network Laboratory Centers</title>
     <link href="https://www.grants.gov/search-results-detail/361820"/>
     <id>urn:funding-finder:grants-gov:361820</id>
@@ -176,6 +197,19 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Education Equity Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363700"/>
+    <id>urn:funding-finder:grants-gov:363700</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
@@ -426,6 +460,18 @@
     <summary>U.S. Mission to Jordan | Closes 2026-08-31 | The U.S. Department of State’s Embassy Amman announces an open competition to implement a program titled Reel American: The Road to the Olympic Rings. Reel American is a 21-month public diplomacy film program designed to showcase American excellence in sports and build excitement ahead of the 2028 Olympic and Paralympic Games in Los Angeles. Beginning in October 2026 and continuing through June 20…</summary>
   </entry>
   <entry>
+    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
+    <link href="https://www.grants.gov/search-results-detail/363239"/>
+    <id>urn:funding-finder:grants-gov:363239</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration | Closes 2026-08-27 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+  </entry>
+  <entry>
     <title>Annual Program Statement for U.S. Presentation at International Architecture Biennales</title>
     <link href="https://www.grants.gov/search-results-detail/363225"/>
     <id>urn:funding-finder:grants-gov:363225</id>
@@ -608,46 +654,5 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Closes 2029-05-07 | The purpose of this notice of funding opportunity (NOFO) is to provide investigators with a mechanism to request services from the state-of-the-art Biological Testing Facility that would advance their contraceptive development or reproductive health programs. This NOFO aims to position innovative and validated methods for future regulatory submission and/or clinical development. Applicants do not …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Instrumentation Grant Program for Resource-Limited Institutions (S10 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360364"/>
-    <id>urn:funding-finder:grants-gov:360364</id>
-    <updated>2026-05-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2029-01-26 | The Instrumentation Grant Program for Resource-Limited Institutions supports the purchase of state-of-the-art scientific instruments to enhance the research and educational missions of resource-limited institutions. Requested instruments may support biomedical research and education in basic, translational, biomedically-related behavioral or clinical fields. This is a Notice of Funding Opportunity…</summary>
-  </entry>
-  <entry>
-    <title>Assessing the Feasibility of Incorporating Mechanisms in Multisite Clinical Trials of Mind and Body Interventions on Whole Person Health Restoration</title>
-    <link href="https://www.grants.gov/search-results-detail/359941"/>
-    <id>urn:funding-finder:grants-gov:359941</id>
-    <updated>2026-05-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health | Closes 2026-10-15 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support multi-site feasibility studies of mind and body interventions (e.g., meditation, yoga, acupuncture, music, or multicomponent interventions) on whole person health restoration. The goal of this NOFO is to establish foundational work necessary to inform and enable…</summary>
-  </entry>
-  <entry>
-    <title>Austrian-American Partnership Fund (AAPF)</title>
-    <link href="https://www.grants.gov/search-results-detail/362489"/>
-    <id>urn:funding-finder:grants-gov:362489</id>
-    <updated>2026-05-20T00:00:00Z</updated>
-    <author><name>U.S. Mission to Austria</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Austria | Posted | This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding. Purpose of Small Grants: The Austrian-American Partnership Fund (AAPF) is organized to fund projects advancing collaboration and dialogue and expand cooperation between Austria and the United States. AAPF accepts applications for funding f…</summary>
-  </entry>
-  <entry>
-    <title>Centers without Walls for mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD)</title>
-    <link href="https://www.grants.gov/search-results-detail/361452"/>
-    <id>urn:funding-finder:grants-gov:361452</id>
-    <updated>2026-05-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects to elucidate mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD) organized as a “Center without Walls” consortium. NINDS Centers without Walls are collaborative research networks that bring together diverse expertise from different institutions to …</summary>
   </entry>
 </feed>

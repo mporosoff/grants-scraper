@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,27 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 National Urban Search and Rescue Response System</title>
+    <link href="https://www.grants.gov/search-results-detail/363627"/>
+    <id>urn:funding-finder:grants-gov:363627</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>Department of Homeland Security - FEMA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Homeland Security - FEMA | Closes 2026-08-31 | The National Urban Search and Rescue (US&amp;R) Response System (the System) receives federal funding to ensure adequate day-to-day administration, program and grant management, training, exercise, procurement (vehicle and equipment) and storage and maintenance for the 28 national task forces. The funding ensures the 28 task forces can maintain their readiness independent of Sponsoring Agency funding.…</summary>
+  </entry>
+  <entry>
+    <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/363691"/>
+    <id>urn:funding-finder:grants-gov:363691</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Cybersecurity"/>
+    <summary>Fish and Wildlife Service | Closes 2026-10-30 | Established by Congress in fiscal year (FY) 1997, the Habitat Conservation Plan (HCP) Land Acquisition Grant program was designed to reduce conflicts between the conservation of listed species and competing land uses on specific parcels of land associated with approved and permitted HCPs. Under this program, the U.S. Fish and Wildlife Service (FWS) provides matching grants to State agencies in sup…</summary>
   </entry>
   <entry>
     <title>Trauma Care Readiness and Coordination Cooperative Agreement</title>
@@ -465,6 +486,18 @@
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
   <entry>
+    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
+    <link href="https://www.grants.gov/search-results-detail/363239"/>
+    <id>urn:funding-finder:grants-gov:363239</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Food and Drug Administration | Closes 2026-08-27 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+  </entry>
+  <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
     <link href="https://www.grants.gov/search-results-detail/362823"/>
     <id>urn:funding-finder:grants-gov:362823</id>
@@ -681,46 +714,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2028-07-07 | The purpose of the Native American Research Centers for Health (NARCH) Planning Grants program is to support federally recognized American Indian/Alaska Native (AI/AN) Tribes, Tribal colleges and universities, Tribal health programs, or Tribal organizations (collectively, eligible AI/AN Tribal entities) to plan and conduct preparatory work for developing competitive NARCH applications.</summary>
-  </entry>
-  <entry>
-    <title>Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358879"/>
-    <id>urn:funding-finder:grants-gov:358879</id>
-    <updated>2025-08-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-08-25 | The Stephen I. Katz Early Stage Investigator Research Project Grant supports an innovative project that represents a change in research direction for an early stage investigator (ESI) and for which no preliminary data exist. Applications submitted to this Notice of Funding Opportunity (NOFO) must not include preliminary data. Applications must include a separate attachment describing the change in…</summary>
-  </entry>
-  <entry>
-    <title>Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360205"/>
-    <id>urn:funding-finder:grants-gov:360205</id>
-    <updated>2025-08-01T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
-  </entry>
-  <entry>
-    <title>Blueprint MedTech Translator (UG3/UH3 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358823"/>
-    <id>urn:funding-finder:grants-gov:358823</id>
-    <updated>2025-06-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
 </feed>

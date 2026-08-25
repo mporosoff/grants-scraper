@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -82,6 +82,14 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-09-28 | The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical &amp; Translational Research (CTR) award, supports clinical and translational (C&amp;T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significant…</summary>
+  </entry>
+  <entry>
+    <title>Small Instruments and Modern Equipment for Shared-use Biomedical Research Facilities and Resources (S15 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363695"/>
+    <id>urn:funding-finder:grants-gov:363695</id>
+    <updated>2027-07-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-27 | This Notice of Funding Opportunity (NOFO) invites eligible shared biomedical research facilities to buy new small instruments or scientific equipment. These facilities may include core facilities, biorepositories, model resource facilities, and other research spaces or resources that are shared by multiple researchers. The goal is to help these facilities improve, update, and operate more efficien…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -566,15 +574,5 @@
     <author><name>Indian Health Service</name></author>
     <category term="Education and workforce"/>
     <summary>Indian Health Service | Closes 2027-04-01 | National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Public Health Systems and Services in Indian Country</title>
-    <link href="https://www.grants.gov/search-results-detail/363416"/>
-    <id>urn:funding-finder:grants-gov:363416</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Closes 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
   </entry>
 </feed>

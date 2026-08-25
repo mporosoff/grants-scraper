@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -74,6 +74,19 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Education Equity Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363700"/>
+    <id>urn:funding-finder:grants-gov:363700</id>
+    <updated>2026-08-24T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
@@ -739,17 +752,5 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:grants-gov:363240</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-20 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
   </entry>
 </feed>

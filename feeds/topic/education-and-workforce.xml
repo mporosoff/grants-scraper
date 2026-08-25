@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-25T03:19:38Z</updated>
+  <updated>2026-08-25T10:57:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -466,6 +466,16 @@
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-08 | Purpose: This NOFO supports applied research to advance automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations. Projects should deliver field-ready solutions that strengthen communication, self-escape, refuge performance, and overall safety through modern autonomy, sensing, and decision-support technologies. Background: Mining remains hazardou…</summary>
   </entry>
   <entry>
+    <title>Regional Excellence for Access to Comprehensive Care for Hemophilia Networks (REACH Networks)</title>
+    <link href="https://www.grants.gov/search-results-detail/363693"/>
+    <id>urn:funding-finder:grants-gov:363693</id>
+    <updated>2026-11-06T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Health Resources and Services Administration | Closes 2026-12-22 | The purpose of the Regional Excellence for Access to Comprehensive Care for Hemophilia Networks (REACH Networks) is to improve access to coordinated evidence-based comprehensive care for individuals with hemophilia and other related bleeding and clotting disorders. This program will expand access to comprehensive care, conduct quality improvement projects, train the workforce, provide ongoing educ…</summary>
+  </entry>
+  <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R41/R42 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362577"/>
     <id>urn:funding-finder:grants-gov:362577</id>
@@ -604,17 +614,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2026-11-16 | The purpose of the THCGME Program is to prepare residents to provide high-quality care, particularly in rural and medically underserved communities, while developing the competencies they need to serve a wide range of populations and communities. The THCGME does this by providing funding to support the training of residents in HRSA-supported primary care residency training programs in community-ba…</summary>
-  </entry>
-  <entry>
-    <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
-    <link href="https://www.grants.gov/search-results-detail/362454"/>
-    <id>urn:funding-finder:grants-gov:362454</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
 </feed>
