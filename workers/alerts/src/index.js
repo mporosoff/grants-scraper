@@ -5,7 +5,7 @@ import {
 } from "./contract.js";
 import { randomToken, sha256Hex, verifySvixWebhook } from "./crypto.js";
 import { baselineIds, dispatchNotifications, evaluateSubscriptions } from "./evaluator.js";
-import { verificationEmail } from "./email.js";
+import { ALERT_EMAIL_TEMPLATE_VERSION, verificationEmail } from "./email.js";
 import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
@@ -160,6 +160,7 @@ export function createHandler({
         database_ready: databaseReady,
         email_provider: "resend",
         email_provider_configured: providerConfigured,
+        email_template_version: ALERT_EMAIL_TEMPLATE_VERSION,
         outbound_email_enabled: config.outbound,
       });
     }

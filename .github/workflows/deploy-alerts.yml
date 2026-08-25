@@ -13,6 +13,7 @@ on:
       - "assets/saved.js"
       - "assets/app.css"
       - "assets/app.js"
+      - "assets/match-explain.js"
       - "assets/search-query.js"
       - "assets/search-retrieval.js"
       - "assets/search-v2-config.js"
@@ -39,16 +40,17 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
-      - name: Verify the bounded Phase 3 contracts
+      - name: Verify the bounded alert and Phase 5 release contracts
         run: >-
           node --check assets/alerts-config.js &&
           node --check assets/alerts.js &&
           node --check assets/award-links.js &&
           node --check assets/saved.js &&
           node --check assets/app.js &&
+          node --check assets/match-explain.js &&
           node --check assets/funded-awards.js &&
           node --check workers/alerts/src/index.js &&
-          node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs
+          node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs tests/browser/phase5-release-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -102,6 +104,7 @@ jobs:
               && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.database_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_configured | tostring' <<<"$health" 2>/dev/null)" = "true" \
+              && test "$(jq -r '.email_template_version // empty' <<<"$health" 2>/dev/null)" = "phase5" \
               && test "$(jq -r '.outbound_email_enabled | tostring' <<<"$health" 2>/dev/null)" = "true"; then
               exit 0
             fi

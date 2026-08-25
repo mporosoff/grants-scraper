@@ -20,8 +20,8 @@
     "assets/search-hybrid.js": "29db9a04d4f66600b8c50eb762fe4f8f5d0d472fce485ec19447e81ba230442d",
     "assets/search-retrieval.js": "4c5f8b0570d3e934a4ae2fb727cbd89f981e0a17caa3426186f1fef4b4f44107",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
-    "match_explorer.html": "9c351d58bba207a709ac992ab3cb9c6a08bb8d0dd28db2c4f6bb004189e0b31d",
-    "team_match.html": "6e624a336ab7620402facd7992489eb23d748c586ddf11e9ba1e06220c1e3575",
+    "match_explorer.html": "733f5decf236dab0f36df723720049e45522f21533dcfa32ad8d92d47a0ee570",
+    "team_match.html": "1373a26739f5b765ebf1843eb23b3a6343fb7fd66ec2258302d829a31e665ed9",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },

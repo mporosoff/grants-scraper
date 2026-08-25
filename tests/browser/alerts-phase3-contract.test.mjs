@@ -7,6 +7,7 @@ import { randomToken } from "../../workers/alerts/src/crypto.js";
 import { createHandler } from "../../workers/alerts/src/index.js";
 import { dispatchNotifications, evaluateSubscriptions } from "../../workers/alerts/src/evaluator.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
+import { parseAssignedJson, StrongMatchEngine } from "../../workers/alerts/src/strong-match.js";
 
 const fixedNow = new Date("2026-09-01T12:00:00.000Z");
 const env = {
@@ -164,6 +165,7 @@ function record(overrides = {}) {
     opportunity_id: "opp-1", opportunity_number: "PD-26-367Y",
     title: "Chemical Process Systems", agency: "National Science Foundation",
     agency_code: "NSF", status: "posted", close_date: "2026-11-01",
+    primary_document_url: "https://www.nsf.gov/funding/opportunities/chemical-process-systems",
     funding_instruments: ["Grant"], applicant_types: [], ...overrides,
   };
 }
@@ -368,9 +370,11 @@ test("saved-search creation baselines existing Strong matches and alerts once fo
   const state = assets({
     records: [record({ opportunity_id: "existing" }), record({ opportunity_id: "new", title: "Hydrogen catalysis" })],
     matcher: {
-      matchIds: (_definition, _asOf, candidateIds) => {
+      matchDetails: (_definition, _asOf, candidateIds) => {
         evaluatedCandidateSets.push(candidateIds);
-        return new Set([...matched].filter(id => candidateIds.includes(id)));
+        return new Map([...matched].filter(id => candidateIds.includes(id)).map(id => [id, {
+          reasons: ["The opportunity title matches hydrogen catalysis in the saved search."],
+        }]));
       },
     },
   });
@@ -392,11 +396,50 @@ test("saved-search creation baselines existing Strong matches and alerts once fo
   state.changes.events = [{ id: "new-1", type: "new", changed_at: "2026-09-02T00:00:00Z", opportunity_id: "new", detail: "First appeared", record: state.catalog.opportunities[1] }];
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
   assert.deepEqual(evaluatedCandidateSets, [["new"]], "only changed records are evaluated");
+  const queuedStrongEvent = [...store.events.values()].find(event => event.event_kind === "strong_match");
+  assert.ok(queuedStrongEvent);
+  const publicPayload = JSON.parse(queuedStrongEvent.payload_json);
+  assert.deepEqual(Object.keys(publicPayload).sort(), [
+    "agency", "close_date", "detail", "funding_finder_url", "official_url", "program", "title", "why_matched",
+  ]);
+  assert.doesNotMatch(JSON.stringify(publicPayload), /cv|profile|orcid|publication|uploaded|document|notes?|chat/i);
   await dispatchNotifications({ store, provider, env, now: fixedNow });
-  assert.equal(provider.messages.filter(message => message.subject === "New Strong funding match").length, 1);
+  const strongMessages = provider.messages.filter(message => message.subject === "New Strong funding match");
+  assert.equal(strongMessages.length, 1);
+  assert.match(strongMessages[0].text, /Agency: National Science Foundation/);
+  assert.match(strongMessages[0].text, /Program: Chemical Process Systems \(CPS\)/);
+  assert.match(strongMessages[0].text, /Deadline: November 1, 2026/);
+  assert.match(strongMessages[0].text, /Update: First appeared/);
+  assert.match(strongMessages[0].text, /Why it matched:\n- The opportunity title matches hydrogen catalysis/);
+  assert.match(strongMessages[0].text, /Open in Funding Finder: https:\/\/app\.example\.test\/match_explorer\.html\?focus=new/);
+  assert.match(strongMessages[0].text, /Verify on official source: https:\/\/www\.nsf\.gov\/funding\/opportunities\/chemical-process-systems/);
+  assert.match(strongMessages[0].html, /Why it matched/);
+  assert.match(strongMessages[0].html, /Open in Funding Finder/);
+  assert.match(strongMessages[0].html, /Verify on official source/);
+  assert.doesNotMatch(strongMessages[0].text + strongMessages[0].html, /Newly qualifies under|profile|CV|ORCID|chat/i);
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
   await dispatchNotifications({ store, provider, env, now: fixedNow });
   assert.equal(provider.messages.filter(message => message.subject === "New Strong funding match").length, 1);
+});
+
+test("Strong alert evidence is produced by the existing public Funding Finder explanation contract", async () => {
+  const source = await readFile(new URL("../fixtures/frozen/opportunities.js", import.meta.url), "utf8");
+  const catalog = parseAssignedJson(source, "GRANT_CATALOG");
+  const engine = new StrongMatchEngine(catalog);
+  const filters = {
+    status: { posted: true, forecasted: true, archived: false },
+    facets: { source: [], source_type: [], discipline: [], topic: [], agency: [], eligibility: [], funding_instrument: [] },
+    deadline: { from: "", through: "" }, minimum_award: 0,
+    flags: { evidence: false, preliminary: false, limited: false, early_career: false, no_cost_share: false }, audience: "all",
+  };
+  const details = engine.matchDetails({
+    query: "carbon capture", filters, currentness: "current_only",
+    strong_contract_version: "funding-search-v2-strong-1", include_potential: false,
+  }, "2026-09-01", ["1001"]);
+  assert.ok(details.has("1001"));
+  assert.ok(details.get("1001").reasons.length > 0);
+  assert.ok(details.get("1001").reasons.length <= 3);
+  assert.doesNotMatch(JSON.stringify(details.get("1001")), /profile|CV|ORCID|publication|chat/i);
 });
 
 test("program watches use the controlled NSF parent identity and weekly events consolidate", async () => {
@@ -417,6 +460,12 @@ test("program watches use the controlled NSF parent identity and weekly events c
   const result = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });
   assert.equal(result.deliveredCount, 1);
   assert.match(provider.messages.at(-1).subject, /weekly digest: 2 updates/);
+  assert.match(provider.messages.at(-1).text, /Agency: National Science Foundation/);
+  assert.match(provider.messages.at(-1).text, /Program: Chemical Process Systems \(CPS\)/);
+  assert.match(provider.messages.at(-1).text, /Deadline: November 1, 2026/);
+  assert.match(provider.messages.at(-1).text, /Open in Funding Finder:/);
+  assert.match(provider.messages.at(-1).text, /Verify on official source:/);
+  assert.match(provider.messages.at(-1).html, /width:calc\(100% - 24px\)/);
 });
 
 test("provider failure leaves a claimed event retryable", async () => {

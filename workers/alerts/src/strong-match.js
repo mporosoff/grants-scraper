@@ -1,12 +1,14 @@
 import "../../../assets/search-v2-config.js";
 import "../../../assets/search-query.js";
 import "../../../assets/search-retrieval.js";
+import "../../../assets/match-explain.js";
 
 import { recordId, recordPassesSavedSearch } from "./contract.js";
 
 const QUERY_API = globalThis.FUNDING_SEARCH_QUERY;
 const RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL;
 const SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG;
+const MATCH_EXPLAIN_API = globalThis.FUNDING_MATCH_EXPLAIN;
 
 function emptyScores(length) {
   return { scores: new Float64Array(length), evidence: null };
@@ -32,7 +34,7 @@ export class StrongMatchEngine {
     }) : null;
   }
 
-  matchIds(definition, asOf, candidateIds = null) {
+  evaluate(definition, asOf, candidateIds = null, collectEvidence = false) {
     const candidates = Array.isArray(candidateIds)
       ? new Set(candidateIds.map(String).filter(Boolean))
       : null;
@@ -42,9 +44,9 @@ export class StrongMatchEngine {
         ))
       : null;
     const parentDirect = this.parent.score(definition.query, {
-      context: "", evidence: false, candidateIndexes: parentCandidateIndexes,
+      context: "", evidence: collectEvidence, candidateIndexes: parentCandidateIndexes,
     });
-    let admitted;
+    let rows;
     if (this.child) {
       const childCandidateIndexes = candidates
         ? this.childCatalog.opportunities.flatMap((record, index) => (
@@ -52,7 +54,7 @@ export class StrongMatchEngine {
           ))
         : null;
       const childDirect = this.child.score(definition.query, {
-        context: "", evidence: false, candidateIndexes: childCandidateIndexes,
+        context: "", evidence: collectEvidence, candidateIndexes: childCandidateIndexes,
       });
       const rolled = RETRIEVAL_API.rollupScores({
         parentCatalog: this.catalog,
@@ -63,18 +65,49 @@ export class StrongMatchEngine {
         childProfile: emptyScores(this.childCatalog.opportunities.length),
         eligibilityBonuses: this.catalog.opportunities.map(() => 0),
       });
-      admitted = new Set(rolled.rows.map(row => row.id));
+      rows = rolled.rows;
     } else {
-      admitted = new Set(this.catalog.opportunities.flatMap((record, index) => (
-        Number(parentDirect.scores[index]) > 0 ? [recordId(record)] : []
-      )));
+      rows = this.catalog.opportunities.flatMap((record, index) => (
+        Number(parentDirect.scores[index]) > 0
+          ? [{
+              id: recordId(record), record, parentAdmitted: true,
+              parentDirectEvidence: parentDirect.evidence?.[index] || null,
+              bestChild: null, childDroveMatch: false,
+            }]
+          : []
+      ));
     }
-    return new Set(this.catalog.opportunities.flatMap(record => {
-      const id = recordId(record);
-      return id && (!candidates || candidates.has(id))
-        && admitted.has(id) && recordPassesSavedSearch(record, definition, asOf)
-        ? [id]
-        : [];
+    return rows.filter(row => (
+      row.id && (!candidates || candidates.has(row.id))
+      && recordPassesSavedSearch(row.record, definition, asOf)
+    ));
+  }
+
+  matchIds(definition, asOf, candidateIds = null) {
+    return new Set(this.evaluate(definition, asOf, candidateIds, false).map(row => row.id));
+  }
+
+  matchDetails(definition, asOf, candidateIds = null) {
+    return new Map(this.evaluate(definition, asOf, candidateIds, true).map(row => {
+      const explanation = MATCH_EXPLAIN_API?.buildV2?.({
+        query: definition.query,
+        parent: {
+          record: row.record,
+          broad: false,
+          parentAdmitted: row.parentAdmitted,
+          directEvidence: row.parentDirectEvidence,
+          profileEvidence: null,
+        },
+        bestChild: row.bestChild,
+        childDroveMatch: row.childDroveMatch,
+        parentAdmitted: row.parentAdmitted,
+        profileSources: {},
+        eligibility: 0,
+        broadFallback: null,
+      });
+      return [row.id, {
+        reasons: (explanation?.reasons || []).map(reason => String(reason?.text || "").trim()).filter(Boolean),
+      }];
     }));
   }
 }

@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "phase": 5,
+  "generated_at": "2026-08-25T13:24:21Z",
+  "protected_main_base": "e17a0c8191d9148e15daced9f9e23d44f838bb6d",
+  "package_version": "1.3.0",
+  "decision": "PHASE 5 RELEASE CANDIDATE PASSED — READY FOR PROTECTED REVIEW AND PRODUCTION HANDOFF",
+  "scope": {
+    "included": [
+      "integrated production hardening across Funding Finder, Team Match, Funded Awards, Institutional Intelligence, and personalized alerts",
+      "public-evidence alert email content and bounded Strong-match explanations",
+      "parameterized shared-link social-preview reliability",
+      "protected deployment rollback hardening",
+      "desktop, mobile, accessibility, privacy, source-health, and no-drift validation"
+    ],
+    "excluded": [
+      "semantic or vector award search",
+      "a second alert ranking system",
+      "LLM-generated alert explanations",
+      "Phase 6 or unrelated product features",
+      "opportunity ranking, vector, or corpus changes"
+    ]
+  },
+  "health_status": {
+    "pages": {
+      "url": "https://mporosoff.github.io/grants-scraper/match_explorer.html",
+      "candidate_baseline_http_status": 200
+    },
+    "award_worker": {
+      "url": "https://funding-finder-award-api.urochestercheme.workers.dev/health",
+      "candidate_baseline_http_status": 200,
+      "service": "available",
+      "sources": ["NSF", "NIH", "DOE"],
+      "institution_registry": "ROR",
+      "credentials_required": false
+    },
+    "alerts_worker": {
+      "url": "https://funding-finder-alerts.urochestercheme.workers.dev/health",
+      "candidate_baseline_http_status": 200,
+      "service": "available",
+      "database_ready": true,
+      "email_provider": "resend",
+      "email_provider_configured": true,
+      "outbound_email_enabled": true,
+      "candidate_contract": "post-deployment health must report email_template_version=phase5"
+    },
+    "search_worker": {
+      "url": "https://funding-finder-voyage-search.urochestercheme.workers.dev/health",
+      "candidate_baseline_http_status": 200,
+      "service": "available",
+      "corpus_sha256": "e2b171d33be7de0b6ab271bda36efabf368bcf15baf7f08faa2ec461c9cdb2c1",
+      "budget_state": "available"
+    }
+  },
+  "source_contracts": {
+    "NSF": "source-native award search and exact or reviewed controlled program-element lookup; official award links and source provenance retained",
+    "NIH": "source-native RePORTER search and exact opportunity-number lookup; pagination remains normalized by core_project_num",
+    "DOE": "isolated bounded PAMS adapter with public WebForms validation, independent failure handling, and exact DE-FOA deep links only",
+    "ROR": "account-free organization registry lookup augments deterministic institution aliases while award queries retain canonical and source-specific institution identities",
+    "cross_source_reranking": false,
+    "award_vectors_used": false,
+    "independent_failure_behavior": "A failed DOE, NSF, NIH, or ROR request degrades only that source and does not suppress usable results from the others."
+  },
+  "integrated_product": {
+    "funding_finder": "37 frozen query cases preserve zero top-10 churn; Strong/Potential behavior, evidence explanations, Saved state, award deep links, and public source links remain on the existing v1.3.0 contracts.",
+    "team_match": "Existing faculty selection, shared browser-local profile state, parent matching, hosted enhancement, and fallback behavior pass the production-like browser suite.",
+    "funded_awards": "NSF, NIH, and independently isolated DOE source sections preserve query/history state, paging, public abstracts, official links, provenance, and partial-failure behavior.",
+    "institutional_intelligence": "ROR-backed aliases and autocomplete, all-agency factual aggregation, filters, investigator/program drill-down, shareable URL state, no-key operation, and shared browser-local LLM configuration pass deterministic and browser validation.",
+    "alerts": "Opportunity watches, baselined saved-search Strong alerts, exact controlled program watches, reminders, weekly digests, verification, manage, pause, resume, unsubscribe, suppression, retry, rate limiting, and idempotency retain the Phase 3 D1 and Worker architecture."
+  },
+  "alerts": {
+    "d1_database": "funding-finder-alerts",
+    "migrations": [
+      "workers/alerts/migrations/0001_phase3_alerts.sql",
+      "workers/alerts/migrations/0002_delivery_claim_lease.sql"
+    ],
+    "tables": [
+      "subscribers",
+      "subscriptions",
+      "subscription_qualifications",
+      "notification_events",
+      "rate_limits",
+      "provider_events",
+      "evaluation_runs",
+      "d1_migrations"
+    ],
+    "saved_search_baseline": "Existing Strong matches are persisted at creation and do not email; only future new or newly qualifying Strong matches enqueue an alert.",
+    "program_identity": "Exact controlled NSF program identities only; no fuzzy program equivalence.",
+    "idempotency": "UNIQUE(subscription_id,event_key), claimed-delivery lease recovery, and stable Resend Idempotency-Key prevent duplicate lifecycle sends.",
+    "failure_handling": "Failed provider sends remain retryable, the daily provider cap queues overflow, and authenticated idempotent webhook events suppress bounced or complained recipients.",
+    "daily_email_limit": 100
+  },
+  "email": {
+    "template_version": "phase5",
+    "provider": "Resend behind the existing provider abstraction",
+    "sender": "Funding Finder <notifications@funding.porosoffresearchgroup.com>",
+    "content": [
+      "opportunity title",
+      "agency and controlled program context when available",
+      "human-readable deadline when available",
+      "specific public change or reminder detail",
+      "Funding Finder focus link",
+      "official-source verification link",
+      "bounded Why it matched evidence for saved-search Strong alerts"
+    ],
+    "why_it_matched": "The existing v1.3.0 query, retrieval, Strong rollup, and public explanation contract are reused with no profile sources and no LLM. Missing evidence is omitted gracefully.",
+    "formats": "Immediate and weekly HTML/text messages carry equivalent factual content; HTML is a concise responsive single-column frame.",
+    "management": "Existing verification, manage, one-click unsubscribe, sender, rate, retry, suppression, and provider idempotency behavior is preserved.",
+    "bounded_live_phase5_send": "required after protected production deployment; deterministic mock/provider/content/privacy gates passed before merge"
+  },
+  "shared_link_image": {
+    "asset": "assets/social/funding-finder-link-preview.jpg",
+    "new_asset_created": false,
+    "root_cause": "A static og:url made social scrapers identify every parameterized state as the bare canonical object, so cached preview identity could collapse or become stale even though the image itself was reachable.",
+    "fix": "Keep the search-engine canonical link, remove the collapsing static og:url, retain absolute Open Graph and Twitter image metadata, and explicitly provide og:image:url.",
+    "state_preservation": "No route, query, hash, history, or application-state parsing changed.",
+    "coverage": [
+      "bare root redirect",
+      "encoded scientific Unicode",
+      "multiple query parameters",
+      "fragments",
+      "ampersands, slashes, and question marks",
+      "values containing file extensions",
+      "explicit .html routes",
+      "Funding Finder, Funded Awards, and Team Match state URLs"
+    ],
+    "production_asset_baseline": {
+      "bare": {"http_status": 200, "content_type": "image/jpeg", "bytes": 156449},
+      "encoded_query": {"http_status": 200, "content_type": "image/jpeg", "bytes": 156449},
+      "multiple_params_fragment_extension": {"http_status": 200, "content_type": "image/jpeg", "bytes": 156449}
+    }
+  },
+  "privacy": {
+    "browser_local_only": [
+      "pursuit statuses",
+      "saved notes",
+      "CV and profile text",
+      "ORCID publication text",
+      "uploaded documents",
+      "AI chat and browser-local LLM credentials"
+    ],
+    "queued_alert_payload_allowlist": [
+      "title",
+      "agency",
+      "program",
+      "close_date",
+      "detail",
+      "why_matched",
+      "funding_finder_url",
+      "official_url"
+    ],
+    "defense": "Worker subscription validation rejects unexpected or recursively private fields, and Phase 5 tests inspect the queued D1-bound JSON before rendering to prove private profile material is absent.",
+    "llm_used_for_alerts": false,
+    "secret_values_read_logged_or_committed": false
+  },
+  "performance": {
+    "method": "Targets are release guardrails derived from observed production-like end-to-end timings on the deployed Phase 1–4 system, including expected hosted/source latency rather than synthetic component timing.",
+    "targets": {
+      "funding_finder_full_search_seconds": 10,
+      "institutional_intelligence_all_source_search_seconds": 10,
+      "funded_awards_cached_all_source_seconds": 3,
+      "funded_awards_cold_all_source_seconds": 35,
+      "team_match_hosted_enhancement_seconds": 35,
+      "doe_adapter_timeout_seconds": 15
+    },
+    "observations_seconds": {
+      "funding_finder_full_search": 8.213,
+      "institutional_intelligence_MIT_all_sources": 3.768,
+      "funded_awards_cached_all_sources_best": 0.762,
+      "funded_awards_cached_all_sources_repeat": 1.881,
+      "funded_awards_cold_all_sources_upper_observed": 32,
+      "team_match_hosted_enhancement": 31.8
+    },
+    "interpretation": "The shell and per-source progress remain responsive while independently bounded public/hosted requests complete; performance was not improved by changing ranking or building a new corpus."
+  },
+  "validation": {
+    "python_live_product_gate": {"passed": 773, "failed": 0},
+    "focused_alert_release_and_rollback_contracts": {"passed": 29, "failed": 0},
+    "real_browser_product_and_accessibility_gate": {
+      "passed": 30,
+      "failed": 0,
+      "mobile_widths_px": [320, 390],
+      "serious_or_critical_accessibility_violations": 0,
+      "lower_severity_axe_violations": 0
+    },
+    "shared_link_real_browser_gate": {"passed": 2, "failed": 0},
+    "frozen_retrieval_guards": {
+      "query_baseline": "37 queries, zero top-10 churn",
+      "p9_scoring": "50 cases, cardinality invariant and byte-identical",
+      "search_release_package": "current corpus, previous corpus, vector binary, and Worker allowlist verified",
+      "vector_or_corpus_evaluation_rerun": false
+    },
+    "full_browser_contract_gate": {"passed": 291, "failed": 0},
+    "protected_pull_request_checks": "pending",
+    "post_merge_pages_worker_email_coherence": "pending"
+  },
+  "service_limits_and_release_capacity": {
+    "checked_at": "2026-08-25",
+    "resend": {
+      "plan": "Free",
+      "monthly_email_limit": 3000,
+      "daily_email_limit": 100,
+      "configured_application_daily_limit": 100,
+      "official_source": "https://resend.com/pricing?product=marketing"
+    },
+    "cloudflare_workers_free": {
+      "requests_per_day": 100000,
+      "cpu_milliseconds_per_request": 10,
+      "memory_megabytes": 128,
+      "subrequests_per_request": 50,
+      "compressed_worker_megabytes": 3,
+      "cron_triggers_per_account": 5,
+      "official_source": "https://developers.cloudflare.com/workers/platform/limits/"
+    },
+    "cloudflare_d1_free": {
+      "database_megabytes": 500,
+      "rows_read_per_day": 5000000,
+      "rows_written_per_day": 100000,
+      "read_queries_per_worker_invocation": 50,
+      "official_sources": [
+        "https://developers.cloudflare.com/d1/platform/limits/",
+        "https://developers.cloudflare.com/d1/platform/pricing/"
+      ]
+    },
+    "capacity_assessment": "The application cap is intentionally no higher than the provider daily cap. Overflow stays queued, and health exposes only aggregate state; normal bounded alert evaluation and public-source traffic remain within the stated deployment architecture."
+  },
+  "deployment_and_rollback": {
+    "protected_workflows": [
+      ".github/workflows/deploy-alerts.yml",
+      ".github/workflows/deploy-award-api.yml",
+      ".github/workflows/deploy-search-package.yml",
+      ".github/workflows/refresh-opportunities.yml"
+    ],
+    "rollback_selection": "Worker rollback candidates are selected from the newest deployment carrying active traffic after deterministic created_on/id sorting; no workflow trusts the first deployment-list entry.",
+    "alerts_gate": "D1 migrations, Worker deployment, phase5 health contract, smoke, and Pages/Worker coherence must pass on protected main or the workflow restores the prior active Worker.",
+    "award_gate": "Worker health, deterministic source smoke, and Funded Awards/Funding Finder Pages coherence remain protected by prior-active-version rollback.",
+    "search_gate": "Atomic Pages/Worker release-package coherence and bounded live Worker smoke retain prior-active-version rollback.",
+    "candidate_status": "awaiting protected pull request checks and post-merge production handoff"
+  },
+  "known_limitations": [
+    "DOE PAMS is a public WebForms system without a published machine API or rate contract; cold all-source award searches can approach the bounded source timeout while NSF and NIH remain usable.",
+    "NSF, NIH, and DOE retain source-native result ordering; no cross-source relevance rank is claimed.",
+    "NIH native multi-concept searches can emphasize a disease area without visibly evidencing every concept in the first records.",
+    "Broad DOE result totals may be source-capped and Funded Awards does not claim exhaustive retrieval beyond its bounded browse window.",
+    "Institution aliases are augmented by current ROR public metadata; ambiguous acronyms require a user selection rather than a guessed institution.",
+    "A social platform can retain its own prior preview cache; the release fixes URL identity and image reachability but cannot force third-party cache eviction."
+  ]
+}

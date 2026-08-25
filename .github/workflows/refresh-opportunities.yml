@@ -88,7 +88,15 @@ jobs:
         run: |
           deployments="$(npx --yes wrangler@4.125.0 deployments list \
             --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          prior_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          prior_version="$(jq -er '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | .versions as $versions
+            | (($versions | map(select((.percentage // 0) == 100)) | first)
+              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+            | .version_id
+          ' <<<"$deployments")"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
           echo "Prior Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
       - name: Deploy the pre-merge compatibility Worker
@@ -106,7 +114,15 @@ jobs:
         run: |
           deployments="$(npx --yes wrangler@4.125.0 deployments list \
             --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          candidate_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          candidate_version="$(jq -er '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | .versions as $versions
+            | (($versions | map(select((.percentage // 0) == 100)) | first)
+              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+            | .version_id
+          ' <<<"$deployments")"
           echo "version_id=$candidate_version" >> "$GITHUB_OUTPUT"
           echo "Candidate Worker version: \`$candidate_version\`" >> "$GITHUB_STEP_SUMMARY"
       - name: Wait for the candidate Worker identity
@@ -309,7 +325,15 @@ jobs:
         run: |
           deployments="$(npx --yes wrangler@4.125.0 deployments list \
             --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          prior_version="$(jq -er '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id)' <<<"$deployments")"
+          prior_version="$(jq -er '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | .versions as $versions
+            | (($versions | map(select((.percentage // 0) == 100)) | first)
+              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+            | .version_id
+          ' <<<"$deployments")"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
           echo "Captured the active Worker version for rollback."
       - name: Deploy the compatibility Worker before publishing Pages assets
