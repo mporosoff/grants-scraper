@@ -11,7 +11,7 @@ import { rankRorOrganizations } from "../../workers/award-api/src/ror.js";
 const root = new URL("../../", import.meta.url);
 const [
   aliases, fundedCoreSource, coreSource, appSource, page, teamPage, styles,
-  credentialsSource, doeForm, fundingAppSource,
+  credentialsSource, doeForm, fundingAppSource, deploymentSource,
 ] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
@@ -23,6 +23,7 @@ const [
   readFile(new URL("assets/credentials.js", root), "utf8"),
   readFile(new URL("tests/fixtures/awards/doe_search_form.html", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
+  readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
 ]);
 
 const sandbox = { URL, URLSearchParams };
@@ -212,6 +213,12 @@ test("the feature is Funding Finder-only, responsive, accessible, no-key capable
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
   assert.match(fundingAppSource, /key === "ii" \|\| key\.startsWith\("ii_"\)/);
+  const workerHealthGate = deploymentSource.slice(
+    deploymentSource.indexOf("Wait for the Award Worker health contract"),
+    deploymentSource.indexOf("Run bounded exact-source smokes"),
+  );
+  assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.0\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
 });
