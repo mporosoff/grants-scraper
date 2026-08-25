@@ -20,7 +20,10 @@
     searchSequence: 0,
     searchController: null,
     payload: null,
+    sourcePages: new Map(),
+    loadingSource: "",
   };
+  const SOURCE_LIMITS = Object.freeze({ NSF: 25, NIH: 25, DOE: 10 });
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -57,12 +60,7 @@
     $("ii-search").disabled = busy;
     $("ii-ask-button").disabled = busy;
     $("ii-output").setAttribute("aria-busy", busy ? "true" : "false");
-    if (busy) {
-      $("ii-previous").disabled = true;
-      $("ii-next").disabled = true;
-    } else {
-      syncPaginationControls();
-    }
+    syncPaginationControls(busy);
   }
 
   function selectedLocation(institution) {
@@ -302,17 +300,63 @@
     list.innerHTML = values.map(source => {
       const status = source.status || "unavailable";
       const label = status === "ok"
-        ? `${source.source} available · ${source.result_count || 0} returned`
-        : awardProduct.sourceIssueText(source);
+        ? `${source.source} available · ${source.result_count || 0} loaded`
+        : source.retained_count
+          ? `${awardProduct.sourceIssueText(source)} ${source.retained_count} previously loaded ${source.source} project${source.retained_count === 1 ? " was" : "s were"} retained.`
+          : awardProduct.sourceIssueText(source);
       return `<li data-status="${escapeAttribute(status)}">${escapeHtml(label)}</li>`;
     }).join("");
     list.classList.toggle("hidden", !values.length);
   }
 
-  function syncPaginationControls() {
-    const offset = Number(state.payload?.pagination?.offset || 0);
-    $("ii-previous").disabled = !state.payload || offset === 0;
-    $("ii-next").disabled = !state.payload || !awardProduct.canPageForward(state.payload);
+  function syncPaginationControls(busy = false) {
+    for (const button of $("ii-load-more-actions").querySelectorAll("[data-ii-load-source]")) {
+      const source = button.dataset.iiLoadSource;
+      button.disabled = busy || state.loadingSource === source;
+    }
+  }
+
+  function combinedPayload() {
+    const pages = [...state.sourcePages.values()];
+    return {
+      schema_version: 1,
+      request: { sources: pages.map(page => page.source) },
+      results: pages.flatMap(page => page.results),
+      sources: pages.map(page => ({
+        ...(page.error || page.meta),
+        source: page.source,
+        status: page.error ? "unavailable" : page.meta?.status || "unavailable",
+        result_count: page.results.length,
+        retained_count: page.error ? page.results.length : 0,
+        has_more: page.error ? false : page.hasMore,
+      })),
+      pagination: { limit: 0, offset: 0 },
+    };
+  }
+
+  function renderFacetSelect(select, items, { kind }) {
+    const noun = kind === "investigator" ? "investigator" : "program";
+    select.innerHTML = items.length
+      ? `<option value="">Choose a ${noun} (${items.length})</option>${items.map(item => {
+        const value = kind === "investigator" ? item.name : item.query;
+        const attributes = kind === "program" ? ` data-ii-program-source="${escapeAttribute(item.source)}"` : "";
+        return `<option value="${escapeAttribute(value)}"${attributes}>${escapeHtml(kind === "investigator" ? item.name : item.label)} · ${item.projects} project${item.projects === 1 ? "" : "s"}</option>`;
+      }).join("")}`
+      : `<option value="">No ${kind === "investigator" ? "investigators" : "programs"} loaded</option>`;
+    select.disabled = items.length === 0;
+  }
+
+  function renderLoadMore(aggregate) {
+    const pages = [...state.sourcePages.values()];
+    const available = pages.filter(page => page.hasMore);
+    const retryable = pages.filter(page => page.error);
+    const actions = [...available, ...retryable.filter(page => !available.includes(page))];
+    $("ii-pagination").classList.toggle("hidden", actions.length === 0);
+    $("ii-page-label").textContent = actions.length
+      ? `${aggregate.project_count.toLocaleString()} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded. Additional source pages are available from ${available.map(page => page.source).join(", ") || "the source that could not be reached"}.`
+      : `${aggregate.project_count.toLocaleString()} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded in this view.`;
+    $("ii-load-more-actions").innerHTML = actions.map(page => `<button class="button secondary" type="button" data-ii-load-source="${escapeAttribute(page.source)}">${page.error ? "Retry" : "Load more"} ${escapeHtml(page.source)}</button>`).join("");
+    syncPaginationControls();
   }
 
   function renderAggregate(payload) {
@@ -320,8 +364,8 @@
     const institution = clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300);
     $("ii-output").classList.remove("hidden");
     $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
-    const hasMore = (payload.sources || []).some(source => source.status === "ok" && source.has_more === true);
-    $("ii-result-scope").textContent = `Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} on this source-native result page${hasMore ? "; additional source results exist" : ""}.`;
+    const moreSources = (payload.sources || []).filter(source => source.status === "ok" && source.has_more === true).map(source => source.source);
+    $("ii-result-scope").textContent = `Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded across source-specific pages${moreSources.length ? `; load more from ${moreSources.join(", ")}` : ""}.`;
     const years = aggregate.year_start
       ? aggregate.year_start === aggregate.year_end ? String(aggregate.year_start) : `${aggregate.year_start}–${aggregate.year_end}`
       : "Not listed";
@@ -331,22 +375,81 @@
       [aggregate.program_count, "Program labels"],
       [years, "Award years"],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
-    $("ii-investigators").innerHTML = aggregate.investigators.length
-      ? aggregate.investigators.map(person => `<button type="button" data-ii-pi="${escapeAttribute(person.name)}">${escapeHtml(person.name)} · ${person.projects}</button>`).join("")
-      : "<p>No structured investigator names were returned.</p>";
-    $("ii-programs").innerHTML = aggregate.programs.length
-      ? aggregate.programs.map(program => `<button type="button" data-ii-program="${escapeAttribute(program.query)}" data-ii-program-source="${escapeAttribute(program.source)}">${escapeHtml(program.label)} · ${program.projects}</button>`).join("")
-      : "<p>No structured program labels were returned.</p>";
+    renderFacetSelect($("ii-investigators"), aggregate.investigators, { kind: "investigator" });
+    renderFacetSelect($("ii-programs"), aggregate.programs, { kind: "program" });
     $("ii-awards").innerHTML = aggregate.awards.length
       ? aggregate.awards.map(awardCard).join("")
       : "<p>No normalized public award records matched these filters.</p>";
     renderSourceStatus(payload.sources);
-    const offset = Number(payload.pagination?.offset || 0);
-    const canNext = awardProduct.canPageForward(payload);
-    $("ii-pagination").classList.toggle("hidden", offset === 0 && !canNext);
-    $("ii-page-label").textContent = awardProduct.paginationLabel(payload, aggregate.project_count);
-    syncPaginationControls();
+    renderLoadMore(aggregate);
     return aggregate;
+  }
+
+  async function fetchAwardPage(requestBody, controller) {
+    const timer = setTimeout(() => controller.abort(), apiConfig.timeoutMs);
+    let response;
+    try {
+      response = await fetch(apiConfig.searchUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        credentials: "omit",
+        body: JSON.stringify(requestBody),
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
+    const payload = await response.json().catch(() => null);
+    if (!payload || !awardProduct.validatePayload(payload)) {
+      const error = new Error(awardProduct.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
+      error.code = awardProduct.boundedErrorCode(payload) || "invalid_response";
+      throw error;
+    }
+    return payload;
+  }
+
+  function sourcePage(requestBody, payload) {
+    const source = requestBody.sources[0];
+    const meta = (payload.sources || []).find(item => item.source === source) || {
+      source,
+      status: "unavailable",
+      error: { code: "source_unavailable" },
+    };
+    return {
+      source,
+      limit: requestBody.limit,
+      nextOffset: requestBody.offset + requestBody.limit,
+      results: payload.results.filter(result => result.source === source),
+      meta,
+      hasMore: meta.status === "ok" && meta.has_more === true,
+      error: null,
+    };
+  }
+
+  function failedSourcePage(requestBody, error) {
+    return {
+      source: requestBody.sources[0],
+      limit: requestBody.limit,
+      nextOffset: requestBody.offset,
+      results: [],
+      meta: null,
+      hasMore: false,
+      error: {
+        source: requestBody.sources[0],
+        status: "unavailable",
+        error: { code: error?.code || (error?.name === "AbortError" ? "source_unavailable" : "service_unavailable") },
+      },
+    };
+  }
+
+  function setLoadedStatus(payload, aggregate) {
+    const failed = (payload.sources || []).filter(source => source.status !== "ok");
+    const issueText = failed.map(awardProduct.sourceIssueText).join(" ");
+    setStatus(failed.length
+      ? aggregate.project_count
+        ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} loaded from available sources. ${issueText}`
+        : issueText
+      : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} loaded. Use the investigator or program menus to drill into the official records.`, failed.length > 0 && aggregate.project_count === 0);
   }
 
   async function runSearch({ historyMode = "replace", resolveInstitution = true, offset = null, focusResults = false, scrollResults = false } = {}) {
@@ -359,37 +462,28 @@
       if (resolveInstitution) await resolveTypedInstitution();
       const current = formState();
       if (offset !== null) current.offset = Math.max(0, Math.min(1_000, Number(offset) || 0));
-      const requestBody = core.buildAwardRequest(current, 10);
+      const sources = core.sourcesForAgency(current.agency);
+      const requestBodies = sources.map(source => core.buildAwardRequest(
+        { ...current, agency: source },
+        SOURCE_LIMITS[source],
+      ));
       syncUrl(current, historyMode);
-      const timer = setTimeout(() => state.searchController?.abort(), apiConfig.timeoutMs);
-      let response;
-      try {
-        response = await fetch(apiConfig.searchUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          credentials: "omit",
-          body: JSON.stringify(requestBody),
-          signal: state.searchController.signal,
-        });
-      } finally {
-        clearTimeout(timer);
-      }
-      const payload = await response.json().catch(() => null);
+      const controller = state.searchController;
+      const settled = await Promise.allSettled(requestBodies.map(requestBody => fetchAwardPage(requestBody, controller)));
       if (sequence !== state.searchSequence) return;
-      if (!payload || !awardProduct.validatePayload(payload)) {
-        const error = new Error(awardProduct.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
-        error.code = awardProduct.boundedErrorCode(payload) || "invalid_response";
-        throw error;
+      if (settled.every(result => result.status === "rejected" && result.reason?.name === "AbortError")) {
+        throw settled[0].reason;
       }
-      state.payload = payload;
-      const aggregate = renderAggregate(payload);
-      const failed = (payload.sources || []).filter(source => source.status !== "ok");
-      const issueText = failed.map(awardProduct.sourceIssueText).join(" ");
-      setStatus(failed.length
-        ? aggregate.project_count
-          ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned from available sources. ${issueText}`
-          : issueText
-        : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned. Use investigator or program selections to drill into the official records.`, failed.length > 0 && aggregate.project_count === 0);
+      state.sourcePages = new Map(requestBodies.map((requestBody, index) => {
+        const result = settled[index];
+        const page = result.status === "fulfilled"
+          ? sourcePage(requestBody, result.value)
+          : failedSourcePage(requestBody, result.reason);
+        return [page.source, page];
+      }));
+      state.payload = combinedPayload();
+      const aggregate = renderAggregate(state.payload);
+      setLoadedStatus(state.payload, aggregate);
       if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
       if (scrollResults) $("ii-output-heading").scrollIntoView({ block: "start" });
     } catch (error) {
@@ -404,11 +498,81 @@
     }
   }
 
+  async function loadMoreSource(source) {
+    const page = state.sourcePages.get(source);
+    if (!page || (!page.hasMore && !page.error)) return;
+    const sequence = ++state.searchSequence;
+    state.searchController?.abort();
+    state.searchController = new AbortController();
+    state.loadingSource = source;
+    setBusy(true);
+    setStatus(`${page.error ? "Retrying" : "Loading more from"} ${source}…`);
+    try {
+      const current = formState();
+      const requestBody = core.buildAwardRequest(
+        { ...current, agency: source, offset: page.nextOffset },
+        page.limit,
+      );
+      const payload = await fetchAwardPage(requestBody, state.searchController);
+      if (sequence !== state.searchSequence) return;
+      const next = sourcePage(requestBody, payload);
+      if (next.meta.status !== "ok") {
+        page.error = next.meta;
+        page.hasMore = false;
+      } else {
+        const seen = new Set(page.results.map(award => `${award.source}:${award.award_id}`));
+        const added = next.results.filter(award => {
+          const key = `${award.source}:${award.award_id}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+        page.results.push(...added);
+        page.meta = next.meta;
+        page.nextOffset = next.nextOffset;
+        page.hasMore = next.hasMore && added.length > 0 && next.nextOffset <= 1_000;
+        page.error = null;
+        state.sourcePages.set(source, page);
+        state.payload = combinedPayload();
+        const aggregate = renderAggregate(state.payload);
+        setStatus(`${added.length} additional ${source} project${added.length === 1 ? "" : "s"} loaded. ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? " is" : "s are"} now shown.`);
+        return;
+      }
+      state.sourcePages.set(source, page);
+      state.payload = combinedPayload();
+      const aggregate = renderAggregate(state.payload);
+      setLoadedStatus(state.payload, aggregate);
+    } catch (error) {
+      if (sequence !== state.searchSequence) return;
+      if (error?.name === "AbortError") {
+        setStatus(`Loading more ${source} projects timed out. Previously loaded projects remain visible.`, true);
+      } else {
+        page.error = {
+          source,
+          status: "unavailable",
+          error: { code: error?.code || "service_unavailable" },
+        };
+        page.hasMore = false;
+        state.sourcePages.set(source, page);
+        state.payload = combinedPayload();
+        renderAggregate(state.payload);
+        setStatus(`${source} could not load another page. Previously loaded projects remain visible.`, true);
+      }
+    } finally {
+      if (sequence === state.searchSequence) {
+        state.loadingSource = "";
+        setBusy(false);
+      }
+    }
+  }
+
   function clearSearch({ historyMode = "push" } = {}) {
     state.searchSequence += 1;
     state.searchController?.abort();
     state.selectedInstitution = null;
     state.payload = null;
+    state.sourcePages.clear();
+    state.loadingSource = "";
     applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", offset: 0 });
     $("ii-output").classList.add("hidden");
     $("ii-source-status").classList.add("hidden");
@@ -522,7 +686,7 @@
         provider,
         key,
         fetchImpl: globalThis.fetch,
-        system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, and year_end. Use empty strings for absent values. Do not answer the question, name awards, infer contacts, recommend collaborators, score funding fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+        system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, and year_end. Use empty strings for absent values. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, score funding fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
         user: JSON.stringify({
           institution: current.institution,
           current_filters: {
@@ -541,6 +705,8 @@
         ? { ...translated }
         : {};
       plan.agency = inferQuestionAgency(plan, question);
+      const explicitPi = core.explicitInvestigator(question);
+      if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
       const next = core.sanitizeQuestionPlan(plan, current);
       applyFormState(next);
       state.selectedInstitution = {
@@ -598,29 +764,23 @@
       runSearch({ historyMode: "push", offset: 0, focusResults: true });
     });
     $("ii-clear").addEventListener("click", () => clearSearch());
-    $("ii-output").addEventListener("click", event => {
-      const investigator = event.target.closest("[data-ii-pi]");
-      if (investigator) {
-        $("ii-pi").value = investigator.dataset.iiPi;
-        runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
-        return;
-      }
-      const program = event.target.closest("[data-ii-program]");
-      if (program) {
-        $("ii-agency").value = program.dataset.iiProgramSource;
-        $("ii-program").value = program.dataset.iiProgram;
-        runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
-      }
+    $("ii-investigators").addEventListener("change", event => {
+      const investigator = clean(event.currentTarget.value, 160);
+      if (!investigator) return;
+      $("ii-pi").value = investigator;
+      runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
     });
-    $("ii-previous").addEventListener("click", () => {
-      const pageSize = Number(state.payload?.request?.limit || 10);
-      const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - pageSize);
-      runSearch({ historyMode: "push", resolveInstitution: false, offset, focusResults: true, scrollResults: true });
+    $("ii-programs").addEventListener("change", event => {
+      const option = event.currentTarget.selectedOptions[0];
+      const program = clean(option?.value, 160);
+      if (!program) return;
+      $("ii-agency").value = option.dataset.iiProgramSource;
+      $("ii-program").value = program;
+      runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
     });
-    $("ii-next").addEventListener("click", () => {
-      const pageSize = Number(state.payload?.request?.limit || 10);
-      const offset = Number(state.payload?.pagination?.offset || 0) + pageSize;
-      runSearch({ historyMode: "push", resolveInstitution: false, offset, focusResults: true, scrollResults: true });
+    $("ii-load-more-actions").addEventListener("click", event => {
+      const button = event.target.closest("[data-ii-load-source]");
+      if (button) loadMoreSource(button.dataset.iiLoadSource);
     });
     $("ii-provider").addEventListener("change", () => refreshProvider({ preferMain: false }));
     $("ii-save-key").addEventListener("click", saveSharedKey);
@@ -631,6 +791,8 @@
       const restored = core.stateFromSearch(location.search);
       applyFormState(restored);
       state.payload = null;
+      state.sourcePages.clear();
+      state.loadingSource = "";
       if (hasSearchState(restored) && !params.get("opportunity")) {
         runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
       } else {

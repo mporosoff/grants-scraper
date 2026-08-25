@@ -94,9 +94,11 @@ export function mockAwards(target, {
   failDoe = false,
   failNih = false,
   failNsf = false,
+  hasMoreBySource = {},
   hasMoreAtOffsets = [],
   resultCountPerSource = 1,
   sourceFailures = {},
+  sourceFailuresByOffset = {},
 } = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
@@ -236,7 +238,9 @@ export function mockAwards(target, {
     const sources = [];
     for (const source of body.sources) {
       const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
-      const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+      const configuredFailure = sourceFailuresByOffset[`${source}:${body.offset}`]
+        || sourceFailures[source]
+        || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
       if (configuredFailure) {
         sources.push({
           source,
@@ -265,7 +269,7 @@ export function mockAwards(target, {
           cache: "miss",
           total_count: null,
           raw_record_count: resultCount,
-          has_more: hasMoreAtOffsets.includes(body.offset),
+          has_more: (hasMoreBySource[source] || hasMoreAtOffsets).includes(body.offset),
           result_count: resultCount,
           retrieved_at: retrievedAt,
         });

@@ -231,11 +231,32 @@
     };
   }
 
+  function explicitInvestigator(question) {
+    const value = clean(question, 1_000);
+    if (!value) return "";
+    const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
+    const patterns = [
+      new RegExp(`\\b(?:investigator|researcher|professor|faculty member|PI)\\s+(?:named\\s+)?${name}(?=\\s*(?:[?.,;:]|$))`, "u"),
+      new RegExp(`\\b(?:awards?|projects?|funding)\\s+(?:for|by|from)\\s+${name}(?=\\s*(?:[?.,;:]|$))`, "u"),
+      new RegExp(`\\b(?:has|did)\\s+${name}\\s+(?:been\\s+funded|receive|received|win|won|lead|led|secure|secured|get|got|have)\\b`, "u"),
+    ];
+    for (const pattern of patterns) {
+      const match = value.match(pattern);
+      if (match?.[1]) {
+        const candidate = clean(match[1], 160).replace(/[.,;:]+$/u, "");
+        if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        return candidate;
+      }
+    }
+    return "";
+  }
+
   globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE = Object.freeze({
     MANAGED_PARAMS,
     aggregateAwards,
     buildAwardRequest,
     chooseInstitution,
+    explicitInvestigator,
     identityKey,
     programCriterion,
     sanitizeQuestionPlan,

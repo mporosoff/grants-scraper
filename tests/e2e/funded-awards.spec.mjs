@@ -27,14 +27,14 @@ test("standalone native topic search renders source records, provenance, institu
   await expect(page.getByText("Direct NSF source field").first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View on official record/ }).first()).toBeVisible();
   await expect(page).toHaveURL(/ii_topic=mitral\+valve\+prolapse/);
-  expect(calls[0].criteria).toMatchObject({
+  expect(calls.slice(0, 3).map(call => call.sources[0])).toEqual(["NSF", "NIH", "DOE"]);
+  expect(calls.slice(0, 3).map(call => call.limit)).toEqual([25, 25, 10]);
+  for (const call of calls.slice(0, 3)) expect(call.criteria).toMatchObject({
     topic: "mitral valve prolapse",
     institution: "University of Rochester",
   });
-  expect(calls[0].sources).toEqual(["NSF", "NIH", "DOE"]);
-  expect(calls[0].limit).toBe(10);
 
-  await page.locator("[data-ii-pi='Stephen Dewhurst']").click();
+  await page.locator("#ii-investigators").selectOption("Stephen Dewhurst");
   await expect(page).toHaveURL(/ii_pi=Stephen\+Dewhurst/);
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_pi=/);
@@ -117,14 +117,23 @@ test("investigator drill-down replaces an exact opportunity request and round-tr
   await expect(page.locator("#selected-opportunity")).toBeHidden();
 });
 
-test("multi-source pagination reports independent source offsets on mobile", async ({ page }) => {
-  mockAwards(page, { resultCountPerSource: { NSF: 2, NIH: 1, DOE: 3 } });
+test("a short multi-source result set exposes only the source that can load more", async ({ page }) => {
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0], NIH: [], DOE: [] },
+    resultCountPerSource: { NSF: 10, NIH: 1, DOE: 3 },
+  });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/funded_awards.html?ii=1&ii_topic=catalysis&ii_offset=10");
-  await expect(page.locator(".ii-award-card")).toHaveCount(6);
-  await expect(page.locator("#ii-page-label")).toHaveText("6 results on this page · each source is paged independently after its first 10 results");
-  await expect(page.locator("#ii-page-label")).not.toContainText(/Results 11/);
+  await page.goto("/funded_awards.html?ii=1&ii_topic=catalysis");
+  await expect(page.locator(".ii-award-card")).toHaveCount(14);
+  await expect(page.locator("#ii-page-label")).toContainText("14 normalized projects loaded");
   await expect(page.locator("#ii-page-label")).toHaveAttribute("aria-live", "polite");
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Load more NIH|Load more DOE/ })).toHaveCount(0);
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  expect(calls.at(-1).sources).toEqual(["NSF"]);
+  await expect(page.locator(".ii-award-card")).toHaveCount(24);
+  await expect(page).not.toHaveURL(/ii_offset=/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -143,7 +152,7 @@ test("partial award results distinguish unsupported and rate-limited sources", a
   await expect(page.locator(".ii-award-card[data-source='NSF']")).toHaveCount(1);
   await expect(page.locator("#ii-source-status")).toContainText("NIH does not support this filter combination");
   await expect(page.locator("#ii-source-status")).toContainText("DOE is rate limited. Wait before retrying.");
-  await expect(page.locator("#ii-status")).toContainText("1 public project returned from available sources");
+  await expect(page.locator("#ii-status")).toContainText("1 public project loaded from available sources");
   await expect(page.locator("#ii-status")).toContainText("does not support this filter combination");
   await expect(page.locator("#ii-status")).toContainText("Wait before retrying");
 });
@@ -176,41 +185,32 @@ test("a failed award source degrades independently", async ({ page }) => {
   await expect(page.locator(".ii-award-card[data-source='NIH']")).toHaveCount(0);
   await expect(page.locator(".ii-award-card[data-source='DOE']")).toHaveCount(1);
   await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable. Retry later.");
-  await expect(page.locator("#ii-status")).toContainText("returned from available sources");
+  await expect(page.locator("#ii-status")).toContainText("loaded from available sources");
 });
 
-test("an underfilled normalized page disables Next even when a source reports more raw records", async ({ page }) => {
+test("an underfilled normalized page uses an explicit source-specific load-more control", async ({ page }) => {
   mockAwards(page, { hasMoreAtOffsets: [0] });
   await page.goto("/funded_awards.html");
   await page.locator("#ii-topic").fill("warm dense matter");
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-search").click();
   await expect(page.locator(".ii-award-card")).toHaveCount(1);
-  await expect(page.locator("#ii-previous")).toBeDisabled();
-  await expect(page.locator("#ii-next")).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: /Next|Previous/ })).toHaveCount(0);
 });
 
-test("pagination restores controls after loading and scrolls each new page to the results heading", async ({ page }) => {
-  mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 10 });
+test("load more preserves loaded projects and does not create a navigation entry", async ({ page }) => {
+  const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
   await page.goto("/funded_awards.html");
   await page.locator("#ii-topic").fill("warm dense matter");
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-search").click();
-  await expect(page.locator(".ii-award-card")).toHaveCount(10);
-  await expect(page.locator("#ii-previous")).toBeDisabled();
-  await expect(page.locator("#ii-next")).toBeEnabled();
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.locator("#ii-next").click();
-  await expect(page).toHaveURL(/ii_offset=10/);
-  await expect(page.locator("#ii-previous")).toBeEnabled();
-  await expect(page.locator("#ii-next")).toBeDisabled();
-  await expect.poll(() => page.locator("#ii-output-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(120);
-  await expect.poll(() => page.locator("#ii-output-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
-
-  await page.locator("#ii-previous").click();
+  await expect(page.locator(".ii-award-card")).toHaveCount(25);
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  await expect(page.locator(".ii-award-card")).toHaveCount(50);
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
   await expect(page).not.toHaveURL(/ii_offset=/);
-  await expect(page.locator("#ii-previous")).toBeDisabled();
-  await expect(page.locator("#ii-next")).toBeEnabled();
 });
 
 test("principal investigator and program officer are first-class search modes", async ({ page }) => {
@@ -236,8 +236,8 @@ test("institution-only shared URLs execute and restore across browser history", 
   const calls = mockAwards(page);
   await page.goto("/funded_awards.html?institution=University+of+Rochester");
   await expect(page.locator(".ii-award-card")).toHaveCount(3);
-  await expect.poll(() => calls.length).toBe(1);
-  expect(calls[0].criteria).toEqual({ institution: "University of Rochester" });
+  await expect.poll(() => calls.length).toBe(3);
+  expect(calls.every(call => call.criteria.institution === "University of Rochester")).toBe(true);
 
   await page.locator("#ii-clear").click();
   await expect(page).not.toHaveURL(/institution=/);
@@ -245,7 +245,7 @@ test("institution-only shared URLs execute and restore across browser history", 
   await page.goBack();
   await expect(page).toHaveURL(/institution=University\+of\+Rochester/);
   await expect(page.locator(".ii-award-card")).toHaveCount(3);
-  await expect.poll(() => calls.length).toBe(2);
+  await expect.poll(() => calls.length).toBe(6);
   await page.goForward();
   await expect(page).not.toHaveURL(/institution=/);
   await expect(page.locator("#ii-output")).toBeHidden();

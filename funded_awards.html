@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=help-alerts-20260825">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=unified-award-intelligence-20260825">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=pre-phase2-ux-20260825">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -193,18 +193,21 @@
             <div class="ii-drilldowns">
               <section aria-labelledby="ii-investigators-heading">
                 <h3 id="ii-investigators-heading">Investigators</h3>
-                <div class="ii-facet-list" id="ii-investigators"></div>
+                <select id="ii-investigators" aria-labelledby="ii-investigators-heading" disabled>
+                  <option value="">No investigators loaded</option>
+                </select>
               </section>
               <section aria-labelledby="ii-programs-heading">
                 <h3 id="ii-programs-heading">Programs</h3>
-                <div class="ii-facet-list" id="ii-programs"></div>
+                <select id="ii-programs" aria-labelledby="ii-programs-heading" disabled>
+                  <option value="">No programs loaded</option>
+                </select>
               </section>
             </div>
             <div class="ii-awards" id="ii-awards" aria-live="polite"></div>
-            <nav class="ii-pagination hidden" id="ii-pagination" aria-label="Funded award result pages">
-              <button class="button secondary" id="ii-previous" type="button">← Previous</button>
-              <span id="ii-page-label" aria-live="polite"></span>
-              <button class="button secondary" id="ii-next" type="button">Next →</button>
+            <nav class="ii-pagination hidden" id="ii-pagination" aria-label="Load additional funded awards">
+              <p id="ii-page-label" aria-live="polite"></p>
+              <div class="ii-load-more-actions" id="ii-load-more-actions"></div>
             </nav>
           </section>
         </div>
@@ -302,10 +305,10 @@
   <script src="./assets/alerts.js?v=search-alerts-20260825"></script>
   <script src="./assets/award-api-config.js?v=phase4-doe-awards"></script>
   <script src="./assets/funded-awards-core.js?v=phase4-doe-awards"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=unified-award-intelligence-20260825"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=pre-phase2-ux-20260825"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/funded-awards.js?v=unified-award-intelligence-20260825"></script>
-  <script src="./assets/institutional-intelligence.js?v=unified-award-intelligence-20260825"></script>
+  <script src="./assets/institutional-intelligence.js?v=pre-phase2-ux-20260825"></script>
 </body>
 </html>
