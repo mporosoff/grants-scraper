@@ -241,7 +241,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "app-1.3.0"
+        style_version = "unified-ui-20260825"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
             explorer_html,
@@ -292,11 +292,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=app-1.3.0"></script>',
+            f'<script src="./assets/app.js?v={style_version}"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=help-20260825"></script>',
+            f'<script src="./assets/site-help.js?v={style_version}"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)
