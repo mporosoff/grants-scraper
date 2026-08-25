@@ -41,14 +41,18 @@ test("source-specific loading accumulates projects without replacing the current
   mockHybrid(page);
   const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
   await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
   await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await page.locator("#ii-institution").fill("MIT");
   await page.locator("#ii-topic").fill("batteries");
   await page.getByRole("button", { name: "Load more NSF" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   expect(calls.at(-1).criteria.topic).toBe("catalysis");
+  expect(calls.at(-1).criteria.institution).toBe("University of Rochester");
+  await expect(page.locator("#ii-output-heading")).toHaveText("University of Rochester funded projects");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(50);
   await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
   await expect(page).not.toHaveURL(/ii_offset=/);

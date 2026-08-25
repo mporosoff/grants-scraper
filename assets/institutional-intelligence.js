@@ -363,7 +363,10 @@
 
   function renderAggregate(payload) {
     const aggregate = core.aggregateAwards(payload.results);
-    const institution = clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300);
+    const submittedPage = state.sourcePages.values().next().value;
+    const institution = submittedPage
+      ? clean(submittedPage.request?.criteria?.institution, 300)
+      : clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300);
     $("ii-output").classList.remove("hidden");
     $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
     const moreSources = (payload.sources || []).filter(source => source.status === "ok" && source.has_more === true).map(source => source.source);
