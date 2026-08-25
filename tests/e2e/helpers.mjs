@@ -88,7 +88,7 @@ export function mockHybrid(page, {
   return calls;
 }
 
-export function mockAwards(target, { failNih = false, failNsf = false } = {}) {
+export function mockAwards(target, { failNih = false, failNsf = false, hasMoreAtOffsets = [] } = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
@@ -159,7 +159,17 @@ export function mockAwards(target, { failNih = false, failNsf = false } = {}) {
         sources.push({ source, status: "unavailable", error: { code: "source_unavailable" } });
       } else {
         results.push(source === "NSF" ? nsf : nih);
-        sources.push({ source, status: "ok", adapter_version: "1.0.0", cache: "miss", total_count: 1, raw_record_count: 1, result_count: 1, retrieved_at: retrievedAt });
+        sources.push({
+          source,
+          status: "ok",
+          adapter_version: "1.1.0",
+          cache: "miss",
+          total_count: null,
+          raw_record_count: 1,
+          has_more: hasMoreAtOffsets.includes(body.offset),
+          result_count: 1,
+          retrieved_at: retrievedAt,
+        });
       }
     }
     await route.fulfill({

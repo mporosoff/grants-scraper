@@ -2,7 +2,7 @@
   "schema_version": 1,
   "phase": 2,
   "title": "Funded Awards product + Funding Finder integration",
-  "generated_at": "2026-08-24T23:43:00.000Z",
+  "generated_at": "2026-08-25T00:07:32.668Z",
   "roadmap": {
     "file": "FUNDING_FINDER_FUNDED_AWARDS_AND_ALERTS_PLAN.md",
     "sha256": "7077c8a144c2be9be4d58a42c12364523d5e19b36f8a8f8d0d9e6eb9be475eec"
@@ -60,6 +60,13 @@
       "fuzzy_mapping": false,
       "unmapped_records_eligible": false
     }
+  },
+  "review_remediation": {
+    "pagination_controls": "Previous and Next are disabled during requests, then restored from the rendered payload's normalized offset and explicit per-source has_more state.",
+    "nih_project_pagination": "The public offset is expressed in normalized core_project_num projects. The NIH adapter scans raw annual RePORTER pages internally until it can slice the requested normalized project page and establish a one-project lookahead.",
+    "institution_only_history": "An institution URL criterion now triggers the same initial and popstate search path as topic, PI, program-officer, and selected-opportunity criteria.",
+    "worker_rollback_selection": "The deployment workflow orders deployment records by created_on and id, selects the newest record with active traffic, and only then selects its active version; deployment-list array order is ignored.",
+    "adapter_versions": {"NSF": "1.1.0", "NIH": "1.1.0"}
   },
   "reviewed_nsf_parent_mappings": [
     {
@@ -146,11 +153,12 @@
     "ranking_or_vector_followup_performed": false
   },
   "validation": {
-    "phase1_boundary_contract_tests": {"passed": 7, "failed": 0},
+    "phase1_boundary_contract_tests": {"passed": 8, "failed": 0},
     "focused_phase2_contract_tests": {"passed": 6, "failed": 0},
     "focused_navigation_contract_tests": {"passed": 3, "failed": 0},
-    "full_browser_and_worker_contract_tests": {"passed": 254, "failed": 0},
-    "full_real_browser_product_and_accessibility_tests": {"passed": 16, "failed": 0},
+    "full_browser_and_worker_contract_tests": {"passed": 255, "failed": 0},
+    "full_real_browser_product_and_accessibility_tests": {"passed": 18, "failed": 0},
+    "affected_funded_awards_browser_tests": {"passed": 6, "failed": 0},
     "focused_accessibility_tests": {"passed": 3, "failed": 0},
     "focused_mobile_widths_px": [390, 320],
     "focused_serious_accessibility_violations": 0,
@@ -178,7 +186,7 @@
   "known_limitations": [
     "Eligibility is intentionally conservative: an NSF solicitation without an exact or reviewed program-element mapping does not receive a funded-awards link.",
     "The reviewed CPS and translational-program groups include explicit historical parent/predecessor program elements because newly assigned 2026 program elements do not yet provide meaningful award history.",
-    "Each source returns at most 25 normalized records per page; NIH broad searches normalize a start-date-sorted window of at most 100 annual application records.",
+    "Each source returns at most 25 normalized records per page; NIH broad searches scan at most 12 RePORTER pages to establish the requested normalized-project page and do not speculate that a further page exists when that bounded scan cannot establish a lookahead.",
     "The standalone product reports source-native order and does not claim comparable relevance between NSF and NIH.",
     "The public Award API deployment is intentionally deferred to the protected post-merge workflow; the pull request must stop before merge for review."
   ],

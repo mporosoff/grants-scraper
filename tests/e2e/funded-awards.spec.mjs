@@ -44,6 +44,46 @@ test("a failed award source degrades independently", async ({ page }) => {
   await expect(page.locator("#award-status")).toContainText("available sources are shown");
 });
 
+test("pagination controls restore their result state after loading clears", async ({ page }) => {
+  mockAwards(page, { hasMoreAtOffsets: [0] });
+  await page.goto("/funded_awards.html");
+  await page.locator("#award-query").fill("warm dense matter");
+  await page.locator("#award-agency").selectOption("NSF");
+  await page.locator("#search-awards").click();
+  await expect(page.locator(".award-card")).toHaveCount(1);
+  await expect(page.locator("#award-previous")).toBeDisabled();
+  await expect(page.locator("#award-next")).toBeEnabled();
+
+  await page.locator("#award-next").click();
+  await expect(page).toHaveURL(/offset=25/);
+  await expect(page.locator("#award-previous")).toBeEnabled();
+  await expect(page.locator("#award-next")).toBeDisabled();
+
+  await page.locator("#award-previous").click();
+  await expect(page).not.toHaveURL(/offset=/);
+  await expect(page.locator("#award-previous")).toBeDisabled();
+  await expect(page.locator("#award-next")).toBeEnabled();
+});
+
+test("institution-only shared URLs execute and restore across browser history", async ({ page }) => {
+  const calls = mockAwards(page);
+  await page.goto("/funded_awards.html?institution=University+of+Rochester");
+  await expect(page.locator(".award-card")).toHaveCount(2);
+  await expect.poll(() => calls.length).toBe(1);
+  expect(calls[0].criteria).toEqual({ institution: "University of Rochester" });
+
+  await page.locator("#clear-award-search").click();
+  await expect(page).not.toHaveURL(/institution=/);
+  await expect(page.locator(".award-card")).toHaveCount(0);
+  await page.goBack();
+  await expect(page).toHaveURL(/institution=University\+of\+Rochester/);
+  await expect(page.locator(".award-card")).toHaveCount(2);
+  await expect.poll(() => calls.length).toBe(2);
+  await page.goForward();
+  await expect(page).not.toHaveURL(/institution=/);
+  await expect(page.locator(".award-card")).toHaveCount(0);
+});
+
 test("eligible Funding Finder results open Funded Awards in a new tab with the exact NIH opportunity selected", async ({ page, context }) => {
   mockHybrid(page);
   const awardCalls = mockAwards(context);

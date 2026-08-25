@@ -97,6 +97,14 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.deepEqual(Array.from(selected.sources), ["NSF"]);
   assert.deepEqual(Array.from(selected.criteria.program_codes), ["367Y00", "140100", "764400", "141700", "140300"]);
   assert.equal(selected.criteria.topic, undefined);
+  assert.equal(product.canPageForward({
+    sources: [{ status: "ok", has_more: false, total_count: 500, raw_record_count: 25 }],
+    pagination: { offset: 25 },
+  }), false, "raw-record totals cannot advance normalized pagination");
+  assert.equal(product.canPageForward({
+    sources: [{ status: "ok", has_more: true, total_count: null, raw_record_count: 100 }],
+    pagination: { offset: 25 },
+  }), true);
   assert.doesNotMatch(coreSource + appSource, /FUNDING_HYBRID_SEARCH|voyage|embedding|vectorUrl/i);
 });
 
@@ -119,6 +127,7 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(appSource, /source-native order; no cross-source reranking/i);
   assert.match(appSource, /history\[mode === "push" \? "pushState" : "replaceState"\]/);
   assert.match(appSource, /addEventListener\("popstate"/);
+  assert.match(appSource, /params\.get\("institution"\)/);
   assert.match(appSource, /funding-finder\.awards\.institution\.v1/);
   assert.match(appSource, /other sources remain usable/);
   assert.match(fundingApp, /data-funded-awards=/);
@@ -156,6 +165,8 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(deployWorkflow, /git ls-remote origin refs\/heads\/main/);
   assert.match(deployWorkflow, /Main changed while the Funded Awards release was being verified/);
   assert.match(deployWorkflow, /Capture the active Award Worker version for rollback/);
+  assert.match(deployWorkflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)\s*\| last/);
+  assert.doesNotMatch(deployWorkflow, /\.\[0\]\.versions/);
   assert.match(deployWorkflow, /wrangler@4\.125\.0 rollback/);
   assert.match(deployWorkflow, /Run bounded exact-source smokes/);
   assert.match(deployWorkflow, /Verify Pages serves the committed Funded Awards page/);

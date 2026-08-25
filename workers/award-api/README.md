@@ -39,7 +39,9 @@ The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other source.
 NIH annual applications are grouped by `core_project_num`; their original
 application IDs, project numbers, fiscal years, amounts, and official links are
-retained in `annual_support`.
+retained in `annual_support`. The public `offset` advances through those
+normalized core projects. RePORTER annual-record offsets are scanned internally
+until the requested project page and one-project lookahead are available.
 
 ## Contact policy
 

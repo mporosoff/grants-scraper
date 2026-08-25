@@ -60,11 +60,21 @@
     node.classList.toggle("error-text", error);
   }
 
+  function syncPaginationControls() {
+    const offset = Number(state.payload?.pagination?.offset || 0);
+    $("award-previous").disabled = !state.payload || offset === 0;
+    $("award-next").disabled = !state.payload || !productApi.canPageForward(state.payload);
+  }
+
   function setBusy(busy) {
     $("award-results").setAttribute("aria-busy", busy ? "true" : "false");
     $("search-awards").disabled = busy;
-    $("award-previous").disabled = busy;
-    $("award-next").disabled = busy;
+    if (busy) {
+      $("award-previous").disabled = true;
+      $("award-next").disabled = true;
+    } else {
+      syncPaginationControls();
+    }
   }
 
   function cancelPendingSearch() {
@@ -76,6 +86,7 @@
 
   function clearRenderedResults() {
     state.payload = null;
+    syncPaginationControls();
     for (const id of ["award-source-status", "institution-summary", "program-summary", "award-pagination"]) {
       $(id).classList.add("hidden");
     }
@@ -331,8 +342,7 @@
     const offset = Number(payload.pagination?.offset || 0);
     const canNext = productApi.canPageForward(payload);
     pagination.classList.toggle("hidden", offset === 0 && !canNext);
-    $("award-previous").disabled = offset === 0;
-    $("award-next").disabled = !canNext;
+    syncPaginationControls();
     $("award-page-label").textContent = payload.results.length
       ? `Results ${offset + 1}–${offset + payload.results.length}`
       : "No results on this page";
@@ -447,13 +457,23 @@
       cancelPendingSearch();
       hydrateFromUrl();
       const params = new URLSearchParams(location.search);
-      if (state.selectedRecord || params.get("q") || params.get("pi") || params.get("program_officer")) {
+      if (hasUrlSearch(params)) {
         search({ historyMode: "replace", offset: Number(params.get("offset") || 0) });
       } else {
         clearRenderedResults();
         setStatus("Choose a topic, program, or eligible current opportunity to begin.");
       }
     });
+  }
+
+  function hasUrlSearch(params) {
+    return Boolean(
+      state.selectedRecord
+      || params.get("q")
+      || params.get("institution")
+      || params.get("pi")
+      || params.get("program_officer"),
+    );
   }
 
   function initialize() {
@@ -464,7 +484,7 @@
       hydrateFromUrl();
       bindEvents();
       const params = new URLSearchParams(location.search);
-      if (state.selectedRecord || params.get("q") || params.get("pi") || params.get("program_officer")) {
+      if (hasUrlSearch(params)) {
         search({ historyMode: "replace", offset: Number(params.get("offset") || 0) });
       }
     } catch (error) {

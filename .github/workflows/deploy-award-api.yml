@@ -63,7 +63,17 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/award-api/wrangler.jsonc --json 2>/dev/null || true)"
-          prior_version="$(jq -r '.[0].versions as $versions | (($versions | map(select(.percentage == 100)) | .[0].version_id) // $versions[0].version_id // empty)' <<<"$deployments" 2>/dev/null || true)"
+          prior_version="$(jq -r '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | if . == null then empty
+              else .versions as $versions
+              | (($versions | map(select((.percentage // 0) == 100)) | first)
+                // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+              | .version_id // empty
+              end
+          ' <<<"$deployments" 2>/dev/null || true)"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
           if [ -n "$prior_version" ]; then
             echo "Prior Award Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"

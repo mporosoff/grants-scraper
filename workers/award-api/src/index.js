@@ -238,6 +238,7 @@ function sourceSummary(payload) {
     cache: payload.cache,
     total_count: payload.total_count,
     raw_record_count: payload.raw_record_count,
+    has_more: payload.has_more === true,
     result_count: payload.results.length,
     retrieved_at: payload.retrieved_at,
   };

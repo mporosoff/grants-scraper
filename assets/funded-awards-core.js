@@ -98,10 +98,9 @@
   }
 
   function canPageForward(payload) {
-    const offset = Number(payload?.pagination?.offset || 0);
     return (payload?.sources || []).some(source => (
       source.status === "ok"
-      && Number(source.total_count || 0) > offset + Number(source.raw_record_count || 0)
+      && source.has_more === true
     ));
   }
 
