@@ -167,6 +167,8 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(deployWorkflow, /Capture the active Award Worker version for rollback/);
   assert.match(deployWorkflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)\s*\| last/);
   assert.doesNotMatch(deployWorkflow, /\.\[0\]\.versions/);
+  assert.match(deployWorkflow, /\.credentials_required \| tostring/);
+  assert.doesNotMatch(deployWorkflow, /\.credentials_required \/\/ empty/);
   assert.match(deployWorkflow, /wrangler@4\.125\.0 rollback/);
   assert.match(deployWorkflow, /Run bounded exact-source smokes/);
   assert.match(deployWorkflow, /Verify Pages serves the committed Funded Awards page/);
