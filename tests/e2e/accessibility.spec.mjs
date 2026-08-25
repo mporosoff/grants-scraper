@@ -124,6 +124,15 @@ test("shared Help remains visible and current across every desktop and mobile su
     await page.setViewportSize({ width: 320, height: 720 });
     await expect(helpButton).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const headerBoxes = await page.locator(".site-header .brand, .site-header .catalog-pill, .site-header .header-context-pill, .site-header .site-help-button, .site-header .nav-toggle").evaluateAll(elements => (
+      elements.map(element => {
+        const rect = element.getBoundingClientRect();
+        return { name: element.className, left: rect.left, right: rect.right, width: rect.width };
+      }).filter(box => box.width > 0).sort((a, b) => a.left - b.left)
+    ));
+    for (let index = 1; index < headerBoxes.length; index += 1) {
+      expect(headerBoxes[index - 1].right, `${label} header items must not overlap`).toBeLessThanOrEqual(headerBoxes[index].left + 1);
+    }
     await helpButton.click();
     await expect(helpDialog).toBeVisible();
     await scan(page, `${label}-help-mobile`, testInfo);
@@ -137,6 +146,9 @@ test("shared Help remains visible and current across every desktop and mobile su
   await alertHelp.click();
   await expect(page.getByRole("dialog").locator("#help-alerts")).toBeVisible();
   await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Help" }).click();
+  await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBe(0);
 });
 
 test("Team Match has no serious or critical violations across picker, results, and fallback states", async ({ page, context }, testInfo) => {

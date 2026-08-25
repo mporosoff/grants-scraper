@@ -43,6 +43,7 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(navigationStyles, /\.site-nav\.is-open\s*\{[\s\S]*?display:\s*flex/);
   assert.match(navigationStyles, /\.site-help-button\s*\{[\s\S]*?display:\s*inline-flex/);
   assert.match(navigationStyles, /@media \(max-width: 540px\)[\s\S]*?\.site-help-label\s*\{[\s\S]*?clip:\s*rect/);
+  assert.match(navigationStyles, /@media \(max-width: 390px\)[\s\S]*?\.catalog-pill-copy\s*\{[\s\S]*?clip:\s*rect/);
   assert.match(navigationStyles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(navigationStyles, /@media \(forced-colors: active\)/);
   assert.doesNotMatch(navigationStyles, /content:\s*["']Current["']/);
@@ -76,6 +77,7 @@ test("shared Help explains the full workflow and optional provider keys", () => 
   assert.match(helpScript, /https:\/\/platform\.claude\.com\/settings\/keys/);
   assert.match(helpScript, /https:\/\/platform\.claude\.com\/docs\/en\/manage-claude\/authentication/);
   assert.match(helpScript, /showModal/);
+  assert.match(helpScript, /dialogBody\.scrollTop = 0/);
   assert.match(helpScript, /data-help-close/);
   assert.match(navigationStyles, /\.help-dialog::backdrop/);
   assert.match(navigationStyles, /\.help-provider-grid/);

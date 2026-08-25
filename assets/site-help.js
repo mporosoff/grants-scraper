@@ -300,6 +300,8 @@
     } else {
       dialog.setAttribute("open", "");
     }
+    const dialogBody = dialog.querySelector(".help-dialog-body");
+    if (dialogBody) dialogBody.scrollTop = 0;
     dialog.querySelector("[data-help-close]")?.focus();
     const requestedSection = String(opener?.dataset.helpSection || "");
     if (/^help-[a-z-]+$/.test(requestedSection)) {

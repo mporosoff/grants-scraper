@@ -828,6 +828,28 @@ html.help-open {
   }
 }
 
+@media (max-width: 390px) {
+  .catalog-pill {
+    width: 38px;
+    min-width: 38px;
+    max-width: 38px;
+    height: 38px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .catalog-pill-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
 @media (max-width: 350px) {
   .site-header .brand > span:last-child {
     display: none;
