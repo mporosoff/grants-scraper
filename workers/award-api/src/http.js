@@ -10,9 +10,12 @@ export class AwardSourceError extends Error {
   }
 }
 
-export async function fetchSourceJson(fetchImpl, url, options = {}) {
+export async function fetchSourceText(fetchImpl, url, options = {}, {
+  maximumBytes = MAX_SOURCE_RESPONSE_BYTES,
+  timeoutMs = SOURCE_TIMEOUT_MS,
+} = {}) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), SOURCE_TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(url, { ...options, signal: controller.signal });
     if (!response.ok) {
@@ -20,24 +23,29 @@ export async function fetchSourceJson(fetchImpl, url, options = {}) {
       throw new AwardSourceError(code);
     }
     const declaredBytes = Number(response.headers.get("content-length") || 0);
-    if (declaredBytes > MAX_SOURCE_RESPONSE_BYTES) {
+    if (declaredBytes > maximumBytes) {
       throw new AwardSourceError("source_response_too_large");
     }
     const body = await response.text();
-    if (new TextEncoder().encode(body).byteLength > MAX_SOURCE_RESPONSE_BYTES) {
+    if (new TextEncoder().encode(body).byteLength > maximumBytes) {
       throw new AwardSourceError("source_response_too_large");
     }
-    try {
-      return JSON.parse(body);
-    } catch {
-      throw new AwardSourceError("source_invalid_response");
-    }
+    return { body, response };
   } catch (error) {
     if (error?.name === "AbortError") throw new AwardSourceError("source_timeout");
     if (error instanceof AwardSourceError) throw error;
     throw new AwardSourceError("source_unavailable");
   } finally {
     clearTimeout(timer);
+  }
+}
+
+export async function fetchSourceJson(fetchImpl, url, options = {}) {
+  const { body } = await fetchSourceText(fetchImpl, url, options);
+  try {
+    return JSON.parse(body);
+  } catch {
+    throw new AwardSourceError("source_invalid_response");
   }
 }
 

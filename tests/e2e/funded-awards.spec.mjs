@@ -16,8 +16,8 @@ test("standalone native topic search renders source records, provenance, institu
   await page.locator("#award-institution").fill("University of Rochester");
   await page.locator("#remember-institution").check();
   await page.locator("#search-awards").click();
-  await expect(page.locator(".award-card")).toHaveCount(2);
-  await expect(page.locator("#institution-summary")).toContainText("2 funded projects in this result page");
+  await expect(page.locator(".award-card")).toHaveCount(3);
+  await expect(page.locator("#institution-summary")).toContainText("3 funded projects in this result page");
   await expect(page.locator(".award-abstract").first()).toBeVisible();
   await expect(page.locator(".award-abstract").first().locator("p")).toHaveCount(2);
   await expect(page.locator(".award-abstract").first()).toContainText("CO₂");
@@ -32,13 +32,14 @@ test("standalone native topic search renders source records, provenance, institu
     topic: "mitral valve prolapse",
     institution: "University of Rochester",
   });
-  expect(calls[0].sources).toEqual(["NSF", "NIH"]);
+  expect(calls[0].sources).toEqual(["NSF", "NIH", "DOE"]);
+  expect(calls[0].limit).toBe(10);
 
   await page.locator("[data-award-pi='Stephen Dewhurst']").click();
   await expect(page).toHaveURL(/pi=Stephen\+Dewhurst/);
   await page.goBack();
   await expect(page).not.toHaveURL(/pi=/);
-  await expect(page.locator(".award-card")).toHaveCount(2);
+  await expect(page.locator(".award-card")).toHaveCount(3);
   expect(errors).toEqual([]);
 });
 
@@ -46,7 +47,7 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/funded_awards.html");
   const pill = page.locator(".header-context-pill");
-  await expect(pill).toHaveText("NSF + NIH awards");
+  await expect(pill).toHaveText("NSF + NIH + DOE awards");
   const geometry = await pill.evaluate(element => {
     const bounds = element.getBoundingClientRect();
     return {
@@ -67,6 +68,7 @@ test("a failed award source degrades independently", async ({ page }) => {
   await page.goto("/funded_awards.html?q=warm+dense+matter&institution=University+of+Rochester");
   await expect(page.locator(".award-card[data-source='NSF']")).toHaveCount(1);
   await expect(page.locator(".award-card[data-source='NIH']")).toHaveCount(0);
+  await expect(page.locator(".award-card[data-source='DOE']")).toHaveCount(1);
   await expect(page.locator("#award-source-status")).toContainText("NIH temporarily unavailable");
   await expect(page.locator("#award-status")).toContainText("available sources are shown");
 });
@@ -95,7 +97,7 @@ test("pagination controls restore their result state after loading clears", asyn
 test("institution-only shared URLs execute and restore across browser history", async ({ page }) => {
   const calls = mockAwards(page);
   await page.goto("/funded_awards.html?institution=University+of+Rochester");
-  await expect(page.locator(".award-card")).toHaveCount(2);
+  await expect(page.locator(".award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(1);
   expect(calls[0].criteria).toEqual({ institution: "University of Rochester" });
 
@@ -104,7 +106,7 @@ test("institution-only shared URLs execute and restore across browser history", 
   await expect(page.locator(".award-card")).toHaveCount(0);
   await page.goBack();
   await expect(page).toHaveURL(/institution=University\+of\+Rochester/);
-  await expect(page.locator(".award-card")).toHaveCount(2);
+  await expect(page.locator(".award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(2);
   await page.goForward();
   await expect(page).not.toHaveURL(/institution=/);
@@ -130,6 +132,27 @@ test("eligible Funding Finder results open Funded Awards in a new tab with the e
   await expect.poll(() => awardCalls.length).toBe(1);
   expect(awardCalls[0].sources).toEqual(["NIH"]);
   expect(awardCalls[0].criteria.opportunity_number).toBe("PAR-26-114");
+});
+
+test("an eligible DOE Office of Science result opens the exact PAMS FOA search without a program-equivalence claim", async ({ page, context }) => {
+  mockHybrid(page);
+  const awardCalls = mockAwards(context);
+  await openFundingFinder(page);
+  await runFundingSearch(page, "DE-FOA-0003612");
+  const card = page.locator('[data-opportunity-id="361526"]');
+  await expect(card).toBeVisible();
+  const [awardsPage] = await Promise.all([
+    page.waitForEvent("popup"),
+    card.locator("[data-funded-awards]").click(),
+  ]);
+  await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("The Genesis Mission");
+  await expect(awardsPage.locator("#selected-mapping-note")).toContainText("exact DOE Office of Science FOA DE-FOA-0003612");
+  await expect(awardsPage.locator(".award-card[data-source='DOE']")).toHaveCount(1);
+  await expect.poll(() => awardCalls.length).toBe(1);
+  expect(awardCalls[0].sources).toEqual(["DOE"]);
+  expect(awardCalls[0].criteria.opportunity_number).toBe("DE-FOA-0003612");
+  expect(awardCalls[0].limit).toBe(10);
+  await expect(awardsPage.locator("#watch-selected-program")).toBeHidden();
 });
 
 test("the reviewed NSF CBET parent opens its exact current and predecessor program group", async ({ page, context }) => {

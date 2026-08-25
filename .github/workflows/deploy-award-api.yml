@@ -12,6 +12,8 @@ on:
       - "assets/funded-awards.css"
       - "assets/funded-awards.js"
       - "funded_awards.html"
+      - "package.json"
+      - "pnpm-lock.yaml"
       - "tools/smoke_award_worker.mjs"
       - "workers/award-api/**"
 permissions:
@@ -29,16 +31,22 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: "11.19.0"
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Verify the bounded award contracts
         run: >-
           node --check assets/award-links.js &&
           node --check assets/funded-awards-core.js &&
           node --check assets/funded-awards.js &&
           node --check workers/award-api/src/index.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs
+          node --check workers/award-api/src/adapters/doe.js &&
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash

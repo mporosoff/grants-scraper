@@ -31,6 +31,7 @@ export function resolveInstitution({ id, name } = {}) {
     sources: {
       NSF: { search_name: cleanName, uei: [] },
       NIH: { search_names: [cleanName], uei: [], ipf: [] },
+      DOE: { search_name: cleanName, uei: [] },
     },
     keys: new Set([identityKey(cleanName)]),
   };

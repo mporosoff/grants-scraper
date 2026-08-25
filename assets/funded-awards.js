@@ -165,7 +165,7 @@
     state.selectedLookup = state.selectedRecord ? linksApi.lookupForOpportunity(state.selectedRecord) : null;
     $("award-query").value = clean(params.get("q"));
     $("search-mode").value = params.get("mode") === "program" ? "program" : "topic";
-    $("award-agency").value = ["NSF", "NIH"].includes(params.get("agency")) ? params.get("agency") : "all";
+    $("award-agency").value = ["NSF", "NIH", "DOE"].includes(params.get("agency")) ? params.get("agency") : "all";
     const defaultInstitution = loadDefaultInstitution();
     const urlInstitution = clean(params.get("institution"));
     $("award-institution").value = urlInstitution || defaultInstitution;
@@ -185,7 +185,10 @@
     if (lookup.mapping_basis === "exact_nsf_program_element") {
       return `Historical lookup: exact NSF program element ${lookup.criteria.program_codes[0]}.`;
     }
-    return `Historical lookup: exact NIH opportunity number ${lookup.criteria.opportunity_number}.`;
+    if (lookup.mapping_basis === "exact_nih_opportunity_number") {
+      return `Historical lookup: exact NIH opportunity number ${lookup.criteria.opportunity_number}.`;
+    }
+    return `Historical lookup: exact DOE Office of Science FOA ${lookup.criteria.opportunity_number}.`;
   }
 
   function renderSelectedOpportunity() {
@@ -263,7 +266,7 @@
       .join("");
     return `<article class="award-card" data-source="${escapeAttribute(award.source)}" data-award-id="${escapeAttribute(id)}" aria-labelledby="award-title-${position}">
       <div class="award-card-topline">
-        <span class="badge ${award.source === "NIH" ? "candidate" : "open"}">${escapeHtml(award.source)}</span>
+        <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : "open"}">${escapeHtml(award.source)}</span>
         <span class="opportunity-number">Award ${escapeHtml(id)}</span>
         ${award.award_year ? `<span class="listed-date">Award year ${escapeHtml(award.award_year)}</span>` : ""}
       </div>
@@ -291,7 +294,8 @@
     list.innerHTML = payload.sources.map(source => {
       if (source.status === "ok") {
         const cache = source.cache === "hit" ? "cached" : "live";
-        return `<li>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}</li>`;
+        const abstractWarning = Number(source.health?.abstracts_failed || 0);
+        return `<li${abstractWarning ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${abstractWarning ? ` · ${abstractWarning.toLocaleString()} public ${abstractWarning === 1 ? "abstract" : "abstracts"} unavailable` : ""}</li>`;
       }
       return `<li class="source-unavailable">${escapeHtml(source.source)} temporarily unavailable · other sources remain usable</li>`;
     }).join("");
@@ -464,11 +468,13 @@
     });
     $("clear-award-search").addEventListener("click", clearSearch);
     $("award-previous").addEventListener("click", () => {
-      const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - apiConfig.maxResultsPerSource);
+      const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
+      const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - pageSize);
       search({ historyMode: "push", offset, focusResults: true });
     });
     $("award-next").addEventListener("click", () => {
-      const offset = Number(state.payload?.pagination?.offset || 0) + apiConfig.maxResultsPerSource;
+      const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
+      const offset = Number(state.payload?.pagination?.offset || 0) + pageSize;
       search({ historyMode: "push", offset, focusResults: true });
     });
     $("institution-summary").addEventListener("click", event => {

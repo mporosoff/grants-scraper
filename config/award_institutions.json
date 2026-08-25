@@ -18,6 +18,10 @@
           "search_names": ["UNIVERSITY OF ROCHESTER"],
           "uei": ["F27KDXZMF9Y8"],
           "ipf": ["7047101"]
+        },
+        "DOE": {
+          "search_name": "University of Rochester",
+          "uei": ["F27KDXZMF9Y8"]
         }
       }
     }
