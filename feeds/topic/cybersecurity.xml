@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-24T19:26:40Z</updated>
+  <updated>2026-08-25T03:19:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -527,17 +527,6 @@
     <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
   </entry>
   <entry>
-    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
-    <link href="https://www.grants.gov/search-results-detail/362943"/>
-    <id>urn:funding-finder:grants-gov:362943</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
-  </entry>
-  <entry>
     <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
     <link href="https://www.grants.gov/search-results-detail/362900"/>
     <id>urn:funding-finder:grants-gov:362900</id>
@@ -720,5 +709,18 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
+  </entry>
+  <entry>
+    <title>Blueprint MedTech Translator (UG3/UH3 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358823"/>
+    <id>urn:funding-finder:grants-gov:358823</id>
+    <updated>2025-06-17T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
 </feed>

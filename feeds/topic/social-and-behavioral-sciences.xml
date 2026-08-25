@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-24T19:26:40Z</updated>
+  <updated>2026-08-25T03:19:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -263,16 +263,6 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
-  </entry>
-  <entry>
-    <title>Community Services Block Grant (CSBG) Essentials for Improved Outcomes</title>
-    <link href="https://www.grants.gov/search-results-detail/362068"/>
-    <id>urn:funding-finder:grants-gov:362068</id>
-    <updated>2026-07-24T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - OCS</name></author>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Administration for Children and Families - OCS | Closes 2026-08-24 | This NOFO is modified. The email address and phone number for the program office have been revised in the Contacts and Support section. The Community Services Block Grant (CSBG) Essentials for Improved Outcomes will fund an organization to help states, territories, and CSBG-eligible entities: 1) strengthen their understanding of CSBG statutory and regulatory requirements; 2) enhance their implemen…</summary>
   </entry>
   <entry>
     <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
@@ -652,5 +642,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>

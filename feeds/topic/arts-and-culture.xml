@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-24T19:26:40Z</updated>
+  <updated>2026-08-25T03:19:38Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -544,17 +544,6 @@
     <summary>National Institutes of Health | Closes 2028-07-01 | This Notice of Funding Opportunity (NOFO) announces the restructured Shared Instrumentation Grant (SIG) Program that consolidates three existing shared-use instrumentation programs, i.e., the Shared Instrumentation Grant program, the High-End Instrumentation Grant program, and the Basic Instrumentation Grant program. The NOFO invites applications from groups of NIH-supported investigators to purch…</summary>
   </entry>
   <entry>
-    <title>FY 2027 International Visitor Leadership Program’s National Program Agencies</title>
-    <link href="https://www.grants.gov/search-results-detail/362943"/>
-    <id>urn:funding-finder:grants-gov:362943</id>
-    <updated>2026-06-24T00:00:00Z</updated>
-    <author><name>Bureau Of Educational and Cultural Affairs</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau Of Educational and Cultural Affairs | Closes 2026-08-24 | The United States Department of State’s Bureau of Educational and Cultural Affairs’ Office of International Visitors (ECA/PE/V) announces an open competition for approximately five cooperative agreements to support the staff expenses and overhead costs of the FY 2027 International Visitor Leadership Program’s (IVLP) National Program Agencies (NPAs). Launched in 1940, the IVLP is the Department of …</summary>
-  </entry>
-  <entry>
     <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359644"/>
     <id>urn:funding-finder:grants-gov:359644</id>
@@ -650,5 +639,15 @@
     <category term="Education and workforce"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to Austria | Posted | This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding. Purpose of Small Grants: The Austrian-American Partnership Fund (AAPF) is organized to fund projects advancing collaboration and dialogue and expand cooperation between Austria and the United States. AAPF accepts applications for funding f…</summary>
+  </entry>
+  <entry>
+    <title>Centers without Walls for mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD)</title>
+    <link href="https://www.grants.gov/search-results-detail/361452"/>
+    <id>urn:funding-finder:grants-gov:361452</id>
+    <updated>2026-05-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects to elucidate mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD) organized as a “Center without Walls” consortium. NINDS Centers without Walls are collaborative research networks that bring together diverse expertise from different institutions to …</summary>
   </entry>
 </feed>
