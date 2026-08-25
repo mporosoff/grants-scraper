@@ -224,6 +224,7 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Show awards for investigator Marc D Porosoff."), "Marc D Porosoff");
   assert.equal(core.explicitInvestigator("Who at this institution has received awards from DOE BES?"), "");
   assert.equal(core.explicitInvestigator("Show funding for Basic Energy Sciences."), "");
+  assert.equal(core.explicitInvestigator("What has Basic Energy Sciences been funded to do?"), "");
   assert.equal(core.explicitInvestigator("What has University of Rochester been funded to do?", "University of Rochester"), "");
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });

@@ -198,11 +198,12 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await expect(page.locator("#ii-ai-state")).toContainText("gpt-5.6-luna configured");
   await expect(page.locator("#ii-key-setup")).toBeHidden();
-  await page.locator("#ii-question").fill("Who at this institution has received awards from DOE BES?");
+  await page.locator("#ii-question").fill("What has Basic Energy Sciences been funded to do?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-plan")).toContainText("Agency: DOE");
   await expect(page.locator("#ii-question-plan")).toContainText("Program: BES");
   await expect.poll(() => calls.at(-1)?.criteria?.program_office).toBe("SC-32");
+  expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
   expect(providerCalls).toHaveLength(1);
   expect(providerCalls[0].store).toBe(false);
   const providerInput = JSON.parse(providerCalls[0].input);

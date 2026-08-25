@@ -244,6 +244,7 @@
       if (match?.[1]) {
         const candidate = clean(match[1], 160).replace(/[.,;:]+$/u, "");
         if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|LLC|Inc)\b/i.test(candidate)) continue;
         if (identityKey(candidate) === identityKey(institution)) continue;
         return candidate;
