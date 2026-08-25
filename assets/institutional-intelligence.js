@@ -464,6 +464,7 @@
       if (resolveInstitution) await resolveTypedInstitution();
       const current = formState();
       if (offset !== null) current.offset = Math.max(0, Math.min(1_000, Number(offset) || 0));
+      core.buildAwardRequest(current, SOURCE_LIMITS.DOE);
       const sources = core.sourcesForAgency(current.agency);
       const requestBodies = sources.map(source => core.buildAwardRequest(
         { ...current, agency: source },

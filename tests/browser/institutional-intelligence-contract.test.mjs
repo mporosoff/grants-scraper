@@ -221,6 +221,8 @@ test("share URLs round-trip institution and all transparent filters", () => {
 
 test("explicitly named investigators survive an incomplete question translation", () => {
   assert.equal(core.explicitInvestigator("What has Marc Porosoff been funded to do?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Has Marc Porosoff received NSF funding?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Did Marc Porosoff receive NIH funding?"), "Marc Porosoff");
   assert.equal(core.explicitInvestigator("Show awards for investigator Marc D Porosoff."), "Marc D Porosoff");
   assert.equal(core.explicitInvestigator("Who at this institution has received awards from DOE BES?"), "");
   assert.equal(core.explicitInvestigator("Show funding for Basic Energy Sciences."), "");

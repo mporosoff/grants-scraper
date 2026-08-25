@@ -27,6 +27,16 @@ test("one unified search supports topic and program-officer queries without an i
   await expect(page).toHaveURL(/ii_program_officer=Alex\+Officer/);
 });
 
+test("a program filter requires one agency before source requests are split", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-program").fill("BES");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-status")).toContainText("Choose NSF, NIH, or DOE before filtering by a program.");
+  expect(calls).toHaveLength(0);
+});
+
 test("source-specific loading accumulates projects without replacing the current page", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
@@ -230,6 +240,12 @@ test("the question translator preserves an explicitly named University of Roches
   await expect.poll(() => calls.length).toBe(3);
   expect(calls.every(call => call.criteria.pi === "Marc Porosoff")).toBe(true);
   await expect(page.locator("#ii-investigators")).toContainText("Marc Porosoff");
+  await page.locator("#ii-question").fill("Has Marc Porosoff received NSF funding?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Agency: NSF");
+  await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
+  await expect.poll(() => calls.length).toBe(4);
+  expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
 });
 
 test("key setup inside Institutional Intelligence populates Funding Finder's shared local configuration", async ({ page }) => {

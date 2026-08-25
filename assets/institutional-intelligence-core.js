@@ -250,7 +250,7 @@
     const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
     const patterns = [
       new RegExp(`\\b(?:investigator|researcher|professor|faculty member|PI)\\s+(?:named\\s+)?${name}(?=\\s*(?:[?.,;:]|$))`, "u"),
-      new RegExp(`\\b(?:has|did)\\s+${name}\\s+(?:been\\s+funded|receive|received|win|won|lead|led|secure|secured|get|got|have)\\b`, "u"),
+      new RegExp(`\\b(?:[Hh]as|[Dd]id)\\s+${name}\\s+(?:been\\s+funded|receive|received|win|won|lead|led|secure|secured|get|got|have)\\b`, "u"),
     ];
     for (const pattern of patterns) {
       const match = value.match(pattern);
