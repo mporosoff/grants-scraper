@@ -23,6 +23,15 @@ function allowedOrigin(value) {
   } catch { return false; }
 }
 
+function allowedOpaqueManageForm(request, url, origin) {
+  if (origin !== "null" || request.method !== "POST") return false;
+  if (!["/manage", "/unsubscribe"].includes(url.pathname.replace(/\/+$/, "") || "/")) return false;
+  if (!String(request.headers.get("content-type") || "").toLowerCase().startsWith("application/x-www-form-urlencoded")) return false;
+  return request.headers.get("sec-fetch-site") === "same-origin"
+    && request.headers.get("sec-fetch-mode") === "navigate"
+    && request.headers.get("sec-fetch-dest") === "document";
+}
+
 function headers(origin, contentType = "application/json; charset=utf-8", extra = {}) {
   return {
     ...(origin ? { "Access-Control-Allow-Origin": origin } : {}),
@@ -121,15 +130,17 @@ export function createHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
   assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
-  fetchImpl = fetch,
+  fetchImpl = (...args) => fetch(...args),
   now = () => new Date(),
   tokenFactory = () => randomToken(),
 } = {}) {
   return async function handle(request, env) {
-    const origin = request.headers.get("origin") || "";
-    if (!allowedOrigin(origin)) return json(origin, 403, { error: { code: "origin_not_allowed" } });
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: headers(origin) });
     const url = new URL(request.url);
+    const origin = request.headers.get("origin") || "";
+    if (!allowedOrigin(origin) && origin !== url.origin && !allowedOpaqueManageForm(request, url, origin)) {
+      return json(origin, 403, { error: { code: "origin_not_allowed" } });
+    }
+    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: headers(origin) });
     const path = url.pathname.replace(/\/+$/, "") || "/";
     const current = now();
     const config = serviceConfig(env);
@@ -252,7 +263,9 @@ export function createHandler({
         const removed = await store.unsubscribe(
           queryToken || String(body.token || ""), querySubscription || String(body.subscription || ""), current.toISOString(),
         );
-        return removed ? html(200, "<h1>Unsubscribed</h1><p>This alert will send no future email.</p>") : html(400, "<h1>Unable to unsubscribe</h1>");
+        return removed
+          ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from Funding Finder.</p>")
+          : html(400, "<h1>Unable to unsubscribe</h1>");
       }
 
       if (path === "/webhooks/resend" && request.method === "POST") {
@@ -281,6 +294,12 @@ export function createHandler({
       }
     } catch (error) {
       if (error?.status) return json(origin, error.status, { error: { code: error.code } });
+      if (error?.providerFailureKind) {
+        console.error("alerts_email_provider_failure", {
+          kind: error.providerFailureKind,
+          status: error.providerFailureKind === "http" ? error.providerHttpStatus : null,
+        });
+      }
       return json(origin, 503, { error: { code: "alerts_unavailable" } });
     }
     return json(origin, 404, { error: { code: "not_found" } });
@@ -291,7 +310,7 @@ export function createScheduledHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
   assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
-  fetchImpl = fetch,
+  fetchImpl = (...args) => fetch(...args),
   now = scheduledTime => new Date(scheduledTime || Date.now()),
 } = {}) {
   return async function scheduled(controller, env) {

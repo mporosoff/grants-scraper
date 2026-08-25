@@ -226,6 +226,57 @@ test("opportunity lifecycle verifies, sends exactly once, and stops after unsubs
   assert.equal(response.status, 202);
   assert.equal(provider.messages.length, 1);
   await verifyLatest(handler, provider);
+  const person = [...store.subscribers.values()][0];
+  const sub = [...store.subscriptions.values()][0];
+  const manage = (body, origin = "https://alerts.example.test") => handler(new Request("https://alerts.example.test/manage", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded", Origin: origin },
+    body: new URLSearchParams({ token: person.manage_token, subscription: sub.id, ...body }),
+  }), env);
+  assert.equal((await manage({ cadence: "weekly" })).status, 200);
+  assert.equal(store.subscriptions.get(sub.id).cadence, "weekly");
+  assert.equal((await manage({ active: "0" })).status, 200);
+  assert.equal(store.subscriptions.get(sub.id).active, 0);
+  assert.equal((await manage({ active: "1" })).status, 200);
+  assert.equal(store.subscriptions.get(sub.id).active, 1);
+  assert.equal((await manage({ cadence: "immediate" })).status, 200);
+  assert.equal(store.subscriptions.get(sub.id).cadence, "immediate");
+  assert.equal((await manage({ active: "0" }, "https://example.invalid")).status, 403);
+  const opaqueMobileManage = headers => handler(new Request("https://alerts.example.test/manage", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Origin: "null",
+      ...headers,
+    },
+    body: new URLSearchParams({
+      token: person.manage_token,
+      subscription: sub.id,
+      cadence: "weekly",
+    }),
+  }), env);
+  assert.equal((await opaqueMobileManage({
+    "Sec-Fetch-Site": "same-origin",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Dest": "document",
+  })).status, 200);
+  assert.equal(store.subscriptions.get(sub.id).cadence, "weekly");
+  assert.equal((await opaqueMobileManage({ "Sec-Fetch-Site": "cross-site" })).status, 403);
+  assert.equal((await handler(new Request("https://alerts.example.test/subscriptions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "null",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "navigate",
+      "Sec-Fetch-Dest": "document",
+    },
+    body: JSON.stringify(subscriptionBody("opportunity", {
+      opportunity_id: "opaque-api",
+      triggers: ["deadline_changed"],
+    })),
+  }), env)).status, 403);
+  assert.equal((await manage({ cadence: "immediate" })).status, 200);
   state.changes.events = [{
     id: "change-1", type: "deadline_changed", changed_at: "2026-09-02T00:00:00Z",
     opportunity_id: "opp-1", detail: "2026-10-01 → 2026-10-08", record: record({ close_date: "2026-10-08" }),
@@ -236,10 +287,9 @@ test("opportunity lifecycle verifies, sends exactly once, and stops after unsubs
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
   await dispatchNotifications({ store, provider, env, now: fixedNow });
   assert.equal(provider.messages.length, 2, "the same event is idempotent");
-  const person = [...store.subscribers.values()][0];
-  const sub = [...store.subscriptions.values()][0];
   const unsub = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manage_token}&subscription=${sub.id}`, { method: "POST" }), env);
   assert.equal(unsub.status, 200);
+  assert.match(await unsub.text(), /You have been successfully unsubscribed from Funding Finder\./);
   state.changes.generated_at = "2026-09-03T00:00:00Z";
   state.changes.events.push({ id: "change-2", type: "amended", changed_at: "2026-09-03T00:00:00Z", opportunity_id: "opp-1", detail: "Changed", record: record() });
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
@@ -386,6 +436,60 @@ test("Resend provider uses the verified sender, secret authorization, and provid
   assert.equal(captured.headers.Authorization, "Bearer private-test-key");
   assert.equal(captured.headers["Idempotency-Key"], "event-1");
   assert.equal(JSON.parse(captured.body).from, "Funding Finder <notifications@funding.porosoffresearchgroup.com>");
+});
+
+test("Resend provider safely distinguishes HTTP rejection from network failure", async () => {
+  const message = { to: "x@example.edu", subject: "Subject", text: "Text", html: "<p>Text</p>" };
+  const rejected = new ResendEmailProvider({
+    apiKey: "private-test-key",
+    fetchImpl: async () => new Response(JSON.stringify({ message: "must stay private" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json" },
+    }),
+  });
+  await assert.rejects(rejected.sendEmail(message, "event-http"), error => {
+    assert.equal(error.code, "provider_failed");
+    assert.equal(error.providerFailureKind, "http");
+    assert.equal(error.providerHttpStatus, 401);
+    assert.doesNotMatch(error.message, /must stay private/);
+    return true;
+  });
+
+  const unavailable = new ResendEmailProvider({
+    apiKey: "private-test-key",
+    fetchImpl: async () => { throw new Error("private network detail"); },
+  });
+  await assert.rejects(unavailable.sendEmail(message, "event-network"), error => {
+    assert.equal(error.code, "provider_network_failure");
+    assert.equal(error.providerFailureKind, "network");
+    assert.equal(error.providerHttpStatus, undefined);
+    assert.doesNotMatch(error.message, /private network detail/);
+    return true;
+  });
+});
+
+test("production handler resolves fetch inside the active request context", async () => {
+  const originalFetch = globalThis.fetch;
+  const store = new MemoryStore();
+  try {
+    globalThis.fetch = async () => { throw new TypeError("stale request context"); };
+    const handler = createHandler({
+      storeFactory: () => store,
+      now: () => fixedNow,
+      tokenFactory: () => randomToken(),
+    });
+    globalThis.fetch = async () => new Response(JSON.stringify({ id: "resend-live-context" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+    const response = await post(handler, "/subscriptions", subscriptionBody("opportunity", {
+      opportunity_id: "opp-live-context",
+      triggers: ["deadline_changed"],
+    }));
+    assert.equal(response.status, 202);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("subscription creation is rate limited without exposing account existence", async () => {

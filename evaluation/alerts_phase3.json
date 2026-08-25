@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": 3,
-  "generated_at": "2026-08-25T01:27:25Z",
+  "generated_at": "2026-08-25T02:55:30Z",
   "protected_main_base": "12f07d2fde48f2d486fbb617da19a72d2bec35e3",
   "decision": "PHASE 3 PASSED — PERSONALIZED ALERTS WORK WITHOUT USER ACCOUNTS",
   "scope": {
@@ -86,17 +86,19 @@
     "daily_limit": 100,
     "overflow": "queued",
     "failure": "failed events retain retry state and are never marked sent",
+    "provider_failure_diagnostics": "logs only network-versus-HTTP classification and the numeric HTTP status; provider response bodies, credentials, recipient data, and token data remain excluded",
+    "request_context": "production fetch is resolved inside each Worker invocation so Cloudflare request-scoped I/O is never reused across requests",
     "bounce_complaint": "authenticated Svix webhooks are idempotent and suppress all future delivery for the subscriber"
   },
   "validation": {
     "node_phase3_contract_tests": {
       "command": "node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs",
-      "passed": 16,
+      "passed": 18,
       "failed": 0
     },
     "protected_browser_contract_tests": {
       "command": "node --test tests/browser/*.test.mjs",
-      "passed": 267,
+      "passed": 269,
       "failed": 0
     },
     "protected_real_browser_tests": {
@@ -121,9 +123,27 @@
     "remote_d1_migration": "0001_phase3_alerts.sql applied successfully; remote list reports no pending migrations"
   },
   "live_email": {
-    "status": "not tested — waiting for the user-controlled Worker secret before deployment",
-    "required_secret": "RESEND_API_KEY",
+    "status": "passed",
+    "worker_url": "https://funding-finder-alerts.urochestercheme.workers.dev",
+    "cloudflare_account_id": "8cb81e39674e3ea3a2ff449371587dff",
+    "secret_binding_verified": "the user-updated RESEND_API_KEY binding was present on the exact production Worker version and account before the bounded send; no value was read or exposed",
+    "diagnostic_result": "the original failure was a Cloudflare request-scoped fetch reuse error, not a Resend HTTP rejection; request-local fetch resolution fixed the only delivery fault",
+    "bounded_verification_request": "HTTP 202 verification_required",
+    "resend_delivery": "verification message accepted and shown as delivered by Resend",
+    "verification": "completed from the received message; remote D1 records one verified subscriber",
+    "manage": "weekly cadence, pause, and resume returned HTTP 200 from the received-message manage link, including iOS Gmail's same-origin opaque navigation form behavior",
+    "unsubscribe": "completed from the received message; remote D1 records zero active and one inactive subscription",
+    "unsubscribe_confirmation": "You have been successfully unsubscribed from Funding Finder.",
+    "final_worker_version": "0e274827-0c74-48a8-94fa-987d7a5da2fc",
+    "webhook": {
+      "endpoint": "https://funding-finder-alerts.urochestercheme.workers.dev/webhooks/resend",
+      "status": "enabled",
+      "subscribed_events": ["email.bounced", "email.complained", "email.suppressed"],
+      "secret_binding": "RESEND_WEBHOOK_SECRET",
+      "live_failure_event_generated": false,
+      "verification": "production endpoint and subscriptions are configured; authenticated signature, duplicate-event idempotency, and subscriber suppression pass deterministic contract tests"
+    },
     "key_committed_or_logged": false,
-    "merge_status": "stop before merge for review"
+    "merge_gate": "live gate passed; merge is permitted after protected PR checks"
   }
 }

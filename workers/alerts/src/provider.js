@@ -11,27 +11,37 @@ export class ResendEmailProvider {
 
   async sendEmail(message, idempotencyKey) {
     if (!this.configured) throw Object.assign(new Error("Email provider is not configured."), { code: "provider_unconfigured" });
-    const response = await this.fetchImpl(RESEND_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${this.apiKey}`,
-        "Content-Type": "application/json",
-        "Idempotency-Key": String(idempotencyKey).slice(0, 256),
-      },
-      body: JSON.stringify({
-        from: ALERT_SENDER,
-        to: [message.to],
-        subject: message.subject,
-        html: message.html,
-        text: message.text,
-        headers: message.headers || {},
-      }),
-    });
+    let response;
+    try {
+      response = await this.fetchImpl(RESEND_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${this.apiKey}`,
+          "Content-Type": "application/json",
+          "Idempotency-Key": String(idempotencyKey).slice(0, 256),
+        },
+        body: JSON.stringify({
+          from: ALERT_SENDER,
+          to: [message.to],
+          subject: message.subject,
+          html: message.html,
+          text: message.text,
+          headers: message.headers || {},
+        }),
+      });
+    } catch {
+      throw Object.assign(new Error("Email provider request failed."), {
+        code: "provider_network_failure",
+        providerFailureKind: "network",
+      });
+    }
     let payload = null;
     try { payload = await response.json(); } catch { /* bounded error below */ }
     if (!response.ok || !payload?.id) {
       throw Object.assign(new Error("Email provider rejected the request."), {
         code: response.status === 429 ? "provider_rate_limited" : "provider_failed",
+        providerFailureKind: "http",
+        providerHttpStatus: Number(response.status) || 0,
       });
     }
     return { id: String(payload.id) };
