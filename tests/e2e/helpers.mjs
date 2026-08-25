@@ -98,6 +98,7 @@ export function mockAwards(target, {
   hasMoreAtOffsets = [],
   resultCountBySourceOffset = {},
   resultCountPerSource = 1,
+  responseDelaysBySourceOffset = {},
   sourceFailures = {},
   sourceFailuresByOffset = {},
 } = {}) {
@@ -129,6 +130,7 @@ export function mockAwards(target, {
           ["https://ror.org/046rm7j60", "University of California, Los Angeles", "UCLA", "Los Angeles"],
           ["https://ror.org/03qgg3111", "Universidad Centroccidental Lisandro Alvarado", "UCLA", "Barquisimeto", "Venezuela", "VE"],
         ],
+        "cold spring harbor": [["https://ror.org/02ar0d825", "Cold Spring Harbor Laboratory", "Cold Spring Harbor", "Cold Spring Harbor"]],
       };
       const institutions = (fixtures[query] || []).map(([id, canonicalName, alias, city, country = "United States", countryCode = "US"], index) => ({
         id,
@@ -156,6 +158,8 @@ export function mockAwards(target, {
     }
     const body = request.postDataJSON();
     calls.push(body);
+    const responseDelay = Math.max(0, Number(responseDelaysBySourceOffset[`${body.sources[0]}:${body.offset}`]) || 0);
+    if (responseDelay) await new Promise(resolve => setTimeout(resolve, responseDelay));
     const retrievedAt = "2026-08-24T20:00:00.000Z";
     const nsf = {
       award_id: "2605508",

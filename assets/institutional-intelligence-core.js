@@ -244,7 +244,7 @@
     };
   }
 
-  function explicitInvestigator(question, institution = "", program = "") {
+  function explicitInvestigator(question, institution = "", program = "", institutionAliases = []) {
     const value = clean(question, 1_000);
     if (!value) return "";
     const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
@@ -260,7 +260,10 @@
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
         if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|LLC|Inc)\b/i.test(candidate)) continue;
-        if (identityKey(candidate) === identityKey(institution)) continue;
+        const institutionIdentities = [institution, ...(Array.isArray(institutionAliases) ? institutionAliases : [])]
+          .map(identityKey)
+          .filter(Boolean);
+        if (institutionIdentities.includes(identityKey(candidate))) continue;
         return candidate;
       }
     }

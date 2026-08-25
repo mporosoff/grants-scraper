@@ -54,6 +54,24 @@ test("source-specific loading accumulates projects without replacing the current
   await expect(page).not.toHaveURL(/ii_offset=/);
 });
 
+test("superseding a source load clears its busy state for the replacement search", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    hasMoreAtOffsets: [0],
+    responseDelaysBySourceOffset: { "NSF:25": 250 },
+    resultCountPerSource: 25,
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-search").click();
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.some(call => call.offset === 25)).toBe(true);
+  await page.locator("#ii-investigators").selectOption("Vasily Karasiev");
+  await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Vasily Karasiev");
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+});
+
 test("a later source failure retains already loaded projects and offers a bounded retry", async ({ page }) => {
   mockHybrid(page);
   mockAwards(page, {
@@ -246,6 +264,30 @@ test("the question translator preserves an explicitly named University of Roches
   await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
   await expect.poll(() => calls.length).toBe(4);
   expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
+});
+
+test("the question translator does not mistake a selected ROR alias for an investigator", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({ output_text: JSON.stringify({ agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "" }) }),
+  }));
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("Cold Spring Harbor");
+  await expect(page.locator("#ii-institution-options [role='option']")).toHaveCount(1);
+  await page.locator("#ii-institution").press("ArrowDown");
+  await page.locator("#ii-institution").press("Enter");
+  await expect(page.locator("#ii-institution")).toHaveValue("Cold Spring Harbor Laboratory");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("What has Cold Spring Harbor received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).not.toContainText("Investigator:");
+  await expect.poll(() => calls.length).toBe(3);
+  expect(calls.every(call => !Object.hasOwn(call.criteria, "pi"))).toBe(true);
+  expect(calls.every(call => call.criteria.institution === "Cold Spring Harbor Laboratory")).toBe(true);
 });
 
 test("key setup inside Institutional Intelligence populates Funding Finder's shared local configuration", async ({ page }) => {

@@ -71,6 +71,8 @@
     state.selectedInstitution = institution ? {
       id: clean(institution.id, 100),
       canonical_name: clean(institution.canonical_name, 300),
+      aliases: [...(institution.aliases || [])].map(value => clean(value, 300)).filter(Boolean).slice(0, 25),
+      acronyms: [...(institution.acronyms || [])].map(value => clean(value, 80)).filter(Boolean).slice(0, 25),
       location: institution.location || {},
       match: institution.match || {},
     } : null;
@@ -457,6 +459,7 @@
   async function runSearch({ historyMode = "replace", resolveInstitution = true, offset = null, focusResults = false, scrollResults = false } = {}) {
     const sequence = ++state.searchSequence;
     state.searchController?.abort();
+    state.loadingSource = "";
     state.searchController = new AbortController();
     setBusy(true);
     setStatus("Searching normalized public NSF, NIH, and DOE award records…");
@@ -705,12 +708,18 @@
         ? { ...translated }
         : {};
       plan.agency = inferQuestionAgency(plan, question);
-      const explicitPi = core.explicitInvestigator(question, current.institution, plan.program);
+      const selectedInstitution = state.selectedInstitution;
+      const institutionAliases = [
+        ...(selectedInstitution?.aliases || []),
+        ...(selectedInstitution?.acronyms || []),
+      ];
+      const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
       const next = core.sanitizeQuestionPlan(plan, current);
       applyFormState(next);
       state.selectedInstitution = {
-        ...state.selectedInstitution,
+        ...selectedInstitution,
+        id: current.ror_id,
         canonical_name: current.institution,
       };
       renderQuestionPlan(next);
