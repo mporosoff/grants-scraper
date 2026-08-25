@@ -94,9 +94,13 @@ export function mockAwards(target, {
   failDoe = false,
   failNih = false,
   failNsf = false,
+  hasMoreBySource = {},
   hasMoreAtOffsets = [],
+  resultCountBySourceOffset = {},
   resultCountPerSource = 1,
+  responseDelaysBySourceOffset = {},
   sourceFailures = {},
+  sourceFailuresByOffset = {},
 } = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
@@ -126,6 +130,8 @@ export function mockAwards(target, {
           ["https://ror.org/046rm7j60", "University of California, Los Angeles", "UCLA", "Los Angeles"],
           ["https://ror.org/03qgg3111", "Universidad Centroccidental Lisandro Alvarado", "UCLA", "Barquisimeto", "Venezuela", "VE"],
         ],
+        "cold spring harbor": [["https://ror.org/02ar0d825", "Cold Spring Harbor Laboratory", "Cold Spring Harbor", "Cold Spring Harbor"]],
+        "cold spring harbor laboratory": [["https://ror.org/02ar0d825", "Cold Spring Harbor Laboratory", "Cold Spring Harbor", "Cold Spring Harbor"]],
       };
       const institutions = (fixtures[query] || []).map(([id, canonicalName, alias, city, country = "United States", countryCode = "US"], index) => ({
         id,
@@ -153,6 +159,8 @@ export function mockAwards(target, {
     }
     const body = request.postDataJSON();
     calls.push(body);
+    const responseDelay = Math.max(0, Number(responseDelaysBySourceOffset[`${body.sources[0]}:${body.offset}`]) || 0);
+    if (responseDelay) await new Promise(resolve => setTimeout(resolve, responseDelay));
     const retrievedAt = "2026-08-24T20:00:00.000Z";
     const nsf = {
       award_id: "2605508",
@@ -236,7 +244,12 @@ export function mockAwards(target, {
     const sources = [];
     for (const source of body.sources) {
       const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
-      const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+      const configuredFailureEntry = sourceFailuresByOffset[`${source}:${body.offset}`]
+        || sourceFailures[source]
+        || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+      const configuredFailure = typeof configuredFailureEntry === "function"
+        ? configuredFailureEntry({ source, offset: body.offset, body })
+        : configuredFailureEntry;
       if (configuredFailure) {
         sources.push({
           source,
@@ -246,9 +259,11 @@ export function mockAwards(target, {
       } else {
         const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
         const template = { ...baseTemplate, ...(awardOverridesBySource[source] || {}) };
-        const configuredCount = typeof resultCountPerSource === "object"
-          ? resultCountPerSource[source]
-          : resultCountPerSource;
+        const configuredCount = resultCountBySourceOffset[`${source}:${body.offset}`] ?? (
+          typeof resultCountPerSource === "object"
+            ? resultCountPerSource[source]
+            : resultCountPerSource
+        );
         const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {
           const suffix = body.offset + index;
@@ -265,7 +280,7 @@ export function mockAwards(target, {
           cache: "miss",
           total_count: null,
           raw_record_count: resultCount,
-          has_more: hasMoreAtOffsets.includes(body.offset),
+          has_more: (hasMoreBySource[source] || hasMoreAtOffsets).includes(body.offset),
           result_count: resultCount,
           retrieved_at: retrievedAt,
         });

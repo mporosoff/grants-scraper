@@ -163,6 +163,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
   assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
     isEnabled: true,
@@ -219,6 +220,31 @@ test("share URLs round-trip institution and all transparent filters", () => {
   });
 });
 
+test("explicitly named investigators survive an incomplete question translation", () => {
+  assert.equal(core.explicitInvestigator("What has Marc Porosoff been funded to do?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Has Marc Porosoff received NSF funding?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Did Marc Porosoff receive NIH funding?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Did Dr. Marc Porosoff receive NSF funding?"), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Show awards for investigator Marc D Porosoff."), "Marc D Porosoff");
+  assert.equal(core.explicitInvestigator("Show awards for Professor Marc Porosoff."), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Show awards for Professor Marc Porosoff from NSF."), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Show awards for Investigator Named Marc Porosoff."), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Who at this institution has received awards from DOE BES?"), "");
+  assert.equal(core.explicitInvestigator("Show funding for Basic Energy Sciences."), "");
+  assert.equal(core.explicitInvestigator("What has Basic Energy Sciences been funded to do?"), "");
+  assert.equal(core.explicitInvestigator("What has Major Research Instrumentation received?", "", "Major Research Instrumentation"), "");
+  assert.equal(core.explicitInvestigator("What has Major Research Instrumentation received?", "", "MRI"), "");
+  assert.equal(core.explicitInvestigator("What has CAREER Program received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has CAREER Award received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has CAREER Grant received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has Faculty Early Career Development received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has Artificial Intelligence Research received?", "", "", [], "Artificial Intelligence Research"), "");
+  assert.equal(core.explicitInvestigator("What has University of Rochester been funded to do?", "University of Rochester"), "");
+  assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory", "", ["Cold Spring Harbor", "CSHL"]), "");
+  assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory"), "");
+  assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
+});
+
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
@@ -229,6 +255,14 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /Structured award search and institution resolution do not require an AI key/);
   assert.match(page, /assets\/institutional-intelligence\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
+  assert.match(page, /<select id="ii-investigators"[^>]*aria-labelledby="ii-investigators-heading"/);
+  assert.match(page, /<select id="ii-programs"[^>]*aria-labelledby="ii-programs-heading"/);
+  assert.doesNotMatch(page, /class="ii-facet-list"/);
+  assert.doesNotMatch(appSource, /data-ii-pi=|data-ii-program=/);
+  assert.match(appSource, /SOURCE_LIMITS = Object\.freeze\(\{ NSF: 25, NIH: 25, DOE: 10 \}\)/);
+  assert.match(appSource, /Promise\.allSettled/);
+  assert.match(appSource, /data-ii-load-source/);
+  assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading,[\s\S]*\.ii-registry-note \{[\s\S]*display: none/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
   assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
@@ -249,6 +283,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.0\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
+  assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program, institutionAliases, plan\.topic\)/);
   const askQuestionSource = appSource.slice(
     appSource.indexOf("async function askQuestion()"),
     appSource.indexOf("function bindEvents()"),

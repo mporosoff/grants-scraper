@@ -70,7 +70,7 @@
 
 .ii-ask > summary:focus-visible,
 .ii-institution-options button:focus-visible,
-.ii-facet-list button:focus-visible {
+.ii-drilldowns select:focus-visible {
   outline: 3px solid rgba(0, 102, 253, .28);
   outline-offset: 3px;
 }
@@ -347,26 +347,16 @@
   font-size: .95rem;
 }
 
-.ii-facet-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.ii-facet-list button {
-  padding: 6px 9px;
+.ii-drilldowns select {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 34px 9px 11px;
   color: #123b69;
-  font-size: .72rem;
-  font-weight: 800;
-  background: #eaf2fb;
-  border: 1px solid #cbdced;
-  border-radius: 999px;
-}
-
-.ii-facet-list p {
-  margin: 0;
-  color: #617188;
-  font-size: .75rem;
+  font-size: .8rem;
+  font-weight: 750;
+  background-color: #fff;
+  border: 1px solid #bfcfe0;
+  border-radius: 8px;
 }
 
 .ii-awards {
@@ -376,21 +366,26 @@
 }
 
 .ii-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
+  display: grid;
+  gap: 12px;
   margin-top: 18px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }
 
-.ii-pagination span {
-  min-width: 120px;
+.ii-pagination p {
+  margin: 0;
   color: #52647a;
   font-size: .76rem;
   font-weight: 750;
   text-align: center;
+}
+
+.ii-load-more-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .ii-award-card {
@@ -601,10 +596,14 @@
   .ii-key-fields {
     grid-template-columns: 1fr;
   }
+
+  .ii-shell-heading,
+  .ii-registry-note {
+    display: none;
+  }
 }
 
 @media (max-width: 520px) {
-  .ii-shell-heading,
   .ii-body {
     padding-right: 15px;
     padding-left: 15px;
@@ -632,9 +631,9 @@
     text-align: left;
   }
 
-  .ii-pagination {
-    align-items: stretch;
-    flex-direction: column;
+  .ii-load-more-actions {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .ii-pagination .button {

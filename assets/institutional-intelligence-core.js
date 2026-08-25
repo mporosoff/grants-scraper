@@ -16,6 +16,11 @@
     ["office of basic energy sciences", "SC-32"],
     ["sc 32", "SC-32"],
   ]);
+  const KNOWN_PROGRAM_IDENTITIES = new Map([
+    ["career", "NSF-CAREER"],
+    ["faculty early career development", "NSF-CAREER"],
+    ["faculty early career development program", "NSF-CAREER"],
+  ]);
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -28,6 +33,24 @@
       .replace(/&/g, " and ")
       .replace(/[^a-z0-9]+/g, " ")
       .trim();
+  }
+
+  function isProgramIdentity(candidate, program) {
+    const candidateKey = identityKey(candidate);
+    const programKey = identityKey(program);
+    if (!candidateKey || !programKey) return false;
+    if (candidateKey === programKey) return true;
+    const candidateBase = candidateKey.replace(/\s+(?:program|programme|initiative|award|awards|grant|grants|fellowship|fellowships|mechanism|scheme)$/u, "");
+    if (candidateBase === programKey) return true;
+    const candidateIdentity = KNOWN_PROGRAM_IDENTITIES.get(candidateKey) || KNOWN_PROGRAM_IDENTITIES.get(candidateBase);
+    const programIdentity = KNOWN_PROGRAM_IDENTITIES.get(programKey);
+    if (candidateIdentity && candidateIdentity === programIdentity) return true;
+    const candidateOffice = DOE_PROGRAM_OFFICES.get(candidateKey);
+    const programOffice = DOE_PROGRAM_OFFICES.get(programKey);
+    if (candidateOffice && programOffice && candidateOffice === programOffice) return true;
+    const initialism = value => identityKey(value).split(" ").filter(Boolean).map(word => word[0]).join("");
+    const programCompact = programKey.replace(/\s/g, "");
+    return programCompact.length >= 3 && initialism(candidate) === programCompact;
   }
 
   function validYear(value) {
@@ -81,6 +104,9 @@
     if (yearEnd) criteria.year_end = yearEnd;
     if (yearStart && yearEnd && yearEnd < yearStart) {
       throw new Error("The ending year must be the same as or later than the starting year.");
+    }
+    if (yearStart && yearEnd && yearEnd - yearStart + 1 > 50) {
+      throw new Error("Choose a year range of 50 years or fewer.");
     }
     if (!institution && !topic && !pi && !programOfficer && !clean(state?.program, 160)) {
       throw new Error("Enter an institution, topic, program, investigator, or program officer before searching.");
@@ -231,11 +257,47 @@
     };
   }
 
+  function explicitInvestigator(question, institution = "", program = "", institutionAliases = [], topic = "") {
+    const value = clean(question, 1_000);
+    if (!value) return "";
+    const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
+    const patterns = [
+      new RegExp(`\\b(?:[Ii]nvestigator|[Rr]esearcher|[Pp]rofessor|[Ff]aculty [Mm]ember|PI)\\s+(?:[Nn]amed\\s+)?${name}(?=\\s*(?:[?.,;:]|$|\\b(?:from|for|at|with|in|under|through|during|between|since|before|after)\\b))`, "u"),
+      new RegExp(`\\b(?:[Hh]as|[Dd]id)\\s+${name}\\s+(?:been\\s+funded|receive|received|win|won|lead|led|secure|secured|get|got|have)\\b`, "u"),
+    ];
+    for (const pattern of patterns) {
+      const match = value.match(pattern);
+      if (match?.[1]) {
+        const candidate = clean(match[1], 160)
+          .replace(/[.,;:]+$/u, "")
+          .replace(/^(?:Dr|Doctor|Prof|Professor|Mr|Ms|Mrs|Mx)\.?\s+/u, "");
+        if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
+        if (isProgramIdentity(candidate, program)) continue;
+        if (identityKey(candidate) === identityKey(topic)) continue;
+        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|Program|Programme|Initiative|Award|Awards|Fellowship|Fellowships|LLC|Inc)\b/i.test(candidate)) continue;
+        const institutionIdentities = [institution, ...(Array.isArray(institutionAliases) ? institutionAliases : [])]
+          .map(identityKey)
+          .filter(Boolean);
+        const candidateKey = identityKey(candidate);
+        const institutionKey = identityKey(institution);
+        const canonicalSuffix = institutionKey.startsWith(`${candidateKey} `)
+          ? institutionKey.slice(candidateKey.length + 1)
+          : "";
+        if (institutionIdentities.includes(candidateKey)) continue;
+        if (/^(?:university|institute|college|hospital|laboratory|center|centre|school|department|office|foundation|corporation)\b/u.test(canonicalSuffix)) continue;
+        return candidate;
+      }
+    }
+    return "";
+  }
+
   globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE = Object.freeze({
     MANAGED_PARAMS,
     aggregateAwards,
     buildAwardRequest,
     chooseInstitution,
+    explicitInvestigator,
     identityKey,
     programCriterion,
     sanitizeQuestionPlan,
