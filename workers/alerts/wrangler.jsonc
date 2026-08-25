@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "funding-finder-alerts",
+  "account_id": "8cb81e39674e3ea3a2ff449371587dff",
   "main": "src/index.js",
   "compatibility_date": "2026-08-24",
   "workers_dev": true,
