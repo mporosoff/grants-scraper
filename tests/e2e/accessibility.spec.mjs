@@ -34,11 +34,23 @@ async function scan(page, label, testInfo) {
 test("Funding Finder has no serious or critical violations across critical states", async ({ page, context }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(page);
+  mockAwards(page);
   await openFundingFinder(page);
   await expect(page.getByLabel("Search funding opportunities")).toBeVisible();
   await expect(page.locator("#search-status")).toHaveAttribute("aria-live", "polite");
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   await scan(page, "funding-initial", testInfo);
+
+  await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
+  await page.locator("#ii-institution").fill("MIT");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
+  await scan(page, "funding-institutional-intelligence", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funding-institutional-intelligence-mobile", testInfo);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.locator("#institutional-intelligence").evaluate(element => { element.open = false; });
 
   const helpButton = page.getByRole("button", { name: "Help" });
   await helpButton.click();

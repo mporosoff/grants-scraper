@@ -11,7 +11,12 @@ on:
       - "assets/funded-awards-core.js"
       - "assets/funded-awards.css"
       - "assets/funded-awards.js"
+      - "assets/institutional-intelligence-core.js"
+      - "assets/institutional-intelligence.css"
+      - "assets/institutional-intelligence.js"
+      - "config/award_institutions.json"
       - "funded_awards.html"
+      - "match_explorer.html"
       - "package.json"
       - "pnpm-lock.yaml"
       - "tools/smoke_award_worker.mjs"
@@ -42,11 +47,15 @@ jobs:
       - name: Verify the bounded award contracts
         run: >-
           node --check assets/award-links.js &&
+          node --check assets/app.js &&
           node --check assets/funded-awards-core.js &&
           node --check assets/funded-awards.js &&
+          node --check assets/institutional-intelligence-core.js &&
+          node --check assets/institutional-intelligence.js &&
           node --check workers/award-api/src/index.js &&
+          node --check workers/award-api/src/ror.js &&
           node --check workers/award-api/src/adapters/doe.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -131,8 +140,27 @@ jobs:
             echo "::error::GitHub Pages did not serve the committed Funded Awards page within the verification window."
             exit 1
           fi
+      - name: Verify Pages serves the committed Funding Finder integration
+        id: funding-finder-verify
+        shell: bash
+        run: |
+          candidate_hash="$(sha256sum match_explorer.html | awk '{print $1}')"
+          verified=false
+          for attempt in $(seq 1 18); do
+            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/match_explorer.html?deploy=${GITHUB_SHA}" -o /tmp/match_explorer.html || true
+            live_hash="$(sha256sum /tmp/match_explorer.html 2>/dev/null | awk '{print $1}')"
+            if [ "$live_hash" = "$candidate_hash" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the committed Funding Finder integration within the verification window."
+            exit 1
+          fi
       - name: Restore the prior Award Worker after a failed release smoke
-        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
+        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure' || steps.funding-finder-verify.outcome == 'failure') }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

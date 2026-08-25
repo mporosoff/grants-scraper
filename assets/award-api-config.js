@@ -22,6 +22,7 @@
   const baseUrl = localOverride() || productionBaseUrl;
   globalThis.FUNDING_AWARD_API_CONFIG = Object.freeze({
     baseUrl,
+    institutionSearchUrl: new URL("institutions/search", baseUrl).href,
     searchUrl: new URL("awards/search", baseUrl).href,
     timeoutMs: 45_000,
     maxResultsPerSource: 25,

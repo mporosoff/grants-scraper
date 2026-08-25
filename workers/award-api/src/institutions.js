@@ -19,13 +19,24 @@ const identities = institutionConfig.institutions.map(item => ({
 export function resolveInstitution({ id, name } = {}) {
   const cleanId = cleanText(id, 100);
   const cleanName = cleanText(name, 300);
-  const known = cleanId
-    ? identities.find(item => item.id === cleanId)
-    : identities.find(item => item.keys.has(identityKey(cleanName)));
-  if (known) return known;
+  const knownById = cleanId
+    ? identities.find(item => item.id === cleanId || item.ror_id === cleanId)
+    : null;
+  const knownByName = cleanName
+    ? identities.find(item => item.keys.has(identityKey(cleanName)))
+    : null;
+  if (knownById) {
+    return !cleanName || knownById.keys.has(identityKey(cleanName)) ? knownById : null;
+  }
+  if (knownByName) {
+    return !cleanId || cleanId === knownByName.id || cleanId === knownByName.ror_id ? knownByName : null;
+  }
   if (!cleanName) return null;
+  const rorId = /^https:\/\/ror\.org\/0[a-z0-9]{8}$/i.test(cleanId || "") ? cleanId : null;
+  if (cleanId && !rorId) return null;
   return {
-    id: null,
+    id: rorId,
+    ror_id: rorId,
     canonical_name: cleanName,
     aliases: [],
     sources: {
@@ -54,6 +65,7 @@ export function normalizeInstitution(name, identifiers = {}) {
     name: cleanName,
     normalized_name: identity?.canonical_name || cleanName,
     identifiers: {
+      ror: identity?.ror_id || null,
       uei: cleanText(identifiers.uei, 40),
       ipf: cleanText(identifiers.ipf, 40),
       other: cleanText(identifiers.other, 80),

@@ -22,6 +22,17 @@ if (health.credentials_required !== false) {
 if (!["NSF", "NIH", "DOE"].every(source => health.sources?.includes(source))) {
   throw new Error("Award Worker health did not advertise all three isolated sources.");
 }
+if (health.institution_registry?.source !== "ROR") {
+  throw new Error("Award Worker health did not advertise the ROR institution registry boundary.");
+}
+
+const institutions = await jsonRequest("institutions/search?query=MIT");
+if (institutions.registry?.source !== "ROR"
+  || institutions.registry?.status !== "available"
+  || institutions.institutions?.[0]?.canonical_name !== "Massachusetts Institute of Technology"
+  || institutions.institutions?.[0]?.id !== "https://ror.org/042nb2s44") {
+  throw new Error("The bounded ROR acronym smoke did not resolve MIT deterministically.");
+}
 
 for (const body of [
   { sources: ["NSF"], criteria: { award_id: "2605508" }, limit: 1, offset: 0 },
@@ -41,4 +52,4 @@ for (const body of [
   }
 }
 
-console.log("Award Worker health and exact NSF/NIH/DOE source smokes passed.");
+console.log("Award Worker health, ROR identity, and exact NSF/NIH/DOE source smokes passed.");

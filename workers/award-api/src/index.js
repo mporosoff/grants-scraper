@@ -1,6 +1,7 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
 import { AwardSourceError } from "./http.js";
 import { resolveInstitution } from "./institutions.js";
+import { ROR_ADAPTER_VERSION, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
@@ -20,6 +21,7 @@ const SEARCH_FIELDS = [
   "core_project_number",
   "opportunity_number",
   "program",
+  "program_office",
   "program_codes",
   "topic",
   "institution_id",
@@ -121,6 +123,7 @@ function validateCriteria(value) {
     core_project_number: 30,
     opportunity_number: 80,
     program: 160,
+    program_office: 40,
     topic: 500,
     institution_id: 100,
     institution: 300,
@@ -150,7 +153,6 @@ function validateCriteria(value) {
   }
   if (!SEARCH_FIELDS.some(field => field in criteria)) return null;
   if (criteria.program && criteria.program_codes) return null;
-  if (criteria.institution && criteria.institution_id) return null;
   if (criteria.year_start && criteria.year_end) {
     if (criteria.year_end < criteria.year_start || criteria.year_end - criteria.year_start + 1 > MAX_YEAR_SPAN) {
       return null;
@@ -159,6 +161,7 @@ function validateCriteria(value) {
   if (criteria.award_id && !/^[A-Za-z0-9-]+$/.test(criteria.award_id)) return null;
   if (criteria.core_project_number && !/^[A-Z0-9]+$/.test(criteria.core_project_number)) return null;
   if (criteria.opportunity_number && !/^[A-Z0-9-]+$/.test(criteria.opportunity_number)) return null;
+  if (criteria.program_office && !/^SC-\d+(?:\.\d+)?$/i.test(criteria.program_office)) return null;
   const institution = resolveInstitution({ id: criteria.institution_id, name: criteria.institution });
   if ((criteria.institution || criteria.institution_id) && !institution) return null;
   return {
@@ -179,6 +182,7 @@ function validateRequest(body, config) {
   const offset = boundedInteger(body.offset, { minimum: 0, maximum: MAX_OFFSET });
   const criteria = validateCriteria(body.criteria);
   if (!limit || offset === null || !criteria) return null;
+  if (criteria.publicCriteria.program_office && (sources.length !== 1 || sources[0] !== "DOE")) return null;
   return { sources, limit, offset, ...criteria };
 }
 
@@ -237,6 +241,55 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, now }) {
   return { ...payload, cache: cache ? "miss" : "bypass" };
 }
 
+async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl }) {
+  const identity = await sha256Hex(stableJson({
+    source: "ROR",
+    adapter_version: ROR_ADAPTER_VERSION,
+    query: query.toLocaleLowerCase("en-US"),
+  }));
+  const key = new Request(`https://award-cache.internal/v1/ror/${identity}`);
+  if (cache) {
+    try {
+      const cached = await cache.match(key);
+      if (cached) {
+        const payload = await cached.json();
+        if (payload?.registry?.source === "ROR" && Array.isArray(payload.institutions)) {
+          return { ...payload, registry: { ...payload.registry, cache: "hit" } };
+        }
+      }
+    } catch {
+      // Registry discovery can continue if the shared cache is unavailable.
+    }
+  }
+  const result = await searchRor(fetchImpl, query);
+  const payload = {
+    schema_version: AWARD_SCHEMA_VERSION,
+    query: result.query,
+    institutions: result.institutions,
+    registry: {
+      source: result.source,
+      status: "available",
+      adapter_version: result.adapter_version,
+      source_url: result.source_url,
+      license: result.license,
+      cache: cache ? "miss" : "bypass",
+    },
+  };
+  if (cache) {
+    try {
+      await cache.put(key, new Response(JSON.stringify(payload), {
+        headers: {
+          "Cache-Control": `public, max-age=${cacheTtl}`,
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      }));
+    } catch {
+      // A cache write failure must not discard a valid registry response.
+    }
+  }
+  return payload;
+}
+
 function sourceSummary(payload) {
   return {
     source: payload.source,
@@ -257,7 +310,8 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(origin, 403, "origin_not_allowed");
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: responseHeaders(origin) });
-    const path = new URL(request.url).pathname.replace(/\/+$/, "");
+    const requestUrl = new URL(request.url);
+    const path = requestUrl.pathname.replace(/\/+$/, "");
     const config = serviceConfig(env);
     if (path === "/health" && request.method === "GET") {
       return json(origin, config.valid ? 200 : 503, {
@@ -265,9 +319,44 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
         schema_version: AWARD_SCHEMA_VERSION,
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
+        institution_registry: { source: "ROR", adapter_version: ROR_ADAPTER_VERSION },
         cache_ttl_seconds: config.cacheTtl,
         credentials_required: false,
       });
+    }
+    if (path === "/institutions/search") {
+      if (request.method !== "GET") return error(origin, 405, "method_not_allowed");
+      if (!config.valid) return error(origin, 503, "service_unavailable");
+      if ([...requestUrl.searchParams.keys()].some(key => key !== "query")) {
+        return error(origin, 400, "invalid_request");
+      }
+      if (requestUrl.searchParams.getAll("query").length !== 1) return error(origin, 400, "invalid_request");
+      const query = normalizedString(requestUrl.searchParams.get("query"), 120);
+      if (!query || query.length < 2) return error(origin, 400, "invalid_request");
+      const cacheStore = cache || globalThis.caches?.default || null;
+      try {
+        return json(origin, 200, await runInstitutionSearch({
+          query,
+          fetchImpl,
+          cache: cacheStore,
+          cacheTtl: config.cacheTtl,
+        }));
+      } catch (cause) {
+        const sourceError = cause instanceof AwardSourceError
+          ? cause
+          : new AwardSourceError("source_unavailable");
+        return json(origin, sourceError.kind === "unsupported" ? 400 : 503, {
+          schema_version: AWARD_SCHEMA_VERSION,
+          query,
+          institutions: [],
+          registry: {
+            source: "ROR",
+            status: "unavailable",
+            adapter_version: ROR_ADAPTER_VERSION,
+            error: { code: sourceError.code },
+          },
+        });
+      }
     }
     if (path !== "/awards/search") return error(origin, 404, "not_found");
     if (request.method !== "POST") return error(origin, 405, "method_not_allowed");

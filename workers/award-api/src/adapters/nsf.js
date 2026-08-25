@@ -81,7 +81,7 @@ function nsfInvestigators(raw, officialUrl, sourceUrl) {
 }
 
 export function buildNsfRequest(criteria, { limit, offset }) {
-  if (criteria.core_project_number || criteria.opportunity_number) {
+  if (criteria.core_project_number || criteria.opportunity_number || criteria.program_office) {
     throw new AwardSourceError("unsupported_criteria", "unsupported");
   }
   if (criteria.award_id) {

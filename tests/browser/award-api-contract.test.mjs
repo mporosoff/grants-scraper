@@ -174,6 +174,7 @@ test("NSF normalization preserves science, institution IDs, direct contacts, and
   assert.match(award.title, /Warm Dense Matter/);
   assert.match(award.abstract, /plasma and materials/);
   assert.equal(award.institution.normalized_name, "University of Rochester");
+  assert.equal(award.institution.identifiers.ror, "https://ror.org/022kthw22");
   assert.equal(award.institution.identifiers.uei, "F27KDXZMF9Y8");
   assert.deepEqual(award.program_codes, ["124200", "176500", "800400", "089Z", "160Z", "8084"]);
   assert.equal(award.total_award, 686056);
@@ -403,6 +404,7 @@ test("Worker validates bounded public requests and exposes no credential require
     schema_version: 1,
     sources: ["NSF", "NIH", "DOE"],
     adapter_versions: ADAPTER_VERSIONS,
+    institution_registry: { source: "ROR", adapter_version: "1.0.0" },
     cache_ttl_seconds: 3600,
     credentials_required: false,
   });
@@ -414,6 +416,14 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), limit: 26 }), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"], 25)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ award_id: "DE-SC0020230" }, ["DOE"], 1)), env)).status, 200);
+  assert.equal((await handler(workerRequest(query({
+    institution: "Massachusetts Institute of Technology",
+    institution_id: "https://ror.org/042nb2s44",
+  }, ["NSF"], 10)), env)).status, 200);
+  assert.equal((await handler(workerRequest(query({
+    institution: "Massachusetts Institute of Technology",
+    institution_id: "https://ror.org/022kthw22",
+  }, ["NSF"], 10)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
   const cbetCodes = [
     "366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400",

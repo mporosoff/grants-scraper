@@ -24,7 +24,7 @@ function parseCoreProjectNumber(value) {
 }
 
 export function buildNihRequest(criteria, { limit, offset }) {
-  if (criteria.award_id || criteria.program_codes) {
+  if (criteria.award_id || criteria.program_codes || criteria.program_office) {
     throw new AwardSourceError("unsupported_criteria", "unsupported");
   }
   const apiCriteria = { exclude_subprojects: true };

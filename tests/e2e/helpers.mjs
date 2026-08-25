@@ -97,6 +97,52 @@ export function mockAwards(target, { failDoe = false, failNih = false, failNsf =
       await route.fulfill({ status: 204, headers: corsHeaders() });
       return;
     }
+    const requestUrl = new URL(request.url());
+    if (requestUrl.pathname === "/institutions/search" && request.method() === "GET") {
+      const query = (requestUrl.searchParams.get("query") || "").toLowerCase();
+      const fixtures = {
+        mit: [
+          ["https://ror.org/042nb2s44", "Massachusetts Institute of Technology", "MIT", "Cambridge"],
+          ["https://ror.org/04mtcj695", "University of Southern Mindanao", "MIT", "Kabacan", "Philippines", "PH"],
+        ],
+        caltech: [["https://ror.org/05dxps055", "California Institute of Technology", "Caltech", "Pasadena"]],
+        uva: [
+          ["https://ror.org/0153tk833", "University of Virginia", "UVA", "Charlottesville"],
+          ["https://ror.org/0432s1v23", "University Vascular Associates", "UVA", "Chattanooga"],
+        ],
+        rit: [
+          ["https://ror.org/00v4yb702", "Rochester Institute of Technology", "RIT", "Rochester"],
+          ["https://ror.org/03zmfa837", "Rochester Institute of Technology - Dubai", "RIT", "Dubai", "United Arab Emirates", "AE"],
+        ],
+        ucla: [
+          ["https://ror.org/046rm7j60", "University of California, Los Angeles", "UCLA", "Los Angeles"],
+          ["https://ror.org/03qgg3111", "Universidad Centroccidental Lisandro Alvarado", "UCLA", "Barquisimeto", "Venezuela", "VE"],
+        ],
+      };
+      const institutions = (fixtures[query] || []).map(([id, canonicalName, alias, city, country = "United States", countryCode = "US"], index) => ({
+        id,
+        canonical_name: canonicalName,
+        aliases: alias === "Caltech" ? [alias] : [],
+        acronyms: alias === "Caltech" ? [] : [alias],
+        types: [canonicalName === "University Vascular Associates" ? "healthcare" : "education"],
+        status: "active",
+        location: { city, country, country_code: countryCode },
+        registry: "ROR",
+        registry_url: id,
+        match: { exact: true, type: alias === "Caltech" ? "alias" : "acronym", score: 130 - index },
+      }));
+      await route.fulfill({
+        status: 200,
+        headers: corsHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({
+          schema_version: 1,
+          query: requestUrl.searchParams.get("query"),
+          institutions,
+          registry: { source: "ROR", status: "available", adapter_version: "1.0.0", license: "CC0-1.0", cache: "miss" },
+        }),
+      });
+      return;
+    }
     const body = request.postDataJSON();
     calls.push(body);
     const retrievedAt = "2026-08-24T20:00:00.000Z";
