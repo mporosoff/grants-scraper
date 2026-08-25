@@ -264,6 +264,11 @@ test("the question translator preserves an explicitly named University of Roches
   await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
   await expect.poll(() => calls.length).toBe(4);
   expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
+  await page.locator("#ii-question").fill("Show awards for Professor Marc Porosoff.");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
+  await expect.poll(() => calls.length).toBe(7);
+  expect(calls.slice(-3).every(call => call.criteria.pi === "Marc Porosoff")).toBe(true);
 });
 
 test("the question translator does not mistake a selected ROR alias for an investigator", async ({ page }) => {
