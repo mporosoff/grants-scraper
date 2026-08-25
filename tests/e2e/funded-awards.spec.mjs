@@ -152,6 +152,8 @@ test("partial award results distinguish unsupported and rate-limited sources", a
   await expect(page.locator(".ii-award-card[data-source='NSF']")).toHaveCount(1);
   await expect(page.locator("#ii-source-status")).toContainText("NIH does not support this filter combination");
   await expect(page.locator("#ii-source-status")).toContainText("DOE is rate limited. Wait before retrying.");
+  await expect(page.getByRole("button", { name: "Retry DOE" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Retry NIH" })).toHaveCount(0);
   await expect(page.locator("#ii-status")).toContainText("1 public project loaded from available sources");
   await expect(page.locator("#ii-status")).toContainText("does not support this filter combination");
   await expect(page.locator("#ii-status")).toContainText("Wait before retrying");

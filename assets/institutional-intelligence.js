@@ -418,11 +418,11 @@
     return {
       source,
       limit: requestBody.limit,
-      nextOffset: requestBody.offset + requestBody.limit,
+      nextOffset: meta.status === "ok" ? requestBody.offset + requestBody.limit : requestBody.offset,
       results: payload.results.filter(result => result.source === source),
       meta,
       hasMore: meta.status === "ok" && meta.has_more === true,
-      error: null,
+      error: meta.status === "unavailable" ? meta : null,
     };
   }
 
