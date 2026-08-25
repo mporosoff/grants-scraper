@@ -704,7 +704,7 @@
         ? { ...translated }
         : {};
       plan.agency = inferQuestionAgency(plan, question);
-      const explicitPi = core.explicitInvestigator(question, current.institution);
+      const explicitPi = core.explicitInvestigator(question, current.institution, plan.program);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
       const next = core.sanitizeQuestionPlan(plan, current);
       applyFormState(next);
