@@ -109,11 +109,22 @@
     return (items || []).some(item => idOf(item) === id);
   }
 
+  function mutationResult(ok, items, details = {}) {
+    return {
+      ok,
+      persisted: ok,
+      items,
+      changed: Boolean(details.changed),
+      ...details,
+    };
+  }
+
   function toggle(record, storage) {
-    const items = load(storage);
+    const persistedItems = load(storage);
     const item = sanitizeItem(record);
-    if (!item) return { saved: false, items };
+    if (!item) return mutationResult(false, persistedItems, { saved: false, error: "invalid_item" });
     const key = idOf(item);
+    const items = persistedItems.map(existing => ({ ...existing }));
     const index = items.findIndex(existing => idOf(existing) === key);
     let saved;
     if (index >= 0) {
@@ -123,20 +134,29 @@
       items.unshift(item);
       saved = true;
     }
-    persist(items, storage);
-    return { saved, items };
+    if (!persist(items, storage)) {
+      return mutationResult(false, persistedItems, {
+        saved: isSaved(persistedItems, key), error: "storage_rejected",
+      });
+    }
+    return mutationResult(true, items, { saved, changed: true });
   }
 
   function remove(id, storage) {
-    const items = load(storage).filter(item => idOf(item) !== id);
-    persist(items, storage);
-    return items;
+    const persistedItems = load(storage);
+    const items = persistedItems.filter(item => idOf(item) !== cleanString(id, 200));
+    if (items.length === persistedItems.length) return mutationResult(true, persistedItems);
+    if (!persist(items, storage)) {
+      return mutationResult(false, persistedItems, { error: "storage_rejected" });
+    }
+    return mutationResult(true, items, { changed: true });
   }
 
   function updatePursuit(id, changes, storage) {
-    const items = load(storage);
+    const persistedItems = load(storage);
+    const items = persistedItems.map(existing => ({ ...existing }));
     const item = items.find(existing => idOf(existing) === cleanString(id, 200));
-    if (!item) return items;
+    if (!item) return mutationResult(true, persistedItems);
     if (Object.prototype.hasOwnProperty.call(changes || {}, "pursuit_status")) {
       const status = cleanString(changes.pursuit_status, 24).toLowerCase();
       if (PURSUIT_STATUSES.includes(status)) item.pursuit_status = status;
@@ -147,20 +167,22 @@
         .trim()
         .slice(0, MAX_NOTE_LENGTH);
     }
-    persist(items, storage);
-    return items;
+    if (!persist(items, storage)) {
+      return mutationResult(false, persistedItems, { error: "storage_rejected" });
+    }
+    return mutationResult(true, items, { changed: true });
   }
 
   function clear(storage) {
     const target = storageOrNull(storage);
-    if (target) {
-      try {
-        target.removeItem(STORAGE_KEY);
-      } catch {
-        /* ignore */
-      }
+    const persistedItems = load(storage);
+    if (!target) return mutationResult(false, persistedItems, { error: "storage_rejected" });
+    try {
+      target.removeItem(STORAGE_KEY);
+      return mutationResult(true, [], { changed: persistedItems.length > 0 });
+    } catch {
+      return mutationResult(false, persistedItems, { error: "storage_rejected" });
     }
-    return [];
   }
 
   globalThis.FUNDING_SAVED = Object.freeze({

@@ -17,6 +17,38 @@
     })[character]);
   }
 
+  function boundedErrorCode(payload) {
+    const code = typeof payload?.error?.code === "string"
+      ? payload.error.code.trim().toLowerCase()
+      : "";
+    return ["alerts_unavailable", "invalid_request", "rate_limited", "service_unavailable"]
+      .includes(code) ? code : "";
+  }
+
+  function errorMessage(code) {
+    if (code === "rate_limited") {
+      return "Too many alert requests. Wait before trying again.";
+    }
+    if (code === "invalid_request") {
+      return "Check the alert details and try again.";
+    }
+    if (["alerts_unavailable", "service_unavailable"].includes(code)) {
+      return "Email alert delivery is unavailable. Retry later. Funding Finder and saved items still work normally.";
+    }
+    if (code === "timeout") {
+      return "The email alert request timed out. Retry later. Funding Finder and saved items still work normally.";
+    }
+    if (code === "invalid_response") {
+      return "The email alert service returned an invalid response. Retry later. Funding Finder and saved items still work normally.";
+    }
+    return "The email alert service could not be reached. Retry later. Funding Finder and saved items still work normally.";
+  }
+
+  function setSubmitStatus(node, message, { error = false } = {}) {
+    node.textContent = message;
+    node.classList.toggle("error-text", error);
+  }
+
   function ensureDialog() {
     if (dialog) return dialog;
     dialog = document.createElement("dialog");
@@ -91,7 +123,7 @@
     if (current.type === "opportunity") {
       definition.triggers = triggers();
       if (!definition.triggers.length) {
-        status.textContent = "Choose at least one change to watch.";
+        setSubmitStatus(status, "Choose at least one change to watch.", { error: true });
         return;
       }
     }
@@ -107,7 +139,7 @@
       },
     };
     submitButton.disabled = true;
-    status.textContent = "Creating a safe baseline and preparing verification…";
+    setSubmitStatus(status, "Creating a safe baseline and preparing verification…");
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), Number(config.requestTimeoutMs) || 10_000);
     try {
@@ -119,11 +151,26 @@
         referrerPolicy: "origin",
         signal: controller.signal,
       });
-      if (!response.ok) throw new Error("subscription unavailable");
-      status.textContent = "Check your email for a verification link. The alert remains inactive until you verify it.";
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        const error = new Error("subscription unavailable");
+        error.code = boundedErrorCode(payload)
+          || (response.status === 429
+            ? "rate_limited"
+            : response.status >= 500 || [401, 403, 404, 405].includes(response.status)
+                ? "service_unavailable"
+                : "invalid_response");
+        throw error;
+      }
+      if (payload?.status !== "verification_required") {
+        const error = new Error("subscription invalid response");
+        error.code = "invalid_response";
+        throw error;
+      }
+      setSubmitStatus(status, "Check your email for a verification link. The alert remains inactive until you verify it.");
       dialog.querySelector("#alert-email").value = "";
-    } catch {
-      status.textContent = "Email alerts are temporarily unavailable. Funding Finder and saved items still work normally.";
+    } catch (error) {
+      setSubmitStatus(status, errorMessage(error?.name === "AbortError" ? "timeout" : error?.code), { error: true });
     } finally {
       clearTimeout(timeout);
       submitButton.disabled = false;
@@ -148,12 +195,12 @@
     dialog.querySelector("#alert-dialog-summary").textContent = summary;
     dialog.querySelector("#alert-trigger-fields").classList.toggle("hidden", type !== "opportunity");
     dialog.querySelector("#alert-search-baseline").classList.toggle("hidden", type !== "saved_search");
-    dialog.querySelector("#alert-dialog-status").textContent = "";
+    setSubmitStatus(dialog.querySelector("#alert-dialog-status"), "");
     dialog.querySelector("#alert-cadence").value = type === "saved_search" ? "weekly" : "immediate";
     dialog.showModal();
     dialog.querySelector("#alert-email").focus();
     return true;
   }
 
-  globalThis.FUNDING_ALERTS = Object.freeze({ open });
+  globalThis.FUNDING_ALERTS = Object.freeze({ boundedErrorCode, errorMessage, open });
 })();

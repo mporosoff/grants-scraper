@@ -3145,6 +3145,37 @@
     state.savedIds = new Set(state.savedItems.map(SAVED_API.idOf));
   }
 
+  function setSavedStatus(message = "", { error = false } = {}) {
+    const status = $("saved-status");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle("hidden", !message);
+    status.classList.toggle("error-text", error);
+  }
+
+  function savedMutationFailed(result, { id = "", control = "" } = {}) {
+    if (result?.ok) {
+      refreshSavedState(result.items);
+      setSavedStatus();
+      return false;
+    }
+    refreshSavedState(result?.items);
+    renderSaved();
+    renderResults();
+    setSavedStatus("This browser did not allow the change to be stored. Your last saved version is still shown.", { error: true });
+    if (id && control) {
+      globalThis.requestAnimationFrame(() => {
+        const selector = control === "note" ? "[data-pursuit-note]" : "[data-pursuit-status]";
+        const target = [...document.querySelectorAll(selector)].find(element => (
+          (control === "note" ? element.dataset.pursuitNote : element.dataset.pursuitStatus) === id
+        ));
+        target?.focus();
+        if (control === "note") target?.setSelectionRange?.(target.value.length, target.value.length);
+      });
+    }
+    return true;
+  }
+
   function renderSaved() {
     const list = $("saved-list");
     const count = $("saved-count");
@@ -3192,27 +3223,30 @@
     const record = catalog.opportunities.find(item => recordId(item) === id);
     if (!record) return;
     const snapshot = { ...record, url: officialActions(record).url || record.detail_page };
-    const { items } = SAVED_API.toggle(snapshot);
-    refreshSavedState(items);
+    const result = SAVED_API.toggle(snapshot);
+    if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
   }
 
   function removeSaved(id) {
-    refreshSavedState(SAVED_API.remove(id));
+    const result = SAVED_API.remove(id);
+    if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
   }
 
   function clearSaved() {
-    SAVED_API.clear();
-    refreshSavedState([]);
+    const result = SAVED_API.clear();
+    if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
   }
 
   function updateSavedPursuit(id, changes) {
-    refreshSavedState(SAVED_API.updatePursuit(id, changes));
+    const result = SAVED_API.updatePursuit(id, changes);
+    const control = Object.prototype.hasOwnProperty.call(changes || {}, "note") ? "note" : "status";
+    savedMutationFailed(result, { id, control });
   }
 
   function openOpportunityAlert(id, focus) {

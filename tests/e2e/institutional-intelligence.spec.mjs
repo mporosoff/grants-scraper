@@ -134,7 +134,7 @@ test("one unavailable award source does not suppress the other institutional evi
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
   await expect(page.locator("#ii-source-status")).toContainText("NSF available");
-  await expect(page.locator("#ii-source-status")).toContainText("NIH temporarily unavailable");
+  await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable. Retry later.");
   await expect(page.locator("#ii-source-status")).toContainText("DOE available");
   await expect(page.locator("#ii-status")).toContainText("returned from available sources");
 });

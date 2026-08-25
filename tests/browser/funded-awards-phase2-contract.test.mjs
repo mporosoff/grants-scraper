@@ -170,7 +170,7 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(appSource, /addEventListener\("popstate"/);
   assert.match(appSource, /params\.get\("institution"\)/);
   assert.match(appSource, /funding-finder\.awards\.institution\.v1/);
-  assert.match(appSource, /other sources remain usable/);
+  assert.match(appSource, /other sources remain usable/i);
   assert.match(appSource, /scrollIntoView\(\{ block: "start" \}\)/);
   assert.match(fundingApp, /data-funded-awards=/);
   assert.match(fundingApp, /target="_blank" rel="noopener">View funded awards/);

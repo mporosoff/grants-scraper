@@ -90,11 +90,13 @@ export function mockHybrid(page, {
 }
 
 export function mockAwards(target, {
+  awardOverridesBySource = {},
   failDoe = false,
   failNih = false,
   failNsf = false,
   hasMoreAtOffsets = [],
   resultCountPerSource = 1,
+  sourceFailures = {},
 } = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
@@ -234,11 +236,20 @@ export function mockAwards(target, {
     const sources = [];
     for (const source of body.sources) {
       const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
-      if (failed) {
-        sources.push({ source, status: "unavailable", error: { code: "source_unavailable" } });
+      const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+      if (configuredFailure) {
+        sources.push({
+          source,
+          status: configuredFailure.status || "unavailable",
+          error: { code: configuredFailure.code || "source_unavailable" },
+        });
       } else {
-        const template = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
-        const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, resultCountPerSource));
+        const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
+        const template = { ...baseTemplate, ...(awardOverridesBySource[source] || {}) };
+        const configuredCount = typeof resultCountPerSource === "object"
+          ? resultCountPerSource[source]
+          : resultCountPerSource;
+        const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {
           const suffix = body.offset + index;
           results.push(index === 0 && body.offset === 0 ? template : {
@@ -261,7 +272,7 @@ export function mockAwards(target, {
       }
     }
     await route.fulfill({
-      status: results.length ? 200 : 503,
+      status: results.length ? 200 : sources.every(source => source.status === "unsupported") ? 400 : 503,
       headers: corsHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({
         schema_version: 1,
@@ -275,7 +286,7 @@ export function mockAwards(target, {
   return calls;
 }
 
-export function mockAlerts(target) {
+export function mockAlerts(target, { status = 202, errorCode = "", responseBody = null } = {}) {
   const calls = [];
   target.route(`${ALERTS_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
@@ -286,9 +297,11 @@ export function mockAlerts(target) {
     if (new URL(request.url()).pathname === "/subscriptions" && request.method() === "POST") {
       calls.push(request.postDataJSON());
       await route.fulfill({
-        status: 202,
+        status,
         headers: corsHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ status: "verification_required" }),
+        body: responseBody ?? JSON.stringify(errorCode
+          ? { error: { code: errorCode } }
+          : { status: "verification_required" }),
       });
       return;
     }

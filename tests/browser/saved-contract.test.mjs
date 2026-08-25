@@ -24,6 +24,15 @@ function memoryStorage() {
   };
 }
 
+function rejectingStorage(items = []) {
+  const values = new Map([[S.STORAGE_KEY, JSON.stringify(items)]]);
+  return {
+    getItem(key) { return values.has(key) ? values.get(key) : null; },
+    setItem() { throw new Error("deterministic setItem rejection"); },
+    removeItem() { throw new Error("deterministic removeItem rejection"); },
+  };
+}
+
 const S = loadSaved();
 const rec = (over = {}) => ({
   opportunity_id: "x1", opportunity_number: "DE-FOA-1",
@@ -35,10 +44,13 @@ const rec = (over = {}) => ({
 test("toggle saves then unsaves, persisting to storage", () => {
   const store = memoryStorage();
   let result = S.toggle(rec(), store);
+  assert.equal(result.ok, true);
+  assert.equal(result.persisted, true);
   assert.equal(result.saved, true);
   assert.equal(result.items.length, 1);
   assert.equal(S.isSaved(S.load(store), "x1"), true);
   result = S.toggle(rec(), store);
+  assert.equal(result.ok, true);
   assert.equal(result.saved, false);
   assert.equal(S.load(store).length, 0);
 });
@@ -58,7 +70,7 @@ test("keeps a compact snapshot with an official url", () => {
 test("pursuit statuses and notes remain in the device-local Saved record", () => {
   const store = memoryStorage();
   S.toggle(rec(), store);
-  S.updatePursuit("x1", { pursuit_status: "pursuing", note: "Draft due Friday" }, store);
+  assert.equal(S.updatePursuit("x1", { pursuit_status: "pursuing", note: "Draft due Friday" }, store).ok, true);
   const item = S.load(store)[0];
   assert.equal(item.pursuit_status, "pursuing");
   assert.equal(item.note, "Draft due Friday");
@@ -72,11 +84,43 @@ test("dedupes by id and supports remove/clear", () => {
   S.toggle(rec(), store);
   S.toggle(rec({ opportunity_id: "x2", opportunity_number: "NSF-2", title: "Second" }), store);
   assert.equal(S.load(store).length, 2);
-  const items = S.remove("x1", store);
-  assert.equal(items.length, 1);
-  assert.equal(S.idOf(items[0]), "x2");
-  S.clear(store);
+  const removed = S.remove("x1", store);
+  assert.equal(removed.ok, true);
+  assert.equal(removed.items.length, 1);
+  assert.equal(S.idOf(removed.items[0]), "x2");
+  assert.equal(S.clear(store).ok, true);
   assert.equal(S.load(store).length, 0);
+});
+
+test("write rejection reports failure and preserves the last durable state for every mutation", () => {
+  const first = S.sanitizeItem(rec({ pursuit_status: "considering", note: "Persisted note" }));
+  const store = rejectingStorage([first]);
+
+  const unsave = S.toggle(rec(), store);
+  assert.equal(unsave.ok, false);
+  assert.equal(unsave.persisted, false);
+  assert.equal(unsave.saved, true);
+  assert.equal(unsave.error, "storage_rejected");
+  assert.equal(unsave.items.length, 1);
+
+  const save = S.toggle(rec({ opportunity_id: "x2", opportunity_number: "NSF-2", title: "Second" }), store);
+  assert.equal(save.ok, false);
+  assert.equal(save.saved, false);
+  assert.deepEqual(Array.from(save.items, S.idOf), ["x1"]);
+
+  const removed = S.remove("x1", store);
+  assert.equal(removed.ok, false);
+  assert.deepEqual(Array.from(removed.items, S.idOf), ["x1"]);
+
+  const updated = S.updatePursuit("x1", { pursuit_status: "submitted", note: "Uncommitted note" }, store);
+  assert.equal(updated.ok, false);
+  assert.equal(updated.items[0].pursuit_status, "considering");
+  assert.equal(updated.items[0].note, "Persisted note");
+
+  const cleared = S.clear(store);
+  assert.equal(cleared.ok, false);
+  assert.deepEqual(Array.from(cleared.items, S.idOf), ["x1"]);
+  assert.equal(S.load(store)[0].note, "Persisted note");
 });
 
 test("rejects items without a title or id", () => {
