@@ -251,6 +251,11 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect.poll(() => calls.at(-1)?.criteria?.program).toBe("CAREER");
   expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
   expect(providerCalls).toHaveLength(2);
+  await page.locator("#ii-question").fill("What has CAREER Award received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Program: CAREER");
+  await expect.poll(() => providerCalls.length).toBe(3);
+  expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
 });
 
 test("the question translator preserves an explicitly named University of Rochester investigator", async ({ page }) => {
@@ -306,6 +311,14 @@ test("the question translator does not mistake a selected ROR alias for an inves
   await expect.poll(() => calls.length).toBe(3);
   expect(calls.every(call => !Object.hasOwn(call.criteria, "pi"))).toBe(true);
   expect(calls.every(call => call.criteria.institution === "Cold Spring Harbor Laboratory")).toBe(true);
+  await page.goto("/funded_awards.html?ii=1&ii_institution=Cold+Spring+Harbor+Laboratory&ii_ror=https%3A%2F%2Fror.org%2F02ar0d825");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("What has Cold Spring Harbor received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).not.toContainText("Investigator:");
+  await expect.poll(() => calls.length).toBe(9);
+  expect(calls.slice(-3).every(call => !Object.hasOwn(call.criteria, "pi"))).toBe(true);
 });
 
 test("key setup inside Institutional Intelligence populates Funding Finder's shared local configuration", async ({ page }) => {

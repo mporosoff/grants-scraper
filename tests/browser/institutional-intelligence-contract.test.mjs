@@ -232,8 +232,11 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("What has Major Research Instrumentation received?", "", "Major Research Instrumentation"), "");
   assert.equal(core.explicitInvestigator("What has Major Research Instrumentation received?", "", "MRI"), "");
   assert.equal(core.explicitInvestigator("What has CAREER Program received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has CAREER Award received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has CAREER Grant received?", "", "CAREER"), "");
   assert.equal(core.explicitInvestigator("What has University of Rochester been funded to do?", "University of Rochester"), "");
   assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory", "", ["Cold Spring Harbor", "CSHL"]), "");
+  assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory"), "");
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 

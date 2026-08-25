@@ -35,6 +35,8 @@
     const programKey = identityKey(program);
     if (!candidateKey || !programKey) return false;
     if (candidateKey === programKey) return true;
+    const candidateBase = candidateKey.replace(/\s+(?:program|programme|initiative|award|awards|grant|grants|fellowship|fellowships|mechanism|scheme)$/u, "");
+    if (candidateBase === programKey) return true;
     const candidateOffice = DOE_PROGRAM_OFFICES.get(candidateKey);
     const programOffice = DOE_PROGRAM_OFFICES.get(programKey);
     if (candidateOffice && programOffice && candidateOffice === programOffice) return true;
@@ -259,11 +261,17 @@
         if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
-        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|Program|Programme|Initiative|LLC|Inc)\b/i.test(candidate)) continue;
+        if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|Program|Programme|Initiative|Award|Awards|Fellowship|Fellowships|LLC|Inc)\b/i.test(candidate)) continue;
         const institutionIdentities = [institution, ...(Array.isArray(institutionAliases) ? institutionAliases : [])]
           .map(identityKey)
           .filter(Boolean);
-        if (institutionIdentities.includes(identityKey(candidate))) continue;
+        const candidateKey = identityKey(candidate);
+        const institutionKey = identityKey(institution);
+        const canonicalSuffix = institutionKey.startsWith(`${candidateKey} `)
+          ? institutionKey.slice(candidateKey.length + 1)
+          : "";
+        if (institutionIdentities.includes(candidateKey)) continue;
+        if (/^(?:university|institute|college|hospital|laboratory|center|centre|school|department|office|foundation|corporation)\b/u.test(canonicalSuffix)) continue;
         return candidate;
       }
     }

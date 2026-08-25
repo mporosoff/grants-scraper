@@ -73,6 +73,7 @@
       canonical_name: clean(institution.canonical_name, 300),
       aliases: [...(institution.aliases || [])].map(value => clean(value, 300)).filter(Boolean).slice(0, 25),
       acronyms: [...(institution.acronyms || [])].map(value => clean(value, 80)).filter(Boolean).slice(0, 25),
+      registryMetadataLoaded: true,
       location: institution.location || {},
       match: institution.match || {},
     } : null;
@@ -167,6 +168,11 @@
       return null;
     }
     if (state.selectedInstitution && core.identityKey(state.selectedInstitution.canonical_name) === core.identityKey(typed)) {
+      if (state.selectedInstitution.id && !state.selectedInstitution.registryMetadataLoaded) {
+        const candidates = await fetchRegistry(typed);
+        const restored = candidates.find(candidate => clean(candidate.id, 100) === state.selectedInstitution.id);
+        if (restored) setSelectedInstitution(restored);
+      }
       return state.selectedInstitution;
     }
     const candidates = await fetchRegistry(typed);
@@ -211,6 +217,9 @@
     state.selectedInstitution = value.institution ? {
       id: value.ror_id || "",
       canonical_name: value.institution,
+      aliases: [],
+      acronyms: [],
+      registryMetadataLoaded: false,
       location: {},
       match: { type: value.ror_id ? "shared_ror" : "shared_source_text" },
     } : null;

@@ -131,6 +131,7 @@ export function mockAwards(target, {
           ["https://ror.org/03qgg3111", "Universidad Centroccidental Lisandro Alvarado", "UCLA", "Barquisimeto", "Venezuela", "VE"],
         ],
         "cold spring harbor": [["https://ror.org/02ar0d825", "Cold Spring Harbor Laboratory", "Cold Spring Harbor", "Cold Spring Harbor"]],
+        "cold spring harbor laboratory": [["https://ror.org/02ar0d825", "Cold Spring Harbor Laboratory", "Cold Spring Harbor", "Cold Spring Harbor"]],
       };
       const institutions = (fixtures[query] || []).map(([id, canonicalName, alias, city, country = "United States", countryCode = "US"], index) => ({
         id,
