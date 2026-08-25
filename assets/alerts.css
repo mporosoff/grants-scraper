@@ -29,7 +29,9 @@
 .alert-trigger-fields { display: grid; gap: .55rem; margin: 1rem 0; }
 .alert-trigger-fields label { display: flex; gap: .55rem; align-items: flex-start; }
 .alert-privacy,
+.alert-management,
 .alert-search-baseline { font-size: .9rem; line-height: 1.5; }
+.alert-management { padding: .75rem .85rem; color: #173a60; background: #eef5ff; border-radius: .65rem; }
 .alert-dialog-actions { margin-top: 1rem; flex-wrap: wrap; }
 .alert-dialog-status { min-height: 1.5rem; font-weight: 700; }
 .pursuit-controls { display: grid; gap: .45rem; margin-top: .6rem; }

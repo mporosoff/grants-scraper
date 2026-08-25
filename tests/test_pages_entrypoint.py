@@ -296,7 +296,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=app-1.3.0"></script>',
+            '<script src="./assets/site-help.js?v=help-20260825"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.GRANT_CATALOG", application_js)

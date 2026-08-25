@@ -107,11 +107,33 @@
 }
 
 .site-help-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
-  background: transparent;
+  min-height: 38px;
+  padding: 7px 10px;
+  color: #dce8f5;
+  font-family: inherit;
+  font-size: .79rem;
+  font-weight: 750;
+  line-height: 1;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .045);
+  cursor: pointer;
+  transition: color .16s ease, background .16s ease, border-color .16s ease;
 }
 
-.site-help-button span {
+.site-help-button:hover,
+.site-help-button:focus-visible {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .24);
+  background: rgba(255, 255, 255, .1);
+}
+
+.site-help-button > span:first-child {
   display: grid;
   width: 18px;
   height: 18px;
@@ -682,14 +704,6 @@ html.help-open {
     font-size: .88rem;
   }
 
-  .site-help-button {
-    width: 100%;
-  }
-
-  .site-help-button span {
-    order: 2;
-  }
-
   .nav-toggle {
     display: grid;
     flex: none;
@@ -753,6 +767,25 @@ html.help-open {
     overflow: hidden;
     font-size: .66rem;
     text-overflow: ellipsis;
+  }
+
+  .site-help-button {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+  }
+
+  .site-help-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .help-dialog {

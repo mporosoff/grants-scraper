@@ -658,7 +658,11 @@ test("Phase 3 deployment and privacy contracts are committed without Phase 4 sco
     readFile(new URL("evaluation/alerts_phase3.json", root), "utf8"),
   ]);
   assert.match(page, /Alert me to new Strong matches/);
-  assert.match(awards, /Watch this program/);
+  assert.match(page, /Choose exactly what should reach your inbox/);
+  assert.match(page, /How email alerts work/);
+  assert.match(page, /data-help-section="help-alerts"/);
+  assert.match(awards, /Email alerts for this program/);
+  assert.match(alerts, /secure Manage alerts link/);
   assert.match(alerts, /Pursuit status and notes, profile\/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser/);
   assert.match(worker, /RESEND_WEBHOOK_SECRET/);
   assert.match(migration, /UNIQUE \(subscription_id, event_key\)/);
