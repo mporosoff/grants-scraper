@@ -1,6 +1,7 @@
 import {
   awardRecord,
   cleanEmail,
+  cleanSourceText,
   cleanText,
   finiteNumber,
   isoDate,
@@ -11,7 +12,7 @@ import {
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NIH_ADAPTER_VERSION = "1.1.0";
+export const NIH_ADAPTER_VERSION = "1.2.0";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
 const NIH_UPSTREAM_PAGE_SIZE = 100;
 const NIH_MAX_UPSTREAM_PAGES = 12;
@@ -188,7 +189,7 @@ export function normalizeNihProject(records, { retrievedAt, sourceUrl, completeH
     activity_code: cleanText(latest.activity_code, 40),
     funding_mechanism: cleanText(latest.funding_mechanism, 200),
     title: cleanText(latest.project_title),
-    abstract: cleanText(latest.abstract_text),
+    abstract: cleanSourceText(latest.abstract_text),
     project_start: minDate(records, "project_start_date"),
     project_end: maxDate(records, "project_end_date"),
     award_year: fiscalYears.length ? Math.min(...fiscalYears) : null,

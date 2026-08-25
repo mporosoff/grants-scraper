@@ -138,6 +138,11 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.ok(appSource.indexOf("<h4 id=\"award-title") < appSource.indexOf("award-abstract"));
   assert.ok(appSource.indexOf("award-abstract") < appSource.indexOf("award-contacts"));
   assert.match(appSource, /View official award/);
+  assert.match(appSource, /function renderAbstract/);
+  assert.match(appSource, /split\(\/\\n\\s\*\\n\+\//);
+  assert.doesNotMatch(appSource, /View source query/);
+  assert.match(styles, /\.award-abstract p \+ p/);
+  assert.match(styles, /\.header-context-pill \{[\s\S]*max-width: none/);
   assert.doesNotMatch(appSource, /invent|generated interpretation|success rate/i);
   assert.doesNotMatch(appSource, /\.at\(/);
   assert.match(styles, /@media \(max-width: 390px\)/);

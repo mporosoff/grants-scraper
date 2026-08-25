@@ -157,6 +157,18 @@ test("NSF normalization preserves science, institution IDs, direct contacts, and
   assert.equal(award.program_contacts[0].source_provenance.source_field, "poName/poEmail");
   assert.equal(award.official_award_url, "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508");
 
+  const richAbstract = normalizeNsfAward({
+    ...raw,
+    abstractText: "This work converts CO₂ selectively.\r\n\r\nA second source paragraph remains separate.",
+  }, {
+    retrievedAt: fixedNow().toISOString(),
+    sourceUrl,
+  });
+  assert.equal(
+    richAbstract.abstract,
+    "This work converts CO₂ selectively.\n\nA second source paragraph remains separate.",
+  );
+
   const listedEmail = normalizeNsfAward({ ...raw, piEmail: null }, {
     retrievedAt: fixedNow().toISOString(),
     sourceUrl,
@@ -195,6 +207,18 @@ test("NIH normalization groups annual applications under the core project withou
   assert.equal(award.program_contacts[0].email, null);
   assert.equal(award.program_contacts[0].official_contact_url, award.official_award_url);
   assert.equal(award.official_award_url, "https://reporter.nih.gov/project-details/10457449");
+  const richAbstract = normalizeNihProject(nihFixture.results.map(record => ({
+    ...record,
+    abstract_text: "A source-provided CO₂ term.\n\nA source-provided second paragraph.",
+  })), {
+    retrievedAt: fixedNow().toISOString(),
+    sourceUrl: "https://api.reporter.nih.gov/v2/projects/search",
+    completeHistory: false,
+  });
+  assert.equal(
+    richAbstract.abstract,
+    "A source-provided CO₂ term.\n\nA source-provided second paragraph.",
+  );
   const nsfAward = normalizeNsfAward(nsfFixture.response.award[0], {
     retrievedAt: fixedNow().toISOString(),
     sourceUrl: "https://api.nsf.gov/services/v1/awards/2605508.json",

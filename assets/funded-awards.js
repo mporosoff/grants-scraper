@@ -38,6 +38,16 @@
     return String(value || "").replace(/\s+/g, " ").trim();
   }
 
+  function renderAbstract(value) {
+    const sourceText = String(value ?? "").replace(/\r\n?/g, "\n").trim();
+    const paragraphs = sourceText
+      .split(/\n\s*\n+/)
+      .map(paragraph => paragraph.replace(/\s+/g, " ").trim())
+      .filter(Boolean);
+    if (!paragraphs.length) return "<p>Not listed</p>";
+    return paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("");
+  }
+
   function safeUrl(value, fallback = "") {
     try {
       const url = new URL(clean(value));
@@ -251,7 +261,6 @@
     const contacts = [...investigators, ...programContacts]
       .map(person => contactLine(person, award.source, officialUrl))
       .join("");
-    const provenanceUrl = safeUrl(award?.source_provenance?.source_url);
     return `<article class="award-card" data-source="${escapeAttribute(award.source)}" data-award-id="${escapeAttribute(id)}" aria-labelledby="award-title-${position}">
       <div class="award-card-topline">
         <span class="badge ${award.source === "NIH" ? "candidate" : "open"}">${escapeHtml(award.source)}</span>
@@ -268,12 +277,11 @@
       </div>
       <section class="award-abstract" aria-label="Award abstract">
         <h5>Abstract</h5>
-        <p>${escapeHtml(clean(award.abstract) || "Not listed")}</p>
+        ${renderAbstract(award.abstract)}
       </section>
       ${contacts ? `<section class="award-contacts" aria-label="Public award contacts"><h5>Investigators and program contacts</h5><ul>${contacts}</ul></section>` : ""}
       <div class="award-card-actions">
         ${officialUrl ? `<a class="source-action primary" href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">View official award ↗</a>` : ""}
-        ${provenanceUrl ? `<a class="source-action" href="${escapeAttribute(provenanceUrl)}" target="_blank" rel="noopener">View source query ↗</a>` : ""}
       </div>
     </article>`;
   }

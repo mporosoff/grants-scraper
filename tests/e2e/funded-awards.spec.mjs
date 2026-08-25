@@ -19,6 +19,12 @@ test("standalone native topic search renders source records, provenance, institu
   await expect(page.locator(".award-card")).toHaveCount(2);
   await expect(page.locator("#institution-summary")).toContainText("2 funded projects in this result page");
   await expect(page.locator(".award-abstract").first()).toBeVisible();
+  await expect(page.locator(".award-abstract").first().locator("p")).toHaveCount(2);
+  await expect(page.locator(".award-abstract").first()).toContainText("CO₂");
+  expect(await page.locator(".award-abstract").first().locator("p").nth(1).evaluate(element =>
+    Number.parseFloat(getComputedStyle(element).marginTop),
+  )).toBeGreaterThan(0);
+  await expect(page.getByRole("link", { name: /View source query/ })).toHaveCount(0);
   await expect(page.getByText("Direct NSF source field").first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View contact on official award page/ }).first()).toBeVisible();
   await expect(page).toHaveURL(/q=mitral\+valve\+prolapse/);
@@ -34,6 +40,26 @@ test("standalone native topic search renders source records, provenance, institu
   await expect(page).not.toHaveURL(/pi=/);
   await expect(page.locator(".award-card")).toHaveCount(2);
   expect(errors).toEqual([]);
+});
+
+test("the Funded Awards status badge remains complete inside a narrow mobile header", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto("/funded_awards.html");
+  const pill = page.locator(".header-context-pill");
+  await expect(pill).toHaveText("NSF + NIH awards");
+  const geometry = await pill.evaluate(element => {
+    const bounds = element.getBoundingClientRect();
+    return {
+      left: bounds.left,
+      right: bounds.right,
+      viewportWidth: window.innerWidth,
+      contentWidth: element.scrollWidth,
+      visibleWidth: element.clientWidth,
+    };
+  });
+  expect(geometry.left).toBeGreaterThanOrEqual(0);
+  expect(geometry.right).toBeLessThanOrEqual(geometry.viewportWidth);
+  expect(geometry.contentWidth).toBeLessThanOrEqual(geometry.visibleWidth);
 });
 
 test("a failed award source degrades independently", async ({ page }) => {

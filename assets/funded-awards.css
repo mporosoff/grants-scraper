@@ -451,7 +451,10 @@
   color: #263e59;
   font-size: .88rem;
   line-height: 1.65;
-  white-space: pre-line;
+}
+
+.award-abstract p + p {
+  margin-top: .85rem;
 }
 
 .award-card-actions {
@@ -589,7 +592,21 @@
   }
 }
 
+@media (max-width: 540px) {
+  .header-context-pill {
+    max-width: none;
+    overflow: visible;
+    padding: 6px 8px;
+    font-size: .62rem;
+    text-overflow: clip;
+  }
+}
+
 @media (max-width: 390px) {
+  .site-header .brand > span:last-child {
+    display: none;
+  }
+
   .awards-main {
     width: calc(100% - 16px);
   }

@@ -21,7 +21,7 @@
     "assets/search-retrieval.js": "4c5f8b0570d3e934a4ae2fb727cbd89f981e0a17caa3426186f1fef4b4f44107",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
     "match_explorer.html": "f8db742d89b571d7c648f931a85c96015cec147f73804dc6620ff7e699dd5a51",
-    "team_match.html": "79be8778358c19445f91209155e14ad8b702a5bc5bc7db6324c2976d054a0b60",
+    "team_match.html": "0803c3545c657dd3cdc5daf25b26ee6fea99580339cf15551aa1be94a0fb9766",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },

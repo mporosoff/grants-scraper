@@ -24,6 +24,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         team_html = (REPOSITORY_ROOT / "team_match.html").read_text(
             encoding="utf-8"
         )
+        funded_html = (REPOSITORY_ROOT / "funded_awards.html").read_text(
+            encoding="utf-8"
+        )
         team_researchers_js = (
             REPOSITORY_ROOT / "assets" / "team-researchers.js"
         ).read_text(encoding="utf-8")
@@ -32,11 +35,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             "https://mporosoff.github.io/grants-scraper/"
             "assets/social/funding-finder-link-preview.jpg"
         )
-        team_image_url = (
-            "https://mporosoff.github.io/grants-scraper/"
-            "assets/social/faculty-pairing-link-preview.jpg"
-        )
-
         for page in (index_html, explorer_html):
             with self.subTest(page="public matcher"):
                 self.assertIn('property="og:title"', page)
@@ -55,12 +53,18 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 self.assertIn('rel="apple-touch-icon" sizes="180x180"', page)
                 self.assertIn('rel="manifest"', page)
 
-        self.assertIn(f'property="og:image" content="{team_image_url}"', team_html)
-        self.assertIn(
-            f'property="og:image:secure_url" content="{team_image_url}"',
-            team_html,
-        )
-        self.assertIn(f'name="twitter:image" content="{team_image_url}"', team_html)
+        for page_name, page in (("Team Match", team_html), ("Funded Awards", funded_html)):
+            with self.subTest(page=page_name):
+                self.assertIn(f'property="og:image" content="{main_image_url}"', page)
+                self.assertIn(
+                    f'property="og:image:secure_url" content="{main_image_url}"',
+                    page,
+                )
+                self.assertIn(f'name="twitter:image" content="{main_image_url}"', page)
+                self.assertIn('property="og:image:width" content="1200"', page)
+                self.assertIn('property="og:image:height" content="630"', page)
+                self.assertIn('name="twitter:card" content="summary_large_image"', page)
+
         self.assertIn('name="twitter:card" content="summary_large_image"', team_html)
         self.assertIn(
             'rel="icon" type="image/svg+xml" '
