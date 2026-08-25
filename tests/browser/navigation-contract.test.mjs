@@ -20,10 +20,13 @@ test("links all three researcher surfaces through shared navigation", () => {
     assert.match(page, /data-nav-toggle/);
     assert.match(page, /assets\/site-nav\.css/);
     assert.match(page, /assets\/site-nav\.js/);
-  }
-  for (const page of [mainPage, teamPage]) {
     assert.match(page, /data-help-open/);
     assert.match(page, /assets\/site-help\.js/);
+    const navigationEnd = page.indexOf("</nav>");
+    const helpButton = page.indexOf("data-help-open", navigationEnd);
+    const navigationToggle = page.indexOf("data-nav-toggle", helpButton);
+    assert.ok(navigationEnd >= 0 && helpButton > navigationEnd && navigationToggle > helpButton,
+      "Help must remain a persistent header action outside the collapsible navigation");
   }
   assert.match(mainPage, /href="\.\/match_explorer\.html" aria-current="page"/);
   assert.match(teamPage, /href="\.\/team_match\.html" aria-current="page"/);
@@ -38,6 +41,9 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(navigationStyles, /@media \(max-width: 820px\)/);
   assert.match(navigationStyles, /\.nav-toggle\s*\{[\s\S]*?display:\s*none/);
   assert.match(navigationStyles, /\.site-nav\.is-open\s*\{[\s\S]*?display:\s*flex/);
+  assert.match(navigationStyles, /\.site-help-button\s*\{[\s\S]*?display:\s*inline-flex/);
+  assert.match(navigationStyles, /@media \(max-width: 540px\)[\s\S]*?\.site-help-label\s*\{[\s\S]*?clip:\s*rect/);
+  assert.match(navigationStyles, /@media \(max-width: 390px\)[\s\S]*?\.catalog-pill-copy\s*\{[\s\S]*?clip:\s*rect/);
   assert.match(navigationStyles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(navigationStyles, /@media \(forced-colors: active\)/);
   assert.doesNotMatch(navigationStyles, /content:\s*["']Current["']/);
@@ -55,6 +61,15 @@ test("shared Help explains the full workflow and optional provider keys", () => 
   assert.match(helpScript, /Ambiguous acronyms are left unexpanded/);
   assert.match(helpScript, /Local abbreviation handling and the site's hosted Potential ranking need no key from you/);
   assert.match(helpScript, /Upload and chat with a NOFO/);
+  assert.match(helpScript, /Configure personalized email alerts/);
+  assert.match(helpScript, /Existing Strong matches become the baseline and do not immediately generate email/);
+  assert.match(helpScript, /secure <strong>Manage alerts<\/strong> link/);
+  assert.match(helpScript, /There is no Funding Finder account or public alert dashboard/);
+  assert.match(helpScript, /Explore Funded Awards/);
+  assert.match(helpScript, /principal investigator, or program officer/);
+  assert.match(helpScript, /Use Institutional Intelligence/);
+  assert.match(helpScript, /Research Organization Registry \(ROR\)/);
+  assert.match(helpScript, /Ask about this institution/);
   assert.match(helpScript, /Create an OpenAI API key/);
   assert.match(helpScript, /https:\/\/platform\.openai\.com\/api-keys/);
   assert.match(helpScript, /https:\/\/developers\.openai\.com\/api\/docs\/quickstart/);
@@ -62,6 +77,7 @@ test("shared Help explains the full workflow and optional provider keys", () => 
   assert.match(helpScript, /https:\/\/platform\.claude\.com\/settings\/keys/);
   assert.match(helpScript, /https:\/\/platform\.claude\.com\/docs\/en\/manage-claude\/authentication/);
   assert.match(helpScript, /showModal/);
+  assert.match(helpScript, /dialogBody\.scrollTop = 0/);
   assert.match(helpScript, /data-help-close/);
   assert.match(navigationStyles, /\.help-dialog::backdrop/);
   assert.match(navigationStyles, /\.help-provider-grid/);

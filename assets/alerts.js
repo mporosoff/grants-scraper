@@ -47,6 +47,7 @@
             </select>
           </label>
         </div>
+        <p class="alert-management"><strong>After verification:</strong> every Funding Finder alert email includes a secure Manage alerts link where you can change frequency, pause or resume delivery, or unsubscribe.</p>
         <p class="alert-privacy"><strong>Stored for this alert:</strong> your email address, the watched ID or typed query and filters, cadence, verification state, and delivery history. Pursuit status and notes, profile/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser and are never sent to the Alerts Worker.</p>
         <p class="alert-search-baseline hidden" id="alert-search-baseline">The current Strong matches become the starting baseline. They will not trigger email; only a future new or newly qualifying Strong match can alert you. Potential matches are excluded.</p>
         <div class="alert-dialog-actions">

@@ -33,8 +33,8 @@
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
   <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=team-match-pre-phase5-20260823">
-  <link rel="stylesheet" href="./assets/alerts.css?v=phase3-alerts">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=help-20260825">
+  <link rel="stylesheet" href="./assets/alerts.css?v=help-alerts-20260825">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -52,7 +52,6 @@
         <a href="./match_explorer.html" aria-current="page">Funding Finder</a>
         <a href="./team_match.html">Team Match</a>
         <a href="./funded_awards.html">Funded Awards</a>
-        <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span> Help</button>
       </nav>
       <div class="catalog-pill" id="catalog-pill" aria-live="polite" aria-label="Loading catalog status">
         <span class="status-dot" aria-hidden="true"></span>
@@ -61,6 +60,7 @@
           <small>Loading…</small>
         </span>
       </div>
+      <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
       </button>
@@ -388,6 +388,15 @@
             <button class="text-button hidden" id="clear-saved" type="button">Clear all saved</button>
           </div>
         </details>
+        <section class="email-alert-onboarding" aria-labelledby="email-alert-onboarding-title">
+          <div>
+            <p class="eyebrow">Personalized email alerts</p>
+            <h2 id="email-alert-onboarding-title">Choose exactly what should reach your inbox</h2>
+            <p>Run a typed search to alert only on future new Strong matches, or use a result card to watch one opportunity or an eligible controlled program. Enter your email and cadence, then activate the alert from the verification email.</p>
+            <p class="email-alert-manage-note">Use the secure <strong>Manage alerts</strong> link in any alert email to pause delivery, change frequency, or unsubscribe.</p>
+          </div>
+          <button class="button secondary" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How email alerts work</button>
+        </section>
         <div class="results-toolbar search-not-started" id="results-toolbar">
           <div class="toolbar-actions">
             <button class="button secondary" id="alert-new-matches" type="button" disabled>Alert me to new Strong matches</button>
@@ -592,14 +601,14 @@
   <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
   <script src="./assets/award-links.js?v=phase3-program-watches"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
-  <script src="./assets/alerts.js?v=phase3-alerts"></script>
+  <script src="./assets/alerts.js?v=help-alerts-20260825"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
   <script src="./assets/search-query.js?v=app-1.3.0"></script>
   <script src="./assets/search-retrieval.js?v=app-1.3.0"></script>
   <script src="./assets/subtopic-runtime.js?v=app-1.3.0-sidecar-cache1"></script>
   <script src="./assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
-  <script src="./assets/site-help.js?v=app-1.3.0"></script>
+  <script src="./assets/site-help.js?v=help-20260825"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
   <script src="./assets/app.js?v=app-1.3.0"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>

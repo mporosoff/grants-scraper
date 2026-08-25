@@ -98,6 +98,59 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
 });
 
+test("shared Help remains visible and current across every desktop and mobile surface", async ({ page }, testInfo) => {
+  mockHybrid(page);
+  mockAwards(page);
+  const surfaces = [
+    ["funding-finder", "/match_explorer.html"],
+    ["team-match", "/team_match.html"],
+    ["funded-awards", "/funded_awards.html"],
+  ];
+
+  for (const [label, url] of surfaces) {
+    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.goto(url);
+    const helpButton = page.getByRole("button", { name: "Help" });
+    await expect(helpButton).toBeVisible();
+    await helpButton.click();
+    const helpDialog = page.getByRole("dialog", { name: /How to search, review awards/i });
+    await expect(helpDialog).toBeVisible();
+    await expect(helpDialog.locator("#help-alerts")).toContainText("Manage alerts");
+    await expect(helpDialog.locator("#help-awards")).toContainText("DOE Office of Science");
+    await expect(helpDialog.locator("#help-institutions")).toContainText("Research Organization Registry (ROR)");
+    await scan(page, `${label}-help-desktop`, testInfo);
+    await page.keyboard.press("Escape");
+
+    await page.setViewportSize({ width: 320, height: 720 });
+    await expect(helpButton).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const headerBoxes = await page.locator(".site-header .brand, .site-header .catalog-pill, .site-header .header-context-pill, .site-header .site-help-button, .site-header .nav-toggle").evaluateAll(elements => (
+      elements.map(element => {
+        const rect = element.getBoundingClientRect();
+        return { name: element.className, left: rect.left, right: rect.right, width: rect.width };
+      }).filter(box => box.width > 0).sort((a, b) => a.left - b.left)
+    ));
+    for (let index = 1; index < headerBoxes.length; index += 1) {
+      expect(headerBoxes[index - 1].right, `${label} header items must not overlap`).toBeLessThanOrEqual(headerBoxes[index].left + 1);
+    }
+    await helpButton.click();
+    await expect(helpDialog).toBeVisible();
+    await scan(page, `${label}-help-mobile`, testInfo);
+    await page.keyboard.press("Escape");
+  }
+
+  await page.setViewportSize({ width: 1024, height: 800 });
+  await page.goto("/match_explorer.html");
+  const alertHelp = page.getByRole("button", { name: "How email alerts work" });
+  await expect(alertHelp).toBeVisible();
+  await alertHelp.click();
+  await expect(page.getByRole("dialog").locator("#help-alerts")).toBeVisible();
+  await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Help" }).click();
+  await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBe(0);
+});
+
 test("Team Match has no serious or critical violations across picker, results, and fallback states", async ({ page, context }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(page);

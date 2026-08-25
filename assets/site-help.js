@@ -12,7 +12,7 @@
     <div class="help-dialog-header">
       <div>
         <p class="help-eyebrow">Funding Finder guide</p>
-        <h2 id="help-guide-title">How to find, review, and discuss funding</h2>
+        <h2 id="help-guide-title">How to search, review awards, build teams, and manage alerts</h2>
       </div>
       <button class="help-close" type="button" data-help-close aria-label="Close help">&times;</button>
     </div>
@@ -21,12 +21,12 @@
         <div>
           <span class="help-kicker">Start here</span>
           <h3 id="help-start-title">Search is free. Your own AI connection is optional.</h3>
-          <p>Funding Finder searches the current public opportunity catalog. Strong matching and filters run in your browser; the site's hosted semantic service can add Potential matches. You do not need an account or your own API key.</p>
+          <p>Funding Finder searches current public opportunities, Funded Awards explores historical NSF, NIH, and DOE projects, and Team Match finds calls for a group. Strong matching and structured award searches do not require an account or your own API key.</p>
         </div>
         <ol class="help-steps">
           <li><span>1</span><div><strong>Describe what you want to fund</strong><small>Use a topic, method, population, goal, or opportunity number. You may also upload a funding-notice PDF.</small></div></li>
           <li><span>2</span><div><strong>Add context if it helps</strong><small>Optionally add a reusable profile, CV, or filters. You can leave the search blank when those provide enough context.</small></div></li>
-          <li><span>3</span><div><strong>Find and review</strong><small>Open the official notice before acting on a deadline, eligibility rule, award amount, or submission requirement.</small></div></li>
+          <li><span>3</span><div><strong>Review, save, and choose alerts</strong><small>Open official sources before acting, then save locally or verify an email alert for the exact search, opportunity, or controlled program you want to follow.</small></div></li>
         </ol>
       </section>
 
@@ -34,7 +34,10 @@
         <a href="#help-search">Search</a>
         <a href="#help-nofo">Uploaded notices</a>
         <a href="#help-results">Results</a>
-        <a href="#help-teams">Team matcher</a>
+        <a href="#help-alerts">Email alerts</a>
+        <a href="#help-awards">Funded Awards</a>
+        <a href="#help-institutions">Institutions</a>
+        <a href="#help-teams">Team Match</a>
         <a href="#help-api-keys">API keys</a>
         <a href="#help-privacy">Privacy</a>
         <a href="#help-troubleshooting">Troubleshooting</a>
@@ -97,9 +100,69 @@
         <p class="help-footnote">“Recently posted” uses the catalog's listed or first-seen date. “Relevance” combines the words and concepts in your query, profile, and filters. Recently posted and closing-soon labels help with timing but do not replace deadline verification.</p>
       </section>
 
-      <section class="help-section" id="help-teams">
+      <section class="help-section" id="help-alerts">
         <div class="help-section-heading">
           <span class="help-section-number">04</span>
+          <div><h3>Configure personalized email alerts</h3><p>Alerts are opt-in, email-verified, and tied to one exact opportunity, controlled program identity, or typed Funding Finder search.</p></div>
+        </div>
+        <div class="help-grid">
+          <div class="help-card">
+            <h4>Choose what to watch in the GUI</h4>
+            <ul>
+              <li><strong>New Strong matches:</strong> run a typed Funding Finder search, then choose <em>Alert me to new Strong matches</em> above the results. Existing Strong matches become the baseline and do not immediately generate email.</li>
+              <li><strong>One opportunity:</strong> choose <em>Email alert</em> on a result card or in Saved opportunities, then select deadline, amendment, reminder, and status triggers.</li>
+              <li><strong>One program:</strong> choose <em>Program email alert</em> on an eligible result, or <em>Email alerts for this program</em> from an eligible Funded Awards deep link. Program watches use only controlled stable identities.</li>
+            </ul>
+          </div>
+          <div class="help-card">
+            <h4>Verify and manage delivery</h4>
+            <ol>
+              <li>Enter your email address and choose immediate delivery or a weekly digest.</li>
+              <li>Open the verification email; the alert is inactive until that link is used.</li>
+              <li>Use the secure <strong>Manage alerts</strong> link in any Funding Finder email to change frequency, pause or resume an alert, or unsubscribe.</li>
+            </ol>
+            <p class="help-footnote">There is no Funding Finder account or public alert dashboard. The private management link in your verified email is the safe way to administer subscriptions.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="help-section" id="help-awards">
+        <div class="help-section-heading">
+          <span class="help-section-number">05</span>
+          <div><h3>Explore Funded Awards</h3><p>Search normalized public NSF, NIH, and DOE Office of Science award records without using the opportunity-vector corpus.</p></div>
+        </div>
+        <div class="help-grid">
+          <div class="help-card">
+            <h4>Search historical projects</h4>
+            <p>Choose research topic, program, principal investigator, or program officer, then optionally filter by agency, institution, and year. Topic searches use each award source's native public search. Titles, abstracts, contacts, and official links are shown only when the source publishes them.</p>
+          </div>
+          <div class="help-card">
+            <h4>Start from a current opportunity</h4>
+            <p><strong>View funded awards ↗</strong> carries exact NSF or NIH identifiers, reviewed NSF parent mappings, or defensible DOE FOA/program mappings into Funded Awards. When equivalence is uncertain, the product offers a controlled source search instead of claiming an exact match.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="help-section" id="help-institutions">
+        <div class="help-section-heading">
+          <span class="help-section-number">06</span>
+          <div><h3>Use Institutional Intelligence</h3><p>Aggregate the public funded-award evidence returned for a selected institution.</p></div>
+        </div>
+        <div class="help-grid">
+          <div class="help-card">
+            <h4>Resolve an institution</h4>
+            <p>Open Institutional Intelligence in Funded Awards and start typing a name, acronym, or alias. Autocomplete uses the open Research Organization Registry (ROR), while award requests preserve the canonical and source-specific institution identities used by NSF, NIH, and DOE.</p>
+          </div>
+          <div class="help-card">
+            <h4>Filter or ask a question</h4>
+            <p>Structured institution, agency, program, topic, investigator, and year filters work without an AI key. Optional <strong>Ask about this institution</strong> translates a natural-language question into visible structured filters using the same browser-local provider settings as Funding Finder; returned award records remain authoritative.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="help-section" id="help-teams">
+        <div class="help-section-heading">
+          <span class="help-section-number">07</span>
           <div><h3>Find collaborative opportunities</h3><p>The Team matcher scores the live catalog for a group rather than simply combining separate searches.</p></div>
         </div>
         <div class="help-grid">
@@ -117,7 +180,7 @@
 
       <section class="help-section help-api-section" id="help-api-keys">
         <div class="help-section-heading">
-          <span class="help-section-number">05</span>
+          <span class="help-section-number">08</span>
               <div><h3>What an API key is and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
         </div>
         <div class="help-key-explanation">
@@ -164,8 +227,8 @@
 
       <section class="help-section" id="help-privacy">
         <div class="help-section-heading">
-          <span class="help-section-number">06</span>
-          <div><h3>Know what stays local and what is sent</h3><p>Local search, hosted Potential ranking, and user-connected AI have distinct boundaries.</p></div>
+          <span class="help-section-number">09</span>
+          <div><h3>Know what stays local and what is sent</h3><p>Local search, hosted Potential ranking, verified email alerts, public award retrieval, and user-connected AI have distinct boundaries.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
@@ -181,6 +244,10 @@
             <p>When you explicitly use AI refinement or chat, your key goes directly to the selected provider with only the bounded result, profile/CV, question, or PDF context enabled for that request. Keys are excluded from URLs, exports, GitHub, and the funding catalog.</p>
           </div>
           <div class="help-card">
+            <h4>Verified email alerts</h4>
+            <p>The Alerts Worker stores the verified email address, exact watched opportunity or controlled program ID, or typed search and public filters, plus cadence and delivery history. Pursuit notes, profile and CV text, ORCID publication text, uploaded documents, AI chat, and provider keys are never sent to it.</p>
+          </div>
+          <div class="help-card">
             <h4>URLs and anonymous measurement</h4>
             <p>Search criteria are stored in the page URL so a search can be shared and restored; they may therefore appear in browser history and copied links. A custom anonymous event sends a random session ID and broad usage category, not search text. The usage service aggregates network organization server-side. Cloudflare Web Analytics is loaded only when the page URL has no query parameters.</p>
           </div>
@@ -190,7 +257,7 @@
 
       <section class="help-section" id="help-troubleshooting">
         <div class="help-section-heading">
-          <span class="help-section-number">07</span>
+          <span class="help-section-number">10</span>
           <div><h3>Quick troubleshooting</h3><p>A few checks solve most problems.</p></div>
         </div>
         <details class="help-faq">
@@ -208,6 +275,10 @@
         <details class="help-faq">
           <summary>A catalog match or extracted fact looks wrong.</summary>
           <p>Reject an incorrect uploaded-notice match and rely on the linked official notice. Invited reviewers can use the separate evaluation mode. Machine-extracted summaries are aids, not authoritative program instructions.</p>
+        </details>
+        <details class="help-faq">
+          <summary>I created an alert but cannot find its settings.</summary>
+          <p>Open a Funding Finder verification or alert email and use its secure <strong>Manage alerts</strong> link. There is no signed-in dashboard. That private link lets you change frequency, pause or resume delivery, or unsubscribe without exposing your subscriptions publicly.</p>
         </details>
         <details class="help-faq">
           <summary>How current is the catalog?</summary>
@@ -229,7 +300,13 @@
     } else {
       dialog.setAttribute("open", "");
     }
+    const dialogBody = dialog.querySelector(".help-dialog-body");
+    if (dialogBody) dialogBody.scrollTop = 0;
     dialog.querySelector("[data-help-close]")?.focus();
+    const requestedSection = String(opener?.dataset.helpSection || "");
+    if (/^help-[a-z-]+$/.test(requestedSection)) {
+      dialog.querySelector(`#${requestedSection}`)?.scrollIntoView({ block: "start" });
+    }
   }
 
   function closeHelp() {
