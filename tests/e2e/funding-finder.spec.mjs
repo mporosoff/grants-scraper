@@ -49,6 +49,94 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
+test("saved-item write rejection restores durable UI state across every mutation", async ({ page }, testInfo) => {
+  await page.addInitScript(() => {
+    const originalSetItem = Storage.prototype.setItem;
+    const originalRemoveItem = Storage.prototype.removeItem;
+    Storage.prototype.setItem = function setItem(key, value) {
+      if (key === "funding-finder.saved.v1" && globalThis.__rejectSavedWrites) {
+        throw new DOMException("Deterministic storage rejection", "QuotaExceededError");
+      }
+      return originalSetItem.call(this, key, value);
+    };
+    Storage.prototype.removeItem = function removeItem(key) {
+      if (key === "funding-finder.saved.v1" && globalThis.__rejectSavedWrites) {
+        throw new DOMException("Deterministic storage rejection", "QuotaExceededError");
+      }
+      return originalRemoveItem.call(this, key);
+    };
+  });
+  mockHybrid(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const cards = page.locator("#results .result-card");
+  await expect(cards.nth(1)).toBeVisible();
+  await cards.first().locator("[data-save]").click();
+  await expect(cards.first().locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#saved-panel > summary").click();
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+
+  await page.evaluate(() => { globalThis.__rejectSavedWrites = true; });
+  await cards.first().locator("[data-save]").click();
+  await expect(cards.first().locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#saved-status")).toContainText("last saved version is still shown");
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+
+  await page.locator("[data-pursuit-status]").selectOption("submitted");
+  await expect(page.locator("[data-pursuit-status]")).toHaveValue("saved");
+  await page.locator("[data-pursuit-note]").evaluate(element => {
+    element.value = "Uncommitted note";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await expect(page.locator("[data-pursuit-note]")).toHaveValue("");
+  await expect(page.locator("[data-pursuit-note]")).toBeFocused();
+
+  await page.locator("[data-remove-saved]").click();
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+  await page.locator("#clear-saved").click();
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+
+  await cards.nth(1).locator("[data-save]").click();
+  await expect(cards.nth(1).locator("[data-save]")).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("funding-finder.saved.v1")).length)).toBe(1);
+  await testInfo.attach("ff-bug-011-storage-rejection-390px.png", {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: "image/png",
+  });
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("alert dialog gives bounded recovery guidance for each server error class", async ({ context }) => {
+  const cases = [
+    { status: 429, errorCode: "rate_limited", message: "Too many alert requests. Wait before trying again." },
+    { status: 429, responseBody: "not-json private provider body", message: "Too many alert requests. Wait before trying again." },
+    { status: 400, errorCode: "invalid_request", message: "Check the alert details and try again." },
+    { status: 503, errorCode: "alerts_unavailable", message: "Email alert delivery is unavailable. Retry later." },
+    { status: 503, responseBody: "not-json private provider body", message: "Email alert delivery is unavailable. Retry later." },
+    { status: 202, responseBody: "not-json private provider body", message: "The email alert service returned an invalid response. Retry later." },
+  ];
+  for (const fixture of cases) {
+    const errorPage = await context.newPage();
+    mockHybrid(errorPage);
+    mockAlerts(errorPage, fixture);
+    await openFundingFinder(errorPage);
+    await runFundingSearch(errorPage, "hydrogen catalysis");
+    await errorPage.locator("#profile-builder > summary").click();
+    await errorPage.locator("#alert-new-matches").click();
+    const dialog = errorPage.getByRole("dialog", { name: "Save this search as an email alert" });
+    await dialog.locator("#alert-email").fill("researcher@example.edu");
+    await dialog.locator("#alert-submit").click();
+    await expect(dialog.locator("#alert-dialog-status")).toContainText(fixture.message);
+    await expect(dialog.locator("#alert-dialog-status")).not.toContainText(/researcher@example\.edu|provider body|suppressed|exists/i);
+    await errorPage.setViewportSize({ width: 320, height: 720 });
+    expect(await errorPage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    await errorPage.close();
+  }
+});
+
 test("Funding Finder loads with a usable catalog and no uncaught runtime errors", async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   await openFundingFinder(page);

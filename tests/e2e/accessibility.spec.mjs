@@ -54,6 +54,21 @@ test("Funding Finder has no serious or critical violations across critical state
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   await scan(page, "funding-strong-potential", testInfo);
+  await page.evaluate(() => {
+    const original = Storage.prototype.setItem;
+    Storage.prototype.setItem = function setItem(key, value) {
+      if (key === "funding-finder.saved.v1") throw new DOMException("Blocked for accessibility fixture", "QuotaExceededError");
+      return original.call(this, key, value);
+    };
+  });
+  const rejectedSave = page.locator("#results .result-card [data-save]").first();
+  await rejectedSave.click();
+  await expect(rejectedSave).toHaveAttribute("aria-pressed", "false");
+  await expect(page.locator("#saved-status")).toContainText("last saved version is still shown");
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funding-saved-storage-error-mobile", testInfo);
+  await page.setViewportSize({ width: 1280, height: 900 });
   mockAlerts(page);
   await page.locator("#profile-builder > summary").click();
   await page.locator("#alert-new-matches").click();
@@ -214,7 +229,13 @@ test("Team Match has no serious or critical violations across picker, results, a
 test("Funded Awards has no serious or critical violations and fits narrow mobile layouts", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 390, height: 844 });
-  mockAwards(page);
+  mockAwards(page, {
+    awardOverridesBySource: { NSF: { award_year: null, total_award: null } },
+    sourceFailures: {
+      NIH: { status: "unsupported", code: "unsupported_criteria" },
+      DOE: { status: "unavailable", code: "source_rate_limited" },
+    },
+  });
   await page.goto("/funded_awards.html");
   await expect(page.locator("#ii-form")).toBeVisible();
   await expect(page.locator("#award-search-form")).toBeHidden();
@@ -223,6 +244,9 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
+  await expect(page.locator("#ii-source-status")).toContainText("does not support this filter combination");
+  await expect(page.locator("#ii-source-status")).toContainText("Wait before retrying");
+  await expect(page.locator(".ii-award-kicker")).toContainText("Amount not listed");
   await scan(page, "awards-results-mobile", testInfo);
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

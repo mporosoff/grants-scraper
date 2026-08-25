@@ -3,6 +3,8 @@
 
   const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
   const DOE_PAGE_LIMIT = 10;
+  const AWARD_YEAR_MIN = 1989;
+  const AWARD_YEAR_MAX = 2100;
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
@@ -11,7 +13,78 @@
 
   function year(value) {
     const number = Number(value);
-    return Number.isInteger(number) && number >= 1989 && number <= 2100 ? number : null;
+    return Number.isInteger(number) && number >= AWARD_YEAR_MIN && number <= AWARD_YEAR_MAX ? number : null;
+  }
+
+  function presentFiniteNumber(value) {
+    if (typeof value === "number") return Number.isFinite(value) ? value : null;
+    if (typeof value !== "string" || !value.trim()) return null;
+    const number = Number(value.trim());
+    return Number.isFinite(number) ? number : null;
+  }
+
+  function awardYear(value) {
+    const number = presentFiniteNumber(value);
+    return Number.isInteger(number) && number >= AWARD_YEAR_MIN && number <= AWARD_YEAR_MAX
+      ? number
+      : null;
+  }
+
+  function awardYearRange(results) {
+    const years = (Array.isArray(results) ? results : [])
+      .map(award => awardYear(award?.award_year))
+      .filter(value => value !== null)
+      .sort((left, right) => left - right);
+    if (!years.length) return null;
+    return years[0] === years.at(-1) ? String(years[0]) : `${years[0]}–${years.at(-1)}`;
+  }
+
+  function boundedErrorCode(value) {
+    return clean(value?.error?.code, 80).toLowerCase();
+  }
+
+  function sourceIssueText(source) {
+    const name = clean(source?.source, 20) || "Selected source";
+    if (source?.status === "unsupported") {
+      return `${name} does not support this filter combination.`;
+    }
+    const code = boundedErrorCode(source);
+    if (["rate_limited", "source_rate_limited"].includes(code)) {
+      return `${name} is rate limited. Wait before retrying.`;
+    }
+    if (["invalid_response", "source_invalid_response"].includes(code)) {
+      return `${name} returned an invalid service response. Retry later.`;
+    }
+    return `${name} is temporarily unavailable. Retry later.`;
+  }
+
+  function serviceIssueText(payload) {
+    const code = boundedErrorCode(payload);
+    if (code === "invalid_request") {
+      return "Check the submitted award filters and try again.";
+    }
+    if (["rate_limited", "source_rate_limited"].includes(code)) {
+      return "Award search is rate limited. Wait before retrying.";
+    }
+    if (["service_unavailable", "source_unavailable"].includes(code)) {
+      return "The award service is unavailable. Retry later.";
+    }
+    return "";
+  }
+
+  function paginationLabel(payload, resultCount = payload?.results?.length || 0) {
+    const count = Math.max(0, Number(resultCount) || 0);
+    if (!count) return "No results on this page";
+    const offset = Math.max(0, Number(payload?.pagination?.offset) || 0);
+    const requestedSources = Array.isArray(payload?.request?.sources)
+      ? payload.request.sources
+      : (payload?.sources || []).map(source => source?.source);
+    const sourceCount = new Set(requestedSources.map(source => clean(source, 20)).filter(Boolean)).size;
+    if (sourceCount <= 1) return `Results ${offset + 1}–${offset + count}`;
+    const noun = count === 1 ? "result" : "results";
+    return offset
+      ? `${count.toLocaleString()} ${noun} on this page · each source is paged independently after its first ${offset.toLocaleString()} results`
+      : `${count.toLocaleString()} ${noun} on this source-scoped page`;
   }
 
   function sourcesForAgency(agency) {
@@ -120,9 +193,16 @@
   }
 
   globalThis.FUNDING_AWARD_PRODUCT = Object.freeze({
+    awardYear,
+    awardYearRange,
+    boundedErrorCode,
     buildRequest,
     canPageForward,
     institutionSummary,
+    paginationLabel,
+    presentFiniteNumber,
+    serviceIssueText,
+    sourceIssueText,
     sourcesForAgency,
     standaloneCriterion,
     validatePayload,

@@ -238,8 +238,8 @@
   }
 
   function formatMoney(value) {
-    const number = Number(value);
-    return Number.isFinite(number)
+    const number = awardProduct.presentFiniteNumber(value);
+    return number !== null
       ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(number)
       : "Amount not listed";
   }
@@ -281,7 +281,7 @@
       .filter(Boolean);
     const programs = [clean(award?.program_name, 300), ...(award?.program_codes || []).map(value => clean(value, 100))]
       .filter(Boolean);
-    const year = Number(award?.award_year) || "Year not listed";
+    const year = awardProduct.awardYear(award?.award_year) ?? "Year not listed";
     const contacts = [...investigatorRecords, ...programContacts]
       .map(person => contactLine(person, source, officialUrl))
       .join("");
@@ -303,9 +303,7 @@
       const status = source.status || "unavailable";
       const label = status === "ok"
         ? `${source.source} available · ${source.result_count || 0} returned`
-        : status === "unsupported"
-          ? `${source.source} does not support this filter combination`
-          : `${source.source} temporarily unavailable`;
+        : awardProduct.sourceIssueText(source);
       return `<li data-status="${escapeAttribute(status)}">${escapeHtml(label)}</li>`;
     }).join("");
     list.classList.toggle("hidden", !values.length);
@@ -346,9 +344,7 @@
     const offset = Number(payload.pagination?.offset || 0);
     const canNext = awardProduct.canPageForward(payload);
     $("ii-pagination").classList.toggle("hidden", offset === 0 && !canNext);
-    $("ii-page-label").textContent = aggregate.project_count
-      ? `Results ${offset + 1}–${offset + aggregate.project_count}`
-      : "No results on this page";
+    $("ii-page-label").textContent = awardProduct.paginationLabel(payload, aggregate.project_count);
     syncPaginationControls();
     return aggregate;
   }
@@ -380,23 +376,29 @@
       }
       const payload = await response.json().catch(() => null);
       if (sequence !== state.searchSequence) return;
-      if (!payload || !awardProduct.validatePayload(payload)) throw new Error("The award service returned an invalid response.");
-      if (!response.ok && !payload.results.length) {
-        state.payload = payload;
-        renderAggregate(payload);
-        throw new Error("The selected award sources are temporarily unavailable or do not support this filter combination.");
+      if (!payload || !awardProduct.validatePayload(payload)) {
+        const error = new Error(awardProduct.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
+        error.code = awardProduct.boundedErrorCode(payload) || "invalid_response";
+        throw error;
       }
       state.payload = payload;
       const aggregate = renderAggregate(payload);
       const failed = (payload.sources || []).filter(source => source.status !== "ok");
+      const issueText = failed.map(awardProduct.sourceIssueText).join(" ");
       setStatus(failed.length
-        ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned from available sources. ${failed.map(source => source.source).join(", ")} did not complete.`
-        : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned. Use investigator or program selections to drill into the official records.`);
+        ? aggregate.project_count
+          ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned from available sources. ${issueText}`
+          : issueText
+        : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned. Use investigator or program selections to drill into the official records.`, failed.length > 0 && aggregate.project_count === 0);
       if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
       if (scrollResults) $("ii-output-heading").scrollIntoView({ block: "start" });
     } catch (error) {
-      if (error?.name === "AbortError" || sequence !== state.searchSequence) return;
-      setStatus(error?.message || "Funded award search could not be completed.", true);
+      if (sequence !== state.searchSequence) return;
+      if (error?.name === "AbortError") {
+        setStatus("The award search timed out. Retry later.", true);
+        return;
+      }
+      setStatus(error?.message || "Funded award search could not be completed. Retry later.", true);
     } finally {
       if (sequence === state.searchSequence) setBusy(false);
     }
@@ -625,11 +627,13 @@
     $("ii-ask-button").addEventListener("click", askQuestion);
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", () => {
+      const params = new URLSearchParams(location.search);
       const restored = core.stateFromSearch(location.search);
       applyFormState(restored);
       state.payload = null;
-      if (hasSearchState(restored)) runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
-      else {
+      if (hasSearchState(restored) && !params.get("opportunity")) {
+        runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
+      } else {
         $("ii-output").classList.add("hidden");
         $("ii-source-status").classList.add("hidden");
         $("ii-pagination").classList.add("hidden");

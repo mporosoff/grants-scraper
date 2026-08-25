@@ -2230,6 +2230,11 @@ textarea:focus {
   padding: 0 16px 14px;
 }
 
+.saved-storage-status {
+  margin: 0.65rem 0 0;
+  font-weight: 700;
+}
+
 .saved-item {
   display: flex;
   align-items: center;

@@ -245,8 +245,8 @@
   }
 
   function formatMoney(value) {
-    const number = Number(value);
-    return Number.isFinite(number)
+    const number = productApi.presentFiniteNumber(value);
+    return number !== null
       ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(number)
       : "Not listed";
   }
@@ -276,11 +276,12 @@
     const contacts = [...investigators, ...programContacts]
       .map(person => contactLine(person, award.source, officialUrl))
       .join("");
+    const awardYear = productApi.awardYear(award.award_year);
     return `<article class="award-card" data-source="${escapeAttribute(award.source)}" data-award-id="${escapeAttribute(id)}" aria-labelledby="award-title-${position}">
       <div class="award-card-topline">
         <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : "open"}">${escapeHtml(award.source)}</span>
         <span class="opportunity-number">Award ${escapeHtml(id)}</span>
-        ${award.award_year ? `<span class="listed-date">Award year ${escapeHtml(award.award_year)}</span>` : ""}
+        ${awardYear !== null ? `<span class="listed-date">Award year ${escapeHtml(awardYear)}</span>` : ""}
       </div>
       <h4 id="award-title-${position}">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h4>
       <p class="award-people"><strong>${escapeHtml(primaryNames.join(" · ") || "Investigator not listed")}</strong> · ${escapeHtml(institution)}</p>
@@ -303,13 +304,15 @@
 
   function renderSourceStatus(payload) {
     const list = $("award-source-status");
+    const hasHealthySource = payload.sources.some(source => source.status === "ok");
     list.innerHTML = payload.sources.map(source => {
       if (source.status === "ok") {
         const cache = source.cache === "hit" ? "cached" : "live";
         const abstractWarning = Number(source.health?.abstracts_failed || 0);
         return `<li${abstractWarning ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${abstractWarning ? ` · ${abstractWarning.toLocaleString()} public ${abstractWarning === 1 ? "abstract" : "abstracts"} unavailable` : ""}</li>`;
       }
-      return `<li class="source-unavailable">${escapeHtml(source.source)} temporarily unavailable · other sources remain usable</li>`;
+      const suffix = hasHealthySource ? " Other sources remain usable." : "";
+      return `<li class="source-unavailable" data-status="${escapeAttribute(source.status || "unavailable")}">${escapeHtml(productApi.sourceIssueText(source))}${escapeHtml(suffix)}</li>`;
     }).join("");
     list.classList.toggle("hidden", !payload.sources.length);
   }
@@ -342,9 +345,7 @@
       (award.principal_investigators || []).map(person => clean(person?.name)).filter(Boolean)
     )));
     const institutions = new Set(results.map(award => clean(award?.institution?.normalized_name || award?.institution?.name)).filter(Boolean));
-    const years = results.map(award => Number(award.award_year)).filter(Number.isFinite).sort((a, b) => a - b);
-    const finalYear = years[years.length - 1];
-    const yearRange = years.length ? (years[0] === finalYear ? String(years[0]) : `${years[0]}–${finalYear}`) : "Years not listed";
+    const yearRange = productApi.awardYearRange(results) || "Years not listed";
     node.innerHTML = `<h3>Result-page summary</h3><p class="summary-counts"><span><strong>${results.length.toLocaleString()}</strong> funded projects</span><span><strong>${investigators.size.toLocaleString()}</strong> unique investigators</span><span><strong>${institutions.size.toLocaleString()}</strong> institutions</span><span>${escapeHtml(yearRange)}</span></p>`;
     node.classList.remove("hidden");
   }
@@ -374,9 +375,7 @@
     const canNext = productApi.canPageForward(payload);
     pagination.classList.toggle("hidden", offset === 0 && !canNext);
     syncPaginationControls();
-    $("award-page-label").textContent = payload.results.length
-      ? `Results ${offset + 1}–${offset + payload.results.length}`
-      : "No results on this page";
+    $("award-page-label").textContent = productApi.paginationLabel(payload);
   }
 
   async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false } = {}) {
@@ -411,10 +410,14 @@
       });
       const payload = await response.json().catch(() => null);
       if (sequence !== state.sequence) return;
-      if (!productApi.validatePayload(payload)) throw new Error("The award service returned an invalid response.");
+      if (!productApi.validatePayload(payload)) {
+        const error = new Error(productApi.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
+        error.code = productApi.boundedErrorCode(payload) || "invalid_response";
+        throw error;
+      }
       renderResults(payload, searchState);
-      const unavailable = payload.sources.filter(source => source.status !== "ok").map(source => source.source);
-      const suffix = unavailable.length ? ` ${unavailable.join(" and ")} could not be reached; available sources are shown.` : "";
+      const issues = payload.sources.filter(source => source.status !== "ok").map(productApi.sourceIssueText);
+      const suffix = issues.length ? ` ${issues.join(" ")}` : "";
       setStatus(`${payload.results.length.toLocaleString()} funded projects returned.${suffix}`, { error: !response.ok && !payload.results.length });
       if (focusResults) $("award-results-heading").focus({ preventScroll: true });
       if (scrollResults) $("award-results-heading").scrollIntoView({ block: "start" });
@@ -424,8 +427,23 @@
       $("institution-summary").classList.add("hidden");
       $("program-summary").classList.add("hidden");
       $("award-pagination").classList.add("hidden");
-      $("award-result-list").innerHTML = `<div class="award-empty"><h3>Award search is temporarily unavailable.</h3><p>Try again shortly. Funding Finder and Team Match remain available.</p></div>`;
-      setStatus(error?.name === "AbortError" ? "The award search timed out. Try again." : "The award service could not be reached. Try again shortly.", { error: true });
+      const timedOut = error?.name === "AbortError";
+      const invalidRequest = error?.code === "invalid_request";
+      const rateLimited = ["rate_limited", "source_rate_limited"].includes(error?.code);
+      const title = timedOut
+        ? "Award search timed out."
+        : invalidRequest
+          ? "Check the award search filters."
+          : rateLimited
+            ? "Award search is rate limited."
+            : error?.code === "invalid_response"
+              ? "The award service returned an invalid response."
+              : "Award search is temporarily unavailable.";
+      const detail = timedOut
+        ? "Retry later. Funding Finder and Team Match remain available."
+        : error?.message || "The award service could not be reached. Retry later.";
+      $("award-result-list").innerHTML = `<div class="award-empty"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(detail)}</p></div>`;
+      setStatus(timedOut ? "The award search timed out. Retry later." : detail, { error: true });
     } finally {
       clearTimeout(timeout);
       if (sequence === state.sequence) {
@@ -494,9 +512,27 @@
     $("institution-summary").addEventListener("click", event => {
       const button = event.target.closest("[data-award-pi]");
       if (!button) return;
-      $("award-query").value = clean(button.getAttribute("data-award-pi"));
-      $("search-mode").value = "pi";
-      search({ historyMode: "push", offset: 0, focusResults: true });
+      const investigator = clean(button.getAttribute("data-award-pi"));
+      const source = state.selectedLookup?.source || $("award-agency").value;
+      const institution = clean($("award-institution").value);
+      const yearStart = $("year-start").value;
+      const yearEnd = $("year-end").value;
+      cancelPendingSearch();
+      state.selectedRecord = null;
+      state.selectedLookup = null;
+      renderSelectedOpportunity();
+      clearRenderedResults();
+      $("award-results").classList.add("hidden");
+      $("ii-institution").value = institution;
+      $("ii-institution").dispatchEvent(new Event("input", { bubbles: true }));
+      $("ii-agency").value = ["NSF", "NIH", "DOE"].includes(source) ? source : "all";
+      $("ii-program").value = "";
+      $("ii-topic").value = "";
+      $("ii-pi").value = investigator;
+      $("ii-program-officer").value = "";
+      $("ii-year-start").value = yearStart;
+      $("ii-year-end").value = yearEnd;
+      $("ii-form").requestSubmit();
     });
     window.addEventListener("popstate", () => {
       cancelPendingSearch();
