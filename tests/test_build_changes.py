@@ -74,6 +74,18 @@ class ChangeFeedTests(unittest.TestCase):
             ElementTree.parse(out / "changes.xml")
             self.assertTrue((out / "changes.json").exists())
 
+    def test_detects_non_closing_status_transition(self):
+        events = diff_catalogs(
+            catalog([rec("1", status="forecasted")]),
+            catalog([rec("1", status="posted")]),
+            as_of=AS_OF,
+        )
+
+        status_event = next(event for event in events if event["type"] == "status_changed")
+        self.assertEqual(status_event["opportunity_id"], "1")
+        self.assertEqual(status_event["old_status"], "forecasted")
+        self.assertEqual(status_event["new_status"], "posted")
+
 
 if __name__ == "__main__":
     unittest.main()

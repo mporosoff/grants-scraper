@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": 3,
-  "generated_at": "2026-08-25T02:55:30Z",
+  "generated_at": "2026-08-25T03:05:41Z",
   "protected_main_base": "12f07d2fde48f2d486fbb617da19a72d2bec35e3",
   "decision": "PHASE 3 PASSED — PERSONALIZED ALERTS WORK WITHOUT USER ACCOUNTS",
   "scope": {
@@ -29,7 +29,7 @@
     "strong_matching": "Alerts Worker imports the production search-query, search-retrieval, and search-v2-config modules; an optional candidate-index input limits scheduled scoring to changed public opportunity IDs without changing default ranking",
     "change_detection": "Scheduled evaluation consumes the existing feeds/changes.json new/material-change contract",
     "program_identity": "Program watches use reviewed NSF parent mappings or exact NSF program-element identities from assets/award-links.js",
-    "worker_deployment": "Main-only deployment, protected-main race check, newest active rollback version, health, smoke, and Pages coherence mirror the hardened Award Worker workflow",
+    "worker_deployment": "Main-only deployment, protected-main race check, newest active rollback version, health, smoke, Pages coherence, and path triggers for every bundled Strong-match module mirror the hardened Award Worker workflow",
     "failure_isolation": "Alerts and email failures leave Funding Finder, Funded Awards, Saved state, and queued notifications available"
   },
   "saved_search_baseline": {
@@ -64,7 +64,10 @@
   "d1": {
     "database_name": "funding-finder-alerts",
     "database_id": "cae0a60b-b8d1-4cdf-96fe-092db8e2a51d",
-    "migration": "workers/alerts/migrations/0001_phase3_alerts.sql",
+    "migrations": [
+      "workers/alerts/migrations/0001_phase3_alerts.sql",
+      "workers/alerts/migrations/0002_delivery_claim_lease.sql"
+    ],
     "remote_migration_applied": true,
     "tables": [
       "subscribers",
@@ -86,6 +89,7 @@
     "daily_limit": 100,
     "overflow": "queued",
     "failure": "failed events retain retry state and are never marked sent",
+    "claim_recovery": "sending events use a 15-minute claim lease; expired claims are retried with the original deterministic Resend idempotency key",
     "provider_failure_diagnostics": "logs only network-versus-HTTP classification and the numeric HTTP status; provider response bodies, credentials, recipient data, and token data remain excluded",
     "request_context": "production fetch is resolved inside each Worker invocation so Cloudflare request-scoped I/O is never reused across requests",
     "bounce_complaint": "authenticated Svix webhooks are idempotent and suppress all future delivery for the subscriber"
@@ -93,12 +97,12 @@
   "validation": {
     "node_phase3_contract_tests": {
       "command": "node --test tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs",
-      "passed": 18,
+      "passed": 20,
       "failed": 0
     },
     "protected_browser_contract_tests": {
       "command": "node --test tests/browser/*.test.mjs",
-      "passed": 269,
+      "passed": 271,
       "failed": 0
     },
     "protected_real_browser_tests": {
@@ -110,7 +114,7 @@
     },
     "protected_python_tests": {
       "command": "python -m tools.run_refresh_validation",
-      "passed": 772,
+      "passed": 773,
       "failed": 0
     },
     "frozen_retrieval_guards": {
@@ -120,7 +124,12 @@
       "vector_or_corpus_evaluation_rerun": false
     },
     "worker_dry_run": "Wrangler 4.125.0 bundled 258.40 KiB / 55.05 KiB gzip without deployment",
-    "remote_d1_migration": "0001_phase3_alerts.sql applied successfully; remote list reports no pending migrations"
+    "remote_d1_migration": "0001_phase3_alerts.sql and 0002_delivery_claim_lease.sql applied successfully; remote list reports no pending migrations",
+    "review_regressions": {
+      "stale_delivery_claim": "expired sending claims are reclaimed and retain the original provider idempotency key",
+      "status_transition": "the existing catalog change feed emits status_changed for non-closing transitions and opportunity/program watches consume it",
+      "deployment_coherence": "Alerts Worker release paths include search-query.js, search-retrieval.js, and search-v2-config.js"
+    }
   },
   "live_email": {
     "status": "passed",
@@ -134,7 +143,7 @@
     "manage": "weekly cadence, pause, and resume returned HTTP 200 from the received-message manage link, including iOS Gmail's same-origin opaque navigation form behavior",
     "unsubscribe": "completed from the received message; remote D1 records zero active and one inactive subscription",
     "unsubscribe_confirmation": "You have been successfully unsubscribed from Funding Finder.",
-    "final_worker_version": "0e274827-0c74-48a8-94fa-987d7a5da2fc",
+    "bounded_live_test_worker_version": "0e274827-0c74-48a8-94fa-987d7a5da2fc",
     "webhook": {
       "endpoint": "https://funding-finder-alerts.urochestercheme.workers.dev/webhooks/resend",
       "status": "enabled",

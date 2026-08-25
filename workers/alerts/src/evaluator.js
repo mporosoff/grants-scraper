@@ -5,7 +5,7 @@ import { sha256Hex } from "./crypto.js";
 import { digestEmail, eventEmail } from "./email.js";
 
 const LINKS_API = globalThis.FUNDING_AWARD_LINKS;
-const CHANGE_KINDS = new Set(["new", "deadline_changed", "amended", "closed_or_removed"]);
+const CHANGE_KINDS = new Set(["new", "deadline_changed", "amended", "status_changed", "closed_or_removed"]);
 
 function isoDate(now) {
   return now.toISOString().slice(0, 10);
@@ -137,6 +137,7 @@ async function evaluateProgram(store, subscription, assets, env, now) {
       new: "program_new_cycle",
       amended: "program_amended",
       deadline_changed: "program_deadline_changed",
+      status_changed: "program_status_changed",
       closed_or_removed: "program_status_changed",
     }[event.type];
     const inserted = await enqueue(store, subscription, {
@@ -192,7 +193,7 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     : pending.slice(0, remaining).map(event => [event]);
   for (const batch of batches) {
     if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) break;
-    const ids = await store.claimEvents(batch.map(event => event.id));
+    const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
     attemptedCount += 1;

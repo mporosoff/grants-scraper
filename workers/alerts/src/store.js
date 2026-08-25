@@ -2,6 +2,13 @@ function rows(result) {
   return result?.results || [];
 }
 
+const DELIVERY_LEASE_MS = 15 * 60 * 1_000;
+
+function staleClaimCutoff(now) {
+  const timestamp = Date.parse(now);
+  return new Date((Number.isFinite(timestamp) ? timestamp : Date.now()) - DELIVERY_LEASE_MS).toISOString();
+}
+
 export class D1AlertStore {
   constructor(database) {
     if (!database?.prepare) throw new Error("Alerts D1 binding is unavailable.");
@@ -188,17 +195,19 @@ export class D1AlertStore {
   }
 
   async pendingEvents(cadence, now, limit) {
+    const staleBefore = staleClaimCutoff(now);
     return rows(await this.db.prepare(
-      "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.status IN ('queued', 'failed') AND n.next_attempt_at <= ? AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = ? AND u.suppressed_at IS NULL ORDER BY n.created_at LIMIT ?",
-    ).bind(now, cadence, limit).all());
+      "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = ? AND u.suppressed_at IS NULL ORDER BY n.created_at LIMIT ?",
+    ).bind(now, staleBefore, cadence, limit).all());
   }
 
-  async claimEvents(ids) {
+  async claimEvents(ids, now) {
+    const staleBefore = staleClaimCutoff(now);
     const claimed = [];
     for (const id of ids) {
       const result = await this.db.prepare(
-        "UPDATE notification_events SET status = 'sending', attempts = attempts + 1 WHERE id = ? AND status IN ('queued', 'failed')",
-      ).bind(id).run();
+        "UPDATE notification_events SET status = 'sending', attempts = attempts + 1, claimed_at = ? WHERE id = ? AND (status IN ('queued', 'failed') OR (status = 'sending' AND claimed_at IS NOT NULL AND claimed_at <= ?))",
+      ).bind(now, id, staleBefore).run();
       if (Number(result?.meta?.changes || 0) > 0) claimed.push(id);
     }
     return claimed;
@@ -207,7 +216,7 @@ export class D1AlertStore {
   async markEventsSent(ids, providerMessageId, now) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = 'sent', provider_message_id = ?, sent_at = ?, error_code = NULL WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = 'sent', provider_message_id = ?, sent_at = ?, error_code = NULL, claimed_at = NULL WHERE id = ? AND status = 'sending'",
     ).bind(providerMessageId, now, id)));
     await this.db.prepare(
       `UPDATE subscriptions SET last_notified_at = ?, updated_at = ? WHERE id IN (SELECT subscription_id FROM notification_events WHERE id IN (${ids.map(() => "?").join(",")}))`,
@@ -217,7 +226,7 @@ export class D1AlertStore {
   async markEventsFailed(ids, errorCode, nextAttemptAt) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = 'failed', error_code = ?, next_attempt_at = ? WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = 'failed', error_code = ?, next_attempt_at = ?, claimed_at = NULL WHERE id = ? AND status = 'sending'",
     ).bind(errorCode, nextAttemptAt, id)));
   }
 

@@ -118,26 +118,33 @@ class MemoryStore {
   async markEvaluated(id, at) { this.subscriptions.get(id).last_evaluated_at = at; }
   async sentCountSince() { return [...this.events.values()].filter(item => item.status === "sent").length; }
   async pendingEvents(cadence, now, limit) {
+    const staleBefore = new Date(Date.parse(now) - 15 * 60 * 1_000).toISOString();
     return [...this.events.values()].flatMap(event => {
       const sub = this.subscriptions.get(event.subscription_id);
       const person = this.subscribers.get(sub.subscriber_id);
-      return ["queued", "failed"].includes(event.status) && event.next_attempt_at <= now
+      const ready = (["queued", "failed"].includes(event.status) && event.next_attempt_at <= now)
+        || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore);
+      return ready
         && sub.active === 1 && sub.cadence === cadence && !person.suppressed_at
         ? [{ ...event, ...sub, id: event.id, subscription_id: sub.id, subscriber_id: sub.subscriber_id, email: person.email, manage_token: person.manage_token }]
         : [];
     }).slice(0, limit);
   }
-  async claimEvents(ids) {
+  async claimEvents(ids, now = fixedNow.toISOString()) {
+    const staleBefore = new Date(Date.parse(now) - 15 * 60 * 1_000).toISOString();
     return ids.flatMap(id => {
       const event = this.events.get(id);
-      if (!event || !["queued", "failed"].includes(event.status)) return [];
+      const claimable = event && (["queued", "failed"].includes(event.status)
+        || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore));
+      if (!claimable) return [];
       event.status = "sending";
       event.attempts += 1;
+      event.claimed_at = now;
       return [id];
     });
   }
-  async markEventsSent(ids, providerId, now) { for (const id of ids) Object.assign(this.events.get(id), { status: "sent", provider_message_id: providerId, sent_at: now }); }
-  async markEventsFailed(ids, code, retry) { for (const id of ids) Object.assign(this.events.get(id), { status: "failed", error_code: code, next_attempt_at: retry }); }
+  async markEventsSent(ids, providerId, now) { for (const id of ids) Object.assign(this.events.get(id), { status: "sent", provider_message_id: providerId, sent_at: now, claimed_at: null }); }
+  async markEventsFailed(ids, code, retry) { for (const id of ids) Object.assign(this.events.get(id), { status: "failed", error_code: code, next_attempt_at: retry, claimed_at: null }); }
   async suppressSubscriberByMessage(providerMessageId, reason, providerEventId, now) {
     this.providerEvents ||= new Set();
     if (this.providerEvents.has(providerEventId)) return false;
@@ -328,6 +335,31 @@ test("opportunity watches send the exact 30, 14, and 7 day reminders once", asyn
   );
 });
 
+test("opportunity watches detect a non-closing status transition", async () => {
+  const store = new MemoryStore();
+  const provider = new MockEmailProvider();
+  const person = await store.upsertSubscriber({
+    id: "status-person", email: "status@example.edu", manageToken: "m".repeat(43),
+    now: fixedNow.toISOString(),
+  });
+  store.subscriptions.set("status-watch", {
+    id: "status-watch", subscriber_id: person.id, type: "opportunity", active: 1,
+    verified_at: fixedNow.toISOString(), cadence: "immediate",
+    definition_json: JSON.stringify({ opportunity_id: "opp-1", triggers: ["status_changed"] }),
+    baseline_at: fixedNow.toISOString(), last_evaluated_at: null,
+  });
+  const state = assets({
+    events: [{
+      id: "status-1", type: "status_changed", changed_at: "2026-09-02T00:00:00Z",
+      opportunity_id: "opp-1", detail: "forecasted → posted", record: record({ status: "posted" }),
+    }],
+  });
+  await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
+  await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(provider.messages[0].subject, "Funding opportunity status changed");
+});
+
 test("saved-search creation baselines existing Strong matches and alerts once for a future qualifier", async () => {
   const store = new MemoryStore();
   const provider = new MockEmailProvider();
@@ -397,6 +429,34 @@ test("provider failure leaves a claimed event retryable", async () => {
   assert.equal(result.failedCount, 1);
   assert.equal(store.events.get("e").status, "failed");
   assert.equal(store.events.get("e").provider_message_id, undefined);
+});
+
+test("an expired sending claim is safely reclaimed with the original idempotency key", async () => {
+  const store = new MemoryStore();
+  const provider = new MockEmailProvider();
+  const person = await store.upsertSubscriber({
+    id: "lease-person", email: "lease@example.edu", manageToken: "m".repeat(43),
+    now: fixedNow.toISOString(),
+  });
+  store.subscriptions.set("lease-watch", {
+    id: "lease-watch", subscriber_id: person.id, type: "opportunity", active: 1,
+    verified_at: fixedNow.toISOString(), cadence: "immediate", definition_json: "{}",
+  });
+  await store.enqueueEvent({
+    id: "lease-event", subscriptionId: "lease-watch", eventKey: "lease-key",
+    eventKind: "amended", opportunityId: "opp-1", payload: { title: "Title" },
+    createdAt: fixedNow.toISOString(),
+  });
+  Object.assign(store.events.get("lease-event"), {
+    status: "sending",
+    attempts: 1,
+    claimed_at: new Date(fixedNow.getTime() - 16 * 60 * 1_000).toISOString(),
+  });
+  const result = await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(result.deliveredCount, 1);
+  assert.equal(store.events.get("lease-event").status, "sent");
+  assert.equal(store.events.get("lease-event").attempts, 2);
+  assert.equal(provider.messages[0].idempotencyKey, "lease-event");
 });
 
 test("the global provider cap queues overflow instead of dropping it", async () => {
@@ -537,12 +597,13 @@ test("authenticated duplicate Resend bounce webhooks suppress future delivery", 
 
 test("Phase 3 deployment and privacy contracts are committed without Phase 4 scope", async () => {
   const root = new URL("../../", import.meta.url);
-  const [page, awards, alerts, worker, migration, workflow, wrangler, evidence] = await Promise.all([
+  const [page, awards, alerts, worker, migration, leaseMigration, workflow, wrangler, evidence] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("assets/alerts.js", root), "utf8"),
     readFile(new URL("workers/alerts/src/index.js", root), "utf8"),
     readFile(new URL("workers/alerts/migrations/0001_phase3_alerts.sql", root), "utf8"),
+    readFile(new URL("workers/alerts/migrations/0002_delivery_claim_lease.sql", root), "utf8"),
     readFile(new URL(".github/workflows/deploy-alerts.yml", root), "utf8"),
     readFile(new URL("workers/alerts/wrangler.jsonc", root), "utf8"),
     readFile(new URL("evaluation/alerts_phase3.json", root), "utf8"),
@@ -553,7 +614,12 @@ test("Phase 3 deployment and privacy contracts are committed without Phase 4 sco
   assert.match(worker, /RESEND_WEBHOOK_SECRET/);
   assert.match(migration, /UNIQUE \(subscription_id, event_key\)/);
   assert.match(migration, /subscription_qualifications/);
+  assert.match(leaseMigration, /claimed_at/);
+  assert.match(leaseMigration, /WHERE status = 'sending'/);
   assert.match(workflow, /d1 migrations apply funding-finder-alerts --remote/);
+  assert.match(workflow, /assets\/search-query\.js/);
+  assert.match(workflow, /assets\/search-retrieval\.js/);
+  assert.match(workflow, /assets\/search-v2-config\.js/);
   assert.match(workflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)\s*\| last/);
   assert.doesNotMatch(workflow, /\.\[0\]\.versions/);
   assert.match(workflow, /wrangler@4\.125\.0 rollback/);
