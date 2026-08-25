@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import {
   addDepartmentResearcher,
+  mockAwards,
   mockHybrid,
   openFundingFinder,
   openTeamMatch,
@@ -95,4 +96,20 @@ test("Team Match has no serious or critical violations across picker, results, a
   await expect(fallback.locator("#team-hybrid-status")).toContainText(/local team-fit order.*temporarily limited/i, { timeout: 30_000 });
   await scan(fallback, "team-enhanced-fallback", testInfo);
   await fallback.close();
+});
+
+test("Funded Awards has no serious or critical violations and fits narrow mobile layouts", async ({ page }, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  mockAwards(page);
+  await page.goto("/funded_awards.html");
+  await expect(page.locator("#award-search-form")).toBeVisible();
+  await scan(page, "awards-initial-mobile", testInfo);
+  await page.locator("#award-query").fill("warm dense matter");
+  await page.locator("#award-institution").fill("University of Rochester");
+  await page.locator("#search-awards").click();
+  await expect(page.locator(".award-card").first()).toBeVisible();
+  await scan(page, "awards-results-mobile", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });

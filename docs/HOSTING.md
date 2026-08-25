@@ -12,6 +12,12 @@ Team Match is also a public, self-canonical product route and is intentionally
 indexable. Its metadata uses researcher/team language so it does not imply that
 the tool is limited to faculty records.
 
+Funded Awards is the third public, self-canonical route. It uses the same static
+application shell and current-opportunity catalog, while a bounded Cloudflare
+Worker normalizes public NSF Awards and NIH RePORTER responses. The Worker has
+no source credential or durable user/account history; only successful
+per-source responses enter its one-hour public cache.
+
 ## Architecture
 
 ```text
@@ -104,6 +110,10 @@ User-connected AI use is explicit and bounded:
 
 Neither hosted Potential matching nor user-connected AI sends the full catalog.
 Blank-query browsing, local Strong matching, and filters have no model cost.
+Funded Awards does not call an embedding or reranking provider. Standalone
+research-topic searches use the agencies' native title/abstract criteria, and
+current-opportunity links use exact source identifiers or committed NSF parent
+program groups.
 
 ## Public repository and site
 
@@ -158,6 +168,10 @@ Worker resolves network organization server-side for aggregate reporting.
 Cloudflare Web Analytics is loaded only on clean URLs. Funding Finder disables
 that route whenever query parameters are present, so managed search criteria
 are not included in analytics requests.
+
+Funded Awards search criteria and selected current-opportunity identifiers are
+also serialized into its URL. A browser-local default institution is applied
+only on that device and enters a shared URL when it is part of a search.
 
 The AI shortlist, chat, and any extracted uploaded-notice text exist only in
 page memory. The original uploaded PDF is not retained. Its bounded extracted
@@ -221,6 +235,12 @@ The last successful catalog remains available after a failure, and the page visi
 
 ## Deployment verification
 
+Award-service changes deploy only from a committed protected `main` revision.
+The dedicated workflow verifies the Worker contract, captures the prior Worker
+version, deploys, checks health, runs one exact NSF and NIH smoke, verifies the
+committed Funded Awards page on GitHub Pages, and restores the prior Worker when
+a post-deploy gate fails.
+
 Phase 1 through Phase 3 release verification covers:
 
 - observe one successful scheduled refresh;
@@ -275,7 +295,7 @@ they are not the only way to verify the browser workflow.
 
 ## Deliberate limitations
 
-Without a service layer, the application does not provide:
+Without an account and notification service layer, the application does not provide:
 
 - saved searches or watchlists across devices;
 - self-service personalized email subscriptions in the public application;

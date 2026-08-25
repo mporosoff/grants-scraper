@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "phase": 2,
+  "title": "Funded Awards product + Funding Finder integration",
+  "generated_at": "2026-08-25T00:07:32.668Z",
+  "roadmap": {
+    "file": "FUNDING_FINDER_FUNDED_AWARDS_AND_ALERTS_PLAN.md",
+    "sha256": "7077c8a144c2be9be4d58a42c12364523d5e19b36f8a8f8d0d9e6eb9be475eec"
+  },
+  "authoritative_base": {
+    "package_version": "1.3.0",
+    "main_sha": "2f2aa714577441362626c6a6a41edd55fc105abb",
+    "phase1_decision": "PHASE 1 PASSED — NSF/NIH AWARD DATA NORMALIZED AND VERIFIED"
+  },
+  "scope": {
+    "implemented": [
+      "third top-level Funded Awards surface",
+      "standalone NSF and NIH source-native title and abstract search",
+      "institution, agency, year, principal-investigator, and program-officer controls",
+      "source-separated status, results, errors, provenance, and pagination",
+      "institutional result summaries",
+      "URL, browser-history, and shareable state",
+      "exact NIH opportunity-number funded-award lookup from Funding Finder",
+      "exact or explicitly reviewed NSF program-element funded-award lookup from Funding Finder",
+      "new-tab View funded awards links for eligible Funding Finder results",
+      "post-merge protected Award API deployment and smoke workflow"
+    ],
+    "explicitly_not_implemented": [
+      "watchlists or alerts",
+      "DOE award integration",
+      "award semantic vectors or a new award corpus",
+      "cross-source award ranking",
+      "optional analytics",
+      "Funding Finder ranking or opportunity-vector changes"
+    ],
+    "ranking_files_changed": []
+  },
+  "architecture_reuse": {
+    "application_shell": "shared brand, application, and site-navigation styles plus the existing static-page architecture",
+    "current_opportunity_data": "existing data/opportunities.js catalog and opportunity_id selection",
+    "current_result_rendering": "existing Funding Finder card renderer receives one eligibility-gated link",
+    "state_and_history": "URLSearchParams, history.pushState/replaceState, popstate, and localStorage patterns",
+    "query_boundary": "Phase 1 Award API Worker and normalized NSF/NIH adapter contract",
+    "loading_and_errors": "per-source status and isolated failure rendering preserve usable sources",
+    "provenance": "Phase 1 field-level source labels, official award URLs, and official contact fallback",
+    "accessibility": "existing skip-link, live-region, keyboard, responsive, reduced-motion, forced-colors, and axe gates",
+    "testing_and_delivery": "existing node contracts, Playwright product/accessibility suite, protected pull request, and GitHub Actions patterns"
+  },
+  "retrieval_contract": {
+    "standalone_topic_search": {
+      "method": "Phase 1 source-native NSF keyword and NIH RePORTER text search",
+      "result_order": "native order retained within each source",
+      "cross_source_reranking": false,
+      "opportunity_vectors_used": false,
+      "new_award_vector_corpus_built": false
+    },
+    "current_opportunity_lookup": {
+      "NIH": "exact Funding Opportunity Announcement number",
+      "NSF": "exact program-element code derived from a PD identifier, or an explicitly reviewed parent/predecessor program-element group",
+      "fuzzy_mapping": false,
+      "unmapped_records_eligible": false
+    }
+  },
+  "review_remediation": {
+    "pagination_controls": "Previous and Next are disabled during requests, then restored from the rendered payload's normalized offset and explicit per-source has_more state.",
+    "nih_project_pagination": "The public offset is expressed in normalized core_project_num projects. The NIH adapter scans raw annual RePORTER pages internally until it can slice the requested normalized project page and establish a one-project lookahead.",
+    "institution_only_history": "An institution URL criterion now triggers the same initial and popstate search path as topic, PI, program-officer, and selected-opportunity criteria.",
+    "worker_rollback_selection": "The deployment workflow orders deployment records by created_on and id, selects the newest record with active traffic, and only then selects its active version; deployment-list array order is ignored.",
+    "adapter_versions": {"NSF": "1.1.0", "NIH": "1.1.0"}
+  },
+  "reviewed_nsf_parent_mappings": [
+    {
+      "opportunity_id": "362061",
+      "opportunity_number": "PD-26-367Y",
+      "program": "Chemical Process Systems (CPS)",
+      "program_element_codes": ["367Y00", "140100", "764400", "141700", "140300"],
+      "basis": "current exact NSF program element plus reviewed historical CPS parent/predecessor program elements"
+    },
+    {
+      "opportunity_id": "362062",
+      "opportunity_number": "PD-26-369Y",
+      "program": "Engineering Biological and Biomedical Systems (EBBS)",
+      "program_element_codes": ["369Y00", "723600", "149100", "534200", "534500"],
+      "basis": "current exact NSF program element plus reviewed historical EBBS parent/predecessor program elements"
+    },
+    {
+      "opportunity_id": "nsf-cbet:PD-26-370Y",
+      "opportunity_number": "PD-26-370Y",
+      "program": "Energy, Water, and Resource Engineering (EWRE)",
+      "program_element_codes": ["370Y00", "764300", "117900"],
+      "basis": "current exact NSF program element plus reviewed historical EWRE parent/predecessor program elements"
+    },
+    {
+      "opportunity_id": "362063",
+      "opportunity_number": "PD-26-366Y",
+      "program": "Transport Phenomena (TP)",
+      "program_element_codes": ["366Y00", "140700", "144300", "141500", "140600"],
+      "basis": "current exact NSF program element plus reviewed historical Transport Phenomena parent/predecessor program elements"
+    },
+    {
+      "opportunity_id": "363616",
+      "opportunity_number": "26-518",
+      "program": "Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)",
+      "program_element_codes": ["366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400", "141700", "140300", "723600", "149100", "534200", "534500", "764300", "117900", "140700", "144300", "141500", "140600"],
+      "basis": "the four current CBET elements plus the 14 program descriptions explicitly replaced by NSF 26-518, grouped by official NSF program names"
+    }
+  ],
+  "nsf_mapping_verification": {
+    "checked_at": "2026-08-24T23:38:00.000Z",
+    "official_current_program_pages": "The NSF CPS, EBBS, EWRE, TP, and CBET pages expose award searches for program elements 367Y00, 369Y00, 370Y00, 366Y00, and their four-code union.",
+    "official_solicitation": "NSF 26-518 explicitly replaces 14 prior CBET program descriptions.",
+    "legacy_program_elements": {
+      "CPS": {"140100": "Catalysis", "764400": "Electrochemical Systems", "141700": "Interfacial Engineering", "140300": "Process Systems, Reaction Engineering and Molecular Thermodynamics"},
+      "EBBS": {"723600": "Biophotonics", "149100": "Cellular and Biochemical Engineering", "534200": "Disability and Rehabilitation Engineering", "534500": "Engineering of Biomedical Systems"},
+      "EWRE": {"764300": "Environmental Sustainability", "117900": "Nanoscale Interactions"},
+      "TP": {"140700": "Combustion and Fire Systems", "144300": "Fluid Dynamics", "141500": "Particulate and Multiphase Processes", "140600": "Thermal Transport Processes"}
+    },
+    "verification_method": "official NSF funding pages and bounded NSF Awards API exact program-element lookups",
+    "combined_cbet_live_check": {"source_total_count": 10000, "count_is_source_capped": true, "records_requested": 5, "records_returned": 5},
+    "fuzzy_title_matching_used": false
+  },
+  "bounded_search_quality_check": {
+    "checked_at": "2026-08-24T23:10:57.007Z",
+    "method": "four representative scientific phrases sent through the Phase 1 source-native adapters; at most five normalized results inspected per source and query; no tuning performed",
+    "queries": [
+      {
+        "query": "warm dense matter",
+        "NSF": {"source_total_count": 27, "inspected": 5, "observation": "all inspected awards were directly relevant"},
+        "NIH": {"source_total_count": 0, "inspected": 0, "observation": "no results; expected source-domain specificity"}
+      },
+      {
+        "query": "mitral valve prolapse",
+        "NSF": {"source_total_count": 0, "inspected": 0, "observation": "no results; expected source-domain specificity"},
+        "NIH": {"source_total_count": 192, "raw_records_inspected": 50, "inspected": 5, "observation": "all inspected projects were strongly relevant"}
+      },
+      {
+        "query": "CO2 hydrogenation methanol catalyst",
+        "NSF": {"source_total_count": 10, "inspected": 5, "observation": "all inspected awards were strongly relevant"},
+        "NIH": {"source_total_count": 0, "inspected": 0, "observation": "no results; expected source-domain specificity"}
+      },
+      {
+        "query": "single cell RNA sequencing glioblastoma",
+        "NSF": {"source_total_count": 0, "inspected": 0, "observation": "no results; expected source-domain specificity"},
+        "NIH": {"source_total_count": 156, "raw_records_inspected": 50, "inspected": 5, "observation": "top projects were glioblastoma-relevant, but their displayed title/abstract snippets did not consistently evidence every query concept"}
+      }
+    ],
+    "conclusion": "Source-native search is adequate for a Phase 2 standalone product when users choose source-appropriate, reasonably precise scientific phrases.",
+    "material_weaknesses": [
+      "NIH native ordering can broaden multi-concept searches toward the disease area without making every query-concept match visible in the first displayed records.",
+      "NSF and NIH relevance scores are not exposed or comparable, so the product keeps source sections and does not imply a global cross-source rank.",
+      "Zero results from the other agency can reflect legitimate source-domain specificity rather than a retrieval failure."
+    ],
+    "ranking_or_vector_followup_performed": false
+  },
+  "validation": {
+    "phase1_boundary_contract_tests": {"passed": 8, "failed": 0},
+    "focused_phase2_contract_tests": {"passed": 6, "failed": 0},
+    "focused_navigation_contract_tests": {"passed": 3, "failed": 0},
+    "full_browser_and_worker_contract_tests": {"passed": 255, "failed": 0},
+    "full_real_browser_product_and_accessibility_tests": {"passed": 18, "failed": 0},
+    "affected_funded_awards_browser_tests": {"passed": 6, "failed": 0},
+    "focused_accessibility_tests": {"passed": 3, "failed": 0},
+    "focused_mobile_widths_px": [390, 320],
+    "focused_serious_accessibility_violations": 0,
+    "normal_live_product_python_tests": {"passed": 772, "failed": 0},
+    "frozen_artifact_no_drift_check": {"passed": 22, "failed": 0},
+    "closed_search_or_vector_evaluations_rerun_locally": false,
+    "protected_pull_request_checks": "pending pull-request run"
+  },
+  "gate": {
+    "third_top_level_surface_present": true,
+    "standalone_native_search_usable": true,
+    "eligible_funding_finder_links_open_new_tab": true,
+    "deep_links_preserve_current_opportunity": true,
+    "nih_lookup_uses_exact_opportunity_identifier": true,
+    "nsf_lookup_uses_exact_or_reviewed_parent_identifier": true,
+    "unmapped_opportunities_do_not_guess": true,
+    "title_and_abstract_are_primary": true,
+    "official_sources_and_contact_provenance_preserved": true,
+    "url_history_and_share_state_work": true,
+    "source_failures_remain_isolated": true,
+    "mobile_and_accessibility_gate_passed": true,
+    "funding_finder_ranking_unchanged": true,
+    "alerts_doe_analytics_and_award_vectors_absent": true
+  },
+  "known_limitations": [
+    "Eligibility is intentionally conservative: an NSF solicitation without an exact or reviewed program-element mapping does not receive a funded-awards link.",
+    "The reviewed CPS and translational-program groups include explicit historical parent/predecessor program elements because newly assigned 2026 program elements do not yet provide meaningful award history.",
+    "Each source returns at most 25 normalized records per page; NIH broad searches scan at most 12 RePORTER pages to establish the requested normalized-project page and do not speculate that a further page exists when that bounded scan cannot establish a lookahead.",
+    "The standalone product reports source-native order and does not claim comparable relevance between NSF and NIH.",
+    "The public Award API deployment is intentionally deferred to the protected post-merge workflow; the pull request must stop before merge for review."
+  ],
+  "rollback": {
+    "product": "Revert funded_awards.html and its dedicated assets; the existing Funding Finder and Team Match pages remain independent.",
+    "integration": "Revert assets/award-links.js and the small assets/app.js link renderer addition; current opportunity ranking and rendering remain otherwise unchanged.",
+    "worker": "Set AWARD_API_ENABLED=false or roll back the Worker version captured by the protected deployment workflow."
+  },
+  "decision": "PHASE 2 PASSED — FUNDED AWARDS IS USABLE AND INTEGRATED"
+}

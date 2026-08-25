@@ -31,14 +31,17 @@ health response. It does not import or modify the Funding Finder ranking code.
 Criteria may use `award_id` (NSF), `core_project_number` (NIH),
 `opportunity_number` (NIH), `program`, `topic`, `institution_id` or
 `institution`, `pi`, `program_officer`, and a bounded year range. NSF program
-codes are six-digit program element codes. NIH program identifiers are activity
-codes such as `R01`.
+codes are six-character program element codes. A reviewed NSF parent mapping
+may use `program_codes` with at most 24 exact program element codes. NIH program
+identifiers are activity codes such as `R01`.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other source.
 NIH annual applications are grouped by `core_project_num`; their original
 application IDs, project numbers, fiscal years, amounts, and official links are
-retained in `annual_support`.
+retained in `annual_support`. The public `offset` advances through those
+normalized core projects. RePORTER annual-record offsets are scanned internally
+until the requested project page and one-project lookahead are available.
 
 ## Contact policy
 
@@ -54,5 +57,15 @@ Failures are never cached, and a cache failure falls through to the official
 source without coupling NSF and NIH availability. Both APIs are public; this
 Worker has no API-key or secret binding.
 
-The Phase 1 Worker is committed but is not linked from the public product. The
-Funded Awards page and its deployment integration belong to Phase 2.
+Phase 2 links this boundary from the Funded Awards product. Current NIH
+opportunities use exact FOA numbers. Eligible NSF opportunities use an exact
+program element code or a committed, reviewed parent-program code set; the
+browser does not silently substitute a fuzzy title match.
+
+## Deployment
+
+The protected-main `Deploy Funded Awards service` workflow validates the award
+contracts, deploys this Worker, waits for its public health contract, runs one
+exact NSF and one exact NIH smoke, and then verifies that GitHub Pages serves
+the same committed Funded Awards page. If a prior Worker exists, a failed
+health, source, or Pages check automatically restores that version.

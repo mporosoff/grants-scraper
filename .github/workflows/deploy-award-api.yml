@@ -1,0 +1,150 @@
+name: Deploy Funded Awards service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-award-api.yml"
+      - "assets/award-api-config.js"
+      - "assets/award-links.js"
+      - "assets/funded-awards-core.js"
+      - "assets/funded-awards.css"
+      - "assets/funded-awards.js"
+      - "funded_awards.html"
+      - "tools/smoke_award_worker.mjs"
+      - "workers/award-api/**"
+permissions:
+  contents: read
+
+concurrency:
+  group: funding-finder-award-api-release
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Verify the bounded award contracts
+        run: >-
+          node --check assets/award-links.js &&
+          node --check assets/funded-awards-core.js &&
+          node --check assets/funded-awards.js &&
+          node --check workers/award-api/src/index.js &&
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs
+      - name: Capture and verify the protected main release base
+        id: release-base
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          built_from_sha="$(git rev-parse HEAD)"
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ]; then
+            echo "::error::Protected main could not be resolved."
+            exit 1
+          fi
+          if [ "$built_from_sha" != "$current_main_sha" ]; then
+            echo "::error::Main changed while the Funded Awards release was being verified."
+            exit 1
+          fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Capture the active Award Worker version for rollback
+        id: prior-worker
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/award-api/wrangler.jsonc --json 2>/dev/null || true)"
+          prior_version="$(jq -r '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | if . == null then empty
+              else .versions as $versions
+              | (($versions | map(select((.percentage // 0) == 100)) | first)
+                // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+              | .version_id // empty
+              end
+          ' <<<"$deployments" 2>/dev/null || true)"
+          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+          if [ -n "$prior_version" ]; then
+            echo "Prior Award Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No prior Award Worker deployment was found; this is a first deployment." >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Deploy the committed Award Worker
+        id: worker-deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 deploy --config workers/award-api/wrangler.jsonc
+      - name: Wait for the Award Worker health contract
+        id: worker-health
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            health="$(curl --fail --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-award-api.urochestercheme.workers.dev/health' || true)"
+            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
+              && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
+              && test "$(jq -r '.credentials_required // empty' <<<"$health" 2>/dev/null)" = "false"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::The Award Worker health contract did not become available."
+          exit 1
+      - name: Run bounded exact-source smokes
+        id: worker-smoke
+        run: node tools/smoke_award_worker.mjs
+      - name: Verify Pages serves the committed Funded Awards page
+        id: pages-verify
+        shell: bash
+        run: |
+          candidate_hash="$(sha256sum funded_awards.html | awk '{print $1}')"
+          verified=false
+          for attempt in $(seq 1 18); do
+            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/funded_awards.html?deploy=${GITHUB_SHA}" -o /tmp/funded_awards.html || true
+            live_hash="$(sha256sum /tmp/funded_awards.html 2>/dev/null | awk '{print $1}')"
+            if [ "$live_hash" = "$candidate_hash" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the committed Funded Awards page within the verification window."
+            exit 1
+          fi
+      - name: Restore the prior Award Worker after a failed release smoke
+        if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          npx --yes wrangler@4.125.0 rollback
+          "${{ steps.prior-worker.outputs.version_id }}"
+          --config workers/award-api/wrangler.jsonc
+          --message "Automatic rollback after Funded Awards release failure"
+      - name: Refuse a release if protected main advanced
+        if: ${{ steps.worker-smoke.outcome == 'success' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            if [ -n "${{ steps.prior-worker.outputs.version_id }}" ]; then
+              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/award-api/wrangler.jsonc --message "Automatic rollback because main advanced"
+            fi
+            echo "::error::Protected main advanced during the Funded Awards release."
+            exit 1
+          fi

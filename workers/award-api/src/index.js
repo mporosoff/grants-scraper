@@ -15,6 +15,7 @@ const SEARCH_FIELDS = [
   "core_project_number",
   "opportunity_number",
   "program",
+  "program_codes",
   "topic",
   "institution_id",
   "institution",
@@ -123,6 +124,13 @@ function validateCriteria(value) {
   };
   for (const field of SEARCH_FIELDS) {
     if (!(field in value)) continue;
+    if (field === "program_codes") {
+      if (!Array.isArray(value[field]) || value[field].length < 1 || value[field].length > 24) return null;
+      const codes = value[field].map(code => normalizedString(code, 12)?.toUpperCase());
+      if (codes.some(code => !code || !/^[A-Z0-9]+$/.test(code))) return null;
+      criteria[field] = [...new Set(codes)];
+      continue;
+    }
     const text = normalizedString(value[field], limits[field]);
     if (!text) return null;
     criteria[field] = ["core_project_number", "opportunity_number"].includes(field)
@@ -136,6 +144,7 @@ function validateCriteria(value) {
     criteria[field] = year;
   }
   if (!SEARCH_FIELDS.some(field => field in criteria)) return null;
+  if (criteria.program && criteria.program_codes) return null;
   if (criteria.institution && criteria.institution_id) return null;
   if (criteria.year_start && criteria.year_end) {
     if (criteria.year_end < criteria.year_start || criteria.year_end - criteria.year_start + 1 > MAX_YEAR_SPAN) {
@@ -229,6 +238,7 @@ function sourceSummary(payload) {
     cache: payload.cache,
     total_count: payload.total_count,
     raw_record_count: payload.raw_record_count,
+    has_more: payload.has_more === true,
     result_count: payload.results.length,
     retrieved_at: payload.retrieved_at,
   };

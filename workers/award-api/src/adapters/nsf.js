@@ -10,7 +10,7 @@ import {
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NSF_ADAPTER_VERSION = "1.0.0";
+export const NSF_ADAPTER_VERSION = "1.1.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
 
 function quoted(value) {
@@ -88,8 +88,10 @@ export function buildNsfRequest(criteria, { limit, offset }) {
     return { url, options: { headers: { Accept: "application/json" } } };
   }
   const params = new URLSearchParams({ rpp: String(limit), offset: String(offset) });
-  if (criteria.program) {
-    if (/^\d{6}$/.test(criteria.program)) params.set("ProgEleCode", criteria.program);
+  if (criteria.program_codes) {
+    params.set("ProgEleCode", criteria.program_codes.join(","));
+  } else if (criteria.program) {
+    if (/^[A-Z0-9]{6}$/i.test(criteria.program)) params.set("ProgEleCode", criteria.program);
     else params.set("fundProgramName", quoted(criteria.program));
   }
   if (criteria.topic) params.set("keyword", allTerms(criteria.topic));
@@ -168,12 +170,14 @@ export async function searchNsf(fetchImpl, criteria, options) {
   if (criteria._institution) {
     awards = awards.filter(award => recordMatchesInstitution(award, criteria._institution, "NSF"));
   }
+  const totalCount = finiteNumber(response.metadata?.totalCount) ?? rawAwards.length;
   return {
     source: "NSF",
     adapter_version: NSF_ADAPTER_VERSION,
     results: awards.slice(0, options.limit),
-    total_count: finiteNumber(response.metadata?.totalCount) ?? rawAwards.length,
+    total_count: totalCount,
     raw_record_count: rawAwards.length,
+    has_more: !criteria.award_id && totalCount > options.offset + rawAwards.length,
     retrieved_at: retrievedAt,
   };
 }

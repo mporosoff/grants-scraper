@@ -33,6 +33,7 @@
   const CHAT_UI = globalThis.FUNDING_CHAT_UI;
   const RESULT_WORKFLOW_API = globalThis.FUNDING_RESULT_WORKFLOW;
   const SAVED_API = globalThis.FUNDING_SAVED;
+  const AWARD_LINKS_API = globalThis.FUNDING_AWARD_LINKS;
   const INITIAL_URL_PARAMS = new URLSearchParams(location.search);
   const EVALUATION_MODE = INITIAL_URL_PARAMS.get("evaluation") === "1";
   let pendingLinkedOpportunityId = INITIAL_URL_PARAMS.get("focus") || "";
@@ -2560,6 +2561,7 @@
       : record.status === "archived"
         ? "Archived"
         : "Forecasted";
+    const fundedAwardsHref = AWARD_LINKS_API?.fundedAwardsHref?.(record) || "";
 
     return `<article class="result-card${assessment ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -2614,6 +2616,7 @@
       </details>
       <div class="card-actions">
         ${actions.html}
+        ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>

@@ -2,27 +2,32 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const [mainPage, teamPage, navigationScript, helpScript, navigationStyles] = await Promise.all([
+const [mainPage, teamPage, awardsPage, navigationScript, helpScript, navigationStyles] = await Promise.all([
   readFile(new URL("../../match_explorer.html", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
+  readFile(new URL("../../funded_awards.html", import.meta.url), "utf8"),
   readFile(new URL("../../assets/site-nav.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/site-help.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/site-nav.css", import.meta.url), "utf8"),
 ]);
 
-test("links the public and team matchers through shared navigation", () => {
-  for (const page of [mainPage, teamPage]) {
+test("links all three researcher surfaces through shared navigation", () => {
+  for (const page of [mainPage, teamPage, awardsPage]) {
     assert.match(page, /id="primary-navigation"/);
     assert.match(page, /href="\.\/match_explorer\.html"/);
     assert.match(page, /href="\.\/team_match\.html"/);
+    assert.match(page, /href="\.\/funded_awards\.html"/);
     assert.match(page, /data-nav-toggle/);
-    assert.match(page, /data-help-open/);
     assert.match(page, /assets\/site-nav\.css/);
     assert.match(page, /assets\/site-nav\.js/);
+  }
+  for (const page of [mainPage, teamPage]) {
+    assert.match(page, /data-help-open/);
     assert.match(page, /assets\/site-help\.js/);
   }
   assert.match(mainPage, /href="\.\/match_explorer\.html" aria-current="page"/);
   assert.match(teamPage, /href="\.\/team_match\.html" aria-current="page"/);
+  assert.match(awardsPage, /href="\.\/funded_awards\.html" aria-current="page"/);
 });
 
 test("mobile navigation is accessible and safely dismissible", () => {
@@ -39,6 +44,7 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.doesNotMatch(navigationStyles, /a\[aria-current=["']page["']\]::after/);
   assert.match(mainPage, /aria-current="page"/);
   assert.match(teamPage, /aria-current="page"/);
+  assert.match(awardsPage, /aria-current="page"/);
 });
 
 test("shared Help explains the full workflow and optional provider keys", () => {

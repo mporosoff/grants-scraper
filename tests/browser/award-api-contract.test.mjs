@@ -9,6 +9,7 @@ import {
 import {
   buildNihRequest,
   normalizeNihProject,
+  searchNih,
 } from "../../workers/award-api/src/adapters/nih.js";
 import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
 import {
@@ -51,7 +52,27 @@ function fixtureFetch({ failNih = false, failNsf = false, calls = [] } = {}) {
       return new Response(JSON.stringify(nsfFixture), { headers: { "Content-Type": "application/json" } });
     }
     if (failNih) return new Response("unavailable", { status: 503 });
-    return new Response(JSON.stringify(nihFixture), { headers: { "Content-Type": "application/json" } });
+    const body = JSON.parse(options.body || "{}");
+    const results = body.offset > 0 ? [] : nihFixture.results;
+    return new Response(JSON.stringify({
+      ...nihFixture,
+      meta: { ...nihFixture.meta, offset: body.offset || 0, total: nihFixture.results.length },
+      results,
+    }), { headers: { "Content-Type": "application/json" } });
+  };
+}
+
+function nihProjectRecord(core, projectStart, index) {
+  const base = nihFixture.results[0];
+  const applicationId = 20_000_000 + index;
+  return {
+    ...base,
+    appl_id: applicationId,
+    core_project_num: core,
+    project_num: `${core}-${index}`,
+    project_start_date: projectStart,
+    fiscal_year: 2020 + index % 7,
+    project_detail_url: `https://reporter.nih.gov/project-details/${applicationId}`,
   };
 }
 
@@ -90,6 +111,13 @@ test("Phase 1 uses the v1.3.0 runtime and source-specific exact query contracts"
   assert.equal(nsfUrl.searchParams.get("dateEnd"), "12/31/2026");
   const nsfTopic = buildNsfRequest({ topic: "warm dense matter" }, { limit: 5, offset: 0 });
   assert.equal(new URL(nsfTopic.url).searchParams.get("keyword"), "warm AND dense AND matter");
+  const nsfParent = buildNsfRequest({
+    program_codes: ["367Y00", "140100", "764400", "141700", "140300"],
+  }, { limit: 5, offset: 0 });
+  assert.equal(
+    new URL(nsfParent.url).searchParams.get("ProgEleCode"),
+    "367Y00,140100,764400,141700,140300",
+  );
 
   const nih = buildNihRequest({
     core_project_number: "K12GM106997",
@@ -174,6 +202,53 @@ test("NIH normalization groups annual applications under the core project withou
   assert.deepEqual(Object.keys(award), Object.keys(nsfAward), "both sources expose one normalized contract");
 });
 
+test("NIH pagination advances through normalized core projects instead of annual records", async () => {
+  const starts = {
+    R01AA000001: "2026-01-01",
+    R01BB000002: "2025-01-01",
+    R01CC000003: "2024-01-01",
+    R01DD000004: "2023-01-01",
+    R01EE000005: "2022-01-01",
+    R01FF000006: "2021-01-01",
+  };
+  const firstFour = Object.keys(starts).slice(0, 4);
+  const rawRecords = Array.from({ length: 100 }, (_, index) => {
+    const core = firstFour[index % firstFour.length];
+    return nihProjectRecord(core, starts[core], index);
+  });
+  rawRecords.push(
+    nihProjectRecord("R01DD000004", starts.R01DD000004, 100),
+    nihProjectRecord("R01EE000005", starts.R01EE000005, 101),
+    nihProjectRecord("R01EE000005", starts.R01EE000005, 102),
+    nihProjectRecord("R01FF000006", starts.R01FF000006, 103),
+    nihProjectRecord("R01FF000006", starts.R01FF000006, 104),
+  );
+  const offsets = [];
+  const fetchImpl = async (_url, options) => {
+    const body = JSON.parse(options.body);
+    offsets.push(body.offset);
+    return new Response(JSON.stringify({
+      meta: { total: rawRecords.length, offset: body.offset },
+      results: rawRecords.slice(body.offset, body.offset + body.limit),
+    }), { headers: { "Content-Type": "application/json" } });
+  };
+  const criteria = { topic: "cell signaling" };
+  const first = await searchNih(fetchImpl, criteria, { limit: 2, offset: 0, now: fixedNow });
+  const second = await searchNih(fetchImpl, criteria, { limit: 2, offset: 2, now: fixedNow });
+  const third = await searchNih(fetchImpl, criteria, { limit: 2, offset: 4, now: fixedNow });
+
+  assert.deepEqual(first.results.map(award => award.award_id), ["R01AA000001", "R01BB000002"]);
+  assert.deepEqual(second.results.map(award => award.award_id), ["R01CC000003", "R01DD000004"]);
+  assert.deepEqual(third.results.map(award => award.award_id), ["R01EE000005", "R01FF000006"]);
+  assert.equal(new Set([...first.results, ...second.results, ...third.results].map(award => award.award_id)).size, 6);
+  assert.equal(second.results[1].annual_support.length, 26, "a core project crossing raw pages remains one project");
+  assert.equal(first.has_more, true);
+  assert.equal(second.has_more, true);
+  assert.equal(third.has_more, false);
+  assert.equal(third.total_count, 6);
+  assert.deepEqual(offsets, [0, 0, 100, 0, 100]);
+});
+
 test("Worker validates bounded public requests and exposes no credential requirement", async () => {
   const handler = createHandler({ fetchImpl: fixtureFetch(), now: fixedNow });
   const health = await handler(workerRequest(null, { path: "/health", method: "GET" }), env);
@@ -193,6 +268,14 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"])), env)).status, 400);
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), limit: 26 }), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
+  const cbetCodes = [
+    "366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400",
+    "141700", "140300", "723600", "149100", "534200", "534500",
+    "764300", "117900", "140700", "144300", "141500", "140600",
+  ];
+  assert.equal((await handler(workerRequest(query({ program_codes: cbetCodes }, ["NSF"])), env)).status, 200);
+  const tooManyCodes = Array.from({ length: 25 }, (_, index) => String(index + 1).padStart(6, "0"));
+  assert.equal((await handler(workerRequest(query({ program_codes: tooManyCodes }, ["NSF"])), env)).status, 400);
   const tooLarge = workerRequest(query({ topic: "x".repeat(MAX_REQUEST_BYTES) }));
   assert.equal((await handler(tooLarge, env)).status, 413);
 });

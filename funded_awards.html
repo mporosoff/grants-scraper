@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Search public NSF and NIH funded-project titles, abstracts, investigators, institutions, programs, and official award records.">
+  <meta name="theme-color" content="#001e5f">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://funding-finder-award-api.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'">
+  <title>Funded Awards | Funding Finder</title>
+  <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/funded_awards.html">
+  <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260815">
+  <link rel="stylesheet" href="./assets/brand.css?v=20260812">
+  <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=funded-awards-phase2">
+  <link rel="stylesheet" href="./assets/funded-awards.css?v=funded-awards-phase2">
+</head>
+<body>
+  <a class="skip-link" href="#award-results">Skip to award results</a>
+
+  <header class="site-header">
+    <a class="brand" href="./match_explorer.html" aria-label="Funding Finder home">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span>
+        <strong>Funding Finder</strong>
+        <small>Search current and funded research</small>
+      </span>
+    </a>
+    <div class="header-actions">
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="./match_explorer.html">Funding Finder</a>
+        <a href="./team_match.html">Team Match</a>
+        <a href="./funded_awards.html" aria-current="page">Funded Awards</a>
+      </nav>
+      <span class="header-context-pill">NSF + NIH awards</span>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="awards-main">
+    <section class="awards-hero" aria-labelledby="page-title">
+      <p class="eyebrow">Historical award intelligence</p>
+      <h1 id="page-title">See what NSF and NIH have funded</h1>
+      <p>Search public project titles and abstracts, or arrive from a current Funding Finder opportunity for an exact program lookup. Results remain source records, not predictions of future fit.</p>
+    </section>
+
+    <section class="selected-opportunity hidden" id="selected-opportunity" aria-labelledby="selected-opportunity-heading">
+      <div>
+        <p class="eyebrow">Selected funding opportunity</p>
+        <h2 id="selected-opportunity-heading"></h2>
+        <p id="selected-opportunity-meta"></p>
+        <p class="mapping-note" id="selected-mapping-note"></p>
+      </div>
+      <div class="selected-actions">
+        <a class="button secondary" id="open-current-opportunity" target="_blank" rel="noopener">Open current opportunity ↗</a>
+        <button class="text-button" id="clear-opportunity" type="button">Clear selection</button>
+      </div>
+    </section>
+
+    <form class="award-search-panel" id="award-search-form" role="search">
+      <div class="award-search-primary standalone-search-fields">
+        <label class="award-field award-query-field" for="award-query">
+          <span>Program or research topic</span>
+          <input id="award-query" name="q" type="search" autocomplete="off" maxlength="500" placeholder="Example: CO2 hydrogenation methanol catalyst">
+        </label>
+        <label class="award-field" for="search-mode">
+          <span>Search as</span>
+          <select id="search-mode" name="mode">
+            <option value="topic">Research topic</option>
+            <option value="program">Program identifier or NSF program name</option>
+          </select>
+        </label>
+        <label class="award-field" for="award-agency">
+          <span>Agency</span>
+          <select id="award-agency" name="agency">
+            <option value="all">NSF + NIH</option>
+            <option value="NSF">NSF</option>
+            <option value="NIH">NIH</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="award-filter-grid">
+        <label class="award-field institution-field" for="award-institution">
+          <span>Institution</span>
+          <input id="award-institution" name="institution" type="text" autocomplete="organization" maxlength="300" list="known-institutions" placeholder="Any institution">
+          <datalist id="known-institutions"><option value="University of Rochester"></option></datalist>
+        </label>
+        <label class="award-field" for="year-start">
+          <span>From year</span>
+          <input id="year-start" name="year_start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="1989">
+        </label>
+        <label class="award-field" for="year-end">
+          <span>Through year</span>
+          <input id="year-end" name="year_end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2026">
+        </label>
+      </div>
+
+      <label class="remember-institution" for="remember-institution">
+        <input id="remember-institution" type="checkbox">
+        Use this as my default institution on this device
+      </label>
+
+      <details class="advanced-award-fields">
+        <summary>Advanced: investigator or program officer</summary>
+        <div class="award-filter-grid two-columns">
+          <label class="award-field" for="award-pi">
+            <span>Principal investigator</span>
+            <input id="award-pi" name="pi" type="text" autocomplete="off" maxlength="160" placeholder="Full or partial name">
+          </label>
+          <label class="award-field" for="award-program-officer">
+            <span>Program officer</span>
+            <input id="award-program-officer" name="program_officer" type="text" autocomplete="off" maxlength="160" placeholder="Full or partial name">
+          </label>
+        </div>
+      </details>
+
+      <div class="award-form-actions">
+        <button class="button primary" id="search-awards" type="submit">Search funded awards</button>
+        <button class="button secondary" id="clear-award-search" type="button">Clear search</button>
+      </div>
+      <p class="award-search-help">Standalone topic searches use each source's native title-and-abstract search. For program search, use an NSF PD/program-element identifier or program name, or an NIH FOA/activity code. Selected opportunities use exact source identifiers or reviewed NSF parent mappings—never the opportunity-vector corpus.</p>
+    </form>
+
+    <section class="award-output" id="award-results" aria-labelledby="award-results-heading" aria-busy="false" tabindex="-1">
+      <div class="award-output-heading">
+        <div>
+          <p class="eyebrow">Public award records</p>
+          <h2 id="award-results-heading" tabindex="-1">Funded projects</h2>
+        </div>
+        <p class="award-status" id="award-status" role="status" aria-live="polite">Choose a topic, program, or eligible current opportunity to begin.</p>
+      </div>
+
+      <ul class="source-status-list hidden" id="award-source-status" aria-label="Award source status"></ul>
+      <section class="institution-summary hidden" id="institution-summary" aria-labelledby="institution-summary-heading"></section>
+      <section class="program-summary hidden" id="program-summary" aria-label="Award result summary"></section>
+      <div class="award-result-list" id="award-result-list"></div>
+      <nav class="award-pagination hidden" id="award-pagination" aria-label="Award result pages">
+        <button class="button secondary" id="award-previous" type="button">← Previous</button>
+        <span id="award-page-label" aria-live="polite"></span>
+        <button class="button secondary" id="award-next" type="button">Next →</button>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="awards-footer">
+    <p><strong>Source notice:</strong> Award information comes from public NSF Award Search and NIH RePORTER records. Missing values are shown as not listed; contact details are never inferred.</p>
+    <p>Funding Finder is not an official source of record. Verify material details on the linked official award page.</p>
+    <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. All rights reserved. Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author.</p>
+  </footer>
+
+  <noscript><div class="notice error">JavaScript is required to search funded awards.</div></noscript>
+  <script src="./assets/app-config.js?v=app-1.3.0"></script>
+  <script src="./data/opportunities.js?v=catalog-20260824T192653Z"></script>
+  <script src="./assets/award-links.js?v=funded-awards-phase2"></script>
+  <script src="./assets/award-api-config.js?v=funded-awards-phase2"></script>
+  <script src="./assets/funded-awards-core.js?v=funded-awards-phase2"></script>
+  <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
+  <script src="./assets/funded-awards.js?v=funded-awards-phase2"></script>
+</body>
+</html>
