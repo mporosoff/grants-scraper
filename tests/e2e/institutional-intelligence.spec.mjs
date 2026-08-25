@@ -114,6 +114,16 @@ test("source-specific loading can advance across an empty normalized page within
   await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
 });
 
+test("a restored source page at the maximum offset cannot advance past the worker bound", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, { hasMoreAtOffsets: [1_000] });
+  await page.goto("/funded_awards.html?ii=1&ii_agency=NSF&ii_topic=catalysis&ii_offset=1000");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  expect(calls.at(-1)?.offset).toBe(1_000);
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
+  await expect(page.locator("#ii-page-label")).toContainText("loaded in this view");
+});
+
 test("ROR aliases resolve to canonical institutions before normalized award queries", async ({ page }) => {
   const errors = watchRuntimeErrors(page);
   mockHybrid(page);

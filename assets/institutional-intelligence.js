@@ -436,7 +436,7 @@
       nextOffset: meta.status === "ok" ? requestBody.offset + requestBody.limit : requestBody.offset,
       results: payload.results.filter(result => result.source === source),
       meta,
-      hasMore: meta.status === "ok" && meta.has_more === true,
+      hasMore: meta.status === "ok" && meta.has_more === true && requestBody.offset + requestBody.limit <= 1_000,
       error: meta.status === "unavailable" ? meta : null,
     };
   }
