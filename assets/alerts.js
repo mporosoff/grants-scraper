@@ -157,9 +157,7 @@
         error.code = boundedErrorCode(payload)
           || (response.status === 429
             ? "rate_limited"
-            : response.status >= 400 && response.status < 500
-              ? "invalid_request"
-              : response.status >= 500
+            : response.status >= 500 || [401, 403, 404, 405].includes(response.status)
                 ? "service_unavailable"
                 : "invalid_response");
         throw error;

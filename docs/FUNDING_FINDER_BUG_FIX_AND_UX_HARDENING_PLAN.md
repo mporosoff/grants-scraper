@@ -1019,7 +1019,7 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 
 | Phase | Status | PR | Final `main` SHA | Tests and workflow evidence | Deployment evidence | Notes / known limitations |
 |---|---|---|---|---|---|---|
-| Phase 1 - Front-end correctness | In progress - local gates passed 2026-08-25; protected merge and deployment pending | Pending | Pending | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 affected-spec rerun after final audit | Pending protected workflow and Pages/Worker verification | Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
+| Phase 1 - Front-end correctness | In progress - local gates passed 2026-08-25; protected merge and deployment pending | Pending | Pending | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 final-audit and 9/9 post-review affected-spec reruns | Pending protected workflow and Pages/Worker verification | Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
 | Phase 2 - Alert lifecycle | Not started |  |  |  | Alerts Worker version/health |  |
 | Phase 3 - Institution completeness | Not started |  |  |  | Award Worker version/health |  |
 | Phase 4 - Operational hardening | Not started |  |  |  | All Worker versions and final release |  |

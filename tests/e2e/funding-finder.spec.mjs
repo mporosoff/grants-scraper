@@ -77,19 +77,27 @@ test("saved-item write rejection restores durable UI state across every mutation
   await page.locator("#saved-panel > summary").click();
   await expect(page.locator("#saved-count")).toHaveText("(1)");
 
-  await page.evaluate(() => { globalThis.__rejectSavedWrites = true; });
+  await page.evaluate(() => {
+    const items = JSON.parse(localStorage.getItem("funding-finder.saved.v1"));
+    items[0].pursuit_status = "pursuing";
+    items[0].note = "Durable update from another tab";
+    localStorage.setItem("funding-finder.saved.v1", JSON.stringify(items));
+    globalThis.__rejectSavedWrites = true;
+  });
   await cards.first().locator("[data-save]").click();
   await expect(cards.first().locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator("#saved-status")).toContainText("last saved version is still shown");
   await expect(page.locator("#saved-count")).toHaveText("(1)");
+  await expect(page.locator("[data-pursuit-status]")).toHaveValue("pursuing");
+  await expect(page.locator("[data-pursuit-note]")).toHaveValue("Durable update from another tab");
 
   await page.locator("[data-pursuit-status]").selectOption("submitted");
-  await expect(page.locator("[data-pursuit-status]")).toHaveValue("saved");
+  await expect(page.locator("[data-pursuit-status]")).toHaveValue("pursuing");
   await page.locator("[data-pursuit-note]").evaluate(element => {
     element.value = "Uncommitted note";
     element.dispatchEvent(new Event("input", { bubbles: true }));
   });
-  await expect(page.locator("[data-pursuit-note]")).toHaveValue("");
+  await expect(page.locator("[data-pursuit-note]")).toHaveValue("Durable update from another tab");
   await expect(page.locator("[data-pursuit-note]")).toBeFocused();
 
   await page.locator("[data-remove-saved]").click();
@@ -114,6 +122,7 @@ test("alert dialog gives bounded recovery guidance for each server error class",
     { status: 429, errorCode: "rate_limited", message: "Too many alert requests. Wait before trying again." },
     { status: 429, responseBody: "not-json private provider body", message: "Too many alert requests. Wait before trying again." },
     { status: 400, errorCode: "invalid_request", message: "Check the alert details and try again." },
+    { status: 403, errorCode: "origin_not_allowed", message: "Email alert delivery is unavailable. Retry later." },
     { status: 503, errorCode: "alerts_unavailable", message: "Email alert delivery is unavailable. Retry later." },
     { status: 503, responseBody: "not-json private provider body", message: "Email alert delivery is unavailable. Retry later." },
     { status: 202, responseBody: "not-json private provider body", message: "The email alert service returned an invalid response. Retry later." },

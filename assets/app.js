@@ -3159,6 +3159,7 @@
       setSavedStatus();
       return false;
     }
+    refreshSavedState(result?.items);
     renderSaved();
     renderResults();
     setSavedStatus("This browser did not allow the change to be stored. Your last saved version is still shown.", { error: true });

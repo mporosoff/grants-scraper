@@ -62,6 +62,8 @@ test("FF-BUG-011 exposes an accessible saved-storage failure channel for every U
   );
   assert.match(mutationUi, /result\?\.ok/);
   assert.match(mutationUi, /last saved version is still shown/);
+  const failureBranch = mutationUi.slice(mutationUi.indexOf("if (result?.ok)"), mutationUi.indexOf("return true"));
+  assert.ok(failureBranch.indexOf("refreshSavedState(result?.items)") < failureBranch.indexOf("renderSaved()"));
   assert.match(mutationUi, /SAVED_API\.toggle/);
   assert.match(mutationUi, /SAVED_API\.remove/);
   assert.match(mutationUi, /SAVED_API\.clear/);
