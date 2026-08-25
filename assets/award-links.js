@@ -77,6 +77,14 @@
       || /National Institutes of Health/i.test(clean(record?.agency));
   }
 
+  function isDoeOfficeScience(record) {
+    const code = clean(record?.agency_code).toUpperCase();
+    const agency = clean(record?.agency);
+    return code === "PAMS-SC"
+      || /^Office of Science$/i.test(agency)
+      || /^(?:U\.S\. )?Department of Energy(?: \(DOE\))? (?:-|–) Office of Science$/i.test(agency);
+  }
+
   function nsfProgramElementCode(opportunityNumber) {
     const match = /^PD-\d{2}-([A-Z0-9]{4})$/i.exec(clean(opportunityNumber));
     return match ? `${match[1].toUpperCase()}00` : "";
@@ -153,6 +161,18 @@
       });
     }
 
+    if (isDoeOfficeScience(record)) {
+      const number = clean(record?.opportunity_number).toUpperCase();
+      if (!/^DE-FOA-\d+$/.test(number)) return null;
+      return Object.freeze({
+        source: "DOE",
+        label: number,
+        criteria: Object.freeze({ opportunity_number: number }),
+        mapping_basis: "exact_doe_foa_number",
+        mapping_source_url: clean(record?.detail_page || record?.funding_opportunity_url),
+      });
+    }
+
     if (isNsf(record)) {
       const code = nsfProgramElementCode(record?.opportunity_number);
       if (!code) return null;
@@ -177,6 +197,7 @@
 
   globalThis.FUNDING_AWARD_LINKS = Object.freeze({
     fundedAwardsHref,
+    isDoeOfficeScience,
     lookupForOpportunity,
     matchesProgramIdentity,
     nsfProgramElementCode,

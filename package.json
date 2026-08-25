@@ -9,6 +9,9 @@
     "test:e2e": "playwright test",
     "test:e2e:a11y": "playwright test tests/e2e/accessibility.spec.mjs"
   },
+  "dependencies": {
+    "cheerio": "1.0.0"
+  },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.62.1"

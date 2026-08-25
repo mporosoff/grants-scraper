@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "generated_at": "2026-08-25T11:09:19Z",
+  "protected_main_base": "b750909bd92eee1133219511103482097b7fbe7b",
+  "decision": "PHASE 4 PASSED — DOE OFFICE OF SCIENCE AWARDS ARE ISOLATED AND VERIFIED",
+  "scope": {
+    "implemented": [
+      "account-free DOE Office of Science PAMS public-search reconnaissance",
+      "isolated DOE PAMS award adapter",
+      "source-native public abstract, institution, PI, program-area, program-manager, exact award, and exact FOA search",
+      "normalized DOE Office of Science public award fields in the existing Funded Awards contract",
+      "exact DOE Office of Science FOA deep links from Funding Finder",
+      "bounded successful-response caching, source-health degradation, and independent DOE failure handling",
+      "deterministic PAMS fixtures and a bounded post-deployment exact-award smoke"
+    ],
+    "explicitly_not_implemented": [
+      "Phase 5 or optional analytics",
+      "personal DOE/PAMS account or credential use",
+      "fuzzy DOE program equivalence",
+      "DOE program watches",
+      "inferred email addresses or structured co-PIs inferred from prose",
+      "award semantic vectors or cross-source ranking",
+      "opportunity search or ranking changes"
+    ],
+    "ranking_files_changed": [],
+    "award_vectors_built": false
+  },
+  "architecture_reuse": {
+    "worker": "The existing award Worker dispatch, per-source cache key, normalized contract, request validation, health response, CORS, and independent Promise.allSettled-style source outcomes are extended with one DOE adapter.",
+    "product": "The existing Funded Awards agency control, source sections, provenance, loading, pagination, URL/history state, responsive cards, and accessibility behavior accept DOE as a third source.",
+    "funding_finder": "The existing award-links eligibility boundary emits a new-tab deep link only for a controlled Office of Science record carrying an exact DE-FOA identifier.",
+    "delivery": "The existing protected-main Award Worker workflow retains newest-active-version rollback, health, bounded source smoke, and Pages coherence checks."
+  },
+  "public_access_reconnaissance": {
+    "document": "docs/DOE_PAMS_PUBLIC_AWARD_RECONNAISSANCE.md",
+    "search_url": "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx",
+    "abstract_url_pattern": "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Common/ViewPublicAbstract.aspx?rv=<public-guid>&rtc=24&PRoleId=10",
+    "flow": "GET fresh ASP.NET WebForms state, then POST the labeled public search form; dynamic __doPostBack targets page the results grid.",
+    "account_or_key_required": false,
+    "public_json_api_found": false,
+    "default_page_size": 15,
+    "observed_session_behavior": "Fresh viewstate POSTs succeeded without a retained incoming cookie; direct public abstract GETs were account-free.",
+    "bounded_observations": {
+      "exact_award_DE_SC0020230": 1,
+      "institution_University_of_Rochester_site_defaults": 25,
+      "pi_William_Jones": 2,
+      "program_area_Catalysis": 326,
+      "foa_DE_FOA_0003612": 106,
+      "abstract_carbon_dioxide": 400
+    },
+    "rate_behavior": "No 429, CAPTCHA, bot challenge, or login redirect was encountered in the bounded reconnaissance; no public rate specification was found.",
+    "practical_limit": "Broad search totals can be large or source-capped and PAMS response latency varies, so the product bounds results to 10 and browsing to offset 100.",
+    "production_adapter_smoke": {
+      "method": "One account-free all-status/all-country search per case with limit 1; no retries.",
+      "institution_University_of_Rochester": {"source_total": 114, "returned": 1, "abstract_loaded": true, "official_url": true},
+      "pi_William_Jones": {"source_total": 2, "returned": 1, "abstract_loaded": true, "official_url": true},
+      "program_area_Catalysis": {"source_total": 326, "returned": 1, "abstract_loaded": true, "official_url": true}
+    }
+  },
+  "normalized_fields": {
+    "award_id": true,
+    "title": true,
+    "public_abstract": true,
+    "lead_pi": true,
+    "structured_co_pi": false,
+    "institution_and_public_identifiers": true,
+    "program_office": true,
+    "program_manager_name": true,
+    "dates": true,
+    "amount_awarded_to_date": true,
+    "foa_solicitation_reference": true,
+    "official_public_abstract_or_search_record": true,
+    "published_email_seen": false,
+    "inferred_email": false
+  },
+  "source_compliance": {
+    "maximum_results_per_request": 10,
+    "maximum_offset": 100,
+    "abstract_concurrency": 2,
+    "pause_between_abstract_batches_ms": 125,
+    "source_timeout_ms": 15000,
+    "successful_cache_ttl_seconds": 3600,
+    "automatic_retry_storm": false,
+    "individual_abstract_failure": "DOE metadata remains usable and source health is degraded.",
+    "search_contract_failure": "DOE is unavailable independently; NSF and NIH results remain usable."
+  },
+  "mapping": {
+    "method": "exact DE-FOA solicitation number only for controlled DOE Office of Science catalog records",
+    "fuzzy_equivalence_used": false,
+    "current_catalog_eligible_records": [
+      {"opportunity_id": "360678", "opportunity_number": "DE-FOA-0003600"},
+      {"opportunity_id": "361526", "opportunity_number": "DE-FOA-0003612"}
+    ],
+    "other_doe_components_excluded": ["ARPA-E", "NETL", "Idaho Field Office"]
+  },
+  "validation": {
+    "deterministic_award_worker_contract_tests": {"passed": 10, "failed": 0},
+    "focused_phase2_and_phase4_contract_tests": {"passed": 12, "failed": 0},
+    "affected_funded_awards_e2e_tests": {"passed": 8, "failed": 0},
+    "focused_accessibility_tests": {"passed": 1, "failed": 0, "states": 2, "serious_or_critical_violations": 0},
+    "worker_bundle_dry_run": {"passed": true, "wrangler": "4.125.0", "upload_kib": 327.37, "gzip_kib": 85.16},
+    "bounded_live_adapter_smokes": {"passed": 4, "failed": 0, "cases": ["exact award", "institution", "PI", "program area"]},
+    "protected_pull_request_checks": "pending",
+    "post_merge_worker_and_pages_coherence": "pending"
+  },
+  "gate": {
+    "public_account_free_access_documented": true,
+    "institution_pi_and_program_search_verified": true,
+    "public_abstracts_and_official_links_verified": true,
+    "no_contact_inference": true,
+    "bounded_cache_rate_and_health_behavior": true,
+    "nsf_nih_unaffected_by_doe_failure": true,
+    "exact_or_controlled_mapping_only": true,
+    "deterministic_fixtures_no_live_pams_pr_dependency": true,
+    "phase5_not_started": true
+  },
+  "known_limitations": [
+    "PAMS is a public HTML/WebForms application without a published machine API or rate contract; the adapter validates known structure and fails closed if it changes.",
+    "A result without a published public abstract has only the official PAMS search surface rather than an award-specific public URL.",
+    "PAMS exposes structured lead-PI and program-manager names, but not a consistent structured co-PI field or email fields in the inspected public pages.",
+    "Program-area matching is PAMS source-native text matching and is not claimed as an exact cross-cycle program identity.",
+    "Broad PAMS search totals may be capped; the product does not claim exhaustive retrieval past its bounded browse window."
+  ]
+}

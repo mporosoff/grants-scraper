@@ -23,7 +23,7 @@
   globalThis.FUNDING_AWARD_API_CONFIG = Object.freeze({
     baseUrl,
     searchUrl: new URL("awards/search", baseUrl).href,
-    timeoutMs: 12_000,
+    timeoutMs: 45_000,
     maxResultsPerSource: 25,
   });
 })();

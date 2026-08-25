@@ -7,6 +7,13 @@ import {
   normalizeNsfAward,
 } from "../../workers/award-api/src/adapters/nsf.js";
 import {
+  buildDoeSearchForm,
+  normalizeDoeAward,
+  parseDoeAbstract,
+  parseDoeSearchResults,
+  searchDoe,
+} from "../../workers/award-api/src/adapters/doe.js";
+import {
   buildNihRequest,
   normalizeNihProject,
   searchNih,
@@ -19,9 +26,16 @@ import {
 } from "../../workers/award-api/src/index.js";
 
 const root = new URL("../../", import.meta.url);
-const [nsfFixture, nihFixture, packageSource, phase1Evidence] = await Promise.all([
+const [
+  nsfFixture, nihFixture, doeFormFixture, doeResultsPage1, doeResultsPage2,
+  doeAbstractFixture, packageSource, phase1Evidence,
+] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/nsf_award.json", root), "utf8").then(JSON.parse),
   readFile(new URL("tests/fixtures/awards/nih_project_years.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("tests/fixtures/awards/doe_search_form.html", root), "utf8"),
+  readFile(new URL("tests/fixtures/awards/doe_search_results_page1.html", root), "utf8"),
+  readFile(new URL("tests/fixtures/awards/doe_search_results_page2.html", root), "utf8"),
+  readFile(new URL("tests/fixtures/awards/doe_public_abstract.html", root), "utf8"),
   readFile(new URL("package.json", root), "utf8").then(JSON.parse),
   readFile(new URL("evaluation/funded_awards_phase1.json", root), "utf8").then(JSON.parse),
 ]);
@@ -40,16 +54,30 @@ function workerRequest(body, { origin = "http://localhost:8000", path = "/awards
   });
 }
 
-function query(criteria, sources = ["NSF", "NIH"]) {
-  return { sources, criteria, limit: 25, offset: 0 };
+function query(criteria, sources = ["NSF", "NIH"], limit = 25, offset = 0) {
+  return { sources, criteria, limit, offset };
 }
 
-function fixtureFetch({ failNih = false, failNsf = false, calls = [] } = {}) {
+function fixtureFetch({ failDoe = false, failNih = false, failNsf = false, calls = [] } = {}) {
   return async (url, options = {}) => {
     calls.push({ url: String(url), options });
     if (String(url).includes("api.nsf.gov")) {
       if (failNsf) return new Response("unavailable", { status: 503 });
       return new Response(JSON.stringify(nsfFixture), { headers: { "Content-Type": "application/json" } });
+    }
+    if (String(url).includes("pamspublic.science.energy.gov")) {
+      if (failDoe) return new Response("unavailable", { status: 503 });
+      if (String(url).includes("ViewPublicAbstract.aspx")) {
+        return new Response(doeAbstractFixture, { headers: { "Content-Type": "text/html" } });
+      }
+      if (options.method === "POST") {
+        const decoded = decodeURIComponent(String(options.body || ""));
+        const body = decoded.includes("ctl00$MainContent$grdAwardsList")
+          ? doeResultsPage2
+          : doeResultsPage1;
+        return new Response(body, { headers: { "Content-Type": "text/html" } });
+      }
+      return new Response(doeFormFixture, { headers: { "Content-Type": "text/html" } });
     }
     if (failNih) return new Response("unavailable", { status: 503 });
     const body = JSON.parse(options.body || "{}");
@@ -226,6 +254,99 @@ test("NIH normalization groups annual applications under the core project withou
   assert.deepEqual(Object.keys(award), Object.keys(nsfAward), "both sources expose one normalized contract");
 });
 
+test("DOE builds the account-free PAMS form and normalizes only labeled public fields", async () => {
+  const institution = resolveInstitution({ id: "university-of-rochester" });
+  const form = buildDoeSearchForm(doeFormFixture, {
+    opportunity_number: "DE-FOA-0003600",
+    topic: "carbon dioxide",
+    _institution: institution,
+    pi: "William Jones",
+    program_officer: "Bradley, Christopher",
+    year_start: 2020,
+    year_end: 2026,
+  });
+  assert.equal(form.get("__EVENTTARGET"), "ctl00$MainContent$pnlSearch");
+  assert.match(form.get("__EVENTARGUMENT"), /Search$/);
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$ddAwardStatus"), "0");
+  assert.deepEqual(
+    JSON.parse(form.get("ctl00_MainContent_pnlSearch_rlbCountry_ClientState")).checkedIndices,
+    [],
+  );
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtInstitutionName"), "University of Rochester");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtPILastName"), "Jones");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtPIFirstName"), "William");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtPMLastName"), "Bradley");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtPMFirstName"), "Christopher");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtSolNum"), "DE-FOA-0003600");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$txtAbstractKeyword"), "carbon dioxide");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$dpAwardDateFrom"), "2020-01-01");
+  assert.equal(form.get("ctl00$MainContent$pnlSearch$dpAwardDateTo"), "2026-12-31");
+
+  const firstPage = parseDoeSearchResults(doeResultsPage1);
+  assert.equal(firstPage.total_count, 2);
+  assert.equal(firstPage.page_size, 1);
+  assert.match(firstPage.page_targets[2], /ctl07$/);
+  assert.equal(firstPage.records[0].award_id, "DE-SC0020230");
+  assert.equal(firstPage.records[0].program_area, "Catalysis Science");
+  assert.deepEqual(firstPage.records[0].opportunity_numbers, ["DE-FOA-0001820", "DE-FOA-0003600"]);
+  assert.equal(firstPage.records[0].amount_awarded_to_date, 1363185);
+
+  const secondPage = parseDoeSearchResults(doeResultsPage2);
+  const abstract = parseDoeAbstract(doeAbstractFixture, "DE-SC0024701");
+  assert.match(abstract, /CO₂/);
+  assert.match(abstract, /\n\nThis project/);
+  const award = normalizeDoeAward(secondPage.records[0], {
+    retrievedAt: fixedNow().toISOString(),
+    abstract,
+  });
+  assert.equal(award.source, "DOE");
+  assert.equal(award.award_id, "DE-SC0024701");
+  assert.equal(award.subagency, "Office of Biological & Environmental Research");
+  assert.equal(award.program_name, "Foundational Genomics Research");
+  assert.deepEqual(award.program_codes, ["SC-33.2"]);
+  assert.deepEqual(award.opportunity_numbers, ["DE-FOA-0003003"]);
+  assert.equal(award.total_award, 1480000);
+  assert.equal(award.award_amount_basis, "amount_awarded_to_date");
+  assert.equal(award.principal_investigators[0].name, "Justin North");
+  assert.equal(award.principal_investigators[0].email, null);
+  assert.equal(award.program_contacts[0].name, "Dawn Adin");
+  assert.equal(award.program_contacts[0].email, null);
+  assert.match(award.official_award_url, /ViewPublicAbstract\.aspx/);
+  const nsfAward = normalizeNsfAward(nsfFixture.response.award[0], {
+    retrievedAt: fixedNow().toISOString(),
+    sourceUrl: "https://api.nsf.gov/services/v1/awards/2605508.json",
+  });
+  assert.deepEqual(Object.keys(award), Object.keys(nsfAward), "DOE reuses the normalized award contract");
+
+  const firstCalls = [];
+  const firstOnly = await searchDoe(fixtureFetch({ calls: firstCalls }), { topic: "carbon dioxide" }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+    sleep: async () => {},
+  });
+  assert.deepEqual(firstOnly.results.map(item => item.award_id), ["DE-SC0020230"]);
+  assert.equal(firstOnly.has_more, true);
+  assert.equal(firstCalls.length, 2, "a full source page is not postback-fetched merely to establish has_more");
+
+  const calls = [];
+  const paged = await searchDoe(fixtureFetch({ calls }), { topic: "carbon dioxide" }, {
+    limit: 1,
+    offset: 1,
+    now: fixedNow,
+    sleep: async () => {},
+  });
+  assert.deepEqual(paged.results.map(item => item.award_id), ["DE-SC0024701"]);
+  assert.equal(paged.has_more, false);
+  assert.deepEqual(paged.health, {
+    status: "available",
+    abstract_requests: 1,
+    abstracts_loaded: 1,
+    abstracts_failed: 0,
+  });
+  assert.equal(calls.length, 4, "one form, search, page, and public-abstract request");
+});
+
 test("NIH pagination advances through normalized core projects instead of annual records", async () => {
   const starts = {
     R01AA000001: "2026-01-01",
@@ -280,7 +401,7 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.deepEqual(await health.json(), {
     service: "available",
     schema_version: 1,
-    sources: ["NSF", "NIH"],
+    sources: ["NSF", "NIH", "DOE"],
     adapter_versions: ADAPTER_VERSIONS,
     cache_ttl_seconds: 3600,
     credentials_required: false,
@@ -289,8 +410,10 @@ test("Worker validates bounded public requests and exposes no credential require
     origin: "https://evil.example",
   }), env)).status, 403);
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), extra: true }), env)).status, 400);
-  assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"])), env)).status, 400);
+  assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["NASA"])), env)).status, 400);
   assert.equal((await handler(workerRequest({ ...query({ topic: "plasma" }), limit: 26 }), env)).status, 400);
+  assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"], 25)), env)).status, 400);
+  assert.equal((await handler(workerRequest(query({ award_id: "DE-SC0020230" }, ["DOE"], 1)), env)).status, 200);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
   const cbetCodes = [
     "366Y00", "367Y00", "369Y00", "370Y00", "140100", "764400",
@@ -317,6 +440,25 @@ test("Worker isolates a failed source and retains the common successful response
     status: "unavailable",
     error: { code: "source_unavailable" },
   });
+});
+
+test("a PAMS failure is isolated from unchanged NSF and NIH adapters", async () => {
+  const handler = createHandler({ fetchImpl: fixtureFetch({ failDoe: true }), now: fixedNow });
+  const response = await handler(workerRequest(query(
+    { topic: "carbon dioxide" },
+    ["NSF", "NIH", "DOE"],
+    10,
+  )), env);
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.deepEqual(payload.results.map(item => item.source).sort(), ["NIH", "NSF"]);
+  assert.deepEqual(payload.sources.find(item => item.source === "DOE"), {
+    source: "DOE",
+    status: "unavailable",
+    error: { code: "source_unavailable" },
+  });
+  assert.equal(payload.sources.find(item => item.source === "NSF").status, "ok");
+  assert.equal(payload.sources.find(item => item.source === "NIH").status, "ok");
 });
 
 test("Worker caches only successful per-source results for the bounded TTL", async () => {

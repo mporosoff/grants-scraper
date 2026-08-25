@@ -89,7 +89,7 @@ export function mockHybrid(page, {
   return calls;
 }
 
-export function mockAwards(target, { failNih = false, failNsf = false, hasMoreAtOffsets = [] } = {}) {
+export function mockAwards(target, { failDoe = false, failNih = false, failNsf = false, hasMoreAtOffsets = [] } = {}) {
   const calls = [];
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
@@ -152,14 +152,40 @@ export function mockAwards(target, { failNih = false, failNsf = false, hasMoreAt
       annual_support: [{ fiscal_year: 2026, award_amount: 500000 }],
       source_provenance: { source_url: "https://api.reporter.nih.gov/v2/projects/search", retrieved_at: retrievedAt, source_record_id: "10875475", adapter_version: "1.0.0" },
     };
+    const doe = {
+      ...nsf,
+      award_id: "DE-SC0020230",
+      source_record_ids: ["DE-SC0020230"],
+      source: "DOE",
+      agency: "U.S. Department of Energy Office of Science",
+      subagency: "Office of Basic Energy Sciences",
+      program_name: "Catalysis Science",
+      program_codes: ["Catalysis Science"],
+      opportunity_numbers: ["DE-FOA-0003612"],
+      activity_code: null,
+      funding_mechanism: "Financial Assistance",
+      title: "Catalytic Activation and Conversion of Carbon Dioxide",
+      abstract: "This public PAMS abstract studies catalytic CO₂ conversion.\n\nThe second source paragraph remains separate.",
+      project_start: "2019-09-01",
+      project_end: "2024-08-31",
+      award_year: 2019,
+      total_award: 1150000,
+      award_amount_basis: "amount_awarded_to_date",
+      organization_department: null,
+      principal_investigators: [{ name: "Marc Porosoff", role: "Principal Investigator", email: null, official_contact_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Common/ViewPublicAbstract.aspx?rv=fixture&rtc=24&PRoleId=10" }],
+      program_contacts: [{ name: "DOE Program Manager", role: "Program Manager", email: null, official_contact_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Common/ViewPublicAbstract.aspx?rv=fixture&rtc=24&PRoleId=10" }],
+      official_award_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Common/ViewPublicAbstract.aspx?rv=fixture&rtc=24&PRoleId=10",
+      annual_support: [],
+      source_provenance: { source_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx", retrieved_at: retrievedAt, source_record_id: "DE-SC0020230", adapter_version: "1.0.0" },
+    };
     const results = [];
     const sources = [];
     for (const source of body.sources) {
-      const failed = source === "NSF" ? failNsf : failNih;
+      const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
       if (failed) {
         sources.push({ source, status: "unavailable", error: { code: "source_unavailable" } });
       } else {
-        results.push(source === "NSF" ? nsf : nih);
+        results.push(source === "NSF" ? nsf : source === "NIH" ? nih : doe);
         sources.push({
           source,
           status: "ok",

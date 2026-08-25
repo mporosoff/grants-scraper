@@ -67,6 +67,22 @@ test("eligible Funding Finder records use exact identifiers or reviewed NSF pare
     agency_code: "HHS-NIH11",
   }), "./funded_awards.html?opportunity=361187");
 
+  const doe = links.lookupForOpportunity({
+    opportunity_id: "361526",
+    opportunity_number: "DE-FOA-0003612",
+    agency_code: "PAMS-SC",
+    agency: "Office of Science",
+  });
+  assert.equal(doe.source, "DOE");
+  assert.equal(doe.mapping_basis, "exact_doe_foa_number");
+  assert.equal(doe.criteria.opportunity_number, "DE-FOA-0003612");
+  assert.equal(links.lookupForOpportunity({
+    opportunity_id: "outside-office-of-science",
+    opportunity_number: "DE-FOA-0003612",
+    agency_code: "DOE-NETL",
+    agency: "National Energy Technology Laboratory",
+  }), null, "the same FOA syntax outside DOE Office of Science is not claimed as a PAMS mapping");
+
   assert.equal(links.lookupForOpportunity({
     opportunity_id: "361333",
     opportunity_number: "26-506",
@@ -84,7 +100,8 @@ test("standalone searches use source-native criteria and never opportunity seman
     year_end: "2026",
     offset: 0,
   }, null, 25);
-  assert.deepEqual(Array.from(topic.sources), ["NSF", "NIH"]);
+  assert.deepEqual(Array.from(topic.sources), ["NSF", "NIH", "DOE"]);
+  assert.equal(topic.limit, 10, "a mixed-source request honors the polite DOE page bound");
   assert.equal(topic.criteria.topic, "CO2 hydrogenation methanol catalyst");
   assert.equal(topic.criteria.institution, "University of Rochester");
   assert.equal(topic.criteria.year_start, 2020);
@@ -97,6 +114,15 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.deepEqual(Array.from(selected.sources), ["NSF"]);
   assert.deepEqual(Array.from(selected.criteria.program_codes), ["367Y00", "140100", "764400", "141700", "140300"]);
   assert.equal(selected.criteria.topic, undefined);
+  const doeProgram = product.buildRequest({
+    mode: "program",
+    agency: "DOE",
+    query: "Catalysis",
+    offset: 0,
+  }, null, 25);
+  assert.deepEqual(Array.from(doeProgram.sources), ["DOE"]);
+  assert.deepEqual(JSON.parse(JSON.stringify(doeProgram.criteria)), { program: "Catalysis" });
+  assert.equal(doeProgram.limit, 10);
   assert.equal(product.canPageForward({
     sources: [{ status: "ok", has_more: false, total_count: 500, raw_record_count: 25 }],
     pagination: { offset: 25 },
@@ -109,7 +135,7 @@ test("standalone searches use source-native criteria and never opportunity seman
 });
 
 test("the standalone product exposes the Phase 2 controls, state, provenance, and source isolation", () => {
-  assert.match(page, /<h1 id="page-title">See what NSF and NIH have funded<\/h1>/);
+  assert.match(page, /<h1 id="page-title">See what NSF, NIH, and DOE have funded<\/h1>/);
   for (const id of [
     "selected-opportunity", "award-search-form", "award-query", "search-mode",
     "award-institution", "award-agency", "year-start", "year-end", "award-pi",
@@ -153,7 +179,7 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(page, /tabindex="-1">Funded projects/);
 });
 
-test("Phase 2 extends rather than replaces the verified Phase 1 boundary", () => {
+test("the historical Phase 2 evidence remains authoritative while Phase 4 extends its adapter boundary", () => {
   assert.match(phase1Evidence.decision, /^PHASE 1 PASSED/);
   assert.equal(phase1Evidence.authoritative_base.package_version, "1.3.0");
   assert.equal(phase2Evidence.authoritative_base.main_sha, "2f2aa714577441362626c6a6a41edd55fc105abb");
@@ -161,7 +187,7 @@ test("Phase 2 extends rather than replaces the verified Phase 1 boundary", () =>
   assert.equal(phase2Evidence.bounded_search_quality_check.ranking_or_vector_followup_performed, false);
   assert.equal(phase2Evidence.gate.unmapped_opportunities_do_not_guess, true);
   assert.equal(phase2Evidence.gate.alerts_doe_analytics_and_award_vectors_absent, true);
-  assert.doesNotMatch(page + appSource + linksSource, /alert me|resend|DOE adapter|semantic award/i);
+  assert.doesNotMatch(coreSource + appSource, /FUNDING_HYBRID_SEARCH|voyage|embedding|vectorUrl/i);
 });
 
 test("Award service delivery follows the protected main and rollback pattern", () => {
@@ -179,5 +205,6 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(deployWorkflow, /Verify Pages serves the committed Funded Awards page/);
   assert.match(workerSmoke, /award_id: "2605508"/);
   assert.match(workerSmoke, /core_project_number: "K12GM106997"/);
+  assert.match(workerSmoke, /award_id: "DE-SC0020230"/);
   assert.doesNotMatch(deployWorkflow + workerSmoke, /query_baseline|p9_scoring|vector|semantic/i);
 });

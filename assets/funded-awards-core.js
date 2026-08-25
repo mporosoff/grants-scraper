@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  const SOURCE_NAMES = ["NSF", "NIH"];
+  const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+  const DOE_PAGE_LIMIT = 10;
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
@@ -24,16 +25,21 @@
     if (mode !== "program") return { topic: value };
     const source = clean(agency, 10).toUpperCase();
     if (!SOURCE_NAMES.includes(source)) {
-      throw new Error("Choose NSF or NIH when searching by program identifier or name.");
+      throw new Error("Choose NSF, NIH, or DOE when searching by program identifier or name.");
     }
     if (source === "NSF") {
       const pdCode = globalThis.FUNDING_AWARD_LINKS?.nsfProgramElementCode(value);
       if (pdCode) return { program_codes: [pdCode] };
       return { program: /^[A-Z0-9]{6}$/i.test(value) ? value.toUpperCase() : value };
     }
-    return value.includes("-")
+    if (source === "NIH") {
+      return value.includes("-")
+        ? { opportunity_number: value.toUpperCase() }
+        : { program: value.toUpperCase() };
+    }
+    return /^DE-FOA-\d+$/i.test(value)
       ? { opportunity_number: value.toUpperCase() }
-      : { program: value.toUpperCase() };
+      : { program: value };
   }
 
   function buildRequest(state, selectedLookup, limit = 25) {
@@ -58,10 +64,14 @@
       throw new Error("Enter a topic or program, or add an investigator, program officer, or selected opportunity.");
     }
     const offset = Math.max(0, Math.min(1_000, Number.parseInt(state.offset, 10) || 0));
+    const sources = selectedLookup ? [selectedLookup.source] : sourcesForAgency(state.agency);
+    const resultLimit = sources.includes("DOE")
+      ? Math.max(1, Math.min(DOE_PAGE_LIMIT, Number(limit) || DOE_PAGE_LIMIT))
+      : Math.max(1, Math.min(25, Number(limit) || 25));
     return {
-      sources: selectedLookup ? [selectedLookup.source] : sourcesForAgency(state.agency),
+      sources,
       criteria,
-      limit: Math.max(1, Math.min(25, Number(limit) || 25)),
+      limit: resultLimit,
       offset,
     };
   }
@@ -72,7 +82,7 @@
       && payload.schema_version === 1
       && Array.isArray(payload.results)
       && Array.isArray(payload.sources)
-      && payload.results.length <= 50
+      && payload.results.length <= 75
       && payload.results.every(item => item && SOURCE_NAMES.includes(item.source)),
     );
   }

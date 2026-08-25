@@ -1,6 +1,7 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
 import { AwardSourceError } from "./http.js";
 import { resolveInstitution } from "./institutions.js";
+import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
 
@@ -8,8 +9,12 @@ const MAX_REQUEST_BYTES = 16_384;
 const MAX_OFFSET = 1_000;
 const MAX_YEAR_SPAN = 50;
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
-const SOURCE_NAMES = ["NSF", "NIH"];
-const ADAPTER_VERSIONS = { NSF: NSF_ADAPTER_VERSION, NIH: NIH_ADAPTER_VERSION };
+const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+const ADAPTER_VERSIONS = {
+  NSF: NSF_ADAPTER_VERSION,
+  NIH: NIH_ADAPTER_VERSION,
+  DOE: DOE_ADAPTER_VERSION,
+};
 const SEARCH_FIELDS = [
   "award_id",
   "core_project_number",
@@ -167,7 +172,10 @@ function validateRequest(body, config) {
   if (!Array.isArray(body.sources) || body.sources.length < 1 || body.sources.length > SOURCE_NAMES.length) return null;
   const sources = body.sources.map(value => String(value || "").toUpperCase());
   if (new Set(sources).size !== sources.length || sources.some(source => !SOURCE_NAMES.includes(source))) return null;
-  const limit = boundedInteger(body.limit, { maximum: config.maxResults });
+  const maximumLimit = sources.includes("DOE")
+    ? Math.min(config.maxResults, DOE_MAX_RESULTS)
+    : config.maxResults;
+  const limit = boundedInteger(body.limit, { maximum: maximumLimit });
   const offset = boundedInteger(body.offset, { minimum: 0, maximum: MAX_OFFSET });
   const criteria = validateCriteria(body.criteria);
   if (!limit || offset === null || !criteria) return null;
@@ -212,9 +220,8 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, now }) {
     }
   }
   const options = { limit: request.limit, offset: request.offset, now };
-  const payload = source === "NSF"
-    ? await searchNsf(fetchImpl, request.resolvedCriteria, options)
-    : await searchNih(fetchImpl, request.resolvedCriteria, options);
+  const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
+  const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
     try {
       await cache.put(key, new Response(JSON.stringify(payload), {
@@ -241,6 +248,7 @@ function sourceSummary(payload) {
     has_more: payload.has_more === true,
     result_count: payload.results.length,
     retrieved_at: payload.retrieved_at,
+    ...(payload.health ? { health: payload.health } : {}),
   };
 }
 

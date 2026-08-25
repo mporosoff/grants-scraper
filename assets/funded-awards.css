@@ -246,6 +246,11 @@
   background: #fff0df;
 }
 
+.source-status-list li.source-degraded {
+  color: #78520a;
+  background: #fff6d9;
+}
+
 .institution-summary,
 .program-summary {
   margin-top: 16px;
@@ -343,6 +348,10 @@
 
 .award-card[data-source="NIH"] {
   border-top-color: #6b3fa0;
+}
+
+.award-card[data-source="DOE"] {
+  border-top-color: #21705e;
 }
 
 .award-card-topline {

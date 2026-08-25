@@ -5,7 +5,7 @@ async function jsonRequest(path, options = {}) {
   const response = await fetch(new URL(path, baseUrl), {
     ...options,
     headers: { Origin: origin, ...(options.headers || {}) },
-    signal: AbortSignal.timeout(15_000),
+    signal: AbortSignal.timeout(45_000),
   });
   const payload = await response.json();
   if (!response.ok) throw new Error(`${path} returned ${response.status}`);
@@ -19,10 +19,14 @@ if (health.service !== "available" || health.schema_version !== 1) {
 if (health.credentials_required !== false) {
   throw new Error("Award Worker unexpectedly reports a credential requirement.");
 }
+if (!["NSF", "NIH", "DOE"].every(source => health.sources?.includes(source))) {
+  throw new Error("Award Worker health did not advertise all three isolated sources.");
+}
 
 for (const body of [
   { sources: ["NSF"], criteria: { award_id: "2605508" }, limit: 1, offset: 0 },
   { sources: ["NIH"], criteria: { core_project_number: "K12GM106997" }, limit: 1, offset: 0 },
+  { sources: ["DOE"], criteria: { award_id: "DE-SC0020230" }, limit: 1, offset: 0 },
 ]) {
   const payload = await jsonRequest("awards/search", {
     method: "POST",
@@ -37,4 +41,4 @@ for (const body of [
   }
 }
 
-console.log("Award Worker health and exact NSF/NIH source smokes passed.");
+console.log("Award Worker health and exact NSF/NIH/DOE source smokes passed.");
