@@ -1,6 +1,7 @@
 import {
   awardRecord,
   cleanEmail,
+  cleanSourceText,
   cleanText,
   finiteNumber,
   isoDate,
@@ -10,7 +11,7 @@ import {
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NSF_ADAPTER_VERSION = "1.1.0";
+export const NSF_ADAPTER_VERSION = "1.2.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
 
 function quoted(value) {
@@ -136,7 +137,7 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
     activity_code: null,
     funding_mechanism: cleanText(raw.transType, 200),
     title: cleanText(raw.title),
-    abstract: cleanText(raw.abstractText),
+    abstract: cleanSourceText(raw.abstractText),
     project_start: isoDate(raw.startDate),
     project_end: isoDate(raw.expDate),
     award_year: awardDate ? Number(awardDate.slice(0, 4)) : null,

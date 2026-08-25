@@ -124,4 +124,7 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await scan(page, "awards-results-mobile", testInfo);
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  const statusPill = page.locator(".header-context-pill");
+  await expect(statusPill).toHaveText("NSF + NIH awards");
+  expect(await statusPill.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
 });

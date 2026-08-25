@@ -6,6 +6,17 @@ export function cleanText(value, maximum = 20_000) {
   return normalized ? normalized.slice(0, maximum) : null;
 }
 
+export function cleanSourceText(value, maximum = 20_000) {
+  if (value === null || value === undefined) return null;
+  const normalized = String(value)
+    .replace(/\r\n?/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+  return normalized ? normalized.slice(0, maximum).trimEnd() : null;
+}
+
 export function cleanEmail(value) {
   const email = cleanText(value, 320);
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;

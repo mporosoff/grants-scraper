@@ -112,7 +112,7 @@ export function mockAwards(target, { failNih = false, failNsf = false, hasMoreAt
       activity_code: null,
       funding_mechanism: "Grant",
       title: "Collaborative Research: Warm Dense Matter",
-      abstract: "This project studies warm dense matter, plasma, and materials under extreme conditions.",
+      abstract: "This project studies CO₂ conversion, warm dense matter, plasma, and materials under extreme conditions.\n\nThis source-provided second paragraph remains separate.",
       project_start: "2026-09-01",
       project_end: "2029-08-31",
       award_year: 2026,
