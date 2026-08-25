@@ -226,6 +226,7 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Did Marc Porosoff receive NIH funding?"), "Marc Porosoff");
   assert.equal(core.explicitInvestigator("Show awards for investigator Marc D Porosoff."), "Marc D Porosoff");
   assert.equal(core.explicitInvestigator("Show awards for Professor Marc Porosoff."), "Marc Porosoff");
+  assert.equal(core.explicitInvestigator("Show awards for Professor Marc Porosoff from NSF."), "Marc Porosoff");
   assert.equal(core.explicitInvestigator("Show awards for Investigator Named Marc Porosoff."), "Marc Porosoff");
   assert.equal(core.explicitInvestigator("Who at this institution has received awards from DOE BES?"), "");
   assert.equal(core.explicitInvestigator("Show funding for Basic Energy Sciences."), "");
@@ -235,6 +236,7 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("What has CAREER Program received?", "", "CAREER"), "");
   assert.equal(core.explicitInvestigator("What has CAREER Award received?", "", "CAREER"), "");
   assert.equal(core.explicitInvestigator("What has CAREER Grant received?", "", "CAREER"), "");
+  assert.equal(core.explicitInvestigator("What has Faculty Early Career Development received?", "", "CAREER"), "");
   assert.equal(core.explicitInvestigator("What has University of Rochester been funded to do?", "University of Rochester"), "");
   assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory", "", ["Cold Spring Harbor", "CSHL"]), "");
   assert.equal(core.explicitInvestigator("What has Cold Spring Harbor received?", "Cold Spring Harbor Laboratory"), "");

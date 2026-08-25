@@ -16,6 +16,11 @@
     ["office of basic energy sciences", "SC-32"],
     ["sc 32", "SC-32"],
   ]);
+  const KNOWN_PROGRAM_IDENTITIES = new Map([
+    ["career", "NSF-CAREER"],
+    ["faculty early career development", "NSF-CAREER"],
+    ["faculty early career development program", "NSF-CAREER"],
+  ]);
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -37,6 +42,9 @@
     if (candidateKey === programKey) return true;
     const candidateBase = candidateKey.replace(/\s+(?:program|programme|initiative|award|awards|grant|grants|fellowship|fellowships|mechanism|scheme)$/u, "");
     if (candidateBase === programKey) return true;
+    const candidateIdentity = KNOWN_PROGRAM_IDENTITIES.get(candidateKey) || KNOWN_PROGRAM_IDENTITIES.get(candidateBase);
+    const programIdentity = KNOWN_PROGRAM_IDENTITIES.get(programKey);
+    if (candidateIdentity && candidateIdentity === programIdentity) return true;
     const candidateOffice = DOE_PROGRAM_OFFICES.get(candidateKey);
     const programOffice = DOE_PROGRAM_OFFICES.get(programKey);
     if (candidateOffice && programOffice && candidateOffice === programOffice) return true;
@@ -254,7 +262,7 @@
     if (!value) return "";
     const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
     const patterns = [
-      new RegExp(`\\b(?:[Ii]nvestigator|[Rr]esearcher|[Pp]rofessor|[Ff]aculty [Mm]ember|PI)\\s+(?:[Nn]amed\\s+)?${name}(?=\\s*(?:[?.,;:]|$))`, "u"),
+      new RegExp(`\\b(?:[Ii]nvestigator|[Rr]esearcher|[Pp]rofessor|[Ff]aculty [Mm]ember|PI)\\s+(?:[Nn]amed\\s+)?${name}(?=\\s*(?:[?.,;:]|$|\\b(?:from|for|at|with|in|under|through|during|between|since|before|after)\\b))`, "u"),
       new RegExp(`\\b(?:[Hh]as|[Dd]id)\\s+${name}\\s+(?:been\\s+funded|receive|received|win|won|lead|led|secure|secured|get|got|have)\\b`, "u"),
     ];
     for (const pattern of patterns) {

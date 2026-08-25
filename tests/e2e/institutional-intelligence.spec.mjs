@@ -242,7 +242,7 @@ test("the natural-language translator reuses the saved Funding Finder provider a
     const providerCall = route.request().postDataJSON();
     providerCalls.push(providerCall);
     const requestedQuestion = JSON.parse(providerCall.input).question;
-    const program = requestedQuestion.includes("CAREER") ? "CAREER" : "MRI";
+    const program = /CAREER|Faculty Early Career/.test(requestedQuestion) ? "CAREER" : "MRI";
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
@@ -279,6 +279,11 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect(page.locator("#ii-question-plan")).toContainText("Program: CAREER");
   await expect.poll(() => providerCalls.length).toBe(3);
   expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
+  await page.locator("#ii-question").fill("What has Faculty Early Career Development received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Program: CAREER");
+  await expect.poll(() => providerCalls.length).toBe(4);
+  expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
 });
 
 test("the question translator preserves an explicitly named University of Rochester investigator", async ({ page }) => {
@@ -310,6 +315,12 @@ test("the question translator preserves an explicitly named University of Roches
   await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
   await expect.poll(() => calls.length).toBe(7);
   expect(calls.slice(-3).every(call => call.criteria.pi === "Marc Porosoff")).toBe(true);
+  await page.locator("#ii-question").fill("Show awards for Professor Marc Porosoff from NSF.");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Agency: NSF");
+  await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
+  await expect.poll(() => calls.length).toBe(8);
+  expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
 });
 
 test("the question translator does not mistake a selected ROR alias for an investigator", async ({ page }) => {
