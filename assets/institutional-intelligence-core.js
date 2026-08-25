@@ -97,6 +97,9 @@
     if (yearStart && yearEnd && yearEnd < yearStart) {
       throw new Error("The ending year must be the same as or later than the starting year.");
     }
+    if (yearStart && yearEnd && yearEnd - yearStart + 1 > 50) {
+      throw new Error("Choose a year range of 50 years or fewer.");
+    }
     if (!institution && !topic && !pi && !programOfficer && !clean(state?.program, 160)) {
       throw new Error("Enter an institution, topic, program, investigator, or program officer before searching.");
     }

@@ -163,6 +163,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
   assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
     isEnabled: true,

@@ -37,6 +37,19 @@ test("a program filter requires one agency before source requests are split", as
   expect(calls).toHaveLength(0);
 });
 
+test("an overlong award-year range shows one validation error without source retries", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-year-start").fill("1989");
+  await page.locator("#ii-year-end").fill("2100");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-status")).toContainText("Choose a year range of 50 years or fewer.");
+  expect(calls).toHaveLength(0);
+  await expect(page.getByRole("button", { name: /Retry (NSF|NIH|DOE)/ })).toHaveCount(0);
+});
+
 test("source-specific loading accumulates projects without replacing the current page", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
