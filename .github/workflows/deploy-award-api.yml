@@ -111,7 +111,9 @@ jobs:
             health="$(curl --fail --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-award-api.urochestercheme.workers.dev/health' || true)"
             if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
               && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
-              && test "$(jq -r '.credentials_required | tostring' <<<"$health" 2>/dev/null)" = "false"; then
+              && test "$(jq -r '.credentials_required | tostring' <<<"$health" 2>/dev/null)" = "false" \
+              && test "$(jq -r '.institution_registry.source // empty' <<<"$health" 2>/dev/null)" = "ROR" \
+              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.0.0"; then
               exit 0
             fi
             sleep 5
