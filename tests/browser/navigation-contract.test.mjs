@@ -38,7 +38,8 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(navigationScript, /aria-expanded/);
   assert.match(navigationScript, /event\.key === "Escape"/);
   assert.match(navigationScript, /pointerdown/);
-  assert.match(navigationStyles, /@media \(max-width: 820px\)/);
+  assert.match(navigationStyles, /@media \(max-width: 1080px\)/);
+  assert.match(navigationStyles, /\.site-nav\s*\{[\s\S]*?left:\s*50%[\s\S]*?transform:\s*translateX\(-50%\)/);
   assert.match(navigationStyles, /\.nav-toggle\s*\{[\s\S]*?display:\s*none/);
   assert.match(navigationStyles, /\.site-nav\.is-open\s*\{[\s\S]*?display:\s*flex/);
   assert.match(navigationStyles, /\.site-help-button\s*\{[\s\S]*?display:\s*inline-flex/);
@@ -66,7 +67,7 @@ test("shared Help explains the full workflow and optional provider keys", () => 
   assert.match(helpScript, /secure <strong>Manage alerts<\/strong> link/);
   assert.match(helpScript, /There is no Funding Finder account or public alert dashboard/);
   assert.match(helpScript, /Explore Funded Awards/);
-  assert.match(helpScript, /principal investigator, or program officer/);
+  assert.match(helpScript, /principal investigator, program officer, agency, or year/);
   assert.match(helpScript, /Use Institutional Intelligence/);
   assert.match(helpScript, /Research Organization Registry \(ROR\)/);
   assert.match(helpScript, /Ask about this institution/);

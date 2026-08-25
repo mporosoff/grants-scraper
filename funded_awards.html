@@ -29,21 +29,21 @@
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=app-1.3.0">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=help-20260825">
-  <link rel="stylesheet" href="./assets/funded-awards.css?v=phase4-doe-awards">
+  <link rel="stylesheet" href="./assets/app.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=help-alerts-20260825">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=institutional-intelligence-2">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=unified-award-intelligence-20260825">
 </head>
 <body>
-  <a class="skip-link" href="#award-results">Skip to award results</a>
+  <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
 
   <header class="site-header">
     <a class="brand" href="./match_explorer.html" aria-label="Funding Finder home">
       <span class="brand-mark" aria-hidden="true">F</span>
       <span>
         <strong>Funding Finder</strong>
-        <small>Search current and funded research</small>
+        <small>Research funding tools</small>
       </span>
     </a>
     <div class="header-actions">
@@ -52,7 +52,7 @@
         <a href="./team_match.html">Team Match</a>
         <a href="./funded_awards.html" aria-current="page">Funded Awards</a>
       </nav>
-      <span class="header-context-pill">NSF + NIH + DOE awards</span>
+      <span class="header-context-pill" aria-label="NSF, NIH, and DOE award sources available">NSF · NIH · DOE</span>
       <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
@@ -64,36 +64,49 @@
     <section class="awards-hero" aria-labelledby="page-title">
       <p class="eyebrow">Historical award intelligence</p>
       <h1 id="page-title">See what NSF, NIH, and DOE have funded</h1>
-      <p>Search public project titles and abstracts, or arrive from a current Funding Finder opportunity for an exact program lookup. Results remain source records, not predictions of future fit.</p>
+      <p>Search and summarize public project titles, abstracts, investigators, institutions, programs, and program officers in one place. Current Funding Finder opportunities still use exact or controlled historical mappings where available.</p>
+    </section>
+
+    <section class="selected-opportunity hidden" id="selected-opportunity" aria-labelledby="selected-opportunity-heading">
+      <div>
+        <p class="eyebrow">Selected funding opportunity</p>
+        <h2 id="selected-opportunity-heading"></h2>
+        <p id="selected-opportunity-meta"></p>
+        <p class="mapping-note" id="selected-mapping-note"></p>
+      </div>
+      <div class="selected-actions">
+        <button class="button secondary hidden" id="watch-selected-program" type="button">Email alerts for this program</button>
+        <a class="button secondary" id="open-current-opportunity" target="_blank" rel="noopener">Open current opportunity ↗</a>
+        <button class="text-button" id="clear-opportunity" type="button">Clear selection</button>
+      </div>
     </section>
 
     <section class="ii-wrap" aria-labelledby="ii-heading">
-      <details class="ii-shell" id="institutional-intelligence">
-        <summary>
+      <section class="ii-shell" id="institutional-intelligence">
+        <header class="ii-shell-heading">
           <span>
-            <strong id="ii-heading">Institutional Intelligence</strong>
-            <small>Explore public NSF, NIH, and DOE awards by institution</small>
+            <strong id="ii-heading">Funded Award Intelligence</strong>
+            <small>One search for public NSF, NIH, and DOE awards, with Institutional Intelligence when an institution is selected</small>
           </span>
-          <span class="summary-action">Search institutions</span>
-        </summary>
+        </header>
         <div class="ii-body">
           <div class="ii-intro">
             <div>
               <p class="eyebrow">Public award evidence</p>
-              <h2>See who and what an institution’s funders have supported</h2>
-              <p>Choose an institution, then filter normalized NSF, NIH, and DOE award records. Counts and drill-downs describe only the public projects returned by the selected source search; official award records remain authoritative.</p>
+              <h2>Find funded projects and understand the result set</h2>
+              <p>Search by institution, topic, program, investigator, program officer, agency, or year. The same normalized records power factual counts, investigator and program drill-downs, and the underlying compact project cards.</p>
             </div>
-            <p class="ii-registry-note"><strong>Institution identity:</strong> autocomplete uses the open Research Organization Registry (ROR), including its aliases and acronyms. Funding queries keep the award sources’ canonical names and any existing source-specific identifiers.</p>
+            <p class="ii-registry-note"><strong>Optional institution identity:</strong> autocomplete uses the open Research Organization Registry (ROR), including aliases and acronyms such as MIT, Caltech, UVA, RIT, and UCLA. Award queries preserve canonical and source-specific identities.</p>
           </div>
 
-          <form id="ii-form" class="ii-form" aria-label="Search institutional funded awards">
+          <form id="ii-form" class="ii-form" role="search" aria-label="Search funded awards">
             <div class="ii-institution-field">
-              <label for="ii-institution">Institution</label>
+              <label for="ii-institution">Institution <span class="ii-optional">Optional</span></label>
               <div class="ii-combobox">
                 <input id="ii-institution" type="search" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ii-institution-options" aria-describedby="ii-registry-status" placeholder="Try MIT, Caltech, UVA, RIT, UCLA, or a full name">
                 <div class="ii-institution-options hidden" id="ii-institution-options" role="listbox" aria-label="Matching institutions"></div>
               </div>
-              <p class="ii-field-status" id="ii-registry-status" aria-live="polite">Type at least two characters to search the Research Organization Registry (ROR).</p>
+              <p class="ii-field-status" id="ii-registry-status" aria-live="polite">Optional: type at least two characters to search the Research Organization Registry (ROR), or search the other fields without an institution.</p>
             </div>
 
             <div class="ii-filter-grid">
@@ -114,6 +127,9 @@
               <label>Investigator
                 <input id="ii-pi" type="search" autocomplete="off" placeholder="Name as listed by sponsor">
               </label>
+              <label>Program officer
+                <input id="ii-program-officer" type="search" autocomplete="off" placeholder="Name as listed by sponsor">
+              </label>
               <label>From year
                 <input id="ii-year-start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2019">
               </label>
@@ -123,12 +139,12 @@
             </div>
             <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps only to the published PAMS organization identity SC-32.</p>
             <div class="ii-actions">
-              <button class="button primary" id="ii-search" type="submit">Search funded projects</button>
-              <button class="text-button" id="ii-clear" type="button">Clear institutional search</button>
+              <button class="button primary" id="ii-search" type="submit">Search funded awards</button>
+              <button class="text-button" id="ii-clear" type="button">Clear search</button>
             </div>
           </form>
 
-          <div class="ii-status" id="ii-status" role="status" aria-live="polite">Structured institutional search does not require an AI key.</div>
+          <div class="ii-status" id="ii-status" role="status" aria-live="polite">Structured award search and institution resolution do not require an AI key.</div>
           <ul class="ii-source-status hidden" id="ii-source-status" aria-label="Award source status"></ul>
 
           <details class="ii-ask" id="ii-ask">
@@ -168,8 +184,8 @@
           <section class="ii-output hidden" id="ii-output" aria-labelledby="ii-output-heading" aria-busy="false">
             <div class="ii-output-heading">
               <div>
-                <p class="eyebrow">Returned public evidence</p>
-                <h2 id="ii-output-heading">Institutional award summary</h2>
+              <p class="eyebrow">Returned public evidence</p>
+                <h2 id="ii-output-heading" tabindex="-1">Funded award summary</h2>
               </div>
               <p id="ii-result-scope"></p>
             </div>
@@ -185,26 +201,17 @@
               </section>
             </div>
             <div class="ii-awards" id="ii-awards" aria-live="polite"></div>
+            <nav class="ii-pagination hidden" id="ii-pagination" aria-label="Funded award result pages">
+              <button class="button secondary" id="ii-previous" type="button">← Previous</button>
+              <span id="ii-page-label" aria-live="polite"></span>
+              <button class="button secondary" id="ii-next" type="button">Next →</button>
+            </nav>
           </section>
         </div>
-      </details>
+      </section>
     </section>
 
-    <section class="selected-opportunity hidden" id="selected-opportunity" aria-labelledby="selected-opportunity-heading">
-      <div>
-        <p class="eyebrow">Selected funding opportunity</p>
-        <h2 id="selected-opportunity-heading"></h2>
-        <p id="selected-opportunity-meta"></p>
-        <p class="mapping-note" id="selected-mapping-note"></p>
-      </div>
-      <div class="selected-actions">
-        <button class="button secondary hidden" id="watch-selected-program" type="button">Email alerts for this program</button>
-        <a class="button secondary" id="open-current-opportunity" target="_blank" rel="noopener">Open current opportunity ↗</a>
-        <button class="text-button" id="clear-opportunity" type="button">Clear selection</button>
-      </div>
-    </section>
-
-    <form class="award-search-panel" id="award-search-form" role="search">
+    <form class="award-search-panel" id="award-search-form" role="search" hidden aria-label="Legacy funded-award search compatibility">
       <div class="award-search-primary standalone-search-fields">
         <label class="award-field award-query-field" for="award-query">
           <span>Search terms</span>
@@ -258,7 +265,7 @@
       <p class="award-search-help">Choose a research topic, program, principal investigator, or program officer search. Topic searches use each source's native public award search. For program search, use an NSF PD/program-element identifier or program name, an NIH FOA/activity code, or a DOE Office of Science FOA/program area. Selected opportunities use exact source identifiers or reviewed NSF parent mappings—never the opportunity-vector corpus.</p>
     </form>
 
-    <section class="award-output" id="award-results" aria-labelledby="award-results-heading" aria-busy="false" tabindex="-1">
+    <section class="award-output hidden" id="award-results" aria-labelledby="award-results-heading" aria-busy="false" tabindex="-1">
       <div class="award-output-heading">
         <div>
           <p class="eyebrow">Public award records</p>
@@ -292,13 +299,13 @@
   <script src="./data/opportunities.js?v=catalog-20260825T105031Z"></script>
   <script src="./assets/award-links.js?v=phase4-doe-awards"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
-  <script src="./assets/alerts.js?v=help-alerts-20260825"></script>
+  <script src="./assets/alerts.js?v=search-alerts-20260825"></script>
   <script src="./assets/award-api-config.js?v=phase4-doe-awards"></script>
   <script src="./assets/funded-awards-core.js?v=phase4-doe-awards"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=institutional-intelligence-2"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=unified-award-intelligence-20260825"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
-  <script src="./assets/site-help.js?v=help-20260825"></script>
-  <script src="./assets/funded-awards.js?v=phase4-doe-awards"></script>
-  <script src="./assets/institutional-intelligence.js?v=institutional-intelligence-2"></script>
+  <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
+  <script src="./assets/funded-awards.js?v=unified-award-intelligence-20260825"></script>
+  <script src="./assets/institutional-intelligence.js?v=unified-award-intelligence-20260825"></script>
 </body>
 </html>

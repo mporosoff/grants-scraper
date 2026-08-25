@@ -1,5 +1,5 @@
 .awards-main {
-  width: min(1180px, calc(100% - 36px));
+  width: min(1240px, calc(100% - 36px));
   margin: 0 auto;
   padding: 34px 0 72px;
 }
@@ -531,7 +531,7 @@
 
 @media (max-width: 620px) {
   .awards-main {
-    width: min(100% - 24px, 1180px);
+    width: min(100% - 24px, 1240px);
     padding-top: 18px;
   }
 
@@ -591,10 +591,6 @@
 }
 
 @media (max-width: 390px) {
-  .site-header .brand > span:last-child {
-    display: none;
-  }
-
   .awards-main {
     width: calc(100% - 16px);
   }

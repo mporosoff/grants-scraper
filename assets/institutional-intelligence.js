@@ -57,6 +57,12 @@
     $("ii-search").disabled = busy;
     $("ii-ask-button").disabled = busy;
     $("ii-output").setAttribute("aria-busy", busy ? "true" : "false");
+    if (busy) {
+      $("ii-previous").disabled = true;
+      $("ii-next").disabled = true;
+    } else {
+      syncPaginationControls();
+    }
   }
 
   function selectedLocation(institution) {
@@ -154,7 +160,12 @@
   async function resolveTypedInstitution() {
     clearTimeout(state.registryTimer);
     const typed = clean($("ii-institution").value, 300);
-    if (!typed) throw new Error("Choose an institution before searching its funded awards.");
+    if (!typed) {
+      state.selectedInstitution = null;
+      hideRegistryOptions();
+      $("ii-registry-status").textContent = "No institution selected. The search will use the other public award filters.";
+      return null;
+    }
     if (state.selectedInstitution && core.identityKey(state.selectedInstitution.canonical_name) === core.identityKey(typed)) {
       return state.selectedInstitution;
     }
@@ -181,18 +192,20 @@
       program: clean($("ii-program").value, 160),
       topic: clean($("ii-topic").value, 500),
       pi: clean($("ii-pi").value, 160),
+      program_officer: clean($("ii-program-officer").value, 160),
       year_start: $("ii-year-start").value,
       year_end: $("ii-year-end").value,
+      offset: Number(state.payload?.pagination?.offset || 0),
     };
   }
 
   function applyFormState(value) {
-    $("institutional-intelligence").open = Boolean(value.open);
     $("ii-institution").value = value.institution || "";
     $("ii-agency").value = value.agency || "all";
     $("ii-program").value = value.program || "";
     $("ii-topic").value = value.topic || "";
     $("ii-pi").value = value.pi || "";
+    $("ii-program-officer").value = value.program_officer || "";
     $("ii-year-start").value = value.year_start || "";
     $("ii-year-end").value = value.year_end || "";
     state.selectedInstitution = value.institution ? {
@@ -206,12 +219,20 @@
         ? `Restored ${value.institution} with its shared Research Organization Registry (ROR) identity.`
         : `Restored ${value.institution} as the shared canonical award-source name.`;
     } else {
-      $("ii-registry-status").textContent = "Type at least two characters to search the Research Organization Registry (ROR).";
+      $("ii-registry-status").textContent = "Optional: type at least two characters to search the Research Organization Registry (ROR), or search the other fields without an institution.";
     }
+  }
+
+  function hasSearchState(value) {
+    return Boolean(value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
   }
 
   function syncUrl(value, mode = "replace") {
     if (!location.protocol.startsWith("http")) return;
+    if (hasSearchState(value) && new URLSearchParams(location.search).has("opportunity")) {
+      $("selected-opportunity")?.classList.add("hidden");
+      $("award-results")?.classList.add("hidden");
+    }
     const url = core.urlForState(location.href, value);
     history[mode === "push" ? "pushState" : "replaceState"](null, "", url);
   }
@@ -290,11 +311,17 @@
     list.classList.toggle("hidden", !values.length);
   }
 
+  function syncPaginationControls() {
+    const offset = Number(state.payload?.pagination?.offset || 0);
+    $("ii-previous").disabled = !state.payload || offset === 0;
+    $("ii-next").disabled = !state.payload || !awardProduct.canPageForward(state.payload);
+  }
+
   function renderAggregate(payload) {
     const aggregate = core.aggregateAwards(payload.results);
     const institution = clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300);
     $("ii-output").classList.remove("hidden");
-    $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Institutional award summary";
+    $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
     const hasMore = (payload.sources || []).some(source => source.status === "ok" && source.has_more === true);
     $("ii-result-scope").textContent = `Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} on this source-native result page${hasMore ? "; additional source results exist" : ""}.`;
     const years = aggregate.year_start
@@ -316,10 +343,17 @@
       ? aggregate.awards.map(awardCard).join("")
       : "<p>No normalized public award records matched these filters.</p>";
     renderSourceStatus(payload.sources);
+    const offset = Number(payload.pagination?.offset || 0);
+    const canNext = awardProduct.canPageForward(payload);
+    $("ii-pagination").classList.toggle("hidden", offset === 0 && !canNext);
+    $("ii-page-label").textContent = aggregate.project_count
+      ? `Results ${offset + 1}–${offset + aggregate.project_count}`
+      : "No results on this page";
+    syncPaginationControls();
     return aggregate;
   }
 
-  async function runSearch({ historyMode = "replace", resolveInstitution = true } = {}) {
+  async function runSearch({ historyMode = "replace", resolveInstitution = true, offset = null, focusResults = false, scrollResults = false } = {}) {
     const sequence = ++state.searchSequence;
     state.searchController?.abort();
     state.searchController = new AbortController();
@@ -328,6 +362,7 @@
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       const current = formState();
+      if (offset !== null) current.offset = Math.max(0, Math.min(1_000, Number(offset) || 0));
       const requestBody = core.buildAwardRequest(current, 10);
       syncUrl(current, historyMode);
       const timer = setTimeout(() => state.searchController?.abort(), apiConfig.timeoutMs);
@@ -357,9 +392,11 @@
       setStatus(failed.length
         ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned from available sources. ${failed.map(source => source.source).join(", ")} did not complete.`
         : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} returned. Use investigator or program selections to drill into the official records.`);
+      if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
+      if (scrollResults) $("ii-output-heading").scrollIntoView({ block: "start" });
     } catch (error) {
       if (error?.name === "AbortError" || sequence !== state.searchSequence) return;
-      setStatus(error?.message || "Institutional award search could not be completed.", true);
+      setStatus(error?.message || "Funded award search could not be completed.", true);
     } finally {
       if (sequence === state.searchSequence) setBusy(false);
     }
@@ -370,11 +407,12 @@
     state.searchController?.abort();
     state.selectedInstitution = null;
     state.payload = null;
-    applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", year_start: "", year_end: "" });
+    applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", offset: 0 });
     $("ii-output").classList.add("hidden");
     $("ii-source-status").classList.add("hidden");
     $("ii-question-plan").classList.add("hidden");
-    setStatus("Structured institutional search does not require an AI key.");
+    $("ii-pagination").classList.add("hidden");
+    setStatus("Structured award search and institution resolution do not require an AI key.");
     syncUrl({ open: true }, historyMode);
   }
 
@@ -438,11 +476,12 @@
 
   function renderQuestionPlan(value) {
     const labels = [
-      `Institution: ${value.institution}`,
+      value.institution ? `Institution: ${value.institution}` : "",
       `Agency: ${value.agency === "all" ? "NSF + NIH + DOE" : value.agency}`,
       value.program ? `Program: ${value.program}` : "",
       value.topic ? `Topic: ${value.topic}` : "",
       value.pi ? `Investigator: ${value.pi}` : "",
+      value.program_officer ? `Program officer: ${value.program_officer}` : "",
       value.year_start || value.year_end ? `Years: ${value.year_start || "any"}–${value.year_end || "any"}` : "",
     ].filter(Boolean);
     $("ii-question-plan").innerHTML = `<strong>Transparent search plan:</strong> ${labels.map(escapeHtml).join(" · ")}. The public award records below remain authoritative.`;
@@ -458,7 +497,8 @@
       return;
     }
     try {
-      await resolveTypedInstitution();
+      const institution = await resolveTypedInstitution();
+      if (!institution) throw new Error("Select an institution before asking a question about it.");
     } catch (error) {
       setStatus(error?.message || String(error), true);
       return;
@@ -480,7 +520,7 @@
         provider,
         key,
         fetchImpl: globalThis.fetch,
-        system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, year_start, and year_end. Use empty strings for absent values. Do not answer the question, name awards, infer contacts, recommend collaborators, score funding fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+        system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, and year_end. Use empty strings for absent values. Do not answer the question, name awards, infer contacts, recommend collaborators, score funding fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
         user: JSON.stringify({
           institution: current.institution,
           current_filters: {
@@ -488,6 +528,7 @@
             program: current.program,
             topic: current.topic,
             pi: current.pi,
+            program_officer: current.program_officer,
             year_start: current.year_start,
             year_end: current.year_end,
           },
@@ -520,7 +561,9 @@
       const query = clean($("ii-institution").value, 120);
       if (query.length < 2) {
         hideRegistryOptions();
-        $("ii-registry-status").textContent = "Type at least two characters to search the Research Organization Registry (ROR).";
+        $("ii-registry-status").textContent = query
+          ? "Type at least two characters to search the Research Organization Registry (ROR)."
+          : "Optional: type at least two characters to search the Research Organization Registry (ROR), or search the other fields without an institution.";
         return;
       }
       state.registryTimer = setTimeout(() => fetchRegistry(query), 300);
@@ -550,22 +593,32 @@
     });
     $("ii-form").addEventListener("submit", event => {
       event.preventDefault();
-      runSearch({ historyMode: "push" });
+      runSearch({ historyMode: "push", offset: 0, focusResults: true });
     });
     $("ii-clear").addEventListener("click", () => clearSearch());
     $("ii-output").addEventListener("click", event => {
       const investigator = event.target.closest("[data-ii-pi]");
       if (investigator) {
         $("ii-pi").value = investigator.dataset.iiPi;
-        runSearch({ historyMode: "push", resolveInstitution: false });
+        runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
         return;
       }
       const program = event.target.closest("[data-ii-program]");
       if (program) {
         $("ii-agency").value = program.dataset.iiProgramSource;
         $("ii-program").value = program.dataset.iiProgram;
-        runSearch({ historyMode: "push", resolveInstitution: false });
+        runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
       }
+    });
+    $("ii-previous").addEventListener("click", () => {
+      const pageSize = Number(state.payload?.request?.limit || 10);
+      const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - pageSize);
+      runSearch({ historyMode: "push", resolveInstitution: false, offset, focusResults: true, scrollResults: true });
+    });
+    $("ii-next").addEventListener("click", () => {
+      const pageSize = Number(state.payload?.request?.limit || 10);
+      const offset = Number(state.payload?.pagination?.offset || 0) + pageSize;
+      runSearch({ historyMode: "push", resolveInstitution: false, offset, focusResults: true, scrollResults: true });
     });
     $("ii-provider").addEventListener("change", () => refreshProvider({ preferMain: false }));
     $("ii-save-key").addEventListener("click", saveSharedKey);
@@ -575,11 +628,12 @@
       const restored = core.stateFromSearch(location.search);
       applyFormState(restored);
       state.payload = null;
-      if (restored.institution) runSearch({ historyMode: "replace", resolveInstitution: false });
+      if (hasSearchState(restored)) runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
       else {
         $("ii-output").classList.add("hidden");
         $("ii-source-status").classList.add("hidden");
-        setStatus("Structured institutional search does not require an AI key.");
+        $("ii-pagination").classList.add("hidden");
+        setStatus("Structured award search and institution resolution do not require an AI key.");
       }
     });
   }
@@ -589,8 +643,8 @@
     applyFormState(restored);
     bindEvents();
     refreshProvider();
-    if (restored.institution) {
-      runSearch({ historyMode: "replace", resolveInstitution: false });
+    if (hasSearchState(restored) && !new URLSearchParams(location.search).get("opportunity")) {
+      runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
     }
   }
 

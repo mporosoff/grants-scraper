@@ -31,8 +31,8 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=app-1.3.0" />
-<link rel="stylesheet" href="./assets/site-nav.css?v=help-20260825" />
+<link rel="stylesheet" href="./assets/app.css?v=unified-ui-20260825" />
+<link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825" />
 <style>
   :root{
     --navy:var(--ur-navy,#001e5f);--navy-2:var(--ur-meliora-blue,#021bc3);--blue:var(--ur-arpeggio-azure,#0066fd);--blue-dark:var(--ur-meliora-blue,#021bc3);--blue-soft:rgb(183 211 255 / 34%);
@@ -45,7 +45,7 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--page);color:var(--ink);line-height:1.5;}
   a{color:var(--blue-dark);}
-  .wrap{max-width:1060px;margin:0 auto;padding:28px 20px 80px;}
+  .wrap{width:min(1240px,calc(100% - 36px));max-width:none;margin:0 auto;padding:34px 0 80px;}
   header.page{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow);}
   header.page h1{margin:0 0 6px;font-size:1.45rem;}
   header.page p{margin:0;color:#cfe0f5;font-size:.92rem;}
@@ -175,7 +175,7 @@
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   footer.note .app-version{font-weight:800;}
   .hide{display:none !important;}
-  @media (max-width:700px){.researcher-fields{grid-template-columns:1fr}.researcher-keywords{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
+  @media (max-width:700px){.wrap{width:min(100% - 24px,1240px);padding-top:18px}.researcher-fields{grid-template-columns:1fr}.researcher-keywords{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -290,7 +290,7 @@
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
 <script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
-<script src="assets/site-help.js?v=help-20260825"></script>
+<script src="assets/site-help.js?v=unified-ui-20260825"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {

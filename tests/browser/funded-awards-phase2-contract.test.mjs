@@ -153,6 +153,8 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
     "institution-summary", "award-result-list", "award-pagination",
   ]) assert.match(page, new RegExp(`id="${id}"`));
   assert.match(page, /role="search"/);
+  assert.match(page, /id="award-search-form"[^>]*hidden/);
+  assert.match(page, /id="ii-form"[^>]*role="search"/);
   assert.match(page, /<option value="pi">Principal investigator<\/option>/);
   assert.match(page, /<option value="program_officer">Program officer<\/option>/);
   assert.doesNotMatch(page, /Advanced: investigator or program officer/);
@@ -188,7 +190,7 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(styles, /@media \(max-width: 390px\)/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(styles, /@media \(forced-colors: active\)/);
-  assert.match(page, /<a class="skip-link" href="#award-results">/);
+  assert.match(page, /<a class="skip-link" href="#institutional-intelligence">/);
   assert.match(page, /id="award-results"[^>]*tabindex="-1"/);
   assert.match(page, /tabindex="-1">Funded projects/);
 });

@@ -129,6 +129,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
     agency: "all",
     topic: "catalysis",
     pi: "Ada Investigator",
+    program_officer: "Megan Manager",
     year_start: 2019,
     year_end: 2026,
   });
@@ -139,12 +140,26 @@ test("structured filters reuse the normalized cross-agency award request contrac
       institution_id: "https://ror.org/042nb2s44",
       topic: "catalysis",
       pi: "Ada Investigator",
+      program_officer: "Megan Manager",
       year_start: 2019,
       year_end: 2026,
     },
     limit: 10,
     offset: 0,
   });
+  assert.deepEqual(plain(core.buildAwardRequest({
+    institution: "",
+    agency: "NSF",
+    topic: "electrocatalysis",
+    program_officer: "Alex Officer",
+    offset: 10,
+  })), {
+    sources: ["NSF"],
+    criteria: { topic: "electrocatalysis", program_officer: "Alex Officer" },
+    limit: 10,
+    offset: 10,
+  });
+  assert.throws(() => core.buildAwardRequest({ agency: "all" }), /Enter an institution, topic, program, investigator, or program officer/);
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
   assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
@@ -175,7 +190,7 @@ test("aggregates returned awards and preserves investigator and program drill-do
 });
 
 test("share URLs round-trip institution and all transparent filters", () => {
-  const url = core.urlForState("https://example.test/funded_awards.html?q=opportunities", {
+  const url = core.urlForState("https://example.test/funded_awards.html?opportunity=123&q=opportunities", {
     open: true,
     institution: "University of California, Los Angeles",
     ror_id: "https://ror.org/046rm7j60",
@@ -183,10 +198,12 @@ test("share URLs round-trip institution and all transparent filters", () => {
     program: "BES",
     topic: "catalysis",
     pi: "Ada Investigator",
+    program_officer: "Megan Manager",
     year_start: 2020,
     year_end: 2026,
   });
-  assert.equal(url.searchParams.get("q"), "opportunities");
+  assert.equal(url.searchParams.get("q"), null, "legacy search parameters are replaced by the unified state");
+  assert.equal(url.searchParams.get("opportunity"), null, "a new unified search clears an exact-opportunity selection");
   assert.deepEqual(plain(core.stateFromSearch(url.search)), {
     open: true,
     institution: "University of California, Los Angeles",
@@ -195,8 +212,10 @@ test("share URLs round-trip institution and all transparent filters", () => {
     program: "BES",
     topic: "catalysis",
     pi: "Ada Investigator",
+    program_officer: "Megan Manager",
     year_start: "2020",
     year_end: "2026",
+    offset: 0,
   });
 });
 
@@ -204,7 +223,10 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
   assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
-  assert.match(page, /Structured institutional search does not require an AI key/);
+  assert.match(page, /Funded Award Intelligence/);
+  assert.match(page, /id="award-search-form"[^>]*hidden/);
+  assert.match(page, /id="ii-program-officer"/);
+  assert.match(page, /Structured award search and institution resolution do not require an AI key/);
   assert.match(page, /assets\/institutional-intelligence\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));

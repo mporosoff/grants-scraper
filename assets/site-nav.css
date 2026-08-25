@@ -53,7 +53,7 @@
 }
 
 .header-actions {
-  position: relative;
+  position: static;
   display: flex;
   flex: 1;
   align-items: center;
@@ -64,6 +64,8 @@
 }
 
 .site-nav {
+  position: absolute;
+  left: 50%;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -71,6 +73,7 @@
   border: 1px solid rgba(255, 255, 255, .1);
   border-radius: 11px;
   background: rgba(255, 255, 255, .045);
+  transform: translateX(-50%);
 }
 
 .site-nav a,
@@ -649,7 +652,7 @@ html.help-open {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1080px) {
   .site-header {
     position: sticky;
     min-height: 64px;
@@ -665,6 +668,7 @@ html.help-open {
     position: absolute;
     top: calc(100% + 13px);
     right: 0;
+    left: auto;
     display: none;
     width: min(280px, calc(100vw - 28px));
     padding: 8px;
@@ -675,6 +679,7 @@ html.help-open {
     border-radius: 13px;
     background: rgba(18, 38, 63, .99);
     box-shadow: 0 18px 45px rgba(8, 23, 42, .28);
+    transform: none;
   }
 
   .site-nav::before {
@@ -850,7 +855,7 @@ html.help-open {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 420px) {
   .site-header .brand > span:last-child {
     display: none;
   }

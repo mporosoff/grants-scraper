@@ -3379,6 +3379,11 @@
       $("alert-new-matches").title = state.query
         ? "Email only for future new Strong matches; private profile context is excluded"
         : "Enter a typed research query before creating a saved-search alert";
+      if ($("profile-search-alert-status")) {
+        $("profile-search-alert-status").textContent = state.query
+          ? `Ready to save the current “${state.query}” search. Existing Strong matches will become the baseline.`
+          : "Run a typed funding search to enable this alert.";
+      }
     }
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));

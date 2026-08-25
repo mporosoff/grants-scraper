@@ -16,23 +16,28 @@
   box-shadow: var(--shadow);
 }
 
-.ii-shell > summary,
+.ii-shell-heading,
 .ii-ask > summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 20px 24px;
-  cursor: pointer;
-  list-style: none;
 }
 
-.ii-shell > summary::-webkit-details-marker,
+.ii-shell-heading {
+  min-height: 68px;
+}
+
 .ii-ask > summary::-webkit-details-marker {
   display: none;
 }
 
-.ii-shell > summary::after,
+.ii-ask > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
 .ii-ask > summary::after {
   content: "+";
   flex: none;
@@ -42,29 +47,27 @@
   font-weight: 900;
 }
 
-.ii-shell[open] > summary::after,
 .ii-ask[open] > summary::after {
   content: "−";
 }
 
-.ii-shell > summary > span:first-child,
+.ii-shell-heading > span:first-child,
 .ii-ask > summary > span:first-child {
   display: grid;
   gap: 2px;
 }
 
-.ii-shell > summary strong {
+.ii-shell-heading strong {
   color: var(--navy);
   font-size: 1.05rem;
 }
 
-.ii-shell > summary small,
+.ii-shell-heading small,
 .ii-ask > summary small {
   color: #617188;
   font-size: .76rem;
 }
 
-.ii-shell > summary:focus-visible,
 .ii-ask > summary:focus-visible,
 .ii-institution-options button:focus-visible,
 .ii-facet-list button:focus-visible {
@@ -75,6 +78,13 @@
 .ii-body {
   padding: 0 24px 26px;
   border-top: 1px solid var(--line);
+}
+
+.ii-optional {
+  margin-left: 4px;
+  color: #617188;
+  font-size: .68rem;
+  font-weight: 650;
 }
 
 .ii-intro {
@@ -209,7 +219,7 @@
 
 .ii-filter-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 13px;
   margin-top: 16px;
 }
@@ -363,6 +373,24 @@
   display: grid;
   gap: 13px;
   margin-top: 18px;
+}
+
+.ii-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.ii-pagination span {
+  min-width: 120px;
+  color: #52647a;
+  font-size: .76rem;
+  font-weight: 750;
+  text-align: center;
 }
 
 .ii-award-card {
@@ -576,13 +604,12 @@
 }
 
 @media (max-width: 520px) {
-  .ii-shell > summary,
+  .ii-shell-heading,
   .ii-body {
     padding-right: 15px;
     padding-left: 15px;
   }
 
-  .ii-shell > summary .summary-action,
   .ii-ask > summary > span:last-of-type {
     display: none;
   }
@@ -603,5 +630,14 @@
 
   .ii-output-heading p:last-child {
     text-align: left;
+  }
+
+  .ii-pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ii-pagination .button {
+    width: 100%;
   }
 }

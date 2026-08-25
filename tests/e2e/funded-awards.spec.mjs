@@ -12,22 +12,21 @@ test("standalone native topic search renders source records, provenance, institu
   const errors = watchRuntimeErrors(page);
   const calls = mockAwards(page);
   await page.goto("/funded_awards.html");
-  await page.locator("#award-query").fill("mitral valve prolapse");
-  await page.locator("#award-institution").fill("University of Rochester");
-  await page.locator("#remember-institution").check();
-  await page.locator("#search-awards").click();
-  await expect(page.locator(".award-card")).toHaveCount(3);
-  await expect(page.locator("#institution-summary")).toContainText("3 funded projects in this result page");
-  await expect(page.locator(".award-abstract").first()).toBeVisible();
-  await expect(page.locator(".award-abstract").first().locator("p")).toHaveCount(2);
-  await expect(page.locator(".award-abstract").first()).toContainText("CO₂");
-  expect(await page.locator(".award-abstract").first().locator("p").nth(1).evaluate(element =>
+  await page.locator("#ii-topic").fill("mitral valve prolapse");
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-search").click();
+  await expect(page.locator(".ii-award-card")).toHaveCount(3);
+  await expect(page.locator("#ii-metrics")).toContainText("3Projects returned");
+  await page.locator(".ii-award-abstract").first().evaluate(element => { element.open = true; });
+  await expect(page.locator(".ii-award-abstract").first().locator("p")).toHaveCount(2);
+  await expect(page.locator(".ii-award-abstract").first()).toContainText("CO₂");
+  expect(await page.locator(".ii-award-abstract").first().locator("p").nth(1).evaluate(element =>
     Number.parseFloat(getComputedStyle(element).marginTop),
   )).toBeGreaterThan(0);
   await expect(page.getByRole("link", { name: /View source query/ })).toHaveCount(0);
   await expect(page.getByText("Direct NSF source field").first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /View contact on official award page/ }).first()).toBeVisible();
-  await expect(page).toHaveURL(/q=mitral\+valve\+prolapse/);
+  await expect(page.getByRole("link", { name: /View on official record/ }).first()).toBeVisible();
+  await expect(page).toHaveURL(/ii_topic=mitral\+valve\+prolapse/);
   expect(calls[0].criteria).toMatchObject({
     topic: "mitral valve prolapse",
     institution: "University of Rochester",
@@ -35,12 +34,11 @@ test("standalone native topic search renders source records, provenance, institu
   expect(calls[0].sources).toEqual(["NSF", "NIH", "DOE"]);
   expect(calls[0].limit).toBe(10);
 
-  await page.locator("[data-award-pi='Stephen Dewhurst']").click();
-  await expect(page).toHaveURL(/q=Stephen\+Dewhurst/);
-  await expect(page).toHaveURL(/mode=pi/);
+  await page.locator("[data-ii-pi='Stephen Dewhurst']").click();
+  await expect(page).toHaveURL(/ii_pi=Stephen\+Dewhurst/);
   await page.goBack();
-  await expect(page).not.toHaveURL(/mode=pi/);
-  await expect(page.locator(".award-card")).toHaveCount(3);
+  await expect(page).not.toHaveURL(/ii_pi=/);
+  await expect(page.locator(".ii-award-card")).toHaveCount(3);
   expect(errors).toEqual([]);
 });
 
@@ -48,7 +46,8 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/funded_awards.html");
   const pill = page.locator(".header-context-pill");
-  await expect(pill).toHaveText("NSF + NIH + DOE awards");
+  await expect(pill).toHaveText("NSF · NIH · DOE");
+  await expect(pill).toHaveAttribute("aria-label", "NSF, NIH, and DOE award sources available");
   const geometry = await pill.evaluate(element => {
     const bounds = element.getBoundingClientRect();
     return {
@@ -67,45 +66,45 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
 test("a failed award source degrades independently", async ({ page }) => {
   mockAwards(page, { failNih: true });
   await page.goto("/funded_awards.html?q=warm+dense+matter&institution=University+of+Rochester");
-  await expect(page.locator(".award-card[data-source='NSF']")).toHaveCount(1);
-  await expect(page.locator(".award-card[data-source='NIH']")).toHaveCount(0);
-  await expect(page.locator(".award-card[data-source='DOE']")).toHaveCount(1);
-  await expect(page.locator("#award-source-status")).toContainText("NIH temporarily unavailable");
-  await expect(page.locator("#award-status")).toContainText("available sources are shown");
+  await expect(page.locator(".ii-award-card[data-source='NSF']")).toHaveCount(1);
+  await expect(page.locator(".ii-award-card[data-source='NIH']")).toHaveCount(0);
+  await expect(page.locator(".ii-award-card[data-source='DOE']")).toHaveCount(1);
+  await expect(page.locator("#ii-source-status")).toContainText("NIH temporarily unavailable");
+  await expect(page.locator("#ii-status")).toContainText("returned from available sources");
 });
 
 test("an underfilled normalized page disables Next even when a source reports more raw records", async ({ page }) => {
   mockAwards(page, { hasMoreAtOffsets: [0] });
   await page.goto("/funded_awards.html");
-  await page.locator("#award-query").fill("warm dense matter");
-  await page.locator("#award-agency").selectOption("NSF");
-  await page.locator("#search-awards").click();
-  await expect(page.locator(".award-card")).toHaveCount(1);
-  await expect(page.locator("#award-previous")).toBeDisabled();
-  await expect(page.locator("#award-next")).toBeDisabled();
+  await page.locator("#ii-topic").fill("warm dense matter");
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-search").click();
+  await expect(page.locator(".ii-award-card")).toHaveCount(1);
+  await expect(page.locator("#ii-previous")).toBeDisabled();
+  await expect(page.locator("#ii-next")).toBeDisabled();
 });
 
 test("pagination restores controls after loading and scrolls each new page to the results heading", async ({ page }) => {
-  mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
+  mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 10 });
   await page.goto("/funded_awards.html");
-  await page.locator("#award-query").fill("warm dense matter");
-  await page.locator("#award-agency").selectOption("NSF");
-  await page.locator("#search-awards").click();
-  await expect(page.locator(".award-card")).toHaveCount(25);
-  await expect(page.locator("#award-previous")).toBeDisabled();
-  await expect(page.locator("#award-next")).toBeEnabled();
+  await page.locator("#ii-topic").fill("warm dense matter");
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-search").click();
+  await expect(page.locator(".ii-award-card")).toHaveCount(10);
+  await expect(page.locator("#ii-previous")).toBeDisabled();
+  await expect(page.locator("#ii-next")).toBeEnabled();
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.locator("#award-next").click();
-  await expect(page).toHaveURL(/offset=25/);
-  await expect(page.locator("#award-previous")).toBeEnabled();
-  await expect(page.locator("#award-next")).toBeDisabled();
-  await expect.poll(() => page.locator("#award-results-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(120);
-  await expect.poll(() => page.locator("#award-results-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
+  await page.locator("#ii-next").click();
+  await expect(page).toHaveURL(/ii_offset=10/);
+  await expect(page.locator("#ii-previous")).toBeEnabled();
+  await expect(page.locator("#ii-next")).toBeDisabled();
+  await expect.poll(() => page.locator("#ii-output-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(120);
+  await expect.poll(() => page.locator("#ii-output-heading").evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
 
-  await page.locator("#award-previous").click();
-  await expect(page).not.toHaveURL(/offset=/);
-  await expect(page.locator("#award-previous")).toBeDisabled();
-  await expect(page.locator("#award-next")).toBeEnabled();
+  await page.locator("#ii-previous").click();
+  await expect(page).not.toHaveURL(/ii_offset=/);
+  await expect(page.locator("#ii-previous")).toBeDisabled();
+  await expect(page.locator("#ii-next")).toBeEnabled();
 });
 
 test("principal investigator and program officer are first-class search modes", async ({ page }) => {
@@ -113,38 +112,37 @@ test("principal investigator and program officer are first-class search modes", 
   await page.goto("/funded_awards.html");
   await expect(page.getByText("Advanced: investigator or program officer")).toHaveCount(0);
 
-  await page.locator("#search-mode").selectOption("pi");
-  await page.locator("#award-query").fill("Stephen Dewhurst");
-  await page.locator("#award-agency").selectOption("NIH");
-  await page.locator("#search-awards").click();
+  await page.locator("#ii-pi").fill("Stephen Dewhurst");
+  await page.locator("#ii-agency").selectOption("NIH");
+  await page.locator("#ii-search").click();
   await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Stephen Dewhurst");
-  await expect(page).toHaveURL(/mode=pi/);
+  await expect(page).toHaveURL(/ii_pi=Stephen\+Dewhurst/);
 
-  await page.locator("#search-mode").selectOption("program_officer");
-  await page.locator("#award-query").fill("Vladimir Lukin");
-  await page.locator("#award-agency").selectOption("NSF");
-  await page.locator("#search-awards").click();
+  await page.locator("#ii-pi").fill("");
+  await page.locator("#ii-program-officer").fill("Vladimir Lukin");
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-search").click();
   await expect.poll(() => calls.at(-1)?.criteria?.program_officer).toBe("Vladimir Lukin");
-  await expect(page).toHaveURL(/mode=program_officer/);
+  await expect(page).toHaveURL(/ii_program_officer=Vladimir\+Lukin/);
 });
 
 test("institution-only shared URLs execute and restore across browser history", async ({ page }) => {
   const calls = mockAwards(page);
   await page.goto("/funded_awards.html?institution=University+of+Rochester");
-  await expect(page.locator(".award-card")).toHaveCount(3);
+  await expect(page.locator(".ii-award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(1);
   expect(calls[0].criteria).toEqual({ institution: "University of Rochester" });
 
-  await page.locator("#clear-award-search").click();
+  await page.locator("#ii-clear").click();
   await expect(page).not.toHaveURL(/institution=/);
-  await expect(page.locator(".award-card")).toHaveCount(0);
+  await expect(page.locator("#ii-output")).toBeHidden();
   await page.goBack();
   await expect(page).toHaveURL(/institution=University\+of\+Rochester/);
-  await expect(page.locator(".award-card")).toHaveCount(3);
+  await expect(page.locator(".ii-award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(2);
   await page.goForward();
   await expect(page).not.toHaveURL(/institution=/);
-  await expect(page.locator(".award-card")).toHaveCount(0);
+  await expect(page.locator("#ii-output")).toBeHidden();
 });
 
 test("eligible Funding Finder results open Funded Awards in a new tab with the exact NIH opportunity selected", async ({ page, context }) => {

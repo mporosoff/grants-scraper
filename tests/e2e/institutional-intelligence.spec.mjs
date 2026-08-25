@@ -8,9 +8,39 @@ import {
 
 async function openInstitutionalIntelligence(page) {
   await page.goto("/funded_awards.html");
-  await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
   await expect(page.locator("#ii-form")).toBeVisible();
 }
+
+test("one unified search supports topic and program-officer queries without an institution", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await expect(page.locator("#award-search-form")).toBeHidden();
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("electrocatalysis");
+  await page.locator("#ii-program-officer").fill("Alex Officer");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  expect(calls.at(-1).criteria).toMatchObject({ topic: "electrocatalysis", program_officer: "Alex Officer" });
+  expect(calls.at(-1).criteria).not.toHaveProperty("institution");
+  await expect(page).toHaveURL(/ii_topic=electrocatalysis/);
+  await expect(page).toHaveURL(/ii_program_officer=Alex\+Officer/);
+});
+
+test("unified pagination stops on an exhausted page and returns to the result heading", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 10 });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-next")).toBeEnabled();
+  await page.locator("#ii-next").click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(10);
+  await expect(page.locator("#ii-next")).toBeDisabled();
+  await expect(page.locator("#ii-output-heading")).toBeFocused();
+  await expect(page).toHaveURL(/ii_offset=10/);
+});
 
 test("ROR aliases resolve to canonical institutions before normalized award queries", async ({ page }) => {
   const errors = watchRuntimeErrors(page);
@@ -78,7 +108,7 @@ test("institution-only shared URLs restore and execute without an AI key", async
   mockHybrid(page);
   const calls = mockAwards(page);
   await page.goto("/funded_awards.html?ii=1&ii_institution=University+of+Virginia&ii_ror=https%3A%2F%2Fror.org%2F0153tk833&ii_topic=catalysis&ii_year_start=2020&ii_year_end=2026");
-  await expect(page.locator("#institutional-intelligence")).toHaveAttribute("open", "");
+  await expect(page.locator("#institutional-intelligence")).toBeVisible();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
   await expect.poll(() => calls.length).toBe(1);
   expect(calls[0].criteria).toMatchObject({
@@ -136,7 +166,7 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   expect(providerCalls[0].store).toBe(false);
   const providerInput = JSON.parse(providerCalls[0].input);
   expect(Object.keys(providerInput).sort()).toEqual(["current_filters", "institution", "question"]);
-  expect(Object.keys(providerInput.current_filters).sort()).toEqual(["agency", "pi", "program", "topic", "year_end", "year_start"]);
+  expect(Object.keys(providerInput.current_filters).sort()).toEqual(["agency", "pi", "program", "program_officer", "topic", "year_end", "year_start"]);
   expect(JSON.stringify(providerInput)).not.toMatch(/profile|cv_text|orcid|saved|pursuit|document/i);
 });
 
@@ -180,6 +210,6 @@ test("legacy Funding Finder Institutional Intelligence links redirect to Funded 
   mockAwards(page);
   await page.goto("/match_explorer.html?ii=1&ii_institution=Massachusetts+Institute+of+Technology&ii_ror=https%3A%2F%2Fror.org%2F042nb2s44");
   await expect(page).toHaveURL(/funded_awards\.html\?ii=1/);
-  await expect(page.locator("#institutional-intelligence")).toHaveAttribute("open", "");
+  await expect(page.locator("#institutional-intelligence")).toBeVisible();
   await expect(page.locator("#ii-institution")).toHaveValue("Massachusetts Institute of Technology");
 });

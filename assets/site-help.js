@@ -26,7 +26,7 @@
         <ol class="help-steps">
           <li><span>1</span><div><strong>Describe what you want to fund</strong><small>Use a topic, method, population, goal, or opportunity number. You may also upload a funding-notice PDF.</small></div></li>
           <li><span>2</span><div><strong>Add context if it helps</strong><small>Optionally add a reusable profile, CV, or filters. You can leave the search blank when those provide enough context.</small></div></li>
-          <li><span>3</span><div><strong>Review, save, and choose alerts</strong><small>Open official sources before acting, then save locally or verify an email alert for the exact search, opportunity, or controlled program you want to follow.</small></div></li>
+          <li><span>3</span><div><strong>Review, save, and choose alerts</strong><small>Open official sources before acting, then save locally or verify a broader saved-search alert. Narrow opportunity and controlled-program watches remain optional.</small></div></li>
         </ol>
       </section>
 
@@ -103,13 +103,13 @@
       <section class="help-section" id="help-alerts">
         <div class="help-section-heading">
           <span class="help-section-number">04</span>
-          <div><h3>Configure personalized email alerts</h3><p>Alerts are opt-in, email-verified, and tied to one exact opportunity, controlled program identity, or typed Funding Finder search.</p></div>
+          <div><h3>Configure personalized email alerts</h3><p>Saved-search alerts are the primary way to follow your broader interests. Optional opportunity and controlled-program watches are available when you need a narrower alert.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
             <h4>Choose what to watch in the GUI</h4>
             <ul>
-              <li><strong>New Strong matches:</strong> run a typed Funding Finder search, then choose <em>Alert me to new Strong matches</em> above the results. Existing Strong matches become the baseline and do not immediately generate email.</li>
+              <li><strong>Overall search and interests:</strong> open <em>Research profile, ORCID, CV, and search alerts</em>, run a typed Funding Finder search, then choose <em>Save this search as an email alert</em> in that pane. The alert follows future new Strong matches to the typed search and public filters across the catalog. Existing Strong matches become the baseline and do not immediately generate email.</li>
               <li><strong>One opportunity:</strong> choose <em>Email alert</em> on a result card or in Saved opportunities, then select deadline, amendment, reminder, and status triggers.</li>
               <li><strong>One program:</strong> choose <em>Program email alert</em> on an eligible result, or <em>Email alerts for this program</em> from an eligible Funded Awards deep link. Program watches use only controlled stable identities.</li>
             </ul>
@@ -129,12 +129,12 @@
       <section class="help-section" id="help-awards">
         <div class="help-section-heading">
           <span class="help-section-number">05</span>
-          <div><h3>Explore Funded Awards</h3><p>Search normalized public NSF, NIH, and DOE Office of Science award records without using the opportunity-vector corpus.</p></div>
+          <div><h3>Explore Funded Awards</h3><p>Use one Funded Award Intelligence search for normalized public NSF, NIH, and DOE Office of Science records without using the opportunity-vector corpus.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
             <h4>Search historical projects</h4>
-            <p>Choose research topic, program, principal investigator, or program officer, then optionally filter by agency, institution, and year. Topic searches use each award source's native public search. Titles, abstracts, contacts, and official links are shown only when the source publishes them.</p>
+            <p>Search by institution, research topic, program, principal investigator, program officer, agency, or year. Selecting an institution adds Research Organization Registry (ROR) identity resolution and institutional summaries; the same compact award cards and factual drill-downs are used for every search. Topic searches use each award source's native public search.</p>
           </div>
           <div class="help-card">
             <h4>Start from a current opportunity</h4>
@@ -151,7 +151,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Resolve an institution</h4>
-            <p>Open Institutional Intelligence in Funded Awards and start typing a name, acronym, or alias. Autocomplete uses the open Research Organization Registry (ROR), while award requests preserve the canonical and source-specific institution identities used by NSF, NIH, and DOE.</p>
+            <p>Use the optional institution field in Funded Award Intelligence and start typing a name, acronym, or alias. Autocomplete uses the open Research Organization Registry (ROR), while award requests preserve the canonical and source-specific institution identities used by NSF, NIH, and DOE.</p>
           </div>
           <div class="help-card">
             <h4>Filter or ask a question</h4>

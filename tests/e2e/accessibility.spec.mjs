@@ -55,8 +55,9 @@ test("Funding Finder has no serious or critical violations across critical state
   await waitForHybridSettled(page);
   await scan(page, "funding-strong-potential", testInfo);
   mockAlerts(page);
+  await page.locator("#profile-builder > summary").click();
   await page.locator("#alert-new-matches").click();
-  const alertDialog = page.getByRole("dialog", { name: "Alert me to new Strong matches" });
+  const alertDialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(alertDialog).toBeVisible();
   await expect(alertDialog.locator("#alert-email")).toBeFocused();
   await scan(page, "funding-alert-dialog", testInfo);
@@ -88,7 +89,6 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.emulateMedia({ reducedMotion: "reduce" });
   mockAwards(page);
   await page.goto("/funded_awards.html");
-  await page.locator("#institutional-intelligence").evaluate(element => { element.open = true; });
   await page.locator("#ii-institution").fill("MIT");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
@@ -108,7 +108,7 @@ test("shared Help remains visible and current across every desktop and mobile su
   ];
 
   for (const [label, url] of surfaces) {
-    await page.setViewportSize({ width: 1024, height: 800 });
+    await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto(url);
     const helpButton = page.getByRole("button", { name: "Help" });
     await expect(helpButton).toBeVisible();
@@ -139,9 +139,10 @@ test("shared Help remains visible and current across every desktop and mobile su
     await page.keyboard.press("Escape");
   }
 
-  await page.setViewportSize({ width: 1024, height: 800 });
+  await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/match_explorer.html");
-  const alertHelp = page.getByRole("button", { name: "How email alerts work" });
+  await page.locator("#profile-builder > summary").click();
+  const alertHelp = page.getByRole("button", { name: "How search alerts work" });
   await expect(alertHelp).toBeVisible();
   await alertHelp.click();
   await expect(page.getByRole("dialog").locator("#help-alerts")).toBeVisible();
@@ -149,6 +150,38 @@ test("shared Help remains visible and current across every desktop and mobile su
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Help" }).click();
   await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBe(0);
+});
+
+test("shared navigation and primary content geometry stay aligned across all three pages", async ({ page }) => {
+  mockHybrid(page);
+  mockAwards(page);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const surfaces = [
+    ["/match_explorer.html", ".hero-copy"],
+    ["/team_match.html", ".wrap"],
+    ["/funded_awards.html", ".awards-main"],
+  ];
+  const measurements = [];
+  for (const [url, contentSelector] of surfaces) {
+    await page.goto(url);
+    measurements.push(await page.evaluate(selector => {
+      const nav = document.querySelector(".site-nav").getBoundingClientRect();
+      const header = document.querySelector(".site-header").getBoundingClientRect();
+      const content = document.querySelector(selector).getBoundingClientRect();
+      return {
+        navCenter: nav.left + nav.width / 2,
+        headerHeight: header.height,
+        contentWidth: content.width,
+        brandSubtitle: document.querySelector(".site-header .brand small")?.textContent?.trim(),
+      };
+    }, contentSelector));
+  }
+  for (const measurement of measurements) {
+    expect(Math.abs(measurement.navCenter - 720)).toBeLessThanOrEqual(1);
+    expect(measurement.headerHeight).toBe(measurements[0].headerHeight);
+    expect(Math.abs(measurement.contentWidth - measurements[0].contentWidth)).toBeLessThanOrEqual(4);
+    expect(measurement.brandSubtitle).toBe("Research funding tools");
+  }
 });
 
 test("Team Match has no serious or critical violations across picker, results, and fallback states", async ({ page, context }, testInfo) => {

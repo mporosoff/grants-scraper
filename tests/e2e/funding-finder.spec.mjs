@@ -23,8 +23,9 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   await page.locator("[data-pursuit-status]").selectOption("pursuing");
   await page.locator("[data-pursuit-note]").fill("Draft due Friday");
 
+  await page.locator("#profile-builder > summary").click();
   await page.locator("#alert-new-matches").click();
-  const dialog = page.getByRole("dialog", { name: "Alert me to new Strong matches" });
+  const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText("current Strong matches become the starting baseline");
   await dialog.locator("#alert-email").fill("researcher@example.edu");

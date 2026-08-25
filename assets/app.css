@@ -2248,12 +2248,12 @@ textarea:focus {
 .saved-content { flex: 1; min-width: 0; }
 .saved-item-actions { align-self: flex-start; }
 
-.email-alert-onboarding {
+.profile-search-alert {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 18px;
   align-items: center;
-  margin: 0 0 14px;
+  margin-top: 18px;
   padding: 16px 18px;
   color: var(--ink);
   border: 1px solid #c9d9ee;
@@ -2261,16 +2261,16 @@ textarea:focus {
   background: linear-gradient(135deg, #f5f9ff, #fffdf3);
 }
 
-.email-alert-onboarding .eyebrow {
+.profile-search-alert .eyebrow {
   margin-bottom: 3px;
 }
 
-.email-alert-onboarding h2 {
+.profile-search-alert h3 {
   margin: 0;
   font-size: 1rem;
 }
 
-.email-alert-onboarding p:not(.eyebrow) {
+.profile-search-alert p:not(.eyebrow) {
   max-width: 850px;
   margin: 5px 0 0;
   color: var(--muted);
@@ -2278,18 +2278,35 @@ textarea:focus {
   line-height: 1.5;
 }
 
-.email-alert-onboarding .email-alert-manage-note {
+.profile-search-alert .profile-search-alert-privacy {
   color: #314f72;
 }
 
-.email-alert-onboarding > .button {
-  white-space: nowrap;
+.profile-search-alert-actions {
+  display: grid;
+  gap: 7px;
+  min-width: min(100%, 260px);
+  justify-items: stretch;
+}
+
+.profile-search-alert-actions .button {
+  white-space: normal;
+}
+
+.profile-search-alert-actions .text-button {
+  justify-self: center;
+}
+
+.profile-search-alert-actions #profile-search-alert-status {
+  margin: 0;
+  font-size: .7rem;
+  text-align: center;
 }
 
 @media (max-width: 560px) {
   .saved-item { align-items: stretch; flex-direction: column; }
-  .email-alert-onboarding { grid-template-columns: minmax(0, 1fr); }
-  .email-alert-onboarding > .button { width: 100%; }
+  .profile-search-alert { grid-template-columns: minmax(0, 1fr); }
+  .profile-search-alert-actions { width: 100%; }
 }
 
 .ai-button {
