@@ -266,11 +266,13 @@ test("the natural-language translator reuses the saved Funding Finder provider a
     const providerCall = route.request().postDataJSON();
     providerCalls.push(providerCall);
     const requestedQuestion = JSON.parse(providerCall.input).question;
-    const program = /CAREER|Faculty Early Career/.test(requestedQuestion) ? "CAREER" : "MRI";
+    const topicQuestion = requestedQuestion.includes("Artificial Intelligence Research");
+    const program = topicQuestion ? "" : /CAREER|Faculty Early Career/.test(requestedQuestion) ? "CAREER" : "MRI";
+    const topic = topicQuestion ? "Artificial Intelligence Research" : "";
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({ agency: "NSF", program, topic: "", pi: "", year_start: "", year_end: "" }) }),
+      body: JSON.stringify({ output_text: JSON.stringify({ agency: topicQuestion ? "all" : "NSF", program, topic, pi: "", year_start: "", year_end: "" }) }),
     });
   });
   mockHybrid(page);
@@ -308,6 +310,11 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect(page.locator("#ii-question-plan")).toContainText("Program: CAREER");
   await expect.poll(() => providerCalls.length).toBe(4);
   expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
+  await page.locator("#ii-question").fill("What has Artificial Intelligence Research received?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Topic: Artificial Intelligence Research");
+  await expect.poll(() => providerCalls.length).toBe(5);
+  expect(calls.slice(-3).every(call => call.criteria.topic === "Artificial Intelligence Research" && !Object.hasOwn(call.criteria, "pi"))).toBe(true);
 });
 
 test("the question translator preserves an explicitly named University of Rochester investigator", async ({ page }) => {
@@ -344,6 +351,12 @@ test("the question translator preserves an explicitly named University of Roches
   await expect(page.locator("#ii-question-plan")).toContainText("Agency: NSF");
   await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
   await expect.poll(() => calls.length).toBe(8);
+  expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
+  await page.locator("#ii-question").fill("Did Dr. Marc Porosoff receive NSF funding?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Investigator: Marc Porosoff");
+  await expect(page.locator("#ii-question-plan")).not.toContainText("Investigator: Dr.");
+  await expect.poll(() => calls.length).toBe(9);
   expect(calls.at(-1).criteria.pi).toBe("Marc Porosoff");
 });
 

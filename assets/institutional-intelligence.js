@@ -729,7 +729,7 @@
         ...(selectedInstitution?.aliases || []),
         ...(selectedInstitution?.acronyms || []),
       ];
-      const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases);
+      const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases, plan.topic);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
       const next = core.sanitizeQuestionPlan(plan, current);
       applyFormState(next);

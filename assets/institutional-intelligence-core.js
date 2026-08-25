@@ -257,7 +257,7 @@
     };
   }
 
-  function explicitInvestigator(question, institution = "", program = "", institutionAliases = []) {
+  function explicitInvestigator(question, institution = "", program = "", institutionAliases = [], topic = "") {
     const value = clean(question, 1_000);
     if (!value) return "";
     const name = "([\\p{Lu}][\\p{L}'’.-]*(?:\\s+[\\p{Lu}][\\p{L}'’.-]*){1,3})";
@@ -268,10 +268,13 @@
     for (const pattern of patterns) {
       const match = value.match(pattern);
       if (match?.[1]) {
-        const candidate = clean(match[1], 160).replace(/[.,;:]+$/u, "");
+        const candidate = clean(match[1], 160)
+          .replace(/[.,;:]+$/u, "")
+          .replace(/^(?:Dr|Doctor|Prof|Professor|Mr|Ms|Mrs|Mx)\.?\s+/u, "");
         if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
+        if (identityKey(candidate) === identityKey(topic)) continue;
         if (/\b(?:University|Institute|College|Hospital|Laboratory|Center|Centre|School|Department|Office|Foundation|Corporation|Program|Programme|Initiative|Award|Awards|Fellowship|Fellowships|LLC|Inc)\b/i.test(candidate)) continue;
         const institutionIdentities = [institution, ...(Array.isArray(institutionAliases) ? institutionAliases : [])]
           .map(identityKey)
