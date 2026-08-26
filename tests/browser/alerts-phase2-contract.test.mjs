@@ -212,9 +212,9 @@ test("0003 migrates representative production lifecycle rows without changing th
     states.map(([id, , active, verifiedAt]) => [id, active, verifiedAt]).sort((a, b) => a[0].localeCompare(b[0])),
   );
   assert.deepEqual(
-    all(database, "SELECT status,message_kind,terminal_at,provider_batch_has_overflow FROM notification_events ORDER BY id")
-      .map(row => [row.status, row.message_kind, row.terminal_at, row.provider_batch_has_overflow]),
-    ["failed", "queued", "sending", "sent"].map(status => [status, "notification", null, 0]),
+    all(database, "SELECT status,message_kind,terminal_at,provider_batch_has_overflow,provider_payload_json FROM notification_events ORDER BY id")
+      .map(row => [row.status, row.message_kind, row.terminal_at, row.provider_batch_has_overflow, row.provider_payload_json]),
+    ["failed", "queued", "sending", "sent"].map(status => [status, "notification", null, 0, null]),
   );
   const columns = all(database, "PRAGMA table_info(notification_events)").map(row => row.name);
   assert.ok(columns.includes("message_kind"));
@@ -222,6 +222,7 @@ test("0003 migrates representative production lifecycle rows without changing th
   assert.ok(columns.includes("provider_quota_key"));
   assert.ok(columns.includes("provider_quota_reserved_at"));
   assert.ok(columns.includes("provider_batch_has_overflow"));
+  assert.ok(columns.includes("provider_payload_json"));
   assert.ok(all(database, "PRAGMA table_info(rate_limits)").map(row => row.name).includes("last_reservation_key"));
 });
 
@@ -535,7 +536,11 @@ test("FF-BUG-008 verification delivery survives network and 429 retries with pro
     assert.equal(failed.status, "failed");
     assert.equal(failed.terminal_at, null);
     const retryNow = new Date("2026-09-01T12:06:00.000Z");
-    const second = await dispatchVerificationDeliveries({ store, provider, env: limitedEnv, now: retryNow });
+    const second = await dispatchVerificationDeliveries({
+      store, provider,
+      env: { ...limitedEnv, PUBLIC_WORKER_ORIGIN: "https://replacement-alerts.example.test" },
+      now: retryNow,
+    });
     assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
     const sent = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
     assert.equal(sent.status, "sent");
@@ -545,6 +550,9 @@ test("FF-BUG-008 verification delivery survives network and 429 retries with pro
     assert.ok(sent.provider_quota_reserved_at);
     assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
     assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+    assert.equal(provider.attempts[0].message.subject, provider.attempts[1].message.subject);
+    assert.equal(provider.attempts[0].message.text, provider.attempts[1].message.text);
+    assert.equal(provider.attempts[0].message.html, provider.attempts[1].message.html);
   }
 });
 
@@ -1227,10 +1235,15 @@ test("FF-BUG-017 a failed digest retries the whole claim with the same idempoten
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='failed'").get().count, DIGEST_MAX_EVENTS);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='queued'").get().count, 1);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE provider_batch_has_overflow=1").get().count, DIGEST_MAX_EVENTS);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE provider_payload_json IS NOT NULL").get().count, 1);
   assert.match(provider.attempts[0].message.text, /Additional updates remain queued for a later digest/);
   assert.match(provider.attempts[0].message.html, /Additional updates remain queued for a later digest/);
   const retryNow = new Date("2026-09-01T12:06:00.000Z");
-  const second = await dispatchNotifications({ store, provider, env, now: retryNow, weekly: false });
+  const second = await dispatchNotifications({
+    store, provider,
+    env: { ...env, PUBLIC_WORKER_ORIGIN: "https://replacement-alerts.example.test" },
+    now: retryNow, weekly: false,
+  });
   assert.equal(second.deliveredCount, 1);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='sent'").get().count, DIGEST_MAX_EVENTS);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='queued'").get().count, 1);

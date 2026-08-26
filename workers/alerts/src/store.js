@@ -33,11 +33,14 @@ export class D1AlertStore {
     return true;
   }
 
-  async reserveProviderMessage(messageKey, eventIds, limit, windowSeconds, now, hasOverflow = false) {
+  async reserveProviderMessage(
+    messageKey, eventIds, limit, windowSeconds, now, hasOverflow = false, providerPayload = null,
+  ) {
     if (!messageKey || !eventIds.length) return false;
     const placeholders = eventIds.map(() => "?").join(",");
     const timestamp = now.toISOString();
     const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
+    const payloadJson = JSON.stringify(providerPayload || {});
     const claimableCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL`;
     const matchingReservationCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND provider_quota_key = ?`;
     await this.db.batch([
@@ -50,8 +53,11 @@ export class D1AlertStore {
         ...eventIds, eventIds.length, ...eventIds, messageKey, eventIds.length,
       ),
       this.db.prepare(
-        `UPDATE notification_events SET provider_quota_key = ?, provider_quota_reserved_at = ?, provider_batch_has_overflow = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
-      ).bind(messageKey, timestamp, hasOverflow ? 1 : 0, ...eventIds, messageKey),
+        `UPDATE notification_events SET provider_payload_json = CASE WHEN id = (SELECT MIN(id) FROM notification_events WHERE id IN (${placeholders})) THEN CASE WHEN provider_quota_key = ? THEN COALESCE(provider_payload_json, ?) ELSE ? END ELSE NULL END, provider_batch_has_overflow = CASE WHEN provider_quota_key = ? THEN provider_batch_has_overflow ELSE ? END, provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
+      ).bind(
+        ...eventIds, messageKey, payloadJson, payloadJson, messageKey, hasOverflow ? 1 : 0,
+        messageKey, timestamp, ...eventIds, messageKey,
+      ),
     ]);
     const reserved = await this.db.prepare(
       `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? AND status = 'sending' AND terminal_at IS NULL THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})`,
@@ -312,7 +318,7 @@ export class D1AlertStore {
   async pendingNotificationReconciliationBatches(now, messageLimit, eventLimit) {
     const staleBefore = staleClaimCutoff(now);
     const keys = rows(await this.db.prepare(
-      "SELECT n.provider_quota_key, MIN(n.created_at) AS first_created_at, MAX(n.provider_batch_has_overflow) AS has_overflow FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.provider_quota_key IS NOT NULL AND n.error_code = 'provider_outcome_reconcile' AND n.terminal_at IS NULL AND ((n.status = 'failed' AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND u.suppressed_at IS NULL GROUP BY n.provider_quota_key ORDER BY first_created_at, n.provider_quota_key LIMIT ?",
+      "SELECT n.provider_quota_key, MIN(n.created_at) AS first_created_at, MAX(n.provider_batch_has_overflow) AS has_overflow, MAX(n.provider_payload_json) AS provider_payload_json FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.provider_quota_key IS NOT NULL AND n.error_code = 'provider_outcome_reconcile' AND n.terminal_at IS NULL AND ((n.status = 'failed' AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND u.suppressed_at IS NULL GROUP BY n.provider_quota_key HAVING MAX(n.provider_payload_json) IS NOT NULL ORDER BY first_created_at, n.provider_quota_key LIMIT ?",
     ).bind(now, staleBefore, messageLimit).all());
     const batches = [];
     for (const key of keys) {
@@ -323,6 +329,7 @@ export class D1AlertStore {
         events: eligible,
         hasOverflow: Number(key.has_overflow) === 1,
         idempotencyKey: key.provider_quota_key,
+        providerPayloadJson: key.provider_payload_json,
         reconciliation: true,
       });
     }
@@ -447,7 +454,7 @@ export class D1AlertStore {
 
   async health() {
     const row = await this.db.prepare(
-      "SELECT (SELECT COUNT(*) FROM (SELECT id FROM subscriptions LIMIT 1)) AS subscription_rows, (SELECT COUNT(*) FROM (SELECT message_kind, terminal_at, provider_quota_key, provider_quota_reserved_at, provider_batch_has_overflow FROM notification_events LIMIT 1)) AS event_rows, (SELECT COUNT(*) FROM (SELECT last_reservation_key FROM rate_limits LIMIT 1)) AS rate_rows",
+      "SELECT (SELECT COUNT(*) FROM (SELECT id FROM subscriptions LIMIT 1)) AS subscription_rows, (SELECT COUNT(*) FROM (SELECT message_kind, terminal_at, provider_quota_key, provider_quota_reserved_at, provider_batch_has_overflow, provider_payload_json FROM notification_events LIMIT 1)) AS event_rows, (SELECT COUNT(*) FROM (SELECT last_reservation_key FROM rate_limits LIMIT 1)) AS rate_rows",
     ).first();
     return Boolean(row);
   }

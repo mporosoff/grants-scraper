@@ -22,6 +22,11 @@ ALTER TABLE notification_events
   ADD COLUMN provider_batch_has_overflow INTEGER NOT NULL DEFAULT 0
   CHECK (provider_batch_has_overflow IN (0, 1));
 
+-- A provider idempotency key must replay the exact rendered request even when
+-- a retry crosses a Worker/template or public-origin deployment.
+ALTER TABLE notification_events
+  ADD COLUMN provider_payload_json TEXT;
+
 ALTER TABLE rate_limits
   ADD COLUMN last_reservation_key TEXT;
 
