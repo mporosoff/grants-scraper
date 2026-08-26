@@ -1,6 +1,7 @@
 """P11 workflow scope and failure-routing contracts."""
 
 from pathlib import Path
+import re
 import unittest
 
 
@@ -51,10 +52,37 @@ class P11WorkflowTests(unittest.TestCase):
         self.assertNotIn("unittest discover", source)
         self.assertIn('"tools/run_refresh_validation.py"', source)
 
-    def test_push_ci_uses_the_same_live_product_measurement_boundary(self):
+    def test_protected_ci_uses_the_same_live_product_measurement_boundary(self):
         source = TEST_WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("python -m tools.run_refresh_validation", source)
         self.assertNotIn("unittest discover", source)
+
+    def test_tests_workflow_runs_once_per_pr_head_and_again_on_main(self):
+        source = TEST_WORKFLOW.read_text(encoding="utf-8")
+        self.assertRegex(
+            source,
+            re.compile(
+                r"^on:\n  pull_request:\n  push:\n    branches:\n      - main$",
+                re.MULTILINE,
+            ),
+        )
+        self.assertIn(
+            "concurrency:\n"
+            "  group: tests-${{ github.event.pull_request.number || github.ref }}\n"
+            "  cancel-in-progress: true",
+            source,
+        )
+        for job in ("python", "browser", "e2e"):
+            self.assertRegex(source, rf"(?m)^  {job}:$")
+        for command in (
+            "python -m tools.run_refresh_validation",
+            "bash tools/verify_no_drift.sh",
+            "node --test tests/browser/*.test.mjs",
+            "node tools/query_baseline.mjs --check",
+            "node tools/p9_scoring_probe.mjs --check",
+            "pnpm test:e2e",
+        ):
+            self.assertIn(command, source)
 
     def test_document_degradation_routes_to_the_existing_degraded_channel(self):
         source = WORKFLOW.read_text(encoding="utf-8")

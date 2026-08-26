@@ -54,6 +54,16 @@ python -m scripts.build_catalog \
   --min-records 1 \
   --output "$OUT/opportunities.js" >/dev/null
 
+# Later enrichment and source-merge stages derive currentness from the catalog
+# stamp rather than from build_catalog's --as-of argument. Pin the hermetic
+# artifact's top-level stamp before those stages so date-bound actionability
+# cannot change when this gate crosses a real UTC deadline. Production builds
+# do not call this gate-only helper and continue to retain their real timestamp.
+python "$ROOT/tools/pin_generated_at.py" \
+  "$OUT/opportunities.js" \
+  "$OUT/opportunities.js" \
+  "${AS_OF}T00:00:00Z"
+
 # Snapshot for change detection, mirroring the workflow's pre-build copy.
 cp "$OUT/opportunities.js" "$OUT/.work/opportunities.previous.js"
 
