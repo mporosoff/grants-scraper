@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-25T10:57:15Z",
-  "excluded_noncurrent": 7,
+  "generated_at": "2026-08-26T10:55:47Z",
+  "excluded_noncurrent": 9,
   "feeds": [
     {
       "title": "All new opportunities",
@@ -30,7 +30,7 @@
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 236
+      "count": 235
     },
     {
       "title": "Funding Finder | Arts and culture",
@@ -45,7 +45,7 @@
     {
       "title": "Funding Finder | Cancer",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml",
-      "count": 110
+      "count": 111
     },
     {
       "title": "Funding Finder | Carbon management",
@@ -80,7 +80,7 @@
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 523
+      "count": 525
     },
     {
       "title": "Funding Finder | Energy",
@@ -95,7 +95,7 @@
     {
       "title": "Funding Finder | Health equity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml",
-      "count": 23
+      "count": 24
     },
     {
       "title": "Funding Finder | Infectious disease",
@@ -115,7 +115,7 @@
     {
       "title": "Funding Finder | Neuroscience",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml",
-      "count": 80
+      "count": 81
     },
     {
       "title": "Funding Finder | Public health",
@@ -135,7 +135,7 @@
     {
       "title": "Funding Finder | Social and behavioral sciences",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml",
-      "count": 133
+      "count": 135
     },
     {
       "title": "Funding Finder | Space and aeronautics",
@@ -150,7 +150,7 @@
     {
       "title": "Funding Finder | Transportation",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml",
-      "count": 140
+      "count": 139
     },
     {
       "title": "Funding Finder | Water",

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-25T10:57:15Z</updated>
+  <updated>2026-08-26T10:55:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -167,6 +167,17 @@
     <summary>National Institutes of Health | Closes 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
   </entry>
   <entry>
+    <title>Innovative Research to Improve Native Hawaiian and Pacific Islander (NHPI) Health Outcomes (R34 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363713"/>
+    <id>urn:funding-finder:grants-gov:363713</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Health equity"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-02-16 | The National Institute on Minority Health and Health Disparities (NIMHD), intends to publish a Notice of Funding Opportunity (NOFO) for planning grants to support preparatory, feasibility, and pilot activities that advance intervention development or solutions-oriented etiologic studies aimed at improving health and reducing health disparities outcomes among Native Hawaiian and Pacific Islander (N…</summary>
+  </entry>
+  <entry>
     <title>National Urban Indian Health Program (Education and Research)</title>
     <link href="https://www.grants.gov/search-results-detail/363494"/>
     <id>urn:funding-finder:grants-gov:363494</id>
@@ -232,6 +243,17 @@
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+  </entry>
+  <entry>
+    <title>BJA FY 2026 Crisis Response Training Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363710"/>
+    <id>urn:funding-finder:grants-gov:363710</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Bureau of Justice Assistance | Closes 2026-10-05 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Crisis Response Training Program. This opportunity supports state, local, and tribal governments, law enforcement agencies, correctional facilities, probation and parole departments, and sheriffs’ offices in developing, implementing, or expanding crisis response training programs that enhance public safety, officer safety, and oper…</summary>
   </entry>
   <entry>
     <title>Expeditions in Computing (Expeditions)</title>
@@ -628,30 +650,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
-  </entry>
-  <entry>
-    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
-    <link href="https://www.grants.gov/search-results-detail/361008"/>
-    <id>urn:funding-finder:grants-gov:361008</id>
-    <updated>2025-12-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>
