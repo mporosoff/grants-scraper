@@ -230,6 +230,23 @@ class PinToolTests(unittest.TestCase):
             )
             self.assertFalse(destination.exists())
 
+    def test_the_cli_can_pin_a_hermetic_artifact_in_place(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            catalog = Path(tmp) / "opportunities.js"
+            catalog.write_text(
+                catalog_text(BEFORE_MIDNIGHT, RECORDS), encoding="utf-8"
+            )
+            self.assertEqual(
+                pin_generated_at.main(
+                    [str(catalog), str(catalog), "2026-08-20T00:00:00Z"]
+                ),
+                0,
+            )
+            self.assertIn(
+                '"generated_at": "2026-08-20T00:00:00Z"',
+                catalog.read_text(encoding="utf-8"),
+            )
+
 
 class HermeticBuildWiringTests(unittest.TestCase):
     """The gate script must keep using the pin. Removing it re-opens D7."""
@@ -245,6 +262,11 @@ class HermeticBuildWiringTests(unittest.TestCase):
             self.script.index("tools/pin_generated_at.py"),
             self.script.index("scripts.build_changes"),
         )
+
+    def test_currentness_is_pinned_before_enrichment(self):
+        first_pin = self.script.index("tools/pin_generated_at.py")
+        self.assertLess(first_pin, self.script.index("scripts.enrich_catalog"))
+        self.assertIn('"${AS_OF}T00:00:00Z"', self.script[first_pin:])
 
     def test_build_changes_reads_the_pinned_copy_not_the_artifact(self):
         self.assertIn('--current "$OUT/.work/opportunities.pinned.js"', self.script)
