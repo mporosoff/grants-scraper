@@ -19,6 +19,7 @@ on:
       - "match_explorer.html"
       - "package.json"
       - "pnpm-lock.yaml"
+      - "tools/classify_worker_deployment.mjs"
       - "tools/smoke_award_worker.mjs"
       - "tools/smoke_phase3_award_worker.mjs"
       - "workers/award-api/**"
@@ -47,6 +48,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Verify the bounded award contracts
         run: >-
+          node --check tools/classify_worker_deployment.mjs &&
           node --check assets/award-links.js &&
           node --check assets/app.js &&
           node --check assets/funded-awards-core.js &&
@@ -59,7 +61,7 @@ jobs:
           node --check workers/award-api/src/adapters/nsf.js &&
           node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -76,8 +78,14 @@ jobs:
             exit 1
           fi
           echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Classify Award Worker deployment inputs
+        id: worker-inputs
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: node tools/classify_worker_deployment.mjs award-api "$BEFORE_SHA" "$GITHUB_SHA"
       - name: Capture the active Award Worker version for rollback
         id: prior-worker
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -101,14 +109,25 @@ jobs:
           else
             echo "No prior Award Worker deployment was found; this is a first deployment." >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Reconfirm protected main immediately before Award Worker mutation
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        shell: bash
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            echo "::error::Protected main advanced before the Award Worker mutation."
+            exit 1
+          fi
       - name: Deploy the committed Award Worker
         id: worker-deploy
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.125.0 deploy --config workers/award-api/wrangler.jsonc
       - name: Wait for the Award Worker health contract
         id: worker-health
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash
         run: |
           for attempt in {1..12}; do
@@ -127,6 +146,7 @@ jobs:
           exit 1
       - name: Run bounded exact-source smokes
         id: worker-smoke
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         run: >-
           node tools/smoke_award_worker.mjs &&
           node tools/smoke_phase3_award_worker.mjs
@@ -168,6 +188,15 @@ jobs:
             echo "::error::GitHub Pages did not serve the committed Funding Finder integration within the verification window."
             exit 1
           fi
+      - name: Record retained Award Worker version
+        if: ${{ steps.worker-inputs.outputs.deploy_required != 'true' }}
+        shell: bash
+        run: |
+          {
+            echo "### Award Worker deployment"
+            echo
+            echo "Existing deployed Award Worker version retained because deployment inputs were unchanged."
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Restore the prior Award Worker after a failed release smoke
         if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure' || steps.funding-finder-verify.outcome == 'failure') }}
         env:
