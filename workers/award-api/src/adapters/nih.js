@@ -13,7 +13,7 @@ import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NIH_ADAPTER_VERSION = "1.4.1";
+export const NIH_ADAPTER_VERSION = "1.4.2";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
 export const NIH_UPSTREAM_PAGE_SIZE = 100;
 export const NIH_MAX_UPSTREAM_PAGES = 12;
@@ -24,7 +24,7 @@ function parseCoreProjectNumber(value) {
   return { activity_code: match[1], ic_code: match[2], serial_num: match[3] };
 }
 
-export function buildNihRequest(criteria, { limit, offset, currentYear }) {
+export function buildNihRequest(criteria, { limit, offset, retrievedDate }) {
   if (criteria.award_id || criteria.program_codes || criteria.program_office) {
     throw new AwardSourceError("unsupported_criteria", "unsupported");
   }
@@ -55,7 +55,7 @@ export function buildNihRequest(criteria, { limit, offset, currentYear }) {
       apiCriteria.org_names = criteria._institution.sources.NIH.search_names;
     }
   }
-  const fiscalYears = nihFiscalYears(criteria, currentYear);
+  const fiscalYears = nihFiscalYears(criteria, retrievedDate);
   if (fiscalYears) apiCriteria.fiscal_years = fiscalYears;
   const upstreamLimit = Math.min(Math.max(limit * 4, 50), 100);
   const body = {
@@ -241,7 +241,6 @@ function normalizeProjects(groups, { criteria, retrievedAt, completeHistory }) {
 export async function searchNih(fetchImpl, criteria, options) {
   const retrievedDate = options.now();
   const retrievedAt = retrievedDate.toISOString();
-  const currentYear = retrievedDate.getUTCFullYear();
   const yearFilter = yearFilterDiagnostics(criteria);
   const targetProjectCount = options.offset + options.limit + 1;
   const rawRecords = [];
@@ -254,7 +253,7 @@ export async function searchNih(fetchImpl, criteria, options) {
   let results = [];
 
   for (let page = 0; page < NIH_MAX_UPSTREAM_PAGES; page += 1) {
-    const request = buildNihRequest(criteria, { limit: NIH_UPSTREAM_PAGE_SIZE, offset: upstreamOffset, currentYear });
+    const request = buildNihRequest(criteria, { limit: NIH_UPSTREAM_PAGE_SIZE, offset: upstreamOffset, retrievedDate });
     const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
     if (!Array.isArray(payload?.results) || !payload.meta || typeof payload.meta !== "object") {
       throw new AwardSourceError("source_invalid_response");

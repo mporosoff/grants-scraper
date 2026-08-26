@@ -6,7 +6,7 @@ import vm from "node:vm";
 import { searchDoe } from "../../workers/award-api/src/adapters/doe.js";
 import { buildNihRequest, searchNih } from "../../workers/award-api/src/adapters/nih.js";
 import { searchNsf } from "../../workers/award-api/src/adapters/nsf.js";
-import { nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../../workers/award-api/src/year-filter.js";
+import { federalFiscalYear, nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../../workers/award-api/src/year-filter.js";
 
 const root = new URL("../../", import.meta.url);
 const [coreSource, appSource, fundedSource, nsfFixture, nihFixture, doeForm, doePage1, doePage2, doeAbstract] = await Promise.all([
@@ -73,13 +73,30 @@ function award({ source, id, name, year = 2024, parent, leaf, code = null, email
 }
 
 test("inclusive and one-sided year filters are bounded and explicit", () => {
-  assert.deepEqual(nihFiscalYears({ year_start: 2024 }, 2026), [2024, 2025, 2026]);
-  assert.deepEqual(nihFiscalYears({ year_end: 1991 }, 2026), [1989, 1990, 1991]);
-  assert.deepEqual(nihFiscalYears({ year_start: 2026, year_end: 2027 }, 2026), [2026, 2027]);
-  assert.equal(nihFiscalYears({ year_end: 2027 }, 2026).at(-1), 2027);
-  assert.deepEqual(buildNihRequest({ year_start: 2024 }, { limit: 25, offset: 0, currentYear: 2026 }).body.criteria.fiscal_years, [2024, 2025, 2026]);
+  const beforeRollover = new Date("2026-09-30T23:59:59.999Z");
+  const afterRollover = new Date("2026-10-01T00:00:00.000Z");
+  assert.equal(federalFiscalYear(beforeRollover), 2026);
+  assert.equal(federalFiscalYear(afterRollover), 2027);
+  assert.deepEqual(nihFiscalYears({ year_start: 2026 }, beforeRollover), [2026]);
+  assert.deepEqual(nihFiscalYears({ year_start: 2026 }, afterRollover), [2026, 2027]);
+  assert.deepEqual(nihFiscalYears({ year_start: 2028 }, afterRollover), [2028]);
+  assert.deepEqual(nihFiscalYears({ year_end: 1991 }, afterRollover), [1989, 1990, 1991]);
+  assert.deepEqual(nihFiscalYears({ year_start: 1989, year_end: 1989 }, afterRollover), [1989]);
+  assert.deepEqual(nihFiscalYears({ year_start: 2100, year_end: 2100 }, afterRollover), [2100]);
+  assert.equal(nihFiscalYears({}, afterRollover), null);
+  for (const retrievedDate of [beforeRollover, afterRollover]) {
+    assert.deepEqual(nihFiscalYears({ year_start: 2027, year_end: 2028 }, retrievedDate), [2027, 2028]);
+    assert.deepEqual(
+      buildNihRequest({ year_start: 2027, year_end: 2028 }, { limit: 25, offset: 0, retrievedDate }).body.criteria.fiscal_years,
+      [2027, 2028],
+    );
+  }
   assert.deepEqual(
-    buildNihRequest({ year_start: 2026, year_end: 2027 }, { limit: 25, offset: 0, currentYear: 2026 }).body.criteria.fiscal_years,
+    buildNihRequest({ year_start: 2026 }, { limit: 25, offset: 0, retrievedDate: beforeRollover }).body.criteria.fiscal_years,
+    [2026],
+  );
+  assert.deepEqual(
+    buildNihRequest({ year_start: 2026 }, { limit: 25, offset: 0, retrievedDate: afterRollover }).body.criteria.fiscal_years,
     [2026, 2027],
   );
   const diagnostics = yearFilterDiagnostics({ year_start: 2022, year_end: 2024 });
@@ -98,6 +115,28 @@ test("inclusive and one-sided year filters are bounded and explicit", () => {
     rejected_missing_year: 1,
     rejected_out_of_range: 1,
   });
+});
+
+test("NIH search captures one UTC clock value and carries the federal fiscal year into its request", async () => {
+  const requestBodies = [];
+  let nowCalls = 0;
+  const result = await searchNih(async (_url, options) => {
+    requestBodies.push(JSON.parse(options.body));
+    return new Response(JSON.stringify({ meta: { total: 0, offset: 0 }, results: [] }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }, { topic: "catalysis", year_start: 2026 }, {
+    limit: 2,
+    offset: 0,
+    now: () => {
+      nowCalls += 1;
+      return new Date("2026-10-01T00:00:00.000Z");
+    },
+  });
+  assert.equal(nowCalls, 1);
+  assert.equal(requestBodies.length, 1);
+  assert.deepEqual(requestBodies[0].criteria.fiscal_years, [2026, 2027]);
+  assert.equal(result.retrieved_at, "2026-10-01T00:00:00.000Z");
 });
 
 test("NSF applies year validation before normalized offsets and reaches later valid awards", async () => {

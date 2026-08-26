@@ -6,6 +6,16 @@ function boundedYear(value) {
   return Number.isInteger(year) && year >= MIN_AWARD_YEAR && year <= MAX_AWARD_YEAR ? year : null;
 }
 
+export function federalFiscalYear(asOf = new Date()) {
+  const directYear = boundedYear(asOf);
+  if (directYear !== null) return directYear;
+  const date = asOf instanceof Date ? asOf : new Date(asOf);
+  const calendarYear = date.getUTCFullYear();
+  if (!Number.isInteger(calendarYear)) return MIN_AWARD_YEAR;
+  const fiscalYear = calendarYear + (date.getUTCMonth() >= 9 ? 1 : 0);
+  return Math.min(MAX_AWARD_YEAR, Math.max(MIN_AWARD_YEAR, fiscalYear));
+}
+
 export function requestedYearRange(criteria = {}) {
   const start = boundedYear(criteria.year_start);
   const end = boundedYear(criteria.year_end);
@@ -42,13 +52,12 @@ export function recordSatisfiesYearFilter(value, criteria, diagnostics = null) {
   return true;
 }
 
-export function nihFiscalYears(criteria = {}, currentYear = new Date().getUTCFullYear()) {
+export function nihFiscalYears(criteria = {}, asOf = new Date()) {
   const range = requestedYearRange(criteria);
   if (!range.active) return null;
-  const boundedCurrent = boundedYear(currentYear) || MIN_AWARD_YEAR;
   const start = range.start ?? MIN_AWARD_YEAR;
   const end = range.end !== null
     ? range.end
-    : Math.max(start, boundedCurrent);
+    : Math.max(start, federalFiscalYear(asOf));
   return Array.from({ length: Math.max(0, end - start + 1) }, (_value, index) => start + index);
 }
