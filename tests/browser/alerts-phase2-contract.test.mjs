@@ -404,6 +404,51 @@ test("FF-BUG-008 distinct concurrent claims cannot exceed the atomic provider-me
   );
 });
 
+test("FF-BUG-008 verification completed before quota reservation consumes no provider slot", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscriber(database, {
+    id: "person-2", email: "second@example.edu", manageToken: "q".repeat(43),
+  });
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  const firstCycle = await cycle();
+  await store.createSubscriptionCycle(firstCycle);
+  await store.createSubscriptionCycle(await cycle({
+    id: "watch-2", subscriberId: "person-2", manageToken: "q".repeat(43),
+    definitionHash: "hash-2", verificationEventId: "verify-z",
+    verificationEventKey: "verification:token-2", verificationNonce: "w".repeat(43),
+  }));
+  const originalClaimCheck = store.verificationClaimIsCurrent.bind(store);
+  let completed = false;
+  store.verificationClaimIsCurrent = async (...args) => {
+    const current = await originalClaimCheck(...args);
+    if (current && !completed) {
+      completed = true;
+      d1.beforeBatch = () => store.verifySubscription(
+        firstCycle.verificationTokenHash, fixedNow.toISOString(),
+      );
+    }
+    return current;
+  };
+  const provider = new ScriptedProvider();
+  const limitedEnv = { ...env, DAILY_EMAIL_LIMIT: "1" };
+  const raced = await dispatchVerificationDeliveries({
+    store, provider, env: limitedEnv, now: fixedNow,
+  });
+  assert.deepEqual(raced, { attemptedCount: 0, deliveredCount: 0, failedCount: 0 });
+  assert.equal(provider.messages.length, 0);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().count, 0);
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-new'").get().status, "suppressed");
+
+  const delivered = await dispatchVerificationDeliveries({
+    store, provider, env: limitedEnv, now: fixedNow,
+  });
+  assert.deepEqual(delivered, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+});
+
 test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block re-creation", async () => {
   const database = databaseThrough();
   insertSubscriber(database);

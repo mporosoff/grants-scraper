@@ -44,10 +44,14 @@ export class D1AlertStore {
     }
     const timestamp = now.toISOString();
     const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
+    const claimableCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL`;
     await this.db.batch([
       this.db.prepare(
-        "INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count, last_reservation_key) VALUES('email_send', 'global', ?, ?, 1, ?) ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END, last_reservation_key = excluded.last_reservation_key WHERE rate_limits.expires_at <= ? OR rate_limits.request_count < ?",
-      ).bind(timestamp, expires, messageKey, timestamp, timestamp, timestamp, timestamp, limit),
+        `INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count, last_reservation_key) SELECT 'email_send', 'global', ?, ?, 1, ? WHERE (${claimableCount}) = ? ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END, last_reservation_key = excluded.last_reservation_key WHERE (rate_limits.expires_at <= ? OR rate_limits.request_count < ?) AND (${claimableCount}) = ?`,
+      ).bind(
+        timestamp, expires, messageKey, ...eventIds, eventIds.length,
+        timestamp, timestamp, timestamp, timestamp, limit, ...eventIds, eventIds.length,
+      ),
       this.db.prepare(
         `UPDATE notification_events SET provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
       ).bind(messageKey, timestamp, ...eventIds, messageKey),
