@@ -556,6 +556,45 @@ test("FF-BUG-008 verification delivery survives network and 429 retries with pro
   }
 });
 
+test("FF-BUG-008 a refreshed verification key discards its obsolete stored payload", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const originalNonce = "o".repeat(43);
+  await store.createSubscriptionCycle(await cycle({
+    verificationNonce: originalNonce,
+    verificationExpiresAt: "2026-09-01T13:05:00.000Z",
+  }));
+  const provider = new ScriptedProvider([{ code: "provider_rate_limited", retryable: true }]);
+  const first = await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+  assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+  const originalKey = provider.attempts[0].idempotencyKey;
+  const originalToken = new URL(
+    provider.attempts[0].message.text.match(/Activate it: (\S+)/)[1],
+  ).searchParams.get("token");
+
+  const freshNonce = "f".repeat(43);
+  const retryNow = new Date("2026-09-01T12:06:00.000Z");
+  const second = await dispatchVerificationDeliveries({
+    store, provider,
+    env: { ...env, PUBLIC_WORKER_ORIGIN: "https://replacement-alerts.example.test" },
+    now: retryNow, tokenFactory: () => freshNonce,
+  });
+  assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+  const freshToken = await sha256Hex(
+    `funding-finder-verification-v1|${"m".repeat(43)}|watch-1|${freshNonce}`,
+  );
+  assert.notEqual(provider.attempts[1].idempotencyKey, originalKey);
+  assert.match(provider.attempts[1].message.text, new RegExp(`/verify\\?token=${freshToken}`));
+  assert.doesNotMatch(provider.attempts[1].message.text, new RegExp(originalToken));
+  assert.match(provider.attempts[1].message.text, /replacement-alerts\.example\.test/);
+  const event = database.prepare(
+    "SELECT provider_quota_key,provider_payload_json FROM notification_events WHERE id='verify-new'",
+  ).get();
+  assert.equal(event.provider_quota_key, provider.attempts[1].idempotencyKey);
+  assert.match(event.provider_payload_json, new RegExp(freshToken));
+});
+
 test("FF-BUG-008 concurrent verification dispatchers claim once and reserve one provider slot", async () => {
   const database = databaseThrough();
   insertSubscriber(database);
@@ -1251,6 +1290,39 @@ test("FF-BUG-017 a failed digest retries the whole claim with the same idempoten
   assert.equal(provider.attempts[0].message.subject, provider.attempts[1].message.subject);
   assert.equal(provider.attempts[0].message.text, provider.attempts[1].message.text);
   assert.equal(provider.attempts[0].message.html, provider.attempts[1].message.html);
+});
+
+test("FF-BUG-017 ordinary notification retries replay the payload reserved for their key", async () => {
+  for (const weekly of [false, true]) {
+    const database = databaseThrough();
+    insertSubscriber(database);
+    insertSubscription(database, { active: 1, cadence: weekly ? "weekly" : "immediate" });
+    const store = new D1AlertStore(new SqliteD1(database));
+    for (const id of weekly ? ["retry-a", "retry-b"] : ["retry-a"]) {
+      await store.enqueueEvent({
+        id, subscriptionId: "watch-1", eventKey: id, eventKind: "amended",
+        opportunityId: id, payload: { title: id }, createdAt: fixedNow.toISOString(),
+      });
+    }
+    const provider = new ScriptedProvider([{ code: "provider_rate_limited", retryable: true }]);
+    const first = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly });
+    assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+    assert.equal(database.prepare(
+      "SELECT COUNT(*) AS count FROM notification_events WHERE provider_payload_json IS NOT NULL",
+    ).get().count, 1);
+
+    const second = await dispatchNotifications({
+      store, provider,
+      env: { ...env, PUBLIC_WORKER_ORIGIN: "https://replacement-alerts.example.test" },
+      now: new Date("2026-09-01T12:06:00.000Z"), weekly,
+    });
+    assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+    assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+    assert.equal(provider.attempts[0].message.subject, provider.attempts[1].message.subject);
+    assert.equal(provider.attempts[0].message.text, provider.attempts[1].message.text);
+    assert.equal(provider.attempts[0].message.html, provider.attempts[1].message.html);
+    assert.doesNotMatch(provider.attempts[1].message.text, /replacement-alerts\.example\.test/);
+  }
 });
 
 test("Phase 2 scheduler retries verification and deployment contracts preserve rollback safety", async () => {

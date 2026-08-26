@@ -281,7 +281,11 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const renderedMessage = weekly || idempotencyKey.startsWith("digest:")
       ? digestEmail({ env, events: claimed, hasOverflow: batchValue.hasOverflow })
       : eventEmail({ env, event: claimed[0] });
-    const message = storedProviderMessage(batchValue.providerPayloadJson) || renderedMessage;
+    const reservedPayload = batchValue.providerPayloadJson
+      || claimed.find(event => (
+        event.provider_quota_key === idempotencyKey && event.provider_payload_json
+      ))?.provider_payload_json;
+    const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, batchValue.hasOverflow, message,
     )) {
@@ -386,7 +390,10 @@ export async function dispatchVerificationDeliveries({
       manageToken: candidate.manage_token,
       type: candidate.type,
     });
-    const message = storedProviderMessage(candidate.provider_payload_json) || renderedMessage;
+    const reservedPayload = candidate.provider_quota_key === idempotencyKey
+      ? candidate.provider_payload_json
+      : null;
+    const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, false, message,
     )) {
