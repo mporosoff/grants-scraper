@@ -449,6 +449,46 @@ test("FF-BUG-008 verification completed before quota reservation consumes no pro
   assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
 });
 
+test("FF-BUG-008 verification completed before quota reuse sends no obsolete retry", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const verificationCycle = await cycle();
+  await store.createSubscriptionCycle(verificationCycle);
+  const provider = new ScriptedProvider([{
+    code: "provider_network_failure", retryable: true,
+  }]);
+  const limitedEnv = { ...env, DAILY_EMAIL_LIMIT: "1" };
+  const first = await dispatchVerificationDeliveries({
+    store, provider, env: limitedEnv, now: fixedNow,
+  });
+  assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+  assert.ok(database.prepare("SELECT provider_quota_key FROM notification_events WHERE id='verify-new'").get().provider_quota_key);
+
+  const originalClaimCheck = store.verificationClaimIsCurrent.bind(store);
+  let completed = false;
+  store.verificationClaimIsCurrent = async (...args) => {
+    const current = await originalClaimCheck(...args);
+    if (current && !completed) {
+      completed = true;
+      await store.verifySubscription(
+        verificationCycle.verificationTokenHash, new Date("2026-09-01T12:06:00.000Z").toISOString(),
+      );
+    }
+    return current;
+  };
+  const retry = await dispatchVerificationDeliveries({
+    store, provider, env: limitedEnv, now: new Date("2026-09-01T12:06:00.000Z"),
+  });
+  assert.deepEqual(retry, { attemptedCount: 0, deliveredCount: 0, failedCount: 0 });
+  assert.equal(provider.attempts.length, 1);
+  assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+  const event = database.prepare("SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'").get();
+  assert.equal(event.status, "suppressed");
+  assert.equal(event.error_code, "verification_completed");
+  assert.ok(event.terminal_at);
+});
+
 test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block re-creation", async () => {
   const database = databaseThrough();
   insertSubscriber(database);

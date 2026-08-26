@@ -36,28 +36,25 @@ export class D1AlertStore {
   async reserveProviderMessage(messageKey, eventIds, limit, windowSeconds, now) {
     if (!messageKey || !eventIds.length) return false;
     const placeholders = eventIds.map(() => "?").join(",");
-    const current = await this.db.prepare(
-      `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})`,
-    ).bind(messageKey, ...eventIds).first();
-    if (Number(current?.total || 0) === eventIds.length && Number(current?.matched || 0) === eventIds.length) {
-      return true;
-    }
     const timestamp = now.toISOString();
     const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
     const claimableCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL`;
+    const matchingReservationCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND provider_quota_key = ?`;
     await this.db.batch([
       this.db.prepare(
-        `INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count, last_reservation_key) SELECT 'email_send', 'global', ?, ?, 1, ? WHERE (${claimableCount}) = ? ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END, last_reservation_key = excluded.last_reservation_key WHERE (rate_limits.expires_at <= ? OR rate_limits.request_count < ?) AND (${claimableCount}) = ?`,
+        `INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count, last_reservation_key) SELECT 'email_send', 'global', ?, ?, 1, ? WHERE (${claimableCount}) = ? AND (${matchingReservationCount}) <> ? ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END, last_reservation_key = excluded.last_reservation_key WHERE (rate_limits.expires_at <= ? OR rate_limits.request_count < ?) AND (${claimableCount}) = ? AND (${matchingReservationCount}) <> ?`,
       ).bind(
-        timestamp, expires, messageKey, ...eventIds, eventIds.length,
-        timestamp, timestamp, timestamp, timestamp, limit, ...eventIds, eventIds.length,
+        timestamp, expires, messageKey,
+        ...eventIds, eventIds.length, ...eventIds, messageKey, eventIds.length,
+        timestamp, timestamp, timestamp, timestamp, limit,
+        ...eventIds, eventIds.length, ...eventIds, messageKey, eventIds.length,
       ),
       this.db.prepare(
         `UPDATE notification_events SET provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
       ).bind(messageKey, timestamp, ...eventIds, messageKey),
     ]);
     const reserved = await this.db.prepare(
-      `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})`,
+      `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? AND status = 'sending' AND terminal_at IS NULL THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})`,
     ).bind(messageKey, ...eventIds).first();
     return Number(reserved?.total || 0) === eventIds.length
       && Number(reserved?.matched || 0) === eventIds.length;
