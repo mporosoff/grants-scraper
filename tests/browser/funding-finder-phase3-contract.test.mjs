@@ -202,6 +202,51 @@ test("NIH fills normalized pages after sparse institution validation and NSF sto
   assert.equal(second.raw_record_count, 102);
   assert.equal(second.upstream_pages, 2);
 
+  const fetchBoundedNih = async (_url, options) => {
+    const body = JSON.parse(options.body);
+    const rows = Array.from({ length: 100 }, (_, index) => {
+      const recordIndex = body.offset + index;
+      const coreProject = "R01BX" + String(recordIndex).padStart(6, "0");
+      return {
+        ...nihFixture.results[0],
+        appl_id: 50_000_000 + recordIndex,
+        core_project_num: coreProject,
+        project_num: coreProject + "-01",
+        project_detail_url: "https://reporter.nih.gov/project-details/" + (50_000_000 + recordIndex),
+        organization: {
+          ...nihFixture.results[0].organization,
+          org_name: "Another University",
+          primary_uei: "OTHERUEI0001",
+          org_ipf_code: "9999999",
+        },
+      };
+    });
+    if (body.offset === 1_100) {
+      rows[0] = {
+        ...nihFixture.results[0],
+        appl_id: 60_000_001,
+        core_project_num: "R01GMBOUND01",
+        project_num: "R01GMBOUND01-01",
+        project_detail_url: "https://reporter.nih.gov/project-details/60000001",
+      };
+      rows[1] = {
+        ...nihFixture.results[0],
+        appl_id: 60_000_002,
+        core_project_num: "R01GMBOUND02",
+        project_num: "R01GMBOUND02-01",
+        project_detail_url: "https://reporter.nih.gov/project-details/60000002",
+      };
+    }
+    return new Response(JSON.stringify({ meta: { total: 2_000, offset: body.offset }, results: rows }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  const boundedNih = await searchNih(fetchBoundedNih, { topic: "catalysis", _institution: rochester }, { limit: 1, offset: 0, now: fixedNow });
+  assert.deepEqual(boundedNih.results.map(item => item.award_id), ["R01GMBOUND01"]);
+  assert.equal(boundedNih.upstream_pages, 12);
+  assert.equal(boundedNih.safety_bound_reached, true, "filling the target on the final bounded page does not imply upstream exhaustion");
+  assert.equal(boundedNih.has_more, true);
+
   let nsfPages = 0;
   const fetchBoundedNsf = async url => {
     const parsed = new URL(url);

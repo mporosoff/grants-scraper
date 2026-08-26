@@ -295,7 +295,7 @@ export async function searchNih(fetchImpl, criteria, options) {
     raw_record_count: rawRecords.length,
     upstream_total_count: upstreamTotal,
     upstream_pages: upstreamPages,
-    safety_bound_reached: !upstreamExhausted && upstreamPages >= NIH_MAX_UPSTREAM_PAGES && results.length < targetProjectCount,
+    safety_bound_reached: !upstreamExhausted && upstreamPages >= NIH_MAX_UPSTREAM_PAGES,
     has_more: results.length > options.offset + options.limit,
     retrieved_at: retrievedAt,
   };
