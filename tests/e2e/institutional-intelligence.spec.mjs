@@ -364,11 +364,17 @@ test("a partial investigator-variant failure retains matches and retries the sam
   await expect(page.getByRole("button", { name: "Retry NSF" })).toBeVisible();
   const firstVariantOffsets = calls.filter(call => call.criteria.pi && call.sources[0] === "NSF").map(call => call.offset);
   expect(new Set(firstVariantOffsets)).toEqual(new Set([0]));
+  const callsBeforeRetry = calls.length;
+  await page.locator("#ii-topic").fill("unsent edited topic");
   await page.getByRole("button", { name: "Retry NSF" }).click();
   await expect(page.locator("#ii-source-status")).toContainText("NSF available");
   await expect(page.getByRole("button", { name: "Retry NSF" })).toHaveCount(0);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
   expect(calls.filter(call => call.criteria.pi === "Marc Porosoff" && call.offset === 0)).toHaveLength(2);
+  for (const retryCall of calls.slice(callsBeforeRetry)) {
+    expect(retryCall.criteria.institution).toBe("University of Rochester");
+    expect(retryCall.criteria).not.toHaveProperty("topic");
+  }
 });
 
 test("institution-only shared URLs restore and execute without an AI key", async ({ page }) => {

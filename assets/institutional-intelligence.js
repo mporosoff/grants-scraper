@@ -712,16 +712,27 @@
     return outcome;
   }
 
-  async function fetchInvestigatorSourcePage(current, source, group, offset, controller) {
+  async function fetchInvestigatorSourcePage(current, source, group, offset, controller, requestTemplates = null) {
     const limit = SOURCE_LIMITS[source];
-    const variants = core.investigatorQueryVariants(group, source);
-    const requests = variants.map(variant => core.buildAwardRequest({
-      ...current,
-      agency: source,
-      pi: variant,
-      pi_identity: false,
-      offset,
-    }, limit));
+    const templates = Array.isArray(requestTemplates) ? requestTemplates : [];
+    const variants = templates.length
+      ? templates.map(template => clean(template?.criteria?.pi, 160)).filter(Boolean)
+      : core.investigatorQueryVariants(group, source);
+    const requests = templates.length
+      ? templates.map(template => ({
+        ...template,
+        sources: [source],
+        criteria: { ...template.criteria },
+        limit,
+        offset,
+      }))
+      : variants.map(variant => core.buildAwardRequest({
+        ...current,
+        agency: source,
+        pi: variant,
+        pi_identity: false,
+        offset,
+      }, limit));
     const settled = await Promise.allSettled(requests.map(request => fetchAwardPage(request, controller)));
     const fulfilled = settled.filter(result => result.status === "fulfilled").map(result => result.value);
     if (!fulfilled.length) throw settled.find(result => result.status === "rejected")?.reason || new Error("source_unavailable");
@@ -802,6 +813,13 @@
         const request = core.buildAwardRequest({ ...current, agency: source, pi: group.name, offset: 0 }, SOURCE_LIMITS[source]);
         const page = failedSourcePage(request, result.reason);
         page.investigatorIdentity = group;
+        page.variantRequests = core.investigatorQueryVariants(group, source).map(variant => core.buildAwardRequest({
+          ...current,
+          agency: source,
+          pi: variant,
+          pi_identity: false,
+          offset: 0,
+        }, SOURCE_LIMITS[source]));
         return [source, page];
       }));
       state.payload = combinedPayload();
@@ -829,7 +847,7 @@
     try {
       const requestBody = { ...page.request, sources: [source], offset: page.nextOffset };
       const next = page.investigatorIdentity
-        ? await fetchInvestigatorSourcePage(formState(), source, page.investigatorIdentity, page.nextOffset, state.searchController)
+        ? await fetchInvestigatorSourcePage(null, source, page.investigatorIdentity, page.nextOffset, state.searchController, page.variantRequests)
         : sourcePage(requestBody, await fetchAwardPage(requestBody, state.searchController));
       if (sequence !== state.searchSequence) return;
       if (next.meta.status !== "ok") {

@@ -169,19 +169,18 @@ export async function searchNsf(fetchImpl, criteria, options) {
   const seen = new Set();
   let rawRecordCount = 0;
   let upstreamPages = 0;
-  const reportedTotals = [];
-  let processedQueries = 0;
-  let everyProcessedQueryExhausted = true;
   const maximumPages = criteria._institution && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
   const sourceIdentity = criteria._institution?.sources?.NSF || {};
   const searchNames = criteria._institution && !criteria.award_id
     ? uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3)
     : [null];
-  for (const searchName of searchNames) {
-    let queryOffset = criteria._institution && !criteria.award_id ? 0 : options.offset;
-    let queryTotal = null;
-    let queryExhausted = false;
-    const queryCriteria = searchName
+  const queryStates = searchNames.map(searchName => ({
+    searchName,
+    offset: criteria._institution && !criteria.award_id ? 0 : options.offset,
+    total: null,
+    exhausted: false,
+    fetched: false,
+    criteria: searchName
       ? {
         ...criteria,
         _institution: {
@@ -192,18 +191,24 @@ export async function searchNsf(fetchImpl, criteria, options) {
           },
         },
       }
-      : criteria;
-    while (upstreamPages < maximumPages) {
+      : criteria,
+  }));
+  while (upstreamPages < maximumPages) {
+    let progressed = false;
+    for (const query of queryStates) {
+      if (query.exhausted || upstreamPages >= maximumPages || (criteria._institution && awards.length >= targetCount)) continue;
       const requestOptions = criteria._institution && !criteria.award_id
-        ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: queryOffset }
+        ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: query.offset }
         : options;
-      const request = buildNsfRequest(queryCriteria, requestOptions);
+      const request = buildNsfRequest(query.criteria, requestOptions);
       const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
       const response = payload?.response;
       if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
       const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
       const reportedTotal = finiteNumber(response.metadata?.totalCount);
-      if (queryTotal === null) queryTotal = reportedTotal ?? rawAwards.length;
+      if (query.total === null) query.total = reportedTotal ?? rawAwards.length;
+      query.fetched = true;
+      progressed = true;
       rawRecordCount += rawAwards.length;
       upstreamPages += 1;
       for (const raw of rawAwards) {
@@ -215,19 +220,18 @@ export async function searchNsf(fetchImpl, criteria, options) {
           awards.push(attachResolvedInstitution(award, criteria._institution));
         }
       }
-      const rawEnd = queryOffset + rawAwards.length;
-      queryExhausted = criteria.award_id
+      const rawEnd = query.offset + rawAwards.length;
+      query.exhausted = criteria.award_id
         || rawAwards.length < requestOptions.limit
-        || (queryTotal !== null && rawEnd >= queryTotal);
-      if (!criteria._institution || awards.length >= targetCount || queryExhausted) break;
-      queryOffset += requestOptions.limit;
+        || (query.total !== null && rawEnd >= query.total);
+      query.offset += requestOptions.limit;
+      if (!criteria._institution) break;
     }
-    processedQueries += 1;
-    if (queryTotal !== null) reportedTotals.push(queryTotal);
-    if (!queryExhausted) everyProcessedQueryExhausted = false;
-    if (!criteria._institution || awards.length >= targetCount || upstreamPages >= maximumPages) break;
+    if (!criteria._institution || awards.length >= targetCount || !progressed || queryStates.every(query => query.exhausted)) break;
   }
-  const upstreamExhausted = everyProcessedQueryExhausted && processedQueries === searchNames.length;
+  const processedQueries = queryStates.filter(query => query.fetched).length;
+  const upstreamExhausted = queryStates.length > 0 && queryStates.every(query => query.fetched && query.exhausted);
+  const reportedTotals = queryStates.filter(query => query.fetched && query.total !== null).map(query => query.total);
   const upstreamTotalCount = reportedTotals.length ? reportedTotals.reduce((sum, value) => sum + value, 0) : null;
   const safetyBoundReached = Boolean(criteria._institution && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
   const results = criteria._institution

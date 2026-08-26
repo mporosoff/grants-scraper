@@ -308,19 +308,31 @@ test("the Worker validates and caches uncurated ROR identity without trusting th
 
   const nsfAliasQueries = [];
   const aliasNsf = await searchNsf(async url => {
-    nsfAliasQueries.push(new URL(url).searchParams.get("awardeeName"));
+    const parsed = new URL(url);
+    nsfAliasQueries.push(parsed.searchParams.get("awardeeName"));
     const isAlias = decodeURIComponent(String(url)).includes("Caltech");
-    const award = isAlias ? [nsfRaw("CALTECH-1", "Caltech", "Ada Researcher")] : [];
-    return new Response(JSON.stringify({ response: { award, metadata: { totalCount: award.length } } }), {
+    const offset = Number(parsed.searchParams.get("offset"));
+    const award = isAlias
+      ? [nsfRaw("CALTECH-1", "Caltech", "Ada Researcher")]
+      : Array.from({ length: 25 }, (_, index) => nsfRaw(`OTHER-${offset + index}`, "Another University", "Ada Researcher"));
+    return new Response(JSON.stringify({ response: { award, metadata: { totalCount: isAlias ? 1 : 1_000 } } }), {
       headers: { "Content-Type": "application/json" },
     });
   }, { topic: "catalysis", _institution: trustedAlias }, { limit: 1, offset: 0, now: fixedNow });
   assert.deepEqual(aliasNsf.results.map(item => item.award_id), ["CALTECH-1"]);
   assert.equal(aliasNsf.upstream_queries, 2);
-  assert.equal(nsfAliasQueries.length, 2);
+  assert.equal(aliasNsf.upstream_pages, 12);
+  assert.equal(aliasNsf.safety_bound_reached, true);
+  assert.ok(nsfAliasQueries.some(name => name?.includes("Caltech")), "the canonical query cannot monopolize the shared page budget");
 
   const onePage = html => html.replace("2</strong> items in <strong>2", "1</strong> items in <strong>1");
-  const canonicalDoe = onePage(doePage1)
+  const pagerLinks = Array.from({ length: 8 }, (_, index) => {
+    const page = index + 3;
+    return `<a href="javascript:__doPostBack('ctl00$MainContent$grdAwardsList$page${page}','')">${page}</a>`;
+  }).join("");
+  const canonicalDoe = doePage1
+    .replace("2</strong> items in <strong>2", "10</strong> items in <strong>10")
+    .replace("</table>", `${pagerLinks}</table>`)
     .replace("University of Rochester, Rochester, NY", "Another University, Elsewhere, NY")
     .replaceAll("F27KDXZMF9Y8", "OTHERUEI0001");
   const aliasDoe = onePage(doePage1)
@@ -338,6 +350,8 @@ test("the Worker validates and caches uncurated ROR identity without trusting th
   }, { topic: "catalysis", _institution: trustedAlias }, { limit: 1, offset: 0, now: fixedNow, sleep: async () => {} });
   assert.deepEqual(aliasDoeResult.results.map(item => item.award_id), ["DE-SC0020230"]);
   assert.equal(aliasDoeResult.upstream_queries, 2);
+  assert.equal(aliasDoeResult.upstream_pages, 10);
+  assert.equal(aliasDoeResult.safety_bound_reached, true);
   assert.equal(doeAliasQueries.filter(body => body.includes("Caltech")).length, 1);
 });
 
