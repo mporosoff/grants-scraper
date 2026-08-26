@@ -50,17 +50,18 @@ export class D1AlertStore {
 
   async createSubscriptionCycle(value) {
     const baseline = [...new Set(value.baselineOpportunityIds || [])].filter(Boolean);
+    const staleBefore = staleClaimCutoff(value.now);
     const cyclePredicate = "id = ? AND active = 0 AND verification_token_hash = ?";
     const verificationStatus = value.suppressed ? "suppressed" : "queued";
     const terminalAt = value.suppressed ? value.now : null;
     const errorCode = value.suppressed ? "subscriber_suppressed" : null;
     await this.db.batch([
       this.db.prepare(
-        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0",
+        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0 AND NOT EXISTS (SELECT 1 FROM notification_events n WHERE n.subscription_id = subscriptions.id AND n.message_kind = 'verification' AND n.status = 'sending' AND n.terminal_at IS NULL AND n.claimed_at > ?)",
       ).bind(
         value.id, value.subscriberId, value.type, value.cadence, value.definitionJson,
         value.definitionHash, value.verificationTokenHash, value.verificationExpiresAt,
-        value.now, value.now, value.now,
+        value.now, value.now, value.now, staleBefore,
       ),
       this.db.prepare(
         `UPDATE notification_events SET status = 'suppressed', error_code = 'subscription_reactivated', claimed_at = NULL, terminal_at = ? WHERE subscription_id = ? AND status IN ('queued', 'failed', 'sending') AND EXISTS (SELECT 1 FROM subscriptions WHERE ${cyclePredicate})`,
@@ -292,20 +293,32 @@ export class D1AlertStore {
     ).bind(errorCode, nextAttemptAt, terminalAt, id)));
   }
 
-  async refreshVerificationEvent(eventId, { nonce, tokenHash, expiresAt, eventKey, now }) {
+  async releaseClaimedEvents(ids, nextAttemptAt) {
+    if (!ids.length) return;
+    await this.db.batch(ids.map(id => this.db.prepare(
+      "UPDATE notification_events SET status = 'queued', attempts = MAX(0, attempts - 1), next_attempt_at = ?, claimed_at = NULL WHERE id = ? AND status = 'sending'",
+    ).bind(nextAttemptAt, id)));
+  }
+
+  async verificationClaimIsCurrent(eventId, tokenHash, claimedAt) {
     const event = await this.db.prepare(
-      "SELECT subscription_id FROM notification_events WHERE id = ? AND message_kind = 'verification' AND terminal_at IS NULL",
-    ).bind(eventId).first();
-    if (!event) return false;
+      "SELECT n.id FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.id = ? AND n.message_kind = 'verification' AND n.status = 'sending' AND n.claimed_at = ? AND n.terminal_at IS NULL AND s.active = 0 AND s.verification_token_hash = ? AND u.suppressed_at IS NULL",
+    ).bind(eventId, claimedAt, tokenHash).first();
+    return Boolean(event);
+  }
+
+  async refreshVerificationEvent(eventId, {
+    nonce, tokenHash, expectedTokenHash, expiresAt, eventKey, claimedAt, now,
+  }) {
     await this.db.batch([
       this.db.prepare(
-        "UPDATE subscriptions SET active = 0, verified_at = NULL, verification_token_hash = ?, verification_expires_at = ?, updated_at = ? WHERE id = ?",
-      ).bind(tokenHash, expiresAt, now, event.subscription_id),
+        "UPDATE subscriptions SET active = 0, verified_at = NULL, verification_token_hash = ?, verification_expires_at = ?, updated_at = ? WHERE id = (SELECT subscription_id FROM notification_events WHERE id = ? AND message_kind = 'verification' AND status = 'sending' AND claimed_at = ? AND terminal_at IS NULL) AND active = 0 AND verification_token_hash = ? AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)",
+      ).bind(tokenHash, expiresAt, now, eventId, claimedAt, expectedTokenHash),
       this.db.prepare(
-        "UPDATE notification_events SET event_key = ?, payload_json = ?, next_attempt_at = ?, error_code = NULL WHERE id = ? AND message_kind = 'verification' AND terminal_at IS NULL",
-      ).bind(eventKey, JSON.stringify({ nonce }), now, eventId),
+        "UPDATE notification_events SET event_key = ?, payload_json = ?, next_attempt_at = ?, error_code = NULL WHERE id = ? AND message_kind = 'verification' AND status = 'sending' AND claimed_at = ? AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.id = notification_events.subscription_id AND s.active = 0 AND s.verification_token_hash = ? AND u.suppressed_at IS NULL)",
+      ).bind(eventKey, JSON.stringify({ nonce }), now, eventId, claimedAt, tokenHash),
     ]);
-    return true;
+    return this.verificationClaimIsCurrent(eventId, tokenHash, claimedAt);
   }
 
   async startRun(run) {

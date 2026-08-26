@@ -332,6 +332,70 @@ test("FF-BUG-008 verification delivery survives network and 429 retries with pro
   }
 });
 
+test("FF-BUG-008 concurrent verification dispatchers claim once and reserve one provider slot", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.createSubscriptionCycle(await cycle());
+  const provider = new ScriptedProvider();
+  const results = await Promise.all([
+    dispatchVerificationDeliveries({ store, provider, env, now: fixedNow }),
+    dispatchVerificationDeliveries({ store, provider, env, now: fixedNow }),
+  ]);
+  assert.equal(results.reduce((sum, item) => sum + item.attemptedCount, 0), 1);
+  assert.equal(results.reduce((sum, item) => sum + item.deliveredCount, 0), 1);
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare("SELECT attempts FROM notification_events WHERE id='verify-new'").get().attempts, 1);
+  assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+});
+
+test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block re-creation", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const original = await cycle({ verificationExpiresAt: "2026-09-01T12:30:00.000Z" });
+  await store.createSubscriptionCycle(original);
+  const [candidate] = await store.pendingVerificationEvents(fixedNow.toISOString(), 1);
+  assert.deepEqual(await store.claimEvents([candidate.id], fixedNow.toISOString()), [candidate.id]);
+
+  const attemptedRecreation = await store.createSubscriptionCycle(await cycle({
+    verificationTokenHash: "newer-cycle-token",
+    verificationEventId: "verify-newer-cycle",
+    verificationEventKey: "verification:newer-cycle-token",
+  }));
+  assert.equal(attemptedRecreation.cycleAccepted, false);
+  assert.equal(database.prepare("SELECT verification_token_hash FROM subscriptions WHERE id='watch-1'").get().verification_token_hash, original.verificationTokenHash);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE id='verify-newer-cycle'").get().count, 0);
+
+  database.prepare("UPDATE subscriptions SET verification_token_hash='externally-newer-token' WHERE id='watch-1'").run();
+  const refreshed = await store.refreshVerificationEvent(candidate.id, {
+    nonce: "r".repeat(43), tokenHash: "refreshed-token",
+    expectedTokenHash: original.verificationTokenHash,
+    expiresAt: "2026-09-02T12:00:00.000Z", eventKey: "verification:refreshed-token",
+    claimedAt: fixedNow.toISOString(), now: fixedNow.toISOString(),
+  });
+  assert.equal(refreshed, false);
+  assert.equal(database.prepare("SELECT verification_token_hash FROM subscriptions WHERE id='watch-1'").get().verification_token_hash, "externally-newer-token");
+});
+
+test("FF-BUG-008 exhausted provider quota releases the claim without recording an attempt", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.createSubscriptionCycle(await cycle());
+  database.prepare(
+    "INSERT INTO rate_limits(action,client_key,window_started_at,expires_at,request_count) VALUES('email_send','global',?,?,100)",
+  ).run(fixedNow.toISOString(), "2026-09-02T12:00:00.000Z");
+  const provider = new ScriptedProvider();
+  const result = await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+  assert.deepEqual(result, { attemptedCount: 0, deliveredCount: 0, failedCount: 0 });
+  assert.equal(provider.messages.length, 0);
+  const event = database.prepare("SELECT status,attempts,claimed_at FROM notification_events WHERE id='verify-new'").get();
+  assert.equal(event.status, "queued");
+  assert.equal(event.attempts, 0);
+  assert.equal(event.claimed_at, null);
+});
+
 test("FF-BUG-008 permanent rejection is terminal and delayed delivery refreshes an expiring token", async () => {
   const rejectedDatabase = databaseThrough();
   insertSubscriber(rejectedDatabase);

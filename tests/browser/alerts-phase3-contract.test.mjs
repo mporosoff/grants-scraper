@@ -217,13 +217,34 @@ class MemoryStore {
   }
   async markEventsSent(ids, providerId, now) { for (const id of ids) Object.assign(this.events.get(id), { status: "sent", provider_message_id: providerId, sent_at: now, claimed_at: null }); }
   async markEventsFailed(ids, code, retry, terminalAt = null) { for (const id of ids) Object.assign(this.events.get(id), { status: "failed", error_code: code, next_attempt_at: retry, claimed_at: null, terminal_at: terminalAt }); }
-  async refreshVerificationEvent(eventId, { nonce, tokenHash, expiresAt, eventKey, now }) {
+  async releaseClaimedEvents(ids, nextAttemptAt) {
+    for (const id of ids) {
+      const event = this.events.get(id);
+      if (event?.status === "sending") Object.assign(event, {
+        status: "queued", attempts: Math.max(0, event.attempts - 1),
+        next_attempt_at: nextAttemptAt, claimed_at: null,
+      });
+    }
+  }
+  async verificationClaimIsCurrent(eventId, tokenHash, claimedAt) {
     const event = this.events.get(eventId);
-    if (!event || event.message_kind !== "verification" || event.terminal_at) return false;
+    const sub = event && this.subscriptions.get(event.subscription_id);
+    const person = sub && this.subscribers.get(sub.subscriber_id);
+    return Boolean(
+      event?.message_kind === "verification" && event.status === "sending"
+      && event.claimed_at === claimedAt && !event.terminal_at && sub.active === 0
+      && sub.verification_token_hash === tokenHash && !person.suppressed_at
+    );
+  }
+  async refreshVerificationEvent(eventId, {
+    nonce, tokenHash, expectedTokenHash, expiresAt, eventKey, claimedAt, now,
+  }) {
+    const event = this.events.get(eventId);
+    if (!event || !await this.verificationClaimIsCurrent(eventId, expectedTokenHash, claimedAt)) return false;
     const sub = this.subscriptions.get(event.subscription_id);
     Object.assign(sub, { active: 0, verified_at: null, verification_token_hash: tokenHash, verification_expires_at: expiresAt });
     Object.assign(event, { event_key: eventKey, payload_json: JSON.stringify({ nonce }), next_attempt_at: now, error_code: null });
-    return true;
+    return this.verificationClaimIsCurrent(eventId, tokenHash, claimedAt);
   }
   async suppressSubscriberByMessage(providerMessageId, reason, providerEventId, now) {
     this.providerEvents ||= new Set();

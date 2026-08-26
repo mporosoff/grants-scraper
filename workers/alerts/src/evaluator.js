@@ -236,10 +236,13 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     : pending.slice(0, remaining).map(event => ({ events: [event], hasOverflow: false }));
   for (const batchValue of batches) {
     const batch = batchValue.events;
-    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) break;
     const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
+    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) {
+      await store.releaseClaimedEvents(ids, now.toISOString());
+      break;
+    }
     attemptedCount += 1;
     const idempotencyKey = weekly
       ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
@@ -280,6 +283,9 @@ export async function dispatchVerificationDeliveries({
   let deliveredCount = 0;
   let failedCount = 0;
   for (const candidate of pending) {
+    const claimedAt = now.toISOString();
+    const ids = await store.claimEvents([candidate.id], claimedAt);
+    if (!ids.length) continue;
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
     let token = nonce.length >= 32
@@ -300,15 +306,26 @@ export async function dispatchVerificationDeliveries({
       const refreshed = await store.refreshVerificationEvent(candidate.id, {
         nonce,
         tokenHash,
+        expectedTokenHash: String(candidate.verification_token_hash || ""),
         expiresAt: refreshedExpiresAt,
         eventKey: `verification:${tokenHash}`,
-        now: now.toISOString(),
+        claimedAt,
+        now: claimedAt,
       });
-      if (!refreshed) continue;
+      if (!refreshed) {
+        await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+        continue;
+      }
+    } else if (!await store.verificationClaimIsCurrent(
+      candidate.id, tokenHash, claimedAt,
+    )) {
+      await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+      continue;
     }
-    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) break;
-    const ids = await store.claimEvents([candidate.id], now.toISOString());
-    if (!ids.length) continue;
+    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) {
+      await store.releaseClaimedEvents(ids, claimedAt);
+      break;
+    }
     attemptedCount += 1;
     try {
       const delivery = await provider.sendEmail(verificationEmail({
