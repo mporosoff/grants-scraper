@@ -7,7 +7,7 @@ import { ALERT_SCHEMA_VERSION } from "../../workers/alerts/src/contract.js";
 import { sha256Hex } from "../../workers/alerts/src/crypto.js";
 import { digestEmail, eventEmail } from "../../workers/alerts/src/email.js";
 import {
-  DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries,
+  DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "../../workers/alerts/src/evaluator.js";
 import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
@@ -324,7 +324,8 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
     insertSubscription(database, {
       active: 1, cadence: "immediate", definitionHash: "hash-old",
     });
-    const store = new D1AlertStore(new SqliteD1(database));
+    const d1 = new SqliteD1(database);
+    const store = new D1AlertStore(d1);
     await store.enqueueEvent({
       id: "notice-in-flight", subscriptionId: "watch-1", eventKey: "notice-in-flight",
       eventKind: "amended", opportunityId: "opp-1",
@@ -335,7 +336,7 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
       attempts: [],
       async sendEmail(message, idempotencyKey) {
         this.attempts.push({ message, idempotencyKey });
-        if (this.attempts.length === 1) {
+        const replaceCycle = async () => {
           assert.equal(await store.updateSubscription(
             person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
           ), true);
@@ -344,9 +345,13 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
             verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
           }));
           assert.equal(replacement.cycleAccepted, true);
+        };
+        if (this.attempts.length === 1) {
+          if (providerFails) d1.beforeBatch = replaceCycle;
+          else await replaceCycle();
         }
         if (providerFails && this.attempts.length === 1) throw Object.assign(new Error("bounded provider failure"), {
-          code: "provider_network_failure", retryable: true,
+          code: "provider_network_failure", providerFailureKind: "network", retryable: true,
         });
         return { id: "provider-in-flight" };
       },
@@ -381,6 +386,135 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
     ), true);
     assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "suppressed");
   }
+});
+
+test("FF-BUG-003 definitive HTTP retry failure retires an in-flight reactivated cycle", async () => {
+  const database = databaseThrough();
+  const person = insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "immediate", definitionHash: "hash-old",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.enqueueEvent({
+    id: "notice-http-in-flight", subscriptionId: "watch-1", eventKey: "notice-http-in-flight",
+    eventKind: "amended", opportunityId: "opp-1",
+    payload: { title: "Definitive retry response" }, createdAt: fixedNow.toISOString(),
+  });
+  const provider = {
+    configured: true,
+    attempts: [],
+    async sendEmail(message, idempotencyKey) {
+      this.attempts.push({ message, idempotencyKey });
+      assert.equal(await store.updateSubscription(
+        person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+      ), true);
+      assert.equal((await store.createSubscriptionCycle(await cycle({
+        verificationNonce: "h".repeat(43), verificationTokenHash: "replacement-http-token",
+        verificationEventId: "verify-http-replacement", verificationEventKey: "verification:replacement-http-token",
+      }))).cycleAccepted, true);
+      throw Object.assign(new Error("definitive provider rate limit"), {
+        code: "provider_rate_limited", providerFailureKind: "http", providerHttpStatus: 429,
+        retryable: true,
+      });
+    },
+  };
+  assert.deepEqual(
+    await dispatchNotifications({ store, provider, env, now: fixedNow }),
+    { attemptedCount: 1, deliveredCount: 0, failedCount: 1 },
+  );
+  const retired = database.prepare(
+    "SELECT status,error_code,terminal_at FROM notification_events WHERE id='notice-http-in-flight'",
+  ).get();
+  assert.deepEqual(
+    [retired.status, retired.error_code, retired.terminal_at],
+    ["suppressed", "subscription_reactivated", fixedNow.toISOString()],
+  );
+  assert.deepEqual(
+    await dispatchNotifications({ store, provider, env, now: new Date("2026-09-01T12:06:00.000Z") }),
+    { attemptedCount: 0, deliveredCount: 0, failedCount: 0 },
+  );
+  assert.equal(provider.attempts.length, 1);
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-http-replacement'").get().status, "queued");
+});
+
+test("FF-BUG-003 evaluation writes are bound to the selected subscription cycle", async () => {
+  const database = databaseThrough();
+  const person = insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "immediate", definitionHash: "hash-old",
+  });
+  database.prepare(
+    "INSERT INTO subscription_qualifications(subscription_id,opportunity_id,qualified,updated_at) VALUES('watch-1','old-qualified',1,?)",
+  ).run("2026-08-20T00:00:00.000Z");
+  const store = new D1AlertStore(new SqliteD1(database));
+  const readQualifications = store.qualifications.bind(store);
+  let replacementCreated = false;
+  store.qualifications = async (...args) => {
+    const selected = await readQualifications(...args);
+    if (!replacementCreated) {
+      replacementCreated = true;
+      assert.equal(await store.updateSubscription(
+        person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+      ), true);
+      assert.equal((await store.createSubscriptionCycle(await cycle({
+        verificationNonce: "e".repeat(43), verificationTokenHash: "replacement-evaluation-token",
+        verificationEventId: "verify-evaluation-replacement", verificationEventKey: "verification:replacement-evaluation-token",
+      }))).cycleAccepted, true);
+    }
+    return selected;
+  };
+  const changedRecord = {
+    opportunity_id: "new-qualifier", title: "New qualifier", agency: "NSF",
+    close_date: "2026-11-01", funding_opportunity_url: "https://example.test/new-qualifier",
+  };
+  const assets = {
+    catalog: { opportunities: [changedRecord] },
+    changes: {
+      generated_at: "2026-09-01T11:00:00.000Z",
+      events: [{
+        id: "new-qualifier-change", type: "new", changed_at: "2026-09-01T10:00:00.000Z",
+        opportunity_id: "new-qualifier", detail: "First appeared", record: changedRecord,
+      }],
+    },
+    matcher: {
+      matchDetails: () => new Map([["new-qualifier", { reasons: ["A deterministic match."] }]]),
+    },
+  };
+  assert.deepEqual(
+    await evaluateSubscriptions({ store, assets, env, now: fixedNow }),
+    { subscriptionCount: 1, matchedEventCount: 0 },
+  );
+  assert.equal(replacementCreated, true);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 0);
+  assert.deepEqual(
+    all(database, "SELECT opportunity_id,qualified FROM subscription_qualifications ORDER BY opportunity_id")
+      .map(row => [row.opportunity_id, row.qualified]),
+    [["new-a", 1], ["new-b", 1]],
+  );
+  const replacement = database.prepare(
+    "SELECT active,verification_token_hash,last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual(
+    [replacement.active, replacement.verification_token_hash, replacement.last_evaluated_at],
+    [0, "replacement-evaluation-token", null],
+  );
+  assert.ok(await store.verifySubscription("replacement-evaluation-token", fixedNow.toISOString()));
+  assets.changes = {
+    generated_at: "2026-09-02T11:00:00.000Z",
+    events: [{
+      id: "new-qualifier-next-cycle", type: "new", changed_at: "2026-09-02T10:00:00.000Z",
+      opportunity_id: "new-qualifier", detail: "First appeared after replacement", record: changedRecord,
+    }],
+  };
+  assert.deepEqual(
+    await evaluateSubscriptions({ store, assets, env, now: new Date("2026-09-02T12:00:00.000Z") }),
+    { subscriptionCount: 1, matchedEventCount: 1 },
+  );
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 1);
+  assert.equal(database.prepare(
+    "SELECT qualified FROM subscription_qualifications WHERE subscription_id='watch-1' AND opportunity_id='new-qualifier'",
+  ).get().qualified, 1);
+  assert.equal(database.prepare("SELECT last_evaluated_at FROM subscriptions WHERE id='watch-1'").get().last_evaluated_at, "2026-09-02T11:00:00.000Z");
 });
 
 test("FF-BUG-008 verification delivery survives network and 429 retries with provider evidence", async () => {
@@ -925,10 +1059,14 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
   insertSubscription(database, {
     active: 1, cadence: "weekly", definitionHash: "hash-old",
   });
+  insertSubscription(database, {
+    id: "watch-2", subscriberId: person.id, active: 1, cadence: "weekly",
+    definitionHash: "hash-two", tokenHash: "token-two",
+  });
   const store = new D1AlertStore(new SqliteD1(database));
-  for (const id of ["digest-a", "digest-b"]) {
+  for (const [id, subscriptionId] of [["digest-a", "watch-1"], ["digest-b", "watch-2"]]) {
     await store.enqueueEvent({
-      id, subscriptionId: "watch-1", eventKey: id, eventKind: "amended",
+      id, subscriptionId, eventKey: id, eventKind: "amended",
       opportunityId: id, payload: { title: id }, createdAt: fixedNow.toISOString(),
     });
   }
@@ -946,7 +1084,7 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
           verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
         }))).cycleAccepted, true);
         throw Object.assign(new Error("bounded provider failure"), {
-          code: "provider_network_failure", retryable: true,
+          code: "provider_network_failure", providerFailureKind: "network", retryable: true,
         });
       }
       return { id: "provider-digest-reconciled" };
@@ -962,6 +1100,10 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
       ["failed", "subscription_reactivated_reconcile", null],
     ],
   );
+  assert.equal(await store.suppressSubscriberByMessage(
+    "provider-digest-reconciled", "email.bounced", "webhook-before-correlation", fixedNow.toISOString(),
+  ), false);
+  assert.equal(database.prepare("SELECT suppressed_at FROM subscribers WHERE id='person-1'").get().suppressed_at, null);
   const recovered = await Promise.all([1, 2].map(() => dispatchNotifications({
     store, provider, env, now: new Date("2026-09-01T12:06:00.000Z"), weekly: false,
   })));
@@ -977,6 +1119,18 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
       .map(event => [event.status, event.provider_message_id]),
     [["sent", "provider-digest-reconciled"], ["sent", "provider-digest-reconciled"]],
   );
+  const suppressed = database.prepare(
+    "SELECT suppressed_at,suppression_reason FROM subscribers WHERE id='person-1'",
+  ).get();
+  assert.deepEqual(
+    [suppressed.suppressed_at, suppressed.suppression_reason],
+    [fixedNow.toISOString(), "email.bounced"],
+  );
+  assert.deepEqual(
+    all(database, "SELECT id,active FROM subscriptions ORDER BY id").map(row => [row.id, row.active]),
+    [["watch-1", 0], ["watch-2", 0]],
+  );
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "suppressed");
 });
 
 test("FF-BUG-017 a failed digest retries the whole claim with the same idempotency key", async () => {

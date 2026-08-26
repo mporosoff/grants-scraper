@@ -83,6 +83,10 @@ async function enqueue(store, subscription, value, now) {
     opportunityId: value.opportunityId,
     payload: value.payload,
     createdAt: now.toISOString(),
+    cycle: {
+      verificationTokenHash: subscription.verification_token_hash,
+      baselineAt: subscription.baseline_at,
+    },
   });
 }
 
@@ -160,7 +164,10 @@ async function evaluateSavedSearch(store, subscription, assets, env, now) {
       if (inserted) matched += 1;
     }
     if (qualifies !== didQualify || !prior.has(id)) {
-      await store.setQualification(subscription.id, id, qualifies, now.toISOString());
+      await store.setQualification(subscription.id, id, qualifies, now.toISOString(), {
+        verificationTokenHash: subscription.verification_token_hash,
+        baselineAt: subscription.baseline_at,
+      });
     }
   }
   return matched;
@@ -202,6 +209,10 @@ export async function evaluateSubscriptions({ store, assets, env, now = new Date
       subscription.id,
       String(assets.changes.generated_at || now.toISOString()),
       now.toISOString(),
+      {
+        verificationTokenHash: subscription.verification_token_hash,
+        baselineAt: subscription.baseline_at,
+      },
     );
   }
   return { subscriptionCount: subscriptions.length, matchedEventCount };
@@ -268,6 +279,7 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
         String(error?.code || "provider_failed").slice(0, 80),
         retryable ? retryAt(claimed[0], now) : now.toISOString(),
         retryable ? null : now.toISOString(),
+        String(error?.providerFailureKind || ""),
       );
       failedCount += 1;
     }
