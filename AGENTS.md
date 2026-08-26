@@ -10,3 +10,15 @@
 - Never describe a candidate, review, test run, or gate as “final” while any required review or check is pending.
 - Do not manually duplicate full-suite runs for the same SHA, and never use checks from an earlier SHA to merge a changed candidate.
 - If a completed exact-head re-review finds another consequential issue in the same subsystem after one remediation round, do not begin another autonomous fix/review loop. Stop and report the convergence failure, consolidated findings, current SHA, completed evidence, and recommended next action.
+
+### Recognizing terminal Codex reviews
+
+- A Codex GitHub review may finish as:
+  - a top-level PR conversation comment from `chatgpt-codex-connector[bot]` containing a completed `Codex Review` result and `Reviewed commit: <sha>`;
+  - a submitted PR review anchored to the candidate SHA; or
+  - the configured no-findings reaction, provided the PR head remained unchanged from the review request through that reaction.
+- An exact-head top-level completion comment is terminal even when `pull_request_review_id` is absent. Do not keep waiting for a formal review object or approval reaction after receiving that comment.
+- A review acknowledgement or “working” message is not terminal.
+- Before deciding that a review remains pending, inspect the complete PR conversation comments, submitted reviews, inline review threads, and reactions. Match the reviewed SHA to the complete current PR-head SHA.
+- Bound review waiting. After three unchanged checks or 15 minutes following acknowledgement or completed CI, perform one comprehensive refresh of all review surfaces. If no terminal artifact exists, stop and report the missing review instead of polling indefinitely or triggering a duplicate review.
+- After a clean terminal exact-head result, proceed only if the PR head is unchanged, required CI is green, and no consequential unresolved review thread remains.

@@ -20,6 +20,7 @@ on:
       - "assets/funded-awards.js"
       - "match_explorer.html"
       - "funded_awards.html"
+      - "tools/classify_worker_deployment.mjs"
       - "tools/smoke_alerts_worker.mjs"
       - "workers/alerts/**"
 permissions:
@@ -42,6 +43,7 @@ jobs:
           node-version: "22"
       - name: Verify the bounded alert and Phase 5 release contracts
         run: >-
+          node --check tools/classify_worker_deployment.mjs &&
           node --check assets/alerts-config.js &&
           node --check assets/alerts.js &&
           node --check assets/award-links.js &&
@@ -56,7 +58,7 @@ jobs:
           node --check workers/alerts/src/index.js &&
           node --check workers/alerts/src/provider.js &&
           node --check workers/alerts/src/store.js &&
-          node --test tests/browser/alerts-phase2-contract.test.mjs tests/browser/alerts-phase3-contract.test.mjs tests/browser/saved-contract.test.mjs tests/browser/phase5-release-contract.test.mjs
+          node --test tests/browser/alerts-phase2-contract.test.mjs tests/browser/alerts-phase3-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/saved-contract.test.mjs tests/browser/phase5-release-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -69,14 +71,24 @@ jobs:
             exit 1
           fi
           echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
-      - name: Capture the active Alerts Worker version for rollback
-        id: prior-worker
+      - name: Classify Alerts Worker inputs since the active deployment
+        id: worker-inputs
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/alerts/wrangler.jsonc --json 2>/dev/null || true)"
+          npx --yes wrangler@4.125.0 deployments list --config workers/alerts/wrangler.jsonc --json > /tmp/alerts-worker-deployments.json
+          node tools/classify_worker_deployment.mjs alerts /tmp/alerts-worker-deployments.json "$GITHUB_SHA"
+      - name: Capture the active Alerts Worker version for rollback
+        id: prior-worker
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          deployments="$(cat /tmp/alerts-worker-deployments.json)"
           prior_version="$(jq -r '
             map(select(any(.versions[]?; (.percentage // 0) > 0)))
             | sort_by([(.created_on // ""), (.id // "")])
@@ -89,19 +101,34 @@ jobs:
               end
           ' <<<"$deployments" 2>/dev/null || true)"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+      - name: Reconfirm protected main immediately before Alerts Worker mutation
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        shell: bash
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            echo "::error::Protected main advanced before the Alerts Worker mutation."
+            exit 1
+          fi
       - name: Apply committed D1 migrations
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.125.0 d1 migrations apply funding-finder-alerts --remote --config workers/alerts/wrangler.jsonc
       - name: Deploy the committed Alerts Worker
         id: worker-deploy
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.125.0 deploy --config workers/alerts/wrangler.jsonc
+        run: >-
+          npx --yes wrangler@4.125.0 deploy
+          --config workers/alerts/wrangler.jsonc
+          --message "protected-main:${GITHUB_SHA}; protected main deployment"
       - name: Wait for the Alerts Worker health contract
         id: worker-health
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash
         run: |
           for attempt in {1..12}; do
@@ -123,6 +150,7 @@ jobs:
           exit 1
       - name: Run bounded Alerts Worker smokes
         id: worker-smoke
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         run: node tools/smoke_alerts_worker.mjs
       - name: Verify Pages serves the committed alert surfaces
         id: pages-verify
@@ -142,6 +170,15 @@ jobs:
             echo "::error::GitHub Pages did not serve the committed alert surfaces within the verification window."
             exit 1
           fi
+      - name: Record retained Alerts Worker version
+        if: ${{ steps.worker-inputs.outputs.deploy_required != 'true' }}
+        shell: bash
+        run: |
+          {
+            echo "### Alerts Worker deployment"
+            echo
+            echo "Existing deployed Alerts Worker version retained because deployment inputs were unchanged."
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Restore the prior Alerts Worker after a failed release smoke
         if: ${{ always() && steps.worker-deploy.outcome == 'success' && steps.prior-worker.outputs.version_id != '' && (steps.worker-health.outcome == 'failure' || steps.worker-smoke.outcome == 'failure' || steps.pages-verify.outcome == 'failure') }}
         env:
@@ -151,7 +188,7 @@ jobs:
           npx --yes wrangler@4.125.0 rollback \
             "${{ steps.prior-worker.outputs.version_id }}" \
             --config workers/alerts/wrangler.jsonc \
-            --message "Automatic rollback after Alerts release failure"
+            --message "protected-main:${{ steps.worker-inputs.outputs.deployed_base_sha }}; automatic rollback after Alerts release failure"
           npx --yes wrangler@4.125.0 d1 execute funding-finder-alerts --remote \
             --config workers/alerts/wrangler.jsonc \
             --command "UPDATE notification_events SET status = 'suppressed', error_code = 'worker_version_rollback', claimed_at = NULL, terminal_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE message_kind = 'verification' AND terminal_at IS NULL AND status IN ('queued','failed','sending')"
@@ -165,7 +202,7 @@ jobs:
           current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
           if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
             if [ -n "${{ steps.prior-worker.outputs.version_id }}" ]; then
-              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/alerts/wrangler.jsonc --message "Automatic rollback because main advanced"
+              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/alerts/wrangler.jsonc --message "protected-main:${{ steps.worker-inputs.outputs.deployed_base_sha }}; automatic rollback because main advanced"
               npx --yes wrangler@4.125.0 d1 execute funding-finder-alerts --remote --config workers/alerts/wrangler.jsonc --command "UPDATE notification_events SET status = 'suppressed', error_code = 'worker_version_rollback', claimed_at = NULL, terminal_at = strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE message_kind = 'verification' AND terminal_at IS NULL AND status IN ('queued','failed','sending')"
             fi
             echo "::error::Protected main advanced during the Alerts release."
