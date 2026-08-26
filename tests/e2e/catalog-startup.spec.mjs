@@ -265,6 +265,51 @@ test("catalog failure preserves entered and saved state and retry completes the 
     requests: 2,
     executions: 1,
     initializations: 1,
+    metadataRefreshes: 1,
+  });
+});
+
+test("retry refreshes stale startup metadata after a catalog generation changes", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  let metadataRequests = 0;
+  await page.route("**/data/catalog-metadata.js*", async route => {
+    metadataRequests += 1;
+    const response = await route.fetch();
+    let body = await response.text();
+    if (metadataRequests === 1) {
+      const marker = "globalThis.GRANT_CATALOG_METADATA=";
+      const payload = JSON.parse(body.split(marker, 2)[1].trim().replace(/;$/, ""));
+      const staleCount = Number(payload.record_count) - 1;
+      payload.release_identity = payload.release_identity.replace(
+        `records=${payload.record_count}`,
+        `records=${staleCount}`,
+      );
+      payload.record_count = staleCount;
+      body = `/* Deterministic stale-generation fixture. */\n${marker}${JSON.stringify(payload)};\n`;
+    }
+    await route.fulfill({ response, body, contentType: "text/javascript" });
+  });
+  await openFundingFinderShell(page);
+  await page.locator("#query").fill("carbon capture");
+  await page.locator("#find-funding").click();
+  await expect(page.locator("#catalog-error")).toBeVisible();
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "failed",
+    requests: 1,
+    executions: 1,
+    initializations: 0,
+    metadataRefreshes: 0,
+  });
+  await page.locator("#catalog-retry").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(metadataRequests).toBe(2);
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "ready",
+    requests: 2,
+    executions: 2,
+    initializations: 1,
+    metadataRefreshes: 1,
   });
 });
 

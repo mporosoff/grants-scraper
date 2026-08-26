@@ -92,6 +92,10 @@ test("loader owns one bounded lifecycle without executable prefetch or unsafe co
   assert.match(sources.loader, /document\.hidden/);
   assert.match(sources.loader, /document\.createElement\("script"\)/);
   assert.match(sources.loader, /url\.origin !== location\.origin/);
+  assert.match(sources.loader, /fundingCatalogMetadataRecovery/);
+  assert.match(sources.loader, /if \(retrying\) await refreshMetadata\(\)/);
+  assert.match(sources.loader, /pathname\.endsWith\("\/data\/catalog-metadata\.js"\)/);
+  assert.match(sources.loader, /Catalog startup metadata refresh timed out/);
   assert.doesNotMatch(sources.loader, /\beval\s*\(|new Function|createObjectURL|blob:/);
 });
 

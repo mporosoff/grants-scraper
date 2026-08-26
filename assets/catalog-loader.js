@@ -9,7 +9,7 @@
     "ready",
     "failed",
   ]);
-  const metadata = globalThis.GRANT_CATALOG_METADATA;
+  let metadata = globalThis.GRANT_CATALOG_METADATA;
   const listeners = new Set();
   let lifecycle = "idle";
   let inFlight = null;
@@ -21,12 +21,25 @@
   let prefetchLink = null;
   let prefetchQueued = false;
   let visibilityBound = false;
+  let metadataRefreshPromise = null;
   let lastError = "";
+  const metadataScriptSource = [...document.scripts]
+    .map(script => script.src || "")
+    .find(source => {
+      try {
+        const url = new URL(source, location.href);
+        return url.origin === location.origin
+          && url.pathname.endsWith("/data/catalog-metadata.js");
+      } catch (_error) {
+        return false;
+      }
+    }) || "";
   const counts = {
     requests: 0,
     executions: 0,
     initializations: 0,
     prefetches: 0,
+    metadataRefreshes: 0,
   };
 
   function mark(name) {
@@ -111,6 +124,56 @@
     return { ...metadata, resolvedCatalogUrl: url.href };
   }
 
+  function refreshMetadata() {
+    if (metadataRefreshPromise) return metadataRefreshPromise;
+    metadataRefreshPromise = new Promise((resolve, reject) => {
+      let url;
+      try {
+        url = new URL(metadataScriptSource, location.href);
+        if (url.origin !== location.origin
+          || !url.pathname.endsWith("/data/catalog-metadata.js")) {
+          throw new Error("Catalog startup metadata cannot be refreshed safely.");
+        }
+      } catch (error) {
+        reject(error);
+        return;
+      }
+      url.searchParams.set(
+        "recovery",
+        `${Date.now()}-${counts.metadataRefreshes + 1}`,
+      );
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = url.href;
+      script.dataset.fundingCatalogMetadataRecovery = "true";
+      const timeout = globalThis.setTimeout(() => {
+        script.remove();
+        reject(new Error("Catalog startup metadata refresh timed out."));
+      }, 15_000);
+      script.addEventListener("load", () => {
+        globalThis.clearTimeout(timeout);
+        script.remove();
+        try {
+          metadata = globalThis.GRANT_CATALOG_METADATA;
+          const refreshed = validatedMetadata();
+          counts.metadataRefreshes += 1;
+          resolve(refreshed);
+        } catch (error) {
+          reject(error);
+        }
+      }, { once: true });
+      script.addEventListener("error", () => {
+        globalThis.clearTimeout(timeout);
+        script.remove();
+        reject(new Error("Catalog startup metadata could not be refreshed."));
+      }, { once: true });
+      document.head.append(script);
+    }).finally(() => {
+      metadataRefreshPromise = null;
+    });
+    return metadataRefreshPromise;
+  }
+
   async function validateLoadedCatalog(candidate, startup) {
     if (!candidate || Number(candidate.schema_version) !== Number(startup.catalog_schema_version)) {
       throw new Error("The funding catalog uses an unsupported schema.");
@@ -151,10 +214,12 @@
   async function ensureCatalogReady() {
     if (lifecycle === "ready" && readyCatalog) return readyCatalog;
     if (inFlight) return inFlight;
+    const retrying = lifecycle === "failed";
     inFlight = (async () => {
       try {
-        const startup = validatedMetadata();
         setState("loading");
+        if (retrying) await refreshMetadata();
+        const startup = validatedMetadata();
         const candidate = await executeCatalogScript(startup.resolvedCatalogUrl);
         await validateLoadedCatalog(candidate, startup);
         if (!initializer) throw new Error("Catalog initialization is unavailable.");
