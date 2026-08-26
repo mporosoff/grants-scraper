@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
+  chooseInvestigator,
   mockAwards,
   mockHybrid,
   openFundingFinder,
@@ -9,6 +10,14 @@ import {
 async function openInstitutionalIntelligence(page) {
   await page.goto("/funded_awards.html");
   await expect(page.locator("#ii-form")).toBeVisible();
+}
+
+async function chooseInstitution(page, query, canonical) {
+  await page.locator("#ii-institution").fill(query);
+  const option = page.locator("#ii-institution-options [role='option']").filter({ hasText: canonical }).first();
+  await expect(option).toBeVisible();
+  await option.click();
+  await expect(page.locator("#ii-institution")).toHaveValue(canonical);
 }
 
 test("one unified search supports topic and program-officer queries without an institution", async ({ page }) => {
@@ -84,7 +93,7 @@ test("superseding a source load clears its busy state for the replacement search
   await page.locator("#ii-search").click();
   await page.getByRole("button", { name: "Load more NSF" }).click();
   await expect.poll(() => calls.some(call => call.offset === 25)).toBe(true);
-  await page.locator("#ii-investigators").selectOption("Vasily Karasiev");
+  await chooseInvestigator(page, "Vasily Karasiev");
   await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Vasily Karasiev");
   await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
 });
@@ -177,10 +186,11 @@ test("ROR aliases resolve to canonical institutions before normalized award quer
     await page.locator("#ii-institution").fill(alias);
     if (index === 0) {
       await expect(page.locator("#ii-institution-options [role='option']")).toHaveCount(2);
-      await page.locator("#ii-institution").press("ArrowDown");
-      await page.locator("#ii-institution").press("Enter");
-      await expect(page.locator("#ii-institution")).toHaveValue(canonical);
     }
+    const option = page.locator("#ii-institution-options [role='option']").filter({ hasText: canonical }).first();
+    await expect(option).toBeVisible();
+    await option.click();
+    await expect(page.locator("#ii-institution")).toHaveValue(canonical);
     await page.locator("#ii-search").click();
     await expect(page.locator("#ii-institution")).toHaveValue(canonical);
     await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
@@ -188,6 +198,53 @@ test("ROR aliases resolve to canonical institutions before normalized award quer
     expect(calls.at(-1).criteria.institution_id).toMatch(/^https:\/\/ror\.org\/0[a-z0-9]{8}$/);
   }
   expect(errors).toEqual([]);
+});
+
+test("ambiguous short acronyms require explicit keyboard selection and preserve Escape behavior", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("UVA");
+  await expect(page.locator("#ii-institution-options [role='option']")).toHaveCount(2);
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-status")).toContainText("Choose the intended Research Organization Registry");
+  expect(calls).toHaveLength(0);
+  await expect(page.locator("#ii-registry-status")).toContainText("matches");
+  await page.locator("#ii-institution").press("Escape");
+  await expect(page.locator("#ii-institution-options")).toBeHidden();
+  await page.locator("#ii-institution").fill("");
+  await page.locator("#ii-institution").fill("UVA");
+  await expect(page.locator("#ii-institution-options [role='option']")).toHaveCount(2);
+  await expect(page.locator("#ii-institution-options")).toBeVisible();
+  await page.locator("#ii-institution").press("ArrowDown");
+  await expect(page.locator("#ii-institution")).toHaveAttribute("aria-activedescendant", /ii-institution-option-\d/);
+  await page.locator("#ii-institution").press("Enter");
+  await expect(page.locator("#ii-institution")).toHaveValue("University of Virginia");
+  await expect(page.locator("#ii-registry-status")).toContainText("Resolved to University of Virginia");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+});
+
+test("a registry outage preserves complete-name source search without trusting aliases", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await page.route("**/institutions/search?query=*", route => route.fulfill({
+    status: 503,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({ error: { code: "source_unavailable" } }),
+  }));
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("MIT");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-status")).toContainText("requires an explicit Research Organization Registry");
+  expect(calls).toHaveLength(0);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-registry-status")).toContainText("complete typed name as an exact source search");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+  expect(calls).toHaveLength(3);
+  expect(calls.every(call => call.criteria.institution === "University of Rochester")).toBe(true);
+  expect(calls.every(call => !Object.hasOwn(call.criteria, "institution_id"))).toBe(true);
 });
 
 test("cross-agency summaries, investigator and program drill-downs, and history use authoritative awards", async ({ page }) => {
@@ -206,7 +263,7 @@ test("cross-agency summaries, investigator and program drill-downs, and history 
   expect(calls.slice(0, 3).map(call => call.sources[0])).toEqual(["NSF", "NIH", "DOE"]);
   expect(calls.slice(0, 3).map(call => call.limit)).toEqual([25, 25, 10]);
 
-  await page.locator("#ii-investigators").selectOption("Stephen Dewhurst");
+  await chooseInvestigator(page, "Stephen Dewhurst");
   await expect(page).toHaveURL(/ii_pi=Stephen\+Dewhurst/);
   await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Stephen Dewhurst");
   await page.goBack();
@@ -221,6 +278,62 @@ test("cross-agency summaries, investigator and program drill-downs, and history 
     institution: "University of Rochester",
     program_office: "SC-32",
   });
+});
+
+test("Marc source variants form one identity and return two NSF plus one DOE award", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    resultCountPerSource: { NSF: 2, NIH: 0, DOE: 1 },
+    awardOverridesBySource: {
+      NSF: { principal_investigators: [{ name: "Marc Porosoff", role: "Principal Investigator", email: null }] },
+      DOE: { principal_investigators: [{ name: "Marc D Porosoff", role: "Principal Investigator", email: null }] },
+    },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+  const marcOption = page.locator("#ii-investigators option").filter({ hasText: "Marc D Porosoff · 3 currently loaded awards" });
+  await expect(marcOption).toHaveCount(1);
+  await expect(marcOption).toHaveAttribute("aria-label", /Marc Porosoff from NSF.*Marc D Porosoff from DOE/);
+  await chooseInvestigator(page, "Marc D Porosoff");
+  await expect(page).toHaveURL(/ii_pi=Marc\+D\+Porosoff/);
+  await expect(page).toHaveURL(/ii_pi_identity=1/);
+  await expect(page.locator("#ii-awards .ii-award-card[data-source='NSF']")).toHaveCount(2);
+  await expect(page.locator("#ii-awards .ii-award-card[data-source='DOE']")).toHaveCount(1);
+  await expect(page.locator("#ii-investigator-variants")).toContainText("Marc Porosoff (NSF)");
+  await expect(page.locator("#ii-investigator-variants")).toContainText("Marc D Porosoff (DOE)");
+  const queriedNames = new Set(calls.slice(3).map(call => call.criteria.pi).filter(Boolean));
+  expect(queriedNames.has("Marc Porosoff")).toBe(true);
+  expect(queriedNames.has("Marc D Porosoff")).toBe(true);
+  await page.goBack();
+  await expect(page).not.toHaveURL(/ii_pi_identity/);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+  await page.goForward();
+  await expect(page).toHaveURL(/ii_pi_identity=1/);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+});
+
+test("investigator identity pagination retains the selected identity and deduplicates loaded awards", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0] },
+    resultCountPerSource: { NSF: 1 },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-search").click();
+  await chooseInvestigator(page, "Vasily Karasiev");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeVisible();
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
+  await expect(page.locator("#ii-investigator-variants")).toContainText("2 currently loaded awards");
+  await expect(page).toHaveURL(/ii_pi_identity=1/);
+  expect(calls.filter(call => call.sources[0] === "NSF" && call.offset === 25).length).toBeGreaterThan(0);
+  const ids = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.id));
+  expect(new Set(ids).size).toBe(ids.length);
 });
 
 test("institution-only shared URLs restore and execute without an AI key", async ({ page }) => {
@@ -240,7 +353,7 @@ test("institution-only shared URLs restore and execute without an AI key", async
     });
   await expect(page.locator("#ii-ai-state")).toContainText("Connect a provider");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
-  await page.locator("#ii-question").fill("Who has DOE BES awards?");
+  await page.locator("#ii-question").fill("Who has awards in the loaded public evidence?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-key-setup")).toBeVisible();
   await expect(page.locator("#ii-key-status")).toContainText("Structured filters remain available without one");
@@ -250,7 +363,7 @@ test("one unavailable award source does not suppress the other institutional evi
   mockHybrid(page);
   mockAwards(page, { failNih: true });
   await openInstitutionalIntelligence(page);
-  await page.locator("#ii-institution").fill("MIT");
+  await chooseInstitution(page, "MIT", "Massachusetts Institute of Technology");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
   await expect(page.locator("#ii-source-status")).toContainText("NSF available");
@@ -289,6 +402,9 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect.poll(() => calls.at(-1)?.criteria?.program).toBe("MRI");
   expect(calls.at(-1)?.criteria).not.toHaveProperty("pi");
   expect(providerCalls).toHaveLength(1);
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-answered-question")).toHaveText("What has Major Research Instrumentation received?");
+  await expect(page.locator("#ii-direct-answer")).toContainText("matching award");
   expect(providerCalls[0].store).toBe(false);
   const providerInput = JSON.parse(providerCalls[0].input);
   expect(Object.keys(providerInput).sort()).toEqual(["current_filters", "institution", "question"]);
@@ -315,6 +431,140 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect(page.locator("#ii-question-plan")).toContainText("Topic: Artificial Intelligence Research");
   await expect.poll(() => providerCalls.length).toBe(5);
   expect(calls.slice(-3).every(call => call.criteria.topic === "Artificial Intelligence Research" && !Object.hasOwn(call.criteria, "pi"))).toBe(true);
+});
+
+test("institutional questions cite loaded evidence and refresh only on explicit request", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  const providerInputs = [];
+  await page.route("https://api.openai.com/v1/responses", route => {
+    const input = JSON.parse(route.request().postDataJSON().input);
+    providerInputs.push(input);
+    const output = Object.hasOwn(input, "current_filters")
+      ? {
+          agency: "NSF",
+          program: "",
+          topic: "catalysis",
+          pi: "",
+          program_officer: "",
+          year_start: "",
+          year_end: "",
+          answer_intent: "narrative",
+          narrative_needed: true,
+        }
+      : providerInputs.length === 2
+        ? { claims: [{ text: "<b>Catalysis</b> appears in the returned public project.", evidence_ids: ["NSF:2605508"] }] }
+        : { claims: [{ text: "This fabricated citation must be rejected.", evidence_ids: ["NSF:UNKNOWN"] }] };
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ output_text: JSON.stringify(output) }),
+    });
+  });
+  mockHybrid(page);
+  const calls = mockAwards(page, { hasMoreAtOffsets: [0] });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("What themes appear in the catalysis project abstracts?");
+  await page.locator("#ii-ask-button").click();
+  await expect.poll(() => providerInputs.length).toBe(2);
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("<b>Catalysis</b> appears");
+  await expect(page.locator("#ii-direct-answer b")).toHaveCount(0);
+  await expect(page.locator("#ii-direct-answer a[href='#ii-evidence-NSF-2605508']")).toBeVisible();
+  const evidencePayload = providerInputs[1];
+  expect(Object.keys(evidencePayload).sort()).toEqual([
+    "answer_intent", "evidence_truncated", "institution", "public_award_evidence", "question", "visible_filters",
+  ]);
+  expect(evidencePayload.public_award_evidence).toHaveLength(1);
+  expect(JSON.stringify(evidencePayload)).not.toMatch(/profile|cv_text|orcid|saved_notes|pursuit|alert_data|provider_key/i);
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
+  expect(providerInputs).toHaveLength(2);
+  await expect(page.locator("#ii-update-answer")).toBeVisible();
+  await page.locator("#ii-update-answer").click();
+  await expect.poll(() => providerInputs.length).toBe(3);
+  await expect(page.locator("#ii-update-answer")).toBeHidden();
+  await expect(page.locator("#ii-direct-answer")).toContainText("2 normalized matching awards");
+  await expect(page.locator("#ii-direct-answer")).not.toContainText("fabricated");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("failed evidence validation");
+});
+
+test("a failed narrative provider call degrades to the deterministic loaded-award answer", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  let providerCalls = 0;
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls += 1;
+    if (providerCalls > 1) {
+      return route.fulfill({
+        status: 503,
+        headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+        body: JSON.stringify({ error: { message: "temporary test outage" } }),
+      });
+    }
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ output_text: JSON.stringify({
+        agency: "NSF",
+        program: "",
+        topic: "catalysis",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "narrative",
+        narrative_needed: true,
+      }) }),
+    });
+  });
+  mockHybrid(page);
+  mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Interpret the loaded catalysis award title.");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("1 normalized matching award");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("Narrative synthesis was unavailable");
+  expect(providerCalls).toBe(2);
+});
+
+test("deterministic DOE investigator answers disclose partial sources and remaining pages", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  let providerCalls = 0;
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls += 1;
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ output_text: JSON.stringify({
+        agency: "all",
+        program: "",
+        topic: "",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "investigators",
+        narrative_needed: false,
+      }) }),
+    });
+  });
+  mockHybrid(page);
+  mockAwards(page, { failNih: true, hasMoreBySource: { DOE: [0] } });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Who has awards in the loaded public evidence?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Marc Porosoff");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("Unavailable or unsupported sources: NIH");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("Additional pages remain for DOE");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("not a complete institutional history");
+  expect(providerCalls).toBe(1, "counts and investigator lists do not make a second provider call");
 });
 
 test("the question translator preserves an explicitly named University of Rochester investigator", async ({ page }) => {
@@ -418,7 +668,7 @@ test("Institutional Intelligence fits a narrow mobile viewport", async ({ page }
   mockHybrid(page);
   mockAwards(page);
   await openInstitutionalIntelligence(page);
-  await page.locator("#ii-institution").fill("MIT");
+  await chooseInstitution(page, "MIT", "Massachusetts Institute of Technology");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await expect(page.locator(".ii-shell-heading")).toBeHidden();
@@ -434,6 +684,45 @@ test("Institutional Intelligence fits a narrow mobile viewport", async ({ page }
     expect(box.x).toBeGreaterThanOrEqual(0);
     expect(box.x + box.width).toBeLessThanOrEqual(320);
     expect(box.height).toBeGreaterThanOrEqual(44);
+  }
+});
+
+test("evidence-grounded answers remain keyboard-operable and contained at 390 px", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 760 });
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({ output_text: JSON.stringify({
+      agency: "DOE",
+      program: "BES",
+      topic: "",
+      pi: "",
+      program_officer: "",
+      year_start: "",
+      year_end: "",
+      answer_intent: "investigators",
+      narrative_needed: false,
+    }) }),
+  }));
+  mockHybrid(page);
+  mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#ii-ask")).toHaveAttribute("open", "");
+  await page.locator("#ii-question").fill("Who has DOE BES awards?");
+  await page.locator("#ii-ask-button").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Marc Porosoff");
+  await expect(page.locator("#ii-answer-evidence a").first()).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  for (const selector of ["#ii-question-answer", "#ii-direct-answer", "#ii-answer-evidence"]) {
+    const box = await page.locator(selector).boundingBox();
+    expect(box.x).toBeGreaterThanOrEqual(0);
+    expect(box.x + box.width).toBeLessThanOrEqual(390);
   }
 });
 

@@ -10,12 +10,12 @@ import {
   uniqueStrings,
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
-import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NIH_ADAPTER_VERSION = "1.2.0";
+export const NIH_ADAPTER_VERSION = "1.3.0";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
-const NIH_UPSTREAM_PAGE_SIZE = 100;
-const NIH_MAX_UPSTREAM_PAGES = 12;
+export const NIH_UPSTREAM_PAGE_SIZE = 100;
+export const NIH_MAX_UPSTREAM_PAGES = 12;
 
 function parseCoreProjectNumber(value) {
   const match = /^([A-Z0-9]{3})([A-Z]{2})(\d{6})$/.exec(value || "");
@@ -230,7 +230,9 @@ function normalizeProjects(groups, { criteria, retrievedAt, completeHistory }) {
     completeHistory,
   }));
   if (criteria._institution) {
-    results = results.filter(award => recordMatchesInstitution(award, criteria._institution, "NIH"));
+    results = results
+      .filter(award => recordMatchesInstitution(award, criteria._institution, "NIH"))
+      .map(award => attachResolvedInstitution(award, criteria._institution));
   }
   results.sort((left, right) => (
     (right.project_start || "").localeCompare(left.project_start || "")
@@ -247,6 +249,7 @@ export async function searchNih(fetchImpl, criteria, options) {
   let upstreamOffset = 0;
   let upstreamTotal = null;
   let upstreamExhausted = false;
+  let upstreamPages = 0;
   let results = [];
 
   for (let page = 0; page < NIH_MAX_UPSTREAM_PAGES; page += 1) {
@@ -256,15 +259,14 @@ export async function searchNih(fetchImpl, criteria, options) {
       throw new AwardSourceError("source_invalid_response");
     }
     const pageRecords = payload.results;
+    upstreamPages += 1;
     const reportedTotal = finiteNumber(payload.meta.total);
     if (upstreamTotal === null && reportedTotal !== null) upstreamTotal = reportedTotal;
-    let addedRecords = 0;
     for (const raw of pageRecords) {
       const recordKey = rawRecordKey(raw);
       if (!recordKey || seenRecords.has(recordKey)) continue;
       seenRecords.add(recordKey);
       rawRecords.push(raw);
-      addedRecords += 1;
       const projectKey = cleanText(raw.core_project_num || raw.project_num || raw.appl_id, 60);
       if (!projectKey) continue;
       if (!groups.has(projectKey)) groups.set(projectKey, []);
@@ -282,7 +284,7 @@ export async function searchNih(fetchImpl, criteria, options) {
       completeHistory: Boolean(criteria.core_project_number && upstreamExhausted),
     });
     if (results.length >= targetProjectCount || upstreamExhausted) break;
-    if (!pageRecords.length || addedRecords === 0) break;
+    if (!pageRecords.length) break;
   }
 
   return {
@@ -291,6 +293,9 @@ export async function searchNih(fetchImpl, criteria, options) {
     results: results.slice(options.offset, options.offset + options.limit),
     total_count: upstreamExhausted ? results.length : null,
     raw_record_count: rawRecords.length,
+    upstream_total_count: upstreamTotal,
+    upstream_pages: upstreamPages,
+    safety_bound_reached: !upstreamExhausted && upstreamPages >= NIH_MAX_UPSTREAM_PAGES && results.length < targetProjectCount,
     has_more: results.length > options.offset + options.limit,
     retrieved_at: retrievedAt,
   };

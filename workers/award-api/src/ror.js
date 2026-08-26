@@ -2,7 +2,7 @@ import { cleanText, uniqueStrings } from "./contract.js";
 import { AwardSourceError, fetchSourceJson } from "./http.js";
 
 const ROR_API = "https://api.ror.org/v2/organizations";
-const ROR_ADAPTER_VERSION = "1.0.0";
+const ROR_ADAPTER_VERSION = "1.1.0";
 const ROR_RESULT_LIMIT = 8;
 
 function identityKey(value) {
@@ -29,6 +29,12 @@ function safeRorId(value) {
   } catch {
     return null;
   }
+}
+
+function rorRecordUrl(value) {
+  const id = safeRorId(value);
+  if (!id) return null;
+  return `${ROR_API}/${id.split("/").at(-1)}`;
 }
 
 function locationDetails(item) {
@@ -139,4 +145,21 @@ export async function searchRor(fetchImpl, query, { limit = ROR_RESULT_LIMIT } =
   };
 }
 
-export { ROR_ADAPTER_VERSION, ROR_API, ROR_RESULT_LIMIT };
+export async function resolveRorOrganization(fetchImpl, id) {
+  const url = rorRecordUrl(id);
+  if (!url) throw new AwardSourceError("invalid_institution_identity", "unsupported");
+  const payload = await fetchSourceJson(fetchImpl, url, {
+    headers: { Accept: "application/json" },
+  });
+  const organization = normalizeRorOrganization(payload, "");
+  if (!organization || organization.id !== safeRorId(id)) {
+    throw new AwardSourceError("source_invalid_response");
+  }
+  return {
+    ...organization,
+    source_url: url,
+    license: "CC0-1.0",
+  };
+}
+
+export { ROR_ADAPTER_VERSION, ROR_API, ROR_RESULT_LIMIT, safeRorId };

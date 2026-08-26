@@ -309,7 +309,8 @@
       if (source.status === "ok") {
         const cache = source.cache === "hit" ? "cached" : "live";
         const abstractWarning = Number(source.health?.abstracts_failed || 0);
-        return `<li${abstractWarning ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${abstractWarning ? ` · ${abstractWarning.toLocaleString()} public ${abstractWarning === 1 ? "abstract" : "abstracts"} unavailable` : ""}</li>`;
+        const boundWarning = source.safety_bound_reached === true ? " · upstream scan bound reached" : "";
+        return `<li${abstractWarning || boundWarning ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${abstractWarning ? ` · ${abstractWarning.toLocaleString()} public ${abstractWarning === 1 ? "abstract" : "abstracts"} unavailable` : ""}${boundWarning}</li>`;
       }
       const suffix = hasHealthySource ? " Other sources remain usable." : "";
       return `<li class="source-unavailable" data-status="${escapeAttribute(source.status || "unavailable")}">${escapeHtml(productApi.sourceIssueText(source))}${escapeHtml(suffix)}</li>`;

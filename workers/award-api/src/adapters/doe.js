@@ -11,12 +11,13 @@ import {
   uniqueStrings,
 } from "../contract.js";
 import { AwardSourceError, fetchSourceText } from "../http.js";
-import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const DOE_ADAPTER_VERSION = "1.1.0";
+export const DOE_ADAPTER_VERSION = "1.2.0";
 export const DOE_SEARCH_URL = "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx";
 export const DOE_MAX_RESULTS = 10;
 export const DOE_MAX_OFFSET = 100;
+export const DOE_MAX_UPSTREAM_PAGES = 10;
 
 const DOE_HOST = "pamspublic.science.energy.gov";
 const DOE_REQUEST_TIMEOUT_MS = 15_000;
@@ -442,50 +443,99 @@ export async function searchDoe(fetchImpl, criteria, {
     body: form.toString(),
   }, { timeoutMs: DOE_REQUEST_TIMEOUT_MS });
   const firstPage = parseDoeSearchResults(firstPageHtml);
-  const firstNeededPage = Math.floor(offset / firstPage.page_size) + 1;
-  const lastNeededIndex = Math.min(offset + limit - 1, DOE_MAX_OFFSET + DOE_MAX_RESULTS - 1);
-  const lastNeededPage = Math.floor(lastNeededIndex / firstPage.page_size) + 1;
+  if (!criteria._institution) {
+    const firstNeededPage = Math.floor(offset / firstPage.page_size) + 1;
+    const lastNeededIndex = Math.min(offset + limit - 1, DOE_MAX_OFFSET + DOE_MAX_RESULTS - 1);
+    const lastNeededPage = Math.floor(lastNeededIndex / firstPage.page_size) + 1;
+    const pages = new Map([[1, { html: firstPageHtml, parsed: firstPage }]]);
+    let currentHtml = firstPageHtml;
+    let currentParsed = firstPage;
+    for (let page = firstNeededPage; page <= lastNeededPage; page += 1) {
+      if (pages.has(page) || page > firstPage.page_count) continue;
+      const target = currentParsed.page_targets[page];
+      if (!target) sourceInvalid();
+      currentHtml = await postPage(fetchImpl, currentHtml, target);
+      currentParsed = parseDoeSearchResults(currentHtml);
+      pages.set(page, { html: currentHtml, parsed: currentParsed });
+    }
+    const positioned = new Map();
+    let rawRecordCount = 0;
+    for (const [page, value] of pages) {
+      rawRecordCount += value.parsed.records.length;
+      const pageStart = (page - 1) * firstPage.page_size;
+      value.parsed.records.forEach((record, index) => positioned.set(pageStart + index, record));
+    }
+    const selected = [];
+    for (let index = offset; index < offset + limit; index += 1) {
+      const record = positioned.get(index);
+      if (record) selected.push(record);
+    }
+    const abstracts = await enrichAbstracts(fetchImpl, selected, sleep);
+    return {
+      source: "DOE",
+      adapter_version: DOE_ADAPTER_VERSION,
+      retrieved_at: retrievedAt,
+      total_count: firstPage.total_count,
+      upstream_total_count: firstPage.total_count,
+      raw_record_count: rawRecordCount,
+      upstream_pages: pages.size,
+      safety_bound_reached: false,
+      has_more: offset < DOE_MAX_OFFSET && offset + limit < firstPage.total_count,
+      results: abstracts.enriched.map(({ raw, abstract }) => normalizeDoeAward(raw, { retrievedAt, abstract })),
+      health: {
+        status: abstracts.failed ? "degraded" : "available",
+        abstract_requests: abstracts.requested,
+        abstracts_loaded: abstracts.loaded,
+        abstracts_failed: abstracts.failed,
+      },
+    };
+  }
   const pages = new Map([[1, { html: firstPageHtml, parsed: firstPage }]]);
   let currentHtml = firstPageHtml;
   let currentParsed = firstPage;
-  for (let page = firstNeededPage; page <= lastNeededPage; page += 1) {
-    if (pages.has(page) || page > firstPage.page_count) continue;
+  const targetCount = offset + limit + 1;
+  const sourceScoped = [];
+  const seenAwardIds = new Set();
+  let rawRecordCount = 0;
+  const appendPage = parsed => {
+    rawRecordCount += parsed.records.length;
+    for (const raw of parsed.records) {
+      const awardId = cleanText(raw.award_id, 80);
+      if (!awardId || seenAwardIds.has(awardId)) continue;
+      seenAwardIds.add(awardId);
+      if (!criteria._institution || recordMatchesInstitution({
+        institution: normalizeInstitution(raw.institution_name, { uei: raw.uei }),
+      }, criteria._institution, "DOE")) sourceScoped.push(raw);
+    }
+  };
+  appendPage(firstPage);
+  const maximumPage = Math.min(firstPage.page_count, DOE_MAX_UPSTREAM_PAGES);
+  for (let page = 2; page <= maximumPage && sourceScoped.length < targetCount; page += 1) {
     const target = currentParsed.page_targets[page];
     if (!target) sourceInvalid();
     currentHtml = await postPage(fetchImpl, currentHtml, target);
     currentParsed = parseDoeSearchResults(currentHtml);
     pages.set(page, { html: currentHtml, parsed: currentParsed });
+    appendPage(currentParsed);
   }
-
-  const positioned = new Map();
-  let rawRecordCount = 0;
-  for (const [page, value] of pages) {
-    rawRecordCount += value.parsed.records.length;
-    const pageStart = (page - 1) * firstPage.page_size;
-    value.parsed.records.forEach((record, index) => positioned.set(pageStart + index, record));
-  }
-  const selected = [];
-  for (let index = offset; index < offset + limit; index += 1) {
-    const record = positioned.get(index);
-    if (record) selected.push(record);
-  }
-  const sourceScoped = criteria._institution
-    ? selected.filter(raw => recordMatchesInstitution({
-      institution: normalizeInstitution(raw.institution_name, { uei: raw.uei }),
-    }, criteria._institution, "DOE"))
-    : selected;
-  const abstracts = await enrichAbstracts(fetchImpl, sourceScoped, sleep);
-  const results = abstracts.enriched.map(({ raw, abstract }) => normalizeDoeAward(raw, {
+  const upstreamExhausted = pages.size >= firstPage.page_count || rawRecordCount >= firstPage.total_count;
+  const safetyBoundReached = !upstreamExhausted && pages.size >= DOE_MAX_UPSTREAM_PAGES;
+  const selected = sourceScoped.slice(offset, offset + limit);
+  const abstracts = await enrichAbstracts(fetchImpl, selected, sleep);
+  const results = abstracts.enriched.map(({ raw, abstract }) => attachResolvedInstitution(normalizeDoeAward(raw, {
     retrievedAt,
     abstract,
-  }));
-  const hasMore = offset < DOE_MAX_OFFSET && offset + limit < firstPage.total_count;
+  }), criteria._institution));
+  const hasMore = offset < DOE_MAX_OFFSET && sourceScoped.length > offset + limit;
   return {
     source: "DOE",
     adapter_version: DOE_ADAPTER_VERSION,
     retrieved_at: retrievedAt,
-    total_count: firstPage.total_count,
+    total_count: upstreamExhausted ? sourceScoped.length : null,
+    upstream_total_count: firstPage.total_count,
     raw_record_count: rawRecordCount,
+    upstream_pages: pages.size,
+    safety_bound_reached: safetyBoundReached,
     has_more: hasMore,
     results,
     health: {

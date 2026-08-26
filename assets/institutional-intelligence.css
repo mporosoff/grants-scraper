@@ -359,6 +359,61 @@
   border-radius: 8px;
 }
 
+.ii-facet-detail {
+  margin: 8px 0 0;
+  color: #617188;
+  font-size: .7rem;
+  line-height: 1.45;
+}
+
+.ii-question-answer {
+  margin-top: 18px;
+  padding: 17px;
+  color: #28445f;
+  background: #f3f8fd;
+  border: 1px solid #cbdceb;
+  border-radius: 11px;
+}
+
+.ii-question-answer h3 {
+  margin: 2px 0 9px;
+  color: var(--navy);
+  font-size: 1.02rem;
+}
+
+.ii-question-answer q {
+  overflow-wrap: anywhere;
+}
+
+.ii-question-answer q::before,
+.ii-question-answer q::after {
+  content: none;
+}
+
+.ii-question-answer p,
+.ii-question-answer ul {
+  margin-bottom: 9px;
+}
+
+.ii-question-answer ul {
+  display: grid;
+  gap: 7px;
+  padding-left: 20px;
+}
+
+.ii-answer-evidence a {
+  font-weight: 800;
+}
+
+.ii-answer-limitations {
+  color: #52647a;
+  font-size: .74rem;
+}
+
+.ii-question-answer .button {
+  margin-top: 3px;
+}
+
 .ii-awards {
   display: grid;
   gap: 13px;

@@ -152,7 +152,7 @@ export function mockAwards(target, {
           schema_version: 1,
           query: requestUrl.searchParams.get("query"),
           institutions,
-          registry: { source: "ROR", status: "available", adapter_version: "1.0.0", license: "CC0-1.0", cache: "miss" },
+          registry: { source: "ROR", status: "available", adapter_version: "1.1.0", license: "CC0-1.0", cache: "miss" },
         }),
       });
       return;
@@ -392,6 +392,13 @@ export async function addDepartmentResearcher(page, optionIndex = 0) {
   await page.locator("#choose-researcher").click();
   await expect(page.getByRole("button", { name: `Remove ${label} from team` })).toBeVisible();
   return { label, value };
+}
+
+export async function chooseInvestigator(page, name) {
+  const option = page.locator("#ii-investigators option").filter({ hasText: name }).first();
+  const value = await option.getAttribute("value");
+  expect(value).toBeTruthy();
+  await page.locator("#ii-investigators").selectOption(value);
 }
 
 export async function mockOpenAiBroadening(page) {

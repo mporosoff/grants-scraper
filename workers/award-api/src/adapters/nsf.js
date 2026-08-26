@@ -9,10 +9,12 @@ import {
   uniqueStrings,
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
-import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NSF_ADAPTER_VERSION = "1.2.0";
+export const NSF_ADAPTER_VERSION = "1.3.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
+export const NSF_UPSTREAM_PAGE_SIZE = 25;
+export const NSF_MAX_UPSTREAM_PAGES = 12;
 
 function quoted(value) {
   return `"${String(value).replace(/"/g, "").trim()}"`;
@@ -161,24 +163,59 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
 }
 
 export async function searchNsf(fetchImpl, criteria, options) {
-  const request = buildNsfRequest(criteria, options);
-  const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
-  const response = payload?.response;
-  if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
-  const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
   const retrievedAt = options.now().toISOString();
-  let awards = rawAwards.map(raw => normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url }));
-  if (criteria._institution) {
-    awards = awards.filter(award => recordMatchesInstitution(award, criteria._institution, "NSF"));
+  const targetCount = options.offset + options.limit + 1;
+  const awards = [];
+  const seen = new Set();
+  let rawRecordCount = 0;
+  let upstreamTotalCount = null;
+  let upstreamExhausted = false;
+  let upstreamPages = 0;
+  const maximumPages = criteria._institution && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
+  for (let page = 0; page < maximumPages; page += 1) {
+    const requestOptions = criteria._institution && !criteria.award_id
+      ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: page * NSF_UPSTREAM_PAGE_SIZE }
+      : options;
+    const request = buildNsfRequest(criteria, requestOptions);
+    const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
+    const response = payload?.response;
+    if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
+    const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
+    const reportedTotal = finiteNumber(response.metadata?.totalCount);
+    if (upstreamTotalCount === null) upstreamTotalCount = reportedTotal ?? rawAwards.length;
+    rawRecordCount += rawAwards.length;
+    upstreamPages += 1;
+    for (const raw of rawAwards) {
+      const award = normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url });
+      if (seen.has(award.award_id)) continue;
+      seen.add(award.award_id);
+      if (!criteria._institution) awards.push(award);
+      else if (recordMatchesInstitution(award, criteria._institution, "NSF")) {
+        awards.push(attachResolvedInstitution(award, criteria._institution));
+      }
+    }
+    const rawEnd = requestOptions.offset + rawAwards.length;
+    upstreamExhausted = criteria.award_id
+      || rawAwards.length < requestOptions.limit
+      || (upstreamTotalCount !== null && rawEnd >= upstreamTotalCount);
+    if (!criteria._institution || awards.length >= targetCount || upstreamExhausted) break;
   }
-  const totalCount = finiteNumber(response.metadata?.totalCount) ?? rawAwards.length;
+  const safetyBoundReached = Boolean(criteria._institution && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
+  const results = criteria._institution
+    ? awards.slice(options.offset, options.offset + options.limit)
+    : awards.slice(0, options.limit);
   return {
     source: "NSF",
     adapter_version: NSF_ADAPTER_VERSION,
-    results: awards.slice(0, options.limit),
-    total_count: totalCount,
-    raw_record_count: rawAwards.length,
-    has_more: !criteria.award_id && totalCount > options.offset + rawAwards.length,
+    results,
+    total_count: criteria._institution ? (upstreamExhausted ? awards.length : null) : upstreamTotalCount,
+    upstream_total_count: upstreamTotalCount,
+    raw_record_count: rawRecordCount,
+    upstream_pages: upstreamPages,
+    safety_bound_reached: safetyBoundReached,
+    has_more: criteria._institution
+      ? !safetyBoundReached && awards.length > options.offset + options.limit
+      : !criteria.award_id && upstreamTotalCount > options.offset + rawRecordCount,
     retrieved_at: retrievedAt,
   };
 }

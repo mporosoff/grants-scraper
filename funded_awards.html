@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=help-alerts-20260825">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=pre-phase2-ux-20260825">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=phase3-identity-evidence-20260826">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -149,13 +149,13 @@
 
           <details class="ii-ask" id="ii-ask">
             <summary>
-              <span><strong>Optional: Ask about this institution</strong><small>Translate a question into the transparent filters above</small></span>
+              <span><strong>Optional: Ask about this institution</strong><small>Answer from returned public NSF, NIH, and DOE award evidence</small></span>
               <span id="ii-ai-state">No AI key required for structured search</span>
             </summary>
             <div class="ii-ask-body">
               <label for="ii-question">Question about the selected institution</label>
               <textarea id="ii-question" rows="3" placeholder="Who at this institution has received awards from DOE BES?"></textarea>
-              <button class="button ai-button" id="ii-ask-button" type="button">Translate question into filters</button>
+              <button class="button ai-button" id="ii-ask-button" type="button">Answer using public awards</button>
               <div class="ii-question-plan hidden" id="ii-question-plan" aria-live="polite"></div>
 
               <section class="ii-key-setup" id="ii-key-setup" aria-labelledby="ii-key-heading">
@@ -177,7 +177,7 @@
                 <button class="button secondary" id="ii-save-key" type="button">Save to Funding Finder on this device</button>
                 <p class="credential-status" id="ii-key-status" aria-live="polite"></p>
               </section>
-              <p class="privacy-note">The key stays in the same browser-local Funding Finder credential store. Only your question, selected public institution, and visible structured filters go directly to the selected provider. Profile, CV, ORCID, saved notes, and documents are not included. Award records, not model text, remain authoritative.</p>
+              <p class="privacy-note">The key stays in the same browser-local Funding Finder credential store. An explicit AI question may send the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts directly to that provider. It never sends profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated award records, not model pretraining, remain authoritative.</p>
             </div>
           </details>
 
@@ -189,6 +189,14 @@
               </div>
               <p id="ii-result-scope"></p>
             </div>
+            <section class="ii-question-answer hidden" id="ii-question-answer" aria-labelledby="ii-question-answer-heading">
+              <p class="eyebrow">Evidence-grounded answer</p>
+              <h3 id="ii-question-answer-heading">Answer to <q id="ii-answered-question"></q></h3>
+              <div id="ii-direct-answer" aria-live="polite"></div>
+              <div class="ii-answer-evidence" id="ii-answer-evidence"></div>
+              <p class="ii-answer-limitations" id="ii-answer-limitations"></p>
+              <button class="button secondary hidden" id="ii-update-answer" type="button">Update answer using loaded records</button>
+            </section>
             <div class="ii-metrics" id="ii-metrics"></div>
             <div class="ii-drilldowns">
               <section aria-labelledby="ii-investigators-heading">
@@ -196,6 +204,7 @@
                 <select id="ii-investigators" aria-labelledby="ii-investigators-heading" disabled>
                   <option value="">No investigators loaded</option>
                 </select>
+                <p class="ii-facet-detail" id="ii-investigator-variants" aria-live="polite">Select an investigator to hear source-published name variants and search the matching identity.</p>
               </section>
               <section aria-labelledby="ii-programs-heading">
                 <h3 id="ii-programs-heading">Programs</h3>
@@ -304,11 +313,11 @@
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=search-alerts-20260825"></script>
   <script src="./assets/award-api-config.js?v=phase4-doe-awards"></script>
-  <script src="./assets/funded-awards-core.js?v=phase4-doe-awards"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=pre-phase2-ux-20260825"></script>
+  <script src="./assets/funded-awards-core.js?v=phase3-normalized-paging-20260826"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=phase3-identity-evidence-20260826"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
-  <script src="./assets/funded-awards.js?v=unified-award-intelligence-20260825"></script>
-  <script src="./assets/institutional-intelligence.js?v=pre-phase2-ux-20260825"></script>
+  <script src="./assets/funded-awards.js?v=phase3-normalized-paging-20260826"></script>
+  <script src="./assets/institutional-intelligence.js?v=phase3-identity-evidence-20260826"></script>
 </body>
 </html>
