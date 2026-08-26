@@ -6,11 +6,13 @@ import test from "node:test";
 const root = new URL("../../", import.meta.url);
 const paths = {
   app: "assets/app.js",
+  config: "assets/app-config.js",
   catalog: "data/opportunities.js",
   loader: "assets/catalog-loader.js",
   metadata: "data/catalog-metadata.js",
   explorer: "match_explorer.html",
   team: "team_match.html",
+  subtopic: "assets/subtopic-runtime.js",
   release: "data/search-v2-release.json",
   refresh: ".github/workflows/refresh-opportunities.yml",
   deploy: ".github/workflows/deploy-search-package.yml",
@@ -105,6 +107,21 @@ test("loader owns one bounded lifecycle without executable prefetch or unsafe co
   assert.doesNotMatch(sources.loader, /\beval\s*\(|new Function|createObjectURL|blob:/);
 });
 
+test("every first-use catalog script shares a deterministic bounded termination contract", () => {
+  assert.match(sources.config, /scriptTimeoutMs/);
+  assert.match(sources.config, /15_000/);
+  assert.match(sources.config, /FUNDING_FINDER_SCRIPT_CLOCK/);
+  assert.match(sources.loader, /The funding catalog request timed out/);
+  assert.match(sources.loader, /removeEventListener\("load", onLoad\)/);
+  assert.match(sources.loader, /removeEventListener\("error", onError\)/);
+  assert.match(sources.loader, /BOUNDED_SCRIPT\.clearTimeout\(timeout\)/);
+  assert.match(sources.subtopic, /topic_sidecar_timeout/);
+  assert.match(sources.subtopic, /boundedScript\.clearTimeout\(timeout\)/);
+  assert.match(sources.subtopic, /sidecarPromise = null/);
+  assert.match(sources.subtopic, /searchParams\.set\("recovery"/);
+  assert.match(sources.app, /_topicError\?\.code === "topic_sidecar_timeout"/);
+});
+
 test("application explicitly separates shell and catalog initialization and marks first use", () => {
   assert.match(sources.app, /function initializeShell\(\)/);
   assert.match(sources.app, /async function initializeCatalog\(candidate\)/);
@@ -124,18 +141,25 @@ test("release and refresh contracts publish and verify metadata with the exact c
   for (const path of [
     "data/opportunities.js",
     "data/catalog-metadata.js",
+    "assets/app-config.js",
     "assets/catalog-loader.js",
+    "assets/subtopic-runtime.js",
   ]) {
-    assert.equal(release.source_hashes[path], sha256(sources[
-      path === "data/opportunities.js" ? "catalog"
-        : path === "data/catalog-metadata.js" ? "metadata" : "loader"
-    ]));
+    const sourceKey = {
+      "data/opportunities.js": "catalog",
+      "data/catalog-metadata.js": "metadata",
+      "assets/app-config.js": "config",
+      "assets/catalog-loader.js": "loader",
+      "assets/subtopic-runtime.js": "subtopic",
+    }[path];
+    assert.equal(release.source_hashes[path], sha256(sources[sourceKey]));
   }
   assert.match(release.atomic_publication_contract, /startup metadata/);
   assert.match(sources.refresh, /git add[^\n]*data\/opportunities\.js data\/catalog-metadata\.js/);
   assert.match(sources.refresh, /live_metadata/);
   assert.match(sources.refresh, /live_catalog_sha/);
   assert.match(sources.deploy, /"assets\/catalog-loader\.js"/);
+  assert.match(sources.deploy, /"assets\/subtopic-runtime\.js"/);
   assert.match(sources.deploy, /"data\/catalog-metadata\.js"/);
   assert.match(sources.deploy, /live_metadata/);
   assert.match(sources.deploy, /live_catalog_sha/);

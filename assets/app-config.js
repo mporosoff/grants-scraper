@@ -46,6 +46,27 @@
     vectorUrl: "./data/search-v2-voyage-vectors.f16",
     timeoutMs: 8_000,
   });
+  const configuredScriptTimeout = local
+    ? Number(globalThis.FUNDING_FINDER_SCRIPT_TIMEOUT_MS)
+    : Number.NaN;
+  const scriptTimeoutMs = Number.isFinite(configuredScriptTimeout)
+    && configuredScriptTimeout > 0
+    ? Math.min(60_000, Math.max(1, configuredScriptTimeout))
+    : 15_000;
+  const boundedScript = Object.freeze({
+    timeoutMs: scriptTimeoutMs,
+    setTimeout(callback) {
+      const clock = globalThis.FUNDING_FINDER_SCRIPT_CLOCK;
+      return typeof clock?.setTimeout === "function"
+        ? clock.setTimeout(callback, scriptTimeoutMs)
+        : globalThis.setTimeout(callback, scriptTimeoutMs);
+    },
+    clearTimeout(timer) {
+      const clock = globalThis.FUNDING_FINDER_SCRIPT_CLOCK;
+      if (typeof clock?.clearTimeout === "function") clock.clearTimeout(timer);
+      else globalThis.clearTimeout(timer);
+    },
+  });
 
   function releaseLabel() {
     const date = new Date(`${release.updated}T00:00:00Z`);
@@ -67,6 +88,7 @@
   globalThis.FUNDING_FINDER_APP = Object.freeze({
     flags,
     productionFlags,
+    boundedScript,
     hybridSearch,
     release,
     releaseLabel,

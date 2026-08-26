@@ -9,6 +9,7 @@
     "ready",
     "failed",
   ]);
+  const BOUNDED_SCRIPT = globalThis.FUNDING_FINDER_APP?.boundedScript;
   let metadata = globalThis.GRANT_CATALOG_METADATA;
   const listeners = new Set();
   let lifecycle = "idle";
@@ -197,13 +198,22 @@
       script.async = true;
       script.src = url.href;
       script.dataset.fundingCatalogMetadataRecovery = "true";
-      const timeout = globalThis.setTimeout(() => {
+      let settled = false;
+      let timeout = null;
+      const cleanup = () => {
+        if (timeout !== null) BOUNDED_SCRIPT.clearTimeout(timeout);
+        timeout = null;
+        script.removeEventListener("load", onLoad);
+        script.removeEventListener("error", onError);
         script.remove();
-        reject(new Error("Catalog startup metadata refresh timed out."));
-      }, 15_000);
-      script.addEventListener("load", () => {
-        globalThis.clearTimeout(timeout);
-        script.remove();
+      };
+      const finish = callback => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        callback();
+      };
+      const onLoad = () => finish(() => {
         try {
           metadata = globalThis.GRANT_CATALOG_METADATA;
           const refreshed = validatedMetadata();
@@ -212,12 +222,15 @@
         } catch (error) {
           reject(error);
         }
-      }, { once: true });
-      script.addEventListener("error", () => {
-        globalThis.clearTimeout(timeout);
-        script.remove();
+      });
+      const onError = () => finish(() => {
         reject(new Error("Catalog startup metadata could not be refreshed."));
-      }, { once: true });
+      });
+      script.addEventListener("load", onLoad, { once: true });
+      script.addEventListener("error", onError, { once: true });
+      timeout = BOUNDED_SCRIPT.setTimeout(() => finish(() => {
+        reject(new Error("Catalog startup metadata refresh timed out."));
+      }));
       document.head.append(script);
     }).finally(() => {
       metadataRefreshPromise = null;
@@ -253,14 +266,38 @@
       script.async = true;
       script.src = url;
       script.dataset.fundingCatalog = "true";
-      script.addEventListener("load", () => {
+      let settled = false;
+      let timeout = null;
+      const cleanup = ({ remove = false } = {}) => {
+        if (timeout !== null) BOUNDED_SCRIPT.clearTimeout(timeout);
+        timeout = null;
+        script.removeEventListener("load", onLoad);
+        script.removeEventListener("error", onError);
+        if (remove) script.remove();
+        if (injectedScript === script) injectedScript = null;
+      };
+      const finish = (callback, options) => {
+        if (settled) return;
+        settled = true;
+        cleanup(options);
+        callback();
+      };
+      const onLoad = () => finish(() => {
         counts.executions += 1;
         mark("funding-catalog-executed");
         resolve(globalThis.GRANT_CATALOG);
-      }, { once: true });
-      script.addEventListener("error", () => {
+      });
+      const onError = () => finish(() => {
         reject(new Error("The funding catalog could not be downloaded."));
-      }, { once: true });
+      }, { remove: true });
+      script.addEventListener("load", onLoad, { once: true });
+      script.addEventListener("error", onError, { once: true });
+      timeout = BOUNDED_SCRIPT.setTimeout(() => finish(() => {
+        try { delete globalThis.GRANT_CATALOG; } catch (_error) {
+          globalThis.GRANT_CATALOG = undefined;
+        }
+        reject(new Error("The funding catalog request timed out."));
+      }, { remove: true }));
       injectedScript = script;
       document.head.append(script);
     });
@@ -402,6 +439,7 @@
     getMetadata: () => metadata,
     getSnapshot: snapshot,
     releaseIdentity,
+    scriptTimeoutMs: Number(BOUNDED_SCRIPT?.timeoutMs || 0),
     schedulePrefetch,
     subscribe,
   });

@@ -23,6 +23,33 @@ async function installConnection(page, value) {
   }, value);
 }
 
+async function installScriptClock(page) {
+  await page.addInitScript(() => {
+    let nextTimer = 0;
+    const timers = new Map();
+    globalThis.FUNDING_FINDER_SCRIPT_TIMEOUT_MS = 15_000;
+    globalThis.FUNDING_FINDER_SCRIPT_CLOCK = {
+      setTimeout(callback) {
+        const timer = ++nextTimer;
+        timers.set(timer, callback);
+        return timer;
+      },
+      clearTimeout(timer) {
+        timers.delete(timer);
+      },
+    };
+    globalThis.__FUNDING_FINDER_SCRIPT_CLOCK = Object.freeze({
+      pending: () => timers.size,
+      runAll: () => {
+        const callbacks = [...timers.values()];
+        timers.clear();
+        callbacks.forEach(callback => callback());
+        return callbacks.length;
+      },
+    });
+  });
+}
+
 async function seriousAxeViolations(page) {
   const result = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
@@ -266,6 +293,208 @@ test("catalog failure preserves entered and saved state and retry completes the 
     executions: 1,
     initializations: 1,
     metadataRefreshes: 1,
+  });
+});
+
+test("a stalled catalog request times out once, preserves state, ignores late events, and retries", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  await installScriptClock(page);
+  await page.addInitScript(() => {
+    localStorage.setItem("funding-finder.saved.v1", JSON.stringify([{
+      opportunity_id: "timeout-saved-fixture",
+      title: "Saved before timeout",
+      agency: "Fixture agency",
+      source: "Fixture source",
+      pursuit_status: "considering",
+      note: "Timeout must preserve this note",
+    }]));
+  });
+  const releaseStalledRequest = deferred();
+  let catalogRequests = 0;
+  await page.route("**/data/opportunities.js*", async route => {
+    catalogRequests += 1;
+    if (catalogRequests === 1) {
+      await releaseStalledRequest.promise;
+      await route.abort().catch(() => {});
+      return;
+    }
+    await route.continue();
+  });
+  await openFundingFinderShell(page);
+  await page.locator("#query").fill("hydrogen catalysis timeout");
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill("Electrochemical reaction engineering");
+  await page.locator("#filter-panel > summary").click();
+  await page.getByText("Deadline and award", { exact: true }).click();
+  await page.locator("#deadline-from").fill("2026-09-01");
+  await page.locator("#find-funding").click();
+  await expect.poll(() => catalogRequests).toBe(1);
+  await expect(page.locator("#search-status")).toHaveText("Preparing funding catalog…");
+  await page.evaluate(() => {
+    globalThis.__TIMED_OUT_CATALOG_SCRIPT = document.querySelector(
+      'script[data-funding-catalog="true"]',
+    );
+    globalThis.__CONCURRENT_CATALOG_SETTLEMENTS = Promise.allSettled([
+      globalThis.FUNDING_CATALOG_LOADER.ensureCatalogReady(),
+      globalThis.FUNDING_CATALOG_LOADER.ensureCatalogReady(),
+    ]).then(items => items.map(item => ({
+      status: item.status,
+      message: item.reason?.message || "",
+    })));
+  });
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(1);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.runAll())).toBe(1);
+  releaseStalledRequest.resolve();
+  await expect(page.locator("#catalog-error")).toContainText(/catalog request timed out/i);
+  const settlements = await page.evaluate(() => globalThis.__CONCURRENT_CATALOG_SETTLEMENTS);
+  expect(settlements.map(item => item.status)).toEqual(["rejected", "rejected"]);
+  expect(settlements[0].message).toBe(settlements[1].message);
+  await expect(page.locator("#query")).toHaveValue("hydrogen catalysis timeout");
+  await expect(page.locator("#research-profile")).toHaveValue("Electrochemical reaction engineering");
+  await expect(page.locator("#deadline-from")).toHaveValue("2026-09-01");
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+  expect(await page.evaluate(() => ({
+    catalog: globalThis.GRANT_CATALOG,
+    scriptConnected: globalThis.__TIMED_OUT_CATALOG_SCRIPT?.isConnected,
+    snapshot: globalThis.FUNDING_CATALOG_LOADER.getSnapshot(),
+  }))).toMatchObject({
+    catalog: undefined,
+    scriptConnected: false,
+    snapshot: { state: "failed", requests: 1, executions: 0, initializations: 0 },
+  });
+  await page.locator("#catalog-retry").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  const beforeLateEvents = await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot());
+  await page.evaluate(() => {
+    globalThis.__TIMED_OUT_CATALOG_SCRIPT.dispatchEvent(new Event("load"));
+    globalThis.__TIMED_OUT_CATALOG_SCRIPT.dispatchEvent(new Event("error"));
+  });
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot()))
+    .toEqual(beforeLateEvents);
+  expect(await page.evaluate(() => globalThis.GRANT_CATALOG?.record_count)).toBeGreaterThan(1000);
+  expect(catalogRequests).toBe(2);
+  expect(beforeLateEvents).toMatchObject({
+    state: "ready",
+    requests: 2,
+    executions: 1,
+    initializations: 1,
+    metadataRefreshes: 1,
+  });
+});
+
+test("a stalled topic sidecar fails initialization cleanly and a fresh bounded retry succeeds", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  await installScriptClock(page);
+  const releaseStalledRequest = deferred();
+  const sidecarUrls = [];
+  await page.route("**/data/subtopics.js*", async route => {
+    const requestUrl = new URL(route.request().url());
+    sidecarUrls.push(requestUrl);
+    if (sidecarUrls.length === 1) {
+      await releaseStalledRequest.promise;
+      await route.abort().catch(() => {});
+      return;
+    }
+    await route.continue();
+  });
+  await openFundingFinderShell(page);
+  await page.locator("#query").fill("carbon capture sidecar timeout");
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill("Catalysis and carbon dioxide conversion");
+  await page.locator("#find-funding").click();
+  await expect.poll(() => sidecarUrls.length).toBe(1);
+  await expect.poll(() => (
+    page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot().state)
+  )).toBe("initializing");
+  await page.evaluate(() => {
+    globalThis.__TIMED_OUT_SIDECAR_SCRIPT = document.querySelector(
+      'script[data-funding-subtopic-catalog="true"]',
+    );
+    globalThis.__CONCURRENT_SIDECAR_SETTLEMENTS = Promise.allSettled([
+      globalThis.FUNDING_SUBTOPICS.loadSidecar(),
+      globalThis.FUNDING_SUBTOPICS.loadSidecar(),
+    ]).then(items => items.map(item => ({
+      status: item.status,
+      code: item.reason?.code || "",
+    })));
+  });
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(1);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.runAll())).toBe(1);
+  releaseStalledRequest.resolve();
+  await expect(page.locator("#catalog-error")).toContainText(/topic catalog request timed out/i);
+  const settlements = await page.evaluate(() => globalThis.__CONCURRENT_SIDECAR_SETTLEMENTS);
+  expect(settlements.map(item => item.status)).toEqual(["rejected", "rejected"]);
+  expect(settlements.map(item => item.code)).toEqual([
+    "topic_sidecar_timeout",
+    "topic_sidecar_timeout",
+  ]);
+  await expect(page.locator("#query")).toHaveValue("carbon capture sidecar timeout");
+  await expect(page.locator("#research-profile")).toHaveValue("Catalysis and carbon dioxide conversion");
+  await expect(page.locator("#results .result-card")).toHaveCount(0);
+  expect(await page.evaluate(() => ({
+    catalog: globalThis.GRANT_CATALOG,
+    sidecar: globalThis.SUBTOPIC_CATALOG,
+    scriptConnected: globalThis.__TIMED_OUT_SIDECAR_SCRIPT?.isConnected,
+    snapshot: globalThis.FUNDING_CATALOG_LOADER.getSnapshot(),
+  }))).toMatchObject({
+    catalog: undefined,
+    sidecar: undefined,
+    scriptConnected: false,
+    snapshot: { state: "failed", requests: 1, executions: 1, initializations: 1 },
+  });
+  await page.locator("#catalog-retry").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(sidecarUrls).toHaveLength(2);
+  expect(sidecarUrls[0].searchParams.has("recovery")).toBe(false);
+  expect(sidecarUrls[1].searchParams.get("recovery")).toBe("1");
+  const beforeLateEvents = await page.evaluate(() => ({
+    snapshot: globalThis.FUNDING_CATALOG_LOADER.getSnapshot(),
+    sidecar: globalThis.SUBTOPIC_CATALOG,
+  }));
+  await page.evaluate(() => {
+    globalThis.__TIMED_OUT_SIDECAR_SCRIPT.dispatchEvent(new Event("load"));
+    globalThis.__TIMED_OUT_SIDECAR_SCRIPT.dispatchEvent(new Event("error"));
+  });
+  const afterLateEvents = await page.evaluate(() => ({
+    snapshot: globalThis.FUNDING_CATALOG_LOADER.getSnapshot(),
+    sidecar: globalThis.SUBTOPIC_CATALOG,
+  }));
+  expect(afterLateEvents).toEqual(beforeLateEvents);
+  expect(beforeLateEvents.snapshot).toMatchObject({
+    state: "ready",
+    requests: 2,
+    executions: 2,
+    initializations: 2,
+    metadataRefreshes: 1,
+  });
+});
+
+test("catalog and topic scripts completing before the controlled deadline clear their timers", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  await installScriptClock(page);
+  const gate = deferred();
+  await page.route("**/data/opportunities.js*", async route => {
+    await gate.promise;
+    await route.continue();
+  });
+  await openFundingFinderShell(page);
+  await page.locator("#query").fill("membrane separation");
+  await page.locator("#find-funding").click();
+  await expect.poll(() => page.evaluate(() => (
+    globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending()
+  ))).toBe(1);
+  gate.resolve();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(0);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.runAll())).toBe(0);
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "ready",
+    requests: 1,
+    executions: 1,
+    initializations: 1,
   });
 });
 

@@ -43,6 +43,9 @@ test("v1.3 production feature flags enable topics, explanations, and hybrid sear
   );
   assert.equal(local.release.version, "1.3.0");
   assert.equal(local.release.updated, "2026-08-24");
+  assert.equal(production.boundedScript.timeoutMs, 15_000);
+  assert.equal(typeof production.boundedScript.setTimeout, "function");
+  assert.equal(typeof production.boundedScript.clearTimeout, "function");
   assert.equal(
     production.hybridSearch.proxyUrl,
     "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
@@ -54,6 +57,9 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.match(runtimeSource, /document\.head\.append\(script\)/);
   assert.match(runtimeSource, /GRANT_CATALOG\?\.generated_at/);
   assert.match(runtimeSource, /subtopics\.js\?v=\$\{catalogVersion\}/);
+  assert.match(runtimeSource, /topic_sidecar_timeout/);
+  assert.match(runtimeSource, /boundedScript\.setTimeout/);
+  assert.match(runtimeSource, /sidecarPromise = null/);
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);
   assert.doesNotMatch(teamHtml, /<script src="(?:\.\/)?data\/subtopics\.js/);
   assert.match(mainHtml, /assets\/app-config\.js\?v=app-1\.3\.0/);

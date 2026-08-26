@@ -5301,6 +5301,10 @@
   }
 
   function validateShellDependencies() {
+    if (!APP_CONFIG?.boundedScript?.setTimeout
+      || !APP_CONFIG?.boundedScript?.clearTimeout) {
+      throw new Error("The bounded script loader did not start. Refresh the page and try again.");
+    }
     if (!CATALOG_LOADER?.configure || !CATALOG_LOADER?.ensureCatalogReady) {
       throw new Error("The funding catalog loader did not start. Refresh the page and try again.");
     }
@@ -5378,6 +5382,7 @@
         );
         nextTopicLayerAvailable = true;
       } catch (_topicError) {
+        if (_topicError?.code === "topic_sidecar_timeout") throw _topicError;
         topicLayerFailed = true;
         nextTopicLayerAvailable = false;
       }
