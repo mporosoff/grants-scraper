@@ -335,15 +335,17 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
       attempts: [],
       async sendEmail(message, idempotencyKey) {
         this.attempts.push({ message, idempotencyKey });
-        assert.equal(await store.updateSubscription(
-          person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
-        ), true);
-        const replacement = await store.createSubscriptionCycle(await cycle({
-          verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
-          verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
-        }));
-        assert.equal(replacement.cycleAccepted, true);
-        if (providerFails) throw Object.assign(new Error("bounded provider failure"), {
+        if (this.attempts.length === 1) {
+          assert.equal(await store.updateSubscription(
+            person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+          ), true);
+          const replacement = await store.createSubscriptionCycle(await cycle({
+            verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
+            verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
+          }));
+          assert.equal(replacement.cycleAccepted, true);
+        }
+        if (providerFails && this.attempts.length === 1) throw Object.assign(new Error("bounded provider failure"), {
           code: "provider_network_failure", retryable: true,
         });
         return { id: "provider-in-flight" };
@@ -355,21 +357,29 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
     const event = database.prepare("SELECT status,error_code,terminal_at,provider_message_id FROM notification_events WHERE id='notice-in-flight'").get();
     if (providerFails) {
       assert.deepEqual(result, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
-      assert.equal(event.status, "suppressed");
-      assert.equal(event.error_code, "subscription_reactivated");
-      assert.ok(event.terminal_at);
+      assert.equal(event.status, "failed");
+      assert.equal(event.error_code, "subscription_reactivated_reconcile");
+      assert.equal(event.terminal_at, null);
       assert.equal(event.provider_message_id, null);
+      assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "queued");
+      const recovered = await dispatchNotifications({
+        store, provider, env, now: new Date("2026-09-01T12:06:00.000Z"),
+      });
+      assert.deepEqual(recovered, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+      assert.equal(provider.attempts.length, 2);
+      assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+      Object.assign(event, database.prepare("SELECT status,error_code,terminal_at,provider_message_id FROM notification_events WHERE id='notice-in-flight'").get());
     } else {
       assert.deepEqual(result, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
-      assert.equal(event.status, "sent");
-      assert.equal(event.error_code, null);
-      assert.equal(event.terminal_at, null);
-      assert.equal(event.provider_message_id, "provider-in-flight");
-      assert.equal(await store.suppressSubscriberByMessage(
-        "provider-in-flight", "email.bounced", "webhook-in-flight", fixedNow.toISOString(),
-      ), true);
     }
-    assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, providerFails ? "queued" : "suppressed");
+    assert.equal(event.status, "sent");
+    assert.equal(event.error_code, null);
+    assert.equal(event.terminal_at, null);
+    assert.equal(event.provider_message_id, "provider-in-flight");
+    assert.equal(await store.suppressSubscriberByMessage(
+      "provider-in-flight", "email.bounced", "webhook-in-flight", fixedNow.toISOString(),
+    ), true);
+    assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "suppressed");
   }
 });
 
@@ -907,6 +917,66 @@ test("FF-BUG-017 weekly selection is subscriber-fair, capped, mobile-readable, a
   assert.ok(Buffer.byteLength(large.html) < 200_000);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE subscription_id='watch-a' AND status='queued'").get().count, 5);
   assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='b-00'").get().status, "sent");
+});
+
+test("FF-BUG-017 reactivation reconciliation preserves the exact digest group and idempotency", async () => {
+  const database = databaseThrough();
+  const person = insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", definitionHash: "hash-old",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  for (const id of ["digest-a", "digest-b"]) {
+    await store.enqueueEvent({
+      id, subscriptionId: "watch-1", eventKey: id, eventKind: "amended",
+      opportunityId: id, payload: { title: id }, createdAt: fixedNow.toISOString(),
+    });
+  }
+  const provider = {
+    configured: true,
+    attempts: [],
+    async sendEmail(message, idempotencyKey) {
+      this.attempts.push({ message, idempotencyKey });
+      if (this.attempts.length === 1) {
+        assert.equal(await store.updateSubscription(
+          person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+        ), true);
+        assert.equal((await store.createSubscriptionCycle(await cycle({
+          verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
+          verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
+        }))).cycleAccepted, true);
+        throw Object.assign(new Error("bounded provider failure"), {
+          code: "provider_network_failure", retryable: true,
+        });
+      }
+      return { id: "provider-digest-reconciled" };
+    },
+  };
+  const first = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });
+  assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+  assert.deepEqual(
+    all(database, "SELECT status,error_code,terminal_at FROM notification_events WHERE id LIKE 'digest-%' ORDER BY id")
+      .map(event => [event.status, event.error_code, event.terminal_at]),
+    [
+      ["failed", "subscription_reactivated_reconcile", null],
+      ["failed", "subscription_reactivated_reconcile", null],
+    ],
+  );
+  const recovered = await Promise.all([1, 2].map(() => dispatchNotifications({
+    store, provider, env, now: new Date("2026-09-01T12:06:00.000Z"), weekly: false,
+  })));
+  assert.equal(recovered.reduce((sum, item) => sum + item.attemptedCount, 0), 1);
+  assert.equal(recovered.reduce((sum, item) => sum + item.deliveredCount, 0), 1);
+  assert.equal(recovered.reduce((sum, item) => sum + item.failedCount, 0), 0);
+  assert.equal(provider.attempts.length, 2);
+  assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+  assert.match(provider.attempts[1].idempotencyKey, /^digest:/);
+  assert.match(provider.attempts[1].message.subject, /weekly digest: 2 updates/);
+  assert.deepEqual(
+    all(database, "SELECT status,provider_message_id FROM notification_events WHERE id LIKE 'digest-%' ORDER BY id")
+      .map(event => [event.status, event.provider_message_id]),
+    [["sent", "provider-digest-reconciled"], ["sent", "provider-digest-reconciled"]],
+  );
 });
 
 test("FF-BUG-017 a failed digest retries the whole claim with the same idempotency key", async () => {

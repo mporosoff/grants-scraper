@@ -225,29 +225,36 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
   }
   const dailyLimit = Math.max(1, Math.min(100, Number(env.DAILY_EMAIL_LIMIT) || 100));
   let remaining = dailyLimit;
+  const reconciliation = !weekly && typeof store.pendingNotificationReconciliationBatches === "function"
+    ? await store.pendingNotificationReconciliationBatches(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
+    : [];
   const pending = weekly
     ? []
-    : await store.pendingEvents("immediate", now.toISOString(), remaining);
+    : await store.pendingEvents("immediate", now.toISOString(), Math.max(0, remaining - reconciliation.length));
   let attemptedCount = 0;
   let deliveredCount = 0;
   let failedCount = 0;
   const batches = weekly
     ? await store.pendingDigestEvents(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
-    : pending.slice(0, remaining).map(event => ({ events: [event], hasOverflow: false }));
+    : [
+        ...reconciliation,
+        ...pending.slice(0, Math.max(0, remaining - reconciliation.length))
+          .map(event => ({ events: [event], hasOverflow: false })),
+      ];
   for (const batchValue of batches) {
     const batch = batchValue.events;
     const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
-    const idempotencyKey = weekly
+    const idempotencyKey = batchValue.idempotencyKey || (weekly
       ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
-      : claimed[0].id;
+      : claimed[0].id);
     if (!await store.reserveProviderMessage(idempotencyKey, ids, dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, now.toISOString());
       break;
     }
     attemptedCount += 1;
-    const message = weekly
+    const message = weekly || idempotencyKey.startsWith("digest:")
       ? digestEmail({ env, events: claimed, hasOverflow: batchValue.hasOverflow })
       : eventEmail({ env, event: claimed[0] });
     try {
