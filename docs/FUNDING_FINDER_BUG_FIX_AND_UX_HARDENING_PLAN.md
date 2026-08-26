@@ -1020,7 +1020,7 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 | Phase | Status | PR | Final `main` SHA | Tests and workflow evidence | Deployment evidence | Notes / known limitations |
 |---|---|---|---|---|---|---|
 | Phase 1 - Front-end correctness | Complete - 2026-08-25 | [Implementation PR #54](https://github.com/mporosoff/grants-scraper/pull/54); [execution-record PR #55](https://github.com/mporosoff/grants-scraper/pull/55) | `058262102435f240bac3ed0079ae251ef002d283` (implementation and deployment) | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 final-audit and 9/9 post-review affected-spec reruns. Protected: [reviewed PR Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32887538551) and [post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32888287988) passed. | [Pages](https://github.com/mporosoff/grants-scraper/actions/runs/32888286698) published exact SHA; [Award deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888287950) version `a3735dbe-0eab-4035-92bd-f66b8e2f2f5c`, rollback `b6b6e9d4-e6bf-4a9b-9611-529ea2ccd7a9`; [Alerts deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888288009) version `ff84d774-40df-43a0-bf54-c866e4f9a844`, rollback `e9346921-bbd3-4988-97cf-8937bdb742f1`; [coordinated search-package publication](https://github.com/mporosoff/grants-scraper/actions/runs/32888287924) version `4e894667-e72b-4cb1-aaa3-a40f4372ac23`, rollback `bb7661b5-d9f1-4df2-8395-384400de39f9`. All health, bounded smoke, and Pages equality gates passed. | Released. Live 390 px checks returned 10 NSF awards and 11 Funding Finder results without overflow or console errors. Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
-| Phase 2 - Alert lifecycle | Not started |  |  |  | Alerts Worker version/health |  |
+| Phase 2 - Alert lifecycle | Complete - 2026-08-25 | [Implementation PR #57](https://github.com/mporosoff/grants-scraper/pull/57); [execution-record PR #59](https://github.com/mporosoff/grants-scraper/pull/59) | `f30ef367d093a94541d9764830b9f6a486ca4da7` (implementation, migration, and deployment) | Local: 24/24 alert matcher tests and 47/47 alert lifecycle/browser contracts. Protected candidate: [PR Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32926393214) passed 776/776 Python, 329/329 browser contracts, the 37-query baseline, the 50-case P9 scoring gate, and 54/54 Playwright product/accessibility tests. [Post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32927016123) passed on the exact implementation SHA. | [Alerts deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32927016026) applied `0003_phase2_alert_lifecycle.sql`, passed 57/57 release contracts, deployed version `d9a02762-b7c9-4fa8-bef3-9edd9e2d8c0e`, passed delivery-ready health, bounded Worker smoke/CORS, Pages equality, and protected-main stability gates; rollback version `87fdeece-ba4b-4cc8-b2f0-cc541ec7556b`. | Released. No ranking/search behavior or vectors changed. Production happy-path email and destructive unsubscribe were not exercised because the bounded deployment process intentionally creates no user alerts; deterministic provider/lifecycle contracts cover those transitions. Live invalid-capability checks verified truthful verification/manage/unsubscribe responses without creating or changing a user alert; verification/manage probes wrote only their bounded operational rate-limit counters. |
 | Phase 3 - Institution completeness | Not started |  |  |  | Award Worker version/health |  |
 | Phase 4 - Operational hardening | Not started |  |  |  | All Worker versions and final release |  |
 
@@ -1035,17 +1035,28 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - Protected review: the two automated review findings were fixed on the PR head and their threads resolved before merge. Regression coverage now also restores a durable snapshot changed outside the tab before a rejected write and treats an unrecognized `403 origin_not_allowed` as a service failure rather than invalid user input.
 - Post-merge live verification: at 390 px, `funded_awards.html?deploy=058262102435f240bac3ed0079ae251ef002d283` returned 10 live NSF catalysis projects with a truthful single-source `Results 1–10` label and no horizontal overflow. `match_explorer.html?deploy=058262102435f240bac3ed0079ae251ef002d283` returned 11 catalysis results, exposed `#saved-status` as `role="status"` with `aria-live="polite"`, had no horizontal overflow, and logged no console errors.
 
+### Phase 2 regression and verification evidence
+
+- Migration and compatibility: additive migration `0003_phase2_alert_lifecycle.sql` extends the existing notification ledger with `message_kind`, terminal-state, provider quota/idempotency, digest-overflow, and exact rendered-payload fields plus `rate_limits.last_reservation_key`; existing event rows default to notification, no lifecycle state is rewritten, and the deployment rollback path terminalizes verification jobs that the prior Worker cannot understand. The migration regression starts from schema 0002 with active, inactive, unverified, expired, and suppressed subscriptions plus queued, failed, sending, and sent events, then proves every representative state is preserved with forward-compatible defaults.
+- `FF-BUG-003`: duplicate active subscriptions retain their existing baseline; inactive, paused, unverified, and expired subscriptions receive a fresh baseline and verification cycle in one D1 batch. Tests prove stale qualifications, watermarks, and queued state cannot cross cycles, including evaluation-token, claim, reactivation, and in-flight provider races.
+- `FF-BUG-006`: immediate messages say `Unsubscribe from this alert`; multi-alert digests say `Manage all alerts` and `Unsubscribe from all Funding Finder email alerts` in both HTML and plain text. Route regressions prove single-alert scope leaves sibling alerts active and all-alert scope deactivates both.
+- `FF-BUG-007`: health is available only when schema 2, D1, the selected/configured Resend provider, outbound delivery, and the scheduler are all ready. Live health returned `service=available`, `delivery_ready=true`, `schema_version=2`, `email_provider=resend`, `email_provider_selected=true`, `email_provider_configured=true`, `email_template_version=phase2-lifecycle-20260825`, `outbound_email_enabled=true`, and `scheduler_ready=true`.
+- `FF-BUG-008`: verification delivery is durably queued before acceptance and is claim-safe, quota-reserved, provider-message-correlated, idempotent, and retryable for transient or ambiguous outcomes while permanent outcomes terminate. Coverage includes concurrent claims, exact-key quota reuse, quota exhaustion, refresh races, completion during delivery, network-outcome reconciliation after completion, pending suppression evidence, atomic provider-ID commit rollback/retry, exact payload replay across deployment changes, and fresh-link rendering when token refresh changes the key.
+- `FF-BUG-009`: suppressed recipients receive the same non-enumerating creation response but cannot become deliverable or apparently active; verification, evaluation, queued delivery, provider webhooks, and re-creation all preserve suppression. The live bounded check used only invalid capabilities and returned truthful verification `400`, manage `404`, and unsubscribe `404` pages without creating or changing a user alert.
+- `FF-BUG-017`: weekly selection is subscriber-fair and provider-message-bounded; each digest is capped at 25 events, a second subscriber remains selectable, and overflow remains queued. Network reconciliation and ordinary HTTP retries reuse one quota reservation, exact event group, idempotency key, overflow notice, and byte-identical HTML/plain-text payload; mobile-render/size assertions remain bounded below 200 KB.
+- Review and release: all PR #57 threads were resolved. The final automated exact-head review of `b221b1ba5d85756169067840063d71334a922a01` found no major issue, and the exact head passed the complete protected gate before merge. Deployment run `32927016026` is tied to merged `main` SHA `f30ef367d093a94541d9764830b9f6a486ca4da7`; its migration, Worker health, bounded smoke, Pages equality, and no-main-advance checks all passed without rollback.
+
 ### Finding-level completion checklist
 
 - [x] `FF-BUG-001`
 - [ ] `FF-BUG-002`
-- [ ] `FF-BUG-003`
+- [x] `FF-BUG-003`
 - [ ] `FF-BUG-004`
 - [ ] `FF-BUG-005`
-- [ ] `FF-BUG-006`
-- [ ] `FF-BUG-007`
-- [ ] `FF-BUG-008`
-- [ ] `FF-BUG-009`
+- [x] `FF-BUG-006`
+- [x] `FF-BUG-007`
+- [x] `FF-BUG-008`
+- [x] `FF-BUG-009`
 - [ ] `FF-BUG-010`
 - [x] `FF-BUG-011`
 - [ ] `FF-BUG-012`
@@ -1053,7 +1064,7 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - [x] `FF-BUG-014`
 - [x] `FF-BUG-015`
 - [x] `FF-BUG-016`
-- [ ] `FF-BUG-017`
+- [x] `FF-BUG-017`
 - [ ] `FF-BUG-018`
 - [ ] `FF-BUG-019`
 - [ ] `FF-BUG-020`
