@@ -33,6 +33,15 @@ export class D1AlertStore {
     return true;
   }
 
+  async reserveProviderMessage(limit, windowSeconds, now) {
+    const timestamp = now.toISOString();
+    const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
+    const result = await this.db.prepare(
+      "INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count) VALUES('email_send', 'global', ?, ?, 1) ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END WHERE rate_limits.expires_at <= ? OR rate_limits.request_count < ?",
+    ).bind(timestamp, expires, timestamp, timestamp, timestamp, timestamp, limit).run();
+    return Number(result?.meta?.changes || 0) > 0;
+  }
+
   async findSubscription(subscriberId, type, definitionHash) {
     return this.db.prepare(
       "SELECT * FROM subscriptions WHERE subscriber_id = ? AND type = ? AND definition_hash = ?",

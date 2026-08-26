@@ -37,6 +37,9 @@ class MemoryStore {
     this.rates.set(id, count + 1);
     return true;
   }
+  async reserveProviderMessage(limit) {
+    return this.consumeRateLimit("email_send", "global", limit);
+  }
   async upsertSubscriber(value) {
     const existing = [...this.subscribers.values()].find(item => item.email_normalized === value.email);
     if (existing) return existing;

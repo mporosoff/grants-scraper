@@ -239,7 +239,7 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
-    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) {
+    if (!await store.reserveProviderMessage(dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, now.toISOString());
       break;
     }
@@ -322,7 +322,7 @@ export async function dispatchVerificationDeliveries({
       await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
       continue;
     }
-    if (!await store.consumeRateLimit("email_send", "global", dailyLimit, 86_400, now)) {
+    if (!await store.reserveProviderMessage(dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, claimedAt);
       break;
     }

@@ -122,9 +122,11 @@ function all(database, sql, ...values) { return database.prepare(sql).all(...val
 async function cycle(overrides = {}) {
   const nonce = overrides.verificationNonce || "v".repeat(43);
   const manageToken = overrides.manageToken || "m".repeat(43);
-  const token = await sha256Hex(`funding-finder-verification-v1|${manageToken}|watch-1|${nonce}`);
+  const id = overrides.id || "watch-1";
+  const subscriberId = overrides.subscriberId || "person-1";
+  const token = await sha256Hex(`funding-finder-verification-v1|${manageToken}|${id}|${nonce}`);
   return {
-    id: "watch-1", subscriberId: "person-1", type: "saved_search", cadence: "weekly",
+    id, subscriberId, type: "saved_search", cadence: "weekly",
     definitionJson: JSON.stringify({ query: "new" }), definitionHash: "hash-old",
     baselineOpportunityIds: ["new-a", "new-b"], suppressed: false,
     verificationNonce: nonce,
@@ -347,6 +349,46 @@ test("FF-BUG-008 concurrent verification dispatchers claim once and reserve one 
   assert.equal(provider.messages.length, 1);
   assert.equal(database.prepare("SELECT attempts FROM notification_events WHERE id='verify-new'").get().attempts, 1);
   assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+});
+
+test("FF-BUG-008 distinct concurrent claims cannot exceed the atomic provider-message cap", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscriber(database, {
+    id: "person-2", email: "second@example.edu", manageToken: "q".repeat(43),
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.createSubscriptionCycle(await cycle());
+  await store.createSubscriptionCycle(await cycle({
+    id: "watch-2", subscriberId: "person-2", manageToken: "q".repeat(43),
+    definitionHash: "hash-2", verificationEventId: "verify-2",
+    verificationEventKey: "verification:token-2", verificationNonce: "w".repeat(43),
+  }));
+  const scoped = eventId => {
+    const value = Object.create(store);
+    value.pendingVerificationEvents = async (now, limit) => (
+      (await store.pendingVerificationEvents(now, 100))
+        .filter(event => event.id === eventId).slice(0, limit)
+    );
+    return value;
+  };
+  const provider = new ScriptedProvider();
+  const results = await Promise.all([
+    dispatchVerificationDeliveries({
+      store: scoped("verify-new"), provider, env: { ...env, DAILY_EMAIL_LIMIT: "1" }, now: fixedNow,
+    }),
+    dispatchVerificationDeliveries({
+      store: scoped("verify-2"), provider, env: { ...env, DAILY_EMAIL_LIMIT: "1" }, now: fixedNow,
+    }),
+  ]);
+  assert.equal(results.reduce((sum, item) => sum + item.attemptedCount, 0), 1);
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+  assert.deepEqual(
+    all(database, "SELECT status,attempts FROM notification_events ORDER BY id")
+      .map(event => [event.status, event.attempts]).sort((left, right) => left[0].localeCompare(right[0])),
+    [["queued", 0], ["sent", 1]],
+  );
 });
 
 test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block re-creation", async () => {
