@@ -180,6 +180,18 @@ class PinnedFeedIsDateIndependentTests(unittest.TestCase):
         """A pinned stamp fingerprint.py could not normalize would leak the clock."""
         self.assertRegex(self.PIN, fingerprint.TIMESTAMP_RE)
 
+    def test_catalog_asset_versions_are_timestamp_normalized(self):
+        before = b'"asset_version":"catalog-20260817T235912Z"'
+        after = b'"asset_version":"catalog-20260818T000107Z"'
+        self.assertEqual(
+            fingerprint.normalize(before),
+            fingerprint.normalize(after),
+        )
+        self.assertIn(
+            fingerprint.FROZEN_CATALOG_ASSET_VERSION.encode("utf-8"),
+            fingerprint.normalize(before),
+        )
+
 
 class PinToolTests(unittest.TestCase):
     def test_only_the_top_level_field_is_replaced(self):

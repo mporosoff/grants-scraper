@@ -235,7 +235,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('id="result-label"', explorer_html)
         search_v2_version = "app-1.3.0"
         self.assertIn(
-            '<script src="./data/opportunities.js?v=catalog-',
+            '<script src="./data/catalog-metadata.js?v=catalog-',
+            explorer_html,
+        )
+        self.assertNotIn(
+            '<script src="./data/opportunities.js',
+            explorer_html,
+        )
+        self.assertIn(
+            'assets/catalog-loader.js?v=lazy-catalog-20260826',
             explorer_html,
         )
         release_version = "filters-2026-08-13"
@@ -292,14 +300,15 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/app.js?v={style_version}"></script>',
+            '<script src="./assets/app.js?v=lazy-catalog-20260826"></script>',
             explorer_html,
         )
         self.assertIn(
             f'<script src="./assets/site-help.js?v={style_version}"></script>',
             explorer_html,
         )
-        self.assertIn("globalThis.GRANT_CATALOG", application_js)
+        self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)
+        self.assertIn("async function initializeCatalog(candidate)", application_js)
         self.assertIn("globalThis.FUNDING_SEARCH_QUERY", application_js)
         self.assertIn("globalThis.FUNDING_RETRIEVAL", application_js)
         self.assertIn("searchEngine.score", application_js)

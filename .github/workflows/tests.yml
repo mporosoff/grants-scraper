@@ -43,6 +43,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: node --check assets/app.js
+      - run: node --check assets/catalog-loader.js
       - run: node --check assets/profile.js
       - run: node --check assets/credentials.js
       - run: node --check assets/review.js

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const catalog = globalThis.GRANT_CATALOG;
+  let catalog = null;
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 20;
   const POTENTIAL_MATCH_LIMIT = 12;
@@ -35,9 +35,15 @@
   const SAVED_API = globalThis.FUNDING_SAVED;
   const AWARD_LINKS_API = globalThis.FUNDING_AWARD_LINKS;
   const ALERTS_API = globalThis.FUNDING_ALERTS;
+  const CATALOG_LOADER = globalThis.FUNDING_CATALOG_LOADER;
+  const CATALOG_METADATA = CATALOG_LOADER?.getMetadata?.() || null;
   const INITIAL_URL_PARAMS = new URLSearchParams(location.search);
   const EVALUATION_MODE = INITIAL_URL_PARAMS.get("evaluation") === "1";
   let pendingLinkedOpportunityId = INITIAL_URL_PARAMS.get("focus") || "";
+  let pendingFacetSelections = null;
+  let pendingCatalogAction = null;
+  let catalogActionSequence = 0;
+  let firstSearchMarked = false;
   const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
@@ -78,6 +84,9 @@
     eligibility: { recordField: "applicant_types", limit: 20 },
     funding_instrument: { recordField: "funding_instruments", limit: 10 },
   };
+  pendingFacetSelections = Object.fromEntries(
+    Object.keys(FACETS).map(name => [name, []]),
+  );
 
   const FEEDBACK_REASONS = {
     "": "Optional reason",
@@ -277,6 +286,135 @@
     if (!index || index.document_count !== value.record_count || !index.postings) {
       throw new Error("The published search index is incomplete.");
     }
+  }
+
+  function markPerformance(name) {
+    try {
+      if (!performance.getEntriesByName(name, "mark").length) {
+        performance.mark(name);
+      }
+    } catch (_error) {
+      // Measurements are diagnostic only and never gate product behavior.
+    }
+  }
+
+  function setCatalogControlsBusy(busy) {
+    const controls = document.querySelectorAll([
+      "#find-funding",
+      "#nofo-file",
+      "#browse-all",
+      "[data-example-query]",
+      "[data-watch-opportunity]",
+      "[data-watch-program]",
+    ].join(","));
+    controls.forEach(control => {
+      if (busy) {
+        if (!control.hasAttribute("data-catalog-previous-disabled")) {
+          control.dataset.catalogPreviousDisabled = control.disabled ? "1" : "0";
+        }
+        control.disabled = true;
+        control.setAttribute("aria-busy", "true");
+      } else if (control.hasAttribute("data-catalog-previous-disabled")) {
+        control.disabled = control.dataset.catalogPreviousDisabled === "1";
+        delete control.dataset.catalogPreviousDisabled;
+        control.removeAttribute("aria-busy");
+      }
+    });
+  }
+
+  function metadataDateText(value) {
+    const generated = new Date(value);
+    return Number.isNaN(generated.getTime())
+      ? "unknown date"
+      : new Intl.DateTimeFormat("en-US", {
+          month: "short",
+          day: "numeric",
+        }).format(generated);
+  }
+
+  function renderLightweightCatalogStatus() {
+    const counts = CATALOG_METADATA?.status_counts || {};
+    const recordCount = Number(CATALOG_METADATA?.record_count || 0);
+    const dateText = metadataDateText(
+      CATALOG_METADATA?.pipeline_generated_at || CATALOG_METADATA?.generated_at,
+    );
+    const pill = $("catalog-pill");
+    pill.classList.remove("stale");
+    pill.setAttribute(
+      "aria-label",
+      `${recordCount.toLocaleString()} catalog records; updated ${dateText}; full catalog loads when needed`,
+    );
+    pill.innerHTML = `<span class="status-dot" aria-hidden="true"></span>
+      <span class="catalog-pill-copy"><strong>${recordCount.toLocaleString()} records</strong><small>loads when needed</small></span>`;
+    $("catalog-detail").textContent =
+      `${recordCount.toLocaleString()} published catalog records (${Number(counts.posted || 0).toLocaleString()} open, ${Number(counts.forecasted || 0).toLocaleString()} forecasted). Updated ${dateText}. The full catalog loads only when a search or catalog action needs it.`;
+  }
+
+  function catalogLifecycleChanged(snapshot) {
+    const busy = snapshot.state === "loading" || snapshot.state === "initializing";
+    setCatalogControlsBusy(busy);
+    if (busy) {
+      $("catalog-error").classList.add("hidden");
+      $("catalog-error-message").textContent = "";
+      $("search-status").textContent = "Preparing funding catalog…";
+      $("catalog-pill").setAttribute("aria-label", "Preparing funding catalog");
+      $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>
+        <span class="catalog-pill-copy"><strong>Catalog</strong><small>preparing…</small></span>`;
+      return;
+    }
+    if (snapshot.state === "failed") {
+      $("catalog-error-message").textContent =
+        `${snapshot.error || "The funding catalog could not be prepared."} Your search and entered information are still here.`;
+      $("catalog-error").classList.remove("hidden");
+      $("catalog-pill").setAttribute("aria-label", "Catalog unavailable; retry available");
+      $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>
+        <span class="catalog-pill-copy"><strong>Catalog</strong><small>retry available</small></span>`;
+      $("search-status").textContent =
+        "The funding catalog could not be loaded. Your entries were preserved; retry when ready.";
+      return;
+    }
+    if (snapshot.state === "ready") {
+      $("catalog-error").classList.add("hidden");
+      $("catalog-error-message").textContent = "";
+      updateCatalogStatus();
+      if (!state.searched) $("search-status").textContent = "";
+    }
+  }
+
+  async function runCatalogAction(action) {
+    const request = { id: ++catalogActionSequence, action };
+    pendingCatalogAction = request;
+    try {
+      await CATALOG_LOADER.ensureCatalogReady();
+      if (pendingCatalogAction?.id !== request.id) return null;
+      pendingCatalogAction = null;
+      return await action();
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function resetCatalogInitialization() {
+    state.ready = false;
+    state.searched = false;
+    state.matches = [];
+    state.strongMatches = [];
+    state.potentialMatches = [];
+    state.searchDiagnostics = null;
+    state.runtimeCatalog = {
+      records: [],
+      facets: {},
+      statusCounts: {},
+      excluded: 0,
+    };
+    catalog = null;
+    searchEngine = null;
+    childCatalog = null;
+    childSearchEngine = null;
+    hybridSearchClient = null;
+    topicLayerAvailable = APP_CONFIG?.flags?.subtopics !== true;
+    renderLightweightCatalogStatus();
+    renderResults();
   }
 
   function formatDate(value, options = {}) {
@@ -659,6 +797,13 @@
   }
 
   function profileTermQuery(profile, options = {}) {
+    if (!catalog || !searchEngine) {
+      return {
+        query: "",
+        terms: [],
+        acronymExpansions: [],
+      };
+    }
     return profileTermQueryFor(profile, catalog, searchEngine, options);
   }
 
@@ -875,7 +1020,7 @@
       : "ORCID publication metadata removed from this tab. Imported keyword text remains editable above.");
   }
 
-  function applyProfileToForm(profile) {
+  function applyProfileToForm(profile, { buildCatalogTerms = true } = {}) {
     state.profile.value = PROFILE_API.sanitizeProfile(profile);
     state.profile.saved = Boolean(state.profile.value.remember);
     $("research-profile").value = state.profile.value.research_description;
@@ -890,8 +1035,12 @@
     $("k-key").placeholder = $("k-provider").value === "anthropic"
       ? "sk-ant-…"
       : "sk-…";
-    const built = profileTermQuery(state.profile.value);
-    const admission = profileTermQuery(state.profile.value, { admissionOnly: true });
+    const built = buildCatalogTerms
+      ? profileTermQuery(state.profile.value)
+      : { query: "", terms: [], acronymExpansions: [] };
+    const admission = buildCatalogTerms
+      ? profileTermQuery(state.profile.value, { admissionOnly: true })
+      : { query: "", terms: [] };
     state.profile.query = built.query;
     state.profile.terms = built.terms;
     state.profile.admissionQuery = admission.query;
@@ -902,7 +1051,7 @@
     renderProfileSaveState();
   }
 
-  function applyPreferences(preferences) {
+  function applyPreferences(preferences, { validateFacets = true } = {}) {
     const value = PROFILE_API.sanitizePreferences(preferences);
     $("status-posted").checked = value.status_posted;
     $("status-forecasted").checked = value.status_forecasted;
@@ -918,10 +1067,14 @@
     $("k-provider").value = value.ai_provider;
     $("sort").value = value.sort;
     for (const name of Object.keys(FACETS)) {
-      const validValues = new Set(Object.keys(catalog.facets[name] || {}));
-      state.filters[name] = new Set(
-        (value.facets[name] || []).filter(item => validValues.has(item)),
-      );
+      const requested = value.facets[name] || [];
+      pendingFacetSelections[name] = [...requested];
+      if (validateFacets && catalog) {
+        const validValues = new Set(Object.keys(catalog.facets[name] || {}));
+        state.filters[name] = new Set(
+          requested.filter(item => validValues.has(item)),
+        );
+      }
     }
     $("use-profile").checked =
       value.profile_search_active && profileHasContent();
@@ -935,6 +1088,45 @@
       "limited", "early_career", "no_cost_share", "sort",
       ...Object.keys(FACETS).map(name => `f_${name}`),
     ].some(key => params.has(key));
+  }
+
+  function urlRequestsCatalog() {
+    const params = new URLSearchParams(location.search);
+    return hasManagedUrlState() || params.get("evaluation") === "1";
+  }
+
+  function restoreCatalogUrlState() {
+    hydrateStateFromUrl({ validateFacets: true });
+    state.profile.active = false;
+    $("use-profile").checked = false;
+    state.searched = hasManagedUrlState();
+    renderAllFacets();
+    updateFilterSummary();
+    if (state.searched) runSearch({ persistProfile: false });
+    else {
+      renderActiveFilters();
+      renderResults();
+    }
+  }
+
+  function handleHistoryNavigation() {
+    hydrateStateFromUrl({ validateFacets: state.ready });
+    if (urlRequestsCatalog()) {
+      runCatalogAction(restoreCatalogUrlState);
+      return;
+    }
+    pendingCatalogAction = null;
+    state.searched = false;
+    state.query = "";
+    state.profile.active = false;
+    $("use-profile").checked = false;
+    if (state.ready) {
+      applyPendingFacetSelections();
+      renderAllFacets();
+    }
+    updateFilterSummary();
+    renderActiveFilters();
+    renderResults();
   }
 
   function saveProfileNow({ announce = false, force = false } = {}) {
@@ -1692,24 +1884,36 @@
     history.replaceState(null, "", url);
   }
 
-  function hydrateStateFromUrl() {
+  function hydrateStateFromUrl({ validateFacets = true } = {}) {
     const params = new URLSearchParams(location.search);
     $("query").value = params.get("q") || "";
+    pendingLinkedOpportunityId = params.get("focus") || "";
     const statuses = params.getAll("status");
+    $("status-posted").checked = true;
+    $("status-forecasted").checked = true;
+    $("status-archived").checked = false;
     if (statuses.length) {
       $("status-posted").checked = statuses.includes("open");
       $("status-forecasted").checked = statuses.includes("forecasted");
       $("status-archived").checked = statuses.includes("archived");
     }
     for (const name of Object.keys(FACETS)) {
-      const validValues = new Set(Object.keys(catalog.facets[name] || {}));
-      params.getAll(`f_${name}`)
-        .filter(value => validValues.has(value))
-        .forEach(value => state.filters[name].add(value));
+      const requested = params.getAll(`f_${name}`);
+      pendingFacetSelections[name] = requested;
+      state.filters[name].clear();
+      if (validateFacets && catalog) {
+        const validValues = new Set(Object.keys(catalog.facets[name] || {}));
+        requested
+          .filter(value => validValues.has(value))
+          .forEach(value => state.filters[name].add(value));
+      }
     }
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     const from = params.get("from") || "";
     const through = params.get("through") || "";
+    $("deadline-from").value = "";
+    $("deadline-to").value = "";
+    $("award-min").value = "";
     if (datePattern.test(from)) $("deadline-from").value = from;
     if (datePattern.test(through)) $("deadline-to").value = through;
     const minimumAward = Number(params.get("min_award") || 0);
@@ -1724,6 +1928,15 @@
     $("sort").value = allowedSorts.has(requestedSort)
       ? requestedSort
       : ($("query").value.trim() ? "relevance" : "deadline");
+  }
+
+  function applyPendingFacetSelections() {
+    for (const name of Object.keys(FACETS)) {
+      const validValues = new Set(Object.keys(catalog?.facets?.[name] || {}));
+      state.filters[name] = new Set(
+        (pendingFacetSelections[name] || []).filter(value => validValues.has(value)),
+      );
+    }
   }
 
   function currentChatIds() {
@@ -1832,6 +2045,7 @@
   }
 
   function startSearch() {
+    if (!state.ready) return runCatalogAction(startSearch);
     const built = refreshProfileQuery();
     state.profile.active = $("use-profile").checked && profileHasContent();
     if ($("use-profile").checked && !profileHasContent()) {
@@ -1901,6 +2115,7 @@
   }
 
   function browseAllOpportunities() {
+    if (!state.ready) return runCatalogAction(browseAllOpportunities);
     $("query").value = "";
     $("use-profile").checked = false;
     state.profile.active = false;
@@ -1923,7 +2138,16 @@
     persistProfile = true,
     hybridDebounceMs = 0,
   } = {}) {
-    if (!state.ready) return;
+    if (!state.ready) {
+      return runCatalogAction(() => runSearch({
+        resetPage,
+        preserveAi,
+        preserveNofo,
+        autoSort,
+        persistProfile,
+        hybridDebounceMs,
+      }));
+    }
     updateFilterSummary();
     renderActiveFilters();
     if (!state.searched) {
@@ -1986,10 +2210,15 @@
     syncStateToUrl();
     if (persistProfile) scheduleProfileSave();
     renderResults();
+    if (state.searched && !firstSearchMarked) {
+      firstSearchMarked = true;
+      markPerformance("funding-first-search-completed");
+    }
   }
 
   async function openNofoFromFile(file) {
-    if (!file || !state.ready) return;
+    if (!file) return;
+    if (!state.ready) return runCatalogAction(() => openNofoFromFile(file));
     const fileInput = $("nofo-file");
     fileInput.disabled = true;
     $("nofo-drop-zone").classList.remove("is-dragging");
@@ -3220,6 +3449,7 @@
   }
 
   function toggleSave(id) {
+    if (!state.ready) return runCatalogAction(() => toggleSave(id));
     const record = catalog.opportunities.find(item => recordId(item) === id);
     if (!record) return;
     const snapshot = { ...record, url: officialActions(record).url || record.detail_page };
@@ -3250,6 +3480,9 @@
   }
 
   function openOpportunityAlert(id, focus) {
+    if (!state.ready) {
+      return runCatalogAction(() => openOpportunityAlert(id, focus));
+    }
     const record = recordById(id);
     if (!record || !ALERTS_API?.open) return;
     ALERTS_API.open({
@@ -3264,6 +3497,9 @@
   }
 
   function openProgramAlert(programId, label, focus) {
+    if (!state.ready) {
+      return runCatalogAction(() => openProgramAlert(programId, label, focus));
+    }
     if (!ALERTS_API?.open || !AWARD_LINKS_API?.programIdentityById?.(programId)) return;
     ALERTS_API.open({
       type: "program",
@@ -3821,6 +4057,7 @@
   }
 
   async function refineWithAi() {
+    if (!state.ready) return runCatalogAction(refineWithAi);
     if (!state.searched) {
       setAiStatus("Run the catalog search before asking AI to broaden or refine it.", true);
       $("find-funding").focus();
@@ -4259,6 +4496,7 @@
   }
 
   async function askNofo(question) {
+    if (!state.ready) return runCatalogAction(() => askNofo(question));
     if (!hasNofoDocument() || state.ai.busy) return;
     if (!$("k-key").value.trim()) {
       promptForChatKey("Add your provider key, then ask the question again.");
@@ -4336,6 +4574,7 @@
   }
 
   async function askResults(question) {
+    if (!state.ready) return runCatalogAction(() => askResults(question));
     const cleanQuestion = question.trim();
     if (!cleanQuestion || state.ai.busy) return;
     if (hasNofoDocument() && state.ai.mode === "uploaded-nofo") {
@@ -4516,6 +4755,7 @@
   }
 
   function bindEvents() {
+    globalThis.addEventListener("popstate", handleHistoryNavigation);
     $("search-form").addEventListener("submit", event => {
       event.preventDefault();
       startSearch();
@@ -4545,13 +4785,13 @@
     });
     document.querySelectorAll("[data-example-query]").forEach(button => {
       button.addEventListener("click", () => {
-        // Fill the search box only. Nothing runs until the user explicitly
-        // selects "Find funding".
         $("query").value = button.dataset.exampleQuery;
-        $("query").focus();
-        $("search-status").textContent =
-          "Added to your search. Select “Find funding” when ready.";
+        startSearch();
       });
+    });
+    $("catalog-retry").addEventListener("click", () => {
+      const retry = pendingCatalogAction?.action || (() => {});
+      runCatalogAction(retry);
     });
 
     document.querySelector(".filter-panel").addEventListener("change", event => {
@@ -4701,6 +4941,10 @@
       if (state.searched) runSearch();
     });
     $("save-profile").addEventListener("click", () => {
+      if (!state.ready) {
+        runCatalogAction(() => $("save-profile").click());
+        return;
+      }
       const built = refreshProfileQuery();
       if (!profileHasContent()) {
         setProfileStatus("Add a research description, expertise keywords, a CV, or ORCID publications first.", true);
@@ -5055,120 +5299,163 @@
     return true;
   }
 
-  async function initialize() {
-    if (redirectLegacyInstitutionalIntelligenceUrl()) return;
-    try {
-      validateCatalog(catalog);
-      if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandGroups) {
-        throw new Error("The search-term helper did not load. Refresh the page and try again.");
-      }
-      if (!RETRIEVAL_API?.create) {
-        throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
-      }
-      if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
-        throw new Error("Search v2 could not initialize because its concept contract is missing.");
-      }
-      if (APP_CONFIG?.flags?.searchV2 && !HYBRID_SEARCH_API?.createClient) {
-        throw new Error("Search v2 could not initialize because its hybrid search helper is missing.");
-      }
-      if (
-        APP_CONFIG?.flags?.searchV2
-        && Number(MATCH_EXPLAIN_API?.contractVersion || 0) !== 2
-      ) {
-        throw new Error("Search v2 could not initialize because its explanation contract is incompatible.");
-      }
-      searchEngine = RETRIEVAL_API.create(catalog, SEARCH_QUERY, {
-        searchV2: APP_CONFIG?.flags?.searchV2 === true,
-        searchV2Config: SEARCH_V2_CONFIG,
-        catalogRole: "parent",
-      });
-      if (APP_CONFIG?.flags?.subtopics) {
-        try {
-          if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
-            throw new Error("The topic search helper did not load.");
-          }
-          const sidecar = await SUBTOPIC_API.loadSidecar();
-          childCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
-          childSearchEngine = RETRIEVAL_API.create(childCatalog, SEARCH_QUERY, {
+  function validateShellDependencies() {
+    if (!CATALOG_LOADER?.configure || !CATALOG_LOADER?.ensureCatalogReady) {
+      throw new Error("The funding catalog loader did not start. Refresh the page and try again.");
+    }
+    if (!SEARCH_QUERY?.tokenize || !SEARCH_QUERY?.expandGroups) {
+      throw new Error("The search-term helper did not load. Refresh the page and try again.");
+    }
+    if (!RETRIEVAL_API?.create) {
+      throw new Error("The hybrid retrieval helper did not load. Refresh the page and try again.");
+    }
+    if (APP_CONFIG?.flags?.searchV2 && !SEARCH_V2_CONFIG) {
+      throw new Error("Search v2 could not initialize because its concept contract is missing.");
+    }
+    if (APP_CONFIG?.flags?.searchV2 && !HYBRID_SEARCH_API?.createClient) {
+      throw new Error("Search v2 could not initialize because its hybrid search helper is missing.");
+    }
+    if (APP_CONFIG?.flags?.searchV2
+      && Number(MATCH_EXPLAIN_API?.contractVersion || 0) !== 2) {
+      throw new Error("Search v2 could not initialize because its explanation contract is incompatible.");
+    }
+    if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
+      throw new Error("The local profile module did not load. Refresh the page and try again.");
+    }
+    if (!ORCID_API?.normalizeId || !ORCID_API?.fetchProfile) {
+      throw new Error("The ORCID publication helper did not load. Refresh the page and try again.");
+    }
+    if (!NOFO_API?.extract || !NOFO_API?.matchCatalog) {
+      throw new Error("The local NOFO reader did not load. Refresh the page and try again.");
+    }
+    if (!REVIEW_API?.loadReview || !REVIEW_API?.buildPackage) {
+      throw new Error("The local deployment-review module did not load. Refresh the page and try again.");
+    }
+    if (!CREDENTIAL_API?.loadKey || !CREDENTIAL_API?.saveKey) {
+      throw new Error("The local API-key storage module did not load. Refresh the page and try again.");
+    }
+    if (!CHAT_UI?.renderRichText || !CHAT_UI?.knownResultIds) {
+      throw new Error("The chat display module did not load. Refresh the page and try again.");
+    }
+    if (!RESULT_WORKFLOW_API?.buildCandidateMatchMap
+      || !RESULT_WORKFLOW_API?.resolveCandidateMatches
+      || !RESULT_WORKFLOW_API?.matchMetadata) {
+      throw new Error("The result-workflow module did not load. Refresh the page and try again.");
+    }
+    if (!SAVED_API?.load || !SAVED_API?.toggle) {
+      throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
+    }
+  }
+
+  async function initializeCatalog(candidate) {
+    validateCatalog(candidate);
+    const nextSearchEngine = RETRIEVAL_API.create(candidate, SEARCH_QUERY, {
+      searchV2: APP_CONFIG?.flags?.searchV2 === true,
+      searchV2Config: SEARCH_V2_CONFIG,
+      catalogRole: "parent",
+    });
+    let nextChildCatalog = null;
+    let nextChildSearchEngine = null;
+    let nextHybridSearchClient = null;
+    let nextTopicLayerAvailable = APP_CONFIG?.flags?.subtopics !== true;
+    let topicLayerFailed = false;
+    if (APP_CONFIG?.flags?.subtopics) {
+      try {
+        if (!SUBTOPIC_API?.loadSidecar || !RETRIEVAL_API?.createChildCatalog) {
+          throw new Error("The topic search helper did not load.");
+        }
+        const sidecar = await SUBTOPIC_API.loadSidecar();
+        nextChildCatalog = RETRIEVAL_API.createChildCatalog(sidecar);
+        nextChildSearchEngine = RETRIEVAL_API.create(
+          nextChildCatalog,
+          SEARCH_QUERY,
+          {
             searchV2: APP_CONFIG?.flags?.searchV2 === true,
             searchV2Config: SEARCH_V2_CONFIG,
             catalogRole: "child",
-          });
-          topicLayerAvailable = true;
-        } catch (_topicError) {
-          childCatalog = null;
-          childSearchEngine = null;
-          hybridSearchClient = null;
-          topicLayerAvailable = false;
-          const topicWarning = $("topic-layer-warning");
-          if (topicWarning) {
-            topicWarning.textContent =
-              "Topic details and hosted Potential matching are temporarily unavailable. Parent-level Strong search, filters, saved opportunities, and exports still work.";
-            topicWarning.classList.remove("hidden");
-          }
-        }
+          },
+        );
+        nextTopicLayerAvailable = true;
+      } catch (_topicError) {
+        topicLayerFailed = true;
+        nextTopicLayerAvailable = false;
       }
-      if (APP_CONFIG?.flags?.searchV2 && childCatalog && childSearchEngine) {
-        hybridSearchClient = HYBRID_SEARCH_API.createClient({
-          parentCatalog: catalog,
-          childCatalog,
-          parentEngine: searchEngine,
-          childEngine: childSearchEngine,
-          proxyUrl: APP_CONFIG?.hybridSearch?.proxyUrl || "",
-          manifestUrl: APP_CONFIG?.hybridSearch?.manifestUrl,
-          vectorUrl: APP_CONFIG?.hybridSearch?.vectorUrl,
-          timeoutMs: APP_CONFIG?.hybridSearch?.timeoutMs,
-        });
-      }
-      if (!PROFILE_API?.loadProfile || !PROFILE_API?.extractCv) {
-        throw new Error("The local profile module did not load. Refresh the page and try again.");
-      }
-      if (!ORCID_API?.normalizeId || !ORCID_API?.fetchProfile) {
-        throw new Error("The ORCID publication helper did not load. Refresh the page and try again.");
-      }
-      if (!NOFO_API?.extract || !NOFO_API?.matchCatalog) {
-        throw new Error("The local NOFO reader did not load. Refresh the page and try again.");
-      }
-      if (!REVIEW_API?.loadReview || !REVIEW_API?.buildPackage) {
-        throw new Error("The local deployment-review module did not load. Refresh the page and try again.");
-      }
-      if (!CREDENTIAL_API?.loadKey || !CREDENTIAL_API?.saveKey) {
-        throw new Error("The local API-key storage module did not load. Refresh the page and try again.");
-      }
-      if (!CHAT_UI?.renderRichText || !CHAT_UI?.knownResultIds) {
-        throw new Error("The chat display module did not load. Refresh the page and try again.");
-      }
-      if (!RESULT_WORKFLOW_API?.buildCandidateMatchMap
-        || !RESULT_WORKFLOW_API?.resolveCandidateMatches
-        || !RESULT_WORKFLOW_API?.matchMetadata) {
-        throw new Error("The result-workflow module did not load. Refresh the page and try again.");
-      }
-      if (!SAVED_API?.load || !SAVED_API?.toggle) {
-        throw new Error("The saved-opportunities module did not load. Refresh the page and try again.");
-      }
-      state.runtimeCatalog.records = availableRecords();
-      state.runtimeCatalog.facets = currentFacetCounts(state.runtimeCatalog.records);
-      state.runtimeCatalog.statusCounts = state.runtimeCatalog.records.reduce((counts, record) => {
-        counts[record.status] = (counts[record.status] || 0) + 1;
-        return counts;
-      }, {});
-      state.runtimeCatalog.excluded =
-        catalog.opportunities.length - state.runtimeCatalog.records.length;
-      state.ready = true;
+    }
+    if (APP_CONFIG?.flags?.searchV2
+      && nextChildCatalog
+      && nextChildSearchEngine) {
+      nextHybridSearchClient = HYBRID_SEARCH_API.createClient({
+        parentCatalog: candidate,
+        childCatalog: nextChildCatalog,
+        parentEngine: nextSearchEngine,
+        childEngine: nextChildSearchEngine,
+        proxyUrl: APP_CONFIG?.hybridSearch?.proxyUrl || "",
+        manifestUrl: APP_CONFIG?.hybridSearch?.manifestUrl,
+        vectorUrl: APP_CONFIG?.hybridSearch?.vectorUrl,
+        timeoutMs: APP_CONFIG?.hybridSearch?.timeoutMs,
+      });
+    }
+    const nextRecords = candidate.opportunities.filter(recordIsAvailable);
+    const nextFacets = currentFacetCounts(nextRecords);
+    const nextStatusCounts = nextRecords.reduce((counts, record) => {
+      counts[record.status] = (counts[record.status] || 0) + 1;
+      return counts;
+    }, {});
+
+    // Commit only after every required catalog-dependent object is complete.
+    catalog = candidate;
+    searchEngine = nextSearchEngine;
+    childCatalog = nextChildCatalog;
+    childSearchEngine = nextChildSearchEngine;
+    hybridSearchClient = nextHybridSearchClient;
+    topicLayerAvailable = nextTopicLayerAvailable;
+    state.runtimeCatalog = {
+      records: nextRecords,
+      facets: nextFacets,
+      statusCounts: nextStatusCounts,
+      excluded: candidate.opportunities.length - nextRecords.length,
+    };
+    state.ready = true;
+    applyPendingFacetSelections();
+    refreshProfileQuery();
+    renderAllFacets();
+    updateFilterSummary();
+    renderActiveFilters();
+    renderSaved();
+    renderResults();
+    const topicWarning = $("topic-layer-warning");
+    if (topicLayerFailed) {
+      topicWarning.textContent =
+        "Topic details and hosted Potential matching are temporarily unavailable. Parent-level Strong search, filters, saved opportunities, and exports still work.";
+      topicWarning.classList.remove("hidden");
+    } else {
+      topicWarning.classList.add("hidden");
+    }
+  }
+
+  function initializeShell() {
+    if (redirectLegacyInstitutionalIntelligenceUrl()) return;
+    try {
+      validateShellDependencies();
+      CATALOG_LOADER.configure({
+        validate: validateCatalog,
+        initialize: initializeCatalog,
+        reset: resetCatalogInitialization,
+      });
+      CATALOG_LOADER.subscribe(catalogLifecycleChanged);
+      renderLightweightCatalogStatus();
       $("evaluation-tools").hidden = !EVALUATION_MODE;
-      updateCatalogStatus();
-      hydrateStateFromUrl();
+      hydrateStateFromUrl({ validateFacets: false });
       const savedProfile = PROFILE_API.loadProfile();
-      applyProfileToForm(savedProfile);
+      applyProfileToForm(savedProfile, { buildCatalogTerms: false });
       if (hasManagedUrlState()) {
-        state.searched = true;
         state.profile.active = false;
         $("use-profile").checked = false;
         if (profileHasContent(savedProfile)) {
           setProfileStatus("Saved profile restored but not added to this shared search. Turn on “Use this profile” and search again to include it.");
         }
       } else {
-        applyPreferences(savedProfile.preferences);
+        applyPreferences(savedProfile.preferences, { validateFacets: false });
         if (profileHasContent(savedProfile)) {
           setProfileStatus($("use-profile").checked
             ? "Saved profile restored. It will be combined with your next search."
@@ -5180,16 +5467,19 @@
       refreshSavedState(SAVED_API.load());
       renderSaved();
       applyDeploymentReviewToForm(REVIEW_API.loadReview());
-      renderAllFacets();
       updateFilterSummary();
       bindEvents();
-      if (state.searched) runSearch({ persistProfile: false });
-      else {
-        renderActiveFilters();
-        renderResults();
+      renderActiveFilters();
+      renderResults();
+      markPerformance("funding-shell-ready");
+      CATALOG_LOADER.schedulePrefetch();
+      if (urlRequestsCatalog()) {
+        globalThis.requestAnimationFrame(() => runCatalogAction(
+          hasManagedUrlState() ? restoreCatalogUrlState : () => {},
+        ));
       }
     } catch (error) {
-      $("catalog-error").textContent = error?.message || String(error);
+      $("catalog-error-message").textContent = error?.message || String(error);
       $("catalog-error").classList.remove("hidden");
       $("catalog-pill").setAttribute("aria-label", "Catalog unavailable");
       $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>
@@ -5197,5 +5487,5 @@
     }
   }
 
-  initialize();
+  initializeShell();
 })();

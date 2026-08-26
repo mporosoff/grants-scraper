@@ -114,6 +114,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   ordered.forEach(index => assert.ok(index >= 0));
   assert.deepEqual(ordered, ordered.slice().sort((left, right) => left - right));
   assert.match(workflow, /git add[^\n]*search-v2-voyage-manifest\.json[^\n]*search-v2-voyage-vectors\.f16[^\n]*search-v2-voyage-canaries\.json[^\n]*search-v2-release\.json/);
+  assert.match(workflow, /git add[^\n]*data\/opportunities\.js data\/catalog-metadata\.js/);
   assert.match(workflow, /git add[^\n]*corpus-allowlist\.json/);
   assert.match(workflow, /uses: actions\/checkout@v6[\s\S]*?with:[\s\S]*?ref: main/);
   assert.match(workflow, /built_from_sha="\$\(git rev-parse HEAD\)"/);

@@ -8,6 +8,9 @@ from zipfile import ZipFile
 
 from scripts.build_catalog import (
     build_catalog,
+    catalog_metadata,
+    catalog_metadata_javascript_bytes,
+    catalog_release_identity,
     clean_text,
     compact_catalog_payload,
     discover_latest_extract,
@@ -227,6 +230,9 @@ class CatalogExtractTests(unittest.TestCase):
             output = Path(directory) / "opportunities.js"
             write_catalog(catalog, output)
             javascript = output.read_text(encoding="utf-8")
+            metadata_javascript = output.with_name(
+                "catalog-metadata.js"
+            ).read_text(encoding="utf-8")
 
         self.assertEqual(catalog["record_count"], 3)
         self.assertEqual(catalog["status_counts"]["posted"], 2)
@@ -239,6 +245,20 @@ class CatalogExtractTests(unittest.TestCase):
             catalog["diagnostics"]["quality"]["per_award_amount_count"],
             1,
         )
+        metadata_prefix = "globalThis.GRANT_CATALOG_METADATA="
+        metadata_payload = metadata_javascript.split(
+            metadata_prefix, 1
+        )[1].strip().removesuffix(";")
+        metadata = json.loads(metadata_payload)
+        self.assertEqual(metadata, catalog_metadata(catalog))
+        self.assertEqual(
+            metadata["release_identity"], catalog_release_identity(catalog)
+        )
+        self.assertEqual(
+            metadata_javascript.encode("utf-8"),
+            catalog_metadata_javascript_bytes(catalog),
+        )
+        self.assertLess(len(metadata_javascript.encode("utf-8")), 2_048)
 
     def test_discovers_newest_enhanced_extract(self):
         html = """

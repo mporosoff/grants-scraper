@@ -46,6 +46,14 @@ TIMESTAMP_RE = re.compile(
 )
 FROZEN_TIMESTAMP = "FROZEN-TIMESTAMP"
 
+# The metadata sidecar derives its cache-busting asset identity from the same
+# pipeline timestamp, but uses the compact ``catalog-YYYYMMDDTHHMMSSZ`` shape
+# required in browser URLs. Normalize that representation for the same reason
+# as the ISO literal above; record contents and every non-time identity input
+# remain fingerprinted.
+CATALOG_ASSET_VERSION_RE = re.compile(r"catalog-\d{8}T\d{6}Z")
+FROZEN_CATALOG_ASSET_VERSION = "catalog-FROZEN-TIMESTAMP"
+
 # A DATE-ONLY volatile field, normalized by name rather than by shape.
 #
 # `source_first_seen_date` records the day this build first saw a record, so it
@@ -90,6 +98,7 @@ def normalize(data: bytes) -> bytes:
     text = data.decode("utf-8", errors="surrogateescape")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     text = TIMESTAMP_RE.sub(FROZEN_TIMESTAMP, text)
+    text = CATALOG_ASSET_VERSION_RE.sub(FROZEN_CATALOG_ASSET_VERSION, text)
     text = DATE_FIELD_RE.sub(FROZEN_DATE, text)
     return text.encode("utf-8", errors="surrogateescape")
 
