@@ -33,7 +33,7 @@ export class D1AlertStore {
     return true;
   }
 
-  async reserveProviderMessage(messageKey, eventIds, limit, windowSeconds, now) {
+  async reserveProviderMessage(messageKey, eventIds, limit, windowSeconds, now, hasOverflow = false) {
     if (!messageKey || !eventIds.length) return false;
     const placeholders = eventIds.map(() => "?").join(",");
     const timestamp = now.toISOString();
@@ -50,8 +50,8 @@ export class D1AlertStore {
         ...eventIds, eventIds.length, ...eventIds, messageKey, eventIds.length,
       ),
       this.db.prepare(
-        `UPDATE notification_events SET provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
-      ).bind(messageKey, timestamp, ...eventIds, messageKey),
+        `UPDATE notification_events SET provider_quota_key = ?, provider_quota_reserved_at = ?, provider_batch_has_overflow = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)`,
+      ).bind(messageKey, timestamp, hasOverflow ? 1 : 0, ...eventIds, messageKey),
     ]);
     const reserved = await this.db.prepare(
       `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? AND status = 'sending' AND terminal_at IS NULL THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})`,
@@ -312,7 +312,7 @@ export class D1AlertStore {
   async pendingNotificationReconciliationBatches(now, messageLimit, eventLimit) {
     const staleBefore = staleClaimCutoff(now);
     const keys = rows(await this.db.prepare(
-      "SELECT n.provider_quota_key, MIN(n.created_at) AS first_created_at FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.provider_quota_key IS NOT NULL AND n.error_code = 'provider_outcome_reconcile' AND n.terminal_at IS NULL AND ((n.status = 'failed' AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND u.suppressed_at IS NULL GROUP BY n.provider_quota_key ORDER BY first_created_at, n.provider_quota_key LIMIT ?",
+      "SELECT n.provider_quota_key, MIN(n.created_at) AS first_created_at, MAX(n.provider_batch_has_overflow) AS has_overflow FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.provider_quota_key IS NOT NULL AND n.error_code = 'provider_outcome_reconcile' AND n.terminal_at IS NULL AND ((n.status = 'failed' AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND u.suppressed_at IS NULL GROUP BY n.provider_quota_key ORDER BY first_created_at, n.provider_quota_key LIMIT ?",
     ).bind(now, staleBefore, messageLimit).all());
     const batches = [];
     for (const key of keys) {
@@ -321,7 +321,7 @@ export class D1AlertStore {
       ).bind(key.provider_quota_key, now, staleBefore, eventLimit).all());
       if (eligible.length) batches.push({
         events: eligible,
-        hasOverflow: false,
+        hasOverflow: Number(key.has_overflow) === 1,
         idempotencyKey: key.provider_quota_key,
         reconciliation: true,
       });
@@ -447,7 +447,7 @@ export class D1AlertStore {
 
   async health() {
     const row = await this.db.prepare(
-      "SELECT (SELECT COUNT(*) FROM (SELECT id FROM subscriptions LIMIT 1)) AS subscription_rows, (SELECT COUNT(*) FROM (SELECT message_kind, terminal_at, provider_quota_key, provider_quota_reserved_at FROM notification_events LIMIT 1)) AS event_rows, (SELECT COUNT(*) FROM (SELECT last_reservation_key FROM rate_limits LIMIT 1)) AS rate_rows",
+      "SELECT (SELECT COUNT(*) FROM (SELECT id FROM subscriptions LIMIT 1)) AS subscription_rows, (SELECT COUNT(*) FROM (SELECT message_kind, terminal_at, provider_quota_key, provider_quota_reserved_at, provider_batch_has_overflow FROM notification_events LIMIT 1)) AS event_rows, (SELECT COUNT(*) FROM (SELECT last_reservation_key FROM rate_limits LIMIT 1)) AS rate_rows",
     ).first();
     return Boolean(row);
   }

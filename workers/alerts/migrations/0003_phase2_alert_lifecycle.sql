@@ -16,6 +16,12 @@ ALTER TABLE notification_events
 ALTER TABLE notification_events
   ADD COLUMN provider_quota_reserved_at TEXT;
 
+-- Idempotent digest reconciliation must replay the original body, including
+-- whether additional events remained queued beyond the 25-event message cap.
+ALTER TABLE notification_events
+  ADD COLUMN provider_batch_has_overflow INTEGER NOT NULL DEFAULT 0
+  CHECK (provider_batch_has_overflow IN (0, 1));
+
 ALTER TABLE rate_limits
   ADD COLUMN last_reservation_key TEXT;
 

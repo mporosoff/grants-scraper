@@ -212,15 +212,16 @@ test("0003 migrates representative production lifecycle rows without changing th
     states.map(([id, , active, verifiedAt]) => [id, active, verifiedAt]).sort((a, b) => a[0].localeCompare(b[0])),
   );
   assert.deepEqual(
-    all(database, "SELECT status,message_kind,terminal_at FROM notification_events ORDER BY id")
-      .map(row => [row.status, row.message_kind, row.terminal_at]),
-    ["failed", "queued", "sending", "sent"].map(status => [status, "notification", null]),
+    all(database, "SELECT status,message_kind,terminal_at,provider_batch_has_overflow FROM notification_events ORDER BY id")
+      .map(row => [row.status, row.message_kind, row.terminal_at, row.provider_batch_has_overflow]),
+    ["failed", "queued", "sending", "sent"].map(status => [status, "notification", null, 0]),
   );
   const columns = all(database, "PRAGMA table_info(notification_events)").map(row => row.name);
   assert.ok(columns.includes("message_kind"));
   assert.ok(columns.includes("terminal_at"));
   assert.ok(columns.includes("provider_quota_key"));
   assert.ok(columns.includes("provider_quota_reserved_at"));
+  assert.ok(columns.includes("provider_batch_has_overflow"));
   assert.ok(all(database, "PRAGMA table_info(rate_limits)").map(row => row.name).includes("last_reservation_key"));
 });
 
@@ -1213,7 +1214,8 @@ test("FF-BUG-017 a failed digest retries the whole claim with the same idempoten
   insertSubscriber(database);
   insertSubscription(database, { active: 1 });
   const store = new D1AlertStore(new SqliteD1(database));
-  for (const id of ["digest-1", "digest-2"]) {
+  for (let index = 0; index < DIGEST_MAX_EVENTS + 1; index += 1) {
+    const id = `digest-${String(index).padStart(2, "0")}`;
     await store.enqueueEvent({
       id, subscriptionId: "watch-1", eventKey: id, eventKind: "amended",
       opportunityId: id, payload: { title: id }, createdAt: fixedNow.toISOString(),
@@ -1222,12 +1224,20 @@ test("FF-BUG-017 a failed digest retries the whole claim with the same idempoten
   const provider = new ScriptedProvider([{ code: "provider_network_failure", retryable: true }]);
   const first = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });
   assert.equal(first.failedCount, 1);
-  assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["failed", "failed"]);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='failed'").get().count, DIGEST_MAX_EVENTS);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='queued'").get().count, 1);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE provider_batch_has_overflow=1").get().count, DIGEST_MAX_EVENTS);
+  assert.match(provider.attempts[0].message.text, /Additional updates remain queued for a later digest/);
+  assert.match(provider.attempts[0].message.html, /Additional updates remain queued for a later digest/);
   const retryNow = new Date("2026-09-01T12:06:00.000Z");
   const second = await dispatchNotifications({ store, provider, env, now: retryNow, weekly: false });
   assert.equal(second.deliveredCount, 1);
-  assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["sent", "sent"]);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='sent'").get().count, DIGEST_MAX_EVENTS);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE status='queued'").get().count, 1);
   assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+  assert.equal(provider.attempts[0].message.subject, provider.attempts[1].message.subject);
+  assert.equal(provider.attempts[0].message.text, provider.attempts[1].message.text);
+  assert.equal(provider.attempts[0].message.html, provider.attempts[1].message.html);
 });
 
 test("Phase 2 scheduler retries verification and deployment contracts preserve rollback safety", async () => {

@@ -265,7 +265,9 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const idempotencyKey = batchValue.idempotencyKey || (weekly
       ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
       : claimed[0].id);
-    if (!await store.reserveProviderMessage(idempotencyKey, ids, dailyLimit, 86_400, now)) {
+    if (!await store.reserveProviderMessage(
+      idempotencyKey, ids, dailyLimit, 86_400, now, batchValue.hasOverflow,
+    )) {
       await store.releaseClaimedEvents(ids, now.toISOString());
       break;
     }
