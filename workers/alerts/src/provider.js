@@ -33,15 +33,21 @@ export class ResendEmailProvider {
       throw Object.assign(new Error("Email provider request failed."), {
         code: "provider_network_failure",
         providerFailureKind: "network",
+        retryable: true,
       });
     }
     let payload = null;
     try { payload = await response.json(); } catch { /* bounded error below */ }
     if (!response.ok || !payload?.id) {
+      const status = Number(response.status) || 0;
+      const retryable = response.ok || status === 408 || status === 409 || status === 425 || status === 429 || status >= 500;
       throw Object.assign(new Error("Email provider rejected the request."), {
-        code: response.status === 429 ? "provider_rate_limited" : "provider_failed",
+        code: status === 429
+          ? "provider_rate_limited"
+          : retryable ? "provider_unavailable" : "provider_rejected",
         providerFailureKind: "http",
-        providerHttpStatus: Number(response.status) || 0,
+        providerHttpStatus: status,
+        retryable,
       });
     }
     return { id: String(payload.id) };
@@ -49,14 +55,19 @@ export class ResendEmailProvider {
 }
 
 export class MockEmailProvider {
-  constructor({ fail = false } = {}) {
+  constructor({ fail = false, failures = [] } = {}) {
     this.fail = fail;
+    this.failures = [...failures];
     this.messages = [];
     this.configured = true;
   }
 
   async sendEmail(message, idempotencyKey) {
-    if (this.fail) throw Object.assign(new Error("Mock provider failure."), { code: "provider_failed" });
+    const failure = this.failures.shift();
+    if (failure) throw Object.assign(new Error("Mock provider failure."), failure);
+    if (this.fail) throw Object.assign(new Error("Mock provider failure."), {
+      code: "provider_unavailable", retryable: true,
+    });
     const id = `mock-${this.messages.length + 1}`;
     this.messages.push({ ...message, idempotencyKey, id });
     return { id };

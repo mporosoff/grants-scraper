@@ -4,8 +4,10 @@ import {
   ALERT_SCHEMA_VERSION, normalizeEmail, normalizeSubscription, stableJson,
 } from "./contract.js";
 import { randomToken, sha256Hex, verifySvixWebhook } from "./crypto.js";
-import { baselineIds, dispatchNotifications, evaluateSubscriptions } from "./evaluator.js";
-import { ALERT_EMAIL_TEMPLATE_VERSION, verificationEmail } from "./email.js";
+import {
+  baselineIds, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
+} from "./evaluator.js";
+import { ALERT_EMAIL_TEMPLATE_VERSION } from "./email.js";
 import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
@@ -86,6 +88,7 @@ function serviceConfig(env) {
     outbound: String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() === "true",
     provider: String(env.EMAIL_PROVIDER || "").toLowerCase(),
     publicWorkerOrigin: String(env.PUBLIC_WORKER_ORIGIN || ""),
+    scheduler: String(env.ALERT_SCHEDULER_ENABLED || "").toLowerCase() === "true",
   };
 }
 
@@ -108,13 +111,31 @@ function definitionSummary(subscription) {
   return `Strong matches for “${definition.query}”`;
 }
 
+function suppressionDescription(reason) {
+  const value = String(reason || "").toLowerCase();
+  if (value.includes("complain")) return "A complaint was reported for this address.";
+  if (value.includes("bounce")) return "Delivery to this address bounced.";
+  return "The email provider has suppressed delivery to this address.";
+}
+
 function managePage(subscriber, subscriptions) {
+  const suppressed = Boolean(subscriber.suppressed_at);
   const items = subscriptions.map(subscription => {
     const active = Number(subscription.active) === 1;
     const fields = `<input type="hidden" name="token" value="${escapeHtml(subscriber.manage_token)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}">`;
-    return `<li><strong>${escapeHtml(definitionSummary(subscription))}</strong><p>${active ? "Active" : "Paused"} · ${escapeHtml(subscription.cadence === "weekly" ? "Weekly digest" : "As changes happen")}</p><form method="post" action="/manage">${fields}<input type="hidden" name="active" value="${active ? "0" : "1"}"><button type="submit">${active ? "Pause" : "Resume"}</button></form><form method="post" action="/manage">${fields}<select name="cadence" aria-label="Email frequency"><option value="immediate"${subscription.cadence === "immediate" ? " selected" : ""}>As changes happen</option><option value="weekly"${subscription.cadence === "weekly" ? " selected" : ""}>Weekly digest</option></select> <button type="submit">Save frequency</button></form><form method="post" action="/unsubscribe">${fields}<button type="submit">Unsubscribe</button></form></li>`;
+    const state = suppressed ? "Delivery suppressed" : active ? "Active" : "Paused";
+    const activeForm = suppressed
+      ? ""
+      : `<form method="post" action="/manage">${fields}<input type="hidden" name="active" value="${active ? "0" : "1"}"><button type="submit">${active ? "Pause" : "Resume"}</button></form>`;
+    return `<li><strong>${escapeHtml(definitionSummary(subscription))}</strong><p>${state} · ${escapeHtml(subscription.cadence === "weekly" ? "Weekly digest" : "As changes happen")}</p>${activeForm}<form method="post" action="/manage">${fields}<select name="cadence" aria-label="Email frequency"><option value="immediate"${subscription.cadence === "immediate" ? " selected" : ""}>As changes happen</option><option value="weekly"${subscription.cadence === "weekly" ? " selected" : ""}>Weekly digest</option></select> <button type="submit">Save frequency</button></form><form method="post" action="/unsubscribe">${fields}<button type="submit">Unsubscribe from this alert</button></form></li>`;
   }).join("");
-  return `<h1>Manage Funding Finder alerts</h1><p>These are the email alerts authorized for this address. Browser-local saved statuses, notes, profiles, documents, and chat are not shown because the alert service never receives them.</p><ul>${items || "<li>No alerts found.</li>"}</ul><p class="muted">Closing this page does not change your browser-local Saved list.</p>`;
+  const suppression = suppressed
+    ? `<div role="status"><h2>Email delivery is suppressed</h2><p>${escapeHtml(suppressionDescription(subscriber.suppression_reason))} These alerts cannot be resumed for this address. Use a different email address to create a deliverable alert.</p></div>`
+    : "";
+  const allForm = subscriptions.length
+    ? `<form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(subscriber.manage_token)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all Funding Finder email alerts</button></form>`
+    : "";
+  return `<h1>Manage Funding Finder alerts</h1>${suppression}<p>These are the email alerts authorized for this address. Browser-local saved statuses, notes, profiles, documents, and chat are not shown because the alert service never receives them.</p><ul>${items || "<li>No alerts found.</li>"}</ul>${allForm}<p class="muted">Closing this page does not change your browser-local Saved list.</p>`;
 }
 
 async function formValues(request) {
@@ -153,15 +174,21 @@ export function createHandler({
       try { databaseReady = await store.health(); } catch { /* unavailable */ }
       let providerConfigured = false;
       try { providerConfigured = providerFactory(env, fetchImpl).configured === true; } catch { /* unavailable */ }
-      const available = config.enabled && databaseReady && config.provider === "resend";
-      return json(origin, available ? 200 : 503, {
-        service: available ? "available" : "unavailable",
+      const providerSelected = config.provider === "resend";
+      const deliveryReady = config.enabled && databaseReady && providerSelected
+        && providerConfigured && config.outbound && config.scheduler;
+      return json(origin, deliveryReady ? 200 : 503, {
+        service: deliveryReady ? "available" : "unavailable",
+        delivery_ready: deliveryReady,
+        api_enabled: config.enabled,
         schema_version: ALERT_SCHEMA_VERSION,
         database_ready: databaseReady,
-        email_provider: "resend",
+        email_provider: config.provider || "unconfigured",
+        email_provider_selected: providerSelected,
         email_provider_configured: providerConfigured,
         email_template_version: ALERT_EMAIL_TEMPLATE_VERSION,
         outbound_email_enabled: config.outbound,
+        scheduler_ready: config.scheduler,
       });
     }
     if (!config.enabled) return json(origin, 503, { error: { code: "alerts_unavailable" } });
@@ -185,35 +212,47 @@ export function createHandler({
         if (!email || !subscription || !baselineValid) {
           return json(origin, 400, { error: { code: "invalid_request" } });
         }
+        let provider;
+        try { provider = providerFactory(env, fetchImpl); } catch { /* bounded service response below */ }
+        if (!config.outbound || config.provider !== "resend" || provider?.configured !== true || !config.scheduler) {
+          return json(origin, 503, { error: { code: "alerts_unavailable" } });
+        }
         const baseline = baselineIds(subscription, suppliedBaseline);
         const emailHash = await sha256Hex(email);
         const definitionJson = stableJson(subscription.definition);
         const definitionHash = await sha256Hex(definitionJson);
         const subscriberId = `person_${emailHash.slice(0, 24)}`;
         const subscriptionId = `watch_${(await sha256Hex(`${subscriberId}|${subscription.type}|${definitionHash}`)).slice(0, 24)}`;
-        const verificationToken = tokenFactory();
-        const verificationTokenHash = await sha256Hex(verificationToken);
+        const verificationNonce = tokenFactory();
         const createdAt = current.toISOString();
         const subscriber = await store.upsertSubscriber({ id: subscriberId, email, manageToken: tokenFactory(), now: createdAt });
-        const stored = await store.createPendingSubscription({
+        const verificationToken = await sha256Hex(
+          `funding-finder-verification-v1|${subscriber.manage_token}|${subscriptionId}|${verificationNonce}`,
+        );
+        const verificationTokenHash = await sha256Hex(verificationToken);
+        const verificationEventId = `verify_${(await sha256Hex(`${subscriptionId}|${verificationTokenHash}`)).slice(0, 32)}`;
+        const stored = await store.createSubscriptionCycle({
           id: subscriptionId, subscriberId: subscriber.id, type: subscription.type,
           cadence: subscription.cadence, definitionJson, definitionHash,
+          baselineOpportunityIds: baseline,
+          suppressed: Boolean(subscriber.suppressed_at),
+          verificationNonce,
           verificationTokenHash,
           verificationExpiresAt: new Date(current.getTime() + 24 * 60 * 60_000).toISOString(),
+          verificationEventId,
+          verificationEventKey: `verification:${verificationTokenHash}`,
           now: createdAt,
         });
-        if (!stored.baseline_complete) await store.setBaseline(stored.id, baseline, createdAt);
-        const provider = providerFactory(env, fetchImpl);
-        const dailyLimit = Math.max(1, Math.min(100, Number(env.DAILY_EMAIL_LIMIT) || 100));
-        if (!config.outbound || !await store.consumeRateLimit(
-          "email_send", "global", dailyLimit, 86_400, current,
-        )) {
-          return json(origin, 503, { error: { code: "alerts_unavailable" } });
+        if (!stored?.id) throw new Error("Subscription cycle was not durably stored.");
+        if (stored.cycleAccepted && !subscriber.suppressed_at) {
+          try {
+            await dispatchVerificationDeliveries({
+              store, provider, env, now: current, tokenFactory, limit: 1,
+            });
+          } catch {
+            // The durable queued job remains available to the retry scheduler.
+          }
         }
-        await provider.sendEmail(verificationEmail({
-          env, to: email, token: verificationToken, subscriptionId: stored.id,
-          manageToken: subscriber.manage_token, type: subscription.type,
-        }), `verify:${stored.id}:${verificationTokenHash.slice(0, 24)}`);
         return json(origin, 202, { status: "verification_required" });
       }
 
@@ -224,7 +263,9 @@ export function createHandler({
           ? await store.verifySubscription(await sha256Hex(token), current.toISOString())
           : null;
         return verified
-          ? html(200, `<h1>Email verified</h1><p>Your Funding Finder alert is active.</p><p><a href="/manage?token=${encodeURIComponent(verified.manage_token)}">Manage alerts</a></p>`)
+          ? verified.deliverySuppressed
+            ? html(200, `<h1>Email verified</h1><p>Email delivery remains suppressed for this address, so this alert is not active. Use a different email address to create a deliverable alert.</p><p><a href="/manage?token=${encodeURIComponent(verified.manage_token)}">Manage all alerts</a></p>`)
+            : html(200, `<h1>Email verified</h1><p>Your Funding Finder alert is active.</p><p><a href="/manage?token=${encodeURIComponent(verified.manage_token)}">Manage all alerts</a></p>`)
           : html(400, "<h1>This verification link is invalid or expired</h1><p>Create the alert again to receive a new link.</p>");
       }
 
@@ -251,21 +292,31 @@ export function createHandler({
       if (path === "/unsubscribe" && request.method === "GET") {
         const token = String(url.searchParams.get("token") || "");
         const subscription = String(url.searchParams.get("subscription") || "");
+        const all = url.searchParams.get("scope") === "all";
         const subscriber = await store.subscriberByManageToken(token);
-        if (!subscriber || !subscription) return html(404, "<h1>Unsubscribe link not found</h1>");
-        return html(200, `<h1>Unsubscribe from this alert?</h1><form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription)}"><button type="submit">Unsubscribe</button></form>`);
+        if (!subscriber || (!all && !subscription)) return html(404, "<h1>Unsubscribe link not found</h1>");
+        return all
+          ? html(200, `<h1>Unsubscribe from all Funding Finder email alerts?</h1><form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all alerts</button></form>`)
+          : html(200, `<h1>Unsubscribe from this alert?</h1><form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription)}"><button type="submit">Unsubscribe from this alert</button></form>`);
       }
 
       if (path === "/unsubscribe" && request.method === "POST") {
         if (!await rateLimit(store, request, "unsubscribe", 30, 3_600, current)) return html(429, "<h1>Try again later</h1>");
         const queryToken = String(url.searchParams.get("token") || "");
         const querySubscription = String(url.searchParams.get("subscription") || "");
-        const body = queryToken && querySubscription ? {} : await formValues(request);
-        const removed = await store.unsubscribe(
-          queryToken || String(body.token || ""), querySubscription || String(body.subscription || ""), current.toISOString(),
-        );
+        const queryAll = url.searchParams.get("scope") === "all";
+        const body = queryToken && (querySubscription || queryAll) ? {} : await formValues(request);
+        const token = queryToken || String(body.token || "");
+        const all = queryAll || String(body.scope || "") === "all";
+        const removed = all
+          ? await store.unsubscribeAll(token, current.toISOString())
+          : await store.unsubscribe(
+              token, querySubscription || String(body.subscription || ""), current.toISOString(),
+            );
         return removed
-          ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from Funding Finder.</p>")
+          ? all
+            ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>")
+            : html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from this Funding Finder alert.</p>")
           : html(400, "<h1>Unable to unsubscribe</h1>");
       }
 
@@ -324,16 +375,19 @@ export function createScheduledHandler({
     };
     await store.startRun(run);
     try {
+      const provider = providerFactory(env, fetchImpl);
+      const verification = await dispatchVerificationDeliveries({ store, provider, env, now: current });
+      let immediate = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
+      let weekly = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
       const assets = await assetLoader(env, fetchImpl);
       Object.assign(run, await evaluateSubscriptions({ store, assets, env, now: current }));
-      const provider = providerFactory(env, fetchImpl);
-      const immediate = await dispatchNotifications({ store, provider, env, now: current, weekly: false });
-      const weekly = current.getUTCDay() === 0
+      immediate = await dispatchNotifications({ store, provider, env, now: current, weekly: false });
+      weekly = current.getUTCDay() === 0
         ? await dispatchNotifications({ store, provider, env, now: current, weekly: true })
-        : { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
-      run.attemptedCount = immediate.attemptedCount + weekly.attemptedCount;
-      run.deliveredCount = immediate.deliveredCount + weekly.deliveredCount;
-      run.failedCount = immediate.failedCount + weekly.failedCount;
+        : weekly;
+      run.attemptedCount = verification.attemptedCount + immediate.attemptedCount + weekly.attemptedCount;
+      run.deliveredCount = verification.deliveredCount + immediate.deliveredCount + weekly.deliveredCount;
+      run.failedCount = verification.failedCount + immediate.failedCount + weekly.failedCount;
       run.status = run.failedCount ? "completed_with_delivery_failures" : "completed";
     } catch {
       run.status = "failed";
