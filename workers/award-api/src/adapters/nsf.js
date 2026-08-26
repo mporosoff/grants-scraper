@@ -9,10 +9,12 @@ import {
   uniqueStrings,
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
-import { normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 
-export const NSF_ADAPTER_VERSION = "1.2.0";
+export const NSF_ADAPTER_VERSION = "1.3.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
+export const NSF_UPSTREAM_PAGE_SIZE = 25;
+export const NSF_MAX_UPSTREAM_PAGES = 12;
 
 function quoted(value) {
   return `"${String(value).replace(/"/g, "").trim()}"`;
@@ -161,24 +163,93 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
 }
 
 export async function searchNsf(fetchImpl, criteria, options) {
-  const request = buildNsfRequest(criteria, options);
-  const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
-  const response = payload?.response;
-  if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
-  const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
   const retrievedAt = options.now().toISOString();
-  let awards = rawAwards.map(raw => normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url }));
-  if (criteria._institution) {
-    awards = awards.filter(award => recordMatchesInstitution(award, criteria._institution, "NSF"));
+  const targetCount = options.offset + options.limit + 1;
+  const awards = [];
+  const seen = new Set();
+  let rawRecordCount = 0;
+  let upstreamPages = 0;
+  const maximumPages = criteria._institution && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
+  const sourceIdentity = criteria._institution?.sources?.NSF || {};
+  const searchNames = criteria._institution && !criteria.award_id
+    ? uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3)
+    : [null];
+  const queryStates = searchNames.map(searchName => ({
+    searchName,
+    offset: criteria._institution && !criteria.award_id ? 0 : options.offset,
+    total: null,
+    exhausted: false,
+    fetched: false,
+    criteria: searchName
+      ? {
+        ...criteria,
+        _institution: {
+          ...criteria._institution,
+          sources: {
+            ...criteria._institution.sources,
+            NSF: { ...sourceIdentity, search_name: searchName },
+          },
+        },
+      }
+      : criteria,
+  }));
+  while (upstreamPages < maximumPages) {
+    let progressed = false;
+    for (const query of queryStates) {
+      if (query.exhausted || upstreamPages >= maximumPages || (criteria._institution && awards.length >= targetCount)) continue;
+      const requestOptions = criteria._institution && !criteria.award_id
+        ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: query.offset }
+        : options;
+      const request = buildNsfRequest(query.criteria, requestOptions);
+      const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
+      const response = payload?.response;
+      if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
+      const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
+      const reportedTotal = finiteNumber(response.metadata?.totalCount);
+      if (query.total === null) query.total = reportedTotal ?? rawAwards.length;
+      query.fetched = true;
+      progressed = true;
+      rawRecordCount += rawAwards.length;
+      upstreamPages += 1;
+      for (const raw of rawAwards) {
+        const award = normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url });
+        if (seen.has(award.award_id)) continue;
+        seen.add(award.award_id);
+        if (!criteria._institution) awards.push(award);
+        else if (recordMatchesInstitution(award, criteria._institution, "NSF")) {
+          awards.push(attachResolvedInstitution(award, criteria._institution));
+        }
+      }
+      const rawEnd = query.offset + rawAwards.length;
+      query.exhausted = criteria.award_id
+        || rawAwards.length < requestOptions.limit
+        || (query.total !== null && rawEnd >= query.total);
+      query.offset += requestOptions.limit;
+      if (!criteria._institution) break;
+    }
+    if (!criteria._institution || awards.length >= targetCount || !progressed || queryStates.every(query => query.exhausted)) break;
   }
-  const totalCount = finiteNumber(response.metadata?.totalCount) ?? rawAwards.length;
+  const processedQueries = queryStates.filter(query => query.fetched).length;
+  const upstreamExhausted = queryStates.length > 0 && queryStates.every(query => query.fetched && query.exhausted);
+  const reportedTotals = queryStates.filter(query => query.fetched && query.total !== null).map(query => query.total);
+  const upstreamTotalCount = reportedTotals.length ? reportedTotals.reduce((sum, value) => sum + value, 0) : null;
+  const safetyBoundReached = Boolean(criteria._institution && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
+  const results = criteria._institution
+    ? awards.slice(options.offset, options.offset + options.limit)
+    : awards.slice(0, options.limit);
   return {
     source: "NSF",
     adapter_version: NSF_ADAPTER_VERSION,
-    results: awards.slice(0, options.limit),
-    total_count: totalCount,
-    raw_record_count: rawAwards.length,
-    has_more: !criteria.award_id && totalCount > options.offset + rawAwards.length,
+    results,
+    total_count: criteria._institution ? (upstreamExhausted ? awards.length : null) : upstreamTotalCount,
+    upstream_total_count: upstreamTotalCount,
+    raw_record_count: rawRecordCount,
+    upstream_pages: upstreamPages,
+    upstream_queries: processedQueries,
+    safety_bound_reached: safetyBoundReached,
+    has_more: criteria._institution
+      ? awards.length > options.offset + options.limit
+      : !criteria.award_id && upstreamTotalCount > options.offset + rawRecordCount,
     retrieved_at: retrievedAt,
   };
 }

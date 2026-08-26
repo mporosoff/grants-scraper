@@ -74,17 +74,19 @@
 
   function paginationLabel(payload, resultCount = payload?.results?.length || 0) {
     const count = Math.max(0, Number(resultCount) || 0);
-    if (!count) return "No results on this page";
+    const bounded = (payload?.sources || []).filter(source => source?.safety_bound_reached === true).map(source => clean(source?.source, 20)).filter(Boolean);
+    const boundSuffix = bounded.length ? ` · upstream scan bound reached for ${bounded.join(", ")}` : "";
+    if (!count) return `No results on this page${boundSuffix}`;
     const offset = Math.max(0, Number(payload?.pagination?.offset) || 0);
     const requestedSources = Array.isArray(payload?.request?.sources)
       ? payload.request.sources
       : (payload?.sources || []).map(source => source?.source);
     const sourceCount = new Set(requestedSources.map(source => clean(source, 20)).filter(Boolean)).size;
-    if (sourceCount <= 1) return `Results ${offset + 1}–${offset + count}`;
+    if (sourceCount <= 1) return `Results ${offset + 1}–${offset + count}${boundSuffix}`;
     const noun = count === 1 ? "result" : "results";
     return offset
-      ? `${count.toLocaleString()} ${noun} on this page · each source is paged independently after its first ${offset.toLocaleString()} results`
-      : `${count.toLocaleString()} ${noun} on this source-scoped page`;
+      ? `${count.toLocaleString()} ${noun} on this page · each source is paged independently after its first ${offset.toLocaleString()} results${boundSuffix}`
+      : `${count.toLocaleString()} ${noun} on this source-scoped page${boundSuffix}`;
   }
 
   function sourcesForAgency(agency) {
@@ -188,7 +190,6 @@
     return (payload?.sources || []).some(source => (
       source.status === "ok"
       && source.has_more === true
-      && Number(source.result_count || 0) >= limit
     ));
   }
 

@@ -25,6 +25,17 @@ if (!["NSF", "NIH", "DOE"].every(source => health.sources?.includes(source))) {
 if (health.institution_registry?.source !== "ROR") {
   throw new Error("Award Worker health did not advertise the ROR institution registry boundary.");
 }
+if (health.institution_registry?.adapter_version !== "1.1.0"
+  || health.institution_resolution !== "curated-or-server-validated-ror") {
+  throw new Error("Award Worker health did not advertise trusted Phase 3 ROR resolution.");
+}
+if (health.normalized_paging?.NSF?.upstream_pages !== 12
+  || health.normalized_paging?.NSF?.maximum_identity_queries !== 3
+  || health.normalized_paging?.NIH?.upstream_page_size !== 100
+  || health.normalized_paging?.DOE?.maximum_normalized_offset !== 100
+  || health.normalized_paging?.DOE?.maximum_identity_queries !== 3) {
+  throw new Error("Award Worker health did not advertise the bounded normalized paging contract.");
+}
 
 const institutions = await jsonRequest("institutions/search?query=MIT");
 if (institutions.registry?.source !== "ROR"
@@ -35,9 +46,9 @@ if (institutions.registry?.source !== "ROR"
 }
 
 for (const body of [
-  { sources: ["NSF"], criteria: { award_id: "2605508" }, limit: 1, offset: 0 },
-  { sources: ["NIH"], criteria: { core_project_number: "K12GM106997" }, limit: 1, offset: 0 },
-  { sources: ["DOE"], criteria: { award_id: "DE-SC0020230" }, limit: 1, offset: 0 },
+  { sources: ["NSF"], criteria: { award_id: "2605508", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
+  { sources: ["NIH"], criteria: { core_project_number: "K12GM106997", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
+  { sources: ["DOE"], criteria: { award_id: "DE-SC0020230", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
 ]) {
   const payload = await jsonRequest("awards/search", {
     method: "POST",
@@ -52,4 +63,4 @@ for (const body of [
   }
 }
 
-console.log("Award Worker health, ROR identity, and exact NSF/NIH/DOE source smokes passed.");
+console.log("Award Worker health, trusted ROR identity, normalized paging bounds, and exact institution-validated NSF/NIH/DOE source smokes passed.");

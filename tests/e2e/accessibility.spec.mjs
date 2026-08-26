@@ -102,12 +102,39 @@ test("Funding Finder has no serious or critical violations across critical state
 
 test("Funded Awards Institutional Intelligence has no serious or critical violations", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({ output_text: JSON.stringify({
+      agency: "DOE",
+      program: "BES",
+      topic: "",
+      pi: "",
+      program_officer: "",
+      year_start: "",
+      year_end: "",
+      answer_intent: "investigators",
+      narrative_needed: false,
+    }) }),
+  }));
   mockAwards(page);
   await page.goto("/funded_awards.html");
   await page.locator("#ii-institution").fill("MIT");
+  const mit = page.locator("#ii-institution-options [role='option']").filter({ hasText: "Massachusetts Institute of Technology" }).first();
+  await expect(mit).toBeVisible();
+  await mit.click();
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await scan(page, "funded-awards-institutional-intelligence", testInfo);
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Who has DOE BES awards?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await scan(page, "funded-awards-evidence-answer", testInfo);
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funded-awards-evidence-answer-390", testInfo);
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);

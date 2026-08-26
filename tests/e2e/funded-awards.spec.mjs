@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
+  chooseInvestigator,
   mockAwards,
   mockAlerts,
   mockHybrid,
@@ -34,7 +35,7 @@ test("standalone native topic search renders source records, provenance, institu
     institution: "University of Rochester",
   });
 
-  await page.locator("#ii-investigators").selectOption("Stephen Dewhurst");
+  await chooseInvestigator(page, "Stephen Dewhurst");
   await expect(page).toHaveURL(/ii_pi=Stephen\+Dewhurst/);
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_pi=/);

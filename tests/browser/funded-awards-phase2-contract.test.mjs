@@ -136,7 +136,7 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.equal(product.canPageForward({
     sources: [{ status: "ok", has_more: true, result_count: 24, total_count: null, raw_record_count: 100 }],
     pagination: { offset: 25, limit: 25 },
-  }), false, "an underfilled normalized page is exhausted even if a source reports more raw rows");
+  }), true, "truthful normalized has_more remains usable even when validation underfills the visible page");
   assert.equal(product.canPageForward({
     sources: [{ status: "ok", has_more: true, result_count: 25, total_count: null, raw_record_count: 100 }],
     pagination: { offset: 25, limit: 25 },

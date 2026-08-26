@@ -20,6 +20,7 @@ on:
       - "package.json"
       - "pnpm-lock.yaml"
       - "tools/smoke_award_worker.mjs"
+      - "tools/smoke_phase3_award_worker.mjs"
       - "workers/award-api/**"
 permissions:
   contents: read
@@ -53,9 +54,12 @@ jobs:
           node --check assets/institutional-intelligence-core.js &&
           node --check assets/institutional-intelligence.js &&
           node --check workers/award-api/src/index.js &&
+          node --check workers/award-api/src/institutions.js &&
           node --check workers/award-api/src/ror.js &&
+          node --check workers/award-api/src/adapters/nsf.js &&
+          node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -113,7 +117,8 @@ jobs:
               && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.credentials_required | tostring' <<<"$health" 2>/dev/null)" = "false" \
               && test "$(jq -r '.institution_registry.source // empty' <<<"$health" 2>/dev/null)" = "ROR" \
-              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.0.0"; then
+              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.1.0" \
+              && test "$(jq -r '.institution_resolution // empty' <<<"$health" 2>/dev/null)" = "curated-or-server-validated-ror"; then
               exit 0
             fi
             sleep 5
@@ -122,7 +127,9 @@ jobs:
           exit 1
       - name: Run bounded exact-source smokes
         id: worker-smoke
-        run: node tools/smoke_award_worker.mjs
+        run: >-
+          node tools/smoke_award_worker.mjs &&
+          node tools/smoke_phase3_award_worker.mjs
       - name: Verify Pages serves the committed Funded Awards page
         id: pages-verify
         shell: bash

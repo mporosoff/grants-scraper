@@ -5,7 +5,7 @@ import vm from "node:vm";
 
 import { buildDoeSearchForm } from "../../workers/award-api/src/adapters/doe.js";
 import { createHandler } from "../../workers/award-api/src/index.js";
-import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
+import { institutionFromRor, resolveInstitution } from "../../workers/award-api/src/institutions.js";
 import { rankRorOrganizations } from "../../workers/award-api/src/ror.js";
 
 const root = new URL("../../", import.meta.url);
@@ -52,6 +52,7 @@ function award(overrides = {}) {
     activity_code: null,
     subagency: "Engineering",
     principal_investigators: [{ name: "Ada Investigator" }],
+    institution: { normalized_name: "University of Rochester", identifiers: { ror: "https://ror.org/022kthw22" } },
     ...overrides,
   };
 }
@@ -69,7 +70,8 @@ test("ROR acronym and alias metadata deterministically resolves required institu
     assert.equal(ranked[0].canonical_name, name);
     assert.equal(ranked[0].id, id);
     assert.equal(ranked[0].match.exact, true);
-    assert.equal(core.chooseInstitution(query, ranked).canonical_name, name);
+    if (query === "Caltech") assert.equal(core.chooseInstitution(query, ranked).canonical_name, name);
+    else assert.equal(core.chooseInstitution(query, ranked), null, `${query} requires explicit acronym selection`);
   }
 });
 
@@ -110,10 +112,7 @@ test("existing institution identities retain source-specific award query identif
   assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
   assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
   assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
-  const mit = resolveInstitution({
-    id: "https://ror.org/042nb2s44",
-    name: "Massachusetts Institute of Technology",
-  });
+  const mit = institutionFromRor(rankRorOrganizations(aliases.MIT.items, "MIT")[0], "Massachusetts Institute of Technology");
   assert.equal(mit.ror_id, "https://ror.org/042nb2s44");
   assert.equal(mit.sources.NSF.search_name, "Massachusetts Institute of Technology");
   assert.equal(resolveInstitution({
@@ -129,6 +128,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
     agency: "all",
     topic: "catalysis",
     pi: "Ada Investigator",
+    pi_identity: false,
     program_officer: "Megan Manager",
     year_start: 2019,
     year_end: 2026,
@@ -185,7 +185,9 @@ test("aggregates returned awards and preserves investigator and program drill-do
   assert.equal(aggregate.investigator_count, 3);
   assert.equal(aggregate.year_start, 2022);
   assert.equal(aggregate.year_end, 2025);
-  assert.deepEqual(plain(aggregate.investigators.find(item => item.name === "Ada Investigator")), { name: "Ada Investigator", projects: 2 });
+  const ada = aggregate.investigators.find(item => item.name === "Ada Investigator");
+  assert.equal(ada.projects, 2);
+  assert.deepEqual(plain(ada.variants.map(item => item.source)), ["NSF", "NIH"]);
   assert.ok(aggregate.programs.some(item => item.source === "NIH" && item.query === "R01"));
   assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "BES"));
 });
@@ -280,7 +282,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     deploymentSource.indexOf("Run bounded exact-source smokes"),
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
-  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.0\.0"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.1\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program, institutionAliases, plan\.topic\)/);
@@ -288,5 +290,6 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     appSource.indexOf("async function askQuestion()"),
     appSource.indexOf("function bindEvents()"),
   );
-  assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true \}\)/);
+  assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true \}\)/);
+  assert.match(askQuestionSource, /refreshQuestionAnswer\(\{ allowNarrative: true \}\)/);
 });

@@ -1,7 +1,7 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
 import { AwardSourceError } from "./http.js";
-import { resolveInstitution } from "./institutions.js";
-import { ROR_ADAPTER_VERSION, searchRor } from "./ror.js";
+import { institutionFromRor, resolveInstitution } from "./institutions.js";
+import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
@@ -163,10 +163,15 @@ function validateCriteria(value) {
   if (criteria.opportunity_number && !/^[A-Z0-9-]+$/.test(criteria.opportunity_number)) return null;
   if (criteria.program_office && !/^SC-\d+(?:\.\d+)?$/i.test(criteria.program_office)) return null;
   const institution = resolveInstitution({ id: criteria.institution_id, name: criteria.institution });
-  if ((criteria.institution || criteria.institution_id) && !institution) return null;
+  if ((criteria.institution || criteria.institution_id) && !institution) {
+    if (!criteria.institution || !/^https:\/\/ror\.org\/0[a-z0-9]{8}$/i.test(criteria.institution_id || "")) return null;
+  }
   return {
     publicCriteria: criteria,
     resolvedCriteria: { ...criteria, ...(institution ? { _institution: institution } : {}) },
+    institutionRequest: (criteria.institution || criteria.institution_id)
+      ? { id: criteria.institution_id, name: criteria.institution, resolved: institution }
+      : null,
   };
 }
 
@@ -290,6 +295,42 @@ async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl }) {
   return payload;
 }
 
+async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl }) {
+  if (request?.resolved) return request.resolved;
+  if (!request?.id || !request?.name) return null;
+  const identity = await sha256Hex(stableJson({
+    source: "ROR-identity",
+    adapter_version: ROR_ADAPTER_VERSION,
+    id: request.id,
+  }));
+  const key = new Request(`https://award-cache.internal/v1/ror-identity/${identity}`);
+  let organization = null;
+  if (cache) {
+    try {
+      const cached = await cache.match(key);
+      if (cached) organization = await cached.json();
+    } catch {
+      // Exact ROR resolution can continue if the shared cache is unavailable.
+    }
+  }
+  if (!organization) {
+    organization = await resolveRorOrganization(fetchImpl, request.id);
+    if (cache) {
+      try {
+        await cache.put(key, new Response(JSON.stringify(organization), {
+          headers: {
+            "Cache-Control": `public, max-age=${cacheTtl}`,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        }));
+      } catch {
+        // A cache write failure must not discard a validated ROR identity.
+      }
+    }
+  }
+  return institutionFromRor(organization, request.name);
+}
+
 function sourceSummary(payload) {
   return {
     source: payload.source,
@@ -298,6 +339,10 @@ function sourceSummary(payload) {
     cache: payload.cache,
     total_count: payload.total_count,
     raw_record_count: payload.raw_record_count,
+    upstream_total_count: payload.upstream_total_count,
+    upstream_pages: payload.upstream_pages,
+    upstream_queries: payload.upstream_queries,
+    safety_bound_reached: payload.safety_bound_reached === true,
     has_more: payload.has_more === true,
     result_count: payload.results.length,
     retrieved_at: payload.retrieved_at,
@@ -320,6 +365,12 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
         institution_registry: { source: "ROR", adapter_version: ROR_ADAPTER_VERSION },
+        institution_resolution: "curated-or-server-validated-ror",
+        normalized_paging: {
+          NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
+          NIH: { upstream_pages: 12, upstream_page_size: 100 },
+          DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+        },
         cache_ttl_seconds: config.cacheTtl,
         credentials_required: false,
       });
@@ -369,6 +420,24 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     }
     const normalized = validateRequest(body, config);
     if (!normalized) return error(origin, 400, "invalid_request");
+    if (normalized.institutionRequest && !normalized.institutionRequest.resolved) {
+      const cacheStore = cache || globalThis.caches?.default || null;
+      try {
+        const institution = await runInstitutionResolution({
+          request: normalized.institutionRequest,
+          fetchImpl,
+          cache: cacheStore,
+          cacheTtl: config.cacheTtl,
+        });
+        if (!institution) return error(origin, 400, "invalid_request");
+        normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
+      } catch (cause) {
+        if (cause instanceof AwardSourceError && cause.kind === "unsupported") {
+          return error(origin, 400, "invalid_request");
+        }
+        return error(origin, 503, "institution_registry_unavailable");
+      }
+    }
     const requestState = {
       sources: normalized.sources,
       criteria: normalized.publicCriteria,
@@ -426,4 +495,5 @@ export {
   MAX_YEAR_SPAN,
   serviceConfig,
   validateRequest,
+  runInstitutionResolution,
 };

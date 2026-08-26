@@ -404,7 +404,13 @@ test("Worker validates bounded public requests and exposes no credential require
     schema_version: 1,
     sources: ["NSF", "NIH", "DOE"],
     adapter_versions: ADAPTER_VERSIONS,
-    institution_registry: { source: "ROR", adapter_version: "1.0.0" },
+    institution_registry: { source: "ROR", adapter_version: "1.1.0" },
+    institution_resolution: "curated-or-server-validated-ror",
+    normalized_paging: {
+      NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
+      NIH: { upstream_pages: 12, upstream_page_size: 100 },
+      DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+    },
     cache_ttl_seconds: 3600,
     credentials_required: false,
   });
@@ -417,12 +423,12 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.equal((await handler(workerRequest(query({ topic: "plasma" }, ["DOE"], 25)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ award_id: "DE-SC0020230" }, ["DOE"], 1)), env)).status, 200);
   assert.equal((await handler(workerRequest(query({
-    institution: "Massachusetts Institute of Technology",
-    institution_id: "https://ror.org/042nb2s44",
+    institution: "University of Rochester",
+    institution_id: "university-of-rochester",
   }, ["NSF"], 10)), env)).status, 200);
   assert.equal((await handler(workerRequest(query({
     institution: "Massachusetts Institute of Technology",
-    institution_id: "https://ror.org/022kthw22",
+    institution_id: "university-of-rochester",
   }, ["NSF"], 10)), env)).status, 400);
   assert.equal((await handler(workerRequest(query({ year_start: 2020 })), env)).status, 400);
   const cbetCodes = [
