@@ -490,36 +490,81 @@ export async function searchDoe(fetchImpl, criteria, {
       },
     };
   }
-  const pages = new Map([[1, { html: firstPageHtml, parsed: firstPage }]]);
-  let currentHtml = firstPageHtml;
-  let currentParsed = firstPage;
   const targetCount = offset + limit + 1;
   const sourceScoped = [];
   const seenAwardIds = new Set();
   let rawRecordCount = 0;
+  let upstreamPages = 0;
+  let upstreamTotalCount = 0;
+  let processedQueries = 0;
+  let everyProcessedQueryExhausted = true;
   const appendPage = parsed => {
     rawRecordCount += parsed.records.length;
     for (const raw of parsed.records) {
       const awardId = cleanText(raw.award_id, 80);
       if (!awardId || seenAwardIds.has(awardId)) continue;
-      seenAwardIds.add(awardId);
       if (!criteria._institution || recordMatchesInstitution({
         institution: normalizeInstitution(raw.institution_name, { uei: raw.uei }),
-      }, criteria._institution, "DOE")) sourceScoped.push(raw);
+      }, criteria._institution, "DOE")) {
+        seenAwardIds.add(awardId);
+        sourceScoped.push(raw);
+      }
     }
   };
-  appendPage(firstPage);
-  const maximumPage = Math.min(firstPage.page_count, DOE_MAX_UPSTREAM_PAGES);
-  for (let page = 2; page <= maximumPage && sourceScoped.length < targetCount; page += 1) {
-    const target = currentParsed.page_targets[page];
-    if (!target) sourceInvalid();
-    currentHtml = await postPage(fetchImpl, currentHtml, target);
-    currentParsed = parseDoeSearchResults(currentHtml);
-    pages.set(page, { html: currentHtml, parsed: currentParsed });
+  const sourceIdentity = criteria._institution.sources?.DOE || {};
+  const searchNames = uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3);
+  for (let queryIndex = 0; queryIndex < searchNames.length && upstreamPages < DOE_MAX_UPSTREAM_PAGES; queryIndex += 1) {
+    const searchName = searchNames[queryIndex];
+    const queryCriteria = {
+      ...criteria,
+      _institution: {
+        ...criteria._institution,
+        sources: {
+          ...criteria._institution.sources,
+          DOE: { ...sourceIdentity, search_name: searchName },
+        },
+      },
+    };
+    let currentHtml;
+    let currentParsed;
+    if (queryIndex === 0 && searchName === sourceIdentity.search_name) {
+      currentHtml = firstPageHtml;
+      currentParsed = firstPage;
+    } else {
+      const queryForm = buildDoeSearchForm(searchForm, queryCriteria);
+      const response = await fetchSourceText(fetchImpl, DOE_SEARCH_URL, {
+        method: "POST",
+        headers: { ...REQUEST_HEADERS, "Content-Type": "application/x-www-form-urlencoded" },
+        body: queryForm.toString(),
+      }, { timeoutMs: DOE_REQUEST_TIMEOUT_MS });
+      currentHtml = response.body;
+      currentParsed = parseDoeSearchResults(currentHtml);
+    }
+    processedQueries += 1;
+    upstreamPages += 1;
+    upstreamTotalCount += currentParsed.total_count;
+    let queryRawCount = currentParsed.records.length;
     appendPage(currentParsed);
+    let scannedQueryPages = 1;
+    while (scannedQueryPages < currentParsed.page_count
+      && upstreamPages < DOE_MAX_UPSTREAM_PAGES
+      && sourceScoped.length < targetCount) {
+      const nextPage = scannedQueryPages + 1;
+      const target = currentParsed.page_targets[nextPage];
+      if (!target) sourceInvalid();
+      currentHtml = await postPage(fetchImpl, currentHtml, target);
+      currentParsed = parseDoeSearchResults(currentHtml);
+      scannedQueryPages += 1;
+      upstreamPages += 1;
+      queryRawCount += currentParsed.records.length;
+      appendPage(currentParsed);
+    }
+    const queryExhausted = scannedQueryPages >= currentParsed.page_count || queryRawCount >= currentParsed.total_count;
+    if (!queryExhausted) everyProcessedQueryExhausted = false;
+    if (sourceScoped.length >= targetCount) break;
   }
-  const upstreamExhausted = pages.size >= firstPage.page_count || rawRecordCount >= firstPage.total_count;
-  const safetyBoundReached = !upstreamExhausted && pages.size >= DOE_MAX_UPSTREAM_PAGES;
+  const upstreamExhausted = everyProcessedQueryExhausted && processedQueries === searchNames.length;
+  const safetyBoundReached = !upstreamExhausted && upstreamPages >= DOE_MAX_UPSTREAM_PAGES;
   const selected = sourceScoped.slice(offset, offset + limit);
   const abstracts = await enrichAbstracts(fetchImpl, selected, sleep);
   const results = abstracts.enriched.map(({ raw, abstract }) => attachResolvedInstitution(normalizeDoeAward(raw, {
@@ -532,9 +577,10 @@ export async function searchDoe(fetchImpl, criteria, {
     adapter_version: DOE_ADAPTER_VERSION,
     retrieved_at: retrievedAt,
     total_count: upstreamExhausted ? sourceScoped.length : null,
-    upstream_total_count: firstPage.total_count,
+    upstream_total_count: upstreamTotalCount,
     raw_record_count: rawRecordCount,
-    upstream_pages: pages.size,
+    upstream_pages: upstreamPages,
+    upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
     has_more: hasMore,
     results,

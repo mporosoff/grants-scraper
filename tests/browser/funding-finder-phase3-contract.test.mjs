@@ -220,6 +220,22 @@ test("NIH fills normalized pages after sparse institution validation and NSF sto
   assert.equal(bounded.safety_bound_reached, true);
   assert.equal(bounded.raw_record_count, 300);
   assert.equal(nsfPages, 12);
+  const fetchBoundedExtra = async url => {
+    const parsed = new URL(url);
+    const offset = Number(parsed.searchParams.get("offset"));
+    const rows = Array.from({ length: 25 }, (_, index) => nsfRaw("E" + (offset + index), "Another University"));
+    if (offset === 275) {
+      rows[0] = nsfRaw("BOUND-1", "University of Rochester");
+      rows[1] = nsfRaw("BOUND-2", "University of Rochester");
+    }
+    return new Response(JSON.stringify({ response: { award: rows, metadata: { totalCount: 1_000 } } }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  const boundedExtra = await searchNsf(fetchBoundedExtra, { topic: "catalysis", _institution: rochester }, { limit: 1, offset: 0, now: fixedNow });
+  assert.deepEqual(boundedExtra.results.map(item => item.award_id), ["BOUND-1"]);
+  assert.equal(boundedExtra.safety_bound_reached, true);
+  assert.equal(boundedExtra.has_more, true, "a normalized match already collected beyond the slice remains reachable at the safety bound");
   assert.match(sandbox.FUNDING_AWARD_PRODUCT.paginationLabel({
     request: { sources: ["NSF"] },
     results: [],
@@ -286,7 +302,43 @@ test("the Worker validates and caches uncurated ROR identity without trusting th
   const trustedAlias = institutionFromRor(rankRorOrganizations(aliases.Caltech.items, "Caltech")[0], "Caltech");
   assert.equal(trustedAlias.sources.NSF.search_name, "California Institute of Technology");
   assert.ok(trustedAlias.match_names.includes("Caltech"));
+  assert.deepEqual(trustedAlias.sources.NSF.search_names, ["California Institute of Technology", "Caltech"]);
+  assert.deepEqual(trustedAlias.sources.DOE.search_names, ["California Institute of Technology", "Caltech"]);
   assert.ok(!trustedAlias.sources.NIH.search_names.includes("CIT"), "short acronyms never become uncontrolled source queries");
+
+  const nsfAliasQueries = [];
+  const aliasNsf = await searchNsf(async url => {
+    nsfAliasQueries.push(new URL(url).searchParams.get("awardeeName"));
+    const isAlias = decodeURIComponent(String(url)).includes("Caltech");
+    const award = isAlias ? [nsfRaw("CALTECH-1", "Caltech", "Ada Researcher")] : [];
+    return new Response(JSON.stringify({ response: { award, metadata: { totalCount: award.length } } }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }, { topic: "catalysis", _institution: trustedAlias }, { limit: 1, offset: 0, now: fixedNow });
+  assert.deepEqual(aliasNsf.results.map(item => item.award_id), ["CALTECH-1"]);
+  assert.equal(aliasNsf.upstream_queries, 2);
+  assert.equal(nsfAliasQueries.length, 2);
+
+  const onePage = html => html.replace("2</strong> items in <strong>2", "1</strong> items in <strong>1");
+  const canonicalDoe = onePage(doePage1)
+    .replace("University of Rochester, Rochester, NY", "Another University, Elsewhere, NY")
+    .replaceAll("F27KDXZMF9Y8", "OTHERUEI0001");
+  const aliasDoe = onePage(doePage1)
+    .replace("University of Rochester, Rochester, NY", "Caltech, Pasadena, CA")
+    .replaceAll("F27KDXZMF9Y8", "OTHERUEI0002");
+  const doeAliasQueries = [];
+  const aliasDoeResult = await searchDoe(async (url, options = {}) => {
+    if (String(url).includes("ViewPublicAbstract.aspx")) return new Response(doeAbstract);
+    if (options.method === "POST") {
+      const body = decodeURIComponent(String(options.body || ""));
+      doeAliasQueries.push(body);
+      return new Response(body.includes("Caltech") ? aliasDoe : canonicalDoe);
+    }
+    return new Response(doeForm);
+  }, { topic: "catalysis", _institution: trustedAlias }, { limit: 1, offset: 0, now: fixedNow, sleep: async () => {} });
+  assert.deepEqual(aliasDoeResult.results.map(item => item.award_id), ["DE-SC0020230"]);
+  assert.equal(aliasDoeResult.upstream_queries, 2);
+  assert.equal(doeAliasQueries.filter(body => body.includes("Caltech")).length, 1);
 });
 
 test("investigator identities conservatively unify Marc variants and preserve conflicts", () => {

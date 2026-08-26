@@ -16,8 +16,10 @@ async function jsonRequest(path, options = {}) {
 const health = await jsonRequest("health");
 if (health.institution_resolution !== "curated-or-server-validated-ror"
   || health.normalized_paging?.NSF?.upstream_pages !== 12
+  || health.normalized_paging?.NSF?.maximum_identity_queries !== 3
   || health.normalized_paging?.NIH?.upstream_pages !== 12
-  || health.normalized_paging?.DOE?.upstream_pages !== 10) {
+  || health.normalized_paging?.DOE?.upstream_pages !== 10
+  || health.normalized_paging?.DOE?.maximum_identity_queries !== 3) {
   throw new Error("Phase 3 health and paging bounds are not active.");
 }
 

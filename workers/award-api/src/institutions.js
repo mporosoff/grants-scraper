@@ -81,9 +81,9 @@ export function institutionFromRor(candidate, submittedName) {
     identity_source: "ROR",
     registry_url: rorId,
     sources: {
-      NSF: { search_name: canonicalName, uei: [] },
+      NSF: { search_name: canonicalName, search_names: [canonicalName, ...defensibleAliases], uei: [] },
       NIH: { search_names: [canonicalName, ...defensibleAliases], uei: [], ipf: [] },
-      DOE: { search_name: canonicalName, uei: [] },
+      DOE: { search_name: canonicalName, search_names: [canonicalName, ...defensibleAliases], uei: [] },
     },
   };
 }

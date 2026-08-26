@@ -168,38 +168,67 @@ export async function searchNsf(fetchImpl, criteria, options) {
   const awards = [];
   const seen = new Set();
   let rawRecordCount = 0;
-  let upstreamTotalCount = null;
-  let upstreamExhausted = false;
   let upstreamPages = 0;
+  const reportedTotals = [];
+  let processedQueries = 0;
+  let everyProcessedQueryExhausted = true;
   const maximumPages = criteria._institution && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
-  for (let page = 0; page < maximumPages; page += 1) {
-    const requestOptions = criteria._institution && !criteria.award_id
-      ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: page * NSF_UPSTREAM_PAGE_SIZE }
-      : options;
-    const request = buildNsfRequest(criteria, requestOptions);
-    const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
-    const response = payload?.response;
-    if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
-    const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
-    const reportedTotal = finiteNumber(response.metadata?.totalCount);
-    if (upstreamTotalCount === null) upstreamTotalCount = reportedTotal ?? rawAwards.length;
-    rawRecordCount += rawAwards.length;
-    upstreamPages += 1;
-    for (const raw of rawAwards) {
-      const award = normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url });
-      if (seen.has(award.award_id)) continue;
-      seen.add(award.award_id);
-      if (!criteria._institution) awards.push(award);
-      else if (recordMatchesInstitution(award, criteria._institution, "NSF")) {
-        awards.push(attachResolvedInstitution(award, criteria._institution));
+  const sourceIdentity = criteria._institution?.sources?.NSF || {};
+  const searchNames = criteria._institution && !criteria.award_id
+    ? uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3)
+    : [null];
+  for (const searchName of searchNames) {
+    let queryOffset = criteria._institution && !criteria.award_id ? 0 : options.offset;
+    let queryTotal = null;
+    let queryExhausted = false;
+    const queryCriteria = searchName
+      ? {
+        ...criteria,
+        _institution: {
+          ...criteria._institution,
+          sources: {
+            ...criteria._institution.sources,
+            NSF: { ...sourceIdentity, search_name: searchName },
+          },
+        },
       }
+      : criteria;
+    while (upstreamPages < maximumPages) {
+      const requestOptions = criteria._institution && !criteria.award_id
+        ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: queryOffset }
+        : options;
+      const request = buildNsfRequest(queryCriteria, requestOptions);
+      const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
+      const response = payload?.response;
+      if (!response || typeof response !== "object") throw new AwardSourceError("source_invalid_response");
+      const rawAwards = Array.isArray(response.award) ? response.award : response.award ? [response.award] : [];
+      const reportedTotal = finiteNumber(response.metadata?.totalCount);
+      if (queryTotal === null) queryTotal = reportedTotal ?? rawAwards.length;
+      rawRecordCount += rawAwards.length;
+      upstreamPages += 1;
+      for (const raw of rawAwards) {
+        const award = normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url });
+        if (seen.has(award.award_id)) continue;
+        seen.add(award.award_id);
+        if (!criteria._institution) awards.push(award);
+        else if (recordMatchesInstitution(award, criteria._institution, "NSF")) {
+          awards.push(attachResolvedInstitution(award, criteria._institution));
+        }
+      }
+      const rawEnd = queryOffset + rawAwards.length;
+      queryExhausted = criteria.award_id
+        || rawAwards.length < requestOptions.limit
+        || (queryTotal !== null && rawEnd >= queryTotal);
+      if (!criteria._institution || awards.length >= targetCount || queryExhausted) break;
+      queryOffset += requestOptions.limit;
     }
-    const rawEnd = requestOptions.offset + rawAwards.length;
-    upstreamExhausted = criteria.award_id
-      || rawAwards.length < requestOptions.limit
-      || (upstreamTotalCount !== null && rawEnd >= upstreamTotalCount);
-    if (!criteria._institution || awards.length >= targetCount || upstreamExhausted) break;
+    processedQueries += 1;
+    if (queryTotal !== null) reportedTotals.push(queryTotal);
+    if (!queryExhausted) everyProcessedQueryExhausted = false;
+    if (!criteria._institution || awards.length >= targetCount || upstreamPages >= maximumPages) break;
   }
+  const upstreamExhausted = everyProcessedQueryExhausted && processedQueries === searchNames.length;
+  const upstreamTotalCount = reportedTotals.length ? reportedTotals.reduce((sum, value) => sum + value, 0) : null;
   const safetyBoundReached = Boolean(criteria._institution && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
   const results = criteria._institution
     ? awards.slice(options.offset, options.offset + options.limit)
@@ -212,9 +241,10 @@ export async function searchNsf(fetchImpl, criteria, options) {
     upstream_total_count: upstreamTotalCount,
     raw_record_count: rawRecordCount,
     upstream_pages: upstreamPages,
+    upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
     has_more: criteria._institution
-      ? !safetyBoundReached && awards.length > options.offset + options.limit
+      ? awards.length > options.offset + options.limit
       : !criteria.award_id && upstreamTotalCount > options.offset + rawRecordCount,
     retrieved_at: retrievedAt,
   };

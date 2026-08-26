@@ -30,8 +30,10 @@ if (health.institution_registry?.adapter_version !== "1.1.0"
   throw new Error("Award Worker health did not advertise trusted Phase 3 ROR resolution.");
 }
 if (health.normalized_paging?.NSF?.upstream_pages !== 12
+  || health.normalized_paging?.NSF?.maximum_identity_queries !== 3
   || health.normalized_paging?.NIH?.upstream_page_size !== 100
-  || health.normalized_paging?.DOE?.maximum_normalized_offset !== 100) {
+  || health.normalized_paging?.DOE?.maximum_normalized_offset !== 100
+  || health.normalized_paging?.DOE?.maximum_identity_queries !== 3) {
   throw new Error("Award Worker health did not advertise the bounded normalized paging contract.");
 }
 

@@ -445,6 +445,7 @@
       snapshot.evidencePack.truncated
         ? `The answer evidence was bounded or truncated to ${snapshot.evidencePack.awards.length} public award records.`
         : `The answer evidence used all ${snapshot.evidencePack.awards.length} loaded public award records.`,
+      snapshot.translationFallback ? "Question translation was unavailable, so the deterministic answer used the visible filters and a locally inferred answer intent." : "",
       snapshot.narrativeFailure ? "Narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : "",
     ].filter(Boolean);
     return parts.join(" ");
@@ -545,6 +546,7 @@
       evidencePack,
       narrative,
       narrativeFailure,
+      translationFallback: questionState.translationFallback === true,
       signature,
     };
     state.answering = false;
@@ -740,12 +742,21 @@
       return true;
     });
     const successfulMetas = metas.filter(meta => meta.status === "ok");
+    const failedVariantCount = settled.filter(result => result.status === "rejected").length
+      + metas.filter(meta => meta.status !== "ok").length;
+    const failedVariant = metas.find(meta => meta.status !== "ok")
+      || settled.find(result => result.status === "rejected")?.reason;
+    const partialError = failedVariantCount ? {
+      source,
+      status: "unavailable",
+      error: { code: failedVariant?.error?.code || failedVariant?.code || (failedVariant?.name === "AbortError" ? "source_unavailable" : "service_unavailable") },
+    } : null;
     const baseRequest = { ...requests[0], criteria: { ...requests[0].criteria, pi: group.name } };
     return {
       source,
       limit,
       request: baseRequest,
-      nextOffset: offset + limit,
+      nextOffset: partialError ? offset : offset + limit,
       results,
       meta: {
         source,
@@ -755,9 +766,10 @@
         safety_bound_reached: successfulMetas.some(meta => meta.safety_bound_reached === true),
         raw_record_count: successfulMetas.reduce((sum, meta) => sum + (Number(meta.raw_record_count) || 0), 0),
         investigator_variant_queries: variants.length,
+        ...(partialError ? { health: { status: "degraded", investigator_variant_failures: failedVariantCount } } : {}),
       },
-      hasMore: successfulMetas.some(meta => meta.has_more === true) && offset + limit <= 1_000,
-      error: null,
+      hasMore: !partialError && successfulMetas.some(meta => meta.has_more === true) && offset + limit <= 1_000,
+      error: partialError,
       investigatorIdentity: group,
       variantRequests: requests,
     };
@@ -836,12 +848,14 @@
         page.meta = next.meta;
         page.request = next.request;
         page.nextOffset = next.nextOffset;
-        page.hasMore = next.hasMore && next.nextOffset <= 1_000;
-        page.error = null;
+        page.hasMore = !next.error && next.hasMore && next.nextOffset <= 1_000;
+        page.error = next.error || null;
         state.sourcePages.set(source, page);
         state.payload = combinedPayload();
         const aggregate = renderAggregate(state.payload);
-        setStatus(`${added.length} additional ${source} project${added.length === 1 ? "" : "s"} loaded. ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? " is" : "s are"} now shown.`);
+        setStatus(next.error
+          ? `${source} retained ${page.results.length} safely matched project${page.results.length === 1 ? "" : "s"}, but ${next.meta.health?.investigator_variant_failures || 1} investigator spelling request${next.meta.health?.investigator_variant_failures === 1 ? "" : "s"} could not be completed. Retry ${source} to fill the same normalized page.`
+          : `${added.length} additional ${source} project${added.length === 1 ? "" : "s"} loaded. ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? " is" : "s are"} now shown.`, Boolean(next.error));
         return;
       }
       state.sourcePages.set(source, page);
@@ -951,7 +965,7 @@
     return "all";
   }
 
-  function renderQuestionPlan(value, intent = "") {
+  function renderQuestionPlan(value, intent = "", note = "") {
     const labels = [
       value.institution ? `Institution: ${value.institution}` : "",
       `Agency: ${value.agency === "all" ? "NSF + NIH + DOE" : value.agency}`,
@@ -962,7 +976,7 @@
       value.year_start || value.year_end ? `Years: ${value.year_start || "any"}–${value.year_end || "any"}` : "",
       intent ? `Answer intent: ${intent}` : "",
     ].filter(Boolean);
-    $("ii-question-plan").innerHTML = `<strong>Transparent search plan:</strong> ${labels.map(escapeHtml).join(" · ")}. The public award records below remain authoritative.`;
+    $("ii-question-plan").innerHTML = `<strong>Transparent search plan:</strong> ${labels.map(escapeHtml).join(" · ")}. The public award records below remain authoritative.${note ? ` ${escapeHtml(note)}` : ""}`;
     $("ii-question-plan").classList.remove("hidden");
   }
 
@@ -985,9 +999,7 @@
     const key = credentials.loadKey(provider);
     if (!configured || !key) {
       $("ii-key-setup").classList.remove("hidden");
-      $("ii-key-status").textContent = "Save a key here or in Funding Finder’s existing AI setup to translate this question. Structured filters remain available without one.";
-      $("ii-key").focus();
-      return;
+      $("ii-key-status").textContent = "No key is configured, so the answer will use the visible filters and deterministic loaded-award evidence. Save a key to enable question translation and bounded narrative synthesis.";
     }
     $("ii-ask-button").disabled = true;
     state.question = null;
@@ -996,28 +1008,36 @@
     $("ii-question-plan").classList.remove("hidden");
     try {
       const current = formState();
-      const translated = await ai.providerJson({
-        provider,
-        key,
-        fetchImpl: globalThis.fetch,
-        system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
-        user: JSON.stringify({
-          institution: current.institution,
-          current_filters: {
-            agency: current.agency,
-            program: current.program,
-            topic: current.topic,
-            pi: current.pi,
-            program_officer: current.program_officer,
-            year_start: current.year_start,
-            year_end: current.year_end,
-          },
-          question,
-        }),
-      });
-      const plan = translated && typeof translated === "object" && !Array.isArray(translated)
-        ? { ...translated }
-        : {};
+      let plan = { ...current };
+      let translationFallback = !configured || !key;
+      if (!translationFallback) {
+        try {
+          const translated = await ai.providerJson({
+            provider,
+            key,
+            fetchImpl: globalThis.fetch,
+            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+            user: JSON.stringify({
+              institution: current.institution,
+              current_filters: {
+                agency: current.agency,
+                program: current.program,
+                topic: current.topic,
+                pi: current.pi,
+                program_officer: current.program_officer,
+                year_start: current.year_start,
+                year_end: current.year_end,
+              },
+              question,
+            }),
+          });
+          if (!translated || typeof translated !== "object" || Array.isArray(translated)) throw new Error("invalid_translation");
+          plan = { ...translated };
+        } catch {
+          translationFallback = true;
+          plan = { ...current };
+        }
+      }
       plan.agency = inferQuestionAgency(plan, question);
       const selectedInstitution = state.selectedInstitution;
       const institutionAliases = [
@@ -1040,13 +1060,16 @@
         intent,
         narrativeNeeded: plan.narrative_needed === true || intent === "narrative",
         provider,
+        translationFallback,
         snapshot: null,
       };
-      renderQuestionPlan(next, intent);
+      renderQuestionPlan(next, intent, translationFallback
+        ? "Provider translation was unavailable; the visible filters and deterministic answer intent were used."
+        : "");
       const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true });
       if (outcome) await refreshQuestionAnswer({ allowNarrative: true });
     } catch (error) {
-      $("ii-question-plan").textContent = `The question could not be translated: ${error?.message || String(error)} Structured filters remain available without AI.`;
+      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available without AI.`;
     } finally {
       $("ii-ask-button").disabled = false;
     }

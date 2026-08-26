@@ -336,6 +336,41 @@ test("investigator identity pagination retains the selected identity and dedupli
   expect(new Set(ids).size).toBe(ids.length);
 });
 
+test("a partial investigator-variant failure retains matches and retries the same normalized page", async ({ page }) => {
+  mockHybrid(page);
+  let failedVariantOnce = false;
+  const calls = mockAwards(page, {
+    awardOverridesBySource: {
+      NSF: { principal_investigators: [{ name: "Marc D. Porosoff", role: "Principal Investigator", email: null }] },
+    },
+    resultCountPerSource: { NSF: 1 },
+    sourceFailures: {
+      NSF: ({ body }) => {
+        if (body.criteria.pi === "Marc Porosoff" && !failedVariantOnce) {
+          failedVariantOnce = true;
+          return { status: "unavailable", code: "source_unavailable" };
+        }
+        return null;
+      },
+    },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-search").click();
+  await chooseInvestigator(page, "Marc D. Porosoff");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  await expect(page.locator("#ii-source-status")).toContainText("previously loaded NSF project was retained");
+  await expect(page.getByRole("button", { name: "Retry NSF" })).toBeVisible();
+  const firstVariantOffsets = calls.filter(call => call.criteria.pi && call.sources[0] === "NSF").map(call => call.offset);
+  expect(new Set(firstVariantOffsets)).toEqual(new Set([0]));
+  await page.getByRole("button", { name: "Retry NSF" }).click();
+  await expect(page.locator("#ii-source-status")).toContainText("NSF available");
+  await expect(page.getByRole("button", { name: "Retry NSF" })).toHaveCount(0);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  expect(calls.filter(call => call.criteria.pi === "Marc Porosoff" && call.offset === 0)).toHaveLength(2);
+});
+
 test("institution-only shared URLs restore and execute without an AI key", async ({ page }) => {
   await page.addInitScript(() => localStorage.removeItem("funding-finder.credentials.v1"));
   mockHybrid(page);
@@ -356,7 +391,11 @@ test("institution-only shared URLs restore and execute without an AI key", async
   await page.locator("#ii-question").fill("Who has awards in the loaded public evidence?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-key-setup")).toBeVisible();
-  await expect(page.locator("#ii-key-status")).toContainText("Structured filters remain available without one");
+  await expect(page.locator("#ii-key-status")).toContainText("deterministic loaded-award evidence");
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Investigators in the loaded evidence");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("Question translation was unavailable");
+  expect(calls).toHaveLength(6);
 });
 
 test("one unavailable award source does not suppress the other institutional evidence", async ({ page }) => {
@@ -431,6 +470,34 @@ test("the natural-language translator reuses the saved Funding Finder provider a
   await expect(page.locator("#ii-question-plan")).toContainText("Topic: Artificial Intelligence Research");
   await expect.poll(() => providerCalls.length).toBe(5);
   expect(calls.slice(-3).every(call => call.criteria.topic === "Artificial Intelligence Research" && !Object.hasOwn(call.criteria, "pi"))).toBe(true);
+});
+
+test("a failed question translation falls back to visible filters and a deterministic answer", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  let providerCalls = 0;
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls += 1;
+    return route.fulfill({
+      status: 503,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ error: { message: "translation unavailable" } }),
+    });
+  });
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-agency").selectOption("DOE");
+  await page.locator("#ii-program").fill("BES");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Who has DOE BES awards?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("Provider translation was unavailable");
+  await expect(page.locator("#ii-direct-answer")).toContainText("Marc Porosoff");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("Question translation was unavailable");
+  expect(providerCalls).toBe(1);
+  expect(calls).toHaveLength(1);
+  expect(calls[0]).toMatchObject({ sources: ["DOE"], criteria: { institution: "University of Rochester", program_office: "SC-32" } });
 });
 
 test("institutional questions cite loaded evidence and refresh only on explicit request", async ({ page }) => {

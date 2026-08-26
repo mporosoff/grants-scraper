@@ -407,9 +407,9 @@ test("Worker validates bounded public requests and exposes no credential require
     institution_registry: { source: "ROR", adapter_version: "1.1.0" },
     institution_resolution: "curated-or-server-validated-ror",
     normalized_paging: {
-      NSF: { upstream_pages: 12, upstream_page_size: 25 },
+      NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
       NIH: { upstream_pages: 12, upstream_page_size: 100 },
-      DOE: { upstream_pages: 10, maximum_normalized_offset: 100 },
+      DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
     },
     cache_ttl_seconds: 3600,
     credentials_required: false,
