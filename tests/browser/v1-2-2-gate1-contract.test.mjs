@@ -32,6 +32,18 @@ function runSmoke(workerUrl) {
   });
 }
 
+function assertSafeFundingFinderTopicFallback(fallback) {
+  const approvedTimeoutRethrow = /if \(_topicError\?\.code === "topic_sidecar_timeout"\) throw _topicError;/;
+  assert.match(fallback, approvedTimeoutRethrow);
+  const ordinaryFailurePath = fallback.replace(approvedTimeoutRethrow, "");
+  assert.match(ordinaryFailurePath, /topicLayerFailed = true/);
+  assert.match(ordinaryFailurePath, /nextTopicLayerAvailable = false/);
+  assert.doesNotMatch(
+    ordinaryFailurePath,
+    /catalog-error|throw|state\.ready\s*=\s*false/,
+  );
+}
+
 async function withMockWorker({ failEmbed = false } = {}, callback) {
   const observed = [];
   const server = createServer((request, response) => {
@@ -89,19 +101,41 @@ async function withMockWorker({ failEmbed = false } = {}, callback) {
 }
 
 test("Funding Finder keeps parent search available when the topic sidecar fails", () => {
-  const parentInit = app.indexOf("searchEngine = RETRIEVAL_API.create(catalog");
+  const parentInit = app.indexOf("const nextSearchEngine = RETRIEVAL_API.create(candidate");
   const sidecarLoad = app.indexOf("const sidecar = await SUBTOPIC_API.loadSidecar()");
   assert.ok(parentInit >= 0 && parentInit < sidecarLoad);
   assert.match(searchPage, /id="topic-layer-warning"[^>]*role="status"/);
   const fallback = app.match(/catch \(_topicError\) \{[\s\S]*?\n        \}/)?.[0] || "";
-  assert.match(fallback, /childCatalog = null/);
-  assert.match(fallback, /childSearchEngine = null/);
-  assert.match(fallback, /hybridSearchClient = null/);
-  assert.match(fallback, /topic-layer-warning/);
-  assert.match(fallback, /Parent-level Strong search, filters, saved opportunities, and exports still work/);
-  assert.doesNotMatch(fallback, /catalog-error|throw|state\.ready\s*=\s*false/);
+  assertSafeFundingFinderTopicFallback(fallback);
+  const catalogInit = app.slice(
+    app.indexOf("async function initializeCatalog(candidate)"),
+    app.indexOf("function initializeShell()"),
+  );
+  assert.match(catalogInit, /searchEngine = nextSearchEngine/);
+  assert.match(catalogInit, /hybridSearchClient = nextHybridSearchClient/);
+  assert.match(catalogInit, /topic-layer-warning/);
+  assert.match(catalogInit, /Parent-level Strong search, filters, saved opportunities, and exports still work/);
   assert.match(app, /topicLayerAvailable\s*\?\s*"proxy_unconfigured"\s*:\s*"topic_layer_unavailable"/);
-  assert.match(app, /APP_CONFIG\?\.flags\?\.searchV2 && childCatalog && childSearchEngine/);
+  assert.match(catalogInit, /APP_CONFIG\?\.flags\?\.searchV2[\s\S]*?&& nextChildCatalog[\s\S]*?&& nextChildSearchEngine/);
+});
+
+test("Funding Finder topic fallback contract rejects unrelated failure escalation", () => {
+  const approved = 'if (_topicError?.code === "topic_sidecar_timeout") throw _topicError;';
+  for (const prohibited of [
+    "throw new Error('unrelated');",
+    'document.querySelector("#catalog-error").hidden = false;',
+    "state.ready = false;",
+    "if (_topicError) throw _topicError;",
+  ]) {
+    assert.throws(() => assertSafeFundingFinderTopicFallback(`
+      catch (_topicError) {
+        ${approved}
+        ${prohibited}
+        topicLayerFailed = true;
+        nextTopicLayerAvailable = false;
+      }
+    `));
+  }
 });
 
 test("Team Match keeps parent-only matching and disables hosted enhancement on sidecar failure", () => {

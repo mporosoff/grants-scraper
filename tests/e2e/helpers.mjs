@@ -336,9 +336,20 @@ export async function openFundingFinder(page, { sidecarFailure = false, evaluati
   const parameters = new URLSearchParams({ "gate4-e2e": "1" });
   if (evaluation) parameters.set("evaluation", "1");
   await page.goto(`/match_explorer.html?${parameters}`);
-  await expect(page.locator("#catalog-pill")).toContainText(/current/, { timeout: 30_000 });
   await expect(page.locator("#query")).toBeEnabled();
+  await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.ensureCatalogReady());
+  await expect(page.locator("#catalog-pill")).toContainText(/current/, { timeout: 30_000 });
   await expect(page.locator("#find-funding")).toBeEnabled();
+}
+
+export async function openFundingFinderShell(page, { path = "/match_explorer.html" } = {}) {
+  await page.goto(path);
+  await expect(page.locator("#query")).toBeVisible();
+  await expect(page.locator("#query")).toBeEnabled();
+  await expect(page.locator("#catalog-pill")).toContainText("loads when needed");
+  await expect.poll(() => page.evaluate(() => (
+    performance.getEntriesByName("funding-shell-ready", "mark").length
+  ))).toBe(1);
 }
 
 export async function openTeamMatch(page, { sidecarFailure = false } = {}) {

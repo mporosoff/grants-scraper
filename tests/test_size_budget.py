@@ -5,10 +5,11 @@ size. A 1.5x multiplier would set a ~37 MB ceiling on a 24 MB file, which is
 not a budget -- it is permission to nearly double. See
 docs/TOPIC_LAYER_PLAN.md §12 and §18.1 item A4.
 
-`data/opportunities.js` is what every visitor downloads before the page is
-usable, so the ceiling protects page-load time, not disk. GitHub warns on
-files above 50 MB, so 32 MiB also leaves headroom for ordinary catalog growth
-on top of anything the subtopic layer adds.
+`data/opportunities.js` is loaded on the first catalog-dependent action and may
+be prefetched after the shell is interactive, so the ceiling protects that
+first-use cost rather than initial shell paint. GitHub warns on files above
+50 MB, so 32 MiB also leaves headroom for ordinary catalog growth on top of
+anything the subtopic layer adds.
 
 The per-subtopic cap governs the display payload: at 2 KiB serialized, 1,000
 subtopics cost about 2 MB. Retrieval terms are budgeted once in the sidecar's
@@ -87,7 +88,7 @@ class CatalogSizeBudgetTests(unittest.TestCase):
             CATALOG_HARD_LIMIT_BYTES,
             f"data/opportunities.js is {_megabytes(size)}, over the "
             f"{_megabytes(CATALOG_HARD_LIMIT_BYTES)} hard ceiling. Every "
-            "visitor downloads this file before the page is usable. Cut "
+            "first-use catalog load downloads this file. Cut "
             "per-record cost -- do not raise this limit (§12).",
         )
 

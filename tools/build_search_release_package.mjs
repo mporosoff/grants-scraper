@@ -204,14 +204,18 @@ async function run() {
   const sourceHashes = {};
   for (const path of [
     "data/opportunities.js",
+    "data/catalog-metadata.js",
     "data/subtopics.js",
     MANIFEST_PATH,
     VECTOR_PATH,
     CANARY_PATH,
+    "assets/app-config.js",
     "assets/app.js",
+    "assets/catalog-loader.js",
     "assets/result-workflow.js",
     "assets/search-hybrid.js",
     "assets/search-retrieval.js",
+    "assets/subtopic-runtime.js",
     "assets/team-hybrid.js",
     "match_explorer.html",
     "team_match.html",
@@ -230,7 +234,7 @@ async function run() {
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
   };
   const releaseBytes = jsonBytes(release);
 

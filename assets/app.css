@@ -810,6 +810,18 @@ textarea:focus {
   border-color: #efbcc2;
 }
 
+#catalog-error:not(.hidden) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+#catalog-error .button {
+  flex: 0 0 auto;
+}
+
 .potential-status {
   display: flex;
   align-items: center;

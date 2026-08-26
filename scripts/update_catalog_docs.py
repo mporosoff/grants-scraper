@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from datetime import date, datetime, timezone
+from datetime import date, datetime
 import json
 from pathlib import Path
 import re
@@ -12,12 +12,21 @@ import textwrap
 from typing import Any
 from urllib.parse import urlparse
 
+from scripts.build_catalog import (
+    CATALOG_METADATA_FILENAME,
+    catalog_asset_version,
+    catalog_metadata_javascript_bytes,
+    write_catalog,
+)
 from scripts.currentness import filter_current
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PREFIX = "globalThis.GRANT_CATALOG="
 CATALOG_SCRIPT_RE = re.compile(
     r'<script src="(?:\./)?data/opportunities\.js(?:\?v=[^"]+)?"></script>'
+)
+CATALOG_METADATA_SCRIPT_RE = re.compile(
+    r'<script src="(?:\./)?data/catalog-metadata\.js(?:\?v=[^"]+)?"></script>'
 )
 
 
@@ -125,42 +134,23 @@ def catalog_stats(catalog: dict[str, Any]) -> dict[str, Any]:
     return stats
 
 
-def catalog_asset_version(catalog: dict[str, Any]) -> str:
-    """Build a cache-busting token from the latest completed catalog stage."""
-    values = [
-        catalog.get("generated_at"),
-        catalog.get("detail_enrichment_generated_at"),
-        catalog.get("document_evidence_generated_at"),
-        catalog.get("catalog_audit_generated_at"),
-        catalog.get("link_health_generated_at"),
-        ((catalog.get("diagnostics") or {}).get("additional_sources") or {}).get(
-            "merged_at"
-        ),
-    ]
-    parsed = []
-    for value in values:
-        if not value:
-            continue
-        try:
-            timestamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
-            if timestamp.tzinfo is None:
-                timestamp = timestamp.replace(tzinfo=timezone.utc)
-            parsed.append(timestamp.astimezone(timezone.utc))
-        except ValueError:
-            continue
-    if not parsed:
-        raise ValueError("catalog has no valid generated timestamp")
-    latest = max(parsed)
-    return latest.strftime("catalog-%Y%m%dT%H%M%SZ")
-
-
 def update_catalog_asset_reference(html: str, catalog: dict[str, Any]) -> str:
-    matches = CATALOG_SCRIPT_RE.findall(html)
-    if len(matches) != 1:
-        raise ValueError("expected exactly one opportunity catalog script reference")
+    catalog_matches = CATALOG_SCRIPT_RE.findall(html)
+    metadata_matches = CATALOG_METADATA_SCRIPT_RE.findall(html)
+    if len(catalog_matches) + len(metadata_matches) != 1:
+        raise ValueError(
+            "expected exactly one catalog or catalog-metadata script reference"
+        )
+    version = catalog_asset_version(catalog)
+    if metadata_matches:
+        replacement = (
+            '<script src="./data/catalog-metadata.js?v='
+            f'{version}"></script>'
+        )
+        return CATALOG_METADATA_SCRIPT_RE.sub(replacement, html)
     replacement = (
         '<script src="./data/opportunities.js?v='
-        f'{catalog_asset_version(catalog)}"></script>'
+        f'{version}"></script>'
     )
     return CATALOG_SCRIPT_RE.sub(replacement, html)
 
@@ -317,6 +307,16 @@ def main() -> int:
     explorer_path = REPOSITORY_ROOT / "match_explorer.html"
     team_path = REPOSITORY_ROOT / "team_match.html"
     catalog = load_catalog(args.catalog)
+    metadata_path = args.catalog.with_name(CATALOG_METADATA_FILENAME)
+    expected_metadata = catalog_metadata_javascript_bytes(
+        catalog, args.catalog.name
+    )
+    actual_metadata = (
+        metadata_path.read_bytes() if metadata_path.exists() else b""
+    )
+    metadata_stale = actual_metadata != expected_metadata
+    if metadata_stale and not args.check:
+        write_catalog(catalog, args.catalog, metadata_path)
     stats = catalog_stats(catalog)
     current_readme = readme_path.read_text(encoding="utf-8")
     current_project = project_path.read_text(encoding="utf-8")
@@ -330,6 +330,8 @@ def main() -> int:
     )
     next_team = update_catalog_asset_reference(current_team, catalog)
     changed = []
+    if metadata_stale:
+        changed.append(metadata_path)
     if current_readme != next_readme:
         changed.append(readme_path)
     if current_project != next_project:

@@ -11,19 +11,23 @@
   "worker_allowlist_sha256": "ba82795617ba2ef0365758236f28d780cc91a098b24017ff82f5d60e8fdcb3f9",
   "source_hashes": {
     "data/opportunities.js": "34de841033fba1e7ffb233cddf051d77b21b6759f143404b06f2919628647c43",
+    "data/catalog-metadata.js": "b0c6b31334cff2a78d9c946412fd91a8df3dc9fa73bb168c27eca3749c431d43",
     "data/subtopics.js": "371d71ad677f820982cdd0d98e0c0364be208dbaf9043e4481a5cb9a806e508c",
     "data/search-v2-voyage-manifest.json": "cd775a45a300d63d6303204a5ec05b3500de257216dbbae958e173d716ca969c",
     "data/search-v2-voyage-vectors.f16": "0e74fc33d44551354f3b97be7f3fafe7014fd72027bceb4d75e6b713c45afc86",
     "data/search-v2-voyage-canaries.json": "a97956aee508e10ec535dbbd97fd0c7c3193f74ee321f72b2aa7bed4176722b0",
-    "assets/app.js": "8129de8e16182ac3e8359a2691d3430f62e96a7e6d936324edc39d47cd574eaf",
+    "assets/app-config.js": "f77b8c575f83d56875f6c455dd9856d54f4e4e8107431516bc81ec5ef8fa8015",
+    "assets/app.js": "c01e637026c68d46a596c59d5c382d8a2be6b313f75ba370dbe0d090c4257539",
+    "assets/catalog-loader.js": "c8054ebe60f55ac37c973073ff2d8570c9bfbc95701626586426ea2fca2b4fb8",
     "assets/result-workflow.js": "35bf58debe2fb34f8a61452f0c62ffb5aabcd271e885dd65379dd537903be275",
     "assets/search-hybrid.js": "29db9a04d4f66600b8c50eb762fe4f8f5d0d472fce485ec19447e81ba230442d",
     "assets/search-retrieval.js": "4c5f8b0570d3e934a4ae2fb727cbd89f981e0a17caa3426186f1fef4b4f44107",
+    "assets/subtopic-runtime.js": "a6c36190f9ef26de960125aea58b9415b4b951dc9ec2f26998bbebecbc8b5d1c",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
-    "match_explorer.html": "bf1225bbb01ae8991d496dac6ac4f2647513f5d3de1fa109e9addc8f412085ed",
-    "team_match.html": "be952526f4cb77f096fee984ca4ab8b849482d4225a461a9aaa27b69ea31ef36",
+    "match_explorer.html": "ce6454fe1732f7ced808de7f20dba00b3118c17acba982ac92d028f73e6e12a1",
+    "team_match.html": "588e836da2309adeb0f8463ba3fd0def278d273a7c77112e6ea97951c97ae11a",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
-  "atomic_publication_contract": "catalog + subtopics + manifest + vectors + model-space canaries + Worker allowlist"
+  "atomic_publication_contract": "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist"
 }

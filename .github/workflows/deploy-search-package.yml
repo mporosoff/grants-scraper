@@ -8,14 +8,17 @@ on:
       - ".github/workflows/deploy-search-package.yml"
       - "assets/app-config.js"
       - "assets/app.js"
+      - "assets/catalog-loader.js"
       - "assets/match-explain.js"
       - "assets/result-workflow.js"
       - "assets/search-hybrid.js"
       - "assets/search-retrieval.js"
       - "assets/search-v2-config.js"
+      - "assets/subtopic-runtime.js"
       - "assets/team-hybrid.js"
       - "config/search_v2.json"
       - "data/search-v2-release.json"
+      - "data/catalog-metadata.js"
       - "data/search-v2-voyage-canaries.json"
       - "data/search-v2-voyage-manifest.json"
       - "data/search-v2-voyage-vectors.f16"
@@ -210,6 +213,21 @@ jobs:
           done
           if [ "$verified" != "true" ]; then
             echo "::error::GitHub Pages did not serve the exact committed release package within the verification window."
+            exit 1
+          fi
+          candidate_metadata="$(cat data/catalog-metadata.js)"
+          live_metadata="$(curl --fail --silent --show-error --max-time 15 \
+            "https://mporosoff.github.io/grants-scraper/data/catalog-metadata.js?deploy=${GITHUB_SHA}")"
+          if [ "$live_metadata" != "$candidate_metadata" ]; then
+            echo "::error::GitHub Pages served catalog metadata from a different generation."
+            exit 1
+          fi
+          catalog_url="$(sed -n 's/^globalThis.GRANT_CATALOG_METADATA=//p' data/catalog-metadata.js | sed 's/;$//' | jq -r '.catalog_url')"
+          expected_catalog_sha="$(jq -r '.source_hashes["data/opportunities.js"]' data/search-v2-release.json)"
+          live_catalog_sha="$(curl --fail --silent --show-error --max-time 45 \
+            "https://mporosoff.github.io/grants-scraper/${catalog_url#./}" | sha256sum | awk '{print $1}')"
+          if [ "$live_catalog_sha" != "$expected_catalog_sha" ]; then
+            echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
             exit 1
           fi
       - name: Run a real provider smoke after Pages propagation

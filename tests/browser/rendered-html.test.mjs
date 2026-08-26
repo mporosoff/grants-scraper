@@ -78,7 +78,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /MIT License|href="\.\/LICENSE"/);
   assert.match(css, /\.legal-notice/);
   assert.doesNotMatch(prototype, /class="chat hidden"/);
-  assert.match(prototype, /data\/opportunities\.js/);
+  assert.match(prototype, /data\/catalog-metadata\.js/);
+  assert.doesNotMatch(prototype, /<script src="\.\/data\/opportunities\.js/);
+  assert.match(prototype, /assets\/catalog-loader\.js/);
   assert.match(prototype, /assets\/profile\.js/);
   assert.match(prototype, /assets\/orcid\.js/);
   assert.match(prototype, /assets\/nofo\.js/);
@@ -111,6 +113,9 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /profileContext\(\{ includeCv: true \}\)/);
   assert.match(script, /function exportEvaluation/);
   assert.match(script, /function recordIsArchived/);
+  assert.match(script, /function initializeShell/);
+  assert.match(script, /async function initializeCatalog/);
+  assert.match(script, /ensureCatalogReady/);
   assert.match(script, /function profileAcronymContext/);
   assert.match(script, /no AI call was made/);
   assert.match(script, /function recordIsCurrent/);

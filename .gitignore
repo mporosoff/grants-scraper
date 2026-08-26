@@ -11,6 +11,7 @@ faculty.json
 faculty.csv
 /data/*
 !/data/opportunities.js
+!/data/catalog-metadata.js
 !/data/opportunity_enrichment.json
 !/data/document_evidence.json
 !/data/source_records.json

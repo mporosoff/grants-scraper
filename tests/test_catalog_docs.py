@@ -8,6 +8,7 @@ from scripts.update_catalog_docs import (
     render_docs,
     update_catalog_asset_reference,
 )
+from scripts.build_catalog import catalog_metadata_javascript_bytes
 
 
 class CatalogDocumentationTests(unittest.TestCase):
@@ -33,6 +34,7 @@ class CatalogDocumentationTests(unittest.TestCase):
         project_path = REPOSITORY_ROOT / "PROJECT.md"
         explorer_path = REPOSITORY_ROOT / "match_explorer.html"
         team_path = REPOSITORY_ROOT / "team_match.html"
+        metadata_path = REPOSITORY_ROOT / "data" / "catalog-metadata.js"
         readme = readme_path.read_text(encoding="utf-8")
         project = project_path.read_text(encoding="utf-8")
         explorer = explorer_path.read_text(encoding="utf-8")
@@ -46,6 +48,10 @@ class CatalogDocumentationTests(unittest.TestCase):
             explorer,
         )
         self.assertEqual(update_catalog_asset_reference(team, catalog), team)
+        self.assertEqual(
+            metadata_path.read_bytes(),
+            catalog_metadata_javascript_bytes(catalog),
+        )
 
     def test_generator_requires_unique_marker_pairs(self):
         stats = catalog_stats(
@@ -58,13 +64,19 @@ class CatalogDocumentationTests(unittest.TestCase):
         html = '<script src="./data/opportunities.js"></script>'
         catalog = {
             "generated_at": "2026-07-27T12:00:00Z",
-            "document_evidence_generated_at": "2026-07-27T12:05:06Z",
+            "document_evidence_generated_at": "2026-07-27T12:05:06.123456Z",
             "detail_enrichment_generated_at": "2026-07-27T12:03:00",
         }
         self.assertEqual(
             update_catalog_asset_reference(html, catalog),
             '<script src="./data/opportunities.js?v='
-            'catalog-20260727T120506Z"></script>',
+            'catalog-20260727T120506123456Z"></script>',
+        )
+        metadata_html = '<script src="./data/catalog-metadata.js"></script>'
+        self.assertEqual(
+            update_catalog_asset_reference(metadata_html, catalog),
+            '<script src="./data/catalog-metadata.js?v='
+            'catalog-20260727T120506123456Z"></script>',
         )
 
 

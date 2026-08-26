@@ -46,6 +46,38 @@
     vectorUrl: "./data/search-v2-voyage-vectors.f16",
     timeoutMs: 8_000,
   });
+  function boundedScript(defaultTimeoutMs, overrideName) {
+    const configuredTimeout = local
+      ? Number(globalThis[overrideName])
+      : Number.NaN;
+    const timeoutMs = Number.isFinite(configuredTimeout)
+      && configuredTimeout > 0
+      ? Math.min(900_000, Math.max(1, configuredTimeout))
+      : defaultTimeoutMs;
+    return Object.freeze({
+      timeoutMs,
+      setTimeout(callback) {
+        const clock = globalThis.FUNDING_FINDER_SCRIPT_CLOCK;
+        return typeof clock?.setTimeout === "function"
+          ? clock.setTimeout(callback, timeoutMs)
+          : globalThis.setTimeout(callback, timeoutMs);
+      },
+      clearTimeout(timer) {
+        const clock = globalThis.FUNDING_FINDER_SCRIPT_CLOCK;
+        if (typeof clock?.clearTimeout === "function") clock.clearTimeout(timer);
+        else globalThis.clearTimeout(timer);
+      },
+    });
+  }
+  const boundedScripts = Object.freeze({
+    // The current catalog is 2.93 MB gzip. Ten minutes keeps a genuinely
+    // stalled operation bounded while allowing roughly 39 kbps throughput,
+    // including first-use loads where 2g/slow-2g suppresses prefetch.
+    catalog: boundedScript(600_000, "FUNDING_FINDER_CATALOG_TIMEOUT_MS"),
+    // The topic sidecar is 222 KB gzip and startup metadata is smaller still.
+    // One minute covers roughly 30 kbps without inheriting the catalog budget.
+    sidecar: boundedScript(60_000, "FUNDING_FINDER_SIDECAR_TIMEOUT_MS"),
+  });
 
   function releaseLabel() {
     const date = new Date(`${release.updated}T00:00:00Z`);
@@ -67,6 +99,7 @@
   globalThis.FUNDING_FINDER_APP = Object.freeze({
     flags,
     productionFlags,
+    boundedScripts,
     hybridSearch,
     release,
     releaseLabel,
