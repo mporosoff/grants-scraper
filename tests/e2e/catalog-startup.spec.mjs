@@ -366,11 +366,14 @@ test("catalog validation preserves same-second pipeline timestamp precision", as
   await installConnection(page, { saveData: true, effectiveType: "4g" });
   let latestTimestamp = "";
   let catalogResponses = 0;
+  const catalogUrls = [];
   await page.route("**/data/opportunities.js*", async route => {
     catalogResponses += 1;
+    const requestUrl = new URL(route.request().url());
+    catalogUrls.push(requestUrl);
     const response = await route.fetch();
     let body = await response.text();
-    if (catalogResponses === 1) {
+    if (!requestUrl.searchParams.has("recovery")) {
       const precise = latestTimestamp.match(/^(.*\.)(\d+)(Z)$/);
       expect(precise).toBeTruthy();
       const previousFraction = (BigInt(precise[2]) - 1n)
@@ -399,6 +402,9 @@ test("catalog validation preserves same-second pipeline timestamp precision", as
   await page.locator("#catalog-retry").click();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
   expect(catalogResponses).toBe(2);
+  expect(catalogUrls[0].searchParams.has("recovery")).toBe(false);
+  expect(catalogUrls[1].searchParams.has("recovery")).toBe(true);
+  expect(catalogUrls[1].searchParams.get("v")).toBe(catalogUrls[0].searchParams.get("v"));
   expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
     state: "ready",
     requests: 2,

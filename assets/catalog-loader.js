@@ -258,6 +258,16 @@
     });
   }
 
+  function catalogRequestUrl(startup, retrying) {
+    if (!retrying) return startup.resolvedCatalogUrl;
+    const url = new URL(startup.resolvedCatalogUrl);
+    url.searchParams.set(
+      "recovery",
+      `${Date.now()}-${counts.metadataRefreshes}`,
+    );
+    return url.href;
+  }
+
   async function ensureCatalogReady() {
     if (lifecycle === "ready" && readyCatalog) return readyCatalog;
     if (inFlight) return inFlight;
@@ -267,7 +277,9 @@
         setState("loading");
         if (retrying) await refreshMetadata();
         const startup = validatedMetadata();
-        const candidate = await executeCatalogScript(startup.resolvedCatalogUrl);
+        const candidate = await executeCatalogScript(
+          catalogRequestUrl(startup, retrying),
+        );
         await validateLoadedCatalog(candidate, startup);
         if (!initializer) throw new Error("Catalog initialization is unavailable.");
         setState("initializing");
