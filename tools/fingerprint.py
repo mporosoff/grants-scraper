@@ -47,11 +47,15 @@ TIMESTAMP_RE = re.compile(
 FROZEN_TIMESTAMP = "FROZEN-TIMESTAMP"
 
 # The metadata sidecar derives its cache-busting asset identity from the same
-# pipeline timestamp, but uses the compact ``catalog-YYYYMMDDTHHMMSSZ`` shape
-# required in browser URLs. Normalize that representation for the same reason
-# as the ISO literal above; record contents and every non-time identity input
-# remain fingerprinted.
-CATALOG_ASSET_VERSION_RE = re.compile(r"catalog-\d{8}T\d{6}Z")
+# pipeline timestamp, but uses the compact
+# ``catalog-YYYYMMDDTHHMMSSffffffZ`` shape required in browser URLs. The
+# fractional digits prevent two same-second publications from reusing cached
+# metadata and catalog URLs. Normalize both the current and former shapes for
+# the same reason as the ISO literal above; record contents and every non-time
+# identity input remain fingerprinted.
+CATALOG_ASSET_VERSION_RE = re.compile(
+    r"catalog-\d{8}T\d{6}(?:\d{6})?Z"
+)
 FROZEN_CATALOG_ASSET_VERSION = "catalog-FROZEN-TIMESTAMP"
 
 # A DATE-ONLY volatile field, normalized by name rather than by shape.

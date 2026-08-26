@@ -64,19 +64,19 @@ class CatalogDocumentationTests(unittest.TestCase):
         html = '<script src="./data/opportunities.js"></script>'
         catalog = {
             "generated_at": "2026-07-27T12:00:00Z",
-            "document_evidence_generated_at": "2026-07-27T12:05:06Z",
+            "document_evidence_generated_at": "2026-07-27T12:05:06.123456Z",
             "detail_enrichment_generated_at": "2026-07-27T12:03:00",
         }
         self.assertEqual(
             update_catalog_asset_reference(html, catalog),
             '<script src="./data/opportunities.js?v='
-            'catalog-20260727T120506Z"></script>',
+            'catalog-20260727T120506123456Z"></script>',
         )
         metadata_html = '<script src="./data/catalog-metadata.js"></script>'
         self.assertEqual(
             update_catalog_asset_reference(metadata_html, catalog),
             '<script src="./data/catalog-metadata.js?v='
-            'catalog-20260727T120506Z"></script>',
+            'catalog-20260727T120506123456Z"></script>',
         )
 
 

@@ -77,6 +77,7 @@ test("generated startup metadata is small and coherent with the canonical catalo
   assert.equal(metadata.record_count, catalog.record_count);
   assert.deepEqual(metadata.status_counts, catalog.status_counts);
   assert.equal(metadata.catalog_url, `./data/opportunities.js?v=${metadata.asset_version}`);
+  assert.match(metadata.asset_version, /^catalog-\d{8}T\d{12}Z$/);
   assert.equal(metadata.release_identity, releaseIdentity(catalog, metadata.asset_version));
 });
 

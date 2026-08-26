@@ -363,6 +363,7 @@
       return;
     }
     if (snapshot.state === "failed") {
+      $("catalog-retry").hidden = false;
       $("catalog-error-message").textContent =
         `${snapshot.error || "The funding catalog could not be prepared."} Your search and entered information are still here.`;
       $("catalog-error").classList.remove("hidden");
@@ -5480,6 +5481,7 @@
       }
     } catch (error) {
       $("catalog-error-message").textContent = error?.message || String(error);
+      $("catalog-retry").hidden = true;
       $("catalog-error").classList.remove("hidden");
       $("catalog-pill").setAttribute("aria-label", "Catalog unavailable");
       $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>

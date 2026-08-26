@@ -8,6 +8,7 @@ from zipfile import ZipFile
 
 from scripts.build_catalog import (
     build_catalog,
+    catalog_asset_version,
     catalog_metadata,
     catalog_metadata_javascript_bytes,
     catalog_release_identity,
@@ -33,6 +34,23 @@ FIXTURE = (
 
 
 class CatalogExtractTests(unittest.TestCase):
+    def test_catalog_asset_version_preserves_same_second_precision(self):
+        first = {"generated_at": "2026-08-26T12:00:00.123455Z"}
+        second = {"generated_at": "2026-08-26T12:00:00.123456Z"}
+
+        self.assertEqual(
+            catalog_asset_version(first),
+            "catalog-20260826T120000123455Z",
+        )
+        self.assertEqual(
+            catalog_asset_version(second),
+            "catalog-20260826T120000123456Z",
+        )
+        self.assertNotEqual(
+            catalog_asset_version(first),
+            catalog_asset_version(second),
+        )
+
     def test_compacts_only_deadline_evidence_duplicated_in_the_same_record(self):
         citation = {
             "document_url": "https://example.org/notice.pdf",

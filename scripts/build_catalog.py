@@ -1037,7 +1037,7 @@ def catalog_pipeline_timestamp(catalog):
 def catalog_asset_version(catalog):
     """Return the single cache identity used by catalog browser assets."""
     return catalog_pipeline_timestamp(catalog).strftime(
-        "catalog-%Y%m%dT%H%M%SZ"
+        "catalog-%Y%m%dT%H%M%S%fZ"
     )
 
 

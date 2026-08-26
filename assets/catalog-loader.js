@@ -127,11 +127,19 @@
   }
 
   function catalogAssetVersion(catalog) {
-    const stamp = new Date(catalogPipelineTimestamp(catalog).time)
-      .toISOString()
-      .replace(/[-:]/g, "")
-      .replace(/\.\d{3}Z$/, "Z");
-    return `catalog-${stamp}`;
+    const selected = catalogPipelineTimestamp(catalog);
+    const canonical = selected.value.match(
+      /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?Z$/,
+    );
+    if (!canonical) {
+      throw new Error("The funding catalog timestamp is not canonical UTC.");
+    }
+    const fraction = String(canonical[7] || "")
+      .padEnd(6, "0")
+      .slice(0, 6);
+    const date = canonical.slice(1, 4).join("");
+    const time = canonical.slice(4, 7).join("");
+    return `catalog-${date}T${time}${fraction}Z`;
   }
 
   function releaseIdentity(catalog, assetVersion = catalogAssetVersion(catalog)) {

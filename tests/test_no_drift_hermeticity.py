@@ -181,8 +181,8 @@ class PinnedFeedIsDateIndependentTests(unittest.TestCase):
         self.assertRegex(self.PIN, fingerprint.TIMESTAMP_RE)
 
     def test_catalog_asset_versions_are_timestamp_normalized(self):
-        before = b'"asset_version":"catalog-20260817T235912Z"'
-        after = b'"asset_version":"catalog-20260818T000107Z"'
+        before = b'"asset_version":"catalog-20260817T235912123456Z"'
+        after = b'"asset_version":"catalog-20260818T000107654321Z"'
         self.assertEqual(
             fingerprint.normalize(before),
             fingerprint.normalize(after),

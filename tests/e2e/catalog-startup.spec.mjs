@@ -269,6 +269,24 @@ test("catalog failure preserves entered and saved state and retry completes the 
   });
 });
 
+test("shell dependency failures do not offer a catalog retry that cannot run", async ({ page }) => {
+  await page.route("**/assets/search-query.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: "",
+  }));
+  await page.goto("/match_explorer.html");
+  await expect(page.locator("#query")).toBeVisible();
+  await expect(page.locator("#query")).toBeEnabled();
+  await expect(page.locator("#catalog-error")).toBeVisible();
+  await expect(page.locator("#catalog-error-message")).toContainText(
+    /search-term helper did not load.*refresh the page/i,
+  );
+  await expect(page.locator("#catalog-retry")).toBeHidden();
+  await page.locator("#query").fill("state remains editable");
+  await expect(page.locator("#query")).toHaveValue("state remains editable");
+});
+
 test("retry refreshes stale startup metadata after a catalog generation changes", async ({ page }) => {
   mockHybrid(page);
   await installConnection(page, { saveData: true, effectiveType: "4g" });
