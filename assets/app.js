@@ -5301,9 +5301,11 @@
   }
 
   function validateShellDependencies() {
-    if (!APP_CONFIG?.boundedScript?.setTimeout
-      || !APP_CONFIG?.boundedScript?.clearTimeout) {
-      throw new Error("The bounded script loader did not start. Refresh the page and try again.");
+    if (!APP_CONFIG?.boundedScripts?.catalog?.setTimeout
+      || !APP_CONFIG?.boundedScripts?.catalog?.clearTimeout
+      || !APP_CONFIG?.boundedScripts?.sidecar?.setTimeout
+      || !APP_CONFIG?.boundedScripts?.sidecar?.clearTimeout) {
+      throw new Error("The bounded script loaders did not start. Refresh the page and try again.");
     }
     if (!CATALOG_LOADER?.configure || !CATALOG_LOADER?.ensureCatalogReady) {
       throw new Error("The funding catalog loader did not start. Refresh the page and try again.");

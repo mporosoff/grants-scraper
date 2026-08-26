@@ -11,7 +11,7 @@ const teamHtml = await readFile(new URL("team_match.html", root), "utf8");
 const appSource = await readFile(new URL("assets/app.js", root), "utf8");
 const runtimeSource = await readFile(new URL("assets/subtopic-runtime.js", root), "utf8");
 
-function loadConfig(url) {
+function loadConfig(url, overrides = {}) {
   const parsed = new URL(url);
   const context = {
     Date,
@@ -19,6 +19,7 @@ function loadConfig(url) {
     URLSearchParams,
     globalThis: {
       location: { hostname: parsed.hostname, search: parsed.search },
+      ...overrides,
     },
   };
   vm.runInNewContext(configSource, context);
@@ -43,9 +44,27 @@ test("v1.3 production feature flags enable topics, explanations, and hybrid sear
   );
   assert.equal(local.release.version, "1.3.0");
   assert.equal(local.release.updated, "2026-08-24");
-  assert.equal(production.boundedScript.timeoutMs, 15_000);
-  assert.equal(typeof production.boundedScript.setTimeout, "function");
-  assert.equal(typeof production.boundedScript.clearTimeout, "function");
+  assert.equal(production.boundedScripts.catalog.timeoutMs, 600_000);
+  assert.equal(production.boundedScripts.sidecar.timeoutMs, 60_000);
+  assert.equal(typeof production.boundedScripts.catalog.setTimeout, "function");
+  assert.equal(typeof production.boundedScripts.sidecar.clearTimeout, "function");
+  const observedDelays = [];
+  const overridden = loadConfig("http://127.0.0.1:8765/", {
+    FUNDING_FINDER_CATALOG_TIMEOUT_MS: 17_000,
+    FUNDING_FINDER_SIDECAR_TIMEOUT_MS: 3_000,
+    FUNDING_FINDER_SCRIPT_CLOCK: {
+      setTimeout(_callback, delay) {
+        observedDelays.push(delay);
+        return observedDelays.length;
+      },
+      clearTimeout() {},
+    },
+  });
+  assert.equal(overridden.boundedScripts.catalog.timeoutMs, 17_000);
+  assert.equal(overridden.boundedScripts.sidecar.timeoutMs, 3_000);
+  overridden.boundedScripts.catalog.setTimeout(() => {});
+  overridden.boundedScripts.sidecar.setTimeout(() => {});
+  assert.deepEqual(observedDelays, [17_000, 3_000]);
   assert.equal(
     production.hybridSearch.proxyUrl,
     "https://funding-finder-voyage-search.urochestercheme.workers.dev/",
@@ -58,6 +77,7 @@ test("sidecar is lazy and normal pages share one app release source", () => {
   assert.match(runtimeSource, /GRANT_CATALOG\?\.generated_at/);
   assert.match(runtimeSource, /subtopics\.js\?v=\$\{catalogVersion\}/);
   assert.match(runtimeSource, /topic_sidecar_timeout/);
+  assert.match(runtimeSource, /boundedScripts\?\.sidecar/);
   assert.match(runtimeSource, /boundedScript\.setTimeout/);
   assert.match(runtimeSource, /sidecarPromise = null/);
   assert.doesNotMatch(mainHtml, /<script src="\.\/data\/subtopics\.js/);

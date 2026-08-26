@@ -9,7 +9,7 @@
     "ready",
     "failed",
   ]);
-  const BOUNDED_SCRIPT = globalThis.FUNDING_FINDER_APP?.boundedScript;
+  const BOUNDED_SCRIPTS = globalThis.FUNDING_FINDER_APP?.boundedScripts;
   let metadata = globalThis.GRANT_CATALOG_METADATA;
   const listeners = new Set();
   let lifecycle = "idle";
@@ -24,6 +24,10 @@
   let visibilityBound = false;
   let metadataRefreshPromise = null;
   let lastError = "";
+  let catalogAttemptSequence = 0;
+  let activeCatalogAttempt = null;
+  let publishedCatalog;
+  const catalogAttempts = new Map();
   const metadataScriptSource = [...document.scripts]
     .map(script => script.src || "")
     .find(source => {
@@ -41,7 +45,47 @@
     initializations: 0,
     prefetches: 0,
     metadataRefreshes: 0,
+    catalogScriptCleanups: 0,
+    quarantinedCatalogAssignments: 0,
   };
+
+  function installCatalogAssignmentGate() {
+    const descriptor = Object.getOwnPropertyDescriptor(globalThis, "GRANT_CATALOG");
+    if (descriptor && !descriptor.configurable) {
+      throw new Error("The funding catalog assignment gate could not be installed.");
+    }
+    Object.defineProperty(globalThis, "GRANT_CATALOG", {
+      configurable: false,
+      enumerable: true,
+      get() {
+        return publishedCatalog;
+      },
+      set(candidate) {
+        const attemptId = document.currentScript?.dataset?.fundingCatalogAttempt || "";
+        const attempt = catalogAttempts.get(attemptId);
+        if (!attempt
+          || attempt !== activeCatalogAttempt
+          || attempt.status !== "loading") {
+          counts.quarantinedCatalogAssignments += 1;
+          return;
+        }
+        attempt.candidate = candidate;
+      },
+    });
+  }
+
+  function clearPublishedCatalog() {
+    publishedCatalog = undefined;
+  }
+
+  function invalidateCatalogAttempt(attempt, status) {
+    if (!attempt) return;
+    attempt.status = status;
+    attempt.candidate = undefined;
+    if (activeCatalogAttempt === attempt) activeCatalogAttempt = null;
+  }
+
+  installCatalogAssignmentGate();
 
   function mark(name) {
     try {
@@ -201,7 +245,7 @@
       let settled = false;
       let timeout = null;
       const cleanup = () => {
-        if (timeout !== null) BOUNDED_SCRIPT.clearTimeout(timeout);
+        if (timeout !== null) BOUNDED_SCRIPTS.sidecar.clearTimeout(timeout);
         timeout = null;
         script.removeEventListener("load", onLoad);
         script.removeEventListener("error", onError);
@@ -228,7 +272,7 @@
       });
       script.addEventListener("load", onLoad, { once: true });
       script.addEventListener("error", onError, { once: true });
-      timeout = BOUNDED_SCRIPT.setTimeout(() => finish(() => {
+      timeout = BOUNDED_SCRIPTS.sidecar.setTimeout(() => finish(() => {
         reject(new Error("Catalog startup metadata refresh timed out."));
       }));
       document.head.append(script);
@@ -258,18 +302,27 @@
   }
 
   function executeCatalogScript(url) {
-    if (globalThis.GRANT_CATALOG) return Promise.resolve(globalThis.GRANT_CATALOG);
     counts.requests += 1;
     mark("funding-catalog-requested");
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
+      const attempt = {
+        id: `catalog-attempt-${++catalogAttemptSequence}`,
+        status: "loading",
+        candidate: undefined,
+      };
+      catalogAttempts.set(attempt.id, attempt);
+      activeCatalogAttempt = attempt;
+      clearPublishedCatalog();
       script.async = true;
       script.src = url;
       script.dataset.fundingCatalog = "true";
+      script.dataset.fundingCatalogAttempt = attempt.id;
       let settled = false;
       let timeout = null;
       const cleanup = ({ remove = false } = {}) => {
-        if (timeout !== null) BOUNDED_SCRIPT.clearTimeout(timeout);
+        counts.catalogScriptCleanups += 1;
+        if (timeout !== null) BOUNDED_SCRIPTS.catalog.clearTimeout(timeout);
         timeout = null;
         script.removeEventListener("load", onLoad);
         script.removeEventListener("error", onError);
@@ -283,19 +336,31 @@
         callback();
       };
       const onLoad = () => finish(() => {
+        if (attempt !== activeCatalogAttempt
+          || attempt.status !== "loading"
+          || !attempt.candidate) {
+          invalidateCatalogAttempt(attempt, "invalid");
+          clearPublishedCatalog();
+          reject(new Error("The funding catalog script did not own a catalog assignment."));
+          return;
+        }
+        const candidate = attempt.candidate;
+        attempt.status = "loaded";
+        publishedCatalog = candidate;
         counts.executions += 1;
         mark("funding-catalog-executed");
-        resolve(globalThis.GRANT_CATALOG);
+        resolve({ attempt, candidate });
       });
       const onError = () => finish(() => {
+        invalidateCatalogAttempt(attempt, "failed");
+        clearPublishedCatalog();
         reject(new Error("The funding catalog could not be downloaded."));
       }, { remove: true });
       script.addEventListener("load", onLoad, { once: true });
       script.addEventListener("error", onError, { once: true });
-      timeout = BOUNDED_SCRIPT.setTimeout(() => finish(() => {
-        try { delete globalThis.GRANT_CATALOG; } catch (_error) {
-          globalThis.GRANT_CATALOG = undefined;
-        }
+      timeout = BOUNDED_SCRIPTS.catalog.setTimeout(() => finish(() => {
+        invalidateCatalogAttempt(attempt, "timed_out");
+        clearPublishedCatalog();
         reject(new Error("The funding catalog request timed out."));
       }, { remove: true }));
       injectedScript = script;
@@ -322,14 +387,23 @@
         setState("loading");
         if (retrying) await refreshMetadata();
         const startup = validatedMetadata();
-        const candidate = await executeCatalogScript(
+        const loaded = await executeCatalogScript(
           catalogRequestUrl(startup, retrying),
         );
+        const { attempt, candidate } = loaded;
         await validateLoadedCatalog(candidate, startup);
+        if (attempt !== activeCatalogAttempt || attempt.status !== "loaded") {
+          throw new Error("The funding catalog attempt became stale before initialization.");
+        }
         if (!initializer) throw new Error("Catalog initialization is unavailable.");
         setState("initializing");
         counts.initializations += 1;
         await initializer(candidate, startup);
+        if (attempt !== activeCatalogAttempt || attempt.status !== "loaded") {
+          throw new Error("The funding catalog attempt became stale during initialization.");
+        }
+        attempt.status = "accepted";
+        publishedCatalog = candidate;
         readyCatalog = candidate;
         mark("funding-catalog-initialized");
         setState("ready");
@@ -343,9 +417,8 @@
         try { await resetter?.(); } catch (_resetError) { /* best effort */ }
         if (injectedScript) injectedScript.remove();
         injectedScript = null;
-        try { delete globalThis.GRANT_CATALOG; } catch (_error) {
-          globalThis.GRANT_CATALOG = undefined;
-        }
+        invalidateCatalogAttempt(activeCatalogAttempt, "failed");
+        clearPublishedCatalog();
         setState("failed", message);
         throw new Error(message);
       } finally {
@@ -439,7 +512,8 @@
     getMetadata: () => metadata,
     getSnapshot: snapshot,
     releaseIdentity,
-    scriptTimeoutMs: Number(BOUNDED_SCRIPT?.timeoutMs || 0),
+    catalogTimeoutMs: Number(BOUNDED_SCRIPTS?.catalog?.timeoutMs || 0),
+    sidecarTimeoutMs: Number(BOUNDED_SCRIPTS?.sidecar?.timeoutMs || 0),
     schedulePrefetch,
     subscribe,
   });

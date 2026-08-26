@@ -26,12 +26,14 @@ async function installConnection(page, value) {
 async function installScriptClock(page) {
   await page.addInitScript(() => {
     let nextTimer = 0;
+    let now = 0;
     const timers = new Map();
-    globalThis.FUNDING_FINDER_SCRIPT_TIMEOUT_MS = 15_000;
+    globalThis.FUNDING_FINDER_CATALOG_TIMEOUT_MS = 120_000;
+    globalThis.FUNDING_FINDER_SIDECAR_TIMEOUT_MS = 15_000;
     globalThis.FUNDING_FINDER_SCRIPT_CLOCK = {
-      setTimeout(callback) {
+      setTimeout(callback, delay) {
         const timer = ++nextTimer;
-        timers.set(timer, callback);
+        timers.set(timer, { callback, delay, due: now + delay });
         return timer;
       },
       clearTimeout(timer) {
@@ -40,14 +42,44 @@ async function installScriptClock(page) {
     };
     globalThis.__FUNDING_FINDER_SCRIPT_CLOCK = Object.freeze({
       pending: () => timers.size,
+      delays: () => [...timers.values()].map(item => item.delay).sort((a, b) => a - b),
+      advance: milliseconds => {
+        now += milliseconds;
+        const due = [...timers.entries()]
+          .filter(([, item]) => item.due <= now)
+          .sort((left, right) => left[1].due - right[1].due);
+        due.forEach(([timer]) => timers.delete(timer));
+        due.forEach(([, item]) => item.callback());
+        return due.length;
+      },
       runAll: () => {
-        const callbacks = [...timers.values()];
+        const callbacks = [...timers.values()].map(item => item.callback);
         timers.clear();
         callbacks.forEach(callback => callback());
         return callbacks.length;
       },
     });
   });
+}
+
+async function executeStaleCatalogAttempt(page, label) {
+  await page.evaluate(currentLabel => new Promise((resolve, reject) => {
+    const staleAttempt = globalThis.__TIMED_OUT_CATALOG_SCRIPT
+      ?.dataset?.fundingCatalogAttempt;
+    if (!staleAttempt) {
+      reject(new Error("The timed-out catalog attempt ID is unavailable."));
+      return;
+    }
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `./__stale-catalog-execution.js?case=${encodeURIComponent(currentLabel)}`;
+    script.dataset.fundingCatalogAttempt = staleAttempt;
+    script.addEventListener("load", resolve, { once: true });
+    script.addEventListener("error", () => reject(new Error("Stale fixture failed.")), {
+      once: true,
+    });
+    document.head.append(script);
+  }), label);
 }
 
 async function seriousAxeViolations(page) {
@@ -296,7 +328,7 @@ test("catalog failure preserves entered and saved state and retry completes the 
   });
 });
 
-test("a stalled catalog request times out once, preserves state, ignores late events, and retries", async ({ page }) => {
+test("timed-out catalog ownership quarantines stale execution across failed and successful retries", async ({ page }) => {
   mockHybrid(page);
   await installConnection(page, { saveData: true, effectiveType: "4g" });
   await installScriptClock(page);
@@ -310,13 +342,37 @@ test("a stalled catalog request times out once, preserves state, ignores late ev
       note: "Timeout must preserve this note",
     }]));
   });
-  const releaseStalledRequest = deferred();
+  const requestGates = [deferred(), deferred(), deferred()];
   let catalogRequests = 0;
+  let staleExecutions = 0;
+  const catalogUrls = [];
+  await page.route("**/__stale-catalog-execution.js*", async route => {
+    staleExecutions += 1;
+    const label = new URL(route.request().url()).searchParams.get("case") || "unknown";
+    await route.fulfill({
+      status: 200,
+      contentType: "text/javascript",
+      body: `globalThis.GRANT_CATALOG=Object.freeze({
+        schema_version: 3,
+        generated_at: globalThis.GRANT_CATALOG_METADATA.generated_at,
+        record_count: globalThis.GRANT_CATALOG_METADATA.record_count,
+        status_counts: globalThis.GRANT_CATALOG_METADATA.status_counts,
+        opportunities: [],
+        search_index: { document_count: 0, postings: {} },
+        stale_execution: ${JSON.stringify(label)}
+      });`,
+    });
+  });
   await page.route("**/data/opportunities.js*", async route => {
     catalogRequests += 1;
+    catalogUrls.push(new URL(route.request().url()));
+    await requestGates[catalogRequests - 1].promise;
     if (catalogRequests === 1) {
-      await releaseStalledRequest.promise;
       await route.abort().catch(() => {});
+      return;
+    }
+    if (catalogRequests === 2) {
+      await route.fulfill({ status: 503, contentType: "text/plain", body: "retry failed" });
       return;
     }
     await route.continue();
@@ -343,9 +399,14 @@ test("a stalled catalog request times out once, preserves state, ignores late ev
       message: item.reason?.message || "",
     })));
   });
-  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(1);
+  expect(await page.evaluate(() => globalThis.FUNDING_FINDER_APP.boundedScripts.catalog.timeoutMs))
+    .toBe(120_000);
+  expect(await page.evaluate(() => globalThis.FUNDING_FINDER_APP.boundedScripts.sidecar.timeoutMs))
+    .toBe(15_000);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.delays()))
+    .toEqual([120_000]);
   expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.runAll())).toBe(1);
-  releaseStalledRequest.resolve();
+  requestGates[0].resolve();
   await expect(page.locator("#catalog-error")).toContainText(/catalog request timed out/i);
   const settlements = await page.evaluate(() => globalThis.__CONCURRENT_CATALOG_SETTLEMENTS);
   expect(settlements.map(item => item.status)).toEqual(["rejected", "rejected"]);
@@ -361,10 +422,67 @@ test("a stalled catalog request times out once, preserves state, ignores late ev
   }))).toMatchObject({
     catalog: undefined,
     scriptConnected: false,
-    snapshot: { state: "failed", requests: 1, executions: 0, initializations: 0 },
+    snapshot: {
+      state: "failed",
+      requests: 1,
+      executions: 0,
+      initializations: 0,
+      catalogScriptCleanups: 1,
+    },
   });
+
+  await executeStaleCatalogAttempt(page, "before-retry");
+  expect(await page.evaluate(() => ({
+    catalog: globalThis.GRANT_CATALOG,
+    snapshot: globalThis.FUNDING_CATALOG_LOADER.getSnapshot(),
+  }))).toMatchObject({
+    catalog: undefined,
+    snapshot: { quarantinedCatalogAssignments: 1 },
+  });
+
   await page.locator("#catalog-retry").click();
+  await expect.poll(() => catalogRequests).toBe(2);
+  await executeStaleCatalogAttempt(page, "during-failed-retry");
+  expect(await page.evaluate(() => globalThis.GRANT_CATALOG)).toBeUndefined();
+  requestGates[1].resolve();
+  await expect(page.locator("#catalog-error")).toContainText(/could not be downloaded/i);
+  await expect(page.locator("#query")).toHaveValue("hydrogen catalysis timeout");
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot()))
+    .toMatchObject({
+      state: "failed",
+      requests: 2,
+      executions: 0,
+      initializations: 0,
+      metadataRefreshes: 1,
+      catalogScriptCleanups: 2,
+      quarantinedCatalogAssignments: 2,
+    });
+
+  await page.locator("#catalog-retry").click();
+  await expect.poll(() => catalogRequests).toBe(3);
+  await page.evaluate(() => {
+    globalThis.__CONCURRENT_RETRY_SETTLEMENTS = Promise.allSettled([
+      globalThis.FUNDING_CATALOG_LOADER.ensureCatalogReady(),
+      globalThis.FUNDING_CATALOG_LOADER.ensureCatalogReady(),
+    ]).then(items => items.map(item => item.status));
+  });
+  await executeStaleCatalogAttempt(page, "immediately-before-active-load");
+  expect(await page.evaluate(() => globalThis.GRANT_CATALOG)).toBeUndefined();
+  requestGates[2].resolve();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(await page.evaluate(() => globalThis.__CONCURRENT_RETRY_SETTLEMENTS))
+    .toEqual(["fulfilled", "fulfilled"]);
+  const acceptedCatalog = await page.evaluate(() => ({
+    generatedAt: globalThis.GRANT_CATALOG?.generated_at,
+    recordCount: globalThis.GRANT_CATALOG?.record_count,
+  }));
+  expect(acceptedCatalog.recordCount).toBeGreaterThan(1000);
+  await executeStaleCatalogAttempt(page, "after-successful-retry");
+  expect(await page.evaluate(() => ({
+    generatedAt: globalThis.GRANT_CATALOG?.generated_at,
+    recordCount: globalThis.GRANT_CATALOG?.record_count,
+    staleExecution: globalThis.GRANT_CATALOG?.stale_execution,
+  }))).toEqual({ ...acceptedCatalog, staleExecution: undefined });
   const beforeLateEvents = await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot());
   await page.evaluate(() => {
     globalThis.__TIMED_OUT_CATALOG_SCRIPT.dispatchEvent(new Event("load"));
@@ -373,13 +491,20 @@ test("a stalled catalog request times out once, preserves state, ignores late ev
   expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot()))
     .toEqual(beforeLateEvents);
   expect(await page.evaluate(() => globalThis.GRANT_CATALOG?.record_count)).toBeGreaterThan(1000);
-  expect(catalogRequests).toBe(2);
+  expect(catalogRequests).toBe(3);
+  expect(staleExecutions).toBe(4);
+  expect(catalogUrls[0].searchParams.has("recovery")).toBe(false);
+  expect(catalogUrls[1].searchParams.has("recovery")).toBe(true);
+  expect(catalogUrls[2].searchParams.has("recovery")).toBe(true);
+  expect(catalogUrls[1].href).not.toBe(catalogUrls[2].href);
   expect(beforeLateEvents).toMatchObject({
     state: "ready",
-    requests: 2,
+    requests: 3,
     executions: 1,
     initializations: 1,
-    metadataRefreshes: 1,
+    metadataRefreshes: 2,
+    catalogScriptCleanups: 3,
+    quarantinedCatalogAssignments: 4,
   });
 });
 
@@ -420,7 +545,8 @@ test("a stalled topic sidecar fails initialization cleanly and a fresh bounded r
       code: item.reason?.code || "",
     })));
   });
-  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(1);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.delays()))
+    .toEqual([15_000]);
   expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.runAll())).toBe(1);
   releaseStalledRequest.resolve();
   await expect(page.locator("#catalog-error")).toContainText(/topic catalog request timed out/i);
@@ -471,7 +597,7 @@ test("a stalled topic sidecar fails initialization cleanly and a fresh bounded r
   });
 });
 
-test("catalog and topic scripts completing before the controlled deadline clear their timers", async ({ page }) => {
+test("a healthy catalog may complete after 15 seconds and both asset timers still clean up", async ({ page }) => {
   mockHybrid(page);
   await installConnection(page, { saveData: true, effectiveType: "4g" });
   await installScriptClock(page);
@@ -486,6 +612,11 @@ test("catalog and topic scripts completing before the controlled deadline clear 
   await expect.poll(() => page.evaluate(() => (
     globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending()
   ))).toBe(1);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.delays()))
+    .toEqual([120_000]);
+  expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.advance(15_001)))
+    .toBe(0);
+  await expect(page.locator("#search-status")).toHaveText("Preparing funding catalog…");
   gate.resolve();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
   expect(await page.evaluate(() => globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending())).toBe(0);

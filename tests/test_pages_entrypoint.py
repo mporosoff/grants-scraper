@@ -243,7 +243,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            'assets/catalog-loader.js?v=lazy-catalog-timeout-20260826',
+            'assets/catalog-loader.js?v=lazy-catalog-ownership-20260826',
             explorer_html,
         )
         release_version = "filters-2026-08-13"
@@ -274,7 +274,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(f'assets/search-v2-config.js?v={search_v2_version}', explorer_html)
         self.assertIn(
-            'assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout1',
+            'assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2',
             explorer_html,
         )
         self.assertIn(
@@ -300,7 +300,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=lazy-catalog-timeout-20260826"></script>',
+            '<script src="./assets/app.js?v=lazy-catalog-ownership-20260826"></script>',
             explorer_html,
         )
         self.assertIn(

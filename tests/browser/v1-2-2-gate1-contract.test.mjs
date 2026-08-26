@@ -32,6 +32,18 @@ function runSmoke(workerUrl) {
   });
 }
 
+function assertSafeFundingFinderTopicFallback(fallback) {
+  const approvedTimeoutRethrow = /if \(_topicError\?\.code === "topic_sidecar_timeout"\) throw _topicError;/;
+  assert.match(fallback, approvedTimeoutRethrow);
+  const ordinaryFailurePath = fallback.replace(approvedTimeoutRethrow, "");
+  assert.match(ordinaryFailurePath, /topicLayerFailed = true/);
+  assert.match(ordinaryFailurePath, /nextTopicLayerAvailable = false/);
+  assert.doesNotMatch(
+    ordinaryFailurePath,
+    /catalog-error|throw|state\.ready\s*=\s*false/,
+  );
+}
+
 async function withMockWorker({ failEmbed = false } = {}, callback) {
   const observed = [];
   const server = createServer((request, response) => {
@@ -94,9 +106,7 @@ test("Funding Finder keeps parent search available when the topic sidecar fails"
   assert.ok(parentInit >= 0 && parentInit < sidecarLoad);
   assert.match(searchPage, /id="topic-layer-warning"[^>]*role="status"/);
   const fallback = app.match(/catch \(_topicError\) \{[\s\S]*?\n        \}/)?.[0] || "";
-  assert.match(fallback, /topicLayerFailed = true/);
-  assert.match(fallback, /nextTopicLayerAvailable = false/);
-  assert.doesNotMatch(fallback, /catalog-error|throw|state\.ready\s*=\s*false/);
+  assertSafeFundingFinderTopicFallback(fallback);
   const catalogInit = app.slice(
     app.indexOf("async function initializeCatalog(candidate)"),
     app.indexOf("function initializeShell()"),
@@ -107,6 +117,25 @@ test("Funding Finder keeps parent search available when the topic sidecar fails"
   assert.match(catalogInit, /Parent-level Strong search, filters, saved opportunities, and exports still work/);
   assert.match(app, /topicLayerAvailable\s*\?\s*"proxy_unconfigured"\s*:\s*"topic_layer_unavailable"/);
   assert.match(catalogInit, /APP_CONFIG\?\.flags\?\.searchV2[\s\S]*?&& nextChildCatalog[\s\S]*?&& nextChildSearchEngine/);
+});
+
+test("Funding Finder topic fallback contract rejects unrelated failure escalation", () => {
+  const approved = 'if (_topicError?.code === "topic_sidecar_timeout") throw _topicError;';
+  for (const prohibited of [
+    "throw new Error('unrelated');",
+    'document.querySelector("#catalog-error").hidden = false;',
+    "state.ready = false;",
+    "if (_topicError) throw _topicError;",
+  ]) {
+    assert.throws(() => assertSafeFundingFinderTopicFallback(`
+      catch (_topicError) {
+        ${approved}
+        ${prohibited}
+        topicLayerFailed = true;
+        nextTopicLayerAvailable = false;
+      }
+    `));
+  }
 });
 
 test("Team Match keeps parent-only matching and disables hosted enhancement on sidecar failure", () => {

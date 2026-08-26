@@ -107,14 +107,22 @@ test("loader owns one bounded lifecycle without executable prefetch or unsafe co
   assert.doesNotMatch(sources.loader, /\beval\s*\(|new Function|createObjectURL|blob:/);
 });
 
-test("every first-use catalog script shares a deterministic bounded termination contract", () => {
-  assert.match(sources.config, /scriptTimeoutMs/);
-  assert.match(sources.config, /15_000/);
+test("first-use assets have independent deterministic timeout and ownership contracts", () => {
+  assert.match(sources.config, /catalog: boundedScript\(600_000/);
+  assert.match(sources.config, /sidecar: boundedScript\(60_000/);
+  assert.match(sources.config, /FUNDING_FINDER_CATALOG_TIMEOUT_MS/);
+  assert.match(sources.config, /FUNDING_FINDER_SIDECAR_TIMEOUT_MS/);
   assert.match(sources.config, /FUNDING_FINDER_SCRIPT_CLOCK/);
   assert.match(sources.loader, /The funding catalog request timed out/);
   assert.match(sources.loader, /removeEventListener\("load", onLoad\)/);
   assert.match(sources.loader, /removeEventListener\("error", onError\)/);
-  assert.match(sources.loader, /BOUNDED_SCRIPT\.clearTimeout\(timeout\)/);
+  assert.match(sources.loader, /BOUNDED_SCRIPTS\.catalog\.clearTimeout\(timeout\)/);
+  assert.match(sources.loader, /BOUNDED_SCRIPTS\.sidecar\.clearTimeout\(timeout\)/);
+  assert.match(sources.loader, /fundingCatalogAttempt = attempt\.id/);
+  assert.match(sources.loader, /document\.currentScript\?\.dataset\?\.fundingCatalogAttempt/);
+  assert.match(sources.loader, /quarantinedCatalogAssignments/);
+  assert.doesNotMatch(sources.loader, /if \(globalThis\.GRANT_CATALOG\) return/);
+  assert.doesNotMatch(sources.loader, /delete globalThis\.GRANT_CATALOG/);
   assert.match(sources.subtopic, /topic_sidecar_timeout/);
   assert.match(sources.subtopic, /boundedScript\.clearTimeout\(timeout\)/);
   assert.match(sources.subtopic, /sidecarPromise = null/);

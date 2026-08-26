@@ -28,7 +28,7 @@
       return Promise.resolve(globalThis.SUBTOPIC_CATALOG);
     }
     if (sidecarPromise) return sidecarPromise;
-    const boundedScript = globalThis.FUNDING_FINDER_APP?.boundedScript;
+    const boundedScript = globalThis.FUNDING_FINDER_APP?.boundedScripts?.sidecar;
     const operation = new Promise((resolve, reject) => {
       const script = document.createElement("script");
       const catalogVersion = encodeURIComponent(
