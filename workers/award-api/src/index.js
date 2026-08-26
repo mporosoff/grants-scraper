@@ -5,6 +5,7 @@ import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
+import { federalFiscalYear } from "./year-filter.js";
 
 const MAX_REQUEST_BYTES = 16_384;
 const MAX_OFFSET = 1_000;
@@ -204,19 +205,23 @@ async function sha256Hex(value) {
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
-async function sourceCacheRequest(source, request) {
-  const identity = await sha256Hex(stableJson({
+async function sourceCacheRequest(source, request, asOf) {
+  const cacheIdentity = {
     source,
     adapter_version: ADAPTER_VERSIONS[source],
     criteria: request.publicCriteria,
     limit: request.limit,
     offset: request.offset,
-  }));
+  };
+  if (source === "NIH" && request.publicCriteria.year_start && !request.publicCriteria.year_end) {
+    cacheIdentity.nih_fiscal_year_ceiling = federalFiscalYear(asOf);
+  }
+  const identity = await sha256Hex(stableJson(cacheIdentity));
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
-async function runSource({ source, request, fetchImpl, cache, cacheTtl, now }) {
-  const key = await sourceCacheRequest(source, request);
+async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf }) {
+  const key = await sourceCacheRequest(source, request, asOf);
   if (cache) {
     try {
       const cached = await cache.match(key);
@@ -228,7 +233,7 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, now }) {
       // A cache outage must not make either official source unavailable.
     }
   }
-  const options = { limit: request.limit, offset: request.offset, now };
+  const options = { limit: request.limit, offset: request.offset, now: () => new Date(asOf) };
   const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
@@ -447,6 +452,7 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     };
     const sourceRequest = { ...normalized, publicCriteria: normalized.publicCriteria };
     const cacheStore = cache || globalThis.caches?.default || null;
+    const asOf = now().toISOString();
     const settled = await Promise.all(normalized.sources.map(async source => {
       try {
         return await runSource({
@@ -455,7 +461,7 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           fetchImpl,
           cache: cacheStore,
           cacheTtl: config.cacheTtl,
-          now,
+          asOf,
         });
       } catch (cause) {
         const sourceError = cause instanceof AwardSourceError
