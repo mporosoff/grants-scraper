@@ -324,8 +324,9 @@ For implementation pull requests, use this review and test workflow:
   practical. After addressing it, request one final review of the exact head.
 - Require one complete protected Python, browser-contract, frozen-query,
   frozen-P9, and Playwright product/accessibility run on the exact final commit.
-- If the final exact-head review finds a consequential defect, fix it and rerun
-  that final gate. Otherwise, do not add ceremonial reruns.
+- If the final exact-head review finds a consequential defect, fix it, request
+  another exact-head review, and rerun that final gate. Otherwise, do not add
+  ceremonial reruns.
 - Never merge using green checks from an earlier commit. After merge, the same
   complete Tests workflow runs once more on protected `main`.
 
