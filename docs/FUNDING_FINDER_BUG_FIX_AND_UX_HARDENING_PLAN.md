@@ -5,7 +5,7 @@
 **Repository:** `mporosoff/grants-scraper`
 **Audited baseline:** protected `main` at `e9ddcda995dd9f1fe5462bf8fde81a2d9922fc9b`
 **Baseline release architecture:** v1.3.0
-**Purpose:** Correct the twenty confirmed or strongly supported defects identified in the post-implementation backend, GUI, and user-experience audit without reopening completed architecture or adding unrelated product features.
+**Purpose:** Correct the twenty-two confirmed or strongly supported defects identified in the post-implementation backend, GUI, and user-experience audit without reopening completed architecture or adding unrelated product features.
 
 The audited SHA identifies where the findings were established. It is not a command to reset the repository. Every phase must start from the then-current protected `main`, read the complete current implementation, and determine whether earlier work has already changed any affected path. Where this plan and the current implementation differ because a prior phase has merged, preserve the completed phase and apply the remaining requirements to the new state.
 
@@ -61,9 +61,9 @@ The following are invariants across all four phases:
 | ID | Phase | Severity | Finding | Primary paths |
 |---|---:|---|---|---|
 | `FF-BUG-001` | 1 | High | Missing award amounts can render as `$0`; missing award years can enter summaries as year `0`. | `assets/funded-awards.js`, `assets/institutional-intelligence.js` |
-| `FF-BUG-002` | 3 | High | Local institution validation can reduce a source page and incorrectly prevent access to later valid NSF/DOE results. | `assets/funded-awards-core.js`, award adapters |
+| `FF-BUG-002` | 3 | High | PR #56 exposed independent source-specific Load more controls, but adapter offsets and `has_more` can still be applied before local institution validation, hiding later valid NSF/DOE awards. | `assets/funded-awards-core.js`, award adapters |
 | `FF-BUG-003` | 2 | High | Recreating an inactive saved-search alert can reuse stale qualification and evaluation baseline state. | `workers/alerts/src/store.js`, `index.js`, `evaluator.js` |
-| `FF-BUG-004` | 3 | High | Institutional Intelligence is effectively a first-page sampler; selecting DOE also reduces NSF/NIH to the DOE page limit. | `assets/institutional-intelligence*.js`, award API client/server |
+| `FF-BUG-004` | 3 | High | **Complete in PR #56.** Institutional Intelligence now has independent NSF/NIH/DOE Load more controls, source-specific page sizes, accumulated deduplicated results, failure-safe retry state, shared-URL restoration, dropdown drill-downs, and mobile/accessibility coverage. | `assets/institutional-intelligence*.js`, Funded Awards e2e/contracts |
 | `FF-BUG-005` | 4 | High | The external-source refresh layer is repeatedly degraded and the recurring source-specific cause remains unresolved. | refresh workflow, source adapters/tools, issue `#30` |
 | `FF-BUG-006` | 2 | High | A multi-subscription weekly digest uses the first subscription for unsubscribe semantics and can confirm a broader unsubscribe than occurred. | alert evaluator, email templates, unsubscribe routes |
 | `FF-BUG-007` | 2 | Medium-High | Alerts `/health` can return HTTP 200 when outbound delivery is disabled or the provider is unconfigured. | `workers/alerts/src/index.js`, deployment gate |
@@ -71,8 +71,8 @@ The following are invariants across all four phases:
 | `FF-BUG-009` | 2 | Medium-High | A suppressed subscriber can be re-verified into an apparently active state while remaining excluded from evaluation and delivery. | alert store, verification/manage routes |
 | `FF-BUG-010` | 4 | Medium-High | Alert rate limiting is non-atomic; award/ROR abuse controls are not represented in application code or repository-managed infrastructure. | alert store, award Worker, deployment config |
 | `FF-BUG-011` | 1 | Medium | Saved-item actions can appear successful even when local storage rejected the write. | `assets/saved.js`, `assets/app.js` |
-| `FF-BUG-012` | 3 | Medium | Ambiguous short institution acronyms can be silently auto-selected from ROR results. | `assets/institutional-intelligence-core.js`, UI controller |
-| `FF-BUG-013` | 3 | Medium | ROR aliases/acronyms are discovered in the browser but discarded before source-specific award retrieval. | `ror.js`, `institutions.js`, award Worker/client |
+| `FF-BUG-012` | 3 | Medium | PR #56 preserved accessible ROR selection, URL, and fallback behavior, but a short acronym or multiple exact ROR alias/acronym matches can still resolve silently without explicit selection. | `assets/institutional-intelligence-core.js`, UI controller |
+| `FF-BUG-013` | 3 | Medium | PR #56 preserves selected institution state in the browser, but validated ROR aliases/acronyms still degrade to a generic server identity before source-specific award retrieval for uncurated institutions. | `ror.js`, `institutions.js`, award Worker/client |
 | `FF-BUG-014` | 1 | Medium | Investigator drill-down can appear to select a PI while the retained opportunity lookup silently controls the request. | `assets/funded-awards.js` |
 | `FF-BUG-015` | 1 | Medium | Combined multi-source pagination labels imply one contiguous result range even though offset is applied separately to each source. | `assets/funded-awards.js` |
 | `FF-BUG-016` | 1 | Medium | Several GUI failure states collapse unsupported, invalid, rate-limited, and unavailable outcomes into the same message. | funded-award UI, Institutional Intelligence, alert dialog |
@@ -80,6 +80,8 @@ The following are invariants across all four phases:
 | `FF-BUG-018` | 4 | Low-Medium | Operational D1 rows have no visible bounded retention/cleanup policy. | alert migrations, store, scheduler |
 | `FF-BUG-019` | 4 | Medium security hardening | Long-lived manage capability tokens are stored in plaintext because future emails reuse them. | alert schema, crypto, store, email link generation |
 | `FF-BUG-020` | 4 | Low | Evaluation runs record the scheduled start time as completion time, eliminating useful duration evidence. | alert scheduler, store/schema |
+| `FF-BUG-021` | 3 | High | Cross-source investigator name variants fragment identities, counts, and drill-down results; one raw name is currently sent indiscriminately to every source. | `assets/institutional-intelligence*.js`, award Worker/adapters |
+| `FF-BUG-022` | 3 | High | “Ask about this institution” translates a question into filters but does not answer it from validated public-award evidence. | `assets/institutional-intelligence*.js`, browser-local AI provider |
 
 A finding may be marked complete only after its acceptance criteria below are satisfied. Passing unrelated tests is not sufficient.
 
@@ -544,14 +546,21 @@ Record:
 
 ## Phase 3 objective
 
-Make institution-scoped award retrieval and Institutional Intelligence navigation complete within explicit bounded source paging, while preserving source-native order, source isolation, ROR authority, and truthful result-scope language.
+Make institution-scoped award retrieval, institution identity, investigator identity, and institutional questions complete and evidence-grounded within explicit bounded source paging, while preserving source-native order, source isolation, ROR authority, public-award provenance, and truthful result-scope language.
 
 ## Phase 3 in scope
 
+Completed post-Phase-1 hardening that this phase must preserve:
+
+- `FF-BUG-004` - completed by PR #56 at merge SHA `0fbf076551eed1529304af8602270780bebe817e`.
+
+Remaining Phase 3 implementation findings:
+
 - `FF-BUG-002`
-- `FF-BUG-004`
 - `FF-BUG-012`
 - `FF-BUG-013`
+- `FF-BUG-021`
+- `FF-BUG-022`
 
 ## Phase 3 out of scope
 
@@ -559,12 +568,14 @@ Make institution-scoped award retrieval and Institutional Intelligence navigatio
 - Do not claim complete historical coverage when an upstream source caps or truncates results.
 - Do not remove local institution validation merely to fill pages.
 - Do not weaken exact current-opportunity mappings.
+- Do not add collaborator recommendations, investigator ranking, fit scoring, inferred contacts, or facts from model pretraining.
+- Do not create another credential store or server-side AI proxy.
 
 ## `FF-BUG-002` - Institution-filtered paging must expose later valid records
 
-### Current defect
+### Current defect after PR #56
 
-NSF and DOE can return a source page that is then reduced by local institution identity validation. The browser currently requires `result_count >= limit` before enabling Next. Valid records on later source pages can become unreachable.
+PR #56 replaced combined navigation with independent NSF/NIH/DOE Load more controls and made those controls follow source-specific `has_more` state. The remaining defect is below that UI: NSF and DOE can return raw source pages that are reduced by deterministic local institution validation, while adapter offsets and exhaustion are still derived from the raw sequence. Valid records on later upstream pages can therefore remain absent from the normalized page or receive an incorrect `has_more = false` response.
 
 ### Required adapter/API behavior
 
@@ -581,8 +592,9 @@ NIH already performs grouped upstream iteration and local filtering; inspect and
 
 ### Required browser behavior
 
-- `canPageForward` must use the normalized source `has_more` contract and must not require the current post-filtered count to equal the requested limit.
-- Empty intermediate pages must have a bounded recovery behavior and must not create an infinite Next loop.
+- Standalone Funded Awards and Institutional Intelligence must consume the same normalized, post-validation `offset` and `has_more` contract.
+- Preserve PR #56's independent source-specific Load more controls, accumulated/deduplicated records, submitted-request state, shared-URL restoration, retained records after later-page failure, and explicit retry behavior.
+- An empty normalized page must truthfully reflect source exhaustion or the documented safety bound and must not create an infinite Load more loop.
 
 ### Likely implementation paths
 
@@ -607,23 +619,30 @@ Use deterministic fixtures where:
 
 A user can reach every valid result within the product's documented source bound even when local validation removes earlier raw rows.
 
-## `FF-BUG-004` - Institutional Intelligence needs independent source paging
+## `FF-BUG-004` - Institutional Intelligence independent source paging
 
-### Current defect
+### Completion status
+
+Completed by [PR #56](https://github.com/mporosoff/grants-scraper/pull/56), merged as `0fbf076551eed1529304af8602270780bebe817e`. Phase 3 must preserve this behavior while correcting the lower-level normalized paging and identity contracts.
+
+### Pre-PR-#56 defect
 
 Institutional Intelligence always requests offset zero. When DOE is among the selected sources, the common request limit is capped at DOE's ten-result limit, reducing NSF and NIH to ten as well. Aggregates therefore summarize a small first-page sample with no way to load additional source records.
 
-### Required behavior
+### Completed behavior that must remain unchanged
 
 - DOE's per-request cap must not reduce the NSF or NIH page size.
 - Maintain independent source paging state because sources have different limits, totals, and `has_more` values.
-- Provide a clear bounded **Load more** or source-specific pagination workflow.
+- Provide independent bounded NSF, NIH, and DOE **Load more** controls with source-specific page sizes.
 - Aggregates update over all records loaded in the current session and deduplicate by `source + award_id`.
 - Scope text must state how many normalized records are loaded and which sources still have additional results.
 - Source-specific errors do not discard records already loaded from healthy sources.
 - Shared URL state restores the selected institution and filters. It need not encode an unbounded loaded-record cache, but navigation behavior must be deterministic and documented.
 - Investigator and program drill-down operate on the actually loaded data and submit visible structured filters.
 - No loop may retrieve an unlimited institution history automatically. Paging remains user-driven or subject to a documented strict bound.
+- The exact submitted request, not unsent form edits, controls each later page; shared URLs and Back/Forward restore the submitted first-page state.
+- A later-page failure retains already loaded records and offers a source-specific retry of the same request/offset.
+- Investigator and program summaries remain accessible native dropdowns with explicit currently-loaded counts on desktop and at 320 px/390 px.
 
 ### Implementation options
 
@@ -647,11 +666,17 @@ Do not force unrelated Funded Awards callers into a new architecture without nec
 
 Institutional Intelligence is no longer a fixed first-page sampler and never implies that a loaded subset is a complete institutional history.
 
+### Completion evidence
+
+- PR #56 added independent source paging, source-appropriate NSF/NIH/DOE limits, accumulation/deduplication, retry-safe partial failure, submitted-request and history restoration, dropdown drill-downs, and mobile/accessibility coverage.
+- Its exact merged SHA passed 298/298 browser contracts, 773/773 Python validations, the 37-query and 50-case frozen gates, 22/22 no-drift artifacts, and 47/47 Playwright tests.
+- Production Pages and Award Worker deployment run `32909055943` passed health, ROR, exact NSF/NIH/DOE smokes, and protected-main checks; Worker version `7faebbc9-08e4-4ad5-816a-cbed80d7c4b7`, rollback `a3735dbe-0eab-4035-92bd-f66b8e2f2f5c`.
+
 ## `FF-BUG-012` - Ambiguous institution acronyms require explicit selection
 
-### Current defect
+### Current defect after PR #56
 
-ROR ranking deliberately favors U.S. educational organizations, and `chooseInstitution()` can select the first exact acronym candidate. Short ambiguous acronyms may therefore resolve silently to the wrong institution.
+PR #56 preserved the accessible ROR listbox, visible location, keyboard navigation, Escape behavior, shared URLs, and registry-unavailable fallback. Its selection helper can still treat the first exact acronym candidate as resolved. Short acronyms or multiple exact alias/acronym candidates may therefore resolve silently to the wrong institution.
 
 ### Required behavior
 
@@ -672,9 +697,9 @@ No ambiguous institution acronym is silently converted into a canonical institut
 
 ## `FF-BUG-013` - Preserve validated ROR identity through award retrieval
 
-### Current defect
+### Current defect after PR #56
 
-The browser receives canonical name, aliases, acronyms, and ROR ID, but selected state retains only a subset. The Worker then creates a generic identity from the canonical name unless the institution is in the small curated source-identity configuration. Source-listed aliases such as medical-center or legal grantee names can be missed.
+PR #56 preserves the selected institution's canonical browser identity, visible location, shared URL, and submitted search state. The Worker still creates a generic identity from the submitted canonical name unless the institution is in the small curated source-identity configuration. Validated ROR aliases/acronyms and source-listed medical-center or legal grantee names can therefore be lost before source-specific querying and post-validation.
 
 ### Required behavior
 
@@ -709,18 +734,138 @@ The browser receives canonical name, aliases, acronyms, and ROR ID, but selected
 
 A selected ROR identity remains meaningful at the Worker and source-adapter layers rather than degrading to one display string.
 
+## `FF-BUG-021` - Cross-source investigator identity must be conservative and complete
+
+### Current defect
+
+Institutional Intelligence groups and drills into investigators using source-published display strings. Case, punctuation, order, honorific, suffix, and middle-name variants can fragment one supported person into several dropdown entries. Selecting one entry can then send that single raw spelling to every agency, producing inconsistent or unrelated drill-down results.
+
+### Required identity model
+
+Separate every source-published investigator name from the normalized investigator identity used for grouping and retrieval. Preserve every original name and its source, award, and stable identifier/email provenance.
+
+Normalize for deterministic comparison across:
+
+- case and whitespace;
+- punctuation around initials;
+- `First Middle Last` and `Last, First Middle` order;
+- common honorifics and suffixes;
+- full middle names versus initials;
+- apostrophes and hyphenated family names.
+
+Group only with this evidence order:
+
+1. Stable source person identifier.
+2. Identical direct source-published email.
+3. Exact normalized complete name at the same resolved institution.
+4. Same first and family names where one record omits the middle name/initial, only when the institution matches and there is no conflicting identifier, email, or nonempty middle initial/name.
+
+Never merge conflicting middle initials solely because first and family names match. Never use fuzzy similarity, research topics, an LLM, investigator ranking, or inferred identity evidence.
+
+### Required dropdown and retrieval behavior
+
+- A safe group appears once in the investigator dropdown and uses the most complete supported source name as its label.
+- Original source variants and provenance are exposed accessibly.
+- Counts explicitly describe currently loaded, deduplicated awards in the group.
+- Selecting a group uses its normalized identity rather than blindly submitting one display string to every agency.
+- Construct a bounded set of source-appropriate name variants for NSF, NIH, and DOE, union responses, deduplicate by `source + award_id`, and post-validate returned investigators against the selected identity.
+- Preserve source isolation, normalized pagination, current institution/year/agency filters, submitted-request state, shared URLs, and Back/Forward behavior.
+- A click must not replace a displayed one-project group with unrelated common-name records.
+
+### Required regression coverage
+
+The deterministic Marc fixture must prove that two NSF awards published under `Marc Porosoff` and one DOE award published under `Marc D Porosoff` form one safe group and return all three awards when selected.
+
+Also cover:
+
+- `Marc D. Porosoff`, `Porosoff, Marc D`, and `Dr. Marc D. Porosoff`;
+- a full middle name versus its initial;
+- conflicting middle initials;
+- conflicting direct emails or stable identifiers;
+- common first/family names at one and different institutions;
+- apostrophes, hyphens, honorifics, and common suffixes;
+- normalized paging during source-variant retrieval;
+- shared URLs and Back/Forward restoration;
+- accessible variant disclosure and truthful loaded-award counts.
+
+### Acceptance criteria
+
+Supported cross-source variants form one conservative investigator identity and complete bounded drill-down, while conflicting or weakly evidenced common names remain separate.
+
+## `FF-BUG-022` - Institutional questions must answer from validated award evidence
+
+### Current defect
+
+“Ask about this institution” currently makes one browser-local provider call that translates the question into visible filters, then runs the structured award search. It does not provide a direct answer, supporting award citations, limitations, or an explicit evidence scope.
+
+### Required evidence pipeline
+
+1. The browser-local LLM translates the original question into visible structured filters plus a bounded answer intent.
+2. The existing Award Worker retrieves authoritative NSF, NIH, and DOE records under the normal source and identity contracts.
+3. Deterministic browser code answers counts, investigators, programs, years, and award lists whenever possible.
+4. A second bounded browser-local LLM call may synthesize only returned titles and bounded abstract excerpts when narrative interpretation is useful.
+5. The result displays the original question, transparent filters, direct answer, supporting award evidence, limitations, and the complete loaded award cards.
+
+Every material model-generated claim must cite evidence IDs from the exact returned award set. Reject unknown IDs and fall back to the deterministic summary. Never render model HTML, unsupported factual claims, or facts from model pretraining.
+
+### Evidence and result-scope contract
+
+- Bound the evidence pack by record count, allowed public fields, per-record abstract length, and total serialized payload.
+- Send only public award fields needed for the question.
+- Disclose the number of normalized awards loaded, sources searched, unavailable/unsupported sources, additional pages, and whether the evidence set was bounded or truncated.
+- Never imply complete institutional history while any source reports more pages or while the evidence pack is truncated.
+- Loading more records retains the existing answer and does not automatically make another paid provider call.
+- Provide an explicit **Update answer using loaded records** control when the loaded evidence changes.
+- Structured search and deterministic summaries remain usable without a provider key.
+
+### Browser-local provider and privacy contract
+
+Reuse the existing Funding Finder browser-local provider, model, and credential store. Do not create another credential store, Worker-side AI proxy, or server-held provider key.
+
+Update the disclosure so an explicit institutional AI question may send only:
+
+- the original question;
+- the selected public institution identity;
+- the visible structured filters and bounded answer intent;
+- a bounded set of returned public award identifiers, titles, program/year/investigator fields, and abstract excerpts needed for the answer.
+
+It must never send profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys.
+
+### Required deterministic answer coverage
+
+Use fixtures and mock-provider responses for:
+
+- “Who has DOE BES awards?”;
+- “Which programs funded catalysis?”;
+- project counts and award years;
+- narrative synthesis from returned titles/abstract excerpts;
+- valid evidence citations and fabricated/unknown evidence IDs;
+- partial source failures and additional pages remaining;
+- explicit answer refresh after Load more and no automatic second provider call;
+- malformed, rejected, or failed provider responses;
+- no-key structured search and deterministic answers;
+- privacy payload field/length boundaries;
+- HTML escaping, keyboard operation, live-region announcements, and 320 px/390 px layouts.
+
+### Acceptance criteria
+
+An institutional question produces a transparent answer supported only by validated loaded public awards, degrades to deterministic evidence when AI fails or is absent, and never hides source or paging limitations.
+
 ## Phase 3 gate
 
 Before merge:
 
-1. Add adapter fixtures proving post-filtered pagination across multiple raw pages.
-2. Expand `award-api-contract`, funded-award, and Institutional Intelligence contract tests.
-3. Run bounded live NSF, NIH, DOE, and ROR checks against non-sensitive public queries. Record source URLs, retrieval time, counts, and any upstream caps; do not use live responses as the only regression test.
-4. Run `pnpm test:contracts` and `pnpm test:e2e`.
-5. Run `python -m tools.run_refresh_validation` and `bash tools/verify_no_drift.sh`.
-6. Run the existing frozen query/scoring checks without rebuilding vectors.
-7. Deploy the Award API through the normal workflow, verify health and CORS from the production Pages origin, and smoke test each source against the final merged SHA.
-8. Verify Institutional Intelligence at 320 px and 390 px, keyboard-only institution selection, Load more/pagination, drill-down, and Back/Forward state.
+1. Add adapter fixtures proving sparse post-validation pagination, normalized offsets, truthful `has_more`, source exhaustion, safety-bound behavior, and retained raw diagnostics across multiple upstream pages.
+2. Expand `award-api-contract`, Funded Awards, and Institutional Intelligence contracts for ambiguous ROR selection, server-side identity resolution/cache, curated identifiers, trusted aliases, rejected mismatches, and registry fallback.
+3. Add deterministic investigator fixtures for every `FF-BUG-021` name/identifier/email conflict case, including the three-award Marc example, source-variant paging, shared URLs, and Back/Forward behavior.
+4. Add deterministic institutional-question and mock-provider fixtures for counts, investigators, programs, years, narrative synthesis, evidence validation/rejection, source limitations, explicit refresh, no automatic second call, no-key use, failures, escaping, and privacy payload bounds.
+5. Run syntax checks for every modified browser and Worker JavaScript file, `pnpm test:contracts`, and the reconciled Phase 3 targeted suites during iteration.
+6. Run bounded live NSF, NIH, DOE, ROR, University of Rochester, and Marc Porosoff checks against non-sensitive public queries. Record source URLs, retrieval time, normalized/raw counts, paging bounds, and upstream caps; live responses supplement but never replace deterministic fixtures.
+7. Run `pnpm test:e2e`, including desktop, 390 px, and 320 px Institutional Intelligence, keyboard-only ROR selection, ambiguous selection, Load more/retry, investigator/program drill-down, evidence answers, answer refresh, shared URL, and Back/Forward state.
+8. Run `python -m tools.run_refresh_validation` and `bash tools/verify_no_drift.sh`.
+9. Run the existing frozen query and P9 scoring checks without rebuilding vectors.
+10. Verify no profile, CV, ORCID publication text, uploaded document, saved note, pursuit state, alert data, unrelated chat, or provider key enters an award request or institutional-question provider payload.
+11. Complete the normal protected PR and exact-final-commit review workflow. Deploy the Award API through its existing workflow; verify health, CORS, bounded NSF/NIH/DOE/ROR smokes, Pages equality, and rollback evidence against the exact merged SHA.
 
 ## Phase 3 completion evidence
 
@@ -731,6 +876,8 @@ Record:
 - fixture evidence for later-page valid records;
 - ambiguous acronym behavior;
 - ROR cache/identity behavior;
+- investigator normalization/grouping evidence, conflict behavior, source-variant retrieval bounds, and the three-award Marc result;
+- deterministic and narrative institutional answer contracts, evidence-ID enforcement, payload bounds, explicit refresh behavior, and privacy disclosure;
 - deployed Award Worker version;
 - PR and final `main` SHA;
 - known upstream source caps stated explicitly.
@@ -1020,6 +1167,7 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 | Phase | Status | PR | Final `main` SHA | Tests and workflow evidence | Deployment evidence | Notes / known limitations |
 |---|---|---|---|---|---|---|
 | Phase 1 - Front-end correctness | Complete - 2026-08-25 | [Implementation PR #54](https://github.com/mporosoff/grants-scraper/pull/54); [execution-record PR #55](https://github.com/mporosoff/grants-scraper/pull/55) | `058262102435f240bac3ed0079ae251ef002d283` (implementation and deployment) | Local: 6-file syntax check; 24/24 targeted contracts; 297/297 full browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 scoring; 22-artifact no-drift; 45/45 full Playwright, plus 23/23 final-audit and 9/9 post-review affected-spec reruns. Protected: [reviewed PR Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32887538551) and [post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32888287988) passed. | [Pages](https://github.com/mporosoff/grants-scraper/actions/runs/32888286698) published exact SHA; [Award deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888287950) version `a3735dbe-0eab-4035-92bd-f66b8e2f2f5c`, rollback `b6b6e9d4-e6bf-4a9b-9611-529ea2ccd7a9`; [Alerts deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32888288009) version `ff84d774-40df-43a0-bf54-c866e4f9a844`, rollback `e9346921-bbd3-4988-97cf-8937bdb742f1`; [coordinated search-package publication](https://github.com/mporosoff/grants-scraper/actions/runs/32888287924) version `4e894667-e72b-4cb1-aaa3-a40f4372ac23`, rollback `bb7661b5-d9f1-4df2-8395-384400de39f9`. All health, bounded smoke, and Pages equality gates passed. | Released. Live 390 px checks returned 10 NSF awards and 11 Funding Finder results without overflow or console errors. Phase 3 remains responsible for adapter pagination and institution matching/completeness. No vectors were rebuilt and no ranking/search behavior changed. |
+| Post-Phase-1 Funded Awards / Institutional Intelligence hardening | Complete - 2026-08-25 | [PR #56](https://github.com/mporosoff/grants-scraper/pull/56) | `0fbf076551eed1529304af8602270780bebe817e` | 298/298 browser contracts; 773/773 Python validations; 37-query baseline; 50-case P9 gate; 22/22 no-drift artifacts; 47/47 Playwright tests. [Post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32909055964) passed. | [Pages](https://github.com/mporosoff/grants-scraper/actions/runs/32909053793) published the exact SHA. [Award deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32909055943) version `7faebbc9-08e4-4ad5-816a-cbed80d7c4b7`, rollback `a3735dbe-0eab-4035-92bd-f66b8e2f2f5c`; health, ROR identity, NSF/NIH/DOE smokes, and protected-main stability passed. | `FF-BUG-004` complete. Preserve independent source Load more, source page sizes, accumulated/deduplicated records, failure retention/retry, submitted/shared state, dropdown drill-downs, mobile behavior, and accessibility. Remaining Phase 3 identity and normalized paging findings stay open. |
 | Phase 2 - Alert lifecycle | Complete - 2026-08-25 | [Implementation PR #57](https://github.com/mporosoff/grants-scraper/pull/57); [execution-record PR #59](https://github.com/mporosoff/grants-scraper/pull/59) | `f30ef367d093a94541d9764830b9f6a486ca4da7` (implementation, migration, and deployment) | Local: 24/24 alert matcher tests and 47/47 alert lifecycle/browser contracts. Protected candidate: [PR Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32926393214) passed 776/776 Python, 329/329 browser contracts, the 37-query baseline, the 50-case P9 scoring gate, and 54/54 Playwright product/accessibility tests. [Post-merge Tests](https://github.com/mporosoff/grants-scraper/actions/runs/32927016123) passed on the exact implementation SHA. | [Alerts deployment](https://github.com/mporosoff/grants-scraper/actions/runs/32927016026) applied `0003_phase2_alert_lifecycle.sql`, passed 57/57 release contracts, deployed version `d9a02762-b7c9-4fa8-bef3-9edd9e2d8c0e`, passed delivery-ready health, bounded Worker smoke/CORS, Pages equality, and protected-main stability gates; rollback version `87fdeece-ba4b-4cc8-b2f0-cc541ec7556b`. | Released. No ranking/search behavior or vectors changed. Production happy-path email and destructive unsubscribe were not exercised because the bounded deployment process intentionally creates no user alerts; deterministic provider/lifecycle contracts cover those transitions. Live invalid-capability checks verified truthful verification/manage/unsubscribe responses without creating or changing a user alert; verification/manage probes wrote only their bounded operational rate-limit counters. |
 | Phase 3 - Institution completeness | Not started |  |  |  | Award Worker version/health |  |
 | Phase 4 - Operational hardening | Not started |  |  |  | All Worker versions and final release |  |
@@ -1051,7 +1199,7 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - [x] `FF-BUG-001`
 - [ ] `FF-BUG-002`
 - [x] `FF-BUG-003`
-- [ ] `FF-BUG-004`
+- [x] `FF-BUG-004`
 - [ ] `FF-BUG-005`
 - [x] `FF-BUG-006`
 - [x] `FF-BUG-007`
@@ -1068,6 +1216,8 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - [ ] `FF-BUG-018`
 - [ ] `FF-BUG-019`
 - [ ] `FF-BUG-020`
+- [ ] `FF-BUG-021`
+- [ ] `FF-BUG-022`
 
 For every checked item, the completing PR must cite its regression test and acceptance evidence.
 
@@ -1077,7 +1227,7 @@ For every checked item, the completing PR must cite its regression test and acce
 
 This bug-fix program is complete only when:
 
-1. all twenty finding IDs are checked with evidence;
+1. all twenty-two finding IDs are checked with evidence;
 2. all four phases are merged through protected PRs;
 3. the complete Python, contract, frozen search-quality, real-browser, and accessibility gates pass against the final protected `main`;
 4. affected Workers and Pages assets are deployed and verified against that same final SHA;
