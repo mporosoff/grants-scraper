@@ -8,12 +8,15 @@ const health = await fetch(`${endpoint}/health`, {
 assert.equal(health.status, 200);
 const payload = await health.json();
 assert.equal(payload.service, "available");
-assert.equal(payload.schema_version, 1);
+assert.equal(payload.delivery_ready, true);
+assert.equal(payload.schema_version, 2);
 assert.equal(payload.database_ready, true);
 assert.equal(payload.email_provider, "resend");
+assert.equal(payload.email_provider_selected, true);
 assert.equal(payload.email_provider_configured, true);
-assert.equal(payload.email_template_version, "phase5");
+assert.equal(payload.email_template_version, "phase2-lifecycle-20260825");
 assert.equal(payload.outbound_email_enabled, true);
+assert.equal(payload.scheduler_ready, true);
 
 const preflight = await fetch(`${endpoint}/subscriptions`, {
   method: "OPTIONS",
@@ -33,4 +36,10 @@ const rejected = await fetch(`${endpoint}/health`, {
 });
 assert.equal(rejected.status, 403);
 
-console.log(JSON.stringify({ service: payload.service, schema_version: payload.schema_version, cors: "verified" }));
+console.log(JSON.stringify({
+  service: payload.service,
+  delivery_ready: payload.delivery_ready,
+  schema_version: payload.schema_version,
+  scheduler_ready: payload.scheduler_ready,
+  cors: "verified",
+}));

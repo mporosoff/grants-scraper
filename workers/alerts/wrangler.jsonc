@@ -7,6 +7,7 @@
   "workers_dev": true,
   "vars": {
     "ALERTS_API_ENABLED": "true",
+    "ALERT_SCHEDULER_ENABLED": "true",
     "OUTBOUND_EMAIL_ENABLED": "true",
     "EMAIL_PROVIDER": "resend",
     "DAILY_EMAIL_LIMIT": "100",

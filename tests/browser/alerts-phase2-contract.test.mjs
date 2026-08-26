@@ -1,0 +1,652 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
+import test from "node:test";
+
+import { ALERT_SCHEMA_VERSION } from "../../workers/alerts/src/contract.js";
+import { sha256Hex } from "../../workers/alerts/src/crypto.js";
+import { digestEmail, eventEmail } from "../../workers/alerts/src/email.js";
+import {
+  DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries,
+} from "../../workers/alerts/src/evaluator.js";
+import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
+import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
+import { D1AlertStore } from "../../workers/alerts/src/store.js";
+
+const root = new URL("../../", import.meta.url);
+const migrationNames = [
+  "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
+];
+const migrations = await Promise.all(migrationNames.map(name => (
+  readFile(new URL(`workers/alerts/migrations/${name}`, root), "utf8")
+)));
+const fixedNow = new Date("2026-09-01T12:00:00.000Z");
+const env = {
+  ALERTS_API_ENABLED: "true",
+  ALERT_SCHEDULER_ENABLED: "true",
+  OUTBOUND_EMAIL_ENABLED: "true",
+  EMAIL_PROVIDER: "resend",
+  RESEND_API_KEY: "test-only",
+  PUBLIC_WORKER_ORIGIN: "https://alerts.example.test",
+  PUBLIC_APP_ORIGIN: "https://app.example.test",
+  DAILY_EMAIL_LIMIT: "100",
+};
+
+class D1Statement {
+  constructor(database, sql, values = []) {
+    this.database = database;
+    this.sql = sql;
+    this.values = values;
+  }
+  bind(...values) { return new D1Statement(this.database, this.sql, values); }
+  execute() {
+    const result = this.database.prepare(this.sql).run(...this.values);
+    return { success: true, meta: { changes: Number(result.changes || 0) } };
+  }
+  async run() { return this.execute(); }
+  async first() { return this.database.prepare(this.sql).get(...this.values) || null; }
+  async all() { return { results: this.database.prepare(this.sql).all(...this.values) }; }
+}
+
+class SqliteD1 {
+  constructor(database) {
+    this.database = database;
+    this.failBatchAt = null;
+  }
+  prepare(sql) { return new D1Statement(this.database, sql); }
+  async batch(statements) {
+    this.database.exec("BEGIN IMMEDIATE");
+    try {
+      const results = [];
+      for (let index = 0; index < statements.length; index += 1) {
+        if (index === this.failBatchAt) throw new Error("deterministic batch failure");
+        results.push(statements[index].execute());
+      }
+      this.database.exec("COMMIT");
+      return results;
+    } catch (error) {
+      this.database.exec("ROLLBACK");
+      throw error;
+    }
+  }
+}
+
+function databaseThrough(count = migrations.length) {
+  const database = new DatabaseSync(":memory:");
+  database.exec("PRAGMA foreign_keys = ON");
+  for (const migration of migrations.slice(0, count)) database.exec(migration);
+  return database;
+}
+
+function insertSubscriber(database, {
+  id = "person-1", email = "researcher@example.edu", manageToken = "m".repeat(43),
+  suppressedAt = null, suppressionReason = null,
+} = {}) {
+  database.prepare(
+    "INSERT INTO subscribers(id,email,email_normalized,verified_at,manage_token,suppressed_at,suppression_reason,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)",
+  ).run(id, email, email, fixedNow.toISOString(), manageToken, suppressedAt, suppressionReason, fixedNow.toISOString(), fixedNow.toISOString());
+  return { id, email, manageToken };
+}
+
+function insertSubscription(database, {
+  id = "watch-1", subscriberId = "person-1", type = "saved_search", active = 0,
+  cadence = "weekly", definition = { query: "old" }, definitionHash = "hash-old",
+  tokenHash = "token-old", expiresAt = "2026-09-02T12:00:00.000Z",
+  verifiedAt = "2026-08-01T00:00:00.000Z", baselineComplete = 1,
+  baselineAt = "2026-08-01T00:00:00.000Z", lastEvaluatedAt = "2026-08-20T00:00:00.000Z",
+} = {}) {
+  database.prepare(
+    "INSERT INTO subscriptions(id,subscriber_id,type,active,cadence,definition_json,definition_hash,verification_token_hash,verification_expires_at,verified_at,baseline_at,baseline_complete,last_evaluated_at,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+  ).run(
+    id, subscriberId, type, active, cadence, JSON.stringify(definition), definitionHash,
+    tokenHash, expiresAt, verifiedAt, baselineAt, baselineComplete, lastEvaluatedAt,
+    baselineAt, baselineAt,
+  );
+  return id;
+}
+
+function insertEvent(database, {
+  id, subscriptionId = "watch-1", status = "queued", createdAt = "2026-08-20T00:00:00.000Z",
+  kind = "amended", payload = { title: "Funding opportunity" },
+} = {}) {
+  database.prepare(
+    "INSERT INTO notification_events(id,subscription_id,event_key,event_kind,payload_json,status,attempts,next_attempt_at,created_at,claimed_at) VALUES(?,?,?,?,?,?,?,?,?,?)",
+  ).run(
+    id, subscriptionId, `key-${id}`, kind, JSON.stringify(payload), status, 0,
+    createdAt, createdAt, status === "sending" ? createdAt : null,
+  );
+}
+
+function all(database, sql, ...values) { return database.prepare(sql).all(...values); }
+
+async function cycle(overrides = {}) {
+  const nonce = overrides.verificationNonce || "v".repeat(43);
+  const manageToken = overrides.manageToken || "m".repeat(43);
+  const token = await sha256Hex(`funding-finder-verification-v1|${manageToken}|watch-1|${nonce}`);
+  return {
+    id: "watch-1", subscriberId: "person-1", type: "saved_search", cadence: "weekly",
+    definitionJson: JSON.stringify({ query: "new" }), definitionHash: "hash-old",
+    baselineOpportunityIds: ["new-a", "new-b"], suppressed: false,
+    verificationNonce: nonce,
+    verificationTokenHash: overrides.verificationTokenHash || await sha256Hex(token),
+    verificationExpiresAt: "2026-09-02T12:00:00.000Z",
+    verificationEventId: overrides.verificationEventId || "verify-new",
+    verificationEventKey: overrides.verificationEventKey || "verification:token-new",
+    now: fixedNow.toISOString(), ...overrides,
+  };
+}
+
+function opportunityBody(email = "researcher@example.edu") {
+  return {
+    email,
+    baseline_opportunity_ids: [],
+    subscription: {
+      type: "opportunity", cadence: "immediate",
+      definition: { opportunity_id: "opp-1", triggers: ["deadline_changed"] },
+    },
+  };
+}
+
+async function post(handler, path, body, activeEnv = env) {
+  return handler(new Request(`https://alerts.example.test${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Origin: "https://mporosoff.github.io" },
+    body: JSON.stringify(body),
+  }), activeEnv);
+}
+
+class ScriptedProvider {
+  constructor(failures = []) {
+    this.failures = [...failures];
+    this.attempts = [];
+    this.messages = [];
+    this.configured = true;
+  }
+  async sendEmail(message, idempotencyKey) {
+    this.attempts.push({ message, idempotencyKey });
+    const failure = this.failures.shift();
+    if (failure) throw Object.assign(new Error("bounded provider failure"), failure);
+    const id = `provider-${this.messages.length + 1}`;
+    this.messages.push({ ...message, idempotencyKey, id });
+    return { id };
+  }
+}
+
+test("0003 migrates representative production lifecycle rows without changing their state", async () => {
+  const database = databaseThrough(2);
+  const store = new D1AlertStore(new SqliteD1(database));
+  await assert.rejects(store.health(), /message_kind|terminal_at/);
+  insertSubscriber(database);
+  insertSubscriber(database, {
+    id: "person-suppressed", email: "suppressed@example.edu", manageToken: "s".repeat(43),
+    suppressedAt: "2026-08-15T00:00:00.000Z", suppressionReason: "email.bounced",
+  });
+  const states = [
+    ["active", "person-1", 1, "2026-08-01T00:00:00.000Z", "2026-09-02T00:00:00.000Z"],
+    ["inactive", "person-1", 0, "2026-08-01T00:00:00.000Z", "2026-09-02T00:00:00.000Z"],
+    ["unverified", "person-1", 0, null, "2026-09-02T00:00:00.000Z"],
+    ["expired", "person-1", 0, null, "2026-08-01T00:00:00.000Z"],
+    ["suppressed", "person-suppressed", 0, "2026-08-01T00:00:00.000Z", "2026-09-02T00:00:00.000Z"],
+  ];
+  for (const [id, subscriberId, active, verifiedAt, expiresAt] of states) {
+    insertSubscription(database, {
+      id, subscriberId, active, verifiedAt, expiresAt,
+      definitionHash: `hash-${id}`, tokenHash: `token-${id}`,
+    });
+  }
+  for (const status of ["queued", "failed", "sending", "sent"]) {
+    insertEvent(database, { id: `event-${status}`, subscriptionId: "inactive", status });
+  }
+  database.exec(migrations[2]);
+  assert.equal(await store.health(), true);
+  assert.deepEqual(
+    all(database, "SELECT id,active,verified_at FROM subscriptions ORDER BY id").map(row => [row.id, row.active, row.verified_at]),
+    states.map(([id, , active, verifiedAt]) => [id, active, verifiedAt]).sort((a, b) => a[0].localeCompare(b[0])),
+  );
+  assert.deepEqual(
+    all(database, "SELECT status,message_kind,terminal_at FROM notification_events ORDER BY id")
+      .map(row => [row.status, row.message_kind, row.terminal_at]),
+    ["failed", "queued", "sending", "sent"].map(status => [status, "notification", null]),
+  );
+  const columns = all(database, "PRAGMA table_info(notification_events)").map(row => row.name);
+  assert.ok(columns.includes("message_kind"));
+  assert.ok(columns.includes("terminal_at"));
+});
+
+test("FF-BUG-003 reactivation atomically replaces baseline state and retires old unsent events", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database);
+  database.prepare("INSERT INTO subscription_qualifications VALUES(?,?,1,?)").run("watch-1", "stale", fixedNow.toISOString());
+  for (const status of ["queued", "failed", "sending", "sent"]) insertEvent(database, { id: `old-${status}`, status });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const stored = await store.createSubscriptionCycle(await cycle());
+  assert.equal(stored.cycleAccepted, true);
+  const subscription = database.prepare("SELECT * FROM subscriptions WHERE id='watch-1'").get();
+  assert.equal(subscription.active, 0);
+  assert.equal(subscription.verified_at, null);
+  assert.equal(subscription.baseline_complete, 1);
+  assert.equal(subscription.baseline_at, fixedNow.toISOString());
+  assert.equal(subscription.last_evaluated_at, null);
+  assert.deepEqual(
+    all(database, "SELECT opportunity_id FROM subscription_qualifications ORDER BY opportunity_id").map(row => row.opportunity_id),
+    ["new-a", "new-b"],
+  );
+  assert.deepEqual(
+    all(database, "SELECT id,status,error_code,terminal_at FROM notification_events WHERE id LIKE 'old-%' ORDER BY id")
+      .map(row => [row.id, row.status, row.error_code, Boolean(row.terminal_at)]),
+    [
+      ["old-failed", "suppressed", "subscription_reactivated", true],
+      ["old-queued", "suppressed", "subscription_reactivated", true],
+      ["old-sending", "suppressed", "subscription_reactivated", true],
+      ["old-sent", "sent", null, false],
+    ],
+  );
+  const verification = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
+  assert.equal(verification.message_kind, "verification");
+  assert.equal(verification.status, "queued");
+  assert.deepEqual(Object.keys(JSON.parse(verification.payload_json)), ["nonce"]);
+  assert.doesNotMatch(verification.payload_json, /"token"/);
+});
+
+test("FF-BUG-003 active duplicates stay unchanged and failed baseline batches fail closed", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, tokenHash: "active-token", baselineAt: "2026-08-01T00:00:00.000Z" });
+  database.prepare("INSERT INTO subscription_qualifications VALUES(?,?,1,?)").run("watch-1", "active-baseline", fixedNow.toISOString());
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  const duplicate = await store.createSubscriptionCycle(await cycle());
+  assert.equal(duplicate.alreadyActive, true);
+  assert.equal(database.prepare("SELECT verification_token_hash FROM subscriptions WHERE id='watch-1'").get().verification_token_hash, "active-token");
+  assert.deepEqual(all(database, "SELECT opportunity_id FROM subscription_qualifications").map(row => row.opportunity_id), ["active-baseline"]);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events").get().count, 0);
+
+  database.prepare("UPDATE subscriptions SET active=0 WHERE id='watch-1'").run();
+  d1.failBatchAt = 3;
+  await assert.rejects(store.createSubscriptionCycle(await cycle()), /deterministic batch failure/);
+  const rolledBack = database.prepare("SELECT * FROM subscriptions WHERE id='watch-1'").get();
+  assert.equal(rolledBack.verification_token_hash, "active-token");
+  assert.equal(rolledBack.baseline_complete, 1);
+  assert.deepEqual(all(database, "SELECT opportunity_id FROM subscription_qualifications").map(row => row.opportunity_id), ["active-baseline"]);
+});
+
+test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fresh cycle", async () => {
+  const priorStates = [
+    { name: "inactive", verifiedAt: "2026-08-01T00:00:00.000Z", expiresAt: "2026-09-02T00:00:00.000Z" },
+    { name: "unverified", verifiedAt: null, expiresAt: "2026-09-02T00:00:00.000Z" },
+    { name: "paused_after_unsubscribe", verifiedAt: "2026-08-01T00:00:00.000Z", expiresAt: "2026-09-02T00:00:00.000Z" },
+    { name: "expired", verifiedAt: null, expiresAt: "2026-08-01T00:00:00.000Z" },
+  ];
+  for (const prior of priorStates) {
+    const database = databaseThrough();
+    insertSubscriber(database);
+    insertSubscription(database, {
+      verifiedAt: prior.verifiedAt, expiresAt: prior.expiresAt,
+      tokenHash: `old-${prior.name}`, lastEvaluatedAt: "2026-08-20T00:00:00.000Z",
+    });
+    database.prepare("INSERT INTO subscription_qualifications VALUES(?,?,1,?)").run("watch-1", `old-${prior.name}`, fixedNow.toISOString());
+    const store = new D1AlertStore(new SqliteD1(database));
+    const result = await store.createSubscriptionCycle(await cycle({
+      verificationTokenHash: `fresh-${prior.name}`,
+      verificationEventId: `verify-${prior.name}`,
+      verificationEventKey: `verification:fresh-${prior.name}`,
+    }));
+    assert.equal(result.cycleAccepted, true, prior.name);
+    const row = database.prepare("SELECT * FROM subscriptions WHERE id='watch-1'").get();
+    assert.equal(row.active, 0, prior.name);
+    assert.equal(row.verified_at, null, prior.name);
+    assert.equal(row.baseline_complete, 1, prior.name);
+    assert.equal(row.last_evaluated_at, null, prior.name);
+    assert.deepEqual(
+      all(database, "SELECT opportunity_id FROM subscription_qualifications ORDER BY opportunity_id").map(item => item.opportunity_id),
+      ["new-a", "new-b"],
+      prior.name,
+    );
+  }
+});
+
+test("FF-BUG-008 verification delivery survives network and 429 retries with provider evidence", async () => {
+  for (const failure of [
+    { code: "provider_network_failure", retryable: true },
+    { code: "provider_rate_limited", retryable: true },
+  ]) {
+    const database = databaseThrough();
+    insertSubscriber(database);
+    const store = new D1AlertStore(new SqliteD1(database));
+    await store.createSubscriptionCycle(await cycle());
+    const provider = new ScriptedProvider([failure]);
+    const first = await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+    assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+    const failed = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
+    assert.equal(failed.status, "failed");
+    assert.equal(failed.terminal_at, null);
+    const retryNow = new Date("2026-09-01T12:06:00.000Z");
+    const second = await dispatchVerificationDeliveries({ store, provider, env, now: retryNow });
+    assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+    const sent = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
+    assert.equal(sent.status, "sent");
+    assert.equal(sent.attempts, 2);
+    assert.equal(sent.provider_message_id, "provider-1");
+    assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+  }
+});
+
+test("FF-BUG-008 permanent rejection is terminal and delayed delivery refreshes an expiring token", async () => {
+  const rejectedDatabase = databaseThrough();
+  insertSubscriber(rejectedDatabase);
+  const rejectedStore = new D1AlertStore(new SqliteD1(rejectedDatabase));
+  await rejectedStore.createSubscriptionCycle(await cycle());
+  const rejectedProvider = new ScriptedProvider([{ code: "provider_rejected", retryable: false }]);
+  await dispatchVerificationDeliveries({ store: rejectedStore, provider: rejectedProvider, env, now: fixedNow });
+  const terminal = rejectedDatabase.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
+  assert.equal(terminal.status, "failed");
+  assert.equal(terminal.error_code, "provider_rejected");
+  assert.ok(terminal.terminal_at);
+  assert.equal((await dispatchVerificationDeliveries({ store: rejectedStore, provider: rejectedProvider, env, now: new Date("2026-09-02T12:00:00Z") })).attemptedCount, 0);
+
+  const delayedDatabase = databaseThrough();
+  insertSubscriber(delayedDatabase);
+  const delayedStore = new D1AlertStore(new SqliteD1(delayedDatabase));
+  await delayedStore.createSubscriptionCycle(await cycle({
+    verificationExpiresAt: "2026-09-01T12:30:00.000Z", verificationTokenHash: "old-token-hash",
+  }));
+  const provider = new ScriptedProvider();
+  const freshNonce = "n".repeat(43);
+  const freshToken = await sha256Hex(`funding-finder-verification-v1|${"m".repeat(43)}|watch-1|${freshNonce}`);
+  await dispatchVerificationDeliveries({
+    store: delayedStore, provider, env, now: fixedNow, tokenFactory: () => freshNonce,
+  });
+  const refreshed = delayedDatabase.prepare("SELECT verification_token_hash,verification_expires_at FROM subscriptions WHERE id='watch-1'").get();
+  assert.equal(refreshed.verification_token_hash, await sha256Hex(freshToken));
+  assert.equal(refreshed.verification_expires_at, "2026-09-02T12:00:00.000Z");
+  assert.match(provider.messages[0].text, new RegExp(`/verify\\?token=${freshToken}`));
+});
+
+test("FF-BUG-008 accepted provider failure stays queued and an active duplicate sends no second verification", async () => {
+  const database = databaseThrough();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const provider = new ScriptedProvider([{ code: "provider_network_failure", retryable: true }]);
+  let tokenIndex = 0;
+  const tokens = ["a".repeat(43), "b".repeat(43), "c".repeat(43), "d".repeat(43)];
+  const handler = createHandler({
+    storeFactory: () => store, providerFactory: () => provider, now: () => fixedNow,
+    tokenFactory: () => tokens[tokenIndex++] || "z".repeat(43),
+  });
+  const accepted = await post(handler, "/subscriptions", opportunityBody());
+  assert.equal(accepted.status, 202);
+  assert.deepEqual(await accepted.json(), { status: "verification_required" });
+  const failed = database.prepare("SELECT * FROM notification_events WHERE message_kind='verification'").get();
+  assert.equal(failed.status, "failed");
+  assert.equal(failed.terminal_at, null);
+
+  const retryNow = new Date("2026-09-01T12:06:00.000Z");
+  await dispatchVerificationDeliveries({ store, provider, env, now: retryNow });
+  assert.equal(provider.messages.length, 1);
+  const verifyToken = new URL(provider.messages[0].text.match(/Activate it: (\S+)/)[1]).searchParams.get("token");
+  const verifyHandler = createHandler({
+    storeFactory: () => store, providerFactory: () => provider, now: () => retryNow,
+    tokenFactory: () => tokens[tokenIndex++] || "y".repeat(43),
+  });
+  assert.equal((await verifyHandler(new Request(`https://alerts.example.test/verify?token=${verifyToken}`), env)).status, 200);
+  const duplicate = await post(verifyHandler, "/subscriptions", opportunityBody());
+  assert.equal(duplicate.status, 202);
+  assert.deepEqual(await duplicate.json(), { status: "verification_required" });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='verification'").get().count, 1);
+});
+
+test("FF-BUG-006 multi-alert digest and immediate unsubscribe semantics are exact in HTML and text", () => {
+  const base = {
+    id: "event-1", subscription_id: "watch-1", subscriber_id: "person-1",
+    email: "researcher@example.edu", manage_token: "m".repeat(43),
+    event_kind: "amended", payload_json: JSON.stringify({ title: "One" }),
+  };
+  const digest = digestEmail({ env, events: [base, { ...base, id: "event-2", subscription_id: "watch-2" }] });
+  assert.match(digest.text, /Manage all alerts:/);
+  assert.match(digest.html, />Manage all alerts</);
+  assert.match(digest.text, /Unsubscribe from all Funding Finder email alerts:/);
+  assert.match(digest.html, />Unsubscribe from all Funding Finder email alerts</);
+  assert.match(digest.headers["List-Unsubscribe"], /scope=all/);
+  assert.doesNotMatch(digest.headers["List-Unsubscribe"], /subscription=/);
+  const immediate = eventEmail({ env, event: base });
+  assert.match(immediate.text, /Unsubscribe from this alert:/);
+  assert.match(immediate.html, />Unsubscribe from this alert</);
+  assert.match(immediate.headers["List-Unsubscribe"], /subscription=watch-1/);
+  assert.doesNotMatch(immediate.headers["List-Unsubscribe"], /scope=all/);
+});
+
+test("FF-BUG-006 one-click all-alert unsubscribe deactivates both alerts while single-alert scope leaves the other active", async () => {
+  const database = databaseThrough();
+  const person = insertSubscriber(database);
+  insertSubscription(database, { id: "watch-1", active: 1, definitionHash: "hash-1" });
+  insertSubscription(database, { id: "watch-2", active: 1, definitionHash: "hash-2" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const handler = createHandler({ storeFactory: () => store, providerFactory: () => new MockEmailProvider(), now: () => fixedNow });
+  const single = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&subscription=watch-1`, { method: "POST" }), env);
+  assert.equal(single.status, 200);
+  assert.match(await single.text(), /unsubscribed from this Funding Finder alert/);
+  assert.deepEqual(all(database, "SELECT id,active FROM subscriptions ORDER BY id").map(row => [row.id, row.active]), [["watch-1", 0], ["watch-2", 1]]);
+  const allResponse = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&scope=all`, { method: "POST" }), env);
+  assert.equal(allResponse.status, 200);
+  assert.match(await allResponse.text(), /unsubscribed from all Funding Finder email alerts/);
+  assert.deepEqual(all(database, "SELECT active FROM subscriptions").map(row => row.active), [0, 0]);
+  const manage = await handler(new Request(`https://alerts.example.test/manage?token=${person.manageToken}`), env);
+  const manageText = await manage.text();
+  assert.doesNotMatch(manageText, />Active</);
+  assert.match(manageText, /Unsubscribe from all Funding Finder email alerts/);
+});
+
+test("FF-BUG-007 health is green only for the complete production delivery matrix", async () => {
+  for (const enabled of [false, true]) {
+    for (const databaseReady of [false, true]) {
+      for (const providerConfigured of [false, true]) {
+        for (const outbound of [false, true]) {
+          const handler = createHandler({
+            storeFactory: () => ({ health: async () => databaseReady }),
+            providerFactory: () => ({ configured: providerConfigured }),
+          });
+          const activeEnv = {
+            ...env,
+            ALERTS_API_ENABLED: String(enabled),
+            OUTBOUND_EMAIL_ENABLED: String(outbound),
+          };
+          const response = await handler(new Request("https://alerts.example.test/health"), activeEnv);
+          const payload = await response.json();
+          const ready = enabled && databaseReady && providerConfigured && outbound;
+          assert.equal(response.status, ready ? 200 : 503);
+          assert.equal(payload.delivery_ready, ready);
+          assert.equal(payload.service, ready ? "available" : "unavailable");
+          assert.equal(payload.database_ready, databaseReady);
+          assert.equal(payload.email_provider_configured, providerConfigured);
+          assert.equal(payload.outbound_email_enabled, outbound);
+          assert.equal(payload.scheduler_ready, true);
+          assert.doesNotMatch(JSON.stringify(payload), /test-only|RESEND_API_KEY/i);
+        }
+      }
+    }
+  }
+  const handler = createHandler({
+    storeFactory: () => ({ health: async () => true }), providerFactory: () => ({ configured: true }),
+  });
+  const noScheduler = await handler(new Request("https://alerts.example.test/health"), { ...env, ALERT_SCHEDULER_ENABLED: "false" });
+  assert.equal(noScheduler.status, 503);
+  assert.equal((await noScheduler.json()).scheduler_ready, false);
+  const wrongProvider = await handler(new Request("https://alerts.example.test/health"), { ...env, EMAIL_PROVIDER: "mock" });
+  assert.equal(wrongProvider.status, 503);
+  assert.equal((await wrongProvider.json()).email_provider_selected, false);
+});
+
+test("FF-BUG-009 suppressed subscribers receive a generic response but cannot become apparently active", async () => {
+  const database = databaseThrough();
+  const email = "suppressed@example.edu";
+  const subscriberId = `person_${(await sha256Hex(email)).slice(0, 24)}`;
+  insertSubscriber(database, {
+    id: subscriberId, email, manageToken: "s".repeat(43),
+    suppressedAt: "2026-08-15T00:00:00.000Z", suppressionReason: "email.bounced",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const provider = new MockEmailProvider();
+  let tokenIndex = 0;
+  const tokens = ["v".repeat(43), "m".repeat(43)];
+  const handler = createHandler({
+    storeFactory: () => store, providerFactory: () => provider, now: () => fixedNow,
+    tokenFactory: () => tokens[tokenIndex++] || "x".repeat(43),
+  });
+  const response = await post(handler, "/subscriptions", opportunityBody(email));
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), { status: "verification_required" });
+  assert.equal(provider.messages.length, 0);
+  const verification = database.prepare("SELECT * FROM notification_events WHERE message_kind='verification'").get();
+  assert.equal(verification.status, "suppressed");
+  assert.equal(verification.error_code, "subscriber_suppressed");
+  const subscriptionId = database.prepare("SELECT id FROM subscriptions").get().id;
+  const verificationToken = await sha256Hex(
+    `funding-finder-verification-v1|${"s".repeat(43)}|${subscriptionId}|${tokens[0]}`,
+  );
+  const verify = await handler(new Request(`https://alerts.example.test/verify?token=${verificationToken}`), env);
+  assert.equal(verify.status, 200);
+  assert.match(await verify.text(), /delivery remains suppressed/i);
+  assert.equal(database.prepare("SELECT active FROM subscriptions").get().active, 0);
+  assert.equal((await store.activeSubscriptions()).length, 0);
+  const manage = await handler(new Request(`https://alerts.example.test/manage?token=${"s".repeat(43)}`), env);
+  const manageText = await manage.text();
+  assert.match(manageText, /Email delivery is suppressed/);
+  assert.match(manageText, /Delivery to this address bounced/);
+  assert.doesNotMatch(manageText, />Resume</);
+
+  const normal = await post(handler, "/subscriptions", opportunityBody("new-address@example.edu"));
+  assert.equal(normal.status, 202);
+  assert.deepEqual(await normal.json(), { status: "verification_required" });
+  assert.equal(provider.messages.length, 1);
+});
+
+test("FF-BUG-008 verification provider IDs correlate with suppression webhooks", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.createSubscriptionCycle(await cycle());
+  const provider = new ScriptedProvider();
+  await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+  assert.equal(await store.suppressSubscriberByMessage("provider-1", "email.complained", "webhook-1", fixedNow.toISOString()), true);
+  assert.ok(database.prepare("SELECT suppressed_at FROM subscribers WHERE id='person-1'").get().suppressed_at);
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 0);
+  assert.equal(await store.suppressSubscriberByMessage("provider-1", "email.complained", "webhook-1", fixedNow.toISOString()), false);
+});
+
+test("FF-BUG-017 weekly selection is subscriber-fair, capped, mobile-readable, and leaves overflow queued", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database, { id: "person-a", email: "a@example.edu", manageToken: "a".repeat(43) });
+  insertSubscriber(database, { id: "person-b", email: "b@example.edu", manageToken: "b".repeat(43) });
+  insertSubscription(database, { id: "watch-a", subscriberId: "person-a", active: 1, definitionHash: "hash-a" });
+  insertSubscription(database, { id: "watch-b", subscriberId: "person-b", active: 1, definitionHash: "hash-b" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  for (let index = 0; index < DIGEST_MAX_EVENTS + 5; index += 1) {
+    await store.enqueueEvent({
+      id: `a-${String(index).padStart(2, "0")}`, subscriptionId: "watch-a", eventKey: `a-${index}`,
+      eventKind: "amended", opportunityId: `a-${index}`,
+      payload: { title: `Subscriber A update ${index}` }, createdAt: fixedNow.toISOString(),
+    });
+  }
+  await store.enqueueEvent({
+    id: "b-00", subscriptionId: "watch-b", eventKey: "b-0", eventKind: "amended",
+    opportunityId: "b-0", payload: { title: "Subscriber B update" }, createdAt: fixedNow.toISOString(),
+  });
+  const provider = new ScriptedProvider();
+  const result = await dispatchNotifications({
+    store, provider, env: { ...env, DAILY_EMAIL_LIMIT: "2" }, now: fixedNow, weekly: true,
+  });
+  assert.deepEqual(result, { attemptedCount: 2, deliveredCount: 2, failedCount: 0 });
+  assert.deepEqual(provider.messages.map(message => message.to).sort(), ["a@example.edu", "b@example.edu"]);
+  const large = provider.messages.find(message => message.to === "a@example.edu");
+  assert.match(large.subject, new RegExp(`${DIGEST_MAX_EVENTS} updates`));
+  assert.match(large.text, /Additional updates remain queued for a later digest/);
+  assert.match(large.html, /Additional updates remain queued for a later digest/);
+  assert.match(large.html, /name="viewport" content="width=device-width,initial-scale=1"/);
+  assert.match(large.html, /width:calc\(100% - 24px\)/);
+  assert.ok(Buffer.byteLength(large.html) < 200_000);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE subscription_id='watch-a' AND status='queued'").get().count, 5);
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='b-00'").get().status, "sent");
+});
+
+test("FF-BUG-017 a failed digest retries the whole claim with the same idempotency key", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  const store = new D1AlertStore(new SqliteD1(database));
+  for (const id of ["digest-1", "digest-2"]) {
+    await store.enqueueEvent({
+      id, subscriptionId: "watch-1", eventKey: id, eventKind: "amended",
+      opportunityId: id, payload: { title: id }, createdAt: fixedNow.toISOString(),
+    });
+  }
+  const provider = new ScriptedProvider([{ code: "provider_network_failure", retryable: true }]);
+  const first = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });
+  assert.equal(first.failedCount, 1);
+  assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["failed", "failed"]);
+  const retryNow = new Date("2026-09-01T12:06:00.000Z");
+  const second = await dispatchNotifications({ store, provider, env, now: retryNow, weekly: true });
+  assert.equal(second.deliveredCount, 1);
+  assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["sent", "sent"]);
+  assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+});
+
+test("Phase 2 scheduler retries verification and deployment contracts preserve rollback safety", async () => {
+  const provider = new ScriptedProvider();
+  let verificationDispatches = 0;
+  const store = {
+    pendingVerificationEvents: async () => { verificationDispatches += 1; return []; },
+    startRun: async () => {},
+    activeSubscriptions: async () => [],
+    pendingEvents: async () => [],
+    finishRun: async () => {},
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => ({}),
+    now: () => fixedNow,
+  });
+  const result = await scheduled({ scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" }, env);
+  assert.equal(result.status, "completed");
+  assert.equal(verificationDispatches, 1);
+
+  const [workflow, wrangler, smoke, migration] = await Promise.all([
+    readFile(new URL(".github/workflows/deploy-alerts.yml", root), "utf8"),
+    readFile(new URL("workers/alerts/wrangler.jsonc", root), "utf8"),
+    readFile(new URL("tools/smoke_alerts_worker.mjs", root), "utf8"),
+    readFile(new URL("workers/alerts/migrations/0003_phase2_alert_lifecycle.sql", root), "utf8"),
+  ]);
+  assert.equal(ALERT_SCHEMA_VERSION, 2);
+  assert.match(workflow, /delivery_ready/);
+  assert.match(workflow, /scheduler_ready/);
+  assert.match(workflow, /phase2-lifecycle-20260825/);
+  assert.match(workflow, /worker_version_rollback/);
+  assert.match(wrangler, /"ALERT_SCHEDULER_ENABLED": "true"/);
+  assert.match(wrangler, /"crons": \["15 13 \* \* \*"\]/);
+  assert.match(smoke, /delivery_ready/);
+  assert.match(migration, /deployment workflow terminalizes unsent verification/);
+  assert.doesNotMatch(workflow + wrangler + smoke + migration, /RESEND_API_KEY\s*[:=]\s*["']?re_/i);
+});
+
+test("Resend classifies 429 and 5xx as retryable but permanent 4xx as terminal", async () => {
+  const message = { to: "x@example.edu", subject: "Subject", text: "Text", html: "<p>Text</p>" };
+  for (const [status, code, retryable] of [
+    [429, "provider_rate_limited", true],
+    [503, "provider_unavailable", true],
+    [422, "provider_rejected", false],
+  ]) {
+    const provider = new ResendEmailProvider({
+      apiKey: "private-test-key",
+      fetchImpl: async () => new Response(JSON.stringify({ private: "must not escape" }), {
+        status, headers: { "Content-Type": "application/json" },
+      }),
+    });
+    await assert.rejects(provider.sendEmail(message, `status-${status}`), error => {
+      assert.equal(error.code, code);
+      assert.equal(error.retryable, retryable);
+      assert.doesNotMatch(error.message, /must not escape/);
+      return true;
+    });
+  }
+});

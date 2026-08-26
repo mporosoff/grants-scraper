@@ -1,4 +1,4 @@
-export const ALERT_EMAIL_TEMPLATE_VERSION = "phase5";
+export const ALERT_EMAIL_TEMPLATE_VERSION = "phase2-lifecycle-20260825";
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -34,16 +34,24 @@ function links(env, manageToken, subscriptionId) {
   const subscription = encodeURIComponent(subscriptionId);
   return {
     manage: `${origin}/manage?token=${token}`,
-    unsubscribe: `${origin}/unsubscribe?token=${token}&subscription=${subscription}`,
+    unsubscribeThis: `${origin}/unsubscribe?token=${token}&subscription=${subscription}`,
+    unsubscribeAll: `${origin}/unsubscribe?token=${token}&scope=all`,
   };
 }
 
-function footerHtml(urls) {
-  return `<div style="border-top:1px solid #d8dfeb;margin-top:24px;padding-top:16px"><p style="margin:0 0 10px"><a href="${escapeHtml(urls.manage)}" style="color:#021bc3">Manage alerts</a> &middot; <a href="${escapeHtml(urls.unsubscribe)}" style="color:#021bc3">Unsubscribe</a></p><p style="color:#58647a;font-size:12px;line-height:1.5;margin:0">Funding Finder stores only the alert information you authorized. Verify opportunity details in the official notice.</p></div>`;
+function footerHtml(urls, scope = "subscription") {
+  const unsubscribeUrl = scope === "all" ? urls.unsubscribeAll : urls.unsubscribeThis;
+  const unsubscribeLabel = scope === "all"
+    ? "Unsubscribe from all Funding Finder email alerts"
+    : "Unsubscribe from this alert";
+  return `<div style="border-top:1px solid #d8dfeb;margin-top:24px;padding-top:16px"><p style="margin:0 0 10px"><a href="${escapeHtml(urls.manage)}" style="color:#021bc3">Manage all alerts</a> &middot; <a href="${escapeHtml(unsubscribeUrl)}" style="color:#021bc3">${unsubscribeLabel}</a></p><p style="color:#58647a;font-size:12px;line-height:1.5;margin:0">Funding Finder stores only the alert information you authorized. Verify opportunity details in the official notice.</p></div>`;
 }
 
-function footerText(urls) {
-  return `\n\nManage alerts: ${urls.manage}\nUnsubscribe: ${urls.unsubscribe}\n\nVerify opportunity details in the official notice.`;
+function footerText(urls, scope = "subscription") {
+  const unsubscribe = scope === "all"
+    ? `Unsubscribe from all Funding Finder email alerts: ${urls.unsubscribeAll}`
+    : `Unsubscribe from this alert: ${urls.unsubscribeThis}`;
+  return `\n\nManage all alerts: ${urls.manage}\n${unsubscribe}\n\nVerify opportunity details in the official notice.`;
 }
 
 function emailFrame(content, preheader = "Funding Finder alert") {
@@ -81,7 +89,7 @@ export function verificationEmail({ env, to, token, subscriptionId, manageToken,
     subject: "Verify your Funding Finder alert",
     text,
     html: emailFrame(`<h1 style="color:#001e5f;font-size:24px;line-height:1.2;margin:0 0 12px">Verify your Funding Finder alert</h1><p>Activate your ${escapeHtml(kind)} using this one-time link:</p><p><a href="${escapeHtml(verify)}" style="background:#021bc3;border-radius:7px;color:#ffffff;display:inline-block;font-weight:700;padding:10px 14px;text-decoration:none">Verify email and activate alert</a></p>${footerHtml(urls)}`, `Verify your Funding Finder ${kind}`),
-    headers: { "List-Unsubscribe": `<${urls.unsubscribe}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+    headers: { "List-Unsubscribe": `<${urls.unsubscribeThis}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
   };
 }
 
@@ -155,21 +163,27 @@ export function eventEmail({ env, event }) {
     subject: heading,
     text: `${eventText(heading, body)}${footerText(urls)}`,
     html: emailFrame(`${eventHtml(heading, body)}${footerHtml(urls)}`, `${heading}: ${body.title}`),
-    headers: { "List-Unsubscribe": `<${urls.unsubscribe}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+    headers: { "List-Unsubscribe": `<${urls.unsubscribeThis}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
   };
 }
 
-export function digestEmail({ env, events }) {
+export function digestEmail({ env, events, hasOverflow = false }) {
   const first = events[0];
   const urls = links(env, first.manage_token, first.subscription_id);
   const items = events.map(event => ({ heading: eventTitle(event), ...eventBody(event) }));
   const digestText = items.map(item => eventText(item.heading, item)).join("\n\n---\n\n");
   const digestHtml = items.map(item => `<section style="border-top:1px solid #d8dfeb;margin-top:20px;padding-top:20px">${eventHtml(item.heading, item, 2)}</section>`).join("");
+  const overflowText = hasOverflow
+    ? "\n\nAdditional updates remain queued for a later digest."
+    : "";
+  const overflowHtml = hasOverflow
+    ? '<p style="background:#fff8e6;border-radius:8px;margin:20px 0 0;padding:12px 14px"><strong>Additional updates remain queued for a later digest.</strong></p>'
+    : "";
   return {
     to: first.email,
     subject: `Funding Finder weekly digest: ${items.length} ${items.length === 1 ? "update" : "updates"}`,
-    text: `Funding Finder weekly digest\n\n${digestText}${footerText(urls)}`,
-    html: emailFrame(`<h1 style="color:#001e5f;font-size:24px;line-height:1.2;margin:0">Funding Finder weekly digest</h1><p style="color:#58647a;margin:6px 0 0">${items.length} ${items.length === 1 ? "update" : "updates"}</p>${digestHtml}${footerHtml(urls)}`, `Funding Finder weekly digest: ${items.length} ${items.length === 1 ? "update" : "updates"}`),
-    headers: { "List-Unsubscribe": `<${urls.unsubscribe}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+    text: `Funding Finder weekly digest\n\n${digestText}${overflowText}${footerText(urls, "all")}`,
+    html: emailFrame(`<h1 style="color:#001e5f;font-size:24px;line-height:1.2;margin:0">Funding Finder weekly digest</h1><p style="color:#58647a;margin:6px 0 0">${items.length} ${items.length === 1 ? "update" : "updates"}</p>${digestHtml}${overflowHtml}${footerHtml(urls, "all")}`, `Funding Finder weekly digest: ${items.length} ${items.length === 1 ? "update" : "updates"}`),
+    headers: { "List-Unsubscribe": `<${urls.unsubscribeAll}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
   };
 }

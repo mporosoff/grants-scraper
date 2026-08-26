@@ -12,6 +12,7 @@ import { parseAssignedJson, StrongMatchEngine } from "../../workers/alerts/src/s
 const fixedNow = new Date("2026-09-01T12:00:00.000Z");
 const env = {
   ALERTS_API_ENABLED: "true",
+  ALERT_SCHEDULER_ENABLED: "true",
   OUTBOUND_EMAIL_ENABLED: "true",
   EMAIL_PROVIDER: "resend",
   RESEND_API_KEY: "test-only",
@@ -63,6 +64,41 @@ class MemoryStore {
     this.subscriptions.set(row.id, row);
     return { ...row, created: true, alreadyActive: false };
   }
+  async createSubscriptionCycle(value) {
+    const existing = await this.findSubscription(value.subscriberId, value.type, value.definitionHash);
+    if (existing?.active === 1) return { ...existing, alreadyActive: true, cycleAccepted: false };
+    const row = existing || {
+      id: value.id, subscriber_id: value.subscriberId, type: value.type,
+      definition_hash: value.definitionHash, created_at: value.now,
+    };
+    for (const event of this.events.values()) {
+      if (event.subscription_id === row.id && ["queued", "failed", "sending"].includes(event.status)) {
+        Object.assign(event, {
+          status: "suppressed", error_code: "subscription_reactivated",
+          terminal_at: value.now, claimed_at: null,
+        });
+      }
+    }
+    Object.assign(row, {
+      active: 0, cadence: value.cadence, definition_json: value.definitionJson,
+      verification_token_hash: value.verificationTokenHash,
+      verification_expires_at: value.verificationExpiresAt, verified_at: null,
+      baseline_at: value.now, baseline_complete: 1, last_evaluated_at: null,
+      last_notified_at: null,
+    });
+    this.subscriptions.set(row.id, row);
+    this.qual.set(row.id, new Map((value.baselineOpportunityIds || []).map(id => [id, true])));
+    this.events.set(value.verificationEventId, {
+      id: value.verificationEventId, subscription_id: row.id,
+      event_key: value.verificationEventKey, event_kind: "verification",
+      payload_json: JSON.stringify({ nonce: value.verificationNonce }),
+      status: value.suppressed ? "suppressed" : "queued", attempts: 0,
+      next_attempt_at: value.now, created_at: value.now, message_kind: "verification",
+      terminal_at: value.suppressed ? value.now : null,
+      error_code: value.suppressed ? "subscriber_suppressed" : null,
+    });
+    return { ...row, alreadyActive: false, cycleAccepted: true };
+  }
   async setBaseline(id, opportunityIds) {
     if (!this.qual.has(id)) this.qual.set(id, new Map());
     for (const opportunityId of opportunityIds) this.qual.get(id).set(opportunityId, true);
@@ -71,10 +107,13 @@ class MemoryStore {
   async verifySubscription(tokenHash, now) {
     const sub = [...this.subscriptions.values()].find(item => item.verification_token_hash === tokenHash && item.baseline_complete === 1);
     if (!sub || sub.verification_expires_at < now) return null;
-    sub.active = 1;
-    sub.verified_at = now;
     const person = this.subscribers.get(sub.subscriber_id);
-    return { ...sub, email: person.email, manage_token: person.manage_token };
+    sub.active = person.suppressed_at ? 0 : 1;
+    sub.verified_at = now;
+    return {
+      ...sub, email: person.email, manage_token: person.manage_token,
+      deliverySuppressed: Boolean(person.suppressed_at),
+    };
   }
   async subscriberByManageToken(token) {
     return [...this.subscribers.values()].find(item => item.manage_token === token) || null;
@@ -84,11 +123,18 @@ class MemoryStore {
     const person = await this.subscriberByManageToken(token);
     const sub = this.subscriptions.get(id);
     if (!person || !sub || sub.subscriber_id !== person.id) return false;
+    if (changes.active === true && person.suppressed_at) return false;
     if (typeof changes.active === "boolean") sub.active = changes.active ? 1 : 0;
     if (["immediate", "weekly"].includes(changes.cadence)) sub.cadence = changes.cadence;
     return true;
   }
   async unsubscribe(token, id, now) { return this.updateSubscription(token, id, { active: false }, now); }
+  async unsubscribeAll(token) {
+    const person = await this.subscriberByManageToken(token);
+    if (!person) return false;
+    for (const sub of this.subscriptions.values()) if (sub.subscriber_id === person.id) sub.active = 0;
+    return true;
+  }
   async activeSubscriptions() {
     return [...this.subscriptions.values()].flatMap(sub => {
       const person = this.subscribers.get(sub.subscriber_id);
@@ -113,6 +159,7 @@ class MemoryStore {
       event_kind: event.eventKind, opportunity_id: event.opportunityId,
       payload_json: JSON.stringify(event.payload), status: "queued", attempts: 0,
       next_attempt_at: event.createdAt, created_at: event.createdAt,
+      message_kind: "notification", terminal_at: null,
     });
     return true;
   }
@@ -125,9 +172,33 @@ class MemoryStore {
       const person = this.subscribers.get(sub.subscriber_id);
       const ready = (["queued", "failed"].includes(event.status) && event.next_attempt_at <= now)
         || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore);
-      return ready
+      return ready && event.message_kind !== "verification" && !event.terminal_at
         && sub.active === 1 && sub.cadence === cadence && !person.suppressed_at
         ? [{ ...event, ...sub, id: event.id, subscription_id: sub.id, subscriber_id: sub.subscriber_id, email: person.email, manage_token: person.manage_token }]
+        : [];
+    }).slice(0, limit);
+  }
+  async pendingDigestEvents(now, subscriberLimit, eventLimit) {
+    const pending = await this.pendingEvents("weekly", now, Number.MAX_SAFE_INTEGER);
+    const groups = new Map();
+    for (const event of pending) {
+      if (!groups.has(event.subscriber_id)) groups.set(event.subscriber_id, []);
+      groups.get(event.subscriber_id).push(event);
+    }
+    return [...groups.values()].slice(0, subscriberLimit).map(events => ({
+      events: events.slice(0, eventLimit), hasOverflow: events.length > eventLimit,
+    }));
+  }
+  async pendingVerificationEvents(now, limit) {
+    const staleBefore = new Date(Date.parse(now) - 15 * 60 * 1_000).toISOString();
+    return [...this.events.values()].flatMap(event => {
+      const sub = this.subscriptions.get(event.subscription_id);
+      const person = this.subscribers.get(sub.subscriber_id);
+      const ready = (["queued", "failed"].includes(event.status) && event.next_attempt_at <= now)
+        || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore);
+      return event.message_kind === "verification" && !event.terminal_at && ready
+        && sub.active === 0 && !person.suppressed_at
+        ? [{ ...event, ...sub, id: event.id, subscription_id: sub.id, email: person.email, manage_token: person.manage_token }]
         : [];
     }).slice(0, limit);
   }
@@ -135,7 +206,7 @@ class MemoryStore {
     const staleBefore = new Date(Date.parse(now) - 15 * 60 * 1_000).toISOString();
     return ids.flatMap(id => {
       const event = this.events.get(id);
-      const claimable = event && (["queued", "failed"].includes(event.status)
+      const claimable = event && !event.terminal_at && (["queued", "failed"].includes(event.status)
         || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore));
       if (!claimable) return [];
       event.status = "sending";
@@ -145,7 +216,15 @@ class MemoryStore {
     });
   }
   async markEventsSent(ids, providerId, now) { for (const id of ids) Object.assign(this.events.get(id), { status: "sent", provider_message_id: providerId, sent_at: now, claimed_at: null }); }
-  async markEventsFailed(ids, code, retry) { for (const id of ids) Object.assign(this.events.get(id), { status: "failed", error_code: code, next_attempt_at: retry, claimed_at: null }); }
+  async markEventsFailed(ids, code, retry, terminalAt = null) { for (const id of ids) Object.assign(this.events.get(id), { status: "failed", error_code: code, next_attempt_at: retry, claimed_at: null, terminal_at: terminalAt }); }
+  async refreshVerificationEvent(eventId, { nonce, tokenHash, expiresAt, eventKey, now }) {
+    const event = this.events.get(eventId);
+    if (!event || event.message_kind !== "verification" || event.terminal_at) return false;
+    const sub = this.subscriptions.get(event.subscription_id);
+    Object.assign(sub, { active: 0, verified_at: null, verification_token_hash: tokenHash, verification_expires_at: expiresAt });
+    Object.assign(event, { event_key: eventKey, payload_json: JSON.stringify({ nonce }), next_attempt_at: now, error_code: null });
+    return true;
+  }
   async suppressSubscriberByMessage(providerMessageId, reason, providerEventId, now) {
     this.providerEvents ||= new Set();
     if (this.providerEvents.has(providerEventId)) return false;
@@ -298,7 +377,7 @@ test("opportunity lifecycle verifies, sends exactly once, and stops after unsubs
   assert.equal(provider.messages.length, 2, "the same event is idempotent");
   const unsub = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manage_token}&subscription=${sub.id}`, { method: "POST" }), env);
   assert.equal(unsub.status, 200);
-  assert.match(await unsub.text(), /You have been successfully unsubscribed from Funding Finder\./);
+  assert.match(await unsub.text(), /You have been successfully unsubscribed from this Funding Finder alert\./);
   state.changes.generated_at = "2026-09-03T00:00:00Z";
   state.changes.events.push({ id: "change-2", type: "amended", changed_at: "2026-09-03T00:00:00Z", opportunity_id: "opp-1", detail: "Changed", record: record() });
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
@@ -391,7 +470,7 @@ test("saved-search creation baselines existing Strong matches and alerts once fo
   }, "immediate", ["existing"]))).status, 202);
   await verifyLatest(handler, provider);
   assert.equal([...store.qual.values()][0].get("existing"), true);
-  assert.equal(store.events.size, 0);
+  assert.equal([...store.events.values()].filter(event => event.message_kind === "notification").length, 0);
   matched.add("new");
   state.changes.events = [{ id: "new-1", type: "new", changed_at: "2026-09-02T00:00:00Z", opportunity_id: "new", detail: "First appeared", record: state.catalog.opportunities[1] }];
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
@@ -557,7 +636,8 @@ test("Resend provider safely distinguishes HTTP rejection from network failure",
     }),
   });
   await assert.rejects(rejected.sendEmail(message, "event-http"), error => {
-    assert.equal(error.code, "provider_failed");
+    assert.equal(error.code, "provider_rejected");
+    assert.equal(error.retryable, false);
     assert.equal(error.providerFailureKind, "http");
     assert.equal(error.providerHttpStatus, 401);
     assert.doesNotMatch(error.message, /must stay private/);
@@ -646,13 +726,14 @@ test("authenticated duplicate Resend bounce webhooks suppress future delivery", 
 
 test("Phase 3 deployment and privacy contracts are committed without Phase 4 scope", async () => {
   const root = new URL("../../", import.meta.url);
-  const [page, awards, alerts, worker, migration, leaseMigration, workflow, wrangler, evidence] = await Promise.all([
+  const [page, awards, alerts, worker, migration, leaseMigration, lifecycleMigration, workflow, wrangler, evidence] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("assets/alerts.js", root), "utf8"),
     readFile(new URL("workers/alerts/src/index.js", root), "utf8"),
     readFile(new URL("workers/alerts/migrations/0001_phase3_alerts.sql", root), "utf8"),
     readFile(new URL("workers/alerts/migrations/0002_delivery_claim_lease.sql", root), "utf8"),
+    readFile(new URL("workers/alerts/migrations/0003_phase2_alert_lifecycle.sql", root), "utf8"),
     readFile(new URL(".github/workflows/deploy-alerts.yml", root), "utf8"),
     readFile(new URL("workers/alerts/wrangler.jsonc", root), "utf8"),
     readFile(new URL("evaluation/alerts_phase3.json", root), "utf8"),
@@ -669,6 +750,8 @@ test("Phase 3 deployment and privacy contracts are committed without Phase 4 sco
   assert.match(migration, /subscription_qualifications/);
   assert.match(leaseMigration, /claimed_at/);
   assert.match(leaseMigration, /WHERE status = 'sending'/);
+  assert.match(lifecycleMigration, /message_kind/);
+  assert.match(lifecycleMigration, /terminal_at/);
   assert.match(workflow, /d1 migrations apply funding-finder-alerts --remote/);
   assert.match(workflow, /assets\/search-query\.js/);
   assert.match(workflow, /assets\/search-retrieval\.js/);
