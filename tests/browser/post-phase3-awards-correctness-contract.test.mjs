@@ -75,7 +75,13 @@ function award({ source, id, name, year = 2024, parent, leaf, code = null, email
 test("inclusive and one-sided year filters are bounded and explicit", () => {
   assert.deepEqual(nihFiscalYears({ year_start: 2024 }, 2026), [2024, 2025, 2026]);
   assert.deepEqual(nihFiscalYears({ year_end: 1991 }, 2026), [1989, 1990, 1991]);
+  assert.deepEqual(nihFiscalYears({ year_start: 2026, year_end: 2027 }, 2026), [2026, 2027]);
+  assert.equal(nihFiscalYears({ year_end: 2027 }, 2026).at(-1), 2027);
   assert.deepEqual(buildNihRequest({ year_start: 2024 }, { limit: 25, offset: 0, currentYear: 2026 }).body.criteria.fiscal_years, [2024, 2025, 2026]);
+  assert.deepEqual(
+    buildNihRequest({ year_start: 2026, year_end: 2027 }, { limit: 25, offset: 0, currentYear: 2026 }).body.criteria.fiscal_years,
+    [2026, 2027],
+  );
   const diagnostics = yearFilterDiagnostics({ year_start: 2022, year_end: 2024 });
   assert.equal(recordSatisfiesYearFilter(2022, { year_start: 2022, year_end: 2024 }, diagnostics), true);
   assert.equal(recordSatisfiesYearFilter(2024, { year_start: 2022, year_end: 2024 }, diagnostics), true);

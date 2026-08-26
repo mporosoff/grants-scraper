@@ -48,7 +48,7 @@ export function nihFiscalYears(criteria = {}, currentYear = new Date().getUTCFul
   const boundedCurrent = boundedYear(currentYear) || MIN_AWARD_YEAR;
   const start = range.start ?? MIN_AWARD_YEAR;
   const end = range.end !== null
-    ? Math.min(range.end, Math.max(MIN_AWARD_YEAR, boundedCurrent))
+    ? range.end
     : Math.max(start, boundedCurrent);
   return Array.from({ length: Math.max(0, end - start + 1) }, (_value, index) => start + index);
 }

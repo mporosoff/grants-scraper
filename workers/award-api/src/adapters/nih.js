@@ -13,7 +13,7 @@ import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NIH_ADAPTER_VERSION = "1.4.0";
+export const NIH_ADAPTER_VERSION = "1.4.1";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
 export const NIH_UPSTREAM_PAGE_SIZE = 100;
 export const NIH_MAX_UPSTREAM_PAGES = 12;
