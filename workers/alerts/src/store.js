@@ -90,7 +90,7 @@ export class D1AlertStore {
         value.now, value.now, value.now,
       ),
       this.db.prepare(
-        `UPDATE notification_events SET status = 'suppressed', error_code = 'subscription_reactivated', claimed_at = NULL, terminal_at = ? WHERE subscription_id = ? AND status IN ('queued', 'failed', 'sending') AND EXISTS (SELECT 1 FROM subscriptions WHERE ${cyclePredicate})`,
+        `UPDATE notification_events SET status = CASE WHEN status = 'sending' AND provider_quota_key IS NOT NULL THEN 'sending' ELSE 'suppressed' END, error_code = CASE WHEN status = 'sending' AND provider_quota_key IS NOT NULL THEN 'subscription_reactivated_in_flight' ELSE 'subscription_reactivated' END, claimed_at = CASE WHEN status = 'sending' AND provider_quota_key IS NOT NULL THEN claimed_at ELSE NULL END, terminal_at = ? WHERE subscription_id = ? AND status IN ('queued', 'failed', 'sending') AND EXISTS (SELECT 1 FROM subscriptions WHERE ${cyclePredicate})`,
       ).bind(value.now, value.id, value.id, value.verificationTokenHash),
       this.db.prepare(
         `DELETE FROM subscription_qualifications WHERE subscription_id = ? AND EXISTS (SELECT 1 FROM subscriptions WHERE ${cyclePredicate})`,
@@ -317,14 +317,14 @@ export class D1AlertStore {
   async markEventsFailed(ids, errorCode, nextAttemptAt, terminalAt = null) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN 'suppressed' ELSE 'failed' END, error_code = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN 'verification_completed' ELSE ? END, next_attempt_at = ?, claimed_at = NULL, terminal_at = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN terminal_at ELSE ? END WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NOT NULL AND substr(error_code, -10) = '_in_flight' THEN 'suppressed' ELSE 'failed' END, error_code = CASE WHEN terminal_at IS NOT NULL AND substr(error_code, -10) = '_in_flight' THEN substr(error_code, 1, length(error_code) - 10) ELSE ? END, next_attempt_at = ?, claimed_at = NULL, terminal_at = CASE WHEN terminal_at IS NOT NULL AND substr(error_code, -10) = '_in_flight' THEN terminal_at ELSE ? END WHERE id = ? AND status = 'sending'",
     ).bind(errorCode, nextAttemptAt, terminalAt, id)));
   }
 
   async releaseClaimedEvents(ids, nextAttemptAt) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NULL THEN 'queued' ELSE 'suppressed' END, attempts = CASE WHEN terminal_at IS NULL THEN MAX(0, attempts - 1) ELSE attempts END, next_attempt_at = ?, claimed_at = NULL, error_code = CASE WHEN terminal_at IS NULL THEN error_code ELSE 'verification_completed' END WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NULL THEN 'queued' ELSE 'suppressed' END, attempts = CASE WHEN terminal_at IS NULL THEN MAX(0, attempts - 1) ELSE attempts END, next_attempt_at = ?, claimed_at = NULL, error_code = CASE WHEN terminal_at IS NULL THEN error_code WHEN substr(error_code, -10) = '_in_flight' THEN substr(error_code, 1, length(error_code) - 10) ELSE error_code END WHERE id = ? AND status = 'sending'",
     ).bind(nextAttemptAt, id)));
   }
 

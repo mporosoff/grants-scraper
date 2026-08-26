@@ -317,6 +317,62 @@ test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fres
   }
 });
 
+test("FF-BUG-003 reactivation serializes with an authorized notification delivery", async () => {
+  for (const providerFails of [false, true]) {
+    const database = databaseThrough();
+    const person = insertSubscriber(database);
+    insertSubscription(database, {
+      active: 1, cadence: "immediate", definitionHash: "hash-old",
+    });
+    const store = new D1AlertStore(new SqliteD1(database));
+    await store.enqueueEvent({
+      id: "notice-in-flight", subscriptionId: "watch-1", eventKey: "notice-in-flight",
+      eventKind: "amended", opportunityId: "opp-1",
+      payload: { title: "Authorized update" }, createdAt: fixedNow.toISOString(),
+    });
+    const provider = {
+      configured: true,
+      attempts: [],
+      async sendEmail(message, idempotencyKey) {
+        this.attempts.push({ message, idempotencyKey });
+        assert.equal(await store.updateSubscription(
+          person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+        ), true);
+        const replacement = await store.createSubscriptionCycle(await cycle({
+          verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
+          verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
+        }));
+        assert.equal(replacement.cycleAccepted, true);
+        if (providerFails) throw Object.assign(new Error("bounded provider failure"), {
+          code: "provider_network_failure", retryable: true,
+        });
+        return { id: "provider-in-flight" };
+      },
+    };
+    const result = await dispatchNotifications({ store, provider, env, now: fixedNow });
+    assert.equal(result.attemptedCount, 1);
+    assert.equal(provider.attempts.length, 1);
+    const event = database.prepare("SELECT status,error_code,terminal_at,provider_message_id FROM notification_events WHERE id='notice-in-flight'").get();
+    if (providerFails) {
+      assert.deepEqual(result, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+      assert.equal(event.status, "suppressed");
+      assert.equal(event.error_code, "subscription_reactivated");
+      assert.ok(event.terminal_at);
+      assert.equal(event.provider_message_id, null);
+    } else {
+      assert.deepEqual(result, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+      assert.equal(event.status, "sent");
+      assert.equal(event.error_code, null);
+      assert.equal(event.terminal_at, null);
+      assert.equal(event.provider_message_id, "provider-in-flight");
+      assert.equal(await store.suppressSubscriberByMessage(
+        "provider-in-flight", "email.bounced", "webhook-in-flight", fixedNow.toISOString(),
+      ), true);
+    }
+    assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, providerFails ? "queued" : "suppressed");
+  }
+});
+
 test("FF-BUG-008 verification delivery survives network and 429 retries with provider evidence", async () => {
   for (const failure of [
     { code: "provider_network_failure", retryable: true },
