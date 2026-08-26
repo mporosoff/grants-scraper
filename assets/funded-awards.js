@@ -17,6 +17,7 @@
     selectedLookup: null,
     payload: null,
     request: null,
+    submittedState: null,
     sequence: 0,
     abortController: null,
   };
@@ -379,8 +380,8 @@
     $("award-page-label").textContent = productApi.paginationLabel(payload);
   }
 
-  async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false } = {}) {
-    const searchState = formState();
+  async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false, submittedState = null } = {}) {
+    const searchState = submittedState ? { ...submittedState } : formState();
     if (offset !== null) searchState.offset = Math.max(0, Math.min(1_000, offset));
     let requestBody;
     try {
@@ -390,8 +391,9 @@
       setStatus(error.message, { error: true });
       return;
     }
-    saveDefaultInstitution();
+    if (!submittedState) saveDefaultInstitution();
     syncUrl(searchState, historyMode);
+    state.submittedState = { ...searchState };
     state.request = requestBody;
     state.abortController?.abort();
     const controller = new AbortController();
@@ -458,6 +460,7 @@
     cancelPendingSearch();
     state.selectedRecord = null;
     state.selectedLookup = null;
+    state.submittedState = null;
     renderSelectedOpportunity();
     const searchState = formState();
     searchState.offset = 0;
@@ -471,6 +474,7 @@
     cancelPendingSearch();
     state.selectedRecord = null;
     state.selectedLookup = null;
+    state.submittedState = null;
     $("award-search-form").reset();
     $("search-mode").value = "topic";
     $("award-agency").value = "all";
@@ -503,21 +507,22 @@
     $("award-previous").addEventListener("click", () => {
       const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
       const offset = Math.max(0, Number(state.payload?.pagination?.offset || 0) - pageSize);
-      search({ historyMode: "push", offset, focusResults: true, scrollResults: true });
+      search({ historyMode: "push", offset, focusResults: true, scrollResults: true, submittedState: state.submittedState });
     });
     $("award-next").addEventListener("click", () => {
       const pageSize = Number(state.request?.limit || apiConfig.maxResultsPerSource);
       const offset = Number(state.payload?.pagination?.offset || 0) + pageSize;
-      search({ historyMode: "push", offset, focusResults: true, scrollResults: true });
+      search({ historyMode: "push", offset, focusResults: true, scrollResults: true, submittedState: state.submittedState });
     });
     $("institution-summary").addEventListener("click", event => {
       const button = event.target.closest("[data-award-pi]");
       if (!button) return;
       const investigator = clean(button.getAttribute("data-award-pi"));
-      const source = state.selectedLookup?.source || $("award-agency").value;
-      const institution = clean($("award-institution").value);
-      const yearStart = $("year-start").value;
-      const yearEnd = $("year-end").value;
+      const submitted = state.submittedState || formState();
+      const source = state.selectedLookup?.source || submitted.agency;
+      const institution = clean(submitted.institution);
+      const yearStart = submitted.year_start;
+      const yearEnd = submitted.year_end;
       cancelPendingSearch();
       state.selectedRecord = null;
       state.selectedLookup = null;
@@ -537,6 +542,7 @@
     });
     window.addEventListener("popstate", () => {
       cancelPendingSearch();
+      state.submittedState = null;
       hydrateFromUrl();
       const params = new URLSearchParams(location.search);
       if (hasUrlSearch(params)) {

@@ -263,6 +263,15 @@
     return middleScore + entry.display.length - decorationPenalty;
   }
 
+  function canonicalInvestigatorLabel(entry) {
+    const middle = entry.middle_display
+      ? entry.middle_display.split(/\s+/u).map(token => personToken(token).length === 1
+        ? `${token.replace(/\.+$/u, "")}.`
+        : token).join(" ")
+      : "";
+    return [entry.first_display, middle, entry.family_display].filter(Boolean).join(" ");
+  }
+
   function groupInvestigators(awards) {
     const entries = [];
     for (const award of Array.isArray(awards) ? awards : []) {
@@ -311,7 +320,7 @@
       }
       return {
         identity_key: `investigator:${labelEntry.base_key}:${labelEntry.middle_initial || "none"}:${index + 1}`,
-        name: labelEntry.published,
+        name: canonicalInvestigatorLabel(labelEntry),
         normalized: {
           first: labelEntry.first,
           middle: labelEntry.middle,
@@ -323,7 +332,12 @@
         source_variants: sourceVariants,
         members: group.members,
       };
-    }).sort((left, right) => right.projects - left.projects || left.name.localeCompare(right.name, "en-US"));
+    }).sort((left, right) => (
+      left.normalized.family.localeCompare(right.normalized.family, "en-US")
+      || left.normalized.first.localeCompare(right.normalized.first, "en-US")
+      || left.normalized.middle.localeCompare(right.normalized.middle, "en-US")
+      || left.name.localeCompare(right.name, "en-US")
+    ));
   }
 
   function investigatorQueryVariants(group, source, maximum = 4) {
@@ -362,29 +376,32 @@
 
   function programDescriptors(award) {
     const source = clean(award?.source, 10).toUpperCase();
-    const output = [];
-    const add = (label, query) => {
-      const cleanLabel = clean(label, 300);
-      const cleanQuery = clean(query, 160);
-      if (!cleanLabel || !cleanQuery) return;
-      const key = `${source}:${identityKey(cleanQuery)}`;
-      if (!output.some(item => item.key === key)) output.push({ key, source, label: cleanLabel, query: cleanQuery });
-    };
-    if (source === "DOE") {
-      if (/Basic Energy Sciences/i.test(clean(award?.subagency))) {
-        add("Office of Basic Energy Sciences", "BES");
-      }
-      add(award?.program_name, award?.program_name);
-    } else if (source === "NIH") {
-      add(award?.activity_code, award?.activity_code);
-    } else if (source === "NSF") {
-      add(award?.program_name, award?.program_name || award?.program_codes?.[0]);
-    }
-    if (!output.length) {
-      const code = (Array.isArray(award?.program_codes) ? award.program_codes : []).find(Boolean);
-      add(code, code);
-    }
-    return output;
+    const parent = clean(award?.subagency, 300);
+    const sourceCodes = [...new Set((Array.isArray(award?.program_codes) ? award.program_codes : []).map(value => clean(value, 100)).filter(Boolean))];
+    const code = sourceCodes[0] || "";
+    const sourceLeaf = source === "NIH"
+      ? clean(award?.activity_code || award?.program_name || code, 300)
+      : clean(award?.program_name || code, 300);
+    const leaf = sourceLeaf || parent;
+    if (!source || !leaf) return [];
+    const distinctChild = Boolean(parent && identityKey(parent) !== identityKey(leaf));
+    const doeOfficeCode = sourceCodes.find(value => /^SC-\d+(?:\.\d+)?$/i.test(value));
+    const query = source === "DOE" && !distinctChild
+      ? /Basic Energy Sciences/i.test(parent) ? "BES" : doeOfficeCode || leaf
+      : leaf;
+    if (!query) return [];
+    const label = `${source} · ${distinctChild ? `${parent} › ${leaf}` : leaf}`;
+    return [{
+      key: `${source}:${identityKey(parent || leaf)}:${identityKey(leaf)}`,
+      source,
+      parent_label: parent || null,
+      leaf_label: leaf,
+      leaf_role: distinctChild ? "child_program" : "most_specific_available_program",
+      query,
+      query_role: distinctChild ? "leaf_program" : "fallback_leaf",
+      source_codes: sourceCodes,
+      label,
+    }];
   }
 
   function aggregateAwards(results) {
@@ -418,7 +435,7 @@
       year_start: orderedYears[0] || null,
       year_end: orderedYears.at(-1) || null,
       investigators,
-      programs: [...programs.values()].sort((left, right) => right.projects - left.projects || left.label.localeCompare(right.label)),
+      programs: [...programs.values()].sort((left, right) => left.label.localeCompare(right.label, "en-US")),
     };
   }
 
@@ -646,6 +663,7 @@
     identityKey,
     investigatorQueryVariants,
     normalizedInvestigatorName,
+    programDescriptors,
     programCriterion,
     questionEvidencePack,
     questionProviderPayload,

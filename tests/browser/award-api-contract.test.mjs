@@ -507,6 +507,117 @@ test("Worker caches only successful per-source results for the bounded TTL", asy
   assert.equal(failingCalls.length, 3, "NSF hits cache while NIH is retried");
 });
 
+test("Worker partitions NIH start-only cache entries at the federal fiscal-year rollover", async () => {
+  const cache = memoryCache();
+  const upstreamBodies = [];
+  const fetchImpl = async (_url, options = {}) => {
+    upstreamBodies.push(JSON.parse(options.body || "{}"));
+    return new Response(JSON.stringify({
+      meta: { total: 0, offset: 0 },
+      results: [],
+    }), { headers: { "Content-Type": "application/json" } });
+  };
+  let current = "2026-09-30T23:59:59.998Z";
+  const handler = createHandler({ fetchImpl, cache, now: () => new Date(current) });
+  const requestBody = query({ topic: "catalysis", year_start: 2026 }, ["NIH"], 2);
+
+  const search = async () => {
+    const response = await handler(workerRequest(requestBody), env);
+    assert.equal(response.status, 200);
+    return response.json();
+  };
+
+  const before = await search();
+  assert.equal(before.sources[0].cache, "miss");
+  assert.deepEqual(upstreamBodies[0].criteria.fiscal_years, [2026]);
+
+  current = "2026-09-30T23:59:59.999Z";
+  const repeatedBefore = await search();
+  assert.equal(repeatedBefore.sources[0].cache, "hit");
+  assert.equal(upstreamBodies.length, 1, "the same federal fiscal year reuses the cache entry");
+
+  current = "2026-10-01T00:00:00.000Z";
+  const after = await search();
+  assert.equal(after.sources[0].cache, "miss");
+  assert.deepEqual(upstreamBodies[1].criteria.fiscal_years, [2026, 2027]);
+
+  current = "2026-10-01T00:00:00.001Z";
+  const repeatedAfter = await search();
+  assert.equal(repeatedAfter.sources[0].cache, "hit");
+  assert.equal(upstreamBodies.length, 2, "the post-rollover entry is reused independently");
+  assert.equal(cache.values.size, 2);
+  assert.equal(new Set(cache.values.keys()).size, 2, "pre- and post-rollover identities are distinct");
+  for (const cached of cache.values.values()) {
+    assert.equal(cached.headers.get("cache-control"), "public, max-age=3600");
+  }
+});
+
+test("Worker uses one clock for NIH cache/body coherence and leaves stable source keys unpartitioned", async () => {
+  const beforeRollover = new Date("2026-09-30T23:59:59.999Z");
+  const afterRollover = new Date("2026-10-01T00:00:00.000Z");
+  const cache = memoryCache();
+  const calls = [];
+  let clockCalls = 0;
+  const crossingHandler = createHandler({
+    fetchImpl: fixtureFetch({ calls }),
+    cache,
+    now: () => {
+      clockCalls += 1;
+      return clockCalls === 1 ? beforeRollover : afterRollover;
+    },
+  });
+  const startOnly = query({ topic: "catalysis", year_start: 2026 }, ["NIH"], 2);
+  const first = await crossingHandler(workerRequest(startOnly), env);
+  assert.equal(first.status, 200);
+  assert.equal((await first.json()).sources[0].cache, "miss");
+  assert.equal(clockCalls, 1, "one immutable UTC value controls both the key and adapter body");
+  const nihBodies = calls
+    .filter(call => call.url.includes("api.reporter.nih.gov"))
+    .map(call => JSON.parse(call.options.body));
+  assert.deepEqual(nihBodies[0].criteria.fiscal_years, [2026]);
+
+  const stableBeforeHandler = createHandler({
+    fetchImpl: fixtureFetch({ calls }),
+    cache,
+    now: () => beforeRollover,
+  });
+  const repeated = await stableBeforeHandler(workerRequest(startOnly), env);
+  assert.equal((await repeated.json()).sources[0].cache, "hit");
+  assert.equal(calls.filter(call => call.url.includes("api.reporter.nih.gov")).length, 1);
+
+  const stableCache = memoryCache();
+  const stableCalls = [];
+  let current = beforeRollover;
+  const stableHandler = createHandler({
+    fetchImpl: fixtureFetch({ calls: stableCalls }),
+    cache: stableCache,
+    now: () => current,
+  });
+  const stableRequests = [
+    query({ topic: "catalysis", year_start: 2026, year_end: 2027 }, ["NIH"], 2),
+    query({ topic: "catalysis", year_end: 2026 }, ["NIH"], 2),
+    query({ topic: "catalysis" }, ["NIH"], 2),
+    query({ topic: "warm dense matter" }, ["NSF"], 2),
+    query({ award_id: "DE-SC0020230" }, ["DOE"], 1),
+  ];
+
+  for (const requestBody of stableRequests) {
+    current = beforeRollover;
+    const initial = await stableHandler(workerRequest(requestBody), env);
+    assert.equal(initial.status, 200);
+    assert.equal((await initial.json()).sources[0].cache, "miss");
+    const callsAfterMiss = stableCalls.length;
+    const entriesAfterMiss = stableCache.values.size;
+
+    current = afterRollover;
+    const after = await stableHandler(workerRequest(requestBody), env);
+    assert.equal(after.status, 200);
+    assert.equal((await after.json()).sources[0].cache, "hit");
+    assert.equal(stableCalls.length, callsAfterMiss, "stable criteria do not refetch at rollover");
+    assert.equal(stableCache.values.size, entriesAfterMiss, "stable criteria keep one cache identity");
+  }
+});
+
 test("committed Phase 1 evidence closes only the NSF and NIH data-foundation gate", () => {
   assert.equal(phase1Evidence.authoritative_base.package_version, "1.3.0");
   assert.equal(phase1Evidence.live_truth_set.NSF.length, 7);

@@ -408,10 +408,10 @@ test("investigator identities conservatively unify Marc variants and preserve co
   ];
   const marc = core.aggregateAwards(marcAwards);
   assert.equal(marc.investigator_count, 1);
-  assert.equal(marc.investigators[0].name, "Marc D Porosoff");
+  assert.equal(marc.investigators[0].name, "Marc D. Porosoff");
   assert.equal(marc.investigators[0].projects, 3);
   assert.deepEqual(new Set(marc.investigators[0].variants.map(item => item.name)), new Set(["Marc Porosoff", "Marc D Porosoff"]));
-  assert.deepEqual(plain(core.investigatorQueryVariants(marc.investigators[0], "NSF")), ["Marc Porosoff", "Marc D Porosoff", "Porosoff, Marc D"]);
+  assert.deepEqual(plain(core.investigatorQueryVariants(marc.investigators[0], "NSF")), ["Marc Porosoff", "Marc D. Porosoff", "Porosoff, Marc D."]);
   assert.equal(core.awardMatchesInvestigator(normalizedAward({ source: "DOE", id: "DOE-2", name: "Porosoff, Marc D" }), marc.investigators[0]), true);
   assert.equal(core.awardMatchesInvestigator(normalizedAward({ source: "DOE", id: "DOE-3", name: "Marc K Porosoff" }), marc.investigators[0]), false);
 
@@ -465,7 +465,7 @@ test("deterministic institutional answers and bounded narrative citations use on
   const aggregate = core.aggregateAwards(awards);
   const sources = [{ source: "DOE", status: "ok", has_more: true }, { source: "NIH", status: "unavailable", has_more: false }];
   const who = core.deterministicInstitutionAnswer({ question: "Who has DOE BES awards?", intent: "investigators", aggregate, sources });
-  assert.match(who.answer, /Marc D Porosoff/);
+  assert.match(who.answer, /Marc D\. Porosoff/);
   assert.match(who.answer, /Ada Researcher/);
   assert.deepEqual(who.has_more, ["DOE"]);
   assert.deepEqual(who.unavailable, ["NIH"]);

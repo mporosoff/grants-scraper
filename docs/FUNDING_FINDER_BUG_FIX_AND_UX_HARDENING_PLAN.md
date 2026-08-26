@@ -5,7 +5,7 @@
 **Repository:** `mporosoff/grants-scraper`
 **Audited baseline:** protected `main` at `e9ddcda995dd9f1fe5462bf8fde81a2d9922fc9b`
 **Baseline release architecture:** v1.3.0
-**Purpose:** Correct the twenty-two confirmed or strongly supported defects identified in the post-implementation backend, GUI, and user-experience audit without reopening completed architecture or adding unrelated product features.
+**Purpose:** Correct the twenty-five confirmed or strongly supported defects identified in the post-implementation backend, GUI, and user-experience audit without reopening completed architecture or adding unrelated product features.
 
 The audited SHA identifies where the findings were established. It is not a command to reset the repository. Every phase must start from the then-current protected `main`, read the complete current implementation, and determine whether earlier work has already changed any affected path. Where this plan and the current implementation differ because a prior phase has merged, preserve the completed phase and apply the remaining requirements to the new state.
 
@@ -82,6 +82,9 @@ The following are invariants across all four phases:
 | `FF-BUG-020` | 4 | Low | Evaluation runs record the scheduled start time as completion time, eliminating useful duration evidence. | alert scheduler, store/schema |
 | `FF-BUG-021` | 3 | High | **Complete in PR #60.** Source-published investigator names and provenance remain intact while conservative normalized identities drive accessible loaded-award counts and bounded source-appropriate variant retrieval with post-validation and conflict separation. | `assets/institutional-intelligence*.js`, award Worker/adapters |
 | `FF-BUG-022` | 3 | High | **Complete in PR #60.** Institutional questions now produce deterministic or bounded narrative answers from the exact loaded public-award evidence, validate every model citation, disclose scope and source limitations, and require explicit refresh after Load more. | `assets/institutional-intelligence*.js`, browser-local AI provider |
+| `FF-BUG-023` | Post-3 | High | Active award-year criteria were sent upstream but not enforced on the normalized result sequence, and later paging/drill-down actions could read edited-but-unsent form values. This could admit out-of-range records, hide later valid records, or make metrics describe a different request. | award adapters, Funded Awards and Institutional Intelligence controllers |
+| `FF-BUG-024` | Post-3 | High | Investigator options exposed incomplete loaded-page counts, sorted primarily by count, retained source spelling instead of a stable conservative label, and could lose the selected native-option state after investigator results rerendered. | `assets/institutional-intelligence*.js` |
+| `FF-BUG-025` | Post-3 | High | Flat program aggregation treated a DOE parent office and its child program area as two programs, lost hierarchy in drill-down presentation, and exposed loaded-page counts in native options. | `assets/institutional-intelligence*.js` |
 
 A finding may be marked complete only after its acceptance criteria below are satisfied. Passing unrelated tests is not sufficient.
 
@@ -1141,6 +1144,42 @@ Record:
 
 ---
 
+## Post-Phase-3 Funded Awards / Institutional Intelligence correctness addendum
+
+This bounded addendum preserves completed Phase 3 and corrects three defects found afterward. It does not reopen `FF-BUG-002`, `FF-BUG-004`, `FF-BUG-012`, `FF-BUG-013`, `FF-BUG-021`, or `FF-BUG-022`, and it does not begin Phase 4.
+
+### `FF-BUG-023` - Year filters and summary-metric integrity
+
+**Reproduced causes:** NSF and DOE used source date criteria but accepted normalized records without an inclusive local year check; their non-institution paths applied raw offsets before any such check. NIH grouped all returned support rows, so unrelated fiscal years and amounts could enter a filtered project summary, and a one-sided year criterion became a single exact fiscal year upstream. NIH request construction also used the UTC calendar year for an open-ended upper bound and previously clipped explicit future ends, which could omit the next federal fiscal year after the October 1 rollover. Institutional Intelligence investigator/program drill-downs and standalone Funded Awards Previous/Next plus investigator handoff could read the current form after a submitted search, allowing unsent edits to replace its years and other filters.
+
+**Corrected contract and acceptance:** NSF and DOE must accept an active-year record only when its normalized award year is within the inclusive requested range. NIH must qualify a core project only through returned in-range annual-support rows, and its displayed year, annual support, and summed amount must use those rows only. NIH derives the open-ended upper bound from one immutable UTC `asOf` value captured by the Worker before source-cache lookup: through September 30 it uses the UTC calendar year, and beginning October 1 it uses the next federal fiscal year. The same value controls the NIH request body and, only for a start-only NIH range, a derived `nih_fiscal_year_ceiling` cache discriminator. The raw timestamp is not keyed, so entries remain reusable throughout one federal fiscal year; explicit/end-only/inactive NIH ranges and NSF/DOE remain unpartitioned, obsolete entries expire through the unchanged bounded TTL, and failed source responses remain uncached. Explicit NIH start/end ranges remain exact even when future-dated, and a start later than the current federal fiscal year remains a one-year future request. Missing years are rejected while an active filter is present and counted in bounded source diagnostics. Year post-validation occurs before normalized offset and `has_more`; the existing upstream caps remain NSF 12 x 25, NIH 12 x 100, and DOE 10 pages with DOE normalized offset capped at 100. One-sided filters remain supported. A submitted-state snapshot controls source-specific Load more, retry, Previous/Next, investigator/program drill-down, question search, shared URL restoration, and Back/Forward until the user submits a new search. Metrics are calculated from the exact deduplicated cards currently displayed and use the labels `Projects loaded`, `Investigator identities in loaded results`, `Distinct programs in loaded results`, and `Loaded award years`; the visible scope states the active requested year range and retains paging/safety-bound limitations.
+
+**Deterministic regression authority:** `tests/browser/post-phase3-awards-correctness-contract.test.mjs` covers inclusive and one-sided filters, the September 30/October 1 federal-fiscal-year boundary, future ranges, single-clock request plumbing, minimum/maximum bounds, missing-year diagnostics, out-of-range NSF/NIH/DOE rejection, later valid rows, and NIH support-row amounts. Worker-level cache contracts cover pre-rollover miss/hit, post-rollover miss/hit, distinct federal-fiscal-year identities with the existing TTL, one-clock key/body coherence, stable explicit/end-only/inactive NIH and NSF/DOE keys, and uncached failures. `tests/e2e/institutional-intelligence.spec.mjs` covers submitted years through Load more, investigator/program selection, evidence-grounded questions, URLs/history, metrics, native selected state, mobile widths, and accessible status. Existing Phase 3 sparse-page, partial-source, retry, Marc, URL, mobile, and accessibility cases remain part of the gate.
+
+### `FF-BUG-024` - Investigator grouping, dropdown, selection, and sorting
+
+**Reproduced cause:** The loaded awards were already fed through the conservative Phase 3 identity grouping, including the deterministic three-award Marc fixture. The discrepancy was presentation and state coherence: dropdown labels included the current loaded-page count, groups were sorted by that count, the most complete published spelling could retain inconsistent initial punctuation, and rerendering replaced the selected native option without restoring it. Drill-down request construction also read unsent form values.
+
+**Corrected contract and acceptance:** Existing stable-identifier, direct-email, same-institution complete-name, bounded missing-middle, and conflict-separation rules remain unchanged. Safe labels use the most complete supported source name in canonical given/middle/family order with normalized initial punctuation, while every original source spelling and provenance remains in the accessible selected-investigator explanation. Options contain only the identity label and sort by normalized family, given, middle, then stable display name. Selection runs the existing bounded source variants, preserves the submitted institution/agency/year/topic/program/officer filters, post-validates identity, deduplicates `source + award_id`, restores the selected native option after rerender, and reports the matching awards currently loaded across available sources outside the option. URLs retain only the bounded identity label and flag, never variant arrays or contact data.
+
+**Deterministic regression authority:** the mixed-source contract covers family-name ordering, honorifics, suffixes, apostrophes, hyphens, canonical middle-initial punctuation, Marc grouping, loaded-card counts, and conflict separation. Playwright proves one count-free `Marc D. Porosoff` option, two NSF plus one DOE result after selection, selected-state persistence, active-year retention, source variants in explanatory text, Load more/history behavior, native mobile picker usability, and zero serious or critical accessibility findings in the affected scans.
+
+### `FF-BUG-025` - Hierarchical program aggregation
+
+**Reproduced cause:** DOE aggregation emitted one descriptor for `Office of Basic Energy Sciences` and a second for `Catalysis Science`, so one award contributed two flat program labels. Native options also appended loaded project counts, and award details did not consistently present both hierarchy levels when a child existed.
+
+**Corrected contract and acceptance:** every award contributes at most one most-specific leaf descriptor, namespaced by source and parent/leaf identity. A descriptor records source, parent office or organization, leaf program, role, source-native codes, and bounded query identity. Parent-plus-child records count the child once; parent-only records use the most specific parent as the fallback leaf; different children under one parent remain distinct; and similar text across agencies never merges. DOE presentation retains `Office of Basic Energy Sciences › Catalysis Science`, and program options use a source-prefixed hierarchy label with no project count. Drill-down uses the leaf query while preserving the submitted filters, and award cards retain parent, child, and source-code provenance.
+
+**Deterministic regression authority:** the mixed-source aggregation fixture covers parent-only and parent-plus-child records, duplicate children, multiple children under one parent, similar NSF/DOE labels, exact deduplicated metrics, and loaded years. Playwright verifies count-free hierarchy options, active-year drill-down, visible parent/child award details, partial-source metrics, 320 px and 390 px containment, keyboard operation, and accessibility.
+
+### Addendum release boundary
+
+The implementation changes classified Award Worker inputs by adding shared year post-validation and incrementing the NSF, NIH, and DOE adapter versions. The protected Award release workflow must therefore deploy and verify the Award Worker after merge, retaining the prior version as rollback protection. Alerts Worker inputs, D1 migrations, opportunity catalog/metadata, vectors, search packages, ranking, Team Match, and lazy catalog loading are unchanged. Remaining limitations are the documented bounded source scans, incomplete upstream history beyond a reached cap, and upstream source dates/annual-support rows that cannot be accepted when their year is missing under an active filter.
+
+The three addendum findings remain unchecked until their exact candidate passes protected review and CI, merges, and the classified Award Worker deployment plus Pages/live bounded closeout succeeds. Final PR/SHA/version/run identifiers belong in the task closeout rather than a self-referential candidate commit.
+
+---
+
 ## 4. Cross-phase regression matrix
 
 The phase owner must add the narrowest regression at the responsible layer and retain all earlier tests.
@@ -1227,6 +1266,9 @@ Update this table in the same PR that completes each phase. Do not mark a phase 
 - [ ] `FF-BUG-020`
 - [x] `FF-BUG-021`
 - [x] `FF-BUG-022`
+- [ ] `FF-BUG-023` - candidate implementation complete; protected merge/deployment closeout pending
+- [ ] `FF-BUG-024` - candidate implementation complete; protected merge/deployment closeout pending
+- [ ] `FF-BUG-025` - candidate implementation complete; protected merge/deployment closeout pending
 
 For every checked item, the completing PR must cite its regression test and acceptance evidence.
 
@@ -1236,7 +1278,7 @@ For every checked item, the completing PR must cite its regression test and acce
 
 This bug-fix program is complete only when:
 
-1. all twenty-two finding IDs are checked with evidence;
+1. all twenty-five finding IDs are checked with evidence;
 2. all four phases are merged through protected PRs;
 3. the complete Python, contract, frozen search-quality, real-browser, and accessibility gates pass against the final protected `main`;
 4. affected Workers and Pages assets are deployed and verified against that same final SHA;
