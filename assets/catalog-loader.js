@@ -91,7 +91,34 @@
       .join(",");
   }
 
-  function releaseIdentity(catalog, assetVersion) {
+  function catalogPipelineTimestamp(catalog) {
+    const values = [
+      catalog?.generated_at,
+      catalog?.detail_enrichment_generated_at,
+      catalog?.document_evidence_generated_at,
+      catalog?.catalog_audit_generated_at,
+      catalog?.link_health_generated_at,
+      catalog?.diagnostics?.additional_sources?.merged_at,
+    ].filter(Boolean);
+    const parsed = values
+      .map(value => ({ value: String(value), time: Date.parse(value) }))
+      .filter(item => Number.isFinite(item.time))
+      .sort((left, right) => right.time - left.time);
+    if (!parsed.length) {
+      throw new Error("The funding catalog has no valid pipeline timestamp.");
+    }
+    return parsed[0];
+  }
+
+  function catalogAssetVersion(catalog) {
+    const stamp = new Date(catalogPipelineTimestamp(catalog).time)
+      .toISOString()
+      .replace(/[-:]/g, "")
+      .replace(/\.\d{3}Z$/, "Z");
+    return `catalog-${stamp}`;
+  }
+
+  function releaseIdentity(catalog, assetVersion = catalogAssetVersion(catalog)) {
     const index = catalog?.search_index || {};
     return [
       `catalog-v${Number(catalog?.schema_version) || 0}`,
@@ -178,12 +205,14 @@
     if (!candidate || Number(candidate.schema_version) !== Number(startup.catalog_schema_version)) {
       throw new Error("The funding catalog uses an unsupported schema.");
     }
+    const candidateAssetVersion = catalogAssetVersion(candidate);
     if (!Array.isArray(candidate.opportunities)
       || candidate.opportunities.length !== Number(startup.record_count)
       || Number(candidate.record_count) !== Number(startup.record_count)
       || candidate.generated_at !== startup.generated_at
+      || candidateAssetVersion !== startup.asset_version
       || statusIdentity(candidate.status_counts) !== statusIdentity(startup.status_counts)
-      || releaseIdentity(candidate, startup.asset_version) !== startup.release_identity) {
+      || releaseIdentity(candidate) !== startup.release_identity) {
       throw new Error("The funding catalog does not match its startup metadata.");
     }
     if (validator) await validator(candidate, startup);

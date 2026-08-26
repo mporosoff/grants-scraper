@@ -313,6 +313,54 @@ test("retry refreshes stale startup metadata after a catalog generation changes"
   });
 });
 
+test("catalog validation derives its release version from loaded pipeline timestamps", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  let catalogResponses = 0;
+  await page.route("**/data/opportunities.js*", async route => {
+    catalogResponses += 1;
+    const response = await route.fetch();
+    let body = await response.text();
+    if (catalogResponses === 1) {
+      const generatedAt = body.match(/"generated_at":"([^"]+)"/)?.[1];
+      expect(generatedAt).toBeTruthy();
+      for (const field of [
+        "detail_enrichment_generated_at",
+        "document_evidence_generated_at",
+        "catalog_audit_generated_at",
+        "link_health_generated_at",
+        "merged_at",
+      ]) {
+        body = body.replace(
+          new RegExp(`"${field}":"[^"]+"`, "g"),
+          `"${field}":"${generatedAt}"`,
+        );
+      }
+    }
+    await route.fulfill({ response, body, contentType: "text/javascript" });
+  });
+  await openFundingFinderShell(page);
+  await page.locator("#query").fill("membrane separation");
+  await page.locator("#find-funding").click();
+  await expect(page.locator("#catalog-error")).toBeVisible();
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "failed",
+    requests: 1,
+    executions: 1,
+    initializations: 0,
+  });
+  await page.locator("#catalog-retry").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(catalogResponses).toBe(2);
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "ready",
+    requests: 2,
+    executions: 2,
+    initializations: 1,
+    metadataRefreshes: 1,
+  });
+});
+
 test("Back and Forward restore catalog-dependent URLs before and after readiness without eager clean-page execution", async ({ page }) => {
   mockHybrid(page);
   await installConnection(page, { saveData: true, effectiveType: "4g" });
