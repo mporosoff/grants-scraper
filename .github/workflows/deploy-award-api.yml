@@ -78,11 +78,15 @@ jobs:
             exit 1
           fi
           echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
-      - name: Classify Award Worker deployment inputs
+      - name: Classify Award Worker inputs since the active deployment
         id: worker-inputs
+        shell: bash
         env:
-          BEFORE_SHA: ${{ github.event.before }}
-        run: node tools/classify_worker_deployment.mjs award-api "$BEFORE_SHA" "$GITHUB_SHA"
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4.125.0 deployments list --config workers/award-api/wrangler.jsonc --json > /tmp/award-worker-deployments.json
+          node tools/classify_worker_deployment.mjs award-api /tmp/award-worker-deployments.json "$GITHUB_SHA"
       - name: Capture the active Award Worker version for rollback
         id: prior-worker
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
@@ -91,7 +95,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/award-api/wrangler.jsonc --json 2>/dev/null || true)"
+          deployments="$(cat /tmp/award-worker-deployments.json)"
           prior_version="$(jq -r '
             map(select(any(.versions[]?; (.percentage // 0) > 0)))
             | sort_by([(.created_on // ""), (.id // "")])
@@ -124,7 +128,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.125.0 deploy --config workers/award-api/wrangler.jsonc
+        run: >-
+          npx --yes wrangler@4.125.0 deploy
+          --config workers/award-api/wrangler.jsonc
+          --message "protected-main:${GITHUB_SHA}; protected main deployment"
       - name: Wait for the Award Worker health contract
         id: worker-health
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
@@ -206,7 +213,7 @@ jobs:
           npx --yes wrangler@4.125.0 rollback
           "${{ steps.prior-worker.outputs.version_id }}"
           --config workers/award-api/wrangler.jsonc
-          --message "Automatic rollback after Funded Awards release failure"
+          --message "protected-main:${{ steps.worker-inputs.outputs.deployed_base_sha }}; automatic rollback after Funded Awards release failure"
       - name: Refuse a release if protected main advanced
         if: ${{ steps.worker-smoke.outcome == 'success' }}
         shell: bash
@@ -217,7 +224,7 @@ jobs:
           current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
           if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
             if [ -n "${{ steps.prior-worker.outputs.version_id }}" ]; then
-              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/award-api/wrangler.jsonc --message "Automatic rollback because main advanced"
+              npx --yes wrangler@4.125.0 rollback "${{ steps.prior-worker.outputs.version_id }}" --config workers/award-api/wrangler.jsonc --message "protected-main:${{ steps.worker-inputs.outputs.deployed_base_sha }}; automatic rollback because main advanced"
             fi
             echo "::error::Protected main advanced during the Funded Awards release."
             exit 1
