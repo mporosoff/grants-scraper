@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-08-25T10:57:15Z</updated>
+  <updated>2026-08-26T10:55:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -182,6 +182,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
+    <title>BJA FY 2026 Crisis Response Training Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363710"/>
+    <id>urn:funding-finder:grants-gov:363710</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Bureau of Justice Assistance | Closes 2026-10-05 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Crisis Response Training Program. This opportunity supports state, local, and tribal governments, law enforcement agencies, correctional facilities, probation and parole departments, and sheriffs’ offices in developing, implementing, or expanding crisis response training programs that enhance public safety, officer safety, and oper…</summary>
   </entry>
   <entry>
     <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
@@ -655,16 +666,5 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Social and behavioral sciences"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-10-15 | Development of Psychosocial Therapeutic and Preventive Interventions for Mental Disorders (R61/R33 Clinical Trial Required). As part of NIMH's clinical trials pipeline, this NOFO encourages pilot research developing and testing novel psychosocial interventions and/or targets. Consistent with NIMH's emphasis on the experimental therapeutics approach to intervention development, it intends to speed …</summary>
-  </entry>
-  <entry>
-    <title>First in Human and Early Stage Clinical Trials of Novel Investigational Drugs or Neuromodulatory Device-based Interventions for Psychiatric Disorders (U01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/357424"/>
-    <id>urn:funding-finder:grants-gov:357424</id>
-    <updated>2024-11-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2027-10-15 | The purpose of this Notice of Funding Opportunity (NOFO) is to encourage cooperative agreement applications to support early stage clinical trials of novel mechanism of action, investigational drugs, or novel neuromodulatory devices for the treatment of psychiatric disorders in areas of unmet medical need. The NOFO will support milestone-driven early stage trials in pediatric and adult populations…</summary>
   </entry>
 </feed>

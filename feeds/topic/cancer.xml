@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-25T10:57:15Z</updated>
+  <updated>2026-08-26T10:55:47Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -85,6 +85,17 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Research to Improve Native Hawaiian and Pacific Islander (NHPI) Health Outcomes (R34 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363713"/>
+    <id>urn:funding-finder:grants-gov:363713</id>
+    <updated>2026-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Health equity"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2027-02-16 | The National Institute on Minority Health and Health Disparities (NIMHD), intends to publish a Notice of Funding Opportunity (NOFO) for planning grants to support preparatory, feasibility, and pilot activities that advance intervention development or solutions-oriented etiologic studies aimed at improving health and reducing health disparities outcomes among Native Hawaiian and Pacific Islander (N…</summary>
   </entry>
   <entry>
     <title>Canine Cancer Immunotherapy Network (K9CIN; U01 Clinical Trial Not Allowed)</title>
@@ -613,15 +624,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Pilot Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362209"/>
-    <id>urn:funding-finder:grants-gov:362209</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Technology development"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward. Distinctive Features: Innovation is key. Research projects that demonstrate exceptional s…</summary>
   </entry>
 </feed>
