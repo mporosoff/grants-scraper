@@ -489,6 +489,62 @@ test("FF-BUG-008 verification completed before quota reuse sends no obsolete ret
   assert.ok(event.terminal_at);
 });
 
+test("FF-BUG-008 verification completion serializes with an authorized provider send", async () => {
+  for (const finalFailure of [null, {
+    code: "provider_network_failure", retryable: true,
+  }]) {
+    const database = databaseThrough();
+    insertSubscriber(database);
+    const store = new D1AlertStore(new SqliteD1(database));
+    const verificationCycle = await cycle();
+    await store.createSubscriptionCycle(verificationCycle);
+    const provider = new ScriptedProvider([
+      { code: "provider_network_failure", retryable: true },
+      ...(finalFailure ? [finalFailure] : []),
+    ]);
+    const limitedEnv = { ...env, DAILY_EMAIL_LIMIT: "1" };
+    await dispatchVerificationDeliveries({
+      store, provider, env: limitedEnv, now: fixedNow,
+    });
+
+    const originalReserve = store.reserveProviderMessage.bind(store);
+    let completed = false;
+    store.reserveProviderMessage = async (...args) => {
+      const reserved = await originalReserve(...args);
+      if (reserved && !completed) {
+        completed = true;
+        await store.verifySubscription(
+          verificationCycle.verificationTokenHash, "2026-09-01T12:06:00.000Z",
+        );
+      }
+      return reserved;
+    };
+    const retry = await dispatchVerificationDeliveries({
+      store, provider, env: limitedEnv, now: new Date("2026-09-01T12:06:00.000Z"),
+    });
+    assert.equal(retry.attemptedCount, 1);
+    assert.equal(provider.attempts.length, 2);
+    assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+    assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 1);
+    assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+    const event = database.prepare("SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'").get();
+    if (finalFailure) {
+      assert.deepEqual(retry, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+      assert.equal(event.status, "suppressed");
+      assert.equal(event.error_code, "verification_completed");
+      assert.ok(event.terminal_at);
+      assert.equal((await dispatchVerificationDeliveries({
+        store, provider, env: limitedEnv, now: new Date("2026-09-01T12:20:00.000Z"),
+      })).attemptedCount, 0);
+    } else {
+      assert.deepEqual(retry, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+      assert.equal(event.status, "sent");
+      assert.equal(event.error_code, null);
+      assert.equal(event.terminal_at, null);
+    }
+  }
+});
+
 test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block re-creation", async () => {
   const database = databaseThrough();
   insertSubscriber(database);

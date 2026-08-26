@@ -136,7 +136,7 @@ export class D1AlertStore {
         "UPDATE subscribers SET verified_at = COALESCE(verified_at, ?), updated_at = ? WHERE id = ? AND EXISTS (SELECT 1 FROM subscriptions WHERE id = ? AND verification_token_hash = ? AND verification_expires_at >= ? AND baseline_complete = 1 AND verified_at IS NOT NULL)",
       ).bind(now, now, subscription.subscriber_id, subscription.id, tokenHash, now),
       this.db.prepare(
-        "UPDATE notification_events SET status = 'suppressed', error_code = 'verification_completed', claimed_at = NULL, terminal_at = ? WHERE subscription_id = ? AND message_kind = 'verification' AND status IN ('queued', 'failed', 'sending') AND EXISTS (SELECT 1 FROM subscriptions WHERE id = ? AND verification_token_hash = ? AND verification_expires_at >= ? AND baseline_complete = 1 AND verified_at IS NOT NULL)",
+        "UPDATE notification_events SET status = CASE WHEN status = 'sending' THEN 'sending' ELSE 'suppressed' END, error_code = CASE WHEN status = 'sending' THEN 'verification_completed_in_flight' ELSE 'verification_completed' END, claimed_at = CASE WHEN status = 'sending' THEN claimed_at ELSE NULL END, terminal_at = ? WHERE subscription_id = ? AND message_kind = 'verification' AND status IN ('queued', 'failed', 'sending') AND EXISTS (SELECT 1 FROM subscriptions WHERE id = ? AND verification_token_hash = ? AND verification_expires_at >= ? AND baseline_complete = 1 AND verified_at IS NOT NULL)",
       ).bind(now, subscription.id, subscription.id, tokenHash, now),
     ]);
     const verified = await this.db.prepare(
@@ -307,7 +307,7 @@ export class D1AlertStore {
   async markEventsSent(ids, providerMessageId, now) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = 'sent', provider_message_id = ?, sent_at = ?, error_code = NULL, claimed_at = NULL WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = 'sent', provider_message_id = ?, sent_at = ?, error_code = NULL, claimed_at = NULL, terminal_at = NULL WHERE id = ? AND status = 'sending'",
     ).bind(providerMessageId, now, id)));
     await this.db.prepare(
       `UPDATE subscriptions SET last_notified_at = ?, updated_at = ? WHERE id IN (SELECT subscription_id FROM notification_events WHERE message_kind = 'notification' AND id IN (${ids.map(() => "?").join(",")}))`,
@@ -317,14 +317,14 @@ export class D1AlertStore {
   async markEventsFailed(ids, errorCode, nextAttemptAt, terminalAt = null) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = 'failed', error_code = ?, next_attempt_at = ?, claimed_at = NULL, terminal_at = ? WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN 'suppressed' ELSE 'failed' END, error_code = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN 'verification_completed' ELSE ? END, next_attempt_at = ?, claimed_at = NULL, terminal_at = CASE WHEN terminal_at IS NOT NULL AND error_code = 'verification_completed_in_flight' THEN terminal_at ELSE ? END WHERE id = ? AND status = 'sending'",
     ).bind(errorCode, nextAttemptAt, terminalAt, id)));
   }
 
   async releaseClaimedEvents(ids, nextAttemptAt) {
     if (!ids.length) return;
     await this.db.batch(ids.map(id => this.db.prepare(
-      "UPDATE notification_events SET status = 'queued', attempts = MAX(0, attempts - 1), next_attempt_at = ?, claimed_at = NULL WHERE id = ? AND status = 'sending'",
+      "UPDATE notification_events SET status = CASE WHEN terminal_at IS NULL THEN 'queued' ELSE 'suppressed' END, attempts = CASE WHEN terminal_at IS NULL THEN MAX(0, attempts - 1) ELSE attempts END, next_attempt_at = ?, claimed_at = NULL, error_code = CASE WHEN terminal_at IS NULL THEN error_code ELSE 'verification_completed' END WHERE id = ? AND status = 'sending'",
     ).bind(nextAttemptAt, id)));
   }
 
