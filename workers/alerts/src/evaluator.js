@@ -230,6 +230,11 @@ function retryableProviderFailure(error) {
   ]).has(String(error?.code || ""));
 }
 
+function providerFailureKind(error) {
+  if (error?.providerFailureKind) return String(error.providerFailureKind);
+  return String(error?.code || "") === "provider_network_failure" ? "network" : "";
+}
+
 export async function dispatchNotifications({ store, provider, env, now = new Date(), weekly = false }) {
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
@@ -268,10 +273,9 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const message = weekly || idempotencyKey.startsWith("digest:")
       ? digestEmail({ env, events: claimed, hasOverflow: batchValue.hasOverflow })
       : eventEmail({ env, event: claimed[0] });
+    let delivery;
     try {
-      const delivery = await provider.sendEmail(message, idempotencyKey);
-      await store.markEventsSent(ids, delivery.id, now.toISOString());
-      deliveredCount += 1;
+      delivery = await provider.sendEmail(message, idempotencyKey);
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -279,10 +283,15 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
         String(error?.code || "provider_failed").slice(0, 80),
         retryable ? retryAt(claimed[0], now) : now.toISOString(),
         retryable ? null : now.toISOString(),
-        String(error?.providerFailureKind || ""),
+        providerFailureKind(error),
       );
       failedCount += 1;
+      remaining -= 1;
+      if (!remaining) break;
+      continue;
     }
+    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    deliveredCount += 1;
     remaining -= 1;
     if (!remaining) break;
   }
@@ -307,12 +316,23 @@ export async function dispatchVerificationDeliveries({
     if (!ids.length) continue;
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
+    const reconciliation = candidate.error_code === "verification_outcome_reconcile";
     let token = nonce.length >= 32
       ? await sha256Hex(`funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${nonce}`)
       : "";
     let tokenHash = token ? await sha256Hex(token) : "";
+    let idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
     const expiresAt = Date.parse(candidate.verification_expires_at);
-    if (
+    if (reconciliation) {
+      if (
+        token.length < 32
+        || candidate.provider_quota_key !== idempotencyKey
+        || !await store.verificationReconciliationClaimIsCurrent(candidate.id, claimedAt)
+      ) {
+        await store.markEventsFailed(ids, "verification_reconciliation_invalid", claimedAt, claimedAt);
+        continue;
+      }
+    } else if (
       token.length < 32
       || tokenHash !== String(candidate.verification_token_hash || "")
       || !Number.isFinite(expiresAt)
@@ -321,6 +341,7 @@ export async function dispatchVerificationDeliveries({
       nonce = tokenFactory();
       token = await sha256Hex(`funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${nonce}`);
       tokenHash = await sha256Hex(token);
+      idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
       const refreshedExpiresAt = new Date(now.getTime() + VERIFICATION_VALIDITY_MS).toISOString();
       const refreshed = await store.refreshVerificationEvent(candidate.id, {
         nonce,
@@ -341,14 +362,14 @@ export async function dispatchVerificationDeliveries({
       await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
       continue;
     }
-    const idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
     if (!await store.reserveProviderMessage(idempotencyKey, ids, dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, claimedAt);
       break;
     }
     attemptedCount += 1;
+    let delivery;
     try {
-      const delivery = await provider.sendEmail(verificationEmail({
+      delivery = await provider.sendEmail(verificationEmail({
         env,
         to: candidate.email,
         token,
@@ -356,8 +377,6 @@ export async function dispatchVerificationDeliveries({
         manageToken: candidate.manage_token,
         type: candidate.type,
       }), idempotencyKey);
-      await store.markEventsSent(ids, delivery.id, now.toISOString());
-      deliveredCount += 1;
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -365,9 +384,13 @@ export async function dispatchVerificationDeliveries({
         String(error?.code || "provider_failed").slice(0, 80),
         retryable ? retryAt(candidate, now) : now.toISOString(),
         retryable ? null : now.toISOString(),
+        providerFailureKind(error),
       );
       failedCount += 1;
+      continue;
     }
+    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    deliveredCount += 1;
   }
   return { attemptedCount, deliveredCount, failedCount };
 }

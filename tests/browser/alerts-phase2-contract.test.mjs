@@ -363,7 +363,7 @@ test("FF-BUG-003 reactivation serializes with an authorized notification deliver
     if (providerFails) {
       assert.deepEqual(result, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
       assert.equal(event.status, "failed");
-      assert.equal(event.error_code, "subscription_reactivated_reconcile");
+      assert.equal(event.error_code, "provider_outcome_reconcile");
       assert.equal(event.terminal_at, null);
       assert.equal(event.provider_message_id, null);
       assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "queued");
@@ -649,7 +649,7 @@ test("FF-BUG-008 verification completed before quota reservation consumes no pro
   assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
 });
 
-test("FF-BUG-008 verification completed before quota reuse sends no obsolete retry", async () => {
+test("FF-BUG-008 verification completed after network ambiguity still recovers the provider ID", async () => {
   const database = databaseThrough();
   insertSubscriber(database);
   const store = new D1AlertStore(new SqliteD1(database));
@@ -665,9 +665,9 @@ test("FF-BUG-008 verification completed before quota reuse sends no obsolete ret
   assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
   assert.ok(database.prepare("SELECT provider_quota_key FROM notification_events WHERE id='verify-new'").get().provider_quota_key);
 
-  const originalClaimCheck = store.verificationClaimIsCurrent.bind(store);
+  const originalClaimCheck = store.verificationReconciliationClaimIsCurrent.bind(store);
   let completed = false;
-  store.verificationClaimIsCurrent = async (...args) => {
+  store.verificationReconciliationClaimIsCurrent = async (...args) => {
     const current = await originalClaimCheck(...args);
     if (current && !completed) {
       completed = true;
@@ -680,33 +680,31 @@ test("FF-BUG-008 verification completed before quota reuse sends no obsolete ret
   const retry = await dispatchVerificationDeliveries({
     store, provider, env: limitedEnv, now: new Date("2026-09-01T12:06:00.000Z"),
   });
-  assert.deepEqual(retry, { attemptedCount: 0, deliveredCount: 0, failedCount: 0 });
-  assert.equal(provider.attempts.length, 1);
+  assert.deepEqual(retry, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+  assert.equal(provider.attempts.length, 2);
+  assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
   assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
-  const event = database.prepare("SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'").get();
-  assert.equal(event.status, "suppressed");
-  assert.equal(event.error_code, "verification_completed");
-  assert.ok(event.terminal_at);
+  const event = database.prepare("SELECT status,error_code,terminal_at,provider_message_id FROM notification_events WHERE id='verify-new'").get();
+  assert.equal(event.status, "sent");
+  assert.equal(event.error_code, null);
+  assert.equal(event.terminal_at, null);
+  assert.equal(event.provider_message_id, "provider-1");
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 1);
 });
 
 test("FF-BUG-008 verification completion serializes with an authorized provider send", async () => {
-  for (const finalFailure of [null, {
-    code: "provider_network_failure", retryable: true,
-  }]) {
+  for (const finalFailure of [
+    null,
+    { code: "provider_network_failure", providerFailureKind: "network", retryable: true },
+    { code: "provider_rate_limited", providerFailureKind: "http", providerHttpStatus: 429, retryable: true },
+  ]) {
     const database = databaseThrough();
     insertSubscriber(database);
     const store = new D1AlertStore(new SqliteD1(database));
     const verificationCycle = await cycle();
     await store.createSubscriptionCycle(verificationCycle);
-    const provider = new ScriptedProvider([
-      { code: "provider_network_failure", retryable: true },
-      ...(finalFailure ? [finalFailure] : []),
-    ]);
+    const provider = new ScriptedProvider(finalFailure ? [finalFailure] : []);
     const limitedEnv = { ...env, DAILY_EMAIL_LIMIT: "1" };
-    await dispatchVerificationDeliveries({
-      store, provider, env: limitedEnv, now: fixedNow,
-    });
-
     const originalReserve = store.reserveProviderMessage.bind(store);
     let completed = false;
     store.reserveProviderMessage = async (...args) => {
@@ -719,17 +717,32 @@ test("FF-BUG-008 verification completion serializes with an authorized provider 
       }
       return reserved;
     };
-    const retry = await dispatchVerificationDeliveries({
-      store, provider, env: limitedEnv, now: new Date("2026-09-01T12:06:00.000Z"),
+    const first = await dispatchVerificationDeliveries({
+      store, provider, env: limitedEnv, now: fixedNow,
     });
-    assert.equal(retry.attemptedCount, 1);
-    assert.equal(provider.attempts.length, 2);
-    assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+    assert.equal(first.attemptedCount, 1);
+    assert.equal(provider.attempts.length, 1);
     assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 1);
     assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
     const event = database.prepare("SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'").get();
-    if (finalFailure) {
-      assert.deepEqual(retry, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+    if (finalFailure?.providerFailureKind === "network") {
+      assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
+      assert.equal(event.status, "failed");
+      assert.equal(event.error_code, "verification_outcome_reconcile");
+      assert.equal(event.terminal_at, null);
+      const recovered = await dispatchVerificationDeliveries({
+        store, provider, env: limitedEnv, now: new Date("2026-09-01T12:06:00.000Z"),
+      });
+      assert.deepEqual(recovered, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+      assert.equal(provider.attempts.length, 2);
+      assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+      const sent = database.prepare("SELECT status,error_code,terminal_at,provider_message_id FROM notification_events WHERE id='verify-new'").get();
+      assert.equal(sent.status, "sent");
+      assert.equal(sent.error_code, null);
+      assert.equal(sent.terminal_at, null);
+      assert.equal(sent.provider_message_id, "provider-1");
+    } else if (finalFailure) {
+      assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
       assert.equal(event.status, "suppressed");
       assert.equal(event.error_code, "verification_completed");
       assert.ok(event.terminal_at);
@@ -737,7 +750,7 @@ test("FF-BUG-008 verification completion serializes with an authorized provider 
         store, provider, env: limitedEnv, now: new Date("2026-09-01T12:20:00.000Z"),
       })).attemptedCount, 0);
     } else {
-      assert.deepEqual(retry, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+      assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
       assert.equal(event.status, "sent");
       assert.equal(event.error_code, null);
       assert.equal(event.terminal_at, null);
@@ -1018,6 +1031,63 @@ test("FF-BUG-008 verification provider IDs correlate with suppression webhooks",
   assert.equal(await store.suppressSubscriberByMessage("provider-1", "email.complained", "webhook-1", fixedNow.toISOString()), false);
 });
 
+test("FF-BUG-008 recovered provider IDs and pending webhook suppression commit atomically", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "immediate" });
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  await store.enqueueEvent({
+    id: "atomic-correlation", subscriptionId: "watch-1", eventKey: "atomic-correlation",
+    eventKind: "amended", opportunityId: "opp-atomic",
+    payload: { title: "Atomic correlation" }, createdAt: fixedNow.toISOString(),
+  });
+  assert.equal(await store.suppressSubscriberByMessage(
+    "provider-atomic", "email.complained", "webhook-atomic", fixedNow.toISOString(),
+  ), false);
+  const provider = {
+    configured: true,
+    attempts: [],
+    async sendEmail(message, idempotencyKey) {
+      this.attempts.push({ message, idempotencyKey });
+      if (this.attempts.length === 1) d1.failBatchAt = 2;
+      return { id: "provider-atomic" };
+    },
+  };
+  await assert.rejects(
+    dispatchNotifications({ store, provider, env, now: fixedNow }),
+    /deterministic batch failure/,
+  );
+  const rolledBack = database.prepare(
+    "SELECT status,provider_message_id,claimed_at FROM notification_events WHERE id='atomic-correlation'",
+  ).get();
+  assert.deepEqual(
+    [rolledBack.status, rolledBack.provider_message_id, rolledBack.claimed_at],
+    ["sending", null, fixedNow.toISOString()],
+  );
+  assert.equal(database.prepare("SELECT suppressed_at FROM subscribers WHERE id='person-1'").get().suppressed_at, null);
+  d1.failBatchAt = null;
+  const recovered = await dispatchNotifications({
+    store, provider, env, now: new Date("2026-09-01T12:16:00.000Z"),
+  });
+  assert.deepEqual(recovered, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
+  assert.equal(provider.attempts.length, 2);
+  assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
+  assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
+  const committed = database.prepare(
+    "SELECT status,provider_message_id FROM notification_events WHERE id='atomic-correlation'",
+  ).get();
+  assert.deepEqual([committed.status, committed.provider_message_id], ["sent", "provider-atomic"]);
+  const subscriber = database.prepare(
+    "SELECT suppressed_at,suppression_reason FROM subscribers WHERE id='person-1'",
+  ).get();
+  assert.deepEqual(
+    [subscriber.suppressed_at, subscriber.suppression_reason],
+    [fixedNow.toISOString(), "email.complained"],
+  );
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 0);
+});
+
 test("FF-BUG-017 weekly selection is subscriber-fair, capped, mobile-readable, and leaves overflow queued", async () => {
   const database = databaseThrough();
   insertSubscriber(database, { id: "person-a", email: "a@example.edu", manageToken: "a".repeat(43) });
@@ -1076,13 +1146,6 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
     async sendEmail(message, idempotencyKey) {
       this.attempts.push({ message, idempotencyKey });
       if (this.attempts.length === 1) {
-        assert.equal(await store.updateSubscription(
-          person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
-        ), true);
-        assert.equal((await store.createSubscriptionCycle(await cycle({
-          verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
-          verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
-        }))).cycleAccepted, true);
         throw Object.assign(new Error("bounded provider failure"), {
           code: "provider_network_failure", providerFailureKind: "network", retryable: true,
         });
@@ -1096,9 +1159,21 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
     all(database, "SELECT status,error_code,terminal_at FROM notification_events WHERE id LIKE 'digest-%' ORDER BY id")
       .map(event => [event.status, event.error_code, event.terminal_at]),
     [
-      ["failed", "subscription_reactivated_reconcile", null],
-      ["failed", "subscription_reactivated_reconcile", null],
+      ["failed", "provider_outcome_reconcile", null],
+      ["failed", "provider_outcome_reconcile", null],
     ],
+  );
+  assert.equal(await store.updateSubscription(
+    person.manageToken, "watch-1", { active: false }, fixedNow.toISOString(),
+  ), true);
+  assert.equal((await store.createSubscriptionCycle(await cycle({
+    verificationNonce: "z".repeat(43), verificationTokenHash: "replacement-token",
+    verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
+  }))).cycleAccepted, true);
+  assert.deepEqual(
+    all(database, "SELECT status,error_code,terminal_at FROM notification_events WHERE id LIKE 'digest-%' ORDER BY id")
+      .map(event => [event.status, event.error_code, event.terminal_at]),
+    [["failed", "provider_outcome_reconcile", null], ["failed", "provider_outcome_reconcile", null]],
   );
   assert.equal(await store.suppressSubscriberByMessage(
     "provider-digest-reconciled", "email.bounced", "webhook-before-correlation", fixedNow.toISOString(),
@@ -1149,7 +1224,7 @@ test("FF-BUG-017 a failed digest retries the whole claim with the same idempoten
   assert.equal(first.failedCount, 1);
   assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["failed", "failed"]);
   const retryNow = new Date("2026-09-01T12:06:00.000Z");
-  const second = await dispatchNotifications({ store, provider, env, now: retryNow, weekly: true });
+  const second = await dispatchNotifications({ store, provider, env, now: retryNow, weekly: false });
   assert.equal(second.deliveredCount, 1);
   assert.deepEqual(all(database, "SELECT status FROM notification_events ORDER BY id").map(row => row.status), ["sent", "sent"]);
   assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
