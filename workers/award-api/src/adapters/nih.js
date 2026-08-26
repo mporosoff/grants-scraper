@@ -11,8 +11,9 @@ import {
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NIH_ADAPTER_VERSION = "1.3.0";
+export const NIH_ADAPTER_VERSION = "1.4.0";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
 export const NIH_UPSTREAM_PAGE_SIZE = 100;
 export const NIH_MAX_UPSTREAM_PAGES = 12;
@@ -23,7 +24,7 @@ function parseCoreProjectNumber(value) {
   return { activity_code: match[1], ic_code: match[2], serial_num: match[3] };
 }
 
-export function buildNihRequest(criteria, { limit, offset }) {
+export function buildNihRequest(criteria, { limit, offset, currentYear }) {
   if (criteria.award_id || criteria.program_codes || criteria.program_office) {
     throw new AwardSourceError("unsupported_criteria", "unsupported");
   }
@@ -54,11 +55,8 @@ export function buildNihRequest(criteria, { limit, offset }) {
       apiCriteria.org_names = criteria._institution.sources.NIH.search_names;
     }
   }
-  if (criteria.year_start || criteria.year_end) {
-    const start = criteria.year_start || criteria.year_end;
-    const end = criteria.year_end || criteria.year_start;
-    apiCriteria.fiscal_years = Array.from({ length: end - start + 1 }, (_, index) => start + index);
-  }
+  const fiscalYears = nihFiscalYears(criteria, currentYear);
+  if (fiscalYears) apiCriteria.fiscal_years = fiscalYears;
   const upstreamLimit = Math.min(Math.max(limit * 4, 50), 100);
   const body = {
     criteria: apiCriteria,
@@ -241,7 +239,10 @@ function normalizeProjects(groups, { criteria, retrievedAt, completeHistory }) {
 }
 
 export async function searchNih(fetchImpl, criteria, options) {
-  const retrievedAt = options.now().toISOString();
+  const retrievedDate = options.now();
+  const retrievedAt = retrievedDate.toISOString();
+  const currentYear = retrievedDate.getUTCFullYear();
+  const yearFilter = yearFilterDiagnostics(criteria);
   const targetProjectCount = options.offset + options.limit + 1;
   const rawRecords = [];
   const seenRecords = new Set();
@@ -253,7 +254,7 @@ export async function searchNih(fetchImpl, criteria, options) {
   let results = [];
 
   for (let page = 0; page < NIH_MAX_UPSTREAM_PAGES; page += 1) {
-    const request = buildNihRequest(criteria, { limit: NIH_UPSTREAM_PAGE_SIZE, offset: upstreamOffset });
+    const request = buildNihRequest(criteria, { limit: NIH_UPSTREAM_PAGE_SIZE, offset: upstreamOffset, currentYear });
     const payload = await fetchSourceJson(fetchImpl, request.url, request.options);
     if (!Array.isArray(payload?.results) || !payload.meta || typeof payload.meta !== "object") {
       throw new AwardSourceError("source_invalid_response");
@@ -267,6 +268,7 @@ export async function searchNih(fetchImpl, criteria, options) {
       if (!recordKey || seenRecords.has(recordKey)) continue;
       seenRecords.add(recordKey);
       rawRecords.push(raw);
+      if (!recordSatisfiesYearFilter(raw.fiscal_year, criteria, yearFilter)) continue;
       const projectKey = cleanText(raw.core_project_num || raw.project_num || raw.appl_id, 60);
       if (!projectKey) continue;
       if (!groups.has(projectKey)) groups.set(projectKey, []);
@@ -296,6 +298,7 @@ export async function searchNih(fetchImpl, criteria, options) {
     upstream_total_count: upstreamTotal,
     upstream_pages: upstreamPages,
     safety_bound_reached: !upstreamExhausted && upstreamPages >= NIH_MAX_UPSTREAM_PAGES,
+    year_filter: yearFilter,
     has_more: results.length > options.offset + options.limit,
     retrieved_at: retrievedAt,
   };

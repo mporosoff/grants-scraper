@@ -12,8 +12,9 @@ import {
 } from "../contract.js";
 import { AwardSourceError, fetchSourceText } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { recordSatisfiesYearFilter, requestedYearRange, yearFilterDiagnostics } from "../year-filter.js";
 
-export const DOE_ADAPTER_VERSION = "1.2.0";
+export const DOE_ADAPTER_VERSION = "1.3.0";
 export const DOE_SEARCH_URL = "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx";
 export const DOE_MAX_RESULTS = 10;
 export const DOE_MAX_OFFSET = 100;
@@ -420,6 +421,8 @@ export async function searchDoe(fetchImpl, criteria, {
 } = {}) {
   if (limit > DOE_MAX_RESULTS) unsupported();
   const retrievedAt = now().toISOString();
+  const yearRange = requestedYearRange(criteria);
+  const yearFilter = yearFilterDiagnostics(criteria);
   if (offset > DOE_MAX_OFFSET) {
     return {
       source: "DOE",
@@ -427,6 +430,7 @@ export async function searchDoe(fetchImpl, criteria, {
       retrieved_at: retrievedAt,
       total_count: null,
       raw_record_count: 0,
+      year_filter: yearFilter,
       has_more: false,
       results: [],
       health: { status: "available", abstract_requests: 0, abstracts_loaded: 0, abstracts_failed: 0 },
@@ -443,7 +447,7 @@ export async function searchDoe(fetchImpl, criteria, {
     body: form.toString(),
   }, { timeoutMs: DOE_REQUEST_TIMEOUT_MS });
   const firstPage = parseDoeSearchResults(firstPageHtml);
-  if (!criteria._institution) {
+  if (!criteria._institution && !yearRange.active) {
     const firstNeededPage = Math.floor(offset / firstPage.page_size) + 1;
     const lastNeededIndex = Math.min(offset + limit - 1, DOE_MAX_OFFSET + DOE_MAX_RESULTS - 1);
     const lastNeededPage = Math.floor(lastNeededIndex / firstPage.page_size) + 1;
@@ -480,6 +484,7 @@ export async function searchDoe(fetchImpl, criteria, {
       raw_record_count: rawRecordCount,
       upstream_pages: pages.size,
       safety_bound_reached: false,
+      year_filter: yearFilter,
       has_more: offset < DOE_MAX_OFFSET && offset + limit < firstPage.total_count,
       results: abstracts.enriched.map(({ raw, abstract }) => normalizeDoeAward(raw, { retrievedAt, abstract })),
       health: {
@@ -500,6 +505,8 @@ export async function searchDoe(fetchImpl, criteria, {
     for (const raw of parsed.records) {
       const awardId = cleanText(raw.award_id, 80);
       if (!awardId || seenAwardIds.has(awardId)) continue;
+      const awardYear = Number(raw.most_recent_award_date?.slice(0, 4)) || null;
+      if (!recordSatisfiesYearFilter(awardYear, criteria, yearFilter)) continue;
       if (!criteria._institution || recordMatchesInstitution({
         institution: normalizeInstitution(raw.institution_name, { uei: raw.uei }),
       }, criteria._institution, "DOE")) {
@@ -508,22 +515,26 @@ export async function searchDoe(fetchImpl, criteria, {
       }
     }
   };
-  const sourceIdentity = criteria._institution.sources?.DOE || {};
-  const searchNames = uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3);
+  const sourceIdentity = criteria._institution?.sources?.DOE || {};
+  const searchNames = criteria._institution
+    ? uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3)
+    : [null];
   const queryStates = searchNames.map((searchName, queryIndex) => ({
     searchName,
-    criteria: {
-      ...criteria,
-      _institution: {
-        ...criteria._institution,
-        sources: {
-          ...criteria._institution.sources,
-          DOE: { ...sourceIdentity, search_name: searchName },
+    criteria: searchName
+      ? {
+        ...criteria,
+        _institution: {
+          ...criteria._institution,
+          sources: {
+            ...criteria._institution.sources,
+            DOE: { ...sourceIdentity, search_name: searchName },
+          },
         },
-      },
-    },
-    html: queryIndex === 0 && searchName === sourceIdentity.search_name ? firstPageHtml : null,
-    parsed: queryIndex === 0 && searchName === sourceIdentity.search_name ? firstPage : null,
+      }
+      : criteria,
+    html: queryIndex === 0 && (!criteria._institution || searchName === sourceIdentity.search_name) ? firstPageHtml : null,
+    parsed: queryIndex === 0 && (!criteria._institution || searchName === sourceIdentity.search_name) ? firstPage : null,
     pages: 0,
     rawCount: 0,
     total: null,
@@ -569,10 +580,10 @@ export async function searchDoe(fetchImpl, criteria, {
   const safetyBoundReached = !upstreamExhausted && upstreamPages >= DOE_MAX_UPSTREAM_PAGES;
   const selected = sourceScoped.slice(offset, offset + limit);
   const abstracts = await enrichAbstracts(fetchImpl, selected, sleep);
-  const results = abstracts.enriched.map(({ raw, abstract }) => attachResolvedInstitution(normalizeDoeAward(raw, {
-    retrievedAt,
-    abstract,
-  }), criteria._institution));
+  const results = abstracts.enriched.map(({ raw, abstract }) => {
+    const award = normalizeDoeAward(raw, { retrievedAt, abstract });
+    return criteria._institution ? attachResolvedInstitution(award, criteria._institution) : award;
+  });
   const hasMore = offset < DOE_MAX_OFFSET && sourceScoped.length > offset + limit;
   return {
     source: "DOE",
@@ -584,6 +595,7 @@ export async function searchDoe(fetchImpl, criteria, {
     upstream_pages: upstreamPages,
     upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
+    year_filter: yearFilter,
     has_more: hasMore,
     results,
     health: {

@@ -10,8 +10,9 @@ import {
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
+import { recordSatisfiesYearFilter, requestedYearRange, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NSF_ADAPTER_VERSION = "1.3.0";
+export const NSF_ADAPTER_VERSION = "1.4.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
 export const NSF_UPSTREAM_PAGE_SIZE = 25;
 export const NSF_MAX_UPSTREAM_PAGES = 12;
@@ -165,18 +166,21 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
 export async function searchNsf(fetchImpl, criteria, options) {
   const retrievedAt = options.now().toISOString();
   const targetCount = options.offset + options.limit + 1;
+  const yearRange = requestedYearRange(criteria);
+  const yearFilter = yearFilterDiagnostics(criteria);
+  const normalizedPaging = Boolean(criteria._institution || yearRange.active);
   const awards = [];
   const seen = new Set();
   let rawRecordCount = 0;
   let upstreamPages = 0;
-  const maximumPages = criteria._institution && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
+  const maximumPages = normalizedPaging && !criteria.award_id ? NSF_MAX_UPSTREAM_PAGES : 1;
   const sourceIdentity = criteria._institution?.sources?.NSF || {};
   const searchNames = criteria._institution && !criteria.award_id
     ? uniqueStrings([sourceIdentity.search_name, sourceIdentity.search_names]).slice(0, 3)
     : [null];
   const queryStates = searchNames.map(searchName => ({
     searchName,
-    offset: criteria._institution && !criteria.award_id ? 0 : options.offset,
+    offset: normalizedPaging ? 0 : options.offset,
     total: null,
     exhausted: false,
     fetched: false,
@@ -196,8 +200,8 @@ export async function searchNsf(fetchImpl, criteria, options) {
   while (upstreamPages < maximumPages) {
     let progressed = false;
     for (const query of queryStates) {
-      if (query.exhausted || upstreamPages >= maximumPages || (criteria._institution && awards.length >= targetCount)) continue;
-      const requestOptions = criteria._institution && !criteria.award_id
+      if (query.exhausted || upstreamPages >= maximumPages || (normalizedPaging && awards.length >= targetCount)) continue;
+      const requestOptions = normalizedPaging
         ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: query.offset }
         : options;
       const request = buildNsfRequest(query.criteria, requestOptions);
@@ -215,39 +219,39 @@ export async function searchNsf(fetchImpl, criteria, options) {
         const award = normalizeNsfAward(raw, { retrievedAt, sourceUrl: request.url });
         if (seen.has(award.award_id)) continue;
         seen.add(award.award_id);
-        if (!criteria._institution) awards.push(award);
-        else if (recordMatchesInstitution(award, criteria._institution, "NSF")) {
-          awards.push(attachResolvedInstitution(award, criteria._institution));
-        }
+        if (!recordSatisfiesYearFilter(award.award_year, criteria, yearFilter)) continue;
+        if (criteria._institution && !recordMatchesInstitution(award, criteria._institution, "NSF")) continue;
+        awards.push(criteria._institution ? attachResolvedInstitution(award, criteria._institution) : award);
       }
       const rawEnd = query.offset + rawAwards.length;
       query.exhausted = criteria.award_id
         || rawAwards.length < requestOptions.limit
         || (query.total !== null && rawEnd >= query.total);
       query.offset += requestOptions.limit;
-      if (!criteria._institution) break;
+      if (!normalizedPaging) break;
     }
-    if (!criteria._institution || awards.length >= targetCount || !progressed || queryStates.every(query => query.exhausted)) break;
+    if (!normalizedPaging || awards.length >= targetCount || !progressed || queryStates.every(query => query.exhausted)) break;
   }
   const processedQueries = queryStates.filter(query => query.fetched).length;
   const upstreamExhausted = queryStates.length > 0 && queryStates.every(query => query.fetched && query.exhausted);
   const reportedTotals = queryStates.filter(query => query.fetched && query.total !== null).map(query => query.total);
   const upstreamTotalCount = reportedTotals.length ? reportedTotals.reduce((sum, value) => sum + value, 0) : null;
-  const safetyBoundReached = Boolean(criteria._institution && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
-  const results = criteria._institution
+  const safetyBoundReached = Boolean(normalizedPaging && !criteria.award_id && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
+  const results = normalizedPaging
     ? awards.slice(options.offset, options.offset + options.limit)
     : awards.slice(0, options.limit);
   return {
     source: "NSF",
     adapter_version: NSF_ADAPTER_VERSION,
     results,
-    total_count: criteria._institution ? (upstreamExhausted ? awards.length : null) : upstreamTotalCount,
+    total_count: normalizedPaging ? (upstreamExhausted ? awards.length : null) : upstreamTotalCount,
     upstream_total_count: upstreamTotalCount,
     raw_record_count: rawRecordCount,
     upstream_pages: upstreamPages,
     upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
-    has_more: criteria._institution
+    year_filter: yearFilter,
+    has_more: normalizedPaging
       ? awards.length > options.offset + options.limit
       : !criteria.award_id && upstreamTotalCount > options.offset + rawRecordCount,
     retrieved_at: retrievedAt,

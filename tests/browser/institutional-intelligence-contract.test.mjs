@@ -189,7 +189,7 @@ test("aggregates returned awards and preserves investigator and program drill-do
   assert.equal(ada.projects, 2);
   assert.deepEqual(plain(ada.variants.map(item => item.source)), ["NSF", "NIH"]);
   assert.ok(aggregate.programs.some(item => item.source === "NIH" && item.query === "R01"));
-  assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "BES"));
+  assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "Catalysis Science" && item.parent_label === "Office of Basic Energy Sciences"));
 });
 
 test("share URLs round-trip institution and all transparent filters", () => {

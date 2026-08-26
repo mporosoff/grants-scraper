@@ -76,6 +76,10 @@ test("source-specific loading accumulates projects without replacing the current
   expect(calls.at(-1).criteria.institution).toBe("University of Rochester");
   await expect(page.locator("#ii-output-heading")).toHaveText("University of Rochester funded projects");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(50);
+  await expect(page.locator("#ii-metrics")).toContainText("50Projects loaded");
+  await expect(page.locator("#ii-metrics")).toContainText("1Investigator identities in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("1Distinct programs in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2026Loaded award years");
   await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
   await expect(page).not.toHaveURL(/ii_offset=/);
 });
@@ -254,8 +258,9 @@ test("cross-agency summaries, investigator and program drill-downs, and history 
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
-  await expect(page.locator("#ii-metrics")).toContainText("3Projects returned");
-  await expect(page.locator("#ii-metrics")).toContainText("3Unique investigators");
+  await expect(page.locator("#ii-metrics")).toContainText("3Projects loaded");
+  await expect(page.locator("#ii-metrics")).toContainText("3Investigator identities in loaded results");
+  await expect(page.locator(".ii-award-card[data-source='DOE'] .ii-award-program")).toContainText("Office of Basic Energy Sciences › Catalysis Science");
   await expect(page.getByRole("link", { name: /Official NSF record/ })).toHaveAttribute("target", "_blank");
   await expect(page.locator("a[href='mailto:vkarasev@example.edu']")).toBeVisible();
   await expect(page.locator("a[href='mailto:vlukin@nsf.gov']")).toBeVisible();
@@ -270,13 +275,13 @@ test("cross-agency summaries, investigator and program drill-downs, and history 
   await expect(page).not.toHaveURL(/ii_pi=/);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
 
-  await page.locator("#ii-programs").selectOption({ label: "Office of Basic Energy Sciences · 1 project" });
+  await page.locator("#ii-programs").selectOption({ label: "DOE · Office of Basic Energy Sciences › Catalysis Science" });
   await expect(page).toHaveURL(/ii_agency=DOE/);
-  await expect(page).toHaveURL(/ii_program=BES/);
+  await expect(page).toHaveURL(/ii_program=Catalysis\+Science/);
   await expect.poll(() => calls.at(-1)?.sources).toEqual(["DOE"]);
   expect(calls.at(-1).criteria).toMatchObject({
     institution: "University of Rochester",
-    program_office: "SC-32",
+    program: "Catalysis Science",
   });
 });
 
@@ -291,27 +296,130 @@ test("Marc source variants form one identity and return two NSF plus one DOE awa
   });
   await openInstitutionalIntelligence(page);
   await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-year-start").fill("2019");
+  await page.locator("#ii-year-end").fill("2026");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
-  const marcOption = page.locator("#ii-investigators option").filter({ hasText: "Marc D Porosoff · 3 currently loaded awards" });
+  const marcOption = page.locator("#ii-investigators option").filter({ hasText: /^Marc D\. Porosoff$/ });
   await expect(marcOption).toHaveCount(1);
-  await expect(marcOption).toHaveAttribute("aria-label", /Marc Porosoff from NSF.*Marc D Porosoff from DOE/);
-  await chooseInvestigator(page, "Marc D Porosoff");
-  await expect(page).toHaveURL(/ii_pi=Marc\+D\+Porosoff/);
+  await expect(marcOption).not.toHaveAttribute("aria-label", /award|project/i);
+  await chooseInvestigator(page, "Marc D. Porosoff");
+  await expect(page).toHaveURL(/ii_pi=Marc\+D\.?\+Porosoff/);
   await expect(page).toHaveURL(/ii_pi_identity=1/);
   await expect(page.locator("#ii-awards .ii-award-card[data-source='NSF']")).toHaveCount(2);
   await expect(page.locator("#ii-awards .ii-award-card[data-source='DOE']")).toHaveCount(1);
   await expect(page.locator("#ii-investigator-variants")).toContainText("Marc Porosoff (NSF)");
   await expect(page.locator("#ii-investigator-variants")).toContainText("Marc D Porosoff (DOE)");
+  await expect(page.locator("#ii-investigators")).toHaveValue(/.+/);
+  await expect(page.locator("#ii-status")).toContainText("3 matching awards currently loaded across");
   const queriedNames = new Set(calls.slice(3).map(call => call.criteria.pi).filter(Boolean));
   expect(queriedNames.has("Marc Porosoff")).toBe(true);
   expect(queriedNames.has("Marc D Porosoff")).toBe(true);
+  expect(calls.slice(3).every(call => call.criteria.year_start === 2019 && call.criteria.year_end === 2026)).toBe(true);
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_pi_identity/);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
   await page.goForward();
   await expect(page).toHaveURL(/ii_pi_identity=1/);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(3);
+});
+
+test("submitted years survive Load more, investigator and program drill-downs, and history", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0] },
+    resultCountPerSource: { NSF: 1 },
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-topic").fill("submitted catalysis");
+  await page.locator("#ii-year-start").fill("2024");
+  await page.locator("#ii-year-end").fill("2026");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2024–2026");
+  await page.locator("#ii-year-start").fill("1999");
+  await page.locator("#ii-year-end").fill("2000");
+  await page.getByRole("button", { name: "Load more NSF" }).click();
+  expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026, topic: "submitted catalysis" });
+
+  await chooseInvestigator(page, "Vasily Karasiev");
+  await expect(page.locator("#ii-investigators")).toHaveValue(/.+/);
+  expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026, topic: "submitted catalysis" });
+  await expect(page.locator("#ii-status")).toContainText("matching award");
+  await expect(page.locator("#ii-status")).toContainText("across 1 source for Vasily Karasiev");
+
+  const programOptions = await page.locator("#ii-programs option").allTextContents();
+  expect(programOptions.some(label => /\d+ (?:project|award)/i.test(label))).toBe(false);
+  await page.locator("#ii-programs").selectOption({ label: "NSF · Mathematical and Physical Sciences › Plasma Physics" });
+  expect(calls.at(-1).criteria).toMatchObject({
+    year_start: 2024,
+    year_end: 2026,
+    topic: "submitted catalysis",
+    program: "Plasma Physics",
+  });
+  await page.goBack();
+  await expect(page).toHaveURL(/ii_pi_identity=1/);
+  await expect.poll(() => calls.at(-1)?.criteria?.year_start).toBe(2024);
+  expect(calls.at(-1).criteria.year_end).toBe(2026);
+  await page.goBack();
+  await expect(page).not.toHaveURL(/ii_pi_identity=1/);
+  await expect.poll(() => calls.at(-1)?.criteria?.year_start).toBe(2024);
+  expect(calls.at(-1).criteria.year_end).toBe(2026);
+});
+
+test("evidence-grounded question years become the submitted request state", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({ output_text: JSON.stringify({
+      agency: "all",
+      program: "",
+      topic: "catalysis",
+      pi: "",
+      program_officer: "",
+      year_start: 2024,
+      year_end: 2026,
+      answer_intent: "count",
+      narrative_needed: false,
+    }) }),
+  }));
+  mockHybrid(page);
+  const calls = mockAwards(page);
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many catalysis awards were funded from 2024 through 2026?");
+  await page.locator("#ii-ask-button").click();
+  await expect.poll(() => calls.length).toBe(3);
+  expect(calls.every(call => call.criteria.year_start === 2024 && call.criteria.year_end === 2026)).toBe(true);
+  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2024–2026");
+});
+
+test("submitting a new narrow year range recalculates every loaded-result metric", async ({ page }) => {
+  mockHybrid(page);
+  mockAwards(page, { enforceYearFilters: true });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-year-start").fill("2024");
+  await page.locator("#ii-year-end").fill("2026");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
+  await expect(page.locator("#ii-metrics")).toContainText("2Projects loaded");
+  await expect(page.locator("#ii-metrics")).toContainText("2Investigator identities in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2Distinct programs in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2026Loaded award years");
+
+  await page.locator("#ii-year-start").fill("2019");
+  await page.locator("#ii-year-end").fill("2019");
+  await page.locator("#ii-search").click();
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
+  await expect(page.locator("#ii-metrics")).toContainText("1Projects loaded");
+  await expect(page.locator("#ii-metrics")).toContainText("1Investigator identities in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("1Distinct programs in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2019Loaded award years");
+  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2019–2019");
 });
 
 test("investigator identity pagination retains the selected identity and deduplicates loaded awards", async ({ page }) => {
@@ -415,6 +523,10 @@ test("one unavailable award source does not suppress the other institutional evi
   await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable. Retry later.");
   await expect(page.locator("#ii-source-status")).toContainText("DOE available");
   await expect(page.locator("#ii-status")).toContainText("loaded from available sources");
+  await expect(page.locator("#ii-metrics")).toContainText("2Projects loaded");
+  await expect(page.locator("#ii-metrics")).toContainText("2Investigator identities in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2Distinct programs in loaded results");
+  await expect(page.locator("#ii-metrics")).toContainText("2019–2026Loaded award years");
 });
 
 test("the natural-language translator reuses the saved Funding Finder provider and exposes its structured plan", async ({ page }) => {

@@ -346,6 +346,7 @@ function sourceSummary(payload) {
     has_more: payload.has_more === true,
     result_count: payload.results.length,
     retrieved_at: payload.retrieved_at,
+    ...(payload.year_filter ? { year_filter: payload.year_filter } : {}),
     ...(payload.health ? { health: payload.health } : {}),
   };
 }

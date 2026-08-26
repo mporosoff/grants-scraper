@@ -17,7 +17,7 @@ test("standalone native topic search renders source records, provenance, institu
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator(".ii-award-card")).toHaveCount(3);
-  await expect(page.locator("#ii-metrics")).toContainText("3Projects returned");
+  await expect(page.locator("#ii-metrics")).toContainText("3Projects loaded");
   await page.locator(".ii-award-abstract").first().evaluate(element => { element.open = true; });
   await expect(page.locator(".ii-award-abstract").first().locator("p")).toHaveCount(2);
   await expect(page.locator(".ii-award-abstract").first()).toContainText("CO₂");
@@ -65,8 +65,8 @@ test("missing award values remain missing while explicit zero stays visible", as
   await expect(nih).toContainText("$0");
   await expect(doe).toContainText("2019");
   await expect(doe).toContainText("$1,150,000");
-  await expect(page.locator("#ii-metrics")).toContainText("2019Award years");
-  await expect(page.locator("#ii-metrics")).not.toContainText(/\b0(?:–|Award years)/);
+  await expect(page.locator("#ii-metrics")).toContainText("2019Loaded award years");
+  await expect(page.locator("#ii-metrics")).not.toContainText(/\b0(?:–|Loaded award years)/);
 
   await page.goto("/funded_awards.html?opportunity=363616");
   const legacyNsf = page.locator(".award-card[data-source='NSF']");
@@ -116,6 +116,34 @@ test("investigator drill-down replaces an exact opportunity request and round-tr
   await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Stephen Dewhurst");
   expect(calls.at(-1).criteria).not.toHaveProperty("opportunity_number");
   await expect(page.locator("#selected-opportunity")).toBeHidden();
+});
+
+test("standalone paging and investigator handoff retain the submitted year range", async ({ page }) => {
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0] },
+    resultCountPerSource: { NSF: 1 },
+  });
+  await page.goto("/funded_awards.html?opportunity=363616&institution=University+of+Rochester&year_start=2024&year_end=2026");
+  await expect.poll(() => calls.at(-1)?.criteria?.year_start).toBe(2024);
+  await page.locator("#year-start").evaluate(element => { element.value = "1999"; });
+  await page.locator("#year-end").evaluate(element => { element.value = "2000"; });
+
+  await page.locator("#award-next").click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(25);
+  expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026 });
+  await page.locator("#award-previous").click();
+  await expect.poll(() => calls.at(-1)?.offset).toBe(0);
+  expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026 });
+
+  await page.locator("[data-award-pi='Vasily Karasiev']").click();
+  await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Vasily Karasiev");
+  expect(calls.at(-1).criteria).toMatchObject({
+    institution: "University of Rochester",
+    year_start: 2024,
+    year_end: 2026,
+  });
+  await expect(page.locator("#ii-year-start")).toHaveValue("2024");
+  await expect(page.locator("#ii-year-end")).toHaveValue("2026");
 });
 
 test("a short multi-source result set exposes only the source that can load more", async ({ page }) => {

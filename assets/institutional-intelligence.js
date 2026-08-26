@@ -23,7 +23,9 @@
     sourcePages: new Map(),
     loadingSource: "",
     aggregate: null,
+    submittedState: null,
     investigatorGroups: new Map(),
+    programGroups: new Map(),
     selectedInvestigator: null,
     question: null,
     answering: false,
@@ -78,6 +80,13 @@
       source_variants: {},
       members: [],
     };
+  }
+
+  function sameInvestigatorIdentity(left, right) {
+    if (!left || !right || left.base_key !== right.base_key) return false;
+    if (!left.middle || !right.middle || left.complete_key === right.complete_key) return true;
+    if (left.middle_initial !== right.middle_initial) return false;
+    return left.middle_is_initial !== right.middle_is_initial;
   }
 
   function setStatus(message, error = false) {
@@ -328,8 +337,8 @@
     const investigators = investigatorRecords
       .map(person => clean(person?.name, 300))
       .filter(Boolean);
-    const programs = [clean(award?.program_name, 300), ...(award?.program_codes || []).map(value => clean(value, 100))]
-      .filter(Boolean);
+    const program = core.programDescriptors(award)[0] || null;
+    const programCodes = (program?.source_codes || []).filter(value => ![program?.parent_label, program?.leaf_label].some(label => core.identityKey(label) === core.identityKey(value)));
     const year = awardProduct.awardYear(award?.award_year) ?? "Year not listed";
     const contacts = [...investigatorRecords, ...programContacts]
       .map(person => contactLine(person, source, officialUrl))
@@ -338,7 +347,7 @@
       <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(year)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.join(", "))}` : ""}</p>
-      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(programs.join(" · ") || award?.subagency || "Not listed")}</p>
+      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(program?.label || award?.subagency || "Not listed")}${programCodes.length ? ` <span class="ii-contact-provenance">Source code${programCodes.length === 1 ? "" : "s"}: ${escapeHtml(programCodes.join(", "))}</span>` : ""}</p>
       ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
       <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
       <details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>
@@ -391,20 +400,24 @@
   function renderFacetSelect(select, items, { kind }) {
     const noun = kind === "investigator" ? "investigator" : "program";
     if (kind === "investigator") state.investigatorGroups = new Map(items.map(item => [item.identity_key, item]));
+    else state.programGroups = new Map(items.map(item => [item.key, item]));
     select.innerHTML = items.length
-      ? `<option value="">Choose a ${noun} (${items.length})</option>${items.map(item => {
-        const value = kind === "investigator" ? item.identity_key : item.query;
-        const attributes = kind === "program" ? ` data-ii-program-source="${escapeAttribute(item.source)}"` : "";
-        const label = kind === "investigator"
-          ? `${item.name} · ${item.projects} currently loaded award${item.projects === 1 ? "" : "s"}`
-          : `${item.label} · ${item.projects} project${item.projects === 1 ? "" : "s"}`;
-        const variantLabel = kind === "investigator"
-          ? ` aria-label="${escapeAttribute(`${label}. Source-published variants: ${item.variants.map(variant => `${variant.name} from ${variant.source}`).join("; ")}`)}"`
-          : "";
-        return `<option value="${escapeAttribute(value)}"${attributes}${variantLabel}>${escapeHtml(label)}</option>`;
+      ? `<option value="">Choose a ${noun}</option>${items.map(item => {
+        const value = kind === "investigator" ? item.identity_key : item.key;
+        const label = kind === "investigator" ? item.name : item.label;
+        return `<option value="${escapeAttribute(value)}">${escapeHtml(label)}</option>`;
       }).join("")}`
       : `<option value="">No ${kind === "investigator" ? "investigators" : "programs"} loaded</option>`;
     select.disabled = items.length === 0;
+    if (kind === "investigator" && state.selectedInvestigator) {
+      const selectedName = core.normalizedInvestigatorName(state.selectedInvestigator.name);
+      const selected = items.find(item => item.identity_key === state.selectedInvestigator.identity_key)
+        || items.find(item => sameInvestigatorIdentity(selectedName, core.normalizedInvestigatorName(item.name)));
+      if (selected) {
+        state.selectedInvestigator = selected;
+        select.value = selected.identity_key;
+      }
+    }
   }
 
   function renderLoadMore(aggregate) {
@@ -481,9 +494,9 @@
 
   function renderSelectedInvestigatorDetail(aggregate) {
     if (!state.selectedInvestigator) return;
-    const selectedBase = core.normalizedInvestigatorName(state.selectedInvestigator.name)?.base_key;
+    const selectedName = core.normalizedInvestigatorName(state.selectedInvestigator.name);
     const selected = aggregate.investigators.find(item => item.identity_key === state.selectedInvestigator.identity_key)
-      || aggregate.investigators.find(item => core.normalizedInvestigatorName(item.name)?.base_key === selectedBase);
+      || aggregate.investigators.find(item => sameInvestigatorIdentity(selectedName, core.normalizedInvestigatorName(item.name)));
     $("ii-investigator-variants").textContent = selected
       ? `${selected.name} represents ${selected.projects} currently loaded award${selected.projects === 1 ? "" : "s"}. Source-published variants: ${selected.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`
       : `No returned investigator identity safely matched ${state.selectedInvestigator.name}; unrelated common-name records were excluded.`;
@@ -565,15 +578,19 @@
     $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
     const moreSources = (payload.sources || []).filter(source => source.status === "ok" && source.has_more === true).map(source => source.source);
     const boundedSources = (payload.sources || []).filter(source => source.status === "ok" && source.safety_bound_reached === true).map(source => source.source);
-    $("ii-result-scope").textContent = `Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded across source-specific pages${moreSources.length ? `; load more from ${moreSources.join(", ")}` : ""}${boundedSources.length ? `; upstream scan bound reached for ${boundedSources.join(", ")}` : ""}.`;
+    const submitted = state.submittedState || submittedPage?.request?.criteria || {};
+    const requestedYears = submitted.year_start && submitted.year_end
+      ? `${submitted.year_start}–${submitted.year_end}`
+      : submitted.year_start ? `${submitted.year_start} onward` : submitted.year_end ? `through ${submitted.year_end}` : "all available years";
+    $("ii-result-scope").textContent = `Active requested year range: ${requestedYears}. Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded across source-specific pages${moreSources.length ? `; load more from ${moreSources.join(", ")}` : ""}${boundedSources.length ? `; upstream scan bound reached for ${boundedSources.join(", ")}` : ""}.`;
     const years = aggregate.year_start
       ? aggregate.year_start === aggregate.year_end ? String(aggregate.year_start) : `${aggregate.year_start}–${aggregate.year_end}`
       : "Not listed";
     $("ii-metrics").innerHTML = [
-      [aggregate.project_count, "Projects returned"],
-      [aggregate.investigator_count, "Unique investigators"],
-      [aggregate.program_count, "Program labels"],
-      [years, "Award years"],
+      [aggregate.project_count, "Projects loaded"],
+      [aggregate.investigator_count, "Investigator identities in loaded results"],
+      [aggregate.program_count, "Distinct programs in loaded results"],
+      [years, "Loaded award years"],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
     renderFacetSelect($("ii-investigators"), aggregate.investigators, { kind: "investigator" });
     renderSelectedInvestigatorDetail(aggregate);
@@ -649,14 +666,17 @@
   function setLoadedStatus(payload, aggregate) {
     const failed = (payload.sources || []).filter(source => source.status !== "ok");
     const issueText = failed.map(awardProduct.sourceIssueText).join(" ");
-    setStatus(failed.length
+    const availableSources = (payload.sources || []).filter(source => source.status === "ok").length;
+    setStatus(state.selectedInvestigator
+      ? `${aggregate.project_count} matching award${aggregate.project_count === 1 ? "" : "s"} currently loaded across ${availableSources} source${availableSources === 1 ? "" : "s"} for ${state.selectedInvestigator.name}.${issueText ? ` ${issueText}` : ""}`
+      : failed.length
       ? aggregate.project_count
         ? `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} loaded from available sources. ${issueText}`
         : issueText
       : `${aggregate.project_count} public project${aggregate.project_count === 1 ? "" : "s"} loaded. Use the investigator or program menus to drill into the official records.`, failed.length > 0 && aggregate.project_count === 0);
   }
 
-  async function runSearch({ historyMode = "replace", resolveInstitution = true, offset = null, focusResults = false, scrollResults = false, questionSearch = false } = {}) {
+  async function runSearch({ historyMode = "replace", resolveInstitution = true, offset = null, focusResults = false, scrollResults = false, questionSearch = false, searchState = null } = {}) {
     let outcome = null;
     const sequence = ++state.searchSequence;
     state.searchController?.abort();
@@ -671,9 +691,10 @@
         $("ii-question-answer").classList.add("hidden");
       }
       state.selectedInvestigator = null;
-      const current = formState();
+      const current = searchState ? { ...searchState } : formState();
       if (offset !== null) current.offset = Math.max(0, Math.min(1_000, Number(offset) || 0));
       core.buildAwardRequest(current, SOURCE_LIMITS.DOE);
+      state.submittedState = { ...current };
       const sources = core.sourcesForAgency(current.agency);
       const requestBodies = sources.map(source => core.buildAwardRequest(
         { ...current, agency: source },
@@ -786,7 +807,7 @@
     };
   }
 
-  async function runInvestigatorSearch(group, { historyMode = "push", focusResults = true } = {}) {
+  async function runInvestigatorSearch(group, { historyMode = "push", focusResults = true, searchState = null } = {}) {
     if (!group) return null;
     const sequence = ++state.searchSequence;
     state.searchController?.abort();
@@ -796,7 +817,8 @@
     $("ii-question-answer").classList.add("hidden");
     state.selectedInvestigator = group;
     $("ii-pi").value = group.name;
-    const current = { ...formState(), pi: group.name, pi_identity: true, offset: 0 };
+    const current = { ...(searchState || state.submittedState || formState()), pi: group.name, pi_identity: true, offset: 0 };
+    state.submittedState = { ...current };
     const sources = core.sourcesForAgency(current.agency);
     syncUrl(current, historyMode);
     setBusy(true);
@@ -910,7 +932,9 @@
     state.selectedInstitution = null;
     state.payload = null;
     state.aggregate = null;
+    state.submittedState = null;
     state.investigatorGroups.clear();
+    state.programGroups.clear();
     state.selectedInvestigator = null;
     state.question = null;
     state.sourcePages.clear();
@@ -1142,12 +1166,18 @@
       runInvestigatorSearch(group);
     });
     $("ii-programs").addEventListener("change", event => {
-      const option = event.currentTarget.selectedOptions[0];
-      const program = clean(option?.value, 160);
-      if (!program) return;
-      $("ii-agency").value = option.dataset.iiProgramSource;
-      $("ii-program").value = program;
-      runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true });
+      const descriptor = state.programGroups.get(event.currentTarget.value);
+      if (!descriptor) return;
+      const next = {
+        ...(state.submittedState || formState()),
+        agency: descriptor.source,
+        program: descriptor.query,
+        offset: 0,
+      };
+      $("ii-agency").value = descriptor.source;
+      $("ii-program").value = descriptor.query;
+      if (state.selectedInvestigator) runInvestigatorSearch(state.selectedInvestigator, { searchState: next });
+      else runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, searchState: next });
     });
     $("ii-load-more-actions").addEventListener("click", event => {
       const button = event.target.closest("[data-ii-load-source]");
@@ -1164,6 +1194,7 @@
       applyFormState(restored);
       state.payload = null;
       state.aggregate = null;
+      state.submittedState = null;
       state.sourcePages.clear();
       state.loadingSource = "";
       if (hasSearchState(restored) && !params.get("opportunity")) {

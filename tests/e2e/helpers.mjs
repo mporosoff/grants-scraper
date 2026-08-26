@@ -99,6 +99,7 @@ export function mockAwards(target, {
   resultCountBySourceOffset = {},
   resultCountPerSource = 1,
   responseDelaysBySourceOffset = {},
+  enforceYearFilters = false,
   sourceFailures = {},
   sourceFailuresByOffset = {},
 } = {}) {
@@ -267,12 +268,19 @@ export function mockAwards(target, {
         const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {
           const suffix = body.offset + index;
-          results.push(index === 0 && body.offset === 0 ? template : {
+          const candidate = index === 0 && body.offset === 0 ? template : {
             ...template,
             award_id: `${template.award_id}-${suffix}`,
             source_record_ids: [`${template.source_record_ids[0]}-${suffix}`],
-          });
+          };
+          const year = Number(candidate.award_year);
+          if (enforceYearFilters && (
+            (body.criteria.year_start && (!Number.isInteger(year) || year < body.criteria.year_start))
+            || (body.criteria.year_end && (!Number.isInteger(year) || year > body.criteria.year_end))
+          )) continue;
+          results.push(candidate);
         }
+        const returnedCount = results.filter(result => result.source === source).length;
         sources.push({
           source,
           status: "ok",
@@ -281,7 +289,7 @@ export function mockAwards(target, {
           total_count: null,
           raw_record_count: resultCount,
           has_more: (hasMoreBySource[source] || hasMoreAtOffsets).includes(body.offset),
-          result_count: resultCount,
+          result_count: returnedCount,
           retrieved_at: retrievedAt,
         });
       }
