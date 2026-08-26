@@ -101,9 +101,25 @@
       catalog?.diagnostics?.additional_sources?.merged_at,
     ].filter(Boolean);
     const parsed = values
-      .map(value => ({ value: String(value), time: Date.parse(value) }))
+      .map(value => {
+        const text = String(value);
+        const canonical = text.match(
+          /^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d+))?Z$/,
+        );
+        return {
+          value: text,
+          time: canonical
+            ? Date.parse(`${canonical[1]}Z`)
+            : Date.parse(text),
+          fraction: canonical
+            ? Number(String(canonical[2] || "").padEnd(9, "0").slice(0, 9))
+            : 0,
+        };
+      })
       .filter(item => Number.isFinite(item.time))
-      .sort((left, right) => right.time - left.time);
+      .sort((left, right) => (
+        right.time - left.time || right.fraction - left.fraction
+      ));
     if (!parsed.length) {
       throw new Error("The funding catalog has no valid pipeline timestamp.");
     }
@@ -206,10 +222,12 @@
       throw new Error("The funding catalog uses an unsupported schema.");
     }
     const candidateAssetVersion = catalogAssetVersion(candidate);
+    const candidatePipelineTimestamp = catalogPipelineTimestamp(candidate).value;
     if (!Array.isArray(candidate.opportunities)
       || candidate.opportunities.length !== Number(startup.record_count)
       || Number(candidate.record_count) !== Number(startup.record_count)
       || candidate.generated_at !== startup.generated_at
+      || candidatePipelineTimestamp !== startup.pipeline_generated_at
       || candidateAssetVersion !== startup.asset_version
       || statusIdentity(candidate.status_counts) !== statusIdentity(startup.status_counts)
       || releaseIdentity(candidate) !== startup.release_identity) {

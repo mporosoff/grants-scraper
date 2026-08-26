@@ -361,6 +361,53 @@ test("catalog validation derives its release version from loaded pipeline timest
   });
 });
 
+test("catalog validation preserves same-second pipeline timestamp precision", async ({ page }) => {
+  mockHybrid(page);
+  await installConnection(page, { saveData: true, effectiveType: "4g" });
+  let latestTimestamp = "";
+  let catalogResponses = 0;
+  await page.route("**/data/opportunities.js*", async route => {
+    catalogResponses += 1;
+    const response = await route.fetch();
+    let body = await response.text();
+    if (catalogResponses === 1) {
+      const precise = latestTimestamp.match(/^(.*\.)(\d+)(Z)$/);
+      expect(precise).toBeTruthy();
+      const previousFraction = (BigInt(precise[2]) - 1n)
+        .toString()
+        .padStart(precise[2].length, "0");
+      const staleTimestamp = `${precise[1]}${previousFraction}${precise[3]}`;
+      expect(staleTimestamp).not.toBe(latestTimestamp);
+      expect(body).toContain(latestTimestamp);
+      body = body.replaceAll(latestTimestamp, staleTimestamp);
+    }
+    await route.fulfill({ response, body, contentType: "text/javascript" });
+  });
+  await openFundingFinderShell(page);
+  latestTimestamp = await page.evaluate(() => (
+    globalThis.GRANT_CATALOG_METADATA.pipeline_generated_at
+  ));
+  await page.locator("#query").fill("hydrogen catalysis");
+  await page.locator("#find-funding").click();
+  await expect(page.locator("#catalog-error")).toBeVisible();
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "failed",
+    requests: 1,
+    executions: 1,
+    initializations: 0,
+  });
+  await page.locator("#catalog-retry").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  expect(catalogResponses).toBe(2);
+  expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
+    state: "ready",
+    requests: 2,
+    executions: 2,
+    initializations: 1,
+    metadataRefreshes: 1,
+  });
+});
+
 test("Back and Forward restore catalog-dependent URLs before and after readiness without eager clean-page execution", async ({ page }) => {
   mockHybrid(page);
   await installConnection(page, { saveData: true, effectiveType: "4g" });
