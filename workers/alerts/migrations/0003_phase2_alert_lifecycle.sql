@@ -10,8 +10,20 @@ ALTER TABLE notification_events
 ALTER TABLE notification_events
   ADD COLUMN terminal_at TEXT;
 
+ALTER TABLE notification_events
+  ADD COLUMN provider_quota_key TEXT;
+
+ALTER TABLE notification_events
+  ADD COLUMN provider_quota_reserved_at TEXT;
+
+ALTER TABLE rate_limits
+  ADD COLUMN last_reservation_key TEXT;
+
 CREATE INDEX IF NOT EXISTS events_message_dispatch_idx
   ON notification_events(message_kind, status, next_attempt_at, created_at);
 
 CREATE INDEX IF NOT EXISTS events_weekly_fair_idx
   ON notification_events(status, next_attempt_at, subscription_id, created_at);
+
+CREATE INDEX IF NOT EXISTS events_provider_quota_idx
+  ON notification_events(provider_quota_key);

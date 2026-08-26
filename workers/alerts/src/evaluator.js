@@ -239,14 +239,14 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
-    if (!await store.reserveProviderMessage(dailyLimit, 86_400, now)) {
+    const idempotencyKey = weekly
+      ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
+      : claimed[0].id;
+    if (!await store.reserveProviderMessage(idempotencyKey, ids, dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, now.toISOString());
       break;
     }
     attemptedCount += 1;
-    const idempotencyKey = weekly
-      ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
-      : claimed[0].id;
     const message = weekly
       ? digestEmail({ env, events: claimed, hasOverflow: batchValue.hasOverflow })
       : eventEmail({ env, event: claimed[0] });
@@ -322,7 +322,8 @@ export async function dispatchVerificationDeliveries({
       await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
       continue;
     }
-    if (!await store.reserveProviderMessage(dailyLimit, 86_400, now)) {
+    const idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
+    if (!await store.reserveProviderMessage(idempotencyKey, ids, dailyLimit, 86_400, now)) {
       await store.releaseClaimedEvents(ids, claimedAt);
       break;
     }
@@ -335,7 +336,7 @@ export async function dispatchVerificationDeliveries({
         subscriptionId: candidate.subscription_id,
         manageToken: candidate.manage_token,
         type: candidate.type,
-      }), `verify:${candidate.id}:${tokenHash.slice(0, 24)}`);
+      }), idempotencyKey);
       await store.markEventsSent(ids, delivery.id, now.toISOString());
       deliveredCount += 1;
     } catch (error) {

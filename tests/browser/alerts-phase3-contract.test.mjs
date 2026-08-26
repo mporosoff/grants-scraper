@@ -28,6 +28,7 @@ class MemoryStore {
     this.qual = new Map();
     this.events = new Map();
     this.rates = new Map();
+    this.providerReservations = new Set();
   }
   async health() { return true; }
   async consumeRateLimit(action, key, limit) {
@@ -37,8 +38,15 @@ class MemoryStore {
     this.rates.set(id, count + 1);
     return true;
   }
-  async reserveProviderMessage(limit) {
-    return this.consumeRateLimit("email_send", "global", limit);
+  async reserveProviderMessage(messageKey, eventIds, limit) {
+    if (this.providerReservations.has(messageKey)) return true;
+    if (!await this.consumeRateLimit("email_send", "global", limit)) return false;
+    this.providerReservations.add(messageKey);
+    for (const id of eventIds) {
+      const event = this.events.get(id);
+      if (event) event.provider_quota_key = messageKey;
+    }
+    return true;
   }
   async upsertSubscriber(value) {
     const existing = [...this.subscribers.values()].find(item => item.email_normalized === value.email);

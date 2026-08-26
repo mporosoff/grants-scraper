@@ -52,9 +52,15 @@ class SqliteD1 {
   constructor(database) {
     this.database = database;
     this.failBatchAt = null;
+    this.beforeBatch = null;
   }
   prepare(sql) { return new D1Statement(this.database, sql); }
   async batch(statements) {
+    if (this.beforeBatch) {
+      const hook = this.beforeBatch;
+      this.beforeBatch = null;
+      await hook();
+    }
     this.database.exec("BEGIN IMMEDIATE");
     try {
       const results = [];
@@ -213,6 +219,9 @@ test("0003 migrates representative production lifecycle rows without changing th
   const columns = all(database, "PRAGMA table_info(notification_events)").map(row => row.name);
   assert.ok(columns.includes("message_kind"));
   assert.ok(columns.includes("terminal_at"));
+  assert.ok(columns.includes("provider_quota_key"));
+  assert.ok(columns.includes("provider_quota_reserved_at"));
+  assert.ok(all(database, "PRAGMA table_info(rate_limits)").map(row => row.name).includes("last_reservation_key"));
 });
 
 test("FF-BUG-003 reactivation atomically replaces baseline state and retires old unsent events", async () => {
@@ -318,18 +327,22 @@ test("FF-BUG-008 verification delivery survives network and 429 retries with pro
     const store = new D1AlertStore(new SqliteD1(database));
     await store.createSubscriptionCycle(await cycle());
     const provider = new ScriptedProvider([failure]);
-    const first = await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+    const limitedEnv = { ...env, DAILY_EMAIL_LIMIT: "1" };
+    const first = await dispatchVerificationDeliveries({ store, provider, env: limitedEnv, now: fixedNow });
     assert.deepEqual(first, { attemptedCount: 1, deliveredCount: 0, failedCount: 1 });
     const failed = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
     assert.equal(failed.status, "failed");
     assert.equal(failed.terminal_at, null);
     const retryNow = new Date("2026-09-01T12:06:00.000Z");
-    const second = await dispatchVerificationDeliveries({ store, provider, env, now: retryNow });
+    const second = await dispatchVerificationDeliveries({ store, provider, env: limitedEnv, now: retryNow });
     assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
     const sent = database.prepare("SELECT * FROM notification_events WHERE id='verify-new'").get();
     assert.equal(sent.status, "sent");
     assert.equal(sent.attempts, 2);
     assert.equal(sent.provider_message_id, "provider-1");
+    assert.equal(sent.provider_quota_key, provider.attempts[0].idempotencyKey);
+    assert.ok(sent.provider_quota_reserved_at);
+    assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
     assert.equal(provider.attempts[0].idempotencyKey, provider.attempts[1].idempotencyKey);
   }
 });
@@ -418,6 +431,30 @@ test("FF-BUG-008 refresh cannot overwrite a newer cycle and current claims block
   });
   assert.equal(refreshed, false);
   assert.equal(database.prepare("SELECT verification_token_hash FROM subscriptions WHERE id='watch-1'").get().verification_token_hash, "externally-newer-token");
+});
+
+test("FF-BUG-008 stale verification completion cannot activate or suppress a replacement cycle", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  const original = await cycle();
+  await store.createSubscriptionCycle(original);
+  const replacement = await cycle({
+    verificationNonce: "n".repeat(43), verificationTokenHash: "replacement-token",
+    verificationEventId: "verify-replacement", verificationEventKey: "verification:replacement-token",
+  });
+  d1.beforeBatch = () => store.createSubscriptionCycle(replacement);
+  const verified = await store.verifySubscription(original.verificationTokenHash, fixedNow.toISOString());
+  assert.equal(verified, null);
+  const subscription = database.prepare("SELECT active,verification_token_hash,verified_at FROM subscriptions WHERE id='watch-1'").get();
+  assert.equal(subscription.active, 0);
+  assert.equal(subscription.verification_token_hash, "replacement-token");
+  assert.equal(subscription.verified_at, null);
+  const replacementEvent = database.prepare("SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-replacement'").get();
+  assert.equal(replacementEvent.status, "queued");
+  assert.equal(replacementEvent.error_code, null);
+  assert.equal(replacementEvent.terminal_at, null);
 });
 
 test("FF-BUG-008 exhausted provider quota releases the claim without recording an attempt", async () => {
