@@ -26,6 +26,7 @@
 .alert-field-grid > label { flex: 1; font-weight: 700; }
 .alert-field-grid input,
 .alert-field-grid select { display: block; width: 100%; margin-top: .35rem; }
+.alert-field-grid input[readonly] { color: #4c596d; background: #eef2f7; }
 .alert-trigger-fields { display: grid; gap: .55rem; margin: 1rem 0; }
 .alert-trigger-fields label { display: flex; gap: .55rem; align-items: flex-start; }
 .alert-privacy,

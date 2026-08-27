@@ -1,7 +1,9 @@
 import "../../../assets/award-links.js";
 
 import { recordId } from "./contract.js";
-import { randomToken, sha256Hex } from "./crypto.js";
+import {
+  capabilityUrls, randomToken, sha256Hex, verificationToken as createVerificationToken,
+} from "./crypto.js";
 import { digestEmail, eventEmail, verificationEmail } from "./email.js";
 
 const LINKS_API = globalThis.FUNDING_AWARD_LINKS;
@@ -248,6 +250,12 @@ function storedProviderMessage(value) {
   }
 }
 
+async function deliveryCapabilityLinks(env, event) {
+  return env.ALERT_CAPABILITY_SECRET
+    ? capabilityUrls(env, event.subscriber_id, event.subscription_id)
+    : null;
+}
+
 export async function dispatchNotifications({ store, provider, env, now = new Date(), weekly = false }) {
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
@@ -279,8 +287,14 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
       ? `digest:${await sha256Hex(claimed.map(event => event.id).sort().join("|"))}`
       : claimed[0].id);
     const renderedMessage = weekly || idempotencyKey.startsWith("digest:")
-      ? digestEmail({ env, events: claimed, hasOverflow: batchValue.hasOverflow })
-      : eventEmail({ env, event: claimed[0] });
+      ? digestEmail({
+          env, events: claimed, hasOverflow: batchValue.hasOverflow,
+          capabilityLinks: await deliveryCapabilityLinks(env, claimed[0]),
+        })
+      : eventEmail({
+          env, event: claimed[0],
+          capabilityLinks: await deliveryCapabilityLinks(env, claimed[0]),
+        });
     const reservedPayload = batchValue.providerPayloadJson
       || claimed.find(event => (
         event.provider_quota_key === idempotencyKey && event.provider_payload_json
@@ -320,13 +334,14 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
 
 export async function dispatchVerificationDeliveries({
   store, provider, env, now = new Date(), tokenFactory = () => randomToken(), limit = null,
+  eventIds = null,
 }) {
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
   const dailyLimit = Math.max(1, Math.min(100, Number(env.DAILY_EMAIL_LIMIT) || 100));
   const candidateLimit = Math.max(1, Math.min(dailyLimit, Number(limit) || dailyLimit));
-  const pending = await store.pendingVerificationEvents(now.toISOString(), candidateLimit);
+  const pending = await store.pendingVerificationEvents(now.toISOString(), candidateLimit, eventIds);
   let attemptedCount = 0;
   let deliveredCount = 0;
   let failedCount = 0;
@@ -337,13 +352,41 @@ export async function dispatchVerificationDeliveries({
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
     const reconciliation = candidate.error_code === "verification_outcome_reconcile";
-    let token = nonce.length >= 32
-      ? await sha256Hex(`funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${nonce}`)
-      : "";
+    const legacyVerificationFor = value => sha256Hex(
+      `funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${value}`,
+    );
+    const signedVerificationFor = (value, secret) => secret
+      ? createVerificationToken({
+          subscriberId: candidate.subscriber_id,
+          subscriptionId: candidate.subscription_id,
+          nonce: value,
+        }, secret)
+      : Promise.resolve("");
+    const verificationFor = value => env.ALERT_CAPABILITY_SECRET
+      ? signedVerificationFor(value, env.ALERT_CAPABILITY_SECRET)
+      : legacyVerificationFor(value);
+    let token = nonce.length >= 32 ? await verificationFor(nonce) : "";
     let tokenHash = token ? await sha256Hex(token) : "";
     let idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
     const expiresAt = Date.parse(candidate.verification_expires_at);
     if (reconciliation) {
+      const signedSecrets = [...new Set([
+        String(env.ALERT_CAPABILITY_SECRET || ""),
+        String(env.ALERT_CAPABILITY_PREVIOUS_SECRET || ""),
+      ].filter(Boolean))];
+      const reconciliationTokens = [
+        ...(Number(candidate.capability_version || 0) === 0 && nonce.length >= 32
+          ? [await legacyVerificationFor(nonce)]
+          : []),
+        ...await Promise.all(signedSecrets.map(secret => signedVerificationFor(nonce, secret))),
+      ];
+      const reconciled = (await Promise.all(reconciliationTokens.filter(value => value.length >= 32).map(async value => {
+        const hash = await sha256Hex(value);
+        return { token: value, tokenHash: hash, idempotencyKey: `verify:${candidate.id}:${hash.slice(0, 24)}` };
+      }))).find(value => value.idempotencyKey === candidate.provider_quota_key);
+      token = reconciled?.token || "";
+      tokenHash = reconciled?.tokenHash || "";
+      idempotencyKey = reconciled?.idempotencyKey || "";
       if (
         token.length < 32
         || candidate.provider_quota_key !== idempotencyKey
@@ -359,7 +402,7 @@ export async function dispatchVerificationDeliveries({
       || expiresAt - now.getTime() < VERIFICATION_MINIMUM_SEND_WINDOW_MS
     ) {
       nonce = tokenFactory();
-      token = await sha256Hex(`funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${nonce}`);
+      token = await verificationFor(nonce);
       tokenHash = await sha256Hex(token);
       idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
       const refreshedExpiresAt = new Date(now.getTime() + VERIFICATION_VALIDITY_MS).toISOString();
@@ -388,6 +431,7 @@ export async function dispatchVerificationDeliveries({
       token,
       subscriptionId: candidate.subscription_id,
       manageToken: candidate.manage_token,
+      capabilityLinks: await deliveryCapabilityLinks(env, candidate),
       type: candidate.type,
     });
     const reservedPayload = candidate.provider_quota_key === idempotencyKey

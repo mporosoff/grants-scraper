@@ -70,7 +70,7 @@ test("Funding Finder has no serious or critical violations across critical state
   await scan(page, "funding-saved-storage-error-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 900 });
   mockAlerts(page);
-  await page.locator("#profile-builder > summary").click();
+  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   await page.locator("#alert-new-matches").click();
   const alertDialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(alertDialog).toBeVisible();
@@ -183,7 +183,7 @@ test("shared Help remains visible and current across every desktop and mobile su
 
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/match_explorer.html");
-  await page.locator("#profile-builder > summary").click();
+  await page.locator("#alerts-panel > summary").click();
   const alertHelp = page.getByRole("button", { name: "How search alerts work" });
   await expect(alertHelp).toBeVisible();
   await alertHelp.click();

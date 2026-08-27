@@ -11,6 +11,7 @@
     "OUTBOUND_EMAIL_ENABLED": "true",
     "EMAIL_PROVIDER": "resend",
     "DAILY_EMAIL_LIMIT": "100",
+    "ALERT_ASSET_TIMEOUT_MS": "10000",
     "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io/grants-scraper",
     "PUBLIC_WORKER_ORIGIN": "https://funding-finder-alerts.urochestercheme.workers.dev",
     "CATALOG_URL": "https://mporosoff.github.io/grants-scraper/data/opportunities.js",
@@ -26,6 +27,6 @@
     }
   ],
   "triggers": {
-    "crons": ["15 13 * * *"]
+    "crons": ["15 13 * * *", "*/5 * * * *"]
   }
 }

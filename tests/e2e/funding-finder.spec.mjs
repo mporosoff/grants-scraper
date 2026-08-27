@@ -23,14 +23,17 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   await page.locator("[data-pursuit-status]").selectOption("pursuing");
   await page.locator("[data-pursuit-note]").fill("Draft due Friday");
 
-  await page.locator("#profile-builder > summary").click();
+  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   await page.locator("#alert-new-matches").click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText("current Strong matches become the starting baseline");
   await dialog.locator("#alert-email").fill("researcher@example.edu");
   await dialog.locator("#alert-submit").click();
-  await expect(dialog.locator("#alert-dialog-status")).toContainText("Check your email");
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Verification email requested for researcher@example.edu");
+  await expect(dialog.locator("#alert-email")).toHaveValue("researcher@example.edu");
+  await expect(dialog.locator("#alert-email")).toHaveAttribute("readonly", "");
+  await expect(dialog.locator("#alert-submit")).toHaveText("Send verification email again");
   expect(alertCalls).toHaveLength(1);
   expect(alertCalls[0].subscription.definition).toMatchObject({
     query: "hydrogen catalysis", currentness: "current_only",
@@ -168,7 +171,7 @@ for (const fixture of alertErrorCases) {
     mockAlerts(page, fixture);
     await openFundingFinder(page);
     await runFundingSearch(page, "hydrogen catalysis");
-    await page.locator("#profile-builder > summary").click();
+    await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
     await page.locator("#alert-new-matches").click();
     const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
     await dialog.locator("#alert-email").fill("researcher@example.edu");

@@ -22,6 +22,7 @@ on:
       - "funded_awards.html"
       - "tools/classify_worker_deployment.mjs"
       - "tools/smoke_alerts_worker.mjs"
+      - "tools/validate_alert_capability_rotation.mjs"
       - "workers/alerts/**"
 permissions:
   contents: read
@@ -44,6 +45,7 @@ jobs:
       - name: Verify the bounded alert and Phase 5 release contracts
         run: >-
           node --check tools/classify_worker_deployment.mjs &&
+          node --check tools/validate_alert_capability_rotation.mjs &&
           node --check assets/alerts-config.js &&
           node --check assets/alerts.js &&
           node --check assets/award-links.js &&
@@ -116,6 +118,39 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.125.0 d1 migrations apply funding-finder-alerts --remote --config workers/alerts/wrangler.jsonc
+      - name: Configure the Alerts capability-signing secrets
+        id: capability-secrets
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        env:
+          ALERT_CAPABILITY_SECRET: ${{ secrets.ALERT_CAPABILITY_SECRET }}
+          ALERT_CAPABILITY_PREVIOUS_SECRET: ${{ secrets.ALERT_CAPABILITY_PREVIOUS_SECRET }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$ALERT_CAPABILITY_SECRET" ]; then
+            echo "::error::ALERT_CAPABILITY_SECRET is required for stateless manage links."
+            exit 1
+          fi
+          if [ -z "$ALERT_CAPABILITY_PREVIOUS_SECRET" ]; then
+            echo "::error::ALERT_CAPABILITY_PREVIOUS_SECRET is required for safe signing-key rotation."
+            exit 1
+          fi
+          current_key_id="$(printf '%s' "$ALERT_CAPABILITY_SECRET" | sha256sum | cut -c1-16)"
+          previous_key_id="$(printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | sha256sum | cut -c1-16)"
+          rotation_mode="$(curl --fail --silent --show-error --max-time 10 \
+            -H 'Origin: https://mporosoff.github.io' \
+            'https://funding-finder-alerts.urochestercheme.workers.dev/health' \
+            | node tools/validate_alert_capability_rotation.mjs "$current_key_id" "$previous_key_id")"
+          echo "Alerts signing-key check: $rotation_mode"
+          if [ "$rotation_mode" = "verified-same-key" ]; then
+            echo "The deployed current and previous signing-key bindings are retained unchanged."
+          else
+            printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
+            printf '%s' "$ALERT_CAPABILITY_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_SECRET --config workers/alerts/wrangler.jsonc
+          fi
+          echo "current_key_id=$current_key_id" >> "$GITHUB_OUTPUT"
       - name: Deploy the committed Alerts Worker
         id: worker-deploy
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
@@ -135,13 +170,15 @@ jobs:
             health="$(curl --fail --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-alerts.urochestercheme.workers.dev/health' || true)"
             if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
               && test "$(jq -r '.delivery_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
-              && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "2" \
+              && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "3" \
               && test "$(jq -r '.database_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_selected | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_configured | tostring' <<<"$health" 2>/dev/null)" = "true" \
-              && test "$(jq -r '.email_template_version // empty' <<<"$health" 2>/dev/null)" = "phase2-lifecycle-20260825" \
+              && test "$(jq -r '.email_template_version // empty' <<<"$health" 2>/dev/null)" = "phase4-operations-20260827" \
               && test "$(jq -r '.outbound_email_enabled | tostring' <<<"$health" 2>/dev/null)" = "true" \
-              && test "$(jq -r '.scheduler_ready | tostring' <<<"$health" 2>/dev/null)" = "true"; then
+              && test "$(jq -r '.scheduler_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
+              && test "$(jq -r '.capability_previous_signing_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
+              && test "$(jq -r '.capability_key_id // empty' <<<"$health" 2>/dev/null)" = "${{ steps.capability-secrets.outputs.current_key_id }}"; then
               exit 0
             fi
             sleep 5

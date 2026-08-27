@@ -44,6 +44,7 @@
   let pendingCatalogAction = null;
   let catalogActionSequence = 0;
   let firstSearchMarked = false;
+  let savedSearchAlertIntroduced = false;
   const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
@@ -3542,6 +3543,31 @@
     });
   }
 
+  function updateSavedSearchAlertUi() {
+    const button = $("alert-new-matches");
+    const panel = $("alerts-panel");
+    const enabled = Boolean(state.searched && state.query);
+    if (button) {
+      button.disabled = !enabled;
+      button.title = enabled
+        ? "Email only for future new Strong matches; private profile context is excluded"
+        : "Enter a typed research query before creating a saved-search alert";
+    }
+    if ($("profile-search-alert-status")) {
+      $("profile-search-alert-status").textContent = enabled
+        ? `Ready to save the current “${state.query}” search. Existing Strong matches will become the baseline.`
+        : "Run a typed funding search to enable this alert.";
+    }
+    if ($("alert-panel-summary")) {
+      $("alert-panel-summary").textContent = enabled ? "Ready" : "Available after search";
+    }
+    panel?.classList.toggle("alert-ready", enabled);
+    if (enabled && panel && !savedSearchAlertIntroduced) {
+      panel.open = true;
+      savedSearchAlertIntroduced = true;
+    }
+  }
+
   function paginationItems(currentPage, totalPages) {
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -3624,8 +3650,8 @@
 
   function renderResults() {
     renderHybridStatus();
+    updateSavedSearchAlertUi();
     if (!state.searched) {
-      if ($("alert-new-matches")) $("alert-new-matches").disabled = true;
       $("results-toolbar").classList.add("search-not-started");
       $("result-count").textContent = "";
       $("result-label").textContent = "Your matches will appear here";
@@ -3652,17 +3678,6 @@
     }
 
     const display = currentDisplayMatches();
-    if ($("alert-new-matches")) {
-      $("alert-new-matches").disabled = !state.query;
-      $("alert-new-matches").title = state.query
-        ? "Email only for future new Strong matches; private profile context is excluded"
-        : "Enter a typed research query before creating a saved-search alert";
-      if ($("profile-search-alert-status")) {
-        $("profile-search-alert-status").textContent = state.query
-          ? `Ready to save the current “${state.query}” search. Existing Strong matches will become the baseline.`
-          : "Run a typed funding search to enable this alert.";
-      }
-    }
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
