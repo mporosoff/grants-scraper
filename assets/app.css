@@ -3146,7 +3146,7 @@ footer p {
 }
 
 .search-workflow .search-form {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   padding: 4px 7px;
   border-color: var(--line-strong);
   box-shadow: none;
@@ -3373,6 +3373,21 @@ footer p {
 .launch-actions > span {
   color: var(--muted);
   font-size: .76rem;
+}
+
+.ai-refine-actions {
+  display: flex;
+  gap: 10px 14px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.ai-refine-requirement {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.45;
 }
 
 .search-status,
@@ -3617,6 +3632,15 @@ footer p {
 
   .find-button,
   .credential-actions .button {
+    width: 100%;
+  }
+
+  .ai-refine-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ai-refine-actions .ai-button {
     width: 100%;
   }
 

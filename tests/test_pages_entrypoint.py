@@ -250,19 +250,23 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "ux-followup-20260826"
+        app_style_version = "post-phase4-unit-a-20260827"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
         for asset in (
-            "nofo.js", "review.js", "ai-provider.js", "credentials.js",
+            "nofo.js", "review.js", "credentials.js",
             "chat-ui.js", "saved.js",
         ):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
+        self.assertIn(
+            '<script src="./assets/ai-provider.js?v=post-phase4-unit-a-20260827"></script>',
+            explorer_html,
+        )
         for asset in ("orcid.js",):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={feature_version}"></script>',
@@ -301,7 +305,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=ux-followup-20260826"></script>',
+            '<script src="./assets/app.js?v=post-phase4-unit-a-20260827"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -338,7 +342,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             "Number(record.total_program_funding || 0),\n    );",
             application_js,
         )
-        self.assertIn("globalThis.FUNDING_AI.providerJson", application_js)
+        self.assertIn("globalThis.FUNDING_AI.structuredResult", application_js)
         self.assertIn("globalThis.FUNDING_PROFILE", profile_js)
         self.assertIn("globalThis.FUNDING_NOFO", nofo_js)
         self.assertIn("function matchCatalog", nofo_js)
@@ -388,10 +392,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("AI retrieval candidate set", application_js)
         self.assertIn('id="browse-all"', application_js)
         self.assertIn("function browseAllOpportunities", application_js)
+        self.assertIn("function updateResultHeading(display)", application_js)
         self.assertIn(
-            '$("result-label").textContent = display.length === 1',
+            '`${total.toLocaleString()} ${total === 1 ? "opportunity" : "opportunities"}`',
             application_js,
         )
+        self.assertIn('$("result-label").textContent = ""', application_js)
         self.assertIn("api.openai.com/v1/responses", ai_provider_js)
         self.assertIn("api.anthropic.com/v1/messages", ai_provider_js)
         self.assertRegex(

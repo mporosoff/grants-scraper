@@ -99,7 +99,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(providerScript, /claude-sonnet-5/);
   assert.match(providerScript, /api\.openai\.com\/v1\/responses/);
   assert.match(providerScript, /api\.anthropic\.com\/v1\/messages/);
-  assert.match(script, /globalThis\.FUNDING_AI\.providerJson/);
+  assert.match(script, /globalThis\.FUNDING_AI\.structuredResult/);
   assert.match(profileScript, /globalThis\.FUNDING_PROFILE/);
   assert.match(nofoScript, /globalThis\.FUNDING_NOFO/);
   assert.match(nofoScript, /function matchCatalog/);
