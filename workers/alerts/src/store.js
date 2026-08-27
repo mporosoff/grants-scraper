@@ -3,6 +3,12 @@ function rows(result) {
 }
 
 const DELIVERY_LEASE_MS = 15 * 60 * 1_000;
+export const RETENTION_DAYS = Object.freeze({
+  rateLimits: 30,
+  evaluationRuns: 90,
+  terminalDeliveries: 90,
+  providerEvents: 180,
+});
 
 function staleClaimCutoff(now) {
   const timestamp = Date.parse(now);
@@ -16,21 +22,15 @@ export class D1AlertStore {
   }
 
   async consumeRateLimit(action, clientKey, limit, windowSeconds, now) {
-    const current = await this.db.prepare(
-      "SELECT request_count, expires_at FROM rate_limits WHERE action = ? AND client_key = ?",
-    ).bind(action, clientKey).first();
+    const timestamp = now.toISOString();
     const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
-    if (!current || current.expires_at <= now.toISOString()) {
-      await this.db.prepare(
-        "INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count) VALUES(?, ?, ?, ?, 1) ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = excluded.window_started_at, expires_at = excluded.expires_at, request_count = 1",
-      ).bind(action, clientKey, now.toISOString(), expires).run();
-      return true;
-    }
-    if (Number(current.request_count) >= limit) return false;
-    await this.db.prepare(
-      "UPDATE rate_limits SET request_count = request_count + 1 WHERE action = ? AND client_key = ?",
-    ).bind(action, clientKey).run();
-    return true;
+    const accepted = await this.db.prepare(
+      "INSERT INTO rate_limits(action, client_key, window_started_at, expires_at, request_count) VALUES(?, ?, ?, ?, 1) ON CONFLICT(action, client_key) DO UPDATE SET window_started_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.window_started_at ELSE rate_limits.window_started_at END, expires_at = CASE WHEN rate_limits.expires_at <= ? THEN excluded.expires_at ELSE rate_limits.expires_at END, request_count = CASE WHEN rate_limits.expires_at <= ? THEN 1 ELSE rate_limits.request_count + 1 END WHERE rate_limits.expires_at <= ? OR rate_limits.request_count < ? RETURNING request_count",
+    ).bind(
+      action, clientKey, timestamp, expires,
+      timestamp, timestamp, timestamp, timestamp, limit,
+    ).first();
+    return Boolean(accepted);
   }
 
   async reserveProviderMessage(
@@ -74,7 +74,7 @@ export class D1AlertStore {
 
   async upsertSubscriber({ id, email, manageToken, now }) {
     await this.db.prepare(
-      "INSERT INTO subscribers(id, email, email_normalized, manage_token, created_at, updated_at) VALUES(?, ?, ?, ?, ?, ?) ON CONFLICT(email_normalized) DO UPDATE SET email = excluded.email, updated_at = excluded.updated_at",
+      "INSERT INTO subscribers(id, email, email_normalized, manage_token, created_at, updated_at, capability_version, legacy_manage_expires_at) VALUES(?, ?, ?, ?, ?, ?, 1, NULL) ON CONFLICT(email_normalized) DO UPDATE SET email = excluded.email, updated_at = excluded.updated_at",
     ).bind(id, email, email, manageToken, now, now).run();
     return this.db.prepare(
       "SELECT * FROM subscribers WHERE email_normalized = ?",
@@ -156,8 +156,14 @@ export class D1AlertStore {
     };
   }
 
-  async subscriberByManageToken(token) {
-    return this.db.prepare("SELECT * FROM subscribers WHERE manage_token = ?").bind(token).first();
+  async subscriberById(id) {
+    return this.db.prepare("SELECT * FROM subscribers WHERE id = ?").bind(id).first();
+  }
+
+  async subscriberByManageToken(token, now = new Date().toISOString()) {
+    return this.db.prepare(
+      "SELECT * FROM subscribers WHERE capability_version = 0 AND manage_token = ? AND legacy_manage_expires_at >= ?",
+    ).bind(token, now).first();
   }
 
   async subscriptionsForSubscriber(subscriberId) {
@@ -167,7 +173,13 @@ export class D1AlertStore {
   }
 
   async updateSubscription(manageToken, subscriptionId, { active, cadence }, now) {
-    const subscriber = await this.subscriberByManageToken(manageToken);
+    const subscriber = await this.subscriberByManageToken(manageToken, now);
+    if (!subscriber) return false;
+    return this.updateSubscriptionForSubscriber(subscriber.id, subscriptionId, { active, cadence }, now);
+  }
+
+  async updateSubscriptionForSubscriber(subscriberId, subscriptionId, { active, cadence }, now) {
+    const subscriber = await this.subscriberById(subscriberId);
     if (!subscriber) return false;
     if (active === true && subscriber.suppressed_at) return false;
     const values = [];
@@ -187,11 +199,19 @@ export class D1AlertStore {
   }
 
   async unsubscribeAll(manageToken, now) {
-    const subscriber = await this.subscriberByManageToken(manageToken);
+    const subscriber = await this.subscriberByManageToken(manageToken, now);
     if (!subscriber) return false;
+    return this.unsubscribeAllForSubscriber(subscriber.id, now);
+  }
+
+  async unsubscribeForSubscriber(subscriberId, subscriptionId, now) {
+    return this.updateSubscriptionForSubscriber(subscriberId, subscriptionId, { active: false }, now);
+  }
+
+  async unsubscribeAllForSubscriber(subscriberId, now) {
     await this.db.prepare(
       "UPDATE subscriptions SET active = 0, updated_at = ? WHERE subscriber_id = ?",
-    ).bind(now, subscriber.id).run();
+    ).bind(now, subscriberId).run();
     return true;
   }
 
@@ -217,6 +237,13 @@ export class D1AlertStore {
       ).bind(reason, event?.subscriber_id || ""),
     ]);
     return Boolean(event);
+  }
+
+  async recordProviderEvent(providerEventId, eventType, providerMessageId, now) {
+    const result = await this.db.prepare(
+      "INSERT OR IGNORE INTO provider_events(provider_event_id, event_type, provider_message_id, received_at) VALUES(?, ?, ?, ?)",
+    ).bind(providerEventId, eventType, providerMessageId || null, now).run();
+    return Number(result?.meta?.changes || 0) > 0;
   }
 
   async activeSubscriptions() {
@@ -336,11 +363,15 @@ export class D1AlertStore {
     return batches;
   }
 
-  async pendingVerificationEvents(now, limit) {
+  async pendingVerificationEvents(now, limit, eventIds = null) {
     const staleBefore = staleClaimCutoff(now);
+    const ids = Array.isArray(eventIds) ? [...new Set(eventIds.map(String).filter(Boolean))] : [];
+    const eventPredicate = ids.length
+      ? ` AND n.id IN (${ids.map(() => "?").join(",")})`
+      : "";
     return rows(await this.db.prepare(
-      "SELECT n.*, s.type, s.subscriber_id, s.verification_expires_at, s.verification_token_hash, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'verification' AND n.terminal_at IS NULL AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (s.active = 0 OR n.error_code = 'verification_outcome_reconcile') AND u.suppressed_at IS NULL ORDER BY n.created_at, n.id LIMIT ?",
-    ).bind(now, staleBefore, limit).all());
+      `SELECT n.*, s.type, s.subscriber_id, s.verification_expires_at, s.verification_token_hash, u.email, u.capability_version FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'verification' AND n.terminal_at IS NULL AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (s.active = 0 OR n.error_code = 'verification_outcome_reconcile') AND u.suppressed_at IS NULL${eventPredicate} ORDER BY n.created_at, n.id LIMIT ?`,
+    ).bind(now, staleBefore, ...ids, limit).all());
   }
 
   async claimEvents(ids, now) {
@@ -439,17 +470,50 @@ export class D1AlertStore {
 
   async startRun(run) {
     await this.db.prepare(
-      "INSERT INTO evaluation_runs(id, started_at, status) VALUES(?, ?, 'running')",
-    ).bind(run.id, run.startedAt).run();
+      "INSERT INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status) VALUES(?, ?, ?, ?, 'running')",
+    ).bind(run.id, run.startedAt, run.scheduledAt, run.runKind).run();
   }
 
   async finishRun(run) {
     await this.db.prepare(
-      "UPDATE evaluation_runs SET completed_at = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, status = ? WHERE id = ?",
+      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ? WHERE id = ?",
     ).bind(
-      run.completedAt, run.subscriptionCount, run.matchedEventCount,
-      run.attemptedCount, run.deliveredCount, run.failedCount, run.status, run.id,
+      run.completedAt, run.durationMs, run.subscriptionCount, run.matchedEventCount,
+      run.attemptedCount, run.deliveredCount, run.failedCount,
+      run.cleanupDeletedCount, run.cleanupErrorCode || null, run.status, run.id,
     ).run();
+  }
+
+  async cleanupOperationalData(now, batchSize = 100) {
+    const limit = Math.max(1, Math.min(500, Number(batchSize) || 100));
+    const before = days => new Date(Date.parse(now) - days * 86_400_000).toISOString();
+    const statements = [
+      ["DELETE FROM rate_limits WHERE rowid IN (SELECT rowid FROM rate_limits WHERE expires_at < ? ORDER BY expires_at LIMIT ?)", before(RETENTION_DAYS.rateLimits)],
+      ["DELETE FROM evaluation_runs WHERE rowid IN (SELECT rowid FROM evaluation_runs WHERE completed_at IS NOT NULL AND completed_at < ? AND status <> 'running' ORDER BY completed_at LIMIT ?)", before(RETENTION_DAYS.evaluationRuns)],
+      ["DELETE FROM provider_events WHERE rowid IN (SELECT rowid FROM provider_events WHERE received_at < ? ORDER BY received_at LIMIT ?)", before(RETENTION_DAYS.providerEvents)],
+      ["DELETE FROM notification_events WHERE rowid IN (SELECT rowid FROM notification_events WHERE ((status = 'sent' AND sent_at < ?) OR (status IN ('suppressed','failed') AND terminal_at IS NOT NULL AND terminal_at < ?)) ORDER BY COALESCE(sent_at, terminal_at, created_at) LIMIT ?)", before(RETENTION_DAYS.terminalDeliveries), before(RETENTION_DAYS.terminalDeliveries)],
+    ];
+    let deletedCount = 0;
+    for (const [sql, ...values] of statements) {
+      const result = await this.db.prepare(sql).bind(...values, limit).run();
+      deletedCount += Number(result?.meta?.changes || 0);
+    }
+    return { deletedCount, batchSize: limit };
+  }
+
+  async operationalHealth(now) {
+    const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
+    const row = await this.db.prepare(
+      "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms",
+    ).bind(staleBefore).first();
+    const lastCompletedAt = String(row?.last_completed_at || "");
+    return {
+      staleRunningRuns: Number(row?.stale_running_runs || 0),
+      lastCompletedAt,
+      lastStatus: String(row?.last_status || ""),
+      lastDurationMs: row?.last_duration_ms == null ? null : Number(row.last_duration_ms),
+      schedulerRecent: Boolean(lastCompletedAt && lastCompletedAt >= staleBefore),
+    };
   }
 
   async health() {

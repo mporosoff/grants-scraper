@@ -4,18 +4,23 @@ import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { ALERT_SCHEMA_VERSION } from "../../workers/alerts/src/contract.js";
-import { sha256Hex } from "../../workers/alerts/src/crypto.js";
+import {
+  createCapability, sha256Hex, verificationToken as createVerificationToken,
+  verifyCapability,
+} from "../../workers/alerts/src/crypto.js";
 import { digestEmail, eventEmail } from "../../workers/alerts/src/email.js";
 import {
   DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "../../workers/alerts/src/evaluator.js";
 import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
-import { D1AlertStore } from "../../workers/alerts/src/store.js";
+import { D1AlertStore, RETENTION_DAYS } from "../../workers/alerts/src/store.js";
+import { loadPublicAssets } from "../../workers/alerts/src/strong-match.js";
 
 const root = new URL("../../", import.meta.url);
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
+  "0004_phase4_alert_operations.sql",
 ];
 const migrations = await Promise.all(migrationNames.map(name => (
   readFile(new URL(`workers/alerts/migrations/${name}`, root), "utf8")
@@ -27,6 +32,7 @@ const env = {
   OUTBOUND_EMAIL_ENABLED: "true",
   EMAIL_PROVIDER: "resend",
   RESEND_API_KEY: "test-only",
+  ALERT_CAPABILITY_SECRET: "test-only-capability-secret-with-32-bytes",
   PUBLIC_WORKER_ORIGIN: "https://alerts.example.test",
   PUBLIC_APP_ORIGIN: "https://app.example.test",
   DAILY_EMAIL_LIMIT: "100",
@@ -91,6 +97,11 @@ function insertSubscriber(database, {
   database.prepare(
     "INSERT INTO subscribers(id,email,email_normalized,verified_at,manage_token,suppressed_at,suppression_reason,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)",
   ).run(id, email, email, fixedNow.toISOString(), manageToken, suppressedAt, suppressionReason, fixedNow.toISOString(), fixedNow.toISOString());
+  if (database.prepare("PRAGMA table_info(subscribers)").all().some(column => column.name === "legacy_manage_expires_at")) {
+    database.prepare(
+      "UPDATE subscribers SET legacy_manage_expires_at = ? WHERE id = ?",
+    ).run("2026-11-30T23:59:59.999Z", id);
+  }
   return { id, email, manageToken };
 }
 
@@ -130,7 +141,9 @@ async function cycle(overrides = {}) {
   const manageToken = overrides.manageToken || "m".repeat(43);
   const id = overrides.id || "watch-1";
   const subscriberId = overrides.subscriberId || "person-1";
-  const token = await sha256Hex(`funding-finder-verification-v1|${manageToken}|${id}|${nonce}`);
+  const token = await createVerificationToken({
+    subscriberId, subscriptionId: id, nonce,
+  }, env.ALERT_CAPABILITY_SECRET);
   return {
     id, subscriberId, type: "saved_search", cadence: "weekly",
     definitionJson: JSON.stringify({ query: "new" }), definitionHash: "hash-old",
@@ -155,10 +168,12 @@ function opportunityBody(email = "researcher@example.edu") {
   };
 }
 
-async function post(handler, path, body, activeEnv = env) {
+async function post(handler, path, body, activeEnv = env, extraHeaders = {}) {
   return handler(new Request(`https://alerts.example.test${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Origin: "https://mporosoff.github.io" },
+    headers: {
+      "Content-Type": "application/json", Origin: "https://mporosoff.github.io", ...extraHeaders,
+    },
     body: JSON.stringify(body),
   }), activeEnv);
 }
@@ -581,9 +596,9 @@ test("FF-BUG-008 a refreshed verification key discards its obsolete stored paylo
     now: retryNow, tokenFactory: () => freshNonce,
   });
   assert.deepEqual(second, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 });
-  const freshToken = await sha256Hex(
-    `funding-finder-verification-v1|${"m".repeat(43)}|watch-1|${freshNonce}`,
-  );
+  const freshToken = await createVerificationToken({
+    subscriberId: "person-1", subscriptionId: "watch-1", nonce: freshNonce,
+  }, env.ALERT_CAPABILITY_SECRET);
   assert.notEqual(provider.attempts[1].idempotencyKey, originalKey);
   assert.match(provider.attempts[1].message.text, new RegExp(`/verify\\?token=${freshToken}`));
   assert.doesNotMatch(provider.attempts[1].message.text, new RegExp(originalToken));
@@ -898,7 +913,9 @@ test("FF-BUG-008 permanent rejection is terminal and delayed delivery refreshes 
   }));
   const provider = new ScriptedProvider();
   const freshNonce = "n".repeat(43);
-  const freshToken = await sha256Hex(`funding-finder-verification-v1|${"m".repeat(43)}|watch-1|${freshNonce}`);
+  const freshToken = await createVerificationToken({
+    subscriberId: "person-1", subscriptionId: "watch-1", nonce: freshNonce,
+  }, env.ALERT_CAPABILITY_SECRET);
   await dispatchVerificationDeliveries({
     store: delayedStore, provider, env, now: fixedNow, tokenFactory: () => freshNonce,
   });
@@ -1046,9 +1063,9 @@ test("FF-BUG-009 suppressed subscribers receive a generic response but cannot be
   assert.equal(verification.status, "suppressed");
   assert.equal(verification.error_code, "subscriber_suppressed");
   const subscriptionId = database.prepare("SELECT id FROM subscriptions").get().id;
-  const verificationToken = await sha256Hex(
-    `funding-finder-verification-v1|${"s".repeat(43)}|${subscriptionId}|${tokens[0]}`,
-  );
+  const verificationToken = await createVerificationToken({
+    subscriberId, subscriptionId, nonce: tokens[0],
+  }, env.ALERT_CAPABILITY_SECRET);
   const verify = await handler(new Request(`https://alerts.example.test/verify?token=${verificationToken}`), env);
   assert.equal(verify.status, 200);
   assert.match(await verify.text(), /delivery remains suppressed/i);
@@ -1351,13 +1368,13 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
     readFile(new URL("tools/smoke_alerts_worker.mjs", root), "utf8"),
     readFile(new URL("workers/alerts/migrations/0003_phase2_alert_lifecycle.sql", root), "utf8"),
   ]);
-  assert.equal(ALERT_SCHEMA_VERSION, 2);
+  assert.equal(ALERT_SCHEMA_VERSION, 3);
   assert.match(workflow, /delivery_ready/);
   assert.match(workflow, /scheduler_ready/);
-  assert.match(workflow, /phase2-lifecycle-20260825/);
+  assert.match(workflow, /phase4-operations-20260827/);
   assert.match(workflow, /worker_version_rollback/);
   assert.match(wrangler, /"ALERT_SCHEDULER_ENABLED": "true"/);
-  assert.match(wrangler, /"crons": \["15 13 \* \* \*"\]/);
+  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "\*\/5 \* \* \* \*"\]/);
   assert.match(smoke, /delivery_ready/);
   assert.match(migration, /deployment workflow terminalizes unsent verification/);
   assert.doesNotMatch(workflow + wrangler + smoke + migration, /RESEND_API_KEY\s*[:=]\s*["']?re_/i);
@@ -1383,4 +1400,370 @@ test("Resend classifies 429 and 5xx as retryable but permanent 4xx as terminal",
       return true;
     });
   }
+});
+
+test("0004 migrates representative Phase 3 production state without exposing new raw capabilities", async () => {
+  const database = databaseThrough(3);
+  insertSubscriber(database);
+  insertSubscriber(database, {
+    id: "person-suppressed", email: "suppressed@example.edu", manageToken: "s".repeat(43),
+    suppressedAt: "2026-08-20T00:00:00.000Z", suppressionReason: "email.bounced",
+  });
+  insertSubscription(database, { id: "watch-active", active: 1, definitionHash: "hash-active" });
+  insertSubscription(database, { id: "watch-inactive", active: 0, definitionHash: "hash-inactive" });
+  insertSubscription(database, {
+    id: "watch-unverified", active: 0, verifiedAt: null, definitionHash: "hash-unverified",
+  });
+  insertSubscription(database, {
+    id: "watch-suppressed", subscriberId: "person-suppressed", active: 0,
+    definitionHash: "hash-suppressed",
+  });
+  for (const status of ["queued", "failed", "sending", "sent"]) {
+    insertEvent(database, {
+      id: `legacy-${status}`, subscriptionId: "watch-active", status,
+    });
+  }
+  insertEvent(database, {
+    id: "legacy-provider-reconcile", subscriptionId: "watch-active", status: "failed",
+  });
+  database.prepare(
+    "UPDATE notification_events SET error_code='provider_outcome_reconcile',provider_quota_key='quota-legacy',provider_quota_reserved_at='2026-08-26T13:15:00.000Z' WHERE id='legacy-provider-reconcile'",
+  ).run();
+  const lifecycleBefore = all(database,
+    "SELECT id,status,error_code,claimed_at,provider_quota_key FROM notification_events ORDER BY id",
+  );
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,status) VALUES('stuck','2026-08-26T13:15:00.000Z','running')",
+  ).run();
+  database.exec(migrations[3]);
+  const subscriber = database.prepare(
+    "SELECT capability_version,legacy_manage_expires_at,manage_token FROM subscribers WHERE id='person-1'",
+  ).get();
+  assert.equal(subscriber.capability_version, 0);
+  assert.equal(subscriber.legacy_manage_expires_at, "2026-11-30T23:59:59.999Z");
+  assert.equal(subscriber.manage_token, "m".repeat(43));
+  const recovered = database.prepare(
+    "SELECT status,completed_at,duration_ms,scheduled_at FROM evaluation_runs WHERE id='stuck'",
+  ).get();
+  assert.equal(recovered.status, "failed_stale_recovered");
+  assert.ok(recovered.completed_at);
+  assert.ok(recovered.duration_ms > 0);
+  assert.equal(recovered.scheduled_at, "2026-08-26T13:15:00.000Z");
+  assert.ok(database.prepare(
+    "SELECT id FROM evaluation_runs WHERE id='phase4_migration_ready'",
+  ).get());
+  assert.deepEqual(all(database,
+    "SELECT id,status,error_code,claimed_at,provider_quota_key FROM notification_events ORDER BY id",
+  ), lifecycleBefore);
+  assert.deepEqual(all(database,
+    "SELECT id,active,verified_at FROM subscriptions ORDER BY id",
+  ).map(row => [row.id, row.active, row.verified_at]), [
+    ["watch-active", 1, "2026-08-01T00:00:00.000Z"],
+    ["watch-inactive", 0, "2026-08-01T00:00:00.000Z"],
+    ["watch-suppressed", 0, "2026-08-01T00:00:00.000Z"],
+    ["watch-unverified", 0, null],
+  ]);
+  assert.equal(database.prepare(
+    "SELECT suppression_reason FROM subscribers WHERE id='person-suppressed'",
+  ).get().suppression_reason, "email.bounced");
+});
+
+test("FF-BUG-010 atomic subscription limits admit exactly the configured concurrent total", async () => {
+  const database = databaseThrough();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const accepted = await Promise.all(Array.from({ length: 8 }, () => (
+    store.consumeRateLimit("subscribe", "derived-not-an-ip", 5, 3_600, fixedNow)
+  )));
+  assert.equal(accepted.filter(Boolean).length, 5);
+  assert.equal(database.prepare(
+    "SELECT request_count FROM rate_limits WHERE action='subscribe' AND client_key='derived-not-an-ip'",
+  ).get().request_count, 5);
+  assert.equal(await store.consumeRateLimit("manage", "derived-not-an-ip", 1, 3_600, fixedNow), true);
+  assert.equal(await store.consumeRateLimit("manage", "derived-not-an-ip", 1, 3_600, fixedNow), false);
+  assert.equal(await store.consumeRateLimit(
+    "subscribe", "derived-not-an-ip", 5, 3_600,
+    new Date("2026-09-01T13:00:00.001Z"),
+  ), true);
+  assert.equal(database.prepare(
+    "SELECT request_count FROM rate_limits WHERE action='subscribe' AND client_key='derived-not-an-ip'",
+  ).get().request_count, 1);
+});
+
+test("FF-BUG-010 request limits store only a bounded derived client key", async () => {
+  const database = databaseThrough();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const handler = createHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    now: () => fixedNow,
+    tokenFactory: () => "n".repeat(43),
+  });
+  const rawAddress = "203.0.113.17";
+  const response = await post(
+    handler, "/subscriptions", opportunityBody("derived-key@example.edu"), env,
+    { "cf-connecting-ip": rawAddress },
+  );
+  assert.equal(response.status, 202);
+  const stored = database.prepare(
+    "SELECT action,client_key FROM rate_limits WHERE action='subscribe'",
+  ).get();
+  assert.equal(stored.action, "subscribe");
+  assert.match(stored.client_key, /^[a-f0-9]{64}$/);
+  assert.notEqual(stored.client_key, rawAddress);
+  assert.doesNotMatch(JSON.stringify(all(database, "SELECT * FROM rate_limits")), /203\.0\.113\.17/);
+});
+
+test("new subscriptions dispatch their own durable verification event instead of an older backlog row", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.createSubscriptionCycle(await cycle({
+    verificationEventId: "verify-old-backlog",
+    verificationEventKey: "verification:old-backlog",
+  }));
+  const provider = new ScriptedProvider();
+  const handler = createHandler({
+    storeFactory: () => store, providerFactory: () => provider,
+    now: () => fixedNow, tokenFactory: () => "n".repeat(43),
+  });
+  const response = await post(handler, "/subscriptions", opportunityBody("new-address@example.edu"));
+  assert.equal(response.status, 202);
+  assert.deepEqual(await response.json(), { status: "verification_required" });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(provider.messages[0].to, "new-address@example.edu");
+  assert.equal(database.prepare(
+    "SELECT status FROM notification_events WHERE id='verify-old-backlog'",
+  ).get().status, "queued");
+  const delivered = database.prepare(
+    "SELECT status,provider_message_id FROM notification_events WHERE id <> 'verify-old-backlog' AND message_kind='verification'",
+  ).get();
+  assert.deepEqual([delivered.status, delivered.provider_message_id], ["sent", "provider-1"]);
+});
+
+test("FF-BUG-018 retention is bounded and preserves recent, active, and retryable state", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  for (const id of ["expired-a", "expired-b"]) {
+    database.prepare(
+      "INSERT INTO rate_limits(action,client_key,window_started_at,expires_at,request_count) VALUES('verify',?,?,?,1)",
+    ).run(id, "2025-01-01T00:00:00.000Z", "2025-01-01T01:00:00.000Z");
+  }
+  database.prepare(
+    "INSERT INTO rate_limits(action,client_key,window_started_at,expires_at,request_count) VALUES('verify','recent','2026-09-01T11:00:00.000Z','2026-09-01T13:00:00.000Z',1)",
+  ).run();
+  insertEvent(database, { id: "old-sent", status: "sent", createdAt: "2025-01-01T00:00:00.000Z" });
+  database.prepare(
+    "UPDATE notification_events SET sent_at='2025-01-01T00:00:00.000Z' WHERE id='old-sent'",
+  ).run();
+  insertEvent(database, { id: "recent-sent", status: "sent", createdAt: fixedNow.toISOString() });
+  database.prepare(
+    "UPDATE notification_events SET sent_at=? WHERE id='recent-sent'",
+  ).run(fixedNow.toISOString());
+  insertEvent(database, { id: "old-suppressed", status: "suppressed", createdAt: "2025-01-01T00:00:00.000Z" });
+  database.prepare(
+    "UPDATE notification_events SET terminal_at='2025-01-01T00:00:00.000Z' WHERE id='old-suppressed'",
+  ).run();
+  insertEvent(database, { id: "old-verification", status: "failed", createdAt: "2025-01-01T00:00:00.000Z" });
+  database.prepare(
+    "UPDATE notification_events SET message_kind='verification',terminal_at='2025-01-01T00:00:00.000Z' WHERE id='old-verification'",
+  ).run();
+  insertEvent(database, { id: "old-retry", status: "failed", createdAt: "2025-01-01T00:00:00.000Z" });
+  database.prepare(
+    "UPDATE notification_events SET terminal_at=NULL,next_attempt_at='2026-09-02T00:00:00.000Z' WHERE id='old-retry'",
+  ).run();
+  database.prepare(
+    "INSERT INTO provider_events VALUES('provider-old','email.delivered','message-old','2025-01-01T00:00:00.000Z')",
+  ).run();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('run-old','2025-01-01T00:00:00.000Z','2025-01-01T00:00:01.000Z','completed','2025-01-01T00:00:00.000Z',1000,'daily')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const first = await store.cleanupOperationalData(fixedNow.toISOString(), 1);
+  assert.equal(first.batchSize, 1);
+  assert.ok(first.deletedCount >= 4);
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM rate_limits WHERE client_key LIKE 'expired-%'").get().count, 1);
+  for (let index = 0; index < 3; index += 1) {
+    await store.cleanupOperationalData(fixedNow.toISOString(), 1);
+  }
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM rate_limits WHERE client_key LIKE 'expired-%'").get().count, 0);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE id IN ('old-sent','old-suppressed','old-verification')",
+  ).get().count, 0);
+  assert.ok(database.prepare("SELECT id FROM notification_events WHERE id='recent-sent'").get());
+  assert.ok(database.prepare("SELECT client_key FROM rate_limits WHERE client_key='recent'").get());
+  assert.ok(database.prepare("SELECT id FROM notification_events WHERE id='old-retry'").get());
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 1);
+  assert.deepEqual(RETENTION_DAYS, {
+    rateLimits: 30, evaluationRuns: 90, terminalDeliveries: 90, providerEvents: 180,
+  });
+});
+
+test("FF-BUG-019 signed capabilities are purpose-scoped, tamper-resistant, rotatable, and legacy-bounded", async () => {
+  const secret = "current-secret-with-sufficient-entropy";
+  const previousSecret = "previous-secret-with-sufficient-entropy";
+  const manage = await createCapability({ subscriberId: "person-1", purpose: "manage" }, secret);
+  assert.equal((await verifyCapability(manage, { secret, purpose: "manage" })).s, "person-1");
+  assert.equal(await verifyCapability(manage, { secret, purpose: "unsubscribe_all" }), null);
+  assert.equal(await verifyCapability(`${manage.slice(0, -1)}x`, { secret, purpose: "manage" }), null);
+  const old = await createCapability({ subscriberId: "person-1", purpose: "manage" }, previousSecret);
+  assert.equal((await verifyCapability(old, {
+    secret, previousSecret, purpose: "manage",
+  })).s, "person-1");
+
+  const database = databaseThrough();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const created = await store.upsertSubscriber({
+    id: "person-new", email: "new@example.edu", manageToken: "retired:person-new",
+    now: fixedNow.toISOString(),
+  });
+  assert.equal(created.capability_version, 1);
+  assert.equal(created.manage_token, "retired:person-new");
+  assert.equal(await store.subscriberByManageToken("retired:person-new", fixedNow.toISOString()), null);
+  insertSubscriber(database, { id: "person-legacy", email: "legacy@example.edu", manageToken: "l".repeat(43) });
+  assert.ok(await store.subscriberByManageToken("l".repeat(43), fixedNow.toISOString()));
+  assert.equal(await store.subscriberByManageToken(
+    "l".repeat(43), "2026-12-01T00:00:00.000Z",
+  ), null);
+});
+
+test("FF-BUG-019 signed capabilities authorize only their exact manage and unsubscribe routes", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { id: "watch-1", active: 1, definitionHash: "hash-1" });
+  insertSubscription(database, { id: "watch-2", active: 1, definitionHash: "hash-2" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const handler = createHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    now: () => fixedNow,
+  });
+  const manage = await createCapability({ subscriberId: "person-1", purpose: "manage" }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeOne = await createCapability({
+    subscriberId: "person-1", purpose: "unsubscribe_one", subscriptionId: "watch-1",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeAll = await createCapability({
+    subscriberId: "person-1", purpose: "unsubscribe_all",
+  }, env.ALERT_CAPABILITY_SECRET);
+
+  const managePageResponse = await handler(new Request(
+    `https://alerts.example.test/manage?token=${encodeURIComponent(manage)}`,
+  ), env);
+  assert.equal(managePageResponse.status, 200);
+  assert.match(await managePageResponse.text(), /Manage Funding Finder alerts/);
+
+  const pauseResponse = await handler(new Request("https://alerts.example.test/manage", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ token: manage, subscription: "watch-1", active: "0" }),
+  }), env);
+  assert.equal(pauseResponse.status, 200);
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 0);
+
+  const wrongPurpose = await handler(new Request(
+    `https://alerts.example.test/unsubscribe?token=${encodeURIComponent(manage)}&subscription=watch-1`,
+    { method: "POST" },
+  ), env);
+  assert.equal(wrongPurpose.status, 400);
+
+  const oneResponse = await handler(new Request(
+    `https://alerts.example.test/unsubscribe?token=${encodeURIComponent(unsubscribeOne)}&subscription=watch-1`,
+    { method: "POST" },
+  ), env);
+  assert.equal(oneResponse.status, 200);
+  assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-2'").get().active, 1);
+
+  const allResponse = await handler(new Request(
+    `https://alerts.example.test/unsubscribe?token=${encodeURIComponent(unsubscribeAll)}&scope=all`,
+    { method: "POST" },
+  ), env);
+  assert.equal(allResponse.status, 200);
+  assert.deepEqual(all(database, "SELECT active FROM subscriptions ORDER BY id").map(row => row.active), [0, 0]);
+});
+
+test("FF-BUG-020 retry runs skip catalog loading and record actual timing plus cleanup failure", async () => {
+  const times = [
+    new Date("2026-09-01T12:00:01.000Z"),
+    new Date("2026-09-01T12:00:03.000Z"),
+    new Date("2026-09-01T12:00:05.000Z"),
+  ];
+  let finished;
+  const store = {
+    startRun: async () => {},
+    pendingVerificationEvents: async () => [],
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => [],
+    cleanupOperationalData: async () => { throw new Error("bounded cleanup failure"); },
+    finishRun: async run => { finished = { ...run }; },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => { throw new Error("retry runs must not load the catalog"); },
+    now: () => times.shift(),
+  });
+  const result = await scheduled({
+    scheduledTime: Date.parse("2026-09-01T12:00:00.000Z"), cron: "*/5 * * * *",
+  }, env);
+  assert.equal(result.runKind, "retry");
+  assert.equal(result.scheduledAt, "2026-09-01T12:00:00.000Z");
+  assert.equal(result.startedAt, "2026-09-01T12:00:01.000Z");
+  assert.equal(result.completedAt, "2026-09-01T12:00:05.000Z");
+  assert.equal(result.durationMs, 4_000);
+  assert.equal(result.status, "completed_with_cleanup_failure");
+  assert.equal(result.cleanupErrorCode, "cleanup_failed");
+  assert.deepEqual(finished, result);
+});
+
+test("FF-BUG-020 failed daily runs still record actual completion and duration", async () => {
+  const times = [
+    new Date("2026-09-01T12:00:01.000Z"),
+    new Date("2026-09-01T12:00:04.000Z"),
+    new Date("2026-09-01T12:00:07.000Z"),
+  ];
+  let finished;
+  const store = {
+    startRun: async () => {},
+    pendingVerificationEvents: async () => [],
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => [],
+    cleanupOperationalData: async () => ({ deletedCount: 2 }),
+    finishRun: async run => { finished = { ...run }; },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => { throw new Error("deterministic catalog failure"); },
+    now: () => times.shift(),
+  });
+  const result = await scheduled({
+    scheduledTime: Date.parse("2026-09-01T12:00:00.000Z"), cron: "15 13 * * *",
+  }, env);
+  assert.equal(result.runKind, "daily");
+  assert.equal(result.status, "failed");
+  assert.equal(result.startedAt, "2026-09-01T12:00:01.000Z");
+  assert.equal(result.completedAt, "2026-09-01T12:00:07.000Z");
+  assert.equal(result.durationMs, 6_000);
+  assert.equal(result.cleanupDeletedCount, 2);
+  assert.deepEqual(finished, result);
+});
+
+test("provider and public-asset requests have deterministic bounded deadlines", async () => {
+  const hangingFetch = async (_url, options) => new Promise((_resolve, reject) => {
+    options.signal.addEventListener("abort", () => reject(new DOMException("aborted", "AbortError")));
+  });
+  const provider = new ResendEmailProvider({
+    apiKey: "test-only", fetchImpl: hangingFetch, timeoutMs: 5,
+  });
+  await assert.rejects(
+    provider.sendEmail({ to: "x@example.edu", subject: "x", text: "x", html: "<p>x</p>" }, "timeout"),
+    error => error.code === "provider_network_failure" && error.retryable === true,
+  );
+  await assert.rejects(
+    loadPublicAssets({
+      CATALOG_URL: "https://example.test/catalog", SUBTOPICS_URL: "https://example.test/subtopics",
+      CHANGES_URL: "https://example.test/changes", ALERT_ASSET_TIMEOUT_MS: "5",
+    }, hangingFetch),
+    /aborted/i,
+  );
 });

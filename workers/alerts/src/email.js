@@ -1,4 +1,4 @@
-export const ALERT_EMAIL_TEMPLATE_VERSION = "phase2-lifecycle-20260825";
+export const ALERT_EMAIL_TEMPLATE_VERSION = "phase4-operations-20260827";
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -76,10 +76,10 @@ function actionText(body) {
   ].filter(Boolean).join("\n");
 }
 
-export function verificationEmail({ env, to, token, subscriptionId, manageToken, type }) {
+export function verificationEmail({ env, to, token, subscriptionId, manageToken, capabilityLinks = null, type }) {
   const origin = String(env.PUBLIC_WORKER_ORIGIN).replace(/\/$/, "");
   const verify = `${origin}/verify?token=${encodeURIComponent(token)}`;
-  const urls = links(env, manageToken, subscriptionId);
+  const urls = capabilityLinks || links(env, manageToken, subscriptionId);
   const kind = {
     opportunity: "opportunity watch", saved_search: "saved-search alert", program: "program watch",
   }[type] || "alert";
@@ -154,8 +154,8 @@ function eventHtml(heading, body, headingLevel = 1) {
   return `<${tag} style="color:#001e5f;font-size:${size};line-height:1.25;margin:0 0 10px">${escapeHtml(heading)}</${tag}><p style="font-size:18px;font-weight:700;margin:0 0 10px">${escapeHtml(body.title)}</p>${facts}${reasons}${actionHtml(body)}`;
 }
 
-export function eventEmail({ env, event }) {
-  const urls = links(env, event.manage_token, event.subscription_id);
+export function eventEmail({ env, event, capabilityLinks = null }) {
+  const urls = capabilityLinks || links(env, event.manage_token, event.subscription_id);
   const heading = eventTitle(event);
   const body = eventBody(event);
   return {
@@ -167,9 +167,9 @@ export function eventEmail({ env, event }) {
   };
 }
 
-export function digestEmail({ env, events, hasOverflow = false }) {
+export function digestEmail({ env, events, hasOverflow = false, capabilityLinks = null }) {
   const first = events[0];
-  const urls = links(env, first.manage_token, first.subscription_id);
+  const urls = capabilityLinks || links(env, first.manage_token, first.subscription_id);
   const items = events.map(event => ({ heading: eventTitle(event), ...eventBody(event) }));
   const digestText = items.map(item => eventText(item.heading, item)).join("\n\n---\n\n");
   const digestHtml = items.map(item => `<section style="border-top:1px solid #d8dfeb;margin-top:20px;padding-top:20px">${eventHtml(item.heading, item, 2)}</section>`).join("");

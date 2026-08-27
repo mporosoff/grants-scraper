@@ -3,7 +3,10 @@ import "../../../assets/award-links.js";
 import {
   ALERT_SCHEMA_VERSION, normalizeEmail, normalizeSubscription, stableJson,
 } from "./contract.js";
-import { randomToken, sha256Hex, verifySvixWebhook } from "./crypto.js";
+import {
+  createCapability, randomToken, sha256Hex, verificationToken as createVerificationToken,
+  verifyCapability, verifySvixWebhook,
+} from "./crypto.js";
 import {
   baselineIds, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "./evaluator.js";
@@ -89,6 +92,7 @@ function serviceConfig(env) {
     provider: String(env.EMAIL_PROVIDER || "").toLowerCase(),
     publicWorkerOrigin: String(env.PUBLIC_WORKER_ORIGIN || ""),
     scheduler: String(env.ALERT_SCHEDULER_ENABLED || "").toLowerCase() === "true",
+    capability: Boolean(String(env.ALERT_CAPABILITY_SECRET || "")),
   };
 }
 
@@ -118,22 +122,52 @@ function suppressionDescription(reason) {
   return "The email provider has suppressed delivery to this address.";
 }
 
-function managePage(subscriber, subscriptions) {
+async function signedCapability(env, subscriberId, purpose, subscriptionId = "") {
+  return createCapability(
+    { subscriberId, purpose, subscriptionId },
+    String(env.ALERT_CAPABILITY_SECRET || ""),
+  );
+}
+
+async function resolveSubscriberCapability(store, token, purpose, subscriptionId, env, current) {
+  const signed = env.ALERT_CAPABILITY_SECRET
+    ? await verifyCapability(token, {
+        secret: env.ALERT_CAPABILITY_SECRET,
+        previousSecret: env.ALERT_CAPABILITY_PREVIOUS_SECRET,
+        purpose,
+        subscriptionId,
+      })
+    : null;
+  if (signed) return store.subscriberById(signed.s);
+  return store.subscriberByManageToken(token, current.toISOString());
+}
+
+async function managePage(subscriber, subscriptions, env) {
   const suppressed = Boolean(subscriber.suppressed_at);
-  const items = subscriptions.map(subscription => {
+  const manageToken = env.ALERT_CAPABILITY_SECRET
+    ? await signedCapability(env, subscriber.id, "manage")
+    : subscriber.manage_token;
+  const items = (await Promise.all(subscriptions.map(async subscription => {
     const active = Number(subscription.active) === 1;
-    const fields = `<input type="hidden" name="token" value="${escapeHtml(subscriber.manage_token)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}">`;
+    const unsubscribeToken = env.ALERT_CAPABILITY_SECRET
+      ? await signedCapability(env, subscriber.id, "unsubscribe_one", subscription.id)
+      : subscriber.manage_token;
+    const fields = `<input type="hidden" name="token" value="${escapeHtml(manageToken)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}">`;
     const state = suppressed ? "Delivery suppressed" : active ? "Active" : "Paused";
     const activeForm = suppressed
       ? ""
       : `<form method="post" action="/manage">${fields}<input type="hidden" name="active" value="${active ? "0" : "1"}"><button type="submit">${active ? "Pause" : "Resume"}</button></form>`;
-    return `<li><strong>${escapeHtml(definitionSummary(subscription))}</strong><p>${state} · ${escapeHtml(subscription.cadence === "weekly" ? "Weekly digest" : "As changes happen")}</p>${activeForm}<form method="post" action="/manage">${fields}<select name="cadence" aria-label="Email frequency"><option value="immediate"${subscription.cadence === "immediate" ? " selected" : ""}>As changes happen</option><option value="weekly"${subscription.cadence === "weekly" ? " selected" : ""}>Weekly digest</option></select> <button type="submit">Save frequency</button></form><form method="post" action="/unsubscribe">${fields}<button type="submit">Unsubscribe from this alert</button></form></li>`;
-  }).join("");
+    const unsubscribeFields = `<input type="hidden" name="token" value="${escapeHtml(unsubscribeToken)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}">`;
+    return `<li><strong>${escapeHtml(definitionSummary(subscription))}</strong><p>${state} · ${escapeHtml(subscription.cadence === "weekly" ? "Weekly digest" : "As changes happen")}</p>${activeForm}<form method="post" action="/manage">${fields}<select name="cadence" aria-label="Email frequency"><option value="immediate"${subscription.cadence === "immediate" ? " selected" : ""}>As changes happen</option><option value="weekly"${subscription.cadence === "weekly" ? " selected" : ""}>Weekly digest</option></select> <button type="submit">Save frequency</button></form><form method="post" action="/unsubscribe">${unsubscribeFields}<button type="submit">Unsubscribe from this alert</button></form></li>`;
+  }))).join("");
   const suppression = suppressed
     ? `<div role="status"><h2>Email delivery is suppressed</h2><p>${escapeHtml(suppressionDescription(subscriber.suppression_reason))} These alerts cannot be resumed for this address. Use a different email address to create a deliverable alert.</p></div>`
     : "";
+  const allToken = env.ALERT_CAPABILITY_SECRET
+    ? await signedCapability(env, subscriber.id, "unsubscribe_all")
+    : subscriber.manage_token;
   const allForm = subscriptions.length
-    ? `<form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(subscriber.manage_token)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all Funding Finder email alerts</button></form>`
+    ? `<form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(allToken)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all Funding Finder email alerts</button></form>`
     : "";
   return `<h1>Manage Funding Finder alerts</h1>${suppression}<p>These are the email alerts authorized for this address. Browser-local saved statuses, notes, profiles, documents, and chat are not shown because the alert service never receives them.</p><ul>${items || "<li>No alerts found.</li>"}</ul>${allForm}<p class="muted">Closing this page does not change your browser-local Saved list.</p>`;
 }
@@ -172,11 +206,22 @@ export function createHandler({
     if (path === "/health" && request.method === "GET") {
       let databaseReady = false;
       try { databaseReady = await store.health(); } catch { /* unavailable */ }
+      let operations = {
+        staleRunningRuns: 0, lastCompletedAt: "", lastStatus: "", lastDurationMs: null,
+        schedulerRecent: true,
+      };
+      try {
+        if (typeof store.operationalHealth === "function") {
+          operations = await store.operationalHealth(current.toISOString());
+        }
+      } catch { operations.schedulerRecent = false; }
       let providerConfigured = false;
       try { providerConfigured = providerFactory(env, fetchImpl).configured === true; } catch { /* unavailable */ }
       const providerSelected = config.provider === "resend";
+      const schedulerReady = config.scheduler && operations.schedulerRecent
+        && operations.staleRunningRuns === 0;
       const deliveryReady = config.enabled && databaseReady && providerSelected
-        && providerConfigured && config.outbound && config.scheduler;
+        && providerConfigured && config.outbound && schedulerReady && config.capability;
       return json(origin, deliveryReady ? 200 : 503, {
         service: deliveryReady ? "available" : "unavailable",
         delivery_ready: deliveryReady,
@@ -188,7 +233,12 @@ export function createHandler({
         email_provider_configured: providerConfigured,
         email_template_version: ALERT_EMAIL_TEMPLATE_VERSION,
         outbound_email_enabled: config.outbound,
-        scheduler_ready: config.scheduler,
+        scheduler_ready: schedulerReady,
+        capability_signing_ready: config.capability,
+        stale_running_runs: operations.staleRunningRuns,
+        last_run_completed_at: operations.lastCompletedAt || null,
+        last_run_status: operations.lastStatus || null,
+        last_run_duration_ms: operations.lastDurationMs,
       });
     }
     if (!config.enabled) return json(origin, 503, { error: { code: "alerts_unavailable" } });
@@ -214,7 +264,7 @@ export function createHandler({
         }
         let provider;
         try { provider = providerFactory(env, fetchImpl); } catch { /* bounded service response below */ }
-        if (!config.outbound || config.provider !== "resend" || provider?.configured !== true || !config.scheduler) {
+        if (!config.outbound || config.provider !== "resend" || provider?.configured !== true || !config.scheduler || !config.capability) {
           return json(origin, 503, { error: { code: "alerts_unavailable" } });
         }
         const baseline = baselineIds(subscription, suppliedBaseline);
@@ -225,10 +275,12 @@ export function createHandler({
         const subscriptionId = `watch_${(await sha256Hex(`${subscriberId}|${subscription.type}|${definitionHash}`)).slice(0, 24)}`;
         const verificationNonce = tokenFactory();
         const createdAt = current.toISOString();
-        const subscriber = await store.upsertSubscriber({ id: subscriberId, email, manageToken: tokenFactory(), now: createdAt });
-        const verificationToken = await sha256Hex(
-          `funding-finder-verification-v1|${subscriber.manage_token}|${subscriptionId}|${verificationNonce}`,
-        );
+        const subscriber = await store.upsertSubscriber({
+          id: subscriberId, email, manageToken: `retired:${subscriberId}`, now: createdAt,
+        });
+        const verificationToken = await createVerificationToken({
+          subscriberId: subscriber.id, subscriptionId, nonce: verificationNonce,
+        }, env.ALERT_CAPABILITY_SECRET);
         const verificationTokenHash = await sha256Hex(verificationToken);
         const verificationEventId = `verify_${(await sha256Hex(`${subscriptionId}|${verificationTokenHash}`)).slice(0, 32)}`;
         const stored = await store.createSubscriptionCycle({
@@ -248,6 +300,7 @@ export function createHandler({
           try {
             await dispatchVerificationDeliveries({
               store, provider, env, now: current, tokenFactory, limit: 1,
+              eventIds: [verificationEventId],
             });
           } catch {
             // The durable queued job remains available to the retry scheduler.
@@ -262,25 +315,34 @@ export function createHandler({
         const verified = token.length >= 32
           ? await store.verifySubscription(await sha256Hex(token), current.toISOString())
           : null;
+        const manageToken = verified && config.capability
+          ? await signedCapability(env, verified.subscriber_id, "manage")
+          : verified?.manage_token;
         return verified
           ? verified.deliverySuppressed
-            ? html(200, `<h1>Email verified</h1><p>Email delivery remains suppressed for this address, so this alert is not active. Use a different email address to create a deliverable alert.</p><p><a href="/manage?token=${encodeURIComponent(verified.manage_token)}">Manage all alerts</a></p>`)
-            : html(200, `<h1>Email verified</h1><p>Your Funding Finder alert is active.</p><p><a href="/manage?token=${encodeURIComponent(verified.manage_token)}">Manage all alerts</a></p>`)
+            ? html(200, `<h1>Email verified</h1><p>Email delivery remains suppressed for this address, so this alert is not active. Use a different email address to create a deliverable alert.</p><p><a href="/manage?token=${encodeURIComponent(manageToken)}">Manage all alerts</a></p>`)
+            : html(200, `<h1>Email verified</h1><p>Your Funding Finder alert is active.</p><p><a href="/manage?token=${encodeURIComponent(manageToken)}">Manage all alerts</a></p>`)
           : html(400, "<h1>This verification link is invalid or expired</h1><p>Create the alert again to receive a new link.</p>");
       }
 
       if (path === "/manage" && request.method === "GET") {
         if (!await rateLimit(store, request, "manage", 30, 3_600, current)) return html(429, "<h1>Try again later</h1>");
-        const subscriber = await store.subscriberByManageToken(String(url.searchParams.get("token") || ""));
+        const subscriber = await resolveSubscriberCapability(
+          store, String(url.searchParams.get("token") || ""), "manage", "", env, current,
+        );
         if (!subscriber) return html(404, "<h1>Manage link not found</h1>");
-        return html(200, managePage(subscriber, await store.subscriptionsForSubscriber(subscriber.id)));
+        return html(200, await managePage(subscriber, await store.subscriptionsForSubscriber(subscriber.id), env));
       }
 
       if (path === "/manage" && request.method === "POST") {
         if (!await rateLimit(store, request, "manage", 30, 3_600, current)) return html(429, "<h1>Try again later</h1>");
         const body = await formValues(request);
-        const updated = await store.updateSubscription(
-          String(body.token || ""), String(body.subscription || ""),
+        const subscriptionId = String(body.subscription || "");
+        const subscriber = await resolveSubscriberCapability(
+          store, String(body.token || ""), "manage", "", env, current,
+        );
+        const updated = subscriber && await store.updateSubscriptionForSubscriber(
+          subscriber.id, subscriptionId,
           {
             ...(Object.prototype.hasOwnProperty.call(body, "active") ? { active: String(body.active) === "1" } : {}),
             cadence: String(body.cadence || ""),
@@ -293,7 +355,10 @@ export function createHandler({
         const token = String(url.searchParams.get("token") || "");
         const subscription = String(url.searchParams.get("subscription") || "");
         const all = url.searchParams.get("scope") === "all";
-        const subscriber = await store.subscriberByManageToken(token);
+        const purpose = all ? "unsubscribe_all" : "unsubscribe_one";
+        const subscriber = await resolveSubscriberCapability(
+          store, token, purpose, all ? "" : subscription, env, current,
+        );
         if (!subscriber || (!all && !subscription)) return html(404, "<h1>Unsubscribe link not found</h1>");
         return all
           ? html(200, `<h1>Unsubscribe from all Funding Finder email alerts?</h1><form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(token)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all alerts</button></form>`)
@@ -308,11 +373,14 @@ export function createHandler({
         const body = queryToken && (querySubscription || queryAll) ? {} : await formValues(request);
         const token = queryToken || String(body.token || "");
         const all = queryAll || String(body.scope || "") === "all";
-        const removed = all
-          ? await store.unsubscribeAll(token, current.toISOString())
-          : await store.unsubscribe(
-              token, querySubscription || String(body.subscription || ""), current.toISOString(),
-            );
+        const subscriptionId = querySubscription || String(body.subscription || "");
+        const subscriber = await resolveSubscriberCapability(
+          store, token, all ? "unsubscribe_all" : "unsubscribe_one",
+          all ? "" : subscriptionId, env, current,
+        );
+        const removed = subscriber && (all
+          ? await store.unsubscribeAllForSubscriber(subscriber.id, current.toISOString())
+          : await store.unsubscribeForSubscriber(subscriber.id, subscriptionId, current.toISOString()));
         return removed
           ? all
             ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>")
@@ -341,6 +409,11 @@ export function createHandler({
             String(event.data?.email_id || ""), String(event.type),
             String(request.headers.get("svix-id") || ""), current.toISOString(),
           );
+        } else if (["email.delivered", "email.delivery_delayed", "email.failed"].includes(event.type)) {
+          await store.recordProviderEvent(
+            String(request.headers.get("svix-id") || ""), String(event.type),
+            String(event.data?.email_id || ""), current.toISOString(),
+          );
         }
         return json(origin, 200, { received: true });
       }
@@ -366,12 +439,16 @@ export function createScheduledHandler({
   now = scheduledTime => new Date(scheduledTime || Date.now()),
 } = {}) {
   return async function scheduled(controller, env) {
+    const scheduledAt = new Date(controller?.scheduledTime || Date.now());
     const current = now(controller?.scheduledTime);
+    const runKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
     const store = storeFactory(env);
     const run = {
-      id: `run_${current.toISOString().replace(/[^0-9]/g, "")}`,
+      id: `run_${current.toISOString().replace(/[^0-9]/g, "")}_${runKind}`,
+      scheduledAt: scheduledAt.toISOString(), runKind,
       startedAt: current.toISOString(), subscriptionCount: 0, matchedEventCount: 0,
       attemptedCount: 0, deliveredCount: 0, failedCount: 0, status: "running",
+      cleanupDeletedCount: 0, cleanupErrorCode: "",
     };
     await store.startRun(run);
     try {
@@ -379,12 +456,14 @@ export function createScheduledHandler({
       const verification = await dispatchVerificationDeliveries({ store, provider, env, now: current });
       let immediate = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
       let weekly = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
-      const assets = await assetLoader(env, fetchImpl);
-      Object.assign(run, await evaluateSubscriptions({ store, assets, env, now: current }));
       immediate = await dispatchNotifications({ store, provider, env, now: current, weekly: false });
-      weekly = current.getUTCDay() === 0
-        ? await dispatchNotifications({ store, provider, env, now: current, weekly: true })
-        : weekly;
+      if (runKind === "daily") {
+        const assets = await assetLoader(env, fetchImpl);
+        Object.assign(run, await evaluateSubscriptions({ store, assets, env, now: current }));
+        weekly = current.getUTCDay() === 0
+          ? await dispatchNotifications({ store, provider, env, now: current, weekly: true })
+          : weekly;
+      }
       run.attemptedCount = verification.attemptedCount + immediate.attemptedCount + weekly.attemptedCount;
       run.deliveredCount = verification.deliveredCount + immediate.deliveredCount + weekly.deliveredCount;
       run.failedCount = verification.failedCount + immediate.failedCount + weekly.failedCount;
@@ -392,7 +471,18 @@ export function createScheduledHandler({
     } catch {
       run.status = "failed";
     }
-    run.completedAt = new Date(current.getTime()).toISOString();
+    try {
+      if (typeof store.cleanupOperationalData === "function") {
+        const cleanup = await store.cleanupOperationalData(now().toISOString(), 100);
+        run.cleanupDeletedCount = Number(cleanup?.deletedCount || 0);
+      }
+    } catch {
+      run.cleanupErrorCode = "cleanup_failed";
+      if (run.status === "completed") run.status = "completed_with_cleanup_failure";
+    }
+    const completed = now();
+    run.completedAt = completed.toISOString();
+    run.durationMs = Math.max(0, completed.getTime() - current.getTime());
     await store.finishRun(run);
     return run;
   };

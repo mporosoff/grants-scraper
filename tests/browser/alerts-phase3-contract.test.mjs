@@ -16,6 +16,7 @@ const env = {
   OUTBOUND_EMAIL_ENABLED: "true",
   EMAIL_PROVIDER: "resend",
   RESEND_API_KEY: "test-only",
+  ALERT_CAPABILITY_SECRET: "test-only-capability-secret-with-32-bytes",
   PUBLIC_WORKER_ORIGIN: "https://alerts.example.test",
   PUBLIC_APP_ORIGIN: "https://app.example.test",
   DAILY_EMAIL_LIMIT: "100",
@@ -129,9 +130,19 @@ class MemoryStore {
   async subscriberByManageToken(token) {
     return [...this.subscribers.values()].find(item => item.manage_token === token) || null;
   }
+  async subscriberById(id) { return this.subscribers.get(id) || null; }
   async subscriptionsForSubscriber(id) { return [...this.subscriptions.values()].filter(item => item.subscriber_id === id); }
   async updateSubscription(token, id, changes) {
     const person = await this.subscriberByManageToken(token);
+    const sub = this.subscriptions.get(id);
+    if (!person || !sub || sub.subscriber_id !== person.id) return false;
+    if (changes.active === true && person.suppressed_at) return false;
+    if (typeof changes.active === "boolean") sub.active = changes.active ? 1 : 0;
+    if (["immediate", "weekly"].includes(changes.cadence)) sub.cadence = changes.cadence;
+    return true;
+  }
+  async updateSubscriptionForSubscriber(subscriberId, id, changes) {
+    const person = this.subscribers.get(subscriberId);
     const sub = this.subscriptions.get(id);
     if (!person || !sub || sub.subscriber_id !== person.id) return false;
     if (changes.active === true && person.suppressed_at) return false;
@@ -144,6 +155,14 @@ class MemoryStore {
     const person = await this.subscriberByManageToken(token);
     if (!person) return false;
     for (const sub of this.subscriptions.values()) if (sub.subscriber_id === person.id) sub.active = 0;
+    return true;
+  }
+  async unsubscribeForSubscriber(subscriberId, id) {
+    return this.updateSubscriptionForSubscriber(subscriberId, id, { active: false });
+  }
+  async unsubscribeAllForSubscriber(subscriberId) {
+    if (!this.subscribers.has(subscriberId)) return false;
+    for (const sub of this.subscriptions.values()) if (sub.subscriber_id === subscriberId) sub.active = 0;
     return true;
   }
   async activeSubscriptions() {
@@ -200,14 +219,15 @@ class MemoryStore {
       events: events.slice(0, eventLimit), hasOverflow: events.length > eventLimit,
     }));
   }
-  async pendingVerificationEvents(now, limit) {
+  async pendingVerificationEvents(now, limit, eventIds = null) {
+    const selected = Array.isArray(eventIds) ? new Set(eventIds) : null;
     const staleBefore = new Date(Date.parse(now) - 15 * 60 * 1_000).toISOString();
     return [...this.events.values()].flatMap(event => {
       const sub = this.subscriptions.get(event.subscription_id);
       const person = this.subscribers.get(sub.subscriber_id);
       const ready = (["queued", "failed"].includes(event.status) && event.next_attempt_at <= now)
         || (event.status === "sending" && event.claimed_at && event.claimed_at <= staleBefore);
-      return event.message_kind === "verification" && !event.terminal_at && ready
+      return event.message_kind === "verification" && (!selected || selected.has(event.id)) && !event.terminal_at && ready
         && sub.active === 0 && !person.suppressed_at
         ? [{ ...event, ...sub, id: event.id, subscription_id: sub.id, email: person.email, manage_token: person.manage_token }]
         : [];
@@ -756,7 +776,7 @@ test("authenticated duplicate Resend bounce webhooks suppress future delivery", 
   assert.equal(store.providerEvents.size, 1);
 });
 
-test("Phase 3 deployment and privacy contracts are committed without Phase 4 scope", async () => {
+test("alert deployment and privacy contracts preserve Phase 3 behavior through Phase 4 hardening", async () => {
   const root = new URL("../../", import.meta.url);
   const [page, awards, alerts, worker, migration, leaseMigration, lifecycleMigration, workflow, wrangler, evidence] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
@@ -791,7 +811,7 @@ test("Phase 3 deployment and privacy contracts are committed without Phase 4 sco
   assert.match(workflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)\s*\| last/);
   assert.doesNotMatch(workflow, /\.\[0\]\.versions/);
   assert.match(workflow, /wrangler@4\.125\.0 rollback/);
-  assert.match(wrangler, /"crons": \["15 13 \* \* \*"\]/);
+  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "\*\/5 \* \* \* \*"\]/);
   assert.doesNotMatch(wrangler, /RESEND_API_KEY|re_[A-Za-z0-9]/);
   assert.equal(JSON.parse(evidence).phase, 3);
   assert.doesNotMatch(worker + alerts + workflow, /\bDOE\b|award vector|semantic award/i);

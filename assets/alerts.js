@@ -10,6 +10,7 @@
   let dialog = null;
   let current = null;
   let restoreFocus = null;
+  let lastEmail = "";
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"]/g, character => ({
@@ -84,6 +85,7 @@
         <p class="alert-search-baseline hidden" id="alert-search-baseline">The current Strong matches become the starting baseline. They will not trigger email; only a future new or newly qualifying Strong match can alert you. Potential matches are excluded.</p>
         <div class="alert-dialog-actions">
           <button class="button primary" id="alert-submit" type="submit">Send verification email</button>
+          <button class="text-button hidden" id="alert-change-email" type="button">Use a different email</button>
           <button class="button secondary alert-cancel" type="button">Cancel</button>
         </div>
         <p class="alert-dialog-status" id="alert-dialog-status" role="status" aria-live="polite"></p>
@@ -91,6 +93,18 @@
     document.body.append(dialog);
     dialog.querySelector(".alert-dialog-close").addEventListener("click", close);
     dialog.querySelector(".alert-cancel").addEventListener("click", close);
+    dialog.querySelector("#alert-change-email").addEventListener("click", () => {
+      const email = dialog.querySelector("#alert-email");
+      email.readOnly = false;
+      email.value = "";
+      email.focus();
+      dialog.querySelector("#alert-change-email").classList.add("hidden");
+      dialog.querySelector("#alert-submit").textContent = "Send verification email";
+      setSubmitStatus(
+        dialog.querySelector("#alert-dialog-status"),
+        "Enter the address that should receive the verification link.",
+      );
+    });
     dialog.addEventListener("cancel", event => {
       event.preventDefault();
       close();
@@ -167,8 +181,15 @@
         error.code = "invalid_response";
         throw error;
       }
-      setSubmitStatus(status, "Check your email for a verification link. The alert remains inactive until you verify it.");
-      dialog.querySelector("#alert-email").value = "";
+      const email = dialog.querySelector("#alert-email");
+      lastEmail = email.value;
+      email.readOnly = true;
+      dialog.querySelector("#alert-change-email").classList.remove("hidden");
+      submitButton.textContent = "Send verification email again";
+      setSubmitStatus(
+        status,
+        `Verification email requested for ${lastEmail}. The alert remains inactive until you use the link. Check spam or send it again if it does not arrive.`,
+      );
     } catch (error) {
       setSubmitStatus(status, errorMessage(error?.name === "AbortError" ? "timeout" : error?.code), { error: true });
     } finally {
@@ -197,8 +218,13 @@
     dialog.querySelector("#alert-search-baseline").classList.toggle("hidden", type !== "saved_search");
     setSubmitStatus(dialog.querySelector("#alert-dialog-status"), "");
     dialog.querySelector("#alert-cadence").value = type === "saved_search" ? "weekly" : "immediate";
+    const email = dialog.querySelector("#alert-email");
+    email.value = lastEmail;
+    email.readOnly = false;
+    dialog.querySelector("#alert-change-email").classList.add("hidden");
+    dialog.querySelector("#alert-submit").textContent = "Send verification email";
     dialog.showModal();
-    dialog.querySelector("#alert-email").focus();
+    email.focus();
     return true;
   }
 

@@ -2270,12 +2270,22 @@ textarea:focus {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 18px;
   align-items: center;
-  margin-top: 18px;
+  margin: 0;
   padding: 16px 18px;
   color: var(--ink);
   border: 1px solid #c9d9ee;
   border-radius: 12px;
   background: linear-gradient(135deg, #f5f9ff, #fffdf3);
+}
+
+.alerts-panel > summary .summary-action {
+  min-width: 9rem;
+  text-align: center;
+}
+
+.alerts-panel.alert-ready > summary .summary-action {
+  color: #0b5d3b;
+  background: #e7f7ef;
 }
 
 .profile-search-alert .eyebrow {

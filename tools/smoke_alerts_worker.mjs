@@ -9,12 +9,15 @@ assert.equal(health.status, 200);
 const payload = await health.json();
 assert.equal(payload.service, "available");
 assert.equal(payload.delivery_ready, true);
-assert.equal(payload.schema_version, 2);
+assert.equal(payload.schema_version, 3);
 assert.equal(payload.database_ready, true);
 assert.equal(payload.email_provider, "resend");
 assert.equal(payload.email_provider_selected, true);
 assert.equal(payload.email_provider_configured, true);
-assert.equal(payload.email_template_version, "phase2-lifecycle-20260825");
+assert.equal(payload.email_template_version, "phase4-operations-20260827");
+assert.equal(payload.capability_signing_ready, true);
+assert.equal(payload.stale_running_runs, 0);
+assert.equal(payload.scheduler_ready, true);
 assert.equal(payload.outbound_email_enabled, true);
 assert.equal(payload.scheduler_ready, true);
 
