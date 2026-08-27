@@ -41,7 +41,7 @@ from scripts.build_catalog import (
     validate_catalog,
     write_catalog,
 )
-from .registry import AdapterResult, collect
+from .registry import REGISTRY, AdapterResult, collect
 from .validate import filter_publishable, within_health_bounds
 from .discoverability import augment_records
 
@@ -542,6 +542,20 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         "written": False,
         "stats": stats,
         "sources": source_summaries,
+        "disabled_sources": [
+            {
+                "slug": adapter.slug,
+                "source": adapter.display_name,
+                "reason": str(getattr(adapter, "disabled_reason", "")),
+                "publication_decision": "not_run_published_zero",
+            }
+            for adapter in (selected_adapters if selected_adapters is not None else REGISTRY)
+            if (
+                not adapter.enabled
+                and not include_disabled
+                and str(getattr(adapter, "disabled_reason", ""))
+            )
+        ],
         "discoverability_augmented": augmented,
         "validation": {"ok": validation_ok, "error": validation_error},
     }

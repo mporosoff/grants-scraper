@@ -288,7 +288,18 @@ class JHUFellowshipsAdapter(SourceAdapter):
     slug = "jhu-fellowships"
     display_name = "Johns Hopkins RDT fellowships list"
     source_type = "Fellowship"
-    enabled = True           # parser verified on JHU sample files; live fetch runs in pipeline
+    # The official pages, WordPress API, direct media URLs, and JHU-published
+    # short links all return an interactive Cloudflare challenge to unattended
+    # refresh clients. A complete three-workbook set is mandatory and this
+    # source has no safe stale fallback, so do not represent it as healthy or
+    # repeatedly fail the publication gate. Keep the parser available for
+    # bounded diagnostics with --include-disabled and re-enable only after an
+    # official unattended retrieval path is live-verified.
+    enabled = False
+    disabled_reason = (
+        "official JHU workbook routes require an interactive Cloudflare "
+        "challenge; no complete unattended source or safe fallback is available"
+    )
     # A complete workbook set can legitimately contain zero currently open
     # rows after strict expiration filtering. Raw workbook volume is validated
     # separately in parse().

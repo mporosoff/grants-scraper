@@ -108,6 +108,9 @@ test("refresh alerts summarize current state, reopen, and close on full recovery
   assert.match(workflow, /steps\.additional-sources\.outcome == 'success'/);
   assert.match(workflow, /steps\.document_evidence\.outcome == 'success'/);
   assert.match(workflow, /state_reason: "completed"/);
+  assert.match(workflow, /summary\.disabled_sources \|\| \[\]/);
+  assert.match(workflow, /disabled for documented upstream unavailability is not/);
+  assert.match(workflow, /publication decision/);
   assert.ok((workflow.match(/state: "all"/g) || []).length >= 2);
   assert.ok((workflow.match(/state: "open"/g) || []).length >= 3);
   assert.ok((workflow.match(/github\.rest\.issues\.update/g) || []).length >= 3);

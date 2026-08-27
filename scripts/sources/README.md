@@ -113,7 +113,7 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 | `nasa-nspires` | Disabled shell | The public entry point is session/POST-gated; no stable list route is confirmed. |
 | `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
 | `vpr-email` | Enabled | Reads the private forwarding mailbox over read-only IMAP. VPR and Cindy messages are classified and counted separately; both streams are required, and a format regression preserves the last good snapshot. |
-| `jhu-fellowships` | Enabled | Resolves and downloads JHU's latest graduate, postdoctoral, and early-career workbooks on every run—no manual Excel upload. The official category pages currently report that they are under construction, so the adapter also uses the exact public JHU media URLs and JHU-published short links in a bounded same-session fallback chain. All three raw sheets must be structurally healthy, but the publishable current set may legitimately be zero. Only exact current/future deadlines and explicit rolling entries are retained; expired or unverifiable rows are removed, cross-audience duplicates are merged, and a blocked/failed refresh clears the JHU snapshot instead of republishing stale records. Structured refresh evidence preserves the failure class, last successful refresh, retained-data age, and fail-closed publication decision. |
+| `jhu-fellowships` | Disabled - upstream unavailable | The parser and complete-set validation remain available for bounded diagnostics, but automated publication is disabled. JHU's category pages, WordPress API, direct media URLs, and JHU-published short links require an interactive Cloudflare challenge from unattended refresh clients. Because all three workbooks are mandatory and no stale snapshot can be proven current, production publishes zero JHU records and does not represent this source as healthy. Re-enable only after an official unattended retrieval path is live-verified. |
 
 ## Notes
 
@@ -139,3 +139,10 @@ bounded source snapshot, never as a fresh live refresh. A newer workbook found
 on a category page takes precedence. Once the snapshot exceeds the bound, the
 source fails closed and the source-health summary reports
 `pinned_workbook_expired`; it does not republish rolling rows indefinitely.
+
+As of the 2026-08-27 scheduled-equivalent recovery audit, those pages and every
+official workbook route also returned `cf-mitigated=challenge` to unattended
+clients. The bounded compatibility path therefore cannot retrieve a complete
+set. The adapter is disabled, its parser remains regression-tested, and the
+catalog publishes zero JHU records. This is a documented upstream limitation,
+not a successful refresh or a retained-data fallback.
