@@ -183,7 +183,11 @@
       const payload = await response.json().catch(() => null);
       if (sequence !== state.registrySequence) return [];
       if (!response.ok || payload?.schema_version !== 1 || !Array.isArray(payload?.institutions)) {
-        throw new Error("registry_unavailable");
+        const failure = new Error("registry_unavailable");
+        failure.code = response.status === 429 || payload?.registry?.error?.code === "rate_limited"
+          ? "rate_limited"
+          : "registry_unavailable";
+        throw failure;
       }
       state.registryAvailable = true;
       renderRegistryOptions(payload.institutions);
@@ -196,7 +200,9 @@
       state.registryAvailable = false;
       state.registryCandidates = [];
       hideRegistryOptions();
-      $("ii-registry-status").textContent = "Research Organization Registry (ROR) autocomplete is temporarily unavailable. A complete institution name can still be sent to the official award sources.";
+      $("ii-registry-status").textContent = error?.code === "rate_limited"
+        ? "Research Organization Registry (ROR) autocomplete is rate limited. Wait before trying again, or submit a complete institution name."
+        : "Research Organization Registry (ROR) autocomplete is temporarily unavailable. A complete institution name can still be sent to the official award sources.";
       return [];
     }
   }

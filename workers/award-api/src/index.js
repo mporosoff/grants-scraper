@@ -5,11 +5,14 @@ import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
+import { AwardRateLimiter } from "./rate-limit.js";
 import { federalFiscalYear } from "./year-filter.js";
 
 const MAX_REQUEST_BYTES = 16_384;
 const MAX_OFFSET = 1_000;
 const MAX_YEAR_SPAN = 50;
+const RATE_LIMIT_WINDOW_SECONDS = 60;
+const RATE_LIMIT_HEALTH_TIMEOUT_MS = 2_000;
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
 const ADAPTER_VERSIONS = {
@@ -64,8 +67,8 @@ function json(origin, status, payload, extra = {}) {
   });
 }
 
-function error(origin, status, code) {
-  return json(origin, status, { error: { code } });
+function error(origin, status, code, extra = {}) {
+  return json(origin, status, { error: { code } }, extra);
 }
 
 function boundedInteger(value, { minimum = 1, maximum = Number.MAX_SAFE_INTEGER } = {}) {
@@ -78,8 +81,21 @@ function serviceConfig(env) {
     enabled: String(env?.AWARD_API_ENABLED || "").toLowerCase() === "true",
     cacheTtl: boundedInteger(env?.CACHE_TTL_SECONDS, { minimum: 60, maximum: 86_400 }),
     maxResults: boundedInteger(env?.MAX_SOURCE_RESULTS, { minimum: 1, maximum: 25 }),
+    awardSourceLimit: boundedInteger(env?.AWARD_SOURCE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
+    rorSearchLimit: boundedInteger(env?.ROR_SEARCH_RATE_LIMIT, { minimum: 1, maximum: 240 }),
+    rorResolveLimit: boundedInteger(env?.ROR_RESOLVE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
+    rateLimitSecret: Boolean(String(env?.AWARD_RATE_LIMIT_SECRET || "")),
+    rateLimitBinding: Boolean(
+      env?.AWARD_RATE_LIMITER
+      && typeof env.AWARD_RATE_LIMITER.idFromName === "function"
+      && typeof env.AWARD_RATE_LIMITER.get === "function",
+    ),
   };
-  config.valid = Boolean(config.enabled && config.cacheTtl && config.maxResults);
+  config.valid = Boolean(
+    config.enabled && config.cacheTtl && config.maxResults
+    && config.awardSourceLimit && config.rorSearchLimit && config.rorResolveLimit
+    && config.rateLimitSecret && config.rateLimitBinding,
+  );
   return config;
 }
 
@@ -205,6 +221,75 @@ async function sha256Hex(value) {
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
+async function hmacSha256Hex(value, secret) {
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(String(secret || "")),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
+  );
+  const digest = await crypto.subtle.sign(
+    "HMAC", key, new TextEncoder().encode(String(value)),
+  );
+  return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function clientAddress(request) {
+  return String(
+    request.headers.get("cf-connecting-ip")
+    || request.headers.get("x-forwarded-for")
+    || "unknown",
+  ).split(",")[0].trim().slice(0, 120);
+}
+
+async function createUpstreamGuard(request, env, current) {
+  const actor = await hmacSha256Hex(clientAddress(request), env.AWARD_RATE_LIMIT_SECRET);
+  const namespace = env.AWARD_RATE_LIMITER;
+  const stub = namespace.get(namespace.idFromName(actor));
+  return async (bucket, limit) => {
+    let response;
+    try {
+      response = await stub.fetch("https://award-rate-limit.internal/consume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bucket,
+          limit,
+          window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+          now: current.getTime(),
+        }),
+      });
+    } catch {
+      throw new AwardSourceError("abuse_control_unavailable");
+    }
+    const result = await response.json().catch(() => null);
+    if (!response.ok || typeof result?.success !== "boolean") {
+      throw new AwardSourceError("abuse_control_unavailable");
+    }
+    if (!result.success) {
+      throw new AwardSourceError("rate_limited", "rate_limited");
+    }
+    return true;
+  };
+}
+
+async function probeRateLimiter(env, timeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const namespace = env.AWARD_RATE_LIMITER;
+    const stub = namespace.get(namespace.idFromName("award-rate-limiter-health"));
+    const response = await stub.fetch(new Request("https://award-rate-limit.internal/health", {
+      method: "GET",
+      signal: controller.signal,
+    }));
+    const result = await response.json();
+    return response.ok && result?.ready === true && result?.storage === "sqlite";
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function sourceCacheRequest(source, request, asOf) {
   const cacheIdentity = {
     source,
@@ -220,7 +305,7 @@ async function sourceCacheRequest(source, request, asOf) {
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
-async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf }) {
+async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard = null, rateLimit = null }) {
   const key = await sourceCacheRequest(source, request, asOf);
   if (cache) {
     try {
@@ -233,6 +318,7 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf }) 
       // A cache outage must not make either official source unavailable.
     }
   }
+  if (guard) await guard(`award:${source}`, rateLimit);
   const options = { limit: request.limit, offset: request.offset, now: () => new Date(asOf) };
   const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
@@ -251,7 +337,7 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf }) 
   return { ...payload, cache: cache ? "miss" : "bypass" };
 }
 
-async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl }) {
+async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl, guard = null, rateLimit = null }) {
   const identity = await sha256Hex(stableJson({
     source: "ROR",
     adapter_version: ROR_ADAPTER_VERSION,
@@ -271,6 +357,7 @@ async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl }) {
       // Registry discovery can continue if the shared cache is unavailable.
     }
   }
+  if (guard) await guard("ror:search", rateLimit);
   const result = await searchRor(fetchImpl, query);
   const payload = {
     schema_version: AWARD_SCHEMA_VERSION,
@@ -300,7 +387,7 @@ async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl }) {
   return payload;
 }
 
-async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl }) {
+async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl, guard = null, rateLimit = null }) {
   if (request?.resolved) return request.resolved;
   if (!request?.id || !request?.name) return null;
   const identity = await sha256Hex(stableJson({
@@ -319,6 +406,7 @@ async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl })
     }
   }
   if (!organization) {
+    if (guard) await guard("ror:resolve", rateLimit);
     organization = await resolveRorOrganization(fetchImpl, request.id);
     if (cache) {
       try {
@@ -356,7 +444,12 @@ function sourceSummary(payload) {
   };
 }
 
-export function createHandler({ fetchImpl = fetch, cache = null, now = () => new Date() } = {}) {
+export function createHandler({
+  fetchImpl = fetch,
+  cache = null,
+  now = () => new Date(),
+  rateLimitProbeTimeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS,
+} = {}) {
   return async function handle(request, env) {
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(origin, 403, "origin_not_allowed");
@@ -365,8 +458,12 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     const path = requestUrl.pathname.replace(/\/+$/, "");
     const config = serviceConfig(env);
     if (path === "/health" && request.method === "GET") {
-      return json(origin, config.valid ? 200 : 503, {
-        service: config.valid ? "available" : "unavailable",
+      const abuseControlReady = config.rateLimitBinding && config.rateLimitSecret
+        ? await probeRateLimiter(env, rateLimitProbeTimeoutMs)
+        : false;
+      const serviceReady = config.valid && abuseControlReady;
+      return json(origin, serviceReady ? 200 : 503, {
+        service: serviceReady ? "available" : "unavailable",
         schema_version: AWARD_SCHEMA_VERSION,
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
@@ -377,13 +474,40 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           NIH: { upstream_pages: 12, upstream_page_size: 100 },
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
         },
+        abuse_control: {
+          ready: abuseControlReady,
+          provider: "cloudflare-durable-object",
+          storage: "sqlite",
+          client_identity: "hmac-derived",
+          window_seconds: RATE_LIMIT_WINDOW_SECONDS,
+          limits: {
+            award_source: config.awardSourceLimit,
+            ror_search: config.rorSearchLimit,
+            ror_resolution: config.rorResolveLimit,
+          },
+        },
         cache_ttl_seconds: config.cacheTtl,
         credentials_required: false,
       });
     }
+    if (!["/institutions/search", "/awards/search"].includes(path)) {
+      return error(origin, 404, "not_found");
+    }
+    if (path === "/institutions/search" && request.method !== "GET") {
+      return error(origin, 405, "method_not_allowed");
+    }
+    if (path === "/awards/search" && request.method !== "POST") {
+      return error(origin, 405, "method_not_allowed");
+    }
+    if (!config.valid) return error(origin, 503, "service_unavailable");
+    const current = now();
+    let guard;
+    try {
+      guard = await createUpstreamGuard(request, env, current);
+    } catch {
+      return error(origin, 503, "service_unavailable");
+    }
     if (path === "/institutions/search") {
-      if (request.method !== "GET") return error(origin, 405, "method_not_allowed");
-      if (!config.valid) return error(origin, 503, "service_unavailable");
       if ([...requestUrl.searchParams.keys()].some(key => key !== "query")) {
         return error(origin, 400, "invalid_request");
       }
@@ -397,27 +521,27 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           fetchImpl,
           cache: cacheStore,
           cacheTtl: config.cacheTtl,
+          guard,
+          rateLimit: config.rorSearchLimit,
         }));
       } catch (cause) {
         const sourceError = cause instanceof AwardSourceError
           ? cause
           : new AwardSourceError("source_unavailable");
-        return json(origin, sourceError.kind === "unsupported" ? 400 : 503, {
+        const rateLimited = sourceError.kind === "rate_limited";
+        return json(origin, rateLimited ? 429 : sourceError.kind === "unsupported" ? 400 : 503, {
           schema_version: AWARD_SCHEMA_VERSION,
           query,
           institutions: [],
           registry: {
             source: "ROR",
-            status: "unavailable",
+            status: rateLimited ? "rate_limited" : "unavailable",
             adapter_version: ROR_ADAPTER_VERSION,
             error: { code: sourceError.code },
           },
-        });
+        }, rateLimited ? { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) } : {});
       }
     }
-    if (path !== "/awards/search") return error(origin, 404, "not_found");
-    if (request.method !== "POST") return error(origin, 405, "method_not_allowed");
-    if (!config.valid) return error(origin, 503, "service_unavailable");
     let body;
     try {
       body = await parseBody(request);
@@ -434,10 +558,15 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           fetchImpl,
           cache: cacheStore,
           cacheTtl: config.cacheTtl,
+          guard,
+          rateLimit: config.rorResolveLimit,
         });
         if (!institution) return error(origin, 400, "invalid_request");
         normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
       } catch (cause) {
+        if (cause instanceof AwardSourceError && cause.kind === "rate_limited") {
+          return error(origin, 429, "rate_limited", { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) });
+        }
         if (cause instanceof AwardSourceError && cause.kind === "unsupported") {
           return error(origin, 400, "invalid_request");
         }
@@ -452,7 +581,7 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     };
     const sourceRequest = { ...normalized, publicCriteria: normalized.publicCriteria };
     const cacheStore = cache || globalThis.caches?.default || null;
-    const asOf = now().toISOString();
+    const asOf = current.toISOString();
     const settled = await Promise.all(normalized.sources.map(async source => {
       try {
         return await runSource({
@@ -462,6 +591,8 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           cache: cacheStore,
           cacheTtl: config.cacheTtl,
           asOf,
+          guard,
+          rateLimit: config.awardSourceLimit,
         });
       } catch (cause) {
         const sourceError = cause instanceof AwardSourceError
@@ -484,6 +615,9 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
       pagination: { limit: normalized.limit, offset: normalized.offset },
     };
     if (successful.length) return json(origin, 200, payload);
+    if (sources.every(item => item.error?.code === "rate_limited")) {
+      return json(origin, 429, payload, { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) });
+    }
     return json(origin, sources.every(item => item.status === "unsupported") ? 400 : 503, payload);
   };
 }
@@ -498,8 +632,11 @@ export default {
 
 export {
   ADAPTER_VERSIONS,
+  AwardRateLimiter,
   MAX_REQUEST_BYTES,
   MAX_YEAR_SPAN,
+  RATE_LIMIT_WINDOW_SECONDS,
+  createUpstreamGuard,
   serviceConfig,
   validateRequest,
   runInstitutionResolution,

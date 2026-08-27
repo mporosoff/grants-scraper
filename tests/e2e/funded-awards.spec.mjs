@@ -188,6 +188,15 @@ test("partial award results distinguish unsupported and rate-limited sources", a
   await expect(page.locator("#ii-status")).toContainText("Wait before retrying");
 });
 
+test("a rate-limited institution lookup preserves manual institution search guidance", async ({ page }) => {
+  mockAwards(page, { registryRateLimited: true });
+  await page.goto("/funded_awards.html");
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await expect(page.locator("#ii-registry-status")).toContainText("autocomplete is rate limited");
+  await expect(page.locator("#ii-registry-status")).toContainText("submit a complete institution name");
+  await expect(page.locator("#ii-institution")).toHaveValue("University of Rochester");
+});
+
 test("the Funded Awards status badge remains complete inside a narrow mobile header", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/funded_awards.html");

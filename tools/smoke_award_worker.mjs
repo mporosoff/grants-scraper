@@ -29,6 +29,16 @@ if (health.institution_registry?.adapter_version !== "1.1.0"
   || health.institution_resolution !== "curated-or-server-validated-ror") {
   throw new Error("Award Worker health did not advertise trusted Phase 3 ROR resolution.");
 }
+if (health.abuse_control?.ready !== true
+  || health.abuse_control?.provider !== "cloudflare-durable-object"
+  || health.abuse_control?.storage !== "sqlite"
+  || health.abuse_control?.client_identity !== "hmac-derived"
+  || health.abuse_control?.window_seconds !== 60
+  || health.abuse_control?.limits?.award_source !== 12
+  || health.abuse_control?.limits?.ror_search !== 60
+  || health.abuse_control?.limits?.ror_resolution !== 20) {
+  throw new Error("Award Worker health did not advertise the deployed abuse-control contract.");
+}
 if (health.normalized_paging?.NSF?.upstream_pages !== 12
   || health.normalized_paging?.NSF?.maximum_identity_queries !== 3
   || health.normalized_paging?.NIH?.upstream_page_size !== 100
@@ -63,4 +73,4 @@ for (const body of [
   }
 }
 
-console.log("Award Worker health, trusted ROR identity, normalized paging bounds, and exact institution-validated NSF/NIH/DOE source smokes passed.");
+console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, and exact institution-validated NSF/NIH/DOE source smokes passed.");
