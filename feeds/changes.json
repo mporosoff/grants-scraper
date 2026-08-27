@@ -1,8 +1,38 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-27T09:06:53Z",
+  "generated_at": "2026-08-27T10:01:02Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "73deb356f4471bf59ea1",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-08-27T09:57:46.281864Z",
+      "opportunity_id": "eere-exchange:DE-TA1-0003589",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "eere-exchange:DE-TA1-0003589",
+        "opportunity_number": "DE-TA1-0003589",
+        "title": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+        "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO) Listed on Announcement Listed on Announcement Listed on Announcement <a id=\"ctl00_cphMainContent_FoaDetailGridControl_gvFoaList_cell9_",
+        "source": "DOE EERE Exchange",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+        "funding_opportunity_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+        "primary_document_url": null
+      }
+    },
     {
       "id": "fd8ffbf9ac313387b2cc",
       "type": "deadline_changed",

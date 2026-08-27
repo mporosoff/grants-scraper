@@ -4,8 +4,16 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-08-27T09:06:53Z</updated>
+  <updated>2026-08-27T10:01:02Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>New opportunity: Critical Minerals &amp; Materials Accelerator (CMMA) - Topic Area 1</title>
+    <link href="https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226"/>
+    <id>urn:funding-finder:change:73deb356f4471bf59ea1</id>
+    <updated>2026-08-27T09:57:46.281864Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
   <entry>
     <title>Deadline changed: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
     <link href="https://www.grants.gov/search-results-detail/363419"/>
@@ -1597,13 +1605,5 @@
     <updated>2026-08-24T10:47:40.189590Z</updated>
     <category term="deadline_changed"/>
     <summary>2076-08-20 → not listed</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Child Protection Compact Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363383"/>
-    <id>urn:funding-finder:change:10b835e5c9edc97885ee</id>
-    <updated>2026-08-24T10:47:40.189590Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2099-01-01 → not listed</summary>
   </entry>
 </feed>
