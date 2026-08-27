@@ -119,4 +119,8 @@ test("refresh alerts summarize current state, reopen, and close on full recovery
   ]) {
     assert.match(workflow, new RegExp(field));
   }
+  assert.match(workflow, /const validation = summary\.validation \|\| \{\}/);
+  assert.match(workflow, /validation\.ok === false/);
+  assert.match(workflow, /External-source post-merge validation failed/);
+  assert.match(workflow, /else if \(documentEvidenceDegraded\)/);
 });

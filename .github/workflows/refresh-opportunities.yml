@@ -611,6 +611,7 @@ jobs:
               const degraded = (summary.sources || []).filter(
                 source => !["refreshed", "recent_snapshot"].includes(source.status)
               );
+              const validation = summary.validation || {};
               if (degraded.length) {
                 sourceEvidence = degraded.map(source => {
                   const lastSuccess = source.last_successful_refresh_at
@@ -623,8 +624,17 @@ jobs:
                     `last successful refresh ${lastSuccess}; retained-data age ${retainedAge}; ` +
                     `publication decision \`${source.publication_decision || "unknown"}\`.`;
                 }).join("\n");
-              } else {
+              } else if (validation.ok === false) {
+                const validationError = String(
+                  validation.error || "post-merge catalog validation failed"
+                ).slice(0, 500);
+                sourceEvidence =
+                  `- External-source post-merge validation failed: ${validationError}`;
+              } else if (documentEvidenceDegraded) {
                 sourceEvidence = "- All external sources were healthy; degradation was confined to document evidence/classification.";
+              } else {
+                sourceEvidence =
+                  "- The external-source step failed without a degraded adapter or validation detail; inspect the run log.";
               }
             } catch (error) {
               core.warning(`Could not read structured source summary: ${error.message}`);
