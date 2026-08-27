@@ -197,6 +197,22 @@ class JHUFellowshipsTests(unittest.TestCase):
         self.assertEqual(future.diagnostics["source_snapshot_age_days"], 63)
         self.assertEqual(future.diagnostics["failure_reason"], "pinned_workbook_expired")
 
+        predating = JHUFellowshipsAdapter(as_of=date(2026, 8, 27))
+        with (
+            patch.object(predating, "_get", side_effect=fake_get),
+            patch.object(predating, "parse", return_value=[]),
+        ):
+            _records, results = collect(
+                [predating], context={"catalog_records": [], "as_of": date(2026, 6, 30)}
+            )
+        self.assertFalse(results[0].ok)
+        self.assertEqual(predating.as_of, date(2026, 6, 30))
+        self.assertEqual(predating.diagnostics["source_snapshot_age_days"], -1)
+        self.assertEqual(
+            predating.diagnostics["failure_reason"],
+            "pinned_workbook_newer_than_catalog",
+        )
+
     def test_new_page_discovered_workbooks_are_not_treated_as_pinned_snapshots(self):
         current_sheet = "https://research.jhu.edu/current/current-funding.xlsx"
         page = f'<a href="{current_sheet}">Current workbook</a>'.encode()

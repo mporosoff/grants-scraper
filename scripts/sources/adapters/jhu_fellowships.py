@@ -429,13 +429,20 @@ class JHUFellowshipsAdapter(SourceAdapter):
             oldest_snapshot = min(
                 _dt.date.fromisoformat(value) for value in snapshot_dates.values()
             )
-            snapshot_age_days = max(0, (self.as_of - oldest_snapshot).days)
+            snapshot_age_days = (self.as_of - oldest_snapshot).days
             self.diagnostics.update({
                 "source_state": "bounded_official_snapshot",
                 "source_snapshot_at": oldest_snapshot.isoformat(),
                 "source_snapshot_age_days": snapshot_age_days,
                 "source_snapshot_max_age_days": PINNED_WORKBOOK_MAX_AGE_DAYS,
             })
+            if snapshot_age_days < 0:
+                self.diagnostics["failure_class"] = "upstream_response_change"
+                self.diagnostics["failure_reason"] = "pinned_workbook_newer_than_catalog"
+                raise RuntimeError(
+                    "Incomplete JHU workbook refresh: official fallback snapshot "
+                    f"is newer than catalog date {self.as_of.isoformat()}"
+                )
             if snapshot_age_days > PINNED_WORKBOOK_MAX_AGE_DAYS:
                 self.diagnostics["failure_class"] = "upstream_response_change"
                 self.diagnostics["failure_reason"] = "pinned_workbook_expired"
