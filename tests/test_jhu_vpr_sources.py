@@ -162,6 +162,41 @@ class JHUFellowshipsTests(unittest.TestCase):
             "pinned_workbook_expired",
         )
 
+    def test_merge_context_date_controls_snapshot_freshness_in_both_directions(self):
+        page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
+
+        def fake_get(url, **_kwargs):
+            if "/funding-opportunities/" in url:
+                return page
+            if "/wp-content/uploads/" in url:
+                return b"PK\x03\x04sanitized workbook"
+            raise AssertionError(f"unexpected short-link request: {url}")
+
+        historical = JHUFellowshipsAdapter(as_of=date(2026, 9, 2))
+        with (
+            patch.object(historical, "_get", side_effect=fake_get),
+            patch.object(historical, "parse", return_value=[]),
+        ):
+            _records, results = collect(
+                [historical], context={"catalog_records": [], "as_of": date(2026, 8, 27)}
+            )
+        self.assertTrue(results[0].ok)
+        self.assertEqual(historical.as_of, date(2026, 8, 27))
+        self.assertEqual(historical.diagnostics["source_snapshot_age_days"], 57)
+
+        future = JHUFellowshipsAdapter(as_of=date(2026, 8, 27))
+        with (
+            patch.object(future, "_get", side_effect=fake_get),
+            patch.object(future, "parse", return_value=[]),
+        ):
+            _records, results = collect(
+                [future], context={"catalog_records": [], "as_of": date(2026, 9, 2)}
+            )
+        self.assertFalse(results[0].ok)
+        self.assertEqual(future.as_of, date(2026, 9, 2))
+        self.assertEqual(future.diagnostics["source_snapshot_age_days"], 63)
+        self.assertEqual(future.diagnostics["failure_reason"], "pinned_workbook_expired")
+
     def test_new_page_discovered_workbooks_are_not_treated_as_pinned_snapshots(self):
         current_sheet = "https://research.jhu.edu/current/current-funding.xlsx"
         page = f'<a href="{current_sheet}">Current workbook</a>'.encode()

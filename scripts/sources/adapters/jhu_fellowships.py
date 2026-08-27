@@ -307,6 +307,20 @@ class JHUFellowshipsAdapter(SourceAdapter):
             urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar())
         )
 
+    def set_context(self, context: dict) -> None:
+        """Use the merge run's catalog date for all currentness decisions."""
+        super().set_context(context)
+        effective_as_of = self.context.get("as_of")
+        if isinstance(effective_as_of, _dt.datetime):
+            effective_as_of = effective_as_of.date()
+        elif isinstance(effective_as_of, str):
+            try:
+                effective_as_of = _dt.date.fromisoformat(effective_as_of)
+            except ValueError:
+                effective_as_of = None
+        if isinstance(effective_as_of, _dt.date):
+            self.as_of = effective_as_of
+
     def fetch(self):
         """Download every JHU workbook or fail the source as an incomplete run.
 
