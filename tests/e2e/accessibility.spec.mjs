@@ -282,8 +282,9 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
-  await expect(page.locator("#ii-source-status")).toContainText("does not support this filter combination");
-  await expect(page.locator("#ii-source-status")).toContainText("Wait before retrying");
+  await expect(page.locator("#ii-source-status")).toContainText("does not support this query shape");
+  await expect(page.locator("#ii-source-status")).toContainText("temporarily unavailable");
+  await expect(page.locator('[data-ii-retry-source="DOE"]')).toBeVisible();
   await expect(page.locator(".ii-award-kicker")).toContainText("Amount not listed");
   await scan(page, "awards-results-mobile", testInfo);
   await page.setViewportSize({ width: 320, height: 720 });

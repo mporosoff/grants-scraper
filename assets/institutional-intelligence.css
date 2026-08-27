@@ -254,6 +254,8 @@
 }
 
 .ii-source-status li[data-status="unavailable"],
+.ii-source-status li[data-status="rate_limited"],
+.ii-source-status li[data-status="safety_bounded"],
 .ii-source-status li[data-status="unsupported"] {
   color: #8a3600;
   background: #fff0df;
@@ -345,6 +347,21 @@
   font-weight: 750;
   background-color: #fff;
   border: 1px solid #bfcfe0;
+  border-radius: 8px;
+}
+
+.ii-active-facet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 10px 12px;
+  color: #123b69;
+  font-size: .82rem;
+  font-weight: 750;
+  background: #eef5ff;
+  border: 1px solid #c8dcf4;
   border-radius: 8px;
 }
 
@@ -534,8 +551,55 @@
 
 .ii-card-page-actions {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+}
+
+.ii-page-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.ii-page-summary label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #52647a;
+  font-size: .76rem;
+  font-weight: 750;
+}
+
+.ii-page-summary select {
+  min-height: 38px;
+}
+
+.ii-card-page-numbers {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.ii-card-page-numbers button {
+  min-width: 38px;
+  min-height: 38px;
+  padding: 6px;
+  border-radius: 7px;
+}
+
+.ii-card-page-numbers button.active {
+  color: #fff;
+  background: var(--blue);
+}
+
+.ii-page-ellipsis {
+  padding: 0 3px;
+  color: #52647a;
 }
 
 .ii-award-card {
@@ -792,6 +856,11 @@
   .ii-card-page-actions {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .ii-page-summary {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .ii-card-pagination .button,

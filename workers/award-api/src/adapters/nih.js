@@ -173,6 +173,7 @@ export function normalizeNihProject(records, { retrievedAt, sourceUrl, completeH
     }));
   const amounts = annualSupport.map(item => item.award_amount).filter(value => value !== null);
   const fiscalYears = annualSupport.map(item => item.fiscal_year).filter(value => value !== null);
+  const awardDate = maxDate(records, "award_notice_date") || maxDate(records, "budget_start");
   const organization = latest.organization || {};
   const admin = latest.agency_ic_admin || {};
   return awardRecord({
@@ -188,6 +189,7 @@ export function normalizeNihProject(records, { retrievedAt, sourceUrl, completeH
     funding_mechanism: cleanText(latest.funding_mechanism, 200),
     title: cleanText(latest.project_title),
     abstract: cleanSourceText(latest.abstract_text),
+    award_date: awardDate,
     project_start: minDate(records, "project_start_date"),
     project_end: maxDate(records, "project_end_date"),
     award_year: fiscalYears.length ? Math.min(...fiscalYears) : null,
@@ -284,21 +286,21 @@ export async function searchNih(fetchImpl, criteria, options) {
       retrievedAt,
       completeHistory: Boolean(criteria.core_project_number && upstreamExhausted),
     });
-    if (results.length >= targetProjectCount || upstreamExhausted) break;
+    if ((options.scanAll !== true && results.length >= targetProjectCount) || upstreamExhausted) break;
     if (!pageRecords.length) break;
   }
 
   return {
     source: "NIH",
     adapter_version: NIH_ADAPTER_VERSION,
-    results: results.slice(options.offset, options.offset + options.limit),
+    results: options.scanAll === true ? results : results.slice(options.offset, options.offset + options.limit),
     total_count: upstreamExhausted ? results.length : null,
     raw_record_count: rawRecords.length,
     upstream_total_count: upstreamTotal,
     upstream_pages: upstreamPages,
     safety_bound_reached: !upstreamExhausted && upstreamPages >= NIH_MAX_UPSTREAM_PAGES,
     year_filter: yearFilter,
-    has_more: results.length > options.offset + options.limit,
+    has_more: options.scanAll === true ? !upstreamExhausted : results.length > options.offset + options.limit,
     retrieved_at: retrievedAt,
   };
 }

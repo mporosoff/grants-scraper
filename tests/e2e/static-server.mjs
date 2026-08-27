@@ -5,6 +5,7 @@ import { extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("../../", import.meta.url)));
+const port = Number(process.env.E2E_PORT || 8765);
 const types = new Map([
   [".css", "text/css; charset=utf-8"],
   [".html", "text/html; charset=utf-8"],
@@ -53,6 +54,6 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(8765, "127.0.0.1", () => {
-  process.stdout.write("Funding Finder test server listening on http://127.0.0.1:8765\n");
+server.listen(port, "127.0.0.1", () => {
+  process.stdout.write(`Funding Finder test server listening on http://127.0.0.1:${port}\n`);
 });

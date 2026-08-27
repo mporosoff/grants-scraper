@@ -429,6 +429,15 @@ test("Worker validates bounded public requests and exposes no credential require
       NIH: { upstream_pages: 12, upstream_page_size: 100 },
       DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
     },
+    complete_result_snapshots: {
+      contract_version: 1,
+      ordering_version: "award-recency-v1",
+      batch_ceiling_per_agency: 25,
+      page_sizes: [10, 25, 50],
+      cache_ttl_seconds: 3600,
+      cache_scope: "cloudflare-datacenter",
+      failure_policy: "successful-sources-retained-retry-creates-successor",
+    },
     abuse_control: {
       ready: true,
       provider: "cloudflare-durable-object",

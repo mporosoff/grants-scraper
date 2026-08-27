@@ -141,6 +141,7 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
     funding_mechanism: cleanText(raw.transType, 200),
     title: cleanText(raw.title),
     abstract: cleanSourceText(raw.abstractText),
+    award_date: awardDate,
     project_start: isoDate(raw.startDate),
     project_end: isoDate(raw.expDate),
     award_year: awardDate ? Number(awardDate.slice(0, 4)) : null,
@@ -168,7 +169,8 @@ export async function searchNsf(fetchImpl, criteria, options) {
   const targetCount = options.offset + options.limit + 1;
   const yearRange = requestedYearRange(criteria);
   const yearFilter = yearFilterDiagnostics(criteria);
-  const normalizedPaging = Boolean(criteria._institution || yearRange.active);
+  const completeScan = options.scanAll === true;
+  const normalizedPaging = completeScan || Boolean(criteria._institution || yearRange.active);
   const awards = [];
   const seen = new Set();
   let rawRecordCount = 0;
@@ -200,7 +202,7 @@ export async function searchNsf(fetchImpl, criteria, options) {
   while (upstreamPages < maximumPages) {
     let progressed = false;
     for (const query of queryStates) {
-      if (query.exhausted || upstreamPages >= maximumPages || (normalizedPaging && awards.length >= targetCount)) continue;
+      if (query.exhausted || upstreamPages >= maximumPages || (!completeScan && normalizedPaging && awards.length >= targetCount)) continue;
       const requestOptions = normalizedPaging
         ? { limit: NSF_UPSTREAM_PAGE_SIZE, offset: query.offset }
         : options;
@@ -230,14 +232,16 @@ export async function searchNsf(fetchImpl, criteria, options) {
       query.offset += requestOptions.limit;
       if (!normalizedPaging) break;
     }
-    if (!normalizedPaging || awards.length >= targetCount || !progressed || queryStates.every(query => query.exhausted)) break;
+    if (!normalizedPaging || (!completeScan && awards.length >= targetCount) || !progressed || queryStates.every(query => query.exhausted)) break;
   }
   const processedQueries = queryStates.filter(query => query.fetched).length;
   const upstreamExhausted = queryStates.length > 0 && queryStates.every(query => query.fetched && query.exhausted);
   const reportedTotals = queryStates.filter(query => query.fetched && query.total !== null).map(query => query.total);
   const upstreamTotalCount = reportedTotals.length ? reportedTotals.reduce((sum, value) => sum + value, 0) : null;
   const safetyBoundReached = Boolean(normalizedPaging && !criteria.award_id && !upstreamExhausted && upstreamPages >= NSF_MAX_UPSTREAM_PAGES);
-  const results = normalizedPaging
+  const results = completeScan
+    ? awards
+    : normalizedPaging
     ? awards.slice(options.offset, options.offset + options.limit)
     : awards.slice(0, options.limit);
   return {
@@ -251,7 +255,9 @@ export async function searchNsf(fetchImpl, criteria, options) {
     upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
     year_filter: yearFilter,
-    has_more: normalizedPaging
+    has_more: completeScan
+      ? !upstreamExhausted
+      : normalizedPaging
       ? awards.length > options.offset + options.limit
       : !criteria.award_id && upstreamTotalCount > options.offset + rawRecordCount,
     retrieved_at: retrievedAt,
