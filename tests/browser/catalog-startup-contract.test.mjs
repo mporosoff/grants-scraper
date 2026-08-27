@@ -67,10 +67,16 @@ test("Funding Finder critical HTML executes metadata and the loader, never the f
 test("generated startup metadata is small and coherent with the canonical catalog", () => {
   const catalog = assignedJson(sources.catalog, "GRANT_CATALOG");
   const metadata = assignedJson(sources.metadata, "GRANT_CATALOG_METADATA");
+  const release = JSON.parse(sources.release);
   assert.equal(
     sha256(sources.catalog),
-    "34de841033fba1e7ffb233cddf051d77b21b6759f143404b06f2919628647c43",
-    "the startup refactor must not change the canonical catalog or frozen ranking inputs",
+    release.source_hashes["data/opportunities.js"],
+    "the canonical catalog must match the atomic search-package release",
+  );
+  assert.equal(
+    sha256(sources.metadata),
+    release.source_hashes["data/catalog-metadata.js"],
+    "startup metadata must match the same atomic search-package release",
   );
   assert.ok(Buffer.byteLength(sources.metadata) < 2_048);
   assert.equal(metadata.schema_version, 1);
