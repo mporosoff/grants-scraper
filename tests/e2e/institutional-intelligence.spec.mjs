@@ -594,6 +594,50 @@ test("institutional answers use scannable tables, source-balanced evidence, and 
   await expect(page.locator(`[data-evidence-id="${programEvidenceId}"]`)).toBeFocused();
 });
 
+test("question submission is single-flight while institution resolution is pending", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  const providerCalls = [];
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls.push(route.request().postDataJSON());
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ output_text: JSON.stringify({
+        agency: "all",
+        program: "",
+        topic: "",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "investigators",
+        narrative_needed: false,
+      }) }),
+    });
+  });
+  mockHybrid(page);
+  const awardCalls = mockAwards(page, { institutionResponseDelayMs: 250 });
+  const registryRequests = [];
+  page.on("request", request => {
+    if (new URL(request.url()).pathname === "/institutions/search") registryRequests.push(request.url());
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  const question = page.locator("#ii-question");
+  const askButton = page.locator("#ii-ask-button");
+  await question.fill("Who has awards in the loaded public evidence?");
+  await question.press("Enter");
+  await expect(askButton).toBeDisabled();
+  await question.press("Enter");
+  await question.dispatchEvent("keydown", { key: "Enter", code: "Enter", repeat: true, bubbles: true, cancelable: true });
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(askButton).toBeEnabled();
+  expect(registryRequests).toHaveLength(1);
+  expect(providerCalls).toHaveLength(1);
+  expect(awardCalls).toHaveLength(3);
+});
+
 test("one unavailable award source does not suppress the other institutional evidence", async ({ page }) => {
   mockHybrid(page);
   mockAwards(page, { failNih: true });

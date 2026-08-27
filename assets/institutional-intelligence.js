@@ -30,6 +30,7 @@
     programGroups: new Map(),
     selectedInvestigator: null,
     question: null,
+    questionSubmitting: false,
     answering: false,
   };
   const SOURCE_LIMITS = Object.freeze({ NSF: 25, NIH: 25, DOE: 10 });
@@ -99,7 +100,7 @@
 
   function setBusy(busy) {
     $("ii-search").disabled = busy;
-    $("ii-ask-button").disabled = busy;
+    $("ii-ask-button").disabled = busy || state.questionSubmitting;
     if ($("ii-update-answer")) $("ii-update-answer").disabled = busy;
     $("ii-output").setAttribute("aria-busy", busy ? "true" : "false");
     syncPaginationControls(busy);
@@ -1170,6 +1171,10 @@
       $("ii-question").focus();
       return;
     }
+    if (state.questionSubmitting) return;
+    state.questionSubmitting = true;
+    $("ii-ask-button").disabled = true;
+    try {
     try {
       const institution = await resolveTypedInstitution();
       if (!institution) throw new Error("Select an institution before asking a question about it.");
@@ -1183,7 +1188,6 @@
       $("ii-key-setup").classList.remove("hidden");
       $("ii-key-status").textContent = "No key is configured, so the answer will use the visible filters and deterministic loaded-award evidence. Save a key to enable question translation and bounded narrative synthesis.";
     }
-    $("ii-ask-button").disabled = true;
     state.question = null;
     $("ii-question-answer").classList.add("hidden");
     $("ii-question-plan").textContent = "Translating the question into bounded public-award filters…";
@@ -1252,7 +1256,9 @@
       if (outcome) await refreshQuestionAnswer({ allowNarrative: true });
     } catch (error) {
       $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available without AI.`;
+    }
     } finally {
+      state.questionSubmitting = false;
       $("ii-ask-button").disabled = false;
     }
   }
@@ -1338,7 +1344,7 @@
     $("ii-save-key").addEventListener("click", saveSharedKey);
     $("ii-ask-button").addEventListener("click", askQuestion);
     $("ii-question").addEventListener("keydown", event => {
-      if (event.key !== "Enter" || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
+      if (event.key !== "Enter" || event.repeat || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
       event.preventDefault();
       if (!$("ii-ask-button").disabled) askQuestion();
     });

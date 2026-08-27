@@ -294,7 +294,9 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     appSource.indexOf("async function askQuestion()"),
     appSource.indexOf("function bindEvents()"),
   );
+  assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*\$\("ii-ask-button"\)\.disabled = true;[\s\S]*await resolveTypedInstitution\(\)/);
+  assert.match(askQuestionSource, /finally \{[\s\S]*state\.questionSubmitting = false;[\s\S]*\$\("ii-ask-button"\)\.disabled = false/);
   assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\{ allowNarrative: true \}\)/);
-  assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*askQuestion\(\)/);
+  assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);
 });
