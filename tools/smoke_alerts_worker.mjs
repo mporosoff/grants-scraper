@@ -16,6 +16,8 @@ assert.equal(payload.email_provider_selected, true);
 assert.equal(payload.email_provider_configured, true);
 assert.equal(payload.email_template_version, "phase4-operations-20260827");
 assert.equal(payload.capability_signing_ready, true);
+assert.equal(payload.capability_previous_signing_ready, true);
+assert.match(payload.capability_key_id, /^[0-9a-f]{16}$/);
 assert.equal(payload.stale_running_runs, 0);
 assert.equal(payload.scheduler_ready, true);
 assert.equal(typeof payload.last_daily_run_completed_at, "string");

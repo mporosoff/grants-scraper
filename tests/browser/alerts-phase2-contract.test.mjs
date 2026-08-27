@@ -33,6 +33,7 @@ const env = {
   EMAIL_PROVIDER: "resend",
   RESEND_API_KEY: "test-only",
   ALERT_CAPABILITY_SECRET: "test-only-capability-secret-with-32-bytes",
+  ALERT_CAPABILITY_PREVIOUS_SECRET: "previous-test-only-capability-secret-with-32-bytes",
   PUBLIC_WORKER_ORIGIN: "https://alerts.example.test",
   PUBLIC_APP_ORIGIN: "https://app.example.test",
   DAILY_EMAIL_LIMIT: "100",
@@ -1037,6 +1038,11 @@ test("FF-BUG-007 health is green only for the complete production delivery matri
   const wrongProvider = await handler(new Request("https://alerts.example.test/health"), { ...env, EMAIL_PROVIDER: "mock" });
   assert.equal(wrongProvider.status, 503);
   assert.equal((await wrongProvider.json()).email_provider_selected, false);
+  const noPreviousKey = await handler(new Request("https://alerts.example.test/health"), {
+    ...env, ALERT_CAPABILITY_PREVIOUS_SECRET: "",
+  });
+  assert.equal(noPreviousKey.status, 503);
+  assert.equal((await noPreviousKey.json()).capability_previous_signing_ready, false);
 });
 
 test("FF-BUG-009 suppressed subscribers receive a generic response but cannot become apparently active", async () => {
@@ -1799,4 +1805,48 @@ test("provider and public-asset requests have deterministic bounded deadlines", 
     }, hangingFetch),
     /aborted/i,
   );
+
+  let assetBodyAborted = false;
+  const stalledAssetBody = async (_url, options) => ({
+    ok: true,
+    text: async () => new Promise((_resolve, reject) => {
+      options.signal.addEventListener("abort", () => {
+        assetBodyAborted = true;
+        reject(new DOMException("asset body aborted", "AbortError"));
+      }, { once: true });
+    }),
+    json: async () => new Promise((_resolve, reject) => {
+      options.signal.addEventListener("abort", () => {
+        assetBodyAborted = true;
+        reject(new DOMException("asset body aborted", "AbortError"));
+      }, { once: true });
+    }),
+  });
+  await assert.rejects(
+    loadPublicAssets({
+      CATALOG_URL: "https://example.test/catalog", SUBTOPICS_URL: "https://example.test/subtopics",
+      CHANGES_URL: "https://example.test/changes", ALERT_ASSET_TIMEOUT_MS: "5",
+    }, stalledAssetBody),
+    /asset body aborted/i,
+  );
+  assert.equal(assetBodyAborted, true);
+
+  let providerBodyAborted = false;
+  const stalledProviderBody = async (_url, options) => ({
+    ok: true, status: 200,
+    json: async () => new Promise((_resolve, reject) => {
+      options.signal.addEventListener("abort", () => {
+        providerBodyAborted = true;
+        reject(new DOMException("provider body aborted", "AbortError"));
+      }, { once: true });
+    }),
+  });
+  const stalledProvider = new ResendEmailProvider({
+    apiKey: "test-only", fetchImpl: stalledProviderBody, timeoutMs: 5,
+  });
+  await assert.rejects(
+    stalledProvider.sendEmail({ to: "x@example.edu", subject: "x", text: "x", html: "<p>x</p>" }, "body-timeout"),
+    error => error.code === "provider_network_failure" && error.retryable === true,
+  );
+  assert.equal(providerBodyAborted, true);
 });

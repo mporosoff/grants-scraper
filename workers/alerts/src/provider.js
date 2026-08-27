@@ -14,6 +14,7 @@ export class ResendEmailProvider {
   async sendEmail(message, idempotencyKey) {
     if (!this.configured) throw Object.assign(new Error("Email provider is not configured."), { code: "provider_unconfigured" });
     let response;
+    let payload = null;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
     try {
@@ -34,6 +35,10 @@ export class ResendEmailProvider {
         }),
         signal: controller.signal,
       });
+      try { payload = await response.json(); }
+      catch (error) {
+        if (controller.signal.aborted) throw error;
+      }
     } catch {
       throw Object.assign(new Error("Email provider request failed."), {
         code: "provider_network_failure",
@@ -43,8 +48,6 @@ export class ResendEmailProvider {
     } finally {
       clearTimeout(timeout);
     }
-    let payload = null;
-    try { payload = await response.json(); } catch { /* bounded error below */ }
     if (!response.ok || !payload?.id) {
       const status = Number(response.status) || 0;
       const retryable = response.ok || status === 408 || status === 409 || status === 425 || status === 429 || status >= 500;

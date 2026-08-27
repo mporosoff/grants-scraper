@@ -227,10 +227,20 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /Record retained Alerts Worker version/);
   assert.match(alertsWorkflow, /Existing deployed Alerts Worker version retained because deployment inputs were unchanged/);
   assert.match(alertsWorkflow, /steps\.worker-inputs\.outputs\.deploy_required == 'true'/);
+  const capabilityStep = workflowStep(alertsWorkflow, "Configure the Alerts capability-signing secrets");
+  assert.match(capabilityStep, /secrets\.ALERT_CAPABILITY_PREVIOUS_SECRET/);
+  assert.match(capabilityStep, /deployed_key_id/);
+  assert.match(capabilityStep, /must match the currently deployed signing key before rotation/);
+  assert.ok(
+    capabilityStep.indexOf("secret put ALERT_CAPABILITY_PREVIOUS_SECRET")
+      < capabilityStep.indexOf("secret put ALERT_CAPABILITY_SECRET"),
+    "the previous signing key must be staged before the current key is rotated",
+  );
   for (const name of [
     "Capture the active Alerts Worker version for rollback",
     "Reconfirm protected main immediately before Alerts Worker mutation",
     "Apply committed D1 migrations",
+    "Configure the Alerts capability-signing secrets",
     "Deploy the committed Alerts Worker",
     "Wait for the Alerts Worker health contract",
     "Run bounded Alerts Worker smokes",

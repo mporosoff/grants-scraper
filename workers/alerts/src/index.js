@@ -93,6 +93,7 @@ function serviceConfig(env) {
     publicWorkerOrigin: String(env.PUBLIC_WORKER_ORIGIN || ""),
     scheduler: String(env.ALERT_SCHEDULER_ENABLED || "").toLowerCase() === "true",
     capability: Boolean(String(env.ALERT_CAPABILITY_SECRET || "")),
+    capabilityPrevious: Boolean(String(env.ALERT_CAPABILITY_PREVIOUS_SECRET || "")),
   };
 }
 
@@ -222,7 +223,11 @@ export function createHandler({
       const schedulerReady = config.scheduler && operations.schedulerRecent
         && operations.staleRunningRuns === 0;
       const deliveryReady = config.enabled && databaseReady && providerSelected
-        && providerConfigured && config.outbound && schedulerReady && config.capability;
+        && providerConfigured && config.outbound && schedulerReady
+        && config.capability && config.capabilityPrevious;
+      const capabilityKeyId = config.capability
+        ? (await sha256Hex(env.ALERT_CAPABILITY_SECRET)).slice(0, 16)
+        : null;
       return json(origin, deliveryReady ? 200 : 503, {
         service: deliveryReady ? "available" : "unavailable",
         delivery_ready: deliveryReady,
@@ -236,6 +241,8 @@ export function createHandler({
         outbound_email_enabled: config.outbound,
         scheduler_ready: schedulerReady,
         capability_signing_ready: config.capability,
+        capability_previous_signing_ready: config.capabilityPrevious,
+        capability_key_id: capabilityKeyId,
         stale_running_runs: operations.staleRunningRuns,
         last_run_completed_at: operations.lastCompletedAt || null,
         last_run_status: operations.lastStatus || null,

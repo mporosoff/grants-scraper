@@ -114,25 +114,21 @@ export class StrongMatchEngine {
 
 export async function loadPublicAssets(env, fetchImpl = fetch) {
   const timeoutMs = Math.max(1, Math.min(30_000, Number(env.ALERT_ASSET_TIMEOUT_MS) || 10_000));
-  const load = async (url, accept) => {
+  const load = async (url, accept, bodyType) => {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      return await fetchImpl(url, { headers: { Accept: accept }, signal: controller.signal });
+      const response = await fetchImpl(url, { headers: { Accept: accept }, signal: controller.signal });
+      if (!response.ok) throw new Error("Public alert inputs are unavailable.");
+      return bodyType === "json" ? await response.json() : await response.text();
     } finally {
       clearTimeout(timeout);
     }
   };
-  const [catalogResponse, subtopicResponse, changesResponse] = await Promise.all([
-    load(env.CATALOG_URL, "application/javascript"),
-    load(env.SUBTOPICS_URL, "application/javascript"),
-    load(env.CHANGES_URL, "application/json"),
-  ]);
-  if (!catalogResponse.ok || !subtopicResponse.ok || !changesResponse.ok) {
-    throw new Error("Public alert inputs are unavailable.");
-  }
   const [catalogText, subtopicText, changes] = await Promise.all([
-    catalogResponse.text(), subtopicResponse.text(), changesResponse.json(),
+    load(env.CATALOG_URL, "application/javascript", "text"),
+    load(env.SUBTOPICS_URL, "application/javascript", "text"),
+    load(env.CHANGES_URL, "application/json", "json"),
   ]);
   const catalog = parseAssignedJson(catalogText, "GRANT_CATALOG");
   const subtopics = parseAssignedJson(subtopicText, "SUBTOPIC_CATALOG");
