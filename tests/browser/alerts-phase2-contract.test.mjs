@@ -1096,9 +1096,13 @@ test("FF-BUG-008 verification provider IDs correlate with suppression webhooks",
   await store.createSubscriptionCycle(await cycle());
   const provider = new ScriptedProvider();
   await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow });
+  insertEvent(database, { id: "queued-after-verification", createdAt: fixedNow.toISOString() });
   assert.equal(await store.suppressSubscriberByMessage("provider-1", "email.complained", "webhook-1", fixedNow.toISOString()), true);
   assert.ok(database.prepare("SELECT suppressed_at FROM subscribers WHERE id='person-1'").get().suppressed_at);
   assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 0);
+  assert.equal(database.prepare(
+    "SELECT terminal_at FROM notification_events WHERE id='queued-after-verification'",
+  ).get().terminal_at, fixedNow.toISOString());
   assert.equal(await store.suppressSubscriberByMessage("provider-1", "email.complained", "webhook-1", fixedNow.toISOString()), false);
 });
 
@@ -1277,6 +1281,7 @@ test("FF-BUG-017 reactivation reconciliation preserves the exact digest group an
     [["watch-1", 0], ["watch-2", 0]],
   );
   assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='verify-replacement'").get().status, "suppressed");
+  assert.equal(database.prepare("SELECT terminal_at FROM notification_events WHERE id='verify-replacement'").get().terminal_at, fixedNow.toISOString());
 });
 
 test("FF-BUG-017 a failed digest retries the whole claim with the same idempotency key", async () => {
@@ -1785,6 +1790,34 @@ test("FF-BUG-020 scheduler health requires a recent non-failed daily evaluation"
   assert.equal(recentDaily.lastDailyCompletedAt, "2026-09-01T11:01:00.000Z");
   assert.equal(recentDaily.schedulerRecent, true);
   assert.equal((await store.operationalHealth("2026-09-02T13:02:00.000Z")).schedulerRecent, false);
+});
+
+test("FF-BUG-020 subsequent runs and health terminalize abandoned scheduler runs", async () => {
+  const database = databaseThrough();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,status,scheduled_at,run_kind) VALUES('stale-daily','2026-09-02T10:00:00.000Z','running','2026-09-02T10:00:00.000Z','daily')",
+  ).run();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,status,scheduled_at,run_kind) VALUES('recent-retry','2026-09-02T11:50:00.000Z','running','2026-09-02T11:50:00.000Z','retry')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const health = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(health.staleRunningRuns, 0);
+  const recoveredRun = database.prepare(
+    "SELECT status,completed_at,duration_ms FROM evaluation_runs WHERE id='stale-daily'",
+  ).get();
+  assert.deepEqual(
+    [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms],
+    ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000],
+  );
+  assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='recent-retry'").get().status, "running");
+
+  await store.startRun({
+    id: "next-retry", startedAt: "2026-09-02T12:20:01.000Z",
+    scheduledAt: "2026-09-02T12:20:00.000Z", runKind: "retry",
+  });
+  assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='recent-retry'").get().status, "failed_stale_recovered");
+  assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='next-retry'").get().status, "running");
 });
 
 test("provider and public-asset requests have deterministic bounded deadlines", async () => {

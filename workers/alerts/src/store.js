@@ -233,8 +233,8 @@ export class D1AlertStore {
       this.db.prepare("UPDATE subscriptions SET active = 0, updated_at = ? WHERE subscriber_id = ?")
         .bind(now, event?.subscriber_id || ""),
       this.db.prepare(
-        "UPDATE notification_events SET status = 'suppressed', error_code = ? WHERE status IN ('queued', 'failed') AND subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = ?)",
-      ).bind(reason, event?.subscriber_id || ""),
+        "UPDATE notification_events SET status = 'suppressed', error_code = ?, terminal_at = COALESCE(terminal_at, ?), claimed_at = NULL WHERE status IN ('queued', 'failed') AND subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = ?)",
+      ).bind(reason, now, event?.subscriber_id || ""),
     ]);
     return Boolean(event);
   }
@@ -403,8 +403,8 @@ export class D1AlertStore {
         `UPDATE subscriptions SET active = 0, updated_at = ? WHERE subscriber_id = (${correlatedSubscriber}) AND EXISTS (${suppressionEvidence})`,
       ).bind(now, providerMessageId, providerMessageId),
       this.db.prepare(
-        `UPDATE notification_events SET status = 'suppressed', error_code = (SELECT event_type FROM (${suppressionEvidence})) WHERE status IN ('queued', 'failed') AND subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = (${correlatedSubscriber})) AND EXISTS (${suppressionEvidence})`,
-      ).bind(providerMessageId, providerMessageId, providerMessageId),
+        `UPDATE notification_events SET status = 'suppressed', error_code = (SELECT event_type FROM (${suppressionEvidence})), terminal_at = COALESCE(terminal_at, (SELECT received_at FROM (${suppressionEvidence}))), claimed_at = NULL WHERE status IN ('queued', 'failed') AND subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = (${correlatedSubscriber})) AND EXISTS (${suppressionEvidence})`,
+      ).bind(providerMessageId, providerMessageId, providerMessageId, providerMessageId),
     ]);
   }
 
@@ -469,9 +469,18 @@ export class D1AlertStore {
   }
 
   async startRun(run) {
+    await this.recoverStaleRuns(run.startedAt);
     await this.db.prepare(
       "INSERT INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status) VALUES(?, ?, ?, ?, 'running')",
     ).bind(run.id, run.startedAt, run.scheduledAt, run.runKind).run();
+  }
+
+  async recoverStaleRuns(now) {
+    const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
+    const result = await this.db.prepare(
+      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = MAX(0, CAST(ROUND((julianday(?) - julianday(started_at)) * 86400000) AS INTEGER)), status = 'failed_stale_recovered' WHERE status = 'running' AND started_at < ?",
+    ).bind(now, now, staleBefore).run();
+    return Number(result?.meta?.changes || 0);
   }
 
   async finishRun(run) {
@@ -504,6 +513,7 @@ export class D1AlertStore {
   async operationalHealth(now) {
     const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
     const dailyBefore = new Date(Date.parse(now) - 26 * 60 * 60_000).toISOString();
+    await this.recoverStaleRuns(now);
     const row = await this.db.prepare(
       "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms, (SELECT completed_at FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_completed_at, (SELECT status FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_status",
     ).bind(staleBefore).first();

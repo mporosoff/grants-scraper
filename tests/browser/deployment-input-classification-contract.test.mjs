@@ -234,6 +234,8 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(capabilityStep, /curl --fail --silent --show-error --max-time 10/);
   assert.match(capabilityStep, /validate_alert_capability_rotation\.mjs/);
   assert.doesNotMatch(capabilityStep, /curl[^\n]*\|\| true/);
+  assert.match(capabilityStep, /if \[ "\$rotation_mode" = "verified-same-key" \]/);
+  assert.match(capabilityStep, /deployed current and previous signing-key bindings are retained unchanged/);
   assert.ok(
     capabilityStep.indexOf("secret put ALERT_CAPABILITY_PREVIOUS_SECRET")
       < capabilityStep.indexOf("secret put ALERT_CAPABILITY_SECRET"),
@@ -284,8 +286,8 @@ test("Alerts signing-key rotation fails closed except for the exact verified Pha
     scheduler_ready: true,
   };
   assert.equal(validateAlertCapabilityRotation(phase2Health, current, previous).mode, "verified-phase2-bootstrap");
-  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: current }, current, previous).mode, "verified-continuity");
-  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: previous }, current, previous).mode, "verified-continuity");
+  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: current }, current, previous).mode, "verified-same-key");
+  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: previous }, current, previous).mode, "verified-rotation");
 
   assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: "3".repeat(16) }, current, previous), /must match/);
   assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: "" }, current, previous), /Deployed key ID/);

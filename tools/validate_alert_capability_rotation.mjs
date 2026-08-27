@@ -20,10 +20,13 @@ export function validateAlertCapabilityRotation(health, currentValue, previousVa
 
   if (Object.hasOwn(health, "capability_key_id")) {
     const deployedKeyId = checkedKeyId(health.capability_key_id, "Deployed key ID");
-    if (deployedKeyId !== currentKeyId && deployedKeyId !== previousKeyId) {
-      throw new Error("ALERT_CAPABILITY_PREVIOUS_SECRET must match the currently deployed signing key before rotation.");
+    if (deployedKeyId === currentKeyId) {
+      return Object.freeze({ mode: "verified-same-key", deployedKeyId });
     }
-    return Object.freeze({ mode: "verified-continuity", deployedKeyId });
+    if (deployedKeyId === previousKeyId) {
+      return Object.freeze({ mode: "verified-rotation", deployedKeyId });
+    }
+    throw new Error("ALERT_CAPABILITY_PREVIOUS_SECRET must match the currently deployed signing key before rotation.");
   }
 
   const legacyBootstrap = health.service === "available"

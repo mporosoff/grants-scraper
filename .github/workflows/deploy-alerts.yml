@@ -144,8 +144,12 @@ jobs:
             'https://funding-finder-alerts.urochestercheme.workers.dev/health' \
             | node tools/validate_alert_capability_rotation.mjs "$current_key_id" "$previous_key_id")"
           echo "Alerts signing-key check: $rotation_mode"
-          printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
-          printf '%s' "$ALERT_CAPABILITY_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_SECRET --config workers/alerts/wrangler.jsonc
+          if [ "$rotation_mode" = "verified-same-key" ]; then
+            echo "The deployed current and previous signing-key bindings are retained unchanged."
+          else
+            printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
+            printf '%s' "$ALERT_CAPABILITY_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_SECRET --config workers/alerts/wrangler.jsonc
+          fi
           echo "current_key_id=$current_key_id" >> "$GITHUB_OUTPUT"
       - name: Deploy the committed Alerts Worker
         id: worker-deploy
