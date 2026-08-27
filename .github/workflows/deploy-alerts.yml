@@ -154,6 +154,8 @@ jobs:
           echo "Alerts signing-key check: $rotation_mode"
           if [ "$rotation_mode" = "verified-same-key" ]; then
             echo "The deployed current and previous signing-key bindings are retained unchanged."
+          elif [ "$rotation_mode" = "repair-previous-binding" ]; then
+            printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
           else
             printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
             printf '%s' "$ALERT_CAPABILITY_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_SECRET --config workers/alerts/wrangler.jsonc
