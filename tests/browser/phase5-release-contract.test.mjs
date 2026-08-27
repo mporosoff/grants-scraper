@@ -30,9 +30,9 @@ test("Phase 5 closeout records the integrated release and its explicit boundarie
 });
 
 test("the current alert template is a protected deployment health contract", () => {
-  assert.equal(ALERT_EMAIL_TEMPLATE_VERSION, "phase2-lifecycle-20260825");
+  assert.equal(ALERT_EMAIL_TEMPLATE_VERSION, "phase4-operations-20260827");
   assert.match(alertWorkflow, /email_template_version \/\/ empty/);
-  assert.match(alertWorkflow, /= "phase2-lifecycle-20260825"/);
+  assert.match(alertWorkflow, /= "phase4-operations-20260827"/);
   assert.match(alertWorkflow, /assets\/match-explain\.js/);
   assert.match(alertWorkflow, /tools\/smoke_alerts_worker\.mjs/);
 });

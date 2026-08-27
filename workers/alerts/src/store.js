@@ -503,16 +503,27 @@ export class D1AlertStore {
 
   async operationalHealth(now) {
     const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
+    const dailyBefore = new Date(Date.parse(now) - 26 * 60 * 60_000).toISOString();
     const row = await this.db.prepare(
-      "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms",
+      "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms, (SELECT completed_at FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_completed_at, (SELECT status FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_status",
     ).bind(staleBefore).first();
     const lastCompletedAt = String(row?.last_completed_at || "");
+    const lastDailyCompletedAt = String(row?.last_daily_completed_at || "");
+    const lastDailyStatus = String(row?.last_daily_status || "");
+    const dailyCompletedSuccessfully = lastDailyStatus === "completed"
+      || lastDailyStatus.startsWith("completed_with_");
     return {
       staleRunningRuns: Number(row?.stale_running_runs || 0),
       lastCompletedAt,
       lastStatus: String(row?.last_status || ""),
       lastDurationMs: row?.last_duration_ms == null ? null : Number(row.last_duration_ms),
-      schedulerRecent: Boolean(lastCompletedAt && lastCompletedAt >= staleBefore),
+      lastDailyCompletedAt,
+      lastDailyStatus,
+      schedulerRecent: Boolean(
+        dailyCompletedSuccessfully
+        && lastDailyCompletedAt >= dailyBefore
+        && lastDailyCompletedAt <= now,
+      ),
     };
   }
 

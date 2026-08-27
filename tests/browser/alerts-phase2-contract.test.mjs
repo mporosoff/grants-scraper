@@ -1700,7 +1700,10 @@ test("FF-BUG-020 retry runs skip catalog loading and record actual timing plus c
     storeFactory: () => store,
     providerFactory: () => new MockEmailProvider(),
     assetLoader: async () => { throw new Error("retry runs must not load the catalog"); },
-    now: () => times.shift(),
+    now: scheduledTime => {
+      assert.equal(scheduledTime, undefined);
+      return times.shift();
+    },
   });
   const result = await scheduled({
     scheduledTime: Date.parse("2026-09-01T12:00:00.000Z"), cron: "*/5 * * * *",
@@ -1746,6 +1749,36 @@ test("FF-BUG-020 failed daily runs still record actual completion and duration",
   assert.equal(result.durationMs, 6_000);
   assert.equal(result.cleanupDeletedCount, 2);
   assert.deepEqual(finished, result);
+});
+
+test("FF-BUG-020 scheduler health requires a recent non-failed daily evaluation", async () => {
+  const database = databaseThrough();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('daily-failed','2026-09-02T11:49:00.000Z','2026-09-02T11:50:00.000Z','failed','2026-09-02T11:45:00.000Z',60000,'daily')",
+  ).run();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('retry-ok','2026-09-02T11:54:00.000Z','2026-09-02T11:55:00.000Z','completed','2026-09-02T11:54:00.000Z',60000,'retry')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const failedDaily = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(failedDaily.lastCompletedAt, "2026-09-02T11:55:00.000Z");
+  assert.equal(failedDaily.lastStatus, "completed");
+  assert.equal(failedDaily.lastDailyCompletedAt, "2026-09-02T11:50:00.000Z");
+  assert.equal(failedDaily.lastDailyStatus, "failed");
+  assert.equal(failedDaily.schedulerRecent, false);
+
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('daily-ok','2026-09-01T11:00:00.000Z','2026-09-01T11:01:00.000Z','completed_with_cleanup_failure','2026-09-01T11:00:00.000Z',60000,'daily')",
+  ).run();
+  const recovered = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(recovered.lastDailyStatus, "failed");
+  assert.equal(recovered.schedulerRecent, false);
+
+  database.prepare("DELETE FROM evaluation_runs WHERE id='daily-failed'").run();
+  const recentDaily = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(recentDaily.lastDailyCompletedAt, "2026-09-01T11:01:00.000Z");
+  assert.equal(recentDaily.schedulerRecent, true);
+  assert.equal((await store.operationalHealth("2026-09-02T13:02:00.000Z")).schedulerRecent, false);
 });
 
 test("provider and public-asset requests have deterministic bounded deadlines", async () => {

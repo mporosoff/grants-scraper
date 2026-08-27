@@ -18,8 +18,9 @@ assert.equal(payload.email_template_version, "phase4-operations-20260827");
 assert.equal(payload.capability_signing_ready, true);
 assert.equal(payload.stale_running_runs, 0);
 assert.equal(payload.scheduler_ready, true);
+assert.equal(typeof payload.last_daily_run_completed_at, "string");
+assert.match(payload.last_daily_run_status, /^completed(?:_with_.*)?$/);
 assert.equal(payload.outbound_email_enabled, true);
-assert.equal(payload.scheduler_ready, true);
 
 const preflight = await fetch(`${endpoint}/subscriptions`, {
   method: "OPTIONS",

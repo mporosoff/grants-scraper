@@ -208,6 +208,7 @@ export function createHandler({
       try { databaseReady = await store.health(); } catch { /* unavailable */ }
       let operations = {
         staleRunningRuns: 0, lastCompletedAt: "", lastStatus: "", lastDurationMs: null,
+        lastDailyCompletedAt: "", lastDailyStatus: "",
         schedulerRecent: true,
       };
       try {
@@ -239,6 +240,8 @@ export function createHandler({
         last_run_completed_at: operations.lastCompletedAt || null,
         last_run_status: operations.lastStatus || null,
         last_run_duration_ms: operations.lastDurationMs,
+        last_daily_run_completed_at: operations.lastDailyCompletedAt || null,
+        last_daily_run_status: operations.lastDailyStatus || null,
       });
     }
     if (!config.enabled) return json(origin, 503, { error: { code: "alerts_unavailable" } });
@@ -436,11 +439,11 @@ export function createScheduledHandler({
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
   assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
   fetchImpl = (...args) => fetch(...args),
-  now = scheduledTime => new Date(scheduledTime || Date.now()),
+  now = () => new Date(),
 } = {}) {
   return async function scheduled(controller, env) {
     const scheduledAt = new Date(controller?.scheduledTime || Date.now());
-    const current = now(controller?.scheduledTime);
+    const current = now();
     const runKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
     const store = storeFactory(env);
     const run = {
