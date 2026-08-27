@@ -139,10 +139,18 @@ jobs:
           fi
           current_key_id="$(printf '%s' "$ALERT_CAPABILITY_SECRET" | sha256sum | cut -c1-16)"
           previous_key_id="$(printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | sha256sum | cut -c1-16)"
-          rotation_mode="$(curl --fail --silent --show-error --max-time 10 \
+          health_file="$(mktemp)"
+          trap 'rm -f "$health_file"' EXIT
+          health_status="$(curl --silent --show-error --max-time 10 \
+            --output "$health_file" --write-out '%{http_code}' \
             -H 'Origin: https://mporosoff.github.io' \
-            'https://funding-finder-alerts.urochestercheme.workers.dev/health' \
-            | node tools/validate_alert_capability_rotation.mjs "$current_key_id" "$previous_key_id")"
+            'https://funding-finder-alerts.urochestercheme.workers.dev/health')"
+          if [ "$health_status" != "200" ] && [ "$health_status" != "503" ]; then
+            echo "::error::The deployed Alerts health endpoint returned HTTP $health_status during signing-key validation."
+            exit 1
+          fi
+          rotation_mode="$(node tools/validate_alert_capability_rotation.mjs \
+            "$current_key_id" "$previous_key_id" < "$health_file")"
           echo "Alerts signing-key check: $rotation_mode"
           if [ "$rotation_mode" = "verified-same-key" ]; then
             echo "The deployed current and previous signing-key bindings are retained unchanged."

@@ -237,7 +237,11 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   const capabilityStep = workflowStep(alertsWorkflow, "Configure the Alerts capability-signing secrets");
   assert.match(capabilityStep, /secrets\.ALERT_CAPABILITY_PREVIOUS_SECRET/);
   assert.match(capabilityStep, /set -euo pipefail/);
-  assert.match(capabilityStep, /curl --fail --silent --show-error --max-time 10/);
+  assert.match(capabilityStep, /curl --silent --show-error --max-time 10/);
+  assert.match(capabilityStep, /--output "\$health_file" --write-out '%\{http_code\}'/);
+  assert.match(capabilityStep, /"\$health_status" != "200".*"\$health_status" != "503"/s);
+  assert.match(capabilityStep, /validate_alert_capability_rotation\.mjs[\s\S]*< "\$health_file"/);
+  assert.doesNotMatch(capabilityStep, /curl[^\n]*--fail/);
   assert.match(capabilityStep, /validate_alert_capability_rotation\.mjs/);
   assert.doesNotMatch(capabilityStep, /curl[^\n]*\|\| true/);
   assert.match(capabilityStep, /if \[ "\$rotation_mode" = "verified-same-key" \]/);
