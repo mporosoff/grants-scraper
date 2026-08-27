@@ -326,6 +326,33 @@ class RebuildAndRoundTripTests(unittest.TestCase):
         self.assertEqual(reloaded["record_count"], len(combined))
         self.assertEqual(reloaded["schema_version"], catalog["schema_version"])
 
+    def test_operational_source_evidence_stays_out_of_catalog_artifact(self):
+        catalog, base = self._base_catalog()
+        lifecycle = [{
+            "slug": "jhu",
+            "source": "JHU",
+            "status": "failed_no_fallback",
+            "published": 0,
+            "failure_class": "request_network",
+            "failure_reason": "http_403_access_challenge",
+            "last_successful_refresh_at": "2026-07-01T00:00:00Z",
+            "retained_data_age_days": None,
+            "publication_decision": "published_zero_fail_closed",
+        }]
+
+        rebuilt = rebuild_catalog(catalog, base, results=[], lifecycle=lifecycle)
+        stored = rebuilt["diagnostics"]["additional_sources"]["lifecycle"][0]
+
+        self.assertEqual(
+            stored,
+            {
+                "slug": "jhu",
+                "source": "JHU",
+                "status": "failed_no_fallback",
+                "published": 0,
+            },
+        )
+
 
 class IntegrateSafetyTests(unittest.TestCase):
     def test_preview_does_not_modify_the_catalog_file(self):
@@ -427,6 +454,7 @@ class LifecycleTests(unittest.TestCase):
 
     def test_failed_adapter_keeps_last_known_good(self):
         cache = self._cache_with("nih", "OLD")
+        cache["sources"]["nih"]["fetched_at"] = "2026-07-20T12:00:00Z"
         failed = AdapterResult(
             slug="nih", display_name="Src", source_type="State", ok=False,
             error="network down", min_records=1, max_records=2000,
@@ -434,6 +462,16 @@ class LifecycleTests(unittest.TestCase):
         live, _, summaries = resolve_live_records([failed], cache, self.AS_OF)
         self.assertEqual(len(live), 1)
         self.assertEqual(summaries[0]["status"], "failed_kept_last_good")
+        self.assertEqual(summaries[0]["failure_class"], "request_network")
+        self.assertEqual(
+            summaries[0]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertEqual(summaries[0]["retained_data_age_days"], 5)
+        self.assertEqual(
+            summaries[0]["publication_decision"],
+            "published_filtered_last_known_good",
+        )
 
     def test_recent_complete_snapshot_covers_an_expected_cloud_runner_block(self):
         cache = self._cache_with("jhu", "RECENT")
@@ -463,10 +501,15 @@ class LifecycleTests(unittest.TestCase):
 
     def test_no_fallback_source_clears_snapshot_after_fetch_failure(self):
         cache = self._cache_with("jhu", "UNVERIFIED")
+        cache["sources"]["jhu"]["fetched_at"] = "2026-07-20T12:00:00Z"
         failed = AdapterResult(
             slug="jhu", display_name="JHU", source_type="Fellowship", ok=False,
             error="HTTP 403", min_records=0, max_records=2000,
             retain_on_failure=False,
+            diagnostics={
+                "failure_class": "request_network",
+                "failure_reason": "http_403_access_challenge",
+            },
         )
 
         live, updated, summaries = resolve_live_records([failed], cache, self.AS_OF)
@@ -474,8 +517,30 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(live, [])
         self.assertEqual(updated["sources"]["jhu"]["records"], [])
         self.assertEqual(updated["sources"]["jhu"]["record_count"], 0)
+        self.assertEqual(
+            updated["sources"]["jhu"]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertEqual(
+            updated["sources"]["jhu"]["last_successful_record_count"],
+            1,
+        )
         self.assertEqual(summaries[0]["status"], "failed_no_fallback")
         self.assertFalse(summaries[0]["healthy"])
+        self.assertEqual(summaries[0]["failure_class"], "request_network")
+        self.assertEqual(
+            summaries[0]["failure_reason"],
+            "http_403_access_challenge",
+        )
+        self.assertEqual(
+            summaries[0]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertIsNone(summaries[0]["retained_data_age_days"])
+        self.assertEqual(
+            summaries[0]["publication_decision"],
+            "published_zero_fail_closed",
+        )
 
     def test_valid_empty_source_replaces_an_old_snapshot(self):
         cache = self._cache_with("jhu", "OLD")
@@ -491,6 +556,44 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(updated["sources"]["jhu"]["records"], [])
         self.assertEqual(summaries[0]["status"], "refreshed")
         self.assertTrue(summaries[0]["healthy"])
+        self.assertEqual(summaries[0]["publication_decision"], "published_fresh_records")
+        self.assertIsNone(summaries[0]["failure_class"])
+
+    def test_bounded_source_snapshot_uses_content_date_and_is_not_fresh(self):
+        snapshot = AdapterResult(
+            slug="jhu", display_name="JHU", source_type="Fellowship", ok=True,
+            record_count=1,
+            records=[an_external_record(
+                external_id="SNAPSHOT",
+                url="https://x.org/snapshot",
+                close_date="2026-12-15",
+            )],
+            min_records=0,
+            max_records=2000,
+            retain_on_failure=False,
+            diagnostics={
+                "source_state": "bounded_official_snapshot",
+                "source_snapshot_at": "2026-07-01",
+                "source_snapshot_age_days": 24,
+                "source_snapshot_max_age_days": 62,
+            },
+        )
+
+        _, updated, summaries = resolve_live_records(
+            [snapshot],
+            {"schema_version": 1, "sources": {}},
+            self.AS_OF,
+        )
+
+        self.assertEqual(updated["sources"]["jhu"]["fetched_at"], "2026-07-01T00:00:00Z")
+        self.assertNotIn("last_successful_refresh_at", updated["sources"]["jhu"])
+        self.assertEqual(summaries[0]["status"], "recent_snapshot")
+        self.assertEqual(
+            summaries[0]["publication_decision"],
+            "published_bounded_source_snapshot",
+        )
+        self.assertEqual(summaries[0]["last_successful_refresh_at"], "2026-07-01T00:00:00Z")
+        self.assertEqual(summaries[0]["retained_data_age_days"], 24)
 
     def test_successful_refresh_replaces_records_and_cache(self):
         cache = self._cache_with("nih", "OLD")
@@ -502,6 +605,8 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(
             cache["sources"]["nih"]["records"][0]["opportunity_id"], "demo:NEW")
         self.assertEqual(summaries[0]["status"], "refreshed")
+        self.assertNotIn("last_successful_refresh_at", cache["sources"]["nih"])
+        self.assertNotIn("last_successful_record_count", cache["sources"]["nih"])
 
     def test_successful_refresh_persists_safe_adapter_diagnostics(self):
         fresh = [an_external_record(

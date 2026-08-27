@@ -10,6 +10,7 @@
 - Never describe a candidate, review, test run, or gate as “final” while any required review or check is pending.
 - Do not manually duplicate full-suite runs for the same SHA, and never use checks from an earlier SHA to merge a changed candidate.
 - If a completed exact-head re-review finds another consequential issue in the same subsystem after one remediation round, do not begin another autonomous fix/review loop. Stop and report the convergence failure, consolidated findings, current SHA, completed evidence, and recommended next action.
+- A convergence stop is a checkpoint, not a permanent block. After that checkpoint has been reported, a new explicit user instruction to resume the named work starts one new bounded remediation round. Preserve the candidate and completed evidence, address the consolidated finding in one batch, and repeat exact-head validation. During an explicitly authorized autonomous completion run, do not pause for routine test, review, merge, migration, deployment, or verification approval; stop only for a genuinely unsafe/destructive action, missing authority or credentials, or another condition that cannot be resolved within the named scope.
 
 ### Recognizing terminal Codex reviews
 

@@ -48,6 +48,13 @@ from .discoverability import augment_records
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
 CACHE_SCHEMA_VERSION = 1
+OPERATIONAL_SOURCE_EVIDENCE_KEYS = {
+    "failure_class",
+    "failure_reason",
+    "last_successful_refresh_at",
+    "retained_data_age_days",
+    "publication_decision",
+}
 
 
 # --------------------------------------------------------------------------
@@ -118,9 +125,61 @@ def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
         return None
 
 
+def _last_successful_refresh_at(sources: dict, slug: str) -> str | None:
+    source = sources.get(slug) or {}
+    stamp = source.get("last_successful_refresh_at") or source.get("fetched_at")
+    return str(stamp) if stamp else None
+
+
+def _classify_failure(result: AdapterResult) -> str:
+    explicit = (result.diagnostics or {}).get("failure_class")
+    if explicit:
+        return str(explicit)
+    message = str(result.error or "").casefold()
+    if any(token in message for token in (
+        "http error", "http ", "timeout", "timed out", "connection",
+        "network", "ssl", "tls", "dns",
+    )):
+        return "request_network"
+    if any(token in message for token in (
+        "parse", "worksheet", "header", "malformed", "unexpected shape",
+    )):
+        return "parser_drift"
+    return "validation_failure"
+
+
+def _source_evidence(
+    sources: dict,
+    result: AdapterResult,
+    *,
+    publication_decision: str,
+    failure_class: str | None,
+    retained_data_age_days: int | None,
+) -> dict:
+    return {
+        "failure_class": failure_class,
+        "failure_reason": (result.diagnostics or {}).get("failure_reason"),
+        "last_successful_refresh_at": _last_successful_refresh_at(
+            sources, result.slug
+        ),
+        "retained_data_age_days": retained_data_age_days,
+        "publication_decision": publication_decision,
+    }
+
+
 def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
     """Remove an unsafe snapshot while retaining failure diagnostics."""
-    sources[result.slug] = {
+    previous = sources.get(result.slug) or {}
+    last_successful_refresh_at = (
+        previous.get("last_successful_refresh_at")
+        or previous.get("fetched_at")
+    )
+    last_successful_record_count = previous.get("last_successful_record_count")
+    if last_successful_record_count is None and last_successful_refresh_at:
+        last_successful_record_count = previous.get("record_count")
+        if last_successful_record_count is None:
+            last_successful_record_count = len(previous.get("records") or [])
+    cleared = {
         "source": result.display_name,
         "source_type": result.source_type,
         "fetched_at": None,
@@ -128,6 +187,10 @@ def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
         "diagnostics": result.diagnostics,
         "records": [],
     }
+    if last_successful_refresh_at:
+        cleared["last_successful_refresh_at"] = last_successful_refresh_at
+        cleared["last_successful_record_count"] = last_successful_record_count
+    sources[result.slug] = cleared
 
 
 def resolve_live_records(results: list[AdapterResult], cache: dict,
@@ -169,29 +232,61 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                         or as_of.isoformat()
                     )
                     refreshed_records.append(refreshed)
+                diagnostics = result.diagnostics or {}
+                source_snapshot_at = diagnostics.get("source_snapshot_at")
+                if source_snapshot_at:
+                    refreshed_at = f"{source_snapshot_at}T00:00:00Z"
+                else:
+                    refreshed_at = iso_utc(utc_now())
                 sources[slug] = {
                     "source": result.display_name,
                     "source_type": result.source_type,
-                    "fetched_at": iso_utc(utc_now()),
+                    "fetched_at": refreshed_at,
                     "record_count": len(refreshed_records),
                     "diagnostics": result.diagnostics,
                     "records": refreshed_records,
                 }
                 published = refreshed_records
-                status = "refreshed"
+                status = "recent_snapshot" if source_snapshot_at else "refreshed"
+                publication_decision = (
+                    "published_bounded_source_snapshot"
+                    if source_snapshot_at
+                    else "published_fresh_records"
+                )
+                failure_class = None
+                retained_data_age_days = (
+                    diagnostics.get("source_snapshot_age_days")
+                    if source_snapshot_at
+                    else 0
+                )
             else:
                 if result.retain_on_failure:
                     published = _cached_publishable(sources, slug, as_of)
                     status = "unhealthy_kept_last_good"
+                    publication_decision = "published_filtered_last_known_good"
+                    retained_data_age_days = _snapshot_age_days(
+                        sources, slug, as_of
+                    )
                 else:
                     published = []
                     _clear_failed_source(sources, result)
                     status = "unhealthy_no_fallback"
+                    publication_decision = "published_zero_fail_closed"
+                    retained_data_age_days = None
+                failure_class = "health_bound_violation"
+            evidence = _source_evidence(
+                sources,
+                result,
+                publication_decision=publication_decision,
+                failure_class=failure_class,
+                retained_data_age_days=retained_data_age_days,
+            )
             summaries.append({
                 "slug": slug, "source": result.display_name, "status": status,
                 "fetched": len(result.records), "dropped_invalid": len(dropped),
                 "published": len(published), "healthy": healthy, "error": None,
                 "diagnostics": result.diagnostics,
+                **evidence,
             })
         else:
             if result.retain_on_failure:
@@ -209,12 +304,23 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     "recent_snapshot" if recent_snapshot
                     else "failed_kept_last_good"
                 )
+                publication_decision = "published_filtered_last_known_good"
+                retained_data_age_days = snapshot_age
             else:
                 published = []
                 snapshot_age = None
                 recent_snapshot = False
                 status = "failed_no_fallback"
                 _clear_failed_source(sources, result)
+                publication_decision = "published_zero_fail_closed"
+                retained_data_age_days = None
+            evidence = _source_evidence(
+                sources,
+                result,
+                publication_decision=publication_decision,
+                failure_class=_classify_failure(result),
+                retained_data_age_days=retained_data_age_days,
+            )
             summaries.append({
                 "slug": slug, "source": result.display_name,
                 "status": status,
@@ -224,6 +330,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "diagnostics": result.diagnostics,
                 "snapshot_age_days": snapshot_age,
                 "fallback_grace_days": result.fallback_grace_days,
+                **evidence,
             })
         live.extend(published)
 
@@ -344,7 +451,17 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
     diagnostics["additional_sources"] = {
         "merged_at": iso_utc(utc_now()),
         "source_record_counts": dict(sorted(source_counts.items())),
-        "lifecycle": lifecycle or [],
+        # Operational evidence belongs in the run summary/issue body. Keeping
+        # it out of the generated product artifact preserves the established
+        # catalog contract and the hermetic flag-off baseline.
+        "lifecycle": [
+            {
+                key: value
+                for key, value in source.items()
+                if key not in OPERATIONAL_SOURCE_EVIDENCE_KEYS
+            }
+            for source in (lifecycle or [])
+        ],
         "adapters": [
             {"slug": r.slug, "source": r.display_name, "source_type": r.source_type,
              "ok": r.ok, "record_count": r.record_count, "error": r.error,

@@ -103,6 +103,7 @@ test("Team Match metadata and history use public researcher/team behavior", () =
 });
 
 test("refresh alerts summarize current state, reopen, and close on full recovery", () => {
+  assert.match(workflow, /--summary-output "\$\{\{ runner\.temp \}\}\/source-refresh-summary\.json"/);
   assert.match(workflow, /name: Resolve recovered refresh alerts/);
   assert.match(workflow, /steps\.additional-sources\.outcome == 'success'/);
   assert.match(workflow, /steps\.document_evidence\.outcome == 'success'/);
@@ -110,4 +111,16 @@ test("refresh alerts summarize current state, reopen, and close on full recovery
   assert.ok((workflow.match(/state: "all"/g) || []).length >= 2);
   assert.ok((workflow.match(/state: "open"/g) || []).length >= 3);
   assert.ok((workflow.match(/github\.rest\.issues\.update/g) || []).length >= 3);
+  for (const field of [
+    "failure_class",
+    "last_successful_refresh_at",
+    "retained_data_age_days",
+    "publication_decision",
+  ]) {
+    assert.match(workflow, new RegExp(field));
+  }
+  assert.match(workflow, /const validation = summary\.validation \|\| \{\}/);
+  assert.match(workflow, /validation\.ok === false/);
+  assert.match(workflow, /External-source post-merge validation failed/);
+  assert.match(workflow, /else if \(documentEvidenceDegraded\)/);
 });

@@ -113,7 +113,7 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 | `nasa-nspires` | Disabled shell | The public entry point is session/POST-gated; no stable list route is confirmed. |
 | `ur-infoready` | Disabled shell | The earlier undocumented endpoint currently returns HTTP 500. No embedded credential or unstable request ships; the fixture parser remains for a future permissioned route. |
 | `vpr-email` | Enabled | Reads the private forwarding mailbox over read-only IMAP. VPR and Cindy messages are classified and counted separately; both streams are required, and a format regression preserves the last good snapshot. |
-| `jhu-fellowships` | Enabled | Resolves and downloads JHU's latest graduate, postdoctoral, and early-career workbooks on every run—no manual Excel upload. All three raw sheets must be structurally healthy, but the publishable current set may legitimately be zero. Only exact current/future deadlines and explicit rolling entries are retained; expired or unverifiable rows are removed, cross-audience duplicates are merged, and a blocked/failed refresh clears the JHU snapshot instead of republishing stale records. |
+| `jhu-fellowships` | Enabled | Resolves and downloads JHU's latest graduate, postdoctoral, and early-career workbooks on every run—no manual Excel upload. The official category pages currently report that they are under construction, so the adapter also uses the exact public JHU media URLs and JHU-published short links in a bounded same-session fallback chain. All three raw sheets must be structurally healthy, but the publishable current set may legitimately be zero. Only exact current/future deadlines and explicit rolling entries are retained; expired or unverifiable rows are removed, cross-audience duplicates are merged, and a blocked/failed refresh clears the JHU snapshot instead of republishing stale records. Structured refresh evidence preserves the failure class, last successful refresh, retained-data age, and fail-closed publication decision. |
 
 ## Notes
 
@@ -128,3 +128,14 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 - **Legal hygiene:** only add public, non-licensed sources; respect `robots.txt`
   and rate limits (the HTTP client paces requests). Do not scrape SPIN/InfoEd,
   Pivot, Duke, GrantForward, or other licensed databases.
+
+### JHU RDT workbook outage compatibility
+
+JHU's graduate, postdoctoral, and early-career category pages currently expose
+an under-construction notice instead of workbook links. The adapter may use the
+official 7/1/26 JHU workbook URLs (or JHU's public short links to those files)
+for at most 62 days from their published date. These files are reported as a
+bounded source snapshot, never as a fresh live refresh. A newer workbook found
+on a category page takes precedence. Once the snapshot exceeds the bound, the
+source fails closed and the source-health summary reports
+`pinned_workbook_expired`; it does not republish rolling rows indefinitely.
