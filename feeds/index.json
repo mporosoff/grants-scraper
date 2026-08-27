@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-08-27T09:06:45Z",
+  "generated_at": "2026-08-27T10:00:53Z",
   "excluded_noncurrent": 13,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1436
+      "count": 1437
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1379
+      "count": 1380
     },
     {
       "title": "Funding Finder | Internal",
