@@ -1425,10 +1425,18 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
   assert.match(workflow, /phase4-operations-20260827/);
   assert.match(workflow, /worker_version_rollback/);
   assert.match(wrangler, /"ALERT_SCHEDULER_ENABLED": "true"/);
-  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "\*\/5 \* \* \* \*"\]/);
+  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "2-57\/5 \* \* \* \*"\]/);
   assert.match(smoke, /delivery_ready/);
   assert.match(migration, /deployment workflow terminalizes unsent verification/);
   assert.doesNotMatch(workflow + wrangler + smoke + migration, /RESEND_API_KEY\s*[:=]\s*["']?re_/i);
+});
+
+test("FF-BUG-020 daily evaluation and retry cron minutes cannot collide", async () => {
+  const wrangler = JSON.parse(await readFile(new URL("workers/alerts/wrangler.jsonc", root), "utf8"));
+  assert.deepEqual(wrangler.triggers.crons, ["15 13 * * *", "2-57/5 * * * *"]);
+  const retryMinutes = Array.from({ length: 12 }, (_, index) => 2 + (index * 5));
+  assert.deepEqual(retryMinutes, [2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 57]);
+  assert.equal(retryMinutes.includes(15), false);
 });
 
 test("Resend classifies 429 and 5xx as retryable but permanent 4xx as terminal", async () => {
