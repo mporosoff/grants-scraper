@@ -84,6 +84,13 @@ def cmd_merge(args):
         include_disabled=args.include_disabled,
         write=args.write,
     )
+    if args.summary_output:
+        summary_path = Path(args.summary_output)
+        summary_path.parent.mkdir(parents=True, exist_ok=True)
+        summary_path.write_text(
+            json.dumps(summary, indent=2) + "\n",
+            encoding="utf-8",
+        )
     print(json.dumps(summary, indent=2))
     if not args.write:
         print("\n(Preview only. Re-run with --write to update the catalog file.)")
@@ -127,6 +134,10 @@ def main(argv=None):
             "exit nonzero after safe write/fallback when an enabled source "
             "or post-merge validation is degraded"
         ),
+    )
+    merge.add_argument(
+        "--summary-output",
+        help="write the structured refresh summary to this operational path",
     )
     merge.set_defaults(func=cmd_merge)
 

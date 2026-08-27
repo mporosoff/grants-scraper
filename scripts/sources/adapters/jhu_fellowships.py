@@ -34,9 +34,11 @@ from __future__ import annotations
 import datetime as _dt
 from collections import Counter
 import hashlib
+import http.cookiejar
 import io
 import re
 import time
+import urllib.error
 import urllib.request
 from typing import Iterable, Optional
 
@@ -47,14 +49,17 @@ from ..registry import register
 SHEETS = [
     {"audience": "grad",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/graduate/",
+     "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/GradFundingOpps7126.xlsx",
      "fallback_sheet": "https://bit.ly/GradFundingOpps7126",
      "applicant_types": ["Graduate students"], "drop_federal": False},
     {"audience": "postdoc",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/",
+     "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/PostdocFundingOpps7126.xlsx",
      "fallback_sheet": "https://bit.ly/PostdocFundingOpps7126",
      "applicant_types": ["Postdoctoral researchers"], "drop_federal": False},
     {"audience": "faculty",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/early-career/",
+     "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/ECFopps7126.xlsx",
      "fallback_sheet": "https://bit.ly/ECFopps7126",
      "applicant_types": ["Early-career faculty"], "drop_federal": True},
 ]
@@ -285,6 +290,12 @@ class JHUFellowshipsAdapter(SourceAdapter):
     def __init__(self, as_of: Optional[_dt.date] = None) -> None:
         super().__init__()
         self.as_of = as_of or _dt.date.today()
+        # JHU's Cloudflare edge issues a bounded bot-management cookie even on
+        # successful public page requests. Reuse it for the corresponding
+        # public workbook request instead of treating each URL as a new client.
+        self._opener = urllib.request.build_opener(
+            urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar())
+        )
 
     def fetch(self):
         """Download every JHU workbook or fail the source as an incomplete run.
@@ -297,11 +308,16 @@ class JHUFellowshipsAdapter(SourceAdapter):
         """
         results = []
         failures = []
+        page_states = {}
+        download_sources = {}
         for cfg in SHEETS:
             candidates = []
             page_error = None
             try:
-                html = self._get(cfg["page"]).decode("utf-8", errors="replace")
+                html = self._get(
+                    cfg["page"],
+                    accept="text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+                ).decode("utf-8", errors="replace")
                 links = _LINK_RE.findall(html)
                 candidate = next(
                     (u for u in links
@@ -309,24 +325,47 @@ class JHUFellowshipsAdapter(SourceAdapter):
                 candidate = candidate or next(
                     (u for u in links if u.lower().endswith(".xlsx")), None)
                 if candidate:
-                    candidates.append(candidate)
+                    candidates.append(("page_link", candidate))
+                    page_states[cfg["audience"]] = "workbook_link_present"
+                elif "under construction" in html.casefold():
+                    page_states[cfg["audience"]] = "under_construction_no_workbook_link"
+                else:
+                    page_states[cfg["audience"]] = "no_workbook_link"
             except Exception as exc:  # page fallback is intentional
                 page_error = f"page: {type(exc).__name__}: {exc}"
+                page_states[cfg["audience"]] = "page_request_failed"
+            direct = cfg.get("direct_sheet")
+            if direct and all(url != direct for _, url in candidates):
+                candidates.append(("official_direct", direct))
             fallback = cfg.get("fallback_sheet")
-            if fallback and fallback not in candidates:
-                candidates.append(fallback)
+            if fallback and all(url != fallback for _, url in candidates):
+                candidates.append(("official_shortlink", fallback))
 
             sheet_errors = []
-            for candidate in candidates:
+            for candidate_kind, candidate in candidates:
                 try:
-                    data = self._get(candidate)
+                    data = self._get(
+                        candidate,
+                        accept=(
+                            "application/vnd.openxmlformats-officedocument."
+                            "spreadsheetml.sheet,application/octet-stream;q=0.9,"
+                            "*/*;q=0.8"
+                        ),
+                        referer=cfg["page"],
+                    )
                     if not data.startswith(b"PK"):
                         raise ValueError("response is not an XLSX/ZIP workbook")
-                    results.append({**cfg, "data": data, "sheet_url": candidate})
+                    results.append({
+                        **cfg,
+                        "data": data,
+                        "sheet_url": candidate,
+                        "sheet_candidate_kind": candidate_kind,
+                    })
+                    download_sources[cfg["audience"]] = candidate_kind
                     break
                 except Exception as exc:
                     sheet_errors.append(
-                        f"{candidate}: {type(exc).__name__}: {exc}"
+                        f"{candidate_kind} {candidate}: {type(exc).__name__}: {exc}"
                     )
             else:
                 details = [page_error, *sheet_errors]
@@ -337,19 +376,51 @@ class JHUFellowshipsAdapter(SourceAdapter):
             "expected_audiences": [cfg["audience"] for cfg in SHEETS],
             "downloaded_audiences": [cfg["audience"] for cfg in results],
             "download_failures": failures,
+            "page_states": page_states,
+            "download_sources_by_audience": download_sources,
         }
         if failures or len(results) != len(SHEETS):
+            joined = " | ".join(failures)
+            if "HTTP 403" in joined or "HTTP Error 403" in joined:
+                self.diagnostics["failure_class"] = "request_network"
+                self.diagnostics["failure_reason"] = "http_403_access_challenge"
+            elif "response is not an XLSX/ZIP workbook" in joined:
+                self.diagnostics["failure_class"] = "upstream_response_change"
+                self.diagnostics["failure_reason"] = "non_workbook_response"
+            else:
+                self.diagnostics["failure_class"] = "request_network"
+                self.diagnostics["failure_reason"] = "workbook_request_failed"
             raise RuntimeError("Incomplete JHU workbook refresh: " + " | ".join(failures))
         return results
 
-    @staticmethod
-    def _get(url: str) -> bytes:
+    def _get(
+        self,
+        url: str,
+        *,
+        accept: str = "*/*",
+        referer: Optional[str] = None,
+    ) -> bytes:
         last_error = None
         for attempt in range(FETCH_ATTEMPTS):
             try:
-                req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-                with urllib.request.urlopen(req, timeout=60) as resp:
+                headers = {
+                    "User-Agent": USER_AGENT,
+                    "Accept": accept,
+                    "Accept-Language": "en-US,en;q=0.8",
+                }
+                if referer:
+                    headers["Referer"] = referer
+                req = urllib.request.Request(url, headers=headers)
+                with self._opener.open(req, timeout=60) as resp:
                     return resp.read(16 * 1024 * 1024)  # 16 MB cap
+            except urllib.error.HTTPError as exc:
+                mitigation = exc.headers.get("Cf-Mitigated") if exc.headers else None
+                suffix = f"; cf-mitigated={mitigation}" if mitigation else ""
+                last_error = RuntimeError(
+                    f"HTTP Error {exc.code}: {exc.reason}{suffix}"
+                )
+                if attempt + 1 < FETCH_ATTEMPTS:
+                    time.sleep(attempt + 1)
             except Exception as exc:
                 last_error = exc
                 if attempt + 1 < FETCH_ATTEMPTS:
@@ -372,6 +443,8 @@ class JHUFellowshipsAdapter(SourceAdapter):
                 self.diagnostics = {
                     **getattr(self, "diagnostics", {}),
                     "raw_rows_by_audience": raw_counts,
+                    "failure_class": "health_bound_violation",
+                    "failure_reason": "audience_row_floor",
                 }
                 raise ValueError(
                     f"JHU {cfg['audience']} workbook yielded only {len(items)} rows; "

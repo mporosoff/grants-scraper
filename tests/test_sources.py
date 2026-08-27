@@ -427,6 +427,7 @@ class LifecycleTests(unittest.TestCase):
 
     def test_failed_adapter_keeps_last_known_good(self):
         cache = self._cache_with("nih", "OLD")
+        cache["sources"]["nih"]["fetched_at"] = "2026-07-20T12:00:00Z"
         failed = AdapterResult(
             slug="nih", display_name="Src", source_type="State", ok=False,
             error="network down", min_records=1, max_records=2000,
@@ -434,6 +435,16 @@ class LifecycleTests(unittest.TestCase):
         live, _, summaries = resolve_live_records([failed], cache, self.AS_OF)
         self.assertEqual(len(live), 1)
         self.assertEqual(summaries[0]["status"], "failed_kept_last_good")
+        self.assertEqual(summaries[0]["failure_class"], "request_network")
+        self.assertEqual(
+            summaries[0]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertEqual(summaries[0]["retained_data_age_days"], 5)
+        self.assertEqual(
+            summaries[0]["publication_decision"],
+            "published_filtered_last_known_good",
+        )
 
     def test_recent_complete_snapshot_covers_an_expected_cloud_runner_block(self):
         cache = self._cache_with("jhu", "RECENT")
@@ -463,10 +474,15 @@ class LifecycleTests(unittest.TestCase):
 
     def test_no_fallback_source_clears_snapshot_after_fetch_failure(self):
         cache = self._cache_with("jhu", "UNVERIFIED")
+        cache["sources"]["jhu"]["fetched_at"] = "2026-07-20T12:00:00Z"
         failed = AdapterResult(
             slug="jhu", display_name="JHU", source_type="Fellowship", ok=False,
             error="HTTP 403", min_records=0, max_records=2000,
             retain_on_failure=False,
+            diagnostics={
+                "failure_class": "request_network",
+                "failure_reason": "http_403_access_challenge",
+            },
         )
 
         live, updated, summaries = resolve_live_records([failed], cache, self.AS_OF)
@@ -474,8 +490,30 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(live, [])
         self.assertEqual(updated["sources"]["jhu"]["records"], [])
         self.assertEqual(updated["sources"]["jhu"]["record_count"], 0)
+        self.assertEqual(
+            updated["sources"]["jhu"]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertEqual(
+            updated["sources"]["jhu"]["last_successful_record_count"],
+            1,
+        )
         self.assertEqual(summaries[0]["status"], "failed_no_fallback")
         self.assertFalse(summaries[0]["healthy"])
+        self.assertEqual(summaries[0]["failure_class"], "request_network")
+        self.assertEqual(
+            summaries[0]["failure_reason"],
+            "http_403_access_challenge",
+        )
+        self.assertEqual(
+            summaries[0]["last_successful_refresh_at"],
+            "2026-07-20T12:00:00Z",
+        )
+        self.assertIsNone(summaries[0]["retained_data_age_days"])
+        self.assertEqual(
+            summaries[0]["publication_decision"],
+            "published_zero_fail_closed",
+        )
 
     def test_valid_empty_source_replaces_an_old_snapshot(self):
         cache = self._cache_with("jhu", "OLD")
@@ -491,6 +529,8 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(updated["sources"]["jhu"]["records"], [])
         self.assertEqual(summaries[0]["status"], "refreshed")
         self.assertTrue(summaries[0]["healthy"])
+        self.assertEqual(summaries[0]["publication_decision"], "published_fresh_records")
+        self.assertIsNone(summaries[0]["failure_class"])
 
     def test_successful_refresh_replaces_records_and_cache(self):
         cache = self._cache_with("nih", "OLD")

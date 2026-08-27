@@ -3,8 +3,10 @@
 from io import BytesIO
 from datetime import date
 from email.message import EmailMessage
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
 from pathlib import Path
+from threading import Thread
 import unittest
 from unittest.mock import patch
 
@@ -59,7 +61,7 @@ class JHUFellowshipsTests(unittest.TestCase):
     def test_fetch_uses_official_fallbacks_and_requires_every_audience(self):
         adapter = JHUFellowshipsAdapter()
 
-        def fake_get(url):
+        def fake_get(url, **_kwargs):
             if "/funding-opportunities/" in url:
                 raise RuntimeError("page host blocked")
             return b"PK\x03\x04sanitized workbook"
@@ -79,7 +81,7 @@ class JHUFellowshipsTests(unittest.TestCase):
     def test_fetch_fails_instead_of_accepting_a_partial_snapshot(self):
         adapter = JHUFellowshipsAdapter()
 
-        def fake_get(url):
+        def fake_get(url, **_kwargs):
             if "/funding-opportunities/" in url or "Postdoc" in url:
                 raise RuntimeError("blocked")
             return b"PK\x03\x04sanitized workbook"
@@ -88,6 +90,119 @@ class JHUFellowshipsTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "Incomplete JHU workbook refresh"):
                 adapter.fetch()
         self.assertIn("postdoc", adapter.diagnostics["download_failures"][0])
+
+    def test_under_construction_pages_use_bounded_official_direct_workbooks(self):
+        page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
+        adapter = JHUFellowshipsAdapter()
+
+        def fake_get(url, **_kwargs):
+            if "/funding-opportunities/" in url:
+                return page
+            if "/wp-content/uploads/" in url:
+                return b"PK\x03\x04sanitized workbook"
+            raise AssertionError(f"unexpected short-link request: {url}")
+
+        with patch.object(adapter, "_get", side_effect=fake_get):
+            payload = adapter.fetch()
+
+        self.assertEqual(len(payload), 3)
+        self.assertEqual(
+            adapter.diagnostics["page_states"],
+            {
+                "grad": "under_construction_no_workbook_link",
+                "postdoc": "under_construction_no_workbook_link",
+                "faculty": "under_construction_no_workbook_link",
+            },
+        )
+        self.assertEqual(
+            adapter.diagnostics["download_sources_by_audience"],
+            {
+                "grad": "official_direct",
+                "postdoc": "official_direct",
+                "faculty": "official_direct",
+            },
+        )
+
+    def test_public_page_cookie_is_reused_for_official_workbook_requests(self):
+        page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
+        workbook = b"PK\x03\x04sanitized workbook"
+        workbook_cookies = []
+
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                if self.path.startswith("/page/"):
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html")
+                    self.send_header("Set-Cookie", "__cf_bm=allowed; Path=/; HttpOnly")
+                    self.send_header("Content-Length", str(len(page)))
+                    self.end_headers()
+                    self.wfile.write(page)
+                    return
+                if self.path.startswith("/sheet/"):
+                    cookie = self.headers.get("Cookie") or ""
+                    workbook_cookies.append(cookie)
+                    if "__cf_bm=allowed" not in cookie:
+                        self.send_response(403)
+                        self.end_headers()
+                        return
+                    self.send_response(200)
+                    self.send_header(
+                        "Content-Type",
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    )
+                    self.send_header("Content-Length", str(len(workbook)))
+                    self.end_headers()
+                    self.wfile.write(workbook)
+                    return
+                self.send_response(404)
+                self.end_headers()
+
+            def log_message(self, _format, *_args):
+                return
+
+        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        origin = f"http://127.0.0.1:{server.server_port}"
+        sheets = [
+            {
+                "audience": audience,
+                "page": f"{origin}/page/{audience}",
+                "direct_sheet": f"{origin}/sheet/{audience}.xlsx",
+                "fallback_sheet": None,
+                "applicant_types": [audience],
+                "drop_federal": False,
+            }
+            for audience in ("grad", "postdoc", "faculty")
+        ]
+        try:
+            with patch("scripts.sources.adapters.jhu_fellowships.SHEETS", sheets):
+                payload = JHUFellowshipsAdapter().fetch()
+        finally:
+            server.shutdown()
+            server.server_close()
+            thread.join(timeout=2)
+
+        self.assertEqual(len(payload), 3)
+        self.assertEqual(len(workbook_cookies), 3)
+        self.assertTrue(all("__cf_bm=allowed" in cookie for cookie in workbook_cookies))
+
+    def test_repeated_cloudflare_403_is_classified_and_fails_closed(self):
+        adapter = JHUFellowshipsAdapter()
+
+        def blocked(_url, **_kwargs):
+            raise RuntimeError("HTTP Error 403: Forbidden; cf-mitigated=challenge")
+
+        with patch.object(adapter, "_get", side_effect=blocked):
+            with self.assertRaisesRegex(RuntimeError, "Incomplete JHU workbook refresh"):
+                adapter.fetch()
+
+        self.assertEqual(adapter.diagnostics["downloaded_audiences"], [])
+        self.assertEqual(adapter.diagnostics["failure_class"], "request_network")
+        self.assertEqual(
+            adapter.diagnostics["failure_reason"],
+            "http_403_access_challenge",
+        )
 
     def test_parse_requires_and_reports_all_three_audiences(self):
         adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 10))

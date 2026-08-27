@@ -253,6 +253,7 @@ jobs:
           --catalog data/opportunities.js
           --cache data/source_records.json
           --write
+          --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
       - name: Rebuild faculty metadata and live team-matcher configuration
         run: >-
@@ -590,6 +591,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const fs = require("fs");
             const title = "External funding source refresh degraded";
             const runUrl =
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
@@ -602,13 +604,39 @@ jobs:
               externalDegraded ? "external sources" : null,
               documentEvidenceDegraded ? "document evidence/subtopic classification" : null,
             ].filter(Boolean).join(", ");
+            let sourceEvidence = "- Structured source evidence was unavailable; inspect the run log.";
+            try {
+              const summaryPath = `${process.env.RUNNER_TEMP}/source-refresh-summary.json`;
+              const summary = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+              const degraded = (summary.sources || []).filter(
+                source => !["refreshed", "recent_snapshot"].includes(source.status)
+              );
+              if (degraded.length) {
+                sourceEvidence = degraded.map(source => {
+                  const lastSuccess = source.last_successful_refresh_at
+                    || "none under the current verified contract";
+                  const retainedAge = Number.isInteger(source.retained_data_age_days)
+                    ? `${source.retained_data_age_days} day(s)`
+                    : "not applicable (no retained records published)";
+                  return `- **${source.source}** (\`${source.slug}\`): ` +
+                    `failure class \`${source.failure_class || "unknown"}\`; ` +
+                    `last successful refresh ${lastSuccess}; retained-data age ${retainedAge}; ` +
+                    `publication decision \`${source.publication_decision || "unknown"}\`.`;
+                }).join("\n");
+              } else {
+                sourceEvidence = "- All external sources were healthy; degradation was confined to document evidence/classification.";
+              }
+            } catch (error) {
+              core.warning(`Could not read structured source summary: ${error.message}`);
+            }
             const body =
               `The degraded refresh layer(s) were: ${affected}. ` +
               `This occurred on ${new Date().toISOString()}.\n\n` +
               `Healthy sources were still refreshed. Sources configured to retain ` +
               `last-known-good data kept only publishable records; fail-closed sources ` +
               `published zero. Document-evidence or classifier degradation cannot ` +
-              `publish unchecked generic children.\n\nInspect the run summary: ${runUrl}`;
+              `publish unchecked generic children.\n\nSource health evidence:\n${sourceEvidence}` +
+              `\n\nInspect the run summary: ${runUrl}`;
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
