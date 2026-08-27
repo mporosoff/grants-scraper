@@ -550,6 +550,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const fs = require("fs");
             const titles = new Set([
               "Automated Grants.gov refresh failed",
               "External funding source refresh degraded",
@@ -557,6 +558,21 @@ jobs:
             const runUrl =
               `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
               `/actions/runs/${context.runId}`;
+            let disabledEvidence = "";
+            try {
+              const summaryPath = `${process.env.RUNNER_TEMP}/source-refresh-summary.json`;
+              const summary = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
+              const disabled = (summary.disabled_sources || []).map(source =>
+                `- **${source.source}** (\`${source.slug}\`): ${source.reason}; ` +
+                `publication decision \`${source.publication_decision}\`.`
+              );
+              if (disabled.length) {
+                disabledEvidence =
+                  `\n\nDocumented disabled-source limitations:\n${disabled.join("\n")}`;
+              }
+            } catch (error) {
+              core.warning(`Could not read disabled-source evidence: ${error.message}`);
+            }
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -571,9 +587,10 @@ jobs:
                 repo: context.repo.repo,
                 issue_number: issue.number,
                 body:
-                  `Recovered: the refresh completed with all external-source and ` +
-                  `document-evidence layers healthy on ${new Date().toISOString()}.\n\n` +
-                  `Verified run: ${runUrl}`,
+                  `Recovered: the refresh completed with all enabled external-source and ` +
+                  `document-evidence layers healthy on ${new Date().toISOString()}. ` +
+                  `A source disabled for documented upstream unavailability is not ` +
+                  `represented as healthy.\n\nVerified run: ${runUrl}${disabledEvidence}`,
               });
               await github.rest.issues.update({
                 owner: context.repo.owner,

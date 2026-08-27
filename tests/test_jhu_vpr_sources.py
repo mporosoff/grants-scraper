@@ -59,6 +59,14 @@ def jhu_workbook_bytes(
 
 
 class JHUFellowshipsTests(unittest.TestCase):
+    def test_upstream_challenge_keeps_jhu_out_of_default_publication(self):
+        adapter = JHUFellowshipsAdapter()
+        self.assertFalse(adapter.enabled)
+        self.assertIn("interactive Cloudflare challenge", adapter.disabled_reason)
+        records, results = collect([adapter])
+        self.assertEqual(records, [])
+        self.assertEqual(results, [])
+
     def test_fetch_uses_official_fallbacks_and_requires_every_audience(self):
         adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 27))
 
@@ -178,7 +186,8 @@ class JHUFellowshipsTests(unittest.TestCase):
             patch.object(historical, "parse", return_value=[]),
         ):
             _records, results = collect(
-                [historical], context={"catalog_records": [], "as_of": date(2026, 8, 27)}
+                [historical], include_disabled=True,
+                context={"catalog_records": [], "as_of": date(2026, 8, 27)}
             )
         self.assertTrue(results[0].ok)
         self.assertEqual(historical.as_of, date(2026, 8, 27))
@@ -190,7 +199,8 @@ class JHUFellowshipsTests(unittest.TestCase):
             patch.object(future, "parse", return_value=[]),
         ):
             _records, results = collect(
-                [future], context={"catalog_records": [], "as_of": date(2026, 9, 2)}
+                [future], include_disabled=True,
+                context={"catalog_records": [], "as_of": date(2026, 9, 2)}
             )
         self.assertFalse(results[0].ok)
         self.assertEqual(future.as_of, date(2026, 9, 2))
@@ -203,7 +213,8 @@ class JHUFellowshipsTests(unittest.TestCase):
             patch.object(predating, "parse", return_value=[]),
         ):
             _records, results = collect(
-                [predating], context={"catalog_records": [], "as_of": date(2026, 6, 30)}
+                [predating], include_disabled=True,
+                context={"catalog_records": [], "as_of": date(2026, 6, 30)}
             )
         self.assertFalse(results[0].ok)
         self.assertEqual(predating.as_of, date(2026, 6, 30))

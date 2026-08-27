@@ -355,6 +355,39 @@ class RebuildAndRoundTripTests(unittest.TestCase):
 
 
 class IntegrateSafetyTests(unittest.TestCase):
+    def test_documented_upstream_disabled_source_is_truthful_and_not_degraded(self):
+        class DisabledUpstream(SourceAdapter):
+            slug = "disabled-upstream"
+            display_name = "Disabled upstream"
+            source_type = "Fellowship"
+            enabled = False
+            disabled_reason = "official unattended route unavailable"
+
+            def fetch(self):
+                raise AssertionError("a disabled source must not run")
+
+            def parse(self, _payload):
+                return []
+
+        catalog, _ = RebuildAndRoundTripTests()._base_catalog()
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "opportunities.js"
+            save_catalog(catalog, path)
+            summary = integrate(
+                catalog_path=path,
+                adapters=[DisabledUpstream()],
+                write=False,
+            )
+
+        self.assertEqual(summary["sources"], [])
+        self.assertEqual(summary["disabled_sources"], [{
+            "slug": "disabled-upstream",
+            "source": "Disabled upstream",
+            "reason": "official unattended route unavailable",
+            "publication_decision": "not_run_published_zero",
+        }])
+        self.assertFalse(summary_is_degraded(summary))
+
     def test_preview_does_not_modify_the_catalog_file(self):
         catalog, _ = RebuildAndRoundTripTests()._base_catalog()
         with TemporaryDirectory() as directory:
