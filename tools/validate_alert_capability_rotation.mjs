@@ -21,7 +21,10 @@ export function validateAlertCapabilityRotation(health, currentValue, previousVa
   if (Object.hasOwn(health, "capability_key_id")) {
     const deployedKeyId = checkedKeyId(health.capability_key_id, "Deployed key ID");
     if (deployedKeyId === currentKeyId) {
-      return Object.freeze({ mode: "verified-same-key", deployedKeyId });
+      const mode = health.capability_previous_signing_ready === true
+        ? "verified-same-key"
+        : "repair-previous-binding";
+      return Object.freeze({ mode, deployedKeyId });
     }
     if (deployedKeyId === previousKeyId) {
       return Object.freeze({ mode: "verified-rotation", deployedKeyId });
