@@ -100,6 +100,10 @@ function rorRequest(query, address = "203.0.113.17") {
 test("FF-BUG-010 Durable Object counters are atomic, source-scoped, and roll over exactly", async () => {
   const ctx = context();
   const limiter = new AwardRateLimiter(ctx);
+  const health = await limiter.fetch(new Request("https://award-rate-limit.internal/health"));
+  assert.equal(health.status, 200);
+  assert.deepEqual(await health.json(), { ready: true, storage: "sqlite" });
+  assert.equal(ctx.database.prepare("SELECT COUNT(*) AS count FROM counters").get().count, 0);
   const attempts = await Promise.all(Array.from({ length: 5 }, () => consume(limiter)));
   assert.equal(attempts.filter(attempt => attempt.body.success).length, 3);
   assert.ok(attempts.filter(attempt => !attempt.body.success).every(attempt => (
@@ -177,6 +181,31 @@ test("FF-BUG-010 health fails closed without the deployable binding or identity 
     const response = await handler(request.clone(), missing);
     assert.equal(response.status, 503);
     assert.equal((await response.json()).abuse_control.ready, false);
+  }
+});
+
+test("FF-BUG-010 health probes the live limiter and fails closed on rejection or timeout", async () => {
+  const request = new Request("https://award.test/health", { headers: { Origin: "http://localhost:8000" } });
+  for (const fetch of [
+    async () => { throw new Error("durable object unavailable"); },
+    async (_input, init) => new Promise((resolve, reject) => {
+      init.signal.addEventListener("abort", () => reject(init.signal.reason), { once: true });
+    }),
+  ]) {
+    const namespace = {
+      idFromName: name => name,
+      get: () => ({ fetch }),
+    };
+    const handler = createHandler({
+      fetchImpl: async () => new Response("{}"),
+      now: () => fixedNow,
+      rateLimitProbeTimeoutMs: 5,
+    });
+    const response = await handler(request.clone(), environment(namespace));
+    assert.equal(response.status, 503);
+    const body = await response.json();
+    assert.equal(body.service, "unavailable");
+    assert.equal(body.abuse_control.ready, false);
   }
 });
 

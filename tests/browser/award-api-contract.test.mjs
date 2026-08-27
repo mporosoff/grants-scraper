@@ -28,9 +28,11 @@ import {
 const allowRateLimits = {
   idFromName: name => name,
   get: () => ({
-    fetch: async () => new Response(JSON.stringify({ success: true, retry_after_seconds: 0 }), {
-      headers: { "Content-Type": "application/json" },
-    }),
+    fetch: async (input, init) => new Response(JSON.stringify(
+      (init?.method || new Request(input).method) === "GET"
+        ? { ready: true, storage: "sqlite" }
+        : { success: true, retry_after_seconds: 0 },
+    ), { headers: { "Content-Type": "application/json" } }),
   }),
 };
 

@@ -34,6 +34,11 @@ export class AwardRateLimiter {
   }
 
   async fetch(request) {
+    const path = new URL(request.url).pathname;
+    if (request.method === "GET" && path === "/health") {
+      const ready = Number(rows(this.sql.exec("SELECT 1 AS ready"))[0]?.ready || 0) === 1;
+      return json(ready ? 200 : 503, { ready, storage: "sqlite" });
+    }
     if (request.method !== "POST") return json(405, { error: { code: "method_not_allowed" } });
     let body;
     try { body = await request.json(); }

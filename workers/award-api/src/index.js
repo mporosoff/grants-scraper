@@ -12,6 +12,7 @@ const MAX_REQUEST_BYTES = 16_384;
 const MAX_OFFSET = 1_000;
 const MAX_YEAR_SPAN = 50;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
+const RATE_LIMIT_HEALTH_TIMEOUT_MS = 2_000;
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
 const ADAPTER_VERSIONS = {
@@ -270,6 +271,25 @@ async function createUpstreamGuard(request, env, current) {
   };
 }
 
+async function probeRateLimiter(env, timeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const namespace = env.AWARD_RATE_LIMITER;
+    const stub = namespace.get(namespace.idFromName("award-rate-limiter-health"));
+    const response = await stub.fetch(new Request("https://award-rate-limit.internal/health", {
+      method: "GET",
+      signal: controller.signal,
+    }));
+    const result = await response.json();
+    return response.ok && result?.ready === true && result?.storage === "sqlite";
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function sourceCacheRequest(source, request, asOf) {
   const cacheIdentity = {
     source,
@@ -424,7 +444,12 @@ function sourceSummary(payload) {
   };
 }
 
-export function createHandler({ fetchImpl = fetch, cache = null, now = () => new Date() } = {}) {
+export function createHandler({
+  fetchImpl = fetch,
+  cache = null,
+  now = () => new Date(),
+  rateLimitProbeTimeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS,
+} = {}) {
   return async function handle(request, env) {
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(origin, 403, "origin_not_allowed");
@@ -433,8 +458,12 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
     const path = requestUrl.pathname.replace(/\/+$/, "");
     const config = serviceConfig(env);
     if (path === "/health" && request.method === "GET") {
-      return json(origin, config.valid ? 200 : 503, {
-        service: config.valid ? "available" : "unavailable",
+      const abuseControlReady = config.rateLimitBinding && config.rateLimitSecret
+        ? await probeRateLimiter(env, rateLimitProbeTimeoutMs)
+        : false;
+      const serviceReady = config.valid && abuseControlReady;
+      return json(origin, serviceReady ? 200 : 503, {
+        service: serviceReady ? "available" : "unavailable",
         schema_version: AWARD_SCHEMA_VERSION,
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
@@ -446,7 +475,7 @@ export function createHandler({ fetchImpl = fetch, cache = null, now = () => new
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
         },
         abuse_control: {
-          ready: config.rateLimitBinding && config.rateLimitSecret,
+          ready: abuseControlReady,
           provider: "cloudflare-durable-object",
           storage: "sqlite",
           client_identity: "hmac-derived",
