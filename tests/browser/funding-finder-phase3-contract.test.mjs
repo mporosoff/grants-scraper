@@ -37,7 +37,19 @@ vm.runInContext(providerSource, sandbox);
 const core = sandbox.FUNDING_INSTITUTIONAL_INTELLIGENCE;
 const ai = sandbox.FUNDING_AI;
 const fixedNow = () => new Date("2026-08-26T12:00:00.000Z");
-const env = { AWARD_API_ENABLED: "true", CACHE_TTL_SECONDS: "3600", MAX_SOURCE_RESULTS: "25" };
+const env = {
+  AWARD_API_ENABLED: "true", CACHE_TTL_SECONDS: "3600", MAX_SOURCE_RESULTS: "25",
+  AWARD_SOURCE_RATE_LIMIT: "12", ROR_SEARCH_RATE_LIMIT: "60", ROR_RESOLVE_RATE_LIMIT: "20",
+  AWARD_RATE_LIMIT_SECRET: "deterministic-award-rate-limit-secret",
+  AWARD_RATE_LIMITER: {
+    idFromName: name => name,
+    get: () => ({
+      fetch: async () => new Response(JSON.stringify({ success: true, retry_after_seconds: 0 }), {
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
+  },
+};
 
 function plain(value) {
   return JSON.parse(JSON.stringify(value));

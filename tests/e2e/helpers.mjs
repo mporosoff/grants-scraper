@@ -99,6 +99,7 @@ export function mockAwards(target, {
   institutionResponseDelayMs = 0,
   resultCountBySourceOffset = {},
   resultCountPerSource = 1,
+  registryRateLimited = false,
   responseDelaysBySourceOffset = {},
   enforceYearFilters = false,
   sourceFailures = {},
@@ -113,6 +114,24 @@ export function mockAwards(target, {
     }
     const requestUrl = new URL(request.url());
     if (requestUrl.pathname === "/institutions/search" && request.method() === "GET") {
+      if (registryRateLimited) {
+        await route.fulfill({
+          status: 429,
+          headers: corsHeaders({ "Content-Type": "application/json", "Retry-After": "60" }),
+          body: JSON.stringify({
+            schema_version: 1,
+            query: requestUrl.searchParams.get("query"),
+            institutions: [],
+            registry: {
+              source: "ROR",
+              status: "rate_limited",
+              adapter_version: "1.1.0",
+              error: { code: "rate_limited" },
+            },
+          }),
+        });
+        return;
+      }
       const registryDelay = Math.max(0, Number(institutionResponseDelayMs) || 0);
       if (registryDelay) await new Promise(resolve => setTimeout(resolve, registryDelay));
       const query = (requestUrl.searchParams.get("query") || "").toLowerCase();

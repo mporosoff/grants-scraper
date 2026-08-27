@@ -196,6 +196,7 @@ test("Award workflow classifies before mutation and retains Pages validation on 
   for (const name of [
     "Capture the active Award Worker version for rollback",
     "Reconfirm protected main immediately before Award Worker mutation",
+    "Configure the Award abuse-control identity secret",
     "Deploy the committed Award Worker",
     "Wait for the Award Worker health contract",
     "Run bounded exact-source smokes",
@@ -205,6 +206,7 @@ test("Award workflow classifies before mutation and retains Pages validation on 
     "Classify Award Worker inputs since the active deployment",
     "Capture the active Award Worker version for rollback",
     "Reconfirm protected main immediately before Award Worker mutation",
+    "Configure the Award abuse-control identity secret",
     "Deploy the committed Award Worker",
     "Wait for the Award Worker health contract",
     "Run bounded exact-source smokes",
@@ -213,8 +215,12 @@ test("Award workflow classifies before mutation and retains Pages validation on 
   assert.doesNotMatch(workflowStep(awardWorkflow, "Verify Pages serves the committed Funded Awards page"), /deploy_required/);
   assert.doesNotMatch(workflowStep(awardWorkflow, "Verify Pages serves the committed Funding Finder integration"), /deploy_required/);
   assert.equal(
-    awardWorkflow.indexOf("\n      - name: Deploy the committed Award Worker"),
+    awardWorkflow.indexOf("\n      - name: Configure the Award abuse-control identity secret"),
     awardWorkflow.indexOf("\n      - name:", awardWorkflow.indexOf("Reconfirm protected main immediately before Award Worker mutation")),
+  );
+  assert.equal(
+    awardWorkflow.indexOf("\n      - name: Deploy the committed Award Worker"),
+    awardWorkflow.indexOf("\n      - name:", awardWorkflow.indexOf("Configure the Award abuse-control identity secret")),
   );
 });
 

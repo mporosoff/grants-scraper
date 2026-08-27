@@ -25,6 +25,15 @@ import {
   MAX_REQUEST_BYTES,
 } from "../../workers/award-api/src/index.js";
 
+const allowRateLimits = {
+  idFromName: name => name,
+  get: () => ({
+    fetch: async () => new Response(JSON.stringify({ success: true, retry_after_seconds: 0 }), {
+      headers: { "Content-Type": "application/json" },
+    }),
+  }),
+};
+
 const root = new URL("../../", import.meta.url);
 const [
   nsfFixture, nihFixture, doeFormFixture, doeResultsPage1, doeResultsPage2,
@@ -44,12 +53,19 @@ const env = {
   AWARD_API_ENABLED: "true",
   CACHE_TTL_SECONDS: "3600",
   MAX_SOURCE_RESULTS: "25",
+  AWARD_SOURCE_RATE_LIMIT: "12",
+  ROR_SEARCH_RATE_LIMIT: "60",
+  ROR_RESOLVE_RATE_LIMIT: "20",
+  AWARD_RATE_LIMIT_SECRET: "deterministic-award-rate-limit-secret",
+  AWARD_RATE_LIMITER: allowRateLimits,
 };
 
-function workerRequest(body, { origin = "http://localhost:8000", path = "/awards/search", method = "POST" } = {}) {
+function workerRequest(body, {
+  origin = "http://localhost:8000", path = "/awards/search", method = "POST", headers = {},
+} = {}) {
   return new Request(`https://award.test${path}`, {
     method,
-    headers: { Origin: origin, "Content-Type": "application/json" },
+    headers: { Origin: origin, "Content-Type": "application/json", ...headers },
     body: method === "POST" ? JSON.stringify(body) : undefined,
   });
 }
@@ -410,6 +426,14 @@ test("Worker validates bounded public requests and exposes no credential require
       NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
       NIH: { upstream_pages: 12, upstream_page_size: 100 },
       DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+    },
+    abuse_control: {
+      ready: true,
+      provider: "cloudflare-durable-object",
+      storage: "sqlite",
+      client_identity: "hmac-derived",
+      window_seconds: 60,
+      limits: { award_source: 12, ror_search: 60, ror_resolution: 20 },
     },
     cache_ttl_seconds: 3600,
     credentials_required: false,
