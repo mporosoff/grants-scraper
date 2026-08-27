@@ -320,6 +320,16 @@
         control.removeAttribute("aria-busy");
       }
     });
+    const findButton = $("find-funding");
+    if (busy) {
+      if (!findButton.hasAttribute("data-catalog-previous-label")) {
+        findButton.dataset.catalogPreviousLabel = String(findButton.textContent || "").replace(/\s+/g, " ").trim() || "Find funding";
+      }
+      findButton.innerHTML = `<span class="find-button-spinner" aria-hidden="true"></span><span class="find-button-label">Preparing catalog…</span>`;
+    } else if (findButton.hasAttribute("data-catalog-previous-label")) {
+      findButton.innerHTML = `<span class="find-button-label">${escapeHtml(findButton.dataset.catalogPreviousLabel)}</span>`;
+      delete findButton.dataset.catalogPreviousLabel;
+    }
   }
 
   function metadataDateText(value) {
@@ -342,10 +352,10 @@
     pill.classList.remove("stale");
     pill.setAttribute(
       "aria-label",
-      `${recordCount.toLocaleString()} catalog records; updated ${dateText}; full catalog loads when needed`,
+      `${recordCount.toLocaleString()} catalog records; updated ${dateText}`,
     );
     pill.innerHTML = `<span class="status-dot" aria-hidden="true"></span>
-      <span class="catalog-pill-copy"><strong>${recordCount.toLocaleString()} records</strong><small>loads when needed</small></span>`;
+      <span class="catalog-pill-copy"><strong>${recordCount.toLocaleString()} records</strong><small>updated ${escapeHtml(dateText)}</small></span>`;
     $("catalog-detail").textContent =
       `${recordCount.toLocaleString()} published catalog records (${Number(counts.posted || 0).toLocaleString()} open, ${Number(counts.forecasted || 0).toLocaleString()} forecasted). Updated ${dateText}. The full catalog loads only when a search or catalog action needs it.`;
   }
@@ -357,9 +367,6 @@
       $("catalog-error").classList.add("hidden");
       $("catalog-error-message").textContent = "";
       $("search-status").textContent = "Preparing funding catalog…";
-      $("catalog-pill").setAttribute("aria-label", "Preparing funding catalog");
-      $("catalog-pill").innerHTML = `<span class="status-dot" aria-hidden="true"></span>
-        <span class="catalog-pill-copy"><strong>Catalog</strong><small>preparing…</small></span>`;
       return;
     }
     if (snapshot.state === "failed") {

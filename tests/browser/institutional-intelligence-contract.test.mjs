@@ -257,14 +257,18 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /Structured award search and institution resolution do not require an AI key/);
   assert.match(page, /assets\/institutional-intelligence\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
+  assert.doesNotMatch(page, /Optional institution identity:/);
   assert.match(page, /<select id="ii-investigators"[^>]*aria-labelledby="ii-investigators-heading"/);
   assert.match(page, /<select id="ii-programs"[^>]*aria-labelledby="ii-programs-heading"/);
   assert.doesNotMatch(page, /class="ii-facet-list"/);
   assert.doesNotMatch(appSource, /data-ii-pi=|data-ii-program=/);
   assert.match(appSource, /SOURCE_LIMITS = Object\.freeze\(\{ NSF: 25, NIH: 25, DOE: 10 \}\)/);
   assert.match(appSource, /Promise\.allSettled/);
-  assert.match(appSource, /data-ii-load-source/);
-  assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading,[\s\S]*\.ii-registry-note \{[\s\S]*display: none/);
+  assert.match(appSource, /data-ii-load-additional/);
+  assert.doesNotMatch(appSource, /data-ii-load-source/);
+  assert.match(page, /id="ii-card-pagination"[\s\S]*Previous 10 awards[\s\S]*Next 10 awards/);
+  assert.match(appSource, /AWARDS_PER_PAGE = 10/);
+  assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading \{[\s\S]*display: none/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
   assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
@@ -292,4 +296,5 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   );
   assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\{ allowNarrative: true \}\)/);
+  assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*askQuestion\(\)/);
 });

@@ -354,7 +354,8 @@ export async function openFundingFinderShell(page, { path = "/match_explorer.htm
   await page.goto(path);
   await expect(page.locator("#query")).toBeVisible();
   await expect(page.locator("#query")).toBeEnabled();
-  await expect(page.locator("#catalog-pill")).toContainText("loads when needed");
+  await expect(page.locator("#catalog-pill")).toContainText("updated");
+  await expect(page.locator("#catalog-pill")).not.toContainText("loads when needed");
   await expect.poll(() => page.evaluate(() => (
     performance.getEntriesByName("funding-shell-ready", "mark").length
   ))).toBe(1);

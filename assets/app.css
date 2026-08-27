@@ -3329,10 +3329,35 @@ footer p {
 }
 
 .find-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-width: 210px;
   min-height: 52px;
   padding-inline: 28px;
   font-size: 1rem;
+}
+
+.find-button-spinner {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  border: 2px solid rgba(255, 255, 255, .45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: find-button-spin .8s linear infinite;
+}
+
+@keyframes find-button-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .find-button-spinner {
+    animation: none;
+    border-color: rgba(255, 255, 255, .7);
+  }
 }
 
 .launch-actions > span {

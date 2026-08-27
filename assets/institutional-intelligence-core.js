@@ -456,14 +456,33 @@
   }
 
   function questionEvidencePack(results, { recordLimit = QUESTION_EVIDENCE_LIMIT } = {}) {
-    const awards = [];
-    const seen = new Set();
-    let totalBytes = 2;
-    let truncated = false;
+    const unique = [];
+    const uniqueIds = new Set();
     for (const award of Array.isArray(results) ? results : []) {
       const id = evidenceId(award);
-      if (!/^(?:NSF|NIH|DOE):.+/.test(id) || seen.has(id)) continue;
-      seen.add(id);
+      if (!/^(?:NSF|NIH|DOE):.+/.test(id) || uniqueIds.has(id)) continue;
+      uniqueIds.add(id);
+      unique.push(award);
+    }
+    const bySource = new Map(SOURCE_NAMES.map(source => [source, []]));
+    for (const award of unique) bySource.get(clean(award?.source, 10).toUpperCase())?.push(award);
+    const balanced = [];
+    for (let index = 0; balanced.length < unique.length; index += 1) {
+      let added = false;
+      for (const source of SOURCE_NAMES) {
+        const award = bySource.get(source)?.[index];
+        if (!award) continue;
+        balanced.push(award);
+        added = true;
+      }
+      if (!added) break;
+    }
+    const awards = [];
+    let totalBytes = 2;
+    let truncated = false;
+    const limit = Math.min(QUESTION_EVIDENCE_LIMIT, Math.max(1, Number(recordLimit) || QUESTION_EVIDENCE_LIMIT));
+    for (const award of balanced) {
+      const id = evidenceId(award);
       const record = {
         evidence_id: id,
         source: clean(award?.source, 10).toUpperCase(),
@@ -476,15 +495,18 @@
         abstract_excerpt: clean(award?.abstract, QUESTION_ABSTRACT_LIMIT),
       };
       const bytes = JSON.stringify(record).length + (awards.length ? 1 : 0);
-      if (awards.length >= Math.min(QUESTION_EVIDENCE_LIMIT, Math.max(1, Number(recordLimit) || QUESTION_EVIDENCE_LIMIT))
-        || totalBytes + bytes > QUESTION_PAYLOAD_LIMIT) {
+      if (awards.length >= limit) {
         truncated = true;
         break;
+      }
+      if (totalBytes + bytes > QUESTION_PAYLOAD_LIMIT) {
+        truncated = true;
+        continue;
       }
       awards.push(record);
       totalBytes += bytes;
     }
-    if (awards.length < seen.size || awards.length < (Array.isArray(results) ? new Set(results.map(evidenceId)).size : 0)) truncated = true;
+    if (awards.length < unique.length) truncated = true;
     return {
       awards,
       truncated,

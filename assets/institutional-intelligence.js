@@ -22,7 +22,9 @@
     payload: null,
     sourcePages: new Map(),
     loadingSource: "",
+    lastAdditionalSource: "",
     aggregate: null,
+    awardPage: 0,
     submittedState: null,
     investigatorGroups: new Map(),
     programGroups: new Map(),
@@ -31,6 +33,7 @@
     answering: false,
   };
   const SOURCE_LIMITS = Object.freeze({ NSF: 25, NIH: 25, DOE: 10 });
+  const AWARDS_PER_PAGE = 10;
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -328,7 +331,7 @@
       : `<li>${identity} · Email not listed</li>`;
   }
 
-  function awardCard(award) {
+  function awardCard(award, { hidden = false } = {}) {
     const source = clean(award?.source, 10) || "Source";
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
@@ -343,7 +346,7 @@
     const contacts = [...investigatorRecords, ...programContacts]
       .map(person => contactLine(person, source, officialUrl))
       .join("");
-    return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}">
+    return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(core.evidenceId(award))}" tabindex="-1"${hidden ? " hidden" : ""}>
       <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(year)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.join(", "))}` : ""}</p>
@@ -370,10 +373,8 @@
   }
 
   function syncPaginationControls(busy = false) {
-    for (const button of $("ii-load-more-actions").querySelectorAll("[data-ii-load-source]")) {
-      const source = button.dataset.iiLoadSource;
-      button.disabled = busy || state.loadingSource === source;
-    }
+    const button = $("ii-load-more-actions").querySelector("[data-ii-load-additional]");
+    if (button) button.disabled = busy || Boolean(state.loadingSource);
   }
 
   function combinedPayload() {
@@ -420,17 +421,63 @@
     }
   }
 
+  function renderAwardPage({ focus = false } = {}) {
+    const aggregate = state.aggregate;
+    const count = aggregate?.awards?.length || 0;
+    const pageCount = Math.max(1, Math.ceil(count / AWARDS_PER_PAGE));
+    state.awardPage = Math.max(0, Math.min(state.awardPage, pageCount - 1));
+    const start = state.awardPage * AWARDS_PER_PAGE;
+    const end = Math.min(start + AWARDS_PER_PAGE, count);
+    const cards = [...$("ii-awards").querySelectorAll(".ii-award-card")];
+    cards.forEach((card, index) => { card.hidden = index < start || index >= end; });
+    const pagination = $("ii-card-pagination");
+    pagination.classList.toggle("hidden", count <= AWARDS_PER_PAGE);
+    $("ii-card-page-label").textContent = count
+      ? `Awards ${start + 1}–${end} of ${count.toLocaleString()} · Page ${state.awardPage + 1} of ${pageCount}`
+      : "No awards to page.";
+    $("ii-card-previous").disabled = state.awardPage === 0;
+    $("ii-card-next").disabled = state.awardPage >= pageCount - 1;
+    if (focus && cards[start]) {
+      cards[start].focus({ preventScroll: true });
+      cards[start].scrollIntoView({ block: "start" });
+    }
+  }
+
+  function renderAwardCards(aggregate) {
+    const start = state.awardPage * AWARDS_PER_PAGE;
+    $("ii-awards").innerHTML = aggregate.awards.length
+      ? aggregate.awards.map((award, index) => awardCard(award, {
+          hidden: index < start || index >= start + AWARDS_PER_PAGE,
+        })).join("")
+      : "<p>No normalized public award records matched these filters.</p>";
+    renderAwardPage();
+  }
+
+  function additionalPages() {
+    return [...state.sourcePages.values()].filter(page => page.hasMore || page.error);
+  }
+
+  function nextAdditionalSource() {
+    const pages = [...state.sourcePages.values()];
+    if (!pages.length) return "";
+    const previous = pages.findIndex(page => page.source === state.lastAdditionalSource);
+    for (let step = 1; step <= pages.length; step += 1) {
+      const page = pages[(previous + step + pages.length) % pages.length];
+      if (page.hasMore || page.error) return page.source;
+    }
+    return "";
+  }
+
   function renderLoadMore(aggregate) {
     const pages = [...state.sourcePages.values()];
-    const available = pages.filter(page => page.hasMore);
-    const retryable = pages.filter(page => page.error);
-    const bounded = pages.filter(page => page.meta?.safety_bound_reached === true).map(page => page.source);
-    const actions = [...available, ...retryable.filter(page => !available.includes(page))];
-    $("ii-pagination").classList.toggle("hidden", actions.length === 0);
+    const actions = additionalPages();
+    $("ii-pagination").classList.toggle("hidden", pages.length === 0);
     $("ii-page-label").textContent = actions.length
-      ? `${aggregate.project_count.toLocaleString()} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded. Additional source pages are available from ${available.map(page => page.source).join(", ") || "the source that could not be reached"}.${bounded.length ? ` The upstream scan bound was reached for ${bounded.join(", ")}.` : ""}`
-      : `${aggregate.project_count.toLocaleString()} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded in this view.${bounded.length ? ` The upstream scan bound was reached for ${bounded.join(", ")}.` : ""}`;
-    $("ii-load-more-actions").innerHTML = actions.map(page => `<button class="button secondary" type="button" data-ii-load-source="${escapeAttribute(page.source)}">${page.error ? "Retry" : "Load more"} ${escapeHtml(page.source)}</button>`).join("");
+      ? ""
+      : `${aggregate.project_count.toLocaleString()} normalized award${aggregate.project_count === 1 ? "" : "s"} loaded. All available awards for this search are loaded.`;
+    $("ii-load-more-actions").innerHTML = actions.length
+      ? '<button class="button secondary" type="button" data-ii-load-additional>Load additional awards</button>'
+      : "";
     syncPaginationControls();
   }
 
@@ -464,6 +511,86 @@
     return parts.join(" ");
   }
 
+  function answerTable({ label, headers, rows }) {
+    if (!rows.length) return "";
+    return `<div class="ii-answer-table-wrap" role="region" aria-label="${escapeAttribute(label)}" tabindex="0">
+      <table class="ii-answer-table">
+        <caption>${escapeHtml(label)}</caption>
+        <thead><tr>${headers.map(header => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead>
+        <tbody>${rows.join("")}</tbody>
+      </table>
+    </div>`;
+  }
+
+  function firstEvidenceForProgram(aggregate, key) {
+    const award = aggregate.awards.find(candidate => core.programDescriptors(candidate).some(program => program.key === key));
+    return award ? core.evidenceId(award) : "";
+  }
+
+  function renderDirectAnswer(snapshot, narrative) {
+    const aggregate = snapshot.aggregate;
+    const intent = snapshot.deterministic.intent;
+    let summary = snapshot.deterministic.answer;
+    let structured = "";
+    if (intent === "investigators") {
+      summary = aggregate.investigators.length
+        ? `${aggregate.investigators.length.toLocaleString()} investigator ${aggregate.investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} loaded award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No investigator names appear in the loaded matching awards.";
+      structured = answerTable({
+        label: "Investigators in the answer evidence",
+        headers: ["Investigator", "Awards"],
+        rows: aggregate.investigators.map(person => `<tr><th scope="row">${escapeHtml(person.name)}</th><td>${person.projects.toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "programs") {
+      summary = aggregate.programs.length
+        ? `${aggregate.programs.length.toLocaleString()} program${aggregate.programs.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} loaded award${aggregate.project_count === 1 ? "" : "s"}. Choose a program to move to a supporting award card.`
+        : "No program labels appear in the loaded matching awards.";
+      structured = answerTable({
+        label: "Programs in the answer evidence",
+        headers: ["Program", "Awards"],
+        rows: aggregate.programs.map(program => {
+          const evidence = firstEvidenceForProgram(aggregate, program.key);
+          const label = evidence
+            ? `<a href="#${escapeAttribute(evidenceDomId(evidence))}" data-ii-evidence-link="${escapeAttribute(evidence)}">${escapeHtml(program.label)}</a>`
+            : escapeHtml(program.label);
+          return `<tr><th scope="row">${label}</th><td>${program.projects.toLocaleString()}</td></tr>`;
+        }),
+      });
+    } else if (intent === "years") {
+      const years = new Map();
+      for (const award of aggregate.awards) {
+        const year = awardProduct.awardYear(award?.award_year);
+        if (year !== null) years.set(year, (years.get(year) || 0) + 1);
+      }
+      structured = answerTable({
+        label: "Award years in the answer evidence",
+        headers: ["Year", "Awards"],
+        rows: [...years.entries()].sort(([left], [right]) => right - left)
+          .map(([year, count]) => `<tr><th scope="row">${year}</th><td>${count.toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "awards") {
+      summary = aggregate.project_count
+        ? `${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? " is" : "s are"} loaded. Use the concise supporting evidence below or browse the paged award cards.`
+        : "No matching awards are loaded.";
+    }
+    const claims = narrative.length
+      ? `<ul class="ii-answer-claims">${narrative.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" data-ii-evidence-link="${escapeAttribute(id)}" aria-label="Supporting award ${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
+      : "";
+    return `<p class="ii-answer-summary">${escapeHtml(summary)}</p>${structured}${claims}`;
+  }
+
+  function focusAwardEvidence(evidenceId) {
+    const index = state.aggregate?.awards?.findIndex(award => core.evidenceId(award) === evidenceId) ?? -1;
+    if (index < 0) return;
+    state.awardPage = Math.floor(index / AWARDS_PER_PAGE);
+    renderAwardPage();
+    requestAnimationFrame(() => {
+      const card = $(evidenceDomId(evidenceId));
+      card?.focus({ preventScroll: true });
+      card?.scrollIntoView({ block: "start" });
+    });
+  }
+
   function renderQuestionAnswer() {
     const container = $("ii-question-answer");
     const snapshot = state.question?.snapshot;
@@ -474,20 +601,21 @@
     container.classList.remove("hidden");
     $("ii-answered-question").textContent = state.question.question;
     const narrative = snapshot.narrative?.claims || [];
-    $("ii-direct-answer").innerHTML = [
-      `<p>${escapeHtml(snapshot.deterministic.answer)}</p>`,
-      narrative.length
-        ? `<ul>${narrative.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" aria-label="Supporting award ${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
-        : "",
-    ].join("");
-    const knownEvidence = new Map(snapshot.evidencePack.awards.map(item => [item.evidence_id, item]));
-    const cited = [...new Set([
+    $("ii-direct-answer").innerHTML = renderDirectAnswer(snapshot, narrative);
+    const citedIds = new Set([
       ...snapshot.deterministic.evidence_ids,
       ...narrative.flatMap(claim => claim.evidence_ids),
-    ])].map(id => knownEvidence.get(id)).filter(Boolean);
+    ]);
+    const cited = snapshot.evidencePack.awards.filter(item => citedIds.has(item.evidence_id));
+    const evidenceScope = snapshot.evidencePack.truncated
+      ? `Showing ${cited.length.toLocaleString()} of ${snapshot.aggregate.project_count.toLocaleString()} loaded supporting awards, balanced across the loaded sources.`
+      : `Showing all ${cited.length.toLocaleString()} loaded supporting award${cited.length === 1 ? "" : "s"}.`;
     $("ii-answer-evidence").innerHTML = cited.length
-      ? `<strong>Supporting award evidence:</strong><ul>${cited.map(item => `<li><a href="#${escapeAttribute(evidenceDomId(item.evidence_id))}">${escapeHtml(item.evidence_id)}</a> · ${escapeHtml(item.title || "Title not listed")}</li>`).join("")}</ul>`
-      : "<strong>Supporting award evidence:</strong> No matching award record is loaded.";
+      ? `<h4>Supporting award evidence</h4><p>${escapeHtml(evidenceScope)}</p><ul class="ii-evidence-list">${cited.map(item => `<li>
+          <div class="ii-evidence-heading"><a href="#${escapeAttribute(evidenceDomId(item.evidence_id))}" data-ii-evidence-link="${escapeAttribute(item.evidence_id)}">${escapeHtml(item.evidence_id)}</a><span><strong>Investigator${item.investigators.length === 1 ? "" : "s"}:</strong> ${escapeHtml(item.investigators.join(", ") || "Not listed")}</span></div>
+          <span class="ii-evidence-title">${escapeHtml(item.title || "Title not listed")}</span>
+        </li>`).join("")}</ul>`
+      : "<h4>Supporting award evidence</h4><p>No matching award record is loaded.</p>";
     $("ii-answer-limitations").textContent = answerLimitations(snapshot);
     $("ii-update-answer").classList.toggle("hidden", snapshot.signature === answerEvidenceSignature());
   }
@@ -498,7 +626,7 @@
     const selected = aggregate.investigators.find(item => item.identity_key === state.selectedInvestigator.identity_key)
       || aggregate.investigators.find(item => sameInvestigatorIdentity(selectedName, core.normalizedInvestigatorName(item.name)));
     $("ii-investigator-variants").textContent = selected
-      ? `${selected.name} represents ${selected.projects} currently loaded award${selected.projects === 1 ? "" : "s"}. Source-published variants: ${selected.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`
+      ? `${selected.name} · ${selected.projects} award${selected.projects === 1 ? "" : "s"}. Source-published variants: ${selected.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`
       : `No returned investigator identity safely matched ${state.selectedInvestigator.name}; unrelated common-name records were excluded.`;
   }
 
@@ -576,13 +704,13 @@
       : clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300);
     $("ii-output").classList.remove("hidden");
     $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
-    const moreSources = (payload.sources || []).filter(source => source.status === "ok" && source.has_more === true).map(source => source.source);
-    const boundedSources = (payload.sources || []).filter(source => source.status === "ok" && source.safety_bound_reached === true).map(source => source.source);
     const submitted = state.submittedState || submittedPage?.request?.criteria || {};
+    const hasMore = (payload.sources || []).some(source => source.status === "ok" && source.has_more === true);
+    const bounded = (payload.sources || []).some(source => source.status === "ok" && source.safety_bound_reached === true);
     const requestedYears = submitted.year_start && submitted.year_end
       ? `${submitted.year_start}–${submitted.year_end}`
       : submitted.year_start ? `${submitted.year_start} onward` : submitted.year_end ? `through ${submitted.year_end}` : "all available years";
-    $("ii-result-scope").textContent = `Active requested year range: ${requestedYears}. Summaries cover ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? "" : "s"} loaded across source-specific pages${moreSources.length ? `; load more from ${moreSources.join(", ")}` : ""}${boundedSources.length ? `; upstream scan bound reached for ${boundedSources.join(", ")}` : ""}.`;
+    $("ii-result-scope").textContent = `Requested award years: ${requestedYears}. The summary and cards describe ${aggregate.project_count} normalized award${aggregate.project_count === 1 ? "" : "s"} currently loaded for that submitted search.${hasMore ? " Additional awards remain available." : ""}${bounded ? " A bounded upstream scan limit was reached." : ""}`;
     const years = aggregate.year_start
       ? aggregate.year_start === aggregate.year_end ? String(aggregate.year_start) : `${aggregate.year_start}–${aggregate.year_end}`
       : "Not listed";
@@ -590,14 +718,12 @@
       [aggregate.project_count, "Projects loaded"],
       [aggregate.investigator_count, "Investigator identities in loaded results"],
       [aggregate.program_count, "Distinct programs in loaded results"],
-      [years, "Loaded award years"],
+      [years, "Years represented in loaded awards"],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
     renderFacetSelect($("ii-investigators"), aggregate.investigators, { kind: "investigator" });
     renderSelectedInvestigatorDetail(aggregate);
     renderFacetSelect($("ii-programs"), aggregate.programs, { kind: "program" });
-    $("ii-awards").innerHTML = aggregate.awards.length
-      ? aggregate.awards.map(awardCard).join("")
-      : "<p>No normalized public award records matched these filters.</p>";
+    renderAwardCards(aggregate);
     renderSourceStatus(payload.sources);
     renderLoadMore(aggregate);
     renderQuestionAnswer();
@@ -714,6 +840,8 @@
           : failedSourcePage(requestBody, result.reason);
         return [page.source, page];
       }));
+      state.awardPage = 0;
+      state.lastAdditionalSource = "";
       state.payload = combinedPayload();
       const aggregate = renderAggregate(state.payload);
       outcome = { payload: state.payload, aggregate };
@@ -844,6 +972,8 @@
         }, SOURCE_LIMITS[source]));
         return [source, page];
       }));
+      state.awardPage = 0;
+      state.lastAdditionalSource = "";
       state.payload = combinedPayload();
       const aggregate = renderAggregate(state.payload);
       setLoadedStatus(state.payload, aggregate);
@@ -864,8 +994,9 @@
     state.searchController?.abort();
     state.searchController = new AbortController();
     state.loadingSource = source;
+    state.lastAdditionalSource = source;
     setBusy(true);
-    setStatus(`${page.error ? "Retrying" : "Loading more from"} ${source}…`);
+    setStatus("Loading additional awards…");
     try {
       const requestBody = { ...page.request, sources: [source], offset: page.nextOffset };
       const next = page.investigatorIdentity
@@ -894,8 +1025,8 @@
         state.payload = combinedPayload();
         const aggregate = renderAggregate(state.payload);
         setStatus(next.error
-          ? `${source} retained ${page.results.length} safely matched project${page.results.length === 1 ? "" : "s"}, but ${next.meta.health?.investigator_variant_failures || 1} investigator spelling request${next.meta.health?.investigator_variant_failures === 1 ? "" : "s"} could not be completed. Retry ${source} to fill the same normalized page.`
-          : `${added.length} additional ${source} project${added.length === 1 ? "" : "s"} loaded. ${aggregate.project_count} normalized project${aggregate.project_count === 1 ? " is" : "s are"} now shown.`, Boolean(next.error));
+          ? `${aggregate.project_count} safely matched award${aggregate.project_count === 1 ? " remains" : "s remain"} available, but part of the next page could not be completed. Use Load additional awards to retry without losing the current results.`
+          : `${added.length} additional award${added.length === 1 ? "" : "s"} loaded. ${aggregate.project_count} normalized award${aggregate.project_count === 1 ? " is" : "s are"} now available.`, Boolean(next.error));
         return;
       }
       state.sourcePages.set(source, page);
@@ -905,7 +1036,7 @@
     } catch (error) {
       if (sequence !== state.searchSequence) return;
       if (error?.name === "AbortError") {
-        setStatus(`Loading more ${source} projects timed out. Previously loaded projects remain visible.`, true);
+        setStatus("Loading additional awards timed out. Previously loaded awards remain available.", true);
       } else {
         page.error = {
           source,
@@ -916,7 +1047,7 @@
         state.sourcePages.set(source, page);
         state.payload = combinedPayload();
         renderAggregate(state.payload);
-        setStatus(`${source} could not load another page. Previously loaded projects remain visible.`, true);
+        setStatus("Additional awards could not be loaded. Previously loaded awards remain available; use Load additional awards to retry.", true);
       }
     } finally {
       if (sequence === state.searchSequence) {
@@ -924,6 +1055,12 @@
         setBusy(false);
       }
     }
+  }
+
+  function loadAdditionalAwards() {
+    const source = nextAdditionalSource();
+    if (source) return loadMoreSource(source);
+    return Promise.resolve();
   }
 
   function clearSearch({ historyMode = "push" } = {}) {
@@ -939,12 +1076,15 @@
     state.question = null;
     state.sourcePages.clear();
     state.loadingSource = "";
+    state.lastAdditionalSource = "";
+    state.awardPage = 0;
     applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", offset: 0 });
     $("ii-output").classList.add("hidden");
     $("ii-source-status").classList.add("hidden");
     $("ii-question-plan").classList.add("hidden");
     $("ii-question-answer").classList.add("hidden");
     $("ii-pagination").classList.add("hidden");
+    $("ii-card-pagination").classList.add("hidden");
     setStatus("Structured award search and institution resolution do not require an AI key.");
     syncUrl({ open: true }, historyMode);
   }
@@ -1162,7 +1302,7 @@
     $("ii-investigators").addEventListener("change", event => {
       const group = state.investigatorGroups.get(event.currentTarget.value);
       if (!group) return;
-      $("ii-investigator-variants").textContent = `${group.name} represents ${group.projects} currently loaded award${group.projects === 1 ? "" : "s"}. Source-published variants: ${group.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`;
+      $("ii-investigator-variants").textContent = `${group.name} · ${group.projects} award${group.projects === 1 ? "" : "s"}. Source-published variants: ${group.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`;
       runInvestigatorSearch(group);
     });
     $("ii-programs").addEventListener("change", event => {
@@ -1180,12 +1320,28 @@
       else runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, searchState: next });
     });
     $("ii-load-more-actions").addEventListener("click", event => {
-      const button = event.target.closest("[data-ii-load-source]");
-      if (button) loadMoreSource(button.dataset.iiLoadSource);
+      if (event.target.closest("[data-ii-load-additional]")) loadAdditionalAwards();
+    });
+    $("ii-card-pagination").addEventListener("click", event => {
+      const button = event.target.closest("[data-ii-card-page]");
+      if (!button) return;
+      state.awardPage += button.dataset.iiCardPage === "next" ? 1 : -1;
+      renderAwardPage({ focus: true });
+    });
+    $("ii-question-answer").addEventListener("click", event => {
+      const link = event.target.closest("[data-ii-evidence-link]");
+      if (!link) return;
+      event.preventDefault();
+      focusAwardEvidence(link.dataset.iiEvidenceLink);
     });
     $("ii-provider").addEventListener("change", () => refreshProvider({ preferMain: false }));
     $("ii-save-key").addEventListener("click", saveSharedKey);
     $("ii-ask-button").addEventListener("click", askQuestion);
+    $("ii-question").addEventListener("keydown", event => {
+      if (event.key !== "Enter" || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
+      event.preventDefault();
+      if (!$("ii-ask-button").disabled) askQuestion();
+    });
     $("ii-update-answer").addEventListener("click", () => refreshQuestionAnswer({ allowNarrative: true }));
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", () => {
@@ -1197,6 +1353,8 @@
       state.submittedState = null;
       state.sourcePages.clear();
       state.loadingSource = "";
+      state.lastAdditionalSource = "";
+      state.awardPage = 0;
       if (hasSearchState(restored) && !params.get("opportunity")) {
         if (restored.pi_identity && state.selectedInvestigator) runInvestigatorSearch(state.selectedInvestigator, { historyMode: "replace", focusResults: false });
         else runSearch({ historyMode: "replace", resolveInstitution: false, offset: restored.offset });
@@ -1204,6 +1362,7 @@
         $("ii-output").classList.add("hidden");
         $("ii-source-status").classList.add("hidden");
         $("ii-pagination").classList.add("hidden");
+        $("ii-card-pagination").classList.add("hidden");
         setStatus("Structured award search and institution resolution do not require an AI key.");
       }
     });

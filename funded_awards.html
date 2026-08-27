@@ -29,11 +29,11 @@
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/app.css?v=ux-followup-20260826">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=help-alerts-20260825">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=phase3-identity-evidence-20260826">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=ux-followup-20260826">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -96,7 +96,6 @@
               <h2>Find funded projects and understand the result set</h2>
               <p>Search by institution, topic, program, investigator, program officer, agency, or year. The same normalized records power factual counts, investigator and program drill-downs, and the underlying compact project cards.</p>
             </div>
-            <p class="ii-registry-note"><strong>Optional institution identity:</strong> autocomplete uses the open Research Organization Registry (ROR), including aliases and acronyms such as MIT, Caltech, UVA, RIT, and UCLA. Award queries preserve canonical and source-specific identities.</p>
           </div>
 
           <form id="ii-form" class="ii-form" role="search" aria-label="Search funded awards">
@@ -130,14 +129,15 @@
               <label>Program officer
                 <input id="ii-program-officer" type="search" autocomplete="off" placeholder="Name as listed by sponsor">
               </label>
-              <label>From year
-                <input id="ii-year-start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2019">
+              <label>From year <span class="ii-optional">Optional</span>
+                <input id="ii-year-start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="Any" aria-describedby="ii-year-help">
               </label>
-              <label>Through year
-                <input id="ii-year-end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="2026">
+              <label>Through year <span class="ii-optional">Optional</span>
+                <input id="ii-year-end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="Any" aria-describedby="ii-year-help">
               </label>
             </div>
             <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps only to the published PAMS organization identity SC-32.</p>
+            <p class="ii-program-help" id="ii-year-help">Leave both year fields blank to search all available years. Edited filters apply after you choose Search funded awards.</p>
             <div class="ii-actions">
               <button class="button primary" id="ii-search" type="submit">Search funded awards</button>
               <button class="text-button" id="ii-clear" type="button">Clear search</button>
@@ -214,6 +214,13 @@
               </section>
             </div>
             <div class="ii-awards" id="ii-awards" aria-live="polite"></div>
+            <nav class="ii-card-pagination hidden" id="ii-card-pagination" aria-label="Award result pages">
+              <p id="ii-card-page-label" aria-live="polite"></p>
+              <div class="ii-card-page-actions">
+                <button class="button secondary" id="ii-card-previous" type="button" data-ii-card-page="previous">Previous 10 awards</button>
+                <button class="button secondary" id="ii-card-next" type="button" data-ii-card-page="next">Next 10 awards</button>
+              </div>
+            </nav>
             <nav class="ii-pagination hidden" id="ii-pagination" aria-label="Load additional funded awards">
               <p id="ii-page-label" aria-live="polite"></p>
               <div class="ii-load-more-actions" id="ii-load-more-actions"></div>
@@ -314,10 +321,10 @@
   <script src="./assets/alerts.js?v=search-alerts-20260825"></script>
   <script src="./assets/award-api-config.js?v=phase4-doe-awards"></script>
   <script src="./assets/funded-awards-core.js?v=phase3-normalized-paging-20260826"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=phase3-identity-evidence-20260826"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=ux-followup-20260826"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/funded-awards.js?v=phase3-normalized-paging-20260826"></script>
-  <script src="./assets/institutional-intelligence.js?v=phase3-identity-evidence-20260826"></script>
+  <script src="./assets/institutional-intelligence.js?v=ux-followup-20260826"></script>
 </body>
 </html>

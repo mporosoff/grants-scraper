@@ -231,6 +231,10 @@ test("two rapid searches share one catalog execution and initialization, then pr
   });
   await expect.poll(() => scriptRequests).toBe(1);
   await expect(page.locator("#search-status")).toHaveText("Preparing funding catalog…");
+  await expect(page.locator("#find-funding")).toContainText("Preparing catalog…");
+  await expect(page.locator("#find-funding .find-button-spinner")).toBeVisible();
+  await expect(page.locator("#catalog-pill")).toContainText("updated");
+  await expect(page.locator("#catalog-pill")).not.toContainText(/preparing|loads when needed/i);
   await expect(page.locator("#query")).toHaveValue("carbon capture");
   await expect(page.locator("#research-profile")).toHaveValue("Catalysis and carbon dioxide conversion");
   await expect(page.locator("#status-forecasted")).not.toBeChecked();
@@ -239,6 +243,8 @@ test("two rapid searches share one catalog execution and initialization, then pr
   await page.keyboard.press("Escape");
   gate.resolve();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
+  await expect(page.locator("#find-funding")).toHaveText("Find funding");
+  await expect(page.locator("#find-funding .find-button-spinner")).toHaveCount(0);
   await waitForHybridSettled(page);
   const result = await page.evaluate(() => ({
     ids: [...document.querySelectorAll("#results .result-card")]
