@@ -15,6 +15,7 @@ import openpyxl
 from scripts.sources.adapters.jhu_fellowships import (
     JHUFellowshipsAdapter,
     MIN_ROWS_PER_AUDIENCE,
+    PINNED_WORKBOOK_MAX_AGE_DAYS,
     SHEETS,
 )
 from scripts.sources.adapters.vpr_email import VPREmailAdapter
@@ -59,7 +60,7 @@ def jhu_workbook_bytes(
 
 class JHUFellowshipsTests(unittest.TestCase):
     def test_fetch_uses_official_fallbacks_and_requires_every_audience(self):
-        adapter = JHUFellowshipsAdapter()
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 27))
 
         def fake_get(url, **_kwargs):
             if "/funding-opportunities/" in url:
@@ -93,7 +94,7 @@ class JHUFellowshipsTests(unittest.TestCase):
 
     def test_under_construction_pages_use_bounded_official_direct_workbooks(self):
         page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
-        adapter = JHUFellowshipsAdapter()
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 8, 27))
 
         def fake_get(url, **_kwargs):
             if "/funding-opportunities/" in url:
@@ -122,6 +123,63 @@ class JHUFellowshipsTests(unittest.TestCase):
                 "faculty": "official_direct",
             },
         )
+        self.assertEqual(
+            adapter.diagnostics["source_state"],
+            "bounded_official_snapshot",
+        )
+        self.assertEqual(adapter.diagnostics["source_snapshot_at"], "2026-07-01")
+        self.assertEqual(adapter.diagnostics["source_snapshot_age_days"], 57)
+        self.assertEqual(
+            adapter.diagnostics["source_snapshot_max_age_days"],
+            PINNED_WORKBOOK_MAX_AGE_DAYS,
+        )
+
+    def test_pinned_workbooks_fail_closed_after_the_snapshot_age_bound(self):
+        page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
+        adapter = JHUFellowshipsAdapter(as_of=date(2026, 9, 2))
+
+        def fake_get(url, **_kwargs):
+            if "/funding-opportunities/" in url:
+                return page
+            if "/wp-content/uploads/" in url:
+                return b"PK\x03\x04sanitized workbook"
+            raise AssertionError(f"unexpected short-link request: {url}")
+
+        with patch.object(adapter, "_get", side_effect=fake_get):
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "official fallback snapshot is 63 days old",
+            ):
+                adapter.fetch()
+
+        self.assertEqual(adapter.diagnostics["source_snapshot_age_days"], 63)
+        self.assertEqual(
+            adapter.diagnostics["failure_class"],
+            "upstream_response_change",
+        )
+        self.assertEqual(
+            adapter.diagnostics["failure_reason"],
+            "pinned_workbook_expired",
+        )
+
+    def test_new_page_discovered_workbooks_are_not_treated_as_pinned_snapshots(self):
+        current_sheet = "https://research.jhu.edu/current/current-funding.xlsx"
+        page = f'<a href="{current_sheet}">Current workbook</a>'.encode()
+        adapter = JHUFellowshipsAdapter(as_of=date(2027, 1, 1))
+
+        def fake_get(url, **_kwargs):
+            if "/funding-opportunities/" in url:
+                return page
+            if url == current_sheet:
+                return b"PK\x03\x04sanitized workbook"
+            raise AssertionError(f"unexpected fallback request: {url}")
+
+        with patch.object(adapter, "_get", side_effect=fake_get):
+            payload = adapter.fetch()
+
+        self.assertEqual(len(payload), 3)
+        self.assertEqual(adapter.diagnostics["source_state"], "live_page_workbooks")
+        self.assertEqual(adapter.diagnostics["snapshot_dates_by_audience"], {})
 
     def test_public_page_cookie_is_reused_for_official_workbook_requests(self):
         page = (FIXTURES / "jhu_funding_page_under_construction.html").read_bytes()
@@ -170,6 +228,7 @@ class JHUFellowshipsTests(unittest.TestCase):
                 "page": f"{origin}/page/{audience}",
                 "direct_sheet": f"{origin}/sheet/{audience}.xlsx",
                 "fallback_sheet": None,
+                "snapshot_date": None,
                 "applicant_types": [audience],
                 "drop_federal": False,
             }

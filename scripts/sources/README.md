@@ -128,3 +128,14 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 - **Legal hygiene:** only add public, non-licensed sources; respect `robots.txt`
   and rate limits (the HTTP client paces requests). Do not scrape SPIN/InfoEd,
   Pivot, Duke, GrantForward, or other licensed databases.
+
+### JHU RDT workbook outage compatibility
+
+JHU's graduate, postdoctoral, and early-career category pages currently expose
+an under-construction notice instead of workbook links. The adapter may use the
+official 7/1/26 JHU workbook URLs (or JHU's public short links to those files)
+for at most 62 days from their published date. These files are reported as a
+bounded source snapshot, never as a fresh live refresh. A newer workbook found
+on a category page takes precedence. Once the snapshot exceeds the bound, the
+source fails closed and the source-health summary reports
+`pinned_workbook_expired`; it does not republish rolling rows indefinitely.

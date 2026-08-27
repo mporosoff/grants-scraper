@@ -48,6 +48,13 @@ from .discoverability import augment_records
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
 CACHE_SCHEMA_VERSION = 1
+OPERATIONAL_SOURCE_EVIDENCE_KEYS = {
+    "failure_class",
+    "failure_reason",
+    "last_successful_refresh_at",
+    "retained_data_age_days",
+    "publication_decision",
+}
 
 
 # --------------------------------------------------------------------------
@@ -172,16 +179,18 @@ def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
         last_successful_record_count = previous.get("record_count")
         if last_successful_record_count is None:
             last_successful_record_count = len(previous.get("records") or [])
-    sources[result.slug] = {
+    cleared = {
         "source": result.display_name,
         "source_type": result.source_type,
         "fetched_at": None,
-        "last_successful_refresh_at": last_successful_refresh_at,
-        "last_successful_record_count": last_successful_record_count,
         "record_count": 0,
         "diagnostics": result.diagnostics,
         "records": [],
     }
+    if last_successful_refresh_at:
+        cleared["last_successful_refresh_at"] = last_successful_refresh_at
+        cleared["last_successful_record_count"] = last_successful_record_count
+    sources[result.slug] = cleared
 
 
 def resolve_live_records(results: list[AdapterResult], cache: dict,
@@ -223,22 +232,33 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                         or as_of.isoformat()
                     )
                     refreshed_records.append(refreshed)
-                refreshed_at = iso_utc(utc_now())
+                diagnostics = result.diagnostics or {}
+                source_snapshot_at = diagnostics.get("source_snapshot_at")
+                if source_snapshot_at:
+                    refreshed_at = f"{source_snapshot_at}T00:00:00Z"
+                else:
+                    refreshed_at = iso_utc(utc_now())
                 sources[slug] = {
                     "source": result.display_name,
                     "source_type": result.source_type,
                     "fetched_at": refreshed_at,
-                    "last_successful_refresh_at": refreshed_at,
-                    "last_successful_record_count": len(refreshed_records),
                     "record_count": len(refreshed_records),
                     "diagnostics": result.diagnostics,
                     "records": refreshed_records,
                 }
                 published = refreshed_records
-                status = "refreshed"
-                publication_decision = "published_fresh_records"
+                status = "recent_snapshot" if source_snapshot_at else "refreshed"
+                publication_decision = (
+                    "published_bounded_source_snapshot"
+                    if source_snapshot_at
+                    else "published_fresh_records"
+                )
                 failure_class = None
-                retained_data_age_days = 0
+                retained_data_age_days = (
+                    diagnostics.get("source_snapshot_age_days")
+                    if source_snapshot_at
+                    else 0
+                )
             else:
                 if result.retain_on_failure:
                     published = _cached_publishable(sources, slug, as_of)
@@ -431,7 +451,17 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
     diagnostics["additional_sources"] = {
         "merged_at": iso_utc(utc_now()),
         "source_record_counts": dict(sorted(source_counts.items())),
-        "lifecycle": lifecycle or [],
+        # Operational evidence belongs in the run summary/issue body. Keeping
+        # it out of the generated product artifact preserves the established
+        # catalog contract and the hermetic flag-off baseline.
+        "lifecycle": [
+            {
+                key: value
+                for key, value in source.items()
+                if key not in OPERATIONAL_SOURCE_EVIDENCE_KEYS
+            }
+            for source in (lifecycle or [])
+        ],
         "adapters": [
             {"slug": r.slug, "source": r.display_name, "source_type": r.source_type,
              "ok": r.ok, "record_count": r.record_count, "error": r.error,

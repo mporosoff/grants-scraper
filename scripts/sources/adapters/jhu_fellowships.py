@@ -51,18 +51,28 @@ SHEETS = [
      "page": "https://research.jhu.edu/rdt/funding-opportunities/graduate/",
      "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/GradFundingOpps7126.xlsx",
      "fallback_sheet": "https://bit.ly/GradFundingOpps7126",
+     "snapshot_date": "2026-07-01",
      "applicant_types": ["Graduate students"], "drop_federal": False},
     {"audience": "postdoc",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/postdoctoral/",
      "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/PostdocFundingOpps7126.xlsx",
      "fallback_sheet": "https://bit.ly/PostdocFundingOpps7126",
+     "snapshot_date": "2026-07-01",
      "applicant_types": ["Postdoctoral researchers"], "drop_federal": False},
     {"audience": "faculty",
      "page": "https://research.jhu.edu/rdt/funding-opportunities/early-career/",
      "direct_sheet": "https://research.jhu.edu/wp-content/uploads/2026/07/ECFopps7126.xlsx",
      "fallback_sheet": "https://bit.ly/ECFopps7126",
+     "snapshot_date": "2026-07-01",
      "applicant_types": ["Early-career faculty"], "drop_federal": True},
 ]
+
+# The page-published 7/1/26 workbooks are a bounded compatibility snapshot
+# while JHU's category pages are under construction. Two calendar months is
+# long enough to bridge the observed outage without presenting one fixed file
+# as a perpetually fresh source. A newer page-discovered workbook is not bound
+# by this constant.
+PINNED_WORKBOOK_MAX_AGE_DAYS = 62
 
 MIN_ROWS_PER_AUDIENCE = 50
 FETCH_ATTEMPTS = 3
@@ -310,6 +320,7 @@ class JHUFellowshipsAdapter(SourceAdapter):
         failures = []
         page_states = {}
         download_sources = {}
+        snapshot_dates = {}
         for cfg in SHEETS:
             candidates = []
             page_error = None
@@ -362,6 +373,14 @@ class JHUFellowshipsAdapter(SourceAdapter):
                         "sheet_candidate_kind": candidate_kind,
                     })
                     download_sources[cfg["audience"]] = candidate_kind
+                    if (
+                        cfg.get("snapshot_date")
+                        and candidate in {
+                            cfg.get("direct_sheet"),
+                            cfg.get("fallback_sheet"),
+                        }
+                    ):
+                        snapshot_dates[cfg["audience"]] = cfg["snapshot_date"]
                     break
                 except Exception as exc:
                     sheet_errors.append(
@@ -378,6 +397,7 @@ class JHUFellowshipsAdapter(SourceAdapter):
             "download_failures": failures,
             "page_states": page_states,
             "download_sources_by_audience": download_sources,
+            "snapshot_dates_by_audience": snapshot_dates,
         }
         if failures or len(results) != len(SHEETS):
             joined = " | ".join(failures)
@@ -391,6 +411,27 @@ class JHUFellowshipsAdapter(SourceAdapter):
                 self.diagnostics["failure_class"] = "request_network"
                 self.diagnostics["failure_reason"] = "workbook_request_failed"
             raise RuntimeError("Incomplete JHU workbook refresh: " + " | ".join(failures))
+        if snapshot_dates:
+            oldest_snapshot = min(
+                _dt.date.fromisoformat(value) for value in snapshot_dates.values()
+            )
+            snapshot_age_days = max(0, (self.as_of - oldest_snapshot).days)
+            self.diagnostics.update({
+                "source_state": "bounded_official_snapshot",
+                "source_snapshot_at": oldest_snapshot.isoformat(),
+                "source_snapshot_age_days": snapshot_age_days,
+                "source_snapshot_max_age_days": PINNED_WORKBOOK_MAX_AGE_DAYS,
+            })
+            if snapshot_age_days > PINNED_WORKBOOK_MAX_AGE_DAYS:
+                self.diagnostics["failure_class"] = "upstream_response_change"
+                self.diagnostics["failure_reason"] = "pinned_workbook_expired"
+                raise RuntimeError(
+                    "Incomplete JHU workbook refresh: official fallback snapshot "
+                    f"is {snapshot_age_days} days old (maximum "
+                    f"{PINNED_WORKBOOK_MAX_AGE_DAYS})"
+                )
+        else:
+            self.diagnostics["source_state"] = "live_page_workbooks"
         return results
 
     def _get(
