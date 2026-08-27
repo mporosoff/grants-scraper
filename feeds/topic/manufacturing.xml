@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -16,6 +16,16 @@
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363722"/>
+    <id>urn:funding-finder:grants-gov:363722</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
@@ -216,16 +226,6 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>Small Business Administration | Closes 2026-09-04 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to small businesses. Only applications from the states of Indiana, Ohio, or Virginia that have experience in managing a state-wide, regional or nationwide cybersecurity training program will be considered for funding via this announcement. Applicants must be states, state entities or designat…</summary>
-  </entry>
-  <entry>
-    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363536"/>
-    <id>urn:funding-finder:grants-gov:363536</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -524,21 +524,6 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
-    <title>INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026)</title>
-    <link href="https://www.grants.gov/search-results-detail/362036"/>
-    <id>urn:funding-finder:grants-gov:362036</id>
-    <updated>2026-04-23T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency Energy</name></author>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency Energy | Closes 2026-08-26 | This is Modification 01 to the NOFO: Inserted certain deadlines and updated dates, including the deadlines for submitting questions and Full Applications (Basic Information, Section IV.C, Section IV.D) NOFO number DE-FOA-0003624 INSPIRING GENERATIONS OF NEW INNOVATORS TO IMPACT TECHNOLOGIES IN ENERGY 2026 (IGNIITE 2026) To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to ARPA…</summary>
-  </entry>
-  <entry>
     <title>2026 Alaska Marine Education and Training Mini-Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/362034"/>
     <id>urn:funding-finder:grants-gov:362034</id>
@@ -778,5 +763,20 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
 </feed>
