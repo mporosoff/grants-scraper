@@ -12,6 +12,7 @@ import {
   classifyWorkerDeployment,
   resolveWorkerDeploymentCheckpoint,
 } from "../../tools/classify_worker_deployment.mjs";
+import { validateAlertCapabilityRotation } from "../../tools/validate_alert_capability_rotation.mjs";
 
 const root = new URL("../../", import.meta.url);
 const [awardWorkflow, alertsWorkflow] = await Promise.all([
@@ -229,8 +230,10 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /steps\.worker-inputs\.outputs\.deploy_required == 'true'/);
   const capabilityStep = workflowStep(alertsWorkflow, "Configure the Alerts capability-signing secrets");
   assert.match(capabilityStep, /secrets\.ALERT_CAPABILITY_PREVIOUS_SECRET/);
-  assert.match(capabilityStep, /deployed_key_id/);
-  assert.match(capabilityStep, /must match the currently deployed signing key before rotation/);
+  assert.match(capabilityStep, /set -euo pipefail/);
+  assert.match(capabilityStep, /curl --fail --silent --show-error --max-time 10/);
+  assert.match(capabilityStep, /validate_alert_capability_rotation\.mjs/);
+  assert.doesNotMatch(capabilityStep, /curl[^\n]*\|\| true/);
   assert.ok(
     capabilityStep.indexOf("secret put ALERT_CAPABILITY_PREVIOUS_SECRET")
       < capabilityStep.indexOf("secret put ALERT_CAPABILITY_SECRET"),
@@ -262,4 +265,31 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
     alertsWorkflow.indexOf("\n      - name:", alertsWorkflow.indexOf("Reconfirm protected main immediately before Alerts Worker mutation")),
   );
   assert.match(alertsWorkflow, /if: \$\{\{ always\(\) && steps\.worker-deploy\.outcome == 'success'/);
+});
+
+test("Alerts signing-key rotation fails closed except for the exact verified Phase 2 bootstrap", () => {
+  const current = "1".repeat(16);
+  const previous = "2".repeat(16);
+  const phase2Health = {
+    service: "available",
+    delivery_ready: true,
+    api_enabled: true,
+    schema_version: 2,
+    database_ready: true,
+    email_provider: "resend",
+    email_provider_selected: true,
+    email_provider_configured: true,
+    email_template_version: "phase2-lifecycle-20260825",
+    outbound_email_enabled: true,
+    scheduler_ready: true,
+  };
+  assert.equal(validateAlertCapabilityRotation(phase2Health, current, previous).mode, "verified-phase2-bootstrap");
+  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: current }, current, previous).mode, "verified-continuity");
+  assert.equal(validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: previous }, current, previous).mode, "verified-continuity");
+
+  assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: "3".repeat(16) }, current, previous), /must match/);
+  assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, capability_key_id: "" }, current, previous), /Deployed key ID/);
+  assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, schema_version: 3 }, current, previous), /fingerprint is unavailable/);
+  assert.throws(() => validateAlertCapabilityRotation({ ...phase2Health, delivery_ready: false }, current, previous), /fingerprint is unavailable/);
+  assert.throws(() => validateAlertCapabilityRotation([], current, previous), /JSON object/);
 });

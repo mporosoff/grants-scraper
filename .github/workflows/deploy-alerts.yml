@@ -22,6 +22,7 @@ on:
       - "funded_awards.html"
       - "tools/classify_worker_deployment.mjs"
       - "tools/smoke_alerts_worker.mjs"
+      - "tools/validate_alert_capability_rotation.mjs"
       - "workers/alerts/**"
 permissions:
   contents: read
@@ -44,6 +45,7 @@ jobs:
       - name: Verify the bounded alert and Phase 5 release contracts
         run: >-
           node --check tools/classify_worker_deployment.mjs &&
+          node --check tools/validate_alert_capability_rotation.mjs &&
           node --check assets/alerts-config.js &&
           node --check assets/alerts.js &&
           node --check assets/award-links.js &&
@@ -126,6 +128,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
+          set -euo pipefail
           if [ -z "$ALERT_CAPABILITY_SECRET" ]; then
             echo "::error::ALERT_CAPABILITY_SECRET is required for stateless manage links."
             exit 1
@@ -136,12 +139,11 @@ jobs:
           fi
           current_key_id="$(printf '%s' "$ALERT_CAPABILITY_SECRET" | sha256sum | cut -c1-16)"
           previous_key_id="$(printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | sha256sum | cut -c1-16)"
-          deployed_health="$(curl --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-alerts.urochestercheme.workers.dev/health' || true)"
-          deployed_key_id="$(jq -r '.capability_key_id // empty' <<<"$deployed_health" 2>/dev/null || true)"
-          if [ -n "$deployed_key_id" ] && [ "$deployed_key_id" != "$current_key_id" ] && [ "$deployed_key_id" != "$previous_key_id" ]; then
-            echo "::error::ALERT_CAPABILITY_PREVIOUS_SECRET must match the currently deployed signing key before rotation."
-            exit 1
-          fi
+          rotation_mode="$(curl --fail --silent --show-error --max-time 10 \
+            -H 'Origin: https://mporosoff.github.io' \
+            'https://funding-finder-alerts.urochestercheme.workers.dev/health' \
+            | node tools/validate_alert_capability_rotation.mjs "$current_key_id" "$previous_key_id")"
+          echo "Alerts signing-key check: $rotation_mode"
           printf '%s' "$ALERT_CAPABILITY_PREVIOUS_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_PREVIOUS_SECRET --config workers/alerts/wrangler.jsonc
           printf '%s' "$ALERT_CAPABILITY_SECRET" | npx --yes wrangler@4.125.0 secret put ALERT_CAPABILITY_SECRET --config workers/alerts/wrangler.jsonc
           echo "current_key_id=$current_key_id" >> "$GITHUB_OUTPUT"
