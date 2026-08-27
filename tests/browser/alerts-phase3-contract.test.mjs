@@ -811,7 +811,7 @@ test("alert deployment and privacy contracts preserve Phase 3 behavior through P
   assert.match(workflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)\s*\| last/);
   assert.doesNotMatch(workflow, /\.\[0\]\.versions/);
   assert.match(workflow, /wrangler@4\.125\.0 rollback/);
-  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "\*\/5 \* \* \* \*"\]/);
+  assert.match(wrangler, /"crons": \["15 13 \* \* \*", "2-57\/5 \* \* \* \*"\]/);
   assert.doesNotMatch(wrangler, /RESEND_API_KEY|re_[A-Za-z0-9]/);
   assert.equal(JSON.parse(evidence).phase, 3);
   assert.doesNotMatch(worker + alerts + workflow, /\bDOE\b|award vector|semantic award/i);
