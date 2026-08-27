@@ -352,18 +352,41 @@ export async function dispatchVerificationDeliveries({
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
     const reconciliation = candidate.error_code === "verification_outcome_reconcile";
-    const verificationFor = value => env.ALERT_CAPABILITY_SECRET
+    const legacyVerificationFor = value => sha256Hex(
+      `funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${value}`,
+    );
+    const signedVerificationFor = (value, secret) => secret
       ? createVerificationToken({
           subscriberId: candidate.subscriber_id,
           subscriptionId: candidate.subscription_id,
           nonce: value,
-        }, env.ALERT_CAPABILITY_SECRET)
-      : sha256Hex(`funding-finder-verification-v1|${candidate.manage_token}|${candidate.subscription_id}|${value}`);
+        }, secret)
+      : Promise.resolve("");
+    const verificationFor = value => env.ALERT_CAPABILITY_SECRET
+      ? signedVerificationFor(value, env.ALERT_CAPABILITY_SECRET)
+      : legacyVerificationFor(value);
     let token = nonce.length >= 32 ? await verificationFor(nonce) : "";
     let tokenHash = token ? await sha256Hex(token) : "";
     let idempotencyKey = `verify:${candidate.id}:${tokenHash.slice(0, 24)}`;
     const expiresAt = Date.parse(candidate.verification_expires_at);
     if (reconciliation) {
+      const signedSecrets = [...new Set([
+        String(env.ALERT_CAPABILITY_SECRET || ""),
+        String(env.ALERT_CAPABILITY_PREVIOUS_SECRET || ""),
+      ].filter(Boolean))];
+      const reconciliationTokens = [
+        ...(Number(candidate.capability_version || 0) === 0 && nonce.length >= 32
+          ? [await legacyVerificationFor(nonce)]
+          : []),
+        ...await Promise.all(signedSecrets.map(secret => signedVerificationFor(nonce, secret))),
+      ];
+      const reconciled = (await Promise.all(reconciliationTokens.filter(value => value.length >= 32).map(async value => {
+        const hash = await sha256Hex(value);
+        return { token: value, tokenHash: hash, idempotencyKey: `verify:${candidate.id}:${hash.slice(0, 24)}` };
+      }))).find(value => value.idempotencyKey === candidate.provider_quota_key);
+      token = reconciled?.token || "";
+      tokenHash = reconciled?.tokenHash || "";
+      idempotencyKey = reconciled?.idempotencyKey || "";
       if (
         token.length < 32
         || candidate.provider_quota_key !== idempotencyKey

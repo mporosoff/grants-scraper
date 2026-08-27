@@ -756,6 +756,46 @@ test("FF-BUG-008 verification completed after network ambiguity still recovers t
   assert.equal(database.prepare("SELECT active FROM subscriptions WHERE id='watch-1'").get().active, 1);
 });
 
+test("FF-BUG-008 verification reconciliation preserves rotated and legacy token identity", async () => {
+  const cases = [
+    { name: "rotated", capabilityVersion: 1, signingSecret: env.ALERT_CAPABILITY_PREVIOUS_SECRET },
+    { name: "legacy", capabilityVersion: 0, signingSecret: "" },
+  ];
+  for (const item of cases) {
+    const database = databaseThrough();
+    const person = insertSubscriber(database);
+    database.prepare("UPDATE subscribers SET capability_version = ? WHERE id = ?").run(item.capabilityVersion, person.id);
+    const nonce = item.name.slice(0, 1).repeat(43);
+    const token = item.signingSecret
+      ? await createVerificationToken({ subscriberId: person.id, subscriptionId: "watch-1", nonce }, item.signingSecret)
+      : await sha256Hex(`funding-finder-verification-v1|${person.manageToken}|watch-1|${nonce}`);
+    const store = new D1AlertStore(new SqliteD1(database));
+    await store.createSubscriptionCycle(await cycle({
+      verificationNonce: nonce,
+      verificationTokenHash: await sha256Hex(token),
+      verificationEventId: `verify-${item.name}`,
+      verificationEventKey: `verification:${await sha256Hex(token)}`,
+    }));
+    const provider = new ScriptedProvider([{ code: "provider_network_failure", retryable: true }]);
+    const sendEnv = item.signingSecret
+      ? { ...env, ALERT_CAPABILITY_SECRET: item.signingSecret, ALERT_CAPABILITY_PREVIOUS_SECRET: "older-test-secret" }
+      : { ...env, ALERT_CAPABILITY_SECRET: "", ALERT_CAPABILITY_PREVIOUS_SECRET: "" };
+    const first = await dispatchVerificationDeliveries({ store, provider, env: sendEnv, now: fixedNow });
+    assert.equal(first.failedCount, 1, item.name);
+    const reservedKey = database.prepare(
+      "SELECT provider_quota_key FROM notification_events WHERE id = ?",
+    ).get(`verify-${item.name}`).provider_quota_key;
+
+    const retried = await dispatchVerificationDeliveries({
+      store, provider, env, now: new Date("2026-09-01T12:06:00.000Z"),
+    });
+    assert.deepEqual(retried, { attemptedCount: 1, deliveredCount: 1, failedCount: 0 }, item.name);
+    assert.equal(provider.attempts[0].idempotencyKey, reservedKey, item.name);
+    assert.equal(provider.attempts[1].idempotencyKey, reservedKey, item.name);
+    assert.equal(provider.attempts[0].message.text, provider.attempts[1].message.text, item.name);
+  }
+});
+
 test("FF-BUG-008 verification completion serializes with an authorized provider send", async () => {
   for (const finalFailure of [
     null,
