@@ -129,6 +129,8 @@ export function mockAwards(target, {
   sourceFailuresByOffset = {},
 } = {}) {
   const calls = [];
+  const snapshots = new Map();
+  let snapshotSequence = 0;
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -205,7 +207,7 @@ export function mockAwards(target, {
     }
     const body = request.postDataJSON();
     calls.push(body);
-    const responseDelay = Math.max(0, Number(responseDelaysBySourceOffset[`${body.sources[0]}:${body.offset}`]) || 0);
+    const responseDelay = Math.max(0, Number(responseDelaysBySourceOffset[`${body.sources?.[0]}:${body.offset}`]) || 0);
     if (responseDelay) await new Promise(resolve => setTimeout(resolve, responseDelay));
     const retrievedAt = "2026-08-24T20:00:00.000Z";
     const nsf = {
@@ -286,6 +288,153 @@ export function mockAwards(target, {
       annual_support: [],
       source_provenance: { source_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx", retrieved_at: retrievedAt, source_record_id: "DE-SC0020230", adapter_version: "1.0.0" },
     };
+    const templateFor = source => ({ ...(source === "NSF" ? nsf : source === "NIH" ? nih : doe), ...(awardOverridesBySource[source] || {}) });
+    const snapshotAggregate = records => {
+      const people = new Map();
+      const programs = new Map();
+      const years = new Map();
+      const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0]]);
+      records.forEach(record => {
+        agencyTotals.set(record.source, (agencyTotals.get(record.source) || 0) + 1);
+        if (Number.isInteger(record.award_year)) years.set(record.award_year, (years.get(record.award_year) || 0) + 1);
+        for (const person of record.principal_investigators || []) {
+          const key = `investigator:${String(person.name).toLowerCase().replace(/\W+/g, "-")}`;
+          const current = people.get(key) || { identity_key: key, name: person.name, projects: 0, variants: [], award_keys: [] };
+          current.projects += 1;
+          current.award_keys.push(`${record.source}:${record.award_id}`);
+          if (!current.variants.some(item => item.source === record.source && item.name === person.name)) current.variants.push({ name: person.name, source: record.source, award_id: record.award_id });
+          people.set(key, current);
+        }
+        const programName = record.activity_code || record.program_name || record.program_codes?.[0] || record.subagency;
+        if (programName) {
+          const key = `${record.source}:${String(programName).toLowerCase().replace(/\W+/g, "-")}`;
+          const current = programs.get(key) || { key, source: record.source, label: `${record.source} · ${programName}`, query: programName, projects: 0, award_keys: [] };
+          current.projects += 1;
+          current.award_keys.push(`${record.source}:${record.award_id}`);
+          programs.set(key, current);
+        }
+      });
+      const orderedYears = [...years.entries()].sort(([left], [right]) => left - right);
+      return {
+        project_count: records.length,
+        investigator_count: people.size,
+        program_count: programs.size,
+        year_start: orderedYears[0]?.[0] || null,
+        year_end: orderedYears.at(-1)?.[0] || null,
+        represented_years: orderedYears.map(([year, projects]) => ({ year, projects })),
+        agency_totals: [...agencyTotals].map(([source, projects]) => ({ source, projects })),
+        investigators: [...people.values()],
+        programs: [...programs.values()],
+        ordered_refs: records.map((record, index) => ({ position: index + 1, evidence_id: `${record.source}:${record.award_id}`, source: record.source, award_id: record.award_id, title: record.title, award_year: record.award_year })),
+      };
+    };
+    const publicSnapshot = snapshot => ({
+      schema_version: 1,
+      snapshot_contract_version: 1,
+      snapshot_id: snapshot.snapshot_id,
+      query_id: snapshot.query_id,
+      as_of: snapshot.as_of,
+      ordering_version: "award-recency-v1",
+      batch_ceiling_per_agency: 25,
+      request: snapshot.request,
+      completeness: snapshot.completeness,
+      exact_total: snapshot.exact_total,
+      at_least: snapshot.records.length,
+      recency_order: snapshot.completeness === "complete" ? "verified_most_recent_to_older" : "available_snapshot_recent_to_older",
+      sources: snapshot.sources,
+      base_aggregate: snapshot.aggregate,
+      initial_batches: snapshot.request.sources.map(source => {
+        const results = snapshot.records.filter(record => record.source === source).slice(0, 25);
+        const sourceState = snapshot.sources.find(item => item.source === source);
+        return { schema_version: 1, snapshot_id: snapshot.snapshot_id, query_id: snapshot.query_id, ordering_version: "award-recency-v1", batch_ceiling: 25, source, offset: 0, actual_added: results.length, loaded_through: results.length, source_total: sourceState.status === "complete" ? sourceState.result_count : null, additional_available: results.length < sourceState.result_count, source_status: sourceState, facet: { type: "all", key: "", label: "All awards" }, results };
+      }),
+    });
+    const snapshotView = (snapshot, facet) => {
+      if (!facet || facet.type === "all") return { facet: { type: "all", key: "", label: "All awards" }, records: snapshot.records };
+      const groups = facet.type === "investigator" ? snapshot.aggregate.investigators : snapshot.aggregate.programs;
+      const group = groups.find(item => (facet.type === "investigator" ? item.identity_key : item.key) === facet.key);
+      const allowed = new Set(group?.award_keys || []);
+      return { facet: { type: facet.type, key: facet.key, label: facet.type === "investigator" ? group?.name : group?.label }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
+    };
+    if (requestUrl.pathname === "/awards/snapshots" && request.method() === "POST") {
+      const sources = body.sources;
+      const records = [];
+      const sourceStates = [];
+      for (const source of sources) {
+        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
+        const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+        if (configuredFailure) {
+          sourceStates.push({ source, status: configuredFailure.status || "unavailable", result_count: 0, total_count: null, error: { code: configuredFailure.code || "source_unavailable" } });
+          continue;
+        }
+        const template = templateFor(source);
+        const configuredCount = typeof resultCountPerSource === "object" ? resultCountPerSource[source] : resultCountPerSource;
+        const count = Math.max(0, Number(configuredCount) || 0);
+        for (let index = 0; index < count; index += 1) records.push(index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] });
+        const partial = Array.isArray(hasMoreBySource[source]) ? hasMoreBySource[source].length > 0 : Boolean(hasMoreBySource[source]);
+        sourceStates.push({ source, status: partial ? "safety_bounded" : "complete", result_count: count, total_count: partial ? null : count, at_least: count, safety_bound_reached: partial, adapter_version: "1.1.0", retrieved_at: retrievedAt });
+      }
+      const complete = sourceStates.every(source => source.status === "complete");
+      const snapshotId = String(++snapshotSequence).padStart(64, "a");
+      const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, request: { sources, criteria: body.criteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null };
+      snapshot.aggregate = snapshotAggregate(records);
+      snapshots.set(snapshotId, snapshot);
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(publicSnapshot(snapshot)) });
+      return;
+    }
+    if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
+      const snapshot = snapshots.get(body.snapshot_id);
+      if (!snapshot) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      const view = snapshotView(snapshot, body.facet);
+      const start = (body.page - 1) * body.page_size;
+      const selected = view.records.slice(start, start + body.page_size);
+      const pageCount = Math.max(1, Math.ceil(view.records.length / body.page_size));
+      const payload = {
+        ...publicSnapshot(snapshot),
+        initial_batches: undefined,
+        base_aggregate: view.facet.type === "all" ? undefined : snapshot.aggregate,
+        aggregate: snapshotAggregate(view.records),
+        facet: view.facet,
+        exact_total: snapshot.completeness === "complete" ? view.records.length : null,
+        at_least: view.records.length,
+        pagination: { page: body.page, page_size: body.page_size, start: selected.length ? start + 1 : 0, end: start + selected.length, page_count: snapshot.completeness === "complete" ? pageCount : null, available_page_count: pageCount, has_previous: body.page > 1, has_next: body.page < pageCount },
+        batches: ["NSF", "NIH", "DOE"].map(source => ({ source, actual_added: selected.filter(record => record.source === source).length, results: selected.filter(record => record.source === source).map((record, index) => ({ ...record, snapshot_position: start + selected.indexOf(record) + 1 })) })).filter(batch => batch.results.length),
+      };
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload) });
+      return;
+    }
+    if (requestUrl.pathname === "/awards/snapshots/batch" && request.method() === "POST") {
+      const snapshot = snapshots.get(body.snapshot_id);
+      const view = snapshotView(snapshot, body.facet);
+      const sourceRecords = view.records.filter(record => record.source === body.source);
+      const results = sourceRecords.slice(body.offset, body.offset + 25);
+      const sourceState = snapshot.sources.find(item => item.source === body.source);
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, source: body.source, offset: body.offset, actual_added: results.length, loaded_through: body.offset + results.length, source_total: sourceState.status === "complete" ? sourceRecords.length : null, additional_available: body.offset + results.length < sourceRecords.length, source_status: sourceState, facet: view.facet, results }) });
+      return;
+    }
+    if (requestUrl.pathname === "/awards/snapshots/retry" && request.method() === "POST") {
+      const snapshot = snapshots.get(body.snapshot_id);
+      const alreadyPresent = snapshot.records.some(record => record.source === body.source);
+      const records = alreadyPresent ? [...snapshot.records] : [...snapshot.records, templateFor(body.source)];
+      const recoveredCount = records.filter(record => record.source === body.source).length;
+      const successor = {
+        ...snapshot,
+        snapshot_id: String(++snapshotSequence).padStart(64, "c"),
+        records,
+        sources: snapshot.sources.map(source => source.source === body.source
+          ? { ...source, status: "complete", result_count: recoveredCount, total_count: recoveredCount }
+          : source),
+      };
+      successor.completeness = successor.sources.every(source => source.status === "complete") ? "complete" : "partial";
+      successor.exact_total = successor.completeness === "complete" ? successor.records.length : null;
+      successor.aggregate = snapshotAggregate(successor.records);
+      snapshots.set(successor.snapshot_id, successor);
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ ...publicSnapshot(successor), retry: { source: body.source, status: "recovered", retained_sources: successor.request.sources.filter(source => source !== body.source) } }) });
+      return;
+    }
     const results = [];
     const sources = [];
     for (const source of body.sources) {

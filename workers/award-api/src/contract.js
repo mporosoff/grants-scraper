@@ -96,6 +96,7 @@ export function awardRecord(fields) {
     funding_mechanism: fields.funding_mechanism ?? null,
     title: fields.title ?? null,
     abstract: fields.abstract ?? null,
+    award_date: fields.award_date ?? null,
     project_start: fields.project_start ?? null,
     project_end: fields.project_end ?? null,
     award_year: fields.award_year ?? null,

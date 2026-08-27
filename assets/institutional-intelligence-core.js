@@ -5,6 +5,7 @@
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
     "ii_topic", "ii_pi", "ii_pi_identity", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
+    "ii_snapshot", "ii_page", "ii_page_size", "ii_facet", "ii_facet_key",
   ];
   const LEGACY_SEARCH_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start", "year_end", "pi", "program_officer", "offset",
@@ -522,29 +523,34 @@
   function deterministicInstitutionAnswer({ question = "", intent = "", aggregate, sources = [] } = {}) {
     const safeAggregate = aggregate || aggregateAwards([]);
     const resolvedIntent = sanitizeAnswerIntent({ answer_intent: intent }, question);
-    const evidenceIds = safeAggregate.awards.map(evidenceId);
+    const evidenceIds = Array.isArray(safeAggregate.ordered_refs)
+      ? safeAggregate.ordered_refs.map(item => clean(item?.evidence_id, 120)).filter(Boolean)
+      : (safeAggregate.awards || []).map(evidenceId);
     let answer;
     if (resolvedIntent === "investigators") {
-      const people = safeAggregate.investigators.map(person => `${person.name} (${person.projects} currently loaded award${person.projects === 1 ? "" : "s"})`);
-      answer = people.length ? `Investigators in the loaded evidence: ${people.join("; ")}.` : "No investigator names appear in the loaded matching awards.";
+      const people = safeAggregate.investigators.map(person => `${person.name} (${person.projects} award${person.projects === 1 ? "" : "s"} in the result snapshot)`);
+      answer = people.length ? `Investigators in the result snapshot: ${people.join("; ")}.` : "No investigator names appear in the matching result snapshot.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
-      answer = programs.length ? `Programs in the loaded evidence: ${programs.join("; ")}.` : "No program labels appear in the loaded matching awards.";
+      answer = programs.length ? `Programs in the result snapshot: ${programs.join("; ")}.` : "No program labels appear in the matching result snapshot.";
     } else if (resolvedIntent === "years") {
       answer = safeAggregate.year_start
-        ? `The loaded matching awards span ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
-        : "The loaded matching awards do not contain a usable award year.";
+        ? `The matching result snapshot spans ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
+        : "The matching result snapshot does not contain a usable award year.";
     } else if (resolvedIntent === "count") {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} currently loaded.`;
+      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot.`;
     } else if (resolvedIntent === "awards") {
-      const titles = safeAggregate.awards.slice(0, 8).map(award => clean(award?.title, 180) || `${award.source} ${award.award_id}`);
-      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} loaded: ${titles.join("; ")}.` : "No matching awards are loaded.";
+      const titles = (Array.isArray(safeAggregate.ordered_refs) ? safeAggregate.ordered_refs : safeAggregate.awards || [])
+        .slice(0, 8)
+        .map(award => clean(award?.title, 180) || clean(award?.evidence_id, 120) || `${award.source} ${award.award_id}`);
+      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot: ${titles.join("; ")}.` : "No matching awards are in the result snapshot.";
     } else {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} currently loaded for evidence-grounded interpretation.`;
+      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot for evidence-grounded interpretation.`;
     }
     const searched = sources.map(source => clean(source?.source, 10)).filter(Boolean);
-    const unavailable = sources.filter(source => source?.status !== "ok").map(source => clean(source?.source, 10)).filter(Boolean);
-    const hasMore = sources.filter(source => source?.status === "ok" && source?.has_more === true).map(source => clean(source?.source, 10));
+    const usableStatuses = new Set(["ok", "complete", "partial", "safety_bounded"]);
+    const unavailable = sources.filter(source => !usableStatuses.has(source?.status)).map(source => clean(source?.source, 10)).filter(Boolean);
+    const hasMore = sources.filter(source => source?.has_more === true || ["partial", "safety_bounded"].includes(source?.status)).map(source => clean(source?.source, 10));
     return { answer, intent: resolvedIntent, evidence_ids: evidenceIds, searched, unavailable, has_more: hasMore };
   }
 
@@ -599,6 +605,11 @@
       year_start: /^\d{4}$/.test(params.get("ii_year_start") || params.get("year_start") || "") ? (params.get("ii_year_start") || params.get("year_start")) : "",
       year_end: /^\d{4}$/.test(params.get("ii_year_end") || params.get("year_end") || "") ? (params.get("ii_year_end") || params.get("year_end")) : "",
       offset: Math.max(0, Math.min(1_000, Number(params.get("ii_offset") || params.get("offset")) || 0)),
+      snapshot_id: clean(params.get("ii_snapshot"), 100),
+      page: Math.max(1, Number.parseInt(params.get("ii_page") || "1", 10) || 1),
+      page_size: [10, 25, 50].includes(Number(params.get("ii_page_size"))) ? Number(params.get("ii_page_size")) : 10,
+      facet_type: ["all", "investigator", "program"].includes(params.get("ii_facet")) ? params.get("ii_facet") : "all",
+      facet_key: clean(params.get("ii_facet_key"), 300),
     };
     if (state.pi && params.get("ii_pi_identity") === "1") state.pi_identity = true;
     return state;
@@ -620,7 +631,28 @@
     if (validYear(state?.year_start)) url.searchParams.set("ii_year_start", String(state.year_start));
     if (validYear(state?.year_end)) url.searchParams.set("ii_year_end", String(state.year_end));
     if (Number(state?.offset) > 0) url.searchParams.set("ii_offset", String(Math.max(0, Math.min(1_000, Number(state.offset)))));
+    if (clean(state?.snapshot_id, 100)) url.searchParams.set("ii_snapshot", clean(state.snapshot_id, 100));
+    if (Number(state?.page) > 1) url.searchParams.set("ii_page", String(Math.max(1, Number(state.page) || 1)));
+    if ([10, 25, 50].includes(Number(state?.page_size)) && Number(state.page_size) !== 10) url.searchParams.set("ii_page_size", String(state.page_size));
+    if (["investigator", "program"].includes(state?.facet_type) && clean(state?.facet_key, 300)) {
+      url.searchParams.set("ii_facet", state.facet_type);
+      url.searchParams.set("ii_facet_key", clean(state.facet_key, 300));
+    }
     return url;
+  }
+
+  function compactPageNumbers(page, pageCount) {
+    const current = Math.max(1, Number(page) || 1);
+    const total = Math.max(1, Number(pageCount) || 1);
+    if (total <= 7) return Array.from({ length: total }, (_, index) => index + 1);
+    const values = new Set([1, total, current - 1, current, current + 1]);
+    const ordered = [...values].filter(value => value >= 1 && value <= total).sort((left, right) => left - right);
+    const compact = [];
+    ordered.forEach((value, index) => {
+      if (index && value - ordered[index - 1] > 1) compact.push(null);
+      compact.push(value);
+    });
+    return compact;
   }
 
   function sanitizeQuestionPlan(plan, currentState) {
@@ -678,6 +710,7 @@
     awardMatchesInvestigator,
     buildAwardRequest,
     chooseInstitution,
+    compactPageNumbers,
     deterministicInstitutionAnswer,
     evidenceId,
     explicitInvestigator,
