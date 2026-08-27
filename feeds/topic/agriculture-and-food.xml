@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -90,6 +90,18 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
+  </entry>
+  <entry>
+    <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363720"/>
+    <id>urn:funding-finder:grants-gov:363720</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Education Equity Grants Program</title>
@@ -682,16 +694,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
-  </entry>
-  <entry>
-    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
-    <link href="https://www.grants.gov/search-results-detail/360006"/>
-    <id>urn:funding-finder:grants-gov:360006</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Food and Drug Administration | Closes 2027-04-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
   </entry>
 </feed>

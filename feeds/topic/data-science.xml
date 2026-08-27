@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -119,6 +119,18 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363720"/>
+    <id>urn:funding-finder:grants-gov:363720</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Education Equity Grants Program</title>
@@ -733,18 +745,5 @@
     <category term="Technology development"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
-  </entry>
-  <entry>
-    <title>Advancing Oil and Natural Gas Production and Delivery</title>
-    <link href="https://www.grants.gov/search-results-detail/363302"/>
-    <id>urn:funding-finder:grants-gov:363302</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
   </entry>
 </feed>

@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 29,
- "record_count": 445,
+ "parent_count": 28,
+ "record_count": 441,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -169,13 +169,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "324369": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "324456": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -3320,13 +3313,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "341244": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "341997": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -3342,20 +3328,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "342747": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "342959": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "343166": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -11847,13 +11819,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "347749": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "347858": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -13380,13 +13345,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "349618": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "349655": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34183,13 +34141,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361999": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362012": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34219,13 +34170,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362034": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362036": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35191,13 +35135,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362719": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362721": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35379,300 +35316,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362859": {
-   "segmentation_method": "numbered",
-   "subtopic_count": 4,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-23",
-     "opportunity_id": "362859:fa-1",
-     "ordinal_label": "1",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 1",
-     "subtopic_code_norm": "fa-1",
-     "subtopic_id": "362859:fa-1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Design, build, and demonstrate a proof-of-concept capability (laboratory based) that uses a single, configurable excitation source to generate multiple signatures (molecular, elemental composition, trace elements, isotope ratios) across a continuous range of excitation intensity from a sample for surface and bulk analysis.",
-     "term_display": {
-      "across": "across",
-      "analysi": "Analysis",
-      "area": "Area",
-      "bas": "based",
-      "build": "build",
-      "bulk": "bulk",
-      "capability": "capability",
-      "composition": "composition",
-      "configurable": "configurable",
-      "continuou": "continuous",
-      "demonstrate": "demonstrate",
-      "design": "Design",
-      "element": "elements",
-      "elemental": "elemental",
-      "excitation": "excitation",
-      "focu": "Focus",
-      "generate": "generate",
-      "integrat": "Integrated",
-      "intensity": "intensity",
-      "isotope": "isotope",
-      "laboratory": "laboratory",
-      "material": "Materials",
-      "molecular": "molecular",
-      "multiple": "multiple",
-      "ogoal": "oGoal",
-      "proof-of-concept": "proof-of-concept",
-      "range": "range",
-      "ratio": "ratios",
-      "sample": "sample",
-      "signature": "signatures",
-      "single": "single",
-      "source": "source",
-      "surface": "surface",
-      "trace": "trace",
-      "uses": "uses"
-     },
-     "title": "Integrated Materials Analysis.",
-     "title_fingerprint": "1d00a05b",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-23",
-     "opportunity_id": "362859:fa-2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 2",
-     "subtopic_code_norm": "fa-2",
-     "subtopic_id": "362859:fa-2",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Develop novel methods for multimodal surface analysis utilizing FA1’s capabilities and FA4’s optimization. Perform design studies and proof-of-concept experiments for an advanced, single-source architecture capable of surface analysis.",
-     "term_display": {
-      "advanc": "advanced",
-      "analysi": "analysis",
-      "architecture": "architecture",
-      "area": "Area",
-      "capability": "capabilities",
-      "capable": "capable",
-      "design": "design",
-      "develop": "Develop",
-      "experiment": "experiments",
-      "fa1": "FA1",
-      "fa4": "FA4",
-      "focu": "Focus",
-      "foundation": "Foundations",
-      "method": "methods",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "perform": "Perform",
-      "proof-of-concept": "proof-of-concept",
-      "single-source": "single-source",
-      "study": "studies",
-      "surface": "surface",
-      "utiliz": "utilizing"
-     },
-     "title": "Foundations for Surface Analysis.",
-     "title_fingerprint": "2e252105",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-23",
-     "opportunity_id": "362859:fa-3",
-     "ordinal_label": "3",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 3",
-     "subtopic_code_norm": "fa-3",
-     "subtopic_id": "362859:fa-3",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Develop novel methods for multimodal bulk analysis utilizing FA1’s capabilities and FA4’s optimization. Perform design studies and proof-of-concept experiments for an advanced, single-source architecture capable of penetrating bulk analysis.",
-     "term_display": {
-      "advanc": "advanced",
-      "analysi": "analysis",
-      "architecture": "architecture",
-      "area": "Area",
-      "bulk": "bulk",
-      "capability": "capabilities",
-      "capable": "capable",
-      "design": "design",
-      "develop": "Develop",
-      "experiment": "experiments",
-      "fa1": "FA1",
-      "fa4": "FA4",
-      "focu": "Focus",
-      "foundation": "Foundations",
-      "method": "methods",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "penetrat": "penetrating",
-      "perform": "Perform",
-      "proof-of-concept": "proof-of-concept",
-      "single-source": "single-source",
-      "study": "studies",
-      "utiliz": "utilizing"
-     },
-     "title": "Foundations for Bulk Analysis.",
-     "title_fingerprint": "0beccc87",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-23",
-     "opportunity_id": "362859:fa-4",
-     "ordinal_label": "4",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 6,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 4",
-     "subtopic_code_norm": "fa-4",
-     "subtopic_id": "362859:fa-4",
-     "subtopic_ordinal": 4,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Design, build, and demonstrate the ability to process multimodal surface and bulk analysis data in-situ for real time adaptive feedback during analysis scans with varying excitation intensities. Demonstrate optimization of selected signatures during analysis trials based on adaptive feedback. Explore novel correlations in multimodal signatures that support sample analysis and identification. Other external data sources may be integrated into data fusion models in addition. Addressing the four focus areas of MMoMA will requi",
-     "term_display": {
-      "ability": "ability",
-      "adaptive": "adaptive",
-      "addition": "addition",
-      "address": "Addressing",
-      "analysi": "analysis",
-      "area": "Area",
-      "bas": "based",
-      "build": "build",
-      "bulk": "bulk",
-      "correlation": "correlations",
-      "data": "data",
-      "demonstrate": "Demonstrate",
-      "design": "Design",
-      "dur": "during",
-      "excitation": "excitation",
-      "explore": "Explore",
-      "external": "external",
-      "feedback": "feedback",
-      "focu": "Focus",
-      "four": "four",
-      "fusion": "Fusion",
-      "identification": "identification",
-      "in-situ": "in-situ",
-      "integrat": "integrated",
-      "intensity": "intensities",
-      "into": "into",
-      "mmoma": "MMoMA",
-      "model": "models",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "process": "process",
-      "real": "real",
-      "requi": "requi",
-      "sample": "sample",
-      "scan": "scans",
-      "select": "selected",
-      "signature": "signatures",
-      "source": "sources",
-      "surface": "surface",
-      "time": "time",
-      "trial": "trials"
-     },
-     "title": "Multimodal Data Fusion.",
-     "title_fingerprint": "340a542d",
-     "topic_areas": []
-    }
-   ]
-  },
   "362865": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35702,13 +35345,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362880": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362891": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35940,13 +35576,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362984": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362990": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37369,13 +36998,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363314": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363315": {
    "segmentation_method": "numbered",
    "subtopic_count": 2,
@@ -37857,13 +37479,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363364": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363368": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39621,13 +39236,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363536": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363537": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40182,6 +39790,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363625": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363626": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40490,6 +40105,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363686": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363687": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363689": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40519,6 +40148,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363693": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363694": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363697": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40630,7 +40273,28 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363716": {
+  "363719": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363720": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363721": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363722": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -74,6 +74,18 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363720"/>
+    <id>urn:funding-finder:grants-gov:363720</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Education Equity Grants Program</title>
@@ -741,16 +753,5 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
-  </entry>
-  <entry>
-    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
-    <link href="https://www.grants.gov/search-results-detail/363268"/>
-    <id>urn:funding-finder:grants-gov:363268</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
   </entry>
 </feed>

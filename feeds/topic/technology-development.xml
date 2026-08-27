@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -55,7 +55,7 @@
     <updated>2027-01-15T00:00:00Z</updated>
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Closes 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, territorial, and Tribal capacity to implement, expand, and sustain AIM Patient Safety Bundles and associated resources across the United States. The program supports implementation of evidence-informed maternal safety practices to improve the quality and safety of maternity care, improve maternal health outcomes, and reduce preventabl…</summary>
+    <summary>Health Resources and Services Administration | Closes 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, jurisdiction, and Tribal capacity to implement, expand, and sustain AIM PSBs and associated resources across the United States. AIM PSBs promote evidence-informed maternal safety practices to improve the quality and safety of maternity care and reduce preventable maternal mortality and severe maternal morbidity.</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -532,25 +532,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
-    <title>Collaborative Approaches to Adoption for Children with Complex Needs</title>
-    <link href="https://www.grants.gov/search-results-detail/362891"/>
-    <id>urn:funding-finder:grants-gov:362891</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ACYF/CB</name></author>
-    <category term="Technology development"/>
-    <summary>Administration for Children and Families - ACYF/CB | Closes 2026-08-26 | This funding opportunity aims to support innovations that build evidence on how to help children and youth with complex or high-acuity needs achieve permanency through adoption. The projects will focus on collaborative, system-level efforts to recruit, train, support, and retain families who can meet these children's needs. Projects must be led by researchers who work within a child welfare agency…</summary>
-  </entry>
-  <entry>
-    <title>NOFO- U.S.-Oman Youth Council Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363314"/>
-    <id>urn:funding-finder:grants-gov:363314</id>
-    <updated>2026-07-26T00:00:00Z</updated>
-    <author><name>U.S. Mission to Oman</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Oman | Closes 2026-08-26 | The U.S. Embassy Muscat seeks an implementing partner to administer the U.S.-Omani Youth Council, a structured leadership and bilateral-engagement program for 10-15 university students from diverse academic disciplines and regions of Oman. The program will strengthen participants' understanding of the longstanding U.S.-Omani relationship and expose them to cooperation in diplomacy, trade, space, t…</summary>
-  </entry>
-  <entry>
     <title>NIA Research and Entrepreneurial Development Immersion (REDI): Entrepreneurship Enhancement Award</title>
     <link href="https://www.grants.gov/search-results-detail/361215"/>
     <id>urn:funding-finder:grants-gov:361215</id>
@@ -680,5 +661,26 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Energy"/>
     <category term="Materials science"/>
     <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359279"/>
+    <id>urn:funding-finder:grants-gov:359279</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359644"/>
+    <id>urn:funding-finder:grants-gov:359644</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
 </feed>

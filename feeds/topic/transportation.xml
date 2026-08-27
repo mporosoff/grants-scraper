@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -142,16 +142,6 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
-  </entry>
-  <entry>
-    <title>Legal Competency and Training Program in Southeast Asia and the Pacific</title>
-    <link href="https://www.grants.gov/search-results-detail/363716"/>
-    <id>urn:funding-finder:grants-gov:363716</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>Bureau of East Asian and Pacific Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Bureau of East Asian and Pacific Affairs | Closes 2026-08-26 | The overall goal of the project is to strengthen the legal capacity and proficiency of government officials, including policymakers, negotiators, legal experts and practitioners, and other relevant officials from Southeast Asian and Pacific Islands countries concerning the principles and practices of public international law, including, but not limited to, the law of the sea as reflected in the 19…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Urban Search and Rescue Response System</title>
@@ -503,16 +493,6 @@
     <summary>DOT - Federal Transit Administration | Closes 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
   </entry>
   <entry>
-    <title>DOJ FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (“BIDEN”) Program Round 2</title>
-    <link href="https://www.grants.gov/search-results-detail/363368"/>
-    <id>urn:funding-finder:grants-gov:363368</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Justice Assistance | Closes 2026-08-26 | This is a notice of funding opportunity (NOFO) for the Department of Justice’s (DOJ) FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide (BIDEN) Program. This program, authorized under the BIDEN Reimbursement Fund established by the One Big Beautiful Bill Act, Public Law 119-21, Title X, Subtitle A, Part II (codified at 34 U.S.C. § 61101), provides funding for grants to eligible S…</summary>
-  </entry>
-  <entry>
     <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
     <link href="https://www.grants.gov/search-results-detail/363316"/>
     <id>urn:funding-finder:grants-gov:363316</id>
@@ -644,5 +624,28 @@
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
     <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362478"/>
+    <id>urn:funding-finder:grants-gov:362478</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Maritime Administration</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+  </entry>
+  <entry>
+    <title>Interdisciplinary Transportation Law and Policy Technology Training Development</title>
+    <link href="https://www.grants.gov/search-results-detail/362960"/>
+    <id>urn:funding-finder:grants-gov:362960</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>69A355 Research and Technology</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>69A355 Research and Technology | Closes 2026-08-28 | The U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Interdisciplinary Transportation Law and Policy Technology Training Development program. This 24-month cooperative agreement aims to bridge the critical knowledge gap between fast-changing transportation technologies and our Nati…</summary>
   </entry>
 </feed>

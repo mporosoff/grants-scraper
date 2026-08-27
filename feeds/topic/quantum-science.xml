@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-08-26T10:55:47Z</updated>
+  <updated>2026-08-27T09:06:45Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ONR FY27 NOFO for Young Investigator Program</title>
@@ -236,7 +236,7 @@
     <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
   <entry>
-    <title>Centers of Research Excellence in Science and Technology</title>
+    <title>Centers of Research Excellence in Science and Technology (CREST)</title>
     <link href="https://www.grants.gov/search-results-detail/348375"/>
     <id>urn:funding-finder:grants-gov:348375</id>
     <updated>2023-05-25T00:00:00Z</updated>
@@ -250,20 +250,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Closes 2026-12-04 | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
-  </entry>
-  <entry>
-    <title>Division of Chemistry: Disciplinary Research Programs</title>
-    <link href="https://www.grants.gov/search-results-detail/347749"/>
-    <id>urn:funding-finder:grants-gov:347749</id>
-    <updated>2023-04-26T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Environmental science"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-30 | This solicitation applies to six (of the nine) CHE Disciplinary Research Programs: Chemical Catalysis (CAT); Chemical Measurement and Imaging (CMI); Chemical Mechanism, Function and Properties (CMFP); Chemical Synthesis (SYN); Environmental Chemical Sciences (ECS); and Macromolecular, Supramolecular and Nanochemistry (MSN). All proposals submitted to these six CHE Disciplinary Research Programs (o…</summary>
   </entry>
   <entry>
     <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
@@ -282,19 +268,6 @@
     <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
-    <title>Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
-    <link href="https://www.grants.gov/search-results-detail/341244"/>
-    <id>urn:funding-finder:grants-gov:341244</id>
-    <updated>2022-06-18T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | With this solicitation, the Division of Chemistry is piloting the removal of deadlines for the submission of proposals to the CLP, CSD and CTMC Programs. The no-deadline pilot seeks to assess the benefits and challenges of removing deadlines in proposal submission for the chemistry research community: the removal of deadlines on proposal submission is intended to allow principal investigators (PIs…</summary>
-  </entry>
-  <entry>
     <title>Topology</title>
     <link href="https://www.grants.gov/search-results-detail/340544"/>
     <id>urn:funding-finder:grants-gov:340544</id>
@@ -303,7 +276,9 @@
     <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-03 | The Topology program supports research on algebraic topology, including chromatic, equivariant, motivic, and (un)stable homotopy, homology and cohomology theories; bordism and K-theory; topological manifolds; knots and links; geometric topology; differential topology; transformation groups; topological quantum field theories; contact and symplectic structures; infinity and model categories; and to…</summary>
+    <summary>U.S. National Science Foundation | Closes 2026-11-03 | Research supported by the Topology program includes the areas listed below. This is not a comprehensive list. Proposals on other relevant topics will also be considered. Contact the program if you have questions.
+Target submission date: Proposals should be submitted to MPS Mathematical Sciences Research Programs solicitation. Target date for submissions is the First Tuesday of November.
+While prop…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges and Universities Program</title>
