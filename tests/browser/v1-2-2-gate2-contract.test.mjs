@@ -4,11 +4,12 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [workflowSource, app, hybrid, searchPage] = await Promise.all([
+const [workflowSource, app, hybrid, searchPage, help] = await Promise.all([
   readFile(new URL("assets/result-workflow.js", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("assets/search-hybrid.js", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
+  readFile(new URL("assets/site-help.js", root), "utf8"),
 ]);
 
 function loadWorkflow() {
@@ -120,8 +121,8 @@ test("hosted Potential matching remains query-only while the page explains the b
   assert.match(launch, /context: ""/);
   assert.doesNotMatch(launch, /profile|cv_text|orcid/i);
   assert.match(searchPage, /hosted Potential matching requires a typed topic/);
-  assert.match(searchPage, /Profile, CV, and ORCID text are not sent to that service/);
-  assert.match(searchPage, /user-connected AI provider only when you explicitly use an AI tool/);
+  assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
+  assert.match(help, /When you explicitly use AI refinement or chat/);
 });
 
 test("pending work is shared, filter updates are debounced, and Retry-After disables retry", () => {

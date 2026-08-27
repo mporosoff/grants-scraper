@@ -3,6 +3,7 @@ import {
   chooseInvestigator,
   mockAwards,
   mockHybrid,
+  openAiStructuredResponse,
   openFundingFinder,
   watchRuntimeErrors,
 } from "./helpers.mjs";
@@ -403,17 +404,17 @@ test("evidence-grounded question years become the submitted request state", asyn
   await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
     status: 200,
     headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify({ output_text: JSON.stringify({
+    body: JSON.stringify(openAiStructuredResponse({
       agency: "all",
       program: "",
       topic: "catalysis",
       pi: "",
       program_officer: "",
-      year_start: 2024,
-      year_end: 2026,
+      year_start: "2024",
+      year_end: "2026",
       answer_intent: "count",
       narrative_needed: false,
-    }) }),
+    })),
   }));
   mockHybrid(page);
   const calls = mockAwards(page);
@@ -602,7 +603,7 @@ test("question submission is single-flight while institution resolution is pendi
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({
+      body: JSON.stringify(openAiStructuredResponse({
         agency: "all",
         program: "",
         topic: "",
@@ -612,7 +613,7 @@ test("question submission is single-flight while institution resolution is pendi
         year_end: "",
         answer_intent: "investigators",
         narrative_needed: false,
-      }) }),
+      })),
     });
   });
   mockHybrid(page);
@@ -668,7 +669,17 @@ test("the natural-language translator reuses the saved Funding Finder provider a
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({ agency: topicQuestion ? "all" : "NSF", program, topic, pi: "", year_start: "", year_end: "" }) }),
+      body: JSON.stringify(openAiStructuredResponse({
+        agency: topicQuestion ? "all" : "NSF",
+        program,
+        topic,
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "awards",
+        narrative_needed: false,
+      })),
     });
   });
   mockHybrid(page);
@@ -768,7 +779,7 @@ test("institutional questions cite loaded evidence and refresh only on explicit 
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify(output) }),
+      body: JSON.stringify(openAiStructuredResponse(output)),
     });
   });
   mockHybrid(page);
@@ -817,7 +828,7 @@ test("a failed narrative provider call degrades to the deterministic loaded-awar
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({
+      body: JSON.stringify(openAiStructuredResponse({
         agency: "NSF",
         program: "",
         topic: "catalysis",
@@ -827,7 +838,7 @@ test("a failed narrative provider call degrades to the deterministic loaded-awar
         year_end: "",
         answer_intent: "narrative",
         narrative_needed: true,
-      }) }),
+      })),
     });
   });
   mockHybrid(page);
@@ -851,7 +862,7 @@ test("deterministic DOE investigator answers disclose partial sources and remain
     return route.fulfill({
       status: 200,
       headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-      body: JSON.stringify({ output_text: JSON.stringify({
+      body: JSON.stringify(openAiStructuredResponse({
         agency: "all",
         program: "",
         topic: "",
@@ -861,7 +872,7 @@ test("deterministic DOE investigator answers disclose partial sources and remain
         year_end: "",
         answer_intent: "investigators",
         narrative_needed: false,
-      }) }),
+      })),
     });
   });
   mockHybrid(page);
@@ -883,7 +894,7 @@ test("the question translator preserves an explicitly named University of Roches
   await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
     status: 200,
     headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify({ output_text: JSON.stringify({ agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "" }) }),
+    body: JSON.stringify(openAiStructuredResponse({ agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", answer_intent: "awards", narrative_needed: false })),
   }));
   mockHybrid(page);
   const calls = mockAwards(page);
@@ -926,7 +937,7 @@ test("the question translator does not mistake a selected ROR alias for an inves
   await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
     status: 200,
     headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify({ output_text: JSON.stringify({ agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "" }) }),
+    body: JSON.stringify(openAiStructuredResponse({ agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", answer_intent: "awards", narrative_needed: false })),
   }));
   mockHybrid(page);
   const calls = mockAwards(page);
@@ -1006,7 +1017,7 @@ test("evidence-grounded answers remain keyboard-operable and contained at 390 px
   await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
     status: 200,
     headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify({ output_text: JSON.stringify({
+    body: JSON.stringify(openAiStructuredResponse({
       agency: "DOE",
       program: "BES",
       topic: "",
@@ -1016,7 +1027,7 @@ test("evidence-grounded answers remain keyboard-operable and contained at 390 px
       year_end: "",
       answer_intent: "investigators",
       narrative_needed: false,
-    }) }),
+    })),
   }));
   mockHybrid(page);
   mockAwards(page);

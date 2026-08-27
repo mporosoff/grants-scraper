@@ -193,6 +193,89 @@ test("Funding Finder loads with a usable catalog and no uncaught runtime errors"
   expect(errors).toEqual([]);
 });
 
+test("primary search submits with Enter while AI refinement stays visible and truthfully disabled", async ({ page }) => {
+  mockHybrid(page);
+  await openFundingFinder(page);
+  const query = page.locator("#query");
+  const find = page.locator("#find-funding");
+  const upload = page.locator(".nofo-upload-button");
+  const [queryBox, findBox, uploadBox] = await Promise.all([
+    query.boundingBox(),
+    find.boundingBox(),
+    upload.boundingBox(),
+  ]);
+  expect(queryBox).not.toBeNull();
+  expect(findBox.x).toBeGreaterThan(queryBox.x);
+  expect(uploadBox.x).toBeGreaterThan(findBox.x);
+
+  const refine = page.locator("#ai-refine");
+  await expect(refine).toBeVisible();
+  await expect(refine).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run a funding search and enter or save");
+  await query.fill("catalysis science");
+  await query.press("Enter");
+  await expect(page.locator("#results .result-card").first()).toBeVisible();
+  await waitForHybridSettled(page);
+  await expect(page.locator("#results-heading")).toContainText(/\d+ opportunities · \d+ strong · \d+ potential/);
+  await expect(refine).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Enter or save an AI provider key");
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-layout-test");
+  await expect(refine).toBeEnabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine");
+});
+
+test("primary search and AI action stack without horizontal overflow at 320 and 390 px", async ({ page }) => {
+  mockHybrid(page);
+  await openFundingFinder(page);
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 760 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const [queryBox, findBox, uploadBox] = await Promise.all([
+      page.locator("#query").boundingBox(),
+      page.locator("#find-funding").boundingBox(),
+      page.locator(".nofo-upload-button").boundingBox(),
+    ]);
+    expect(findBox.y).toBeGreaterThan(queryBox.y);
+    expect(uploadBox.y).toBeGreaterThan(findBox.y);
+    for (const box of [queryBox, findBox, uploadBox]) {
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+    }
+    await expect(page.locator("#ai-refine")).toBeVisible();
+  }
+});
+
+test("provider failure preserves the search, filters, results, key, and retry control", async ({ page }) => {
+  mockHybrid(page);
+  let providerCalls = 0;
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls += 1;
+    return route.fulfill({
+      status: 401,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ error: { code: "invalid_api_key", message: "provider-secret-diagnostic" } }),
+    });
+  });
+  await openFundingFinder(page);
+  await page.locator("#filter-panel > summary").click();
+  await page.locator("#status-forecasted").uncheck();
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  const originalHeading = await page.locator("#results-heading").textContent();
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-preserved-test-key");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("provider rejected this API key");
+  await expect(page.locator("#ai-status")).not.toContainText(/provider-secret-diagnostic|sk-preserved-test-key/);
+  expect(providerCalls).toBe(1);
+  await expect(page.locator("#query")).toHaveValue("catalysis science");
+  await expect(page.locator("#status-forecasted")).not.toBeChecked();
+  await expect(page.locator("#k-key")).toHaveValue("sk-preserved-test-key");
+  await expect(page.locator("#results-heading")).toHaveText(originalHeading);
+  await expect(page.locator("#ai-refine")).toBeEnabled();
+});
+
 test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
   mockHybrid(page);
   await page.goto("/match_explorer.html?focus=361187");
@@ -211,8 +294,8 @@ test("Strong and Potential membership survives sorting, filters trigger one sema
   await expect.poll(() => calls.rerank.length).toBe(1);
 
   await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
-  const statusText = await page.locator("#search-status").textContent();
-  const tierCounts = statusText.match(/(\d+) strong.*?(\d+) potential/);
+  const resultHeading = await page.locator("#results-heading").textContent();
+  const tierCounts = resultHeading.match(/(\d+) strong.*?(\d+) potential/);
   const strongCount = Number(tierCounts?.[1] || 0);
   const potentialCount = Number(tierCounts?.[2] || 0);
   expect(strongCount).toBeGreaterThan(0);

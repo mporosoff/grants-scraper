@@ -13,6 +13,29 @@ function corsHeaders(extra = {}) {
   };
 }
 
+export function openAiStructuredResponse(value, overrides = {}) {
+  return {
+    id: "resp_e2e",
+    object: "response",
+    status: "completed",
+    error: null,
+    incomplete_details: null,
+    output: [{
+      id: "msg_e2e",
+      type: "message",
+      role: "assistant",
+      status: "completed",
+      content: [{
+        type: "output_text",
+        text: JSON.stringify(value),
+        annotations: [],
+      }],
+    }],
+    store: false,
+    ...overrides,
+  };
+}
+
 export function watchRuntimeErrors(page) {
   const errors = [];
   page.on("pageerror", error => errors.push(`pageerror: ${error.message}`));
@@ -481,7 +504,7 @@ export async function mockOpenAiBroadening(page) {
         "Access-Control-Allow-Headers": "authorization,content-type",
         "Content-Type": "application/json",
       }),
-      body: JSON.stringify({ output_text: JSON.stringify(output) }),
+      body: JSON.stringify(openAiStructuredResponse(output)),
     });
   });
   return state;

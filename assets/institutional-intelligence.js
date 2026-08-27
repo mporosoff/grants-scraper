@@ -666,9 +666,10 @@
             intent: questionState.intent,
             evidencePack,
           });
-          const proposed = await ai.providerJson({
+          const proposed = await ai.structuredResult({
             provider,
             key,
+            operation: "institution_narrative",
             fetchImpl: globalThis.fetch,
             system: "Synthesize only the supplied public award titles and abstract excerpts when narrative interpretation is useful. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite one or more exact supplied evidence IDs. Do not use model pretraining, add facts, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML. If the evidence cannot support a claim, omit it.",
             user: JSON.stringify(providerPayload),
@@ -1204,9 +1205,10 @@
       let translationFallback = !configured || !key;
       if (!translationFallback) {
         try {
-          const translated = await ai.providerJson({
+          const translated = await ai.structuredResult({
             provider,
             key,
+            operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
             system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
             user: JSON.stringify({

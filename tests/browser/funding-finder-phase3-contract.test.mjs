@@ -533,11 +533,11 @@ test("question-provider payloads enforce privacy boundaries and malformed respon
     assert.equal(serialized.toLowerCase().includes(forbidden), false, forbidden);
   }
   assert.equal(payload.public_award_evidence[0].abstract_excerpt.length, 800);
-  assert.throws(() => ai.extractJson("not valid JSON"), /malformed or incomplete/);
+  assert.throws(() => ai.extractJson("not valid JSON"), error => error.category === "malformed");
   assert.match(pageSource, /Structured award search and institution resolution do not require an AI key/);
   assert.match(pageSource, /Update answer using loaded records/);
   assert.match(appSource, /snapshot\.signature === answerEvidenceSignature\(\)/);
   const loadMoreSource = appSource.slice(appSource.indexOf("async function loadMoreSource"), appSource.indexOf("function clearSearch"));
-  assert.doesNotMatch(loadMoreSource, /providerJson|refreshQuestionAnswer/, "Load more retains the answer without a paid provider call");
+  assert.doesNotMatch(loadMoreSource, /providerStructured|structuredResult|refreshQuestionAnswer/, "Load more retains the answer without a paid provider call");
   assert.match(pageSource, /profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys/);
 });
