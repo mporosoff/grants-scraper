@@ -142,6 +142,13 @@ test("application explicitly separates shell and catalog initialization and mark
   assert.match(sources.loader, /mark\("funding-catalog-initialized"\)/);
   assert.match(sources.app, /markPerformance\("funding-first-search-completed"\)/);
   assert.match(sources.app, /globalThis\.addEventListener\("popstate", handleHistoryNavigation\)/);
+  const pillMarkup = sources.explorer.slice(
+    sources.explorer.indexOf('id="catalog-pill"'),
+    sources.explorer.indexOf('data-help-open'),
+  );
+  assert.doesNotMatch(pillMarkup, /loads when needed|preparing/i);
+  assert.match(sources.app, /find-button-spinner/);
+  assert.match(sources.app, /Preparing catalog…/);
 });
 
 test("release and refresh contracts publish and verify metadata with the exact catalog", () => {

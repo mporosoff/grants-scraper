@@ -250,8 +250,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
+        app_style_version = "ux-followup-20260826"
         self.assertIn(
-            f'<link rel="stylesheet" href="./assets/app.css?v={style_version}">',
+            f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
         for asset in (
@@ -300,7 +301,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=lazy-catalog-ownership-20260826"></script>',
+            '<script src="./assets/app.js?v=ux-followup-20260826"></script>',
             explorer_html,
         )
         self.assertIn(

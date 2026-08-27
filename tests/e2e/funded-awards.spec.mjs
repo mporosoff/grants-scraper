@@ -65,8 +65,8 @@ test("missing award values remain missing while explicit zero stays visible", as
   await expect(nih).toContainText("$0");
   await expect(doe).toContainText("2019");
   await expect(doe).toContainText("$1,150,000");
-  await expect(page.locator("#ii-metrics")).toContainText("2019Loaded award years");
-  await expect(page.locator("#ii-metrics")).not.toContainText(/\b0(?:–|Loaded award years)/);
+  await expect(page.locator("#ii-metrics")).toContainText("2019Years represented in loaded awards");
+  await expect(page.locator("#ii-metrics")).not.toContainText(/\b0(?:–|Years represented in loaded awards)/);
 
   await page.goto("/funded_awards.html?opportunity=363616");
   const legacyNsf = page.locator(".award-card[data-source='NSF']");
@@ -154,11 +154,12 @@ test("a short multi-source result set exposes only the source that can load more
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/funded_awards.html?ii=1&ii_topic=catalysis");
   await expect(page.locator(".ii-award-card")).toHaveCount(14);
-  await expect(page.locator("#ii-page-label")).toContainText("14 normalized projects loaded");
+  await expect(page.locator("#ii-page-label")).toBeEmpty();
   await expect(page.locator("#ii-page-label")).toHaveAttribute("aria-live", "polite");
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Load more NIH|Load more DOE/ })).toHaveCount(0);
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(1);
+  await page.getByRole("button", { name: "Load additional awards" }).click();
+  await expect(page.locator("#ii-page-label")).toContainText("All available awards for this search are loaded");
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   expect(calls.at(-1).sources).toEqual(["NSF"]);
   await expect(page.locator(".ii-award-card")).toHaveCount(24);
@@ -181,8 +182,7 @@ test("partial award results distinguish unsupported and rate-limited sources", a
   await expect(page.locator(".ii-award-card[data-source='NSF']")).toHaveCount(1);
   await expect(page.locator("#ii-source-status")).toContainText("NIH does not support this filter combination");
   await expect(page.locator("#ii-source-status")).toContainText("DOE is rate limited. Wait before retrying.");
-  await expect(page.getByRole("button", { name: "Retry DOE" })).toBeEnabled();
-  await expect(page.getByRole("button", { name: "Retry NIH" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
   await expect(page.locator("#ii-status")).toContainText("1 public project loaded from available sources");
   await expect(page.locator("#ii-status")).toContainText("does not support this filter combination");
   await expect(page.locator("#ii-status")).toContainText("Wait before retrying");
@@ -219,14 +219,14 @@ test("a failed award source degrades independently", async ({ page }) => {
   await expect(page.locator("#ii-status")).toContainText("loaded from available sources");
 });
 
-test("an underfilled normalized page uses an explicit source-specific load-more control", async ({ page }) => {
+test("an underfilled normalized page uses one generic additional-awards control", async ({ page }) => {
   mockAwards(page, { hasMoreAtOffsets: [0] });
   await page.goto("/funded_awards.html");
   await page.locator("#ii-topic").fill("warm dense matter");
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-search").click();
   await expect(page.locator(".ii-award-card")).toHaveCount(1);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
   await expect(page.getByRole("button", { name: /Next|Previous/ })).toHaveCount(0);
 });
 
@@ -237,10 +237,12 @@ test("load more preserves loaded projects and does not create a navigation entry
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-search").click();
   await expect(page.locator(".ii-award-card")).toHaveCount(25);
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   await expect(page.locator(".ii-award-card")).toHaveCount(50);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
   await expect(page).not.toHaveURL(/ii_offset=/);
 });
 

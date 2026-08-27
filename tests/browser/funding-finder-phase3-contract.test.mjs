@@ -489,6 +489,18 @@ test("deterministic institutional answers and bounded narrative citations use on
   assert.equal(bounded.awards.length, 24);
   assert.equal(bounded.truncated, true);
   assert.ok(bounded.serialized_characters <= bounded.limits.serialized_characters);
+
+  const sourceHeavy = [
+    ...Array.from({ length: 30 }, (_, index) => normalizedAward({ source: "NSF", id: `NSF-${index}`, name: `NSF Person ${index}` })),
+    ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "NIH", id: `NIH-${index}`, name: `NIH Person ${index}` })),
+    ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "DOE", id: `DOE-${index}`, name: `DOE Person ${index}` })),
+  ];
+  const balanced = core.questionEvidencePack(sourceHeavy);
+  assert.deepEqual(Array.from(balanced.awards.slice(0, 3), award => award.source), ["NSF", "NIH", "DOE"]);
+  assert.deepEqual(
+    Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [source, balanced.awards.filter(award => award.source === source).length])),
+    { NSF: 16, NIH: 4, DOE: 4 },
+  );
 });
 
 test("question-provider payloads enforce privacy boundaries and malformed responses fall back", () => {

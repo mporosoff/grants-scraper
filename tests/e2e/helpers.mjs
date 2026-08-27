@@ -96,6 +96,7 @@ export function mockAwards(target, {
   failNsf = false,
   hasMoreBySource = {},
   hasMoreAtOffsets = [],
+  institutionResponseDelayMs = 0,
   resultCountBySourceOffset = {},
   resultCountPerSource = 1,
   responseDelaysBySourceOffset = {},
@@ -112,6 +113,8 @@ export function mockAwards(target, {
     }
     const requestUrl = new URL(request.url());
     if (requestUrl.pathname === "/institutions/search" && request.method() === "GET") {
+      const registryDelay = Math.max(0, Number(institutionResponseDelayMs) || 0);
+      if (registryDelay) await new Promise(resolve => setTimeout(resolve, registryDelay));
       const query = (requestUrl.searchParams.get("query") || "").toLowerCase();
       const fixtures = {
         mit: [
@@ -354,7 +357,8 @@ export async function openFundingFinderShell(page, { path = "/match_explorer.htm
   await page.goto(path);
   await expect(page.locator("#query")).toBeVisible();
   await expect(page.locator("#query")).toBeEnabled();
-  await expect(page.locator("#catalog-pill")).toContainText("loads when needed");
+  await expect(page.locator("#catalog-pill")).toContainText("updated");
+  await expect(page.locator("#catalog-pill")).not.toContainText("loads when needed");
   await expect.poll(() => page.evaluate(() => (
     performance.getEntriesByName("funding-shell-ready", "mark").length
   ))).toBe(1);

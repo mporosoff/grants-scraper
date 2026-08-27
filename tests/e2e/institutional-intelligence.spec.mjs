@@ -56,10 +56,10 @@ test("an overlong award-year range shows one validation error without source ret
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-status")).toContainText("Choose a year range of 50 years or fewer.");
   expect(calls).toHaveLength(0);
-  await expect(page.getByRole("button", { name: /Retry (NSF|NIH|DOE)/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
 });
 
-test("source-specific loading accumulates projects without replacing the current page", async ({ page }) => {
+test("generic additional loading preserves submitted source state and pages award cards ten at a time", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page, { hasMoreAtOffsets: [0], resultCountPerSource: 25 });
   await openInstitutionalIntelligence(page);
@@ -67,10 +67,17 @@ test("source-specific loading accumulates projects without replacing the current
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–10 of 25");
+  await page.getByRole("button", { name: "Next 10 awards" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 11–20 of 25");
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await expect(page.locator("#ii-awards .ii-award-card:visible").first()).toBeFocused();
   await page.locator("#ii-institution").fill("MIT");
   await page.locator("#ii-topic").fill("batteries");
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   expect(calls.at(-1).criteria.topic).toBe("catalysis");
   expect(calls.at(-1).criteria.institution).toBe("University of Rochester");
@@ -79,9 +86,32 @@ test("source-specific loading accumulates projects without replacing the current
   await expect(page.locator("#ii-metrics")).toContainText("50Projects loaded");
   await expect(page.locator("#ii-metrics")).toContainText("1Investigator identities in loaded results");
   await expect(page.locator("#ii-metrics")).toContainText("1Distinct programs in loaded results");
-  await expect(page.locator("#ii-metrics")).toContainText("2026Loaded award years");
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
+  await expect(page.locator("#ii-metrics")).toContainText("2026Years represented in loaded awards");
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
   await expect(page).not.toHaveURL(/ii_offset=/);
+});
+
+test("one generic additional-awards control advances available sources fairly without naming one", async ({ page }) => {
+  mockHybrid(page);
+  const calls = mockAwards(page, {
+    hasMoreBySource: { NSF: [0], NIH: [0] },
+    resultCountPerSource: 1,
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-topic").fill("catalysis");
+  await page.locator("#ii-search").click();
+  const loadAdditional = page.getByRole("button", { name: "Load additional awards" });
+  await expect(loadAdditional).toHaveCount(1);
+  await expect(page.locator("#ii-pagination")).not.toContainText(/NSF|NIH|DOE/);
+  await loadAdditional.click();
+  await expect.poll(() => calls.length).toBe(4);
+  expect(calls.at(-1)).toMatchObject({ sources: ["NSF"], offset: 25 });
+  await loadAdditional.click();
+  await expect.poll(() => calls.length).toBe(5);
+  expect(calls.at(-1)).toMatchObject({ sources: ["NIH"], offset: 25 });
+  await expect(loadAdditional).toHaveCount(0);
+  await expect(page.locator("#ii-page-label")).toContainText("All available awards for this search are loaded");
 });
 
 test("superseding a source load clears its busy state for the replacement search", async ({ page }) => {
@@ -95,11 +125,11 @@ test("superseding a source load clears its busy state for the replacement search
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.some(call => call.offset === 25)).toBe(true);
   await chooseInvestigator(page, "Vasily Karasiev");
   await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Vasily Karasiev");
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
 });
 
 test("a later source failure retains already loaded projects and offers a bounded retry", async ({ page }) => {
@@ -114,10 +144,10 @@ test("a later source failure retains already loaded projects and offers a bounde
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
   await expect(page.locator("#ii-source-status")).toContainText("25 previously loaded NSF projects were retained");
-  await expect(page.getByRole("button", { name: "Retry NSF" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
 });
 
 test("a retry that becomes unsupported retains projects and removes the retry action", async ({ page }) => {
@@ -136,15 +166,15 @@ test("a retry that becomes unsupported retains projects and removes the retry ac
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
-  await page.getByRole("button", { name: "Load more NSF" }).click();
-  await expect(page.getByRole("button", { name: "Retry NSF" })).toBeEnabled();
-  await page.getByRole("button", { name: "Retry NSF" }).click();
-  await expect(page.getByRole("button", { name: "Retry NSF" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Load additional awards" }).click();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
   await expect(page.locator("#ii-source-status")).toContainText("25 previously loaded NSF projects were retained");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
 });
 
-test("source-specific loading can advance across an empty normalized page within the bound", async ({ page }) => {
+test("generic additional loading can advance across an empty normalized page within the bound", async ({ page }) => {
   mockHybrid(page);
   const calls = mockAwards(page, {
     hasMoreBySource: { NSF: [0, 25] },
@@ -154,14 +184,14 @@ test("source-specific loading can advance across an empty normalized page within
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("catalysis");
   await page.locator("#ii-search").click();
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(25);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeEnabled();
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeEnabled();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(50);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(26);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
 });
 
 test("a restored source page at the maximum offset cannot advance past the worker bound", async ({ page }) => {
@@ -170,8 +200,8 @@ test("a restored source page at the maximum offset cannot advance past the worke
   await page.goto("/funded_awards.html?ii=1&ii_agency=NSF&ii_topic=catalysis&ii_offset=1000");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
   expect(calls.at(-1)?.offset).toBe(1_000);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toHaveCount(0);
-  await expect(page.locator("#ii-page-label")).toContainText("loaded in this view");
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
+  await expect(page.locator("#ii-page-label")).toContainText("All available awards for this search are loaded");
 });
 
 test("ROR aliases resolve to canonical institutions before normalized award queries", async ({ page }) => {
@@ -337,10 +367,10 @@ test("submitted years survive Load more, investigator and program drill-downs, a
   await page.locator("#ii-year-start").fill("2024");
   await page.locator("#ii-year-end").fill("2026");
   await page.locator("#ii-search").click();
-  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2024–2026");
+  await expect(page.locator("#ii-result-scope")).toContainText("Requested award years: 2024–2026");
   await page.locator("#ii-year-start").fill("1999");
   await page.locator("#ii-year-end").fill("2000");
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026, topic: "submitted catalysis" });
 
   await chooseInvestigator(page, "Vasily Karasiev");
@@ -394,13 +424,18 @@ test("evidence-grounded question years become the submitted request state", asyn
   await page.locator("#ii-ask-button").click();
   await expect.poll(() => calls.length).toBe(3);
   expect(calls.every(call => call.criteria.year_start === 2024 && call.criteria.year_end === 2026)).toBe(true);
-  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2024–2026");
+  await expect(page.locator("#ii-result-scope")).toContainText("Requested award years: 2024–2026");
 });
 
 test("submitting a new narrow year range recalculates every loaded-result metric", async ({ page }) => {
   mockHybrid(page);
   mockAwards(page, { enforceYearFilters: true });
   await openInstitutionalIntelligence(page);
+  await expect(page.locator("#ii-year-start")).toHaveValue("");
+  await expect(page.locator("#ii-year-end")).toHaveValue("");
+  await expect(page.locator("#ii-year-start")).toHaveAttribute("placeholder", "Any");
+  await expect(page.locator("#ii-year-end")).toHaveAttribute("placeholder", "Any");
+  await expect(page.locator("#ii-year-help")).toContainText("Leave both year fields blank to search all available years");
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-year-start").fill("2024");
   await page.locator("#ii-year-end").fill("2026");
@@ -409,17 +444,20 @@ test("submitting a new narrow year range recalculates every loaded-result metric
   await expect(page.locator("#ii-metrics")).toContainText("2Projects loaded");
   await expect(page.locator("#ii-metrics")).toContainText("2Investigator identities in loaded results");
   await expect(page.locator("#ii-metrics")).toContainText("2Distinct programs in loaded results");
-  await expect(page.locator("#ii-metrics")).toContainText("2026Loaded award years");
+  await expect(page.locator("#ii-metrics")).toContainText("2026Years represented in loaded awards");
+  await expect(page.locator("#ii-result-scope")).toContainText("Requested award years: 2024–2026");
 
   await page.locator("#ii-year-start").fill("2019");
   await page.locator("#ii-year-end").fill("2019");
+  await expect(page.locator("#ii-metrics")).toContainText("2026Years represented in loaded awards");
+  await expect(page.locator("#ii-result-scope")).toContainText("Requested award years: 2024–2026");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
   await expect(page.locator("#ii-metrics")).toContainText("1Projects loaded");
   await expect(page.locator("#ii-metrics")).toContainText("1Investigator identities in loaded results");
   await expect(page.locator("#ii-metrics")).toContainText("1Distinct programs in loaded results");
-  await expect(page.locator("#ii-metrics")).toContainText("2019Loaded award years");
-  await expect(page.locator("#ii-result-scope")).toContainText("Active requested year range: 2019–2019");
+  await expect(page.locator("#ii-metrics")).toContainText("2019Years represented in loaded awards");
+  await expect(page.locator("#ii-result-scope")).toContainText("Requested award years: 2019–2019");
 });
 
 test("investigator identity pagination retains the selected identity and deduplicates loaded awards", async ({ page }) => {
@@ -434,10 +472,10 @@ test("investigator identity pagination retains the selected identity and dedupli
   await page.locator("#ii-search").click();
   await chooseInvestigator(page, "Vasily Karasiev");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
-  await expect(page.getByRole("button", { name: "Load more NSF" })).toBeVisible();
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeVisible();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
-  await expect(page.locator("#ii-investigator-variants")).toContainText("2 currently loaded awards");
+  await expect(page.locator("#ii-investigator-variants")).toContainText("Vasily Karasiev · 2 awards");
   await expect(page).toHaveURL(/ii_pi_identity=1/);
   expect(calls.filter(call => call.sources[0] === "NSF" && call.offset === 25).length).toBeGreaterThan(0);
   const ids = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.id));
@@ -469,14 +507,14 @@ test("a partial investigator-variant failure retains matches and retries the sam
   await chooseInvestigator(page, "Marc D. Porosoff");
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
   await expect(page.locator("#ii-source-status")).toContainText("previously loaded NSF project was retained");
-  await expect(page.getByRole("button", { name: "Retry NSF" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toBeVisible();
   const firstVariantOffsets = calls.filter(call => call.criteria.pi && call.sources[0] === "NSF").map(call => call.offset);
   expect(new Set(firstVariantOffsets)).toEqual(new Set([0]));
   const callsBeforeRetry = calls.length;
   await page.locator("#ii-topic").fill("unsent edited topic");
-  await page.getByRole("button", { name: "Retry NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect(page.locator("#ii-source-status")).toContainText("NSF available");
-  await expect(page.getByRole("button", { name: "Retry NSF" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Load additional awards" })).toHaveCount(0);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
   expect(calls.filter(call => call.criteria.pi === "Marc Porosoff" && call.offset === 0)).toHaveLength(2);
   for (const retryCall of calls.slice(callsBeforeRetry)) {
@@ -507,9 +545,97 @@ test("institution-only shared URLs restore and execute without an AI key", async
   await expect(page.locator("#ii-key-setup")).toBeVisible();
   await expect(page.locator("#ii-key-status")).toContainText("deterministic loaded-award evidence");
   await expect(page.locator("#ii-question-answer")).toBeVisible();
-  await expect(page.locator("#ii-direct-answer")).toContainText("Investigators in the loaded evidence");
+  await expect(page.locator("#ii-direct-answer")).toContainText("investigator identities appear");
+  await expect(page.locator("#ii-direct-answer table")).toContainText("InvestigatorAwards");
   await expect(page.locator("#ii-answer-limitations")).toContainText("Question translation was unavailable");
   expect(calls).toHaveLength(6);
+});
+
+test("institutional answers use scannable tables, source-balanced evidence, and links to paged cards", async ({ page }) => {
+  await page.addInitScript(() => localStorage.removeItem("funding-finder.credentials.v1"));
+  mockHybrid(page);
+  const calls = mockAwards(page, { resultCountPerSource: { NSF: 25, NIH: 4, DOE: 4 } });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Who has awards in the loaded public evidence?");
+  await page.locator("#ii-question").press("Enter");
+  await expect.poll(() => calls.length).toBe(3);
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer .ii-answer-table")).toContainText("InvestigatorAwards");
+  await expect(page.locator("#ii-direct-answer")).not.toContainText("currently loaded award");
+  await expect(page.locator("#ii-answer-evidence .ii-evidence-list > li")).toHaveCount(24);
+  await expect(page.locator("#ii-answer-evidence")).toContainText("balanced across the loaded sources");
+  const evidenceSources = await page.locator("#ii-answer-evidence [data-ii-evidence-link]").evaluateAll(links => (
+    links.map(link => link.textContent.trim().split(":", 1)[0])
+  ));
+  expect(evidenceSources.slice(0, 3)).toEqual(["NSF", "NIH", "DOE"]);
+  expect(evidenceSources.filter(source => source === "NIH")).toHaveLength(4);
+  expect(evidenceSources.filter(source => source === "DOE")).toHaveLength(4);
+  await expect(page.locator("#ii-answer-evidence .ii-evidence-heading").first()).toContainText("Investigator:");
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–10 of 33");
+
+  const doeEvidence = page.locator("#ii-answer-evidence [data-ii-evidence-link^='DOE:']").first();
+  const doeEvidenceId = await doeEvidence.getAttribute("data-ii-evidence-link");
+  await doeEvidence.click();
+  const doeCard = page.locator(`[data-evidence-id="${doeEvidenceId}"]`);
+  await expect(doeCard).toBeVisible();
+  await expect(doeCard).toBeFocused();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 21–30 of 33");
+
+  await page.locator("#ii-question").fill("Which programs funded catalysis?");
+  await page.locator("#ii-question").press("Enter");
+  await expect.poll(() => calls.length).toBe(6);
+  const programLink = page.locator("#ii-direct-answer .ii-answer-table [data-ii-evidence-link]").first();
+  await expect(programLink).toBeVisible();
+  const programEvidenceId = await programLink.getAttribute("data-ii-evidence-link");
+  await programLink.click();
+  await expect(page.locator(`[data-evidence-id="${programEvidenceId}"]`)).toBeFocused();
+});
+
+test("question submission is single-flight while institution resolution is pending", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
+  const providerCalls = [];
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls.push(route.request().postDataJSON());
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ output_text: JSON.stringify({
+        agency: "all",
+        program: "",
+        topic: "",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "investigators",
+        narrative_needed: false,
+      }) }),
+    });
+  });
+  mockHybrid(page);
+  const awardCalls = mockAwards(page, { institutionResponseDelayMs: 250 });
+  const registryRequests = [];
+  page.on("request", request => {
+    if (new URL(request.url()).pathname === "/institutions/search") registryRequests.push(request.url());
+  });
+  await openInstitutionalIntelligence(page);
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  const question = page.locator("#ii-question");
+  const askButton = page.locator("#ii-ask-button");
+  await question.fill("Who has awards in the loaded public evidence?");
+  await question.press("Enter");
+  await expect(askButton).toBeDisabled();
+  await question.press("Enter");
+  await question.dispatchEvent("keydown", { key: "Enter", code: "Enter", repeat: true, bubbles: true, cancelable: true });
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(askButton).toBeEnabled();
+  expect(registryRequests).toHaveLength(1);
+  expect(providerCalls).toHaveLength(1);
+  expect(awardCalls).toHaveLength(3);
 });
 
 test("one unavailable award source does not suppress the other institutional evidence", async ({ page }) => {
@@ -526,7 +652,7 @@ test("one unavailable award source does not suppress the other institutional evi
   await expect(page.locator("#ii-metrics")).toContainText("2Projects loaded");
   await expect(page.locator("#ii-metrics")).toContainText("2Investigator identities in loaded results");
   await expect(page.locator("#ii-metrics")).toContainText("2Distinct programs in loaded results");
-  await expect(page.locator("#ii-metrics")).toContainText("2019–2026Loaded award years");
+  await expect(page.locator("#ii-metrics")).toContainText("2019–2026Years represented in loaded awards");
 });
 
 test("the natural-language translator reuses the saved Funding Finder provider and exposes its structured plan", async ({ page }) => {
@@ -663,7 +789,7 @@ test("institutional questions cite loaded evidence and refresh only on explicit 
   ]);
   expect(evidencePayload.public_award_evidence).toHaveLength(1);
   expect(JSON.stringify(evidencePayload)).not.toMatch(/profile|cv_text|orcid|saved_notes|pursuit|alert_data|provider_key/i);
-  await page.getByRole("button", { name: "Load more NSF" }).click();
+  await page.getByRole("button", { name: "Load additional awards" }).click();
   await expect.poll(() => calls.at(-1)?.offset).toBe(25);
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(2);
   expect(providerInputs).toHaveLength(2);
@@ -851,20 +977,22 @@ test("key setup inside Institutional Intelligence populates Funding Finder's sha
 test("Institutional Intelligence fits a narrow mobile viewport", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   mockHybrid(page);
-  mockAwards(page);
+  mockAwards(page, { resultCountPerSource: { NSF: 12, NIH: 0, DOE: 0 } });
   await openInstitutionalIntelligence(page);
   await chooseInstitution(page, "MIT", "Massachusetts Institute of Technology");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
+  await expect(page.locator("#ii-awards .ii-award-card:visible")).toHaveCount(10);
+  await expect(page.getByRole("button", { name: "Next 10 awards" })).toBeVisible();
   await expect(page.locator(".ii-shell-heading")).toBeHidden();
-  await expect(page.locator(".ii-registry-note")).toBeHidden();
+  await expect(page.locator(".ii-registry-note")).toHaveCount(0);
   await expect(page.locator("#ii-investigators")).toBeVisible();
   await expect(page.locator("#ii-programs")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   const input = await page.locator("#ii-institution").boundingBox();
   expect(input.x).toBeGreaterThanOrEqual(0);
   expect(input.x + input.width).toBeLessThanOrEqual(320);
-  for (const selector of ["#ii-investigators", "#ii-programs"]) {
+  for (const selector of ["#ii-investigators", "#ii-programs", "#ii-card-next"]) {
     const box = await page.locator(selector).boundingBox();
     expect(box.x).toBeGreaterThanOrEqual(0);
     expect(box.x + box.width).toBeLessThanOrEqual(320);
@@ -898,8 +1026,9 @@ test("evidence-grounded answers remain keyboard-operable and contained at 390 px
   await page.keyboard.press("Enter");
   await expect(page.locator("#ii-ask")).toHaveAttribute("open", "");
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
-  await page.locator("#ii-ask-button").focus();
-  await page.keyboard.press("Enter");
+  await page.locator("#ii-question").press("Shift+Enter");
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await page.locator("#ii-question").press("Enter");
   await expect(page.locator("#ii-question-answer")).toBeVisible();
   await expect(page.locator("#ii-direct-answer")).toContainText("Marc Porosoff");
   await expect(page.locator("#ii-answer-evidence a").first()).toBeVisible();
