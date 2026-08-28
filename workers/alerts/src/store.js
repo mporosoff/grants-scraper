@@ -280,8 +280,11 @@ export class D1AlertStore {
     const bounded = Math.max(1, Math.min(25, Number(limit) || 4));
     const calendarDate = String(evaluationWindowStartedAt || "").slice(0, 10);
     const values = rows(await this.db.prepare(
-      "SELECT s.*, u.email, u.manage_token FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.active = 1 AND s.verified_at IS NOT NULL AND u.suppressed_at IS NULL AND (s.evaluation_cursor_at IS NOT NULL OR COALESCE(s.last_evaluated_at, '') < ? OR (s.type = 'opportunity' AND COALESCE(s.last_calendar_evaluated_on, '') < ? AND EXISTS (SELECT 1 FROM json_each(json_extract(s.definition_json, '$.triggers')) WHERE value = 'closing_reminders'))) AND (s.evaluation_cursor_at IS NULL OR s.evaluation_window_started_at IS NULL OR s.evaluation_window_started_at = ?) ORDER BY CASE WHEN s.evaluation_cursor_at IS NOT NULL THEN 0 ELSE 1 END, s.id LIMIT ?",
-    ).bind(generatedAt, calendarDate, evaluationWindowStartedAt, bounded + 1).all());
+      "SELECT s.*, u.email, u.manage_token FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.active = 1 AND s.verified_at IS NOT NULL AND u.suppressed_at IS NULL AND (s.evaluation_cursor_at IS NOT NULL OR (MAX(s.baseline_at, s.verified_at) <= ? AND COALESCE(s.last_evaluated_at, '') < ?) OR (s.type = 'opportunity' AND MAX(s.baseline_at, s.verified_at) <= ? AND COALESCE(s.last_calendar_evaluated_on, '') < ? AND EXISTS (SELECT 1 FROM json_each(json_extract(s.definition_json, '$.triggers')) WHERE value = 'closing_reminders'))) AND (s.evaluation_cursor_at IS NULL OR s.evaluation_window_started_at IS NULL OR s.evaluation_window_started_at = ?) ORDER BY CASE WHEN s.evaluation_cursor_at IS NOT NULL THEN 0 ELSE 1 END, s.id LIMIT ?",
+    ).bind(
+      generatedAt, generatedAt, evaluationWindowStartedAt || "", calendarDate,
+      evaluationWindowStartedAt, bounded + 1,
+    ).all());
     return { subscriptions: values.slice(0, bounded), hasMore: values.length > bounded };
   }
 
@@ -354,7 +357,7 @@ export class D1AlertStore {
         ]
       : [evaluatedAt, cycle?.calendarEvaluationDate || "", now, subscriptionId];
     const result = await this.db.prepare(
-      `UPDATE subscriptions SET last_evaluated_at = MAX(COALESCE(last_evaluated_at, ''), ?), last_calendar_evaluated_on = MAX(COALESCE(last_calendar_evaluated_on, ''), ?), evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, evaluation_weekly_window_at = NULL, evaluation_input_generated_at = NULL, evaluation_source_generated_at = NULL, updated_at = ? WHERE ${predicate}`,
+      `UPDATE subscriptions SET last_evaluated_at = MAX(COALESCE(last_evaluated_at, ''), ?, baseline_at), last_calendar_evaluated_on = MAX(COALESCE(last_calendar_evaluated_on, ''), ?), evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, evaluation_weekly_window_at = NULL, evaluation_input_generated_at = NULL, evaluation_source_generated_at = NULL, updated_at = ? WHERE ${predicate}`,
     ).bind(...values).run();
     return Number(result?.meta?.changes || 0) > 0;
   }

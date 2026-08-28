@@ -341,7 +341,7 @@ export async function evaluateSubscriptions({
     subscription,
     ...relevantChanges(
       subscription, changes, boundedChangeLimit, generatedAt,
-      subscription.evaluation_source_generated_at || sourceGeneratedAt,
+      sourceGeneratedAt,
       evaluationWindowStartedAt, weeklyWindowAt,
     ),
   }));

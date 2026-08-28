@@ -2231,6 +2231,45 @@ test("a daily trigger consumed by an older continuation durably queues its remin
   assert.equal((await store.operationalHealth("2026-09-01T13:21:00.000Z")).schedulerRecent, true);
 });
 
+test("an adopted window excludes later subscriptions and completion never predates their baseline", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const baselineAt = "2026-09-01T13:16:00.000Z";
+  const verifiedAt = "2026-09-01T13:17:00.000Z";
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "immediate",
+    definition: { opportunity_id: "opp-newer-cycle", triggers: ["amended", "closing_reminders"] },
+    baselineAt, verifiedAt, lastEvaluatedAt: null,
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const adoptedInput = "2026-09-01T13:14:00.000Z";
+  const adoptedWindow = "2026-09-01T13:15:00.000Z";
+  const oldSelection = await store.activeSubscriptionsForEvaluation(
+    adoptedInput, 25, adoptedWindow,
+  );
+  assert.deepEqual(oldSelection, { subscriptions: [], hasMore: false });
+
+  const defensiveCompletion = await store.completeEvaluation(
+    "watch-1", adoptedInput, "2026-09-01T13:18:00.000Z",
+    {
+      verificationTokenHash: "token-old", baselineAt,
+      evaluationWindowStartedAt: adoptedWindow,
+      evaluationInputGeneratedAt: adoptedInput,
+      calendarEvaluationDate: "2026-09-01",
+    },
+  );
+  assert.equal(defensiveCompletion, true);
+  assert.equal(database.prepare(
+    "SELECT last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get().last_evaluated_at, baselineAt);
+
+  const nextSelection = await store.activeSubscriptionsForEvaluation(
+    "2026-09-02T13:14:00.000Z", 25, "2026-09-02T13:15:00.000Z",
+  );
+  assert.equal(nextSelection.subscriptions.length, 1);
+  assert.equal(nextSelection.subscriptions[0].id, "watch-1");
+});
+
 test("saved-search evaluation resumes equal-timestamp change batches without duplicates", async () => {
   const subscription = {
     id: "saved-1", type: "saved_search", active: 1,
@@ -2777,6 +2816,55 @@ test("multiple incomplete windows remain durable and recover oldest-first across
   const next = await store.dailyContinuationState("2026-09-08T16:03:00.000Z");
   assert.equal(next.evaluationWindowStartedAt, mondayOrigin);
   assert.equal(next.outstandingWindowCount, 1);
+});
+
+test("cursor rebase coverage uses the current source generation while input remains frozen", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", type: "opportunity",
+    definition: { opportunity_id: "opp-retention-gap", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-09-01T13:14:00.000Z",
+  });
+  const origin = "2026-09-02T13:15:00.000Z";
+  const inputGeneration = "2026-09-02T13:14:00.000Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-02T13:00:00.000Z", cursorEventId: "missing-cursor",
+    windowStartedAt: origin, weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    inputGeneratedAt: inputGeneration, sourceGeneratedAt: inputGeneration,
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const current = new Date("2026-09-10T13:14:00.000Z");
+  await assert.rejects(
+    evaluateSubscriptions({
+      store,
+      assets: {
+        catalog: { opportunities: [] },
+        changes: {
+          schema_version: 1, retention_days: 1,
+          events: [{
+            id: "retained-old-event", type: "amended",
+            changed_at: "2026-09-02T12:00:00.000Z", opportunity_id: "opp-retention-gap",
+            record: { opportunity_id: "opp-retention-gap", title: "Retained boundary" },
+          }],
+        },
+      },
+      env, now: current,
+      evaluationWindowStartedAt: origin,
+      weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+      evaluationInputGeneratedAt: inputGeneration,
+    }),
+    error => error?.code === "evaluation_rebase_unsafe",
+  );
+  const cursor = database.prepare(
+    "SELECT evaluation_cursor_event_id,evaluation_input_generated_at,evaluation_source_generated_at,last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...cursor }, {
+    evaluation_cursor_event_id: "missing-cursor",
+    evaluation_input_generated_at: inputGeneration,
+    evaluation_source_generated_at: inputGeneration,
+    last_evaluated_at: "2026-09-01T13:14:00.000Z",
+  });
 });
 
 test("a changed input generation safely rebases a missing cursor without loss, duplication, or window leakage", async () => {
