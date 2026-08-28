@@ -2491,6 +2491,51 @@ test("an exact manual daily scheduled test is idempotent and executes its candid
   assert.equal(deliveryQueries, 1);
 });
 
+test("a timed-out run start settles and revokes its late durable claim before returning", async () => {
+  let releaseStart;
+  let insertedStart;
+  let activeClaim = null;
+  let assetsLoaded = false;
+  const inserted = new Promise(resolve => { insertedStart = resolve; });
+  const startRelease = new Promise(resolve => { releaseStart = resolve; });
+  const store = {
+    startRun: async run => {
+      activeClaim = { runId: run.id, token: run.claimToken };
+      insertedStart();
+      await startRelease;
+      return true;
+    },
+    runClaimIsCurrent: async (runId, token) => (
+      activeClaim?.runId === runId && activeClaim?.token === token
+    ),
+    revokeRunClaim: async (runId, token) => {
+      if (activeClaim?.runId !== runId || activeClaim?.token !== token) return false;
+      activeClaim = null;
+      return true;
+    },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    assetLoader: async () => { assetsLoaded = true; return {}; },
+    now: () => fixedNow,
+  });
+  let settled = false;
+  const pending = scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "40" },
+  ).then(result => { settled = true; return result; });
+  await inserted;
+  await new Promise(resolve => setTimeout(resolve, 45));
+  assert.equal(settled, false, "the handler waits for the mutating start operation to settle");
+  assert.ok(activeClaim, "the late insert remains exclusively owned while it settles");
+  releaseStart();
+  const result = await pending;
+  assert.equal(result.status, "incomplete_timeout");
+  assert.equal(result.errorCode, "scheduler_deadline_exceeded");
+  assert.equal(activeClaim, null, "the late run claim is revoked before the handler returns");
+  assert.equal(assetsLoaded, false);
+});
+
 test("a stalled subscription query ends inside the overall budget with truthful stage evidence", async () => {
   let claim;
   let revoked = false;
@@ -2952,6 +2997,70 @@ test("revoked scheduler fencing makes every late evaluation and delivery write a
   assert.equal(database.prepare(
     "SELECT COUNT(*) AS count FROM evaluation_runs WHERE claim_token IS NOT NULL",
   ).get().count, 0);
+});
+
+test("saved-search qualification writes carry the same scheduler fence as their event", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "saved_search", cadence: "immediate",
+    definition: { query: "fenced hydrogen" }, lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  database.prepare(
+    "INSERT INTO subscription_qualifications(subscription_id,opportunity_id,qualified,updated_at) VALUES('watch-1','opp-new',0,'2026-08-01T00:00:00.000Z')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const claim = { runId: "qualification-run", token: "qualification-token" };
+  const origin = "2026-09-01T13:15:00.000Z";
+  const input = "2026-09-01T13:14:00.000Z";
+  assert.equal(await store.startRun({
+    id: claim.runId, claimToken: claim.token, startedAt: origin, scheduledAt: origin,
+    runKind: "daily", evaluationWindowStartedAt: origin,
+    weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    evaluationInputGeneratedAt: input, evaluationSourceGeneratedAt: input,
+  }), true);
+  const proxy = new Proxy(store, {
+    get(target, property) {
+      if (property === "enqueueEvent") {
+        return async event => {
+          const inserted = await target.enqueueEvent(event);
+          await target.revokeRunClaim(
+            claim.runId, claim.token, "2026-09-01T13:15:01.000Z",
+          );
+          return inserted;
+        };
+      }
+      const value = target[property];
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
+  const opportunity = { opportunity_id: "opp-new", title: "Hydrogen catalysis" };
+  await assert.rejects(evaluateSubscriptions({
+    store: proxy,
+    assets: {
+      catalog: { opportunities: [opportunity] },
+      changes: {
+        schema_version: 1, generated_at: input, retention_days: 90,
+        events: [{
+          id: "new-event", type: "new", changed_at: "2026-09-01T13:00:00.000Z",
+          opportunity_id: "opp-new", record: opportunity,
+        }],
+      },
+      matcher: {
+        prepare: () => {},
+        matchDetails: () => new Map([["opp-new", { reasons: ["Fenced match"] }]]),
+      },
+    },
+    env, now: new Date(origin), evaluationWindowStartedAt: origin,
+    weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    evaluationInputGeneratedAt: input, schedulerClaim: claim,
+  }), error => error.code === "scheduler_claim_lost");
+  assert.equal(database.prepare(
+    "SELECT qualified FROM subscription_qualifications WHERE subscription_id='watch-1' AND opportunity_id='opp-new'",
+  ).get().qualified, 0, "the revoked run cannot overwrite qualification state");
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE event_key='strong:opp-new:new-event'",
+  ).get().count, 1, "the event committed before revocation remains idempotently owned");
 });
 
 test("ambiguous provider completion after fence revocation reuses one provider identity", async () => {

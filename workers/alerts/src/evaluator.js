@@ -282,6 +282,7 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
       await store.setQualification(subscription.id, id, qualifies, now.toISOString(), {
         verificationTokenHash: subscription.verification_token_hash,
         baselineAt: subscription.baseline_at,
+        claim: evaluationContext.schedulerClaim || null,
       });
     }
   }

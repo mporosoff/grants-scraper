@@ -551,7 +551,56 @@ export function createScheduledHandler({
       claimToken: runClaimFactory(),
     };
     const schedulerClaim = { runId: run.id, token: run.claimToken };
-    const started = await budget.run("run_start", () => store.startRun(run), 15_000);
+    let claimRevoked = false;
+    let fencingSafe = true;
+    const revokeClaim = async status => {
+      const revokedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+      const revoked = typeof store.revokeRunClaim === "function"
+        ? await boundedFinalization(() => store.revokeRunClaim(
+            run.id, run.claimToken, revokedAt, status, "scheduler_deadline_exceeded",
+          ))
+        : false;
+      const stillCurrent = typeof store.runClaimIsCurrent === "function"
+        ? await boundedFinalization(() => store.runClaimIsCurrent(run.id, run.claimToken))
+        : !revoked;
+      if (!revoked && stillCurrent) {
+        throw Object.assign(new Error("The scheduler claim could not be revoked."), {
+          code: "scheduler_fence_revoke_failed",
+        });
+      }
+      claimRevoked = true;
+    };
+    let startOperation = null;
+    let started;
+    try {
+      started = await budget.run(
+        "run_start",
+        () => {
+          startOperation = Promise.resolve(store.startRun(run));
+          return startOperation;
+        },
+        15_000,
+        {
+          onTimeout: async () => {
+            const accepted = await startOperation;
+            if (accepted) {
+              await revokeClaim(runKind === "retry" ? "failed_timeout" : "incomplete_timeout");
+            }
+          },
+        },
+      );
+    } catch (error) {
+      const completed = now();
+      run.status = error instanceof SchedulerFenceError
+        ? "failed_fence_revoke"
+        : error instanceof SchedulerTimeoutError
+          ? runKind === "retry" ? "failed_timeout" : "incomplete_timeout"
+          : "failed";
+      run.errorCode = String(error?.code || "scheduler_failed").slice(0, 80);
+      run.completedAt = completed.toISOString();
+      run.durationMs = Math.max(0, completed.getTime() - current.getTime());
+      return run;
+    }
     if (started === false) return { ...run, status: "duplicate_skipped" };
     if (dailyInProgress) {
       const completed = now();
@@ -570,25 +619,9 @@ export function createScheduledHandler({
       return run;
     }
 
-    let claimRevoked = false;
-    let fencingSafe = true;
     const revokeTimedOutClaim = async () => {
-      const revokedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
       const timeoutStatus = run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout";
-      const revoked = typeof store.revokeRunClaim === "function"
-        ? await boundedFinalization(() => store.revokeRunClaim(
-            run.id, run.claimToken, revokedAt, timeoutStatus, "scheduler_deadline_exceeded",
-          ))
-        : false;
-      const stillCurrent = typeof store.runClaimIsCurrent === "function"
-        ? await boundedFinalization(() => store.runClaimIsCurrent(run.id, run.claimToken))
-        : !revoked;
-      if (!revoked && stillCurrent) {
-        throw Object.assign(new Error("The scheduler claim could not be revoked."), {
-          code: "scheduler_fence_revoke_failed",
-        });
-      }
-      claimRevoked = true;
+      await revokeClaim(timeoutStatus);
     };
     const stage = async (name, operation, maximumMs, progress = run.progress) => {
       const stageNow = new Date(Math.max(current.getTime(), clock())).toISOString();
