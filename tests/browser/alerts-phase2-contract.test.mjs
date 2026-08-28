@@ -13,7 +13,7 @@ import {
   DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "../../workers/alerts/src/evaluator.js";
 import {
-  createHandler, createScheduledHandler, weeklyDigestEligibilityCutoff,
+  createHandler, createScheduledHandler, weeklyDigestEligibilityCutoff, weeklyDigestWindowFor,
 } from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
 import { D1AlertStore, RETENTION_DAYS } from "../../workers/alerts/src/store.js";
@@ -1872,7 +1872,7 @@ test("FF-BUG-020 subsequent runs and health terminalize abandoned scheduler runs
     [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms, recoveredRun.stage, recoveredRun.error_code],
     ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000, "stale_recovery", "stale_run_recovered"],
   );
-  assert.equal(await store.dailyContinuationState("2026-09-02T12:00:00.000Z"), "pending");
+  assert.equal((await store.dailyContinuationState("2026-09-02T12:00:00.000Z")).state, "pending");
   assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='recent-retry'").get().status, "running");
 
   await store.startRun({
@@ -1959,8 +1959,14 @@ test("0005 preserves representative production state and adds resumable schedule
   assert.ok(columns.has("stage"));
   assert.ok(columns.has("progress_json"));
   assert.ok(columns.has("evaluation_completed_at"));
+  assert.ok(columns.has("evaluation_window_started_at"));
+  assert.ok(columns.has("weekly_window_at"));
   const subscriptionColumns = new Set(database.prepare("PRAGMA table_info(subscriptions)").all().map(row => row.name));
   assert.ok(subscriptionColumns.has("evaluation_cursor_at"));
+  assert.ok(subscriptionColumns.has("evaluation_window_started_at"));
+  const eventColumns = new Set(database.prepare("PRAGMA table_info(notification_events)").all().map(row => row.name));
+  assert.ok(eventColumns.has("evaluation_window_started_at"));
+  assert.ok(eventColumns.has("weekly_window_at"));
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM subscriptions").get().count, 1);
   const run = database.prepare(
     "SELECT status,stage,evaluation_completed_at FROM evaluation_runs WHERE id='existing-daily'",
@@ -2136,6 +2142,151 @@ test("retry runs drain due weekly overflow without sending the new week's events
     { id: "weekly-due", status: "sent" },
     { id: "weekly-new", status: "queued" },
   ]);
+});
+
+test("an originating Sunday weekly window survives Monday continuations and excludes Monday work", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", type: "opportunity",
+    definition: { opportunity_id: "opp-window", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-09-01T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const sunday = new Date("2026-09-06T13:15:00.000Z");
+  const origin = sunday.toISOString();
+  const weeklyWindow = "2026-09-06T23:59:59.999Z";
+  assert.equal(weeklyDigestWindowFor(sunday), weeklyWindow);
+  assert.equal(
+    weeklyDigestWindowFor(new Date("2026-09-07T13:15:00.000Z")),
+    "2026-09-13T23:59:59.999Z",
+  );
+  const sundayRecords = Array.from({ length: 51 }, (_value, index) => ({
+    opportunity_id: "opp-window", title: `Sunday window update ${index}`,
+  }));
+  const sundayAssets = {
+    catalog: { opportunities: [] },
+    changes: {
+      generated_at: "2026-09-06T13:14:00.000Z",
+      events: sundayRecords.map((record, index) => ({
+        id: `sunday-${String(index).padStart(3, "0")}`, type: "amended",
+        changed_at: "2026-09-06T13:00:00.000Z", opportunity_id: "opp-window", record,
+      })),
+    },
+  };
+  const provider = new MockEmailProvider();
+  const providerSend = provider.sendEmail.bind(provider);
+  provider.sendEmail = async (...args) => {
+    if (!provider.messages.length) {
+      const checkpoint = database.prepare(
+        "SELECT status,evaluation_completed_at,evaluation_window_started_at,weekly_window_at FROM evaluation_runs WHERE run_kind='continuation' ORDER BY started_at DESC LIMIT 1",
+      ).get();
+      assert.equal(checkpoint.status, "running");
+      assert.ok(checkpoint.evaluation_completed_at);
+      assert.equal(checkpoint.evaluation_window_started_at, origin);
+      assert.equal(checkpoint.weekly_window_at, weeklyWindow);
+    }
+    return providerSend(...args);
+  };
+  const runAt = (current, assets = sundayAssets) => createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => assets,
+    now: () => current,
+    clock: () => current.getTime(),
+  });
+
+  const first = await runAt(sunday)(
+    { scheduledTime: sunday.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(first.runKind, "daily");
+  assert.equal(first.status, "incomplete_evaluation");
+  assert.equal(first.evaluationWindowStartedAt, origin);
+  assert.equal(first.weeklyWindowAt, weeklyWindow);
+  assert.equal(provider.messages.length, 0);
+  assert.equal(database.prepare(
+    "SELECT evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_window_started_at, origin);
+  assert.equal((await store.operationalHealth("2026-09-06T13:20:00.000Z")).schedulerRecent, false);
+
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,scheduled_at,run_kind,status,stage,evaluation_window_started_at,weekly_window_at) VALUES('stalled-sunday-continuation','2026-09-06T23:40:00.000Z','2026-09-06T23:40:00.000Z','continuation','running','subscription_evaluation',?,?)",
+  ).run(origin, weeklyWindow);
+  const mondayManual = new Date("2026-09-07T00:05:00.000Z");
+  const second = await runAt(mondayManual)(
+    { scheduledTime: mondayManual.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(second.runKind, "continuation");
+  assert.equal(second.status, "incomplete_evaluation");
+  assert.equal(second.evaluationWindowStartedAt, origin);
+  assert.equal(second.weeklyWindowAt, weeklyWindow);
+  assert.equal(provider.messages.length, 0);
+  assert.equal(database.prepare(
+    "SELECT status FROM evaluation_runs WHERE id='stalled-sunday-continuation'",
+  ).get().status, "failed_stale_recovered");
+  assert.equal((await store.operationalHealth("2026-09-07T00:06:00.000Z")).schedulerRecent, false);
+
+  const mondayComplete = new Date("2026-09-07T00:10:00.000Z");
+  const completionController = {
+    scheduledTime: mondayComplete.getTime(), cron: "2-57/5 * * * *",
+  };
+  const third = await runAt(mondayComplete)(completionController, env);
+  const duplicate = await runAt(mondayComplete)(completionController, env);
+  assert.equal(third.runKind, "continuation");
+  assert.equal(third.status, "completed");
+  assert.equal(third.evaluationWindowStartedAt, origin);
+  assert.equal(third.weeklyWindowAt, weeklyWindow);
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare(
+    "SELECT evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_window_started_at, null);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE evaluation_window_started_at=? AND weekly_window_at=?",
+  ).get(origin, weeklyWindow).count, 51);
+  assert.equal((await store.operationalHealth("2026-09-07T00:11:00.000Z")).schedulerRecent, true);
+
+  for (const minute of [15, 20]) {
+    const retryAt = new Date(`2026-09-07T00:${minute}:00.000Z`);
+    await runAt(retryAt)(
+      { scheduledTime: retryAt.getTime(), cron: "2-57/5 * * * *" }, env,
+    );
+  }
+  assert.equal(provider.messages.length, 3);
+  assert.equal(new Set(provider.messages.map(message => message.idempotencyKey)).size, 3);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE status='sent'",
+  ).get().count, 51);
+
+  const mondayDaily = new Date("2026-09-07T13:15:00.000Z");
+  const mondayAssets = {
+    catalog: { opportunities: [] },
+    changes: {
+      generated_at: "2026-09-07T13:14:00.000Z",
+      events: [{
+        id: "monday-independent", type: "amended",
+        changed_at: "2026-09-07T13:00:00.000Z", opportunity_id: "opp-window",
+        record: { opportunity_id: "opp-window", title: "Independent Monday update" },
+      }],
+    },
+  };
+  const mondayResult = await runAt(mondayDaily, mondayAssets)(
+    { scheduledTime: mondayDaily.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(mondayResult.runKind, "daily");
+  assert.equal(mondayResult.weeklyWindowAt, "2026-09-13T23:59:59.999Z");
+  const mondayRetry = new Date("2026-09-07T13:20:00.000Z");
+  await runAt(mondayRetry, mondayAssets)(
+    { scheduledTime: mondayRetry.getTime(), cron: "2-57/5 * * * *" }, env,
+  );
+  assert.equal(provider.messages.length, 3);
+  const independent = database.prepare(
+    "SELECT status,evaluation_window_started_at,weekly_window_at FROM notification_events WHERE event_key='amended:monday-independent'",
+  ).get();
+  assert.deepEqual({ ...independent }, {
+    status: "queued", evaluation_window_started_at: mondayDaily.toISOString(),
+    weekly_window_at: "2026-09-13T23:59:59.999Z",
+  });
 });
 
 test("an exact manual daily scheduled test is idempotent and executes its candidate once", async () => {

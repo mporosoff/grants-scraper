@@ -77,7 +77,7 @@ function payloadFor(record, detail, env, whyMatched = []) {
   };
 }
 
-async function enqueue(store, subscription, value, now) {
+async function enqueue(store, subscription, value, now, evaluationContext = {}) {
   const id = `evt_${(await sha256Hex(`${subscription.id}|${value.eventKey}`)).slice(0, 32)}`;
   return store.enqueueEvent({
     id,
@@ -87,9 +87,12 @@ async function enqueue(store, subscription, value, now) {
     opportunityId: value.opportunityId,
     payload: value.payload,
     createdAt: now.toISOString(),
+    evaluationWindowStartedAt: evaluationContext.evaluationWindowStartedAt || null,
+    weeklyWindowAt: evaluationContext.weeklyWindowAt || null,
     cycle: {
       verificationTokenHash: subscription.verification_token_hash,
       baselineAt: subscription.baseline_at,
+      evaluationWindowStartedAt: evaluationContext.evaluationWindowStartedAt || null,
     },
   });
 }
@@ -126,7 +129,7 @@ function relevantChanges(subscription, changes, limit = EVALUATION_CHANGE_LIMIT)
   };
 }
 
-async function evaluateOpportunity(store, subscription, assets, env, now, changes) {
+async function evaluateOpportunity(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   const id = definition.opportunity_id;
   const triggers = new Set(definition.triggers);
@@ -140,7 +143,7 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
       eventKind: kind,
       opportunityId: id,
       payload: payloadFor(event.record, event.detail, env),
-    }, now);
+    }, now, evaluationContext);
     if (inserted) matched += 1;
   }
   if (triggers.has("closing_reminders")) {
@@ -153,14 +156,14 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
         eventKind: "closing_reminder",
         opportunityId: id,
         payload: payloadFor(record, `${threshold}-day closing reminder`, env),
-      }, now);
+      }, now, evaluationContext);
       if (inserted) matched += 1;
     }
   }
   return matched;
 }
 
-async function evaluateSavedSearch(store, subscription, assets, env, now, changes) {
+async function evaluateSavedSearch(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   if (!changes.length) return 0;
   const asOf = isoDate(now);
@@ -182,7 +185,7 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
         eventKind: "strong_match",
         opportunityId: id,
         payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons),
-      }, now);
+      }, now, evaluationContext);
       if (inserted) matched += 1;
     }
     if (qualifies !== didQualify || !prior.has(id)) {
@@ -195,7 +198,7 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
   return matched;
 }
 
-async function evaluateProgram(store, subscription, assets, env, now, changes) {
+async function evaluateProgram(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   let matched = 0;
   for (const event of changes) {
@@ -212,7 +215,7 @@ async function evaluateProgram(store, subscription, assets, env, now, changes) {
       eventKind,
       opportunityId: String(event.opportunity_id || ""),
       payload: payloadFor(event.record, event.detail, env),
-    }, now);
+    }, now, evaluationContext);
     if (inserted) matched += 1;
   }
   return matched;
@@ -222,6 +225,8 @@ export async function evaluateSubscriptions({
   store, assets, env, now = new Date(),
   subscriptionLimit = EVALUATION_SUBSCRIPTION_LIMIT,
   changeLimit = EVALUATION_CHANGE_LIMIT,
+  evaluationWindowStartedAt = null,
+  weeklyWindowAt = null,
 } = {}) {
   const changes = assets?.changes && Array.isArray(assets.changes.events)
     ? assets.changes
@@ -230,7 +235,9 @@ export async function evaluateSubscriptions({
   const boundedSubscriptionLimit = Math.max(1, Math.min(25, Number(subscriptionLimit) || EVALUATION_SUBSCRIPTION_LIMIT));
   const boundedChangeLimit = Math.max(1, Math.min(50, Number(changeLimit) || EVALUATION_CHANGE_LIMIT));
   const loaded = typeof store.activeSubscriptionsForEvaluation === "function"
-    ? await store.activeSubscriptionsForEvaluation(generatedAt, boundedSubscriptionLimit)
+    ? await store.activeSubscriptionsForEvaluation(
+        generatedAt, boundedSubscriptionLimit, evaluationWindowStartedAt,
+      )
     : await store.activeSubscriptions();
   const sourceSubscriptions = Array.isArray(loaded) ? loaded : loaded.subscriptions;
   const subscriptions = (sourceSubscriptions || []).slice(0, boundedSubscriptionLimit);
@@ -248,16 +255,18 @@ export async function evaluateSubscriptions({
   }
   let matchedEventCount = 0;
   let continuationRequired = Boolean(!Array.isArray(loaded) && loaded?.hasMore);
+  const evaluationContext = { evaluationWindowStartedAt, weeklyWindowAt };
   for (const batch of batches) {
     const { subscription } = batch;
     let matched = 0;
-    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now, batch.events);
-    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now, batch.events);
-    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now, batch.events);
+    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now, batch.events, evaluationContext);
+    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now, batch.events, evaluationContext);
+    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now, batch.events, evaluationContext);
     matchedEventCount += matched;
     const cycle = {
       verificationTokenHash: subscription.verification_token_hash,
       baselineAt: subscription.baseline_at,
+      evaluationWindowStartedAt,
     };
     if (batch.complete) {
       const complete = typeof store.completeEvaluation === "function"

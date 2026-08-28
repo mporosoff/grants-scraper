@@ -461,6 +461,17 @@ export function weeklyDigestEligibilityCutoff(now) {
   return cutoff.toISOString();
 }
 
+export function weeklyDigestWindowFor(originatingAt) {
+  const value = new Date(originatingAt);
+  if (!Number.isFinite(value.getTime())) throw new TypeError("A valid evaluation window is required.");
+  const daysUntilSunday = (7 - value.getUTCDay()) % 7;
+  const window = new Date(Date.UTC(
+    value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate() + daysUntilSunday,
+    23, 59, 59, 999,
+  ));
+  return window.toISOString();
+}
+
 export function createScheduledHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
@@ -480,31 +491,51 @@ export function createScheduledHandler({
     const triggerKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
     let runKind = triggerKind;
     let dailyInProgress = false;
-    if (triggerKind === "retry" && (
+    let continuation = { state: "none" };
+    if (
       typeof store.dailyContinuationState === "function"
       || typeof store.needsDailyContinuation === "function"
-    )) {
-      const continuationState = await budget.run(
+    ) {
+      const continuationValue = await budget.run(
         "continuation_check",
         async () => {
           if (typeof store.dailyContinuationState === "function") {
             return store.dailyContinuationState(current.toISOString());
           }
-          return await store.needsDailyContinuation(current.toISOString()) ? "pending" : "none";
+          return await store.needsDailyContinuation(current.toISOString())
+            ? { state: "pending" }
+            : { state: "none" };
         },
         15_000,
       );
-      if (continuationState === "pending") runKind = "continuation";
-      if (continuationState === "running") dailyInProgress = true;
+      continuation = typeof continuationValue === "string"
+        ? { state: continuationValue }
+        : continuationValue || { state: "none" };
+      if (continuation.state === "pending") runKind = "continuation";
+      if (continuation.state === "running") {
+        dailyInProgress = true;
+        runKind = "retry";
+      }
     }
+    const evaluationWindowStartedAt = runKind === "daily"
+      ? scheduledAt.toISOString()
+      : runKind === "continuation"
+        ? String(continuation.evaluationWindowStartedAt || scheduledAt.toISOString())
+        : "";
+    const weeklyWindowAt = runKind === "daily"
+      ? weeklyDigestWindowFor(evaluationWindowStartedAt)
+      : runKind === "continuation"
+        ? String(continuation.weeklyWindowAt || weeklyDigestWindowFor(evaluationWindowStartedAt))
+        : "";
     const scheduledIdentity = scheduledAt.toISOString().replace(/[^0-9]/g, "");
     const run = {
-      id: `run_${scheduledIdentity}_${runKind}`,
+      id: `run_${scheduledIdentity}_${triggerKind}`,
       scheduledAt: scheduledAt.toISOString(), runKind,
       startedAt: current.toISOString(), subscriptionCount: 0, matchedEventCount: 0,
       attemptedCount: 0, deliveredCount: 0, failedCount: 0, status: "running",
       cleanupDeletedCount: 0, cleanupErrorCode: "",
       errorCode: "", evaluationCompletedAt: "", stage: "starting",
+      evaluationWindowStartedAt, weeklyWindowAt,
       stageStartedAt: current.toISOString(),
       progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
     };
@@ -549,10 +580,14 @@ export function createScheduledHandler({
 
     const deliveryBatch = Math.max(1, Math.min(10, Number(env.ALERT_SCHEDULER_DELIVERY_BATCH) || 10));
     let continuationRequired = false;
+    let evaluationCompleted = Boolean(continuation.evaluationCompleted);
+    if (evaluationCompleted) {
+      run.evaluationCompletedAt = String(continuation.evaluationCompletedAt || current.toISOString());
+    }
     let failureStage = "";
     let failureStageStartedAt = "";
     try {
-      if (runKind === "daily" || runKind === "continuation") {
+      if ((runKind === "daily" || runKind === "continuation") && !evaluationCompleted) {
         const assets = await stage(
           "asset_loading",
           () => assetLoader(env, fetchImpl),
@@ -560,7 +595,10 @@ export function createScheduledHandler({
         );
         const evaluation = await stage(
           "subscription_evaluation",
-          () => evaluateSubscriptions({ store, assets, env, now: current }),
+          () => evaluateSubscriptions({
+            store, assets, env, now: current,
+            evaluationWindowStartedAt, weeklyWindowAt,
+          }),
           5 * 60_000,
         );
         Object.assign(run, {
@@ -575,6 +613,16 @@ export function createScheduledHandler({
         };
         if (!continuationRequired) {
           run.evaluationCompletedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+          evaluationCompleted = true;
+          if (typeof store.markRunEvaluationComplete === "function") {
+            await stage(
+              "evaluation_checkpoint",
+              () => store.markRunEvaluationComplete(
+                run.id, run.evaluationCompletedAt, run.progress,
+              ),
+              15_000,
+            );
+          }
         }
       }
 
@@ -599,16 +647,18 @@ export function createScheduledHandler({
         }),
         2 * 60_000,
       );
-      const weeklyDue = !continuationRequired && typeof store.pendingDigestEvents === "function" && (
-        runKind === "retry"
-        || ((runKind === "daily" || runKind === "continuation") && current.getUTCDay() === 0)
-      );
+      const weeklyCutoff = weeklyDigestEligibilityCutoff(current);
+      const originatingWindowDue = evaluationCompleted && weeklyWindowAt
+        && weeklyWindowAt <= weeklyCutoff;
+      const weeklyDue = !continuationRequired
+        && typeof store.pendingDigestEvents === "function"
+        && (runKind === "retry" || originatingWindowDue);
       if (weeklyDue) {
         weekly = await stage(
           "weekly_delivery",
           () => dispatchNotifications({
             store, provider, env, now: current, weekly: true, limit: deliveryBatch,
-            eligibleBefore: weeklyDigestEligibilityCutoff(current),
+            eligibleBefore: weeklyCutoff,
           }),
           2 * 60_000,
         );

@@ -1,6 +1,10 @@
 -- Bound daily evaluation across invocations and retain privacy-safe scheduler progress.
 ALTER TABLE subscriptions ADD COLUMN evaluation_cursor_at TEXT;
 ALTER TABLE subscriptions ADD COLUMN evaluation_cursor_event_id TEXT;
+ALTER TABLE subscriptions ADD COLUMN evaluation_window_started_at TEXT;
+
+ALTER TABLE notification_events ADD COLUMN evaluation_window_started_at TEXT;
+ALTER TABLE notification_events ADD COLUMN weekly_window_at TEXT;
 
 ALTER TABLE evaluation_runs ADD COLUMN stage TEXT NOT NULL DEFAULT 'starting';
 ALTER TABLE evaluation_runs ADD COLUMN stage_started_at TEXT;
@@ -8,6 +12,8 @@ ALTER TABLE evaluation_runs ADD COLUMN last_heartbeat_at TEXT;
 ALTER TABLE evaluation_runs ADD COLUMN progress_json TEXT;
 ALTER TABLE evaluation_runs ADD COLUMN error_code TEXT;
 ALTER TABLE evaluation_runs ADD COLUMN evaluation_completed_at TEXT;
+ALTER TABLE evaluation_runs ADD COLUMN evaluation_window_started_at TEXT;
+ALTER TABLE evaluation_runs ADD COLUMN weekly_window_at TEXT;
 
 UPDATE evaluation_runs
 SET stage = CASE
@@ -24,6 +30,8 @@ SET stage = CASE
     END;
 
 CREATE INDEX IF NOT EXISTS subscriptions_evaluation_progress_idx
-  ON subscriptions(active, evaluation_cursor_at, last_evaluated_at, id);
+  ON subscriptions(active, evaluation_window_started_at, evaluation_cursor_at, last_evaluated_at, id);
 CREATE INDEX IF NOT EXISTS evaluation_runs_daily_progress_idx
-  ON evaluation_runs(run_kind, status, started_at, evaluation_completed_at);
+  ON evaluation_runs(run_kind, status, started_at, evaluation_completed_at, evaluation_window_started_at);
+CREATE INDEX IF NOT EXISTS notification_events_weekly_window_idx
+  ON notification_events(weekly_window_at, evaluation_window_started_at, status, created_at);

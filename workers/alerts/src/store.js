@@ -89,7 +89,7 @@ export class D1AlertStore {
     const errorCode = value.suppressed ? "subscriber_suppressed" : null;
     await this.db.batch([
       this.db.prepare(
-        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0 AND NOT EXISTS (SELECT 1 FROM notification_events n WHERE n.subscription_id = subscriptions.id AND n.message_kind = 'verification' AND n.status = 'sending' AND n.terminal_at IS NULL)",
+        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0 AND NOT EXISTS (SELECT 1 FROM notification_events n WHERE n.subscription_id = subscriptions.id AND n.message_kind = 'verification' AND n.status = 'sending' AND n.terminal_at IS NULL)",
       ).bind(
         value.id, value.subscriberId, value.type, value.cadence, value.definitionJson,
         value.definitionHash, value.verificationTokenHash, value.verificationExpiresAt,
@@ -252,11 +252,11 @@ export class D1AlertStore {
     ).all());
   }
 
-  async activeSubscriptionsForEvaluation(generatedAt, limit = 4) {
+  async activeSubscriptionsForEvaluation(generatedAt, limit = 4, evaluationWindowStartedAt = null) {
     const bounded = Math.max(1, Math.min(25, Number(limit) || 4));
     const values = rows(await this.db.prepare(
-      "SELECT s.*, u.email, u.manage_token FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.active = 1 AND s.verified_at IS NOT NULL AND u.suppressed_at IS NULL AND (s.evaluation_cursor_at IS NOT NULL OR COALESCE(s.last_evaluated_at, '') < ?) ORDER BY s.id LIMIT ?",
-    ).bind(generatedAt, bounded + 1).all());
+      "SELECT s.*, u.email, u.manage_token FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.active = 1 AND s.verified_at IS NOT NULL AND u.suppressed_at IS NULL AND (s.evaluation_cursor_at IS NOT NULL OR COALESCE(s.last_evaluated_at, '') < ?) AND (s.evaluation_cursor_at IS NULL OR s.evaluation_window_started_at IS NULL OR s.evaluation_window_started_at = ?) ORDER BY CASE WHEN s.evaluation_cursor_at IS NOT NULL THEN 0 ELSE 1 END, s.id LIMIT ?",
+    ).bind(generatedAt, evaluationWindowStartedAt, bounded + 1).all());
     return { subscriptions: values.slice(0, bounded), hasMore: values.length > bounded };
   }
 
@@ -291,17 +291,19 @@ export class D1AlertStore {
   async enqueueEvent(event) {
     const values = [
       event.id, event.subscriptionId, event.eventKey, event.eventKind,
-      event.opportunityId || null, JSON.stringify(event.payload), event.createdAt, event.createdAt,
+      event.opportunityId || null, JSON.stringify(event.payload),
+      event.evaluationWindowStartedAt || null, event.weeklyWindowAt || null,
+      event.createdAt, event.createdAt,
     ];
     const result = event.cycle
       ? await this.db.prepare(
-        "INSERT OR IGNORE INTO notification_events(id, subscription_id, event_key, event_kind, opportunity_id, payload_json, status, attempts, next_attempt_at, created_at, message_kind) SELECT ?, ?, ?, ?, ?, ?, 'queued', 0, ?, ?, 'notification' WHERE EXISTS (SELECT 1 FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.id = ? AND s.active = 1 AND s.verified_at IS NOT NULL AND s.verification_token_hash = ? AND s.baseline_at = ? AND u.suppressed_at IS NULL)",
+        "INSERT OR IGNORE INTO notification_events(id, subscription_id, event_key, event_kind, opportunity_id, payload_json, evaluation_window_started_at, weekly_window_at, status, attempts, next_attempt_at, created_at, message_kind) SELECT ?, ?, ?, ?, ?, ?, ?, ?, 'queued', 0, ?, ?, 'notification' WHERE EXISTS (SELECT 1 FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.id = ? AND s.active = 1 AND s.verified_at IS NOT NULL AND s.verification_token_hash = ? AND s.baseline_at = ? AND u.suppressed_at IS NULL)",
       ).bind(
         ...values, event.subscriptionId,
         event.cycle.verificationTokenHash, event.cycle.baselineAt,
       ).run()
       : await this.db.prepare(
-        "INSERT OR IGNORE INTO notification_events(id, subscription_id, event_key, event_kind, opportunity_id, payload_json, status, attempts, next_attempt_at, created_at, message_kind) VALUES(?, ?, ?, ?, ?, ?, 'queued', 0, ?, ?, 'notification')",
+        "INSERT OR IGNORE INTO notification_events(id, subscription_id, event_key, event_kind, opportunity_id, payload_json, evaluation_window_started_at, weekly_window_at, status, attempts, next_attempt_at, created_at, message_kind) VALUES(?, ?, ?, ?, ?, ?, ?, ?, 'queued', 0, ?, ?, 'notification')",
       ).bind(...values).run();
     return Number(result?.meta?.changes || 0) > 0;
   }
@@ -312,25 +314,25 @@ export class D1AlertStore {
 
   async completeEvaluation(subscriptionId, evaluatedAt, now, cycle = null) {
     const predicate = cycle
-      ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
+      ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND (? IS NULL OR evaluation_window_started_at IS NULL OR evaluation_window_started_at = ?) AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
       : "id = ?";
     const values = cycle
-      ? [evaluatedAt, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt]
+      ? [evaluatedAt, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt, cycle.evaluationWindowStartedAt, cycle.evaluationWindowStartedAt]
       : [evaluatedAt, now, subscriptionId];
     await this.db.prepare(
-      `UPDATE subscriptions SET last_evaluated_at = ?, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, updated_at = ? WHERE ${predicate}`,
+      `UPDATE subscriptions SET last_evaluated_at = ?, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, updated_at = ? WHERE ${predicate}`,
     ).bind(...values).run();
   }
 
   async saveEvaluationCursor(subscriptionId, cursorAt, cursorEventId, now, cycle = null) {
     const predicate = cycle
-      ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
+      ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND (? IS NULL OR evaluation_window_started_at IS NULL OR evaluation_window_started_at = ?) AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
       : "id = ?";
     const values = cycle
-      ? [cursorAt, cursorEventId, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt]
-      : [cursorAt, cursorEventId, now, subscriptionId];
+      ? [cursorAt, cursorEventId, cycle.evaluationWindowStartedAt, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt, cycle.evaluationWindowStartedAt, cycle.evaluationWindowStartedAt]
+      : [cursorAt, cursorEventId, null, now, subscriptionId];
     await this.db.prepare(
-      `UPDATE subscriptions SET evaluation_cursor_at = ?, evaluation_cursor_event_id = ?, updated_at = ? WHERE ${predicate}`,
+      `UPDATE subscriptions SET evaluation_cursor_at = ?, evaluation_cursor_event_id = ?, evaluation_window_started_at = ?, updated_at = ? WHERE ${predicate}`,
     ).bind(...values).run();
   }
 
@@ -352,12 +354,12 @@ export class D1AlertStore {
     const staleBefore = staleClaimCutoff(now);
     const cutoff = eligibleBefore || null;
     const subscribers = rows(await this.db.prepare(
-      "SELECT s.subscriber_id, MIN(n.created_at) AS first_created_at FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (? IS NULL OR n.created_at <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND u.suppressed_at IS NULL GROUP BY s.subscriber_id ORDER BY first_created_at, s.subscriber_id LIMIT ?",
+      "SELECT s.subscriber_id, MIN(n.created_at) AS first_created_at FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (n.evaluation_window_started_at IS NULL OR EXISTS (SELECT 1 FROM evaluation_runs r WHERE r.evaluation_window_started_at = n.evaluation_window_started_at AND r.evaluation_completed_at IS NOT NULL)) AND (? IS NULL OR COALESCE(n.weekly_window_at, n.created_at) <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND u.suppressed_at IS NULL GROUP BY s.subscriber_id ORDER BY first_created_at, s.subscriber_id LIMIT ?",
     ).bind(now, staleBefore, cutoff, cutoff, subscriberLimit).all());
     const batches = [];
     for (const subscriber of subscribers) {
       const eligible = rows(await this.db.prepare(
-        "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (? IS NULL OR n.created_at <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND s.subscriber_id = ? AND u.suppressed_at IS NULL ORDER BY n.created_at, n.id LIMIT ?",
+        "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (n.evaluation_window_started_at IS NULL OR EXISTS (SELECT 1 FROM evaluation_runs r WHERE r.evaluation_window_started_at = n.evaluation_window_started_at AND r.evaluation_completed_at IS NOT NULL)) AND (? IS NULL OR COALESCE(n.weekly_window_at, n.created_at) <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND s.subscriber_id = ? AND u.suppressed_at IS NULL ORDER BY n.created_at, n.id LIMIT ?",
       ).bind(
         now, staleBefore, cutoff, cutoff, subscriber.subscriber_id, eventLimit + 1,
       ).all());
@@ -498,10 +500,11 @@ export class D1AlertStore {
   async startRun(run) {
     await this.recoverStaleRuns(run.startedAt);
     const result = await this.db.prepare(
-      "INSERT OR IGNORE INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status, stage, stage_started_at, last_heartbeat_at, progress_json) VALUES(?, ?, ?, ?, 'running', 'starting', ?, ?, ?)",
+      "INSERT OR IGNORE INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status, stage, stage_started_at, last_heartbeat_at, progress_json, evaluation_window_started_at, weekly_window_at) VALUES(?, ?, ?, ?, 'running', 'starting', ?, ?, ?, ?, ?)",
     ).bind(
       run.id, run.startedAt, run.scheduledAt, run.runKind,
       run.startedAt, run.startedAt, JSON.stringify({ processedSubscriptions: 0, processedChanges: 0 }),
+      run.evaluationWindowStartedAt || null, run.weeklyWindowAt || null,
     ).run();
     return Number(result?.meta?.changes || 0) > 0;
   }
@@ -518,17 +521,30 @@ export class D1AlertStore {
     await this.recoverStaleRuns(now);
     const recentBefore = new Date(Date.parse(now) - 26 * 60 * 60_000).toISOString();
     const row = await this.db.prepare(
-      "SELECT status, evaluation_completed_at FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND started_at >= ? ORDER BY started_at DESC LIMIT 1",
+      "SELECT status, scheduled_at, evaluation_completed_at, evaluation_window_started_at, weekly_window_at FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND started_at >= ? ORDER BY started_at DESC LIMIT 1",
     ).bind(recentBefore).first();
-    if (!row) return "none";
-    if (String(row.status || "") === "running") return "running";
-    return !row.evaluation_completed_at && !String(row.status || "").startsWith("completed")
-      ? "pending"
-      : "none";
+    if (!row) return { state: "none" };
+    const status = String(row.status || "");
+    const details = {
+      evaluationWindowStartedAt: String(row.evaluation_window_started_at || row.scheduled_at || ""),
+      weeklyWindowAt: String(row.weekly_window_at || ""),
+      evaluationCompletedAt: String(row.evaluation_completed_at || ""),
+      evaluationCompleted: Boolean(row.evaluation_completed_at),
+    };
+    if (status === "running") return { state: "running", ...details };
+    return status.startsWith("completed") && row.evaluation_completed_at
+      ? { state: "none" }
+      : { state: "pending", ...details };
   }
 
   async needsDailyContinuation(now) {
-    return (await this.dailyContinuationState(now)) === "pending";
+    return (await this.dailyContinuationState(now)).state === "pending";
+  }
+
+  async markRunEvaluationComplete(runId, completedAt, progress = null) {
+    await this.db.prepare(
+      "UPDATE evaluation_runs SET evaluation_completed_at = ?, last_heartbeat_at = ?, progress_json = ? WHERE id = ? AND status = 'running'",
+    ).bind(completedAt, completedAt, progress ? JSON.stringify(progress) : null, runId).run();
   }
 
   async updateRunProgress(runId, { stage, stageStartedAt, heartbeatAt, progress = null, errorCode = null } = {}) {
@@ -546,14 +562,15 @@ export class D1AlertStore {
 
   async finishRun(run) {
     await this.db.prepare(
-      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ?, stage = ?, stage_started_at = ?, last_heartbeat_at = ?, progress_json = ?, error_code = ?, evaluation_completed_at = ? WHERE id = ?",
+      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ?, stage = ?, stage_started_at = ?, last_heartbeat_at = ?, progress_json = ?, error_code = ?, evaluation_completed_at = ?, evaluation_window_started_at = ?, weekly_window_at = ? WHERE id = ?",
     ).bind(
       run.completedAt, run.durationMs, run.subscriptionCount, run.matchedEventCount,
       run.attemptedCount, run.deliveredCount, run.failedCount,
       run.cleanupDeletedCount, run.cleanupErrorCode || null, run.status,
       run.stage || "completed", run.stageStartedAt || run.completedAt, run.completedAt,
       JSON.stringify(run.progress || {}), run.errorCode || null,
-      run.evaluationCompletedAt || null, run.id,
+      run.evaluationCompletedAt || null, run.evaluationWindowStartedAt || null,
+      run.weeklyWindowAt || null, run.id,
     ).run();
   }
 
