@@ -11,6 +11,17 @@ export class SchedulerTimeoutError extends Error {
   }
 }
 
+export class SchedulerFenceError extends Error {
+  constructor(stage, cause = null) {
+    super(`Alert scheduler could not revoke ownership after timing out: ${stage}`);
+    this.name = "SchedulerFenceError";
+    this.code = "scheduler_fence_revoke_failed";
+    this.stage = stage;
+    this.cause = cause;
+    this.fenceRevoked = false;
+  }
+}
+
 export class SchedulerBudget {
   constructor({ timeoutMs, clock = () => Date.now(), setTimer = setTimeout, clearTimer = clearTimeout } = {}) {
     this.clock = clock;
@@ -39,13 +50,32 @@ export class SchedulerBudget {
     ));
     if (!timeoutMs) throw new SchedulerTimeoutError(stage);
     let timer;
+    let timeoutStarted = false;
+    let timeoutResult = null;
+    const controller = new AbortController();
     try {
-      return await Promise.race([
-        Promise.resolve().then(operation),
-        new Promise((_, reject) => {
-          timer = this.setTimer(() => reject(new SchedulerTimeoutError(stage)), timeoutMs);
-        }),
-      ]);
+      const deadline = new Promise((_, reject) => {
+        timer = this.setTimer(() => {
+          timeoutStarted = true;
+          timeoutResult = Promise.resolve()
+            .then(() => options.onTimeout?.())
+            .then(() => {
+              controller.abort(new SchedulerTimeoutError(stage));
+              throw new SchedulerTimeoutError(stage);
+            }, error => {
+              controller.abort(error);
+              throw new SchedulerFenceError(stage, error);
+            });
+          timeoutResult.catch(reject);
+        }, timeoutMs);
+      });
+      const result = Promise.resolve()
+        .then(() => operation(controller.signal))
+        .then(
+          value => timeoutStarted ? timeoutResult : value,
+          error => timeoutStarted ? timeoutResult : Promise.reject(error),
+        );
+      return await Promise.race([result, deadline]);
     } finally {
       if (timer !== undefined) this.clearTimer(timer);
     }

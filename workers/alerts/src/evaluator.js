@@ -18,6 +18,24 @@ function isoDate(now) {
   return now.toISOString().slice(0, 10);
 }
 
+function throwIfAborted(signal) {
+  if (!signal?.aborted) return;
+  throw signal.reason instanceof Error
+    ? signal.reason
+    : Object.assign(new Error("Alert scheduler operation was aborted."), { code: "scheduler_aborted" });
+}
+
+async function assertSchedulerClaim(store, claim, signal) {
+  throwIfAborted(signal);
+  if (!claim?.runId || !claim?.token || typeof store.runClaimIsCurrent !== "function") return;
+  if (!await store.runClaimIsCurrent(claim.runId, claim.token)) {
+    throw Object.assign(new Error("Alert scheduler ownership changed."), {
+      code: "scheduler_claim_lost",
+    });
+  }
+  throwIfAborted(signal);
+}
+
 function daysBetween(left, right) {
   const start = Date.parse(`${left}T12:00:00Z`);
   const end = Date.parse(`${right}T12:00:00Z`);
@@ -93,6 +111,7 @@ async function enqueue(store, subscription, value, now, evaluationContext = {}) 
       verificationTokenHash: subscription.verification_token_hash,
       baselineAt: subscription.baseline_at,
       evaluationWindowStartedAt: evaluationContext.evaluationWindowStartedAt || null,
+      claim: evaluationContext.schedulerClaim || null,
     },
   });
 }
@@ -299,7 +318,10 @@ export async function evaluateSubscriptions({
   evaluationWindowStartedAt = null,
   weeklyWindowAt = null,
   evaluationInputGeneratedAt = null,
+  schedulerClaim = null,
+  signal = null,
 } = {}) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
   const changes = assets?.changes && Array.isArray(assets.changes.events)
     ? assets.changes
     : { generated_at: now.toISOString(), events: [] };
@@ -340,8 +362,10 @@ export async function evaluateSubscriptions({
     evaluationInputGeneratedAt: generatedAt,
     evaluationSourceGeneratedAt: sourceGeneratedAt,
     evaluationAsOf,
+    schedulerClaim,
   };
   for (const batch of batches) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
     const { subscription } = batch;
     let matched = 0;
     if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now, batch.events, evaluationContext);
@@ -355,6 +379,8 @@ export async function evaluateSubscriptions({
       weeklyWindowAt,
       evaluationInputGeneratedAt: generatedAt,
       evaluationSourceGeneratedAt: sourceGeneratedAt,
+      calendarEvaluationDate: isoDate(evaluationAsOf),
+      claim: schedulerClaim,
     };
     if (batch.complete) {
       const complete = typeof store.completeEvaluation === "function"
@@ -371,6 +397,7 @@ export async function evaluateSubscriptions({
         await store.markEvaluated(subscription.id, batch.cursorAt, now.toISOString(), cycle);
       }
     }
+    await assertSchedulerClaim(store, schedulerClaim, signal);
   }
   return {
     subscriptionCount: subscriptions.length,
@@ -422,7 +449,9 @@ async function deliveryCapabilityLinks(env, event) {
 export async function dispatchNotifications({
   store, provider, env, now = new Date(), weekly = false, limit = null,
   eligibleBefore = null,
+  schedulerClaim = null, signal = null,
 }) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
@@ -447,8 +476,9 @@ export async function dispatchNotifications({
           .map(event => ({ events: [event], hasOverflow: false })),
       ];
   for (const batchValue of batches) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
     const batch = batchValue.events;
-    const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
+    const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString(), schedulerClaim);
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
     const idempotencyKey = batchValue.idempotencyKey || (weekly
@@ -470,14 +500,15 @@ export async function dispatchNotifications({
     const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, batchValue.hasOverflow, message,
+      schedulerClaim,
     )) {
-      await store.releaseClaimedEvents(ids, now.toISOString());
+      await store.releaseClaimedEvents(ids, now.toISOString(), schedulerClaim);
       break;
     }
     attemptedCount += 1;
     let delivery;
     try {
-      delivery = await provider.sendEmail(message, idempotencyKey);
+      delivery = await provider.sendEmail(message, idempotencyKey, { signal });
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -486,13 +517,14 @@ export async function dispatchNotifications({
         retryable ? retryAt(claimed[0], now) : now.toISOString(),
         retryable ? null : now.toISOString(),
         providerFailureKind(error),
+        schedulerClaim,
       );
       failedCount += 1;
       remaining -= 1;
       if (!remaining) break;
       continue;
     }
-    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    await store.markEventsSent(ids, delivery.id, now.toISOString(), schedulerClaim);
     deliveredCount += 1;
     remaining -= 1;
     if (!remaining) break;
@@ -503,7 +535,9 @@ export async function dispatchNotifications({
 export async function dispatchVerificationDeliveries({
   store, provider, env, now = new Date(), tokenFactory = () => randomToken(), limit = null,
   eventIds = null,
+  schedulerClaim = null, signal = null,
 }) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
@@ -514,8 +548,9 @@ export async function dispatchVerificationDeliveries({
   let deliveredCount = 0;
   let failedCount = 0;
   for (const candidate of pending) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
     const claimedAt = now.toISOString();
-    const ids = await store.claimEvents([candidate.id], claimedAt);
+    const ids = await store.claimEvents([candidate.id], claimedAt, schedulerClaim);
     if (!ids.length) continue;
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
@@ -558,9 +593,9 @@ export async function dispatchVerificationDeliveries({
       if (
         token.length < 32
         || candidate.provider_quota_key !== idempotencyKey
-        || !await store.verificationReconciliationClaimIsCurrent(candidate.id, claimedAt)
+        || !await store.verificationReconciliationClaimIsCurrent(candidate.id, claimedAt, schedulerClaim)
       ) {
-        await store.markEventsFailed(ids, "verification_reconciliation_invalid", claimedAt, claimedAt);
+        await store.markEventsFailed(ids, "verification_reconciliation_invalid", claimedAt, claimedAt, "", schedulerClaim);
         continue;
       }
     } else if (
@@ -582,15 +617,16 @@ export async function dispatchVerificationDeliveries({
         eventKey: `verification:${tokenHash}`,
         claimedAt,
         now: claimedAt,
+        scheduler: schedulerClaim,
       });
       if (!refreshed) {
-        await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+        await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt, "", schedulerClaim);
         continue;
       }
     } else if (!await store.verificationClaimIsCurrent(
-      candidate.id, tokenHash, claimedAt,
+      candidate.id, tokenHash, claimedAt, schedulerClaim,
     )) {
-      await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+      await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt, "", schedulerClaim);
       continue;
     }
     const renderedMessage = verificationEmail({
@@ -608,14 +644,15 @@ export async function dispatchVerificationDeliveries({
     const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, false, message,
+      schedulerClaim,
     )) {
-      await store.releaseClaimedEvents(ids, claimedAt);
+      await store.releaseClaimedEvents(ids, claimedAt, schedulerClaim);
       break;
     }
     attemptedCount += 1;
     let delivery;
     try {
-      delivery = await provider.sendEmail(message, idempotencyKey);
+      delivery = await provider.sendEmail(message, idempotencyKey, { signal });
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -624,11 +661,12 @@ export async function dispatchVerificationDeliveries({
         retryable ? retryAt(candidate, now) : now.toISOString(),
         retryable ? null : now.toISOString(),
         providerFailureKind(error),
+        schedulerClaim,
       );
       failedCount += 1;
       continue;
     }
-    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    await store.markEventsSent(ids, delivery.id, now.toISOString(), schedulerClaim);
     deliveredCount += 1;
   }
   return { attemptedCount, deliveredCount, failedCount };

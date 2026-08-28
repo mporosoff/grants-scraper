@@ -141,10 +141,13 @@ export class StrongMatchEngine {
   }
 }
 
-export async function loadPublicAssets(env, fetchImpl = fetch) {
+export async function loadPublicAssets(env, fetchImpl = fetch, { signal = null } = {}) {
   const timeoutMs = Math.max(1, Math.min(30_000, Number(env.ALERT_ASSET_TIMEOUT_MS) || 10_000));
   const load = async (url, accept, bodyType) => {
     const controller = new AbortController();
+    const externalAbort = () => controller.abort(signal?.reason);
+    if (signal?.aborted) externalAbort();
+    else signal?.addEventListener?.("abort", externalAbort, { once: true });
     let timeout;
     const deadline = new Promise((_, reject) => {
       timeout = setTimeout(() => {
@@ -163,17 +166,18 @@ export async function loadPublicAssets(env, fetchImpl = fetch) {
         return bodyType === "json" ? await response.json() : await response.text();
       })(), deadline]);
     } catch (error) {
-      if (error?.code) throw error;
       if (error?.name === "AbortError") {
         throw Object.assign(new Error("Public alert input was aborted by its timeout."), {
           code: "asset_timeout",
         });
       }
+      if (error?.code) throw error;
       throw Object.assign(new Error("Public alert input could not be read."), {
         code: bodyType === "json" ? "asset_parse_error" : "asset_read_error",
       });
     } finally {
       clearTimeout(timeout);
+      signal?.removeEventListener?.("abort", externalAbort);
     }
   };
   const [catalogText, subtopicText, changes] = await Promise.all([

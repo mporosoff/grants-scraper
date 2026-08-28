@@ -15,7 +15,7 @@ import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
 import {
-  boundedFinalization, SchedulerBudget, SchedulerTimeoutError,
+  boundedFinalization, SchedulerBudget, SchedulerFenceError, SchedulerTimeoutError,
 } from "./scheduler-budget.js";
 
 const MAX_REQUEST_BYTES = 32_768;
@@ -477,10 +477,11 @@ export function weeklyDigestWindowFor(originatingAt) {
 export function createScheduledHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
-  assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
+  assetLoader = (env, fetchImpl, options) => loadPublicAssets(env, fetchImpl, options),
   fetchImpl = (...args) => fetch(...args),
   now = () => new Date(),
   clock = () => Date.now(),
+  runClaimFactory = () => randomToken(),
 } = {}) {
   return async function scheduled(controller, env) {
     const scheduledAt = new Date(controller?.scheduledTime || Date.now());
@@ -547,7 +548,9 @@ export function createScheduledHandler({
       evaluationInputGeneratedAt, evaluationSourceGeneratedAt,
       stageStartedAt: current.toISOString(),
       progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
+      claimToken: runClaimFactory(),
     };
+    const schedulerClaim = { runId: run.id, token: run.claimToken };
     const started = await budget.run("run_start", () => store.startRun(run), 15_000);
     if (started === false) return { ...run, status: "duplicate_skipped" };
     if (dailyInProgress) {
@@ -567,24 +570,48 @@ export function createScheduledHandler({
       return run;
     }
 
+    let claimRevoked = false;
+    let fencingSafe = true;
+    const revokeTimedOutClaim = async () => {
+      const revokedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+      const timeoutStatus = run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout";
+      const revoked = typeof store.revokeRunClaim === "function"
+        ? await boundedFinalization(() => store.revokeRunClaim(
+            run.id, run.claimToken, revokedAt, timeoutStatus, "scheduler_deadline_exceeded",
+          ))
+        : false;
+      const stillCurrent = typeof store.runClaimIsCurrent === "function"
+        ? await boundedFinalization(() => store.runClaimIsCurrent(run.id, run.claimToken))
+        : !revoked;
+      if (!revoked && stillCurrent) {
+        throw Object.assign(new Error("The scheduler claim could not be revoked."), {
+          code: "scheduler_fence_revoke_failed",
+        });
+      }
+      claimRevoked = true;
+    };
     const stage = async (name, operation, maximumMs, progress = run.progress) => {
       const stageNow = new Date(Math.max(current.getTime(), clock())).toISOString();
       run.stage = name;
       run.stageStartedAt = stageNow;
       run.progress = { ...run.progress, ...(progress || {}) };
       if (typeof store.updateRunProgress === "function") {
-        await budget.run(
+        const updated = await budget.run(
           `${name}_progress`,
           () => store.updateRunProgress(run.id, {
             stage: name,
             stageStartedAt: stageNow,
             heartbeatAt: stageNow,
             progress: run.progress,
-          }),
+          }, schedulerClaim),
           15_000,
+          { onTimeout: revokeTimedOutClaim },
         );
+        if (updated === false) throw Object.assign(new Error("The scheduler claim changed."), {
+          code: "scheduler_claim_lost",
+        });
       }
-      return budget.run(name, operation, maximumMs);
+      return budget.run(name, operation, maximumMs, { onTimeout: revokeTimedOutClaim });
     };
 
     const deliveryBatch = Math.max(1, Math.min(10, Number(env.ALERT_SCHEDULER_DELIVERY_BATCH) || 10));
@@ -599,7 +626,7 @@ export function createScheduledHandler({
       if ((runKind === "daily" || runKind === "continuation") && !evaluationCompleted) {
         const assets = await stage(
           "asset_loading",
-          () => assetLoader(env, fetchImpl),
+          signal => assetLoader(env, fetchImpl, { signal }),
           45_000,
         );
         const sourceGeneratedAt = String(assets?.changes?.generated_at || "");
@@ -612,6 +639,7 @@ export function createScheduledHandler({
               run.id, evaluationWindowStartedAt,
               run.evaluationInputGeneratedAt, run.evaluationSourceGeneratedAt,
               new Date(Math.max(current.getTime(), clock())).toISOString(),
+              schedulerClaim,
             ),
             15_000,
           );
@@ -623,10 +651,11 @@ export function createScheduledHandler({
         }
         const evaluation = await stage(
           "subscription_evaluation",
-          () => evaluateSubscriptions({
+          signal => evaluateSubscriptions({
             store, assets, env, now: current,
             evaluationWindowStartedAt, weeklyWindowAt,
             evaluationInputGeneratedAt: run.evaluationInputGeneratedAt,
+            schedulerClaim, signal,
           }),
           5 * 60_000,
         );
@@ -651,6 +680,7 @@ export function createScheduledHandler({
               "evaluation_checkpoint",
               () => store.markRunEvaluationComplete(
                 run.id, run.evaluationCompletedAt, run.progress,
+                schedulerClaim,
               ),
               15_000,
             );
@@ -665,8 +695,9 @@ export function createScheduledHandler({
       );
       const verification = await stage(
         "verification_delivery",
-        () => dispatchVerificationDeliveries({
+        signal => dispatchVerificationDeliveries({
           store, provider, env, now: current, limit: deliveryBatch,
+          schedulerClaim, signal,
         }),
         2 * 60_000,
       );
@@ -674,8 +705,9 @@ export function createScheduledHandler({
       let weekly = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
       immediate = await stage(
         "immediate_delivery",
-        () => dispatchNotifications({
+        signal => dispatchNotifications({
           store, provider, env, now: current, weekly: false, limit: deliveryBatch,
+          schedulerClaim, signal,
         }),
         2 * 60_000,
       );
@@ -688,9 +720,10 @@ export function createScheduledHandler({
       if (weeklyDue) {
         weekly = await stage(
           "weekly_delivery",
-          () => dispatchNotifications({
+          signal => dispatchNotifications({
             store, provider, env, now: current, weekly: true, limit: deliveryBatch,
             eligibleBefore: weeklyCutoff,
+            schedulerClaim, signal,
           }),
           2 * 60_000,
         );
@@ -705,24 +738,36 @@ export function createScheduledHandler({
       failureStage = run.stage;
       failureStageStartedAt = run.stageStartedAt;
       run.errorCode = String(error?.code || "scheduler_failed").slice(0, 80);
-      run.status = error instanceof SchedulerTimeoutError
+      fencingSafe = !(error instanceof SchedulerFenceError)
+        && String(error?.code || "") !== "scheduler_fence_revoke_failed";
+      run.status = !fencingSafe
+        ? "failed_fence_revoke"
+        : error instanceof SchedulerTimeoutError
         ? (run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout")
         : "failed";
     }
     try {
+      if (claimRevoked || !fencingSafe) throw Object.assign(new Error("Cleanup skipped after claim loss."), {
+        code: "cleanup_claim_unavailable",
+      });
       if (typeof store.cleanupOperationalData === "function") {
         const cleanup = await stage(
           "cleanup",
-          () => store.cleanupOperationalData(now().toISOString(), 100),
+          () => store.cleanupOperationalData(now().toISOString(), 100, schedulerClaim),
           20_000,
         );
         run.cleanupDeletedCount = Number(cleanup?.deletedCount || 0);
       }
     } catch (error) {
-      run.cleanupErrorCode = error instanceof SchedulerTimeoutError
+      run.cleanupErrorCode = error?.code === "cleanup_claim_unavailable"
+        ? "cleanup_skipped_claim_unavailable"
+        : error instanceof SchedulerTimeoutError
         ? "cleanup_timeout"
         : "cleanup_failed";
-      if (run.status === "completed") run.status = "completed_with_cleanup_failure";
+      if (claimRevoked) {
+        run.status = run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout";
+        run.errorCode = "scheduler_deadline_exceeded";
+      } else if (run.status === "completed") run.status = "completed_with_cleanup_failure";
     }
     if (failureStage) {
       run.stage = failureStage;
@@ -740,8 +785,13 @@ export function createScheduledHandler({
       run.stage = "completed";
       run.stageStartedAt = run.completedAt;
     }
+    if (claimRevoked || !fencingSafe) return run;
     try {
-      await boundedFinalization(() => store.finishRun(run));
+      const finished = await boundedFinalization(() => store.finishRun(run));
+      if (finished === false) {
+        run.status = "failed_fence_revoke";
+        run.errorCode = "scheduler_claim_lost";
+      }
     } catch (error) {
       run.status = "failed_finalization";
       run.errorCode = String(error?.code || "finalization_failed").slice(0, 80);
