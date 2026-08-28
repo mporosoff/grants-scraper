@@ -12,6 +12,8 @@
     "EMAIL_PROVIDER": "resend",
     "DAILY_EMAIL_LIMIT": "100",
     "ALERT_ASSET_TIMEOUT_MS": "10000",
+    "ALERT_SCHEDULER_TIMEOUT_MS": "600000",
+    "ALERT_SCHEDULER_DELIVERY_BATCH": "10",
     "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io/grants-scraper",
     "PUBLIC_WORKER_ORIGIN": "https://funding-finder-alerts.urochestercheme.workers.dev",
     "CATALOG_URL": "https://mporosoff.github.io/grants-scraper/data/opportunities.js",

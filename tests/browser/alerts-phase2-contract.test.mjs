@@ -12,15 +12,19 @@ import { digestEmail, eventEmail } from "../../workers/alerts/src/email.js";
 import {
   DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "../../workers/alerts/src/evaluator.js";
-import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
+import {
+  createHandler, createScheduledHandler, weeklyDigestEligibilityCutoff, weeklyDigestWindowFor,
+} from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
 import { D1AlertStore, RETENTION_DAYS } from "../../workers/alerts/src/store.js";
-import { loadPublicAssets } from "../../workers/alerts/src/strong-match.js";
+import {
+  loadPublicAssets, parseAssignedJson, StrongMatchEngine,
+} from "../../workers/alerts/src/strong-match.js";
 
 const root = new URL("../../", import.meta.url);
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
-  "0004_phase4_alert_operations.sql",
+  "0004_phase4_alert_operations.sql", "0005_scheduler_progress.sql", "0006_scheduler_fencing.sql",
 ];
 const migrations = await Promise.all(migrationNames.map(name => (
   readFile(new URL(`workers/alerts/migrations/${name}`, root), "utf8")
@@ -121,6 +125,18 @@ function insertSubscription(database, {
     baselineAt, baselineAt,
   );
   return id;
+}
+
+function setEvaluationCursor(database, {
+  id = "watch-1", cursorAt, cursorEventId, windowStartedAt,
+  weeklyWindowAt, inputGeneratedAt, sourceGeneratedAt = inputGeneratedAt,
+} = {}) {
+  database.prepare(
+    "UPDATE subscriptions SET evaluation_cursor_at=?, evaluation_cursor_event_id=?, evaluation_window_started_at=?, evaluation_weekly_window_at=?, evaluation_input_generated_at=?, evaluation_source_generated_at=? WHERE id=?",
+  ).run(
+    cursorAt, cursorEventId, windowStartedAt, weeklyWindowAt,
+    inputGeneratedAt, sourceGeneratedAt, id,
+  );
 }
 
 function insertEvent(database, {
@@ -500,7 +516,13 @@ test("FF-BUG-003 evaluation writes are bound to the selected subscription cycle"
   };
   assert.deepEqual(
     await evaluateSubscriptions({ store, assets, env, now: fixedNow }),
-    { subscriptionCount: 1, matchedEventCount: 0 },
+    {
+      subscriptionCount: 1, matchedEventCount: 0,
+      continuationRequired: false, processedChangeCount: 1,
+      rebasedSubscriptionCount: 0,
+      evaluationInputGeneratedAt: "2026-09-01T11:00:00.000Z",
+      evaluationSourceGeneratedAt: "2026-09-01T11:00:00.000Z",
+    },
   );
   assert.equal(replacementCreated, true);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 0);
@@ -526,7 +548,13 @@ test("FF-BUG-003 evaluation writes are bound to the selected subscription cycle"
   };
   assert.deepEqual(
     await evaluateSubscriptions({ store, assets, env, now: new Date("2026-09-02T12:00:00.000Z") }),
-    { subscriptionCount: 1, matchedEventCount: 1 },
+    {
+      subscriptionCount: 1, matchedEventCount: 1,
+      continuationRequired: false, processedChangeCount: 1,
+      rebasedSubscriptionCount: 0,
+      evaluationInputGeneratedAt: "2026-09-02T11:00:00.000Z",
+      evaluationSourceGeneratedAt: "2026-09-02T11:00:00.000Z",
+    },
   );
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 1);
   assert.equal(database.prepare(
@@ -1083,6 +1111,25 @@ test("FF-BUG-007 health is green only for the complete production delivery matri
   });
   assert.equal(noPreviousKey.status, 503);
   assert.equal((await noPreviousKey.json()).capability_previous_signing_ready, false);
+  const pendingHandler = createHandler({
+    storeFactory: () => ({
+      health: async () => true,
+      operationalHealth: async () => ({
+        staleRunningRuns: 0, schedulerRecent: false,
+        pendingEvaluationWindows: 2,
+        oldestPendingEvaluationWindow: "2026-09-06T13:15:00.000Z",
+      }),
+    }),
+    providerFactory: () => ({ configured: true }),
+  });
+  const pendingResponse = await pendingHandler(
+    new Request("https://alerts.example.test/health"), env,
+  );
+  const pendingPayload = await pendingResponse.json();
+  assert.equal(pendingResponse.status, 503);
+  assert.equal(pendingPayload.scheduler_ready, false);
+  assert.equal(pendingPayload.pending_evaluation_windows, 2);
+  assert.equal(pendingPayload.oldest_pending_evaluation_window, "2026-09-06T13:15:00.000Z");
 });
 
 test("FF-BUG-009 suppressed subscribers receive a generic response but cannot become apparently active", async () => {
@@ -1424,7 +1471,11 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
   assert.match(workflow, /scheduler_ready/);
   assert.match(workflow, /phase4-operations-20260827/);
   assert.match(workflow, /worker_version_rollback/);
+  assert.match(workflow, /recovery_required=true/);
+  assert.match(workflow, /scheduler recovery execution succeeds/);
   assert.match(wrangler, /"ALERT_SCHEDULER_ENABLED": "true"/);
+  assert.match(wrangler, /"ALERT_SCHEDULER_TIMEOUT_MS": "600000"/);
+  assert.match(wrangler, /"ALERT_SCHEDULER_DELIVERY_BATCH": "10"/);
   assert.match(wrangler, /"crons": \["15 13 \* \* \*", "2-57\/5 \* \* \* \*"\]/);
   assert.match(smoke, /delivery_ready/);
   assert.match(migration, /deployment workflow terminalizes unsent verification/);
@@ -1852,12 +1903,13 @@ test("FF-BUG-020 subsequent runs and health terminalize abandoned scheduler runs
   const health = await store.operationalHealth("2026-09-02T12:00:00.000Z");
   assert.equal(health.staleRunningRuns, 0);
   const recoveredRun = database.prepare(
-    "SELECT status,completed_at,duration_ms FROM evaluation_runs WHERE id='stale-daily'",
+    "SELECT status,completed_at,duration_ms,stage,error_code FROM evaluation_runs WHERE id='stale-daily'",
   ).get();
   assert.deepEqual(
-    [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms],
-    ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000],
+    [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms, recoveredRun.stage, recoveredRun.error_code],
+    ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000, "stale_recovery", "stale_run_recovered"],
   );
+  assert.equal((await store.dailyContinuationState("2026-09-02T12:00:00.000Z")).state, "pending");
   assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='recent-retry'").get().status, "running");
 
   await store.startRun({
@@ -1908,7 +1960,7 @@ test("provider and public-asset requests have deterministic bounded deadlines", 
       CATALOG_URL: "https://example.test/catalog", SUBTOPICS_URL: "https://example.test/subtopics",
       CHANGES_URL: "https://example.test/changes", ALERT_ASSET_TIMEOUT_MS: "5",
     }, stalledAssetBody),
-    /asset body aborted/i,
+    error => error.code === "asset_timeout",
   );
   assert.equal(assetBodyAborted, true);
 
@@ -1930,4 +1982,1460 @@ test("provider and public-asset requests have deterministic bounded deadlines", 
     error => error.code === "provider_network_failure" && error.retryable === true,
   );
   assert.equal(providerBodyAborted, true);
+});
+
+test("scheduler cancellation propagates through public assets and provider requests", async () => {
+  const assetController = new AbortController();
+  let assetAborted = 0;
+  const stalledAsset = async (_url, options) => new Promise((_resolve, reject) => {
+    options.signal.addEventListener("abort", () => {
+      assetAborted += 1;
+      reject(new DOMException("asset aborted", "AbortError"));
+    }, { once: true });
+  });
+  const assetPromise = loadPublicAssets({
+    CATALOG_URL: "https://example.test/catalog",
+    SUBTOPICS_URL: "https://example.test/subtopics",
+    CHANGES_URL: "https://example.test/changes",
+    ALERT_ASSET_TIMEOUT_MS: "30000",
+  }, stalledAsset, { signal: assetController.signal });
+  assetController.abort(new Error("scheduler timeout"));
+  await assert.rejects(assetPromise, error => error.code === "asset_timeout");
+  assert.equal(assetAborted, 3);
+
+  const providerController = new AbortController();
+  let providerAborted = false;
+  const provider = new ResendEmailProvider({
+    apiKey: "test-only", timeoutMs: 30_000,
+    fetchImpl: async (_url, options) => new Promise((_resolve, reject) => {
+      options.signal.addEventListener("abort", () => {
+        providerAborted = true;
+        reject(new DOMException("provider aborted", "AbortError"));
+      }, { once: true });
+    }),
+  });
+  const providerPromise = provider.sendEmail(
+    { to: "x@example.edu", subject: "x", text: "x", html: "<p>x</p>" },
+    "scheduler-abort", { signal: providerController.signal },
+  );
+  providerController.abort(new Error("scheduler timeout"));
+  await assert.rejects(providerPromise, error => error.code === "provider_network_failure");
+  assert.equal(providerAborted, true);
+});
+
+test("0005 preserves representative production state and adds resumable scheduler progress", () => {
+  const database = databaseThrough(4);
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('existing-daily','2026-08-28T13:15:00.000Z','2026-08-28T13:15:05.000Z','completed','2026-08-28T13:15:00.000Z',5000,'daily')",
+  ).run();
+  database.exec(migrations[4]);
+  const columns = new Set(database.prepare("PRAGMA table_info(evaluation_runs)").all().map(row => row.name));
+  assert.ok(columns.has("stage"));
+  assert.ok(columns.has("progress_json"));
+  assert.ok(columns.has("evaluation_completed_at"));
+  assert.ok(columns.has("evaluation_window_started_at"));
+  assert.ok(columns.has("weekly_window_at"));
+  assert.ok(columns.has("evaluation_input_generated_at"));
+  assert.ok(columns.has("evaluation_source_generated_at"));
+  const subscriptionColumns = new Set(database.prepare("PRAGMA table_info(subscriptions)").all().map(row => row.name));
+  assert.ok(subscriptionColumns.has("evaluation_cursor_at"));
+  assert.ok(subscriptionColumns.has("evaluation_window_started_at"));
+  assert.ok(subscriptionColumns.has("evaluation_weekly_window_at"));
+  assert.ok(subscriptionColumns.has("evaluation_input_generated_at"));
+  assert.ok(subscriptionColumns.has("evaluation_source_generated_at"));
+  const eventColumns = new Set(database.prepare("PRAGMA table_info(notification_events)").all().map(row => row.name));
+  assert.ok(eventColumns.has("evaluation_window_started_at"));
+  assert.ok(eventColumns.has("weekly_window_at"));
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM subscriptions").get().count, 1);
+  const run = database.prepare(
+    "SELECT status,stage,evaluation_completed_at FROM evaluation_runs WHERE id='existing-daily'",
+  ).get();
+  assert.deepEqual({ ...run }, {
+    status: "completed", stage: "completed",
+    evaluation_completed_at: "2026-08-28T13:15:05.000Z",
+  });
+});
+
+test("0006 preserves outstanding windows while revoking legacy scheduler ownership", () => {
+  const database = databaseThrough(5);
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  setEvaluationCursor(database, {
+    cursorAt: "2026-08-28T13:00:00.000Z", cursorEventId: "cursor-1",
+    windowStartedAt: "2026-08-28T13:15:00.000Z",
+    weeklyWindowAt: "2026-08-30T23:59:59.999Z",
+    inputGeneratedAt: "2026-08-28T13:14:00.000Z",
+  });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,status,scheduled_at,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('legacy-running','2026-08-28T13:15:00.000Z','running','2026-08-28T13:15:00.000Z','daily','subscription_evaluation','2026-08-28T13:15:00.000Z','2026-08-30T23:59:59.999Z','2026-08-28T13:14:00.000Z','2026-08-28T13:14:00.000Z')",
+  ).run();
+  database.exec(migrations[5]);
+  const run = database.prepare(
+    "SELECT status,error_code,claim_token,claim_revoked_at FROM evaluation_runs WHERE id='legacy-running'",
+  ).get();
+  assert.equal(run.status, "failed_stale_recovered");
+  assert.equal(run.error_code, "migration_claim_revoked");
+  assert.equal(run.claim_token, null);
+  assert.ok(run.claim_revoked_at);
+  const cursor = database.prepare(
+    "SELECT evaluation_cursor_event_id,evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...cursor }, {
+    evaluation_cursor_event_id: "cursor-1",
+    evaluation_window_started_at: "2026-08-28T13:15:00.000Z",
+  });
+  assert.ok(database.prepare("PRAGMA table_info(subscriptions)").all().some(
+    column => column.name === "last_calendar_evaluated_on",
+  ));
+});
+
+test("unchanged feed generations still evaluate each 30, 14, and 7 day reminder window", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "immediate",
+    definition: { opportunity_id: "opp-reminder", triggers: ["closing_reminders"] },
+    lastEvaluatedAt: "2026-08-30T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const assets = {
+    catalog: { opportunities: [{
+      opportunity_id: "opp-reminder", title: "Daily reminder", close_date: "2026-10-01",
+    }] },
+    changes: { schema_version: 1, generated_at: "2026-08-30T00:00:00.000Z", events: [] },
+    matcher: { matchIds: () => new Set() },
+  };
+  for (const value of [
+    "2026-08-31", "2026-09-01", "2026-09-02",
+    "2026-09-16", "2026-09-17", "2026-09-18",
+    "2026-09-23", "2026-09-24", "2026-09-25",
+  ]) {
+    const origin = `${value}T13:15:00.000Z`;
+    const first = await evaluateSubscriptions({
+      store, assets, env, now: new Date(origin),
+      evaluationWindowStartedAt: origin,
+      evaluationInputGeneratedAt: assets.changes.generated_at,
+    });
+    assert.equal(first.subscriptionCount, 1);
+    const duplicate = await evaluateSubscriptions({
+      store, assets, env, now: new Date(origin),
+      evaluationWindowStartedAt: origin,
+      evaluationInputGeneratedAt: assets.changes.generated_at,
+    });
+    assert.equal(duplicate.subscriptionCount, 0, "the same daily window is not reevaluated");
+  }
+  const reminders = database.prepare(
+    "SELECT event_key FROM notification_events WHERE event_kind='closing_reminder' ORDER BY created_at,event_key",
+  ).all().map(row => row.event_key);
+  assert.deepEqual(reminders, [
+    "closing:opp-reminder:2026-10-01:30",
+    "closing:opp-reminder:2026-10-01:14",
+    "closing:opp-reminder:2026-10-01:7",
+  ]);
+  const state = database.prepare(
+    "SELECT last_evaluated_at,last_calendar_evaluated_on FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...state }, {
+    last_evaluated_at: "2026-08-30T00:00:00.000Z",
+    last_calendar_evaluated_on: "2026-09-25",
+  });
+});
+
+test("a daily trigger consumed by an older continuation durably queues its reminder window", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "immediate",
+    definition: { opportunity_id: "opp-deferred-reminder", triggers: ["closing_reminders"] },
+    lastEvaluatedAt: "2026-08-30T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const oldWindow = "2026-08-31T13:15:00.000Z";
+  const dailyWindow = "2026-09-01T13:15:00.000Z";
+  const generation = "2026-08-30T00:00:00.000Z";
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,scheduled_at,duration_ms,run_kind,status,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('older-incomplete',?,?,?,?, 'daily','incomplete_evaluation','continuation_pending',?,?,?,?)",
+  ).run(
+    oldWindow, "2026-08-31T13:16:00.000Z", oldWindow, 60_000,
+    oldWindow, weeklyDigestWindowFor(new Date(oldWindow)), generation, generation,
+  );
+  const assets = {
+    catalog: { opportunities: [{
+      opportunity_id: "opp-deferred-reminder", title: "Deferred daily reminder",
+      close_date: "2026-10-01",
+    }] },
+    changes: { schema_version: 1, generated_at: generation, events: [] },
+    matcher: { matchIds: () => new Set() },
+  };
+  const provider = new MockEmailProvider();
+  const runAt = current => createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => assets,
+    now: () => current,
+    clock: () => current.getTime(),
+  });
+  const daily = new Date(dailyWindow);
+  const dailyController = { scheduledTime: daily.getTime(), cron: "15 13 * * *" };
+  const adopted = await runAt(daily)(dailyController, env);
+  const duplicateDaily = await runAt(daily)(dailyController, env);
+
+  assert.equal(adopted.runKind, "continuation");
+  assert.equal(adopted.evaluationWindowStartedAt, oldWindow);
+  assert.equal(adopted.status, "completed");
+  assert.equal(duplicateDaily.status, "duplicate_skipped");
+  assert.deepEqual({ ...(await store.dailyContinuationState("2026-09-01T13:16:00.000Z")) }, {
+    state: "pending",
+    evaluationCompleted: false,
+    evaluationWindowStartedAt: dailyWindow,
+    weeklyWindowAt: weeklyDigestWindowFor(daily),
+    evaluationInputGeneratedAt: "",
+    evaluationSourceGeneratedAt: "",
+    evaluationCompletedAt: "",
+    discoveredAt: dailyWindow,
+    running: false,
+    cursorCount: 0,
+    outstandingWindowCount: 1,
+  });
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM evaluation_runs WHERE status='pending_evaluation' AND evaluation_window_started_at=?",
+  ).get(dailyWindow).count, 1);
+  assert.equal((await store.operationalHealth("2026-09-01T13:16:00.000Z")).schedulerRecent, false);
+  assert.equal(provider.messages.length, 0);
+
+  const retry = new Date("2026-09-01T13:20:00.000Z");
+  const retryController = { scheduledTime: retry.getTime(), cron: "2-57/5 * * * *" };
+  const resumed = await runAt(retry)(retryController, env);
+  const duplicateRetry = await runAt(retry)(retryController, env);
+  assert.equal(resumed.runKind, "continuation");
+  assert.equal(resumed.evaluationWindowStartedAt, dailyWindow);
+  assert.equal(resumed.status, "completed");
+  assert.equal(duplicateRetry.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual({ ...database.prepare(
+    "SELECT event_key,status,evaluation_window_started_at FROM notification_events WHERE event_kind='closing_reminder'",
+  ).get() }, {
+    event_key: "closing:opp-deferred-reminder:2026-10-01:30",
+    status: "sent",
+    evaluation_window_started_at: dailyWindow,
+  });
+  assert.deepEqual({ ...database.prepare(
+    "SELECT status,evaluation_completed_at FROM evaluation_runs WHERE status='completed_with_adoption' AND evaluation_window_started_at=?",
+  ).get(dailyWindow) }, {
+    status: "completed_with_adoption",
+    evaluation_completed_at: retry.toISOString(),
+  });
+  assert.equal((await store.dailyContinuationState("2026-09-01T13:21:00.000Z")).state, "none");
+  assert.equal((await store.operationalHealth("2026-09-01T13:21:00.000Z")).schedulerRecent, true);
+});
+
+test("an adopted window excludes later subscriptions and completion never predates their baseline", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const baselineAt = "2026-09-01T13:16:00.000Z";
+  const verifiedAt = "2026-09-01T13:17:00.000Z";
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "immediate",
+    definition: { opportunity_id: "opp-newer-cycle", triggers: ["amended", "closing_reminders"] },
+    baselineAt, verifiedAt, lastEvaluatedAt: null,
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const adoptedInput = "2026-09-01T13:14:00.000Z";
+  const adoptedWindow = "2026-09-01T13:15:00.000Z";
+  const oldSelection = await store.activeSubscriptionsForEvaluation(
+    adoptedInput, 25, adoptedWindow,
+  );
+  assert.deepEqual(oldSelection, { subscriptions: [], hasMore: false });
+
+  const defensiveCompletion = await store.completeEvaluation(
+    "watch-1", adoptedInput, "2026-09-01T13:18:00.000Z",
+    {
+      verificationTokenHash: "token-old", baselineAt,
+      evaluationWindowStartedAt: adoptedWindow,
+      evaluationInputGeneratedAt: adoptedInput,
+      calendarEvaluationDate: "2026-09-01",
+    },
+  );
+  assert.equal(defensiveCompletion, true);
+  assert.equal(database.prepare(
+    "SELECT last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get().last_evaluated_at, baselineAt);
+
+  const nextSelection = await store.activeSubscriptionsForEvaluation(
+    "2026-09-02T13:14:00.000Z", 25, "2026-09-02T13:15:00.000Z",
+  );
+  assert.equal(nextSelection.subscriptions.length, 1);
+  assert.equal(nextSelection.subscriptions[0].id, "watch-1");
+});
+
+test("saved-search evaluation resumes equal-timestamp change batches without duplicates", async () => {
+  const subscription = {
+    id: "saved-1", type: "saved_search", active: 1,
+    definition_json: JSON.stringify({ query: "catalysis" }),
+    verification_token_hash: "cycle-token", baseline_at: "2026-08-01T00:00:00.000Z",
+    created_at: "2026-08-01T00:00:00.000Z", last_evaluated_at: "2026-08-20T00:00:00.000Z",
+    evaluation_cursor_at: null, evaluation_cursor_event_id: null,
+  };
+  const qualifications = new Map();
+  const events = new Set();
+  const prepared = [];
+  const store = {
+    activeSubscriptions: async () => [subscription],
+    qualifications: async (_id, ids) => new Map(ids.flatMap(id => (
+      qualifications.has(id) ? [[id, qualifications.get(id)]] : []
+    ))),
+    setQualification: async (_subscriptionId, id, value) => { qualifications.set(id, value); },
+    enqueueEvent: async event => {
+      const duplicate = events.has(event.eventKey);
+      events.add(event.eventKey);
+      return !duplicate;
+    },
+    saveEvaluationCursor: async (_id, cursorAt, cursorEventId) => {
+      subscription.evaluation_cursor_at = cursorAt;
+      subscription.evaluation_cursor_event_id = cursorEventId;
+    },
+    completeEvaluation: async (_id, evaluatedAt) => {
+      subscription.last_evaluated_at = evaluatedAt;
+      subscription.evaluation_cursor_at = null;
+      subscription.evaluation_cursor_event_id = null;
+    },
+  };
+  const records = ["a", "b", "c"].map(id => ({ opportunity_id: id, title: `Award ${id}` }));
+  const changes = {
+    generated_at: "2026-08-28T14:00:00.000Z",
+    events: records.map(record => ({
+      id: `event-${record.opportunity_id}`, type: "new",
+      changed_at: "2026-08-28T13:00:00.000Z",
+      opportunity_id: record.opportunity_id, record,
+    })),
+  };
+  const assets = {
+    catalog: { opportunities: records }, changes,
+    matcher: {
+      prepare: ids => prepared.push([...ids]),
+      matchDetails: (_definition, _asOf, ids) => new Map(ids.map(id => [id, { reasons: ["Strong match"] }])),
+    },
+  };
+  const first = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(first.continuationRequired, true);
+  assert.equal(first.processedChangeCount, 2);
+  assert.equal(subscription.evaluation_cursor_event_id, "event-b");
+  const second = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(second.continuationRequired, false);
+  assert.equal(second.processedChangeCount, 1);
+  assert.equal(subscription.last_evaluated_at, changes.generated_at);
+  assert.equal(events.size, 3);
+  const duplicate = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(duplicate.matchedEventCount, 0);
+  assert.equal(events.size, 3);
+  assert.deepEqual(prepared, [["a", "b"], ["c"]]);
+});
+
+test("daily evaluation runs before delivery backlogs and retry triggers continue incomplete daily work", async () => {
+  const order = [];
+  const seen = new Set();
+  const store = {
+    needsDailyContinuation: async () => true,
+    startRun: async run => {
+      if (seen.has(run.id)) return false;
+      seen.add(run.id);
+      return true;
+    },
+    activeSubscriptions: async () => { order.push("evaluate"); return []; },
+    pendingVerificationEvents: async () => { order.push("verification"); return []; },
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => { order.push("notification"); return []; },
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async () => {},
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => {
+      order.push("assets");
+      return { changes: { generated_at: fixedNow.toISOString(), events: [] } };
+    },
+    now: () => fixedNow,
+  });
+  const controller = { scheduledTime: fixedNow.getTime(), cron: "2-57/5 * * * *" };
+  const first = await scheduled(controller, env);
+  assert.equal(first.runKind, "continuation");
+  assert.equal(first.status, "completed");
+  assert.ok(order.indexOf("evaluate") < order.indexOf("verification"));
+  assert.ok(order.indexOf("assets") < order.indexOf("notification"));
+  const second = await scheduled(controller, env);
+  assert.equal(second.status, "duplicate_skipped");
+  assert.equal(order.filter(value => value === "verification").length, 1);
+});
+
+test("retry triggers do not collide with a recent running daily evaluation", async () => {
+  let deliveryQueries = 0;
+  let finished;
+  const store = {
+    dailyContinuationState: async () => "running",
+    startRun: async () => true,
+    pendingVerificationEvents: async () => { deliveryQueries += 1; return []; },
+    finishRun: async run => { finished = { ...run }; },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => { throw new Error("a retry must not load assets while daily work is running"); },
+    now: () => fixedNow,
+  });
+  const result = await scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "2-57/5 * * * *" }, env,
+  );
+  assert.equal(result.runKind, "retry");
+  assert.equal(result.status, "completed_skipped_daily_in_progress");
+  assert.equal(deliveryQueries, 0);
+  assert.deepEqual(finished, result);
+});
+
+test("retry runs drain due weekly overflow without sending the new week's events", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "weekly" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.enqueueEvent({
+    id: "weekly-due", subscriptionId: "watch-1", eventKey: "weekly-due",
+    eventKind: "amended", opportunityId: "due", payload: { title: "Due update" },
+    createdAt: "2026-09-06T16:00:00.000Z",
+  });
+  await store.enqueueEvent({
+    id: "weekly-new", subscriptionId: "watch-1", eventKey: "weekly-new",
+    eventKind: "amended", opportunityId: "new", payload: { title: "New-week update" },
+    createdAt: "2026-09-07T11:00:00.000Z",
+  });
+  const current = new Date("2026-09-07T12:00:00.000Z");
+  assert.equal(weeklyDigestEligibilityCutoff(current), "2026-09-06T23:59:59.999Z");
+  assert.equal(
+    weeklyDigestEligibilityCutoff(new Date("2026-09-06T13:14:59.999Z")),
+    "2026-08-30T23:59:59.999Z",
+  );
+  const provider = new MockEmailProvider();
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => { throw new Error("an ordinary retry must not load assets"); },
+    now: () => current,
+  });
+  const controller = { scheduledTime: current.getTime(), cron: "2-57/5 * * * *" };
+  const result = await scheduled(controller, env);
+  const duplicate = await scheduled(controller, env);
+  assert.equal(result.runKind, "retry");
+  assert.equal(result.deliveredCount, 1);
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual(all(
+    database, "SELECT id,status FROM notification_events ORDER BY id",
+  ).map(row => ({ ...row })), [
+    { id: "weekly-due", status: "sent" },
+    { id: "weekly-new", status: "queued" },
+  ]);
+});
+
+test("an originating Sunday weekly window survives Monday continuations and excludes Monday work", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", type: "opportunity",
+    definition: { opportunity_id: "opp-window", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-09-01T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const sunday = new Date("2026-09-06T13:15:00.000Z");
+  const origin = sunday.toISOString();
+  const weeklyWindow = "2026-09-06T23:59:59.999Z";
+  assert.equal(weeklyDigestWindowFor(sunday), weeklyWindow);
+  assert.equal(
+    weeklyDigestWindowFor(new Date("2026-09-07T13:15:00.000Z")),
+    "2026-09-13T23:59:59.999Z",
+  );
+  const sundayRecords = Array.from({ length: 51 }, (_value, index) => ({
+    opportunity_id: "opp-window", title: `Sunday window update ${index}`,
+  }));
+  const sundayAssets = {
+    catalog: { opportunities: [] },
+    changes: {
+      generated_at: "2026-09-06T13:14:00.000Z",
+      events: sundayRecords.map((record, index) => ({
+        id: `sunday-${String(index).padStart(3, "0")}`, type: "amended",
+        changed_at: "2026-09-06T13:00:00.000Z", opportunity_id: "opp-window", record,
+      })),
+    },
+  };
+  const provider = new MockEmailProvider();
+  const providerSend = provider.sendEmail.bind(provider);
+  provider.sendEmail = async (...args) => {
+    if (!provider.messages.length) {
+      const checkpoint = database.prepare(
+        "SELECT status,evaluation_completed_at,evaluation_window_started_at,weekly_window_at FROM evaluation_runs WHERE run_kind='continuation' ORDER BY started_at DESC LIMIT 1",
+      ).get();
+      assert.equal(checkpoint.status, "running");
+      assert.ok(checkpoint.evaluation_completed_at);
+      assert.equal(checkpoint.evaluation_window_started_at, origin);
+      assert.equal(checkpoint.weekly_window_at, weeklyWindow);
+    }
+    return providerSend(...args);
+  };
+  const runAt = (current, assets = sundayAssets) => createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => assets,
+    now: () => current,
+    clock: () => current.getTime(),
+  });
+
+  const first = await runAt(sunday)(
+    { scheduledTime: sunday.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(first.runKind, "daily");
+  assert.equal(first.status, "incomplete_evaluation");
+  assert.equal(first.evaluationWindowStartedAt, origin);
+  assert.equal(first.weeklyWindowAt, weeklyWindow);
+  assert.equal(provider.messages.length, 0);
+  assert.equal(database.prepare(
+    "SELECT evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_window_started_at, origin);
+  assert.equal((await store.operationalHealth("2026-09-06T13:20:00.000Z")).schedulerRecent, false);
+
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,scheduled_at,run_kind,status,stage,evaluation_window_started_at,weekly_window_at) VALUES('stalled-sunday-continuation','2026-09-06T23:40:00.000Z','2026-09-06T23:40:00.000Z','continuation','running','subscription_evaluation',?,?)",
+  ).run(origin, weeklyWindow);
+  const mondayManual = new Date("2026-09-07T00:05:00.000Z");
+  const second = await runAt(mondayManual)(
+    { scheduledTime: mondayManual.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(second.runKind, "continuation");
+  assert.equal(second.status, "incomplete_evaluation");
+  assert.equal(second.evaluationWindowStartedAt, origin);
+  assert.equal(second.weeklyWindowAt, weeklyWindow);
+  assert.equal(provider.messages.length, 0);
+  assert.equal(database.prepare(
+    "SELECT status FROM evaluation_runs WHERE id='stalled-sunday-continuation'",
+  ).get().status, "failed_stale_recovered");
+  assert.equal((await store.operationalHealth("2026-09-07T00:06:00.000Z")).schedulerRecent, false);
+
+  const mondayComplete = new Date("2026-09-07T00:10:00.000Z");
+  const completionController = {
+    scheduledTime: mondayComplete.getTime(), cron: "2-57/5 * * * *",
+  };
+  const third = await runAt(mondayComplete)(completionController, env);
+  const duplicate = await runAt(mondayComplete)(completionController, env);
+  assert.equal(third.runKind, "continuation");
+  assert.equal(third.status, "completed");
+  assert.equal(third.evaluationWindowStartedAt, origin);
+  assert.equal(third.weeklyWindowAt, weeklyWindow);
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare(
+    "SELECT evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_window_started_at, null);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE evaluation_window_started_at=? AND weekly_window_at=?",
+  ).get(origin, weeklyWindow).count, 51);
+  assert.equal(
+    (await store.operationalHealth("2026-09-07T00:11:00.000Z")).schedulerRecent,
+    false,
+    "the Monday daily window remains outstanding after the Sunday work completes",
+  );
+
+  for (const minute of [15, 20, 25]) {
+    const retryAt = new Date(`2026-09-07T00:${minute}:00.000Z`);
+    await runAt(retryAt)(
+      { scheduledTime: retryAt.getTime(), cron: "2-57/5 * * * *" }, env,
+    );
+    if (minute === 15) {
+      assert.equal(
+        (await store.operationalHealth("2026-09-07T00:16:00.000Z")).schedulerRecent,
+        true,
+        "health becomes ready only after the deferred Monday window completes",
+      );
+    }
+  }
+  assert.equal(provider.messages.length, 3);
+  assert.equal(new Set(provider.messages.map(message => message.idempotencyKey)).size, 3);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE status='sent'",
+  ).get().count, 51);
+
+  const mondayDaily = new Date("2026-09-07T13:15:00.000Z");
+  const mondayAssets = {
+    catalog: { opportunities: [] },
+    changes: {
+      generated_at: "2026-09-07T13:14:00.000Z",
+      events: [{
+        id: "monday-independent", type: "amended",
+        changed_at: "2026-09-07T13:00:00.000Z", opportunity_id: "opp-window",
+        record: { opportunity_id: "opp-window", title: "Independent Monday update" },
+      }],
+    },
+  };
+  const mondayResult = await runAt(mondayDaily, mondayAssets)(
+    { scheduledTime: mondayDaily.getTime(), cron: "15 13 * * *" }, env,
+  );
+  assert.equal(mondayResult.runKind, "daily");
+  assert.equal(mondayResult.weeklyWindowAt, "2026-09-13T23:59:59.999Z");
+  const mondayRetry = new Date("2026-09-07T13:20:00.000Z");
+  await runAt(mondayRetry, mondayAssets)(
+    { scheduledTime: mondayRetry.getTime(), cron: "2-57/5 * * * *" }, env,
+  );
+  assert.equal(provider.messages.length, 3);
+  const independent = database.prepare(
+    "SELECT status,evaluation_window_started_at,weekly_window_at FROM notification_events WHERE event_key='amended:monday-independent'",
+  ).get();
+  assert.deepEqual({ ...independent }, {
+    status: "queued", evaluation_window_started_at: mondayDaily.toISOString(),
+    weekly_window_at: "2026-09-13T23:59:59.999Z",
+  });
+});
+
+test("an exact manual daily scheduled test is idempotent and executes its candidate once", async () => {
+  const seen = new Set();
+  let assetLoads = 0;
+  let deliveryQueries = 0;
+  const store = {
+    startRun: async run => {
+      if (seen.has(run.id)) return false;
+      seen.add(run.id);
+      return true;
+    },
+    activeSubscriptions: async () => [],
+    pendingVerificationEvents: async () => { deliveryQueries += 1; return []; },
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => [],
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async () => {},
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => {
+      assetLoads += 1;
+      return { changes: { generated_at: fixedNow.toISOString(), events: [] } };
+    },
+    now: () => fixedNow,
+  });
+  const controller = { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" };
+  const first = await scheduled(controller, env);
+  const duplicate = await scheduled(controller, env);
+  assert.equal(first.runKind, "daily");
+  assert.equal(first.status, "completed");
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(assetLoads, 1);
+  assert.equal(deliveryQueries, 1);
+});
+
+test("a timed-out run start settles and revokes its late durable claim before returning", async () => {
+  let releaseStart;
+  let insertedStart;
+  let activeClaim = null;
+  let assetsLoaded = false;
+  const inserted = new Promise(resolve => { insertedStart = resolve; });
+  const startRelease = new Promise(resolve => { releaseStart = resolve; });
+  const store = {
+    startRun: async run => {
+      activeClaim = { runId: run.id, token: run.claimToken };
+      insertedStart();
+      await startRelease;
+      return true;
+    },
+    runClaimIsCurrent: async (runId, token) => (
+      activeClaim?.runId === runId && activeClaim?.token === token
+    ),
+    revokeRunClaim: async (runId, token) => {
+      if (activeClaim?.runId !== runId || activeClaim?.token !== token) return false;
+      activeClaim = null;
+      return true;
+    },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    assetLoader: async () => { assetsLoaded = true; return {}; },
+    now: () => fixedNow,
+  });
+  let settled = false;
+  const pending = scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "40" },
+  ).then(result => { settled = true; return result; });
+  await inserted;
+  await new Promise(resolve => setTimeout(resolve, 45));
+  assert.equal(settled, false, "the handler waits for the mutating start operation to settle");
+  assert.ok(activeClaim, "the late insert remains exclusively owned while it settles");
+  releaseStart();
+  const result = await pending;
+  assert.equal(result.status, "incomplete_timeout");
+  assert.equal(result.errorCode, "scheduler_deadline_exceeded");
+  assert.equal(activeClaim, null, "the late run claim is revoked before the handler returns");
+  assert.equal(assetsLoaded, false);
+});
+
+test("a stalled subscription query ends inside the overall budget with truthful stage evidence", async () => {
+  let claim;
+  let revoked = false;
+  const store = {
+    startRun: async run => { claim = { runId: run.id, token: run.claimToken }; return true; },
+    runClaimIsCurrent: async (runId, token) => !revoked && runId === claim.runId && token === claim.token,
+    revokeRunClaim: async (runId, token) => {
+      if (revoked || runId !== claim.runId || token !== claim.token) return false;
+      revoked = true;
+      return true;
+    },
+    activeSubscriptions: async () => new Promise(() => {}),
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async () => { throw new Error("a revoked run must not finalize again"); },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    assetLoader: async () => ({ changes: { generated_at: fixedNow.toISOString(), events: [] } }),
+    providerFactory: () => new MockEmailProvider(),
+    now: () => fixedNow,
+  });
+  const result = await scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "40" },
+  );
+  assert.equal(result.status, "incomplete_timeout");
+  assert.equal(result.errorCode, "scheduler_deadline_exceeded");
+  assert.equal(result.stage, "subscription_evaluation");
+  assert.equal(result.cleanupErrorCode, "cleanup_skipped_claim_unavailable");
+  assert.equal(revoked, true);
+});
+
+test("health stays unavailable for incomplete daily evaluation and recovers after continuation", async () => {
+  const database = databaseThrough();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,error_code,evaluation_window_started_at) VALUES('daily-incomplete','2026-09-02T11:00:00.000Z','2026-09-02T11:01:00.000Z','incomplete_evaluation','2026-09-02T11:00:00.000Z',60000,'daily','subscription_evaluation','evaluation_continuation_required','2026-09-02T11:00:00.000Z')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  assert.equal((await store.operationalHealth("2026-09-02T12:00:00.000Z")).schedulerRecent, false);
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_completed_at,evaluation_window_started_at) VALUES('daily-continuation','2026-09-02T11:05:00.000Z','2026-09-02T11:06:00.000Z','completed','2026-09-02T11:05:00.000Z',60000,'continuation','completed','2026-09-02T11:05:55.000Z','2026-09-02T11:00:00.000Z')",
+  ).run();
+  const health = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(health.schedulerRecent, true);
+  assert.equal(health.lastDailyStatus, "completed");
+});
+
+test("outstanding cursor ownership survives before, at, and after the 26-hour recovery horizon", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  const origin = "2026-09-06T13:15:00.000Z";
+  const weeklyWindow = "2026-09-06T23:59:59.999Z";
+  const inputGeneration = "2026-09-06T13:14:00.000Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-06T13:00:00.000Z", cursorEventId: "cursor-25",
+    windowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    inputGeneratedAt: inputGeneration,
+  });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('origin-incomplete',?,?,'incomplete_evaluation',?,60000,'daily','continuation_pending',?,?,?,?)",
+  ).run(origin, "2026-09-06T13:16:00.000Z", origin, origin, weeklyWindow, inputGeneration, inputGeneration);
+  const store = new D1AlertStore(new SqliteD1(database));
+  for (const delta of [26 * 60 * 60_000 - 1, 26 * 60 * 60_000, 26 * 60 * 60_000 + 1]) {
+    const state = await store.dailyContinuationState(new Date(Date.parse(origin) + delta).toISOString());
+    assert.equal(state.state, "pending");
+    assert.equal(state.evaluationWindowStartedAt, origin);
+    assert.equal(state.weeklyWindowAt, weeklyWindow);
+    assert.equal(state.evaluationInputGeneratedAt, inputGeneration);
+    assert.equal(state.outstandingWindowCount, 1);
+  }
+  const muchLater = new Date(Date.parse(origin) + 100 * 86_400_000).toISOString();
+  await store.cleanupOperationalData(muchLater, 500);
+  assert.ok(database.prepare("SELECT id FROM evaluation_runs WHERE id='origin-incomplete'").get());
+  assert.equal((await store.dailyContinuationState(muchLater)).state, "pending");
+  const health = await store.operationalHealth(muchLater);
+  assert.equal(health.pendingEvaluationWindows, 1);
+  assert.equal(health.schedulerRecent, false);
+});
+
+test("multiple incomplete windows remain durable and recover oldest-first across Sunday and Monday", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "weekly" });
+  insertSubscriber(database, {
+    id: "person-2", email: "second@example.edu", manageToken: "n".repeat(43),
+  });
+  insertSubscription(database, {
+    id: "watch-2", subscriberId: "person-2", active: 1, cadence: "weekly",
+    tokenHash: "token-second", definitionHash: "hash-second",
+  });
+  const sundayOrigin = "2026-09-06T13:15:00.000Z";
+  const mondayOrigin = "2026-09-07T13:15:00.000Z";
+  const sundayInput = "2026-09-06T13:14:00.000Z";
+  const mondayInput = "2026-09-07T13:14:00.000Z";
+  setEvaluationCursor(database, {
+    id: "watch-1", cursorAt: "2026-09-06T13:00:00.000Z", cursorEventId: "sunday-cursor",
+    windowStartedAt: sundayOrigin, weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    inputGeneratedAt: sundayInput,
+  });
+  setEvaluationCursor(database, {
+    id: "watch-2", cursorAt: "2026-09-07T13:00:00.000Z", cursorEventId: "monday-cursor",
+    windowStartedAt: mondayOrigin, weeklyWindowAt: "2026-09-13T23:59:59.999Z",
+    inputGeneratedAt: mondayInput,
+  });
+  for (const [id, origin, weekly, input] of [
+    ["sunday-incomplete", sundayOrigin, "2026-09-06T23:59:59.999Z", sundayInput],
+    ["monday-incomplete", mondayOrigin, "2026-09-13T23:59:59.999Z", mondayInput],
+  ]) {
+    database.prepare(
+      "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES(?,?,?,'incomplete_evaluation',?,60000,'daily','continuation_pending',?,?,?,?)",
+    ).run(id, origin, new Date(Date.parse(origin) + 60_000).toISOString(), origin, origin, weekly, input, input);
+  }
+  const store = new D1AlertStore(new SqliteD1(database));
+  const afterHorizon = await store.dailyContinuationState("2026-09-08T16:00:00.000Z");
+  assert.equal(afterHorizon.evaluationWindowStartedAt, sundayOrigin);
+  assert.equal(afterHorizon.weeklyWindowAt, "2026-09-06T23:59:59.999Z");
+  assert.equal(afterHorizon.outstandingWindowCount, 2);
+  const completedOnce = await store.completeEvaluation(
+    "watch-1", sundayInput, "2026-09-08T16:01:00.000Z",
+    {
+      verificationTokenHash: "token-old", baselineAt: "2026-08-01T00:00:00.000Z",
+      evaluationWindowStartedAt: sundayOrigin,
+      evaluationInputGeneratedAt: sundayInput,
+    },
+  );
+  const completedTwice = await store.completeEvaluation(
+    "watch-1", sundayInput, "2026-09-08T16:01:01.000Z",
+    {
+      verificationTokenHash: "token-old", baselineAt: "2026-08-01T00:00:00.000Z",
+      evaluationWindowStartedAt: sundayOrigin,
+      evaluationInputGeneratedAt: sundayInput,
+    },
+  );
+  assert.equal(completedOnce, true);
+  assert.equal(completedTwice, false);
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_completed_at,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('sunday-complete','2026-09-08T16:01:00.000Z','2026-09-08T16:02:00.000Z','completed','2026-09-08T16:01:00.000Z',60000,'continuation','completed','2026-09-08T16:01:55.000Z',?,?,?,?)",
+  ).run(sundayOrigin, "2026-09-06T23:59:59.999Z", sundayInput, sundayInput);
+  const next = await store.dailyContinuationState("2026-09-08T16:03:00.000Z");
+  assert.equal(next.evaluationWindowStartedAt, mondayOrigin);
+  assert.equal(next.outstandingWindowCount, 1);
+});
+
+test("cursor rebase coverage uses the current source generation while input remains frozen", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", type: "opportunity",
+    definition: { opportunity_id: "opp-retention-gap", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-09-01T13:14:00.000Z",
+  });
+  const origin = "2026-09-02T13:15:00.000Z";
+  const inputGeneration = "2026-09-02T13:14:00.000Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-02T13:00:00.000Z", cursorEventId: "missing-cursor",
+    windowStartedAt: origin, weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    inputGeneratedAt: inputGeneration, sourceGeneratedAt: inputGeneration,
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const current = new Date("2026-09-10T13:14:00.000Z");
+  await assert.rejects(
+    evaluateSubscriptions({
+      store,
+      assets: {
+        catalog: { opportunities: [] },
+        changes: {
+          schema_version: 1, retention_days: 1,
+          events: [{
+            id: "retained-old-event", type: "amended",
+            changed_at: "2026-09-02T12:00:00.000Z", opportunity_id: "opp-retention-gap",
+            record: { opportunity_id: "opp-retention-gap", title: "Retained boundary" },
+          }],
+        },
+      },
+      env, now: current,
+      evaluationWindowStartedAt: origin,
+      weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+      evaluationInputGeneratedAt: inputGeneration,
+    }),
+    error => error?.code === "evaluation_rebase_unsafe",
+  );
+  const cursor = database.prepare(
+    "SELECT evaluation_cursor_event_id,evaluation_input_generated_at,evaluation_source_generated_at,last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...cursor }, {
+    evaluation_cursor_event_id: "missing-cursor",
+    evaluation_input_generated_at: inputGeneration,
+    evaluation_source_generated_at: inputGeneration,
+    last_evaluated_at: "2026-09-01T13:14:00.000Z",
+  });
+});
+
+test("a changed input generation safely rebases a missing cursor without loss, duplication, or window leakage", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "weekly", type: "opportunity",
+    definition: { opportunity_id: "opp-rebase", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const origin = "2026-09-06T13:15:00.000Z";
+  const weeklyWindow = "2026-09-06T23:59:59.999Z";
+  const inputGeneration = "2026-09-06T13:14:00.000Z";
+  const event = (id, changedAt, title = id) => ({
+    id, type: "amended", changed_at: changedAt, opportunity_id: "opp-rebase",
+    record: { opportunity_id: "opp-rebase", title },
+  });
+  const originalAssets = {
+    catalog: { opportunities: [{ opportunity_id: "opp-rebase", title: "Original catalog" }] },
+    changes: {
+      schema_version: 1, generated_at: inputGeneration, retention_days: 90,
+      events: ["a", "b", "c"].map(id => event(id, "2026-09-06T13:00:00.000Z")),
+    },
+  };
+  const first = await evaluateSubscriptions({
+    store, assets: originalAssets, env, now: new Date(origin), changeLimit: 2,
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    evaluationInputGeneratedAt: inputGeneration,
+  });
+  assert.equal(first.continuationRequired, true);
+  assert.equal(database.prepare(
+    "SELECT evaluation_cursor_event_id FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_cursor_event_id, "b");
+  const rebasedAssets = {
+    catalog: { opportunities: [{ opportunity_id: "opp-rebase", title: "Changed catalog" }] },
+    changes: {
+      schema_version: 1, generated_at: "2026-09-07T13:14:00.000Z", retention_days: 90,
+      events: [
+        event("a", "2026-09-06T13:00:00.000Z"),
+        event("c", "2026-09-06T13:00:00.000Z"),
+        event("monday", "2026-09-07T13:00:00.000Z"),
+      ],
+    },
+  };
+  const recovered = await evaluateSubscriptions({
+    store, assets: rebasedAssets, env, now: new Date("2026-09-07T14:00:00.000Z"), changeLimit: 25,
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    evaluationInputGeneratedAt: inputGeneration,
+  });
+  assert.equal(recovered.rebasedSubscriptionCount, 1);
+  assert.equal(recovered.continuationRequired, false);
+  assert.deepEqual(all(
+    database,
+    "SELECT event_key,weekly_window_at FROM notification_events WHERE message_kind='notification' ORDER BY event_key",
+  ).map(row => ({ ...row })), [
+    { event_key: "amended:a", weekly_window_at: weeklyWindow },
+    { event_key: "amended:b", weekly_window_at: weeklyWindow },
+    { event_key: "amended:c", weekly_window_at: weeklyWindow },
+  ]);
+  const subscription = database.prepare(
+    "SELECT last_evaluated_at,evaluation_cursor_at,evaluation_window_started_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...subscription }, {
+    last_evaluated_at: inputGeneration,
+    evaluation_cursor_at: null,
+    evaluation_window_started_at: null,
+  });
+});
+
+test("concurrent scheduled and manual invocations claim an adopted cursor only once", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, cadence: "immediate", type: "opportunity",
+    definition: { opportunity_id: "opp-claim", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  const origin = "2026-09-01T13:15:00.000Z";
+  const inputGeneration = "2026-09-01T13:14:00.000Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-01T13:00:00.000Z", cursorEventId: "b",
+    windowStartedAt: origin, weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    inputGeneratedAt: inputGeneration,
+  });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('claim-origin',?,?,'incomplete_evaluation',?,60000,'daily','continuation_pending',?,'2026-09-06T23:59:59.999Z',?,?)",
+  ).run(origin, "2026-09-01T13:16:00.000Z", origin, origin, inputGeneration, inputGeneration);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const provider = new MockEmailProvider();
+  const assets = {
+    catalog: { opportunities: [{ opportunity_id: "opp-claim", title: "Claimed" }] },
+    changes: {
+      schema_version: 1, generated_at: inputGeneration, retention_days: 90,
+      events: [
+        { id: "b", type: "amended", changed_at: "2026-09-01T13:00:00.000Z", opportunity_id: "opp-claim", record: { opportunity_id: "opp-claim", title: "Already handled" } },
+        { id: "c", type: "amended", changed_at: "2026-09-01T13:01:00.000Z", opportunity_id: "opp-claim", record: { opportunity_id: "opp-claim", title: "Recovered" } },
+      ],
+    },
+  };
+  let releaseAssets;
+  let signalAssetLoad;
+  const assetLoaded = new Promise(resolve => { signalAssetLoad = resolve; });
+  const heldAssets = new Promise(resolve => { releaseAssets = () => resolve(assets); });
+  const recoveryNow = new Date("2026-09-03T16:00:00.000Z");
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store, providerFactory: () => provider,
+    assetLoader: async () => { signalAssetLoad(); return heldAssets; },
+    now: () => recoveryNow, clock: () => recoveryNow.getTime(),
+  });
+  const firstPromise = scheduled(
+    { scheduledTime: recoveryNow.getTime(), cron: "2-57/5 * * * *" }, env,
+  );
+  await assetLoaded;
+  const manualNow = new Date(recoveryNow.getTime() + 1_000);
+  const manual = createScheduledHandler({
+    storeFactory: () => store, providerFactory: () => provider,
+    assetLoader: async () => { throw new Error("manual execution must not claim the same cursor"); },
+    now: () => manualNow, clock: () => manualNow.getTime(),
+  });
+  const competing = await manual(
+    { scheduledTime: manualNow.getTime(), cron: "15 13 * * *" }, env,
+  );
+  releaseAssets();
+  const recovered = await firstPromise;
+  assert.equal(competing.status, "completed_skipped_daily_in_progress");
+  assert.equal(recovered.runKind, "continuation");
+  assert.equal(recovered.status, "completed");
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM evaluation_runs WHERE run_kind='continuation'",
+  ).get().count, 1);
+});
+
+test("stale adoption recovery and health remain truthful until the cursor completes", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  const origin = "2026-09-01T12:00:00.000Z";
+  const inputGeneration = "2026-09-01T11:59:00.000Z";
+  const weeklyWindow = "2026-09-06T23:59:59.999Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-01T11:30:00.000Z", cursorEventId: "cursor",
+    windowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    inputGeneratedAt: inputGeneration,
+  });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,status,scheduled_at,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('dead-adoption','2026-09-01T12:00:00.000Z','running','2026-09-01T12:00:00.000Z','continuation','subscription_evaluation',?,?,?,?)",
+  ).run(origin, weeklyWindow, inputGeneration, inputGeneration);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const staleHealth = await store.operationalHealth("2026-09-01T12:13:00.000Z");
+  assert.equal(staleHealth.schedulerRecent, false);
+  assert.equal(staleHealth.pendingEvaluationWindows, 1);
+  assert.equal(database.prepare(
+    "SELECT status FROM evaluation_runs WHERE id='dead-adoption'",
+  ).get().status, "failed_stale_recovered");
+  const adoptedRun = {
+    id: "adoption-two", startedAt: "2026-09-01T12:14:00.000Z",
+    scheduledAt: "2026-09-01T12:14:00.000Z", runKind: "continuation",
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    evaluationInputGeneratedAt: inputGeneration,
+    evaluationSourceGeneratedAt: inputGeneration,
+  };
+  assert.equal(await store.startRun(adoptedRun), true);
+  assert.equal((await store.dailyContinuationState("2026-09-01T12:15:00.000Z")).state, "running");
+  assert.equal((await store.operationalHealth("2026-09-01T12:15:00.000Z")).schedulerRecent, false);
+  assert.equal((await store.dailyContinuationState("2026-09-01T12:27:00.001Z")).state, "pending");
+  assert.equal(database.prepare(
+    "SELECT status FROM evaluation_runs WHERE id='adoption-two'",
+  ).get().status, "failed_stale_recovered");
+  const failedRun = {
+    id: "adoption-failed", startedAt: "2026-09-01T12:28:00.000Z",
+    scheduledAt: "2026-09-01T12:28:00.000Z", runKind: "continuation",
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    evaluationInputGeneratedAt: inputGeneration,
+    evaluationSourceGeneratedAt: inputGeneration,
+  };
+  assert.equal(await store.startRun(failedRun), true);
+  await store.finishRun({
+    ...failedRun, completedAt: "2026-09-01T12:29:00.000Z", durationMs: 60_000,
+    subscriptionCount: 0, matchedEventCount: 0, attemptedCount: 0,
+    deliveredCount: 0, failedCount: 0, cleanupDeletedCount: 0,
+    status: "failed", stage: "subscription_evaluation", progress: {},
+  });
+  assert.equal((await store.operationalHealth("2026-09-01T12:29:30.000Z")).schedulerRecent, false);
+  const successfulRun = {
+    id: "adoption-complete", startedAt: "2026-09-01T12:30:00.000Z",
+    scheduledAt: "2026-09-01T12:30:00.000Z", runKind: "continuation",
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weeklyWindow,
+    evaluationInputGeneratedAt: inputGeneration,
+    evaluationSourceGeneratedAt: inputGeneration,
+  };
+  assert.equal(await store.startRun(successfulRun), true);
+  assert.equal(await store.completeEvaluation(
+    "watch-1", inputGeneration, "2026-09-01T12:30:30.000Z",
+    {
+      verificationTokenHash: "token-old", baselineAt: "2026-08-01T00:00:00.000Z",
+      evaluationWindowStartedAt: origin, evaluationInputGeneratedAt: inputGeneration,
+    },
+  ), true);
+  await store.markRunEvaluationComplete(
+    successfulRun.id, "2026-09-01T12:30:40.000Z", { continuationRequired: false },
+  );
+  await store.finishRun({
+    ...successfulRun, completedAt: "2026-09-01T12:31:00.000Z", durationMs: 60_000,
+    evaluationCompletedAt: "2026-09-01T12:30:40.000Z",
+    subscriptionCount: 1, matchedEventCount: 0, attemptedCount: 0,
+    deliveredCount: 0, failedCount: 0, cleanupDeletedCount: 0,
+    status: "completed", stage: "completed", progress: { continuationRequired: false },
+  });
+  assert.equal(database.prepare(
+    "SELECT evaluation_cursor_at FROM subscriptions WHERE id='watch-1'",
+  ).get().evaluation_cursor_at, null);
+  const completedHealth = await store.operationalHealth("2026-09-01T12:31:30.000Z");
+  assert.equal(completedHealth.pendingEvaluationWindows, 0);
+  assert.equal(completedHealth.schedulerRecent, true);
+});
+
+test("revoked scheduler fencing makes every late evaluation and delivery write a no-op", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "saved_search", cadence: "immediate",
+    definition: { query: "fenced catalysis" }, lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const origin = "2026-09-06T13:15:00.000Z";
+  const input = "2026-09-06T13:14:00.000Z";
+  const weekly = "2026-09-06T23:59:59.999Z";
+  const oldClaim = { runId: "old-adopter", token: "old-fence-token" };
+  const oldRun = {
+    id: oldClaim.runId, claimToken: oldClaim.token, startedAt: origin, scheduledAt: origin,
+    runKind: "continuation", evaluationWindowStartedAt: origin, weeklyWindowAt: weekly,
+    evaluationInputGeneratedAt: input, evaluationSourceGeneratedAt: input,
+  };
+  assert.equal(await store.startRun(oldRun), true);
+  const cycle = {
+    verificationTokenHash: "token-old", baselineAt: "2026-08-01T00:00:00.000Z",
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weekly,
+    evaluationInputGeneratedAt: input, evaluationSourceGeneratedAt: input,
+    calendarEvaluationDate: "2026-09-06", claim: oldClaim,
+  };
+  assert.equal(await store.enqueueEvent({
+    id: "fenced-delivery", subscriptionId: "watch-1", eventKey: "fenced-delivery",
+    eventKind: "strong_match", opportunityId: "opp-fenced", payload: { title: "Fenced" },
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weekly,
+    createdAt: "2026-09-06T13:16:00.000Z", cycle,
+  }), true);
+  assert.deepEqual(
+    await store.claimEvents(["fenced-delivery"], "2026-09-06T13:16:00.000Z", oldClaim),
+    ["fenced-delivery"],
+  );
+  assert.equal(await store.revokeRunClaim(
+    oldClaim.runId, oldClaim.token, "2026-09-06T13:17:00.000Z",
+  ), true);
+  const healthAfterTimeout = await store.operationalHealth("2026-09-06T13:17:01.000Z");
+  assert.equal(healthAfterTimeout.schedulerRecent, false);
+
+  const successorClaim = { runId: "successor-adopter", token: "successor-fence-token" };
+  const successorRun = {
+    ...oldRun, id: successorClaim.runId, claimToken: successorClaim.token,
+    startedAt: "2026-09-06T13:18:00.000Z", scheduledAt: "2026-09-06T13:18:00.000Z",
+  };
+  assert.equal(await store.startRun(successorRun), true);
+  assert.equal(await store.enqueueEvent({
+    id: "late-event", subscriptionId: "watch-1", eventKey: "late-event",
+    eventKind: "strong_match", opportunityId: "opp-late", payload: { title: "Late" },
+    evaluationWindowStartedAt: origin, weeklyWindowAt: weekly,
+    createdAt: "2026-09-06T13:18:01.000Z", cycle,
+  }), false);
+  await store.setQualification(
+    "watch-1", "opp-late", true, "2026-09-06T13:18:01.000Z", cycle,
+  );
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM subscription_qualifications WHERE opportunity_id='opp-late'",
+  ).get().count, 0);
+  assert.equal(await store.saveEvaluationCursor(
+    "watch-1", "2026-09-06T13:10:00.000Z", "late-cursor",
+    "2026-09-06T13:18:01.000Z", cycle,
+  ), false);
+  assert.equal(await store.completeEvaluation(
+    "watch-1", input, "2026-09-06T13:18:01.000Z", cycle,
+  ), false);
+  await store.markEventsSent(
+    ["fenced-delivery"], "provider-late", "2026-09-06T13:18:01.000Z", oldClaim,
+  );
+  assert.equal(database.prepare(
+    "SELECT provider_message_id FROM notification_events WHERE id='fenced-delivery'",
+  ).get().provider_message_id, null);
+  assert.equal(await store.markRunEvaluationComplete(
+    oldClaim.runId, "2026-09-06T13:18:01.000Z", {}, oldClaim,
+  ), false);
+  assert.equal(await store.finishRun({
+    ...oldRun, claimToken: oldClaim.token, completedAt: "2026-09-06T13:18:01.000Z",
+    durationMs: 181_000, subscriptionCount: 1, matchedEventCount: 1,
+    attemptedCount: 1, deliveredCount: 1, failedCount: 0, cleanupDeletedCount: 0,
+    status: "completed", stage: "completed", progress: {},
+  }), false);
+
+  const successorCycle = { ...cycle, claim: successorClaim };
+  assert.equal(await store.completeEvaluation(
+    "watch-1", input, "2026-09-06T13:18:30.000Z", successorCycle,
+  ), true);
+  assert.equal(await store.markRunEvaluationComplete(
+    successorClaim.runId, "2026-09-06T13:18:31.000Z", {}, successorClaim,
+  ), true);
+  assert.equal(await store.finishRun({
+    ...successorRun, completedAt: "2026-09-06T13:19:00.000Z", durationMs: 60_000,
+    subscriptionCount: 1, matchedEventCount: 0, attemptedCount: 0,
+    deliveredCount: 0, failedCount: 0, cleanupDeletedCount: 0,
+    status: "completed", stage: "completed", progress: {},
+    evaluationCompletedAt: "2026-09-06T13:18:31.000Z",
+  }), true);
+  const completedHealth = await store.operationalHealth("2026-09-06T13:19:01.000Z");
+  assert.equal(completedHealth.pendingEvaluationWindows, 0);
+  assert.equal(completedHealth.schedulerRecent, true);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM evaluation_runs WHERE claim_token IS NOT NULL",
+  ).get().count, 0);
+});
+
+test("saved-search qualification writes carry the same scheduler fence as their event", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "saved_search", cadence: "immediate",
+    definition: { query: "fenced hydrogen" }, lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  database.prepare(
+    "INSERT INTO subscription_qualifications(subscription_id,opportunity_id,qualified,updated_at) VALUES('watch-1','opp-new',0,'2026-08-01T00:00:00.000Z')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const claim = { runId: "qualification-run", token: "qualification-token" };
+  const origin = "2026-09-01T13:15:00.000Z";
+  const input = "2026-09-01T13:14:00.000Z";
+  assert.equal(await store.startRun({
+    id: claim.runId, claimToken: claim.token, startedAt: origin, scheduledAt: origin,
+    runKind: "daily", evaluationWindowStartedAt: origin,
+    weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    evaluationInputGeneratedAt: input, evaluationSourceGeneratedAt: input,
+  }), true);
+  const proxy = new Proxy(store, {
+    get(target, property) {
+      if (property === "enqueueEvent") {
+        return async event => {
+          const inserted = await target.enqueueEvent(event);
+          await target.revokeRunClaim(
+            claim.runId, claim.token, "2026-09-01T13:15:01.000Z",
+          );
+          return inserted;
+        };
+      }
+      const value = target[property];
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
+  const opportunity = { opportunity_id: "opp-new", title: "Hydrogen catalysis" };
+  await assert.rejects(evaluateSubscriptions({
+    store: proxy,
+    assets: {
+      catalog: { opportunities: [opportunity] },
+      changes: {
+        schema_version: 1, generated_at: input, retention_days: 90,
+        events: [{
+          id: "new-event", type: "new", changed_at: "2026-09-01T13:00:00.000Z",
+          opportunity_id: "opp-new", record: opportunity,
+        }],
+      },
+      matcher: {
+        prepare: () => {},
+        matchDetails: () => new Map([["opp-new", { reasons: ["Fenced match"] }]]),
+      },
+    },
+    env, now: new Date(origin), evaluationWindowStartedAt: origin,
+    weeklyWindowAt: "2026-09-06T23:59:59.999Z",
+    evaluationInputGeneratedAt: input, schedulerClaim: claim,
+  }), error => error.code === "scheduler_claim_lost");
+  assert.equal(database.prepare(
+    "SELECT qualified FROM subscription_qualifications WHERE subscription_id='watch-1' AND opportunity_id='opp-new'",
+  ).get().qualified, 0, "the revoked run cannot overwrite qualification state");
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE event_key='strong:opp-new:new-event'",
+  ).get().count, 1, "the event committed before revocation remains idempotently owned");
+});
+
+test("ambiguous provider completion after fence revocation reuses one provider identity", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, type: "opportunity", cadence: "immediate" });
+  insertEvent(database, { id: "ambiguous-event" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const oldClaim = { runId: "provider-old", token: "provider-old-token" };
+  assert.equal(await store.startRun({
+    id: oldClaim.runId, claimToken: oldClaim.token,
+    startedAt: "2026-09-01T12:00:00.000Z", scheduledAt: "2026-09-01T12:00:00.000Z",
+    runKind: "retry",
+  }), true);
+  let releaseFirst;
+  let providerStarted;
+  const started = new Promise(resolve => { providerStarted = resolve; });
+  const providerIds = new Map();
+  const calls = [];
+  const provider = {
+    configured: true,
+    async sendEmail(_message, key) {
+      calls.push(key);
+      if (!providerIds.has(key)) providerIds.set(key, `provider-${providerIds.size + 1}`);
+      if (calls.length === 1) {
+        providerStarted();
+        return new Promise(resolve => { releaseFirst = () => resolve({ id: providerIds.get(key) }); });
+      }
+      return { id: providerIds.get(key) };
+    },
+  };
+  const firstDispatch = dispatchNotifications({
+    store, provider, env, now: new Date("2026-09-01T12:00:00.000Z"),
+    schedulerClaim: oldClaim,
+  });
+  await started;
+  assert.equal(await store.revokeRunClaim(
+    oldClaim.runId, oldClaim.token, "2026-09-01T12:00:01.000Z", "failed_timeout",
+  ), true);
+  const successorClaim = { runId: "provider-successor", token: "provider-successor-token" };
+  assert.equal(await store.startRun({
+    id: successorClaim.runId, claimToken: successorClaim.token,
+    startedAt: "2026-09-01T12:00:02.000Z", scheduledAt: "2026-09-01T12:00:02.000Z",
+    runKind: "retry",
+  }), true);
+  releaseFirst();
+  await firstDispatch;
+  const ambiguous = database.prepare(
+    "SELECT status,provider_message_id,provider_quota_key FROM notification_events WHERE id='ambiguous-event'",
+  ).get();
+  assert.equal(ambiguous.status, "sending");
+  assert.equal(ambiguous.provider_message_id, null);
+  assert.equal(ambiguous.provider_quota_key, "ambiguous-event");
+  const recovered = await dispatchNotifications({
+    store, provider, env, now: new Date("2026-09-01T12:16:00.000Z"),
+    schedulerClaim: successorClaim,
+  });
+  assert.equal(recovered.deliveredCount, 1);
+  assert.deepEqual(calls, ["ambiguous-event", "ambiguous-event"]);
+  assert.equal(providerIds.size, 1, "the provider observes one idempotent delivery identity");
+  const sent = database.prepare(
+    "SELECT status,provider_message_id FROM notification_events WHERE id='ambiguous-event'",
+  ).get();
+  assert.deepEqual({ ...sent }, { status: "sent", provider_message_id: "provider-1" });
+  assert.equal(database.prepare(
+    "SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'",
+  ).get().request_count, 1, "retry reuses the original quota reservation");
+});
+
+test("a timed-out adopter older than 26 hours is fenced while its Sunday successor completes", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "weekly",
+    definition: { opportunity_id: "opp-recovery", triggers: ["amended"] },
+    lastEvaluatedAt: "2026-08-01T00:00:00.000Z",
+  });
+  const origin = "2026-09-06T13:15:00.000Z";
+  const input = "2026-09-06T13:14:00.000Z";
+  const weekly = "2026-09-06T23:59:59.999Z";
+  setEvaluationCursor(database, {
+    cursorAt: "2026-09-06T13:00:00.000Z", cursorEventId: "cursor",
+    windowStartedAt: origin, weeklyWindowAt: weekly, inputGeneratedAt: input,
+  });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('origin-timeout',?,?, 'incomplete_timeout',?,60000,'daily','subscription_evaluation',?,?,?,?)",
+  ).run(origin, "2026-09-06T13:16:00.000Z", origin, origin, weekly, input, input);
+  const realStore = new D1AlertStore(new SqliteD1(database));
+  const staleLoaded = await realStore.activeSubscriptionsForEvaluation(input, 4, origin);
+  let releaseStale;
+  let firstSelectionStarted;
+  const selectionStarted = new Promise(resolve => { firstSelectionStarted = resolve; });
+  let selectionCalls = 0;
+  const proxy = new Proxy(realStore, {
+    get(target, property) {
+      if (property === "activeSubscriptionsForEvaluation") {
+        return async (...args) => {
+          selectionCalls += 1;
+          if (selectionCalls === 1) {
+            firstSelectionStarted();
+            return new Promise(resolve => { releaseStale = () => resolve(staleLoaded); });
+          }
+          return target.activeSubscriptionsForEvaluation(...args);
+        };
+      }
+      const value = target[property];
+      return typeof value === "function" ? value.bind(target) : value;
+    },
+  });
+  const record = { opportunity_id: "opp-recovery", title: "Recovered Sunday award" };
+  const assets = {
+    catalog: { opportunities: [record] },
+    changes: {
+      schema_version: 1, generated_at: input, retention_days: 90,
+      events: [
+        { id: "cursor", type: "amended", changed_at: "2026-09-06T13:00:00.000Z", opportunity_id: "opp-recovery", record },
+        { id: "recovered", type: "amended", changed_at: "2026-09-06T13:01:00.000Z", opportunity_id: "opp-recovery", detail: "Recovered", record },
+      ],
+    },
+    matcher: { matchIds: () => new Set() },
+  };
+  const provider = new MockEmailProvider();
+  let current = new Date("2026-09-08T16:00:00.000Z");
+  const scheduled = createScheduledHandler({
+    storeFactory: () => proxy, providerFactory: () => provider,
+    assetLoader: async () => assets, now: () => current,
+  });
+  const firstPromise = scheduled(
+    { scheduledTime: current.getTime(), cron: "2-57/5 * * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "80" },
+  );
+  await selectionStarted;
+  const first = await firstPromise;
+  assert.equal(first.status, "incomplete_timeout");
+  assert.equal(first.evaluationWindowStartedAt, origin);
+  assert.equal(first.weeklyWindowAt, weekly);
+  assert.equal((await realStore.operationalHealth("2026-09-08T16:00:01.000Z")).schedulerRecent, false);
+
+  current = new Date("2026-09-08T16:01:00.000Z");
+  const successor = await scheduled(
+    { scheduledTime: current.getTime(), cron: "2-57/5 * * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "120000" },
+  );
+  assert.equal(successor.runKind, "continuation");
+  assert.equal(successor.status, "completed");
+  assert.equal(successor.evaluationWindowStartedAt, origin);
+  assert.equal(successor.weeklyWindowAt, weekly);
+  assert.equal(provider.messages.length, 1);
+  releaseStale();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM notification_events WHERE event_key='amended:recovered'",
+  ).get().count, 1);
+  const subscription = database.prepare(
+    "SELECT evaluation_cursor_at,last_evaluated_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual({ ...subscription }, { evaluation_cursor_at: null, last_evaluated_at: input });
+  const health = await realStore.operationalHealth("2026-09-08T16:01:01.000Z");
+  assert.equal(health.pendingEvaluationWindows, 0);
+  assert.equal(health.schedulerRecent, true);
+});
+
+test("candidate-scoped Strong matching preserves full-engine admission on the public catalog", async () => {
+  const [catalogText, subtopicsText] = await Promise.all([
+    readFile(new URL("data/opportunities.js", root), "utf8"),
+    readFile(new URL("data/subtopics.js", root), "utf8"),
+  ]);
+  const catalog = parseAssignedJson(catalogText, "GRANT_CATALOG");
+  const subtopics = parseAssignedJson(subtopicsText, "SUBTOPIC_CATALOG");
+  const definition = {
+    query: "hydrogen catalysis",
+    filters: {
+      status: { posted: true, forecasted: true, archived: false },
+      facets: { source: [], source_type: [], discipline: [], topic: [], agency: [], eligibility: [], funding_instrument: [] },
+      deadline: { from: "", through: "" }, minimum_award: 0,
+      flags: { evidence: false, preliminary: false, limited: false, early_career: false, no_cost_share: false },
+      audience: "all",
+    },
+    currentness: "current_only", strong_contract_version: "funding-search-v2-strong-1",
+    include_potential: false,
+  };
+  const full = new StrongMatchEngine(catalog, subtopics);
+  const fullIds = full.matchIds(definition, "2026-08-28", null);
+  const candidateIds = [...new Set([
+    ...catalog.opportunities.slice(0, 75).map(record => String(record.opportunity_id)),
+    ...[...fullIds].slice(0, 25),
+  ])];
+  const scoped = new StrongMatchEngine(catalog, subtopics);
+  const scopedIds = scoped.matchIds(definition, "2026-08-28", candidateIds);
+  assert.deepEqual([...scopedIds].sort(), candidateIds.filter(id => fullIds.has(id)).sort());
 });

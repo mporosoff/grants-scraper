@@ -9,11 +9,31 @@ import { digestEmail, eventEmail, verificationEmail } from "./email.js";
 const LINKS_API = globalThis.FUNDING_AWARD_LINKS;
 const CHANGE_KINDS = new Set(["new", "deadline_changed", "amended", "status_changed", "closed_or_removed"]);
 export const DIGEST_MAX_EVENTS = 25;
+export const EVALUATION_CHANGE_LIMIT = 25;
+export const EVALUATION_SUBSCRIPTION_LIMIT = 4;
 const VERIFICATION_VALIDITY_MS = 24 * 60 * 60_000;
 const VERIFICATION_MINIMUM_SEND_WINDOW_MS = 60 * 60_000;
 
 function isoDate(now) {
   return now.toISOString().slice(0, 10);
+}
+
+function throwIfAborted(signal) {
+  if (!signal?.aborted) return;
+  throw signal.reason instanceof Error
+    ? signal.reason
+    : Object.assign(new Error("Alert scheduler operation was aborted."), { code: "scheduler_aborted" });
+}
+
+async function assertSchedulerClaim(store, claim, signal) {
+  throwIfAborted(signal);
+  if (!claim?.runId || !claim?.token || typeof store.runClaimIsCurrent !== "function") return;
+  if (!await store.runClaimIsCurrent(claim.runId, claim.token)) {
+    throw Object.assign(new Error("Alert scheduler ownership changed."), {
+      code: "scheduler_claim_lost",
+    });
+  }
+  throwIfAborted(signal);
 }
 
 function daysBetween(left, right) {
@@ -75,7 +95,7 @@ function payloadFor(record, detail, env, whyMatched = []) {
   };
 }
 
-async function enqueue(store, subscription, value, now) {
+async function enqueue(store, subscription, value, now, evaluationContext = {}) {
   const id = `evt_${(await sha256Hex(`${subscription.id}|${value.eventKey}`)).slice(0, 32)}`;
   return store.enqueueEvent({
     id,
@@ -85,9 +105,13 @@ async function enqueue(store, subscription, value, now) {
     opportunityId: value.opportunityId,
     payload: value.payload,
     createdAt: now.toISOString(),
+    evaluationWindowStartedAt: evaluationContext.evaluationWindowStartedAt || null,
+    weeklyWindowAt: evaluationContext.weeklyWindowAt || null,
     cycle: {
       verificationTokenHash: subscription.verification_token_hash,
       baselineAt: subscription.baseline_at,
+      evaluationWindowStartedAt: evaluationContext.evaluationWindowStartedAt || null,
+      claim: evaluationContext.schedulerClaim || null,
     },
   });
 }
@@ -98,19 +122,107 @@ export function baselineIds(subscription, suppliedIds = []) {
   return [...new Set(suppliedIds.map(String).filter(Boolean))];
 }
 
-function relevantChanges(subscription, changes) {
-  const since = subscription.last_evaluated_at || subscription.baseline_at || subscription.created_at;
-  return changes.events.filter(event => (
-    CHANGE_KINDS.has(event.type) && String(event.changed_at || "") > String(since || "")
-  ));
+function evaluationError(code, message) {
+  return Object.assign(new Error(message), { code });
 }
 
-async function evaluateOpportunity(store, subscription, assets, env, now) {
+function relevantChanges(
+  subscription, changes, limit = EVALUATION_CHANGE_LIMIT,
+  inputGeneratedAt = "", sourceGeneratedAt = "",
+  evaluationWindowStartedAt = "", weeklyWindowAt = "",
+) {
+  const since = subscription.last_evaluated_at || subscription.baseline_at || subscription.created_at;
+  let cursorAt = String(subscription.evaluation_cursor_at || "");
+  let cursorEventId = String(subscription.evaluation_cursor_event_id || "");
+  const sourceGeneration = String(changes.generated_at || sourceGeneratedAt || "");
+  const inputGeneration = String(inputGeneratedAt || sourceGeneration);
+  const inputTime = Date.parse(inputGeneration);
+  const sourceTime = Date.parse(sourceGeneration);
+  const sinceTime = Date.parse(String(since || ""));
+  if (
+    cursorAt
+    && subscription.evaluation_window_started_at
+    && String(subscription.evaluation_window_started_at) !== String(evaluationWindowStartedAt || "")
+  ) {
+    throw evaluationError("evaluation_window_mismatch", "The outstanding cursor belongs to another evaluation window.");
+  }
+  if (
+    cursorAt
+    && subscription.evaluation_input_generated_at
+    && String(subscription.evaluation_input_generated_at) !== inputGeneration
+  ) {
+    throw evaluationError("evaluation_input_mismatch", "The outstanding cursor has a different immutable input boundary.");
+  }
+  if (
+    cursorAt
+    && subscription.evaluation_weekly_window_at
+    && String(subscription.evaluation_weekly_window_at) !== String(weeklyWindowAt || "")
+  ) {
+    throw evaluationError("evaluation_weekly_window_mismatch", "The outstanding cursor has a different weekly window.");
+  }
+  if (!Number.isFinite(inputTime) || !Number.isFinite(sourceTime) || !Number.isFinite(sinceTime)) {
+    throw evaluationError("evaluation_generation_invalid", "Alert evaluation input generation is invalid.");
+  }
+  if (sourceTime < inputTime) {
+    throw evaluationError(
+      "evaluation_generation_behind",
+      "The available change feed predates the outstanding evaluation boundary.",
+    );
+  }
+  const boundedEvents = changes.events.filter(event => (
+    CHANGE_KINDS.has(event.type)
+    && Number.isFinite(Date.parse(String(event.changed_at || "")))
+    && Date.parse(String(event.changed_at || "")) <= inputTime
+  ));
+  const cursorTime = Date.parse(cursorAt);
+  let rebased = false;
+  if (cursorAt && !boundedEvents.some(event => (
+    Date.parse(String(event.changed_at || "")) === cursorTime
+    && String(event.id || "") === cursorEventId
+  ))) {
+    const retentionDays = Number(changes.retention_days);
+    const coverageStart = Number.isFinite(retentionDays) && retentionDays > 0
+      ? new Date(sourceTime - retentionDays * 86_400_000).toISOString()
+      : "";
+    if (!coverageStart || !Number.isFinite(sinceTime) || sinceTime < Date.parse(coverageStart)) {
+      throw evaluationError(
+        "evaluation_rebase_unsafe",
+        "The outstanding cursor cannot be safely rebased inside the retained change-feed window.",
+      );
+    }
+    cursorAt = "";
+    cursorEventId = "";
+    rebased = true;
+  }
+  const ordered = boundedEvents.filter(event => (
+    Date.parse(String(event.changed_at || "")) > sinceTime
+    && (!cursorAt
+      || Date.parse(String(event.changed_at || "")) > cursorTime
+      || (
+        Date.parse(String(event.changed_at || "")) === cursorTime
+        && String(event.id || "") > cursorEventId
+      ))
+  )).sort((left, right) => (
+    Date.parse(String(left.changed_at || "")) - Date.parse(String(right.changed_at || ""))
+    || String(left.id || "").localeCompare(String(right.id || ""))
+  ));
+  const events = ordered.slice(0, Math.max(1, limit));
+  const last = events.at(-1) || null;
+  return {
+    events,
+    complete: ordered.length <= events.length,
+    cursorAt: String(last?.changed_at || cursorAt),
+    cursorEventId: String(last?.id || cursorEventId),
+    rebased,
+  };
+}
+
+async function evaluateOpportunity(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   const id = definition.opportunity_id;
   const triggers = new Set(definition.triggers);
   let matched = 0;
-  for (const event of relevantChanges(subscription, assets.changes)) {
+  for (const event of changes) {
     if (String(event.opportunity_id) !== id) continue;
     const kind = event.type === "closed_or_removed" ? "status_changed" : event.type;
     if (!triggers.has(kind)) continue;
@@ -119,12 +231,14 @@ async function evaluateOpportunity(store, subscription, assets, env, now) {
       eventKind: kind,
       opportunityId: id,
       payload: payloadFor(event.record, event.detail, env),
-    }, now);
+    }, now, evaluationContext);
     if (inserted) matched += 1;
   }
   if (triggers.has("closing_reminders")) {
     const record = assets.catalog.opportunities.find(item => recordId(item) === id);
-    const remaining = record ? daysBetween(isoDate(now), record.close_date) : null;
+    const remaining = record
+      ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), record.close_date)
+      : null;
     const threshold = [7, 14, 30].find(value => remaining === value);
     if (threshold) {
       const inserted = await enqueue(store, subscription, {
@@ -132,18 +246,17 @@ async function evaluateOpportunity(store, subscription, assets, env, now) {
         eventKind: "closing_reminder",
         opportunityId: id,
         payload: payloadFor(record, `${threshold}-day closing reminder`, env),
-      }, now);
+      }, now, evaluationContext);
       if (inserted) matched += 1;
     }
   }
   return matched;
 }
 
-async function evaluateSavedSearch(store, subscription, assets, env, now) {
+async function evaluateSavedSearch(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
-  const changes = relevantChanges(subscription, assets.changes);
   if (!changes.length) return 0;
-  const asOf = isoDate(now);
+  const asOf = isoDate(evaluationContext.evaluationAsOf || now);
   const changedIds = [...new Set(changes.map(event => String(event.opportunity_id || "")).filter(Boolean))];
   const matchDetails = typeof assets.matcher.matchDetails === "function"
     ? assets.matcher.matchDetails(definition, asOf, changedIds)
@@ -162,23 +275,24 @@ async function evaluateSavedSearch(store, subscription, assets, env, now) {
         eventKind: "strong_match",
         opportunityId: id,
         payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons),
-      }, now);
+      }, now, evaluationContext);
       if (inserted) matched += 1;
     }
     if (qualifies !== didQualify || !prior.has(id)) {
       await store.setQualification(subscription.id, id, qualifies, now.toISOString(), {
         verificationTokenHash: subscription.verification_token_hash,
         baselineAt: subscription.baseline_at,
+        claim: evaluationContext.schedulerClaim || null,
       });
     }
   }
   return matched;
 }
 
-async function evaluateProgram(store, subscription, assets, env, now) {
+async function evaluateProgram(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   let matched = 0;
-  for (const event of relevantChanges(subscription, assets.changes)) {
+  for (const event of changes) {
     if (!LINKS_API.matchesProgramIdentity(definition.program_id, event.record)) continue;
     const eventKind = {
       new: "program_new_cycle",
@@ -192,32 +306,109 @@ async function evaluateProgram(store, subscription, assets, env, now) {
       eventKind,
       opportunityId: String(event.opportunity_id || ""),
       payload: payloadFor(event.record, event.detail, env),
-    }, now);
+    }, now, evaluationContext);
     if (inserted) matched += 1;
   }
   return matched;
 }
 
-export async function evaluateSubscriptions({ store, assets, env, now = new Date() }) {
-  const subscriptions = await store.activeSubscriptions();
-  let matchedEventCount = 0;
-  for (const subscription of subscriptions) {
-    let matched = 0;
-    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now);
-    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now);
-    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now);
-    matchedEventCount += matched;
-    await store.markEvaluated(
-      subscription.id,
-      String(assets.changes.generated_at || now.toISOString()),
-      now.toISOString(),
-      {
-        verificationTokenHash: subscription.verification_token_hash,
-        baselineAt: subscription.baseline_at,
-      },
-    );
+export async function evaluateSubscriptions({
+  store, assets, env, now = new Date(),
+  subscriptionLimit = EVALUATION_SUBSCRIPTION_LIMIT,
+  changeLimit = EVALUATION_CHANGE_LIMIT,
+  evaluationWindowStartedAt = null,
+  weeklyWindowAt = null,
+  evaluationInputGeneratedAt = null,
+  schedulerClaim = null,
+  signal = null,
+} = {}) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
+  const changes = assets?.changes && Array.isArray(assets.changes.events)
+    ? assets.changes
+    : { generated_at: now.toISOString(), events: [] };
+  const sourceGeneratedAt = String(changes.generated_at || now.toISOString());
+  const generatedAt = String(evaluationInputGeneratedAt || sourceGeneratedAt);
+  const boundedSubscriptionLimit = Math.max(1, Math.min(25, Number(subscriptionLimit) || EVALUATION_SUBSCRIPTION_LIMIT));
+  const boundedChangeLimit = Math.max(1, Math.min(50, Number(changeLimit) || EVALUATION_CHANGE_LIMIT));
+  const loaded = typeof store.activeSubscriptionsForEvaluation === "function"
+    ? await store.activeSubscriptionsForEvaluation(
+        generatedAt, boundedSubscriptionLimit, evaluationWindowStartedAt,
+      )
+    : await store.activeSubscriptions();
+  const sourceSubscriptions = Array.isArray(loaded) ? loaded : loaded.subscriptions;
+  const subscriptions = (sourceSubscriptions || []).slice(0, boundedSubscriptionLimit);
+  const batches = subscriptions.map(subscription => ({
+    subscription,
+    ...relevantChanges(
+      subscription, changes, boundedChangeLimit, generatedAt,
+      sourceGeneratedAt,
+      evaluationWindowStartedAt, weeklyWindowAt,
+    ),
+  }));
+  const matcherCandidates = [...new Set(batches.flatMap(batch => (
+    batch.subscription.type === "saved_search"
+      ? batch.events.map(event => String(event.opportunity_id || "")).filter(Boolean)
+      : []
+  )))];
+  if (matcherCandidates.length && typeof assets.matcher?.prepare === "function") {
+    assets.matcher.prepare(matcherCandidates);
   }
-  return { subscriptionCount: subscriptions.length, matchedEventCount };
+  let matchedEventCount = 0;
+  let continuationRequired = Boolean(!Array.isArray(loaded) && loaded?.hasMore);
+  const evaluationAsOf = Number.isFinite(Date.parse(String(evaluationWindowStartedAt || "")))
+    ? new Date(evaluationWindowStartedAt)
+    : now;
+  const evaluationContext = {
+    evaluationWindowStartedAt, weeklyWindowAt,
+    evaluationInputGeneratedAt: generatedAt,
+    evaluationSourceGeneratedAt: sourceGeneratedAt,
+    evaluationAsOf,
+    schedulerClaim,
+  };
+  for (const batch of batches) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
+    const { subscription } = batch;
+    let matched = 0;
+    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now, batch.events, evaluationContext);
+    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now, batch.events, evaluationContext);
+    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now, batch.events, evaluationContext);
+    matchedEventCount += matched;
+    const cycle = {
+      verificationTokenHash: subscription.verification_token_hash,
+      baselineAt: subscription.baseline_at,
+      evaluationWindowStartedAt,
+      weeklyWindowAt,
+      evaluationInputGeneratedAt: generatedAt,
+      evaluationSourceGeneratedAt: sourceGeneratedAt,
+      calendarEvaluationDate: isoDate(evaluationAsOf),
+      claim: schedulerClaim,
+    };
+    if (batch.complete) {
+      const complete = typeof store.completeEvaluation === "function"
+        ? store.completeEvaluation.bind(store)
+        : store.markEvaluated.bind(store);
+      await complete(subscription.id, generatedAt, now.toISOString(), cycle);
+    } else {
+      continuationRequired = true;
+      if (typeof store.saveEvaluationCursor === "function") {
+        await store.saveEvaluationCursor(
+          subscription.id, batch.cursorAt, batch.cursorEventId, now.toISOString(), cycle,
+        );
+      } else {
+        await store.markEvaluated(subscription.id, batch.cursorAt, now.toISOString(), cycle);
+      }
+    }
+    await assertSchedulerClaim(store, schedulerClaim, signal);
+  }
+  return {
+    subscriptionCount: subscriptions.length,
+    matchedEventCount,
+    continuationRequired,
+    processedChangeCount: batches.reduce((sum, batch) => sum + batch.events.length, 0),
+    rebasedSubscriptionCount: batches.filter(batch => batch.rebased).length,
+    evaluationInputGeneratedAt: generatedAt,
+    evaluationSourceGeneratedAt: sourceGeneratedAt,
+  };
 }
 
 function retryAt(event, now) {
@@ -256,12 +447,17 @@ async function deliveryCapabilityLinks(env, event) {
     : null;
 }
 
-export async function dispatchNotifications({ store, provider, env, now = new Date(), weekly = false }) {
+export async function dispatchNotifications({
+  store, provider, env, now = new Date(), weekly = false, limit = null,
+  eligibleBefore = null,
+  schedulerClaim = null, signal = null,
+}) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
   const dailyLimit = Math.max(1, Math.min(100, Number(env.DAILY_EMAIL_LIMIT) || 100));
-  let remaining = dailyLimit;
+  let remaining = Math.max(1, Math.min(dailyLimit, Number(limit) || dailyLimit));
   const reconciliation = !weekly && typeof store.pendingNotificationReconciliationBatches === "function"
     ? await store.pendingNotificationReconciliationBatches(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
     : [];
@@ -272,15 +468,18 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
   let deliveredCount = 0;
   let failedCount = 0;
   const batches = weekly
-    ? await store.pendingDigestEvents(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
+    ? await store.pendingDigestEvents(
+        now.toISOString(), remaining, DIGEST_MAX_EVENTS, eligibleBefore,
+      )
     : [
         ...reconciliation,
         ...pending.slice(0, Math.max(0, remaining - reconciliation.length))
           .map(event => ({ events: [event], hasOverflow: false })),
       ];
   for (const batchValue of batches) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
     const batch = batchValue.events;
-    const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString());
+    const ids = await store.claimEvents(batch.map(event => event.id), now.toISOString(), schedulerClaim);
     const claimed = batch.filter(event => ids.includes(event.id));
     if (!claimed.length) continue;
     const idempotencyKey = batchValue.idempotencyKey || (weekly
@@ -302,14 +501,15 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
     const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, batchValue.hasOverflow, message,
+      schedulerClaim,
     )) {
-      await store.releaseClaimedEvents(ids, now.toISOString());
+      await store.releaseClaimedEvents(ids, now.toISOString(), schedulerClaim);
       break;
     }
     attemptedCount += 1;
     let delivery;
     try {
-      delivery = await provider.sendEmail(message, idempotencyKey);
+      delivery = await provider.sendEmail(message, idempotencyKey, { signal });
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -318,13 +518,14 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
         retryable ? retryAt(claimed[0], now) : now.toISOString(),
         retryable ? null : now.toISOString(),
         providerFailureKind(error),
+        schedulerClaim,
       );
       failedCount += 1;
       remaining -= 1;
       if (!remaining) break;
       continue;
     }
-    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    await store.markEventsSent(ids, delivery.id, now.toISOString(), schedulerClaim);
     deliveredCount += 1;
     remaining -= 1;
     if (!remaining) break;
@@ -335,7 +536,9 @@ export async function dispatchNotifications({ store, provider, env, now = new Da
 export async function dispatchVerificationDeliveries({
   store, provider, env, now = new Date(), tokenFactory = () => randomToken(), limit = null,
   eventIds = null,
+  schedulerClaim = null, signal = null,
 }) {
+  await assertSchedulerClaim(store, schedulerClaim, signal);
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
@@ -346,8 +549,9 @@ export async function dispatchVerificationDeliveries({
   let deliveredCount = 0;
   let failedCount = 0;
   for (const candidate of pending) {
+    await assertSchedulerClaim(store, schedulerClaim, signal);
     const claimedAt = now.toISOString();
-    const ids = await store.claimEvents([candidate.id], claimedAt);
+    const ids = await store.claimEvents([candidate.id], claimedAt, schedulerClaim);
     if (!ids.length) continue;
     let nonce = "";
     try { nonce = String(JSON.parse(candidate.payload_json)?.nonce || ""); } catch { /* refresh below */ }
@@ -390,9 +594,9 @@ export async function dispatchVerificationDeliveries({
       if (
         token.length < 32
         || candidate.provider_quota_key !== idempotencyKey
-        || !await store.verificationReconciliationClaimIsCurrent(candidate.id, claimedAt)
+        || !await store.verificationReconciliationClaimIsCurrent(candidate.id, claimedAt, schedulerClaim)
       ) {
-        await store.markEventsFailed(ids, "verification_reconciliation_invalid", claimedAt, claimedAt);
+        await store.markEventsFailed(ids, "verification_reconciliation_invalid", claimedAt, claimedAt, "", schedulerClaim);
         continue;
       }
     } else if (
@@ -414,15 +618,16 @@ export async function dispatchVerificationDeliveries({
         eventKey: `verification:${tokenHash}`,
         claimedAt,
         now: claimedAt,
+        scheduler: schedulerClaim,
       });
       if (!refreshed) {
-        await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+        await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt, "", schedulerClaim);
         continue;
       }
     } else if (!await store.verificationClaimIsCurrent(
-      candidate.id, tokenHash, claimedAt,
+      candidate.id, tokenHash, claimedAt, schedulerClaim,
     )) {
-      await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt);
+      await store.markEventsFailed(ids, "verification_cycle_changed", claimedAt, claimedAt, "", schedulerClaim);
       continue;
     }
     const renderedMessage = verificationEmail({
@@ -440,14 +645,15 @@ export async function dispatchVerificationDeliveries({
     const message = storedProviderMessage(reservedPayload) || renderedMessage;
     if (!await store.reserveProviderMessage(
       idempotencyKey, ids, dailyLimit, 86_400, now, false, message,
+      schedulerClaim,
     )) {
-      await store.releaseClaimedEvents(ids, claimedAt);
+      await store.releaseClaimedEvents(ids, claimedAt, schedulerClaim);
       break;
     }
     attemptedCount += 1;
     let delivery;
     try {
-      delivery = await provider.sendEmail(message, idempotencyKey);
+      delivery = await provider.sendEmail(message, idempotencyKey, { signal });
     } catch (error) {
       const retryable = retryableProviderFailure(error);
       await store.markEventsFailed(
@@ -456,11 +662,12 @@ export async function dispatchVerificationDeliveries({
         retryable ? retryAt(candidate, now) : now.toISOString(),
         retryable ? null : now.toISOString(),
         providerFailureKind(error),
+        schedulerClaim,
       );
       failedCount += 1;
       continue;
     }
-    await store.markEventsSent(ids, delivery.id, now.toISOString());
+    await store.markEventsSent(ids, delivery.id, now.toISOString(), schedulerClaim);
     deliveredCount += 1;
   }
   return { attemptedCount, deliveredCount, failedCount };

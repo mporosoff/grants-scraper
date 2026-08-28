@@ -14,6 +14,9 @@ import { ALERT_EMAIL_TEMPLATE_VERSION } from "./email.js";
 import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
+import {
+  boundedFinalization, SchedulerBudget, SchedulerFenceError, SchedulerTimeoutError,
+} from "./scheduler-budget.js";
 
 const MAX_REQUEST_BYTES = 32_768;
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
@@ -209,8 +212,8 @@ export function createHandler({
       try { databaseReady = await store.health(); } catch { /* unavailable */ }
       let operations = {
         staleRunningRuns: 0, lastCompletedAt: "", lastStatus: "", lastDurationMs: null,
-        lastDailyCompletedAt: "", lastDailyStatus: "",
-        schedulerRecent: true,
+        lastDailyCompletedAt: "", lastDailyStatus: "", lastStage: "", lastErrorCode: "",
+        pendingEvaluationWindows: 0, oldestPendingEvaluationWindow: "", schedulerRecent: true,
       };
       try {
         if (typeof store.operationalHealth === "function") {
@@ -247,8 +250,12 @@ export function createHandler({
         last_run_completed_at: operations.lastCompletedAt || null,
         last_run_status: operations.lastStatus || null,
         last_run_duration_ms: operations.lastDurationMs,
+        last_run_stage: operations.lastStage || null,
+        last_run_error_code: operations.lastErrorCode || null,
         last_daily_run_completed_at: operations.lastDailyCompletedAt || null,
         last_daily_run_status: operations.lastDailyStatus || null,
+        pending_evaluation_windows: Number(operations.pendingEvaluationWindows || 0),
+        oldest_pending_evaluation_window: operations.oldestPendingEvaluationWindow || null,
       });
     }
     if (!config.enabled) return json(origin, 503, { error: { code: "alerts_unavailable" } });
@@ -441,59 +448,399 @@ export function createHandler({
   };
 }
 
+export function weeklyDigestEligibilityCutoff(now) {
+  const value = new Date(now);
+  if (!Number.isFinite(value.getTime())) throw new TypeError("A valid digest cutoff time is required.");
+  const sundayStart = Date.UTC(
+    value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate() - value.getUTCDay(),
+    13, 15, 0, 0,
+  );
+  const eligibleSunday = value.getTime() < sundayStart
+    ? sundayStart - (7 * 86_400_000)
+    : sundayStart;
+  const cutoff = new Date(eligibleSunday);
+  cutoff.setUTCHours(23, 59, 59, 999);
+  return cutoff.toISOString();
+}
+
+export function weeklyDigestWindowFor(originatingAt) {
+  const value = new Date(originatingAt);
+  if (!Number.isFinite(value.getTime())) throw new TypeError("A valid evaluation window is required.");
+  const daysUntilSunday = (7 - value.getUTCDay()) % 7;
+  const window = new Date(Date.UTC(
+    value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate() + daysUntilSunday,
+    23, 59, 59, 999,
+  ));
+  return window.toISOString();
+}
+
 export function createScheduledHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
-  assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
+  assetLoader = (env, fetchImpl, options) => loadPublicAssets(env, fetchImpl, options),
   fetchImpl = (...args) => fetch(...args),
   now = () => new Date(),
+  clock = () => Date.now(),
+  runClaimFactory = () => randomToken(),
 } = {}) {
   return async function scheduled(controller, env) {
     const scheduledAt = new Date(controller?.scheduledTime || Date.now());
     const current = now();
-    const runKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
     const store = storeFactory(env);
+    const budget = new SchedulerBudget({
+      timeoutMs: Number(env.ALERT_SCHEDULER_TIMEOUT_MS) || undefined,
+      clock,
+    });
+    const triggerKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
+    let runKind = triggerKind;
+    let dailyInProgress = false;
+    let continuation = { state: "none" };
+    if (
+      typeof store.dailyContinuationState === "function"
+      || typeof store.needsDailyContinuation === "function"
+    ) {
+      const continuationValue = await budget.run(
+        "continuation_check",
+        async () => {
+          if (typeof store.dailyContinuationState === "function") {
+            return store.dailyContinuationState(current.toISOString());
+          }
+          return await store.needsDailyContinuation(current.toISOString())
+            ? { state: "pending" }
+            : { state: "none" };
+        },
+        15_000,
+      );
+      continuation = typeof continuationValue === "string"
+        ? { state: continuationValue }
+        : continuationValue || { state: "none" };
+      if (continuation.state === "pending") runKind = "continuation";
+      if (continuation.state === "running") {
+        dailyInProgress = true;
+        runKind = "retry";
+      }
+    }
+    const evaluationWindowStartedAt = runKind === "daily"
+      ? scheduledAt.toISOString()
+      : runKind === "continuation"
+        ? String(continuation.evaluationWindowStartedAt || scheduledAt.toISOString())
+        : "";
+    const weeklyWindowAt = runKind === "daily"
+      ? weeklyDigestWindowFor(evaluationWindowStartedAt)
+      : runKind === "continuation"
+        ? String(continuation.weeklyWindowAt || weeklyDigestWindowFor(evaluationWindowStartedAt))
+        : "";
+    const evaluationInputGeneratedAt = runKind === "continuation"
+      ? String(continuation.evaluationInputGeneratedAt || "")
+      : "";
+    const evaluationSourceGeneratedAt = runKind === "continuation"
+      ? String(continuation.evaluationSourceGeneratedAt || "")
+      : "";
+    const scheduledIdentity = scheduledAt.toISOString().replace(/[^0-9]/g, "");
+    const deferredDailyWindow = triggerKind === "daily"
+      && (continuation.state === "pending" || continuation.state === "running")
+      && String(continuation.evaluationWindowStartedAt || "") !== scheduledAt.toISOString()
+      ? {
+          id: `pending_${scheduledIdentity}_daily`,
+          queuedAt: current.toISOString(),
+          scheduledAt: scheduledAt.toISOString(),
+          evaluationWindowStartedAt: scheduledAt.toISOString(),
+          weeklyWindowAt: weeklyDigestWindowFor(scheduledAt),
+        }
+      : null;
     const run = {
-      id: `run_${current.toISOString().replace(/[^0-9]/g, "")}_${runKind}`,
+      id: `run_${scheduledIdentity}_${triggerKind}`,
       scheduledAt: scheduledAt.toISOString(), runKind,
       startedAt: current.toISOString(), subscriptionCount: 0, matchedEventCount: 0,
       attemptedCount: 0, deliveredCount: 0, failedCount: 0, status: "running",
       cleanupDeletedCount: 0, cleanupErrorCode: "",
+      errorCode: "", evaluationCompletedAt: "", stage: "starting",
+      evaluationWindowStartedAt, weeklyWindowAt,
+      evaluationInputGeneratedAt, evaluationSourceGeneratedAt,
+      stageStartedAt: current.toISOString(),
+      progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
+      claimToken: runClaimFactory(),
+      deferredDailyWindow,
     };
-    await store.startRun(run);
+    const schedulerClaim = { runId: run.id, token: run.claimToken };
+    let claimRevoked = false;
+    let fencingSafe = true;
+    const revokeClaim = async status => {
+      const revokedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+      const revoked = typeof store.revokeRunClaim === "function"
+        ? await boundedFinalization(() => store.revokeRunClaim(
+            run.id, run.claimToken, revokedAt, status, "scheduler_deadline_exceeded",
+          ))
+        : false;
+      const stillCurrent = typeof store.runClaimIsCurrent === "function"
+        ? await boundedFinalization(() => store.runClaimIsCurrent(run.id, run.claimToken))
+        : !revoked;
+      if (!revoked && stillCurrent) {
+        throw Object.assign(new Error("The scheduler claim could not be revoked."), {
+          code: "scheduler_fence_revoke_failed",
+        });
+      }
+      claimRevoked = true;
+    };
+    let startOperation = null;
+    let started;
     try {
-      const provider = providerFactory(env, fetchImpl);
-      const verification = await dispatchVerificationDeliveries({ store, provider, env, now: current });
+      started = await budget.run(
+        "run_start",
+        () => {
+          startOperation = Promise.resolve(store.startRun(run));
+          return startOperation;
+        },
+        15_000,
+        {
+          onTimeout: async () => {
+            const accepted = await startOperation;
+            if (accepted) {
+              await revokeClaim(runKind === "retry" ? "failed_timeout" : "incomplete_timeout");
+            }
+          },
+        },
+      );
+    } catch (error) {
+      const completed = now();
+      run.status = error instanceof SchedulerFenceError
+        ? "failed_fence_revoke"
+        : error instanceof SchedulerTimeoutError
+          ? runKind === "retry" ? "failed_timeout" : "incomplete_timeout"
+          : "failed";
+      run.errorCode = String(error?.code || "scheduler_failed").slice(0, 80);
+      run.completedAt = completed.toISOString();
+      run.durationMs = Math.max(0, completed.getTime() - current.getTime());
+      return run;
+    }
+    if (started === false) return { ...run, status: "duplicate_skipped" };
+    if (dailyInProgress) {
+      const completed = now();
+      run.status = "completed_skipped_daily_in_progress";
+      run.stage = "completed";
+      run.stageStartedAt = completed.toISOString();
+      run.completedAt = completed.toISOString();
+      run.durationMs = Math.max(0, completed.getTime() - current.getTime());
+      run.progress = { ...run.progress, dailyInProgress: true };
+      try {
+        await boundedFinalization(() => store.finishRun(run));
+      } catch (error) {
+        run.status = "failed_finalization";
+        run.errorCode = String(error?.code || "finalization_failed").slice(0, 80);
+      }
+      return run;
+    }
+
+    const revokeTimedOutClaim = async () => {
+      const timeoutStatus = run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout";
+      await revokeClaim(timeoutStatus);
+    };
+    const stage = async (name, operation, maximumMs, progress = run.progress) => {
+      const stageNow = new Date(Math.max(current.getTime(), clock())).toISOString();
+      run.stage = name;
+      run.stageStartedAt = stageNow;
+      run.progress = { ...run.progress, ...(progress || {}) };
+      if (typeof store.updateRunProgress === "function") {
+        const updated = await budget.run(
+          `${name}_progress`,
+          () => store.updateRunProgress(run.id, {
+            stage: name,
+            stageStartedAt: stageNow,
+            heartbeatAt: stageNow,
+            progress: run.progress,
+          }, schedulerClaim),
+          15_000,
+          { onTimeout: revokeTimedOutClaim },
+        );
+        if (updated === false) throw Object.assign(new Error("The scheduler claim changed."), {
+          code: "scheduler_claim_lost",
+        });
+      }
+      return budget.run(name, operation, maximumMs, { onTimeout: revokeTimedOutClaim });
+    };
+
+    const deliveryBatch = Math.max(1, Math.min(10, Number(env.ALERT_SCHEDULER_DELIVERY_BATCH) || 10));
+    let continuationRequired = false;
+    let evaluationCompleted = Boolean(continuation.evaluationCompleted);
+    if (evaluationCompleted) {
+      run.evaluationCompletedAt = String(continuation.evaluationCompletedAt || current.toISOString());
+    }
+    let failureStage = "";
+    let failureStageStartedAt = "";
+    try {
+      if ((runKind === "daily" || runKind === "continuation") && !evaluationCompleted) {
+        const assets = await stage(
+          "asset_loading",
+          signal => assetLoader(env, fetchImpl, { signal }),
+          45_000,
+        );
+        const sourceGeneratedAt = String(assets?.changes?.generated_at || "");
+        run.evaluationInputGeneratedAt = run.evaluationInputGeneratedAt || sourceGeneratedAt;
+        run.evaluationSourceGeneratedAt = sourceGeneratedAt;
+        if (typeof store.bindRunEvaluationInput === "function") {
+          const bound = await stage(
+            "evaluation_input_checkpoint",
+            () => store.bindRunEvaluationInput(
+              run.id, evaluationWindowStartedAt,
+              run.evaluationInputGeneratedAt, run.evaluationSourceGeneratedAt,
+              new Date(Math.max(current.getTime(), clock())).toISOString(),
+              schedulerClaim,
+            ),
+            15_000,
+          );
+          if (!bound) {
+            throw Object.assign(new Error("Evaluation input ownership changed during adoption."), {
+              code: "evaluation_input_claim_lost",
+            });
+          }
+        }
+        const evaluation = await stage(
+          "subscription_evaluation",
+          signal => evaluateSubscriptions({
+            store, assets, env, now: current,
+            evaluationWindowStartedAt, weeklyWindowAt,
+            evaluationInputGeneratedAt: run.evaluationInputGeneratedAt,
+            schedulerClaim, signal,
+          }),
+          5 * 60_000,
+        );
+        Object.assign(run, {
+          subscriptionCount: evaluation.subscriptionCount,
+          matchedEventCount: evaluation.matchedEventCount,
+        });
+        continuationRequired = evaluation.continuationRequired === true;
+        run.progress = {
+          processedSubscriptions: evaluation.subscriptionCount,
+          processedChanges: evaluation.processedChangeCount,
+          continuationRequired,
+          rebasedSubscriptions: evaluation.rebasedSubscriptionCount,
+        };
+        run.evaluationInputGeneratedAt = evaluation.evaluationInputGeneratedAt;
+        run.evaluationSourceGeneratedAt = evaluation.evaluationSourceGeneratedAt;
+        if (!continuationRequired) {
+          run.evaluationCompletedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+          evaluationCompleted = true;
+          if (typeof store.markRunEvaluationComplete === "function") {
+            await stage(
+              "evaluation_checkpoint",
+              () => store.markRunEvaluationComplete(
+                run.id, run.evaluationCompletedAt, run.progress,
+                schedulerClaim,
+              ),
+              15_000,
+            );
+          }
+        }
+      }
+
+      const provider = await stage(
+        "provider_initialization",
+        () => providerFactory(env, fetchImpl),
+        15_000,
+      );
+      const verification = await stage(
+        "verification_delivery",
+        signal => dispatchVerificationDeliveries({
+          store, provider, env, now: current, limit: deliveryBatch,
+          schedulerClaim, signal,
+        }),
+        2 * 60_000,
+      );
       let immediate = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
       let weekly = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
-      immediate = await dispatchNotifications({ store, provider, env, now: current, weekly: false });
-      if (runKind === "daily") {
-        const assets = await assetLoader(env, fetchImpl);
-        Object.assign(run, await evaluateSubscriptions({ store, assets, env, now: current }));
-        weekly = current.getUTCDay() === 0
-          ? await dispatchNotifications({ store, provider, env, now: current, weekly: true })
-          : weekly;
+      immediate = await stage(
+        "immediate_delivery",
+        signal => dispatchNotifications({
+          store, provider, env, now: current, weekly: false, limit: deliveryBatch,
+          schedulerClaim, signal,
+        }),
+        2 * 60_000,
+      );
+      const weeklyCutoff = weeklyDigestEligibilityCutoff(current);
+      const originatingWindowDue = evaluationCompleted && weeklyWindowAt
+        && weeklyWindowAt <= weeklyCutoff;
+      const weeklyDue = !continuationRequired
+        && typeof store.pendingDigestEvents === "function"
+        && (runKind === "retry" || originatingWindowDue);
+      if (weeklyDue) {
+        weekly = await stage(
+          "weekly_delivery",
+          signal => dispatchNotifications({
+            store, provider, env, now: current, weekly: true, limit: deliveryBatch,
+            eligibleBefore: weeklyCutoff,
+            schedulerClaim, signal,
+          }),
+          2 * 60_000,
+        );
       }
       run.attemptedCount = verification.attemptedCount + immediate.attemptedCount + weekly.attemptedCount;
       run.deliveredCount = verification.deliveredCount + immediate.deliveredCount + weekly.deliveredCount;
       run.failedCount = verification.failedCount + immediate.failedCount + weekly.failedCount;
-      run.status = run.failedCount ? "completed_with_delivery_failures" : "completed";
-    } catch {
-      run.status = "failed";
+      run.status = continuationRequired
+        ? run.failedCount ? "incomplete_evaluation_with_delivery_failures" : "incomplete_evaluation"
+        : run.failedCount ? "completed_with_delivery_failures" : "completed";
+    } catch (error) {
+      failureStage = run.stage;
+      failureStageStartedAt = run.stageStartedAt;
+      run.errorCode = String(error?.code || "scheduler_failed").slice(0, 80);
+      fencingSafe = !(error instanceof SchedulerFenceError)
+        && String(error?.code || "") !== "scheduler_fence_revoke_failed";
+      run.status = !fencingSafe
+        ? "failed_fence_revoke"
+        : error instanceof SchedulerTimeoutError
+        ? (run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout")
+        : "failed";
     }
     try {
+      if (claimRevoked || !fencingSafe) throw Object.assign(new Error("Cleanup skipped after claim loss."), {
+        code: "cleanup_claim_unavailable",
+      });
       if (typeof store.cleanupOperationalData === "function") {
-        const cleanup = await store.cleanupOperationalData(now().toISOString(), 100);
+        const cleanup = await stage(
+          "cleanup",
+          () => store.cleanupOperationalData(now().toISOString(), 100, schedulerClaim),
+          20_000,
+        );
         run.cleanupDeletedCount = Number(cleanup?.deletedCount || 0);
       }
-    } catch {
-      run.cleanupErrorCode = "cleanup_failed";
-      if (run.status === "completed") run.status = "completed_with_cleanup_failure";
+    } catch (error) {
+      run.cleanupErrorCode = error?.code === "cleanup_claim_unavailable"
+        ? "cleanup_skipped_claim_unavailable"
+        : error instanceof SchedulerTimeoutError
+        ? "cleanup_timeout"
+        : "cleanup_failed";
+      if (claimRevoked) {
+        run.status = run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout";
+        run.errorCode = "scheduler_deadline_exceeded";
+      } else if (run.status === "completed") run.status = "completed_with_cleanup_failure";
+    }
+    if (failureStage) {
+      run.stage = failureStage;
+      run.stageStartedAt = failureStageStartedAt;
+    }
+    if (continuationRequired && run.status.startsWith("incomplete_evaluation")) {
+      run.stage = "continuation_pending";
+      run.stageStartedAt = now().toISOString();
+      run.errorCode = "evaluation_continuation_required";
     }
     const completed = now();
     run.completedAt = completed.toISOString();
     run.durationMs = Math.max(0, completed.getTime() - current.getTime());
-    await store.finishRun(run);
+    if (run.status.startsWith("completed")) {
+      run.stage = "completed";
+      run.stageStartedAt = run.completedAt;
+    }
+    if (claimRevoked || !fencingSafe) return run;
+    try {
+      const finished = await boundedFinalization(() => store.finishRun(run));
+      if (finished === false) {
+        run.status = "failed_fence_revoke";
+        run.errorCode = "scheduler_claim_lost";
+      }
+    } catch (error) {
+      run.status = "failed_finalization";
+      run.errorCode = String(error?.code || "finalization_failed").slice(0, 80);
+    }
     return run;
   };
 }
