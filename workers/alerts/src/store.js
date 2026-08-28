@@ -554,7 +554,7 @@ export class D1AlertStore {
 
   async startRun(run) {
     await this.recoverStaleRuns(run.startedAt);
-    const result = await this.db.prepare(
+    const startStatement = this.db.prepare(
       "INSERT OR IGNORE INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status, stage, stage_started_at, last_heartbeat_at, progress_json, evaluation_window_started_at, weekly_window_at, evaluation_input_generated_at, evaluation_source_generated_at, claim_token, claim_revoked_at) VALUES(?, ?, ?, ?, 'running', 'starting', ?, ?, ?, ?, ?, ?, ?, ?, NULL)",
     ).bind(
       run.id, run.startedAt, run.scheduledAt, run.runKind,
@@ -562,7 +562,23 @@ export class D1AlertStore {
       run.evaluationWindowStartedAt || null, run.weeklyWindowAt || null,
       run.evaluationInputGeneratedAt || null, run.evaluationSourceGeneratedAt || null,
       String(run.claimToken || run.id),
-    ).run();
+    );
+    if (run.deferredDailyWindow?.evaluationWindowStartedAt) {
+      const deferred = run.deferredDailyWindow;
+      const [result] = await this.db.batch([
+        startStatement,
+        this.db.prepare(
+          "INSERT OR IGNORE INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status, stage, stage_started_at, last_heartbeat_at, progress_json, evaluation_window_started_at, weekly_window_at, claim_token, claim_revoked_at) VALUES(?, ?, ?, 'daily', 'pending_evaluation', 'queued', ?, ?, ?, ?, ?, NULL, NULL)",
+        ).bind(
+          deferred.id, deferred.queuedAt, deferred.scheduledAt,
+          deferred.queuedAt, deferred.queuedAt,
+          JSON.stringify({ processedSubscriptions: 0, processedChanges: 0, deferredByWindow: run.evaluationWindowStartedAt || null }),
+          deferred.evaluationWindowStartedAt, deferred.weeklyWindowAt,
+        ),
+      ]);
+      return Number(result?.meta?.changes || 0) > 0;
+    }
+    const result = await startStatement.run();
     return Number(result?.meta?.changes || 0) > 0;
   }
 
@@ -694,7 +710,7 @@ export class D1AlertStore {
   }
 
   async finishRun(run) {
-    const result = await this.db.prepare(
+    const finishStatement = this.db.prepare(
       "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ?, stage = ?, stage_started_at = ?, last_heartbeat_at = ?, progress_json = ?, error_code = ?, evaluation_completed_at = ?, evaluation_window_started_at = ?, weekly_window_at = ?, evaluation_input_generated_at = ?, evaluation_source_generated_at = ?, claim_token = NULL, claim_revoked_at = ? WHERE id = ? AND status = 'running' AND claim_token = ?",
     ).bind(
       run.completedAt, run.durationMs, run.subscriptionCount, run.matchedEventCount,
@@ -706,7 +722,17 @@ export class D1AlertStore {
       run.weeklyWindowAt || null, run.evaluationInputGeneratedAt || null,
       run.evaluationSourceGeneratedAt || null, run.completedAt, run.id,
       String(run.claimToken || run.id),
-    ).run();
+    );
+    const [result] = await this.db.batch([
+      finishStatement,
+      this.db.prepare(
+        "UPDATE evaluation_runs SET completed_at = ?, duration_ms = MAX(0, CAST(ROUND((julianday(?) - julianday(started_at)) * 86400000) AS INTEGER)), status = 'completed_with_adoption', stage = 'completed', stage_started_at = ?, last_heartbeat_at = ?, evaluation_completed_at = ?, claim_revoked_at = ? WHERE status = 'pending_evaluation' AND evaluation_window_started_at = ? AND EXISTS (SELECT 1 FROM evaluation_runs owner WHERE owner.id = ? AND owner.status LIKE 'completed%' AND owner.evaluation_completed_at IS NOT NULL)",
+      ).bind(
+        run.completedAt, run.completedAt, run.completedAt, run.completedAt,
+        run.evaluationCompletedAt || null, run.completedAt,
+        run.evaluationWindowStartedAt || null, run.id,
+      ),
+    ]);
     return Number(result?.meta?.changes || 0) > 0;
   }
 

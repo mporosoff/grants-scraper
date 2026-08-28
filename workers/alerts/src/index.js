@@ -537,6 +537,17 @@ export function createScheduledHandler({
       ? String(continuation.evaluationSourceGeneratedAt || "")
       : "";
     const scheduledIdentity = scheduledAt.toISOString().replace(/[^0-9]/g, "");
+    const deferredDailyWindow = triggerKind === "daily"
+      && (continuation.state === "pending" || continuation.state === "running")
+      && String(continuation.evaluationWindowStartedAt || "") !== scheduledAt.toISOString()
+      ? {
+          id: `pending_${scheduledIdentity}_daily`,
+          queuedAt: current.toISOString(),
+          scheduledAt: scheduledAt.toISOString(),
+          evaluationWindowStartedAt: scheduledAt.toISOString(),
+          weeklyWindowAt: weeklyDigestWindowFor(scheduledAt),
+        }
+      : null;
     const run = {
       id: `run_${scheduledIdentity}_${triggerKind}`,
       scheduledAt: scheduledAt.toISOString(), runKind,
@@ -549,6 +560,7 @@ export function createScheduledHandler({
       stageStartedAt: current.toISOString(),
       progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
       claimToken: runClaimFactory(),
+      deferredDailyWindow,
     };
     const schedulerClaim = { runId: run.id, token: run.claimToken };
     let claimRevoked = false;

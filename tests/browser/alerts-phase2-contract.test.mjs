@@ -2143,6 +2143,94 @@ test("unchanged feed generations still evaluate each 30, 14, and 7 day reminder 
   });
 });
 
+test("a daily trigger consumed by an older continuation durably queues its reminder window", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, {
+    active: 1, type: "opportunity", cadence: "immediate",
+    definition: { opportunity_id: "opp-deferred-reminder", triggers: ["closing_reminders"] },
+    lastEvaluatedAt: "2026-08-30T00:00:00.000Z",
+  });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const oldWindow = "2026-08-31T13:15:00.000Z";
+  const dailyWindow = "2026-09-01T13:15:00.000Z";
+  const generation = "2026-08-30T00:00:00.000Z";
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,scheduled_at,duration_ms,run_kind,status,stage,evaluation_window_started_at,weekly_window_at,evaluation_input_generated_at,evaluation_source_generated_at) VALUES('older-incomplete',?,?,?,?, 'daily','incomplete_evaluation','continuation_pending',?,?,?,?)",
+  ).run(
+    oldWindow, "2026-08-31T13:16:00.000Z", oldWindow, 60_000,
+    oldWindow, weeklyDigestWindowFor(new Date(oldWindow)), generation, generation,
+  );
+  const assets = {
+    catalog: { opportunities: [{
+      opportunity_id: "opp-deferred-reminder", title: "Deferred daily reminder",
+      close_date: "2026-10-01",
+    }] },
+    changes: { schema_version: 1, generated_at: generation, events: [] },
+    matcher: { matchIds: () => new Set() },
+  };
+  const provider = new MockEmailProvider();
+  const runAt = current => createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => assets,
+    now: () => current,
+    clock: () => current.getTime(),
+  });
+  const daily = new Date(dailyWindow);
+  const dailyController = { scheduledTime: daily.getTime(), cron: "15 13 * * *" };
+  const adopted = await runAt(daily)(dailyController, env);
+  const duplicateDaily = await runAt(daily)(dailyController, env);
+
+  assert.equal(adopted.runKind, "continuation");
+  assert.equal(adopted.evaluationWindowStartedAt, oldWindow);
+  assert.equal(adopted.status, "completed");
+  assert.equal(duplicateDaily.status, "duplicate_skipped");
+  assert.deepEqual({ ...(await store.dailyContinuationState("2026-09-01T13:16:00.000Z")) }, {
+    state: "pending",
+    evaluationCompleted: false,
+    evaluationWindowStartedAt: dailyWindow,
+    weeklyWindowAt: weeklyDigestWindowFor(daily),
+    evaluationInputGeneratedAt: "",
+    evaluationSourceGeneratedAt: "",
+    evaluationCompletedAt: "",
+    discoveredAt: dailyWindow,
+    running: false,
+    cursorCount: 0,
+    outstandingWindowCount: 1,
+  });
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM evaluation_runs WHERE status='pending_evaluation' AND evaluation_window_started_at=?",
+  ).get(dailyWindow).count, 1);
+  assert.equal((await store.operationalHealth("2026-09-01T13:16:00.000Z")).schedulerRecent, false);
+  assert.equal(provider.messages.length, 0);
+
+  const retry = new Date("2026-09-01T13:20:00.000Z");
+  const retryController = { scheduledTime: retry.getTime(), cron: "2-57/5 * * * *" };
+  const resumed = await runAt(retry)(retryController, env);
+  const duplicateRetry = await runAt(retry)(retryController, env);
+  assert.equal(resumed.runKind, "continuation");
+  assert.equal(resumed.evaluationWindowStartedAt, dailyWindow);
+  assert.equal(resumed.status, "completed");
+  assert.equal(duplicateRetry.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual({ ...database.prepare(
+    "SELECT event_key,status,evaluation_window_started_at FROM notification_events WHERE event_kind='closing_reminder'",
+  ).get() }, {
+    event_key: "closing:opp-deferred-reminder:2026-10-01:30",
+    status: "sent",
+    evaluation_window_started_at: dailyWindow,
+  });
+  assert.deepEqual({ ...database.prepare(
+    "SELECT status,evaluation_completed_at FROM evaluation_runs WHERE status='completed_with_adoption' AND evaluation_window_started_at=?",
+  ).get(dailyWindow) }, {
+    status: "completed_with_adoption",
+    evaluation_completed_at: retry.toISOString(),
+  });
+  assert.equal((await store.dailyContinuationState("2026-09-01T13:21:00.000Z")).state, "none");
+  assert.equal((await store.operationalHealth("2026-09-01T13:21:00.000Z")).schedulerRecent, true);
+});
+
 test("saved-search evaluation resumes equal-timestamp change batches without duplicates", async () => {
   const subscription = {
     id: "saved-1", type: "saved_search", active: 1,
@@ -2410,13 +2498,24 @@ test("an originating Sunday weekly window survives Monday continuations and excl
   assert.equal(database.prepare(
     "SELECT COUNT(*) AS count FROM notification_events WHERE evaluation_window_started_at=? AND weekly_window_at=?",
   ).get(origin, weeklyWindow).count, 51);
-  assert.equal((await store.operationalHealth("2026-09-07T00:11:00.000Z")).schedulerRecent, true);
+  assert.equal(
+    (await store.operationalHealth("2026-09-07T00:11:00.000Z")).schedulerRecent,
+    false,
+    "the Monday daily window remains outstanding after the Sunday work completes",
+  );
 
-  for (const minute of [15, 20]) {
+  for (const minute of [15, 20, 25]) {
     const retryAt = new Date(`2026-09-07T00:${minute}:00.000Z`);
     await runAt(retryAt)(
       { scheduledTime: retryAt.getTime(), cron: "2-57/5 * * * *" }, env,
     );
+    if (minute === 15) {
+      assert.equal(
+        (await store.operationalHealth("2026-09-07T00:16:00.000Z")).schedulerRecent,
+        true,
+        "health becomes ready only after the deferred Monday window completes",
+      );
+    }
   }
   assert.equal(provider.messages.length, 3);
   assert.equal(new Set(provider.messages.map(message => message.idempotencyKey)).size, 3);
