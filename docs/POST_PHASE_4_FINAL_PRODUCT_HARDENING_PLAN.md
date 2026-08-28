@@ -49,6 +49,8 @@ Cloudflare Workflows/Queues evaluation is a separate future architecture item. I
 
 No pull request exists for Unit A or Unit B as of this reconciliation. Unit A is pushed to `origin`; Unit B is a clean local branch without an upstream branch.
 
+Until a separately authorized Unit B task creates remote preservation, the Unit B local branch and worktree are preservation-critical. Do not delete, rename, reset, rebase, garbage-collect, or otherwise rewrite them. If the exact commit is not locally available when Unit B is authorized, stop rather than reconstructing or substituting it.
+
 ---
 
 ## 3. Completed baseline that all units must preserve
@@ -224,10 +226,11 @@ The Unit B commit must not be integrated until Unit A is merged and production-v
 
 ### Integration method
 
-1. Start from protected `main` after Unit A merges.
-2. Apply only the Unit B commit/change. Do not replay or duplicate the historical Unit A parent commit.
-3. Compare the resulting diff with the frozen Unit B candidate and current Award Worker/Pages implementation.
-4. Repeat the architecture measurement and verify current Cloudflare Worker limits and deployment configuration rather than relying only on historical local wall time.
+1. Before applying the candidate, publish exact commit `cfbbcd309d8340313e7f10b70851603ddbbb95a6` to a remote preservation ref and verify that the remote ref resolves to that full SHA. This preservation step does not open the Unit B pull request or integrate Unit B.
+2. Start from protected `main` after Unit A merges.
+3. Apply only the Unit B commit/change. Do not replay or duplicate the historical Unit A parent commit.
+4. Compare the resulting diff with the frozen Unit B candidate and current Award Worker/Pages implementation.
+5. Repeat the architecture measurement and verify current Cloudflare Worker limits and deployment configuration rather than relying only on historical local wall time.
 
 ### Architecture contract
 
