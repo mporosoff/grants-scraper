@@ -213,7 +213,7 @@ export function createHandler({
       let operations = {
         staleRunningRuns: 0, lastCompletedAt: "", lastStatus: "", lastDurationMs: null,
         lastDailyCompletedAt: "", lastDailyStatus: "", lastStage: "", lastErrorCode: "",
-        schedulerRecent: true,
+        pendingEvaluationWindows: 0, oldestPendingEvaluationWindow: "", schedulerRecent: true,
       };
       try {
         if (typeof store.operationalHealth === "function") {
@@ -254,6 +254,8 @@ export function createHandler({
         last_run_error_code: operations.lastErrorCode || null,
         last_daily_run_completed_at: operations.lastDailyCompletedAt || null,
         last_daily_run_status: operations.lastDailyStatus || null,
+        pending_evaluation_windows: Number(operations.pendingEvaluationWindows || 0),
+        oldest_pending_evaluation_window: operations.oldestPendingEvaluationWindow || null,
       });
     }
     if (!config.enabled) return json(origin, 503, { error: { code: "alerts_unavailable" } });
@@ -527,6 +529,12 @@ export function createScheduledHandler({
       : runKind === "continuation"
         ? String(continuation.weeklyWindowAt || weeklyDigestWindowFor(evaluationWindowStartedAt))
         : "";
+    const evaluationInputGeneratedAt = runKind === "continuation"
+      ? String(continuation.evaluationInputGeneratedAt || "")
+      : "";
+    const evaluationSourceGeneratedAt = runKind === "continuation"
+      ? String(continuation.evaluationSourceGeneratedAt || "")
+      : "";
     const scheduledIdentity = scheduledAt.toISOString().replace(/[^0-9]/g, "");
     const run = {
       id: `run_${scheduledIdentity}_${triggerKind}`,
@@ -536,6 +544,7 @@ export function createScheduledHandler({
       cleanupDeletedCount: 0, cleanupErrorCode: "",
       errorCode: "", evaluationCompletedAt: "", stage: "starting",
       evaluationWindowStartedAt, weeklyWindowAt,
+      evaluationInputGeneratedAt, evaluationSourceGeneratedAt,
       stageStartedAt: current.toISOString(),
       progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
     };
@@ -593,11 +602,31 @@ export function createScheduledHandler({
           () => assetLoader(env, fetchImpl),
           45_000,
         );
+        const sourceGeneratedAt = String(assets?.changes?.generated_at || "");
+        run.evaluationInputGeneratedAt = run.evaluationInputGeneratedAt || sourceGeneratedAt;
+        run.evaluationSourceGeneratedAt = sourceGeneratedAt;
+        if (typeof store.bindRunEvaluationInput === "function") {
+          const bound = await stage(
+            "evaluation_input_checkpoint",
+            () => store.bindRunEvaluationInput(
+              run.id, evaluationWindowStartedAt,
+              run.evaluationInputGeneratedAt, run.evaluationSourceGeneratedAt,
+              new Date(Math.max(current.getTime(), clock())).toISOString(),
+            ),
+            15_000,
+          );
+          if (!bound) {
+            throw Object.assign(new Error("Evaluation input ownership changed during adoption."), {
+              code: "evaluation_input_claim_lost",
+            });
+          }
+        }
         const evaluation = await stage(
           "subscription_evaluation",
           () => evaluateSubscriptions({
             store, assets, env, now: current,
             evaluationWindowStartedAt, weeklyWindowAt,
+            evaluationInputGeneratedAt: run.evaluationInputGeneratedAt,
           }),
           5 * 60_000,
         );
@@ -610,7 +639,10 @@ export function createScheduledHandler({
           processedSubscriptions: evaluation.subscriptionCount,
           processedChanges: evaluation.processedChangeCount,
           continuationRequired,
+          rebasedSubscriptions: evaluation.rebasedSubscriptionCount,
         };
+        run.evaluationInputGeneratedAt = evaluation.evaluationInputGeneratedAt;
+        run.evaluationSourceGeneratedAt = evaluation.evaluationSourceGeneratedAt;
         if (!continuationRequired) {
           run.evaluationCompletedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
           evaluationCompleted = true;

@@ -586,6 +586,7 @@ test("program watches use the controlled NSF parent identity and weekly events c
     { id: "cycle", type: "new", changed_at: "2026-09-02T00:00:00Z", opportunity_id: "future-cps", detail: "First appeared", record: next },
     { id: "amend", type: "amended", changed_at: "2026-09-02T00:00:01Z", opportunity_id: "future-cps", detail: "Changed", record: next },
   ];
+  state.changes.generated_at = "2026-09-02T00:00:02Z";
   await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
   assert.equal((await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: false })).attemptedCount, 0);
   const result = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });

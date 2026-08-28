@@ -103,20 +103,88 @@ export function baselineIds(subscription, suppliedIds = []) {
   return [...new Set(suppliedIds.map(String).filter(Boolean))];
 }
 
-function relevantChanges(subscription, changes, limit = EVALUATION_CHANGE_LIMIT) {
+function evaluationError(code, message) {
+  return Object.assign(new Error(message), { code });
+}
+
+function relevantChanges(
+  subscription, changes, limit = EVALUATION_CHANGE_LIMIT,
+  inputGeneratedAt = "", sourceGeneratedAt = "",
+  evaluationWindowStartedAt = "", weeklyWindowAt = "",
+) {
   const since = subscription.last_evaluated_at || subscription.baseline_at || subscription.created_at;
-  const cursorAt = String(subscription.evaluation_cursor_at || "");
-  const cursorEventId = String(subscription.evaluation_cursor_event_id || "");
-  const ordered = changes.events.filter(event => (
-    CHANGE_KINDS.has(event.type) && String(event.changed_at || "") > String(since || "")
+  let cursorAt = String(subscription.evaluation_cursor_at || "");
+  let cursorEventId = String(subscription.evaluation_cursor_event_id || "");
+  const sourceGeneration = String(changes.generated_at || sourceGeneratedAt || "");
+  const inputGeneration = String(inputGeneratedAt || sourceGeneration);
+  const inputTime = Date.parse(inputGeneration);
+  const sourceTime = Date.parse(sourceGeneration);
+  const sinceTime = Date.parse(String(since || ""));
+  if (
+    cursorAt
+    && subscription.evaluation_window_started_at
+    && String(subscription.evaluation_window_started_at) !== String(evaluationWindowStartedAt || "")
+  ) {
+    throw evaluationError("evaluation_window_mismatch", "The outstanding cursor belongs to another evaluation window.");
+  }
+  if (
+    cursorAt
+    && subscription.evaluation_input_generated_at
+    && String(subscription.evaluation_input_generated_at) !== inputGeneration
+  ) {
+    throw evaluationError("evaluation_input_mismatch", "The outstanding cursor has a different immutable input boundary.");
+  }
+  if (
+    cursorAt
+    && subscription.evaluation_weekly_window_at
+    && String(subscription.evaluation_weekly_window_at) !== String(weeklyWindowAt || "")
+  ) {
+    throw evaluationError("evaluation_weekly_window_mismatch", "The outstanding cursor has a different weekly window.");
+  }
+  if (!Number.isFinite(inputTime) || !Number.isFinite(sourceTime) || !Number.isFinite(sinceTime)) {
+    throw evaluationError("evaluation_generation_invalid", "Alert evaluation input generation is invalid.");
+  }
+  if (sourceTime < inputTime) {
+    throw evaluationError(
+      "evaluation_generation_behind",
+      "The available change feed predates the outstanding evaluation boundary.",
+    );
+  }
+  const boundedEvents = changes.events.filter(event => (
+    CHANGE_KINDS.has(event.type)
+    && Number.isFinite(Date.parse(String(event.changed_at || "")))
+    && Date.parse(String(event.changed_at || "")) <= inputTime
+  ));
+  const cursorTime = Date.parse(cursorAt);
+  let rebased = false;
+  if (cursorAt && !boundedEvents.some(event => (
+    Date.parse(String(event.changed_at || "")) === cursorTime
+    && String(event.id || "") === cursorEventId
+  ))) {
+    const retentionDays = Number(changes.retention_days);
+    const coverageStart = Number.isFinite(retentionDays) && retentionDays > 0
+      ? new Date(sourceTime - retentionDays * 86_400_000).toISOString()
+      : "";
+    if (!coverageStart || !Number.isFinite(sinceTime) || sinceTime < Date.parse(coverageStart)) {
+      throw evaluationError(
+        "evaluation_rebase_unsafe",
+        "The outstanding cursor cannot be safely rebased inside the retained change-feed window.",
+      );
+    }
+    cursorAt = "";
+    cursorEventId = "";
+    rebased = true;
+  }
+  const ordered = boundedEvents.filter(event => (
+    Date.parse(String(event.changed_at || "")) > sinceTime
     && (!cursorAt
-      || String(event.changed_at || "") > cursorAt
+      || Date.parse(String(event.changed_at || "")) > cursorTime
       || (
-        String(event.changed_at || "") === cursorAt
+        Date.parse(String(event.changed_at || "")) === cursorTime
         && String(event.id || "") > cursorEventId
       ))
   )).sort((left, right) => (
-    String(left.changed_at || "").localeCompare(String(right.changed_at || ""))
+    Date.parse(String(left.changed_at || "")) - Date.parse(String(right.changed_at || ""))
     || String(left.id || "").localeCompare(String(right.id || ""))
   ));
   const events = ordered.slice(0, Math.max(1, limit));
@@ -126,6 +194,7 @@ function relevantChanges(subscription, changes, limit = EVALUATION_CHANGE_LIMIT)
     complete: ordered.length <= events.length,
     cursorAt: String(last?.changed_at || cursorAt),
     cursorEventId: String(last?.id || cursorEventId),
+    rebased,
   };
 }
 
@@ -148,7 +217,9 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
   }
   if (triggers.has("closing_reminders")) {
     const record = assets.catalog.opportunities.find(item => recordId(item) === id);
-    const remaining = record ? daysBetween(isoDate(now), record.close_date) : null;
+    const remaining = record
+      ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), record.close_date)
+      : null;
     const threshold = [7, 14, 30].find(value => remaining === value);
     if (threshold) {
       const inserted = await enqueue(store, subscription, {
@@ -166,7 +237,7 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
 async function evaluateSavedSearch(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
   if (!changes.length) return 0;
-  const asOf = isoDate(now);
+  const asOf = isoDate(evaluationContext.evaluationAsOf || now);
   const changedIds = [...new Set(changes.map(event => String(event.opportunity_id || "")).filter(Boolean))];
   const matchDetails = typeof assets.matcher.matchDetails === "function"
     ? assets.matcher.matchDetails(definition, asOf, changedIds)
@@ -227,11 +298,13 @@ export async function evaluateSubscriptions({
   changeLimit = EVALUATION_CHANGE_LIMIT,
   evaluationWindowStartedAt = null,
   weeklyWindowAt = null,
+  evaluationInputGeneratedAt = null,
 } = {}) {
   const changes = assets?.changes && Array.isArray(assets.changes.events)
     ? assets.changes
     : { generated_at: now.toISOString(), events: [] };
-  const generatedAt = String(changes.generated_at || now.toISOString());
+  const sourceGeneratedAt = String(changes.generated_at || now.toISOString());
+  const generatedAt = String(evaluationInputGeneratedAt || sourceGeneratedAt);
   const boundedSubscriptionLimit = Math.max(1, Math.min(25, Number(subscriptionLimit) || EVALUATION_SUBSCRIPTION_LIMIT));
   const boundedChangeLimit = Math.max(1, Math.min(50, Number(changeLimit) || EVALUATION_CHANGE_LIMIT));
   const loaded = typeof store.activeSubscriptionsForEvaluation === "function"
@@ -243,7 +316,11 @@ export async function evaluateSubscriptions({
   const subscriptions = (sourceSubscriptions || []).slice(0, boundedSubscriptionLimit);
   const batches = subscriptions.map(subscription => ({
     subscription,
-    ...relevantChanges(subscription, changes, boundedChangeLimit),
+    ...relevantChanges(
+      subscription, changes, boundedChangeLimit, generatedAt,
+      subscription.evaluation_source_generated_at || sourceGeneratedAt,
+      evaluationWindowStartedAt, weeklyWindowAt,
+    ),
   }));
   const matcherCandidates = [...new Set(batches.flatMap(batch => (
     batch.subscription.type === "saved_search"
@@ -255,7 +332,15 @@ export async function evaluateSubscriptions({
   }
   let matchedEventCount = 0;
   let continuationRequired = Boolean(!Array.isArray(loaded) && loaded?.hasMore);
-  const evaluationContext = { evaluationWindowStartedAt, weeklyWindowAt };
+  const evaluationAsOf = Number.isFinite(Date.parse(String(evaluationWindowStartedAt || "")))
+    ? new Date(evaluationWindowStartedAt)
+    : now;
+  const evaluationContext = {
+    evaluationWindowStartedAt, weeklyWindowAt,
+    evaluationInputGeneratedAt: generatedAt,
+    evaluationSourceGeneratedAt: sourceGeneratedAt,
+    evaluationAsOf,
+  };
   for (const batch of batches) {
     const { subscription } = batch;
     let matched = 0;
@@ -267,6 +352,9 @@ export async function evaluateSubscriptions({
       verificationTokenHash: subscription.verification_token_hash,
       baselineAt: subscription.baseline_at,
       evaluationWindowStartedAt,
+      weeklyWindowAt,
+      evaluationInputGeneratedAt: generatedAt,
+      evaluationSourceGeneratedAt: sourceGeneratedAt,
     };
     if (batch.complete) {
       const complete = typeof store.completeEvaluation === "function"
@@ -289,6 +377,9 @@ export async function evaluateSubscriptions({
     matchedEventCount,
     continuationRequired,
     processedChangeCount: batches.reduce((sum, batch) => sum + batch.events.length, 0),
+    rebasedSubscriptionCount: batches.filter(batch => batch.rebased).length,
+    evaluationInputGeneratedAt: generatedAt,
+    evaluationSourceGeneratedAt: sourceGeneratedAt,
   };
 }
 
