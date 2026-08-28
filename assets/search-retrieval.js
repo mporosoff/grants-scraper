@@ -502,6 +502,14 @@
     const evidenceSchemaVersion = searchV2
       ? Number(searchV2Config.compatibility?.evidence_schema_version || 0)
       : 1;
+    const preparedCandidateIndexes = Array.isArray(configuration.preparedCandidateIndexes)
+      ? new Set(configuration.preparedCandidateIndexes.filter(documentId => (
+          Number.isInteger(documentId) && documentId >= 0 && documentId < records.length
+        )))
+      : null;
+    const shouldPrepareDocument = documentId => (
+      !preparedCandidateIndexes || preparedCandidateIndexes.has(documentId)
+    );
 
     // The defaults below are the production scoring contract. Phase-1/CI
     // diagnostics may set an individual value to zero to measure an ablation,
@@ -567,10 +575,12 @@
         location: String(fact.citation?.location || ""),
       })).filter(fact => fact.value);
     }
-    const authoritativeDocumentScopeByDocument = records.map(authoritativeDocumentScopeFacts);
-    const documentFields = records.map((record, documentId) => {
+    const authoritativeDocumentScopeByDocument = records.map((record, documentId) => (
+      shouldPrepareDocument(documentId) ? authoritativeDocumentScopeFacts(record) : []
+    ));
+    function fieldsForRecord(record, authoritativeDocumentScope) {
       const child = Boolean(record.subtopic_id);
-      const authoritativeDocumentScope = authoritativeDocumentScopeByDocument[documentId]
+      const authoritativeDocumentScopeText = authoritativeDocumentScope
         .map(fact => fact.value).join(" ");
       return child
         ? [
@@ -587,14 +597,19 @@
             ["authoritative_program_area", (
               record.program_area_labels || record.document_program_areas || []
             ).join(" "), true],
-            ["authoritative_document_scope", authoritativeDocumentScope, true],
+            ["authoritative_document_scope", authoritativeDocumentScopeText, true],
             ["citation_source_evidence", record.document_search_text || "", !searchV2],
             ["topic_area", (record.topic_areas || []).join(" "), false],
             ["discipline", (record.disciplines || []).join(" "), false],
             ["agency", record.agency || "", false],
             ["funding_category", (record.funding_categories || []).join(" "), false],
           ];
-    });
+    }
+    const documentFields = records.map((record, documentId) => (
+      shouldPrepareDocument(documentId)
+        ? fieldsForRecord(record, authoritativeDocumentScopeByDocument[documentId])
+        : []
+    ));
     const documentFieldTokens = documentFields.map(fields => new Map(
       fields.map(([name, value]) => [name, new Set(queryApi.tokenize(value))]),
     ));
@@ -660,7 +675,7 @@
       field.tokens.forEach(term => counts.set(term, (counts.get(term) || 0) + 1));
       return [field.field, { ...field, counts }];
     })));
-    const fieldedAverageLengths = Object.fromEntries(fieldedFieldNames.map(fieldName => {
+    let fieldedAverageLengths = Object.fromEntries(fieldedFieldNames.map(fieldName => {
       const lengthsForField = fieldedTokenCounts.flatMap(fields => (
         fields.has(fieldName) ? [fields.get(fieldName).tokens.length] : []
       ));
@@ -668,10 +683,10 @@
         ? lengthsForField.reduce((sum, value) => sum + value, 0) / lengthsForField.length
         : 1];
     }));
-    const fieldedVocabulary = new Set(documentScopeFields.flatMap(fields => (
+    let fieldedVocabulary = new Set(documentScopeFields.flatMap(fields => (
       fields.flatMap(field => [...field.positions.keys()])
     )));
-    const fieldedDocumentFrequency = new Map();
+    let fieldedDocumentFrequency = new Map();
     fieldedTokenCounts.forEach(fields => {
       const terms = new Set([...fields.values()].flatMap(field => [...field.counts.keys()]));
       terms.forEach(term => fieldedDocumentFrequency.set(
@@ -679,6 +694,38 @@
         (fieldedDocumentFrequency.get(term) || 0) + 1,
       ));
     });
+    if (preparedCandidateIndexes) {
+      const vocabulary = new Set();
+      const documentFrequency = new Map();
+      const lengthTotals = Object.fromEntries(fieldedFieldNames.map(fieldName => [fieldName, 0]));
+      const lengthCounts = Object.fromEntries(fieldedFieldNames.map(fieldName => [fieldName, 0]));
+      records.forEach(record => {
+        const documentTerms = new Set();
+        fieldsForRecord(record, authoritativeDocumentScopeFacts(record))
+          .filter(([_name, _value, admissionEligible]) => admissionEligible)
+          .forEach(([fieldName, value]) => {
+            const tokens = scopeTokens(value);
+            if (Object.hasOwn(lengthTotals, fieldName)) {
+              lengthTotals[fieldName] += tokens.length;
+              lengthCounts[fieldName] += 1;
+            }
+            tokens.forEach(term => {
+              vocabulary.add(term);
+              documentTerms.add(term);
+            });
+          });
+        documentTerms.forEach(term => documentFrequency.set(
+          term,
+          (documentFrequency.get(term) || 0) + 1,
+        ));
+      });
+      fieldedVocabulary = vocabulary;
+      fieldedDocumentFrequency = documentFrequency;
+      fieldedAverageLengths = Object.fromEntries(fieldedFieldNames.map(fieldName => [
+        fieldName,
+        lengthCounts[fieldName] ? lengthTotals[fieldName] / lengthCounts[fieldName] : 1,
+      ]));
+    }
     function boundedPassageWindows(value) {
       let sentenceOffset = 0;
       return String(value || "").split(/[\n\r]+/).flatMap(paragraph => {
@@ -718,6 +765,7 @@
       };
     }
     const fieldedPassages = records.map((record, documentId) => {
+      if (!shouldPrepareDocument(documentId)) return [];
       const child = Boolean(record.subtopic_id);
       const titleField = child ? "child_title" : "parent_title";
       const descriptionField = child ? "child_summary" : "parent_description";
@@ -888,31 +936,31 @@
         admissionEligible && pattern.test(String(value || ""))
       ));
     }
-    const documentTopics = records.map(record => [
+    const documentTopics = records.map((record, documentId) => shouldPrepareDocument(documentId) ? [
       ...new Set((record.topic_areas || []).filter(Boolean).map(String)),
-    ]);
-    const documentPhraseTokens = records.map(record => queryApi.tokenize([
+    ] : []);
+    const documentPhraseTokens = records.map((record, documentId) => shouldPrepareDocument(documentId) ? queryApi.tokenize([
       record.title || "",
       record.opportunity_number || "",
       String(record.description || "").slice(0, 5_000),
       String(record.document_search_text || "").slice(0, 16_000),
       ...(record.topic_areas || []),
-    ].join(" ")));
+    ].join(" ")) : []);
     const documentPhraseText = documentPhraseTokens.map(terms => terms.join(" "));
-    const documentNarrativeSentences = records.map((record, documentId) => [
+    const documentNarrativeSentences = records.map((record, documentId) => shouldPrepareDocument(documentId) ? [
       record.title || "",
       record.description || record.summary || "",
       ...(record.program_area_labels || []),
       ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
     ].join(". ").split(/(?<=[.!?])\s+|…+|[\n\r]+/).map(value => (
       new Set(scopeTokens(value))
-    )).filter(tokens => tokens.size));
-    const documentNarrativeTokens = records.map((record, documentId) => queryApi.tokenize([
+    )).filter(tokens => tokens.size) : []);
+    const documentNarrativeTokens = records.map((record, documentId) => shouldPrepareDocument(documentId) ? queryApi.tokenize([
       record.title || "",
       record.description || record.summary || "",
       ...(record.program_area_labels || []),
       ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
-    ].join(". ")));
+    ].join(". ")) : []);
     const topicDocuments = new Map();
 
     function fieldsForTerms(documentId, terms) {

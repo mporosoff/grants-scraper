@@ -89,7 +89,7 @@ export class D1AlertStore {
     const errorCode = value.suppressed ? "subscriber_suppressed" : null;
     await this.db.batch([
       this.db.prepare(
-        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0 AND NOT EXISTS (SELECT 1 FROM notification_events n WHERE n.subscription_id = subscriptions.id AND n.message_kind = 'verification' AND n.status = 'sending' AND n.terminal_at IS NULL)",
+        "INSERT INTO subscriptions(id, subscriber_id, type, active, cadence, definition_json, definition_hash, verification_token_hash, verification_expires_at, verified_at, baseline_at, baseline_complete, last_evaluated_at, last_notified_at, created_at, updated_at) VALUES(?, ?, ?, 0, ?, ?, ?, ?, ?, NULL, ?, 0, NULL, NULL, ?, ?) ON CONFLICT(id) DO UPDATE SET cadence = excluded.cadence, definition_json = excluded.definition_json, verification_token_hash = excluded.verification_token_hash, verification_expires_at = excluded.verification_expires_at, verified_at = NULL, baseline_at = excluded.baseline_at, baseline_complete = 0, last_evaluated_at = NULL, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, last_notified_at = NULL, updated_at = excluded.updated_at WHERE subscriptions.active = 0 AND NOT EXISTS (SELECT 1 FROM notification_events n WHERE n.subscription_id = subscriptions.id AND n.message_kind = 'verification' AND n.status = 'sending' AND n.terminal_at IS NULL)",
       ).bind(
         value.id, value.subscriberId, value.type, value.cadence, value.definitionJson,
         value.definitionHash, value.verificationTokenHash, value.verificationExpiresAt,
@@ -252,6 +252,14 @@ export class D1AlertStore {
     ).all());
   }
 
+  async activeSubscriptionsForEvaluation(generatedAt, limit = 4) {
+    const bounded = Math.max(1, Math.min(25, Number(limit) || 4));
+    const values = rows(await this.db.prepare(
+      "SELECT s.*, u.email, u.manage_token FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE s.active = 1 AND s.verified_at IS NOT NULL AND u.suppressed_at IS NULL AND (s.evaluation_cursor_at IS NOT NULL OR COALESCE(s.last_evaluated_at, '') < ?) ORDER BY s.id LIMIT ?",
+    ).bind(generatedAt, bounded + 1).all());
+    return { subscriptions: values.slice(0, bounded), hasMore: values.length > bounded };
+  }
+
   async qualifications(subscriptionId, opportunityIds) {
     const output = new Map();
     for (const id of opportunityIds || []) {
@@ -299,6 +307,10 @@ export class D1AlertStore {
   }
 
   async markEvaluated(subscriptionId, evaluatedAt, now, cycle = null) {
+    return this.completeEvaluation(subscriptionId, evaluatedAt, now, cycle);
+  }
+
+  async completeEvaluation(subscriptionId, evaluatedAt, now, cycle = null) {
     const predicate = cycle
       ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
       : "id = ?";
@@ -306,7 +318,19 @@ export class D1AlertStore {
       ? [evaluatedAt, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt]
       : [evaluatedAt, now, subscriptionId];
     await this.db.prepare(
-      `UPDATE subscriptions SET last_evaluated_at = ?, updated_at = ? WHERE ${predicate}`,
+      `UPDATE subscriptions SET last_evaluated_at = ?, evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, updated_at = ? WHERE ${predicate}`,
+    ).bind(...values).run();
+  }
+
+  async saveEvaluationCursor(subscriptionId, cursorAt, cursorEventId, now, cycle = null) {
+    const predicate = cycle
+      ? "id = ? AND active = 1 AND verified_at IS NOT NULL AND verification_token_hash = ? AND baseline_at = ? AND EXISTS (SELECT 1 FROM subscribers WHERE id = subscriptions.subscriber_id AND suppressed_at IS NULL)"
+      : "id = ?";
+    const values = cycle
+      ? [cursorAt, cursorEventId, now, subscriptionId, cycle.verificationTokenHash, cycle.baselineAt]
+      : [cursorAt, cursorEventId, now, subscriptionId];
+    await this.db.prepare(
+      `UPDATE subscriptions SET evaluation_cursor_at = ?, evaluation_cursor_event_id = ?, updated_at = ? WHERE ${predicate}`,
     ).bind(...values).run();
   }
 
@@ -470,26 +494,63 @@ export class D1AlertStore {
 
   async startRun(run) {
     await this.recoverStaleRuns(run.startedAt);
-    await this.db.prepare(
-      "INSERT INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status) VALUES(?, ?, ?, ?, 'running')",
-    ).bind(run.id, run.startedAt, run.scheduledAt, run.runKind).run();
+    const result = await this.db.prepare(
+      "INSERT OR IGNORE INTO evaluation_runs(id, started_at, scheduled_at, run_kind, status, stage, stage_started_at, last_heartbeat_at, progress_json) VALUES(?, ?, ?, ?, 'running', 'starting', ?, ?, ?)",
+    ).bind(
+      run.id, run.startedAt, run.scheduledAt, run.runKind,
+      run.startedAt, run.startedAt, JSON.stringify({ processedSubscriptions: 0, processedChanges: 0 }),
+    ).run();
+    return Number(result?.meta?.changes || 0) > 0;
   }
 
   async recoverStaleRuns(now) {
-    const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
+    const staleBefore = new Date(Date.parse(now) - 12 * 60_000).toISOString();
     const result = await this.db.prepare(
-      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = MAX(0, CAST(ROUND((julianday(?) - julianday(started_at)) * 86400000) AS INTEGER)), status = 'failed_stale_recovered' WHERE status = 'running' AND started_at < ?",
-    ).bind(now, now, staleBefore).run();
+      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = MAX(0, CAST(ROUND((julianday(?) - julianday(started_at)) * 86400000) AS INTEGER)), status = 'failed_stale_recovered', error_code = 'stale_run_recovered', stage = CASE WHEN stage = 'starting' THEN 'stale_recovery' ELSE stage END, last_heartbeat_at = ? WHERE status = 'running' AND started_at < ?",
+    ).bind(now, now, now, staleBefore).run();
     return Number(result?.meta?.changes || 0);
+  }
+
+  async dailyContinuationState(now) {
+    await this.recoverStaleRuns(now);
+    const recentBefore = new Date(Date.parse(now) - 26 * 60 * 60_000).toISOString();
+    const row = await this.db.prepare(
+      "SELECT status, evaluation_completed_at FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND started_at >= ? ORDER BY started_at DESC LIMIT 1",
+    ).bind(recentBefore).first();
+    if (!row) return "none";
+    if (String(row.status || "") === "running") return "running";
+    return !row.evaluation_completed_at && !String(row.status || "").startsWith("completed")
+      ? "pending"
+      : "none";
+  }
+
+  async needsDailyContinuation(now) {
+    return (await this.dailyContinuationState(now)) === "pending";
+  }
+
+  async updateRunProgress(runId, { stage, stageStartedAt, heartbeatAt, progress = null, errorCode = null } = {}) {
+    await this.db.prepare(
+      "UPDATE evaluation_runs SET stage = ?, stage_started_at = ?, last_heartbeat_at = ?, progress_json = ?, error_code = ? WHERE id = ? AND status = 'running'",
+    ).bind(
+      String(stage || "unknown").slice(0, 80),
+      stageStartedAt,
+      heartbeatAt,
+      progress ? JSON.stringify(progress) : null,
+      errorCode ? String(errorCode).slice(0, 80) : null,
+      runId,
+    ).run();
   }
 
   async finishRun(run) {
     await this.db.prepare(
-      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ? WHERE id = ?",
+      "UPDATE evaluation_runs SET completed_at = ?, duration_ms = ?, subscription_count = ?, matched_event_count = ?, attempted_count = ?, delivered_count = ?, failed_count = ?, cleanup_deleted_count = ?, cleanup_error_code = ?, status = ?, stage = ?, stage_started_at = ?, last_heartbeat_at = ?, progress_json = ?, error_code = ?, evaluation_completed_at = ? WHERE id = ?",
     ).bind(
       run.completedAt, run.durationMs, run.subscriptionCount, run.matchedEventCount,
       run.attemptedCount, run.deliveredCount, run.failedCount,
-      run.cleanupDeletedCount, run.cleanupErrorCode || null, run.status, run.id,
+      run.cleanupDeletedCount, run.cleanupErrorCode || null, run.status,
+      run.stage || "completed", run.stageStartedAt || run.completedAt, run.completedAt,
+      JSON.stringify(run.progress || {}), run.errorCode || null,
+      run.evaluationCompletedAt || null, run.id,
     ).run();
   }
 
@@ -511,22 +572,24 @@ export class D1AlertStore {
   }
 
   async operationalHealth(now) {
-    const staleBefore = new Date(Date.parse(now) - 20 * 60_000).toISOString();
+    const staleBefore = new Date(Date.parse(now) - 12 * 60_000).toISOString();
     const dailyBefore = new Date(Date.parse(now) - 26 * 60 * 60_000).toISOString();
     await this.recoverStaleRuns(now);
     const row = await this.db.prepare(
-      "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms, (SELECT completed_at FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_completed_at, (SELECT status FROM evaluation_runs WHERE run_kind = 'daily' AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_status",
+      "SELECT (SELECT COUNT(*) FROM evaluation_runs WHERE status = 'running' AND started_at < ?) AS stale_running_runs, (SELECT completed_at FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_completed_at, (SELECT status FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_status, (SELECT duration_ms FROM evaluation_runs WHERE completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_duration_ms, (SELECT stage FROM evaluation_runs ORDER BY started_at DESC LIMIT 1) AS last_stage, (SELECT error_code FROM evaluation_runs ORDER BY started_at DESC LIMIT 1) AS last_error_code, (SELECT completed_at FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_completed_at, (SELECT status FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_status, (SELECT COALESCE(evaluation_completed_at, CASE WHEN status LIKE 'completed%' THEN completed_at END) FROM evaluation_runs WHERE run_kind IN ('daily','continuation') AND completed_at IS NOT NULL ORDER BY completed_at DESC LIMIT 1) AS last_daily_evaluation_completed_at",
     ).bind(staleBefore).first();
     const lastCompletedAt = String(row?.last_completed_at || "");
     const lastDailyCompletedAt = String(row?.last_daily_completed_at || "");
     const lastDailyStatus = String(row?.last_daily_status || "");
-    const dailyCompletedSuccessfully = lastDailyStatus === "completed"
-      || lastDailyStatus.startsWith("completed_with_");
+    const dailyCompletedSuccessfully = Boolean(row?.last_daily_evaluation_completed_at)
+      && (lastDailyStatus === "completed" || lastDailyStatus.startsWith("completed_with_"));
     return {
       staleRunningRuns: Number(row?.stale_running_runs || 0),
       lastCompletedAt,
       lastStatus: String(row?.last_status || ""),
       lastDurationMs: row?.last_duration_ms == null ? null : Number(row.last_duration_ms),
+      lastStage: String(row?.last_stage || ""),
+      lastErrorCode: String(row?.last_error_code || ""),
       lastDailyCompletedAt,
       lastDailyStatus,
       schedulerRecent: Boolean(

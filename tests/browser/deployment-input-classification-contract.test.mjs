@@ -178,7 +178,7 @@ function workflowStep(source, name) {
 function assertDeployGuard(source, name) {
   assert.match(
     workflowStep(source, name),
-    /if: \$\{\{ steps\.worker-inputs\.outputs\.deploy_required == 'true' \}\}/,
+    /if: \$\{\{ steps\.worker-inputs\.outputs\.deploy_required == 'true'(?: && [^}]*)? \}\}/,
     `${name} must run only when deployment inputs changed`,
   );
 }
@@ -234,6 +234,11 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /Record retained Alerts Worker version/);
   assert.match(alertsWorkflow, /Existing deployed Alerts Worker version retained because deployment inputs were unchanged/);
   assert.match(alertsWorkflow, /steps\.worker-inputs\.outputs\.deploy_required == 'true'/);
+  assert.match(alertsWorkflow, /recovery_required=true/);
+  assert.match(alertsWorkflow, /last_daily_run_status/);
+  assert.match(alertsWorkflow, /failed_stale_recovered/);
+  assert.match(alertsWorkflow, /2026-08-28T13:37:40\.002Z/);
+  assert.match(alertsWorkflow, /worker-health\.outputs\.recovery_required != 'true'/);
   const capabilityStep = workflowStep(alertsWorkflow, "Configure the Alerts capability-signing secrets");
   assert.match(capabilityStep, /secrets\.ALERT_CAPABILITY_PREVIOUS_SECRET/);
   assert.match(capabilityStep, /set -euo pipefail/);

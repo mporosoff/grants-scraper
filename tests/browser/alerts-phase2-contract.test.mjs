@@ -15,12 +15,14 @@ import {
 import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
 import { D1AlertStore, RETENTION_DAYS } from "../../workers/alerts/src/store.js";
-import { loadPublicAssets } from "../../workers/alerts/src/strong-match.js";
+import {
+  loadPublicAssets, parseAssignedJson, StrongMatchEngine,
+} from "../../workers/alerts/src/strong-match.js";
 
 const root = new URL("../../", import.meta.url);
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
-  "0004_phase4_alert_operations.sql",
+  "0004_phase4_alert_operations.sql", "0005_scheduler_progress.sql",
 ];
 const migrations = await Promise.all(migrationNames.map(name => (
   readFile(new URL(`workers/alerts/migrations/${name}`, root), "utf8")
@@ -500,7 +502,10 @@ test("FF-BUG-003 evaluation writes are bound to the selected subscription cycle"
   };
   assert.deepEqual(
     await evaluateSubscriptions({ store, assets, env, now: fixedNow }),
-    { subscriptionCount: 1, matchedEventCount: 0 },
+    {
+      subscriptionCount: 1, matchedEventCount: 0,
+      continuationRequired: false, processedChangeCount: 1,
+    },
   );
   assert.equal(replacementCreated, true);
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 0);
@@ -526,7 +531,10 @@ test("FF-BUG-003 evaluation writes are bound to the selected subscription cycle"
   };
   assert.deepEqual(
     await evaluateSubscriptions({ store, assets, env, now: new Date("2026-09-02T12:00:00.000Z") }),
-    { subscriptionCount: 1, matchedEventCount: 1 },
+    {
+      subscriptionCount: 1, matchedEventCount: 1,
+      continuationRequired: false, processedChangeCount: 1,
+    },
   );
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM notification_events WHERE message_kind='notification'").get().count, 1);
   assert.equal(database.prepare(
@@ -1424,7 +1432,11 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
   assert.match(workflow, /scheduler_ready/);
   assert.match(workflow, /phase4-operations-20260827/);
   assert.match(workflow, /worker_version_rollback/);
+  assert.match(workflow, /recovery_required=true/);
+  assert.match(workflow, /scheduler recovery execution succeeds/);
   assert.match(wrangler, /"ALERT_SCHEDULER_ENABLED": "true"/);
+  assert.match(wrangler, /"ALERT_SCHEDULER_TIMEOUT_MS": "600000"/);
+  assert.match(wrangler, /"ALERT_SCHEDULER_DELIVERY_BATCH": "10"/);
   assert.match(wrangler, /"crons": \["15 13 \* \* \*", "2-57\/5 \* \* \* \*"\]/);
   assert.match(smoke, /delivery_ready/);
   assert.match(migration, /deployment workflow terminalizes unsent verification/);
@@ -1852,12 +1864,13 @@ test("FF-BUG-020 subsequent runs and health terminalize abandoned scheduler runs
   const health = await store.operationalHealth("2026-09-02T12:00:00.000Z");
   assert.equal(health.staleRunningRuns, 0);
   const recoveredRun = database.prepare(
-    "SELECT status,completed_at,duration_ms FROM evaluation_runs WHERE id='stale-daily'",
+    "SELECT status,completed_at,duration_ms,stage,error_code FROM evaluation_runs WHERE id='stale-daily'",
   ).get();
   assert.deepEqual(
-    [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms],
-    ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000],
+    [recoveredRun.status, recoveredRun.completed_at, recoveredRun.duration_ms, recoveredRun.stage, recoveredRun.error_code],
+    ["failed_stale_recovered", "2026-09-02T12:00:00.000Z", 7_200_000, "stale_recovery", "stale_run_recovered"],
   );
+  assert.equal(await store.dailyContinuationState("2026-09-02T12:00:00.000Z"), "pending");
   assert.equal(database.prepare("SELECT status FROM evaluation_runs WHERE id='recent-retry'").get().status, "running");
 
   await store.startRun({
@@ -1908,7 +1921,7 @@ test("provider and public-asset requests have deterministic bounded deadlines", 
       CATALOG_URL: "https://example.test/catalog", SUBTOPICS_URL: "https://example.test/subtopics",
       CHANGES_URL: "https://example.test/changes", ALERT_ASSET_TIMEOUT_MS: "5",
     }, stalledAssetBody),
-    /asset body aborted/i,
+    error => error.code === "asset_timeout",
   );
   assert.equal(assetBodyAborted, true);
 
@@ -1930,4 +1943,258 @@ test("provider and public-asset requests have deterministic bounded deadlines", 
     error => error.code === "provider_network_failure" && error.retryable === true,
   );
   assert.equal(providerBodyAborted, true);
+});
+
+test("0005 preserves representative production state and adds resumable scheduler progress", () => {
+  const database = databaseThrough(4);
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1 });
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('existing-daily','2026-08-28T13:15:00.000Z','2026-08-28T13:15:05.000Z','completed','2026-08-28T13:15:00.000Z',5000,'daily')",
+  ).run();
+  database.exec(migrations[4]);
+  const columns = new Set(database.prepare("PRAGMA table_info(evaluation_runs)").all().map(row => row.name));
+  assert.ok(columns.has("stage"));
+  assert.ok(columns.has("progress_json"));
+  assert.ok(columns.has("evaluation_completed_at"));
+  const subscriptionColumns = new Set(database.prepare("PRAGMA table_info(subscriptions)").all().map(row => row.name));
+  assert.ok(subscriptionColumns.has("evaluation_cursor_at"));
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM subscriptions").get().count, 1);
+  const run = database.prepare(
+    "SELECT status,stage,evaluation_completed_at FROM evaluation_runs WHERE id='existing-daily'",
+  ).get();
+  assert.deepEqual({ ...run }, {
+    status: "completed", stage: "completed",
+    evaluation_completed_at: "2026-08-28T13:15:05.000Z",
+  });
+});
+
+test("saved-search evaluation resumes equal-timestamp change batches without duplicates", async () => {
+  const subscription = {
+    id: "saved-1", type: "saved_search", active: 1,
+    definition_json: JSON.stringify({ query: "catalysis" }),
+    verification_token_hash: "cycle-token", baseline_at: "2026-08-01T00:00:00.000Z",
+    created_at: "2026-08-01T00:00:00.000Z", last_evaluated_at: "2026-08-20T00:00:00.000Z",
+    evaluation_cursor_at: null, evaluation_cursor_event_id: null,
+  };
+  const qualifications = new Map();
+  const events = new Set();
+  const prepared = [];
+  const store = {
+    activeSubscriptions: async () => [subscription],
+    qualifications: async (_id, ids) => new Map(ids.flatMap(id => (
+      qualifications.has(id) ? [[id, qualifications.get(id)]] : []
+    ))),
+    setQualification: async (_subscriptionId, id, value) => { qualifications.set(id, value); },
+    enqueueEvent: async event => {
+      const duplicate = events.has(event.eventKey);
+      events.add(event.eventKey);
+      return !duplicate;
+    },
+    saveEvaluationCursor: async (_id, cursorAt, cursorEventId) => {
+      subscription.evaluation_cursor_at = cursorAt;
+      subscription.evaluation_cursor_event_id = cursorEventId;
+    },
+    completeEvaluation: async (_id, evaluatedAt) => {
+      subscription.last_evaluated_at = evaluatedAt;
+      subscription.evaluation_cursor_at = null;
+      subscription.evaluation_cursor_event_id = null;
+    },
+  };
+  const records = ["a", "b", "c"].map(id => ({ opportunity_id: id, title: `Award ${id}` }));
+  const changes = {
+    generated_at: "2026-08-28T14:00:00.000Z",
+    events: records.map(record => ({
+      id: `event-${record.opportunity_id}`, type: "new",
+      changed_at: "2026-08-28T13:00:00.000Z",
+      opportunity_id: record.opportunity_id, record,
+    })),
+  };
+  const assets = {
+    catalog: { opportunities: records }, changes,
+    matcher: {
+      prepare: ids => prepared.push([...ids]),
+      matchDetails: (_definition, _asOf, ids) => new Map(ids.map(id => [id, { reasons: ["Strong match"] }])),
+    },
+  };
+  const first = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(first.continuationRequired, true);
+  assert.equal(first.processedChangeCount, 2);
+  assert.equal(subscription.evaluation_cursor_event_id, "event-b");
+  const second = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(second.continuationRequired, false);
+  assert.equal(second.processedChangeCount, 1);
+  assert.equal(subscription.last_evaluated_at, changes.generated_at);
+  assert.equal(events.size, 3);
+  const duplicate = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit: 2 });
+  assert.equal(duplicate.matchedEventCount, 0);
+  assert.equal(events.size, 3);
+  assert.deepEqual(prepared, [["a", "b"], ["c"]]);
+});
+
+test("daily evaluation runs before delivery backlogs and retry triggers continue incomplete daily work", async () => {
+  const order = [];
+  const seen = new Set();
+  const store = {
+    needsDailyContinuation: async () => true,
+    startRun: async run => {
+      if (seen.has(run.id)) return false;
+      seen.add(run.id);
+      return true;
+    },
+    activeSubscriptions: async () => { order.push("evaluate"); return []; },
+    pendingVerificationEvents: async () => { order.push("verification"); return []; },
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => { order.push("notification"); return []; },
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async () => {},
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => {
+      order.push("assets");
+      return { changes: { generated_at: fixedNow.toISOString(), events: [] } };
+    },
+    now: () => fixedNow,
+  });
+  const controller = { scheduledTime: fixedNow.getTime(), cron: "2-57/5 * * * *" };
+  const first = await scheduled(controller, env);
+  assert.equal(first.runKind, "continuation");
+  assert.equal(first.status, "completed");
+  assert.ok(order.indexOf("evaluate") < order.indexOf("verification"));
+  assert.ok(order.indexOf("assets") < order.indexOf("notification"));
+  const second = await scheduled(controller, env);
+  assert.equal(second.status, "duplicate_skipped");
+  assert.equal(order.filter(value => value === "verification").length, 1);
+});
+
+test("retry triggers do not collide with a recent running daily evaluation", async () => {
+  let deliveryQueries = 0;
+  let finished;
+  const store = {
+    dailyContinuationState: async () => "running",
+    startRun: async () => true,
+    pendingVerificationEvents: async () => { deliveryQueries += 1; return []; },
+    finishRun: async run => { finished = { ...run }; },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => { throw new Error("a retry must not load assets while daily work is running"); },
+    now: () => fixedNow,
+  });
+  const result = await scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "2-57/5 * * * *" }, env,
+  );
+  assert.equal(result.runKind, "retry");
+  assert.equal(result.status, "completed_skipped_daily_in_progress");
+  assert.equal(deliveryQueries, 0);
+  assert.deepEqual(finished, result);
+});
+
+test("an exact manual daily scheduled test is idempotent and executes its candidate once", async () => {
+  const seen = new Set();
+  let assetLoads = 0;
+  let deliveryQueries = 0;
+  const store = {
+    startRun: async run => {
+      if (seen.has(run.id)) return false;
+      seen.add(run.id);
+      return true;
+    },
+    activeSubscriptions: async () => [],
+    pendingVerificationEvents: async () => { deliveryQueries += 1; return []; },
+    pendingNotificationReconciliationBatches: async () => [],
+    pendingEvents: async () => [],
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async () => {},
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => new MockEmailProvider(),
+    assetLoader: async () => {
+      assetLoads += 1;
+      return { changes: { generated_at: fixedNow.toISOString(), events: [] } };
+    },
+    now: () => fixedNow,
+  });
+  const controller = { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" };
+  const first = await scheduled(controller, env);
+  const duplicate = await scheduled(controller, env);
+  assert.equal(first.runKind, "daily");
+  assert.equal(first.status, "completed");
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(assetLoads, 1);
+  assert.equal(deliveryQueries, 1);
+});
+
+test("a stalled subscription query ends inside the overall budget with truthful stage evidence", async () => {
+  let finished;
+  const store = {
+    startRun: async () => true,
+    activeSubscriptions: async () => new Promise(() => {}),
+    cleanupOperationalData: async () => ({ deletedCount: 0 }),
+    finishRun: async run => { finished = { ...run }; },
+  };
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    assetLoader: async () => ({ changes: { generated_at: fixedNow.toISOString(), events: [] } }),
+    providerFactory: () => new MockEmailProvider(),
+    now: () => fixedNow,
+  });
+  const result = await scheduled(
+    { scheduledTime: fixedNow.getTime(), cron: "15 13 * * *" },
+    { ...env, ALERT_SCHEDULER_TIMEOUT_MS: "40" },
+  );
+  assert.equal(result.status, "incomplete_timeout");
+  assert.equal(result.errorCode, "scheduler_deadline_exceeded");
+  assert.equal(result.stage, "subscription_evaluation");
+  assert.equal(result.cleanupErrorCode, "cleanup_timeout");
+  assert.deepEqual(finished, result);
+});
+
+test("health stays unavailable for incomplete daily evaluation and recovers after continuation", async () => {
+  const database = databaseThrough();
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,error_code) VALUES('daily-incomplete','2026-09-02T11:00:00.000Z','2026-09-02T11:01:00.000Z','incomplete_evaluation','2026-09-02T11:00:00.000Z',60000,'daily','subscription_evaluation','evaluation_continuation_required')",
+  ).run();
+  const store = new D1AlertStore(new SqliteD1(database));
+  assert.equal((await store.operationalHealth("2026-09-02T12:00:00.000Z")).schedulerRecent, false);
+  database.prepare(
+    "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind,stage,evaluation_completed_at) VALUES('daily-continuation','2026-09-02T11:05:00.000Z','2026-09-02T11:06:00.000Z','completed','2026-09-02T11:05:00.000Z',60000,'continuation','completed','2026-09-02T11:05:55.000Z')",
+  ).run();
+  const health = await store.operationalHealth("2026-09-02T12:00:00.000Z");
+  assert.equal(health.schedulerRecent, true);
+  assert.equal(health.lastDailyStatus, "completed");
+});
+
+test("candidate-scoped Strong matching preserves full-engine admission on the public catalog", async () => {
+  const [catalogText, subtopicsText] = await Promise.all([
+    readFile(new URL("data/opportunities.js", root), "utf8"),
+    readFile(new URL("data/subtopics.js", root), "utf8"),
+  ]);
+  const catalog = parseAssignedJson(catalogText, "GRANT_CATALOG");
+  const subtopics = parseAssignedJson(subtopicsText, "SUBTOPIC_CATALOG");
+  const definition = {
+    query: "hydrogen catalysis",
+    filters: {
+      status: { posted: true, forecasted: true, archived: false },
+      facets: { source: [], source_type: [], discipline: [], topic: [], agency: [], eligibility: [], funding_instrument: [] },
+      deadline: { from: "", through: "" }, minimum_award: 0,
+      flags: { evidence: false, preliminary: false, limited: false, early_career: false, no_cost_share: false },
+      audience: "all",
+    },
+    currentness: "current_only", strong_contract_version: "funding-search-v2-strong-1",
+    include_potential: false,
+  };
+  const full = new StrongMatchEngine(catalog, subtopics);
+  const fullIds = full.matchIds(definition, "2026-08-28", null);
+  const candidateIds = [...new Set([
+    ...catalog.opportunities.slice(0, 75).map(record => String(record.opportunity_id)),
+    ...[...fullIds].slice(0, 25),
+  ])];
+  const scoped = new StrongMatchEngine(catalog, subtopics);
+  const scopedIds = scoped.matchIds(definition, "2026-08-28", candidateIds);
+  assert.deepEqual([...scopedIds].sort(), candidateIds.filter(id => fullIds.has(id)).sort());
 });

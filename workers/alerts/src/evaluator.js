@@ -9,6 +9,8 @@ import { digestEmail, eventEmail, verificationEmail } from "./email.js";
 const LINKS_API = globalThis.FUNDING_AWARD_LINKS;
 const CHANGE_KINDS = new Set(["new", "deadline_changed", "amended", "status_changed", "closed_or_removed"]);
 export const DIGEST_MAX_EVENTS = 25;
+export const EVALUATION_CHANGE_LIMIT = 25;
+export const EVALUATION_SUBSCRIPTION_LIMIT = 4;
 const VERIFICATION_VALIDITY_MS = 24 * 60 * 60_000;
 const VERIFICATION_MINIMUM_SEND_WINDOW_MS = 60 * 60_000;
 
@@ -98,19 +100,38 @@ export function baselineIds(subscription, suppliedIds = []) {
   return [...new Set(suppliedIds.map(String).filter(Boolean))];
 }
 
-function relevantChanges(subscription, changes) {
+function relevantChanges(subscription, changes, limit = EVALUATION_CHANGE_LIMIT) {
   const since = subscription.last_evaluated_at || subscription.baseline_at || subscription.created_at;
-  return changes.events.filter(event => (
+  const cursorAt = String(subscription.evaluation_cursor_at || "");
+  const cursorEventId = String(subscription.evaluation_cursor_event_id || "");
+  const ordered = changes.events.filter(event => (
     CHANGE_KINDS.has(event.type) && String(event.changed_at || "") > String(since || "")
+    && (!cursorAt
+      || String(event.changed_at || "") > cursorAt
+      || (
+        String(event.changed_at || "") === cursorAt
+        && String(event.id || "") > cursorEventId
+      ))
+  )).sort((left, right) => (
+    String(left.changed_at || "").localeCompare(String(right.changed_at || ""))
+    || String(left.id || "").localeCompare(String(right.id || ""))
   ));
+  const events = ordered.slice(0, Math.max(1, limit));
+  const last = events.at(-1) || null;
+  return {
+    events,
+    complete: ordered.length <= events.length,
+    cursorAt: String(last?.changed_at || cursorAt),
+    cursorEventId: String(last?.id || cursorEventId),
+  };
 }
 
-async function evaluateOpportunity(store, subscription, assets, env, now) {
+async function evaluateOpportunity(store, subscription, assets, env, now, changes) {
   const definition = JSON.parse(subscription.definition_json);
   const id = definition.opportunity_id;
   const triggers = new Set(definition.triggers);
   let matched = 0;
-  for (const event of relevantChanges(subscription, assets.changes)) {
+  for (const event of changes) {
     if (String(event.opportunity_id) !== id) continue;
     const kind = event.type === "closed_or_removed" ? "status_changed" : event.type;
     if (!triggers.has(kind)) continue;
@@ -139,9 +160,8 @@ async function evaluateOpportunity(store, subscription, assets, env, now) {
   return matched;
 }
 
-async function evaluateSavedSearch(store, subscription, assets, env, now) {
+async function evaluateSavedSearch(store, subscription, assets, env, now, changes) {
   const definition = JSON.parse(subscription.definition_json);
-  const changes = relevantChanges(subscription, assets.changes);
   if (!changes.length) return 0;
   const asOf = isoDate(now);
   const changedIds = [...new Set(changes.map(event => String(event.opportunity_id || "")).filter(Boolean))];
@@ -175,10 +195,10 @@ async function evaluateSavedSearch(store, subscription, assets, env, now) {
   return matched;
 }
 
-async function evaluateProgram(store, subscription, assets, env, now) {
+async function evaluateProgram(store, subscription, assets, env, now, changes) {
   const definition = JSON.parse(subscription.definition_json);
   let matched = 0;
-  for (const event of relevantChanges(subscription, assets.changes)) {
+  for (const event of changes) {
     if (!LINKS_API.matchesProgramIdentity(definition.program_id, event.record)) continue;
     const eventKind = {
       new: "program_new_cycle",
@@ -198,26 +218,69 @@ async function evaluateProgram(store, subscription, assets, env, now) {
   return matched;
 }
 
-export async function evaluateSubscriptions({ store, assets, env, now = new Date() }) {
-  const subscriptions = await store.activeSubscriptions();
-  let matchedEventCount = 0;
-  for (const subscription of subscriptions) {
-    let matched = 0;
-    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now);
-    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now);
-    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now);
-    matchedEventCount += matched;
-    await store.markEvaluated(
-      subscription.id,
-      String(assets.changes.generated_at || now.toISOString()),
-      now.toISOString(),
-      {
-        verificationTokenHash: subscription.verification_token_hash,
-        baselineAt: subscription.baseline_at,
-      },
-    );
+export async function evaluateSubscriptions({
+  store, assets, env, now = new Date(),
+  subscriptionLimit = EVALUATION_SUBSCRIPTION_LIMIT,
+  changeLimit = EVALUATION_CHANGE_LIMIT,
+} = {}) {
+  const changes = assets?.changes && Array.isArray(assets.changes.events)
+    ? assets.changes
+    : { generated_at: now.toISOString(), events: [] };
+  const generatedAt = String(changes.generated_at || now.toISOString());
+  const boundedSubscriptionLimit = Math.max(1, Math.min(25, Number(subscriptionLimit) || EVALUATION_SUBSCRIPTION_LIMIT));
+  const boundedChangeLimit = Math.max(1, Math.min(50, Number(changeLimit) || EVALUATION_CHANGE_LIMIT));
+  const loaded = typeof store.activeSubscriptionsForEvaluation === "function"
+    ? await store.activeSubscriptionsForEvaluation(generatedAt, boundedSubscriptionLimit)
+    : await store.activeSubscriptions();
+  const sourceSubscriptions = Array.isArray(loaded) ? loaded : loaded.subscriptions;
+  const subscriptions = (sourceSubscriptions || []).slice(0, boundedSubscriptionLimit);
+  const batches = subscriptions.map(subscription => ({
+    subscription,
+    ...relevantChanges(subscription, changes, boundedChangeLimit),
+  }));
+  const matcherCandidates = [...new Set(batches.flatMap(batch => (
+    batch.subscription.type === "saved_search"
+      ? batch.events.map(event => String(event.opportunity_id || "")).filter(Boolean)
+      : []
+  )))];
+  if (matcherCandidates.length && typeof assets.matcher?.prepare === "function") {
+    assets.matcher.prepare(matcherCandidates);
   }
-  return { subscriptionCount: subscriptions.length, matchedEventCount };
+  let matchedEventCount = 0;
+  let continuationRequired = Boolean(!Array.isArray(loaded) && loaded?.hasMore);
+  for (const batch of batches) {
+    const { subscription } = batch;
+    let matched = 0;
+    if (subscription.type === "opportunity") matched = await evaluateOpportunity(store, subscription, assets, env, now, batch.events);
+    else if (subscription.type === "saved_search") matched = await evaluateSavedSearch(store, subscription, assets, env, now, batch.events);
+    else if (subscription.type === "program") matched = await evaluateProgram(store, subscription, assets, env, now, batch.events);
+    matchedEventCount += matched;
+    const cycle = {
+      verificationTokenHash: subscription.verification_token_hash,
+      baselineAt: subscription.baseline_at,
+    };
+    if (batch.complete) {
+      const complete = typeof store.completeEvaluation === "function"
+        ? store.completeEvaluation.bind(store)
+        : store.markEvaluated.bind(store);
+      await complete(subscription.id, generatedAt, now.toISOString(), cycle);
+    } else {
+      continuationRequired = true;
+      if (typeof store.saveEvaluationCursor === "function") {
+        await store.saveEvaluationCursor(
+          subscription.id, batch.cursorAt, batch.cursorEventId, now.toISOString(), cycle,
+        );
+      } else {
+        await store.markEvaluated(subscription.id, batch.cursorAt, now.toISOString(), cycle);
+      }
+    }
+  }
+  return {
+    subscriptionCount: subscriptions.length,
+    matchedEventCount,
+    continuationRequired,
+    processedChangeCount: batches.reduce((sum, batch) => sum + batch.events.length, 0),
+  };
 }
 
 function retryAt(event, now) {
@@ -256,12 +319,14 @@ async function deliveryCapabilityLinks(env, event) {
     : null;
 }
 
-export async function dispatchNotifications({ store, provider, env, now = new Date(), weekly = false }) {
+export async function dispatchNotifications({
+  store, provider, env, now = new Date(), weekly = false, limit = null,
+}) {
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
   }
   const dailyLimit = Math.max(1, Math.min(100, Number(env.DAILY_EMAIL_LIMIT) || 100));
-  let remaining = dailyLimit;
+  let remaining = Math.max(1, Math.min(dailyLimit, Number(limit) || dailyLimit));
   const reconciliation = !weekly && typeof store.pendingNotificationReconciliationBatches === "function"
     ? await store.pendingNotificationReconciliationBatches(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
     : [];

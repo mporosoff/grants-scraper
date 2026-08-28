@@ -14,6 +14,9 @@ import { ALERT_EMAIL_TEMPLATE_VERSION } from "./email.js";
 import { createEmailProvider } from "./provider.js";
 import { D1AlertStore } from "./store.js";
 import { loadPublicAssets } from "./strong-match.js";
+import {
+  boundedFinalization, SchedulerBudget, SchedulerTimeoutError,
+} from "./scheduler-budget.js";
 
 const MAX_REQUEST_BYTES = 32_768;
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
@@ -209,7 +212,7 @@ export function createHandler({
       try { databaseReady = await store.health(); } catch { /* unavailable */ }
       let operations = {
         staleRunningRuns: 0, lastCompletedAt: "", lastStatus: "", lastDurationMs: null,
-        lastDailyCompletedAt: "", lastDailyStatus: "",
+        lastDailyCompletedAt: "", lastDailyStatus: "", lastStage: "", lastErrorCode: "",
         schedulerRecent: true,
       };
       try {
@@ -247,6 +250,8 @@ export function createHandler({
         last_run_completed_at: operations.lastCompletedAt || null,
         last_run_status: operations.lastStatus || null,
         last_run_duration_ms: operations.lastDurationMs,
+        last_run_stage: operations.lastStage || null,
+        last_run_error_code: operations.lastErrorCode || null,
         last_daily_run_completed_at: operations.lastDailyCompletedAt || null,
         last_daily_run_status: operations.lastDailyStatus || null,
       });
@@ -447,53 +452,199 @@ export function createScheduledHandler({
   assetLoader = (env, fetchImpl) => loadPublicAssets(env, fetchImpl),
   fetchImpl = (...args) => fetch(...args),
   now = () => new Date(),
+  clock = () => Date.now(),
 } = {}) {
   return async function scheduled(controller, env) {
     const scheduledAt = new Date(controller?.scheduledTime || Date.now());
     const current = now();
-    const runKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
     const store = storeFactory(env);
+    const budget = new SchedulerBudget({
+      timeoutMs: Number(env.ALERT_SCHEDULER_TIMEOUT_MS) || undefined,
+      clock,
+    });
+    const triggerKind = controller?.cron && controller.cron !== "15 13 * * *" ? "retry" : "daily";
+    let runKind = triggerKind;
+    let dailyInProgress = false;
+    if (triggerKind === "retry" && (
+      typeof store.dailyContinuationState === "function"
+      || typeof store.needsDailyContinuation === "function"
+    )) {
+      const continuationState = await budget.run(
+        "continuation_check",
+        async () => {
+          if (typeof store.dailyContinuationState === "function") {
+            return store.dailyContinuationState(current.toISOString());
+          }
+          return await store.needsDailyContinuation(current.toISOString()) ? "pending" : "none";
+        },
+        15_000,
+      );
+      if (continuationState === "pending") runKind = "continuation";
+      if (continuationState === "running") dailyInProgress = true;
+    }
+    const scheduledIdentity = scheduledAt.toISOString().replace(/[^0-9]/g, "");
     const run = {
-      id: `run_${current.toISOString().replace(/[^0-9]/g, "")}_${runKind}`,
+      id: `run_${scheduledIdentity}_${runKind}`,
       scheduledAt: scheduledAt.toISOString(), runKind,
       startedAt: current.toISOString(), subscriptionCount: 0, matchedEventCount: 0,
       attemptedCount: 0, deliveredCount: 0, failedCount: 0, status: "running",
       cleanupDeletedCount: 0, cleanupErrorCode: "",
+      errorCode: "", evaluationCompletedAt: "", stage: "starting",
+      stageStartedAt: current.toISOString(),
+      progress: { processedSubscriptions: 0, processedChanges: 0, continuationRequired: false },
     };
-    await store.startRun(run);
+    const started = await budget.run("run_start", () => store.startRun(run), 15_000);
+    if (started === false) return { ...run, status: "duplicate_skipped" };
+    if (dailyInProgress) {
+      const completed = now();
+      run.status = "completed_skipped_daily_in_progress";
+      run.stage = "completed";
+      run.stageStartedAt = completed.toISOString();
+      run.completedAt = completed.toISOString();
+      run.durationMs = Math.max(0, completed.getTime() - current.getTime());
+      run.progress = { ...run.progress, dailyInProgress: true };
+      try {
+        await boundedFinalization(() => store.finishRun(run));
+      } catch (error) {
+        run.status = "failed_finalization";
+        run.errorCode = String(error?.code || "finalization_failed").slice(0, 80);
+      }
+      return run;
+    }
+
+    const stage = async (name, operation, maximumMs, progress = run.progress) => {
+      const stageNow = new Date(Math.max(current.getTime(), clock())).toISOString();
+      run.stage = name;
+      run.stageStartedAt = stageNow;
+      run.progress = { ...run.progress, ...(progress || {}) };
+      if (typeof store.updateRunProgress === "function") {
+        await budget.run(
+          `${name}_progress`,
+          () => store.updateRunProgress(run.id, {
+            stage: name,
+            stageStartedAt: stageNow,
+            heartbeatAt: stageNow,
+            progress: run.progress,
+          }),
+          15_000,
+        );
+      }
+      return budget.run(name, operation, maximumMs);
+    };
+
+    const deliveryBatch = Math.max(1, Math.min(10, Number(env.ALERT_SCHEDULER_DELIVERY_BATCH) || 10));
+    let continuationRequired = false;
+    let failureStage = "";
+    let failureStageStartedAt = "";
     try {
-      const provider = providerFactory(env, fetchImpl);
-      const verification = await dispatchVerificationDeliveries({ store, provider, env, now: current });
+      if (runKind === "daily" || runKind === "continuation") {
+        const assets = await stage(
+          "asset_loading",
+          () => assetLoader(env, fetchImpl),
+          45_000,
+        );
+        const evaluation = await stage(
+          "subscription_evaluation",
+          () => evaluateSubscriptions({ store, assets, env, now: current }),
+          5 * 60_000,
+        );
+        Object.assign(run, {
+          subscriptionCount: evaluation.subscriptionCount,
+          matchedEventCount: evaluation.matchedEventCount,
+        });
+        continuationRequired = evaluation.continuationRequired === true;
+        run.progress = {
+          processedSubscriptions: evaluation.subscriptionCount,
+          processedChanges: evaluation.processedChangeCount,
+          continuationRequired,
+        };
+        if (!continuationRequired) {
+          run.evaluationCompletedAt = new Date(Math.max(current.getTime(), clock())).toISOString();
+        }
+      }
+
+      const provider = await stage(
+        "provider_initialization",
+        () => providerFactory(env, fetchImpl),
+        15_000,
+      );
+      const verification = await stage(
+        "verification_delivery",
+        () => dispatchVerificationDeliveries({
+          store, provider, env, now: current, limit: deliveryBatch,
+        }),
+        2 * 60_000,
+      );
       let immediate = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
       let weekly = { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
-      immediate = await dispatchNotifications({ store, provider, env, now: current, weekly: false });
-      if (runKind === "daily") {
-        const assets = await assetLoader(env, fetchImpl);
-        Object.assign(run, await evaluateSubscriptions({ store, assets, env, now: current }));
-        weekly = current.getUTCDay() === 0
-          ? await dispatchNotifications({ store, provider, env, now: current, weekly: true })
-          : weekly;
+      immediate = await stage(
+        "immediate_delivery",
+        () => dispatchNotifications({
+          store, provider, env, now: current, weekly: false, limit: deliveryBatch,
+        }),
+        2 * 60_000,
+      );
+      if ((runKind === "daily" || runKind === "continuation")
+        && !continuationRequired && current.getUTCDay() === 0) {
+        weekly = await stage(
+          "weekly_delivery",
+          () => dispatchNotifications({
+            store, provider, env, now: current, weekly: true, limit: deliveryBatch,
+          }),
+          2 * 60_000,
+        );
       }
       run.attemptedCount = verification.attemptedCount + immediate.attemptedCount + weekly.attemptedCount;
       run.deliveredCount = verification.deliveredCount + immediate.deliveredCount + weekly.deliveredCount;
       run.failedCount = verification.failedCount + immediate.failedCount + weekly.failedCount;
-      run.status = run.failedCount ? "completed_with_delivery_failures" : "completed";
-    } catch {
-      run.status = "failed";
+      run.status = continuationRequired
+        ? run.failedCount ? "incomplete_evaluation_with_delivery_failures" : "incomplete_evaluation"
+        : run.failedCount ? "completed_with_delivery_failures" : "completed";
+    } catch (error) {
+      failureStage = run.stage;
+      failureStageStartedAt = run.stageStartedAt;
+      run.errorCode = String(error?.code || "scheduler_failed").slice(0, 80);
+      run.status = error instanceof SchedulerTimeoutError
+        ? (run.evaluationCompletedAt ? "failed_timeout" : "incomplete_timeout")
+        : "failed";
     }
     try {
       if (typeof store.cleanupOperationalData === "function") {
-        const cleanup = await store.cleanupOperationalData(now().toISOString(), 100);
+        const cleanup = await stage(
+          "cleanup",
+          () => store.cleanupOperationalData(now().toISOString(), 100),
+          20_000,
+        );
         run.cleanupDeletedCount = Number(cleanup?.deletedCount || 0);
       }
-    } catch {
-      run.cleanupErrorCode = "cleanup_failed";
+    } catch (error) {
+      run.cleanupErrorCode = error instanceof SchedulerTimeoutError
+        ? "cleanup_timeout"
+        : "cleanup_failed";
       if (run.status === "completed") run.status = "completed_with_cleanup_failure";
+    }
+    if (failureStage) {
+      run.stage = failureStage;
+      run.stageStartedAt = failureStageStartedAt;
+    }
+    if (continuationRequired && run.status.startsWith("incomplete_evaluation")) {
+      run.stage = "continuation_pending";
+      run.stageStartedAt = now().toISOString();
+      run.errorCode = "evaluation_continuation_required";
     }
     const completed = now();
     run.completedAt = completed.toISOString();
     run.durationMs = Math.max(0, completed.getTime() - current.getTime());
-    await store.finishRun(run);
+    if (run.status.startsWith("completed")) {
+      run.stage = "completed";
+      run.stageStartedAt = run.completedAt;
+    }
+    try {
+      await boundedFinalization(() => store.finishRun(run));
+    } catch (error) {
+      run.status = "failed_finalization";
+      run.errorCode = String(error?.code || "finalization_failed").slice(0, 80);
+    }
     return run;
   };
 }

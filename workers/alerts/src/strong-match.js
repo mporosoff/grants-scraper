@@ -25,19 +25,48 @@ export function parseAssignedJson(text, assignment) {
 export class StrongMatchEngine {
   constructor(catalog, subtopics = null) {
     this.catalog = catalog;
-    this.parent = RETRIEVAL_API.create(catalog, QUERY_API, {
-      searchV2: true, searchV2Config: SEARCH_V2_CONFIG, catalogRole: "parent",
-    });
     this.childCatalog = subtopics ? RETRIEVAL_API.createChildCatalog(subtopics) : null;
+    this.parent = null;
+    this.child = null;
+    this.preparedIds = null;
+    this.prepared = false;
+  }
+
+  prepare(candidateIds = null) {
+    const candidates = Array.isArray(candidateIds)
+      ? new Set(candidateIds.map(String).filter(Boolean))
+      : null;
+    if (this.prepared && (
+      this.preparedIds === null
+      || (candidates && [...candidates].every(id => this.preparedIds.has(id)))
+    )) return;
+    const parentCandidateIndexes = candidates
+      ? this.catalog.opportunities.flatMap((record, index) => (
+          candidates.has(recordId(record)) ? [index] : []
+        ))
+      : null;
+    const childCandidateIndexes = candidates && this.childCatalog
+      ? this.childCatalog.opportunities.flatMap((record, index) => (
+          candidates.has(String(record.parent_id || "")) ? [index] : []
+        ))
+      : null;
+    this.parent = RETRIEVAL_API.create(this.catalog, QUERY_API, {
+      searchV2: true, searchV2Config: SEARCH_V2_CONFIG, catalogRole: "parent",
+      preparedCandidateIndexes: parentCandidateIndexes,
+    });
     this.child = this.childCatalog ? RETRIEVAL_API.create(this.childCatalog, QUERY_API, {
       searchV2: true, searchV2Config: SEARCH_V2_CONFIG, catalogRole: "child",
+      preparedCandidateIndexes: childCandidateIndexes,
     }) : null;
+    this.preparedIds = candidates;
+    this.prepared = true;
   }
 
   evaluate(definition, asOf, candidateIds = null, collectEvidence = false) {
     const candidates = Array.isArray(candidateIds)
       ? new Set(candidateIds.map(String).filter(Boolean))
       : null;
+    this.prepare(candidateIds);
     const parentCandidateIndexes = candidates
       ? this.catalog.opportunities.flatMap((record, index) => (
           candidates.has(recordId(record)) ? [index] : []
@@ -116,11 +145,33 @@ export async function loadPublicAssets(env, fetchImpl = fetch) {
   const timeoutMs = Math.max(1, Math.min(30_000, Number(env.ALERT_ASSET_TIMEOUT_MS) || 10_000));
   const load = async (url, accept, bodyType) => {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    let timeout;
+    const deadline = new Promise((_, reject) => {
+      timeout = setTimeout(() => {
+        controller.abort();
+        reject(Object.assign(new Error("Public alert input was aborted by its timeout."), {
+          code: "asset_timeout",
+        }));
+      }, timeoutMs);
+    });
     try {
-      const response = await fetchImpl(url, { headers: { Accept: accept }, signal: controller.signal });
-      if (!response.ok) throw new Error("Public alert inputs are unavailable.");
-      return bodyType === "json" ? await response.json() : await response.text();
+      return await Promise.race([(async () => {
+        const response = await fetchImpl(url, { headers: { Accept: accept }, signal: controller.signal });
+        if (!response.ok) throw Object.assign(new Error("Public alert inputs are unavailable."), {
+          code: "asset_http_error",
+        });
+        return bodyType === "json" ? await response.json() : await response.text();
+      })(), deadline]);
+    } catch (error) {
+      if (error?.code) throw error;
+      if (error?.name === "AbortError") {
+        throw Object.assign(new Error("Public alert input was aborted by its timeout."), {
+          code: "asset_timeout",
+        });
+      }
+      throw Object.assign(new Error("Public alert input could not be read."), {
+        code: bodyType === "json" ? "asset_parse_error" : "asset_read_error",
+      });
     } finally {
       clearTimeout(timeout);
     }
@@ -130,13 +181,25 @@ export async function loadPublicAssets(env, fetchImpl = fetch) {
     load(env.SUBTOPICS_URL, "application/javascript", "text"),
     load(env.CHANGES_URL, "application/json", "json"),
   ]);
-  const catalog = parseAssignedJson(catalogText, "GRANT_CATALOG");
-  const subtopics = parseAssignedJson(subtopicText, "SUBTOPIC_CATALOG");
+  let catalog;
+  let subtopics;
+  try {
+    catalog = parseAssignedJson(catalogText, "GRANT_CATALOG");
+    subtopics = parseAssignedJson(subtopicText, "SUBTOPIC_CATALOG");
+  } catch {
+    throw Object.assign(new Error("Public alert inputs could not be parsed."), {
+      code: "asset_parse_error",
+    });
+  }
   if (Number(catalog.schema_version) !== 3 || Number(subtopics.schema_version) !== 1) {
-    throw new Error("Public alert inputs have incompatible schemas.");
+    throw Object.assign(new Error("Public alert inputs have incompatible schemas."), {
+      code: "asset_schema_error",
+    });
   }
   if (Number(changes?.schema_version) !== 1 || !Array.isArray(changes.events)) {
-    throw new Error("Change feed has an incompatible schema.");
+    throw Object.assign(new Error("Change feed has an incompatible schema."), {
+      code: "asset_schema_error",
+    });
   }
   return { catalog, subtopics, changes, matcher: new StrongMatchEngine(catalog, subtopics) };
 }
