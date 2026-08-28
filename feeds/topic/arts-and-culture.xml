@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -165,6 +165,16 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
+    <title>Exploring and Enhancing Outdoor and Heritage Tourism in the Chesapeake Bay Watershed</title>
+    <link href="https://www.grants.gov/search-results-detail/363728"/>
+    <id>urn:funding-finder:grants-gov:363728</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>National Park Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <summary>National Park Service | Closes 2026-11-04 | Goal: Encourage outdoor recreation and natural, historical, and cultural tourism that expands access to and awareness of the Chesapeake Bay watershed and fosters economic development of communities. ObjectivesNPS Chesapeake Gateways is offering this competitive grant opportunity to strengthen a community's ability to offer or enhance outdoor recreation and natural, historical, and cultural tourism…</summary>
   </entry>
   <entry>
     <title>Mission Australia APS, 2026</title>
@@ -336,16 +346,6 @@
     <summary>Administration for Children and Families - ORR | Closes 2026-09-17 | This NOFO is modified. Changes are made to Step 1: Review the Opportunity and Step 2: Get Ready to Apply. The disqualifying factors section has been updated to clarify that applications from organizations currently funded by ORR to support Program of Initial Resettlement services will be disqualified, including organizations receiving PIR funding through subaward. The webinar description has been …</summary>
   </entry>
   <entry>
-    <title>DRL Transshipment Supply Chain Tracing</title>
-    <link href="https://www.grants.gov/search-results-detail/363397"/>
-    <id>urn:funding-finder:grants-gov:363397</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | DRL solicits proposals of up to $1,973,359 that aim to strengthen the ability of the United States and partner countries with ARTs to detect and disrupt transshipment practices that evade U.S. laws that prohibit the importation of goods made with forced labor and/or other country’s forced labor import prohibitions.</summary>
-  </entry>
-  <entry>
     <title>NATIVE Act Tribal Tourism Cooperative Agreement</title>
     <link href="https://www.grants.gov/search-results-detail/363399"/>
     <id>urn:funding-finder:grants-gov:363399</id>
@@ -354,30 +354,6 @@
     <category term="Arts and culture"/>
     <category term="Community development"/>
     <summary>Bureau of Indian Affairs | Closes 2026-08-28 | The NATIVE Act cooperative agreement will support Tribal Tourism Grant Program (TTGP) and Office of Native Hawaiian Relations (ONHR) applicants, which is comprised of Tribes, Tribal organizations, and Native Hawaiian organizations, by identifying technical assistance needs and delivering targeted capacity-building support to expand cultural heritage tourism and increase visitation. The selected re…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Labor Rights in the Garment Industry</title>
-    <link href="https://www.grants.gov/search-results-detail/363387"/>
-    <id>urn:funding-finder:grants-gov:363387</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | The program will strengthen labor rights protections consistent with labor rights commitments and support labor rights reforms in strategic partner countries with existing Agreements on Reciprocal Trade (ARTs). This program will support garment workers to help them better understand and exercise their labor rights, freely associate, and access timely, non-retaliatory remedies for workplace abuses …</summary>
-  </entry>
-  <entry>
-    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
-    <link href="https://www.grants.gov/search-results-detail/361908"/>
-    <id>urn:funding-finder:grants-gov:361908</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
@@ -469,7 +445,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-27 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-28 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
   <entry>
     <title>Annual Program Statement for U.S. Presentation at International Architecture Biennales</title>
@@ -654,5 +630,25 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Closes 2029-05-07 | The purpose of this notice of funding opportunity (NOFO) is to provide investigators with a mechanism to request services from the state-of-the-art Biological Testing Facility that would advance their contraceptive development or reproductive health programs. This NOFO aims to position innovative and validated methods for future regulatory submission and/or clinical development. Applicants do not …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Instrumentation Grant Program for Resource-Limited Institutions (S10 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360364"/>
+    <id>urn:funding-finder:grants-gov:360364</id>
+    <updated>2026-05-27T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2029-01-26 | The Instrumentation Grant Program for Resource-Limited Institutions supports the purchase of state-of-the-art scientific instruments to enhance the research and educational missions of resource-limited institutions. Requested instruments may support biomedical research and education in basic, translational, biomedically-related behavioral or clinical fields. This is a Notice of Funding Opportunity…</summary>
+  </entry>
+  <entry>
+    <title>Assessing the Feasibility of Incorporating Mechanisms in Multisite Clinical Trials of Mind and Body Interventions on Whole Person Health Restoration</title>
+    <link href="https://www.grants.gov/search-results-detail/359941"/>
+    <id>urn:funding-finder:grants-gov:359941</id>
+    <updated>2026-05-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Institutes of Health | Closes 2026-10-15 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support multi-site feasibility studies of mind and body interventions (e.g., meditation, yoga, acupuncture, music, or multicomponent interventions) on whole person health restoration. The goal of this NOFO is to establish foundational work necessary to inform and enable…</summary>
   </entry>
 </feed>

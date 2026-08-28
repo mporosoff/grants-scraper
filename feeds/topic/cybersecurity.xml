@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,29 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363723"/>
+    <id>urn:funding-finder:grants-gov:363723</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Zimbabwe</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Zimbabwe | Closes 2026-09-13 | 1. Project Background, Goals, and Objectives The Public Diplomacy Section invites proposals for programs that support one of the following U.S. Embassy priority program areas listed below. Applicants are strongly encouraged to propose collaborative approaches and programs that integrate multiple priority areas. Priority Program Areas/Goals: Applicants may submit a proposal to address one of the pr…</summary>
+  </entry>
+  <entry>
+    <title>FYs 2024 through 2026 - Promoting Resilient Operations for Transformative, Efficient, and Cost-saving Transportation (PROTECT) Competitive Grant Program Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/363732"/>
+    <id>urn:funding-finder:grants-gov:363732</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>DOT Federal Highway Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>DOT Federal Highway Administration | Closes 2026-10-09 | The intent of the PROTECT Competitive Grant Program is to fund projects to improve the resilience of the surface transportation system, including highways, public transportation, ports, and intercity passenger rail. Program goals include protecting: surface transportation assets by making them more resilient; communities through resilience improvements and strategies that allow for the continued o…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 National Urban Search and Rescue Response System</title>
@@ -495,7 +518,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-27 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-28 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Expanding Nutrition Services</title>
@@ -695,24 +718,5 @@
     <category term="Public health"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2026-10-03 | The National Institute on Deafness and Other Communication Disorders (NIDCD) invites applications for Clinical Research Center Grants designed to advance the diagnosis, prevention, treatment, and amelioration of human sensory and communication disorders. For this announcement, Clinical Research is defined as research involving individuals with a sensory and/or communication disorder, or data/tissu…</summary>
-  </entry>
-  <entry>
-    <title>Stimulating Access to Research in Residency (StARR) (R38 Independent Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359130"/>
-    <id>urn:funding-finder:grants-gov:359130</id>
-    <updated>2025-08-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-01-10 | The overall goal of the Stimulating Access to Research in Residency (StARR) program is to provide resident clinicians in training with in-depth research experiences early in their careers, in order to recruit, retain and accelerate independence of a pool of clinician-investigators with both clinical and research experience necessary to perform basic, clinical and/or translational research.</summary>
-  </entry>
-  <entry>
-    <title>Native American Research Centers for Health (NARCH) Planning Grants (R34 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359146"/>
-    <id>urn:funding-finder:grants-gov:359146</id>
-    <updated>2025-08-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-07-07 | The purpose of the Native American Research Centers for Health (NARCH) Planning Grants program is to support federally recognized American Indian/Alaska Native (AI/AN) Tribes, Tribal colleges and universities, Tribal health programs, or Tribal organizations (collectively, eligible AI/AN Tribal entities) to plan and conduct preparatory work for developing competitive NARCH applications.</summary>
   </entry>
 </feed>

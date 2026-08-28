@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -25,6 +25,7 @@
     <author><name>Bureau of Near Eastern Affairs</name></author>
     <category term="Community development"/>
     <category term="Manufacturing"/>
+    <category term="Materials science"/>
     <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
@@ -35,9 +36,6 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
     <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
   </entry>
   <entry>
@@ -47,8 +45,6 @@
     <updated>2026-08-21T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
   </entry>
   <entry>
@@ -272,26 +268,6 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>Foreign Agricultural Service | Closes 2026-09-02 | Fertilize Right Vietnam (FR Vietnam) is a program implemented by USDA/FAS since 2023. USDA’s official partner is the Ministry of Agriculture and Environment (MAE) and an implementing partner from an international agricultural research organization. The objectives of FR Vietnam are to (1) increase fertilizer-use efficiency, (2) enhance fertilizer effectiveness, and (3) develop alternatives to tradi…</summary>
-  </entry>
-  <entry>
-    <title>DRL Transshipment Supply Chain Tracing</title>
-    <link href="https://www.grants.gov/search-results-detail/363397"/>
-    <id>urn:funding-finder:grants-gov:363397</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | DRL solicits proposals of up to $1,973,359 that aim to strengthen the ability of the United States and partner countries with ARTs to detect and disrupt transshipment practices that evade U.S. laws that prohibit the importation of goods made with forced labor and/or other country’s forced labor import prohibitions.</summary>
-  </entry>
-  <entry>
-    <title>Advancing Labor Rights in the Garment Industry</title>
-    <link href="https://www.grants.gov/search-results-detail/363387"/>
-    <id>urn:funding-finder:grants-gov:363387</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-27 | The program will strengthen labor rights protections consistent with labor rights commitments and support labor rights reforms in strategic partner countries with existing Agreements on Reciprocal Trade (ARTs). This program will support garment workers to help them better understand and exercise their labor rights, freely associate, and access timely, non-retaliatory remedies for workplace abuses …</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
@@ -778,5 +754,33 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+  </entry>
+  <entry>
+    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
+    <link href="https://www.grants.gov/search-results-detail/351715"/>
+    <id>urn:funding-finder:grants-gov:351715</id>
+    <updated>2024-01-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Climate change"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+  </entry>
+  <entry>
+    <title>Joint Center of Excellence for Advanced Materials Research</title>
+    <link href="https://www.grants.gov/search-results-detail/39841"/>
+    <id>urn:funding-finder:grants-gov:39841</id>
+    <updated>2023-11-01T00:00:00Z</updated>
+    <author><name>FAA-COE-JAMS</name></author>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <category term="Transportation"/>
+    <summary>FAA-COE-JAMS | Posted | The Joint Center of Excellence (COE) for Advanced Materials (JAMS) was established in January 2004 to assist in ensuring the safe and reliable application of composites and advanced materials to commercial aircraft. The Center is a joint effort of the Center of Excellence for Composite and Advanced Materials (CECAM) led by Wichita State University and the Center of Excellence for Advanced Material…</summary>
   </entry>
 </feed>

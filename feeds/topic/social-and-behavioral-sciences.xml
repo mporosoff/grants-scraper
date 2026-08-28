@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -321,27 +321,6 @@
     <summary>Bureau of Consular Affairs | Closes 2026-09-16 | Through this cooperative agreement, the Office of Children’s Issues seeks to fund one research study whose goal is to better understand how international parental child abduction (IPCA) affects abducted children and their left-behind parents in order to better support impacted individuals, their families, and their communities in the United States. The study objectives are: 1) identify short- and …</summary>
   </entry>
   <entry>
-    <title>FY26 Safer Outcomes Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363260"/>
-    <id>urn:funding-finder:grants-gov:363260</id>
-    <updated>2026-07-21T00:00:00Z</updated>
-    <author><name>Community Oriented Policing Services</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Community Oriented Policing Services | Closes 2026-08-27 | The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. This is a notice of funding opportuni…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 DRUG COURT TRAINING AND TECHNICAL ASSISTANCE COMPETITIVE COOPERATIVE AGREEMENT SOLICITATION</title>
-    <link href="https://www.grants.gov/search-results-detail/363191"/>
-    <id>urn:funding-finder:grants-gov:363191</id>
-    <updated>2026-07-15T00:00:00Z</updated>
-    <author><name>Office of National Drug Control Policy</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Office of National Drug Control Policy | Closes 2026-08-27 | ONDCP’s Drug Court Training and Technical Assistance Cooperative Agreement supports training and technical assistance (TTA) to ensure access to evidence-based addiction treatment through drug courts, including when substance use disorder co-occurs with other mental healthconditions. ONDCP seeks to reduce drug use and its consequences through evidence-based treatment that leads to long-term recover…</summary>
-  </entry>
-  <entry>
     <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
     <link href="https://www.grants.gov/search-results-detail/363101"/>
     <id>urn:funding-finder:grants-gov:363101</id>
@@ -650,5 +629,30 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
+  </entry>
+  <entry>
+    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
+    <link href="https://www.grants.gov/search-results-detail/361008"/>
+    <id>urn:funding-finder:grants-gov:361008</id>
+    <updated>2025-12-12T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
+  </entry>
+  <entry>
+    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/359155"/>
+    <id>urn:funding-finder:grants-gov:359155</id>
+    <updated>2025-09-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>
