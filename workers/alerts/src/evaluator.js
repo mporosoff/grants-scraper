@@ -321,6 +321,7 @@ async function deliveryCapabilityLinks(env, event) {
 
 export async function dispatchNotifications({
   store, provider, env, now = new Date(), weekly = false, limit = null,
+  eligibleBefore = null,
 }) {
   if (String(env.OUTBOUND_EMAIL_ENABLED || "").toLowerCase() !== "true") {
     return { attemptedCount: 0, deliveredCount: 0, failedCount: 0 };
@@ -337,7 +338,9 @@ export async function dispatchNotifications({
   let deliveredCount = 0;
   let failedCount = 0;
   const batches = weekly
-    ? await store.pendingDigestEvents(now.toISOString(), remaining, DIGEST_MAX_EVENTS)
+    ? await store.pendingDigestEvents(
+        now.toISOString(), remaining, DIGEST_MAX_EVENTS, eligibleBefore,
+      )
     : [
         ...reconciliation,
         ...pending.slice(0, Math.max(0, remaining - reconciliation.length))

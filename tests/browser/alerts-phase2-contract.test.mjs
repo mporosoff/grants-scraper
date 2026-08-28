@@ -12,7 +12,9 @@ import { digestEmail, eventEmail } from "../../workers/alerts/src/email.js";
 import {
   DIGEST_MAX_EVENTS, dispatchNotifications, dispatchVerificationDeliveries, evaluateSubscriptions,
 } from "../../workers/alerts/src/evaluator.js";
-import { createHandler, createScheduledHandler } from "../../workers/alerts/src/index.js";
+import {
+  createHandler, createScheduledHandler, weeklyDigestEligibilityCutoff,
+} from "../../workers/alerts/src/index.js";
 import { MockEmailProvider, ResendEmailProvider } from "../../workers/alerts/src/provider.js";
 import { D1AlertStore, RETENTION_DAYS } from "../../workers/alerts/src/store.js";
 import {
@@ -2091,6 +2093,49 @@ test("retry triggers do not collide with a recent running daily evaluation", asy
   assert.equal(result.status, "completed_skipped_daily_in_progress");
   assert.equal(deliveryQueries, 0);
   assert.deepEqual(finished, result);
+});
+
+test("retry runs drain due weekly overflow without sending the new week's events", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "weekly" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  await store.enqueueEvent({
+    id: "weekly-due", subscriptionId: "watch-1", eventKey: "weekly-due",
+    eventKind: "amended", opportunityId: "due", payload: { title: "Due update" },
+    createdAt: "2026-09-06T16:00:00.000Z",
+  });
+  await store.enqueueEvent({
+    id: "weekly-new", subscriptionId: "watch-1", eventKey: "weekly-new",
+    eventKind: "amended", opportunityId: "new", payload: { title: "New-week update" },
+    createdAt: "2026-09-07T11:00:00.000Z",
+  });
+  const current = new Date("2026-09-07T12:00:00.000Z");
+  assert.equal(weeklyDigestEligibilityCutoff(current), "2026-09-06T23:59:59.999Z");
+  assert.equal(
+    weeklyDigestEligibilityCutoff(new Date("2026-09-06T13:14:59.999Z")),
+    "2026-08-30T23:59:59.999Z",
+  );
+  const provider = new MockEmailProvider();
+  const scheduled = createScheduledHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    assetLoader: async () => { throw new Error("an ordinary retry must not load assets"); },
+    now: () => current,
+  });
+  const controller = { scheduledTime: current.getTime(), cron: "2-57/5 * * * *" };
+  const result = await scheduled(controller, env);
+  const duplicate = await scheduled(controller, env);
+  assert.equal(result.runKind, "retry");
+  assert.equal(result.deliveredCount, 1);
+  assert.equal(duplicate.status, "duplicate_skipped");
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual(all(
+    database, "SELECT id,status FROM notification_events ORDER BY id",
+  ).map(row => ({ ...row })), [
+    { id: "weekly-due", status: "sent" },
+    { id: "weekly-new", status: "queued" },
+  ]);
 });
 
 test("an exact manual daily scheduled test is idempotent and executes its candidate once", async () => {

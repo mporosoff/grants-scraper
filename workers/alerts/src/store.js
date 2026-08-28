@@ -348,16 +348,19 @@ export class D1AlertStore {
     ).bind(now, staleBefore, cadence, limit).all());
   }
 
-  async pendingDigestEvents(now, subscriberLimit, eventLimit) {
+  async pendingDigestEvents(now, subscriberLimit, eventLimit, eligibleBefore = null) {
     const staleBefore = staleClaimCutoff(now);
+    const cutoff = eligibleBefore || null;
     const subscribers = rows(await this.db.prepare(
-      "SELECT s.subscriber_id, MIN(n.created_at) AS first_created_at FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND u.suppressed_at IS NULL GROUP BY s.subscriber_id ORDER BY first_created_at, s.subscriber_id LIMIT ?",
-    ).bind(now, staleBefore, subscriberLimit).all());
+      "SELECT s.subscriber_id, MIN(n.created_at) AS first_created_at FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (? IS NULL OR n.created_at <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND u.suppressed_at IS NULL GROUP BY s.subscriber_id ORDER BY first_created_at, s.subscriber_id LIMIT ?",
+    ).bind(now, staleBefore, cutoff, cutoff, subscriberLimit).all());
     const batches = [];
     for (const subscriber of subscribers) {
       const eligible = rows(await this.db.prepare(
-        "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND s.subscriber_id = ? AND u.suppressed_at IS NULL ORDER BY n.created_at, n.id LIMIT ?",
-      ).bind(now, staleBefore, subscriber.subscriber_id, eventLimit + 1).all());
+        "SELECT n.*, s.type, s.cadence, s.definition_json, s.subscriber_id, u.email, u.manage_token FROM notification_events n JOIN subscriptions s ON s.id = n.subscription_id JOIN subscribers u ON u.id = s.subscriber_id WHERE n.message_kind = 'notification' AND n.terminal_at IS NULL AND COALESCE(n.error_code, '') <> 'provider_outcome_reconcile' AND ((n.status IN ('queued', 'failed') AND n.next_attempt_at <= ?) OR (n.status = 'sending' AND n.claimed_at IS NOT NULL AND n.claimed_at <= ?)) AND (? IS NULL OR n.created_at <= ?) AND s.active = 1 AND s.verified_at IS NOT NULL AND s.cadence = 'weekly' AND s.subscriber_id = ? AND u.suppressed_at IS NULL ORDER BY n.created_at, n.id LIMIT ?",
+      ).bind(
+        now, staleBefore, cutoff, cutoff, subscriber.subscriber_id, eventLimit + 1,
+      ).all());
       if (eligible.length) batches.push({
         events: eligible.slice(0, eventLimit),
         hasOverflow: eligible.length > eventLimit,

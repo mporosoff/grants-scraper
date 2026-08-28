@@ -446,6 +446,21 @@ export function createHandler({
   };
 }
 
+export function weeklyDigestEligibilityCutoff(now) {
+  const value = new Date(now);
+  if (!Number.isFinite(value.getTime())) throw new TypeError("A valid digest cutoff time is required.");
+  const sundayStart = Date.UTC(
+    value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate() - value.getUTCDay(),
+    13, 15, 0, 0,
+  );
+  const eligibleSunday = value.getTime() < sundayStart
+    ? sundayStart - (7 * 86_400_000)
+    : sundayStart;
+  const cutoff = new Date(eligibleSunday);
+  cutoff.setUTCHours(23, 59, 59, 999);
+  return cutoff.toISOString();
+}
+
 export function createScheduledHandler({
   storeFactory = env => new D1AlertStore(env.ALERTS_DB),
   providerFactory = (env, fetchImpl) => createEmailProvider(env, fetchImpl),
@@ -584,12 +599,16 @@ export function createScheduledHandler({
         }),
         2 * 60_000,
       );
-      if ((runKind === "daily" || runKind === "continuation")
-        && !continuationRequired && current.getUTCDay() === 0) {
+      const weeklyDue = !continuationRequired && typeof store.pendingDigestEvents === "function" && (
+        runKind === "retry"
+        || ((runKind === "daily" || runKind === "continuation") && current.getUTCDay() === 0)
+      );
+      if (weeklyDue) {
         weekly = await stage(
           "weekly_delivery",
           () => dispatchNotifications({
             store, provider, env, now: current, weekly: true, limit: deliveryBatch,
+            eligibleBefore: weeklyDigestEligibilityCutoff(current),
           }),
           2 * 60_000,
         );
