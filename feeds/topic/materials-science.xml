@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -16,6 +16,17 @@
     <summary>National Institutes of Health | Closes 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
   </entry>
   <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363722"/>
+    <id>urn:funding-finder:grants-gov:363722</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
+  </entry>
+  <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
     <link href="https://www.grants.gov/search-results-detail/363215"/>
     <id>urn:funding-finder:grants-gov:363215</id>
@@ -23,9 +34,6 @@
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
     <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
   </entry>
   <entry>

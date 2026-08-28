@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -76,6 +76,31 @@
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
+    <title>Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363723"/>
+    <id>urn:funding-finder:grants-gov:363723</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Zimbabwe</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Zimbabwe | Closes 2026-09-13 | 1. Project Background, Goals, and Objectives The Public Diplomacy Section invites proposals for programs that support one of the following U.S. Embassy priority program areas listed below. Applicants are strongly encouraged to propose collaborative approaches and programs that integrate multiple priority areas. Priority Program Areas/Goals: Applicants may submit a proposal to address one of the pr…</summary>
+  </entry>
+  <entry>
+    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
+    <link href="https://www.grants.gov/search-results-detail/363724"/>
+    <id>urn:funding-finder:grants-gov:363724</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
+  </entry>
+  <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
     <link href="https://www.grants.gov/search-results-detail/363720"/>
     <id>urn:funding-finder:grants-gov:363720</id>
@@ -101,43 +126,9 @@
     <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
   </entry>
   <entry>
-    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363215"/>
-    <id>urn:funding-finder:grants-gov:363215</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
-  </entry>
-  <entry>
     <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
     <link href="https://www.grants.gov/search-results-detail/363531"/>
     <id>urn:funding-finder:grants-gov:363531</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
-  </entry>
-  <entry>
-    <title>Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing</title>
-    <link href="https://www.grants.gov/search-results-detail/363214"/>
-    <id>urn:funding-finder:grants-gov:363214</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
-  </entry>
-  <entry>
-    <title>Supporting Implementation of the Labor Provisions of Trade Arrangements for American Worker Competitiveness</title>
-    <link href="https://www.grants.gov/search-results-detail/363212"/>
-    <id>urn:funding-finder:grants-gov:363212</id>
     <updated>2026-08-21T00:00:00Z</updated>
     <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Artificial intelligence and machine learning"/>
@@ -615,18 +606,6 @@
     <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
   </entry>
   <entry>
-    <title>AI3 Action Institute - Artificial Intelligence for American Indians</title>
-    <link href="https://www.grants.gov/search-results-detail/362270"/>
-    <id>urn:funding-finder:grants-gov:362270</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Data science"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA) anticipates announcing the availability of funds and requesting applications for the AI3 Action Institute - Artificial Intelligence for American Indians. The successful applicant will establish the AI3 Action Institute, which will monitor the pace of AI change, identify responsible and practical opportunities to apply this technology to socioeconomic d…</summary>
-  </entry>
-  <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
     <link href="https://www.grants.gov/search-results-detail/363385"/>
     <id>urn:funding-finder:grants-gov:363385</id>
@@ -676,45 +655,6 @@
     <summary>Office of Naval Research | Closes 2026-11-06 | In accordance with EO 14332, Improving Oversight of Federal Grantmaking, dated 7 August 2025, and EO 14303, Restoring Gold Standard Science, dated 23 May 2025, this Announcement seeksproposals from universities to purchase equipment and instrumentation in support of research in areas of interest to the DoW, reflecting the basic research priorities for the Department of War and advancing the admini…</summary>
   </entry>
   <entry>
-    <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
-    <link href="https://www.grants.gov/search-results-detail/363347"/>
-    <id>urn:funding-finder:grants-gov:363347</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Mexico</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Mexico | Closes 2026-08-27 | The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
-  </entry>
-  <entry>
-    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
-    <link href="https://www.grants.gov/search-results-detail/361908"/>
-    <id>urn:funding-finder:grants-gov:361908</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
-  </entry>
-  <entry>
-    <title>National Center for Native Training and Technical Assistance (the Center)</title>
-    <link href="https://www.grants.gov/search-results-detail/361960"/>
-    <id>urn:funding-finder:grants-gov:361960</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans (ANA), announces funds for a National Center for Native Training and Technical Assistance (the Center). The Center will be ANA"s primary provider of training and technical assistance (TTA). The goal is to build the capacity of ANA applicants and recipients to implement successful strategies and facilitate sustainable and successful outcomes that strengthen N…</summary>
-  </entry>
-  <entry>
     <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
     <link href="https://www.grants.gov/search-results-detail/363315"/>
     <id>urn:funding-finder:grants-gov:363315</id>
@@ -753,5 +693,67 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
+  </entry>
+  <entry>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.14 Atmosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363240"/>
+    <id>urn:funding-finder:grants-gov:363240</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-10-20 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
+  </entry>
+  <entry>
+    <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
+    <link href="https://www.grants.gov/search-results-detail/363179"/>
+    <id>urn:funding-finder:grants-gov:363179</id>
+    <updated>2026-07-14T00:00:00Z</updated>
+    <author><name>National Telecommunications and Information Admini</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Research</title>
+    <link href="https://www.grants.gov/search-results-detail/363084"/>
+    <id>urn:funding-finder:grants-gov:363084</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Endowment for the Humanities | Closes 2026-09-16 | The program supports groups of two or more scholars increasing humanistic knowledge through the preparation of a manuscript for print publication, the creation of a scholarly digital project, or the planning of an international collaboration. Projects must pursue significant research questions and lead toward an interpretive product. This year’s competition is limited to projects on American histo…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
 </feed>

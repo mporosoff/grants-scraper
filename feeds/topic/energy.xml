@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -38,19 +38,6 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>Fish and Wildlife Service | Closes 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
-  </entry>
-  <entry>
-    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363215"/>
-    <id>urn:funding-finder:grants-gov:363215</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
@@ -321,20 +308,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
-  </entry>
-  <entry>
-    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
-    <link href="https://www.grants.gov/search-results-detail/361908"/>
-    <id>urn:funding-finder:grants-gov:361908</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
@@ -687,5 +660,32 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
+    <link href="https://www.grants.gov/search-results-detail/362478"/>
+    <id>urn:funding-finder:grants-gov:362478</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Maritime Administration</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Cybersecurity"/>
+    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -207,6 +207,28 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+  </entry>
+  <entry>
+    <title>Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363723"/>
+    <id>urn:funding-finder:grants-gov:363723</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>U.S. Mission to Zimbabwe</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <summary>U.S. Mission to Zimbabwe | Closes 2026-09-13 | 1. Project Background, Goals, and Objectives The Public Diplomacy Section invites proposals for programs that support one of the following U.S. Embassy priority program areas listed below. Applicants are strongly encouraged to propose collaborative approaches and programs that integrate multiple priority areas. Priority Program Areas/Goals: Applicants may submit a proposal to address one of the pr…</summary>
+  </entry>
+  <entry>
+    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
+    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
   </entry>
   <entry>
     <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
@@ -465,20 +487,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
-    <title>Building Skills, Strengthening Communities, and Advancing Innovation in Northwest Mexico</title>
-    <link href="https://www.grants.gov/search-results-detail/363347"/>
-    <id>urn:funding-finder:grants-gov:363347</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Mexico</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Mexico | Closes 2026-08-27 | The Public Diplomacy Sections of the U.S. Consulates General Tijuana, Nogales, and Hermosillo announce an open competition for programs that strengthen workforce readiness, promote safe border communities, and support a transparent and innovative information ecosystem in northwest Mexico. This Notice of Funding Opportunity (NOFO) seeks merit-based proposals that equip Mexican educators, youth, and…</summary>
-  </entry>
-  <entry>
     <title>American Corners Portugal Operational Funding</title>
     <link href="https://www.grants.gov/search-results-detail/363340"/>
     <id>urn:funding-finder:grants-gov:363340</id>
@@ -671,16 +679,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
-  </entry>
-  <entry>
-    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359644"/>
-    <id>urn:funding-finder:grants-gov:359644</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
   </entry>
 </feed>

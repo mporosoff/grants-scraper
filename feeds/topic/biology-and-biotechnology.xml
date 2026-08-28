@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -333,6 +333,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+  </entry>
+  <entry>
+    <title>SEFSC Bluefin Tuna Research Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363729"/>
+    <id>urn:funding-finder:grants-gov:363729</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
   </entry>
   <entry>
     <title>Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado</title>
@@ -674,18 +684,5 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
-  </entry>
-  <entry>
-    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359152"/>
-    <id>urn:funding-finder:grants-gov:359152</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
 </feed>

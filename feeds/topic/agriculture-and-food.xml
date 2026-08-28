@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -324,20 +324,6 @@
     <summary>Agricultural Marketing Service | Closes 2026-10-02 | The purpose of SPMGP is to support projects that strengthen and enhance the production and marketing of sheep and sheep products in the United States. This includes improving infrastructure, business, and resource development, and the development of innovative approaches to solve long-term needs. The SPMGP seeks to develop solutions for practical problems across the United States and address the n…</summary>
   </entry>
   <entry>
-    <title>Economic Advancement Grants for Local Empowerment (EAGLE)</title>
-    <link href="https://www.grants.gov/search-results-detail/361908"/>
-    <id>urn:funding-finder:grants-gov:361908</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - ANA</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <summary>Administration for Children and Families - ANA | Closes 2026-08-27 | The Administration for Native Americans anticipates announcing the availability of funds and requesting applications for EAGLE: Economic Advancement Grants for Local Empowerment, supporting socioeconomic and cultural success for Native communities through business creation in regenerative agriculture, artificial intelligence, tribal energy sovereignty, and human capital development. The primary go…</summary>
-  </entry>
-  <entry>
     <title>Coordinating Agricultural Development &amp; Innovation (CADI) to enable America First Trade Wins in Europe, the South Caucasus and Central Asia</title>
     <link href="https://www.grants.gov/search-results-detail/363359"/>
     <id>urn:funding-finder:grants-gov:363359</id>
@@ -443,7 +429,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-27 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
+    <summary>Food and Drug Administration | Closes 2026-08-28 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
   </entry>
   <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
@@ -694,5 +680,16 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
+  </entry>
+  <entry>
+    <title>NARMS Cooperative Agreement Program to Strengthen Antibiotic Resistance Surveillance in Retail Food Specimens</title>
+    <link href="https://www.grants.gov/search-results-detail/360006"/>
+    <id>urn:funding-finder:grants-gov:360006</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>Food and Drug Administration | Closes 2027-04-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
   </entry>
 </feed>

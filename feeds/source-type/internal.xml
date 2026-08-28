@@ -4,8 +4,33 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-08-27T20:34:55Z</updated>
+  <updated>2026-08-28T21:17:09Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
+    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>Simons Foundation</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>Simons Foundation</name></author>
+    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+  </entry>
+  <entry>
+    <title>DOD Office of Naval Research (ONR) FY27 Young Investigator Program (YIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363632"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0e50b8deed73ddc7</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-30</summary>
+  </entry>
   <entry>
     <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
     <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
@@ -38,14 +63,6 @@
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>DEFENSE ADVANCED RESEARCH PROJECTS AGENCY (DARPA)</title>
-    <link href="https://sam.gov/opp/a269e0efc8614bf5b9ea6628ae5f1ad7/view"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-a63ebf170f822213</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-08-27</summary>
   </entry>
   <entry>
     <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
