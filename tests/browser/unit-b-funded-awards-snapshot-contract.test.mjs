@@ -315,17 +315,17 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(config, /"cpu_ms": 250/);
 });
 
-test("the integrated A-C browser release uses one fresh cache key for every changed served asset", async () => {
-  const [fundedAwards, fundingFinder, teamMatch, finderRuntime, releaseManifest] = await Promise.all([
+test("the integrated A-C browser release uses coherent cache keys for every changed served asset", async () => {
+  const [fundedAwards, fundingFinder, teamMatch, appStyle, finderRuntime, releaseManifest] = await Promise.all([
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("team_match.html", root), "utf8"),
+    readFile(new URL("assets/app.css", root)),
     readFile(new URL("assets/app.js", root)),
     readFile(new URL("data/search-v2-release.json", root), "utf8").then(JSON.parse),
   ]);
   const releaseKey = "post-phase4-abc-20260829";
   for (const asset of [
-    "app.css",
     "alerts.css",
     "institutional-intelligence.css",
     "ai-provider.js",
@@ -334,14 +334,20 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
     "institutional-intelligence-core.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=post-phase4-abc-evidence-20260829/);
-  for (const asset of ["app.css", "alerts.css", "ai-provider.js", "alerts.js"])
+  for (const asset of ["alerts.css", "ai-provider.js", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  const styleSha256 = createHash("sha256").update(appStyle).digest("hex");
+  const styleCacheKey = `app-css-${styleSha256.slice(0, 16)}`;
+  for (const page of [fundedAwards, fundingFinder, teamMatch]) {
+    assert.match(page, new RegExp(`app\\.css\\?v=${styleCacheKey}`));
+  }
+  assert.equal(releaseManifest.runtime_cache_keys["assets/app.css"], styleCacheKey);
+  assert.equal(releaseManifest.source_hashes["assets/app.css"], styleSha256);
   const runtimeSha256 = createHash("sha256").update(finderRuntime).digest("hex");
   const runtimeCacheKey = `app-${runtimeSha256.slice(0, 16)}`;
   assert.match(fundingFinder, new RegExp(`assets/app\\.js\\?v=${runtimeCacheKey}`));
   assert.equal(releaseManifest.runtime_cache_keys["assets/app.js"], runtimeCacheKey);
   assert.equal(releaseManifest.source_hashes["assets/app.js"], runtimeSha256);
-  assert.match(teamMatch, new RegExp(`app\\.css\\?v=${releaseKey}`));
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {

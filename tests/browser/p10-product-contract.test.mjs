@@ -10,6 +10,7 @@ const mainHtml = await readFile(new URL("match_explorer.html", root), "utf8");
 const teamHtml = await readFile(new URL("team_match.html", root), "utf8");
 const appSource = await readFile(new URL("assets/app.js", root), "utf8");
 const runtimeSource = await readFile(new URL("assets/subtopic-runtime.js", root), "utf8");
+const teamMatcherSource = await readFile(new URL("assets/team-matcher.js", root), "utf8");
 
 function loadConfig(url, overrides = {}) {
   const parsed = new URL(url);
@@ -217,7 +218,8 @@ test("ORCID provenance and profile-only fallback remain source truthful", () => 
 });
 
 test("Team Matcher uses the shared rollup and a restrained default view", () => {
-  assert.match(teamHtml, /RETRIEVAL_API\.rollupRankedRecords/);
+  assert.match(teamHtml, /MATCHER_API\.rollupTeamMatches/);
+  assert.match(teamMatcherSource, /retrievalApi\.rollupRankedRecords/);
   assert.match(teamHtml, /fits\.slice\(0, 3\)/);
   assert.match(teamHtml, /parts\.slice\(0, maximum \|\| 2\)/);
   assert.match(teamHtml, /teamTopicSummary\(d\.topicMatches\)/);

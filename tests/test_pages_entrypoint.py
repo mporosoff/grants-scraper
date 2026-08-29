@@ -249,8 +249,21 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         release_version = "filters-2026-08-13"
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
-        style_version = "unified-ui-20260825"
-        app_style_version = "post-phase4-abc-20260829"
+        release_manifest = json.loads(
+            (REPOSITORY_ROOT / "data" / "search-v2-release.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        def runtime_cache_key(asset):
+            asset_bytes = (REPOSITORY_ROOT / asset).read_bytes()
+            digest = hashlib.sha256(asset_bytes).hexdigest()
+            self.assertEqual(release_manifest["source_hashes"][asset], digest)
+            key = release_manifest["runtime_cache_keys"][asset]
+            self.assertTrue(key.endswith(digest[:16]))
+            return key
+
+        app_style_version = runtime_cache_key("assets/app.css")
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -293,11 +306,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-query.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-query.js?v={runtime_cache_key("assets/search-query.js")}"></script>',
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-retrieval.js?v={runtime_cache_key("assets/search-retrieval.js")}"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -305,11 +318,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=hajim-panel-ownership-20260829"></script>',
+            f'<script src="./assets/app.js?v={runtime_cache_key("assets/app.js")}"></script>',
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/site-help.js?v={style_version}"></script>',
+            f'<script src="./assets/site-help.js?v={runtime_cache_key("assets/site-help.js")}"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

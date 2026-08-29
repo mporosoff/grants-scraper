@@ -16,32 +16,63 @@ const VECTOR_PATH = "data/search-v2-voyage-vectors.f16";
 const CANARY_PATH = "data/search-v2-voyage-canaries.json";
 const ALLOWLIST_PATH = "workers/search-voyage-proxy/generated/corpus-allowlist.json";
 const RELEASE_PATH = "data/search-v2-release.json";
-const FINDER_PAGE_PATH = "match_explorer.html";
-const FINDER_RUNTIME_PATH = "assets/app.js";
 const WORKER_SOURCE_PATH = "workers/search-voyage-proxy/src/index.js";
 const REQUIRED_MODEL = "voyage-4-lite";
 const REQUIRED_DIMENSION = 1024;
 const execFileAsync = promisify(execFile);
 
+const RUNTIME_ASSETS = [
+  { path: "assets/app.css", prefix: "app-css", pages: ["funded_awards.html", "match_explorer.html", "team_match.html"] },
+  { path: "assets/app.js", prefix: "app", pages: ["match_explorer.html"] },
+  { path: "assets/search-query.js", prefix: "search-query", pages: ["match_explorer.html", "team_match.html"] },
+  { path: "assets/search-retrieval.js", prefix: "search-retrieval", pages: ["match_explorer.html", "team_match.html"] },
+  { path: "assets/hajim-faculty.js", prefix: "hajim-faculty", pages: ["match_explorer.html", "team_match.html"] },
+  { path: "assets/hajim-reverse-match.js", prefix: "hajim-reverse-match", pages: ["match_explorer.html"] },
+  { path: "assets/site-help.js", prefix: "site-help", pages: ["funded_awards.html", "match_explorer.html", "team_match.html"] },
+  { path: "assets/team-researchers.js", prefix: "team-researchers", pages: ["team_match.html"] },
+  { path: "assets/team-match-config.js", prefix: "team-match-config", pages: ["team_match.html"] },
+  { path: "assets/team-matcher.js", prefix: "team-matcher", pages: ["team_match.html"] },
+];
+
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
-async function synchronizeFinderRuntimeCacheKey(write) {
-  const [runtimeBytes, pageText] = await Promise.all([
-    read(FINDER_RUNTIME_PATH),
-    readFile(new URL(FINDER_PAGE_PATH, ROOT), "utf8"),
-  ]);
-  const runtimeSha256 = sha256(runtimeBytes);
-  const cacheKey = `app-${runtimeSha256.slice(0, 16)}`;
-  const pattern = /(\.\/assets\/app\.js\?v=)[^"']+/;
-  if (!pattern.test(pageText)) throw new Error("Funding Finder does not publish a versioned app.js runtime.");
-  const expectedPage = pageText.replace(pattern, `$1${cacheKey}`);
-  if (expectedPage !== pageText) {
-    if (!write) throw new Error("Funding Finder's app.js cache key does not match the runtime content hash.");
-    await writeFile(new URL(FINDER_PAGE_PATH, ROOT), expectedPage, "utf8");
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function synchronizeRuntimeCacheKeys(write) {
+  const pagePaths = [...new Set(RUNTIME_ASSETS.flatMap(asset => asset.pages))];
+  const pageEntries = await Promise.all(pagePaths.map(async path => [
+    path,
+    await readFile(new URL(path, ROOT), "utf8"),
+  ]));
+  const pages = new Map(pageEntries);
+  const cacheKeys = {};
+
+  for (const asset of RUNTIME_ASSETS) {
+    const runtimeSha256 = sha256(await read(asset.path));
+    const cacheKey = `${asset.prefix}-${runtimeSha256.slice(0, 16)}`;
+    cacheKeys[asset.path] = cacheKey;
+    const pattern = new RegExp(`((?:\\./)?${escapeRegex(asset.path)}\\?v=)[^"'\\s<>]+`, "g");
+    for (const pagePath of asset.pages) {
+      const pageText = pages.get(pagePath);
+      const matches = [...pageText.matchAll(pattern)];
+      if (matches.length !== 1) {
+        throw new Error(`${pagePath} must publish exactly one versioned ${asset.path} reference.`);
+      }
+      pages.set(pagePath, pageText.replace(pattern, `$1${cacheKey}`));
+    }
   }
-  return { cacheKey, runtimeSha256 };
+
+  for (const [pagePath, expectedPage] of pages) {
+    const actualPage = pageEntries.find(([path]) => path === pagePath)[1];
+    if (expectedPage === actualPage) continue;
+    if (!write) throw new Error(`${pagePath} runtime cache keys do not match their content hashes.`);
+    await writeFile(new URL(pagePath, ROOT), expectedPage, "utf8");
+  }
+  return { cacheKeys };
 }
 
 async function read(path) {
@@ -206,7 +237,7 @@ async function run() {
   const bootstrapIndex = process.argv.indexOf("--bootstrap-previous");
   const bootstrapRevision = bootstrapIndex >= 0 ? process.argv[bootstrapIndex + 1] : "";
   if (bootstrapIndex >= 0 && !bootstrapRevision) throw new Error("--bootstrap-previous requires a Git revision.");
-  const finderRuntime = await synchronizeFinderRuntimeCacheKey(write);
+  const runtimeAssets = await synchronizeRuntimeCacheKeys(write);
   const bootstrapPromise = bootstrapRevision
     ? execFileAsync("git", ["show", `${bootstrapRevision}:${MANIFEST_PATH}`], { cwd: new URL(".", ROOT) })
       .then(({ stdout }) => JSON.parse(stdout))
@@ -230,13 +261,16 @@ async function run() {
     VECTOR_PATH,
     CANARY_PATH,
     "assets/app-config.js",
-    "assets/app.js",
     "assets/catalog-loader.js",
     "assets/result-workflow.js",
     "assets/search-hybrid.js",
-    "assets/search-retrieval.js",
     "assets/subtopic-runtime.js",
     "assets/team-hybrid.js",
+    ...RUNTIME_ASSETS.map(asset => asset.path),
+    "config/hajim_faculty.json",
+    "data/hajim_faculty_directory.js",
+    "data/faculty_matches.js",
+    "funded_awards.html",
     "match_explorer.html",
     "team_match.html",
     WORKER_SOURCE_PATH,
@@ -253,11 +287,9 @@ async function run() {
     model_space_fingerprint: manifest.model_space_fingerprint || null,
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
-    runtime_cache_keys: {
-      [FINDER_RUNTIME_PATH]: finderRuntime.cacheKey,
-    },
+    runtime_cache_keys: runtimeAssets.cacheKeys,
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-versioned browser runtimes + Hajim faculty projections",
   };
   const releaseBytes = jsonBytes(release);
 

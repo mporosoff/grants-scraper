@@ -6,10 +6,11 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const root = new URL("../../", import.meta.url);
-const [app, searchPage, teamPage, smoke, worker, refreshWorkflow, deployWorkflow, allowlist] = await Promise.all([
+const [app, searchPage, teamPage, teamMatcher, smoke, worker, refreshWorkflow, deployWorkflow, allowlist] = await Promise.all([
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
+  readFile(new URL("assets/team-matcher.js", root), "utf8"),
   readFile(new URL("tools/smoke_search_worker.mjs", root), "utf8"),
   readFile(new URL("workers/search-voyage-proxy/src/index.js", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
@@ -148,7 +149,8 @@ test("Team Match keeps parent-only matching and disables hosted enhancement on s
   assert.match(fallback, /TEAM_HYBRID_COORDINATOR = null/);
   assert.match(fallback, /Parent-level team matching still works/);
   assert.doesNotMatch(fallback, /return;/);
-  assert.match(teamPage, /if \(!CHILD_MATCH_ENGINE \|\| !RETRIEVAL_API \|\| !CHILD_CATALOG\) \{[\s\S]*?return outcome\.results/);
+  assert.match(teamPage, /childEnabled: Boolean\(CHILD_CATALOG && CHILD_MATCH_ENGINE\)/);
+  assert.match(teamMatcher, /if \(!childEnabled\) \{[\s\S]*?return parentResults\.filter/);
   assert.match(teamPage, /id="team-topic-layer-status"/);
 });
 

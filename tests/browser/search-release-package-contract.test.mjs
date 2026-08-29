@@ -17,8 +17,9 @@ const paths = {
   vectorBuilder: new URL("tools/build_search_v2_voyage_vectors.mjs", root),
   packageBuilder: new URL("tools/build_search_release_package.mjs", root),
   workflow: new URL(".github/workflows/refresh-opportunities.yml", root),
+  deployWorkflow: new URL(".github/workflows/deploy-search-package.yml", root),
 };
-const [manifest, vectors, canaries, receipt, release, allowlist, worker, vectorBuilder, packageBuilder, workflow] = await Promise.all([
+const [manifest, vectors, canaries, receipt, release, allowlist, worker, vectorBuilder, packageBuilder, workflow, deployWorkflow] = await Promise.all([
   readFile(paths.manifest, "utf8").then(JSON.parse),
   readFile(paths.vectors),
   readFile(paths.canaries, "utf8").then(JSON.parse),
@@ -29,6 +30,7 @@ const [manifest, vectors, canaries, receipt, release, allowlist, worker, vectorB
   readFile(paths.vectorBuilder, "utf8"),
   readFile(paths.packageBuilder, "utf8"),
   readFile(paths.workflow, "utf8"),
+  readFile(paths.deployWorkflow, "utf8"),
 ]);
 
 function sha256(value) {
@@ -53,6 +55,63 @@ test("release manifest, vector binary, and Worker allowlist identify one current
     release.worker_allowlist_sha256,
     sha256(await readFile(paths.allowlist)),
   );
+});
+
+test("related browser runtimes use manifest-backed content identities on every serving page", async () => {
+  const servingPages = {
+    "assets/app.css": ["funded_awards.html", "match_explorer.html", "team_match.html"],
+    "assets/app.js": ["match_explorer.html"],
+    "assets/search-query.js": ["match_explorer.html", "team_match.html"],
+    "assets/search-retrieval.js": ["match_explorer.html", "team_match.html"],
+    "assets/hajim-faculty.js": ["match_explorer.html", "team_match.html"],
+    "assets/hajim-reverse-match.js": ["match_explorer.html"],
+    "assets/site-help.js": ["funded_awards.html", "match_explorer.html", "team_match.html"],
+    "assets/team-researchers.js": ["team_match.html"],
+    "assets/team-match-config.js": ["team_match.html"],
+    "assets/team-matcher.js": ["team_match.html"],
+  };
+  assert.deepEqual(Object.keys(release.runtime_cache_keys), Object.keys(servingPages));
+  const pageEntries = await Promise.all(
+    [...new Set(Object.values(servingPages).flat())].map(async page => [
+      page,
+      await readFile(new URL(page, root), "utf8"),
+    ]),
+  );
+  const pages = new Map(pageEntries);
+  for (const [asset, pagePaths] of Object.entries(servingPages)) {
+    const digest = sha256(await readFile(new URL(asset, root)));
+    const cacheKey = release.runtime_cache_keys[asset];
+    assert.equal(release.source_hashes[asset], digest);
+    assert.ok(cacheKey.endsWith(digest.slice(0, 16)), `${asset} cache key must derive from its bytes`);
+    for (const pagePath of pagePaths) {
+      assert.match(pages.get(pagePath), new RegExp(`${asset.replaceAll(".", "\\.")}\\?v=${cacheKey}`));
+    }
+  }
+  for (const [pagePath, page] of pages) {
+    assert.equal(release.source_hashes[pagePath], sha256(Buffer.from(page)));
+  }
+});
+
+test("Hajim projections remain one immutable generation inside the coordinated release", async () => {
+  const [directoryBytes, graphBytes, finderPage, teamPage] = await Promise.all([
+    readFile(new URL("data/hajim_faculty_directory.js", root)),
+    readFile(new URL("data/faculty_matches.js", root)),
+    readFile(new URL("match_explorer.html", root), "utf8"),
+    readFile(new URL("team_match.html", root), "utf8"),
+  ]);
+  const assignment = bytes => {
+    const source = bytes.toString("utf8");
+    return JSON.parse(source.slice(source.indexOf("{"), source.lastIndexOf(";")));
+  };
+  const directory = assignment(directoryBytes);
+  const graph = assignment(graphBytes);
+  assert.equal(directory.generation_id, graph.generation_id);
+  assert.deepEqual(directory.projection_fingerprints, graph.projection_fingerprints);
+  assert.equal(release.source_hashes["data/hajim_faculty_directory.js"], sha256(directoryBytes));
+  assert.equal(release.source_hashes["data/faculty_matches.js"], sha256(graphBytes));
+  assert.match(finderPage, new RegExp(`hajim-match-generation" content="${directory.generation_id}`));
+  assert.match(teamPage, new RegExp(`hajim-match-generation" content="${directory.generation_id}`));
+  assert.match(teamPage, new RegExp(`hajim_faculty_directory\\.js\\?v=${directory.generation_id}`));
 });
 
 test("Worker package contains only current and immediately previous corpus generations", () => {
@@ -140,6 +199,21 @@ test("scheduled publication deploys a validated compatibility Worker before one 
     workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),
     /continue-on-error:\s*true/,
   );
+});
+
+test("both Pages publication paths reject mixed runtime and faculty generations", () => {
+  for (const publicationWorkflow of [workflow, deployWorkflow]) {
+    assert.match(publicationWorkflow, /runtime_cache_keys/);
+    assert.match(publicationWorkflow, /source_hashes/);
+    assert.match(publicationWorkflow, /GitHub Pages served mismatched runtime HTML, cache identities, or bytes/);
+    assert.match(publicationWorkflow, /assets\/app\.css\|assets\/site-help\.js/);
+    assert.match(publicationWorkflow, /assets\/search-query\.js\|assets\/search-retrieval\.js\|assets\/hajim-faculty\.js/);
+    assert.match(publicationWorkflow, /data\/hajim_faculty_directory\.js\?v=\$\{faculty_generation\}/);
+    assert.match(publicationWorkflow, /data\/faculty_matches\.js\?v=\$\{faculty_generation\}/);
+  }
+  for (const changedAsset of Object.keys(release.runtime_cache_keys)) {
+    assert.match(deployWorkflow, new RegExp(`- "${changedAsset.replaceAll(".", "\\.")}"`));
+  }
 });
 
 test("release package verification is a deterministic no-write gate", () => {

@@ -7,21 +7,33 @@ on:
     paths:
       - ".github/workflows/deploy-search-package.yml"
       - "assets/app-config.js"
+      - "assets/app.css"
       - "assets/app.js"
       - "assets/catalog-loader.js"
+      - "assets/hajim-faculty.js"
+      - "assets/hajim-reverse-match.js"
       - "assets/match-explain.js"
       - "assets/result-workflow.js"
       - "assets/search-hybrid.js"
+      - "assets/search-query.js"
       - "assets/search-retrieval.js"
       - "assets/search-v2-config.js"
+      - "assets/site-help.js"
       - "assets/subtopic-runtime.js"
       - "assets/team-hybrid.js"
+      - "assets/team-match-config.js"
+      - "assets/team-matcher.js"
+      - "assets/team-researchers.js"
+      - "config/hajim_faculty.json"
       - "config/search_v2.json"
+      - "data/faculty_matches.js"
+      - "data/hajim_faculty_directory.js"
       - "data/search-v2-release.json"
       - "data/catalog-metadata.js"
       - "data/search-v2-voyage-canaries.json"
       - "data/search-v2-voyage-manifest.json"
       - "data/search-v2-voyage-vectors.f16"
+      - "funded_awards.html"
       - "match_explorer.html"
       - "team_match.html"
       - "tools/build_search_release_package.mjs"
@@ -228,6 +240,96 @@ jobs:
             "https://mporosoff.github.io/grants-scraper/${catalog_url#./}" | sha256sum | awk '{print $1}')"
           if [ "$live_catalog_sha" != "$expected_catalog_sha" ]; then
             echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
+            exit 1
+          fi
+          runtime_verified=false
+          for attempt in $(seq 1 18); do
+            live_funded="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/funded_awards.html?runtime=${GITHUB_SHA}" \
+              || true)"
+            live_finder="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/match_explorer.html?runtime=${GITHUB_SHA}" \
+              || true)"
+            live_team="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/team_match.html?runtime=${GITHUB_SHA}" \
+              || true)"
+            coherent=true
+            while IFS=$'\t' read -r asset cache_key expected_sha; do
+              live_sha="$(curl --fail --silent --show-error --max-time 30 \
+                "https://mporosoff.github.io/grants-scraper/${asset}?v=${cache_key}" \
+                | sha256sum | awk '{print $1}' || true)"
+              if [ "$live_sha" != "$expected_sha" ]; then
+                coherent=false
+                break
+              fi
+              case "$asset" in
+                assets/app.css|assets/site-help.js)
+                  grep -Fq "${asset}?v=${cache_key}" <<<"$live_funded" \
+                    && grep -Fq "${asset}?v=${cache_key}" <<<"$live_finder" \
+                    && grep -Fq "${asset}?v=${cache_key}" <<<"$live_team" \
+                    || coherent=false
+                  ;;
+                assets/search-query.js|assets/search-retrieval.js|assets/hajim-faculty.js)
+                  grep -Fq "${asset}?v=${cache_key}" <<<"$live_finder" \
+                    && grep -Fq "${asset}?v=${cache_key}" <<<"$live_team" \
+                    || coherent=false
+                  ;;
+                assets/app.js|assets/hajim-reverse-match.js)
+                  grep -Fq "${asset}?v=${cache_key}" <<<"$live_finder" || coherent=false
+                  ;;
+                assets/team-researchers.js|assets/team-match-config.js|assets/team-matcher.js)
+                  grep -Fq "${asset}?v=${cache_key}" <<<"$live_team" || coherent=false
+                  ;;
+                *)
+                  coherent=false
+                  ;;
+              esac
+              [ "$coherent" = "true" ] || break
+            done < <(jq -r '. as $release | $release.runtime_cache_keys | to_entries[] | [.key, .value, $release.source_hashes[.key]] | @tsv' data/search-v2-release.json)
+            if [ "$coherent" = "true" ]; then
+              runtime_verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$runtime_verified" != "true" ]; then
+            echo "::error::GitHub Pages served mismatched runtime HTML, cache identities, or bytes."
+            exit 1
+          fi
+          faculty_generation="$(sed -n 's/.*<meta name="hajim-match-generation" content="\([a-f0-9]\{64\}\)".*/\1/p' match_explorer.html)"
+          team_faculty_generation="$(sed -n 's/.*<meta name="hajim-match-generation" content="\([a-f0-9]\{64\}\)".*/\1/p' team_match.html)"
+          if [ -z "$faculty_generation" ] || [ "$team_faculty_generation" != "$faculty_generation" ]; then
+            echo "::error::Published pages do not share one valid Hajim faculty generation marker."
+            exit 1
+          fi
+          expected_directory_sha="$(jq -r '.source_hashes["data/hajim_faculty_directory.js"]' data/search-v2-release.json)"
+          expected_graph_sha="$(jq -r '.source_hashes["data/faculty_matches.js"]' data/search-v2-release.json)"
+          faculty_verified=false
+          for attempt in $(seq 1 18); do
+            live_finder="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/match_explorer.html?faculty=${faculty_generation}" \
+              || true)"
+            live_team="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/team_match.html?faculty=${faculty_generation}" \
+              || true)"
+            live_directory_sha="$(curl --fail --silent --show-error --max-time 30 \
+              "https://mporosoff.github.io/grants-scraper/data/hajim_faculty_directory.js?v=${faculty_generation}" \
+              | sha256sum | awk '{print $1}' || true)"
+            live_graph_sha="$(curl --fail --silent --show-error --max-time 30 \
+              "https://mporosoff.github.io/grants-scraper/data/faculty_matches.js?v=${faculty_generation}" \
+              | sha256sum | awk '{print $1}' || true)"
+            if grep -Fq "<meta name=\"hajim-match-generation\" content=\"${faculty_generation}\"" <<<"$live_finder" \
+              && grep -Fq "<meta name=\"hajim-match-generation\" content=\"${faculty_generation}\"" <<<"$live_team" \
+              && grep -Fq "data/hajim_faculty_directory.js?v=${faculty_generation}" <<<"$live_team" \
+              && [ "$live_directory_sha" = "$expected_directory_sha" ] \
+              && [ "$live_graph_sha" = "$expected_graph_sha" ]; then
+              faculty_verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$faculty_verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the coordinated Hajim faculty generation ${faculty_generation}."
             exit 1
           fi
       - name: Run a real provider smoke after Pages propagation
