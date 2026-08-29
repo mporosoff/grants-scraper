@@ -5,6 +5,7 @@ import {
   mockAwards,
   mockAlerts,
   mockHybrid,
+  openAiStructuredResponse,
   openFundingFinder,
   openTeamMatch,
   runFundingSearch,
@@ -40,6 +41,16 @@ test("Funding Finder has no serious or critical violations across critical state
   await expect(page.locator("#search-status")).toHaveAttribute("aria-live", "polite");
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   await scan(page, "funding-initial", testInfo);
+
+  await page.locator(".provider-setup > summary").click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator("#ai-refine")).toBeVisible();
+  await expect(page.locator("#ai-refine")).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funding-ai-setup-mobile", testInfo);
+  await page.locator(".provider-setup > summary").click();
+  await page.setViewportSize({ width: 1280, height: 900 });
 
   const helpButton = page.getByRole("button", { name: "Help" });
   await helpButton.click();
@@ -106,7 +117,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
     status: 200,
     headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify({ output_text: JSON.stringify({
+    body: JSON.stringify(openAiStructuredResponse({
       agency: "DOE",
       program: "BES",
       topic: "",
@@ -116,7 +127,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
       year_end: "",
       answer_intent: "investigators",
       narrative_needed: false,
-    }) }),
+    })),
   }));
   mockAwards(page);
   await page.goto("/funded_awards.html");
@@ -271,8 +282,9 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
-  await expect(page.locator("#ii-source-status")).toContainText("does not support this filter combination");
-  await expect(page.locator("#ii-source-status")).toContainText("Wait before retrying");
+  await expect(page.locator("#ii-source-status")).toContainText("does not support this query shape");
+  await expect(page.locator("#ii-source-status")).toContainText("temporarily unavailable");
+  await expect(page.locator('[data-ii-retry-source="DOE"]')).toBeVisible();
   await expect(page.locator(".ii-award-kicker")).toContainText("Amount not listed");
   await scan(page, "awards-results-mobile", testInfo);
   await page.setViewportSize({ width: 320, height: 720 });

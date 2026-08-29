@@ -20,8 +20,8 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
     assert.match(source, /Potential/i);
     assert.match(source, /hosted|site-managed/i);
   }
-  assert.match(searchPage, /Potential matching sends only that search text and eligible public opportunity passages/);
-  assert.match(searchPage, /Profile, CV, and ORCID text are not sent to that service/);
+  assert.match(help, /submitted search text is sent to the Funding Finder Worker/);
+  assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
   assert.match(help, /User-connected AI tools/);
   assert.match(teamPage, /Enhanced ordering may send a bounded aggregate of selected research keywords and theme labels/);

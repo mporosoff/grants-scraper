@@ -4,6 +4,9 @@
   "main": "src/index.js",
   "compatibility_date": "2026-08-23",
   "workers_dev": true,
+  "limits": {
+    "cpu_ms": 250
+  },
   "vars": {
     "AWARD_API_ENABLED": "true",
     "CACHE_TTL_SECONDS": "3600",

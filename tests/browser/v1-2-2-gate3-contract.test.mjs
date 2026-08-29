@@ -44,13 +44,15 @@ test("custom usage events omit search text and use an origin-only referrer", () 
   assert.match(logger, /referrerPolicy: "origin"/);
   assert.match(logger, /credentials: "omit"/);
   assert.doesNotMatch(logger, /state\.query|INITIAL_URL_PARAMS|location\.search/);
-  for (const source of [searchPage, help, hosting]) {
+  for (const source of [help, hosting]) {
     assert.match(source, /browser history/i);
     assert.match(source, /random session/i);
     assert.match(source, /network organization/i);
     assert.match(source, /Cloudflare Web Analytics/i);
     assert.match(source, /query parameters|no query parameters/i);
   }
+  assert.doesNotMatch(searchPage, /<strong>URLs and anonymous usage:<\/strong>/);
+  assert.doesNotMatch(searchPage, /<strong>What leaves this page:<\/strong>/);
 });
 
 test("deadline display resolves shared citations and falls back from note to quote", () => {

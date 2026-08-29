@@ -1,5 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
+const e2ePort = Number(process.env.E2E_PORT || 8765);
+
 export default defineConfig({
   testDir: "./tests/e2e",
   timeout: 90_000,
@@ -12,16 +14,16 @@ export default defineConfig({
   ],
   outputDir: "test-results/playwright-artifacts",
   use: {
-    baseURL: "http://127.0.0.1:8765",
+    baseURL: `http://127.0.0.1:${e2ePort}`,
     browserName: "chromium",
     headless: true,
     reducedMotion: "reduce",
     trace: "retain-on-failure",
     viewport: { width: 1280, height: 900 },
   },
-  webServer: {
+  webServer: process.env.E2E_EXTERNAL_SERVER === "1" ? undefined : {
     command: "node tests/e2e/static-server.mjs",
-    url: "http://127.0.0.1:8765/match_explorer.html",
+    url: `http://127.0.0.1:${e2ePort}/match_explorer.html`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

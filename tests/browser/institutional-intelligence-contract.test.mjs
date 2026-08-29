@@ -16,7 +16,7 @@ const [
   readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
-  readFile(new URL("assets/institutional-intelligence.js", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
   readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
@@ -231,7 +231,25 @@ test("share URLs round-trip institution and all transparent filters", () => {
     year_start: "2020",
     year_end: "2026",
     offset: 0,
+    snapshot_id: "",
+    page: 1,
+    page_size: 10,
+    facet_type: "all",
+    facet_key: "",
   });
+});
+
+test("share URLs preserve complete opaque program facet keys", () => {
+  const facetKey = `NSF:${"parent ".repeat(45)}:${"child ".repeat(45)}`.trim();
+  assert.ok(facetKey.length > 300);
+  const url = core.urlForState("https://example.test/funded_awards.html", {
+    open: true,
+    snapshot_id: "a".repeat(64),
+    facet_type: "program",
+    facet_key: facetKey,
+  });
+  assert.equal(url.searchParams.get("ii_facet_key"), facetKey);
+  assert.equal(core.stateFromSearch(url.search).facet_key, facetKey);
 });
 
 test("explicitly named investigators survive an incomplete question translation", () => {
@@ -259,6 +277,49 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
+test("snapshot URLs and replacement results have one committed owner", () => {
+  const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
+  assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
+  assert.match(historySource, /requestAnimationFrame\([\s\S]*requestAnimationFrame\([\s\S]*recordCurrentHistoryViewState\(\)/);
+  const syncUrlSource = appSource.slice(appSource.indexOf("function syncUrl("), appSource.indexOf("async function postJson("));
+  assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
+  assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
+
+  const postJsonSource = appSource.slice(appSource.indexOf("async function postJson("), appSource.indexOf("function absorbAwards("));
+  assert.match(postJsonSource, /activeController\.signal\.aborted[\s\S]*activeController = new AbortController\(\)[\s\S]*controller === state\.controller[\s\S]*state\.controller = activeController/);
+
+  const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
+  const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
+  const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
+  const stageIndex = runSearchSource.indexOf("stagedSnapshotResult(");
+  const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
+  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
+  assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
+
+  const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
+  for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
+    assert.match(commitSource, new RegExp(`state\\.${field}`));
+  assert.ok(commitSource.indexOf("renderPage(") > commitSource.indexOf("state.pagePayload ="));
+  assert.ok(commitSource.indexOf("syncUrl(") > commitSource.indexOf("renderPage("));
+
+  const hydrationSource = appSource.slice(appSource.indexOf("async function loadSourceBatch("), appSource.indexOf("async function retrySource("));
+  assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset, snapshotId\)/);
+  assert.match(hydrationSource, /const batchIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === snapshotId[\s\S]*if \(!batchIsCurrent\(\)\) return;[\s\S]*applySourceBatch\(source, batch\)/);
+
+  const facetSource = appSource.slice(appSource.indexOf("function restoreCommittedViewControls("), appSource.indexOf("async function requestSourceBatch("));
+  assert.match(facetSource, /restoreCommittedViewControls\(\)[\s\S]*state\.facet\.type === "investigator"[\s\S]*state\.facet\.type === "program"/);
+  assert.match(facetSource, /async function changeFacet\([\s\S]*catch \(error\)[\s\S]*restoreCommittedViewControls\(\)/);
+  const facetCommitSource = facetSource.slice(facetSource.indexOf("async function changeFacet("));
+  assert.ok(facetCommitSource.indexOf("clearQuestionState();") > facetCommitSource.indexOf("if (!payload) return;"));
+  assert.match(appSource, /"ii-page-size"\)\.addEventListener\("change"[\s\S]*catch\(error => \{[\s\S]*restoreCommittedViewControls\(\)/);
+
+  const answerSource = appSource.slice(appSource.indexOf("async function refreshQuestionAnswer("), appSource.indexOf("async function focusAwardEvidence("));
+  assert.match(answerSource, /const evidencePack = core\.questionEvidencePack\([\s\S]*const evidenceSignature = answerEvidenceSignature\(\);[\s\S]*await ai\.structuredResult\([\s\S]*signature: evidenceSignature/);
+
+  const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
+  assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+});
+
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
@@ -267,22 +328,22 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /id="award-search-form"[^>]*hidden/);
   assert.match(page, /id="ii-program-officer"/);
   assert.match(page, /Structured award search and institution resolution do not require an AI key/);
-  assert.match(page, /assets\/institutional-intelligence\.js/);
+  assert.match(page, /assets\/institutional-intelligence-snapshots\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
   assert.doesNotMatch(page, /Optional institution identity:/);
   assert.match(page, /<select id="ii-investigators"[^>]*aria-labelledby="ii-investigators-heading"/);
   assert.match(page, /<select id="ii-programs"[^>]*aria-labelledby="ii-programs-heading"/);
   assert.doesNotMatch(page, /class="ii-facet-list"/);
   assert.doesNotMatch(appSource, /data-ii-pi=|data-ii-program=/);
-  assert.match(appSource, /SOURCE_LIMITS = Object\.freeze\(\{ NSF: 25, NIH: 25, DOE: 10 \}\)/);
-  assert.match(appSource, /Promise\.allSettled/);
-  assert.match(appSource, /data-ii-load-additional/);
-  assert.doesNotMatch(appSource, /data-ii-load-source/);
-  assert.match(page, /id="ii-card-pagination"[\s\S]*Previous 10 awards[\s\S]*Next 10 awards/);
-  assert.match(appSource, /AWARDS_PER_PAGE = 10/);
+  assert.match(appSource, /snapshotPageUrl/);
+  assert.match(appSource, /data-ii-load-source/);
+  assert.match(appSource, /data-ii-retry-source/);
+  assert.doesNotMatch(appSource, /searchUrl|awards\/search/);
+  assert.match(page, /id="ii-card-pagination"[\s\S]*>Previous<[\s\S]*id="ii-card-page-numbers"[\s\S]*>Next</);
+  assert.match(page, /id="ii-page-size"[\s\S]*value="10"[\s\S]*value="25"[\s\S]*value="50"/);
   assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading \{[\s\S]*display: none/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
-  assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence\.js/);
+  assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence-snapshots\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
   assert.match(styles, /@media \(max-width: 520px\)/);
   assert.match(appSource, /credentials\.loadKey\(provider\)/);
@@ -300,15 +361,15 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
   assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.1\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
-  assert.match(appSource, /Do not answer the question[\s\S]*recommend collaborators[\s\S]*invent facts/);
-  assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program, institutionAliases, plan\.topic\)/);
+  assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(
     appSource.indexOf("async function askQuestion()"),
     appSource.indexOf("function bindEvents()"),
   );
-  assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*\$\("ii-ask-button"\)\.disabled = true;[\s\S]*await resolveTypedInstitution\(\)/);
-  assert.match(askQuestionSource, /finally \{[\s\S]*state\.questionSubmitting = false;[\s\S]*\$\("ii-ask-button"\)\.disabled = false/);
-  assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true \}\)/);
-  assert.match(askQuestionSource, /refreshQuestionAnswer\(\{ allowNarrative: true \}\)/);
+  assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*setBusy\(true\);[\s\S]*await resolveTypedInstitution\(\)/);
+  assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
+  assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*setBusy\(false\)/);
+  assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
+  assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);
   assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);
 });

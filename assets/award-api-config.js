@@ -24,7 +24,11 @@
     baseUrl,
     institutionSearchUrl: new URL("institutions/search", baseUrl).href,
     searchUrl: new URL("awards/search", baseUrl).href,
-    timeoutMs: 45_000,
+    snapshotUrl: new URL("awards/snapshots", baseUrl).href,
+    snapshotPageUrl: new URL("awards/snapshots/page", baseUrl).href,
+    snapshotBatchUrl: new URL("awards/snapshots/batch", baseUrl).href,
+    snapshotRetryUrl: new URL("awards/snapshots/retry", baseUrl).href,
+    timeoutMs: 120_000,
     maxResultsPerSource: 25,
   });
 })();

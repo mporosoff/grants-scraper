@@ -6,6 +6,16 @@ import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
 import { AwardRateLimiter } from "./rate-limit.js";
+import {
+  AWARD_ORDERING_VERSION,
+  SNAPSHOT_BATCH_SIZE,
+  SNAPSHOT_FACET_KEY_MAX_LENGTH,
+  SNAPSHOT_PAGE_SIZES,
+  buildAwardSnapshot,
+  publicSnapshot,
+  snapshotPage,
+  snapshotSourceBatch,
+} from "./snapshot.js";
 import { federalFiscalYear } from "./year-filter.js";
 
 const MAX_REQUEST_BYTES = 16_384;
@@ -13,6 +23,16 @@ const MAX_OFFSET = 1_000;
 const MAX_YEAR_SPAN = 50;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_HEALTH_TIMEOUT_MS = 2_000;
+const WORKER_RESOURCE_BUDGET = Object.freeze({
+  target_plan: "workers-paid",
+  configured_cpu_ms: 250,
+  memory_mb: 128,
+  platform_subrequests_per_request: 10_000,
+  maximum_snapshot_create_subrequests: 50,
+  maximum_snapshot_create_cache_api_calls: 10,
+  maximum_snapshot_create_upstream_and_guard_subrequests: 40,
+  maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+});
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
 const ADAPTER_VERSIONS = {
@@ -34,6 +54,13 @@ const SEARCH_FIELDS = [
   "program_officer",
 ];
 const CRITERIA_FIELDS = [...SEARCH_FIELDS, "year_start", "year_end"];
+const SNAPSHOT_ID_PATTERN = /^[a-f0-9]{64}$/;
+const SNAPSHOT_PATHS = new Set([
+  "/awards/snapshots",
+  "/awards/snapshots/page",
+  "/awards/snapshots/batch",
+  "/awards/snapshots/retry",
+]);
 
 function allowedOrigin(value) {
   if (!value) return true;
@@ -297,6 +324,8 @@ async function sourceCacheRequest(source, request, asOf) {
     criteria: request.publicCriteria,
     limit: request.limit,
     offset: request.offset,
+    scan_all: request.scanAll === true,
+    include_abstracts: request.includeAbstracts !== false,
   };
   if (source === "NIH" && request.publicCriteria.year_start && !request.publicCriteria.year_end) {
     cacheIdentity.nih_fiscal_year_ceiling = federalFiscalYear(asOf);
@@ -319,7 +348,13 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, gu
     }
   }
   if (guard) await guard(`award:${source}`, rateLimit);
-  const options = { limit: request.limit, offset: request.offset, now: () => new Date(asOf) };
+  const options = {
+    limit: request.limit,
+    offset: request.offset,
+    now: () => new Date(asOf),
+    scanAll: request.scanAll === true,
+    includeAbstracts: request.includeAbstracts !== false,
+  };
   const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
@@ -444,6 +479,169 @@ function sourceSummary(payload) {
   };
 }
 
+function sourceFailure(source, cause) {
+  const sourceError = cause instanceof AwardSourceError
+    ? cause
+    : new AwardSourceError("source_unavailable");
+  return {
+    source,
+    status: sourceError.kind === "unsupported" ? "unsupported" : "unavailable",
+    error: { code: sourceError.code },
+  };
+}
+
+function validateSnapshotCreate(body, config) {
+  if (!exactKeys(body, ["sources", "criteria"])) return null;
+  if (!Array.isArray(body.sources) || body.sources.length < 1 || body.sources.length > SOURCE_NAMES.length) return null;
+  const sources = body.sources.map(value => String(value || "").toUpperCase());
+  if (new Set(sources).size !== sources.length || sources.some(source => !SOURCE_NAMES.includes(source))) return null;
+  const criteria = validateCriteria(body.criteria);
+  if (!criteria) return null;
+  if (criteria.publicCriteria.program_office && (sources.length !== 1 || sources[0] !== "DOE")) return null;
+  return {
+    sources,
+    limit: Math.min(SNAPSHOT_BATCH_SIZE, config.maxResults),
+    offset: 0,
+    scanAll: true,
+    includeAbstracts: false,
+    ...criteria,
+  };
+}
+
+function validateFacet(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value) || !exactKeys(value, ["type", "key"])) return null;
+  const type = normalizedString(value.type, 20);
+  const key = typeof value.key === "string" ? value.key.replace(/\s+/g, " ").trim() : null;
+  if (!new Set(["all", "investigator", "program"]).has(type) || key === null) return null;
+  if (key.length > SNAPSHOT_FACET_KEY_MAX_LENGTH) return null;
+  if (type === "all" && key) return null;
+  if (type !== "all" && !key) return null;
+  return { type, key };
+}
+
+function validateSnapshotId(value) {
+  const id = String(value || "").toLowerCase();
+  return SNAPSHOT_ID_PATTERN.test(id) ? id : null;
+}
+
+function validateSnapshotPage(body) {
+  if (!exactKeys(body, ["snapshot_id", "page", "page_size", "facet"])) return null;
+  const snapshotId = validateSnapshotId(body.snapshot_id);
+  const page = boundedInteger(body.page, { minimum: 1, maximum: 100_000 });
+  const pageSize = boundedInteger(body.page_size, { minimum: 1, maximum: 50 });
+  const facet = validateFacet(body.facet);
+  if (!snapshotId || !page || !SNAPSHOT_PAGE_SIZES.includes(pageSize) || !facet) return null;
+  return { snapshotId, page, pageSize, facet };
+}
+
+function validateSnapshotBatch(body) {
+  if (!exactKeys(body, ["snapshot_id", "source", "offset", "facet"])) return null;
+  const snapshotId = validateSnapshotId(body.snapshot_id);
+  const source = String(body.source || "").toUpperCase();
+  const offset = boundedInteger(body.offset, { minimum: 0, maximum: 100_000 });
+  const facet = validateFacet(body.facet);
+  if (!snapshotId || !SOURCE_NAMES.includes(source) || offset === null || !facet) return null;
+  return { snapshotId, source, offset, facet };
+}
+
+function validateSnapshotRetry(body) {
+  if (!exactKeys(body, ["snapshot_id", "source"])) return null;
+  const snapshotId = validateSnapshotId(body.snapshot_id);
+  const source = String(body.source || "").toUpperCase();
+  return snapshotId && SOURCE_NAMES.includes(source) ? { snapshotId, source } : null;
+}
+
+function snapshotCacheRequest(snapshotId) {
+  return new Request(`https://award-snapshot.internal/v1/${snapshotId}`);
+}
+
+async function loadSnapshot(cache, snapshotId) {
+  if (!cache) return null;
+  try {
+    const response = await cache.match(snapshotCacheRequest(snapshotId));
+    if (!response) return null;
+    const snapshot = await response.json();
+    return snapshot?.snapshot_contract_version === 1 && snapshot?.snapshot_id === snapshotId
+      && Array.isArray(snapshot?.awards) && snapshot?.source_metadata
+      ? snapshot
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+async function storeSnapshot(cache, snapshot, cacheTtl) {
+  if (!cache) return false;
+  const key = snapshotCacheRequest(snapshot.snapshot_id);
+  try {
+    await cache.put(key, new Response(JSON.stringify(snapshot), {
+      headers: {
+        "Cache-Control": `public, max-age=${cacheTtl}`,
+        "Content-Type": "application/json; charset=utf-8",
+        ETag: `"${snapshot.snapshot_id}"`,
+      },
+    }));
+    const stored = await cache.match(key);
+    return Boolean(stored);
+  } catch {
+    return false;
+  }
+}
+
+function snapshotRequestIdentity(normalized, asOf) {
+  const publicRequest = {
+    sources: normalized.sources,
+    criteria: normalized.publicCriteria,
+    institution_identity: normalized.resolvedCriteria?._institution || null,
+    source_adapter_versions: ADAPTER_VERSIONS,
+    ordering_version: AWARD_ORDERING_VERSION,
+    year_interpretation: {
+      minimum_year: 1989,
+      maximum_year: 2100,
+      nih_federal_fiscal_year: normalized.sources.includes("NIH")
+        && normalized.publicCriteria.year_start && !normalized.publicCriteria.year_end
+        ? federalFiscalYear(asOf)
+        : null,
+    },
+  };
+  return { publicRequest, cacheIdentity: stableJson(publicRequest) };
+}
+
+async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit, onlySource = "" }) {
+  const selectedSources = onlySource ? [onlySource] : normalized.sources;
+  const request = {
+    ...normalized,
+    publicCriteria: normalized.publicCriteria,
+    limit: normalized.limit || SNAPSHOT_BATCH_SIZE,
+    offset: 0,
+    scanAll: true,
+    includeAbstracts: false,
+  };
+  const settled = await Promise.all(selectedSources.map(async source => {
+    try {
+      return await runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit });
+    } catch (cause) {
+      return sourceFailure(source, cause);
+    }
+  }));
+  return Object.fromEntries(selectedSources.map((source, index) => [source, settled[index]]));
+}
+
+async function resolveRequestInstitution({ normalized, fetchImpl, cache, cacheTtl, guard, rateLimit }) {
+  if (!normalized.institutionRequest || normalized.institutionRequest.resolved) return normalized;
+  const institution = await runInstitutionResolution({
+    request: normalized.institutionRequest,
+    fetchImpl,
+    cache,
+    cacheTtl,
+    guard,
+    rateLimit,
+  });
+  if (!institution) throw new AwardSourceError("invalid_request", "unsupported");
+  normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
+  return normalized;
+}
+
 export function createHandler({
   fetchImpl = fetch,
   cache = null,
@@ -474,6 +672,16 @@ export function createHandler({
           NIH: { upstream_pages: 12, upstream_page_size: 100 },
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
         },
+        complete_result_snapshots: {
+          contract_version: 1,
+          ordering_version: AWARD_ORDERING_VERSION,
+          batch_ceiling_per_agency: SNAPSHOT_BATCH_SIZE,
+          page_sizes: SNAPSHOT_PAGE_SIZES,
+          cache_ttl_seconds: config.cacheTtl,
+          cache_scope: "cloudflare-datacenter",
+          failure_policy: "successful-sources-retained-retry-creates-successor",
+          resource_budget: WORKER_RESOURCE_BUDGET,
+        },
         abuse_control: {
           ready: abuseControlReady,
           provider: "cloudflare-durable-object",
@@ -490,13 +698,16 @@ export function createHandler({
         credentials_required: false,
       });
     }
-    if (!["/institutions/search", "/awards/search"].includes(path)) {
+    if (!["/institutions/search", "/awards/search"].includes(path) && !SNAPSHOT_PATHS.has(path)) {
       return error(origin, 404, "not_found");
     }
     if (path === "/institutions/search" && request.method !== "GET") {
       return error(origin, 405, "method_not_allowed");
     }
     if (path === "/awards/search" && request.method !== "POST") {
+      return error(origin, 405, "method_not_allowed");
+    }
+    if (SNAPSHOT_PATHS.has(path) && request.method !== "POST") {
       return error(origin, 405, "method_not_allowed");
     }
     if (!config.valid) return error(origin, 503, "service_unavailable");
@@ -541,6 +752,141 @@ export function createHandler({
           },
         }, rateLimited ? { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) } : {});
       }
+    }
+    if (SNAPSHOT_PATHS.has(path)) {
+      let body;
+      try {
+        body = await parseBody(request);
+      } catch (cause) {
+        return error(origin, cause.status || 400, cause.code || "invalid_request");
+      }
+      const cacheStore = cache || globalThis.caches?.default || null;
+      if (!cacheStore) return error(origin, 503, "snapshot_store_unavailable");
+      if (path === "/awards/snapshots") {
+        const normalized = validateSnapshotCreate(body, config);
+        if (!normalized) return error(origin, 400, "invalid_request");
+        try {
+          await resolveRequestInstitution({
+            normalized,
+            fetchImpl,
+            cache: cacheStore,
+            cacheTtl: config.cacheTtl,
+            guard,
+            rateLimit: config.rorResolveLimit,
+          });
+        } catch (cause) {
+          if (cause instanceof AwardSourceError && cause.kind === "rate_limited") {
+            return error(origin, 429, "rate_limited", { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) });
+          }
+          return error(origin, cause instanceof AwardSourceError && cause.kind === "unsupported" ? 400 : 503,
+            cause instanceof AwardSourceError && cause.kind === "unsupported" ? "invalid_request" : "institution_registry_unavailable");
+        }
+        const asOf = current.toISOString();
+        const identity = snapshotRequestIdentity(normalized, asOf);
+        const queryId = await sha256Hex(identity.cacheIdentity);
+        const snapshotId = await sha256Hex(stableJson({ query_id: queryId, as_of: asOf, ordering_version: AWARD_ORDERING_VERSION }));
+        const sourcePayloads = await runSnapshotSources({
+          normalized,
+          fetchImpl,
+          cache: cacheStore,
+          cacheTtl: config.cacheTtl,
+          asOf,
+          guard,
+          rateLimit: config.awardSourceLimit,
+        });
+        const snapshot = buildAwardSnapshot({
+          snapshotId,
+          queryId,
+          asOf,
+          request: identity.publicRequest,
+          sourcePayloads,
+        });
+        snapshot.runtime_request = normalized;
+        if (!await storeSnapshot(cacheStore, snapshot, config.cacheTtl)) {
+          return error(origin, 503, "snapshot_store_unavailable");
+        }
+        return json(origin, 200, publicSnapshot(snapshot));
+      }
+      if (path === "/awards/snapshots/page") {
+        const action = validateSnapshotPage(body);
+        if (!action) return error(origin, 400, "invalid_request");
+        const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+        if (!snapshot) return error(origin, 410, "snapshot_expired");
+        const payload = snapshotPage(snapshot, action);
+        if (!payload) return error(origin, 400, "invalid_page_or_facet");
+        payload.view_id = await sha256Hex(stableJson({
+          query_id: snapshot.query_id,
+          snapshot_id: snapshot.snapshot_id,
+          facet: action.facet,
+          page_size: action.pageSize,
+          ordering_version: snapshot.ordering_version,
+        }));
+        return json(origin, 200, payload);
+      }
+      if (path === "/awards/snapshots/batch") {
+        const action = validateSnapshotBatch(body);
+        if (!action) return error(origin, 400, "invalid_request");
+        const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+        if (!snapshot) return error(origin, 410, "snapshot_expired");
+        const payload = snapshotSourceBatch(snapshot, action);
+        return payload ? json(origin, 200, payload) : error(origin, 400, "invalid_source_or_facet");
+      }
+      const action = validateSnapshotRetry(body);
+      if (!action) return error(origin, 400, "invalid_request");
+      const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+      if (!snapshot) return error(origin, 410, "snapshot_expired");
+      const normalized = snapshot.runtime_request;
+      if (!normalized?.sources?.includes(action.source)) return error(origin, 400, "invalid_source");
+      const priorSource = snapshot.sources.find(source => source.source === action.source);
+      if (!priorSource || !["unavailable", "rate_limited"].includes(priorSource.status)) {
+        return error(origin, 409, "source_not_retryable");
+      }
+      const successorAsOf = current.toISOString();
+      const replacement = await runSnapshotSources({
+        normalized,
+        fetchImpl,
+        cache: cacheStore,
+        cacheTtl: config.cacheTtl,
+        asOf: successorAsOf,
+        guard,
+        rateLimit: config.awardSourceLimit,
+        onlySource: action.source,
+      });
+      if (replacement[action.source]?.status) {
+        const rateLimited = ["rate_limited", "source_rate_limited"].includes(replacement[action.source].error?.code);
+        return json(origin, rateLimited ? 429 : 503, {
+          ...publicSnapshot(snapshot),
+          retry: replacement[action.source],
+        }, rateLimited ? { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) } : {});
+      }
+      const sourcePayloads = Object.fromEntries(snapshot.request.sources.map(source => {
+        if (replacement[source]) return [source, replacement[source]];
+        const metadata = snapshot.source_metadata[source] || {};
+        const results = snapshot.awards.filter(award => String(award?.source || "").toUpperCase() === source);
+        return [source, metadata.status ? metadata : { ...metadata, results }];
+      }));
+      const successorId = await sha256Hex(stableJson({
+        predecessor: snapshot.snapshot_id,
+        source: action.source,
+        recovered_at: successorAsOf,
+      }));
+      const successorIdentity = snapshotRequestIdentity(normalized, successorAsOf);
+      const successor = buildAwardSnapshot({
+        snapshotId: successorId,
+        queryId: await sha256Hex(successorIdentity.cacheIdentity),
+        asOf: successorAsOf,
+        request: successorIdentity.publicRequest,
+        sourcePayloads,
+      });
+      successor.runtime_request = normalized;
+      successor.predecessor_snapshot_id = snapshot.snapshot_id;
+      if (!await storeSnapshot(cacheStore, successor, config.cacheTtl)) {
+        return error(origin, 503, "snapshot_store_unavailable");
+      }
+      return json(origin, 200, {
+        ...publicSnapshot(successor),
+        retry: { source: action.source, status: "recovered", retained_sources: snapshot.request.sources.filter(source => source !== action.source) },
+      });
     }
     let body;
     try {
@@ -595,14 +941,7 @@ export function createHandler({
           rateLimit: config.awardSourceLimit,
         });
       } catch (cause) {
-        const sourceError = cause instanceof AwardSourceError
-          ? cause
-          : new AwardSourceError("source_unavailable");
-        return {
-          source,
-          status: sourceError.kind === "unsupported" ? "unsupported" : "unavailable",
-          error: { code: sourceError.code },
-        };
+        return sourceFailure(source, cause);
       }
     }));
     const successful = settled.filter(item => item.status === undefined);
@@ -636,8 +975,15 @@ export {
   MAX_REQUEST_BYTES,
   MAX_YEAR_SPAN,
   RATE_LIMIT_WINDOW_SECONDS,
+  SNAPSHOT_PATHS,
   createUpstreamGuard,
+  loadSnapshot,
   serviceConfig,
+  storeSnapshot,
+  validateSnapshotBatch,
+  validateSnapshotCreate,
+  validateSnapshotPage,
+  validateSnapshotRetry,
   validateRequest,
   runInstitutionResolution,
 };

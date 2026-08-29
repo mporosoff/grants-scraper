@@ -52,6 +52,116 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
+test("Unit C alert dialog locks the page, traps focus, scrolls internally, and restores state on mobile", async ({ page }) => {
+  mockHybrid(page);
+  mockAlerts(page);
+  await page.setViewportSize({ width: 320, height: 480 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const invoker = page.locator("#alert-new-matches");
+  await invoker.scrollIntoViewIfNeeded();
+  const scrollBefore = await page.evaluate(() => window.scrollY);
+  await invoker.click();
+  const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("#alert-email")).toBeFocused();
+  expect(await page.evaluate(() => ({
+    rootLocked: document.documentElement.classList.contains("alert-dialog-open"),
+    bodyLocked: document.body.classList.contains("alert-dialog-open"),
+    position: document.body.style.position,
+    top: document.body.style.top,
+    rootOverflow: document.documentElement.style.overflow,
+  }))).toEqual({
+    rootLocked: true,
+    bodyLocked: true,
+    position: "fixed",
+    top: `-${scrollBefore}px`,
+    rootOverflow: "hidden",
+  });
+  const mobileGeometry = await dialog.evaluate(element => {
+    const rect = element.getBoundingClientRect();
+    return {
+      left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
+      width: rect.width, height: rect.height,
+      clientHeight: element.clientHeight, scrollHeight: element.scrollHeight,
+      overflowY: getComputedStyle(element).overflowY,
+    };
+  });
+  expect(mobileGeometry.left).toBeGreaterThanOrEqual(0);
+  expect(mobileGeometry.right).toBeLessThanOrEqual(320);
+  expect(mobileGeometry.top).toBeGreaterThanOrEqual(0);
+  expect(mobileGeometry.bottom).toBeLessThanOrEqual(480);
+  expect(mobileGeometry.scrollHeight).toBeGreaterThan(mobileGeometry.clientHeight);
+  expect(["auto", "scroll"]).toContain(mobileGeometry.overflowY);
+  await dialog.evaluate(element => { element.scrollTop = element.scrollHeight; });
+  expect(await dialog.evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  for (const viewport of [{ width: 320, height: 320 }, { width: 480, height: 320 }]) {
+    await page.setViewportSize(viewport);
+    const bounds = await dialog.evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+    });
+    expect(bounds.left).toBeGreaterThanOrEqual(0);
+    expect(bounds.right).toBeLessThanOrEqual(viewport.width);
+    expect(bounds.top).toBeGreaterThanOrEqual(0);
+    expect(bounds.bottom).toBeLessThanOrEqual(viewport.height);
+  }
+  await page.setViewportSize({ width: 320, height: 480 });
+
+  const closeButton = dialog.locator(".alert-dialog-close");
+  const cancelButton = dialog.locator(".alert-cancel");
+  await closeButton.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(cancelButton).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(closeButton).toBeFocused();
+  await page.locator("#query").focus();
+  expect(await page.evaluate(() => document.querySelector(".alert-dialog")?.contains(document.activeElement))).toBe(true);
+
+  await dialog.locator("#alert-email").fill("mobile-researcher@example.edu");
+  await dialog.locator("#alert-submit").click();
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Verification email requested for mobile-researcher@example.edu");
+  await expect(dialog.locator("#alert-email")).toHaveValue("mobile-researcher@example.edu");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(invoker).toBeFocused();
+  await expect.poll(() => page.evaluate(() => Math.round(window.scrollY))).toBe(Math.round(scrollBefore));
+  expect(await page.evaluate(() => ({
+    rootLocked: document.documentElement.classList.contains("alert-dialog-open"),
+    bodyLocked: document.body.classList.contains("alert-dialog-open"),
+    position: document.body.style.position,
+    rootOverflow: document.documentElement.style.overflow,
+  }))).toEqual({ rootLocked: false, bodyLocked: false, position: "", rootOverflow: "" });
+
+  await page.setViewportSize({ width: 390, height: 600 });
+  await invoker.click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(invoker).toBeFocused();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("Unit C alert dialog preserves its recovery state and restores focus after a failed submission", async ({ page }) => {
+  mockHybrid(page);
+  mockAlerts(page, { status: 503, errorCode: "alerts_unavailable" });
+  await page.setViewportSize({ width: 390, height: 520 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const invoker = page.locator("#alert-new-matches");
+  await invoker.click();
+  const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
+  await dialog.locator("#alert-email").fill("failure-researcher@example.edu");
+  await dialog.locator("#alert-submit").click();
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Email alert delivery is unavailable");
+  await expect(dialog.locator("#alert-email")).toHaveValue("failure-researcher@example.edu");
+  expect(await page.evaluate(() => document.body.style.position)).toBe("fixed");
+  expect(await page.evaluate(() => document.querySelector(".alert-dialog")?.contains(document.activeElement))).toBe(true);
+  await dialog.locator(".alert-dialog-close").click();
+  await expect(dialog).toBeHidden();
+  await expect(invoker).toBeFocused();
+  expect(await page.evaluate(() => document.body.style.position)).toBe("");
+});
+
 test("saved-item write rejection restores durable UI state across every mutation", async ({ page }, testInfo) => {
   await page.addInitScript(() => {
     const originalSetItem = Storage.prototype.setItem;
@@ -193,7 +303,91 @@ test("Funding Finder loads with a usable catalog and no uncaught runtime errors"
   expect(errors).toEqual([]);
 });
 
+test("primary search submits with Enter while AI refinement stays visible and truthfully disabled", async ({ page }) => {
+  mockHybrid(page);
+  await openFundingFinder(page);
+  const query = page.locator("#query");
+  const find = page.locator("#find-funding");
+  const upload = page.locator(".nofo-upload-button");
+  const [queryBox, findBox, uploadBox] = await Promise.all([
+    query.boundingBox(),
+    find.boundingBox(),
+    upload.boundingBox(),
+  ]);
+  expect(queryBox).not.toBeNull();
+  expect(findBox.x).toBeGreaterThan(queryBox.x);
+  expect(uploadBox.x).toBeGreaterThan(findBox.x);
+
+  const refine = page.locator("#ai-refine");
+  await expect(refine).toBeVisible();
+  await expect(refine).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run a funding search and enter or save");
+  await query.fill("catalysis science");
+  await query.press("Enter");
+  await expect(page.locator("#results .result-card").first()).toBeVisible();
+  await waitForHybridSettled(page);
+  await expect(page.locator("#results-heading")).toContainText(/\d+ opportunities · \d+ strong · \d+ potential/);
+  await expect(refine).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Enter or save an AI provider key");
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-layout-test");
+  await expect(refine).toBeEnabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine");
+});
+
+test("primary search and AI action stack without horizontal overflow from tablet through 320 px", async ({ page }) => {
+  mockHybrid(page);
+  await openFundingFinder(page);
+  for (const width of [820, 700, 600, 541, 540, 390, 320]) {
+    await page.setViewportSize({ width, height: 760 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const [queryBox, findBox, uploadBox] = await Promise.all([
+      page.locator("#query").boundingBox(),
+      page.locator("#find-funding").boundingBox(),
+      page.locator(".nofo-upload-button").boundingBox(),
+    ]);
+    expect(findBox.y).toBeGreaterThan(queryBox.y);
+    expect(uploadBox.y).toBeGreaterThan(findBox.y);
+    for (const box of [queryBox, findBox, uploadBox]) {
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(width);
+    }
+    await expect(page.locator("#ai-refine")).toBeVisible();
+  }
+});
+
+test("provider failure preserves the search, filters, results, key, and retry control", async ({ page }) => {
+  mockHybrid(page);
+  let providerCalls = 0;
+  await page.route("https://api.openai.com/v1/responses", route => {
+    providerCalls += 1;
+    return route.fulfill({
+      status: 401,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify({ error: { code: "invalid_api_key", message: "provider-secret-diagnostic" } }),
+    });
+  });
+  await openFundingFinder(page);
+  await page.locator("#filter-panel > summary").click();
+  await page.locator("#status-forecasted").uncheck();
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  const originalHeading = await page.locator("#results-heading").textContent();
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-preserved-test-key");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("provider rejected this API key");
+  await expect(page.locator("#ai-status")).not.toContainText(/provider-secret-diagnostic|sk-preserved-test-key/);
+  expect(providerCalls).toBe(1);
+  await expect(page.locator("#query")).toHaveValue("catalysis science");
+  await expect(page.locator("#status-forecasted")).not.toBeChecked();
+  await expect(page.locator("#k-key")).toHaveValue("sk-preserved-test-key");
+  await expect(page.locator("#results-heading")).toHaveText(originalHeading);
+  await expect(page.locator("#ai-refine")).toBeEnabled();
+});
+
 test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
   mockHybrid(page);
   await page.goto("/match_explorer.html?focus=361187");
   const card = page.locator('[data-opportunity-id="361187"]');
@@ -211,8 +405,8 @@ test("Strong and Potential membership survives sorting, filters trigger one sema
   await expect.poll(() => calls.rerank.length).toBe(1);
 
   await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
-  const statusText = await page.locator("#search-status").textContent();
-  const tierCounts = statusText.match(/(\d+) strong.*?(\d+) potential/);
+  const resultHeading = await page.locator("#results-heading").textContent();
+  const tierCounts = resultHeading.match(/(\d+) strong.*?(\d+) potential/);
   const strongCount = Number(tierCounts?.[1] || 0);
   const potentialCount = Number(tierCounts?.[2] || 0);
   expect(strongCount).toBeGreaterThan(0);

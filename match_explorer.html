@@ -32,9 +32,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=ux-followup-20260826">
+  <link rel="stylesheet" href="./assets/app.css?v=post-phase4-abc-20260829">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
-  <link rel="stylesheet" href="./assets/alerts.css?v=search-alerts-20260825">
+  <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -77,7 +77,7 @@
       <ol class="workflow-map" aria-label="Suggested funding search steps">
         <li><strong>1</strong><span><b>Search or add a notice</b><small>Recommended</small></span></li>
         <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
-        <li><strong>3</strong><span><b>Find and review</b><small>Optional AI refinement afterward</small></span></li>
+        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional user-connected AI</small></span></li>
       </ol>
 
       <form class="search-workflow" id="search-form" role="search">
@@ -93,12 +93,14 @@
           <div class="search-form nofo-drop-zone" id="nofo-drop-zone">
             <label class="sr-only" for="query">Search funding opportunities</label>
             <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing">
+            <button class="button primary find-button" id="find-funding" type="submit"><span class="find-button-label">Find funding</span></button>
             <input class="sr-only" id="nofo-file" type="file" accept=".pdf,application/pdf" aria-label="Choose a NOFO or FOA PDF">
             <label class="nofo-upload-button" for="nofo-file">
               <span aria-hidden="true">&#8679;</span>
               <span><strong>Drop or upload a NOFO</strong><small>PDF only</small></span>
             </label>
           </div>
+          <div class="search-status" id="search-status" aria-live="polite"></div>
           <div class="nofo-upload-status" id="nofo-upload-status" aria-live="polite">Your PDF stays in this tab and is sent to your selected AI provider only when you ask a question.</div>
           <div class="quick-searches" aria-label="Example searches">
             <span>Examples:</span>
@@ -344,24 +346,16 @@
           <div class="step-heading">
             <span class="step-number">3</span>
             <div>
-              <p class="eyebrow">Run the combined search</p>
-              <h2 id="launch-step-heading">Find and review your opportunities</h2>
-              <p>Funding Finder will use the keywords, profile, and filters selected above together. It will not show the full catalog until you start a search.</p>
+              <p class="eyebrow">Optional after a search</p>
+              <h2 id="launch-step-heading">Expand and refine your search with AI</h2>
+              <p>Connect your own provider only if you want AI to expand terminology, refine the current catalog results, or answer questions about them.</p>
             </div>
           </div>
-          <div class="launch-actions">
-            <button class="button primary find-button" id="find-funding" type="submit"><span class="find-button-label">Find funding</span></button>
-            <span>Free catalog search. No AI key required.</span>
-          </div>
-          <p class="privacy-note"><strong>What leaves this page:</strong> Strong matching, profile, CV, and ORCID relevance run locally. When you type a topic, Potential matching sends only that search text and eligible public opportunity passages to the site-managed semantic service. Profile, CV, and ORCID text are not sent to that service. They are sent to a user-connected AI provider only when you explicitly use an AI tool with that context enabled.</p>
-          <p class="privacy-note"><strong>URLs and anonymous usage:</strong> Search criteria are written to this page's URL, so they may appear in browser history and copied links. A custom anonymous usage event sends a random session ID and broad usage category, never the search text; the service aggregates network organization server-side. Cloudflare Web Analytics is disabled whenever the page URL has query parameters.</p>
-          <div class="search-status" id="search-status" aria-live="polite"></div>
-
           <details class="provider-setup">
             <summary>
               <span>
-                <strong>Optional: expand and refine with AI</strong>
-                <small>AI can translate unfamiliar terminology before retrieving and reranking results</small>
+                <strong>Connect an AI provider</strong>
+                <small>Provider, key, cost, Help, and privacy details</small>
               </span>
               <span id="provider-state">Not configured</span>
             </summary>
@@ -387,14 +381,17 @@
               </div>
               <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
               <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
-              <button class="button ai-button" id="ai-refine" type="button" disabled>
-                <span aria-hidden="true">✦</span>
-                <span id="ai-refine-label">Expand and refine these results with AI</span>
-              </button>
               <p class="cost-note">Your connected AI uses two bounded calls for refinement: terminology expansion, then reranking of at most 32 results. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
-              <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
             </div>
           </details>
+          <div class="ai-refine-actions">
+            <button class="button ai-button" id="ai-refine" type="button" aria-describedby="ai-refine-requirement" disabled>
+              <span aria-hidden="true">✦</span>
+              <span id="ai-refine-label">Expand and refine these results with AI</span>
+            </button>
+            <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search and enter or save an AI provider key to enable refinement.</p>
+          </div>
+          <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
         </section>
       </form>
     </section>
@@ -426,7 +423,7 @@
           <div class="toolbar-lower-row">
             <div class="results-summary">
               <p class="eyebrow" id="results-mode">Ready when you are</p>
-              <h2 id="results-heading"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
+              <h2 id="results-heading" aria-live="polite" aria-atomic="true"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
               <p class="result-range" id="result-range"></p>
             </div>
             <div class="toolbar-controls">
@@ -616,12 +613,12 @@
   <script src="./assets/nofo.js?v=filters-2026-08-13"></script>
   <script src="./assets/review.js?v=filters-2026-08-13"></script>
   <script src="./assets/credentials.js?v=filters-2026-08-13"></script>
-  <script src="./assets/ai-provider.js?v=filters-2026-08-13"></script>
+  <script src="./assets/ai-provider.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
   <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
   <script src="./assets/award-links.js?v=phase3-program-watches"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
-  <script src="./assets/alerts.js?v=search-alerts-20260825"></script>
+  <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
   <script src="./assets/search-query.js?v=app-1.3.0"></script>
   <script src="./assets/search-retrieval.js?v=app-1.3.0"></script>
@@ -630,7 +627,7 @@
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=ux-followup-20260826"></script>
+  <script src="./assets/app.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>
