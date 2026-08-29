@@ -163,6 +163,70 @@ test("failed facet and page-size requests restore the committed view controls", 
   expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
 });
 
+test("a failed facet preserves its evidence answer and a committed facet clears it", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 2, snapshotPageFailAtCalls: [3] });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "facet-answer-commit", "all");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many awards are in this result?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  const committedAnswer = await page.locator("#ii-direct-answer").textContent();
+
+  await page.locator("#ii-programs").selectOption({ label: "NIH · R01 (2)" });
+  await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toHaveText(committedAnswer);
+  await expect(page.locator("#ii-question-plan")).toBeVisible();
+
+  await page.locator("#ii-programs").selectOption({ label: "NIH · R01 (2)" });
+  await expect(page.locator("#ii-active-facet")).toContainText("NIH · R01");
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
+});
+
+test("provider synthesis retains the evidence signature captured before later hydration", async ({ page }) => {
+  const providerCalls = [];
+  let releaseUpdate;
+  let updateFulfilled = false;
+  const updateGate = new Promise(resolve => { releaseUpdate = resolve; });
+  await page.route("https://api.openai.com/v1/responses", async route => {
+    providerCalls.push(route.request().postDataJSON());
+    const call = providerCalls.length;
+    if (call === 3) await updateGate;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(openAiStructuredResponse(call === 1
+        ? { agency: "all", program: "", topic: "signature-race", pi: "", program_officer: "", year_start: "", year_end: "", answer_intent: "narrative", narrative_needed: true }
+        : { claims: [{ text: call === 2 ? "Initial evidence summary." : "Updated evidence summary.", evidence_ids: ["NSF:2605508"] }] })),
+    });
+    if (call === 3) updateFulfilled = true;
+  });
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "signature-race", "all");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-key").fill("sk-signature-race-test");
+  await page.locator("#ii-save-key").click();
+  await page.locator("#ii-question").fill("Summarize these awards.");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Initial evidence summary.");
+
+  await page.locator('[data-ii-load-source="NSF"]').click();
+  await expect(page.locator("#ii-update-answer")).toBeVisible();
+  await page.locator("#ii-update-answer").click();
+  await expect.poll(() => providerCalls.length).toBe(3);
+  await page.locator('[data-ii-load-source="NIH"]').click();
+  releaseUpdate();
+  await expect.poll(() => updateFulfilled).toBe(true);
+  await expect(page.locator("#ii-direct-answer")).toContainText("Updated evidence summary.");
+  await expect(page.locator("#ii-update-answer")).toBeVisible();
+  expect(runtimeErrors).toEqual([]);
+});
+
 test("draft filters never relabel an active snapshot during page, size, facet, share, or reload navigation", async ({ page }) => {
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
   await searchTopic(page, "committed-criteria", "all");

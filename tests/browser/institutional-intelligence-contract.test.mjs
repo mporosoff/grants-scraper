@@ -309,7 +309,12 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const facetSource = appSource.slice(appSource.indexOf("function restoreCommittedViewControls("), appSource.indexOf("async function requestSourceBatch("));
   assert.match(facetSource, /restoreCommittedViewControls\(\)[\s\S]*state\.facet\.type === "investigator"[\s\S]*state\.facet\.type === "program"/);
   assert.match(facetSource, /async function changeFacet\([\s\S]*catch \(error\)[\s\S]*restoreCommittedViewControls\(\)/);
+  const facetCommitSource = facetSource.slice(facetSource.indexOf("async function changeFacet("));
+  assert.ok(facetCommitSource.indexOf("clearQuestionState();") > facetCommitSource.indexOf("if (!payload) return;"));
   assert.match(appSource, /"ii-page-size"\)\.addEventListener\("change"[\s\S]*catch\(error => \{[\s\S]*restoreCommittedViewControls\(\)/);
+
+  const answerSource = appSource.slice(appSource.indexOf("async function refreshQuestionAnswer("), appSource.indexOf("async function focusAwardEvidence("));
+  assert.match(answerSource, /const evidencePack = core\.questionEvidencePack\([\s\S]*const evidenceSignature = answerEvidenceSignature\(\);[\s\S]*await ai\.structuredResult\([\s\S]*signature: evidenceSignature/);
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);

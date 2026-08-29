@@ -709,12 +709,12 @@
   }
 
   async function changeFacet(type, key, { historyMode = "push", focus = true } = {}) {
-    clearQuestionState();
     const requestedFacet = type === "all" ? { type: "all", key: "" } : { type, key };
     setBusy(true);
     try {
       const payload = await fetchPageWithRecovery({ page: 1, facet: requestedFacet, historyMode, focus });
       if (!payload) return;
+      clearQuestionState();
       setStatus(state.facet.type === "all" ? "Showing all awards in the submitted result snapshot." : `Showing the ${state.pagePayload.facet.label} drill-down within the same result snapshot.`);
     } catch (error) {
       restoreCommittedViewControls();
@@ -891,6 +891,7 @@
     const questionSequence = state.questionSequence;
     state.answering = true;
     const evidencePack = core.questionEvidencePack([...state.residentAwards.values()]);
+    const evidenceSignature = answerEvidenceSignature();
     const aggregate = { ...state.aggregate, awards: pageAwards(), ordered_refs: state.pagePayload.aggregate.ordered_refs };
     const deterministic = core.deterministicInstitutionAnswer({
       question: questionState.question,
@@ -929,7 +930,7 @@
       }
     }
     if (questionSequence !== state.questionSequence || state.question !== questionState) return;
-    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: answerEvidenceSignature() };
+    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: evidenceSignature };
     state.answering = false;
     renderQuestionAnswer();
   }
