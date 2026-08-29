@@ -665,6 +665,7 @@ export async function chooseInvestigator(page, name) {
 }
 
 export async function mockOpenAiBroadening(page, {
+  chatResultAction = "none",
   planDelayMs = 0,
   planTerms = null,
 } = {}) {
@@ -720,8 +721,10 @@ export async function mockOpenAiBroadening(page, {
         answer: "The mock answer is grounded in the supplied bounded result context.",
         referenced_result_ids: input.current_results.slice(0, 8).map(item => item.id),
         citation_evidence_ids: [],
-        result_action: "none",
-        focus_result_ids: [],
+        result_action: chatResultAction,
+        focus_result_ids: chatResultAction === "focus" && input.current_results[0]
+          ? [input.current_results[0].id]
+          : [],
       };
     } else {
       throw new Error(`Unexpected mocked OpenAI operation: ${operation}`);

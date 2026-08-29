@@ -1857,7 +1857,10 @@
     const baseMatches = state.refinement.active
       ? state.refinement.combinedMatches
       : state.matches;
-    if (!state.ai.active || state.ai.mode === "uploaded-nofo") return baseMatches;
+    if (!state.ai.active
+      || (state.ai.mode === "uploaded-nofo" && !state.ai.currentIds.length)) {
+      return baseMatches;
+    }
     const ids = state.ai.reviewCandidates
       ? state.ai.candidateIds
       : state.ai.currentIds;
@@ -2028,15 +2031,7 @@
   }
 
   function clearResultFocusPreservingConversation() {
-    if (state.ai.mode === "uploaded-nofo") {
-      state.ai.originalIds = [];
-      state.ai.currentIds = [];
-      state.ai.candidateIds = [];
-      state.ai.candidateMatches = new Map();
-      state.ai.reviewCandidates = false;
-      state.ai.assessments = new Map();
-      return;
-    }
+    if (state.ai.mode === "uploaded-nofo") return;
     if (!state.ai.active) return;
     state.ai.active = false;
     state.ai.mode = "";
@@ -2058,13 +2053,20 @@
       : null;
   }
 
+  function refinementProfileFingerprint() {
+    return PROFILE_API.profileFingerprint({
+      ...currentProfile(),
+      preferences: {},
+    });
+  }
+
   function refinementSearchSignature() {
     const profileEnabled = $("use-profile").checked && profileHasContent();
     return JSON.stringify({
       query: $("query").value.trim(),
       profile: profileEnabled ? {
         enabled: true,
-        fingerprint: PROFILE_API.profileFingerprint(currentProfile()),
+        fingerprint: refinementProfileFingerprint(),
         matching_query: state.profile.query,
         include_cv_in_ai: $("include-cv-ai").checked,
       } : { enabled: false },
@@ -2320,7 +2322,8 @@
     state.sort = $("sort").value;
     if (!preserveAi) {
       const refinementChanged = invalidateRefinement({ announce: true });
-      if (!refinementChanged) clearAiState({ preserveNofo });
+      if (refinementChanged) clearResultFocusPreservingConversation();
+      else clearAiState({ preserveNofo });
     }
     const search = computeMatches(state.query);
     state.strongMatches = search.matches.map(match => ({ ...match, workflowTier: "strong" }));

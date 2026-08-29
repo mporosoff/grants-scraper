@@ -42,6 +42,10 @@ test("realistic alternative phrases remain independent retrieval paths and gener
     "health",
     "innovation",
     "energy",
+    "Research.",
+    "science,",
+    "Technology!",
+    "...",
     " reaction engineering ",
   ];
   const phrases = workflow.sanitizeAlternativePhrases(raw);
@@ -238,6 +242,10 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(appSource, /state\.refinement\.requestSequence \+= 1/);
   assert.match(appSource, /state\.ordinarySearchSignature = refinementSearchSignature\(\)/);
   assert.match(appSource, /function aiRefineSearchIsCurrent\(\)[\s\S]*?state\.ordinarySearchSignature === refinementSearchSignature\(\)/);
+  assert.match(appSource, /function refinementProfileFingerprint\(\)[\s\S]*?preferences: \{\}/);
+  assert.match(appSource, /if \(refinementChanged\) clearResultFocusPreservingConversation\(\)/);
+  assert.match(appSource, /state\.ai\.mode === "uploaded-nofo" && !state\.ai\.currentIds\.length/);
+  assert.match(appSource, /function clearResultFocusPreservingConversation\(\)[\s\S]*?state\.ai\.mode === "uploaded-nofo"\) return/);
 });
 
 test("one accessible restore control and search-input controls have the required DOM and responsive order", () => {

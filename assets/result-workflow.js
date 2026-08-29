@@ -114,8 +114,11 @@
         .replace(/\s+/g, " ")
         .trim()
         .slice(0, 120);
-      const key = phrase.toLocaleLowerCase("en-US");
-      if (!phrase || seen.has(key) || GENERIC_STANDALONE_PHRASES.has(key)) continue;
+      const key = phrase
+        .toLocaleLowerCase("en-US")
+        .replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "")
+        .trim();
+      if (!key || seen.has(key) || GENERIC_STANDALONE_PHRASES.has(key)) continue;
       seen.add(key);
       phrases.push(phrase);
       if (phrases.length >= limit) break;

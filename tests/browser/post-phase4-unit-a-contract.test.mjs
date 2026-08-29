@@ -66,8 +66,16 @@ test("AI refinement requires both a usable result context and an entered or save
     app.indexOf("function setAiBusy"),
   );
   assert.match(control, /const hasContext = aiRefineHasContext\(\)/);
+  assert.match(control, /const searchIsCurrent = aiRefineSearchIsCurrent\(\)/);
   assert.match(control, /const hasKey = Boolean\(\$\("k-key"\)\.value\.trim\(\)\)/);
-  assert.match(control, /button\.disabled = state\.ai\.busy \|\| !hasContext \|\| !hasKey/);
+  for (const guard of [
+    /state\.ai\.busy/,
+    /state\.refinement\.busy/,
+    /state\.refinement\.active/,
+    /!hasContext/,
+    /!searchIsCurrent/,
+    /!hasKey/,
+  ]) assert.match(control, guard);
   assert.match(control, /aria-disabled/);
   assert.match(control, /ai-refine-requirement/);
   const providerState = app.slice(
@@ -87,7 +95,8 @@ test("one polite result heading owns total, Strong, Potential, pending, fallback
   assert.match(heading, /counts\.potential/);
   assert.match(heading, /finding potential matches/);
   assert.match(heading, /potential matches unavailable/);
-  assert.match(heading, /AI-expanded/);
+  assert.match(heading, /counts\.aiIdentified/);
+  assert.match(heading, /AI identified/);
   assert.match(heading, /textContent !== summary/);
   assert.doesNotMatch(app, /\$\("search-status"\)\.textContent = `\$\{state\.strongMatches\.length/);
 });

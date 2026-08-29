@@ -588,6 +588,10 @@ test("refinement sends only enabled profile context and honors the explicit CV-f
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-provider").selectOption("anthropic");
+  await page.locator("#k-key").fill("sk-ant-provider-choice-mock");
+  await expect(page.locator("#ai-refine")).toBeEnabled();
+  await page.locator("#k-provider").selectOption("openai");
   await page.locator("#k-key").fill("sk-profile-boundary-mock");
   await page.locator("#ai-refine").click();
   await expect.poll(() => ai.calls).toBeGreaterThanOrEqual(1);
@@ -595,6 +599,32 @@ test("refinement sends only enabled profile context and honors the explicit CV-f
   expect(context.research_description).toContain("heterogeneous catalysts");
   expect(context.expertise_keywords).toContain("reaction engineering");
   expect(context.cv_excerpt).toBeUndefined();
+});
+
+test("rerunning changed criteria clears stale chat focus while preserving the conversation", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const ai = await mockOpenAiBroadening(page, { chatResultAction: "focus" });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-focus-invalidation-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+  await page.locator("#open-results-chat").click();
+  await page.locator("#chat-input").fill("Focus the result list on one supplied opportunity.");
+  await page.locator("#chat-submit").click();
+  await expect.poll(() => ai.chatRequests.length).toBe(1);
+  await expect(page.locator("#results .result-card")).toHaveCount(1);
+  const conversationCount = await page.locator("#chat-messages .message").count();
+  await page.locator("#toggle-chat-size").click();
+
+  await page.locator("#sort").selectOption("agency");
+  await expect.poll(() => page.locator("#results .result-card").count()).toBeGreaterThan(1);
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#chat-messages .message")).toHaveCount(conversationCount);
+  await expect(page.locator("#query")).toHaveValue("catalysis science");
+  await expect(page.locator("#k-key")).toHaveValue("sk-focus-invalidation-mock");
 });
 
 test("AI refinement adds locally Strong records and exact restoration preserves the ordinary baseline", async ({ page }) => {
