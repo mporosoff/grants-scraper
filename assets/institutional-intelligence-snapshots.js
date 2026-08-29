@@ -35,6 +35,7 @@
     investigatorGroups: new Map(),
     programGroups: new Map(),
     question: null,
+    questionSequence: 0,
     questionSubmitting: false,
     answering: false,
   };
@@ -533,14 +534,11 @@
     state.pageRequestSequence += 1;
     state.controller?.abort();
     state.controller = new AbortController();
+    if (!questionSearch) clearQuestionState();
     setBusy(true);
     setStatus("Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
-      if (!questionSearch) {
-        state.question = null;
-        $("ii-question-answer").classList.add("hidden");
-      }
       const current = searchState ? { ...searchState } : formState();
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
       state.submitted = { ...current, snapshot_id: "", page: 1, page_size: current.page_size || 10, facet_type: "all", facet_key: "" };
@@ -578,8 +576,7 @@
   }
 
   async function changeFacet(type, key, { historyMode = "push", focus = true } = {}) {
-    state.question = null;
-    $("ii-question-answer").classList.add("hidden");
+    clearQuestionState();
     state.facet = type === "all" ? { type: "all", key: "" } : { type, key };
     state.page = 1;
     setBusy(true);
@@ -674,30 +671,32 @@
 
   async function refreshQuestionAnswer() {
     if (!state.question || !state.aggregate || state.answering) return;
+    const questionState = state.question;
+    const questionSequence = state.questionSequence;
     state.answering = true;
     const evidencePack = core.questionEvidencePack([...state.residentAwards.values()]);
     const aggregate = { ...state.aggregate, awards: pageAwards(), ordered_refs: state.pagePayload.aggregate.ordered_refs };
     const deterministic = core.deterministicInstitutionAnswer({
-      question: state.question.question,
-      intent: state.question.intent,
+      question: questionState.question,
+      intent: questionState.intent,
       aggregate,
       sources: state.snapshot.sources,
     });
     let narrative = null;
     let narrativeFailure = false;
-    if (state.question.narrativeNeeded) {
-      const key = credentials.loadKey(state.question.provider);
+    if (questionState.narrativeNeeded) {
+      const key = credentials.loadKey(questionState.provider);
       if (key) {
         try {
           const providerPayload = core.questionProviderPayload({
-            question: state.question.question,
+            question: questionState.question,
             institution: state.selectedInstitution,
-            filters: state.question.filters,
-            intent: state.question.intent,
+            filters: questionState.filters,
+            intent: questionState.intent,
             evidencePack,
           });
           const proposed = await ai.structuredResult({
-            provider: state.question.provider,
+            provider: questionState.provider,
             key,
             operation: "institution_narrative",
             fetchImpl: globalThis.fetch,
@@ -713,7 +712,8 @@
         narrativeFailure = true;
       }
     }
-    state.question.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: answerEvidenceSignature() };
+    if (questionSequence !== state.questionSequence || state.question !== questionState) return;
+    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: answerEvidenceSignature() };
     state.answering = false;
     renderQuestionAnswer();
   }
@@ -762,12 +762,17 @@
 
   async function askQuestion() {
     if (state.questionSubmitting) return;
+    const questionSequence = ++state.questionSequence;
     state.questionSubmitting = true;
+    state.answering = false;
+    state.question = null;
+    $("ii-question-answer").classList.add("hidden");
     $("ii-ask-button").disabled = true;
     try {
       const question = clean($("ii-question").value, 1_000);
       if (!question) throw new Error("Enter a question first.");
       const institution = await resolveTypedInstitution();
+      if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
       const current = formState();
       const { provider, configured } = refreshProvider();
@@ -800,6 +805,7 @@
           plan = { ...current };
         }
       }
+      if (questionSequence !== state.questionSequence) return;
       const upper = `${question} ${clean(plan.program)}`.toUpperCase();
       plan.agency = ["NSF", "NIH", "DOE"].includes(clean(plan.agency, 10).toUpperCase())
         ? clean(plan.agency, 10).toUpperCase()
@@ -818,14 +824,28 @@
       applyFormState(next);
       state.question = { question, intent, filters: next, provider, narrativeNeeded: plan.narrative_needed === true || intent === "narrative", translationFallback, snapshot: null };
       const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, searchState: next });
-      if (outcome) await refreshQuestionAnswer();
+      if (questionSequence === state.questionSequence && outcome) await refreshQuestionAnswer();
     } catch (error) {
+      if (questionSequence !== state.questionSequence) return;
       $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)}`;
       $("ii-question-plan").classList.remove("hidden");
     } finally {
-      state.questionSubmitting = false;
-      $("ii-ask-button").disabled = false;
+      if (questionSequence === state.questionSequence) {
+        state.questionSubmitting = false;
+        $("ii-ask-button").disabled = state.busyDepth > 0;
+      }
     }
+  }
+
+  function clearQuestionState({ clearInput = false } = {}) {
+    state.questionSequence += 1;
+    state.question = null;
+    state.questionSubmitting = false;
+    state.answering = false;
+    $("ii-question-answer").classList.add("hidden");
+    $("ii-question-plan").classList.add("hidden");
+    $("ii-question-plan").textContent = "";
+    if (clearInput) $("ii-question").value = "";
   }
 
   function resetResultState() {
@@ -840,7 +860,9 @@
     state.residentAwards.clear();
     state.sourceOffsets.clear();
     state.sourceMessages.clear();
-    state.question = null;
+    state.investigatorGroups.clear();
+    state.programGroups.clear();
+    clearQuestionState({ clearInput: true });
   }
 
   function clearSearch({ historyMode = "push" } = {}) {
@@ -942,15 +964,13 @@
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
       const restored = core.stateFromSearch(location.search);
-      applyFormState(restored);
-      state.submitted = { ...restored };
-      state.page = restored.page;
-      state.pageSize = restored.page_size;
-      state.facet = { type: restored.facet_type, key: restored.facet_key };
       if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return clearSearch({ historyMode: "replace" });
       state.sequence += 1;
       state.pageRequestSequence += 1;
       state.controller?.abort();
+      resetResultState();
+      applyFormState(restored);
+      state.submitted = { ...restored };
       state.controller = new AbortController();
       setBusy(true);
       try {

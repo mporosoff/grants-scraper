@@ -121,6 +121,68 @@ test("an expired snapshot is rebuilt before the requested page is restored", asy
   expect(runtimeErrors.some(error => error.includes("410 (Gone)"))).toBe(true);
 });
 
+test("history restoration cannot mix a newer snapshot question into an older snapshot", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 2 });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "older-snapshot");
+  const olderSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many awards are in this result?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("2 normalized matching awards");
+  const newerSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(newerSnapshot).not.toBe(olderSnapshot);
+  await page.goBack();
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(olderSnapshot);
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–2 of 2");
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await expect(page.locator("#ii-question")).toHaveValue("");
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("an in-flight newer-snapshot narrative cannot repopulate restored history", async ({ page }) => {
+  const providerCalls = [];
+  let releaseNarrative;
+  let narrativeFulfilled = false;
+  const narrativeGate = new Promise(resolve => { releaseNarrative = resolve; });
+  await page.route("https://api.openai.com/v1/responses", async route => {
+    providerCalls.push(route.request().postDataJSON());
+    const translation = providerCalls.length === 1;
+    if (!translation) await narrativeGate;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(openAiStructuredResponse(translation
+        ? { agency: "NSF", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", answer_intent: "narrative", narrative_needed: true }
+        : { claims: [{ text: "Delayed summary for the newer snapshot.", evidence_ids: ["NSF:2605508"] }] })),
+    });
+    if (!translation) narrativeFulfilled = true;
+  });
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 2 });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "older-snapshot");
+  const olderSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-key").fill("sk-history-generation-test");
+  await page.locator("#ii-save-key").click();
+  await page.locator("#ii-question").fill("Summarize these awards.");
+  await page.locator("#ii-ask-button").click();
+  await expect.poll(() => providerCalls.length).toBe(2);
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(olderSnapshot);
+  await page.goBack();
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(olderSnapshot);
+  releaseNarrative();
+  await expect.poll(() => narrativeFulfilled).toBe(true);
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await expect(page.locator("#ii-question")).toHaveValue("");
+  expect(runtimeErrors).toEqual([]);
+});
+
 test("investigator and program drill-downs filter the same snapshot and clear in one action", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 3, NIH: 2, DOE: 4 } });
   await searchTopic(page, "cross-agency", "all");
