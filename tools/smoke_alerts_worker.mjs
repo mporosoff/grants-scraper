@@ -9,7 +9,7 @@ assert.equal(health.status, 200);
 const payload = await health.json();
 assert.equal(payload.service, "available");
 assert.equal(payload.delivery_ready, true);
-assert.equal(payload.schema_version, 3);
+assert.equal(payload.schema_version, 4);
 assert.equal(payload.database_ready, true);
 assert.equal(payload.email_provider, "resend");
 assert.equal(payload.email_provider_selected, true);

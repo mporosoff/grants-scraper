@@ -59,7 +59,7 @@ function json(origin, status, payload) {
 }
 
 function html(status, body) {
-  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Funding Finder alerts</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:0 auto;padding:2rem;color:#14213d}main{border:1px solid #ccd5e4;border-radius:1rem;padding:1.5rem}button,select{font:inherit;padding:.55rem .8rem}li{margin:1rem 0}.muted{color:#58647a}</style></head><body><main>${body}</main></body></html>`, {
+  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Funding Finder alerts</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:0 auto;padding:2rem;color:#14213d}main{border:1px solid #ccd5e4;border-radius:1rem;padding:1.5rem}button,select,.button-link{font:inherit;padding:.55rem .8rem}.button-link{display:inline-block;border:1px solid #7b879c;border-radius:.25rem;color:inherit;text-decoration:none;background:#f5f7fa}li{margin:1rem 0}.muted{color:#58647a}</style></head><body><main>${body}</main></body></html>`, {
     status,
     headers: headers("", "text/html; charset=utf-8", {
       "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
@@ -161,7 +161,7 @@ async function managePage(subscriber, subscriptions, env) {
     const activeForm = suppressed
       ? ""
       : `<form method="post" action="/manage">${fields}<input type="hidden" name="active" value="${active ? "0" : "1"}"><button type="submit">${active ? "Pause" : "Resume"}</button></form>`;
-    const unsubscribeFields = `<input type="hidden" name="token" value="${escapeHtml(unsubscribeToken)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}">`;
+    const unsubscribeFields = `<input type="hidden" name="token" value="${escapeHtml(unsubscribeToken)}"><input type="hidden" name="subscription" value="${escapeHtml(subscription.id)}"><input type="hidden" name="return_token" value="${escapeHtml(manageToken)}">`;
     return `<li><strong>${escapeHtml(definitionSummary(subscription))}</strong><p>${state} · ${escapeHtml(subscription.cadence === "weekly" ? "Weekly digest" : "As changes happen")}</p>${activeForm}<form method="post" action="/manage">${fields}<select name="cadence" aria-label="Email frequency"><option value="immediate"${subscription.cadence === "immediate" ? " selected" : ""}>As changes happen</option><option value="weekly"${subscription.cadence === "weekly" ? " selected" : ""}>Weekly digest</option></select> <button type="submit">Save frequency</button></form><form method="post" action="/unsubscribe">${unsubscribeFields}<button type="submit">Unsubscribe from this alert</button></form></li>`;
   }))).join("");
   const suppression = suppressed
@@ -171,7 +171,7 @@ async function managePage(subscriber, subscriptions, env) {
     ? await signedCapability(env, subscriber.id, "unsubscribe_all")
     : subscriber.manage_token;
   const allForm = subscriptions.length
-    ? `<form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(allToken)}"><input type="hidden" name="scope" value="all"><button type="submit">Unsubscribe from all Funding Finder email alerts</button></form>`
+    ? `<form method="post" action="/unsubscribe"><input type="hidden" name="token" value="${escapeHtml(allToken)}"><input type="hidden" name="scope" value="all"><input type="hidden" name="return_token" value="${escapeHtml(manageToken)}"><button type="submit">Unsubscribe from all Funding Finder email alerts</button></form>`
     : "";
   return `<h1>Manage Funding Finder alerts</h1>${suppression}<p>These are the email alerts authorized for this address. Browser-local saved statuses, notes, profiles, documents, and chat are not shown because the alert service never receives them.</p><ul>${items || "<li>No alerts found.</li>"}</ul>${allForm}<p class="muted">Closing this page does not change your browser-local Saved list.</p>`;
 }
@@ -398,10 +398,17 @@ export function createHandler({
         const removed = subscriber && (all
           ? await store.unsubscribeAllForSubscriber(subscriber.id, current.toISOString())
           : await store.unsubscribeForSubscriber(subscriber.id, subscriptionId, current.toISOString()));
+        const returnToken = String(body.return_token || "");
+        const returnSubscriber = removed && subscriber && returnToken
+          ? await resolveSubscriberCapability(store, returnToken, "manage", "", env, current)
+          : null;
+        const returnToManage = returnSubscriber?.id === subscriber?.id
+          ? `<p><a class="button-link" href="/manage?token=${escapeHtml(encodeURIComponent(returnToken))}">Return to manage alerts</a></p>`
+          : "";
         return removed
           ? all
-            ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>")
-            : html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from this Funding Finder alert.</p>")
+            ? html(200, `<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>${returnToManage}`)
+            : html(200, `<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from this Funding Finder alert.</p>${returnToManage}`)
           : html(400, "<h1>Unable to unsubscribe</h1>");
       }
 
