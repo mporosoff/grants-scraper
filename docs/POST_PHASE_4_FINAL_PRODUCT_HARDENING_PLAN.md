@@ -439,10 +439,19 @@ The decision must verify the actual account plan, CPU, wall-time, subrequest, st
 
 | Unit | Status | PR | Candidate | Final `main` | Review/CI | Deployment |
 |---|---|---|---|---|---|---|
-| 0 | Not started | — | — | — | — | Documentation only |
-| A | Integrated into A-C candidate; not complete or live | [Closed PR #82](https://github.com/mporosoff/grants-scraper/pull/82) | `443748b0381fedbae5ba478fb04b11dcf057827e` | — | Terminal clean exact-head review; Python/browser green; two date-bound E2E fixtures deferred to the integration train | Not deployed |
-| B | Frozen candidate on Unit A; not integrated | — | `cfbbcd309d8340313e7f10b70851603ddbbb95a6` | — | Historical local validation only | Not deployed |
-| C | Not started | — | — | — | — | — |
+| 0 | Complete | [PR #81](https://github.com/mporosoff/grants-scraper/pull/81) | `68af61ea71a9ba10144a7532916fa392f0c4738e` | `464d0dd48cd69eefee2bd349afd4f7a4b5ec0fe6` | Terminal clean exact-head review and three green Tests jobs | Documentation only; no application deployment |
+| A | Integrated into A-C candidate; not complete or live | [Closed PR #82](https://github.com/mporosoff/grants-scraper/pull/82) | `443748b0381fedbae5ba478fb04b11dcf057827e` | — | Terminal clean exact-head review; prior Python/browser green; corrected date-bound fixtures and focused browser contracts green on the train | Not deployed |
+| B | Integrated into A-C candidate; not complete or live | — | Frozen delta `cfbbcd309d8340313e7f10b70851603ddbbb95a6`; train commits `716aa39`, `502305a`, and `3c7a849` | — | Focused snapshot, Award/ROR, release, packaging, and resource checks green | Not deployed |
+| C | Integrated into A-C candidate; not complete or live | — | `ba2938983d5689bdbbb757a0ba277cb40b4ccd9f` | — | Privacy-safe delivery audit and focused browser, mobile, E2E, and accessibility checks complete | Not deployed |
 | D | Not started | — | — | — | — | Documentation only |
+
+### Pre-deployment integration evidence — 2026-08-28
+
+- Unit A's two date-bound real-catalog fixtures are fixed at `2026-08-28T12:00:00Z`; both focused cases and the 32 applicable browser contracts passed.
+- Unit B's final focused Worker gate passed 62 Award, ROR, snapshot, source-state, pagination, facet, ordering, retry, privacy, release, and deployment-classification contracts. Pinned Wrangler `4.125.0` accepted the package at 404.39 KiB uncompressed and 101.22 KiB gzip.
+- The final production target is Workers Paid, with `limits.cpu_ms` explicitly set to 1,000. In the repeated 1,650-award synthetic measurement, snapshot construction measured 5.623 ms minimum, 9.691 ms p50, 13.097 ms p95, and 17.612 ms maximum; create-response serialization measured 0.486 ms p50 and page-50 construction plus serialization measured 1.741 ms p50. Actual post-deployment Cloudflare CPU distributions and invocation outcomes remain authoritative.
+- The same Unit B measurement produced a 1,126,787-byte stored snapshot, a 38,313-byte create response, and a 347,299-byte page-50 response. Observed process-heap growth from fixture construction through the snapshot-build peak was 4,718,672 bytes against Cloudflare's 128 MiB isolate limit.
+- A maximum all-source cache-miss create with uncurated ROR resolution is structurally bounded to 10 Cache API operations, 40 upstream/abuse-guard subrequests, and 50 combined subrequests, below the Workers Paid 10,000-subrequest limit. Server-built membership, complete-versus-partial truthfulness, internal facet membership, source isolation, and immutable snapshot ownership remain unchanged; the public create/page projections avoid returning redundant internal membership arrays.
+- Unit C's read-only production audit confirmed application/provider acceptance evidence but no provider-webhook or authorized inbox-receipt evidence; inbox delivery is therefore not claimed. The integrated dialog implementation passed its focused repeated-open, focus, scroll-lock, 320 px mobile/virtual-keyboard/orientation, deterministic multiple-address/subscription, and accessibility checks without changing the Alerts Worker or D1 schema.
 
 Final completion requires Units 0 and A-D to be merged and every applicable production gate to be truthfully closed.
