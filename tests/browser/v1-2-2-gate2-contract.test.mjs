@@ -4,8 +4,9 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [workflowSource, app, hybrid, searchPage, help] = await Promise.all([
+const [workflowSource, querySource, app, hybrid, searchPage, help] = await Promise.all([
   readFile(new URL("assets/result-workflow.js", root), "utf8"),
+  readFile(new URL("assets/search-query.js", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("assets/search-hybrid.js", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
@@ -13,10 +14,10 @@ const [workflowSource, app, hybrid, searchPage, help] = await Promise.all([
 ]);
 
 function loadWorkflow() {
-  const context = { Date, Map, Math, Number, Object, Set, String };
-  context.globalThis = context;
+  const context = { globalThis: {} };
+  vm.runInNewContext(querySource, context, { filename: "search-query.js" });
   vm.runInNewContext(workflowSource, context, { filename: "result-workflow.js" });
-  return context.FUNDING_RESULT_WORKFLOW;
+  return context.globalThis.FUNDING_RESULT_WORKFLOW;
 }
 
 test("AI-expanded matches retain bounded Strong objects without mutating the ordinary baseline", () => {

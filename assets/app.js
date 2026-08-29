@@ -3024,8 +3024,8 @@
     </article>`;
   }
 
-  function currentModel() {
-    if ($("k-provider").value === "anthropic") {
+  function currentModel(provider = $("k-provider").value) {
+    if (provider === "anthropic") {
       return globalThis.FUNDING_AI?.ANTHROPIC_MODEL || "";
     }
     return globalThis.FUNDING_AI?.OPENAI_MODEL || "";
@@ -4100,13 +4100,13 @@
     recordDeploymentUsage("csv_exports");
   }
 
-  async function providerStructured(operation, system, user) {
+  async function providerStructured(operation, system, user, connection = null) {
     if (!globalThis.FUNDING_AI?.structuredResult) {
       throw new Error("The optional AI refinement module did not load. Public catalog search is still available.");
     }
     return globalThis.FUNDING_AI.structuredResult({
-      provider: $("k-provider").value,
-      key: $("k-key").value,
+      provider: connection?.provider || $("k-provider").value,
+      key: connection?.key ?? $("k-key").value,
       operation,
       system,
       user,
@@ -4361,6 +4361,10 @@
       return;
     }
 
+    const refinementConnection = Object.freeze({
+      provider: $("k-provider").value,
+      key: $("k-key").value.trim(),
+    });
     const signature = refinementSearchSignature();
     const sequence = ++state.refinement.requestSequence;
     state.refinement.searchSignature = signature;
@@ -4385,6 +4389,7 @@
           active_filters: selectedFilterSummary(),
           prompt_version: PROMPT_VERSION,
         }),
+        refinementConnection,
       );
       if (!refinementRequestIsCurrent(sequence, signature)) return;
       const phrases = RESULT_WORKFLOW_API.sanitizeAlternativePhrases(
@@ -4424,6 +4429,7 @@
           candidate_opportunities: candidateRecords,
           prompt_version: PROMPT_VERSION,
         }),
+        refinementConnection,
       );
       if (!refinementRequestIsCurrent(sequence, signature)) return;
       const selected = RESULT_WORKFLOW_API.selectAssessedAdditions({
@@ -4446,8 +4452,8 @@
         additions: selected.additions,
       });
       state.refinement.summary = String(ranked.summary || plan.interpretation || "");
-      state.refinement.provider = $("k-provider").value;
-      state.refinement.model = currentModel();
+      state.refinement.provider = refinementConnection.provider;
+      state.refinement.model = currentModel(refinementConnection.provider);
       clearResultFocusPreservingConversation();
       state.page = 1;
       recordDeploymentUsage("ai_matches");

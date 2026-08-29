@@ -601,6 +601,23 @@ test("refinement sends only enabled profile context and honors the explicit CV-f
   expect(context.cv_excerpt).toBeUndefined();
 });
 
+test("refinement keeps both calls and provenance bound to its starting provider", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const ai = await mockOpenAiBroadening(page, { planDelayMs: 500 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-provider-snapshot-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("Step 1 of 2");
+  await page.locator("#k-provider").selectOption("anthropic");
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+  expect(ai.calls).toBe(2);
+  await expect(page.locator("#k-provider")).toHaveValue("anthropic");
+  await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved");
+});
+
 test("rerunning changed criteria clears stale chat focus while preserving the conversation", async ({ page }) => {
   mockHybrid(page, { maxRankings: 0 });
   const ai = await mockOpenAiBroadening(page, { chatResultAction: "focus" });

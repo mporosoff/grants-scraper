@@ -106,6 +106,8 @@
   function sanitizeAlternativePhrases(values, maximum = 16) {
     const limit = Math.max(0, Math.min(16, Number(maximum) || 0));
     if (!limit) return [];
+    const retrievalTokenize = globalThis.FUNDING_SEARCH_QUERY?.tokenize;
+    if (typeof retrievalTokenize !== "function") return [];
     const phrases = [];
     const seen = new Set();
     for (const value of Array.isArray(values) ? values : []) {
@@ -114,11 +116,11 @@
         .replace(/\s+/g, " ")
         .trim()
         .slice(0, 120);
-      const key = phrase
-        .toLocaleLowerCase("en-US")
-        .replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "")
-        .trim();
-      if (!key || seen.has(key) || GENERIC_STANDALONE_PHRASES.has(key)) continue;
+      const tokens = retrievalTokenize(phrase);
+      const key = Array.isArray(tokens) ? tokens.join("\u001f") : "";
+      const genericStandalone = tokens?.length === 1
+        && GENERIC_STANDALONE_PHRASES.has(tokens[0]);
+      if (!key || seen.has(key) || genericStandalone) continue;
       seen.add(key);
       phrases.push(phrase);
       if (phrases.length >= limit) break;

@@ -4,8 +4,9 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [workflowSource, appSource, pageSource, cssSource, profileSource] = await Promise.all([
+const [workflowSource, querySource, appSource, pageSource, cssSource, profileSource] = await Promise.all([
   readFile(new URL("assets/result-workflow.js", root), "utf8"),
+  readFile(new URL("assets/search-query.js", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("match_explorer.html", root), "utf8"),
   readFile(new URL("assets/app.css", root), "utf8"),
@@ -13,10 +14,10 @@ const [workflowSource, appSource, pageSource, cssSource, profileSource] = await 
 ]);
 
 function loadWorkflow() {
-  const context = { Date, Map, Math, Number, Object, Set, String };
-  context.globalThis = context;
+  const context = { globalThis: {} };
+  vm.runInNewContext(querySource, context, { filename: "search-query.js" });
   vm.runInNewContext(workflowSource, context, { filename: "result-workflow.js" });
-  return context.FUNDING_RESULT_WORKFLOW;
+  return context.globalThis.FUNDING_RESULT_WORKFLOW;
 }
 
 function ids(values) {
@@ -46,10 +47,24 @@ test("realistic alternative phrases remain independent retrieval paths and gener
     "science,",
     "Technology!",
     "...",
+    "Sciences",
+    "Technologies",
+    "Innovations",
+    "Energies",
     " reaction engineering ",
   ];
   const phrases = workflow.sanitizeAlternativePhrases(raw);
   assert.deepEqual([...phrases], raw.slice(0, 10));
+  assert.deepEqual(
+    [...workflow.sanitizeAlternativePhrases([
+      "Researching",
+      "Sciences",
+      "Technologies",
+      "Innovations",
+      "Energies",
+    ])],
+    [],
+  );
 
   const calls = [];
   const byPhrase = new Map(phrases.map((phrase, index) => [phrase, [
@@ -243,6 +258,11 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(appSource, /state\.ordinarySearchSignature = refinementSearchSignature\(\)/);
   assert.match(appSource, /function aiRefineSearchIsCurrent\(\)[\s\S]*?state\.ordinarySearchSignature === refinementSearchSignature\(\)/);
   assert.match(appSource, /function refinementProfileFingerprint\(\)[\s\S]*?preferences: \{\}/);
+  assert.match(refine, /const refinementConnection = Object\.freeze\([\s\S]*?provider:[\s\S]*?key:/);
+  assert.equal((refine.match(/refinementConnection,\s*\)/g) || []).length, 2);
+  assert.match(refine, /state\.refinement\.provider = refinementConnection\.provider/);
+  assert.match(refine, /state\.refinement\.model = currentModel\(refinementConnection\.provider\)/);
+  assert.match(appSource, /function providerStructured\(operation, system, user, connection = null\)[\s\S]*?connection\?\.provider[\s\S]*?connection\?\.key/);
   assert.match(appSource, /if \(refinementChanged\) clearResultFocusPreservingConversation\(\)/);
   assert.match(appSource, /state\.ai\.mode === "uploaded-nofo" && !state\.ai\.currentIds\.length/);
   assert.match(appSource, /function clearResultFocusPreservingConversation\(\)[\s\S]*?state\.ai\.mode === "uploaded-nofo"\) return/);
