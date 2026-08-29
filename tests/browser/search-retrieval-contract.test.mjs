@@ -30,6 +30,31 @@ function loadApis() {
   };
 }
 
+test("shared runtime currentness uses one immutable boundary clock", () => {
+  const { retrieval } = loadApis();
+  const beforeBoundary = new Date("2026-08-30T23:59:59Z");
+  const afterBoundary = new Date("2026-08-31T00:00:00Z");
+  const base = { status: "posted", close_date: "2026-08-30" };
+
+  assert.equal(retrieval.recordIsCurrent(base, beforeBoundary), true);
+  assert.equal(retrieval.recordIsCurrent(base, afterBoundary), false);
+  assert.equal(retrieval.recordIsCurrent({ ...base, rolling: true }, afterBoundary), true);
+  assert.equal(retrieval.recordIsCurrent({ status: "forecasted", close_date: "2026-09-30" }, afterBoundary), true);
+  assert.equal(retrieval.recordIsCurrent({ status: "archived", close_date: "2026-09-30" }, beforeBoundary), false);
+  assert.equal(retrieval.recordIsCurrent({
+    status: "posted",
+    posted_date: "2021-08-25",
+    close_date: "",
+    archive_date: "",
+  }, afterBoundary), false);
+  assert.equal(retrieval.recordIsCurrent({
+    status: "posted",
+    posted_date: "2026-08-01",
+    close_date: "",
+    archive_date: "",
+  }, afterBoundary), true);
+});
+
 function catalogFor(records, queryApi) {
   const postings = {};
   const documentLengths = [];

@@ -82,6 +82,17 @@ class FacultyMatchTests(unittest.TestCase):
             list(range(len(edges))),
         )
 
+    def test_directory_search_documents_preserve_official_phrase_boundaries(self):
+        canonical = {profile["faculty_id"]: profile for profile in self.config["profiles"]}
+        for projection in self.directory["profiles"]:
+            source = canonical[projection["faculty_id"]]
+            expected = "; ".join(
+                " ".join(str(phrase).split()).casefold()
+                for phrase in source.get("research_phrases", [])
+                if str(phrase).strip()
+            ) if source.get("rankable") else ""
+            self.assertEqual(projection["search_document"], expected)
+
     def test_generic_or_theme_only_overlap_cannot_admit(self):
         profile = {
             "faculty_id": "generic",

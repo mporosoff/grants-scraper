@@ -16,6 +16,8 @@ const VECTOR_PATH = "data/search-v2-voyage-vectors.f16";
 const CANARY_PATH = "data/search-v2-voyage-canaries.json";
 const ALLOWLIST_PATH = "workers/search-voyage-proxy/generated/corpus-allowlist.json";
 const RELEASE_PATH = "data/search-v2-release.json";
+const FINDER_PAGE_PATH = "match_explorer.html";
+const FINDER_RUNTIME_PATH = "assets/app.js";
 const WORKER_SOURCE_PATH = "workers/search-voyage-proxy/src/index.js";
 const REQUIRED_MODEL = "voyage-4-lite";
 const REQUIRED_DIMENSION = 1024;
@@ -23,6 +25,23 @@ const execFileAsync = promisify(execFile);
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
+}
+
+async function synchronizeFinderRuntimeCacheKey(write) {
+  const [runtimeBytes, pageText] = await Promise.all([
+    read(FINDER_RUNTIME_PATH),
+    readFile(new URL(FINDER_PAGE_PATH, ROOT), "utf8"),
+  ]);
+  const runtimeSha256 = sha256(runtimeBytes);
+  const cacheKey = `app-${runtimeSha256.slice(0, 16)}`;
+  const pattern = /(\.\/assets\/app\.js\?v=)[^"']+/;
+  if (!pattern.test(pageText)) throw new Error("Funding Finder does not publish a versioned app.js runtime.");
+  const expectedPage = pageText.replace(pattern, `$1${cacheKey}`);
+  if (expectedPage !== pageText) {
+    if (!write) throw new Error("Funding Finder's app.js cache key does not match the runtime content hash.");
+    await writeFile(new URL(FINDER_PAGE_PATH, ROOT), expectedPage, "utf8");
+  }
+  return { cacheKey, runtimeSha256 };
 }
 
 async function read(path) {
@@ -187,6 +206,7 @@ async function run() {
   const bootstrapIndex = process.argv.indexOf("--bootstrap-previous");
   const bootstrapRevision = bootstrapIndex >= 0 ? process.argv[bootstrapIndex + 1] : "";
   if (bootstrapIndex >= 0 && !bootstrapRevision) throw new Error("--bootstrap-previous requires a Git revision.");
+  const finderRuntime = await synchronizeFinderRuntimeCacheKey(write);
   const bootstrapPromise = bootstrapRevision
     ? execFileAsync("git", ["show", `${bootstrapRevision}:${MANIFEST_PATH}`], { cwd: new URL(".", ROOT) })
       .then(({ stdout }) => JSON.parse(stdout))
@@ -233,6 +253,9 @@ async function run() {
     model_space_fingerprint: manifest.model_space_fingerprint || null,
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
+    runtime_cache_keys: {
+      [FINDER_RUNTIME_PATH]: finderRuntime.cacheKey,
+    },
     source_hashes: sourceHashes,
     atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
   };

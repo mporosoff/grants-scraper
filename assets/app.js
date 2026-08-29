@@ -500,24 +500,14 @@
   }
 
   function recordIsArchived(record, asOf = runtimeDateIso()) {
-    const status = String(record.status || "").trim().toLowerCase();
-    if (status === "archived") return true;
-    return /^\d{4}-\d{2}-\d{2}$/.test(record.archive_date || "")
-      && record.archive_date <= asOf;
+    return Boolean(RETRIEVAL_API?.recordIsArchived?.(record, asOf));
   }
 
   function recordIsCurrent(record, asOf = runtimeDateIso()) {
     const status = String(record.status || "").trim().toLowerCase();
-    if (["closed", "archived", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
-      return false;
-    }
-    if (recordIsArchived(record, asOf)) return false;
     if (nonFundingReason(record)) return false;
-    if (record.close_date) {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(record.close_date)) return false;
-      if (record.close_date < asOf) return false;
-    }
-    return status === "posted" || status === "forecasted";
+    return (status === "posted" || status === "forecasted")
+      && Boolean(RETRIEVAL_API?.recordIsCurrent?.(record, asOf));
   }
 
   function recordIsTestOpportunity(record) {

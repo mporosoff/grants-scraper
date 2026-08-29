@@ -41,6 +41,46 @@
       && Math.floor((now - posted) / 86_400_000) > STALE_UNDATED_MAX_AGE_DAYS;
   }
 
+  function runtimeDate(value = Date.now()) {
+    const date = value instanceof Date ? new Date(value.getTime()) : new Date(value);
+    return Number.isFinite(date.getTime()) ? date : null;
+  }
+
+  function runtimeDateIso(value = Date.now()) {
+    return runtimeDate(value)?.toISOString().slice(0, 10) || "";
+  }
+
+  function recordIsArchived(record, now = Date.now()) {
+    const status = String(record?.status || "").trim().toLowerCase();
+    if (status === "archived") return true;
+    const today = runtimeDateIso(now);
+    const archiveDate = String(record?.archive_date || "").trim();
+    if (!archiveDate) return false;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(archiveDate) || !today) return true;
+    return archiveDate <= today;
+  }
+
+  function recordIsCurrent(record, now = Date.now()) {
+    if (!record) return false;
+    const status = String(record.status || "").trim().toLowerCase();
+    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
+      return false;
+    }
+    if (recordIsArchived(record, now)) return false;
+    // Legacy in-memory fixtures omit status; published runtime records do not.
+    // Any explicit status must use the catalog's two displayable states.
+    if (status && !["posted", "forecasted"].includes(status)) return false;
+    const today = runtimeDateIso(now);
+    if (!today) return false;
+    const closeDate = String(record.close_date || "").trim();
+    if (closeDate) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(closeDate)) return false;
+      if (closeDate < today && !record.rolling) return false;
+    }
+    const instant = runtimeDate(now);
+    return !staleUndatedOpportunity(record, instant?.getTime());
+  }
+
   function positiveScale(values) {
     const positive = Array.from(values || [])
       .filter(value => Number(value) > 0)
@@ -2792,6 +2832,8 @@
     create,
     createChildCatalog,
     positiveScale,
+    recordIsArchived,
+    recordIsCurrent,
     rollupRankedRecords,
     rollupScores,
     validateSearchV2Configuration,

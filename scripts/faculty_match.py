@@ -149,7 +149,14 @@ def _generation_id(source_sha: str, catalog_fingerprint: str,
 
 
 def _search_document(profile: dict) -> str:
-    return " ".join(_tokens(profile.get("research_interests_text"))) if profile.get("rankable") else ""
+    if not profile.get("rankable"):
+        return ""
+    phrases = profile.get("research_phrases") or []
+    return "; ".join(
+        re.sub(r"\s+", " ", str(phrase)).strip().casefold()
+        for phrase in phrases
+        if str(phrase).strip()
+    )
 
 
 def build_directory(config: dict, catalog_identity: dict) -> dict:

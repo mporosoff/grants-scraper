@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="theme-color" content="#001e5f" />
-<meta name="hajim-match-generation" content="706d30ec6b7ccdc5c2f44407fb0dc34fce24cd886a82366f196a6cdbb05f8c2c" />
+<meta name="hajim-match-generation" content="7a79ea633c2e4138ddf983870d83beeeb1c34eb1894639d355b281dd93d92871" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Funding Finder Team Match" />
 <meta property="og:title" content="Team Match | Funding Finder" />
@@ -310,17 +310,17 @@
 <script src="assets/app-config.js?v=app-1.3.0-script-timeout2"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260828T211742197473Z"></script>
-<script src="data/hajim_faculty_directory.js?v=706d30ec6b7ccdc5c2f44407fb0dc34fce24cd886a82366f196a6cdbb05f8c2c"></script>
+<script src="data/hajim_faculty_directory.js?v=7a79ea633c2e4138ddf983870d83beeeb1c34eb1894639d355b281dd93d92871"></script>
 <script src="assets/hajim-faculty.js?v=hajim-identity-20260829"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
-<script src="assets/search-retrieval.js?v=app-1.3.0"></script>
+<script src="assets/search-retrieval.js?v=runtime-3173705c99739d11"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
 <script src="assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
 <script src="assets/team-hybrid.js?v=app-1.3.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
-<script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
+<script src="assets/team-researchers.js?v=runtime-47aa9aa8b5c9b934"></script>
 <script src="assets/team-match-config.js?v=manual-team-config-20260829"></script>
-<script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
+<script src="assets/team-matcher.js?v=runtime-d654612a59b8ddaf"></script>
 <script src="assets/site-help.js?v=unified-ui-20260825"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
@@ -352,6 +352,7 @@
   var TEAM_HYBRID_API = globalThis.FUNDING_TEAM_HYBRID || null;
   var MATCHER_API = globalThis.FUNDING_TEAM_MATCHER || null;
   var TEAM_MATCH_CONFIG = globalThis.FUNDING_TEAM_MATCH_CONFIG || {};
+  var TEAM_RUNTIME_NOW = new Date();
   var MATCH_ENGINE = null;
   var CHILD_MATCH_ENGINE = null;
   var CHILD_CATALOG = null;
@@ -419,9 +420,13 @@
     var profile = externalProfile(key);
     return profile ? profile.name : ((faculty[key] && faculty[key].name) || key);
   }
+  function facultyResearchPhrases(key) {
+    return String((faculty[key] && faculty[key].search_document) || "")
+      .split(/\s*;\s*/).map(function (value) { return value.trim(); }).filter(Boolean);
+  }
   function memberTerms(key) {
     var profile = externalProfile(key);
-    return profile ? profile.keywords : ((faculty[key] && faculty[key].search_document.split(" ").filter(Boolean)) || []);
+    return profile ? profile.keywords : facultyResearchPhrases(key);
   }
   function memberSummary(key) {
     var profile = externalProfile(key);
@@ -442,11 +447,13 @@
       };
     }
     var metadata = faculty[key] || {};
+    var researchPhrases = facultyResearchPhrases(key);
     return {
       name: metadata.name || key,
-      key_terms: metadata.search_document ? [metadata.search_document] : [],
+      key_terms: researchPhrases,
+      keywords: researchPhrases,
       research_summary: "",
-      domains: metadata.rosters || []
+      domains: TEAM_API ? TEAM_API.inferDomains(researchPhrases) : []
     };
   }
   function memberMatches(key) {
@@ -738,6 +745,7 @@
           terms: fit.researchReasons || [],
           scopeLabel: fit.scopeLabel || "",
           shared_topics: [],
+          evidenceSource: fit.evidenceSource || "",
           score: fit.score || 0,
           rank_score: fit.score || 0
         };
@@ -746,6 +754,17 @@
       sumScore: result.relevanceScore || 0,
       sumRankScore: result.rankScore || 0
     };
+  }
+
+  function rollupTeamResults(parentResults, childResults, department) {
+    return MATCHER_API.rollupTeamMatches({
+      parentResults: parentResults,
+      childResults: childResults,
+      parentRecord: function (id) { return byId[id] || null; },
+      retrievalApi: RETRIEVAL_API,
+      now: TEAM_RUNTIME_NOW,
+      childEnabled: Boolean(CHILD_CATALOG && CHILD_MATCH_ENGINE)
+    }).map(function (result) { return liveEntry(result, department); });
   }
 
   function buildShared(members) {
@@ -763,49 +782,14 @@
     lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
     var outcome = MATCH_ENGINE.matchTeam(profiles, activeLabels);
     renderThemes(outcome.themes);
-    if (!CHILD_MATCH_ENGINE || !RETRIEVAL_API || !CHILD_CATALOG) {
-      return outcome.results.map(function (result) { return liveEntry(result, false); });
-    }
-    var childOutcome = CHILD_MATCH_ENGINE.matchTeam(profiles, activeLabels);
-    var rolled = RETRIEVAL_API.rollupRankedRecords({
-      parentRows: outcome.results,
-      childRows: childOutcome.results,
-      parentId: function (row) { return row.id; },
-      childParentId: function (row) { return row.record && row.record.parent_id; },
-      childId: function (row) { return row.id; },
-      score: function (row) { return row && row.relevanceScore; }
-    });
-    return rolled.rows.map(function (row) {
-      var parentRecord = byId[row.id];
-      if (!parentRecord) return null;
-      var parentResult = row.parent;
-      var bestTopic = row.bestChild && row.bestChild.row;
-      var evidence = row.childNormalized > row.parentNormalized ? bestTopic : parentResult;
-      return liveEntry({
-        id: row.id,
-        title: parentRecord.title,
-        agency: parentRecord.agency,
-        url: parentRecord.primary_document_url || parentRecord.funding_opportunity_url || parentRecord.detail_page || "",
-        deadline: parentRecord.close_date ? "Closes " + parentRecord.close_date : "",
-        postedDate: parentRecord.posted_date || parentRecord.source_first_seen_date || "",
-        updatedDate: parentRecord.last_updated || "",
-        new: Boolean(parentResult && parentResult.new),
-        broad: Boolean(parentResult && parentResult.broad),
-        closingSoon: Boolean(parentResult && parentResult.closingSoon),
-        relevanceScore: row.relevance,
-        rankScore: row.relevance * Number((parentResult && parentResult.recencyBoost) || 1),
-        fits: (evidence && evidence.fits) || [],
-        themeHits: (evidence && evidence.themeHits) || [],
-        topicMatches: row.childDroveMatch
-          ? row.children.map(function (child) { return child.row; })
-          : [],
-        record: parentRecord
-      }, false);
-    }).filter(Boolean);
+    var childOutcome = CHILD_MATCH_ENGINE
+      ? CHILD_MATCH_ENGINE.matchTeam(profiles, activeLabels)
+      : { results: [] };
+    return rollupTeamResults(outcome.results, childOutcome.results, false);
   }
 
   function buildGraphShared(teamMembers) {
-    if (!M || !HAJIM_API) {
+    if (!M || !HAJIM_API || !MATCHER_API || !RETRIEVAL_API) {
       renderThemes([]);
       return [];
     }
@@ -813,7 +797,10 @@
       var index = new Map();
       if (!isExternalKey(member)) {
         HAJIM_API.facultyMatches(M, member).forEach(function (edge) {
-          index.set(edge.opportunity_id, { edge: edge });
+          var record = byId[edge.opportunity_id];
+          if (record && RETRIEVAL_API.recordIsCurrent(record, TEAM_RUNTIME_NOW)) {
+            index.set(edge.opportunity_id, { edge: edge });
+          }
         });
         return index;
       }
@@ -824,9 +811,7 @@
       return index;
     });
     if (!memberIndexes.length) return [];
-    var common = Array.from(memberIndexes[0].keys()).filter(function (opportunityId) {
-      return memberIndexes.slice(1).every(function (index) { return index.has(opportunityId); });
-    });
+    var common = MATCHER_API.intersectEvidenceIndexes(memberIndexes);
     var themeMembers = new Map();
     common.forEach(function (opportunityId) {
       teamMembers.forEach(function (member, memberIndex) {
@@ -838,14 +823,28 @@
         });
       });
     });
-    var themes = Array.from(themeMembers.entries()).map(function (entry) {
+    var graphThemes = Array.from(themeMembers.entries()).map(function (entry) {
       return { type: "core", label: entry[0], domains: [], terms: [], members: Array.from(entry[1]) };
     }).sort(function (left, right) { return left.label.localeCompare(right.label); });
+    var profiles = teamMembers.map(memberProfile);
+    var profileThemes = MATCH_ENGINE ? MATCH_ENGINE.buildThemes(profiles) : [];
+    var themesByLabel = new Map();
+    graphThemes.concat(profileThemes).forEach(function (theme) {
+      var prior = themesByLabel.get(theme.label);
+      if (!prior) {
+        themesByLabel.set(theme.label, theme);
+      } else {
+        prior.members = Array.from(new Set((prior.members || []).concat(theme.members || [])));
+        prior.domains = Array.from(new Set((prior.domains || []).concat(theme.domains || [])));
+        prior.terms = Array.from(new Set((prior.terms || []).concat(theme.terms || [])));
+      }
+    });
+    var themes = Array.from(themesByLabel.values()).sort(function (left, right) { return left.label.localeCompare(right.label); });
     var activeLabels = new Set(themes.filter(function (theme) {
       return themeState[theme.label] !== false;
     }).map(function (theme) { return theme.label; }));
-    var themeFilterActive = activeLabels.size < themes.length;
-    if (themeFilterActive) {
+    var graphThemeFilterActive = graphThemes.some(function (theme) { return !activeLabels.has(theme.label); });
+    if (graphThemeFilterActive) {
       common = common.filter(function (opportunityId) {
         return teamMembers.some(function (_member, memberIndex) {
           var match = memberIndexes[memberIndex].get(opportunityId) || {};
@@ -854,44 +853,58 @@
       });
     }
     renderThemes(themes);
-    lastHybridProfiles = teamMembers.map(memberProfile);
+    lastHybridProfiles = profiles;
     lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
-    return common.map(function (opportunityId) {
+    var parentResults = common.map(function (opportunityId) {
       var record = byId[opportunityId] || {};
       var fits = teamMembers.map(function (member, memberIndex) {
         var match = memberIndexes[memberIndex].get(opportunityId) || {};
         if (match.edge) {
           return {
-            name: memberName(member), external: false,
-            terms: match.edge.matched_profile_phrases || [],
-            shared_topics: match.edge.corroborating_themes || [],
-            score: match.edge.score || 0, rank_score: match.edge.score || 0
+            name: memberName(member),
+            researchReasons: match.edge.matched_profile_phrases || [],
+            evidenceSource: "faculty_graph",
+            score: match.edge.score || 0
           };
         }
         var fit = match.result && match.result.fits && match.result.fits[0] || {};
         return {
-          name: memberName(member), external: true,
-          terms: fit.researchReasons || [], shared_topics: [],
-          score: fit.score || 0, rank_score: fit.score || 0
+          name: memberName(member),
+          researchReasons: fit.researchReasons || [],
+          scopeLabel: fit.scopeLabel || "",
+          evidenceSource: "parent_catalog",
+          score: fit.score || 0
         };
       });
       var sum = fits.reduce(function (total, fit) { return total + fit.score; }, 0);
-      var themeLabels = Array.from(new Set(fits.flatMap(function (fit) { return fit.shared_topics || []; })))
-        .filter(function (label) { return activeLabels.has(label); });
       return {
-        d: {
-          id: opportunityId,
-          title: record.title || opportunityId,
-          agency: record.agency || "",
-          url: record.primary_document_url || record.funding_opportunity_url || record.detail_page || "",
-          deadline: record.close_date ? "Closes " + record.close_date : "",
-          listing_date: record.posted_date || record.source_first_seen_date || "",
-          record: record,
-          themeLabels: themeLabels, topicMatches: [], scopeLabels: []
-        },
-        fits: fits, totalN: fits.length, sumScore: sum, sumRankScore: sum
+        id: opportunityId,
+        title: record.title || opportunityId,
+        agency: record.agency || "",
+        url: record.primary_document_url || record.funding_opportunity_url || record.detail_page || "",
+        deadline: record.close_date ? "Closes " + record.close_date : "",
+        postedDate: record.posted_date || record.source_first_seen_date || "",
+        updatedDate: record.last_updated || "",
+        relevanceScore: sum,
+        rankScore: sum,
+        recencyBoost: 1,
+        fits: fits,
+        themeHits: Array.from(new Set(teamMembers.flatMap(function (_member, memberIndex) {
+          var match = memberIndexes[memberIndex].get(opportunityId) || {};
+          return match.edge && match.edge.corroborating_themes || [];
+        }))).filter(function (label) { return activeLabels.has(label); }).map(function (label) {
+          return { label: label, score: 1 };
+        }),
+        record: record
       };
-    }).sort(balancedRanking);
+    });
+    var profileActiveLabels = new Set(profileThemes.filter(function (theme) {
+      return activeLabels.has(theme.label);
+    }).map(function (theme) { return theme.label; }));
+    var childOutcome = CHILD_MATCH_ENGINE
+      ? CHILD_MATCH_ENGINE.matchTeam(profiles, profileActiveLabels)
+      : { results: [] };
+    return rollupTeamResults(parentResults, childOutcome.results, false).sort(balancedRanking);
   }
   function matchesQuery(e, q) {
     if (!q) return true;
@@ -1086,7 +1099,7 @@
   function rebuildResearcherMatches() {
     researcherMatches = {};
     if (!MATCHER_API || !SEARCH_API) return;
-    MATCH_ENGINE = MATCHER_API.create(catalogData, TEAM_MATCH_CONFIG, SEARCH_API);
+    MATCH_ENGINE = MATCHER_API.create(catalogData, TEAM_MATCH_CONFIG, SEARCH_API, { now: TEAM_RUNTIME_NOW });
   }
 
   var facultySearchResults = [];
@@ -1519,7 +1532,7 @@
       try {
         var sidecar = await SUBTOPIC_API.loadSidecar();
         CHILD_CATALOG = RETRIEVAL_API.createChildCatalog(sidecar);
-        CHILD_MATCH_ENGINE = MATCHER_API.create(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API);
+        CHILD_MATCH_ENGINE = MATCHER_API.create(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API, { now: TEAM_RUNTIME_NOW });
       } catch (error) {
         CHILD_CATALOG = null;
         CHILD_MATCH_ENGINE = null;

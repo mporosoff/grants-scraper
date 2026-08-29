@@ -51,8 +51,194 @@ test("keeps manual and ORCID matching configuration eager and roster-independent
   assert.match(matchConfig.broad_pattern, /broad agency announcement/);
   assert.equal("faculty" in matchConfig, false);
   assert.match(teamPage, /assets\/team-match-config\.js/);
-  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API\)/);
-  assert.match(teamPage, /MATCHER_API\.create\(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API, \{ now: TEAM_RUNTIME_NOW \}\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API, \{ now: TEAM_RUNTIME_NOW \}\)/);
+});
+
+function childTopicCatalog(query, children, excluded = []) {
+  const index = buildIndex(children, query);
+  return {
+    schema_version: 1,
+    records: {
+      parent: {
+        subtopics: [...children, ...excluded],
+      },
+    },
+    search_index: {
+      ...index,
+      record_ids: children.map(child => child.subtopic_id),
+    },
+  };
+}
+
+function childTopicFixtures(apis, profiles) {
+  const parent = {
+    opportunity_id: "parent",
+    title: "Umbrella research program",
+    description: "Broad research areas without the specific child terminology.",
+    status: "posted",
+    close_date: "2027-01-15",
+  };
+  const eligible = {
+    subtopic_id: "parent:eligible",
+    parent_id: "parent",
+    title: "Catalytic carbon conversion and catalyst screening",
+    summary: "Heterogeneous catalysis, reaction kinetics, and machine learning catalyst screening for carbon conversion.",
+    publication_state: "publishable",
+    child_type: "subject",
+    topic_areas: ["Catalysis and reaction engineering", "Artificial intelligence and machine learning"],
+  };
+  const unrelated = {
+    subtopic_id: "parent:unrelated",
+    parent_id: "parent",
+    title: "Community arts engagement",
+    summary: "Public art workshops and cultural events.",
+    publication_state: "publishable",
+    child_type: "subject",
+    topic_areas: ["Arts and culture"],
+  };
+  const excluded = {
+    subtopic_id: "parent:excluded",
+    parent_id: "parent",
+    title: "Catalytic carbon conversion internal draft",
+    summary: eligible.summary,
+    publication_state: "excluded",
+    child_type: "subject",
+  };
+  const sidecar = childTopicCatalog(apis.query, [eligible, unrelated], [excluded]);
+  const childCatalog = apis.retrieval.createChildCatalog(sidecar);
+  const childEngine = apis.matcher.create(childCatalog, apis.matchConfig, apis.query, {
+    now: new Date("2026-08-29T12:00:00Z"),
+  });
+  return {
+    parent,
+    outcome: childEngine.matchTeam(profiles),
+  };
+}
+
+function rollupChildOnly(apis, parent, childResults) {
+  return apis.matcher.rollupTeamMatches({
+    parentResults: [],
+    childResults,
+    parentRecord: id => id === parent.opportunity_id ? parent : null,
+    retrievalApi: apis.retrieval,
+    now: new Date("2026-08-29T12:00:00Z"),
+  });
+}
+
+test("all-Hajim teams retain publication-eligible child-only parent matches", () => {
+  const apis = loadApis();
+  const profiles = [
+    {
+      name: "Hajim Catalysis Researcher",
+      key_terms: ["heterogeneous catalysis", "reaction kinetics"],
+      domains: ["Catalysis and reaction engineering"],
+    },
+    {
+      name: "Hajim Data Researcher",
+      key_terms: ["machine learning catalyst screening", "carbon conversion"],
+      domains: ["Artificial intelligence and machine learning"],
+    },
+  ];
+  const { parent, outcome } = childTopicFixtures(apis, profiles);
+  const rows = rollupChildOnly(apis, parent, outcome.results);
+
+  assert.deepEqual(Array.from(rows, row => row.id), ["parent"]);
+  assert.deepEqual(Array.from(rows[0].topicMatches, row => row.id), ["parent:eligible"]);
+  assert.ok(rows[0].fits.every(fit => fit.evidenceSource === "child_topic"));
+  assert.equal(rows[0].topicMatches.some(row => row.id === "parent:unrelated"), false);
+  assert.equal(rows[0].topicMatches.some(row => row.id === "parent:excluded"), false);
+});
+
+test("mixed Hajim and custom teams retain child evidence and every-researcher gating", () => {
+  const apis = loadApis();
+  const mixedProfiles = [
+    {
+      name: "Hajim Catalysis Researcher",
+      key_terms: ["heterogeneous catalysis", "reaction kinetics"],
+      domains: ["Catalysis and reaction engineering"],
+    },
+    {
+      name: "Manual Collaborator",
+      keywords: ["machine learning catalyst screening", "carbon conversion"],
+      key_terms: ["machine learning catalyst screening", "carbon conversion"],
+      domains: ["Artificial intelligence and machine learning"],
+    },
+  ];
+  const mixed = childTopicFixtures(apis, mixedProfiles);
+  const rows = rollupChildOnly(apis, mixed.parent, mixed.outcome.results);
+  assert.equal(rows.length, 1);
+  assert.deepEqual(Array.from(rows[0].fits, fit => fit.name), ["Hajim Catalysis Researcher", "Manual Collaborator"]);
+
+  const unrelatedResearcher = {
+    name: "Unrelated Researcher",
+    key_terms: ["medieval poetry", "community theater"],
+    domains: ["Arts and culture"],
+  };
+  const gated = childTopicFixtures(apis, [mixedProfiles[0], unrelatedResearcher]);
+  assert.equal(gated.outcome.results.length, 0);
+  assert.equal(rollupChildOnly(apis, gated.parent, gated.outcome.results).length, 0);
+
+  const graphIndex = new Map([["parent", { edge: true }]]);
+  const customIndex = new Map();
+  assert.equal(apis.matcher.intersectEvidenceIndexes([graphIndex, customIndex]).length, 0);
+});
+
+test("ordinary custom team results use the same rollup without expanding eligibility", () => {
+  const apis = loadApis();
+  const parent = {
+    opportunity_id: "ordinary",
+    title: "Ordinary custom-team opportunity",
+    status: "posted",
+    close_date: "2027-01-15",
+  };
+  const direct = {
+    id: "ordinary",
+    title: parent.title,
+    relevanceScore: 7,
+    rankScore: 7,
+    recencyBoost: 1,
+    fits: [{ name: "Custom A" }, { name: "Custom B" }],
+    themeHits: [],
+    record: parent,
+  };
+  const rows = apis.matcher.rollupTeamMatches({
+    parentResults: [direct],
+    childResults: [],
+    parentRecord: () => parent,
+    retrievalApi: apis.retrieval,
+    now: new Date("2026-08-29T12:00:00Z"),
+  });
+  assert.deepEqual(Array.from(rows, row => row.id), ["ordinary"]);
+  assert.deepEqual(Array.from(rows[0].fits, fit => fit.name), ["Custom A", "Custom B"]);
+  assert.deepEqual(Array.from(rows[0].topicMatches), []);
+});
+
+test("graph membership cannot override the shared runtime catalog state", () => {
+  const apis = loadApis();
+  const expired = {
+    opportunity_id: "expired-graph-member",
+    title: "Expired graph member",
+    status: "posted",
+    close_date: "2026-08-28",
+  };
+  const graphResult = {
+    id: expired.opportunity_id,
+    relevanceScore: 10,
+    fits: [{ name: "Hajim A" }, { name: "Hajim B" }],
+    record: expired,
+  };
+  const rows = apis.matcher.rollupTeamMatches({
+    parentResults: [graphResult],
+    parentRecord: () => expired,
+    retrievalApi: apis.retrieval,
+    now: new Date("2026-08-29T12:00:00Z"),
+    childEnabled: false,
+  });
+  assert.equal(rows.length, 0);
+  assert.match(teamPage, /RETRIEVAL_API\.recordIsCurrent\(record, TEAM_RUNTIME_NOW\)/);
+  assert.match(teamPage, /MATCHER_API\.rollupTeamMatches/);
+  assert.match(teamPage, /CHILD_MATCH_ENGINE\.matchTeam\(profiles, profileActiveLabels\)/);
 });
 
 function memoryStorage() {
@@ -103,7 +289,7 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.match(teamPage, /assets\/search-retrieval\.js/);
   assert.match(teamPage, /assets\/search-hybrid\.js/);
   assert.match(teamPage, /assets\/team-hybrid\.js/);
-  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API, \{ now: TEAM_RUNTIME_NOW \}\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
   assert.match(teamPage, /function opportunityCard/);

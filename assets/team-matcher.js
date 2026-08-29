@@ -50,18 +50,6 @@
     return Math.floor((now.getTime() - timestamp) / 86400000);
   }
 
-  function recordIsCurrent(record, now) {
-    const status = String(record.status || "").trim().toLowerCase();
-    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
-      return false;
-    }
-    const archiveAge = daysBetween(record.archive_date, now);
-    if (archiveAge !== null && archiveAge >= 0) return false;
-    const closeAge = daysBetween(record.close_date, now);
-    if (closeAge !== null && closeAge > 0 && !record.rolling) return false;
-    return true;
-  }
-
   function recordIsTestOpportunity(record) {
     const agency = String(record.agency || "");
     const text = `${record.title || ""} ${String(record.description || "").slice(0, 500)}`;
@@ -96,7 +84,73 @@
     return [...new Set(values.filter(Boolean))];
   }
 
+  function intersectEvidenceIndexes(indexes) {
+    if (!Array.isArray(indexes) || !indexes.length) return [];
+    return Array.from(indexes[0].keys()).filter(identifier => (
+      indexes.slice(1).every(index => index.has(identifier))
+    ));
+  }
+
+  function rollupTeamMatches({
+    parentResults = [],
+    childResults = [],
+    parentRecord = () => null,
+    retrievalApi = globalThis.FUNDING_RETRIEVAL,
+    now = new Date(),
+    childEnabled = true,
+  } = {}) {
+    if (!retrievalApi?.recordIsCurrent) {
+      throw new Error("Team rollup requires the shared funding currentness contract.");
+    }
+    if (!childEnabled) {
+      return parentResults.filter(result => (
+        retrievalApi.recordIsCurrent(result.record || parentRecord(result.id), now)
+      ));
+    }
+    const rolled = retrievalApi.rollupRankedRecords({
+      parentRows: parentResults,
+      childRows: childResults,
+      parentId: row => row.id,
+      childParentId: row => row.record?.parent_id,
+      childId: row => row.id,
+      score: row => row?.relevanceScore,
+    });
+    return rolled.rows.map(row => {
+      const record = parentRecord(row.id);
+      if (!record || !retrievalApi.recordIsCurrent(record, now)) return null;
+      const direct = row.parent;
+      const bestTopic = row.bestChild?.row || null;
+      const evidence = row.childNormalized > row.parentNormalized ? bestTopic : direct;
+      const evidenceSource = evidence === bestTopic ? "child_topic" : "";
+      return {
+        id: row.id,
+        title: record.title,
+        agency: record.agency,
+        url: record.primary_document_url || record.funding_opportunity_url || record.detail_page || "",
+        deadline: record.close_date ? `Closes ${record.close_date}` : "",
+        postedDate: record.posted_date || record.source_first_seen_date || "",
+        updatedDate: record.last_updated || "",
+        new: Boolean(direct?.new),
+        broad: Boolean(direct?.broad),
+        closingSoon: Boolean(direct?.closingSoon),
+        relevanceScore: row.relevance,
+        rankScore: row.relevance * Number(direct?.recencyBoost || 1),
+        fits: (evidence?.fits || []).map(fit => ({
+          ...fit,
+          evidenceSource: fit.evidenceSource || evidenceSource,
+        })),
+        themeHits: evidence?.themeHits || [],
+        topicMatches: row.childDroveMatch ? row.children.map(child => child.row) : [],
+        record,
+      };
+    }).filter(Boolean);
+  }
+
   function create(catalogData, config = {}, searchApi = null, options = {}) {
+    const recordIsCurrent = globalThis.FUNDING_RETRIEVAL?.recordIsCurrent;
+    if (typeof recordIsCurrent !== "function") {
+      throw new Error("Team Match requires the shared funding currentness contract.");
+    }
     const rawRecords = Array.isArray(catalogData?.opportunities)
       ? catalogData.opportunities
       : [];
@@ -616,5 +670,9 @@
     });
   }
 
-  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create });
+  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({
+    create,
+    intersectEvidenceIndexes,
+    rollupTeamMatches,
+  });
 })();
