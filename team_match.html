@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="theme-color" content="#001e5f" />
-<meta name="hajim-match-generation" content="f335bbdd56f5d79a184495810d7e679495cd5bf7d95b8bf1368547c52cb31d8a" />
+<meta name="hajim-match-generation" content="8be5c3336a40348c4e153c50009fcebade10ad224b95f1a1e091ba54c4285be2" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Funding Finder Team Match" />
 <meta property="og:title" content="Team Match | Funding Finder" />
@@ -310,7 +310,7 @@
 <script src="assets/app-config.js?v=app-1.3.0-script-timeout2"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260828T211742197473Z"></script>
-<script src="data/hajim_faculty_directory.js?v=f335bbdd56f5d79a184495810d7e679495cd5bf7d95b8bf1368547c52cb31d8a"></script>
+<script src="data/hajim_faculty_directory.js?v=8be5c3336a40348c4e153c50009fcebade10ad224b95f1a1e091ba54c4285be2"></script>
 <script src="assets/hajim-faculty.js?v=hajim-faculty-8fa66d073a31cd0a"></script>
 <script src="assets/search-query.js?v=search-query-43ddabcf52c78008"></script>
 <script src="assets/search-retrieval.js?v=search-retrieval-3173705c99739d11"></script>
@@ -320,7 +320,7 @@
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=team-researchers-47aa9aa8b5c9b934"></script>
 <script src="assets/team-match-config.js?v=team-match-config-ac592b58a1d3d2df"></script>
-<script src="assets/team-matcher.js?v=team-matcher-64132d257da85c3a"></script>
+<script src="assets/team-matcher.js?v=team-matcher-a5e8004fc28c1a58"></script>
 <script src="assets/site-help.js?v=site-help-a59ca23870aa1cc4"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
@@ -829,8 +829,9 @@
       });
     });
     var graphThemes = Array.from(themeMembers.entries()).map(function (entry) {
+      if (entry[1].size < 2) return null;
       return { type: "core", label: entry[0], domains: [], terms: [], members: Array.from(entry[1]) };
-    }).sort(function (left, right) { return left.label.localeCompare(right.label); });
+    }).filter(Boolean).sort(function (left, right) { return left.label.localeCompare(right.label); });
     var profiles = teamMembers.map(memberProfile);
     var profileThemes = MATCH_ENGINE ? MATCH_ENGINE.buildThemes(profiles) : [];
     var themesByLabel = new Map();
@@ -848,15 +849,16 @@
     var activeLabels = new Set(themes.filter(function (theme) {
       return themeState[theme.label] !== false;
     }).map(function (theme) { return theme.label; }));
-    var graphThemeFilterActive = graphThemes.some(function (theme) { return !activeLabels.has(theme.label); });
-    if (graphThemeFilterActive) {
-      common = common.filter(function (opportunityId) {
-        return teamMembers.some(function (_member, memberIndex) {
+    var themeOutcome = MATCH_ENGINE.narrowRecordIdsByThemes(
+      common, themes, profileThemes, activeLabels, function (opportunityId) {
+        return Array.from(new Set(teamMembers.flatMap(function (_member, memberIndex) {
           var match = memberIndexes[memberIndex].get(opportunityId) || {};
-          return (match.edge && match.edge.corroborating_themes || []).some(function (label) { return activeLabels.has(label); });
-        });
-      });
-    }
+          return match.edge && match.edge.corroborating_themes || [];
+        })));
+      }
+    );
+    common = themeOutcome.recordIds;
+    var activeThemeHits = themeOutcome.hitsById;
     renderThemes(themes);
     lastHybridProfiles = profiles;
     lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
@@ -894,12 +896,7 @@
         rankScore: sum,
         recencyBoost: 1,
         fits: fits,
-        themeHits: Array.from(new Set(teamMembers.flatMap(function (_member, memberIndex) {
-          var match = memberIndexes[memberIndex].get(opportunityId) || {};
-          return match.edge && match.edge.corroborating_themes || [];
-        }))).filter(function (label) { return activeLabels.has(label); }).map(function (label) {
-          return { label: label, score: 1 };
-        }),
+        themeHits: activeThemeHits.get(String(opportunityId)) || [],
         record: record
       };
     });

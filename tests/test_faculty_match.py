@@ -14,6 +14,8 @@ from scripts.faculty_match import (
     MAX_FACULTY_PER_OPPORTUNITY,
     MAX_OPPORTUNITIES_PER_FACULTY,
     _faculty_idf,
+    _distinctive_tokens,
+    _excerpt,
     _generation_id,
     _load_js_object,
     _projection_fingerprint,
@@ -253,6 +255,27 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertIsNotNone(edge)
         self.assertIn("carbon dioxide capture and conversion", edge["matched_profile_phrases"])
         self.assertTrue(edge["opportunity_evidence"])
+
+    def test_excerpt_uses_the_matching_token_normalizer_for_word_forms(self):
+        text = (
+            "An unrelated opening section precedes the evidence by enough words to force clipping. "
+            + "background " * 20
+            + "The program develops mathematical theories and methodologies. "
+            + "additional material " * 20
+            + "Important information appears in a later administrative section."
+        )
+        excerpt = _excerpt(text, _distinctive_tokens("Information theory"), limit=120)
+        self.assertIn("mathematical theories", excerpt)
+        self.assertNotIn("unrelated opening", excerpt)
+
+        graph_edge = next(
+            edge for edge in self.graph["edges"]
+            if edge["opportunity_id"] == "341997"
+            and "Information theory" in edge["matched_profile_phrases"]
+        )
+        evidence = next(item for item in graph_edge["opportunity_evidence"] if item["field"] == "description")
+        self.assertIn("theories", evidence["excerpt"].casefold())
+        self.assertNotIn("supports research in all areas", evidence["excerpt"].casefold())
 
     def test_human_reviewed_multidisciplinary_quality_fixture(self):
         fixture = json.loads(QUALITY.read_text(encoding="utf-8"))

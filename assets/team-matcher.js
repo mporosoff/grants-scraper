@@ -186,6 +186,7 @@
     };
 
     const records = [];
+    const recordsById = new Map();
     const wordFrequency = new Map();
     const topicFrequency = new Map();
     const profileVocabularyCache = new WeakMap();
@@ -244,6 +245,7 @@
         closeIn,
       };
       records.push(prepared);
+      recordsById.set(prepared.id, prepared);
       tokenSet.forEach(token => wordFrequency.set(token, (wordFrequency.get(token) || 0) + 1));
       topics.forEach(topic => topicFrequency.set(topic, (topicFrequency.get(topic) || 0) + 1));
     });
@@ -609,6 +611,38 @@
       return score >= .35 ? score : 0;
     }
 
+    function themeHitsForRecord(recordId, themes, activeLabels = null) {
+      const prepared = recordsById.get(String(recordId));
+      if (!prepared) return [];
+      return (themes || []).filter(theme => (
+        !activeLabels || activeLabels.has(theme.label)
+      )).map(theme => ({
+        label: theme.label,
+        score: themeEvidence(theme, prepared),
+      })).filter(hit => hit.score > 0);
+    }
+
+    function narrowRecordIdsByThemes(recordIds, displayedThemes, profileThemes,
+                                     activeLabels, corroboratingLabels = () => []) {
+      const filterActive = (displayedThemes || []).some(theme => !activeLabels.has(theme.label));
+      const hitsById = new Map();
+      const retainedIds = (recordIds || []).filter(recordId => {
+        const hits = new Map();
+        themeHitsForRecord(recordId, profileThemes, activeLabels).forEach(hit => {
+          hits.set(hit.label, hit);
+        });
+        (corroboratingLabels(recordId) || []).forEach(label => {
+          if (activeLabels.has(label) && !hits.has(label)) {
+            hits.set(label, { label, score: 1 });
+          }
+        });
+        const activeHits = [...hits.values()];
+        hitsById.set(String(recordId), activeHits);
+        return !filterActive || activeHits.length > 0;
+      });
+      return { recordIds: retainedIds, hitsById };
+    }
+
     function recencyBoost(prepared) {
       if (prepared.freshAge !== null && prepared.freshAge <= 14) return 1.65;
       if (prepared.freshAge !== null && prepared.freshAge <= 45) return 1.3;
@@ -650,10 +684,7 @@
         // A selected team is a true intersection: adding a researcher can
         // never introduce a result that does not also fit that researcher.
         if (fits.some(fit => !fit)) return;
-        const themeHits = active.map(theme => ({
-          label: theme.label,
-          score: themeEvidence(theme, prepared),
-        })).filter(hit => hit.score > 0);
+        const themeHits = themeHitsForRecord(prepared.id, themes, activeLabels);
         // The full-member intersection is the stable eligibility rule. Themes
         // explain and boost linked areas by default; once a user turns a chip
         // off, the remaining active chips become an explicit narrowing filter.
@@ -698,6 +729,8 @@
     return Object.freeze({
       records,
       buildThemes,
+      themeHitsForRecord,
+      narrowRecordIdsByThemes,
       scoreProfile,
       matchTeam,
       matchDepartment,

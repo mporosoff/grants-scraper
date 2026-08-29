@@ -464,11 +464,18 @@ def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float],
 
 
 def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
-    clean = _SPACE_RE.sub(" ", text).strip()
+    clean = _SPACE_RE.sub(" ", unicodedata.normalize("NFC", text)).strip()
     if len(clean) <= limit:
         return clean
-    lowered = _normalize(clean)
-    positions = [lowered.find(token) for token in concepts if lowered.find(token) >= 0]
+    concept_set = set(concepts)
+    # Admission compares stemmed word tokens. Preserve offsets from that same
+    # normalization so evidence such as ``theory`` -> ``theories`` is located
+    # in the published text instead of falling back to an unrelated opening.
+    positions = [
+        match.start()
+        for match in _WORD_RE.finditer(clean)
+        if _stem(match.group(0)) in concept_set
+    ]
     center = min(positions) if positions else 0
     start = max(0, center - 55)
     end = min(len(clean), start + limit)

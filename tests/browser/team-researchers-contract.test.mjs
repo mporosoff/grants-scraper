@@ -94,6 +94,52 @@ test("Hajim child matching requires specific phrases in authoritative text while
   assert.deepEqual(Array.from(engine.matchProfile(profile), result => result.id), ["authoritative"]);
 });
 
+test("every displayed graph-team theme participates in the existing narrowing contract", () => {
+  const { query, matcher } = loadApis();
+  const catalog = { opportunities: [
+    {
+      opportunity_id: "photonics",
+      status: "posted",
+      title: "Integrated photonics and optical sensing",
+      description: "Photonic devices for biomedical measurement.",
+      close_date: "2027-01-15",
+    },
+    {
+      opportunity_id: "unrelated",
+      status: "posted",
+      title: "General biological systems",
+      description: "A broad program for cellular research.",
+      close_date: "2027-01-15",
+    },
+  ] };
+  const label = "Optics / Photonics / Lasers";
+  const engine = matcher.create(catalog, {
+    theme_lexicon: { [label]: ["photonics", "optical sensing"] },
+  }, query, { now: new Date("2026-08-29T00:00:00Z") });
+  const themes = engine.buildThemes([
+    { name: "Optics A", domains: [label] },
+    { name: "Optics B", domains: [label] },
+  ]);
+
+  assert.deepEqual(
+    Array.from(engine.themeHitsForRecord("photonics", themes, new Set([label])), hit => hit.label),
+    [label],
+  );
+  assert.deepEqual(Array.from(engine.themeHitsForRecord("photonics", themes, new Set())), []);
+  assert.deepEqual(Array.from(engine.themeHitsForRecord("unrelated", themes, new Set([label]))), []);
+  const narrowed = engine.narrowRecordIdsByThemes(
+    ["photonics", "unrelated"], themes, themes, new Set(), () => [],
+  );
+  assert.deepEqual(Array.from(narrowed.recordIds), []);
+  const corroborated = engine.narrowRecordIdsByThemes(
+    ["unrelated"], themes, themes, new Set([label]), () => [label],
+  );
+  assert.deepEqual(Array.from(corroborated.recordIds), ["unrelated"]);
+  assert.deepEqual(Array.from(corroborated.hitsById.get("unrelated"), hit => hit.label), [label]);
+  assert.match(teamPage, /if \(entry\[1\]\.size < 2\) return null/);
+  assert.match(teamPage, /MATCH_ENGINE\.narrowRecordIdsByThemes\(/);
+});
+
 function childTopicCatalog(query, children, excluded = []) {
   const index = buildIndex(children, query);
   return {
