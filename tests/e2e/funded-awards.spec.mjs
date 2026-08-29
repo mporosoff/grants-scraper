@@ -28,8 +28,8 @@ test("standalone paging and investigator handoff retain the submitted year range
   expect(calls.at(-1).criteria).toMatchObject({ year_start: 2024, year_end: 2026 });
 
   await page.locator("[data-award-pi='Vasily Karasiev']").click();
-  await expect.poll(() => calls.at(-1)?.criteria?.pi).toBe("Vasily Karasiev");
-  expect(calls.at(-1).criteria).toMatchObject({
+  await expect.poll(() => calls.findLast(call => call.criteria?.pi === "Vasily Karasiev")?.criteria).toMatchObject({
+    pi: "Vasily Karasiev",
     institution: "University of Rochester",
     year_start: 2024,
     year_end: 2026,

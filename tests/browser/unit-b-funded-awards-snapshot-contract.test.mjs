@@ -262,6 +262,28 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(config, /"cpu_ms": 250/);
 });
 
+test("the integrated A-C browser release uses one fresh cache key for every changed served asset", async () => {
+  const [fundedAwards, fundingFinder, teamMatch] = await Promise.all([
+    readFile(new URL("funded_awards.html", root), "utf8"),
+    readFile(new URL("match_explorer.html", root), "utf8"),
+    readFile(new URL("team_match.html", root), "utf8"),
+  ]);
+  const releaseKey = "post-phase4-abc-20260829";
+  for (const asset of [
+    "app.css",
+    "alerts.css",
+    "institutional-intelligence.css",
+    "ai-provider.js",
+    "alerts.js",
+    "award-api-config.js",
+    "institutional-intelligence-core.js",
+    "institutional-intelligence-snapshots.js",
+  ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  for (const asset of ["app.css", "alerts.css", "ai-provider.js", "alerts.js", "app.js"])
+    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  assert.match(teamMatch, new RegExp(`app\\.css\\?v=${releaseKey}`));
+});
+
 test("Unit B aggregate helper deduplicates source plus award ID", () => {
   const duplicate = award(1);
   const aggregate = aggregateSnapshotAwards([duplicate, { ...duplicate }, award(1, "NIH")]);
