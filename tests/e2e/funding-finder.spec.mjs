@@ -341,6 +341,19 @@ test("Funding Finder lazy-loads evidence-qualified Hajim reverse matches with on
   await expect(card.locator(".hajim-match-panel")).toHaveCount(0);
 });
 
+test("primary Hajim reverse scope retains its own top candidates before display bounding", async ({ page }) => {
+  await page.goto("/match_explorer.html?focus=356055");
+  const card = page.locator('#results .result-card[data-opportunity-id="356055"]');
+  await card.getByRole("button", { name: "Find relevant Hajim faculty" }).click();
+  await expect(card.locator(".hajim-faculty-match")).toHaveCount(12);
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Thomas M. Howard" })).toHaveCount(0);
+
+  await card.locator("[data-hajim-scope]").selectOption("primary");
+  await expect(card.locator(".hajim-faculty-match")).toHaveCount(12);
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Thomas M. Howard" })).toBeVisible();
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Benjamin E. Partridge" })).toHaveCount(0);
+});
+
 test("Hajim reverse-panel ownership recovers across rerenders, stale nodes, and consecutive cards", async ({ page }) => {
   await page.goto("/match_explorer.html?focus=353936");
   const card = page.locator('#results .result-card[data-opportunity-id="353936"]');

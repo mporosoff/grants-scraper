@@ -3,7 +3,7 @@
 
   var SCHEMA_FAMILY = "hajim-faculty-match";
   var DIRECTORY_SCHEMA = 2;
-  var GRAPH_SCHEMA = 3;
+  var GRAPH_SCHEMA = 4;
   var MAX_RESULTS = 12;
   var graphPromise = null;
   var directoryPromise = null;
@@ -67,7 +67,8 @@
 
   function validateGraph(graph, directory, catalog, expectedGenerationId) {
     if (!graph || graph.schema_family !== SCHEMA_FAMILY || graph.schema_version !== GRAPH_SCHEMA ||
-        !Array.isArray(graph.edges) || !graph.by_faculty || !graph.by_opportunity) {
+        !Array.isArray(graph.edges) || !graph.by_faculty || !graph.by_opportunity ||
+        !graph.by_opportunity_primary) {
       throw new Error("The Hajim faculty match data has an incompatible schema.");
     }
     validateIdentity(graph, expectedGenerationId);
@@ -125,28 +126,60 @@
 
   function injectScript(src, globalName) {
     return new Promise(function (resolve, reject) {
+      var boundedScript = global.FUNDING_FINDER_APP &&
+        global.FUNDING_FINDER_APP.boundedScripts &&
+        global.FUNDING_FINDER_APP.boundedScripts.sidecar;
       var existing = document.querySelector('script[data-hajim-asset="' + globalName + '"]');
       if (global[globalName]) return resolve(global[globalName]);
+      if (!boundedScript) return reject(new Error("The bounded faculty asset loader is unavailable."));
+      var settled = false;
+      var timeout = null;
+      function cleanup(script, remove) {
+        if (timeout !== null) boundedScript.clearTimeout(timeout);
+        timeout = null;
+        script.removeEventListener("load", onLoad);
+        script.removeEventListener("error", onError);
+        if (remove) script.remove();
+      }
+      function finish(script, callback, remove) {
+        if (settled) return;
+        settled = true;
+        cleanup(script, remove);
+        callback();
+      }
       function loaded(script) {
+        if (settled) return;
         script.dataset.hajimState = "loaded";
-        if (global[globalName]) resolve(global[globalName]);
+        if (global[globalName]) finish(script, function () { resolve(global[globalName]); }, false);
         else {
-          script.remove();
-          reject(new Error(globalName + " did not initialize."));
+          finish(script, function () { reject(new Error(globalName + " did not initialize.")); }, true);
         }
       }
       function failed(script) {
+        if (settled) return;
         script.dataset.hajimState = "failed";
-        script.remove();
-        reject(new Error("Unable to load " + globalName));
+        finish(script, function () { reject(new Error("Unable to load " + globalName)); }, true);
+      }
+      function onLoad() { loaded(this); }
+      function onError() { failed(this); }
+      function watch(script) {
+        script.addEventListener("load", onLoad, { once: true });
+        script.addEventListener("error", onError, { once: true });
+        timeout = boundedScript.setTimeout(function () {
+          if (settled) return;
+          script.dataset.hajimState = "timed-out";
+          finish(script, function () {
+            reject(new Error("Timed out loading " + globalName));
+          }, true);
+        });
       }
       if (existing && existing.dataset.hajimState !== "loading") {
         existing.remove();
         existing = null;
       }
       if (existing) {
-        existing.addEventListener("load", function () { loaded(existing); }, { once: true });
-        existing.addEventListener("error", function () { failed(existing); }, { once: true });
+        watch(existing);
+        if (global[globalName]) loaded(existing);
         return;
       }
       var script = document.createElement("script");
@@ -154,8 +187,7 @@
       script.async = true;
       script.dataset.hajimAsset = globalName;
       script.dataset.hajimState = "loading";
-      script.addEventListener("load", function () { loaded(script); }, { once: true });
-      script.addEventListener("error", function () { failed(script); }, { once: true });
+      watch(script);
       document.head.appendChild(script);
     });
   }
@@ -201,7 +233,8 @@
   function opportunityMatches(graph, directory, opportunityId, primaryOnly) {
     var profiles = {};
     (directory.profiles || []).forEach(function (profile) { profiles[profile.faculty_id] = profile; });
-    return (graph.by_opportunity[String(opportunityId)] || []).map(function (index) {
+    var indexFamily = primaryOnly ? graph.by_opportunity_primary : graph.by_opportunity;
+    return (indexFamily[String(opportunityId)] || []).map(function (index) {
       var edge = graph.edges[index];
       var profile = profiles[edge.faculty_id];
       if (!profile) return null;

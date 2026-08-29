@@ -65,20 +65,16 @@ test("uses one content-derived generation in page markers, URLs, runtime validat
   assert.doesNotMatch([finderPage, teamPage, apiSource, reverseSource, refreshWorkflow].join("\n"), /hajim-pr1/);
 });
 
-test("looks up each opportunity edge once and applies the 126-person scope", () => {
+test("applies independent bounded indexes for the full and 126-person scopes", () => {
   const api = loadApi();
-  const opportunityId = Object.keys(graph.by_opportunity).find(id => {
-    const all = api.opportunityMatches(graph, directory, id, false);
-    const primary = api.opportunityMatches(graph, directory, id, true);
-    return all.length > primary.length;
-  });
-  assert.ok(opportunityId, "fixture graph should include a broader-roster match");
-  const all = api.opportunityMatches(graph, directory, opportunityId, false);
-  const primary = api.opportunityMatches(graph, directory, opportunityId, true);
-  assert.ok(all.length <= 12);
-  assert.ok(primary.length < all.length);
+  const all = api.opportunityMatches(graph, directory, "356055", false);
+  const primary = api.opportunityMatches(graph, directory, "356055", true);
+  assert.equal(all.length, 12);
+  assert.equal(primary.length, 12);
   assert.ok(primary.every(item => ["hajim_primary_core", "hajim_research"].includes(item.profile.relationship)));
   assert.equal(new Set(all.map(item => `${item.edge.faculty_id}:${item.edge.opportunity_id}`)).size, all.length);
+  assert.equal(primary.filter(item => !all.some(other => other.edge.faculty_id === item.edge.faculty_id)).length, 4);
+  assert.ok(Object.values(graph.by_opportunity_primary).every(indexes => indexes.length <= 12));
 });
 
 test("keeps directory search local, ordered, and bounded to twelve results", () => {
@@ -161,6 +157,64 @@ test("validation failures discard stale globals so a clean retry can load the cu
     directory, catalog, "unused-graph.js", directory.generation_id,
   );
   assert.equal(reloadedGraph, graph);
+});
+
+test("stalled directory and graph scripts time out, detach, and allow a clean retry", async () => {
+  const timers = [];
+  let timerSequence = 0;
+  const cleared = [];
+  const removed = [];
+  const listeners = [];
+  const scope = {
+    FUNDING_FINDER_APP: {
+      boundedScripts: {
+        sidecar: {
+          setTimeout(callback) {
+            timerSequence += 1;
+            timers.push({ id: timerSequence, callback });
+            return timerSequence;
+          },
+          clearTimeout(timer) { cleared.push(timer); },
+        },
+      },
+    },
+  };
+  const document = {
+    querySelector() { return null; },
+    querySelectorAll() { return []; },
+    createElement() {
+      const handlers = {};
+      const script = {
+        dataset: {},
+        addEventListener(type, callback) { handlers[type] = callback; },
+        removeEventListener(type) { delete handlers[type]; },
+        remove() { removed.push(script.dataset.hajimAsset); },
+      };
+      listeners.push(handlers);
+      return script;
+    },
+    head: { appendChild() {} },
+  };
+  vm.runInNewContext(apiSource, { globalThis: scope, document });
+
+  const directoryLoad = scope.HajimFaculty.loadDirectory(catalog, "stalled-directory.js", directory.generation_id);
+  await new Promise(resolve => setImmediate(resolve));
+  timers.shift().callback();
+  await assert.rejects(directoryLoad, /Timed out loading HAJIM_FACULTY_DIRECTORY/);
+  assert.deepEqual(removed, ["HAJIM_FACULTY_DIRECTORY"]);
+  assert.equal(Object.keys(listeners[0]).length, 0);
+  scope.HAJIM_FACULTY_DIRECTORY = directory;
+  assert.equal(await scope.HajimFaculty.loadDirectory(catalog, "retry-directory.js", directory.generation_id), directory);
+
+  const graphLoad = scope.HajimFaculty.loadGraph(directory, catalog, "stalled-graph.js", directory.generation_id);
+  await new Promise(resolve => setImmediate(resolve));
+  timers.shift().callback();
+  await assert.rejects(graphLoad, /Timed out loading FACULTY_MATCHES/);
+  assert.deepEqual(removed, ["HAJIM_FACULTY_DIRECTORY", "FACULTY_MATCHES"]);
+  assert.equal(Object.keys(listeners[1]).length, 0);
+  scope.FACULTY_MATCHES = graph;
+  assert.equal(await scope.HajimFaculty.loadGraph(directory, catalog, "retry-graph.js", directory.generation_id), graph);
+  assert.deepEqual(cleared, [1, 2]);
 });
 
 test("Team Match loads the directory initially but graph only after Hajim selection", () => {

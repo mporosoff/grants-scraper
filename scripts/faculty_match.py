@@ -26,7 +26,7 @@ from scripts.import_hajim_faculty import validate_payload
 
 SCHEMA_FAMILY = "hajim-faculty-match"
 DIRECTORY_SCHEMA_VERSION = 2
-GRAPH_SCHEMA_VERSION = 3
+GRAPH_SCHEMA_VERSION = 4
 CURATED_CHEME_SCHEMA_VERSION = 1
 CURATED_CHEME_RELATIONSHIP = "curated_cheme_team_match"
 CURATED_CHEME_LABEL = "Existing curated Chemical & Sustainability Engineering Team Match profile"
@@ -40,6 +40,7 @@ GRAPH_GZIP_BUDGET = 500_000
 LONG_PHRASE_MIN_CONCEPTS = 4
 LONG_PHRASE_WINDOW_FACTOR = 3
 LONG_PHRASE_MIN_WINDOW = 12
+PRIMARY_REVERSE_RELATIONSHIPS = frozenset({"hajim_primary_core", "hajim_research"})
 
 _WORD_RE = re.compile(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", re.I)
 _SPACE_RE = re.compile(r"\s+")
@@ -80,6 +81,24 @@ _ADMISSION_AUDIT_BASELINE = {
         "title": 110,
     },
     "defect": "published_subject combined authoritative document text with derived catalog facets",
+    "post_remediation_bounded_graph": {
+        "candidate_sha": "54160342d0f7816c54adfa77724cd081a0c75b44",
+        "generation_id": "8be5c3336a40348c4e153c50009fcebade10ad224b95f1a1e091ba54c4285be2",
+        "edge_count": 559,
+        "evidence_field_edge_counts": {
+            "description": 468,
+            "published_subject": 88,
+            "title": 25,
+        },
+        "evidence_field_sets": {
+            "description": 446,
+            "description+published_subject": 15,
+            "description+title": 7,
+            "published_subject": 73,
+            "title": 18,
+        },
+        "note": "Legacy coupled index bounds; current graph metrics use independent bounded indexes.",
+    },
 }
 
 
@@ -612,40 +631,78 @@ def _current_records(catalog: dict) -> list[dict]:
 
 def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
     profiles = config["profiles"]
+    profiles_by_id = {profile["faculty_id"]: profile for profile in profiles}
     idf = _faculty_idf(profiles)
     candidates_by_opportunity: dict[str, list[dict]] = defaultdict(list)
+    candidates_by_faculty: dict[str, list[dict]] = defaultdict(list)
+    candidate_edges: dict[tuple[str, str], dict] = {}
     for record in _current_records(catalog):
         prepared = _prepare_opportunity(record)
         for profile in profiles:
             edge = score_profile_opportunity(profile, record, idf, prepared)
             if edge is not None:
                 candidates_by_opportunity[edge["opportunity_id"]].append(edge)
-    opportunity_bounded: list[dict] = []
+                candidates_by_faculty[edge["faculty_id"]].append(edge)
+                candidate_edges[(edge["faculty_id"], edge["opportunity_id"])] = edge
+
+    opportunity_keys: dict[str, list[tuple[str, str]]] = {}
+    primary_opportunity_keys: dict[str, list[tuple[str, str]]] = {}
     for opportunity_id in sorted(candidates_by_opportunity):
         ranked = sorted(candidates_by_opportunity[opportunity_id], key=lambda edge: (
             -edge["score"], edge["faculty_id"], edge["opportunity_id"],
         ))
-        opportunity_bounded.extend(ranked[:MAX_FACULTY_PER_OPPORTUNITY])
-    candidates_by_faculty: dict[str, list[dict]] = defaultdict(list)
-    for edge in opportunity_bounded:
-        candidates_by_faculty[edge["faculty_id"]].append(edge)
-    retained: set[tuple[str, str]] = set()
+        opportunity_keys[opportunity_id] = [
+            (edge["faculty_id"], edge["opportunity_id"])
+            for edge in ranked[:MAX_FACULTY_PER_OPPORTUNITY]
+        ]
+        primary_ranked = [
+            edge for edge in ranked
+            if profiles_by_id[edge["faculty_id"]]["relationship"] in PRIMARY_REVERSE_RELATIONSHIPS
+        ]
+        primary_opportunity_keys[opportunity_id] = [
+            (edge["faculty_id"], edge["opportunity_id"])
+            for edge in primary_ranked[:MAX_FACULTY_PER_OPPORTUNITY]
+        ]
+
+    faculty_keys: dict[str, list[tuple[str, str]]] = {}
     for faculty_id in sorted(candidates_by_faculty):
         ranked = sorted(candidates_by_faculty[faculty_id], key=lambda edge: (
             -edge["score"], edge["opportunity_id"], edge["faculty_id"],
         ))
-        retained.update((edge["faculty_id"], edge["opportunity_id"])
-                        for edge in ranked[:MAX_OPPORTUNITIES_PER_FACULTY])
+        faculty_keys[faculty_id] = [
+            (edge["faculty_id"], edge["opportunity_id"])
+            for edge in ranked[:MAX_OPPORTUNITIES_PER_FACULTY]
+        ]
+
+    retained = {
+        key
+        for index_family in (opportunity_keys, primary_opportunity_keys, faculty_keys)
+        for keys in index_family.values()
+        for key in keys
+    }
     edges = sorted(
-        (edge for edge in opportunity_bounded
-         if (edge["faculty_id"], edge["opportunity_id"]) in retained),
+        (candidate_edges[key] for key in retained),
         key=lambda edge: (edge["opportunity_id"], -edge["score"], edge["faculty_id"]),
     )
-    by_opportunity: dict[str, list[int]] = defaultdict(list)
-    by_faculty: dict[str, list[int]] = defaultdict(list)
-    for index, edge in enumerate(edges):
-        by_opportunity[edge["opportunity_id"]].append(index)
-        by_faculty[edge["faculty_id"]].append(index)
+    edge_indexes = {
+        (edge["faculty_id"], edge["opportunity_id"]): index
+        for index, edge in enumerate(edges)
+    }
+    by_opportunity = {
+        opportunity_id: [edge_indexes[key] for key in keys]
+        for opportunity_id, keys in opportunity_keys.items()
+        if keys
+    }
+    by_opportunity_primary = {
+        opportunity_id: [edge_indexes[key] for key in keys]
+        for opportunity_id, keys in primary_opportunity_keys.items()
+        if keys
+    }
+    by_faculty = {
+        faculty_id: [edge_indexes[key] for key in keys]
+        for faculty_id, keys in faculty_keys.items()
+        if keys
+    }
     contacts = {profile["faculty_id"]: {
         "email": profile["email"],
         "website_url": profile["website_url"],
@@ -673,6 +730,11 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
         },
         "generation_metrics": {
             "edge_count": len(edges),
+            "index_entry_counts": {
+                "by_faculty": sum(len(indexes) for indexes in by_faculty.values()),
+                "by_opportunity": sum(len(indexes) for indexes in by_opportunity.values()),
+                "by_opportunity_primary": sum(len(indexes) for indexes in by_opportunity_primary.values()),
+            },
             "evidence_field_edge_counts": dict(sorted(evidence_field_edge_counts.items())),
             "evidence_field_sets": dict(sorted(evidence_field_sets.items())),
         },
@@ -680,6 +742,7 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
         "contacts": contacts,
         "edges": edges,
         "by_opportunity": dict(by_opportunity),
+        "by_opportunity_primary": dict(by_opportunity_primary),
         "by_faculty": dict(by_faculty),
     }
 
@@ -731,22 +794,32 @@ def validate_assets(directory: dict, graph: dict, *, enforce_budgets: bool = Fal
     edges = graph.get("edges") or []
     if len({(edge["faculty_id"], edge["opportunity_id"]) for edge in edges}) != len(edges):
         raise FacultyMatchError("Graph contains duplicate faculty/opportunity edges")
-    seen_indexes: list[int] = []
-    for opportunity_id, indexes in graph.get("by_opportunity", {}).items():
-        if len(indexes) > MAX_FACULTY_PER_OPPORTUNITY:
-            raise FacultyMatchError(f"Opportunity {opportunity_id} exceeds the top-N bound")
-        for index in indexes:
-            if index < 0 or index >= len(edges) or edges[index]["opportunity_id"] != opportunity_id:
-                raise FacultyMatchError("Opportunity reverse index is inconsistent")
-            seen_indexes.append(index)
-    if sorted(seen_indexes) != list(range(len(edges))):
-        raise FacultyMatchError("Every edge must appear exactly once in by_opportunity")
+    profiles_by_id = {profile["faculty_id"]: profile for profile in directory["profiles"]}
+    seen_indexes: set[int] = set()
+    for index_name in ("by_opportunity", "by_opportunity_primary"):
+        index_family = graph.get(index_name)
+        if not isinstance(index_family, dict):
+            raise FacultyMatchError(f"Graph requires {index_name}")
+        for opportunity_id, indexes in index_family.items():
+            if len(indexes) > MAX_FACULTY_PER_OPPORTUNITY or len(indexes) != len(set(indexes)):
+                raise FacultyMatchError(f"Opportunity {opportunity_id} exceeds or duplicates the {index_name} bound")
+            for index in indexes:
+                if index < 0 or index >= len(edges) or edges[index]["opportunity_id"] != opportunity_id:
+                    raise FacultyMatchError(f"{index_name} is inconsistent")
+                if (index_name == "by_opportunity_primary"
+                        and profiles_by_id[edges[index]["faculty_id"]]["relationship"]
+                        not in PRIMARY_REVERSE_RELATIONSHIPS):
+                    raise FacultyMatchError("Primary opportunity index contains an out-of-scope faculty profile")
+                seen_indexes.add(index)
     for faculty_id, indexes in graph.get("by_faculty", {}).items():
-        if len(indexes) > MAX_OPPORTUNITIES_PER_FACULTY:
-            raise FacultyMatchError(f"Faculty {faculty_id} exceeds the top-N bound")
+        if len(indexes) > MAX_OPPORTUNITIES_PER_FACULTY or len(indexes) != len(set(indexes)):
+            raise FacultyMatchError(f"Faculty {faculty_id} exceeds or duplicates the top-N bound")
         for index in indexes:
             if index < 0 or index >= len(edges) or edges[index]["faculty_id"] != faculty_id:
                 raise FacultyMatchError("Faculty reverse index is inconsistent")
+            seen_indexes.add(index)
+    if seen_indexes != set(range(len(edges))):
+        raise FacultyMatchError("Every edge must appear in at least one bounded graph index")
     unrankable = {profile["faculty_id"] for profile in directory["profiles"] if not profile["rankable"]}
     if any(edge["faculty_id"] in unrankable for edge in edges):
         raise FacultyMatchError("Unrankable faculty must not appear in match edges")

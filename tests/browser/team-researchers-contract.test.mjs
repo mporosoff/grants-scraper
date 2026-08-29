@@ -839,6 +839,7 @@ test("production graph keeps every-member intersections monotonic and bounded", 
     assert.ok(intersections[index].size <= intersections[index - 1].size);
   }
   assert.ok(Object.values(generated.by_opportunity).every(indexes => indexes.length <= 12));
+  assert.ok(Object.values(generated.by_opportunity_primary).every(indexes => indexes.length <= 12));
   assert.ok(Object.values(generated.by_faculty).every(indexes => indexes.length <= 25));
   assert.equal(new Set(generated.edges.map(edge => `${edge.faculty_id}:${edge.opportunity_id}`)).size, generated.edges.length);
 });

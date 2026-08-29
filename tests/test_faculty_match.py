@@ -23,6 +23,7 @@ from scripts.faculty_match import (
     _projection_fingerprint,
     generate_assets,
     load_curated_cheme_config,
+    load_catalog,
     load_faculty_config,
     merge_faculty_sources,
     score_profile_opportunity,
@@ -47,6 +48,7 @@ class FacultyMatchTests(unittest.TestCase):
         cls.workbook = workbook
         cls.curated = curated
         cls.config = merge_faculty_sources(workbook, workbook_raw, curated, curated_raw)
+        cls.catalog, _ = load_catalog(CATALOG)
         cls.directory, _ = _load_js_object(DIRECTORY, "HAJIM_FACULTY_DIRECTORY")
         cls.graph, _ = _load_js_object(GRAPH, "FACULTY_MATCHES")
 
@@ -90,14 +92,19 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertEqual(len(edges), len({(edge["faculty_id"], edge["opportunity_id"]) for edge in edges}))
         self.assertTrue(all(len(indexes) <= MAX_FACULTY_PER_OPPORTUNITY
                             for indexes in self.graph["by_opportunity"].values()))
+        self.assertTrue(all(len(indexes) <= MAX_FACULTY_PER_OPPORTUNITY
+                            for indexes in self.graph["by_opportunity_primary"].values()))
         self.assertTrue(all(len(indexes) <= MAX_OPPORTUNITIES_PER_FACULTY
                             for indexes in self.graph["by_faculty"].values()))
         unrankable = {profile["faculty_id"] for profile in self.directory["profiles"] if not profile["rankable"]}
         self.assertFalse(unrankable & set(self.graph["by_faculty"]))
-        self.assertEqual(
-            sorted(index for values in self.graph["by_opportunity"].values() for index in values),
-            list(range(len(edges))),
-        )
+        indexed = {
+            index
+            for family in ("by_opportunity", "by_opportunity_primary", "by_faculty")
+            for values in self.graph[family].values()
+            for index in values
+        }
+        self.assertEqual(indexed, set(range(len(edges))))
         metrics = self.graph["generation_metrics"]
         self.assertEqual(metrics["edge_count"], len(edges))
         actual_field_counts = {}
@@ -110,14 +117,58 @@ class FacultyMatchTests(unittest.TestCase):
                 actual_field_counts[field] = actual_field_counts.get(field, 0) + 1
         self.assertEqual(metrics["evidence_field_edge_counts"], actual_field_counts)
         self.assertEqual(metrics["evidence_field_sets"], actual_field_sets)
+        self.assertEqual(metrics["index_entry_counts"], {
+            family: sum(len(indexes) for indexes in self.graph[family].values())
+            for family in ("by_faculty", "by_opportunity", "by_opportunity_primary")
+        })
         baseline = self.graph["admission_audit_baseline"]
         self.assertEqual(baseline["edge_count"], 918)
         self.assertEqual(baseline["evidence_field_sets"]["published_subject"], 164)
-        self.assertLess(len(edges), baseline["edge_count"])
+        remediated = baseline["post_remediation_bounded_graph"]
+        self.assertEqual(remediated["edge_count"], 559)
+        self.assertEqual(remediated["evidence_field_sets"]["published_subject"], 73)
+        self.assertLess(remediated["edge_count"], baseline["edge_count"])
+        self.assertIn("independent bounded indexes", remediated["note"])
         self.assertEqual(
             self.graph["matching_policy"]["corroborating_only_fields"],
             ["disciplines", "topic_areas", "derived_themes"],
         )
+
+    def test_primary_reverse_scope_is_ranked_before_its_own_display_bound(self):
+        profiles = self.config["profiles"]
+        profiles_by_id = {profile["faculty_id"]: profile for profile in profiles}
+        record = next(record for record in self.catalog["opportunities"]
+                      if str(record.get("opportunity_id")) == "356055")
+        idf = _faculty_idf(profiles)
+        candidates = [
+            edge for profile in profiles
+            if (edge := score_profile_opportunity(profile, record, idf)) is not None
+        ]
+        ranked = sorted(candidates, key=lambda edge: (
+            -edge["score"], edge["faculty_id"], edge["opportunity_id"],
+        ))
+        expected_all = [edge["faculty_id"] for edge in ranked[:MAX_FACULTY_PER_OPPORTUNITY]]
+        primary_ranked = [
+            edge for edge in ranked
+            if profiles_by_id[edge["faculty_id"]]["relationship"]
+            in {"hajim_primary_core", "hajim_research"}
+        ]
+        self.assertEqual(len(primary_ranked), 13)
+        expected_primary = [
+            edge["faculty_id"]
+            for edge in primary_ranked[:MAX_FACULTY_PER_OPPORTUNITY]
+        ]
+        actual_all = [
+            self.graph["edges"][index]["faculty_id"]
+            for index in self.graph["by_opportunity"]["356055"]
+        ]
+        actual_primary = [
+            self.graph["edges"][index]["faculty_id"]
+            for index in self.graph["by_opportunity_primary"]["356055"]
+        ]
+        self.assertEqual(actual_all, expected_all)
+        self.assertEqual(actual_primary, expected_primary)
+        self.assertEqual(len(set(actual_primary) - set(actual_all)), 4)
 
     def test_directory_search_documents_preserve_official_phrase_boundaries(self):
         canonical = {profile["faculty_id"]: profile for profile in self.config["profiles"]}
