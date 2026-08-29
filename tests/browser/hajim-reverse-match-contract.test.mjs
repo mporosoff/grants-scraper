@@ -78,6 +78,9 @@ test("Funding Finder lazy-loads both projections and isolates a failed faculty l
   assert.match(reverseSource, /Ordinary Funding Finder search and actions still work/);
   assert.match(reverseSource, /data-hajim-retry/);
   assert.doesNotMatch(reverseSource, /OpenAI|Anthropic|model provider|fetch\(/i);
+  assert.match(apiSource, /script\.dataset\.hajimState = "loading"/);
+  assert.match(apiSource, /script\.remove\(\)/);
+  assert.match(apiSource, /existing\.dataset\.hajimState !== "loading"/);
 });
 
 test("Team Match loads the directory initially but graph only after Hajim selection", () => {

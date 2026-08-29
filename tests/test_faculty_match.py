@@ -134,6 +134,10 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertIn("--faculty-config config/hajim_faculty.json", workflow)
         self.assertIn("--directory-out data/hajim_faculty_directory.js", workflow)
         self.assertNotIn("--profiles faculty_profiles.json", workflow)
+        self.assertLess(
+            workflow.index("- name: Rotate through official links and record health and redirects"),
+            workflow.index("- name: Rebuild Hajim faculty directory and match graph atomically"),
+        )
 
 
 if __name__ == "__main__":

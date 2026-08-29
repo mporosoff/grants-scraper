@@ -80,20 +80,35 @@
     return new Promise(function (resolve, reject) {
       var existing = document.querySelector('script[data-hajim-asset="' + globalName + '"]');
       if (global[globalName]) return resolve(global[globalName]);
+      function loaded(script) {
+        script.dataset.hajimState = "loaded";
+        if (global[globalName]) resolve(global[globalName]);
+        else {
+          script.remove();
+          reject(new Error(globalName + " did not initialize."));
+        }
+      }
+      function failed(script) {
+        script.dataset.hajimState = "failed";
+        script.remove();
+        reject(new Error("Unable to load " + globalName));
+      }
+      if (existing && existing.dataset.hajimState !== "loading") {
+        existing.remove();
+        existing = null;
+      }
       if (existing) {
-        existing.addEventListener("load", function () { resolve(global[globalName]); }, { once: true });
-        existing.addEventListener("error", function () { reject(new Error("Unable to load " + globalName)); }, { once: true });
+        existing.addEventListener("load", function () { loaded(existing); }, { once: true });
+        existing.addEventListener("error", function () { failed(existing); }, { once: true });
         return;
       }
       var script = document.createElement("script");
       script.src = src;
       script.async = true;
       script.dataset.hajimAsset = globalName;
-      script.onload = function () {
-        if (global[globalName]) resolve(global[globalName]);
-        else reject(new Error(globalName + " did not initialize."));
-      };
-      script.onerror = function () { reject(new Error("Unable to load " + globalName)); };
+      script.dataset.hajimState = "loading";
+      script.addEventListener("load", function () { loaded(script); }, { once: true });
+      script.addEventListener("error", function () { failed(script); }, { once: true });
       document.head.appendChild(script);
     });
   }

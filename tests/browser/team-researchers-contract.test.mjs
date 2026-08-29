@@ -8,6 +8,7 @@ const [
   retrievalSource,
   teamSource,
   matcherSource,
+  matchConfigSource,
   teamPage,
   catalogSource,
   facultyMatchesSource,
@@ -16,6 +17,7 @@ const [
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/team-researchers.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/team-matcher.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/team-match-config.js", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
@@ -31,13 +33,27 @@ function loadApis() {
   vm.runInNewContext(retrievalSource, context);
   vm.runInNewContext(teamSource, context);
   vm.runInNewContext(matcherSource, context);
+  vm.runInNewContext(matchConfigSource, context);
   return {
     query: context.globalThis.FUNDING_SEARCH_QUERY,
     retrieval: context.globalThis.FUNDING_RETRIEVAL,
     team: context.globalThis.FUNDING_TEAM_RESEARCHERS,
     matcher: context.globalThis.FUNDING_TEAM_MATCHER,
+    matchConfig: context.globalThis.FUNDING_TEAM_MATCH_CONFIG,
   };
 }
+
+test("keeps manual and ORCID matching configuration eager and roster-independent", () => {
+  const { matchConfig } = loadApis();
+  assert.ok(Object.keys(matchConfig.theme_lexicon).length >= 15);
+  assert.equal(matchConfig.bridge_themes.length, 11);
+  assert.equal(matchConfig.agency_scope.length, 6);
+  assert.match(matchConfig.broad_pattern, /broad agency announcement/);
+  assert.equal("faculty" in matchConfig, false);
+  assert.match(teamPage, /assets\/team-match-config\.js/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API\)/);
+});
 
 function memoryStorage() {
   const values = new Map();
@@ -87,7 +103,7 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.match(teamPage, /assets\/search-retrieval\.js/);
   assert.match(teamPage, /assets\/search-hybrid\.js/);
   assert.match(teamPage, /assets\/team-hybrid\.js/);
-  assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, TEAM_MATCH_CONFIG, SEARCH_API\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
   assert.match(teamPage, /function opportunityCard/);
@@ -142,6 +158,10 @@ test("shows an accessible progress state while lazy-loading faculty matches", ()
   assert.match(teamPage, /function ensureFacultyGraph\(\)/);
   assert.match(teamPage, /ensureFacultyGraph\(\)\.then/);
   assert.match(teamPage, /Directory search and manual entry are still available; try again/);
+  assert.match(teamPage, /var facultyChoicePending = false/);
+  assert.match(teamPage, /facultyChoicePending \|\| !faculty\[facultyId\]/);
+  assert.match(teamPage, /closeFacultySuggestions\(false\)/);
+  assert.match(teamPage, /if \(selected\.indexOf\(facultyId\) !== -1 \|\| selected\.length >= MAX\)/);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {

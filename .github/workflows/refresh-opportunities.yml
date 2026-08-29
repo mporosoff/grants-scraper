@@ -262,13 +262,6 @@ jobs:
           --write
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
-      - name: Rebuild Hajim faculty directory and match graph atomically
-        run: >-
-          python -m scripts.faculty_match match
-          --catalog data/opportunities.js
-          --faculty-config config/hajim_faculty.json
-          --directory-out data/hajim_faculty_directory.js
-          --out data/faculty_matches.js
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
           python -m scripts.build_changes
@@ -283,6 +276,13 @@ jobs:
           --max-checks 150
           --workers 8
           --fail-threshold 0.35
+      - name: Rebuild Hajim faculty directory and match graph atomically
+        run: >-
+          python -m scripts.faculty_match match
+          --catalog data/opportunities.js
+          --faculty-config config/hajim_faculty.json
+          --directory-out data/hajim_faculty_directory.js
+          --out data/faculty_matches.js
       - name: Generate static RSS/Atom feeds from the final catalog
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation

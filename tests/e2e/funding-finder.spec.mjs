@@ -328,13 +328,22 @@ test("Funding Finder lazy-loads evidence-qualified Hajim reverse matches with on
   await expect(card.locator(".hajim-match-panel")).toHaveCount(0);
 });
 
-test("a failed Hajim asset remains isolated from ordinary Funding Finder actions", async ({ page }) => {
-  await page.route("**/data/faculty_matches.js*", route => route.abort("failed"));
+test("a failed Hajim asset can retry without affecting ordinary Funding Finder actions", async ({ page }) => {
+  let graphRequests = 0;
+  await page.route("**/data/faculty_matches.js*", route => {
+    graphRequests += 1;
+    if (graphRequests === 1) return route.abort("failed");
+    return route.fallback();
+  });
   await page.goto("/match_explorer.html?focus=353936");
   const card = page.locator('#results .result-card[data-opportunity-id="353936"]');
   await card.getByRole("button", { name: "Find relevant Hajim faculty" }).click();
   await expect(card.locator(".hajim-match-body")).toContainText("temporarily unavailable");
-  await expect(card.locator("[data-hajim-retry]")).toBeVisible();
+  const retry = card.locator("[data-hajim-retry]");
+  await expect(retry).toBeVisible();
+  await retry.click();
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Anson Kahng" })).toBeVisible();
+  expect(graphRequests).toBe(2);
   await card.locator("[data-save]").click();
   await expect(card.locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
   await page.locator("#query").fill("catalysis");
