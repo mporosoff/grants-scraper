@@ -1,6 +1,6 @@
 # Funding Finder Post-Phase-4 Final Product Hardening Plan
 
-**Document status:** Final execution record for the completed post-Phase-4 hardening program<br>
+**Document status:** Unit D closeout candidate; this exact document becomes the final execution record only after protected exact-head CI, terminal review, and protected merge<br>
 **Plan version:** 3.0<br>
 **Repository:** `mporosoff/grants-scraper`  
 **Reconciled:** 2026-08-29<br>
@@ -25,7 +25,7 @@ The SHAs above record the completed-program and Unit 0 synchronization baselines
 
 ### This plan
 
-This document governed the now-complete post-Phase-4 work:
+This document governed Units 0 and A-C and now governs the conditional Unit D closeout:
 
 1. Unit 0 — commit and merge this reconciliation.
 2. Unit A — integrate the frozen AI-provider and Funding Finder layout candidate.
@@ -46,7 +46,7 @@ Cloudflare Workflows/Queues evaluation is a separate future architecture item. I
 | Unit A | Complete and live | Closed-unmerged preservation PR #82 at `443748b0381fedbae5ba478fb04b11dcf057827e`; integrated application PR #83 at candidate `55df7df2c20e92d3eff243b66ad10c0416292d28`; protected `main` `fee9912a47d0b5841d04973a23086e6566546200` | None |
 | Unit B | Complete and live | Historical frozen delta `cfbbcd309d8340313e7f10b70851603ddbbb95a6`; integrated application PR #83; Award Worker `d375880e-4ec4-4436-b435-2cb41e302124` | None |
 | Unit C | Complete and live within the A-C application release | Train commit `ba2938983d5689bdbbb757a0ba277cb40b4ccd9f`; integrated application PR #83; Pages deployment verified; Alerts Worker and D1 intentionally unchanged | No authorized inbox-receipt evidence; that boundary is recorded, not an unfinished defect |
-| Unit D | Complete through this documentation-only closeout | This final execution record and the concise addendum in the completed hardening plan | None |
+| Unit D | Closeout candidate; not complete before protected merge | This candidate execution record and the concise addendum in the completed hardening plan | Exact-head CI, terminal review, and protected merge of this exact documentation-only candidate |
 
 At Unit 0 reconciliation, no pull request existed for Unit A or Unit B. PR #82 subsequently preserved an integrated Unit A candidate and exact-head evidence, but was closed without merge under the authorized integration-train amendment. Its branch and commits remain preservation evidence. Unit B remained a clean local branch without an upstream branch until its exact delta was incorporated into PR #83.
 
@@ -93,7 +93,7 @@ Unit B may replace the existing incremental award-card browsing with its complet
 | `PFH-010` | B | Medium-High | Source failure/retry must retain successful source results and create a coherent successor snapshot without inventing completeness. | Complete and live through PR #83 |
 | `PFH-011` | C | High | Verification-email behavior across multiple addresses/subscriptions has not been conclusively separated into application acceptance, provider acceptance, and inbox delivery. | Complete: application/provider acceptance evidence confirmed; provider-webhook and authorized inbox-receipt evidence absent and not claimed |
 | `PFH-012` | C | Medium | The mobile alert dialog permits background-page scrolling and requires focus/scroll/repeated-open hardening. | Complete and live through PR #83 |
-| `PFH-013` | D | Medium | The post-Phase-4 implementation and production evidence is not yet recorded in one repository-tracked execution record. | Complete through this Unit D documentation closeout |
+| `PFH-013` | D | Medium | The post-Phase-4 implementation and production evidence is not yet recorded in one repository-tracked execution record. | Closure condition: protected merge of this exact Unit D closeout candidate; not complete before then |
 | `PFH-014` | Future | Architectural | Additional alert scheduler features require a Cloudflare Workflows/Queues versus Cron/D1 architecture decision. | Recorded; intentionally outside Units A-D |
 
 ---
@@ -401,7 +401,7 @@ Close the post-Phase-4 program after Units A-C are merged, deployed, and verifie
 
 ### Required updates
 
-- [x] Mark `PFH-001` through `PFH-013` complete only with evidence.
+- [x] Record evidence for `PFH-001` through `PFH-013`; keep `PFH-013` conditional until this exact Unit D candidate merges.
 - [x] Record every Unit 0/A/B/C PR, candidate SHA, protected-main SHA, review artifact, exact-head CI, post-merge CI, Pages/Worker deployment, deployed version, and rollback version.
 - [x] Record Unit A provider behavior and remaining user-key boundary.
 - [x] Record Unit B complete versus partial semantics, batch ceilings, pagination, ordering, snapshots, and production limits.
@@ -444,7 +444,7 @@ The decision must verify the actual account plan, CPU, wall-time, subrequest, st
 | A | Complete and live | [Preservation PR #82](https://github.com/mporosoff/grants-scraper/pull/82); integrated [PR #83](https://github.com/mporosoff/grants-scraper/pull/83) | Preserved `443748b0381fedbae5ba478fb04b11dcf057827e`; integrated `55df7df2c20e92d3eff243b66ad10c0416292d28` | `fee9912a47d0b5841d04973a23086e6566546200` | [PR #82 clean review](https://github.com/mporosoff/grants-scraper/pull/82#issuecomment-5459031304); PR #83 review/convergence and protected evidence recorded below; [exact-candidate Tests `33246300974`](https://github.com/mporosoff/grants-scraper/actions/runs/33246300974); [post-merge Tests `33246934811`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934811) | [Pages `33246934213`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934213); [search-package release `33246934851`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934851), version `60124838-52e5-4db7-8853-cdd5d08702f0`, rollback `e71f9ef0-77ba-49cc-9375-9a289ca3f941` |
 | B | Complete and live | [PR #83](https://github.com/mporosoff/grants-scraper/pull/83) | Frozen delta `cfbbcd309d8340313e7f10b70851603ddbbb95a6`; train commits `716aa3979c02916bf6571f7fe0376242d9a1054e`, `502305afb14d69dc100ebcfcb7269866e52871f3`, `3c7a84915faa375e3ca47256fae82655bb30a046`; integrated `55df7df2c20e92d3eff243b66ad10c0416292d28` | `fee9912a47d0b5841d04973a23086e6566546200` | [Terminal review artifact](https://github.com/mporosoff/grants-scraper/pull/83#issuecomment-5459644970), convergence record, exact-candidate and post-merge Tests as above | [Award release `33246934839`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934839), version `d375880e-4ec4-4436-b435-2cb41e302124`, rollback `61f565cf-0c1b-419d-903c-6534e4ca72ec`; Pages passed |
 | C | Complete and live | [PR #83](https://github.com/mporosoff/grants-scraper/pull/83) | Train commit `ba2938983d5689bdbbb757a0ba277cb40b4ccd9f`; integrated `55df7df2c20e92d3eff243b66ad10c0416292d28` | `fee9912a47d0b5841d04973a23086e6566546200` | Privacy-safe audit, terminal review/convergence, exact-candidate and post-merge Tests as above | Pages passed; [Alerts classifier `33246934814`](https://github.com/mporosoff/grants-scraper/actions/runs/33246934814) retained version `7b95c810-f46f-47a8-9a8d-6100aa75bb34`; no Alerts Worker or D1 mutation |
-| D | Complete through this closeout | This documentation-only closeout PR | Documentation-only commit based on application main `fee9912a47d0b5841d04973a23086e6566546200` | Recorded by the protected Unit D merge | Protected exact-head CI and terminal review are required on this closeout PR | Documentation only; Pages may run under repository policy; no application deployment is authorized |
+| D | Closeout candidate; conditionally complete on protected merge | This documentation-only closeout PR | Documentation-only commit based on application main `fee9912a47d0b5841d04973a23086e6566546200` | Recorded only by the protected Unit D merge | Protected exact-head CI and terminal review are required on this closeout PR | Documentation only; Pages may run under repository policy; no application deployment is authorized |
 
 ### Pre-deployment integration evidence — 2026-08-28
 
@@ -488,4 +488,4 @@ The decision must verify the actual account plan, CPU, wall-time, subrequest, st
 - Cloudflare Workflows/Queues evaluation remains a separate future architecture decision. It was not implemented in Units A-D and does not reopen this closeout.
 - The historical untracked roadmap and the frozen Unit A/Unit B worktrees were preserved unchanged. Unit D changes only this execution record and the concise pointer in the completed twenty-five-finding plan.
 
-All post-Phase-4 findings `PFH-001` through `PFH-013` are complete with evidence. `PFH-014` remains intentionally separate future architecture work. The post-Phase-4 final product hardening program is closed when this documentation-only Unit D candidate passes its protected exact-head gate, receives its terminal review, and merges without an unrelated deployment.
+Post-Phase-4 findings `PFH-001` through `PFH-012` are complete with evidence. `PFH-013` and Unit D become complete only when this exact documentation-only candidate passes its protected exact-head gate, receives its terminal review, and merges without an unrelated deployment. `PFH-014` remains intentionally separate future architecture work. Before that merge, neither Unit D nor the post-Phase-4 program may be described as complete; after that merge, the stated closure condition is satisfied without changing the historical evidence above.
