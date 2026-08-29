@@ -294,6 +294,7 @@ test("institution-only shared URLs execute and restore across browser history", 
 });
 
 test("eligible Funding Finder results open Funded Awards in a new tab with the exact NIH opportunity selected", async ({ page, context }) => {
+  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
   mockHybrid(page);
   const awardCalls = mockAwards(context);
   await openFundingFinder(page);

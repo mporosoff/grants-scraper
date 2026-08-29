@@ -277,6 +277,7 @@ test("provider failure preserves the search, filters, results, key, and retry co
 });
 
 test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
   mockHybrid(page);
   await page.goto("/match_explorer.html?focus=361187");
   const card = page.locator('[data-opportunity-id="361187"]');

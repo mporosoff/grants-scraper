@@ -1,12 +1,12 @@
 # Funding Finder Post-Phase-4 Final Product Hardening Plan
 
 **Document status:** Authoritative execution plan for the remaining post-Phase-4 work  
-**Plan version:** 2.0  
+**Plan version:** 2.1<br>
 **Repository:** `mporosoff/grants-scraper`  
 **Reconciled:** 2026-08-28  
 **Completed program baseline:** protected `main` at `888ca4264f0c437f970b867b9e3c28b4d393643b`  
 **Unit 0 synchronization baseline:** protected `main` at `1cbbb345a3b85051256dc934f9fe28dbe137d9d9`  
-**Purpose:** Integrate the already-built Unit A and Unit B candidates, complete the residual alert-delivery/mobile work, and close the post-Phase-4 record without reopening the completed twenty-five-finding hardening program.
+**Purpose:** Integrate Units A-C through the authorized application integration train, then close the post-Phase-4 record without reopening the completed twenty-five-finding hardening program.
 
 The SHAs above record the completed-program and Unit 0 synchronization baselines. They are not instructions to reset the repository. Every implementation unit must start from the then-current protected `main` and preserve any later merged work.
 
@@ -42,12 +42,12 @@ Cloudflare Workflows/Queues evaluation is a separate future architecture item. I
 |---|---|---|---|
 | Four-phase bug-fix and UX-hardening program | Complete and live | PR #79; protected `main` `888ca4264f0c437f970b867b9e3c28b4d393643b` | None |
 | Alerts scheduler recovery and Phase 4 operational closeout | Complete and live | Alerts Worker `7b95c810-f46f-47a8-9a8d-6100aa75bb34`; rollback `34c69ecb-7c70-4892-a28f-748ece759df0` | Future Workflows/Queues evaluation only |
-| Unit A | Implemented and locally validated; not integrated | `codex/post-phase4-unit-a` at `c6fd6bab2f86f3c6ef3959bd55e26e7b952e553d` | Rebase, exact-head validation, PR, merge, deployment classification, production verification |
-| Unit B | Implemented and locally validated on Unit A; not integrated | `codex/post-phase4-unit-b` at `cfbbcd309d8340313e7f10b70851603ddbbb95a6` | Integrate after Unit A; exact-head validation, PR, merge, Award Worker/Pages deployment, production verification |
-| Unit C | Not started as a bounded residual unit | Current protected `main` contains the completed PR #73/#78 alert backend baseline | Evidence-based residual delivery audit and mobile dialog work |
+| Unit A | Integrated into the A-C train; not complete or live | Closed-unmerged PR #82 preserved at exact candidate `443748b0381fedbae5ba478fb04b11dcf057827e`, with a terminal clean exact-head review | Deterministic date-fixture correction, combined A-C validation, application PR, deployment, and production verification |
+| Unit B | Implemented and locally validated on historical Unit A; not integrated | `codex/post-phase4-unit-b` at `cfbbcd309d8340313e7f10b70851603ddbbb95a6` | Apply only its delta to the A-C train and complete combined validation/deployment |
+| Unit C | Authorized on the A-C train; implementation not started | Current protected `main` contains the completed PR #73/#78 alert backend baseline | Privacy-safe residual delivery audit and mobile dialog work on the train |
 | Unit D | Not started | This plan and the completed hardening plan | Final post-Phase-4 execution record |
 
-No pull request exists for Unit A or Unit B as of this reconciliation. Unit A is pushed to `origin`; Unit B is a clean local branch without an upstream branch.
+At Unit 0 reconciliation, no pull request existed for Unit A or Unit B. PR #82 subsequently preserved an integrated Unit A candidate and exact-head evidence, but was closed without merge under the authorized integration-train amendment. Its branch and commits remain preservation evidence. Unit B remains a clean local branch without an upstream branch until its exact delta is incorporated into the train.
 
 Until a separately authorized Unit B task creates remote preservation, the Unit B local branch and worktree are preservation-critical. Do not delete, rename, reset, rebase, garbage-collect, or otherwise rewrite them. If the exact commit is not locally available when Unit B is authorized, stop rather than reconstructing or substituting it.
 
@@ -113,6 +113,37 @@ Unit B may replace the existing incremental award-card browsing with its complet
 12. Update this plan's execution record only with verified evidence. Passing tests alone does not prove production behavior.
 13. Do not modify or commit the unrelated untracked historical roadmap during Units 0-A-C.
 14. Stop a unit only for a genuinely unsafe action, missing authority/credential, an unresolved consequential review result under repository policy, or an external failure that cannot be safely isolated.
+
+---
+
+## 5A. Authorized A-C integration-train amendment
+
+This amendment was authorized after PR #82 preserved Unit A at `443748b0381fedbae5ba478fb04b11dcf057827e`. It supersedes only the separate unit-by-unit PR, review, complete-gate, merge, deployment, and production-verification sequence in Sections 7-10 and any directly conflicting per-unit sequencing in Section 5. It does not weaken any acceptance criterion, privacy/security requirement, exact-head green-check requirement, no-drift requirement, source-authority requirement, or production-verification requirement.
+
+### Preserved Unit A checkpoint
+
+- Preserve closed-unmerged PR #82, its branch, candidate, terminal clean exact-head review, and completed CI evidence; do not delete or rewrite them and do not rerun its unchanged failed workflow.
+- The two failed scenarios used real opportunity `361187` / `PAR-26-114`, whose `close_date` is `2026-08-28`. Establish a deterministic test-scoped browser time of `2026-08-28T12:00:00Z` before navigation and application scripts for those scenarios. Preserve the real catalog record, deadline, current/expired filtering, normal timers, and exact mapping.
+- Audit other E2E visibility assertions for expiring real records and correct only genuinely date-bound fixtures. Do not increase timeouts, add application test hooks, or call the expiry behavior a catalog-loading defect.
+- Use only focused syntax, contract, and diff validation at this checkpoint. Unit A remains integrated into the A-C candidate, pending combined final validation and production deployment; it is not complete or live.
+
+### One application train
+
+1. Continue from exact Unit A candidate `443748b0381fedbae5ba478fb04b11dcf057827e` in one isolated integration worktree/branch.
+2. Preserve separate logical commits for the amendment/date-fixture correction, Unit A, Unit B, and Unit C.
+3. Apply only Unit B delta `cfbbcd309d8340313e7f10b70851603ddbbb95a6`; do not replay historical Unit A parent `c6fd6bab2f86f3c6ef3959bd55e26e7b952e553d`. Reconcile it against integrated Unit A and current protected-main behavior while preserving all snapshot, completeness, source-state, pagination, facet, ordering, retry, privacy, and Worker-limit contracts.
+4. Perform Unit C's privacy-safe read-only delivery audit before backend changes. Correct only demonstrated residual delivery defects and implement the complete alert-dialog scroll, focus, Escape, repeated-open, verification-pending, and narrow-mobile contract while preserving the completed PR #73/#78 scheduler and delivery invariants.
+5. Until A-C implementation is coherent, run only focused deterministic contracts, syntax checks, package/Worker validation, migration checks, and architecture measurements. Do not run complete Playwright/E2E, repository-wide Python, frozen-query, frozen-P9, or no-drift gates; do not request review, open/update an application PR, or deploy.
+
+### Combined final application gate
+
+After Units A-C are fully implemented, rebase the complete train once onto the then-current protected `main`, resolving drift without dropping or duplicating any unit behavior. Run the complete combined validation exactly once on the resulting candidate: Python, all browser contracts, complete Playwright/E2E and accessibility, frozen queries, frozen P9, no-drift, Worker/package validation, migration/deployment classification, and Unit B architecture/resource checks. Diagnose and correct a demonstrated failure before running a changed candidate; never rerun an unchanged failed candidate.
+
+Open one application PR for integrated Units A-C. Request one exact-head Codex review only after the candidate is complete and protected checks are running or green. Continuous convergence is explicitly authorized for that PR: each review remains atomic to one SHA, all findings must be collected before edits, accepted consequential findings must be corrected coherently by invariant, and exact-head validation/review repeats only after the head changes. Merge only the unchanged exact reviewed head when every required check is green and no consequential thread remains unresolved.
+
+After merge, track post-merge Tests and Pages; deploy only components classified by the merged diff; apply only required forward-compatible migrations; retain and record Worker rollback versions; verify every Unit A-C production contract; and prove no catalog, vector, ranking, or opportunity-search drift. Provider acceptance is not inbox receipt, and inbox delivery must not be claimed without authorized inbox evidence.
+
+Unit D remains a separate post-deployment documentation-only closeout. Only after the integrated application deployment and production verification succeed may it reconcile this plan and add the concise required pointer to the completed historical plan through one documentation-only protected PR.
 
 ---
 
@@ -409,7 +440,7 @@ The decision must verify the actual account plan, CPU, wall-time, subrequest, st
 | Unit | Status | PR | Candidate | Final `main` | Review/CI | Deployment |
 |---|---|---|---|---|---|---|
 | 0 | Not started | — | — | — | — | Documentation only |
-| A | Frozen candidate; not integrated | — | `c6fd6bab2f86f3c6ef3959bd55e26e7b952e553d` | — | Historical local validation only | Not deployed |
+| A | Integrated into A-C candidate; not complete or live | [Closed PR #82](https://github.com/mporosoff/grants-scraper/pull/82) | `443748b0381fedbae5ba478fb04b11dcf057827e` | — | Terminal clean exact-head review; Python/browser green; two date-bound E2E fixtures deferred to the integration train | Not deployed |
 | B | Frozen candidate on Unit A; not integrated | — | `cfbbcd309d8340313e7f10b70851603ddbbb95a6` | — | Historical local validation only | Not deployed |
 | C | Not started | — | — | — | — | — |
 | D | Not started | — | — | — | — | Documentation only |
