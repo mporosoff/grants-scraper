@@ -38,6 +38,7 @@
     questionSequence: 0,
     questionSubmitting: false,
     answering: false,
+    historyStateFrame: 0,
   };
 
   function clean(value, maximum = 500) {
@@ -270,14 +271,48 @@
     return Boolean(value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
   }
 
-  function syncUrl(mode = "replace") {
+  function historyViewState() {
+    return { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
+  }
+
+  function recordCurrentHistoryViewState() {
+    if (!location.protocol.startsWith("http")) return;
+    history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", location.href);
+  }
+
+  function scheduleCurrentHistoryViewState() {
+    if (state.historyStateFrame) return;
+    const scheduledUrl = location.href;
+    state.historyStateFrame = requestAnimationFrame(() => {
+      state.historyStateFrame = requestAnimationFrame(() => {
+        state.historyStateFrame = 0;
+        if (location.href !== scheduledUrl) {
+          scheduleCurrentHistoryViewState();
+          return;
+        }
+        recordCurrentHistoryViewState();
+      });
+    });
+  }
+
+  function writeHistoryUrl(url, mode = "replace", departureHistoryState = null) {
+    if (!location.protocol.startsWith("http")) return;
+    if (mode === "push") {
+      history.replaceState({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) }, "", location.href);
+      history.pushState(historyViewState(), "", url);
+    } else {
+      history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", url);
+    }
+    scheduleCurrentHistoryViewState();
+  }
+
+  function syncUrl(mode = "replace", departureHistoryState = null) {
     if (!location.protocol.startsWith("http")) return;
     const value = state.submitted && state.snapshot?.snapshot_id
       ? { ...state.submitted, ...snapshotViewState() }
       : formState();
     const url = core.urlForState(location.href, value);
-    const historyState = { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
-    history[mode === "push" ? "pushState" : "replaceState"](historyState, "", url);
+    writeHistoryUrl(url, mode, departureHistoryState);
   }
 
   async function postJson(url, body, controller = state.controller) {
@@ -535,7 +570,7 @@
     };
   }
 
-  function commitSnapshotResult(staged, { historyMode = "replace", focus = false } = {}) {
+  function commitSnapshotResult(staged, { historyMode = "replace", focus = false, departureHistoryState = null } = {}) {
     state.submitted = staged.submitted;
     state.snapshot = staged.snapshot;
     state.pagePayload = staged.pagePayload;
@@ -557,10 +592,10 @@
       clearQuestionState();
     }
     renderPage({ focus });
-    syncUrl(historyMode);
+    syncUrl(historyMode, departureHistoryState);
   }
 
-  async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
+  async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     if (!state.snapshot?.snapshot_id) return null;
     const requestSequence = ++state.pageRequestSequence;
     const snapshotId = state.snapshot.snapshot_id;
@@ -578,11 +613,11 @@
     state.pagePayload = payload;
     state.snapshot = { ...state.snapshot, ...payload, snapshot_id: payload.snapshot_id };
     renderPage({ focus });
-    syncUrl(historyMode);
+    syncUrl(historyMode, departureHistoryState);
     return payload;
   }
 
-  async function rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode = "replace", focus = false }) {
+  async function rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode = "replace", focus = false, departureHistoryState = null }) {
     const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
     const retryView = page !== 1 || requestedFacet.type !== "all";
     const submitted = {
@@ -598,20 +633,21 @@
       resolveInstitution: false,
       focusResults: !retryView && focus,
       searchState: submitted,
+      departureHistoryState,
     });
     if (!refreshed) return null;
     if (!retryView) return state.pagePayload;
-    return fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus });
+    return fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus, departureHistoryState });
   }
 
-  async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
+  async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     try {
-      return await fetchPage({ page, pageSize, facet, historyMode, focus });
+      return await fetchPage({ page, pageSize, facet, historyMode, focus, departureHistoryState });
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
       setStatus("The result snapshot expired. Rebuilding the submitted search before restoring this view…");
       const retryView = page !== 1 || facet?.type !== "all";
-      const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode, focus });
+      const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode, focus, departureHistoryState });
       if (!payload) return null;
       if (!retryView) {
         setStatus("The expired result snapshot was rebuilt from the submitted search.");
@@ -622,7 +658,7 @@
     }
   }
 
-  async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, questionState = null, searchState = null } = {}) {
+  async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, questionState = null, searchState = null, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     const sequence = ++state.sequence;
     state.pageRequestSequence += 1;
     state.controller?.abort();
@@ -645,7 +681,7 @@
       });
       if (sequence !== state.sequence) return null;
       const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
-      commitSnapshotResult(staged, { historyMode, focus: focusResults });
+      commitSnapshotResult(staged, { historyMode, focus: focusResults, departureHistoryState });
       const exact = snapshot.completeness === "complete";
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
@@ -920,7 +956,7 @@
     state.questionSubmitting = true;
     state.answering = false;
     $("ii-question-answer").classList.add("hidden");
-    $("ii-ask-button").disabled = true;
+    setBusy(true);
     try {
       const question = clean($("ii-question").value, 1_000);
       if (!question) throw new Error("Enter a question first.");
@@ -985,8 +1021,8 @@
     } finally {
       if (questionSequence === state.questionSequence) {
         state.questionSubmitting = false;
-        $("ii-ask-button").disabled = state.busyDepth > 0;
       }
+      setBusy(false);
     }
   }
 
@@ -1019,6 +1055,7 @@
   }
 
   function clearSearch({ historyMode = "push" } = {}) {
+    const departureHistoryState = historyMode === "push" ? historyViewState() : null;
     state.sequence += 1;
     state.pageRequestSequence += 1;
     state.controller?.abort();
@@ -1027,10 +1064,13 @@
     applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", page: 1, page_size: 10, facet_type: "all", facet_key: "" });
     for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
     setStatus("Structured award search and institution resolution do not require an AI key.");
-    if (location.protocol.startsWith("http")) history[historyMode === "push" ? "pushState" : "replaceState"](null, "", core.urlForState(location.href, { open: true }));
+    writeHistoryUrl(core.urlForState(location.href, { open: true }), historyMode, departureHistoryState);
   }
 
   function bindEvents() {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.addEventListener("scroll", scheduleCurrentHistoryViewState, { passive: true });
+    document.addEventListener("focusin", scheduleCurrentHistoryViewState);
     $("ii-institution").addEventListener("input", () => {
       state.selectedInstitution = null;
       clearTimeout(state.registryTimer);

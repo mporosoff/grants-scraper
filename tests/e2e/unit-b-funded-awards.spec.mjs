@@ -91,6 +91,39 @@ test("numbered navigation, page size, and history keep one stable view", async (
   expect(runtimeErrors).toEqual([]);
 });
 
+test("Back and Forward restore the scroll and focus owned by each snapshot page", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 51 });
+  await searchTopic(page, "history-view-state");
+  const pageOneScroll = await page.evaluate(() => {
+    document.querySelector("#ii-topic").focus();
+    const y = Math.min(420, document.documentElement.scrollHeight - window.innerHeight);
+    window.scrollTo(0, y);
+    return y;
+  });
+  await expect.poll(() => page.evaluate(() => history.state?.focusId)).toBe("ii-topic");
+  await expect.poll(() => page.evaluate(() => history.state?.scrollY)).toBe(pageOneScroll);
+  await page.evaluate(() => document.querySelector('[data-ii-page-number="2"]').click());
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 6");
+  const pageTwoScroll = await page.evaluate(() => {
+    document.querySelector("#ii-card-next").focus();
+    const y = Math.min(760, document.documentElement.scrollHeight - window.innerHeight);
+    window.scrollTo(0, y);
+    return y;
+  });
+  await expect.poll(() => page.evaluate(() => history.state?.focusId)).toBe("ii-card-next");
+  await expect.poll(() => page.evaluate(() => history.state?.scrollY)).toBe(pageTwoScroll);
+
+  await page.goBack();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 1 of 6");
+  await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe("ii-topic");
+  await expect.poll(() => page.evaluate(y => Math.abs(window.scrollY - y), pageOneScroll)).toBeLessThan(3);
+  await page.goForward();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 6");
+  await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe("ii-card-next");
+  await expect.poll(() => page.evaluate(y => Math.abs(window.scrollY - y), pageTwoScroll)).toBeLessThan(3);
+  expect(runtimeErrors).toEqual([]);
+});
+
 test("snapshot navigation controls stay locked until one requested view is committed", async ({ page }) => {
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 51, snapshotPageDelayMs: 350 });
   await searchTopic(page, "atomic-navigation");
@@ -419,6 +452,43 @@ test("optional provider translation remains strict and feeds the snapshot reques
   expect(providerCalls).toHaveLength(1);
   expect(providerCalls[0].text.format.type).toBe("json_schema");
   expect(calls.find(call => Array.isArray(call.sources))).toMatchObject({ sources: ["DOE"], criteria: { program_office: "SC-32", year_start: 2020, year_end: 2026 } });
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("question translation locks newer searches until its owned snapshot is committed", async ({ page }) => {
+  let releaseTranslation;
+  const translationGate = new Promise(resolve => { releaseTranslation = resolve; });
+  const providerCalls = [];
+  await page.route("https://api.openai.com/v1/responses", async route => {
+    providerCalls.push(route.request().postDataJSON());
+    await translationGate;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(openAiStructuredResponse({ agency: "NSF", program: "", topic: "question-owned", pi: "", program_officer: "", year_start: "", year_end: "", answer_intent: "count", narrative_needed: false })),
+    });
+  });
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "manual-owner", "NSF");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-key").fill("sk-question-lock-test");
+  await page.locator("#ii-save-key").click();
+  await page.locator("#ii-question").fill("How many question-owned NSF awards are there?");
+  await page.locator("#ii-ask-button").click();
+  await expect.poll(() => providerCalls.length).toBe(1);
+  await expect(page.locator("#ii-search")).toBeDisabled();
+  await expect(page.locator("#ii-clear")).toBeDisabled();
+  await expect(page.locator("#ii-card-next")).toBeDisabled();
+  const createCountWhileTranslating = calls.filter(call => Array.isArray(call.sources)).length;
+  await page.locator("#ii-form").evaluate(form => form.dispatchEvent(new SubmitEvent("submit", { bubbles: true, cancelable: true })));
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCountWhileTranslating);
+  releaseTranslation();
+  await expect(page.locator("#ii-direct-answer")).toBeVisible();
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCountWhileTranslating + 1);
+  expect(calls.filter(call => Array.isArray(call.sources)).at(-1)).toMatchObject({ sources: ["NSF"], criteria: { topic: "question-owned" } });
+  await expect(page.locator("#ii-search")).toBeEnabled();
   expect(runtimeErrors).toEqual([]);
 });
 
