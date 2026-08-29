@@ -37,6 +37,9 @@ DIRECTORY_RAW_BUDGET = 350_000
 DIRECTORY_GZIP_BUDGET = 90_000
 GRAPH_RAW_BUDGET = 2_500_000
 GRAPH_GZIP_BUDGET = 500_000
+LONG_PHRASE_MIN_CONCEPTS = 4
+LONG_PHRASE_WINDOW_FACTOR = 3
+LONG_PHRASE_MIN_WINDOW = 12
 
 _WORD_RE = re.compile(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", re.I)
 _SPACE_RE = re.compile(r"\s+")
@@ -440,15 +443,43 @@ def _opportunity_fields(record: dict) -> dict[str, str]:
     }
 
 
-def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float],
+def _minimum_covering_window(field_tokens: list[str], concepts: list[str]) -> tuple[int, int] | None:
+    """Return the tightest token window containing every distinct concept."""
+    required = set(concepts)
+    if not required:
+        return None
+    counts: Counter[str] = Counter()
+    best: tuple[int, int] | None = None
+    left = 0
+    for right, token in enumerate(field_tokens):
+        if token in required:
+            counts[token] += 1
+        while len(counts) == len(required):
+            if best is None or right - left < best[1] - best[0]:
+                best = (left, right)
+            left_token = field_tokens[left]
+            if left_token in required:
+                counts[left_token] -= 1
+                if not counts[left_token]:
+                    del counts[left_token]
+            left += 1
+    return best
+
+
+def _long_phrase_window_limit(concept_count: int) -> int:
+    return max(LONG_PHRASE_MIN_WINDOW, LONG_PHRASE_WINDOW_FACTOR * concept_count)
+
+
+def _phrase_admitted(phrase: str, field_tokens: list[str], idf: dict[str, float],
                      profile_context: set[str] | None = None) -> tuple[bool, float]:
     concepts = _distinctive_tokens(phrase)
     if not concepts:
         return False, 0.0
-    covered = [token for token in concepts if token in field_tokens]
+    field_token_set = set(field_tokens)
+    covered = [token for token in concepts if token in field_token_set]
     if len(concepts) == 1:
         token = concepts[0]
-        context_hits = (profile_context or set()) & field_tokens
+        context_hits = (profile_context or set()) & field_token_set
         contextual = (
             len(context_hits) >= 2
             and sum(idf.get(item, 1.0) for item in context_hits) >= 3.4
@@ -456,10 +487,14 @@ def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float],
         admitted = len(covered) == 1 and (
             token in _UNAMBIGUOUS_SINGLE_TOKEN_STEMS or contextual
         )
-    elif len(concepts) <= 3:
+    elif len(concepts) < LONG_PHRASE_MIN_CONCEPTS:
         admitted = len(covered) == len(concepts)
     else:
-        admitted = len(covered) >= max(3, math.ceil(0.75 * len(concepts)))
+        window = _minimum_covering_window(field_tokens, concepts)
+        admitted = bool(
+            window
+            and window[1] - window[0] + 1 <= _long_phrase_window_limit(len(concepts))
+        )
     return admitted, sum(idf.get(token, 1.0) for token in covered)
 
 
@@ -471,12 +506,18 @@ def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
     # Admission compares stemmed word tokens. Preserve offsets from that same
     # normalization so evidence such as ``theory`` -> ``theories`` is located
     # in the published text instead of falling back to an unrelated opening.
+    word_matches = list(_WORD_RE.finditer(clean))
+    normalized_tokens = [_stem(match.group(0)) for match in word_matches]
     positions = [
         match.start()
-        for match in _WORD_RE.finditer(clean)
-        if _stem(match.group(0)) in concept_set
+        for match, token in zip(word_matches, normalized_tokens)
+        if token in concept_set
     ]
-    center = min(positions) if positions else 0
+    window = _minimum_covering_window(normalized_tokens, list(concept_set))
+    if window and window[1] - window[0] + 1 <= _long_phrase_window_limit(len(concept_set)):
+        center = word_matches[window[0]].start()
+    else:
+        center = min(positions) if positions else 0
     start = max(0, center - 55)
     end = min(len(clean), start + limit)
     if end == len(clean):
@@ -485,16 +526,16 @@ def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
 
 
 def _prepare_opportunity(record: dict) -> tuple[
-        dict[str, str], dict[str, set[str]], set[str], set[str]]:
+        dict[str, str], dict[str, list[str]], set[str], set[str]]:
     fields = _opportunity_fields(record)
-    token_sets = {field: set(_tokens(text)) for field, text in fields.items()}
-    authoritative_tokens = set().union(*token_sets.values())
+    token_sequences = {field: _tokens(text) for field, text in fields.items()}
+    authoritative_tokens = set().union(*(set(tokens) for tokens in token_sequences.values()))
     corroborating_tokens = authoritative_tokens | set(_tokens(_corroborating_facet_text(record)))
-    return fields, token_sets, authoritative_tokens, corroborating_tokens
+    return fields, token_sequences, authoritative_tokens, corroborating_tokens
 
 
 def score_profile_opportunity(profile: dict, record: dict, idf: dict[str, float],
-                              prepared: tuple[dict[str, str], dict[str, set[str]], set[str], set[str]] | None = None) -> dict | None:
+                              prepared: tuple[dict[str, str], dict[str, list[str]], set[str], set[str]] | None = None) -> dict | None:
     if not profile.get("rankable"):
         return None
     fields, token_sets, _authoritative_tokens, corroborating_tokens = prepared or _prepare_opportunity(record)
@@ -537,7 +578,7 @@ def score_profile_opportunity(profile: dict, record: dict, idf: dict[str, float]
         field_hits = [item for item in chosen if item[1] == field]
         if not field_hits:
             continue
-        concepts = [token for item in field_hits for token in _distinctive_tokens(item[0])]
+        concepts = _distinctive_tokens(field_hits[0][0])
         excerpt = _excerpt(fields[field], concepts)
         if excerpt:
             evidence.append({"field": field, "excerpt": excerpt})
@@ -626,6 +667,9 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
             "admission_fields": ["title", "description", "published_subject"],
             "corroborating_only_fields": ["disciplines", "topic_areas", "derived_themes"],
             "single_term_policy": "curated_unambiguous_or_two_profile_context_terms",
+            "long_phrase_policy": "all_distinctive_concepts_within_bounded_token_window",
+            "long_phrase_window_factor": LONG_PHRASE_WINDOW_FACTOR,
+            "long_phrase_min_window": LONG_PHRASE_MIN_WINDOW,
         },
         "generation_metrics": {
             "edge_count": len(edges),

@@ -11,6 +11,8 @@ from scripts.faculty_match import (
     DIRECTORY_RAW_BUDGET,
     GRAPH_GZIP_BUDGET,
     GRAPH_RAW_BUDGET,
+    LONG_PHRASE_MIN_WINDOW,
+    LONG_PHRASE_WINDOW_FACTOR,
     MAX_FACULTY_PER_OPPORTUNITY,
     MAX_OPPORTUNITIES_PER_FACULTY,
     _faculty_idf,
@@ -255,6 +257,56 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertIsNotNone(edge)
         self.assertIn("carbon dioxide capture and conversion", edge["matched_profile_phrases"])
         self.assertTrue(edge["opportunity_evidence"])
+
+    def test_long_phrase_requires_every_concept_in_one_bounded_window(self):
+        profile = {
+            "faculty_id": "quantum-fixture",
+            "rankable": True,
+            "research_interests_text": "Experimental quantum information processing",
+            "research_phrases": ["Experimental quantum information processing"],
+            "derived_themes": [],
+        }
+        idf = {token: 3.0 for token in _distinctive_tokens(profile["research_interests_text"])}
+        missing_defining_concept = {
+            "opportunity_id": "missing-quantum",
+            "title": "General research methods",
+            "document_search_text": (
+                "Experimental studies describe information from many unrelated sections. "
+                + "administrative process " * 80
+            ),
+        }
+        scattered_concepts = {
+            "opportunity_id": "scattered-quantum",
+            "description": (
+                "Experimental work begins here. "
+                + "background " * (LONG_PHRASE_MIN_WINDOW + 2)
+                + "Quantum methods produce information for processing."
+            ),
+        }
+        local_concepts = {
+            "opportunity_id": "local-quantum",
+            "description": "The program supports experimental quantum information processing platforms.",
+        }
+        self.assertIsNone(score_profile_opportunity(profile, missing_defining_concept, idf))
+        self.assertIsNone(score_profile_opportunity(profile, scattered_concepts, idf))
+        edge = score_profile_opportunity(profile, local_concepts, idf)
+        self.assertIsNotNone(edge)
+        self.assertEqual(edge["matched_profile_phrases"], ["Experimental quantum information processing"])
+        self.assertIn("experimental quantum information processing", edge["opportunity_evidence"][0]["excerpt"].casefold())
+        self.assertEqual(LONG_PHRASE_WINDOW_FACTOR, 3)
+        self.assertEqual(LONG_PHRASE_MIN_WINDOW, 12)
+
+    def test_reported_quantum_false_positive_is_absent_from_generated_graph(self):
+        self.assertFalse(any(
+            edge["faculty_id"] == "john-m-nichol"
+            and edge["opportunity_id"] == "350944"
+            and "Experimental quantum information processing" in edge["matched_profile_phrases"]
+            for edge in self.graph["edges"]
+        ))
+        self.assertEqual(
+            self.graph["matching_policy"]["long_phrase_policy"],
+            "all_distinctive_concepts_within_bounded_token_window",
+        )
 
     def test_excerpt_uses_the_matching_token_normalizer_for_word_forms(self):
         text = (
