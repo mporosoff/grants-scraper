@@ -52,6 +52,116 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
+test("Unit C alert dialog locks the page, traps focus, scrolls internally, and restores state on mobile", async ({ page }) => {
+  mockHybrid(page);
+  mockAlerts(page);
+  await page.setViewportSize({ width: 320, height: 480 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const invoker = page.locator("#alert-new-matches");
+  await invoker.scrollIntoViewIfNeeded();
+  const scrollBefore = await page.evaluate(() => window.scrollY);
+  await invoker.click();
+  const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("#alert-email")).toBeFocused();
+  expect(await page.evaluate(() => ({
+    rootLocked: document.documentElement.classList.contains("alert-dialog-open"),
+    bodyLocked: document.body.classList.contains("alert-dialog-open"),
+    position: document.body.style.position,
+    top: document.body.style.top,
+    rootOverflow: document.documentElement.style.overflow,
+  }))).toEqual({
+    rootLocked: true,
+    bodyLocked: true,
+    position: "fixed",
+    top: `-${scrollBefore}px`,
+    rootOverflow: "hidden",
+  });
+  const mobileGeometry = await dialog.evaluate(element => {
+    const rect = element.getBoundingClientRect();
+    return {
+      left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
+      width: rect.width, height: rect.height,
+      clientHeight: element.clientHeight, scrollHeight: element.scrollHeight,
+      overflowY: getComputedStyle(element).overflowY,
+    };
+  });
+  expect(mobileGeometry.left).toBeGreaterThanOrEqual(0);
+  expect(mobileGeometry.right).toBeLessThanOrEqual(320);
+  expect(mobileGeometry.top).toBeGreaterThanOrEqual(0);
+  expect(mobileGeometry.bottom).toBeLessThanOrEqual(480);
+  expect(mobileGeometry.scrollHeight).toBeGreaterThan(mobileGeometry.clientHeight);
+  expect(["auto", "scroll"]).toContain(mobileGeometry.overflowY);
+  await dialog.evaluate(element => { element.scrollTop = element.scrollHeight; });
+  expect(await dialog.evaluate(element => element.scrollTop)).toBeGreaterThan(0);
+  for (const viewport of [{ width: 320, height: 320 }, { width: 480, height: 320 }]) {
+    await page.setViewportSize(viewport);
+    const bounds = await dialog.evaluate(element => {
+      const rect = element.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+    });
+    expect(bounds.left).toBeGreaterThanOrEqual(0);
+    expect(bounds.right).toBeLessThanOrEqual(viewport.width);
+    expect(bounds.top).toBeGreaterThanOrEqual(0);
+    expect(bounds.bottom).toBeLessThanOrEqual(viewport.height);
+  }
+  await page.setViewportSize({ width: 320, height: 480 });
+
+  const closeButton = dialog.locator(".alert-dialog-close");
+  const cancelButton = dialog.locator(".alert-cancel");
+  await closeButton.focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(cancelButton).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(closeButton).toBeFocused();
+  await page.locator("#query").focus();
+  expect(await page.evaluate(() => document.querySelector(".alert-dialog")?.contains(document.activeElement))).toBe(true);
+
+  await dialog.locator("#alert-email").fill("mobile-researcher@example.edu");
+  await dialog.locator("#alert-submit").click();
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Verification email requested for mobile-researcher@example.edu");
+  await expect(dialog.locator("#alert-email")).toHaveValue("mobile-researcher@example.edu");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(invoker).toBeFocused();
+  await expect.poll(() => page.evaluate(() => Math.round(window.scrollY))).toBe(Math.round(scrollBefore));
+  expect(await page.evaluate(() => ({
+    rootLocked: document.documentElement.classList.contains("alert-dialog-open"),
+    bodyLocked: document.body.classList.contains("alert-dialog-open"),
+    position: document.body.style.position,
+    rootOverflow: document.documentElement.style.overflow,
+  }))).toEqual({ rootLocked: false, bodyLocked: false, position: "", rootOverflow: "" });
+
+  await page.setViewportSize({ width: 390, height: 600 });
+  await invoker.click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(invoker).toBeFocused();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+test("Unit C alert dialog preserves its recovery state and restores focus after a failed submission", async ({ page }) => {
+  mockHybrid(page);
+  mockAlerts(page, { status: 503, errorCode: "alerts_unavailable" });
+  await page.setViewportSize({ width: 390, height: 520 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "hydrogen catalysis");
+  const invoker = page.locator("#alert-new-matches");
+  await invoker.click();
+  const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
+  await dialog.locator("#alert-email").fill("failure-researcher@example.edu");
+  await dialog.locator("#alert-submit").click();
+  await expect(dialog.locator("#alert-dialog-status")).toContainText("Email alert delivery is unavailable");
+  await expect(dialog.locator("#alert-email")).toHaveValue("failure-researcher@example.edu");
+  expect(await page.evaluate(() => document.body.style.position)).toBe("fixed");
+  expect(await page.evaluate(() => document.querySelector(".alert-dialog")?.contains(document.activeElement))).toBe(true);
+  await dialog.locator(".alert-dialog-close").click();
+  await expect(dialog).toBeHidden();
+  await expect(invoker).toBeFocused();
+  expect(await page.evaluate(() => document.body.style.position)).toBe("");
+});
+
 test("saved-item write rejection restores durable UI state across every mutation", async ({ page }, testInfo) => {
   await page.addInitScript(() => {
     const originalSetItem = Storage.prototype.setItem;

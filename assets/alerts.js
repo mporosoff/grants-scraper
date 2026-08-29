@@ -11,6 +11,7 @@
   let current = null;
   let restoreFocus = null;
   let lastEmail = "";
+  let scrollLock = null;
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"]/g, character => ({
@@ -48,6 +49,70 @@
   function setSubmitStatus(node, message, { error = false } = {}) {
     node.textContent = message;
     node.classList.toggle("error-text", error);
+  }
+
+  function lockBackgroundScroll() {
+    if (scrollLock) return;
+    const root = document.documentElement;
+    const body = document.body;
+    const scrollbarWidth = Math.max(0, window.innerWidth - root.clientWidth);
+    scrollLock = {
+      x: window.scrollX,
+      y: window.scrollY,
+      rootOverflow: root.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+      bodyOverflow: body.style.overflow,
+      bodyPaddingRight: body.style.paddingRight,
+    };
+    root.classList.add("alert-dialog-open");
+    body.classList.add("alert-dialog-open");
+    root.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollLock.y}px`;
+    body.style.left = `-${scrollLock.x}px`;
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    if (scrollbarWidth) {
+      body.style.paddingRight = `calc(${getComputedStyle(body).paddingRight} + ${scrollbarWidth}px)`;
+    }
+  }
+
+  function unlockBackgroundScroll() {
+    if (!scrollLock) return;
+    const root = document.documentElement;
+    const body = document.body;
+    const saved = scrollLock;
+    scrollLock = null;
+    root.classList.remove("alert-dialog-open");
+    body.classList.remove("alert-dialog-open");
+    root.style.overflow = saved.rootOverflow;
+    body.style.position = saved.bodyPosition;
+    body.style.top = saved.bodyTop;
+    body.style.left = saved.bodyLeft;
+    body.style.right = saved.bodyRight;
+    body.style.width = saved.bodyWidth;
+    body.style.overflow = saved.bodyOverflow;
+    body.style.paddingRight = saved.bodyPaddingRight;
+    window.scrollTo(saved.x, saved.y);
+  }
+
+  function dialogFocusableElements() {
+    if (!dialog) return [];
+    return [...dialog.querySelectorAll('button, input, select, textarea, a[href], [tabindex]:not([tabindex="-1"])')]
+      .filter(element => !element.disabled && !element.closest("[hidden], .hidden")
+        && getComputedStyle(element).display !== "none" && getComputedStyle(element).visibility !== "hidden");
+  }
+
+  function restoreDialogState() {
+    const target = restoreFocus;
+    restoreFocus = null;
+    unlockBackgroundScroll();
+    if (target?.isConnected && !target.disabled) target.focus({ preventScroll: true });
   }
 
   function ensureDialog() {
@@ -109,9 +174,28 @@
       event.preventDefault();
       close();
     });
+    dialog.addEventListener("keydown", event => {
+      if (event.key !== "Tab") return;
+      const focusable = dialogFocusableElements();
+      if (!focusable.length) {
+        event.preventDefault();
+        dialog.focus({ preventScroll: true });
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus({ preventScroll: true });
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    });
     dialog.addEventListener("click", event => {
       if (event.target === dialog) close();
     });
+    dialog.addEventListener("close", restoreDialogState);
     dialog.querySelector("form").addEventListener("submit", submit);
     return dialog;
   }
@@ -119,8 +203,6 @@
   function close() {
     if (!dialog?.open) return;
     dialog.close();
-    restoreFocus?.focus?.();
-    restoreFocus = null;
   }
 
   function triggers() {
@@ -195,6 +277,9 @@
     } finally {
       clearTimeout(timeout);
       submitButton.disabled = false;
+      if (dialog.open && !dialog.contains(document.activeElement)) {
+        submitButton.focus({ preventScroll: true });
+      }
     }
   }
 
@@ -211,7 +296,7 @@
         ? [...new Set(baselineOpportunityIds.map(String).filter(Boolean))]
         : [],
     };
-    restoreFocus = focus;
+    restoreFocus = focus?.isConnected ? focus : restoreFocus;
     dialog.querySelector("#alert-dialog-title").textContent = TYPE_LABELS[type];
     dialog.querySelector("#alert-dialog-summary").textContent = summary;
     dialog.querySelector("#alert-trigger-fields").classList.toggle("hidden", type !== "opportunity");
@@ -223,8 +308,16 @@
     email.readOnly = false;
     dialog.querySelector("#alert-change-email").classList.add("hidden");
     dialog.querySelector("#alert-submit").textContent = "Send verification email";
-    dialog.showModal();
-    email.focus();
+    if (!dialog.open) {
+      lockBackgroundScroll();
+      try {
+        dialog.showModal();
+      } catch (error) {
+        restoreDialogState();
+        throw error;
+      }
+    }
+    email.focus({ preventScroll: true });
     return true;
   }
 

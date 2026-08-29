@@ -1,16 +1,23 @@
 .alert-dialog {
   width: min(42rem, calc(100vw - 2rem));
   max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  overscroll-behavior: contain;
   padding: 0;
   border: 0;
   border-radius: 1rem;
   box-shadow: 0 1.5rem 4rem rgb(0 20 70 / 28%);
   color: var(--ink, #14213d);
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 }
 
 .alert-dialog::backdrop { background: rgb(0 17 52 / 58%); }
 
-.alert-dialog-card { padding: 1.5rem; }
+.alert-dialog-open { overscroll-behavior: none; }
+.alert-dialog-card { min-width: 0; padding: 1.5rem; box-sizing: border-box; }
+.alert-dialog-card * { box-sizing: border-box; }
 
 .alert-dialog-heading,
 .alert-dialog-actions,
@@ -42,7 +49,11 @@
 .saved-item-actions { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 
 @media (max-width: 520px) {
-  .alert-dialog { width: calc(100vw - 1rem); max-height: calc(100vh - 1rem); }
+  .alert-dialog {
+    width: calc(100vw - 1rem);
+    max-height: calc(100vh - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
   .alert-dialog-card { padding: 1rem; }
   .alert-field-grid { display: grid; }
   .alert-dialog-actions .button { width: 100%; }

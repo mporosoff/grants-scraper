@@ -1650,6 +1650,96 @@ test("new subscriptions dispatch their own durable verification event instead of
   assert.deepEqual([delivered.status, delivered.provider_message_id], ["sent", "provider-1"]);
 });
 
+test("Unit C multiple addresses and multiple subscriptions remain independently verifiable and manageable", async () => {
+  const database = databaseThrough();
+  const store = new D1AlertStore(new SqliteD1(database));
+  const provider = new ScriptedProvider();
+  const nonces = ["a".repeat(43), "b".repeat(43), "c".repeat(43)];
+  const handler = createHandler({
+    storeFactory: () => store,
+    providerFactory: () => provider,
+    now: () => fixedNow,
+    tokenFactory: () => nonces.shift(),
+  });
+  const firstAddress = "first-independent@example.edu";
+  const secondAddress = "second-independent@example.edu";
+  const programBody = {
+    email: firstAddress,
+    baseline_opportunity_ids: [],
+    subscription: {
+      type: "program", cadence: "weekly", definition: { program_id: "nsf:cbet" },
+    },
+  };
+  for (const body of [
+    opportunityBody(firstAddress),
+    opportunityBody(secondAddress),
+    programBody,
+  ]) {
+    const response = await post(handler, "/subscriptions", body);
+    assert.equal(response.status, 202);
+    assert.deepEqual(await response.json(), { status: "verification_required" });
+  }
+  assert.deepEqual(provider.messages.map(message => message.to), [
+    firstAddress, secondAddress, firstAddress,
+  ]);
+  assert.deepEqual({ ...database.prepare(
+    "SELECT COUNT(*) AS addresses, (SELECT COUNT(*) FROM subscriptions) AS subscriptions FROM subscribers",
+  ).get() }, { addresses: 2, subscriptions: 3 });
+  assert.deepEqual(all(database,
+    "SELECT COUNT(*) AS subscriptions FROM subscriptions GROUP BY subscriber_id ORDER BY subscriptions",
+  ).map(row => row.subscriptions), [1, 2]);
+
+  for (const message of provider.messages) {
+    const token = new URL(message.text.match(/Activate it: (\S+)/)[1]).searchParams.get("token");
+    const response = await handler(new Request(
+      `https://alerts.example.test/verify?token=${encodeURIComponent(token)}`,
+      { headers: { Origin: "https://alerts.example.test" } },
+    ), env);
+    assert.equal(response.status, 200);
+  }
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM subscriptions WHERE active = 1 AND verified_at IS NOT NULL",
+  ).get().count, 3);
+
+  const firstSubscriber = database.prepare(
+    "SELECT id FROM subscribers WHERE email_normalized = ?",
+  ).get(firstAddress);
+  const firstSubscriptions = all(database,
+    "SELECT id FROM subscriptions WHERE subscriber_id = ? ORDER BY id",
+    firstSubscriber.id,
+  );
+  const manageToken = await createCapability({
+    subscriberId: firstSubscriber.id, purpose: "manage",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const manageResponse = await handler(new Request(
+    `https://alerts.example.test/manage?token=${encodeURIComponent(manageToken)}`,
+    { headers: { Origin: "https://alerts.example.test" } },
+  ), env);
+  assert.equal(manageResponse.status, 200);
+  const manageHtml = await manageResponse.text();
+  assert.match(manageHtml, /Opportunity opp-1/);
+  assert.match(manageHtml, /Chemical, Bioengineering, Energy, and Transport Systems \(CBET\)/);
+
+  const unsubscribeToken = await createCapability({
+    subscriberId: firstSubscriber.id,
+    purpose: "unsubscribe_one",
+    subscriptionId: firstSubscriptions[0].id,
+  }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeResponse = await handler(new Request("https://alerts.example.test/unsubscribe", {
+    method: "POST",
+    headers: { Origin: "https://alerts.example.test", "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ token: unsubscribeToken, subscription: firstSubscriptions[0].id }),
+  }), env);
+  assert.equal(unsubscribeResponse.status, 200);
+  assert.deepEqual(all(database,
+    "SELECT active FROM subscriptions WHERE subscriber_id = ? ORDER BY id",
+    firstSubscriber.id,
+  ).map(row => row.active), [0, 1]);
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE u.email_normalized = ? AND s.active = 1",
+  ).get(secondAddress).count, 1);
+});
+
 test("FF-BUG-018 retention is bounded and preserves recent, active, and retryable state", async () => {
   const database = databaseThrough();
   insertSubscriber(database);
