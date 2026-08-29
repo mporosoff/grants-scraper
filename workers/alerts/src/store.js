@@ -54,7 +54,8 @@ export class D1AlertStore {
     const expires = new Date(now.getTime() + windowSeconds * 1_000).toISOString();
     const payloadJson = JSON.stringify(providerPayload || {});
     const claim = schedulerClaim(scheduler);
-    const claimableCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL${claim.sql}`;
+    const subscribed = "EXISTS (SELECT 1 FROM subscriptions WHERE id = notification_events.subscription_id AND unsubscribed_at IS NULL)";
+    const claimableCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND ${subscribed}${claim.sql}`;
     const matchingReservationCount = `SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND provider_quota_key = ?`;
     await this.db.batch([
       this.db.prepare(
@@ -66,14 +67,14 @@ export class D1AlertStore {
         ...eventIds, ...claim.values, eventIds.length, ...eventIds, messageKey, eventIds.length,
       ),
       this.db.prepare(
-        `UPDATE notification_events SET provider_payload_json = CASE WHEN id = (SELECT MIN(id) FROM notification_events WHERE id IN (${placeholders})) THEN CASE WHEN provider_quota_key = ? THEN COALESCE(provider_payload_json, ?) ELSE ? END ELSE NULL END, provider_batch_has_overflow = CASE WHEN provider_quota_key = ? THEN provider_batch_has_overflow ELSE ? END, provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)${claim.sql}`,
+        `UPDATE notification_events SET provider_payload_json = CASE WHEN id = (SELECT MIN(id) FROM notification_events WHERE id IN (${placeholders})) THEN CASE WHEN provider_quota_key = ? THEN COALESCE(provider_payload_json, ?) ELSE ? END ELSE NULL END, provider_batch_has_overflow = CASE WHEN provider_quota_key = ? THEN provider_batch_has_overflow ELSE ? END, provider_quota_key = ?, provider_quota_reserved_at = ? WHERE id IN (${placeholders}) AND status = 'sending' AND terminal_at IS NULL AND ${subscribed} AND EXISTS (SELECT 1 FROM rate_limits WHERE action = 'email_send' AND client_key = 'global' AND last_reservation_key = ?)${claim.sql}`,
       ).bind(
         ...eventIds, messageKey, payloadJson, payloadJson, messageKey, hasOverflow ? 1 : 0,
         messageKey, timestamp, ...eventIds, messageKey, ...claim.values,
       ),
     ]);
     const reserved = await this.db.prepare(
-      `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? AND status = 'sending' AND terminal_at IS NULL THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})${claim.sql}`,
+      `SELECT COUNT(*) AS total, SUM(CASE WHEN provider_quota_key = ? AND status = 'sending' AND terminal_at IS NULL AND ${subscribed} THEN 1 ELSE 0 END) AS matched FROM notification_events WHERE id IN (${placeholders})${claim.sql}`,
     ).bind(messageKey, ...eventIds, ...claim.values).first();
     return Number(reserved?.total || 0) === eventIds.length
       && Number(reserved?.matched || 0) === eventIds.length;
@@ -234,7 +235,7 @@ export class D1AlertStore {
         "UPDATE subscriptions SET active = 0, unsubscribed_at = COALESCE(unsubscribed_at, ?), evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, evaluation_weekly_window_at = NULL, evaluation_input_generated_at = NULL, evaluation_source_generated_at = NULL, updated_at = ? WHERE id = ? AND subscriber_id = ?",
       ).bind(now, now, subscriptionId, subscriberId),
       this.db.prepare(
-        "UPDATE notification_events SET status = 'suppressed', error_code = 'subscription_unsubscribed', terminal_at = COALESCE(terminal_at, ?), claimed_at = NULL WHERE subscription_id = ? AND terminal_at IS NULL AND status IN ('queued', 'failed') AND EXISTS (SELECT 1 FROM subscriptions WHERE id = ? AND subscriber_id = ?)",
+        "UPDATE notification_events SET status = 'suppressed', error_code = 'subscription_unsubscribed', terminal_at = COALESCE(terminal_at, ?), claimed_at = NULL WHERE subscription_id = ? AND terminal_at IS NULL AND (status IN ('queued', 'failed') OR (status = 'sending' AND provider_quota_key IS NULL)) AND EXISTS (SELECT 1 FROM subscriptions WHERE id = ? AND subscriber_id = ?)",
       ).bind(now, subscriptionId, subscriptionId, subscriberId),
     ]);
     return Number(result?.meta?.changes || 0) > 0;
@@ -246,7 +247,7 @@ export class D1AlertStore {
         "UPDATE subscriptions SET active = 0, unsubscribed_at = COALESCE(unsubscribed_at, ?), evaluation_cursor_at = NULL, evaluation_cursor_event_id = NULL, evaluation_window_started_at = NULL, evaluation_weekly_window_at = NULL, evaluation_input_generated_at = NULL, evaluation_source_generated_at = NULL, updated_at = ? WHERE subscriber_id = ?",
       ).bind(now, now, subscriberId),
       this.db.prepare(
-        "UPDATE notification_events SET status = 'suppressed', error_code = 'subscriber_unsubscribed', terminal_at = COALESCE(terminal_at, ?), claimed_at = NULL WHERE subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = ?) AND terminal_at IS NULL AND status IN ('queued', 'failed')",
+        "UPDATE notification_events SET status = 'suppressed', error_code = 'subscriber_unsubscribed', terminal_at = COALESCE(terminal_at, ?), claimed_at = NULL WHERE subscription_id IN (SELECT id FROM subscriptions WHERE subscriber_id = ?) AND terminal_at IS NULL AND (status IN ('queued', 'failed') OR (status = 'sending' AND provider_quota_key IS NULL))",
       ).bind(now, subscriberId),
     ]);
     return true;
@@ -532,9 +533,10 @@ export class D1AlertStore {
   async releaseClaimedEvents(ids, nextAttemptAt, scheduler = null) {
     if (!ids.length) return;
     const claim = schedulerClaim(scheduler);
+    const unsubscribed = "EXISTS (SELECT 1 FROM subscriptions WHERE id = notification_events.subscription_id AND unsubscribed_at IS NOT NULL)";
     await this.db.batch(ids.map(id => this.db.prepare(
-      `UPDATE notification_events SET status = CASE WHEN terminal_at IS NULL THEN 'queued' ELSE 'suppressed' END, attempts = CASE WHEN terminal_at IS NULL THEN MAX(0, attempts - 1) ELSE attempts END, next_attempt_at = ?, claimed_at = NULL, error_code = CASE WHEN terminal_at IS NULL THEN error_code WHEN substr(error_code, -10) = '_in_flight' THEN substr(error_code, 1, length(error_code) - 10) ELSE error_code END WHERE id = ? AND status = 'sending'${claim.sql}`,
-    ).bind(nextAttemptAt, id, ...claim.values)));
+      `UPDATE notification_events SET status = CASE WHEN ${unsubscribed} THEN 'suppressed' WHEN terminal_at IS NULL THEN 'queued' ELSE 'suppressed' END, attempts = CASE WHEN ${unsubscribed} THEN attempts WHEN terminal_at IS NULL THEN MAX(0, attempts - 1) ELSE attempts END, next_attempt_at = ?, claimed_at = NULL, error_code = CASE WHEN ${unsubscribed} THEN 'subscription_unsubscribed' WHEN terminal_at IS NULL THEN error_code WHEN substr(error_code, -10) = '_in_flight' THEN substr(error_code, 1, length(error_code) - 10) ELSE error_code END, terminal_at = CASE WHEN ${unsubscribed} THEN COALESCE(terminal_at, ?) ELSE terminal_at END WHERE id = ? AND status = 'sending'${claim.sql}`,
+    ).bind(nextAttemptAt, nextAttemptAt, id, ...claim.values)));
   }
 
   async verificationClaimIsCurrent(eventId, tokenHash, claimedAt, scheduler = null) {

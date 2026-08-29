@@ -745,6 +745,77 @@ test("FF-BUG-008 concurrent verification dispatchers claim once and reserve one 
   assert.equal(database.prepare("SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'").get().request_count, 1);
 });
 
+test("unsubscribe wins atomically before notification provider reservation", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "immediate" });
+  insertEvent(database, { id: "notice-before-reservation" });
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  const provider = new ScriptedProvider();
+  d1.beforeBatch = async () => {
+    assert.equal(await store.unsubscribeForSubscriber(
+      "person-1", "watch-1", fixedNow.toISOString(),
+    ), true);
+  };
+
+  assert.deepEqual(
+    await dispatchNotifications({ store, provider, env, now: fixedNow }),
+    { attemptedCount: 0, deliveredCount: 0, failedCount: 0 },
+  );
+  assert.equal(provider.attempts.length, 0);
+  const event = database.prepare(
+    "SELECT status,error_code,terminal_at,provider_quota_key FROM notification_events WHERE id='notice-before-reservation'",
+  ).get();
+  assert.deepEqual(
+    [event.status, event.error_code, event.terminal_at, event.provider_quota_key],
+    ["suppressed", "subscription_unsubscribed", fixedNow.toISOString(), null],
+  );
+  assert.equal(database.prepare(
+    "SELECT COUNT(*) AS count FROM rate_limits WHERE action='email_send'",
+  ).get().count, 0);
+});
+
+test("unsubscribe prevents verification retry from reusing an earlier provider reservation", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const d1 = new SqliteD1(database);
+  const store = new D1AlertStore(d1);
+  await store.createSubscriptionCycle(await cycle());
+  const provider = new ScriptedProvider([{
+    code: "provider_rate_limited", providerFailureKind: "http", retryable: true,
+  }]);
+  assert.deepEqual(
+    await dispatchVerificationDeliveries({ store, provider, env, now: fixedNow }),
+    { attemptedCount: 1, deliveredCount: 0, failedCount: 1 },
+  );
+  assert.ok(database.prepare(
+    "SELECT provider_quota_key FROM notification_events WHERE id='verify-new'",
+  ).get().provider_quota_key);
+
+  const retryNow = new Date("2026-09-01T12:06:00.000Z");
+  d1.beforeBatch = async () => {
+    assert.equal(await store.unsubscribeForSubscriber(
+      "person-1", "watch-1", retryNow.toISOString(),
+    ), true);
+  };
+  assert.deepEqual(
+    await dispatchVerificationDeliveries({ store, provider, env, now: retryNow }),
+    { attemptedCount: 0, deliveredCount: 0, failedCount: 0 },
+  );
+  assert.equal(provider.attempts.length, 1);
+  const event = database.prepare(
+    "SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'",
+  ).get();
+  assert.deepEqual(
+    [event.status, event.error_code, event.terminal_at],
+    ["suppressed", "subscription_unsubscribed", retryNow.toISOString()],
+  );
+  assert.equal(database.prepare(
+    "SELECT request_count FROM rate_limits WHERE action='email_send' AND client_key='global'",
+  ).get().request_count, 1);
+});
+
 test("FF-BUG-008 distinct concurrent claims cannot exceed the atomic provider-message cap", async () => {
   const database = databaseThrough();
   insertSubscriber(database);
