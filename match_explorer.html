@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=post-phase4-abc-20260829">
+  <link rel="stylesheet" href="./assets/app.css?v=ai-additive-20260829">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
 </head>
@@ -360,7 +360,7 @@
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can use the profile context you enabled, expand terminology, refine up to 32 catalog candidates, and answer questions about results or an uploaded notice. This is an explicit optional provider request; it never replaces or searches outside the funding catalog.</p>
+              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can use the profile context you enabled, try alternative scientific phrases, assess up to 32 locally qualified catalog candidates, and answer questions about results or an uploaded notice. Refinement only adds evidence-qualified Strong matches; it never removes ordinary results or searches outside the funding catalog.</p>
               <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
               <div class="provider-fields">
                 <label>
@@ -381,7 +381,7 @@
               </div>
               <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
               <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
-              <p class="cost-note">Your connected AI uses two bounded calls for refinement: terminology expansion, then reranking of at most 32 results. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
+              <p class="cost-note">Your connected AI uses two bounded calls for refinement: alternative scientific phrases, then assessment of at most 32 locally qualified candidates. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
             </div>
           </details>
           <div class="ai-refine-actions">
@@ -389,6 +389,7 @@
               <span aria-hidden="true">✦</span>
               <span id="ai-refine-label">Expand and refine these results with AI</span>
             </button>
+            <button class="button secondary hidden" id="restore-ai-refinement" type="button">Restore original results</button>
             <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search and enter or save an AI provider key to enable refinement.</p>
           </div>
           <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
@@ -579,7 +580,6 @@
           <div class="evaluation-metrics" id="evaluation-metrics"></div>
           <div class="evaluation-actions">
             <button class="button secondary" id="export-evaluation" type="button">Export match ratings</button>
-            <button class="button secondary hidden" id="review-candidates" type="button">Review AI candidates</button>
             <button class="text-button" id="clear-feedback" type="button">Clear ratings</button>
           </div>
           <div class="evaluation-status" id="evaluation-status" aria-live="polite"></div>
@@ -613,9 +613,9 @@
   <script src="./assets/nofo.js?v=filters-2026-08-13"></script>
   <script src="./assets/review.js?v=filters-2026-08-13"></script>
   <script src="./assets/credentials.js?v=filters-2026-08-13"></script>
-  <script src="./assets/ai-provider.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/ai-provider.js?v=ai-additive-20260829"></script>
   <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
-  <script src="./assets/result-workflow.js?v=app-1.3.0"></script>
+  <script src="./assets/result-workflow.js?v=ai-additive-20260829"></script>
   <script src="./assets/award-links.js?v=phase3-program-watches"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
@@ -627,7 +627,7 @@
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/app.js?v=ai-additive-20260829"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

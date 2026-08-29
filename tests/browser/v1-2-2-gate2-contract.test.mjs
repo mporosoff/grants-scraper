@@ -19,7 +19,7 @@ function loadWorkflow() {
   return context.FUNDING_RESULT_WORKFLOW;
 }
 
-test("AI-expanded matches retain actual bounded match objects and restore the base order", () => {
+test("AI-expanded matches retain bounded Strong objects without mutating the ordinary baseline", () => {
   const workflow = loadWorkflow();
   const baseStrong = { id: "strong", index: 0, workflowTier: "strong" };
   const basePotential = {
@@ -45,9 +45,11 @@ test("AI-expanded matches retain actual bounded match objects and restore the ba
     limit: 32,
   });
 
-  assert.equal(candidates.get("new-ai"), expanded[0]);
+  assert.notEqual(candidates.get("new-ai"), expanded[0]);
   assert.equal(candidates.get("new-ai").index, 9);
-  assert.equal(candidates.get("new-ai").workflowTier, "ai_candidate");
+  assert.equal(candidates.get("new-ai").workflowTier, "strong");
+  assert.equal(candidates.get("new-ai").aiIdentified, true);
+  assert.equal(expanded[0].workflowTier, undefined);
   assert.equal(candidates.get("potential"), basePotential);
   assert.deepEqual(
     workflow.resolveCandidateMatches({
@@ -69,11 +71,11 @@ test("AI-expanded matches retain actual bounded match objects and restore the ba
   assert.equal(oversized.size, 32);
 });
 
-test("workflow metadata preserves Strong, Potential, and AI-candidate provenance", () => {
+test("workflow metadata keeps Strong/Potential tier separate from AI provenance", () => {
   const workflow = loadWorkflow();
   assert.equal(workflow.workflowTierLabel({ workflowTier: "strong" }), "Strong");
   assert.equal(workflow.workflowTierLabel({ workflowTier: "potential" }), "Potential");
-  assert.equal(workflow.workflowTierLabel({ workflowTier: "ai_candidate" }), "AI-candidate");
+  assert.equal(workflow.workflowTierLabel({ workflowTier: "ai_candidate" }), "Strong");
   const evidence = workflow.matchMetadata({
     workflowTier: "potential",
     hybridExplanation: {
@@ -86,10 +88,18 @@ test("workflow metadata preserves Strong, Potential, and AI-candidate provenance
   assert.equal(evidence.potential_evidence.source_field, "child_summary");
   assert.ok(evidence.potential_evidence.excerpt.length <= 360);
   assert.equal(workflow.matchMetadata({ workflowTier: "strong" }).potential_evidence, null);
+  const identified = workflow.matchMetadata({
+    workflowTier: "strong",
+    aiIdentified: true,
+    aiPhrases: ["electrochemical carbon conversion"],
+  });
+  assert.equal(identified.workflow_tier, "strong");
+  assert.equal(identified.ai_identified, true);
+  assert.deepEqual([...identified.ai_discovery_phrases], ["electrochemical carbon conversion"]);
 });
 
 test("AI candidates use the same pagination, save, calendar, chat-jump, and official-link paths", () => {
-  assert.match(searchPage, /assets\/result-workflow\.js\?v=app-1\.3\.0/);
+  assert.match(searchPage, /assets\/result-workflow\.js\?v=ai-additive-20260829/);
   assert.match(app, /candidateMatches: new Map\(\)/);
   assert.match(app, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(app, /Math\.ceil\(currentDisplayMatches\(\)\.length \/ PAGE_SIZE\)/);
@@ -106,9 +116,9 @@ test("exports and user-connected AI contexts carry bounded workflow evidence", (
     "Potential evidence source field",
     "Potential evidence excerpt",
   ]) assert.match(app, new RegExp(`"${heading}"`));
-  assert.match(app, /compactResultRecord\(record, candidateMatches\.get/);
+  assert.match(app, /compactResultRecord\(record, match\)/);
   assert.match(app, /current_results:[\s\S]*?map\(evaluationResultMetadata\)/);
-  assert.match(app, /candidate_results:[\s\S]*?map\(evaluationResultMetadata\)/);
+  assert.match(app, /ai_addition_results:[\s\S]*?map\(evaluationResultMetadata\)/);
   assert.match(app, /workflow_tier \\"strong\\" means a conservative local match/);
   assert.match(app, /bounded potential_evidence excerpt supports review but not confirmed fit/);
 });

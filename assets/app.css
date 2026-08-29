@@ -3152,6 +3152,11 @@ footer p {
   box-shadow: none;
 }
 
+.search-workflow .search-form > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .search-workflow .search-form:focus-within {
   box-shadow: 0 0 0 4px rgba(31, 100, 213, .12);
 }
@@ -3377,9 +3382,19 @@ footer p {
 
 .ai-refine-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px 14px;
   align-items: center;
   margin-top: 12px;
+}
+
+.ai-refine-actions .ai-button {
+  width: auto;
+  margin-top: 0;
+}
+
+.ai-refine-actions #restore-ai-refinement {
+  flex: none;
 }
 
 .ai-refine-requirement {
@@ -3646,6 +3661,10 @@ footer p {
   }
 
   .ai-refine-actions .ai-button {
+    width: 100%;
+  }
+
+  .ai-refine-actions #restore-ai-refinement {
     width: 100%;
   }
 

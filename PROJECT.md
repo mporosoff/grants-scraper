@@ -136,13 +136,14 @@ rather than a sticky nested scrolling pane.
 
 A user may choose OpenAI or Anthropic and enter one provider key. The same provider powers:
 
-1. **Query expansion:** translate a natural-language research description into concrete search terms and synonyms.
-2. **Bounded reranking:** compare at most 32 locally retrieved candidates and return at most 12 grounded recommendations.
-3. **Chat with results:** answer questions over either the top 20 ordinary search results or the AI shortlist; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
+1. **Alternative-phrase expansion:** translate the enabled search context into 5–16 independent, concrete scientific phrases and synonyms.
+2. **Bounded additive assessment:** compare at most 32 new candidates that independently passed local Strong admission and add at most 12 without removing or reordering ordinary results.
+3. **Chat with results:** answer questions over the top 20 active ordinary or additively refined results; preserve Strong/Potential tier and AI-identification provenance; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
 4. **Chat with an uploaded notice:** answer questions over a page-marked, bounded PDF extract; cite supporting page numbers; and compare against an automatically matched catalog record when available.
 
 AI settings sit inside that same workflow. “Refine these results with AI”
-reranks the bounded candidate set, while “Chat with your results” appears with
+adds only locally evidence-qualified Strong matches and provides an exact
+“Restore original results” action, while “Chat with your results” appears with
 the result set on desktop and mobile. A dropped PDF opens “Chat with the NOFO”
 and, when no key is configured, presents the provider/key form inside that chat
 workspace. Chat can expand without losing the current result state, uses
@@ -194,7 +195,7 @@ Normal search no longer includes a permanent rating panel or rating-trained
 reranking. Invited pilot participants use `?evaluation=1`; those labels remain
 measurement evidence only and never alter the deterministic product ranking.
 
-The AI shortlist, chat, and extracted uploaded-notice text remain page-memory
+The additive AI refinement overlay, chat, and extracted uploaded-notice text remain page-memory
 only and disappear on reload. The uploaded file itself is never stored; its
 bounded text is sent to the selected provider only after the user asks a notice
 question. An API key is tab-only by default, but the user may explicitly save
@@ -407,13 +408,14 @@ catalog or a shared institutional record.
 2. Open the optional AI settings, choose a provider, and enter a key.
 3. Keep the key tab-only or explicitly save it on this device.
 4. Select “Refine these results with AI.”
-5. Review the shortlist, scores, specific rationale, and caveats.
+5. Review the newly added locally Strong matches, AI-identification badges,
+   assessment rationale, and caveats without losing any ordinary result.
 6. Ask grounded follow-up questions such as:
    - “Which allow a university to lead?”
    - “Keep only those closing after October.”
    - “Which require cost share?”
    - “Compare the top three on fit and timing.”
-7. Return to the unmodified catalog at any time.
+7. Select “Restore original results” to return to the exact ordinary baseline.
 
 ### Chat with ordinary results
 
@@ -523,7 +525,7 @@ Phase 1 now includes both the catalog foundation and the first optional refineme
 - one guided search that combines keywords, optional profile/CV context, and
   filters;
 - bounded two-call AI refinement;
-- chat integrated with ordinary results or the AI shortlist;
+- chat integrated with the top 20 ordinary or additively refined results;
 - an empty initial result state until a user starts a search;
 - explicit optional device-local API-key persistence with visible state and
   a removal control;
@@ -663,15 +665,15 @@ keyword string.
 - **Implemented:** a versioned synthetic regression fixture and export schema
   separate from the production catalog. Consented human exports will remain
   separate from source control.
-- **Implemented:** measure catalog retrieval independently from AI reranking:
+- **Implemented:** measure catalog retrieval independently from AI assessment:
   - recall within the 32-record candidate set;
-  - precision and useful-result rate within the 12-record shortlist;
-  - graded nDCG for both retrieval and AI reranking;
-  - rank movement between BM25 retrieval and AI output; and
+  - precision and useful-result rate within up to 12 additive records;
+  - graded nDCG for both retrieval and AI assessment;
+  - rank movement among locally qualified additions; and
   - hard eligibility and expired-record error rates.
-- **Implemented:** a reviewer can switch between the 12-record AI shortlist
-  and the pre-reranking candidate set to label retrieval and ranking failures
-  separately.
+- **Implemented:** evaluation exports distinguish the immutable ordinary baseline
+  from locally qualified AI additions so retrieval and assessment failures can
+  be labeled separately.
 - **Implemented:** profile persistence, CV-parser, provider-contract, privacy,
   and evaluator regression tests.
 - **Implemented:** provider/model and prompt versions in evaluation exports so
@@ -1039,7 +1041,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Add a Phase 1.5 evidence layer before pilot work: incremental official detail enrichment, one-click source actions, and strict funding/deadline semantics. |
 | July 2026 | Treat the Albany study as evidence that exact-keyword recommendations require researcher feedback and separate retrieval/reranking evaluation. |
 | July 2026 | Make pilot validation and separate retrieval/reranking measurement the next implementation phase before expanding sources. |
-| July 2026 | Add explicit device-local profile, extracted-CV, preference, and evaluation-label persistence while keeping raw CV files, API keys, AI shortlists, and chat out of storage. |
+| July 2026 | Add explicit device-local profile, extracted-CV, preference, and evaluation-label persistence while keeping raw CV files, API keys, AI result overlays, and chat out of storage. |
 | July 2026 | Implement Phase 2A/2B controls and evaluator; require the 3–5 researcher pilot and report before declaring Phase 2 complete. |
 | July 2026 | Defer the Phase 2C researcher pilot until Phase 3 source evidence and deployment-review handoff are deployed and verified; the pilot is deferred, not declared complete. |
 | July 2026 | Retrieve and parse official notices only in bounded scheduled jobs; retain compact citations, hashes, facts, and version history while discarding raw documents and full text. |

@@ -218,7 +218,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn('id="compare-panel"', explorer_html)
         self.assertIn('id="result-assistant"', explorer_html)
         self.assertIn('id="export-evaluation"', explorer_html)
-        self.assertIn('id="review-candidates"', explorer_html)
+        self.assertNotIn('id="review-candidates"', explorer_html)
+        self.assertIn('id="restore-ai-refinement"', explorer_html)
         self.assertIn('id="send-deployment-review"', explorer_html)
         self.assertIn('id="source-review-progress"', explorer_html)
         self.assertIn('id="ai-refine"', explorer_html)
@@ -250,7 +251,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "post-phase4-abc-20260829"
+        app_style_version = "ai-additive-20260829"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -264,7 +265,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=post-phase4-abc-20260829"></script>',
+            '<script src="./assets/ai-provider.js?v=ai-additive-20260829"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/result-workflow.js?v=ai-additive-20260829"></script>',
             explorer_html,
         )
         for asset in ("orcid.js",):
@@ -305,7 +310,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=post-phase4-abc-20260829"></script>',
+            '<script src="./assets/app.js?v=ai-additive-20260829"></script>',
             explorer_html,
         )
         self.assertIn(

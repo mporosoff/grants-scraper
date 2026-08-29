@@ -74,10 +74,11 @@ Local Strong and profile-ranked search make zero model calls. Hosted Potential
 matching does not require a user key. Separately, a user may enter an OpenAI or
 Anthropic key to:
 
-1. expand the search with useful terminology before retrieval, including when
-   the ordinary search returned no candidates;
-2. rerank at most 32 newly retrieved candidates into a shortlist of at most 12; and
-3. ask grounded follow-up questions that can further narrow the shortlist.
+1. create 5–16 independent, meaningful scientific phrases and retrieve each
+   through the existing filtered local Strong matcher;
+2. assess at most 32 new locally qualified candidates and add at most 12 while
+   preserving every ordinary Strong and Potential result; and
+3. ask grounded follow-up questions over the top 20 active results.
 
 “Chat with your results” appears with the returned result set and can answer
 questions over the top 20 ordinary search results without requiring a prior AI
@@ -104,7 +105,7 @@ refinement or chat. An API
 key is tab-only unless the user explicitly saves it on that device. Saved keys
 are isolated from profiles and reviewer data, have a visible saved/loaded
 status and removal control, and never enter GitHub, URLs, exports, or an
-application database. Extracted uploaded-notice text, the shortlist, and chat
+application database. Extracted uploaded-notice text, the additive refinement overlay, and chat
 remain page-memory only; notice text is sent only when the user asks a question
 about that document.
 
@@ -152,8 +153,8 @@ an optional local preference model can prioritize future Relevance sorting.
 The explicit evaluation export includes current search text, filters, ranks,
 and ratings while omitting API keys, saved profile text, CV text, and chat.
 `scripts/evaluate_phase2.py` measures retrieval recall separately from AI
-reranking precision. Reviewers can switch from the 12-result shortlist to the
-pre-reranking candidate set when labeling. The 3–5 researcher pilot is
+assessment precision. Evaluation exports distinguish the immutable ordinary
+baseline from up to 12 locally qualified additions. The 3–5 researcher pilot is
 deliberately deferred until the Phase 3 deployment batch and review handoff are
 verified.
 

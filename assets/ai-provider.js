@@ -7,9 +7,10 @@
   const REQUEST_TIMEOUT_MS = 45_000;
   const MAX_ATTEMPTS = 2;
 
-  const stringArray = (maximum, itemMaximum = 240) => ({
+  const stringArray = (maximum, itemMaximum = 240, minimum = 0) => ({
     type: "array",
     items: { type: "string", maxLength: itemMaximum },
+    ...(minimum ? { minItems: minimum } : {}),
     maxItems: maximum,
   });
 
@@ -22,7 +23,10 @@
         additionalProperties: false,
         properties: {
           interpretation: { type: "string", maxLength: 500 },
-          search_terms: stringArray(16, 120),
+          search_terms: {
+            ...stringArray(16, 120, 5),
+            uniqueItems: true,
+          },
           avoid_terms: stringArray(8, 120),
         },
         required: ["interpretation", "search_terms", "avoid_terms"],

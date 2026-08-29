@@ -64,7 +64,13 @@ function anthropicResponse(value, overrides = {}) {
 const samples = {
   search_plan: {
     interpretation: "Catalysis with adjacent reaction-engineering terminology.",
-    search_terms: ["catalysis", "reaction engineering"],
+    search_terms: [
+      "heterogeneous catalysis",
+      "reaction engineering",
+      "electrochemical conversion",
+      "carbon dioxide utilization",
+      "catalytic reactor design",
+    ],
     avoid_terms: [],
   },
   refinement_shortlist: {

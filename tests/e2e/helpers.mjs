@@ -664,8 +664,11 @@ export async function chooseInvestigator(page, name) {
   await page.locator("#ii-investigators").selectOption(value);
 }
 
-export async function mockOpenAiBroadening(page) {
-  const state = { calls: 0, candidate: null };
+export async function mockOpenAiBroadening(page, {
+  planDelayMs = 0,
+  planTerms = null,
+} = {}) {
+  const state = { calls: 0, candidate: null, requests: [], chatRequests: [] };
   await page.route("https://api.openai.com/v1/responses", async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -674,16 +677,32 @@ export async function mockOpenAiBroadening(page) {
     }
     state.calls += 1;
     const body = request.postDataJSON();
+    const input = JSON.parse(body.input);
+    const operation = body.text?.format?.name;
+    state.requests.push(input);
     let output;
-    if (state.calls === 1) {
+    if (operation === "funding_search_plan_v1") {
+      if (planDelayMs) await new Promise(resolve => setTimeout(resolve, planDelayMs));
       output = {
         interpretation: "Catalysis research broadened to adjacent reaction-engineering terminology.",
-        search_terms: ["reaction engineering"],
+        search_terms: planTerms || [
+          "reaction engineering",
+          "heterogeneous catalyst design",
+          "electrochemical carbon conversion",
+          "carbon dioxide utilization",
+          "catalytic reactor systems",
+          "surface reaction kinetics",
+          "sustainable chemical manufacturing",
+          "porous catalytic materials",
+          "low carbon fuels synthesis",
+          "process intensification catalysis",
+        ],
         avoid_terms: [],
       };
-    } else {
-      const input = JSON.parse(body.input);
-      state.candidate = input.candidate_opportunities.find(item => item.workflow_tier === "ai_candidate");
+    } else if (operation === "funding_refinement_shortlist_v1") {
+      state.candidate = input.candidate_opportunities.find(item => (
+        item.workflow_tier === "strong" && item.ai_identified === true
+      ));
       output = {
         summary: "The bounded mock selected one newly retrieved candidate to exercise the workflow.",
         matches: state.candidate ? [{
@@ -695,6 +714,17 @@ export async function mockOpenAiBroadening(page) {
         }] : [],
         follow_up_suggestions: ["Show this candidate"],
       };
+    } else if (operation === "funding_result_chat_v1") {
+      state.chatRequests.push(input);
+      output = {
+        answer: "The mock answer is grounded in the supplied bounded result context.",
+        referenced_result_ids: input.current_results.slice(0, 8).map(item => item.id),
+        citation_evidence_ids: [],
+        result_action: "none",
+        focus_result_ids: [],
+      };
+    } else {
+      throw new Error(`Unexpected mocked OpenAI operation: ${operation}`);
     }
     await route.fulfill({
       status: 200,
