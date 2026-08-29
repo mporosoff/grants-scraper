@@ -1303,3 +1303,13 @@ This bug-fix program is complete only when:
 At that point, stop. Any new feature, architecture change, or unrelated cleanup requires a separate roadmap.
 
 All eight conditions were satisfied on 2026-08-28. Phases 1-4 and the bounded post-phase corrections are complete, deployed, and recorded above; this bug-fix program is closed. The post-closeout Workflows/Queues evaluation is not an unfinished phase and must begin, if authorized, under a separate roadmap.
+
+---
+
+## Post-Phase-4 final product hardening addendum — 2026-08-29
+
+The completed four-phase, twenty-five-finding program above remains closed and unchanged. The separate post-Phase-4 program is recorded in `docs/POST_PHASE_4_FINAL_PRODUCT_HARDENING_PLAN.md`.
+
+Application [PR #83](https://github.com/mporosoff/grants-scraper/pull/83) integrated Units A-C at exact candidate `55df7df2c20e92d3eff243b66ad10c0416292d28` and protected-main merge `fee9912a47d0b5841d04973a23086e6566546200`. Its exact-candidate and post-merge protected gates passed 788 Python tests, 431 browser contracts, 87 Playwright/accessibility scenarios, frozen-query and frozen-P9 gates without drift, and the 23-artifact no-drift check. Pages, the Award Worker, and the search-package compatibility release deployed and were production-verified; the Alerts classifier correctly retained the existing Worker and skipped D1 migration. No catalog, vector, corpus, fingerprint, ranking, or source-mapping change occurred.
+
+The final record preserves the remaining boundaries: JHU's official unattended routes remain blocked by an interactive Cloudflare challenge; complete-result snapshots are immutable and server-authoritative but cached for 3,600 seconds with Cloudflare datacenter locality; provider acceptance is not authorized inbox receipt; and user-connected AI keys remain local and user-managed. Cloudflare Workflows/Queues remains separate future scheduler architecture work, not an incomplete phase of this program.
