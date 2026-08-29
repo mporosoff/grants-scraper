@@ -124,6 +124,8 @@ export function mockAwards(target, {
   resultCountPerSource = 1,
   registryRateLimited = false,
   responseDelaysBySourceOffset = {},
+  snapshotPageDelayMs = 0,
+  snapshotPageExpireAtCall = 0,
   enforceYearFilters = false,
   sourceFailures = {},
   sourceFailuresByOffset = {},
@@ -131,6 +133,7 @@ export function mockAwards(target, {
   const calls = [];
   const snapshots = new Map();
   let snapshotSequence = 0;
+  let snapshotPageCallCount = 0;
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -383,6 +386,12 @@ export function mockAwards(target, {
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
+      snapshotPageCallCount += 1;
+      if (snapshotPageCallCount === Number(snapshotPageExpireAtCall)) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      if (Number(snapshotPageDelayMs) > 0) await new Promise(resolve => setTimeout(resolve, Number(snapshotPageDelayMs)));
       const snapshot = snapshots.get(body.snapshot_id);
       if (!snapshot) {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });

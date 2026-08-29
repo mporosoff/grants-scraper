@@ -250,7 +250,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "post-phase4-unit-a-20260827"
+        app_style_version = "post-phase4-abc-20260829"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -264,7 +264,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=post-phase4-unit-a-20260827"></script>',
+            '<script src="./assets/ai-provider.js?v=post-phase4-abc-20260829"></script>',
             explorer_html,
         )
         for asset in ("orcid.js",):
@@ -305,7 +305,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=post-phase4-unit-a-20260827"></script>',
+            '<script src="./assets/app.js?v=post-phase4-abc-20260829"></script>',
             explorer_html,
         )
         self.assertIn(

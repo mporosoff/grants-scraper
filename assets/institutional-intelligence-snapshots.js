@@ -18,6 +18,8 @@
     registryAvailable: true,
     activeOption: -1,
     sequence: 0,
+    pageRequestSequence: 0,
+    busyDepth: 0,
     controller: null,
     submitted: null,
     snapshot: null,
@@ -78,12 +80,20 @@
   }
 
   function setBusy(busy) {
-    $("ii-search").disabled = busy;
-    $("ii-ask-button").disabled = busy || state.questionSubmitting;
-    $("ii-output").setAttribute("aria-busy", busy ? "true" : "false");
-    $("ii-card-previous").disabled = busy || !state.pagePayload?.pagination?.has_previous;
-    $("ii-card-next").disabled = busy || !state.pagePayload?.pagination?.has_next;
-    $("ii-load-more-actions").querySelectorAll("button").forEach(button => { button.disabled = busy; });
+    state.busyDepth = Math.max(0, state.busyDepth + (busy ? 1 : -1));
+    const active = state.busyDepth > 0;
+    $("ii-search").disabled = active;
+    $("ii-clear").disabled = active;
+    $("ii-ask-button").disabled = active || state.questionSubmitting;
+    $("ii-output").setAttribute("aria-busy", active ? "true" : "false");
+    $("ii-card-previous").disabled = active || !state.pagePayload?.pagination?.has_previous;
+    $("ii-card-next").disabled = active || !state.pagePayload?.pagination?.has_next;
+    $("ii-card-page-numbers").querySelectorAll("button").forEach(button => { button.disabled = active; });
+    $("ii-page-size").disabled = active || !state.pagePayload;
+    $("ii-investigators").disabled = active || state.investigatorGroups.size === 0;
+    $("ii-programs").disabled = active || state.programGroups.size === 0;
+    $("ii-clear-facet").disabled = active || state.facet.type === "all";
+    $("ii-load-more-actions").querySelectorAll("button").forEach(button => { button.disabled = active; });
   }
 
   function selectedLocation(institution) {
@@ -256,7 +266,7 @@
       const payload = await response.json().catch(() => null);
       if (!response.ok) {
         const error = new Error(payload?.error?.code === "snapshot_expired"
-          ? "This result snapshot expired; the submitted search will be refreshed."
+          ? "This result snapshot expired. Rebuild the submitted search to continue."
           : awardProduct.serviceIssueText(payload) || "The award service could not complete this request.");
         error.code = payload?.error?.code || "service_unavailable";
         error.payload = payload;
@@ -357,9 +367,9 @@
     for (const source of sources) {
       const offset = state.sourceOffsets.get(source.source) || 0;
       if (["unavailable", "rate_limited"].includes(source.status)) {
-        actions.push(`<button class="button secondary" type="button" data-ii-retry-source="${escapeAttribute(source.source)}">Retry ${escapeHtml(source.source)}</button>`);
+        actions.push(`<button class="button secondary" type="button" data-ii-retry-source="${escapeAttribute(source.source)}"${state.busyDepth ? " disabled" : ""}>Retry ${escapeHtml(source.source)}</button>`);
       } else if (offset < source.result_count) {
-        actions.push(`<button class="button secondary" type="button" data-ii-load-source="${escapeAttribute(source.source)}">Load up to 25 more ${escapeHtml(source.source)} awards</button>`);
+        actions.push(`<button class="button secondary" type="button" data-ii-load-source="${escapeAttribute(source.source)}"${state.busyDepth ? " disabled" : ""}>Load up to 25 more ${escapeHtml(source.source)} awards</button>`);
       }
     }
     $("ii-pagination").classList.toggle("hidden", !sources.length);
@@ -379,7 +389,7 @@
       const value = kind === "investigator" ? item.identity_key : item.key;
       return `<option value="${escapeAttribute(value)}">${escapeHtml(kind === "investigator" ? item.name : item.label)} (${item.projects})</option>`;
     }).join("")}`;
-    select.disabled = items.length === 0;
+    select.disabled = state.busyDepth > 0 || items.length === 0;
     select.value = state.facet.type === kind ? state.facet.key : "all";
   }
 
@@ -393,14 +403,15 @@
         ? `Awards ${pagination.start}–${pagination.end} of ${total.toLocaleString()} · Page ${pagination.page} of ${pagination.page_count}`
         : `Awards ${pagination.start}–${pagination.end} of at least ${total.toLocaleString()} available · Page ${pagination.page} (partial result set)`
       : exact ? "No awards matched this view." : "No awards were available within the current partial result set.";
-    $("ii-card-previous").disabled = !pagination.has_previous;
-    $("ii-card-next").disabled = !pagination.has_next;
+    $("ii-card-previous").disabled = state.busyDepth > 0 || !pagination.has_previous;
+    $("ii-card-next").disabled = state.busyDepth > 0 || !pagination.has_next;
     const knownPages = pagination.page_count || pagination.available_page_count;
     $("ii-card-page-numbers").innerHTML = core.compactPageNumbers(pagination.page, knownPages).map(value => value === null
       ? '<span class="ii-page-ellipsis" aria-hidden="true">…</span>'
-      : `<button class="text-button${value === pagination.page ? " active" : ""}" type="button" data-ii-page-number="${value}"${value === pagination.page ? ' aria-current="page"' : ""}>${value}</button>`).join("");
+      : `<button class="text-button${value === pagination.page ? " active" : ""}" type="button" data-ii-page-number="${value}"${value === pagination.page ? ' aria-current="page"' : ""}${state.busyDepth ? " disabled" : ""}>${value}</button>`).join("");
     $("ii-card-pagination").classList.toggle("hidden", knownPages <= 1 && !pagination.end);
     $("ii-page-size").value = String(state.pageSize);
+    $("ii-page-size").disabled = state.busyDepth > 0;
   }
 
   function renderPage({ focus = false } = {}) {
@@ -436,6 +447,7 @@
     renderFacetSelect($("ii-programs"), state.baseAggregate.programs || [], "program");
     const active = payload.facet?.type !== "all";
     $("ii-active-facet").classList.toggle("hidden", !active);
+    $("ii-clear-facet").disabled = state.busyDepth > 0 || !active;
     $("ii-active-facet-label").textContent = active ? `Active ${payload.facet.type} drill-down: ${payload.facet.label}` : "";
     if (active && payload.facet.type === "investigator") {
       const group = state.investigatorGroups.get(payload.facet.key);
@@ -458,12 +470,21 @@
 
   async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
     if (!state.snapshot?.snapshot_id) return null;
-    const payload = await postJson(api.snapshotPageUrl, {
-      snapshot_id: state.snapshot.snapshot_id,
-      page,
-      page_size: pageSize,
-      facet: { type: facet.type, key: facet.key },
-    });
+    const requestSequence = ++state.pageRequestSequence;
+    const snapshotId = state.snapshot.snapshot_id;
+    let payload;
+    try {
+      payload = await postJson(api.snapshotPageUrl, {
+        snapshot_id: snapshotId,
+        page,
+        page_size: pageSize,
+        facet: { type: facet.type, key: facet.key },
+      });
+    } catch (error) {
+      if (requestSequence !== state.pageRequestSequence) return null;
+      throw error;
+    }
+    if (requestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== snapshotId) return null;
     state.page = payload.pagination.page;
     state.pageSize = payload.pagination.page_size;
     state.facet = { type: payload.facet.type, key: payload.facet.key };
@@ -474,8 +495,42 @@
     return payload;
   }
 
+  async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
+    try {
+      return await fetchPage({ page, pageSize, facet, historyMode, focus });
+    } catch (error) {
+      if (error?.code !== "snapshot_expired") throw error;
+      setStatus("The result snapshot expired. Rebuilding the submitted search before restoring this view…");
+      const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
+      const retryView = page !== 1 || requestedFacet.type !== "all";
+      const submitted = {
+        ...(state.submitted || formState()),
+        snapshot_id: "",
+        page: 1,
+        page_size: pageSize,
+        facet_type: "all",
+        facet_key: "",
+      };
+      const refreshed = await runSearch({
+        historyMode: retryView ? "replace" : historyMode,
+        resolveInstitution: false,
+        focusResults: !retryView && focus,
+        searchState: submitted,
+      });
+      if (!refreshed) return null;
+      if (!retryView) {
+        setStatus("The expired result snapshot was rebuilt from the submitted search.");
+        return state.pagePayload;
+      }
+      const payload = await fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus });
+      if (payload) setStatus("The expired result snapshot was rebuilt and the requested view was restored.");
+      return payload;
+    }
+  }
+
   async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, searchState = null } = {}) {
     const sequence = ++state.sequence;
+    state.pageRequestSequence += 1;
     state.controller?.abort();
     state.controller = new AbortController();
     setBusy(true);
@@ -504,7 +559,8 @@
         state.sourceOffsets.set(batch.source, batch.loaded_through || batch.results.length);
       }
       state.submitted.snapshot_id = snapshot.snapshot_id;
-      await fetchPage({ historyMode, focus: focusResults });
+      const initialPage = await fetchPage({ historyMode, focus: focusResults });
+      if (!initialPage || sequence !== state.sequence) return null;
       const exact = snapshot.completeness === "complete";
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
@@ -517,7 +573,7 @@
       else setStatus(error?.message || "Funded award search could not be completed.", true);
       return null;
     } finally {
-      if (sequence === state.sequence) setBusy(false);
+      setBusy(false);
     }
   }
 
@@ -528,7 +584,8 @@
     state.page = 1;
     setBusy(true);
     try {
-      await fetchPage({ historyMode, focus });
+      const payload = await fetchPageWithRecovery({ historyMode, focus });
+      if (!payload) return;
       setStatus(state.facet.type === "all" ? "Showing all awards in the submitted result snapshot." : `Showing the ${state.pagePayload.facet.label} drill-down within the same result snapshot.`);
     } catch (error) {
       setStatus(error?.message || "The requested drill-down could not be loaded.", true);
@@ -667,7 +724,7 @@
     const page = Math.floor((reference.position - 1) / state.pageSize) + 1;
     if (page !== state.page) {
       setBusy(true);
-      try { await fetchPage({ page, historyMode: "push" }); } finally { setBusy(false); }
+      try { await fetchPageWithRecovery({ page, historyMode: "push" }); } finally { setBusy(false); }
     }
     requestAnimationFrame(() => {
       const card = $(evidenceDomId(evidenceId));
@@ -788,6 +845,7 @@
 
   function clearSearch({ historyMode = "push" } = {}) {
     state.sequence += 1;
+    state.pageRequestSequence += 1;
     state.controller?.abort();
     state.selectedInstitution = null;
     resetResultState();
@@ -824,42 +882,47 @@
       setSelectedInstitution(state.registryCandidates[Number(option.dataset.iiInstitutionIndex)]);
       $("ii-institution").focus();
     });
-    $("ii-form").addEventListener("submit", event => { event.preventDefault(); runSearch({ historyMode: "push", focusResults: true }); });
-    $("ii-clear").addEventListener("click", () => clearSearch());
-    $("ii-clear-facet").addEventListener("click", () => changeFacet("all", ""));
+    $("ii-form").addEventListener("submit", event => { event.preventDefault(); if (!state.busyDepth) runSearch({ historyMode: "push", focusResults: true }); });
+    $("ii-clear").addEventListener("click", () => { if (!state.busyDepth) clearSearch(); });
+    $("ii-clear-facet").addEventListener("click", () => { if (!state.busyDepth) changeFacet("all", ""); });
     $("ii-investigators").addEventListener("change", event => {
+      if (state.busyDepth) return;
       const key = event.currentTarget.value;
       if (key === "all") return changeFacet("all", "");
       $("ii-programs").value = "all";
       return changeFacet("investigator", key);
     });
     $("ii-programs").addEventListener("change", event => {
+      if (state.busyDepth) return;
       const key = event.currentTarget.value;
       if (key === "all") return changeFacet("all", "");
       $("ii-investigators").value = "all";
       return changeFacet("program", key);
     });
     $("ii-load-more-actions").addEventListener("click", event => {
+      if (state.busyDepth) return;
       const load = event.target.closest("[data-ii-load-source]");
       const retry = event.target.closest("[data-ii-retry-source]");
       if (load) loadSourceBatch(load.dataset.iiLoadSource);
       else if (retry) retrySource(retry.dataset.iiRetrySource);
     });
     $("ii-card-pagination").addEventListener("click", event => {
+      if (state.busyDepth) return;
       const numbered = event.target.closest("[data-ii-page-number]");
       const relative = event.target.closest("[data-ii-card-page]");
       const page = numbered ? Number(numbered.dataset.iiPageNumber)
         : relative ? state.page + (relative.dataset.iiCardPage === "next" ? 1 : -1) : null;
       if (!page || page === state.page) return;
       setBusy(true);
-      fetchPage({ page, historyMode: "push", focus: true }).catch(error => setStatus(error.message, true)).finally(() => setBusy(false));
+      fetchPageWithRecovery({ page, historyMode: "push", focus: true }).catch(error => setStatus(error.message, true)).finally(() => setBusy(false));
     });
     $("ii-page-size").addEventListener("change", event => {
+      if (state.busyDepth) return;
       const nextSize = Number(event.currentTarget.value);
       const anchor = (state.page - 1) * state.pageSize;
       const page = Math.floor(anchor / nextSize) + 1;
       setBusy(true);
-      fetchPage({ page, pageSize: nextSize, historyMode: "push", focus: true }).catch(error => setStatus(error.message, true)).finally(() => setBusy(false));
+      fetchPageWithRecovery({ page, pageSize: nextSize, historyMode: "push", focus: true }).catch(error => setStatus(error.message, true)).finally(() => setBusy(false));
     });
     $("ii-question-answer").addEventListener("click", event => {
       const link = event.target.closest("[data-ii-evidence-link]");
@@ -885,19 +948,20 @@
       state.pageSize = restored.page_size;
       state.facet = { type: restored.facet_type, key: restored.facet_key };
       if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return clearSearch({ historyMode: "replace" });
+      state.sequence += 1;
+      state.pageRequestSequence += 1;
       state.controller?.abort();
       state.controller = new AbortController();
       setBusy(true);
       try {
         if (restored.snapshot_id) {
           state.snapshot = { snapshot_id: restored.snapshot_id, sources: state.snapshot?.sources || [] };
-          await fetchPage({ historyMode: "replace" });
+          await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         } else {
           await runSearch({ historyMode: "replace", resolveInstitution: false, searchState: restored });
         }
       } catch (error) {
-        if (error.code === "snapshot_expired") await runSearch({ historyMode: "replace", resolveInstitution: false, searchState: restored });
-        else setStatus(error.message, true);
+        setStatus(error.message, true);
       } finally {
         setBusy(false);
         requestAnimationFrame(() => {
@@ -920,12 +984,11 @@
       state.controller = new AbortController();
       setBusy(true);
       try {
-        await fetchPage({ historyMode: "replace" });
+        await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         state.snapshot = { ...state.snapshot, ...state.pagePayload };
         setStatus("Restored the shared result snapshot and page.");
       } catch (error) {
-        if (error.code === "snapshot_expired") await runSearch({ historyMode: "replace", resolveInstitution: false, searchState: restored });
-        else setStatus(error.message, true);
+        setStatus(error.message, true);
       } finally {
         setBusy(false);
       }

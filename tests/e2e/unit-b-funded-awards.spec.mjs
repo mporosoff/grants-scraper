@@ -91,6 +91,36 @@ test("numbered navigation, page size, and history keep one stable view", async (
   expect(runtimeErrors).toEqual([]);
 });
 
+test("snapshot navigation controls stay locked until one requested view is committed", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 51, snapshotPageDelayMs: 350 });
+  await searchTopic(page, "atomic-navigation");
+  await page.locator('[data-ii-page-number="2"]').click();
+  await expect(page.locator("#ii-card-page-numbers button").first()).toBeDisabled();
+  await expect(page.locator("#ii-page-size")).toBeDisabled();
+  await expect(page.locator("#ii-investigators")).toBeDisabled();
+  await expect(page.locator("#ii-programs")).toBeDisabled();
+  await expect(page.locator("#ii-clear-facet")).toBeDisabled();
+  await expect(page.locator("#ii-clear")).toBeDisabled();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 6");
+  await expect(page.locator("#ii-page-size")).toBeEnabled();
+  await expect(page.locator("#ii-card-page-numbers button").first()).toBeEnabled();
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("an expired snapshot is rebuilt before the requested page is restored", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 26, snapshotPageExpireAtCall: 2 });
+  await searchTopic(page, "expiry-recovery");
+  const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator('[data-ii-page-number="2"]').click();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
+  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt");
+  const refreshedSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(refreshedSnapshot).not.toBe(originalSnapshot);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+  expect(runtimeErrors.some(error => error.includes("410 (Gone)"))).toBe(true);
+});
+
 test("investigator and program drill-downs filter the same snapshot and clear in one action", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 3, NIH: 2, DOE: 4 } });
   await searchTopic(page, "cross-agency", "all");
