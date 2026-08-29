@@ -306,6 +306,11 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset, snapshotId\)/);
   assert.match(hydrationSource, /const batchIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === snapshotId[\s\S]*if \(!batchIsCurrent\(\)\) return;[\s\S]*applySourceBatch\(source, batch\)/);
 
+  const facetSource = appSource.slice(appSource.indexOf("function restoreCommittedViewControls("), appSource.indexOf("async function requestSourceBatch("));
+  assert.match(facetSource, /restoreCommittedViewControls\(\)[\s\S]*state\.facet\.type === "investigator"[\s\S]*state\.facet\.type === "program"/);
+  assert.match(facetSource, /async function changeFacet\([\s\S]*catch \(error\)[\s\S]*restoreCommittedViewControls\(\)/);
+  assert.match(appSource, /"ii-page-size"\)\.addEventListener\("change"[\s\S]*catch\(error => \{[\s\S]*restoreCommittedViewControls\(\)/);
+
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
 });

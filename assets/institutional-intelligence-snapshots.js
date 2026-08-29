@@ -460,6 +460,12 @@
     select.value = state.facet.type === kind ? state.facet.key : "all";
   }
 
+  function restoreCommittedViewControls() {
+    $("ii-page-size").value = String(state.pageSize);
+    $("ii-investigators").value = state.facet.type === "investigator" ? state.facet.key : "all";
+    $("ii-programs").value = state.facet.type === "program" ? state.facet.key : "all";
+  }
+
   function renderPagination() {
     const pagination = state.pagePayload?.pagination;
     if (!pagination) return;
@@ -711,6 +717,7 @@
       if (!payload) return;
       setStatus(state.facet.type === "all" ? "Showing all awards in the submitted result snapshot." : `Showing the ${state.pagePayload.facet.label} drill-down within the same result snapshot.`);
     } catch (error) {
+      restoreCommittedViewControls();
       setStatus(error?.message || "The requested drill-down could not be loaded.", true);
     } finally {
       setBusy(false);
@@ -1156,7 +1163,10 @@
       const anchor = (state.page - 1) * state.pageSize;
       const page = Math.floor(anchor / nextSize) + 1;
       setBusy(true);
-      fetchPageWithRecovery({ page, pageSize: nextSize, historyMode: "push", focus: true }).catch(error => setStatus(error.message, true)).finally(() => setBusy(false));
+      fetchPageWithRecovery({ page, pageSize: nextSize, historyMode: "push", focus: true }).catch(error => {
+        restoreCommittedViewControls();
+        setStatus(error.message, true);
+      }).finally(() => setBusy(false));
     });
     $("ii-question-answer").addEventListener("click", event => {
       const link = event.target.closest("[data-ii-evidence-link]");

@@ -126,6 +126,7 @@ export function mockAwards(target, {
   responseDelaysBySourceOffset = {},
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
+  snapshotPageFailAtCalls = [],
   snapshotBatchExpireAtCall = 0,
   snapshotBatchDelaysMs = [],
   snapshotRetryExpireAtCall = 0,
@@ -402,6 +403,10 @@ export function mockAwards(target, {
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
       snapshotPageCallCount += 1;
+      if (snapshotPageFailAtCalls.includes(snapshotPageCallCount)) {
+        await route.fulfill({ status: 503, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "source_unavailable" } }) });
+        return;
+      }
       if (snapshotPageCallCount === Number(snapshotPageExpireAtCall)) {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
         return;

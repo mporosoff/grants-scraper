@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-import { mockAwards, openAiStructuredResponse, watchRuntimeErrors } from "./helpers.mjs";
+import { chooseInvestigator, mockAwards, openAiStructuredResponse, watchRuntimeErrors } from "./helpers.mjs";
 
 async function openSearch(page, options = {}) {
   const calls = mockAwards(page, options);
@@ -138,6 +138,29 @@ test("snapshot navigation controls stay locked until one requested view is commi
   await expect(page.locator("#ii-page-size")).toBeEnabled();
   await expect(page.locator("#ii-card-page-numbers button").first()).toBeEnabled();
   expect(runtimeErrors).toEqual([]);
+});
+
+test("failed facet and page-size requests restore the committed view controls", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 2, snapshotPageFailAtCalls: [3, 4] });
+  await searchTopic(page, "view-control-rollback", "all");
+  await page.locator("#ii-programs").selectOption({ label: "NIH · R01 (2)" });
+  await expect(page.locator("#ii-active-facet")).toContainText("NIH · R01");
+  const committedUrl = page.url();
+  const committedProgram = await page.locator("#ii-programs").inputValue();
+
+  await chooseInvestigator(page, "Marc Porosoff");
+  await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
+  await expect(page.locator("#ii-investigators")).toHaveValue("all");
+  await expect(page.locator("#ii-programs")).toHaveValue(committedProgram);
+  await expect(page.locator("#ii-active-facet")).toContainText("NIH · R01");
+  expect(page.url()).toBe(committedUrl);
+
+  await page.locator("#ii-page-size").selectOption("25");
+  await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
+  await expect(page.locator("#ii-page-size")).toHaveValue("10");
+  await expect(page.locator("#ii-programs")).toHaveValue(committedProgram);
+  expect(page.url()).toBe(committedUrl);
+  expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
 });
 
 test("draft filters never relabel an active snapshot during page, size, facet, share, or reload navigation", async ({ page }) => {
