@@ -219,6 +219,31 @@
     };
   }
 
+  function submittedCriteria(value) {
+    return {
+      open: true,
+      institution: clean(value?.institution, 300),
+      ror_id: clean(value?.ror_id, 100),
+      agency: clean(value?.agency, 10) || "all",
+      program: clean(value?.program, 160),
+      topic: clean(value?.topic, 500),
+      pi: clean(value?.pi, 160),
+      program_officer: clean(value?.program_officer, 160),
+      year_start: clean(value?.year_start, 4),
+      year_end: clean(value?.year_end, 4),
+    };
+  }
+
+  function snapshotViewState() {
+    return {
+      snapshot_id: state.snapshot?.snapshot_id || "",
+      page: state.page,
+      page_size: state.pageSize,
+      facet_type: state.facet.type,
+      facet_key: state.facet.key,
+    };
+  }
+
   function applyFormState(value) {
     $("ii-institution").value = value.institution || "";
     $("ii-agency").value = value.agency || "all";
@@ -247,7 +272,9 @@
 
   function syncUrl(mode = "replace") {
     if (!location.protocol.startsWith("http")) return;
-    const value = { ...(state.submitted || formState()), ...formState() };
+    const value = state.submitted && state.snapshot?.snapshot_id
+      ? { ...state.submitted, ...snapshotViewState() }
+      : formState();
     const url = core.urlForState(location.href, value);
     const historyState = { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
     history[mode === "push" ? "pushState" : "replaceState"](historyState, "", url);
@@ -469,18 +496,77 @@
     });
   }
 
+  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller }) {
+    return postJson(api.snapshotPageUrl, {
+      snapshot_id: snapshotId,
+      page,
+      page_size: pageSize,
+      facet: { type: facet.type, key: facet.key },
+    }, controller);
+  }
+
+  function stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState = null }) {
+    const residentAwards = new Map();
+    const sourceOffsets = new Map();
+    const absorb = awards => {
+      for (const award of Array.isArray(awards) ? awards : []) {
+        const key = awardKey(award);
+        if (key && !residentAwards.has(key)) residentAwards.set(key, award);
+      }
+    };
+    for (const batch of snapshot.initial_batches || []) {
+      if (!batch) continue;
+      absorb(batch.results);
+      sourceOffsets.set(batch.source, Number(batch.loaded_through ?? batch.results?.length) || 0);
+    }
+    absorb(pageAwards(pagePayload));
+    return {
+      submitted: submittedCriteria(submitted),
+      snapshot: { ...snapshot, ...pagePayload, snapshot_id: pagePayload.snapshot_id },
+      pagePayload,
+      page: pagePayload.pagination.page,
+      pageSize: pagePayload.pagination.page_size,
+      facet: { type: pagePayload.facet.type, key: pagePayload.facet.key },
+      aggregate: { ...pagePayload.aggregate, awards: pageAwards(pagePayload) },
+      baseAggregate: pagePayload.facet?.type === "all" ? pagePayload.aggregate : pagePayload.base_aggregate,
+      residentAwards,
+      sourceOffsets,
+      questionState,
+    };
+  }
+
+  function commitSnapshotResult(staged, { historyMode = "replace", focus = false } = {}) {
+    state.submitted = staged.submitted;
+    state.snapshot = staged.snapshot;
+    state.pagePayload = staged.pagePayload;
+    state.page = staged.page;
+    state.pageSize = staged.pageSize;
+    state.facet = staged.facet;
+    state.aggregate = staged.aggregate;
+    state.baseAggregate = staged.baseAggregate;
+    state.residentAwards = staged.residentAwards;
+    state.sourceOffsets = staged.sourceOffsets;
+    state.sourceMessages = new Map();
+    state.investigatorGroups = new Map();
+    state.programGroups = new Map();
+    if (staged.questionState) {
+      state.question = staged.questionState;
+      state.answering = false;
+      $("ii-question-answer").classList.add("hidden");
+    } else {
+      clearQuestionState();
+    }
+    renderPage({ focus });
+    syncUrl(historyMode);
+  }
+
   async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
     if (!state.snapshot?.snapshot_id) return null;
     const requestSequence = ++state.pageRequestSequence;
     const snapshotId = state.snapshot.snapshot_id;
     let payload;
     try {
-      payload = await postJson(api.snapshotPageUrl, {
-        snapshot_id: snapshotId,
-        page,
-        page_size: pageSize,
-        facet: { type: facet.type, key: facet.key },
-      });
+      payload = await requestSnapshotPage({ snapshotId, page, pageSize, facet });
     } catch (error) {
       if (requestSequence !== state.pageRequestSequence) return null;
       throw error;
@@ -505,7 +591,7 @@
       const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
       const retryView = page !== 1 || requestedFacet.type !== "all";
       const submitted = {
-        ...(state.submitted || formState()),
+        ...(state.submitted || submittedCriteria(formState())),
         snapshot_id: "",
         page: 1,
         page_size: pageSize,
@@ -529,36 +615,30 @@
     }
   }
 
-  async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, searchState = null } = {}) {
+  async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, questionState = null, searchState = null } = {}) {
     const sequence = ++state.sequence;
     state.pageRequestSequence += 1;
     state.controller?.abort();
     state.controller = new AbortController();
-    if (!questionSearch) clearQuestionState();
     setBusy(true);
     setStatus("Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
-      state.submitted = { ...current, snapshot_id: "", page: 1, page_size: current.page_size || 10, facet_type: "all", facet_key: "" };
+      const submitted = submittedCriteria(current);
+      const pageSize = current.page_size || 10;
       const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria });
       if (sequence !== state.sequence) return null;
-      state.snapshot = snapshot;
-      state.page = 1;
-      state.pageSize = current.page_size || 10;
-      state.facet = { type: "all", key: "" };
-      state.residentAwards.clear();
-      state.sourceOffsets.clear();
-      state.sourceMessages.clear();
-      for (const batch of snapshot.initial_batches || []) {
-        if (!batch) continue;
-        absorbAwards(batch.results);
-        state.sourceOffsets.set(batch.source, batch.loaded_through || batch.results.length);
-      }
-      state.submitted.snapshot_id = snapshot.snapshot_id;
-      const initialPage = await fetchPage({ historyMode, focus: focusResults });
-      if (!initialPage || sequence !== state.sequence) return null;
+      const initialPage = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize,
+        facet: { type: "all", key: "" },
+      });
+      if (sequence !== state.sequence) return null;
+      const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
+      commitSnapshotResult(staged, { historyMode, focus: focusResults });
       const exact = snapshot.completeness === "complete";
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
@@ -577,11 +657,10 @@
 
   async function changeFacet(type, key, { historyMode = "push", focus = true } = {}) {
     clearQuestionState();
-    state.facet = type === "all" ? { type: "all", key: "" } : { type, key };
-    state.page = 1;
+    const requestedFacet = type === "all" ? { type: "all", key: "" } : { type, key };
     setBusy(true);
     try {
-      const payload = await fetchPageWithRecovery({ historyMode, focus });
+      const payload = await fetchPageWithRecovery({ page: 1, facet: requestedFacet, historyMode, focus });
       if (!payload) return;
       setStatus(state.facet.type === "all" ? "Showing all awards in the submitted result snapshot." : `Showing the ${state.pagePayload.facet.label} drill-down within the same result snapshot.`);
     } catch (error) {
@@ -621,21 +700,23 @@
 
   async function retrySource(source) {
     const previous = state.snapshot.snapshot_id;
+    const sequence = state.sequence;
+    const pageRequestSequence = ++state.pageRequestSequence;
     setBusy(true);
     setStatus(`Retrying ${source}; successful source results remain available…`);
     try {
       const snapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: previous, source });
-      state.snapshot = snapshot;
-      state.submitted.snapshot_id = snapshot.snapshot_id;
+      const initialPage = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize: state.pageSize,
+        facet: { type: "all", key: "" },
+      });
+      if (sequence !== state.sequence || pageRequestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== previous) return;
+      const staged = stagedSnapshotResult({ submitted: state.submitted, snapshot, pagePayload: initialPage });
+      commitSnapshotResult(staged, { historyMode: "replace" });
       state.sourceMessages.set(source, `${source} recovered. The successor snapshot retained the other successful sources.`);
-      for (const batch of snapshot.initial_batches || []) {
-        if (!batch || batch.source !== source) continue;
-        absorbAwards(batch.results);
-        state.sourceOffsets.set(source, batch.loaded_through);
-      }
-      state.page = 1;
-      state.facet = { type: "all", key: "" };
-      await fetchPage({ historyMode: "replace" });
+      renderSourceStatus();
       setStatus(`${source} recovered in successor snapshot ${snapshot.snapshot_id.slice(0, 12)}…; successful source results were retained.`);
     } catch (error) {
       state.sourceMessages.set(source, `${source} retry did not recover. Existing snapshot results remain available.`);
@@ -765,7 +846,6 @@
     const questionSequence = ++state.questionSequence;
     state.questionSubmitting = true;
     state.answering = false;
-    state.question = null;
     $("ii-question-answer").classList.add("hidden");
     $("ii-ask-button").disabled = true;
     try {
@@ -822,8 +902,8 @@
       $("ii-question-plan").textContent = `Deterministic evidence plan · ${details.join(" · ")}`;
       $("ii-question-plan").classList.remove("hidden");
       applyFormState(next);
-      state.question = { question, intent, filters: next, provider, narrativeNeeded: plan.narrative_needed === true || intent === "narrative", translationFallback, snapshot: null };
-      const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, searchState: next });
+      const questionState = { question, intent, filters: next, provider, narrativeNeeded: plan.narrative_needed === true || intent === "narrative", translationFallback, snapshot: null };
+      const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next });
       if (questionSequence === state.questionSequence && outcome) await refreshQuestionAnswer();
     } catch (error) {
       if (questionSequence !== state.questionSequence) return;
@@ -970,11 +1050,11 @@
       state.controller?.abort();
       resetResultState();
       applyFormState(restored);
-      state.submitted = { ...restored };
       state.controller = new AbortController();
       setBusy(true);
       try {
         if (restored.snapshot_id) {
+          state.submitted = submittedCriteria(restored);
           state.snapshot = { snapshot_id: restored.snapshot_id, sources: state.snapshot?.sources || [] };
           await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         } else {
@@ -998,8 +1078,8 @@
     bindEvents();
     refreshProvider();
     if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return;
-    state.submitted = { ...restored };
     if (restored.snapshot_id) {
+      state.submitted = submittedCriteria(restored);
       state.snapshot = { snapshot_id: restored.snapshot_id, sources: [] };
       state.controller = new AbortController();
       setBusy(true);

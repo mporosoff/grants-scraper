@@ -107,6 +107,112 @@ test("snapshot navigation controls stay locked until one requested view is commi
   expect(runtimeErrors).toEqual([]);
 });
 
+test("draft filters never relabel an active snapshot during page, size, facet, share, or reload navigation", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
+  await searchTopic(page, "committed-criteria", "all");
+  const committedSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+
+  await page.locator("#ii-topic").fill("unsubmitted-draft");
+  await page.locator("#ii-agency").selectOption("NIH");
+  await page.locator('[data-ii-page-number="2"]').click();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2");
+  let activeUrl = new URL(page.url());
+  expect(activeUrl.searchParams.get("ii_snapshot")).toBe(committedSnapshot);
+  expect(activeUrl.searchParams.get("ii_topic")).toBe("committed-criteria");
+  expect(activeUrl.searchParams.get("ii_agency")).toBeNull();
+  await expect(page.locator("#ii-topic")).toHaveValue("unsubmitted-draft");
+  await expect(page.locator("#ii-agency")).toHaveValue("NIH");
+
+  await page.locator("#ii-page-size").selectOption("25");
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 1");
+  activeUrl = new URL(page.url());
+  expect(activeUrl.searchParams.get("ii_topic")).toBe("committed-criteria");
+  expect(activeUrl.searchParams.get("ii_agency")).toBeNull();
+  await page.locator("#ii-programs").selectOption({ label: "NIH · R01 (26)" });
+  await expect(page.locator("#ii-active-facet")).toContainText("NIH · R01");
+  activeUrl = new URL(page.url());
+  expect(activeUrl.searchParams.get("ii_topic")).toBe("committed-criteria");
+  expect(activeUrl.searchParams.get("ii_agency")).toBeNull();
+  const sharedUrl = page.url();
+
+  await page.goto(sharedUrl);
+  await expect(page.locator("#ii-output")).toBeVisible();
+  await expect(page.locator("#ii-topic")).toHaveValue("committed-criteria");
+  await expect(page.locator("#ii-agency")).toHaveValue("all");
+  await expect(page.locator("#ii-active-facet")).toContainText("NIH · R01");
+  expect(new URL(page.url()).searchParams.get("ii_snapshot")).toBe(committedSnapshot);
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("replacement search commits only after its initial page succeeds", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 2, snapshotPageDelayMs: 900 });
+  await searchTopic(page, "atomic-first", "all");
+  const firstUrl = page.url();
+  const firstSnapshot = new URL(firstUrl).searchParams.get("ii_snapshot");
+
+  await page.locator("#ii-topic").fill("atomic-second");
+  await page.locator("#ii-search").click();
+  await expect.poll(() => calls.filter(call => call.snapshot_id && call.page === 1).length).toBe(2);
+  expect(page.url()).toBe(firstUrl);
+  await expect(page.locator("#ii-output")).toBeVisible();
+  await expect(page.locator("#ii-topic")).toHaveValue("atomic-second");
+  await expect(page.locator("#ii-search")).toBeDisabled();
+
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(firstSnapshot);
+  await expect(page.locator("#ii-search")).toBeEnabled();
+  expect(new URL(page.url()).searchParams.get("ii_topic")).toBe("atomic-second");
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("failed creation and initial-page replacements retain one coherent owner before success and history restoration", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, {
+    resultCountPerSource: 2,
+    failSnapshotCreateForTopics: ["fail-create"],
+    failSnapshotInitialPageForTopics: ["fail-initial-page"],
+  });
+  await page.locator("#ii-institution").fill("University of Rochester");
+  await searchTopic(page, "stable-owner", "all");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many awards are in this result?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  const stableUrl = page.url();
+  const stableSnapshot = new URL(stableUrl).searchParams.get("ii_snapshot");
+  const stableEvidence = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId));
+
+  for (const topic of ["fail-create", "fail-initial-page"]) {
+    await page.locator("#ii-topic").fill(topic);
+    await page.locator("#ii-search").click();
+    await expect(page.locator("#ii-search")).toBeEnabled();
+    await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
+    expect(page.url()).toBe(stableUrl);
+    expect(await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId))).toEqual(stableEvidence);
+    await expect(page.locator("#ii-topic")).toHaveValue(topic);
+    await expect(page.locator("#ii-question-answer")).toBeVisible();
+  }
+
+  await page.locator("#ii-topic").fill("successful-owner");
+  await page.locator("#ii-agency").selectOption("NIH");
+  await page.locator("#ii-search").click();
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(stableSnapshot);
+  const successfulUrl = page.url();
+  await expect(page.locator("#ii-awards .ii-award-card[data-source='NIH']")).toHaveCount(2);
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await expect(page.locator("#ii-question-plan")).toBeHidden();
+
+  await page.goBack();
+  await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(stableSnapshot);
+  await expect(page.locator("#ii-topic")).toHaveValue("stable-owner");
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  expect(await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId))).toEqual(stableEvidence);
+  await page.goForward();
+  await expect(page).toHaveURL(successfulUrl);
+  await expect(page.locator("#ii-topic")).toHaveValue("successful-owner");
+  await expect(page.locator("#ii-awards .ii-award-card[data-source='NIH']")).toHaveCount(2);
+  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
+});
+
 test("an expired snapshot is rebuilt before the requested page is restored", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 26, snapshotPageExpireAtCall: 2 });
   await searchTopic(page, "expiry-recovery");

@@ -126,6 +126,8 @@ export function mockAwards(target, {
   responseDelaysBySourceOffset = {},
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
+  failSnapshotCreateForTopics = [],
+  failSnapshotInitialPageForTopics = [],
   enforceYearFilters = false,
   sourceFailures = {},
   sourceFailuresByOffset = {},
@@ -360,6 +362,14 @@ export function mockAwards(target, {
       return { facet: { type: facet.type, key: facet.key, label: facet.type === "investigator" ? group?.name : group?.label }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
     };
     if (requestUrl.pathname === "/awards/snapshots" && request.method() === "POST") {
+      if (failSnapshotCreateForTopics.includes(body.criteria?.topic)) {
+        await route.fulfill({
+          status: 503,
+          headers: corsHeaders({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ schema_version: 1, error: { code: "source_unavailable" } }),
+        });
+        return;
+      }
       const sources = body.sources;
       const records = [];
       const sourceStates = [];
@@ -395,6 +405,14 @@ export function mockAwards(target, {
       const snapshot = snapshots.get(body.snapshot_id);
       if (!snapshot) {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      if (body.page === 1 && body.facet?.type === "all" && failSnapshotInitialPageForTopics.includes(snapshot.request.criteria?.topic)) {
+        await route.fulfill({
+          status: 503,
+          headers: corsHeaders({ "Content-Type": "application/json" }),
+          body: JSON.stringify({ schema_version: 1, error: { code: "source_unavailable" } }),
+        });
         return;
       }
       const view = snapshotView(snapshot, body.facet);

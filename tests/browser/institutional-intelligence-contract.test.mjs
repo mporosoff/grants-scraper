@@ -277,6 +277,26 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
+test("snapshot URLs and replacement results have one committed owner", () => {
+  const syncUrlSource = appSource.slice(appSource.indexOf("function syncUrl("), appSource.indexOf("async function postJson("));
+  assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
+  assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
+
+  const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
+  const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
+  const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
+  const stageIndex = runSearchSource.indexOf("stagedSnapshotResult(");
+  const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
+  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
+  assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
+
+  const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
+  for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
+    assert.match(commitSource, new RegExp(`state\\.${field}`));
+  assert.ok(commitSource.indexOf("renderPage(") > commitSource.indexOf("state.pagePayload ="));
+  assert.ok(commitSource.indexOf("syncUrl(") > commitSource.indexOf("renderPage("));
+});
+
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
@@ -326,7 +346,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*\$\("ii-ask-button"\)\.disabled = true;[\s\S]*await resolveTypedInstitution\(\)/);
   assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
   assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*\$\("ii-ask-button"\)\.disabled = state\.busyDepth > 0/);
-  assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, searchState: next \}\)/);
+  assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);
   assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);
 });
