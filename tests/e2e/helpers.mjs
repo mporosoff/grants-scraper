@@ -126,6 +126,7 @@ export function mockAwards(target, {
   responseDelaysBySourceOffset = {},
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
+  snapshotBatchExpireAtCall = 0,
   failSnapshotCreateForTopics = [],
   failSnapshotInitialPageForTopics = [],
   enforceYearFilters = false,
@@ -136,6 +137,7 @@ export function mockAwards(target, {
   const snapshots = new Map();
   let snapshotSequence = 0;
   let snapshotPageCallCount = 0;
+  let snapshotBatchCallCount = 0;
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -434,6 +436,11 @@ export function mockAwards(target, {
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/batch" && request.method() === "POST") {
+      snapshotBatchCallCount += 1;
+      if (snapshotBatchCallCount === Number(snapshotBatchExpireAtCall)) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
       const snapshot = snapshots.get(body.snapshot_id);
       const view = snapshotView(snapshot, body.facet);
       const sourceRecords = view.records.filter(record => record.source === body.source);

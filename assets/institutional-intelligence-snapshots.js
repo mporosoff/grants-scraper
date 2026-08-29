@@ -582,35 +582,42 @@
     return payload;
   }
 
+  async function rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode = "replace", focus = false }) {
+    const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
+    const retryView = page !== 1 || requestedFacet.type !== "all";
+    const submitted = {
+      ...(state.submitted || submittedCriteria(formState())),
+      snapshot_id: "",
+      page: 1,
+      page_size: pageSize,
+      facet_type: "all",
+      facet_key: "",
+    };
+    const refreshed = await runSearch({
+      historyMode: retryView ? "replace" : historyMode,
+      resolveInstitution: false,
+      focusResults: !retryView && focus,
+      searchState: submitted,
+    });
+    if (!refreshed) return null;
+    if (!retryView) return state.pagePayload;
+    return fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus });
+  }
+
   async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false } = {}) {
     try {
       return await fetchPage({ page, pageSize, facet, historyMode, focus });
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
       setStatus("The result snapshot expired. Rebuilding the submitted search before restoring this view…");
-      const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
-      const retryView = page !== 1 || requestedFacet.type !== "all";
-      const submitted = {
-        ...(state.submitted || submittedCriteria(formState())),
-        snapshot_id: "",
-        page: 1,
-        page_size: pageSize,
-        facet_type: "all",
-        facet_key: "",
-      };
-      const refreshed = await runSearch({
-        historyMode: retryView ? "replace" : historyMode,
-        resolveInstitution: false,
-        focusResults: !retryView && focus,
-        searchState: submitted,
-      });
-      if (!refreshed) return null;
+      const retryView = page !== 1 || facet?.type !== "all";
+      const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode, focus });
+      if (!payload) return null;
       if (!retryView) {
         setStatus("The expired result snapshot was rebuilt from the submitted search.");
-        return state.pagePayload;
+        return payload;
       }
-      const payload = await fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus });
-      if (payload) setStatus("The expired result snapshot was rebuilt and the requested view was restored.");
+      setStatus("The expired result snapshot was rebuilt and the requested view was restored.");
       return payload;
     }
   }
@@ -670,26 +677,56 @@
     }
   }
 
+  async function requestSourceBatch(source, offset, snapshotId = state.snapshot?.snapshot_id) {
+    return postJson(api.snapshotBatchUrl, {
+      snapshot_id: snapshotId,
+      source,
+      offset,
+      facet: { type: "all", key: "" },
+    });
+  }
+
+  function applySourceBatch(source, batch) {
+    const actualAdded = absorbAwards(batch.results);
+    state.sourceOffsets.set(source, batch.loaded_through);
+    const loaded = [...state.residentAwards.values()].filter(award => clean(award.source, 10).toUpperCase() === source).length;
+    const message = batch.source_total !== null
+      ? batch.loaded_through >= batch.source_total
+        ? `Loaded remaining ${actualAdded} ${source} award${actualAdded === 1 ? "" : "s"}; all ${batch.source_total} ${source} awards are available as hydrated cards.`
+        : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"}; ${loaded} of ${batch.source_total} are hydrated. Most recent first.`
+      : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"} after normalization; ${loaded} are hydrated within the partial source snapshot.`;
+    state.sourceMessages.set(source, message);
+    return message;
+  }
+
   async function loadSourceBatch(source) {
-    const offset = state.sourceOffsets.get(source) || 0;
+    const requestedOffset = state.sourceOffsets.get(source) || 0;
+    const requestedView = { page: state.page, pageSize: state.pageSize, facet: { ...state.facet } };
     setBusy(true);
     try {
-      const batch = await postJson(api.snapshotBatchUrl, {
-        snapshot_id: state.snapshot.snapshot_id,
-        source,
-        offset,
-        facet: { type: "all", key: "" },
-      });
-      const actualAdded = absorbAwards(batch.results);
-      state.sourceOffsets.set(source, batch.loaded_through);
-      const loaded = [...state.residentAwards.values()].filter(award => clean(award.source, 10).toUpperCase() === source).length;
-      state.sourceMessages.set(source, batch.source_total !== null
-        ? batch.loaded_through >= batch.source_total
-          ? `Loaded remaining ${actualAdded} ${source} award${actualAdded === 1 ? "" : "s"}; all ${batch.source_total} ${source} awards are available as hydrated cards.`
-          : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"}; ${loaded} of ${batch.source_total} are hydrated. Most recent first.`
-        : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"} after normalization; ${loaded} are hydrated within the partial source snapshot.`);
+      let rebuilt = false;
+      let message;
+      try {
+        message = applySourceBatch(source, await requestSourceBatch(source, requestedOffset));
+      } catch (error) {
+        if (error?.code !== "snapshot_expired") throw error;
+        rebuilt = true;
+        setStatus("The result snapshot expired. Rebuilding the submitted search before restoring source hydration…");
+        const restored = await rebuildSubmittedSnapshotView({ ...requestedView, historyMode: "replace" });
+        if (!restored) return;
+        let offset = state.sourceOffsets.get(source) || 0;
+        while (offset <= requestedOffset) {
+          const batch = await requestSourceBatch(source, offset);
+          message = applySourceBatch(source, batch);
+          if (offset === requestedOffset || batch.additional_available !== true) break;
+          const nextOffset = Number(batch.loaded_through);
+          if (!Number.isInteger(nextOffset) || nextOffset <= offset) break;
+          offset = nextOffset;
+        }
+        message ||= `${source} source hydration was already restored by the rebuilt snapshot.`;
+      }
       renderSourceStatus();
-      setStatus(state.sourceMessages.get(source));
+      setStatus(rebuilt ? `The expired result snapshot was rebuilt before source hydration resumed. ${message}` : message);
       renderQuestionAnswer();
     } catch (error) {
       setStatus(`${source} card hydration failed. Existing results remain available.`, true);

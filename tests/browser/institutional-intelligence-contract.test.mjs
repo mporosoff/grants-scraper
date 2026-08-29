@@ -295,6 +295,9 @@ test("snapshot URLs and replacement results have one committed owner", () => {
     assert.match(commitSource, new RegExp(`state\\.${field}`));
   assert.ok(commitSource.indexOf("renderPage(") > commitSource.indexOf("state.pagePayload ="));
   assert.ok(commitSource.indexOf("syncUrl(") > commitSource.indexOf("renderPage("));
+
+  const hydrationSource = appSource.slice(appSource.indexOf("async function loadSourceBatch("), appSource.indexOf("async function retrySource("));
+  assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset\)/);
 });
 
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {

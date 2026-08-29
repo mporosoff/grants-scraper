@@ -227,6 +227,20 @@ test("an expired snapshot is rebuilt before the requested page is restored", asy
   expect(runtimeErrors.some(error => error.includes("410 (Gone)"))).toBe(true);
 });
 
+test("an expired snapshot is rebuilt before source hydration resumes at the requested offset", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 51, snapshotBatchExpireAtCall: 1 });
+  await searchTopic(page, "hydration-expiry");
+  const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator('[data-ii-load-source="NSF"]').click();
+  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt before source hydration resumed");
+  await expect(page.locator("#ii-source-status")).toContainText("50 of 51 are hydrated");
+  const rebuiltSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(rebuiltSnapshot).not.toBe(originalSnapshot);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
+  expect(calls.filter(call => call.source === "NSF" && Number.isInteger(call.offset))).toHaveLength(2);
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+});
+
 test("history restoration cannot mix a newer snapshot question into an older snapshot", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 2 });
   await page.locator("#ii-institution").fill("University of Rochester");
