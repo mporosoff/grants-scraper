@@ -26,9 +26,15 @@
   const QUESTION_EVIDENCE_LIMIT = 24;
   const QUESTION_ABSTRACT_LIMIT = 800;
   const QUESTION_PAYLOAD_LIMIT = 18_000;
+  const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
+  }
+
+  function snapshotFacetKey(value) {
+    const key = String(value || "").replace(/\s+/g, " ").trim();
+    return key.length <= SNAPSHOT_FACET_KEY_MAX_LENGTH ? key : "";
   }
 
   function identityKey(value) {
@@ -609,7 +615,7 @@
       page: Math.max(1, Number.parseInt(params.get("ii_page") || "1", 10) || 1),
       page_size: [10, 25, 50].includes(Number(params.get("ii_page_size"))) ? Number(params.get("ii_page_size")) : 10,
       facet_type: ["all", "investigator", "program"].includes(params.get("ii_facet")) ? params.get("ii_facet") : "all",
-      facet_key: clean(params.get("ii_facet_key"), 300),
+      facet_key: snapshotFacetKey(params.get("ii_facet_key")),
     };
     if (state.pi && params.get("ii_pi_identity") === "1") state.pi_identity = true;
     return state;
@@ -634,9 +640,10 @@
     if (clean(state?.snapshot_id, 100)) url.searchParams.set("ii_snapshot", clean(state.snapshot_id, 100));
     if (Number(state?.page) > 1) url.searchParams.set("ii_page", String(Math.max(1, Number(state.page) || 1)));
     if ([10, 25, 50].includes(Number(state?.page_size)) && Number(state.page_size) !== 10) url.searchParams.set("ii_page_size", String(state.page_size));
-    if (["investigator", "program"].includes(state?.facet_type) && clean(state?.facet_key, 300)) {
+    const facetKey = snapshotFacetKey(state?.facet_key);
+    if (["investigator", "program"].includes(state?.facet_type) && facetKey) {
       url.searchParams.set("ii_facet", state.facet_type);
-      url.searchParams.set("ii_facet_key", clean(state.facet_key, 300));
+      url.searchParams.set("ii_facet_key", facetKey);
     }
     return url;
   }

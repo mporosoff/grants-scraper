@@ -5,6 +5,7 @@ import { createHandler, storeSnapshot } from "../../workers/award-api/src/index.
 import {
   AWARD_ORDERING_VERSION,
   SNAPSHOT_BATCH_SIZE,
+  SNAPSHOT_FACET_KEY_MAX_LENGTH,
   aggregateSnapshotAwards,
   buildAwardSnapshot,
   compareAwardsByRecency,
@@ -127,6 +128,57 @@ test("Unit B aggregates and investigator/program facets are computed from the fu
   const programPage = snapshotPage(value, { page: 1, pageSize: 10, facet: { type: "program", key: program.key } });
   assert.equal(programPage.aggregate.project_count, program.projects);
   assert.equal(programPage.base_aggregate.project_count, 26);
+});
+
+test("Unit B preserves complete opaque program facet keys through page and batch validation", async () => {
+  class MemoryCache {
+    constructor() { this.values = new Map(); }
+    async match(request) { return this.values.get(request.url)?.clone() || null; }
+    async put(request, response) { this.values.set(request.url, response.clone()); }
+  }
+  const longParent = `Parent ${"a".repeat(293)}`;
+  const longLeaf = `Program ${"b".repeat(292)}`;
+  const value = snapshot({
+    NSF: sourcePayload("NSF", [award(1, "NSF", { subagency: longParent, program_name: longLeaf })]),
+  }, ["NSF"]);
+  const program = value.base_aggregate.programs[0];
+  assert.ok(program.key.length > 300);
+  assert.ok(program.key.length <= SNAPSHOT_FACET_KEY_MAX_LENGTH);
+  const facet = { type: "program", key: program.key };
+  assert.equal(snapshotPage(value, { page: 1, pageSize: 10, facet }).facet.key, program.key);
+  assert.equal(snapshotSourceBatch(value, { source: "NSF", offset: 0, facet }).facet.key, program.key);
+
+  const cache = new MemoryCache();
+  await storeSnapshot(cache, value, 3600);
+  const handler = createHandler({ cache, fetchImpl: async () => { throw new Error("unexpected upstream request"); } });
+  const env = {
+    AWARD_API_ENABLED: "true",
+    CACHE_TTL_SECONDS: "3600",
+    MAX_SOURCE_RESULTS: "25",
+    AWARD_SOURCE_RATE_LIMIT: "12",
+    ROR_SEARCH_RATE_LIMIT: "60",
+    ROR_RESOLVE_RATE_LIMIT: "20",
+    AWARD_RATE_LIMIT_SECRET: "unit-b-facet-rate-limit-secret",
+    AWARD_RATE_LIMITER: {
+      idFromName: value => value,
+      get: () => ({ fetch: async () => new Response(JSON.stringify({ success: true }), { headers: { "Content-Type": "application/json" } }) }),
+    },
+  };
+  const request = (path, body) => new Request(`https://award.test${path}`, {
+    method: "POST",
+    headers: { Origin: "https://mporosoff.github.io", "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const pageResponse = await handler(request("/awards/snapshots/page", {
+    snapshot_id: value.snapshot_id, page: 1, page_size: 10, facet,
+  }), env);
+  assert.equal(pageResponse.status, 200);
+  assert.equal((await pageResponse.json()).facet.key, program.key);
+  const batchResponse = await handler(request("/awards/snapshots/batch", {
+    snapshot_id: value.snapshot_id, source: "NSF", offset: 0, facet,
+  }), env);
+  assert.equal(batchResponse.status, 200);
+  assert.equal((await batchResponse.json()).facet.key, program.key);
 });
 
 test("Unit B partial semantics never invent an exact total and a successor retains successful sources", () => {

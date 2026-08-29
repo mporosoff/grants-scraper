@@ -239,6 +239,19 @@ test("share URLs round-trip institution and all transparent filters", () => {
   });
 });
 
+test("share URLs preserve complete opaque program facet keys", () => {
+  const facetKey = `NSF:${"parent ".repeat(45)}:${"child ".repeat(45)}`.trim();
+  assert.ok(facetKey.length > 300);
+  const url = core.urlForState("https://example.test/funded_awards.html", {
+    open: true,
+    snapshot_id: "a".repeat(64),
+    facet_type: "program",
+    facet_key: facetKey,
+  });
+  assert.equal(url.searchParams.get("ii_facet_key"), facetKey);
+  assert.equal(core.stateFromSearch(url.search).facet_key, facetKey);
+});
+
 test("explicitly named investigators survive an incomplete question translation", () => {
   assert.equal(core.explicitInvestigator("What has Marc Porosoff been funded to do?"), "Marc Porosoff");
   assert.equal(core.explicitInvestigator("Has Marc Porosoff received NSF funding?"), "Marc Porosoff");
@@ -311,7 +324,8 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     appSource.indexOf("function bindEvents()"),
   );
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*\$\("ii-ask-button"\)\.disabled = true;[\s\S]*await resolveTypedInstitution\(\)/);
-  assert.match(askQuestionSource, /finally \{[\s\S]*state\.questionSubmitting = false;[\s\S]*\$\("ii-ask-button"\)\.disabled = false/);
+  assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
+  assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*\$\("ii-ask-button"\)\.disabled = state\.busyDepth > 0/);
   assert.match(askQuestionSource, /runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);
   assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);

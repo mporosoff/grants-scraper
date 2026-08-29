@@ -9,6 +9,7 @@ import { AwardRateLimiter } from "./rate-limit.js";
 import {
   AWARD_ORDERING_VERSION,
   SNAPSHOT_BATCH_SIZE,
+  SNAPSHOT_FACET_KEY_MAX_LENGTH,
   SNAPSHOT_PAGE_SIZES,
   buildAwardSnapshot,
   publicSnapshot,
@@ -510,8 +511,9 @@ function validateSnapshotCreate(body, config) {
 function validateFacet(value) {
   if (!value || typeof value !== "object" || Array.isArray(value) || !exactKeys(value, ["type", "key"])) return null;
   const type = normalizedString(value.type, 20);
-  const key = typeof value.key === "string" ? value.key.replace(/\s+/g, " ").trim().slice(0, 300) : null;
+  const key = typeof value.key === "string" ? value.key.replace(/\s+/g, " ").trim() : null;
   if (!new Set(["all", "investigator", "program"]).has(type) || key === null) return null;
+  if (key.length > SNAPSHOT_FACET_KEY_MAX_LENGTH) return null;
   if (type === "all" && key) return null;
   if (type !== "all" && !key) return null;
   return { type, key };

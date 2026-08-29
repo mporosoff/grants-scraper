@@ -1,6 +1,7 @@
 const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE"]);
 export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
+export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
 export const SNAPSHOT_PAGE_SIZES = Object.freeze([10, 25, 50]);
 const EN_COLLATOR = new Intl.Collator("en-US");
 
@@ -477,7 +478,7 @@ export function buildAwardSnapshot({ snapshotId, queryId, asOf, request, sourceP
 
 function facetAwards(snapshot, facet = { type: "all", key: "" }) {
   const type = clean(facet?.type, 20) || "all";
-  const key = clean(facet?.key, 300);
+  const key = clean(facet?.key, SNAPSHOT_FACET_KEY_MAX_LENGTH);
   if (type === "all") return { facet: { type: "all", key: "", label: "All awards" }, awards: snapshot.awards };
   const groups = type === "investigator" ? snapshot.base_aggregate.investigators
     : type === "program" ? snapshot.base_aggregate.programs : [];
