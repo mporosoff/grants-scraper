@@ -1220,21 +1220,36 @@ test("FF-BUG-006 pause remains manageable while unsubscribe removes alerts and r
   });
   const store = new D1AlertStore(new SqliteD1(database));
   const handler = createHandler({ storeFactory: () => store, providerFactory: () => new MockEmailProvider(), now: () => fixedNow });
+  const manageToken = await createCapability({
+    subscriberId: person.id, purpose: "manage",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeOne = await createCapability({
+    subscriberId: person.id, purpose: "unsubscribe_one", subscriptionId: "watch-1",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeAll = await createCapability({
+    subscriberId: person.id, purpose: "unsubscribe_all",
+  }, env.ALERT_CAPABILITY_SECRET);
 
   const pause = await handler(new Request("https://alerts.example.test/manage", {
     method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ token: person.manageToken, subscription: "watch-1", active: "0" }),
+    body: new URLSearchParams({ token: manageToken, subscription: "watch-1", active: "0" }),
   }), env);
   assert.equal(pause.status, 200);
   const pausedPage = await handler(new Request(
-    `https://alerts.example.test/manage?token=${person.manageToken}`,
+    `https://alerts.example.test/manage?token=${encodeURIComponent(manageToken)}`,
   ), env);
   const pausedHtml = await pausedPage.text();
   assert.match(pausedHtml, /Opportunity opp-1/);
   assert.match(pausedHtml, /Paused/);
   assert.match(pausedHtml, />Resume</);
+  assert.match(pausedHtml, /name="return_token"/);
 
-  const single = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&subscription=watch-1`, { method: "POST" }), env);
+  const single = await handler(new Request("https://alerts.example.test/unsubscribe", {
+    method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      token: unsubscribeOne, subscription: "watch-1", return_token: manageToken,
+    }),
+  }), env);
   assert.equal(single.status, 200);
   const singleHtml = await single.text();
   assert.match(singleHtml, /unsubscribed from this Funding Finder alert/);
@@ -1253,7 +1268,10 @@ test("FF-BUG-006 pause remains manageable while unsubscribe removes alerts and r
   assert.match(afterSingleHtml, /Opportunity opp-2/);
   assert.doesNotMatch(afterSingleHtml, /Opportunity opp-1[\s\S]*Paused/);
 
-  const allResponse = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&scope=all`, { method: "POST" }), env);
+  const allResponse = await handler(new Request("https://alerts.example.test/unsubscribe", {
+    method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ token: unsubscribeAll, scope: "all", return_token: manageToken }),
+  }), env);
   assert.equal(allResponse.status, 200);
   const allHtml = await allResponse.text();
   assert.match(allHtml, /unsubscribed from all Funding Finder email alerts/);
@@ -1271,6 +1289,44 @@ test("FF-BUG-006 pause remains manageable while unsubscribe removes alerts and r
   assert.match(manageText, /No alerts found/);
   assert.doesNotMatch(manageText, /Opportunity opp-/);
   assert.doesNotMatch(manageText, /Unsubscribe from all Funding Finder email alerts/);
+});
+
+test("purpose-scoped unsubscribe links cannot mint or substitute a manage capability", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscriber(database, {
+    id: "person-2", email: "second@example.edu", manageToken: "q".repeat(43),
+  });
+  insertSubscription(database, { id: "watch-1", active: 1, definitionHash: "hash-1" });
+  insertSubscription(database, { id: "watch-2", active: 1, definitionHash: "hash-2" });
+  const store = new D1AlertStore(new SqliteD1(database));
+  const handler = createHandler({
+    storeFactory: () => store, providerFactory: () => new MockEmailProvider(), now: () => fixedNow,
+  });
+  const unsubscribeOne = await createCapability({
+    subscriberId: "person-1", purpose: "unsubscribe_one", subscriptionId: "watch-1",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const unsubscribeTwo = await createCapability({
+    subscriberId: "person-1", purpose: "unsubscribe_one", subscriptionId: "watch-2",
+  }, env.ALERT_CAPABILITY_SECRET);
+  const otherSubscriberManage = await createCapability({
+    subscriberId: "person-2", purpose: "manage",
+  }, env.ALERT_CAPABILITY_SECRET);
+
+  for (const [token, subscription, returnToken] of [
+    [unsubscribeOne, "watch-1", unsubscribeOne],
+    [unsubscribeTwo, "watch-2", otherSubscriberManage],
+  ]) {
+    const response = await handler(new Request("https://alerts.example.test/unsubscribe", {
+      method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ token, subscription, return_token: returnToken }),
+    }), env);
+    assert.equal(response.status, 200);
+    const responseHtml = await response.text();
+    assert.match(responseHtml, /unsubscribed from this Funding Finder alert/);
+    assert.doesNotMatch(responseHtml, /Return to manage alerts/);
+    assert.doesNotMatch(responseHtml, /\/manage\?token=/);
+  }
 });
 
 test("FF-BUG-007 health is green only for the complete production delivery matrix", async () => {
@@ -1938,7 +1994,8 @@ test("Unit C multiple addresses and multiple subscriptions remain independently 
   }), env);
   assert.equal(unsubscribeResponse.status, 200);
   const unsubscribeHtml = await unsubscribeResponse.text();
-  assert.match(unsubscribeHtml, />Return to manage alerts</);
+  assert.doesNotMatch(unsubscribeHtml, />Return to manage alerts</);
+  assert.doesNotMatch(unsubscribeHtml, /\/manage\?token=/);
   assert.deepEqual(all(database,
     "SELECT active,unsubscribed_at FROM subscriptions WHERE subscriber_id = ? ORDER BY id",
     firstSubscriber.id,
