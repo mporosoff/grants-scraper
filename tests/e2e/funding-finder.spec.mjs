@@ -328,6 +328,43 @@ test("Funding Finder lazy-loads evidence-qualified Hajim reverse matches with on
   await expect(card.locator(".hajim-match-panel")).toHaveCount(0);
 });
 
+test("Hajim reverse-panel ownership recovers across rerenders, stale nodes, and consecutive cards", async ({ page }) => {
+  await page.goto("/match_explorer.html?focus=353936");
+  const card = page.locator('#results .result-card[data-opportunity-id="353936"]');
+  const trigger = card.getByRole("button", { name: "Find relevant Hajim faculty" });
+  await trigger.click();
+  await expect(card.locator(".hajim-match-panel h4")).toBeFocused();
+
+  await card.locator("[data-save]").click();
+  await expect(card.locator(".hajim-match-panel")).toHaveCount(0);
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await trigger.click();
+  await expect(card.locator(".hajim-match-panel h4")).toBeFocused();
+
+  await card.locator(".hajim-match-panel").evaluate(panel => panel.remove());
+  await trigger.click();
+  await expect(card.locator(".hajim-match-panel")).toHaveCount(1);
+  await expect(card.locator(".hajim-match-panel h4")).toBeFocused();
+  await card.locator("[data-hajim-close]").click();
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+  await page.goto("/match_explorer.html");
+  await page.locator("#browse-all").click();
+  const cards = page.locator("#results .result-card");
+  await expect(cards).toHaveCount(20);
+  const firstTrigger = cards.nth(0).getByRole("button", { name: "Find relevant Hajim faculty" });
+  const secondTrigger = cards.nth(1).getByRole("button", { name: "Find relevant Hajim faculty" });
+  await firstTrigger.click();
+  await expect(cards.nth(0).locator(".hajim-match-panel h4")).toBeFocused();
+  await secondTrigger.click();
+  await expect(page.locator(".hajim-match-panel")).toHaveCount(1);
+  await expect(firstTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(cards.nth(1).locator(".hajim-match-panel h4")).toBeFocused();
+  await cards.nth(1).locator("[data-hajim-close]").click();
+  await expect(secondTrigger).toBeFocused();
+});
+
 test("a failed Hajim asset can retry without affecting ordinary Funding Finder actions", async ({ page }) => {
   let graphRequests = 0;
   await page.route("**/data/faculty_matches.js*", route => {

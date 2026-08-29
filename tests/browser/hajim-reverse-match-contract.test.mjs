@@ -3,14 +3,16 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
-const [apiSource, reverseSource, directorySource, graphSource, catalogSource, finderPage, teamPage] = await Promise.all([
+const [apiSource, reverseSource, appSource, directorySource, graphSource, catalogSource, finderPage, teamPage, refreshWorkflow] = await Promise.all([
   readFile(new URL("../../assets/hajim-faculty.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/hajim-reverse-match.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/app.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/hajim_faculty_directory.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
   readFile(new URL("../../match_explorer.html", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
+  readFile(new URL("../../.github/workflows/refresh-opportunities.yml", import.meta.url), "utf8"),
 ]);
 
 function assignmentJson(source) {
@@ -29,14 +31,35 @@ const catalog = assignmentJson(catalogSource);
 
 test("validates the shared schema, fingerprint, and reviewed roster counts", () => {
   const api = loadApi();
-  assert.equal(api.validateDirectory(directory, catalog), directory);
-  assert.equal(api.validateGraph(graph, directory, catalog), graph);
+  assert.equal(api.validateDirectory(directory, catalog, directory.generation_id), directory);
+  assert.equal(api.validateGraph(graph, directory, catalog, directory.generation_id), graph);
   assert.equal(directory.faculty_source.record_count, 156);
   assert.equal(directory.faculty_source.rankable_record_count, 145);
   assert.equal(directory.faculty_source.unlisted_interest_count, 11);
   assert.equal(directory.generation_id, graph.generation_id);
+  assert.equal(directory.asset_version, directory.generation_id);
+  assert.deepEqual(directory.projection_fingerprints, graph.projection_fingerprints);
   assert.equal(directory.catalog.fingerprint, graph.catalog.fingerprint);
-  assert.throws(() => api.validateGraph({ ...graph, generation_id: "stale" }, directory, catalog), /out of sync/);
+  assert.throws(() => api.validateDirectory(directory, catalog, "a".repeat(64)), /page generation/);
+  assert.throws(() => api.validateGraph({ ...graph, generation_id: "a".repeat(64), asset_version: "a".repeat(64) }, directory, catalog), /out of sync/);
+});
+
+test("uses one content-derived generation in page markers, URLs, runtime validation, and publication", () => {
+  const generation = directory.generation_id;
+  const finderMarker = finderPage.match(/<meta name="hajim-match-generation" content="([a-f0-9]{64})"/);
+  const teamMarker = teamPage.match(/<meta name="hajim-match-generation" content="([a-f0-9]{64})"/);
+  assert.equal(finderMarker?.[1], generation);
+  assert.equal(teamMarker?.[1], generation);
+  assert.match(teamPage, new RegExp(`data/hajim_faculty_directory\\.js\\?v=${generation}`));
+  assert.equal(loadApi().versionedAssetUrl("data/faculty_matches.js", generation), `data/faculty_matches.js?v=${generation}`);
+  assert.match(reverseSource, /pageGenerationId\(\)/);
+  assert.match(reverseSource, /versionedAssetUrl\("data\/hajim_faculty_directory\.js"/);
+  assert.match(reverseSource, /versionedAssetUrl\("data\/faculty_matches\.js"/);
+  assert.match(refreshWorkflow, /--version-target match_explorer\.html/);
+  assert.match(refreshWorkflow, /--version-target team_match\.html/);
+  assert.match(refreshWorkflow, /hajim_faculty_directory\.js\?v=\$\{faculty_generation\}/);
+  assert.match(refreshWorkflow, /faculty_matches\.js\?v=\$\{faculty_generation\}/);
+  assert.doesNotMatch([finderPage, teamPage, apiSource, reverseSource, refreshWorkflow].join("\n"), /hajim-pr1/);
 });
 
 test("looks up each opportunity edge once and applies the 126-person scope", () => {
@@ -113,4 +136,9 @@ test("reverse-match explanations and accessible one-panel behavior are determini
   assert.match(reverseSource, /trigger\.setAttribute\("aria-expanded", "true"\)/);
   assert.match(reverseSource, /heading\.focus\(\)/);
   assert.match(reverseSource, /closeCurrent\(\{ restoreFocus: true \}\)/);
+  assert.match(reverseSource, /function panelIsOwned\(current\)/);
+  assert.match(reverseSource, /function reconcileOpenPanel\(\)/);
+  assert.match(reverseSource, /openPanel\.trigger === trigger/);
+  assert.match(reverseSource, /funding-finder:before-results-render/);
+  assert.match(appSource, /document\.dispatchEvent\(new CustomEvent\("funding-finder:before-results-render"\)\)/);
 });

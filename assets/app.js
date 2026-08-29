@@ -3680,6 +3680,7 @@
   }
 
   function renderResults() {
+    document.dispatchEvent(new CustomEvent("funding-finder:before-results-render"));
     renderHybridStatus();
     updateSavedSearchAlertUi();
     if (!state.searched) {

@@ -18,16 +18,33 @@
     return global.GRANT_CATALOG || null;
   }
 
+  function panelIsOwned(current) {
+    if (!current || !current.trigger || !current.panel ||
+        !current.trigger.isConnected || !current.panel.isConnected) return false;
+    var triggerCard = current.trigger.closest(".result-card");
+    var panelCard = current.panel.closest(".result-card");
+    return Boolean(triggerCard && triggerCard === panelCard &&
+      triggerCard.contains(current.trigger) && triggerCard.contains(current.panel));
+  }
+
   function closeCurrent(options) {
     options = options || {};
     if (!openPanel) return;
     var trigger = openPanel.trigger;
-    if (trigger && trigger.isConnected) {
+    if (trigger) {
       trigger.setAttribute("aria-expanded", "false");
-      if (options.restoreFocus) trigger.focus();
+      trigger.removeAttribute("aria-controls");
+      if (options.restoreFocus && trigger.isConnected) trigger.focus();
     }
-    if (openPanel.panel && openPanel.panel.isConnected) openPanel.panel.remove();
+    if (openPanel.panel) openPanel.panel.remove();
     openPanel = null;
+  }
+
+  function reconcileOpenPanel() {
+    if (!openPanel) return false;
+    if (panelIsOwned(openPanel)) return true;
+    closeCurrent({ restoreFocus: false });
+    return false;
   }
 
   function panelShell(trigger, opportunityId) {
@@ -78,7 +95,7 @@
   }
 
   function renderMatches() {
-    if (!openPanel || !openPanel.directory || !openPanel.graph) return;
+    if (!reconcileOpenPanel() || !openPanel.directory || !openPanel.graph) return;
     var body = openPanel.panel.querySelector(".hajim-match-body");
     var matches = API.opportunityMatches(
       openPanel.graph, openPanel.directory, openPanel.opportunityId, openPanel.primaryOnly
@@ -95,7 +112,7 @@
   }
 
   function renderFailure(error) {
-    if (!openPanel) return;
+    if (!reconcileOpenPanel()) return;
     var body = openPanel.panel.querySelector(".hajim-match-body");
     body.innerHTML = '<p>Faculty matches are temporarily unavailable. Ordinary Funding Finder search and actions still work.</p>' +
       '<button type="button" class="source-action" data-hajim-retry>Retry</button>';
@@ -104,17 +121,34 @@
 
   function loadCurrent() {
     var current = openPanel;
-    if (!current || !API || !catalog()) {
+    if (!current || !panelIsOwned(current) || !API || !catalog()) {
       renderFailure(new Error("Faculty matching helper or catalog unavailable."));
       return;
     }
+    var generationId;
+    try {
+      generationId = API.pageGenerationId();
+    } catch (error) {
+      renderFailure(error);
+      return;
+    }
     current.panel.querySelector(".hajim-match-body").innerHTML = "<p>Loading evidence-qualified faculty matches…</p>";
-    API.loadDirectory(catalog(), "data/hajim_faculty_directory.js?v=hajim-pr1").then(function (directory) {
-      if (openPanel !== current) return null;
+    API.loadDirectory(
+      catalog(), API.versionedAssetUrl("data/hajim_faculty_directory.js", generationId), generationId
+    ).then(function (directory) {
+      if (openPanel !== current || !panelIsOwned(current)) {
+        if (openPanel === current) closeCurrent({ restoreFocus: false });
+        return null;
+      }
       current.directory = directory;
-      return API.loadGraph(directory, catalog(), "data/faculty_matches.js?v=hajim-pr1");
+      return API.loadGraph(
+        directory, catalog(), API.versionedAssetUrl("data/faculty_matches.js", generationId), generationId
+      );
     }).then(function (graph) {
-      if (!graph || openPanel !== current) return;
+      if (!graph || openPanel !== current || !panelIsOwned(current)) {
+        if (openPanel === current) closeCurrent({ restoreFocus: false });
+        return;
+      }
       current.graph = graph;
       renderMatches();
       var heading = current.panel.querySelector("h4");
@@ -127,8 +161,9 @@
   document.addEventListener("click", function (event) {
     var trigger = event.target.closest("[data-hajim-match]");
     if (trigger) {
+      reconcileOpenPanel();
       var opportunityId = trigger.getAttribute("data-hajim-match");
-      if (openPanel && openPanel.opportunityId === opportunityId) {
+      if (openPanel && openPanel.trigger === trigger && openPanel.opportunityId === opportunityId) {
         closeCurrent({ restoreFocus: true });
         return;
       }
@@ -143,10 +178,14 @@
   });
 
   document.addEventListener("change", function (event) {
-    if (!openPanel || !event.target.matches("[data-hajim-scope]")) return;
+    if (!reconcileOpenPanel() || !event.target.matches("[data-hajim-scope]")) return;
     openPanel.primaryOnly = event.target.value === "primary";
     renderMatches();
   });
 
-  global.HajimReverseMatch = Object.freeze({ closeCurrent: closeCurrent });
+  document.addEventListener("funding-finder:before-results-render", function () {
+    closeCurrent({ restoreFocus: false });
+  });
+
+  global.HajimReverseMatch = Object.freeze({ closeCurrent: closeCurrent, reconcileOpenPanel: reconcileOpenPanel });
 })(globalThis);

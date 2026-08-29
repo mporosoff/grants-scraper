@@ -305,7 +305,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=post-phase4-abc-20260829"></script>',
+            '<script src="./assets/app.js?v=hajim-panel-ownership-20260829"></script>',
             explorer_html,
         )
         self.assertIn(

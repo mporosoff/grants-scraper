@@ -8,6 +8,22 @@
   var graphPromise = null;
   var directoryPromise = null;
 
+  function pageGenerationId() {
+    var marker = document.querySelector('meta[name="hajim-match-generation"]');
+    var generationId = marker && marker.getAttribute("content");
+    if (!/^[a-f0-9]{64}$/.test(generationId || "")) {
+      throw new Error("The page does not declare a valid Hajim faculty generation.");
+    }
+    return generationId;
+  }
+
+  function versionedAssetUrl(path, generationId) {
+    if (!/^[a-f0-9]{64}$/.test(generationId || "")) {
+      throw new Error("A valid Hajim faculty generation is required for asset loading.");
+    }
+    return path + (path.indexOf("?") === -1 ? "?" : "&") + "v=" + generationId;
+  }
+
   function normalize(value) {
     return String(value == null ? "" : value).normalize("NFC").toLocaleLowerCase().replace(/&/g, " and ").replace(/\s+/g, " ").trim();
   }
@@ -19,10 +35,22 @@
       identity.generated_at === (catalog.generated_at || "") && /^[a-f0-9]{64}$/.test(identity.fingerprint || "");
   }
 
-  function validateDirectory(directory, catalog) {
+  function validateIdentity(asset, expectedGenerationId) {
+    var fingerprints = asset && asset.projection_fingerprints;
+    if (!asset || !/^[a-f0-9]{64}$/.test(asset.generation_id || "") ||
+        asset.asset_version !== asset.generation_id ||
+        !fingerprints || !/^[a-f0-9]{64}$/.test(fingerprints.directory || "") ||
+        !/^[a-f0-9]{64}$/.test(fingerprints.graph || "") ||
+        (expectedGenerationId && asset.generation_id !== expectedGenerationId)) {
+      throw new Error("The Hajim faculty asset does not match the page generation.");
+    }
+  }
+
+  function validateDirectory(directory, catalog, expectedGenerationId) {
     if (!directory || directory.schema_family !== SCHEMA_FAMILY || directory.schema_version !== DIRECTORY_SCHEMA) {
       throw new Error("The Hajim faculty directory has an incompatible schema.");
     }
+    validateIdentity(directory, expectedGenerationId);
     var source = directory.faculty_source || {};
     if (!Array.isArray(directory.profiles) || directory.profiles.length !== 156 ||
         source.record_count !== 156 || source.rankable_record_count !== 145 || source.unlisted_interest_count !== 11) {
@@ -34,12 +62,15 @@
     return directory;
   }
 
-  function validateGraph(graph, directory, catalog) {
+  function validateGraph(graph, directory, catalog, expectedGenerationId) {
     if (!graph || graph.schema_family !== SCHEMA_FAMILY || graph.schema_version !== GRAPH_SCHEMA ||
         !Array.isArray(graph.edges) || !graph.by_faculty || !graph.by_opportunity) {
       throw new Error("The Hajim faculty match data has an incompatible schema.");
     }
+    validateIdentity(graph, expectedGenerationId);
     if (!directory || graph.generation_id !== directory.generation_id ||
+        graph.asset_version !== directory.asset_version ||
+        JSON.stringify(graph.projection_fingerprints) !== JSON.stringify(directory.projection_fingerprints) ||
         JSON.stringify(graph.catalog) !== JSON.stringify(directory.catalog) ||
         JSON.stringify(graph.faculty_source) !== JSON.stringify(directory.faculty_source)) {
       throw new Error("The Hajim faculty directory and match data are out of sync.");
@@ -113,11 +144,11 @@
     });
   }
 
-  function loadDirectory(catalog, src) {
+  function loadDirectory(catalog, src, expectedGenerationId) {
     if (!directoryPromise) {
       directoryPromise = Promise.resolve(global.HAJIM_FACULTY_DIRECTORY || null).then(function (value) {
         return value || injectScript(src || "data/hajim_faculty_directory.js", "HAJIM_FACULTY_DIRECTORY");
-      }).then(function (directory) { return validateDirectory(directory, catalog); }).catch(function (error) {
+      }).then(function (directory) { return validateDirectory(directory, catalog, expectedGenerationId); }).catch(function (error) {
         directoryPromise = null;
         throw error;
       });
@@ -125,11 +156,11 @@
     return directoryPromise;
   }
 
-  function loadGraph(directory, catalog, src) {
+  function loadGraph(directory, catalog, src, expectedGenerationId) {
     if (!graphPromise) {
       graphPromise = Promise.resolve(global.FACULTY_MATCHES || null).then(function (value) {
         return value || injectScript(src || "data/faculty_matches.js", "FACULTY_MATCHES");
-      }).then(function (graph) { return validateGraph(graph, directory, catalog); }).catch(function (error) {
+      }).then(function (graph) { return validateGraph(graph, directory, catalog, expectedGenerationId); }).catch(function (error) {
         graphPromise = null;
         throw error;
       });
@@ -161,6 +192,8 @@
   global.HajimFaculty = Object.freeze({
     MAX_RESULTS: MAX_RESULTS,
     normalize: normalize,
+    pageGenerationId: pageGenerationId,
+    versionedAssetUrl: versionedAssetUrl,
     search: search,
     validateDirectory: validateDirectory,
     validateGraph: validateGraph,

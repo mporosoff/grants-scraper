@@ -283,6 +283,8 @@ jobs:
           --faculty-config config/hajim_faculty.json
           --directory-out data/hajim_faculty_directory.js
           --out data/faculty_matches.js
+          --version-target match_explorer.html
+          --version-target team_match.html
       - name: Generate static RSS/Atom feeds from the final catalog
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
@@ -545,6 +547,42 @@ jobs:
             "https://mporosoff.github.io/grants-scraper/${catalog_url#./}" | sha256sum | awk '{print $1}')"
           if [ "$live_catalog_sha" != "$expected_catalog_sha" ]; then
             echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
+            exit 1
+          fi
+          faculty_generation="$(sed -n 's/.*<meta name="hajim-match-generation" content="\([a-f0-9]\{64\}\)".*/\1/p' match_explorer.html)"
+          team_faculty_generation="$(sed -n 's/.*<meta name="hajim-match-generation" content="\([a-f0-9]\{64\}\)".*/\1/p' team_match.html)"
+          if [ -z "$faculty_generation" ] || [ "$team_faculty_generation" != "$faculty_generation" ]; then
+            echo "::error::Published pages do not share one valid Hajim faculty generation marker."
+            exit 1
+          fi
+          expected_directory_sha="$(sha256sum data/hajim_faculty_directory.js | awk '{print $1}')"
+          expected_graph_sha="$(sha256sum data/faculty_matches.js | awk '{print $1}')"
+          faculty_verified=false
+          for attempt in $(seq 1 18); do
+            live_finder="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/match_explorer.html?faculty=${faculty_generation}" \
+              || true)"
+            live_team="$(curl --fail --silent --show-error --max-time 15 \
+              "https://mporosoff.github.io/grants-scraper/team_match.html?faculty=${faculty_generation}" \
+              || true)"
+            live_directory_sha="$(curl --fail --silent --show-error --max-time 30 \
+              "https://mporosoff.github.io/grants-scraper/data/hajim_faculty_directory.js?v=${faculty_generation}" \
+              | sha256sum | awk '{print $1}' || true)"
+            live_graph_sha="$(curl --fail --silent --show-error --max-time 30 \
+              "https://mporosoff.github.io/grants-scraper/data/faculty_matches.js?v=${faculty_generation}" \
+              | sha256sum | awk '{print $1}' || true)"
+            if grep -Fq "<meta name=\"hajim-match-generation\" content=\"${faculty_generation}\"" <<<"$live_finder" \
+              && grep -Fq "<meta name=\"hajim-match-generation\" content=\"${faculty_generation}\"" <<<"$live_team" \
+              && grep -Fq "data/hajim_faculty_directory.js?v=${faculty_generation}" <<<"$live_team" \
+              && [ "$live_directory_sha" = "$expected_directory_sha" ] \
+              && [ "$live_graph_sha" = "$expected_graph_sha" ]; then
+              faculty_verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$faculty_verified" != "true" ]; then
+            echo "::error::GitHub Pages did not serve the coordinated Hajim faculty generation ${faculty_generation}."
             exit 1
           fi
       - name: Run a real provider smoke after Pages propagation

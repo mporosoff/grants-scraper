@@ -1,3 +1,4 @@
+import copy
 import gzip
 import json
 import tempfile
@@ -12,7 +13,9 @@ from scripts.faculty_match import (
     MAX_FACULTY_PER_OPPORTUNITY,
     MAX_OPPORTUNITIES_PER_FACULTY,
     _faculty_idf,
+    _generation_id,
     _load_js_object,
+    _projection_fingerprint,
     generate_assets,
     score_profile_opportunity,
     validate_assets,
@@ -37,11 +40,33 @@ class FacultyMatchTests(unittest.TestCase):
     def test_generated_assets_share_one_current_identity(self):
         validate_assets(self.directory, self.graph)
         self.assertEqual(self.directory["generation_id"], self.graph["generation_id"])
+        self.assertEqual(self.directory["asset_version"], self.directory["generation_id"])
+        self.assertEqual(self.directory["projection_fingerprints"], self.graph["projection_fingerprints"])
         self.assertEqual(self.directory["faculty_source"], self.graph["faculty_source"])
         self.assertEqual(self.directory["catalog"], self.graph["catalog"])
         self.assertEqual(self.directory["faculty_source"]["record_count"], 156)
         self.assertEqual(self.directory["faculty_source"]["rankable_record_count"], 145)
         self.assertEqual(self.directory["faculty_source"]["unlisted_interest_count"], 11)
+
+    def test_identity_changes_with_either_projection_and_rejects_tampering(self):
+        directory_fingerprint = _projection_fingerprint(self.directory)
+        graph_fingerprint = _projection_fingerprint(self.graph)
+        self.assertEqual(directory_fingerprint, self.directory["projection_fingerprints"]["directory"])
+        self.assertEqual(graph_fingerprint, self.directory["projection_fingerprints"]["graph"])
+        changed_graph = copy.deepcopy(self.graph)
+        changed_graph["edges"][0]["score"] += 0.001
+        changed_fingerprints = {
+            "directory": directory_fingerprint,
+            "graph": _projection_fingerprint(changed_graph),
+        }
+        changed_generation = _generation_id(
+            self.directory["faculty_source"]["sha256"],
+            self.directory["catalog"]["fingerprint"],
+            changed_fingerprints,
+        )
+        self.assertNotEqual(changed_generation, self.directory["generation_id"])
+        with self.assertRaisesRegex(ValueError, "fingerprints"):
+            validate_assets(self.directory, changed_graph)
 
     def test_edges_are_normalized_bounded_and_exclude_unrankable_profiles(self):
         edges = self.graph["edges"]
@@ -128,11 +153,42 @@ class FacultyMatchTests(unittest.TestCase):
             self.assertEqual(first_directory.read_bytes(), second_directory.read_bytes())
             self.assertEqual(first_graph.read_bytes(), second_graph.read_bytes())
 
+    def test_generation_updates_page_markers_and_team_directory_version_together(self):
+        old_generation = "0" * 64
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            finder = root / "match_explorer.html"
+            team = root / "team_match.html"
+            finder.write_text(
+                f'<meta name="hajim-match-generation" content="{old_generation}" />\n',
+                encoding="utf-8",
+            )
+            team.write_text(
+                f'<meta name="hajim-match-generation" content="{old_generation}" />\n'
+                f'<script src="data/hajim_faculty_directory.js?v={old_generation}"></script>\n',
+                encoding="utf-8",
+            )
+            directory_out = root / "directory.js"
+            graph_out = root / "graph.js"
+            generated_directory, _ = generate_assets(
+                CONFIG, CATALOG, directory_out, graph_out, (finder, team),
+            )
+            generation = generated_directory["generation_id"]
+            self.assertNotEqual(generation, old_generation)
+            self.assertIn(f'content="{generation}"', finder.read_text(encoding="utf-8"))
+            team_text = team.read_text(encoding="utf-8")
+            self.assertIn(f'content="{generation}"', team_text)
+            self.assertIn(f'data/hajim_faculty_directory.js?v={generation}', team_text)
+
     def test_nightly_refresh_uses_canonical_config_and_atomic_outputs(self):
         workflow = (ROOT / ".github" / "workflows" / "refresh-opportunities.yml").read_text(encoding="utf-8")
         self.assertIn("python -m scripts.faculty_match match", workflow)
         self.assertIn("--faculty-config config/hajim_faculty.json", workflow)
         self.assertIn("--directory-out data/hajim_faculty_directory.js", workflow)
+        self.assertIn("--version-target match_explorer.html", workflow)
+        self.assertIn("--version-target team_match.html", workflow)
+        self.assertIn("data/hajim_faculty_directory.js?v=${faculty_generation}", workflow)
+        self.assertIn("data/faculty_matches.js?v=${faculty_generation}", workflow)
         self.assertNotIn("--profiles faculty_profiles.json", workflow)
         self.assertLess(
             workflow.index("- name: Rotate through official links and record health and redirects"),

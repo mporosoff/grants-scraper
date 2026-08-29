@@ -12,8 +12,10 @@ import gzip
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 import re
+import tempfile
 import unicodedata
 
 from scripts.currentness import record_is_current
@@ -121,16 +123,36 @@ def _catalog_identity(catalog: dict, raw: bytes) -> dict:
     }
 
 
-def _generation_id(source_sha: str, catalog_fingerprint: str) -> str:
-    value = f"{SCHEMA_FAMILY}:{DIRECTORY_SCHEMA_VERSION}:{GRAPH_SCHEMA_VERSION}:{source_sha}:{catalog_fingerprint}"
-    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+_IDENTITY_FIELDS = frozenset({"generation_id", "asset_version", "projection_fingerprints"})
+
+
+def _projection_fingerprint(value: dict) -> str:
+    projection = {key: item for key, item in value.items() if key not in _IDENTITY_FIELDS}
+    raw = json.dumps(
+        projection, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
+    ).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _generation_id(source_sha: str, catalog_fingerprint: str,
+                   projection_fingerprints: dict[str, str]) -> str:
+    identity = {
+        "schema_family": SCHEMA_FAMILY,
+        "directory_schema_version": DIRECTORY_SCHEMA_VERSION,
+        "graph_schema_version": GRAPH_SCHEMA_VERSION,
+        "faculty_source_sha256": source_sha,
+        "catalog_fingerprint": catalog_fingerprint,
+        "projection_fingerprints": projection_fingerprints,
+    }
+    raw = json.dumps(identity, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
 
 
 def _search_document(profile: dict) -> str:
     return " ".join(_tokens(profile.get("research_interests_text"))) if profile.get("rankable") else ""
 
 
-def build_directory(config: dict, catalog_identity: dict, generation_id: str) -> dict:
+def build_directory(config: dict, catalog_identity: dict) -> dict:
     profiles = [{
         "faculty_id": profile["faculty_id"],
         "name": profile["name"],
@@ -145,7 +167,6 @@ def build_directory(config: dict, catalog_identity: dict, generation_id: str) ->
     return {
         "schema_family": SCHEMA_FAMILY,
         "schema_version": DIRECTORY_SCHEMA_VERSION,
-        "generation_id": generation_id,
         "catalog": catalog_identity,
         "faculty_source": dict(config["source"]),
         "profiles": profiles,
@@ -283,7 +304,7 @@ def _current_records(catalog: dict) -> list[dict]:
     ))
 
 
-def build_graph(config: dict, catalog: dict, catalog_identity: dict, generation_id: str) -> dict:
+def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
     profiles = config["profiles"]
     idf = _faculty_idf(profiles)
     candidates_by_opportunity: dict[str, list[dict]] = defaultdict(list)
@@ -328,7 +349,6 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict, generation_
     return {
         "schema_family": SCHEMA_FAMILY,
         "schema_version": GRAPH_SCHEMA_VERSION,
-        "generation_id": generation_id,
         "catalog": catalog_identity,
         "faculty_source": dict(config["source"]),
         "contacts": contacts,
@@ -344,9 +364,30 @@ def validate_assets(directory: dict, graph: dict, *, enforce_budgets: bool = Fal
         raise FacultyMatchError("Generated assets have an incompatible schema family")
     if directory.get("schema_version") != DIRECTORY_SCHEMA_VERSION or graph.get("schema_version") != GRAPH_SCHEMA_VERSION:
         raise FacultyMatchError("Generated assets have incompatible schema versions")
-    for field in ("generation_id", "catalog", "faculty_source"):
+    for field in ("generation_id", "asset_version", "projection_fingerprints", "catalog", "faculty_source"):
         if directory.get(field) != graph.get(field):
             raise FacultyMatchError(f"Generated assets disagree on {field}")
+    generation_id = directory.get("generation_id")
+    if not re.fullmatch(r"[a-f0-9]{64}", str(generation_id or "")):
+        raise FacultyMatchError("Generated assets have an invalid generation identity")
+    if directory.get("asset_version") != generation_id:
+        raise FacultyMatchError("Generated asset_version must equal the immutable generation identity")
+    fingerprints = directory.get("projection_fingerprints")
+    if not isinstance(fingerprints, dict) or set(fingerprints) != {"directory", "graph"}:
+        raise FacultyMatchError("Generated assets require both projection fingerprints")
+    expected_fingerprints = {
+        "directory": _projection_fingerprint(directory),
+        "graph": _projection_fingerprint(graph),
+    }
+    if fingerprints != expected_fingerprints:
+        raise FacultyMatchError("Generated projection fingerprints do not match the asset contents")
+    expected_generation_id = _generation_id(
+        directory["faculty_source"]["sha256"],
+        directory["catalog"]["fingerprint"],
+        expected_fingerprints,
+    )
+    if generation_id != expected_generation_id:
+        raise FacultyMatchError("Generated identity does not match the directory and graph fingerprints")
     source = directory["faculty_source"]
     if len(directory.get("profiles") or []) != source.get("record_count"):
         raise FacultyMatchError("Directory profile count disagrees with faculty source")
@@ -392,20 +433,92 @@ def _js_bytes(global_name: str, value: dict) -> bytes:
     return f"{header}globalThis.{global_name}={body};\n".encode("utf-8")
 
 
+_GENERATION_META_RE = re.compile(
+    rb'<meta name="hajim-match-generation" content="[a-f0-9]{64}"\s*/?>',
+)
+_TEAM_DIRECTORY_SCRIPT_RE = re.compile(
+    rb'<script src="data/hajim_faculty_directory\.js\?v=[^"]+"></script>',
+)
+
+
+def _versioned_html_bytes(path: str | Path, generation_id: str) -> bytes:
+    raw = Path(path).read_bytes()
+    meta = f'<meta name="hajim-match-generation" content="{generation_id}" />'.encode("ascii")
+    updated, meta_count = _GENERATION_META_RE.subn(meta, raw)
+    if meta_count != 1:
+        raise FacultyMatchError(f"{path} must contain exactly one Hajim generation meta marker")
+    if Path(path).name == "team_match.html":
+        script = (
+            '<script src="data/hajim_faculty_directory.js?v='
+            f'{generation_id}"></script>'
+        ).encode("ascii")
+        updated, script_count = _TEAM_DIRECTORY_SCRIPT_RE.subn(script, updated)
+        if script_count != 1:
+            raise FacultyMatchError(f"{path} must contain exactly one Hajim directory script reference")
+    return updated
+
+
+def _atomic_write(path: str | Path, content: bytes) -> None:
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{target.name}.", dir=target.parent)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_name, target)
+    except BaseException:
+        try:
+            os.unlink(temporary_name)
+        except FileNotFoundError:
+            pass
+        raise
+
+
 def generate_assets(faculty_config_path: str | Path, catalog_path: str | Path,
-                    directory_out: str | Path, graph_out: str | Path) -> tuple[dict, dict]:
+                    directory_out: str | Path, graph_out: str | Path,
+                    version_targets: tuple[str | Path, ...] = ()) -> tuple[dict, dict]:
     config, _ = load_faculty_config(faculty_config_path)
     catalog, catalog_bytes = load_catalog(catalog_path)
     catalog_identity = _catalog_identity(catalog, catalog_bytes)
-    generation_id = _generation_id(config["source"]["sha256"], catalog_identity["fingerprint"])
-    directory = build_directory(config, catalog_identity, generation_id)
-    graph = build_graph(config, catalog, catalog_identity, generation_id)
+    directory = build_directory(config, catalog_identity)
+    graph = build_graph(config, catalog, catalog_identity)
+    projection_fingerprints = {
+        "directory": _projection_fingerprint(directory),
+        "graph": _projection_fingerprint(graph),
+    }
+    generation_id = _generation_id(
+        config["source"]["sha256"], catalog_identity["fingerprint"], projection_fingerprints,
+    )
+    identity = {
+        "generation_id": generation_id,
+        "asset_version": generation_id,
+        "projection_fingerprints": projection_fingerprints,
+    }
+    directory = {
+        "schema_family": directory.pop("schema_family"),
+        "schema_version": directory.pop("schema_version"),
+        **identity,
+        **directory,
+    }
+    graph = {
+        "schema_family": graph.pop("schema_family"),
+        "schema_version": graph.pop("schema_version"),
+        **identity,
+        **graph,
+    }
     directory_bytes = _js_bytes("HAJIM_FACULTY_DIRECTORY", directory)
     graph_bytes = _js_bytes("FACULTY_MATCHES", graph)
     validate_assets(directory, graph, enforce_budgets=True,
                     directory_bytes=directory_bytes, graph_bytes=graph_bytes)
-    Path(directory_out).write_bytes(directory_bytes)
-    Path(graph_out).write_bytes(graph_bytes)
+    versioned_targets = {
+        Path(path): _versioned_html_bytes(path, generation_id) for path in version_targets
+    }
+    _atomic_write(directory_out, directory_bytes)
+    _atomic_write(graph_out, graph_bytes)
+    for path, content in versioned_targets.items():
+        _atomic_write(path, content)
     return directory, graph
 
 
@@ -417,8 +530,12 @@ def main(argv: list[str] | None = None) -> int:
     match.add_argument("--faculty-config", default="config/hajim_faculty.json")
     match.add_argument("--directory-out", default="data/hajim_faculty_directory.js")
     match.add_argument("--out", default="data/faculty_matches.js")
+    match.add_argument("--version-target", action="append", default=[])
     args = parser.parse_args(argv)
-    directory, graph = generate_assets(args.faculty_config, args.catalog, args.directory_out, args.out)
+    directory, graph = generate_assets(
+        args.faculty_config, args.catalog, args.directory_out, args.out,
+        tuple(args.version_target),
+    )
     directory_bytes = Path(args.directory_out).read_bytes()
     graph_bytes = Path(args.out).read_bytes()
     print(f"Wrote {args.directory_out}: {len(directory['profiles'])} faculty, "
