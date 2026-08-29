@@ -159,10 +159,11 @@ function childTopicCatalog(query, children, excluded = []) {
 function childTopicFixtures(apis, profiles) {
   const parent = {
     opportunity_id: "parent",
-    title: "Umbrella research program",
+    title: "Broad Agency Announcement umbrella research program",
     description: "Broad research areas without the specific child terminology.",
     status: "posted",
-    close_date: "2027-01-15",
+    posted_date: "2026-08-20",
+    close_date: "2026-09-10",
   };
   const eligible = {
     subtopic_id: "parent:eligible",
@@ -202,12 +203,17 @@ function childTopicFixtures(apis, profiles) {
 }
 
 function rollupChildOnly(apis, parent, childResults) {
+  const now = new Date("2026-08-29T12:00:00Z");
+  const parentEngine = apis.matcher.create(
+    { opportunities: [parent] }, apis.matchConfig, apis.query, { now },
+  );
   return apis.matcher.rollupTeamMatches({
     parentResults: [],
     childResults,
     parentRecord: id => id === parent.opportunity_id ? parent : null,
     retrievalApi: apis.retrieval,
-    now: new Date("2026-08-29T12:00:00Z"),
+    now,
+    parentMetadata: id => parentEngine.recordMetadata(id),
   });
 }
 
@@ -233,6 +239,11 @@ test("all-Hajim teams retain publication-eligible child-only parent matches", ()
   assert.ok(rows[0].fits.every(fit => fit.evidenceSource === "child_topic"));
   assert.equal(rows[0].topicMatches.some(row => row.id === "parent:unrelated"), false);
   assert.equal(rows[0].topicMatches.some(row => row.id === "parent:excluded"), false);
+  assert.equal(rows[0].new, true);
+  assert.equal(rows[0].closingSoon, true);
+  assert.equal(rows[0].broad, true);
+  assert.equal(rows[0].recencyBoost, 1.65);
+  assert.equal(rows[0].rankScore, rows[0].relevanceScore * 1.65);
 });
 
 test("mixed Hajim and custom teams retain child evidence and every-researcher gating", () => {
@@ -324,6 +335,8 @@ test("graph membership cannot override the shared runtime catalog state", () => 
   assert.match(teamPage, /RETRIEVAL_API\.recordIsCurrent\(record, TEAM_RUNTIME_NOW\)/);
   assert.match(teamPage, /MATCHER_API\.rollupTeamMatches/);
   assert.match(teamPage, /CHILD_MATCH_ENGINE\.matchTeam\(profiles, profileActiveLabels\)/);
+  assert.match(teamPage, /MATCH_ENGINE\.recordMetadata\(id\)/);
+  assert.match(teamPage, /MATCH_ENGINE\.recordMetadata\(opportunityId\)/);
 });
 
 function memoryStorage() {

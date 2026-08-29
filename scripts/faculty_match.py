@@ -37,9 +37,8 @@ DIRECTORY_RAW_BUDGET = 350_000
 DIRECTORY_GZIP_BUDGET = 90_000
 GRAPH_RAW_BUDGET = 2_500_000
 GRAPH_GZIP_BUDGET = 500_000
-LONG_PHRASE_MIN_CONCEPTS = 4
-LONG_PHRASE_WINDOW_FACTOR = 3
-LONG_PHRASE_MIN_WINDOW = 12
+MULTI_CONCEPT_WINDOW_FACTOR = 3
+MULTI_CONCEPT_MIN_WINDOW = 12
 PRIMARY_REVERSE_RELATIONSHIPS = frozenset({"hajim_primary_core", "hajim_research"})
 
 _WORD_RE = re.compile(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", re.I)
@@ -485,8 +484,8 @@ def _minimum_covering_window(field_tokens: list[str], concepts: list[str]) -> tu
     return best
 
 
-def _long_phrase_window_limit(concept_count: int) -> int:
-    return max(LONG_PHRASE_MIN_WINDOW, LONG_PHRASE_WINDOW_FACTOR * concept_count)
+def _multi_concept_window_limit(concept_count: int) -> int:
+    return max(MULTI_CONCEPT_MIN_WINDOW, MULTI_CONCEPT_WINDOW_FACTOR * concept_count)
 
 
 def _phrase_admitted(phrase: str, field_tokens: list[str], idf: dict[str, float],
@@ -506,13 +505,11 @@ def _phrase_admitted(phrase: str, field_tokens: list[str], idf: dict[str, float]
         admitted = len(covered) == 1 and (
             token in _UNAMBIGUOUS_SINGLE_TOKEN_STEMS or contextual
         )
-    elif len(concepts) < LONG_PHRASE_MIN_CONCEPTS:
-        admitted = len(covered) == len(concepts)
     else:
         window = _minimum_covering_window(field_tokens, concepts)
         admitted = bool(
             window
-            and window[1] - window[0] + 1 <= _long_phrase_window_limit(len(concepts))
+            and window[1] - window[0] + 1 <= _multi_concept_window_limit(len(concepts))
         )
     return admitted, sum(idf.get(token, 1.0) for token in covered)
 
@@ -533,7 +530,7 @@ def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
         if token in concept_set
     ]
     window = _minimum_covering_window(normalized_tokens, list(concept_set))
-    if window and window[1] - window[0] + 1 <= _long_phrase_window_limit(len(concept_set)):
+    if window and window[1] - window[0] + 1 <= _multi_concept_window_limit(len(concept_set)):
         center = word_matches[window[0]].start()
     else:
         center = min(positions) if positions else 0
@@ -724,9 +721,9 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
             "admission_fields": ["title", "description", "published_subject"],
             "corroborating_only_fields": ["disciplines", "topic_areas", "derived_themes"],
             "single_term_policy": "curated_unambiguous_or_two_profile_context_terms",
-            "long_phrase_policy": "all_distinctive_concepts_within_bounded_token_window",
-            "long_phrase_window_factor": LONG_PHRASE_WINDOW_FACTOR,
-            "long_phrase_min_window": LONG_PHRASE_MIN_WINDOW,
+            "multi_concept_phrase_policy": "all_distinctive_concepts_within_bounded_token_window",
+            "multi_concept_window_factor": MULTI_CONCEPT_WINDOW_FACTOR,
+            "multi_concept_min_window": MULTI_CONCEPT_MIN_WINDOW,
         },
         "generation_metrics": {
             "edge_count": len(edges),

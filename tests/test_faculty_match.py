@@ -11,8 +11,8 @@ from scripts.faculty_match import (
     DIRECTORY_RAW_BUDGET,
     GRAPH_GZIP_BUDGET,
     GRAPH_RAW_BUDGET,
-    LONG_PHRASE_MIN_WINDOW,
-    LONG_PHRASE_WINDOW_FACTOR,
+    MULTI_CONCEPT_MIN_WINDOW,
+    MULTI_CONCEPT_WINDOW_FACTOR,
     MAX_FACULTY_PER_OPPORTUNITY,
     MAX_OPPORTUNITIES_PER_FACULTY,
     _faculty_idf,
@@ -21,9 +21,9 @@ from scripts.faculty_match import (
     _generation_id,
     _load_js_object,
     _projection_fingerprint,
+    build_graph,
     generate_assets,
     load_curated_cheme_config,
-    load_catalog,
     load_faculty_config,
     merge_faculty_sources,
     score_profile_opportunity,
@@ -48,7 +48,6 @@ class FacultyMatchTests(unittest.TestCase):
         cls.workbook = workbook
         cls.curated = curated
         cls.config = merge_faculty_sources(workbook, workbook_raw, curated, curated_raw)
-        cls.catalog, _ = load_catalog(CATALOG)
         cls.directory, _ = _load_js_object(DIRECTORY, "HAJIM_FACULTY_DIRECTORY")
         cls.graph, _ = _load_js_object(GRAPH, "FACULTY_MATCHES")
 
@@ -137,8 +136,35 @@ class FacultyMatchTests(unittest.TestCase):
     def test_primary_reverse_scope_is_ranked_before_its_own_display_bound(self):
         profiles = self.config["profiles"]
         profiles_by_id = {profile["faculty_id"]: profile for profile in profiles}
-        record = next(record for record in self.catalog["opportunities"]
-                      if str(record.get("opportunity_id")) == "356055")
+        eligible_phrases = lambda profile: [
+            phrase for phrase in profile["research_phrases"]
+            if len(_distinctive_tokens(phrase)) >= 2
+        ]
+        primary_profiles = [
+            profile for profile in profiles
+            if profile["rankable"]
+            and profile["relationship"] in {"hajim_primary_core", "hajim_research"}
+            and eligible_phrases(profile)
+        ][:13]
+        broader_profiles = [
+            profile for profile in profiles
+            if profile["rankable"]
+            and profile["relationship"] not in {"hajim_primary_core", "hajim_research"}
+            and len(eligible_phrases(profile)) >= 2
+        ][:6]
+        record = {
+            "opportunity_id": "scope-fixture",
+            "status": "posted",
+            "close_date": "2099-01-01",
+            "title": "Specific engineering research opportunity",
+            "description": ". ".join([
+                eligible_phrases(profile)[0] for profile in primary_profiles
+            ] + [
+                phrase
+                for profile in broader_profiles
+                for phrase in eligible_phrases(profile)[:4]
+            ]),
+        }
         idf = _faculty_idf(profiles)
         candidates = [
             edge for profile in profiles
@@ -153,22 +179,27 @@ class FacultyMatchTests(unittest.TestCase):
             if profiles_by_id[edge["faculty_id"]]["relationship"]
             in {"hajim_primary_core", "hajim_research"}
         ]
-        self.assertEqual(len(primary_ranked), 13)
+        self.assertGreater(len(primary_ranked), MAX_FACULTY_PER_OPPORTUNITY)
         expected_primary = [
             edge["faculty_id"]
             for edge in primary_ranked[:MAX_FACULTY_PER_OPPORTUNITY]
         ]
+        synthetic_graph = build_graph(
+            self.config,
+            {"opportunities": [record]},
+            {"sha256": "scope-fixture", "asset_version": "scope-fixture"},
+        )
         actual_all = [
-            self.graph["edges"][index]["faculty_id"]
-            for index in self.graph["by_opportunity"]["356055"]
+            synthetic_graph["edges"][index]["faculty_id"]
+            for index in synthetic_graph["by_opportunity"]["scope-fixture"]
         ]
         actual_primary = [
-            self.graph["edges"][index]["faculty_id"]
-            for index in self.graph["by_opportunity_primary"]["356055"]
+            synthetic_graph["edges"][index]["faculty_id"]
+            for index in synthetic_graph["by_opportunity_primary"]["scope-fixture"]
         ]
         self.assertEqual(actual_all, expected_all)
         self.assertEqual(actual_primary, expected_primary)
-        self.assertEqual(len(set(actual_primary) - set(actual_all)), 4)
+        self.assertGreater(len(set(actual_primary) - set(actual_all)), 0)
 
     def test_directory_search_documents_preserve_official_phrase_boundaries(self):
         canonical = {profile["faculty_id"]: profile for profile in self.config["profiles"]}
@@ -330,7 +361,7 @@ class FacultyMatchTests(unittest.TestCase):
             "opportunity_id": "scattered-quantum",
             "description": (
                 "Experimental work begins here. "
-                + "background " * (LONG_PHRASE_MIN_WINDOW + 2)
+                + "background " * (MULTI_CONCEPT_MIN_WINDOW + 2)
                 + "Quantum methods produce information for processing."
             ),
         }
@@ -344,8 +375,51 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertIsNotNone(edge)
         self.assertEqual(edge["matched_profile_phrases"], ["Experimental quantum information processing"])
         self.assertIn("experimental quantum information processing", edge["opportunity_evidence"][0]["excerpt"].casefold())
-        self.assertEqual(LONG_PHRASE_WINDOW_FACTOR, 3)
-        self.assertEqual(LONG_PHRASE_MIN_WINDOW, 12)
+        self.assertEqual(MULTI_CONCEPT_WINDOW_FACTOR, 3)
+        self.assertEqual(MULTI_CONCEPT_MIN_WINDOW, 12)
+
+    def test_short_multiconcept_phrases_require_one_bounded_window(self):
+        profile = {
+            "faculty_id": "short-phrase-fixture",
+            "rankable": True,
+            "research_interests_text": "natural language processing; information theory",
+            "research_phrases": ["natural language processing", "information theory"],
+            "derived_themes": [],
+        }
+        idf = {token: 3.0 for token in _distinctive_tokens(profile["research_interests_text"])}
+        scattered = {
+            "opportunity_id": "scattered-short-phrases",
+            "description": (
+                "Natural systems support chemical processes. "
+                + "background " * (MULTI_CONCEPT_MIN_WINDOW + 2)
+                + "Language requirements are administrative. "
+                + "background " * (MULTI_CONCEPT_MIN_WINDOW + 2)
+                + "Information is supplied. "
+                + "background " * (MULTI_CONCEPT_MIN_WINDOW + 2)
+                + "The program includes a theory section."
+            ),
+        }
+        local = {
+            "opportunity_id": "local-short-phrases",
+            "description": "Natural language processing and information theory research are supported.",
+        }
+        self.assertIsNone(score_profile_opportunity(profile, scattered, idf))
+        edge = score_profile_opportunity(profile, local, idf)
+        self.assertIsNotNone(edge)
+        self.assertEqual(
+            edge["matched_profile_phrases"],
+            ["natural language processing", "information theory"],
+        )
+
+    def test_reported_scattered_nlp_false_positive_is_absent_from_generated_graph(self):
+        self.assertFalse(any(
+            edge["faculty_id"] == "hangfeng-he"
+            and edge["opportunity_id"] == "356536"
+            and "natural language processing" in [
+                phrase.casefold() for phrase in edge["matched_profile_phrases"]
+            ]
+            for edge in self.graph["edges"]
+        ))
 
     def test_reported_quantum_false_positive_is_absent_from_generated_graph(self):
         self.assertFalse(any(
@@ -355,7 +429,7 @@ class FacultyMatchTests(unittest.TestCase):
             for edge in self.graph["edges"]
         ))
         self.assertEqual(
-            self.graph["matching_policy"]["long_phrase_policy"],
+            self.graph["matching_policy"]["multi_concept_phrase_policy"],
             "all_distinctive_concepts_within_bounded_token_window",
         )
 
@@ -371,14 +445,11 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertIn("mathematical theories", excerpt)
         self.assertNotIn("unrelated opening", excerpt)
 
-        graph_edge = next(
-            edge for edge in self.graph["edges"]
-            if edge["opportunity_id"] == "341997"
+        self.assertFalse(any(
+            edge["opportunity_id"] == "341997"
             and "Information theory" in edge["matched_profile_phrases"]
-        )
-        evidence = next(item for item in graph_edge["opportunity_evidence"] if item["field"] == "description")
-        self.assertIn("theories", evidence["excerpt"].casefold())
-        self.assertNotIn("supports research in all areas", evidence["excerpt"].casefold())
+            for edge in self.graph["edges"]
+        ))
 
     def test_human_reviewed_multidisciplinary_quality_fixture(self):
         fixture = json.loads(QUALITY.read_text(encoding="utf-8"))

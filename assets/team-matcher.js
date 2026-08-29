@@ -98,6 +98,7 @@
     retrievalApi = globalThis.FUNDING_RETRIEVAL,
     now = new Date(),
     childEnabled = true,
+    parentMetadata = () => null,
   } = {}) {
     if (!retrievalApi?.recordIsCurrent) {
       throw new Error("Team rollup requires the shared funding currentness contract.");
@@ -122,6 +123,9 @@
       const bestTopic = row.bestChild?.row || null;
       const evidence = row.childNormalized > row.parentNormalized ? bestTopic : direct;
       const evidenceSource = evidence === bestTopic ? "child_topic" : "";
+      const metadata = (typeof parentMetadata === "function" && parentMetadata(row.id))
+        || direct
+        || {};
       return {
         id: row.id,
         title: record.title,
@@ -130,11 +134,12 @@
         deadline: record.close_date ? `Closes ${record.close_date}` : "",
         postedDate: record.posted_date || record.source_first_seen_date || "",
         updatedDate: record.last_updated || "",
-        new: Boolean(direct?.new),
-        broad: Boolean(direct?.broad),
-        closingSoon: Boolean(direct?.closingSoon),
+        new: Boolean(metadata.new),
+        broad: Boolean(metadata.broad),
+        closingSoon: Boolean(metadata.closingSoon),
         relevanceScore: row.relevance,
-        rankScore: row.relevance * Number(direct?.recencyBoost || 1),
+        recencyBoost: Number(metadata.recencyBoost || 1),
+        rankScore: row.relevance * Number(metadata.recencyBoost || 1),
         fits: (evidence?.fits || []).map(fit => ({
           ...fit,
           evidenceSource: fit.evidenceSource || evidenceSource,
@@ -649,22 +654,37 @@
       return 1;
     }
 
+    function recordMetadata(identifier) {
+      const prepared = typeof identifier === "object"
+        ? identifier
+        : recordsById.get(String(identifier));
+      if (!prepared) return null;
+      return {
+        closeIn: prepared.closeIn,
+        closingSoon: prepared.closeIn !== null && prepared.closeIn >= 0 && prepared.closeIn <= 21,
+        new: prepared.freshAge !== null && prepared.freshAge <= 14,
+        broad: prepared.isBroad,
+        recencyBoost: recencyBoost(prepared),
+      };
+    }
+
     function resultRecord(prepared, fits, relevanceScore, themeHits) {
+      const metadata = recordMetadata(prepared);
       return {
         id: prepared.id,
         title: prepared.record.title || "Untitled opportunity",
         agency: prepared.record.agency || "",
         url: bestUrl(prepared.record),
         deadline: deadlineText(prepared.record),
-        closeIn: prepared.closeIn,
-        closingSoon: prepared.closeIn !== null && prepared.closeIn >= 0 && prepared.closeIn <= 21,
+        closeIn: metadata.closeIn,
+        closingSoon: metadata.closingSoon,
         postedDate: cleanDate(prepared.record.posted_date || prepared.record.source_first_seen_date),
         updatedDate: cleanDate(prepared.record.last_updated),
-        new: prepared.freshAge !== null && prepared.freshAge <= 14,
-        broad: prepared.isBroad,
+        new: metadata.new,
+        broad: metadata.broad,
         relevanceScore,
-        recencyBoost: recencyBoost(prepared),
-        rankScore: relevanceScore * recencyBoost(prepared),
+        recencyBoost: metadata.recencyBoost,
+        rankScore: relevanceScore * metadata.recencyBoost,
         fits,
         themeHits,
         record: prepared.record,
@@ -731,6 +751,7 @@
       buildThemes,
       themeHitsForRecord,
       narrowRecordIdsByThemes,
+      recordMetadata,
       scoreProfile,
       matchTeam,
       matchDepartment,

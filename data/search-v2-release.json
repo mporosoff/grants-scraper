@@ -19,7 +19,7 @@
     "assets/site-help.js": "site-help-a59ca23870aa1cc4",
     "assets/team-researchers.js": "team-researchers-47aa9aa8b5c9b934",
     "assets/team-match-config.js": "team-match-config-ac592b58a1d3d2df",
-    "assets/team-matcher.js": "team-matcher-a5e8004fc28c1a58"
+    "assets/team-matcher.js": "team-matcher-0076159a0c8b9c3b"
   },
   "source_hashes": {
     "data/opportunities.js": "224e8474077c26f6e0463daf2e48009ea042210c04b9df89ba944ee42529b72f",
@@ -43,14 +43,14 @@
     "assets/site-help.js": "a59ca23870aa1cc4e7cb8b84ff16d48cb17facfab19ab3bf73c1acb1fe2b9397",
     "assets/team-researchers.js": "47aa9aa8b5c9b934282f8a1658488050e4af9a07dab969437b7fe8f3c4b4b55d",
     "assets/team-match-config.js": "ac592b58a1d3d2dfb73a31ecde45c2c463f4fcdb574981913f33d0d8f491dfe5",
-    "assets/team-matcher.js": "a5e8004fc28c1a58d254518df985773e1e61799bd015045ec47f4e7244fadd66",
+    "assets/team-matcher.js": "0076159a0c8b9c3b243eefd22797a9db2d30d9574973562280b794bc4bd79701",
     "config/hajim_faculty.json": "f920c2aa17b16835255e472fbdf4a5e10738130b7596740679be66a566d6eb9c",
     "config/cheme_team_match_profiles.json": "df2295d79cb93f61b2990721afba0e8c9db307d78a08e3d76ded44bd4b6e5cdd",
-    "data/hajim_faculty_directory.js": "17510e628095d322f7755d47cbf103a1df0ae5d1f87b1c72d234113ba8b9dbf4",
-    "data/faculty_matches.js": "4d63247929d2b00d67639d9dbcbfb96b4bceb38639678c94c049ebbc7bcfba8b",
+    "data/hajim_faculty_directory.js": "1f20a9db26f4d1d5a7e0101d184ba38ddd5859e49ca8550b55de9c4956286ed4",
+    "data/faculty_matches.js": "5d177347f0619530f2c15805e92ef8c4fe21495b790a6f335ad4cb3b9f045035",
     "funded_awards.html": "7de55d608f241f1f12dbd28a0c33add3d1db247e0c791c1670d72ea76a0e323a",
-    "match_explorer.html": "d340883d880a340271f19160ee6d08ceca8bfb3f0963b609466405ef9479ec64",
-    "team_match.html": "3dbe02541e77876bed98bb0262fe09a72b699b7b93388947fffdfe76001be3c8",
+    "match_explorer.html": "4cd64b6ac4242091b60de99e52f326bebd06299cf30a0fd5ff9bbfb1380a3fa6",
+    "team_match.html": "21dc69006faad94605831af7edbe3431b4811fbe7d0debeecf3ff92e8e4d98fe",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },

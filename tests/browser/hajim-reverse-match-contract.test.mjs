@@ -67,13 +67,19 @@ test("uses one content-derived generation in page markers, URLs, runtime validat
 
 test("applies independent bounded indexes for the full and 126-person scopes", () => {
   const api = loadApi();
-  const all = api.opportunityMatches(graph, directory, "356055", false);
-  const primary = api.opportunityMatches(graph, directory, "356055", true);
-  assert.equal(all.length, 12);
-  assert.equal(primary.length, 12);
+  const opportunityId = "356055";
+  const all = api.opportunityMatches(graph, directory, opportunityId, false);
+  const primary = api.opportunityMatches(graph, directory, opportunityId, true);
+  assert.equal(all.length, graph.by_opportunity[opportunityId].length);
+  assert.equal(primary.length, graph.by_opportunity_primary[opportunityId].length);
+  assert.ok(all.length <= 12);
+  assert.ok(primary.length <= 12);
   assert.ok(primary.every(item => ["hajim_primary_core", "hajim_research"].includes(item.profile.relationship)));
   assert.equal(new Set(all.map(item => `${item.edge.faculty_id}:${item.edge.opportunity_id}`)).size, all.length);
-  assert.equal(primary.filter(item => !all.some(other => other.edge.faculty_id === item.edge.faculty_id)).length, 4);
+  assert.deepEqual(
+    primary.map(item => item.edge.faculty_id),
+    graph.by_opportunity_primary[opportunityId].map(index => graph.edges[index].faculty_id),
+  );
   assert.ok(Object.values(graph.by_opportunity_primary).every(indexes => indexes.length <= 12));
 });
 
