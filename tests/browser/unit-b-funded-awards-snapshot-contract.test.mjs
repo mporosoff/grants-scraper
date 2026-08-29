@@ -259,7 +259,7 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(worker, /failure_policy: "successful-sources-retained-retry-creates-successor"/);
   assert.match(worker, /maximum_snapshot_create_subrequests: 50/);
   assert.match(config, /snapshotBatchUrl/);
-  assert.match(config, /"cpu_ms": 1000/);
+  assert.match(config, /"cpu_ms": 250/);
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {

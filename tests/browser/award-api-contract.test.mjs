@@ -439,7 +439,7 @@ test("Worker validates bounded public requests and exposes no credential require
       failure_policy: "successful-sources-retained-retry-creates-successor",
       resource_budget: {
         target_plan: "workers-paid",
-        configured_cpu_ms: 1_000,
+        configured_cpu_ms: 250,
         memory_mb: 128,
         platform_subrequests_per_request: 10_000,
         maximum_snapshot_create_subrequests: 50,

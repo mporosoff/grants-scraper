@@ -24,7 +24,7 @@ const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_HEALTH_TIMEOUT_MS = 2_000;
 const WORKER_RESOURCE_BUDGET = Object.freeze({
   target_plan: "workers-paid",
-  configured_cpu_ms: 1_000,
+  configured_cpu_ms: 250,
   memory_mb: 128,
   platform_subrequests_per_request: 10_000,
   maximum_snapshot_create_subrequests: 50,
