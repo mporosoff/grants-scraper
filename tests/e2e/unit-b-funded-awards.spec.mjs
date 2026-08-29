@@ -274,6 +274,33 @@ test("an expired snapshot is rebuilt before source hydration resumes at the requ
   expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
 });
 
+test("a fallback source-batch controller and ownership guard prevent late hydration after Back", async ({ page }) => {
+  await page.addInitScript(() => {
+    let configured;
+    Object.defineProperty(globalThis, "FUNDING_AWARD_API_CONFIG", {
+      configurable: true,
+      get: () => configured,
+      set: value => { configured = Object.freeze({ ...value, timeoutMs: 80 }); },
+    });
+  });
+  const { calls, runtimeErrors } = await openSearch(page, {
+    resultCountPerSource: 51,
+    snapshotBatchDelaysMs: [120, 60],
+  });
+  await searchTopic(page, "batch-back-ownership");
+  await page.locator('[data-ii-load-source="NSF"]').click();
+  await expect(page.locator("#ii-status")).toContainText("NSF card hydration failed");
+  await page.locator('[data-ii-load-source="NSF"]').click();
+  await page.goBack();
+  await expect(page).not.toHaveURL(/ii_snapshot=/);
+  await expect(page.locator("#ii-output")).toBeHidden();
+  await expect(page.locator("#ii-status")).toContainText("Structured award search and institution resolution do not require an AI key");
+  await page.waitForTimeout(180);
+  await expect(page.locator("#ii-status")).toContainText("Structured award search and institution resolution do not require an AI key");
+  expect(calls.filter(call => call.source === "NSF" && Number.isInteger(call.offset))).toHaveLength(2);
+  expect(runtimeErrors).toEqual([]);
+});
+
 test("history restoration cannot mix a newer snapshot question into an older snapshot", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 2 });
   await page.locator("#ii-institution").fill("University of Rochester");

@@ -285,6 +285,9 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
   assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
 
+  const postJsonSource = appSource.slice(appSource.indexOf("async function postJson("), appSource.indexOf("function absorbAwards("));
+  assert.match(postJsonSource, /activeController\.signal\.aborted[\s\S]*activeController = new AbortController\(\)[\s\S]*controller === state\.controller[\s\S]*state\.controller = activeController/);
+
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
   const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
   const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
@@ -300,7 +303,8 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.ok(commitSource.indexOf("syncUrl(") > commitSource.indexOf("renderPage("));
 
   const hydrationSource = appSource.slice(appSource.indexOf("async function loadSourceBatch("), appSource.indexOf("async function retrySource("));
-  assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset\)/);
+  assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset, snapshotId\)/);
+  assert.match(hydrationSource, /const batchIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === snapshotId[\s\S]*if \(!batchIsCurrent\(\)\) return;[\s\S]*applySourceBatch\(source, batch\)/);
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);

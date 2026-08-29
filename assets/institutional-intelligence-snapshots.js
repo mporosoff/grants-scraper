@@ -316,7 +316,11 @@
   }
 
   async function postJson(url, body, controller = state.controller) {
-    const activeController = controller?.signal?.aborted ? new AbortController() : controller || new AbortController();
+    let activeController = controller;
+    if (!activeController || activeController.signal.aborted) {
+      activeController = new AbortController();
+      if (!controller || controller === state.controller) state.controller = activeController;
+    }
     const timer = setTimeout(() => activeController.abort(), api.timeoutMs);
     try {
       const response = await fetch(url, {
@@ -738,21 +742,34 @@
   async function loadSourceBatch(source) {
     const requestedOffset = state.sourceOffsets.get(source) || 0;
     const requestedView = { page: state.page, pageSize: state.pageSize, facet: { ...state.facet } };
+    let snapshotId = state.snapshot?.snapshot_id;
+    let sequence = state.sequence;
+    let pageRequestSequence = ++state.pageRequestSequence;
+    const batchIsCurrent = () => sequence === state.sequence
+      && pageRequestSequence === state.pageRequestSequence
+      && state.snapshot?.snapshot_id === snapshotId;
     setBusy(true);
     try {
       let rebuilt = false;
       let message;
       try {
-        message = applySourceBatch(source, await requestSourceBatch(source, requestedOffset));
+        const batch = await requestSourceBatch(source, requestedOffset, snapshotId);
+        if (!batchIsCurrent()) return;
+        message = applySourceBatch(source, batch);
       } catch (error) {
         if (error?.code !== "snapshot_expired") throw error;
+        if (!batchIsCurrent()) return;
         rebuilt = true;
         setStatus("The result snapshot expired. Rebuilding the submitted search before restoring source hydration…");
         const restored = await rebuildSubmittedSnapshotView({ ...requestedView, historyMode: "replace" });
         if (!restored) return;
+        snapshotId = state.snapshot?.snapshot_id;
+        sequence = state.sequence;
+        pageRequestSequence = ++state.pageRequestSequence;
         let offset = state.sourceOffsets.get(source) || 0;
         while (offset <= requestedOffset) {
-          const batch = await requestSourceBatch(source, offset);
+          const batch = await requestSourceBatch(source, offset, snapshotId);
+          if (!batchIsCurrent()) return;
           message = applySourceBatch(source, batch);
           if (offset === requestedOffset || batch.additional_available !== true) break;
           const nextOffset = Number(batch.loaded_through);
@@ -761,10 +778,12 @@
         }
         message ||= `${source} source hydration was already restored by the rebuilt snapshot.`;
       }
+      if (!batchIsCurrent()) return;
       renderSourceStatus();
       setStatus(rebuilt ? `The expired result snapshot was rebuilt before source hydration resumed. ${message}` : message);
       renderQuestionAnswer();
     } catch (error) {
+      if (!batchIsCurrent()) return;
       setStatus(`${source} card hydration failed. Existing results remain available.`, true);
     } finally {
       setBusy(false);

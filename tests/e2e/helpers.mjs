@@ -127,6 +127,7 @@ export function mockAwards(target, {
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
   snapshotBatchExpireAtCall = 0,
+  snapshotBatchDelaysMs = [],
   snapshotRetryExpireAtCall = 0,
   failSnapshotCreateForTopics = [],
   failSnapshotInitialPageForTopics = [],
@@ -439,6 +440,8 @@ export function mockAwards(target, {
     }
     if (requestUrl.pathname === "/awards/snapshots/batch" && request.method() === "POST") {
       snapshotBatchCallCount += 1;
+      const batchDelay = Math.max(0, Number(snapshotBatchDelaysMs[snapshotBatchCallCount - 1]) || 0);
+      if (batchDelay) await new Promise(resolve => setTimeout(resolve, batchDelay));
       if (snapshotBatchCallCount === Number(snapshotBatchExpireAtCall)) {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
         return;
