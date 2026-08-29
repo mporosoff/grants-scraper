@@ -184,7 +184,7 @@ jobs:
             health="$(cat "$health_file")"
             rm -f "$health_file"
             common_ready=false
-            if test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "3" \
+            if test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "4" \
               && test "$(jq -r '.database_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_selected | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_configured | tostring' <<<"$health" 2>/dev/null)" = "true" \

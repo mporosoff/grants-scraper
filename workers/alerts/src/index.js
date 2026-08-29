@@ -59,7 +59,7 @@ function json(origin, status, payload) {
 }
 
 function html(status, body) {
-  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Funding Finder alerts</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:0 auto;padding:2rem;color:#14213d}main{border:1px solid #ccd5e4;border-radius:1rem;padding:1.5rem}button,select{font:inherit;padding:.55rem .8rem}li{margin:1rem 0}.muted{color:#58647a}</style></head><body><main>${body}</main></body></html>`, {
+  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Funding Finder alerts</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:48rem;margin:0 auto;padding:2rem;color:#14213d}main{border:1px solid #ccd5e4;border-radius:1rem;padding:1.5rem}button,select,.button-link{font:inherit;padding:.55rem .8rem}.button-link{display:inline-block;border:1px solid #7b879c;border-radius:.25rem;color:inherit;text-decoration:none;background:#f5f7fa}li{margin:1rem 0}.muted{color:#58647a}</style></head><body><main>${body}</main></body></html>`, {
     status,
     headers: headers("", "text/html; charset=utf-8", {
       "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
@@ -398,10 +398,18 @@ export function createHandler({
         const removed = subscriber && (all
           ? await store.unsubscribeAllForSubscriber(subscriber.id, current.toISOString())
           : await store.unsubscribeForSubscriber(subscriber.id, subscriptionId, current.toISOString()));
+        const manageToken = removed && subscriber
+          ? config.capability
+            ? await signedCapability(env, subscriber.id, "manage")
+            : subscriber.manage_token
+          : "";
+        const returnToManage = manageToken
+          ? `<p><a class="button-link" href="/manage?token=${escapeHtml(encodeURIComponent(manageToken))}">Return to manage alerts</a></p>`
+          : "";
         return removed
           ? all
-            ? html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>")
-            : html(200, "<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from this Funding Finder alert.</p>")
+            ? html(200, `<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from all Funding Finder email alerts.</p>${returnToManage}`)
+            : html(200, `<h1>Successfully unsubscribed</h1><p>You have been successfully unsubscribed from this Funding Finder alert.</p>${returnToManage}`)
           : html(400, "<h1>Unable to unsubscribe</h1>");
       }
 

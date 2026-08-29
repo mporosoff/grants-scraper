@@ -25,6 +25,7 @@ const root = new URL("../../", import.meta.url);
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
   "0004_phase4_alert_operations.sql", "0005_scheduler_progress.sql", "0006_scheduler_fencing.sql",
+  "0007_subscription_unsubscribe_state.sql",
 ];
 const migrations = await Promise.all(migrationNames.map(name => (
   readFile(new URL(`workers/alerts/migrations/${name}`, root), "utf8")
@@ -215,7 +216,7 @@ class ScriptedProvider {
 test("0003 migrates representative production lifecycle rows without changing their state", async () => {
   const database = databaseThrough(2);
   const store = new D1AlertStore(new SqliteD1(database));
-  await assert.rejects(store.health(), /message_kind|terminal_at/);
+  await assert.rejects(store.health(), /unsubscribed_at|message_kind|terminal_at/);
   insertSubscriber(database);
   insertSubscriber(database, {
     id: "person-suppressed", email: "suppressed@example.edu", manageToken: "s".repeat(43),
@@ -238,7 +239,6 @@ test("0003 migrates representative production lifecycle rows without changing th
     insertEvent(database, { id: `event-${status}`, subscriptionId: "inactive", status });
   }
   database.exec(migrations[2]);
-  assert.equal(await store.health(), true);
   assert.deepEqual(
     all(database, "SELECT id,active,verified_at FROM subscriptions ORDER BY id").map(row => [row.id, row.active, row.verified_at]),
     states.map(([id, , active, verifiedAt]) => [id, active, verifiedAt]).sort((a, b) => a[0].localeCompare(b[0])),
@@ -256,6 +256,25 @@ test("0003 migrates representative production lifecycle rows without changing th
   assert.ok(columns.includes("provider_batch_has_overflow"));
   assert.ok(columns.includes("provider_payload_json"));
   assert.ok(all(database, "PRAGMA table_info(rate_limits)").map(row => row.name).includes("last_reservation_key"));
+  for (const migration of migrations.slice(3)) database.exec(migration);
+  assert.equal(await store.health(), true);
+});
+
+test("0007 preserves existing alert state while adding durable unsubscribe state", async () => {
+  const database = databaseThrough(6);
+  insertSubscriber(database);
+  insertSubscription(database, { id: "active", active: 1, definitionHash: "hash-active" });
+  insertSubscription(database, { id: "paused", active: 0, definitionHash: "hash-paused" });
+  database.exec(migrations[6]);
+
+  assert.deepEqual(
+    all(database, "SELECT id,active,unsubscribed_at FROM subscriptions ORDER BY id")
+      .map(row => [row.id, row.active, row.unsubscribed_at]),
+    [["active", 1, null], ["paused", 0, null]],
+  );
+  assert.ok(all(database, "PRAGMA index_list(subscriptions)")
+    .some(index => index.name === "subscriptions_manageable_idx"));
+  assert.equal(await new D1AlertStore(new SqliteD1(database)).health(), true);
 });
 
 test("FF-BUG-003 reactivation atomically replaces baseline state and retires old unsent events", async () => {
@@ -316,11 +335,15 @@ test("FF-BUG-003 active duplicates stay unchanged and failed baseline batches fa
   assert.deepEqual(all(database, "SELECT opportunity_id FROM subscription_qualifications").map(row => row.opportunity_id), ["active-baseline"]);
 });
 
-test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fresh cycle", async () => {
+test("FF-BUG-003 inactive, unverified, paused, unsubscribed, and expired rows all start a fresh cycle", async () => {
   const priorStates = [
     { name: "inactive", verifiedAt: "2026-08-01T00:00:00.000Z", expiresAt: "2026-09-02T00:00:00.000Z" },
     { name: "unverified", verifiedAt: null, expiresAt: "2026-09-02T00:00:00.000Z" },
-    { name: "paused_after_unsubscribe", verifiedAt: "2026-08-01T00:00:00.000Z", expiresAt: "2026-09-02T00:00:00.000Z" },
+    { name: "paused", verifiedAt: "2026-08-01T00:00:00.000Z", expiresAt: "2026-09-02T00:00:00.000Z" },
+    {
+      name: "unsubscribed", verifiedAt: "2026-08-01T00:00:00.000Z",
+      expiresAt: "2026-09-02T00:00:00.000Z", unsubscribedAt: "2026-08-25T00:00:00.000Z",
+    },
     { name: "expired", verifiedAt: null, expiresAt: "2026-08-01T00:00:00.000Z" },
   ];
   for (const prior of priorStates) {
@@ -330,6 +353,9 @@ test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fres
       verifiedAt: prior.verifiedAt, expiresAt: prior.expiresAt,
       tokenHash: `old-${prior.name}`, lastEvaluatedAt: "2026-08-20T00:00:00.000Z",
     });
+    if (prior.unsubscribedAt) {
+      database.prepare("UPDATE subscriptions SET unsubscribed_at=? WHERE id='watch-1'").run(prior.unsubscribedAt);
+    }
     database.prepare("INSERT INTO subscription_qualifications VALUES(?,?,1,?)").run("watch-1", `old-${prior.name}`, fixedNow.toISOString());
     const store = new D1AlertStore(new SqliteD1(database));
     const result = await store.createSubscriptionCycle(await cycle({
@@ -341,6 +367,7 @@ test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fres
     const row = database.prepare("SELECT * FROM subscriptions WHERE id='watch-1'").get();
     assert.equal(row.active, 0, prior.name);
     assert.equal(row.verified_at, null, prior.name);
+    assert.equal(row.unsubscribed_at, null, prior.name);
     assert.equal(row.baseline_complete, 1, prior.name);
     assert.equal(row.last_evaluated_at, null, prior.name);
     assert.deepEqual(
@@ -349,6 +376,68 @@ test("FF-BUG-003 inactive, unverified, paused, and expired rows all start a fres
       prior.name,
     );
   }
+});
+
+test("unsubscribe retires one verification cycle while a fresh subscription can be verified", async () => {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  const store = new D1AlertStore(new SqliteD1(database));
+  const original = await cycle();
+  assert.equal((await store.createSubscriptionCycle(original)).cycleAccepted, true);
+  insertEvent(database, { id: "notice-queued" });
+  insertEvent(database, { id: "notice-ambiguous", status: "failed" });
+  database.prepare(
+    "UPDATE notification_events SET error_code='provider_outcome_reconcile',provider_quota_key='quota-ambiguous' WHERE id='notice-ambiguous'",
+  ).run();
+
+  assert.equal(await store.unsubscribeForSubscriber(
+    "person-1", "watch-1", fixedNow.toISOString(),
+  ), true);
+  const retired = database.prepare(
+    "SELECT active,unsubscribed_at FROM subscriptions WHERE id='watch-1'",
+  ).get();
+  assert.deepEqual([retired.active, retired.unsubscribed_at], [0, fixedNow.toISOString()]);
+  const suppressedVerification = database.prepare(
+    "SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-new'",
+  ).get();
+  assert.deepEqual(
+    [suppressedVerification.status, suppressedVerification.error_code, suppressedVerification.terminal_at],
+    ["suppressed", "subscription_unsubscribed", fixedNow.toISOString()],
+  );
+  assert.deepEqual(
+    all(database, "SELECT id,status,error_code,terminal_at FROM notification_events WHERE id LIKE 'notice-%' ORDER BY id")
+      .map(event => [event.id, event.status, event.error_code, event.terminal_at]),
+    [
+      ["notice-ambiguous", "suppressed", "subscription_unsubscribed", fixedNow.toISOString()],
+      ["notice-queued", "suppressed", "subscription_unsubscribed", fixedNow.toISOString()],
+    ],
+  );
+  assert.deepEqual(await store.pendingNotificationReconciliationBatches(
+    fixedNow.toISOString(), 10, 25,
+  ), []);
+  assert.equal(await store.verifySubscription(
+    original.verificationTokenHash, fixedNow.toISOString(),
+  ), null);
+  assert.equal(await store.updateSubscriptionForSubscriber(
+    "person-1", "watch-1", { active: true }, fixedNow.toISOString(),
+  ), false);
+  assert.deepEqual(await store.subscriptionsForSubscriber("person-1"), []);
+
+  const replacement = await cycle({
+    verificationNonce: "r".repeat(43), verificationEventId: "verify-replacement",
+    verificationEventKey: "verification:replacement",
+  });
+  assert.equal((await store.createSubscriptionCycle(replacement)).cycleAccepted, true);
+  assert.equal(database.prepare(
+    "SELECT unsubscribed_at FROM subscriptions WHERE id='watch-1'",
+  ).get().unsubscribed_at, null);
+  const replacementVerification = database.prepare(
+    "SELECT status,error_code,terminal_at FROM notification_events WHERE id='verify-replacement'",
+  ).get();
+  assert.deepEqual(
+    [replacementVerification.status, replacementVerification.error_code, replacementVerification.terminal_at],
+    ["queued", null, null],
+  );
 });
 
 test("FF-BUG-003 reactivation serializes with an authorized notification delivery", async () => {
@@ -1047,25 +1136,70 @@ test("FF-BUG-006 multi-alert digest and immediate unsubscribe semantics are exac
   assert.doesNotMatch(immediate.headers["List-Unsubscribe"], /scope=all/);
 });
 
-test("FF-BUG-006 one-click all-alert unsubscribe deactivates both alerts while single-alert scope leaves the other active", async () => {
+test("FF-BUG-006 pause remains manageable while unsubscribe removes alerts and returns to management", async () => {
   const database = databaseThrough();
   const person = insertSubscriber(database);
-  insertSubscription(database, { id: "watch-1", active: 1, definitionHash: "hash-1" });
-  insertSubscription(database, { id: "watch-2", active: 1, definitionHash: "hash-2" });
+  insertSubscription(database, {
+    id: "watch-1", type: "opportunity", active: 1,
+    definition: { opportunity_id: "opp-1" }, definitionHash: "hash-1",
+  });
+  insertSubscription(database, {
+    id: "watch-2", type: "opportunity", active: 1,
+    definition: { opportunity_id: "opp-2" }, definitionHash: "hash-2",
+  });
   const store = new D1AlertStore(new SqliteD1(database));
   const handler = createHandler({ storeFactory: () => store, providerFactory: () => new MockEmailProvider(), now: () => fixedNow });
+
+  const pause = await handler(new Request("https://alerts.example.test/manage", {
+    method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ token: person.manageToken, subscription: "watch-1", active: "0" }),
+  }), env);
+  assert.equal(pause.status, 200);
+  const pausedPage = await handler(new Request(
+    `https://alerts.example.test/manage?token=${person.manageToken}`,
+  ), env);
+  const pausedHtml = await pausedPage.text();
+  assert.match(pausedHtml, /Opportunity opp-1/);
+  assert.match(pausedHtml, /Paused/);
+  assert.match(pausedHtml, />Resume</);
+
   const single = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&subscription=watch-1`, { method: "POST" }), env);
   assert.equal(single.status, 200);
-  assert.match(await single.text(), /unsubscribed from this Funding Finder alert/);
-  assert.deepEqual(all(database, "SELECT id,active FROM subscriptions ORDER BY id").map(row => [row.id, row.active]), [["watch-1", 0], ["watch-2", 1]]);
+  const singleHtml = await single.text();
+  assert.match(singleHtml, /unsubscribed from this Funding Finder alert/);
+  assert.match(singleHtml, />Return to manage alerts</);
+  assert.deepEqual(
+    all(database, "SELECT id,active,unsubscribed_at FROM subscriptions ORDER BY id")
+      .map(row => [row.id, row.active, row.unsubscribed_at]),
+    [["watch-1", 0, fixedNow.toISOString()], ["watch-2", 1, null]],
+  );
+  const returnHref = singleHtml.match(/href="([^"]+)">Return to manage alerts/)[1];
+  const afterSingle = await handler(new Request(
+    new URL(returnHref, "https://alerts.example.test"),
+  ), env);
+  const afterSingleHtml = await afterSingle.text();
+  assert.doesNotMatch(afterSingleHtml, /Opportunity opp-1/);
+  assert.match(afterSingleHtml, /Opportunity opp-2/);
+  assert.doesNotMatch(afterSingleHtml, /Opportunity opp-1[\s\S]*Paused/);
+
   const allResponse = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manageToken}&scope=all`, { method: "POST" }), env);
   assert.equal(allResponse.status, 200);
-  assert.match(await allResponse.text(), /unsubscribed from all Funding Finder email alerts/);
-  assert.deepEqual(all(database, "SELECT active FROM subscriptions").map(row => row.active), [0, 0]);
-  const manage = await handler(new Request(`https://alerts.example.test/manage?token=${person.manageToken}`), env);
+  const allHtml = await allResponse.text();
+  assert.match(allHtml, /unsubscribed from all Funding Finder email alerts/);
+  assert.match(allHtml, />Return to manage alerts</);
+  assert.deepEqual(
+    all(database, "SELECT active,unsubscribed_at FROM subscriptions ORDER BY id")
+      .map(row => [row.active, row.unsubscribed_at]),
+    [[0, fixedNow.toISOString()], [0, fixedNow.toISOString()]],
+  );
+  const allReturnHref = allHtml.match(/href="([^"]+)">Return to manage alerts/)[1];
+  const manage = await handler(new Request(
+    new URL(allReturnHref, "https://alerts.example.test"),
+  ), env);
   const manageText = await manage.text();
-  assert.doesNotMatch(manageText, />Active</);
-  assert.match(manageText, /Unsubscribe from all Funding Finder email alerts/);
+  assert.match(manageText, /No alerts found/);
+  assert.doesNotMatch(manageText, /Opportunity opp-/);
+  assert.doesNotMatch(manageText, /Unsubscribe from all Funding Finder email alerts/);
 });
 
 test("FF-BUG-007 health is green only for the complete production delivery matrix", async () => {
@@ -1466,8 +1600,9 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
     readFile(new URL("tools/smoke_alerts_worker.mjs", root), "utf8"),
     readFile(new URL("workers/alerts/migrations/0003_phase2_alert_lifecycle.sql", root), "utf8"),
   ]);
-  assert.equal(ALERT_SCHEMA_VERSION, 3);
+  assert.equal(ALERT_SCHEMA_VERSION, 4);
   assert.match(workflow, /delivery_ready/);
+  assert.match(workflow, /schema_version[^\n]*= "4"/);
   assert.match(workflow, /scheduler_ready/);
   assert.match(workflow, /phase4-operations-20260827/);
   assert.match(workflow, /worker_version_rollback/);
@@ -1731,10 +1866,20 @@ test("Unit C multiple addresses and multiple subscriptions remain independently 
     body: new URLSearchParams({ token: unsubscribeToken, subscription: firstSubscriptions[0].id }),
   }), env);
   assert.equal(unsubscribeResponse.status, 200);
+  const unsubscribeHtml = await unsubscribeResponse.text();
+  assert.match(unsubscribeHtml, />Return to manage alerts</);
   assert.deepEqual(all(database,
-    "SELECT active FROM subscriptions WHERE subscriber_id = ? ORDER BY id",
+    "SELECT active,unsubscribed_at FROM subscriptions WHERE subscriber_id = ? ORDER BY id",
     firstSubscriber.id,
-  ).map(row => row.active), [0, 1]);
+  ).map(row => [row.active, row.unsubscribed_at]), [[0, fixedNow.toISOString()], [1, null]]);
+  const afterUnsubscribeManage = await handler(new Request(
+    `https://alerts.example.test/manage?token=${encodeURIComponent(manageToken)}`,
+    { headers: { Origin: "https://alerts.example.test" } },
+  ), env);
+  const afterUnsubscribeHtml = await afterUnsubscribeManage.text();
+  assert.equal(afterUnsubscribeManage.status, 200);
+  assert.doesNotMatch(afterUnsubscribeHtml, new RegExp(firstSubscriptions[0].id));
+  assert.equal((await store.subscriptionsForSubscriber(firstSubscriber.id)).length, 1);
   assert.equal(database.prepare(
     "SELECT COUNT(*) AS count FROM subscriptions s JOIN subscribers u ON u.id = s.subscriber_id WHERE u.email_normalized = ? AND s.active = 1",
   ).get(secondAddress).count, 1);

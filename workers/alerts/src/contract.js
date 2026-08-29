@@ -1,4 +1,4 @@
-export const ALERT_SCHEMA_VERSION = 3;
+export const ALERT_SCHEMA_VERSION = 4;
 export const STRONG_CONTRACT_VERSION = "funding-search-v2-strong-1";
 export const SUBSCRIPTION_TYPES = Object.freeze(["opportunity", "saved_search", "program"]);
 export const CADENCES = Object.freeze(["immediate", "weekly"]);
