@@ -127,6 +127,7 @@ export function mockAwards(target, {
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
   snapshotBatchExpireAtCall = 0,
+  snapshotRetryExpireAtCall = 0,
   failSnapshotCreateForTopics = [],
   failSnapshotInitialPageForTopics = [],
   enforceYearFilters = false,
@@ -138,6 +139,7 @@ export function mockAwards(target, {
   let snapshotSequence = 0;
   let snapshotPageCallCount = 0;
   let snapshotBatchCallCount = 0;
+  let snapshotRetryCallCount = 0;
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -450,6 +452,11 @@ export function mockAwards(target, {
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/retry" && request.method() === "POST") {
+      snapshotRetryCallCount += 1;
+      if (snapshotRetryCallCount === Number(snapshotRetryExpireAtCall)) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
       const snapshot = snapshots.get(body.snapshot_id);
       const alreadyPresent = snapshot.records.some(record => record.source === body.source);
       const records = alreadyPresent ? [...snapshot.records] : [...snapshot.records, templateFor(body.source)];

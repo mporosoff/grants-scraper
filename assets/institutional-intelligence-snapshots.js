@@ -735,27 +735,63 @@
     }
   }
 
+  async function stagedSourceRetry(source, snapshotId, pageSize, submitted) {
+    const snapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+    const initialPage = await requestSnapshotPage({
+      snapshotId: snapshot.snapshot_id,
+      page: 1,
+      pageSize,
+      facet: { type: "all", key: "" },
+    });
+    return { snapshot, staged: stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage }) };
+  }
+
   async function retrySource(source) {
-    const previous = state.snapshot.snapshot_id;
-    const sequence = state.sequence;
-    const pageRequestSequence = ++state.pageRequestSequence;
+    let previous = state.snapshot.snapshot_id;
+    let sequence = state.sequence;
+    let pageRequestSequence = ++state.pageRequestSequence;
+    const retryIsCurrent = () => sequence === state.sequence
+      && pageRequestSequence === state.pageRequestSequence
+      && state.snapshot?.snapshot_id === previous;
     setBusy(true);
     setStatus(`Retrying ${source}; successful source results remain available…`);
     try {
-      const snapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: previous, source });
-      const initialPage = await requestSnapshotPage({
-        snapshotId: snapshot.snapshot_id,
-        page: 1,
-        pageSize: state.pageSize,
-        facet: { type: "all", key: "" },
-      });
-      if (sequence !== state.sequence || pageRequestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== previous) return;
-      const staged = stagedSnapshotResult({ submitted: state.submitted, snapshot, pagePayload: initialPage });
-      commitSnapshotResult(staged, { historyMode: "replace" });
+      let rebuilt = false;
+      let result;
+      try {
+        result = await stagedSourceRetry(source, previous, state.pageSize, state.submitted);
+      } catch (error) {
+        if (error?.code !== "snapshot_expired") throw error;
+        if (!retryIsCurrent()) return;
+        rebuilt = true;
+        const pageSize = state.pageSize;
+        setStatus(`The result snapshot expired. Rebuilding the submitted search before retrying ${source}…`);
+        const restored = await rebuildSubmittedSnapshotView({
+          page: 1,
+          pageSize,
+          facet: { type: "all", key: "" },
+          historyMode: "replace",
+        });
+        if (!restored) return;
+        const refreshedSource = state.snapshot?.sources?.find(item => item.source === source);
+        if (!refreshedSource || !["unavailable", "rate_limited"].includes(refreshedSource.status)) {
+          state.sourceMessages.set(source, `${source} no longer requires a retry after the expired result snapshot was rebuilt.`);
+          renderSourceStatus();
+          setStatus(state.sourceMessages.get(source));
+          return;
+        }
+        previous = state.snapshot.snapshot_id;
+        sequence = state.sequence;
+        pageRequestSequence = ++state.pageRequestSequence;
+        result = await stagedSourceRetry(source, previous, pageSize, state.submitted);
+      }
+      if (!retryIsCurrent()) return;
+      commitSnapshotResult(result.staged, { historyMode: "replace" });
       state.sourceMessages.set(source, `${source} recovered. The successor snapshot retained the other successful sources.`);
       renderSourceStatus();
-      setStatus(`${source} recovered in successor snapshot ${snapshot.snapshot_id.slice(0, 12)}…; successful source results were retained.`);
+      setStatus(`${rebuilt ? "The expired result snapshot was rebuilt before " : ""}${source} recovered in successor snapshot ${result.snapshot.snapshot_id.slice(0, 12)}…; successful source results were retained.`);
     } catch (error) {
+      if (!retryIsCurrent()) return;
       state.sourceMessages.set(source, `${source} retry did not recover. Existing snapshot results remain available.`);
       renderSourceStatus();
       setStatus(state.sourceMessages.get(source), true);

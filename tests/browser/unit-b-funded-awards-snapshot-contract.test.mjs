@@ -329,8 +329,8 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
     "alerts.js",
     "award-api-config.js",
     "institutional-intelligence-core.js",
-    "institutional-intelligence-snapshots.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=post-phase4-abc-retry-20260829/);
   for (const asset of ["app.css", "alerts.css", "ai-provider.js", "alerts.js", "app.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(teamMatch, new RegExp(`app\\.css\\?v=${releaseKey}`));

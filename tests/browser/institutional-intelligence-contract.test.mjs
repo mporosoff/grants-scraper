@@ -298,6 +298,9 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const hydrationSource = appSource.slice(appSource.indexOf("async function loadSourceBatch("), appSource.indexOf("async function retrySource("));
   assert.match(hydrationSource, /error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*while \(offset <= requestedOffset\)[\s\S]*requestSourceBatch\(source, offset\)/);
+
+  const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
+  assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
 });
 
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {

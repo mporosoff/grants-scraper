@@ -341,6 +341,25 @@ test("failed-source retry creates a successor without discarding successful card
   expect(runtimeErrors).toEqual([]);
 });
 
+test("an expired snapshot is rebuilt before a failed source retry creates its successor", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, {
+    failNih: true,
+    resultCountPerSource: { NSF: 2, NIH: 0, DOE: 2 },
+    snapshotRetryExpireAtCall: 1,
+  });
+  await searchTopic(page, "expired-partial", "all");
+  const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable");
+  await page.locator('[data-ii-retry-source="NIH"]').click();
+  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt before NIH recovered in successor snapshot");
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–5 of 5");
+  const successorSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(successorSnapshot).not.toBe(originalSnapshot);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
+  expect(calls.filter(call => call.source === "NIH" && call.snapshot_id && !Number.isInteger(call.offset))).toHaveLength(2);
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+});
+
 test("a new snapshot replaces full-result facets instead of retaining the prior search", async ({ page }) => {
   const { runtimeErrors } = await openSearch(page);
   await searchTopic(page, "first", "all");
