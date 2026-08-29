@@ -65,6 +65,15 @@ test("Funding Finder has no serious or critical violations across critical state
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   await scan(page, "funding-strong-potential", testInfo);
+  const facultyTrigger = page.locator("#results .result-card [data-hajim-match]").first();
+  await facultyTrigger.click();
+  await expect(page.locator(".hajim-match-panel")).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funding-hajim-reverse-match-mobile", testInfo);
+  await page.locator("[data-hajim-close]").click();
+  await expect(facultyTrigger).toBeFocused();
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.evaluate(() => {
     const original = Storage.prototype.setItem;
     Storage.prototype.setItem = function setItem(key, value) {
@@ -244,7 +253,7 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.locator("#add-researcher").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
-  await expect(page.getByLabel("Choose a researcher")).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Search Hajim faculty at the University of Rochester" })).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
   await page.locator("#add-researcher").click();
   await addDepartmentResearcher(page, 0);

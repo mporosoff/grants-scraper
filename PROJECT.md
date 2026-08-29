@@ -42,7 +42,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, faculty profiles, or persistent user-managed opportunity files. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
+There are no accounts, installations, or persistent user-managed opportunity files. The repository includes one reviewed, provenance-bearing Hajim faculty snapshot for local discovery and matching; its source workbook is an uncommitted import artifact and the full canonical JSON is never browser-loaded. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -314,6 +314,31 @@ The source pipeline also treats Grants.gov 2076/2099 dates as lifecycle
 sentinels, gives catalog records precedence over duplicate VPR/Cindy email
 records, enriches missing private-funder card fields from allowlisted public
 links when possible, and keeps opportunity actions concise on narrow cards.
+
+### 2.9 Reviewed Hajim faculty discovery and reverse matching
+
+The active faculty authority is `config/hajim_faculty.json`, deterministically
+imported from the reviewed 2026-08-28 workbook at source SHA-256
+`f625ec89beabcfe7a7c178b83dcd9ca6737be455fc70c3b00f06882f2d6114fc`.
+Its contract is 156 roster records, 145 rankable profiles, and 11 profiles with
+the exact official missing-interest sentinel. OpenAlex and the former hard-coded
+ChemE roster are not membership authorities.
+
+One scheduled command atomically projects that canonical snapshot and the
+current catalog into a compact initial faculty directory and a lazy normalized
+match graph. The projections share a schema family, faculty-source hash,
+catalog fingerprint, and generation ID. Each evidence-qualified edge is stored
+once, with bounded faculty and opportunity indexes. Official research-interest
+phrases establish membership; home unit, appointment, relationship, roster,
+and derived themes cannot admit a result. The browser never loads the workbook
+or canonical JSON and makes no model call for ordinary reverse matching.
+
+Team Match exposes an accessible local Hajim combobox (at most 12 visible
+suggestions) and a separate manual/ORCID path while retaining the four-person
+limit and every-researcher intersection. Funding Finder lazy-loads the same
+projections when **Find relevant Hajim faculty** is selected and keeps at most
+one evidence panel open. Asset failures remain isolated from ordinary search,
+directory discovery, and manual collaborator entry.
 
 ---
 
@@ -989,6 +1014,8 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `index.html` | GitHub Pages entry point |
 | `match_explorer.html` | Public search and refinement interface |
 | `assets/app.js` | Browser search, cited source evidence, review/export, profile ranking, AI matching, and chat |
+| `assets/hajim-faculty.js` | Local directory search, generated-asset compatibility, and graph lookups |
+| `assets/hajim-reverse-match.js` | Lazy opportunity-to-faculty evidence panel |
 | `assets/app-config.js` | Shared Funding Finder release metadata and production feature flags |
 | `assets/subtopic-runtime.js` | Lazy publishable-subject loading and parent-level child-score rollup |
 | `assets/match-explain.js` | Local deterministic, evidence-bounded match explanations |
@@ -999,6 +1026,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `assets/app.css` | Responsive visual design |
 | `assets/vendor/` | Vendored PDF.js and Mammoth browser parsers plus licenses |
 | `data/opportunities.js` | Generated catalog, facets, and BM25 index |
+| `data/hajim_faculty_directory.js` | Compact reviewed-roster projection loaded by Team Match |
+| `data/faculty_matches.js` | Lazy normalized faculty/opportunity match graph |
+| `config/hajim_faculty.json` | Canonical reviewed Hajim roster; not a public browser dependency |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
 | `data/subtopics.js` | Lazy public sidecar for publishable and review-gated subject-child records and their search index |
@@ -1006,6 +1036,8 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `scripts/build_catalog.py` | Complete XML ingestion, normalization, validation, and index build |
 | `scripts/enrich_catalog.py` | Official detail enrichment, evidence reconciliation, and FOA selection |
 | `scripts/extract_document_evidence.py` | Bounded official-notice retrieval, deterministic extraction, versioning, and citations |
+| `scripts/import_hajim_faculty.py` | Strict workbook importer and canonical schema validation |
+| `scripts/faculty_match.py` | Multidisciplinary evidence matcher and atomic projection generator |
 | `scripts/program_areas.py` | Evidence-backed controlled vocabulary for official-notice discoverability |
 | `scripts/sources/` | Multi-source adapters, validation, health gates, lifecycle, and merge |
 | `scripts/build_feeds.py` | Static all/topic/source-type Atom feed generator |
@@ -1047,6 +1079,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
 | July 2026 | Generate catalog baselines from the published asset, keep browser tests with the canonical product, and retire the unused server experiment and faculty scraper from the active tree. |
+| August 2026 | Replace OpenAlex and the hard-coded ChemE roster with the reviewed 156-person Hajim snapshot; publish only compact directory and lazy normalized match projections with shared fingerprints. |
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
 | July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |

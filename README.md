@@ -114,6 +114,17 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
+The reviewed Hajim faculty roster is imported deterministically from a handoff
+workbook into `config/hajim_faculty.json`. The workbook is not committed or
+served. Team Match initially loads only a compact 156-person directory and
+offers a bounded local combobox alongside a separate manual/ORCID path for
+collaborators outside Hajim or anyone not listed. Selecting or restoring a
+Hajim faculty member lazy-loads the evidence-qualified match graph. Funding
+Finder uses the same graph for each card's **Find relevant Hajim faculty**
+action; no AI key or model call is involved, and only one reverse-match panel
+opens at a time. Eleven roster profiles whose official source page lists no
+interests are visible in the directory but never ranked automatically.
+
 Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
 Office of Science awards through the sources' native fields, keeps the adapters
 separate, and preserves direct-field or official-record contact provenance.
@@ -265,6 +276,8 @@ support it.
 | `assets/search-retrieval.js` | Local BM25 candidate retrieval, fuzzy matching, concept coverage, and topic reranking |
 | `assets/profile-ranking.js` | Weighted profile/CV terms, profile-only concept coverage, eligibility, and career-fit evidence |
 | `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
+| `assets/hajim-faculty.js` | Local faculty-directory search, generated-asset compatibility, and normalized graph lookups |
+| `assets/hajim-reverse-match.js` | Lazy opportunity-to-faculty panel with deterministic evidence explanations |
 | `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
@@ -274,6 +287,9 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
+| `data/hajim_faculty_directory.js` | Compact initial Team Match projection of the reviewed 156-person roster |
+| `data/faculty_matches.js` | Lazy, normalized faculty/opportunity edge graph with reverse indexes |
+| `config/hajim_faculty.json` | Canonical reviewed roster snapshot; never browser-loaded |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
@@ -283,6 +299,8 @@ support it.
 | `scripts/build_catalog.py` | Official XML ingestion and catalog builder |
 | `scripts/enrich_catalog.py` | Official detail reconciliation and FOA selection |
 | `scripts/extract_document_evidence.py` | Official PDF/HTML retrieval, versioning, deterministic fact extraction, and citations |
+| `scripts/import_hajim_faculty.py` | Strict deterministic importer for the reviewed workbook artifact |
+| `scripts/faculty_match.py` | Multidisciplinary lexical matcher and atomic directory/graph generator |
 | `scripts/program_areas.py` | Evidence-backed controlled vocabulary for discoverability in official notices |
 | `scripts/sources/discoverability.py` | Audited official-scope registry for opaque umbrella FOAs and BAAs |
 | `scripts/sources/` | Validated multi-source adapters, lifecycle, health gates, and merge |
@@ -362,10 +380,12 @@ python -m scripts.summarize_phase3_reviews evaluation/inbox --output-dir evaluat
 
 The scheduled workflow runs the Grants.gov, enrichment, document-evidence, and
 external-source steps daily; validates source-specific and whole-catalog
-health; regenerates the public feeds; retests the generated assets; alerts the
+health; rebuilds both faculty projections atomically against the current
+catalog; regenerates the public feeds; retests the generated assets; alerts the
 owner about degradation; and commits the normalized browser catalog, feeds,
 and compact caches. Raw XML archives, raw notices, full extracted notice text,
-subscriber data, SMTP credentials, and returned review files are not committed.
+the faculty workbook, subscriber data, SMTP credentials, and returned review
+files are not committed.
 
 See `PROJECT.md` for the completed Phase 1/1.5 scope, deferred Phase 2 pilot,
 and Phase 3 implementation,

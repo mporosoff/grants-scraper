@@ -303,6 +303,45 @@ test("Funding Finder loads with a usable catalog and no uncaught runtime errors"
   expect(errors).toEqual([]);
 });
 
+test("Funding Finder lazy-loads evidence-qualified Hajim reverse matches with one accessible panel", async ({ page }) => {
+  const requested = [];
+  page.on("request", request => requested.push(request.url()));
+  await page.goto("/match_explorer.html?focus=353936");
+  const card = page.locator('#results .result-card[data-opportunity-id="353936"]');
+  await expect(card).toBeVisible();
+  expect(requested.some(url => /hajim_faculty_directory|faculty_matches/.test(url))).toBe(false);
+
+  const trigger = card.getByRole("button", { name: "Find relevant Hajim faculty" });
+  await trigger.click();
+  await expect(card.locator(".hajim-match-panel")).toBeVisible();
+  await expect(card.locator(".hajim-match-panel h4")).toBeFocused();
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Anson Kahng" })).toContainText("Computer Science");
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Anson Kahng" })).toContainText("Source checked 2026-08-28");
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Benjamin E. Partridge" })).toBeVisible();
+  expect(requested.some(url => /hajim_faculty_directory\.js/.test(url))).toBe(true);
+  expect(requested.some(url => /faculty_matches\.js/.test(url))).toBe(true);
+
+  await card.locator("[data-hajim-scope]").selectOption("primary");
+  await expect(card.locator(".hajim-faculty-match", { hasText: "Benjamin E. Partridge" })).toHaveCount(0);
+  await card.locator("[data-hajim-close]").click();
+  await expect(trigger).toBeFocused();
+  await expect(card.locator(".hajim-match-panel")).toHaveCount(0);
+});
+
+test("a failed Hajim asset remains isolated from ordinary Funding Finder actions", async ({ page }) => {
+  await page.route("**/data/faculty_matches.js*", route => route.abort("failed"));
+  await page.goto("/match_explorer.html?focus=353936");
+  const card = page.locator('#results .result-card[data-opportunity-id="353936"]');
+  await card.getByRole("button", { name: "Find relevant Hajim faculty" }).click();
+  await expect(card.locator(".hajim-match-body")).toContainText("temporarily unavailable");
+  await expect(card.locator("[data-hajim-retry]")).toBeVisible();
+  await card.locator("[data-save]").click();
+  await expect(card.locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#query").fill("catalysis");
+  await page.locator("#find-funding").click();
+  await expect(page.locator("#results .result-card").first()).toBeVisible();
+});
+
 test("primary search submits with Enter while AI refinement stays visible and truthfully disabled", async ({ page }) => {
   mockHybrid(page);
   await openFundingFinder(page);

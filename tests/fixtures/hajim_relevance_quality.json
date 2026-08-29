@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "reviewed_date": "2026-08-29",
+  "cases": [
+    {
+      "id": "optics-photonics-lasers",
+      "discipline": "optics/photonics/lasers",
+      "expected_profile_ids": ["jaime-cardenas"],
+      "irrelevant_near_neighbors": ["adam-sefkow"],
+      "decisive_profile_phrases": ["Nanophotonics", "integrated photonics", "nonlinear photonics"],
+      "opportunity": {"opportunity_id": "quality-optics", "title": "Integrated nanophotonics and nonlinear photonics laser systems", "description": "Research on integrated photonic devices and nanophotonic laser platforms."},
+      "test_kind": "admission"
+    },
+    {
+      "id": "imaging-sensing",
+      "discipline": "imaging/sensing",
+      "expected_profile_ids": ["mujdat-cetin"],
+      "irrelevant_near_neighbors": ["james-r-fienup"],
+      "decisive_profile_phrases": ["Computational sensing and imaging", "radar and biomedical imaging"],
+      "opportunity": {"opportunity_id": "quality-imaging", "title": "Computational sensing and imaging", "description": "New radar and biomedical imaging methods for probabilistic image analysis."},
+      "test_kind": "ordering"
+    },
+    {
+      "id": "biomedical-bioengineering",
+      "discipline": "biomedical/bioengineering",
+      "expected_profile_ids": ["diane-dalecki"],
+      "irrelevant_near_neighbors": ["timothy-m-baran"],
+      "decisive_profile_phrases": ["Diagnostic ultrasound imaging", "ultrasound for tissue engineering and regenerative medicine"],
+      "opportunity": {"opportunity_id": "quality-biomedical", "title": "Diagnostic ultrasound for tissue engineering", "description": "Therapeutic ultrasound and regenerative medicine research using ultrasound imaging."},
+      "test_kind": "admission"
+    },
+    {
+      "id": "materials-polymers-nanoscience",
+      "discipline": "materials/polymers/nanoscience",
+      "expected_profile_ids": ["todd-d-krauss"],
+      "irrelevant_near_neighbors": ["niaz-abdolrahim"],
+      "decisive_profile_phrases": ["Materials chemistry and physics of colloidal nanoscale semiconductors", "optics of nanoscale semiconductor materials"],
+      "opportunity": {"opportunity_id": "quality-materials", "title": "Colloidal nanoscale semiconductor materials", "description": "Materials chemistry and physics of nanoscale semiconductor optics."},
+      "test_kind": "admission"
+    },
+    {
+      "id": "ai-ml-data-science",
+      "discipline": "AI/ML/data science",
+      "expected_profile_ids": ["hangfeng-he"],
+      "irrelevant_near_neighbors": ["john-criswell"],
+      "decisive_profile_phrases": ["Machine learning", "natural language processing", "reasoning"],
+      "opportunity": {"opportunity_id": "quality-ai", "title": "Natural language processing and machine learning reasoning", "description": "AI systems for language understanding and automated reasoning."},
+      "test_kind": "ordering"
+    },
+    {
+      "id": "fusion-plasma-hedp",
+      "discipline": "fusion/plasma/high-energy-density physics",
+      "expected_profile_ids": ["adam-sefkow"],
+      "irrelevant_near_neighbors": ["jaime-cardenas"],
+      "decisive_profile_phrases": ["Inertial confinement fusion", "high-energy-density physics", "laser-plasma interaction"],
+      "opportunity": {"opportunity_id": "quality-plasma", "title": "Inertial confinement fusion and high-energy-density physics", "description": "Laser-plasma interaction experiments for magneto-inertial fusion."},
+      "test_kind": "admission"
+    },
+    {
+      "id": "catalysis-electrochemistry-energy",
+      "discipline": "catalysis/electrochemistry/energy",
+      "expected_profile_ids": ["marc-d-porosoff"],
+      "irrelevant_near_neighbors": ["brandon-r-barnett"],
+      "decisive_profile_phrases": ["CO2 capture and conversion", "heterogeneous thermal catalysis"],
+      "opportunity": {"opportunity_id": "quality-catalysis", "title": "Carbon dioxide capture and conversion", "description": "Heterogeneous thermal catalysis and reactive separations for CO2 conversion."},
+      "test_kind": "admission"
+    },
+    {
+      "id": "computing-security-networks",
+      "discipline": "computing systems/security/networks",
+      "expected_profile_ids": ["yanan-guo"],
+      "irrelevant_near_neighbors": ["john-criswell"],
+      "decisive_profile_phrases": ["Microarchitectural side channels", "machine-learning security", "GPU systems and architectures"],
+      "opportunity": {"opportunity_id": "quality-security", "title": "Microarchitectural side channels and GPU security", "description": "Hardware protections for GPU systems, architectures, and memory side channels."},
+      "test_kind": "ordering"
+    }
+  ]
+}

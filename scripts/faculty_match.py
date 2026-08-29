@@ -1,844 +1,432 @@
-"""Phase 4 engine: ChemE faculty publication profiles + solicitation matching.
+"""Generate deterministic Hajim faculty discovery and match assets.
 
-Two stages:
-
-1. ``build_profiles`` — for each Chemical & Sustainability Engineering faculty
-   member, resolve their OpenAlex author record (preferring University of
-   Rochester affiliation) and build a research profile from their top OpenAlex
-   concepts/topics and recent publication titles. Writes ``faculty_profiles.json``.
-   OpenAlex is free and needs no key; ``OPENALEX_MAILTO`` can opt into its
-   polite pool without hard-coding a personal address.
-
-2. ``match_to_catalog`` — score every opportunity in ``data/opportunities.js``
-   against each faculty profile by topic/keyword overlap, and emit
-   ``data/faculty_matches.js`` for the (forthcoming) internal team-match page,
-   including simple multi-PI groupings for large/center solicitations.
-
-Stage 1 is runnable now (network only). Stage 2 is wired into the catalog
-pipeline and intentionally conservative: focused research concepts establish
-eligibility, catalog topics only corroborate that evidence, and recency is
-balanced with relevance after low-confidence matches are removed.
-
-Usage:
-    python -m scripts.faculty_match profiles --out faculty_profiles.json
-    python -m scripts.faculty_match match --catalog data/opportunities.js \
-        --profiles faculty_profiles.json --out data/faculty_matches.js
+The reviewed canonical faculty JSON is the sole roster authority. Matching is
+local, lexical, evidence-qualified, and does not call a model or provider.
 """
 
 from __future__ import annotations
 
 import argparse
-from datetime import date
+from collections import Counter, defaultdict
+import gzip
+import hashlib
 import json
-import os
+import math
+from pathlib import Path
 import re
-import time
-import urllib.parse
-import urllib.request
+import unicodedata
 
 from scripts.currentness import record_is_current
-
-OPENALEX = "https://api.openalex.org"
-OPENALEX_MAILTO = os.environ.get("OPENALEX_MAILTO", "").strip()
-ROCHESTER_HINT = "university of rochester"        # exclude "Rochester Institute of Technology"
-
-# Core Chemical & Sustainability Engineering faculty (Hajim, 2026).
-FACULTY = [
-    "Mitchell Anthamatten", "Yasemin Basdogan", "Pooja Rajendra Bhalode",
-    "Siddharth Deshpande", "Gang Fan", "David G. Foster", "Melodie I. Lawton",
-    "Darren Lipomi", "Allison J. Lopatkin", "Astrid M. Muller",
-    "Marc D. Porosoff", "Alexander A. Shestopalov", "Wyatt E. Tenhaeff",
-    "Matthew Z. Yates",
-]
+from scripts.import_hajim_faculty import validate_payload
 
 
-def _get(url: str) -> dict:
-    request_url = url
-    user_agent = "Funding-Finder-FacultyMatch/1.0"
-    if OPENALEX_MAILTO:
-        sep = "&" if "?" in url else "?"
-        request_url = f"{url}{sep}mailto={urllib.parse.quote(OPENALEX_MAILTO)}"
-        user_agent = f"{user_agent} ({OPENALEX_MAILTO})"
-    req = urllib.request.Request(
-        request_url,
-        headers={"User-Agent": user_agent},
-    )
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+SCHEMA_FAMILY = "hajim-faculty-match"
+DIRECTORY_SCHEMA_VERSION = 1
+GRAPH_SCHEMA_VERSION = 2
+MAX_FACULTY_PER_OPPORTUNITY = 12
+MAX_OPPORTUNITIES_PER_FACULTY = 25
+DIRECTORY_RAW_BUDGET = 350_000
+DIRECTORY_GZIP_BUDGET = 90_000
+GRAPH_RAW_BUDGET = 2_500_000
+GRAPH_GZIP_BUDGET = 500_000
+
+_WORD_RE = re.compile(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", re.I)
+_SPACE_RE = re.compile(r"\s+")
+_GENERIC = {
+    "a", "an", "and", "application", "applications", "approach", "approaches",
+    "based", "can", "data", "development", "for", "from", "general", "health",
+    "in", "into", "materials", "method", "methods", "model", "modeling", "models",
+    "new", "of", "on", "or", "program", "programs", "project", "projects",
+    "research", "science", "studies", "study", "support", "system", "systems",
+    "technology", "the", "their", "to", "toward", "towards", "using", "with", "energy",
+}
+_FIELD_WEIGHTS = {"title": 4.5, "description": 2.0, "published_subject": 1.5}
 
 
-def _affiliation_names(author: dict) -> str:
-    names = []
-    for inst in author.get("last_known_institutions") or []:
-        if inst.get("display_name"):
-            names.append(inst["display_name"])
-    for aff in author.get("affiliations") or []:
-        inst = (aff.get("institution") or {})
-        if inst.get("display_name"):
-            names.append(inst["display_name"])
-    return " | ".join(names)
+class FacultyMatchError(ValueError):
+    """Raised when canonical input or generated assets violate the contract."""
 
 
-def find_author(name: str) -> dict | None:
-    """Best OpenAlex author for a name that is actually affiliated with the
-    University of Rochester. Returns None when no confident UR match exists, so
-    we omit the person rather than attach a same-named stranger's publications
-    (that mis-resolution is how "Gang Fan" and "Melodie Lawton" went wrong)."""
-    data = _get(f"{OPENALEX}/authors?search={urllib.parse.quote(name)}&per_page=15")
-    results = data.get("results") or []
-    rochester = [a for a in results
-                 if ROCHESTER_HINT in _affiliation_names(a).lower()]
-    if not rochester:
-        return None
-    best = max(rochester, key=lambda a: a.get("works_count") or 0)
-    best["_matched_rochester"] = True
-    return best
+def _normalize(value: object) -> str:
+    text = unicodedata.normalize("NFC", str(value or "")).casefold()
+    return _SPACE_RE.sub(" ", text).strip()
 
 
-def recent_titles(author_id: str, limit: int = 12) -> list[str]:
-    aid = author_id.rsplit("/", 1)[-1]
-    data = _get(
-        f"{OPENALEX}/works?filter=author.id:{aid}"
-        f"&sort=publication_date:desc&per_page={limit}"
-    )
-    return [w.get("display_name") for w in (data.get("results") or [])
-            if w.get("display_name")]
+def _stem(token: str) -> str:
+    """Small deterministic word-form normalizer, not a synonym map."""
+    token = token.casefold()
+    if "-" in token or len(token) <= 4:
+        return token
+    for suffix, replacement in (
+        ("ization", "ize"), ("isation", "ise"), ("ational", "ate"),
+        ("iveness", "ive"), ("ically", "ic"), ("ments", "ment"),
+        ("ation", "ate"), ("ities", "ity"), ("ing", ""), ("ers", "er"),
+        ("ies", "y"), ("ed", ""), ("es", ""), ("s", ""),
+    ):
+        if token.endswith(suffix) and len(token) - len(suffix) + len(replacement) >= 4:
+            return token[:-len(suffix)] + replacement
+    return token
 
 
-def build_profiles() -> list[dict]:
-    profiles = []
-    for name in FACULTY:
-        try:
-            author = find_author(name)
-        except Exception as exc:  # network hiccup: record and continue
-            profiles.append({"name": name, "error": str(exc)})
+def _tokens(value: object) -> list[str]:
+    return [_stem(token) for token in _WORD_RE.findall(_normalize(value))]
+
+
+def _distinctive_tokens(value: object) -> list[str]:
+    found: list[str] = []
+    for token in _tokens(value):
+        if token in _GENERIC or len(token) < 3:
             continue
-        if not author:
-            profiles.append({"name": name,
-                             "error": "no University of Rochester match in OpenAlex"})
-            continue
-        concepts = [c.get("display_name") for c in (author.get("x_concepts") or [])
-                    if (c.get("score") or 0) >= 10][:12]
-        topics = [t.get("display_name") for t in (author.get("topics") or [])][:8]
-        try:
-            titles = recent_titles(author.get("id", ""))
-        except Exception:
-            titles = []
-        profiles.append({
-            "name": name,
-            "openalex_id": author.get("id"),
-            "resolved_name": author.get("display_name"),
-            "affiliation": _affiliation_names(author),
-            "matched_rochester": author.get("_matched_rochester", False),
-            "works_count": author.get("works_count"),
-            "concepts": concepts,
-            "topics": topics,
-            "recent_titles": titles,
-        })
-        time.sleep(0.3)
-    return profiles
+        if token not in found:
+            found.append(token)
+    return found
 
 
-# --------------------------------------------------------------------------- #
-# Stage 2: match profiles against the opportunity catalog (v1 keyword/topic)
-# --------------------------------------------------------------------------- #
-_WORD_RE = re.compile(r"[a-z][a-z0-9\-]{2,}")
-# Generic words are stripped so a shared key phrase must overlap on *distinctive*
-# terms, not filler like "research"/"program"/"science".
-_STOP = set("""the and for with from this that are was into over out per via
-research program programs grant grants funding award awards project projects
-support national university
-universities institute department departments studies study development
-applications application advancing advanced approaches approach based using their
-which will been more also may can under new toward towards related general
-foundation opportunity opportunities proposal proposals faculty investigator
-investigators""".split())
-
-# Focused research concepts per PI, verified against the University of Rochester
-# Chemical and Sustainability Engineering faculty directory and supplemented by
-# recent publications. These override OpenAlex's auto topics, which mis-resolved
-# several people and attached over-broad tags. Each phrase is specific enough to
-# establish fit while broad enough to catch adjacent funding language.
-FACULTY_KEYTERMS: dict[str, list[str]] = {
-    "Mitchell Anthamatten": [
-        "macromolecular self-assembly", "associative and functional polymers",
-        "nanostructured polymer materials", "polymer interfacial phenomena",
-        "optoelectronic polymer materials", "vapor deposition polymerization"],
-    "Yasemin Basdogan": [
-        "machine learning for computational materials design",
-        "molecular dynamics simulation", "quantum chemistry",
-        "polymer solution modeling", "computational catalysis",
-        "CO2 separation membranes"],
-    "Pooja Rajendra Bhalode": [
-        "process systems engineering", "multiscale molecules-to-systems modeling",
-        "physics and data-driven hybrid modeling", "powder flow modeling",
-        "sustainable process design", "solvent-based extraction"],
-    "Siddharth Deshpande": [
-        "atomic modeling of solid-liquid interfaces",
-        "atomic modeling of solid-gas interfaces",
-        "machine learning for catalyst discovery", "heterogeneous catalysis",
-        "electrocatalysis at interfaces", "battery interface modeling"],
-    "Gang Fan": [
-        "bio-inspired catalysis", "polymer chemistry and plastic upcycling",
-        "bioelectrochemistry", "biosensors", "synthetic biology",
-        "metabolic engineering for environmental remediation"],
-    "David G. Foster": [
-        "transport phenomena", "computational fluid dynamics",
-        "microfluidic cancer cell capture", "nanoparticle capture coatings",
-        "biomedical transport modeling", "fluid mechanics education"],
-    "Melodie I. Lawton": [
-        "shape-memory polymers", "polymeric composites", "biomaterials",
-        "polymer degradation", "controlled drug delivery",
-        "structure-property relationships"],
-    "Darren Lipomi": [
-        "organic and flexible electronics", "conducting polymers",
-        "stretchable semiconductors", "mechanical properties of organic electronics",
-        "electrotactile haptics", "wearable bioelectronic interfaces"],
-    "Allison J. Lopatkin": [
-        "antibiotic resistance", "plasmid dynamics and horizontal gene transfer",
-        "engineered microbial communities", "microbial systems biology",
-        "metabolic engineering", "computational models of bacterial resistance"],
-    "Astrid M. Muller": [
-        "electrocatalytic aqueous PFAS defluorination",
-        "organic electrooxidation through water activation",
-        "selective carbon dioxide reduction", "electrode microenvironments",
-        "pulsed-laser nanoparticle synthesis", "nanocatalyst structure-function"],
-    "Marc D. Porosoff": [
-        "carbon dioxide capture and conversion", "heterogeneous thermal catalysis",
-        "catalyst structure-property relationships", "reactive separations",
-        "C1 chemistry and light alkane upgrading",
-        "catalyst representation with large language models"],
-    "Alexander A. Shestopalov": [
-        "surface chemistry and molecular monolayers",
-        "surface patterning and contact printing", "nanostructured materials",
-        "interfacial thermodynamics", "organic thin-film coatings",
-        "self-assembled monolayers"],
-    "Wyatt E. Tenhaeff": [
-        "lithium metal batteries", "solid electrolyte interphase",
-        "solid-state battery electrolytes", "battery interfacial engineering",
-        "polymer thin-film electrolytes", "vacuum deposition processing"],
-    "Matthew Z. Yates": [
-        "functional surfaces and coatings", "sorbent polymers for chemical sensing",
-        "waveguide-enhanced Raman sensing", "electrochemical sensors",
-        "electrochemical surface modification", "open-source electrochemistry hardware"],
-}
-
-# Human-readable synthesis of each official profile. The matcher uses the
-# focused concepts above, while these summaries preserve the broader research
-# context that motivated those concepts and can be shown by the interface.
-FACULTY_RESEARCH_SUMMARIES: dict[str, str] = {
-    "Mitchell Anthamatten": (
-        "Develops associative and functional polymers, macromolecular self-assembly, "
-        "nanostructured and optoelectronic polymer materials, and vapor-deposited "
-        "polymer interfaces."
-    ),
-    "Yasemin Basdogan": (
-        "Uses quantum chemistry, molecular dynamics, and machine learning to design "
-        "polymers, solutions, catalytic materials, and separation media."
-    ),
-    "Pooja Rajendra Bhalode": (
-        "Builds multiscale, physics-informed, and data-driven process models for "
-        "sustainable process systems, powder flow, and solvent-based separations."
-    ),
-    "Siddharth Deshpande": (
-        "Models solid-liquid and solid-gas interfaces and develops data-driven methods "
-        "for heterogeneous catalysis, electrocatalysis, and battery interfaces."
-    ),
-    "Gang Fan": (
-        "Combines polymer chemistry, bio-inspired catalysis, synthetic biology, "
-        "bioelectrochemistry, and metabolic engineering for plastic upcycling, sensing, "
-        "and environmental remediation."
-    ),
-    "David G. Foster": (
-        "Studies transport phenomena and computational fluid dynamics, including "
-        "microfluidic and nanoparticle-coating approaches for capturing circulating cells."
-    ),
-    "Melodie I. Lawton": (
-        "Studies shape-memory polymers, polymer composites and degradation, biomaterials, "
-        "controlled drug delivery, and polymer structure-property relationships."
-    ),
-    "Darren Lipomi": (
-        "Develops conducting and semiconducting polymers for flexible electronics, "
-        "wearable biointerfaces, medical devices, and electrotactile haptics."
-    ),
-    "Allison J. Lopatkin": (
-        "Uses systems and synthetic biology, microbial community engineering, mathematical "
-        "modeling, and machine learning to study metabolism, horizontal gene transfer, and "
-        "antibiotic resistance."
-    ),
-    "Astrid M. Muller": (
-        "Develops nanocatalysts and electrode microenvironments for aqueous PFAS "
-        "defluorination, selective carbon dioxide reduction, and organic electrooxidation, "
-        "including controlled pulsed-laser synthesis."
-    ),
-    "Marc D. Porosoff": (
-        "Develops heterogeneous thermal catalysts and reactive separations for carbon "
-        "dioxide capture and conversion, C1 chemistry, and light-alkane upgrading, with "
-        "data and language-model representations of catalyst behavior."
-    ),
-    "Alexander A. Shestopalov": (
-        "Studies molecularly engineered surfaces, monolayers, surface patterning, "
-        "nanostructured materials, organic coatings, and interfacial thermodynamics."
-    ),
-    "Wyatt E. Tenhaeff": (
-        "Engineers interfaces, solid electrolytes, and polymer thin films for solid-state "
-        "and lithium-metal batteries using thin-film synthesis and vacuum processing."
-    ),
-    "Matthew Z. Yates": (
-        "Develops functional surfaces and coatings, electrochemical and Raman sensors, "
-        "surface-modification methods, and open-source electrochemistry hardware."
-    ),
-}
-
-# Curated program-topic domains per PI, drawn from the catalog's controlled
-# ``topic_areas`` vocabulary. Chosen conservatively and only where central to the
-# person's work. These tags can corroborate concept-level evidence, but never
-# establish a match by themselves because catalog topic tagging is intentionally
-# broad and occasionally noisy.
-FACULTY_DOMAINS: dict[str, list[str]] = {
-    "Mitchell Anthamatten": ["Materials science", "Manufacturing"],
-    "Yasemin Basdogan": [
-        "Catalysis and reaction engineering", "Separations and membranes",
-        "Materials science", "Carbon management",
-        "Artificial intelligence and machine learning", "Energy"],
-    "Pooja Rajendra Bhalode": [
-        "Manufacturing", "Artificial intelligence and machine learning"],
-    "Siddharth Deshpande": [
-        "Catalysis and reaction engineering", "Energy", "Materials science",
-        "Artificial intelligence and machine learning"],
-    "Gang Fan": [
-        "Biology and biotechnology", "Catalysis and reaction engineering",
-        "Carbon management", "Materials science", "Environmental science"],
-    "David G. Foster": ["Materials science", "Biology and biotechnology"],
-    "Melodie I. Lawton": ["Materials science", "Biology and biotechnology"],
-    "Darren Lipomi": ["Materials science", "Manufacturing"],
-    "Allison J. Lopatkin": [
-        "Biology and biotechnology", "Infectious disease", "Public health",
-        "Environmental science"],
-    "Astrid M. Muller": [
-        "Catalysis and reaction engineering", "Energy", "Carbon management",
-        "Environmental science", "Materials science"],
-    "Marc D. Porosoff": [
-        "Catalysis and reaction engineering", "Carbon management", "Energy",
-        "Materials science"],
-    "Alexander A. Shestopalov": ["Materials science", "Manufacturing"],
-    "Wyatt E. Tenhaeff": ["Energy", "Materials science", "Manufacturing"],
-    "Matthew Z. Yates": [
-        "Materials science", "Separations and membranes",
-        "Catalysis and reaction engineering"],
-}
+def _load_js_object(path: str | Path, global_name: str) -> tuple[dict, bytes]:
+    raw = Path(path).read_bytes()
+    text = raw.decode("utf-8")
+    marker = f"globalThis.{global_name}="
+    start = text.find(marker)
+    if start < 0:
+        raise FacultyMatchError(f"{path} does not assign {marker}")
+    body = text[start + len(marker):].strip()
+    if body.endswith(";"):
+        body = body[:-1]
+    value = json.loads(body)
+    if not isinstance(value, dict):
+        raise FacultyMatchError(f"{path} must contain a JSON object")
+    return value, raw
 
 
-def _load_catalog(path: str) -> list[dict]:
-    with open(path, encoding="utf-8") as catalog_file:
-        text = catalog_file.read()
-    start = text.index("{")
-    obj = json.loads(text[start:].rstrip().rstrip(";"))
-    return obj.get("opportunities", obj.get("records", []))
+def load_catalog(path: str | Path) -> tuple[dict, bytes]:
+    catalog, raw = _load_js_object(path, "GRANT_CATALOG")
+    records = catalog.get("opportunities")
+    if not isinstance(records, list) or catalog.get("record_count") != len(records):
+        raise FacultyMatchError("Catalog record_count is incompatible with opportunities")
+    return catalog, raw
 
 
-def _sig_words(phrase: str) -> list[str]:
-    return [w for w in _WORD_RE.findall((phrase or "").lower()) if w not in _STOP]
+def load_faculty_config(path: str | Path) -> tuple[dict, bytes]:
+    raw = Path(path).read_bytes()
+    payload = json.loads(raw.decode("utf-8"))
+    validate_payload(payload, require_snapshot=False)
+    return payload, raw
 
 
-def _phrase_hit(sig: list[str], opp_tokens: list[str]) -> bool:
-    """A key phrase hits only when its distinctive words occur close together.
-
-    Short phrases require every concept word. Longer phrases may omit one word,
-    but the evidence must fit inside a compact token window; scattered mentions
-    across a long notice are not research-fit evidence.
-
-    Generic words remain useful inside a focused phrase (for example,
-    "metabolic engineering"), but never qualify on their own because short
-    phrases require complete, proximate coverage."""
-    orig_len = len(sig)
-    if not sig:
-        return False
-    if orig_len == 1:
-        return sig[0] in opp_tokens
-    if len(sig) < 2:
-        return False
-    need = len(sig) if len(sig) <= 3 else max(3, (3 * len(sig) + 3) // 4)
-    window_size = len(sig) + 4
-    sig_set = set(sig)
-    for start in range(len(opp_tokens)):
-        window = set(opp_tokens[start:start + window_size])
-        if len(sig_set & window) >= need:
-            return True
-    return False
-
-
-def _key_terms(profile: dict) -> list[str]:
-    """5-8 descriptive key phrases for a PI: a hand-curated override if provided,
-    otherwise the PI's top OpenAlex research topics."""
-    if profile["name"] in FACULTY_KEYTERMS:
-        return [t for t in FACULTY_KEYTERMS[profile["name"]] if t][:8]
-    seen, terms = set(), []
-    for t in (profile.get("topics") or []):
-        t = re.sub(r"\s+", " ", t or "").strip()
-        if t and t.lower() not in seen:
-            seen.add(t.lower())
-            terms.append(t)
-    return terms[:8]
-
-
-# --------------------------------------------------------------------------- #
-# Program-topic domains. A PI's specific work is mapped onto the catalog's
-# controlled ``topic_areas`` vocabulary. These domains are context and may
-# corroborate focused phrase evidence; they never establish eligibility.
-# Keys are catalog topic_areas; values are substrings sought in a PI profile.
-# --------------------------------------------------------------------------- #
-DOMAIN_LEXICON: dict[str, list[str]] = {
-    "Catalysis and reaction engineering":
-        ["cataly", "electrocataly", "photocataly", "reaction engineering",
-         "kinetics", "water-gas shift", "hydrogenation"],
-    "Energy":
-        ["energy", "fuel cell", "biofuel", "fuel", "battery", "batteries",
-         "electrochem", "solar", "photovolta", "combustion", "hydrogen",
-         "electroly", "power grid", "renewable"],
-    "Carbon management":
-        ["co2", "carbon dioxide", "carbon capture", "carbon utiliz",
-         "decarboniz", "sequestrat", "direct air capture", "syngas"],
-    "Materials science":
-        ["material", "polymer", "nanomaterial", "thin film", "crystal",
-         "metal-organic framework", "mof", "composite", "coating", "graphene",
-         "2d material", "semiconductor", "nanoparticle", "self-assembl"],
-    "Separations and membranes":
-        ["membrane", "gas separation", "adsorp", "filtration", "distillation",
-         "chromatograph", "ion exchange"],
-    "Manufacturing":
-        ["manufactur", "additive manufactur", "3d printing", "fabrication",
-         "roll-to-roll", "process intensification", "scale-up"],
-    "Artificial intelligence and machine learning":
-        ["machine learning", "deep learning", "neural network",
-         "artificial intelligence", "data-driven"],
-    "Quantum science": ["quantum"],
-    "Biology and biotechnology":
-        ["biolog", "biotechnolog", "microb", "protein", "synthetic biology",
-         "enzyme", "antibiotic", "bioreactor", "metabolic", "fermentation"],
-    "Environmental science":
-        ["environ", "pollut", "emission", "sustainab", "remediation",
-         "air quality"],
-    "Water":
-        ["desalinat", "wastewater", "water treatment", "drinking water",
-         "water purification", "water resources"],
-    "Public health":
-        ["clinical trial", "drug delivery", "therapeutic", "pharmaceutic",
-         "vaccine", "diagnostic"],
-    "Climate change":
-        ["climate", "greenhouse gas", "global warming"],
-    "Space and aeronautics":
-        ["aerospace", "spacecraft", "aeronautic", "propulsion",
-         "in situ resource"],
-}
-
-# Vocabulary used by the live graded team matcher. Unlike DOMAIN_LEXICON,
-# these phrases deliberately omit single umbrella words such as ``energy`` or
-# ``materials``; corpus frequency further reduces the weight of common terms.
-THEME_LEXICON: dict[str, list[str]] = {
-    "Catalysis and reaction engineering": [
-        "catalyst", "catalytic", "catalysis", "electrocataly",
-        "photocataly", "reaction engineering", "reaction kinetics",
-        "water-gas shift", "hydrogenation", "dehydrogenation", "reforming"],
-    "Energy": [
-        "energy conversion", "energy storage", "fuel cell", "biofuel",
-        "battery", "electrochem", "solar fuel", "photovolta", "combustion",
-        "hydrogen production", "electrolyzer", "renewable energy",
-        "clean energy", "energy efficiency"],
-    "Carbon management": [
-        "carbon dioxide", "carbon capture", "carbon utilization", "decarboniz",
-        "sequestrat", "direct air capture", "syngas", "co2 reduction",
-        "co2 conversion", "negative emissions", "carbon-neutral"],
-    "Materials science": [
-        "advanced materials", "polymer", "nanomaterial", "thin film",
-        "crystalline", "metal-organic framework", "composite", "coating",
-        "graphene", "2d material", "semiconductor", "nanoparticle",
-        "self-assembl", "soft matter", "functional materials"],
-    "Separations and membranes": [
-        "membrane", "gas separation", "adsorb", "adsorption", "sorbent",
-        "filtration", "distillation", "chromatograph", "ion exchange",
-        "desalinat", "solvent extraction"],
-    "Manufacturing": [
-        "advanced manufactur", "additive manufactur", "3d printing",
-        "fabrication", "roll-to-roll", "process intensification", "scale-up",
-        "smart manufactur", "biomanufactur", "process control"],
-    "Artificial intelligence and machine learning": [
-        "machine learning", "deep learning", "neural network",
-        "artificial intelligence", "data-driven", "autonomous experiment",
-        "digital twin", "surrogate model", "high-throughput screening"],
-    "Quantum science": [
-        "quantum computing", "quantum material", "quantum sensing",
-        "quantum information", "quantum chemistry"],
-    "Biology and biotechnology": [
-        "biotechnology", "microbial", "synthetic biology", "enzyme",
-        "bioreactor", "metabolic engineering", "fermentation", "biocataly",
-        "biopolymer", "biomaterial", "bioprocess", "cell culture",
-        "protein engineering", "genome"],
-    "Environmental science": [
-        "environmental remediation", "pollution", "emissions", "bioremediation",
-        "air quality", "contaminant", "ecosystem", "circular economy",
-        "recycling", "upcycling"],
-    "Water": [
-        "water treatment", "wastewater", "drinking water", "desalinat",
-        "water purification", "water resources", "water quality"],
-    "Public health": [
-        "clinical trial", "drug delivery", "therapeutic", "pharmaceutical",
-        "vaccine", "diagnostic", "medical countermeasure"],
-    "Infectious disease": [
-        "antibiotic", "antimicrobial", "pathogen", "infection", "antifungal",
-        "antiviral", "biosurveillance"],
-    "Climate change": [
-        "climate change", "greenhouse gas", "global warming", "climate resilience"],
-    "Space and aeronautics": [
-        "aerospace", "spacecraft", "aeronautic", "propulsion",
-        "in situ resource", "lunar", "planetary"],
-}
-
-BRIDGE_THEMES: list[dict] = [
-    {"label": "CO₂ conversion and utilization",
-     "domains": ["Catalysis and reaction engineering", "Carbon management"],
-     "terms": ["co2 utilization", "co2 conversion", "co2 reduction",
-               "carbon utilization", "e-fuels", "fuels from co2", "co2 hydrogenation"]},
-    {"label": "Data-driven catalyst discovery",
-     "domains": ["Artificial intelligence and machine learning",
-                 "Catalysis and reaction engineering"],
-     "terms": ["catalyst discovery", "catalyst screening", "machine learning",
-               "high-throughput", "autonomous"]},
-    {"label": "AI for materials discovery",
-     "domains": ["Artificial intelligence and machine learning", "Materials science"],
-     "terms": ["materials discovery", "materials genome", "autonomous experiment",
-               "materials acceleration", "inverse design"]},
-    {"label": "Carbon capture materials",
-     "domains": ["Separations and membranes", "Carbon management"],
-     "terms": ["carbon capture", "direct air capture", "co2 separation",
-               "capture sorbent", "point-source capture"]},
-    {"label": "Electrochemical energy conversion",
-     "domains": ["Energy", "Catalysis and reaction engineering"],
-     "terms": ["electrolysis", "electrolyzer", "fuel cell", "electrocataly",
-               "hydrogen production"]},
-    {"label": "Energy storage materials",
-     "domains": ["Energy", "Materials science"],
-     "terms": ["battery", "energy storage", "solid-state electrolyte",
-               "electrode material"]},
-    {"label": "Biomaterials and biomanufacturing",
-     "domains": ["Biology and biotechnology", "Materials science"],
-     "terms": ["biomaterial", "biomanufactur", "biopolymer", "bioprocess",
-               "tissue engineering", "bioink"]},
-    {"label": "Sustainable polymers and plastics upcycling",
-     "domains": ["Materials science", "Environmental science"],
-     "terms": ["plastic", "upcycling", "recycling", "circular economy",
-               "biodegradable", "depolymerization"]},
-    {"label": "Smart and digital manufacturing",
-     "domains": ["Manufacturing", "Artificial intelligence and machine learning"],
-     "terms": ["digital twin", "smart manufacturing", "process optimization",
-               "advanced manufacturing", "cyber-physical"]},
-    {"label": "Environmental biotechnology",
-     "domains": ["Biology and biotechnology", "Environmental science"],
-     "terms": ["bioremediation", "wastewater", "antimicrobial resistance",
-               "microbiome", "environmental microbial"]},
-    {"label": "Water treatment and separations",
-     "domains": ["Separations and membranes", "Environmental science"],
-     "terms": ["water treatment", "desalination", "pfas", "contaminant removal",
-               "water reuse"]},
-]
-
-# Open-scope BAAs and omnibus calls often contain only administrative text.
-# This small hand-checked map contributes the weakest signal and is used only
-# when the record is recognizably open-scope; every such result is visibly
-# flagged for verification in the UI.
-AGENCY_SCOPE: list[dict] = [
-    {"label": "Office of Naval Research / Navy labs",
-     "pattern": "office of naval research|naval research lab|nswc|navsea|\\bonr\\b",
-     "domains": ["Materials science", "Energy", "Manufacturing",
-                 "Artificial intelligence and machine learning"]},
-    {"label": "Army research (ARL / ARO / DEVCOM / ERDC)",
-     "pattern": "army research (?:laboratory|office)|devcom|"
-                "army combat capabilities|acc apg|"
-                "engineer research and development|\\berdc\\b|\\baro\\b|\\barl\\b",
-     "domains": ["Materials science", "Energy", "Manufacturing",
-                 "Artificial intelligence and machine learning", "Environmental science"]},
-    {"label": "Air Force research (AFOSR / AFRL)",
-     "pattern": "air force (?:office of scientific research|research laboratory)|"
-                "afosr|afrl",
-     "domains": ["Materials science", "Energy", "Manufacturing",
-                 "Artificial intelligence and machine learning", "Space and aeronautics"]},
-    {"label": "DARPA", "pattern": "\\bdarpa\\b|defense advanced research",
-     "domains": ["Materials science", "Manufacturing", "Energy",
-                 "Artificial intelligence and machine learning", "Biology and biotechnology"]},
-    {"label": "DOE Office of Science / ARPA-E",
-     "pattern": "office of science|arpa-e|advanced research projects agency - energy|"
-                "national energy technology|golden field office",
-     "domains": ["Energy", "Materials science", "Catalysis and reaction engineering",
-                 "Carbon management", "Artificial intelligence and machine learning",
-                 "Quantum science", "Biology and biotechnology",
-                 "Separations and membranes"]},
-    {"label": "NASA", "pattern": "\\bnasa\\b",
-     "domains": ["Space and aeronautics", "Materials science", "Energy",
-                 "Manufacturing", "Artificial intelligence and machine learning"]},
-]
-
-BROAD_PATTERN = (
-    r"broad agency announcement|\bbaa\b|continuation of solicitation|"
-    r"office of science financial assistance|long[\s-]?range|"
-    r"research announcement|\broses\b|omnibus|unsolicited proposal|"
-    r"open topic|financial assistance program"
-)
-
-# These catalog facets are useful for browsing, but too broad to explain or
-# materially boost a researcher match. In particular, a single noisy
-# "Materials science" tag caused the Egypt Annual Program Statement to be
-# recommended to most of the department.
-_UMBRELLA_TOPICS = {
-    "Artificial intelligence and machine learning",
-    "Biology and biotechnology",
-    "Energy",
-    "Environmental science",
-    "Manufacturing",
-    "Materials science",
-}
-
-
-def _pi_domains(profile: dict) -> list[str]:
-    """Program topics a PI works in, inferred from their OpenAlex topics, recent
-    titles, and key phrases via :data:`DOMAIN_LEXICON`."""
-    text = " ".join(
-        (profile.get("topics") or [])
-        + (profile.get("recent_titles") or [])
-        + _key_terms(profile)
-    ).lower()
-    return [area for area, kws in DOMAIN_LEXICON.items()
-            if any(k in text for k in kws)]
-
-
-def _domains_for(name: str, profile: dict) -> list[str]:
-    """Curated program-topic domains if we have them (the norm), otherwise fall
-    back to the auto lexicon for any faculty not yet hand-curated."""
-    if name in FACULTY_DOMAINS:
-        return list(FACULTY_DOMAINS[name])
-    return _pi_domains(profile)
-
-
-def _niche_topics(catalog: list[dict]) -> set[str]:
-    """Retain topic-frequency metadata for diagnostics and compatibility.
-
-    Topic rarity no longer determines eligibility; the former rule mistakenly
-    treated a noisy Materials science tag as sufficient research evidence.
-    """
-    from collections import Counter
-    freq: Counter = Counter()
-    for r in catalog:
-        for x in (r.get("topic_areas") or []):
-            freq[x] += 1
-    cutoff = max(45, round(0.03 * len(catalog)))
-    return {t for t, c in freq.items() if c <= cutoff}
-
-
-def _best_url(r: dict) -> str:
-    for k in ("funding_opportunity_url", "primary_document_url", "detail_page", "url"):
-        u = r.get(k) or ""
-        if re.match(r"^https?://", str(u), re.I):
-            return str(u)
-    return ""
-
-
-def _deadline_text(r: dict) -> str:
-    cd = r.get("close_date")
-    if cd and re.match(r"^\d{4}-\d{2}-\d{2}$", str(cd)):
-        return "Closes " + str(cd)
-    return str(r.get("deadline_note") or r.get("close_date_note") or "")
-
-
-def _listing_date(r: dict) -> str:
-    """The date an opportunity was listed by its source or first seen here."""
-    for key in ("posted_date", "source_first_seen_date"):
-        value = str(r.get(key) or "")
-        if re.match(r"^\d{4}-\d{2}-\d{2}$", value):
-            return value
-    return ""
-
-
-def _listing_date_value(value: str) -> int:
-    return int(value.replace("-", "")) if re.match(r"^\d{4}-\d{2}-\d{2}$", value or "") else 0
-
-
-def _recency_score(value: str, newest_value: str) -> float:
-    """Return a bounded 0-3 recency contribution over a one-year window."""
-    try:
-        age = max(0, (date.fromisoformat(newest_value) - date.fromisoformat(value)).days)
-    except (TypeError, ValueError):
-        return 0.0
-    return round(3.0 * max(0.0, 1.0 - age / 365.0), 3)
-
-
-def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
-                     top_n: int = 25) -> dict:
-    """Match every PI against the catalog and emit a per-PI index the team page
-    uses to compute mutual interests for any chosen subset.
-
-    At least one focused research concept must match an opportunity. Catalog
-    topics may corroborate that evidence but never establish eligibility by
-    themselves. A bounded recency contribution is then combined with research
-    relevance so newer calls are favored without outranking a substantially
-    better scientific fit merely because of date.
-    """
-    catalog = [
-        record
-        for record in _load_catalog(catalog_path)
-        if not record.get("status") or record_is_current(record)[0]
-    ]
-    niche = _niche_topics(catalog)
-
-    # Roster = the full FACULTY list, so hand-curated people with no OpenAlex
-    # profile (Bhalode, Lawton) are still included. Curated key terms / domains
-    # take precedence; OpenAlex only supplies resolved_name / works_count.
-    prof_by_name = {p.get("name"): p for p in profiles if p.get("name")}
-    faculty_meta: dict[str, dict] = {}
-    faculty_terms: dict[str, list[str]] = {}
-    faculty_doms: dict[str, set] = {}
-    for name in FACULTY:
-        p = prof_by_name.get(name) or {"name": name}
-        terms = _key_terms(p)
-        doms = set(_domains_for(name, p))
-        if not terms and not doms:
-            continue
-        resolved = name if p.get("error") else (p.get("resolved_name") or name)
-        faculty_terms[name] = terms
-        faculty_doms[name] = doms
-        faculty_meta[name] = {
-            "resolved_name": resolved,
-            "openalex_id": None if p.get("error") else p.get("openalex_id"),
-            "works_count": None if p.get("error") else p.get("works_count"),
-            "research_summary": FACULTY_RESEARCH_SUMMARIES.get(name, ""),
-            "key_terms": terms,
-            "domains": sorted(doms),
-        }
-    term_sig = {name: [(t, _sig_words(t)) for t in terms]
-                for name, terms in faculty_terms.items()}
-
-    pi_matches: dict[str, list] = {name: [] for name in faculty_meta}
-    # opp_id -> [(name, tier, relevance_score, rank_score), ...]
-    per_opp: dict[str, list] = {}
-    newest_listing = max(
-        (_listing_date(opp) for opp in catalog),
-        key=_listing_date_value,
-        default="",
-    )
-
-    for opp in catalog:
-        title = opp.get("title") or ""
-        text = " ".join([
-            title, opp.get("description") or "",
-            " ".join(opp.get("disciplines") or []),
-        ]).lower()
-        opp_tokens = [w for w in _WORD_RE.findall(text) if w not in _STOP]
-        if not opp_tokens:
-            continue
-        opp_topics = set(opp.get("topic_areas") or [])
-        oid = (opp.get("opportunity_id") or opp.get("opportunity_number")
-               or title)
-        display = {
-            "id": oid, "title": title, "agency": opp.get("agency") or "",
-            "url": _best_url(opp), "deadline": _deadline_text(opp),
-            "listing_date": _listing_date(opp),
-        }
-        for name, sigs in term_sig.items():
-            doms = faculty_doms[name]
-            hit_terms = [t for (t, sig) in sigs
-                         if _phrase_hit(sig, opp_tokens)]
-            if not hit_terms:
-                continue
-            shared = sorted((doms & opp_topics) - _UMBRELLA_TOPICS)
-            relevance_score = round(
-                4.0 * len(hit_terms) + min(1.5, 0.25 * len(shared)), 3
-            )
-            recency_score = _recency_score(display["listing_date"], newest_listing)
-            rank_score = round(relevance_score + recency_score, 3)
-            pi_matches[name].append({
-                **display, "tier": "focused", "terms": hit_terms,
-                "shared_topics": shared, "score": relevance_score,
-                "relevance_score": relevance_score,
-                "recency_score": recency_score,
-                "rank_score": rank_score,
-            })
-            per_opp.setdefault(oid, []).append(
-                (name, "focused", relevance_score, rank_score)
-            )
-
-    for name in pi_matches:
-        pi_matches[name].sort(key=lambda m: (
-            -m["rank_score"], -_listing_date_value(m["listing_date"]),
-            -m["relevance_score"], (m["title"] or "").lower()))
-
-    # Department-wide overview: opportunities where 2+ faculty have focused
-    # concept evidence. Combined fit and recency determine order.
-    idx = {m["id"]: m for lst in pi_matches.values() for m in lst}
-    groups = []
-    for oid, members in per_opp.items():
-        if len({m[0] for m in members}) < 2:
-            continue
-        d = idx.get(oid, {})
-        team = []
-        for (name, tier, score, rank_score) in members:
-            mm = next((x for x in pi_matches[name] if x["id"] == oid), {})
-            team.append({"name": name, "tier": tier, "score": score,
-                         "rank_score": rank_score,
-                         "matched_terms": mm.get("terms") or [],
-                         "shared_topics": mm.get("shared_topics") or []})
-        team.sort(key=lambda t: (-t["rank_score"], -t["score"], t["name"]))
-        groups.append({
-            "opportunity_id": oid, "title": d.get("title") or oid,
-            "agency": d.get("agency") or "", "url": d.get("url") or "",
-            "deadline": d.get("deadline") or "",
-            "listing_date": d.get("listing_date") or "",
-            "team_size": len(team),
-            "total_score": sum(t["score"] for t in team),
-            "total_rank_score": round(sum(t["rank_score"] for t in team), 3),
-            "suggested_team": team[:12],
-        })
-    groups.sort(key=lambda g: (
-        -g["total_rank_score"], -_listing_date_value(g["listing_date"]),
-        -g["team_size"], -g["total_score"], (g["title"] or "").lower()))
-
-    out = {
-        "catalog_size": len(catalog),
-        "niche_topics": sorted(niche),
-        "faculty": faculty_meta,
-        "pi_matches": pi_matches,
-        "multi_pi_suggestions": groups,
-        "theme_lexicon": THEME_LEXICON,
-        "bridge_themes": BRIDGE_THEMES,
-        "agency_scope": AGENCY_SCOPE,
-        "broad_pattern": BROAD_PATTERN,
+def _catalog_identity(catalog: dict, raw: bytes) -> dict:
+    return {
+        "record_count": catalog["record_count"],
+        "generated_at": catalog.get("generated_at") or "",
+        "fingerprint": hashlib.sha256(raw).hexdigest(),
     }
-    with open(out_path, "w", encoding="utf-8") as fh:
-        fh.write("/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n")
-        fh.write("globalThis.FACULTY_MATCHES=")
-        json.dump(out, fh, ensure_ascii=False)
-        fh.write(";\n")
-    return out
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser()
-    sub = ap.add_subparsers(dest="cmd", required=True)
-    p1 = sub.add_parser("profiles")
-    p1.add_argument("--out", default="faculty_profiles.json")
-    p2 = sub.add_parser("match")
-    p2.add_argument("--catalog", default="data/opportunities.js")
-    p2.add_argument("--profiles", default="faculty_profiles.json")
-    p2.add_argument("--out", default="data/faculty_matches.js")
-    args = ap.parse_args()
+def _generation_id(source_sha: str, catalog_fingerprint: str) -> str:
+    value = f"{SCHEMA_FAMILY}:{DIRECTORY_SCHEMA_VERSION}:{GRAPH_SCHEMA_VERSION}:{source_sha}:{catalog_fingerprint}"
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
 
-    if args.cmd == "profiles":
-        profiles = build_profiles()
-        with open(args.out, "w", encoding="utf-8") as fh:
-            json.dump(profiles, fh, ensure_ascii=False, indent=2)
-        print(f"wrote {args.out} ({len(profiles)} faculty)")
-    elif args.cmd == "match":
-        profiles = json.load(open(args.profiles, encoding="utf-8"))
-        out = match_to_catalog(profiles, args.catalog, args.out)
-        print(f"wrote {args.out}: {len(out['multi_pi_suggestions'])} multi-PI suggestions")
+
+def _search_document(profile: dict) -> str:
+    return " ".join(_tokens(profile.get("research_interests_text"))) if profile.get("rankable") else ""
+
+
+def build_directory(config: dict, catalog_identity: dict, generation_id: str) -> dict:
+    profiles = [{
+        "faculty_id": profile["faculty_id"],
+        "name": profile["name"],
+        "home_unit": profile["home_unit"],
+        "relationship": profile["relationship"],
+        "relationship_label": profile["relationship_label"],
+        "rosters": profile["rosters"],
+        "appointment_text": profile["appointment_text"],
+        "rankable": profile["rankable"],
+        "search_document": _search_document(profile),
+    } for profile in config["profiles"]]
+    return {
+        "schema_family": SCHEMA_FAMILY,
+        "schema_version": DIRECTORY_SCHEMA_VERSION,
+        "generation_id": generation_id,
+        "catalog": catalog_identity,
+        "faculty_source": dict(config["source"]),
+        "profiles": profiles,
+    }
+
+
+def _faculty_idf(profiles: list[dict]) -> dict[str, float]:
+    rankable = [profile for profile in profiles if profile.get("rankable")]
+    document_frequency: Counter[str] = Counter()
+    for profile in rankable:
+        document_frequency.update(set(_distinctive_tokens(profile["research_interests_text"])))
+    total = len(rankable)
+    return {token: math.log((total + 1.0) / (count + 1.0)) + 1.0
+            for token, count in document_frequency.items()}
+
+
+def _published_subject_text(record: dict) -> str:
+    values: list[str] = []
+    for key in ("disciplines", "topic_areas"):
+        values.extend(str(item) for item in (record.get(key) or []) if item)
+    values.append(str(record.get("document_search_text") or ""))
+    for fact in (record.get("document_evidence") or {}).get("facts") or []:
+        if isinstance(fact, dict):
+            values.extend(str(fact.get(key) or "") for key in ("label", "value", "excerpt"))
+    return " ".join(values)
+
+
+def _opportunity_fields(record: dict) -> dict[str, str]:
+    return {
+        "title": str(record.get("title") or ""),
+        "description": str(record.get("description") or ""),
+        "published_subject": _published_subject_text(record),
+    }
+
+
+def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float]) -> tuple[bool, float]:
+    concepts = _distinctive_tokens(phrase)
+    if not concepts:
+        return False, 0.0
+    covered = [token for token in concepts if token in field_tokens]
+    if len(concepts) == 1:
+        admitted = len(covered) == 1 and idf.get(concepts[0], 0.0) >= 2.2
+    elif len(concepts) <= 3:
+        admitted = len(covered) == len(concepts)
+    else:
+        admitted = len(covered) >= max(3, math.ceil(0.75 * len(concepts)))
+    return admitted, sum(idf.get(token, 1.0) for token in covered)
+
+
+def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
+    clean = _SPACE_RE.sub(" ", text).strip()
+    if len(clean) <= limit:
+        return clean
+    lowered = _normalize(clean)
+    positions = [lowered.find(token) for token in concepts if lowered.find(token) >= 0]
+    center = min(positions) if positions else 0
+    start = max(0, center - 55)
+    end = min(len(clean), start + limit)
+    if end == len(clean):
+        start = max(0, end - limit)
+    return ("…" if start else "") + clean[start:end].strip() + ("…" if end < len(clean) else "")
+
+
+def _prepare_opportunity(record: dict) -> tuple[dict[str, str], dict[str, set[str]], set[str]]:
+    fields = _opportunity_fields(record)
+    token_sets = {field: set(_tokens(text)) for field, text in fields.items()}
+    return fields, token_sets, set().union(*token_sets.values())
+
+
+def score_profile_opportunity(profile: dict, record: dict, idf: dict[str, float],
+                              prepared: tuple[dict[str, str], dict[str, set[str]], set[str]] | None = None) -> dict | None:
+    if not profile.get("rankable"):
+        return None
+    fields, token_sets, opportunity_tokens = prepared or _prepare_opportunity(record)
+    phrase_hits: list[tuple[str, str, float]] = []
+    for phrase in profile["research_phrases"]:
+        best: tuple[str, float] | None = None
+        for field, tokens in token_sets.items():
+            admitted, rarity = _phrase_admitted(phrase, tokens, idf)
+            if admitted:
+                weighted = rarity * _FIELD_WEIGHTS[field]
+                if best is None or weighted > best[1] or (weighted == best[1] and field < best[0]):
+                    best = (field, weighted)
+        if best is not None:
+            phrase_hits.append((phrase, best[0], best[1]))
+    if not phrase_hits:
+        return None
+    phrase_hits.sort(key=lambda item: (-item[2], item[0].casefold(), item[1]))
+    chosen = phrase_hits[:4]
+    full_overlap = set(_distinctive_tokens(profile["research_interests_text"])) & opportunity_tokens
+    theme_hits = []
+    for theme in profile.get("derived_themes") or []:
+        theme_tokens = _distinctive_tokens(theme)
+        if theme_tokens and sum(token in opportunity_tokens for token in theme_tokens) >= min(2, len(theme_tokens)):
+            theme_hits.append(theme)
+    score = sum(item[2] for item in chosen)
+    score += min(8.0, 0.6 * sum(idf.get(token, 1.0) for token in full_overlap))
+    score += min(4.5, 1.5 * max(0, len(chosen) - 1))
+    score += min(1.5, 0.5 * len(theme_hits))
+    score = round(score, 3)
+    evidence = []
+    for field in ("title", "description", "published_subject"):
+        field_hits = [item for item in chosen if item[1] == field]
+        if not field_hits:
+            continue
+        concepts = [token for item in field_hits for token in _distinctive_tokens(item[0])]
+        excerpt = _excerpt(fields[field], concepts)
+        if excerpt:
+            evidence.append({"field": field, "excerpt": excerpt})
+    opportunity_id = str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+    if not opportunity_id:
+        return None
+    return {
+        "faculty_id": profile["faculty_id"],
+        "opportunity_id": opportunity_id,
+        "score": score,
+        "tier": "likely_relevant" if score >= 32.0 or len(chosen) >= 2 else "possible_relevance",
+        "matched_profile_phrases": [item[0] for item in chosen],
+        "opportunity_evidence": evidence[:2],
+        "corroborating_themes": theme_hits[:3],
+    }
+
+
+def _current_records(catalog: dict) -> list[dict]:
+    records = []
+    for record in catalog["opportunities"]:
+        if record.get("status") and not record_is_current(record)[0]:
+            continue
+        if not (record.get("opportunity_id") or record.get("opportunity_number")):
+            continue
+        records.append(record)
+    return sorted(records, key=lambda record: (
+        str(record.get("opportunity_id") or record.get("opportunity_number")),
+        str(record.get("title") or "").casefold(),
+    ))
+
+
+def build_graph(config: dict, catalog: dict, catalog_identity: dict, generation_id: str) -> dict:
+    profiles = config["profiles"]
+    idf = _faculty_idf(profiles)
+    candidates_by_opportunity: dict[str, list[dict]] = defaultdict(list)
+    for record in _current_records(catalog):
+        prepared = _prepare_opportunity(record)
+        for profile in profiles:
+            edge = score_profile_opportunity(profile, record, idf, prepared)
+            if edge is not None:
+                candidates_by_opportunity[edge["opportunity_id"]].append(edge)
+    opportunity_bounded: list[dict] = []
+    for opportunity_id in sorted(candidates_by_opportunity):
+        ranked = sorted(candidates_by_opportunity[opportunity_id], key=lambda edge: (
+            -edge["score"], edge["faculty_id"], edge["opportunity_id"],
+        ))
+        opportunity_bounded.extend(ranked[:MAX_FACULTY_PER_OPPORTUNITY])
+    candidates_by_faculty: dict[str, list[dict]] = defaultdict(list)
+    for edge in opportunity_bounded:
+        candidates_by_faculty[edge["faculty_id"]].append(edge)
+    retained: set[tuple[str, str]] = set()
+    for faculty_id in sorted(candidates_by_faculty):
+        ranked = sorted(candidates_by_faculty[faculty_id], key=lambda edge: (
+            -edge["score"], edge["opportunity_id"], edge["faculty_id"],
+        ))
+        retained.update((edge["faculty_id"], edge["opportunity_id"])
+                        for edge in ranked[:MAX_OPPORTUNITIES_PER_FACULTY])
+    edges = sorted(
+        (edge for edge in opportunity_bounded
+         if (edge["faculty_id"], edge["opportunity_id"]) in retained),
+        key=lambda edge: (edge["opportunity_id"], -edge["score"], edge["faculty_id"]),
+    )
+    by_opportunity: dict[str, list[int]] = defaultdict(list)
+    by_faculty: dict[str, list[int]] = defaultdict(list)
+    for index, edge in enumerate(edges):
+        by_opportunity[edge["opportunity_id"]].append(index)
+        by_faculty[edge["faculty_id"]].append(index)
+    contacts = {profile["faculty_id"]: {
+        "email": profile["email"],
+        "website_url": profile["website_url"],
+        "source_urls": profile["source_urls"],
+        "checked_date": profile["checked_date"],
+    } for profile in profiles}
+    return {
+        "schema_family": SCHEMA_FAMILY,
+        "schema_version": GRAPH_SCHEMA_VERSION,
+        "generation_id": generation_id,
+        "catalog": catalog_identity,
+        "faculty_source": dict(config["source"]),
+        "contacts": contacts,
+        "edges": edges,
+        "by_opportunity": dict(by_opportunity),
+        "by_faculty": dict(by_faculty),
+    }
+
+
+def validate_assets(directory: dict, graph: dict, *, enforce_budgets: bool = False,
+                    directory_bytes: bytes | None = None, graph_bytes: bytes | None = None) -> None:
+    if directory.get("schema_family") != SCHEMA_FAMILY or graph.get("schema_family") != SCHEMA_FAMILY:
+        raise FacultyMatchError("Generated assets have an incompatible schema family")
+    if directory.get("schema_version") != DIRECTORY_SCHEMA_VERSION or graph.get("schema_version") != GRAPH_SCHEMA_VERSION:
+        raise FacultyMatchError("Generated assets have incompatible schema versions")
+    for field in ("generation_id", "catalog", "faculty_source"):
+        if directory.get(field) != graph.get(field):
+            raise FacultyMatchError(f"Generated assets disagree on {field}")
+    source = directory["faculty_source"]
+    if len(directory.get("profiles") or []) != source.get("record_count"):
+        raise FacultyMatchError("Directory profile count disagrees with faculty source")
+    edges = graph.get("edges") or []
+    if len({(edge["faculty_id"], edge["opportunity_id"]) for edge in edges}) != len(edges):
+        raise FacultyMatchError("Graph contains duplicate faculty/opportunity edges")
+    seen_indexes: list[int] = []
+    for opportunity_id, indexes in graph.get("by_opportunity", {}).items():
+        if len(indexes) > MAX_FACULTY_PER_OPPORTUNITY:
+            raise FacultyMatchError(f"Opportunity {opportunity_id} exceeds the top-N bound")
+        for index in indexes:
+            if index < 0 or index >= len(edges) or edges[index]["opportunity_id"] != opportunity_id:
+                raise FacultyMatchError("Opportunity reverse index is inconsistent")
+            seen_indexes.append(index)
+    if sorted(seen_indexes) != list(range(len(edges))):
+        raise FacultyMatchError("Every edge must appear exactly once in by_opportunity")
+    for faculty_id, indexes in graph.get("by_faculty", {}).items():
+        if len(indexes) > MAX_OPPORTUNITIES_PER_FACULTY:
+            raise FacultyMatchError(f"Faculty {faculty_id} exceeds the top-N bound")
+        for index in indexes:
+            if index < 0 or index >= len(edges) or edges[index]["faculty_id"] != faculty_id:
+                raise FacultyMatchError("Faculty reverse index is inconsistent")
+    unrankable = {profile["faculty_id"] for profile in directory["profiles"] if not profile["rankable"]}
+    if any(edge["faculty_id"] in unrankable for edge in edges):
+        raise FacultyMatchError("Unrankable faculty must not appear in match edges")
+    if enforce_budgets:
+        if directory_bytes is None or graph_bytes is None:
+            raise FacultyMatchError("Asset bytes are required for budget validation")
+        measurements = (
+            ("directory raw", len(directory_bytes), DIRECTORY_RAW_BUDGET),
+            ("directory gzip", len(gzip.compress(directory_bytes, mtime=0)), DIRECTORY_GZIP_BUDGET),
+            ("graph raw", len(graph_bytes), GRAPH_RAW_BUDGET),
+            ("graph gzip", len(gzip.compress(graph_bytes, mtime=0)), GRAPH_GZIP_BUDGET),
+        )
+        for label, actual, budget in measurements:
+            if actual > budget:
+                raise FacultyMatchError(f"{label} size {actual} exceeds budget {budget}")
+
+
+def _js_bytes(global_name: str, value: dict) -> bytes:
+    header = "/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n"
+    body = json.dumps(value, ensure_ascii=False, separators=(",", ":"), sort_keys=False)
+    return f"{header}globalThis.{global_name}={body};\n".encode("utf-8")
+
+
+def generate_assets(faculty_config_path: str | Path, catalog_path: str | Path,
+                    directory_out: str | Path, graph_out: str | Path) -> tuple[dict, dict]:
+    config, _ = load_faculty_config(faculty_config_path)
+    catalog, catalog_bytes = load_catalog(catalog_path)
+    catalog_identity = _catalog_identity(catalog, catalog_bytes)
+    generation_id = _generation_id(config["source"]["sha256"], catalog_identity["fingerprint"])
+    directory = build_directory(config, catalog_identity, generation_id)
+    graph = build_graph(config, catalog, catalog_identity, generation_id)
+    directory_bytes = _js_bytes("HAJIM_FACULTY_DIRECTORY", directory)
+    graph_bytes = _js_bytes("FACULTY_MATCHES", graph)
+    validate_assets(directory, graph, enforce_budgets=True,
+                    directory_bytes=directory_bytes, graph_bytes=graph_bytes)
+    Path(directory_out).write_bytes(directory_bytes)
+    Path(graph_out).write_bytes(graph_bytes)
+    return directory, graph
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="command", required=True)
+    match = sub.add_parser("match")
+    match.add_argument("--catalog", default="data/opportunities.js")
+    match.add_argument("--faculty-config", default="config/hajim_faculty.json")
+    match.add_argument("--directory-out", default="data/hajim_faculty_directory.js")
+    match.add_argument("--out", default="data/faculty_matches.js")
+    args = parser.parse_args(argv)
+    directory, graph = generate_assets(args.faculty_config, args.catalog, args.directory_out, args.out)
+    directory_bytes = Path(args.directory_out).read_bytes()
+    graph_bytes = Path(args.out).read_bytes()
+    print(f"Wrote {args.directory_out}: {len(directory['profiles'])} faculty, "
+          f"{len(directory_bytes)} raw / {len(gzip.compress(directory_bytes, mtime=0))} gzip bytes")
+    print(f"Wrote {args.out}: {len(graph['edges'])} edges, "
+          f"{len(graph_bytes)} raw / {len(gzip.compress(graph_bytes, mtime=0))} gzip bytes")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

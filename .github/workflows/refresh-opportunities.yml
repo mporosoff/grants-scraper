@@ -11,6 +11,13 @@ on:
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
       - "scripts/faculty_match.py"
+      - "scripts/import_hajim_faculty.py"
+      - "config/hajim_faculty.json"
+      - "assets/hajim-faculty.js"
+      - "assets/hajim-reverse-match.js"
+      - "tests/test_faculty_match.py"
+      - "tests/test_import_hajim_faculty.py"
+      - "tests/browser/hajim-reverse-match-contract.test.mjs"
       - "scripts/program_areas.py"
       - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
@@ -255,11 +262,12 @@ jobs:
           --write
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
-      - name: Rebuild faculty metadata and live team-matcher configuration
+      - name: Rebuild Hajim faculty directory and match graph atomically
         run: >-
           python -m scripts.faculty_match match
           --catalog data/opportunities.js
-          --profiles faculty_profiles.json
+          --faculty-config config/hajim_faculty.json
+          --directory-out data/hajim_faculty_directory.js
           --out data/faculty_matches.js
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
@@ -438,7 +446,7 @@ jobs:
           # would abort the commit and stop the nightly publishing entirely.
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/hajim_faculty_directory.js data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
           if [ -f data/subtopics.js ]; then
             git add data/subtopics.js
           fi

@@ -75,8 +75,9 @@ function buildIndex(records, query) {
 test("wires the researcher picker and editor into a syntactically valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
   assert.match(teamPage, /id="researcher-picker"/);
-  assert.match(teamPage, /id="researcher-choice"/);
-  assert.match(teamPage, /id="choose-researcher"/);
+  assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
+  assert.match(teamPage, /id="faculty-suggestions" role="listbox"/);
+  assert.match(teamPage, /id="manual-researcher"/);
   assert.match(teamPage, /id="external-researcher-form"/);
   assert.match(teamPage, /id="external-orcid"/);
   assert.match(teamPage, /id="import-external-orcid"/);
@@ -112,35 +113,35 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with one Add researcher control instead of a department pill wall", () => {
+test("starts with one Add researcher control instead of a faculty button wall", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
-  assert.match(grid, />\s*Add researcher\s*<\/button>/);
+  assert.match(grid, />\s*Add a researcher\s*<\/button>/);
   assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
-  assert.match(teamPage, /facultyGroup\.label = "Department faculty"/);
-  assert.match(teamPage, /savedGroup\.label = "Saved researchers"/);
-  assert.match(teamPage, /newGroup\.label = "Add a new researcher"/);
-  assert.match(teamPage, /selected\.indexOf\(name\) === -1/);
-  assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
+  assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
+  assert.match(teamPage, /Add a researcher manually/);
+  assert.match(teamPage, /facultySearchResults = HAJIM_API\.search/);
+  assert.match(teamPage, /limit: 12/);
+  assert.match(teamPage, /selected\.indexOf\(key\) !== -1/);
 });
 
-test("opens the researcher picker without forcing the native select open", () => {
+test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /picker\.hidden = !opening/);
-  assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
-  const newResearcher = teamPage.indexOf('newGroup.label = "Add a new researcher"');
-  const faculty = teamPage.indexOf('facultyGroup.label = "Department faculty"');
-  const saved = teamPage.indexOf('savedGroup.label = "Saved researchers"');
-  assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
+  assert.match(teamPage, /aria-autocomplete="list"/);
+  assert.match(teamPage, /aria-controls="faculty-suggestions"/);
+  assert.match(teamPage, /aria-activedescendant/);
+  assert.match(teamPage, /event\.key === "ArrowDown"/);
+  assert.match(teamPage, /event\.key === "Enter"/);
+  assert.match(teamPage, /event\.key === "Escape"/);
 });
 
-test("shows an accessible progress state while adding a researcher", () => {
+test("shows an accessible progress state while lazy-loading faculty matches", () => {
   assert.match(teamPage, /id="researcher-picker-status" role="status" aria-live="polite"/);
-  assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
-  assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
-  assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
-  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
-  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
-  assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+  assert.match(teamPage, /id="faculty-search-status" role="status" aria-live="polite"/);
+  assert.match(teamPage, /Loading evidence-qualified matches for/);
+  assert.match(teamPage, /function ensureFacultyGraph\(\)/);
+  assert.match(teamPage, /ensureFacultyGraph\(\)\.then/);
+  assert.match(teamPage, /Directory search and manual entry are still available; try again/);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {
@@ -156,11 +157,12 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
 });
 
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {
-  assert.match(teamPage, /function chooseResearcher\(\)/);
-  assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
+  assert.match(teamPage, /function chooseFaculty\(facultyId\)/);
+  assert.match(teamPage, /selected\.indexOf\(facultyId\) !== -1/);
   assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
   assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
-  assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
+  assert.match(teamPage, /addButton\.disabled = selected\.length >= MAX/);
+  assert.match(teamPage, /Team limit reached: remove a researcher/);
   assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
   assert.match(teamPage, /autoSelected = !wasEditing && selected\.length < MAX/);
   assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
@@ -488,26 +490,13 @@ test("requires focused evidence and balances relevance with listing date", () =>
 });
 
 test("the live Egypt diplomacy notice is not a faculty research match", () => {
-  const { query, retrieval, team } = loadApis();
   const catalog = assignmentJson(catalogSource);
   const generated = assignmentJson(facultyMatchesSource);
-  const engine = retrieval.create(catalog, query);
-
-  for (const name of ["Marc D. Porosoff", "Siddharth Deshpande"]) {
-    const metadata = generated.faculty[name];
-    const matches = team.buildMatches(
-      { name, keywords: metadata.key_terms, domains: metadata.domains },
-      catalog,
-      query,
-      generated.niche_topics,
-      engine,
-    );
-    assert.equal(matches.some(match => match.title === "Egypt Annual Program Statement"), false);
-  }
-  assert.equal(
-    generated.multi_pi_suggestions.some(group => group.title === "Egypt Annual Program Statement"),
-    false,
-  );
+  const egypt = catalog.opportunities.find(record => record.title === "Egypt Annual Program Statement");
+  if (!egypt) return;
+  const id = String(egypt.opportunity_id || egypt.opportunity_number);
+  const edges = (generated.by_opportunity[id] || []).map(index => generated.edges[index]);
+  assert.equal(edges.some(edge => ["marc-d-porosoff", "siddharth-deshpande"].includes(edge.faculty_id)), false);
 });
 
 test("presents one interactive full-team list with graded themes and broad-call flags", () => {
@@ -541,56 +530,26 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.doesNotMatch(teamPage, />specific<\/span>/);
 });
 
-test("production acceptance suite keeps broad and focused calls while excluding noise", () => {
-  const { query, matcher } = loadApis();
-  const catalog = assignmentJson(catalogSource);
+test("production graph keeps every-member intersections monotonic and bounded", () => {
   const generated = assignmentJson(facultyMatchesSource);
-  const engine = matcher.create(catalog, generated, query, { now: new Date("2026-08-11T00:00:00Z") });
-  const names = ["Marc D. Porosoff", "Astrid M. Muller", "Siddharth Deshpande", "Yasemin Basdogan"];
-  const profiles = names.map(name => ({ name, ...generated.faculty[name] }));
-  const two = engine.matchTeam(profiles.slice(0, 2)).results;
-  const three = engine.matchTeam(profiles.slice(0, 3)).results;
-  const four = engine.matchTeam(profiles).results;
-  const ids = new Set(four.map(item => item.id));
-
-  const expectedBroadPatterns = [
-    /Office of Science Financial Assistance Program/i,
-    /Long Range Broad Agency Announcement.*Navy and Marine Corps/i,
-  ];
-  for (const pattern of expectedBroadPatterns) {
-    const current = engine.records.find(item => pattern.test(item.record.title || ""));
-    if (current) {
-      assert.ok(ids.has(current.id), `expected current broad call to match: ${current.record.title}`);
-    }
+  const faculty = Object.entries(generated.by_faculty)
+    .filter(([, indexes]) => indexes.length >= 3)
+    .slice(0, 4)
+    .map(([id]) => id);
+  assert.ok(faculty.length >= 2);
+  const opportunitySet = id => new Set(generated.by_faculty[id].map(index => generated.edges[index].opportunity_id));
+  const intersections = faculty.map(opportunitySet).reduce((rows, current, index) => {
+    if (index === 0) return [current];
+    const next = new Set([...rows[index - 1]].filter(id => current.has(id)));
+    rows.push(next);
+    return rows;
+  }, []);
+  for (let index = 1; index < intersections.length; index += 1) {
+    assert.ok(intersections[index].size <= intersections[index - 1].size);
   }
-  assert.ok(four.length >= 1, "the production team intersection should not be empty");
-  assert.ok(four.some(item => item.broad), "the production team should retain a broad sponsor call");
-  assert.equal(
-    four.some(item => /public diplomacy|embassy|consulate/i.test(`${item.agency} ${item.title}`)),
-    false,
-    "public-diplomacy calls must be excluded",
-  );
-  assert.equal(
-    four.some(item => /mine safety|Brookwood-Sago/i.test(`${item.agency} ${item.title}`)),
-    false,
-    "mine-safety calls must be excluded",
-  );
-  assert.equal(
-    four.some(item => /^ROSES\s*(?:20)?\d{2}:\s*[A-Z]\.\d+/i.test(item.title)),
-    false,
-    "specific NASA program elements must not inherit the agency-wide scope signal",
-  );
-  assert.ok(four.every(item => item.fits.length === profiles.length));
-  assert.ok(three.length <= two.length);
-  assert.ok(four.length <= three.length);
-
-  const onr = four.find(item => /Navy and Marine Corps Science and Technology/i.test(item.title));
-  if (onr) assert.equal(onr.broad, true);
-
-  Object.values(generated.faculty).forEach(metadata => {
-    const count = engine.matchProfile({ name: metadata.resolved_name, ...metadata }).length;
-    assert.ok(count >= 1 && count <= 500, `per-PI match count ${count} should remain bounded`);
-  });
+  assert.ok(Object.values(generated.by_opportunity).every(indexes => indexes.length <= 12));
+  assert.ok(Object.values(generated.by_faculty).every(indexes => indexes.length <= 25));
+  assert.equal(new Set(generated.edges.map(edge => `${edge.faculty_id}:${edge.opportunity_id}`)).size, generated.edges.length);
 });
 
 test("uses the same PFAS and fuzzy retrieval for faculty and external profiles", () => {

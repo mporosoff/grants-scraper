@@ -95,6 +95,7 @@
           <div><strong>Why this matched</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
+          <div><strong>Find relevant Hajim faculty</strong><span>Open a local, evidence-qualified faculty panel for one opportunity. This uses official profile phrases and does not require AI.</span></div>
           <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results after connecting a provider.</span></div>
         </div>
         <p class="help-footnote">“Recently posted” uses the catalog's listed or first-seen date. “Relevance” combines the words and concepts in your query, profile, and filters. Recently posted and closing-soon labels help with timing but do not replace deadline verification.</p>
@@ -168,7 +169,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Build a team</h4>
-            <p>Select two to four researchers. Choose department faculty or save another researcher using specific research keywords, an ORCID publication import, or both.</p>
+            <p>Select two to four researchers. Search the reviewed 156-person Hajim directory by name, unit, roster, or official interest, or use the separate <strong>Add a researcher manually</strong> path with specific keywords, an ORCID publication import, or both.</p>
           </div>
           <div class="help-card">
             <h4>Steer the themes</h4>

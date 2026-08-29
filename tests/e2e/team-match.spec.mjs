@@ -19,12 +19,6 @@ async function assertNoHorizontalOverflow(page) {
 }
 
 test("Team Match supports department, manual, duplicate, team-size, history, progress, and mobile workflows", async ({ page }) => {
-  await page.addInitScript(() => {
-    const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
-    globalThis.setTimeout = (callback, delay, ...args) => (
-      nativeSetTimeout(callback, delay === 25 ? 350 : delay, ...args)
-    );
-  });
   mockHybrid(page);
   const errors = watchRuntimeErrors(page);
   await openTeamMatch(page);
@@ -32,13 +26,8 @@ test("Team Match supports department, manual, duplicate, team-size, history, pro
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(0);
   await expect(page.locator("#add-researcher")).toBeVisible();
 
-  await page.locator("#add-researcher").click();
-  const firstOption = page.locator('#researcher-choice optgroup[label="Department faculty"] option').first();
-  const firstValue = await firstOption.getAttribute("value");
-  const firstLabel = (await firstOption.textContent()).trim();
-  await page.locator("#researcher-choice").selectOption(firstValue);
-  await page.locator("#choose-researcher").click();
-  await expect(page.locator("#researcher-picker-status")).toContainText(`Adding ${firstLabel} to the team`);
+  const first = await addDepartmentResearcher(page, 0);
+  const firstLabel = first.label;
   await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
 
   const second = await addDepartmentResearcher(page, 0);
@@ -46,22 +35,22 @@ test("Team Match supports department, manual, duplicate, team-size, history, pro
   await expect(page.locator("#count")).toContainText("fit every selected researcher");
 
   await page.locator("#add-researcher").click();
-  await page.locator("#researcher-choice").selectOption("__new__");
-  await page.locator("#choose-researcher").click();
+  await page.locator("#manual-researcher").click();
   await expect(page.locator("#external-researcher-form")).toBeVisible();
   await page.locator("#external-name").fill("Gate Four Researcher");
-  await page.locator("#external-keywords").fill("catalysis, electrochemistry, chemical engineering, carbon capture");
+  await page.locator("#external-keywords").fill("artificial intelligence, machine learning, computer vision, human computer interaction");
   await page.getByRole("button", { name: /Save researcher/i }).click();
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
-  await expect(page.locator('#researcher-choice optgroup[label="Saved researchers"] option', { hasText: "Gate Four Researcher" })).toHaveCount(0);
+  await expect(page.locator('#saved-researchers button', { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
 
   const fourth = await addDepartmentResearcher(page, 0);
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
-  await expect(page.locator("#add-researcher")).toBeHidden();
+  await expect(page.locator("#add-researcher")).toBeDisabled();
+  await expect(page.locator("#team-hint")).toContainText("Team limit reached");
   await page.getByRole("button", { name: `Remove ${fourth.label} from team` }).click();
-  await expect(page.locator("#add-researcher")).toBeVisible();
+  await expect(page.locator("#add-researcher")).toBeEnabled();
 
   await page.setViewportSize({ width: 390, height: 844 });
   await assertNoHorizontalOverflow(page);

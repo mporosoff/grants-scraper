@@ -1,0 +1,113 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import vm from "node:vm";
+
+const [apiSource, reverseSource, directorySource, graphSource, catalogSource, finderPage, teamPage] = await Promise.all([
+  readFile(new URL("../../assets/hajim-faculty.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/hajim-reverse-match.js", import.meta.url), "utf8"),
+  readFile(new URL("../../data/hajim_faculty_directory.js", import.meta.url), "utf8"),
+  readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
+  readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
+  readFile(new URL("../../match_explorer.html", import.meta.url), "utf8"),
+  readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
+]);
+
+function assignmentJson(source) {
+  return JSON.parse(source.slice(source.indexOf("{"), source.lastIndexOf(";")).trim());
+}
+
+function loadApi() {
+  const context = { globalThis: {} };
+  vm.runInNewContext(apiSource, context);
+  return context.globalThis.HajimFaculty;
+}
+
+const directory = assignmentJson(directorySource);
+const graph = assignmentJson(graphSource);
+const catalog = assignmentJson(catalogSource);
+
+test("validates the shared schema, fingerprint, and reviewed roster counts", () => {
+  const api = loadApi();
+  assert.equal(api.validateDirectory(directory, catalog), directory);
+  assert.equal(api.validateGraph(graph, directory, catalog), graph);
+  assert.equal(directory.faculty_source.record_count, 156);
+  assert.equal(directory.faculty_source.rankable_record_count, 145);
+  assert.equal(directory.faculty_source.unlisted_interest_count, 11);
+  assert.equal(directory.generation_id, graph.generation_id);
+  assert.equal(directory.catalog.fingerprint, graph.catalog.fingerprint);
+  assert.throws(() => api.validateGraph({ ...graph, generation_id: "stale" }, directory, catalog), /out of sync/);
+});
+
+test("looks up each opportunity edge once and applies the 126-person scope", () => {
+  const api = loadApi();
+  const opportunityId = Object.keys(graph.by_opportunity).find(id => {
+    const all = api.opportunityMatches(graph, directory, id, false);
+    const primary = api.opportunityMatches(graph, directory, id, true);
+    return all.length > primary.length;
+  });
+  assert.ok(opportunityId, "fixture graph should include a broader-roster match");
+  const all = api.opportunityMatches(graph, directory, opportunityId, false);
+  const primary = api.opportunityMatches(graph, directory, opportunityId, true);
+  assert.ok(all.length <= 12);
+  assert.ok(primary.length < all.length);
+  assert.ok(primary.every(item => ["hajim_primary_core", "hajim_research"].includes(item.profile.relationship)));
+  assert.equal(new Set(all.map(item => `${item.edge.faculty_id}:${item.edge.opportunity_id}`)).size, all.length);
+});
+
+test("keeps directory search local, ordered, and bounded to twelve results", () => {
+  const api = loadApi();
+  const target = directory.profiles.find(profile => profile.name === "Marc D. Porosoff");
+  assert.equal(api.search(directory, "Marc D. Porosoff")[0].faculty_id, target.faculty_id);
+  assert.equal(api.search(directory, "Marc D")[0].faculty_id, target.faculty_id);
+  const unitResults = api.search(directory, "Chemical and Sustainability Engineering");
+  assert.ok(unitResults.length > 0 && unitResults.length <= 12);
+  assert.ok(unitResults.every(profile => api.normalize([profile.home_unit, ...profile.rosters].join(" ")).includes("chemical and sustainability engineering")));
+  assert.ok(api.search(directory, "CO2 capture").some(profile => profile.faculty_id === target.faculty_id));
+  assert.equal(api.search(directory, "m").length, 0);
+  assert.ok(api.search(directory, "", { showAll: true }).length <= 12);
+  assert.doesNotMatch(apiSource, /fetch\(|XMLHttpRequest|sendBeacon|analytics/i);
+});
+
+test("Funding Finder lazy-loads both projections and isolates a failed faculty load", () => {
+  assert.match(finderPage, /assets\/hajim-faculty\.js/);
+  assert.match(finderPage, /assets\/hajim-reverse-match\.js/);
+  assert.doesNotMatch(finderPage, /<script[^>]+(?:hajim_faculty_directory|faculty_matches)\.js/);
+  assert.match(reverseSource, /data\/hajim_faculty_directory\.js/);
+  assert.match(reverseSource, /data\/faculty_matches\.js/);
+  assert.match(reverseSource, /Ordinary Funding Finder search and actions still work/);
+  assert.match(reverseSource, /data-hajim-retry/);
+  assert.doesNotMatch(reverseSource, /OpenAI|Anthropic|model provider|fetch\(/i);
+});
+
+test("Team Match loads the directory initially but graph only after Hajim selection", () => {
+  assert.match(teamPage, /<script src="data\/hajim_faculty_directory\.js/);
+  assert.doesNotMatch(teamPage, /<script src="data\/faculty_matches\.js/);
+  assert.match(teamPage, /function ensureFacultyGraph\(\)/);
+  assert.match(teamPage, /ensureFacultyGraph\(\)\.then/);
+  assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
+  assert.match(teamPage, /role="combobox"/);
+  assert.match(teamPage, /aria-activedescendant/);
+  assert.match(teamPage, /Add a researcher manually/);
+  assert.match(teamPage, /For collaborators outside Hajim or anyone not listed/);
+  assert.doesNotMatch(teamPage, /<select id="researcher-choice"/);
+});
+
+test("browser code never requests the workbook or canonical JSON", () => {
+  const browserSources = [apiSource, reverseSource, finderPage, teamPage].join("\n");
+  assert.doesNotMatch(browserSources, /\.xlsx/i);
+  assert.doesNotMatch(browserSources, /config\/hajim_faculty\.json/i);
+});
+
+test("reverse-match explanations and accessible one-panel behavior are deterministic", () => {
+  assert.match(reverseSource, /Matched faculty interest:/);
+  assert.match(reverseSource, /Opportunity evidence/);
+  assert.match(reverseSource, /Derived corroboration:/);
+  assert.match(reverseSource, /Source checked/);
+  assert.match(reverseSource, /Likely relevant/);
+  assert.match(reverseSource, /Possible relevance/);
+  assert.match(reverseSource, /closeCurrent\(\{ restoreFocus: false \}\)/);
+  assert.match(reverseSource, /trigger\.setAttribute\("aria-expanded", "true"\)/);
+  assert.match(reverseSource, /heading\.focus\(\)/);
+  assert.match(reverseSource, /closeCurrent\(\{ restoreFocus: true \}\)/);
+});

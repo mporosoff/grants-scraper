@@ -16,6 +16,7 @@ faculty.csv
 !/data/document_evidence.json
 !/data/source_records.json
 !/data/link_health.json
+!/data/hajim_faculty_directory.js
 !/data/faculty_matches.js
 # Added ahead of the cache itself: /data/* is deny-by-default, so a new cache
 # file is invisible to git, and `git add` on an ignored path exits non-zero --

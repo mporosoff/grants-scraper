@@ -1573,6 +1573,141 @@ textarea:focus {
   background: #123f83;
 }
 
+.hajim-match-trigger[aria-expanded="true"] {
+  color: #0d6545;
+  background: #e4f6ee;
+  border-color: #68aa91;
+}
+
+.hajim-match-panel {
+  margin-top: 14px;
+  padding: 16px;
+  background: #f7faff;
+  border: 1px solid #b9cee7;
+  border-radius: 11px;
+}
+
+.hajim-match-heading,
+.hajim-faculty-title,
+.hajim-match-controls,
+.hajim-faculty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hajim-match-heading h4,
+.hajim-faculty-title h5 {
+  margin: 0;
+  color: var(--navy);
+}
+
+.hajim-match-heading .eyebrow {
+  margin: 0 0 3px;
+}
+
+.hajim-match-close {
+  padding: 7px 10px;
+  color: var(--blue-dark);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 800;
+  background: white;
+  border: 1px solid #b9c9dc;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.hajim-match-controls {
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+.hajim-match-controls label {
+  color: var(--navy);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.hajim-match-controls select {
+  max-width: 100%;
+  padding: 7px 9px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+}
+
+.hajim-match-note,
+.hajim-unranked-note,
+.hajim-no-matches {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.hajim-unranked-note {
+  padding: 8px 10px;
+  background: #fff9e8;
+  border-left: 3px solid #d69d22;
+}
+
+.hajim-match-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.hajim-faculty-match {
+  padding: 12px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.hajim-faculty-title p,
+.hajim-faculty-match > p {
+  margin: 4px 0 0;
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.hajim-tier {
+  padding: 4px 7px;
+  color: #0d6545;
+  font-size: .7rem;
+  font-weight: 850;
+  background: #e4f6ee;
+  border-radius: 999px;
+}
+
+.hajim-evidence,
+.hajim-derived {
+  color: var(--muted);
+}
+
+.hajim-faculty-actions {
+  justify-content: flex-start;
+  margin-top: 8px;
+  font-size: .74rem;
+}
+
+.hajim-faculty-actions a {
+  font-weight: 750;
+}
+
+@media (max-width: 560px) {
+  .hajim-match-panel { padding: 12px; }
+  .hajim-match-heading,
+  .hajim-faculty-title,
+  .hajim-match-controls { align-items: stretch; flex-direction: column; }
+  .hajim-match-close { align-self: flex-start; }
+  .hajim-match-controls select { width: 100%; }
+}
+
 .source-action-note {
   margin: 0 0 13px;
   padding: 9px 10px;

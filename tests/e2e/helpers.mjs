@@ -646,13 +646,16 @@ export function csvRows(csv) {
 }
 
 export async function addDepartmentResearcher(page, optionIndex = 0) {
-  await page.locator("#add-researcher").click();
-  const options = page.locator('#researcher-choice optgroup[label="Department faculty"] option');
-  const option = options.nth(optionIndex);
-  const value = await option.getAttribute("value");
-  const label = (await option.textContent()).trim();
-  await page.locator("#researcher-choice").selectOption(value);
-  await page.locator("#choose-researcher").click();
+  const preferred = ["Ehsan Hoque", "Christopher Kanan", "Thomas M. Howard", "Yasemin Basdogan", "Anson Kahng"];
+  if (!(await page.locator("#researcher-picker").isVisible())) await page.locator("#add-researcher").click();
+  const selected = await page.locator('#pi-grid [data-member-entry]').evaluateAll(entries => entries.map(entry => entry.textContent));
+  const available = preferred.filter(name => !selected.some(value => value.includes(name)));
+  const label = available[Math.min(optionIndex, Math.max(0, available.length - 1))];
+  expect(label).toBeTruthy();
+  await page.locator("#faculty-search").fill(label);
+  const option = page.locator('#faculty-suggestions [role="option"]').filter({ hasText: label }).first();
+  const value = await option.getAttribute("data-faculty-id");
+  await option.click();
   await expect(page.getByRole("button", { name: `Remove ${label} from team` })).toBeVisible();
   return { label, value };
 }

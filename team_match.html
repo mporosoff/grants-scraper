@@ -71,8 +71,23 @@
   .pi-edit[disabled]{opacity:.4;cursor:not-allowed;}
   .researcher-picker{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin-top:12px;padding:12px;border:1px solid #bed2eb;border-radius:11px;background:#f7faff;}
   .researcher-picker[hidden]{display:none;}
-  .researcher-picker label{display:grid;flex:1;min-width:min(100%,280px);gap:5px;color:var(--navy);font-size:.8rem;font-weight:750;}
-  .researcher-picker select{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
+  .researcher-paths{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(240px,.8fr);gap:14px;width:100%;}
+  .researcher-path{min-width:0;padding:12px;border:1px solid #bed2eb;border-radius:10px;background:#fff;}
+  .researcher-path h3{margin:0 0 5px;color:var(--navy);font-size:.94rem;}
+  .researcher-path p{margin:0 0 9px;color:var(--muted);font-size:.78rem;line-height:1.4;}
+  .faculty-combobox{position:relative;display:flex;gap:7px;align-items:stretch;}
+  .faculty-combobox input{width:100%;min-width:0;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;}
+  .faculty-combobox button{flex:0 0 auto;}
+  .faculty-suggestions{position:absolute;z-index:25;top:calc(100% + 5px);left:0;right:0;max-height:340px;overflow-y:auto;margin:0;padding:5px;list-style:none;border:1px solid var(--line-strong);border-radius:10px;background:#fff;box-shadow:0 12px 28px rgb(13 46 82 / 18%);}
+  .faculty-suggestions[hidden]{display:none;}
+  .faculty-suggestions li{margin:0;padding:0;}
+  .faculty-suggestions button{display:block;width:100%;padding:9px 10px;border:0;border-radius:7px;background:transparent;color:var(--ink);text-align:left;}
+  .faculty-suggestions button:hover,.faculty-suggestions button[aria-selected="true"]{background:var(--blue-soft);outline:2px solid transparent;}
+  .faculty-suggestions strong,.faculty-suggestions span{display:block;}
+  .faculty-suggestions span{margin-top:2px;color:var(--muted);font-size:.72rem;}
+  .manual-researcher-button{width:100%;padding:10px 12px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.84rem;font-weight:750;cursor:pointer;}
+  .saved-researchers{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+  .saved-researchers button{padding:6px 8px;border:1px solid var(--line-strong);border-radius:999px;background:#fff;color:var(--blue-dark);font:inherit;font-size:.74rem;cursor:pointer;}
   .researcher-picker button{padding:9px 13px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.82rem;font-weight:750;cursor:pointer;}
   .researcher-picker button:disabled{opacity:.5;cursor:not-allowed;}
   .researcher-picker button[aria-busy="true"]{opacity:1;cursor:wait;}
@@ -80,6 +95,8 @@
   .researcher-picker-status{flex-basis:100%;min-height:1.2em;margin:0;color:var(--blue-dark);font-size:.76rem;font-weight:650;}
   @keyframes team-add-spin{to{transform:rotate(360deg);}}
   @media (prefers-reduced-motion:reduce){.researcher-picker button[aria-busy="true"]::before{animation:none;}}
+  @media(max-width:700px){.researcher-paths{grid-template-columns:1fr}.faculty-suggestions{max-height:280px}}
+  @media(forced-colors:active){.faculty-suggestions,.researcher-path{border:1px solid CanvasText}.faculty-suggestions button[aria-selected="true"]{outline:2px solid Highlight}}
   .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
   .external-status.error{color:#9b2735;}
   .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
@@ -202,7 +219,7 @@
 <div class="wrap">
   <header class="page">
     <h1>Research team and funding collaboration finder</h1>
-    <p>Add two to four researchers to find funding opportunities that fit the team. Choose from department faculty or add another researcher by name, research keywords, or ORCID iD.</p>
+    <p>Add two to four researchers to find funding opportunities that fit the team. Search the reviewed Hajim roster or add another collaborator by name, research keywords, or ORCID iD.</p>
   </header>
 
   <div class="panel">
@@ -211,17 +228,28 @@
     <div class="pi-grid" id="pi-grid">
       <button class="pi-toggle add-researcher" id="add-researcher" type="button" aria-expanded="false" aria-controls="researcher-picker">
         <span class="dot" aria-hidden="true">+</span>
-        Add researcher
+        Add a researcher
       </button>
     </div>
     <div class="researcher-picker" id="researcher-picker" hidden>
-      <label for="researcher-choice">
-        Choose a researcher
-        <select id="researcher-choice">
-          <option value="">Choose a researcher</option>
-        </select>
-      </label>
-      <button id="choose-researcher" type="button" disabled>Add to team</button>
+      <div class="researcher-paths">
+        <section class="researcher-path" aria-labelledby="faculty-search-heading">
+          <h3 id="faculty-search-heading">Search Hajim faculty at the University of Rochester</h3>
+          <p>Search by name, department, roster, or research interest. Results stay in this browser.</p>
+          <div class="faculty-combobox">
+            <input id="faculty-search" type="search" role="combobox" aria-labelledby="faculty-search-heading" aria-autocomplete="list" aria-expanded="false" aria-controls="faculty-suggestions" autocomplete="off" placeholder="Search by name, department, roster, or research interest" />
+            <button id="show-faculty-suggestions" type="button" aria-label="Show Hajim faculty suggestions">Show</button>
+            <ul class="faculty-suggestions" id="faculty-suggestions" role="listbox" hidden></ul>
+          </div>
+          <p class="researcher-picker-status" id="faculty-search-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="researcher-path" aria-labelledby="manual-researcher-heading">
+          <h3 id="manual-researcher-heading">Add a researcher manually</h3>
+          <p>For collaborators outside Hajim or anyone not listed.</p>
+          <button class="manual-researcher-button" id="manual-researcher" type="button">Add a researcher manually</button>
+          <div class="saved-researchers" id="saved-researchers" role="group" aria-label="Saved researchers"></div>
+        </section>
+      </div>
       <p class="researcher-picker-status" id="researcher-picker-status" role="status" aria-live="polite"></p>
     </div>
     <p class="external-status" id="external-status" aria-live="polite">Researchers you add are saved only in this browser.</p>
@@ -281,7 +309,8 @@
 <script src="assets/app-config.js?v=app-1.3.0-script-timeout2"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260828T211742197473Z"></script>
-<script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
+<script src="data/hajim_faculty_directory.js?v=hajim-pr1"></script>
+<script src="assets/hajim-faculty.js?v=hajim-pr1"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
 <script src="assets/search-retrieval.js?v=app-1.3.0"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
@@ -296,9 +325,16 @@
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
-  var M = globalThis.FACULTY_MATCHES || null;
   var catalogData = globalThis.GRANT_CATALOG || {};
   var catalog = catalogData.opportunities || [];
+  var HAJIM_API = globalThis.HajimFaculty || null;
+  var DIRECTORY = null;
+  try {
+    DIRECTORY = HAJIM_API ? HAJIM_API.validateDirectory(globalThis.HAJIM_FACULTY_DIRECTORY, catalogData) : null;
+  } catch (_directoryError) {
+    DIRECTORY = null;
+  }
+  var M = null;
   var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
   var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
@@ -350,40 +386,15 @@
     });
   });
 
-  var faculty = (M && M.faculty) || {};
-  var piMatches = (M && M.pi_matches) || {};
-  var groups = (M && M.multi_pi_suggestions) || [];
-  var names = Object.keys(faculty).sort();
+  var faculty = {};
+  (DIRECTORY && DIRECTORY.profiles || []).forEach(function (profile) { faculty[profile.faculty_id] = profile; });
+  var facultyNameToId = {};
+  Object.keys(faculty).forEach(function (facultyId) { facultyNameToId[faculty[facultyId].name] = facultyId; });
+  var names = Object.keys(faculty).sort(function (left, right) { return faculty[left].name.localeCompare(faculty[right].name); });
   var selected = [];
   var externalResearchers = [];
   var researcherMatches = {};
-  var departmentGroups = groups.map(function (group) {
-    var catalogRecord = byId[group.opportunity_id] || {};
-    return {
-      d: {
-        id: group.opportunity_id,
-        title: group.title,
-        agency: group.agency,
-        url: group.url,
-        deadline: group.deadline,
-        listing_date: group.listing_date || catalogRecord.posted_date || catalogRecord.source_first_seen_date || ""
-      },
-      fits: (group.suggested_team || []).map(function (member) {
-        return {
-          name: member.name,
-          external: false,
-          tier: member.tier,
-          terms: member.matched_terms || [],
-          shared_topics: member.shared_topics || [],
-          score: member.score || 0,
-          rank_score: member.rank_score || member.score || 0
-        };
-      }),
-      totalN: group.team_size || 0,
-      sumScore: group.total_score || 0,
-      sumRankScore: group.total_rank_score || group.total_score || 0
-    };
-  });
+  var departmentGroups = [];
   var externalStorage = null;
   var editingExternalId = "";
   var editingOrcidData = null;
@@ -399,18 +410,18 @@
   }
   function memberName(key) {
     var profile = externalProfile(key);
-    return profile ? profile.name : key;
+    return profile ? profile.name : ((faculty[key] && faculty[key].name) || key);
   }
   function memberTerms(key) {
     var profile = externalProfile(key);
-    return profile ? profile.keywords : ((faculty[key] && faculty[key].key_terms) || []);
+    return profile ? profile.keywords : ((faculty[key] && faculty[key].search_document.split(" ").filter(Boolean)) || []);
   }
   function memberSummary(key) {
     var profile = externalProfile(key);
     if (profile && profile.orcid_text) {
       return profile.orcid_work_count + " ORCID-linked publications imported";
     }
-    return isExternalKey(key) ? "" : ((faculty[key] && faculty[key].research_summary) || "");
+    return isExternalKey(key) ? "" : ((faculty[key] && faculty[key].appointment_text) || "");
   }
   function memberProfile(key) {
     var profile = externalProfile(key);
@@ -425,14 +436,14 @@
     }
     var metadata = faculty[key] || {};
     return {
-      name: key,
-      key_terms: metadata.key_terms || [],
-      research_summary: metadata.research_summary || "",
-      domains: metadata.domains || []
+      name: metadata.name || key,
+      key_terms: metadata.search_document ? [metadata.search_document] : [],
+      research_summary: "",
+      domains: metadata.rosters || []
     };
   }
   function memberMatches(key) {
-    return researcherMatches[key] || (isExternalKey(key) ? [] : (piMatches[key] || []));
+    return researcherMatches[key] || [];
   }
 
   function reasonText(fit, maximum) {
@@ -732,6 +743,9 @@
 
   function buildShared(members) {
     var teamMembers = members || selected;
+    if (teamMembers.some(function (member) { return !isExternalKey(member); })) {
+      return buildGraphShared(teamMembers);
+    }
     if (!MATCH_ENGINE) return [];
     var profiles = teamMembers.map(memberProfile);
     var themes = MATCH_ENGINE.buildThemes(profiles);
@@ -781,6 +795,96 @@
         record: parentRecord
       }, false);
     }).filter(Boolean);
+  }
+
+  function buildGraphShared(teamMembers) {
+    if (!M || !HAJIM_API) {
+      renderThemes([]);
+      return [];
+    }
+    var memberIndexes = teamMembers.map(function (member) {
+      var index = new Map();
+      if (!isExternalKey(member)) {
+        HAJIM_API.facultyMatches(M, member).forEach(function (edge) {
+          index.set(edge.opportunity_id, { edge: edge });
+        });
+        return index;
+      }
+      if (!MATCH_ENGINE) return index;
+      MATCH_ENGINE.matchProfile(memberProfile(member)).forEach(function (result) {
+        index.set(String(result.id), { result: result });
+      });
+      return index;
+    });
+    if (!memberIndexes.length) return [];
+    var common = Array.from(memberIndexes[0].keys()).filter(function (opportunityId) {
+      return memberIndexes.slice(1).every(function (index) { return index.has(opportunityId); });
+    });
+    var themeMembers = new Map();
+    common.forEach(function (opportunityId) {
+      teamMembers.forEach(function (member, memberIndex) {
+        var match = memberIndexes[memberIndex].get(opportunityId) || {};
+        (match.edge && match.edge.corroborating_themes || []).forEach(function (label) {
+          var holders = themeMembers.get(label) || new Set();
+          holders.add(memberName(member));
+          themeMembers.set(label, holders);
+        });
+      });
+    });
+    var themes = Array.from(themeMembers.entries()).map(function (entry) {
+      return { type: "core", label: entry[0], domains: [], terms: [], members: Array.from(entry[1]) };
+    }).sort(function (left, right) { return left.label.localeCompare(right.label); });
+    var activeLabels = new Set(themes.filter(function (theme) {
+      return themeState[theme.label] !== false;
+    }).map(function (theme) { return theme.label; }));
+    var themeFilterActive = activeLabels.size < themes.length;
+    if (themeFilterActive) {
+      common = common.filter(function (opportunityId) {
+        return teamMembers.some(function (_member, memberIndex) {
+          var match = memberIndexes[memberIndex].get(opportunityId) || {};
+          return (match.edge && match.edge.corroborating_themes || []).some(function (label) { return activeLabels.has(label); });
+        });
+      });
+    }
+    renderThemes(themes);
+    lastHybridProfiles = teamMembers.map(memberProfile);
+    lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
+    return common.map(function (opportunityId) {
+      var record = byId[opportunityId] || {};
+      var fits = teamMembers.map(function (member, memberIndex) {
+        var match = memberIndexes[memberIndex].get(opportunityId) || {};
+        if (match.edge) {
+          return {
+            name: memberName(member), external: false,
+            terms: match.edge.matched_profile_phrases || [],
+            shared_topics: match.edge.corroborating_themes || [],
+            score: match.edge.score || 0, rank_score: match.edge.score || 0
+          };
+        }
+        var fit = match.result && match.result.fits && match.result.fits[0] || {};
+        return {
+          name: memberName(member), external: true,
+          terms: fit.researchReasons || [], shared_topics: [],
+          score: fit.score || 0, rank_score: fit.score || 0
+        };
+      });
+      var sum = fits.reduce(function (total, fit) { return total + fit.score; }, 0);
+      var themeLabels = Array.from(new Set(fits.flatMap(function (fit) { return fit.shared_topics || []; })))
+        .filter(function (label) { return activeLabels.has(label); });
+      return {
+        d: {
+          id: opportunityId,
+          title: record.title || opportunityId,
+          agency: record.agency || "",
+          url: record.primary_document_url || record.funding_opportunity_url || record.detail_page || "",
+          deadline: record.close_date ? "Closes " + record.close_date : "",
+          listing_date: record.posted_date || record.source_first_seen_date || "",
+          record: record,
+          themeLabels: themeLabels, topicMatches: [], scopeLabels: []
+        },
+        fits: fits, totalN: fits.length, sumScore: sum, sumRankScore: sum
+      };
+    }).sort(balancedRanking);
   }
   function matchesQuery(e, q) {
     if (!q) return true;
@@ -932,7 +1036,9 @@
     var validExternal = new Set(externalResearchers.map(function (profile) {
       return externalKey(profile.id);
     }));
-    selected = (Array.isArray(saved.selected) ? saved.selected : []).filter(function (member) {
+    selected = (Array.isArray(saved.selected) ? saved.selected : []).map(function (member) {
+      return facultyNameToId[member] || member;
+    }).filter(function (member) {
       return names.indexOf(member) !== -1 || validExternal.has(member);
     }).slice(0, MAX);
     themeState = saved.themeState && typeof saved.themeState === "object"
@@ -976,40 +1082,121 @@
     MATCH_ENGINE = MATCHER_API.create(catalogData, M || {}, SEARCH_API);
   }
 
-  function appendResearcherOption(group, value, label) {
-    var option = document.createElement("option");
-    option.value = value;
-    option.textContent = label;
-    group.appendChild(option);
-  }
+  var facultySearchResults = [];
+  var facultySearchIndex = -1;
 
   function renderResearcherPicker() {
-    var choice = $("researcher-choice");
-    choice.innerHTML = '<option value="">Choose a researcher</option>';
-    if (externalResearchers.length < MAX_EXTERNAL) {
-      var newGroup = document.createElement("optgroup");
-      newGroup.label = "Add a new researcher";
-      appendResearcherOption(newGroup, "__new__", "Enter name, keywords, or ORCID iD");
-      choice.appendChild(newGroup);
-    }
-
-    var facultyGroup = document.createElement("optgroup");
-    facultyGroup.label = "Department faculty";
-    names.filter(function (name) { return selected.indexOf(name) === -1; }).forEach(function (name) {
-      appendResearcherOption(facultyGroup, name, name);
-    });
-    if (facultyGroup.children.length) choice.appendChild(facultyGroup);
-
-    var savedGroup = document.createElement("optgroup");
-    savedGroup.label = "Saved researchers";
+    var savedGroup = $("saved-researchers");
+    savedGroup.innerHTML = "";
     externalResearchers.forEach(function (profile) {
       var key = externalKey(profile.id);
-      if (selected.indexOf(key) === -1) appendResearcherOption(savedGroup, key, profile.name);
+      if (selected.indexOf(key) !== -1) return;
+      var button = document.createElement("button");
+      button.type = "button";
+      button.textContent = "Add saved: " + profile.name;
+      button.disabled = selected.length >= MAX;
+      button.addEventListener("click", function () { toggle(key); });
+      savedGroup.appendChild(button);
     });
-    if (savedGroup.children.length) choice.appendChild(savedGroup);
+    $("manual-researcher").disabled = selected.length >= MAX || externalResearchers.length >= MAX_EXTERNAL;
+    $("faculty-search").disabled = selected.length >= MAX || !DIRECTORY;
+    $("show-faculty-suggestions").disabled = selected.length >= MAX || !DIRECTORY;
+  }
 
-    choice.value = "";
-    $("choose-researcher").disabled = true;
+  function closeFacultySuggestions(restoreFocus) {
+    var input = $("faculty-search");
+    var list = $("faculty-suggestions");
+    list.hidden = true;
+    list.innerHTML = "";
+    input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
+    facultySearchResults = [];
+    facultySearchIndex = -1;
+    if (restoreFocus) input.focus();
+  }
+
+  function renderFacultySuggestions(showAll) {
+    var input = $("faculty-search");
+    var list = $("faculty-suggestions");
+    if (!DIRECTORY || selected.length >= MAX) {
+      closeFacultySuggestions(false);
+      return;
+    }
+    facultySearchResults = HAJIM_API.search(DIRECTORY, input.value, { showAll: Boolean(showAll), limit: 12 })
+      .filter(function (profile) { return selected.indexOf(profile.faculty_id) === -1; });
+    facultySearchIndex = facultySearchResults.length ? 0 : -1;
+    list.innerHTML = "";
+    facultySearchResults.forEach(function (profile, index) {
+      var item = document.createElement("li");
+      item.setAttribute("role", "presentation");
+      var button = document.createElement("button");
+      button.type = "button";
+      button.id = "faculty-option-" + index;
+      button.setAttribute("role", "option");
+      button.setAttribute("aria-selected", index === facultySearchIndex ? "true" : "false");
+      button.dataset.facultyId = profile.faculty_id;
+      button.innerHTML = "<strong>" + esc(profile.name) + "</strong><span>" + esc(profile.home_unit) + " · " + esc(profile.relationship_label) + "</span>";
+      button.addEventListener("mousedown", function (event) { event.preventDefault(); });
+      button.addEventListener("click", function () { chooseFaculty(profile.faculty_id); });
+      item.appendChild(button);
+      list.appendChild(item);
+    });
+    list.hidden = !facultySearchResults.length;
+    input.setAttribute("aria-expanded", facultySearchResults.length ? "true" : "false");
+    if (facultySearchIndex >= 0) input.setAttribute("aria-activedescendant", "faculty-option-0");
+    else input.removeAttribute("aria-activedescendant");
+    var queryLength = HAJIM_API.normalize(input.value).length;
+    $("faculty-search-status").textContent = queryLength < 2 && !showAll
+      ? "Enter at least two characters, or choose Show."
+      : facultySearchResults.length + " Hajim facult" + (facultySearchResults.length === 1 ? "y result." : "y results.");
+  }
+
+  function moveFacultySuggestion(delta) {
+    if (!facultySearchResults.length) return;
+    facultySearchIndex = (facultySearchIndex + delta + facultySearchResults.length) % facultySearchResults.length;
+    $("faculty-suggestions").querySelectorAll('[role="option"]').forEach(function (option, index) {
+      option.setAttribute("aria-selected", index === facultySearchIndex ? "true" : "false");
+    });
+    var id = "faculty-option-" + facultySearchIndex;
+    $("faculty-search").setAttribute("aria-activedescendant", id);
+    var active = $(id);
+    if (active) active.scrollIntoView({ block: "nearest" });
+  }
+
+  function ensureFacultyGraph() {
+    if (M) return Promise.resolve(M);
+    if (!HAJIM_API || !DIRECTORY) return Promise.reject(new Error("The Hajim faculty directory is unavailable."));
+    return HAJIM_API.loadGraph(DIRECTORY, catalogData, "data/faculty_matches.js?v=hajim-pr1").then(function (graph) {
+      M = graph;
+      rebuildResearcherMatches();
+      return graph;
+    });
+  }
+
+  function chooseFaculty(facultyId) {
+    if (!faculty[facultyId] || selected.indexOf(facultyId) !== -1 || selected.length >= MAX) return;
+    var member = facultyId;
+    $("researcher-picker-status").textContent = "Adding " + memberName(member) + " to the team…";
+    $("faculty-search-status").textContent = "Loading evidence-qualified matches for " + memberName(facultyId) + "…";
+    $("faculty-search").disabled = true;
+    $("show-faculty-suggestions").disabled = true;
+    ensureFacultyGraph().then(function () {
+      selected.push(facultyId);
+      themeState = {};
+      teamHybridState = idleTeamHybridState();
+      $("faculty-search").value = "";
+      closeFacultySuggestions(false);
+      $("researcher-picker").hidden = true;
+      $("add-researcher").setAttribute("aria-expanded", "false");
+      $("researcher-picker-status").textContent = "";
+      updateToggles();
+      refresh();
+    }).catch(function () {
+      $("faculty-search-status").textContent = "Faculty match data could not be loaded. Directory search and manual entry are still available; try again.";
+      $("researcher-picker-status").textContent = "";
+      $("faculty-search").disabled = false;
+      $("show-faculty-suggestions").disabled = false;
+    });
   }
 
   function renderExternalButtons() {
@@ -1043,9 +1230,8 @@
       }
       grid.insertBefore(entry, addButton);
     });
-    addButton.hidden = selected.length >= MAX;
     addButton.disabled = selected.length >= MAX;
-    if (addButton.hidden) {
+    if (selected.length >= MAX) {
       $("researcher-picker").hidden = true;
       addButton.setAttribute("aria-expanded", "false");
     }
@@ -1059,48 +1245,6 @@
     if (opening) closeExternalEditor();
     picker.hidden = !opening;
     $("add-researcher").setAttribute("aria-expanded", opening ? "true" : "false");
-  }
-
-  function setResearcherAddBusy(busy, member) {
-    var choice = $("researcher-choice");
-    var button = $("choose-researcher");
-    choice.disabled = busy;
-    button.disabled = busy || !choice.value;
-    button.textContent = busy ? "Adding…" : "Add to team";
-    if (busy) button.setAttribute("aria-busy", "true");
-    else button.removeAttribute("aria-busy");
-    $("researcher-picker-status").textContent = busy
-      ? "Adding " + memberName(member) + " to the team…"
-      : "";
-  }
-
-  function chooseResearcher() {
-    var member = $("researcher-choice").value;
-    if (!member) return;
-    if (member === "__new__") {
-      $("researcher-picker").hidden = true;
-      openExternalEditor("");
-      return;
-    }
-    if (selected.indexOf(member) !== -1) {
-      renderExternalStatus("That researcher is already on the team.", true);
-      return;
-    }
-    setResearcherAddBusy(true, member);
-    setTimeout(function () {
-      var error = null;
-      try {
-        toggle(member);
-        $("researcher-picker").hidden = true;
-        $("add-researcher").setAttribute("aria-expanded", "false");
-      } catch (caught) {
-        error = caught;
-      }
-      setResearcherAddBusy(false, member);
-      if (error) {
-        $("researcher-picker-status").textContent = "The researcher could not be added. Please try again.";
-      }
-    }, 25);
   }
 
   function keywordInput() {
@@ -1311,7 +1455,9 @@
     renderExternalButtons();
     $("add-researcher").disabled = atMax;
     $("add-researcher").title = atMax ? "The team already has four researchers" : "Add a researcher";
-    $("team-hint").textContent = selected.length < 2
+    $("team-hint").textContent = atMax
+      ? "Team limit reached: remove a researcher to add someone else. Showing only calls that fit all four selected researchers."
+      : selected.length < 2
       ? "Add two to four researchers to see funding opportunities that fit everyone on the team."
       : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.";
   }
@@ -1328,11 +1474,7 @@
   }
 
   async function init() {
-    if (!M) {
-      $("view").innerHTML = '<div class="empty">Couldn\'t find <code>data/faculty_matches.js</code>.<br>' +
-        "Run <code>python -m scripts.faculty_match match</code> and commit the generated file.</div>";
-      return;
-    }
+    if (!DIRECTORY) $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Manual researcher entry still works.";
     if (!TEAM_API || !SEARCH_API || !MATCHER_API) {
       renderExternalStatus("Saved researchers are unavailable because a helper did not load.", true);
     } else {
@@ -1344,6 +1486,13 @@
       renderExternalStatus(loaded.error, Boolean(loaded.error));
     }
     restoreTeamHistory();
+    if (selected.some(function (member) { return !isExternalKey(member); })) {
+      try {
+        await ensureFacultyGraph();
+      } catch (_graphError) {
+        $("faculty-search-status").textContent = "Faculty match data could not be restored. Directory search and manual entry are still available; try again.";
+      }
+    }
     if (APP_CONFIG && APP_CONFIG.flags.subtopics) {
       try {
         var sidecar = await SUBTOPIC_API.loadSidecar();
@@ -1393,10 +1542,32 @@
 
     $("filter").addEventListener("input", refresh);
     $("add-researcher").addEventListener("click", toggleResearcherPicker);
-    $("researcher-choice").addEventListener("change", function () {
-      $("choose-researcher").disabled = !$("researcher-choice").value;
+    $("manual-researcher").addEventListener("click", function () {
+      if (selected.length >= MAX) return;
+      closeFacultySuggestions(false);
+      openExternalEditor("");
     });
-    $("choose-researcher").addEventListener("click", chooseResearcher);
+    $("faculty-search").addEventListener("input", function () { renderFacultySuggestions(false); });
+    $("show-faculty-suggestions").addEventListener("click", function () {
+      renderFacultySuggestions(true);
+      $("faculty-search").focus();
+    });
+    $("faculty-search").addEventListener("keydown", function (event) {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        if (!facultySearchResults.length) renderFacultySuggestions(true);
+        else moveFacultySuggestion(event.key === "ArrowDown" ? 1 : -1);
+      } else if (event.key === "Enter" && facultySearchIndex >= 0) {
+        event.preventDefault();
+        chooseFaculty(facultySearchResults[facultySearchIndex].faculty_id);
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        closeFacultySuggestions(true);
+      }
+    });
+    $("faculty-search").addEventListener("blur", function () {
+      setTimeout(function () { closeFacultySuggestions(false); }, 0);
+    });
     $("cancel-external").addEventListener("click", closeExternalEditor);
     $("delete-external").addEventListener("click", deleteExternal);
     $("external-researcher-form").addEventListener("submit", saveExternal);
