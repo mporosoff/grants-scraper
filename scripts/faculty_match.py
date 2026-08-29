@@ -1,13 +1,15 @@
 """Generate deterministic Hajim faculty discovery and match assets.
 
-The reviewed canonical faculty JSON is the sole roster authority. Matching is
-local, lexical, evidence-qualified, and does not call a model or provider.
+The reviewed workbook snapshot and validated curated ChemE compatibility data
+form one canonical union. Matching is local, lexical, evidence-qualified, and
+does not call a model or provider.
 """
 
 from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+import copy
 import gzip
 import hashlib
 import json
@@ -23,8 +25,12 @@ from scripts.import_hajim_faculty import validate_payload
 
 
 SCHEMA_FAMILY = "hajim-faculty-match"
-DIRECTORY_SCHEMA_VERSION = 1
-GRAPH_SCHEMA_VERSION = 2
+DIRECTORY_SCHEMA_VERSION = 2
+GRAPH_SCHEMA_VERSION = 3
+CURATED_CHEME_SCHEMA_VERSION = 1
+CURATED_CHEME_RELATIONSHIP = "curated_cheme_team_match"
+CURATED_CHEME_LABEL = "Existing curated Chemical & Sustainability Engineering Team Match profile"
+DEFAULT_CURATED_CHEME_CONFIG = Path("config/cheme_team_match_profiles.json")
 MAX_FACULTY_PER_OPPORTUNITY = 12
 MAX_OPPORTUNITIES_PER_FACULTY = 25
 DIRECTORY_RAW_BUDGET = 350_000
@@ -43,6 +49,35 @@ _GENERIC = {
     "technology", "the", "their", "to", "toward", "towards", "using", "with", "energy",
 }
 _FIELD_WEIGHTS = {"title": 4.5, "description": 2.0, "published_subject": 1.5}
+_UNAMBIGUOUS_SINGLE_TERMS = frozenset({
+    "amyloid-inspired", "bio-nano-manufacturing", "bioelectrochemistry",
+    "biophotonics", "biosensors", "combinatorics", "cscw",
+    "electro-optics", "electrochemistry", "electrocatalysis",
+    "ferroelectrics", "geomorphology", "holography",
+    "magnetohydrodynamics", "mechanobiology", "micromechanics",
+    "microfluidics", "morphogenesis", "nanophotonics", "nanoporous",
+    "nanowires", "photodetectors", "phylogeny", "pseudorandomness",
+    "spintronics", "superconductivity", "turbulence",
+})
+_ADMISSION_AUDIT_BASELINE = {
+    "candidate_sha": "0e5f202e962e18000ed72fea200dc85d83e62c92",
+    "generation_id": "7a79ea633c2e4138ddf983870d83beeeb1c34eb1894639d355b281dd93d92871",
+    "edge_count": 918,
+    "evidence_field_edge_counts": {
+        "description": 629,
+        "published_subject": 256,
+        "title": 139,
+    },
+    "evidence_field_sets": {
+        "description": 538,
+        "description+published_subject": 77,
+        "description+title": 14,
+        "published_subject": 164,
+        "published_subject+title": 15,
+        "title": 110,
+    },
+    "defect": "published_subject combined authoritative document text with derived catalog facets",
+}
 
 
 class FacultyMatchError(ValueError):
@@ -68,6 +103,11 @@ def _stem(token: str) -> str:
         if token.endswith(suffix) and len(token) - len(suffix) + len(replacement) >= 4:
             return token[:-len(suffix)] + replacement
     return token
+
+
+_UNAMBIGUOUS_SINGLE_TOKEN_STEMS = frozenset(
+    _stem(term) for term in _UNAMBIGUOUS_SINGLE_TERMS
+)
 
 
 def _tokens(value: object) -> list[str]:
@@ -115,6 +155,176 @@ def load_faculty_config(path: str | Path) -> tuple[dict, bytes]:
     return payload, raw
 
 
+def _identity_key(value: object) -> str:
+    text = unicodedata.normalize("NFKD", str(value or ""))
+    text = "".join(character for character in text if not unicodedata.combining(character))
+    return re.sub(r"[^a-z0-9]", "", text.casefold())
+
+
+def load_curated_cheme_config(path: str | Path) -> tuple[dict, bytes]:
+    raw = Path(path).read_bytes()
+    payload = json.loads(raw.decode("utf-8"))
+    if payload.get("schema_version") != CURATED_CHEME_SCHEMA_VERSION:
+        raise FacultyMatchError("Curated ChemE compatibility data has an incompatible schema")
+    source = payload.get("source") or {}
+    profiles = payload.get("profiles")
+    if source.get("kind") != "curated_cheme_team_match_compatibility":
+        raise FacultyMatchError("Curated ChemE compatibility data has an invalid source kind")
+    if not re.fullmatch(r"[a-f0-9]{40}", str(source.get("preservation_authority_sha") or "")):
+        raise FacultyMatchError("Curated ChemE compatibility data requires its protected-base authority SHA")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(source.get("source_review_date") or "")):
+        raise FacultyMatchError("Curated ChemE compatibility data requires a source review date")
+    if not str(source.get("membership_source_url") or "").startswith("https://"):
+        raise FacultyMatchError("Curated ChemE compatibility data requires an HTTPS membership source")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(source.get("membership_checked_date") or "")):
+        raise FacultyMatchError("Curated ChemE compatibility data requires a membership checked date")
+    if not isinstance(profiles, list) or source.get("record_count") != len(profiles) or len(profiles) != 14:
+        raise FacultyMatchError("Curated ChemE compatibility data must contain the protected 14 profiles")
+    seen_ids: set[str] = set()
+    seen_names: set[str] = set()
+    for profile in profiles:
+        faculty_id = str(profile.get("faculty_id") or "")
+        name_key = _identity_key(profile.get("name"))
+        phrases = profile.get("research_phrases")
+        domains = profile.get("domains")
+        if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", faculty_id) or faculty_id in seen_ids:
+            raise FacultyMatchError("Curated ChemE profile IDs must be unique stable slugs")
+        if not name_key or name_key in seen_names:
+            raise FacultyMatchError("Curated ChemE profile names must be unique")
+        if not isinstance(phrases, list) or not (5 <= len(phrases) <= 10) or any(not str(item).strip() for item in phrases):
+            raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires five to ten expertise phrases")
+        if len({_normalize(item) for item in phrases}) != len(phrases):
+            raise FacultyMatchError(f"Curated ChemE profile {faculty_id} contains duplicate expertise phrases")
+        if not isinstance(profile.get("research_summary"), str) or len(profile["research_summary"].strip()) < 40:
+            raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires a readable research summary")
+        if not isinstance(domains, list) or not domains or any(not str(item).strip() for item in domains):
+            raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires conservative domains")
+        aliases = profile.get("aliases")
+        if not isinstance(aliases, list) or any(not str(item).strip() for item in aliases):
+            raise FacultyMatchError(f"Curated ChemE profile {faculty_id} aliases must be a list of names")
+        identity = profile.get("identity")
+        if identity is not None:
+            required_identity = {
+                "home_unit", "appointment_text", "appointments", "rosters", "email",
+                "website_url", "source_urls", "checked_date",
+            }
+            if not isinstance(identity, dict) or set(identity) != required_identity:
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} has invalid identity fields")
+            if not identity["home_unit"] or not identity["appointment_text"] or not identity["email"]:
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} has incomplete identity data")
+            if not isinstance(identity["appointments"], list) or not identity["appointments"]:
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires appointments")
+            if not isinstance(identity["rosters"], list) or not identity["rosters"]:
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires roster labels")
+            if not isinstance(identity["source_urls"], list) or not identity["source_urls"] or any(
+                    not str(url).startswith("https://") for url in identity["source_urls"]):
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires HTTPS sources")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(identity["checked_date"] or "")):
+                raise FacultyMatchError(f"Curated ChemE profile {faculty_id} requires a checked date")
+        seen_ids.add(faculty_id)
+        seen_names.add(name_key)
+    return payload, raw
+
+
+def merge_faculty_sources(workbook: dict, workbook_raw: bytes,
+                          curated: dict, curated_raw: bytes) -> dict:
+    """Return the deterministic, deduplicated runtime union of both authorities."""
+    profiles = [copy.deepcopy(profile) for profile in workbook["profiles"]]
+    by_id = {profile["faculty_id"]: profile for profile in profiles}
+    by_name = {_identity_key(profile["name"]): profile for profile in profiles}
+    workbook_kind = workbook["source"]["kind"]
+    curated_kind = curated["source"]["kind"]
+    for profile in profiles:
+        profile["aliases"] = []
+        profile["workbook_member"] = True
+        profile["workbook_rankable"] = bool(profile["rankable"])
+        profile["research_summary"] = ""
+        profile["research_domains"] = list(profile.get("derived_themes") or [])
+        profile["roster_provenance"] = [workbook_kind]
+        profile["expertise_provenance"] = workbook_kind
+    overlap = 0
+    additions = 0
+    for enrichment in curated["profiles"]:
+        target = by_id.get(enrichment["faculty_id"])
+        name_target = by_name.get(_identity_key(enrichment["name"]))
+        if target is not None and name_target is not None and target is not name_target:
+            raise FacultyMatchError(f"Curated ChemE identity conflict for {enrichment['faculty_id']}")
+        target = target or name_target
+        if target is not None:
+            enrichment_names = [enrichment["name"], *(enrichment.get("aliases") or [])]
+            if _identity_key(target["name"]) not in {_identity_key(name) for name in enrichment_names}:
+                raise FacultyMatchError(f"Curated ChemE stable ID points to a different identity: {enrichment['faculty_id']}")
+        if target is None:
+            identity = enrichment.get("identity")
+            if not isinstance(identity, dict):
+                raise FacultyMatchError(f"Curated-only profile {enrichment['faculty_id']} requires identity data")
+            target = {
+                "faculty_id": enrichment["faculty_id"],
+                "name": enrichment["name"],
+                "home_unit": identity["home_unit"],
+                "relationship": CURATED_CHEME_RELATIONSHIP,
+                "relationship_label": CURATED_CHEME_LABEL,
+                "appointment_text": identity["appointment_text"],
+                "appointments": list(identity["appointments"]),
+                "rosters": list(identity["rosters"]),
+                "email": identity["email"],
+                "website_url": identity.get("website_url"),
+                "source_urls": list(identity["source_urls"]),
+                "checked_date": identity["checked_date"],
+                "workbook_member": False,
+                "workbook_rankable": False,
+                "roster_provenance": [curated_kind],
+            }
+            profiles.append(target)
+            by_id[target["faculty_id"]] = target
+            by_name[_identity_key(target["name"])] = target
+            additions += 1
+        else:
+            if target["faculty_id"] != enrichment["faculty_id"]:
+                raise FacultyMatchError(f"Curated ChemE stable ID disagrees for {enrichment['name']}")
+            target["roster_provenance"].append(curated_kind)
+            overlap += 1
+        aliases = list(enrichment.get("aliases") or [])
+        if enrichment["name"] != target["name"]:
+            aliases.append(enrichment["name"])
+        target["aliases"] = sorted(
+            {item for item in aliases if item != target["name"]},
+            key=lambda item: (_identity_key(item), item),
+        )
+        target["research_interests_text"] = "; ".join(enrichment["research_phrases"])
+        target["research_phrases"] = list(enrichment["research_phrases"])
+        target["derived_themes"] = list(enrichment["domains"])
+        target["research_domains"] = list(enrichment["domains"])
+        target["research_summary"] = enrichment["research_summary"]
+        target["expertise_provenance"] = curated_kind
+        target["rankable"] = True
+    profiles.sort(key=lambda profile: (_identity_key(profile["name"]), profile["faculty_id"]))
+    if overlap != 12 or additions != 2 or len(profiles) != 158:
+        raise FacultyMatchError(
+            f"Canonical faculty union expected 12 curated overlaps and 2 additions; got {overlap} and {additions}"
+        )
+    rankable_count = sum(bool(profile["rankable"]) for profile in profiles)
+    source_fingerprint = hashlib.sha256(
+        workbook_raw + b"\0curated-cheme\0" + curated_raw
+    ).hexdigest()
+    curated_source = dict(curated["source"])
+    curated_source["sha256"] = hashlib.sha256(curated_raw).hexdigest()
+    return {
+        "schema_version": 1,
+        "source": {
+            "kind": "canonical_faculty_union",
+            "source_fingerprint": source_fingerprint,
+            "workbook": dict(workbook["source"]),
+            "curated_team_match": curated_source,
+            "union_record_count": len(profiles),
+            "union_rankable_record_count": rankable_count,
+            "union_unrankable_count": len(profiles) - rankable_count,
+        },
+        "counts": dict(workbook["counts"]),
+        "profiles": profiles,
+    }
+
+
 def _catalog_identity(catalog: dict, raw: bytes) -> dict:
     return {
         "record_count": catalog["record_count"],
@@ -134,13 +344,13 @@ def _projection_fingerprint(value: dict) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
-def _generation_id(source_sha: str, catalog_fingerprint: str,
+def _generation_id(source_fingerprint: str, catalog_fingerprint: str,
                    projection_fingerprints: dict[str, str]) -> str:
     identity = {
         "schema_family": SCHEMA_FAMILY,
         "directory_schema_version": DIRECTORY_SCHEMA_VERSION,
         "graph_schema_version": GRAPH_SCHEMA_VERSION,
-        "faculty_source_sha256": source_sha,
+        "faculty_source_fingerprint": source_fingerprint,
         "catalog_fingerprint": catalog_fingerprint,
         "projection_fingerprints": projection_fingerprints,
     }
@@ -169,6 +379,22 @@ def build_directory(config: dict, catalog_identity: dict) -> dict:
         "rosters": profile["rosters"],
         "appointment_text": profile["appointment_text"],
         "rankable": profile["rankable"],
+        "aliases": profile.get("aliases") or [],
+        "research_summary": profile.get("research_summary") or "",
+        "research_domains": profile.get("research_domains") or [],
+        "workbook_member": bool(profile.get("workbook_member")),
+        "roster_provenance": profile.get("roster_provenance") or [],
+        "expertise_provenance": profile.get("expertise_provenance") or "",
+        "evidence_policy": "specific_phrase_required",
+        "single_term_phrases": [
+            phrase for phrase in profile.get("research_phrases") or []
+            if len(_distinctive_tokens(phrase)) == 1
+        ],
+        "admitting_single_terms": [
+            phrase for phrase in profile.get("research_phrases") or []
+            if len(_distinctive_tokens(phrase)) == 1
+            and _distinctive_tokens(phrase)[0] in _UNAMBIGUOUS_SINGLE_TOKEN_STEMS
+        ],
         "search_document": _search_document(profile),
     } for profile in config["profiles"]]
     return {
@@ -192,12 +418,17 @@ def _faculty_idf(profiles: list[dict]) -> dict[str, float]:
 
 def _published_subject_text(record: dict) -> str:
     values: list[str] = []
-    for key in ("disciplines", "topic_areas"):
-        values.extend(str(item) for item in (record.get(key) or []) if item)
     values.append(str(record.get("document_search_text") or ""))
     for fact in (record.get("document_evidence") or {}).get("facts") or []:
         if isinstance(fact, dict):
             values.extend(str(fact.get(key) or "") for key in ("label", "value", "excerpt"))
+    return " ".join(values)
+
+
+def _corroborating_facet_text(record: dict) -> str:
+    values: list[str] = []
+    for key in ("disciplines", "topic_areas"):
+        values.extend(str(item) for item in (record.get(key) or []) if item)
     return " ".join(values)
 
 
@@ -209,13 +440,22 @@ def _opportunity_fields(record: dict) -> dict[str, str]:
     }
 
 
-def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float]) -> tuple[bool, float]:
+def _phrase_admitted(phrase: str, field_tokens: set[str], idf: dict[str, float],
+                     profile_context: set[str] | None = None) -> tuple[bool, float]:
     concepts = _distinctive_tokens(phrase)
     if not concepts:
         return False, 0.0
     covered = [token for token in concepts if token in field_tokens]
     if len(concepts) == 1:
-        admitted = len(covered) == 1 and idf.get(concepts[0], 0.0) >= 2.2
+        token = concepts[0]
+        context_hits = (profile_context or set()) & field_tokens
+        contextual = (
+            len(context_hits) >= 2
+            and sum(idf.get(item, 1.0) for item in context_hits) >= 3.4
+        )
+        admitted = len(covered) == 1 and (
+            token in _UNAMBIGUOUS_SINGLE_TOKEN_STEMS or contextual
+        )
     elif len(concepts) <= 3:
         admitted = len(covered) == len(concepts)
     else:
@@ -237,22 +477,33 @@ def _excerpt(text: str, concepts: list[str], limit: int = 190) -> str:
     return ("…" if start else "") + clean[start:end].strip() + ("…" if end < len(clean) else "")
 
 
-def _prepare_opportunity(record: dict) -> tuple[dict[str, str], dict[str, set[str]], set[str]]:
+def _prepare_opportunity(record: dict) -> tuple[
+        dict[str, str], dict[str, set[str]], set[str], set[str]]:
     fields = _opportunity_fields(record)
     token_sets = {field: set(_tokens(text)) for field, text in fields.items()}
-    return fields, token_sets, set().union(*token_sets.values())
+    authoritative_tokens = set().union(*token_sets.values())
+    corroborating_tokens = authoritative_tokens | set(_tokens(_corroborating_facet_text(record)))
+    return fields, token_sets, authoritative_tokens, corroborating_tokens
 
 
 def score_profile_opportunity(profile: dict, record: dict, idf: dict[str, float],
-                              prepared: tuple[dict[str, str], dict[str, set[str]], set[str]] | None = None) -> dict | None:
+                              prepared: tuple[dict[str, str], dict[str, set[str]], set[str], set[str]] | None = None) -> dict | None:
     if not profile.get("rankable"):
         return None
-    fields, token_sets, opportunity_tokens = prepared or _prepare_opportunity(record)
+    fields, token_sets, _authoritative_tokens, corroborating_tokens = prepared or _prepare_opportunity(record)
+    profile_phrases = profile.get("research_phrases") or []
+    phrase_concepts = [_distinctive_tokens(phrase) for phrase in profile_phrases]
     phrase_hits: list[tuple[str, str, float]] = []
-    for phrase in profile["research_phrases"]:
+    for phrase_index, phrase in enumerate(profile_phrases):
+        profile_context = {
+            token
+            for index, concepts in enumerate(phrase_concepts)
+            if index != phrase_index
+            for token in concepts
+        }
         best: tuple[str, float] | None = None
         for field, tokens in token_sets.items():
-            admitted, rarity = _phrase_admitted(phrase, tokens, idf)
+            admitted, rarity = _phrase_admitted(phrase, tokens, idf, profile_context)
             if admitted:
                 weighted = rarity * _FIELD_WEIGHTS[field]
                 if best is None or weighted > best[1] or (weighted == best[1] and field < best[0]):
@@ -263,11 +514,11 @@ def score_profile_opportunity(profile: dict, record: dict, idf: dict[str, float]
         return None
     phrase_hits.sort(key=lambda item: (-item[2], item[0].casefold(), item[1]))
     chosen = phrase_hits[:4]
-    full_overlap = set(_distinctive_tokens(profile["research_interests_text"])) & opportunity_tokens
+    full_overlap = set(_distinctive_tokens(profile["research_interests_text"])) & corroborating_tokens
     theme_hits = []
     for theme in profile.get("derived_themes") or []:
         theme_tokens = _distinctive_tokens(theme)
-        if theme_tokens and sum(token in opportunity_tokens for token in theme_tokens) >= min(2, len(theme_tokens)):
+        if theme_tokens and sum(token in corroborating_tokens for token in theme_tokens) >= min(2, len(theme_tokens)):
             theme_hits.append(theme)
     score = sum(item[2] for item in chosen)
     score += min(8.0, 0.6 * sum(idf.get(token, 1.0) for token in full_overlap))
@@ -353,11 +604,28 @@ def build_graph(config: dict, catalog: dict, catalog_identity: dict) -> dict:
         "source_urls": profile["source_urls"],
         "checked_date": profile["checked_date"],
     } for profile in profiles}
+    evidence_field_edge_counts: Counter[str] = Counter()
+    evidence_field_sets: Counter[str] = Counter()
+    for edge in edges:
+        fields = sorted({item["field"] for item in edge["opportunity_evidence"]})
+        evidence_field_edge_counts.update(fields)
+        evidence_field_sets["+".join(fields)] += 1
     return {
         "schema_family": SCHEMA_FAMILY,
         "schema_version": GRAPH_SCHEMA_VERSION,
         "catalog": catalog_identity,
         "faculty_source": dict(config["source"]),
+        "matching_policy": {
+            "admission_fields": ["title", "description", "published_subject"],
+            "corroborating_only_fields": ["disciplines", "topic_areas", "derived_themes"],
+            "single_term_policy": "curated_unambiguous_or_two_profile_context_terms",
+        },
+        "generation_metrics": {
+            "edge_count": len(edges),
+            "evidence_field_edge_counts": dict(sorted(evidence_field_edge_counts.items())),
+            "evidence_field_sets": dict(sorted(evidence_field_sets.items())),
+        },
+        "admission_audit_baseline": copy.deepcopy(_ADMISSION_AUDIT_BASELINE),
         "contacts": contacts,
         "edges": edges,
         "by_opportunity": dict(by_opportunity),
@@ -389,15 +657,26 @@ def validate_assets(directory: dict, graph: dict, *, enforce_budgets: bool = Fal
     if fingerprints != expected_fingerprints:
         raise FacultyMatchError("Generated projection fingerprints do not match the asset contents")
     expected_generation_id = _generation_id(
-        directory["faculty_source"]["sha256"],
+        directory["faculty_source"]["source_fingerprint"],
         directory["catalog"]["fingerprint"],
         expected_fingerprints,
     )
     if generation_id != expected_generation_id:
         raise FacultyMatchError("Generated identity does not match the directory and graph fingerprints")
     source = directory["faculty_source"]
-    if len(directory.get("profiles") or []) != source.get("record_count"):
+    if not re.fullmatch(r"[a-f0-9]{64}", str(source.get("source_fingerprint") or "")):
+        raise FacultyMatchError("Faculty union requires a valid combined source fingerprint")
+    workbook_source = source.get("workbook") or {}
+    if (workbook_source.get("record_count") != 156
+            or workbook_source.get("rankable_record_count") != 145
+            or workbook_source.get("unlisted_interest_count") != 11):
+        raise FacultyMatchError("Workbook faculty source counts violate the reviewed 156/145/11 contract")
+    if len(directory.get("profiles") or []) != source.get("union_record_count"):
         raise FacultyMatchError("Directory profile count disagrees with faculty source")
+    if sum(bool(profile.get("rankable")) for profile in directory["profiles"]) != source.get("union_rankable_record_count"):
+        raise FacultyMatchError("Directory rankable count disagrees with faculty source")
+    if sum(not bool(profile.get("rankable")) for profile in directory["profiles"]) != source.get("union_unrankable_count"):
+        raise FacultyMatchError("Directory unrankable count disagrees with faculty source")
     edges = graph.get("edges") or []
     if len({(edge["faculty_id"], edge["opportunity_id"]) for edge in edges}) != len(edges):
         raise FacultyMatchError("Graph contains duplicate faculty/opportunity edges")
@@ -485,8 +764,11 @@ def _atomic_write(path: str | Path, content: bytes) -> None:
 
 def generate_assets(faculty_config_path: str | Path, catalog_path: str | Path,
                     directory_out: str | Path, graph_out: str | Path,
-                    version_targets: tuple[str | Path, ...] = ()) -> tuple[dict, dict]:
-    config, _ = load_faculty_config(faculty_config_path)
+                    version_targets: tuple[str | Path, ...] = (),
+                    curated_cheme_config_path: str | Path = DEFAULT_CURATED_CHEME_CONFIG) -> tuple[dict, dict]:
+    workbook, workbook_raw = load_faculty_config(faculty_config_path)
+    curated, curated_raw = load_curated_cheme_config(curated_cheme_config_path)
+    config = merge_faculty_sources(workbook, workbook_raw, curated, curated_raw)
     catalog, catalog_bytes = load_catalog(catalog_path)
     catalog_identity = _catalog_identity(catalog, catalog_bytes)
     directory = build_directory(config, catalog_identity)
@@ -496,7 +778,7 @@ def generate_assets(faculty_config_path: str | Path, catalog_path: str | Path,
         "graph": _projection_fingerprint(graph),
     }
     generation_id = _generation_id(
-        config["source"]["sha256"], catalog_identity["fingerprint"], projection_fingerprints,
+        config["source"]["source_fingerprint"], catalog_identity["fingerprint"], projection_fingerprints,
     )
     identity = {
         "generation_id": generation_id,
@@ -535,13 +817,14 @@ def main(argv: list[str] | None = None) -> int:
     match = sub.add_parser("match")
     match.add_argument("--catalog", default="data/opportunities.js")
     match.add_argument("--faculty-config", default="config/hajim_faculty.json")
+    match.add_argument("--curated-cheme-config", default=str(DEFAULT_CURATED_CHEME_CONFIG))
     match.add_argument("--directory-out", default="data/hajim_faculty_directory.js")
     match.add_argument("--out", default="data/faculty_matches.js")
     match.add_argument("--version-target", action="append", default=[])
     args = parser.parse_args(argv)
     directory, graph = generate_assets(
         args.faculty_config, args.catalog, args.directory_out, args.out,
-        tuple(args.version_target),
+        tuple(args.version_target), args.curated_cheme_config,
     )
     directory_bytes = Path(args.directory_out).read_bytes()
     graph_bytes = Path(args.out).read_bytes()

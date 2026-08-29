@@ -1,5 +1,6 @@
 import copy
 import gzip
+import hashlib
 import json
 import tempfile
 import unittest
@@ -17,6 +18,9 @@ from scripts.faculty_match import (
     _load_js_object,
     _projection_fingerprint,
     generate_assets,
+    load_curated_cheme_config,
+    load_faculty_config,
+    merge_faculty_sources,
     score_profile_opportunity,
     validate_assets,
 )
@@ -24,6 +28,7 @@ from scripts.faculty_match import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config" / "hajim_faculty.json"
+CURATED = ROOT / "config" / "cheme_team_match_profiles.json"
 CATALOG = ROOT / "data" / "opportunities.js"
 DIRECTORY = ROOT / "data" / "hajim_faculty_directory.js"
 GRAPH = ROOT / "data" / "faculty_matches.js"
@@ -33,7 +38,11 @@ QUALITY = ROOT / "tests" / "fixtures" / "hajim_relevance_quality.json"
 class FacultyMatchTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.config = json.loads(CONFIG.read_text(encoding="utf-8"))
+        workbook, workbook_raw = load_faculty_config(CONFIG)
+        curated, curated_raw = load_curated_cheme_config(CURATED)
+        cls.workbook = workbook
+        cls.curated = curated
+        cls.config = merge_faculty_sources(workbook, workbook_raw, curated, curated_raw)
         cls.directory, _ = _load_js_object(DIRECTORY, "HAJIM_FACULTY_DIRECTORY")
         cls.graph, _ = _load_js_object(GRAPH, "FACULTY_MATCHES")
 
@@ -44,9 +53,13 @@ class FacultyMatchTests(unittest.TestCase):
         self.assertEqual(self.directory["projection_fingerprints"], self.graph["projection_fingerprints"])
         self.assertEqual(self.directory["faculty_source"], self.graph["faculty_source"])
         self.assertEqual(self.directory["catalog"], self.graph["catalog"])
-        self.assertEqual(self.directory["faculty_source"]["record_count"], 156)
-        self.assertEqual(self.directory["faculty_source"]["rankable_record_count"], 145)
-        self.assertEqual(self.directory["faculty_source"]["unlisted_interest_count"], 11)
+        source = self.directory["faculty_source"]
+        self.assertEqual(source["workbook"]["record_count"], 156)
+        self.assertEqual(source["workbook"]["rankable_record_count"], 145)
+        self.assertEqual(source["workbook"]["unlisted_interest_count"], 11)
+        self.assertEqual(source["union_record_count"], 158)
+        self.assertEqual(source["union_rankable_record_count"], 148)
+        self.assertEqual(source["union_unrankable_count"], 10)
 
     def test_identity_changes_with_either_projection_and_rejects_tampering(self):
         directory_fingerprint = _projection_fingerprint(self.directory)
@@ -60,7 +73,7 @@ class FacultyMatchTests(unittest.TestCase):
             "graph": _projection_fingerprint(changed_graph),
         }
         changed_generation = _generation_id(
-            self.directory["faculty_source"]["sha256"],
+            self.directory["faculty_source"]["source_fingerprint"],
             self.directory["catalog"]["fingerprint"],
             changed_fingerprints,
         )
@@ -81,6 +94,26 @@ class FacultyMatchTests(unittest.TestCase):
             sorted(index for values in self.graph["by_opportunity"].values() for index in values),
             list(range(len(edges))),
         )
+        metrics = self.graph["generation_metrics"]
+        self.assertEqual(metrics["edge_count"], len(edges))
+        actual_field_counts = {}
+        actual_field_sets = {}
+        for edge in edges:
+            fields = sorted({item["field"] for item in edge["opportunity_evidence"]})
+            field_set = "+".join(fields)
+            actual_field_sets[field_set] = actual_field_sets.get(field_set, 0) + 1
+            for field in fields:
+                actual_field_counts[field] = actual_field_counts.get(field, 0) + 1
+        self.assertEqual(metrics["evidence_field_edge_counts"], actual_field_counts)
+        self.assertEqual(metrics["evidence_field_sets"], actual_field_sets)
+        baseline = self.graph["admission_audit_baseline"]
+        self.assertEqual(baseline["edge_count"], 918)
+        self.assertEqual(baseline["evidence_field_sets"]["published_subject"], 164)
+        self.assertLess(len(edges), baseline["edge_count"])
+        self.assertEqual(
+            self.graph["matching_policy"]["corroborating_only_fields"],
+            ["disciplines", "topic_areas", "derived_themes"],
+        )
 
     def test_directory_search_documents_preserve_official_phrase_boundaries(self):
         canonical = {profile["faculty_id"]: profile for profile in self.config["profiles"]}
@@ -92,6 +125,62 @@ class FacultyMatchTests(unittest.TestCase):
                 if str(phrase).strip()
             ) if source.get("rankable") else ""
             self.assertEqual(projection["search_document"], expected)
+
+    def test_protected_cheme_profiles_are_preserved_in_one_deduplicated_union(self):
+        protected_names = [
+            "Mitchell Anthamatten", "Yasemin Basdogan", "Pooja Rajendra Bhalode",
+            "Siddharth Deshpande", "Gang Fan", "David G. Foster",
+            "Melodie I. Lawton", "Darren Lipomi", "Allison J. Lopatkin",
+            "Astrid M. Muller", "Marc D. Porosoff", "Alexander A. Shestopalov",
+            "Wyatt E. Tenhaeff", "Matthew Z. Yates",
+        ]
+        self.assertEqual([profile["name"] for profile in self.curated["profiles"]], protected_names)
+        protected_rows = [{
+            key: profile[key]
+            for key in ("faculty_id", "name", "aliases", "research_phrases", "research_summary", "domains")
+        } for profile in self.curated["profiles"]]
+        digest = hashlib.sha256(json.dumps(
+            protected_rows, ensure_ascii=False, separators=(",", ":"), sort_keys=True,
+        ).encode("utf-8")).hexdigest()
+        self.assertEqual(digest, "e8623811298848422671a33319bb7e5e551c40f041e225a2773ebe50694150c4")
+        by_id = {profile["faculty_id"]: profile for profile in self.config["profiles"]}
+        self.assertEqual(len(by_id), 158)
+        self.assertEqual(sum(profile["workbook_member"] for profile in by_id.values()), 156)
+        for faculty_id in ("david-g-foster", "melodie-i-lawton"):
+            self.assertFalse(by_id[faculty_id]["workbook_member"])
+            self.assertEqual(by_id[faculty_id]["roster_provenance"], ["curated_cheme_team_match_compatibility"])
+        self.assertTrue(by_id["darren-lipomi"]["rankable"])
+        self.assertFalse(by_id["darren-lipomi"]["workbook_rankable"])
+        self.assertEqual(by_id["darren-lipomi"]["expertise_provenance"], "curated_cheme_team_match_compatibility")
+        self.assertIn("Astrid M. Muller", by_id["astrid-m-muller"]["aliases"])
+        self.assertEqual(len([profile for profile in by_id.values() if profile["faculty_id"] == "astrid-m-muller"]), 1)
+
+    def test_legacy_cheme_profiles_remain_matchable_on_fixed_authoritative_fixtures(self):
+        profiles = self.config["profiles"]
+        by_id = {profile["faculty_id"]: profile for profile in profiles}
+        idf = _faculty_idf(profiles)
+        cases = {
+            "david-g-foster": {
+                "opportunity_id": "legacy-foster",
+                "title": "Computational fluid dynamics for circulating cancer-cell capture",
+                "description": "Transport phenomena and nanoparticle capture coatings in microfluidic systems.",
+            },
+            "melodie-i-lawton": {
+                "opportunity_id": "legacy-lawton",
+                "title": "Controlled drug delivery with shape-memory polymers",
+                "description": "Polymeric composites and structure-property relationships for biomaterials.",
+            },
+            "darren-lipomi": {
+                "opportunity_id": "legacy-lipomi",
+                "title": "Organic and flexible electronics",
+                "description": "Conducting polymers and stretchable semiconductors for wearable bioelectronic interfaces.",
+            },
+        }
+        for faculty_id, opportunity in cases.items():
+            with self.subTest(faculty_id=faculty_id):
+                edge = score_profile_opportunity(by_id[faculty_id], opportunity, idf)
+                self.assertIsNotNone(edge)
+                self.assertTrue(edge["matched_profile_phrases"])
 
     def test_generic_or_theme_only_overlap_cannot_admit(self):
         profile = {
@@ -109,18 +198,60 @@ class FacultyMatchTests(unittest.TestCase):
         }
         self.assertIsNone(score_profile_opportunity(profile, opportunity, {}))
 
+    def test_opportunity_facets_and_generic_single_terms_cannot_admit(self):
+        profiles = self.config["profiles"]
+        by_id = {profile["faculty_id"]: profile for profile in profiles}
+        idf = _faculty_idf(profiles)
+        facet_only = {
+            "opportunity_id": "facet-only-ai",
+            "title": "General collaborative program",
+            "description": "Supports broad interdisciplinary activities.",
+            "disciplines": ["Engineering and Physical Sciences"],
+            "topic_areas": ["Artificial intelligence and machine learning", "Reasoning"],
+        }
+        self.assertIsNone(score_profile_opportunity(by_id["hangfeng-he"], facet_only, idf))
+        generic_profile = {
+            "faculty_id": "generic-single",
+            "rankable": True,
+            "research_interests_text": "optimization; routing; reasoning",
+            "research_phrases": ["optimization", "routing", "reasoning"],
+            "derived_themes": ["Artificial intelligence and machine learning"],
+        }
+        generic_idf = {"optimization": 5.0, "routing": 5.0, "reasoning": 5.0}
+        for term in ("optimization", "routing", "reasoning"):
+            with self.subTest(term=term):
+                self.assertIsNone(score_profile_opportunity(generic_profile, {
+                    "opportunity_id": f"generic-{term}",
+                    "title": term.title(),
+                    "description": "A broad research program.",
+                }, generic_idf))
+
+    def test_specific_authoritative_text_still_admits_and_facets_only_corroborate(self):
+        profiles = self.config["profiles"]
+        by_id = {profile["faculty_id"]: profile for profile in profiles}
+        idf = _faculty_idf(profiles)
+        record = {
+            "opportunity_id": "specific-spintronics",
+            "title": "Spintronics research initiative",
+            "description": "Experimental work on magnetic heterostructures.",
+            "topic_areas": ["Materials science"],
+        }
+        edge = score_profile_opportunity(by_id["stephen-wu"], record, idf)
+        self.assertIsNotNone(edge)
+        self.assertTrue(any(item["field"] == "title" for item in edge["opportunity_evidence"]))
+
     def test_multiconcept_phrase_admits_with_local_evidence(self):
         profiles = self.config["profiles"]
         by_id = {profile["faculty_id"]: profile for profile in profiles}
         idf = _faculty_idf(profiles)
         record = {
             "opportunity_id": "catalysis-fixture",
-            "title": "CO2 capture and conversion",
+            "title": "Carbon dioxide capture and conversion",
             "description": "Heterogeneous thermal catalysis for reactive separations.",
         }
         edge = score_profile_opportunity(by_id["marc-d-porosoff"], record, idf)
         self.assertIsNotNone(edge)
-        self.assertIn("CO2 capture and conversion", edge["matched_profile_phrases"])
+        self.assertIn("carbon dioxide capture and conversion", edge["matched_profile_phrases"])
         self.assertTrue(edge["opportunity_evidence"])
 
     def test_human_reviewed_multidisciplinary_quality_fixture(self):
@@ -195,6 +326,7 @@ class FacultyMatchTests(unittest.TestCase):
         workflow = (ROOT / ".github" / "workflows" / "refresh-opportunities.yml").read_text(encoding="utf-8")
         self.assertIn("python -m scripts.faculty_match match", workflow)
         self.assertIn("--faculty-config config/hajim_faculty.json", workflow)
+        self.assertIn("--curated-cheme-config config/cheme_team_match_profiles.json", workflow)
         self.assertIn("--directory-out data/hajim_faculty_directory.js", workflow)
         self.assertIn("--version-target match_explorer.html", workflow)
         self.assertIn("--version-target team_match.html", workflow)

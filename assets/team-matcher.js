@@ -201,9 +201,16 @@
         ...(record.topic_areas || []),
         ...(record.disciplines || []),
       ].join(" ");
+      const authoritativeText = [
+        record.title || "",
+        record.description || "",
+        String(record.document_search_text || "").slice(0, 16_000),
+      ].join(" ");
       const sourceLower = sourceText.toLowerCase();
       const tokens = tokenize(sourceText);
       const tokenSet = new Set(tokens);
+      const authoritativeTokens = tokenize(authoritativeText);
+      const authoritativeTokenSet = new Set(authoritativeTokens);
       const topics = new Set(record.topic_areas || []);
       const broadText = `${record.title || ""} ${(record.description || "").slice(0, 700)}`;
       const postedAge = daysBetween(record.posted_date || record.source_first_seen_date, now);
@@ -224,6 +231,8 @@
         sourceLower,
         tokens,
         tokenSet,
+        authoritativeTokens,
+        authoritativeTokenSet,
         topics,
         agencyLower: String(record.agency || "").toLowerCase(),
         scopeText: identityText.toLowerCase(),
@@ -426,6 +435,25 @@
       return null;
     }
 
+    function specificPhraseAllowed(profile, phrase, prepared) {
+      if (profile.evidence_policy !== "specific_phrase_required") return true;
+      const normalizedPhrase = String(phrase || "").normalize("NFC").toLowerCase().trim();
+      const singlePhrases = new Set((profile.single_term_phrases || []).map(value =>
+        String(value || "").normalize("NFC").toLowerCase().trim()));
+      if (!singlePhrases.has(normalizedPhrase)) return true;
+      const freelyAdmitting = new Set((profile.admitting_single_terms || []).map(value =>
+        String(value || "").normalize("NFC").toLowerCase().trim()));
+      if (freelyAdmitting.has(normalizedPhrase)) return true;
+      const contextTokens = new Set();
+      (profile.key_terms || profile.keywords || []).forEach(otherPhrase => {
+        if (String(otherPhrase || "").normalize("NFC").toLowerCase().trim() === normalizedPhrase) return;
+        tokenize(otherPhrase).forEach(token => {
+          if (prepared.authoritativeTokenSet.has(token)) contextTokens.add(token);
+        });
+      });
+      return contextTokens.size >= 2;
+    }
+
     function scoreProfile(profile, prepared) {
       const reasons = [];
       const matchedDomains = new Set();
@@ -436,9 +464,13 @@
       let strong = false;
       let signalCount = 0;
       const context = profileContext(profile);
+      const phrasePrepared = profile.evidence_policy === "specific_phrase_required"
+        ? { ...prepared, tokens: prepared.authoritativeTokens, tokenSet: prepared.authoritativeTokenSet }
+        : prepared;
 
       for (const phrase of profile.key_terms || profile.keywords || []) {
-        const evidence = phraseEvidence(phrase, prepared, context);
+        if (!specificPhraseAllowed(profile, phrase, prepared)) continue;
+        const evidence = phraseEvidence(phrase, phrasePrepared, context);
         if (!evidence) continue;
         phraseScore += evidence.score;
         strong = strong || evidence.strong;
@@ -481,7 +513,10 @@
       // accumulation of textual/topic evidence so one generic vocabulary hit
       // cannot establish researcher fit by itself.
       const minimumScore = scopeScore > 0 ? 1.0 : MIN_MEMBER_SCORE;
-      const hasResearcherLink = phraseScore >= .18 || linkedVocabularyScore >= .3 || scopeScore > 0;
+      const phraseRequired = profile.evidence_policy === "specific_phrase_required";
+      const hasResearcherLink = phraseRequired
+        ? phraseScore >= .18
+        : phraseScore >= .18 || linkedVocabularyScore >= .3 || scopeScore > 0;
       if (score < minimumScore || !signalCount || !hasResearcherLink) return null;
       reasons.sort((left, right) => right.score - left.score || left.label.localeCompare(right.label));
       const researchReasons = uniq(reasons

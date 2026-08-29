@@ -13,6 +13,7 @@ on:
       - "scripts/faculty_match.py"
       - "scripts/import_hajim_faculty.py"
       - "config/hajim_faculty.json"
+      - "config/cheme_team_match_profiles.json"
       - "assets/hajim-faculty.js"
       - "assets/hajim-reverse-match.js"
       - "tests/test_faculty_match.py"
@@ -281,6 +282,7 @@ jobs:
           python -m scripts.faculty_match match
           --catalog data/opportunities.js
           --faculty-config config/hajim_faculty.json
+          --curated-cheme-config config/cheme_team_match_profiles.json
           --directory-out data/hajim_faculty_directory.js
           --out data/faculty_matches.js
           --version-target match_explorer.html

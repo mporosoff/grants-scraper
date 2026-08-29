@@ -33,9 +33,12 @@ test("validates the shared schema, fingerprint, and reviewed roster counts", () 
   const api = loadApi();
   assert.equal(api.validateDirectory(directory, catalog, directory.generation_id), directory);
   assert.equal(api.validateGraph(graph, directory, catalog, directory.generation_id), graph);
-  assert.equal(directory.faculty_source.record_count, 156);
-  assert.equal(directory.faculty_source.rankable_record_count, 145);
-  assert.equal(directory.faculty_source.unlisted_interest_count, 11);
+  assert.equal(directory.faculty_source.workbook.record_count, 156);
+  assert.equal(directory.faculty_source.workbook.rankable_record_count, 145);
+  assert.equal(directory.faculty_source.workbook.unlisted_interest_count, 11);
+  assert.equal(directory.faculty_source.union_record_count, 158);
+  assert.equal(directory.faculty_source.union_rankable_record_count, 148);
+  assert.equal(directory.faculty_source.union_unrankable_count, 10);
   assert.equal(directory.generation_id, graph.generation_id);
   assert.equal(directory.asset_version, directory.generation_id);
   assert.deepEqual(directory.projection_fingerprints, graph.projection_fingerprints);
@@ -86,7 +89,11 @@ test("keeps directory search local, ordered, and bounded to twelve results", () 
   const unitResults = api.search(directory, "Chemical and Sustainability Engineering");
   assert.ok(unitResults.length > 0 && unitResults.length <= 12);
   assert.ok(unitResults.every(profile => api.normalize([profile.home_unit, ...profile.rosters].join(" ")).includes("chemical and sustainability engineering")));
-  assert.ok(api.search(directory, "CO2 capture").some(profile => profile.faculty_id === target.faculty_id));
+  assert.ok(api.search(directory, "carbon dioxide capture").some(profile => profile.faculty_id === target.faculty_id));
+  assert.ok(api.search(directory, "computational fluid dynamics").some(profile => profile.faculty_id === "david-g-foster"));
+  assert.ok(api.search(directory, "controlled drug delivery").some(profile => profile.faculty_id === "melodie-i-lawton"));
+  assert.ok(api.search(directory, "flexible electronics").some(profile => profile.faculty_id === "darren-lipomi"));
+  assert.deepEqual(Array.from(api.search(directory, "Astrid M Muller"), profile => profile.faculty_id), ["astrid-m-muller"]);
   assert.equal(api.search(directory, "m").length, 0);
   assert.ok(api.search(directory, "", { showAll: true }).length <= 12);
   assert.doesNotMatch(apiSource, /fetch\(|XMLHttpRequest|sendBeacon|analytics/i);
@@ -104,6 +111,49 @@ test("Funding Finder lazy-loads both projections and isolates a failed faculty l
   assert.match(apiSource, /script\.dataset\.hajimState = "loading"/);
   assert.match(apiSource, /script\.remove\(\)/);
   assert.match(apiSource, /existing\.dataset\.hajimState !== "loading"/);
+  assert.match(apiSource, /discardAsset\("HAJIM_FACULTY_DIRECTORY"\)/);
+  assert.match(apiSource, /discardAsset\("FACULTY_MATCHES"\)/);
+});
+
+test("validation failures discard stale globals so a clean retry can load the current assets", async () => {
+  const scope = { HAJIM_FACULTY_DIRECTORY: { schema_family: "stale" } };
+  const removed = [];
+  const staleScripts = {
+    HAJIM_FACULTY_DIRECTORY: { remove() { removed.push("HAJIM_FACULTY_DIRECTORY"); } },
+    FACULTY_MATCHES: { remove() { removed.push("FACULTY_MATCHES"); } },
+  };
+  const document = {
+    querySelectorAll(selector) {
+      const match = selector.match(/data-hajim-asset="([A-Z_]+)"/);
+      return match && staleScripts[match[1]] ? [staleScripts[match[1]]] : [];
+    },
+  };
+  const context = { globalThis: scope, document };
+  vm.runInNewContext(apiSource, context);
+  await assert.rejects(
+    scope.HajimFaculty.loadDirectory(catalog, "unused-directory.js", directory.generation_id),
+    /incompatible schema/,
+  );
+  assert.equal(scope.HAJIM_FACULTY_DIRECTORY, undefined);
+  assert.ok(removed.includes("HAJIM_FACULTY_DIRECTORY"));
+  scope.HAJIM_FACULTY_DIRECTORY = directory;
+  const reloadedDirectory = await scope.HajimFaculty.loadDirectory(
+    catalog, "unused-directory.js", directory.generation_id,
+  );
+  assert.equal(reloadedDirectory, directory);
+
+  scope.FACULTY_MATCHES = { schema_family: "stale" };
+  await assert.rejects(
+    scope.HajimFaculty.loadGraph(directory, catalog, "unused-graph.js", directory.generation_id),
+    /incompatible schema/,
+  );
+  assert.equal(scope.FACULTY_MATCHES, undefined);
+  assert.ok(removed.includes("FACULTY_MATCHES"));
+  scope.FACULTY_MATCHES = graph;
+  const reloadedGraph = await scope.HajimFaculty.loadGraph(
+    directory, catalog, "unused-graph.js", directory.generation_id,
+  );
+  assert.equal(reloadedGraph, graph);
 });
 
 test("Team Match loads the directory initially but graph only after Hajim selection", () => {

@@ -71,7 +71,7 @@
   function evidenceLabel(field) {
     if (field === "title") return "Title";
     if (field === "description") return "Synopsis";
-    return "Published subject text";
+    return "Published document or subject text";
   }
 
   function facultyRow(match) {
@@ -100,13 +100,17 @@
     var matches = API.opportunityMatches(
       openPanel.graph, openPanel.directory, openPanel.opportunityId, openPanel.primaryOnly
     );
+    var source = openPanel.directory.faculty_source || {};
+    var unionCount = source.union_record_count || openPanel.directory.profiles.length;
+    var workbook = source.workbook || {};
+    var restoredCount = Math.max(0, (workbook.unlisted_interest_count || 0) - (source.union_unrankable_count || 0));
     body.removeAttribute("role");
     body.innerHTML = '<div class="hajim-match-controls"><label for="hajim-scope-' + safeId(openPanel.opportunityId) + '">Faculty scope</label>' +
       '<select id="hajim-scope-' + safeId(openPanel.opportunityId) + '" data-hajim-scope>' +
-      '<option value="all"' + (openPanel.primaryOnly ? "" : " selected") + '>All included Hajim roster faculty (156)</option>' +
+      '<option value="all"' + (openPanel.primaryOnly ? "" : " selected") + '>Full Hajim and preserved Team Match directory (' + unionCount + ')</option>' +
       '<option value="primary"' + (openPanel.primaryOnly ? " selected" : "") + '>Hajim primary/research only (126)</option></select></div>' +
       '<p class="hajim-match-note">Matches use official faculty-interest phrases and published opportunity text. They do not imply eligibility, availability, or willingness to participate.</p>' +
-      '<p class="hajim-unranked-note">Eleven current roster profiles do not list research interests on their source faculty page and therefore are not automatically ranked.</p>' +
+      '<p class="hajim-unranked-note">' + (workbook.unlisted_interest_count || 0) + ' workbook profiles do not list research interests on their source faculty page. Preserved reviewed expertise restores ' + restoredCount + '; ' + (source.union_unrankable_count || 0) + ' directory profiles remain unranked.</p>' +
       (matches.length ? '<div class="hajim-match-list">' + matches.map(facultyRow).join("") + '</div>' :
         '<p class="hajim-no-matches">No faculty passed the evidence gate for this opportunity in the selected scope.</p>');
   }

@@ -268,6 +268,7 @@ async function run() {
     "assets/team-hybrid.js",
     ...RUNTIME_ASSETS.map(asset => asset.path),
     "config/hajim_faculty.json",
+    "config/cheme_team_match_profiles.json",
     "data/hajim_faculty_directory.js",
     "data/faculty_matches.js",
     "funded_awards.html",

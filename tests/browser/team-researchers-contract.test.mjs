@@ -55,6 +55,45 @@ test("keeps manual and ORCID matching configuration eager and roster-independent
   assert.match(teamPage, /MATCHER_API\.create\(CHILD_CATALOG, TEAM_MATCH_CONFIG, SEARCH_API, \{ now: TEAM_RUNTIME_NOW \}\)/);
 });
 
+test("Hajim child matching requires specific phrases in authoritative text while facets only corroborate", () => {
+  const { query, matcher } = loadApis();
+  const catalog = { opportunities: [
+    {
+      opportunity_id: "facet-only",
+      status: "posted",
+      title: "General collaborative program",
+      description: "Supports broad interdisciplinary activities.",
+      topic_areas: ["Artificial intelligence and machine learning", "Optimization"],
+      close_date: "2026-12-31",
+    },
+    {
+      opportunity_id: "authoritative",
+      status: "posted",
+      title: "Machine learning for catalyst discovery",
+      description: "Atomic modeling of solid-liquid interfaces for heterogeneous catalysis.",
+      topic_areas: ["Artificial intelligence and machine learning"],
+      close_date: "2026-12-31",
+    },
+    {
+      opportunity_id: "generic-single",
+      status: "posted",
+      title: "Optimization methods",
+      description: "A broad research program.",
+      close_date: "2026-12-31",
+    },
+  ] };
+  const engine = matcher.create(catalog, {}, query, { now: new Date("2026-08-29T00:00:00Z") });
+  const profile = {
+    name: "Hajim profile",
+    key_terms: ["machine learning for catalyst discovery", "atomic modeling of solid-liquid interfaces", "optimization"],
+    domains: ["Artificial intelligence and machine learning"],
+    evidence_policy: "specific_phrase_required",
+    single_term_phrases: ["optimization"],
+    admitting_single_terms: [],
+  };
+  assert.deepEqual(Array.from(engine.matchProfile(profile), result => result.id), ["authoritative"]);
+});
+
 function childTopicCatalog(query, children, excluded = []) {
   const index = buildIndex(children, query);
   return {

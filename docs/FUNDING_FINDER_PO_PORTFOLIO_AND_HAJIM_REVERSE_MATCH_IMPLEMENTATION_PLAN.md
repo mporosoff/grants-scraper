@@ -153,6 +153,7 @@ Create a deterministic importer that converts the supplied workbook into a revie
 
 - input: the supplied `.xlsx`;
 - committed source of truth: `config/hajim_faculty.json`;
+- committed curated ChemE compatibility enrichment: `config/cheme_team_match_profiles.json`;
 - generated lightweight browser directory: `data/hajim_faculty_directory.js`;
 - generated match asset: the existing `data/faculty_matches.js` path, upgraded to a compact versioned schema.
 
@@ -160,7 +161,7 @@ Do **not** commit the binary workbook unless the repository owner explicitly dir
 
 Neither the workbook nor the full canonical JSON may be loaded by the public browser application. Team Match should initially receive only the compact directory fields needed for local discovery and display. Match edges and evidence must be generated separately and lazy-loaded when matching is actually requested.
 
-Future roster updates should use the same importer with a newly reviewed workbook and produce an ordinary JSON diff.
+Future workbook updates should use the same importer and produce an ordinary JSON diff. They must then be deterministically reconciled with the validated curated ChemE compatibility enrichment. The workbook expands and updates Hajim discovery; it does not silently delete established Team Match profiles that are outside the research-active workbook.
 
 ---
 
@@ -267,7 +268,7 @@ The actual supplied workbook import must fail unless all of these hold:
 - the canonical JSON passes its schema validator;
 - running the importer twice produces identical bytes.
 
-Do not infer research interests for the 11 unrankable profiles from OpenAlex, ORCID, publication titles, department names, appointment text, or lab-site text.
+Do not infer research interests for the 11 workbook profiles with missing interests from OpenAlex, ORCID, department names, appointment text, or generic topics. A profile may become rankable in the union only when a pre-existing reviewed curated Team Match record supplies preserved expertise with explicit provenance; Darren Lipomi is the compatibility case. The workbook count remains 156/145/11 even though the deduplicated browser/matcher union is 158 total / 148 rankable / 10 unrankable.
 
 ---
 
@@ -277,21 +278,17 @@ The repository already contains a ChemE-only matching pipeline in `scripts/facul
 
 ### 6.1 Required refactor
 
-Refactor the active match path to consume `config/hajim_faculty.json` instead of:
+Refactor the active match path to consume the deterministic union of `config/hajim_faculty.json` and `config/cheme_team_match_profiles.json`. The 14-person protected-base ChemE roster, exact reviewed key terms, readable summaries, and conservative domains are a preservation and compatibility baseline. Hard-coded Python maps may be removed only after their content is migrated without loss into the validated, version-controlled enrichment schema. David G. Foster and Melodie I. Lawton remain truthful curated Team Match members rather than being mislabeled as workbook rows; Astrid M. Muller/Müller resolves to one stable identity; Darren Lipomi retains curated expertise even though his workbook row lacks source-page interest text.
 
-- the hard-coded 14-person `FACULTY` list;
-- hard-coded ChemE-only `FACULTY_KEYTERMS`;
-- hard-coded ChemE-only summaries and domains;
-- OpenAlex resolution as the membership authority;
-- `faculty_profiles.json` as the active roster.
+OpenAlex resolution must not be a membership authority and must not overwrite curated expertise. Roster provenance and expertise provenance are separate concepts and must both survive projection generation. `faculty_profiles.json` must not remain an active roster authority.
 
-Audit every reference to `faculty_profiles.json`, the `profiles` command, and the old hard-coded maps before removing or deprecating them. The final scheduled build must use the canonical Hajim JSON.
+Audit every reference to `faculty_profiles.json`, the `profiles` command, and the old hard-coded maps before removing or deprecating them. The final scheduled build must use the validated canonical union inputs.
 
 OpenAlex functionality may remain only as clearly optional future enrichment if it is still used elsewhere. It must not gate inclusion, establish current affiliation, or silently overwrite official workbook text.
 
 ### 6.2 Generated asset schema
 
-Generate two purpose-built browser projections atomically from the same canonical faculty JSON and current catalog. They must share the same faculty-source SHA, catalog fingerprint, schema family, and generation identity so they cannot drift.
+Generate two purpose-built browser projections atomically from the same validated workbook-plus-curated canonical faculty union and current catalog. They must share the same combined faculty-source fingerprint, catalog fingerprint, schema family, and generation identity so they cannot drift.
 
 1. `data/hajim_faculty_directory.js` is a small local discovery asset for Team Match. It contains only stable faculty ID, name, home unit, relationship, roster labels, rank/appointment display text, rankable state, and a normalized local-search document derived from the official research-interest text. Do not include match lists or the workbook itself.
 2. `data/faculty_matches.js` is the compact evidence-qualified match graph used by Team Match and Funding Finder. Store each faculty/opportunity edge once and expose lightweight `by_faculty` and `by_opportunity` indexes containing edge IDs or array offsets. Do not serialize the same edge twice in full.
@@ -304,10 +301,13 @@ globalThis.FACULTY_MATCHES = {
   generation_id: "...",
   catalog: { record_count: 1430, generated_at: "...", fingerprint: "..." },
   faculty_source: {
-    checked_date: "2026-08-28",
-    sha256: "...",
-    record_count: 156,
-    rankable_record_count: 145
+    kind: "canonical_faculty_union",
+    source_fingerprint: "...",
+    workbook: { sha256: "...", record_count: 156, rankable_record_count: 145, unlisted_interest_count: 11 },
+    curated_team_match: { record_count: 14, preservation_authority_sha: "...", sha256: "..." },
+    union_record_count: 158,
+    union_rankable_record_count: 148,
+    union_unrankable_count: 10
   },
   edges: [
     {
@@ -347,7 +347,7 @@ Before merge, record raw and gzip bytes for the current 14-person assets and bot
 
 ## 7. Reverse-match retrieval contract
 
-Scaling the existing phrase matcher from 14 curated ChemE profiles to 156 multidisciplinary profiles without changing its quality controls is not acceptable. The current implementation must be generalized and validated.
+Scaling the existing phrase matcher from 14 curated ChemE profiles to the 158-person deduplicated multidisciplinary union without preserving and generalizing its quality controls is not acceptable. The current implementation must be generalized and validated against the original 14-profile compatibility baseline.
 
 ### 7.1 Authoritative evidence
 
@@ -356,6 +356,8 @@ Faculty evidence, in descending authority:
 1. source-listed research-interest phrases;
 2. the complete source-listed research-interest text;
 3. derived themes as corroboration only.
+
+For the original 14 ChemE profiles, the migrated protected-base reviewed phrases, summaries, and domains remain the authoritative faculty-side compatibility data. For the expanded population, reviewed workbook interest phrases are authoritative. Domains and derived themes corroborate an already-admitted phrase match but never establish one.
 
 The following may be displayed as context but must not establish topical fit:
 
@@ -465,7 +467,7 @@ For each faculty result, show:
 
 Default scope:
 
-> **All included Hajim roster faculty (156)**
+> **Full Hajim and preserved Team Match directory (158)**
 
 Provide one compact scope control:
 
@@ -475,7 +477,7 @@ The broader default is intentional: reverse match is a discovery workflow, and t
 
 The panel should also state:
 
-> Eleven current roster profiles do not list research interests on their source faculty page and therefore are not automatically ranked.
+> Eleven workbook profiles do not list research interests on their source faculty page. Preserved reviewed expertise restores one established ChemE profile; ten directory profiles remain unranked.
 
 ### 8.3 Failure behavior
 
@@ -503,7 +505,7 @@ The reverse-match control and panel must support:
 
 ## 9. Team Match compatibility
 
-Team Match already consumes `globalThis.FACULTY_MATCHES` and supports selected researchers, custom researchers, ORCID-derived context, and local team-fit behavior. Its current faculty chooser is a native select designed around 14 ChemE researchers; it is **not** an adequate searchable control for 156 multidisciplinary profiles. This is the one targeted Team Match interaction change authorized by this plan.
+Team Match already consumes `globalThis.FACULTY_MATCHES` and supports selected researchers, custom researchers, ORCID-derived context, and local team-fit behavior. Its current faculty chooser is a native select designed around 14 ChemE researchers; it is **not** an adequate searchable control for the 158-person deduplicated union. This is the one targeted Team Match interaction change authorized by this plan.
 
 Replace that picker with two visually and semantically separate paths:
 
@@ -512,7 +514,7 @@ Replace that picker with two visually and semantically separate paths:
 
 The directory search must:
 
-- keep the full 156-person directory out of a permanently expanded DOM list;
+- keep the full 158-person directory out of a permanently expanded DOM list;
 - begin suggestions after two meaningful characters, while still allowing an explicit “show suggestions” action for keyboard/touch users;
 - show at most 10–12 results at once;
 - rank exact/prefix name matches first, followed by home unit/roster matches and then official-interest phrase matches;
@@ -526,14 +528,14 @@ When four researchers are selected, disable both add paths and explain the team-
 
 Additional compatibility requirements:
 
-- populate Team Match from the same 156-profile canonical roster;
+- populate Team Match from the same 158-profile canonical union while preserving the workbook’s separate 156/145/11 source contract;
 - preserve custom/external researcher entry and ORCID behavior;
 - preserve the current every-researcher evidence gate;
 - retain relationship/home-unit labeling where useful;
 - ensure the expanded roster does not change selected-team semantics;
 - keep enhanced Team Match ordering unable to add an opportunity that failed local full-team fit.
 
-The reverse-match release must not create a second faculty source of truth. The lightweight directory and match graph are different projections generated atomically from the same canonical JSON and catalog fingerprint.
+The reverse-match release must not create a hidden parallel runtime. The lightweight directory and match graph are different projections generated atomically from the same validated workbook-plus-curated canonical union and catalog fingerprint.
 
 ---
 
@@ -1109,16 +1111,18 @@ The implementation is complete only when all of the following are true.
 ## Hajim Reverse Match
 
 - The supplied workbook has been converted to deterministic, reviewable canonical JSON.
-- The canonical profile count is 156, with 145 rankable and 11 explicitly unrankable profiles.
+- The reviewed workbook contract is 156 profiles / 145 rankable / 11 missing-interest; the deduplicated canonical union is 158 / 148 / 10 after preserving all 14 original ChemE profiles.
 - OpenAlex no longer determines the active Hajim roster.
 - The existing faculty matcher is generalized rather than duplicated.
-- Team Match consumes a compact projection of the same canonical roster; neither the workbook nor canonical JSON is browser-loaded.
+- Team Match consumes a compact projection of the same canonical union; neither the workbook nor either canonical JSON input is browser-loaded.
 - Team Match offers **Search Hajim faculty at the University of Rochester** through an accessible, bounded local combobox rather than a 156-name select/button wall.
 - **Add a researcher manually** remains a separate prominent path for collaborators outside Hajim or anyone not listed, with existing ORCID and browser-local behavior preserved.
 - The directory and match graph share one generation identity and stay within validated initial/lazy-load byte budgets.
 - Every current opportunity can request a lazy-loaded, no-AI reverse match.
 - Results are evidence-qualified, source-cited, and relationship-labeled.
 - Derived themes never admit a result by themselves.
+- Opportunity disciplines, topic areas, and other derived facets never admit a result by themselves.
+- All 14 original ChemE profiles retain their exact reviewed phrases, summaries, domains, stable identity/aliases, and separated roster/expertise provenance.
 - Generic single-token overlaps do not flood the result set.
 - A multidisciplinary human-reviewed quality fixture passes.
 - Failure of the reverse-match asset does not impair Funding Finder.
@@ -1162,7 +1166,8 @@ Feature 1: Hajim Reverse Match
 - Merge SHA:
 - Canonical faculty source:
 - Workbook SHA-256:
-- Profiles: 156 total / 145 rankable / 11 unrankable
+- Workbook profiles: 156 total / 145 rankable / 11 missing-interest
+- Canonical union: 158 total / 148 rankable / 10 unrankable; all 14 protected ChemE profiles preserved
 - Directory/match schema and shared generation ID:
 - Directory raw/gzip bytes:
 - Match graph raw/gzip bytes:

@@ -25,6 +25,7 @@ on:
       - "assets/team-matcher.js"
       - "assets/team-researchers.js"
       - "config/hajim_faculty.json"
+      - "config/cheme_team_match_profiles.json"
       - "config/search_v2.json"
       - "data/faculty_matches.js"
       - "data/hajim_faculty_directory.js"

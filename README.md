@@ -115,15 +115,18 @@ names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
 The reviewed Hajim faculty roster is imported deterministically from a handoff
-workbook into `config/hajim_faculty.json`. The workbook is not committed or
-served. Team Match initially loads only a compact 156-person directory and
+workbook into `config/hajim_faculty.json` and reconciled with the validated
+14-profile ChemE compatibility data in `config/cheme_team_match_profiles.json`.
+The workbook is not committed or served. Team Match initially loads only a compact
+158-person deduplicated directory and
 offers a bounded local combobox alongside a separate manual/ORCID path for
 collaborators outside Hajim or anyone not listed. Selecting or restoring a
 Hajim faculty member lazy-loads the evidence-qualified match graph. Funding
 Finder uses the same graph for each card's **Find relevant Hajim faculty**
 action; no AI key or model call is involved, and only one reverse-match panel
-opens at a time. Eleven roster profiles whose official source page lists no
-interests are visible in the directory but never ranked automatically.
+opens at a time. The workbook contract remains 156 total / 145 rankable / 11
+missing-interest; preserved reviewed expertise restores one established ChemE
+profile, so the union is 158 total / 148 rankable / 10 unrankable.
 
 Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
 Office of Science awards through the sources' native fields, keeps the adapters
@@ -287,9 +290,10 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
-| `data/hajim_faculty_directory.js` | Compact initial Team Match projection of the reviewed 156-person roster |
+| `data/hajim_faculty_directory.js` | Compact initial Team Match projection of the 158-person deduplicated faculty union |
 | `data/faculty_matches.js` | Lazy, normalized faculty/opportunity edge graph with reverse indexes |
 | `config/hajim_faculty.json` | Canonical reviewed roster snapshot; never browser-loaded |
+| `config/cheme_team_match_profiles.json` | Canonical protected-base ChemE expertise and membership enrichment; never browser-loaded |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |

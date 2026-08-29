@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "source": {
+    "kind": "curated_cheme_team_match_compatibility",
+    "preservation_authority_sha": "ffb5ec7a49de4286e0123ea5360629973e079e0c",
+    "source_review_date": "2026-08-11",
+    "membership_source_url": "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+    "membership_checked_date": "2026-08-29",
+    "record_count": 14
+  },
+  "profiles": [
+    {
+      "faculty_id": "mitchell-anthamatten",
+      "name": "Mitchell Anthamatten",
+      "aliases": [],
+      "research_phrases": [
+        "macromolecular self-assembly",
+        "associative and functional polymers",
+        "nanostructured polymer materials",
+        "polymer interfacial phenomena",
+        "optoelectronic polymer materials",
+        "vapor deposition polymerization"
+      ],
+      "research_summary": "Develops associative and functional polymers, macromolecular self-assembly, nanostructured and optoelectronic polymer materials, and vapor-deposited polymer interfaces.",
+      "domains": ["Materials science", "Manufacturing"]
+    },
+    {
+      "faculty_id": "yasemin-basdogan",
+      "name": "Yasemin Basdogan",
+      "aliases": [],
+      "research_phrases": [
+        "machine learning for computational materials design",
+        "molecular dynamics simulation",
+        "quantum chemistry",
+        "polymer solution modeling",
+        "computational catalysis",
+        "CO2 separation membranes"
+      ],
+      "research_summary": "Uses quantum chemistry, molecular dynamics, and machine learning to design polymers, solutions, catalytic materials, and separation media.",
+      "domains": [
+        "Catalysis and reaction engineering",
+        "Separations and membranes",
+        "Materials science",
+        "Carbon management",
+        "Artificial intelligence and machine learning",
+        "Energy"
+      ]
+    },
+    {
+      "faculty_id": "pooja-rajendra-bhalode",
+      "name": "Pooja Rajendra Bhalode",
+      "aliases": [],
+      "research_phrases": [
+        "process systems engineering",
+        "multiscale molecules-to-systems modeling",
+        "physics and data-driven hybrid modeling",
+        "powder flow modeling",
+        "sustainable process design",
+        "solvent-based extraction"
+      ],
+      "research_summary": "Builds multiscale, physics-informed, and data-driven process models for sustainable process systems, powder flow, and solvent-based separations.",
+      "domains": ["Manufacturing", "Artificial intelligence and machine learning"]
+    },
+    {
+      "faculty_id": "siddharth-deshpande",
+      "name": "Siddharth Deshpande",
+      "aliases": [],
+      "research_phrases": [
+        "atomic modeling of solid-liquid interfaces",
+        "atomic modeling of solid-gas interfaces",
+        "machine learning for catalyst discovery",
+        "heterogeneous catalysis",
+        "electrocatalysis at interfaces",
+        "battery interface modeling"
+      ],
+      "research_summary": "Models solid-liquid and solid-gas interfaces and develops data-driven methods for heterogeneous catalysis, electrocatalysis, and battery interfaces.",
+      "domains": [
+        "Catalysis and reaction engineering",
+        "Energy",
+        "Materials science",
+        "Artificial intelligence and machine learning"
+      ]
+    },
+    {
+      "faculty_id": "gang-fan",
+      "name": "Gang Fan",
+      "aliases": [],
+      "research_phrases": [
+        "bio-inspired catalysis",
+        "polymer chemistry and plastic upcycling",
+        "bioelectrochemistry",
+        "biosensors",
+        "synthetic biology",
+        "metabolic engineering for environmental remediation"
+      ],
+      "research_summary": "Combines polymer chemistry, bio-inspired catalysis, synthetic biology, bioelectrochemistry, and metabolic engineering for plastic upcycling, sensing, and environmental remediation.",
+      "domains": [
+        "Biology and biotechnology",
+        "Catalysis and reaction engineering",
+        "Carbon management",
+        "Materials science",
+        "Environmental science"
+      ]
+    },
+    {
+      "faculty_id": "david-g-foster",
+      "name": "David G. Foster",
+      "aliases": [],
+      "research_phrases": [
+        "transport phenomena",
+        "computational fluid dynamics",
+        "microfluidic cancer cell capture",
+        "nanoparticle capture coatings",
+        "biomedical transport modeling",
+        "fluid mechanics education"
+      ],
+      "research_summary": "Studies transport phenomena and computational fluid dynamics, including microfluidic and nanoparticle-coating approaches for capturing circulating cells.",
+      "domains": ["Materials science", "Biology and biotechnology"],
+      "identity": {
+        "home_unit": "Department of Chemical and Sustainability Engineering",
+        "appointment_text": "Professor of Chemical Engineering (instructional)",
+        "appointments": ["Professor of Chemical Engineering (instructional)"],
+        "rosters": ["Chemical and Sustainability Engineering"],
+        "email": "david.foster@rochester.edu",
+        "website_url": "https://www.sas.rochester.edu/che/sites/dafoster/",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.sas.rochester.edu/che/sites/dafoster/"
+        ],
+        "checked_date": "2026-08-29"
+      }
+    },
+    {
+      "faculty_id": "melodie-i-lawton",
+      "name": "Melodie I. Lawton",
+      "aliases": [],
+      "research_phrases": [
+        "shape-memory polymers",
+        "polymeric composites",
+        "biomaterials",
+        "polymer degradation",
+        "controlled drug delivery",
+        "structure-property relationships"
+      ],
+      "research_summary": "Studies shape-memory polymers, polymer composites and degradation, biomaterials, controlled drug delivery, and polymer structure-property relationships.",
+      "domains": ["Materials science", "Biology and biotechnology"],
+      "identity": {
+        "home_unit": "Department of Chemical and Sustainability Engineering",
+        "appointment_text": "Associate Professor of Chemical Engineering (Instructional); Associate Chair, Department of Chemical Engineering; Laboratory Director, Teaching Labs",
+        "appointments": [
+          "Associate Professor of Chemical Engineering (Instructional)",
+          "Associate Chair, Department of Chemical Engineering",
+          "Laboratory Director, Teaching Labs"
+        ],
+        "rosters": ["Chemical and Sustainability Engineering"],
+        "email": "melodie.lawton@rochester.edu",
+        "website_url": null,
+        "source_urls": ["https://www.hajim.rochester.edu/che/people/faculty/index.html"],
+        "checked_date": "2026-08-29"
+      }
+    },
+    {
+      "faculty_id": "darren-lipomi",
+      "name": "Darren Lipomi",
+      "aliases": [],
+      "research_phrases": [
+        "organic and flexible electronics",
+        "conducting polymers",
+        "stretchable semiconductors",
+        "mechanical properties of organic electronics",
+        "electrotactile haptics",
+        "wearable bioelectronic interfaces"
+      ],
+      "research_summary": "Develops conducting and semiconducting polymers for flexible electronics, wearable biointerfaces, medical devices, and electrotactile haptics.",
+      "domains": ["Materials science", "Manufacturing"]
+    },
+    {
+      "faculty_id": "allison-j-lopatkin",
+      "name": "Allison J. Lopatkin",
+      "aliases": [],
+      "research_phrases": [
+        "antibiotic resistance",
+        "plasmid dynamics and horizontal gene transfer",
+        "engineered microbial communities",
+        "microbial systems biology",
+        "metabolic engineering",
+        "computational models of bacterial resistance"
+      ],
+      "research_summary": "Uses systems and synthetic biology, microbial community engineering, mathematical modeling, and machine learning to study metabolism, horizontal gene transfer, and antibiotic resistance.",
+      "domains": [
+        "Biology and biotechnology",
+        "Infectious disease",
+        "Public health",
+        "Environmental science"
+      ]
+    },
+    {
+      "faculty_id": "astrid-m-muller",
+      "name": "Astrid M. Muller",
+      "aliases": ["Astrid M. Müller"],
+      "research_phrases": [
+        "electrocatalytic aqueous PFAS defluorination",
+        "organic electrooxidation through water activation",
+        "selective carbon dioxide reduction",
+        "electrode microenvironments",
+        "pulsed-laser nanoparticle synthesis",
+        "nanocatalyst structure-function"
+      ],
+      "research_summary": "Develops nanocatalysts and electrode microenvironments for aqueous PFAS defluorination, selective carbon dioxide reduction, and organic electrooxidation, including controlled pulsed-laser synthesis.",
+      "domains": [
+        "Catalysis and reaction engineering",
+        "Energy",
+        "Carbon management",
+        "Environmental science",
+        "Materials science"
+      ]
+    },
+    {
+      "faculty_id": "marc-d-porosoff",
+      "name": "Marc D. Porosoff",
+      "aliases": [],
+      "research_phrases": [
+        "carbon dioxide capture and conversion",
+        "heterogeneous thermal catalysis",
+        "catalyst structure-property relationships",
+        "reactive separations",
+        "C1 chemistry and light alkane upgrading",
+        "catalyst representation with large language models"
+      ],
+      "research_summary": "Develops heterogeneous thermal catalysts and reactive separations for carbon dioxide capture and conversion, C1 chemistry, and light-alkane upgrading, with data and language-model representations of catalyst behavior.",
+      "domains": [
+        "Catalysis and reaction engineering",
+        "Carbon management",
+        "Energy",
+        "Materials science"
+      ]
+    },
+    {
+      "faculty_id": "alexander-a-shestopalov",
+      "name": "Alexander A. Shestopalov",
+      "aliases": [],
+      "research_phrases": [
+        "surface chemistry and molecular monolayers",
+        "surface patterning and contact printing",
+        "nanostructured materials",
+        "interfacial thermodynamics",
+        "organic thin-film coatings",
+        "self-assembled monolayers"
+      ],
+      "research_summary": "Studies molecularly engineered surfaces, monolayers, surface patterning, nanostructured materials, organic coatings, and interfacial thermodynamics.",
+      "domains": ["Materials science", "Manufacturing"]
+    },
+    {
+      "faculty_id": "wyatt-e-tenhaeff",
+      "name": "Wyatt E. Tenhaeff",
+      "aliases": [],
+      "research_phrases": [
+        "lithium metal batteries",
+        "solid electrolyte interphase",
+        "solid-state battery electrolytes",
+        "battery interfacial engineering",
+        "polymer thin-film electrolytes",
+        "vacuum deposition processing"
+      ],
+      "research_summary": "Engineers interfaces, solid electrolytes, and polymer thin films for solid-state and lithium-metal batteries using thin-film synthesis and vacuum processing.",
+      "domains": ["Energy", "Materials science", "Manufacturing"]
+    },
+    {
+      "faculty_id": "matthew-z-yates",
+      "name": "Matthew Z. Yates",
+      "aliases": [],
+      "research_phrases": [
+        "functional surfaces and coatings",
+        "sorbent polymers for chemical sensing",
+        "waveguide-enhanced Raman sensing",
+        "electrochemical sensors",
+        "electrochemical surface modification",
+        "open-source electrochemistry hardware"
+      ],
+      "research_summary": "Develops functional surfaces and coatings, electrochemical and Raman sensors, surface-modification methods, and open-source electrochemistry hardware.",
+      "domains": [
+        "Materials science",
+        "Separations and membranes",
+        "Catalysis and reaction engineering"
+      ]
+    }
+  ]
+}

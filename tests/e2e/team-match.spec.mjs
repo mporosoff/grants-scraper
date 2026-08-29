@@ -18,6 +18,26 @@ async function assertNoHorizontalOverflow(page) {
   expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.client);
 }
 
+test("preserved ChemE profiles remain searchable, selectable, and descriptively presented", async ({ page }) => {
+  mockHybrid(page);
+  await openTeamMatch(page);
+  await page.locator("#add-researcher").click();
+  await page.locator("#faculty-search").fill("computational fluid dynamics");
+  const foster = page.locator('#faculty-suggestions [role="option"]').filter({ hasText: "David G. Foster" });
+  await expect(foster).toContainText("Existing curated Chemical & Sustainability Engineering Team Match profile");
+  await foster.click();
+  await expect(page.getByRole("button", { name: "Remove David G. Foster from team" })).toBeVisible();
+  await expect(page.locator("#selected-terms")).toContainText("Studies transport phenomena and computational fluid dynamics");
+
+  await page.locator("#add-researcher").click();
+  await page.locator("#faculty-search").fill("controlled drug delivery");
+  const lawton = page.locator('#faculty-suggestions [role="option"]').filter({ hasText: "Melodie I. Lawton" });
+  await expect(lawton).toContainText("Existing curated Chemical & Sustainability Engineering Team Match profile");
+  await lawton.click();
+  await expect(page.getByRole("button", { name: "Remove Melodie I. Lawton from team" })).toBeVisible();
+  await expect(page.locator("#selected-terms")).toContainText("Studies shape-memory polymers");
+});
+
 test("Team Match supports department, manual, duplicate, team-size, history, progress, and mobile workflows", async ({ page }) => {
   mockHybrid(page);
   const errors = watchRuntimeErrors(page);

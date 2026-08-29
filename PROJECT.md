@@ -317,20 +317,22 @@ links when possible, and keeps opportunity actions concise on narrow cards.
 
 ### 2.9 Reviewed Hajim faculty discovery and reverse matching
 
-The active faculty authority is `config/hajim_faculty.json`, deterministically
-imported from the reviewed 2026-08-28 workbook at source SHA-256
+The active faculty authority is the validated union of `config/hajim_faculty.json`,
+deterministically imported from the reviewed 2026-08-28 workbook at source SHA-256
 `f625ec89beabcfe7a7c178b83dcd9ca6737be455fc70c3b00f06882f2d6114fc`.
-Its contract is 156 roster records, 145 rankable profiles, and 11 profiles with
-the exact official missing-interest sentinel. OpenAlex and the former hard-coded
-ChemE roster are not membership authorities.
+and `config/cheme_team_match_profiles.json`, which preserves all 14 protected-base
+ChemE profiles and their exact reviewed descriptors. The workbook contract is
+156 roster records, 145 rankable profiles, and 11 profiles with the exact official
+missing-interest sentinel; the deduplicated union is 158 / 148 / 10. OpenAlex and
+the former Python hard-coded roster are not membership authorities.
 
 One scheduled command atomically projects that canonical snapshot and the
 current catalog into a compact initial faculty directory and a lazy normalized
-match graph. The projections share a schema family, faculty-source hash,
+match graph. The projections share a schema family, combined faculty-source fingerprint,
 catalog fingerprint, and generation ID. Each evidence-qualified edge is stored
 once, with bounded faculty and opportunity indexes. Official research-interest
-phrases establish membership; home unit, appointment, relationship, roster,
-and derived themes cannot admit a result. The browser never loads the workbook
+phrases establish topical fit; home unit, appointment, relationship, roster,
+derived themes, disciplines, and topic areas cannot admit a result. The browser never loads the workbook
 or canonical JSON and makes no model call for ordinary reverse matching.
 
 Team Match exposes an accessible local Hajim combobox (at most 12 visible
@@ -1029,6 +1031,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | `data/hajim_faculty_directory.js` | Compact reviewed-roster projection loaded by Team Match |
 | `data/faculty_matches.js` | Lazy normalized faculty/opportunity match graph |
 | `config/hajim_faculty.json` | Canonical reviewed Hajim roster; not a public browser dependency |
+| `config/cheme_team_match_profiles.json` | Canonical protected ChemE compatibility enrichment; not a public browser dependency |
 | `data/opportunity_enrichment.json` | Compact official-detail cache for incremental refresh |
 | `data/document_evidence.json` | Compact document hash/version, citations, extracted facts, and review-queue cache |
 | `data/subtopics.js` | Lazy public sidecar for publishable and review-gated subject-child records and their search index |
@@ -1079,7 +1082,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 | July 2026 | Collect no silent central telemetry. Autosave deployment review locally and return it only through explicit file share/download/email, then aggregate it in gitignored private folders. |
 | July 2026 | Keep GitHub Actions as the authoritative daily refresh engine; do not move ingestion to Google Sheets. Build any automatic digest from a catalog change feed and a separate consent-based subscription service. |
 | July 2026 | Generate catalog baselines from the published asset, keep browser tests with the canonical product, and retire the unused server experiment and faculty scraper from the active tree. |
-| August 2026 | Replace OpenAlex and the hard-coded ChemE roster with the reviewed 156-person Hajim snapshot; publish only compact directory and lazy normalized match projections with shared fingerprints. |
+| August 2026 | Replace OpenAlex and hard-coded runtime roster maps with the validated 158-person union of the reviewed 156-person Hajim snapshot and all 14 protected ChemE compatibility profiles; publish only compact directory and lazy normalized match projections with shared fingerprints. |
 | July 2026 | Start with an empty result state, integrate keywords/profile/CV/filters under one “Find funding” action, and move invited-tester evidence checks out of the normal user workflow. |
 | July 2026 | Make result chat visibly interactive: add a large focused workspace, working indicator, keyboard send, safe rich formatting, exact result references, jump-to-result/source actions, and explicit result-list focusing. |
 | July 2026 | Stack profile/CV and filters full-width, remove nested filter scrolling, and retry malformed AI structured responses once with a smaller-output instruction. |

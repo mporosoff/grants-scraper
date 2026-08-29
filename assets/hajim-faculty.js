@@ -2,8 +2,8 @@
   "use strict";
 
   var SCHEMA_FAMILY = "hajim-faculty-match";
-  var DIRECTORY_SCHEMA = 1;
-  var GRAPH_SCHEMA = 2;
+  var DIRECTORY_SCHEMA = 2;
+  var GRAPH_SCHEMA = 3;
   var MAX_RESULTS = 12;
   var graphPromise = null;
   var directoryPromise = null;
@@ -52,8 +52,11 @@
     }
     validateIdentity(directory, expectedGenerationId);
     var source = directory.faculty_source || {};
-    if (!Array.isArray(directory.profiles) || directory.profiles.length !== 156 ||
-        source.record_count !== 156 || source.rankable_record_count !== 145 || source.unlisted_interest_count !== 11) {
+    var workbook = source.workbook || {};
+    if (!Array.isArray(directory.profiles) || directory.profiles.length !== 158 ||
+        source.union_record_count !== 158 || source.union_rankable_record_count !== 148 ||
+        source.union_unrankable_count !== 10 || workbook.record_count !== 156 ||
+        workbook.rankable_record_count !== 145 || workbook.unlisted_interest_count !== 11) {
       throw new Error("The Hajim faculty directory has incompatible roster counts.");
     }
     if (catalog && !catalogCompatible(directory.catalog, catalog)) {
@@ -86,17 +89,30 @@
     var value = normalize(query);
     if (!options.showAll && value.length < 2) return [];
     var terms = value.split(" ").filter(Boolean);
+    var queryParts = value.split(/[^a-z0-9\u00c0-\u024f]+/).filter(Boolean);
     var ranked = [];
     (directory.profiles || []).forEach(function (profile) {
       var name = normalize(profile.name);
+      var aliasNames = (profile.aliases || []).map(normalize);
+      var aliases = aliasNames.join(" ");
       var unit = normalize(profile.home_unit);
       var rosters = normalize((profile.rosters || []).join(" "));
-      var interests = normalize(profile.search_document);
+      var interests = normalize([
+        profile.search_document,
+        profile.research_summary,
+        (profile.research_domains || []).join(" ")
+      ].join(" "));
       var score = 99;
       if (!value) score = 10;
       else if (name === value) score = 0;
       else if (name.indexOf(value) === 0 || terms.every(function (term) { return name.split(" ").some(function (part) { return part.indexOf(term) === 0; }); })) score = 1;
-      else if (name.indexOf(value) !== -1) score = 2;
+      else if (aliasNames.some(function (alias) {
+        var parts = alias.split(/[^a-z0-9\u00c0-\u024f]+/).filter(Boolean);
+        return alias === value || alias.indexOf(value) === 0 || queryParts.every(function (term) {
+          return parts.some(function (part) { return part.indexOf(term) === 0; });
+        });
+      })) score = 1;
+      else if (name.indexOf(value) !== -1 || aliases.indexOf(value) !== -1) score = 2;
       else if (unit.indexOf(value) !== -1 || rosters.indexOf(value) !== -1) score = 3;
       else if (terms.every(function (term) { return interests.indexOf(term) !== -1; })) score = 4;
       if (score < 99) ranked.push({ profile: profile, score: score });
@@ -144,11 +160,19 @@
     });
   }
 
+  function discardAsset(globalName) {
+    try { delete global[globalName]; } catch (_error) { global[globalName] = undefined; }
+    document.querySelectorAll('script[data-hajim-asset="' + globalName + '"]').forEach(function (script) {
+      script.remove();
+    });
+  }
+
   function loadDirectory(catalog, src, expectedGenerationId) {
     if (!directoryPromise) {
       directoryPromise = Promise.resolve(global.HAJIM_FACULTY_DIRECTORY || null).then(function (value) {
         return value || injectScript(src || "data/hajim_faculty_directory.js", "HAJIM_FACULTY_DIRECTORY");
       }).then(function (directory) { return validateDirectory(directory, catalog, expectedGenerationId); }).catch(function (error) {
+        discardAsset("HAJIM_FACULTY_DIRECTORY");
         directoryPromise = null;
         throw error;
       });
@@ -161,6 +185,7 @@
       graphPromise = Promise.resolve(global.FACULTY_MATCHES || null).then(function (value) {
         return value || injectScript(src || "data/faculty_matches.js", "FACULTY_MATCHES");
       }).then(function (graph) { return validateGraph(graph, directory, catalog, expectedGenerationId); }).catch(function (error) {
+        discardAsset("FACULTY_MATCHES");
         graphPromise = null;
         throw error;
       });
