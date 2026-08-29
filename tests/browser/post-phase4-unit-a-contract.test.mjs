@@ -92,10 +92,11 @@ test("one polite result heading owns total, Strong, Potential, pending, fallback
   assert.doesNotMatch(app, /\$\("search-status"\)\.textContent = `\$\{state\.strongMatches\.length/);
 });
 
-test("desktop aligns query, submit, and upload while 540 px and smaller stacks safely", () => {
+test("desktop aligns query, submit, and upload while tablet and smaller widths stack safely", () => {
   assert.match(styles, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto auto;/);
-  const mobile = styles.slice(styles.indexOf("@media (max-width: 540px)"));
-  assert.match(mobile, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(mobile, /\.find-button,[\s\S]*?width: 100%;/);
+  const tablet = styles.slice(styles.lastIndexOf("@media (max-width: 820px)"));
+  assert.match(tablet, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
+  assert.match(tablet, /\.find-button \{[\s\S]*?width: 100%;/);
+  const mobile = styles.slice(styles.lastIndexOf("@media (max-width: 540px)"));
   assert.match(mobile, /\.ai-refine-actions \{[\s\S]*?flex-direction: column;/);
 });

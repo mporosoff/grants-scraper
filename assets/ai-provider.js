@@ -298,24 +298,29 @@
     return "provider_unavailable";
   }
 
-  async function providerFailure(response) {
-    let envelope = null;
-    try {
-      envelope = await response.json();
-    } catch {
-      // Provider bodies are intentionally not surfaced to the user.
-    }
-    throw new ProviderStructuredError(classifyProviderEnvelope(envelope, response.status));
+  function providerFailure(envelope, status) {
+    throw new ProviderStructuredError(classifyProviderEnvelope(envelope, status));
   }
 
-  async function fetchBounded(fetchImpl, url, options, timeoutMs) {
+  async function fetchJsonBounded(fetchImpl, url, options, timeoutMs) {
     const controller = typeof AbortController === "function" ? new AbortController() : null;
     const timer = controller && typeof setTimeout === "function"
       ? setTimeout(() => controller.abort(), timeoutMs)
       : null;
     try {
-      return await fetchImpl(url, { ...options, ...(controller ? { signal: controller.signal } : {}) });
+      const response = await fetchImpl(url, {
+        ...options,
+        ...(controller ? { signal: controller.signal } : {}),
+      });
+      try {
+        return { response, data: await response.json(), malformed: false };
+      } catch (error) {
+        if (error?.name === "AbortError") throw new ProviderStructuredError("timeout");
+        if (error?.name !== "SyntaxError") throw new ProviderStructuredError("network_cors");
+        return { response, data: null, malformed: true };
+      }
     } catch (error) {
+      if (error instanceof ProviderStructuredError) throw error;
       if (error?.name === "AbortError") throw new ProviderStructuredError("timeout");
       throw new ProviderStructuredError("network_cors");
     } finally {
@@ -375,69 +380,69 @@
       ? "\n\nReturn a smaller complete response that still matches the supplied schema. Shorten prose and include fewer optional list items."
       : "";
     if (provider === "anthropic") {
-      const response = await fetchBounded(fetchImpl, "https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": key,
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
-        },
-        body: JSON.stringify({
-          model: ANTHROPIC_MODEL,
-          max_tokens: MAX_OUTPUT_TOKENS,
-          system: `${system}${retryInstruction}`,
-          messages: [{ role: "user", content: user }],
-          output_config: {
-            format: {
-              type: "json_schema",
-              schema: schemaForProvider(contract.schema, "anthropic"),
-            },
+      const { response, data, malformed } = await fetchJsonBounded(
+        fetchImpl,
+        "https://api.anthropic.com/v1/messages",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": key,
+            "anthropic-version": "2023-06-01",
+            "anthropic-dangerous-direct-browser-access": "true",
           },
-        }),
-      }, timeoutMs);
-      if (!response.ok) await providerFailure(response);
-      let data;
-      try {
-        data = await response.json();
-      } catch {
-        throw new ProviderStructuredError("malformed", { retryable: true });
-      }
+          body: JSON.stringify({
+            model: ANTHROPIC_MODEL,
+            max_tokens: MAX_OUTPUT_TOKENS,
+            system: `${system}${retryInstruction}`,
+            messages: [{ role: "user", content: user }],
+            output_config: {
+              format: {
+                type: "json_schema",
+                schema: schemaForProvider(contract.schema, "anthropic"),
+              },
+            },
+          }),
+        },
+        timeoutMs,
+      );
+      if (!response.ok) providerFailure(data, response.status);
+      if (malformed) throw new ProviderStructuredError("malformed", { retryable: true });
       return anthropicResponseText(data);
     }
     if (provider !== "openai") throw new ProviderStructuredError("unsupported_contract");
-    const response = await fetchBounded(fetchImpl, "https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model: OPENAI_MODEL,
-        instructions: `${system}${retryInstruction}`,
-        input: user,
-        reasoning: { effort: "low" },
-        text: {
-          verbosity: "low",
-          format: {
-            type: "json_schema",
-            name: contract.name,
-            description: contract.description,
-            schema: contract.schema,
-            strict: true,
-          },
+    const { response, data, malformed } = await fetchJsonBounded(
+      fetchImpl,
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${key}`,
         },
-        max_output_tokens: MAX_OUTPUT_TOKENS,
-        store: false,
-      }),
-    }, timeoutMs);
-    if (!response.ok) await providerFailure(response);
-    let data;
-    try {
-      data = await response.json();
-    } catch {
-      throw new ProviderStructuredError("malformed", { retryable: true });
-    }
+        body: JSON.stringify({
+          model: OPENAI_MODEL,
+          instructions: `${system}${retryInstruction}`,
+          input: user,
+          reasoning: { effort: "low" },
+          text: {
+            verbosity: "low",
+            format: {
+              type: "json_schema",
+              name: contract.name,
+              description: contract.description,
+              schema: contract.schema,
+              strict: true,
+            },
+          },
+          max_output_tokens: MAX_OUTPUT_TOKENS,
+          store: false,
+        }),
+      },
+      timeoutMs,
+    );
+    if (!response.ok) providerFailure(data, response.status);
+    if (malformed) throw new ProviderStructuredError("malformed", { retryable: true });
     return openAIResponseText(data);
   }
 

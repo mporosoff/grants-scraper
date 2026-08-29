@@ -225,10 +225,10 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine");
 });
 
-test("primary search and AI action stack without horizontal overflow at 320 and 390 px", async ({ page }) => {
+test("primary search and AI action stack without horizontal overflow from tablet through 320 px", async ({ page }) => {
   mockHybrid(page);
   await openFundingFinder(page);
-  for (const width of [390, 320]) {
+  for (const width of [820, 700, 600, 541, 540, 390, 320]) {
     await page.setViewportSize({ width, height: 760 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     const [queryBox, findBox, uploadBox] = await Promise.all([

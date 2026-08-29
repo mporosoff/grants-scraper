@@ -5,9 +5,9 @@ import vm from "node:vm";
 
 const root = new URL("../", import.meta.url);
 
-async function loadProvider() {
+async function loadProvider(overrides = {}) {
   const source = await readFile(new URL("../assets/ai-provider.js", root), "utf8");
-  const context = { AbortController, clearTimeout, console, setTimeout };
+  const context = { AbortController, clearTimeout, console, setTimeout, ...overrides };
   context.globalThis = context;
   vm.runInNewContext(source, context, { filename: "ai-provider.js" });
   return context.FUNDING_AI;
@@ -294,6 +294,49 @@ test("auth, model access, quota, refusal, network, and timeout failures never re
     assert.equal(caught?.category, category);
     assert.equal(calls, 1);
     assert.doesNotMatch(caught.message, /SECRET-BODY|not-the-real-key/);
+  }
+});
+
+test("the timeout remains active while successful and error response bodies are consumed", async () => {
+  const provider = await loadProvider({
+    setTimeout: callback => setTimeout(callback, 10),
+  });
+  for (const response of [
+    { ok: true, status: 200 },
+    { ok: false, status: 503 },
+  ]) {
+    let calls = 0;
+    await assert.rejects(
+      provider.structuredResult({
+        provider: "openai",
+        key: "not-the-real-key",
+        operation: "search_plan",
+        system: "Create a search plan.",
+        user: "Catalysis",
+        timeoutMs: 1_000,
+        fetchImpl: async (_url, options) => {
+          calls += 1;
+          return {
+            ...response,
+            json: () => new Promise((_, reject) => {
+              if (options.signal?.aborted) {
+                const error = new Error("provider-body-timeout");
+                error.name = "AbortError";
+                reject(error);
+                return;
+              }
+              options.signal?.addEventListener("abort", () => {
+                const error = new Error("provider-body-timeout");
+                error.name = "AbortError";
+                reject(error);
+              }, { once: true });
+            }),
+          };
+        },
+      }),
+      error => error.category === "timeout" && !/provider-body-timeout/.test(error.message),
+    );
+    assert.equal(calls, 1);
   }
 });
 

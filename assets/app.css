@@ -3589,6 +3589,21 @@ footer p {
   }
 }
 
+@media (max-width: 820px) {
+  .search-workflow .search-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nofo-upload-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .find-button {
+    width: 100%;
+  }
+}
+
 @media (max-width: 540px) {
   .hero {
     padding-right: 14px;
@@ -3611,15 +3626,6 @@ footer p {
     gap: 10px;
   }
 
-  .search-workflow .search-form {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .nofo-upload-button {
-    justify-content: center;
-    width: 100%;
-  }
-
   .toolbar-controls {
     align-items: stretch;
     flex-direction: column;
@@ -3630,7 +3636,6 @@ footer p {
     max-width: none;
   }
 
-  .find-button,
   .credential-actions .button {
     width: 100%;
   }
