@@ -85,7 +85,9 @@ const firstPageKeys = firstPage.batches.flatMap(batch => batch.results.map(item 
 if (firstPage.pagination?.page !== 1
   || firstPage.pagination?.page_size !== 10
   || firstPageKeys.length > 10
-  || new Set(firstPageKeys).size !== firstPageKeys.length) {
+  || new Set(firstPageKeys).size !== firstPageKeys.length
+  || !Number.isInteger(firstPage.aggregate?.project_count)
+  || !Array.isArray(firstPage.aggregate?.investigators)) {
   throw new Error("The Unit B direct first page was not bounded and deduplicated.");
 }
 
@@ -105,7 +107,7 @@ if (firstPage.pagination?.available_page_count > 1) {
 }
 
 let facetVerified = false;
-const investigator = snapshot.base_aggregate?.investigators?.[0];
+const investigator = firstPage.aggregate.investigators[0];
 if (investigator?.identity_key) {
   const facetPage = await post("awards/snapshots/page", {
     snapshot_id: snapshot.snapshot_id,
@@ -115,10 +117,13 @@ if (investigator?.identity_key) {
   });
   if (facetPage.facet?.key !== investigator.identity_key
     || facetPage.aggregate?.project_count !== investigator.projects
-    || facetPage.aggregate.project_count > snapshot.base_aggregate.project_count) {
+    || facetPage.aggregate.project_count > firstPage.aggregate.project_count) {
     throw new Error("The Unit B server-backed investigator facet was not coherent.");
   }
   facetVerified = true;
+}
+if (investigator?.identity_key && !facetVerified) {
+  throw new Error("The Unit B live investigator facet check did not run.");
 }
 
 for (const sourceState of snapshot.sources) {

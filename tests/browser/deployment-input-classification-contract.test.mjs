@@ -15,9 +15,10 @@ import {
 import { validateAlertCapabilityRotation } from "../../tools/validate_alert_capability_rotation.mjs";
 
 const root = new URL("../../", import.meta.url);
-const [awardWorkflow, alertsWorkflow] = await Promise.all([
+const [awardWorkflow, alertsWorkflow, awardSmoke] = await Promise.all([
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-alerts.yml", root), "utf8"),
+  readFile(new URL("tools/smoke_unit_b_award_worker.mjs", root), "utf8"),
 ]);
 
 test("Award Worker deployment inputs include source, config, and actual package dependencies", () => {
@@ -227,6 +228,13 @@ test("Award workflow classifies before mutation and retains Pages validation on 
     awardWorkflow.indexOf("\n      - name: Deploy the committed Award Worker"),
     awardWorkflow.indexOf("\n      - name:", awardWorkflow.indexOf("Configure the Award abuse-control identity secret")),
   );
+});
+
+test("Award Worker live smoke exercises investigator facets from the direct page aggregate", () => {
+  assert.match(awardSmoke, /const investigator = firstPage\.aggregate\.investigators\[0\]/);
+  assert.match(awardSmoke, /facetPage\.aggregate\.project_count > firstPage\.aggregate\.project_count/);
+  assert.match(awardSmoke, /investigator\?\.identity_key && !facetVerified/);
+  assert.doesNotMatch(awardSmoke, /snapshot\.base_aggregate/);
 });
 
 test("Alerts workflow guards version capture, D1 migration, deployment, and rollback preparation", () => {
