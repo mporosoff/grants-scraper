@@ -2848,7 +2848,7 @@
         ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
         <button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Email alert</button>
         ${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Program email alert</button>` : ""}
-        <button class="source-action hajim-match-trigger" type="button" data-hajim-match="${escapeAttribute(id)}" aria-expanded="false">Find relevant Hajim faculty</button>
+        ${recordIsCurrent(record) ? `<button class="source-action hajim-match-trigger" type="button" data-hajim-match="${escapeAttribute(id)}" aria-expanded="false">Find relevant Hajim faculty</button>` : ""}
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>

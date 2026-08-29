@@ -303,6 +303,19 @@ test("Funding Finder loads with a usable catalog and no uncaught runtime errors"
   expect(errors).toEqual([]);
 });
 
+test("archived Funding Finder cards preserve ordinary actions without a meaningless reverse match", async ({ page }) => {
+  const requested = [];
+  page.on("request", request => requested.push(request.url()));
+  await page.goto("/match_explorer.html?gate4-e2e=1&status=archived&focus=347749");
+  const card = page.locator('#results .result-card[data-opportunity-id="347749"]');
+  await expect(card).toBeVisible();
+  await expect(card.locator(".badge.archived")).toHaveText("Archived");
+  await expect(card.locator("[data-hajim-match]")).toHaveCount(0);
+  await expect(card.locator("[data-save]")).toBeVisible();
+  await expect(card.locator("[data-chat-record]")).toBeVisible();
+  expect(requested.some(url => /hajim_faculty_directory|faculty_matches/.test(url))).toBe(false);
+});
+
 test("Funding Finder lazy-loads evidence-qualified Hajim reverse matches with one accessible panel", async ({ page }) => {
   const requested = [];
   page.on("request", request => requested.push(request.url()));

@@ -115,6 +115,13 @@ test("Funding Finder lazy-loads both projections and isolates a failed faculty l
   assert.match(apiSource, /discardAsset\("FACULTY_MATCHES"\)/);
 });
 
+test("reverse matching is offered only under Funding Finder's authoritative currentness gate", () => {
+  assert.match(appSource, /\$\{recordIsCurrent\(record\) \? `<button class="source-action hajim-match-trigger"/);
+  assert.match(appSource, /function recordIsCurrent\(record, asOf = runtimeDateIso\(\)\)/);
+  assert.match(appSource, /RETRIEVAL_API\?\.recordIsCurrent\?\.\(record, asOf\)/);
+  assert.match(appSource, /recordIsArchived\(record\)[\s\S]+status-archived/);
+});
+
 test("validation failures discard stale globals so a clean retry can load the current assets", async () => {
   const scope = { HAJIM_FACULTY_DIRECTORY: { schema_family: "stale" } };
   const removed = [];
