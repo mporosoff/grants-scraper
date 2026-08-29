@@ -245,29 +245,28 @@
   async function postJson(url, body, controller = state.controller) {
     const activeController = controller?.signal?.aborted ? new AbortController() : controller || new AbortController();
     const timer = setTimeout(() => activeController.abort(), api.timeoutMs);
-    let response;
     try {
-      response = await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         credentials: "omit",
         body: JSON.stringify(body),
         signal: activeController.signal,
       });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        const error = new Error(payload?.error?.code === "snapshot_expired"
+          ? "This result snapshot expired; the submitted search will be refreshed."
+          : awardProduct.serviceIssueText(payload) || "The award service could not complete this request.");
+        error.code = payload?.error?.code || "service_unavailable";
+        error.payload = payload;
+        throw error;
+      }
+      if (!payload || payload.schema_version !== 1 || !clean(payload.snapshot_id, 100)) throw new Error("The award service returned an invalid snapshot response.");
+      return payload;
     } finally {
       clearTimeout(timer);
     }
-    const payload = await response.json().catch(() => null);
-    if (!response.ok) {
-      const error = new Error(payload?.error?.code === "snapshot_expired"
-        ? "This result snapshot expired; the submitted search will be refreshed."
-        : awardProduct.serviceIssueText(payload) || "The award service could not complete this request.");
-      error.code = payload?.error?.code || "service_unavailable";
-      error.payload = payload;
-      throw error;
-    }
-    if (!payload || payload.schema_version !== 1 || !clean(payload.snapshot_id, 100)) throw new Error("The award service returned an invalid snapshot response.");
-    return payload;
   }
 
   function absorbAwards(awards) {

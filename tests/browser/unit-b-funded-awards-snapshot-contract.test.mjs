@@ -250,6 +250,9 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(app, /snapshotPageUrl/);
   assert.match(app, /data-ii-load-source/);
   assert.match(app, /data-ii-retry-source/);
+  const bodyRead = app.indexOf("await response.json().catch(() => null)");
+  const timeoutRelease = app.indexOf("clearTimeout(timer)", bodyRead);
+  assert.ok(bodyRead > -1 && timeoutRelease > bodyRead, "the bounded request timer must remain active while the response body is read");
   assert.match(worker, /failure_policy: "successful-sources-retained-retry-creates-successor"/);
   assert.match(config, /snapshotBatchUrl/);
 });

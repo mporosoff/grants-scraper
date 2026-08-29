@@ -14,6 +14,7 @@ on:
       - "assets/institutional-intelligence-core.js"
       - "assets/institutional-intelligence.css"
       - "assets/institutional-intelligence.js"
+      - "assets/institutional-intelligence-snapshots.js"
       - "config/award_institutions.json"
       - "funded_awards.html"
       - "match_explorer.html"
@@ -22,6 +23,7 @@ on:
       - "tools/classify_worker_deployment.mjs"
       - "tools/smoke_award_worker.mjs"
       - "tools/smoke_phase3_award_worker.mjs"
+      - "tools/smoke_unit_b_award_worker.mjs"
       - "workers/award-api/**"
 permissions:
   contents: read
@@ -55,14 +57,16 @@ jobs:
           node --check assets/funded-awards.js &&
           node --check assets/institutional-intelligence-core.js &&
           node --check assets/institutional-intelligence.js &&
+          node --check assets/institutional-intelligence-snapshots.js &&
           node --check workers/award-api/src/index.js &&
+          node --check workers/award-api/src/snapshot.js &&
           node --check workers/award-api/src/rate-limit.js &&
           node --check workers/award-api/src/institutions.js &&
           node --check workers/award-api/src/ror.js &&
           node --check workers/award-api/src/adapters/nsf.js &&
           node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -159,6 +163,11 @@ jobs:
               && test "$(jq -r '.institution_registry.source // empty' <<<"$health" 2>/dev/null)" = "ROR" \
               && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.1.0" \
               && test "$(jq -r '.institution_resolution // empty' <<<"$health" 2>/dev/null)" = "curated-or-server-validated-ror" \
+              && test "$(jq -r '.complete_result_snapshots.contract_version // empty' <<<"$health" 2>/dev/null)" = "1" \
+              && test "$(jq -r '.complete_result_snapshots.ordering_version // empty' <<<"$health" 2>/dev/null)" = "award-recency-v1" \
+              && test "$(jq -r '.complete_result_snapshots.batch_ceiling_per_agency // empty' <<<"$health" 2>/dev/null)" = "25" \
+              && test "$(jq -c '.complete_result_snapshots.page_sizes // empty' <<<"$health" 2>/dev/null)" = "[10,25,50]" \
+              && test "$(jq -r '.complete_result_snapshots.cache_scope // empty' <<<"$health" 2>/dev/null)" = "cloudflare-datacenter" \
               && test "$(jq -r '.abuse_control.ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.abuse_control.provider // empty' <<<"$health" 2>/dev/null)" = "cloudflare-durable-object" \
               && test "$(jq -r '.abuse_control.storage // empty' <<<"$health" 2>/dev/null)" = "sqlite"; then
@@ -173,7 +182,8 @@ jobs:
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         run: >-
           node tools/smoke_award_worker.mjs &&
-          node tools/smoke_phase3_award_worker.mjs
+          node tools/smoke_phase3_award_worker.mjs &&
+          node tools/smoke_unit_b_award_worker.mjs
       - name: Verify Pages serves the committed Funded Awards page
         id: pages-verify
         shell: bash

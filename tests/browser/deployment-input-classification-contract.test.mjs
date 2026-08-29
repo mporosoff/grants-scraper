@@ -185,6 +185,11 @@ function assertDeployGuard(source, name) {
 
 test("Award workflow classifies before mutation and retains Pages validation on no-op releases", () => {
   assert.match(awardWorkflow, /tools\/classify_worker_deployment\.mjs/);
+  assert.match(awardWorkflow, /assets\/institutional-intelligence-snapshots\.js/);
+  assert.match(awardWorkflow, /workers\/award-api\/src\/snapshot\.js/);
+  assert.match(awardWorkflow, /unit-b-funded-awards-snapshot-contract\.test\.mjs/);
+  assert.match(awardWorkflow, /tools\/smoke_unit_b_award_worker\.mjs/);
+  assert.match(awardWorkflow, /complete_result_snapshots\.ordering_version/);
   assert.match(awardWorkflow, /Classify Award Worker inputs since the active deployment/);
   assert.match(awardWorkflow, /deployments list --config workers\/award-api\/wrangler\.jsonc --json/);
   assert.doesNotMatch(awardWorkflow, /github\.event\.before/);
