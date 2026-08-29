@@ -22,6 +22,16 @@ const MAX_OFFSET = 1_000;
 const MAX_YEAR_SPAN = 50;
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_HEALTH_TIMEOUT_MS = 2_000;
+const WORKER_RESOURCE_BUDGET = Object.freeze({
+  target_plan: "workers-paid",
+  configured_cpu_ms: 1_000,
+  memory_mb: 128,
+  platform_subrequests_per_request: 10_000,
+  maximum_snapshot_create_subrequests: 50,
+  maximum_snapshot_create_cache_api_calls: 10,
+  maximum_snapshot_create_upstream_and_guard_subrequests: 40,
+  maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+});
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
 const ADAPTER_VERSIONS = {
@@ -668,6 +678,7 @@ export function createHandler({
           cache_ttl_seconds: config.cacheTtl,
           cache_scope: "cloudflare-datacenter",
           failure_policy: "successful-sources-retained-retry-creates-successor",
+          resource_budget: WORKER_RESOURCE_BUDGET,
         },
         abuse_control: {
           ready: abuseControlReady,

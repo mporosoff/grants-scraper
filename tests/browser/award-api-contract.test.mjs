@@ -437,6 +437,16 @@ test("Worker validates bounded public requests and exposes no credential require
       cache_ttl_seconds: 3600,
       cache_scope: "cloudflare-datacenter",
       failure_policy: "successful-sources-retained-retry-creates-successor",
+      resource_budget: {
+        target_plan: "workers-paid",
+        configured_cpu_ms: 1_000,
+        memory_mb: 128,
+        platform_subrequests_per_request: 10_000,
+        maximum_snapshot_create_subrequests: 50,
+        maximum_snapshot_create_cache_api_calls: 10,
+        maximum_snapshot_create_upstream_and_guard_subrequests: 40,
+        maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+      },
     },
     abuse_control: {
       ready: true,

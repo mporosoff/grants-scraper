@@ -240,7 +240,10 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
     readFile(new URL("workers/award-api/src/index.js", root), "utf8"),
-    readFile(new URL("assets/award-api-config.js", root), "utf8"),
+    Promise.all([
+      readFile(new URL("assets/award-api-config.js", root), "utf8"),
+      readFile(new URL("workers/award-api/wrangler.jsonc", root), "utf8"),
+    ]).then(values => values.join("\n")),
   ]);
   assert.match(page, /institutional-intelligence-snapshots\.js/);
   assert.match(page, /id="ii-page-size"[\s\S]*value="10"[\s\S]*value="25"[\s\S]*value="50"/);
@@ -254,7 +257,9 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   const timeoutRelease = app.indexOf("clearTimeout(timer)", bodyRead);
   assert.ok(bodyRead > -1 && timeoutRelease > bodyRead, "the bounded request timer must remain active while the response body is read");
   assert.match(worker, /failure_policy: "successful-sources-retained-retry-creates-successor"/);
+  assert.match(worker, /maximum_snapshot_create_subrequests: 50/);
   assert.match(config, /snapshotBatchUrl/);
+  assert.match(config, /"cpu_ms": 1000/);
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {
@@ -267,4 +272,25 @@ test("Unit B aggregate helper deduplicates source plus award ID", () => {
   const batch = snapshotSourceBatch(value, { source: "NSF", offset: 1, facet: { type: "all", key: "" } });
   assert.equal(batch.actual_added, 0);
   assert.equal(batch.additional_available, false);
+});
+
+test("Unit B 1,650-award architecture stays bounded for the deployed Workers Paid target", () => {
+  const sourcePayloads = Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [
+    source,
+    sourcePayload(source, Array.from({ length: 550 }, (_, index) => award(index, source, {
+      program_name: `Program ${index % 20}`,
+      program_codes: [`${source}-P${index % 20}`],
+    }))),
+  ]));
+  const value = snapshot(sourcePayloads);
+  const createPayload = publicSnapshot(value);
+  const pagePayload = snapshotPage(value, { page: 1, pageSize: 50, facet: { type: "all", key: "" } });
+
+  assert.equal(value.exact_total, 1_650);
+  assert.equal(createPayload.base_aggregate, undefined, "the create response must not duplicate the page aggregate");
+  assert.ok(pagePayload.aggregate.investigators.every(item => item.award_keys === undefined));
+  assert.ok(pagePayload.aggregate.programs.every(item => item.award_keys === undefined));
+  assert.ok(Buffer.byteLength(JSON.stringify(value)) < 2 * 1024 * 1024);
+  assert.ok(Buffer.byteLength(JSON.stringify(createPayload)) < 128 * 1024);
+  assert.ok(Buffer.byteLength(JSON.stringify(pagePayload)) < 2 * 1024 * 1024);
 });

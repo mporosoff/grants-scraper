@@ -2,9 +2,12 @@ const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE"]);
 export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
 export const SNAPSHOT_PAGE_SIZES = Object.freeze([10, 25, 50]);
+const EN_COLLATOR = new Intl.Collator("en-US");
 
 function clean(value, maximum = 500) {
-  return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, maximum);
+  const text = String(value ?? "");
+  if (!/[\t\n\f\r\v]| {2,}/u.test(text)) return text.trim().slice(0, maximum);
+  return text.replace(/\s+/g, " ").trim().slice(0, maximum);
 }
 
 function identityKey(value) {
@@ -62,7 +65,20 @@ function uniqueAwards(values) {
 }
 
 function deduplicateAwards(values) {
-  return uniqueAwards(values).sort(compareAwardsByRecency);
+  return sortAwards(uniqueAwards(values));
+}
+
+function sortAwards(values) {
+  return values.map(award => ({
+    award,
+    recency: awardRecency(award).date,
+    source: clean(award?.source, 10),
+    id: clean(award?.award_id, 120),
+  })).sort((left, right) => (
+    (right.recency > left.recency ? 1 : right.recency < left.recency ? -1 : 0)
+    || EN_COLLATOR.compare(left.source, right.source)
+    || EN_COLLATOR.compare(left.id, right.id)
+  )).map(item => item.award);
 }
 
 function personToken(value) {
@@ -76,8 +92,11 @@ function personToken(value) {
     .trim();
 }
 
-function normalizedInvestigatorName(value) {
-  let published = clean(value, 300);
+function normalizedInvestigatorName(value, cache = null) {
+  const raw = String(value ?? "");
+  if (!raw) return null;
+  if (cache?.has(raw)) return cache.get(raw);
+  let published = clean(raw, 300);
   if (!published) return null;
   published = published
     .replace(/^(?:(?:dr|doctor|prof|professor|mr|mrs|ms|miss|mx)\.?\s+)+/iu, "")
@@ -88,10 +107,14 @@ function normalizedInvestigatorName(value) {
     ? [...commaParts[1].split(/\s+/), ...commaParts[0].split(/\s+/)].filter(Boolean)
     : published.split(/\s+/).filter(Boolean);
   const keyed = tokens.map(personToken).filter(Boolean);
-  if (keyed.length < 2) return null;
+  if (keyed.length < 2) {
+    cache?.set(raw, null);
+    return null;
+  }
   const middleParts = keyed.slice(1, -1);
-  return {
+  const normalized = {
     published: clean(value, 300),
+    published_key: identityKey(value),
     first_display: tokens[0],
     middle_display: tokens.slice(1, -1).join(" "),
     family_display: tokens.at(-1),
@@ -103,25 +126,26 @@ function normalizedInvestigatorName(value) {
     base_key: `${keyed[0]}|${keyed.at(-1)}`,
     complete_key: `${keyed[0]}|${middleParts.join(" ")}|${keyed.at(-1)}`,
   };
+  cache?.set(raw, normalized);
+  return normalized;
 }
 
-function institutionIdentity(award) {
-  return clean(award?.institution?.identifiers?.ror, 100)
+function institutionIdentity(award, cache = null) {
+  if (cache?.has(award)) return cache.get(award);
+  const identity = clean(award?.institution?.identifiers?.ror, 100)
     || identityKey(award?.institution?.normalized_name || award?.institution?.name);
+  if (award && typeof award === "object") cache?.set(award, identity);
+  return identity;
 }
 
-function contactEvidence(award, person) {
-  const parsed = normalizedInvestigatorName(person?.name);
+function contactEvidence(person, nameCache, awardEvidence) {
+  const parsed = normalizedInvestigatorName(person?.name, nameCache);
   if (!parsed) return null;
-  const source = clean(award?.source, 10).toUpperCase();
   const identifier = clean(person?.source_person_id ?? person?.profile_id, 120);
   return {
     ...parsed,
-    source,
-    award_key: awardKey(award),
-    award_id: clean(award?.award_id, 120),
-    institution_key: institutionIdentity(award),
-    identifier: identifier ? `${source}:${identifier}` : "",
+    ...awardEvidence,
+    identifier: identifier ? `${awardEvidence.source}:${identifier}` : "",
     email: clean(person?.email, 320).toLocaleLowerCase("en-US"),
   };
 }
@@ -157,12 +181,14 @@ function canonicalInvestigatorLabel(entry) {
   return [entry.first_display, middle, entry.family_display].filter(Boolean).join(" ");
 }
 
-function investigatorGroups(awards) {
+function investigatorGroups(awards, factsFor) {
   const entries = [];
+  const nameCache = new Map();
   for (const award of awards) {
+    const awardEvidence = factsFor(award);
     const seen = new Set();
     for (const person of Array.isArray(award?.principal_investigators) ? award.principal_investigators : []) {
-      const entry = contactEvidence(award, person);
+      const entry = contactEvidence(person, nameCache, awardEvidence);
       if (!entry) continue;
       const key = `${entry.award_key}:${entry.identifier || entry.email || entry.complete_key}`;
       if (seen.has(key)) continue;
@@ -171,30 +197,70 @@ function investigatorGroups(awards) {
     }
   }
   entries.sort((left, right) => (
-    left.base_key.localeCompare(right.base_key, "en-US")
-    || left.complete_key.localeCompare(right.complete_key, "en-US")
-    || left.award_key.localeCompare(right.award_key, "en-US")
+    (left.base_key < right.base_key ? -1 : left.base_key > right.base_key ? 1 : 0)
+    || (left.complete_key < right.complete_key ? -1 : left.complete_key > right.complete_key ? 1 : 0)
+    || (left.award_key < right.award_key ? -1 : left.award_key > right.award_key ? 1 : 0)
   ));
   const groups = [];
   const identifierIndex = new Map();
   const emailIndex = new Map();
   const baseIndex = new Map();
+  const labelPreference = (candidate, current) => (
+    Number(Boolean(candidate.middle)) - Number(Boolean(current.middle))
+    || candidate.middle.length - current.middle.length
+    || -EN_COLLATOR.compare(candidate.published, current.published)
+  );
+  const compatibilityKey = entry => [
+    entry.identifier,
+    entry.email,
+    entry.institution_key,
+    entry.complete_key,
+    entry.middle_is_initial ? "1" : "0",
+  ].join("\u0000");
+  const groupCompatible = (group, entry) => {
+    for (const member of group.compatibility.values()) {
+      if (!contactsCanGroup(member, entry)) return false;
+    }
+    return true;
+  };
+  const findCompatible = (candidates, entry) => {
+    for (const candidate of candidates || []) {
+      if (groupCompatible(candidate, entry)) return candidate;
+    }
+    return null;
+  };
   const indexGroup = (index, key, group) => {
     if (!key) return;
-    const matches = index.get(key) || new Set();
-    matches.add(group);
+    const matches = index.get(key) || [];
+    if (!matches.includes(group)) matches.push(group);
     index.set(key, matches);
   };
+  const addMember = (group, entry) => {
+    group.members.push(entry);
+    group.compatibility.set(compatibilityKey(entry), entry);
+    group.awardKeys.add(entry.award_key);
+    if (labelPreference(entry, group.labelEntry) > 0) group.labelEntry = entry;
+    const variantKey = `${entry.source}:${entry.published_key}`;
+    if (!group.variantKeys.has(variantKey)) {
+      group.variantKeys.add(variantKey);
+      group.variants.push({ name: entry.published, source: entry.source, award_id: entry.award_id });
+    }
+  };
   for (const entry of entries) {
-    const candidates = new Set([
-      ...(identifierIndex.get(entry.identifier) || []),
-      ...(emailIndex.get(entry.email) || []),
-      ...(baseIndex.get(entry.base_key) || []),
-    ]);
-    let group = [...candidates].find(candidate => candidate.members.every(member => contactsCanGroup(member, entry)));
-    if (group) group.members.push(entry);
+    let group = findCompatible(identifierIndex.get(entry.identifier), entry)
+      || findCompatible(emailIndex.get(entry.email), entry)
+      || findCompatible(baseIndex.get(entry.base_key), entry);
+    if (group) addMember(group, entry);
     else {
-      group = { members: [entry] };
+      group = {
+        members: [],
+        compatibility: new Map(),
+        awardKeys: new Set(),
+        labelEntry: entry,
+        variantKeys: new Set(),
+        variants: [],
+      };
+      addMember(group, entry);
       groups.push(group);
     }
     indexGroup(identifierIndex, entry.identifier, group);
@@ -202,20 +268,8 @@ function investigatorGroups(awards) {
     indexGroup(baseIndex, entry.base_key, group);
   }
   const normalized = groups.map(group => {
-    const labelEntry = [...group.members].sort((left, right) => (
-      Number(Boolean(right.middle)) - Number(Boolean(left.middle))
-      || right.middle.length - left.middle.length
-      || left.published.localeCompare(right.published, "en-US")
-    ))[0];
-    const awardKeys = [...new Set(group.members.map(member => member.award_key))].sort();
-    const variants = [];
-    const seenVariants = new Set();
-    for (const member of group.members) {
-      const key = `${member.source}:${identityKey(member.published)}`;
-      if (seenVariants.has(key)) continue;
-      seenVariants.add(key);
-      variants.push({ name: member.published, source: member.source, award_id: member.award_id });
-    }
+    const labelEntry = group.labelEntry;
+    const awardKeys = [...group.awardKeys].sort();
     return {
       name: canonicalInvestigatorLabel(labelEntry),
       normalized: {
@@ -225,14 +279,14 @@ function investigatorGroups(awards) {
         family: labelEntry.family,
       },
       projects: awardKeys.length,
-      variants,
+      variants: group.variants,
       award_keys: awardKeys,
     };
   }).sort((left, right) => (
-    left.normalized.family.localeCompare(right.normalized.family, "en-US")
-    || left.normalized.first.localeCompare(right.normalized.first, "en-US")
-    || left.normalized.middle.localeCompare(right.normalized.middle, "en-US")
-    || left.name.localeCompare(right.name, "en-US")
+    EN_COLLATOR.compare(left.normalized.family, right.normalized.family)
+    || EN_COLLATOR.compare(left.normalized.first, right.normalized.first)
+    || EN_COLLATOR.compare(left.normalized.middle, right.normalized.middle)
+    || EN_COLLATOR.compare(left.name, right.name)
   ));
   const identityOrdinals = new Map();
   normalized.forEach(group => {
@@ -244,7 +298,15 @@ function investigatorGroups(awards) {
   return normalized;
 }
 
-function programDescriptors(award) {
+function programDescriptors(award, cache = null) {
+  const cacheKey = cache ? [
+    award?.source,
+    award?.subagency,
+    award?.activity_code,
+    award?.program_name,
+    ...(Array.isArray(award?.program_codes) ? award.program_codes : []),
+  ].join("\u0000") : "";
+  if (cache?.has(cacheKey)) return cache.get(cacheKey);
   const source = clean(award?.source, 10).toUpperCase();
   const parent = clean(award?.subagency, 300);
   const sourceCodes = [...new Set((Array.isArray(award?.program_codes) ? award.program_codes : [])
@@ -254,13 +316,16 @@ function programDescriptors(award) {
     ? clean(award?.activity_code || award?.program_name || code, 300)
     : clean(award?.program_name || code, 300);
   const leaf = sourceLeaf || parent;
-  if (!source || !leaf) return [];
+  if (!source || !leaf) {
+    cache?.set(cacheKey, []);
+    return [];
+  }
   const distinctChild = Boolean(parent && identityKey(parent) !== identityKey(leaf));
   const doeOfficeCode = sourceCodes.find(value => /^SC-\d+(?:\.\d+)?$/i.test(value));
   const query = source === "DOE" && !distinctChild
     ? /Basic Energy Sciences/i.test(parent) ? "BES" : doeOfficeCode || leaf
     : leaf;
-  return [{
+  const descriptors = [{
     key: `${source}:${identityKey(parent || leaf)}:${identityKey(leaf)}`,
     source,
     parent_label: parent || null,
@@ -271,20 +336,42 @@ function programDescriptors(award) {
     source_codes: sourceCodes,
     label: `${source} · ${distinctChild ? `${parent} › ${leaf}` : leaf}`,
   }];
+  cache?.set(cacheKey, descriptors);
+  return descriptors;
 }
 
 export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = {}) {
   const awards = alreadyNormalized ? values : deduplicateAwards(values);
-  const investigators = investigatorGroups(awards);
+  const factsCache = new WeakMap();
+  const institutionCache = new WeakMap();
+  const factsFor = award => {
+    let facts = factsCache.get(award);
+    if (facts) return facts;
+    const source = clean(award?.source, 10).toUpperCase();
+    const awardId = clean(award?.award_id, 120);
+    facts = {
+      source,
+      award_key: source && awardId ? `${source}:${awardId}` : "",
+      award_id: awardId,
+      institution_key: institutionIdentity(award, institutionCache),
+      year: validYear(award?.award_year),
+      recency: awardRecency(award),
+    };
+    factsCache.set(award, facts);
+    return facts;
+  };
+  const investigators = investigatorGroups(awards, factsFor);
   const programs = new Map();
+  const programCache = new Map();
   const years = new Map();
   const agencyTotals = new Map(SOURCE_NAMES.map(source => [source, 0]));
   for (const award of awards) {
-    const year = validYear(award?.award_year);
+    const facts = factsFor(award);
+    const year = facts.year;
     if (year) years.set(year, (years.get(year) || 0) + 1);
-    const source = clean(award?.source, 10).toUpperCase();
+    const source = facts.source;
     if (agencyTotals.has(source)) agencyTotals.set(source, agencyTotals.get(source) + 1);
-    for (const descriptor of programDescriptors(award)) {
+    for (const descriptor of programDescriptors(award, programCache)) {
       const current = programs.get(descriptor.key) || { ...descriptor, projects: 0, award_keys: [] };
       current.projects += 1;
       current.award_keys.push(awardKey(award));
@@ -304,16 +391,19 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
     programs: [...programs.values()].map(program => ({
       ...program,
       award_keys: [...new Set(program.award_keys)].sort(),
-    })).sort((left, right) => left.label.localeCompare(right.label, "en-US")),
-    ordered_refs: awards.map((award, index) => ({
-      position: index + 1,
-      evidence_id: awardKey(award),
-      source: clean(award?.source, 10).toUpperCase(),
-      award_id: clean(award?.award_id, 120),
-      title: clean(award?.title, 500),
-      award_year: validYear(award?.award_year),
-      recency: awardRecency(award),
-    })),
+    })).sort((left, right) => EN_COLLATOR.compare(left.label, right.label)),
+    ordered_refs: awards.map((award, index) => {
+      const facts = factsFor(award);
+      return {
+        position: index + 1,
+        evidence_id: facts.award_key,
+        source: facts.source,
+        award_id: facts.award_id,
+        title: clean(award?.title, 500),
+        award_year: facts.year,
+        recency: facts.recency,
+      };
+    }),
   };
 }
 
@@ -359,7 +449,7 @@ export function buildAwardSnapshot({ snapshotId, queryId, asOf, request, sourceP
     sourceResults[source] = payload?.status ? [] : uniqueAwards(payload?.results || []);
     return sourceState(source, payload, sourceResults[source].length);
   });
-  const awards = deduplicateAwards(request.sources.flatMap(source => sourceResults[source]));
+  const awards = sortAwards(request.sources.flatMap(source => sourceResults[source]));
   const complete = sources.every(source => source.status === "complete");
   const sourceMetadata = Object.fromEntries(request.sources.map(source => {
     const { results: _results, ...metadata } = sourcePayloads[source] || {};
@@ -477,8 +567,8 @@ export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type
     at_least: view.awards.length,
     recency_order: snapshot.recency_order,
     sources: snapshot.sources,
-    ...(allAwards ? {} : { base_aggregate: snapshot.base_aggregate }),
-    aggregate,
+    ...(allAwards ? {} : { base_aggregate: publicAggregate(snapshot.base_aggregate, { includeOrderedRefs: false }) }),
+    aggregate: publicAggregate(aggregate),
     facet: view.facet,
     pagination: {
       page: normalizedPage,
@@ -509,8 +599,16 @@ export function publicSnapshot(snapshot) {
     at_least: snapshot.at_least,
     recency_order: snapshot.recency_order,
     sources: snapshot.sources,
-    base_aggregate: snapshot.base_aggregate,
     initial_batches: snapshot.request.sources.map(source => snapshotSourceBatch(snapshot, { source, offset: 0 })),
+  };
+}
+
+function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
+  return {
+    ...aggregate,
+    investigators: aggregate.investigators.map(({ award_keys: _awardKeys, ...investigator }) => investigator),
+    programs: aggregate.programs.map(({ award_keys: _awardKeys, ...program }) => program),
+    ...(includeOrderedRefs ? {} : { ordered_refs: [] }),
   };
 }
 
