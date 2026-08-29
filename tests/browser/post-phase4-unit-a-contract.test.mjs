@@ -72,6 +72,7 @@ test("AI refinement requires both a usable result context and an entered or save
     /state\.ai\.busy/,
     /state\.refinement\.busy/,
     /state\.refinement\.active/,
+    /uploadedNofoActive/,
     /!hasContext/,
     /!searchIsCurrent/,
     /!hasKey/,

@@ -4262,12 +4262,14 @@
   function updateAiRefineControl() {
     const button = $("ai-refine");
     if (!button) return;
+    const uploadedNofoActive = state.ai.mode === "uploaded-nofo";
     const hasContext = aiRefineHasContext();
     const searchIsCurrent = aiRefineSearchIsCurrent();
     const hasKey = Boolean($("k-key").value.trim());
     button.disabled = state.ai.busy
       || state.refinement.busy
       || state.refinement.active
+      || uploadedNofoActive
       || !hasContext
       || !searchIsCurrent
       || !hasKey;
@@ -4283,6 +4285,8 @@
     if (requirement) {
       const message = state.refinement.active
         ? "AI additions are active. Restore original results before starting another refinement."
+        : uploadedNofoActive
+          ? "Remove the uploaded PDF or run a new funding search before using AI refinement. Document chat remains available."
         : state.refinement.busy
         ? "AI refinement is in progress."
         : state.ai.busy
@@ -4332,6 +4336,11 @@
     if (state.refinement.active) {
       setAiStatus("Restore original results before starting another AI refinement.");
       $("restore-ai-refinement").focus();
+      return;
+    }
+    if (state.ai.mode === "uploaded-nofo") {
+      setAiStatus("Remove the uploaded PDF or run a new funding search before using AI refinement. Document chat remains available.", true);
+      $("nofo-chat-context")?.querySelector("[data-nofo-remove]")?.focus();
       return;
     }
     if (!state.searched) {
@@ -5184,6 +5193,7 @@
         refreshProfileQuery();
         scheduleProfileSave();
       }
+      invalidateRefinementForCriteriaChange();
       renderOrcidStatus(
         $("orcid-id").value.trim()
           ? "Select “Import ORCID” to add public publication topics to this profile."
@@ -5230,9 +5240,11 @@
         $("expertise-keywords").focus();
         return;
       }
+      const profileWasDisabled = !$("use-profile").checked;
       state.profile.saved = true;
       $("use-profile").checked = true;
       saveProfileNow({ announce: true, force: true });
+      if (profileWasDisabled) invalidateRefinementForCriteriaChange();
       setProfileStatus(
         `Profile saved on this device with ${built.terms.length} high-signal terms. It will be combined with the next search.`,
       );

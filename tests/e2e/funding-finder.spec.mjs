@@ -11,6 +11,27 @@ import {
   watchRuntimeErrors,
 } from "./helpers.mjs";
 
+async function mockNofoExtraction(page, text) {
+  await page.route("**/assets/nofo.js*", async route => {
+    const response = await route.fetch();
+    const source = await response.text();
+    const extracted = {
+      name: "matched-notice.pdf",
+      text,
+      pageCount: 2,
+      pagesRead: 2,
+      wordCount: text.split(/\s+/).filter(Boolean).length,
+      truncated: false,
+    };
+    const patched = source.replace(
+      /    extract,\r?\n/,
+      `    extract: async () => (${JSON.stringify(extracted)}),\n`,
+    );
+    if (patched === source) throw new Error("NOFO extraction mock did not attach");
+    await route.fulfill({ response, body: patched, contentType: "application/javascript" });
+  });
+}
+
 test("watchlist pursuit state stays local and saved-search alerts send only typed public criteria", async ({ page }) => {
   mockHybrid(page);
   const alertCalls = mockAlerts(page);
@@ -616,6 +637,76 @@ test("refinement keeps both calls and provenance bound to its starting provider"
   expect(ai.calls).toBe(2);
   await expect(page.locator("#k-provider")).toHaveValue("anthropic");
   await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved");
+});
+
+test("editing an imported ORCID clears stale refinement and restores ordinary results", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  await page.route("https://api.crossref.org/works?*", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: {
+        "total-results": 1,
+        items: [{
+          title: ["Catalytic reaction engineering for carbon conversion"],
+          author: [{
+            given: "Josiah",
+            family: "Carberry",
+            ORCID: "https://orcid.org/0000-0002-1825-0097",
+          }],
+          subject: ["Catalysis", "Reaction engineering"],
+          published: { "date-parts": [[2026]] },
+        }],
+      },
+    }),
+  }));
+  await mockOpenAiBroadening(page);
+  await openFundingFinder(page);
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill("Catalytic reaction engineering and carbon conversion.");
+  await page.locator("#orcid-id").fill("0000-0002-1825-0097");
+  await page.locator("#import-orcid").click();
+  await expect(page.locator("#orcid-status")).toContainText("publications imported");
+  await page.locator("#use-profile").check();
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  const baselineHeading = await page.locator("#result-count").textContent();
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-orcid-invalidation-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+
+  await page.locator("#orcid-id").fill("0000-0001-5109-3700");
+  await expect(page.locator("#ai-status")).toContainText("cleared because the search criteria changed");
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run Find funding again");
+  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect(page.locator("#orcid-status")).toContainText("Select “Import ORCID”");
+});
+
+test("uploaded notice focus blocks refinement until the PDF is removed", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  await mockNofoExtraction(
+    page,
+    "[Page 1] Funding Opportunity 26-506 supports secure open-source research ecosystems. [Page 2] Applicants should verify all requirements in the official notice.",
+  );
+  await openFundingFinder(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-upload-focus-mock");
+  await page.locator("#nofo-file").setInputFiles({
+    name: "matched-notice.pdf",
+    mimeType: "application/pdf",
+    buffer: Buffer.from("%PDF-1.4 deterministic extraction mock"),
+  });
+  await expect(page.locator("#nofo-upload-status")).toContainText("Matched opportunity number 26-506");
+  await expect(page.locator("#results .result-card")).toHaveCount(1);
+  await expect(page.locator("#ai-refine")).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Remove the uploaded PDF");
+  await expect(page.locator("#nofo-chat-context [data-nofo-remove]")).toBeVisible();
+
+  await page.locator("#nofo-chat-context [data-nofo-remove]").click();
+  await expect(page.locator("#search-status")).toContainText("uploaded PDF was removed");
+  await expect(page.locator("#ai-refine")).toBeEnabled();
 });
 
 test("rerunning changed criteria clears stale chat focus while preserving the conversation", async ({ page }) => {

@@ -240,6 +240,14 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
     appSource.indexOf("function currentChatIds"),
     appSource.indexOf("function hasNofoDocument"),
   );
+  const refineControl = appSource.slice(
+    appSource.indexOf("function updateAiRefineControl"),
+    appSource.indexOf("function setRefinementBusy"),
+  );
+  const orcidInput = appSource.slice(
+    appSource.indexOf('$("orcid-id").addEventListener("input"'),
+    appSource.indexOf('$("import-orcid").addEventListener'),
+  );
   assert.match(appSource, /refinement:\s*\{[\s\S]*?baseline: null,[\s\S]*?additions: \[\],[\s\S]*?combinedMatches: \[\],[\s\S]*?requestSequence: 0/);
   assert.match(refine, /await awaitPendingPotential\(sequence, signature\)/);
   assert.match(refine, /refinementRequestIsCurrent\(sequence, signature\)/);
@@ -266,6 +274,10 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(appSource, /if \(refinementChanged\) clearResultFocusPreservingConversation\(\)/);
   assert.match(appSource, /state\.ai\.mode === "uploaded-nofo" && !state\.ai\.currentIds\.length/);
   assert.match(appSource, /function clearResultFocusPreservingConversation\(\)[\s\S]*?state\.ai\.mode === "uploaded-nofo"\) return/);
+  assert.match(orcidInput, /refreshProfileQuery\(\)[\s\S]*?invalidateRefinementForCriteriaChange\(\)/);
+  assert.match(refineControl, /uploadedNofoActive = state\.ai\.mode === "uploaded-nofo"/);
+  assert.match(refineControl, /button\.disabled =[\s\S]*?\|\| uploadedNofoActive/);
+  assert.match(refine, /if \(state\.ai\.mode === "uploaded-nofo"\)[\s\S]*?Remove the uploaded PDF/);
 });
 
 test("one accessible restore control and search-input controls have the required DOM and responsive order", () => {
