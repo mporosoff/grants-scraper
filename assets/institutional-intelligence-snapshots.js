@@ -38,6 +38,7 @@
     questionSequence: 0,
     questionSubmitting: false,
     answering: false,
+    searchActivityOwner: 0,
     historyStateFrame: 0,
   };
 
@@ -79,6 +80,15 @@
   function setStatus(message, error = false) {
     $("ii-status").textContent = message;
     $("ii-status").classList.toggle("error-text", error);
+  }
+
+  function setSearchActivity(active, owner = 0) {
+    if (active) state.searchActivityOwner = owner;
+    else if (owner && state.searchActivityOwner !== owner) return;
+    else state.searchActivityOwner = 0;
+    $("ii-search").setAttribute("aria-busy", active ? "true" : "false");
+    $("ii-search-spinner").classList.toggle("hidden", !active);
+    $("ii-search-label").textContent = active ? "Searching awards…" : "Search funded awards";
   }
 
   function setBusy(busy) {
@@ -423,7 +433,20 @@
     if (source.status === "partial") return `${source.source} partial · at least ${source.result_count.toLocaleString()} normalized awards available`;
     if (source.status === "rate_limited") return `${source.source} is rate-limited. Other source results remain available.`;
     if (source.status === "unsupported") return `${source.source} does not support this query shape. Other source results remain available.`;
+    if (source.error?.code === "source_timeout") return `${source.source} timed out before completing. Other source results remain available.`;
     return `${source.source} is temporarily unavailable. Other source results remain available.`;
+  }
+
+  function unavailableSourceSummary(sources) {
+    const failures = sources.filter(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
+    if (!failures.length) return "";
+    const labels = failures.map(source => {
+      if (source.error?.code === "source_timeout") return `${source.source} timed out`;
+      if (source.status === "rate_limited") return `${source.source} was rate-limited`;
+      if (source.status === "unsupported") return `${source.source} does not support these filters`;
+      return `${source.source} did not load`;
+    });
+    return ` ${labels.join("; ")}; results from completed sources are shown.`;
   }
 
   function renderSourceStatus() {
@@ -673,6 +696,7 @@
     state.pageRequestSequence += 1;
     state.controller?.abort();
     state.controller = new AbortController();
+    setSearchActivity(true, sequence);
     setBusy(true);
     setStatus("Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
     try {
@@ -693,9 +717,10 @@
       const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
       commitSnapshotResult(staged, { historyMode, focus: focusResults, departureHistoryState });
       const exact = snapshot.completeness === "complete";
-      setStatus(exact
+      const sourceIssue = unavailableSourceSummary(snapshot.sources || []);
+      setStatus((exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
-        : `${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} are available within disclosed safety bounds; incomplete sources are labeled below.`);
+        : `${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} are available within disclosed safety bounds; incomplete sources are labeled below.`) + sourceIssue);
       if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
       return { payload: state.pagePayload, aggregate: state.aggregate };
     } catch (error) {
@@ -704,6 +729,7 @@
       else setStatus(error?.message || "Funded award search could not be completed.", true);
       return null;
     } finally {
+      setSearchActivity(false, sequence);
       setBusy(false);
     }
   }
@@ -1086,6 +1112,7 @@
     state.sequence += 1;
     state.pageRequestSequence += 1;
     state.controller?.abort();
+    setSearchActivity(false);
     state.selectedInstitution = null;
     resetResultState();
     applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", page: 1, page_size: 10, facet_type: "all", facet_key: "" });
@@ -1191,6 +1218,7 @@
       state.sequence += 1;
       state.pageRequestSequence += 1;
       state.controller?.abort();
+      setSearchActivity(false);
       resetResultState();
       applyFormState(restored);
       state.controller = new AbortController();

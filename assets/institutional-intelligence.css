@@ -221,6 +221,10 @@
   margin-top: 17px;
 }
 
+.ii-search-spinner {
+  display: inline-block;
+}
+
 .ii-status {
   margin-top: 14px;
   padding: 10px 12px;

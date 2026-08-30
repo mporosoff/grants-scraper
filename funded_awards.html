@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=presentation-cleanup-20260830">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=live-award-loading-20260830">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -139,7 +139,10 @@
             <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps only to the published PAMS organization identity SC-32.</p>
             <p class="ii-program-help" id="ii-year-help">Leave both year fields blank to search all available years. Edited filters apply after you choose Search funded awards.</p>
             <div class="ii-actions">
-              <button class="button primary" id="ii-search" type="submit">Search funded awards</button>
+              <button class="button primary" id="ii-search" type="submit" aria-busy="false">
+                <span class="find-button-spinner ii-search-spinner hidden" id="ii-search-spinner" aria-hidden="true"></span>
+                <span id="ii-search-label">Search funded awards</span>
+              </button>
               <button class="text-button" id="ii-clear" type="button">Clear search</button>
             </div>
           </form>
@@ -335,6 +338,6 @@
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/funded-awards.js?v=phase3-normalized-paging-20260826"></script>
-  <script src="./assets/institutional-intelligence-snapshots.js?v=presentation-cleanup-20260830"></script>
+  <script src="./assets/institutional-intelligence-snapshots.js?v=live-award-loading-20260830"></script>
 </body>
 </html>
