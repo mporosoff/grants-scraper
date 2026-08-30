@@ -256,7 +256,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "presentation-cleanup-20260830"
+        app_style_version = "compact-match-count-size-20260830"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
