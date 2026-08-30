@@ -683,7 +683,7 @@
     };
   }
 
-  function programOfficerAggregateIntent(question) {
+  function programOfficerAggregateIntent(question, lockedDisplayName = "") {
     const text = clean(question, 1_000).toLocaleLowerCase("en-US");
     const intentText = text.replace(/\bprogram\s+(?:contact|official|officer)s?\b/gu, " ");
     if (/how many|\bcount\b|number of/.test(text)) return "count";
@@ -692,12 +692,12 @@
     if (/\bprograms?\b|mechanism|activity|office/.test(intentText)) return "programs";
     if (/\bwhen\b|\byear|timeline|chronolog|oldest|newest|earliest|latest|recent/.test(text)) return "years";
     if (/(?:\blist\b|\bshow\b).{0,24}(?:awards?|projects?)|which (?:awards?|projects?) (?:are |were )?(?:in|on|from) (?:this|the) snapshot|award titles?|project titles?|next page|previous page/.test(text)) return "awards";
-    const phrases = programOfficerRetrievalPhrases(question);
+    const phrases = programOfficerRetrievalPhrases(question, lockedDisplayName);
     if (text && Array.isArray(phrases) && phrases.length === 0) return "awards";
     return "";
   }
 
-  function programOfficerRetrievalPhrases(question) {
+  function programOfficerRetrievalPhrases(question, lockedDisplayName = "") {
     const ignored = new Set([
       "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts",
       "area", "areas", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
@@ -707,12 +707,14 @@
       "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
       "they", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
     ]);
-    const tokens = clean(question, 1_000)
+    const normalizedTokens = (value, maximum) => clean(value, maximum)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
-      .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
-      .filter(token => token.length >= 3 && !ignored.has(token)) || [];
+      .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
+    const lockedNameTokens = new Set(normalizedTokens(lockedDisplayName, 300));
+    const tokens = normalizedTokens(question, 1_000)
+      .filter(token => token.length >= 3 && !ignored.has(token) && !lockedNameTokens.has(token));
     const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];

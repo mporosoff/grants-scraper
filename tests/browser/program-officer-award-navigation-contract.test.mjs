@@ -265,6 +265,11 @@ test("topical evidence requires every substantive query concept in the same awar
     ["NSF-203"],
     "server normalization must not treat aggregate facet nouns as topical concepts",
   );
+  assert.deepEqual(
+    snapshotEvidence(snapshot, { phrases: ["Doe Jane catalysis quantum sensing"], limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-203"],
+    "server scoring independently removes the immutable snapshot officer identity",
+  );
   const investigatorAnswer = plain(core.deterministicProgramOfficerAnswer({
     question: "Which investigators work on catalysis and quantum sensing?",
     intent: "topical",
@@ -345,6 +350,9 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(core.programOfficerAggregateIntent("Which projects are in this snapshot?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("Which awards did this program officer fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("What research did they fund?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("What awards did Jane Smith fund?", "Jane Smith"), "awards");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What awards did Jane Smith fund?", "Jane Smith")), []);
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which Jane Smith awards involve quantum sensing?", "Jane Smith")), ["quantum sensing"]);
   assert.equal(core.programOfficerAggregateIntent("What types of projects did they fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("What kinds of projects did they fund?"), "awards");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What categories and themes of projects did they fund?")), []);
@@ -481,7 +489,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-3";
+  const key = "po-award-navigation-20260830-4";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }

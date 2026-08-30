@@ -602,6 +602,17 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
 
+  await page.locator("#ii-question").fill("What awards did Vladimir Lukin fund?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
+
+  await page.locator("#ii-question").fill("Which Vladimir Lukin awards involve carbon dioxide conversion?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(4);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+
   const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);
   const beyondId = await beyondPageLink.getAttribute("data-ii-evidence-link");
   await beyondPageLink.click();

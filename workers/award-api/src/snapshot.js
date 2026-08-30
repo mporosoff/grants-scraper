@@ -815,9 +815,19 @@ function publicMatchedAggregate(awards) {
 
 export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT } = {}) {
   if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return null;
-  const normalizedPhrases = normalizeEvidencePhrases(phrases);
+  const submittedPhrases = normalizeEvidencePhrases(phrases);
   const normalizedLimit = Number(limit);
-  if (normalizedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  if (submittedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  const lockedNameTokens = new Set(retrievalTokens(snapshot.program_officer.display_name));
+  const seenPhrases = new Set();
+  const normalizedPhrases = [];
+  for (const phrase of submittedPhrases) {
+    const tokens = phrase.tokens.filter(token => !lockedNameTokens.has(token));
+    const key = tokens.join(" ");
+    if (!key || seenPhrases.has(key)) continue;
+    seenPhrases.add(key);
+    normalizedPhrases.push({ key, tokens });
+  }
   const requiredConcepts = [...new Set(normalizedPhrases.flatMap(phrase => phrase.tokens))];
   const scored = snapshot.awards.map((award, position) => ({
     award,

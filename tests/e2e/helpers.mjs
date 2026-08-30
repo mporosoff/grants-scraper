@@ -482,7 +482,9 @@ export function mockAwards(target, {
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
         .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
         .filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
-      const requiredConcepts = [...new Set(body.phrases.flatMap(evidenceTokens))];
+      const lockedNameTokens = new Set(evidenceTokens(snapshot.program_officer.display_name));
+      const requiredConcepts = [...new Set(body.phrases.flatMap(evidenceTokens))]
+        .filter(token => !lockedNameTokens.has(token));
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
           record.title,
