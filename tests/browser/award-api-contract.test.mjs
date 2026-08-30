@@ -8,6 +8,11 @@ import {
 } from "../../workers/award-api/src/adapters/nsf.js";
 import {
   buildDoeSearchForm,
+  DOE_ADAPTER_VERSION,
+  DOE_PAGE_REQUEST_TIMEOUT_MS,
+  DOE_OPERATION_BUDGET_MS,
+  DOE_REQUEST_TIMEOUT_MS,
+  DOE_SEARCH_REQUEST_TIMEOUT_MS,
   normalizeDoeAward,
   parseDoeAbstract,
   parseDoeSearchResults,
@@ -274,6 +279,12 @@ test("NIH normalization groups annual applications under the core project withou
 });
 
 test("DOE builds the account-free PAMS form and normalizes only labeled public fields", async () => {
+  assert.equal(DOE_ADAPTER_VERSION, "1.3.1");
+  assert.equal(DOE_SEARCH_REQUEST_TIMEOUT_MS, 30_000);
+  assert.equal(DOE_PAGE_REQUEST_TIMEOUT_MS, 30_000);
+  assert.equal(DOE_REQUEST_TIMEOUT_MS, 15_000);
+  assert.equal(DOE_OPERATION_BUDGET_MS, 100_000);
+
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const form = buildDoeSearchForm(doeFormFixture, {
     opportunity_number: "DE-FOA-0003600",
@@ -364,6 +375,62 @@ test("DOE builds the account-free PAMS form and normalizes only labeled public f
     abstracts_failed: 0,
   });
   assert.equal(calls.length, 4, "one form, search, page, and public-abstract request");
+});
+
+test("DOE returns a truthful safety-bounded snapshot before its total scan budget expires", async () => {
+  const calls = [];
+  let elapsedChecks = 0;
+  const result = await searchDoe(fixtureFetch({ calls }), { topic: "carbon dioxide" }, {
+    limit: 25,
+    offset: 0,
+    now: fixedNow,
+    monotonicNow: () => elapsedChecks++ === 0 ? 0 : 71_000,
+    sleep: async () => {},
+    scanAll: true,
+    includeAbstracts: false,
+  });
+
+  assert.deepEqual(result.results.map(item => item.award_id), ["DE-SC0020230"]);
+  assert.equal(result.upstream_pages, 1);
+  assert.equal(result.total_count, null);
+  assert.equal(result.has_more, true);
+  assert.equal(result.safety_bound_reached, true);
+  assert.equal(result.scan_budget_reached, true);
+  assert.equal(calls.length, 2, "the adapter does not start a page request it cannot bound");
+});
+
+test("DOE preserves award results when optional abstract enrichment exhausts the operation budget", async () => {
+  const calls = [];
+  const fetchImpl = async (url, options = {}) => {
+    calls.push({ url: String(url), options });
+    if (!String(url).includes("ViewPublicAbstract.aspx")) {
+      return new Response(options.method === "POST" ? doeResultsPage2 : doeFormFixture, {
+        headers: { "Content-Type": "text/html" },
+      });
+    }
+    return new Promise((_resolve, reject) => {
+      const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
+      if (options.signal?.aborted) abort();
+      else options.signal?.addEventListener("abort", abort, { once: true });
+    });
+  };
+  const elapsed = [0, 99_990, 99_990, 99_999];
+  const result = await searchDoe(fetchImpl, { topic: "carbon dioxide" }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+    monotonicNow: () => elapsed.shift() ?? 100_000,
+    sleep: async () => {},
+  });
+
+  assert.deepEqual(result.results.map(item => item.award_id), ["DE-SC0024701"]);
+  assert.deepEqual(result.health, {
+    status: "degraded",
+    abstract_requests: 1,
+    abstracts_loaded: 0,
+    abstracts_failed: 1,
+  });
+  assert.equal(calls.length, 3, "the form, award search, and one bounded abstract request were attempted");
 });
 
 test("NIH pagination advances through normalized core projects instead of annual records", async () => {
