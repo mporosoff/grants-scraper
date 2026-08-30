@@ -489,7 +489,7 @@ test("Worker validates bounded public requests and exposes no credential require
     schema_version: 1,
     sources: ["NSF", "NIH", "DOE"],
     adapter_versions: ADAPTER_VERSIONS,
-    institution_registry: { source: "ROR", adapter_version: "1.1.0" },
+    institution_registry: { source: "ROR", adapter_version: "1.2.0" },
     institution_resolution: "curated-or-server-validated-ror",
     normalized_paging: {
       NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },

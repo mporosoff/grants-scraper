@@ -1086,9 +1086,12 @@
   }
 
   function chooseResearcher() {
-    var member = $("researcher-choice").value;
+    var choice = $("researcher-choice");
+    var member = choice.value;
     if (!member) return;
     if (member === "__new__") {
+      choice.value = "";
+      $("choose-researcher").disabled = true;
       $("researcher-picker").hidden = true;
       openExternalEditor("");
       return;
@@ -1405,6 +1408,10 @@
     $("filter").addEventListener("input", refresh);
     $("add-researcher").addEventListener("click", toggleResearcherPicker);
     $("researcher-choice").addEventListener("change", function () {
+      if ($("researcher-choice").value === "__new__") {
+        chooseResearcher();
+        return;
+      }
       $("choose-researcher").disabled = !$("researcher-choice").value;
     });
     $("choose-researcher").addEventListener("click", chooseResearcher);

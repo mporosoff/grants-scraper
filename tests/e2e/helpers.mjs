@@ -161,7 +161,7 @@ export function mockAwards(target, {
             registry: {
               source: "ROR",
               status: "rate_limited",
-              adapter_version: "1.1.0",
+              adapter_version: "1.2.0",
               error: { code: "rate_limited" },
             },
           }),
@@ -211,7 +211,7 @@ export function mockAwards(target, {
           schema_version: 1,
           query: requestUrl.searchParams.get("query"),
           institutions,
-          registry: { source: "ROR", status: "available", adapter_version: "1.1.0", license: "CC0-1.0", cache: "miss" },
+          registry: { source: "ROR", status: "available", adapter_version: "1.2.0", license: "CC0-1.0", cache: "miss" },
         }),
       });
       return;

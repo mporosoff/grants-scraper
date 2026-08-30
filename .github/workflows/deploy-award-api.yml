@@ -161,7 +161,7 @@ jobs:
               && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.credentials_required | tostring' <<<"$health" 2>/dev/null)" = "false" \
               && test "$(jq -r '.institution_registry.source // empty' <<<"$health" 2>/dev/null)" = "ROR" \
-              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.1.0" \
+              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.2.0" \
               && test "$(jq -r '.institution_resolution // empty' <<<"$health" 2>/dev/null)" = "curated-or-server-validated-ror" \
               && test "$(jq -r '.complete_result_snapshots.contract_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.complete_result_snapshots.ordering_version // empty' <<<"$health" 2>/dev/null)" = "award-recency-v1" \

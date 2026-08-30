@@ -133,6 +133,12 @@ test("opens the researcher picker without forcing the native select open", () =>
   assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
 });
 
+test("selecting the new external researcher option opens its editor without an extra add click", () => {
+  assert.match(teamPage, /\$\("researcher-choice"\)\.addEventListener\("change", function \(\) \{[\s\S]*?value === "__new__"[\s\S]*?chooseResearcher\(\);[\s\S]*?return;/);
+  assert.match(teamPage, /if \(member === "__new__"\) \{[\s\S]*?choice\.value = "";[\s\S]*?\$\("choose-researcher"\)\.disabled = true;[\s\S]*?openExternalEditor\(""\);[\s\S]*?return;/);
+  assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
+});
+
 test("shows an accessible progress state while adding a researcher", () => {
   assert.match(teamPage, /id="researcher-picker-status" role="status" aria-live="polite"/);
   assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
