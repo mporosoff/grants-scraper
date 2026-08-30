@@ -646,24 +646,13 @@ export function csvRows(csv) {
 }
 
 export async function addDepartmentResearcher(page, optionIndex = 0) {
-  const candidates = [
-    "Yasemin Basdogan",
-    "Siddharth Deshpande",
-    "Marc D. Porosoff",
-    "Astrid M. Müller",
-  ];
-  const selectedLabels = await page.locator("#pi-grid [data-member-entry] .pi-toggle").evaluateAll(buttons => (
-    buttons.map(button => button.getAttribute("aria-label") || "")
-  ));
-  const available = candidates.filter(name => !selectedLabels.includes(`Remove ${name} from team`));
-  const label = available[Math.min(optionIndex, Math.max(0, available.length - 1))];
-  expect(label).toBeTruthy();
-  if (await page.locator("#researcher-picker").isHidden()) await page.locator("#add-researcher").click();
-  await page.locator("#researcher-search").fill(label);
-  const option = page.locator("#researcher-options [role=option]", { hasText: label }).first();
-  await expect(option).toBeVisible({ timeout: 10_000 });
-  const value = await option.getAttribute("data-faculty-id");
-  await option.click();
+  await page.locator("#add-researcher").click();
+  const options = page.locator('#researcher-choice optgroup[label="Department faculty"] option');
+  const option = options.nth(optionIndex);
+  const value = await option.getAttribute("value");
+  const label = (await option.textContent()).trim();
+  await page.locator("#researcher-choice").selectOption(value);
+  await page.locator("#choose-researcher").click();
   await expect(page.getByRole("button", { name: `Remove ${label} from team` })).toBeVisible();
   return { label, value };
 }

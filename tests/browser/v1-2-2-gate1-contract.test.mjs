@@ -140,7 +140,7 @@ test("Funding Finder topic fallback contract rejects unrelated failure escalatio
 
 test("Team Match keeps parent-only matching and disables hosted enhancement on sidecar failure", () => {
   const sidecarLoad = teamPage.indexOf("var sidecar = await SUBTOPIC_API.loadSidecar()");
-  const continueInit = teamPage.indexOf("renderResearcherButtons();", sidecarLoad);
+  const continueInit = teamPage.indexOf("renderExternalButtons();", sidecarLoad);
   assert.ok(sidecarLoad >= 0 && continueInit > sidecarLoad);
   const fallback = teamPage.slice(sidecarLoad, teamPage.indexOf("if (\n      CHILD_CATALOG", sidecarLoad));
   assert.match(fallback, /CHILD_CATALOG = null/);

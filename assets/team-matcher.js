@@ -36,9 +36,6 @@
     "faculty", "investigator", "investigators",
   ]);
   const MIN_MEMBER_SCORE = 1.35;
-  const STALE_UNDATED_MAX_AGE_DAYS = 5 * 366;
-  const NON_FUNDING_TITLE_RE = /^(?:[A-Z0-9-]+\s+)?(?:notice\s+of\s+intent(?:\s+to\s+issue)?\b|request\s+for\s+information\b|RFI\s*[-:])/i;
-  const NOT_ACCEPTING_RE = /\b(?:not|isn't|is\s+not)\s+accepting\s+applications?\b|\bno\s+applications?\s+(?:are|will\s+be)\s+accepted\b/i;
 
   function cleanDate(value) {
     const text = String(value || "");
@@ -53,36 +50,15 @@
     return Math.floor((now.getTime() - timestamp) / 86400000);
   }
 
-  function nonFundingReason(record) {
-    if (NON_FUNDING_TITLE_RE.test(String(record.title || "").trim())) return "informational_notice";
-    const instruments = new Set((record.funding_instrument_codes || record.funding_instruments || [])
-      .map(value => String(value || "").trim().toLowerCase()).filter(Boolean));
-    if (instruments.size && [...instruments].every(value => value === "o" || value === "other")
-      && NOT_ACCEPTING_RE.test(String(record.description || "").slice(0, 2500))) {
-      return "not_accepting_applications";
-    }
-    return "";
-  }
-
-  function recordIsCurrent(record, now = new Date(), catalogRole = "parent") {
-    if (catalogRole === "child") {
-      return record?.publication_state === "publishable" && record?.child_type === "subject";
-    }
+  function recordIsCurrent(record, now) {
     const status = String(record.status || "").trim().toLowerCase();
     if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
       return false;
     }
-    if (!["posted", "forecasted"].includes(status) || nonFundingReason(record)) return false;
     const archiveAge = daysBetween(record.archive_date, now);
     if (archiveAge !== null && archiveAge >= 0) return false;
-    if (record.archive_date && archiveAge === null) return false;
     const closeAge = daysBetween(record.close_date, now);
     if (closeAge !== null && closeAge > 0 && !record.rolling) return false;
-    if (record.close_date && closeAge === null) return false;
-    if (!record.rolling && !record.close_date && !record.archive_date) {
-      const postedAge = daysBetween(record.posted_date, now);
-      if (postedAge !== null && postedAge > STALE_UNDATED_MAX_AGE_DAYS) return false;
-    }
     return true;
   }
 
@@ -127,7 +103,6 @@
     const now = options.now instanceof Date
       ? options.now
       : new Date(options.now || Date.now());
-    const catalogRole = options.catalogRole === "child" ? "child" : "parent";
     const lexicon = config.theme_lexicon || {};
     const bridgeDefinitions = config.bridge_themes || [];
     const commonTopics = new Set([...COMMON_TOPICS, ...(config.common_topics || [])]);
@@ -162,7 +137,7 @@
     const profileVocabularyCache = new WeakMap();
     const groupDefinitionCache = new Map();
     rawRecords.forEach(record => {
-      if (!recordIsCurrent(record, now, catalogRole) || recordIsTestOpportunity(record)) return;
+      if (!recordIsCurrent(record, now) || recordIsTestOpportunity(record)) return;
       const identityText = `${record.agency || ""} ${record.title || ""}`;
       if (OUT_OF_SCOPE_RE.some(pattern => pattern.test(identityText))) return;
       const sourceText = [
@@ -641,5 +616,5 @@
     });
   }
 
-  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create, recordIsCurrent, nonFundingReason });
+  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create });
 })();
