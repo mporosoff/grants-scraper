@@ -1884,6 +1884,11 @@
     return parts.join(" · ");
   }
 
+  function shouldShowNoStrongNotice(matches) {
+    const tiers = new Set(matches.map(match => RESULT_WORKFLOW_API.workflowTier(match)));
+    return !tiers.has("strong") && tiers.has("potential");
+  }
+
   function syncStateToUrl() {
     if (!location.protocol.startsWith("http")) return;
     const url = new URL(location.href);
@@ -3879,7 +3884,10 @@
         }
         group.rows.push({ match, position: start + index + 1 });
       });
-      $("results").innerHTML = groups.map(group => (
+      const noStrongNotice = shouldShowNoStrongNotice(display)
+        ? `<div class="result-tier-empty"><h3>No strong matches found.</h3><p>The broader search found potential matches below for you to review.</p></div>`
+        : "";
+      $("results").innerHTML = noStrongNotice + groups.map(group => (
         `<div class="result-tier result-tier-${group.tier}">
           ${group.rows.map(item => resultCard(item.match, item.position)).join("")}
         </div>`
