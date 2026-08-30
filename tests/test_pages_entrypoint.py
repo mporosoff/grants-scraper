@@ -315,7 +315,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=presentation-cleanup-20260830"></script>',
+            '<script src="./assets/app.js?v=compact-match-counts-20260830"></script>',
             explorer_html,
         )
         self.assertIn(
