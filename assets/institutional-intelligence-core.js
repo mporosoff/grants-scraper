@@ -699,13 +699,13 @@
 
   function programOfficerRetrievalPhrases(question, lockedDisplayName = "") {
     const ignored = new Set([
-      "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts",
+      "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts", "could",
       "area", "areas", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
       "institution", "institutions", "investigator", "investigators",
       "involve", "involved", "involves", "involving", "kind", "kinds", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
-      "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
+      "find", "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
       "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
-      "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
+      "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
     ]);
     const normalizedTokens = (value, maximum) => clean(value, maximum)
       .normalize("NFKD")

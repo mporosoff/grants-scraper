@@ -10,11 +10,11 @@ export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 const EN_COLLATOR = new Intl.Collator("en-US");
 const GENERIC_RETRIEVAL_TERMS = new Set([
-  "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields",
-  "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
+  "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
+  "find", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
   "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies", "subject", "subjects",
   "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what",
-  "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
+  "there", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
 ]);
 
 function clean(value, maximum = 500) {
