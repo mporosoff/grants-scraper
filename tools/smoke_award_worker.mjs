@@ -25,7 +25,7 @@ if (!["NSF", "NIH", "DOE"].every(source => health.sources?.includes(source))) {
 if (health.institution_registry?.source !== "ROR") {
   throw new Error("Award Worker health did not advertise the ROR institution registry boundary.");
 }
-if (health.institution_registry?.adapter_version !== "1.1.0"
+if (health.institution_registry?.adapter_version !== "1.2.0"
   || health.institution_resolution !== "curated-or-server-validated-ror") {
   throw new Error("Award Worker health did not advertise trusted Phase 3 ROR resolution.");
 }

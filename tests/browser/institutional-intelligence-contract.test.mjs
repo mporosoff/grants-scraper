@@ -12,6 +12,7 @@ const root = new URL("../../", import.meta.url);
 const [
   aliases, fundedCoreSource, coreSource, appSource, page, fundingPage, teamPage, styles,
   credentialsSource, doeForm, fundingAppSource, deploymentSource,
+  awardSmokeSource,
 ] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
@@ -25,6 +26,7 @@ const [
   readFile(new URL("tests/fixtures/awards/doe_search_form.html", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
+  readFile(new URL("tools/smoke_award_worker.mjs", root), "utf8"),
 ]);
 
 const sandbox = { URL, URLSearchParams };
@@ -369,6 +371,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
   assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.2\.0"/);
+  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.2\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(
