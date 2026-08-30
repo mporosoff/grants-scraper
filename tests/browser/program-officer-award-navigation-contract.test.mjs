@@ -287,6 +287,28 @@ test("topical evidence requires every substantive query concept in the same awar
   assert.doesNotMatch(institutionAnswer.answer, /Beta Laboratory/);
 });
 
+test("explicit award-year qualifiers use structured metadata and retain topical aggregate facets", () => {
+  const snapshot = programOfficerSnapshot([
+    award(301, { award_year: 2023, award_date: "2023-06-01", principal_investigators: [{ name: "Earlier Researcher" }] }),
+    award(302, { award_year: 2024, award_date: "2024-06-01", principal_investigators: [{ name: "Target Researcher" }] }),
+  ]);
+  const phrases = plain(core.programOfficerRetrievalPhrases("Who received awards in FY2024?"));
+  assert.deepEqual(phrases, ["2024"]);
+  const evidence = snapshotEvidence(snapshot, { phrases, limit: 24 });
+  assert.deepEqual(evidence.awards.map(item => item.award_id), ["NSF-302"]);
+  assert.deepEqual(evidence.awards[0].matched_fields, ["year"]);
+  const answer = plain(core.deterministicProgramOfficerAnswer({
+    question: "Who received awards in FY2024?",
+    intent: "topical",
+    aggregateIntent: "investigators",
+    aggregate: snapshot.base_aggregate,
+    snapshot,
+    evidencePack: evidence,
+  }));
+  assert.match(answer.answer, /Matching investigators: Target Researcher/);
+  assert.doesNotMatch(answer.answer, /Earlier Researcher/);
+});
+
 test("snapshot-native institutions, coverage, abstract facts, and absence language remain explicit", () => {
   const complete = programOfficerSnapshot();
   assert.equal(complete.mode, "program_officer");
@@ -323,6 +345,10 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(core.programOfficerAggregateIntent("Which projects are in this snapshot?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("Which awards did this program officer fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("What research did they fund?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("What types of projects did they fund?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("What kinds of projects did they fund?"), "awards");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What categories and themes of projects did they fund?")), []);
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What types of quantum sensing projects did they fund?")), ["quantum sensing"]);
   assert.equal(core.programOfficerAggregateIntent("Which programs did this program officer manage?"), "programs");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("How many awards are in this snapshot?")), []);
   const longConcepts = [
@@ -455,7 +481,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-2";
+  const key = "po-award-navigation-20260830-3";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }

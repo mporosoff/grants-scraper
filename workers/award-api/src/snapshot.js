@@ -10,10 +10,10 @@ export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 const EN_COLLATOR = new Intl.Collator("en-US");
 const GENERIC_RETRIEVAL_TERMS = new Set([
-  "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "college", "colleges", "count", "did", "does",
+  "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields",
   "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
-  "involve", "involved", "involves", "involving", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
-  "support", "supported", "supports", "that", "the", "their", "then", "this", "those", "timeline", "university", "universities", "was", "were", "what",
+  "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies", "subject", "subjects",
+  "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "was", "were", "what",
   "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
 ]);
 
@@ -700,7 +700,8 @@ function retrievalTokens(value) {
     .normalize("NFKD")
     .replace(/\p{M}+/gu, "")
     .toLocaleLowerCase("en-US")
-    .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)) || [];
+    .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
+    .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)) || [];
 }
 
 export function normalizeEvidencePhrases(values) {
@@ -730,6 +731,7 @@ function evidenceFieldValues(award) {
       award?.subagency,
       ...(Array.isArray(award?.program_codes) ? award.program_codes : []),
     ].map(value => clean(value, 500)).filter(Boolean).join(" "),
+    year: String(validYear(award?.award_year) || ""),
     investigators: (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
       .map(person => clean(person?.name, 300)).filter(Boolean).join(" "),
     institution: clean(award?.institution?.normalized_name || award?.institution?.name, 500),
@@ -742,6 +744,7 @@ function scoreEvidenceAward(award, phrases, requiredConcepts) {
     title: { token: 100, phrase: 180 },
     abstract: { token: 28, phrase: 55 },
     program: { token: 16, phrase: 32 },
+    year: { token: 12, phrase: 0 },
     investigators: { token: 4, phrase: 7 },
     institution: { token: 3, phrase: 5 },
   };

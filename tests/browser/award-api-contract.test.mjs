@@ -461,6 +461,7 @@ test("Worker validates bounded public requests and exposes no credential require
         concept_coverage: "all_substantive_query_concepts_same_record",
         maximum_phrases: 8,
         maximum_records: 24,
+        matched_facet_limit: 12,
         abstract_characters_per_record: 800,
         serialized_characters: 18000,
       },

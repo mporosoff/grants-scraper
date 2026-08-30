@@ -700,18 +700,19 @@
   function programOfficerRetrievalPhrases(question) {
     const ignored = new Set([
       "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts",
-      "college", "colleges", "count", "did", "does", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
+      "area", "areas", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
       "institution", "institutions", "investigator", "investigators",
-      "involve", "involved", "involves", "involving", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
+      "involve", "involved", "involves", "involving", "kind", "kinds", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
       "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
-      "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "then", "these",
+      "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
       "they", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
     ]);
     const tokens = clean(question, 1_000)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
-      .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !ignored.has(token)) || [];
+      .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
+      .filter(token => token.length >= 3 && !ignored.has(token)) || [];
     const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];

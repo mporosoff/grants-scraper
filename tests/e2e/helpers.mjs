@@ -472,15 +472,16 @@ export function mockAwards(target, {
         return;
       }
       const genericTerms = new Set([
-        "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "college", "colleges", "count", "did", "does",
+        "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields",
         "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
-        "involve", "involved", "involves", "involving", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source",
-        "study", "studies", "support", "supported", "supports", "that", "the", "their", "then", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when",
+        "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "subject", "subjects",
+        "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "was", "were", "what", "when",
         "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
       ]);
       const evidenceTokens = value => String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
-        .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
+        .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
+        .filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
       const requiredConcepts = [...new Set(body.phrases.flatMap(evidenceTokens))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
@@ -489,6 +490,7 @@ export function mockAwards(target, {
           record.program_name,
           record.activity_code,
           record.subagency,
+          record.award_year,
           ...(record.program_codes || []),
           ...(record.principal_investigators || []).map(person => person.name),
           record.institution?.normalized_name || record.institution?.name,
