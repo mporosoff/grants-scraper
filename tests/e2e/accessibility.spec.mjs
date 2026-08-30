@@ -244,7 +244,7 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.locator("#add-researcher").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
-  await expect(page.getByLabel("Choose a researcher")).toBeVisible();
+  await expect(page.getByLabel("Search Hajim faculty at the University of Rochester")).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
   await page.locator("#add-researcher").click();
   await addDepartmentResearcher(page, 0);

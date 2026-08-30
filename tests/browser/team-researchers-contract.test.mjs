@@ -74,19 +74,21 @@ function buildIndex(records, query) {
 
 test("wires the researcher picker and editor into a syntactically valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
+  assert.match(teamPage, /id="add-external-researcher"/);
   assert.match(teamPage, /id="researcher-picker"/);
-  assert.match(teamPage, /id="researcher-choice"/);
-  assert.match(teamPage, /id="choose-researcher"/);
+  assert.match(teamPage, /id="researcher-search"[^>]+role="combobox"/);
+  assert.match(teamPage, /id="researcher-options" role="listbox"/);
   assert.match(teamPage, /id="external-researcher-form"/);
   assert.match(teamPage, /id="external-orcid"/);
   assert.match(teamPage, /id="import-external-orcid"/);
   assert.match(teamPage, /assets\/orcid\.js/);
   assert.match(teamPage, /assets\/team-researchers\.js/);
+  assert.match(teamPage, /assets\/hajim-faculty-directory\.js/);
   assert.match(teamPage, /assets\/team-matcher\.js/);
   assert.match(teamPage, /assets\/search-retrieval\.js/);
   assert.match(teamPage, /assets\/search-hybrid\.js/);
   assert.match(teamPage, /assets\/team-hybrid\.js/);
-  assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API, \{ catalogRole: "parent" \}\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
   assert.match(teamPage, /function opportunityCard/);
@@ -112,35 +114,33 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with one Add researcher control instead of a department pill wall", () => {
+test("starts with unified Hajim search and separate external controls instead of a faculty wall", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
-  assert.match(grid, />\s*Add researcher\s*<\/button>/);
-  assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
+  assert.match(grid, />\s*Search Hajim faculty\s*<\/button>/);
+  assert.match(grid, />\s*Add an external researcher\s*<\/button>/);
+  assert.equal((grid.match(/class="pi-toggle/g) || []).length, 2);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
-  assert.match(teamPage, /facultyGroup\.label = "Department faculty"/);
-  assert.match(teamPage, /savedGroup\.label = "Saved researchers"/);
-  assert.match(teamPage, /newGroup\.label = "Add a new researcher"/);
-  assert.match(teamPage, /selected\.indexOf\(name\) === -1/);
-  assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
+  assert.doesNotMatch(teamPage, /<select[^>]+researcher-choice|facultyGroup\.label/);
+  assert.match(teamPage, /HAJIM_API\.search\(hajimDirectory, query/);
+  assert.match(teamPage, /limit: HAJIM_API\.MAX_RESULTS/);
+  assert.match(teamPage, /Add saved " \+ profile\.name/);
 });
 
-test("opens the researcher picker without forcing the native select open", () => {
+test("opens and lazy-loads the accessible faculty typeahead", () => {
   assert.match(teamPage, /picker\.hidden = !opening/);
-  assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
-  const newResearcher = teamPage.indexOf('newGroup.label = "Add a new researcher"');
-  const faculty = teamPage.indexOf('facultyGroup.label = "Department faculty"');
-  const saved = teamPage.indexOf('savedGroup.label = "Saved researchers"');
-  assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
+  assert.match(teamPage, /function ensureFacultyDirectory\(\)/);
+  assert.match(teamPage, /HAJIM_API\.load\(\)/);
+  assert.match(teamPage, /\$\("researcher-search"\)\.focus\(\)/);
+  assert.match(teamPage, /aria-autocomplete="list"/);
+  assert.match(teamPage, /aria-activedescendant/);
 });
 
-test("shows an accessible progress state while adding a researcher", () => {
+test("announces loading, search results, selection, and recoverable directory failures", () => {
   assert.match(teamPage, /id="researcher-picker-status" role="status" aria-live="polite"/);
-  assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
-  assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
-  assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
-  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
-  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
-  assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+  assert.match(teamPage, /Loading the reviewed Hajim faculty directory/);
+  assert.match(teamPage, /suggestion.*Use arrow keys and Enter to select/);
+  assert.match(teamPage, /was added\. Search for another researcher/);
+  assert.match(teamPage, /directory could not be loaded.*add an external researcher/i);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {
@@ -156,8 +156,8 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
 });
 
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {
-  assert.match(teamPage, /function chooseResearcher\(\)/);
-  assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
+  assert.match(teamPage, /function addHajimResearcher\(member\)/);
+  assert.match(teamPage, /selected\.indexOf\(member\) !== -1/);
   assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
   assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
   assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
@@ -167,14 +167,14 @@ test("supports repeated selection, removal, editing, and the four-person maximum
   assert.match(teamPage, /ORCID_API\.fetchProfile/);
 });
 
-test("uses neutral visitor-facing researcher terminology", () => {
+test("uses the requested external-researcher path and preserves local-only privacy messaging", () => {
   const visibleText = teamPage
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ");
-  assert.doesNotMatch(visibleText, /\b(?:internal|external)\b/i);
   assert.doesNotMatch(teamPage, /\(internal\)/i);
+  assert.match(visibleText, /Add an external researcher/);
   assert.match(visibleText, /Researchers you add are saved only in this browser/);
 });
 
@@ -254,6 +254,7 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         title: "Data-driven reaction discovery",
         description: "Catalytic conversion, reaction kinetics, and machine learning catalyst screening.",
         topic_areas: ["Catalysis and reaction engineering", "Artificial intelligence and machine learning"],
+        status: "posted",
         posted_date: "2026-08-08",
         close_date: "2026-08-20",
       },
@@ -262,6 +263,7 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         title: "General materials program",
         description: "A broad program for technology development.",
         topic_areas: ["Materials science", "Technology development"],
+        status: "posted",
         posted_date: "2026-08-09",
         close_date: "2026-10-01",
       },
@@ -271,6 +273,7 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         description: "Meritorious research across a spectrum of science and engineering.",
         agency: "Office of Naval Research",
         topic_areas: [],
+        status: "posted",
         posted_date: "2025-01-01",
         close_date: "2026-10-01",
       },

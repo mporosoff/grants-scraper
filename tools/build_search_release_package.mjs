@@ -20,9 +20,40 @@ const WORKER_SOURCE_PATH = "workers/search-voyage-proxy/src/index.js";
 const REQUIRED_MODEL = "voyage-4-lite";
 const REQUIRED_DIMENSION = 1024;
 const execFileAsync = promisify(execFile);
+const TEAM_RUNTIME_ASSETS = [
+  { path: "data/faculty_matches.js", prefix: "faculty-matches" },
+  { path: "assets/hajim-faculty-directory.js", prefix: "hajim-faculty-directory" },
+  { path: "assets/team-matcher.js", prefix: "team-matcher" },
+];
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
+}
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function synchronizeTeamRuntimeCacheKeys(write) {
+  let page = await readFile(new URL("team_match.html", ROOT), "utf8");
+  const original = page;
+  const cacheKeys = {};
+  for (const asset of TEAM_RUNTIME_ASSETS) {
+    const digest = sha256(await read(asset.path));
+    const cacheKey = `${asset.prefix}-${digest.slice(0, 16)}`;
+    cacheKeys[asset.path] = cacheKey;
+    const pattern = new RegExp(`((?:\\./)?${escapeRegex(asset.path)}\\?v=)[^"'\\s<>]+`, "g");
+    const matches = [...page.matchAll(pattern)];
+    if (matches.length !== 1) {
+      throw new Error(`team_match.html must publish exactly one versioned ${asset.path} reference.`);
+    }
+    page = page.replace(pattern, `$1${cacheKey}`);
+  }
+  if (page !== original) {
+    if (!write) throw new Error("Team Match runtime cache keys do not match their content hashes.");
+    await writeFile(new URL("team_match.html", ROOT), page, "utf8");
+  }
+  return cacheKeys;
 }
 
 async function read(path) {
@@ -187,6 +218,7 @@ async function run() {
   const bootstrapIndex = process.argv.indexOf("--bootstrap-previous");
   const bootstrapRevision = bootstrapIndex >= 0 ? process.argv[bootstrapIndex + 1] : "";
   if (bootstrapIndex >= 0 && !bootstrapRevision) throw new Error("--bootstrap-previous requires a Git revision.");
+  const runtimeCacheKeys = await synchronizeTeamRuntimeCacheKeys(write);
   const bootstrapPromise = bootstrapRevision
     ? execFileAsync("git", ["show", `${bootstrapRevision}:${MANIFEST_PATH}`], { cwd: new URL(".", ROOT) })
       .then(({ stdout }) => JSON.parse(stdout))
@@ -206,6 +238,8 @@ async function run() {
     "data/opportunities.js",
     "data/catalog-metadata.js",
     "data/subtopics.js",
+    "data/faculty_matches.js",
+    "data/hajim-faculty-directory.js",
     MANIFEST_PATH,
     VECTOR_PATH,
     CANARY_PATH,
@@ -217,6 +251,9 @@ async function run() {
     "assets/search-retrieval.js",
     "assets/subtopic-runtime.js",
     "assets/team-hybrid.js",
+    "assets/team-researchers.js",
+    "assets/team-matcher.js",
+    "assets/hajim-faculty-directory.js",
     "match_explorer.html",
     "team_match.html",
     WORKER_SOURCE_PATH,
@@ -233,8 +270,9 @@ async function run() {
     model_space_fingerprint: manifest.model_space_fingerprint || null,
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
+    runtime_cache_keys: runtimeCacheKeys,
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + Team Match faculty assets + content-versioned Team Match runtimes + manifest + vectors + model-space canaries + Worker allowlist",
   };
   const releaseBytes = jsonBytes(release);
 

@@ -17,6 +17,7 @@ faculty.csv
 !/data/source_records.json
 !/data/link_health.json
 !/data/faculty_matches.js
+!/data/hajim-faculty-directory.js
 # Added ahead of the cache itself: /data/* is deny-by-default, so a new cache
 # file is invisible to git, and `git add` on an ignored path exits non-zero --
 # which aborts the workflow's commit step and stops the nightly publishing
