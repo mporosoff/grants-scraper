@@ -1086,9 +1086,12 @@
   }
 
   function chooseResearcher() {
-    var member = $("researcher-choice").value;
+    var choice = $("researcher-choice");
+    var member = choice.value;
     if (!member) return;
     if (member === "__new__") {
+      choice.value = "";
+      $("choose-researcher").disabled = true;
       $("researcher-picker").hidden = true;
       openExternalEditor("");
       return;

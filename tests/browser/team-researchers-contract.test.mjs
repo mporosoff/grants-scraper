@@ -135,7 +135,7 @@ test("opens the researcher picker without forcing the native select open", () =>
 
 test("selecting the new external researcher option opens its editor without an extra add click", () => {
   assert.match(teamPage, /\$\("researcher-choice"\)\.addEventListener\("change", function \(\) \{[\s\S]*?value === "__new__"[\s\S]*?chooseResearcher\(\);[\s\S]*?return;/);
-  assert.match(teamPage, /if \(member === "__new__"\) \{[\s\S]*?openExternalEditor\(""\);[\s\S]*?return;/);
+  assert.match(teamPage, /if \(member === "__new__"\) \{[\s\S]*?choice\.value = "";[\s\S]*?\$\("choose-researcher"\)\.disabled = true;[\s\S]*?openExternalEditor\(""\);[\s\S]*?return;/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
 
