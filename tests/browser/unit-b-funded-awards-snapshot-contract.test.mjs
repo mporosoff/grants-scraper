@@ -189,6 +189,20 @@ test("Unit B partial semantics never invent an exact total and a successor retai
   assert.equal(first.exact_total, null);
   assert.equal(first.at_least, 1);
   assert.equal(first.sources.find(source => source.source === "NIH").status, "unavailable");
+  const timedOutDoe = snapshot({
+    NSF: nsf,
+    DOE: { source: "DOE", status: "unavailable", error: { code: "source_timeout" } },
+  }, ["NSF", "DOE"]);
+  assert.equal(timedOutDoe.completeness, "partial");
+  assert.equal(timedOutDoe.exact_total, null);
+  assert.equal(timedOutDoe.at_least, 1);
+  assert.deepEqual(timedOutDoe.sources.find(source => source.source === "DOE"), {
+    source: "DOE",
+    status: "unavailable",
+    result_count: 0,
+    total_count: null,
+    error: { code: "source_timeout" },
+  });
   const recoveredNih = sourcePayload("NIH", [award(2, "NIH")]);
   const successor = snapshot({ NSF: { ...first.source_metadata.NSF, results: first.awards.filter(item => item.source === "NSF") }, NIH: recoveredNih }, ["NSF", "NIH"]);
   assert.equal(successor.completeness, "complete");
@@ -330,7 +344,7 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
   assert.match(fundedAwards, /ai-provider\.js\?v=ai-additive-20260829/);
   assert.match(fundedAwards, /institutional-intelligence\.css\?v=presentation-cleanup-20260830/);
-  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=presentation-cleanup-20260830/);
+  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=live-award-loading-20260830/);
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundingFinder, /app\.css\?v=compact-match-count-size-20260830/);
