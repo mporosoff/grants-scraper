@@ -21,7 +21,7 @@ export const DOE_MAX_OFFSET = 100;
 export const DOE_MAX_UPSTREAM_PAGES = 10;
 export const DOE_SEARCH_REQUEST_TIMEOUT_MS = 30_000;
 export const DOE_PAGE_REQUEST_TIMEOUT_MS = 30_000;
-export const DOE_SCAN_BUDGET_MS = 100_000;
+export const DOE_OPERATION_BUDGET_MS = 100_000;
 
 const DOE_HOST = "pamspublic.science.energy.gov";
 export const DOE_REQUEST_TIMEOUT_MS = 15_000;
@@ -377,7 +377,13 @@ export function normalizeDoeAward(raw, { retrievedAt, abstract = null } = {}) {
   });
 }
 
-async function postPage(fetchImpl, html, target) {
+function boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout) {
+  const remaining = Math.floor(operationDeadline - monotonicNow());
+  if (remaining <= 0) throw new AwardSourceError("source_timeout");
+  return Math.min(maximumTimeout, remaining);
+}
+
+async function postPage(fetchImpl, html, target, timeoutMs = DOE_PAGE_REQUEST_TIMEOUT_MS) {
   const params = hiddenForm(html);
   params.set("__EVENTTARGET", target);
   params.set("__EVENTARGUMENT", "");
@@ -385,11 +391,11 @@ async function postPage(fetchImpl, html, target) {
     method: "POST",
     headers: { ...REQUEST_HEADERS, "Content-Type": "application/x-www-form-urlencoded" },
     body: params.toString(),
-  }, { timeoutMs: DOE_PAGE_REQUEST_TIMEOUT_MS });
+  }, { timeoutMs });
   return body;
 }
 
-async function enrichAbstracts(fetchImpl, records, sleep) {
+async function enrichAbstracts(fetchImpl, records, sleep, { monotonicNow, operationDeadline }) {
   const enriched = [];
   let requested = 0;
   let loaded = 0;
@@ -399,10 +405,15 @@ async function enrichAbstracts(fetchImpl, records, sleep) {
     const values = await Promise.all(batch.map(async raw => {
       if (!raw.abstract_url) return { raw, abstract: null };
       requested += 1;
+      const remaining = Math.floor(operationDeadline - monotonicNow());
+      if (remaining <= 0) {
+        failed += 1;
+        return { raw, abstract: null };
+      }
       try {
         const { body } = await fetchSourceText(fetchImpl, raw.abstract_url, {
           headers: REQUEST_HEADERS,
-        }, { timeoutMs: DOE_REQUEST_TIMEOUT_MS });
+        }, { timeoutMs: Math.min(DOE_REQUEST_TIMEOUT_MS, remaining) });
         const abstract = parseDoeAbstract(body, raw.award_id);
         loaded += 1;
         return { raw, abstract };
@@ -426,7 +437,7 @@ export async function searchDoe(fetchImpl, criteria, {
   scanAll = false,
   includeAbstracts = true,
 } = {}) {
-  const scanStartedAt = monotonicNow();
+  const operationDeadline = monotonicNow() + DOE_OPERATION_BUDGET_MS;
   if (!scanAll && limit > DOE_MAX_RESULTS) unsupported();
   const retrievedAt = now().toISOString();
   const yearRange = requestedYearRange(criteria);
@@ -447,13 +458,13 @@ export async function searchDoe(fetchImpl, criteria, {
 
   const { body: searchForm } = await fetchSourceText(fetchImpl, DOE_SEARCH_URL, {
     headers: REQUEST_HEADERS,
-  }, { timeoutMs: DOE_REQUEST_TIMEOUT_MS });
+  }, { timeoutMs: boundedRequestTimeout(monotonicNow, operationDeadline, DOE_REQUEST_TIMEOUT_MS) });
   const form = buildDoeSearchForm(searchForm, criteria);
   const { body: firstPageHtml } = await fetchSourceText(fetchImpl, DOE_SEARCH_URL, {
     method: "POST",
     headers: { ...REQUEST_HEADERS, "Content-Type": "application/x-www-form-urlencoded" },
     body: form.toString(),
-  }, { timeoutMs: DOE_SEARCH_REQUEST_TIMEOUT_MS });
+  }, { timeoutMs: boundedRequestTimeout(monotonicNow, operationDeadline, DOE_SEARCH_REQUEST_TIMEOUT_MS) });
   const firstPage = parseDoeSearchResults(firstPageHtml);
   if (!scanAll && !criteria._institution && !yearRange.active) {
     const firstNeededPage = Math.floor(offset / firstPage.page_size) + 1;
@@ -466,7 +477,12 @@ export async function searchDoe(fetchImpl, criteria, {
       if (pages.has(page) || page > firstPage.page_count) continue;
       const target = currentParsed.page_targets[page];
       if (!target) sourceInvalid();
-      currentHtml = await postPage(fetchImpl, currentHtml, target);
+      currentHtml = await postPage(
+        fetchImpl,
+        currentHtml,
+        target,
+        boundedRequestTimeout(monotonicNow, operationDeadline, DOE_PAGE_REQUEST_TIMEOUT_MS),
+      );
       currentParsed = parseDoeSearchResults(currentHtml);
       pages.set(page, { html: currentHtml, parsed: currentParsed });
     }
@@ -482,7 +498,7 @@ export async function searchDoe(fetchImpl, criteria, {
       const record = positioned.get(index);
       if (record) selected.push(record);
     }
-    const abstracts = await enrichAbstracts(fetchImpl, selected, sleep);
+    const abstracts = await enrichAbstracts(fetchImpl, selected, sleep, { monotonicNow, operationDeadline });
     return {
       source: "DOE",
       adapter_version: DOE_ADAPTER_VERSION,
@@ -558,7 +574,7 @@ export async function searchDoe(fetchImpl, criteria, {
         ? DOE_SEARCH_REQUEST_TIMEOUT_MS
         : query.fetched ? DOE_PAGE_REQUEST_TIMEOUT_MS : 0;
       if (scanAll && nextRequestTimeout
-        && monotonicNow() - scanStartedAt + nextRequestTimeout > DOE_SCAN_BUDGET_MS) {
+        && operationDeadline - monotonicNow() < nextRequestTimeout) {
         scanBudgetReached = true;
         break scan;
       }
@@ -569,7 +585,13 @@ export async function searchDoe(fetchImpl, criteria, {
             method: "POST",
             headers: { ...REQUEST_HEADERS, "Content-Type": "application/x-www-form-urlencoded" },
             body: queryForm.toString(),
-          }, { timeoutMs: DOE_SEARCH_REQUEST_TIMEOUT_MS });
+          }, {
+            timeoutMs: boundedRequestTimeout(
+              monotonicNow,
+              operationDeadline,
+              DOE_SEARCH_REQUEST_TIMEOUT_MS,
+            ),
+          });
           query.html = response.body;
           query.parsed = parseDoeSearchResults(query.html);
         }
@@ -577,7 +599,12 @@ export async function searchDoe(fetchImpl, criteria, {
         const nextPage = query.pages + 1;
         const target = query.parsed.page_targets[nextPage];
         if (!target) sourceInvalid();
-        query.html = await postPage(fetchImpl, query.html, target);
+        query.html = await postPage(
+          fetchImpl,
+          query.html,
+          target,
+          boundedRequestTimeout(monotonicNow, operationDeadline, DOE_PAGE_REQUEST_TIMEOUT_MS),
+        );
         query.parsed = parseDoeSearchResults(query.html);
       }
       if (query.total === null) query.total = query.parsed.total_count;
@@ -598,7 +625,7 @@ export async function searchDoe(fetchImpl, criteria, {
     && (upstreamPages >= DOE_MAX_UPSTREAM_PAGES || scanBudgetReached);
   const selected = scanAll ? sourceScoped : sourceScoped.slice(offset, offset + limit);
   const abstracts = includeAbstracts
-    ? await enrichAbstracts(fetchImpl, selected, sleep)
+    ? await enrichAbstracts(fetchImpl, selected, sleep, { monotonicNow, operationDeadline })
     : { enriched: selected.map(raw => ({ raw, abstract: null })), requested: 0, loaded: 0, failed: 0 };
   const results = abstracts.enriched.map(({ raw, abstract }) => {
     const award = normalizeDoeAward(raw, { retrievedAt, abstract });
