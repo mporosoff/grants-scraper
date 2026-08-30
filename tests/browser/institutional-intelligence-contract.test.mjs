@@ -325,6 +325,8 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
+  assert.match(page, /id="ii-institution"[^>]*placeholder="Try URochester, MIT, JHU, or a full name"/);
+  assert.doesNotMatch(page, /id="ii-institution"[^>]*placeholder="[^"]*RIT/);
   assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
   assert.match(page, /id="ii-search"[^>]*aria-busy="false"[\s\S]*class="find-button-spinner ii-search-spinner hidden" id="ii-search-spinner"[^>]*aria-hidden="true"[\s\S]*id="ii-search-label">Search funded awards/);
   assert.match(styles, /\.ii-search-spinner\s*\{[^}]*display:\s*inline-block/);

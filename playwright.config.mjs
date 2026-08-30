@@ -24,7 +24,7 @@ export default defineConfig({
   webServer: process.env.E2E_EXTERNAL_SERVER === "1" ? undefined : {
     command: "node tests/e2e/static-server.mjs",
     url: `http://127.0.0.1:${e2ePort}/match_explorer.html`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: process.env.E2E_REUSE_SERVER === "1",
     timeout: 120_000,
   },
 });
