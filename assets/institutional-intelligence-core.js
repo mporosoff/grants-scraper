@@ -708,16 +708,16 @@
       "pi", "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
     ]);
     const shortNoise = new Set(["am", "an", "as", "at", "be", "by", "do", "he", "if", "in", "is", "it", "me", "my", "of", "oh", "ok", "on", "or", "so", "to", "up", "us", "we"]);
-    const collidingElementSymbols = new Set(["Am", "As", "At", "Be", "He", "In"]);
-    const scientificShorts = new Set((clean(question, 1_000)
+    const caseSensitiveScientificSymbols = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
+    const questionSourceTokens = (clean(question, 1_000)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
-      .match(/[\p{L}\p{N}]+/gu) || [])
+      .match(/[\p{L}\p{N}]+/gu) || []);
+    const scientificShorts = new Set(questionSourceTokens
       .filter(token => token.length === 2 && (
         /^[A-Z0-9]{2}$/u.test(token)
         || /\d/u.test(token)
-        || token === "pH"
-        || collidingElementSymbols.has(token)
+        || caseSensitiveScientificSymbols.has(token)
       ))
       .map(token => token.toLocaleLowerCase("en-US")));
     const normalizedTokens = (value, maximum) => clean(value, maximum)
@@ -761,7 +761,9 @@
       if (natural.length > 2) addNameSequence([natural[0], natural.at(-1)]);
     }
     nameSequences.sort((left, right) => right.length - left.length);
-    const questionTokens = stripLeadingRequest(normalizedTokens(question, 1_000));
+    const allQuestionTokens = normalizedTokens(question, 1_000);
+    const questionTokens = stripLeadingRequest(allQuestionTokens);
+    const strippedPrefixLength = allQuestionTokens.length - questionTokens.length;
     const removed = new Set();
     for (const sequence of nameSequences) {
       for (let index = 0; index <= questionTokens.length - sequence.length; index += 1) {
@@ -771,12 +773,20 @@
         }
       }
     }
-    const tokens = questionTokens.filter((token, index) => (
-      (token.length >= 3 || (token.length === 2 && (!shortNoise.has(token) || scientificShorts.has(token))))
-      && !removed.has(index)
-      && !ignored.has(token)
+    const tokens = questionTokens.map((token, index) => {
+      const sourceToken = questionSourceTokens[strippedPrefixLength + index] || "";
+      return {
+        key: caseSensitiveScientificSymbols.has(sourceToken) ? `case:${sourceToken}` : token,
+        output: caseSensitiveScientificSymbols.has(sourceToken) ? sourceToken : token,
+        token,
+        index,
+      };
+    }).filter(item => (
+      (item.token.length >= 3 || (item.token.length === 2 && (!shortNoise.has(item.token) || scientificShorts.has(item.token))))
+      && !removed.has(item.index)
+      && !ignored.has(item.token)
     ));
-    const unique = [...new Set(tokens)];
+    const unique = [...new Map(tokens.map(item => [item.key, item.output])).values()];
     if (!unique.length) return [];
     const phrases = [];
     for (const token of unique) {

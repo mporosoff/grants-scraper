@@ -8,8 +8,9 @@ export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
 export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
-export const SNAPSHOT_EVIDENCE_PHRASE_FORMAT = "normalized-concepts-v1";
+export const SNAPSHOT_EVIDENCE_PHRASE_FORMAT = "normalized-concepts-v2";
 const EN_COLLATOR = new Intl.Collator("en-US");
+const CASE_SENSITIVE_SCIENTIFIC_SYMBOLS = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
 const GENERIC_RETRIEVAL_TERMS = new Set([
   "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
   "find", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
@@ -696,17 +697,36 @@ function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
   };
 }
 
-function normalizedRetrievalTokens(value) {
-  return clean(value, 4_000)
+function retrievalTokenEntries(value) {
+  const sourceTokens = clean(value, 4_000)
     .normalize("NFKD")
     .replace(/\p{M}+/gu, "")
-    .toLocaleLowerCase("en-US")
-    .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
+    .match(/[\p{L}\p{N}]+/gu) || [];
+  return sourceTokens.map(source => {
+    const normalized = source.toLocaleLowerCase("en-US");
+    return {
+      source,
+      normalized: /^fy(?:19|20)\d{2}$/u.test(normalized) ? normalized.slice(2) : normalized,
+    };
+  });
+}
+
+function normalizedRetrievalTokens(value) {
+  return retrievalTokenEntries(value).map(entry => entry.normalized);
+}
+
+function queryConceptKey(entry) {
+  return CASE_SENSITIVE_SCIENTIFIC_SYMBOLS.has(entry.source) ? `case:${entry.source}` : entry.normalized;
 }
 
 function retrievalTokens(value) {
-  return normalizedRetrievalTokens(value)
-    .filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token));
+  const tokens = [];
+  for (const entry of retrievalTokenEntries(value)) {
+    if (entry.normalized.length < 2 || GENERIC_RETRIEVAL_TERMS.has(entry.normalized)) continue;
+    tokens.push(entry.normalized);
+    if (CASE_SENSITIVE_SCIENTIFIC_SYMBOLS.has(entry.source)) tokens.push(`case:${entry.source}`);
+  }
+  return [...new Set(tokens)];
 }
 
 function officerNameSequences(displayName) {
@@ -736,17 +756,17 @@ function officerNameSequences(displayName) {
   return sequences.sort((left, right) => right.length - left.length);
 }
 
-function stripOfficerNameOccurrences(tokens, sequences) {
+function stripOfficerNameOccurrences(entries, sequences) {
   const removed = new Set();
   for (const sequence of sequences) {
-    for (let index = 0; index <= tokens.length - sequence.length; index += 1) {
-      if (sequence.every((token, offset) => !removed.has(index + offset) && tokens[index + offset] === token)) {
+    for (let index = 0; index <= entries.length - sequence.length; index += 1) {
+      if (sequence.every((token, offset) => !removed.has(index + offset) && entries[index + offset].normalized === token)) {
         sequence.forEach((_token, offset) => removed.add(index + offset));
         index += sequence.length - 1;
       }
     }
   }
-  return tokens.filter((_token, index) => !removed.has(index));
+  return entries.filter((_entry, index) => !removed.has(index));
 }
 
 export function normalizeEvidencePhrases(values) {
@@ -757,12 +777,14 @@ export function normalizeEvidencePhrases(values) {
     if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
     const text = clean(value, 120);
     if (!text) return null;
-    const rawTokens = normalizedRetrievalTokens(text);
-    const tokens = [...new Set(rawTokens.filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
+    const rawEntries = retrievalTokenEntries(text);
+    const tokens = [...new Set(rawEntries
+      .filter(entry => entry.normalized.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(entry.normalized))
+      .map(queryConceptKey))];
     const key = tokens.join(" ");
     if (!key || seen.has(key)) continue;
     seen.add(key);
-    phrases.push({ key, tokens, raw_tokens: rawTokens });
+    phrases.push({ key, tokens, raw_entries: rawEntries });
   }
   return phrases.length ? phrases : [];
 }
@@ -868,8 +890,9 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
   const seenPhrases = new Set();
   const normalizedPhrases = [];
   for (const phrase of submittedPhrases) {
-    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_tokens, nameSequences)
-      .filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
+    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_entries, nameSequences)
+      .filter(entry => entry.normalized.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(entry.normalized))
+      .map(queryConceptKey))];
     const key = tokens.join(" ");
     if (!key || seenPhrases.has(key)) continue;
     seenPhrases.add(key);

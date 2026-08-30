@@ -462,7 +462,7 @@ export function mockAwards(target, {
     }
     if (requestUrl.pathname === "/awards/snapshots/evidence" && request.method() === "POST") {
       snapshotEvidenceCallCount += 1;
-      if (body.phrase_format !== "normalized-concepts-v1") {
+      if (body.phrase_format !== "normalized-concepts-v2") {
         await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_request" } }) });
         return;
       }
@@ -482,28 +482,39 @@ export function mockAwards(target, {
         "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what", "when",
         "there", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
       ]);
-      const normalizedEvidenceTokens = value => String(value || "")
-        .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
-        .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
-      const evidenceTokens = value => normalizedEvidenceTokens(value)
-        .filter(token => token.length >= 2 && !genericTerms.has(token));
+      const caseSensitiveScientificSymbols = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
+      const evidenceTokenEntries = value => (String(value || "")
+        .normalize("NFKD").replace(/\p{M}+/gu, "")
+        .match(/[\p{L}\p{N}]+/gu) || []).map(source => {
+          const lowered = source.toLowerCase();
+          return { source, normalized: /^fy(?:19|20)\d{2}$/u.test(lowered) ? lowered.slice(2) : lowered };
+        });
+      const normalizedEvidenceTokens = value => evidenceTokenEntries(value).map(entry => entry.normalized);
+      const queryConceptKey = entry => caseSensitiveScientificSymbols.has(entry.source) ? `case:${entry.source}` : entry.normalized;
+      const evidenceTokens = value => evidenceTokenEntries(value).flatMap(entry => {
+        if (entry.normalized.length < 2 || genericTerms.has(entry.normalized)) return [];
+        return caseSensitiveScientificSymbols.has(entry.source)
+          ? [entry.normalized, `case:${entry.source}`]
+          : [entry.normalized];
+      });
       const lockedName = normalizedEvidenceTokens(snapshot.program_officer.display_name);
       const nameSequences = lockedName.length >= 2 ? [lockedName, [...lockedName].reverse()] : [];
-      const stripNameOccurrences = tokens => {
+      const stripNameOccurrences = entries => {
         const removed = new Set();
         for (const sequence of nameSequences) {
-          for (let index = 0; index <= tokens.length - sequence.length; index += 1) {
-            if (sequence.every((token, offset) => !removed.has(index + offset) && tokens[index + offset] === token)) {
+          for (let index = 0; index <= entries.length - sequence.length; index += 1) {
+            if (sequence.every((token, offset) => !removed.has(index + offset) && entries[index + offset].normalized === token)) {
               sequence.forEach((_token, offset) => removed.add(index + offset));
               index += sequence.length - 1;
             }
           }
         }
-        return tokens.filter((_token, index) => !removed.has(index));
+        return entries.filter((_entry, index) => !removed.has(index));
       };
       const requiredConcepts = [...new Set(body.phrases
-        .flatMap(phrase => stripNameOccurrences(normalizedEvidenceTokens(phrase)))
-        .filter(token => token.length >= 2 && !genericTerms.has(token)))];
+        .flatMap(phrase => stripNameOccurrences(evidenceTokenEntries(phrase)))
+        .filter(entry => entry.normalized.length >= 2 && !genericTerms.has(entry.normalized))
+        .map(queryConceptKey))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
           record.title,

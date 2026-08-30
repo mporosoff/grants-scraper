@@ -9,7 +9,7 @@ extended through the isolated DOE adapter in Phase 4. It exposes:
   server-authoritative result snapshots;
 - `POST /awards/snapshots/evidence` for bounded deterministic retrieval over
   an unexpired Program Officer snapshot. Evidence requests declare
-  `"phrase_format": "normalized-concepts-v1"`; phrases are browser-normalized
+  `"phrase_format": "normalized-concepts-v2"`; phrases are browser-normalized
   substantive concepts and are not reinterpreted as raw questions; and
 - `GET /health` for the enabled sources, adapter versions, cache ceiling, and
   credential requirement only.

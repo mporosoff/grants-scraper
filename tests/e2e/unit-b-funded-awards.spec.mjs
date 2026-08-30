@@ -641,7 +641,7 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await expect(page.locator("#ii-direct-answer")).toContainText("No related project");
   const shortConceptCalls = calls.filter(call => Array.isArray(call.phrases));
   expect(shortConceptCalls).toHaveLength(7);
-  expect(shortConceptCalls.at(-1)).toMatchObject({ phrases: ["ai"], phrase_format: "normalized-concepts-v1" });
+  expect(shortConceptCalls.at(-1)).toMatchObject({ phrases: ["ai"], phrase_format: "normalized-concepts-v2" });
 
   const evidenceCalls = calls.filter(call => Array.isArray(call.phrases)).length;
   const overCapacityQuestion = `Which projects involve ${Array.from({ length: 9 }, (_, index) => String.fromCharCode(97 + index).repeat(105)).join(" ")}?`;
