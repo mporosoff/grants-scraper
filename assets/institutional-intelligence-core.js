@@ -705,8 +705,9 @@
       "involve", "involved", "involves", "involving", "kind", "kinds", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
       "find", "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
       "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
-      "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
+      "pi", "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
     ]);
+    const shortNoise = new Set(["am", "an", "as", "at", "be", "by", "do", "he", "if", "in", "is", "it", "me", "my", "of", "oh", "ok", "on", "or", "so", "to", "up", "us", "we"]);
     const normalizedTokens = (value, maximum) => clean(value, maximum)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
@@ -758,7 +759,11 @@
         }
       }
     }
-    const tokens = questionTokens.filter((token, index) => token.length >= 3 && !removed.has(index) && !ignored.has(token));
+    const tokens = questionTokens.filter((token, index) => (
+      (token.length >= 3 || (token.length === 2 && !shortNoise.has(token)))
+      && !removed.has(index)
+      && !ignored.has(token)
+    ));
     const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];

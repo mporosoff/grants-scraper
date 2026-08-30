@@ -486,7 +486,7 @@ export function mockAwards(target, {
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
         .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
       const evidenceTokens = value => normalizedEvidenceTokens(value)
-        .filter(token => token.length >= 3 && !genericTerms.has(token));
+        .filter(token => token.length >= 2 && !genericTerms.has(token));
       const lockedName = normalizedEvidenceTokens(snapshot.program_officer.display_name);
       const nameSequences = lockedName.length >= 2 ? [lockedName, [...lockedName].reverse()] : [];
       const stripNameOccurrences = tokens => {
@@ -503,7 +503,7 @@ export function mockAwards(target, {
       };
       const requiredConcepts = [...new Set(body.phrases
         .flatMap(phrase => stripNameOccurrences(normalizedEvidenceTokens(phrase)))
-        .filter(token => token.length >= 3 && !genericTerms.has(token)))];
+        .filter(token => token.length >= 2 && !genericTerms.has(token)))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
           record.title,

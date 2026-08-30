@@ -627,6 +627,7 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(6);
+
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
 
   const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);
@@ -634,6 +635,13 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await beyondPageLink.click();
   await expect(page.locator(`[data-evidence-id="${beyondId}"]`)).toBeFocused();
   await expect(page).toHaveURL(/ii_page=2/);
+
+  await page.locator("#ii-question").fill("Which projects involve AI?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("No related project");
+  const shortConceptCalls = calls.filter(call => Array.isArray(call.phrases));
+  expect(shortConceptCalls).toHaveLength(7);
+  expect(shortConceptCalls.at(-1)).toMatchObject({ phrases: ["ai"], phrase_format: "normalized-concepts-v1" });
 
   const evidenceCalls = calls.filter(call => Array.isArray(call.phrases)).length;
   const overCapacityQuestion = `Which projects involve ${Array.from({ length: 9 }, (_, index) => String.fromCharCode(97 + index).repeat(105)).join(" ")}?`;

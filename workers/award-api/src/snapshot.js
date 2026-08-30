@@ -706,7 +706,7 @@ function normalizedRetrievalTokens(value) {
 
 function retrievalTokens(value) {
   return normalizedRetrievalTokens(value)
-    .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token));
+    .filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token));
 }
 
 function officerNameSequences(displayName) {
@@ -758,7 +758,7 @@ export function normalizeEvidencePhrases(values) {
     const text = clean(value, 120);
     if (!text) return null;
     const rawTokens = normalizedRetrievalTokens(text);
-    const tokens = [...new Set(rawTokens.filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
+    const tokens = [...new Set(rawTokens.filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seen.has(key)) continue;
     seen.add(key);
@@ -869,7 +869,7 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
   const normalizedPhrases = [];
   for (const phrase of submittedPhrases) {
     const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_tokens, nameSequences)
-      .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
+      .filter(token => token.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seenPhrases.has(key)) continue;
     seenPhrases.add(key);
