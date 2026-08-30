@@ -1020,7 +1020,7 @@
       if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
       const current = formState();
-      const { provider, configured } = refreshProvider();
+      const { provider, configured } = refreshProvider({ preferMain: false });
       const key = credentials.loadKey(provider);
       let plan = { ...current };
       let translationFallback = !configured || !key;
