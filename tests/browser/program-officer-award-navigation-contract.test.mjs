@@ -278,6 +278,9 @@ test("topical evidence requires every substantive query concept in the same awar
     award(212, { title: "Semiconductor transport in devices", abstract: "General device physics." }),
     award(213, { title: "Semiconductor manufacturing", abstract: "In semiconductor manufacturing, process controls improve yield." }),
     award(214, { title: "Toxicity controls", abstract: "As toxicity increases, process controls improve." }),
+    award(216, { title: "In 2024 catalysis research", abstract: "Catalysis process controls." }),
+    award(217, { title: "In-doped catalysis", abstract: "Doped catalyst synthesis." }),
+    award(218, { title: "As (III) oxidation", abstract: "Oxidation-state measurements." }),
   ]);
   assert.deepEqual(
     snapshotEvidence(shortConcepts, { phrases: ["ai safety"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
@@ -293,6 +296,16 @@ test("topical evidence requires every substantive query concept in the same awar
     snapshotEvidence(shortConcepts, { phrases: ["In semiconductor"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
     ["NSF-211"],
     "an In concept is not satisfied by the ordinary preposition in",
+  );
+  assert.deepEqual(
+    snapshotEvidence(shortConcepts, { phrases: ["In catalysis"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-217"],
+    "a following year does not establish chemical notation while an adjacent -doped modifier does",
+  );
+  assert.deepEqual(
+    snapshotEvidence(shortConcepts, { phrases: ["As oxidation"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-218"],
+    "a compact Roman oxidation state establishes explicit chemical notation",
   );
   const longAbstract = `${"background context ".repeat(260)}terminalconcept evidence`;
   assert.ok(longAbstract.indexOf("terminalconcept") > 4_000 && longAbstract.length < SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT);

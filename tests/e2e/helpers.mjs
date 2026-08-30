@@ -493,7 +493,9 @@ export function mockAwards(target, {
           return {
             source,
             normalized: /^fy(?:19|20)\d{2}$/u.test(lowered) ? lowered.slice(2) : lowered,
-            explicit_notation: /^\s*(?:[-+]|\(|\[|\{|\d)/u.test(after),
+            explicit_notation: /^(?:\d+(?:[+-])?|[+-])/u.test(after)
+              || /^-(?:based|containing|doped|rich|treated)\b/iu.test(after)
+              || /^\s*\(\s*(?:[IVX]{1,4}|[+-]?\d{1,2}[+-]?)\s*\)/u.test(after),
           };
         });
       };

@@ -717,7 +717,9 @@ function retrievalTokenEntries(value, maximum = 4_000) {
     return {
       source,
       normalized: /^fy(?:19|20)\d{2}$/u.test(normalized) ? normalized.slice(2) : normalized,
-      explicit_notation: /^\s*(?:[-+]|\(|\[|\{|\d)/u.test(after),
+      explicit_notation: /^(?:\d+(?:[+-])?|[+-])/u.test(after)
+        || /^-(?:based|containing|doped|rich|treated)\b/iu.test(after)
+        || /^\s*\(\s*(?:[IVX]{1,4}|[+-]?\d{1,2}[+-]?)\s*\)/u.test(after),
     };
   });
 }
