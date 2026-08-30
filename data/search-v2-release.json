@@ -10,7 +10,7 @@
   "passage_count": 1650,
   "worker_allowlist_sha256": "9b191bcd5b5f01b73d23b620021fad22f59701f1cbed0db0541b38d4e5d8e711",
   "runtime_cache_keys": {
-    "data/faculty_matches.js": "faculty-matches-a22aa1e86e001df2",
+    "data/faculty_matches.js": "faculty-matches-e3530df2a8df64b2",
     "assets/hajim-faculty-directory.js": "hajim-faculty-directory-cf42d377b409a563",
     "assets/team-matcher.js": "team-matcher-f633f5b54ff8e534"
   },
@@ -18,7 +18,7 @@
     "data/opportunities.js": "224e8474077c26f6e0463daf2e48009ea042210c04b9df89ba944ee42529b72f",
     "data/catalog-metadata.js": "ece1aff13ee4213d1f060994be3fc5dc09e0aa6bf388691a031bd6973d5f8969",
     "data/subtopics.js": "244b364304abea297fc85171e17931986a1e71eec612054f7f708e5577d9e164",
-    "data/faculty_matches.js": "a22aa1e86e001df2c8749642726e4bb6055961fe42526ebdbb073e6f1ee23133",
+    "data/faculty_matches.js": "e3530df2a8df64b2700be27974c6188f1de5998391386abd74adb78fad916177",
     "data/hajim-faculty-directory.js": "5b6176894b258223b04531ed7d736db86891272751329b4e8b43d638bd07683e",
     "data/search-v2-voyage-manifest.json": "9efe65e7bc5af5c141e39f29da679fbb386d36e13f365fdca9aa53b89af4e9e8",
     "data/search-v2-voyage-vectors.f16": "110d9b7585b0935fd20777271afdd1422e337ac0582f84db20617f4bd0bfa8d4",
@@ -35,7 +35,7 @@
     "assets/team-matcher.js": "f633f5b54ff8e53483aadf10d251d324d7c8da7dbbbb20d0b282d4546bf2ebc6",
     "assets/hajim-faculty-directory.js": "cf42d377b409a5633bb728023cb1e79068e7bad1bf8c6ebc7be50fc635d036ac",
     "match_explorer.html": "4822a6a501a879df83e6d4ae83fcc9081e5ba4426e5b942d6bab8cd4974db31c",
-    "team_match.html": "24d500059c1b1d2e0fa9570bc1c225195c0aead95790868a40a98716ba32d895",
+    "team_match.html": "891ab79516744ab9363f956110326ec0f774bdb0b4d86d42f6a8364561ae9eae",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
