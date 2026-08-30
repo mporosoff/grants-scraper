@@ -11,6 +11,27 @@ import {
   watchRuntimeErrors,
 } from "./helpers.mjs";
 
+async function mockNofoExtraction(page, text) {
+  await page.route("**/assets/nofo.js*", async route => {
+    const response = await route.fetch();
+    const source = await response.text();
+    const extracted = {
+      name: "matched-notice.pdf",
+      text,
+      pageCount: 2,
+      pagesRead: 2,
+      wordCount: text.split(/\s+/).filter(Boolean).length,
+      truncated: false,
+    };
+    const patched = source.replace(
+      /    extract,\r?\n/,
+      `    extract: async () => (${JSON.stringify(extracted)}),\n`,
+    );
+    if (patched === source) throw new Error("NOFO extraction mock did not attach");
+    await route.fulfill({ response, body: patched, contentType: "application/javascript" });
+  });
+}
+
 test("watchlist pursuit state stays local and saved-search alerts send only typed public criteria", async ({ page }) => {
   mockHybrid(page);
   const alertCalls = mockAlerts(page);
@@ -317,6 +338,18 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   expect(queryBox).not.toBeNull();
   expect(findBox.x).toBeGreaterThan(queryBox.x);
   expect(uploadBox.x).toBeGreaterThan(findBox.x);
+  expect(await page.locator("#nofo-drop-zone").evaluate(node => {
+    const order = [...node.children].map(child => child.id || child.getAttribute("for"));
+    const positions = [order.indexOf("query"), order.indexOf("find-funding"), order.indexOf("nofo-file")];
+    return positions.every(position => position >= 0)
+      && positions[0] < positions[1]
+      && positions[1] < positions[2];
+  })).toBe(true);
+  await query.focus();
+  await page.keyboard.press("Tab");
+  await expect(find).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#nofo-file")).toBeFocused();
 
   const refine = page.locator("#ai-refine");
   await expect(refine).toBeVisible();
@@ -498,39 +531,286 @@ test("Retry-After keeps Strong results visible and disables retry until the inte
   await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
 });
 
-test("AI broadening renders a newly retrieved candidate across actions, review, chat focus, CSV, and clear", async ({ page }) => {
+test("refinement awaits the one pending Potential request before capturing its ordinary baseline", async ({ page }) => {
+  const hybrid = mockHybrid(page, { rerankDelayMs: 4_000 });
+  const ai = await mockOpenAiBroadening(page);
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-pending-baseline-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("Waiting for the ordinary Potential search");
+  expect(ai.calls).toBe(0);
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+  expect(hybrid.embed).toHaveLength(1);
+  expect(hybrid.rerank).toHaveLength(1);
+  expect(ai.calls).toBe(2);
+  await expect(page.locator("#result-count")).toContainText(/\d+ strong · \d+ potential · \d+ AI identified/);
+  await page.locator("#restore-ai-refinement").click();
+  await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
+});
+
+test("generic-only and stale AI responses leave the ordinary baseline untouched", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const generic = await mockOpenAiBroadening(page, {
+    planTerms: ["research", "science", "technology", "health", "energy"],
+  });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  const baselineHeading = await page.locator("#result-count").textContent();
+  const baselineIds = await page.locator("#results .result-card").evaluateAll(cards => (
+    cards.map(card => card.dataset.opportunityId)
+  ));
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-generic-plan-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("no additional evidence-qualified opportunities");
+  expect(generic.calls).toBe(1);
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => (
+    cards.map(card => card.dataset.opportunityId)
+  ))).toEqual(baselineIds);
+
+  await page.unroute("https://api.openai.com/v1/responses");
+  const stale = await mockOpenAiBroadening(page, { planDelayMs: 500 });
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("Step 1 of 2");
+  await page.locator("#query").fill("a changed search that invalidates refinement");
+  await expect(page.locator("#ai-status")).toContainText("cleared because the search criteria changed");
+  await expect(page.locator("#ai-refine")).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run Find funding again");
+  await expect.poll(() => stale.calls).toBe(1);
+  await page.waitForTimeout(650);
+  expect(stale.calls).toBe(1);
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => (
+    cards.map(card => card.dataset.opportunityId)
+  ))).toEqual(baselineIds);
+});
+
+test("refinement sends only enabled profile context and honors the explicit CV-for-AI control", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const ai = await mockOpenAiBroadening(page);
+  await openFundingFinder(page);
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill(
+    "We develop heterogeneous catalysts and electrochemical reactors for carbon dioxide conversion.",
+  );
+  await page.locator("#expertise-keywords").fill(
+    "reaction engineering, catalysis, electrochemical conversion, porous materials",
+  );
+  await page.locator("#cv-file").setInputFiles("tests/fixtures/browser_cv.txt");
+  await expect(page.locator("#cv-status")).toContainText(/words/);
+  await page.locator("#include-cv-ai").uncheck();
+  await page.locator("#use-profile").check();
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-provider").selectOption("anthropic");
+  await page.locator("#k-key").fill("sk-ant-provider-choice-mock");
+  await expect(page.locator("#ai-refine")).toBeEnabled();
+  await page.locator("#k-provider").selectOption("openai");
+  await page.locator("#k-key").fill("sk-profile-boundary-mock");
+  await page.locator("#ai-refine").click();
+  await expect.poll(() => ai.calls).toBeGreaterThanOrEqual(1);
+  const context = ai.requests[0].researcher_profile;
+  expect(context.research_description).toContain("heterogeneous catalysts");
+  expect(context.expertise_keywords).toContain("reaction engineering");
+  expect(context.cv_excerpt).toBeUndefined();
+});
+
+test("refinement keeps both calls and provenance bound to its starting provider", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const ai = await mockOpenAiBroadening(page, { planDelayMs: 500 });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-provider-snapshot-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("Step 1 of 2");
+  await page.locator("#k-provider").selectOption("anthropic");
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+  expect(ai.calls).toBe(2);
+  await expect(page.locator("#k-provider")).toHaveValue("anthropic");
+  await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved");
+});
+
+test("editing an imported ORCID clears stale refinement and restores ordinary results", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  await page.route("https://api.crossref.org/works?*", route => route.fulfill({
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      message: {
+        "total-results": 1,
+        items: [{
+          title: ["Catalytic reaction engineering for carbon conversion"],
+          author: [{
+            given: "Josiah",
+            family: "Carberry",
+            ORCID: "https://orcid.org/0000-0002-1825-0097",
+          }],
+          subject: ["Catalysis", "Reaction engineering"],
+          published: { "date-parts": [[2026]] },
+        }],
+      },
+    }),
+  }));
+  await mockOpenAiBroadening(page);
+  await openFundingFinder(page);
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill("Catalytic reaction engineering and carbon conversion.");
+  await page.locator("#orcid-id").fill("0000-0002-1825-0097");
+  await page.locator("#import-orcid").click();
+  await expect(page.locator("#orcid-status")).toContainText("publications imported");
+  await page.locator("#use-profile").check();
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  const baselineHeading = await page.locator("#result-count").textContent();
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-orcid-invalidation-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+
+  await page.locator("#orcid-id").fill("0000-0001-5109-3700");
+  await expect(page.locator("#ai-status")).toContainText("cleared because the search criteria changed");
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run Find funding again");
+  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect(page.locator("#orcid-status")).toContainText("Select “Import ORCID”");
+});
+
+test("uploaded notice focus blocks refinement until the PDF is removed", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  await mockNofoExtraction(
+    page,
+    "[Page 1] Funding Opportunity 26-506 supports secure open-source research ecosystems. [Page 2] Applicants should verify all requirements in the official notice.",
+  );
+  await openFundingFinder(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-upload-focus-mock");
+  await page.locator("#nofo-file").setInputFiles({
+    name: "matched-notice.pdf",
+    mimeType: "application/pdf",
+    buffer: Buffer.from("%PDF-1.4 deterministic extraction mock"),
+  });
+  await expect(page.locator("#nofo-upload-status")).toContainText("Matched opportunity number 26-506");
+  await expect(page.locator("#results .result-card")).toHaveCount(1);
+  await expect(page.locator("#ai-refine")).toBeDisabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Remove the uploaded PDF");
+  await expect(page.locator("#nofo-chat-context [data-nofo-remove]")).toBeVisible();
+
+  await page.locator("#nofo-chat-context [data-nofo-remove]").click();
+  await expect(page.locator("#search-status")).toContainText("uploaded PDF was removed");
+  await expect(page.locator("#ai-refine")).toBeEnabled();
+});
+
+test("rerunning changed criteria clears stale chat focus while preserving the conversation", async ({ page }) => {
+  mockHybrid(page, { maxRankings: 0 });
+  const ai = await mockOpenAiBroadening(page, { chatResultAction: "focus" });
+  await openFundingFinder(page);
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await page.locator(".provider-setup > summary").click();
+  await page.locator("#k-key").fill("sk-focus-invalidation-mock");
+  await page.locator("#ai-refine").click();
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
+  await page.locator("#open-results-chat").click();
+  await page.locator("#chat-input").fill("Focus the result list on one supplied opportunity.");
+  await page.locator("#chat-submit").click();
+  await expect.poll(() => ai.chatRequests.length).toBe(1);
+  await expect(page.locator("#results .result-card")).toHaveCount(1);
+  const conversationCount = await page.locator("#chat-messages .message").count();
+  await page.locator("#toggle-chat-size").click();
+
+  await page.locator("#sort").selectOption("agency");
+  await expect.poll(() => page.locator("#results .result-card").count()).toBeGreaterThan(1);
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#chat-messages .message")).toHaveCount(conversationCount);
+  await expect(page.locator("#query")).toHaveValue("catalysis science");
+  await expect(page.locator("#k-key")).toHaveValue("sk-focus-invalidation-mock");
+});
+
+test("AI refinement adds locally Strong records and exact restoration preserves the ordinary baseline", async ({ page }) => {
   mockHybrid(page, { maxRankings: 0 });
   const ai = await mockOpenAiBroadening(page);
   await openFundingFinder(page, { evaluation: true });
+  await page.locator("#profile-builder > summary").click();
+  await page.locator("#research-profile").fill(
+    "A populated but disabled profile that must not affect AI expansion.",
+  );
+  await page.locator("#expertise-keywords").fill("biomaterials, tissue engineering");
+  await expect(page.locator("#use-profile")).not.toBeChecked();
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   const originalCount = await page.locator("#result-count").textContent();
   const originalPageIds = await page.locator("#results .result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
+  const originalCsv = await downloadText(page, "#export-csv");
+  const originalSort = await page.locator("#sort").inputValue();
 
   await page.locator(".provider-setup > summary").click();
   await page.locator("#k-key").fill("sk-gate4-browser-mock");
   await page.locator("#ai-refine").click();
-  await expect(page.locator("#ai-status")).toContainText("Shortlisted", { timeout: 30_000 });
+  await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
   expect(ai.calls).toBe(2);
-  expect(ai.candidate?.workflow_tier).toBe("ai_candidate");
-  await expect(page.locator("#results-mode")).toHaveText("AI-refined shortlist", { timeout: 30_000 });
+  expect(ai.requests[0].researcher_profile).toBeNull();
+  expect(ai.candidate?.workflow_tier).toBe("strong");
+  expect(ai.candidate?.ai_identified).toBe(true);
+  expect(ai.candidate?.ai_discovery_phrases.length).toBeGreaterThan(0);
+  await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved", { timeout: 30_000 });
   const candidate = page.locator(`[data-opportunity-id="${ai.candidate.id}"]`);
   await expect(candidate).toBeVisible();
-  await expect(candidate.getByText("AI-expanded candidate", { exact: true })).toBeVisible();
+  await expect(candidate.getByText("AI identified", { exact: true })).toBeVisible();
+  await expect(candidate.getByText("Strong match", { exact: true })).toBeVisible();
+  await expect(page.locator("#restore-ai-refinement")).toBeVisible();
+  await expect(page.locator("#ai-refine")).toBeDisabled();
+  const refinedCsv = await downloadText(page, "#export-csv");
+  for (const row of csvRows(originalCsv)) expect(csvRows(refinedCsv)).toContain(row);
+  expect(refinedCsv).toContain('"Strong","Yes"');
   await candidate.locator("[data-save]").click();
   await expect(candidate.locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
   await candidate.locator("details.record-details > summary").click();
   await expect(candidate.locator("details.record-details")).toHaveAttribute("open", "");
 
-  const aiCsv = await downloadText(page, "#export-csv");
-  expect(aiCsv).toContain('"AI-candidate"');
-  await page.locator("#evaluation-tools > summary").click();
-  await page.locator("#review-candidates").click();
-  await expect(page.locator(`[data-opportunity-id="${ai.candidate.id}"]`)).toBeVisible();
-  await page.locator(`[data-opportunity-id="${ai.candidate.id}"] [data-chat-record]`).click();
-  await expect(page.locator("#result-assistant")).toBeVisible();
-  await expect(page.locator(`[data-opportunity-id="${ai.candidate.id}"]`)).toBeVisible();
-  await page.locator("#clear-ai").click();
+  await page.locator("#open-results-chat").click();
+  await page.locator("#chat-input").fill("Compare the bounded active results.");
+  await page.locator("#chat-submit").click();
+  await expect.poll(() => ai.chatRequests.length).toBe(1);
+  await expect(page.locator("#chat-messages")).toContainText("mock answer is grounded");
+  expect(ai.chatRequests[0].current_results.length).toBeLessThanOrEqual(20);
+  expect(ai.chatRequests[0].current_results.some(item => (
+    item.id === ai.candidate.id
+      && item.workflow_tier === "strong"
+      && item.ai_identified === true
+  ))).toBe(true);
+  const conversationBeforeRestore = await page.locator("#chat-messages .message").count();
+  await page.locator("#toggle-chat-size").click();
+
+  await page.locator("#restore-ai-refinement").click();
+  await expect(page.locator("#ai-status")).toContainText("Original results restored exactly");
+  await expect(page.locator("#restore-ai-refinement")).toBeHidden();
+  await expect(page.locator("#ai-refine")).toBeFocused();
   await expect(page.locator("#result-count")).toHaveText(originalCount);
+  await expect(page.locator("#sort")).toHaveValue(originalSort);
   await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId))).toEqual(originalPageIds);
+  expect(await downloadText(page, "#export-csv")).toBe(originalCsv);
+  await expect(page.locator("#saved-count")).toHaveText("(1)");
+  await expect(page.locator("#k-key")).toHaveValue("sk-gate4-browser-mock");
+  await expect(page.locator("#research-profile")).toHaveValue(
+    "A populated but disabled profile that must not affect AI expansion.",
+  );
+  await expect(page.locator("#expertise-keywords")).toHaveValue("biomaterials, tissue engineering");
+  await expect(page.locator("#use-profile")).not.toBeChecked();
+
+  await page.locator("#open-results-chat").click();
+  await expect(page.locator("#chat-messages .message")).toHaveCount(conversationBeforeRestore);
+  await page.locator("#chat-input").fill("Recheck the restored ordinary context.");
+  await page.locator("#chat-submit").click();
+  await expect.poll(() => ai.chatRequests.length).toBe(2);
+  expect(ai.chatRequests[1].current_results.length).toBeLessThanOrEqual(20);
+  expect(ai.chatRequests[1].current_results.some(item => item.id === ai.candidate.id)).toBe(false);
 });

@@ -52,9 +52,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /Help improve Funding Finder|id="use-preferences"/);
   assert.match(prototype, /id="result-assistant"/);
   assert.match(prototype, /id="export-evaluation"/);
-  assert.match(prototype, /id="review-candidates"/);
+  assert.doesNotMatch(prototype, /id="review-candidates"/);
   assert.match(prototype, /id="send-deployment-review"/);
   assert.match(prototype, /id="ai-refine"/);
+  assert.match(prototype, /id="restore-ai-refinement"[^>]*>Restore original results/);
   assert.match(prototype, /id="chat-form"/);
   assert.match(prototype, /id="chat-thinking"/);
   assert.match(prototype, /id="open-results-chat"/);
