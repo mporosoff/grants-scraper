@@ -7,6 +7,10 @@ const source = await readFile(
   new URL("../../assets/credentials.js", import.meta.url),
   "utf8",
 );
+const appSource = await readFile(
+  new URL("../../assets/app.js", import.meta.url),
+  "utf8",
+);
 
 function memoryStorage(initial = {}) {
   const values = new Map(Object.entries(initial));
@@ -79,6 +83,21 @@ test("an absent page-level provider honors the most recently saved provider", ()
   assert.equal(credentials.resolveProvider("", storage), "anthropic");
   assert.equal(credentials.resolveProvider(undefined, storage), "anthropic");
   assert.equal(credentials.resolveProvider("openai", storage), "openai");
+});
+
+test("Funding Finder startup uses the stored preference unless a saved profile owns the selection", () => {
+  const loader = appSource.slice(
+    appSource.indexOf("function loadProviderKey"),
+    appSource.indexOf("function bindEvents"),
+  );
+  const initialization = appSource.slice(
+    appSource.indexOf("function initializeShell"),
+    appSource.indexOf("initializeShell();"),
+  );
+
+  assert.match(loader, /preferStored = false/);
+  assert.match(loader, /preferStored[\s\S]*?CREDENTIAL_API\.resolveProvider\(""\)/);
+  assert.match(initialization, /loadProviderKey\(\{ announce: true, preferStored: !state\.profile\.saved \}\)/);
 });
 
 test("fails closed for malformed storage and bounds saved values", () => {

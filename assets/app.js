@@ -4953,8 +4953,12 @@
     updateAiRefineControl();
   }
 
-  function loadProviderKey({ announce = false } = {}) {
+  function loadProviderKey({ announce = false, preferStored = false } = {}) {
     let provider = $("k-provider").value;
+    if (preferStored && typeof CREDENTIAL_API.resolveProvider === "function") {
+      provider = CREDENTIAL_API.resolveProvider("");
+      $("k-provider").value = provider;
+    }
     let key = CREDENTIAL_API.loadKey(provider);
     if (!key) {
       const alternative = provider === "anthropic" ? "openai" : "anthropic";
@@ -5703,7 +5707,7 @@
             : "Saved profile restored but is not currently selected for searching.");
         }
       }
-      loadProviderKey({ announce: true });
+      loadProviderKey({ announce: true, preferStored: !state.profile.saved });
       state.feedback = EVALUATION_MODE ? PROFILE_API.loadFeedback() : {};
       refreshSavedState(SAVED_API.load());
       renderSaved();
