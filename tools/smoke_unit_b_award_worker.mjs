@@ -135,6 +135,7 @@ if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
   || programOfficerEvidenceContract.maximum_records !== 24
   || programOfficerEvidenceContract.matched_facet_limit !== 12
   || programOfficerEvidenceContract.abstract_characters_per_record !== 800
+  || programOfficerEvidenceContract.indexed_abstract_characters_per_record !== 20_000
   || programOfficerEvidenceContract.serialized_characters !== 18_000) {
   throw new Error("The Program Officer evidence health contract is not active.");
 }

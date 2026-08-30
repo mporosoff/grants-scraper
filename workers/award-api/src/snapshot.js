@@ -5,12 +5,21 @@ export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
 export const SNAPSHOT_PAGE_SIZES = Object.freeze([10, 25, 50]);
 export const SNAPSHOT_EVIDENCE_LIMIT = 24;
 export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
+export const SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT = 20_000;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
 export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 export const SNAPSHOT_EVIDENCE_PHRASE_FORMAT = "normalized-concepts-v2";
 const EN_COLLATOR = new Intl.Collator("en-US");
 const CASE_SENSITIVE_SCIENTIFIC_SYMBOLS = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
+const AMBIGUOUS_SYMBOL_NAMES = new Map([
+  ["Am", "americium"],
+  ["As", "arsenic"],
+  ["At", "astatine"],
+  ["Be", "beryllium"],
+  ["He", "helium"],
+  ["In", "indium"],
+]);
 const GENERIC_RETRIEVAL_TERMS = new Set([
   "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
   "find", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
@@ -697,34 +706,40 @@ function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
   };
 }
 
-function retrievalTokenEntries(value) {
-  const sourceTokens = clean(value, 4_000)
+function retrievalTokenEntries(value, maximum = 4_000) {
+  const text = clean(value, maximum)
     .normalize("NFKD")
-    .replace(/\p{M}+/gu, "")
-    .match(/[\p{L}\p{N}]+/gu) || [];
-  return sourceTokens.map(source => {
+    .replace(/\p{M}+/gu, "");
+  return [...text.matchAll(/[\p{L}\p{N}]+/gu)].map(match => {
+    const source = match[0];
     const normalized = source.toLocaleLowerCase("en-US");
+    const after = text.slice((match.index || 0) + source.length);
     return {
       source,
       normalized: /^fy(?:19|20)\d{2}$/u.test(normalized) ? normalized.slice(2) : normalized,
+      explicit_notation: /^\s*(?:[-+]|\(|\[|\{|\d)/u.test(after),
     };
   });
 }
 
-function normalizedRetrievalTokens(value) {
-  return retrievalTokenEntries(value).map(entry => entry.normalized);
+function normalizedRetrievalTokens(value, maximum = 4_000) {
+  return retrievalTokenEntries(value, maximum).map(entry => entry.normalized);
 }
 
 function queryConceptKey(entry) {
   return CASE_SENSITIVE_SCIENTIFIC_SYMBOLS.has(entry.source) ? `case:${entry.source}` : entry.normalized;
 }
 
-function retrievalTokens(value) {
+function retrievalTokens(value, maximum, confirmedSymbols) {
   const tokens = [];
-  for (const entry of retrievalTokenEntries(value)) {
+  for (const entry of retrievalTokenEntries(value, maximum)) {
     if (entry.normalized.length < 2 || GENERIC_RETRIEVAL_TERMS.has(entry.normalized)) continue;
     tokens.push(entry.normalized);
-    if (CASE_SENSITIVE_SCIENTIFIC_SYMBOLS.has(entry.source)) tokens.push(`case:${entry.source}`);
+    if (entry.source === "pH"
+      || (AMBIGUOUS_SYMBOL_NAMES.has(entry.source)
+        && (confirmedSymbols.has(entry.source) || entry.explicit_notation))) {
+      tokens.push(`case:${entry.source}`);
+    }
   }
   return [...new Set(tokens)];
 }
@@ -792,7 +807,7 @@ export function normalizeEvidencePhrases(values) {
 function evidenceFieldValues(award) {
   return {
     title: clean(award?.title, 1_000),
-    abstract: clean(award?.abstract, 20_000),
+    abstract: clean(award?.abstract, SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT),
     program: [
       award?.program_name,
       award?.activity_code,
@@ -808,6 +823,18 @@ function evidenceFieldValues(award) {
 
 function scoreEvidenceAward(award, phrases, requiredConcepts) {
   const fields = evidenceFieldValues(award);
+  const fieldLimits = {
+    title: 1_000,
+    abstract: SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT,
+    program: 4_000,
+    year: 10,
+    investigators: 4_000,
+    institution: 500,
+  };
+  const allFieldTokens = new Set(normalizedRetrievalTokens(Object.values(fields).join(" "), SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT + 10_000));
+  const confirmedSymbols = new Set([...AMBIGUOUS_SYMBOL_NAMES]
+    .filter(([_symbol, name]) => allFieldTokens.has(name))
+    .map(([symbol]) => symbol));
   const weights = {
     title: { token: 100, phrase: 180 },
     abstract: { token: 28, phrase: 55 },
@@ -816,7 +843,7 @@ function scoreEvidenceAward(award, phrases, requiredConcepts) {
     investigators: { token: 4, phrase: 7 },
     institution: { token: 3, phrase: 5 },
   };
-  const fieldEntries = Object.entries(fields).map(([field, value]) => [field, new Set(retrievalTokens(value))]);
+  const fieldEntries = Object.entries(fields).map(([field, value]) => [field, new Set(retrievalTokens(value, fieldLimits[field], confirmedSymbols))]);
   const awardConcepts = new Set(fieldEntries.flatMap(([, tokens]) => [...tokens]));
   if (requiredConcepts.some(concept => !awardConcepts.has(concept))) return { score: 0, matched_fields: [] };
   let score = 0;

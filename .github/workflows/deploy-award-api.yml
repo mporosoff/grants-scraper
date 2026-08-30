@@ -175,6 +175,7 @@ jobs:
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_records // empty' <<<"$health" 2>/dev/null)" = "24" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.matched_facet_limit // empty' <<<"$health" 2>/dev/null)" = "12" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.abstract_characters_per_record // empty' <<<"$health" 2>/dev/null)" = "800" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.indexed_abstract_characters_per_record // empty' <<<"$health" 2>/dev/null)" = "20000" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.serialized_characters // empty' <<<"$health" 2>/dev/null)" = "18000" \
               && test "$(jq -r '.abuse_control.ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.abuse_control.provider // empty' <<<"$health" 2>/dev/null)" = "cloudflare-durable-object" \

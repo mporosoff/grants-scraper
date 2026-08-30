@@ -11,6 +11,7 @@ import {
 import { createHandler, storeSnapshot, validateSnapshotCreate } from "../../workers/award-api/src/index.js";
 import {
   SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
+  SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT,
   SNAPSHOT_EVIDENCE_LIMIT,
   SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
   SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
@@ -275,6 +276,8 @@ test("topical evidence requires every substantive query concept in the same awar
     award(210, { title: "Toxicity as a concern", abstract: "General exposure mechanisms." }),
     award(211, { title: "In semiconductor devices", abstract: "Indium transport layers." }),
     award(212, { title: "Semiconductor transport in devices", abstract: "General device physics." }),
+    award(213, { title: "Semiconductor manufacturing", abstract: "In semiconductor manufacturing, process controls improve yield." }),
+    award(214, { title: "Toxicity controls", abstract: "As toxicity increases, process controls improve." }),
   ]);
   assert.deepEqual(
     snapshotEvidence(shortConcepts, { phrases: ["ai safety"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
@@ -290,6 +293,16 @@ test("topical evidence requires every substantive query concept in the same awar
     snapshotEvidence(shortConcepts, { phrases: ["In semiconductor"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
     ["NSF-211"],
     "an In concept is not satisfied by the ordinary preposition in",
+  );
+  const longAbstract = `${"background context ".repeat(260)}terminalconcept evidence`;
+  assert.ok(longAbstract.indexOf("terminalconcept") > 4_000 && longAbstract.length < SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT);
+  const deepAbstract = programOfficerSnapshot([
+    award(215, { title: "Extended abstract evidence", abstract: longAbstract }),
+  ]);
+  assert.deepEqual(
+    snapshotEvidence(deepAbstract, { phrases: ["terminalconcept"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-215"],
+    "matching tokenizes the full retained abstract beyond the former 4,000-character cutoff",
   );
   assert.equal(evidence.retrieval.concept_coverage, "all_substantive_query_concepts_same_record");
   assert.equal(evidence.retrieval.required_concept_count, 3, "conjunctions and question scaffolding are not substantive concepts");
@@ -591,4 +604,5 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.match(deploySource, /normalized-concepts-v2/);
   assert.match(deploySource, /all_substantive_query_concepts_same_record/);
   assert.match(deploySource, /matched_facet_limit/);
+  assert.match(deploySource, /indexed_abstract_characters_per_record/);
 });

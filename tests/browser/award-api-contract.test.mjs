@@ -464,6 +464,7 @@ test("Worker validates bounded public requests and exposes no credential require
         maximum_records: 24,
         matched_facet_limit: 12,
         abstract_characters_per_record: 800,
+        indexed_abstract_characters_per_record: 20000,
         serialized_characters: 18000,
       },
     },

@@ -483,17 +483,25 @@ export function mockAwards(target, {
         "there", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
       ]);
       const caseSensitiveScientificSymbols = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
-      const evidenceTokenEntries = value => (String(value || "")
-        .normalize("NFKD").replace(/\p{M}+/gu, "")
-        .match(/[\p{L}\p{N}]+/gu) || []).map(source => {
+      const ambiguousSymbolNames = new Map([["Am", "americium"], ["As", "arsenic"], ["At", "astatine"], ["Be", "beryllium"], ["He", "helium"], ["In", "indium"]]);
+      const evidenceTokenEntries = value => {
+        const text = String(value || "").normalize("NFKD").replace(/\p{M}+/gu, "");
+        return [...text.matchAll(/[\p{L}\p{N}]+/gu)].map(match => {
+          const source = match[0];
           const lowered = source.toLowerCase();
-          return { source, normalized: /^fy(?:19|20)\d{2}$/u.test(lowered) ? lowered.slice(2) : lowered };
+          const after = text.slice((match.index || 0) + source.length);
+          return {
+            source,
+            normalized: /^fy(?:19|20)\d{2}$/u.test(lowered) ? lowered.slice(2) : lowered,
+            explicit_notation: /^\s*(?:[-+]|\(|\[|\{|\d)/u.test(after),
+          };
         });
+      };
       const normalizedEvidenceTokens = value => evidenceTokenEntries(value).map(entry => entry.normalized);
       const queryConceptKey = entry => caseSensitiveScientificSymbols.has(entry.source) ? `case:${entry.source}` : entry.normalized;
-      const evidenceTokens = value => evidenceTokenEntries(value).flatMap(entry => {
+      const evidenceTokens = (value, confirmedSymbols) => evidenceTokenEntries(value).flatMap(entry => {
         if (entry.normalized.length < 2 || genericTerms.has(entry.normalized)) return [];
-        return caseSensitiveScientificSymbols.has(entry.source)
+        return entry.source === "pH" || (ambiguousSymbolNames.has(entry.source) && (confirmedSymbols.has(entry.source) || entry.explicit_notation))
           ? [entry.normalized, `case:${entry.source}`]
           : [entry.normalized];
       });
@@ -516,7 +524,7 @@ export function mockAwards(target, {
         .filter(entry => entry.normalized.length >= 2 && !genericTerms.has(entry.normalized))
         .map(queryConceptKey))];
       const scored = snapshot.records.filter(record => {
-        const recordTokens = new Set(evidenceTokens([
+        const recordValues = [
           record.title,
           record.abstract,
           record.program_name,
@@ -526,7 +534,12 @@ export function mockAwards(target, {
           ...(record.program_codes || []),
           ...(record.principal_investigators || []).map(person => person.name),
           record.institution?.normalized_name || record.institution?.name,
-        ].filter(Boolean).join(" ")));
+        ].filter(Boolean);
+        const normalizedRecordTokens = new Set(recordValues.flatMap(value => normalizedEvidenceTokens(value)));
+        const confirmedSymbols = new Set([...ambiguousSymbolNames]
+          .filter(([_symbol, name]) => normalizedRecordTokens.has(name))
+          .map(([symbol]) => symbol));
+        const recordTokens = new Set(recordValues.flatMap(value => evidenceTokens(value, confirmedSymbols)));
         return requiredConcepts.length > 0 && requiredConcepts.every(concept => recordTokens.has(concept));
       });
       const awards = scored.slice(0, body.limit).map(record => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: snapshot.records.indexOf(record) + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: 100, matched_fields: ["title", "abstract"] }));
