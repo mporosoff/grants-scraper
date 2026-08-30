@@ -233,7 +233,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("Open larger chat", explorer_html)
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
-        self.assertIn('id="result-label"', explorer_html)
+        for removed_result_summary in (
+            'id="results-heading"', 'id="result-count"', 'id="result-label"',
+            'id="results-mode"', 'id="result-range"', 'class="results-summary"',
+            'class="toolbar-lower-row"',
+        ):
+            self.assertNotIn(removed_result_summary, explorer_html)
         search_v2_version = "app-1.3.0"
         self.assertIn(
             '<script src="./data/catalog-metadata.js?v=catalog-',
@@ -251,7 +256,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "ai-additive-20260829"
+        app_style_version = "presentation-cleanup-20260830"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -310,7 +315,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=ai-additive-20260829"></script>',
+            '<script src="./assets/app.js?v=presentation-cleanup-20260830"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -394,15 +399,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("globalThis.FUNDING_CREDENTIALS", application_js)
         self.assertIn("funding-finder.credentials.v1", credentials_js)
         self.assertIn("localStorage", credentials_js)
-        self.assertIn("AI retrieval candidate set", application_js)
+        self.assertNotIn("AI retrieval candidate set", application_js)
         self.assertIn('id="browse-all"', application_js)
         self.assertIn("function browseAllOpportunities", application_js)
-        self.assertIn("function updateResultHeading(display)", application_js)
-        self.assertIn(
-            '`${total.toLocaleString()} ${total === 1 ? "opportunity" : "opportunities"}`',
-            application_js,
-        )
-        self.assertIn('$("result-label").textContent = ""', application_js)
+        self.assertNotIn("function updateResultHeading(display)", application_js)
+        self.assertNotIn('$("result-label")', application_js)
         self.assertIn("api.openai.com/v1/responses", ai_provider_js)
         self.assertIn("api.anthropic.com/v1/messages", ai_provider_js)
         self.assertRegex(

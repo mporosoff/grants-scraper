@@ -534,7 +534,9 @@ test("question-provider payloads enforce privacy boundaries and malformed respon
   }
   assert.equal(payload.public_award_evidence[0].abstract_excerpt.length, 800);
   assert.throws(() => ai.extractJson("not valid JSON"), error => error.category === "malformed");
-  assert.match(pageSource, /Structured award search and institution resolution do not require an AI key/);
+  assert.doesNotMatch(pageSource, /Structured award search and institution resolution do not require an AI key/);
+  assert.match(pageSource, /id="ii-status" role="status" aria-live="polite"><\/div>/);
+  assert.match(appSource, /setStatus\(""\)/);
   assert.match(pageSource, /Update answer using loaded records/);
   assert.match(appSource, /snapshot\.signature === answerEvidenceSignature\(\)/);
   const loadMoreSource = appSource.slice(appSource.indexOf("async function loadMoreSource"), appSource.indexOf("function clearSearch"));

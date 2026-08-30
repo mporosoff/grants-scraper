@@ -64,7 +64,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /Open larger chat/);
   assert.match(prototype, /id="chat-submit"/);
   assert.match(prototype, /Enter to send/);
-  assert.match(prototype, /id="result-label"/);
+  assert.doesNotMatch(prototype, /id="(?:results-heading|result-count|result-label|results-mode|result-range)"|class="results-summary"|class="toolbar-lower-row"/);
   assert.match(prototype, /Chat with your results/);
   assert.match(prototype, /Minimum per-award amount/);
   assert.match(prototype, /not endorsed or certified/);
@@ -177,8 +177,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.match-explanation/);
   assert.match(css, /\.matched-topics/);
   assert.doesNotMatch(script, />FOA changed</);
-  assert.match(script, /AI retrieval candidate set/);
-  assert.match(script, /result-label/);
+  assert.doesNotMatch(script, /AI retrieval candidate set|updateResultHeading|result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
   assert.match(script, /MAX_CHAT_RESULTS = 20/);
   assert.match(script, /async function refineWithAi/);
@@ -234,7 +233,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(reviewScript, /FUNDING_CREDENTIALS/);
   assert.doesNotMatch(prototype, /Phase 3 deployment/);
   assert.doesNotMatch(prototype, /id="profile-search"|id="remember-profile"/);
-  assert.match(prototype, /Your matches will appear here/);
+  assert.doesNotMatch(prototype, /Your matches will appear here/);
   assert.match(script, /id="browse-all"/);
   assert.match(script, /function browseAllOpportunities/);
   assert.match(css, /\/\* Unified search workflow \*\//);

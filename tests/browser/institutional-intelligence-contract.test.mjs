@@ -327,7 +327,10 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /Funded Award Intelligence/);
   assert.match(page, /id="award-search-form"[^>]*hidden/);
   assert.match(page, /id="ii-program-officer"/);
-  assert.match(page, /Structured award search and institution resolution do not require an AI key/);
+  assert.doesNotMatch(page, /Structured award search and institution resolution do not require an AI key/);
+  assert.match(page, /id="ii-status" role="status" aria-live="polite"><\/div>/);
+  assert.match(styles, /\.ii-status:empty\s*\{[^}]*display:\s*none/);
+  assert.match(appSource, /setStatus\(""\)/);
   assert.match(page, /assets\/institutional-intelligence-snapshots\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
   assert.doesNotMatch(page, /Optional institution identity:/);

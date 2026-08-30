@@ -323,19 +323,21 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   const releaseKey = "post-phase4-abc-20260829";
   for (const asset of [
     "alerts.css",
-    "institutional-intelligence.css",
     "alerts.js",
     "award-api-config.js",
     "institutional-intelligence-core.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  for (const asset of ["app.css", "ai-provider.js"])
-    assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=ai-additive-20260829`));
-  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=post-phase4-abc-evidence-20260829/);
+  assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
+  assert.match(fundedAwards, /ai-provider\.js\?v=ai-additive-20260829/);
+  assert.match(fundedAwards, /institutional-intelligence\.css\?v=presentation-cleanup-20260830/);
+  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=presentation-cleanup-20260830/);
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  for (const asset of ["app.css", "ai-provider.js", "result-workflow.js", "app.js"])
+  for (const asset of ["app.css", "app.js"])
+    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=presentation-cleanup-20260830`));
+  for (const asset of ["ai-provider.js", "result-workflow.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=ai-additive-20260829`));
-  assert.match(teamMatch, /app\.css\?v=ai-additive-20260829/);
+  assert.match(teamMatch, /app\.css\?v=presentation-cleanup-20260830/);
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {
