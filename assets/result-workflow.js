@@ -216,12 +216,9 @@
 
   function mergeAdditiveResults({ baseline, additions }) {
     const ordinary = Array.isArray(baseline?.matches) ? baseline.matches : [];
-    const strong = ordinary.filter(match => workflowTier(match) === "strong");
-    const potential = ordinary.filter(match => workflowTier(match) === "potential");
     return deepFreeze([
-      ...cloneValue(strong),
       ...cloneValue(additions || []),
-      ...cloneValue(potential),
+      ...cloneValue(ordinary),
     ]);
   }
 

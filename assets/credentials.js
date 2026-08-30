@@ -33,9 +33,13 @@
         const key = normalizeKey(parsed?.keys?.[provider]);
         if (key) keys[provider] = key;
       }
-      return { keys };
+      const preferredProvider = normalizeProvider(parsed?.preferred_provider);
+      return {
+        keys,
+        preferred_provider: keys[preferredProvider] ? preferredProvider : "",
+      };
     } catch {
-      return { keys: {} };
+      return { keys: {}, preferred_provider: "" };
     }
   }
 
@@ -52,6 +56,7 @@
     }
     const record = readRecord(target);
     record.keys[normalizedProvider] = normalizedKey;
+    record.preferred_provider = normalizedProvider;
     try {
       target.setItem(CREDENTIAL_STORAGE_KEY, JSON.stringify(record));
       return { saved: true, provider: normalizedProvider };
@@ -66,6 +71,9 @@
     if (!target) return false;
     const record = readRecord(target);
     delete record.keys[normalizedProvider];
+    if (record.preferred_provider === normalizedProvider) {
+      record.preferred_provider = Object.keys(record.keys)[0] || "";
+    }
     try {
       if (Object.keys(record.keys).length) {
         target.setItem(CREDENTIAL_STORAGE_KEY, JSON.stringify(record));
@@ -78,10 +86,22 @@
     }
   }
 
+  function resolveProvider(preferred, storage) {
+    const normalizedPreferred = normalizeProvider(preferred);
+    const record = readRecord(storage);
+    if (record.keys[normalizedPreferred]) return normalizedPreferred;
+    if (record.preferred_provider && record.keys[record.preferred_provider]) {
+      return record.preferred_provider;
+    }
+    return [...PROVIDERS].find(provider => Boolean(record.keys[provider]))
+      || normalizedPreferred;
+  }
+
   global.FUNDING_CREDENTIALS = Object.freeze({
     CREDENTIAL_STORAGE_KEY,
     loadKey,
     saveKey,
     clearKey,
+    resolveProvider,
   });
 })(globalThis);

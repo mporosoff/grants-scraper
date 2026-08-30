@@ -5,6 +5,12 @@ import vm from "node:vm";
 
 const root = new URL("../", import.meta.url);
 
+test("provider requests use the bounded 60-second default timeout", async () => {
+  const source = await readFile(new URL("../assets/ai-provider.js", root), "utf8");
+  assert.match(source, /REQUEST_TIMEOUT_MS = 60_000/);
+  assert.match(source, /Math\.min\(60_000,/);
+});
+
 async function loadProvider(overrides = {}) {
   const source = await readFile(new URL("../assets/ai-provider.js", root), "utf8");
   const context = { AbortController, clearTimeout, console, setTimeout, ...overrides };

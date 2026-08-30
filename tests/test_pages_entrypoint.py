@@ -256,27 +256,29 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "compact-match-count-size-20260830"
+        app_style_version = "chat-output-fixes-20260830"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
-        for asset in (
-            "nofo.js", "review.js", "credentials.js",
-            "chat-ui.js", "saved.js",
-        ):
+        for asset in ("nofo.js", "review.js", "saved.js"):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=ai-additive-20260829"></script>',
+            '<script src="./assets/ai-provider.js?v=chat-output-fixes-20260830"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/result-workflow.js?v=ai-additive-20260829"></script>',
+            '<script src="./assets/result-workflow.js?v=chat-output-fixes-20260830"></script>',
             explorer_html,
         )
+        for asset in ("credentials.js", "chat-ui.js"):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v=chat-output-fixes-20260830"></script>',
+                explorer_html,
+            )
         for asset in ("orcid.js",):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={feature_version}"></script>',
@@ -315,7 +317,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=compact-match-counts-empty-guidance-20260830"></script>',
+            '<script src="./assets/app.js?v=chat-output-fixes-20260830"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -328,7 +330,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("globalThis.FUNDING_RETRIEVAL", application_js)
         self.assertIn("searchEngine.score", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
-        self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
+        self.assertIn("MAX_CHAT_RESULTS = 10", application_js)
         self.assertIn("NEW_RELEVANT_MAX_AGE_DAYS = 14", application_js)
         self.assertIn("NEW_RELEVANT_MIN_SCORE_RATIO = .2", application_js)
         self.assertIn("function announcementAgeDays", application_js)

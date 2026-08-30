@@ -54,6 +54,20 @@ test("keeps OpenAI and Anthropic keys separate and clears one at a time", () => 
   assert.equal(credentials.clearKey("openai", storage), true);
   assert.equal(credentials.loadKey("openai", storage), "");
   assert.equal(credentials.loadKey("anthropic", storage), "sk-ant-test");
+  assert.equal(credentials.resolveProvider("openai", storage), "anthropic");
+});
+
+test("shares the saved provider choice across Funding Finder pages", () => {
+  const storage = memoryStorage();
+  const credentials = loadModule(storage);
+
+  credentials.saveKey("anthropic", "sk-ant-test", storage);
+  assert.equal(credentials.resolveProvider("openai", storage), "anthropic");
+  credentials.saveKey("openai", "sk-openai-test", storage);
+  assert.equal(credentials.resolveProvider("openai", storage), "openai");
+  assert.equal(credentials.resolveProvider("anthropic", storage), "anthropic");
+  credentials.clearKey("anthropic", storage);
+  assert.equal(credentials.resolveProvider("anthropic", storage), "openai");
 });
 
 test("fails closed for malformed storage and bounds saved values", () => {

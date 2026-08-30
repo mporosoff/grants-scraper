@@ -4,7 +4,7 @@
   const OPENAI_MODEL = "gpt-5.6-luna";
   const ANTHROPIC_MODEL = "claude-sonnet-5";
   const MAX_OUTPUT_TOKENS = 5000;
-  const REQUEST_TIMEOUT_MS = 45_000;
+  const REQUEST_TIMEOUT_MS = 60_000;
   const MAX_ATTEMPTS = 2;
 
   const stringArray = (maximum, itemMaximum = 240, minimum = 0) => ({

@@ -983,6 +983,9 @@
   function refreshProvider({ preferMain = true } = {}) {
     let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
     if (!["openai", "anthropic"].includes(provider)) provider = "openai";
+    if (preferMain && typeof credentials.resolveProvider === "function") {
+      provider = credentials.resolveProvider(provider);
+    }
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";

@@ -98,3 +98,15 @@ test("labels optional result narrowing clearly for singular and plural sets", as
   );
   assert.equal(chatUi.focusActionLabel(0), "");
 });
+
+test("copies one assistant output as plain source text", async () => {
+  const chatUi = await loadChatUi();
+  let copied = "";
+  const result = await chatUi.copyText("  **Best fit**\n\n- Opportunity A  ", {
+    clipboard: { writeText: async value => { copied = value; } },
+  });
+
+  assert.equal(result, true);
+  assert.equal(copied, "**Best fit**\n\n- Opportunity A");
+  assert.equal(await chatUi.copyText("", { clipboard: { writeText: async () => {} } }), false);
+});

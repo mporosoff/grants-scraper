@@ -2663,6 +2663,17 @@ textarea:focus {
   border-bottom-left-radius: 3px;
 }
 
+.message-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 7px;
+}
+
+.chat-copy-answer {
+  padding: 3px 5px;
+  font-size: .68rem;
+}
+
 .message-note {
   display: block;
   margin-top: 5px;
