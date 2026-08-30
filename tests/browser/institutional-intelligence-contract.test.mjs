@@ -368,7 +368,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     deploymentSource.indexOf("Run bounded exact-source smokes"),
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
-  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.1\.0"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.2\.0"/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(

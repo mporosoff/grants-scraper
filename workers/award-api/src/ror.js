@@ -2,7 +2,7 @@ import { cleanText, uniqueStrings } from "./contract.js";
 import { AwardSourceError, fetchSourceJson } from "./http.js";
 
 const ROR_API = "https://api.ror.org/v2/organizations";
-const ROR_ADAPTER_VERSION = "1.1.0";
+const ROR_ADAPTER_VERSION = "1.2.0";
 const ROR_RESULT_LIMIT = 8;
 
 function identityKey(value) {
@@ -52,17 +52,24 @@ function candidateScore(candidate, query) {
   const canonicalKey = identityKey(candidate.canonical_name);
   const aliasKeys = candidate.aliases.map(identityKey);
   const acronymKeys = candidate.acronyms.map(identityKey);
+  const canonicalUniversityKey = `university of ${queryKey}`;
+  const canonicalNamedUniversityKey = `${queryKey} university`;
+  const commonUniversityShorthand = canonicalKey === canonicalUniversityKey
+    || canonicalKey === `the ${canonicalUniversityKey}`
+    || canonicalKey === canonicalNamedUniversityKey;
   let score = canonicalKey === queryKey
     ? 120
     : aliasKeys.includes(queryKey)
       ? 100
       : acronymKeys.includes(queryKey)
         ? 90
-        : canonicalKey.startsWith(queryKey)
-          ? 65
-          : canonicalKey.includes(queryKey)
-            ? 45
-            : 20;
+        : commonUniversityShorthand
+          ? 80
+          : canonicalKey.startsWith(queryKey)
+            ? 65
+            : canonicalKey.includes(queryKey)
+              ? 45
+              : 20;
 
   // NSF, NIH, and DOE are U.S. funders. This corpus-specific tie-break keeps
   // ambiguous short acronyms such as MIT, UVA, RIT, and UCLA deterministic

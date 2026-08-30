@@ -316,6 +316,27 @@ test("ambiguous acronyms require selection while unique canonical names and alia
   assert.equal(core.chooseInstitution("California Institute of Technology", canonical)?.id, "https://ror.org/05dxps055");
 });
 
+test("common university shorthand ranks the canonical university without hiding other ROR candidates", () => {
+  const organization = (id, name, types = ["education"]) => ({
+    id: `https://ror.org/${id}`,
+    names: [{ value: name, types: ["ror_display"] }],
+    types,
+    status: "active",
+    locations: [{ geonames_details: { name: "Rochester", country_name: "United States", country_code: "US" } }],
+  });
+  const candidates = [
+    organization("022kthw22", "University of Rochester"),
+    organization("00v4yb702", "Rochester Institute of Technology"),
+    organization("0abcde123", "Rochester General Hospital", ["healthcare"]),
+    organization("0abcde124", "Rochester Engineering Society", ["nonprofit"]),
+  ];
+  const ranked = rankRorOrganizations(candidates, "rochester");
+  assert.equal(ranked[0].canonical_name, "University of Rochester");
+  assert.deepEqual(new Set(ranked.map(item => item.canonical_name)), new Set(candidates.map(item => item.names[0].value)));
+  assert.equal(ranked.every(item => item.match.type === "keyword"), true);
+  assert.equal(core.chooseInstitution("rochester", ranked), null);
+});
+
 test("the Worker validates and caches uncurated ROR identity without trusting the submitted name", async () => {
   const mitRecord = aliases.MIT.items.find(item => item.id === "https://ror.org/042nb2s44");
   const cache = memoryCache();

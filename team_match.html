@@ -1405,6 +1405,10 @@
     $("filter").addEventListener("input", refresh);
     $("add-researcher").addEventListener("click", toggleResearcherPicker);
     $("researcher-choice").addEventListener("change", function () {
+      if ($("researcher-choice").value === "__new__") {
+        chooseResearcher();
+        return;
+      }
       $("choose-researcher").disabled = !$("researcher-choice").value;
     });
     $("choose-researcher").addEventListener("click", chooseResearcher);
