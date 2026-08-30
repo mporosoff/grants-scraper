@@ -128,6 +128,8 @@ if (investigator?.identity_key && !facetVerified) {
 
 const programOfficerEvidenceContract = contract.program_officer_evidence;
 if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
+  || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v2"
+  || programOfficerEvidenceContract.concept_coverage !== "all_substantive_query_concepts_same_record"
   || programOfficerEvidenceContract.maximum_phrases !== 8
   || programOfficerEvidenceContract.maximum_records !== 24
   || programOfficerEvidenceContract.abstract_characters_per_record !== 800

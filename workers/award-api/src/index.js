@@ -774,6 +774,7 @@ export function createHandler({
           program_officer_evidence: {
             endpoint: "/awards/snapshots/evidence",
             scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
+            concept_coverage: "all_substantive_query_concepts_same_record",
             maximum_phrases: 8,
             maximum_records: SNAPSHOT_EVIDENCE_LIMIT,
             abstract_characters_per_record: SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,

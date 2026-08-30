@@ -19,11 +19,12 @@ import {
 } from "../../workers/award-api/src/snapshot.js";
 
 const root = new URL("../../", import.meta.url);
-const [coreSource, pageSource, appSource, configSource] = await Promise.all([
+const [coreSource, pageSource, appSource, configSource, deploySource] = await Promise.all([
   readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
   readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
   readFile(new URL("assets/award-api-config.js", root), "utf8"),
+  readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
 ]);
 const sandbox = { URL, URLSearchParams };
 vm.createContext(sandbox);
@@ -231,6 +232,20 @@ test("full-snapshot deterministic evidence finds beyond-page matches with stable
   assert.ok(largeEvidence.retrieval.serialized_characters <= SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT);
 });
 
+test("topical evidence requires every substantive query concept in the same award", () => {
+  const snapshot = programOfficerSnapshot([
+    award(201, { title: "Catalysis platform", abstract: "Carbon conversion research." }),
+    award(202, { title: "Quantum sensing platform", abstract: "Precision measurement research." }),
+    award(203, { title: "Catalysis platform", abstract: "Quantum sensing for reaction measurements." }),
+  ]);
+  const phrases = plain(core.programOfficerRetrievalPhrases("Which projects involve catalysis and quantum sensing?"));
+  const evidence = snapshotEvidence(snapshot, { phrases, limit: 24 });
+  assert.deepEqual(evidence.awards.map(item => item.award_id), ["NSF-203"]);
+  assert.equal(evidence.retrieval.concept_coverage, "all_substantive_query_concepts_same_record");
+  assert.equal(evidence.retrieval.required_concept_count, 3, "conjunctions and question scaffolding are not substantive concepts");
+  assert.deepEqual(evidence.awards[0].matched_fields, ["title", "abstract"]);
+});
+
 test("snapshot-native institutions, coverage, abstract facts, and absence language remain explicit", () => {
   const complete = programOfficerSnapshot();
   assert.equal(complete.mode, "program_officer");
@@ -391,4 +406,6 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.match(appSource, /programOfficerEvidence/);
   assert.match(appSource, /records_scanned/);
   assert.doesNotMatch(appSource.slice(appSource.indexOf("function programOfficerEvidence"), appSource.indexOf("function refreshProgramOfficerQuestionAnswer")), /residentAwards/);
+  assert.match(deploySource, /program-officer-evidence-v2/);
+  assert.match(deploySource, /all_substantive_query_concepts_same_record/);
 });

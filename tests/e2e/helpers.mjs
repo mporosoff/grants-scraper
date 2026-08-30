@@ -236,7 +236,7 @@ export function mockAwards(target, {
       activity_code: null,
       funding_mechanism: "Grant",
       title: "Collaborative Research: Warm Dense Matter",
-      abstract: "This project studies CO₂ conversion, warm dense matter, plasma, and materials under extreme conditions.\n\nThis source-provided second paragraph remains separate.",
+      abstract: "This project studies CO₂ (carbon dioxide) conversion, warm dense matter, plasma, and materials under extreme conditions.\n\nThis source-provided second paragraph remains separate.",
       project_start: "2026-09-01",
       project_end: "2029-08-31",
       award_year: 2026,
@@ -445,10 +445,32 @@ export function mockAwards(target, {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
         return;
       }
-      const phrases = body.phrases.map(value => String(value).toLowerCase());
-      const scored = snapshot.records.filter(record => phrases.some(phrase => `${record.title} ${record.abstract} ${record.program_name}`.toLowerCase().includes(phrase) || phrase.split(/\s+/).some(token => `${record.title} ${record.abstract} ${record.program_name}`.toLowerCase().includes(token))));
+      const genericTerms = new Set([
+        "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "did", "does",
+        "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
+        "involve", "involved", "involves", "involving", "project", "projects", "related", "relevant", "research",
+        "study", "studies", "that", "the", "their", "then", "this", "those", "was", "were", "what", "when",
+        "where", "which", "who", "why", "with", "work", "would", "your",
+      ]);
+      const evidenceTokens = value => String(value || "")
+        .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
+        .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
+      const requiredConcepts = [...new Set(body.phrases.flatMap(evidenceTokens))];
+      const scored = snapshot.records.filter(record => {
+        const recordTokens = new Set(evidenceTokens([
+          record.title,
+          record.abstract,
+          record.program_name,
+          record.activity_code,
+          record.subagency,
+          ...(record.program_codes || []),
+          ...(record.principal_investigators || []).map(person => person.name),
+          record.institution?.normalized_name || record.institution?.name,
+        ].filter(Boolean).join(" ")));
+        return requiredConcepts.length > 0 && requiredConcepts.every(concept => recordTokens.has(concept));
+      });
       const awards = scored.slice(0, body.limit).map(record => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: snapshot.records.indexOf(record) + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: 100, matched_fields: ["title", "abstract"] }));
-      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, retrieval: { scoring_version: "program-officer-evidence-v1", records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, retrieval: { scoring_version: "program-officer-evidence-v2", concept_coverage: "all_substantive_query_concepts_same_record", required_concept_count: requiredConcepts.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {

@@ -6,12 +6,14 @@ export const SNAPSHOT_PAGE_SIZES = Object.freeze([10, 25, 50]);
 export const SNAPSHOT_EVIDENCE_LIMIT = 24;
 export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
-export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v1";
+export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 const EN_COLLATOR = new Intl.Collator("en-US");
 const GENERIC_RETRIEVAL_TERMS = new Set([
-  "about", "award", "awards", "fund", "funded", "funding", "grant", "grants", "project", "projects",
+  "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "did", "does",
+  "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
   "involve", "involved", "involves", "involving", "related", "relevant", "research", "study", "studies",
-  "their", "this", "those", "what", "which", "with", "work",
+  "project", "projects", "that", "the", "their", "then", "this", "those", "was", "were", "what",
+  "when", "where", "which", "who", "why", "with", "work", "would", "your",
 ]);
 
 function clean(value, maximum = 500) {
@@ -733,7 +735,7 @@ function evidenceFieldValues(award) {
   };
 }
 
-function scoreEvidenceAward(award, phrases) {
+function scoreEvidenceAward(award, phrases, requiredConcepts) {
   const fields = evidenceFieldValues(award);
   const weights = {
     title: { token: 100, phrase: 180 },
@@ -742,10 +744,12 @@ function scoreEvidenceAward(award, phrases) {
     investigators: { token: 4, phrase: 7 },
     institution: { token: 3, phrase: 5 },
   };
+  const fieldEntries = Object.entries(fields).map(([field, value]) => [field, new Set(retrievalTokens(value))]);
+  const awardConcepts = new Set(fieldEntries.flatMap(([, tokens]) => [...tokens]));
+  if (requiredConcepts.some(concept => !awardConcepts.has(concept))) return { score: 0, matched_fields: [] };
   let score = 0;
   const matchedFields = new Set();
-  for (const [field, value] of Object.entries(fields)) {
-    const fieldTokens = new Set(retrievalTokens(value));
+  for (const [field, fieldTokens] of fieldEntries) {
     if (!fieldTokens.size) continue;
     const normalizedField = [...fieldTokens].join(" ");
     for (const phrase of phrases) {
@@ -783,10 +787,11 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
   const normalizedPhrases = normalizeEvidencePhrases(phrases);
   const normalizedLimit = Number(limit);
   if (normalizedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  const requiredConcepts = [...new Set(normalizedPhrases.flatMap(phrase => phrase.tokens))];
   const scored = snapshot.awards.map((award, position) => ({
     award,
     position,
-    ...scoreEvidenceAward(award, normalizedPhrases),
+    ...scoreEvidenceAward(award, normalizedPhrases, requiredConcepts),
   })).filter(item => item.score > 0).sort((left, right) => (
     right.score - left.score
     || left.position - right.position
@@ -826,6 +831,8 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
     },
     retrieval: {
       scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
+      concept_coverage: "all_substantive_query_concepts_same_record",
+      required_concept_count: requiredConcepts.length,
       records_scanned: snapshot.awards.length,
       records_with_score: scored.length,
       records_selected: awards.length,
