@@ -230,6 +230,10 @@
   border-radius: 8px;
 }
 
+.ii-status:empty {
+  display: none;
+}
+
 .ii-status.error-text {
   color: #8a2430;
   background: var(--danger-bg);

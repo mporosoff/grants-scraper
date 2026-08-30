@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=ai-additive-20260829" />
+<link rel="stylesheet" href="./assets/app.css?v=presentation-cleanup-20260830" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825" />
 <style>
   :root{
@@ -254,9 +254,6 @@
       </div>
       <p class="editor-message" id="external-editor-message" aria-live="polite"></p>
     </form>
-    <div class="toolrow">
-      <div class="search"><input id="filter" type="search" aria-label="Filter team matches" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
-    </div>
   </div>
 
   <div id="selected-terms" class="selected-terms"></div>
@@ -264,6 +261,9 @@
   <p class="count" id="count"></p>
   <div class="team-hybrid-status warning hide" id="team-topic-layer-status" role="status" aria-live="polite"></div>
   <div class="team-hybrid-status hide" id="team-hybrid-status" role="status" aria-live="polite"></div>
+  <div class="toolrow hide" id="results-search">
+    <div class="search"><input id="filter" type="search" aria-label="Filter team matches" placeholder="Filter results by title, agency, or keyword…" autocomplete="off" /></div>
+  </div>
   <div id="view" class="result-list"></div>
 
   <footer class="note">
@@ -833,6 +833,7 @@
     }).join("");
 
     if (selected.length < 2) {
+      $("results-search").classList.add("hide");
       $("themes").innerHTML = "";
       $("count").textContent = "";
       $("view").innerHTML = '<div class="empty">Pick at least two researchers above to see the calls they could pursue together.</div>';
@@ -847,6 +848,7 @@
     if (teamHybridState.status === "ready" && teamHybridState.signature === hybridSignature) {
       all = TEAM_HYBRID_API.applyHybridRanking(all, teamHybridState.rankById);
     }
+    $("results-search").classList.toggle("hide", !all.length);
     all = all.filter(function (e) { return matchesQuery(e, q); });
 
     var picked = selected.map(function (member) { return last(memberName(member)); }).join(" + ");

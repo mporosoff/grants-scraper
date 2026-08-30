@@ -1090,7 +1090,7 @@
     resetResultState();
     applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", page: 1, page_size: 10, facet_type: "all", facet_key: "" });
     for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
-    setStatus("Structured award search and institution resolution do not require an AI key.");
+    setStatus("");
     writeHistoryUrl(core.urlForState(location.href, { open: true }), historyMode, departureHistoryState);
   }
 

@@ -319,7 +319,6 @@
       "#find-funding",
       "#nofo-file",
       "#browse-all",
-      "[data-example-query]",
       "[data-watch-opportunity]",
       "[data-watch-program]",
     ].join(","));
@@ -1694,8 +1693,6 @@
     );
     if (state.hybrid.pending) {
       message = "Finding broader Potential matches from public opportunity text…";
-    } else if (state.hybrid.active && !state.potentialMatches.length) {
-      message = "Potential matching completed. No additional eligible matches were found.";
     } else if (state.hybrid.fallbackCategory === "limited") {
       message = "Strong matches are shown. Broader Potential matching is temporarily limited.";
       retry = true;
@@ -1710,8 +1707,6 @@
         "service_unconfigured",
         "topic_layer_unavailable",
       ].includes(state.hybrid.fallbackReason);
-    } else if (state.hybrid.active) {
-      message = "Potential matching completed.";
     }
     if (!message) {
       node.classList.add("hidden");
@@ -1796,7 +1791,7 @@
       state.hybrid.usage = result.usage || null;
       applyHybridParents(state.hybrid.parents);
       state.page = 1;
-      $("search-status").textContent = "Potential matching completed.";
+      $("search-status").textContent = "";
       renderResults();
     }).catch(error => {
       if (sequence !== state.hybrid.sequence
@@ -2001,9 +1996,7 @@
     };
     if ($("nofo-file")) $("nofo-file").value = "";
     if (clearStatus && $("nofo-upload-status")) {
-      setNofoUploadStatus(
-        "Your PDF stays in this tab and is sent to your selected AI provider only when you ask a question.",
-      );
+      setNofoUploadStatus("");
     }
   }
 
@@ -2253,7 +2246,7 @@
       hybridCanRun()
         ? `Strong matching completed. Looking for additional potential matches…${typoNote}${acronymNote}`
         : `Search complete.${typoNote}${acronymNote}`;
-    $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function resetFilterControls() {
@@ -2281,7 +2274,7 @@
     runSearch();
     $("search-status").textContent =
       `Browsing all ${state.matches.length.toLocaleString()} current opportunities.`;
-    $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function runSearch({
@@ -3717,7 +3710,7 @@
     }
     panel?.classList.toggle("alert-ready", enabled);
     if (enabled && panel && !savedSearchAlertIntroduced) {
-      panel.open = true;
+      if (!globalThis.matchMedia?.("(max-width: 820px)").matches) panel.open = true;
       savedSearchAlertIntroduced = true;
     }
   }
@@ -3766,7 +3759,7 @@
   function jumpToResultsTop() {
     const root = document.documentElement;
     root.classList.add("instant-scroll");
-    $("results-heading").scrollIntoView({ block: "start" });
+    $("results").scrollIntoView({ block: "start" });
     globalThis.requestAnimationFrame(() => root.classList.remove("instant-scroll"));
   }
 
@@ -3802,47 +3795,11 @@
     });
   }
 
-  function updateResultHeading(display) {
-    const total = display.length;
-    const pieces = [
-      `${total.toLocaleString()} ${total === 1 ? "opportunity" : "opportunities"}`,
-    ];
-    const counts = display.reduce((result, match) => {
-      const tier = RESULT_WORKFLOW_API.workflowTier(match);
-      result[tier] = (result[tier] || 0) + 1;
-      if (match.aiIdentified) result.aiIdentified += 1;
-      return result;
-    }, { strong: 0, potential: 0, aiIdentified: 0 });
-    const tiered = Boolean(
-      (APP_CONFIG?.flags?.searchV2 && state.query)
-      || counts.potential
-      || counts.aiIdentified,
-    );
-    if (tiered) {
-      pieces.push(`${(counts.strong || 0).toLocaleString()} strong`);
-      if (state.hybrid.pending && !state.ai.active) {
-        pieces.push("finding potential matches");
-      } else if (state.hybrid.fallbackReason && !state.ai.active) {
-        pieces.push("potential matches unavailable");
-      } else {
-        pieces.push(`${(counts.potential || 0).toLocaleString()} potential`);
-      }
-      if (counts.aiIdentified) pieces.push(`${counts.aiIdentified.toLocaleString()} AI identified`);
-    }
-    const summary = pieces.join(" · ");
-    if ($("result-count").textContent !== summary) $("result-count").textContent = summary;
-    $("result-label").textContent = "";
-  }
-
   function renderResults() {
     renderHybridStatus();
     updateSavedSearchAlertUi();
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
-      $("result-count").textContent = "";
-      $("result-label").textContent = "Your matches will appear here";
-      $("results-mode").textContent = "Ready when you are";
-      $("result-range").textContent = "";
       $("results").innerHTML = `<div class="empty-state initial-empty-state">
         <span class="empty-step-number" aria-hidden="true">1</span>
         <h3>Search or add a funding notice above</h3>
@@ -3869,28 +3826,6 @@
     state.page = Math.min(state.page, totalPages);
     const start = (state.page - 1) * PAGE_SIZE;
     const page = display.slice(start, start + PAGE_SIZE);
-    updateResultHeading(display);
-    $("results-mode").textContent = state.refinement.active
-      ? "AI-expanded catalog · originals preserved"
-      : state.ai.active
-      ? state.ai.reviewCandidates
-        ? "AI retrieval candidate set"
-        : state.ai.mode === "uploaded-nofo"
-          ? state.nofo.matchedId
-            ? "Uploaded NOFO · catalog match"
-            : "Uploaded NOFO · related catalog search"
-          : state.ai.mode === "foa-focus"
-              ? "Single-FOA focus"
-              : "Chat-focused results"
-      : state.hybrid.active
-        ? "Strong + potential catalog"
-        : state.hybrid.pending
-          ? "Strong matches · finding potential matches"
-          : state.hybrid.fallbackReason
-            ? "Strong matches"
-      : state.profile.active
-        ? "Profile-ranked catalog"
-        : "Public catalog";
     $("results-toolbar").classList.remove("search-not-started");
     const profileGateTermCount = state.profile.admissionTerms.length
       || state.profile.terms.length;
@@ -3901,10 +3836,6 @@
       && !state.query
       ? String(PROFILE_RANKING_API.minimumCoverage(profileGateTermCount))
       : "0";
-    $("result-range").textContent = display.length
-      ? `Showing ${start + 1} to ${Math.min(start + PAGE_SIZE, display.length)} of ${display.length.toLocaleString()}`
-      : "No records match the current search";
-
     if (!page.length) {
       const strongPotentialWorkflow = APP_CONFIG?.flags?.searchV2 && Boolean(state.query);
       const waitingForPotential = strongPotentialWorkflow && state.hybrid.pending;
@@ -4468,7 +4399,7 @@
       recordDeploymentUsage("ai_matches");
       setAiStatus(`AI added ${selected.additions.length} new evidence-qualified Strong ${selected.additions.length === 1 ? "match" : "matches"}. Every original Strong and Potential result remains in place.`);
       renderResults();
-      $("results-heading").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("results").scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       if (state.refinement.requestSequence === sequence) {
         setAiStatus(`${error?.message || String(error)} Your original results are unchanged.`, true);
@@ -5063,12 +4994,6 @@
       dropZone.classList.remove("is-dragging");
       const file = [...(event.dataTransfer?.files || [])][0];
       if (file) openNofoFromFile(file);
-    });
-    document.querySelectorAll("[data-example-query]").forEach(button => {
-      button.addEventListener("click", () => {
-        $("query").value = button.dataset.exampleQuery;
-        startSearch();
-      });
     });
     $("catalog-retry").addEventListener("click", () => {
       const retry = pendingCatalogAction?.action || (() => {});

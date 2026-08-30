@@ -1093,7 +1093,7 @@
     $("ii-question-answer").classList.add("hidden");
     $("ii-pagination").classList.add("hidden");
     $("ii-card-pagination").classList.add("hidden");
-    setStatus("Structured award search and institution resolution do not require an AI key.");
+    setStatus("");
     syncUrl({ open: true }, historyMode);
   }
 
@@ -1377,7 +1377,7 @@
         $("ii-source-status").classList.add("hidden");
         $("ii-pagination").classList.add("hidden");
         $("ii-card-pagination").classList.add("hidden");
-        setStatus("Structured award search and institution resolution do not require an AI key.");
+        setStatus("");
       }
     });
   }
