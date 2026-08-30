@@ -47,7 +47,6 @@ test("Team Match supports department, manual, duplicate, team-size, history, pro
 
   await page.locator("#add-researcher").click();
   await page.locator("#researcher-choice").selectOption("__new__");
-  await page.locator("#choose-researcher").click();
   await expect(page.locator("#external-researcher-form")).toBeVisible();
   await page.locator("#external-name").fill("Gate Four Researcher");
   await page.locator("#external-keywords").fill("catalysis, electrochemistry, chemical engineering, carbon capture");

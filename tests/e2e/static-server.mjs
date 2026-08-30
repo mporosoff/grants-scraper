@@ -57,3 +57,14 @@ const server = createServer(async (request, response) => {
 server.listen(port, "127.0.0.1", () => {
   process.stdout.write(`Funding Finder test server listening on http://127.0.0.1:${port}\n`);
 });
+
+let shuttingDown = false;
+function shutdown() {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  server.close(() => process.exit(0));
+  setTimeout(() => process.exit(0), 1_000).unref();
+}
+
+process.once("SIGINT", shutdown);
+process.once("SIGTERM", shutdown);
