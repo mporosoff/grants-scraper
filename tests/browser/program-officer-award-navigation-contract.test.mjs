@@ -271,11 +271,18 @@ test("topical evidence requires every substantive query concept in the same awar
     award(206, { title: "AI safety", abstract: "Machine learning assurance." }),
     award(207, { title: "Safety engineering", abstract: "General assurance." }),
     award(208, { title: "ML safety", abstract: "Machine learning assurance." }),
+    award(209, { title: "As toxicity", abstract: "Arsenic exposure mechanisms." }),
+    award(210, { title: "Toxicity", abstract: "General exposure mechanisms." }),
   ]);
   assert.deepEqual(
     snapshotEvidence(shortConcepts, { phrases: ["ai safety"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
     ["NSF-206"],
     "a two-character concept remains mandatory under all-concepts same-record admission",
+  );
+  assert.deepEqual(
+    snapshotEvidence(shortConcepts, { phrases: ["as toxicity"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-209"],
+    "a normalized scientific symbol that resembles grammar remains mandatory in the Worker",
   );
   assert.equal(evidence.retrieval.concept_coverage, "all_substantive_query_concepts_same_record");
   assert.equal(evidence.retrieval.required_concept_count, 3, "conjunctions and question scaffolding are not substantive concepts");
@@ -416,6 +423,10 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects involve AI?")), ["ai"], "two-character acronyms remain substantive");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects involve ML and H2?")), ["ml h2"], "short acronyms and scientific formulas remain substantive");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects involve AI safety?")), ["ai safety"], "short concepts remain required in mixed queries");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects involve As toxicity?")), ["as toxicity"], "case-sensitive element symbols override grammar noise");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects involve He cooling and Be alloys?")), ["he cooling be alloys"], "colliding scientific symbols remain substantive");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects measure pH?")), ["measure ph"], "mixed-case scientific notation remains substantive");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects are as relevant as this snapshot?")), [], "lowercase grammar collisions remain excluded");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which projects are in this snapshot?")), [], "two-character grammar noise remains excluded");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Are there any awards?")), [], "a broad scaffold-only question remains aggregate-eligible");
   assert.equal(core.programOfficerAggregateIntent("What types of projects did they fund?"), "awards");
@@ -556,7 +567,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-10";
+  const key = "po-award-navigation-20260830-11";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }

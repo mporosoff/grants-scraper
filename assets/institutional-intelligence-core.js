@@ -708,6 +708,18 @@
       "pi", "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
     ]);
     const shortNoise = new Set(["am", "an", "as", "at", "be", "by", "do", "he", "if", "in", "is", "it", "me", "my", "of", "oh", "ok", "on", "or", "so", "to", "up", "us", "we"]);
+    const collidingElementSymbols = new Set(["Am", "As", "At", "Be", "He", "In"]);
+    const scientificShorts = new Set((clean(question, 1_000)
+      .normalize("NFKD")
+      .replace(/\p{M}+/gu, "")
+      .match(/[\p{L}\p{N}]+/gu) || [])
+      .filter(token => token.length === 2 && (
+        /^[A-Z0-9]{2}$/u.test(token)
+        || /\d/u.test(token)
+        || token === "pH"
+        || collidingElementSymbols.has(token)
+      ))
+      .map(token => token.toLocaleLowerCase("en-US")));
     const normalizedTokens = (value, maximum) => clean(value, maximum)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
@@ -760,7 +772,7 @@
       }
     }
     const tokens = questionTokens.filter((token, index) => (
-      (token.length >= 3 || (token.length === 2 && !shortNoise.has(token)))
+      (token.length >= 3 || (token.length === 2 && (!shortNoise.has(token) || scientificShorts.has(token))))
       && !removed.has(index)
       && !ignored.has(token)
     ));
