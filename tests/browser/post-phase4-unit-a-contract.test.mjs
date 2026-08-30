@@ -87,7 +87,7 @@ test("AI refinement requires both a usable result context and an entered or save
   assert.match(providerState, /updateAiRefineControl\(\)/);
 });
 
-test("one compact live tier count replaces the redundant result summary and tier explanations", () => {
+test("one compact live tier count replaces normal tier explanations while preserving empty guidance", () => {
   const $ = load(page);
   for (const id of ["results-heading", "result-count", "result-label", "results-mode", "result-range"]) {
     assert.equal(page.includes(`id="${id}"`), false, id);
@@ -114,7 +114,7 @@ test("one compact live tier count replaces the redundant result summary and tier
       workflowTier(match) { return match.workflowTier === "potential" ? "potential" : "strong"; },
     },
   };
-  vm.runInNewContext(`${countSource}\nthis.compactResultCounts = compactResultCounts;`, context);
+  vm.runInNewContext(`${countSource}\nthis.compactResultCounts = compactResultCounts; this.shouldShowNoStrongNotice = shouldShowNoStrongNotice;`, context);
   const nineStrong = Array.from({ length: 9 }, () => ({ workflowTier: "strong" }));
   const twelvePotential = Array.from({ length: 12 }, () => ({ workflowTier: "potential" }));
   assert.equal(
@@ -129,9 +129,18 @@ test("one compact live tier count replaces the redundant result summary and tier
     "1 strong match · 1 potential match · 1 AI-identified match",
   );
   assert.equal(context.compactResultCounts([]), "0 strong matches · 0 potential matches");
+  assert.equal(context.shouldShowNoStrongNotice([{ workflowTier: "potential" }]), true);
+  assert.equal(context.shouldShowNoStrongNotice([{ workflowTier: "strong" }]), false);
+  assert.equal(context.shouldShowNoStrongNotice([
+    { workflowTier: "strong", aiIdentified: true },
+    { workflowTier: "potential" },
+  ]), false);
+  assert.equal(context.shouldShowNoStrongNotice([]), false);
   const render = app.slice(app.indexOf("function renderResults"), app.indexOf("function renderActiveFilters"));
   assert.match(render, /result-tier-counts"\)\.textContent = compactResultCounts\(display\)/);
-  assert.doesNotMatch(render, /result-tier-heading|result-tier-empty|Supported by conservative local evidence|Additional leads from the broader hybrid search/);
+  assert.doesNotMatch(render, /result-tier-heading|Supported by conservative local evidence|Additional leads from the broader hybrid search/);
+  assert.match(render, /const noStrongNotice = shouldShowNoStrongNotice\(display\)[\s\S]*?No strong matches found\.<\/h3><p>The broader search found potential matches below for you to review\.<\/p>/);
+  assert.match(render, /\$\("results"\)\.innerHTML = noStrongNotice \+ groups\.map/);
 });
 
 test("desktop aligns query, submit, and upload while tablet and smaller widths stack safely", () => {

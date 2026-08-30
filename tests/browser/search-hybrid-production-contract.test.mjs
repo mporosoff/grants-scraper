@@ -599,7 +599,7 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   assert.match(appSource, /\.filter\(match => !strongIds\.has/);
   assert.match(appSource, /Strong matches/);
   assert.match(appSource, /Potential matches/);
-  assert.doesNotMatch(appSource, /No strong matches found\.<\/h3><p>The broader search found potential matches below/);
+  assert.match(appSource, /No strong matches found\.<\/h3><p>The broader search found potential matches below for you to review\./);
   assert.doesNotMatch(appSource, /confirm fit in the official opportunity/i);
   assert.doesNotMatch(appSource, /intent classification is temporarily unavailable/i);
   assert.doesNotMatch(source, /\/judge|JUDGE_MODEL|intent_classification/);
