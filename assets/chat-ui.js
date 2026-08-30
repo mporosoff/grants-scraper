@@ -232,9 +232,42 @@
       : `Narrow results to these ${total} opportunities`;
   }
 
+  async function copyText(value, { clipboard, documentRef } = {}) {
+    const text = String(value || "").trim();
+    if (!text) return false;
+    const targetClipboard = clipboard || globalThis.navigator?.clipboard;
+    if (typeof targetClipboard?.writeText === "function") {
+      try {
+        await targetClipboard.writeText(text);
+        return true;
+      } catch {
+        // Fall through to the bounded legacy copy path.
+      }
+    }
+    const targetDocument = documentRef || globalThis.document;
+    if (!targetDocument?.body || typeof targetDocument.execCommand !== "function") return false;
+    const textarea = targetDocument.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    targetDocument.body.append(textarea);
+    textarea.select();
+    let copied = false;
+    try {
+      copied = targetDocument.execCommand("copy") === true;
+    } catch {
+      copied = false;
+    } finally {
+      textarea.remove();
+    }
+    return copied;
+  }
+
   globalThis.FUNDING_CHAT_UI = Object.freeze({
     renderRichText,
     knownResultIds,
     focusActionLabel,
+    copyText,
   });
 })();

@@ -8,7 +8,7 @@
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
   const MIN_AI_PHRASES = 5;
-  const MAX_CHAT_RESULTS = 20;
+  const MAX_CHAT_RESULTS = 10;
   const MAX_AI_CV_CHARS = 12_000;
   const MAX_NOFO_AI_CHARS = 145_000;
   const NEW_RELEVANT_MAX_AGE_DAYS = 14;
@@ -4589,6 +4589,7 @@
         <div class="message-content">${message.role === "assistant"
           ? CHAT_UI.renderRichText(message.text)
           : `<p>${escapeHtml(message.text)}</p>`}</div>
+        ${message.role === "assistant" ? `<div class="message-actions"><button class="text-button chat-copy-answer" type="button" data-chat-copy-message="${messageIndex}" aria-label="Copy this answer">Copy answer</button></div>` : ""}
         ${message.note ? `<span class="message-note">${escapeHtml(message.note)}</span>` : ""}
         ${message.resultIds?.length ? renderChatResultReferences(message.resultIds) : ""}
         ${message.focusIds?.length ? `<button class="button secondary chat-focus-action" type="button" data-chat-focus-message="${messageIndex}">${escapeHtml(CHAT_UI.focusActionLabel(message.focusIds.length))}</button>` : ""}
@@ -4952,8 +4953,12 @@
     updateAiRefineControl();
   }
 
-  function loadProviderKey({ announce = false } = {}) {
+  function loadProviderKey({ announce = false, preferStored = false } = {}) {
     let provider = $("k-provider").value;
+    if (preferStored && typeof CREDENTIAL_API.resolveProvider === "function") {
+      provider = CREDENTIAL_API.resolveProvider("");
+      $("k-provider").value = provider;
+    }
     let key = CREDENTIAL_API.loadKey(provider);
     if (!key) {
       const alternative = provider === "anthropic" ? "openai" : "anthropic";
@@ -5462,6 +5467,19 @@
     $("open-results-chat").addEventListener("click", openExpandedChat);
     $("toggle-chat-size").addEventListener("click", closeExpandedChat);
     $("chat-messages").addEventListener("click", event => {
+      const copy = event.target.closest("[data-chat-copy-message]");
+      if (copy) {
+        const message = state.ai.messages[Number(copy.dataset.chatCopyMessage)];
+        if (message?.role !== "assistant" || !message.text) return;
+        copy.disabled = true;
+        CHAT_UI.copyText(message.text).then(copied => {
+          if (!copy.isConnected) return;
+          copy.textContent = copied ? "Copied" : "Copy failed";
+          copy.setAttribute("aria-label", copied ? "Answer copied" : "Copy failed");
+          copy.disabled = false;
+        });
+        return;
+      }
       const jump = event.target.closest("[data-chat-jump]");
       if (jump) {
         jumpToResultFromChat(jump.dataset.chatJump);
@@ -5689,7 +5707,7 @@
             : "Saved profile restored but is not currently selected for searching.");
         }
       }
-      loadProviderKey({ announce: true });
+      loadProviderKey({ announce: true, preferStored: !state.profile.saved });
       state.feedback = EVALUATION_MODE ? PROFILE_API.loadFeedback() : {};
       refreshSavedState(SAVED_API.load());
       renderSaved();

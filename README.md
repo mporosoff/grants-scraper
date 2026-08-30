@@ -78,10 +78,10 @@ Anthropic key to:
    through the existing filtered local Strong matcher;
 2. assess at most 32 new locally qualified candidates and add at most 12 while
    preserving every ordinary Strong and Potential result; and
-3. ask grounded follow-up questions over the top 20 active results.
+3. ask grounded follow-up questions over the top 10 active results.
 
 “Chat with your results” appears with the returned result set and can answer
-questions over the top 20 ordinary search results without requiring a prior AI
+questions over the top 10 ordinary search results without requiring a prior AI
 rerank. It uses the same responsive result workflow on desktop and mobile.
 
 A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the

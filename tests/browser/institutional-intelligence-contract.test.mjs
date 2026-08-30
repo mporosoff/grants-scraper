@@ -361,6 +361,11 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(styles, /@media \(max-width: 520px\)/);
   assert.match(appSource, /credentials\.loadKey\(provider\)/);
   assert.match(appSource, /credentials\.saveKey\(provider, key\)/);
+  assert.match(appSource, /credentials\.resolveProvider\(provider\)/);
+  assert.ok(
+    appSource.indexOf("credentials.resolveProvider(provider)")
+      < appSource.indexOf('if (!["openai", "anthropic"].includes(provider)) provider = "openai";'),
+  );
   assert.match(appSource, /\$\("k-provider"\)/);
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
@@ -382,6 +387,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   );
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*setBusy\(true\);[\s\S]*await resolveTypedInstitution\(\)/);
   assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
+  assert.match(askQuestionSource, /refreshProvider\(\{ preferMain: false \}\)/);
   assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*setBusy\(false\)/);
   assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);

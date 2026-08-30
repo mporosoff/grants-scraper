@@ -342,15 +342,15 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
     "institutional-intelligence-core.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
-  assert.match(fundedAwards, /ai-provider\.js\?v=ai-additive-20260829/);
+  assert.match(fundedAwards, /ai-provider\.js\?v=chat-output-fixes-20260830/);
   assert.match(fundedAwards, /institutional-intelligence\.css\?v=live-award-loading-20260830/);
-  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=live-award-loading-20260830/);
+  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=chat-output-fixes-20260830/);
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  assert.match(fundingFinder, /app\.css\?v=compact-match-count-size-20260830/);
-  assert.match(fundingFinder, /app\.js\?v=compact-match-counts-empty-guidance-20260830/);
+  assert.match(fundingFinder, /app\.css\?v=chat-output-fixes-20260830/);
+  assert.match(fundingFinder, /app\.js\?v=chat-output-fixes-20260830/);
   for (const asset of ["ai-provider.js", "result-workflow.js"])
-    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=ai-additive-20260829`));
+    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=chat-output-fixes-20260830`));
   assert.match(teamMatch, /app\.css\?v=presentation-cleanup-20260830/);
 });
 

@@ -179,7 +179,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(script, />FOA changed</);
   assert.doesNotMatch(script, /AI retrieval candidate set|updateResultHeading|result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
-  assert.match(script, /MAX_CHAT_RESULTS = 20/);
+  assert.match(script, /MAX_CHAT_RESULTS = 10/);
+  assert.match(script, /data-chat-copy-message/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
   assert.match(script, /async function openNofoFromFile/);

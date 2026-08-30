@@ -982,6 +982,9 @@
 
   function refreshProvider({ preferMain = true } = {}) {
     let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
+    if (preferMain && typeof credentials.resolveProvider === "function") {
+      provider = credentials.resolveProvider(provider);
+    }
     if (!["openai", "anthropic"].includes(provider)) provider = "openai";
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
@@ -1017,7 +1020,7 @@
       if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
       const current = formState();
-      const { provider, configured } = refreshProvider();
+      const { provider, configured } = refreshProvider({ preferMain: false });
       const key = credentials.loadKey(provider);
       let plan = { ...current };
       let translationFallback = !configured || !key;

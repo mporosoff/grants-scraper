@@ -165,10 +165,11 @@ test("additive merge preserves every ordinary tier and relative order while limi
   ]);
 
   const combined = workflow.mergeAdditiveResults({ baseline, additions: selected.additions });
-  assert.deepEqual(ids(combined).slice(0, 2), ["strong-a", "strong-b"]);
+  assert.deepEqual(ids(combined).slice(0, 2), ["new-17", "new-16"]);
+  assert.deepEqual(ids(combined).slice(-4), ["strong-a", "strong-b", "potential-a", "potential-b"]);
   assert.deepEqual(ids(combined).slice(-2), ["potential-a", "potential-b"]);
   assert.ok(baseline.ids.every(id => ids(combined).includes(id)));
-  assert.ok(combined.slice(2, -2).every(match => (
+  assert.ok(combined.slice(0, 12).every(match => (
     match.workflowTier === "strong" && match.aiIdentified === true
   )));
 });
@@ -260,6 +261,9 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(restore, /clearResultFocusPreservingConversation\(\)/);
   assert.doesNotMatch(restore, /clearAiState|clearNofoState|savedItems|savedIds|k-key|currentProfile/);
   assert.match(chatIds, /currentDisplayMatches\(\)[\s\S]*?slice\(0, MAX_CHAT_RESULTS\)/);
+  assert.match(appSource, /MAX_CHAT_RESULTS = 10/);
+  assert.match(appSource, /data-chat-copy-message/);
+  assert.match(appSource, /CHAT_UI\.copyText\(message\.text\)/);
   assert.match(appSource, /knownResultIds\([\s\S]*?answer\.referenced_result_ids[\s\S]*?8/);
   assert.match(appSource, /AI refinement was cleared because the search criteria changed/);
   assert.match(appSource, /state\.refinement\.requestSequence \+= 1/);

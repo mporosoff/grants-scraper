@@ -103,8 +103,8 @@ User-connected AI use is explicit and bounded:
 - one call translates a research description into retrieval terms;
 - local search selects at most 32 candidates;
 - one call reranks those candidates into at most 12 matches; and
-- result-chat calls receive at most the top 20 ordinary results or the current
-  12-record AI shortlist plus recent conversation; and
+- result-chat calls receive at most the top 10 active ordinary or AI-refined
+  results plus recent conversation; and
 - uploaded-notice chat calls receive a page-marked extract capped at 145,000
   characters, optional matched public catalog metadata, and recent conversation.
 
