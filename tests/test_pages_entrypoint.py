@@ -256,7 +256,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "chat-output-fixes-20260830"
+        app_style_version = "pdf-drop-order-20260830"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -317,7 +317,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=chat-output-fixes-20260830"></script>',
+            '<script src="./assets/app.js?v=pdf-drop-order-20260830"></script>',
             explorer_html,
         )
         self.assertIn(

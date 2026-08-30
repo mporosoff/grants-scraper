@@ -19,8 +19,11 @@ test("primary search owns the only Find funding control and the optional AI sect
   assert.equal($(".primary-step #nofo-drop-zone #find-funding").length, 1);
   const children = $("#nofo-drop-zone").children().toArray();
   const queryIndex = children.findIndex(node => $(node).attr("id") === "query");
+  const uploadIndex = children.findIndex(node => $(node).hasClass("nofo-upload-button"));
   const findIndex = children.findIndex(node => $(node).attr("id") === "find-funding");
-  assert.equal(findIndex, queryIndex + 1, "the submit control stays immediately beside the main query field");
+  assert.ok(queryIndex < uploadIndex, "the PDF upload follows the main query field");
+  assert.ok(uploadIndex < findIndex, "the PDF upload precedes Find funding on desktop and mobile");
+  assert.equal($("#query").attr("data-nofo-drop-target"), "true");
   assert.equal($("#launch-step-heading").text().trim(), "Expand and refine your search with AI");
   assert.equal($(".provider-setup #ai-refine").length, 0);
   assert.equal($(".launch-step > .ai-refine-actions #ai-refine").length, 1);
@@ -28,6 +31,18 @@ test("primary search owns the only Find funding control and the optional AI sect
   assert.equal($("#ai-refine-requirement").attr("aria-live"), "polite");
   assert.equal($(".results-column").attr("aria-label"), "Funding opportunities");
   assert.equal($("#results").attr("aria-live"), "polite");
+});
+
+test("the main query accepts file drops through the existing local NOFO pipeline", () => {
+  const dropBinding = app.slice(
+    app.indexOf('const dropZone = $("nofo-drop-zone")'),
+    app.indexOf('$("catalog-retry").addEventListener'),
+  );
+  assert.match(dropBinding, /const isFileDrag = event =>/);
+  assert.match(dropBinding, /if \(!isFileDrag\(event\)\) return;[\s\S]*?event\.preventDefault\(\)/);
+  assert.match(dropBinding, /const files = \[\.\.\.\(event\.dataTransfer\?\.files \|\| \[\]\)\]/);
+  assert.match(dropBinding, /if \(!files\.length\) return;[\s\S]*?openNofoFromFile\(files\[0\]\)/);
+  assert.match(styles, /\.nofo-drop-zone\.is-dragging #query\s*\{/);
 });
 
 test("provider setup retains key, cost, help, and privacy details without repeating full privacy copy", () => {

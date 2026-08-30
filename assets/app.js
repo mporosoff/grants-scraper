@@ -4996,8 +4996,10 @@
       if (file) openNofoFromFile(file);
     });
     const dropZone = $("nofo-drop-zone");
+    const isFileDrag = event => [...(event.dataTransfer?.types || [])].includes("Files");
     ["dragenter", "dragover"].forEach(type => {
       dropZone.addEventListener(type, event => {
+        if (!isFileDrag(event)) return;
         event.preventDefault();
         if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
         dropZone.classList.add("is-dragging");
@@ -5009,10 +5011,11 @@
       }
     });
     dropZone.addEventListener("drop", event => {
+      const files = [...(event.dataTransfer?.files || [])];
+      if (!files.length) return;
       event.preventDefault();
       dropZone.classList.remove("is-dragging");
-      const file = [...(event.dataTransfer?.files || [])][0];
-      if (file) openNofoFromFile(file);
+      openNofoFromFile(files[0]);
     });
     $("catalog-retry").addEventListener("click", () => {
       const retry = pendingCatalogAction?.action || (() => {});
