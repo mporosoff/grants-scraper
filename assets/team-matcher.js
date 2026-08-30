@@ -36,6 +36,7 @@
     "faculty", "investigator", "investigators",
   ]);
   const MIN_MEMBER_SCORE = 1.35;
+  const STALE_UNDATED_MAX_AGE_DAYS = 5 * 366;
 
   function cleanDate(value) {
     const text = String(value || "");
@@ -55,10 +56,16 @@
     if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
       return false;
     }
+    const archiveDate = cleanDate(record.archive_date);
     const archiveAge = daysBetween(record.archive_date, now);
     if (archiveAge !== null && archiveAge >= 0) return false;
+    const closeDate = cleanDate(record.close_date);
     const closeAge = daysBetween(record.close_date, now);
     if (closeAge !== null && closeAge > 0 && !record.rolling) return false;
+    if (!record.rolling && !closeDate && !archiveDate) {
+      const postedAge = daysBetween(record.posted_date, now);
+      if (postedAge !== null && postedAge > STALE_UNDATED_MAX_AGE_DAYS) return false;
+    }
     return true;
   }
 

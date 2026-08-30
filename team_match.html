@@ -289,7 +289,7 @@
 <script src="assets/team-hybrid.js?v=app-1.3.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=acronym-2026-08-13"></script>
-<script src="assets/team-matcher.js?v=audit-2026-08-13"></script>
+<script src="assets/team-matcher.js?v=team-currentness-20260830"></script>
 <script src="assets/site-help.js?v=unified-ui-20260825"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
@@ -741,27 +741,34 @@
     lastHybridProfiles = profiles;
     lastHybridThemes = themes.filter(function (theme) { return activeLabels.has(theme.label); });
     var outcome = MATCH_ENGINE.matchTeam(profiles, activeLabels);
+    var eligibleParentIds = new Set(MATCH_ENGINE.records.map(function (row) {
+      return String(row.id);
+    }));
     renderThemes(outcome.themes);
     if (!CHILD_MATCH_ENGINE || !RETRIEVAL_API || !CHILD_CATALOG) {
       return outcome.results.map(function (result) { return liveEntry(result, false); });
     }
     var childOutcome = CHILD_MATCH_ENGINE.matchTeam(profiles, activeLabels);
+    var eligibleChildResults = childOutcome.results.filter(function (row) {
+      return eligibleParentIds.has(String(row.record && row.record.parent_id || ""));
+    });
     var rolled = RETRIEVAL_API.rollupRankedRecords({
       parentRows: outcome.results,
-      childRows: childOutcome.results,
-      parentId: function (row) { return row.id; },
-      childParentId: function (row) { return row.record && row.record.parent_id; },
-      childId: function (row) { return row.id; },
+      childRows: eligibleChildResults,
+      parentId: function (row) { return String(row.id); },
+      childParentId: function (row) { return String(row.record && row.record.parent_id || ""); },
+      childId: function (row) { return String(row.id); },
       score: function (row) { return row && row.relevanceScore; }
     });
     return rolled.rows.map(function (row) {
-      var parentRecord = byId[row.id];
+      var parentId = String(row.id);
+      var parentRecord = byId[parentId];
       if (!parentRecord) return null;
       var parentResult = row.parent;
       var bestTopic = row.bestChild && row.bestChild.row;
       var evidence = row.childNormalized > row.parentNormalized ? bestTopic : parentResult;
       return liveEntry({
-        id: row.id,
+        id: parentId,
         title: parentRecord.title,
         agency: parentRecord.agency,
         url: parentRecord.primary_document_url || parentRecord.funding_opportunity_url || parentRecord.detail_page || "",
@@ -780,7 +787,9 @@
           : [],
         record: parentRecord
       }, false);
-    }).filter(Boolean);
+    }).filter(function (entry) {
+      return entry && eligibleParentIds.has(String(entry.d.id));
+    });
   }
   function matchesQuery(e, q) {
     if (!q) return true;
