@@ -568,10 +568,11 @@ test("provider errors and client timeouts fail closed for the existing local-res
   assert.equal(timedOut.usage().fallbacks, 1);
 });
 
-test("Funding Finder visibly distinguishes Potential progress, empty completion, limits, and package failure", () => {
+test("Funding Finder shows Potential progress and failures while successful completion stays silent", () => {
   assert.match(htmlSource, /id="potential-status"[^>]*role="status"/);
   assert.match(appSource, /Finding broader Potential matches from public opportunity text/);
-  assert.match(appSource, /Potential matching completed\. No additional eligible matches were found\./);
+  assert.doesNotMatch(appSource, /"Potential matching completed\./);
+  assert.match(appSource, /applyHybridParents\(state\.hybrid\.parents\);[\s\S]*?\$\("search-status"\)\.textContent = "";[\s\S]*?renderResults\(\);/);
   assert.match(appSource, /Broader Potential matching is temporarily unavailable\./);
   assert.match(appSource, /Broader Potential matching is temporarily limited\./);
   assert.match(appSource, /unavailable while the search package updates/);
@@ -593,7 +594,7 @@ test("production integration is enabled, lazy, extractive, and fail-closed", () 
   assert.match(appSource, /Why this may be relevant/);
   assert.match(appSource, /Strong match/);
   assert.match(appSource, /Potential match/);
-  assert.match(appSource, /Strong \+ potential catalog/);
+  assert.doesNotMatch(appSource, /Strong \+ potential catalog/);
   assert.match(appSource, /const POTENTIAL_MATCH_LIMIT = 12/);
   assert.match(appSource, /\.filter\(match => !strongIds\.has/);
   assert.match(appSource, /Strong matches/);
