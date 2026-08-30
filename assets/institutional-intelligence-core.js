@@ -688,7 +688,7 @@
     const intentText = text.replace(/\bprogram\s+(?:contact|official|officer)s?\b/gu, " ");
     if (/how many|\bcount\b|number of/.test(text)) return "count";
     if (/\bwho\b|investigator|researcher|\bpi\b/.test(text)) return "investigators";
-    if (/institution|organization|university|college|recipient/.test(text)) return "institutions";
+    if (/\bwhere\b|institution|organization|university|college|recipient/.test(text)) return "institutions";
     if (/\bprograms?\b|mechanism|activity|office/.test(intentText)) return "programs";
     if (/\bwhen\b|\byear|timeline|chronolog|oldest|newest|earliest|latest|recent/.test(text)) return "years";
     if (/(?:\blist\b|\bshow\b).{0,24}(?:awards?|projects?)|which (?:awards?|projects?) (?:are |were )?(?:in|on|from) (?:this|the) snapshot|award titles?|project titles?|next page|previous page/.test(text)) return "awards";
@@ -714,7 +714,7 @@
       .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
     const nameNoise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
     const nameTokens = value => normalizedTokens(value, 300)
-      .filter(token => token.length >= 3 && !nameNoise.has(token));
+      .filter(token => token && !nameNoise.has(token));
     const nameSequences = [];
     const addNameSequence = tokens => {
       const key = tokens.join(" ");
@@ -736,7 +736,7 @@
       if (natural.length > 2) addNameSequence([natural[0], natural.at(-1)]);
     }
     nameSequences.sort((left, right) => right.length - left.length);
-    const questionTokens = normalizedTokens(question, 1_000).filter(token => token.length >= 3);
+    const questionTokens = normalizedTokens(question, 1_000);
     const removed = new Set();
     for (const sequence of nameSequences) {
       for (let index = 0; index <= questionTokens.length - sequence.length; index += 1) {
@@ -746,7 +746,7 @@
         }
       }
     }
-    const tokens = questionTokens.filter((token, index) => !removed.has(index) && !ignored.has(token));
+    const tokens = questionTokens.filter((token, index) => token.length >= 3 && !removed.has(index) && !ignored.has(token));
     const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];

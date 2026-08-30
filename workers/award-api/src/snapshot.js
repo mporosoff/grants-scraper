@@ -711,7 +711,7 @@ function retrievalTokens(value) {
 function officerNameSequences(displayName) {
   const noise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
   const tokensFor = value => normalizedRetrievalTokens(value)
-    .filter(token => token.length >= 3 && !noise.has(token));
+    .filter(token => token && !noise.has(token));
   const sequences = [];
   const add = tokens => {
     const key = tokens.join(" ");

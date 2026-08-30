@@ -478,11 +478,12 @@ export function mockAwards(target, {
         "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what", "when",
         "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
       ]);
-      const evidenceTokens = value => String(value || "")
+      const normalizedEvidenceTokens = value => String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
-        .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
-        .filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
-      const lockedName = evidenceTokens(snapshot.program_officer.display_name);
+        .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
+      const evidenceTokens = value => normalizedEvidenceTokens(value)
+        .filter(token => token.length >= 3 && !genericTerms.has(token));
+      const lockedName = normalizedEvidenceTokens(snapshot.program_officer.display_name);
       const nameSequences = lockedName.length >= 2 ? [lockedName, [...lockedName].reverse()] : [];
       const stripNameOccurrences = tokens => {
         const removed = new Set();
@@ -496,7 +497,9 @@ export function mockAwards(target, {
         }
         return tokens.filter((_token, index) => !removed.has(index));
       };
-      const requiredConcepts = [...new Set(body.phrases.flatMap(phrase => stripNameOccurrences(evidenceTokens(phrase))))];
+      const requiredConcepts = [...new Set(body.phrases
+        .flatMap(phrase => stripNameOccurrences(normalizedEvidenceTokens(phrase)))
+        .filter(token => token.length >= 3 && !genericTerms.has(token)))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
           record.title,

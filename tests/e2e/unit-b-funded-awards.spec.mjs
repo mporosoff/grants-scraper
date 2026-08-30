@@ -607,9 +607,15 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
 
-  await page.locator("#ii-question").fill("Which Vladimir Lukin awards involve carbon dioxide conversion?");
+  await page.locator("#ii-question").fill("Where did Vladimir Lukin fund projects?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
+  await expect(page.locator("#ii-direct-answer")).toContainText("Recipient institutions in the result snapshot");
+  await expect(page.locator("#ii-direct-answer")).toContainText("University of Rochester");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
+
+  await page.locator("#ii-question").fill("Where did Vladimir Lukin fund carbon dioxide conversion projects?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Matching recipient institutions: University of Rochester");
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(4);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
 
