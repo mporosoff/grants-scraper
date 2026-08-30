@@ -1867,6 +1867,23 @@
     });
   }
 
+  function compactResultCounts(matches) {
+    const counts = { strong: 0, potential: 0, ai: 0 };
+    matches.forEach(match => {
+      counts[RESULT_WORKFLOW_API.workflowTier(match)] += 1;
+      if (match.aiIdentified === true) counts.ai += 1;
+    });
+    const label = (count, tier) => (
+      `${count.toLocaleString()} ${tier} ${count === 1 ? "match" : "matches"}`
+    );
+    const parts = [
+      label(counts.strong, "strong"),
+      label(counts.potential, "potential"),
+    ];
+    if (counts.ai) parts.push(label(counts.ai, "AI-identified"));
+    return parts.join(" · ");
+  }
+
   function syncStateToUrl() {
     if (!location.protocol.startsWith("http")) return;
     const url = new URL(location.href);
@@ -3800,6 +3817,7 @@
     updateSavedSearchAlertUi();
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
+      $("result-tier-counts").textContent = "";
       $("results").innerHTML = `<div class="empty-state initial-empty-state">
         <span class="empty-step-number" aria-hidden="true">1</span>
         <h3>Search or add a funding notice above</h3>
@@ -3821,6 +3839,7 @@
     }
 
     const display = currentDisplayMatches();
+    $("result-tier-counts").textContent = compactResultCounts(display);
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
@@ -3860,24 +3879,11 @@
         }
         group.rows.push({ match, position: start + index + 1 });
       });
-      const noStrongNotice = state.strongMatches.length
-        ? ""
-        : `<div class="result-tier-empty"><h3>No strong matches found.</h3><p>The broader search found potential matches below for you to review.</p></div>`;
-      $("results").innerHTML = noStrongNotice + groups.map(group => {
-        const strong = group.tier === "strong";
-        const count = display.filter(match => (
-          RESULT_WORKFLOW_API.workflowTier(match) === group.tier
-        )).length;
-        return `<section class="result-tier result-tier-${group.tier}" aria-labelledby="result-tier-${group.tier}">
-          <div class="result-tier-heading">
-            <h3 id="result-tier-${group.tier}">${strong ? "Strong matches" : "Potential matches"} <span>${count.toLocaleString()}</span></h3>
-            <p>${strong
-              ? "Supported by conservative local evidence in the opportunity’s public title, program area, description, or eligible child text."
-              : "Additional leads from the broader hybrid search. The supporting public passage is shown, but confirm fit in the official opportunity."}</p>
-          </div>
+      $("results").innerHTML = groups.map(group => (
+        `<div class="result-tier result-tier-${group.tier}">
           ${group.rows.map(item => resultCard(item.match, item.position)).join("")}
-        </section>`;
-      }).join("");
+        </div>`
+      )).join("");
     } else {
       $("results").innerHTML = page
         .map((match, index) => resultCard(match, start + index + 1))

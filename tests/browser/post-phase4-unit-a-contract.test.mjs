@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import vm from "node:vm";
 import { load } from "cheerio";
 
 const root = new URL("../../", import.meta.url);
@@ -86,18 +87,51 @@ test("AI refinement requires both a usable result context and an entered or save
   assert.match(providerState, /updateAiRefineControl\(\)/);
 });
 
-test("the redundant result summary is absent while result actions and sort remain", () => {
+test("one compact live tier count replaces the redundant result summary and tier explanations", () => {
+  const $ = load(page);
   for (const id of ["results-heading", "result-count", "result-label", "results-mode", "result-range"]) {
     assert.equal(page.includes(`id="${id}"`), false, id);
   }
   for (const className of ["results-summary", "toolbar-lower-row"]) {
     assert.equal(page.includes(`class="${className}"`), false, className);
   }
-  assert.match(page, /class="results-toolbar[^>]*" id="results-toolbar"[\s\S]*?class="toolbar-actions"/);
+  assert.equal($("#result-tier-counts").length, 1);
+  assert.equal($("#result-tier-counts").attr("role"), "status");
+  assert.equal($("#result-tier-counts").attr("aria-live"), "polite");
+  assert.equal($("#result-tier-counts").attr("aria-atomic"), "true");
+  assert.equal($("#results-toolbar > #result-tier-counts").length, 1);
+  assert.match(page, /class="results-toolbar[^>]*" id="results-toolbar"[\s\S]*?id="result-tier-counts"[\s\S]*?class="toolbar-actions"/);
   assert.match(page, /class="toolbar-controls"[\s\S]*?id="sort"/);
   assert.doesNotMatch(app, /updateResultHeading|results-heading|result-count|result-label|results-mode|result-range/);
   assert.match(styles, /\.results-toolbar\.search-not-started\s*\{[^}]*display:\s*none/);
   assert.doesNotMatch(app, /\$\("search-status"\)\.textContent = `\$\{state\.strongMatches\.length/);
+  const countSource = app.slice(
+    app.indexOf("function compactResultCounts"),
+    app.indexOf("function syncStateToUrl"),
+  );
+  const context = {
+    RESULT_WORKFLOW_API: {
+      workflowTier(match) { return match.workflowTier === "potential" ? "potential" : "strong"; },
+    },
+  };
+  vm.runInNewContext(`${countSource}\nthis.compactResultCounts = compactResultCounts;`, context);
+  const nineStrong = Array.from({ length: 9 }, () => ({ workflowTier: "strong" }));
+  const twelvePotential = Array.from({ length: 12 }, () => ({ workflowTier: "potential" }));
+  assert.equal(
+    context.compactResultCounts([...nineStrong, ...twelvePotential]),
+    "9 strong matches · 12 potential matches",
+  );
+  assert.equal(
+    context.compactResultCounts([
+      { workflowTier: "strong", aiIdentified: true },
+      { workflowTier: "potential" },
+    ]),
+    "1 strong match · 1 potential match · 1 AI-identified match",
+  );
+  assert.equal(context.compactResultCounts([]), "0 strong matches · 0 potential matches");
+  const render = app.slice(app.indexOf("function renderResults"), app.indexOf("function renderActiveFilters"));
+  assert.match(render, /result-tier-counts"\)\.textContent = compactResultCounts\(display\)/);
+  assert.doesNotMatch(render, /result-tier-heading|result-tier-empty|Supported by conservative local evidence|Additional leads from the broader hybrid search/);
 });
 
 test("desktop aligns query, submit, and upload while tablet and smaller widths stack safely", () => {
