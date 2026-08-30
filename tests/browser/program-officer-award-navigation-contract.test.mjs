@@ -280,6 +280,17 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(partial.exact_total, null);
   assert.equal(core.programOfficerAggregateIntent("Which projects involve quantum sensing?"), "");
   assert.equal(core.programOfficerAggregateIntent("Which projects are in this snapshot?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("Which awards did this program officer fund?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("What research did they fund?"), "awards");
+  assert.equal(core.programOfficerAggregateIntent("Which programs did this program officer manage?"), "programs");
+  const longConcepts = [
+    "electrochemical", "interfacial", "photophysical", "spectroscopy", "nanostructured", "heterogeneous",
+    "catalysis", "quantum", "sensing", "bioengineering", "microfluidics", "metamaterials",
+  ];
+  const packedPhrases = plain(core.programOfficerRetrievalPhrases(`Which projects involve ${longConcepts.join(" ")}?`));
+  assert.ok(packedPhrases.length <= 8);
+  assert.ok(packedPhrases.every(phrase => phrase.length <= 120));
+  assert.deepEqual(packedPhrases.flatMap(phrase => phrase.split(" ")), longConcepts, "bounded phrases retain whole concepts without mid-token truncation");
   for (const [status, expected] of [["rate_limited", "rate_limited"], ["unsupported", "unsupported"], ["unavailable", "unavailable"]]) {
     const value = buildAwardSnapshot({
       snapshotId: "d".repeat(64), queryId: "e".repeat(64), asOf: "2026-08-29T12:00:00.000Z",
@@ -395,7 +406,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260829";
+  const key = "po-award-navigation-20260830";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }

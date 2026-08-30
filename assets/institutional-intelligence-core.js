@@ -685,21 +685,25 @@
 
   function programOfficerAggregateIntent(question) {
     const text = clean(question, 1_000).toLocaleLowerCase("en-US");
+    const intentText = text.replace(/\bprogram\s+(?:contact|official|officer)s?\b/gu, " ");
     if (/how many|\bcount\b|number of/.test(text)) return "count";
     if (/\bwho\b|investigator|researcher|\bpi\b/.test(text)) return "investigators";
     if (/institution|organization|university|college|recipient/.test(text)) return "institutions";
-    if (/program|mechanism|activity|office/.test(text)) return "programs";
+    if (/\bprograms?\b|mechanism|activity|office/.test(intentText)) return "programs";
     if (/\bwhen\b|\byear|timeline|chronolog|oldest|newest|earliest|latest|recent/.test(text)) return "years";
     if (/(?:\blist\b|\bshow\b).{0,24}(?:awards?|projects?)|which (?:awards?|projects?) (?:are |were )?(?:in|on|from) (?:this|the) snapshot|award titles?|project titles?|next page|previous page/.test(text)) return "awards";
+    if (text && !programOfficerRetrievalPhrases(question).length) return "awards";
     return "";
   }
 
   function programOfficerRetrievalPhrases(question) {
     const ignored = new Set([
-      "about", "award", "awards", "contact", "did", "does", "fund", "funded", "funding", "grant", "grants",
-      "have", "involve", "involved", "involves", "involving", "officer", "program", "project", "projects",
-      "related", "relevant", "research", "study", "studies", "their", "this", "those", "what", "when",
-      "where", "which", "with", "work",
+      "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "contact", "contacts",
+      "did", "does", "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
+      "involve", "involved", "involves", "involving", "manage", "managed", "officer", "officers", "official", "officials",
+      "overview", "please", "program", "programs", "project", "projects", "related", "relevant", "research", "study", "studies",
+      "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "then", "these",
+      "they", "this", "those", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "your",
     ]);
     const tokens = clean(question, 1_000)
       .normalize("NFKD")
@@ -709,15 +713,16 @@
     const unique = [...new Set(tokens)].slice(0, 12);
     if (!unique.length) return [];
     const phrases = [];
-    if (unique.length > 1) phrases.push(unique.join(" ").slice(0, 120));
-    for (let index = 0; index + 1 < unique.length && phrases.length < 8; index += 1) {
-      phrases.push(`${unique[index]} ${unique[index + 1]}`);
-    }
     for (const token of unique) {
-      if (phrases.length >= 8) break;
-      phrases.push(token);
+      if (token.length > 120) continue;
+      const slot = phrases.findIndex(phrase => phrase.length + token.length + 1 <= 120);
+      if (slot >= 0) {
+        phrases[slot] = `${phrases[slot]} ${token}`;
+      } else if (phrases.length < 8) {
+        phrases.push(token);
+      }
     }
-    return [...new Set(phrases)].slice(0, 8);
+    return phrases;
   }
 
   function programOfficerScopeText(snapshot) {

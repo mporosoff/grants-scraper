@@ -602,6 +602,12 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await expect(page.locator("#ii-direct-answer")).toContainText("30 normalized matching awards");
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+
+  await page.locator("#ii-question").fill("What research did they fund?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
   expect(runtimeErrors).toEqual([]);
 });
 
