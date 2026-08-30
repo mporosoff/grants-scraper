@@ -624,10 +624,16 @@ export async function runFundingSearch(page, query) {
 }
 
 export async function waitForHybridSettled(page) {
-  await expect(page.locator("#potential-status")).toContainText(
-    /Potential matching completed|temporarily|needs the topic layer|unavailable/,
-    { timeout: 30_000 },
-  );
+  await expect.poll(async () => {
+    const status = page.locator("#potential-status");
+    const text = (await status.textContent() || "").trim();
+    if (/temporarily|needs the topic layer|unavailable/i.test(text)) return "settled";
+    if (!(await status.evaluate(node => node.classList.contains("hidden")))) return "pending";
+    const counts = (await page.locator("#result-tier-counts").textContent() || "").trim();
+    return /\d+ strong match(?:es)? · \d+ potential match(?:es)?/i.test(counts)
+      ? "settled"
+      : "pending";
+  }, { timeout: 30_000 }).toBe("settled");
 }
 
 export async function downloadText(page, selector) {

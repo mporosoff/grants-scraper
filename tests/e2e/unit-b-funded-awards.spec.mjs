@@ -381,9 +381,9 @@ test("a fallback source-batch controller and ownership guard prevent late hydrat
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_snapshot=/);
   await expect(page.locator("#ii-output")).toBeHidden();
-  await expect(page.locator("#ii-status")).toContainText("Structured award search and institution resolution do not require an AI key");
+  await expect(page.locator("#ii-status")).toHaveText("");
   await page.waitForTimeout(180);
-  await expect(page.locator("#ii-status")).toContainText("Structured award search and institution resolution do not require an AI key");
+  await expect(page.locator("#ii-status")).toHaveText("");
   expect(calls.filter(call => call.source === "NSF" && Number.isInteger(call.offset))).toHaveLength(2);
   expect(runtimeErrors).toEqual([]);
 });

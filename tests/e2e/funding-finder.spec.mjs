@@ -44,6 +44,8 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   await page.locator("[data-pursuit-status]").selectOption("pursuing");
   await page.locator("[data-pursuit-note]").fill("Draft due Friday");
 
+  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#alerts-panel > summary").click();
   await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   await page.locator("#alert-new-matches").click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
@@ -79,6 +81,9 @@ test("Unit C alert dialog locks the page, traps focus, scrolls internally, and r
   await page.setViewportSize({ width: 320, height: 480 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
+  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#alerts-panel > summary").click();
+  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.scrollIntoViewIfNeeded();
   const scrollBefore = await page.evaluate(() => window.scrollY);
@@ -168,6 +173,9 @@ test("Unit C alert dialog preserves its recovery state and restores focus after 
   await page.setViewportSize({ width: 390, height: 520 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
+  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#alerts-panel > summary").click();
+  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
@@ -359,7 +367,7 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   await query.press("Enter");
   await expect(page.locator("#results .result-card").first()).toBeVisible();
   await waitForHybridSettled(page);
-  await expect(page.locator("#results-heading")).toContainText(/\d+ opportunities · \d+ strong · \d+ potential/);
+  await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
   await expect(refine).toBeDisabled();
   await expect(page.locator("#ai-refine-requirement")).toContainText("Enter or save an AI provider key");
   await page.locator(".provider-setup > summary").click();
@@ -379,8 +387,8 @@ test("primary search and AI action stack without horizontal overflow from tablet
       page.locator("#find-funding").boundingBox(),
       page.locator(".nofo-upload-button").boundingBox(),
     ]);
-    expect(findBox.y).toBeGreaterThan(queryBox.y);
-    expect(uploadBox.y).toBeGreaterThan(findBox.y);
+    expect(uploadBox.y).toBeGreaterThan(queryBox.y);
+    expect(findBox.y).toBeGreaterThan(uploadBox.y);
     for (const box of [queryBox, findBox, uploadBox]) {
       expect(box.x).toBeGreaterThanOrEqual(0);
       expect(box.x + box.width).toBeLessThanOrEqual(width);
@@ -405,7 +413,7 @@ test("provider failure preserves the search, filters, results, key, and retry co
   await page.locator("#status-forecasted").uncheck();
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  const originalHeading = await page.locator("#results-heading").textContent();
+  const originalHeading = await page.locator("#result-tier-counts").textContent();
   await page.locator(".provider-setup > summary").click();
   await page.locator("#k-key").fill("sk-preserved-test-key");
   await page.locator("#ai-refine").click();
@@ -415,7 +423,7 @@ test("provider failure preserves the search, filters, results, key, and retry co
   await expect(page.locator("#query")).toHaveValue("catalysis science");
   await expect(page.locator("#status-forecasted")).not.toBeChecked();
   await expect(page.locator("#k-key")).toHaveValue("sk-preserved-test-key");
-  await expect(page.locator("#results-heading")).toHaveText(originalHeading);
+  await expect(page.locator("#result-tier-counts")).toHaveText(originalHeading);
   await expect(page.locator("#ai-refine")).toBeEnabled();
 });
 
@@ -426,7 +434,7 @@ test("an alert focus link starts a result search and reveals its exact opportuni
   const card = page.locator('[data-opportunity-id="361187"]');
   await expect(card).toBeVisible({ timeout: 30_000 });
   await expect(card).toHaveClass(/chat-target/);
-  await expect(page.locator("#results-mode")).not.toContainText("Ready when you are");
+  await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
 });
 
 test("Strong and Potential membership survives sorting, filters trigger one semantic cycle, and core actions work", async ({ page }) => {
@@ -437,8 +445,8 @@ test("Strong and Potential membership survives sorting, filters trigger one sema
   await expect.poll(() => calls.embed.length).toBe(1);
   await expect.poll(() => calls.rerank.length).toBe(1);
 
-  await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
-  const resultHeading = await page.locator("#results-heading").textContent();
+  await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
+  const resultHeading = await page.locator("#result-tier-counts").textContent();
   const tierCounts = resultHeading.match(/(\d+) strong.*?(\d+) potential/);
   const strongCount = Number(tierCounts?.[1] || 0);
   const potentialCount = Number(tierCounts?.[2] || 0);
@@ -527,8 +535,8 @@ test("Retry-After keeps Strong results visible and disables retry until the inte
   await expect(retry).toBeEnabled({ timeout: 12_000 });
   await retry.click();
   await expect.poll(() => calls.embed.length).toBe(2);
-  await expect(page.locator("#potential-status")).toContainText("Potential matching completed", { timeout: 30_000 });
-  await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
+  await waitForHybridSettled(page);
+  await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
 });
 
 test("refinement awaits the one pending Potential request before capturing its ordinary baseline", async ({ page }) => {
@@ -545,9 +553,9 @@ test("refinement awaits the one pending Potential request before capturing its o
   expect(hybrid.embed).toHaveLength(1);
   expect(hybrid.rerank).toHaveLength(1);
   expect(ai.calls).toBe(2);
-  await expect(page.locator("#result-count")).toContainText(/\d+ strong · \d+ potential · \d+ AI identified/);
+  await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)? · \d+ AI-identified match(?:es)?/i);
   await page.locator("#restore-ai-refinement").click();
-  await expect(page.locator("#results-mode")).toHaveText("Strong + potential catalog");
+  await expect(page.locator("#result-tier-counts")).not.toContainText(/AI-identified/i);
 });
 
 test("generic-only and stale AI responses leave the ordinary baseline untouched", async ({ page }) => {
@@ -558,7 +566,7 @@ test("generic-only and stale AI responses leave the ordinary baseline untouched"
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  const baselineHeading = await page.locator("#result-count").textContent();
+  const baselineHeading = await page.locator("#result-tier-counts").textContent();
   const baselineIds = await page.locator("#results .result-card").evaluateAll(cards => (
     cards.map(card => card.dataset.opportunityId)
   ));
@@ -568,7 +576,7 @@ test("generic-only and stale AI responses leave the ordinary baseline untouched"
   await expect(page.locator("#ai-status")).toContainText("no additional evidence-qualified opportunities");
   expect(generic.calls).toBe(1);
   await expect(page.locator("#restore-ai-refinement")).toBeHidden();
-  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect(page.locator("#result-tier-counts")).toHaveText(baselineHeading);
   await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => (
     cards.map(card => card.dataset.opportunityId)
   ))).toEqual(baselineIds);
@@ -585,7 +593,7 @@ test("generic-only and stale AI responses leave the ordinary baseline untouched"
   await page.waitForTimeout(650);
   expect(stale.calls).toBe(1);
   await expect(page.locator("#restore-ai-refinement")).toBeHidden();
-  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect(page.locator("#result-tier-counts")).toHaveText(baselineHeading);
   await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => (
     cards.map(card => card.dataset.opportunityId)
   ))).toEqual(baselineIds);
@@ -636,7 +644,7 @@ test("refinement keeps both calls and provenance bound to its starting provider"
   await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
   expect(ai.calls).toBe(2);
   await expect(page.locator("#k-provider")).toHaveValue("anthropic");
-  await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved");
+  await expect(page.locator("#result-tier-counts")).toContainText(/AI-identified/i);
 });
 
 test("editing an imported ORCID clears stale refinement and restores ordinary results", async ({ page }) => {
@@ -670,7 +678,7 @@ test("editing an imported ORCID clears stale refinement and restores ordinary re
   await page.locator("#use-profile").check();
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  const baselineHeading = await page.locator("#result-count").textContent();
+  const baselineHeading = await page.locator("#result-tier-counts").textContent();
   await page.locator(".provider-setup > summary").click();
   await page.locator("#k-key").fill("sk-orcid-invalidation-mock");
   await page.locator("#ai-refine").click();
@@ -680,7 +688,7 @@ test("editing an imported ORCID clears stale refinement and restores ordinary re
   await expect(page.locator("#ai-status")).toContainText("cleared because the search criteria changed");
   await expect(page.locator("#restore-ai-refinement")).toBeHidden();
   await expect(page.locator("#ai-refine-requirement")).toContainText("Run Find funding again");
-  await expect(page.locator("#result-count")).toHaveText(baselineHeading);
+  await expect(page.locator("#result-tier-counts")).toHaveText(baselineHeading);
   await expect(page.locator("#orcid-status")).toContainText("Select “Import ORCID”");
 });
 
@@ -747,7 +755,7 @@ test("AI refinement adds locally Strong records and exact restoration preserves 
   await expect(page.locator("#use-profile")).not.toBeChecked();
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  const originalCount = await page.locator("#result-count").textContent();
+  const originalCount = await page.locator("#result-tier-counts").textContent();
   const originalPageIds = await page.locator("#results .result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
   const originalCsv = await downloadText(page, "#export-csv");
   const originalSort = await page.locator("#sort").inputValue();
@@ -761,7 +769,7 @@ test("AI refinement adds locally Strong records and exact restoration preserves 
   expect(ai.candidate?.workflow_tier).toBe("strong");
   expect(ai.candidate?.ai_identified).toBe(true);
   expect(ai.candidate?.ai_discovery_phrases.length).toBeGreaterThan(0);
-  await expect(page.locator("#results-mode")).toHaveText("AI-expanded catalog · originals preserved", { timeout: 30_000 });
+  await expect(page.locator("#result-tier-counts")).toContainText(/AI-identified/i, { timeout: 30_000 });
   const candidate = page.locator(`[data-opportunity-id="${ai.candidate.id}"]`);
   await expect(candidate).toBeVisible();
   await expect(candidate.getByText("AI identified", { exact: true })).toBeVisible();
@@ -794,7 +802,7 @@ test("AI refinement adds locally Strong records and exact restoration preserves 
   await expect(page.locator("#ai-status")).toContainText("Original results restored exactly");
   await expect(page.locator("#restore-ai-refinement")).toBeHidden();
   await expect(page.locator("#ai-refine")).toBeFocused();
-  await expect(page.locator("#result-count")).toHaveText(originalCount);
+  await expect(page.locator("#result-tier-counts")).toHaveText(originalCount);
   await expect(page.locator("#sort")).toHaveValue(originalSort);
   await expect.poll(() => page.locator("#results .result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId))).toEqual(originalPageIds);
   expect(await downloadText(page, "#export-csv")).toBe(originalCsv);
