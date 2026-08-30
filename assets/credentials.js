@@ -87,9 +87,12 @@
   }
 
   function resolveProvider(preferred, storage) {
-    const normalizedPreferred = normalizeProvider(preferred);
+    const requestedProvider = String(preferred || "").toLowerCase();
+    const normalizedPreferred = normalizeProvider(requestedProvider);
     const record = readRecord(storage);
-    if (record.keys[normalizedPreferred]) return normalizedPreferred;
+    if (PROVIDERS.has(requestedProvider) && record.keys[normalizedPreferred]) {
+      return normalizedPreferred;
+    }
     if (record.preferred_provider && record.keys[record.preferred_provider]) {
       return record.preferred_provider;
     }

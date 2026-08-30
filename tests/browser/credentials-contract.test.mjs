@@ -70,6 +70,17 @@ test("shares the saved provider choice across Funding Finder pages", () => {
   assert.equal(credentials.resolveProvider("anthropic", storage), "openai");
 });
 
+test("an absent page-level provider honors the most recently saved provider", () => {
+  const storage = memoryStorage();
+  const credentials = loadModule(storage);
+
+  credentials.saveKey("openai", "sk-openai-test", storage);
+  credentials.saveKey("anthropic", "sk-ant-test", storage);
+  assert.equal(credentials.resolveProvider("", storage), "anthropic");
+  assert.equal(credentials.resolveProvider(undefined, storage), "anthropic");
+  assert.equal(credentials.resolveProvider("openai", storage), "openai");
+});
+
 test("fails closed for malformed storage and bounds saved values", () => {
   const storage = memoryStorage({
     "funding-finder.credentials.v1": "{not-json",

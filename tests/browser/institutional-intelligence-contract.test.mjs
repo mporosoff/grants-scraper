@@ -362,6 +362,10 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(appSource, /credentials\.loadKey\(provider\)/);
   assert.match(appSource, /credentials\.saveKey\(provider, key\)/);
   assert.match(appSource, /credentials\.resolveProvider\(provider\)/);
+  assert.ok(
+    appSource.indexOf("credentials.resolveProvider(provider)")
+      < appSource.indexOf('if (!["openai", "anthropic"].includes(provider)) provider = "openai";'),
+  );
   assert.match(appSource, /\$\("k-provider"\)/);
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
