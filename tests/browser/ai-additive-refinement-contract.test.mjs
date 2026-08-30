@@ -289,8 +289,8 @@ test("one accessible restore control and search-input controls have the required
     pageSource.indexOf('id="nofo-drop-zone"'),
     pageSource.indexOf('id="search-status"'),
   );
-  assert.ok(searchArea.indexOf('id="query"') < searchArea.indexOf('id="find-funding"'));
-  assert.ok(searchArea.indexOf('id="find-funding"') < searchArea.indexOf('id="nofo-file"'));
+  assert.ok(searchArea.indexOf('id="query"') < searchArea.indexOf('id="nofo-file"'));
+  assert.ok(searchArea.indexOf('class="nofo-upload-button"') < searchArea.indexOf('id="find-funding"'));
   assert.equal((pageSource.match(/id="restore-ai-refinement"/g) || []).length, 1);
   assert.equal((pageSource.match(/>Restore original results<\/button>/g) || []).length, 1);
   assert.doesNotMatch(pageSource, /Hide AI/);
