@@ -457,6 +457,7 @@ test("Worker validates bounded public requests and exposes no credential require
       },
       program_officer_evidence: {
         endpoint: "/awards/snapshots/evidence",
+        phrase_format: "normalized-concepts-v1",
         scoring_version: "program-officer-evidence-v2",
         concept_coverage: "all_substantive_query_concepts_same_record",
         maximum_phrases: 8,

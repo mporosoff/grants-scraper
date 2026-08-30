@@ -17,6 +17,7 @@ import {
   SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
   SNAPSHOT_EVIDENCE_FACET_LIMIT,
   SNAPSHOT_EVIDENCE_LIMIT,
+  SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
   SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
   SNAPSHOT_EVIDENCE_SCORING_VERSION,
   SNAPSHOT_FACET_KEY_MAX_LENGTH,
@@ -633,13 +634,13 @@ function validateSnapshotRetry(body) {
 }
 
 function validateSnapshotEvidence(body) {
-  if (!exactKeys(body, ["snapshot_id", "phrases", "limit"])) return null;
+  if (!exactKeys(body, ["snapshot_id", "phrases", "phrase_format", "limit"])) return null;
   const snapshotId = validateSnapshotId(body.snapshot_id);
   const limit = boundedInteger(body.limit, { minimum: 1, maximum: SNAPSHOT_EVIDENCE_LIMIT });
-  if (!snapshotId || !limit || !Array.isArray(body.phrases) || body.phrases.length < 1 || body.phrases.length > 8) return null;
+  if (!snapshotId || !limit || body.phrase_format !== SNAPSHOT_EVIDENCE_PHRASE_FORMAT || !Array.isArray(body.phrases) || body.phrases.length < 1 || body.phrases.length > 8) return null;
   const phrases = body.phrases.map(value => normalizedString(value, 120));
   if (phrases.some(value => !value)) return null;
-  return { snapshotId, phrases, limit };
+  return { snapshotId, phrases, phraseFormat: body.phrase_format, limit };
 }
 
 function snapshotCacheRequest(snapshotId) {
@@ -774,6 +775,7 @@ export function createHandler({
           resource_budget: WORKER_RESOURCE_BUDGET,
           program_officer_evidence: {
             endpoint: "/awards/snapshots/evidence",
+            phrase_format: SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
             scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
             concept_coverage: "all_substantive_query_concepts_same_record",
             maximum_phrases: 8,

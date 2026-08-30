@@ -12,6 +12,7 @@ import { createHandler, storeSnapshot, validateSnapshotCreate } from "../../work
 import {
   SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
   SNAPSHOT_EVIDENCE_LIMIT,
+  SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
   SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
   buildAwardSnapshot,
   snapshotEvidence,
@@ -257,15 +258,14 @@ test("topical evidence requires every substantive query concept in the same awar
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which institutions received catalysis awards?")), ["catalysis"]);
   const evidence = snapshotEvidence(snapshot, { phrases, limit: 24 });
   assert.deepEqual(evidence.awards.map(item => item.award_id), ["NSF-203"]);
+  const topicalStarter = programOfficerSnapshot([
+    award(204, { title: "Quantum control", abstract: "Precision methods." }),
+    award(205, { title: "Show quantum control", abstract: "Explicit topical vocabulary." }),
+  ]);
   assert.deepEqual(
-    snapshotEvidence(snapshot, { phrases: ["could you find awards about catalysis quantum sensing"], limit: 24 }).awards.map(item => item.award_id),
-    ["NSF-203"],
-    "the Worker independently excludes request scaffolding from required concepts",
-  );
-  assert.deepEqual(
-    snapshotEvidence(snapshot, { phrases: ["can you help me find projects about catalysis quantum sensing"], limit: 24 }).awards.map(item => item.award_id),
-    ["NSF-203"],
-    "the Worker independently strips a complete leading request clause",
+    snapshotEvidence(topicalStarter, { phrases: ["show quantum control"], phraseFormat: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-205"],
+    "the Worker treats browser-packed normalized concepts literally and preserves every required concept",
   );
   assert.equal(evidence.retrieval.concept_coverage, "all_substantive_query_concepts_same_record");
   assert.equal(evidence.retrieval.required_concept_count, 3, "conjunctions and question scaffolding are not substantive concepts");
@@ -521,26 +521,28 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
   };
   const handler = createHandler({ cache, now: () => new Date("2026-08-29T12:30:00.000Z"), fetchImpl: async () => { throw new Error("no upstream"); } });
   const request = (body, origin = "https://mporosoff.github.io") => new Request("https://award.test/awards/snapshots/evidence", { method: "POST", headers: { Origin: origin, "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const response = await handler(request({ snapshot_id: snapshot.snapshot_id, phrases: ["catalysis"], limit: 24 }), env);
+  const evidenceBody = body => ({ phrase_format: SNAPSHOT_EVIDENCE_PHRASE_FORMAT, ...body });
+  const response = await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, phrases: ["catalysis"], limit: 24 })), env);
   assert.equal(response.status, 200);
   assert.equal((await response.json()).retrieval.records_scanned, 30);
   assert.ok(buckets.includes("award:evidence"));
   const privatePhrase = "retrieval-private-marker";
-  assert.equal((await handler(request({ snapshot_id: snapshot.snapshot_id, phrases: [privatePhrase], limit: 24 }), env)).status, 200);
+  assert.equal((await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, phrases: [privatePhrase], limit: 24 })), env)).status, 200);
   const storedSnapshot = await [...cache.values.entries()].find(([url]) => url.includes("award-snapshot.internal"))[1].clone().text();
   assert.doesNotMatch(storedSnapshot, new RegExp(privatePhrase), "retrieval phrases must not be persisted into the snapshot cache");
-  assert.equal((await handler(request({ snapshot_id: snapshot.snapshot_id, phrases: [], limit: 24 }), env)).status, 400);
-  assert.equal((await handler(request({ snapshot_id: snapshot.snapshot_id, phrases: ["catalysis"], limit: 24 }, "https://evil.example"), env)).status, 403);
+  assert.equal((await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, phrases: [], limit: 24 })), env)).status, 400);
+  assert.equal((await handler(request({ snapshot_id: snapshot.snapshot_id, phrases: ["catalysis"], limit: 24 }), env)).status, 400, "the phrase format is mandatory");
+  assert.equal((await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, phrases: ["catalysis"], limit: 24 }), "https://evil.example"), env)).status, 403);
 
   const expired = programOfficerSnapshot([], { expiresAt: "2026-08-29T12:29:59.999Z" });
   expired.snapshot_id = "c".repeat(64);
   await storeSnapshot(cache, expired, 3600);
-  assert.equal((await handler(request({ snapshot_id: expired.snapshot_id, phrases: ["catalysis"], limit: 24 }), env)).status, 410);
+  assert.equal((await handler(request(evidenceBody({ snapshot_id: expired.snapshot_id, phrases: ["catalysis"], limit: 24 })), env)).status, 410);
   assert.equal(core.validateNarrativeAnswer({ claims: [{ text: "Unsupported", evidence_ids: ["NSF:NOT-IN-EVIDENCE"] }] }, [{ evidence_id: "NSF:KNOWN" }]), null);
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-8";
+  const key = "po-award-navigation-20260830-9";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }
@@ -549,9 +551,11 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.match(pageSource, /id="ii-institutions"/);
   assert.match(configSource, /snapshotEvidenceUrl/);
   assert.match(appSource, /programOfficerEvidence/);
+  assert.match(appSource, /phrase_format: "normalized-concepts-v1"/);
   assert.match(appSource, /records_scanned/);
   assert.doesNotMatch(appSource.slice(appSource.indexOf("function programOfficerEvidence"), appSource.indexOf("function refreshProgramOfficerQuestionAnswer")), /residentAwards/);
   assert.match(deploySource, /program-officer-evidence-v2/);
+  assert.match(deploySource, /normalized-concepts-v1/);
   assert.match(deploySource, /all_substantive_query_concepts_same_record/);
   assert.match(deploySource, /matched_facet_limit/);
 });

@@ -1012,7 +1012,7 @@
       awards: [],
     };
     try {
-      return await postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, limit: 24 });
+      return await postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, phrase_format: "normalized-concepts-v1", limit: 24 });
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
       setStatus("The Program Officer snapshot expired. Rebuilding the same locked contact and year scope before answering…");
@@ -1033,7 +1033,7 @@
           historyMode: "replace",
         });
       }
-      return postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, limit: 24 });
+      return postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, phrase_format: "normalized-concepts-v1", limit: 24 });
     }
   }
 

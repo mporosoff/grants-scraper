@@ -8,6 +8,7 @@ export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
 export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
+export const SNAPSHOT_EVIDENCE_PHRASE_FORMAT = "normalized-concepts-v1";
 const EN_COLLATOR = new Intl.Collator("en-US");
 const GENERIC_RETRIEVAL_TERMS = new Set([
   "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
@@ -15,12 +16,6 @@ const GENERIC_RETRIEVAL_TERMS = new Set([
   "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies", "subject", "subjects",
   "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what",
   "there", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
-]);
-const REQUEST_PREFIX_STARTERS = new Set([
-  "are", "can", "could", "do", "find", "give", "help", "i", "is", "kindly", "list", "may", "please", "provide", "show", "tell", "we", "will", "would",
-]);
-const REQUEST_PREFIX_TERMS = new Set([
-  "a", "about", "an", "any", "are", "can", "could", "d", "display", "do", "fetch", "find", "for", "get", "give", "have", "help", "i", "identify", "if", "is", "kindly", "know", "like", "list", "locate", "look", "looking", "m", "may", "me", "need", "of", "please", "provide", "re", "retrieve", "return", "search", "see", "share", "show", "some", "surface", "tell", "the", "there", "to", "us", "want", "we", "whether", "will", "would", "you",
 ]);
 
 function clean(value, maximum = 500) {
@@ -709,14 +704,6 @@ function normalizedRetrievalTokens(value) {
     .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
 }
 
-function stripLeadingRequestTokens(tokens) {
-  let start = 0;
-  if (REQUEST_PREFIX_STARTERS.has(tokens[0])) {
-    while (start < tokens.length && REQUEST_PREFIX_TERMS.has(tokens[start])) start += 1;
-  }
-  return tokens.slice(start);
-}
-
 function retrievalTokens(value) {
   return normalizedRetrievalTokens(value)
     .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token));
@@ -872,16 +859,16 @@ function publicMatchedAggregate(awards) {
   };
 }
 
-export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT } = {}) {
+export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT, phraseFormat = SNAPSHOT_EVIDENCE_PHRASE_FORMAT } = {}) {
   if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return null;
   const submittedPhrases = normalizeEvidencePhrases(phrases);
   const normalizedLimit = Number(limit);
-  if (submittedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  if (phraseFormat !== SNAPSHOT_EVIDENCE_PHRASE_FORMAT || submittedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
   const nameSequences = officerNameSequences(snapshot.program_officer.display_name);
   const seenPhrases = new Set();
   const normalizedPhrases = [];
   for (const phrase of submittedPhrases) {
-    const tokens = [...new Set(stripOfficerNameOccurrences(stripLeadingRequestTokens(phrase.raw_tokens), nameSequences)
+    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_tokens, nameSequences)
       .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seenPhrases.has(key)) continue;

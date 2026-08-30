@@ -462,6 +462,10 @@ export function mockAwards(target, {
     }
     if (requestUrl.pathname === "/awards/snapshots/evidence" && request.method() === "POST") {
       snapshotEvidenceCallCount += 1;
+      if (body.phrase_format !== "normalized-concepts-v1") {
+        await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_request" } }) });
+        return;
+      }
       if (snapshotEvidenceCallCount === Number(snapshotEvidenceExpireAtCall)) {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
         return;
@@ -481,18 +485,6 @@ export function mockAwards(target, {
       const normalizedEvidenceTokens = value => String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
         .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
-      const requestPrefixStarters = new Set([
-        "are", "can", "could", "do", "find", "give", "help", "i", "is", "kindly", "list", "may", "please", "provide", "show", "tell", "we", "will", "would",
-      ]);
-      const requestPrefixTerms = new Set([
-        "a", "about", "an", "any", "are", "can", "could", "d", "display", "do", "fetch", "find", "for", "get", "give", "have", "help", "i", "identify", "if", "is", "kindly", "know", "like", "list", "locate", "look", "looking", "m", "may", "me", "need", "of", "please", "provide", "re", "retrieve", "return", "search", "see", "share", "show", "some", "surface", "tell", "the", "there", "to", "us", "want", "we", "whether", "will", "would", "you",
-      ]);
-      const stripRequestPrefix = tokens => {
-        if (!requestPrefixStarters.has(tokens[0])) return tokens;
-        let index = 0;
-        while (index < tokens.length && requestPrefixTerms.has(tokens[index])) index += 1;
-        return tokens.slice(index);
-      };
       const evidenceTokens = value => normalizedEvidenceTokens(value)
         .filter(token => token.length >= 3 && !genericTerms.has(token));
       const lockedName = normalizedEvidenceTokens(snapshot.program_officer.display_name);
@@ -510,7 +502,7 @@ export function mockAwards(target, {
         return tokens.filter((_token, index) => !removed.has(index));
       };
       const requiredConcepts = [...new Set(body.phrases
-        .flatMap(phrase => stripNameOccurrences(stripRequestPrefix(normalizedEvidenceTokens(phrase))))
+        .flatMap(phrase => stripNameOccurrences(normalizedEvidenceTokens(phrase)))
         .filter(token => token.length >= 3 && !genericTerms.has(token)))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([

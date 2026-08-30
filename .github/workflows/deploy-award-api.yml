@@ -169,6 +169,7 @@ jobs:
               && test "$(jq -c '.complete_result_snapshots.page_sizes // empty' <<<"$health" 2>/dev/null)" = "[10,25,50]" \
               && test "$(jq -r '.complete_result_snapshots.cache_scope // empty' <<<"$health" 2>/dev/null)" = "cloudflare-datacenter" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.endpoint // empty' <<<"$health" 2>/dev/null)" = "/awards/snapshots/evidence" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.phrase_format // empty' <<<"$health" 2>/dev/null)" = "normalized-concepts-v1" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.scoring_version // empty' <<<"$health" 2>/dev/null)" = "program-officer-evidence-v2" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.concept_coverage // empty' <<<"$health" 2>/dev/null)" = "all_substantive_query_concepts_same_record" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_records // empty' <<<"$health" 2>/dev/null)" = "24" \

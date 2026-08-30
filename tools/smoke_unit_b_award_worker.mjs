@@ -128,6 +128,7 @@ if (investigator?.identity_key && !facetVerified) {
 
 const programOfficerEvidenceContract = contract.program_officer_evidence;
 if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
+  || programOfficerEvidenceContract.phrase_format !== "normalized-concepts-v1"
   || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v2"
   || programOfficerEvidenceContract.concept_coverage !== "all_substantive_query_concepts_same_record"
   || programOfficerEvidenceContract.maximum_phrases !== 8
@@ -221,6 +222,7 @@ for (const source of ["NSF", "NIH", "DOE"]) {
   const evidence = await post("awards/snapshots/evidence", {
     snapshot_id: recent.snapshot_id,
     phrases: [String(evidenceSeed.title || "public research award").slice(0, 120)],
+    phrase_format: "normalized-concepts-v1",
     limit: 24,
   });
   if (evidence.mode !== "program_officer"
