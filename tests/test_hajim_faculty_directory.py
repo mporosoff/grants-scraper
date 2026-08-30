@@ -1,11 +1,13 @@
 import hashlib
 import json
 from pathlib import Path
+import tempfile
 import unittest
 
 from scripts import faculty_match
 from scripts.hajim_faculty_directory import (
     CURATED_PROFILE_KEYS,
+    DirectoryContractError,
     EXPECTED_COUNTS,
     EXPECTED_SOURCE_SHA256,
     GZIP_SIZE_BUDGET,
@@ -13,6 +15,7 @@ from scripts.hajim_faculty_directory import (
     asset_bytes,
     parse_asset,
     size_report,
+    synchronize_html_generation,
     validate_payload,
 )
 
@@ -104,6 +107,27 @@ class HajimFacultyDirectoryTests(unittest.TestCase):
         self.assertNotIn("pi_matches", serialized)
         self.assertNotIn("edges", self.payload)
         self.assertNotIn("opportunities", self.payload)
+
+    def test_html_generation_sync_writes_canonical_utf8_lf_bytes(self):
+        identity = self.payload["generation_identity"]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "team_match.html"
+            path.write_bytes(
+                (
+                    '<html>\r\n<meta name="hajim-faculty-directory-generation" '
+                    f'content="{"0" * 64}" />\r\n</html>\r\n'
+                ).encode("utf-8")
+            )
+            synchronize_html_generation(path, identity, write=True)
+            expected = (
+                '<html>\n<meta name="hajim-faculty-directory-generation" '
+                f'content="{identity}" />\n</html>\n'
+            ).encode("utf-8")
+            self.assertEqual(path.read_bytes(), expected)
+            synchronize_html_generation(path, identity, write=False)
+            path.write_bytes(expected.replace(b"\n", b"\r\n"))
+            with self.assertRaises(DirectoryContractError):
+                synchronize_html_generation(path, identity, write=False)
 
 
 if __name__ == "__main__":

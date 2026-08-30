@@ -5,13 +5,15 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [helperSource, matcherSource, assetSource, teamPage, facultySource, release] = await Promise.all([
+const [helperSource, matcherSource, assetSource, teamPage, facultySource, release, deployWorkflow, refreshWorkflow] = await Promise.all([
   readFile(new URL("assets/hajim-faculty-directory.js", root), "utf8"),
   readFile(new URL("assets/team-matcher.js", root), "utf8"),
   readFile(new URL("data/hajim-faculty-directory.js", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
   readFile(new URL("data/faculty_matches.js", root), "utf8"),
   readFile(new URL("data/search-v2-release.json", root), "utf8").then(JSON.parse),
+  readFile(new URL(".github/workflows/deploy-search-package.yml", root), "utf8"),
+  readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
 ]);
 
 function assignmentJson(source) {
@@ -59,6 +61,21 @@ test("every changed Team Match runtime has a content-derived HTML and release ca
     assert.equal(release.runtime_cache_keys[path], cacheKey);
     assert.equal(release.source_hashes[path], digest);
     assert.match(teamPage, new RegExp(`${path.replaceAll(".", "\\.")}\\?v=${cacheKey}`));
+  }
+});
+
+test("both Pages publication paths verify the exact Team Match page and every manifest runtime", () => {
+  for (const workflow of [deployWorkflow, refreshWorkflow]) {
+    assert.match(workflow, /expected_team_sha=.*source_hashes\["team_match\.html"\]/);
+    assert.match(workflow, /live_team_sha=.*sha256sum "\$live_team_path"/);
+    assert.match(workflow, /"\$live_team_sha" != "\$expected_team_sha"/);
+    assert.match(workflow, /mapfile -t team_runtime_entries/);
+    assert.match(workflow, /\.runtime_cache_keys \| to_entries\[\]/);
+    assert.match(workflow, /grep -Fq "\$\{runtime_path\}\?v=\$\{runtime_key\}" "\$live_team_path"/);
+    assert.match(workflow, /source_hashes\[\$path\] \/\/ empty/);
+    assert.match(workflow, /"\$\{pages_base\}\/\$\{runtime_path\}\?v=\$\{runtime_key\}"/);
+    assert.match(workflow, /"\$live_runtime_sha" != "\$expected_runtime_sha"/);
+    assert.match(workflow, /data\/hajim-faculty-directory\.js\?v=\$\{directory_generation\}/);
   }
 });
 

@@ -411,18 +411,25 @@ def size_report(value: bytes) -> tuple[int, int]:
 
 
 def synchronize_html_generation(path: Path, identity: str, *, write: bool) -> None:
-    text = path.read_text(encoding="utf-8")
+    actual = path.read_bytes()
+    try:
+        text = actual.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    except UnicodeDecodeError as error:
+        raise DirectoryContractError("Team Match HTML must be UTF-8.") from error
     pattern = re.compile(
         r'(<meta name="hajim-faculty-directory-generation" content=")[a-f0-9]{64}("\s*/>)'
     )
     if len(pattern.findall(text)) != 1:
         raise DirectoryContractError("Team Match must declare exactly one faculty-directory generation.")
-    expected = pattern.sub(rf"\g<1>{identity}\g<2>", text)
+    expected = pattern.sub(rf"\g<1>{identity}\g<2>", text).encode("utf-8")
     if write:
-        if expected != text:
-            path.write_text(expected, encoding="utf-8")
-    elif expected != text:
-        raise DirectoryContractError("Team Match points to a different faculty-directory generation.")
+        if expected != actual:
+            path.write_bytes(expected)
+    elif expected != actual:
+        raise DirectoryContractError(
+            "Team Match HTML is not canonical UTF-8/LF or points to a different "
+            "faculty-directory generation."
+        )
 
 
 def run(argv: list[str] | None = None) -> int:

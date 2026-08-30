@@ -548,13 +548,40 @@ jobs:
             echo "::error::Team Match does not declare a valid faculty-directory generation."
             exit 1
           fi
+          expected_team_sha="$(jq -r '.source_hashes["team_match.html"]' data/search-v2-release.json)"
           expected_directory_sha="$(jq -r '.source_hashes["data/hajim-faculty-directory.js"]' data/search-v2-release.json)"
-          live_team="$(curl --fail --silent --show-error --max-time 30 "https://mporosoff.github.io/grants-scraper/team_match.html?candidate=${candidate_sha}")"
-          if ! grep -Fq "name=\"hajim-faculty-directory-generation\" content=\"${directory_generation}\"" <<<"$live_team"; then
+          pages_base="https://mporosoff.github.io/grants-scraper"
+          live_team_path="${RUNNER_TEMP}/team-match-${candidate_sha}.html"
+          curl --fail --silent --show-error --max-time 30 \
+            "${pages_base}/team_match.html?candidate=${candidate_sha}" --output "$live_team_path"
+          live_team_sha="$(sha256sum "$live_team_path" | awk '{print $1}')"
+          if [ "$live_team_sha" != "$expected_team_sha" ]; then
+            echo "::error::GitHub Pages served Team Match HTML from a different release."
+            exit 1
+          fi
+          if ! grep -Fq "name=\"hajim-faculty-directory-generation\" content=\"${directory_generation}\"" "$live_team_path"; then
             echo "::error::GitHub Pages served Team Match with a different faculty-directory generation."
             exit 1
           fi
-          live_directory_sha="$(curl --fail --silent --show-error --max-time 45 "https://mporosoff.github.io/grants-scraper/data/hajim-faculty-directory.js?v=${directory_generation}" | sha256sum | awk '{print $1}')"
+          mapfile -t team_runtime_entries < <(jq -r '.runtime_cache_keys | to_entries[] | "\(.key)\t\(.value)"' data/search-v2-release.json)
+          if [ "${#team_runtime_entries[@]}" -eq 0 ]; then
+            echo "::error::The release manifest has no versioned Team Match runtimes."
+            exit 1
+          fi
+          for runtime_entry in "${team_runtime_entries[@]}"; do
+            IFS=$'\t' read -r runtime_path runtime_key <<<"$runtime_entry"
+            expected_runtime_sha="$(jq -r --arg path "$runtime_path" '.source_hashes[$path] // empty' data/search-v2-release.json)"
+            if [ -z "$expected_runtime_sha" ] || ! grep -Fq "${runtime_path}?v=${runtime_key}" "$live_team_path"; then
+              echo "::error::Team Match does not publish the manifest cache key for ${runtime_path}."
+              exit 1
+            fi
+            live_runtime_sha="$(curl --fail --silent --show-error --max-time 45 "${pages_base}/${runtime_path}?v=${runtime_key}" | sha256sum | awk '{print $1}')"
+            if [ "$live_runtime_sha" != "$expected_runtime_sha" ]; then
+              echo "::error::GitHub Pages served ${runtime_path} bytes from a different release."
+              exit 1
+            fi
+          done
+          live_directory_sha="$(curl --fail --silent --show-error --max-time 45 "${pages_base}/data/hajim-faculty-directory.js?v=${directory_generation}" | sha256sum | awk '{print $1}')"
           if [ "$live_directory_sha" != "$expected_directory_sha" ]; then
             echo "::error::GitHub Pages served faculty-directory bytes from a different generation."
             exit 1
