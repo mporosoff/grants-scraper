@@ -115,6 +115,25 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
+Team Match lazy-loads a reviewed, searchable Hajim faculty directory only when
+faculty search is opened (or a saved team needs restoration). The compact asset
+contains 156 reviewed workbook profiles plus the separately retained David G.
+Foster profile, 202 controlled terms, 460 primary-anchor mappings, and 94
+context-only mappings. Existing curated Chemical & Sustainability Engineering
+profiles remain authoritative for matching; other Hajim profiles may be
+admitted only through reviewed primary anchors. Context-only mappings support
+search and inspection but cannot create an opportunity match. External
+researchers remain a separate, browser-local workflow with optional ORCID
+publication import.
+
+The source workbook is never committed or loaded in the browser. To refresh the
+projection from the reviewed import artifact, verify its documented SHA-256 and
+run `python -m scripts.hajim_faculty_directory --write --source <workbook.xlsx>`,
+then rebuild the coordinated release manifest. The generator synchronizes the
+content-derived HTML generation identity; `--check` verifies the committed
+asset, identity, source hash, counts, evidence roles, and size budgets without
+requiring the workbook.
+
 Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
 Office of Science awards through the sources' native fields, keeps the adapters
 separate, and preserves direct-field or official-record contact provenance.
@@ -275,6 +294,7 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
+| `data/hajim-faculty-directory.js` | Compact reviewed Hajim faculty search and primary/context evidence projection |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
@@ -291,6 +311,7 @@ support it.
 | `scripts/build_changes.py` | Rolling new/deadline/amendment/closing/closure event feeds |
 | `scripts/check_links.py` | Bounded official-link health and redirect monitor |
 | `scripts/currentness.py` | Shared runtime expiration and non-funding gate |
+| `scripts/hajim_faculty_directory.py` | Deterministic workbook import, validation, cache identity, and browser projection generator |
 | `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
 | `feeds/` | Generated public Atom feeds and feed directory |
 | `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |

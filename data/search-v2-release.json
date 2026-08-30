@@ -9,10 +9,17 @@
   "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
   "passage_count": 1650,
   "worker_allowlist_sha256": "9b191bcd5b5f01b73d23b620021fad22f59701f1cbed0db0541b38d4e5d8e711",
+  "runtime_cache_keys": {
+    "data/faculty_matches.js": "faculty-matches-e3530df2a8df64b2",
+    "assets/hajim-faculty-directory.js": "hajim-faculty-directory-cf42d377b409a563",
+    "assets/team-matcher.js": "team-matcher-f633f5b54ff8e534"
+  },
   "source_hashes": {
     "data/opportunities.js": "224e8474077c26f6e0463daf2e48009ea042210c04b9df89ba944ee42529b72f",
     "data/catalog-metadata.js": "ece1aff13ee4213d1f060994be3fc5dc09e0aa6bf388691a031bd6973d5f8969",
     "data/subtopics.js": "244b364304abea297fc85171e17931986a1e71eec612054f7f708e5577d9e164",
+    "data/faculty_matches.js": "e3530df2a8df64b2700be27974c6188f1de5998391386abd74adb78fad916177",
+    "data/hajim-faculty-directory.js": "5b6176894b258223b04531ed7d736db86891272751329b4e8b43d638bd07683e",
     "data/search-v2-voyage-manifest.json": "9efe65e7bc5af5c141e39f29da679fbb386d36e13f365fdca9aa53b89af4e9e8",
     "data/search-v2-voyage-vectors.f16": "110d9b7585b0935fd20777271afdd1422e337ac0582f84db20617f4bd0bfa8d4",
     "data/search-v2-voyage-canaries.json": "ecb5acec10248ef7a041a3a2ff7a759c873a690fe4328c4948db8031b6ef12ec",
@@ -24,10 +31,13 @@
     "assets/search-retrieval.js": "591ee942bf9e6323ee493462583f26eaa171516cc2f8b6dbeef54f80f2794f6f",
     "assets/subtopic-runtime.js": "a6c36190f9ef26de960125aea58b9415b4b951dc9ec2f26998bbebecbc8b5d1c",
     "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
+    "assets/team-researchers.js": "fb0c77140fc01bfec162dedb46c2085d7df715f075f38ad4fa6c9c91de7d6624",
+    "assets/team-matcher.js": "f633f5b54ff8e53483aadf10d251d324d7c8da7dbbbb20d0b282d4546bf2ebc6",
+    "assets/hajim-faculty-directory.js": "cf42d377b409a5633bb728023cb1e79068e7bad1bf8c6ebc7be50fc635d036ac",
     "match_explorer.html": "4822a6a501a879df83e6d4ae83fcc9081e5ba4426e5b942d6bab8cd4974db31c",
-    "team_match.html": "cf27a08b89fd0809719a75ed14cb6ff871ede9f566867dfb1ba612881333fae0",
+    "team_match.html": "891ab79516744ab9363f956110326ec0f774bdb0b4d86d42f6a8364561ae9eae",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
-  "atomic_publication_contract": "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist"
+  "atomic_publication_contract": "catalog + startup metadata + subtopics + Team Match faculty assets + content-versioned Team Match runtimes + manifest + vectors + model-space canaries + Worker allowlist"
 }

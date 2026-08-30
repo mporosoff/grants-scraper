@@ -42,7 +42,18 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, faculty profiles, or persistent user-managed opportunity files. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
+There are no accounts, installations, or persistent user-managed opportunity files. Team Match publishes one reviewed, read-only Hajim faculty directory; user-added researcher profiles remain device-local. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
+
+### 2.1.1 Reviewed faculty selection, not a faculty-opportunity graph
+
+Team Match lazy-loads a compact faculty directory generated deterministically
+from a hash-pinned reviewed workbook. The browser never loads the workbook or a
+precomputed all-faculty/all-opportunity graph. Search may use names, home units,
+and reviewed evidence terminology, but only primary-anchor mappings enter the
+existing on-demand Team Match matcher. Context-only mappings remain
+non-admitting. Existing curated Chemical & Sustainability Engineering profiles
+remain the matching authority when directory and curated identities coincide;
+external researchers and optional ORCID publication data remain browser-local.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -975,7 +986,7 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - a 48-record discipline-specific shortlist;
 - local storage as the funding database;
 - AI calls for every keyword search;
-- faculty scraping or preloaded faculty identities;
+- automated faculty scraping, unreviewed inferred faculty vocabulary, or a precomputed faculty-opportunity graph;
 - user-managed JSON files;
 - a Python installation for end users;
 - scraping Duke, Pivot-RP, or other licensed databases;
