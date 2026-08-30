@@ -324,7 +324,8 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
   assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
-  assert.match(page, /id="ii-search"[^>]*aria-busy="false"[\s\S]*id="ii-search-spinner"[^>]*aria-hidden="true"[\s\S]*id="ii-search-label">Search funded awards/);
+  assert.match(page, /id="ii-search"[^>]*aria-busy="false"[\s\S]*class="find-button-spinner ii-search-spinner hidden" id="ii-search-spinner"[^>]*aria-hidden="true"[\s\S]*id="ii-search-label">Search funded awards/);
+  assert.match(styles, /\.ii-search-spinner\s*\{[^}]*display:\s*inline-block/);
   assert.match(appSource, /function setSearchActivity\(active, owner = 0\)[\s\S]*aria-busy[\s\S]*ii-search-spinner[\s\S]*Searching awards…/);
   assert.match(appSource, /setSearchActivity\(true, sequence\)[\s\S]*try \{[\s\S]*setSearchActivity\(false, sequence\)[\s\S]*setBusy\(false\)/);
   assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*timed out before completing\. Other source results remain available\./);
