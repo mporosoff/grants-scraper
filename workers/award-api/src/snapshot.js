@@ -13,7 +13,7 @@ const GENERIC_RETRIEVAL_TERMS = new Set([
   "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields",
   "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
   "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies", "subject", "subjects",
-  "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "was", "were", "what",
+  "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what",
   "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
 ]);
 
@@ -695,13 +695,57 @@ function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
   };
 }
 
-function retrievalTokens(value) {
+function normalizedRetrievalTokens(value) {
   return clean(value, 4_000)
     .normalize("NFKD")
     .replace(/\p{M}+/gu, "")
     .toLocaleLowerCase("en-US")
-    .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
-    .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)) || [];
+    .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
+}
+
+function retrievalTokens(value) {
+  return normalizedRetrievalTokens(value)
+    .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token));
+}
+
+function officerNameSequences(displayName) {
+  const noise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
+  const tokensFor = value => normalizedRetrievalTokens(value)
+    .filter(token => token.length >= 3 && !noise.has(token));
+  const sequences = [];
+  const add = tokens => {
+    const key = tokens.join(" ");
+    if (tokens.length >= 2 && !sequences.some(sequence => sequence.join(" ") === key)) sequences.push(tokens);
+  };
+  const comma = String(displayName || "").indexOf(",");
+  if (comma >= 0) {
+    const surname = tokensFor(String(displayName).slice(0, comma));
+    const given = tokensFor(String(displayName).slice(comma + 1));
+    add([...given, ...surname]);
+    add([...surname, ...given]);
+    if (given.length > 1) {
+      add([given[0], ...surname]);
+      add([...surname, given[0]]);
+    }
+  } else {
+    const natural = tokensFor(displayName);
+    add(natural);
+    if (natural.length > 2) add([natural[0], natural.at(-1)]);
+  }
+  return sequences.sort((left, right) => right.length - left.length);
+}
+
+function stripOfficerNameOccurrences(tokens, sequences) {
+  const removed = new Set();
+  for (const sequence of sequences) {
+    for (let index = 0; index <= tokens.length - sequence.length; index += 1) {
+      if (sequence.every((token, offset) => !removed.has(index + offset) && tokens[index + offset] === token)) {
+        sequence.forEach((_token, offset) => removed.add(index + offset));
+        index += sequence.length - 1;
+      }
+    }
+  }
+  return tokens.filter((_token, index) => !removed.has(index));
 }
 
 export function normalizeEvidencePhrases(values) {
@@ -712,11 +756,12 @@ export function normalizeEvidencePhrases(values) {
     if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
     const text = clean(value, 120);
     if (!text) return null;
-    const tokens = [...new Set(retrievalTokens(text))];
+    const rawTokens = normalizedRetrievalTokens(text);
+    const tokens = [...new Set(rawTokens.filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seen.has(key)) continue;
     seen.add(key);
-    phrases.push({ key, tokens });
+    phrases.push({ key, tokens, raw_tokens: rawTokens });
   }
   return phrases.length ? phrases : [];
 }
@@ -818,11 +863,12 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
   const submittedPhrases = normalizeEvidencePhrases(phrases);
   const normalizedLimit = Number(limit);
   if (submittedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
-  const lockedNameTokens = new Set(retrievalTokens(snapshot.program_officer.display_name));
+  const nameSequences = officerNameSequences(snapshot.program_officer.display_name);
   const seenPhrases = new Set();
   const normalizedPhrases = [];
   for (const phrase of submittedPhrases) {
-    const tokens = phrase.tokens.filter(token => !lockedNameTokens.has(token));
+    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_tokens, nameSequences)
+      .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seenPhrases.has(key)) continue;
     seenPhrases.add(key);

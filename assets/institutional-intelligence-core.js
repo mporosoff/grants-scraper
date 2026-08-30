@@ -705,16 +705,48 @@
       "involve", "involved", "involves", "involving", "kind", "kinds", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
       "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
       "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
-      "they", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
+      "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
     ]);
     const normalizedTokens = (value, maximum) => clean(value, maximum)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
       .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
-    const lockedNameTokens = new Set(normalizedTokens(lockedDisplayName, 300));
-    const tokens = normalizedTokens(question, 1_000)
-      .filter(token => token.length >= 3 && !ignored.has(token) && !lockedNameTokens.has(token));
+    const nameNoise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
+    const nameTokens = value => normalizedTokens(value, 300)
+      .filter(token => token.length >= 3 && !nameNoise.has(token));
+    const nameSequences = [];
+    const addNameSequence = tokens => {
+      const key = tokens.join(" ");
+      if (tokens.length >= 2 && !nameSequences.some(sequence => sequence.join(" ") === key)) nameSequences.push(tokens);
+    };
+    const comma = lockedDisplayName.indexOf(",");
+    if (comma >= 0) {
+      const surname = nameTokens(lockedDisplayName.slice(0, comma));
+      const given = nameTokens(lockedDisplayName.slice(comma + 1));
+      addNameSequence([...given, ...surname]);
+      addNameSequence([...surname, ...given]);
+      if (given.length > 1) {
+        addNameSequence([given[0], ...surname]);
+        addNameSequence([...surname, given[0]]);
+      }
+    } else {
+      const natural = nameTokens(lockedDisplayName);
+      addNameSequence(natural);
+      if (natural.length > 2) addNameSequence([natural[0], natural.at(-1)]);
+    }
+    nameSequences.sort((left, right) => right.length - left.length);
+    const questionTokens = normalizedTokens(question, 1_000).filter(token => token.length >= 3);
+    const removed = new Set();
+    for (const sequence of nameSequences) {
+      for (let index = 0; index <= questionTokens.length - sequence.length; index += 1) {
+        if (sequence.every((token, offset) => !removed.has(index + offset) && questionTokens[index + offset] === token)) {
+          sequence.forEach((_token, offset) => removed.add(index + offset));
+          index += sequence.length - 1;
+        }
+      }
+    }
+    const tokens = questionTokens.filter((token, index) => !removed.has(index) && !ignored.has(token));
     const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];

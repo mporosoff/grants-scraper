@@ -314,6 +314,24 @@ test("explicit award-year qualifiers use structured metadata and retain topical 
   assert.doesNotMatch(answer.answer, /Earlier Researcher/);
 });
 
+test("Worker identity removal is sequence-aware and preserves surname research concepts", () => {
+  const snapshot = programOfficerSnapshot([
+    award(401, { title: "Smith predictors", abstract: "Statistical estimation methods." }),
+    award(402, { title: "Predictors", abstract: "General estimation methods." }),
+  ]);
+  snapshot.program_officer.display_name = "Jane Smith";
+  assert.deepEqual(
+    snapshotEvidence(snapshot, { phrases: ["Smith predictors"], limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-401"],
+    "a surname-only topic must not be stripped",
+  );
+  assert.deepEqual(
+    snapshotEvidence(snapshot, { phrases: ["Jane Smith smith predictors"], limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-401"],
+    "only the actual full-name occurrence is stripped when the surname is repeated as a topic",
+  );
+});
+
 test("snapshot-native institutions, coverage, abstract facts, and absence language remain explicit", () => {
   const complete = programOfficerSnapshot();
   assert.equal(complete.mode, "program_officer");
@@ -353,6 +371,9 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(core.programOfficerAggregateIntent("What awards did Jane Smith fund?", "Jane Smith"), "awards");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What awards did Jane Smith fund?", "Jane Smith")), []);
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which Jane Smith awards involve quantum sensing?", "Jane Smith")), ["quantum sensing"]);
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which awards use Smith predictors?", "Jane Smith")), ["smith predictors"], "a surname remains topical when the full locked identity is absent");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which Jane Smith awards use Smith predictors?", "Jane Smith")), ["smith predictors"], "only the repeated full-name occurrence is removed");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What awards did Jane Doe fund?", "Doe, Jane A., Jr.")), [], "source last-first order accepts the natural normalized identity");
   assert.equal(core.programOfficerAggregateIntent("What types of projects did they fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("What kinds of projects did they fund?"), "awards");
   assert.deepEqual(plain(core.programOfficerRetrievalPhrases("What categories and themes of projects did they fund?")), []);
@@ -489,7 +510,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-4";
+  const key = "po-award-navigation-20260830-5";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }

@@ -475,16 +475,28 @@ export function mockAwards(target, {
         "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields",
         "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
         "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "subject", "subjects",
-        "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "was", "were", "what", "when",
+        "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what", "when",
         "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
       ]);
       const evidenceTokens = value => String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
         .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token)
         .filter(token => token.length >= 3 && !genericTerms.has(token)) || [];
-      const lockedNameTokens = new Set(evidenceTokens(snapshot.program_officer.display_name));
-      const requiredConcepts = [...new Set(body.phrases.flatMap(evidenceTokens))]
-        .filter(token => !lockedNameTokens.has(token));
+      const lockedName = evidenceTokens(snapshot.program_officer.display_name);
+      const nameSequences = lockedName.length >= 2 ? [lockedName, [...lockedName].reverse()] : [];
+      const stripNameOccurrences = tokens => {
+        const removed = new Set();
+        for (const sequence of nameSequences) {
+          for (let index = 0; index <= tokens.length - sequence.length; index += 1) {
+            if (sequence.every((token, offset) => !removed.has(index + offset) && tokens[index + offset] === token)) {
+              sequence.forEach((_token, offset) => removed.add(index + offset));
+              index += sequence.length - 1;
+            }
+          }
+        }
+        return tokens.filter((_token, index) => !removed.has(index));
+      };
+      const requiredConcepts = [...new Set(body.phrases.flatMap(phrase => stripNameOccurrences(evidenceTokens(phrase))))];
       const scored = snapshot.records.filter(record => {
         const recordTokens = new Set(evidenceTokens([
           record.title,
