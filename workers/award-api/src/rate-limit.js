@@ -2,6 +2,7 @@ const BUCKETS = new Set([
   "award:NSF",
   "award:NIH",
   "award:DOE",
+  "award:evidence",
   "ror:search",
   "ror:resolve",
 ]);

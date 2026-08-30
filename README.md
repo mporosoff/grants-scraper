@@ -141,12 +141,23 @@ Eligible Funding Finder cards open it in a new tab only for exact or explicitly
 reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
 title similarity.
 
-Funded Awards also includes Institutional Intelligence for page-bounded factual
-summaries and drill-downs over those normalized public awards. Its ROR-backed
+Funded Awards also includes Institutional Intelligence for snapshot-native
+factual summaries and drill-downs over those normalized public awards. Its ROR-backed
 typeahead resolves canonical institution names, aliases, and acronyms while the
 existing identity layer retains sponsor-specific UEI/IPF query identifiers.
 Institution, agency, program, topic, investigator, and year filters work without
-an AI key and are shareable through page URLs. An optional question translator
+an AI key and are shareable through page URLs. The Award Worker owns immutable
+membership, exact-versus-lower-bound totals, full-snapshot metrics and facets,
+and direct pages of 10, 25, or 50; card hydration never changes those facts.
+
+Person-like source-published program contacts can start a locked, single-source
+Program Officer snapshot for recent five, all available, or custom source award
+years. Exact same-source post-validation removes partial-name results before
+totals or evidence. Aggregate questions need no AI; optional topical questions
+use deterministic full-snapshot Worker retrieval capped at 24 public records,
+800 abstract characters per record, and 18,000 serialized evidence characters.
+The interface discloses completeness and abstract coverage and never describes
+the result as a complete career portfolio. An optional institution question translator
 uses the same browser-local Funding Finder provider configuration; it only creates
 a transparent filter plan and does not search or rank an award-vector corpus.
 

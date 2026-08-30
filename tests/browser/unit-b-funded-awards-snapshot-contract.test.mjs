@@ -314,28 +314,26 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(config, /"cpu_ms": 250/);
 });
 
-test("the integrated A-C browser release uses one fresh cache key for every changed served asset", async () => {
+test("each served runtime family uses its current coherent cache identity without freezing unrelated history", async () => {
   const [fundedAwards, fundingFinder, teamMatch] = await Promise.all([
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("team_match.html", root), "utf8"),
   ]);
-  const releaseKey = "post-phase4-abc-20260829";
-  for (const asset of [
-    "alerts.css",
+  const cacheKeys = (html, assets) => assets.map(asset => {
+    const match = html.match(new RegExp(`${asset.replace(".", "\\.")}\\?v=([^"']+)`));
+    assert.ok(match, `${asset} must be versioned`);
+    return match[1];
+  });
+  assert.deepEqual(new Set(cacheKeys(fundedAwards, [
     "institutional-intelligence.css",
-    "alerts.js",
     "award-api-config.js",
     "institutional-intelligence-core.js",
-  ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  for (const asset of ["app.css", "ai-provider.js"])
-    assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=ai-additive-20260829`));
-  assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=post-phase4-abc-evidence-20260829/);
-  for (const asset of ["alerts.css", "alerts.js"])
-    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  for (const asset of ["app.css", "ai-provider.js", "result-workflow.js", "app.js"])
-    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=ai-additive-20260829`));
-  assert.match(teamMatch, /app\.css\?v=ai-additive-20260829/);
+    "institutional-intelligence-snapshots.js",
+  ])).size, 1, "the jointly changed Program Officer page/runtime assets must share one cache identity");
+  for (const html of [fundedAwards, fundingFinder, teamMatch]) {
+    assert.doesNotMatch(html, /(?:src|href)="[^"]+\.(?:js|css)"(?![^>]*\?v=)/, "served JavaScript and CSS references remain versioned");
+  }
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {

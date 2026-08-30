@@ -3,7 +3,16 @@ export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
 export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
 export const SNAPSHOT_PAGE_SIZES = Object.freeze([10, 25, 50]);
+export const SNAPSHOT_EVIDENCE_LIMIT = 24;
+export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
+export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
+export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v1";
 const EN_COLLATOR = new Intl.Collator("en-US");
+const GENERIC_RETRIEVAL_TERMS = new Set([
+  "about", "award", "awards", "fund", "funded", "funding", "grant", "grants", "project", "projects",
+  "involve", "involved", "involves", "involving", "related", "relevant", "research", "study", "studies",
+  "their", "this", "those", "what", "which", "with", "work",
+]);
 
 function clean(value, maximum = 500) {
   const text = String(value ?? "");
@@ -363,6 +372,7 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
   };
   const investigators = investigatorGroups(awards, factsFor);
   const programs = new Map();
+  const institutions = new Map();
   const programCache = new Map();
   const years = new Map();
   const agencyTotals = new Map(SOURCE_NAMES.map(source => [source, 0]));
@@ -372,6 +382,19 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
     if (year) years.set(year, (years.get(year) || 0) + 1);
     const source = facts.source;
     if (agencyTotals.has(source)) agencyTotals.set(source, agencyTotals.get(source) + 1);
+    const institutionLabel = clean(award?.institution?.normalized_name || award?.institution?.name, 500);
+    const institutionIdentity = clean(award?.institution?.identifiers?.ror, 100) || identityKey(institutionLabel);
+    if (institutionIdentity && institutionLabel) {
+      const key = `institution:${institutionIdentity}`;
+      const current = institutions.get(key) || { key, name: institutionLabel, projects: 0, award_keys: [], variants: [] };
+      current.projects += 1;
+      current.award_keys.push(awardKey(award));
+      const sourceName = clean(award?.institution?.name, 500) || institutionLabel;
+      if (!current.variants.some(variant => variant.source === source && variant.name === sourceName)) {
+        current.variants.push({ source, name: sourceName });
+      }
+      institutions.set(key, current);
+    }
     for (const descriptor of programDescriptors(award, programCache)) {
       const current = programs.get(descriptor.key) || { ...descriptor, projects: 0, award_keys: [] };
       current.projects += 1;
@@ -384,11 +407,16 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
     project_count: awards.length,
     investigator_count: investigators.length,
     program_count: programs.size,
+    institution_count: institutions.size,
     year_start: orderedYears[0]?.[0] || null,
     year_end: orderedYears.at(-1)?.[0] || null,
     represented_years: orderedYears.map(([year, projects]) => ({ year, projects })),
     agency_totals: SOURCE_NAMES.map(source => ({ source, projects: agencyTotals.get(source) || 0 })),
     investigators,
+    institutions: [...institutions.values()].map(institution => ({
+      ...institution,
+      award_keys: [...new Set(institution.award_keys)].sort(),
+    })).sort((left, right) => EN_COLLATOR.compare(left.name, right.name)),
     programs: [...programs.values()].map(program => ({
       ...program,
       award_keys: [...new Set(program.award_keys)].sort(),
@@ -438,12 +466,45 @@ function sourceState(source, payload, normalizedResultCount = null) {
     safety_bound_reached: payload.safety_bound_reached === true,
     year_filter: payload.year_filter,
     health: payload.health,
+    contact_post_validation: payload.contact_post_validation,
     retrieved_at: payload.retrieved_at,
     recency_order: complete ? "verified_complete_snapshot" : "available_snapshot_only",
   };
 }
 
-export function buildAwardSnapshot({ snapshotId, queryId, asOf, request, sourcePayloads }) {
+function abstractCoverage(awards) {
+  const withAbstract = awards.filter(award => clean(award?.abstract, 20_000)).length;
+  return {
+    total_records: awards.length,
+    records_with_abstract: withAbstract,
+    records_without_abstract: awards.length - withAbstract,
+    percentage: awards.length ? Math.round((withAbstract / awards.length) * 10_000) / 100 : 0,
+  };
+}
+
+function programOfficerScope(request) {
+  const criteria = request?.criteria || {};
+  if (criteria.mode !== "program_officer") return null;
+  return {
+    source: request.sources?.[0] || null,
+    display_name: clean(criteria.program_officer, 300),
+    contact_key: clean(criteria.program_contact_key, 300),
+    year_preset: clean(criteria.year_preset, 20),
+    year_start: validYear(criteria.year_start),
+    year_end: validYear(criteria.year_end),
+    membership_rule: "exact_same_source_program_contact_key",
+  };
+}
+
+function coverageState(sources, awardCount) {
+  if (sources.every(source => source.status === "complete")) return "complete";
+  if (sources.length === 1) return sources[0].status;
+  if (!awardCount && sources.every(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status))) return "unavailable";
+  if (sources.some(source => source.status === "safety_bounded")) return "safety_bounded";
+  return awardCount ? "partial" : "unavailable";
+}
+
+export function buildAwardSnapshot({ snapshotId, queryId, asOf, expiresAt = null, request, sourcePayloads }) {
   const sourceResults = {};
   const sources = request.sources.map(source => {
     const payload = sourcePayloads[source];
@@ -452,6 +513,7 @@ export function buildAwardSnapshot({ snapshotId, queryId, asOf, request, sourceP
   });
   const awards = sortAwards(request.sources.flatMap(source => sourceResults[source]));
   const complete = sources.every(source => source.status === "complete");
+  const officerScope = programOfficerScope(request);
   const sourceMetadata = Object.fromEntries(request.sources.map(source => {
     const { results: _results, ...metadata } = sourcePayloads[source] || {};
     return [source, metadata];
@@ -462,14 +524,19 @@ export function buildAwardSnapshot({ snapshotId, queryId, asOf, request, sourceP
     snapshot_id: snapshotId,
     query_id: queryId,
     as_of: asOf,
+    expires_at: expiresAt,
     ordering_version: AWARD_ORDERING_VERSION,
     batch_ceiling_per_agency: SNAPSHOT_BATCH_SIZE,
     request,
     completeness: complete ? "complete" : awards.length ? "partial" : "unavailable",
+    coverage_state: coverageState(sources, awards.length),
     exact_total: complete ? awards.length : null,
     at_least: awards.length,
     recency_order: complete ? "verified_most_recent_to_older" : "available_snapshot_recent_to_older",
     sources,
+    mode: officerScope ? "program_officer" : "standard",
+    program_officer: officerScope,
+    abstract_coverage: abstractCoverage(awards),
     base_aggregate: aggregateSnapshotAwards(awards, { alreadyNormalized: true }),
     awards,
     source_metadata: sourceMetadata,
@@ -481,12 +548,13 @@ function facetAwards(snapshot, facet = { type: "all", key: "" }) {
   const key = clean(facet?.key, SNAPSHOT_FACET_KEY_MAX_LENGTH);
   if (type === "all") return { facet: { type: "all", key: "", label: "All awards" }, awards: snapshot.awards };
   const groups = type === "investigator" ? snapshot.base_aggregate.investigators
-    : type === "program" ? snapshot.base_aggregate.programs : [];
+    : type === "program" ? snapshot.base_aggregate.programs
+      : type === "institution" ? (snapshot.base_aggregate.institutions || []) : [];
   const group = groups.find(item => (type === "investigator" ? item.identity_key : item.key) === key);
   if (!group) return null;
   const allowed = new Set(group.award_keys);
   return {
-    facet: { type, key, label: type === "investigator" ? group.name : group.label },
+    facet: { type, key, label: type === "investigator" || type === "institution" ? group.name : group.label },
     awards: snapshot.awards.filter(award => allowed.has(awardKey(award))),
   };
 }
@@ -561,13 +629,18 @@ export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type
     snapshot_id: snapshot.snapshot_id,
     query_id: snapshot.query_id,
     as_of: snapshot.as_of,
+    expires_at: snapshot.expires_at,
     ordering_version: snapshot.ordering_version,
     batch_ceiling_per_agency: SNAPSHOT_BATCH_SIZE,
     completeness: snapshot.completeness,
+    coverage_state: snapshot.coverage_state,
     exact_total: snapshot.completeness === "complete" ? view.awards.length : null,
     at_least: view.awards.length,
     recency_order: snapshot.recency_order,
     sources: snapshot.sources,
+    mode: snapshot.mode,
+    program_officer: snapshot.program_officer,
+    abstract_coverage: snapshot.abstract_coverage,
     ...(allAwards ? {} : { base_aggregate: publicAggregate(snapshot.base_aggregate, { includeOrderedRefs: false }) }),
     aggregate: publicAggregate(aggregate),
     facet: view.facet,
@@ -592,14 +665,19 @@ export function publicSnapshot(snapshot) {
     snapshot_id: snapshot.snapshot_id,
     query_id: snapshot.query_id,
     as_of: snapshot.as_of,
+    expires_at: snapshot.expires_at,
     ordering_version: snapshot.ordering_version,
     batch_ceiling_per_agency: snapshot.batch_ceiling_per_agency,
     request: snapshot.request,
     completeness: snapshot.completeness,
+    coverage_state: snapshot.coverage_state,
     exact_total: snapshot.exact_total,
     at_least: snapshot.at_least,
     recency_order: snapshot.recency_order,
     sources: snapshot.sources,
+    mode: snapshot.mode,
+    program_officer: snapshot.program_officer,
+    abstract_coverage: snapshot.abstract_coverage,
     initial_batches: snapshot.request.sources.map(source => snapshotSourceBatch(snapshot, { source, offset: 0 })),
   };
 }
@@ -608,8 +686,158 @@ function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
   return {
     ...aggregate,
     investigators: aggregate.investigators.map(({ award_keys: _awardKeys, ...investigator }) => investigator),
+    institutions: (aggregate.institutions || []).map(({ award_keys: _awardKeys, ...institution }) => institution),
     programs: aggregate.programs.map(({ award_keys: _awardKeys, ...program }) => program),
     ...(includeOrderedRefs ? {} : { ordered_refs: [] }),
+  };
+}
+
+function retrievalTokens(value) {
+  return clean(value, 4_000)
+    .normalize("NFKD")
+    .replace(/\p{M}+/gu, "")
+    .toLocaleLowerCase("en-US")
+    .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)) || [];
+}
+
+export function normalizeEvidencePhrases(values) {
+  if (!Array.isArray(values) || values.length < 1 || values.length > 8) return null;
+  const phrases = [];
+  const seen = new Set();
+  for (const value of values) {
+    if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
+    const text = clean(value, 120);
+    if (!text) return null;
+    const tokens = [...new Set(retrievalTokens(text))].slice(0, 12);
+    const key = tokens.join(" ");
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    phrases.push({ key, tokens });
+  }
+  return phrases.length ? phrases : [];
+}
+
+function evidenceFieldValues(award) {
+  return {
+    title: clean(award?.title, 1_000),
+    abstract: clean(award?.abstract, 20_000),
+    program: [
+      award?.program_name,
+      award?.activity_code,
+      award?.subagency,
+      ...(Array.isArray(award?.program_codes) ? award.program_codes : []),
+    ].map(value => clean(value, 500)).filter(Boolean).join(" "),
+    investigators: (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
+      .map(person => clean(person?.name, 300)).filter(Boolean).join(" "),
+    institution: clean(award?.institution?.normalized_name || award?.institution?.name, 500),
+  };
+}
+
+function scoreEvidenceAward(award, phrases) {
+  const fields = evidenceFieldValues(award);
+  const weights = {
+    title: { token: 100, phrase: 180 },
+    abstract: { token: 28, phrase: 55 },
+    program: { token: 16, phrase: 32 },
+    investigators: { token: 4, phrase: 7 },
+    institution: { token: 3, phrase: 5 },
+  };
+  let score = 0;
+  const matchedFields = new Set();
+  for (const [field, value] of Object.entries(fields)) {
+    const fieldTokens = new Set(retrievalTokens(value));
+    if (!fieldTokens.size) continue;
+    const normalizedField = [...fieldTokens].join(" ");
+    for (const phrase of phrases) {
+      const overlap = phrase.tokens.filter(token => fieldTokens.has(token)).length;
+      if (!overlap) continue;
+      matchedFields.add(field);
+      score += Math.min(4, overlap) * weights[field].token;
+      if (phrase.tokens.length > 1 && normalizedField.includes(phrase.key)) score += weights[field].phrase;
+    }
+  }
+  return { score, matched_fields: [...matchedFields] };
+}
+
+function publicEvidenceAward(award, scored) {
+  return {
+    evidence_id: awardKey(award),
+    snapshot_position: scored.position + 1,
+    source: clean(award?.source, 10).toUpperCase(),
+    award_id: clean(award?.award_id, 120),
+    title: clean(award?.title, 500),
+    program: clean(award?.program_name || award?.activity_code || award?.program_codes?.[0], 200),
+    program_office: clean(award?.subagency, 300),
+    year: validYear(award?.award_year),
+    investigators: (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
+      .map(person => clean(person?.name, 160)).filter(Boolean).slice(0, 8),
+    institution: clean(award?.institution?.normalized_name || award?.institution?.name, 300),
+    abstract_excerpt: clean(award?.abstract, SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT),
+    deterministic_score: scored.score,
+    matched_fields: scored.matched_fields,
+  };
+}
+
+export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT } = {}) {
+  if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return null;
+  const normalizedPhrases = normalizeEvidencePhrases(phrases);
+  const normalizedLimit = Number(limit);
+  if (normalizedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  const scored = snapshot.awards.map((award, position) => ({
+    award,
+    position,
+    ...scoreEvidenceAward(award, normalizedPhrases),
+  })).filter(item => item.score > 0).sort((left, right) => (
+    right.score - left.score
+    || left.position - right.position
+    || EN_COLLATOR.compare(awardKey(left.award), awardKey(right.award))
+  ));
+  const awards = [];
+  let serializedCharacters = 2;
+  for (const item of scored) {
+    if (awards.length >= normalizedLimit) break;
+    const record = publicEvidenceAward(item.award, item);
+    const characters = JSON.stringify(record).length + (awards.length ? 1 : 0);
+    if (serializedCharacters + characters > SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT) continue;
+    awards.push(record);
+    serializedCharacters += characters;
+  }
+  const selectedWithAbstract = awards.filter(award => award.abstract_excerpt).length;
+  return {
+    schema_version: 1,
+    snapshot_id: snapshot.snapshot_id,
+    as_of: snapshot.as_of,
+    expires_at: snapshot.expires_at,
+    mode: snapshot.mode,
+    program_officer: snapshot.program_officer,
+    completeness: snapshot.completeness,
+    coverage_state: snapshot.coverage_state,
+    exact_total: snapshot.exact_total,
+    at_least: snapshot.at_least,
+    year_scope: {
+      preset: snapshot.program_officer.year_preset,
+      start: snapshot.program_officer.year_start,
+      end: snapshot.program_officer.year_end,
+    },
+    abstract_coverage: {
+      ...snapshot.abstract_coverage,
+      selected_records: awards.length,
+      selected_with_abstract: selectedWithAbstract,
+    },
+    retrieval: {
+      scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
+      records_scanned: snapshot.awards.length,
+      records_with_score: scored.length,
+      records_selected: awards.length,
+      serialized_characters: JSON.stringify(awards).length,
+      limits: {
+        phrases: 8,
+        records: SNAPSHOT_EVIDENCE_LIMIT,
+        abstract_characters_per_record: SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
+        serialized_characters: SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
+      },
+    },
+    awards,
   };
 }
 

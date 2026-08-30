@@ -144,7 +144,7 @@ test("FF-BUG-010 Award and ROR limits protect only cache misses and never store 
   assert.equal(limitedAward.status, 429);
   assert.equal(limitedAward.headers.get("retry-after"), "60");
   assert.deepEqual((await limitedAward.json()).sources, [{
-    source: "NSF", status: "unavailable", error: { code: "rate_limited" },
+    source: "NSF", status: "rate_limited", error: { code: "rate_limited" },
   }]);
   assert.equal((await handler(awardRequest("photocatalysis", "203.0.113.18"), activeEnv)).status, 200);
 

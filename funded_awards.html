@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=post-phase4-abc-20260829">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=po-award-navigation-20260829">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -99,7 +99,26 @@
           </div>
 
           <form id="ii-form" class="ii-form" role="search" aria-label="Search funded awards">
-            <div class="ii-institution-field">
+            <section class="ii-po-scope hidden" id="ii-po-scope" aria-labelledby="ii-po-scope-heading">
+              <div>
+                <p class="eyebrow">Exact source-listed contact</p>
+                <h3 id="ii-po-scope-heading">Program Officer award navigation</h3>
+                <p id="ii-po-scope-description">This view searches one sponsor source for the exact published contact name. It does not infer aliases or merge people.</p>
+              </div>
+              <dl>
+                <div><dt>Contact</dt><dd id="ii-po-name"></dd></div>
+                <div><dt>Source</dt><dd id="ii-po-source"></dd></div>
+              </dl>
+              <label for="ii-year-preset">Award years
+                <select id="ii-year-preset" aria-describedby="ii-po-year-help">
+                  <option value="recent5">Recent 5 years (recommended)</option>
+                  <option value="all">Search all available years</option>
+                  <option value="custom">Custom From/Through years</option>
+                </select>
+              </label>
+              <p class="ii-field-status" id="ii-po-year-help">Changing this range creates a new immutable source snapshot and clears page and drill-down state.</p>
+            </section>
+            <div class="ii-institution-field" id="ii-institution-field">
               <label for="ii-institution">Institution <span class="ii-optional">Optional</span></label>
               <div class="ii-combobox">
                 <input id="ii-institution" type="search" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ii-institution-options" aria-describedby="ii-registry-status" placeholder="Try MIT, Caltech, UVA, RIT, UCLA, or a full name">
@@ -129,10 +148,10 @@
               <label>Program officer
                 <input id="ii-program-officer" type="search" autocomplete="off" placeholder="Name as listed by sponsor">
               </label>
-              <label>From year <span class="ii-optional">Optional</span>
+              <label id="ii-year-start-field">From year <span class="ii-optional">Optional</span>
                 <input id="ii-year-start" type="number" inputmode="numeric" min="1989" max="2100" placeholder="Any" aria-describedby="ii-year-help">
               </label>
-              <label>Through year <span class="ii-optional">Optional</span>
+              <label id="ii-year-end-field">Through year <span class="ii-optional">Optional</span>
                 <input id="ii-year-end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="Any" aria-describedby="ii-year-help">
               </label>
             </div>
@@ -149,11 +168,11 @@
 
           <details class="ii-ask" id="ii-ask">
             <summary>
-              <span><strong>Optional: Ask about this institution</strong><small>Answer from returned public NSF, NIH, and DOE award evidence</small></span>
+              <span><strong id="ii-ask-heading">Optional: Ask about this institution</strong><small id="ii-ask-summary">Answer from returned public NSF, NIH, and DOE award evidence</small></span>
               <span id="ii-ai-state">No AI key required for structured search</span>
             </summary>
             <div class="ii-ask-body">
-              <label for="ii-question">Question about the selected institution</label>
+              <label for="ii-question" id="ii-question-label">Question about the selected institution</label>
               <textarea id="ii-question" rows="3" placeholder="Who at this institution has received awards from DOE BES?"></textarea>
               <button class="button ai-button" id="ii-ask-button" type="button">Answer using public awards</button>
               <div class="ii-question-plan hidden" id="ii-question-plan" aria-live="polite"></div>
@@ -177,7 +196,7 @@
                 <button class="button secondary" id="ii-save-key" type="button">Save to Funding Finder on this device</button>
                 <p class="credential-status" id="ii-key-status" aria-live="polite"></p>
               </section>
-              <p class="privacy-note">The key stays in the same browser-local Funding Finder credential store. An explicit AI question may send the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts directly to that provider. It never sends profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated award records, not model pretraining, remain authoritative.</p>
+              <p class="privacy-note" id="ii-privacy-note">The key stays in the same browser-local Funding Finder credential store. An explicit AI question may send the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts directly to that provider. It never sends profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated award records, not model pretraining, remain authoritative.</p>
             </div>
           </details>
 
@@ -210,6 +229,12 @@
                 <h3 id="ii-programs-heading">Programs</h3>
                 <select id="ii-programs" aria-labelledby="ii-programs-heading" disabled>
                   <option value="all">All programs</option>
+                </select>
+              </section>
+              <section aria-labelledby="ii-institutions-heading">
+                <h3 id="ii-institutions-heading">Recipient institutions</h3>
+                <select id="ii-institutions" aria-labelledby="ii-institutions-heading" disabled>
+                  <option value="all">All recipient institutions</option>
                 </select>
               </section>
             </div>
@@ -329,12 +354,12 @@
   <script src="./assets/award-links.js?v=phase4-doe-awards"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
-  <script src="./assets/award-api-config.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/award-api-config.js?v=po-award-navigation-20260829"></script>
   <script src="./assets/funded-awards-core.js?v=phase3-normalized-paging-20260826"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=po-award-navigation-20260829"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/funded-awards.js?v=phase3-normalized-paging-20260826"></script>
-  <script src="./assets/institutional-intelligence-snapshots.js?v=post-phase4-abc-evidence-20260829"></script>
+  <script src="./assets/institutional-intelligence-snapshots.js?v=po-award-navigation-20260829"></script>
 </body>
 </html>

@@ -201,6 +201,9 @@ test("NSF normalization preserves science, institution IDs, direct contacts, and
   assert.equal(award.principal_investigators.length, 3);
   assert.equal(award.principal_investigators[1].email, "trickey@qtp.ufl.edu");
   assert.equal(award.program_contacts[0].email, "vlukin@nsf.gov");
+  assert.equal(award.program_contacts[0].source_display_name, raw.poName);
+  assert.equal(award.program_contacts[0].searchable_program_contact, true);
+  assert.equal(award.program_contacts[0].program_contact_identity, `NSF:${award.program_contacts[0].program_contact_key}`);
   assert.equal(award.program_contacts[0].source_provenance.source_field, "poName/poEmail");
   assert.equal(award.official_award_url, "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508");
 
@@ -252,6 +255,8 @@ test("NIH normalization groups annual applications under the core project withou
   assert.equal(award.principal_investigators.find(person => person.profile_id === 1891753).role, "Contact Principal Investigator");
   assert.ok(award.principal_investigators.every(person => person.email === null));
   assert.equal(award.program_contacts[0].email, null);
+  assert.equal(award.program_contacts[0].searchable_program_contact, true);
+  assert.equal(award.program_contacts[0].program_contact_identity, `NIH:${award.program_contacts[0].program_contact_key}`);
   assert.equal(award.program_contacts[0].official_contact_url, award.official_award_url);
   assert.equal(award.official_award_url, "https://reporter.nih.gov/project-details/10457449");
   const richAbstract = normalizeNihProject(nihFixture.results.map(record => ({
@@ -330,6 +335,9 @@ test("DOE builds the account-free PAMS form and normalizes only labeled public f
   assert.equal(award.principal_investigators[0].email, null);
   assert.equal(award.program_contacts[0].name, "Dawn Adin");
   assert.equal(award.program_contacts[0].email, null);
+  assert.equal(award.program_contacts[0].source_display_name, secondPage.records[0].program_manager);
+  assert.equal(award.program_contacts[0].searchable_program_contact, true);
+  assert.equal(award.program_contacts[0].program_contact_identity, `DOE:${award.program_contacts[0].program_contact_key}`);
   assert.match(award.official_award_url, /ViewPublicAbstract\.aspx/);
   const nsfAward = normalizeNsfAward(nsfFixture.response.award[0], {
     retrievedAt: fixedNow().toISOString(),
@@ -447,6 +455,14 @@ test("Worker validates bounded public requests and exposes no credential require
         maximum_snapshot_create_upstream_and_guard_subrequests: 40,
         maximum_snapshot_create_subrequests_without_ror_resolution: 46,
       },
+      program_officer_evidence: {
+        endpoint: "/awards/snapshots/evidence",
+        scoring_version: "program-officer-evidence-v1",
+        maximum_phrases: 8,
+        maximum_records: 24,
+        abstract_characters_per_record: 800,
+        serialized_characters: 18000,
+      },
     },
     abuse_control: {
       ready: true,
@@ -454,7 +470,7 @@ test("Worker validates bounded public requests and exposes no credential require
       storage: "sqlite",
       client_identity: "hmac-derived",
       window_seconds: 60,
-      limits: { award_source: 12, ror_search: 60, ror_resolution: 20 },
+      limits: { award_source: 12, snapshot_evidence: 12, ror_search: 60, ror_resolution: 20 },
     },
     cache_ttl_seconds: 3600,
     credentials_required: false,

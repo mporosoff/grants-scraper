@@ -127,12 +127,14 @@ export function mockAwards(target, {
   snapshotPageDelayMs = 0,
   snapshotPageExpireAtCall = 0,
   snapshotPageFailAtCalls = [],
+  snapshotEvidenceExpireAtCall = 0,
   snapshotBatchExpireAtCall = 0,
   snapshotBatchDelaysMs = [],
   snapshotRetryExpireAtCall = 0,
   failSnapshotCreateForTopics = [],
   failSnapshotInitialPageForTopics = [],
   enforceYearFilters = false,
+  programOfficerSourceFailures = {},
   sourceFailures = {},
   sourceFailuresByOffset = {},
 } = {}) {
@@ -140,6 +142,7 @@ export function mockAwards(target, {
   const snapshots = new Map();
   let snapshotSequence = 0;
   let snapshotPageCallCount = 0;
+  let snapshotEvidenceCallCount = 0;
   let snapshotBatchCallCount = 0;
   let snapshotRetryCallCount = 0;
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
@@ -242,7 +245,7 @@ export function mockAwards(target, {
       institution: { name: "University of Rochester", normalized_name: "University of Rochester", identifiers: { uei: "F27KDXZMF9Y8", ipf: null, other: null } },
       organization_department: null,
       principal_investigators: [{ name: "Vasily Karasiev", role: "Principal Investigator", email: "vkarasev@example.edu", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508" }],
-      program_contacts: [{ name: "Vladimir Lukin", role: "Program Officer", email: "vlukin@nsf.gov", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508" }],
+      program_contacts: [{ name: "Vladimir Lukin", role: "Program Officer", email: "vlukin@nsf.gov", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508", source_display_name: "Vladimir Lukin", program_contact_key: "program-contact-v1:vladimir|lukin", program_contact_identity: "NSF:program-contact-v1:vladimir|lukin", searchable_program_contact: true }],
       official_award_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508",
       annual_support: [],
       source_provenance: { source_url: "https://api.nsf.gov/services/v1/awards.json", retrieved_at: retrievedAt, source_record_id: "2605508", adapter_version: "1.0.0" },
@@ -268,7 +271,7 @@ export function mockAwards(target, {
       award_amount_basis: "returned_support_years",
       organization_department: "Medicine",
       principal_investigators: [{ name: "Stephen Dewhurst", role: "Contact Principal Investigator", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475" }],
-      program_contacts: [{ name: "Anissa Brown", role: "Program Official", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475" }],
+      program_contacts: [{ name: "Anissa Brown", role: "Program Official", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475", source_display_name: "Anissa Brown", program_contact_key: "program-contact-v1:anissa|brown", program_contact_identity: "NIH:program-contact-v1:anissa|brown", searchable_program_contact: true }],
       official_award_url: "https://reporter.nih.gov/project-details/10875475",
       annual_support: [{ fiscal_year: 2026, award_amount: 500000 }],
       source_provenance: { source_url: "https://api.reporter.nih.gov/v2/projects/search", retrieved_at: retrievedAt, source_record_id: "10875475", adapter_version: "1.0.0" },
@@ -303,6 +306,7 @@ export function mockAwards(target, {
     const snapshotAggregate = records => {
       const people = new Map();
       const programs = new Map();
+      const institutions = new Map();
       const years = new Map();
       const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0]]);
       records.forEach(record => {
@@ -324,17 +328,28 @@ export function mockAwards(target, {
           current.award_keys.push(`${record.source}:${record.award_id}`);
           programs.set(key, current);
         }
+        const institutionName = record.institution?.normalized_name || record.institution?.name;
+        if (institutionName) {
+          const key = `institution:${String(institutionName).toLowerCase().replace(/\W+/g, "-")}`;
+          const current = institutions.get(key) || { key, name: institutionName, projects: 0, variants: [], award_keys: [] };
+          current.projects += 1;
+          current.award_keys.push(`${record.source}:${record.award_id}`);
+          if (!current.variants.includes(institutionName)) current.variants.push(institutionName);
+          institutions.set(key, current);
+        }
       });
       const orderedYears = [...years.entries()].sort(([left], [right]) => left - right);
       return {
         project_count: records.length,
         investigator_count: people.size,
+        institution_count: institutions.size,
         program_count: programs.size,
         year_start: orderedYears[0]?.[0] || null,
         year_end: orderedYears.at(-1)?.[0] || null,
         represented_years: orderedYears.map(([year, projects]) => ({ year, projects })),
         agency_totals: [...agencyTotals].map(([source, projects]) => ({ source, projects })),
         investigators: [...people.values()],
+        institutions: [...institutions.values()],
         programs: [...programs.values()],
         ordered_refs: records.map((record, index) => ({ position: index + 1, evidence_id: `${record.source}:${record.award_id}`, source: record.source, award_id: record.award_id, title: record.title, award_year: record.award_year })),
       };
@@ -345,14 +360,19 @@ export function mockAwards(target, {
       snapshot_id: snapshot.snapshot_id,
       query_id: snapshot.query_id,
       as_of: snapshot.as_of,
+      expires_at: snapshot.expires_at,
       ordering_version: "award-recency-v1",
       batch_ceiling_per_agency: 25,
       request: snapshot.request,
       completeness: snapshot.completeness,
+      coverage_state: snapshot.completeness === "complete" ? "complete" : snapshot.records.length ? "partial" : "unavailable",
       exact_total: snapshot.exact_total,
       at_least: snapshot.records.length,
       recency_order: snapshot.completeness === "complete" ? "verified_most_recent_to_older" : "available_snapshot_recent_to_older",
       sources: snapshot.sources,
+      mode: snapshot.mode,
+      program_officer: snapshot.program_officer,
+      abstract_coverage: snapshot.abstract_coverage,
       base_aggregate: snapshot.aggregate,
       initial_batches: snapshot.request.sources.map(source => {
         const results = snapshot.records.filter(record => record.source === source).slice(0, 25);
@@ -362,10 +382,11 @@ export function mockAwards(target, {
     });
     const snapshotView = (snapshot, facet) => {
       if (!facet || facet.type === "all") return { facet: { type: "all", key: "", label: "All awards" }, records: snapshot.records };
-      const groups = facet.type === "investigator" ? snapshot.aggregate.investigators : snapshot.aggregate.programs;
+      const groups = facet.type === "investigator" ? snapshot.aggregate.investigators
+        : facet.type === "institution" ? snapshot.aggregate.institutions : snapshot.aggregate.programs;
       const group = groups.find(item => (facet.type === "investigator" ? item.identity_key : item.key) === facet.key);
       const allowed = new Set(group?.award_keys || []);
-      return { facet: { type: facet.type, key: facet.key, label: facet.type === "investigator" ? group?.name : group?.label }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
+      return { facet: { type: facet.type, key: facet.key, label: facet.type === "program" ? group?.label : group?.name }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
     };
     if (requestUrl.pathname === "/awards/snapshots" && request.method() === "POST") {
       if (failSnapshotCreateForTopics.includes(body.criteria?.topic)) {
@@ -377,11 +398,18 @@ export function mockAwards(target, {
         return;
       }
       const sources = body.sources;
+      const snapshotCriteria = { ...body.criteria };
+      if (snapshotCriteria.mode === "program_officer" && snapshotCriteria.year_preset === "recent5" && !snapshotCriteria.year_start && !snapshotCriteria.year_end) {
+        snapshotCriteria.year_start = 2022;
+        snapshotCriteria.year_end = 2026;
+      }
       const records = [];
       const sourceStates = [];
       for (const source of sources) {
         const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
-        const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+        const configuredFailure = (snapshotCriteria.mode === "program_officer" ? programOfficerSourceFailures[source] : null)
+          || sourceFailures[source]
+          || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
         if (configuredFailure) {
           sourceStates.push({ source, status: configuredFailure.status || "unavailable", result_count: 0, total_count: null, error: { code: configuredFailure.code || "source_unavailable" } });
           continue;
@@ -389,16 +417,38 @@ export function mockAwards(target, {
         const template = templateFor(source);
         const configuredCount = typeof resultCountPerSource === "object" ? resultCountPerSource[source] : resultCountPerSource;
         const count = Math.max(0, Number(configuredCount) || 0);
-        for (let index = 0; index < count; index += 1) records.push(index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] });
+        for (let index = 0; index < count; index += 1) {
+          const record = index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] };
+          if (snapshotCriteria.mode !== "program_officer" || record.program_contacts?.some(contact => contact.program_contact_key === snapshotCriteria.program_contact_key)) records.push(record);
+        }
         const partial = Array.isArray(hasMoreBySource[source]) ? hasMoreBySource[source].length > 0 : Boolean(hasMoreBySource[source]);
         sourceStates.push({ source, status: partial ? "safety_bounded" : "complete", result_count: count, total_count: partial ? null : count, at_least: count, safety_bound_reached: partial, adapter_version: "1.1.0", retrieved_at: retrievedAt });
       }
       const complete = sourceStates.every(source => source.status === "complete");
       const snapshotId = String(++snapshotSequence).padStart(64, "a");
-      const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, request: { sources, criteria: body.criteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null };
+      const programOfficer = snapshotCriteria.mode === "program_officer" ? { source: sources[0], display_name: snapshotCriteria.program_officer, contact_key: snapshotCriteria.program_contact_key, year_preset: snapshotCriteria.year_preset, year_start: snapshotCriteria.year_start || null, year_end: snapshotCriteria.year_end || null, membership_rule: "exact_same_source_program_contact_key" } : null;
+      const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, expires_at: "2026-08-24T21:00:00.000Z", request: { sources, criteria: snapshotCriteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null, mode: programOfficer ? "program_officer" : "standard", program_officer: programOfficer };
       snapshot.aggregate = snapshotAggregate(records);
+      snapshot.abstract_coverage = { total_records: records.length, records_with_abstract: records.filter(record => record.abstract).length, records_without_abstract: records.filter(record => !record.abstract).length, percentage: records.length ? 100 : 0 };
       snapshots.set(snapshotId, snapshot);
       await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(publicSnapshot(snapshot)) });
+      return;
+    }
+    if (requestUrl.pathname === "/awards/snapshots/evidence" && request.method() === "POST") {
+      snapshotEvidenceCallCount += 1;
+      if (snapshotEvidenceCallCount === Number(snapshotEvidenceExpireAtCall)) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      const snapshot = snapshots.get(body.snapshot_id);
+      if (!snapshot || snapshot.mode !== "program_officer") {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      const phrases = body.phrases.map(value => String(value).toLowerCase());
+      const scored = snapshot.records.filter(record => phrases.some(phrase => `${record.title} ${record.abstract} ${record.program_name}`.toLowerCase().includes(phrase) || phrase.split(/\s+/).some(token => `${record.title} ${record.abstract} ${record.program_name}`.toLowerCase().includes(token))));
+      const awards = scored.slice(0, body.limit).map(record => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: snapshot.records.indexOf(record) + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: 100, matched_fields: ["title", "abstract"] }));
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, retrieval: { scoring_version: "program-officer-evidence-v1", records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
@@ -474,7 +524,22 @@ export function mockAwards(target, {
         snapshot_id: String(++snapshotSequence).padStart(64, "c"),
         records,
         sources: snapshot.sources.map(source => source.source === body.source
-          ? { ...source, status: "complete", result_count: recoveredCount, total_count: recoveredCount }
+          ? {
+              ...source,
+              status: "complete",
+              result_count: recoveredCount,
+              total_count: recoveredCount,
+              ...(snapshot.mode === "program_officer" ? { contact_post_validation: {
+                version: "program-contact-v1",
+                source: body.source,
+                display_name: snapshot.program_officer.display_name,
+                contact_key: snapshot.program_officer.contact_key,
+                returned_count: recoveredCount,
+                retained_count: recoveredCount,
+                rejected_count: 0,
+                complete: true,
+              } } : {}),
+            }
           : source),
       };
       successor.completeness = successor.sources.every(source => source.status === "complete") ? "complete" : "partial";

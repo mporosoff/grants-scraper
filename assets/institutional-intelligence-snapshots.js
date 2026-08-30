@@ -34,6 +34,8 @@
     sourceMessages: new Map(),
     investigatorGroups: new Map(),
     programGroups: new Map(),
+    institutionGroups: new Map(),
+    programOfficerScope: null,
     question: null,
     questionSequence: 0,
     questionSubmitting: false,
@@ -94,6 +96,7 @@
     $("ii-page-size").disabled = active || !state.pagePayload;
     $("ii-investigators").disabled = active || state.investigatorGroups.size === 0;
     $("ii-programs").disabled = active || state.programGroups.size === 0;
+    $("ii-institutions").disabled = active || state.institutionGroups.size === 0;
     $("ii-clear-facet").disabled = active || state.facet.type === "all";
     $("ii-load-more-actions").querySelectorAll("button").forEach(button => { button.disabled = active; });
   }
@@ -201,7 +204,7 @@
   }
 
   function formState() {
-    return {
+    const value = {
       open: true,
       institution: clean(state.selectedInstitution?.canonical_name || $("ii-institution").value, 300),
       ror_id: clean(state.selectedInstitution?.id, 100),
@@ -218,10 +221,18 @@
       facet_type: state.facet.type,
       facet_key: state.facet.key,
     };
+    if (state.programOfficerScope) Object.assign(value, {
+      mode: "program_officer",
+      program_officer_source: state.programOfficerScope.source,
+      program_officer_display_name: state.programOfficerScope.display_name,
+      program_contact_key: state.programOfficerScope.contact_key,
+      year_preset: $("ii-year-preset").value || state.programOfficerScope.year_preset || "recent5",
+    });
+    return value;
   }
 
   function submittedCriteria(value) {
-    return {
+    const submitted = {
       open: true,
       institution: clean(value?.institution, 300),
       ror_id: clean(value?.ror_id, 100),
@@ -233,6 +244,31 @@
       year_start: clean(value?.year_start, 4),
       year_end: clean(value?.year_end, 4),
     };
+    if (value?.mode === "program_officer") Object.assign(submitted, {
+      mode: "program_officer",
+      program_officer_source: clean(value?.program_officer_source || value?.agency, 10).toUpperCase(),
+      program_officer_display_name: clean(value?.program_officer_display_name || value?.program_officer, 300),
+      program_contact_key: clean(value?.program_contact_key, 300),
+      year_preset: clean(value?.year_preset, 20) || "recent5",
+    });
+    return submitted;
+  }
+
+  function submittedFromSnapshot(value, snapshot) {
+    if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return submittedCriteria(value);
+    const officer = snapshot.program_officer;
+    return submittedCriteria({
+      ...value,
+      mode: "program_officer",
+      agency: officer.source,
+      program_officer: officer.display_name,
+      program_officer_source: officer.source,
+      program_officer_display_name: officer.display_name,
+      program_contact_key: officer.contact_key,
+      year_preset: officer.year_preset,
+      year_start: officer.year_start || "",
+      year_end: officer.year_end || "",
+    });
   }
 
   function snapshotViewState() {
@@ -246,29 +282,53 @@
   }
 
   function applyFormState(value) {
-    $("ii-institution").value = value.institution || "";
+    const officerMode = value?.mode === "program_officer";
+    state.programOfficerScope = officerMode ? {
+      source: clean(value.program_officer_source || value.agency, 10).toUpperCase(),
+      display_name: clean(value.program_officer_display_name || value.program_officer, 300),
+      contact_key: clean(value.program_contact_key, 300),
+      year_preset: clean(value.year_preset, 20) || "recent5",
+    } : null;
+    $("ii-institution").value = officerMode ? "" : value.institution || "";
     $("ii-agency").value = value.agency || "all";
-    $("ii-program").value = value.program || "";
-    $("ii-topic").value = value.topic || "";
-    $("ii-pi").value = value.pi || "";
-    $("ii-program-officer").value = value.program_officer || "";
+    $("ii-program").value = officerMode ? "" : value.program || "";
+    $("ii-topic").value = officerMode ? "" : value.topic || "";
+    $("ii-pi").value = officerMode ? "" : value.pi || "";
+    $("ii-program-officer").value = officerMode ? state.programOfficerScope.display_name : value.program_officer || "";
     $("ii-year-start").value = value.year_start || "";
     $("ii-year-end").value = value.year_end || "";
+    $("ii-year-preset").value = state.programOfficerScope?.year_preset || "recent5";
     $("ii-page-size").value = String(value.page_size || 10);
     state.page = value.page || 1;
     state.pageSize = value.page_size || 10;
     state.facet = { type: value.facet_type || "all", key: value.facet_key || "" };
-    state.selectedInstitution = value.institution ? {
+    state.selectedInstitution = !officerMode && value.institution ? {
       id: value.ror_id || "", canonical_name: value.institution, aliases: [], acronyms: [], registryMetadataLoaded: false,
       location: {}, match: { type: value.ror_id ? "shared_ror" : "shared_source_text" },
     } : null;
-    if (value.institution) $("ii-registry-status").textContent = value.ror_id
+    if (!officerMode && value.institution) $("ii-registry-status").textContent = value.ror_id
       ? `Restored ${value.institution} with its shared Research Organization Registry (ROR) identity.`
       : `Restored ${value.institution} as the shared canonical award-source name.`;
+    const lockedIds = ["ii-institution", "ii-agency", "ii-program", "ii-topic", "ii-pi", "ii-program-officer"];
+    lockedIds.forEach(id => { $(id).disabled = officerMode; });
+    const customYears = officerMode && state.programOfficerScope.year_preset === "custom";
+    $("ii-year-start").disabled = officerMode && !customYears;
+    $("ii-year-end").disabled = officerMode && !customYears;
+    $("ii-po-scope").classList.toggle("hidden", !officerMode);
+    $("ii-po-name").textContent = state.programOfficerScope?.display_name || "";
+    $("ii-po-source").textContent = state.programOfficerScope?.source || "";
+    $("ii-institution-field").classList.toggle("hidden", officerMode);
+    $("ii-ask-heading").textContent = officerMode ? "Optional: Ask about this Program Officer snapshot" : "Optional: Ask about this institution";
+    $("ii-ask-summary").textContent = officerMode ? "Answer from the full stored source snapshot, not only visible cards" : "Answer from returned public NSF, NIH, and DOE award evidence";
+    $("ii-question-label").textContent = officerMode ? `Question about ${state.programOfficerScope?.display_name || "this exact source-listed contact"}` : "Question about the selected institution";
+    $("ii-question").placeholder = officerMode ? "Example: Which projects involve catalysis?" : "Who at this institution has received awards from DOE BES?";
+    $("ii-privacy-note").textContent = officerMode
+      ? "The key stays in the same browser-local Funding Finder credential store. An explicit topical question may send the question, locked public source/contact/year/snapshot metadata, and at most 24 bounded public award records or abstract excerpts directly to that provider. It never sends the full snapshot, profiles, CVs, ORCID or faculty data, uploaded notices, saved notes, alerts, unrelated chat, or provider keys. Source facts and deterministic retrieval, not model pretraining, remain authoritative."
+      : "The key stays in the same browser-local Funding Finder credential store. An explicit AI question may send the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts directly to that provider. It never sends profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated award records, not model pretraining, remain authoritative.";
   }
 
   function hasSearchState(value) {
-    return Boolean(value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
+    return Boolean(value?.mode === "program_officer" || value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
   }
 
   function historyViewState() {
@@ -384,15 +444,20 @@
       .map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("");
   }
 
-  function contactLine(person, source, officialUrl) {
+  function contactLine(person, source, officialUrl, { programContact = false } = {}) {
     const name = clean(person?.name, 300) || "Name not listed";
     const role = clean(person?.role, 160) || "Contact";
     const email = clean(person?.email, 320);
     const contactUrl = safeUrl(person?.official_contact_url || officialUrl);
-    if (email) return `<li><strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · <a href="mailto:${escapeAttribute(email)}">${escapeHtml(email)}</a><span class="ii-contact-provenance">Direct ${escapeHtml(source)} source field</span></li>`;
-    return contactUrl
-      ? `<li><strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · <a href="${escapeAttribute(contactUrl)}" target="_blank" rel="noopener">View on official record ↗</a></li>`
-      : `<li><strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · Email not listed</li>`;
+    const details = email
+      ? `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · <a href="mailto:${escapeAttribute(email)}">${escapeHtml(email)}</a><span class="ii-contact-provenance">Direct ${escapeHtml(source)} source field</span>`
+      : contactUrl
+        ? `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · <a href="${escapeAttribute(contactUrl)}" target="_blank" rel="noopener">View on official record ↗</a>`
+        : `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · Email not listed`;
+    const action = programContact && core.searchableProgramContact(person, source)
+      ? `<div class="ii-po-action"><button class="text-button" type="button" data-ii-program-officer="1" data-ii-po-source="${escapeAttribute(source)}" data-ii-po-name="${escapeAttribute(person.source_display_name || person.name)}" data-ii-po-key="${escapeAttribute(person.program_contact_key)}">Search this contact’s recent ${escapeHtml(source)} awards</button></div>`
+      : "";
+    return `<li>${details}${action}</li>`;
   }
 
   function awardCard(award) {
@@ -400,8 +465,11 @@
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
     const investigators = Array.isArray(award?.principal_investigators) ? award.principal_investigators : [];
-    const contacts = [...investigators, ...(Array.isArray(award?.program_contacts) ? award.program_contacts : [])]
-      .map(person => contactLine(person, source, officialUrl)).join("");
+    const contacts = [
+      ...investigators.map(person => contactLine(person, source, officialUrl)),
+      ...(Array.isArray(award?.program_contacts) ? award.program_contacts : [])
+        .map(person => contactLine(person, source, officialUrl, { programContact: true })),
+    ].join("");
     const program = core.programDescriptors(award)[0] || null;
     const recency = clean(award?.award_date || award?.project_start || award?.award_year, 40) || "Date not listed";
     return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(awardKey(award))}" tabindex="-1">
@@ -418,12 +486,23 @@
   function sourceStatusText(source) {
     const message = state.sourceMessages.get(source.source);
     if (message) return message;
-    if (source.status === "complete") return `${source.source} complete · ${source.result_count.toLocaleString()} awards · exact source total`;
-    if (source.status === "safety_bounded") return `${source.source} safety-bounded · at least ${source.result_count.toLocaleString()} normalized awards available`;
-    if (source.status === "partial") return `${source.source} partial · at least ${source.result_count.toLocaleString()} normalized awards available`;
-    if (source.status === "rate_limited") return `${source.source} is rate-limited. Other source results remain available.`;
-    if (source.status === "unsupported") return `${source.source} does not support this query shape. Other source results remain available.`;
-    return `${source.source} is temporarily unavailable. Other source results remain available.`;
+    const validation = source.contact_post_validation;
+    const validationText = validation
+      ? ` · exact-contact validation retained ${validation.retained_count} of ${validation.returned_count} normalized records`
+      : "";
+    if (source.status === "complete") return `${source.source} complete · ${source.result_count.toLocaleString()} awards · exact source total${validationText}`;
+    if (source.status === "safety_bounded") return `${source.source} safety-bounded · at least ${source.result_count.toLocaleString()} normalized awards available${validationText}`;
+    if (source.status === "partial") return `${source.source} partial · at least ${source.result_count.toLocaleString()} normalized awards available${validationText}`;
+    const singleSource = state.snapshot?.sources?.length === 1;
+    if (source.status === "rate_limited") return singleSource
+      ? `${source.source} is rate-limited; no exact total is available for this snapshot.`
+      : `${source.source} is rate-limited. Other source results remain available.`;
+    if (source.status === "unsupported") return singleSource
+      ? `${source.source} does not support this query shape; no exact total is available for this snapshot.`
+      : `${source.source} does not support this query shape. Other source results remain available.`;
+    return singleSource
+      ? `${source.source} is temporarily unavailable; no exact total is available for this snapshot.`
+      : `${source.source} is temporarily unavailable. Other source results remain available.`;
   }
 
   function renderSourceStatus() {
@@ -449,12 +528,15 @@
   }
 
   function renderFacetSelect(select, items, kind) {
-    const allLabel = kind === "investigator" ? "All investigators" : "All programs";
+    const allLabel = kind === "investigator" ? "All investigators"
+      : kind === "institution" ? "All recipient institutions" : "All programs";
     if (kind === "investigator") state.investigatorGroups = new Map(items.map(item => [item.identity_key, item]));
+    else if (kind === "institution") state.institutionGroups = new Map(items.map(item => [item.key, item]));
     else state.programGroups = new Map(items.map(item => [item.key, item]));
     select.innerHTML = `<option value="all">${allLabel}</option>${items.map(item => {
       const value = kind === "investigator" ? item.identity_key : item.key;
-      return `<option value="${escapeAttribute(value)}">${escapeHtml(kind === "investigator" ? item.name : item.label)} (${item.projects})</option>`;
+      const label = kind === "program" ? item.label : item.name;
+      return `<option value="${escapeAttribute(value)}">${escapeHtml(label)} (${item.projects})</option>`;
     }).join("")}`;
     select.disabled = state.busyDepth > 0 || items.length === 0;
     select.value = state.facet.type === kind ? state.facet.key : "all";
@@ -464,6 +546,7 @@
     $("ii-page-size").value = String(state.pageSize);
     $("ii-investigators").value = state.facet.type === "investigator" ? state.facet.key : "all";
     $("ii-programs").value = state.facet.type === "program" ? state.facet.key : "all";
+    $("ii-institutions").value = state.facet.type === "institution" ? state.facet.key : "all";
   }
 
   function renderPagination() {
@@ -498,14 +581,19 @@
     absorbAwards(awards);
     $("ii-output").classList.remove("hidden");
     const institution = clean(state.submitted?.institution, 300);
-    $("ii-output-heading").textContent = institution ? `${institution} funded projects` : "Funded award summary";
+    const officer = state.snapshot?.mode === "program_officer" ? state.snapshot.program_officer : null;
+    $("ii-output-heading").textContent = officer
+      ? `${officer.display_name} · ${officer.source} funded projects`
+      : institution ? `${institution} funded projects` : "Funded award summary";
     const requestedYears = state.submitted?.year_start && state.submitted?.year_end
       ? `${state.submitted.year_start}–${state.submitted.year_end}`
       : state.submitted?.year_start ? `${state.submitted.year_start} onward` : state.submitted?.year_end ? `through ${state.submitted.year_end}` : "all available years";
     const totalText = payload.completeness === "complete"
       ? `${payload.exact_total.toLocaleString()} exact matching award${payload.exact_total === 1 ? "" : "s"}`
       : `at least ${payload.at_least.toLocaleString()} matching award${payload.at_least === 1 ? "" : "s"} within the disclosed source bounds`;
-    $("ii-result-scope").textContent = `Requested award years: ${requestedYears}. This stable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}, ordered by award or action date, then project start, then award year; missing dates sort last.`;
+    $("ii-result-scope").textContent = officer
+      ? `Exact ${officer.source} source-listed contact: ${officer.display_name}. Requested source award years: ${requestedYears}. This immutable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}; coverage is ${payload.coverage_state}. It expires ${new Date(payload.expires_at).toLocaleString()}.`
+      : `Requested award years: ${requestedYears}. This stable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}, ordered by award or action date, then project start, then award year; missing dates sort last.`;
     const years = payload.aggregate.year_start
       ? payload.aggregate.year_start === payload.aggregate.year_end ? String(payload.aggregate.year_start) : `${payload.aggregate.year_start}–${payload.aggregate.year_end}`
       : "Not listed";
@@ -513,11 +601,13 @@
     $("ii-metrics").innerHTML = [
       [payload.aggregate.project_count, `Projects ${scope}`],
       [payload.aggregate.investigator_count, `Investigator identities ${scope}`],
+      [payload.aggregate.institution_count || 0, `Recipient institutions ${scope}`],
       [payload.aggregate.program_count, `Distinct programs ${scope}`],
       [years, `Years represented ${scope}`],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
     renderFacetSelect($("ii-investigators"), state.baseAggregate.investigators || [], "investigator");
     renderFacetSelect($("ii-programs"), state.baseAggregate.programs || [], "program");
+    renderFacetSelect($("ii-institutions"), state.baseAggregate.institutions || [], "institution");
     const active = payload.facet?.type !== "all";
     $("ii-active-facet").classList.toggle("hidden", !active);
     $("ii-clear-facet").disabled = state.busyDepth > 0 || !active;
@@ -566,7 +656,7 @@
     }
     absorb(pageAwards(pagePayload));
     return {
-      submitted: submittedCriteria(submitted),
+      submitted: submittedFromSnapshot(submitted, snapshot),
       snapshot: { ...snapshot, ...pagePayload, snapshot_id: pagePayload.snapshot_id },
       pagePayload,
       page: pagePayload.pagination.page,
@@ -594,6 +684,8 @@
     state.sourceMessages = new Map();
     state.investigatorGroups = new Map();
     state.programGroups = new Map();
+    state.institutionGroups = new Map();
+    if (staged.snapshot.mode === "program_officer") applyFormState({ ...staged.submitted, ...snapshotViewState() });
     if (staged.questionState) {
       state.question = staged.questionState;
       state.answering = false;
@@ -622,6 +714,10 @@
     state.facet = { type: payload.facet.type, key: payload.facet.key };
     state.pagePayload = payload;
     state.snapshot = { ...state.snapshot, ...payload, snapshot_id: payload.snapshot_id };
+    if (payload.mode === "program_officer") {
+      state.submitted = submittedFromSnapshot(state.submitted, payload);
+      applyFormState({ ...state.submitted, ...snapshotViewState() });
+    }
     renderPage({ focus });
     syncUrl(historyMode, departureHistoryState);
     return payload;
@@ -674,9 +770,12 @@
     state.controller?.abort();
     state.controller = new AbortController();
     setBusy(true);
-    setStatus("Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
+    const preliminary = searchState ? { ...searchState } : formState();
+    setStatus(preliminary.mode === "program_officer"
+      ? `Building an immutable ${preliminary.program_officer_source || preliminary.agency} snapshot for the exact source-listed contact…`
+      : "Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
     try {
-      if (resolveInstitution) await resolveTypedInstitution();
+      if (resolveInstitution && preliminary.mode !== "program_officer") await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
       const submitted = submittedCriteria(current);
@@ -700,6 +799,9 @@
       return { payload: state.pagePayload, aggregate: state.aggregate };
     } catch (error) {
       if (sequence !== state.sequence) return null;
+      if (preliminary.mode === "program_officer" && state.submitted && state.snapshot?.snapshot_id) {
+        applyFormState({ ...state.submitted, ...snapshotViewState() });
+      }
       if (error?.name === "AbortError") setStatus("The result snapshot search timed out. Retry later.", true);
       else setStatus(error?.message || "Funded award search could not be completed.", true);
       return null;
@@ -849,9 +951,13 @@
       }
       if (!retryIsCurrent()) return;
       commitSnapshotResult(result.staged, { historyMode: "replace" });
-      state.sourceMessages.set(source, `${source} recovered. The successor snapshot retained the other successful sources.`);
+      const singleSource = state.snapshot.sources.length === 1;
+      const validation = state.snapshot.sources.find(item => item.source === source)?.contact_post_validation;
+      state.sourceMessages.set(source, singleSource
+        ? `${source} recovered in an exact-contact successor snapshot${validation ? `; exact-contact validation retained ${validation.retained_count} of ${validation.returned_count} normalized records` : ""}.`
+        : `${source} recovered. The successor snapshot retained the other successful sources.`);
       renderSourceStatus();
-      setStatus(`${rebuilt ? "The expired result snapshot was rebuilt before " : ""}${source} recovered in successor snapshot ${result.snapshot.snapshot_id.slice(0, 12)}…; successful source results were retained.`);
+      setStatus(`${rebuilt ? "The expired result snapshot was rebuilt before " : ""}${source} recovered in successor snapshot ${result.snapshot.snapshot_id.slice(0, 12)}…; ${singleSource ? "the locked contact and year scope were preserved" : "successful source results were retained"}.`);
     } catch (error) {
       if (!retryIsCurrent()) return;
       state.sourceMessages.set(source, `${source} retry did not recover. Existing snapshot results remain available.`);
@@ -863,6 +969,9 @@
   }
 
   function answerEvidenceSignature() {
+    if (state.snapshot?.mode === "program_officer") {
+      return JSON.stringify({ snapshot: state.snapshot.snapshot_id, facet: state.facet });
+    }
     return JSON.stringify({ snapshot: state.snapshot?.snapshot_id, ids: [...state.residentAwards.keys()].sort(), facet: state.facet });
   }
 
@@ -879,10 +988,93 @@
     const evidence = snapshot.evidencePack.awards.filter(item => ids.has(item.evidence_id));
     $("ii-answer-evidence").innerHTML = evidence.length
       ? `<h4>Supporting award evidence</h4><ul class="ii-evidence-list">${evidence.map(item => `<li><a href="#${escapeAttribute(evidenceDomId(item.evidence_id))}" data-ii-evidence-link="${escapeAttribute(item.evidence_id)}">${escapeHtml(item.evidence_id)}</a><span class="ii-evidence-title">${escapeHtml(item.title || "Title not listed")}</span></li>`).join("")}</ul>`
-      : "<h4>Supporting award evidence</h4><p>No hydrated supporting award card is currently available.</p>";
+      : state.snapshot.mode === "program_officer"
+        ? "<h4>Supporting award evidence</h4><p>No separate record excerpts were needed for this full-snapshot aggregate answer.</p>"
+        : "<h4>Supporting award evidence</h4><p>No hydrated supporting award card is currently available.</p>";
     const incomplete = state.snapshot.completeness !== "complete";
-    $("ii-answer-limitations").textContent = `${snapshot.aggregate.project_count} normalized awards informed the server aggregate. ${snapshot.evidencePack.awards.length} hydrated public records supplied bounded card evidence.${incomplete ? " One or more sources reached a disclosed safety bound or failed, so this is not a complete institutional history." : " All requested sources were exhausted within the published architecture bounds."}${state.question.translationFallback ? " Provider translation was unavailable, so visible filters and deterministic intent were used." : ""}${snapshot.narrativeFailure ? " Narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
-    $("ii-update-answer").classList.toggle("hidden", snapshot.signature === answerEvidenceSignature());
+    if (state.snapshot.mode === "program_officer") {
+      const coverage = state.snapshot.abstract_coverage || {};
+      const retrieval = snapshot.evidencePack.retrieval;
+      $("ii-answer-limitations").textContent = `Source facts come from the immutable ${state.snapshot.program_officer.source} snapshot of ${state.snapshot.at_least} post-validated awards for the exact source-listed contact. ${retrieval ? `Deterministic retrieval scanned all ${retrieval.records_scanned} stored records and selected ${retrieval.records_selected}; it did not rely on the visible page. ` : "The answer used the full stored aggregate; it did not rely on the visible page. "}${coverage.records_with_abstract || 0} of ${coverage.total_records || 0} records include source abstract text.${incomplete ? " The source snapshot is incomplete, so absence is not a negative finding." : " The source result was exhausted for this exact scoped query."}${snapshot.narrative ? " Model interpretation is shown only in separately cited claims; the snapshot and deterministic retrieval remain authoritative." : " No model interpretation was required."}${snapshot.narrativeFailure ? " Optional narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
+      $("ii-update-answer").classList.add("hidden");
+    } else {
+      $("ii-answer-limitations").textContent = `${snapshot.aggregate.project_count} normalized awards informed the server aggregate. ${snapshot.evidencePack.awards.length} hydrated public records supplied bounded card evidence.${incomplete ? " One or more sources reached a disclosed safety bound or failed, so this is not a complete institutional history." : " All requested sources were exhausted within the published architecture bounds."}${state.question.translationFallback ? " Provider translation was unavailable, so visible filters and deterministic intent were used." : ""}${snapshot.narrativeFailure ? " Narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
+      $("ii-update-answer").classList.toggle("hidden", snapshot.signature === answerEvidenceSignature());
+    }
+  }
+
+  async function programOfficerEvidence(questionState) {
+    const phrases = core.programOfficerRetrievalPhrases(questionState.question);
+    if (!phrases.length) return {
+      schema_version: 1,
+      snapshot_id: state.snapshot.snapshot_id,
+      retrieval: { records_scanned: state.snapshot.at_least, records_with_score: 0, records_selected: 0 },
+      awards: [],
+    };
+    try {
+      return await postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, limit: 24 });
+    } catch (error) {
+      if (error?.code !== "snapshot_expired") throw error;
+      setStatus("The Program Officer snapshot expired. Rebuilding the same locked contact and year scope before answering…");
+      const requestedView = { page: state.page, pageSize: state.pageSize, facet: { ...state.facet } };
+      const restored = await runSearch({
+        historyMode: "replace",
+        resolveInstitution: false,
+        questionSearch: true,
+        questionState,
+        searchState: state.submitted,
+      });
+      if (!restored) throw new Error("The expired Program Officer snapshot could not be rebuilt.");
+      if (requestedView.page !== 1 || requestedView.facet.type !== "all" || requestedView.pageSize !== state.pageSize) {
+        await fetchPage({
+          page: requestedView.page,
+          pageSize: requestedView.pageSize,
+          facet: requestedView.facet,
+          historyMode: "replace",
+        });
+      }
+      return postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, limit: 24 });
+    }
+  }
+
+  async function refreshProgramOfficerQuestionAnswer(questionState, questionSequence) {
+    const aggregateIntent = core.programOfficerAggregateIntent(questionState.question);
+    const intent = aggregateIntent || "topical";
+    const aggregate = { ...(state.baseAggregate || state.aggregate), awards: [], ordered_refs: state.baseAggregate?.ordered_refs || state.pagePayload?.aggregate?.ordered_refs || [] };
+    const evidencePack = intent === "topical"
+      ? await programOfficerEvidence(questionState)
+      : { awards: [], retrieval: null };
+    const deterministic = core.deterministicProgramOfficerAnswer({
+      question: questionState.question,
+      intent,
+      aggregate,
+      snapshot: state.snapshot,
+      evidencePack,
+    });
+    let narrative = null;
+    let narrativeFailure = false;
+    const key = credentials.loadKey(questionState.provider);
+    if (intent === "topical" && evidencePack.awards.length && key) {
+      try {
+        const proposed = await ai.structuredResult({
+          provider: questionState.provider,
+          key,
+          operation: "institution_narrative",
+          fetchImpl: globalThis.fetch,
+          system: "Interpret only the supplied public award evidence within the locked Program Officer snapshot. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not broaden the contact, source, years, or evidence; do not infer aliases, identities, roles, or negative career conclusions; do not recommend, rank, or return HTML.",
+          user: JSON.stringify(core.programOfficerProviderPayload({ question: questionState.question, snapshot: state.snapshot, evidencePack })),
+        });
+        narrative = core.validateNarrativeAnswer(proposed, evidencePack.awards);
+        narrativeFailure = !narrative;
+      } catch {
+        narrativeFailure = true;
+      }
+    }
+    if (questionSequence !== state.questionSequence || state.question !== questionState) return;
+    questionState.intent = intent;
+    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: answerEvidenceSignature() };
+    state.answering = false;
+    renderQuestionAnswer();
   }
 
   async function refreshQuestionAnswer() {
@@ -890,6 +1082,18 @@
     const questionState = state.question;
     const questionSequence = state.questionSequence;
     state.answering = true;
+    if (state.snapshot?.mode === "program_officer") {
+      try {
+        await refreshProgramOfficerQuestionAnswer(questionState, questionSequence);
+      } catch (error) {
+        if (questionSequence === state.questionSequence && state.question === questionState) {
+          state.answering = false;
+          $("ii-question-plan").textContent = `The full-snapshot evidence question could not be completed: ${error?.message || String(error)}`;
+          $("ii-question-plan").classList.remove("hidden");
+        }
+      }
+      return;
+    }
     const evidencePack = core.questionEvidencePack([...state.residentAwards.values()]);
     const evidenceSignature = answerEvidenceSignature();
     const aggregate = { ...state.aggregate, awards: pageAwards(), ordered_refs: state.pagePayload.aggregate.ordered_refs };
@@ -936,12 +1140,20 @@
   }
 
   async function focusAwardEvidence(evidenceId) {
-    const reference = state.pagePayload?.aggregate?.ordered_refs?.find(item => item.evidence_id === evidenceId);
+    const facetReference = (state.pagePayload?.aggregate?.ordered_refs || []).find(item => item.evidence_id === evidenceId);
+    const evidenceRecord = state.question?.snapshot?.evidencePack?.awards?.find(item => item.evidence_id === evidenceId);
+    const fullReference = state.facet.type === "all"
+      ? (state.baseAggregate?.ordered_refs || []).find(item => item.evidence_id === evidenceId)
+      : null;
+    const reference = facetReference || fullReference || (Number.isInteger(evidenceRecord?.snapshot_position)
+      ? { position: evidenceRecord.snapshot_position }
+      : null);
     if (!reference) return;
+    const targetFacet = (facetReference || state.facet.type === "all") ? state.facet : { type: "all", key: "" };
     const page = Math.floor((reference.position - 1) / state.pageSize) + 1;
-    if (page !== state.page) {
+    if (page !== state.page || targetFacet.type !== state.facet.type || targetFacet.key !== state.facet.key) {
       setBusy(true);
-      try { await fetchPageWithRecovery({ page, historyMode: "push" }); } finally { setBusy(false); }
+      try { await fetchPageWithRecovery({ page, facet: targetFacet, historyMode: "push" }); } finally { setBusy(false); }
     }
     requestAnimationFrame(() => {
       const card = $(evidenceDomId(evidenceId));
@@ -987,6 +1199,15 @@
     try {
       const question = clean($("ii-question").value, 1_000);
       if (!question) throw new Error("Enter a question first.");
+      if (state.snapshot?.mode === "program_officer") {
+        const { provider } = refreshProvider();
+        const questionState = { question, intent: "", filters: state.submitted, provider, narrativeNeeded: true, translationFallback: false, snapshot: null };
+        state.question = questionState;
+        $("ii-question-plan").textContent = `Locked evidence plan · exact ${state.snapshot.program_officer.source} contact ${state.snapshot.program_officer.display_name} · ${state.snapshot.program_officer.year_preset} source award years · full stored snapshot`;
+        $("ii-question-plan").classList.remove("hidden");
+        await refreshQuestionAnswer();
+        return;
+      }
       const institution = await resolveTypedInstitution();
       if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
@@ -1078,6 +1299,8 @@
     state.sourceMessages.clear();
     state.investigatorGroups.clear();
     state.programGroups.clear();
+    state.institutionGroups.clear();
+    state.programOfficerScope = null;
     clearQuestionState({ clearInput: true });
   }
 
@@ -1092,6 +1315,72 @@
     for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
     setStatus("Structured award search and institution resolution do not require an AI key.");
     writeHistoryUrl(core.urlForState(location.href, { open: true }), historyMode, departureHistoryState);
+  }
+
+  function programOfficerSearchState({ source, displayName, contactKey, yearPreset = "recent5", yearStart = "", yearEnd = "" }) {
+    return {
+      open: true,
+      mode: "program_officer",
+      institution: "",
+      ror_id: "",
+      agency: source,
+      program: "",
+      topic: "",
+      pi: "",
+      program_officer: displayName,
+      program_officer_source: source,
+      program_officer_display_name: displayName,
+      program_contact_key: contactKey,
+      year_preset: yearPreset,
+      year_start: yearStart,
+      year_end: yearEnd,
+      page: 1,
+      page_size: state.pageSize,
+      facet_type: "all",
+      facet_key: "",
+    };
+  }
+
+  async function startProgramOfficerSearch(trigger) {
+    const source = clean(trigger?.dataset.iiPoSource, 10).toUpperCase();
+    const displayName = clean(trigger?.dataset.iiPoName, 300);
+    const contactKey = clean(trigger?.dataset.iiPoKey, 300);
+    if (!displayName || core.programContactKey(displayName) !== contactKey || !["NSF", "NIH", "DOE"].includes(source)) {
+      setStatus("This source-listed contact cannot be searched safely.", true);
+      return;
+    }
+    const departureHistoryState = historyViewState();
+    const next = programOfficerSearchState({ source, displayName, contactKey });
+    state.selectedInstitution = null;
+    applyFormState(next);
+    const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, focusResults: false, searchState: next, departureHistoryState });
+    if (outcome) {
+      $("ii-output-heading").focus({ preventScroll: true });
+      $("ii-output-heading").scrollIntoView({ block: "start" });
+    }
+  }
+
+  async function changeProgramOfficerYears() {
+    if (!state.programOfficerScope || state.busyDepth) return;
+    const preset = $("ii-year-preset").value;
+    let yearStart = $("ii-year-start").value;
+    let yearEnd = $("ii-year-end").value;
+    if (["recent5", "all"].includes(preset)) yearStart = yearEnd = "";
+    if (preset === "custom" && !yearStart && !yearEnd) {
+      const asOfYear = new Date(state.snapshot?.as_of || Date.now()).getUTCFullYear();
+      yearStart = String(asOfYear - 4);
+      yearEnd = String(asOfYear);
+    }
+    const next = programOfficerSearchState({
+      source: state.programOfficerScope.source,
+      displayName: state.programOfficerScope.display_name,
+      contactKey: state.programOfficerScope.contact_key,
+      yearPreset: preset,
+      yearStart,
+      yearEnd,
+    });
+    applyFormState(next);
+    await runSearch({ historyMode: "push", resolveInstitution: false, focusResults: true, searchState: next });
   }
 
   function bindEvents() {
@@ -1140,6 +1429,26 @@
       if (key === "all") return changeFacet("all", "");
       $("ii-investigators").value = "all";
       return changeFacet("program", key);
+    });
+    $("ii-institutions").addEventListener("change", event => {
+      if (state.busyDepth) return;
+      const key = event.currentTarget.value;
+      if (key === "all") return changeFacet("all", "");
+      $("ii-investigators").value = "all";
+      $("ii-programs").value = "all";
+      return changeFacet("institution", key);
+    });
+    $("ii-year-preset").addEventListener("change", changeProgramOfficerYears);
+    $("ii-year-start").addEventListener("change", () => {
+      if (state.programOfficerScope?.year_preset === "custom") changeProgramOfficerYears();
+    });
+    $("ii-year-end").addEventListener("change", () => {
+      if (state.programOfficerScope?.year_preset === "custom") changeProgramOfficerYears();
+    });
+    $("ii-awards").addEventListener("click", event => {
+      if (state.busyDepth) return;
+      const trigger = event.target.closest("[data-ii-program-officer]");
+      if (trigger) startProgramOfficerSearch(trigger);
     });
     $("ii-load-more-actions").addEventListener("click", event => {
       if (state.busyDepth) return;

@@ -149,6 +149,23 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.locator("#ii-clear").click();
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("program officer accessibility");
+  await page.locator("#ii-search").click();
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  await expect(page.locator("#ii-institution")).toBeDisabled();
+  await scan(page, "funded-awards-program-officer-snapshot", testInfo);
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many awards are in this snapshot?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await scan(page, "funded-awards-program-officer-answer", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funded-awards-program-officer-mobile", testInfo);
 });
 
 test("shared Help remains visible and current across every desktop and mobile surface", async ({ page }, testInfo) => {

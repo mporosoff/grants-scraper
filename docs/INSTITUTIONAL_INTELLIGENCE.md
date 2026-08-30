@@ -1,12 +1,26 @@
 # Institutional Intelligence architecture and ROR reconnaissance
 
-Checked: 2026-08-25 (America/New_York)
+Checked: 2026-08-29 (America/New_York)
 
 ## Product boundary
 
 Institutional Intelligence is a Funded Awards section in `funded_awards.html`. It is not loaded by Funding Finder or Team Match and does not introduce another opportunity or award search system. Legacy Institutional Intelligence URLs on Funding Finder redirect to the corresponding state on Funded Awards. The browser sends transparent structured filters to the existing Funded Awards Worker, which continues to query and normalize NSF, NIH, and DOE records through the deployed source adapters. No award embeddings, semantic award corpus, reranking, collaborator recommendation, or funding-fit score is involved.
 
-Summaries cover only the normalized records returned on the current source-native result page. The interface states that additional source results may exist and links every displayed project to its official sponsor record. It does not treat a first page as an exhaustive institutional portfolio.
+The Worker builds an immutable Cache API snapshot and computes totals, completeness, metrics, facets, and direct pages from that server-owned membership. The browser renders only a page of 10, 25, or 50 awards; optional 25-record card hydration never changes membership or totals. Partial and safety-bounded source results remain explicitly non-exhaustive.
+
+## Program Officer navigation
+
+Person-like program contacts on normalized NSF, NIH, and DOE award cards can start a dedicated single-source snapshot without an AI key. Identity is deliberately narrow: source plus exact source-published display name plus a deterministic same-source key. The key normalizes display-only Unicode, case, whitespace, punctuation, and comma ordering while retaining substantive name tokens, middle initials, and suffixes. It never uses email, crosses agencies, or invents aliases. Organization, help-desk, office, and generic contact names are not actionable.
+
+The source-native name is sent upstream, but upstream membership is not trusted by itself. Every normalized award is post-validated against its `program_contacts`; partial-name and prefix results are removed before totals, facets, pages, and evidence. A complete total is shown only when the one requested source is exhausted and all retained records passed this check.
+
+Program Officer mode locks the source and contact identity, clears unrelated filters, and defaults to five inclusive source award years derived from the snapshot's immutable UTC `as_of` clock. Recent-five, all-years, and custom ranges each create a new snapshot. Managed URLs and browser history preserve the exact identity, preset, bounds, snapshot, page, page size, and facet; the existing expiration rebuild path repeats the same scope.
+
+Aggregate questions use the full server aggregate and need no AI. Optional topical questions send at most eight bounded retrieval phrases to `/awards/snapshots/evidence`. The Worker deterministically scores every record in the unexpired immutable snapshot and returns at most 24 records, 800 abstract characters per record, and 18,000 serialized evidence characters. Titles have the strongest weight, followed by abstracts and program/office fields; investigator and institution matches are weak support. Phrases are neither logged nor persisted, and no corpus or database is created.
+
+If a browser-local provider key is configured, only the locked public scope and bounded evidence may be sent for optional interpretation. Every cited award ID is checked against that evidence. The interface separately discloses source facts, deterministic retrieval, model interpretation, completeness, abstract coverage, and the rule that an incomplete topical miss is not a negative finding.
+
+The current Funding Finder opportunity-contact catalog was also audited. Its populated roles are only the broad labels `Agency contact` and `Program contact`; they do not establish that a person is an allowlisted scientific or historical award officer. The optional opportunity-card action is therefore intentionally omitted. Solicitation contacts are not promoted into Program Officer identities.
 
 ## ROR evaluation
 
@@ -63,3 +77,5 @@ All structured filters, alias resolution, aggregation, URLs, history, and drill-
 The optional question translator uses `FUNDING_AI.providerJson` and `FUNDING_CREDENTIALS`, including the same provider, model, and `funding-finder.credentials.v1` browser-local key store as Funding Finder. Setup inside Institutional Intelligence writes to that same store and synchronizes the main provider controls. No key is sent to the Award Worker.
 
 The model receives only the question, selected public institution, and visible structured award filters. It returns a bounded filter plan; it is not allowed to answer from memory, name awards, infer contacts, recommend collaborators, or score funding fit. Profile text, CV text, ORCID text, saved pursuits, notes, and uploaded documents are excluded. Returned award records and official sponsor pages remain authoritative.
+
+Program Officer questions do not use that translator because the source, exact contact key, years, and snapshot are locked. With an optional key, only a topical question, locked public scope metadata, and the Worker-selected bounded evidence are sent for cited narrative interpretation. The full snapshot and raw retrieval phrases are never sent to the provider.

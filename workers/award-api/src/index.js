@@ -1,4 +1,9 @@
-import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
+import {
+  AWARD_SCHEMA_VERSION,
+  awardMatchesProgramContact,
+  cleanText,
+  programContactKey,
+} from "./contract.js";
 import { AwardSourceError } from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
@@ -9,10 +14,15 @@ import { AwardRateLimiter } from "./rate-limit.js";
 import {
   AWARD_ORDERING_VERSION,
   SNAPSHOT_BATCH_SIZE,
+  SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
+  SNAPSHOT_EVIDENCE_LIMIT,
+  SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
+  SNAPSHOT_EVIDENCE_SCORING_VERSION,
   SNAPSHOT_FACET_KEY_MAX_LENGTH,
   SNAPSHOT_PAGE_SIZES,
   buildAwardSnapshot,
   publicSnapshot,
+  snapshotEvidence,
   snapshotPage,
   snapshotSourceBatch,
 } from "./snapshot.js";
@@ -53,13 +63,22 @@ const SEARCH_FIELDS = [
   "pi",
   "program_officer",
 ];
-const CRITERIA_FIELDS = [...SEARCH_FIELDS, "year_start", "year_end"];
+const PROGRAM_OFFICER_YEAR_PRESETS = new Set(["recent5", "all", "custom"]);
+const CRITERIA_FIELDS = [
+  ...SEARCH_FIELDS,
+  "year_start",
+  "year_end",
+  "mode",
+  "program_contact_key",
+  "year_preset",
+];
 const SNAPSHOT_ID_PATTERN = /^[a-f0-9]{64}$/;
 const SNAPSHOT_PATHS = new Set([
   "/awards/snapshots",
   "/awards/snapshots/page",
   "/awards/snapshots/batch",
   "/awards/snapshots/retry",
+  "/awards/snapshots/evidence",
 ]);
 
 function allowedOrigin(value) {
@@ -158,7 +177,7 @@ function normalizedString(value, maximum) {
   return text && text.length <= maximum ? text : null;
 }
 
-function validateCriteria(value) {
+function validateCriteria(value, { allowProgramOfficerMode = false, asOf = null } = {}) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   if (Object.keys(value).some(key => !CRITERIA_FIELDS.includes(key))) return null;
   const criteria = {};
@@ -195,6 +214,12 @@ function validateCriteria(value) {
     if (!year) return null;
     criteria[field] = year;
   }
+  for (const [field, maximum] of [["mode", 40], ["program_contact_key", 300], ["year_preset", 20]]) {
+    if (!(field in value)) continue;
+    const text = normalizedString(value[field], maximum);
+    if (!text) return null;
+    criteria[field] = text;
+  }
   if (!SEARCH_FIELDS.some(field => field in criteria)) return null;
   if (criteria.program && criteria.program_codes) return null;
   if (criteria.year_start && criteria.year_end) {
@@ -206,6 +231,28 @@ function validateCriteria(value) {
   if (criteria.core_project_number && !/^[A-Z0-9]+$/.test(criteria.core_project_number)) return null;
   if (criteria.opportunity_number && !/^[A-Z0-9-]+$/.test(criteria.opportunity_number)) return null;
   if (criteria.program_office && !/^SC-\d+(?:\.\d+)?$/i.test(criteria.program_office)) return null;
+  if (criteria.mode || criteria.program_contact_key || criteria.year_preset) {
+    if (!allowProgramOfficerMode || criteria.mode !== "program_officer") return null;
+    const disallowed = SEARCH_FIELDS.filter(field => field !== "program_officer" && field in criteria);
+    if (disallowed.length || !criteria.program_officer || !criteria.program_contact_key) return null;
+    if (programContactKey(criteria.program_officer) !== criteria.program_contact_key) return null;
+    if (!PROGRAM_OFFICER_YEAR_PRESETS.has(criteria.year_preset)) return null;
+    if (criteria.year_preset === "recent5") {
+      if (!criteria.year_start && !criteria.year_end) {
+        const basis = asOf instanceof Date ? asOf : new Date(asOf || Date.now());
+        const year = basis.getUTCFullYear();
+        if (!Number.isInteger(year)) return null;
+        criteria.year_start = year - 4;
+        criteria.year_end = year;
+      } else if (!criteria.year_start || !criteria.year_end || criteria.year_end - criteria.year_start !== 4) {
+        return null;
+      }
+    } else if (criteria.year_preset === "all") {
+      if (criteria.year_start || criteria.year_end) return null;
+    } else if (!criteria.year_start && !criteria.year_end) {
+      return null;
+    }
+  }
   const institution = resolveInstitution({ id: criteria.institution_id, name: criteria.institution });
   if ((criteria.institution || criteria.institution_id) && !institution) {
     if (!criteria.institution || !/^https:\/\/ror\.org\/0[a-z0-9]{8}$/i.test(criteria.institution_id || "")) return null;
@@ -334,6 +381,34 @@ async function sourceCacheRequest(source, request, asOf) {
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
+function postValidateProgramOfficerPayload(source, request, payload) {
+  if (request.publicCriteria?.mode !== "program_officer") return payload;
+  const expectedKey = request.publicCriteria.program_contact_key;
+  const returned = Array.isArray(payload?.results) ? payload.results : [];
+  const results = returned.filter(award => awardMatchesProgramContact(award, source, expectedKey));
+  const exhausted = payload?.safety_bound_reached !== true && payload?.has_more !== true && Number.isInteger(payload?.total_count);
+  const priorValidation = payload?.contact_post_validation?.version === "program-contact-v1"
+    && payload.contact_post_validation.source === source
+    && payload.contact_post_validation.contact_key === expectedKey
+    ? payload.contact_post_validation : null;
+  const returnedCount = priorValidation?.returned_count ?? returned.length;
+  return {
+    ...payload,
+    results,
+    total_count: exhausted ? results.length : null,
+    contact_post_validation: {
+      version: "program-contact-v1",
+      source,
+      display_name: request.publicCriteria.program_officer,
+      contact_key: expectedKey,
+      returned_count: returnedCount,
+      retained_count: results.length,
+      rejected_count: Math.max(0, returnedCount - results.length),
+      complete: exhausted,
+    },
+  };
+}
+
 async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard = null, rateLimit = null }) {
   const key = await sourceCacheRequest(source, request, asOf);
   if (cache) {
@@ -341,7 +416,9 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, gu
       const cached = await cache.match(key);
       if (cached) {
         const payload = await cached.json();
-        if (payload?.source === source && Array.isArray(payload.results)) return { ...payload, cache: "hit" };
+        if (payload?.source === source && Array.isArray(payload.results)) {
+          return { ...postValidateProgramOfficerPayload(source, request, payload), cache: "hit" };
+        }
       }
     } catch {
       // A cache outage must not make either official source unavailable.
@@ -356,7 +433,8 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, gu
     includeAbstracts: request.includeAbstracts !== false,
   };
   const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
-  const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
+  const upstreamPayload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
+  const payload = postValidateProgramOfficerPayload(source, request, upstreamPayload);
   if (cache) {
     try {
       await cache.put(key, new Response(JSON.stringify(payload), {
@@ -485,18 +563,20 @@ function sourceFailure(source, cause) {
     : new AwardSourceError("source_unavailable");
   return {
     source,
-    status: sourceError.kind === "unsupported" ? "unsupported" : "unavailable",
+    status: sourceError.kind === "unsupported" ? "unsupported"
+      : sourceError.kind === "rate_limited" ? "rate_limited" : "unavailable",
     error: { code: sourceError.code },
   };
 }
 
-function validateSnapshotCreate(body, config) {
+function validateSnapshotCreate(body, config, asOf = new Date()) {
   if (!exactKeys(body, ["sources", "criteria"])) return null;
   if (!Array.isArray(body.sources) || body.sources.length < 1 || body.sources.length > SOURCE_NAMES.length) return null;
   const sources = body.sources.map(value => String(value || "").toUpperCase());
   if (new Set(sources).size !== sources.length || sources.some(source => !SOURCE_NAMES.includes(source))) return null;
-  const criteria = validateCriteria(body.criteria);
+  const criteria = validateCriteria(body.criteria, { allowProgramOfficerMode: true, asOf });
   if (!criteria) return null;
+  if (criteria.publicCriteria.mode === "program_officer" && sources.length !== 1) return null;
   if (criteria.publicCriteria.program_office && (sources.length !== 1 || sources[0] !== "DOE")) return null;
   return {
     sources,
@@ -512,7 +592,7 @@ function validateFacet(value) {
   if (!value || typeof value !== "object" || Array.isArray(value) || !exactKeys(value, ["type", "key"])) return null;
   const type = normalizedString(value.type, 20);
   const key = typeof value.key === "string" ? value.key.replace(/\s+/g, " ").trim() : null;
-  if (!new Set(["all", "investigator", "program"]).has(type) || key === null) return null;
+  if (!new Set(["all", "investigator", "program", "institution"]).has(type) || key === null) return null;
   if (key.length > SNAPSHOT_FACET_KEY_MAX_LENGTH) return null;
   if (type === "all" && key) return null;
   if (type !== "all" && !key) return null;
@@ -549,6 +629,16 @@ function validateSnapshotRetry(body) {
   const snapshotId = validateSnapshotId(body.snapshot_id);
   const source = String(body.source || "").toUpperCase();
   return snapshotId && SOURCE_NAMES.includes(source) ? { snapshotId, source } : null;
+}
+
+function validateSnapshotEvidence(body) {
+  if (!exactKeys(body, ["snapshot_id", "phrases", "limit"])) return null;
+  const snapshotId = validateSnapshotId(body.snapshot_id);
+  const limit = boundedInteger(body.limit, { minimum: 1, maximum: SNAPSHOT_EVIDENCE_LIMIT });
+  if (!snapshotId || !limit || !Array.isArray(body.phrases) || body.phrases.length < 1 || body.phrases.length > 8) return null;
+  const phrases = body.phrases.map(value => normalizedString(value, 120));
+  if (phrases.some(value => !value)) return null;
+  return { snapshotId, phrases, limit };
 }
 
 function snapshotCacheRequest(snapshotId) {
@@ -681,6 +771,14 @@ export function createHandler({
           cache_scope: "cloudflare-datacenter",
           failure_policy: "successful-sources-retained-retry-creates-successor",
           resource_budget: WORKER_RESOURCE_BUDGET,
+          program_officer_evidence: {
+            endpoint: "/awards/snapshots/evidence",
+            scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
+            maximum_phrases: 8,
+            maximum_records: SNAPSHOT_EVIDENCE_LIMIT,
+            abstract_characters_per_record: SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
+            serialized_characters: SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
+          },
         },
         abuse_control: {
           ready: abuseControlReady,
@@ -690,6 +788,7 @@ export function createHandler({
           window_seconds: RATE_LIMIT_WINDOW_SECONDS,
           limits: {
             award_source: config.awardSourceLimit,
+            snapshot_evidence: config.awardSourceLimit,
             ror_search: config.rorSearchLimit,
             ror_resolution: config.rorResolveLimit,
           },
@@ -763,7 +862,7 @@ export function createHandler({
       const cacheStore = cache || globalThis.caches?.default || null;
       if (!cacheStore) return error(origin, 503, "snapshot_store_unavailable");
       if (path === "/awards/snapshots") {
-        const normalized = validateSnapshotCreate(body, config);
+        const normalized = validateSnapshotCreate(body, config, current);
         if (!normalized) return error(origin, 400, "invalid_request");
         try {
           await resolveRequestInstitution({
@@ -798,6 +897,7 @@ export function createHandler({
           snapshotId,
           queryId,
           asOf,
+          expiresAt: new Date(current.getTime() + config.cacheTtl * 1_000).toISOString(),
           request: identity.publicRequest,
           sourcePayloads,
         });
@@ -806,6 +906,24 @@ export function createHandler({
           return error(origin, 503, "snapshot_store_unavailable");
         }
         return json(origin, 200, publicSnapshot(snapshot));
+      }
+      if (path === "/awards/snapshots/evidence") {
+        const action = validateSnapshotEvidence(body);
+        if (!action) return error(origin, 400, "invalid_request");
+        const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+        if (!snapshot || snapshot.mode !== "program_officer"
+          || !snapshot.expires_at || Date.parse(snapshot.expires_at) <= current.getTime()) {
+          return error(origin, 410, "snapshot_expired");
+        }
+        try {
+          await guard("award:evidence", config.awardSourceLimit);
+        } catch (cause) {
+          const rateLimited = cause instanceof AwardSourceError && cause.kind === "rate_limited";
+          return error(origin, rateLimited ? 429 : 503, rateLimited ? "rate_limited" : "service_unavailable",
+            rateLimited ? { "Retry-After": String(RATE_LIMIT_WINDOW_SECONDS) } : {});
+        }
+        const payload = snapshotEvidence(snapshot, action);
+        return payload ? json(origin, 200, payload) : error(origin, 400, "invalid_evidence_request");
       }
       if (path === "/awards/snapshots/page") {
         const action = validateSnapshotPage(body);
@@ -875,6 +993,7 @@ export function createHandler({
         snapshotId: successorId,
         queryId: await sha256Hex(successorIdentity.cacheIdentity),
         asOf: successorAsOf,
+        expiresAt: new Date(current.getTime() + config.cacheTtl * 1_000).toISOString(),
         request: successorIdentity.publicRequest,
         sourcePayloads,
       });
@@ -982,6 +1101,7 @@ export {
   storeSnapshot,
   validateSnapshotBatch,
   validateSnapshotCreate,
+  validateSnapshotEvidence,
   validateSnapshotPage,
   validateSnapshotRetry,
   validateRequest,

@@ -518,6 +518,176 @@ test("a new snapshot replaces full-result facets instead of retaining the prior 
   expect(runtimeErrors).toEqual([]);
 });
 
+test("source-listed Program Officer actions create locked, navigable snapshots with immutable year presets", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 30, NIH: 2, DOE: 0 } });
+  await searchTopic(page, "contact-navigation", "all");
+  const originalUrl = page.url();
+  const action = page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first();
+  await expect(action).toBeVisible();
+  await action.click();
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  await expect(page.locator("#ii-po-name")).toHaveText("Vladimir Lukin");
+  await expect(page.locator("#ii-po-source")).toHaveText("NSF");
+  await expect(page.locator("#ii-institution")).toBeDisabled();
+  await expect(page.locator("#ii-agency")).toBeDisabled();
+  await expect(page.locator("#ii-topic")).toBeDisabled();
+  await expect(page.locator("#ii-program-officer")).toBeDisabled();
+  await expect(page.locator("#ii-year-preset")).toHaveValue("recent5");
+  await expect(page.locator("#ii-year-start")).toHaveValue("2022");
+  await expect(page.locator("#ii-year-end")).toHaveValue("2026");
+  await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe("ii-output-heading");
+  await expect(page).toHaveURL(/ii_mode=program_officer/);
+  await expect(page).toHaveURL(/ii_po_source=NSF/);
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(10);
+  await expect(page.locator("#ii-institutions option")).toHaveCount(2);
+  const recentSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  const recentCreate = calls.filter(call => call.criteria?.mode === "program_officer").at(-1);
+  expect(recentCreate).toEqual({ sources: ["NSF"], criteria: { mode: "program_officer", program_officer: "Vladimir Lukin", program_contact_key: "program-contact-v1:vladimir|lukin", year_preset: "recent5" } });
+
+  await page.locator("#ii-year-preset").selectOption("all");
+  await expect(page).toHaveURL(/ii_year_preset=all/);
+  await expect(page.locator("#ii-year-start")).toHaveValue("");
+  const allSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(allSnapshot).not.toBe(recentSnapshot);
+  expect(calls.filter(call => call.criteria?.mode === "program_officer").at(-1).criteria).toEqual({ mode: "program_officer", program_officer: "Vladimir Lukin", program_contact_key: "program-contact-v1:vladimir|lukin", year_preset: "all" });
+
+  await page.locator("#ii-year-preset").selectOption("custom");
+  await expect(page).toHaveURL(/ii_year_preset=custom/);
+  await expect(page.locator("#ii-year-start")).toBeEnabled();
+  await page.evaluate(() => {
+    document.querySelector("#ii-year-start").value = "2020";
+    document.querySelector("#ii-year-end").value = "2024";
+    document.querySelector("#ii-year-end").dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  await expect(page).toHaveURL(/ii_year_start=2020/);
+  await expect(page).toHaveURL(/ii_year_end=2024/);
+  expect(calls.filter(call => call.criteria?.mode === "program_officer").at(-1).criteria).toMatchObject({ year_preset: "custom", year_start: 2020, year_end: 2024 });
+
+  await page.goBack();
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  await page.goBack();
+  await page.goBack();
+  await page.goBack();
+  await expect(page).toHaveURL(originalUrl);
+  await expect(page.locator("#ii-po-scope")).toBeHidden();
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+});
+
+test("Program Officer questions use the full stored snapshot while keeping visible cards bounded", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 30 });
+  await searchTopic(page, "full-snapshot-question", "NSF");
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  const createCount = calls.filter(call => Array.isArray(call.sources)).length;
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Which projects involve carbon dioxide conversion?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-direct-answer")).toContainText("related projects");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("scanned all 30 stored records");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("did not rely on the visible page");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(10);
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(1);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+
+  const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);
+  const beyondId = await beyondPageLink.getAttribute("data-ii-evidence-link");
+  await beyondPageLink.click();
+  await expect(page.locator(`[data-evidence-id="${beyondId}"]`)).toBeFocused();
+  await expect(page).toHaveURL(/ii_page=2/);
+
+  const evidenceCalls = calls.filter(call => Array.isArray(call.phrases)).length;
+  await page.locator("#ii-question").fill("How many awards are in this snapshot?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 normalized matching awards");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("an expired Program Officer page rebuild preserves exact contact, preset, years, and requested view", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 30, snapshotPageExpireAtCall: 3 });
+  await searchTopic(page, "program-officer-expiry", "NSF");
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  const firstSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator("#ii-card-next").click();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
+  const rebuiltSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  expect(rebuiltSnapshot).not.toBe(firstSnapshot);
+  await expect(page).toHaveURL(/ii_mode=program_officer/);
+  await expect(page).toHaveURL(/ii_po_source=NSF/);
+  await expect(page).toHaveURL(/ii_year_preset=recent5/);
+  await expect(page).toHaveURL(/ii_year_start=2022/);
+  await expect(page).toHaveURL(/ii_year_end=2026/);
+  await expect(page).toHaveURL(/ii_page=2/);
+  const programOfficerCreates = calls.filter(call => call.criteria?.mode === "program_officer");
+  expect(programOfficerCreates).toHaveLength(2);
+  expect(programOfficerCreates[1]).toEqual({ sources: ["NSF"], criteria: { mode: "program_officer", program_officer: "Vladimir Lukin", program_contact_key: "program-contact-v1:vladimir|lukin", year_preset: "recent5", year_start: 2022, year_end: 2026 } });
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+});
+
+test("expired Program Officer evidence rebuilds the exact scope and restores the requested page", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 30, snapshotEvidenceExpireAtCall: 1 });
+  await searchTopic(page, "program-officer-evidence-expiry", "NSF");
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  const firstSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await page.locator("#ii-card-next").click();
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Which projects involve carbon dioxide conversion?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("related projects");
+  await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
+  await expect(page).toHaveURL(/ii_mode=program_officer/);
+  await expect(page).toHaveURL(/ii_po_source=NSF/);
+  await expect(page).toHaveURL(/ii_year_preset=recent5/);
+  await expect(page).toHaveURL(/ii_year_start=2022/);
+  await expect(page).toHaveURL(/ii_year_end=2026/);
+  await expect(page).toHaveURL(/ii_page=2/);
+  expect(new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(firstSnapshot);
+  expect(calls.filter(call => call.criteria?.mode === "program_officer")).toHaveLength(2);
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(2);
+  expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
+});
+
+test("a rate-limited Program Officer source retries into an exact-scope successor", async ({ page }) => {
+  const { calls, runtimeErrors } = await openSearch(page, {
+    resultCountPerSource: 2,
+    programOfficerSourceFailures: { NSF: { status: "rate_limited", code: "rate_limited" } },
+  });
+  await searchTopic(page, "program-officer-rate-limit", "NSF");
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  const limitedSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
+  await expect(page.locator("#ii-source-status")).toContainText("NSF is rate-limited; no exact total is available");
+  await expect(page.locator("#ii-card-page-label")).toContainText("No awards were available within the current partial result set");
+  await page.locator('[data-ii-retry-source="NSF"]').click();
+  await expect(page.locator("#ii-status")).toContainText("NSF recovered in successor snapshot");
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  await expect(page.locator("#ii-source-status")).toContainText("exact-contact validation retained 1 of 1");
+  await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–1 of 1");
+  await expect(page).toHaveURL(/ii_mode=program_officer/);
+  await expect(page).toHaveURL(/ii_year_preset=recent5/);
+  expect(new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(limitedSnapshot);
+  expect(calls.filter(call => call.source === "NSF" && call.snapshot_id && !Number.isInteger(call.offset))).toHaveLength(1);
+  expect(runtimeErrors).toEqual([]);
+});
+
+test("an incomplete Program Officer snapshot never turns a deterministic topical miss into a negative finding", async ({ page }) => {
+  const { runtimeErrors } = await openSearch(page, {
+    resultCountPerSource: 3,
+    hasMoreBySource: { NSF: [0] },
+    awardOverridesBySource: { NSF: { title: "Unrelated mechanics", abstract: "Unrelated mechanics evidence." } },
+  });
+  await searchTopic(page, "partial-contact", "NSF");
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("Which projects involve quantum sensing?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("No related project was identified in the available records, but the source snapshot is incomplete, so this is not a negative finding.");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("absence is not a negative finding");
+  expect(runtimeErrors).toEqual([]);
+});
+
 test("ROR keyboard selection puts canonical identity in snapshot criteria", async ({ page }) => {
   const { calls, runtimeErrors } = await openSearch(page);
   await page.locator("#ii-institution").fill("Caltech");
