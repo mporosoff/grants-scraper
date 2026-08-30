@@ -16,6 +16,12 @@ const GENERIC_RETRIEVAL_TERMS = new Set([
   "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what",
   "there", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
 ]);
+const REQUEST_PREFIX_STARTERS = new Set([
+  "are", "can", "could", "do", "find", "give", "help", "i", "is", "kindly", "list", "may", "please", "provide", "show", "tell", "we", "will", "would",
+]);
+const REQUEST_PREFIX_TERMS = new Set([
+  "a", "about", "an", "any", "are", "can", "could", "d", "display", "do", "fetch", "find", "for", "get", "give", "have", "help", "i", "identify", "if", "is", "kindly", "know", "like", "list", "locate", "look", "looking", "m", "may", "me", "need", "of", "please", "provide", "re", "retrieve", "return", "search", "see", "share", "show", "some", "surface", "tell", "the", "there", "to", "us", "want", "we", "whether", "will", "would", "you",
+]);
 
 function clean(value, maximum = 500) {
   const text = String(value ?? "");
@@ -703,6 +709,14 @@ function normalizedRetrievalTokens(value) {
     .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
 }
 
+function stripLeadingRequestTokens(tokens) {
+  let start = 0;
+  if (REQUEST_PREFIX_STARTERS.has(tokens[0])) {
+    while (start < tokens.length && REQUEST_PREFIX_TERMS.has(tokens[start])) start += 1;
+  }
+  return tokens.slice(start);
+}
+
 function retrievalTokens(value) {
   return normalizedRetrievalTokens(value)
     .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token));
@@ -867,7 +881,7 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
   const seenPhrases = new Set();
   const normalizedPhrases = [];
   for (const phrase of submittedPhrases) {
-    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_tokens, nameSequences)
+    const tokens = [...new Set(stripOfficerNameOccurrences(stripLeadingRequestTokens(phrase.raw_tokens), nameSequences)
       .filter(token => token.length >= 3 && !GENERIC_RETRIEVAL_TERMS.has(token)))];
     const key = tokens.join(" ");
     if (!key || seenPhrases.has(key)) continue;

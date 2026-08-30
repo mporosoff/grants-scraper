@@ -622,6 +622,11 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(5);
+
+  await page.locator("#ii-question").fill("Can you help me find projects about carbon dioxide conversion?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(6);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
 
   const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);

@@ -712,6 +712,18 @@
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
       .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
+    const requestPrefixStarters = new Set([
+      "are", "can", "could", "do", "find", "give", "help", "i", "is", "kindly", "list", "may", "please", "provide", "show", "tell", "we", "will", "would",
+    ]);
+    const requestPrefixTerms = new Set([
+      "a", "about", "an", "any", "are", "can", "could", "d", "display", "do", "fetch", "find", "for", "get", "give", "have", "help", "i", "identify", "if", "is", "kindly", "know", "like", "list", "locate", "look", "looking", "m", "may", "me", "need", "of", "please", "provide", "re", "retrieve", "return", "search", "see", "share", "show", "some", "surface", "tell", "the", "there", "to", "us", "want", "we", "whether", "will", "would", "you",
+    ]);
+    const stripLeadingRequest = tokens => {
+      if (!requestPrefixStarters.has(tokens[0])) return tokens;
+      let index = 0;
+      while (index < tokens.length && requestPrefixTerms.has(tokens[index])) index += 1;
+      return tokens.slice(index);
+    };
     const nameNoise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
     const nameTokens = value => normalizedTokens(value, 300)
       .filter(token => token && !nameNoise.has(token));
@@ -736,7 +748,7 @@
       if (natural.length > 2) addNameSequence([natural[0], natural.at(-1)]);
     }
     nameSequences.sort((left, right) => right.length - left.length);
-    const questionTokens = normalizedTokens(question, 1_000);
+    const questionTokens = stripLeadingRequest(normalizedTokens(question, 1_000));
     const removed = new Set();
     for (const sequence of nameSequences) {
       for (let index = 0; index <= questionTokens.length - sequence.length; index += 1) {
