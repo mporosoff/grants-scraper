@@ -3353,6 +3353,10 @@ footer p {
   font-weight: 650;
 }
 
+.result-tier-counts {
+  font-size: .9rem;
+}
+
 .search-status:empty {
   display: none;
 }

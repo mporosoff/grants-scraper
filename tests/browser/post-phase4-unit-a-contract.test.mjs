@@ -103,6 +103,7 @@ test("one compact live tier count replaces normal tier explanations while preser
   assert.match(page, /class="results-toolbar[^>]*" id="results-toolbar"[\s\S]*?id="result-tier-counts"[\s\S]*?class="toolbar-actions"/);
   assert.match(page, /class="toolbar-controls"[\s\S]*?id="sort"/);
   assert.doesNotMatch(app, /updateResultHeading|results-heading|result-count|result-label|results-mode|result-range/);
+  assert.match(styles, /\.result-tier-counts\s*\{[^}]*font-size:\s*\.9rem/);
   assert.match(styles, /\.results-toolbar\.search-not-started\s*\{[^}]*display:\s*none/);
   assert.doesNotMatch(app, /\$\("search-status"\)\.textContent = `\$\{state\.strongMatches\.length/);
   const countSource = app.slice(
