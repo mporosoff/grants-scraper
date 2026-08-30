@@ -354,6 +354,32 @@ export function mockAwards(target, {
         ordered_refs: records.map((record, index) => ({ position: index + 1, evidence_id: `${record.source}:${record.award_id}`, source: record.source, award_id: record.award_id, title: record.title, award_year: record.award_year })),
       };
     };
+    const matchedAggregate = records => {
+      const aggregate = snapshotAggregate(records);
+      const rank = (values, label) => values
+        .map(value => ({ [label]: value[label], projects: value.projects }))
+        .sort((left, right) => right.projects - left.projects || String(left[label]).localeCompare(String(right[label]), "en-US"))
+        .slice(0, 12);
+      return {
+        project_count: aggregate.project_count,
+        investigator_count: aggregate.investigator_count,
+        institution_count: aggregate.institution_count,
+        program_count: aggregate.program_count,
+        year_start: aggregate.year_start,
+        year_end: aggregate.year_end,
+        represented_years: aggregate.represented_years,
+        agency_totals: aggregate.agency_totals,
+        investigators: rank(aggregate.investigators, "name"),
+        institutions: rank(aggregate.institutions, "name"),
+        programs: rank(aggregate.programs, "label"),
+        facet_limit: 12,
+        facets_truncated: {
+          investigators: aggregate.investigator_count > 12,
+          institutions: aggregate.institution_count > 12,
+          programs: aggregate.program_count > 12,
+        },
+      };
+    };
     const publicSnapshot = snapshot => ({
       schema_version: 1,
       snapshot_contract_version: 1,
@@ -446,11 +472,11 @@ export function mockAwards(target, {
         return;
       }
       const genericTerms = new Set([
-        "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "did", "does",
-        "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
-        "involve", "involved", "involves", "involving", "project", "projects", "related", "relevant", "research",
-        "study", "studies", "that", "the", "their", "then", "this", "those", "was", "were", "what", "when",
-        "where", "which", "who", "why", "with", "work", "would", "your",
+        "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "college", "colleges", "count", "did", "does",
+        "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
+        "involve", "involved", "involves", "involving", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source",
+        "study", "studies", "support", "supported", "supports", "that", "the", "their", "then", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when",
+        "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
       ]);
       const evidenceTokens = value => String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase()
@@ -470,7 +496,7 @@ export function mockAwards(target, {
         return requiredConcepts.length > 0 && requiredConcepts.every(concept => recordTokens.has(concept));
       });
       const awards = scored.slice(0, body.limit).map(record => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: snapshot.records.indexOf(record) + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: 100, matched_fields: ["title", "abstract"] }));
-      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, retrieval: { scoring_version: "program-officer-evidence-v2", concept_coverage: "all_substantive_query_concepts_same_record", required_concept_count: requiredConcepts.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(scored), retrieval: { scoring_version: "program-officer-evidence-v2", concept_coverage: "all_substantive_query_concepts_same_record", required_concept_count: requiredConcepts.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {

@@ -1003,8 +1003,8 @@
     }
   }
 
-  async function programOfficerEvidence(questionState) {
-    const phrases = core.programOfficerRetrievalPhrases(questionState.question);
+  async function programOfficerEvidence(questionState, phrases = core.programOfficerRetrievalPhrases(questionState.question)) {
+    if (phrases === null) throw new Error("This question contains too many distinct concepts for bounded retrieval. Shorten it and try again.");
     if (!phrases.length) return {
       schema_version: 1,
       snapshot_id: state.snapshot.snapshot_id,
@@ -1038,15 +1038,17 @@
   }
 
   async function refreshProgramOfficerQuestionAnswer(questionState, questionSequence) {
+    const phrases = core.programOfficerRetrievalPhrases(questionState.question);
     const aggregateIntent = core.programOfficerAggregateIntent(questionState.question);
-    const intent = aggregateIntent || "topical";
+    const intent = phrases === null || phrases.length ? "topical" : (aggregateIntent || "awards");
     const aggregate = { ...(state.baseAggregate || state.aggregate), awards: [], ordered_refs: state.baseAggregate?.ordered_refs || state.pagePayload?.aggregate?.ordered_refs || [] };
     const evidencePack = intent === "topical"
-      ? await programOfficerEvidence(questionState)
+      ? await programOfficerEvidence(questionState, phrases)
       : { awards: [], retrieval: null };
     const deterministic = core.deterministicProgramOfficerAnswer({
       question: questionState.question,
       intent,
+      aggregateIntent,
       aggregate,
       snapshot: state.snapshot,
       evidencePack,

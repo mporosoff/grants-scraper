@@ -590,6 +590,12 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(1);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
 
+  await page.locator("#ii-question").fill("Which investigators work on carbon dioxide conversion?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-direct-answer")).toContainText("Matching investigators: Vasily Karasiev");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(2);
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+
   const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);
   const beyondId = await beyondPageLink.getAttribute("data-ii-evidence-link");
   await beyondPageLink.click();
@@ -597,6 +603,12 @@ test("Program Officer questions use the full stored snapshot while keeping visib
   await expect(page).toHaveURL(/ii_page=2/);
 
   const evidenceCalls = calls.filter(call => Array.isArray(call.phrases)).length;
+  const overCapacityQuestion = `Which projects involve ${Array.from({ length: 9 }, (_, index) => String.fromCharCode(97 + index).repeat(105)).join(" ")}?`;
+  await page.locator("#ii-question").fill(overCapacityQuestion);
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-plan")).toContainText("too many distinct concepts");
+  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
+
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("30 normalized matching awards");

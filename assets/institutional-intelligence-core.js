@@ -692,34 +692,38 @@
     if (/\bprograms?\b|mechanism|activity|office/.test(intentText)) return "programs";
     if (/\bwhen\b|\byear|timeline|chronolog|oldest|newest|earliest|latest|recent/.test(text)) return "years";
     if (/(?:\blist\b|\bshow\b).{0,24}(?:awards?|projects?)|which (?:awards?|projects?) (?:are |were )?(?:in|on|from) (?:this|the) snapshot|award titles?|project titles?|next page|previous page/.test(text)) return "awards";
-    if (text && !programOfficerRetrievalPhrases(question).length) return "awards";
+    const phrases = programOfficerRetrievalPhrases(question);
+    if (text && Array.isArray(phrases) && phrases.length === 0) return "awards";
     return "";
   }
 
   function programOfficerRetrievalPhrases(question) {
     const ignored = new Set([
-      "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "contact", "contacts",
-      "did", "does", "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
-      "involve", "involved", "involves", "involving", "manage", "managed", "officer", "officers", "official", "officials",
-      "overview", "please", "program", "programs", "project", "projects", "related", "relevant", "research", "study", "studies",
+      "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts",
+      "college", "colleges", "count", "did", "does", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
+      "institution", "institutions", "investigator", "investigators",
+      "involve", "involved", "involves", "involving", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
+      "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
       "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "then", "these",
-      "they", "this", "those", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "your",
+      "they", "this", "those", "timeline", "university", "universities", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
     ]);
     const tokens = clean(question, 1_000)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
       .match(/[\p{L}\p{N}]+/gu)?.filter(token => token.length >= 3 && !ignored.has(token)) || [];
-    const unique = [...new Set(tokens)].slice(0, 12);
+    const unique = [...new Set(tokens)];
     if (!unique.length) return [];
     const phrases = [];
     for (const token of unique) {
-      if (token.length > 120) continue;
+      if (token.length > 120) return null;
       const slot = phrases.findIndex(phrase => phrase.length + token.length + 1 <= 120);
       if (slot >= 0) {
         phrases[slot] = `${phrases[slot]} ${token}`;
       } else if (phrases.length < 8) {
         phrases.push(token);
+      } else {
+        return null;
       }
     }
     return phrases;
@@ -739,15 +743,46 @@
     return { source, name, years, total };
   }
 
-  function deterministicProgramOfficerAnswer({ question = "", intent = "", aggregate, snapshot, evidencePack = null } = {}) {
+  function deterministicProgramOfficerAnswer({ question = "", intent = "", aggregateIntent = "", aggregate, snapshot, evidencePack = null } = {}) {
     const scope = programOfficerScopeText(snapshot);
     const evidence = Array.isArray(evidencePack?.awards) ? evidencePack.awards : [];
     if (intent === "topical") {
-      const count = evidence.length;
+      const retrievedCount = Number(evidencePack?.retrieval?.records_with_score);
+      const count = Number.isInteger(retrievedCount) && retrievedCount >= 0 ? retrievedCount : evidence.length;
+      const matchedAggregate = evidencePack?.matched_aggregate || {};
+      let matchedDetails = "";
+      if (count && aggregateIntent === "investigators") {
+        const people = Array.isArray(matchedAggregate.investigators) ? matchedAggregate.investigators : [];
+        const total = Number(matchedAggregate.investigator_count || people.length);
+        matchedDetails = people.length
+          ? ` Matching investigators: ${people.map(person => `${person.name} (${person.projects} matching award${person.projects === 1 ? "" : "s"})`).join("; ")}.${total > people.length ? ` Showing ${people.length} of ${total}.` : ""}`
+          : " No investigator names appear in the matching records.";
+      } else if (count && aggregateIntent === "institutions") {
+        const institutions = Array.isArray(matchedAggregate.institutions) ? matchedAggregate.institutions : [];
+        const total = Number(matchedAggregate.institution_count || institutions.length);
+        matchedDetails = institutions.length
+          ? ` Matching recipient institutions: ${institutions.map(institution => `${institution.name} (${institution.projects})`).join("; ")}.${total > institutions.length ? ` Showing ${institutions.length} of ${total}.` : ""}`
+          : " No recipient institution names appear in the matching records.";
+      } else if (count && aggregateIntent === "programs") {
+        const programs = Array.isArray(matchedAggregate.programs) ? matchedAggregate.programs : [];
+        const total = Number(matchedAggregate.program_count || programs.length);
+        matchedDetails = programs.length
+          ? ` Matching programs: ${programs.map(program => `${program.label} (${program.projects})`).join("; ")}.${total > programs.length ? ` Showing ${programs.length} of ${total}.` : ""}`
+          : " No program labels appear in the matching records.";
+      } else if (count && aggregateIntent === "years") {
+        matchedDetails = matchedAggregate.year_start
+          ? ` The matching records span ${matchedAggregate.year_start}${matchedAggregate.year_end !== matchedAggregate.year_start ? ` through ${matchedAggregate.year_end}` : ""}.`
+          : " The matching records do not contain a usable award year.";
+      }
+      const evidenceDetails = count > evidence.length
+        ? evidence.length
+          ? ` The evidence list shows the ${evidence.length} highest-scoring records within its published bound.`
+          : " The bounded evidence list contains no records."
+        : "";
       const answer = count
         ? snapshot?.completeness === "complete"
-          ? `I found ${count} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.”`
-          : `I found ${count} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.” The source snapshot is incomplete.`
+          ? `I found ${count.toLocaleString()} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.”${matchedDetails}${evidenceDetails}`
+          : `I found ${count.toLocaleString()} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.”${matchedDetails}${evidenceDetails} The source snapshot is incomplete.`
         : snapshot?.completeness === "complete"
           ? `No related project was identified among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.” This is a scoped snapshot result, not a complete-career claim.`
           : "No related project was identified in the available records, but the source snapshot is incomplete, so this is not a negative finding.";

@@ -7,13 +7,14 @@ export const SNAPSHOT_EVIDENCE_LIMIT = 24;
 export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
 export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
+export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 const EN_COLLATOR = new Intl.Collator("en-US");
 const GENERIC_RETRIEVAL_TERMS = new Set([
-  "about", "all", "also", "and", "any", "are", "award", "awards", "been", "can", "did", "does",
-  "for", "from", "fund", "funded", "funding", "grant", "grants", "has", "have", "how", "into",
-  "involve", "involved", "involves", "involving", "related", "relevant", "research", "study", "studies",
-  "project", "projects", "that", "the", "their", "then", "this", "those", "was", "were", "what",
-  "when", "where", "which", "who", "why", "with", "work", "would", "your",
+  "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "college", "colleges", "count", "did", "does",
+  "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
+  "involve", "involved", "involves", "involving", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
+  "support", "supported", "supports", "that", "the", "their", "then", "this", "those", "timeline", "university", "universities", "was", "were", "what",
+  "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "your",
 ]);
 
 function clean(value, maximum = 500) {
@@ -710,7 +711,7 @@ export function normalizeEvidencePhrases(values) {
     if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
     const text = clean(value, 120);
     if (!text) return null;
-    const tokens = [...new Set(retrievalTokens(text))].slice(0, 12);
+    const tokens = [...new Set(retrievalTokens(text))];
     const key = tokens.join(" ");
     if (!key || seen.has(key)) continue;
     seen.add(key);
@@ -782,6 +783,33 @@ function publicEvidenceAward(award, scored) {
   };
 }
 
+function publicMatchedAggregate(awards) {
+  const aggregate = aggregateSnapshotAwards(awards, { alreadyNormalized: true });
+  const rank = (values, label) => values
+    .map(value => ({ [label]: value[label], projects: value.projects }))
+    .sort((left, right) => right.projects - left.projects || EN_COLLATOR.compare(left[label], right[label]))
+    .slice(0, SNAPSHOT_EVIDENCE_FACET_LIMIT);
+  return {
+    project_count: aggregate.project_count,
+    investigator_count: aggregate.investigator_count,
+    institution_count: aggregate.institution_count,
+    program_count: aggregate.program_count,
+    year_start: aggregate.year_start,
+    year_end: aggregate.year_end,
+    represented_years: aggregate.represented_years,
+    agency_totals: aggregate.agency_totals,
+    investigators: rank(aggregate.investigators, "name"),
+    institutions: rank(aggregate.institutions, "name"),
+    programs: rank(aggregate.programs, "label"),
+    facet_limit: SNAPSHOT_EVIDENCE_FACET_LIMIT,
+    facets_truncated: {
+      investigators: aggregate.investigator_count > SNAPSHOT_EVIDENCE_FACET_LIMIT,
+      institutions: aggregate.institution_count > SNAPSHOT_EVIDENCE_FACET_LIMIT,
+      programs: aggregate.program_count > SNAPSHOT_EVIDENCE_FACET_LIMIT,
+    },
+  };
+}
+
 export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT } = {}) {
   if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return null;
   const normalizedPhrases = normalizeEvidencePhrases(phrases);
@@ -829,6 +857,7 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
       selected_records: awards.length,
       selected_with_abstract: selectedWithAbstract,
     },
+    matched_aggregate: publicMatchedAggregate(scored.map(item => item.award)),
     retrieval: {
       scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
       concept_coverage: "all_substantive_query_concepts_same_record",

@@ -228,8 +228,22 @@ test("full-snapshot deterministic evidence finds beyond-page matches with stable
   })));
   const largeEvidence = snapshotEvidence(large, { phrases: ["catalysis carbon dioxide conversion"], limit: 24 });
   assert.equal(largeEvidence.retrieval.records_scanned, 1_650);
+  assert.equal(largeEvidence.retrieval.records_with_score, 1_650);
   assert.equal(largeEvidence.retrieval.records_selected, 24);
+  assert.equal(largeEvidence.matched_aggregate.project_count, 1_650);
+  assert.equal(largeEvidence.matched_aggregate.investigator_count, 1_650);
+  assert.equal(largeEvidence.matched_aggregate.investigators.length, 12);
+  assert.equal(largeEvidence.matched_aggregate.facets_truncated.investigators, true);
   assert.ok(largeEvidence.retrieval.serialized_characters <= SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT);
+  const largeAnswer = plain(core.deterministicProgramOfficerAnswer({
+    question: "Which projects involve catalysis carbon dioxide conversion?",
+    intent: "topical",
+    aggregate: large.base_aggregate,
+    snapshot: large,
+    evidencePack: largeEvidence,
+  }));
+  assert.match(largeAnswer.answer, /1,650 related projects/);
+  assert.match(largeAnswer.answer, /24 highest-scoring records/);
 });
 
 test("topical evidence requires every substantive query concept in the same award", () => {
@@ -239,11 +253,38 @@ test("topical evidence requires every substantive query concept in the same awar
     award(203, { title: "Catalysis platform", abstract: "Quantum sensing for reaction measurements." }),
   ]);
   const phrases = plain(core.programOfficerRetrievalPhrases("Which projects involve catalysis and quantum sensing?"));
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which investigators work on catalysis and quantum sensing?")), ["catalysis quantum sensing"]);
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("Which institutions received catalysis awards?")), ["catalysis"]);
   const evidence = snapshotEvidence(snapshot, { phrases, limit: 24 });
   assert.deepEqual(evidence.awards.map(item => item.award_id), ["NSF-203"]);
   assert.equal(evidence.retrieval.concept_coverage, "all_substantive_query_concepts_same_record");
   assert.equal(evidence.retrieval.required_concept_count, 3, "conjunctions and question scaffolding are not substantive concepts");
   assert.deepEqual(evidence.awards[0].matched_fields, ["title", "abstract"]);
+  assert.deepEqual(
+    snapshotEvidence(snapshot, { phrases: ["investigators catalysis quantum sensing"], limit: 24 }).awards.map(item => item.award_id),
+    ["NSF-203"],
+    "server normalization must not treat aggregate facet nouns as topical concepts",
+  );
+  const investigatorAnswer = plain(core.deterministicProgramOfficerAnswer({
+    question: "Which investigators work on catalysis and quantum sensing?",
+    intent: "topical",
+    aggregateIntent: "investigators",
+    aggregate: snapshot.base_aggregate,
+    snapshot,
+    evidencePack: evidence,
+  }));
+  assert.match(investigatorAnswer.answer, /Matching investigators: Researcher 203 \(1 matching award\)/);
+  assert.doesNotMatch(investigatorAnswer.answer, /Researcher 201|Researcher 202/);
+  const institutionAnswer = plain(core.deterministicProgramOfficerAnswer({
+    question: "Which institutions received catalysis and quantum sensing awards?",
+    intent: "topical",
+    aggregateIntent: "institutions",
+    aggregate: snapshot.base_aggregate,
+    snapshot,
+    evidencePack: evidence,
+  }));
+  assert.match(institutionAnswer.answer, /Matching recipient institutions: Alpha University \(1\)/);
+  assert.doesNotMatch(institutionAnswer.answer, /Beta Laboratory/);
 });
 
 test("snapshot-native institutions, coverage, abstract facts, and absence language remain explicit", () => {
@@ -283,14 +324,22 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(core.programOfficerAggregateIntent("Which awards did this program officer fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("What research did they fund?"), "awards");
   assert.equal(core.programOfficerAggregateIntent("Which programs did this program officer manage?"), "programs");
+  assert.deepEqual(plain(core.programOfficerRetrievalPhrases("How many awards are in this snapshot?")), []);
   const longConcepts = [
     "electrochemical", "interfacial", "photophysical", "spectroscopy", "nanostructured", "heterogeneous",
     "catalysis", "quantum", "sensing", "bioengineering", "microfluidics", "metamaterials",
+    "thermochemical", "electrocatalytic", "operando", "plasmonic", "biomolecular", "microfabrication",
   ];
   const packedPhrases = plain(core.programOfficerRetrievalPhrases(`Which projects involve ${longConcepts.join(" ")}?`));
   assert.ok(packedPhrases.length <= 8);
   assert.ok(packedPhrases.every(phrase => phrase.length <= 120));
-  assert.deepEqual(packedPhrases.flatMap(phrase => phrase.split(" ")), longConcepts, "bounded phrases retain whole concepts without mid-token truncation");
+  assert.deepEqual(
+    packedPhrases.flatMap(phrase => phrase.split(" ")).sort(),
+    [...longConcepts].sort(),
+    "bounded phrases retain every whole concept without mid-token truncation",
+  );
+  const overCapacityConcepts = Array.from({ length: 9 }, (_, index) => String.fromCharCode(97 + index).repeat(105));
+  assert.equal(core.programOfficerRetrievalPhrases(`Which projects involve ${overCapacityConcepts.join(" ")}?`), null, "queries that exceed the published phrase capacity must be rejected instead of partially retrieved");
   for (const [status, expected] of [["rate_limited", "rate_limited"], ["unsupported", "unsupported"], ["unavailable", "unavailable"]]) {
     const value = buildAwardSnapshot({
       snapshotId: "d".repeat(64), queryId: "e".repeat(64), asOf: "2026-08-29T12:00:00.000Z",
@@ -406,7 +455,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830";
+  const key = "po-award-navigation-20260830-2";
   for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
     assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
   }
@@ -419,4 +468,5 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.doesNotMatch(appSource.slice(appSource.indexOf("function programOfficerEvidence"), appSource.indexOf("function refreshProgramOfficerQuestionAnswer")), /residentAwards/);
   assert.match(deploySource, /program-officer-evidence-v2/);
   assert.match(deploySource, /all_substantive_query_concepts_same_record/);
+  assert.match(deploySource, /matched_facet_limit/);
 });

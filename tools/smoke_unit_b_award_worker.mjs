@@ -132,6 +132,7 @@ if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
   || programOfficerEvidenceContract.concept_coverage !== "all_substantive_query_concepts_same_record"
   || programOfficerEvidenceContract.maximum_phrases !== 8
   || programOfficerEvidenceContract.maximum_records !== 24
+  || programOfficerEvidenceContract.matched_facet_limit !== 12
   || programOfficerEvidenceContract.abstract_characters_per_record !== 800
   || programOfficerEvidenceContract.serialized_characters !== 18_000) {
   throw new Error("The Program Officer evidence health contract is not active.");
@@ -226,6 +227,10 @@ for (const source of ["NSF", "NIH", "DOE"]) {
     || evidence.retrieval?.records_scanned !== recent.at_least
     || evidence.retrieval?.records_selected < 1
     || evidence.retrieval.records_selected > 24
+    || evidence.matched_aggregate?.project_count !== evidence.retrieval.records_with_score
+    || evidence.matched_aggregate.investigators?.length > 12
+    || evidence.matched_aggregate.institutions?.length > 12
+    || evidence.matched_aggregate.programs?.length > 12
     || evidence.retrieval.serialized_characters > 18_000
     || evidence.awards.some(award => (award.abstract_excerpt || "").length > 800
       || !Number.isInteger(award.snapshot_position)
@@ -240,7 +245,7 @@ for (const source of ["NSF", "NIH", "DOE"]) {
     recent5: { completeness: recent.completeness, exact_total: recent.exact_total, at_least: recent.at_least, year_start: recent.program_officer.year_start, year_end: recent.program_officer.year_end },
     all: { completeness: snapshotsByPreset.all.completeness, exact_total: snapshotsByPreset.all.exact_total, at_least: snapshotsByPreset.all.at_least },
     custom: { completeness: snapshotsByPreset.custom.completeness, exact_total: snapshotsByPreset.custom.exact_total, at_least: snapshotsByPreset.custom.at_least, year_start: 2024, year_end: 2026 },
-    evidence: { records_scanned: evidence.retrieval.records_scanned, records_selected: evidence.retrieval.records_selected, serialized_characters: evidence.retrieval.serialized_characters },
+    evidence: { records_scanned: evidence.retrieval.records_scanned, records_with_score: evidence.retrieval.records_with_score, records_selected: evidence.retrieval.records_selected, matched_facet_limit: evidence.matched_aggregate.facet_limit, serialized_characters: evidence.retrieval.serialized_characters },
   };
 }
 
