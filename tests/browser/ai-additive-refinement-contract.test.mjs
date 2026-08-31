@@ -255,6 +255,7 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(refine, /retrieve: phrase => computeMatches\(phrase, "relevance"\)\.matches/);
   assert.doesNotMatch(refine, /expandedQuery|coverage: false|scheduleHybridSearch/);
   assert.match(refine, /researcher_profile: enabledProfileContext/);
+  assert.match(refine, /const routeExamples = phrases\.slice\(0, 3\)/);
   assert.match(appSource, /function refinementProfileContext\(\)[\s\S]*?state\.profile\.active[\s\S]*?: null/);
   assert.match(profileSource, /profile\.include_cv_in_ai && profile\.cv_text/);
   assert.match(restore, /restoreOrdinaryBaseline\(baseline\)/);

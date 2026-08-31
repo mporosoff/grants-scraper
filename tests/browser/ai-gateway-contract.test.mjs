@@ -103,6 +103,7 @@ test("hosted routing includes the preview-feedback override for structured NOFO 
   assert.equal(HOSTED_MODELS.gemma, "@cf/google/gemma-4-26b-a4b-it");
   assert.match(PRODUCTION_PROMPTS.search_plan, /Provide 8 to 16 concise, meaningful scientific phrases/);
   assert.match(PRODUCTION_PROMPTS.search_plan, /genuinely distinct retrieval routes rather than minor rewrites/);
+  assert.match(PRODUCTION_PROMPTS.search_plan, /one or two distinctive scientific concepts/);
   assert.match(PRODUCTION_PROMPTS.refinement_shortlist, /Do not return an empty matches array merely because fit is imperfect/);
   assert.match(PRODUCTION_PROMPTS.notice_chat, /exact columns Item, Answer, and Source/);
 });
