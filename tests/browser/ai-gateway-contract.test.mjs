@@ -90,17 +90,21 @@ function openAIResponse(output) {
   };
 }
 
-test("hosted routing matches the completed blind and automated evaluation", () => {
+test("hosted routing includes the preview-feedback override for structured NOFO answers", () => {
   assert.deepEqual(OPERATION_ROUTES, {
     search_plan: ["gemma"],
     refinement_shortlist: ["luna"],
     result_chat: ["luna"],
-    notice_chat: ["gemma", "luna"],
+    notice_chat: ["luna", "gemma"],
     institution_question_translation: ["gemma"],
     institution_narrative: ["luna"],
   });
   assert.equal(HOSTED_MODELS.luna, "gpt-5.6-luna");
   assert.equal(HOSTED_MODELS.gemma, "@cf/google/gemma-4-26b-a4b-it");
+  assert.match(PRODUCTION_PROMPTS.search_plan, /Provide 8 to 16 concise, meaningful scientific phrases/);
+  assert.match(PRODUCTION_PROMPTS.search_plan, /genuinely distinct retrieval routes rather than minor rewrites/);
+  assert.match(PRODUCTION_PROMPTS.refinement_shortlist, /Do not return an empty matches array merely because fit is imperfect/);
+  assert.match(PRODUCTION_PROMPTS.notice_chat, /exact columns Item, Answer, and Source/);
 });
 
 test("the gateway owns prompts and routes institution translation to Gemma", async () => {
@@ -157,7 +161,7 @@ test("results chat routes to Luna with strict storage-disabled Responses output"
   }
 });
 
-test("NOFO chat falls back from Gemma to Luna without accepting a browser prompt", async () => {
+test("NOFO chat routes to Luna with the server-owned structured presentation prompt", async () => {
   const originalFetch = globalThis.fetch;
   let lunaBody;
   globalThis.fetch = async (_url, options) => {
@@ -167,13 +171,7 @@ test("NOFO chat falls back from Gemma to Luna without accepting a browser prompt
       headers: { "Content-Type": "application/json" },
     });
   };
-  const env = environment({
-    AI: {
-      async run() {
-        throw new Error("simulated Workers AI outage");
-      },
-    },
-  });
+  const env = environment();
   try {
     const response = await createHandler()(request("notice_chat"), env);
     assert.equal(response.status, 200);
@@ -182,7 +180,7 @@ test("NOFO chat falls back from Gemma to Luna without accepting a browser prompt
     assert.deepEqual(body.route, {
       model: "luna",
       model_id: HOSTED_MODELS.luna,
-      fallback_used: true,
+      fallback_used: false,
     });
     assert.equal(lunaBody.instructions, PRODUCTION_PROMPTS.notice_chat);
 
@@ -195,6 +193,35 @@ test("NOFO chat falls back from Gemma to Luna without accepting a browser prompt
     }), env);
     assert.equal(injected.status, 400);
     assert.equal((await injected.json()).error.code, "invalid_request_shape");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("NOFO chat falls back from Luna to Gemma with the same server-owned prompt", async () => {
+  const originalFetch = globalThis.fetch;
+  let captured;
+  globalThis.fetch = async () => new Response("upstream unavailable", { status: 503 });
+  const env = environment({
+    AI: {
+      async run(model, options) {
+        captured = { model, options };
+        return { response: noticeChat() };
+      },
+    },
+  });
+  try {
+    const response = await createHandler()(request("notice_chat"), env);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.deepEqual(body.output, noticeChat());
+    assert.deepEqual(body.route, {
+      model: "gemma",
+      model_id: HOSTED_MODELS.gemma,
+      fallback_used: true,
+    });
+    assert.equal(captured.model, HOSTED_MODELS.gemma);
+    assert.equal(captured.options.messages[0].content, PRODUCTION_PROMPTS.notice_chat);
   } finally {
     globalThis.fetch = originalFetch;
   }

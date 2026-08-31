@@ -892,15 +892,65 @@
     return JSON.stringify({ snapshot: state.snapshot?.snapshot_id, ids: [...state.residentAwards.keys()].sort(), facet: state.facet });
   }
 
+  function answerTable({ label, headers, rows }) {
+    if (!rows.length) return "";
+    return `<div class="ii-answer-table-wrap" role="region" aria-label="${escapeAttribute(label)}" tabindex="0">
+      <table class="ii-answer-table">
+        <caption>${escapeHtml(label)}</caption>
+        <thead><tr>${headers.map(header => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead>
+        <tbody>${rows.join("")}</tbody>
+      </table>
+    </div>`;
+  }
+
+  function renderDirectAnswer(snapshot) {
+    const aggregate = snapshot.aggregate;
+    const intent = snapshot.deterministic.intent;
+    const investigators = Array.isArray(aggregate.investigators) ? aggregate.investigators : [];
+    const programs = Array.isArray(aggregate.programs) ? aggregate.programs : [];
+    const representedYears = Array.isArray(aggregate.represented_years) ? aggregate.represented_years : [];
+    let summary = snapshot.deterministic.answer;
+    let structured = "";
+    if (intent === "investigators") {
+      summary = investigators.length
+        ? `${investigators.length.toLocaleString()} investigator ${investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No investigator names appear in the matching result snapshot.";
+      structured = answerTable({
+        label: "Investigators in the matching awards",
+        headers: ["Investigator", "Awards"],
+        rows: investigators.map(person => `<tr><th scope="row">${escapeHtml(person.name)}</th><td>${Number(person.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "programs") {
+      summary = programs.length
+        ? `${programs.length.toLocaleString()} program${programs.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No program labels appear in the matching result snapshot.";
+      structured = answerTable({
+        label: "Programs in the matching awards",
+        headers: ["Program", "Awards"],
+        rows: programs.map(program => `<tr><th scope="row">${escapeHtml(program.label)}</th><td>${Number(program.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "years") {
+      structured = answerTable({
+        label: "Award years in the matching awards",
+        headers: ["Year", "Awards"],
+        rows: [...representedYears]
+          .sort((left, right) => Number(right.year) - Number(left.year))
+          .map(item => `<tr><th scope="row">${escapeHtml(item.year)}</th><td>${Number(item.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    }
+    const claims = snapshot.narrative?.claims || [];
+    const narrative = claims.length
+      ? `<ul class="ii-answer-claims">${claims.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" data-ii-evidence-link="${escapeAttribute(id)}" aria-label="Supporting award ${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
+      : "";
+    return `<p class="ii-answer-summary">${escapeHtml(summary)}</p>${structured}${narrative}`;
+  }
+
   function renderQuestionAnswer() {
     const snapshot = state.question?.snapshot;
     if (!snapshot) return $("ii-question-answer").classList.add("hidden");
     $("ii-question-answer").classList.remove("hidden");
     $("ii-answered-question").textContent = state.question.question;
-    const claims = snapshot.narrative?.claims || [];
-    $("ii-direct-answer").innerHTML = `<p class="ii-answer-summary">${escapeHtml(snapshot.deterministic.answer)}</p>${claims.length
-      ? `<ul class="ii-answer-claims">${claims.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" data-ii-evidence-link="${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
-      : ""}`;
+    $("ii-direct-answer").innerHTML = renderDirectAnswer(snapshot);
     const ids = new Set(snapshot.deterministic.evidence_ids);
     const evidence = snapshot.evidencePack.awards.filter(item => ids.has(item.evidence_id));
     $("ii-answer-evidence").innerHTML = evidence.length

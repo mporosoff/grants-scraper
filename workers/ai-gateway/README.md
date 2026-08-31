@@ -6,7 +6,7 @@ The browser sends only a supported operation name and its bounded user payload. 
 
 - Gemma: search phrase expansion and institution-question translation
 - GPT-5.6 Luna: candidate assessment, results chat, and institution narrative
-- NOFO chat: Gemma first, with Luna as the bounded fallback
+- NOFO chat: Luna first for consistent structured presentation, with Gemma as the bounded fallback
 
 The Worker does not log or store prompts or responses. OpenAI requests set `store: false`; request and output sizes are bounded; client and global request rates are limited; browser origins are allowlisted; and every response is validated against the operation schema.
 

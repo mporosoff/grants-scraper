@@ -322,6 +322,17 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
 });
 
+test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
+  assert.match(appSource, /function answerTable\(\{ label, headers, rows \}\)[\s\S]*class="ii-answer-table-wrap"[\s\S]*<table class="ii-answer-table">/);
+  assert.match(appSource, /const investigators = Array\.isArray\(aggregate\.investigators\)/);
+  assert.match(appSource, /intent === "investigators"[\s\S]*label: "Investigators in the matching awards"[\s\S]*headers: \["Investigator", "Awards"\]/);
+  assert.match(appSource, /intent === "programs"[\s\S]*label: "Programs in the matching awards"[\s\S]*headers: \["Program", "Awards"\]/);
+  assert.match(appSource, /intent === "years"[\s\S]*label: "Award years in the matching awards"[\s\S]*headers: \["Year", "Awards"\]/);
+  assert.match(appSource, /\$\("ii-direct-answer"\)\.innerHTML = renderDirectAnswer\(snapshot\)/);
+  assert.match(styles, /\.ii-answer-table-wrap\s*\{/);
+  assert.match(styles, /\.ii-answer-table\s*\{/);
+});
+
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
