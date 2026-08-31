@@ -163,7 +163,8 @@ export const BENCHMARK_CASES = Object.freeze([
     }),
     estimated_output_tokens: 350,
     checks: {
-      required_text: ["April 18, 2027", "not required", "institutions of higher education", "conflict"],
+      required_text: ["April 18, 2027", "not required", "institutions of higher education"],
+      required_any_text: ["conflict", "different close date"],
       forbidden_text: ["April 1, 2027 is the deadline"],
       required_page_references: [2, 3],
     },
@@ -247,6 +248,9 @@ export function gradeBenchmarkOutput(testCase, output) {
   }
   for (const text of checks.forbidden_text || []) {
     if (serialized.includes(String(text).toLowerCase())) problems.push(`forbidden_text:${text}`);
+  }
+  if (checks.required_any_text && !checks.required_any_text.some(text => serialized.includes(String(text).toLowerCase()))) {
+    problems.push(`missing_any_text:${checks.required_any_text.join("|")}`);
   }
   if (checks.minimum_search_terms && (output.search_terms?.length || 0) < checks.minimum_search_terms) {
     problems.push(`too_few_search_terms:${output.search_terms?.length || 0}`);

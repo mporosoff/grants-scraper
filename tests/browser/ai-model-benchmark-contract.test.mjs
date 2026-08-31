@@ -133,6 +133,31 @@ test("Gemma uses the exact Cloudflare model, disables thinking, and receives the
   assert.equal(captured.options.store, false);
 });
 
+test("provider-facing phrase schemas omit unsupported uniqueness while canonical validation retains it", async () => {
+  let captured;
+  const output = {
+    interpretation: "Catalysis pathways",
+    search_terms: ["term one", "term two", "term three", "term four", "term five"],
+    avoid_terms: [],
+  };
+  const env = environment({
+    AI: {
+      async run(_model, options) {
+        captured = options;
+        return { response: output };
+      },
+    },
+  });
+  const response = await createHandler()(request(validBody({
+    operation: "search_plan",
+    system: PRODUCTION_PROMPTS.search_plan,
+    user: JSON.stringify({ topic: "catalysis" }),
+  })), env);
+  assert.equal(response.status, 200);
+  assert.equal(captured.response_format.json_schema.properties.search_terms.uniqueItems, undefined);
+  assert.match(captured.response_format.json_schema.properties.search_terms.description, /Items must be unique/);
+});
+
 test("Gemma receives one bounded retry after invalid structured output", async () => {
   let attempts = 0;
   const env = environment({

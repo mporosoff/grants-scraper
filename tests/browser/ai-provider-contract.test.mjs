@@ -166,7 +166,10 @@ test("OpenAI uses strict Responses JSON Schema, store false, and raw output item
     type: "json_schema",
     name: "funding_search_plan_v1",
     description: provider.STRUCTURED_OPERATIONS.search_plan.description,
-    schema: JSON.parse(JSON.stringify(provider.STRUCTURED_OPERATIONS.search_plan.schema)),
+    schema: JSON.parse(JSON.stringify(provider.schemaForProvider(
+      provider.STRUCTURED_OPERATIONS.search_plan.schema,
+      "openai",
+    ))),
     strict: true,
   });
   assert.equal(body.max_output_tokens, 5000);
@@ -230,6 +233,19 @@ test("Anthropic schema adaptation preserves strict local bounds without mutating
   assert.equal(adapted.properties.matches.items.properties.score.maximum, undefined);
   assert.match(adapted.properties.matches.items.properties.score.description, /less than or equal to 100/);
   assert.equal(provider.schemaForProvider(canonical, "openai").properties.matches.maxItems, 12);
+
+  const searchCanonical = provider.STRUCTURED_OPERATIONS.search_plan.schema;
+  const openAISearchSchema = provider.schemaForProvider(searchCanonical, "openai");
+  assert.equal(searchCanonical.properties.search_terms.uniqueItems, true);
+  assert.equal(openAISearchSchema.properties.search_terms.uniqueItems, undefined);
+  assert.match(openAISearchSchema.properties.search_terms.description, /Items must be unique/);
+  assert.throws(
+    () => provider.validateStructuredValue({
+      ...samples.search_plan,
+      search_terms: ["catalysis", "catalysis", "electrocatalysis", "reaction mechanisms", "active sites"],
+    }, searchCanonical),
+    error => error.category === "schema_validation",
+  );
 
   assert.throws(
     () => provider.validateStructuredValue({

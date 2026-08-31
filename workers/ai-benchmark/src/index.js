@@ -5,6 +5,7 @@ const {
   validateStructuredValue,
   extractJson,
   openAIResponseText,
+  schemaForProvider,
 } = globalThis.FUNDING_AI;
 
 export const BENCHMARK_MODELS = Object.freeze({
@@ -166,7 +167,7 @@ async function requestLuna({ env, system, user, contract, attempt }) {
             type: "json_schema",
             name: contract.name,
             description: contract.description,
-            schema: contract.schema,
+            schema: schemaForProvider(contract.schema, "openai"),
             strict: true,
           },
         },
@@ -206,7 +207,7 @@ async function requestGemma({ env, system, user, contract, attempt }) {
       chat_template_kwargs: { enable_thinking: false },
       response_format: {
         type: "json_schema",
-        json_schema: contract.schema,
+        json_schema: schemaForProvider(contract.schema, "openai"),
       },
       max_completion_tokens: MAX_OUTPUT_TOKENS,
       store: false,

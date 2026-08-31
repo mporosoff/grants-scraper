@@ -215,6 +215,10 @@
     if (Array.isArray(value)) {
       if (Number.isInteger(schema.minItems) && value.length < schema.minItems) return `${path}:minItems`;
       if (Number.isInteger(schema.maxItems) && value.length > schema.maxItems) return `${path}:maxItems`;
+      if (schema.uniqueItems === true) {
+        const serialized = value.map(item => JSON.stringify(item));
+        if (new Set(serialized).size !== serialized.length) return `${path}:uniqueItems`;
+      }
       for (let index = 0; index < value.length; index += 1) {
         const problem = schemaProblem(value[index], schema.items || {}, `${path}[${index}]`);
         if (problem) return problem;
@@ -262,13 +266,21 @@
     maxProperties: value => `Must contain no more than ${value} properties.`,
   });
 
+  const OPENAI_UNSUPPORTED_SCHEMA_CONSTRAINTS = Object.freeze({
+    uniqueItems: value => value ? "Items must be unique." : "",
+  });
+
   function schemaForProvider(schema, provider) {
     if (Array.isArray(schema)) return schema.map(value => schemaForProvider(value, provider));
     if (!plainObject(schema)) return schema;
     const result = {};
     const notes = [];
     for (const [key, value] of Object.entries(schema)) {
-      const explain = provider === "anthropic" && ANTHROPIC_UNSUPPORTED_SCHEMA_CONSTRAINTS[key];
+      const explain = provider === "anthropic"
+        ? ANTHROPIC_UNSUPPORTED_SCHEMA_CONSTRAINTS[key]
+        : provider === "openai"
+          ? OPENAI_UNSUPPORTED_SCHEMA_CONSTRAINTS[key]
+          : null;
       if (explain) {
         const note = explain(value);
         if (note) notes.push(note);
@@ -435,7 +447,7 @@
               type: "json_schema",
               name: contract.name,
               description: contract.description,
-              schema: contract.schema,
+              schema: schemaForProvider(contract.schema, "openai"),
               strict: true,
             },
           },
