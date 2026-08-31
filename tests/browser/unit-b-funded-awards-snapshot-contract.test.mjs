@@ -349,7 +349,7 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundingFinder, /app\.css\?v=pdf-drop-order-20260830/);
-  assert.match(fundingFinder, /app\.js\?v=hosted-ai-20260831/);
+  assert.match(fundingFinder, /app\.js\?v=hosted-ai-migration-20260831/);
   assert.match(fundingFinder, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundingFinder, /ai-provider\.js\?v=hosted-ai-20260831/);
   assert.match(fundingFinder, /result-workflow\.js\?v=chat-output-fixes-20260830/);

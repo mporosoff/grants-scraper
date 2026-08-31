@@ -4990,7 +4990,7 @@
       if (alternativeKey) {
         provider = alternative;
         key = alternativeKey;
-      } else if (preferStored) {
+      } else {
         provider = "hosted";
       }
     }

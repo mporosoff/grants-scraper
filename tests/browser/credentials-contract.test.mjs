@@ -85,7 +85,7 @@ test("an absent page-level provider honors the most recently saved provider", ()
   assert.equal(credentials.resolveProvider("openai", storage), "openai");
 });
 
-test("Funding Finder startup uses the stored preference unless a saved profile owns the selection", () => {
+test("Funding Finder startup keeps a saved personal key and otherwise migrates to hosted AI", () => {
   const loader = appSource.slice(
     appSource.indexOf("function loadProviderKey"),
     appSource.indexOf("function bindEvents"),
@@ -97,6 +97,10 @@ test("Funding Finder startup uses the stored preference unless a saved profile o
 
   assert.match(loader, /preferStored = false/);
   assert.match(loader, /preferStored[\s\S]*?CREDENTIAL_API\.resolveProvider\(""\)/);
+  assert.match(
+    loader,
+    /if \(!key && provider !== "hosted"\)[\s\S]*?if \(alternativeKey\)[\s\S]*?else \{\s*provider = "hosted";/,
+  );
   assert.match(initialization, /loadProviderKey\(\{ announce: true, preferStored: !state\.profile\.saved \}\)/);
 });
 
