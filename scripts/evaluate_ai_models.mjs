@@ -188,6 +188,20 @@ async function callWorker(options, job) {
   };
 }
 
+export function benchmarkFailureRecord(job, error) {
+  return {
+    id: `${BENCHMARK_VERSION}:${job.testCase.id}:r${job.run}:${job.model}`,
+    case_id: job.testCase.id,
+    feature: job.testCase.feature,
+    operation: job.testCase.operation,
+    run: job.run,
+    model: job.model,
+    model_id: MODEL_CONFIG[job.model].id,
+    error: { code: String(error?.message || "provider_call_failed").slice(0, 240) },
+    automated_grade: { passed: false, problems: ["provider_call_failed"] },
+  };
+}
+
 function blindArtifacts(records, cases, seed) {
   const random = mulberry32(seed ^ 0xA5A5A5A5);
   const review = [];
@@ -207,8 +221,8 @@ function blindArtifacts(records, cases, seed) {
       pair_id: pairId,
       feature: testCase.feature,
       scenario: testCase.title,
-      response_a: ordered[0].output,
-      response_b: ordered[1].output,
+      response_a: ordered[0].output || ordered[0].error,
+      response_b: ordered[1].output || ordered[1].error,
       reviewer: {
         preferred: "",
         factual_grounding_a_1_to_5: null,
@@ -263,7 +277,12 @@ async function main() {
   for (const job of jobsFor(options, cases)) {
     const id = `${BENCHMARK_VERSION}:${job.testCase.id}:r${job.run}:${job.model}`;
     if (completed.has(id)) continue;
-    const record = await callWorker(options, job);
+    let record;
+    try {
+      record = await callWorker(options, job);
+    } catch (error) {
+      record = benchmarkFailureRecord(job, error);
+    }
     records.push(record);
     completed.add(id);
     await writeJsonAtomic(checkpointPath, {
@@ -273,7 +292,8 @@ async function main() {
       estimate: costEstimate,
       records,
     });
-    process.stdout.write(`Completed ${records.length}/${costEstimate.calls}: ${job.testCase.id} · run ${job.run} · ${job.model}\n`);
+    const outcome = record.error ? `failed (${record.error.code})` : "completed";
+    process.stdout.write(`${records.length}/${costEstimate.calls}: ${job.testCase.id} · run ${job.run} · ${job.model} · ${outcome}\n`);
   }
   const blind = blindArtifacts(records, cases, options.seed);
   await writeJsonAtomic(path.join(options.output, "blind-review.json"), {
@@ -289,7 +309,9 @@ async function main() {
   process.stdout.write(`\nSaved resumable results and anonymized review files in ${options.output}\n`);
 }
 
-main().catch(error => {
-  process.stderr.write(`${error?.message || String(error)}\n`);
-  process.exitCode = 1;
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(error => {
+    process.stderr.write(`${error?.message || String(error)}\n`);
+    process.exitCode = 1;
+  });
+}

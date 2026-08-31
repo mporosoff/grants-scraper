@@ -13,6 +13,7 @@ import {
   BENCHMARK_MODELS,
   createHandler,
 } from "../../workers/ai-benchmark/src/index.js";
+import { benchmarkFailureRecord } from "../../scripts/evaluate_ai_models.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const token = "benchmark-token-for-contract-test";
@@ -222,4 +223,16 @@ test("automated grading detects unsupported citations and deterministic translat
   });
   assert.equal(translationGrade.passed, false);
   assert.ok(translationGrade.problems.some(problem => problem.startsWith("field_mismatch:agency")));
+});
+
+test("one provider timeout is recorded as evidence without invalidating other benchmark jobs", () => {
+  const testCase = BENCHMARK_CASES.find(item => item.id === "nofo-chat-conflicting-deadline");
+  const record = benchmarkFailureRecord(
+    { testCase, run: 2, model: "gemma" },
+    new Error("Worker HTTP 504: provider_timeout"),
+  );
+  assert.equal(record.id, "ai-model-benchmark-v1:nofo-chat-conflicting-deadline:r2:gemma");
+  assert.equal(record.model_id, "@cf/google/gemma-4-26b-a4b-it");
+  assert.deepEqual(record.error, { code: "Worker HTTP 504: provider_timeout" });
+  assert.deepEqual(record.automated_grade, { passed: false, problems: ["provider_call_failed"] });
 });
