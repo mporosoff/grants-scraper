@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "funding-finder-ai",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-31",
+  "workers_dev": true,
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io"
+  },
+  "ratelimits": [
+    {
+      "name": "AI_CLIENT_RATE_LIMITER",
+      "namespace_id": "6202608241",
+      "simple": { "limit": 12, "period": 60 }
+    },
+    {
+      "name": "AI_GLOBAL_RATE_LIMITER",
+      "namespace_id": "6202608242",
+      "simple": { "limit": 180, "period": 60 }
+    }
+  ]
+}

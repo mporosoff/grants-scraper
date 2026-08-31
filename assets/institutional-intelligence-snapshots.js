@@ -928,8 +928,10 @@
     let narrative = null;
     let narrativeFailure = false;
     if (questionState.narrativeNeeded) {
-      const key = credentials.loadKey(questionState.provider);
-      if (key) {
+      const key = questionState.provider === "hosted"
+        ? ""
+        : credentials.loadKey(questionState.provider);
+      if (questionState.provider === "hosted" || key) {
         try {
           const providerPayload = core.questionProviderPayload({
             question: questionState.question,
@@ -977,22 +979,38 @@
   }
 
   function modelForProvider(provider) {
+    if (provider === "hosted") {
+      return globalThis.FUNDING_AI_GATEWAY?.modelLabel
+        || "Gemma + GPT-5.6 Luna, routed by feature";
+    }
     return provider === "anthropic" ? ai?.ANTHROPIC_MODEL : ai?.OPENAI_MODEL;
   }
 
   function refreshProvider({ preferMain = true } = {}) {
-    let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
-    if (preferMain && typeof credentials.resolveProvider === "function") {
+    let provider = preferMain
+      ? clean($("k-provider")?.value || $("ii-provider")?.value || "hosted", 20)
+      : clean($("ii-provider").value, 20);
+    if (preferMain && provider !== "hosted" && typeof credentials.resolveProvider === "function") {
       provider = credentials.resolveProvider(provider);
     }
-    if (!["openai", "anthropic"].includes(provider)) provider = "openai";
+    if (!["hosted", "openai", "anthropic"].includes(provider)) provider = "hosted";
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-    const configured = Boolean(credentials.loadKey(provider));
-    $("ii-ai-state").textContent = configured ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured` : "No AI key required for deterministic answers";
-    $("ii-key-setup").classList.toggle("hidden", configured);
-    $("ii-key-status").textContent = configured ? "Using the Funding Finder key already saved on this device." : "Optional. Deterministic questions work without a key.";
+    const configured = provider === "hosted" || Boolean(credentials.loadKey(provider));
+    $("ii-ai-state").textContent = provider === "hosted"
+      ? "Hosted AI included"
+      : configured
+        ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
+        : "No AI key required for deterministic answers";
+    $("ii-key-setup").classList.remove("hidden");
+    $("ii-key-field")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-save-key")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-key-status").textContent = provider === "hosted"
+      ? "Funding Finder's hosted AI is ready. No key is required on this device."
+      : configured
+        ? "Using the Funding Finder key already saved on this device."
+        : "Optional. Deterministic questions work without a key.";
     return { provider, configured };
   }
 
@@ -1020,10 +1038,10 @@
       if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
       const current = formState();
-      const { provider, configured } = refreshProvider({ preferMain: false });
-      const key = credentials.loadKey(provider);
+    const { provider, configured } = refreshProvider({ preferMain: false });
+      const key = provider === "hosted" ? "" : credentials.loadKey(provider);
       let plan = { ...current };
-      let translationFallback = !configured || !key;
+      let translationFallback = !configured || (provider !== "hosted" && !key);
       if (!translationFallback) {
         try {
           const currentFilters = {

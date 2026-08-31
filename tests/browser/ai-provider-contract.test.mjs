@@ -176,6 +176,39 @@ test("OpenAI uses strict Responses JSON Schema, store false, and raw output item
   assert.equal(JSON.stringify(result), JSON.stringify(samples.search_plan));
 });
 
+test("hosted AI requires no browser key and sends no browser-owned prompt or model", async () => {
+  const endpoint = "https://funding-finder-ai.example/v1/structured";
+  const provider = await loadProvider({
+    FUNDING_AI_GATEWAY: { endpoint, modelLabel: "routed" },
+  });
+  let request;
+  const result = await provider.structuredResult({
+    provider: "hosted",
+    key: "",
+    operation: "search_plan",
+    system: "This browser prompt must not cross the gateway boundary.",
+    user: JSON.stringify({ topic: "catalysis" }),
+    fetchImpl: async (url, options) => {
+      request = { url, options, body: JSON.parse(options.body) };
+      return jsonResponse({
+        output: samples.search_plan,
+        route: { model: "gemma", fallback_used: false },
+      });
+    },
+  });
+
+  assert.equal(provider.HOSTED_PROVIDER, "hosted");
+  assert.equal(request.url, endpoint);
+  assert.deepEqual(request.body, {
+    operation: "search_plan",
+    user: JSON.stringify({ topic: "catalysis" }),
+  });
+  assert.equal("system" in request.body, false);
+  assert.equal("model" in request.body, false);
+  assert.equal("Authorization" in request.options.headers, false);
+  assert.equal(JSON.stringify(result), JSON.stringify(samples.search_plan));
+});
+
 test("Anthropic uses native output_config JSON Schema and one terminal text block", async () => {
   const provider = await loadProvider();
   let request;

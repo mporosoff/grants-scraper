@@ -56,7 +56,7 @@ test("provider setup retains key, cost, help, and privacy details without repeat
   assert.doesNotMatch(page, /<strong>What leaves this page:<\/strong>/);
   assert.doesNotMatch(page, /<strong>URLs and anonymous usage:<\/strong>/);
   assert.match(help, /Hosted Potential matching/);
-  assert.match(help, /User-connected AI tools/);
+  assert.match(help, /Hosted AI tools/);
   assert.match(help, /URLs and anonymous measurement/);
 });
 
@@ -76,14 +76,14 @@ test("every AI consumer names one shared structured-result operation", () => {
   assert.doesNotMatch(`${app}\n${institution}`, /output_schema/);
 });
 
-test("AI refinement requires both a usable result context and an entered or saved key", () => {
+test("AI refinement requires a usable result context and a ready hosted or user-connected provider", () => {
   const control = app.slice(
     app.indexOf("function updateAiRefineControl"),
     app.indexOf("function setAiBusy"),
   );
   assert.match(control, /const hasContext = aiRefineHasContext\(\)/);
   assert.match(control, /const searchIsCurrent = aiRefineSearchIsCurrent\(\)/);
-  assert.match(control, /const hasKey = Boolean\(\$\("k-key"\)\.value\.trim\(\)\)/);
+  assert.match(control, /const hasConnection = providerReady\(\)/);
   for (const guard of [
     /state\.ai\.busy/,
     /state\.refinement\.busy/,
@@ -91,7 +91,7 @@ test("AI refinement requires both a usable result context and an entered or save
     /uploadedNofoActive/,
     /!hasContext/,
     /!searchIsCurrent/,
-    /!hasKey/,
+    /!hasConnection/,
   ]) assert.match(control, guard);
   assert.match(control, /aria-disabled/);
   assert.match(control, /ai-refine-requirement/);

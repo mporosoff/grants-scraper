@@ -133,7 +133,7 @@ test("hosted Potential matching remains query-only while the page explains the b
   assert.doesNotMatch(launch, /profile|cv_text|orcid/i);
   assert.match(searchPage, /hosted Potential matching requires a typed topic/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
-  assert.match(help, /When you explicitly use AI refinement or chat/);
+  assert.match(help, /When you explicitly use AI refinement, chat, or an institution question/);
 });
 
 test("pending work is shared, filter updates are debounced, and Retry-After disables retry", () => {

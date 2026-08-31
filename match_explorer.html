@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-award-api.urochestercheme.workers.dev https://funding-finder-alerts.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-award-api.urochestercheme.workers.dev https://funding-finder-alerts.urochestercheme.workers.dev https://funding-finder-ai.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
@@ -76,7 +76,7 @@
       <ol class="workflow-map" aria-label="Suggested funding search steps">
         <li><strong>1</strong><span><b>Search or add a notice</b><small>Recommended</small></span></li>
         <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
-        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional user-connected AI</small></span></li>
+        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional hosted AI</small></span></li>
       </ol>
 
       <form class="search-workflow" id="search-form" role="search">
@@ -344,34 +344,35 @@
           <details class="provider-setup">
             <summary>
               <span>
-                <strong>Connect an AI provider</strong>
-                <small>Provider, key, cost, Help, and privacy details</small>
+                <strong>AI service and privacy</strong>
+                <small>Hosted AI is included; personal provider keys remain optional</small>
               </span>
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can use the profile context you enabled, try alternative scientific phrases, assess up to 32 locally qualified catalog candidates, and answer questions about results or an uploaded notice. Refinement only adds evidence-qualified Strong matches; it never removes ordinary results or searches outside the funding catalog.</p>
-              <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
+              <p class="provider-explanation"><strong>What hosted AI changes:</strong> after catalog search, it can use the profile context you enabled, try alternative scientific phrases, assess up to 32 locally qualified catalog candidates, and answer questions about results or an uploaded notice. Refinement only adds evidence-qualified Strong matches; it never removes ordinary results or searches outside the funding catalog.</p>
+              <p class="key-help"><strong>No API key is required.</strong> Funding Finder routes each feature through its tested hosted model. Advanced users may instead select OpenAI or Anthropic and provide their own limited-use key after reviewing its spending controls: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
               <div class="provider-fields">
                 <label>
                   Provider
                   <select id="k-provider">
+                    <option value="hosted" selected>Funding Finder AI (included)</option>
                     <option value="openai">OpenAI</option>
                     <option value="anthropic">Anthropic</option>
                   </select>
                 </label>
-                <label>
+                <label id="provider-key-field" class="hidden">
                   API key
                   <input id="k-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
                 </label>
               </div>
-              <div class="credential-actions">
+              <div class="credential-actions hidden" id="credential-actions">
                 <button class="button secondary" id="save-key" type="button">Save key on this device</button>
                 <button class="text-button" id="clear-key" type="button">Remove key</button>
               </div>
               <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
-              <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
-              <p class="cost-note">Your connected AI uses two bounded calls for refinement: alternative scientific phrases, then assessment of at most 32 locally qualified candidates. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
+              <p class="privacy-note">Hosted AI sends only the bounded information needed for the feature to Funding Finder's protected Cloudflare service; provider keys are never sent to the browser. If you choose your own provider, a saved key stays in this browser's local storage until you remove it.</p>
+              <p class="cost-note">Hosted refinement uses two bounded calls: alternative scientific phrases, then assessment of at most 32 locally qualified candidates. Ordinary Strong and Potential search remains model-free.</p>
             </div>
           </details>
           <div class="ai-refine-actions">
@@ -380,7 +381,7 @@
               <span id="ai-refine-label">Expand and refine these results with AI</span>
             </button>
             <button class="button secondary hidden" id="restore-ai-refinement" type="button">Restore original results</button>
-            <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search and enter or save an AI provider key to enable refinement.</p>
+            <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search to enable hosted AI refinement.</p>
           </div>
           <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
         </section>
@@ -451,6 +452,7 @@
             <div class="chat-key-fields">
               <label>Provider
                 <select id="chat-k-provider">
+                  <option value="hosted">Funding Finder AI (included)</option>
                   <option value="openai">OpenAI</option>
                   <option value="anthropic">Anthropic</option>
                 </select>
@@ -597,7 +599,8 @@
   <script src="./assets/nofo.js?v=filters-2026-08-13"></script>
   <script src="./assets/review.js?v=filters-2026-08-13"></script>
   <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
-  <script src="./assets/ai-provider.js?v=chat-output-fixes-20260830"></script>
+  <script src="./assets/ai-gateway-config.js?v=hosted-ai-20260831"></script>
+  <script src="./assets/ai-provider.js?v=hosted-ai-20260831"></script>
   <script src="./assets/chat-ui.js?v=chat-output-fixes-20260830"></script>
   <script src="./assets/result-workflow.js?v=chat-output-fixes-20260830"></script>
   <script src="./assets/award-links.js?v=phase3-program-watches"></script>
@@ -611,7 +614,7 @@
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
   <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=pdf-drop-order-20260830"></script>
+  <script src="./assets/app.js?v=hosted-ai-20260831"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

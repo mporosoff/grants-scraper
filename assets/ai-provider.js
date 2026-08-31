@@ -3,6 +3,7 @@
 
   const OPENAI_MODEL = "gpt-5.6-luna";
   const ANTHROPIC_MODEL = "claude-sonnet-5";
+  const HOSTED_PROVIDER = "hosted";
   const MAX_OUTPUT_TOKENS = 5000;
   const REQUEST_TIMEOUT_MS = 60_000;
   const MAX_ATTEMPTS = 2;
@@ -162,7 +163,7 @@
   const ERROR_MESSAGES = Object.freeze({
     authentication: "The provider rejected this API key. Check or replace the key, then try again.",
     authorization_model: "This provider account cannot use the selected model. Check model access, then try again.",
-    quota_rate: "The provider reported a quota or rate limit. Check provider usage and billing, then try again.",
+    quota_rate: "The AI service is temporarily rate limited. Try again later; if you selected your own provider, also check its usage and billing.",
     unsupported_contract: "The selected provider or model does not support the required structured-response contract.",
     network_cors: "The browser could not reach the AI provider. Check the network and provider browser-access settings, then try again.",
     timeout: "The AI provider request timed out. Your search and entered information were preserved; try again.",
@@ -318,6 +319,20 @@
     throw new ProviderStructuredError(classifyProviderEnvelope(envelope, status));
   }
 
+  function hostedFailure(envelope, status) {
+    const code = String(envelope?.error?.code || "").toLowerCase();
+    if (status === 429 || /rate_limit/.test(code)) {
+      throw new ProviderStructuredError("quota_rate");
+    }
+    if (status === 408 || status === 504 || /timeout/.test(code)) {
+      throw new ProviderStructuredError("timeout");
+    }
+    if (status === 400 || /invalid|unsupported|schema/.test(code)) {
+      throw new ProviderStructuredError("unsupported_contract");
+    }
+    throw new ProviderStructuredError("provider_unavailable");
+  }
+
   async function fetchJsonBounded(fetchImpl, url, options, timeoutMs) {
     const controller = typeof AbortController === "function" ? new AbortController() : null;
     const timer = controller && typeof setTimeout === "function"
@@ -395,6 +410,25 @@
     const retryInstruction = attempt
       ? "\n\nReturn a smaller complete response that still matches the supplied schema. Shorten prose and include fewer optional list items."
       : "";
+    if (provider === HOSTED_PROVIDER) {
+      const endpoint = String(globalThis.FUNDING_AI_GATEWAY?.endpoint || "").trim();
+      if (!endpoint) throw new ProviderStructuredError("provider_unavailable");
+      const { response, data, malformed } = await fetchJsonBounded(
+        fetchImpl,
+        endpoint,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ operation, user }),
+        },
+        timeoutMs,
+      );
+      if (!response.ok) hostedFailure(data, response.status);
+      if (malformed || !plainObject(data) || !plainObject(data.output)) {
+        throw new ProviderStructuredError("malformed", { retryable: true });
+      }
+      return JSON.stringify(data.output);
+    }
     if (provider === "anthropic") {
       const { response, data, malformed } = await fetchJsonBounded(
         fetchImpl,
@@ -473,7 +507,7 @@
     timeoutMs = REQUEST_TIMEOUT_MS,
   }) {
     const cleanKey = String(key || "").trim();
-    if (!cleanKey) {
+    if (provider !== HOSTED_PROVIDER && !cleanKey) {
       throw new Error(
         "Enter an API key to use AI refinement. Public catalog search does not require one.",
       );
@@ -518,6 +552,7 @@
 
   globalThis.FUNDING_AI = Object.freeze({
     ANTHROPIC_MODEL,
+    HOSTED_PROVIDER,
     OPENAI_MODEL,
     ProviderStructuredError,
     STRUCTURED_OPERATIONS,

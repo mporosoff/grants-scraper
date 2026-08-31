@@ -3040,10 +3040,21 @@
   }
 
   function currentModel(provider = $("k-provider").value) {
+    if (provider === "hosted") {
+      return globalThis.FUNDING_AI_GATEWAY?.modelLabel
+        || "Gemma + GPT-5.6 Luna, routed by feature";
+    }
     if (provider === "anthropic") {
       return globalThis.FUNDING_AI?.ANTHROPIC_MODEL || "";
     }
     return globalThis.FUNDING_AI?.OPENAI_MODEL || "";
+  }
+
+  function providerReady(
+    provider = $("k-provider").value,
+    key = $("k-key").value,
+  ) {
+    return provider === "hosted" || Boolean(String(key || "").trim());
   }
 
   function feedbackSnapshot(record, label, reason = "") {
@@ -4210,14 +4221,14 @@
     const uploadedNofoActive = state.ai.mode === "uploaded-nofo";
     const hasContext = aiRefineHasContext();
     const searchIsCurrent = aiRefineSearchIsCurrent();
-    const hasKey = Boolean($("k-key").value.trim());
+    const hasConnection = providerReady();
     button.disabled = state.ai.busy
       || state.refinement.busy
       || state.refinement.active
       || uploadedNofoActive
       || !hasContext
       || !searchIsCurrent
-      || !hasKey;
+      || !hasConnection;
     button.setAttribute("aria-disabled", String(button.disabled));
     const label = $("ai-refine-label");
     if (label) {
@@ -4238,13 +4249,15 @@
           ? "An AI request is in progress."
         : hasContext && !searchIsCurrent
           ? "Run Find funding again so AI refinement uses the current search criteria."
-        : !hasContext && !hasKey
-          ? "Run a funding search and enter or save an AI provider key to enable refinement."
+        : !hasContext && !hasConnection
+          ? "Run a funding search and connect an AI provider to enable refinement."
           : !hasContext
             ? "Run a funding search with a topic or enabled profile to enable refinement."
-            : !hasKey
-              ? "Enter or save an AI provider key to enable refinement."
-              : "Ready to refine the current search with your connected provider.";
+            : !hasConnection
+              ? "Connect an AI provider to enable refinement."
+              : $("k-provider").value === "hosted"
+                ? "Ready to refine the current search with hosted AI."
+                : "Ready to refine the current search with your connected provider.";
       if (requirement.textContent !== message) requirement.textContent = message;
     }
   }
@@ -4258,9 +4271,9 @@
   function setAiBusy(busy) {
     state.ai.busy = busy;
     updateAiRefineControl();
-    $("chat-input").disabled = busy || !chatHasContext() || !$("k-key").value.trim();
+    $("chat-input").disabled = busy || !chatHasContext() || !providerReady();
     $("chat-submit").disabled =
-      busy || !chatHasContext() || !$("k-key").value.trim();
+      busy || !chatHasContext() || !providerReady();
     $("chat-submit").querySelector("span").textContent =
       busy ? "Working…" : "Send";
     $("chat").setAttribute("aria-busy", String(busy));
@@ -4308,10 +4321,10 @@
       $("query").focus();
       return;
     }
-    if (!$("k-key").value.trim()) {
+    if (!providerReady()) {
       setAiStatus("Connect an AI provider to use matching or chat. Catalog search and filters remain free.", true);
       document.querySelector(".provider-setup").open = true;
-      $("k-key").focus();
+      $("k-provider").focus();
       return;
     }
 
@@ -4510,10 +4523,10 @@
 
   function renderChatKeyPrompt() {
     const prompt = $("chat-key-prompt");
-    const hasKey = Boolean($("k-key").value.trim());
-    prompt.classList.toggle("hidden", hasKey);
-    $("result-assistant").classList.toggle("needs-chat-key", !hasKey);
-    if (hasKey) {
+    const ready = providerReady();
+    prompt.classList.toggle("hidden", ready);
+    $("result-assistant").classList.toggle("needs-chat-key", !ready);
+    if (ready) {
       $("chat-key-status").textContent = "";
       return;
     }
@@ -4521,6 +4534,8 @@
     if (document.activeElement !== $("chat-k-provider")) {
       $("chat-k-provider").value = provider;
     }
+    $("chat-k-key").closest("label")?.classList.remove("hidden");
+    $("chat-save-key").closest("label")?.classList.remove("hidden");
     $("chat-k-key").placeholder = $("chat-k-provider").value === "anthropic"
       ? "sk-ant-..."
       : "sk-...";
@@ -4533,7 +4548,7 @@
     const contextIds = currentChatIds();
     const documentChat = hasNofoDocument() && state.ai.mode === "uploaded-nofo";
     const canChat = state.searched && Boolean(contextIds.length || documentChat);
-    const canAsk = canChat && Boolean($("k-key").value.trim());
+    const canAsk = canChat && providerReady();
     $("result-assistant").classList.toggle("document-chat", documentChat);
     $("open-results-chat").disabled = !canChat;
     if (!canChat && document.body.classList.contains("chat-expanded")) {
@@ -4641,10 +4656,10 @@
     $("open-results-chat").setAttribute("aria-expanded", "true");
     const messages = $("chat-messages");
     messages.scrollTop = messages.scrollHeight;
-    if ($("k-key").value.trim()) {
+    if (providerReady()) {
       $("chat-input").focus();
     } else {
-      $("chat-k-key").focus();
+      $("chat-k-provider").focus();
     }
   }
 
@@ -4736,7 +4751,7 @@
   async function askNofo(question) {
     if (!state.ready) return runCatalogAction(() => askNofo(question));
     if (!hasNofoDocument() || state.ai.busy) return;
-    if (!$("k-key").value.trim()) {
+    if (!providerReady()) {
       promptForChatKey("Add your provider key, then ask the question again.");
       return;
     }
@@ -4821,7 +4836,7 @@
       setAiStatus("There are no current results to discuss. Run a search or loosen the filters first.", true);
       return;
     }
-    if (!$("k-key").value.trim()) {
+    if (!providerReady()) {
       setAiStatus("Add an API key before starting chat.", true);
       promptForChatKey("Add your provider key, then ask the question again.");
       return;
@@ -4928,27 +4943,36 @@
     }
   }
 
-  function providerLabel() {
-    return $("k-provider").value === "anthropic" ? "Anthropic" : "OpenAI";
+  function providerLabel(provider = $("k-provider").value) {
+    if (provider === "hosted") return "Funding Finder AI";
+    return provider === "anthropic" ? "Anthropic" : "OpenAI";
   }
 
   function updateProviderState(message = "") {
+    const provider = $("k-provider").value;
+    const hosted = provider === "hosted";
     const key = $("k-key").value.trim();
-    const savedKey = CREDENTIAL_API.loadKey($("k-provider").value);
+    const savedKey = hosted ? "" : CREDENTIAL_API.loadKey(provider);
     const isSaved = Boolean(key && savedKey === key);
-    $("provider-state").textContent = isSaved
-      ? `${providerLabel()} key saved`
-      : key
-        ? `${providerLabel()} key entered`
-        : "Not configured";
-    $("key-storage-status").textContent = message || (
-      isSaved
-        ? `${providerLabel()} key is saved on this device.`
+    $("provider-key-field")?.classList.toggle("hidden", hosted);
+    $("credential-actions")?.classList.toggle("hidden", hosted);
+    $("provider-state").textContent = hosted
+      ? "Hosted AI ready"
+      : isSaved
+        ? `${providerLabel()} key saved`
         : key
-          ? "Key is available for this tab but has not been saved."
-          : `No ${providerLabel()} key is stored on this device.`
+          ? `${providerLabel()} key entered`
+          : "Not configured";
+    $("key-storage-status").textContent = message || (hosted
+      ? "Funding Finder's hosted AI is ready. No API key is required on this device."
+      : isSaved
+          ? `${providerLabel()} key is saved on this device.`
+          : key
+            ? "Key is available for this tab but has not been saved."
+            : `No ${providerLabel()} key is stored on this device.`
     );
-    $("save-key").disabled = !key || isSaved;
+    $("save-key").disabled = hosted || !key || isSaved;
+    $("clear-key").disabled = hosted;
     if ($("chat-key-prompt")) renderChatKeyPrompt();
     updateAiRefineControl();
   }
@@ -4956,19 +4980,21 @@
   function loadProviderKey({ announce = false, preferStored = false } = {}) {
     let provider = $("k-provider").value;
     if (preferStored && typeof CREDENTIAL_API.resolveProvider === "function") {
-      provider = CREDENTIAL_API.resolveProvider("");
-      $("k-provider").value = provider;
+      const resolved = CREDENTIAL_API.resolveProvider("");
+      if (CREDENTIAL_API.loadKey(resolved)) provider = resolved;
     }
-    let key = CREDENTIAL_API.loadKey(provider);
-    if (!key) {
+    let key = provider === "hosted" ? "" : CREDENTIAL_API.loadKey(provider);
+    if (!key && provider !== "hosted") {
       const alternative = provider === "anthropic" ? "openai" : "anthropic";
       const alternativeKey = CREDENTIAL_API.loadKey(alternative);
       if (alternativeKey) {
         provider = alternative;
         key = alternativeKey;
-        $("k-provider").value = provider;
+      } else if (preferStored) {
+        provider = "hosted";
       }
     }
+    $("k-provider").value = provider;
     $("k-key").value = key;
     $("k-key").placeholder =
       $("k-provider").value === "anthropic" ? "sk-ant-..." : "sk-...";
@@ -5408,11 +5434,21 @@
     });
     $("chat-k-provider").addEventListener("change", () => {
       const provider = $("chat-k-provider").value;
-      $("chat-k-key").value = CREDENTIAL_API.loadKey(provider);
+      const hosted = provider === "hosted";
+      $("chat-k-key").value = hosted ? "" : CREDENTIAL_API.loadKey(provider);
+      $("chat-k-key").closest("label")?.classList.toggle("hidden", hosted);
+      $("chat-save-key").closest("label")?.classList.toggle("hidden", hosted);
       $("chat-k-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-      $("chat-key-status").textContent = $("chat-k-key").value
+      $("chat-key-status").textContent = hosted
+        ? "Funding Finder's hosted AI does not require a key. Select the button to continue."
+        : $("chat-k-key").value
         ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key found on this device. Select the button to use it.`
         : `Enter a ${provider === "anthropic" ? "Anthropic" : "OpenAI"} API key.`;
+      $("connect-chat-key").textContent = hosted
+        ? "Use hosted AI and start chatting"
+        : $("chat-save-key").checked
+          ? "Save key and start chatting"
+          : "Use key for this tab";
     });
     $("chat-k-key").addEventListener("input", () => {
       $("chat-key-status").textContent = "";
@@ -5421,15 +5457,17 @@
     $("connect-chat-key").addEventListener("click", () => {
       const provider = $("chat-k-provider").value;
       const key = $("chat-k-key").value.trim();
-      if (!key) {
+      if (provider !== "hosted" && !key) {
         $("chat-key-status").textContent = "Enter an API key first.";
         $("chat-k-key").focus();
         return;
       }
       $("k-provider").value = provider;
       $("k-key").value = key;
-      let message = `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is ready for this tab.`;
-      if ($("chat-save-key").checked) {
+      let message = provider === "hosted"
+        ? "Funding Finder's hosted AI is ready."
+        : `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is ready for this tab.`;
+      if (provider !== "hosted" && $("chat-save-key").checked) {
         const result = CREDENTIAL_API.saveKey(provider, key);
         message = result.saved
           ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key saved on this device.`
