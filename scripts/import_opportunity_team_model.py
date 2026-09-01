@@ -294,7 +294,7 @@ def build_config(faculty_model: dict, gate: dict, source_hashes: dict) -> dict:
 
     payload = {
         "schema_version": SCHEMA_VERSION,
-        "method_version": "opportunity-team-role-evidence-v2",
+        "method_version": "opportunity-team-role-evidence-v3",
         "release_state": "evidence_calibrated_pilot",
         "source_hashes": source_hashes,
         "source_roster_counts": SOURCE_ROSTER_COUNTS,

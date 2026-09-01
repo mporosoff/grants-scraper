@@ -6230,14 +6230,14 @@
       ]
     }
   ],
-  "generation_id": "eb25768438990ad0c2170c0892eaa4dcbb4fbc9ecec8cca23611d7dd50387422",
+  "generation_id": "441291abdf262792c406e85cbbc897c23e9209b3ed960b79d159533a5274060a",
   "limitations": [
     "The directory may omit relevant faculty and does not imply availability or eligibility.",
     "Only the listed opportunity scopes have a reviewed role model; broad parent programs never receive a team proposal.",
     "A conditional or failed proposal is an incomplete internal core, not a complete application team.",
     "Replacement choices are source-backed capability alternatives and remain non-covering until role transfer is reviewed."
   ],
-  "method_version": "opportunity-team-role-evidence-v2",
+  "method_version": "opportunity-team-role-evidence-v3",
   "opportunities": [
     {
       "agency": "Dept of the Army -- Materiel Command",

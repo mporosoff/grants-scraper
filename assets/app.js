@@ -1846,6 +1846,7 @@
     if (!record || !OPPORTUNITY_TEAM_API?.hasAvailableScope) return false;
     const scopeId = opportunityTeamScopeId(match, record);
     try {
+      if (!recordIsCurrent(record)) return false;
       return OPPORTUNITY_TEAM_API.hasAvailableScope({
         parentId: recordId(record),
         scopeId,

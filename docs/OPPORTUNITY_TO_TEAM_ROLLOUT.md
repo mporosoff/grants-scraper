@@ -94,7 +94,10 @@ Funding Finder shows the lazy “Build a team” action only on cards whose exac
 scope, reviewed child/branch, or parent scope chooser exists in the generated
 availability index. The toolbar's separate “Build a team” toggle filters the
 current result set, exports, pagination, and chat context to those supported
-opportunities without loading the full graph. Only one team panel may be open.
+opportunities without loading the full graph. Card and toolbar availability
+also pass the shared runtime currentness predicate, so an archived or newly
+expired indexed record is never advertised before the panel rejects it. Only
+one team panel may be open.
 A result rerender closes the owned panel and clears its trigger state, so
 detached nodes cannot block a later activation. Close and Escape restore focus
 when the trigger remains connected. A team-data failure is isolated from search
@@ -109,7 +112,10 @@ proposal can be carried into Team Match through public faculty identifiers; no
 private research text is put in the URL. Directory selections paint a visible
 highlight, move focus to the selected team chip, and announce the matching
 refresh before the heavier local matching pass. Saved directory members use
-stable public identifiers and load directory identities before restoration.
+stable public identifiers and load directory identities before restoration. A
+transient directory failure defers restoration and history writes, preserves
+the saved identities, and blocks incomplete-team matching until a successful
+retry restores the team.
 
 ## AI boundary
 

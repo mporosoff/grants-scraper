@@ -204,6 +204,14 @@ test("Funding Finder panel is lazy, rerender-safe, single-owner, and accessible"
   assert.match(appSource, /data-opportunity-team="\$\{escapeAttribute\(id\)\}"/);
   assert.match(appSource, /data-opportunity-team-broad="\$\{isBroadOpportunity\(record\)\}"/);
   assert.match(appSource, /state\.teamReadyOnly[\s\S]*?matches\.filter\(opportunityHasAvailableTeam\)/);
+  const availabilityStart = appSource.indexOf("  function opportunityHasAvailableTeam(match) {");
+  const availabilityEnd = appSource.indexOf("  function currentDisplayMatches() {", availabilityStart);
+  const availabilitySource = appSource.slice(availabilityStart, availabilityEnd);
+  assert.match(availabilitySource, /if \(!recordIsCurrent\(record\)\) return false/);
+  assert.ok(
+    availabilitySource.indexOf("recordIsCurrent(record)") < availabilitySource.indexOf(".hasAvailableScope({"),
+    "runtime currentness must be checked before advertising generated team availability",
+  );
   assert.match(appSource, /Team-building opportunities only/);
   assert.match(appSource, /document\.dispatchEvent\(new CustomEvent\("funding-finder:before-results-render"\)\)/);
   assert.match(panelSource, /var openPanel = null/);

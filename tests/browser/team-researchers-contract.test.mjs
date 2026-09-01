@@ -175,11 +175,25 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
   assert.match(teamPage, /selectedIdentities:/);
   assert.match(teamPage, /kind: "directory"/);
   assert.match(teamPage, /function teamHistoryNeedsDirectory\(\)/);
-  assert.match(teamPage, /if \(teamHistoryNeedsDirectory\(\)\) \{[\s\S]*?await ensureTeamDirectory\(\);[\s\S]*?restoreTeamHistory\(\)/);
+  assert.match(teamPage, /if \(teamHistoryNeedsDirectory\(\)\) \{[\s\S]*?teamHistoryRestoreDeferred = true;[\s\S]*?await ensureTeamDirectory\(\)/);
   assert.match(teamPage, /restoreTeamHistory\(\)/);
   assert.match(teamPage, /finishHistoryRestore\(\)/);
   assert.doesNotMatch(teamPage, /id="meta-line"/);
   assert.doesNotMatch(teamPage, /department faculty profiles|live graded matching across/);
+});
+
+test("a transient directory failure preserves history until a successful retry", () => {
+  assert.match(teamPage, /var teamHistoryRestoreDeferred = false/);
+  const saveStart = teamPage.indexOf("  function saveTeamHistory() {");
+  const saveEnd = teamPage.indexOf("  function teamHistoryNeedsDirectory() {", saveStart);
+  const saveSource = teamPage.slice(saveStart, saveEnd);
+  assert.match(saveSource, /if \(teamHistoryRestoreDeferred\) return/);
+  assert.ok(saveSource.indexOf("teamHistoryRestoreDeferred") < saveSource.indexOf("history.replaceState"));
+  assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
+  assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
+  assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
+  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
+  assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
 });
 
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {
@@ -189,7 +203,7 @@ test("supports repeated selection, removal, editing, and the four-person maximum
   assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
   assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
   assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
-  assert.match(teamPage, /autoSelected = !wasEditing && selected\.length < MAX/);
+  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
   assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
   assert.match(teamPage, /ORCID_API\.fetchProfile/);
 });
