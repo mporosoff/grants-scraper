@@ -26,12 +26,13 @@ export const BENCHMARK_RETRY_INSTRUCTIONS = Object.freeze({
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,119}$/;
 
 class BenchmarkError extends Error {
-  constructor(code, status = 400, { retryable = false } = {}) {
+  constructor(code, status = 400, { retryable = false, usage = null } = {}) {
     super(code);
     this.name = "BenchmarkError";
     this.code = code;
     this.status = status;
     this.retryable = retryable;
+    this.usage = usage;
   }
 }
 
@@ -136,6 +137,15 @@ function normalizeUsage(value) {
   };
 }
 
+function addUsage(total, value) {
+  const next = normalizeUsage({ usage: value });
+  return {
+    input_tokens: total.input_tokens + next.input_tokens,
+    output_tokens: total.output_tokens + next.output_tokens,
+    total_tokens: total.total_tokens + next.total_tokens,
+  };
+}
+
 function cloudflareResponseText(value) {
   const candidate = value?.response ?? value?.result?.response;
   if (typeof candidate === "string" && candidate.trim()) return candidate;
@@ -178,6 +188,7 @@ async function requestLuna({ env, system, user, contract, attempt }) {
       }),
     });
     const data = await jsonBounded(response);
+    const usage = normalizeUsage(data);
     if (!response.ok) {
       const status = response.status === 429 ? 429 : response.status >= 500 ? 502 : 400;
       throw new BenchmarkError(response.status === 429 ? "provider_rate_limited" : "provider_rejected", status);
@@ -188,9 +199,10 @@ async function requestLuna({ env, system, user, contract, attempt }) {
     } catch (error) {
       throw new BenchmarkError(error?.category === "incomplete" ? "incomplete_provider_response" : "malformed_provider_response", 502, {
         retryable: error?.retryable === true,
+        usage,
       });
     }
-    return { text, usage: normalizeUsage(data) };
+    return { text, usage };
   });
 }
 
@@ -216,17 +228,25 @@ async function requestGemma({ env, system, user, contract, attempt }) {
     if (error instanceof BenchmarkError) throw error;
     throw new BenchmarkError("provider_unavailable", 502);
   }
-  return { text: cloudflareResponseText(data), usage: normalizeUsage(data) };
+  const usage = normalizeUsage(data);
+  try {
+    return { text: cloudflareResponseText(data), usage };
+  } catch (error) {
+    if (!(error instanceof BenchmarkError)) throw error;
+    throw new BenchmarkError(error.code, error.status, { retryable: error.retryable, usage });
+  }
 }
 
 async function runModel(clean, env) {
   const contract = STRUCTURED_OPERATIONS[clean.operation];
   const startedAt = Date.now();
   let lastError;
+  let usage = normalizeUsage(null);
   for (let attempt = 0; attempt < BENCHMARK_MAX_ATTEMPTS; attempt += 1) {
     try {
       const provider = clean.model === "luna" ? requestLuna : requestGemma;
       const result = await provider({ env, ...clean, contract, attempt });
+      usage = addUsage(usage, result.usage);
       let output;
       try {
         output = validateStructuredValue(extractJson(result.text), contract.schema);
@@ -240,10 +260,11 @@ async function runModel(clean, env) {
         model_id: BENCHMARK_MODELS[clean.model],
         attempts: attempt + 1,
         latency_ms: Date.now() - startedAt,
-        usage: result.usage,
+        usage,
         output,
       };
     } catch (error) {
+      usage = addUsage(usage, error?.usage);
       lastError = error;
       if (!(error instanceof BenchmarkError) || !error.retryable || attempt + 1 >= BENCHMARK_MAX_ATTEMPTS) break;
     }

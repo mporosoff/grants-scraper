@@ -181,15 +181,61 @@ test("Gemma receives one bounded retry after invalid structured output", async (
       async run() {
         attempts += 1;
         return attempts === 1
-          ? { response: JSON.stringify({ agency: "DOE" }) }
-          : { response: JSON.stringify(validTranslation()) };
+          ? {
+              response: JSON.stringify({ agency: "DOE" }),
+              usage: { prompt_tokens: 80, completion_tokens: 10, total_tokens: 90 },
+            }
+          : {
+              response: JSON.stringify(validTranslation()),
+              usage: { prompt_tokens: 120, completion_tokens: 30, total_tokens: 150 },
+            };
       },
     },
   });
   const response = await createHandler()(request(validBody()), env);
   assert.equal(response.status, 200);
-  assert.equal((await response.json()).attempts, 2);
+  const body = await response.json();
+  assert.equal(body.attempts, 2);
+  assert.deepEqual(body.usage, { input_tokens: 200, output_tokens: 40, total_tokens: 240 });
   assert.equal(attempts, 2);
+});
+
+test("Luna retry usage includes a billed malformed first response", async () => {
+  const originalFetch = globalThis.fetch;
+  let attempts = 0;
+  globalThis.fetch = async () => {
+    attempts += 1;
+    const body = attempts === 1
+      ? {
+          status: "completed",
+          output: [],
+          usage: { input_tokens: 90, output_tokens: 5, total_tokens: 95 },
+        }
+      : {
+          status: "completed",
+          output: [{
+            type: "message",
+            status: "completed",
+            role: "assistant",
+            content: [{ type: "output_text", text: JSON.stringify(validTranslation()) }],
+          }],
+          usage: { input_tokens: 110, output_tokens: 25, total_tokens: 135 },
+        };
+    return new Response(JSON.stringify(body), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+  try {
+    const response = await createHandler()(request(validBody({ model: "luna" })), environment());
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.attempts, 2);
+    assert.deepEqual(body.usage, { input_tokens: 200, output_tokens: 30, total_tokens: 230 });
+    assert.equal(attempts, 2);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("Luna request matches the production Responses API contract and does not enable storage", async () => {
