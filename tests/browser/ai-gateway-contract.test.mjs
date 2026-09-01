@@ -167,6 +167,41 @@ function budgetNamespace({ status = 200, body = { consumed: true } } = {}) {
   };
 }
 
+function budgetSqlStorage() {
+  const rows = new Map();
+  const sql = {
+    exec(query, ...bindings) {
+      const normalized = String(query).replace(/\s+/g, " ").trim().toUpperCase();
+      if (normalized.startsWith("CREATE TABLE IF NOT EXISTS AI_BUDGET_USAGE")) {
+        return { toArray: () => [] };
+      }
+      if (normalized === "DELETE FROM AI_BUDGET_USAGE WHERE DAY <> ?") {
+        const [day] = bindings;
+        for (const [key, row] of rows) {
+          if (row.day !== day) rows.delete(key);
+        }
+        return { toArray: () => [] };
+      }
+      if (normalized === "SELECT UNITS FROM AI_BUDGET_USAGE WHERE DAY = ? AND CLIENT_HASH = ?") {
+        const [day, clientHash] = bindings;
+        const row = rows.get(`${day}:${clientHash}`);
+        return { toArray: () => row ? [{ units: row.units }] : [] };
+      }
+      if (normalized.startsWith("INSERT INTO AI_BUDGET_USAGE")) {
+        const [day, clientHash, units] = bindings;
+        rows.set(`${day}:${clientHash}`, { day, client_hash: clientHash, units });
+        return { toArray: () => [] };
+      }
+      throw new Error(`Unexpected budget SQL: ${query}`);
+    },
+  };
+  return {
+    rows,
+    sql,
+    transactionSync(callback) { return callback(); },
+  };
+}
+
 function environment(overrides = {}) {
   return {
     PUBLIC_APP_ORIGIN: "https://mporosoff.github.io",
@@ -489,19 +524,16 @@ test("a caller that copies the production Origin still cannot bypass the daily b
 });
 
 test("the daily coordinator atomically enforces client and global weighted ceilings", async () => {
-  const values = new Map();
+  const storage = budgetSqlStorage();
   const coordinator = new AiBudgetCoordinator({
-    storage: {
-      async get(key) { return values.get(key); },
-      async put(key, value) { values.set(key, structuredClone(value)); },
-    },
+    storage,
   }, { now: () => Date.UTC(2026, 8, 1, 12) });
-  const consume = (clientHash, units) => coordinator.fetch(new Request("https://budget.internal/", {
+  const consume = (clientHash, units, budgets = { client: 100, global: 150 }) => coordinator.fetch(new Request("https://budget.internal/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       action: "consume",
-      budgets: { client: 100, global: 150 },
+      budgets,
       client_hash: clientHash,
       units,
     }),
@@ -512,8 +544,30 @@ test("the daily coordinator atomically enforces client and global weighted ceili
   assert.equal((await consume(firstClient, 41)).status, 429);
   assert.equal((await consume(secondClient, 60)).status, 200);
   assert.equal((await consume(secondClient, 31)).status, 429);
-  const stored = JSON.stringify(values.get("daily"));
+  const stored = JSON.stringify([...storage.rows.values()]);
   assert.doesNotMatch(stored, /notice|question|catalysis|192\.0\.2/);
+});
+
+test("the daily coordinator shards thousands of client counters into separate SQLite rows", async () => {
+  const storage = budgetSqlStorage();
+  const coordinator = new AiBudgetCoordinator({ storage }, { now: () => Date.UTC(2026, 8, 1, 12) });
+  const budgets = { client: 2, global: 5_000 };
+  for (let index = 0; index < 2_000; index += 1) {
+    const clientHash = index.toString(16).padStart(64, "0");
+    const response = await coordinator.fetch(new Request("https://budget.internal/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "consume",
+        budgets,
+        client_hash: clientHash,
+        units: 1,
+      }),
+    }));
+    assert.equal(response.status, 200);
+  }
+  assert.equal(storage.rows.size, 2_001);
+  assert.ok([...storage.rows.values()].every(row => !Object.hasOwn(row, "clients")));
 });
 
 test("weighted estimates cover retries and the more expensive routed paths", () => {

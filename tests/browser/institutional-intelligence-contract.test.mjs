@@ -312,6 +312,21 @@ test("explicit year language deterministically overrides an incorrect model tran
   );
   assert.equal(range.year_start, 2022);
   assert.equal(range.year_end, 2024);
+
+  for (const question of [
+    "Show awards from 2021–2025",
+    "Show awards from 2021 — 2025",
+    "Show awards from 2021 until 2025",
+    "Show awards between 2021 and 2025",
+  ]) {
+    const bounded = core.sanitizeQuestionPlan(
+      { agency: "all", year_start: "2021", year_end: "" },
+      current,
+      question,
+    );
+    assert.equal(bounded.year_start, 2021, question);
+    assert.equal(bounded.year_end, 2025, question);
+  }
 });
 
 test("snapshot URLs and replacement results have one committed owner", () => {

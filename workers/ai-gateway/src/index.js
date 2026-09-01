@@ -144,8 +144,25 @@ function dayUtc(timestamp = Date.now()) {
   return new Date(timestamp).toISOString().slice(0, 10);
 }
 
-function emptyBudgetState(day) {
-  return { day, global_units: 0, clients: {} };
+const BUDGET_GLOBAL_CLIENT = "__global__";
+
+function budgetUnits(sql, day, clientHash) {
+  const row = sql.exec(
+    "SELECT units FROM ai_budget_usage WHERE day = ? AND client_hash = ?",
+    day,
+    clientHash,
+  ).toArray()[0];
+  return boundedInteger(row?.units, { minimum: 0 }) ?? 0;
+}
+
+function putBudgetUnits(sql, day, clientHash, units) {
+  sql.exec(
+    `INSERT INTO ai_budget_usage (day, client_hash, units) VALUES (?, ?, ?)
+     ON CONFLICT(day, client_hash) DO UPDATE SET units = excluded.units`,
+    day,
+    clientHash,
+    units,
+  );
 }
 
 function internalJson(status, payload) {
@@ -159,6 +176,16 @@ export class AiBudgetCoordinator {
   constructor(ctx, { now = Date.now } = {}) {
     this.ctx = ctx;
     this.now = now;
+    this.sql = ctx.storage.sql;
+    if (!this.sql?.exec || !ctx.storage.transactionSync) {
+      throw new Error("sqlite_budget_storage_required");
+    }
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS ai_budget_usage (
+      day TEXT NOT NULL,
+      client_hash TEXT NOT NULL,
+      units INTEGER NOT NULL CHECK (units >= 0),
+      PRIMARY KEY (day, client_hash)
+    )`);
   }
 
   async fetch(request) {
@@ -182,33 +209,42 @@ export class AiBudgetCoordinator {
         || !budgets.client || !budgets.global || budgets.client > budgets.global) {
       return internalJson(503, { error: "invalid_budget" });
     }
-    const today = dayUtc(this.now());
-    let state = await this.ctx.storage.get("daily");
-    if (!state || state.day !== today) state = emptyBudgetState(today);
-    if (body.action === "status") {
-      return internalJson(200, {
-        budget_state: state.global_units >= budgets.global ? "exhausted" : "available",
-        global_units: Math.min(state.global_units, budgets.global),
-      });
-    }
     const units = boundedInteger(body.units, { maximum: budgets.global });
     const clientHash = typeof body.client_hash === "string" && /^[a-f0-9]{64}$/.test(body.client_hash)
       ? body.client_hash
       : "";
-    if (body.action !== "consume" || !units || !clientHash) {
+    if (body.action !== "status" && (body.action !== "consume" || !units || !clientHash)) {
       return internalJson(400, { error: "invalid_consumption" });
     }
-    const clientUnits = boundedInteger(state.clients?.[clientHash], { minimum: 0 }) ?? 0;
-    if (state.global_units + units > budgets.global || clientUnits + units > budgets.client) {
-      return internalJson(429, { error: "budget_exhausted" });
-    }
-    state.global_units += units;
-    state.clients[clientHash] = clientUnits + units;
-    await this.ctx.storage.put("daily", state);
-    return internalJson(200, {
-      consumed: true,
-      budget_state: state.global_units >= budgets.global ? "exhausted" : "available",
+    const today = dayUtc(this.now());
+    const outcome = this.ctx.storage.transactionSync(() => {
+      this.sql.exec("DELETE FROM ai_budget_usage WHERE day <> ?", today);
+      const globalUnits = budgetUnits(this.sql, today, BUDGET_GLOBAL_CLIENT);
+      if (body.action === "status") {
+        return {
+          status: 200,
+          payload: {
+            budget_state: globalUnits >= budgets.global ? "exhausted" : "available",
+            global_units: Math.min(globalUnits, budgets.global),
+          },
+        };
+      }
+      const clientUnits = budgetUnits(this.sql, today, clientHash);
+      if (globalUnits + units > budgets.global || clientUnits + units > budgets.client) {
+        return { status: 429, payload: { error: "budget_exhausted" } };
+      }
+      const nextGlobalUnits = globalUnits + units;
+      putBudgetUnits(this.sql, today, BUDGET_GLOBAL_CLIENT, nextGlobalUnits);
+      putBudgetUnits(this.sql, today, clientHash, clientUnits + units);
+      return {
+        status: 200,
+        payload: {
+          consumed: true,
+          budget_state: nextGlobalUnits >= budgets.global ? "exhausted" : "available",
+        },
+      };
     });
+    return internalJson(outcome.status, outcome.payload);
   }
 }
 
