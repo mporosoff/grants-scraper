@@ -657,3 +657,30 @@ test("Cloudflare configuration binds the durable daily budget and fail-closed co
   assert.match(wrangler, /"AI_BUDGET_COORDINATOR"[\s\S]*?"AiBudgetCoordinator"/);
   assert.match(wrangler, /"storage": "sqlite"/);
 });
+
+test("hosted AI deployment fails closed around rollback capture and protected-main races", async () => {
+  const workflow = await readFile(new URL(".github/workflows/deploy-ai-gateway.yml", root), "utf8");
+  const releaseBase = workflow.indexOf("Capture and verify the protected main release base");
+  const previous = workflow.indexOf("Capture the previous Worker version");
+  const reconfirm = workflow.indexOf("Reconfirm protected main immediately before hosted AI mutation");
+  const deploy = workflow.indexOf("Deploy the protected hosted AI Worker");
+  assert.ok(releaseBase >= 0);
+  assert.deepEqual(
+    [releaseBase, previous, reconfirm, deploy],
+    [releaseBase, previous, reconfirm, deploy].toSorted((left, right) => left - right),
+  );
+
+  const rollbackCapture = workflow.slice(previous, reconfirm);
+  assert.match(rollbackCapture, /wrangler@4\.125\.0 deployments list[\s\S]*?--json\)/);
+  assert.doesNotMatch(rollbackCapture, /deployments list[^\n]*(?:\|\||2>\/dev\/null)/);
+  assert.match(rollbackCapture, /jq -e 'type == "array"'/);
+  assert.match(rollbackCapture, /if \[ "\$deployment_count" = "0" \]/);
+  assert.match(rollbackCapture, /jq -er '[\s\S]*?\.version_id[\s\S]*?select\(type == "string" and length > 0\)/);
+  assert.match(rollbackCapture, /active hosted AI rollback version could not be resolved/);
+
+  const protectedMain = workflow.slice(releaseBase, deploy);
+  assert.match(protectedMain, /built_from_sha="\$\(git rev-parse HEAD\)"/);
+  assert.equal((protectedMain.match(/git ls-remote origin refs\/heads\/main/g) || []).length, 2);
+  assert.match(protectedMain, /steps\.release-base\.outputs\.main_sha/);
+  assert.match(protectedMain, /Protected main advanced before the hosted AI Worker mutation/);
+});

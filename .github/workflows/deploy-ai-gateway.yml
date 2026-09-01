@@ -44,6 +44,22 @@ jobs:
           node --check workers/ai-gateway/src/input-policy.js &&
           node --check workers/ai-gateway/src/index.js &&
           node --test tests/browser/ai-gateway-contract.test.mjs tests/browser/ai-provider-contract.test.mjs
+      - name: Capture and verify the protected main release base
+        id: release-base
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          built_from_sha="$(git rev-parse HEAD)"
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ]; then
+            echo "::error::Protected main could not be resolved."
+            exit 1
+          fi
+          if [ "$built_from_sha" != "$current_main_sha" ]; then
+            echo "::error::Main changed while the hosted AI release was being verified."
+            exit 1
+          fi
+          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
       - name: Capture the previous Worker version
         id: previous
         env:
@@ -51,9 +67,40 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/ai-gateway/wrangler.jsonc --json 2>/dev/null || printf '[]')"
-          version_id="$(jq -r '.[0].versions[0].version_id // .[0].id // empty' <<<"$deployments" 2>/dev/null || true)"
+          deployments="$(npx --yes wrangler@4.125.0 deployments list --config workers/ai-gateway/wrangler.jsonc --json)"
+          if ! jq -e 'type == "array"' <<<"$deployments" > /dev/null; then
+            echo "::error::Cloudflare returned an invalid deployment list."
+            exit 1
+          fi
+          deployment_count="$(jq -r 'length' <<<"$deployments")"
+          if [ "$deployment_count" = "0" ]; then
+            echo "version_id=" >> "$GITHUB_OUTPUT"
+            echo "No prior hosted AI deployment was found; this is a first deployment." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if ! version_id="$(jq -er '
+            map(select(any(.versions[]?; (.percentage // 0) > 0)))
+            | sort_by([(.created_on // ""), (.id // "")])
+            | last
+            | .versions as $versions
+            | (($versions | map(select((.percentage // 0) == 100)) | first)
+              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
+            | .version_id
+            | select(type == "string" and length > 0)
+          ' <<<"$deployments")"; then
+            echo "::error::The active hosted AI rollback version could not be resolved."
+            exit 1
+          fi
           echo "version_id=$version_id" >> "$GITHUB_OUTPUT"
+          echo "Captured the active hosted AI Worker version for rollback." >> "$GITHUB_STEP_SUMMARY"
+      - name: Reconfirm protected main immediately before hosted AI mutation
+        shell: bash
+        run: |
+          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.release-base.outputs.main_sha }}" ]; then
+            echo "::error::Protected main advanced before the hosted AI Worker mutation."
+            exit 1
+          fi
       - name: Deploy the protected hosted AI Worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
