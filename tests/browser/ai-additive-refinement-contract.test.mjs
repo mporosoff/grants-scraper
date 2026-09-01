@@ -245,6 +245,10 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
     appSource.indexOf("function currentChatIds"),
     appSource.indexOf("function hasNofoDocument"),
   );
+  const resultsChat = appSource.slice(
+    appSource.indexOf("async function askResults"),
+    appSource.indexOf("function providerLabel"),
+  );
   const refineControl = appSource.slice(
     appSource.indexOf("function updateAiRefineControl"),
     appSource.indexOf("function setRefinementBusy"),
@@ -259,6 +263,8 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(refine, /retrieve: phrase => computeMatches\(phrase, "relevance"\)\.matches/);
   assert.doesNotMatch(refine, /expandedQuery|coverage: false|scheduleHybridSearch/);
   assert.match(refine, /researcher_profile: enabledProfileContext/);
+  assert.match(resultsChat, /researcher_profile: refinementProfileContext\(\)/);
+  assert.doesNotMatch(resultsChat, /researcher_profile: profileContext\(/);
   assert.match(refine, /const routeExamples = phrases\.slice\(0, 3\)/);
   assert.match(appSource, /function refinementProfileContext\(\)[\s\S]*?state\.profile\.active[\s\S]*?: null/);
   assert.match(profileSource, /profile\.include_cv_in_ai && profile\.cv_text/);

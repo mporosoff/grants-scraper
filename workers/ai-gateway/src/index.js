@@ -488,11 +488,12 @@ async function applyRateLimits(request, env) {
     throw new GatewayError("rate_limit_not_configured", 503);
   }
   const clientKey = String(request.headers.get("CF-Connecting-IP") || "unknown").slice(0, 80);
-  const [client, global] = await Promise.all([
-    env.AI_CLIENT_RATE_LIMITER.limit({ key: clientKey }),
-    env.AI_GLOBAL_RATE_LIMITER.limit({ key: "funding-finder-ai" }),
-  ]);
-  if (!client?.success || !global?.success) {
+  const client = await env.AI_CLIENT_RATE_LIMITER.limit({ key: clientKey });
+  if (!client?.success) {
+    throw new GatewayError("rate_limited", 429, { retryAfter: 60 });
+  }
+  const global = await env.AI_GLOBAL_RATE_LIMITER.limit({ key: "funding-finder-ai" });
+  if (!global?.success) {
     throw new GatewayError("rate_limited", 429, { retryAfter: 60 });
   }
 }

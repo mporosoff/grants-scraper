@@ -398,13 +398,21 @@ test("the public gateway allows only approved origins and fails closed on unavai
   assert.equal((await disallowed.json()).error.code, "origin_not_allowed");
 
   let providerCalled = false;
+  let globalLimiterCalls = 0;
   const limited = await handler(request("institution_question_translation"), environment({
     AI: { async run() { providerCalled = true; } },
     AI_CLIENT_RATE_LIMITER: { async limit() { return { success: false }; } },
+    AI_GLOBAL_RATE_LIMITER: {
+      async limit() {
+        globalLimiterCalls += 1;
+        return { success: true };
+      },
+    },
   }));
   assert.equal(limited.status, 429);
   assert.equal(limited.headers.get("Retry-After"), "60");
   assert.equal(providerCalled, false);
+  assert.equal(globalLimiterCalls, 0);
 
   const missingBinding = environment();
   delete missingBinding.AI_GLOBAL_RATE_LIMITER;
