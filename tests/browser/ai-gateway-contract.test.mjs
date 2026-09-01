@@ -68,6 +68,48 @@ function record(id = "ABC-123") {
   };
 }
 
+function productionRecord(id = "ABC-123") {
+  return {
+    id,
+    number: "NOFO-123",
+    title: "Catalysis research opportunity",
+    agency: "Example Agency",
+    source: "Grants.gov",
+    source_type: "federal",
+    status: "open",
+    deadline: "2027-04-18",
+    deadline_note: "Verify on the official source.",
+    deadlines: [],
+    deadline_source: "official source",
+    deadline_conflict: null,
+    actionability_status: "actionable",
+    award_floor: null,
+    award_ceiling: 500_000,
+    total_program_funding: null,
+    award_source: "official source",
+    award_conflicts: null,
+    eligibility: ["Higher Education Institutions"],
+    eligibility_note: "See the official notice.",
+    disciplines: ["Chemical engineering"],
+    topics: ["Catalysis"],
+    funding_instruments: ["Grant"],
+    limited_submission_signal: false,
+    preliminary_stage_signal: null,
+    cost_share_required: false,
+    status_verification_required: false,
+    primary_foa_identified: true,
+    official_source_url: "https://example.gov/nofo-123",
+    document_evidence: null,
+    description: "Public catalog evidence about catalysis.",
+    workflow_tier: "strong",
+    ai_identified: false,
+    ai_discovery_phrases: [],
+    potential_evidence: null,
+    deterministic_strong_score: 91,
+    strong_match_evidence: null,
+  };
+}
+
 function sampleUser(operation) {
   const samples = {
     search_plan: {
@@ -267,6 +309,25 @@ test("all six browser payload families satisfy the exact Worker input policy", (
     assert.ok(user.length < MAX_USER_CHARS);
     assert.deepEqual(validateOperationUser(operation, user), sampleUser(operation));
   }
+});
+
+test("production-shaped records fit the record policy without relaxing nested object bounds", () => {
+  const fullRecord = productionRecord();
+  assert.equal(Object.keys(fullRecord).length, 37);
+  for (const operation of ["refinement_shortlist", "result_chat"]) {
+    const user = sampleUser(operation);
+    const key = operation === "refinement_shortlist" ? "candidate_opportunities" : "current_results";
+    user[key] = [fullRecord];
+    assert.deepEqual(validateOperationUser(operation, JSON.stringify(user)), user);
+  }
+
+  const nestedOverflow = productionRecord("nested-overflow");
+  nestedOverflow.deadline_conflict = Object.fromEntries(
+    Array.from({ length: 33 }, (_, index) => [`field_${index}`, index]),
+  );
+  const rejected = sampleUser("result_chat");
+  rejected.current_results = [nestedOverflow];
+  assert.equal(validateOperationUser("result_chat", JSON.stringify(rejected)), null);
 });
 
 test("the gateway owns prompts and routes institution translation to Gemma", async () => {

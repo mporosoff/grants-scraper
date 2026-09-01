@@ -93,24 +93,26 @@ function boundedStringList(value, maximumItems, maximumCharacters) {
     && value.every(item => boundedText(item, maximumCharacters));
 }
 
-function safeJsonValue(value, depth = 0) {
+function safeJsonValue(value, depth = 0, maximumTopLevelObjectKeys = 32) {
   if (value === null || typeof value === "boolean") return true;
   if (typeof value === "number") return Number.isFinite(value);
   if (typeof value === "string") return value.length <= 120_000;
   if (depth >= 5) return false;
   if (Array.isArray(value)) {
-    return value.length <= 24 && value.every(item => safeJsonValue(item, depth + 1));
+    return value.length <= 24
+      && value.every(item => safeJsonValue(item, depth + 1, maximumTopLevelObjectKeys));
   }
-  if (!plainObject(value) || Object.keys(value).length > 32) return false;
+  const maximumObjectKeys = depth === 0 ? maximumTopLevelObjectKeys : 32;
+  if (!plainObject(value) || Object.keys(value).length > maximumObjectKeys) return false;
   return Object.entries(value).every(([key, item]) => (
     /^[a-z][a-z0-9_]{0,63}$/i.test(key)
     && !["__proto__", "constructor", "prototype"].includes(key)
-    && safeJsonValue(item, depth + 1)
+    && safeJsonValue(item, depth + 1, maximumTopLevelObjectKeys)
   ));
 }
 
-function boundedObject(value, allowed, maximumCharacters, required = []) {
-  if (!hasOnlyKeys(value, allowed, required) || !safeJsonValue(value)) return false;
+function boundedObject(value, allowed, maximumCharacters, required = [], maximumKeys = 32) {
+  if (!hasOnlyKeys(value, allowed, required) || !safeJsonValue(value, 0, maximumKeys)) return false;
   return JSON.stringify(value).length <= maximumCharacters;
 }
 
@@ -131,7 +133,7 @@ function validFilters(value) {
 }
 
 function validRecord(value) {
-  return boundedObject(value, RECORD_KEYS, 9_000, ["id", "title"])
+  return boundedObject(value, RECORD_KEYS, 9_000, ["id", "title"], RECORD_KEYS.length)
     && boundedText(value.id, 180, { empty: false })
     && boundedText(value.title, 600, { empty: false });
 }
