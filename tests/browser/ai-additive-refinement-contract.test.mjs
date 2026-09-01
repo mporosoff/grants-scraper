@@ -160,12 +160,16 @@ test("additive merge preserves every ordinary tier and relative order while limi
   });
   assert.equal(selected.additions.length, 12);
   assert.deepEqual(ids(selected.additions), [
-    "new-17", "new-16", "new-15", "new-14", "new-13", "new-12",
-    "new-11", "new-10", "new-9", "new-8", "new-7", "new-6",
+    "new-0", "new-2", "new-3", "new-4", "new-5", "new-6",
+    "new-7", "new-8", "new-9", "new-10", "new-11", "new-12",
   ]);
+  assert.deepEqual(
+    Array.from(selected.additions, match => selected.assessments.get(match.id).score),
+    [100, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88],
+  );
 
   const combined = workflow.mergeAdditiveResults({ baseline, additions: selected.additions });
-  assert.deepEqual(ids(combined).slice(0, 2), ["new-17", "new-16"]);
+  assert.deepEqual(ids(combined).slice(0, 2), ["new-0", "new-2"]);
   assert.deepEqual(ids(combined).slice(-4), ["strong-a", "strong-b", "potential-a", "potential-b"]);
   assert.deepEqual(ids(combined).slice(-2), ["potential-a", "potential-b"]);
   assert.ok(baseline.ids.every(id => ids(combined).includes(id)));

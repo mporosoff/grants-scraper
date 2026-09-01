@@ -4545,7 +4545,7 @@
       : "Use key for this tab";
   }
 
-  function renderChat() {
+  function renderChat({ scrollToLatestAssistant = false } = {}) {
     const contextIds = currentChatIds();
     const documentChat = hasNofoDocument() && state.ai.mode === "uploaded-nofo";
     const canChat = state.searched && Boolean(contextIds.length || documentChat);
@@ -4600,8 +4600,9 @@
     $("chat-suggestions").innerHTML = (canChat && !documentChat ? suggestions : [])
       .map(suggestion => `<button type="button" data-chat-suggestion="${escapeAttribute(suggestion)}">${escapeHtml(suggestion)}</button>`)
       .join("");
-    $("chat-messages").innerHTML = state.ai.messages.map((message, messageIndex) =>
-      `<div class="message ${message.role}">
+    const messages = $("chat-messages");
+    messages.innerHTML = state.ai.messages.map((message, messageIndex) =>
+      `<div class="message ${message.role}" data-message-role="${escapeAttribute(message.role)}">
         <div class="message-content">${message.role === "assistant"
           ? CHAT_UI.renderRichText(message.text)
           : `<p>${escapeHtml(message.text)}</p>`}</div>
@@ -4614,7 +4615,17 @@
         ).join("")}</div>` : ""}
       </div>`
     ).join("");
-    $("chat-messages").scrollTop = $("chat-messages").scrollHeight;
+    if (scrollToLatestAssistant) {
+      requestAnimationFrame(() => {
+        const assistantMessages = messages.querySelectorAll('[data-message-role="assistant"]');
+        const latestAssistant = assistantMessages[assistantMessages.length - 1];
+        messages.scrollTop = latestAssistant
+          ? Math.max(0, latestAssistant.offsetTop - messages.offsetTop)
+          : messages.scrollHeight;
+      });
+    } else {
+      messages.scrollTop = messages.scrollHeight;
+    }
     $("clear-ai").classList.toggle("hidden", documentChat || !state.ai.active);
     $("clear-ai").textContent = "Return to the full search results";
     const narrowed = state.ai.active && (
@@ -4811,14 +4822,14 @@
           ? "Answer grounded in the bounded PDF extract. Verify decisive details in the full uploaded notice."
           : "Answer grounded in the uploaded PDF. Verify decisive details before applying.",
       );
-      renderChat();
+      renderChat({ scrollToLatestAssistant: true });
     } catch (error) {
       state.ai.messages.push({
         role: "assistant",
         text: `I could not complete that request: ${error?.message || String(error)}`,
       });
       setAiStatus(error?.message || String(error), true);
-      renderChat();
+      renderChat({ scrollToLatestAssistant: true });
     } finally {
       setAiBusy(false);
     }
@@ -4931,14 +4942,14 @@
       state.ai.model = currentModel();
       recordDeploymentUsage("chats");
       setAiStatus("Answer grounded in the current result context. Verify decisive details in the official notice.");
-      renderChat();
+      renderChat({ scrollToLatestAssistant: true });
     } catch (error) {
       state.ai.messages.push({
         role: "assistant",
         text: `I could not complete that request: ${error?.message || String(error)}`,
       });
       setAiStatus(error?.message || String(error), true);
-      renderChat();
+      renderChat({ scrollToLatestAssistant: true });
     } finally {
       setAiBusy(false);
     }

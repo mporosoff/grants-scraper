@@ -267,11 +267,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=chat-output-fixes-20260830"></script>',
+            '<script src="./assets/ai-provider.js?v=hosted-ai-20260831"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/result-workflow.js?v=chat-output-fixes-20260830"></script>',
+            '<script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>',
             explorer_html,
         )
         for asset in ("credentials.js", "chat-ui.js"):
@@ -317,7 +317,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=pdf-drop-order-20260830"></script>',
+            '<script src="./assets/app.js?v=ai-feedback-20260901"></script>',
             explorer_html,
         )
         self.assertIn(

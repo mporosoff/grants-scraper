@@ -279,6 +279,41 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
+test("explicit year language deterministically overrides an incorrect model translation", () => {
+  const current = { institution: "University of Rochester", agency: "all" };
+  const since = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "How many awards funded in catalysis since 2024?",
+  );
+  assert.equal(since.year_start, 2024);
+  assert.equal(since.year_end, "");
+
+  const onward = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "Show awards from 2024 onward",
+  );
+  assert.equal(onward.year_start, 2024);
+  assert.equal(onward.year_end, "");
+
+  const oneYear = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "" },
+    current,
+    "Show awards in 2024",
+  );
+  assert.equal(oneYear.year_start, 2024);
+  assert.equal(oneYear.year_end, 2024);
+
+  const range = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "", year_end: "" },
+    current,
+    "Show awards from 2022 through 2024",
+  );
+  assert.equal(range.year_start, 2022);
+  assert.equal(range.year_end, 2024);
+});
+
 test("snapshot URLs and replacement results have one committed owner", () => {
   const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
   assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
@@ -297,6 +332,8 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
   assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
+  assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
+  assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
 
   const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
   for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
@@ -402,6 +439,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*setBusy\(true\);[\s\S]*await resolveTypedInstitution\(\)/);
   assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
   assert.match(askQuestionSource, /refreshProvider\(\{ preferMain: false \}\)/);
+  assert.match(askQuestionSource, /sanitizeQuestionPlan\(plan, current, question\)/);
   assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*setBusy\(false\)/);
   assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);

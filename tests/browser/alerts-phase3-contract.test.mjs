@@ -792,7 +792,9 @@ test("alert deployment and privacy contracts preserve Phase 3 behavior through P
     readFile(new URL("evaluation/alerts_phase3.json", root), "utf8"),
   ]);
   assert.match(page, /Save this search as an email alert/);
-  assert.match(page, /Watch your overall funding search/);
+  assert.match(page, /<h3 id="profile-search-alert-heading">Save this search<\/h3>/);
+  assert.match(page, /Current results will not be emailed/);
+  assert.doesNotMatch(page, /Watch your overall funding search|Saved-search email alert/);
   assert.match(page, /How search alerts work/);
   assert.match(page, /data-help-section="help-alerts"/);
   assert.match(awards, /Email alerts for this program/);

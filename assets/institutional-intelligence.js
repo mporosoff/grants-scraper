@@ -1222,7 +1222,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({
               institution: current.institution,
               current_filters: {
@@ -1252,7 +1252,7 @@
       ];
       const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases, plan.topic);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
-      const next = core.sanitizeQuestionPlan(plan, current);
+      const next = core.sanitizeQuestionPlan(plan, current, question);
       const intent = core.sanitizeAnswerIntent(plan, question);
       applyFormState(next);
       state.selectedInstitution = {

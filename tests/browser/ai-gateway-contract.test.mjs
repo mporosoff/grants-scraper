@@ -106,6 +106,7 @@ test("hosted routing includes the preview-feedback override for structured NOFO 
   assert.match(PRODUCTION_PROMPTS.search_plan, /one or two distinctive scientific concepts/);
   assert.match(PRODUCTION_PROMPTS.refinement_shortlist, /Do not return an empty matches array merely because fit is imperfect/);
   assert.match(PRODUCTION_PROMPTS.notice_chat, /exact columns Item, Answer, and Source/);
+  assert.match(PRODUCTION_PROMPTS.institution_question_translation, /since 2024.*leave year_end empty/);
 });
 
 test("the gateway owns prompts and routes institution translation to Gemma", async () => {

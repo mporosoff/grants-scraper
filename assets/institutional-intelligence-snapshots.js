@@ -715,13 +715,17 @@
       });
       if (sequence !== state.sequence) return null;
       const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
-      commitSnapshotResult(staged, { historyMode, focus: focusResults, departureHistoryState });
+      commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
       const exact = snapshot.completeness === "complete";
       const sourceIssue = unavailableSourceSummary(snapshot.sources || []);
       setStatus((exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
         : `${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} are available within disclosed safety bounds; incomplete sources are labeled below.`) + sourceIssue);
-      if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
+      if (focusResults) requestAnimationFrame(() => {
+        const heading = $("ii-output-heading");
+        heading?.focus({ preventScroll: true });
+        heading?.scrollIntoView({ block: "start" });
+      });
       return { payload: state.pagePayload, aggregate: state.aggregate };
     } catch (error) {
       if (sequence !== state.sequence) return null;
@@ -1108,7 +1112,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency, program, topic, pi, program_officer, year_start, year_end, answer_intent, and narrative_needed. Use empty strings for absent filters. Do not answer the question, infer contacts, recommend collaborators, rank investigators, score fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES.",
+            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({ institution: current.institution, current_filters: currentFilters, question }),
           });
           if (!translated || typeof translated !== "object" || Array.isArray(translated)) throw new Error("invalid_translation");
@@ -1126,7 +1130,7 @@
       const investigator = core.explicitInvestigator(question, current.institution, plan.program, [...(state.selectedInstitution?.aliases || []), ...(state.selectedInstitution?.acronyms || [])], plan.topic);
       if (investigator && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = investigator;
       if (/\bBES\b/i.test(question) && !clean(plan.program)) plan.program = "BES";
-      const next = core.sanitizeQuestionPlan(plan, current);
+      const next = core.sanitizeQuestionPlan(plan, current, question);
       const intent = core.sanitizeAnswerIntent(plan, question);
       const details = [`Answer intent: ${intent}`];
       if (next.agency !== "all") details.push(`Agency: ${next.agency}`);

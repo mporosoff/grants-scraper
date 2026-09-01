@@ -100,7 +100,7 @@ test("workflow metadata keeps Strong/Potential tier separate from AI provenance"
 });
 
 test("AI candidates use the same pagination, save, calendar, chat-jump, and official-link paths", () => {
-  assert.match(searchPage, /assets\/result-workflow\.js\?v=chat-output-fixes-20260830/);
+  assert.match(searchPage, /assets\/result-workflow\.js\?v=ai-feedback-20260901/);
   assert.match(app, /candidateMatches: new Map\(\)/);
   assert.match(app, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(app, /Math\.ceil\(currentDisplayMatches\(\)\.length \/ PAGE_SIZE\)/);
