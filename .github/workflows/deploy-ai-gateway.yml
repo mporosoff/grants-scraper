@@ -41,6 +41,7 @@ jobs:
         run: >-
           node --check assets/ai-provider.js &&
           node --check assets/ai-prompts.mjs &&
+          node --check workers/ai-gateway/src/input-policy.js &&
           node --check workers/ai-gateway/src/index.js &&
           node --test tests/browser/ai-gateway-contract.test.mjs tests/browser/ai-provider-contract.test.mjs
       - name: Capture the previous Worker version

@@ -9,7 +9,7 @@ This benchmark compares OpenAI GPT-5.6 Luna with Cloudflare Workers AI Gemma 4 2
 3. **Chat with NOFO**
 4. **Ask about this institution**: question translation and bounded narrative synthesis
 
-Ordinary catalog search is not an AI operation and is not being retested. The existing evaluation export is optional background evidence only; no additional feedback exports are required for this benchmark.
+The existing evaluation export is optional background evidence only; no additional feedback exports are required for this benchmark.
 
 ## Safety and cost controls
 

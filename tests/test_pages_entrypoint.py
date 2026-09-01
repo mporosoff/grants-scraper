@@ -267,7 +267,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=hosted-ai-20260831"></script>',
+            '<script src="./assets/ai-provider.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -285,7 +285,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
+            '<script src="./assets/profile.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
@@ -317,11 +317,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=ai-feedback-20260901"></script>',
+            '<script src="./assets/app.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/site-help.js?v={style_version}"></script>',
+            '<script src="./assets/site-help.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

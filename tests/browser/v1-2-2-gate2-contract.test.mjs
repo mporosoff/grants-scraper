@@ -117,7 +117,7 @@ test("exports and user-connected AI contexts carry bounded workflow evidence", (
     "Potential evidence source field",
     "Potential evidence excerpt",
   ]) assert.match(app, new RegExp(`"${heading}"`));
-  assert.match(app, /compactResultRecord\(record, match\)/);
+  assert.match(app, /compactResultRecord\(record, match, 360,/);
   assert.match(app, /current_results:[\s\S]*?map\(evaluationResultMetadata\)/);
   assert.match(app, /ai_addition_results:[\s\S]*?map\(evaluationResultMetadata\)/);
   assert.match(app, /workflow_tier \\"strong\\" means a conservative local match/);

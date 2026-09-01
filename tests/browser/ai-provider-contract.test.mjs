@@ -485,6 +485,29 @@ test("missing keys and unsupported operations fail before any provider request",
   assert.equal(calls, 0);
 });
 
+test("browser adapters reject empty and oversized context before any hosted or personal provider request", async () => {
+  const provider = await loadProvider({
+    FUNDING_AI_GATEWAY: { endpoint: "https://funding-finder-ai.example/v1/structured" },
+  });
+  let calls = 0;
+  for (const [selectedProvider, key] of [["hosted", ""], ["openai", "test-key"]]) {
+    for (const user of ["", "x".repeat(provider.MAX_USER_CHARS + 1)]) {
+      await assert.rejects(
+        provider.structuredResult({
+          provider: selectedProvider,
+          key,
+          operation: "search_plan",
+          system: "Create a search plan.",
+          user,
+          fetchImpl: async () => { calls += 1; },
+        }),
+        error => error.category === "request_too_large",
+      );
+    }
+  }
+  assert.equal(calls, 0);
+});
+
 test("schema and citation validation reject untrusted extra fields and fabricated evidence IDs", async () => {
   const provider = await loadProvider();
   assert.throws(

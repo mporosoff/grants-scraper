@@ -5,6 +5,7 @@
   const ANTHROPIC_MODEL = "claude-sonnet-5";
   const HOSTED_PROVIDER = "hosted";
   const MAX_OUTPUT_TOKENS = 5000;
+  const MAX_USER_CHARS = 170_000;
   const REQUEST_TIMEOUT_MS = 60_000;
   const MAX_ATTEMPTS = 2;
 
@@ -172,6 +173,7 @@
     schema_validation: "The AI provider response did not match the required structure after one bounded retry.",
     malformed: "The AI provider returned malformed structured data after one bounded retry.",
     provider_unavailable: "The AI provider is temporarily unavailable. Your search and entered information were preserved; try again later.",
+    request_too_large: "This AI request contains too much context. Shorten the question or document, then try again.",
   });
 
   class ProviderStructuredError extends Error {
@@ -321,11 +323,14 @@
 
   function hostedFailure(envelope, status) {
     const code = String(envelope?.error?.code || "").toLowerCase();
-    if (status === 429 || /rate_limit/.test(code)) {
+    if (status === 429 || /rate_limit|budget_limit/.test(code)) {
       throw new ProviderStructuredError("quota_rate");
     }
     if (status === 408 || status === 504 || /timeout/.test(code)) {
       throw new ProviderStructuredError("timeout");
+    }
+    if (status === 413 || /request_too_large/.test(code)) {
+      throw new ProviderStructuredError("request_too_large");
     }
     if (status === 400 || /invalid|unsupported|schema/.test(code)) {
       throw new ProviderStructuredError("unsupported_contract");
@@ -514,6 +519,9 @@
     }
     if (typeof fetchImpl !== "function") throw new ProviderStructuredError("network_cors");
     if (!STRUCTURED_OPERATIONS[operation]) throw new ProviderStructuredError("unsupported_contract");
+    if (typeof user !== "string" || !user.trim() || user.length > MAX_USER_CHARS) {
+      throw new ProviderStructuredError("request_too_large");
+    }
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
       try {
@@ -553,6 +561,7 @@
   globalThis.FUNDING_AI = Object.freeze({
     ANTHROPIC_MODEL,
     HOSTED_PROVIDER,
+    MAX_USER_CHARS,
     OPENAI_MODEL,
     ProviderStructuredError,
     STRUCTURED_OPERATIONS,

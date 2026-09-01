@@ -8,7 +8,25 @@
     "binding": "AI"
   },
   "vars": {
-    "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io"
+    "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io",
+    "AI_GATEWAY_ENABLED": "true",
+    "AI_DAILY_CLIENT_UNIT_BUDGET": "2500000",
+    "AI_DAILY_GLOBAL_UNIT_BUDGET": "50000000",
+    "AI_BUDGET_RETRY_AFTER_SECONDS": "3600"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AI_BUDGET_COORDINATOR",
+        "class_name": "AiBudgetCoordinator"
+      }
+    ]
+  },
+  "exports": {
+    "AiBudgetCoordinator": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
   },
   "ratelimits": [
     {

@@ -104,9 +104,17 @@ Hosted AI use is explicit and bounded:
 - local search selects at most 32 candidates;
 - one call reranks those candidates into at most 12 matches; and
 - result-chat calls receive at most the top 10 active ordinary or AI-refined
-  results plus recent conversation; and
-- uploaded-notice chat calls receive a page-marked extract capped at 145,000
-  characters, optional matched public catalog metadata, and recent conversation.
+  results plus at most 12,000 characters of recent conversation; and
+- uploaded-notice chat calls receive a page-marked extract capped at 120,000
+  characters, optional matched public catalog metadata, and at most 12,000
+  characters of recent conversation.
+
+The hosted AI gateway rejects fields outside each operation's bounded input
+contract. In addition to per-minute client and global request limits, an atomic
+daily coordinator applies weighted per-client and global ceilings before any
+provider call. The gateway fails closed when the enable switch, limit
+configuration, rate-limit bindings, daily coordinator, or required provider
+bindings are unavailable.
 
 Neither hosted Potential matching nor hosted AI sends the full catalog.
 Blank-query browsing, local Strong matching, and filters have no model cost.
@@ -304,7 +312,6 @@ Without an account and notification service layer, the application does not prov
 - saved searches or watchlists across devices;
 - self-service personalized email subscriptions in the public application;
 - institutional AI credential management;
-- central usage budgets;
 - shared evaluation data;
 - automatic central telemetry or anonymous review submission;
 - private access control; or

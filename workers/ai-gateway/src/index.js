@@ -1,5 +1,6 @@
 import "../../../assets/ai-provider.js";
 import { PRODUCTION_PROMPTS } from "../../../assets/ai-prompts.mjs";
+import { validateOperationUser } from "./input-policy.js";
 
 const {
   STRUCTURED_OPERATIONS,
@@ -23,22 +24,24 @@ export const OPERATION_ROUTES = Object.freeze({
   institution_narrative: Object.freeze(["luna"]),
 });
 
-const MAX_BODY_BYTES = 300_000;
-const MAX_USER_CHARS = 180_000;
+const MAX_BODY_BYTES = 750_000;
 const MAX_OUTPUT_TOKENS = 5_000;
 const DEFAULT_TIMEOUT_MS = 30_000;
 const GEMMA_TIMEOUT_MS = 15_000;
 const NOTICE_GEMMA_TIMEOUT_MS = 8_000;
 const MAX_ATTEMPTS = 2;
+const BUDGET_COORDINATOR_NAME = "funding-finder-ai-daily-budget";
+const MODEL_COST_WEIGHTS = Object.freeze({ luna: 4, gemma: 1 });
 const LOCAL_ORIGIN_PATTERN = /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d{1,5})?$/;
 
 class GatewayError extends Error {
-  constructor(code, status = 400, { retryable = false } = {}) {
+  constructor(code, status = 400, { retryable = false, retryAfter = null } = {}) {
     super(code);
     this.name = "GatewayError";
     this.code = code;
     this.status = status;
     this.retryable = retryable;
+    this.retryAfter = retryAfter;
   }
 }
 
@@ -62,16 +65,17 @@ function responseHeaders(origin = "") {
       "Access-Control-Allow-Origin": origin,
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Expose-Headers": "Retry-After",
       "Access-Control-Max-Age": "600",
       "Vary": "Origin",
     } : {}),
   };
 }
 
-function jsonResponse(value, status = 200, origin = "") {
+function jsonResponse(value, status = 200, origin = "", extraHeaders = {}) {
   return new Response(JSON.stringify(value), {
     status,
-    headers: responseHeaders(origin),
+    headers: { ...responseHeaders(origin), ...extraHeaders },
   });
 }
 
@@ -81,6 +85,7 @@ function errorResponse(error, origin = "") {
     { error: { code: known ? error.code : "provider_unavailable" } },
     known ? error.status : 502,
     origin,
+    known && error.retryAfter ? { "Retry-After": String(error.retryAfter) } : {},
   );
 }
 
@@ -90,6 +95,34 @@ function exactKeys(value, allowed) {
   const actual = Object.keys(value).sort();
   return actual.length === expected.length
     && actual.every((key, index) => key === expected[index]);
+}
+
+function boundedInteger(value, { minimum = 1, maximum = Number.MAX_SAFE_INTEGER } = {}) {
+  const parsed = Number(value);
+  return Number.isSafeInteger(parsed) && parsed >= minimum && parsed <= maximum ? parsed : null;
+}
+
+function serviceConfig(env) {
+  const config = {
+    enabled: String(env?.AI_GATEWAY_ENABLED || "").toLowerCase() === "true",
+    clientDailyBudget: boundedInteger(env?.AI_DAILY_CLIENT_UNIT_BUDGET, { maximum: 1_000_000_000 }),
+    globalDailyBudget: boundedInteger(env?.AI_DAILY_GLOBAL_UNIT_BUDGET, { maximum: 10_000_000_000 }),
+    retryAfter: boundedInteger(env?.AI_BUDGET_RETRY_AFTER_SECONDS, { maximum: 86_400 }),
+  };
+  config.valid = Boolean(
+    config.enabled
+    && config.clientDailyBudget
+    && config.globalDailyBudget
+    && config.clientDailyBudget <= config.globalDailyBudget
+    && config.retryAfter
+    && String(env?.OPENAI_API_KEY || "").trim()
+    && env?.AI?.run
+    && env?.AI_CLIENT_RATE_LIMITER?.limit
+    && env?.AI_GLOBAL_RATE_LIMITER?.limit
+    && env?.AI_BUDGET_COORDINATOR?.idFromName
+    && env?.AI_BUDGET_COORDINATOR?.get,
+  );
+  return config;
 }
 
 function cleanRequest(value) {
@@ -103,10 +136,150 @@ function cleanRequest(value) {
       || !Object.prototype.hasOwnProperty.call(PRODUCTION_PROMPTS, operation)) {
     throw new GatewayError("unsupported_operation");
   }
-  if (!user.trim() || user.length > MAX_USER_CHARS) {
-    throw new GatewayError("invalid_user");
-  }
+  if (!validateOperationUser(operation, user)) throw new GatewayError("invalid_operation_input");
   return { operation, user };
+}
+
+function dayUtc(timestamp = Date.now()) {
+  return new Date(timestamp).toISOString().slice(0, 10);
+}
+
+function emptyBudgetState(day) {
+  return { day, global_units: 0, clients: {} };
+}
+
+function internalJson(status, payload) {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: { "Cache-Control": "no-store", "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+
+export class AiBudgetCoordinator {
+  constructor(ctx, { now = Date.now } = {}) {
+    this.ctx = ctx;
+    this.now = now;
+  }
+
+  async fetch(request) {
+    if (request.method !== "POST") return internalJson(405, { error: "method_not_allowed" });
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return internalJson(400, { error: "invalid_json" });
+    }
+    if (!exactKeys(body, body?.action === "status"
+      ? ["action", "budgets"]
+      : ["action", "budgets", "client_hash", "units"])) {
+      return internalJson(400, { error: "invalid_request" });
+    }
+    const budgets = {
+      client: boundedInteger(body?.budgets?.client, { maximum: 1_000_000_000 }),
+      global: boundedInteger(body?.budgets?.global, { maximum: 10_000_000_000 }),
+    };
+    if (!exactKeys(body?.budgets, ["client", "global"])
+        || !budgets.client || !budgets.global || budgets.client > budgets.global) {
+      return internalJson(503, { error: "invalid_budget" });
+    }
+    const today = dayUtc(this.now());
+    let state = await this.ctx.storage.get("daily");
+    if (!state || state.day !== today) state = emptyBudgetState(today);
+    if (body.action === "status") {
+      return internalJson(200, {
+        budget_state: state.global_units >= budgets.global ? "exhausted" : "available",
+        global_units: Math.min(state.global_units, budgets.global),
+      });
+    }
+    const units = boundedInteger(body.units, { maximum: budgets.global });
+    const clientHash = typeof body.client_hash === "string" && /^[a-f0-9]{64}$/.test(body.client_hash)
+      ? body.client_hash
+      : "";
+    if (body.action !== "consume" || !units || !clientHash) {
+      return internalJson(400, { error: "invalid_consumption" });
+    }
+    const clientUnits = boundedInteger(state.clients?.[clientHash], { minimum: 0 }) ?? 0;
+    if (state.global_units + units > budgets.global || clientUnits + units > budgets.client) {
+      return internalJson(429, { error: "budget_exhausted" });
+    }
+    state.global_units += units;
+    state.clients[clientHash] = clientUnits + units;
+    await this.ctx.storage.put("daily", state);
+    return internalJson(200, {
+      consumed: true,
+      budget_state: state.global_units >= budgets.global ? "exhausted" : "available",
+    });
+  }
+}
+
+async function sha256Hex(value) {
+  const digest = new Uint8Array(await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(String(value || "unknown-client")),
+  ));
+  return [...digest].map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+export function estimateRequestUnits(operation, user) {
+  const approximateInputTokens = Math.max(1, Math.ceil(new TextEncoder().encode(user).byteLength / 4));
+  const routeWeight = (OPERATION_ROUTES[operation] || [])
+    .reduce((total, model) => total + (MODEL_COST_WEIGHTS[model] || 1), 0);
+  return (approximateInputTokens + MAX_OUTPUT_TOKENS) * Math.max(1, routeWeight) * MAX_ATTEMPTS;
+}
+
+function budgetPayload(config, values) {
+  return {
+    ...values,
+    budgets: {
+      client: config.clientDailyBudget,
+      global: config.globalDailyBudget,
+    },
+  };
+}
+
+async function budgetCall(env, payload) {
+  const id = env.AI_BUDGET_COORDINATOR.idFromName(BUDGET_COORDINATOR_NAME);
+  const stub = env.AI_BUDGET_COORDINATOR.get(id);
+  const response = await stub.fetch("https://budget.internal/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  let body = {};
+  try {
+    body = await response.json();
+  } catch {
+    body = {};
+  }
+  return { ok: response.ok, status: response.status, body };
+}
+
+async function applyDailyBudget(request, clean, env, config) {
+  const clientHash = await sha256Hex(request.headers.get("CF-Connecting-IP") || "unknown-client");
+  let result;
+  try {
+    result = await budgetCall(env, budgetPayload(config, {
+      action: "consume",
+      client_hash: clientHash,
+      units: estimateRequestUnits(clean.operation, clean.user),
+    }));
+  } catch {
+    throw new GatewayError("budget_not_configured", 503);
+  }
+  if (!result.ok) {
+    if (result.status === 429) {
+      throw new GatewayError("budget_limited", 429, { retryAfter: config.retryAfter });
+    }
+    throw new GatewayError("budget_not_configured", 503);
+  }
+}
+
+async function budgetStatus(env, config) {
+  try {
+    return await budgetCall(env, budgetPayload(config, { action: "status" }));
+  } catch {
+    return { ok: false, body: {} };
+  }
 }
 
 async function jsonBounded(response) {
@@ -283,7 +456,9 @@ async function applyRateLimits(request, env) {
     env.AI_CLIENT_RATE_LIMITER.limit({ key: clientKey }),
     env.AI_GLOBAL_RATE_LIMITER.limit({ key: "funding-finder-ai" }),
   ]);
-  if (!client?.success || !global?.success) throw new GatewayError("rate_limited", 429);
+  if (!client?.success || !global?.success) {
+    throw new GatewayError("rate_limited", 429, { retryAfter: 60 });
+  }
 }
 
 export function createHandler() {
@@ -291,6 +466,7 @@ export function createHandler() {
     const url = new URL(request.url);
     const requestOrigin = request.headers.get("Origin") || "";
     const origin = allowedOrigin(requestOrigin, env);
+    const config = serviceConfig(env);
 
     if (request.method === "OPTIONS") {
       if (!origin) return errorResponse(new GatewayError("origin_not_allowed", 403));
@@ -298,11 +474,15 @@ export function createHandler() {
     }
 
     if (url.pathname === "/health" && request.method === "GET") {
+      const daily = config.valid
+        ? await budgetStatus(env, config)
+        : { ok: false, body: {} };
       return jsonResponse({
-        service: "funding-finder-ai",
+        service: config.valid && daily.ok ? "funding-finder-ai" : "unavailable",
         operations: Object.keys(OPERATION_ROUTES),
         openai_configured: Boolean(String(env.OPENAI_API_KEY || "").trim()),
         workers_ai_configured: Boolean(env.AI?.run),
+        budget_state: daily.ok ? daily.body.budget_state : "unavailable",
       }, 200, origin);
     }
 
@@ -310,6 +490,11 @@ export function createHandler() {
       return errorResponse(new GatewayError("not_found", 404), origin);
     }
     if (!origin) return errorResponse(new GatewayError("origin_not_allowed", 403));
+    if (!config.enabled) return errorResponse(new GatewayError("service_disabled", 503), origin);
+    if (!config.valid) return errorResponse(new GatewayError("service_unconfigured", 503), origin);
+    if (!String(request.headers.get("Content-Type") || "").toLowerCase().startsWith("application/json")) {
+      return errorResponse(new GatewayError("json_required", 415), origin);
+    }
 
     const contentLength = Number(request.headers.get("Content-Length") || 0);
     if (contentLength > MAX_BODY_BYTES) {
@@ -329,6 +514,7 @@ export function createHandler() {
       }
       const clean = cleanRequest(body);
       await applyRateLimits(request, env);
+      await applyDailyBudget(request, clean, env, config);
       return jsonResponse(await runRouted(clean, env), 200, origin);
     } catch (error) {
       return errorResponse(error, origin);
