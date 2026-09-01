@@ -222,6 +222,7 @@ async function run() {
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",
+    "data/opportunity_team_index.js",
     "data/opportunity_teams.js",
     "match_explorer.html",
     "team_match.html",
@@ -240,7 +241,7 @@ async function run() {
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team projection",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team index and projection",
   };
   const releaseBytes = jsonBytes(release);
 

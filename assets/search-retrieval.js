@@ -89,7 +89,7 @@
     const closeDate = String(record.close_date || "").trim();
     if (closeDate) {
       if (!/^\d{4}-\d{2}-\d{2}$/.test(closeDate)) return false;
-      if (closeDate < today && !record.rolling) return false;
+      if (closeDate < today) return false;
     }
     const instant = runtimeDate(now);
     return !staleUndatedOpportunity(record, instant?.getTime());

@@ -288,6 +288,7 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
+| `data/opportunity_team_index.js` | Tiny eager index of reviewed team-ready opportunity scopes; contains no faculty or role graph |
 | `data/opportunity_teams.js` | Compact generated faculty directory and ten-scope role/team projection |
 | `config/opportunity_team_model.json` | Canonical source-traceable faculty and opportunity-role model |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |

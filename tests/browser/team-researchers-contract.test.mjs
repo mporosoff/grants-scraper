@@ -147,8 +147,23 @@ test("shows an accessible progress state while adding a researcher", () => {
   assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
   assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
   assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
-  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
+  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?selected\.push\(member\)[\s\S]*?scheduleTeamRefresh\(member\)/);
   assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+});
+
+test("directory selection paints, highlights, focuses, and announces before matching", () => {
+  assert.match(teamPage, /function scheduleTeamRefresh\(member\)/);
+  assert.match(teamPage, /recentlyAddedMember = member/);
+  assert.match(teamPage, /renderSelectedResearcherCards\(\)/);
+  assert.match(teamPage, /\$\("view"\)\.setAttribute\("aria-busy", "true"\)/);
+  assert.match(teamPage, /Updating opportunities for /);
+  assert.match(teamPage, /selectedButton\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(teamPage, /className = "pi-entry" \+ \(member === recentlyAddedMember \? " just-added" : ""\)/);
+  const chooseStart = teamPage.indexOf("  function chooseFaculty(facultyId) {");
+  const chooseEnd = teamPage.indexOf("  function renderExternalButtons() {", chooseStart);
+  const chooseSource = teamPage.slice(chooseStart, chooseEnd);
+  assert.ok(chooseSource.indexOf("renderExternalStatus") < chooseSource.indexOf("scheduleTeamRefresh(key)"));
+  assert.doesNotMatch(chooseSource, /\n\s*refresh\(\);/);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {
@@ -157,6 +172,10 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
   assert.doesNotMatch(teamPage, /window\.scrollTo\(0, 0\)/);
   assert.match(teamPage, /TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch"/);
   assert.match(teamPage, /window\.addEventListener\("pagehide", saveTeamHistory\)/);
+  assert.match(teamPage, /selectedIdentities:/);
+  assert.match(teamPage, /kind: "directory"/);
+  assert.match(teamPage, /function teamHistoryNeedsDirectory\(\)/);
+  assert.match(teamPage, /if \(teamHistoryNeedsDirectory\(\)\) \{[\s\S]*?await ensureTeamDirectory\(\);[\s\S]*?restoreTeamHistory\(\)/);
   assert.match(teamPage, /restoreTeamHistory\(\)/);
   assert.match(teamPage, /finishHistoryRestore\(\)/);
   assert.doesNotMatch(teamPage, /id="meta-line"/);

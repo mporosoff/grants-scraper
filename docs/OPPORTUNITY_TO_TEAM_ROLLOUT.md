@@ -32,12 +32,16 @@ later source-evidence audit. Pool assignment describes the retained,
 source-traceable capability model after that audit, so the two classifications
 are intentionally reported separately rather than treated as the same partition.
 
-The compact browser projection is `data/opportunity_teams.js`. Its immutable
-generation identifier is the SHA-256 of the canonical model payload before the
-identifier is added. Funding Finder and Team Match declare that same identity
-in their HTML markers and all changed runtime/cache references. Runtime
-validation rejects a mismatched projection. The search release manifest hashes
-the projection, both pages, and every changed runtime file.
+The compact browser projection is `data/opportunity_teams.js` and remains lazy.
+The eager `data/opportunity_team_index.js` contains only the ten reviewed scope
+identifiers, their parent identifiers, and record types; it contains no faculty,
+role, or explanation graph. Both assets share an immutable generation identifier:
+the SHA-256 of the canonical model payload before the identifier is added.
+Funding Finder and Team Match declare that identity in their HTML markers and
+all changed runtime/cache references. Runtime validation rejects a mismatched
+index or projection. The search release manifest hashes both generated assets,
+both pages, and every changed runtime file, and Pages verification checks the
+published bytes against those hashes.
 
 The controlled workbook source hash is
 `4cc24fad355c5716a462b93e1f60d0c7d55d9368d7cfede330ff41daa36af130`.
@@ -74,8 +78,10 @@ Generated membership never overrides the live catalog. The reverse-team panel
 uses the same browser currentness predicate as ordinary retrieval and Team
 Match, evaluated against one clock captured when the panel opens. A record that
 has expired, been archived, become stale-undated, or moved to an ineligible
-status is rejected even if the generated model still contains it. Rolling and
-forecasted records keep the existing product treatment.
+status is rejected even if the generated model still contains it. An explicit
+past close date is authoritative even when a record is also labeled rolling;
+rolling applies only when no explicit deadline exists. Forecasted records keep
+the existing product treatment.
 
 Publication-eligible child topics are rechecked against the current lazy child
 catalog. A generated child that is not in that eligible projection is rejected.
@@ -84,11 +90,15 @@ or more calibrated branches presents a scope chooser instead of a team.
 
 ## User experience
 
-Funding Finder adds one lazy “Build a team” action to result cards. Only one
-team panel may be open. A result rerender closes the owned panel and clears its
-trigger state, so detached nodes cannot block a later activation. Close and
-Escape restore focus when the trigger remains connected. A team-data failure is
-isolated from search and other card actions.
+Funding Finder shows the lazy “Build a team” action only on cards whose exact
+scope, reviewed child/branch, or parent scope chooser exists in the generated
+availability index. The toolbar's separate “Build a team” toggle filters the
+current result set, exports, pagination, and chat context to those supported
+opportunities without loading the full graph. Only one team panel may be open.
+A result rerender closes the owned panel and clears its trigger state, so
+detached nodes cannot block a later activation. Close and Escape restore focus
+when the trigger remains connected. A team-data failure is isolated from search
+and other card actions.
 
 Team Match adds an accessible local combobox labeled “Search Hajim faculty at
 the University of Rochester.” Results show main, standby, or directory-only
@@ -96,7 +106,10 @@ status. Directory-only records cannot be admitted without better evidence.
 The separate “Add a researcher manually” path preserves saved researchers,
 ORCID import, the four-person limit, and device-local storage. A Funding Finder
 proposal can be carried into Team Match through public faculty identifiers; no
-private research text is put in the URL.
+private research text is put in the URL. Directory selections paint a visible
+highlight, move focus to the selected team chip, and announce the matching
+refresh before the heavier local matching pass. Saved directory members use
+stable public identifiers and load directory identities before restoration.
 
 ## AI boundary
 

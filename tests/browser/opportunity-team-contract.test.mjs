@@ -3,7 +3,8 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
-const [dataSource, teamSource, retrievalSource, panelSource, appSource, page, teamPage] = await Promise.all([
+const [indexSource, dataSource, teamSource, retrievalSource, panelSource, appSource, page, teamPage] = await Promise.all([
+  readFile(new URL("../../data/opportunity_team_index.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunity_teams.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/opportunity-team.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
@@ -14,7 +15,17 @@ const [dataSource, teamSource, retrievalSource, panelSource, appSource, page, te
 ]);
 
 function loadApi() {
-  const context = { globalThis: {} };
+  const context = {
+    globalThis: {},
+    document: {
+      querySelector(selector) {
+        return selector === 'meta[name="opportunity-team-generation"]'
+          ? { getAttribute: () => loadIndex().generation_id }
+          : null;
+      },
+    },
+  };
+  vm.runInNewContext(indexSource, context);
   vm.runInNewContext(retrievalSource, context);
   vm.runInNewContext(dataSource, context);
   vm.runInNewContext(teamSource, context);
@@ -22,6 +33,12 @@ function loadApi() {
     api: context.globalThis.OpportunityTeam,
     data: context.globalThis.OPPORTUNITY_TEAM_DATA,
   };
+}
+
+function loadIndex() {
+  const context = { globalThis: {} };
+  vm.runInNewContext(indexSource, context);
+  return context.globalThis.OPPORTUNITY_TEAM_INDEX;
 }
 
 function record(id, overrides = {}) {
@@ -125,7 +142,7 @@ test("runtime catalog state overrides a generated proposal at one immutable cloc
     record: record("358021", { close_date: "2020-01-01", rolling: true }),
     isBroad: false, now: new Date("2026-09-02T00:00:01Z"),
   });
-  assert.equal(rolling.ok, true);
+  assert.equal(rolling.reason, "not_current");
   const forecasted = engine.resolveScope({
     parentId: "358021", scopeId: "358021",
     record: record("358021", { status: "forecasted", close_date: "2026-12-31" }),
@@ -181,8 +198,13 @@ test("Funding Finder panel is lazy, rerender-safe, single-owner, and accessible"
   assert.match(page, /meta name="opportunity-team-generation" content="[a-f0-9]{64}"/);
   assert.match(page, /assets\/opportunity-team\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /assets\/opportunity-team-panel\.js\?v=[a-f0-9]{64}/);
+  assert.match(page, /id="filter-team-ready"[^>]+aria-pressed="false"/);
+  assert.match(page, /data\/opportunity_team_index\.js\?v=[a-f0-9]{64}/);
+  assert.match(appSource, /teamAvailable \? `<button class="source-action opportunity-team-trigger"/);
   assert.match(appSource, /data-opportunity-team="\$\{escapeAttribute\(id\)\}"/);
   assert.match(appSource, /data-opportunity-team-broad="\$\{isBroadOpportunity\(record\)\}"/);
+  assert.match(appSource, /state\.teamReadyOnly[\s\S]*?matches\.filter\(opportunityHasAvailableTeam\)/);
+  assert.match(appSource, /Team-building opportunities only/);
   assert.match(appSource, /document\.dispatchEvent\(new CustomEvent\("funding-finder:before-results-render"\)\)/);
   assert.match(panelSource, /var openPanel = null/);
   assert.match(panelSource, /function panelOwned\(current\)/);
@@ -196,9 +218,28 @@ test("Funding Finder panel is lazy, rerender-safe, single-owner, and accessible"
   assert.doesNotMatch([page, teamPage, teamSource, panelSource].join("\n"), /\.xlsx|config\/opportunity_team_model\.json/i);
 });
 
+test("the eager availability index is exact, bounded, and omits the full team graph", () => {
+  const index = loadIndex();
+  const { api, data } = loadApi();
+  assert.equal(index.generation_id, data.generation_id);
+  assert.deepEqual(
+    Array.from(index.scopes, scope => [scope.id, scope.parent_id, scope.record_type]),
+    Array.from(data.opportunities, scope => [scope.id, scope.parent_id, scope.record_type]),
+  );
+  const specific = data.opportunities.find(scope => scope.record_type === "specific_parent");
+  const branch = data.opportunities.find(scope => scope.record_type === "declared_branch");
+  assert.equal(api.hasAvailableScope({ parentId: specific.parent_id, scopeId: specific.id }), true);
+  assert.equal(api.hasAvailableScope({ parentId: branch.parent_id }), true);
+  assert.equal(api.hasAvailableScope({ parentId: "unsupported" }), false);
+  assert.doesNotMatch(indexSource, /faculty|why_team|why_person|missing_skills/);
+});
+
 test("a stale or stalled lazy projection is discarded and retryable", async () => {
   const removed = [];
-  const scope = { OPPORTUNITY_TEAM_DATA: { schema_version: 99 } };
+  const scope = {
+    OPPORTUNITY_TEAM_DATA: { schema_version: 99 },
+    OPPORTUNITY_TEAM_INDEX: loadIndex(),
+  };
   const staleScript = { remove() { removed.push("stale"); } };
   const document = {
     querySelectorAll() { return [staleScript]; },
@@ -217,6 +258,7 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
   const timers = [];
   const detached = [];
   const timeoutScope = {
+    OPPORTUNITY_TEAM_INDEX: loadIndex(),
     FUNDING_FINDER_APP: {
       boundedScripts: {
         sidecar: {

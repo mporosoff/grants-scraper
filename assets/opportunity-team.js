@@ -30,6 +30,42 @@
     return "data/opportunity_teams.js?v=" + generationId;
   }
 
+  function validateIndex(index, expectedGenerationId) {
+    if (!index || index.schema_version !== SCHEMA_VERSION ||
+        !/^[a-f0-9]{64}$/.test(index.generation_id || "") ||
+        (expectedGenerationId && index.generation_id !== expectedGenerationId) ||
+        !Array.isArray(index.scopes) || index.scopes.length !== 10) {
+      throw new Error("The opportunity-team availability index is incompatible.");
+    }
+    var identifiers = new Set();
+    index.scopes.forEach(function (scope) {
+      if (!scope || !scope.id || !scope.parent_id || identifiers.has(scope.id) ||
+          !["specific_parent", "publishable_child", "declared_branch"].includes(scope.record_type)) {
+        throw new Error("The opportunity-team availability index is invalid.");
+      }
+      identifiers.add(scope.id);
+    });
+    return index;
+  }
+
+  function availabilityIndex() {
+    return validateIndex(global.OPPORTUNITY_TEAM_INDEX, pageGenerationId());
+  }
+
+  function availableScopes(options) {
+    options = options || {};
+    var parentId = String(options.parentId || "");
+    var scopeId = String(options.scopeId || "");
+    return availabilityIndex().scopes.filter(function (scope) {
+      if (scopeId && scope.id !== scopeId) return false;
+      return !parentId || scope.parent_id === parentId;
+    });
+  }
+
+  function hasAvailableScope(options) {
+    return availableScopes(options).length > 0;
+  }
+
   function validateData(data, expectedGenerationId) {
     var source = data && data.source_roster_counts;
     var pools = data && data.pool_counts;
@@ -61,6 +97,20 @@
         throw new Error("The opportunity-team role model is invalid.");
       }
     });
+    var indexedScopes = validateIndex(
+      global.OPPORTUNITY_TEAM_INDEX,
+      expectedGenerationId || data.generation_id,
+    ).scopes;
+    var projectedScopes = data.opportunities.map(function (opportunity) {
+      return {
+        id: opportunity.id,
+        parent_id: opportunity.parent_id,
+        record_type: opportunity.record_type,
+      };
+    });
+    if (JSON.stringify(indexedScopes) !== JSON.stringify(projectedScopes)) {
+      throw new Error("The opportunity-team data and availability index do not match.");
+    }
     return data;
   }
 
@@ -338,6 +388,10 @@
     normalize: normalize,
     pageGenerationId: pageGenerationId,
     versionedAssetUrl: versionedAssetUrl,
+    validateIndex: validateIndex,
+    availabilityIndex: availabilityIndex,
+    availableScopes: availableScopes,
+    hasAvailableScope: hasAvailableScope,
     validateData: validateData,
     loadData: loadData,
     resetLoadForTest: resetLoadForTest,

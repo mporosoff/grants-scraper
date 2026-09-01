@@ -36,6 +36,7 @@
   const SAVED_API = globalThis.FUNDING_SAVED;
   const AWARD_LINKS_API = globalThis.FUNDING_AWARD_LINKS;
   const ALERTS_API = globalThis.FUNDING_ALERTS;
+  const OPPORTUNITY_TEAM_API = globalThis.OpportunityTeam;
   const CATALOG_LOADER = globalThis.FUNDING_CATALOG_LOADER;
   const CATALOG_METADATA = CATALOG_LOADER?.getMetadata?.() || null;
   const INITIAL_URL_PARAMS = new URLSearchParams(location.search);
@@ -144,6 +145,7 @@
     page: 1,
     query: "",
     sort: "deadline",
+    teamReadyOnly: false,
     ordinarySearchSignature: "",
     filters: Object.fromEntries(Object.keys(FACETS).map(name => [name, new Set()])),
     matches: [],
@@ -421,6 +423,7 @@
     invalidateRefinement();
     state.ready = false;
     state.searched = false;
+    state.teamReadyOnly = false;
     state.ordinarySearchSignature = "";
     state.matches = [];
     state.strongMatches = [];
@@ -1115,6 +1118,7 @@
     }
     pendingCatalogAction = null;
     state.searched = false;
+    state.teamReadyOnly = false;
     state.query = "";
     state.ordinarySearchSignature = "";
     state.profile.active = false;
@@ -1818,7 +1822,7 @@
     return launchHybridSearch(normalizedQuery, requestSignature, eligibleParentIds);
   }
 
-  function currentDisplayMatches() {
+  function currentWorkflowMatches() {
     const baseMatches = state.refinement.active
       ? state.refinement.combinedMatches
       : state.matches;
@@ -1835,6 +1839,27 @@
       ids,
       idForMatch: match => recordId(catalog.opportunities[match.index]),
     });
+  }
+
+  function opportunityHasAvailableTeam(match) {
+    const record = catalog?.opportunities?.[match?.index];
+    if (!record || !OPPORTUNITY_TEAM_API?.hasAvailableScope) return false;
+    const scopeId = opportunityTeamScopeId(match, record);
+    try {
+      return OPPORTUNITY_TEAM_API.hasAvailableScope({
+        parentId: recordId(record),
+        scopeId,
+      });
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function currentDisplayMatches() {
+    const matches = currentWorkflowMatches();
+    return state.teamReadyOnly
+      ? matches.filter(opportunityHasAvailableTeam)
+      : matches;
   }
 
   function compactResultCounts(matches) {
@@ -2947,6 +2972,7 @@
     const fundedAwardsHref = AWARD_LINKS_API?.fundedAwardsHref?.(record) || "";
     const programIdentity = AWARD_LINKS_API?.programIdentityForOpportunity?.(record) || null;
     const proposedTeamScope = opportunityTeamScopeId(match, record);
+    const teamAvailable = opportunityHasAvailableTeam(match);
 
     return `<article class="result-card${match.aiIdentified ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -3004,7 +3030,7 @@
         ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
         <button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Email alert</button>
         ${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Program email alert</button>` : ""}
-        <button class="source-action opportunity-team-trigger" type="button" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>
+        ${teamAvailable ? `<button class="source-action opportunity-team-trigger" type="button" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>` : ""}
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
@@ -3815,6 +3841,8 @@
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
       $("export-ics").disabled = true;
+      $("filter-team-ready").disabled = true;
+      $("filter-team-ready").setAttribute("aria-pressed", "false");
       $("open-results-chat").disabled = true;
       updateAiRefineControl();
       closeExpandedChat({ restoreFocus: false });
@@ -3823,8 +3851,20 @@
       return;
     }
 
-    const display = currentDisplayMatches();
-    $("result-tier-counts").textContent = compactResultCounts(display);
+    const workflowDisplay = currentWorkflowMatches();
+    const availableTeamCount = workflowDisplay.filter(opportunityHasAvailableTeam).length;
+    const display = state.teamReadyOnly
+      ? workflowDisplay.filter(opportunityHasAvailableTeam)
+      : workflowDisplay;
+    $("result-tier-counts").textContent = compactResultCounts(display) +
+      (state.teamReadyOnly ? " · Team-building opportunities only" : "");
+    $("filter-team-ready").disabled = !state.teamReadyOnly && !availableTeamCount;
+    $("filter-team-ready").setAttribute("aria-pressed", state.teamReadyOnly ? "true" : "false");
+    $("filter-team-ready").title = state.teamReadyOnly
+      ? "Show every matching opportunity again"
+      : availableTeamCount
+        ? `Show only the ${availableTeamCount} matching ${availableTeamCount === 1 ? "opportunity" : "opportunities"} with a reviewed team model`
+        : "No matching opportunity currently has a reviewed team model";
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);
@@ -3846,8 +3886,8 @@
       const potentialUnavailable = strongPotentialWorkflow && Boolean(state.hybrid.fallbackReason);
       const potentialCompleted = strongPotentialWorkflow && state.hybrid.active;
       $("results").innerHTML = `<div class="empty-state">
-        <h3>${hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
-        <p>${hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        <h3>${state.teamReadyOnly ? "No team-building opportunities in these results" : hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
+        <p>${state.teamReadyOnly ? "Select Build a team again to return to every matching opportunity." : hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
         ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;
@@ -3934,6 +3974,7 @@
     state.searched = false;
     state.ordinarySearchSignature = "";
     state.searchDiagnostics = null;
+    state.teamReadyOnly = false;
     state.profile.active = false;
     invalidateRefinement();
     clearAiState();
@@ -5064,6 +5105,11 @@
       );
     });
     $("export-csv").addEventListener("click", exportCsv);
+    $("filter-team-ready").addEventListener("click", () => {
+      state.teamReadyOnly = !state.teamReadyOnly;
+      state.page = 1;
+      renderResults();
+    });
     $("alert-new-matches")?.addEventListener("click", openSavedSearchAlert);
     $("clear-saved")?.addEventListener("click", clearSaved);
     document.addEventListener("click", event => {
