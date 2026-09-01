@@ -166,6 +166,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_js = (
             REPOSITORY_ROOT / "assets" / "app.js"
         ).read_text(encoding="utf-8")
+        opportunity_team_generation = json.loads(
+            (REPOSITORY_ROOT / "config" / "opportunity_team_model.json").read_text(
+                encoding="utf-8"
+            )
+        )["generation_id"]
         ai_provider_js = (
             REPOSITORY_ROOT / "assets" / "ai-provider.js"
         ).read_text(encoding="utf-8")
@@ -256,9 +261,8 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "pdf-drop-order-20260830"
         self.assertIn(
-            f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
+            f'<link rel="stylesheet" href="./assets/app.css?v={opportunity_team_generation}">',
             explorer_html,
         )
         for asset in ("nofo.js", "review.js", "saved.js"):
@@ -309,7 +313,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-retrieval.js?v={opportunity_team_generation}"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -317,7 +321,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=pdf-drop-order-20260830"></script>',
+            f'<script src="./assets/app.js?v={opportunity_team_generation}"></script>',
             explorer_html,
         )
         self.assertIn(

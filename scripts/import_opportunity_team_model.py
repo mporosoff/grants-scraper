@@ -344,6 +344,7 @@ def write_outputs(config: dict, config_out: Path, browser_out: Path) -> None:
     config_out.write_text(
         json.dumps(config, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
     projection = browser_projection(config)
     browser = (
@@ -372,7 +373,7 @@ def update_version_target(path: Path, generation_id: str) -> None:
         updated = re.sub(pattern, rf"\g<1>{generation_id}", updated)
     if "assets/opportunity-team.js?v=" not in updated:
         raise ValueError(f"Missing opportunity-team runtime reference in {path}")
-    path.write_text(updated, encoding="utf-8")
+    path.write_text(updated, encoding="utf-8", newline="\n")
 
 
 def main() -> None:

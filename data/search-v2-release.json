@@ -30,8 +30,8 @@
     "assets/opportunity-team.js": "ec2c7dae5bb01aaea799154293a81ac0099ec7c491e9fd613cf8c3bf25d32b65",
     "assets/opportunity-team-panel.js": "d870c561598822758305ccc36e8398258e96c81514f7140d27e99933cdfa5c0e",
     "data/opportunity_teams.js": "23e59e164786952ad2d17f7e45ac6f3a18ae17728586812bec7af6e7a1fa60e0",
-    "match_explorer.html": "64e1000d3f9adb073c96a521b02afc4cf1e4014269b8fd7f5e6368face559bf9",
-    "team_match.html": "69b7b6fe205fecc60421ae14643eaf384258236a50e3311f72163854556f6d4a",
+    "match_explorer.html": "75b4d52c881980f642dd394bdb5154591a151bb36cb4efda57961b14ad707ace",
+    "team_match.html": "1cbcecf715ff00536c27a656af574bd8bf15d21a9e360588038d0fa7dbb9d691",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },

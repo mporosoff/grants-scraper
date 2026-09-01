@@ -5,9 +5,10 @@ import test from "node:test";
 const root = new URL("../../", import.meta.url);
 
 test("supports one guided funding search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
-  const [prototype, script, profileScript, nofoScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
+  const [prototype, script, retrievalScript, profileScript, nofoScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("assets/app.js", root), "utf8"),
+    readFile(new URL("assets/search-retrieval.js", root), "utf8"),
     readFile(new URL("assets/profile.js", root), "utf8"),
     readFile(new URL("assets/nofo.js", root), "utf8"),
     readFile(new URL("assets/review.js", root), "utf8"),
@@ -121,7 +122,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /no AI call was made/);
   assert.match(script, /function recordIsCurrent/);
   assert.match(script, /function recordIsAvailable/);
-  assert.match(script, /record\.archive_date <= asOf/);
+  assert.match(script, /return RETRIEVAL_API\.recordIsArchived\(record, asOf\)/);
+  assert.match(script, /return RETRIEVAL_API\.recordIsCurrent\(record, asOf\)/);
+  assert.match(retrievalScript, /archiveDate <= today/);
+  assert.match(retrievalScript, /function recordIsCurrent/);
   assert.match(script, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(script, /status === "archived"/);
   assert.match(script, /Archived included/);

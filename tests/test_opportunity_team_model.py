@@ -37,6 +37,8 @@ class OpportunityTeamModelTests(unittest.TestCase):
             + ";\n"
         ).encode("utf-8")
         self.assertEqual(self.browser_bytes, expected)
+        for path in (CONFIG_PATH, ROOT / "match_explorer.html", ROOT / "team_match.html"):
+            self.assertNotIn(b"\r\n", path.read_bytes(), f"{path.name} must be platform-stable LF")
 
     def test_roster_and_pool_contracts_are_explicit(self):
         self.assertEqual(self.config["source_roster_counts"], {

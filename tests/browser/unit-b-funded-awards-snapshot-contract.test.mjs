@@ -347,11 +347,13 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=chat-output-fixes-20260830/);
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  assert.match(fundingFinder, /app\.css\?v=pdf-drop-order-20260830/);
-  assert.match(fundingFinder, /app\.js\?v=pdf-drop-order-20260830/);
+  const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
+  assert.ok(opportunityTeamGeneration);
+  assert.match(fundingFinder, new RegExp(`app\\.css\\?v=${opportunityTeamGeneration}`));
+  assert.match(fundingFinder, new RegExp(`app\\.js\\?v=${opportunityTeamGeneration}`));
   for (const asset of ["ai-provider.js", "result-workflow.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=chat-output-fixes-20260830`));
-  assert.match(teamMatch, /app\.css\?v=presentation-cleanup-20260830/);
+  assert.match(teamMatch, new RegExp(`app\\.css\\?v=${opportunityTeamGeneration}`));
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {
