@@ -16,9 +16,13 @@ export const BENCHMARK_MODELS = Object.freeze({
 const MAX_BODY_BYTES = 900_000;
 const MAX_SYSTEM_CHARS = 12_000;
 const MAX_USER_CHARS = 750_000;
-const MAX_OUTPUT_TOKENS = 5_000;
+export const BENCHMARK_MAX_OUTPUT_TOKENS = 5_000;
 const REQUEST_TIMEOUT_MS = 60_000;
-const MAX_ATTEMPTS = 2;
+export const BENCHMARK_MAX_ATTEMPTS = 2;
+export const BENCHMARK_RETRY_INSTRUCTIONS = Object.freeze({
+  luna: "\n\nReturn a smaller complete response that still matches the supplied schema. Shorten prose and include fewer optional list items.",
+  gemma: "\n\nReturn a smaller complete response that still matches the supplied JSON schema.",
+});
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,119}$/;
 
 class BenchmarkError extends Error {
@@ -145,9 +149,7 @@ function cloudflareResponseText(value) {
 
 async function requestLuna({ env, system, user, contract, attempt }) {
   if (!String(env.OPENAI_API_KEY || "").trim()) throw new BenchmarkError("openai_not_configured", 503);
-  const retryInstruction = attempt
-    ? "\n\nReturn a smaller complete response that still matches the supplied schema. Shorten prose and include fewer optional list items."
-    : "";
+  const retryInstruction = attempt ? BENCHMARK_RETRY_INSTRUCTIONS.luna : "";
   return withTimeout(async signal => {
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -171,7 +173,7 @@ async function requestLuna({ env, system, user, contract, attempt }) {
             strict: true,
           },
         },
-        max_output_tokens: MAX_OUTPUT_TOKENS,
+        max_output_tokens: BENCHMARK_MAX_OUTPUT_TOKENS,
         store: false,
       }),
     });
@@ -194,9 +196,7 @@ async function requestLuna({ env, system, user, contract, attempt }) {
 
 async function requestGemma({ env, system, user, contract, attempt }) {
   if (!env.AI?.run) throw new BenchmarkError("workers_ai_not_configured", 503);
-  const retryInstruction = attempt
-    ? "\n\nReturn a smaller complete response that still matches the supplied JSON schema."
-    : "";
+  const retryInstruction = attempt ? BENCHMARK_RETRY_INSTRUCTIONS.gemma : "";
   let data;
   try {
     data = await withTimeout(() => env.AI.run(BENCHMARK_MODELS.gemma, {
@@ -209,7 +209,7 @@ async function requestGemma({ env, system, user, contract, attempt }) {
         type: "json_schema",
         json_schema: schemaForProvider(contract.schema, "openai"),
       },
-      max_completion_tokens: MAX_OUTPUT_TOKENS,
+      max_completion_tokens: BENCHMARK_MAX_OUTPUT_TOKENS,
       store: false,
     }));
   } catch (error) {
@@ -223,7 +223,7 @@ async function runModel(clean, env) {
   const contract = STRUCTURED_OPERATIONS[clean.operation];
   const startedAt = Date.now();
   let lastError;
-  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
+  for (let attempt = 0; attempt < BENCHMARK_MAX_ATTEMPTS; attempt += 1) {
     try {
       const provider = clean.model === "luna" ? requestLuna : requestGemma;
       const result = await provider({ env, ...clean, contract, attempt });
@@ -245,7 +245,7 @@ async function runModel(clean, env) {
       };
     } catch (error) {
       lastError = error;
-      if (!(error instanceof BenchmarkError) || !error.retryable || attempt + 1 >= MAX_ATTEMPTS) break;
+      if (!(error instanceof BenchmarkError) || !error.retryable || attempt + 1 >= BENCHMARK_MAX_ATTEMPTS) break;
     }
   }
   throw lastError;

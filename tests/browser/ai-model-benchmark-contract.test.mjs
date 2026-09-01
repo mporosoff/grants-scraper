@@ -11,9 +11,15 @@ import {
 } from "../../evaluation/ai-model-benchmark-v1.mjs";
 import {
   BENCHMARK_MODELS,
+  BENCHMARK_MAX_ATTEMPTS,
+  BENCHMARK_MAX_OUTPUT_TOKENS,
   createHandler,
 } from "../../workers/ai-benchmark/src/index.js";
-import { benchmarkFailureRecord } from "../../scripts/evaluate_ai_models.mjs";
+import { validateOperationUser } from "../../workers/ai-gateway/src/input-policy.js";
+import {
+  benchmarkFailureRecord,
+  estimateBenchmarkCost,
+} from "../../scripts/evaluate_ai_models.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const token = "benchmark-token-for-contract-test";
@@ -88,6 +94,16 @@ test("benchmark covers the six production contracts behind the four priority fea
     [...new Set(BENCHMARK_CASES.map(item => item.feature))].sort(),
     ["Ask about this institution", "Chat with NOFO", "Chat with results", "Enhance with AI"],
   );
+});
+
+test("every benchmark fixture is accepted by its production gateway input contract", () => {
+  for (const testCase of BENCHMARK_CASES) {
+    assert.deepEqual(
+      validateOperationUser(testCase.operation, testCase.user),
+      JSON.parse(testCase.user),
+      `${testCase.id} must use the live browser payload shape`,
+    );
+  }
 });
 
 test("benchmark prompt copies remain pinned to the production call sites", async () => {
@@ -248,6 +264,30 @@ test("automated grading detects unsupported citations and deterministic translat
   });
   assert.equal(translationGrade.passed, false);
   assert.ok(translationGrade.problems.some(problem => problem.startsWith("field_mismatch:agency")));
+
+  const refinementCase = BENCHMARK_CASES.find(item => item.id === "enhance-candidate-assessment");
+  const ineligibleGrade = gradeBenchmarkOutput(refinementCase, {
+    matches: [{ id: "GRAD-FELLOWSHIP-02", verdict: "Possible fit" }],
+  });
+  assert.equal(ineligibleGrade.passed, false);
+  assert.ok(ineligibleGrade.problems.includes("ineligible_result_id:GRAD-FELLOWSHIP-02"));
+});
+
+test("bounded cost estimate includes the Worker's single retry ceiling", () => {
+  const estimate = estimateBenchmarkCost(
+    { models: ["luna"], runs: 1 },
+    [BENCHMARK_CASES[0]],
+  );
+  const luna = estimate.by_model.luna;
+  assert.equal(BENCHMARK_MAX_ATTEMPTS, 2);
+  assert.equal(estimate.calls, 1);
+  assert.equal(estimate.bounded_maximum_provider_calls, 2);
+  assert.equal(luna.bounded_maximum_provider_calls, 2);
+  assert.ok(luna.bounded_maximum_input_tokens > luna.estimated_input_tokens * 2);
+  assert.equal(
+    luna.bounded_maximum_output_tokens,
+    BENCHMARK_MAX_OUTPUT_TOKENS * BENCHMARK_MAX_ATTEMPTS,
+  );
 });
 
 test("one provider timeout is recorded as evidence without invalidating other benchmark jobs", () => {
@@ -256,7 +296,7 @@ test("one provider timeout is recorded as evidence without invalidating other be
     { testCase, run: 2, model: "gemma" },
     new Error("Worker HTTP 504: provider_timeout"),
   );
-  assert.equal(record.id, "ai-model-benchmark-v1:nofo-chat-conflicting-deadline:r2:gemma");
+  assert.equal(record.id, "ai-model-benchmark-v2:nofo-chat-conflicting-deadline:r2:gemma");
   assert.equal(record.model_id, "@cf/google/gemma-4-26b-a4b-it");
   assert.deepEqual(record.error, { code: "Worker HTTP 504: provider_timeout" });
   assert.deepEqual(record.automated_grade, { passed: false, problems: ["provider_call_failed"] });

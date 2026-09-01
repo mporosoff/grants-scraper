@@ -19,7 +19,7 @@ The existing evaluation export is optional background evidence only; no addition
 - Provider outputs are capped at 5,000 tokens and provider requests at 60 seconds.
 - Invalid structured output receives at most one retry.
 - Cloudflare applies a 60-request-per-minute account-side limit.
-- The runner defaults to estimate-only mode. It cannot make a provider call unless `--run` is supplied.
+- The runner defaults to estimate-only mode. It cannot make a provider call unless `--run` is supplied, and its bounded maximum includes the one permitted retry's input and output usage.
 - Results and review artifacts are written under the git-ignored `evaluation/ai-model-results/` directory.
 
 ## One-time setup

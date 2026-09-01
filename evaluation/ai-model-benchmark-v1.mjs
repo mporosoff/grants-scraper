@@ -2,7 +2,7 @@ import { PRODUCTION_PROMPTS } from "../assets/ai-prompts.mjs";
 
 export { PRODUCTION_PROMPTS };
 
-export const BENCHMARK_VERSION = "ai-model-benchmark-v1";
+export const BENCHMARK_VERSION = "ai-model-benchmark-v2";
 
 export const MODEL_CONFIG = Object.freeze({
   luna: Object.freeze({
@@ -29,13 +29,13 @@ export const BENCHMARK_CASES = Object.freeze([
     user: JSON.stringify({
       task: "Create independent alternative phrases for local retrieval from the current funding-opportunity catalog.",
       researcher_profile: {
-        disciplines: ["chemical engineering", "catalysis"],
-        topics: ["electrochemical carbon dioxide conversion", "single-atom catalysts"],
-        methods: ["operando spectroscopy", "density functional theory"],
-        goals: ["convert captured carbon dioxide into value-added chemicals"],
+        research_description: "I study electrochemical carbon dioxide conversion with single-atom catalysts to produce value-added chemicals.",
+        expertise_keywords: "chemical engineering; catalysis; operando spectroscopy; density functional theory",
+        applicant_context: "Faculty investigator at a public research university",
+        career_stage: "Tenured faculty",
       },
       current_keyword_search: "electrochemical CO2 conversion catalysts",
-      active_filters: { agencies: ["DOE", "NSF"], status: "open" },
+      active_filters: { agency: ["DOE", "NSF"], status: ["open"] },
       prompt_version: promptVersion,
     }),
     estimated_output_tokens: 300,
@@ -53,9 +53,10 @@ export const BENCHMARK_CASES = Object.freeze([
     user: JSON.stringify({
       task: "Assess which locally qualified new opportunities are most worth adding to the ordinary results.",
       researcher_profile: {
-        career_stage: "tenured faculty",
-        institution_type: "public research university",
-        topics: ["electrochemical carbon dioxide conversion", "catalysis"],
+        research_description: "I study electrochemical carbon dioxide conversion and heterogeneous catalysis.",
+        expertise_keywords: "electrocatalysis; carbon management; reaction mechanisms",
+        applicant_context: "Faculty investigator at a public research university",
+        career_stage: "Tenured faculty",
       },
       search_interpretation: "Catalytic and electrochemical routes for carbon management.",
       avoid_concepts: ["student-only fellowships"],
@@ -64,24 +65,27 @@ export const BENCHMARK_CASES = Object.freeze([
           id: "DOE-CATALYSIS-01",
           title: "Catalysis Science for Carbon Conversion",
           workflow_tier: "strong",
-          eligibility: "U.S. institutions of higher education may apply.",
-          close_date: "2027-02-12",
+          eligibility: ["U.S. institutions of higher education"],
+          eligibility_note: "U.S. institutions of higher education may apply.",
+          deadline: "2027-02-12",
           description: "Supports fundamental catalysis and mechanistic studies for carbon conversion.",
         },
         {
           id: "GRAD-FELLOWSHIP-02",
           title: "Graduate Student Energy Fellowship",
           workflow_tier: "strong",
-          eligibility: "Only currently enrolled graduate students may apply as individuals.",
-          close_date: "2027-01-10",
+          eligibility: ["Graduate students"],
+          eligibility_note: "Only currently enrolled graduate students may apply as individuals.",
+          deadline: "2027-01-10",
           description: "Includes electrochemical carbon dioxide conversion research.",
         },
         {
           id: "NSF-ELECTROCHEM-03",
           title: "Electrochemical Systems",
           workflow_tier: "strong",
-          eligibility: "Institutions of higher education may submit proposals.",
-          close_date: "not listed",
+          eligibility: ["Institutions of higher education"],
+          eligibility_note: "Institutions of higher education may submit proposals.",
+          deadline: "not listed",
           description: "Fundamental electrochemical reaction and transport science.",
         },
       ],
@@ -100,26 +104,40 @@ export const BENCHMARK_CASES = Object.freeze([
     title: "Compare supplied deadlines and state when one is not listed",
     system: PRODUCTION_PROMPTS.result_chat,
     user: JSON.stringify({
-      researcher_profile: { topics: ["battery recycling"] },
+      researcher_profile: {
+        research_description: "I study recovery and reuse of critical materials from lithium-ion batteries.",
+        expertise_keywords: "battery recycling; circular materials; resource recovery",
+      },
       result_context: "top 2 current search results",
       current_results: [
         {
           id: "DOE-BATT-100",
           title: "Battery Materials and Recycling",
           workflow_tier: "strong",
-          close_date: "2027-03-15",
-          evidence: [{ evidence_id: "DOE-BATT-100:deadline", text: "Applications are due March 15, 2027." }],
+          deadline: "2027-03-15",
+          document_evidence: {
+            facts: [{
+              evidence_id: "DOE-BATT-100:deadline",
+              type: "deadline",
+              label: "Application deadline",
+              display_value: "March 15, 2027",
+              citation: { quote: "Applications are due March 15, 2027." },
+            }],
+          },
         },
         {
           id: "NSF-BATT-200",
           title: "Sustainable Materials Systems",
           workflow_tier: "potential",
-          close_date: "not listed",
+          deadline: "not listed",
           potential_evidence: "Includes circular materials and resource recovery.",
-          evidence: [],
+          document_evidence: null,
         },
       ],
-      conversation: [{ role: "user", text: "Which has the later deadline?" }],
+      conversation: [{
+        role: "user",
+        text: "Compare the deadlines and keep only opportunities with a confirmed deadline.",
+      }],
       latest_question: "Compare the deadlines and keep only opportunities with a confirmed deadline.",
       prompt_version: promptVersion,
     }),
@@ -149,10 +167,14 @@ export const BENCHMARK_CASES = Object.freeze([
       },
       matched_catalog_record: {
         id: "SAMPLE-001",
-        close_date: "2027-04-01",
+        title: "Sample Funding Notice",
+        deadline: "2027-04-01",
         source: "catalog snapshot",
       },
-      conversation: [],
+      conversation: [{
+        role: "user",
+        text: "What is the deadline, who is eligible, and is cost sharing required?",
+      }],
       latest_question: "What is the deadline, who is eligible, and is cost sharing required?",
       prompt_version: "uploaded-nofo-chat-v1",
     }),
@@ -204,22 +226,45 @@ export const BENCHMARK_CASES = Object.freeze([
     user: JSON.stringify({
       question: "What research theme connects these catalysis awards?",
       institution: { canonical_name: "Example State University", id: "https://ror.org/example" },
-      filters: { agency: "DOE", program: "BES", topic: "catalysis" },
+      visible_filters: {
+        agency: "DOE",
+        program: "BES",
+        topic: "catalysis",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+      },
       answer_intent: "narrative",
-      evidence: [
+      public_award_evidence: [
         {
           evidence_id: "DOE:AWARD-1",
+          source: "DOE",
+          award_id: "AWARD-1",
           title: "Operando Studies of Single-Atom Catalysts",
+          program: "BES",
+          year: "2025",
+          investigators: ["A. Researcher"],
           abstract_excerpt: "Studies active sites and reaction mechanisms during carbon dioxide conversion.",
         },
         {
           evidence_id: "DOE:AWARD-2",
+          source: "DOE",
+          award_id: "AWARD-2",
           title: "Dynamic Interfaces in Electrocatalysis",
+          program: "BES",
+          year: "2024",
+          investigators: ["B. Scientist"],
           abstract_excerpt: "Examines evolving catalyst interfaces under reaction conditions.",
         },
         {
           evidence_id: "DOE:AWARD-3",
+          source: "DOE",
+          award_id: "AWARD-3",
           title: "Quantum Algorithms for Materials",
+          program: "BES",
+          year: "2023",
+          investigators: ["C. Investigator"],
           abstract_excerpt: "Develops algorithms for electronic structure calculations.",
         },
       ],
@@ -264,8 +309,7 @@ export function gradeBenchmarkOutput(testCase, output) {
     if (allowedResultIds.size && !allowedResultIds.has(id)) problems.push(`unknown_result_id:${id}`);
   }
   for (const id of checks.ineligible_result_ids || []) {
-    const assessment = (output.matches || []).find(item => item?.id === id);
-    if (assessment && assessment.verdict === "Strong fit") problems.push(`ineligible_strong_fit:${id}`);
+    if ((output.matches || []).some(item => item?.id === id)) problems.push(`ineligible_result_id:${id}`);
   }
   const allowedEvidenceIds = new Set(checks.allowed_evidence_ids || []);
   const evidenceIds = [

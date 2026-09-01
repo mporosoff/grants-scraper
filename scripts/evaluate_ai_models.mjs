@@ -11,6 +11,11 @@ import {
   MODEL_CONFIG,
   gradeBenchmarkOutput,
 } from "../evaluation/ai-model-benchmark-v1.mjs";
+import {
+  BENCHMARK_MAX_ATTEMPTS,
+  BENCHMARK_MAX_OUTPUT_TOKENS,
+  BENCHMARK_RETRY_INSTRUCTIONS,
+} from "../workers/ai-benchmark/src/index.js";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contracts = globalThis.FUNDING_AI.STRUCTURED_OPERATIONS;
@@ -91,7 +96,7 @@ function selectedCases(options) {
   return cases;
 }
 
-function estimate(options, cases) {
+export function estimateBenchmarkCost(options, cases) {
   const byModel = {};
   let calls = 0;
   for (const model of options.models) {
@@ -106,19 +111,33 @@ function estimate(options, cases) {
     }
     const estimatedCost = inputTokens / 1_000_000 * pricing.input_usd_per_million_tokens
       + outputTokens / 1_000_000 * pricing.output_usd_per_million_tokens;
-    const maximumOutputTokens = cases.length * options.runs * 5_000;
-    const boundedMaximumCost = inputTokens / 1_000_000 * pricing.input_usd_per_million_tokens
+    const retryInputTokens = Math.ceil(BENCHMARK_RETRY_INSTRUCTIONS[model].length / 4)
+      * cases.length
+      * options.runs
+      * (BENCHMARK_MAX_ATTEMPTS - 1);
+    const boundedMaximumInputTokens = inputTokens * BENCHMARK_MAX_ATTEMPTS + retryInputTokens;
+    const maximumOutputTokens = cases.length
+      * options.runs
+      * BENCHMARK_MAX_OUTPUT_TOKENS
+      * BENCHMARK_MAX_ATTEMPTS;
+    const boundedMaximumCost = boundedMaximumInputTokens / 1_000_000 * pricing.input_usd_per_million_tokens
       + maximumOutputTokens / 1_000_000 * pricing.output_usd_per_million_tokens;
     byModel[model] = {
       calls: cases.length * options.runs,
+      bounded_maximum_provider_calls: cases.length * options.runs * BENCHMARK_MAX_ATTEMPTS,
       estimated_input_tokens: inputTokens,
       estimated_output_tokens: outputTokens,
       estimated_usage_cost_usd_before_free_allowances: Number(estimatedCost.toFixed(6)),
+      bounded_maximum_input_tokens: boundedMaximumInputTokens,
       bounded_maximum_output_tokens: maximumOutputTokens,
       bounded_maximum_usage_cost_usd_before_free_allowances: Number(boundedMaximumCost.toFixed(6)),
     };
   }
-  return { calls, by_model: byModel };
+  return {
+    calls,
+    bounded_maximum_provider_calls: calls * BENCHMARK_MAX_ATTEMPTS,
+    by_model: byModel,
+  };
 }
 
 async function writeJsonAtomic(filePath, value) {
@@ -244,7 +263,7 @@ async function main() {
     return;
   }
   const cases = selectedCases(options);
-  const costEstimate = estimate(options, cases);
+  const costEstimate = estimateBenchmarkCost(options, cases);
   process.stdout.write(`${JSON.stringify({
     mode: options.run ? "run" : "estimate_only",
     benchmark: BENCHMARK_VERSION,

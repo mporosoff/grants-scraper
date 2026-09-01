@@ -7,7 +7,7 @@ It exposes an authenticated endpoint for the six existing structured AI operatio
 - OpenAI `gpt-5.6-luna` through the Responses API
 - Cloudflare Workers AI `@cf/google/gemma-4-26b-a4b-it`
 
-Prompts and responses are not logged or stored by the Worker. The local runner saves checkpoints under the git-ignored `evaluation/ai-model-results/` directory. Requests are limited to 60 per minute, outputs are bounded, both providers receive the same production response schemas, and malformed structured output gets at most one retry.
+Prompts and responses are not logged or stored by the Worker. The local runner saves checkpoints under the git-ignored `evaluation/ai-model-results/` directory. Requests are limited to 60 per minute, outputs are bounded, both providers receive the same production response schemas, and malformed structured output gets at most one retry. The runner's bounded cost ceiling includes both attempts.
 
 Required Cloudflare secrets:
 
