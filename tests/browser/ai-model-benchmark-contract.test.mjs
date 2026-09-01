@@ -18,6 +18,7 @@ import {
 import { validateOperationUser } from "../../workers/ai-gateway/src/input-policy.js";
 import {
   benchmarkFailureRecord,
+  callWorker,
   estimateBenchmarkCost,
 } from "../../scripts/evaluate_ai_models.mjs";
 
@@ -238,6 +239,28 @@ test("Luna retry usage includes a billed malformed first response", async () => 
   }
 });
 
+test("terminal schema failures return every billed attempt for checkpoint evidence", async () => {
+  let attempts = 0;
+  const env = environment({
+    AI: {
+      async run() {
+        attempts += 1;
+        return {
+          response: JSON.stringify({ agency: "DOE" }),
+          usage: { prompt_tokens: 70, completion_tokens: 10, total_tokens: 80 },
+        };
+      },
+    },
+  });
+  const response = await createHandler()(request(validBody()), env);
+  assert.equal(response.status, 502);
+  const body = await response.json();
+  assert.equal(body.error.code, "schema_validation_failed");
+  assert.equal(body.attempts, 2);
+  assert.deepEqual(body.usage, { input_tokens: 140, output_tokens: 20, total_tokens: 160 });
+  assert.equal(attempts, 2);
+});
+
 test("Luna request matches the production Responses API contract and does not enable storage", async () => {
   const originalFetch = globalThis.fetch;
   let captured;
@@ -346,4 +369,33 @@ test("one provider timeout is recorded as evidence without invalidating other be
   assert.equal(record.model_id, "@cf/google/gemma-4-26b-a4b-it");
   assert.deepEqual(record.error, { code: "Worker HTTP 504: provider_timeout" });
   assert.deepEqual(record.automated_grade, { passed: false, problems: ["provider_call_failed"] });
+});
+
+test("the runner preserves terminal Worker attempts and usage in its failure record", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    error: { code: "schema_validation_failed" },
+    attempts: 2,
+    usage: { input_tokens: 140, output_tokens: 20, total_tokens: 160 },
+  }), { status: 502, headers: { "Content-Type": "application/json" } });
+  const testCase = BENCHMARK_CASES.find(item => item.id === "institution-translate-bes-count");
+  const job = { testCase, run: 1, model: "gemma" };
+  try {
+    await assert.rejects(
+      callWorker({ endpoint: "https://benchmark.example", token }, job),
+      error => {
+        const record = benchmarkFailureRecord(job, error);
+        assert.equal(record.attempts, 2);
+        assert.deepEqual(record.usage, {
+          input_tokens: 140,
+          output_tokens: 20,
+          total_tokens: 160,
+        });
+        assert.deepEqual(record.error, { code: "Worker HTTP 502: schema_validation_failed" });
+        return true;
+      },
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

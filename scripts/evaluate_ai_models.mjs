@@ -166,7 +166,28 @@ function jobsFor(options, cases) {
   return shuffled(jobs, mulberry32(options.seed));
 }
 
-async function callWorker(options, job) {
+function normalizedFailureUsage(value) {
+  if (!value || typeof value !== "object") return null;
+  const fields = ["input_tokens", "output_tokens", "total_tokens"];
+  if (!fields.every(field => Number.isFinite(value[field]) && value[field] >= 0)) return null;
+  return Object.fromEntries(fields.map(field => [field, value[field]]));
+}
+
+class BenchmarkWorkerError extends Error {
+  constructor(status, body) {
+    const code = String(body?.error?.code || "unknown_error").slice(0, 120);
+    super(`Worker HTTP ${status}: ${code}`);
+    this.name = "BenchmarkWorkerError";
+    this.attempts = Number.isInteger(body?.attempts)
+      && body.attempts > 0
+      && body.attempts <= BENCHMARK_MAX_ATTEMPTS
+      ? body.attempts
+      : null;
+    this.usage = normalizedFailureUsage(body?.usage);
+  }
+}
+
+export async function callWorker(options, job) {
   const requestId = `${BENCHMARK_VERSION}:${job.testCase.id}:r${job.run}:${job.model}`;
   const startedAt = Date.now();
   const response = await fetch(new URL("/v1/evaluate", options.endpoint), {
@@ -189,7 +210,7 @@ async function callWorker(options, job) {
   } catch {
     throw new Error(`Worker returned non-JSON HTTP ${response.status}.`);
   }
-  if (!response.ok) throw new Error(`Worker HTTP ${response.status}: ${body?.error?.code || "unknown_error"}`);
+  if (!response.ok) throw new BenchmarkWorkerError(response.status, body);
   return {
     id: requestId,
     case_id: job.testCase.id,
@@ -208,6 +229,12 @@ async function callWorker(options, job) {
 }
 
 export function benchmarkFailureRecord(job, error) {
+  const attempts = Number.isInteger(error?.attempts)
+    && error.attempts > 0
+    && error.attempts <= BENCHMARK_MAX_ATTEMPTS
+    ? error.attempts
+    : null;
+  const usage = normalizedFailureUsage(error?.usage);
   return {
     id: `${BENCHMARK_VERSION}:${job.testCase.id}:r${job.run}:${job.model}`,
     case_id: job.testCase.id,
@@ -216,6 +243,8 @@ export function benchmarkFailureRecord(job, error) {
     run: job.run,
     model: job.model,
     model_id: MODEL_CONFIG[job.model].id,
+    ...(attempts ? { attempts } : {}),
+    ...(usage ? { usage } : {}),
     error: { code: String(error?.message || "provider_call_failed").slice(0, 240) },
     automated_grade: { passed: false, problems: ["provider_call_failed"] },
   };

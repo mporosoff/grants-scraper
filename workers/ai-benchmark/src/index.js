@@ -26,13 +26,18 @@ export const BENCHMARK_RETRY_INSTRUCTIONS = Object.freeze({
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,119}$/;
 
 class BenchmarkError extends Error {
-  constructor(code, status = 400, { retryable = false, usage = null } = {}) {
+  constructor(code, status = 400, {
+    retryable = false,
+    usage = null,
+    attempts = null,
+  } = {}) {
     super(code);
     this.name = "BenchmarkError";
     this.code = code;
     this.status = status;
     this.retryable = retryable;
     this.usage = usage;
+    this.attempts = attempts;
   }
 }
 
@@ -50,8 +55,13 @@ function jsonResponse(value, status = 200, extraHeaders = {}) {
 
 function errorResponse(error) {
   const known = error instanceof BenchmarkError;
+  const body = { error: { code: known ? error.code : "provider_unavailable" } };
+  if (known && Number.isInteger(error.attempts) && error.attempts > 0 && error.usage) {
+    body.attempts = error.attempts;
+    body.usage = error.usage;
+  }
   return jsonResponse(
-    { error: { code: known ? error.code : "provider_unavailable" } },
+    body,
     known ? error.status : 502,
   );
 }
@@ -242,7 +252,9 @@ async function runModel(clean, env) {
   const startedAt = Date.now();
   let lastError;
   let usage = normalizeUsage(null);
+  let attempts = 0;
   for (let attempt = 0; attempt < BENCHMARK_MAX_ATTEMPTS; attempt += 1) {
+    attempts = attempt + 1;
     try {
       const provider = clean.model === "luna" ? requestLuna : requestGemma;
       const result = await provider({ env, ...clean, contract, attempt });
@@ -268,6 +280,13 @@ async function runModel(clean, env) {
       lastError = error;
       if (!(error instanceof BenchmarkError) || !error.retryable || attempt + 1 >= BENCHMARK_MAX_ATTEMPTS) break;
     }
+  }
+  if (lastError instanceof BenchmarkError) {
+    throw new BenchmarkError(lastError.code, lastError.status, {
+      retryable: lastError.retryable,
+      usage,
+      attempts,
+    });
   }
   throw lastError;
 }
