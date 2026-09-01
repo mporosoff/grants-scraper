@@ -970,6 +970,248 @@ textarea:focus {
   background: #f1eafb;
 }
 
+.opportunity-team-trigger {
+  border-color: #1f5a47;
+  color: #174738;
+  font-weight: 750;
+}
+
+.opportunity-team-panel {
+  margin-top: 18px;
+  padding: clamp(16px, 2.5vw, 24px);
+  border: 2px solid #2d6a56;
+  border-radius: 14px;
+  background: #f5fbf8;
+  box-shadow: 0 12px 28px rgba(12, 53, 42, .12);
+}
+
+.opportunity-team-heading,
+.opportunity-team-member-title,
+.opportunity-team-status,
+.opportunity-team-next {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.opportunity-team-heading h4,
+.opportunity-team-member h5,
+.opportunity-team-roles h5,
+.opportunity-team-gaps h5,
+.opportunity-team-scope {
+  margin: 0;
+}
+
+.opportunity-team-close,
+.opportunity-team-remove {
+  border: 1px solid #7d9a90;
+  border-radius: 8px;
+  background: #fff;
+  color: #173b31;
+  cursor: pointer;
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 750;
+  padding: 7px 10px;
+}
+
+.opportunity-team-body > * + * {
+  margin-top: 14px;
+}
+
+.opportunity-team-status {
+  align-items: center;
+  color: #405b53;
+  font-size: .86rem;
+}
+
+.opportunity-team-why {
+  border-left: 4px solid #2d6a56;
+  padding: 10px 13px;
+  background: #e8f4ee;
+}
+
+.opportunity-team-why p {
+  margin: 5px 0 0;
+}
+
+.opportunity-team-members {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.opportunity-team-member {
+  padding: 14px;
+  border: 1px solid #bad2c9;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.opportunity-team-member p {
+  margin: 7px 0 0;
+  font-size: .88rem;
+}
+
+.opportunity-team-member-title > div > p {
+  color: #526a62;
+  margin-top: 3px;
+}
+
+.opportunity-team-source {
+  color: #526a62;
+  font-size: .78rem !important;
+}
+
+.opportunity-team-roles ul,
+.opportunity-team-gaps ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.opportunity-team-role {
+  padding: 11px 0;
+  border-top: 1px solid #c9ddd5;
+}
+
+.opportunity-team-role > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.opportunity-team-role p {
+  margin: 5px 0;
+  font-size: .86rem;
+}
+
+.opportunity-team-role-state {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: #dcefe6;
+  color: #174738;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.opportunity-team-role.missing .opportunity-team-role-state {
+  background: #fff0d4;
+  color: #764b00;
+}
+
+.opportunity-team-gaps {
+  padding: 13px;
+  border: 1px solid #dfbd74;
+  border-radius: 10px;
+  background: #fff9eb;
+}
+
+.opportunity-team-gaps li {
+  margin-top: 6px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.opportunity-team-gaps li::before {
+  content: "!";
+  position: absolute;
+  left: 0;
+  color: #8b5b00;
+  font-weight: 900;
+}
+
+.opportunity-team-replacement {
+  padding: 13px;
+  border-radius: 10px;
+  background: #edf4fb;
+}
+
+.opportunity-team-replacement label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 750;
+}
+
+.opportunity-team-replacement > div {
+  display: flex;
+  gap: 8px;
+}
+
+.opportunity-team-replacement select {
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 8px;
+}
+
+.opportunity-team-replacement button,
+.opportunity-team-scope-options button {
+  border: 1px solid #315f84;
+  border-radius: 8px;
+  background: #fff;
+  color: #16476d;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 750;
+  padding: 8px 11px;
+}
+
+.opportunity-team-scope-options {
+  display: grid;
+  gap: 8px;
+}
+
+.opportunity-team-scope-options button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.opportunity-team-scope-options span {
+  margin-top: 3px;
+  color: #536b78;
+  font-size: .78rem;
+  text-transform: capitalize;
+}
+
+.opportunity-team-next {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.opportunity-team-caveat,
+.opportunity-team-no-replacement {
+  color: #516860;
+  font-size: .82rem;
+}
+
+@media (max-width: 700px) {
+  .opportunity-team-members {
+    grid-template-columns: 1fr;
+  }
+
+  .opportunity-team-heading,
+  .opportunity-team-status,
+  .opportunity-team-role > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .opportunity-team-replacement > div {
+    flex-direction: column;
+  }
+
+  .opportunity-team-replacement button,
+  .opportunity-team-next a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 .badge.warning {
   color: #8b4d00;
   background: #fff0df;

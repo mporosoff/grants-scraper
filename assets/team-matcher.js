@@ -52,21 +52,11 @@
   }
 
   function recordIsCurrent(record, now) {
-    const status = String(record.status || "").trim().toLowerCase();
-    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
-      return false;
+    const shared = globalThis.FUNDING_RETRIEVAL?.recordIsCurrent;
+    if (typeof shared !== "function") {
+      throw new Error("Team Match requires the shared funding currentness contract.");
     }
-    const archiveDate = cleanDate(record.archive_date);
-    const archiveAge = daysBetween(record.archive_date, now);
-    if (archiveAge !== null && archiveAge >= 0) return false;
-    const closeDate = cleanDate(record.close_date);
-    const closeAge = daysBetween(record.close_date, now);
-    if (closeAge !== null && closeAge > 0 && !record.rolling) return false;
-    if (!record.rolling && !closeDate && !archiveDate) {
-      const postedAge = daysBetween(record.posted_date, now);
-      if (postedAge !== null && postedAge > STALE_UNDATED_MAX_AGE_DAYS) return false;
-    }
-    return true;
+    return shared(record, now);
   }
 
   function recordIsTestOpportunity(record) {
@@ -623,5 +613,5 @@
     });
   }
 
-  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create });
+  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create, recordIsCurrent });
 })();

@@ -42,7 +42,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, faculty profiles, or persistent user-managed opportunity files. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
+There are no accounts, installations, private faculty accounts, or persistent user-managed opportunity files. A compact public, source-traceable Hajim faculty directory supports Team Match and a staged ten-scope opportunity-to-team pilot; it is a generated planning asset rather than a user profile system. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -967,6 +967,14 @@ provider is the maintainable path if the pilot justifies personalized alerts.
   must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
+- Opportunity-to-team proposals use only a specific parent, a currently
+  publication-eligible child, or an official declared branch. Broad parents
+  never receive an automatic team.
+- Every proposed person and required role retains inspectable source evidence;
+  adjacent or provisional replacement evidence cannot silently complete a
+  missing role.
+- Generated team membership never overrides current runtime catalog status,
+  dates, or child publication eligibility.
 
 ---
 
@@ -975,7 +983,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - a 48-record discipline-specific shortlist;
 - local storage as the funding database;
 - AI calls for every keyword search;
-- faculty scraping or preloaded faculty identities;
+- private faculty accounts or untraceable scraped faculty identities;
+- treating faculty-faculty similarity or team-permutation counts as proof of a
+  high-quality opportunity team;
 - user-managed JSON files;
 - a Python installation for end users;
 - scraping Duke, Pivot-RP, or other licensed databases;

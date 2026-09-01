@@ -115,6 +115,17 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
+Funding Finder also has a staged opportunity-to-team pilot for ten calibrated,
+specific opportunity scopes. It proposes complementary three- or four-person
+teams from source-traceable Hajim capability evidence, explains the team and
+each person, keeps missing roles visible, and supports remove/replacement and a
+manual-collaborator path. Broad parent programs never receive an automatic team.
+Generated team membership is rechecked against the same runtime catalog
+currentness and publication-eligible child-topic contracts used by ordinary
+search. Team Match's local directory distinguishes 118 main-pool, 35 standby,
+and 3 directory-only profiles while preserving saved researchers, ORCID, and
+the four-person limit. See `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md`.
+
 Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
 Office of Science awards through the sources' native fields, keeps the adapters
 separate, and preserves direct-field or official-record contact provenance.
@@ -266,6 +277,8 @@ support it.
 | `assets/search-retrieval.js` | Local BM25 candidate retrieval, fuzzy matching, concept coverage, and topic reranking |
 | `assets/profile-ranking.js` | Weighted profile/CV terms, profile-only concept coverage, eligibility, and career-fit evidence |
 | `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
+| `assets/opportunity-team.js` | Lazy content-identified faculty directory and deterministic role/team engine |
+| `assets/opportunity-team-panel.js` | Funding Finder team proposal, missing-role, remove, replacement, and focus lifecycle |
 | `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
@@ -275,6 +288,8 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
+| `data/opportunity_teams.js` | Compact generated faculty directory and ten-scope role/team projection |
+| `config/opportunity_team_model.json` | Canonical source-traceable faculty and opportunity-role model |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
@@ -291,6 +306,7 @@ support it.
 | `scripts/build_changes.py` | Rolling new/deadline/amendment/closing/closure event feeds |
 | `scripts/check_links.py` | Bounded official-link health and redirect monitor |
 | `scripts/currentness.py` | Shared runtime expiration and non-funding gate |
+| `scripts/import_opportunity_team_model.py` | Deterministic reduction of offline calibration artifacts and shared generation identity |
 | `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
 | `feeds/` | Generated public Atom feeds and feed directory |
 | `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
@@ -300,6 +316,7 @@ support it.
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
 | `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
 | `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
+| `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md` | Opportunity-role evidence, team assembly, replacement, and staged expansion contract |
 | `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
 | `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, and ROR normalization Worker |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
@@ -323,8 +340,9 @@ For implementation pull requests, use this review and test workflow:
   time, and do not manually trigger duplicate full suites for the same commit.
 - Request one comprehensive automated review before the final gate where
   practical. After addressing it, request one final review of the exact head.
-- Require one complete protected Python, browser-contract, frozen-query,
-  frozen-P9, and Playwright product/accessibility run on the exact final commit.
+- Require one complete protected Python, browser-contract, frozen-query, and
+  frozen-P9 run on the exact final commit. E2E/Playwright runs are reserved for
+  a separately authorized manual validation task under `AGENTS.md`.
 - If the final exact-head review finds a consequential defect, fix it, request
   another exact-head review, and rerun that final gate. Otherwise, do not add
   ceremonial reruns.

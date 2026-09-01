@@ -498,42 +498,12 @@
     );
   }
 
-  function nonFundingReason(record) {
-    const title = String(record.title || "").trim();
-    if (/^(?:[A-Z0-9_.-]+\s+)?(?:notice of intent\b|request for information\b|rfi\s*[-:])/i.test(title)) {
-      return "informational notice";
-    }
-    const instruments = (record.funding_instruments || []).map(value => String(value).toLowerCase());
-    const note = `${record.description || ""} ${record.close_date_note || ""}`;
-    if (
-      instruments.length
-      && instruments.every(value => value === "other")
-      && /\bnot accepting applications?\b/i.test(note)
-    ) {
-      return "not accepting applications";
-    }
-    return "";
-  }
-
   function recordIsArchived(record, asOf = runtimeDateIso()) {
-    const status = String(record.status || "").trim().toLowerCase();
-    if (status === "archived") return true;
-    return /^\d{4}-\d{2}-\d{2}$/.test(record.archive_date || "")
-      && record.archive_date <= asOf;
+    return RETRIEVAL_API.recordIsArchived(record, asOf);
   }
 
   function recordIsCurrent(record, asOf = runtimeDateIso()) {
-    const status = String(record.status || "").trim().toLowerCase();
-    if (["closed", "archived", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
-      return false;
-    }
-    if (recordIsArchived(record, asOf)) return false;
-    if (nonFundingReason(record)) return false;
-    if (record.close_date) {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(record.close_date)) return false;
-      if (record.close_date < asOf) return false;
-    }
-    return status === "posted" || status === "forecasted";
+    return RETRIEVAL_API.recordIsCurrent(record, asOf);
   }
 
   function recordIsTestOpportunity(record) {
@@ -2899,6 +2869,13 @@
     return `<details class="match-explanation"><summary>Why this matched</summary><ul>${reasons.map(reason => `<li>${escapeHtml(reason)}</li>`).join("")}</ul></details>`;
   }
 
+  function opportunityTeamScopeId(match, record) {
+    const child = match?.childDroveMatch ? match.bestChild?.record : null;
+    const childIdentifier = child?.subtopic_id || child?.opportunity_id || "";
+    if (childIdentifier) return String(childIdentifier);
+    return isBroadOpportunity(record) ? "" : recordId(record);
+  }
+
   function resultCard(match, resultPosition) {
     const record = catalog.opportunities[match.index];
     const id = recordId(record);
@@ -2969,6 +2946,7 @@
         : "Forecasted";
     const fundedAwardsHref = AWARD_LINKS_API?.fundedAwardsHref?.(record) || "";
     const programIdentity = AWARD_LINKS_API?.programIdentityForOpportunity?.(record) || null;
+    const proposedTeamScope = opportunityTeamScopeId(match, record);
 
     return `<article class="result-card${match.aiIdentified ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -3026,6 +3004,7 @@
         ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
         <button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Email alert</button>
         ${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Program email alert</button>` : ""}
+        <button class="source-action opportunity-team-trigger" type="button" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>
         <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
         ${contactAction}
         <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
@@ -3818,6 +3797,7 @@
   }
 
   function renderResults() {
+    document.dispatchEvent(new CustomEvent("funding-finder:before-results-render"));
     renderHybridStatus();
     updateSavedSearchAlertUi();
     if (!state.searched) {

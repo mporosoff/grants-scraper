@@ -112,30 +112,32 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with one Add researcher control instead of a department pill wall", () => {
+test("starts with one Add researcher control and separates directory from manual entry", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
   assert.match(grid, />\s*Add researcher\s*<\/button>/);
   assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
-  assert.match(teamPage, /facultyGroup\.label = "Department faculty"/);
-  assert.match(teamPage, /savedGroup\.label = "Saved researchers"/);
-  assert.match(teamPage, /newGroup\.label = "Add a new researcher"/);
-  assert.match(teamPage, /selected\.indexOf\(name\) === -1/);
+  assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
+  assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
+  assert.match(teamPage, /id="manual-researcher"/);
+  assert.match(teamPage, /Add a researcher manually/);
+  assert.doesNotMatch(teamPage, /facultyGroup\.label = "Department faculty"/);
   assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
 });
 
-test("opens the researcher picker without forcing the native select open", () => {
+test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /picker\.hidden = !opening/);
   assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
-  const newResearcher = teamPage.indexOf('newGroup.label = "Add a new researcher"');
-  const faculty = teamPage.indexOf('facultyGroup.label = "Department faculty"');
-  const saved = teamPage.indexOf('savedGroup.label = "Saved researchers"');
-  assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
+  assert.match(teamPage, /aria-autocomplete="list"/);
+  assert.match(teamPage, /aria-controls="faculty-suggestions"/);
+  assert.match(teamPage, /aria-activedescendant/);
+  assert.match(teamPage, /event\.key === "ArrowDown"/);
+  assert.match(teamPage, /event\.key === "Enter"/);
+  assert.match(teamPage, /event\.key === "Escape"/);
 });
 
-test("selecting the new external researcher option opens its editor without an extra add click", () => {
-  assert.match(teamPage, /\$\("researcher-choice"\)\.addEventListener\("change", function \(\) \{[\s\S]*?value === "__new__"[\s\S]*?chooseResearcher\(\);[\s\S]*?return;/);
-  assert.match(teamPage, /if \(member === "__new__"\) \{[\s\S]*?choice\.value = "";[\s\S]*?\$\("choose-researcher"\)\.disabled = true;[\s\S]*?openExternalEditor\(""\);[\s\S]*?return;/);
+test("the prominent manual path opens the researcher editor directly", () => {
+  assert.match(teamPage, /\$\("manual-researcher"\)\.addEventListener\("click", function \(\) \{[\s\S]*?openExternalEditor\(""\)/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
 
