@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import {
   mockAwards,
   mockAlerts,
-  mockFrozenAwardCatalog,
+  mockFrozenFundingCatalog,
   mockHybrid,
   openFundingFinder,
   runFundingSearch,
@@ -13,7 +13,7 @@ import {
 
 async function openFrozenAwardFromFundingFinder(page, context, opportunityId, query) {
   await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
-  await mockFrozenAwardCatalog(context);
+  await mockFrozenFundingCatalog(context);
   mockHybrid(page);
   const awardCalls = mockAwards(context);
   await openFundingFinder(page);
@@ -34,7 +34,7 @@ async function openFrozenAwardFromFundingFinder(page, context, opportunityId, qu
 }
 
 test("standalone paging and investigator handoff retain the submitted year range", async ({ page }) => {
-  await mockFrozenAwardCatalog(page);
+  await mockFrozenFundingCatalog(page);
   const calls = mockAwards(page, {
     hasMoreBySource: { NSF: [0] },
     resultCountPerSource: { NSF: 1 },

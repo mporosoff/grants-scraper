@@ -4,6 +4,7 @@ import {
   addDepartmentResearcher,
   mockAwards,
   mockAlerts,
+  mockFrozenFundingSearchPackage,
   mockHybrid,
   openAiStructuredResponse,
   openFundingFinder,
@@ -33,6 +34,7 @@ async function scan(page, label, testInfo) {
 }
 
 test("Funding Finder has no serious or critical violations across critical states", async ({ page, context }, testInfo) => {
+  await mockFrozenFundingSearchPackage(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(page);
   mockAwards(page);
@@ -101,10 +103,11 @@ test("Funding Finder has no serious or critical violations across critical state
   await expect(chatButton).toBeFocused();
 
   const fallback = await context.newPage();
+  await mockFrozenFundingSearchPackage(fallback);
   await fallback.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(fallback, { failEveryEmbed: true, retryAfter: 10 });
   await openFundingFinder(fallback);
-  await runFundingSearch(fallback, "DE-FOA-0003600");
+  await runFundingSearch(fallback, "hydrogen catalysis");
   await expect(fallback.locator("#potential-status")).toContainText(/temporarily limited/i, { timeout: 30_000 });
   await expect(fallback.locator("#retry-potential")).toBeDisabled();
   await scan(fallback, "funding-potential-fallback", testInfo);
