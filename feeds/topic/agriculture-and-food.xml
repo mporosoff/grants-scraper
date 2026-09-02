@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -92,6 +92,18 @@
     <summary>Health Resources and Services Administration | Closes 2026-10-20 | Fiscal Year (FY) 2027 Regional Nutrition Hubs (RNH) will support region-specific technical assistance (TA) on expanding high-quality nutrition services to the Health Resources and Services Administration's (HRSA) Health Center Program (H80) award recipients and look-alikes (health centers). Nutrition services prevent, manage, and treat diseases and conditions through nutritional and food-based int…</summary>
   </entry>
   <entry>
+    <title>Fiscal Year (FY) 2027 AmeriCorps State and National Competitive Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/363696"/>
+    <id>urn:funding-finder:grants-gov:363696</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>AmeriCorps</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>AmeriCorps | Closes 2027-01-13 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps grants are awarded to eligible or…</summary>
+  </entry>
+  <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
     <link href="https://www.grants.gov/search-results-detail/363720"/>
     <id>urn:funding-finder:grants-gov:363720</id>
@@ -125,29 +137,6 @@
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
     <summary>Foreign Agricultural Service | Closes 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
-  </entry>
-  <entry>
-    <title>Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado</title>
-    <link href="https://www.grants.gov/search-results-detail/363685"/>
-    <id>urn:funding-finder:grants-gov:363685</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Animal and Plant Health Inspection Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>Animal and Plant Health Inspection Service | Closes 2026-08-31 | The Animal Plant Health Inspection Service (APHIS) Wildlife Services, National Wildlife Research Center (NWRC) anticipates awarding $413,380 in cooperative agreement funding to support one project that addresses the funding priorities to investigate chronic wasting disease (CWD) as a population-limiting factor in Northern Colorado mule deer and white-tailed deer and to better understand the relati…</summary>
-  </entry>
-  <entry>
-    <title>Children, Youth, and Families At-Risk Professional Development and Technical Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363675"/>
-    <id>urn:funding-finder:grants-gov:363675</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-09-01 | CYFAR marshals the resources of the Land-grant and the Cooperative Extension Systems so that, in collaboration with other organizations, they can develop and deliver educational programs to youth who are at risk for not meeting basic human needs. These programs provide youth with the skills they need to lead positive, productive, and contributing lives; participating youth make a difference social…</summary>
   </entry>
   <entry>
     <title>Agriculture Risk Management Education Partnerships Competitive Grants Program</title>
@@ -203,19 +192,6 @@
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363578"/>
-    <id>urn:funding-finder:grants-gov:363578</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>Food and Agricultural Sciences National Needs Graduate and Postgraduate Fellowships</title>
@@ -349,19 +325,6 @@
     <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
-    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363334"/>
-    <id>urn:funding-finder:grants-gov:363334</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management | Closes 2026-08-28 | The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
-  </entry>
-  <entry>
     <title>Plant Protection Act Section 7721 Plant Pest and Disease Management and Disaster Prevention Program (PPDMDPP)</title>
     <link href="https://www.grants.gov/search-results-detail/363328"/>
     <id>urn:funding-finder:grants-gov:363328</id>
@@ -420,18 +383,6 @@
     <summary>Natural Resources Conservation Service | Closes 2026-09-21 | The purpose of the Feral Swine Eradication and Control Project (FSCP) is to respond to the threat feral swine pose to agriculture, native ecosystems, and human and animal health. Feral swine are a destructive, non-native, invasive species and their populations have expanded across the United States since the 1980’s. Over an estimated $3.4 billion in damage, including agricultural, is caused by fer…</summary>
   </entry>
   <entry>
-    <title>Education and Outreach to Tribal Producers through the Tribal Food Safety Alliance</title>
-    <link href="https://www.grants.gov/search-results-detail/363239"/>
-    <id>urn:funding-finder:grants-gov:363239</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Cybersecurity"/>
-    <summary>Food and Drug Administration | Closes 2026-08-28 | The primary purpose of this program is to develop and provide education and/or training, and outreach regarding FDA's Produce Safety Rule to produce farmers who are members of federally recognized Tribes. The program is expected to help Tribal farmers access appropriate technical assistance and may include Tribal farmers who are not currently required to comply with the rule but are interested in …</summary>
-  </entry>
-  <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
     <link href="https://www.grants.gov/search-results-detail/363224"/>
     <id>urn:funding-finder:grants-gov:363224</id>
@@ -452,16 +403,6 @@
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
-  </entry>
-  <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living | Closes 2026-09-01 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
@@ -691,5 +632,61 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>Food and Drug Administration | Closes 2027-04-01 | This Funding Opportunity Announcement (FOA) issued by the Food and Drug Administration (FDA), Center for Veterinary Medicine (CVM), builds upon the National Antimicrobial Resistance Monitoring System (NARMS) which was initiated in 1996 as one of the key activities in a national action plan to combat antibiotic resistance threats. The purpose of this FOA is to protect and promote public health by e…</summary>
+  </entry>
+  <entry>
+    <title>Reissue of RFA-FD-22-001 - Efficient and Innovative Natural History Studies Addressing Unmet Needs in Rare Diseases (R01 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360007"/>
+    <id>urn:funding-finder:grants-gov:360007</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Food and Drug Administration | Closes 2028-02-08 | The purpose of this notice of funding opportunity (NOFO) is to support efficient and innovative natural history studies that advance medical product development in rare diseases/conditions with unmet needs. Through the support of natural history studies with high quality and interpretable data elements, FDA expects to address critical knowledge gaps, remove major barriers to progress in the field,…</summary>
+  </entry>
+  <entry>
+    <title>Reissue of RFA-FD-23-001- Clinical Studies of Orphan Products Addressing Unmet Needs of Rare Diseases (R01 Clinical Trials Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360008"/>
+    <id>urn:funding-finder:grants-gov:360008</id>
+    <updated>2025-07-11T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <summary>Food and Drug Administration | Closes 2028-05-16 | The purpose of this Notice of Funding Opportunity (NOFO) is to fund clinical trials of products evaluating efficacy and/or safety in support of a new indication or change in labeling to address unmet needs in rare diseases or conditions. Additionally, through the funding of collaborative, efficient, and/or innovative clinical trials, FDA expects to increase the number of approved treatments for ra…</summary>
+  </entry>
+  <entry>
+    <title>National Science Foundation Translation to Practice</title>
+    <link href="https://www.grants.gov/search-results-detail/359966"/>
+    <id>urn:funding-finder:grants-gov:359966</id>
+    <updated>2025-07-09T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
+  </entry>
+  <entry>
+    <title>Animal Food Regulatory Program Standards Implementation Development and Maintenance, with Mutual Reliance Initiatives Clinical Trials Not Allowed</title>
+    <link href="https://www.grants.gov/search-results-detail/359816"/>
+    <id>urn:funding-finder:grants-gov:359816</id>
+    <updated>2025-06-25T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Public health"/>
+    <summary>Food and Drug Administration | Closes 2027-04-01 | The purpose of this Notice of Funding Opportunity (NOFO) is to advance efforts for a nationally integrated animal food safety system providing state animal food regulatory programs the ability to achieve full implementation of the Animal Food Regulatory Program Standards (AFRPS) within 5 years and to maintain full implementation. This NOFO will also fund optional projects for state animal food reg…</summary>
+  </entry>
+  <entry>
+    <title>Support for Research Excellence (SuRE) Award (R16 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358829"/>
+    <id>urn:funding-finder:grants-gov:358829</id>
+    <updated>2025-06-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2028-09-07 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
   </entry>
 </feed>

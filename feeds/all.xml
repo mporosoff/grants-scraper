@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -853,6 +853,15 @@
     <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
+    <title>Human Trafficking Youth Prevention Education (HTYPE) Demonstration Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363751"/>
+    <id>urn:funding-finder:grants-gov:363751</id>
+    <updated>2027-01-09T00:00:00Z</updated>
+    <author><name>Administration for Children and Families-IOAS-OTIP</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children and Families-IOAS-OTIP | Closes 2027-03-10 | The purpose of the HTYPE Demonstration Program is to fund local education agencies (LEAs) to establish, expand, and support programs to educate school staff to recognize and respond to signs of human trafficking and to provide age-appropriate information to students on how to avoid becoming victims of human trafficking. LEAs, with the support of a nonprofit or nongovernmental organization (NGO) pa…</summary>
+  </entry>
+  <entry>
     <title>Health Workforce Research Center (HWRC)</title>
     <link href="https://www.grants.gov/search-results-detail/363112"/>
     <id>urn:funding-finder:grants-gov:363112</id>
@@ -954,14 +963,5 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
-  </entry>
-  <entry>
-    <title>The National Network of STI Prevention Training Centers (NNPTC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363356"/>
-    <id>urn:funding-finder:grants-gov:363356</id>
-    <updated>2026-12-20T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Education and workforce"/>
-    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-02-20 | This NOFO will support the development and dissemination of education, training and technical assistance-emphasizing prevention strategies-for clinicians and disease intervention specialists to improve sexually transmitted infection (STI) patient care. The NOFO aims to improve the capacity of providers, clinical sites, and healthcare systems to diagnose, manage, treat and counsel individuals with …</summary>
   </entry>
 </feed>

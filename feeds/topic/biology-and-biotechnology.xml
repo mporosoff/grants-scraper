@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -335,6 +335,48 @@
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
   </entry>
   <entry>
+    <title>Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361213"/>
+    <id>urn:funding-finder:grants-gov:361213</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Closes 2026-11-09 | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institu…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Integrative Team-Research BRAIN Circuits Program - iBCP (RM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360398"/>
+    <id>urn:funding-finder:grants-gov:360398</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
+  </entry>
+  <entry>
+    <title>NINDS Efficacy and Exploratory Clinical Trials (UG3/UH3 - Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360404"/>
+    <id>urn:funding-finder:grants-gov:360404</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+  </entry>
+  <entry>
     <title>SEFSC Bluefin Tuna Research Program</title>
     <link href="https://www.grants.gov/search-results-detail/363729"/>
     <id>urn:funding-finder:grants-gov:363729</id>
@@ -343,19 +385,6 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <summary>DOC NOAA - ERA Production | Closes 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
-  </entry>
-  <entry>
-    <title>Spatial Ecology and Chronic Wasting Disease Dynamics of Wild White-tailed and Mule Deer in Northern Colorado</title>
-    <link href="https://www.grants.gov/search-results-detail/363685"/>
-    <id>urn:funding-finder:grants-gov:363685</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Animal and Plant Health Inspection Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>Animal and Plant Health Inspection Service | Closes 2026-08-31 | The Animal Plant Health Inspection Service (APHIS) Wildlife Services, National Wildlife Research Center (NWRC) anticipates awarding $413,380 in cooperative agreement funding to support one project that addresses the funding priorities to investigate chronic wasting disease (CWD) as a population-limiting factor in Northern Colorado mule deer and white-tailed deer and to better understand the relati…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -483,17 +512,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360947"/>
-    <id>urn:funding-finder:grants-gov:360947</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2026-10-13 | The NIGMS Mature Synchrotron Resources for Structural Biology program supports mature technologies at synchrotron facilities that provide biomedical researchers with state-of-the-art X-ray beamlines, hands-on user training, and expert assistance to generate and analyze structural biology data. NIGMS intends to reissue a Notice of Funding Opportunity to continue to support these important national …</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -637,19 +655,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
-    <title>FY26 Bureau of Land Management Abandoned Mine Lands and Hazardous Materials - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363334"/>
-    <id>urn:funding-finder:grants-gov:363334</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management | Closes 2026-08-28 | The BLM and its partners inventory and mitigate abandoned mine hazards to protect public health and safety and the environment, and restore watersheds for recreation, fish, wildlife and domestic animals, manage air quality for the protection of public health and sensitive ecosystems, and return lands to productive uses including, but not limited to, recreation, fish and wildlife habitat, and prese…</summary>
-  </entry>
-  <entry>
     <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
     <link href="https://www.grants.gov/search-results-detail/363335"/>
     <id>urn:funding-finder:grants-gov:363335</id>
@@ -672,17 +677,5 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2026-10-09 | The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
-  </entry>
-  <entry>
-    <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
-    <link href="https://www.grants.gov/search-results-detail/363101"/>
-    <id>urn:funding-finder:grants-gov:363101</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
   </entry>
 </feed>

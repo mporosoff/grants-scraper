@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -14,6 +14,18 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Materials science"/>
     <summary>National Institutes of Health | Closes 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
+  </entry>
+  <entry>
+    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363754"/>
+    <id>urn:funding-finder:grants-gov:363754</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
   </entry>
   <entry>
     <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
@@ -63,22 +75,6 @@
     <category term="Materials science"/>
     <category term="Data science"/>
     <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363633"/>
-    <id>urn:funding-finder:grants-gov:363633</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -195,21 +191,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
-    <link href="https://www.grants.gov/search-results-detail/363609"/>
-    <id>urn:funding-finder:grants-gov:363609</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-31 | This program will help responsible businesses counter unfair competition from production models relying on forced labor, worker exploitation, and other violations or abuses of internationally recognized labor rights. The program will also promote worker upskilling by working with leading foreign companies in critical industries to develop and strengthen private-sector workforce development practic…</summary>
-  </entry>
-  <entry>
     <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
     <link href="https://www.grants.gov/search-results-detail/363530"/>
     <id>urn:funding-finder:grants-gov:363530</id>
@@ -250,22 +231,6 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
-  </entry>
-  <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>

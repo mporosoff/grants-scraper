@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -194,6 +194,27 @@
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
   </entry>
   <entry>
+    <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360606"/>
+    <id>urn:funding-finder:grants-gov:360606</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
+    <title>Cancer Advancement through Partnerships in Research and Infrastructure (CAPRI) (U54 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360393"/>
+    <id>urn:funding-finder:grants-gov:360393</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Closes 2027-01-25 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered for funding. This funding opportunity seeks to supp…</summary>
+  </entry>
+  <entry>
     <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362277"/>
     <id>urn:funding-finder:grants-gov:362277</id>
@@ -244,7 +265,7 @@ we will not consider for support include Covid-19 relat…</summary>
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
-    <title>Clinical Research Network on Antimicrobial Resistance</title>
+    <title>Clinical Research Network on Antimicrobial Resistance (UM1 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/361065"/>
     <id>urn:funding-finder:grants-gov:361065</id>
     <updated>2026-07-01T00:00:00Z</updated>
@@ -603,26 +624,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Research Program (OCRP) Investigator-Initiated Research Award is intended to support high-impact research that addresses a critical need and has the potential to make an important contribution to ovarian cancer or patient/survivor care. Distinctive Features: Application must contain strong research plan with sound scientific rational and logical reasoning. Preliminary d…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Academy - Early-Career Investigator Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362204"/>
-    <id>urn:funding-finder:grants-gov:362204</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Initially created in FY09, the OCRP Ovarian Cancer Academy (OCA) is a unique, interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The overarching goal of the OCA is to conduct innovative and impactful ovarian cancer research while developing successful, highly productive ovarian cancer researchers in a collab…</summary>
-  </entry>
-  <entry>
-    <title>DoW, Ovarian Cancer, Ovarian Cancer Clinical Trial Academy - Early-Career Investigator Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362207"/>
-    <id>urn:funding-finder:grants-gov:362207</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
   </entry>
 </feed>

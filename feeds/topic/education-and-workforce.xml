@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -257,6 +257,15 @@
     <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
   </entry>
   <entry>
+    <title>Human Trafficking Youth Prevention Education (HTYPE) Demonstration Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363751"/>
+    <id>urn:funding-finder:grants-gov:363751</id>
+    <updated>2027-01-09T00:00:00Z</updated>
+    <author><name>Administration for Children and Families-IOAS-OTIP</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children and Families-IOAS-OTIP | Closes 2027-03-10 | The purpose of the HTYPE Demonstration Program is to fund local education agencies (LEAs) to establish, expand, and support programs to educate school staff to recognize and respond to signs of human trafficking and to provide age-appropriate information to students on how to avoid becoming victims of human trafficking. LEAs, with the support of a nonprofit or nongovernmental organization (NGO) pa…</summary>
+  </entry>
+  <entry>
     <title>Health Workforce Research Center (HWRC)</title>
     <link href="https://www.grants.gov/search-results-detail/363112"/>
     <id>urn:funding-finder:grants-gov:363112</id>
@@ -303,6 +312,26 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
+  </entry>
+  <entry>
+    <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
+    <link href="https://www.grants.gov/search-results-detail/363749"/>
+    <id>urn:funding-finder:grants-gov:363749</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | The purpose of this award is to strengthen capacity and performance of national immunization programs in countries of the Eastern Mediterranean Region (EMR) to achieve regional vaccine preventable disease (VPD) control, elimination and eradication targets (i.e., polio eradication, measles and rubella elimination), reduce VPD-related morbidity and mortality, and address emerging public health threa…</summary>
+  </entry>
+  <entry>
+    <title>Informing global polio eradication efforts through innovative modeling approaches</title>
+    <link href="https://www.grants.gov/search-results-detail/363748"/>
+    <id>urn:funding-finder:grants-gov:363748</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | This NOFO will provide critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response, optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches. It will also build capacity for a diverse public health workforce of statistical and mathematical modelers. Additionally, models will assess economic implications …</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -585,34 +614,5 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Education and workforce"/>
     <summary>Department of Housing and Urban Development | Closes 2026-11-30 | The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
-  </entry>
-  <entry>
-    <title>Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363047"/>
-    <id>urn:funding-finder:grants-gov:363047</id>
-    <updated>2026-09-17T00:00:00Z</updated>
-    <author><name>Administration for Children and Families</name></author>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children and Families | Closes 2026-11-17 | The U.S. Department of Health and Human Services (HHS), Administration for Children and Families (ACF), seeks applications for the Preschool Development Grant Birth through Five (PDG B-5) SMART Grant: Strategic Measurement, Analytics, and Results using Technology. This funding opportunity will support states and territories to make targeted, one-year investments in statewide early care and educati…</summary>
-  </entry>
-  <entry>
-    <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363242"/>
-    <id>urn:funding-finder:grants-gov:363242</id>
-    <updated>2026-09-15T00:00:00Z</updated>
-    <author><name>69A345 Office of the Under Secretary for Policy</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
-  </entry>
-  <entry>
-    <title>Teaching Health Center Graduate Medical Education (THCGME) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363324"/>
-    <id>urn:funding-finder:grants-gov:363324</id>
-    <updated>2026-09-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2026-11-16 | The purpose of the THCGME Program is to prepare residents to provide high-quality care, particularly in rural and medically underserved communities, while developing the competencies they need to serve a wide range of populations and communities. The THCGME does this by providing funding to support the training of residents in HRSA-supported primary care residency training programs in community-ba…</summary>
   </entry>
 </feed>
