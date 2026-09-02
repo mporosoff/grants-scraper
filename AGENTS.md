@@ -28,13 +28,14 @@
 - An exact-head top-level completion comment is terminal even when `pull_request_review_id` is absent. Do not keep waiting for a formal review object or approval reaction after receiving that comment.
 - A review acknowledgement or “working” message is not terminal.
 - Before deciding that a review remains pending, inspect the complete PR conversation comments, submitted reviews, inline review threads, and reactions. Match the reviewed SHA to the complete current PR-head SHA.
-- Bound review waiting. After three unchanged checks or 15 minutes following acknowledgement or completed CI, perform one comprehensive refresh of all review surfaces. If no terminal artifact exists, stop and report the missing review instead of polling indefinitely or triggering a duplicate review.
+- When continuous convergence has not been explicitly authorized, bound review waiting. After three unchanged checks or 15 minutes following acknowledgement or completed CI, perform one comprehensive refresh of all review surfaces. If no terminal artifact exists, stop and report the missing review instead of polling indefinitely or triggering a duplicate review.
 - After a clean terminal exact-head result, proceed only if the PR head is unchanged, required CI is green, and no consequential unresolved review thread remains.
 
 ### Explicitly authorized continuous convergence
 
 - The default same-subsystem convergence stop remains in force unless the user explicitly authorizes continuous convergence for a named task or PR.
 - During an explicitly authorized continuous-convergence run, a consequential exact-head re-review finding does not require another user checkpoint. Wait for the review to finish, collect all findings from that SHA, audit the complete affected invariant family, correct accepted findings in one coherent batch, and repeat exact-head validation and review.
+- During an explicitly authorized continuous-convergence or autonomous-completion run, an acknowledged or actively running review is not a reason to return control to the user. After the normal bounded waiting window, reduce the polling cadence and continue monitoring the same review until it reaches a terminal state. Do not request a duplicate review. Treat the wait as blocked only when the review service reports a terminal failure or an external outage remains unresolved after bounded retries.
 - Continue this process until the exact candidate has a terminal clean review, all required exact-head checks pass, and no consequential thread remains unresolved.
 - Continuous convergence does not authorize editing while a review is pending, using evidence from an earlier SHA, duplicating reviews or full-suite runs, bypassing failing checks, resolving uncorrected findings, fabricating production evidence, weakening privacy or security controls, or merging an unverified candidate.
 - Stop only for an unsafe or destructive action, missing authority or credentials, an external outage that remains terminal after bounded retries, or another condition that cannot be safely resolved within the named scope.

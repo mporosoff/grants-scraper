@@ -3,6 +3,12 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
+import {
+  childRecords as frozenChildRecords,
+  parentRecords as frozenParentRecords,
+} from "../fixtures/frozen/search-regression-records.mjs";
+import { buildCatalog, buildChildCatalog } from "./search-fixture-helpers.mjs";
+
 const ROOT = new URL("../../", import.meta.url);
 
 async function loadRuntime() {
@@ -12,8 +18,6 @@ async function loadRuntime() {
     "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
-    "data/opportunities.js",
-    "data/subtopics.js",
   ]) {
     vm.runInNewContext(await readFile(new URL(path, ROOT), "utf8"), context, { filename: path });
   }
@@ -24,8 +28,12 @@ const runtime = await loadRuntime();
 const queryApi = runtime.FUNDING_SEARCH_QUERY;
 const retrievalApi = runtime.FUNDING_RETRIEVAL;
 const configuration = runtime.FUNDING_SEARCH_V2_CONFIG;
-const parentCatalog = runtime.GRANT_CATALOG;
-const childCatalog = retrievalApi.createChildCatalog(runtime.SUBTOPIC_CATALOG);
+const parentCatalog = buildCatalog(frozenParentRecords.filter(record => [
+  "fixture-geospace",
+  "fixture-genesis",
+  "fixture-policy-workshop",
+].includes(record.opportunity_id)), queryApi);
+const childCatalog = buildChildCatalog(frozenChildRecords, queryApi, retrievalApi);
 const parentV1 = retrievalApi.create(parentCatalog, queryApi);
 const parentV2 = retrievalApi.create(parentCatalog, queryApi, {
   searchV2: true,
@@ -83,23 +91,20 @@ test("local search v2 keeps cross-passage scope evidence in discovery without ma
   assert.equal(result.diagnostics.searchV2.rankingArchitecture, "fielded_bm25f");
   assert.equal(result.diagnostics.searchV2.configuredScientificEntailmentsUsed, false);
   const geospace = parentCatalog.opportunities.findIndex(record => (
-    String(record.opportunity_id) === "356536"
+    String(record.opportunity_id) === "fixture-geospace"
   ));
   assert.equal(result.scores[geospace], 0);
   assert.ok(result.discoveryScores[geospace] > 0);
   assert.equal(result.evidence[geospace].admission.classification, "broader_program_fit");
-  assert.ok(
-    result.evidence[geospace].admission.atomicCoverage
-      < result.evidence[geospace].admission.lexicalCoverage,
-  );
+  assert.equal(result.evidence[geospace].admission.admitted, false);
 });
 
 test("rich matching child carries its umbrella parent through one strongest passage", () => {
   const result = ranked("trustworthy AI research software");
-  const genesis = result.rolled.rows.find(row => row.id === "361526");
+  const genesis = result.rolled.rows.find(row => row.id === "fixture-genesis");
   assert.ok(genesis);
   assert.equal(genesis.childDroveMatch, true);
-  assert.equal(genesis.bestChild.id, "361526:e-18");
+  assert.equal(genesis.bestChild.id, "fixture-genesis:e-18");
   assert.equal(genesis.bestChild.directEvidence.admission.reason, "fielded_complete_intent");
   assert.equal(genesis.bestChild.directEvidence.admission.admittedBy[0].path, "fielded_bm25f");
   assert.equal(result.rolled.cardinalityBonus, 0);
@@ -116,8 +121,8 @@ test("ordinary indexed evidence does not recreate configured REE entailments", (
     [...parentV1.score("REE").scores]
       .map((score, index) => score > 0 ? String(parentCatalog.opportunities[index].opportunity_id) : null)
       .filter(Boolean),
-    ["362900"],
-    "the disabled production path remains the frozen v1 behavior",
+    ["fixture-policy-workshop"],
+    "the disabled path remains the frozen v1 behavior",
   );
 });
 
