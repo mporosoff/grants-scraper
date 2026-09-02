@@ -77,15 +77,26 @@ function liveParentExamples(count) {
   const examples = [];
   const seen = new Set();
   for (const passage of corpus) {
+    if (passage.passage_kind !== "parent") continue;
     const parentId = String(passage.parent_id || "");
     const record = recordsById.get(parentId);
-    const opportunityNumber = String(record?.opportunity_number || "").trim();
-    if (!parentId || !opportunityNumber || seen.has(parentId)) continue;
+    if (!parentId || !record || seen.has(parentId)) continue;
+    const recordIndex = harness.parentCatalog.opportunities.indexOf(record);
+    const passageTerms = new Set(passage.text.toLowerCase().match(/[a-z][a-z'-]{3,}/g) || []);
+    const query = [...new Set(`${record.title || ""} ${record.description || ""}`
+      .match(/[A-Za-z][A-Za-z'-]{3,}/g)
+      ?.map(token => token.toLowerCase()) || [])]
+      .find(token => (
+        passageTerms.has(token)
+        && harness.parentEngine.score(token, { evidence: true }).discoveryScores[recordIndex] > 0
+        && api.deterministicSafeguard(token, passage).allowed
+      ));
+    if (!query) continue;
     seen.add(parentId);
-    examples.push({ parentId, opportunityNumber });
+    examples.push({ parentId, query });
     if (examples.length === count) break;
   }
-  assert.equal(examples.length, count, `live catalog supplies ${count} active identifier examples`);
+  assert.equal(examples.length, count, `live catalog supplies ${count} active searchable parent examples`);
   return examples;
 }
 
@@ -248,7 +259,7 @@ test("a cross-track result removed from Strong remains eligible for Potential", 
 });
 
 test("active parent eligibility constrains BM25, semantic top-k, child passages, and reranking", async () => {
-  const [{ parentId, opportunityNumber }] = liveParentExamples(1);
+  const [{ parentId, query }] = liveParentExamples(1);
   const eligibleParentIds = [parentId];
   const vectors = api.decodeFloat16(
     vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
@@ -265,7 +276,6 @@ test("active parent eligibility constrains BM25, semantic top-k, child passages,
   assert.ok(semantic.length > 0);
   assert.ok(semantic.every(item => item.parent_id === eligibleParentIds[0]));
 
-  const query = opportunityNumber;
   const parentDirect = harness.parentEngine.score(query, { evidence: true });
   const childDirect = harness.childEngine.score(query, { evidence: true });
   const bm25 = api.buildBm25Candidates({
@@ -368,8 +378,8 @@ test("identical in-flight searches share one paid semantic cycle", async () => {
 
   const examples = liveParentExamples(2);
   const eligibleParentIds = examples.map(item => item.parentId);
-  const first = client.search(examples[0].opportunityNumber, { eligibleParentIds });
-  const repeated = client.search(examples[0].opportunityNumber, { eligibleParentIds: eligibleParentIds.toReversed() });
+  const first = client.search(examples[0].query, { eligibleParentIds });
+  const repeated = client.search(examples[0].query, { eligibleParentIds: eligibleParentIds.toReversed() });
   releaseEmbedding();
   const [firstResult, repeatedResult] = await Promise.all([first, repeated]);
 
