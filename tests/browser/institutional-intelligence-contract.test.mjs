@@ -397,7 +397,8 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(appSource, /setSearchActivity\(true, sequence\)[\s\S]*try \{[\s\S]*setSearchActivity\(false, sequence\)[\s\S]*setBusy\(false\)/);
   assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*timed out before completing\. Other source results remain available\./);
   assert.match(appSource, /unavailableSourceSummary\(snapshot\.sources \|\| \[\]\)/);
-  assert.match(page, /Funded Award Intelligence/);
+  assert.doesNotMatch(page, /Funded Award Intelligence/);
+  assert.match(page, /aria-labelledby="ii-heading"[\s\S]*<h2 id="ii-heading">Find funded projects/);
   assert.match(page, /id="award-search-form"[^>]*hidden/);
   assert.match(page, /id="ii-program-officer"/);
   assert.doesNotMatch(page, /Structured award search and institution resolution do not require an AI key/);
@@ -417,7 +418,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.doesNotMatch(appSource, /searchUrl|awards\/search/);
   assert.match(page, /id="ii-card-pagination"[\s\S]*>Previous<[\s\S]*id="ii-card-page-numbers"[\s\S]*>Next</);
   assert.match(page, /id="ii-page-size"[\s\S]*value="10"[\s\S]*value="25"[\s\S]*value="50"/);
-  assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading \{[\s\S]*display: none/);
+  assert.doesNotMatch(page + styles, /ii-shell-heading/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
   assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence-snapshots\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);

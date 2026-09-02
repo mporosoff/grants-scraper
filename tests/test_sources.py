@@ -1245,7 +1245,9 @@ class DoeExchangeParseTests(unittest.TestCase):
         'Notice Of Funding Opportunity (NOFO) Geothermal Technologies (GTO) 10/30/2026 05:00 PM ET TBD</li>'
         '<li><a href="#FoaId55555555-5555-5555-5555-555555555555">DE-TA3-0003589</a> '
         '<a href="#FoaId55555555-5555-5555-5555-555555555555">Critical Minerals Topic Area 3</a> '
-        'Notice Of Funding Opportunity (NOFO) Manufacturing Office 11/30/2026 05:00 PM ET</li>'
+        'Notice Of Funding Opportunity (NOFO) Manufacturing Office '
+        '<a href="#FoaId55555555-5555-5555-5555-555555555555">Listed on Announcement</a> '
+        '<a href="#FoaId55555555-5555-5555-5555-555555555555">Listed on Announcement</a></li>'
         '<li><a href="#FoaId66666666-6666-6666-6666-666666666666">DE-FOA-0003588</a> '
         '<a href="#FoaId66666666-6666-6666-6666-666666666666">Notice of Intent to issue a Notice of Funding Opportunity</a> '
         'Notice of Intent to Publish Announcement (NOI) Manufacturing Office TBD</li>'
@@ -1275,6 +1277,32 @@ class DoeExchangeParseTests(unittest.TestCase):
         geo = by_title["Geothermal Field Tests"].to_record(
             slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
         self.assertEqual(geo["agency"], "Geothermal Technologies (GTO)")
+
+        critical = by_title["Critical Minerals Topic Area 3"].to_record(
+            slug="eere-exchange", source="DOE EERE Exchange", source_type="Federal")
+        self.assertEqual(critical["agency"], "Manufacturing Office")
+        self.assertNotIn("Listed on Announcement", critical["agency"])
+
+    def test_tbd_is_a_deadline_placeholder_not_an_arpa_e_office(self):
+        from scripts.sources.adapters.doe_exchange import ArpaEAdapter
+
+        html = (
+            '<a href="#FoaId11111111-1111-1111-1111-111111111111">DE-FOA-0009001</a>'
+            '<a href="#FoaId11111111-1111-1111-1111-111111111111">Open-ended program</a>'
+            'Notice Of Funding Opportunity (NOFO) TBD'
+            '<a href="#FoaId22222222-2222-2222-2222-222222222222">DE-FOA-0009002</a>'
+            '<a href="#FoaId22222222-2222-2222-2222-222222222222">Dated program</a>'
+            'Notice Of Funding Opportunity (NOFO) 11/30/2026 05:00 PM ET'
+            '<a href="#FoaId33333333-3333-3333-3333-333333333333">DE-FOA-0009003</a>'
+            '<a href="#FoaId33333333-3333-3333-3333-333333333333">Second dated program</a>'
+            'Notice Of Funding Opportunity (NOFO) 12/15/2026 05:00 PM ET'
+        )
+        records = [
+            item.to_record(slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
+            for item in ArpaEAdapter().parse_html(html, as_of=date(2026, 9, 2))
+        ]
+        self.assertEqual(records[0]["agency"], "ARPA-E eXCHANGE")
+        self.assertNotIn("<a", records[0]["agency"])
 
     def test_currentness_gate_drops_closed_foas(self):
         from scripts.sources.adapters.doe_exchange import ArpaEAdapter

@@ -2,7 +2,8 @@
   "use strict";
 
   var API = global.OpportunityTeam;
-  var openPanel = null;
+  var openPanels = new Map();
+  var panelSequence = 0;
   var childCatalogPromise = null;
 
   function escapeHtml(value) {
@@ -31,31 +32,51 @@
       card.contains(current.trigger) && card.contains(current.panel));
   }
 
-  function closeCurrent(options) {
+  function closePanel(current, options) {
     options = options || {};
-    if (!openPanel) return;
-    var trigger = openPanel.trigger;
+    if (!current) return;
+    var trigger = current.trigger;
     if (trigger) {
       trigger.setAttribute("aria-expanded", "false");
       trigger.removeAttribute("aria-controls");
       if (options.restoreFocus && trigger.isConnected) trigger.focus();
     }
-    if (openPanel.panel) openPanel.panel.remove();
-    openPanel = null;
+    if (current.panel) {
+      openPanels.delete(current.panel);
+      current.panel.remove();
+    }
   }
 
-  function reconcile() {
-    if (!openPanel) return false;
-    if (panelOwned(openPanel)) return true;
-    closeCurrent({ restoreFocus: false });
+  function closeAll() {
+    Array.from(openPanels.values()).forEach(function (current) {
+      closePanel(current, { restoreFocus: false });
+    });
+  }
+
+  function reconcile(current) {
+    if (!current || !openPanels.has(current.panel)) return false;
+    if (panelOwned(current)) return true;
+    closePanel(current, { restoreFocus: false });
     return false;
   }
 
+  function currentForElement(element) {
+    var panel = element && element.closest && element.closest(".opportunity-team-panel");
+    return panel ? openPanels.get(panel) || null : null;
+  }
+
+  function currentForTrigger(trigger) {
+    var panelId = trigger && trigger.getAttribute("aria-controls");
+    var panel = panelId ? document.getElementById(panelId) : null;
+    var current = panel ? openPanels.get(panel) : null;
+    return current && current.trigger === trigger ? current : null;
+  }
+
   function panelShell(trigger, parentId, scopeId) {
-    closeCurrent({ restoreFocus: false });
     var card = trigger.closest(".result-card");
     if (!card) return null;
-    var panelId = "opportunity-team-panel-" + safeId(parentId);
+    panelSequence += 1;
+    var panelId = "opportunity-team-panel-" + safeId(parentId) + "-" + panelSequence;
     var panel = document.createElement("section");
     panel.className = "opportunity-team-panel";
     panel.id = panelId;
@@ -67,7 +88,7 @@
     card.appendChild(panel);
     trigger.setAttribute("aria-expanded", "true");
     trigger.setAttribute("aria-controls", panelId);
-    openPanel = {
+    var current = {
       trigger: trigger,
       panel: panel,
       parentId: String(parentId),
@@ -79,8 +100,9 @@
       state: null,
       childCatalog: null,
     };
+    openPanels.set(panel, current);
     panel.querySelector("h4").focus();
-    return openPanel;
+    return current;
   }
 
   function teamMatchHref(view) {
@@ -129,18 +151,19 @@
       '<a href="' + escapeHtml(role.source_url) + '" target="_blank" rel="noopener">Opportunity role source ↗</a></li>';
   }
 
-  function renderProposal() {
-    if (!reconcile() || !openPanel.engine || !openPanel.state) return;
-    var current = openPanel;
+  function renderProposal(current) {
+    if (!reconcile(current) || !current.engine || !current.state) return;
     var view = current.engine.proposalView(current.state);
     var body = current.panel.querySelector(".opportunity-team-body");
+    var replacementId = current.panel.id + "-replacement";
+    var rolesId = current.panel.id + "-roles";
     var missingSkills = view.opportunity.missing_skills.slice();
     view.unfilledRoles.forEach(function (role) {
       if (!missingSkills.includes(role.label)) missingSkills.push(role.label);
     });
     var replacement = view.replacements.length && view.selectedIds.length < 4
-      ? '<div class="opportunity-team-replacement"><label for="opportunity-team-replacement-' + safeId(view.opportunity.id) + '">Source-backed replacement options</label>' +
-        '<div><select id="opportunity-team-replacement-' + safeId(view.opportunity.id) + '" data-opportunity-team-replacement><option value="">Choose a replacement</option>' +
+      ? '<div class="opportunity-team-replacement"><label for="' + replacementId + '">Source-backed replacement options</label>' +
+        '<div><select id="' + replacementId + '" data-opportunity-team-replacement><option value="">Choose a replacement</option>' +
         view.replacements.map(function (item) {
           return '<option value="' + escapeHtml(item.profile.id) + '">' + escapeHtml(item.profile.name) + ' — ' + escapeHtml(item.roles.map(function (role) { return role.label; }).join("; ")) + (item.reviewed ? '' : ' (role review required)') + '</option>';
         }).join("") + '</select><button type="button" data-opportunity-team-add-replacement disabled>Add to team</button></div></div>'
@@ -154,7 +177,7 @@
       '<p><strong>Specific objective:</strong> ' + escapeHtml(view.opportunity.objective) + '</p>' +
       '<div class="opportunity-team-why"><strong>Why this team</strong><p>' + escapeHtml(view.opportunity.why_team) + '</p></div>' +
       '<div class="opportunity-team-members">' + view.selected.map(memberCard).join("") + '</div>' +
-      '<section class="opportunity-team-roles" aria-labelledby="opportunity-team-roles-' + safeId(view.opportunity.id) + '"><h5 id="opportunity-team-roles-' + safeId(view.opportunity.id) + '">Required roles and evidence</h5><ul>' +
+      '<section class="opportunity-team-roles" aria-labelledby="' + rolesId + '"><h5 id="' + rolesId + '">Required roles and evidence</h5><ul>' +
       view.roles.map(function (role) { return roleRow(role, current.engine); }).join("") + '</ul></section>' +
       (missingSkills.length ? '<section class="opportunity-team-gaps"><h5>Missing skills to recruit</h5><ul>' + missingSkills.map(function (skill) { return '<li>' + escapeHtml(skill) + '</li>'; }).join("") + '</ul></section>' : '') +
       replacement +
@@ -163,9 +186,9 @@
       '<p class="opportunity-team-caveat">This is an evidence-calibrated planning aid, not a statement of eligibility, availability, willingness, or sponsor fit. Verify the official notice and contact each proposed investigator.</p>';
   }
 
-  function renderScopeChoice(scopes) {
-    if (!reconcile()) return;
-    var body = openPanel.panel.querySelector(".opportunity-team-body");
+  function renderScopeChoice(current, scopes) {
+    if (!reconcile(current)) return;
+    var body = current.panel.querySelector(".opportunity-team-body");
     body.removeAttribute("role");
     body.innerHTML = '<h5>Choose a specific opportunity topic</h5><p>This parent call is too broad for automatic team assembly. Select one reviewed child or declared branch.</p>' +
       '<div class="opportunity-team-scope-options">' + scopes.map(function (scope) {
@@ -173,10 +196,10 @@
       }).join("") + '</div>';
   }
 
-  function renderUnavailable(reason, scopes) {
-    if (!reconcile()) return;
+  function renderUnavailable(current, reason, scopes) {
+    if (!reconcile(current)) return;
     if (reason === "specific_scope_required" && scopes && scopes.length) {
-      renderScopeChoice(scopes);
+      renderScopeChoice(current, scopes);
       return;
     }
     var messages = {
@@ -186,16 +209,16 @@
       child_not_publication_eligible: "The selected child topic is not currently publication-eligible, so it cannot support a team proposal.",
       currentness_unavailable: "The authoritative opportunity-currentness check is unavailable.",
     };
-    var body = openPanel.panel.querySelector(".opportunity-team-body");
+    var body = current.panel.querySelector(".opportunity-team-body");
     body.removeAttribute("role");
     body.innerHTML = '<p>' + escapeHtml(messages[reason] || "The proposed team is temporarily unavailable.") + '</p>' +
       '<p>Ordinary Funding Finder search and Team Match remain available.</p>' +
       '<a class="button secondary" href="team_match.html">Open Team Match</a>';
   }
 
-  function renderFailure(error) {
-    if (!reconcile()) return;
-    var body = openPanel.panel.querySelector(".opportunity-team-body");
+  function renderFailure(current, error) {
+    if (!reconcile(current)) return;
+    var body = current.panel.querySelector(".opportunity-team-body");
     body.innerHTML = '<p>Team proposals are temporarily unavailable. Ordinary Funding Finder search and actions still work.</p>' +
       '<button type="button" class="source-action" data-opportunity-team-retry>Retry</button>';
     body.dataset.error = String(error && error.message || "load_failed").slice(0, 200);
@@ -215,14 +238,13 @@
     return childCatalogPromise;
   }
 
-  function resolveCurrent() {
-    var current = openPanel;
+  function resolveCurrent(current) {
     if (!current || !panelOwned(current) || !current.engine) return;
     var tentative = current.engine.opportunityById.get(current.scopeId);
     var needChildren = tentative && tentative.record_type === "publishable_child";
     var childReady = needChildren ? loadChildCatalog() : Promise.resolve(null);
     childReady.then(function (childCatalog) {
-      if (openPanel !== current || !panelOwned(current)) return;
+      if (!reconcile(current)) return;
       current.childCatalog = childCatalog;
       var outcome = current.engine.resolveScope({
         parentId: current.parentId,
@@ -233,96 +255,97 @@
         now: current.now,
       });
       if (!outcome.ok) {
-        renderUnavailable(outcome.reason, outcome.scopes);
+        renderUnavailable(current, outcome.reason, outcome.scopes);
         return;
       }
       current.scopeId = outcome.opportunity.id;
       current.state = current.engine.proposal(outcome.opportunity);
-      renderProposal();
-      var heading = current.panel.querySelector("h4");
-      if (heading) heading.focus();
+      renderProposal(current);
     }).catch(function (error) {
-      if (openPanel === current) renderFailure(error);
+      if (reconcile(current)) renderFailure(current, error);
     });
   }
 
-  function loadCurrent() {
-    var current = openPanel;
+  function loadCurrent(current) {
     if (!current || !panelOwned(current) || !API || !current.record) {
-      renderFailure(new Error("Team helper or catalog record unavailable."));
+      if (current) renderFailure(current, new Error("Team helper or catalog record unavailable."));
       return;
     }
     var generationId;
     try { generationId = API.pageGenerationId(); } catch (error) {
-      renderFailure(error);
+      renderFailure(current, error);
       return;
     }
     API.loadData(generationId).then(function (data) {
-      if (openPanel !== current || !panelOwned(current)) return;
+      if (!reconcile(current)) return;
       current.engine = API.create(data);
-      resolveCurrent();
+      resolveCurrent(current);
     }).catch(function (error) {
-      if (openPanel === current) renderFailure(error);
+      if (reconcile(current)) renderFailure(current, error);
     });
   }
 
   document.addEventListener("click", function (event) {
     var trigger = event.target.closest("[data-opportunity-team]");
     if (trigger) {
-      reconcile();
       var parentId = trigger.getAttribute("data-opportunity-team");
       var scopeId = trigger.getAttribute("data-opportunity-team-scope") || "";
-      if (openPanel && openPanel.trigger === trigger && openPanel.parentId === parentId) {
-        closeCurrent({ restoreFocus: true });
+      var existing = currentForTrigger(trigger);
+      if (existing && existing.parentId === parentId) {
+        closePanel(existing, { restoreFocus: true });
         return;
       }
-      if (panelShell(trigger, parentId, scopeId)) loadCurrent();
+      var created = panelShell(trigger, parentId, scopeId);
+      if (created) loadCurrent(created);
       return;
     }
-    if (event.target.closest("[data-opportunity-team-close]")) {
-      closeCurrent({ restoreFocus: true });
+    var current = currentForElement(event.target);
+    if (event.target.closest("[data-opportunity-team-close]") && current) {
+      closePanel(current, { restoreFocus: true });
       return;
     }
-    if (event.target.closest("[data-opportunity-team-retry]")) {
-      loadCurrent();
+    if (event.target.closest("[data-opportunity-team-retry]") && current) {
+      loadCurrent(current);
       return;
     }
     var scope = event.target.closest("[data-opportunity-team-scope]");
-    if (scope && reconcile()) {
-      openPanel.scopeId = scope.getAttribute("data-opportunity-team-scope");
-      openPanel.panel.querySelector(".opportunity-team-body").innerHTML = "<p>Checking the selected topic and its current publication eligibility…</p>";
-      resolveCurrent();
+    if (scope && reconcile(current)) {
+      current.scopeId = scope.getAttribute("data-opportunity-team-scope");
+      current.panel.querySelector(".opportunity-team-body").innerHTML = "<p>Checking the selected topic and its current publication eligibility…</p>";
+      resolveCurrent(current);
       return;
     }
     var remove = event.target.closest("[data-opportunity-team-remove]");
-    if (remove && reconcile() && openPanel.state) {
-      openPanel.state = openPanel.engine.removeMember(openPanel.state, remove.getAttribute("data-opportunity-team-remove"));
-      renderProposal();
+    if (remove && reconcile(current) && current.state) {
+      current.state = current.engine.removeMember(current.state, remove.getAttribute("data-opportunity-team-remove"));
+      renderProposal(current);
       return;
     }
     var add = event.target.closest("[data-opportunity-team-add-replacement]");
-    if (add && reconcile() && openPanel.state) {
-      var select = openPanel.panel.querySelector("[data-opportunity-team-replacement]");
+    if (add && reconcile(current) && current.state) {
+      var select = current.panel.querySelector("[data-opportunity-team-replacement]");
       if (select && select.value) {
-        openPanel.state = openPanel.engine.addReplacement(openPanel.state, select.value);
-        renderProposal();
+        current.state = current.engine.addReplacement(current.state, select.value);
+        renderProposal(current);
       }
     }
   });
 
   document.addEventListener("change", function (event) {
-    if (!reconcile() || !event.target.matches("[data-opportunity-team-replacement]")) return;
-    var button = openPanel.panel.querySelector("[data-opportunity-team-add-replacement]");
+    var current = currentForElement(event.target);
+    if (!reconcile(current) || !event.target.matches("[data-opportunity-team-replacement]")) return;
+    var button = current.panel.querySelector("[data-opportunity-team-add-replacement]");
     if (button) button.disabled = !event.target.value;
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && reconcile()) closeCurrent({ restoreFocus: true });
+    var current = currentForElement(event.target);
+    if (event.key === "Escape" && reconcile(current)) closePanel(current, { restoreFocus: true });
   });
 
   document.addEventListener("funding-finder:before-results-render", function () {
-    closeCurrent({ restoreFocus: false });
+    closeAll();
   });
 
-  global.OpportunityTeamPanel = Object.freeze({ closeCurrent: closeCurrent, reconcile: reconcile });
+  global.OpportunityTeamPanel = Object.freeze({ closeAll: closeAll, reconcile: reconcile });
 })(globalThis);

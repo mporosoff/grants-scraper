@@ -32,7 +32,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="count-archived"/);
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
-  assert.match(prototype, /id="export-ics"/);
+  assert.doesNotMatch(prototype + script, /id="export-ics"|\$\("export-ics"\)/);
+  assert.match(prototype, /class="button primary" id="export-csv"/);
+  assert.match(prototype, /class="button primary team-ready-filter" id="filter-team-ready"/);
+  assert.match(script, /function scrollToSearchWorkspace\(\)[\s\S]*?\$\("saved-panel"\)\.scrollIntoView/);
   assert.doesNotMatch(prototype, /id="compare-panel"|data-compare=/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
