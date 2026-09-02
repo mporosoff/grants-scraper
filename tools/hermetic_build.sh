@@ -25,6 +25,11 @@ FROZEN="$ROOT/tests/fixtures/frozen"
 # The catalog date is fixed so currentness gates resolve identically every run.
 AS_OF="2026-08-20"
 
+# Every stage that makes TTL or recheck decisions receives the same fixed
+# instant. Pinning only the catalog's generated_at is insufficient because
+# document rechecks are evaluated at timestamp (not calendar-day) precision.
+PIPELINE_NOW="${AS_OF}T00:00:00Z"
+
 # The change feed derives every event's `changed_at` -- and therefore its event
 # id, which is a SHA-1 over `changed_at[:10]` -- from the CURRENT catalog's
 # `generated_at`. AS_OF does not reach that value, so before this pin the gate
@@ -71,13 +76,15 @@ cp "$OUT/opportunities.js" "$OUT/.work/opportunities.previous.js"
 python -m scripts.enrich_catalog \
   --catalog "$OUT/opportunities.js" \
   --cache "$OUT/opportunity_enrichment.json" \
-  --max-updates 0 --max-agency-updates 0 --request-delay 0 >/dev/null
+  --max-updates 0 --max-agency-updates 0 --request-delay 0 \
+  --now "$PIPELINE_NOW" >/dev/null
 
 # 3. Document evidence. Zero fetches; still merges and rebuilds the index.
 python -m scripts.extract_document_evidence \
   --catalog "$OUT/opportunities.js" \
   --cache "$OUT/document_evidence.json" \
-  --max-documents 0 --request-delay 0 >/dev/null
+  --max-documents 0 --request-delay 0 \
+  --now "$PIPELINE_NOW" >/dev/null
 
 # 4. Source merge. The sample adapter is fixture-backed and needs no network.
 python -m scripts.sources merge \

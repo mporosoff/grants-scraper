@@ -108,6 +108,24 @@ def utc_now():
     return datetime.now(timezone.utc)
 
 
+def parse_now(value):
+    """Parse an explicit clock override for deterministic offline builds."""
+    text = str(value or "").strip()
+    if text.endswith("Z"):
+        text = f"{text[:-1]}+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "--now must be an ISO 8601 timestamp with a timezone"
+        ) from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise argparse.ArgumentTypeError(
+            "--now must be an ISO 8601 timestamp with a timezone"
+        )
+    return parsed.astimezone(timezone.utc)
+
+
 def read_catalog(path):
     text = Path(path).read_text(encoding="utf-8")
     prefix = f"globalThis.{CATALOG_GLOBAL}="
@@ -1097,6 +1115,15 @@ def parse_args(argv=None):
         default=0.25,
         help="Seconds between Grants.gov detail requests (default: 0.25).",
     )
+    parser.add_argument(
+        "--now",
+        type=parse_now,
+        default=None,
+        help=(
+            "Override the current time with a timezone-aware ISO 8601 "
+            "timestamp for deterministic offline builds."
+        ),
+    )
     args = parser.parse_args(argv)
     if args.max_updates < 0:
         parser.error("--max-updates must be non-negative")
@@ -1117,6 +1144,7 @@ def main(argv=None):
         max_updates=args.max_updates,
         max_agency_updates=args.max_agency_updates,
         request_delay=args.request_delay,
+        now=args.now,
     )
     write_cache(cache, args.cache)
     write_catalog(enriched, args.catalog)
