@@ -3,10 +3,35 @@ import {
   mockAwards,
   mockAlerts,
   mockFrozenAwardCatalog,
+  mockHybrid,
+  openFundingFinder,
+  runFundingSearch,
 } from "./helpers.mjs";
 
 // Snapshot-native standalone coverage lives in unit-b-funded-awards.spec.mjs.
 // These tests retain the exact-opportunity and cross-product compatibility surface.
+
+async function openFrozenAwardFromFundingFinder(page, context, opportunityId, query) {
+  await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
+  await mockFrozenAwardCatalog(context);
+  mockHybrid(page);
+  const awardCalls = mockAwards(context);
+  await openFundingFinder(page);
+  await runFundingSearch(page, query);
+
+  const card = page.locator(`[data-opportunity-id="${opportunityId}"]`);
+  await expect(card).toBeVisible();
+  const link = card.locator("[data-funded-awards]");
+  await expect(link).toHaveAttribute("href", new RegExp(`funded_awards\\.html\\?opportunity=${opportunityId}$`));
+  await expect(link).toHaveAttribute("target", "_blank");
+  await expect(link).toHaveAttribute("rel", "noopener");
+  const [awardsPage] = await Promise.all([
+    page.waitForEvent("popup"),
+    link.click(),
+  ]);
+  await awardsPage.waitForLoadState("domcontentloaded");
+  return { awardsPage, awardCalls };
+}
 
 test("standalone paging and investigator handoff retain the submitted year range", async ({ page }) => {
   await mockFrozenAwardCatalog(page);
@@ -58,39 +83,33 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   expect(geometry.contentWidth).toBeLessThanOrEqual(geometry.visibleWidth);
 });
 
-test("the frozen NIH example opens its exact opportunity mapping", async ({ page }) => {
-  await mockFrozenAwardCatalog(page);
-  const awardCalls = mockAwards(page);
-  await page.goto("/funded_awards.html?opportunity=361187");
-  await expect(page.locator("#selected-opportunity-heading")).toContainText("Lasker Clinical Research Scholar");
-  await expect(page.locator("#selected-mapping-note")).toContainText("exact NIH opportunity number PAR-26-114");
-  await expect(page.locator(".award-card[data-source='NIH']")).toHaveCount(1);
+test("the frozen NIH example opens its exact opportunity mapping", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "361187", "PAR-26-114");
+  await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("Lasker Clinical Research Scholar");
+  await expect(awardsPage.locator("#selected-mapping-note")).toContainText("exact NIH opportunity number PAR-26-114");
+  await expect(awardsPage.locator(".award-card[data-source='NIH']")).toHaveCount(1);
   await expect.poll(() => awardCalls.length).toBe(1);
   expect(awardCalls[0].sources).toEqual(["NIH"]);
   expect(awardCalls[0].criteria.opportunity_number).toBe("PAR-26-114");
 });
 
-test("the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim", async ({ page }) => {
-  await mockFrozenAwardCatalog(page);
-  const awardCalls = mockAwards(page);
-  await page.goto("/funded_awards.html?opportunity=361526");
-  await expect(page.locator("#selected-opportunity-heading")).toContainText("The Genesis Mission");
-  await expect(page.locator("#selected-mapping-note")).toContainText("exact DOE Office of Science FOA DE-FOA-0003612");
-  await expect(page.locator(".award-card[data-source='DOE']")).toHaveCount(1);
+test("the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "361526", "DE-FOA-0003612");
+  await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("The Genesis Mission");
+  await expect(awardsPage.locator("#selected-mapping-note")).toContainText("exact DOE Office of Science FOA DE-FOA-0003612");
+  await expect(awardsPage.locator(".award-card[data-source='DOE']")).toHaveCount(1);
   await expect.poll(() => awardCalls.length).toBe(1);
   expect(awardCalls[0].sources).toEqual(["DOE"]);
   expect(awardCalls[0].criteria.opportunity_number).toBe("DE-FOA-0003612");
   expect(awardCalls[0].limit).toBe(10);
-  await expect(page.locator("#watch-selected-program")).toBeHidden();
+  await expect(awardsPage.locator("#watch-selected-program")).toBeHidden();
 });
 
-test("the frozen NSF CBET example opens its reviewed current and predecessor program group", async ({ page }) => {
-  await mockFrozenAwardCatalog(page);
-  const awardCalls = mockAwards(page);
-  await page.goto("/funded_awards.html?opportunity=363616");
-  await expect(page.locator("#selected-opportunity-heading")).toContainText("Chemical, Bioengineering, Energy, and Transport Systems");
-  await expect(page.locator("#selected-mapping-note")).toContainText("reviewed predecessor program-element codes");
-  await expect(page.locator(".award-card[data-source='NSF']")).toHaveCount(1);
+test("the frozen NSF CBET example opens its reviewed current and predecessor program group", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "363616", "26-518");
+  await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("Chemical, Bioengineering, Energy, and Transport Systems");
+  await expect(awardsPage.locator("#selected-mapping-note")).toContainText("reviewed predecessor program-element codes");
+  await expect(awardsPage.locator(".award-card[data-source='NSF']")).toHaveCount(1);
   await expect.poll(() => awardCalls.length).toBe(1);
   expect(awardCalls[0].sources).toEqual(["NSF"]);
   expect(awardCalls[0].criteria.program_codes).toEqual([
@@ -99,12 +118,12 @@ test("the frozen NSF CBET example opens its reviewed current and predecessor pro
     "723600", "149100", "534200", "534500",
     "764300", "117900", "140700", "144300", "141500", "140600",
   ]);
-  const alertCalls = mockAlerts(page);
-  await expect(page.locator("#watch-selected-program")).toBeVisible();
-  await page.locator("#watch-selected-program").click();
-  await expect(page.getByRole("dialog", { name: "Watch this program" })).toContainText("controlled NSF program identity");
-  await page.locator("#alert-email").fill("researcher@example.edu");
-  await page.locator("#alert-submit").click();
+  const alertCalls = mockAlerts(awardsPage);
+  await expect(awardsPage.locator("#watch-selected-program")).toBeVisible();
+  await awardsPage.locator("#watch-selected-program").click();
+  await expect(awardsPage.getByRole("dialog", { name: "Watch this program" })).toContainText("controlled NSF program identity");
+  await awardsPage.locator("#alert-email").fill("researcher@example.edu");
+  await awardsPage.locator("#alert-submit").click();
   await expect.poll(() => alertCalls.length).toBe(1);
   expect(alertCalls[0].subscription.definition).toEqual({ program_id: "nsf:cbet" });
 });

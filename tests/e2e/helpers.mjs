@@ -5,6 +5,17 @@ const frozenAwardCatalogSource = await readFile(
   new URL("../fixtures/frozen/award-opportunities.js", import.meta.url),
   "utf8",
 );
+const frozenAwardCatalogMetadataSource = `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
+  schema_version: 1,
+  catalog_schema_version: 3,
+  generated_at: "2026-09-01T12:00:00Z",
+  pipeline_generated_at: "2026-09-01T12:00:00Z",
+  record_count: 1000,
+  status_counts: { posted: 1000 },
+  asset_version: "catalog-20260901T120000000000Z",
+  catalog_url: "./data/opportunities.js?v=catalog-20260901T120000000000Z",
+  release_identity: "catalog-v3:catalog-20260901T120000000000Z:records=1000:documents=1000:terms=0:status=posted=1000",
+})};`;
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
 const AWARD_WORKER_ORIGIN = "https://funding-finder-award-api.urochestercheme.workers.dev";
@@ -119,6 +130,11 @@ export function mockHybrid(page, {
 }
 
 export async function mockFrozenAwardCatalog(target) {
+  await target.route("**/data/catalog-metadata.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenAwardCatalogMetadataSource,
+  }));
   await target.route("**/data/opportunities.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",
