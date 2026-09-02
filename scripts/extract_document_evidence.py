@@ -2601,7 +2601,11 @@ def main(argv=None):
     catalog = read_catalog(args.catalog)
     cache = read_cache(args.cache)
     if args.revalidate_program_areas_only:
-        enriched, cache, changed_ids = revalidate_program_areas_only(catalog, cache)
+        enriched, cache, changed_ids = revalidate_program_areas_only(
+            catalog,
+            cache,
+            now=args.now,
+        )
         write_cache(cache, args.cache)
         write_catalog(enriched, args.catalog)
         print(

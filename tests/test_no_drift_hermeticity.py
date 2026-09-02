@@ -243,6 +243,31 @@ class DocumentRecheckRolloverTests(unittest.TestCase):
         after = build_document_stage(self.AFTER_RECHECK, pin_to=self.PIN)
         self.assertEqual(before, after)
 
+    def test_program_area_revalidation_uses_the_same_pinned_clock(self):
+        frozen = ROOT / "tests" / "fixtures" / "frozen"
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            catalog = work / "opportunities.js"
+            cache = work / "document_evidence.json"
+            catalog.write_bytes((frozen / catalog.name).read_bytes())
+            cache.write_bytes((frozen / cache.name).read_bytes())
+            with mock.patch.object(
+                extract_document_evidence,
+                "utc_now",
+                return_value=self.AFTER_RECHECK,
+            ):
+                extract_document_evidence.main([
+                    "--catalog", str(catalog),
+                    "--cache", str(cache),
+                    "--revalidate-program-areas-only",
+                    "--now", self.PIN,
+                ])
+
+            rebuilt = extract_document_evidence.read_catalog(catalog)
+            rebuilt_cache = json.loads(cache.read_text(encoding="utf-8"))
+            self.assertEqual(rebuilt["document_evidence_generated_at"], self.PIN)
+            self.assertEqual(rebuilt_cache["generated_at"], self.PIN)
+
 
 class PinToolTests(unittest.TestCase):
     def test_only_the_top_level_field_is_replaced(self):
