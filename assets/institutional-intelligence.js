@@ -656,8 +656,8 @@
     let narrativeFailure = false;
     if (allowNarrative && questionState.narrativeNeeded) {
       const provider = questionState.provider;
-      const key = credentials.loadKey(provider);
-      if (key) {
+      const key = provider === "hosted" ? "" : credentials.loadKey(provider);
+      if (provider === "hosted" || key) {
         try {
           const providerPayload = core.questionProviderPayload({
             question: questionState.question,
@@ -1098,27 +1098,39 @@
   }
 
   function modelForProvider(provider) {
+    if (provider === "hosted") {
+      return globalThis.FUNDING_AI_GATEWAY?.modelLabel
+        || "Gemma + GPT-5.6 Luna, routed by feature";
+    }
     return provider === "anthropic" ? ai?.ANTHROPIC_MODEL : ai?.OPENAI_MODEL;
   }
 
   function refreshProvider({ preferMain = true } = {}) {
-    let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
-    if (!new Set(["openai", "anthropic"]).has(provider)) provider = "openai";
-    if (preferMain && !credentials.loadKey(provider)) {
+    let provider = preferMain
+      ? clean($("k-provider")?.value || $("ii-provider")?.value || "hosted", 20)
+      : clean($("ii-provider").value, 20);
+    if (!new Set(["hosted", "openai", "anthropic"]).has(provider)) provider = "hosted";
+    if (preferMain && provider !== "hosted" && !credentials.loadKey(provider)) {
       const alternative = provider === "openai" ? "anthropic" : "openai";
       if (credentials.loadKey(alternative)) provider = alternative;
     }
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-    const configured = Boolean(credentials.loadKey(provider));
-    $("ii-ai-state").textContent = configured
-      ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
-      : "Connect a provider to translate questions";
-    $("ii-key-setup").classList.toggle("hidden", configured);
-    $("ii-key-status").textContent = configured
-      ? "Using the Funding Finder key already saved on this device."
-      : `No ${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is saved on this device.`;
+    const configured = provider === "hosted" || Boolean(credentials.loadKey(provider));
+    $("ii-ai-state").textContent = provider === "hosted"
+      ? "Hosted AI included"
+      : configured
+        ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
+        : "Connect a provider to translate questions";
+    $("ii-key-setup").classList.remove("hidden");
+    $("ii-key-field")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-save-key")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-key-status").textContent = provider === "hosted"
+      ? "Funding Finder's hosted AI is ready. No key is required on this device."
+      : configured
+        ? "Using the Funding Finder key already saved on this device."
+        : `No ${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is saved on this device.`;
     return { provider, configured };
   }
 
@@ -1190,8 +1202,8 @@
       return;
     }
     const { provider, configured } = refreshProvider();
-    const key = credentials.loadKey(provider);
-    if (!configured || !key) {
+    const key = provider === "hosted" ? "" : credentials.loadKey(provider);
+    if (!configured || (provider !== "hosted" && !key)) {
       $("ii-key-setup").classList.remove("hidden");
       $("ii-key-status").textContent = "No key is configured, so the answer will use the visible filters and deterministic loaded-award evidence. Save a key to enable question translation and bounded narrative synthesis.";
     }
@@ -1202,7 +1214,7 @@
     try {
       const current = formState();
       let plan = { ...current };
-      let translationFallback = !configured || !key;
+      let translationFallback = !configured || (provider !== "hosted" && !key);
       if (!translationFallback) {
         try {
           const translated = await ai.structuredResult({
@@ -1210,7 +1222,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({
               institution: current.institution,
               current_filters: {
@@ -1240,7 +1252,7 @@
       ];
       const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases, plan.topic);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
-      const next = core.sanitizeQuestionPlan(plan, current);
+      const next = core.sanitizeQuestionPlan(plan, current, question);
       const intent = core.sanitizeAnswerIntent(plan, question);
       applyFormState(next);
       state.selectedInstitution = {
@@ -1263,7 +1275,7 @@
       const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true });
       if (outcome) await refreshQuestionAnswer({ allowNarrative: true });
     } catch (error) {
-      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available without AI.`;
+      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available.`;
     }
     } finally {
       state.questionSubmitting = false;

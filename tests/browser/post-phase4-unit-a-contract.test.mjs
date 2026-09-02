@@ -45,18 +45,20 @@ test("the main query accepts file drops through the existing local NOFO pipeline
   assert.match(styles, /\.nofo-drop-zone\.is-dragging #query\s*\{/);
 });
 
-test("provider setup retains key, cost, help, and privacy details without repeating full privacy copy", () => {
+test("provider setup retains key, help, and privacy details without repeating removed copy", () => {
   const $ = load(page);
   const details = $(".provider-setup").text();
   assert.match(details, /Provider/);
   assert.match(details, /API key/);
   assert.match(details, /spending controls/);
   assert.match(details, /saved key stays in this browser/);
-  assert.match(details, /two bounded calls/);
+  assert.match(details, /No API key is required/);
+  assert.match(details, /Advanced users may instead select OpenAI or Anthropic/);
+  assert.doesNotMatch(details, /two bounded calls|What hosted AI changes/);
   assert.doesNotMatch(page, /<strong>What leaves this page:<\/strong>/);
   assert.doesNotMatch(page, /<strong>URLs and anonymous usage:<\/strong>/);
   assert.match(help, /Hosted Potential matching/);
-  assert.match(help, /User-connected AI tools/);
+  assert.match(help, /Hosted AI tools/);
   assert.match(help, /URLs and anonymous measurement/);
 });
 
@@ -76,14 +78,14 @@ test("every AI consumer names one shared structured-result operation", () => {
   assert.doesNotMatch(`${app}\n${institution}`, /output_schema/);
 });
 
-test("AI refinement requires both a usable result context and an entered or saved key", () => {
+test("AI refinement requires a usable result context and a ready hosted or user-connected provider", () => {
   const control = app.slice(
     app.indexOf("function updateAiRefineControl"),
     app.indexOf("function setAiBusy"),
   );
   assert.match(control, /const hasContext = aiRefineHasContext\(\)/);
   assert.match(control, /const searchIsCurrent = aiRefineSearchIsCurrent\(\)/);
-  assert.match(control, /const hasKey = Boolean\(\$\("k-key"\)\.value\.trim\(\)\)/);
+  assert.match(control, /const hasConnection = providerReady\(\)/);
   for (const guard of [
     /state\.ai\.busy/,
     /state\.refinement\.busy/,
@@ -91,7 +93,7 @@ test("AI refinement requires both a usable result context and an entered or save
     /uploadedNofoActive/,
     /!hasContext/,
     /!searchIsCurrent/,
-    /!hasKey/,
+    /!hasConnection/,
   ]) assert.match(control, guard);
   assert.match(control, /aria-disabled/);
   assert.match(control, /ai-refine-requirement/);

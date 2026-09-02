@@ -54,13 +54,13 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(awardsPage, /aria-current="page"/);
 });
 
-test("shared Help explains the full workflow and optional provider keys", () => {
+test("shared Help explains the full workflow, hosted AI, and optional provider keys", () => {
   assert.doesNotThrow(() => new Function(helpScript));
-  assert.match(helpScript, /Search is free\. Your own AI connection is optional\./);
-  assert.match(helpScript, /Catalog search and Team Match do not need your API key/);
+  assert.match(helpScript, /Search is free\. Hosted AI is included\./);
+  assert.match(helpScript, /Catalog search and Team Match do not use these models/);
   assert.match(helpScript, /learn a matching full phrase from the local catalog/);
   assert.match(helpScript, /Ambiguous acronyms are left unexpanded/);
-  assert.match(helpScript, /Local abbreviation handling and the site's hosted Potential ranking need no key from you/);
+  assert.match(helpScript, /Funding Finder's hosted AI powers optional terminology expansion/);
   assert.match(helpScript, /Upload and chat with a NOFO/);
   assert.match(helpScript, /Configure personalized email alerts/);
   assert.match(helpScript, /Existing Strong matches become the baseline and do not immediately generate email/);

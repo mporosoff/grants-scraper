@@ -119,7 +119,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /async function initializeCatalog/);
   assert.match(script, /ensureCatalogReady/);
   assert.match(script, /function profileAcronymContext/);
-  assert.match(script, /no AI call was made/);
+  assert.match(script, /Interpreted .* using/);
   assert.match(script, /function recordIsCurrent/);
   assert.match(script, /function recordIsAvailable/);
   assert.match(script, /return RETRIEVAL_API\.recordIsArchived\(record, asOf\)/);

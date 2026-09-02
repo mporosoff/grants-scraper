@@ -6,7 +6,7 @@
 
 https://mporosoff.github.io/grants-scraper/
 
-The application is public and browser-only. Users do not install Python, create an account, choose a faculty record, upload a file, or provide an API key merely to search. A NOFO/FOA PDF upload is an optional page-memory path for document chat.
+The public interface is a static browser application backed by narrowly bounded Cloudflare services. Users do not install Python, create an account, choose a faculty record, upload a file, or provide an API key merely to search. A NOFO/FOA PDF upload is an optional page-memory path for document chat.
 
 Team Match is also a public, self-canonical product route and is intentionally
 indexable. Its metadata uses researcher/team language so it does not imply that
@@ -43,10 +43,10 @@ Current cross-source catalog + last-known-good snapshots
           GitHub Pages
           /         |         \
          v          v          v
-Local catalog   Device-local   Optional OpenAI or Anthropic request
-and cited       profile,      using a tab-only or explicitly
-facts           optional      device-saved provider key
-ranking         provider keys,
+Local catalog   Device-local   Optional hosted AI request through
+and cited       profile,      the protected Funding Finder gateway;
+facts           optional      personal provider keys remain an
+ranking         provider keys, advanced alternative
                 and review
                     |
                     v
@@ -98,17 +98,25 @@ rerank bounded public opportunity passages to produce Potential matches. It
 receives the search text and public passages, not CV/profile text, researcher
 names, or ORCID publication text.
 
-User-connected AI use is explicit and bounded:
+Hosted AI use is explicit and bounded:
 
 - one call translates a research description into retrieval terms;
 - local search selects at most 32 candidates;
 - one call reranks those candidates into at most 12 matches; and
 - result-chat calls receive at most the top 10 active ordinary or AI-refined
-  results plus recent conversation; and
-- uploaded-notice chat calls receive a page-marked extract capped at 145,000
-  characters, optional matched public catalog metadata, and recent conversation.
+  results plus at most 12,000 characters of recent conversation; and
+- uploaded-notice chat calls receive a page-marked extract capped at 120,000
+  characters, optional matched public catalog metadata, and at most 12,000
+  characters of recent conversation.
 
-Neither hosted Potential matching nor user-connected AI sends the full catalog.
+The hosted AI gateway rejects fields outside each operation's bounded input
+contract. In addition to per-minute client and global request limits, an atomic
+daily coordinator applies weighted per-client and global ceilings before any
+provider call. The gateway fails closed when the enable switch, limit
+configuration, rate-limit bindings, daily coordinator, or required provider
+bindings are unavailable.
+
+Neither hosted Potential matching nor hosted AI sends the full catalog.
 Blank-query browsing, local Strong matching, and filters have no model cost.
 Funded Awards does not call an embedding or reranking provider. Standalone
 research-topic searches use the agencies' native title/abstract criteria, and
@@ -175,20 +183,24 @@ only on that device and enters a shared URL when it is part of a search.
 
 The AI shortlist, chat, and any extracted uploaded-notice text exist only in
 page memory. The original uploaded PDF is not retained. Its bounded extracted
-text is sent directly to the selected provider only after the user asks a
-notice question. An API key is also tab-only by default. The user may explicitly
-save one key per provider in a
+text is sent through the protected Funding Finder AI gateway only after the
+user asks a notice question. The gateway accepts only six fixed operations,
+owns their prompts and response schemas, routes the evaluated models by
+feature, validates output, rate-limits callers, and does not log or store
+prompts or responses. An optional personal API key is tab-only by default. The
+user may explicitly save one key per provider in a
 separate `funding-finder.credentials.v1` local-storage record; the interface
 shows whether the key is entered, saved, loaded, or removed. A saved key is
 available to anyone using that browser profile, so it should not be used on a
 shared device. Keys are never placed in the profile, evaluation/review records,
 `sessionStorage`, cookies, URLs, exports, GitHub, or a central database.
 
-When AI is invoked, the browser sends enabled profile context, at most 12,000
-characters of extracted CV text, and a bounded set of public opportunity text
-directly to the selected provider. The provider’s billing, privacy, and
-retention terms apply. Users should use scoped keys with spending limits and
-should not enter confidential research.
+When hosted AI is invoked, the browser sends enabled profile context, at most
+12,000 characters of extracted CV text, and a bounded set of public opportunity
+text to the gateway. The gateway sends that bounded operation to its selected
+provider with storage disabled where supported. Users should not enter
+confidential research. If a user explicitly selects a personal provider, that
+provider's billing, privacy, and retention terms apply.
 
 The explicit Phase 2 export excludes profile text, CV text, API keys, and chat.
 It includes the current search text, a non-content comparison fingerprint,
@@ -300,7 +312,6 @@ Without an account and notification service layer, the application does not prov
 - saved searches or watchlists across devices;
 - self-service personalized email subscriptions in the public application;
 - institutional AI credential management;
-- central usage budgets;
 - shared evaluation data;
 - automatic central telemetry or anonymous review submission;
 - private access control; or

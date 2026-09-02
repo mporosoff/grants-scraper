@@ -5,6 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@11.19.0",
   "scripts": {
+    "benchmark:ai": "node scripts/evaluate_ai_models.mjs",
     "test:contracts": "node --test tests/browser/*.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:a11y": "playwright test tests/e2e/accessibility.spec.mjs"

@@ -6,6 +6,8 @@ import test from "node:test";
 import vm from "node:vm";
 
 import { loadHarness, makeVariantHarness, rankQuery } from "../../tools/run_search_diagnosis.mjs";
+import { childRecords, parentRecords } from "../fixtures/frozen/search-regression-records.mjs";
+import { buildCatalog, buildChildCatalog } from "./search-fixture-helpers.mjs";
 
 const root = new URL("../../", import.meta.url);
 const [source, manifest, vectorBuffer, appSource, configSource, htmlSource] = await Promise.all([
@@ -53,6 +55,50 @@ const corpus = api.buildCorpus({
   childCatalog: harness.childCatalog,
   currentnessRejectedIndexes: currentness.currentnessRejectedIndexes,
 });
+const frozenCatalog = buildCatalog(parentRecords, base.queryApi);
+const frozenChildCatalog = buildChildCatalog(childRecords, base.queryApi, base.retrievalApi);
+const frozenHarness = makeVariantHarness({
+  ...base,
+  catalog: frozenCatalog,
+  childCatalog: frozenChildCatalog,
+}, { searchV2: true });
+const frozenCurrentness = frozenHarness.parentEngine.score("funding research", { evidence: false });
+const frozenCorpus = api.buildCorpus({
+  parentCatalog: frozenHarness.parentCatalog,
+  childCatalog: frozenHarness.childCatalog,
+  currentnessRejectedIndexes: frozenCurrentness.currentnessRejectedIndexes,
+});
+
+function liveParentExamples(count) {
+  const recordsById = new Map(harness.parentCatalog.opportunities.map(record => [
+    String(record.opportunity_id),
+    record,
+  ]));
+  const examples = [];
+  const seen = new Set();
+  for (const passage of corpus) {
+    if (passage.passage_kind !== "parent") continue;
+    const parentId = String(passage.parent_id || "");
+    const record = recordsById.get(parentId);
+    if (!parentId || !record || seen.has(parentId)) continue;
+    const recordIndex = harness.parentCatalog.opportunities.indexOf(record);
+    const passageTerms = new Set(passage.text.toLowerCase().match(/[a-z][a-z'-]{3,}/g) || []);
+    const query = [...new Set(`${record.title || ""} ${record.description || ""}`
+      .match(/[A-Za-z][A-Za-z'-]{3,}/g)
+      ?.map(token => token.toLowerCase()) || [])]
+      .find(token => (
+        passageTerms.has(token)
+        && harness.parentEngine.score(token, { evidence: true }).discoveryScores[recordIndex] > 0
+        && api.deterministicSafeguard(token, passage).allowed
+      ));
+    if (!query) continue;
+    seen.add(parentId);
+    examples.push({ parentId, query });
+    if (examples.length === count) break;
+  }
+  assert.equal(examples.length, count, `live catalog supplies ${count} active searchable parent examples`);
+  return examples;
+}
 
 test("static public passage asset has an exact corpus/order/hash handshake", async () => {
   assert.ok(corpus.length >= 1_000);
@@ -189,30 +235,32 @@ test("semantic retrieval, RRF union, acronym guard, and strongest-child rollup a
 });
 
 test("a cross-track result removed from Strong remains eligible for Potential", () => {
-  const query = "health data workforce workshop";
-  const local = rankQuery(harness, query, { evidence: true });
-  assert.equal(local.rows.some(row => row.id === "334326"), false);
+  const query = "rare earth supply chain separations";
+  const fixtureId = "fixture-policy-workshop";
+  const local = rankQuery(frozenHarness, query, { evidence: true });
+  assert.equal(local.rows.some(row => row.id === fixtureId), false);
 
-  const parentDirect = harness.parentEngine.score(query, { evidence: true });
-  const childDirect = harness.childEngine.score(query, { evidence: true });
+  const parentDirect = frozenHarness.parentEngine.score(query, { evidence: true });
+  const childDirect = frozenHarness.childEngine.score(query, { evidence: true });
   const candidates = api.buildBm25Candidates({
-    parentCatalog: harness.parentCatalog,
-    childCatalog: harness.childCatalog,
+    parentCatalog: frozenHarness.parentCatalog,
+    childCatalog: frozenHarness.childCatalog,
     parentDirect,
     childDirect,
-    corpusById: new Map(corpus.map(item => [item.passage_id, item])),
+    corpusById: new Map(frozenCorpus.map(item => [item.passage_id, item])),
   });
-  const blocker = candidates.find(item => item.parent_id === "334326");
+  const blocker = candidates.find(item => item.parent_id === fixtureId);
 
   assert.ok(blocker);
-  assert.equal(blocker.passage_id, "parent:334326");
-  assert.ok(parentDirect.discoveryScores[harness.parentCatalog.opportunities.findIndex(record => (
-    String(record.opportunity_id) === "334326"
+  assert.equal(blocker.passage_id, `parent:${fixtureId}`);
+  assert.ok(parentDirect.discoveryScores[frozenHarness.parentCatalog.opportunities.findIndex(record => (
+    String(record.opportunity_id) === fixtureId
   ))] > 0);
 });
 
 test("active parent eligibility constrains BM25, semantic top-k, child passages, and reranking", async () => {
-  const eligibleParentIds = ["361526"];
+  const [{ parentId, query }] = liveParentExamples(1);
+  const eligibleParentIds = [parentId];
   const vectors = api.decodeFloat16(
     vectorBuffer.buffer.slice(vectorBuffer.byteOffset, vectorBuffer.byteOffset + vectorBuffer.byteLength),
     corpus.length,
@@ -228,7 +276,6 @@ test("active parent eligibility constrains BM25, semantic top-k, child passages,
   assert.ok(semantic.length > 0);
   assert.ok(semantic.every(item => item.parent_id === eligibleParentIds[0]));
 
-  const query = "rare earth recycling";
   const parentDirect = harness.parentEngine.score(query, { evidence: true });
   const childDirect = harness.childEngine.score(query, { evidence: true });
   const bm25 = api.buildBm25Candidates({
@@ -275,15 +322,16 @@ test("active parent eligibility constrains BM25, semantic top-k, child passages,
   const outcome = await client.search(query, { eligibleParentIds });
   const corpusByPassage = new Map(corpus.map(item => [item.passage_id, item]));
   assert.ok(rerankCandidates.length > 0);
-  assert.ok(rerankCandidates.every(item => corpusByPassage.get(item.passage_id)?.parent_id === "361526"));
-  assert.ok(outcome.parents.every(item => item.parent_id === "361526"));
+  assert.ok(rerankCandidates.every(item => corpusByPassage.get(item.passage_id)?.parent_id === parentId));
+  assert.ok(outcome.parents.every(item => item.parent_id === parentId));
   assert.equal(outcome.diagnostics.eligible_parent_count, 1);
   assert.match(outcome.diagnostics.request_signature, /^[a-f0-9]{64}$/);
   const cached = await client.search(query, { eligibleParentIds });
   assert.equal(cached.diagnostics.cache_hit, true);
   assert.equal(embedRequests, 1, "an unchanged retrieval signature causes no paid request");
   assert.equal(rerankRequests, 1, "an unchanged retrieval signature causes no paid request");
-  await client.search(query, { eligibleParentIds: [...eligibleParentIds, "362061"] });
+  const [{ parentId: additionalParentId }] = liveParentExamples(2).slice(1);
+  await client.search(query, { eligibleParentIds: [...eligibleParentIds, additionalParentId] });
   assert.equal(embedRequests, 2, "a substantive eligibility change causes one new embed");
   assert.equal(rerankRequests, 2, "a substantive eligibility change causes one new rerank");
 });
@@ -328,8 +376,10 @@ test("identical in-flight searches share one paid semantic cycle", async () => {
     },
   });
 
-  const first = client.search("rare earth recycling", { eligibleParentIds: ["361526", "362061"] });
-  const repeated = client.search("rare earth recycling", { eligibleParentIds: ["362061", "361526"] });
+  const examples = liveParentExamples(2);
+  const eligibleParentIds = examples.map(item => item.parentId);
+  const first = client.search(examples[0].query, { eligibleParentIds });
+  const repeated = client.search(examples[0].query, { eligibleParentIds: eligibleParentIds.toReversed() });
   releaseEmbedding();
   const [firstResult, repeatedResult] = await Promise.all([first, repeated]);
 

@@ -271,11 +271,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=chat-output-fixes-20260830"></script>',
+            '<script src="./assets/ai-provider.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/result-workflow.js?v=chat-output-fixes-20260830"></script>',
+            '<script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>',
             explorer_html,
         )
         for asset in ("credentials.js", "chat-ui.js"):
@@ -289,7 +289,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
+            '<script src="./assets/profile.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
@@ -325,7 +325,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/site-help.js?v={style_version}"></script>',
+            '<script src="./assets/site-help.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

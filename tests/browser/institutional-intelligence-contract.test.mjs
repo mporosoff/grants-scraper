@@ -279,6 +279,56 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
+test("explicit year language deterministically overrides an incorrect model translation", () => {
+  const current = { institution: "University of Rochester", agency: "all" };
+  const since = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "How many awards funded in catalysis since 2024?",
+  );
+  assert.equal(since.year_start, 2024);
+  assert.equal(since.year_end, "");
+
+  const onward = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "Show awards from 2024 onward",
+  );
+  assert.equal(onward.year_start, 2024);
+  assert.equal(onward.year_end, "");
+
+  const oneYear = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "" },
+    current,
+    "Show awards in 2024",
+  );
+  assert.equal(oneYear.year_start, 2024);
+  assert.equal(oneYear.year_end, 2024);
+
+  const range = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "", year_end: "" },
+    current,
+    "Show awards from 2022 through 2024",
+  );
+  assert.equal(range.year_start, 2022);
+  assert.equal(range.year_end, 2024);
+
+  for (const question of [
+    "Show awards from 2021–2025",
+    "Show awards from 2021 — 2025",
+    "Show awards from 2021 until 2025",
+    "Show awards between 2021 and 2025",
+  ]) {
+    const bounded = core.sanitizeQuestionPlan(
+      { agency: "all", year_start: "2021", year_end: "" },
+      current,
+      question,
+    );
+    assert.equal(bounded.year_start, 2021, question);
+    assert.equal(bounded.year_end, 2025, question);
+  }
+});
+
 test("snapshot URLs and replacement results have one committed owner", () => {
   const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
   assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
@@ -297,6 +347,8 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
   assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
+  assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
+  assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
 
   const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
   for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
@@ -320,6 +372,17 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+});
+
+test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
+  assert.match(appSource, /function answerTable\(\{ label, headers, rows \}\)[\s\S]*class="ii-answer-table-wrap"[\s\S]*<table class="ii-answer-table">/);
+  assert.match(appSource, /const investigators = Array\.isArray\(aggregate\.investigators\)/);
+  assert.match(appSource, /intent === "investigators"[\s\S]*label: "Investigators in the matching awards"[\s\S]*headers: \["Investigator", "Awards"\]/);
+  assert.match(appSource, /intent === "programs"[\s\S]*label: "Programs in the matching awards"[\s\S]*headers: \["Program", "Awards"\]/);
+  assert.match(appSource, /intent === "years"[\s\S]*label: "Award years in the matching awards"[\s\S]*headers: \["Year", "Awards"\]/);
+  assert.match(appSource, /\$\("ii-direct-answer"\)\.innerHTML = renderDirectAnswer\(snapshot\)/);
+  assert.match(styles, /\.ii-answer-table-wrap\s*\{/);
+  assert.match(styles, /\.ii-answer-table\s*\{/);
 });
 
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
@@ -364,8 +427,11 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(appSource, /credentials\.resolveProvider\(provider\)/);
   assert.ok(
     appSource.indexOf("credentials.resolveProvider(provider)")
-      < appSource.indexOf('if (!["openai", "anthropic"].includes(provider)) provider = "openai";'),
+      < appSource.indexOf('if (!["hosted", "openai", "anthropic"].includes(provider)) provider = "hosted";'),
   );
+  assert.match(page, /value="hosted" selected>Funding Finder AI \(included\)/);
+  assert.match(page, /assets\/ai-gateway-config\.js/);
+  assert.match(appSource, /provider === "hosted" \|\| Boolean\(credentials\.loadKey\(provider\)\)/);
   assert.match(appSource, /\$\("k-provider"\)/);
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
@@ -388,6 +454,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*setBusy\(true\);[\s\S]*await resolveTypedInstitution\(\)/);
   assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
   assert.match(askQuestionSource, /refreshProvider\(\{ preferMain: false \}\)/);
+  assert.match(askQuestionSource, /sanitizeQuestionPlan\(plan, current, question\)/);
   assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*setBusy\(false\)/);
   assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);

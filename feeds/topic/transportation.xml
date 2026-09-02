@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -144,6 +144,29 @@
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
+    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363754"/>
+    <id>urn:funding-finder:grants-gov:363754</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
+  </entry>
+  <entry>
+    <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360606"/>
+    <id>urn:funding-finder:grants-gov:360606</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
     <title>FYs 2024 through 2026 - Promoting Resilient Operations for Transformative, Efficient, and Cost-saving Transportation (PROTECT) Competitive Grant Program Notice of Funding Opportunity</title>
     <link href="https://www.grants.gov/search-results-detail/363732"/>
     <id>urn:funding-finder:grants-gov:363732</id>
@@ -164,17 +187,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 National Urban Search and Rescue Response System</title>
-    <link href="https://www.grants.gov/search-results-detail/363627"/>
-    <id>urn:funding-finder:grants-gov:363627</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-08-31 | The National Urban Search and Rescue (US&amp;R) Response System (the System) receives federal funding to ensure adequate day-to-day administration, program and grant management, training, exercise, procurement (vehicle and equipment) and storage and maintenance for the 28 national task forces. The funding ensures the 28 task forces can maintain their readiness independent of Sponsoring Agency funding.…</summary>
   </entry>
   <entry>
     <title>FY26-22-Baltimore Penn Station Facility Improvements</title>
@@ -200,16 +212,6 @@
     <summary>AmeriCorps | Closes 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
-    <title>Sin Rutas, Sin Recursos: Hitting Criminal Networks Where It Hurts</title>
-    <link href="https://www.grants.gov/search-results-detail/363666"/>
-    <id>urn:funding-finder:grants-gov:363666</id>
-    <updated>2026-08-19T00:00:00Z</updated>
-    <author><name>U.S. Mission to Colombia</name></author>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to Colombia | Closes 2026-08-31 | The U.S. Department of State's Embassy Bogotá announces an open competition to contract an investigative journalist or media production firm to document how reduced illegal migration has disrupted the operations of criminal networks, including Clan del Golfo and Tren de Aragua, that prey on migrants originating from and transiting through Colombia, and the damage these groups cause to Colombian co…</summary>
-  </entry>
-  <entry>
     <title>OVC FY 2026 Housing Assistance for Victims of Human Trafficking</title>
     <link href="https://www.grants.gov/search-results-detail/363654"/>
     <id>urn:funding-finder:grants-gov:363654</id>
@@ -217,32 +219,6 @@
     <author><name>Office for Victims of Crime</name></author>
     <category term="Transportation"/>
     <summary>Office for Victims of Crime | Closes 2026-09-28 | This is a notice of funding opportunity (NOFO) for the OVC FY 2026 Housing Assistance for Victims of Human Trafficking. This opportunity will fund organizations that provide housing and associated support services to victims of human trafficking as defined by 22 U.S.C. § 7102(11). The primary focus of this program is to provide rapid rehousing (i.e., transitional housing and supportive services th…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Railroad Rights-of-Way and Highway-Railroad Grade Crossing Safety Information and Education Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363642"/>
-    <id>urn:funding-finder:grants-gov:363642</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>DOT - Federal Railroad Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Railroad Administration | Closes 2026-08-31 | Provide program funding for Operation Lifesaver Inc using funds designed and provided under the approved budget for the Federal Railroad Administration Office of Safety for fiscal year 2026</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363633"/>
-    <id>urn:funding-finder:grants-gov:363633</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Ending HIV and TB as public health threats through an accelerated and sustained comprehensive response in India</title>
@@ -284,19 +260,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
     <summary>NYSERDA | Closes 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
-  </entry>
-  <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363578"/>
-    <id>urn:funding-finder:grants-gov:363578</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>Family Unification Program (FUP) Multi-Year NOFO</title>
@@ -364,26 +327,6 @@
     <summary>DOT-Federal Motor Carrier Safety Administration | Closes 2026-09-30 | The Motor Carrier Safety Assistance Program (MCSAP) is a Federal formula grant program that provides financial assistance to States, and U.S. Territories to reduce the number and severity of crashes, injuries, and fatalities and hazardous material incidents involving commercial motor vehicles.</summary>
   </entry>
   <entry>
-    <title>SOI - Rural Transportation Match and Gap Funding Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363480"/>
-    <id>urn:funding-finder:grants-gov:363480</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Denali Commission</name></author>
-    <category term="Transportation"/>
-    <summary>Denali Commission | Closes 2026-08-28 | The Denali Commission is inviting statements of interest for rural Alaska transportation projects in need of local match or gap funding assistance. Many Alaskan communities lack the tax base or resources necessary to meet cost share requirements. This opportunity seeks to provide funding to cover local match needs or address funding gaps, facilitating the completion of transportation projects and …</summary>
-  </entry>
-  <entry>
-    <title>Tribal Personal Responsibility Education Program (Tribal PREP)</title>
-    <link href="https://www.grants.gov/search-results-detail/361987"/>
-    <id>urn:funding-finder:grants-gov:361987</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Family and Youth Services Bureau will be posting a revised Tribal PREP NOFO shortly and will be accepting applications. Tribal PREP competitively funds projects that educate American Indian/Alaska Native (AI/AN) youth ages 10-19, and expectant and parenting youth under age 21, on both abstinence and contraception for the prevention of pregnancy, sexually transmitted infections (STIs), and HIV …</summary>
-  </entry>
-  <entry>
     <title>Media Literacy and Capacity Building Workshop Series</title>
     <link href="https://www.grants.gov/search-results-detail/363441"/>
     <id>urn:funding-finder:grants-gov:363441</id>
@@ -433,78 +376,6 @@
     <summary>National Highway Traffic Safety Administration | Closes 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
   </entry>
   <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 1)</title>
-    <link href="https://www.grants.gov/search-results-detail/363425"/>
-    <id>urn:funding-finder:grants-gov:363425</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 1-FY2026-1 to establish and operate the Region 1 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 2)</title>
-    <link href="https://www.grants.gov/search-results-detail/363436"/>
-    <id>urn:funding-finder:grants-gov:363436</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 3)</title>
-    <link href="https://www.grants.gov/search-results-detail/363428"/>
-    <id>urn:funding-finder:grants-gov:363428</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 3-FY2026-1 to establish and operate the Region 3 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 4)</title>
-    <link href="https://www.grants.gov/search-results-detail/363437"/>
-    <id>urn:funding-finder:grants-gov:363437</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 5)</title>
-    <link href="https://www.grants.gov/search-results-detail/363439"/>
-    <id>urn:funding-finder:grants-gov:363439</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The United States Department of Transportation Office of Small and Disadvantaged Business Utilization will enter into Cooperative Agreements with eligible organizations to provide outreach to the small business community in their designated region and provide financial and technical assistance, business training programs, business assessment, management training, counseling, marketing and outreach…</summary>
-  </entry>
-  <entry>
-    <title>Small Business Transportation Technical Assistance Center (Region 6)</title>
-    <link href="https://www.grants.gov/search-results-detail/363430"/>
-    <id>urn:funding-finder:grants-gov:363430</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>69A350 OSDBU</name></author>
-    <category term="Transportation"/>
-    <summary>69A350 OSDBU | Closes 2026-08-30 | The U.S. Department of Transportation (USDOT), Office of the Secretary (OST), Office of Small and Disadvantaged Business Utilization (OSDBU), announces the availability of funding under Notice of Funding Opportunity (NOFO) Number OST/OSDBU-2026-SBTTAC-Region 6-FY2026-1 to establish and operate the Region 6 Small Business Transportation Technical Assistance Center (SBTTAC) formerly known as the Sma…</summary>
-  </entry>
-  <entry>
-    <title>Improving regional capacity to respond to HIV, TB, and other global health priorities in Central America</title>
-    <link href="https://www.grants.gov/search-results-detail/360704"/>
-    <id>urn:funding-finder:grants-gov:360704</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>Centers for Disease Control-GHC</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Centers for Disease Control-GHC | Closes 2026-08-31 | The Award Ceiling for Year 1 is 0 (none). CDC anticipates an Approximate Total Fiscal Year Funding amount of $20,000,000 for Year 1, subject to the availability of funds. You will advance progress towards achieving the 95-95-95 targets and continue to transition site-level support to local governments in Central America (CA) for: El Salvador. Guatemala. Honduras. Nicaragua. Panama. To achieve the …</summary>
-  </entry>
-  <entry>
     <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
     <link href="https://www.grants.gov/search-results-detail/363372"/>
     <id>urn:funding-finder:grants-gov:363372</id>
@@ -513,19 +384,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>DOT - Federal Transit Administration | Closes 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
-  </entry>
-  <entry>
-    <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
-    <link href="https://www.grants.gov/search-results-detail/363316"/>
-    <id>urn:funding-finder:grants-gov:363316</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to ASEAN</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to ASEAN | Closes 2026-08-30 | The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2026 Competitive Funding Opportunity: Buses and Bus Facilities Program</title>
@@ -608,25 +466,6 @@
     <summary>NYSERDA | Closes 2030-09-30 | Funding is available to build and expand training capacity that advances skills and knowledge for clean energy workers in the areas of energy efficiency and building electrification, renewable energy, energy storage, smart grid, and electric vehicle charging stations. This solicitation may also support the enhancement of clean energy content delivered to students enrolled in a degree or certificat…</summary>
   </entry>
   <entry>
-    <title>FY 2026 COPS Office-NHTSA Impaired Driving Curricula Invitational Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363305"/>
-    <id>urn:funding-finder:grants-gov:363305</id>
-    <updated>2026-07-24T00:00:00Z</updated>
-    <author><name>Community Oriented Policing Services</name></author>
-    <category term="Transportation"/>
-    <summary>Community Oriented Policing Services | Closes 2026-08-31 | The Office of Community Oriented Policing Services (COPS) is the component of the U.S. Department of Justice responsible for advancing the practice of community policing and the Administration’s priority of Making America Safe Again by supporting the nation’s state, local, territorial and Tribal law enforcement agencies through information and grant resources. The COPS Office / NHTSA Impaired Driv…</summary>
-  </entry>
-  <entry>
-    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362099"/>
-    <id>urn:funding-finder:grants-gov:362099</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
-  </entry>
-  <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
     <link href="https://www.grants.gov/search-results-detail/363229"/>
     <id>urn:funding-finder:grants-gov:363229</id>
@@ -646,5 +485,155 @@
     <author><name>DOT - Federal Transit Administration</name></author>
     <category term="Transportation"/>
     <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
+  </entry>
+  <entry>
+    <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361251"/>
+    <id>urn:funding-finder:grants-gov:361251</id>
+    <updated>2026-06-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2029-07-12 | The National Institutes of Health (NIH) will award Institutional Mentored Career Development grants to eligible domestic institutions to support career development programs designed to prepare later stage postdoctoral fellows and junior faculty scholars who have made a commitment to an independent research career for their career advancement and transition to independence. Supported scholars will …</summary>
+  </entry>
+  <entry>
+    <title>DoW Duchenne Muscular Dystrophy, Clinical/Translational Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362851"/>
+    <id>urn:funding-finder:grants-gov:362851</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-18 | Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Clinical/Translational Research Award (CTRA) supports advanced translational research to accelerate promising ideas in Duchenne muscular dystrophy (DMD) research toward clinical applications. Research must address at least one of the FY26 CTRA Focus Areas. Research projects investigating therapies that will b…</summary>
+  </entry>
+  <entry>
+    <title>DoW Duchenne Muscular Dystrophy, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362848"/>
+    <id>urn:funding-finder:grants-gov:362848</id>
+    <updated>2026-06-17T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-18 | Summary: The fiscal year 2026 (FY26) Duchenne Muscular Dystrophy Research Program (DMDRP) Idea Development Award (IDA) promotes new ideas that are still in the early stages of development and have the potential to yield impactful data and new avenues of investigation. This award supports impactful, high-risk/high-reward research that could lead to critical discoveries or major advancements that wi…</summary>
+  </entry>
+  <entry>
+    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362836"/>
+    <id>urn:funding-finder:grants-gov:362836</id>
+    <updated>2026-06-16T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>Office of Naval Research | Closes 2026-11-16 | The proposed topic will develop and mature Communications and Networking technologies for Naval operations. Background: A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the N…</summary>
+  </entry>
+  <entry>
+    <title>Predoctoral to Postdoctoral Transition Award (Parent F99/K00 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359702"/>
+    <id>urn:funding-finder:grants-gov:359702</id>
+    <updated>2026-06-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2029-04-08 | The purpose of this award is to support promising graduate students as they complete their doctoral research training and transition into mentored postdoctoral career development opportunities in research areas relevant to the missions of participating NIH Institutes and Centers. This Notice of Funding Opportunity (NOFO) does not allow candidates to propose to lead an independent clinical trial, b…</summary>
+  </entry>
+  <entry>
+    <title>Science Track Award for Research Transition (START) Program (R03, Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360553"/>
+    <id>urn:funding-finder:grants-gov:360553</id>
+    <updated>2026-06-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2029-03-16 | The purpose of this notice of funding opportunity (NOFO) is to facilitate the entry of investigators into multiple high-priority areas of substance use research, including comorbidity with HIV. The Science Track Award for Research Transition (START) Program aims to provide investigators with the opportunity to gather preliminary data that will assist them in securing future research grants and adv…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
+  </entry>
+  <entry>
+    <title>Advancing Research on Empirically-Supported Interventions for Older Adults Living with Serious Mental Illness (SMI) (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359201"/>
+    <id>urn:funding-finder:grants-gov:359201</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2026-10-15 | The purpose of this notice of funding opportunity (NOFO) is to foster research that will inform and support the optimization, delivery, sustainability, and effectiveness of empirically-supported practices for addressing the mental health needs of older adults with serious mental illness (SMI). To this end, NIMH seeks applications that propose work that is focused on practice-relevant questions and…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for Mentored Research Career Development Award Recipients (R03) (Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358824"/>
+    <id>urn:funding-finder:grants-gov:358824</id>
+    <updated>2026-05-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
+  </entry>
+  <entry>
+    <title>DoW Autism Career Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362529"/>
+    <id>urn:funding-finder:grants-gov:362529</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-22 | Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism. Distinctive Features: ﻿Applications …</summary>
+  </entry>
+  <entry>
+    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/362393"/>
+    <id>urn:funding-finder:grants-gov:362393</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <category term="Transportation"/>
+    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
+  </entry>
+  <entry>
+    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360655"/>
+    <id>urn:funding-finder:grants-gov:360655</id>
+    <updated>2026-05-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359675"/>
+    <id>urn:funding-finder:grants-gov:359675</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
+  </entry>
+  <entry>
+    <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
+    <link href="https://www.grants.gov/search-results-detail/361450"/>
+    <id>urn:funding-finder:grants-gov:361450</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2026-11-06 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects that propose comprehensive functional validation of newly identified therapeutic target candidates for Alzheimer’s Disease-Related Dementias (ADRD). A major barrier to the development of effective treatments for ADRD, as well as other complex central nervous system disorders,…</summary>
+  </entry>
+  <entry>
+    <title>DoW Vision, Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362183"/>
+    <id>urn:funding-finder:grants-gov:362183</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-12 | Summary: The fiscal year 2026 (FY26) Vision Research Program (VRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of service-connected eye injury and visual dysfunction. Research must align with at least one of the FY26 VRP Focus Areas. Distinctive Features: · For interventions that requ…</summary>
   </entry>
 </feed>

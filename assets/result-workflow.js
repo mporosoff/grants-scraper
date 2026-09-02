@@ -198,8 +198,8 @@
       .sort((left, right) => {
         const leftId = String(idForMatch(left) || "");
         const rightId = String(idForMatch(right) || "");
-        return Number(right.score || 0) - Number(left.score || 0)
-          || Number(accepted.get(rightId)?.score || 0) - Number(accepted.get(leftId)?.score || 0)
+        return Number(accepted.get(rightId)?.score || 0) - Number(accepted.get(leftId)?.score || 0)
+          || Number(right.score || 0) - Number(left.score || 0)
           || Number(left.aiPhraseOrder || 0) - Number(right.aiPhraseOrder || 0)
           || leftId.localeCompare(rightId, undefined, { numeric: true });
       })
