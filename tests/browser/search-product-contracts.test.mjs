@@ -29,6 +29,22 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
   assert.match(teamPage, /Researcher names and publication text are not sent/);
 });
 
+test("AI service and privacy copy stays compact and keeps advanced-key guidance with privacy", () => {
+  const start = searchPage.indexOf('<details class="provider-setup">');
+  const end = searchPage.indexOf("</details>", start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const setup = searchPage.slice(start, end);
+
+  assert.doesNotMatch(setup, /What hosted AI changes|Hosted refinement uses two bounded calls/);
+  assert.doesNotMatch(setup, /provider-explanation|cost-note/);
+  assert.match(setup, /<p class="key-help"><strong>No API key is required\.<\/strong> Funding Finder routes each feature through its tested hosted model\.<\/p>/);
+  assert.match(setup, /<p class="privacy-note">Hosted AI[\s\S]*Advanced users may instead select OpenAI or Anthropic[\s\S]*OpenAI key and project limits[\s\S]*Anthropic key safety and limits<\/a>\.<\/p>/);
+  assert.match(searchPage, /app\.css\?v=ai-privacy-copy-20260902/);
+  assert.match(appCss, /\.provider-setup-body\s*\{[^}]*padding:\s*0 15px 11px/s);
+  assert.match(appCss, /\.provider-setup \.privacy-note\s*\{[^}]*margin:\s*7px 0 0/s);
+});
+
 test("hosted semantic requests contain only query and bounded public passage fields", () => {
   assert.match(hybrid, /post\("embed-query", \{ query: semanticQuery \}, signal\)/);
   assert.match(hybrid, /post\("rerank", \{\s*query: semanticQuery,\s*corpus_sha256:[\s\S]*?candidates: guarded\.map/);

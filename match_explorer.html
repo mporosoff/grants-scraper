@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=pdf-drop-order-20260830">
+  <link rel="stylesheet" href="./assets/app.css?v=ai-privacy-copy-20260902">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
 </head>
@@ -349,8 +349,7 @@
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What hosted AI changes:</strong> after catalog search, it can use the profile context you enabled, try alternative scientific phrases, assess up to 32 locally qualified catalog candidates, and answer questions about results or an uploaded notice. Refinement only adds evidence-qualified Strong matches; it never removes ordinary results or searches outside the funding catalog.</p>
-              <p class="key-help"><strong>No API key is required.</strong> Funding Finder routes each feature through its tested hosted model. Advanced users may instead select OpenAI or Anthropic and provide their own limited-use key after reviewing its spending controls: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
+              <p class="key-help"><strong>No API key is required.</strong> Funding Finder routes each feature through its tested hosted model.</p>
               <div class="provider-fields">
                 <label>
                   Provider
@@ -370,8 +369,7 @@
                 <button class="text-button" id="clear-key" type="button">Remove key</button>
               </div>
               <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
-              <p class="privacy-note">Hosted AI sends only the bounded information needed for the feature to Funding Finder's protected Cloudflare service; provider keys are never sent to the browser. If you choose your own provider, a saved key stays in this browser's local storage until you remove it.</p>
-              <p class="cost-note">Hosted refinement uses two bounded calls: alternative scientific phrases, then assessment of at most 32 locally qualified candidates.</p>
+              <p class="privacy-note">Hosted AI sends only the bounded information needed for the feature to Funding Finder's protected Cloudflare service; provider keys are never sent to the browser. If you choose your own provider, a saved key stays in this browser's local storage until you remove it. Advanced users may instead select OpenAI or Anthropic and provide their own limited-use key after reviewing its spending controls: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
             </div>
           </details>
           <div class="ai-refine-actions">
