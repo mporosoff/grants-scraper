@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -200,6 +200,15 @@
     <author><name>Centers for Disease Control - NCBDDD</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCBDDD | Closes 2027-03-31 | Birth defects affect about three percent of all births in the United States and are a leading cause of infant mortality, morbidity, and healthcare costs; the causes of two-thirds of birth defects remain unknown. In addition, stillbirths (pregnancy loss at 20 or more weeks of gestation) are an under-evaluated public health issue. Over 20,000 pregnancies in the U.S. end in a stillbirth each year. Th…</summary>
+  </entry>
+  <entry>
+    <title>Native Hawaiian Health Care Improvement Act Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363781"/>
+    <id>urn:funding-finder:grants-gov:363781</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Public health"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-12 | This Notice of Funding Opportunity (NOFO) announces the opportunity to apply for funding under the Native Hawaiian Health Care Improvement Act (NHHCIA) program. The purpose of these Native Hawaiian Health Care Improvement Act (NHHCIA) awards is to provide Native Hawaiian health care programs with resources to raise the health status of Native Hawaiians to the highest possible health level. This NO…</summary>
   </entry>
   <entry>
     <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
@@ -627,15 +636,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-02-12 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Clinical and Translational Science Awards (CTSA) Program: Collaborative and Innovative Acceleration Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363251"/>
-    <id>urn:funding-finder:grants-gov:363251</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-02-16 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

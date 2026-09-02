@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -263,17 +263,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Technology development"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Research Network on Antimicrobial Resistance (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361065"/>
-    <id>urn:funding-finder:grants-gov:361065</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-09-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
   </entry>
   <entry>
     <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
@@ -624,5 +613,16 @@ a high level of innovation and creativity. The goal is to support the best young
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Research Program (OCRP) Investigator-Initiated Research Award is intended to support high-impact research that addresses a critical need and has the potential to make an important contribution to ovarian cancer or patient/survivor care. Distinctive Features: Application must contain strong research plan with sound scientific rational and logical reasoning. Preliminary d…</summary>
+  </entry>
+  <entry>
+    <title>DoW, Ovarian Cancer, Ovarian Cancer Academy - Early-Career Investigator Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362204"/>
+    <id>urn:funding-finder:grants-gov:362204</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Initially created in FY09, the OCRP Ovarian Cancer Academy (OCA) is a unique, interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The overarching goal of the OCA is to conduct innovative and impactful ovarian cancer research while developing successful, highly productive ovarian cancer researchers in a collab…</summary>
   </entry>
 </feed>

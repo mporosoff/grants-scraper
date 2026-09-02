@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -26,6 +26,18 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>American Institute in Taiwan | Closes 2026-10-06 | The American Institute in Taiwan Public Diplomacy Section announces an open competition for one cooperative agreement to support the implementation of four Global Cooperation and Training Framework Classic workshops in Taiwan during calendar year 2027. The GCTF is a capacity building platform that brings together government officials, industry experts, academics, and civil society representatives …</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363735"/>
+    <id>urn:funding-finder:grants-gov:363735</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
@@ -466,6 +478,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <summary>Office of Science | Closes 2026-12-17 | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
+    <title>Pathways to Enable Secure Open-Source Ecosystems (PESOSE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361333"/>
+    <id>urn:funding-finder:grants-gov:361333</id>
+    <updated>2026-02-19T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2027-03-02 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
+  </entry>
+  <entry>
     <title>Postdoctoral Research Fellowships in Biology</title>
     <link href="https://www.grants.gov/search-results-detail/361249"/>
     <id>urn:funding-finder:grants-gov:361249</id>
@@ -535,7 +562,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>National Institute of Standards and Technology | Closes 2029-09-30 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+    <summary>National Institute of Standards and Technology | Closes 2026-09-15 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
   </entry>
   <entry>
     <title>TTO Office Wide (OW) BAA 2025</title>
@@ -745,32 +772,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Closes 2026-12-04 | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
-  </entry>
-  <entry>
-    <title>NDEP STEM Open NFO</title>
-    <link href="https://www.grants.gov/search-results-detail/345938"/>
-    <id>urn:funding-finder:grants-gov:345938</id>
-    <updated>2023-02-09T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>Washington Headquarters Services | Closes 2028-02-08 | This is an open NFO, applicants may apply to this posting or subsequent amendments for specific STEM activities. See the Related Documents tab for the full NFO, and amendments announcing new funding opportunities. The Department of War (DoW) Office of the Under Secretary of War for Research and Engineering (OUSW(R&amp;E)) seeks innovative applications on mechanisms to implement and research the effect…</summary>
-  </entry>
-  <entry>
-    <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
-    <link href="https://www.grants.gov/search-results-detail/344592"/>
-    <id>urn:funding-finder:grants-gov:344592</id>
-    <updated>2022-11-21T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -447,6 +447,14 @@
     <summary>Health Resources and Services Administration | Closes 2027-04-06 | The Rural Communities Opioid Response Program (RCORP) - Community Systems Development provides funding to communities in rural areas to develop and/or expand behavioral health systems of care through formalized networks that expand operational and clinical service capacity regionally through coordinated implementation of evidence-based SUD prevention, treatment, recovery, and related services.</summary>
   </entry>
   <entry>
+    <title>Supporting Community Application of Life-Saving Evidence to Prevent Injury and Violence (SCALE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363782"/>
+    <id>urn:funding-finder:grants-gov:363782</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-04-06 | Injury, including violence, overdose, and suicide, is the leading cause of morbidity and mortality from birth to 44 years of age. The purpose of this notice of funding opportunity (NOFO) is to strengthen implementation, amplify messaging, and broaden reach in addressing injury, violence, overdose, and suicide prevention across populations nationwide, including those in tribal communities. Funding …</summary>
+  </entry>
+  <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363290"/>
     <id>urn:funding-finder:grants-gov:363290</id>
@@ -565,14 +573,5 @@
     <updated>2027-02-01T00:00:00Z</updated>
     <author><name>Indian Health Service</name></author>
     <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
-  </entry>
-  <entry>
-    <title>Urban Indian Health Program - Education &amp; Research</title>
-    <link href="https://www.grants.gov/search-results-detail/363502"/>
-    <id>urn:funding-finder:grants-gov:363502</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Closes 2027-04-01 | National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
   </entry>
 </feed>

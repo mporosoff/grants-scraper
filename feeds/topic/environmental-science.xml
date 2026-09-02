@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -286,6 +286,26 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
   </entry>
   <entry>
+    <title>DARRP Restoration Implementation Grants (2026)</title>
+    <link href="https://www.grants.gov/search-results-detail/363758"/>
+    <id>urn:funding-finder:grants-gov:363758</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Closes 2026-11-18 | The principal objective of the Damage Assessment, Remediation and Restoration Program (DARRP) Restoration Implementation Grants is for NOAA to collaborate with non-federal partners to implement marine and coastal habitat restoration and conservation in order to accomplish common goals related to oil spills, hazardous substance releases, and other natural resource damages. Successful applicants wil…</summary>
+  </entry>
+  <entry>
+    <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>
+    <link href="https://www.grants.gov/search-results-detail/363734"/>
+    <id>urn:funding-finder:grants-gov:363734</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
+  </entry>
+  <entry>
     <title>Clinical and Translational Science Award</title>
     <link href="https://www.grants.gov/search-results-detail/363244"/>
     <id>urn:funding-finder:grants-gov:363244</id>
@@ -295,6 +315,26 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+  </entry>
+  <entry>
+    <title>Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359940"/>
+    <id>urn:funding-finder:grants-gov:359940</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
+  </entry>
+  <entry>
+    <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360554"/>
+    <id>urn:funding-finder:grants-gov:360554</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
   </entry>
   <entry>
     <title>U.S-Saudi AI Research Commercialization Accelerator Program (ReCAP)</title>
@@ -627,46 +667,5 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>Geological Survey | Closes 2026-09-11 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50-65 billion…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363534"/>
-    <id>urn:funding-finder:grants-gov:363534</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Threatened and Endangered Species Program (T&amp;E) focuses on conservation and recovery of endangered, threatened and BLM Sensitive Species (collectively referred to as BLM Special Status Species) and their habitats to help inform a balance of multiple uses of BLM-managed lands, including the Nation"s need for domestic sources of energy, minerals, timber, grazing, recreation, and fish and wil…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Wildlife Resource Management Program - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363535"/>
-    <id>urn:funding-finder:grants-gov:363535</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Wildlife Program, including the Sage-Grouse Conservation Program, implements statutory authorities to address the management of wildlife resources on the public lands for the social and economic well-being of all Americans. Specific BLM Wildlife Program priorities include: 1. protection, maintenance, and development of wildlife habitat; 2. wildlife reintroduction and propagation; 3. field …</summary>
-  </entry>
-  <entry>
-    <title>Project Constellation: Building a Constellation of Outer Space Partners at the UN</title>
-    <link href="https://www.grants.gov/search-results-detail/363470"/>
-    <id>urn:funding-finder:grants-gov:363470</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>U.S. Mission to the International Organizations</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to the International Organizations | Closes 2026-09-04 | As the home of the United Nations Office for Outer Space Affairs (UNOOSA) and the United Nations Committee on the Peaceful Uses of Outer Space (COPUOS), Vienna provides a unique multilateral platform for fostering these partnerships. Building upon the successful inaugural U.S. Space Forum in 2025, the U.S. Mission to the International Organizations in Vienna (UNVIE) is launching Project Constellat…</summary>
-  </entry>
-  <entry>
-    <title>Forest Legacy Program - FY2028 Funding</title>
-    <link href="https://www.grants.gov/search-results-detail/363363"/>
-    <id>urn:funding-finder:grants-gov:363363</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Forest Service | Closes 2026-09-11 | The USDA Forest Service is requesting applications for the Forest Legacy Program (FLP), authorized by the Cooperative Forestry Assistance Act of 1978, as amended (16 U.S.C. 2103) and funded through the Land and Water Conservation Fund (LWCF). The Forest Legacy Program is a competitive grant program that is administered by the Forest Service in partnership with State agencies to encourage the perma…</summary>
   </entry>
 </feed>

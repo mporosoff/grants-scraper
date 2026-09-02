@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -391,6 +391,16 @@
     <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
   <entry>
+    <title>NIOSH Mentored Research Scientist Development Award (K01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363783"/>
+    <id>urn:funding-finder:grants-gov:363783</id>
+    <updated>2026-11-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
+  </entry>
+  <entry>
     <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/363037"/>
     <id>urn:funding-finder:grants-gov:363037</id>
@@ -605,14 +615,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
-  </entry>
-  <entry>
-    <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
-    <link href="https://www.grants.gov/search-results-detail/362014"/>
-    <id>urn:funding-finder:grants-gov:362014</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Education and workforce"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-11-30 | The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
   </entry>
 </feed>
