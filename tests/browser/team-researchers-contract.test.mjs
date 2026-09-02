@@ -112,30 +112,32 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with one Add researcher control instead of a department pill wall", () => {
+test("starts with one Add researcher control and separates directory from manual entry", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
   assert.match(grid, />\s*Add researcher\s*<\/button>/);
   assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
-  assert.match(teamPage, /facultyGroup\.label = "Department faculty"/);
-  assert.match(teamPage, /savedGroup\.label = "Saved researchers"/);
-  assert.match(teamPage, /newGroup\.label = "Add a new researcher"/);
-  assert.match(teamPage, /selected\.indexOf\(name\) === -1/);
+  assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
+  assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
+  assert.match(teamPage, /id="manual-researcher"/);
+  assert.match(teamPage, /Add a researcher manually/);
+  assert.doesNotMatch(teamPage, /facultyGroup\.label = "Department faculty"/);
   assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
 });
 
-test("opens the researcher picker without forcing the native select open", () => {
+test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /picker\.hidden = !opening/);
   assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
-  const newResearcher = teamPage.indexOf('newGroup.label = "Add a new researcher"');
-  const faculty = teamPage.indexOf('facultyGroup.label = "Department faculty"');
-  const saved = teamPage.indexOf('savedGroup.label = "Saved researchers"');
-  assert.ok(newResearcher > -1 && newResearcher < faculty && faculty < saved);
+  assert.match(teamPage, /aria-autocomplete="list"/);
+  assert.match(teamPage, /aria-controls="faculty-suggestions"/);
+  assert.match(teamPage, /aria-activedescendant/);
+  assert.match(teamPage, /event\.key === "ArrowDown"/);
+  assert.match(teamPage, /event\.key === "Enter"/);
+  assert.match(teamPage, /event\.key === "Escape"/);
 });
 
-test("selecting the new external researcher option opens its editor without an extra add click", () => {
-  assert.match(teamPage, /\$\("researcher-choice"\)\.addEventListener\("change", function \(\) \{[\s\S]*?value === "__new__"[\s\S]*?chooseResearcher\(\);[\s\S]*?return;/);
-  assert.match(teamPage, /if \(member === "__new__"\) \{[\s\S]*?choice\.value = "";[\s\S]*?\$\("choose-researcher"\)\.disabled = true;[\s\S]*?openExternalEditor\(""\);[\s\S]*?return;/);
+test("the prominent manual path opens the researcher editor directly", () => {
+  assert.match(teamPage, /\$\("manual-researcher"\)\.addEventListener\("click", function \(\) \{[\s\S]*?openExternalEditor\(""\)/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
 
@@ -145,8 +147,23 @@ test("shows an accessible progress state while adding a researcher", () => {
   assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
   assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
   assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
-  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?setTimeout\(function \(\) \{[\s\S]*?toggle\(member\)/);
+  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?selected\.push\(member\)[\s\S]*?scheduleTeamRefresh\(member\)/);
   assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+});
+
+test("directory selection paints, highlights, focuses, and announces before matching", () => {
+  assert.match(teamPage, /function scheduleTeamRefresh\(member\)/);
+  assert.match(teamPage, /recentlyAddedMember = member/);
+  assert.match(teamPage, /renderSelectedResearcherCards\(\)/);
+  assert.match(teamPage, /\$\("view"\)\.setAttribute\("aria-busy", "true"\)/);
+  assert.match(teamPage, /Updating opportunities for /);
+  assert.match(teamPage, /selectedButton\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(teamPage, /className = "pi-entry" \+ \(member === recentlyAddedMember \? " just-added" : ""\)/);
+  const chooseStart = teamPage.indexOf("  function chooseFaculty(facultyId) {");
+  const chooseEnd = teamPage.indexOf("  function renderExternalButtons() {", chooseStart);
+  const chooseSource = teamPage.slice(chooseStart, chooseEnd);
+  assert.ok(chooseSource.indexOf("renderExternalStatus") < chooseSource.indexOf("scheduleTeamRefresh(key)"));
+  assert.doesNotMatch(chooseSource, /\n\s*refresh\(\);/);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {
@@ -155,10 +172,30 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
   assert.doesNotMatch(teamPage, /window\.scrollTo\(0, 0\)/);
   assert.match(teamPage, /TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch"/);
   assert.match(teamPage, /window\.addEventListener\("pagehide", saveTeamHistory\)/);
+  assert.match(teamPage, /selectedIdentities:/);
+  assert.match(teamPage, /kind: "directory"/);
+  assert.match(teamPage, /function teamHistoryNeedsDirectory\(\)/);
+  assert.match(teamPage, /if \(teamHistoryNeedsDirectory\(\)\) \{[\s\S]*?teamHistoryRestoreDeferred = true;[\s\S]*?await ensureTeamDirectory\(\)/);
   assert.match(teamPage, /restoreTeamHistory\(\)/);
   assert.match(teamPage, /finishHistoryRestore\(\)/);
   assert.doesNotMatch(teamPage, /id="meta-line"/);
   assert.doesNotMatch(teamPage, /department faculty profiles|live graded matching across/);
+});
+
+test("a transient directory failure preserves history until a successful retry", () => {
+  assert.match(teamPage, /var teamHistoryRestoreDeferred = false/);
+  const saveStart = teamPage.indexOf("  function saveTeamHistory() {");
+  const saveEnd = teamPage.indexOf("  function teamHistoryNeedsDirectory() {", saveStart);
+  const saveSource = teamPage.slice(saveStart, saveEnd);
+  assert.match(saveSource, /if \(teamHistoryRestoreDeferred\) return/);
+  assert.ok(saveSource.indexOf("teamHistoryRestoreDeferred") < saveSource.indexOf("history.replaceState"));
+  assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
+  assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
+  assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
+  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
+  assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
+  assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
+  assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);
 });
 
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {
@@ -168,7 +205,7 @@ test("supports repeated selection, removal, editing, and the four-person maximum
   assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
   assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
   assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
-  assert.match(teamPage, /autoSelected = !wasEditing && selected\.length < MAX/);
+  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
   assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
   assert.match(teamPage, /ORCID_API\.fetchProfile/);
 });

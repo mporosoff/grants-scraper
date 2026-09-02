@@ -210,6 +210,7 @@ async function run() {
     VECTOR_PATH,
     CANARY_PATH,
     "assets/app-config.js",
+    "assets/app.css",
     "assets/app.js",
     "assets/catalog-loader.js",
     "assets/result-workflow.js",
@@ -217,6 +218,12 @@ async function run() {
     "assets/search-retrieval.js",
     "assets/subtopic-runtime.js",
     "assets/team-hybrid.js",
+    "assets/team-matcher.js",
+    "assets/team-researchers.js",
+    "assets/opportunity-team.js",
+    "assets/opportunity-team-panel.js",
+    "data/opportunity_team_index.js",
+    "data/opportunity_teams.js",
     "match_explorer.html",
     "team_match.html",
     WORKER_SOURCE_PATH,
@@ -234,7 +241,7 @@ async function run() {
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team index and projection",
   };
   const releaseBytes = jsonBytes(release);
 

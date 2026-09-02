@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createHandler, storeSnapshot } from "../../workers/award-api/src/index.js";
@@ -329,10 +330,12 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
 });
 
 test("the integrated A-C browser release uses one fresh cache key for every changed served asset", async () => {
-  const [fundedAwards, fundingFinder, teamMatch] = await Promise.all([
+  const [fundedAwards, fundingFinder, teamMatch, appCss, appJs] = await Promise.all([
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("team_match.html", root), "utf8"),
+    readFile(new URL("assets/app.css", root)),
+    readFile(new URL("assets/app.js", root)),
   ]);
   const releaseKey = "post-phase4-abc-20260829";
   for (const asset of [
@@ -348,12 +351,16 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=ai-feedback-20260901/);
   for (const asset of ["alerts.css", "alerts.js"])
     assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
-  assert.match(fundingFinder, /app\.css\?v=ai-privacy-copy-20260902/);
-  assert.match(fundingFinder, /app\.js\?v=ai-boundaries-20260901/);
+  const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
+  assert.ok(opportunityTeamGeneration);
+  const appCssHash = createHash("sha256").update(appCss).digest("hex");
+  const appJsHash = createHash("sha256").update(appJs).digest("hex");
+  assert.match(fundingFinder, new RegExp(`app\\.css\\?v=${appCssHash}`));
+  assert.match(fundingFinder, new RegExp(`app\\.js\\?v=${appJsHash}`));
+  assert.match(teamMatch, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(fundingFinder, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundingFinder, /ai-provider\.js\?v=ai-boundaries-20260901/);
   assert.match(fundingFinder, /result-workflow\.js\?v=ai-feedback-20260901/);
-  assert.match(teamMatch, /app\.css\?v=presentation-cleanup-20260830/);
 });
 
 test("Unit B aggregate helper deduplicates source plus award ID", () => {

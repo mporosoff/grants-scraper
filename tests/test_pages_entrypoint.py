@@ -166,6 +166,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_js = (
             REPOSITORY_ROOT / "assets" / "app.js"
         ).read_text(encoding="utf-8")
+        opportunity_team_generation = json.loads(
+            (REPOSITORY_ROOT / "config" / "opportunity_team_model.json").read_text(
+                encoding="utf-8"
+            )
+        )["generation_id"]
         ai_provider_js = (
             REPOSITORY_ROOT / "assets" / "ai-provider.js"
         ).read_text(encoding="utf-8")
@@ -187,6 +192,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
+        app_script_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.js").read_bytes()
+        ).hexdigest()
+        app_style_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.css").read_bytes()
+        ).hexdigest()
 
         self.assertIn('id="query"', explorer_html)
         self.assertIn('id="nofo-drop-zone"', explorer_html)
@@ -256,7 +267,6 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         feature_version = "orcid-2026-08-13"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "ai-privacy-copy-20260902"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
@@ -309,7 +319,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-retrieval.js?v={opportunity_team_generation}"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -317,7 +327,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=ai-boundaries-20260901"></script>',
+            f'<script src="./assets/app.js?v={app_script_version}"></script>',
             explorer_html,
         )
         self.assertIn(

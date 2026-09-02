@@ -5,9 +5,10 @@ import test from "node:test";
 import vm from "node:vm";
 
 const FIXED_NOW = new Date("2026-08-30T00:00:00.000Z");
-const [matcherSource, retrievalSource, teamPage, releaseSource] = await Promise.all([
+const [matcherSource, retrievalSource, appSource, teamPage, releaseSource] = await Promise.all([
   readFile(new URL("../../assets/team-matcher.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/app.js", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
   readFile(new URL("../../data/search-v2-release.json", import.meta.url), "utf8"),
 ]);
@@ -50,7 +51,10 @@ test("Team Match currentness uses posted age only for undated non-rolling opport
     record("missing-posted-date"),
     record("invalid-posted-date", { posted_date: "not-a-date" }),
     record("future-close", { posted_date: "2015-03-01", close_date: "2026-12-31" }),
+    record("rolling-future-close", { posted_date: "2015-03-01", close_date: "2026-12-31", rolling: true }),
+    record("close-boundary", { posted_date: "2026-08-01", close_date: "2026-08-30" }),
     record("past-close", { posted_date: "2026-08-01", close_date: "2026-08-28" }),
+    record("rolling-past-close", { posted_date: "2026-08-01", close_date: "2026-08-29", rolling: true }),
     record("past-archive", { posted_date: "2026-08-01", archive_date: "2026-08-30" }),
     ...["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"]
       .map(status => record(`status-${status}`, { posted_date: "2026-08-29", status })),
@@ -65,11 +69,14 @@ test("Team Match currentness uses posted age only for undated non-rolling opport
     "missing-posted-date",
     "invalid-posted-date",
     "future-close",
+    "rolling-future-close",
+    "close-boundary",
   ]) assert.equal(ids.has(id), true, id);
   for (const id of [
     "obsolete-2018",
     "obsolete-2015",
     "past-close",
+    "rolling-past-close",
     "past-archive",
     "status-archived",
     "status-closed",
@@ -161,7 +168,20 @@ test("child evidence can help only runtime-current parents and final rows stay e
 test("Team Match cache and release identities cover the changed page", () => {
   const release = JSON.parse(releaseSource);
   const teamPageHash = createHash("sha256").update(teamPage).digest("hex");
+  const generation = teamPage.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
 
-  assert.match(teamPage, /assets\/team-matcher\.js\?v=team-currentness-20260830/);
+  assert.ok(generation);
+  assert.match(teamPage, new RegExp(`assets/team-matcher\\.js\\?v=${generation}`));
+  assert.match(teamPage, new RegExp(`assets/search-retrieval\\.js\\?v=${generation}`));
+  assert.match(teamPage, new RegExp(`assets/opportunity-team\\.js\\?v=${generation}`));
   assert.equal(release.source_hashes["team_match.html"], teamPageHash);
+});
+
+test("Funding Finder and Team Match delegate to one shared currentness contract", () => {
+  assert.match(appSource, /return RETRIEVAL_API\.recordIsArchived\(record, asOf\)/);
+  assert.match(appSource, /return RETRIEVAL_API\.recordIsCurrent\(record, asOf\)/);
+  assert.match(matcherSource, /FUNDING_RETRIEVAL\?\.recordIsCurrent/);
+  assert.match(retrievalSource, /if \(closeDate < today\) return false/);
+  assert.doesNotMatch(retrievalSource, /closeDate < today && !record\.rolling/);
+  assert.doesNotMatch(appSource, /function recordIsCurrent[\s\S]{0,600}\["closed", "archived"/);
 });

@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/deploy-search-package.yml"
       - "assets/app-config.js"
+      - "assets/app.css"
       - "assets/app.js"
       - "assets/catalog-loader.js"
       - "assets/match-explain.js"
@@ -16,14 +17,22 @@ on:
       - "assets/search-v2-config.js"
       - "assets/subtopic-runtime.js"
       - "assets/team-hybrid.js"
+      - "assets/team-matcher.js"
+      - "assets/team-researchers.js"
+      - "assets/opportunity-team.js"
+      - "assets/opportunity-team-panel.js"
+      - "config/opportunity_team_model.json"
       - "config/search_v2.json"
       - "data/search-v2-release.json"
       - "data/catalog-metadata.js"
+      - "data/opportunity_team_index.js"
+      - "data/opportunity_teams.js"
       - "data/search-v2-voyage-canaries.json"
       - "data/search-v2-voyage-manifest.json"
       - "data/search-v2-voyage-vectors.f16"
       - "match_explorer.html"
       - "team_match.html"
+      - "scripts/import_opportunity_team_model.py"
       - "tools/build_search_release_package.mjs"
       - "tools/build_search_v2_voyage_vectors.mjs"
       - "tools/smoke_search_worker.mjs"
@@ -230,6 +239,22 @@ jobs:
             echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
             exit 1
           fi
+          for team_asset in \
+            data/opportunity_team_index.js \
+            data/opportunity_teams.js \
+            assets/opportunity-team.js \
+            assets/opportunity-team-panel.js \
+            assets/app.js \
+            match_explorer.html \
+            team_match.html; do
+            expected_team_sha="$(jq -r --arg path "$team_asset" '.source_hashes[$path] // empty' data/search-v2-release.json)"
+            live_team_sha="$(curl --fail --silent --show-error --max-time 45 \
+              "https://mporosoff.github.io/grants-scraper/${team_asset}?deploy=${GITHUB_SHA}" | sha256sum | awk '{print $1}')"
+            if [ -z "$expected_team_sha" ] || [ "$live_team_sha" != "$expected_team_sha" ]; then
+              echo "::error::GitHub Pages served mismatched opportunity-team asset ${team_asset}."
+              exit 1
+            fi
+          done
       - name: Run a real provider smoke after Pages propagation
         if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
         run: node tools/smoke_search_worker.mjs

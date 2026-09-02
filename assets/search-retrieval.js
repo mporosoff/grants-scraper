@@ -41,6 +41,60 @@
       && Math.floor((now - posted) / 86_400_000) > STALE_UNDATED_MAX_AGE_DAYS;
   }
 
+  function nonFundingReason(record) {
+    const title = String(record?.title || "").trim();
+    if (/^(?:[A-Z0-9_.-]+\s+)?(?:notice of intent\b|request for information\b|rfi\s*[-:])/i.test(title)) {
+      return "informational notice";
+    }
+    const instruments = (record?.funding_instruments || []).map(value => String(value).toLowerCase());
+    const note = `${record?.description || ""} ${record?.close_date_note || ""}`;
+    if (
+      instruments.length
+      && instruments.every(value => value === "other")
+      && /\bnot accepting applications?\b/i.test(note)
+    ) {
+      return "not accepting applications";
+    }
+    return "";
+  }
+
+  function runtimeDate(value = Date.now()) {
+    const date = value instanceof Date ? new Date(value.getTime()) : new Date(value);
+    return Number.isFinite(date.getTime()) ? date : null;
+  }
+
+  function runtimeDateIso(value = Date.now()) {
+    return runtimeDate(value)?.toISOString().slice(0, 10) || "";
+  }
+
+  function recordIsArchived(record, now = Date.now()) {
+    const status = String(record?.status || "").trim().toLowerCase();
+    if (status === "archived") return true;
+    const today = runtimeDateIso(now);
+    const archiveDate = String(record?.archive_date || "").trim();
+    if (!archiveDate) return false;
+    return /^\d{4}-\d{2}-\d{2}$/.test(archiveDate) && Boolean(today) && archiveDate <= today;
+  }
+
+  function recordIsCurrent(record, now = Date.now()) {
+    if (!record) return false;
+    const status = String(record.status || "").trim().toLowerCase();
+    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
+      return false;
+    }
+    if (recordIsArchived(record, now)) return false;
+    if ((status && !["posted", "forecasted"].includes(status)) || nonFundingReason(record)) return false;
+    const today = runtimeDateIso(now);
+    if (!today) return false;
+    const closeDate = String(record.close_date || "").trim();
+    if (closeDate) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(closeDate)) return false;
+      if (closeDate < today) return false;
+    }
+    const instant = runtimeDate(now);
+    return !staleUndatedOpportunity(record, instant?.getTime());
+  }
+
   function positiveScale(values) {
     const positive = Array.from(values || [])
       .filter(value => Number(value) > 0)
@@ -2791,7 +2845,10 @@
     boundedDamerauLevenshtein,
     create,
     createChildCatalog,
+    nonFundingReason,
     positiveScale,
+    recordIsArchived,
+    recordIsCurrent,
     rollupRankedRecords,
     rollupScores,
     validateSearchV2Configuration,
