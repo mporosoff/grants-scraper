@@ -155,6 +155,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
 });
 
 test("shared Help remains visible and current across every desktop and mobile surface", async ({ page }, testInfo) => {
+  await mockFrozenFundingSearchPackage(page);
   mockHybrid(page);
   mockAwards(page);
   const surfaces = [
@@ -209,6 +210,7 @@ test("shared Help remains visible and current across every desktop and mobile su
 });
 
 test("shared navigation and primary content geometry stay aligned across all three pages", async ({ page }) => {
+  await mockFrozenFundingSearchPackage(page);
   mockHybrid(page);
   mockAwards(page);
   await page.setViewportSize({ width: 1440, height: 900 });

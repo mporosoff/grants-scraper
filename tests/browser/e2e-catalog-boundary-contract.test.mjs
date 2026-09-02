@@ -25,7 +25,15 @@ test("deterministic Funding Finder E2E cannot borrow the daily catalog", () => {
     deterministicFundingSource,
     /test\.beforeEach\([\s\S]*mockFrozenFundingSearchPackage\(page\)/,
   );
-  assert.match(accessibilitySource, /mockFrozenFundingSearchPackage\(page\)/);
+  const accessibilityFundingTests = accessibilitySource
+    .split(/\ntest\(/)
+    .slice(1)
+    .filter(source => /\/match_explorer\.html|openFundingFinder\(/.test(source));
+  assert.ok(accessibilityFundingTests.length > 0);
+  accessibilityFundingTests.forEach(source => assert.match(
+    source,
+    /mockFrozenFundingSearchPackage\(/,
+  ));
   assert.doesNotMatch(
     `${deterministicFundingSource}\n${accessibilitySource}`,
     /data\/opportunities\.js|liveCatalog|liveCurrentNumberedOpportunity|26-506|362900|334326|DE-FOA-0003600/,
