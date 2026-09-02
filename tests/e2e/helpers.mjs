@@ -1,4 +1,10 @@
+import { readFile } from "node:fs/promises";
 import { expect } from "@playwright/test";
+
+const frozenAwardCatalogSource = await readFile(
+  new URL("../fixtures/frozen/award-opportunities.js", import.meta.url),
+  "utf8",
+);
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
 const AWARD_WORKER_ORIGIN = "https://funding-finder-award-api.urochestercheme.workers.dev";
@@ -110,6 +116,14 @@ export function mockHybrid(page, {
     });
   });
   return calls;
+}
+
+export async function mockFrozenAwardCatalog(target) {
+  await target.route("**/data/opportunities.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenAwardCatalogSource,
+  }));
 }
 
 export function mockAwards(target, {

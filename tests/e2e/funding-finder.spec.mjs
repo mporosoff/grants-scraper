@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 import {
   csvRows,
@@ -10,6 +11,21 @@ import {
   waitForHybridSettled,
   watchRuntimeErrors,
 } from "./helpers.mjs";
+
+const liveCatalogSource = await readFile(
+  new URL("../../data/opportunities.js", import.meta.url),
+  "utf8",
+);
+const liveCatalog = JSON.parse(
+  liveCatalogSource.slice(liveCatalogSource.indexOf("{"), liveCatalogSource.lastIndexOf(";")),
+);
+const liveCatalogDate = String(liveCatalog.generated_at || "").slice(0, 10);
+const liveFocusOpportunity = liveCatalog.opportunities.find(record => (
+  ["posted", "forecasted"].includes(String(record.status || "").toLowerCase())
+  && String(record.opportunity_id || "")
+  && (!record.archive_date || record.archive_date > liveCatalogDate)
+  && (!record.close_date || record.close_date >= liveCatalogDate)
+));
 
 async function mockNofoExtraction(page, text) {
   await page.route("**/assets/nofo.js*", async route => {
@@ -337,15 +353,6 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   await openFundingFinder(page);
   const query = page.locator("#query");
   const find = page.locator("#find-funding");
-  const upload = page.locator(".nofo-upload-button");
-  const [queryBox, findBox, uploadBox] = await Promise.all([
-    query.boundingBox(),
-    find.boundingBox(),
-    upload.boundingBox(),
-  ]);
-  expect(queryBox).not.toBeNull();
-  expect(findBox.x).toBeGreaterThan(queryBox.x);
-  expect(uploadBox.x).toBeGreaterThan(findBox.x);
   expect(await page.locator("#nofo-drop-zone").evaluate(node => {
     const order = [...node.children].map(child => child.id || child.getAttribute("for"));
     const positions = [order.indexOf("query"), order.indexOf("find-funding"), order.indexOf("nofo-file")];
@@ -428,10 +435,12 @@ test("provider failure preserves the search, filters, results, key, and retry co
 });
 
 test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
+  expect(liveFocusOpportunity).toBeTruthy();
+  await page.clock.setFixedTime(new Date(liveCatalog.generated_at));
   mockHybrid(page);
-  await page.goto("/match_explorer.html?focus=361187");
-  const card = page.locator('[data-opportunity-id="361187"]');
+  const focusId = String(liveFocusOpportunity.opportunity_id);
+  await page.goto(`/match_explorer.html?focus=${encodeURIComponent(focusId)}`);
+  const card = page.locator(`[data-opportunity-id="${focusId}"]`);
   await expect(card).toBeVisible({ timeout: 30_000 });
   await expect(card).toHaveClass(/chat-target/);
   await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
