@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Energy-Focused Air Quality and Health Effects Research</title>
@@ -32,15 +32,6 @@
     <author><name>NYSERDA</name></author>
     <category term="Energy"/>
     <summary>NYSERDA | Closes 2026-10-21 | Provides funding for projects in three categories: Category A) Regional Planning - technical assistance for Regional Energy Economy strategies; Category B) Industry Plans- funding for plans designed to attract and grow a specific industry across several regions in New York; and Category C) Implementation Support - targeted investment for implementation activities. NYSERDA has prequalified firms ca…</summary>
-  </entry>
-  <entry>
-    <title>New York State Clean Energy Internship Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000MdhViAAJ"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4000</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <summary>NYSERDA | Closes 2026-08-31 | Provides funding to eligible clean energy businesses, organizations, and local municipalities hiring interns to perform meaningful work in the clean energy sector. Both clean energy employers and interns can apply to participate in the program. Accepted employers will select, interview, and hire interns, and NYSERDA provides reimbursement on a percentage of the interns’ wages.</summary>
   </entry>
   <entry>
     <title>Empire Building Challenge: Hospitals</title>
