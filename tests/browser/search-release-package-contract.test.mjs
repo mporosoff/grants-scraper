@@ -109,6 +109,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
     "Refuse to deploy a stale generation",
     "Deploy the compatibility Worker before publishing Pages assets",
     "Commit refreshed catalog",
+    "Dispatch refreshed catalog to GitHub Pages",
     "Verify GitHub Pages serves the coordinated search package",
   ].map(label => workflow.indexOf(label));
   ordered.forEach(index => assert.ok(index >= 0));
@@ -122,6 +123,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   assert.match(workflow, /refusing to deploy stale Worker or Pages assets/);
   assert.match(workflow, /pull-requests: write/);
   assert.match(workflow, /statuses: write/);
+  assert.match(workflow, /actions: write/);
   assert.match(workflow, /gh api --method POST "repos\/\$\{GITHUB_REPOSITORY\}\/statuses\/\$\{head_sha\}"/);
   assert.match(workflow, /-f context=python/);
   assert.match(workflow, /-f context=browser/);
@@ -136,6 +138,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   }
   assert.match(workflow, /gh pr create/);
   assert.match(workflow, /gh pr merge "\$pr_url" --squash --delete-branch/);
+  assert.match(workflow, /gh workflow run pages\.yml --ref main/);
   assert.doesNotMatch(
     workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),
     /continue-on-error:\s*true/,

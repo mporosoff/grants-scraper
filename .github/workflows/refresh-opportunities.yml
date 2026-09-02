@@ -31,6 +31,7 @@ on:
         type: boolean
 
 permissions:
+  actions: write
   contents: write
   issues: write
   pull-requests: write
@@ -501,6 +502,12 @@ jobs:
             exit 1
           fi
           echo "merge_sha=$merge_sha" >> "$GITHUB_OUTPUT"
+      - name: Dispatch refreshed catalog to GitHub Pages
+        if: success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
       - name: Verify GitHub Pages serves the coordinated search package
         id: pages-verify
         if: success()
