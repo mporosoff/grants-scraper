@@ -1703,6 +1703,9 @@
       openExternalEditor("");
     });
     $("faculty-search").addEventListener("input", function () { renderFacultySuggestions(false); });
+    $("show-faculty-suggestions").addEventListener("mousedown", function (event) {
+      event.preventDefault();
+    });
     $("show-faculty-suggestions").addEventListener("click", function () {
       ensureTeamDirectory()
         .then(function () { renderFacultySuggestions(true); })

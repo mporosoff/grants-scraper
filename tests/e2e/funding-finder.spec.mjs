@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import {
+  configurePersonalProvider,
   csvRows,
   downloadText,
   mockHybrid,
@@ -328,7 +329,7 @@ for (const fixture of alertErrorCases) {
   });
 }
 
-test("primary search submits with Enter while AI refinement stays visible and truthfully disabled", async ({ page }) => {
+test("primary search submits with Enter while hosted AI refinement stays visible and truthfully gated", async ({ page }) => {
   mockHybrid(page);
   await openFundingFinder(page);
   const query = page.locator("#query");
@@ -349,18 +350,19 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   const refine = page.locator("#ai-refine");
   await expect(refine).toBeVisible();
   await expect(refine).toBeDisabled();
-  await expect(page.locator("#ai-refine-requirement")).toContainText("Run a funding search and enter or save");
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Run a funding search with a topic or enabled profile");
+  await expect(page.locator("#k-provider")).toHaveValue("hosted");
+  await expect(page.locator("#provider-state")).toContainText("Hosted AI ready");
   await query.fill("catalysis science");
   await query.press("Enter");
   await expect(page.locator("#results .result-card").first()).toBeVisible();
   await waitForHybridSettled(page);
   await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
-  await expect(refine).toBeDisabled();
-  await expect(page.locator("#ai-refine-requirement")).toContainText("Enter or save an AI provider key");
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-layout-test");
   await expect(refine).toBeEnabled();
-  await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine");
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine the current search with hosted AI");
+  await configurePersonalProvider(page, "sk-layout-test");
+  await expect(refine).toBeEnabled();
+  await expect(page.locator("#ai-refine-requirement")).toContainText("Ready to refine the current search with your connected provider");
 });
 
 test("primary search and AI action stack without horizontal overflow from tablet through 320 px", async ({ page }) => {
@@ -401,8 +403,7 @@ test("provider failure preserves the search, filters, results, key, and retry co
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   const originalHeading = await page.locator("#result-tier-counts").textContent();
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-preserved-test-key");
+  await configurePersonalProvider(page, "sk-preserved-test-key");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("provider rejected this API key");
   await expect(page.locator("#ai-status")).not.toContainText(/provider-secret-diagnostic|sk-preserved-test-key/);
@@ -531,8 +532,7 @@ test("refinement awaits the one pending Potential request before capturing its o
   const ai = await mockOpenAiBroadening(page);
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis science");
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-pending-baseline-mock");
+  await configurePersonalProvider(page, "sk-pending-baseline-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("Waiting for the ordinary Potential search");
   expect(ai.calls).toBe(0);
@@ -557,8 +557,7 @@ test("generic-only and stale AI responses leave the ordinary baseline untouched"
   const baselineIds = await page.locator("#results .result-card").evaluateAll(cards => (
     cards.map(card => card.dataset.opportunityId)
   ));
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-generic-plan-mock");
+  await configurePersonalProvider(page, "sk-generic-plan-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("no additional evidence-qualified opportunities");
   expect(generic.calls).toBe(1);
@@ -623,8 +622,7 @@ test("refinement keeps both calls and provenance bound to its starting provider"
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-provider-snapshot-mock");
+  await configurePersonalProvider(page, "sk-provider-snapshot-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("Step 1 of 2");
   await page.locator("#k-provider").selectOption("anthropic");
@@ -666,8 +664,7 @@ test("editing an imported ORCID clears stale refinement and restores ordinary re
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
   const baselineHeading = await page.locator("#result-tier-counts").textContent();
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-orcid-invalidation-mock");
+  await configurePersonalProvider(page, "sk-orcid-invalidation-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
 
@@ -686,8 +683,7 @@ test("uploaded notice focus blocks refinement until the PDF is removed", async (
     "[Page 1] Funding Opportunity 26-518 supports chemical, bioengineering, energy, and transport systems. [Page 2] Applicants should verify all requirements in the official notice.",
   );
   await openFundingFinder(page);
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-upload-focus-mock");
+  await configurePersonalProvider(page, "sk-upload-focus-mock");
   await page.locator("#nofo-file").setInputFiles({
     name: "matched-notice.pdf",
     mimeType: "application/pdf",
@@ -710,8 +706,7 @@ test("rerunning changed criteria clears stale chat focus while preserving the co
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis science");
   await waitForHybridSettled(page);
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-focus-invalidation-mock");
+  await configurePersonalProvider(page, "sk-focus-invalidation-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
   await page.locator("#open-results-chat").click();
@@ -747,8 +742,7 @@ test("AI refinement adds locally Strong records and exact restoration preserves 
   const originalCsv = await downloadText(page, "#export-csv");
   const originalSort = await page.locator("#sort").inputValue();
 
-  await page.locator(".provider-setup > summary").click();
-  await page.locator("#k-key").fill("sk-gate4-browser-mock");
+  await configurePersonalProvider(page, "sk-gate4-browser-mock");
   await page.locator("#ai-refine").click();
   await expect(page.locator("#ai-status")).toContainText("AI added", { timeout: 30_000 });
   expect(ai.calls).toBe(2);
