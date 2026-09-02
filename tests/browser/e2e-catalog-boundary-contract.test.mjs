@@ -46,6 +46,7 @@ test("deterministic Funding Finder E2E cannot borrow the daily catalog", () => {
 test("the daily-catalog E2E is a behavior-only health smoke", () => {
   assert.match(liveFundingSource, /browse-all/);
   assert.match(liveFundingSource, /result-card/);
+  assert.match(liveFundingSource, /watchRuntimeErrors\(page\)/);
   assert.doesNotMatch(
     liveFundingSource,
     /opportunity_(?:id|number)|data-opportunity-id|[?&]focus=|\b\d{6}\b|\b(?:PAR|RFA|DE-FOA)-\d/i,
