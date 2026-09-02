@@ -8,7 +8,7 @@ What this file pins, and why each rule exists (docs/TOPIC_LAYER_PLAN.md §18.1 P
 * **Identity within ROSES is `(appendix_code, program_title)`**, cycle-scoped,
   because the measured source contains `D.3C` twice.
 * **Cross-source matching is deterministic**: the appendix code printed in a
-  catalog record's title, corroborated by an `NNH<yy>ZDA<nnn>[A-Z]-` solicitation
+  catalog record's title, corroborated by an `NNH<yy>ZDA001N-` solicitation
   number. **No fuzzy-title matching is introduced by P8** — the normalised-title
   test that exists in `merge_records` is the framework's pre-existing collision
   backstop, and these tests show it agreeing rather than being relied upon.
@@ -175,6 +175,18 @@ class CatalogIndexTests(unittest.TestCase):
     def test_a_non_roses_record_is_ignored(self):
         index = catalog_roses_index([
             catalog_record("DE-FOA-0003600", "DOE Office of Science Financial Assistance")
+        ])
+        self.assertEqual(index["by_code"], {})
+        self.assertEqual(index["unresolved"], [])
+
+    def test_a_non_roses_nasa_smd_notice_is_ignored(self):
+        """SSERVI CAN-5 caused the 2026-09-02 production degradation alert."""
+        index = catalog_roses_index([
+            catalog_record(
+                "NNH26ZDA016C",
+                "Solar System Exploration Research Virtual Institute "
+                "Cooperative Agreement Notice-5 (SSERVI CAN-5)",
+            )
         ])
         self.assertEqual(index["by_code"], {})
         self.assertEqual(index["unresolved"], [])

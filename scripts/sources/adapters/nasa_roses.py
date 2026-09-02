@@ -93,10 +93,15 @@ DERIVED_UNDATED = "undated"
 #   NNH25ZDA001N-ATMOS        "ROSES25: A.14 Atmosphere"
 #   NNH25ZDA001N-RRNES        "ROSES 2025: A.4 Rapid Response and Novel Research…"
 #
+# `ZDA001N` is the annual ROSES omnibus identifier. Other Science Mission
+# Directorate notices use the same NNH<yy>ZDA prefix (for example SSERVI CAN-5
+# is `NNH26ZDA016C`) and must not enter ROSES reconciliation merely because
+# their solicitation numbers share that broad prefix.
+#
 # Both are exact string forms. There is deliberately **no** fuzzy-title matching:
 # a normalised-title comparison is the framework's existing last-resort collision
 # test in `merge_records`, not this module's identity rule.
-ROSES_SOLICITATION_RE = re.compile(r"^\s*NNH(\d{2})ZDA\d{3}[A-Z]", re.IGNORECASE)
+ROSES_SOLICITATION_RE = re.compile(r"^\s*NNH(\d{2})ZDA001N(?:-|$)", re.IGNORECASE)
 CATALOG_CODE_RE = re.compile(
     r"ROSES[\s-]*(?:20)?(\d{2})\s*:\s*([A-F]\.\d+[A-Z]?)\b", re.IGNORECASE
 )
