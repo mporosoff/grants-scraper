@@ -194,7 +194,7 @@ test("removal exposes missing roles and replacements cannot silently claim unaud
   assert.ok(afterAlternative.roles.some(role => role.selected_alternative_ids.includes(alternative.profile.id)));
 });
 
-test("Funding Finder panel is lazy, rerender-safe, single-owner, and accessible", () => {
+test("Funding Finder panels are lazy, rerender-safe, independently owned, and accessible", () => {
   assert.match(page, /meta name="opportunity-team-generation" content="[a-f0-9]{64}"/);
   assert.match(page, /assets\/opportunity-team\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /assets\/opportunity-team-panel\.js\?v=[a-f0-9]{64}/);
@@ -214,9 +214,12 @@ test("Funding Finder panel is lazy, rerender-safe, single-owner, and accessible"
   );
   assert.match(appSource, /Team-building opportunities only/);
   assert.match(appSource, /document\.dispatchEvent\(new CustomEvent\("funding-finder:before-results-render"\)\)/);
-  assert.match(panelSource, /var openPanel = null/);
+  assert.match(panelSource, /var openPanels = new Map\(\)/);
   assert.match(panelSource, /function panelOwned\(current\)/);
-  assert.match(panelSource, /closeCurrent\(\{ restoreFocus: false \}\)/);
+  assert.match(panelSource, /function currentForElement\(element\)/);
+  assert.match(panelSource, /openPanels\.set\(panel, current\)/);
+  assert.match(panelSource, /function closeAll\(\)/);
+  assert.doesNotMatch(panelSource, /panelShell[\s\S]{0,200}closeAll\(/);
   assert.match(panelSource, /funding-finder:before-results-render/);
   assert.match(panelSource, /if \(event\.key === "Escape"/);
   assert.match(panelSource, /aria-labelledby/);

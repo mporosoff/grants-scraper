@@ -6230,7 +6230,7 @@
       ]
     }
   ],
-  "generation_id": "441291abdf262792c406e85cbbc897c23e9209b3ed960b79d159533a5274060a",
+  "generation_id": "d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0",
   "limitations": [
     "The directory may omit relevant faculty and does not imply availability or eligibility.",
     "Only the listed opportunity scopes have a reviewed role model; broad parent programs never receive a team proposal.",
@@ -7374,7 +7374,7 @@
       "why_team": "Ignjatovic, Kose, and Renninger form an electronics/readout subteam, not a complete inertial-navigation team. The case is intentionally retained as a fail: three adjacent electronics profiles cannot substitute for MEMS physics, nonlinear resonator modeling, and adaptive control."
     },
     {
-      "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO) Listed on Announcement Listed on Announcement Listed on Announcement <a id=\"ctl00_cphMainContent_FoaDetailGridControl_gvFoaList_cell9_",
+      "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO)",
       "archetype": "Materials, chemistry, and advanced manufacturing",
       "catalog_title": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
       "gate_label": "Conditional — credible internal core",

@@ -37,7 +37,7 @@ _FOA_NUMBER = r"(?:[A-Z]{2,4}-)?[A-Z0-9]{2,8}-[A-Z0-9]{3,}"
 _ROW_RE = re.compile(
     r'[?#]foaid=?(?P<guid>' + _GUID + r')"[^>]*>\s*(?P<number>' + _FOA_NUMBER + r')\s*</a>'
     r'(?P<middle>.*?)'
-    r'(?=[?#]foaid=?' + _GUID + r'"[^>]*>\s*' + _FOA_NUMBER + r'\s*</a>|\Z)',
+    r'(?=<a\b[^>]*[?#]foaid=?' + _GUID + r'"[^>]*>\s*' + _FOA_NUMBER + r'\s*</a>|\Z)',
     re.IGNORECASE | re.DOTALL,
 )
 _ANCHOR_RE = re.compile(r"<a\b[^>]*>(?P<text>.*?)</a>", re.IGNORECASE | re.DOTALL)
@@ -48,6 +48,10 @@ _NOFO_TYPE_RE = re.compile(
 )
 _DATE_RE = re.compile(
     r"(\d{1,2})/(\d{1,2})/(\d{4})(?:\s+(\d{1,2}:\d{2}\s*(?:AM|PM))\s*ET)?",
+    re.IGNORECASE,
+)
+_NON_DATE_DEADLINE_RE = re.compile(
+    r"\b(?:listed on announcement|TBD)\b",
     re.IGNORECASE,
 )
 
@@ -64,7 +68,12 @@ def _deadlines_after_type(text: str, as_of: date):
     window = text[match.end(): match.end() + 200]
     window = re.sub(r"^\s*\(NOFO\)\s*", "", window, flags=re.IGNORECASE)
     first_date = _DATE_RE.search(window)
-    office = (window[: first_date.start()] if first_date else window).strip(" -–|")
+    non_date_deadline = _NON_DATE_DEADLINE_RE.search(window)
+    boundary = min(
+        (match.start() for match in (first_date, non_date_deadline) if match),
+        default=len(window),
+    )
+    office = window[:boundary].strip(" -–|")
     office = office or None
 
     pairs = {}

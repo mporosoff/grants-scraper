@@ -393,10 +393,10 @@ h1 {
 }
 
 .team-ready-filter[aria-pressed="true"] {
-  border-color: var(--blue);
-  background: var(--blue-soft);
-  color: var(--blue-dark);
-  box-shadow: inset 0 0 0 1px var(--blue);
+  border-color: var(--navy);
+  background: var(--blue-dark);
+  color: white;
+  box-shadow: inset 0 0 0 2px white, 0 0 0 2px var(--blue-dark);
   font-weight: 800;
 }
 
@@ -2426,6 +2426,7 @@ textarea:focus {
 
 .saved-panel {
   margin: 0 0 14px;
+  scroll-margin-top: 128px;
   border: 1px solid #e3e7ec;
   border-radius: 12px;
   background: #fff;

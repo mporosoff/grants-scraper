@@ -2211,6 +2211,10 @@
     );
   }
 
+  function scrollToSearchWorkspace() {
+    $("saved-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   function startSearch() {
     if (!state.ready) return runCatalogAction(startSearch);
     const built = refreshProfileQuery();
@@ -2266,7 +2270,7 @@
       hybridCanRun()
         ? `Strong matching completed. Looking for additional potential matches…${typoNote}${acronymNote}`
         : `Search complete.${typoNote}${acronymNote}`;
-    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToSearchWorkspace();
   }
 
   function resetFilterControls() {
@@ -2294,7 +2298,7 @@
     runSearch();
     $("search-status").textContent =
       `Browsing all ${state.matches.length.toLocaleString()} current opportunities.`;
-    $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToSearchWorkspace();
   }
 
   function runSearch({
@@ -3854,7 +3858,6 @@
       $("page-numbers").innerHTML = "";
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
-      $("export-ics").disabled = true;
       $("filter-team-ready").disabled = true;
       $("filter-team-ready").setAttribute("aria-pressed", "false");
       $("open-results-chat").disabled = true;
@@ -3933,9 +3936,6 @@
     }
     renderPagination(totalPages, Boolean(display.length));
     $("export-csv").disabled = !display.length;
-    $("export-ics").disabled = !display.some(match =>
-      calendarEvents(catalog.opportunities[match.index]).length
-    );
     updateAiRefineControl();
     renderDeploymentReview();
     renderEvaluation();
@@ -5217,13 +5217,6 @@
     $("page-numbers").addEventListener("click", event => {
       const pageButton = event.target.closest("[data-page]");
       if (pageButton) goToResultsPage(pageButton.dataset.page);
-    });
-    $("export-ics").addEventListener("click", () => {
-      const records = currentDisplayMatches().map(match => catalog.opportunities[match.index]);
-      exportCalendar(
-        records,
-        `funding-finder-deadlines-${runtimeDateIso()}.ics`,
-      );
     });
     $("export-csv").addEventListener("click", exportCsv);
     $("filter-team-ready").addEventListener("click", () => {
