@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -40,7 +41,8 @@ test("AI service and privacy copy stays compact and keeps advanced-key guidance 
   assert.doesNotMatch(setup, /provider-explanation|cost-note/);
   assert.match(setup, /<p class="key-help"><strong>No API key is required\.<\/strong> Funding Finder routes each feature through its tested hosted model\.<\/p>/);
   assert.match(setup, /<p class="privacy-note">Hosted AI[\s\S]*Advanced users may instead select OpenAI or Anthropic[\s\S]*OpenAI key and project limits[\s\S]*Anthropic key safety and limits<\/a>\.<\/p>/);
-  assert.match(searchPage, /app\.css\?v=ai-privacy-copy-20260902/);
+  const appCssHash = createHash("sha256").update(appCss).digest("hex");
+  assert.match(searchPage, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(appCss, /\.provider-setup-body\s*\{[^}]*padding:\s*0 15px 11px/s);
   assert.match(appCss, /\.provider-setup \.privacy-note\s*\{[^}]*margin:\s*7px 0 0/s);
 });

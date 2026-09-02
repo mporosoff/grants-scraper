@@ -194,6 +194,8 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
   assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
+  assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
+  assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);
 });
 
 test("supports repeated selection, removal, editing, and the four-person maximum", () => {

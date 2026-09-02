@@ -114,12 +114,16 @@ class OpportunityTeamModelTests(unittest.TestCase):
             self.assertNotIn("hajim-pr1", source)
         page = (ROOT / "match_explorer.html").read_text(encoding="utf-8")
         for path in (
-            "assets/app.css",
-            "assets/app.js",
             "assets/search-retrieval.js",
             "assets/opportunity-team-panel.js",
         ):
             self.assertIn(f'{path}?v={generation}', page)
+        app_css_hash = hashlib.sha256((ROOT / "assets" / "app.css").read_bytes()).hexdigest()
+        app_js_hash = hashlib.sha256((ROOT / "assets" / "app.js").read_bytes()).hexdigest()
+        self.assertIn(f"assets/app.css?v={app_css_hash}", page)
+        self.assertIn(f"assets/app.js?v={app_js_hash}", page)
+        team_page = (ROOT / "team_match.html").read_text(encoding="utf-8")
+        self.assertIn(f"assets/app.css?v={app_css_hash}", team_page)
 
     def test_browser_projection_stays_compact(self):
         self.assertLessEqual(len(self.browser_bytes), MAX_BROWSER_BYTES)

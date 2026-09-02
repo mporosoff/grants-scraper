@@ -32,14 +32,16 @@ POOL_COUNTS = {"main": 118, "standby": 35, "unadmitted": 3}
 MAX_BROWSER_BYTES = 220_000
 MAX_INDEX_BYTES = 4_096
 VERSIONED_ASSETS = (
-    "assets/app.css",
-    "assets/app.js",
     "assets/search-retrieval.js",
     "assets/team-matcher.js",
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",
     "data/opportunity_team_index.js",
+)
+CONTENT_HASHED_ASSETS = (
+    "assets/app.css",
+    "assets/app.js",
 )
 
 
@@ -403,6 +405,9 @@ def update_version_target(path: Path, generation_id: str) -> None:
     for asset in VERSIONED_ASSETS:
         pattern = rf"({re.escape(asset)}\?v=)[^\"']+"
         updated = re.sub(pattern, rf"\g<1>{generation_id}", updated)
+    for asset in CONTENT_HASHED_ASSETS:
+        pattern = rf"({re.escape(asset)}\?v=)[^\"']+"
+        updated = re.sub(pattern, rf"\g<1>{_sha256(path.parent / asset)}", updated)
     if "assets/opportunity-team.js?v=" not in updated:
         raise ValueError(f"Missing opportunity-team runtime reference in {path}")
     path.write_text(updated, encoding="utf-8", newline="\n")

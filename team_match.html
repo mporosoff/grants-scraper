@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=441291abdf262792c406e85cbbc897c23e9209b3ed960b79d159533a5274060a" />
+<link rel="stylesheet" href="./assets/app.css?v=613b02d18407a7186f7ffed3bcc06f2c94c8467988344c9e2d7c3374712adc46" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825" />
 <style>
   :root{
@@ -1312,10 +1312,13 @@
       ensureTeamDirectory().then(function () {
         $("faculty-search-status").textContent = "Search by name, department, or retained research capability.";
         $("faculty-search").focus();
-      }).catch(function () {
-        $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Add a researcher manually instead.";
-      });
+      }).catch(handleTeamDirectoryFailure);
     } else closeFacultySuggestions(true);
+  }
+
+  function handleTeamDirectoryFailure() {
+    closeFacultySuggestions(false);
+    $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Add a researcher manually instead, or select Show to retry.";
   }
 
   function setResearcherAddBusy(busy, member) {
@@ -1701,7 +1704,9 @@
     });
     $("faculty-search").addEventListener("input", function () { renderFacultySuggestions(false); });
     $("show-faculty-suggestions").addEventListener("click", function () {
-      ensureTeamDirectory().then(function () { renderFacultySuggestions(true); });
+      ensureTeamDirectory()
+        .then(function () { renderFacultySuggestions(true); })
+        .catch(handleTeamDirectoryFailure);
       $("faculty-search").focus();
     });
     $("faculty-search").addEventListener("keydown", function (event) {

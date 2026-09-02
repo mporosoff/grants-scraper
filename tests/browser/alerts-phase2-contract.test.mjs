@@ -2226,6 +2226,7 @@ test("FF-BUG-020 failed daily runs still record actual completion and duration",
 
 test("FF-BUG-020 scheduler health requires a recent non-failed daily evaluation", async () => {
   const database = databaseThrough();
+  database.prepare("DELETE FROM evaluation_runs WHERE run_kind='migration'").run();
   database.prepare(
     "INSERT INTO evaluation_runs(id,started_at,completed_at,status,scheduled_at,duration_ms,run_kind) VALUES('daily-failed','2026-09-02T11:49:00.000Z','2026-09-02T11:50:00.000Z','failed','2026-09-02T11:45:00.000Z',60000,'daily')",
   ).run();

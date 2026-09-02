@@ -192,6 +192,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
+        app_script_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.js").read_bytes()
+        ).hexdigest()
+        app_style_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.css").read_bytes()
+        ).hexdigest()
 
         self.assertIn('id="query"', explorer_html)
         self.assertIn('id="nofo-drop-zone"', explorer_html)
@@ -262,7 +268,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
         self.assertIn(
-            f'<link rel="stylesheet" href="./assets/app.css?v={opportunity_team_generation}">',
+            f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
         for asset in ("nofo.js", "review.js", "saved.js"):
@@ -321,7 +327,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/app.js?v={opportunity_team_generation}"></script>',
+            f'<script src="./assets/app.js?v={app_script_version}"></script>',
             explorer_html,
         )
         self.assertIn(
