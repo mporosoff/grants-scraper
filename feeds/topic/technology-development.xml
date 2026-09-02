@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -209,6 +209,52 @@
     <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
+    <title>U.S-Saudi AI Research Commercialization Accelerator Program (ReCAP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363744"/>
+    <id>urn:funding-finder:grants-gov:363744</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>U.S. Mission to Saudi Arabia</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Environmental science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-14 | The U.S. Embassy Riyadh Public Diplomacy Section announces an open competition for organizations to design and implement the U.S.-Saudi AI Research Commercialization Accelerator (ReCAP), a 12-month initiative connecting Saudi Arabia's expanding artificial intelligence innovation ecosystem with the United States' world-leading technology, investment, and commercialization ecosystem. The program wil…</summary>
+  </entry>
+  <entry>
+    <title>IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363752"/>
+    <id>urn:funding-finder:grants-gov:363752</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-12-09 | The National Science Foundation (NSF) plays a prominent role in the improvement of undergraduate STEM education at the Nation’s colleges and universities. Through the IUSE: Innovation in Two-Year College STEM Education (ITYC) program, the agency seeks to extend this effort by making an intentional investment in the country’s two-year institutions of higher education, or two-year colleges. The twin…</summary>
+  </entry>
+  <entry>
+    <title>Exploratory Clinical Neuroscience Research on Substance Use Disorders (R61/R33 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361518"/>
+    <id>urn:funding-finder:grants-gov:361518</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2028-06-16 | This notice of funding opportunity (NOFO) uses a R61/R33 Phased Innovation Award activity code to support clinical research applications that are exploratory and developmental in nature and focus on understanding the neurobiological mechanisms underlying substance use disorders (SUD), including fundamental circuitry and behavior relevant to substance use. For projects not requiring a phased resear…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360947"/>
+    <id>urn:funding-finder:grants-gov:360947</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
+  </entry>
+  <entry>
     <title>Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363723"/>
     <id>urn:funding-finder:grants-gov:363723</id>
@@ -297,15 +343,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
-    <title>2026 SBIR/STTR topics</title>
-    <link href="https://arpa-h.gov/explore-funding/sbir"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Asbir</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-11 | Current ARPA-H small business. For Small Businesses | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer',…</summary>
-  </entry>
-  <entry>
     <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
@@ -358,6 +395,15 @@
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
+  </entry>
+  <entry>
+    <title>2026 SBIR/STTR topics</title>
+    <link href="https://arpa-h.gov/explore-funding/sbir"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Asbir</id>
+    <updated>2026-08-15T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H small business. For Small Businesses | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer',…</summary>
   </entry>
   <entry>
     <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
@@ -413,21 +459,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <summary>U.S. Mission to the International Organizations | Closes 2026-09-04 | As the home of the United Nations Office for Outer Space Affairs (UNOOSA) and the United Nations Committee on the Peaceful Uses of Outer Space (COPUOS), Vienna provides a unique multilateral platform for fostering these partnerships. Building upon the successful inaugural U.S. Space Forum in 2025, the U.S. Mission to the International Organizations in Vienna (UNVIE) is launching Project Constellat…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Investigative Journalism in Ukraine through U.S. AI Innovation</title>
-    <link href="https://www.grants.gov/search-results-detail/363440"/>
-    <id>urn:funding-finder:grants-gov:363440</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>U.S. Mission to Ukraine</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Community development"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Ukraine | Closes 2026-09-01 | The U.S. Department of State's Embassy Kyiv announces an open competition for Ukrainian non-governmental media organizations and independent media outlets to implement a program that strengthens data-driven and AI-enabled journalism in Ukraine. It will build the capacity of journalists and newsrooms to produce high-quality reporting on economic development, reconstruction and investment through tr…</summary>
   </entry>
   <entry>
     <title>Placement and Coordination Program</title>
@@ -487,24 +518,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
-    <title>American Corners Portugal Operational Funding</title>
-    <link href="https://www.grants.gov/search-results-detail/363340"/>
-    <id>urn:funding-finder:grants-gov:363340</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Portugal</name></author>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Portugal | Closes 2026-08-28 | The U.S. Department of State’s Mission to Portugal announces a limited competition solicitation for American Corners in Portugal to apply for FY2026 American Spaces Operational Funding. Funds will primarily support the operational needs of the Corners, including design and furnishings that showcase an American look and feel, resources and supplies, technology, internet, mission's programmatic and …</summary>
-  </entry>
-  <entry>
-    <title>Advancing Sports Diplomacy Through Adaptive Sports</title>
-    <link href="https://www.grants.gov/search-results-detail/363338"/>
-    <id>urn:funding-finder:grants-gov:363338</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Ukraine</name></author>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Ukraine | Closes 2026-08-31 | The U.S. Department of State's U.S. Embassy Kyiv announces an open competition to implement a program to build Ukraine’s capacity to support wounded veterans through adaptive sports by leveraging American leadership, innovation, and expertise in sport. Capitalizing on President Trump's announcement of the Decade of Sports (2024-2034) and the United States' role as host of global sporting events - …</summary>
-  </entry>
-  <entry>
     <title>Building Lasting U.S.-Chad Partnerships to Promote American Excellence</title>
     <link href="https://www.grants.gov/search-results-detail/363339"/>
     <id>urn:funding-finder:grants-gov:363339</id>
@@ -549,21 +562,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Environmental science"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-09-25 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to continue its Research and Entrepreneurial Development Immersion (REDI) Award program. The REDI program promotes the development of entrepreneurial education programs that are designed to broaden the skillset of graduate students and postdoctoral researchers, as well as early-career master's, Ph. D., …</summary>
-  </entry>
-  <entry>
-    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
-    <link href="https://www.grants.gov/search-results-detail/363293"/>
-    <id>urn:funding-finder:grants-gov:363293</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
   </entry>
   <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
@@ -612,19 +610,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
-    <title>Tribal Transportation Safety Strategy Pilot Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362956"/>
-    <id>urn:funding-finder:grants-gov:362956</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>69A355 Research and Technology</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>69A355 Research and Technology | Closes 2026-08-28 | he U.S. Department of Transportation’s Office of the Assistant Secretary for Research and Technology (OST-R) is announcing a Notice of Funding Opportunity (NOFO) for the Tribal Transportation Safety Strategy Pilot Program. This three-year cooperative agreement is designed to address the critical public safety crisis in Tribal communities, as American Indian and Alaska Native populations experience…</summary>
-  </entry>
-  <entry>
     <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359666"/>
     <id>urn:funding-finder:grants-gov:359666</id>
@@ -655,25 +640,30 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Closes 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
   </entry>
   <entry>
-    <title>The 2027 YSEALI Regional Workshop: Securing Supply Chains</title>
-    <link href="https://www.grants.gov/search-results-detail/362900"/>
-    <id>urn:funding-finder:grants-gov:362900</id>
-    <updated>2026-06-22T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-31 | Project Background, Goals, and Objectives: In an era of global disruption and rapid technological change, secure and resilient supply chains are more critical than ever. This workshop will bring together early-stage professionals from across Southeast Asia to explore how supply chains operate, the impact of advanced technologies, and the critical minerals that power modern economies. They will lea…</summary>
-  </entry>
-  <entry>
     <title>GREGoRi Data Coordination and Outreach Center (U01, Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359279"/>
     <id>urn:funding-finder:grants-gov:359279</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Innovation Projects (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359644"/>
+    <id>urn:funding-finder:grants-gov:359644</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Technology Integration Center (U01, Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359280"/>
+    <id>urn:funding-finder:grants-gov:359280</id>
     <updated>2026-06-18T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>

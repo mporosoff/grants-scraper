@@ -155,7 +155,7 @@
           </div>
           <div class="help-card">
             <h4>Filter or ask a question</h4>
-            <p>Structured institution, agency, program, topic, investigator, and year filters work without AI. Optional <strong>Ask about this institution</strong> uses hosted AI to translate a natural-language question into visible structured filters; returned award records remain authoritative.</p>
+            <p>Use the structured institution, agency, program, topic, investigator, and year filters directly, or choose <strong>Ask about this institution</strong> to translate a natural-language question into visible structured filters. Returned award records remain authoritative.</p>
           </div>
         </div>
       </section>

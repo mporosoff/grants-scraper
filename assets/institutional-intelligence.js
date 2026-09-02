@@ -1275,7 +1275,7 @@
       const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true });
       if (outcome) await refreshQuestionAnswer({ allowNarrative: true });
     } catch (error) {
-      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available without AI.`;
+      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available.`;
     }
     } finally {
       state.questionSubmitting = false;

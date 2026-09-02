@@ -93,26 +93,44 @@ function boundedStringList(value, maximumItems, maximumCharacters) {
     && value.every(item => boundedText(item, maximumCharacters));
 }
 
-function safeJsonValue(value, depth = 0, maximumTopLevelObjectKeys = 32) {
+function safeJsonValue(
+  value,
+  depth = 0,
+  maximumTopLevelObjectKeys = 32,
+  maximumArrayItems = 24,
+) {
   if (value === null || typeof value === "boolean") return true;
   if (typeof value === "number") return Number.isFinite(value);
   if (typeof value === "string") return value.length <= 120_000;
   if (depth >= 5) return false;
   if (Array.isArray(value)) {
-    return value.length <= 24
-      && value.every(item => safeJsonValue(item, depth + 1, maximumTopLevelObjectKeys));
+    return value.length <= maximumArrayItems
+      && value.every(item => safeJsonValue(
+        item,
+        depth + 1,
+        maximumTopLevelObjectKeys,
+        maximumArrayItems,
+      ));
   }
   const maximumObjectKeys = depth === 0 ? maximumTopLevelObjectKeys : 32;
   if (!plainObject(value) || Object.keys(value).length > maximumObjectKeys) return false;
   return Object.entries(value).every(([key, item]) => (
     /^[a-z][a-z0-9_]{0,63}$/i.test(key)
     && !["__proto__", "constructor", "prototype"].includes(key)
-    && safeJsonValue(item, depth + 1, maximumTopLevelObjectKeys)
+    && safeJsonValue(item, depth + 1, maximumTopLevelObjectKeys, maximumArrayItems)
   ));
 }
 
-function boundedObject(value, allowed, maximumCharacters, required = [], maximumKeys = 32) {
-  if (!hasOnlyKeys(value, allowed, required) || !safeJsonValue(value, 0, maximumKeys)) return false;
+function boundedObject(
+  value,
+  allowed,
+  maximumCharacters,
+  required = [],
+  maximumKeys = 32,
+  maximumArrayItems = 24,
+) {
+  if (!hasOnlyKeys(value, allowed, required)
+    || !safeJsonValue(value, 0, maximumKeys, maximumArrayItems)) return false;
   return JSON.stringify(value).length <= maximumCharacters;
 }
 
@@ -129,7 +147,7 @@ function validProfile(value) {
 }
 
 function validFilters(value) {
-  return boundedObject(value, FILTER_KEYS, 12_000);
+  return boundedObject(value, FILTER_KEYS, 12_000, [], 32, 50);
 }
 
 function validRecord(value) {

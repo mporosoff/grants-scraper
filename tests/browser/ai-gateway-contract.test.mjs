@@ -311,6 +311,22 @@ test("all six browser payload families satisfy the exact Worker input policy", (
   }
 });
 
+test("search plans accept every selectable facet value without widening unrelated arrays", () => {
+  const maximum = sampleUser("search_plan");
+  maximum.active_filters.topic = Array.from({ length: 50 }, (_, index) => `topic-${index}`);
+  assert.deepEqual(validateOperationUser("search_plan", JSON.stringify(maximum)), maximum);
+
+  const overflow = structuredClone(maximum);
+  overflow.active_filters.topic.push("topic-50");
+  assert.equal(validateOperationUser("search_plan", JSON.stringify(overflow)), null);
+
+  const recordOverflow = productionRecord("too-many-topics");
+  recordOverflow.topics = Array.from({ length: 25 }, (_, index) => `topic-${index}`);
+  const refinement = sampleUser("refinement_shortlist");
+  refinement.candidate_opportunities = [recordOverflow];
+  assert.equal(validateOperationUser("refinement_shortlist", JSON.stringify(refinement)), null);
+});
+
 test("production-shaped records fit the record policy without relaxing nested object bounds", () => {
   const fullRecord = productionRecord();
   assert.equal(Object.keys(fullRecord).length, 37);

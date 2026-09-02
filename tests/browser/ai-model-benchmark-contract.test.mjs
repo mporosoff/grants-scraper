@@ -13,10 +13,13 @@ import {
   BENCHMARK_MODELS,
   BENCHMARK_MAX_ATTEMPTS,
   BENCHMARK_MAX_OUTPUT_TOKENS,
+  BENCHMARK_RETRY_INSTRUCTIONS,
   createHandler,
 } from "../../workers/ai-benchmark/src/index.js";
 import { validateOperationUser } from "../../workers/ai-gateway/src/input-policy.js";
 import {
+  BENCHMARK_PROVIDER_OVERHEAD_TOKEN_CEILING,
+  BENCHMARK_WORKER_TIMEOUT_MS,
   benchmarkFailureRecord,
   callWorker,
   estimateBenchmarkCost,
@@ -342,7 +345,7 @@ test("automated grading detects unsupported citations and deterministic translat
   assert.ok(ineligibleGrade.problems.includes("ineligible_result_id:GRAD-FELLOWSHIP-02"));
 });
 
-test("bounded cost estimate includes the Worker's single retry ceiling", () => {
+test("bounded cost estimate uses a conservative byte ceiling across retries", () => {
   const estimate = estimateBenchmarkCost(
     { models: ["luna"], runs: 1 },
     [BENCHMARK_CASES[0]],
@@ -353,10 +356,46 @@ test("bounded cost estimate includes the Worker's single retry ceiling", () => {
   assert.equal(estimate.bounded_maximum_provider_calls, 2);
   assert.equal(luna.bounded_maximum_provider_calls, 2);
   assert.ok(luna.bounded_maximum_input_tokens > luna.estimated_input_tokens * 2);
+  const testCase = BENCHMARK_CASES[0];
+  const schema = JSON.stringify(globalThis.FUNDING_AI.STRUCTURED_OPERATIONS[testCase.operation]);
+  const firstAttemptBytes = Buffer.byteLength(testCase.system, "utf8")
+    + Buffer.byteLength(testCase.user, "utf8")
+    + Buffer.byteLength(schema, "utf8");
+  const retryAttemptBytes = firstAttemptBytes
+    + Buffer.byteLength(BENCHMARK_RETRY_INSTRUCTIONS.luna, "utf8");
+  assert.equal(
+    luna.bounded_maximum_input_tokens,
+    firstAttemptBytes + retryAttemptBytes + BENCHMARK_PROVIDER_OVERHEAD_TOKEN_CEILING * 2,
+  );
   assert.equal(
     luna.bounded_maximum_output_tokens,
     BENCHMARK_MAX_OUTPUT_TOKENS * BENCHMARK_MAX_ATTEMPTS,
   );
+});
+
+test("the runner timeout covers stalled benchmark response bodies", async () => {
+  let signal;
+  const fetchImpl = async (_url, options) => {
+    signal = options.signal;
+    return {
+      ok: true,
+      status: 200,
+      json: () => new Promise((_, reject) => {
+        signal.addEventListener("abort", () => reject(new Error("body stalled")), { once: true });
+      }),
+    };
+  };
+  const testCase = BENCHMARK_CASES.find(item => item.id === "institution-translate-bes-count");
+  await assert.rejects(
+    callWorker(
+      { endpoint: "https://benchmark.example", token },
+      { testCase, run: 1, model: "gemma" },
+      { fetchImpl, timeoutMs: 10 },
+    ),
+    /Benchmark Worker request timed out after 10 ms/,
+  );
+  assert.equal(signal.aborted, true);
+  assert.equal(BENCHMARK_WORKER_TIMEOUT_MS, 75_000);
 });
 
 test("one provider timeout is recorded as evidence without invalidating other benchmark jobs", () => {

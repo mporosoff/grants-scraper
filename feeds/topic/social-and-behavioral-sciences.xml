@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-02T06:05:33Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -245,6 +245,30 @@
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
   </entry>
   <entry>
+    <title>IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363752"/>
+    <id>urn:funding-finder:grants-gov:363752</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Closes 2026-12-09 | The National Science Foundation (NSF) plays a prominent role in the improvement of undergraduate STEM education at the Nation’s colleges and universities. Through the IUSE: Innovation in Two-Year College STEM Education (ITYC) program, the agency seeks to extend this effort by making an intentional investment in the country’s two-year institutions of higher education, or two-year colleges. The twin…</summary>
+  </entry>
+  <entry>
+    <title>NINDS Efficacy and Exploratory Clinical Trials (UG3/UH3 - Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360404"/>
+    <id>urn:funding-finder:grants-gov:360404</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Closes 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+  </entry>
+  <entry>
     <title>BJA FY 2026 Crisis Response Training Program</title>
     <link href="https://www.grants.gov/search-results-detail/363710"/>
     <id>urn:funding-finder:grants-gov:363710</id>
@@ -287,31 +311,6 @@
     <summary>National Institutes of Health | Closes 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
   </entry>
   <entry>
-    <title>American Innovation Hub: AI &amp; Digital Skills for the Creative &amp; Tech Economy</title>
-    <link href="https://www.grants.gov/search-results-detail/363293"/>
-    <id>urn:funding-finder:grants-gov:363293</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>U.S. Mission to Indonesia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Indonesia | Closes 2026-08-30 | Indonesia is ASEAN’s largest economy and most populous nation, with a young, fast-growing digital population that is rapidly adopting artificial intelligence and creative-technology tools. The choices this generation makes about which technologies, standards, and platforms to build on will shape Indonesia’s digital economy for decades. Demand for trusted, high-quality AI tools is outpacing access …</summary>
-  </entry>
-  <entry>
-    <title>The Primary Prevention Youth Homelessness Demonstration Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362099"/>
-    <id>urn:funding-finder:grants-gov:362099</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>Administration for Children &amp; Families - ACYF/FYSB</name></author>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <summary>Administration for Children &amp; Families - ACYF/FYSB | Closes 2026-08-31 | The Primary Prevention Youth Homelessness Demonstration Program provides funding to identify and implement strategies and services for youth and young adults between ages 12 and 26 in order to prevent homelessness, including strategies designed to serve youth and young adult populations with a high likelihood of experiencing homelessness, housing instability, particularly among youth at risk of hu…</summary>
-  </entry>
-  <entry>
     <title>Effects of International Parental Child Abduction on Abducted Children and Left-Behind Parents</title>
     <link href="https://www.grants.gov/search-results-detail/363297"/>
     <id>urn:funding-finder:grants-gov:363297</id>
@@ -331,15 +330,6 @@
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
     <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
-  </entry>
-  <entry>
-    <title>National HIV Behavioral Surveillance</title>
-    <link href="https://www.grants.gov/search-results-detail/361918"/>
-    <id>urn:funding-finder:grants-gov:361918</id>
-    <updated>2026-07-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP | Closes 2026-09-01 | The purpose of this NOFO is to support ongoing bio-behavioral surveillance among populations disproportionately affected by HIV. Data will be collected on behavioral risk factors for HIV (e.g., sexual behaviors, drug use), HIV testing behaviors, use of prevention strategies (e.g., condoms, PrEP) and receipt of prevention services. All NHBS participants will be offered an HIV test and linked to app…</summary>
   </entry>
   <entry>
     <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
@@ -654,5 +644,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
+  </entry>
+  <entry>
+    <title>NIA Expanding Research in AD/ADRD (ERA) Postbaccalaureate Research Education Program (R25 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359653"/>
+    <id>urn:funding-finder:grants-gov:359653</id>
+    <updated>2025-09-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-05-26 | This Notice of Funding Opportunity Announcement (NOFO) invites R25 applications to support the development and implementation of research education programs for recent baccalaureates from all backgrounds, including those from groups underrepresented in the biomedical and behavioral sciences. It is essential to expand and broaden the skilled Alzheimers Disease (AD) and Alzheimers Disease and Relate…</summary>
   </entry>
 </feed>

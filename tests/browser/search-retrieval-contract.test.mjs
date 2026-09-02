@@ -3,6 +3,8 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
+import { parentRecords as frozenSearchRecords } from "../fixtures/frozen/search-regression-records.mjs";
+
 const querySource = await readFile(
   new URL("../../assets/search-query.js", import.meta.url),
   "utf8",
@@ -132,6 +134,13 @@ function record(id, title, description = "", topics = []) {
     topic_areas: topics,
     disciplines: [],
   };
+}
+
+function frozenRecords(...ids) {
+  const requested = new Set(ids);
+  const records = frozenSearchRecords.filter(item => requested.has(item.opportunity_id));
+  assert.equal(records.length, requested.size, `missing frozen search fixture: ${ids.join(", ")}`);
+  return records;
 }
 
 test("recovers scientific typos and irregular word forms", () => {
@@ -523,9 +532,18 @@ test("search v2 disambiguates resolved AI from the AI/AN population abbreviation
   assert.equal(result.scores[1], 0, JSON.stringify(result.evidence[1]));
 });
 
-test("reported catalyst and AI search is narrow without losing chemistry programs", () => {
+test("catalyst and AI search is narrow without losing frozen chemistry programs", () => {
   const apis = loadApis();
-  const catalog = assignmentJson(productionCatalogSource);
+  const catalog = catalogFor(frozenRecords(
+    "fixture-cps",
+    "fixture-bes",
+    "fixture-onr",
+    "fixture-chemistry",
+    "fixture-ai-journalism",
+    "fixture-ai-outreach",
+    "fixture-metaphorical-catalyst",
+    "fixture-biodata-catalyst",
+  ), apis.query);
   const result = apis.retrieval.create(catalog, apis.query).score(
     "catalysts for AI",
     { context: "Electrochemistry, colloids, catalysis, AI, and chemical engineering." },
@@ -533,15 +551,15 @@ test("reported catalyst and AI search is narrow without losing chemistry program
   const matches = catalog.opportunities.filter((_record, index) => result.scores[index] > 0);
   const matchedIds = new Set(matches.map(record => record.opportunity_id));
 
-  assert.ok(matchedIds.has("362061"), "Chemical Process Systems should remain retrievable");
-  assert.ok(matchedIds.has("360678"), "the evidence-backed DOE umbrella should remain retrievable");
-  assert.ok(matchedIds.has("356605"), "the evidence-backed ONR BAA should remain retrievable");
-  assert.ok(matchedIds.has("347749"), "the NSF chemistry program should remain retrievable");
+  assert.ok(matchedIds.has("fixture-cps"), "Chemical Process Systems should remain retrievable");
+  assert.ok(matchedIds.has("fixture-bes"), "the Basic Energy Sciences fixture should remain retrievable");
+  assert.ok(matchedIds.has("fixture-onr"), "the broad chemistry fixture should remain retrievable");
+  assert.ok(matchedIds.has("fixture-chemistry"), "the chemistry program should remain retrievable");
   assert.ok(matches.length >= 3 && matches.length <= 20, `unexpected candidate count: ${matches.length}`);
-  assert.equal(matchedIds.has("363440"), false, "AI journalism must not leak through");
-  assert.equal(matchedIds.has("363547"), false, "EducationUSA AI outreach must not leak through");
-  assert.equal(matchedIds.has("359949"), false, "metaphorical catalyst wording must not leak through");
-  assert.equal(matchedIds.has("359942"), false, "BioData Catalyst is not chemical catalysis");
+  assert.equal(matchedIds.has("fixture-ai-journalism"), false, "AI journalism must not leak through");
+  assert.equal(matchedIds.has("fixture-ai-outreach"), false, "AI outreach must not leak through");
+  assert.equal(matchedIds.has("fixture-metaphorical-catalyst"), false, "metaphorical catalyst wording must not leak through");
+  assert.equal(matchedIds.has("fixture-biodata-catalyst"), false, "BioData Catalyst is not chemical catalysis");
 });
 
 test("preserves exact opportunity-number priority", () => {
@@ -608,9 +626,11 @@ test("uses researcher context to resolve an unknown acronym without AI", () => {
   );
 });
 
-test("resolves CFD with the production retrieval engine from researcher context", () => {
+test("resolves CFD with a frozen retrieval catalog from researcher context", () => {
   const apis = loadApis();
-  const catalog = assignmentJson(productionCatalogSource);
+  const catalog = catalogFor([
+    record("cfd", "Hypersonic flow simulation", "Computational fluid dynamics for reacting flows."),
+  ], apis.query);
   const groups = apis.retrieval.create(catalog, apis.query).expandGroups("CFD", {
     context: "Transport phenomena and computational fluid dynamics for reacting flows.",
   });
@@ -623,9 +643,14 @@ test("resolves CFD with the production retrieval engine from researcher context"
   assert.ok(groups[0].terms.some(item => item.term === "dynamic"));
 });
 
-test("production separation searches surface focused programs and the DOE umbrella call without policy noise", () => {
+test("frozen separation searches surface focused programs and an umbrella call without policy noise", () => {
   const apis = loadApis();
-  const catalog = assignmentJson(productionCatalogSource);
+  const catalog = catalogFor(frozenRecords(
+    "fixture-cps",
+    "fixture-separations",
+    "fixture-bes",
+    "fixture-policy-workshop",
+  ), apis.query);
   const engine = apis.retrieval.create(catalog, apis.query);
   const ids = Object.fromEntries(
     catalog.opportunities.map((record, index) => [record.opportunity_id, index]),
@@ -633,28 +658,47 @@ test("production separation searches surface focused programs and the DOE umbrel
 
   for (const query of ["separations with ionic liquids", "REE extraction with ILs"]) {
     const result = engine.score(query);
-    for (const id of ["362061", "362063", "360678"]) {
+    for (const id of ["fixture-cps", "fixture-separations", "fixture-bes"]) {
       assert.ok(result.scores[ids[id]] > 0, `${query}: ${id}`);
     }
     const workshop = catalog.opportunities.findIndex(record =>
-      /YSEALI Regional Workshop/i.test(record.title || "")
+      /Regional Workshop/i.test(record.title || "")
     );
     assert.ok(workshop >= 0);
     assert.equal(result.scores[workshop], 0, `${query}: policy workshop noise`);
   }
 });
 
-test("exact Basic Energy Sciences wording outranks generic new DOE notices", () => {
+test("exact Basic Energy Sciences wording outranks a generic frozen notice", () => {
   const apis = loadApis();
-  const catalog = assignmentJson(productionCatalogSource);
+  const catalog = catalogFor(frozenRecords("fixture-bes", "fixture-new-doe-notice"), apis.query);
   const result = apis.retrieval.create(catalog, apis.query)
     .score("DOE Basic Energy Sciences separations");
-  const bes = catalog.opportunities.findIndex(record => record.opportunity_id === "360678");
-  const prospect = catalog.opportunities.findIndex(record => record.opportunity_id === "363510");
+  const bes = catalog.opportunities.findIndex(record => record.opportunity_id === "fixture-bes");
+  const prospect = catalog.opportunities.findIndex(record => record.opportunity_id === "fixture-new-doe-notice");
 
   assert.ok(bes >= 0);
   assert.ok(result.scores[bes] > 0);
   if (prospect >= 0) assert.ok(result.scores[bes] > result.scores[prospect]);
+});
+
+test("the live catalog supports exact-identifier retrieval without naming a mutable opportunity", () => {
+  const apis = loadApis();
+  const catalog = assignmentJson(productionCatalogSource);
+  assert.equal(catalog.opportunities.length, catalog.search_index.document_count);
+  const candidate = catalog.opportunities.find(item => (
+    ["posted", "forecasted"].includes(String(item.status || "").toLowerCase())
+    && String(item.opportunity_number || "").length >= 6
+  ));
+  assert.ok(candidate, "the current catalog should contain an indexed active opportunity number");
+  const result = apis.retrieval.create(catalog, apis.query).score(candidate.opportunity_number);
+  const index = catalog.opportunities.indexOf(candidate);
+  assert.ok(result.scores[index] > 0);
+  assert.equal(
+    Math.max(...result.scores),
+    result.scores[index],
+    "the selected live opportunity number should receive top exact-match priority",
+  );
 });
 
 test("topic catalog admits only search-indexed publishable subject children", () => {

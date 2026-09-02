@@ -1056,7 +1056,7 @@
       ? "Hosted AI included"
       : configured
         ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
-        : "No AI key required for deterministic answers";
+        : "Personal AI key not configured";
     $("ii-key-setup").classList.remove("hidden");
     $("ii-key-field")?.classList.toggle("hidden", provider === "hosted" || configured);
     $("ii-save-key")?.classList.toggle("hidden", provider === "hosted" || configured);

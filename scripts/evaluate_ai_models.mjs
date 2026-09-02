@@ -19,6 +19,8 @@ import {
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contracts = globalThis.FUNDING_AI.STRUCTURED_OPERATIONS;
+export const BENCHMARK_WORKER_TIMEOUT_MS = 75_000;
+export const BENCHMARK_PROVIDER_OVERHEAD_TOKEN_CEILING = 8_192;
 
 function parseArgs(values) {
   const options = {
@@ -103,19 +105,25 @@ export function estimateBenchmarkCost(options, cases) {
     const pricing = MODEL_CONFIG[model];
     let inputTokens = 0;
     let outputTokens = 0;
+    let boundedMaximumInputTokens = 0;
     for (const testCase of cases) {
-      const schemaChars = JSON.stringify(contracts[testCase.operation]).length;
-      inputTokens += Math.ceil((testCase.system.length + testCase.user.length + schemaChars) / 4) * options.runs;
+      const schema = JSON.stringify(contracts[testCase.operation]);
+      inputTokens += Math.ceil((testCase.system.length + testCase.user.length + schema.length) / 4)
+        * options.runs;
       outputTokens += testCase.estimated_output_tokens * options.runs;
+      for (let attempt = 0; attempt < BENCHMARK_MAX_ATTEMPTS; attempt += 1) {
+        const retryInstruction = attempt ? BENCHMARK_RETRY_INSTRUCTIONS[model] : "";
+        boundedMaximumInputTokens += (
+          Buffer.byteLength(testCase.system + retryInstruction, "utf8")
+          + Buffer.byteLength(testCase.user, "utf8")
+          + Buffer.byteLength(schema, "utf8")
+          + BENCHMARK_PROVIDER_OVERHEAD_TOKEN_CEILING
+        ) * options.runs;
+      }
       calls += options.runs;
     }
     const estimatedCost = inputTokens / 1_000_000 * pricing.input_usd_per_million_tokens
       + outputTokens / 1_000_000 * pricing.output_usd_per_million_tokens;
-    const retryInputTokens = Math.ceil(BENCHMARK_RETRY_INSTRUCTIONS[model].length / 4)
-      * cases.length
-      * options.runs
-      * (BENCHMARK_MAX_ATTEMPTS - 1);
-    const boundedMaximumInputTokens = inputTokens * BENCHMARK_MAX_ATTEMPTS + retryInputTokens;
     const maximumOutputTokens = cases.length
       * options.runs
       * BENCHMARK_MAX_OUTPUT_TOKENS
@@ -187,28 +195,49 @@ class BenchmarkWorkerError extends Error {
   }
 }
 
-export async function callWorker(options, job) {
+export async function callWorker(options, job, {
+  fetchImpl = globalThis.fetch,
+  timeoutMs = BENCHMARK_WORKER_TIMEOUT_MS,
+} = {}) {
   const requestId = `${BENCHMARK_VERSION}:${job.testCase.id}:r${job.run}:${job.model}`;
   const startedAt = Date.now();
-  const response = await fetch(new URL("/v1/evaluate", options.endpoint), {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${options.token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      request_id: requestId,
-      operation: job.testCase.operation,
-      model: job.model,
-      system: job.testCase.system,
-      user: job.testCase.user,
-    }),
-  });
+  const controller = new AbortController();
+  const boundedTimeoutMs = Math.max(1, Math.min(
+    120_000,
+    Number(timeoutMs) || BENCHMARK_WORKER_TIMEOUT_MS,
+  ));
+  const timeout = setTimeout(() => controller.abort(), boundedTimeoutMs);
+  let response;
   let body;
   try {
-    body = await response.json();
-  } catch {
-    throw new Error(`Worker returned non-JSON HTTP ${response.status}.`);
+    response = await fetchImpl(new URL("/v1/evaluate", options.endpoint), {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${options.token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        request_id: requestId,
+        operation: job.testCase.operation,
+        model: job.model,
+        system: job.testCase.system,
+        user: job.testCase.user,
+      }),
+      signal: controller.signal,
+    });
+    try {
+      body = await response.json();
+    } catch (error) {
+      if (controller.signal.aborted) throw error;
+      throw new Error(`Worker returned non-JSON HTTP ${response.status}.`);
+    }
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error(`Benchmark Worker request timed out after ${boundedTimeoutMs} ms.`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
   }
   if (!response.ok) throw new BenchmarkWorkerError(response.status, body);
   return {

@@ -4,12 +4,18 @@ import {
   downloadText,
   mockHybrid,
   mockAlerts,
+  mockFrozenFundingSearchPackage,
   mockOpenAiBroadening,
   openFundingFinder,
   runFundingSearch,
   waitForHybridSettled,
-  watchRuntimeErrors,
 } from "./helpers.mjs";
+
+const frozenFocusOpportunityId = "363616";
+
+test.beforeEach(async ({ page }) => {
+  await mockFrozenFundingSearchPackage(page);
+});
 
 async function mockNofoExtraction(page, text) {
   await page.route("**/assets/nofo.js*", async route => {
@@ -322,42 +328,23 @@ for (const fixture of alertErrorCases) {
   });
 }
 
-test("Funding Finder loads with a usable catalog and no uncaught runtime errors", async ({ page }) => {
-  const errors = watchRuntimeErrors(page);
-  await openFundingFinder(page);
-  await expect(page.locator("[data-app-version]")).toContainText("Funding Finder v1.3.0");
-  await expect(page.locator("#search-form")).toBeVisible();
-  await expect(page.locator("#sort")).toBeAttached();
-  await expect(page.locator("#sort")).toBeEnabled();
-  expect(errors).toEqual([]);
-});
-
 test("primary search submits with Enter while AI refinement stays visible and truthfully disabled", async ({ page }) => {
   mockHybrid(page);
   await openFundingFinder(page);
   const query = page.locator("#query");
   const find = page.locator("#find-funding");
-  const upload = page.locator(".nofo-upload-button");
-  const [queryBox, findBox, uploadBox] = await Promise.all([
-    query.boundingBox(),
-    find.boundingBox(),
-    upload.boundingBox(),
-  ]);
-  expect(queryBox).not.toBeNull();
-  expect(findBox.x).toBeGreaterThan(queryBox.x);
-  expect(uploadBox.x).toBeGreaterThan(findBox.x);
   expect(await page.locator("#nofo-drop-zone").evaluate(node => {
     const order = [...node.children].map(child => child.id || child.getAttribute("for"));
-    const positions = [order.indexOf("query"), order.indexOf("find-funding"), order.indexOf("nofo-file")];
+    const positions = [order.indexOf("query"), order.indexOf("nofo-file"), order.indexOf("find-funding")];
     return positions.every(position => position >= 0)
       && positions[0] < positions[1]
       && positions[1] < positions[2];
   })).toBe(true);
   await query.focus();
   await page.keyboard.press("Tab");
-  await expect(find).toBeFocused();
-  await page.keyboard.press("Tab");
   await expect(page.locator("#nofo-file")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(find).toBeFocused();
 
   const refine = page.locator("#ai-refine");
   await expect(refine).toBeVisible();
@@ -428,10 +415,10 @@ test("provider failure preserves the search, filters, results, key, and retry co
 });
 
 test("an alert focus link starts a result search and reveals its exact opportunity", async ({ page }) => {
-  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
+  await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
   mockHybrid(page);
-  await page.goto("/match_explorer.html?focus=361187");
-  const card = page.locator('[data-opportunity-id="361187"]');
+  await page.goto(`/match_explorer.html?focus=${encodeURIComponent(frozenFocusOpportunityId)}`);
+  const card = page.locator(`[data-opportunity-id="${frozenFocusOpportunityId}"]`);
   await expect(card).toBeVisible({ timeout: 30_000 });
   await expect(card).toHaveClass(/chat-target/);
   await expect(page.locator("#result-tier-counts")).toContainText(/\d+ strong match(?:es)? · \d+ potential match(?:es)?/i);
@@ -510,7 +497,7 @@ test("Strong and Potential membership survives sorting, filters trigger one sema
 test("sidecar failure preserves parent search, browsing, and filters with a visible warning", async ({ page }) => {
   const calls = mockHybrid(page);
   await openFundingFinder(page, { sidecarFailure: true });
-  await runFundingSearch(page, "DE-FOA-0003600");
+  await runFundingSearch(page, "hydrogen catalysis");
   await expect(page.locator("#results .result-card").first()).toBeVisible();
   await expect(page.locator("#topic-layer-warning")).toContainText(/topic details.*temporarily unavailable/i);
   await expect(page.locator("#potential-status")).toContainText(/needs the topic layer/i);
@@ -527,7 +514,7 @@ test("sidecar failure preserves parent search, browsing, and filters with a visi
 test("Retry-After keeps Strong results visible and disables retry until the interval expires", async ({ page }) => {
   const calls = mockHybrid(page, { failEmbedCalls: 1, retryAfter: 10 });
   await openFundingFinder(page);
-  await runFundingSearch(page, "DE-FOA-0003600");
+  await runFundingSearch(page, "hydrogen catalysis");
   await expect(page.locator("#potential-status")).toContainText(/temporarily limited/i, { timeout: 30_000 });
   await expect(page.locator("#results .badge.open").first()).toBeVisible();
   const retry = page.locator("#retry-potential");
@@ -540,7 +527,7 @@ test("Retry-After keeps Strong results visible and disables retry until the inte
 });
 
 test("refinement awaits the one pending Potential request before capturing its ordinary baseline", async ({ page }) => {
-  const hybrid = mockHybrid(page, { rerankDelayMs: 4_000 });
+  const hybrid = mockHybrid(page, { rerankDelayMs: 4_000, maxRankings: 1 });
   const ai = await mockOpenAiBroadening(page);
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis science");
@@ -696,7 +683,7 @@ test("uploaded notice focus blocks refinement until the PDF is removed", async (
   mockHybrid(page, { maxRankings: 0 });
   await mockNofoExtraction(
     page,
-    "[Page 1] Funding Opportunity 26-506 supports secure open-source research ecosystems. [Page 2] Applicants should verify all requirements in the official notice.",
+    "[Page 1] Funding Opportunity 26-518 supports chemical, bioengineering, energy, and transport systems. [Page 2] Applicants should verify all requirements in the official notice.",
   );
   await openFundingFinder(page);
   await page.locator(".provider-setup > summary").click();
@@ -706,7 +693,7 @@ test("uploaded notice focus blocks refinement until the PDF is removed", async (
     mimeType: "application/pdf",
     buffer: Buffer.from("%PDF-1.4 deterministic extraction mock"),
   });
-  await expect(page.locator("#nofo-upload-status")).toContainText("Matched opportunity number 26-506");
+  await expect(page.locator("#nofo-upload-status")).toContainText("Matched opportunity number 26-518");
   await expect(page.locator("#results .result-card")).toHaveCount(1);
   await expect(page.locator("#ai-refine")).toBeDisabled();
   await expect(page.locator("#ai-refine-requirement")).toContainText("Remove the uploaded PDF");

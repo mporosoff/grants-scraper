@@ -2264,7 +2264,7 @@
     const usedResearcherContext = acronymExpansions.some(item =>
       String(item.basis || "").includes("context"));
     const acronymNote = acronymNotes.length
-      ? ` Interpreted ${acronymNotes.join(", ")} using ${usedResearcherContext ? "local catalog and researcher context" : "the local catalog"}; no AI call was made.`
+      ? ` Interpreted ${acronymNotes.join(", ")} using ${usedResearcherContext ? "local catalog and researcher context" : "the local catalog"}.`
       : "";
     $("search-status").textContent =
       hybridCanRun()

@@ -70,8 +70,7 @@ profile-only admission gate; CV and ORCID terms still rerank the admitted set
 but cannot broaden it. CV/ORCID terms serve as the fallback gate only when the
 manual profile fields are blank.
 
-Local Strong and profile-ranked search make zero model calls. Hosted Potential
-matching does not require a user key. Funding Finder also provides hosted AI,
+Hosted Potential matching does not require a user key. Funding Finder also provides hosted AI,
 with optional personal OpenAI or Anthropic keys retained as an advanced
 alternative, to:
 
@@ -238,13 +237,13 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 28, 2026 build contains 1,430 current funding opportunities (1,115 posted and 315
-forecasted) from ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,357), NASA ROSES (2),
-NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest (limited
-submissions & foundations) (22), with no deadline before the catalog date. It provides a
-direct official announcement for 339 records, an official source-page route for another
-615, and the official Grants.gov record for the remaining 476. Across all route types,
-723 records also contain an official source URL.
+September 2, 2026 build contains 1,367 current funding opportunities (1,054 posted and
+313 forecasted) from ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,294), NASA ROSES
+(4), NYSERDA (36), U.S. National Science Foundation (1), VPR funding digest (limited
+submissions & foundations) (21), with no deadline before the catalog date. It provides a
+direct official announcement for 280 records, an official source-page route for another
+605, and the official Grants.gov record for the remaining 482. Across all route types,
+691 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
