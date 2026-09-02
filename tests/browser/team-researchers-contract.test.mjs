@@ -134,6 +134,7 @@ test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /event\.key === "ArrowDown"/);
   assert.match(teamPage, /event\.key === "Enter"/);
   assert.match(teamPage, /event\.key === "Escape"/);
+  assert.match(teamPage, /\$\("show-faculty-suggestions"\)\.addEventListener\("mousedown", function \(event\) \{[\s\S]*?event\.preventDefault\(\)/);
 });
 
 test("the prominent manual path opens the researcher editor directly", () => {

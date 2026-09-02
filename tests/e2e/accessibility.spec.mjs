@@ -249,11 +249,11 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.locator("#add-researcher").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
-  await expect(page.getByLabel("Choose a researcher")).toBeVisible();
+  await expect(page.getByRole("combobox", { name: /Search Hajim faculty/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Add a researcher manually" })).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
-  await page.locator("#add-researcher").click();
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#view .team-result-card").first()).toBeVisible();
   await expect(page.locator("#team-hybrid-status")).toContainText(/Enhanced ordering is applied/, { timeout: 30_000 });
   await scan(page, "team-two-person-results", testInfo);
@@ -262,8 +262,8 @@ test("Team Match has no serious or critical violations across picker, results, a
   await fallback.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(fallback, { failEveryEmbed: true, retryAfter: 1 });
   await openTeamMatch(fallback);
-  await addDepartmentResearcher(fallback, 0);
-  await addDepartmentResearcher(fallback, 0);
+  await addDepartmentResearcher(fallback, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(fallback, "Allison J. Lopatkin");
   await expect(fallback.locator("#team-hybrid-status")).toContainText(/local team-fit order.*temporarily limited/i, { timeout: 30_000 });
   await scan(fallback, "team-enhanced-fallback", testInfo);
   await fallback.close();

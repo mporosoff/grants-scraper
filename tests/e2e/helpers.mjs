@@ -820,15 +820,33 @@ export function csvRows(csv) {
   return csv.trim().split(/\r?\n/).slice(1);
 }
 
-export async function addDepartmentResearcher(page, optionIndex = 0) {
-  await page.locator("#add-researcher").click();
-  const options = page.locator('#researcher-choice optgroup[label="Department faculty"] option');
-  const option = options.nth(optionIndex);
-  const value = await option.getAttribute("value");
-  const label = (await option.textContent()).trim();
-  await page.locator("#researcher-choice").selectOption(value);
-  await page.locator("#choose-researcher").click();
-  await expect(page.getByRole("button", { name: `Remove ${label} from team` })).toBeVisible();
+export async function configurePersonalProvider(page, key, provider = "openai") {
+  const setup = page.locator(".provider-setup");
+  if (!(await setup.evaluate(details => details.open))) {
+    await setup.locator(":scope > summary").click();
+  }
+  await page.locator("#k-provider").selectOption(provider);
+  await expect(page.locator("#k-key")).toBeVisible();
+  await page.locator("#k-key").fill(key);
+}
+
+export async function addDepartmentResearcher(page, researcherName) {
+  const picker = page.locator("#researcher-picker");
+  if (await picker.isHidden()) await page.locator("#add-researcher").click();
+  await expect(page.locator("#faculty-search-status")).toContainText(/Search by name|Hajim facult/, { timeout: 30_000 });
+  await page.locator("#faculty-search").fill(researcherName);
+  const options = page.locator('#faculty-suggestions [role="option"]:not([aria-disabled="true"])');
+  const option = options.filter({ hasText: researcherName }).first();
+  await expect(option).toBeVisible({ timeout: 30_000 });
+  await expect(option.locator("strong")).toHaveText(researcherName);
+  const value = await option.getAttribute("data-faculty-id");
+  const entries = page.locator("#pi-grid [data-member-entry]");
+  const priorCount = await entries.count();
+  await option.click();
+  await expect(entries).toHaveCount(priorCount + 1);
+  const addedButton = entries.nth(priorCount).locator(".pi-toggle");
+  await expect(addedButton).toBeVisible();
+  const label = (await addedButton.textContent()).trim();
   return { label, value };
 }
 

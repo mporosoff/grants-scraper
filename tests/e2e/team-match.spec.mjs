@@ -18,7 +18,7 @@ async function assertNoHorizontalOverflow(page) {
   expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.client);
 }
 
-test("Team Match supports department, manual, duplicate, team-size, history, progress, and mobile workflows", async ({ page }) => {
+test("Team Match supports department, manual, duplicate, team-size, history, and mobile workflows", async ({ page }) => {
   await page.addInitScript(() => {
     const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
     globalThis.setTimeout = (callback, delay, ...args) => (
@@ -33,30 +33,30 @@ test("Team Match supports department, manual, duplicate, team-size, history, pro
   await expect(page.locator("#add-researcher")).toBeVisible();
 
   await page.locator("#add-researcher").click();
-  const firstOption = page.locator('#researcher-choice optgroup[label="Department faculty"] option').first();
-  const firstValue = await firstOption.getAttribute("value");
-  const firstLabel = (await firstOption.textContent()).trim();
-  await page.locator("#researcher-choice").selectOption(firstValue);
-  await page.locator("#choose-researcher").click();
-  await expect(page.locator("#researcher-picker-status")).toContainText(`Adding ${firstLabel} to the team`);
-  await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
+  await expect(page.locator("#faculty-search-status")).toContainText("Search by name", { timeout: 30_000 });
+  await page.locator("#show-faculty-suggestions").click();
+  await expect(page.locator('#faculty-suggestions [role="option"]:not([aria-disabled="true"])').first()).toBeVisible();
+  const first = await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  const firstValue = first.value;
+  const firstLabel = first.label;
+  await expect(page.locator("#external-status")).toContainText(`${firstLabel} was added from the`);
 
-  const second = await addDepartmentResearcher(page, 0);
+  const second = await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#selected-terms .st-card")).toHaveCount(2);
   await expect(page.locator("#count")).toContainText("fit every selected researcher");
 
   await page.locator("#add-researcher").click();
-  await page.locator("#researcher-choice").selectOption("__new__");
+  await page.locator("#manual-researcher").click();
   await expect(page.locator("#external-researcher-form")).toBeVisible();
   await page.locator("#external-name").fill("Gate Four Researcher");
   await page.locator("#external-keywords").fill("catalysis, electrochemistry, chemical engineering, carbon capture");
   await page.getByRole("button", { name: /Save researcher/i }).click();
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
-  await expect(page.locator('#researcher-choice optgroup[label="Saved researchers"] option', { hasText: "Gate Four Researcher" })).toHaveCount(0);
+  await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
 
-  const fourth = await addDepartmentResearcher(page, 0);
+  const fourth = await addDepartmentResearcher(page, "Astrid M. Müller");
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
   await expect(page.locator("#add-researcher")).toBeHidden();
   await page.getByRole("button", { name: `Remove ${fourth.label} from team` }).click();
@@ -82,8 +82,8 @@ test("Team Match supports department, manual, duplicate, team-size, history, pro
 test("enhanced ordering can reorder only locally eligible every-member-fit results", async ({ page }) => {
   const calls = mockHybrid(page, { reverseRerank: true, rerankDelayMs: 900 });
   await openTeamMatch(page);
-  const first = await addDepartmentResearcher(page, 0);
-  const second = await addDepartmentResearcher(page, 0);
+  const first = await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  const second = await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#team-hybrid-status")).toContainText(/Finding enhanced ordering/);
   const localIds = await page.locator("#view .team-result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
   expect(localIds.length).toBeGreaterThan(0);
@@ -106,8 +106,8 @@ test("enhanced ordering can reorder only locally eligible every-member-fit resul
 test("Team Match sidecar failure keeps parent-level matching and disables enhanced ordering", async ({ page }) => {
   const calls = mockHybrid(page);
   await openTeamMatch(page, { sidecarFailure: true });
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#team-topic-layer-status")).toContainText(/Parent-level team matching still works/i);
   await expect(page.locator("#view .team-result-card").first()).toBeVisible();
   expect(calls.embed).toHaveLength(0);
@@ -118,8 +118,8 @@ test("Team Match sidecar failure keeps parent-level matching and disables enhanc
 test("enhanced-ordering failure leaves local team-fit results usable with a nontechnical message", async ({ page }) => {
   const calls = mockHybrid(page, { failEveryEmbed: true, retryAfter: 1 });
   await openTeamMatch(page);
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   const localIds = await page.locator("#view .team-result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
   expect(localIds.length).toBeGreaterThan(0);
   await expect(page.locator("#team-hybrid-status")).toContainText(/Showing the local team-fit order.*temporarily limited/i, { timeout: 30_000 });
