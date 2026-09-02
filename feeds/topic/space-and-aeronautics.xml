@@ -4,8 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-09-02T18:11:23Z</updated>
+  <updated>2026-09-02T19:37:15Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>ROSES25: A.17 Hydrosphere</title>
+    <link href="https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO"/>
+    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-A.17-c0957a7778</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2027-01-28 | NASA ROSES-2025 program element A.17, appendix division A. Published status: dated; due dates as printed: 10/08/2026 (Step-1) | 1/28/2027 (Step-2). Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+  </entry>
   <entry>
     <title>ROSES 2025: A.16 Cryosphere</title>
     <link href="https://www.grants.gov/search-results-detail/363759"/>

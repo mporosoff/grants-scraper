@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-02T18:11:23Z",
+  "generated_at": "2026-09-02T19:37:15Z",
   "excluded_noncurrent": 12,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1399
+      "count": 1400
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1342
+      "count": 1343
     },
     {
       "title": "Funding Finder | Internal",
@@ -140,7 +140,7 @@
     {
       "title": "Funding Finder | Space and aeronautics",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml",
-      "count": 26
+      "count": 27
     },
     {
       "title": "Funding Finder | Technology development",
