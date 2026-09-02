@@ -1,20 +1,79 @@
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import vm from "node:vm";
 import { expect } from "@playwright/test";
 
-const frozenAwardCatalogSource = await readFile(
-  new URL("../fixtures/frozen/award-opportunities.js", import.meta.url),
-  "utf8",
+const [frozenFundingCatalogSource, searchQuerySource] = await Promise.all([
+  readFile(new URL("../fixtures/frozen/funding-catalog.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/search-query.js", import.meta.url), "utf8"),
+]);
+const frozenCatalogContext = {};
+frozenCatalogContext.globalThis = frozenCatalogContext;
+vm.createContext(frozenCatalogContext);
+vm.runInContext(searchQuerySource, frozenCatalogContext);
+vm.runInContext(frozenFundingCatalogSource, frozenCatalogContext);
+const frozenCatalog = frozenCatalogContext.GRANT_CATALOG;
+const timestamp = String(frozenCatalog.generated_at).match(
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?Z$/,
 );
-const frozenAwardCatalogMetadataSource = `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
+if (!timestamp) throw new Error("Frozen catalog timestamp must be canonical UTC.");
+const frozenAssetVersion = `catalog-${timestamp.slice(1, 4).join("")}T${timestamp.slice(4, 7).join("")}${String(timestamp[7] || "").padEnd(6, "0").slice(0, 6)}Z`;
+const frozenStatusIdentity = Object.entries(frozenCatalog.status_counts)
+  .filter(([_status, count]) => Number(count) > 0)
+  .sort(([left], [right]) => left.localeCompare(right))
+  .map(([status, count]) => `${status}=${count}`)
+  .join(",");
+const frozenCatalogMetadataSource = `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
   schema_version: 1,
-  catalog_schema_version: 3,
-  generated_at: "2026-09-01T12:00:00Z",
-  pipeline_generated_at: "2026-09-01T12:00:00Z",
-  record_count: 1000,
-  status_counts: { posted: 1000 },
-  asset_version: "catalog-20260901T120000000000Z",
-  catalog_url: "./data/opportunities.js?v=catalog-20260901T120000000000Z",
-  release_identity: "catalog-v3:catalog-20260901T120000000000Z:records=1000:documents=1000:terms=0:status=posted=1000",
+  catalog_schema_version: frozenCatalog.schema_version,
+  generated_at: frozenCatalog.generated_at,
+  pipeline_generated_at: frozenCatalog.generated_at,
+  record_count: frozenCatalog.record_count,
+  status_counts: frozenCatalog.status_counts,
+  asset_version: frozenAssetVersion,
+  catalog_url: `./data/opportunities.js?v=${frozenAssetVersion}`,
+  release_identity: [
+    `catalog-v${frozenCatalog.schema_version}`,
+    frozenAssetVersion,
+    `records=${frozenCatalog.record_count}`,
+    `documents=${frozenCatalog.search_index.document_count}`,
+    `terms=${Object.keys(frozenCatalog.search_index.postings).length}`,
+    `status=${frozenStatusIdentity}`,
+  ].join(":"),
+})};`;
+const frozenSubtopicCatalogSource = `globalThis.SUBTOPIC_CATALOG=${JSON.stringify({
+  schema_version: 1,
+  generation: { as_of: "2026-09-01" },
+  parent_count: 1,
+  record_count: 1,
+  records: {
+    "363616": {
+      segmentation_method: "frozen_fixture",
+      subtopic_count: 1,
+      subtopics: [{
+        id: "363616:fixture-child",
+        subtopic_id: "363616:fixture-child",
+        parent_id: "363616",
+        parent_opportunity_number: "26-518",
+        title: "Catalysis and Reaction Engineering",
+        summary: "Publication-eligible catalysis science and reaction engineering research.",
+        description: "Publication-eligible catalysis science and reaction engineering research.",
+        child_type: "subject",
+        publication_state: "publishable",
+        status: "posted",
+        topic_areas: ["Catalysis and reaction engineering"],
+        program_area_labels: ["Catalysis and reaction engineering"],
+      }],
+    },
+  },
+  search_index: {
+    algorithm: "bm25",
+    document_count: 1,
+    average_document_length: 1,
+    document_lengths: [1],
+    record_ids: ["363616:fixture-child"],
+    postings: {},
+  },
 })};`;
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
@@ -129,17 +188,97 @@ export function mockHybrid(page, {
   return calls;
 }
 
-export async function mockFrozenAwardCatalog(target) {
+export async function mockFrozenFundingCatalog(target) {
   await target.route("**/data/catalog-metadata.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",
-    body: frozenAwardCatalogMetadataSource,
+    body: frozenCatalogMetadataSource,
   }));
   await target.route("**/data/opportunities.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",
-    body: frozenAwardCatalogSource,
+    body: frozenFundingCatalogSource,
   }));
+}
+
+export async function mockFrozenFundingSearchPackage(page) {
+  await mockFrozenFundingCatalog(page);
+  await page.route("**/data/subtopics.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenSubtopicCatalogSource,
+  }));
+
+  let packagePromise = null;
+  const buildPackage = () => {
+    if (packagePromise) return packagePromise;
+    packagePromise = (async () => {
+      const { corpus, corpusSha256 } = await page.evaluate(async () => {
+        const value = globalThis.FUNDING_HYBRID_SEARCH.buildCorpus({
+          parentCatalog: globalThis.GRANT_CATALOG,
+          childCatalog: globalThis.FUNDING_RETRIEVAL.createChildCatalog(
+            globalThis.SUBTOPIC_CATALOG,
+          ),
+        });
+        return {
+          corpus: value,
+          corpusSha256: await globalThis.FUNDING_HYBRID_SEARCH.corpusHash(value),
+        };
+      });
+      const vectors = Buffer.alloc(corpus.length * 1024 * 2);
+      corpus.forEach((_passage, index) => vectors.writeUInt16LE(0x3c00, index * 1024 * 2));
+      const vectorSha256 = createHash("sha256").update(vectors).digest("hex");
+      return {
+        vectors,
+        manifest: {
+          schema_version: 1,
+          generated_at: "2026-09-01T12:00:00Z",
+          model: "voyage-4-lite",
+          provider_revision: "frozen-e2e-fixture",
+          response_model: "voyage-4-lite",
+          input_type: "document",
+          source_output_dtype: "float",
+          dimension: 1024,
+          dtype: "float16-le",
+          byte_order: "little-endian",
+          passage_count: corpus.length,
+          parent_passage_count: corpus.filter(item => item.passage_kind === "parent").length,
+          child_passage_count: corpus.filter(item => item.passage_kind !== "parent").length,
+          corpus_sha256: corpusSha256,
+          vector_sha256: vectorSha256,
+          vector_bytes: vectors.length,
+          model_space_fingerprint: "0".repeat(64),
+          model_space: { canary_set_version: 1, canary_count: 1 },
+          passages: corpus.map((passage, vectorRow) => ({
+            passage_id: passage.passage_id,
+            parent_id: passage.parent_id,
+            passage_kind: passage.passage_kind,
+            record_id: passage.record_id,
+            text_sha256: createHash("sha256").update(passage.text).digest("hex"),
+            vector_row: vectorRow,
+          })),
+        },
+      };
+    })();
+    return packagePromise;
+  };
+
+  await page.route("**/data/search-v2-voyage-manifest.json*", async route => {
+    const fixture = await buildPackage();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(fixture.manifest),
+    });
+  });
+  await page.route("**/data/search-v2-voyage-vectors.f16*", async route => {
+    const fixture = await buildPackage();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/octet-stream",
+      body: fixture.vectors,
+    });
+  });
 }
 
 export function mockAwards(target, {
