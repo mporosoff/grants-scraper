@@ -355,16 +355,16 @@ test("primary search submits with Enter while AI refinement stays visible and tr
   const find = page.locator("#find-funding");
   expect(await page.locator("#nofo-drop-zone").evaluate(node => {
     const order = [...node.children].map(child => child.id || child.getAttribute("for"));
-    const positions = [order.indexOf("query"), order.indexOf("find-funding"), order.indexOf("nofo-file")];
+    const positions = [order.indexOf("query"), order.indexOf("nofo-file"), order.indexOf("find-funding")];
     return positions.every(position => position >= 0)
       && positions[0] < positions[1]
       && positions[1] < positions[2];
   })).toBe(true);
   await query.focus();
   await page.keyboard.press("Tab");
-  await expect(find).toBeFocused();
-  await page.keyboard.press("Tab");
   await expect(page.locator("#nofo-file")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(find).toBeFocused();
 
   const refine = page.locator("#ai-refine");
   await expect(refine).toBeVisible();
