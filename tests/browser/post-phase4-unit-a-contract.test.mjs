@@ -45,14 +45,16 @@ test("the main query accepts file drops through the existing local NOFO pipeline
   assert.match(styles, /\.nofo-drop-zone\.is-dragging #query\s*\{/);
 });
 
-test("provider setup retains key, cost, help, and privacy details without repeating full privacy copy", () => {
+test("provider setup retains key, help, and privacy details without repeating removed copy", () => {
   const $ = load(page);
   const details = $(".provider-setup").text();
   assert.match(details, /Provider/);
   assert.match(details, /API key/);
   assert.match(details, /spending controls/);
   assert.match(details, /saved key stays in this browser/);
-  assert.match(details, /two bounded calls/);
+  assert.match(details, /No API key is required/);
+  assert.match(details, /Advanced users may instead select OpenAI or Anthropic/);
+  assert.doesNotMatch(details, /two bounded calls|What hosted AI changes/);
   assert.doesNotMatch(page, /<strong>What leaves this page:<\/strong>/);
   assert.doesNotMatch(page, /<strong>URLs and anonymous usage:<\/strong>/);
   assert.match(help, /Hosted Potential matching/);

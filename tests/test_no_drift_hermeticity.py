@@ -1,4 +1,4 @@
-"""The hermetic gate must not depend on which UTC day it runs on (debt D7).
+"""The hermetic gate must not depend on the wall clock (debt D7).
 
 `scripts/build_changes.py` seeds each event id with `changed_at[:10]`, and
 `changed_at` comes from the *current* catalog's `generated_at` -- a wall-clock
@@ -7,20 +7,27 @@ should mint a new event id. The hermetic build (§8.4) is what must not vary, so
 `tools/hermetic_build.sh` hands `build_changes` a `.work/` copy of the catalog
 with `generated_at` pinned, via `tools/pin_generated_at.py`.
 
+Document-evidence rechecks have a second, timestamp-precision boundary. The
+hermetic build therefore also passes a fixed `--now` to every stage that makes
+TTL or recheck decisions. Otherwise a zero-fetch build still changes its
+`remaining_update_count` when a frozen cache entry ages past fourteen days.
+
 These tests prove the rollover is closed at the input rather than papered over
 downstream: `tools/fingerprint.py` deliberately does **not** normalize event ids,
 because an id is an opaque hash and normalizing hashes would blind the gate to
 real content changes.
 """
 
-from datetime import date
+from datetime import date, datetime, timezone
 import importlib.util
 import json
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 from scripts.build_changes import _event_id, write_change_feed
+from scripts import extract_document_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,6 +123,32 @@ def build_feed(generated_at, *, pin_to=None):
         }
 
 
+def build_document_stage(ambient_now, *, pin_to=None):
+    """Run the zero-fetch document stage on either side of its TTL boundary."""
+    frozen = ROOT / "tests" / "fixtures" / "frozen"
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp)
+        catalog = work / "opportunities.js"
+        cache = work / "document_evidence.json"
+        catalog.write_bytes((frozen / catalog.name).read_bytes())
+        cache.write_bytes((frozen / cache.name).read_bytes())
+        argv = [
+            "--catalog", str(catalog),
+            "--cache", str(cache),
+            "--max-documents", "0",
+            "--request-delay", "0",
+        ]
+        if pin_to is not None:
+            argv.extend(["--now", pin_to])
+        with mock.patch.object(
+            extract_document_evidence,
+            "utc_now",
+            return_value=ambient_now,
+        ):
+            extract_document_evidence.main(argv)
+        return fingerprint.normalize(catalog.read_bytes())
+
+
 class EventIdRolloverTests(unittest.TestCase):
     """The mechanism, pinned so a later reader does not have to rediscover it."""
 
@@ -191,6 +224,49 @@ class PinnedFeedIsDateIndependentTests(unittest.TestCase):
             fingerprint.FROZEN_CATALOG_ASSET_VERSION.encode("utf-8"),
             fingerprint.normalize(before),
         )
+
+
+class DocumentRecheckRolloverTests(unittest.TestCase):
+    """The frozen document cache must not age while the gate is running."""
+
+    BEFORE_RECHECK = datetime(2026, 9, 2, 10, 1, 59, tzinfo=timezone.utc)
+    AFTER_RECHECK = datetime(2026, 9, 2, 10, 6, 16, tzinfo=timezone.utc)
+    PIN = "2026-08-20T00:00:00Z"
+
+    def test_the_unpinned_stage_crosses_the_exact_recheck_boundary(self):
+        before = build_document_stage(self.BEFORE_RECHECK)
+        after = build_document_stage(self.AFTER_RECHECK)
+        self.assertNotEqual(before, after)
+
+    def test_the_pinned_stage_is_identical_across_the_recheck_boundary(self):
+        before = build_document_stage(self.BEFORE_RECHECK, pin_to=self.PIN)
+        after = build_document_stage(self.AFTER_RECHECK, pin_to=self.PIN)
+        self.assertEqual(before, after)
+
+    def test_program_area_revalidation_uses_the_same_pinned_clock(self):
+        frozen = ROOT / "tests" / "fixtures" / "frozen"
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            catalog = work / "opportunities.js"
+            cache = work / "document_evidence.json"
+            catalog.write_bytes((frozen / catalog.name).read_bytes())
+            cache.write_bytes((frozen / cache.name).read_bytes())
+            with mock.patch.object(
+                extract_document_evidence,
+                "utc_now",
+                return_value=self.AFTER_RECHECK,
+            ):
+                extract_document_evidence.main([
+                    "--catalog", str(catalog),
+                    "--cache", str(cache),
+                    "--revalidate-program-areas-only",
+                    "--now", self.PIN,
+                ])
+
+            rebuilt = extract_document_evidence.read_catalog(catalog)
+            rebuilt_cache = json.loads(cache.read_text(encoding="utf-8"))
+            self.assertEqual(rebuilt["document_evidence_generated_at"], self.PIN)
+            self.assertEqual(rebuilt_cache["generated_at"], self.PIN)
 
 
 class PinToolTests(unittest.TestCase):
@@ -279,6 +355,10 @@ class HermeticBuildWiringTests(unittest.TestCase):
         first_pin = self.script.index("tools/pin_generated_at.py")
         self.assertLess(first_pin, self.script.index("scripts.enrich_catalog"))
         self.assertIn('"${AS_OF}T00:00:00Z"', self.script[first_pin:])
+
+    def test_every_recheck_stage_receives_the_pinned_clock(self):
+        self.assertIn('PIPELINE_NOW="${AS_OF}T00:00:00Z"', self.script)
+        self.assertEqual(self.script.count('--now "$PIPELINE_NOW"'), 2)
 
     def test_build_changes_reads_the_pinned_copy_not_the_artifact(self):
         self.assertIn('--current "$OUT/.work/opportunities.pinned.js"', self.script)

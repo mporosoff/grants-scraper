@@ -2146,8 +2146,7 @@ textarea:focus {
   width: max-content;
 }
 
-.privacy-note,
-.cost-note {
+.privacy-note {
   color: #586a82;
   font-size: .69rem;
   line-height: 1.45;
@@ -2295,11 +2294,6 @@ textarea:focus {
   margin-top: 13px;
   color: white;
   background: linear-gradient(135deg, #021bc3, #2673df);
-}
-
-.cost-note {
-  margin: 7px 2px 0;
-  text-align: center;
 }
 
 .ai-status {
@@ -3401,28 +3395,18 @@ footer p {
 }
 
 .provider-setup-body {
-  padding: 0 15px 15px;
+  padding: 0 15px 11px;
   border-top: 1px solid var(--line);
 }
 
-.provider-explanation {
-  margin: 13px 0;
-  color: #526177;
-  font-size: .78rem;
-}
-
 .key-help {
-  margin: 0 0 13px;
+  margin: 10px 0;
   padding: 10px 12px;
   color: #425873;
   font-size: .74rem;
   background: var(--blue-soft);
   border: 1px solid #cbdcf5;
   border-radius: 8px;
-}
-
-.key-help a {
-  font-weight: 800;
 }
 
 .provider-fields {
@@ -3439,8 +3423,7 @@ footer p {
 }
 
 .provider-setup .privacy-note {
-  margin-right: 0;
-  margin-left: 0;
+  margin: 7px 0 0;
 }
 
 .workspace {
