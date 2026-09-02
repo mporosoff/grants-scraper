@@ -1,6 +1,6 @@
 # Funding Finder
 
-A public funding-opportunity search engine with optional AI refinement and browser-based NOFO chat.
+A public funding-opportunity search engine with optional hosted AI refinement and browser-based NOFO chat.
 
 Open the application:
 
@@ -12,7 +12,7 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 
 - full-text search across current Grants.gov opportunities;
 - a built-in Help guide covering search, uploaded notices, result tools, team
-  matching, privacy, troubleshooting, and optional OpenAI/Anthropic API keys;
+  matching, privacy, troubleshooting, hosted AI, and optional personal OpenAI/Anthropic API keys;
 - drag-and-drop NOFO/FOA PDF chat with automatic catalog-record matching;
 - one-click browsing of the complete current catalog without search terms;
 - filters for status, discipline, topic, agency, eligibility, instrument,
@@ -70,9 +70,9 @@ profile-only admission gate; CV and ORCID terms still rerank the admitted set
 but cannot broaden it. CV/ORCID terms serve as the fallback gate only when the
 manual profile fields are blank.
 
-Local Strong and profile-ranked search make zero model calls. Hosted Potential
-matching does not require a user key. Separately, a user may enter an OpenAI or
-Anthropic key to:
+Hosted Potential matching does not require a user key. Funding Finder also provides hosted AI,
+with optional personal OpenAI or Anthropic keys retained as an advanced
+alternative, to:
 
 1. create 5–16 independent, meaningful scientific phrases and retrieve each
    through the existing filtered local Strong matcher;
@@ -88,9 +88,8 @@ A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
 main search box. Funding Finder extracts page-marked text in the browser, tries
 to match the notice to an existing opportunity number or distinctive catalog
 title, shows the matched card with save/calendar/source actions, and opens a
-document-grounded “Chat with the NOFO” workspace. If no key is configured, the
-workspace prompts for one without losing the uploaded document. A missing
-catalog match does not prevent document chat.
+document-grounded “Chat with the NOFO” workspace. No visitor key is required.
+A missing catalog match does not prevent document chat.
 
 When the scheduled Phase 3 pipeline has analyzed an official notice, the
 result card shows document version/change status and compact cited facts for
@@ -101,8 +100,10 @@ single result; AI may cite only evidence identifiers that the browser supplied.
 
 The original CV or uploaded notice file is never retained. A bounded CV excerpt
 is sent only when the user enables that option and explicitly runs AI
-refinement or chat. An API
-key is tab-only unless the user explicitly saves it on that device. Saved keys
+refinement or chat. Hosted requests pass through the protected Funding Finder
+AI gateway, which owns the fixed prompts, schemas, feature-level model routing,
+rate limits, and provider secret. An optional personal API key is tab-only
+unless the user explicitly saves it on that device. Saved keys
 are isolated from profiles and reviewer data, have a visible saved/loaded
 status and removal control, and never enter GitHub, URLs, exports, or an
 application database. Extracted uploaded-notice text, the additive refinement overlay, and chat
@@ -127,8 +128,8 @@ summaries and drill-downs over those normalized public awards. Its ROR-backed
 typeahead resolves canonical institution names, aliases, and acronyms while the
 existing identity layer retains sponsor-specific UEI/IPF query identifiers.
 Institution, agency, program, topic, investigator, and year filters work without
-an AI key and are shareable through page URLs. An optional question translator
-uses the same browser-local Funding Finder provider configuration; it only creates
+AI and are shareable through page URLs. An optional hosted question translator
+only creates
 a transparent filter plan and does not search or rank an award-vector corpus.
 
 Funding Finder search criteria are shareable page parameters and can appear in

@@ -20,7 +20,7 @@
       <section class="help-intro" aria-labelledby="help-start-title">
         <div>
           <span class="help-kicker">Start here</span>
-          <h3 id="help-start-title">Search is free. Your own AI connection is optional.</h3>
+          <h3 id="help-start-title">Search is free. Hosted AI is included.</h3>
           <p>Funding Finder searches current public opportunities, Funded Awards explores historical NSF, NIH, and DOE projects, and Team Match finds calls for a group. Strong matching and structured award searches do not require an account or your own API key.</p>
         </div>
         <ol class="help-steps">
@@ -38,7 +38,7 @@
         <a href="#help-awards">Funded Awards</a>
         <a href="#help-institutions">Institutions</a>
         <a href="#help-teams">Team Match</a>
-        <a href="#help-api-keys">API keys</a>
+        <a href="#help-api-keys">Hosted AI</a>
         <a href="#help-privacy">Privacy</a>
         <a href="#help-troubleshooting">Troubleshooting</a>
       </nav>
@@ -95,7 +95,7 @@
           <div><strong>Why this matched</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
-          <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results after connecting a provider.</span></div>
+          <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results using hosted AI or an optional personal provider.</span></div>
         </div>
         <p class="help-footnote">“Recently posted” uses the catalog's listed or first-seen date. “Relevance” combines the words and concepts in your query, profile, and filters. Recently posted and closing-soon labels help with timing but do not replace deadline verification.</p>
       </section>
@@ -155,7 +155,7 @@
           </div>
           <div class="help-card">
             <h4>Filter or ask a question</h4>
-            <p>Structured institution, agency, program, topic, investigator, and year filters work without an AI key. Optional <strong>Ask about this institution</strong> translates a natural-language question into visible structured filters using the same browser-local provider settings as Funding Finder; returned award records remain authoritative.</p>
+            <p>Use the structured institution, agency, program, topic, investigator, and year filters directly, or choose <strong>Ask about this institution</strong> to translate a natural-language question into visible structured filters. Returned award records remain authoritative.</p>
           </div>
         </div>
       </section>
@@ -181,11 +181,11 @@
       <section class="help-section help-api-section" id="help-api-keys">
         <div class="help-section-heading">
           <span class="help-section-number">08</span>
-              <div><h3>What an API key is and why AI needs one</h3><p>A key is a private credential from an AI provider, not your account password.</p></div>
+              <div><h3>Hosted AI and optional personal keys</h3><p>Funding Finder's tested hosted AI is included; a personal provider key is an advanced alternative.</p></div>
         </div>
         <div class="help-key-explanation">
-          <p>Your provider key authorizes optional user-connected AI requests and associates those charges with your account. Local abbreviation handling and the site's hosted Potential ranking need no key from you. Your key is used only for optional AI terminology expansion, AI refinement, result chat, and uploaded-notice chat.</p>
-          <p><strong>Catalog search and Team Match do not need your API key.</strong> The hosted Potential service uses a site-managed server-side key. Billing and availability for user-connected tools are controlled by the provider.</p>
+          <p>Funding Finder's hosted AI powers optional terminology expansion, candidate assessment, result chat, uploaded-notice chat, and institution questions without putting a provider key in your browser. Each feature sends only its bounded context after you choose the AI action.</p>
+          <p><strong>Catalog search and Team Match do not use these models.</strong> Advanced users may select OpenAI or Anthropic and supply a personal key; those requests and charges then use that provider account.</p>
         </div>
         <div class="help-provider-grid">
           <article class="help-provider-card">
@@ -228,7 +228,7 @@
       <section class="help-section" id="help-privacy">
         <div class="help-section-heading">
           <span class="help-section-number">09</span>
-          <div><h3>Know what stays local and what is sent</h3><p>Local search, hosted Potential ranking, verified email alerts, public award retrieval, and user-connected AI have distinct boundaries.</p></div>
+          <div><h3>Know what stays local and what is sent</h3><p>Local search, hosted Potential ranking, hosted AI, verified email alerts, and public award retrieval have distinct boundaries.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
@@ -240,8 +240,8 @@
             <p>The submitted search text is sent to the Funding Finder Worker, which obtains a query embedding and reranks bounded public opportunity passages with the site's server-side key. Your CV, full profile, researcher names, and ORCID publication text are not sent.</p>
           </div>
           <div class="help-card">
-            <h4>User-connected AI tools</h4>
-            <p>When you explicitly use AI refinement or chat, your key goes directly to the selected provider with only the bounded result, profile/CV, question, or PDF context enabled for that request. Keys are excluded from URLs, exports, GitHub, and the funding catalog.</p>
+            <h4>Hosted AI tools</h4>
+            <p>When you explicitly use AI refinement, chat, or an institution question, only the bounded result, enabled profile/CV excerpt, question, or PDF context needed for that request goes to Funding Finder's protected AI service. The service owns the provider key, fixed prompts, schemas, model routing, and request limits; prompts and responses are not stored by Funding Finder.</p>
           </div>
           <div class="help-card">
             <h4>Verified email alerts</h4>
@@ -270,7 +270,7 @@
         </details>
         <details class="help-faq">
           <summary>The AI request failed.</summary>
-          <p>For user-connected refinement or chat, confirm that the selected provider matches the key, re-enter an expired or revoked key, and check the provider account's billing, credits, usage limits, and service status. Strong local search remains available.</p>
+          <p>For hosted AI, wait briefly and try again; the service may be rate limited or temporarily unavailable. If you selected a personal provider, confirm that it matches the key and check that provider account. Strong local search remains available.</p>
         </details>
         <details class="help-faq">
           <summary>A catalog match or extracted fact looks wrong.</summary>

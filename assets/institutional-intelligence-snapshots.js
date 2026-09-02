@@ -715,13 +715,17 @@
       });
       if (sequence !== state.sequence) return null;
       const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
-      commitSnapshotResult(staged, { historyMode, focus: focusResults, departureHistoryState });
+      commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
       const exact = snapshot.completeness === "complete";
       const sourceIssue = unavailableSourceSummary(snapshot.sources || []);
       setStatus((exact
         ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
         : `${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} are available within disclosed safety bounds; incomplete sources are labeled below.`) + sourceIssue);
-      if (focusResults) $("ii-output-heading").focus({ preventScroll: true });
+      if (focusResults) requestAnimationFrame(() => {
+        const heading = $("ii-output-heading");
+        heading?.focus({ preventScroll: true });
+        heading?.scrollIntoView({ block: "start" });
+      });
       return { payload: state.pagePayload, aggregate: state.aggregate };
     } catch (error) {
       if (sequence !== state.sequence) return null;
@@ -892,15 +896,65 @@
     return JSON.stringify({ snapshot: state.snapshot?.snapshot_id, ids: [...state.residentAwards.keys()].sort(), facet: state.facet });
   }
 
+  function answerTable({ label, headers, rows }) {
+    if (!rows.length) return "";
+    return `<div class="ii-answer-table-wrap" role="region" aria-label="${escapeAttribute(label)}" tabindex="0">
+      <table class="ii-answer-table">
+        <caption>${escapeHtml(label)}</caption>
+        <thead><tr>${headers.map(header => `<th scope="col">${escapeHtml(header)}</th>`).join("")}</tr></thead>
+        <tbody>${rows.join("")}</tbody>
+      </table>
+    </div>`;
+  }
+
+  function renderDirectAnswer(snapshot) {
+    const aggregate = snapshot.aggregate;
+    const intent = snapshot.deterministic.intent;
+    const investigators = Array.isArray(aggregate.investigators) ? aggregate.investigators : [];
+    const programs = Array.isArray(aggregate.programs) ? aggregate.programs : [];
+    const representedYears = Array.isArray(aggregate.represented_years) ? aggregate.represented_years : [];
+    let summary = snapshot.deterministic.answer;
+    let structured = "";
+    if (intent === "investigators") {
+      summary = investigators.length
+        ? `${investigators.length.toLocaleString()} investigator ${investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No investigator names appear in the matching result snapshot.";
+      structured = answerTable({
+        label: "Investigators in the matching awards",
+        headers: ["Investigator", "Awards"],
+        rows: investigators.map(person => `<tr><th scope="row">${escapeHtml(person.name)}</th><td>${Number(person.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "programs") {
+      summary = programs.length
+        ? `${programs.length.toLocaleString()} program${programs.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No program labels appear in the matching result snapshot.";
+      structured = answerTable({
+        label: "Programs in the matching awards",
+        headers: ["Program", "Awards"],
+        rows: programs.map(program => `<tr><th scope="row">${escapeHtml(program.label)}</th><td>${Number(program.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    } else if (intent === "years") {
+      structured = answerTable({
+        label: "Award years in the matching awards",
+        headers: ["Year", "Awards"],
+        rows: [...representedYears]
+          .sort((left, right) => Number(right.year) - Number(left.year))
+          .map(item => `<tr><th scope="row">${escapeHtml(item.year)}</th><td>${Number(item.projects || 0).toLocaleString()}</td></tr>`),
+      });
+    }
+    const claims = snapshot.narrative?.claims || [];
+    const narrative = claims.length
+      ? `<ul class="ii-answer-claims">${claims.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" data-ii-evidence-link="${escapeAttribute(id)}" aria-label="Supporting award ${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
+      : "";
+    return `<p class="ii-answer-summary">${escapeHtml(summary)}</p>${structured}${narrative}`;
+  }
+
   function renderQuestionAnswer() {
     const snapshot = state.question?.snapshot;
     if (!snapshot) return $("ii-question-answer").classList.add("hidden");
     $("ii-question-answer").classList.remove("hidden");
     $("ii-answered-question").textContent = state.question.question;
-    const claims = snapshot.narrative?.claims || [];
-    $("ii-direct-answer").innerHTML = `<p class="ii-answer-summary">${escapeHtml(snapshot.deterministic.answer)}</p>${claims.length
-      ? `<ul class="ii-answer-claims">${claims.map(claim => `<li>${escapeHtml(claim.text)} ${claim.evidence_ids.map(id => `<a href="#${escapeAttribute(evidenceDomId(id))}" data-ii-evidence-link="${escapeAttribute(id)}">[${escapeHtml(id)}]</a>`).join(" ")}</li>`).join("")}</ul>`
-      : ""}`;
+    $("ii-direct-answer").innerHTML = renderDirectAnswer(snapshot);
     const ids = new Set(snapshot.deterministic.evidence_ids);
     const evidence = snapshot.evidencePack.awards.filter(item => ids.has(item.evidence_id));
     $("ii-answer-evidence").innerHTML = evidence.length
@@ -928,8 +982,10 @@
     let narrative = null;
     let narrativeFailure = false;
     if (questionState.narrativeNeeded) {
-      const key = credentials.loadKey(questionState.provider);
-      if (key) {
+      const key = questionState.provider === "hosted"
+        ? ""
+        : credentials.loadKey(questionState.provider);
+      if (questionState.provider === "hosted" || key) {
         try {
           const providerPayload = core.questionProviderPayload({
             question: questionState.question,
@@ -977,22 +1033,38 @@
   }
 
   function modelForProvider(provider) {
+    if (provider === "hosted") {
+      return globalThis.FUNDING_AI_GATEWAY?.modelLabel
+        || "Gemma + GPT-5.6 Luna, routed by feature";
+    }
     return provider === "anthropic" ? ai?.ANTHROPIC_MODEL : ai?.OPENAI_MODEL;
   }
 
   function refreshProvider({ preferMain = true } = {}) {
-    let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
-    if (preferMain && typeof credentials.resolveProvider === "function") {
+    let provider = preferMain
+      ? clean($("k-provider")?.value || $("ii-provider")?.value || "hosted", 20)
+      : clean($("ii-provider").value, 20);
+    if (preferMain && provider !== "hosted" && typeof credentials.resolveProvider === "function") {
       provider = credentials.resolveProvider(provider);
     }
-    if (!["openai", "anthropic"].includes(provider)) provider = "openai";
+    if (!["hosted", "openai", "anthropic"].includes(provider)) provider = "hosted";
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-    const configured = Boolean(credentials.loadKey(provider));
-    $("ii-ai-state").textContent = configured ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured` : "No AI key required for deterministic answers";
-    $("ii-key-setup").classList.toggle("hidden", configured);
-    $("ii-key-status").textContent = configured ? "Using the Funding Finder key already saved on this device." : "Optional. Deterministic questions work without a key.";
+    const configured = provider === "hosted" || Boolean(credentials.loadKey(provider));
+    $("ii-ai-state").textContent = provider === "hosted"
+      ? "Hosted AI included"
+      : configured
+        ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
+        : "Personal AI key not configured";
+    $("ii-key-setup").classList.remove("hidden");
+    $("ii-key-field")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-save-key")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-key-status").textContent = provider === "hosted"
+      ? "Funding Finder's hosted AI is ready. No key is required on this device."
+      : configured
+        ? "Using the Funding Finder key already saved on this device."
+        : "Optional. Deterministic questions work without a key.";
     return { provider, configured };
   }
 
@@ -1020,10 +1092,10 @@
       if (questionSequence !== state.questionSequence) return;
       if (!institution) throw new Error("Select an institution before asking a question about it.");
       const current = formState();
-      const { provider, configured } = refreshProvider({ preferMain: false });
-      const key = credentials.loadKey(provider);
+    const { provider, configured } = refreshProvider({ preferMain: false });
+      const key = provider === "hosted" ? "" : credentials.loadKey(provider);
       let plan = { ...current };
-      let translationFallback = !configured || !key;
+      let translationFallback = !configured || (provider !== "hosted" && !key);
       if (!translationFallback) {
         try {
           const currentFilters = {
@@ -1040,7 +1112,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency, program, topic, pi, program_officer, year_start, year_end, answer_intent, and narrative_needed. Use empty strings for absent filters. Do not answer the question, infer contacts, recommend collaborators, rank investigators, score fit, or invent facts. DOE Basic Energy Sciences is agency DOE and program BES.",
+            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({ institution: current.institution, current_filters: currentFilters, question }),
           });
           if (!translated || typeof translated !== "object" || Array.isArray(translated)) throw new Error("invalid_translation");
@@ -1058,7 +1130,7 @@
       const investigator = core.explicitInvestigator(question, current.institution, plan.program, [...(state.selectedInstitution?.aliases || []), ...(state.selectedInstitution?.acronyms || [])], plan.topic);
       if (investigator && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = investigator;
       if (/\bBES\b/i.test(question) && !clean(plan.program)) plan.program = "BES";
-      const next = core.sanitizeQuestionPlan(plan, current);
+      const next = core.sanitizeQuestionPlan(plan, current, question);
       const intent = core.sanitizeAnswerIntent(plan, question);
       const details = [`Answer intent: ${intent}`];
       if (next.agency !== "all") details.push(`Agency: ${next.agency}`);

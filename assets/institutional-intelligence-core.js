@@ -662,8 +662,26 @@
     return compact;
   }
 
-  function sanitizeQuestionPlan(plan, currentState) {
+  function sanitizeQuestionPlan(plan, currentState, question = "") {
     const agency = clean(plan?.agency, 10).toUpperCase();
+    const questionText = clean(question, 1_000);
+    let yearStart = validYear(plan?.year_start) || "";
+    let yearEnd = validYear(plan?.year_end) || "";
+    const explicitRange = questionText.match(
+      /\b(?:from|between)\s+((?:19|20)\d{2})(?:\s+(?:through|to|until|and)\s+|\s*[-\u2013\u2014]\s*)((?:19|20)\d{2})\b/i,
+    );
+    const onward = questionText.match(/\b(?:since|from)\s+((?:19|20)\d{2})(?:\s+onward)?\b/i);
+    const singleYear = questionText.match(/\b(?:in|during)\s+((?:19|20)\d{2})\b/i);
+    if (explicitRange) {
+      yearStart = validYear(explicitRange[1]) || "";
+      yearEnd = validYear(explicitRange[2]) || "";
+    } else if (onward) {
+      yearStart = validYear(onward[1]) || "";
+      yearEnd = "";
+    } else if (singleYear) {
+      yearStart = validYear(singleYear[1]) || "";
+      yearEnd = yearStart;
+    }
     return {
       ...currentState,
       agency: SOURCE_NAMES.includes(agency) ? agency : "all",
@@ -671,8 +689,8 @@
       topic: clean(plan?.topic, 500),
       pi: clean(plan?.pi, 160),
       program_officer: clean(plan?.program_officer, 160),
-      year_start: validYear(plan?.year_start) || "",
-      year_end: validYear(plan?.year_end) || "",
+      year_start: yearStart,
+      year_end: yearEnd,
     };
   }
 

@@ -31,6 +31,7 @@ faculty.csv
 # Human deployment-review files stay private and out of source control
 /evaluation/inbox/
 /evaluation/reports/
+/evaluation/ai-model-results/
 /docs/weekly-alerts/subscriptions.json
 
 # Original local handoff archive

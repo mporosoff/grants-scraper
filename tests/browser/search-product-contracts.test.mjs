@@ -23,7 +23,8 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
   assert.match(help, /submitted search text is sent to the Funding Finder Worker/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
-  assert.match(help, /User-connected AI tools/);
+  assert.match(help, /Hosted AI tools/);
+  assert.match(help, /Advanced users may select OpenAI or Anthropic/);
   assert.match(teamPage, /Enhanced ordering may send a bounded aggregate of selected research keywords and theme labels/);
   assert.match(teamPage, /Researcher names and publication text are not sent/);
 });

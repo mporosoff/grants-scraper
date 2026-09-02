@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "funding-finder-ai",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-31",
+  "workers_dev": true,
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io",
+    "AI_GATEWAY_ENABLED": "true",
+    "AI_DAILY_CLIENT_UNIT_BUDGET": "2500000",
+    "AI_DAILY_GLOBAL_UNIT_BUDGET": "50000000",
+    "AI_BUDGET_RETRY_AFTER_SECONDS": "3600"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AI_BUDGET_COORDINATOR",
+        "class_name": "AiBudgetCoordinator"
+      }
+    ]
+  },
+  "exports": {
+    "AiBudgetCoordinator": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
+  },
+  "ratelimits": [
+    {
+      "name": "AI_CLIENT_RATE_LIMITER",
+      "namespace_id": "6202608241",
+      "simple": { "limit": 12, "period": 60 }
+    },
+    {
+      "name": "AI_GLOBAL_RATE_LIMITER",
+      "namespace_id": "6202608242",
+      "simple": { "limit": 180, "period": 60 }
+    }
+  ]
+}

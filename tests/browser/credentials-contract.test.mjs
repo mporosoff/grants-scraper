@@ -85,10 +85,14 @@ test("an absent page-level provider honors the most recently saved provider", ()
   assert.equal(credentials.resolveProvider("openai", storage), "openai");
 });
 
-test("Funding Finder startup uses the stored preference unless a saved profile owns the selection", () => {
+test("Funding Finder keeps an explicit personal provider choice and limits hosted fallback to startup", () => {
   const loader = appSource.slice(
     appSource.indexOf("function loadProviderKey"),
     appSource.indexOf("function bindEvents"),
+  );
+  const bindings = appSource.slice(
+    appSource.indexOf("function bindEvents"),
+    appSource.indexOf("function syncHeaderHeight"),
   );
   const initialization = appSource.slice(
     appSource.indexOf("function initializeShell"),
@@ -96,8 +100,17 @@ test("Funding Finder startup uses the stored preference unless a saved profile o
   );
 
   assert.match(loader, /preferStored = false/);
+  assert.match(loader, /fallbackToHosted = false/);
   assert.match(loader, /preferStored[\s\S]*?CREDENTIAL_API\.resolveProvider\(""\)/);
-  assert.match(initialization, /loadProviderKey\(\{ announce: true, preferStored: !state\.profile\.saved \}\)/);
+  assert.match(
+    loader,
+    /if \(fallbackToHosted && !key && provider !== "hosted"\)[\s\S]*?if \(alternativeKey\)[\s\S]*?else \{\s*provider = "hosted";/,
+  );
+  assert.match(bindings, /\$\("k-provider"\)\.addEventListener\("change", \(\) => \{\s*loadProviderKey\(\{ announce: true \}\)/);
+  assert.match(
+    initialization,
+    /loadProviderKey\(\{[\s\S]*?preferStored: !state\.profile\.saved,[\s\S]*?fallbackToHosted: true,[\s\S]*?\}\)/,
+  );
 });
 
 test("fails closed for malformed storage and bounds saved values", () => {
