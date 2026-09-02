@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-02T19:37:36.818Z",
+  "generated_at": "2026-09-02T20:04:55.664Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",

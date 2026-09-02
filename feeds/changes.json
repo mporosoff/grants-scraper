@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-02T19:37:23Z",
+  "generated_at": "2026-09-02T20:04:41Z",
   "retention_days": 90,
   "events": [
     {
       "id": "fd340b1142dfc518009d",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360334",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -63,7 +63,7 @@
       "id": "f95100212eb953bc9e56",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360335",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -119,7 +119,7 @@
       "id": "b294799aa0eb735a1332",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360337",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -173,7 +173,7 @@
       "id": "a82859ec0d4cd578f6c2",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360336",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -230,7 +230,7 @@
       "id": "a2b746dd4d1f5ff62dd0",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360333",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -285,7 +285,7 @@
       "id": "84bc14a4125cf37fc7a3",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "363376",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -324,7 +324,7 @@
       "id": "5db1df50a87c82753219",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "359268",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -375,7 +375,7 @@
       "id": "5816f1d8bbdc89a7f2bc",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "359269",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -426,7 +426,7 @@
       "id": "4caa6fe24d7563e2800b",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "361204",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -477,7 +477,7 @@
       "id": "3bef90a7e24c91891f8d",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360332",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -532,7 +532,7 @@
       "id": "320902ea3d86cb2df553",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "359949",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -587,7 +587,7 @@
       "id": "2ef3ee71f2185a8a5326",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "358915",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -621,42 +621,10 @@
       "deadline": "2026-10-02"
     },
     {
-      "id": "2bd92192059619b9a054",
-      "type": "new",
-      "label": "New opportunity",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
-      "opportunity_id": "nasa-roses:25-A.17-c0957a7778",
-      "detail": "First appeared in the public catalog",
-      "record": {
-        "opportunity_id": "nasa-roses:25-A.17-c0957a7778",
-        "opportunity_number": "NNH25ZDA001N-HYDRO",
-        "title": "ROSES25: A.17 Hydrosphere",
-        "agency": "NASA Headquarters",
-        "source": "NASA ROSES",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2027-01-28",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [
-          "Space and aeronautics"
-        ],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO",
-        "funding_opportunity_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO",
-        "primary_document_url": null
-      }
-    },
-    {
       "id": "1dc72dca6753e5048265",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360338",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -711,7 +679,7 @@
       "id": "093c3cabd1a7401dab50",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360324",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -766,7 +734,7 @@
       "id": "033c902ee317606ca1ad",
       "type": "closing_soon",
       "label": "Closing soon",
-      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "changed_at": "2026-09-02T20:02:24.678622Z",
       "opportunity_id": "360455",
       "detail": "Deadline 2026-10-02",
       "record": {
@@ -817,6 +785,38 @@
         "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354708"
       },
       "deadline": "2026-10-02"
+    },
+    {
+      "id": "2bd92192059619b9a054",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-02T19:35:13.236638Z",
+      "opportunity_id": "nasa-roses:25-A.17-c0957a7778",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "nasa-roses:25-A.17-c0957a7778",
+        "opportunity_number": "NNH25ZDA001N-HYDRO",
+        "title": "ROSES25: A.17 Hydrosphere",
+        "agency": "NASA Headquarters",
+        "source": "NASA ROSES",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-01-28",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Space and aeronautics"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO",
+        "funding_opportunity_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO",
+        "primary_document_url": null
+      }
     },
     {
       "id": "fdd801685b91f46c3016",
