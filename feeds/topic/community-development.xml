@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -104,6 +104,17 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+  </entry>
+  <entry>
+    <title>Native American/Native Hawaiian Museum Services (2027)</title>
+    <link href="https://www.grants.gov/search-results-detail/363775"/>
+    <id>urn:funding-finder:grants-gov:363775</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Institute of Museum and Library Services</name></author>
+    <category term="Arts and culture"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | The Native American/Native Hawaiian Museum Services program (NANH) supports Native American Tribes, Alaska Native Villages, and organizations that primarily serve and represent Native Hawaiians in sustaining heritage, culture, and knowledge. The program supports projects such as educational services and programs, workforce professional development, organizational capacity building, community engag…</summary>
   </entry>
   <entry>
     <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
@@ -480,6 +491,22 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | NSF GRANTED supports innovative models of research enterprise administrative development and workforce training infrastructure that promote sustainable research capacity and opportunities for economic impactin U.S. organizations. The research enterprise, broadly defined, includes research development and administration, research analytics, technology transfer and commercialization, corporate relat…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges and Universities Program (TCUP)</title>
+    <link href="https://www.grants.gov/search-results-detail/334326"/>
+    <id>urn:funding-finder:grants-gov:334326</id>
+    <updated>2021-06-24T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Community development"/>
+    <category term="Cybersecurity"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>U.S. National Science Foundation | Closes 2026-10-14 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
     <title>FY 2021 - 2023 Economic Development RNTA</title>

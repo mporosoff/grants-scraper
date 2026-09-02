@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -447,6 +447,14 @@
     <summary>Health Resources and Services Administration | Closes 2027-04-06 | The Rural Communities Opioid Response Program (RCORP) - Community Systems Development provides funding to communities in rural areas to develop and/or expand behavioral health systems of care through formalized networks that expand operational and clinical service capacity regionally through coordinated implementation of evidence-based SUD prevention, treatment, recovery, and related services.</summary>
   </entry>
   <entry>
+    <title>Supporting Community Application of Life-Saving Evidence to Prevent Injury and Violence (SCALE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363782"/>
+    <id>urn:funding-finder:grants-gov:363782</id>
+    <updated>2027-02-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-04-06 | Injury, including violence, overdose, and suicide, is the leading cause of morbidity and mortality from birth to 44 years of age. The purpose of this notice of funding opportunity (NOFO) is to strengthen implementation, amplify messaging, and broaden reach in addressing injury, violence, overdose, and suicide prevention across populations nationwide, including those in tribal communities. Funding …</summary>
+  </entry>
+  <entry>
     <title>NIOSH Support for Conferences and Scientific Meetings (R13 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363290"/>
     <id>urn:funding-finder:grants-gov:363290</id>
@@ -666,12 +674,29 @@
     <summary>Health Resources and Services Administration | Closes 2027-03-27 | The Appalachian Region Healthcare Support Program provides technical assistance (TA) to help rural healthcare organizations, including critical access hospitals (CAHs), small rural hospitals, rural health clinics, tribal healthcare facilities, and other healthcare organizations located in the rural counties served by the Appalachian Regional Commission (ARC) with planning and implementing health c…</summary>
   </entry>
   <entry>
+    <title>Drug-Free Communities (DFC) Support Program - Competing Continuation (Year 6)</title>
+    <link href="https://www.grants.gov/search-results-detail/363354"/>
+    <id>urn:funding-finder:grants-gov:363354</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCIPC</name></author>
+    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+  </entry>
+  <entry>
     <title>Drug-Free Communities (DFC) Support Program - NEW (Year 1)</title>
     <link href="https://www.grants.gov/search-results-detail/363353"/>
     <id>urn:funding-finder:grants-gov:363353</id>
     <updated>2027-01-26T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <summary>Centers for Disease Control - NCIPC | Closes 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
+  </entry>
+  <entry>
+    <title>Native Hawaiian Health Care Improvement Act Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363781"/>
+    <id>urn:funding-finder:grants-gov:363781</id>
+    <updated>2027-01-26T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Public health"/>
+    <summary>Health Resources and Services Administration | Closes 2027-04-12 | This Notice of Funding Opportunity (NOFO) announces the opportunity to apply for funding under the Native Hawaiian Health Care Improvement Act (NHHCIA) program. The purpose of these Native Hawaiian Health Care Improvement Act (NHHCIA) awards is to provide Native Hawaiian health care programs with resources to raise the health status of Native Hawaiians to the highest possible health level. This NO…</summary>
   </entry>
   <entry>
     <title>Rural Communities Opioid Response Program - Evaluation</title>
@@ -931,37 +956,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
-  </entry>
-  <entry>
-    <title>Bridge2AI Network for AI Health Science</title>
-    <link href="https://www.grants.gov/search-results-detail/363107"/>
-    <id>urn:funding-finder:grants-gov:363107</id>
-    <updated>2027-01-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
-  </entry>
-  <entry>
-    <title>Zero Suicide Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363653"/>
-    <id>urn:funding-finder:grants-gov:363653</id>
-    <updated>2027-01-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of this program is to strengthen suicide prevention in Indian health systems by implementing the Zero Suicide framework through a comprehensive, culturally informed approach. The program supports Tribal health systems in building leadership, workforce capacity, systematic suicide risk identification, timely engagement and evidence-based treatment, continuity of care, and quality improv…</summary>
-  </entry>
-  <entry>
-    <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
-    <link href="https://www.grants.gov/search-results-detail/363153"/>
-    <id>urn:funding-finder:grants-gov:363153</id>
-    <updated>2026-12-29T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Arts and culture"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
 </feed>

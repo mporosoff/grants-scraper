@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -50,6 +50,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Mentored Research Scientist Development Award (K01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363783"/>
+    <id>urn:funding-finder:grants-gov:363783</id>
+    <updated>2026-11-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
   </entry>
   <entry>
     <title>Multi-Site Investigator-Initiated Clinical Trials (Collaborative UG3/UH3 Clinical Trial Required)</title>
@@ -144,6 +154,28 @@
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
   </entry>
   <entry>
+    <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363757"/>
+    <id>urn:funding-finder:grants-gov:363757</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support for Regional State Engagement with the United States (U.S.) Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and State government representatives in four (4) specific regions (Eastern Region, Western Region, Midwestern Region, or Southern Region of the United States) …</summary>
+  </entry>
+  <entry>
+    <title>Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359940"/>
+    <id>urn:funding-finder:grants-gov:359940</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
+  </entry>
+  <entry>
     <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
     <link href="https://www.grants.gov/search-results-detail/363754"/>
     <id>urn:funding-finder:grants-gov:363754</id>
@@ -165,6 +197,18 @@
     <category term="Neuroscience"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363735"/>
+    <id>urn:funding-finder:grants-gov:363735</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>FYs 2024 through 2026 - Promoting Resilient Operations for Transformative, Efficient, and Cost-saving Transportation (PROTECT) Competitive Grant Program Notice of Funding Opportunity</title>
@@ -597,43 +641,5 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
-  </entry>
-  <entry>
-    <title>INCLUDE Project: Clinical Trials Phased Awards for Down syndrome Research (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360655"/>
-    <id>urn:funding-finder:grants-gov:360655</id>
-    <updated>2026-05-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359675"/>
-    <id>urn:funding-finder:grants-gov:359675</id>
-    <updated>2026-05-12T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
-  </entry>
-  <entry>
-    <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
-    <link href="https://www.grants.gov/search-results-detail/361450"/>
-    <id>urn:funding-finder:grants-gov:361450</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2026-11-06 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects that propose comprehensive functional validation of newly identified therapeutic target candidates for Alzheimer’s Disease-Related Dementias (ADRD). A major barrier to the development of effective treatments for ADRD, as well as other complex central nervous system disorders,…</summary>
-  </entry>
-  <entry>
-    <title>DoW Vision, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362183"/>
-    <id>urn:funding-finder:grants-gov:362183</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-12 | Summary: The fiscal year 2026 (FY26) Vision Research Program (VRP) Clinical Trial Award (CTA) supports the rapid implementation of clinical trials with the potential to have a significant impact on the treatment or management of service-connected eye injury and visual dysfunction. Research must align with at least one of the FY26 VRP Focus Areas. Distinctive Features: · For interventions that requ…</summary>
   </entry>
 </feed>

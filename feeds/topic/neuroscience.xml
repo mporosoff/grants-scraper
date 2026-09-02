@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-09-02T06:05:33Z</updated>
+  <updated>2026-09-02T18:11:23Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -182,6 +182,34 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
+    <title>Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359740"/>
+    <id>urn:funding-finder:grants-gov:359740</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2026-11-10 | This Notice of Funding Opportunity (NOFO) invites applications proposing a Data Coordinating Center that integrates and disseminates multiscale mouse brain datasets for the aging and Alzheimer's disease (AD) research community. The Data Coordinating Center will establish the Aging and AD Mouse Brain Atlas (AD-MBA), which will serve as a central, unified research resource for multi-omic and connect…</summary>
+  </entry>
+  <entry>
+    <title>Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research (P50 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360574"/>
+    <id>urn:funding-finder:grants-gov:360574</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2028-05-25 | This notice of funding opportunity (NOFO) encourages applications for Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research. The National Institute of Mental Health (NIMH) seeks teams of integrative researchers working at different levels of analysis and employing novel, and creative experimental approaches to address high-risk, high-impact questions with the prima…</summary>
+  </entry>
+  <entry>
+    <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360554"/>
+    <id>urn:funding-finder:grants-gov:360554</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
   </entry>
   <entry>
     <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
@@ -563,17 +591,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Closes 2027-03-05 | The purpose of this Notice of Funding Opportunity (NOFO) is to support investigators who have the interest and capability to join efforts for the discovery of in vivo chemical probes for novel brain targets. It is expected that applicants will have, in hand, the starting compounds (validated hits) for chemical optimization and bioassays for testing new analog compounds. Through this NOFO, NIH wish…</summary>
   </entry>
   <entry>
-    <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access</title>
-    <link href="https://www.grants.gov/search-results-detail/360554"/>
-    <id>urn:funding-finder:grants-gov:360554</id>
-    <updated>2026-05-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-09-08 | The National Institute on Drug Abuse seeks to advance its mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive Development (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with study objectives that wi…</summary>
-  </entry>
-  <entry>
     <title>HEAL Initiative: Integrative Management of Chronic Pain and Opioid Use Disorder (OUD) for Whole Recovery: Health Systems</title>
     <link href="https://www.grants.gov/search-results-detail/360048"/>
     <id>urn:funding-finder:grants-gov:360048</id>
@@ -639,30 +656,5 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-11-08 | The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
-  </entry>
-  <entry>
-    <title>Translational Efforts to Advance Gene-based Therapies for Ultra-Rare Neurological and Neuromuscular Disorders (U01 - Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357817"/>
-    <id>urn:funding-finder:grants-gov:357817</id>
-    <updated>2024-12-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2027-10-08 | The Ultra-Rare Gene-Based Therapy (URGenT) network supports Investigational New Drug (IND)-enabling studies and planning activities for First-in-Human (FIH) clinical testing of gene-based or transcript-directed therapeutics, such as oligonucleotides and viral-based gene therapies, for ultra-rare neurological or neuromuscular disorders. The goal of this announcement is to accelerate the development…</summary>
-  </entry>
-  <entry>
-    <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357529"/>
-    <id>urn:funding-finder:grants-gov:357529</id>
-    <updated>2024-12-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-11-05 | The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
   </entry>
 </feed>
