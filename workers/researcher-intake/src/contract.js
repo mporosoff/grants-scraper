@@ -114,7 +114,7 @@ export function validateSubmission(value) {
   };
 }
 
-export function validateAdminProfile(value, researcherId) {
+export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds = []) {
   const allowed = new Set([
     "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship", "pool_visibility",
     "auto_proposable", "status", "research_summary", "source_urls", "source_checked_date", "claims",
@@ -130,6 +130,7 @@ export function validateAdminProfile(value, researcherId) {
   const sourceCheckedDate = calendarDate(value.source_checked_date, "Source checked date");
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
+  const legacyClaimIds = new Set([...reservedLegacyClaimIds].map(value => String(value).toLocaleLowerCase()));
   const claims = value.claims.map(claim => {
     const claimAllowed = new Set(["claim_id", "revision", "status", "label", "category", "categories", "type", "evidence", "source_urls", "verified_on", "evidence_level", "legacy_claim_ids", "material_hash"]);
     exactFields(claim, claimAllowed, "Claim");
@@ -146,12 +147,20 @@ export function validateAdminProfile(value, researcherId) {
     const category = text(claim.category, 140, "Claim category", true);
     const categories = list(claim.categories || [category], 12, 140, "Claim categories", true);
     if (!categories.includes(category)) fail("invalid_claim", "Claim categories must include the primary category.");
+    if (!Array.isArray(claim.legacy_claim_ids) || claim.legacy_claim_ids.some(value => typeof value !== "string")) {
+      fail("invalid_claim_id", "Legacy claim identifiers must be a bounded list of globally unique strings.");
+    }
+    const legacyIds = list(claim.legacy_claim_ids, 10, 80, "Legacy claim identifier");
+    if (legacyIds.length !== claim.legacy_claim_ids.length || legacyIds.some(value => legacyClaimIds.has(value.toLocaleLowerCase()))) {
+      fail("invalid_claim_id", "Legacy claim identifiers must be a bounded list of globally unique strings.");
+    }
+    legacyIds.forEach(value => legacyClaimIds.add(value.toLocaleLowerCase()));
     return {
       claim_id: claimId, revision: claim.revision, status: claim.status,
       label: text(claim.label, 180, "Claim label", true), category, categories,
       type: text(claim.type, 80, "Claim type", true), evidence: text(claim.evidence, 500, "Claim evidence", true),
       source_urls: urls(claim.source_urls, true), verified_on: calendarDate(claim.verified_on, "Claim verification date"),
-      evidence_level: claim.evidence_level, legacy_claim_ids: list(claim.legacy_claim_ids || [], 10, 80, "Legacy claim identifier"),
+      evidence_level: claim.evidence_level, legacy_claim_ids: legacyIds,
       ...(claim.material_hash ? { material_hash: text(claim.material_hash, 64, "Material hash", true) } : {}),
     };
   });

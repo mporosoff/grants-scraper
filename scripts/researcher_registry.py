@@ -113,6 +113,7 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
     identity_aliases: set[str] = set()
     orcids: set[str] = set()
     claim_ids: set[str] = set()
+    legacy_claim_ids: set[str] = set()
     for researcher in researchers:
         if not isinstance(researcher, dict):
             raise ValueError("each researcher must be an object")
@@ -188,6 +189,17 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
                 raise ValueError(f"{claim_id} has an invalid evidence_level")
             if not _valid_date(str(claim.get("verified_on") or "")):
                 raise ValueError(f"{claim_id}.verified_on must be YYYY-MM-DD")
+            legacy_ids = claim.get("legacy_claim_ids")
+            if not isinstance(legacy_ids, list) or len(legacy_ids) > 10:
+                raise ValueError(f"{claim_id}.legacy_claim_ids must be a list of at most 10 IDs")
+            for legacy_id in legacy_ids:
+                if not isinstance(legacy_id, str):
+                    raise ValueError(f"{claim_id}.legacy_claim_ids must contain only strings")
+                normalized = _require_text(legacy_id, f"{claim_id}.legacy_claim_ids", 80)
+                identity = normalized.casefold()
+                if normalized != legacy_id or identity in legacy_claim_ids:
+                    raise ValueError("legacy claim IDs must be globally unique canonical strings")
+                legacy_claim_ids.add(identity)
             if claim.get("material_hash") != material_claim_hash(claim):
                 raise ValueError(f"{claim_id}.material_hash does not match its material content")
     if ids.intersection(identity_aliases):
@@ -708,6 +720,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
         claims = []
         seen_labels = set()
         legacy_terms = list(source.get("terms") or [])
+        legacy_researcher_id = str((source.get("legacy_ids") or [source["id"]])[0])
         for term in legacy_terms:
             label = str(term.get("label") or "").strip()
             if not label or label.casefold() in seen_labels:
@@ -725,7 +738,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
                 "source_urls": source_urls,
                 "verified_on": source["source_checked_date"],
                 "evidence_level": "direct" if "direct" in str(term.get("evidence_tier") or "").lower() else "corroborated",
-                "legacy_claim_ids": [term["id"]] if term.get("id") else [],
+                "legacy_claim_ids": [f"{legacy_researcher_id}:{term['id']}"] if term.get("id") else [],
             }
             claim["material_hash"] = material_claim_hash(claim)
             claims.append(claim)

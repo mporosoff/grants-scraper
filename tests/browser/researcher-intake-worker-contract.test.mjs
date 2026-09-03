@@ -144,6 +144,24 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
     }, ""),
     /cannot preassign claim identifiers/,
   );
+  assert.throws(
+    () => validateAdminProfile({ ...dateProfile, claims: [{ ...validClaim, legacy_claim_ids: "ada:CV001" }] }, ""),
+    /bounded list of globally unique strings/,
+  );
+  assert.throws(
+    () => validateAdminProfile({
+      ...dateProfile,
+      claims: [
+        { ...validClaim, legacy_claim_ids: ["ada:CV001"] },
+        { ...validClaim, label: "Symbolic computing", legacy_claim_ids: ["ADA:cv001"] },
+      ],
+    }, ""),
+    /globally unique strings/,
+  );
+  assert.throws(
+    () => validateAdminProfile({ ...dateProfile, claims: [{ ...validClaim, legacy_claim_ids: ["ada:CV001"] }] }, "", ["ADA:cv001"]),
+    /globally unique strings/,
+  );
 });
 
 test("correction approval defaults apply submitted additions and retirements", () => {
@@ -225,6 +243,33 @@ test("public creation is rate bounded, idempotent, and returns the same private 
   assert.equal(secondBody.submission_id, firstBody.submission_id);
   assert.equal(secondBody.status_url, firstBody.status_url);
   assert.equal(store.rows.size, 1);
+});
+
+test("concurrent idempotent inserts recover the winning receipt and reject different content", async () => {
+  class ConcurrentInsertStore extends MemoryStore {
+    constructor(winningPayloadHash = null) { super(); this.winningPayloadHash = winningPayloadHash; }
+    async create(input) {
+      await super.create({ ...input, payloadHash: this.winningPayloadHash || input.payloadHash });
+      throw new Error("UNIQUE constraint failed: researcher_submissions.idempotency_key");
+    }
+  }
+  const request = () => new Request("https://worker.example/submissions", {
+    method: "POST", headers: { Origin: "https://mporosoff.github.io", "Content-Type": "application/json", "CF-Connecting-IP": "192.0.2.1" },
+    body: JSON.stringify(submission()),
+  });
+  const matchingStore = new ConcurrentInsertStore();
+  const matchingHandler = createHandler({ storeFactory: () => matchingStore, now: () => new Date("2026-09-03T12:00:00Z") });
+  const recovered = await matchingHandler(request(), environment(), { waitUntil() {} });
+  const recoveredBody = await recovered.json();
+  assert.equal(recovered.status, 200);
+  assert.equal(recoveredBody.duplicate, true);
+  assert.match(recoveredBody.status_url, new RegExp(`/status/${recoveredBody.submission_id}\\?token=[a-f0-9]{64}$`));
+
+  const conflictingStore = new ConcurrentInsertStore("f".repeat(64));
+  const conflictingHandler = createHandler({ storeFactory: () => conflictingStore, now: () => new Date("2026-09-03T12:00:00Z") });
+  const conflict = await conflictingHandler(request(), environment(), { waitUntil() {} });
+  assert.equal(conflict.status, 409);
+  assert.equal((await conflict.json()).error.code, "idempotency_conflict");
 });
 
 test("accepted local development origins receive matching CORS headers", async () => {

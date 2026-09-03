@@ -403,24 +403,32 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
         }
         const submission = validateSubmission(await readJson(request));
         const payloadHash = await sha256(JSON.stringify(submission));
+        const duplicateResponse = async row => {
+          if (!safeEqual(row.payload_hash, payloadHash)) fail("idempotency_conflict", "That submission identifier was already used for different content.", 409);
+          const token = await receiptToken(env, submission.idempotency_key);
+          return json(200, { submission_id: row.submission_id, state: row.state, duplicate: true, status_url: `${url.origin}/status/${row.submission_id}?token=${token}` }, allowedOrigin, env);
+        };
         const existing = await store.byIdempotencyKey(submission.idempotency_key);
-        if (existing) {
-          if (!safeEqual(existing.payload_hash, payloadHash)) fail("idempotency_conflict", "That submission identifier was already used for different content.", 409);
-          const existingReceiptToken = await receiptToken(env, submission.idempotency_key);
-          return json(200, { submission_id: existing.submission_id, state: existing.state, duplicate: true, status_url: `${url.origin}/status/${existing.submission_id}?token=${existingReceiptToken}` }, allowedOrigin, env);
-        }
+        if (existing) return await duplicateResponse(existing);
         const submissionId = `rs_${randomToken(12)}`;
         const submissionReceiptToken = await receiptToken(env, submission.idempotency_key);
         const createdAt = now().toISOString();
-        const row = await store.create({
-          submissionId, idempotencyKey: submission.idempotency_key, payloadHash,
-          receiptTokenHash: await sha256(submissionReceiptToken), submissionType: submission.submission_type,
-          sourceSurface: submission.source_surface, researcherId: submission.researcher_id,
-          baseRegistryGeneration: submission.base_registry_generation,
-          proposedProfile: submission.proposed_profile, contactEmail: submission.submitter.contact_email,
-          submitterNote: submission.submitter.note, privacyNoticeVersion: submission.consent.privacy_notice_version,
-          createdAt,
-        });
+        let row;
+        try {
+          row = await store.create({
+            submissionId, idempotencyKey: submission.idempotency_key, payloadHash,
+            receiptTokenHash: await sha256(submissionReceiptToken), submissionType: submission.submission_type,
+            sourceSurface: submission.source_surface, researcherId: submission.researcher_id,
+            baseRegistryGeneration: submission.base_registry_generation,
+            proposedProfile: submission.proposed_profile, contactEmail: submission.submitter.contact_email,
+            submitterNote: submission.submitter.note, privacyNoticeVersion: submission.consent.privacy_notice_version,
+            createdAt,
+          });
+        } catch (error) {
+          const winner = await store.byIdempotencyKey(submission.idempotency_key);
+          if (!winner) throw error;
+          return await duplicateResponse(winner);
+        }
         context.waitUntil(notifyOwner(env, row, fetchImpl).catch(() => undefined));
         return json(201, { submission_id: submissionId, state: "pending", duplicate: false, status_url: `${url.origin}/status/${submissionId}?token=${submissionReceiptToken}` }, allowedOrigin, env);
       }
@@ -495,17 +503,20 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
         if (body.action === "approve") {
           const [manifest, directory] = await Promise.all([
             currentManifest(env, fetchImpl),
-            current.researcher_id ? currentDirectory(env, fetchImpl) : Promise.resolve(null),
+            currentDirectory(env, fetchImpl),
           ]);
           if (manifest.registry_generation !== current.base_registry_generation) fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
-          if (current.researcher_id && (!directory || directory.registry_generation !== manifest.registry_generation)) {
+          if (!directory || directory.registry_generation !== manifest.registry_generation || !Array.isArray(directory.researchers)) {
             fail("registry_unavailable", "The current researcher directory could not be verified.", 503);
           }
           const currentProfile = directory?.researchers?.find(row => row.id === current.researcher_id) || null;
           if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
+          const reservedLegacyClaimIds = directory.researchers
+            .filter(row => row.id !== current.researcher_id)
+            .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
           const approvedProfile = enforceClaimContinuity(
             enforceSubmittedRelationship(
-              validateAdminProfile(body.approved_profile, current.researcher_id),
+              validateAdminProfile(body.approved_profile, current.researcher_id, reservedLegacyClaimIds),
               JSON.parse(current.proposed_profile_json),
             ),
             currentProfile,

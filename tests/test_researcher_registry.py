@@ -50,6 +50,23 @@ class ResearcherRegistryTests(unittest.TestCase):
                 self.assertTrue(claim["claim_id"].startswith(researcher["researcher_id"] + "-c"))
                 self.assertEqual(claim["material_hash"], material_claim_hash(claim))
 
+    def test_legacy_claim_ids_are_bounded_global_strings(self):
+        claims = [claim for researcher in self.registry["researchers"] for claim in researcher["claims"]]
+        legacy_ids = [legacy_id for claim in claims for legacy_id in claim["legacy_claim_ids"]]
+        self.assertEqual(len(legacy_ids), len({legacy_id.casefold() for legacy_id in legacy_ids}))
+        self.assertTrue(all(isinstance(legacy_id, str) and 0 < len(legacy_id) <= 80 for legacy_id in legacy_ids))
+
+        malformed = copy.deepcopy(self.registry)
+        malformed["researchers"][0]["claims"][0]["legacy_claim_ids"] = "aaron-bauer:CV077"
+        with self.assertRaisesRegex(ValueError, r"must be a list"):
+            validate_registry(malformed, require_generation=False)
+
+        duplicate = copy.deepcopy(self.registry)
+        duplicate["researchers"][0]["claims"][0]["legacy_claim_ids"] = ["collision:CV001"]
+        duplicate["researchers"][1]["claims"][0]["legacy_claim_ids"] = ["COLLISION:cv001"]
+        with self.assertRaisesRegex(ValueError, r"globally unique"):
+            validate_registry(duplicate, require_generation=False)
+
     def test_public_directory_and_manifest_are_exact_registry_projections(self):
         directory = assignment_json(ROOT / "data" / "researcher_directory.js")
         manifest = json.loads((ROOT / "data" / "researcher_registry_manifest.json").read_text(encoding="utf-8"))

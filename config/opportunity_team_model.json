@@ -33,7 +33,7 @@
           "claim_revision": 1,
           "evidence": "freeform optical system design",
           "evidence_tier": "direct",
-          "id": "CV077",
+          "id": "aaron-bauer:CV077",
           "label": "Freeform and gradient-index optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html",
@@ -50,7 +50,7 @@
           "claim_revision": 1,
           "evidence": "augmented-reality display optics",
           "evidence_tier": "direct",
-          "id": "CV055",
+          "id": "aaron-bauer:CV055",
           "label": "Augmented and virtual reality",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html",
@@ -94,7 +94,7 @@
           "claim_revision": 1,
           "evidence": "formal semantics for natural-language processing",
           "evidence_tier": "direct",
-          "id": "CV011",
+          "id": "aaron-white:CV011",
           "label": "Natural language processing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/white_aaron/index.html",
@@ -145,7 +145,7 @@
           "claim_revision": 1,
           "evidence": "magnetized inertial fusion",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "adam-sefkow:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
@@ -164,7 +164,7 @@
           "claim_revision": 1,
           "evidence": "magnetohydrodynamic fusion modeling",
           "evidence_tier": "direct",
-          "id": "CV187",
+          "id": "adam-sefkow:CV187",
           "label": "Magnetohydrodynamics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
@@ -183,7 +183,7 @@
           "claim_revision": 1,
           "evidence": "high-energy-density plasma transport",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "adam-sefkow:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
@@ -233,7 +233,7 @@
           "claim_revision": 1,
           "evidence": "electrochemical interface microenvironments",
           "evidence_tier": "direct",
-          "id": "CV147",
+          "id": "agnes-e-thorarinsdottir:CV147",
           "label": "Electrochemical interfaces and redox chemistry",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
@@ -252,7 +252,7 @@
           "claim_revision": 1,
           "evidence": "oxygen-reduction and oxygen-evolution electrocatalysis",
           "evidence_tier": "corroborated",
-          "id": "CV140",
+          "id": "agnes-e-thorarinsdottir:CV140",
           "label": "Electrocatalysis",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
@@ -271,7 +271,7 @@
           "claim_revision": 1,
           "evidence": "porous-framework-coated electrocatalysts",
           "evidence_tier": "corroborated",
-          "id": "CV144",
+          "id": "agnes-e-thorarinsdottir:CV144",
           "label": "Porous and framework materials",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
@@ -320,7 +320,7 @@
           "claim_revision": 1,
           "evidence": "chemically selective surface modification",
           "evidence_tier": "direct",
-          "id": "CV145",
+          "id": "alexander-a-shestopalov:CV145",
           "label": "Surface and interface chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
@@ -339,7 +339,7 @@
           "claim_revision": 1,
           "evidence": "covalent surface functionalization",
           "evidence_tier": "direct",
-          "id": "CV166",
+          "id": "alexander-a-shestopalov:CV166",
           "label": "Surface functionalization and protective coatings",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
@@ -505,7 +505,7 @@
           "claim_revision": 1,
           "evidence": "rubble-pile asteroid granular mechanics",
           "evidence_tier": "direct",
-          "id": "CV165",
+          "id": "alice-c-quillen:CV165",
           "label": "Granular and architected materials",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html",
@@ -525,7 +525,7 @@
           "claim_revision": 1,
           "evidence": "N-body dynamics of exoplanet and debris-disk systems",
           "evidence_tier": "direct",
-          "id": "CV192",
+          "id": "alice-c-quillen:CV192",
           "label": "Planetary, astrophysical, and orbital dynamics",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html",
@@ -578,7 +578,7 @@
           "claim_revision": 1,
           "evidence": "synthetic-biology interventions against resistance",
           "evidence_tier": "direct",
-          "id": "CV133",
+          "id": "allison-j-lopatkin:CV133",
           "label": "Synthetic biology",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
@@ -597,7 +597,7 @@
           "claim_revision": 1,
           "evidence": "metabolic control of antibiotic susceptibility",
           "evidence_tier": "direct",
-          "id": "CV134",
+          "id": "allison-j-lopatkin:CV134",
           "label": "Metabolic engineering",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
@@ -756,7 +756,7 @@
           "claim_revision": 1,
           "evidence": "super-resolution temperature mapping",
           "evidence_tier": "direct",
-          "id": "CV170",
+          "id": "andrea-pickel:CV170",
           "label": "Thermal transport and temperature metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/pickel_andrea/index.html",
@@ -802,7 +802,7 @@
           "claim_revision": 1,
           "evidence": "Raman spectroscopy of bone quality",
           "evidence_tier": "direct",
-          "id": "CV086",
+          "id": "andrew-j-berger:CV086",
           "label": "Fluorescence and Raman optical methods",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
@@ -821,7 +821,7 @@
           "claim_revision": 1,
           "evidence": "diffuse biomedical tissue spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV084",
+          "id": "andrew-j-berger:CV084",
           "label": "Biomedical optics and tissue spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
@@ -865,7 +865,7 @@
           "claim_revision": 1,
           "evidence": "continuous and weak quantum measurement",
           "evidence_tier": "corroborated",
-          "id": "CV100",
+          "id": "andrew-n-jordan:CV100",
           "label": "Quantum sensing and metrology",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/jordan_andrew/index.html",
@@ -908,7 +908,7 @@
           "claim_revision": 1,
           "evidence": "peripheral auditory neurobiology",
           "evidence_tier": "direct",
-          "id": "CV125",
+          "id": "anne-e-luebke:CV125",
           "label": "Auditory neuroscience and hearing technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/luebke_anne/index.html",
@@ -955,7 +955,7 @@
           "claim_revision": 1,
           "evidence": "engineered living materials",
           "evidence_tier": "direct",
-          "id": "CV130",
+          "id": "anne-s-meyer:CV130",
           "label": "Biomaterials and engineered living materials",
           "source_urls": [
             "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
@@ -973,7 +973,7 @@
           "claim_revision": 1,
           "evidence": "synthetic-biology control of biomaterial production",
           "evidence_tier": "direct",
-          "id": "CV133",
+          "id": "anne-s-meyer:CV133",
           "label": "Synthetic biology",
           "source_urls": [
             "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
@@ -991,7 +991,7 @@
           "claim_revision": 1,
           "evidence": "3D bioprinting of bacteria",
           "evidence_tier": "direct",
-          "id": "CV138",
+          "id": "anne-s-meyer:CV138",
           "label": "Biomanufacturing and engineered cells",
           "source_urls": [
             "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
@@ -1046,7 +1046,7 @@
           "claim_revision": 1,
           "evidence": "algorithmic game theory",
           "evidence_tier": "direct",
-          "id": "CV029",
+          "id": "anson-kahng:CV029",
           "label": "Algorithmic game theory",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html",
@@ -1064,7 +1064,7 @@
           "claim_revision": 1,
           "evidence": "computational social choice",
           "evidence_tier": "direct",
-          "id": "CV030",
+          "id": "anson-kahng:CV030",
           "label": "Computational social choice",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html",
@@ -1112,7 +1112,7 @@
           "claim_revision": 1,
           "evidence": "electrochemical PFAS defluorination",
           "evidence_tier": "direct",
-          "id": "CV179",
+          "id": "astrid-m-muller:CV179",
           "label": "Water treatment and contaminant remediation",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
@@ -1131,7 +1131,7 @@
           "claim_revision": 1,
           "evidence": "electrode microenvironment control",
           "evidence_tier": "direct",
-          "id": "CV145",
+          "id": "astrid-m-muller:CV145",
           "label": "Surface and interface chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
@@ -1150,7 +1150,7 @@
           "claim_revision": 1,
           "evidence": "mechanistic electrocatalysis",
           "evidence_tier": "corroborated",
-          "id": "CV140",
+          "id": "astrid-m-muller:CV140",
           "label": "Electrocatalysis",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
@@ -1335,7 +1335,7 @@
           "claim_revision": 1,
           "evidence": "supramolecular biomaterial design",
           "evidence_tier": "direct",
-          "id": "CV130",
+          "id": "benjamin-e-partridge:CV130",
           "label": "Biomaterials and engineered living materials",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
@@ -1353,7 +1353,7 @@
           "claim_revision": 1,
           "evidence": "aqueous supramolecular self-assembly",
           "evidence_tier": "direct",
-          "id": "CV150",
+          "id": "benjamin-e-partridge:CV150",
           "label": "Supramolecular and self-assembly chemistry",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
@@ -1371,7 +1371,7 @@
           "claim_revision": 1,
           "evidence": "programmable peptide and protein materials",
           "evidence_tier": "direct",
-          "id": "CV137",
+          "id": "benjamin-e-partridge:CV137",
           "label": "Protein and peptide engineering",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
@@ -1418,7 +1418,7 @@
           "claim_revision": 1,
           "evidence": "silicon-photonic ring-resonator biosensors",
           "evidence_tier": "direct",
-          "id": "CV088",
+          "id": "benjamin-l-miller:CV088",
           "label": "Silicon photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
@@ -1439,7 +1439,7 @@
           "claim_revision": 1,
           "evidence": "sensing in microphysiological systems",
           "evidence_tier": "direct",
-          "id": "CV117",
+          "id": "benjamin-l-miller:CV117",
           "label": "Organ-on-chip and microphysiological systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
@@ -1460,7 +1460,7 @@
           "claim_revision": 1,
           "evidence": "silicon-photonic ring-resonator biosensors",
           "evidence_tier": "corroborated",
-          "id": "CV044",
+          "id": "benjamin-l-miller:CV044",
           "label": "Electronic-photonic integration",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
@@ -1504,7 +1504,7 @@
           "claim_revision": 1,
           "evidence": "multiscale ocean energy transfer",
           "evidence_tier": "corroborated",
-          "id": "CV180",
+          "id": "benjamin-storer:CV180",
           "label": "Climate, ocean, and landscape systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/index.html",
@@ -1522,7 +1522,7 @@
           "claim_revision": 1,
           "evidence": "coarse-graining of ocean flows",
           "evidence_tier": "corroborated",
-          "id": "CV185",
+          "id": "benjamin-storer:CV185",
           "label": "Turbulence and multiscale flow",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/index.html",
@@ -1540,7 +1540,7 @@
           "claim_revision": 1,
           "evidence": "computational ocean fluid dynamics",
           "evidence_tier": "corroborated",
-          "id": "CV186",
+          "id": "benjamin-storer:CV186",
           "label": "Geophysical and ocean fluid dynamics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/index.html",
@@ -1583,7 +1583,7 @@
           "claim_revision": 1,
           "evidence": "point-of-care diagnostic ultrasound",
           "evidence_tier": "direct",
-          "id": "CV121",
+          "id": "benjamin-castaneda:CV121",
           "label": "Diagnostic ultrasound and elastography",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/castaneda-benjamin/index.html",
@@ -1630,7 +1630,7 @@
           "claim_revision": 1,
           "evidence": "amyloid-inspired biomaterials",
           "evidence_tier": "direct",
-          "id": "CV130",
+          "id": "bradley-l-nilsson:CV130",
           "label": "Biomaterials and engineered living materials",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
@@ -1648,7 +1648,7 @@
           "claim_revision": 1,
           "evidence": "amyloid peptide self-assembly",
           "evidence_tier": "direct",
-          "id": "CV150",
+          "id": "bradley-l-nilsson:CV150",
           "label": "Supramolecular and self-assembly chemistry",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
@@ -1666,7 +1666,7 @@
           "claim_revision": 1,
           "evidence": "amyloid peptide self-assembly",
           "evidence_tier": "direct",
-          "id": "CV137",
+          "id": "bradley-l-nilsson:CV137",
           "label": "Protein and peptide engineering",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
@@ -1713,7 +1713,7 @@
           "claim_revision": 1,
           "evidence": "organometallic synthesis of porous materials",
           "evidence_tier": "direct",
-          "id": "CV146",
+          "id": "brandon-r-barnett:CV146",
           "label": "Organometallic and inorganic synthesis",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
@@ -1732,7 +1732,7 @@
           "claim_revision": 1,
           "evidence": "porous-material adsorption thermodynamics",
           "evidence_tier": "direct",
-          "id": "CV144",
+          "id": "brandon-r-barnett:CV144",
           "label": "Porous and framework materials",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
@@ -1751,7 +1751,7 @@
           "claim_revision": 1,
           "evidence": "hydrogen binding in porous frameworks",
           "evidence_tier": "direct",
-          "id": "CV174",
+          "id": "brandon-r-barnett:CV174",
           "label": "Hydrogen, tritium, and isotope systems",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
@@ -1797,7 +1797,7 @@
           "claim_revision": 1,
           "evidence": "high-power laser wavefront control",
           "evidence_tier": "direct",
-          "id": "CV095",
+          "id": "brian-kruschwitz:CV095",
           "label": "High-power and high-energy laser systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html",
@@ -1814,7 +1814,7 @@
           "claim_revision": 1,
           "evidence": "adaptive optics for high-power lasers",
           "evidence_tier": "direct",
-          "id": "CV082",
+          "id": "brian-kruschwitz:CV082",
           "label": "Adaptive optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html",
@@ -1860,7 +1860,7 @@
           "claim_revision": 1,
           "evidence": "compiler locality optimization",
           "evidence_tier": "direct",
-          "id": "CV038",
+          "id": "chen-ding:CV038",
           "label": "Compilers and runtime systems",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html",
@@ -1878,7 +1878,7 @@
           "claim_revision": 1,
           "evidence": "cache and memory locality analysis",
           "evidence_tier": "direct",
-          "id": "CV039",
+          "id": "chen-ding:CV039",
           "label": "Memory systems and data locality",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html",
@@ -1925,7 +1925,7 @@
           "claim_revision": 1,
           "evidence": "temporal visual understanding",
           "evidence_tier": "direct",
-          "id": "CV013",
+          "id": "chenliang-xu:CV013",
           "label": "Computer vision",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/xu_chenliang/index.html",
@@ -1969,7 +1969,7 @@
           "claim_revision": 1,
           "evidence": "temporomandibular-joint biomechanics",
           "evidence_tier": "direct",
-          "id": "CV114",
+          "id": "cherice-natasha-hill:CV114",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/hill_cherice/index.html",
@@ -2014,7 +2014,7 @@
           "claim_revision": 1,
           "evidence": "targeted cochlear and vestibular drug delivery",
           "evidence_tier": "direct",
-          "id": "CV125",
+          "id": "choongheon-lee:CV125",
           "label": "Auditory neuroscience and hearing technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
@@ -2031,7 +2031,7 @@
           "claim_revision": 1,
           "evidence": "inner-ear pharmacokinetics",
           "evidence_tier": "direct",
-          "id": "CV126",
+          "id": "choongheon-lee:CV126",
           "label": "Vestibular and inner-ear therapeutics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
@@ -2078,7 +2078,7 @@
           "claim_revision": 1,
           "evidence": "computer vision for medical imaging",
           "evidence_tier": "direct",
-          "id": "CV013",
+          "id": "christopher-kanan:CV013",
           "label": "Computer vision",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/kanan_chris/index.html",
@@ -2123,7 +2123,7 @@
           "claim_revision": 1,
           "evidence": "laser-plasma interaction in inertial fusion",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "chuang-ren:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
@@ -2140,7 +2140,7 @@
           "claim_revision": 1,
           "evidence": "laser-plasma interaction in inertial fusion",
           "evidence_tier": "direct",
-          "id": "CV197",
+          "id": "chuang-ren:CV197",
           "label": "Laser-plasma interaction",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
@@ -2157,7 +2157,7 @@
           "claim_revision": 1,
           "evidence": "particle-in-cell modeling",
           "evidence_tier": "direct",
-          "id": "CV198",
+          "id": "chuang-ren:CV198",
           "label": "Plasma simulation and particle-in-cell methods",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
@@ -2203,7 +2203,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast laser-metal interaction",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "chunlei-guo:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
@@ -2222,7 +2222,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast laser-metal interaction",
           "evidence_tier": "direct",
-          "id": "CV096",
+          "id": "chunlei-guo:CV096",
           "label": "Laser-matter interaction and processing",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
@@ -2241,7 +2241,7 @@
           "claim_revision": 1,
           "evidence": "femtosecond-laser surface functionalization",
           "evidence_tier": "direct",
-          "id": "CV166",
+          "id": "chunlei-guo:CV166",
           "label": "Surface functionalization and protective coatings",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
@@ -2287,7 +2287,7 @@
           "claim_revision": 1,
           "evidence": "time-resolved X-ray diffraction under dynamic compression",
           "evidence_tier": "direct",
-          "id": "CV160",
+          "id": "danae-polsin:CV160",
           "label": "X-ray diffraction and crystallography",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
@@ -2304,7 +2304,7 @@
           "claim_revision": 1,
           "evidence": "time-resolved X-ray diffraction under dynamic compression",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "danae-polsin:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
@@ -2321,7 +2321,7 @@
           "claim_revision": 1,
           "evidence": "diffraction-based high-pressure phase analysis",
           "evidence_tier": "direct",
-          "id": "CV200",
+          "id": "danae-polsin:CV200",
           "label": "Shock compression and extreme-pressure materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
@@ -2365,7 +2365,7 @@
           "claim_revision": 1,
           "evidence": "decoding algorithms for natural language processing",
           "evidence_tier": "direct",
-          "id": "CV011",
+          "id": "daniel-gildea:CV011",
           "label": "Natural language processing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/gildea_daniel/index.html",
@@ -2408,7 +2408,7 @@
           "claim_revision": 1,
           "evidence": "Markov-chain Monte Carlo theory",
           "evidence_tier": "direct",
-          "id": "CV024",
+          "id": "daniel-stefankovic:CV024",
           "label": "Stochastic optimization and sampling",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
@@ -2426,7 +2426,7 @@
           "claim_revision": 1,
           "evidence": "graph-polynomial algorithms",
           "evidence_tier": "direct",
-          "id": "CV025",
+          "id": "daniel-stefankovic:CV025",
           "label": "Combinatorics and graph algorithms",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
@@ -2444,7 +2444,7 @@
           "claim_revision": 1,
           "evidence": "Fourier methods in theoretical computer science",
           "evidence_tier": "direct",
-          "id": "CV026",
+          "id": "daniel-stefankovic:CV026",
           "label": "Pseudorandomness and discrete Fourier methods",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
@@ -2489,7 +2489,7 @@
           "claim_revision": 1,
           "evidence": "electrotactile haptic interfaces",
           "evidence_tier": "direct",
-          "id": "CV056",
+          "id": "darren-lipomi:CV056",
           "label": "Tangible and embodied interfaces",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
@@ -2511,7 +2511,7 @@
           "claim_revision": 1,
           "evidence": "mixed ionic-electronic conducting polymers",
           "evidence_tier": "direct",
-          "id": "CV153",
+          "id": "darren-lipomi:CV153",
           "label": "Functional and conducting polymers",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
@@ -2697,7 +2697,7 @@
           "claim_revision": 1,
           "evidence": "inertial-fusion target thin-film deposition",
           "evidence_tier": "direct",
-          "id": "CV167",
+          "id": "david-r-harding:CV167",
           "label": "Thin-film deposition and atomic layer deposition",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
@@ -2714,7 +2714,7 @@
           "claim_revision": 1,
           "evidence": "cryogenic deuterium-tritium target layers",
           "evidence_tier": "direct",
-          "id": "CV174",
+          "id": "david-r-harding:CV174",
           "label": "Hydrogen, tritium, and isotope systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
@@ -2731,7 +2731,7 @@
           "claim_revision": 1,
           "evidence": "inertial-fusion target thin-film deposition",
           "evidence_tier": "direct",
-          "id": "CV201",
+          "id": "david-r-harding:CV201",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
@@ -2776,7 +2776,7 @@
           "claim_revision": 1,
           "evidence": "phase-diverse retinal image reconstruction",
           "evidence_tier": "corroborated",
-          "id": "CV064",
+          "id": "david-r-williams:CV064",
           "label": "Computational imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
@@ -2796,7 +2796,7 @@
           "claim_revision": 1,
           "evidence": "phase-diverse retinal image reconstruction",
           "evidence_tier": "corroborated",
-          "id": "CV073",
+          "id": "david-r-williams:CV073",
           "label": "Inverse problems and image reconstruction",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
@@ -2816,7 +2816,7 @@
           "claim_revision": 1,
           "evidence": "adaptive-optics retinal imaging",
           "evidence_tier": "direct",
-          "id": "CV083",
+          "id": "david-r-williams:CV083",
           "label": "Ophthalmic and retinal optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
@@ -2862,7 +2862,7 @@
           "claim_revision": 1,
           "evidence": "femtosecond stimulated Raman spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV086",
+          "id": "david-w-mccamant:CV086",
           "label": "Fluorescence and Raman optical methods",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
@@ -2880,7 +2880,7 @@
           "claim_revision": 1,
           "evidence": "excited-state molecular dynamics",
           "evidence_tier": "direct",
-          "id": "CV161",
+          "id": "david-w-mccamant:CV161",
           "label": "Atomistic and molecular simulation",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
@@ -2898,7 +2898,7 @@
           "claim_revision": 1,
           "evidence": "time-resolved spectroscopy of molecular chromophores",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "david-w-mccamant:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
@@ -2941,7 +2941,7 @@
           "claim_revision": 1,
           "evidence": "therapeutic ultrasound bioeffects",
           "evidence_tier": "direct",
-          "id": "CV132",
+          "id": "diane-dalecki:CV132",
           "label": "Toxicology and biological-effects models",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
@@ -2959,7 +2959,7 @@
           "claim_revision": 1,
           "evidence": "ultrasound for regenerative medicine",
           "evidence_tier": "direct",
-          "id": "CV116",
+          "id": "diane-dalecki:CV116",
           "label": "Regenerative medicine and tissue engineering",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
@@ -2977,7 +2977,7 @@
           "claim_revision": 1,
           "evidence": "physical acoustics of biological systems",
           "evidence_tier": "direct",
-          "id": "CV190",
+          "id": "diane-dalecki:CV190",
           "label": "Acoustics and vibroacoustics",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
@@ -3025,7 +3025,7 @@
           "claim_revision": 1,
           "evidence": "liquid-metal battery convection",
           "evidence_tier": "direct",
-          "id": "CV171",
+          "id": "douglas-h-kelley:CV171",
           "label": "Electrochemical energy storage",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
@@ -3044,7 +3044,7 @@
           "claim_revision": 1,
           "evidence": "glymphatic and perivascular fluid transport",
           "evidence_tier": "direct",
-          "id": "CV124",
+          "id": "douglas-h-kelley:CV124",
           "label": "Cerebral fluid mechanics and glymphatic transport",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
@@ -3063,7 +3063,7 @@
           "claim_revision": 1,
           "evidence": "inner-ear fluid mixing",
           "evidence_tier": "direct",
-          "id": "CV126",
+          "id": "douglas-h-kelley:CV126",
           "label": "Vestibular and inner-ear therapeutics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
@@ -3109,7 +3109,7 @@
           "claim_revision": 1,
           "evidence": "integrated-circuit power-delivery networks",
           "evidence_tier": "direct",
-          "id": "CV041",
+          "id": "eby-g-friedman:CV041",
           "label": "Power delivery and clock distribution",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/friedman_eby/index.html",
@@ -3126,7 +3126,7 @@
           "claim_revision": 1,
           "evidence": "3D integrated-circuit design",
           "evidence_tier": "direct",
-          "id": "CV040",
+          "id": "eby-g-friedman:CV040",
           "label": "Integrated circuit design",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/friedman_eby/index.html",
@@ -3168,7 +3168,7 @@
           "claim_revision": 1,
           "evidence": "auditory cortical encoding of natural sounds",
           "evidence_tier": "direct",
-          "id": "CV125",
+          "id": "edmund-lalor:CV125",
           "label": "Auditory neuroscience and hearing technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/lalor_edmund/index.html",
@@ -3211,7 +3211,7 @@
           "claim_revision": 1,
           "evidence": "intravital multiphoton tumor imaging",
           "evidence_tier": "direct",
-          "id": "CV075",
+          "id": "edward-brown-iii:CV075",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html",
@@ -3259,7 +3259,7 @@
           "claim_revision": 1,
           "evidence": "multimodal behavioral-signal analysis",
           "evidence_tier": "corroborated",
-          "id": "CV059",
+          "id": "ehsan-hoque:CV059",
           "label": "Behavioral sensing and modeling",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
@@ -3278,7 +3278,7 @@
           "claim_revision": 1,
           "evidence": "affective and social computing",
           "evidence_tier": "corroborated",
-          "id": "CV058",
+          "id": "ehsan-hoque:CV058",
           "label": "Affective and social computing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
@@ -3330,7 +3330,7 @@
           "claim_revision": 1,
           "evidence": "metasurface control of structured optical fields",
           "evidence_tier": "direct",
-          "id": "CV090",
+          "id": "eileen-otte:CV090",
           "label": "Metasurfaces and metamaterials",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/otte-eileen/index.html",
@@ -3373,7 +3373,7 @@
           "claim_revision": 1,
           "evidence": "single-cell mechanical measurements",
           "evidence_tier": "direct",
-          "id": "CV115",
+          "id": "elena-lomakina:CV115",
           "label": "Cell mechanics, adhesion, and cytoskeleton",
           "source_urls": [
             "https://www.urmc.rochester.edu/people/23097780-elena-lomakina",
@@ -3417,7 +3417,7 @@
           "claim_revision": 1,
           "evidence": "metal-oxide cluster catalysis",
           "evidence_tier": "direct",
-          "id": "CV146",
+          "id": "ellen-matson:CV146",
           "label": "Organometallic and inorganic synthesis",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/matson-ellen/index.html",
@@ -3436,7 +3436,7 @@
           "claim_revision": 1,
           "evidence": "proton-coupled electron transfer",
           "evidence_tier": "direct",
-          "id": "CV147",
+          "id": "ellen-matson:CV147",
           "label": "Electrochemical interfaces and redox chemistry",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/matson-ellen/index.html",
@@ -3483,7 +3483,7 @@
           "claim_revision": 1,
           "evidence": "automated data-discovery systems",
           "evidence_tier": "direct",
-          "id": "CV020",
+          "id": "fatemeh-nargesian:CV020",
           "label": "Search and information retrieval",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html",
@@ -3536,7 +3536,7 @@
           "claim_revision": 1,
           "evidence": "synthetic-biology environmental remediation",
           "evidence_tier": "direct",
-          "id": "CV179",
+          "id": "gang-fan:CV179",
           "label": "Water treatment and contaminant remediation",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
@@ -3556,7 +3556,7 @@
           "claim_revision": 1,
           "evidence": "synthetic-biology environmental remediation",
           "evidence_tier": "direct",
-          "id": "CV133",
+          "id": "gang-fan:CV133",
           "label": "Synthetic biology",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
@@ -3576,7 +3576,7 @@
           "claim_revision": 1,
           "evidence": "microbial metabolic engineering",
           "evidence_tier": "direct",
-          "id": "CV134",
+          "id": "gang-fan:CV134",
           "label": "Metabolic engineering",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
@@ -3743,7 +3743,7 @@
           "claim_revision": 1,
           "evidence": "III-V molecular-beam epitaxy",
           "evidence_tier": "direct",
-          "id": "CV167",
+          "id": "gary-w-wicks:CV167",
           "label": "Thin-film deposition and atomic layer deposition",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/wicks_gary/index.html",
@@ -3762,7 +3762,7 @@
           "claim_revision": 1,
           "evidence": "III-V molecular-beam epitaxy",
           "evidence_tier": "direct",
-          "id": "CV107",
+          "id": "gary-w-wicks:CV107",
           "label": "Semiconductor optoelectronics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/wicks_gary/index.html",
@@ -3812,7 +3812,7 @@
           "claim_revision": 1,
           "evidence": "computer vision for image integrity",
           "evidence_tier": "direct",
-          "id": "CV013",
+          "id": "gaurav-sharma:CV013",
           "label": "Computer vision",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/sharma_gaurav/index.html",
@@ -3861,7 +3861,7 @@
           "claim_revision": 1,
           "evidence": "fusion-relevant high-energy-density materials",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "gilbert-rip-collins:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
@@ -3879,7 +3879,7 @@
           "claim_revision": 1,
           "evidence": "laboratory astrophysics at extreme pressure",
           "evidence_tier": "direct",
-          "id": "CV200",
+          "id": "gilbert-rip-collins:CV200",
           "label": "Shock compression and extreme-pressure materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
@@ -3897,7 +3897,7 @@
           "claim_revision": 1,
           "evidence": "planetary-interior materials at extreme conditions",
           "evidence_tier": "direct",
-          "id": "CV192",
+          "id": "gilbert-rip-collins:CV192",
           "label": "Planetary, astrophysical, and orbital dynamics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
@@ -3945,7 +3945,7 @@
           "claim_revision": 1,
           "evidence": "graph signal processing",
           "evidence_tier": "direct",
-          "id": "CV021",
+          "id": "gonzalo-mateos:CV021",
           "label": "Graph and network analytics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
@@ -3990,7 +3990,7 @@
           "claim_revision": 1,
           "evidence": "complex-network statistical physics",
           "evidence_tier": "direct",
-          "id": "CV021",
+          "id": "gourab-ghoshal:CV021",
           "label": "Graph and network analytics",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/ghoshal_gourab/index.html",
@@ -4031,7 +4031,7 @@
           "claim_revision": 1,
           "evidence": "freeform gradient-index optics",
           "evidence_tier": "corroborated",
-          "id": "CV077",
+          "id": "greg-schmidt:CV077",
           "label": "Freeform and gradient-index optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/schmidt_greg/index.html",
@@ -4048,7 +4048,7 @@
           "claim_revision": 1,
           "evidence": "gradient-index optical metrology",
           "evidence_tier": "corroborated",
-          "id": "CV080",
+          "id": "greg-schmidt:CV080",
           "label": "Optical metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/schmidt_greg/index.html",
@@ -4090,7 +4090,7 @@
           "claim_revision": 1,
           "evidence": "spectral recovery of damaged texts",
           "evidence_tier": "corroborated",
-          "id": "CV074",
+          "id": "gregory-heyworth:CV074",
           "label": "Spectral and multispectral imaging",
           "source_urls": [
             "https://www.sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html",
@@ -4135,7 +4135,7 @@
           "claim_revision": 1,
           "evidence": "exciton complexes in monolayer transition-metal dichalcogenides",
           "evidence_tier": "corroborated",
-          "id": "CV109",
+          "id": "hanan-dery:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
@@ -4155,7 +4155,7 @@
           "claim_revision": 1,
           "evidence": "spin-polarized carrier transport",
           "evidence_tier": "corroborated",
-          "id": "CV108",
+          "id": "hanan-dery:CV108",
           "label": "Spintronics and magnetic devices",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
@@ -4175,7 +4175,7 @@
           "claim_revision": 1,
           "evidence": "exciton complexes in monolayer transition-metal dichalcogenides",
           "evidence_tier": "corroborated",
-          "id": "CV106",
+          "id": "hanan-dery:CV106",
           "label": "Two-dimensional and van der Waals materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
@@ -4224,7 +4224,7 @@
           "claim_revision": 1,
           "evidence": "evaluation of language-model reasoning",
           "evidence_tier": "direct",
-          "id": "CV011",
+          "id": "hangfeng-he:CV011",
           "label": "Natural language processing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hangfeng_he/index.html",
@@ -4244,7 +4244,7 @@
           "claim_revision": 1,
           "evidence": "reasoning in large language models",
           "evidence_tier": "direct",
-          "id": "CV012",
+          "id": "hangfeng-he:CV012",
           "label": "Large language models",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hangfeng_he/index.html",
@@ -4294,7 +4294,7 @@
           "claim_revision": 1,
           "evidence": "mechanics of architected lattice materials",
           "evidence_tier": "direct",
-          "id": "CV165",
+          "id": "hesam-askari:CV165",
           "label": "Granular and architected materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/askari_hesam/index.html",
@@ -4314,7 +4314,7 @@
           "claim_revision": 1,
           "evidence": "granular intrusion and rheology",
           "evidence_tier": "direct",
-          "id": "CV183",
+          "id": "hesam-askari:CV183",
           "label": "Soft matter and rheology",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/askari_hesam/index.html",
@@ -4368,7 +4368,7 @@
           "claim_revision": 1,
           "evidence": "ultra-wideband transceivers",
           "evidence_tier": "direct",
-          "id": "CV043",
+          "id": "hui-wu:CV043",
           "label": "RF and microwave electronics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
@@ -4386,7 +4386,7 @@
           "claim_revision": 1,
           "evidence": "silicon photonic-electronic co-integration",
           "evidence_tier": "direct",
-          "id": "CV088",
+          "id": "hui-wu:CV088",
           "label": "Silicon photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
@@ -4404,7 +4404,7 @@
           "claim_revision": 1,
           "evidence": "silicon photonic-electronic co-integration",
           "evidence_tier": "direct",
-          "id": "CV044",
+          "id": "hui-wu:CV044",
           "label": "Electronic-photonic integration",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
@@ -4452,7 +4452,7 @@
           "claim_revision": 1,
           "evidence": "geophysical fluid turbulence",
           "evidence_tier": "direct",
-          "id": "CV180",
+          "id": "hussein-aluie:CV180",
           "label": "Climate, ocean, and landscape systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
@@ -4471,7 +4471,7 @@
           "claim_revision": 1,
           "evidence": "spatial coarse-graining of turbulent flows",
           "evidence_tier": "direct",
-          "id": "CV185",
+          "id": "hussein-aluie:CV185",
           "label": "Turbulence and multiscale flow",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
@@ -4490,7 +4490,7 @@
           "claim_revision": 1,
           "evidence": "compressible magnetohydrodynamic turbulence",
           "evidence_tier": "direct",
-          "id": "CV187",
+          "id": "hussein-aluie:CV187",
           "label": "Magnetohydrodynamics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
@@ -4533,7 +4533,7 @@
           "claim_revision": 1,
           "evidence": "liquid-metal battery fluid dynamics",
           "evidence_tier": "corroborated",
-          "id": "CV171",
+          "id": "ibrahim-mohammad:CV171",
           "label": "Electrochemical energy storage",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
@@ -4552,7 +4552,7 @@
           "claim_revision": 1,
           "evidence": "computational magnetohydrodynamics",
           "evidence_tier": "corroborated",
-          "id": "CV187",
+          "id": "ibrahim-mohammad:CV187",
           "label": "Magnetohydrodynamics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
@@ -4571,7 +4571,7 @@
           "claim_revision": 1,
           "evidence": "liquid-metal battery fluid dynamics",
           "evidence_tier": "corroborated",
-          "id": "CV173",
+          "id": "ibrahim-mohammad:CV173",
           "label": "Flow and liquid-metal batteries",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
@@ -4616,7 +4616,7 @@
           "claim_revision": 1,
           "evidence": "dissipative exciton dynamics",
           "evidence_tier": "direct",
-          "id": "CV109",
+          "id": "ignacio-franco:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html",
@@ -4635,7 +4635,7 @@
           "claim_revision": 1,
           "evidence": "open-quantum-system dynamics",
           "evidence_tier": "direct",
-          "id": "CV111",
+          "id": "ignacio-franco:CV111",
           "label": "Open quantum systems and molecular quantum dynamics",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html",
@@ -4681,7 +4681,7 @@
           "claim_revision": 1,
           "evidence": "dynamic X-ray diffraction at extreme pressure",
           "evidence_tier": "corroborated",
-          "id": "CV160",
+          "id": "j-ryan-rygg:CV160",
           "label": "X-ray diffraction and crystallography",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
@@ -4699,7 +4699,7 @@
           "claim_revision": 1,
           "evidence": "high-pressure phase transformations",
           "evidence_tier": "direct",
-          "id": "CV200",
+          "id": "j-ryan-rygg:CV200",
           "label": "Shock compression and extreme-pressure materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
@@ -4717,7 +4717,7 @@
           "claim_revision": 1,
           "evidence": "fusion-relevant high-energy-density materials",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "j-ryan-rygg:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
@@ -4762,7 +4762,7 @@
           "claim_revision": 1,
           "evidence": "performer-dependent organ acoustics",
           "evidence_tier": "direct",
-          "id": "CV067",
+          "id": "jack-g-mottley:CV067",
           "label": "Music information and performance technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html",
@@ -4779,7 +4779,7 @@
           "claim_revision": 1,
           "evidence": "nonlinear organ-pipe acoustics",
           "evidence_tier": "direct",
-          "id": "CV190",
+          "id": "jack-g-mottley:CV190",
           "label": "Acoustics and vibroacoustics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html",
@@ -4826,7 +4826,7 @@
           "claim_revision": 1,
           "evidence": "nonlinear integrated photonics",
           "evidence_tier": "direct",
-          "id": "CV087",
+          "id": "jaime-cardenas:CV087",
           "label": "Integrated photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
@@ -4845,7 +4845,7 @@
           "claim_revision": 1,
           "evidence": "silicon integrated nanophotonics",
           "evidence_tier": "direct",
-          "id": "CV088",
+          "id": "jaime-cardenas:CV088",
           "label": "Silicon photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
@@ -4864,7 +4864,7 @@
           "claim_revision": 1,
           "evidence": "silicon integrated nanophotonics",
           "evidence_tier": "direct",
-          "id": "CV089",
+          "id": "jaime-cardenas:CV089",
           "label": "Nanophotonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
@@ -4907,7 +4907,7 @@
           "claim_revision": 1,
           "evidence": "high-energy laser diagnostics",
           "evidence_tier": "direct",
-          "id": "CV095",
+          "id": "jake-bromage:CV095",
           "label": "High-power and high-energy laser systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bromage_jake/index.html",
@@ -4950,7 +4950,7 @@
           "claim_revision": 1,
           "evidence": "ocular and tear-film optical metrology",
           "evidence_tier": "corroborated",
-          "id": "CV080",
+          "id": "james-m-zavislan:CV080",
           "label": "Optical metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
@@ -4968,7 +4968,7 @@
           "claim_revision": 1,
           "evidence": "optical coherence modeling for microscopy",
           "evidence_tier": "corroborated",
-          "id": "CV081",
+          "id": "james-m-zavislan:CV081",
           "label": "Wave propagation and optical coherence",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
@@ -4986,7 +4986,7 @@
           "claim_revision": 1,
           "evidence": "optical-system tolerancing for manufacture",
           "evidence_tier": "corroborated",
-          "id": "CV079",
+          "id": "james-m-zavislan:CV079",
           "label": "Optical tolerancing and aberration control",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
@@ -5030,7 +5030,7 @@
           "claim_revision": 1,
           "evidence": "organ-on-chip barrier models",
           "evidence_tier": "direct",
-          "id": "CV117",
+          "id": "james-mcgrath:CV117",
           "label": "Organ-on-chip and microphysiological systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/mcgrath_james/index.html",
@@ -5049,7 +5049,7 @@
           "claim_revision": 1,
           "evidence": "microfluidic barrier microphysiology",
           "evidence_tier": "direct",
-          "id": "CV119",
+          "id": "james-mcgrath:CV119",
           "label": "Microfluidics and microscale transport",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/mcgrath_james/index.html",
@@ -5100,7 +5100,7 @@
           "claim_revision": 1,
           "evidence": "computational imaging through aberrations",
           "evidence_tier": "direct",
-          "id": "CV064",
+          "id": "james-r-fienup:CV064",
           "label": "Computational imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
@@ -5118,7 +5118,7 @@
           "claim_revision": 1,
           "evidence": "phase-diverse image reconstruction",
           "evidence_tier": "direct",
-          "id": "CV073",
+          "id": "james-r-fienup:CV073",
           "label": "Inverse problems and image reconstruction",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
@@ -5136,7 +5136,7 @@
           "claim_revision": 1,
           "evidence": "synthetic-aperture radar image reconstruction",
           "evidence_tier": "direct",
-          "id": "CV065",
+          "id": "james-r-fienup:CV065",
           "label": "Radar and synthetic-aperture imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
@@ -5191,7 +5191,7 @@
           "claim_revision": 1,
           "evidence": "freeform optical metrology",
           "evidence_tier": "direct",
-          "id": "CV080",
+          "id": "jannick-rolland:CV080",
           "label": "Optical metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
@@ -5209,7 +5209,7 @@
           "claim_revision": 1,
           "evidence": "freeform optical system design",
           "evidence_tier": "direct",
-          "id": "CV077",
+          "id": "jannick-rolland:CV077",
           "label": "Freeform and gradient-index optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
@@ -5227,7 +5227,7 @@
           "claim_revision": 1,
           "evidence": "augmented- and virtual-reality display optics",
           "evidence_tier": "direct",
-          "id": "CV055",
+          "id": "jannick-rolland:CV055",
           "label": "Augmented and virtual reality",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
@@ -5270,7 +5270,7 @@
           "claim_revision": 1,
           "evidence": "colorimetric spectral-reflectance reconstruction",
           "evidence_tier": "corroborated",
-          "id": "CV074",
+          "id": "jennifer-d-t-kruschwitz:CV074",
           "label": "Spectral and multispectral imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_jen/index.html",
@@ -5317,7 +5317,7 @@
           "claim_revision": 1,
           "evidence": "coherent vortex structures",
           "evidence_tier": "direct",
-          "id": "CV185",
+          "id": "jessica-shang:CV185",
           "label": "Turbulence and multiscale flow",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
@@ -5335,7 +5335,7 @@
           "claim_revision": 1,
           "evidence": "high-energy-density hydrodynamic mixing",
           "evidence_tier": "corroborated",
-          "id": "CV196",
+          "id": "jessica-shang:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
@@ -5353,7 +5353,7 @@
           "claim_revision": 1,
           "evidence": "fluid-structure interaction in biological systems",
           "evidence_tier": "direct",
-          "id": "CV188",
+          "id": "jessica-shang:CV188",
           "label": "Fluid-structure interaction and biofluid mechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
@@ -5399,7 +5399,7 @@
           "claim_revision": 1,
           "evidence": "stochastic optimization algorithms",
           "evidence_tier": "direct",
-          "id": "CV024",
+          "id": "jiaming-liang:CV024",
           "label": "Stochastic optimization and sampling",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html",
@@ -5417,7 +5417,7 @@
           "claim_revision": 1,
           "evidence": "optimization in games",
           "evidence_tier": "direct",
-          "id": "CV029",
+          "id": "jiaming-liang:CV029",
           "label": "Algorithmic game theory",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html",
@@ -5467,7 +5467,7 @@
           "claim_revision": 1,
           "evidence": "computer vision for social and behavioral science",
           "evidence_tier": "direct",
-          "id": "CV059",
+          "id": "jiebo-luo:CV059",
           "label": "Behavioral sensing and modeling",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
@@ -5486,7 +5486,7 @@
           "claim_revision": 1,
           "evidence": "multimodal social-media image analysis",
           "evidence_tier": "direct",
-          "id": "CV058",
+          "id": "jiebo-luo:CV058",
           "label": "Affective and social computing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
@@ -5505,7 +5505,7 @@
           "claim_revision": 1,
           "evidence": "large-scale visual content mining",
           "evidence_tier": "direct",
-          "id": "CV013",
+          "id": "jiebo-luo:CV013",
           "label": "Computer vision",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
@@ -5551,7 +5551,7 @@
           "claim_revision": 1,
           "evidence": "compiler-enforced systems security",
           "evidence_tier": "direct",
-          "id": "CV038",
+          "id": "john-criswell:CV038",
           "label": "Compilers and runtime systems",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html",
@@ -5596,7 +5596,7 @@
           "claim_revision": 1,
           "evidence": "subsurface damage in optical fabrication",
           "evidence_tier": "corroborated",
-          "id": "CV078",
+          "id": "john-lambropoulos:CV078",
           "label": "Optical fabrication and manufacturability",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/lambropoulos_john/index.html",
@@ -5640,7 +5640,7 @@
           "claim_revision": 1,
           "evidence": "singlet-triplet quantum-dot qubits",
           "evidence_tier": "direct",
-          "id": "CV158",
+          "id": "john-m-nichol:CV158",
           "label": "Semiconductor nanomaterials",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
@@ -5659,7 +5659,7 @@
           "claim_revision": 1,
           "evidence": "spin-valley coherence in quantum dots",
           "evidence_tier": "direct",
-          "id": "CV108",
+          "id": "john-m-nichol:CV108",
           "label": "Spintronics and magnetic devices",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
@@ -5678,7 +5678,7 @@
           "claim_revision": 1,
           "evidence": "dynamically corrected qubit gates",
           "evidence_tier": "direct",
-          "id": "CV099",
+          "id": "john-m-nichol:CV099",
           "label": "Quantum information processing",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
@@ -5724,7 +5724,7 @@
           "claim_revision": 1,
           "evidence": "intense laser-plasma interaction",
           "evidence_tier": "direct",
-          "id": "CV197",
+          "id": "john-palastro:CV197",
           "label": "Laser-plasma interaction",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/palastro_john/index.html",
@@ -5769,7 +5769,7 @@
           "claim_revision": 1,
           "evidence": "high-energy laser diagnostics",
           "evidence_tier": "direct",
-          "id": "CV095",
+          "id": "jonathan-d-zuegel:CV095",
           "label": "High-power and high-energy laser systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html",
@@ -5786,7 +5786,7 @@
           "claim_revision": 1,
           "evidence": "nonlinear frequency conversion for high-power lasers",
           "evidence_tier": "direct",
-          "id": "CV091",
+          "id": "jonathan-d-zuegel:CV091",
           "label": "Nonlinear optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html",
@@ -5830,7 +5830,7 @@
           "claim_revision": 1,
           "evidence": "inertial-fusion plasma diagnostics",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "jonathan-davies:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
@@ -5847,7 +5847,7 @@
           "claim_revision": 1,
           "evidence": "laser-plasma interaction measurements",
           "evidence_tier": "direct",
-          "id": "CV197",
+          "id": "jonathan-davies:CV197",
           "label": "Laser-plasma interaction",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
@@ -5864,7 +5864,7 @@
           "claim_revision": 1,
           "evidence": "magnetized high-energy-density plasma experiments",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "jonathan-davies:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
@@ -5907,7 +5907,7 @@
           "claim_revision": 1,
           "evidence": "organ-of-Corti micromechanics",
           "evidence_tier": "corroborated",
-          "id": "CV125",
+          "id": "jong-hoon-nam:CV125",
           "label": "Auditory neuroscience and hearing technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
@@ -5925,7 +5925,7 @@
           "claim_revision": 1,
           "evidence": "inner-ear sensory-cell biophysics",
           "evidence_tier": "direct",
-          "id": "CV126",
+          "id": "jong-hoon-nam:CV126",
           "label": "Vestibular and inner-ear therapeutics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
@@ -5943,7 +5943,7 @@
           "claim_revision": 1,
           "evidence": "cochlear hair-cell mechanics",
           "evidence_tier": "direct",
-          "id": "CV115",
+          "id": "jong-hoon-nam:CV115",
           "label": "Cell mechanics, adhesion, and cytoskeleton",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
@@ -5987,7 +5987,7 @@
           "claim_revision": 1,
           "evidence": "gradient-index optical system design",
           "evidence_tier": "corroborated",
-          "id": "CV077",
+          "id": "julie-bentley:CV077",
           "label": "Freeform and gradient-index optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
@@ -6005,7 +6005,7 @@
           "claim_revision": 1,
           "evidence": "optical tolerancing for manufacturability",
           "evidence_tier": "corroborated",
-          "id": "CV078",
+          "id": "julie-bentley:CV078",
           "label": "Optical fabrication and manufacturability",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
@@ -6023,7 +6023,7 @@
           "claim_revision": 1,
           "evidence": "optical tolerancing for manufacturability",
           "evidence_tier": "corroborated",
-          "id": "CV079",
+          "id": "julie-bentley:CV079",
           "label": "Optical tolerancing and aberration control",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
@@ -6069,7 +6069,7 @@
           "claim_revision": 1,
           "evidence": "additive combinatorics",
           "evidence_tier": "direct",
-          "id": "CV025",
+          "id": "kaave-hosseini:CV025",
           "label": "Combinatorics and graph algorithms",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html",
@@ -6087,7 +6087,7 @@
           "claim_revision": 1,
           "evidence": "discrete Fourier analysis of combinatorial structures",
           "evidence_tier": "direct",
-          "id": "CV026",
+          "id": "kaave-hosseini:CV026",
           "label": "Pseudorandomness and discrete Fourier methods",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html",
@@ -6130,7 +6130,7 @@
           "claim_revision": 1,
           "evidence": "transition-metal-oxide nanocrystals",
           "evidence_tier": "direct",
-          "id": "CV146",
+          "id": "kathryn-knowles:CV146",
           "label": "Organometallic and inorganic synthesis",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
@@ -6148,7 +6148,7 @@
           "claim_revision": 1,
           "evidence": "VO2 nanocrystal synthesis and phase behavior",
           "evidence_tier": "corroborated",
-          "id": "CV163",
+          "id": "kathryn-knowles:CV163",
           "label": "Phase transformations and material stability",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
@@ -6166,7 +6166,7 @@
           "claim_revision": 1,
           "evidence": "time-resolved optical spectroscopy of nanomaterials",
           "evidence_tier": "corroborated",
-          "id": "CV093",
+          "id": "kathryn-knowles:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
@@ -6212,7 +6212,7 @@
           "claim_revision": 1,
           "evidence": "network modeling of glymphatic transport",
           "evidence_tier": "direct",
-          "id": "CV021",
+          "id": "kimberly-boster:CV021",
           "label": "Graph and network analytics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
@@ -6230,7 +6230,7 @@
           "claim_revision": 1,
           "evidence": "AI velocimetry of cerebral fluid flow",
           "evidence_tier": "direct",
-          "id": "CV124",
+          "id": "kimberly-boster:CV124",
           "label": "Cerebral fluid mechanics and glymphatic transport",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
@@ -6248,7 +6248,7 @@
           "claim_revision": 1,
           "evidence": "phase-change heat transfer",
           "evidence_tier": "direct",
-          "id": "CV170",
+          "id": "kimberly-boster:CV170",
           "label": "Thermal transport and temperature metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
@@ -6294,7 +6294,7 @@
           "claim_revision": 1,
           "evidence": "visual neuroscience of damaged cortex",
           "evidence_tier": "direct",
-          "id": "CV127",
+          "id": "krystel-huxlin:CV127",
           "label": "Visual neuroscience and vision rehabilitation",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
@@ -6312,7 +6312,7 @@
           "claim_revision": 1,
           "evidence": "adaptive-optics measurement of visual function",
           "evidence_tier": "direct",
-          "id": "CV082",
+          "id": "krystel-huxlin:CV082",
           "label": "Adaptive optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
@@ -6330,7 +6330,7 @@
           "claim_revision": 1,
           "evidence": "laser-vision-correction outcomes",
           "evidence_tier": "direct",
-          "id": "CV083",
+          "id": "krystel-huxlin:CV083",
           "label": "Ophthalmic and retinal optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
@@ -6374,7 +6374,7 @@
           "claim_revision": 1,
           "evidence": "computational social-choice bribery problems",
           "evidence_tier": "direct",
-          "id": "CV030",
+          "id": "lane-a-hemaspaandra:CV030",
           "label": "Computational social choice",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/hemaspaandra_lane/index.html",
@@ -6420,7 +6420,7 @@
           "claim_revision": 1,
           "evidence": "musculoskeletal soft-tissue mechanics",
           "evidence_tier": "direct",
-          "id": "CV112",
+          "id": "laura-slane:CV112",
           "label": "Tissue biomechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
@@ -6437,7 +6437,7 @@
           "claim_revision": 1,
           "evidence": "rehabilitation biomechanics",
           "evidence_tier": "direct",
-          "id": "CV114",
+          "id": "laura-slane:CV114",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
@@ -6454,7 +6454,7 @@
           "claim_revision": 1,
           "evidence": "quantitative ultrasound of tendon and ligament",
           "evidence_tier": "direct",
-          "id": "CV121",
+          "id": "laura-slane:CV121",
           "label": "Diagnostic ultrasound and elastography",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
@@ -6498,7 +6498,7 @@
           "claim_revision": 1,
           "evidence": "neural encoding of speech in noise",
           "evidence_tier": "direct",
-          "id": "CV125",
+          "id": "laurel-h-carney:CV125",
           "label": "Auditory neuroscience and hearing technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/carney_laurel/index.html",
@@ -6548,7 +6548,7 @@
           "claim_revision": 1,
           "evidence": "organic light-emitting diode physics",
           "evidence_tier": "direct",
-          "id": "CV107",
+          "id": "lewis-rothberg:CV107",
           "label": "Semiconductor optoelectronics",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
@@ -6566,7 +6566,7 @@
           "claim_revision": 1,
           "evidence": "semiconducting polymer electronics",
           "evidence_tier": "direct",
-          "id": "CV153",
+          "id": "lewis-rothberg:CV153",
           "label": "Functional and conducting polymers",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
@@ -6584,7 +6584,7 @@
           "claim_revision": 1,
           "evidence": "organic thin-film transistors",
           "evidence_tier": "direct",
-          "id": "CV155",
+          "id": "lewis-rothberg:CV155",
           "label": "Polymer interfaces, coatings, and thin films",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
@@ -6631,7 +6631,7 @@
           "claim_revision": 1,
           "evidence": "cutaneous barrier toxicology models",
           "evidence_tier": "direct",
-          "id": "CV132",
+          "id": "lisa-a-delouise:CV132",
           "label": "Toxicology and biological-effects models",
           "source_urls": [
             "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
@@ -6649,7 +6649,7 @@
           "claim_revision": 1,
           "evidence": "tissue-chip microphysiological systems",
           "evidence_tier": "direct",
-          "id": "CV117",
+          "id": "lisa-a-delouise:CV117",
           "label": "Organ-on-chip and microphysiological systems",
           "source_urls": [
             "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
@@ -6697,7 +6697,7 @@
           "claim_revision": 1,
           "evidence": "multi-objective automatic-speech-recognition training",
           "evidence_tier": "direct",
-          "id": "CV014",
+          "id": "lisha-chen:CV014",
           "label": "Audio and speech machine learning",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/chen_lisha/index.html",
@@ -6744,7 +6744,7 @@
           "claim_revision": 1,
           "evidence": "quantum simulation with microwave circuits",
           "evidence_tier": "direct",
-          "id": "CV043",
+          "id": "machiel-blok:CV043",
           "label": "RF and microwave electronics",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
@@ -6763,7 +6763,7 @@
           "claim_revision": 1,
           "evidence": "superconducting quantum sensing",
           "evidence_tier": "direct",
-          "id": "CV100",
+          "id": "machiel-blok:CV100",
           "label": "Quantum sensing and metrology",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
@@ -6782,7 +6782,7 @@
           "claim_revision": 1,
           "evidence": "quantum simulation with microwave circuits",
           "evidence_tier": "direct",
-          "id": "CV099",
+          "id": "machiel-blok:CV099",
           "label": "Quantum information processing",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
@@ -6830,7 +6830,7 @@
           "claim_revision": 1,
           "evidence": "heterogeneous catalyst design for carbon conversion",
           "evidence_tier": "direct",
-          "id": "CV139",
+          "id": "marc-d-porosoff:CV139",
           "label": "Heterogeneous catalysis",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
@@ -6849,7 +6849,7 @@
           "claim_revision": 1,
           "evidence": "language-model representations of catalysts",
           "evidence_tier": "direct",
-          "id": "CV011",
+          "id": "marc-d-porosoff:CV011",
           "label": "Natural language processing",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
@@ -6868,7 +6868,7 @@
           "claim_revision": 1,
           "evidence": "carbon-dioxide hydrogenation catalysts",
           "evidence_tier": "direct",
-          "id": "CV141",
+          "id": "marc-d-porosoff:CV141",
           "label": "Carbon dioxide capture and conversion",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
@@ -7022,7 +7022,7 @@
           "claim_revision": 1,
           "evidence": "mechanochemical control of morphogenesis",
           "evidence_tier": "direct",
-          "id": "CV113",
+          "id": "marisol-herrera-perez:CV113",
           "label": "Mechanobiology and mechanotransduction",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/herrera-perez_marisol/index.html",
@@ -7068,7 +7068,7 @@
           "claim_revision": 1,
           "evidence": "acoustic wavefield reconstruction",
           "evidence_tier": "direct",
-          "id": "CV190",
+          "id": "mark-bocko:CV190",
           "label": "Acoustics and vibroacoustics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html",
@@ -7087,7 +7087,7 @@
           "claim_revision": 1,
           "evidence": "computational analysis of musical performance",
           "evidence_tier": "corroborated",
-          "id": "CV067",
+          "id": "mark-bocko:CV067",
           "label": "Music information and performance technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html",
@@ -7132,7 +7132,7 @@
           "claim_revision": 1,
           "evidence": "surgical soft-tissue biomechanics",
           "evidence_tier": "direct",
-          "id": "CV112",
+          "id": "mark-buckley:CV112",
           "label": "Tissue biomechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
@@ -7151,7 +7151,7 @@
           "claim_revision": 1,
           "evidence": "mechanical-property imaging of musculoskeletal tissue",
           "evidence_tier": "direct",
-          "id": "CV114",
+          "id": "mark-buckley:CV114",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
@@ -7195,7 +7195,7 @@
           "claim_revision": 1,
           "evidence": "ultrasound elastography",
           "evidence_tier": "direct",
-          "id": "CV121",
+          "id": "marvin-doyley:CV121",
           "label": "Diagnostic ultrasound and elastography",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/affiliated-faculty/doyley_marvin/index.html",
@@ -7241,7 +7241,7 @@
           "claim_revision": 1,
           "evidence": "electrochemical interface characterization",
           "evidence_tier": "corroborated",
-          "id": "CV147",
+          "id": "matthew-z-yates:CV147",
           "label": "Electrochemical interfaces and redox chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
@@ -7405,7 +7405,7 @@
           "claim_revision": 1,
           "evidence": "fluorescence-lifetime imaging microscopy",
           "evidence_tier": "direct",
-          "id": "CV086",
+          "id": "michael-giacomelli:CV086",
           "label": "Fluorescence and Raman optical methods",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html",
@@ -7424,7 +7424,7 @@
           "claim_revision": 1,
           "evidence": "multiphoton surgical microscopy",
           "evidence_tier": "direct",
-          "id": "CV075",
+          "id": "michael-giacomelli:CV075",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html",
@@ -7471,7 +7471,7 @@
           "claim_revision": 1,
           "evidence": "non-von-Neumann computing accelerators",
           "evidence_tier": "direct",
-          "id": "CV037",
+          "id": "michael-huang:CV037",
           "label": "GPU and heterogeneous accelerators",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
@@ -7490,7 +7490,7 @@
           "claim_revision": 1,
           "evidence": "memory-system architecture",
           "evidence_tier": "corroborated",
-          "id": "CV039",
+          "id": "michael-huang:CV039",
           "label": "Memory systems and data locality",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
@@ -7509,7 +7509,7 @@
           "claim_revision": 1,
           "evidence": "architecture for emerging computing paradigms",
           "evidence_tier": "direct",
-          "id": "CV035",
+          "id": "michael-huang:CV035",
           "label": "Computer architecture",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
@@ -7557,7 +7557,7 @@
           "claim_revision": 1,
           "evidence": "terahertz vibrational spectroscopy of molecular crystals",
           "evidence_tier": "direct",
-          "id": "CV094",
+          "id": "michael-t-ruggiero:CV094",
           "label": "Terahertz science and imaging",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
@@ -7576,7 +7576,7 @@
           "claim_revision": 1,
           "evidence": "diffraction-spectroscopy correlation",
           "evidence_tier": "direct",
-          "id": "CV160",
+          "id": "michael-t-ruggiero:CV160",
           "label": "X-ray diffraction and crystallography",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
@@ -7595,7 +7595,7 @@
           "claim_revision": 1,
           "evidence": "crystal polymorphism and solid-state structure",
           "evidence_tier": "corroborated",
-          "id": "CV163",
+          "id": "michael-t-ruggiero:CV163",
           "label": "Phase transformations and material stability",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
@@ -7641,7 +7641,7 @@
           "claim_revision": 1,
           "evidence": "single-photon embedded eigenstates",
           "evidence_tier": "direct",
-          "id": "CV104",
+          "id": "michele-cotrufo:CV104",
           "label": "Quantum emitters and single-photon sources",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
@@ -7659,7 +7659,7 @@
           "claim_revision": 1,
           "evidence": "quasi-BIC nonlinear optical nonreciprocity",
           "evidence_tier": "direct",
-          "id": "CV091",
+          "id": "michele-cotrufo:CV091",
           "label": "Nonlinear optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
@@ -7703,7 +7703,7 @@
           "claim_revision": 1,
           "evidence": "nonparaxial structured-wave propagation",
           "evidence_tier": "direct",
-          "id": "CV081",
+          "id": "miguel-a-alonso:CV081",
           "label": "Wave propagation and optical coherence",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/alonso_miguel/index.html",
@@ -7753,7 +7753,7 @@
           "claim_revision": 1,
           "evidence": "interfacial thermodynamics of polymeric materials",
           "evidence_tier": "direct",
-          "id": "CV145",
+          "id": "mitchell-anthamatten:CV145",
           "label": "Surface and interface chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
@@ -7772,7 +7772,7 @@
           "claim_revision": 1,
           "evidence": "self-assembly of functional polymers",
           "evidence_tier": "direct",
-          "id": "CV150",
+          "id": "mitchell-anthamatten:CV150",
           "label": "Supramolecular and self-assembly chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
@@ -7791,7 +7791,7 @@
           "claim_revision": 1,
           "evidence": "vapor-deposited polymer coatings",
           "evidence_tier": "direct",
-          "id": "CV155",
+          "id": "mitchell-anthamatten:CV155",
           "label": "Polymer interfaces, coatings, and thin films",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
@@ -7957,7 +7957,7 @@
           "claim_revision": 1,
           "evidence": "inverse problems in computational imaging",
           "evidence_tier": "direct",
-          "id": "CV064",
+          "id": "mujdat-cetin:CV064",
           "label": "Computational imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
@@ -7975,7 +7975,7 @@
           "claim_revision": 1,
           "evidence": "Bayesian image reconstruction",
           "evidence_tier": "direct",
-          "id": "CV073",
+          "id": "mujdat-cetin:CV073",
           "label": "Inverse problems and image reconstruction",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
@@ -7993,7 +7993,7 @@
           "claim_revision": 1,
           "evidence": "radar image formation",
           "evidence_tier": "direct",
-          "id": "CV065",
+          "id": "mujdat-cetin:CV065",
           "label": "Radar and synthetic-aperture imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
@@ -8042,7 +8042,7 @@
           "claim_revision": 1,
           "evidence": "machine-learning classification of X-ray diffraction",
           "evidence_tier": "corroborated",
-          "id": "CV160",
+          "id": "niaz-abdolrahim:CV160",
           "label": "X-ray diffraction and crystallography",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
@@ -8062,7 +8062,7 @@
           "claim_revision": 1,
           "evidence": "nanoporous membrane mechanical design",
           "evidence_tier": "direct",
-          "id": "CV144",
+          "id": "niaz-abdolrahim:CV144",
           "label": "Porous and framework materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
@@ -8082,7 +8082,7 @@
           "claim_revision": 1,
           "evidence": "thin-film dewetting and phase separation",
           "evidence_tier": "direct",
-          "id": "CV163",
+          "id": "niaz-abdolrahim:CV163",
           "label": "Phase transformations and material stability",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
@@ -8132,7 +8132,7 @@
           "claim_revision": 1,
           "evidence": "atom-light Raman transitions",
           "evidence_tier": "corroborated",
-          "id": "CV086",
+          "id": "nicholas-p-bigelow:CV086",
           "label": "Fluorescence and Raman optical methods",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html",
@@ -8152,7 +8152,7 @@
           "claim_revision": 1,
           "evidence": "cold-atom quantum sensing",
           "evidence_tier": "direct",
-          "id": "CV100",
+          "id": "nicholas-p-bigelow:CV100",
           "label": "Quantum sensing and metrology",
           "source_urls": [
             "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html",
@@ -8199,7 +8199,7 @@
           "claim_revision": 1,
           "evidence": "solid-state quantum photonics",
           "evidence_tier": "direct",
-          "id": "CV092",
+          "id": "nickolas-a-vamivakas:CV092",
           "label": "Quantum optics and photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
@@ -8218,7 +8218,7 @@
           "claim_revision": 1,
           "evidence": "nanoscale quantum-emitter spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV104",
+          "id": "nickolas-a-vamivakas:CV104",
           "label": "Quantum emitters and single-photon sources",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
@@ -8237,7 +8237,7 @@
           "claim_revision": 1,
           "evidence": "nanoscale light-matter coupling",
           "evidence_tier": "corroborated",
-          "id": "CV109",
+          "id": "nickolas-a-vamivakas:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
@@ -8285,7 +8285,7 @@
           "claim_revision": 1,
           "evidence": "quantum-dot single-photon emitters",
           "evidence_tier": "direct",
-          "id": "CV104",
+          "id": "pablo-a-postigo:CV104",
           "label": "Quantum emitters and single-photon sources",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
@@ -8304,7 +8304,7 @@
           "claim_revision": 1,
           "evidence": "quantum-dot single-photon emitters",
           "evidence_tier": "direct",
-          "id": "CV158",
+          "id": "pablo-a-postigo:CV158",
           "label": "Semiconductor nanomaterials",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
@@ -8323,7 +8323,7 @@
           "claim_revision": 1,
           "evidence": "photonic-crystal nanostructures",
           "evidence_tier": "direct",
-          "id": "CV089",
+          "id": "pablo-a-postigo:CV089",
           "label": "Nanophotonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
@@ -8369,7 +8369,7 @@
           "claim_revision": 1,
           "evidence": "materials-process optimization",
           "evidence_tier": "corroborated",
-          "id": "CV169",
+          "id": "paul-d-funkenbusch:CV169",
           "label": "Precision manufacturing and process optimization",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
@@ -8387,7 +8387,7 @@
           "claim_revision": 1,
           "evidence": "biomaterial mechanical variability",
           "evidence_tier": "direct",
-          "id": "CV130",
+          "id": "paul-d-funkenbusch:CV130",
           "label": "Biomaterials and engineered living materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
@@ -8405,7 +8405,7 @@
           "claim_revision": 1,
           "evidence": "microstructure-property-processing relationships",
           "evidence_tier": "direct",
-          "id": "CV162",
+          "id": "paul-d-funkenbusch:CV162",
           "label": "Multiscale materials modeling",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
@@ -8455,7 +8455,7 @@
           "claim_revision": 1,
           "evidence": "cavity-QED molecular dynamics",
           "evidence_tier": "direct",
-          "id": "CV109",
+          "id": "pengfei-huo:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
@@ -8475,7 +8475,7 @@
           "claim_revision": 1,
           "evidence": "cavity-QED molecular dynamics",
           "evidence_tier": "direct",
-          "id": "CV161",
+          "id": "pengfei-huo:CV161",
           "label": "Atomistic and molecular simulation",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
@@ -8495,7 +8495,7 @@
           "claim_revision": 1,
           "evidence": "nonadiabatic quantum dynamics",
           "evidence_tier": "direct",
-          "id": "CV111",
+          "id": "pengfei-huo:CV111",
           "label": "Open quantum systems and molecular quantum dynamics",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
@@ -8545,7 +8545,7 @@
           "claim_revision": 1,
           "evidence": "data-driven process monitoring",
           "evidence_tier": "direct",
-          "id": "CV169",
+          "id": "pooja-rajendra-bhalode:CV169",
           "label": "Precision manufacturing and process optimization",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
@@ -8563,7 +8563,7 @@
           "claim_revision": 1,
           "evidence": "multiscale powder-flow modeling",
           "evidence_tier": "direct",
-          "id": "CV189",
+          "id": "pooja-rajendra-bhalode:CV189",
           "label": "Multiphase, granular, and particulate flow",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
@@ -8581,7 +8581,7 @@
           "claim_revision": 1,
           "evidence": "hybrid mechanistic and data-driven process models",
           "evidence_tier": "direct",
-          "id": "CV017",
+          "id": "pooja-rajendra-bhalode:CV017",
           "label": "Data-driven surrogate modeling",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
@@ -8741,7 +8741,7 @@
           "claim_revision": 1,
           "evidence": "chip-scale photonic signal processing",
           "evidence_tier": "corroborated",
-          "id": "CV087",
+          "id": "qiang-lin:CV087",
           "label": "Integrated photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
@@ -8761,7 +8761,7 @@
           "claim_revision": 1,
           "evidence": "on-chip quantum photonics",
           "evidence_tier": "corroborated",
-          "id": "CV092",
+          "id": "qiang-lin:CV092",
           "label": "Quantum optics and photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
@@ -8781,7 +8781,7 @@
           "claim_revision": 1,
           "evidence": "photon-phonon interactions",
           "evidence_tier": "corroborated",
-          "id": "CV109",
+          "id": "qiang-lin:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
@@ -8832,7 +8832,7 @@
           "claim_revision": 1,
           "evidence": "sediment transport mechanics",
           "evidence_tier": "direct",
-          "id": "CV180",
+          "id": "rachel-glade:CV180",
           "label": "Climate, ocean, and landscape systems",
           "source_urls": [
             "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
@@ -8851,7 +8851,7 @@
           "claim_revision": 1,
           "evidence": "granular-flow pattern formation",
           "evidence_tier": "direct",
-          "id": "CV189",
+          "id": "rachel-glade:CV189",
           "label": "Multiphase, granular, and particulate flow",
           "source_urls": [
             "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
@@ -8870,7 +8870,7 @@
           "claim_revision": 1,
           "evidence": "granular river and landscape processes",
           "evidence_tier": "direct",
-          "id": "CV165",
+          "id": "rachel-glade:CV165",
           "label": "Granular and architected materials",
           "source_urls": [
             "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
@@ -8919,7 +8919,7 @@
           "claim_revision": 1,
           "evidence": "neural population coding and decoding",
           "evidence_tier": "direct",
-          "id": "CV128",
+          "id": "ralf-haefner:CV128",
           "label": "Neural computation and perception",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/haefner_ralf/index.html",
@@ -8963,7 +8963,7 @@
           "claim_revision": 1,
           "evidence": "intravital multiphoton tissue imaging",
           "evidence_tier": "direct",
-          "id": "CV075",
+          "id": "rebecca-irwin:CV075",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
@@ -8982,7 +8982,7 @@
           "claim_revision": 1,
           "evidence": "regenerative therapies for soft tissue",
           "evidence_tier": "direct",
-          "id": "CV116",
+          "id": "rebecca-irwin:CV116",
           "label": "Regenerative medicine and tissue engineering",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
@@ -9001,7 +9001,7 @@
           "claim_revision": 1,
           "evidence": "soft-tissue mechanobiology",
           "evidence_tier": "direct",
-          "id": "CV113",
+          "id": "rebecca-irwin:CV113",
           "label": "Mechanobiology and mechanotransduction",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
@@ -9045,7 +9045,7 @@
           "claim_revision": 1,
           "evidence": "near-infrared tissue spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV084",
+          "id": "regine-choe:CV084",
           "label": "Biomedical optics and tissue spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
@@ -9063,7 +9063,7 @@
           "claim_revision": 1,
           "evidence": "optical monitoring of breast-cancer therapy",
           "evidence_tier": "direct",
-          "id": "CV122",
+          "id": "regine-choe:CV122",
           "label": "Optical diagnostics and phototherapy",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
@@ -9106,7 +9106,7 @@
           "claim_revision": 1,
           "evidence": "finite-element structural mechanics",
           "evidence_tier": "direct",
-          "id": "CV182",
+          "id": "renato-perucchio:CV182",
           "label": "Finite-element and computational mechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/perucchio_renato/index.html",
@@ -9151,7 +9151,7 @@
           "claim_revision": 1,
           "evidence": "direct-drive inertial confinement fusion",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "riccardo-betti:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
@@ -9169,7 +9169,7 @@
           "claim_revision": 1,
           "evidence": "thermonuclear burn physics",
           "evidence_tier": "direct",
-          "id": "CV195",
+          "id": "riccardo-betti:CV195",
           "label": "Thermonuclear burn and implosion physics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
@@ -9187,7 +9187,7 @@
           "claim_revision": 1,
           "evidence": "high-energy-density plasma stability",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "riccardo-betti:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
@@ -9231,7 +9231,7 @@
           "claim_revision": 1,
           "evidence": "visual working-memory modeling",
           "evidence_tier": "direct",
-          "id": "CV128",
+          "id": "robert-a-jacobs:CV128",
           "label": "Neural computation and perception",
           "source_urls": [
             "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
@@ -9249,7 +9249,7 @@
           "claim_revision": 1,
           "evidence": "Bayesian models of perceptual learning",
           "evidence_tier": "direct",
-          "id": "CV127",
+          "id": "robert-a-jacobs:CV127",
           "label": "Visual neuroscience and vision rehabilitation",
           "source_urls": [
             "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
@@ -9294,7 +9294,7 @@
           "claim_revision": 1,
           "evidence": "quantum ghost imaging",
           "evidence_tier": "direct",
-          "id": "CV092",
+          "id": "robert-boyd:CV092",
           "label": "Quantum optics and photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
@@ -9314,7 +9314,7 @@
           "claim_revision": 1,
           "evidence": "optical phase conjugation through turbulence",
           "evidence_tier": "corroborated",
-          "id": "CV185",
+          "id": "robert-boyd:CV185",
           "label": "Turbulence and multiscale flow",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
@@ -9334,7 +9334,7 @@
           "claim_revision": 1,
           "evidence": "high-gain parametric down-conversion",
           "evidence_tier": "direct",
-          "id": "CV091",
+          "id": "robert-boyd:CV091",
           "label": "Nonlinear optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
@@ -9382,7 +9382,7 @@
           "claim_revision": 1,
           "evidence": "tissue-engineering scaffold fabrication",
           "evidence_tier": "direct",
-          "id": "CV116",
+          "id": "robert-clark:CV116",
           "label": "Regenerative medicine and tissue engineering",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
@@ -9399,7 +9399,7 @@
           "claim_revision": 1,
           "evidence": "tissue-engineering scaffold fabrication",
           "evidence_tier": "direct",
-          "id": "CV168",
+          "id": "robert-clark:CV168",
           "label": "Additive manufacturing and bioprinting",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
@@ -9416,7 +9416,7 @@
           "claim_revision": 1,
           "evidence": "nanoscale biomanufacturing",
           "evidence_tier": "corroborated",
-          "id": "CV138",
+          "id": "robert-clark:CV138",
           "label": "Biomanufacturing and engineered cells",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
@@ -9457,7 +9457,7 @@
           "claim_revision": 1,
           "evidence": "terahertz time-domain spectroscopy and imaging",
           "evidence_tier": "corroborated",
-          "id": "CV094",
+          "id": "roman-sobolewski:CV094",
           "label": "Terahertz science and imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
@@ -9476,7 +9476,7 @@
           "claim_revision": 1,
           "evidence": "superconducting single-photon detectors",
           "evidence_tier": "corroborated",
-          "id": "CV104",
+          "id": "roman-sobolewski:CV104",
           "label": "Quantum emitters and single-photon sources",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
@@ -9495,7 +9495,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast optoelectronic transducers",
           "evidence_tier": "corroborated",
-          "id": "CV093",
+          "id": "roman-sobolewski:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
@@ -9543,7 +9543,7 @@
           "claim_revision": 1,
           "evidence": "X-ray spectroscopy of high-energy-density plasmas",
           "evidence_tier": "direct",
-          "id": "CV196",
+          "id": "sean-regan:CV196",
           "label": "High-energy-density and warm-dense matter",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/regan_sean/index.html",
@@ -9560,7 +9560,7 @@
           "claim_revision": 1,
           "evidence": "3D imaging diagnostics for inertial fusion",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "sean-regan:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/regan_sean/index.html",
@@ -9605,7 +9605,7 @@
           "claim_revision": 1,
           "evidence": "3D integrated-circuit power delivery",
           "evidence_tier": "direct",
-          "id": "CV041",
+          "id": "selcuk-kose:CV041",
           "label": "Power delivery and clock distribution",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
@@ -9623,7 +9623,7 @@
           "claim_revision": 1,
           "evidence": "secure mixed-signal hardware",
           "evidence_tier": "direct",
-          "id": "CV042",
+          "id": "selcuk-kose:CV042",
           "label": "Analog and mixed-signal electronics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
@@ -9641,7 +9641,7 @@
           "claim_revision": 1,
           "evidence": "secure mixed-signal hardware",
           "evidence_tier": "direct",
-          "id": "CV045",
+          "id": "selcuk-kose:CV045",
           "label": "Hardware security",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
@@ -9686,7 +9686,7 @@
           "claim_revision": 1,
           "evidence": "battery electrode-electrolyte interfaces",
           "evidence_tier": "direct",
-          "id": "CV147",
+          "id": "siddharth-deshpande:CV147",
           "label": "Electrochemical interfaces and redox chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
@@ -9704,7 +9704,7 @@
           "claim_revision": 1,
           "evidence": "battery electrode-electrolyte interfaces",
           "evidence_tier": "direct",
-          "id": "CV171",
+          "id": "siddharth-deshpande:CV171",
           "label": "Electrochemical energy storage",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
@@ -9722,7 +9722,7 @@
           "claim_revision": 1,
           "evidence": "electrocatalytic interface modeling",
           "evidence_tier": "direct",
-          "id": "CV140",
+          "id": "siddharth-deshpande:CV140",
           "label": "Electrocatalysis",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
@@ -9899,7 +9899,7 @@
           "claim_revision": 1,
           "evidence": "first-principles density-functional theory",
           "evidence_tier": "direct",
-          "id": "CV161",
+          "id": "sobhit-singh:CV161",
           "label": "Atomistic and molecular simulation",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
@@ -9918,7 +9918,7 @@
           "claim_revision": 1,
           "evidence": "topological quantum phases",
           "evidence_tier": "direct",
-          "id": "CV105",
+          "id": "sobhit-singh:CV105",
           "label": "Quantum and topological materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
@@ -9965,7 +9965,7 @@
           "claim_revision": 1,
           "evidence": "program transformation for heterogeneous architectures",
           "evidence_tier": "direct",
-          "id": "CV038",
+          "id": "sreepathi-pai:CV038",
           "label": "Compilers and runtime systems",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/pai_sreepathi/index.html",
@@ -9983,7 +9983,7 @@
           "claim_revision": 1,
           "evidence": "GPU compiler optimization",
           "evidence_tier": "direct",
-          "id": "CV037",
+          "id": "sreepathi-pai:CV037",
           "label": "GPU and heterogeneous accelerators",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/pai_sreepathi/index.html",
@@ -10026,7 +10026,7 @@
           "claim_revision": 1,
           "evidence": "ultrasound elastography",
           "evidence_tier": "direct",
-          "id": "CV121",
+          "id": "stephen-mcaleavey:CV121",
           "label": "Diagnostic ultrasound and elastography",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/mcaleavey_stephen/index.html",
@@ -10073,7 +10073,7 @@
           "claim_revision": 1,
           "evidence": "quantum-material electronics",
           "evidence_tier": "direct",
-          "id": "CV105",
+          "id": "stephen-wu:CV105",
           "label": "Quantum and topological materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
@@ -10092,7 +10092,7 @@
           "claim_revision": 1,
           "evidence": "spin transport in two-dimensional materials",
           "evidence_tier": "direct",
-          "id": "CV108",
+          "id": "stephen-wu:CV108",
           "label": "Spintronics and magnetic devices",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
@@ -10111,7 +10111,7 @@
           "claim_revision": 1,
           "evidence": "van der Waals quantum materials",
           "evidence_tier": "direct",
-          "id": "CV106",
+          "id": "stephen-wu:CV106",
           "label": "Two-dimensional and van der Waals materials",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
@@ -10155,7 +10155,7 @@
           "claim_revision": 1,
           "evidence": "ocular aberration measurement",
           "evidence_tier": "corroborated",
-          "id": "CV079",
+          "id": "susana-marcos:CV079",
           "label": "Optical tolerancing and aberration control",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
@@ -10175,7 +10175,7 @@
           "claim_revision": 1,
           "evidence": "customized intraocular-lens selection",
           "evidence_tier": "corroborated",
-          "id": "CV083",
+          "id": "susana-marcos:CV083",
           "label": "Ophthalmic and retinal optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
@@ -10195,7 +10195,7 @@
           "claim_revision": 1,
           "evidence": "adaptive-optics vision simulation",
           "evidence_tier": "corroborated",
-          "id": "CV082",
+          "id": "susana-marcos:CV082",
           "label": "Adaptive optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
@@ -10249,7 +10249,7 @@
           "claim_revision": 1,
           "evidence": "attosecond electron dynamics",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "suxing-hu:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
@@ -10268,7 +10268,7 @@
           "claim_revision": 1,
           "evidence": "inertial-confinement-fusion target physics",
           "evidence_tier": "direct",
-          "id": "CV195",
+          "id": "suxing-hu:CV195",
           "label": "Thermonuclear burn and implosion physics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
@@ -10287,7 +10287,7 @@
           "claim_revision": 1,
           "evidence": "inertial-confinement-fusion target physics",
           "evidence_tier": "direct",
-          "id": "CV201",
+          "id": "suxing-hu:CV201",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
@@ -10335,7 +10335,7 @@
           "claim_revision": 1,
           "evidence": "quantum-optics teaching instrumentation",
           "evidence_tier": "direct",
-          "id": "CV092",
+          "id": "svetlana-g-lukishova:CV092",
           "label": "Quantum optics and photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
@@ -10353,7 +10353,7 @@
           "claim_revision": 1,
           "evidence": "single-photon nanophotonics",
           "evidence_tier": "direct",
-          "id": "CV104",
+          "id": "svetlana-g-lukishova:CV104",
           "label": "Quantum emitters and single-photon sources",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
@@ -10371,7 +10371,7 @@
           "claim_revision": 1,
           "evidence": "nonlinear optics in liquid crystals",
           "evidence_tier": "direct",
-          "id": "CV091",
+          "id": "svetlana-g-lukishova:CV091",
           "label": "Nonlinear optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
@@ -10415,7 +10415,7 @@
           "claim_revision": 1,
           "evidence": "freeform optical surface metrology",
           "evidence_tier": "direct",
-          "id": "CV080",
+          "id": "thomas-g-brown:CV080",
           "label": "Optical metrology",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
@@ -10432,7 +10432,7 @@
           "claim_revision": 1,
           "evidence": "photonic integrated-circuit characterization",
           "evidence_tier": "direct",
-          "id": "CV087",
+          "id": "thomas-g-brown:CV087",
           "label": "Integrated photonics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
@@ -10449,7 +10449,7 @@
           "claim_revision": 1,
           "evidence": "freeform optical surface metrology",
           "evidence_tier": "direct",
-          "id": "CV077",
+          "id": "thomas-g-brown:CV077",
           "label": "Freeform and gradient-index optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
@@ -10522,7 +10522,7 @@
           "claim_revision": 1,
           "evidence": "antimicrobial photodynamic therapy",
           "evidence_tier": "direct",
-          "id": "CV122",
+          "id": "timothy-m-baran:CV122",
           "label": "Optical diagnostics and phototherapy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/baran-timothy/index.html",
@@ -10569,7 +10569,7 @@
           "claim_revision": 1,
           "evidence": "exciton physics in semiconductor nanocrystals",
           "evidence_tier": "direct",
-          "id": "CV109",
+          "id": "todd-d-krauss:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/krauss_todd/index.html",
@@ -10588,7 +10588,7 @@
           "claim_revision": 1,
           "evidence": "quantum emitters from semiconductor nanomaterials",
           "evidence_tier": "direct",
-          "id": "CV158",
+          "id": "todd-d-krauss:CV158",
           "label": "Semiconductor nanomaterials",
           "source_urls": [
             "https://www.sas.rochester.edu/chm/people/faculty/krauss_todd/index.html",
@@ -10635,7 +10635,7 @@
           "claim_revision": 1,
           "evidence": "hydrodynamic-instability theory for inertial fusion",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "valeri-goncharov:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html",
@@ -10652,7 +10652,7 @@
           "claim_revision": 1,
           "evidence": "radiation-hydrodynamic modeling",
           "evidence_tier": "direct",
-          "id": "CV202",
+          "id": "valeri-goncharov:CV202",
           "label": "Radiation hydrodynamics and plasma instability",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html",
@@ -10697,7 +10697,7 @@
           "claim_revision": 1,
           "evidence": "machine-learning surrogate models for fusion",
           "evidence_tier": "direct",
-          "id": "CV017",
+          "id": "varchas-gopalaswamy:CV017",
           "label": "Data-driven surrogate modeling",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
@@ -10714,7 +10714,7 @@
           "claim_revision": 1,
           "evidence": "inertial-fusion implosion design",
           "evidence_tier": "direct",
-          "id": "CV193",
+          "id": "varchas-gopalaswamy:CV193",
           "label": "Inertial confinement fusion",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
@@ -10731,7 +10731,7 @@
           "claim_revision": 1,
           "evidence": "thermonuclear burn modeling",
           "evidence_tier": "direct",
-          "id": "CV195",
+          "id": "varchas-gopalaswamy:CV195",
           "label": "Thermonuclear burn and implosion physics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
@@ -10775,7 +10775,7 @@
           "claim_revision": 1,
           "evidence": "optomechanical finite-element analysis",
           "evidence_tier": "direct",
-          "id": "CV182",
+          "id": "victor-l-genberg:CV182",
           "label": "Finite-element and computational mechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/genberg_victor/index.html",
@@ -10816,7 +10816,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast nonlinear optical interactions",
           "evidence_tier": "corroborated",
-          "id": "CV093",
+          "id": "wayne-h-knox:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
@@ -10835,7 +10835,7 @@
           "claim_revision": 1,
           "evidence": "laser-based refractive vision correction",
           "evidence_tier": "corroborated",
-          "id": "CV083",
+          "id": "wayne-h-knox:CV083",
           "label": "Ophthalmic and retinal optics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
@@ -10854,7 +10854,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast laser material modification",
           "evidence_tier": "corroborated",
-          "id": "CV096",
+          "id": "wayne-h-knox:CV096",
           "label": "Laser-matter interaction and processing",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
@@ -10934,7 +10934,7 @@
           "claim_revision": 1,
           "evidence": "energy-storage material characterization",
           "evidence_tier": "direct",
-          "id": "CV171",
+          "id": "wenjie-zang:CV171",
           "label": "Electrochemical energy storage",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/zang-wenjie/index.html",
@@ -10953,7 +10953,7 @@
           "claim_revision": 1,
           "evidence": "nanoscale heterogeneous catalyst structure",
           "evidence_tier": "direct",
-          "id": "CV139",
+          "id": "wenjie-zang:CV139",
           "label": "Heterogeneous catalysis",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/zang-wenjie/index.html",
@@ -10997,7 +10997,7 @@
           "claim_revision": 1,
           "evidence": "cellular force sensing in joint tissues",
           "evidence_tier": "direct",
-          "id": "CV113",
+          "id": "whasil-lee:CV113",
           "label": "Mechanobiology and mechanotransduction",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
@@ -11015,7 +11015,7 @@
           "claim_revision": 1,
           "evidence": "chondrocyte and cartilage mechanics",
           "evidence_tier": "direct",
-          "id": "CV112",
+          "id": "whasil-lee:CV112",
           "label": "Tissue biomechanics",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
@@ -11033,7 +11033,7 @@
           "claim_revision": 1,
           "evidence": "mechanosensitive ion channels in musculoskeletal cells",
           "evidence_tier": "direct",
-          "id": "CV114",
+          "id": "whasil-lee:CV114",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "source_urls": [
             "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
@@ -11076,7 +11076,7 @@
           "claim_revision": 1,
           "evidence": "optomechanical microwave-photonic signal processing",
           "evidence_tier": "corroborated",
-          "id": "CV043",
+          "id": "william-renninger:CV043",
           "label": "RF and microwave electronics",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
@@ -11094,7 +11094,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast pulsed nonlinear optics",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "william-renninger:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
@@ -11112,7 +11112,7 @@
           "claim_revision": 1,
           "evidence": "Brillouin photon-phonon interactions",
           "evidence_tier": "corroborated",
-          "id": "CV109",
+          "id": "william-renninger:CV109",
           "label": "Excitons, polaritons, and light-matter coupling",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
@@ -11156,7 +11156,7 @@
           "claim_revision": 1,
           "evidence": "petawatt laser experiments",
           "evidence_tier": "direct",
-          "id": "CV095",
+          "id": "wolfgang-theobald:CV095",
           "label": "High-power and high-energy laser systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
@@ -11173,7 +11173,7 @@
           "claim_revision": 1,
           "evidence": "short-pulse laser-plasma interaction",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "wolfgang-theobald:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
@@ -11190,7 +11190,7 @@
           "claim_revision": 1,
           "evidence": "short-pulse laser-plasma interaction",
           "evidence_tier": "direct",
-          "id": "CV197",
+          "id": "wolfgang-theobald:CV197",
           "label": "Laser-plasma interaction",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
@@ -11236,7 +11236,7 @@
           "claim_revision": 1,
           "evidence": "vacuum-deposited battery films",
           "evidence_tier": "direct",
-          "id": "CV167",
+          "id": "wyatt-e-tenhaeff:CV167",
           "label": "Thin-film deposition and atomic layer deposition",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
@@ -11255,7 +11255,7 @@
           "claim_revision": 1,
           "evidence": "solid-state battery interfaces",
           "evidence_tier": "direct",
-          "id": "CV171",
+          "id": "wyatt-e-tenhaeff:CV171",
           "label": "Electrochemical energy storage",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
@@ -11274,7 +11274,7 @@
           "claim_revision": 1,
           "evidence": "polymer electrolyte thin-film interfaces",
           "evidence_tier": "direct",
-          "id": "CV154",
+          "id": "wyatt-e-tenhaeff:CV154",
           "label": "Polymer membranes and separations",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
@@ -11447,7 +11447,7 @@
           "claim_revision": 1,
           "evidence": "terahertz time-domain spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV094",
+          "id": "xi-cheng-zhang:CV094",
           "label": "Terahertz science and imaging",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
@@ -11465,7 +11465,7 @@
           "claim_revision": 1,
           "evidence": "ultrafast terahertz generation and detection",
           "evidence_tier": "direct",
-          "id": "CV093",
+          "id": "xi-cheng-zhang:CV093",
           "label": "Ultrafast optics and spectroscopy",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
@@ -11483,7 +11483,7 @@
           "claim_revision": 1,
           "evidence": "femtosecond laser-matter spectroscopy",
           "evidence_tier": "direct",
-          "id": "CV096",
+          "id": "xi-cheng-zhang:CV096",
           "label": "Laser-matter interaction and processing",
           "source_urls": [
             "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
@@ -11558,7 +11558,7 @@
           "claim_revision": 1,
           "evidence": "GPU security architecture",
           "evidence_tier": "direct",
-          "id": "CV037",
+          "id": "yanan-guo:CV037",
           "label": "GPU and heterogeneous accelerators",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
@@ -11577,7 +11577,7 @@
           "claim_revision": 1,
           "evidence": "memory-system security",
           "evidence_tier": "direct",
-          "id": "CV039",
+          "id": "yanan-guo:CV039",
           "label": "Memory systems and data locality",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
@@ -11596,7 +11596,7 @@
           "claim_revision": 1,
           "evidence": "software-hardware security boundaries",
           "evidence_tier": "direct",
-          "id": "CV045",
+          "id": "yanan-guo:CV045",
           "label": "Hardware security",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
@@ -11648,7 +11648,7 @@
           "claim_revision": 1,
           "evidence": "machine-learning-guided polymer membrane discovery",
           "evidence_tier": "direct",
-          "id": "CV154",
+          "id": "yasemin-basdogan:CV154",
           "label": "Polymer membranes and separations",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
@@ -11668,7 +11668,7 @@
           "claim_revision": 1,
           "evidence": "molecular dynamics of polymer and solution systems",
           "evidence_tier": "direct",
-          "id": "CV161",
+          "id": "yasemin-basdogan:CV161",
           "label": "Atomistic and molecular simulation",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
@@ -11688,7 +11688,7 @@
           "claim_revision": 1,
           "evidence": "quantum-chemical solvation modeling",
           "evidence_tier": "direct",
-          "id": "CV149",
+          "id": "yasemin-basdogan:CV149",
           "label": "Theoretical and computational chemistry",
           "source_urls": [
             "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
@@ -11887,7 +11887,7 @@
           "claim_revision": 1,
           "evidence": "computational imaging hardware-software co-design",
           "evidence_tier": "direct",
-          "id": "CV064",
+          "id": "yuhao-zhu:CV064",
           "label": "Computational imaging",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
@@ -11905,7 +11905,7 @@
           "claim_revision": 1,
           "evidence": "augmented- and virtual-reality systems architecture",
           "evidence_tier": "direct",
-          "id": "CV055",
+          "id": "yuhao-zhu:CV055",
           "label": "Augmented and virtual reality",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
@@ -11923,7 +11923,7 @@
           "claim_revision": 1,
           "evidence": "perceptually aware computer architecture",
           "evidence_tier": "direct",
-          "id": "CV035",
+          "id": "yuhao-zhu:CV035",
           "label": "Computer architecture",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
@@ -11969,7 +11969,7 @@
           "claim_revision": 1,
           "evidence": "multimodal user-state sensing",
           "evidence_tier": "corroborated",
-          "id": "CV059",
+          "id": "yukang-yan:CV059",
           "label": "Behavioral sensing and modeling",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
@@ -11988,7 +11988,7 @@
           "claim_revision": 1,
           "evidence": "embodied interaction in virtual environments",
           "evidence_tier": "direct",
-          "id": "CV056",
+          "id": "yukang-yan:CV056",
           "label": "Tangible and embodied interfaces",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
@@ -12007,7 +12007,7 @@
           "claim_revision": 1,
           "evidence": "virtual- and augmented-reality interaction techniques",
           "evidence_tier": "direct",
-          "id": "CV055",
+          "id": "yukang-yan:CV055",
           "label": "Augmented and virtual reality",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
@@ -12052,7 +12052,7 @@
           "claim_revision": 1,
           "evidence": "atomic layer deposition on complex geometries",
           "evidence_tier": "corroborated",
-          "id": "CV167",
+          "id": "zachary-robinson:CV167",
           "label": "Thin-film deposition and atomic layer deposition",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
@@ -12073,7 +12073,7 @@
           "claim_revision": 1,
           "evidence": "hydrogen-isotope permeation control",
           "evidence_tier": "corroborated",
-          "id": "CV174",
+          "id": "zachary-robinson:CV174",
           "label": "Hydrogen, tritium, and isotope systems",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
@@ -12094,7 +12094,7 @@
           "claim_revision": 1,
           "evidence": "fusion fuel-cycle materials",
           "evidence_tier": "corroborated",
-          "id": "CV201",
+          "id": "zachary-robinson:CV201",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "source_urls": [
             "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
@@ -12137,7 +12137,7 @@
           "claim_revision": 1,
           "evidence": "analog VLSI for imaging",
           "evidence_tier": "direct",
-          "id": "CV042",
+          "id": "zeljko-ignjatovic:CV042",
           "label": "Analog and mixed-signal electronics",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/ignjatovic_zeljko/index.html",
@@ -12154,7 +12154,7 @@
           "claim_revision": 1,
           "evidence": "analog VLSI for imaging",
           "evidence_tier": "direct",
-          "id": "CV040",
+          "id": "zeljko-ignjatovic:CV040",
           "label": "Integrated circuit design",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/ignjatovic_zeljko/index.html",
@@ -12203,7 +12203,7 @@
           "claim_revision": 1,
           "evidence": "machine-learning models of human interaction",
           "evidence_tier": "direct",
-          "id": "CV058",
+          "id": "zhen-bai:CV058",
           "label": "Affective and social computing",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
@@ -12221,7 +12221,7 @@
           "claim_revision": 1,
           "evidence": "embodied conversational agents for learning",
           "evidence_tier": "direct",
-          "id": "CV056",
+          "id": "zhen-bai:CV056",
           "label": "Tangible and embodied interfaces",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
@@ -12239,7 +12239,7 @@
           "claim_revision": 1,
           "evidence": "tangible and augmented-reality learning interfaces",
           "evidence_tier": "direct",
-          "id": "CV055",
+          "id": "zhen-bai:CV055",
           "label": "Augmented and virtual reality",
           "source_urls": [
             "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
@@ -12286,7 +12286,7 @@
           "claim_revision": 1,
           "evidence": "music information retrieval",
           "evidence_tier": "direct",
-          "id": "CV067",
+          "id": "zhiyao-duan:CV067",
           "label": "Music information and performance technology",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
@@ -12305,7 +12305,7 @@
           "claim_revision": 1,
           "evidence": "audio representation learning",
           "evidence_tier": "direct",
-          "id": "CV014",
+          "id": "zhiyao-duan:CV014",
           "label": "Audio and speech machine learning",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
@@ -12324,7 +12324,7 @@
           "claim_revision": 1,
           "evidence": "music information retrieval",
           "evidence_tier": "direct",
-          "id": "CV020",
+          "id": "zhiyao-duan:CV020",
           "label": "Search and information retrieval",
           "source_urls": [
             "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
@@ -12597,7 +12597,7 @@
       ]
     }
   ],
-  "generation_id": "8d2f8d53cb7fe9e4b8fc74d264eaad01651797f1dab2c19cf055585ea5be71e1",
+  "generation_id": "2e7055bed2e08149149f198a0094ff958b2a544fd2cbaceea1a01792f65ca567",
   "limitations": [
     "The directory may omit relevant faculty and does not imply availability or eligibility.",
     "Only the listed opportunity scopes have a reviewed role model; broad parent programs never receive a team proposal.",
@@ -13876,7 +13876,7 @@
     "unadmitted": 3
   },
   "release_state": "evidence_calibrated_pilot",
-  "researcher_registry_generation": "815b57cbb354e1e410b942a24d95c1c89d161208c9adcd4f1802c6f6144aa26c",
+  "researcher_registry_generation": "8442b0d30fe8b3c04563579f0caea91a81384a9d76401c06960026d6ea28a8df",
   "schema_version": 1,
   "source_hashes": {
     "benchmark_lock": "8c1ae23b0104611e0a7ba3cd802b7c56af9c9b9c2c396b1be3413e43e2b0d255",

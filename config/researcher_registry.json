@@ -1,5 +1,5 @@
 {
-  "registry_generation": "815b57cbb354e1e410b942a24d95c1c89d161208c9adcd4f1802c6f6144aa26c",
+  "registry_generation": "8442b0d30fe8b3c04563579f0caea91a81384a9d76401c06960026d6ea28a8df",
   "researchers": [
     {
       "aliases": [],
@@ -15,7 +15,7 @@
           "evidence_level": "direct",
           "label": "Freeform and gradient-index optics",
           "legacy_claim_ids": [
-            "CV077"
+            "aaron-bauer:CV077"
           ],
           "material_hash": "021c69f835af98e7fbb49a443959b0fac28d37a240a94082dfb3e42b5625df83",
           "revision": 1,
@@ -37,7 +37,7 @@
           "evidence_level": "direct",
           "label": "Augmented and virtual reality",
           "legacy_claim_ids": [
-            "CV055"
+            "aaron-bauer:CV055"
           ],
           "material_hash": "efc776b8702269b450367465cb6b665a334569da7bc642d99509f012ea7ab21f",
           "revision": 1,
@@ -93,7 +93,7 @@
           "evidence_level": "direct",
           "label": "Natural language processing",
           "legacy_claim_ids": [
-            "CV011"
+            "aaron-white:CV011"
           ],
           "material_hash": "8f99e81139afa500a08492f454d93a25aa123368c8a19698f71ebb698d7fa2c5",
           "revision": 1,
@@ -152,7 +152,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "adam-sefkow:CV193"
           ],
           "material_hash": "594381bcea67353a0a58202c7ab55eb72cdad05d89d8ee85e9759ea23ca25d31",
           "revision": 1,
@@ -176,7 +176,7 @@
           "evidence_level": "direct",
           "label": "Magnetohydrodynamics",
           "legacy_claim_ids": [
-            "CV187"
+            "adam-sefkow:CV187"
           ],
           "material_hash": "bbb86c7800c817846cd632595a00dde32ef971ddf5730e7b953ad43741cff27d",
           "revision": 1,
@@ -200,7 +200,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "adam-sefkow:CV196"
           ],
           "material_hash": "e054926892fe0aff8efcf751bd8396dc78fa31793f1d44585c97cc732d0fe677",
           "revision": 1,
@@ -264,7 +264,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical interfaces and redox chemistry",
           "legacy_claim_ids": [
-            "CV147"
+            "agnes-e-thorarinsdottir:CV147"
           ],
           "material_hash": "ffa0d843fe4f788c67d517b2b4b8a358879b642cb515bff775140f476319629d",
           "revision": 1,
@@ -288,7 +288,7 @@
           "evidence_level": "corroborated",
           "label": "Electrocatalysis",
           "legacy_claim_ids": [
-            "CV140"
+            "agnes-e-thorarinsdottir:CV140"
           ],
           "material_hash": "895c82adc8dc102fb34a26898d7a06b1051a128c55fadb54b8cbc94c94e912b3",
           "revision": 1,
@@ -312,7 +312,7 @@
           "evidence_level": "corroborated",
           "label": "Porous and framework materials",
           "legacy_claim_ids": [
-            "CV144"
+            "agnes-e-thorarinsdottir:CV144"
           ],
           "material_hash": "00e061215706a935711a66a103408913039d10fc94cb5cf6dd47cc0480188b04",
           "revision": 1,
@@ -375,7 +375,7 @@
           "evidence_level": "direct",
           "label": "Surface and interface chemistry",
           "legacy_claim_ids": [
-            "CV145"
+            "alexander-a-shestopalov:CV145"
           ],
           "material_hash": "966b46476308c47802376440ac3bd10231e97417bbfc9abff55ae1f5ff456d4b",
           "revision": 1,
@@ -399,7 +399,7 @@
           "evidence_level": "direct",
           "label": "Surface functionalization and protective coatings",
           "legacy_claim_ids": [
-            "CV166"
+            "alexander-a-shestopalov:CV166"
           ],
           "material_hash": "f35e54b2dd20ec8867862b7dc99219780dbbefc644026e7ebb5f4d9472d059b4",
           "revision": 1,
@@ -599,7 +599,7 @@
           "evidence_level": "direct",
           "label": "Granular and architected materials",
           "legacy_claim_ids": [
-            "CV165"
+            "alice-c-quillen:CV165"
           ],
           "material_hash": "191c9827d4614f2ba0ec3202c94232b15c688139052ae2b3ac59fab6b3e841cc",
           "revision": 1,
@@ -624,7 +624,7 @@
           "evidence_level": "direct",
           "label": "Planetary, astrophysical, and orbital dynamics",
           "legacy_claim_ids": [
-            "CV192"
+            "alice-c-quillen:CV192"
           ],
           "material_hash": "43f8cc5b8bcfcd3e5197758e1926fb59a0c19a67e5bbddc5c30febbeb3505a2a",
           "revision": 1,
@@ -684,7 +684,7 @@
           "evidence_level": "direct",
           "label": "Synthetic biology",
           "legacy_claim_ids": [
-            "CV133"
+            "allison-j-lopatkin:CV133"
           ],
           "material_hash": "6ea9df9184427c3978eb3d6a46b2603943096048f2ebfab2610fa2e20e611ee2",
           "revision": 1,
@@ -708,7 +708,7 @@
           "evidence_level": "direct",
           "label": "Metabolic engineering",
           "legacy_claim_ids": [
-            "CV134"
+            "allison-j-lopatkin:CV134"
           ],
           "material_hash": "3118b37693a0fa197dab120824c5efa361a44118d95ca36c229ffd44cfd8734b",
           "revision": 1,
@@ -898,7 +898,7 @@
           "evidence_level": "direct",
           "label": "Thermal transport and temperature metrology",
           "legacy_claim_ids": [
-            "CV170"
+            "andrea-pickel:CV170"
           ],
           "material_hash": "214fb0d6660ae787aa615c5a2f46455de18644e3d211fce01bcc1dc37e7bf5a4",
           "revision": 1,
@@ -960,7 +960,7 @@
           "evidence_level": "direct",
           "label": "Fluorescence and Raman optical methods",
           "legacy_claim_ids": [
-            "CV086"
+            "andrew-j-berger:CV086"
           ],
           "material_hash": "a9c86b377e45dbf8294ba113889db2a72ccd9d84d14d11d68ea9cdfb71ef0b40",
           "revision": 1,
@@ -984,7 +984,7 @@
           "evidence_level": "direct",
           "label": "Biomedical optics and tissue spectroscopy",
           "legacy_claim_ids": [
-            "CV084"
+            "andrew-j-berger:CV084"
           ],
           "material_hash": "d84aeeaec19da68f0c9540ca0bf58f463c8351c89718df4e58eab4b01ed70678",
           "revision": 1,
@@ -1043,7 +1043,7 @@
           "evidence_level": "corroborated",
           "label": "Quantum sensing and metrology",
           "legacy_claim_ids": [
-            "CV100"
+            "andrew-n-jordan:CV100"
           ],
           "material_hash": "fb99d29bf43b62025d860fab0aeea8f55625978bd900215e875852bc51e799bb",
           "revision": 1,
@@ -1099,7 +1099,7 @@
           "evidence_level": "direct",
           "label": "Auditory neuroscience and hearing technology",
           "legacy_claim_ids": [
-            "CV125"
+            "anne-e-luebke:CV125"
           ],
           "material_hash": "11c257c97eb7f447b9b639ab83d350138480291fda5d37b95e50582d217051d3",
           "revision": 1,
@@ -1155,7 +1155,7 @@
           "evidence_level": "direct",
           "label": "Biomaterials and engineered living materials",
           "legacy_claim_ids": [
-            "CV130"
+            "anne-s-meyer:CV130"
           ],
           "material_hash": "eb0268f79d2bbbe66005b39829d8eacc3b7ec55fb2a8e94c87b586b7d2c0b2b4",
           "revision": 1,
@@ -1178,7 +1178,7 @@
           "evidence_level": "direct",
           "label": "Synthetic biology",
           "legacy_claim_ids": [
-            "CV133"
+            "anne-s-meyer:CV133"
           ],
           "material_hash": "fb692841254aaeeb1a7f7dadbfef096082101936012cd552bc4f88aadef1c02c",
           "revision": 1,
@@ -1201,7 +1201,7 @@
           "evidence_level": "direct",
           "label": "Biomanufacturing and engineered cells",
           "legacy_claim_ids": [
-            "CV138"
+            "anne-s-meyer:CV138"
           ],
           "material_hash": "b0abfa2f1e275f65d284fae7c1440b3f3ffe3ad36efffe745151b11f65369fd6",
           "revision": 1,
@@ -1261,7 +1261,7 @@
           "evidence_level": "direct",
           "label": "Algorithmic game theory",
           "legacy_claim_ids": [
-            "CV029"
+            "anson-kahng:CV029"
           ],
           "material_hash": "c34a593c5b690792f62a00168b0e0a179bf6a287382edd9b719e2ad8877f48dd",
           "revision": 1,
@@ -1284,7 +1284,7 @@
           "evidence_level": "direct",
           "label": "Computational social choice",
           "legacy_claim_ids": [
-            "CV030"
+            "anson-kahng:CV030"
           ],
           "material_hash": "fe929c7676883a09f2d630e7e94963952525d03a972b484fc7b370b8437cea9d",
           "revision": 1,
@@ -1354,7 +1354,7 @@
           "evidence_level": "direct",
           "label": "Water treatment and contaminant remediation",
           "legacy_claim_ids": [
-            "CV179"
+            "astrid-m-muller:CV179"
           ],
           "material_hash": "ea53054382f60bf62a9736d140530aed008ce6c45c5e9bfde4ace757a15321ba",
           "revision": 1,
@@ -1378,7 +1378,7 @@
           "evidence_level": "direct",
           "label": "Surface and interface chemistry",
           "legacy_claim_ids": [
-            "CV145"
+            "astrid-m-muller:CV145"
           ],
           "material_hash": "fe97ae9e8a480ac710311b4473d1f98e18778848eb24f6b9aea5168c1cd11e6f",
           "revision": 1,
@@ -1402,7 +1402,7 @@
           "evidence_level": "corroborated",
           "label": "Electrocatalysis",
           "legacy_claim_ids": [
-            "CV140"
+            "astrid-m-muller:CV140"
           ],
           "material_hash": "39a59cb1e0ba430ef3242e25c70bdbce62f43eba253497a2f3c183074aadfd3a",
           "revision": 1,
@@ -1620,7 +1620,7 @@
           "evidence_level": "direct",
           "label": "Biomaterials and engineered living materials",
           "legacy_claim_ids": [
-            "CV130"
+            "benjamin-e-partridge:CV130"
           ],
           "material_hash": "87f06d9152ee3ba326d305b2ad784832d74b21b1221bdcc3bd4355bc2337d4e7",
           "revision": 1,
@@ -1643,7 +1643,7 @@
           "evidence_level": "direct",
           "label": "Supramolecular and self-assembly chemistry",
           "legacy_claim_ids": [
-            "CV150"
+            "benjamin-e-partridge:CV150"
           ],
           "material_hash": "b698cf7a1fe7d90f7f4c8d7c0615508450505b713676785311c88a2aa9c960ff",
           "revision": 1,
@@ -1666,7 +1666,7 @@
           "evidence_level": "direct",
           "label": "Protein and peptide engineering",
           "legacy_claim_ids": [
-            "CV137"
+            "benjamin-e-partridge:CV137"
           ],
           "material_hash": "bd3280e34b63e0719c07de787edfdfc5b8162620435f9e66f683182d979a0013",
           "revision": 1,
@@ -1725,7 +1725,7 @@
           "evidence_level": "direct",
           "label": "Silicon photonics",
           "legacy_claim_ids": [
-            "CV088"
+            "benjamin-l-miller:CV088"
           ],
           "material_hash": "7a40fe6fb2c8d6fd5f923a789bd3a4ad792ce2e955ca75083ceba8eb209a02db",
           "revision": 1,
@@ -1751,7 +1751,7 @@
           "evidence_level": "direct",
           "label": "Organ-on-chip and microphysiological systems",
           "legacy_claim_ids": [
-            "CV117"
+            "benjamin-l-miller:CV117"
           ],
           "material_hash": "34af66add2fe5a787fe278a7676c9c40de3a4582e0ec53084e36d1e3d91f92c1",
           "revision": 1,
@@ -1777,7 +1777,7 @@
           "evidence_level": "corroborated",
           "label": "Electronic-photonic integration",
           "legacy_claim_ids": [
-            "CV044"
+            "benjamin-l-miller:CV044"
           ],
           "material_hash": "e1812533ac14e216aa8cafad404668e720e1f6afcfbd784f67c733b91459d0e6",
           "revision": 1,
@@ -1840,7 +1840,7 @@
           "evidence_level": "corroborated",
           "label": "Climate, ocean, and landscape systems",
           "legacy_claim_ids": [
-            "CV180"
+            "benjamin-storer:CV180"
           ],
           "material_hash": "012c514b09c7b5e04174f8993a2c629e6e6aba518c9cbfe195eb2962b56e1cd6",
           "revision": 1,
@@ -1863,7 +1863,7 @@
           "evidence_level": "corroborated",
           "label": "Turbulence and multiscale flow",
           "legacy_claim_ids": [
-            "CV185"
+            "benjamin-storer:CV185"
           ],
           "material_hash": "6a5e3fe584a7e4a09e628deabba71d885f9abcc9ea1f02f73e595f8a35e95dd6",
           "revision": 1,
@@ -1886,7 +1886,7 @@
           "evidence_level": "corroborated",
           "label": "Geophysical and ocean fluid dynamics",
           "legacy_claim_ids": [
-            "CV186"
+            "benjamin-storer:CV186"
           ],
           "material_hash": "dcc9ffb96406a1ef3b381a666ff5b570662277c7b22665e84ba71773043d855e",
           "revision": 1,
@@ -1940,7 +1940,7 @@
           "evidence_level": "direct",
           "label": "Diagnostic ultrasound and elastography",
           "legacy_claim_ids": [
-            "CV121"
+            "benjamin-castaneda:CV121"
           ],
           "material_hash": "4dc5416999f971562b384b077c78bcf012dbaf3272ef3ab463a8715ac0cac928",
           "revision": 1,
@@ -1996,7 +1996,7 @@
           "evidence_level": "direct",
           "label": "Biomaterials and engineered living materials",
           "legacy_claim_ids": [
-            "CV130"
+            "bradley-l-nilsson:CV130"
           ],
           "material_hash": "c37fd4a21cfa66628cf132ad29f237f7d352b0628887c066cef5f2fead69d11c",
           "revision": 1,
@@ -2019,7 +2019,7 @@
           "evidence_level": "direct",
           "label": "Supramolecular and self-assembly chemistry",
           "legacy_claim_ids": [
-            "CV150"
+            "bradley-l-nilsson:CV150"
           ],
           "material_hash": "1647311cc8b2050f3b8709e3fd56ac1ac096aff39628d5ae3845e780eb37d460",
           "revision": 1,
@@ -2042,7 +2042,7 @@
           "evidence_level": "direct",
           "label": "Protein and peptide engineering",
           "legacy_claim_ids": [
-            "CV137"
+            "bradley-l-nilsson:CV137"
           ],
           "material_hash": "fd4528cb872bbcf38b39f4ac8ed57cd0c954b1c8ecd2f1c8803b3643ccc46c7b",
           "revision": 1,
@@ -2102,7 +2102,7 @@
           "evidence_level": "direct",
           "label": "Organometallic and inorganic synthesis",
           "legacy_claim_ids": [
-            "CV146"
+            "brandon-r-barnett:CV146"
           ],
           "material_hash": "01bd82b090808287e4c2eb145364f73a1d9fdf6865482180387eb21976d57fc3",
           "revision": 1,
@@ -2126,7 +2126,7 @@
           "evidence_level": "direct",
           "label": "Porous and framework materials",
           "legacy_claim_ids": [
-            "CV144"
+            "brandon-r-barnett:CV144"
           ],
           "material_hash": "94561139637351a315c5d9e39515aedcea9934291ebaab09e380f82a62ca3e3c",
           "revision": 1,
@@ -2150,7 +2150,7 @@
           "evidence_level": "direct",
           "label": "Hydrogen, tritium, and isotope systems",
           "legacy_claim_ids": [
-            "CV174"
+            "brandon-r-barnett:CV174"
           ],
           "material_hash": "56c0358b6389d825f5888347d3cf1920116454b358a93af927f06008cd20a34b",
           "revision": 1,
@@ -2211,7 +2211,7 @@
           "evidence_level": "direct",
           "label": "High-power and high-energy laser systems",
           "legacy_claim_ids": [
-            "CV095"
+            "brian-kruschwitz:CV095"
           ],
           "material_hash": "d74a169de69095434721e01d2aba87a96476c750cd9d3943e660145bfc2683b7",
           "revision": 1,
@@ -2233,7 +2233,7 @@
           "evidence_level": "direct",
           "label": "Adaptive optics",
           "legacy_claim_ids": [
-            "CV082"
+            "brian-kruschwitz:CV082"
           ],
           "material_hash": "58d9ed39663d87bb8ce62f39fd8948ba62611f931148c37978facbc1fe417953",
           "revision": 1,
@@ -2290,7 +2290,7 @@
           "evidence_level": "direct",
           "label": "Compilers and runtime systems",
           "legacy_claim_ids": [
-            "CV038"
+            "chen-ding:CV038"
           ],
           "material_hash": "747c6035eeb02a479d55bf11fca7afd8ae664af40762fe1b2e91ba71aac85278",
           "revision": 1,
@@ -2313,7 +2313,7 @@
           "evidence_level": "direct",
           "label": "Memory systems and data locality",
           "legacy_claim_ids": [
-            "CV039"
+            "chen-ding:CV039"
           ],
           "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24",
           "revision": 1,
@@ -2373,7 +2373,7 @@
           "evidence_level": "direct",
           "label": "Computer vision",
           "legacy_claim_ids": [
-            "CV013"
+            "chenliang-xu:CV013"
           ],
           "material_hash": "c819c3c09b9345cb57ddb661d1a202664fb688215ad2967b078a1b288db847ee",
           "revision": 1,
@@ -2433,7 +2433,7 @@
           "evidence_level": "direct",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "legacy_claim_ids": [
-            "CV114"
+            "cherice-natasha-hill:CV114"
           ],
           "material_hash": "4bb4ad95f7b7584845e965f7bf40ea6fefc716cf588a882e4346d1a997906c2c",
           "revision": 1,
@@ -2491,7 +2491,7 @@
           "evidence_level": "direct",
           "label": "Auditory neuroscience and hearing technology",
           "legacy_claim_ids": [
-            "CV125"
+            "choongheon-lee:CV125"
           ],
           "material_hash": "45d3698527d732372007bacf3ecda71d8a524c02571c52dff33fb221235382e4",
           "revision": 1,
@@ -2513,7 +2513,7 @@
           "evidence_level": "direct",
           "label": "Vestibular and inner-ear therapeutics",
           "legacy_claim_ids": [
-            "CV126"
+            "choongheon-lee:CV126"
           ],
           "material_hash": "8a5b02d4378f669e895e1ea14f639643f4e8635ed2d1f0c759acee25d64af000",
           "revision": 1,
@@ -2569,7 +2569,7 @@
           "evidence_level": "direct",
           "label": "Computer vision",
           "legacy_claim_ids": [
-            "CV013"
+            "christopher-kanan:CV013"
           ],
           "material_hash": "1713aca320ef557346b87978f7347a3215c7d1edba2db4c58909f2dfc22fee1c",
           "revision": 1,
@@ -2631,7 +2631,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "chuang-ren:CV193"
           ],
           "material_hash": "361f6880fd82419fdbd7eba61d1f72add14dd52e5ec4b1ac604ea4ddc2a715d8",
           "revision": 1,
@@ -2653,7 +2653,7 @@
           "evidence_level": "direct",
           "label": "Laser-plasma interaction",
           "legacy_claim_ids": [
-            "CV197"
+            "chuang-ren:CV197"
           ],
           "material_hash": "12bcdc6724f3f74adab06025676df65d030479741d2a85a2266b3b9baf382fad",
           "revision": 1,
@@ -2675,7 +2675,7 @@
           "evidence_level": "direct",
           "label": "Plasma simulation and particle-in-cell methods",
           "legacy_claim_ids": [
-            "CV198"
+            "chuang-ren:CV198"
           ],
           "material_hash": "28991c632c89ccdd10441f50942435f59098d36934454a2154ea8343dffafd37",
           "revision": 1,
@@ -2731,7 +2731,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "chunlei-guo:CV093"
           ],
           "material_hash": "adf48567b82ee6d80640f33ed129f92e7389d469e3686f2501f88b3b60aa89f3",
           "revision": 1,
@@ -2755,7 +2755,7 @@
           "evidence_level": "direct",
           "label": "Laser-matter interaction and processing",
           "legacy_claim_ids": [
-            "CV096"
+            "chunlei-guo:CV096"
           ],
           "material_hash": "d018e23ec4c54aa40baefc9a732aca59b9ef457c8a9a9ed9e8722d3b14750707",
           "revision": 1,
@@ -2779,7 +2779,7 @@
           "evidence_level": "direct",
           "label": "Surface functionalization and protective coatings",
           "legacy_claim_ids": [
-            "CV166"
+            "chunlei-guo:CV166"
           ],
           "material_hash": "3d59c359cd1ca7e9bd76a6d9c016132d0444d6155f3f807da217bbad0633ac9e",
           "revision": 1,
@@ -2840,7 +2840,7 @@
           "evidence_level": "direct",
           "label": "X-ray diffraction and crystallography",
           "legacy_claim_ids": [
-            "CV160"
+            "danae-polsin:CV160"
           ],
           "material_hash": "f109aa0f8bef3ab7a67f505bc1a48a76c61ab868aa5be2716427dc0894d74980",
           "revision": 1,
@@ -2862,7 +2862,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "danae-polsin:CV093"
           ],
           "material_hash": "87db1e48633ddac70c2c23965b97e5d82f002a99c9026a503209cdec1abad75e",
           "revision": 1,
@@ -2884,7 +2884,7 @@
           "evidence_level": "direct",
           "label": "Shock compression and extreme-pressure materials",
           "legacy_claim_ids": [
-            "CV200"
+            "danae-polsin:CV200"
           ],
           "material_hash": "b8a716eda67a334b84ca806a5573cc5fef86fbf59df6cfb1b67b79e134825c13",
           "revision": 1,
@@ -2941,7 +2941,7 @@
           "evidence_level": "direct",
           "label": "Natural language processing",
           "legacy_claim_ids": [
-            "CV011"
+            "daniel-gildea:CV011"
           ],
           "material_hash": "1eb251aa2ba086d619d21405b90f445cec571c6d848eb9d366f8dae40376d013",
           "revision": 1,
@@ -2999,7 +2999,7 @@
           "evidence_level": "direct",
           "label": "Stochastic optimization and sampling",
           "legacy_claim_ids": [
-            "CV024"
+            "daniel-stefankovic:CV024"
           ],
           "material_hash": "ad080b75435521026f2feb4594f8e2f7ce80e42cc6f97ca19f305a865014ff0f",
           "revision": 1,
@@ -3022,7 +3022,7 @@
           "evidence_level": "direct",
           "label": "Combinatorics and graph algorithms",
           "legacy_claim_ids": [
-            "CV025"
+            "daniel-stefankovic:CV025"
           ],
           "material_hash": "c025d77b285d9147fa06eb8267659bcab2b7e7bcef2a5858294171428d89c09c",
           "revision": 1,
@@ -3045,7 +3045,7 @@
           "evidence_level": "direct",
           "label": "Pseudorandomness and discrete Fourier methods",
           "legacy_claim_ids": [
-            "CV026"
+            "daniel-stefankovic:CV026"
           ],
           "material_hash": "d482808316aac4c31ac5bd20e47b060689c19329007bfee498dccc13a3e50483",
           "revision": 1,
@@ -3101,7 +3101,7 @@
           "evidence_level": "direct",
           "label": "Tangible and embodied interfaces",
           "legacy_claim_ids": [
-            "CV056"
+            "darren-lipomi:CV056"
           ],
           "material_hash": "ef8cbd1386ee280d1b34b7b5611dc5b3641358f819beb56c88257de4d19a1a4a",
           "revision": 1,
@@ -3128,7 +3128,7 @@
           "evidence_level": "direct",
           "label": "Functional and conducting polymers",
           "legacy_claim_ids": [
-            "CV153"
+            "darren-lipomi:CV153"
           ],
           "material_hash": "d7eb7aa53bd588551a9683c2badab3c57a000a9136fbddf379055f6341260137",
           "revision": 1,
@@ -3346,7 +3346,7 @@
           "evidence_level": "direct",
           "label": "Thin-film deposition and atomic layer deposition",
           "legacy_claim_ids": [
-            "CV167"
+            "david-r-harding:CV167"
           ],
           "material_hash": "18d9d6155b4586e3a340f1eb71aad7a6465675d53fa21010c5d0d640b18e6851",
           "revision": 1,
@@ -3368,7 +3368,7 @@
           "evidence_level": "direct",
           "label": "Hydrogen, tritium, and isotope systems",
           "legacy_claim_ids": [
-            "CV174"
+            "david-r-harding:CV174"
           ],
           "material_hash": "b3e73a228987d5e220b330d185d1439d6c94d75e9bcd98b98006c6b767574bbd",
           "revision": 1,
@@ -3390,7 +3390,7 @@
           "evidence_level": "direct",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "legacy_claim_ids": [
-            "CV201"
+            "david-r-harding:CV201"
           ],
           "material_hash": "cf8b8c8c3cef0907a9f022c28b2e8a408fa7180d539be391bb5ceadbfdc60498",
           "revision": 1,
@@ -3446,7 +3446,7 @@
           "evidence_level": "corroborated",
           "label": "Computational imaging",
           "legacy_claim_ids": [
-            "CV064"
+            "david-r-williams:CV064"
           ],
           "material_hash": "1bce8e460e779e6fcc8c4c89723d5c1f5fa320691d3793e2eb88af9f61b667e3",
           "revision": 1,
@@ -3471,7 +3471,7 @@
           "evidence_level": "corroborated",
           "label": "Inverse problems and image reconstruction",
           "legacy_claim_ids": [
-            "CV073"
+            "david-r-williams:CV073"
           ],
           "material_hash": "503a7715a3ef4eb085306a90ff81d20b07d7038fd5527acc2e5bbbacc50efa68",
           "revision": 1,
@@ -3496,7 +3496,7 @@
           "evidence_level": "direct",
           "label": "Ophthalmic and retinal optics",
           "legacy_claim_ids": [
-            "CV083"
+            "david-r-williams:CV083"
           ],
           "material_hash": "5c27d6da64d45b5610ca84703065237419408c9792e6cdab4aa3d38a5fb32716",
           "revision": 1,
@@ -3557,7 +3557,7 @@
           "evidence_level": "direct",
           "label": "Fluorescence and Raman optical methods",
           "legacy_claim_ids": [
-            "CV086"
+            "david-w-mccamant:CV086"
           ],
           "material_hash": "263cf28102f262030bff3f67c38bd1bc792f1d7e244c39f26edb470d52d3f45b",
           "revision": 1,
@@ -3580,7 +3580,7 @@
           "evidence_level": "direct",
           "label": "Atomistic and molecular simulation",
           "legacy_claim_ids": [
-            "CV161"
+            "david-w-mccamant:CV161"
           ],
           "material_hash": "9f2fe79368cada22115daa95b350acd69c3fdd41086b4d5ef2b6b75e0a18c2ec",
           "revision": 1,
@@ -3603,7 +3603,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "david-w-mccamant:CV093"
           ],
           "material_hash": "e26aec6c81b18d7a33ba011b7c9f4de7ce5bd4ca0888063ef62d42595a3edded",
           "revision": 1,
@@ -3660,7 +3660,7 @@
           "evidence_level": "direct",
           "label": "Toxicology and biological-effects models",
           "legacy_claim_ids": [
-            "CV132"
+            "diane-dalecki:CV132"
           ],
           "material_hash": "1111090fada29b917e60adfe915054a0a2b329d060751694370a4c421eb4d1cc",
           "revision": 1,
@@ -3683,7 +3683,7 @@
           "evidence_level": "direct",
           "label": "Regenerative medicine and tissue engineering",
           "legacy_claim_ids": [
-            "CV116"
+            "diane-dalecki:CV116"
           ],
           "material_hash": "8ee3afb7fccf6a183b34c419c30beef6c7710bc5634d6fc0884593b4abaa77fd",
           "revision": 1,
@@ -3706,7 +3706,7 @@
           "evidence_level": "direct",
           "label": "Acoustics and vibroacoustics",
           "legacy_claim_ids": [
-            "CV190"
+            "diane-dalecki:CV190"
           ],
           "material_hash": "c92002151cb65d7b51bdd5af54fd5f91706f4de9ea47d804032c801f065dc587",
           "revision": 1,
@@ -3762,7 +3762,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical energy storage",
           "legacy_claim_ids": [
-            "CV171"
+            "douglas-h-kelley:CV171"
           ],
           "material_hash": "0bc28259a8a595c5ac5bb4aeeedfbe42048e7e3dd9d6c3c05bff9da12d00fa81",
           "revision": 1,
@@ -3786,7 +3786,7 @@
           "evidence_level": "direct",
           "label": "Cerebral fluid mechanics and glymphatic transport",
           "legacy_claim_ids": [
-            "CV124"
+            "douglas-h-kelley:CV124"
           ],
           "material_hash": "81d614e6fab534f8f05b49ad19cdcf69fadc54014f0eb81ad00ceeb9eed4fa55",
           "revision": 1,
@@ -3810,7 +3810,7 @@
           "evidence_level": "direct",
           "label": "Vestibular and inner-ear therapeutics",
           "legacy_claim_ids": [
-            "CV126"
+            "douglas-h-kelley:CV126"
           ],
           "material_hash": "83455e7d2bc0f4885190b5da684783d508f1f298a335924aa38f25ed3acbb663",
           "revision": 1,
@@ -3872,7 +3872,7 @@
           "evidence_level": "direct",
           "label": "Power delivery and clock distribution",
           "legacy_claim_ids": [
-            "CV041"
+            "eby-g-friedman:CV041"
           ],
           "material_hash": "86780feac63539601136c1b2a83780504eafb2cbf7928a707354e4ed44bbddc1",
           "revision": 1,
@@ -3894,7 +3894,7 @@
           "evidence_level": "direct",
           "label": "Integrated circuit design",
           "legacy_claim_ids": [
-            "CV040"
+            "eby-g-friedman:CV040"
           ],
           "material_hash": "8c38ec2589478e8bc87ffc574544c28005c7815c3e7933962ef932008ed486a4",
           "revision": 1,
@@ -3951,7 +3951,7 @@
           "evidence_level": "direct",
           "label": "Auditory neuroscience and hearing technology",
           "legacy_claim_ids": [
-            "CV125"
+            "edmund-lalor:CV125"
           ],
           "material_hash": "b6d7dd3b05055c64b0c4f7db136e720d8e0ac7a3a9aacb1f8f418b80a49528b0",
           "revision": 1,
@@ -4007,7 +4007,7 @@
           "evidence_level": "direct",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "legacy_claim_ids": [
-            "CV075"
+            "edward-brown-iii:CV075"
           ],
           "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
           "revision": 1,
@@ -4063,7 +4063,7 @@
           "evidence_level": "corroborated",
           "label": "Behavioral sensing and modeling",
           "legacy_claim_ids": [
-            "CV059"
+            "ehsan-hoque:CV059"
           ],
           "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
           "revision": 1,
@@ -4087,7 +4087,7 @@
           "evidence_level": "corroborated",
           "label": "Affective and social computing",
           "legacy_claim_ids": [
-            "CV058"
+            "ehsan-hoque:CV058"
           ],
           "material_hash": "f5a79229ff8842767badf891b2e03bca548f3c3ffd84aea5b94d6bfdb9487a84",
           "revision": 1,
@@ -4149,7 +4149,7 @@
           "evidence_level": "direct",
           "label": "Metasurfaces and metamaterials",
           "legacy_claim_ids": [
-            "CV090"
+            "eileen-otte:CV090"
           ],
           "material_hash": "8a8c1403ad703de3296be78fd1ecebaedddbc439c7b7c281a75181e9f3bd25ce",
           "revision": 1,
@@ -4212,7 +4212,7 @@
           "evidence_level": "direct",
           "label": "Cell mechanics, adhesion, and cytoskeleton",
           "legacy_claim_ids": [
-            "CV115"
+            "elena-lomakina:CV115"
           ],
           "material_hash": "70d1bb16c61b3eba8643fbff0671f836696ce62e8310099b0345b1f556ac8aad",
           "revision": 1,
@@ -4269,7 +4269,7 @@
           "evidence_level": "direct",
           "label": "Organometallic and inorganic synthesis",
           "legacy_claim_ids": [
-            "CV146"
+            "ellen-matson:CV146"
           ],
           "material_hash": "2296b2e20b7d89cb516a9b6bd04a256774179c319b434cf290e7d9bf76de2029",
           "revision": 1,
@@ -4293,7 +4293,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical interfaces and redox chemistry",
           "legacy_claim_ids": [
-            "CV147"
+            "ellen-matson:CV147"
           ],
           "material_hash": "7fbdc97dbc2b81d854431e60054a5b5f5358692fab8e7283afc47f0f9a7b8111",
           "revision": 1,
@@ -4351,7 +4351,7 @@
           "evidence_level": "direct",
           "label": "Search and information retrieval",
           "legacy_claim_ids": [
-            "CV020"
+            "fatemeh-nargesian:CV020"
           ],
           "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
           "revision": 1,
@@ -4411,7 +4411,7 @@
           "evidence_level": "direct",
           "label": "Water treatment and contaminant remediation",
           "legacy_claim_ids": [
-            "CV179"
+            "gang-fan:CV179"
           ],
           "material_hash": "b065d77b83391d3e8487dbe2f20dd12b0460363373f5b991d80923f12623f621",
           "revision": 1,
@@ -4436,7 +4436,7 @@
           "evidence_level": "direct",
           "label": "Synthetic biology",
           "legacy_claim_ids": [
-            "CV133"
+            "gang-fan:CV133"
           ],
           "material_hash": "5e6685fc12fdf1db983888d71e7a2db5893b32c038cad219062199310fb1a38d",
           "revision": 1,
@@ -4461,7 +4461,7 @@
           "evidence_level": "direct",
           "label": "Metabolic engineering",
           "legacy_claim_ids": [
-            "CV134"
+            "gang-fan:CV134"
           ],
           "material_hash": "5006a2bc1e9e63f8ba24ff7dbc819988d3c73db3459ccfd78eceebdad98aa464",
           "revision": 1,
@@ -4663,7 +4663,7 @@
           "evidence_level": "direct",
           "label": "Thin-film deposition and atomic layer deposition",
           "legacy_claim_ids": [
-            "CV167"
+            "gary-w-wicks:CV167"
           ],
           "material_hash": "36971d0aadda12e19ed66c16f37e9a625247207a7af65d4b2672463c979f42f3",
           "revision": 1,
@@ -4687,7 +4687,7 @@
           "evidence_level": "direct",
           "label": "Semiconductor optoelectronics",
           "legacy_claim_ids": [
-            "CV107"
+            "gary-w-wicks:CV107"
           ],
           "material_hash": "255e53d4edd5c6ad415bd331880fa4e3105f6a61cb39722559386ed622b2317c",
           "revision": 1,
@@ -4746,7 +4746,7 @@
           "evidence_level": "direct",
           "label": "Computer vision",
           "legacy_claim_ids": [
-            "CV013"
+            "gaurav-sharma:CV013"
           ],
           "material_hash": "fba0f9ad566b36343760c3740b29c3858535a7b665fefe1c4552da322a05aa4c",
           "revision": 1,
@@ -4809,7 +4809,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "gilbert-rip-collins:CV196"
           ],
           "material_hash": "09a08be764f2a912ec12b5690fad1cf69585f147f0105033556c612286c76029",
           "revision": 1,
@@ -4832,7 +4832,7 @@
           "evidence_level": "direct",
           "label": "Shock compression and extreme-pressure materials",
           "legacy_claim_ids": [
-            "CV200"
+            "gilbert-rip-collins:CV200"
           ],
           "material_hash": "7964768ea061032fe9c57b44b68e697c0b94e5676ff83837e6e8793431e38648",
           "revision": 1,
@@ -4855,7 +4855,7 @@
           "evidence_level": "direct",
           "label": "Planetary, astrophysical, and orbital dynamics",
           "legacy_claim_ids": [
-            "CV192"
+            "gilbert-rip-collins:CV192"
           ],
           "material_hash": "daa22ec3434e9c71faffe07c6d682b8e494a34a3f4b94a4b699dfa5bac1a0ea4",
           "revision": 1,
@@ -4916,7 +4916,7 @@
           "evidence_level": "direct",
           "label": "Graph and network analytics",
           "legacy_claim_ids": [
-            "CV021"
+            "gonzalo-mateos:CV021"
           ],
           "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b",
           "revision": 1,
@@ -4978,7 +4978,7 @@
           "evidence_level": "direct",
           "label": "Graph and network analytics",
           "legacy_claim_ids": [
-            "CV021"
+            "gourab-ghoshal:CV021"
           ],
           "material_hash": "be7ce5366bb191494c94af882cb86479195e4d0a9016d8dc726fcd8c77071bf6",
           "revision": 1,
@@ -5036,7 +5036,7 @@
           "evidence_level": "corroborated",
           "label": "Freeform and gradient-index optics",
           "legacy_claim_ids": [
-            "CV077"
+            "greg-schmidt:CV077"
           ],
           "material_hash": "5aabe1224988e82496650cb267bfe98cb194c51db1c97c99fee521c62b677084",
           "revision": 1,
@@ -5058,7 +5058,7 @@
           "evidence_level": "corroborated",
           "label": "Optical metrology",
           "legacy_claim_ids": [
-            "CV080"
+            "greg-schmidt:CV080"
           ],
           "material_hash": "5f53edb37a11afaf57802cef81010da6aa4f3d4d5fc490db7d845dffb10c96ce",
           "revision": 1,
@@ -5110,7 +5110,7 @@
           "evidence_level": "corroborated",
           "label": "Spectral and multispectral imaging",
           "legacy_claim_ids": [
-            "CV074"
+            "gregory-heyworth:CV074"
           ],
           "material_hash": "c9edfe6e4159e523e37aba40bee41c849ffceb560652c22aa77ab80efa8ce990",
           "revision": 1,
@@ -5168,7 +5168,7 @@
           "evidence_level": "corroborated",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "hanan-dery:CV109"
           ],
           "material_hash": "04211dcd879f88c90435500b2b8a3011105a8055c27a4f9078d5c83e03b98a38",
           "revision": 1,
@@ -5193,7 +5193,7 @@
           "evidence_level": "corroborated",
           "label": "Spintronics and magnetic devices",
           "legacy_claim_ids": [
-            "CV108"
+            "hanan-dery:CV108"
           ],
           "material_hash": "a8d228dfcb57779abab41771de8834d6ab1b322352f442025ccc559567c3acea",
           "revision": 1,
@@ -5218,7 +5218,7 @@
           "evidence_level": "corroborated",
           "label": "Two-dimensional and van der Waals materials",
           "legacy_claim_ids": [
-            "CV106"
+            "hanan-dery:CV106"
           ],
           "material_hash": "642465ddb884db279c106201b4a0e715430049d3b5064f2b4eaba5b1e7e325b3",
           "revision": 1,
@@ -5276,7 +5276,7 @@
           "evidence_level": "direct",
           "label": "Natural language processing",
           "legacy_claim_ids": [
-            "CV011"
+            "hangfeng-he:CV011"
           ],
           "material_hash": "4ee3a7f1fcbedea026d374880d21e6e67df233936e12d99820f77a9b8ad963eb",
           "revision": 1,
@@ -5301,7 +5301,7 @@
           "evidence_level": "direct",
           "label": "Large language models",
           "legacy_claim_ids": [
-            "CV012"
+            "hangfeng-he:CV012"
           ],
           "material_hash": "557abe29a3eed6d8458e4a1a4ebd9c058930cef6640ee99fa20d24942b459d9f",
           "revision": 1,
@@ -5363,7 +5363,7 @@
           "evidence_level": "direct",
           "label": "Granular and architected materials",
           "legacy_claim_ids": [
-            "CV165"
+            "hesam-askari:CV165"
           ],
           "material_hash": "42f9f943afc716285379e9853fde5876b86fcb54a93fc9b6a4ef3fc3a0a31fce",
           "revision": 1,
@@ -5388,7 +5388,7 @@
           "evidence_level": "direct",
           "label": "Soft matter and rheology",
           "legacy_claim_ids": [
-            "CV183"
+            "hesam-askari:CV183"
           ],
           "material_hash": "3753846059496d281e4995c520cd1a0852a6cd3d4c857f3d624f08cd55e8ac62",
           "revision": 1,
@@ -5451,7 +5451,7 @@
           "evidence_level": "direct",
           "label": "RF and microwave electronics",
           "legacy_claim_ids": [
-            "CV043"
+            "hui-wu:CV043"
           ],
           "material_hash": "3c9c410ff0ca69e30d8b25ed0f6efb986469c88211d5cca0b20b48a6c0bb13d6",
           "revision": 1,
@@ -5474,7 +5474,7 @@
           "evidence_level": "direct",
           "label": "Silicon photonics",
           "legacy_claim_ids": [
-            "CV088"
+            "hui-wu:CV088"
           ],
           "material_hash": "62263e024ce6f3f8b613c9141c2f1ba97d84514ef4c981b4136076af92086e78",
           "revision": 1,
@@ -5497,7 +5497,7 @@
           "evidence_level": "direct",
           "label": "Electronic-photonic integration",
           "legacy_claim_ids": [
-            "CV044"
+            "hui-wu:CV044"
           ],
           "material_hash": "3b0c838ac55b9fa6079f8472b877ab3ce6327051f2f3fd89ad087a79fd289fab",
           "revision": 1,
@@ -5562,7 +5562,7 @@
           "evidence_level": "direct",
           "label": "Climate, ocean, and landscape systems",
           "legacy_claim_ids": [
-            "CV180"
+            "hussein-aluie:CV180"
           ],
           "material_hash": "fc815aaec31ac8176cf8b71a43268aa12ab0c07b6758a1f24f06c79b5ed84bcc",
           "revision": 1,
@@ -5586,7 +5586,7 @@
           "evidence_level": "direct",
           "label": "Turbulence and multiscale flow",
           "legacy_claim_ids": [
-            "CV185"
+            "hussein-aluie:CV185"
           ],
           "material_hash": "9007f77c65cb4a827b73c34f7cc6322f5d7ee4d65e43f20aa48d7ec0b8db2301",
           "revision": 1,
@@ -5610,7 +5610,7 @@
           "evidence_level": "direct",
           "label": "Magnetohydrodynamics",
           "legacy_claim_ids": [
-            "CV187"
+            "hussein-aluie:CV187"
           ],
           "material_hash": "51f52e8ad4441a84fb7a593b2d434190b0d9fd9efe14141785cd49ccac13345d",
           "revision": 1,
@@ -5672,7 +5672,7 @@
           "evidence_level": "corroborated",
           "label": "Electrochemical energy storage",
           "legacy_claim_ids": [
-            "CV171"
+            "ibrahim-mohammad:CV171"
           ],
           "material_hash": "dd57474cc9f2e3a17a17dd366752beee1418135b95f660d6ed6b09dd1df25fca",
           "revision": 1,
@@ -5696,7 +5696,7 @@
           "evidence_level": "corroborated",
           "label": "Magnetohydrodynamics",
           "legacy_claim_ids": [
-            "CV187"
+            "ibrahim-mohammad:CV187"
           ],
           "material_hash": "e5b31e177bc5dab43c292307db2390e12a1909d24e2973ac70077b113ec4181b",
           "revision": 1,
@@ -5720,7 +5720,7 @@
           "evidence_level": "corroborated",
           "label": "Flow and liquid-metal batteries",
           "legacy_claim_ids": [
-            "CV173"
+            "ibrahim-mohammad:CV173"
           ],
           "material_hash": "0949d6710bcd3f861c0b7c4667109c47b95659202d7ad07340ec4517920015f8",
           "revision": 1,
@@ -5776,7 +5776,7 @@
           "evidence_level": "direct",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "ignacio-franco:CV109"
           ],
           "material_hash": "2fae45a9cf7d8c0a383a82b97963cb8e529718cf08931d723fce03477de23b22",
           "revision": 1,
@@ -5800,7 +5800,7 @@
           "evidence_level": "direct",
           "label": "Open quantum systems and molecular quantum dynamics",
           "legacy_claim_ids": [
-            "CV111"
+            "ignacio-franco:CV111"
           ],
           "material_hash": "92c98fa5f118a189d9ae009ec6d24aa6225a975300bda777b17e4954ac2875e4",
           "revision": 1,
@@ -5858,7 +5858,7 @@
           "evidence_level": "corroborated",
           "label": "X-ray diffraction and crystallography",
           "legacy_claim_ids": [
-            "CV160"
+            "j-ryan-rygg:CV160"
           ],
           "material_hash": "49afad7fe202b62d1186b96039a8943c27afada41fa899f31477061926f215b2",
           "revision": 1,
@@ -5881,7 +5881,7 @@
           "evidence_level": "direct",
           "label": "Shock compression and extreme-pressure materials",
           "legacy_claim_ids": [
-            "CV200"
+            "j-ryan-rygg:CV200"
           ],
           "material_hash": "68e4738fa2e56752a0b89f68ec6d3bd3888d3532a81100b836b51604d942a369",
           "revision": 1,
@@ -5904,7 +5904,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "j-ryan-rygg:CV196"
           ],
           "material_hash": "529be6053af37a4f806dae69e4c69f0641713d81c900c941bde729e123455444",
           "revision": 1,
@@ -5962,7 +5962,7 @@
           "evidence_level": "direct",
           "label": "Music information and performance technology",
           "legacy_claim_ids": [
-            "CV067"
+            "jack-g-mottley:CV067"
           ],
           "material_hash": "8118682351ab24f1c31a0d4e7d33f449cf6824e86ab24a6b4699d86e300121ac",
           "revision": 1,
@@ -5984,7 +5984,7 @@
           "evidence_level": "direct",
           "label": "Acoustics and vibroacoustics",
           "legacy_claim_ids": [
-            "CV190"
+            "jack-g-mottley:CV190"
           ],
           "material_hash": "ab6fd9b03fc7d723e83ca32ffa970b81f6b7a82992ea4c5f886f2c0d458bf28d",
           "revision": 1,
@@ -6041,7 +6041,7 @@
           "evidence_level": "direct",
           "label": "Integrated photonics",
           "legacy_claim_ids": [
-            "CV087"
+            "jaime-cardenas:CV087"
           ],
           "material_hash": "187bd3e103bfe38e47c826d98c9420d1cf40d162fb6c9be32daa68265c981ae3",
           "revision": 1,
@@ -6065,7 +6065,7 @@
           "evidence_level": "direct",
           "label": "Silicon photonics",
           "legacy_claim_ids": [
-            "CV088"
+            "jaime-cardenas:CV088"
           ],
           "material_hash": "a4fcd3b944506072d2224bf1f2e828c58de6cebb51836e6d04fd3e2e15d22285",
           "revision": 1,
@@ -6089,7 +6089,7 @@
           "evidence_level": "direct",
           "label": "Nanophotonics",
           "legacy_claim_ids": [
-            "CV089"
+            "jaime-cardenas:CV089"
           ],
           "material_hash": "6a73514007e141605b63f78368ccf45c75924771dfc49c53081d6abc9ec73ca2",
           "revision": 1,
@@ -6151,7 +6151,7 @@
           "evidence_level": "direct",
           "label": "High-power and high-energy laser systems",
           "legacy_claim_ids": [
-            "CV095"
+            "jake-bromage:CV095"
           ],
           "material_hash": "0ab05d7069361fe615377114c6946eaf6ab08b04fef959d3e85a2a4428b6e1a3",
           "revision": 1,
@@ -6205,7 +6205,7 @@
           "evidence_level": "corroborated",
           "label": "Optical metrology",
           "legacy_claim_ids": [
-            "CV080"
+            "james-m-zavislan:CV080"
           ],
           "material_hash": "ef4a439c6780c0e11bd7cac7815fdc49358a6df39ac3d399e55e93b7171a05c5",
           "revision": 1,
@@ -6228,7 +6228,7 @@
           "evidence_level": "corroborated",
           "label": "Wave propagation and optical coherence",
           "legacy_claim_ids": [
-            "CV081"
+            "james-m-zavislan:CV081"
           ],
           "material_hash": "0f2eccf7be33531c03a4b0a829e607dc41e1bc182132403f59b819e6473f8fab",
           "revision": 1,
@@ -6251,7 +6251,7 @@
           "evidence_level": "corroborated",
           "label": "Optical tolerancing and aberration control",
           "legacy_claim_ids": [
-            "CV079"
+            "james-m-zavislan:CV079"
           ],
           "material_hash": "e9039d43ba1802023a97c11bfa981f008d79d70998577a663cce02d2c3a25621",
           "revision": 1,
@@ -6308,7 +6308,7 @@
           "evidence_level": "direct",
           "label": "Organ-on-chip and microphysiological systems",
           "legacy_claim_ids": [
-            "CV117"
+            "james-mcgrath:CV117"
           ],
           "material_hash": "8819341f0ab836e6dadf346d642402f8d6cba11b06d022090d3489a81668f8a2",
           "revision": 1,
@@ -6332,7 +6332,7 @@
           "evidence_level": "direct",
           "label": "Microfluidics and microscale transport",
           "legacy_claim_ids": [
-            "CV119"
+            "james-mcgrath:CV119"
           ],
           "material_hash": "899d03b9172727f99f1fd10c110c6f974d7496f5e88c9e77cce5148a8c1d6e1b",
           "revision": 1,
@@ -6390,7 +6390,7 @@
           "evidence_level": "direct",
           "label": "Computational imaging",
           "legacy_claim_ids": [
-            "CV064"
+            "james-r-fienup:CV064"
           ],
           "material_hash": "3967a6518a58a931d12fde8eef36e0d5eb292678350c0f8e706ddc8b2929a5c9",
           "revision": 1,
@@ -6413,7 +6413,7 @@
           "evidence_level": "direct",
           "label": "Inverse problems and image reconstruction",
           "legacy_claim_ids": [
-            "CV073"
+            "james-r-fienup:CV073"
           ],
           "material_hash": "e9f5e809ce5051470a104f078ce6717a4d9c21552a13018a89988b9b87b5f234",
           "revision": 1,
@@ -6436,7 +6436,7 @@
           "evidence_level": "direct",
           "label": "Radar and synthetic-aperture imaging",
           "legacy_claim_ids": [
-            "CV065"
+            "james-r-fienup:CV065"
           ],
           "material_hash": "3492602b97bcb91d676f19df59183ba8c48a91c1475dee8c9d8d9a147041cf78",
           "revision": 1,
@@ -6499,7 +6499,7 @@
           "evidence_level": "direct",
           "label": "Optical metrology",
           "legacy_claim_ids": [
-            "CV080"
+            "jannick-rolland:CV080"
           ],
           "material_hash": "ca7f92dbf84aa98eb197913996bc6e3ed3039ac1d2eae152d355f46e13d29305",
           "revision": 1,
@@ -6522,7 +6522,7 @@
           "evidence_level": "direct",
           "label": "Freeform and gradient-index optics",
           "legacy_claim_ids": [
-            "CV077"
+            "jannick-rolland:CV077"
           ],
           "material_hash": "49154120ff6de7aaa2c3854665252f04c3d05d6c847dfa13e0fee352296c5358",
           "revision": 1,
@@ -6545,7 +6545,7 @@
           "evidence_level": "direct",
           "label": "Augmented and virtual reality",
           "legacy_claim_ids": [
-            "CV055"
+            "jannick-rolland:CV055"
           ],
           "material_hash": "194183ef2a968f6423551a6946516686efbdc40bfc900666ac0afefa0b8a950f",
           "revision": 1,
@@ -6613,7 +6613,7 @@
           "evidence_level": "corroborated",
           "label": "Spectral and multispectral imaging",
           "legacy_claim_ids": [
-            "CV074"
+            "jennifer-d-t-kruschwitz:CV074"
           ],
           "material_hash": "88826a6bee1877febd4e47dbce1299f7e7bf97e21e66e6ad75d9d3569ce8e5f8",
           "revision": 1,
@@ -6669,7 +6669,7 @@
           "evidence_level": "direct",
           "label": "Turbulence and multiscale flow",
           "legacy_claim_ids": [
-            "CV185"
+            "jessica-shang:CV185"
           ],
           "material_hash": "dc20bde54e2ac73ab57c2ed7a3267a8a18941981e809041598c03f963387b87d",
           "revision": 1,
@@ -6692,7 +6692,7 @@
           "evidence_level": "corroborated",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "jessica-shang:CV196"
           ],
           "material_hash": "bb4d1b15824895c26b9257c87bb169bd78a1967130b75c7fe1516deeda75240b",
           "revision": 1,
@@ -6715,7 +6715,7 @@
           "evidence_level": "direct",
           "label": "Fluid-structure interaction and biofluid mechanics",
           "legacy_claim_ids": [
-            "CV188"
+            "jessica-shang:CV188"
           ],
           "material_hash": "5657d159785dac73dd3ebae7be043f042ccbced93f5a9cb385cb1047fafdcdc4",
           "revision": 1,
@@ -6775,7 +6775,7 @@
           "evidence_level": "direct",
           "label": "Stochastic optimization and sampling",
           "legacy_claim_ids": [
-            "CV024"
+            "jiaming-liang:CV024"
           ],
           "material_hash": "9f6942e54a6ad7b8e8c3bfa1e869ee3f313bd51539cb73b3d6e30c2ff11ffc2f",
           "revision": 1,
@@ -6798,7 +6798,7 @@
           "evidence_level": "direct",
           "label": "Algorithmic game theory",
           "legacy_claim_ids": [
-            "CV029"
+            "jiaming-liang:CV029"
           ],
           "material_hash": "4c6ff03c9dd508b281337ccfd101605c1029708764f2280297c56837fdc2e37a",
           "revision": 1,
@@ -6857,7 +6857,7 @@
           "evidence_level": "direct",
           "label": "Behavioral sensing and modeling",
           "legacy_claim_ids": [
-            "CV059"
+            "jiebo-luo:CV059"
           ],
           "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
           "revision": 1,
@@ -6881,7 +6881,7 @@
           "evidence_level": "direct",
           "label": "Affective and social computing",
           "legacy_claim_ids": [
-            "CV058"
+            "jiebo-luo:CV058"
           ],
           "material_hash": "db30275f96001e7090aff1d477102e6ea85d0607f391082f68c646a2dbb1b1a1",
           "revision": 1,
@@ -6905,7 +6905,7 @@
           "evidence_level": "direct",
           "label": "Computer vision",
           "legacy_claim_ids": [
-            "CV013"
+            "jiebo-luo:CV013"
           ],
           "material_hash": "eb9584116982ea3cbc36f1af8fdc0b6cd040e6d859a6502d61b7badb6bde0de1",
           "revision": 1,
@@ -6969,7 +6969,7 @@
           "evidence_level": "direct",
           "label": "Compilers and runtime systems",
           "legacy_claim_ids": [
-            "CV038"
+            "john-criswell:CV038"
           ],
           "material_hash": "1ca4684a8c9bc2ba7008218d5932f1f779f897933a9d8df7b5eaa4b8ac6f1d08",
           "revision": 1,
@@ -7027,7 +7027,7 @@
           "evidence_level": "corroborated",
           "label": "Optical fabrication and manufacturability",
           "legacy_claim_ids": [
-            "CV078"
+            "john-lambropoulos:CV078"
           ],
           "material_hash": "0d3a68d8296f8fe02f535a61afaf291470ca714e49914b4806b03a509a7ccbac",
           "revision": 1,
@@ -7085,7 +7085,7 @@
           "evidence_level": "direct",
           "label": "Semiconductor nanomaterials",
           "legacy_claim_ids": [
-            "CV158"
+            "john-m-nichol:CV158"
           ],
           "material_hash": "da9efae97831967639dcf83a05549353f062e4d6a8485da37a10584d2b327e10",
           "revision": 1,
@@ -7109,7 +7109,7 @@
           "evidence_level": "direct",
           "label": "Spintronics and magnetic devices",
           "legacy_claim_ids": [
-            "CV108"
+            "john-m-nichol:CV108"
           ],
           "material_hash": "b4365bfa995b012b2b19e583f703e1206eb58cbc2b4d2729c3f240063cd46731",
           "revision": 1,
@@ -7133,7 +7133,7 @@
           "evidence_level": "direct",
           "label": "Quantum information processing",
           "legacy_claim_ids": [
-            "CV099"
+            "john-m-nichol:CV099"
           ],
           "material_hash": "38401c44bd108eac1c4580959633972e632fc41b07d1921e2f24f9a3c2192c4a",
           "revision": 1,
@@ -7191,7 +7191,7 @@
           "evidence_level": "direct",
           "label": "Laser-plasma interaction",
           "legacy_claim_ids": [
-            "CV197"
+            "john-palastro:CV197"
           ],
           "material_hash": "9a492ec71cdf3087ff4ef71e39b1e8235bdb5a1042b70ebd5f6b880d84561285",
           "revision": 1,
@@ -7249,7 +7249,7 @@
           "evidence_level": "direct",
           "label": "High-power and high-energy laser systems",
           "legacy_claim_ids": [
-            "CV095"
+            "jonathan-d-zuegel:CV095"
           ],
           "material_hash": "9494963a5f4aa783a2d8cc6ff0e735836ba1b32c6d6f616547adf6aa38cd94de",
           "revision": 1,
@@ -7271,7 +7271,7 @@
           "evidence_level": "direct",
           "label": "Nonlinear optics",
           "legacy_claim_ids": [
-            "CV091"
+            "jonathan-d-zuegel:CV091"
           ],
           "material_hash": "aeefd5eab21d952fecd5d1fa35f2d0bbd571ec1af9a70098485ac9c501611fc2",
           "revision": 1,
@@ -7328,7 +7328,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "jonathan-davies:CV193"
           ],
           "material_hash": "076c3670568c0e5a34930bde813ddcc95350708f6b4580a99d9c2200c0a72a20",
           "revision": 1,
@@ -7350,7 +7350,7 @@
           "evidence_level": "direct",
           "label": "Laser-plasma interaction",
           "legacy_claim_ids": [
-            "CV197"
+            "jonathan-davies:CV197"
           ],
           "material_hash": "3429079c39a73809de6722853d1a7ce45c230fdf448f9b5c731aed34abc705ec",
           "revision": 1,
@@ -7372,7 +7372,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "jonathan-davies:CV196"
           ],
           "material_hash": "32ca8e759eafab53f3a05ca5a36e985c069acfbc6a587b6f0e7ca71b234587d6",
           "revision": 1,
@@ -7429,7 +7429,7 @@
           "evidence_level": "corroborated",
           "label": "Auditory neuroscience and hearing technology",
           "legacy_claim_ids": [
-            "CV125"
+            "jong-hoon-nam:CV125"
           ],
           "material_hash": "c778e71d6190348ee33e040172bdbbdea1470584d02a5c65931d0676c6bbd4ce",
           "revision": 1,
@@ -7452,7 +7452,7 @@
           "evidence_level": "direct",
           "label": "Vestibular and inner-ear therapeutics",
           "legacy_claim_ids": [
-            "CV126"
+            "jong-hoon-nam:CV126"
           ],
           "material_hash": "cd22fce752f8038f4274213a0444f59bcac3f6a6d27cf29391f7f9cac857ccc7",
           "revision": 1,
@@ -7475,7 +7475,7 @@
           "evidence_level": "direct",
           "label": "Cell mechanics, adhesion, and cytoskeleton",
           "legacy_claim_ids": [
-            "CV115"
+            "jong-hoon-nam:CV115"
           ],
           "material_hash": "7e52fb6188ad242271f7e2fbf1eab349f0d3d9055a9a65837af88cc7e8a8a549",
           "revision": 1,
@@ -7532,7 +7532,7 @@
           "evidence_level": "corroborated",
           "label": "Freeform and gradient-index optics",
           "legacy_claim_ids": [
-            "CV077"
+            "julie-bentley:CV077"
           ],
           "material_hash": "5f7c450ed0ad86a7f6829051612cacc484288d9f2d17cd738ac5ae2b58377225",
           "revision": 1,
@@ -7555,7 +7555,7 @@
           "evidence_level": "corroborated",
           "label": "Optical fabrication and manufacturability",
           "legacy_claim_ids": [
-            "CV078"
+            "julie-bentley:CV078"
           ],
           "material_hash": "09a1b6b0025480159d0f05c3f92ee422a98c2550fb4761dbd596a11dbe539d90",
           "revision": 1,
@@ -7578,7 +7578,7 @@
           "evidence_level": "corroborated",
           "label": "Optical tolerancing and aberration control",
           "legacy_claim_ids": [
-            "CV079"
+            "julie-bentley:CV079"
           ],
           "material_hash": "4c73b77a067056e14ddcc1b2c254696f7b82f400ec11261d4cfd403b82bc3699",
           "revision": 1,
@@ -7635,7 +7635,7 @@
           "evidence_level": "direct",
           "label": "Combinatorics and graph algorithms",
           "legacy_claim_ids": [
-            "CV025"
+            "kaave-hosseini:CV025"
           ],
           "material_hash": "5796a5bd2deae55877c97df8aa2998a6d6e6e524fec2232af144e3c1f3efb142",
           "revision": 1,
@@ -7658,7 +7658,7 @@
           "evidence_level": "direct",
           "label": "Pseudorandomness and discrete Fourier methods",
           "legacy_claim_ids": [
-            "CV026"
+            "kaave-hosseini:CV026"
           ],
           "material_hash": "934dec20172695fa43fced58b8449a2f64463494cf1e95a02ebfce208771bb06",
           "revision": 1,
@@ -7717,7 +7717,7 @@
           "evidence_level": "direct",
           "label": "Organometallic and inorganic synthesis",
           "legacy_claim_ids": [
-            "CV146"
+            "kathryn-knowles:CV146"
           ],
           "material_hash": "5dd0479c800fd02986cd282cafca5718076aaad11b0c132f13953708978d40e5",
           "revision": 1,
@@ -7740,7 +7740,7 @@
           "evidence_level": "corroborated",
           "label": "Phase transformations and material stability",
           "legacy_claim_ids": [
-            "CV163"
+            "kathryn-knowles:CV163"
           ],
           "material_hash": "cf7bf47f14cd6967ad796cf3ff850784c0cf379ba60446c5b0d7f1e956557433",
           "revision": 1,
@@ -7763,7 +7763,7 @@
           "evidence_level": "corroborated",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "kathryn-knowles:CV093"
           ],
           "material_hash": "84cbbc95dd884992324ab279c26173b506eefbef64f5e9f865e8f58edb516462",
           "revision": 1,
@@ -7819,7 +7819,7 @@
           "evidence_level": "direct",
           "label": "Graph and network analytics",
           "legacy_claim_ids": [
-            "CV021"
+            "kimberly-boster:CV021"
           ],
           "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d",
           "revision": 1,
@@ -7842,7 +7842,7 @@
           "evidence_level": "direct",
           "label": "Cerebral fluid mechanics and glymphatic transport",
           "legacy_claim_ids": [
-            "CV124"
+            "kimberly-boster:CV124"
           ],
           "material_hash": "0b08b36638acacdd969db3fe145e39ce100349178bd798894a6f4144c0294254",
           "revision": 1,
@@ -7865,7 +7865,7 @@
           "evidence_level": "direct",
           "label": "Thermal transport and temperature metrology",
           "legacy_claim_ids": [
-            "CV170"
+            "kimberly-boster:CV170"
           ],
           "material_hash": "06b8857782eb10163c3e848c9b98c17f2c0b905d40707b71f77e2b7717d7772c",
           "revision": 1,
@@ -7924,7 +7924,7 @@
           "evidence_level": "direct",
           "label": "Visual neuroscience and vision rehabilitation",
           "legacy_claim_ids": [
-            "CV127"
+            "krystel-huxlin:CV127"
           ],
           "material_hash": "3cea1372bf2ca586a901ab220f6422c5ae0c07a69211586068d03e8234f71e0c",
           "revision": 1,
@@ -7947,7 +7947,7 @@
           "evidence_level": "direct",
           "label": "Adaptive optics",
           "legacy_claim_ids": [
-            "CV082"
+            "krystel-huxlin:CV082"
           ],
           "material_hash": "5e928ad2e2ef4d1983a71eaeb7c45742a36c2f197cac723400b084611e656da0",
           "revision": 1,
@@ -7970,7 +7970,7 @@
           "evidence_level": "direct",
           "label": "Ophthalmic and retinal optics",
           "legacy_claim_ids": [
-            "CV083"
+            "krystel-huxlin:CV083"
           ],
           "material_hash": "a131a4cfbae1ac6e4c09528f928bc219b49c5a2938a7c549f899e987b6b03d33",
           "revision": 1,
@@ -8029,7 +8029,7 @@
           "evidence_level": "direct",
           "label": "Computational social choice",
           "legacy_claim_ids": [
-            "CV030"
+            "lane-a-hemaspaandra:CV030"
           ],
           "material_hash": "f5c30e22a1e37be77b14b292c4be41a6e355c96a05e4e4d9d940f98b219f5ceb",
           "revision": 1,
@@ -8086,7 +8086,7 @@
           "evidence_level": "direct",
           "label": "Tissue biomechanics",
           "legacy_claim_ids": [
-            "CV112"
+            "laura-slane:CV112"
           ],
           "material_hash": "f6eb9e4cc2665e1a83c09c138d2f75317f3f6885a738d262314ee7c2f34ebf92",
           "revision": 1,
@@ -8108,7 +8108,7 @@
           "evidence_level": "direct",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "legacy_claim_ids": [
-            "CV114"
+            "laura-slane:CV114"
           ],
           "material_hash": "c3479d61adeaa9e95286166258b02c16cf638bd68467870c25e0f21079bf76ef",
           "revision": 1,
@@ -8130,7 +8130,7 @@
           "evidence_level": "direct",
           "label": "Diagnostic ultrasound and elastography",
           "legacy_claim_ids": [
-            "CV121"
+            "laura-slane:CV121"
           ],
           "material_hash": "3a16d9b3b6c03930b2f36379755f7d899b2a7c70136b2273208a28fcee593221",
           "revision": 1,
@@ -8188,7 +8188,7 @@
           "evidence_level": "direct",
           "label": "Auditory neuroscience and hearing technology",
           "legacy_claim_ids": [
-            "CV125"
+            "laurel-h-carney:CV125"
           ],
           "material_hash": "bdc9a13d0a75469b0bd9cf3ce64bb08bbca928e0435daca07d7d2bc734c946cb",
           "revision": 1,
@@ -8246,7 +8246,7 @@
           "evidence_level": "direct",
           "label": "Semiconductor optoelectronics",
           "legacy_claim_ids": [
-            "CV107"
+            "lewis-rothberg:CV107"
           ],
           "material_hash": "932895b187b9de574063fca1c4d0a4281fa0756a510f07101b8cccb8866b5124",
           "revision": 1,
@@ -8269,7 +8269,7 @@
           "evidence_level": "direct",
           "label": "Functional and conducting polymers",
           "legacy_claim_ids": [
-            "CV153"
+            "lewis-rothberg:CV153"
           ],
           "material_hash": "ebe769219c428a67a27d664e2b27b3c7763792c9e206d33fd911ba6b9af7089a",
           "revision": 1,
@@ -8292,7 +8292,7 @@
           "evidence_level": "direct",
           "label": "Polymer interfaces, coatings, and thin films",
           "legacy_claim_ids": [
-            "CV155"
+            "lewis-rothberg:CV155"
           ],
           "material_hash": "9e2878877c19521607c36e547ae81954550d4795bd41a90fe3514cd822d59753",
           "revision": 1,
@@ -8355,7 +8355,7 @@
           "evidence_level": "direct",
           "label": "Toxicology and biological-effects models",
           "legacy_claim_ids": [
-            "CV132"
+            "lisa-a-delouise:CV132"
           ],
           "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
           "revision": 1,
@@ -8378,7 +8378,7 @@
           "evidence_level": "direct",
           "label": "Organ-on-chip and microphysiological systems",
           "legacy_claim_ids": [
-            "CV117"
+            "lisa-a-delouise:CV117"
           ],
           "material_hash": "0716dbdc77f21e81636148d9e0497bdf000f27a932c4f1abb75a9338dfc3fe68",
           "revision": 1,
@@ -8438,7 +8438,7 @@
           "evidence_level": "direct",
           "label": "Audio and speech machine learning",
           "legacy_claim_ids": [
-            "CV014"
+            "lisha-chen:CV014"
           ],
           "material_hash": "da825b9814d4b0da9342630f6ea6031ac2f1df8b180e9acde28d80a2aaf38437",
           "revision": 1,
@@ -8502,7 +8502,7 @@
           "evidence_level": "direct",
           "label": "RF and microwave electronics",
           "legacy_claim_ids": [
-            "CV043"
+            "machiel-blok:CV043"
           ],
           "material_hash": "7e55dd2c0a2faa843d113d90be05d3bef1dd87afd7b67879ade0fb501d643365",
           "revision": 1,
@@ -8526,7 +8526,7 @@
           "evidence_level": "direct",
           "label": "Quantum sensing and metrology",
           "legacy_claim_ids": [
-            "CV100"
+            "machiel-blok:CV100"
           ],
           "material_hash": "f56a3d0f57dad71ab3940f41f4ae5eb4e19c965700f5943ca34376fea4be452b",
           "revision": 1,
@@ -8550,7 +8550,7 @@
           "evidence_level": "direct",
           "label": "Quantum information processing",
           "legacy_claim_ids": [
-            "CV099"
+            "machiel-blok:CV099"
           ],
           "material_hash": "fc2a7fa210632d6e2dad75690525f4a46c005830f31376f664526095a52ffe43",
           "revision": 1,
@@ -8608,7 +8608,7 @@
           "evidence_level": "direct",
           "label": "Heterogeneous catalysis",
           "legacy_claim_ids": [
-            "CV139"
+            "marc-d-porosoff:CV139"
           ],
           "material_hash": "14923dce29673ea3b5d7949f6aaba6359d3e6af4e5ee747c4e9960065ac6d2f9",
           "revision": 1,
@@ -8632,7 +8632,7 @@
           "evidence_level": "direct",
           "label": "Natural language processing",
           "legacy_claim_ids": [
-            "CV011"
+            "marc-d-porosoff:CV011"
           ],
           "material_hash": "9bd9010ef7b394f39a59685af3fff1039a145d86ad9652e5719c2fbb719c97fc",
           "revision": 1,
@@ -8656,7 +8656,7 @@
           "evidence_level": "direct",
           "label": "Carbon dioxide capture and conversion",
           "legacy_claim_ids": [
-            "CV141"
+            "marc-d-porosoff:CV141"
           ],
           "material_hash": "4de8cc52a010ef0a5442bf15a4302270a2e5a472054a9e62efb704ddf72eefba",
           "revision": 1,
@@ -8842,7 +8842,7 @@
           "evidence_level": "direct",
           "label": "Mechanobiology and mechanotransduction",
           "legacy_claim_ids": [
-            "CV113"
+            "marisol-herrera-perez:CV113"
           ],
           "material_hash": "45a5837c687a860a7d270c5c7b1189089ab952c2802daa0e1f43fa7af7ff44bb",
           "revision": 1,
@@ -8898,7 +8898,7 @@
           "evidence_level": "direct",
           "label": "Acoustics and vibroacoustics",
           "legacy_claim_ids": [
-            "CV190"
+            "mark-bocko:CV190"
           ],
           "material_hash": "11f05059c0a35fb829721ebad4fdd6ce5e9932420b1ca6f17f0cf03221d14691",
           "revision": 1,
@@ -8922,7 +8922,7 @@
           "evidence_level": "corroborated",
           "label": "Music information and performance technology",
           "legacy_claim_ids": [
-            "CV067"
+            "mark-bocko:CV067"
           ],
           "material_hash": "aeebb4167b502dfc6cef5519ede919de7ccbdf707a866986bc58ca4df19b4f6b",
           "revision": 1,
@@ -8982,7 +8982,7 @@
           "evidence_level": "direct",
           "label": "Tissue biomechanics",
           "legacy_claim_ids": [
-            "CV112"
+            "mark-buckley:CV112"
           ],
           "material_hash": "822b95b94bd54b1823cd2674406d3a39fde57581d2cbb4007d3877cc93edf06e",
           "revision": 1,
@@ -9006,7 +9006,7 @@
           "evidence_level": "direct",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "legacy_claim_ids": [
-            "CV114"
+            "mark-buckley:CV114"
           ],
           "material_hash": "51e5b9700832746d7c3849536749ec123ea3d517d140cbf1737462d60d2988a6",
           "revision": 1,
@@ -9064,7 +9064,7 @@
           "evidence_level": "direct",
           "label": "Diagnostic ultrasound and elastography",
           "legacy_claim_ids": [
-            "CV121"
+            "marvin-doyley:CV121"
           ],
           "material_hash": "2ac758c334e296cc3667c395dd7bb6947577918649227a8f8aa34be7b0c75a5d",
           "revision": 1,
@@ -9120,7 +9120,7 @@
           "evidence_level": "corroborated",
           "label": "Electrochemical interfaces and redox chemistry",
           "legacy_claim_ids": [
-            "CV147"
+            "matthew-z-yates:CV147"
           ],
           "material_hash": "31bd7969ccebc184f9977642089ea22bf6065de45d015b0fa6677147d760eba2",
           "revision": 1,
@@ -9317,7 +9317,7 @@
           "evidence_level": "direct",
           "label": "Fluorescence and Raman optical methods",
           "legacy_claim_ids": [
-            "CV086"
+            "michael-giacomelli:CV086"
           ],
           "material_hash": "cfdfded0182cd8f120eeb3a30efba6615542794fa655505480d87bbc3ee3c11d",
           "revision": 1,
@@ -9341,7 +9341,7 @@
           "evidence_level": "direct",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "legacy_claim_ids": [
-            "CV075"
+            "michael-giacomelli:CV075"
           ],
           "material_hash": "98c18c7784a7f99bfacc3d700b422c783168bfa1796f18adb475afdf122fc5aa",
           "revision": 1,
@@ -9399,7 +9399,7 @@
           "evidence_level": "direct",
           "label": "GPU and heterogeneous accelerators",
           "legacy_claim_ids": [
-            "CV037"
+            "michael-huang:CV037"
           ],
           "material_hash": "07a73eca7f3c0fbf8821397e0840e97f09a73e2957278fc230e623638e131787",
           "revision": 1,
@@ -9423,7 +9423,7 @@
           "evidence_level": "corroborated",
           "label": "Memory systems and data locality",
           "legacy_claim_ids": [
-            "CV039"
+            "michael-huang:CV039"
           ],
           "material_hash": "546cced7889989722f44d64f308461e1b12b2b3e634ab7564d6a6745bafca0a8",
           "revision": 1,
@@ -9447,7 +9447,7 @@
           "evidence_level": "direct",
           "label": "Computer architecture",
           "legacy_claim_ids": [
-            "CV035"
+            "michael-huang:CV035"
           ],
           "material_hash": "b69b9566f285eedaf5f22316f8ea6a92d64ae28d1bb9750d0511d76a5a78abe9",
           "revision": 1,
@@ -9507,7 +9507,7 @@
           "evidence_level": "direct",
           "label": "Terahertz science and imaging",
           "legacy_claim_ids": [
-            "CV094"
+            "michael-t-ruggiero:CV094"
           ],
           "material_hash": "a25cda37c3979a3d9fb6d65c4c657ad19c6e3fcd4864f267391f94218ad3f6cf",
           "revision": 1,
@@ -9531,7 +9531,7 @@
           "evidence_level": "direct",
           "label": "X-ray diffraction and crystallography",
           "legacy_claim_ids": [
-            "CV160"
+            "michael-t-ruggiero:CV160"
           ],
           "material_hash": "4cd46c8f331622581bd3fdf64b9e88e5977e8b197db2509cd1eb0bb95a7ea7f7",
           "revision": 1,
@@ -9555,7 +9555,7 @@
           "evidence_level": "corroborated",
           "label": "Phase transformations and material stability",
           "legacy_claim_ids": [
-            "CV163"
+            "michael-t-ruggiero:CV163"
           ],
           "material_hash": "2a7871f5d810d3548305f8a4e757b384151870b5fd9eee1ada50b347f7ce4231",
           "revision": 1,
@@ -9616,7 +9616,7 @@
           "evidence_level": "direct",
           "label": "Quantum emitters and single-photon sources",
           "legacy_claim_ids": [
-            "CV104"
+            "michele-cotrufo:CV104"
           ],
           "material_hash": "3f365d6cb0bb1711dc13e823e96cf8acaff280e49c6d8c4df3ecf3a6da9f642b",
           "revision": 1,
@@ -9639,7 +9639,7 @@
           "evidence_level": "direct",
           "label": "Nonlinear optics",
           "legacy_claim_ids": [
-            "CV091"
+            "michele-cotrufo:CV091"
           ],
           "material_hash": "0ead47576092ffd30ac43e97ac5b154ffff23c40aa51f5feb4b22ca9eddf1a60",
           "revision": 1,
@@ -9697,7 +9697,7 @@
           "evidence_level": "direct",
           "label": "Wave propagation and optical coherence",
           "legacy_claim_ids": [
-            "CV081"
+            "miguel-a-alonso:CV081"
           ],
           "material_hash": "69c2850de9ad07b4dc9b7e345716f07ff38b5092ab3a37a00c92f05d5d98b579",
           "revision": 1,
@@ -9755,7 +9755,7 @@
           "evidence_level": "direct",
           "label": "Surface and interface chemistry",
           "legacy_claim_ids": [
-            "CV145"
+            "mitchell-anthamatten:CV145"
           ],
           "material_hash": "b11af3f200258996c0a4996b0705e43aa7486c9edf09aa7caa1e3c3919efd037",
           "revision": 1,
@@ -9779,7 +9779,7 @@
           "evidence_level": "direct",
           "label": "Supramolecular and self-assembly chemistry",
           "legacy_claim_ids": [
-            "CV150"
+            "mitchell-anthamatten:CV150"
           ],
           "material_hash": "7cc1bfc11aca690769846365329011c93e29d8ee10e5d242afeba44d77aa6eb4",
           "revision": 1,
@@ -9803,7 +9803,7 @@
           "evidence_level": "direct",
           "label": "Polymer interfaces, coatings, and thin films",
           "legacy_claim_ids": [
-            "CV155"
+            "mitchell-anthamatten:CV155"
           ],
           "material_hash": "1f00d87383804d0abdf184ec301abe68768e39566e758eb8d48f70e68862944c",
           "revision": 1,
@@ -10004,7 +10004,7 @@
           "evidence_level": "direct",
           "label": "Computational imaging",
           "legacy_claim_ids": [
-            "CV064"
+            "mujdat-cetin:CV064"
           ],
           "material_hash": "503d6a2baabba56b1e3b339bca2da4939bf768f3871728c90491d88c724a4a2b",
           "revision": 1,
@@ -10027,7 +10027,7 @@
           "evidence_level": "direct",
           "label": "Inverse problems and image reconstruction",
           "legacy_claim_ids": [
-            "CV073"
+            "mujdat-cetin:CV073"
           ],
           "material_hash": "e3fd489a781c639301f59eaf471e0655760bc9d11ec3e519dbb15d53329ce395",
           "revision": 1,
@@ -10050,7 +10050,7 @@
           "evidence_level": "direct",
           "label": "Radar and synthetic-aperture imaging",
           "legacy_claim_ids": [
-            "CV065"
+            "mujdat-cetin:CV065"
           ],
           "material_hash": "cd193313ed209fdf2a40c487845a68815b29c981ee633d7176abe25e7cd5d298",
           "revision": 1,
@@ -10108,7 +10108,7 @@
           "evidence_level": "corroborated",
           "label": "X-ray diffraction and crystallography",
           "legacy_claim_ids": [
-            "CV160"
+            "niaz-abdolrahim:CV160"
           ],
           "material_hash": "322098b3ecc8b3146d947af0386f6902a0e178a336da0a46c0d14bad2f8e3bd4",
           "revision": 1,
@@ -10133,7 +10133,7 @@
           "evidence_level": "direct",
           "label": "Porous and framework materials",
           "legacy_claim_ids": [
-            "CV144"
+            "niaz-abdolrahim:CV144"
           ],
           "material_hash": "9793d8e17107049b9dcb29dff76cbf9300713fc3ccfd44ed9e4f4c288ffa6278",
           "revision": 1,
@@ -10158,7 +10158,7 @@
           "evidence_level": "direct",
           "label": "Phase transformations and material stability",
           "legacy_claim_ids": [
-            "CV163"
+            "niaz-abdolrahim:CV163"
           ],
           "material_hash": "8bbc0d12448aef24ed1e684dc98589d962f1a5eec5e7d86c798292ecc652876d",
           "revision": 1,
@@ -10222,7 +10222,7 @@
           "evidence_level": "corroborated",
           "label": "Fluorescence and Raman optical methods",
           "legacy_claim_ids": [
-            "CV086"
+            "nicholas-p-bigelow:CV086"
           ],
           "material_hash": "b9f2a45ed74d030594c8973632a4e83e60eecf7654f36111dfdb9a21813755ae",
           "revision": 1,
@@ -10247,7 +10247,7 @@
           "evidence_level": "direct",
           "label": "Quantum sensing and metrology",
           "legacy_claim_ids": [
-            "CV100"
+            "nicholas-p-bigelow:CV100"
           ],
           "material_hash": "cb7f51df4196eba49c9a8a79838d2aae3e843968288b1654a4a7095f2f387df0",
           "revision": 1,
@@ -10310,7 +10310,7 @@
           "evidence_level": "direct",
           "label": "Quantum optics and photonics",
           "legacy_claim_ids": [
-            "CV092"
+            "nickolas-a-vamivakas:CV092"
           ],
           "material_hash": "de85b21e03365a76b001965b41827070b315ef931bcfbc0484bc8b75dea54b28",
           "revision": 1,
@@ -10334,7 +10334,7 @@
           "evidence_level": "direct",
           "label": "Quantum emitters and single-photon sources",
           "legacy_claim_ids": [
-            "CV104"
+            "nickolas-a-vamivakas:CV104"
           ],
           "material_hash": "aae25c95f5fd84a79ec8ab6839e2a6221075e65753846e9a701275564f737dc1",
           "revision": 1,
@@ -10358,7 +10358,7 @@
           "evidence_level": "corroborated",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "nickolas-a-vamivakas:CV109"
           ],
           "material_hash": "aeaa3c4a80fc9cf09aaf48f8db9071e3a569c1e6f0aaa45fbaf0ba33dadba8d4",
           "revision": 1,
@@ -10417,7 +10417,7 @@
           "evidence_level": "direct",
           "label": "Quantum emitters and single-photon sources",
           "legacy_claim_ids": [
-            "CV104"
+            "pablo-a-postigo:CV104"
           ],
           "material_hash": "587fc58e6307af57d9c5a79d9e3e1259745b59b8eb39b57efdd8bb60988896b1",
           "revision": 1,
@@ -10441,7 +10441,7 @@
           "evidence_level": "direct",
           "label": "Semiconductor nanomaterials",
           "legacy_claim_ids": [
-            "CV158"
+            "pablo-a-postigo:CV158"
           ],
           "material_hash": "6d503576b7462ef9f80d02db6ccd29ac1067dab97db9bd21fe90053156a0b007",
           "revision": 1,
@@ -10465,7 +10465,7 @@
           "evidence_level": "direct",
           "label": "Nanophotonics",
           "legacy_claim_ids": [
-            "CV089"
+            "pablo-a-postigo:CV089"
           ],
           "material_hash": "e0cdc97ce16bc31bb8ee3bf3fd1d52e265cbc97342af64e9cfb3369ae6bb90b6",
           "revision": 1,
@@ -10526,7 +10526,7 @@
           "evidence_level": "corroborated",
           "label": "Precision manufacturing and process optimization",
           "legacy_claim_ids": [
-            "CV169"
+            "paul-d-funkenbusch:CV169"
           ],
           "material_hash": "f46bfd569062603d8471a0a68a28d04e36f6777fa53942970ac1dc00397aace3",
           "revision": 1,
@@ -10549,7 +10549,7 @@
           "evidence_level": "direct",
           "label": "Biomaterials and engineered living materials",
           "legacy_claim_ids": [
-            "CV130"
+            "paul-d-funkenbusch:CV130"
           ],
           "material_hash": "e81566bf5af9d22fba8fb82c9baa97cb470d520c92ae2d59f3c21d724ce0b790",
           "revision": 1,
@@ -10572,7 +10572,7 @@
           "evidence_level": "direct",
           "label": "Multiscale materials modeling",
           "legacy_claim_ids": [
-            "CV162"
+            "paul-d-funkenbusch:CV162"
           ],
           "material_hash": "6370e302dec63d41a7ab4e0aa607a0f681ed353af470a46eaba68f44ba2ec796",
           "revision": 1,
@@ -10630,7 +10630,7 @@
           "evidence_level": "direct",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "pengfei-huo:CV109"
           ],
           "material_hash": "40d74640a6852e68cf0d75f5d73318cf443ddc06a3f00e0ed1f57cc00fd3f8e3",
           "revision": 1,
@@ -10655,7 +10655,7 @@
           "evidence_level": "direct",
           "label": "Atomistic and molecular simulation",
           "legacy_claim_ids": [
-            "CV161"
+            "pengfei-huo:CV161"
           ],
           "material_hash": "a9ebf60a55d8da306d5f8a2ce820e68eabb88047814048a46d3bc4cf7917b9ac",
           "revision": 1,
@@ -10680,7 +10680,7 @@
           "evidence_level": "direct",
           "label": "Open quantum systems and molecular quantum dynamics",
           "legacy_claim_ids": [
-            "CV111"
+            "pengfei-huo:CV111"
           ],
           "material_hash": "3f045f3eabe282b83270cdef6d2ab002fefa7e9a2c5ca3437a7a82ddf2a1427a",
           "revision": 1,
@@ -10745,7 +10745,7 @@
           "evidence_level": "direct",
           "label": "Precision manufacturing and process optimization",
           "legacy_claim_ids": [
-            "CV169"
+            "pooja-rajendra-bhalode:CV169"
           ],
           "material_hash": "c18707da525b77498692563c1d1ff0aeda899d060c3513fc04d4d4969927b5a8",
           "revision": 1,
@@ -10768,7 +10768,7 @@
           "evidence_level": "direct",
           "label": "Multiphase, granular, and particulate flow",
           "legacy_claim_ids": [
-            "CV189"
+            "pooja-rajendra-bhalode:CV189"
           ],
           "material_hash": "810c4c0da16824eeaf4ec8f0bfbd8ce1eafe68f4100bac38a65e06ecdfc118d3",
           "revision": 1,
@@ -10791,7 +10791,7 @@
           "evidence_level": "direct",
           "label": "Data-driven surrogate modeling",
           "legacy_claim_ids": [
-            "CV017"
+            "pooja-rajendra-bhalode:CV017"
           ],
           "material_hash": "ceadf0867e9afd183f7040cef9287e4ad8c15c3f6dce7697cee5de0ef3879d2d",
           "revision": 1,
@@ -10984,7 +10984,7 @@
           "evidence_level": "corroborated",
           "label": "Integrated photonics",
           "legacy_claim_ids": [
-            "CV087"
+            "qiang-lin:CV087"
           ],
           "material_hash": "6fc764c40c4c2812261a798ed62e109a9a321a16c00e543991ed8ea27245615f",
           "revision": 1,
@@ -11009,7 +11009,7 @@
           "evidence_level": "corroborated",
           "label": "Quantum optics and photonics",
           "legacy_claim_ids": [
-            "CV092"
+            "qiang-lin:CV092"
           ],
           "material_hash": "2aa711e6793f83f2a8c2c3e1c1b68b54d787335120184300b559514a86dd978d",
           "revision": 1,
@@ -11034,7 +11034,7 @@
           "evidence_level": "corroborated",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "qiang-lin:CV109"
           ],
           "material_hash": "39aa910cbe7899c5d10ca622f46b31d5e05bccb1dd34ab6e5aea9f20e7926dea",
           "revision": 1,
@@ -11095,7 +11095,7 @@
           "evidence_level": "direct",
           "label": "Climate, ocean, and landscape systems",
           "legacy_claim_ids": [
-            "CV180"
+            "rachel-glade:CV180"
           ],
           "material_hash": "317be2855863e57fed82ac73979104b55274226b763b3c9d3bace398ad0123e6",
           "revision": 1,
@@ -11119,7 +11119,7 @@
           "evidence_level": "direct",
           "label": "Multiphase, granular, and particulate flow",
           "legacy_claim_ids": [
-            "CV189"
+            "rachel-glade:CV189"
           ],
           "material_hash": "ddfd70258e9f7a63c3532661c89e9fe6b8dd7bcddae515d3ece226c385a35788",
           "revision": 1,
@@ -11143,7 +11143,7 @@
           "evidence_level": "direct",
           "label": "Granular and architected materials",
           "legacy_claim_ids": [
-            "CV165"
+            "rachel-glade:CV165"
           ],
           "material_hash": "b5f58a7ed03b911dbfb99d2c4ae2894917d8721cf4b3cea48ad5daa723f25645",
           "revision": 1,
@@ -11206,7 +11206,7 @@
           "evidence_level": "direct",
           "label": "Neural computation and perception",
           "legacy_claim_ids": [
-            "CV128"
+            "ralf-haefner:CV128"
           ],
           "material_hash": "bba4f1167f34ae05db2f3565a4a38d250a09a20ebddbd89300ef840103ca32ff",
           "revision": 1,
@@ -11267,7 +11267,7 @@
           "evidence_level": "direct",
           "label": "High-resolution biomedical microscopy and histology imaging",
           "legacy_claim_ids": [
-            "CV075"
+            "rebecca-irwin:CV075"
           ],
           "material_hash": "577fabe9425db35fccac1de3ae904b02c62b54de8c5ce37123f0f10a7f1637f6",
           "revision": 1,
@@ -11291,7 +11291,7 @@
           "evidence_level": "direct",
           "label": "Regenerative medicine and tissue engineering",
           "legacy_claim_ids": [
-            "CV116"
+            "rebecca-irwin:CV116"
           ],
           "material_hash": "c2d6da631ca1a0f939515e337855ae1d6c3ef0c5617ac12ee5e871943dd42197",
           "revision": 1,
@@ -11315,7 +11315,7 @@
           "evidence_level": "direct",
           "label": "Mechanobiology and mechanotransduction",
           "legacy_claim_ids": [
-            "CV113"
+            "rebecca-irwin:CV113"
           ],
           "material_hash": "ed3451122d4c77488e33c9398ff1993396cc944e3619b40f8f3bffb6453947b6",
           "revision": 1,
@@ -11373,7 +11373,7 @@
           "evidence_level": "direct",
           "label": "Biomedical optics and tissue spectroscopy",
           "legacy_claim_ids": [
-            "CV084"
+            "regine-choe:CV084"
           ],
           "material_hash": "8b1cc9fa78630e2a748c384dcea30424a4d4a4161f562c49adfd95f9a2f85429",
           "revision": 1,
@@ -11396,7 +11396,7 @@
           "evidence_level": "direct",
           "label": "Optical diagnostics and phototherapy",
           "legacy_claim_ids": [
-            "CV122"
+            "regine-choe:CV122"
           ],
           "material_hash": "a4f1dca86b885ed0465f4c99f61de90853c92240d9bfc2ee487b17b481fd8715",
           "revision": 1,
@@ -11452,7 +11452,7 @@
           "evidence_level": "direct",
           "label": "Finite-element and computational mechanics",
           "legacy_claim_ids": [
-            "CV182"
+            "renato-perucchio:CV182"
           ],
           "material_hash": "80a4e8b28bdbf34d71a525b4f6bfab935395535ce6c4ed078c117d13e7cc647e",
           "revision": 1,
@@ -11507,7 +11507,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "riccardo-betti:CV193"
           ],
           "material_hash": "3ea8718ebf4a124ad8602894d1e004d28d0df12e0549eff0d84d783cb9116861",
           "revision": 1,
@@ -11530,7 +11530,7 @@
           "evidence_level": "direct",
           "label": "Thermonuclear burn and implosion physics",
           "legacy_claim_ids": [
-            "CV195"
+            "riccardo-betti:CV195"
           ],
           "material_hash": "17113045d9b9835235333dfa39d60c6f269fad912c1b03b630b6762da78a2321",
           "revision": 1,
@@ -11553,7 +11553,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "riccardo-betti:CV196"
           ],
           "material_hash": "eed01d966358bdb11ee5b18d7d0d741e2714e0cee3ad4263127e65e020b805f3",
           "revision": 1,
@@ -11612,7 +11612,7 @@
           "evidence_level": "direct",
           "label": "Neural computation and perception",
           "legacy_claim_ids": [
-            "CV128"
+            "robert-a-jacobs:CV128"
           ],
           "material_hash": "83e06ea66a4cf553025f351ffc77f00c82c8784fa32ab0fb9d94decf88425237",
           "revision": 1,
@@ -11635,7 +11635,7 @@
           "evidence_level": "direct",
           "label": "Visual neuroscience and vision rehabilitation",
           "legacy_claim_ids": [
-            "CV127"
+            "robert-a-jacobs:CV127"
           ],
           "material_hash": "6ec618df96adfe5742e02f754a151d593764cd2181f774861671b7acce918222",
           "revision": 1,
@@ -11692,7 +11692,7 @@
           "evidence_level": "direct",
           "label": "Quantum optics and photonics",
           "legacy_claim_ids": [
-            "CV092"
+            "robert-boyd:CV092"
           ],
           "material_hash": "2f025fefe771b116632069f2e49312b6fbf84b430e808c2daeb623e43762ce21",
           "revision": 1,
@@ -11717,7 +11717,7 @@
           "evidence_level": "corroborated",
           "label": "Turbulence and multiscale flow",
           "legacy_claim_ids": [
-            "CV185"
+            "robert-boyd:CV185"
           ],
           "material_hash": "09a86a15315b21f2cadbe6e0f2de1d643afbef814135055f24f3050b9b8bbd67",
           "revision": 1,
@@ -11742,7 +11742,7 @@
           "evidence_level": "direct",
           "label": "Nonlinear optics",
           "legacy_claim_ids": [
-            "CV091"
+            "robert-boyd:CV091"
           ],
           "material_hash": "34f70a1aef261b80d36be31b3c3cb2887cfe84f7f67419087f09b855afad2b72",
           "revision": 1,
@@ -11802,7 +11802,7 @@
           "evidence_level": "direct",
           "label": "Regenerative medicine and tissue engineering",
           "legacy_claim_ids": [
-            "CV116"
+            "robert-clark:CV116"
           ],
           "material_hash": "bf39d4e7414901d9737fc696c585d1cae93d4b489e141dd613dc819e92025df3",
           "revision": 1,
@@ -11824,7 +11824,7 @@
           "evidence_level": "direct",
           "label": "Additive manufacturing and bioprinting",
           "legacy_claim_ids": [
-            "CV168"
+            "robert-clark:CV168"
           ],
           "material_hash": "44fcd7cada73930c58fbebd9cb9c457ffcdc88d286313406b92199831b3ad0e2",
           "revision": 1,
@@ -11846,7 +11846,7 @@
           "evidence_level": "corroborated",
           "label": "Biomanufacturing and engineered cells",
           "legacy_claim_ids": [
-            "CV138"
+            "robert-clark:CV138"
           ],
           "material_hash": "96be712daa4a5709982ad06599eb4769e81c99d198c44f3d278f9756007bd683",
           "revision": 1,
@@ -11904,7 +11904,7 @@
           "evidence_level": "corroborated",
           "label": "Terahertz science and imaging",
           "legacy_claim_ids": [
-            "CV094"
+            "roman-sobolewski:CV094"
           ],
           "material_hash": "3af36e983ce8d42451cb7b73153e63209f8298153e9dec6ce4eeb9ade3be13ec",
           "revision": 1,
@@ -11928,7 +11928,7 @@
           "evidence_level": "corroborated",
           "label": "Quantum emitters and single-photon sources",
           "legacy_claim_ids": [
-            "CV104"
+            "roman-sobolewski:CV104"
           ],
           "material_hash": "564fbe360a6bfbe3a08aa4564fe67df1d1b9dcc4952baceb17ef3cec5f59ab97",
           "revision": 1,
@@ -11952,7 +11952,7 @@
           "evidence_level": "corroborated",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "roman-sobolewski:CV093"
           ],
           "material_hash": "d34bbb1b2bd4e553cc61c086d87812f17511e6c3c6c494f64b9931b871adf75f",
           "revision": 1,
@@ -12008,7 +12008,7 @@
           "evidence_level": "direct",
           "label": "High-energy-density and warm-dense matter",
           "legacy_claim_ids": [
-            "CV196"
+            "sean-regan:CV196"
           ],
           "material_hash": "2bdace9257e1bc0db849d9d793fdd9181788d9c17bebb479f6fb676344b801e4",
           "revision": 1,
@@ -12030,7 +12030,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "sean-regan:CV193"
           ],
           "material_hash": "78ac5c8c8d9e1013c51320e1aee38e301cf38efb6a6874ffe08ca064a15fe14e",
           "revision": 1,
@@ -12089,7 +12089,7 @@
           "evidence_level": "direct",
           "label": "Power delivery and clock distribution",
           "legacy_claim_ids": [
-            "CV041"
+            "selcuk-kose:CV041"
           ],
           "material_hash": "8f626679b7c4641414814b4f0bcdec7ec4dd16f38285b22e9885f2b5b1197c69",
           "revision": 1,
@@ -12112,7 +12112,7 @@
           "evidence_level": "direct",
           "label": "Analog and mixed-signal electronics",
           "legacy_claim_ids": [
-            "CV042"
+            "selcuk-kose:CV042"
           ],
           "material_hash": "5832e869bb05a4ae1e5d4ac56b53e61acdf63f7d1b73b8b198e64bcb7c05fd84",
           "revision": 1,
@@ -12135,7 +12135,7 @@
           "evidence_level": "direct",
           "label": "Hardware security",
           "legacy_claim_ids": [
-            "CV045"
+            "selcuk-kose:CV045"
           ],
           "material_hash": "a22d24586d18f6e40589aba2e416fccb7d4c81ad59ae3d8147213291b4d6763e",
           "revision": 1,
@@ -12194,7 +12194,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical interfaces and redox chemistry",
           "legacy_claim_ids": [
-            "CV147"
+            "siddharth-deshpande:CV147"
           ],
           "material_hash": "f957c3c83c9edec1f388074837d2a70dcf07a17fefdb4b6af8a122ed56f0e6d7",
           "revision": 1,
@@ -12217,7 +12217,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical energy storage",
           "legacy_claim_ids": [
-            "CV171"
+            "siddharth-deshpande:CV171"
           ],
           "material_hash": "9ac576f680771756451dc0995c79ae2dcc89f5e207d709025d468432a13ed2da",
           "revision": 1,
@@ -12240,7 +12240,7 @@
           "evidence_level": "direct",
           "label": "Electrocatalysis",
           "legacy_claim_ids": [
-            "CV140"
+            "siddharth-deshpande:CV140"
           ],
           "material_hash": "a48d60b84d4cc2d40b24309e8ee1cdfcfe7bc0615da48fcb0054dee4c850c9ca",
           "revision": 1,
@@ -12442,7 +12442,7 @@
           "evidence_level": "direct",
           "label": "Atomistic and molecular simulation",
           "legacy_claim_ids": [
-            "CV161"
+            "sobhit-singh:CV161"
           ],
           "material_hash": "a3427e9528babfb6925aab9ce6bb07f1379dd1e4894663589a0a5dae657063f3",
           "revision": 1,
@@ -12466,7 +12466,7 @@
           "evidence_level": "direct",
           "label": "Quantum and topological materials",
           "legacy_claim_ids": [
-            "CV105"
+            "sobhit-singh:CV105"
           ],
           "material_hash": "b9373b03f569e5c2a54a0b850d0ad33caab396a2789f98bea2a6006241a49e75",
           "revision": 1,
@@ -12531,7 +12531,7 @@
           "evidence_level": "direct",
           "label": "Compilers and runtime systems",
           "legacy_claim_ids": [
-            "CV038"
+            "sreepathi-pai:CV038"
           ],
           "material_hash": "d2e5a0619446876d0b8bd94f261c55866ae146191e71a2afe771101cdd65d8a6",
           "revision": 1,
@@ -12554,7 +12554,7 @@
           "evidence_level": "direct",
           "label": "GPU and heterogeneous accelerators",
           "legacy_claim_ids": [
-            "CV037"
+            "sreepathi-pai:CV037"
           ],
           "material_hash": "8b0c749da020a1e7aa0e73a56098c26e872a26515c48a91d7ecab2804dc3157d",
           "revision": 1,
@@ -12613,7 +12613,7 @@
           "evidence_level": "direct",
           "label": "Diagnostic ultrasound and elastography",
           "legacy_claim_ids": [
-            "CV121"
+            "stephen-mcaleavey:CV121"
           ],
           "material_hash": "cc3be4e31302b6b0e519a66c586f20994307cf326cd44337f5ec3e52983ace0a",
           "revision": 1,
@@ -12669,7 +12669,7 @@
           "evidence_level": "direct",
           "label": "Quantum and topological materials",
           "legacy_claim_ids": [
-            "CV105"
+            "stephen-wu:CV105"
           ],
           "material_hash": "98fe269e35d3ae14f622eaf16417fa15e2ddc1c63d16bf12224f74ebcbd79dcb",
           "revision": 1,
@@ -12693,7 +12693,7 @@
           "evidence_level": "direct",
           "label": "Spintronics and magnetic devices",
           "legacy_claim_ids": [
-            "CV108"
+            "stephen-wu:CV108"
           ],
           "material_hash": "4c5b362e51a32e582ef54313b5bd6d6ad03f6d5ee27079c10b62c51930d1c3d9",
           "revision": 1,
@@ -12717,7 +12717,7 @@
           "evidence_level": "direct",
           "label": "Two-dimensional and van der Waals materials",
           "legacy_claim_ids": [
-            "CV106"
+            "stephen-wu:CV106"
           ],
           "material_hash": "9cc83e6cc39b260549fb010d310b8be90b62b57f55a3e38329ee1370de1b120a",
           "revision": 1,
@@ -12778,7 +12778,7 @@
           "evidence_level": "corroborated",
           "label": "Optical tolerancing and aberration control",
           "legacy_claim_ids": [
-            "CV079"
+            "susana-marcos:CV079"
           ],
           "material_hash": "a4e55a3926e10b81a24f0bc6fc8fdc1cee5160749c53a247c8f1fb7ccaf11833",
           "revision": 1,
@@ -12803,7 +12803,7 @@
           "evidence_level": "corroborated",
           "label": "Ophthalmic and retinal optics",
           "legacy_claim_ids": [
-            "CV083"
+            "susana-marcos:CV083"
           ],
           "material_hash": "8e992ffb45ce1b98ebefcd98786c6da24bde3ed18551499906b6188bacf515ce",
           "revision": 1,
@@ -12828,7 +12828,7 @@
           "evidence_level": "corroborated",
           "label": "Adaptive optics",
           "legacy_claim_ids": [
-            "CV082"
+            "susana-marcos:CV082"
           ],
           "material_hash": "0607e1a69dc62098e026196093287631c59ad63be2866aa4b41b713d88ccec66",
           "revision": 1,
@@ -12886,7 +12886,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "suxing-hu:CV093"
           ],
           "material_hash": "e36e5e659694e04f8df9a9bf22cc7f178f464e1d8f679b58428546bf5a14b0aa",
           "revision": 1,
@@ -12910,7 +12910,7 @@
           "evidence_level": "direct",
           "label": "Thermonuclear burn and implosion physics",
           "legacy_claim_ids": [
-            "CV195"
+            "suxing-hu:CV195"
           ],
           "material_hash": "0d62072cf2db12fcb4587debbf78907663c088c571a55adca46724be5645246e",
           "revision": 1,
@@ -12934,7 +12934,7 @@
           "evidence_level": "direct",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "legacy_claim_ids": [
-            "CV201"
+            "suxing-hu:CV201"
           ],
           "material_hash": "597725d4f7ced3361943ac3c7fd96bf4bdebed7acca6fa08d3b224b1d647728f",
           "revision": 1,
@@ -13000,7 +13000,7 @@
           "evidence_level": "direct",
           "label": "Quantum optics and photonics",
           "legacy_claim_ids": [
-            "CV092"
+            "svetlana-g-lukishova:CV092"
           ],
           "material_hash": "9efae7c01b86d3631a47b7146d8002a05344dac56fcd7ed6526696abff7df89c",
           "revision": 1,
@@ -13023,7 +13023,7 @@
           "evidence_level": "direct",
           "label": "Quantum emitters and single-photon sources",
           "legacy_claim_ids": [
-            "CV104"
+            "svetlana-g-lukishova:CV104"
           ],
           "material_hash": "8cc1cf9790c7b5cc4ae2748675f43e6774e499fc00dd1191441dee1263acb7d2",
           "revision": 1,
@@ -13046,7 +13046,7 @@
           "evidence_level": "direct",
           "label": "Nonlinear optics",
           "legacy_claim_ids": [
-            "CV091"
+            "svetlana-g-lukishova:CV091"
           ],
           "material_hash": "b57a9ba5af6767859a48bce804dcffa76662a3c9ff8c9ed41d332cffdc8ba18d",
           "revision": 1,
@@ -13106,7 +13106,7 @@
           "evidence_level": "direct",
           "label": "Optical metrology",
           "legacy_claim_ids": [
-            "CV080"
+            "thomas-g-brown:CV080"
           ],
           "material_hash": "b4fc4cf5eab5f9d44c897b59dc4e4c38e47572ddc67777c5f7ae6b2d2b0cf6d6",
           "revision": 1,
@@ -13128,7 +13128,7 @@
           "evidence_level": "direct",
           "label": "Integrated photonics",
           "legacy_claim_ids": [
-            "CV087"
+            "thomas-g-brown:CV087"
           ],
           "material_hash": "4b337441241cfd5918f2de99deb6e0c511aefc3ec6fae9c257f03b05785027bb",
           "revision": 1,
@@ -13150,7 +13150,7 @@
           "evidence_level": "direct",
           "label": "Freeform and gradient-index optics",
           "legacy_claim_ids": [
-            "CV077"
+            "thomas-g-brown:CV077"
           ],
           "material_hash": "81ee56dda101cf5a528ed8aa8a250b379a7fdd606fb5ba08bbbd42a1f11d3294",
           "revision": 1,
@@ -13242,7 +13242,7 @@
           "evidence_level": "direct",
           "label": "Optical diagnostics and phototherapy",
           "legacy_claim_ids": [
-            "CV122"
+            "timothy-m-baran:CV122"
           ],
           "material_hash": "9e8082503ed08dd25e68658f1e40e3f7e45b176bd30b9df4ef0e69ecb479520a",
           "revision": 1,
@@ -13302,7 +13302,7 @@
           "evidence_level": "direct",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "todd-d-krauss:CV109"
           ],
           "material_hash": "3818fc8be571e96f79898bcde425c414347aad0ff6d04b7dd2959e1ce7e50e42",
           "revision": 1,
@@ -13326,7 +13326,7 @@
           "evidence_level": "direct",
           "label": "Semiconductor nanomaterials",
           "legacy_claim_ids": [
-            "CV158"
+            "todd-d-krauss:CV158"
           ],
           "material_hash": "f352fe5ce0a5c646dd9a7cddb4287f036e9500a54d88a5602cbbd1093dd79470",
           "revision": 1,
@@ -13386,7 +13386,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "valeri-goncharov:CV193"
           ],
           "material_hash": "9463e925958cba4a4454a16a48a0f714558f9fe5712adc892c99b21601952848",
           "revision": 1,
@@ -13408,7 +13408,7 @@
           "evidence_level": "direct",
           "label": "Radiation hydrodynamics and plasma instability",
           "legacy_claim_ids": [
-            "CV202"
+            "valeri-goncharov:CV202"
           ],
           "material_hash": "efb7cec9ddcb4ea8711a875dcd3093868865a9399778855932794e61e48ae126",
           "revision": 1,
@@ -13466,7 +13466,7 @@
           "evidence_level": "direct",
           "label": "Data-driven surrogate modeling",
           "legacy_claim_ids": [
-            "CV017"
+            "varchas-gopalaswamy:CV017"
           ],
           "material_hash": "0540e9a50c1ca06fb354d2c92e3fe1f7c3ad63c1552266bd262540ef12d37e5f",
           "revision": 1,
@@ -13488,7 +13488,7 @@
           "evidence_level": "direct",
           "label": "Inertial confinement fusion",
           "legacy_claim_ids": [
-            "CV193"
+            "varchas-gopalaswamy:CV193"
           ],
           "material_hash": "a710c9cb474db0b804f089800d66be550243b956259f38a0e607321e0743ef75",
           "revision": 1,
@@ -13510,7 +13510,7 @@
           "evidence_level": "direct",
           "label": "Thermonuclear burn and implosion physics",
           "legacy_claim_ids": [
-            "CV195"
+            "varchas-gopalaswamy:CV195"
           ],
           "material_hash": "8c709d6c016ec0026e5aecb364c3ff636f0d1e0a034675a0a401aca3f144c216",
           "revision": 1,
@@ -13568,7 +13568,7 @@
           "evidence_level": "direct",
           "label": "Finite-element and computational mechanics",
           "legacy_claim_ids": [
-            "CV182"
+            "victor-l-genberg:CV182"
           ],
           "material_hash": "9ee5b3ee0e5c5e251707aa3bc50e28c8a93050aef7cc121cb56b2c282d874dc9",
           "revision": 1,
@@ -13625,7 +13625,7 @@
           "evidence_level": "corroborated",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "wayne-h-knox:CV093"
           ],
           "material_hash": "240053c6c1715b898b628e45509f09ce5b811d544692fe8cc1289a5a10fef1a1",
           "revision": 1,
@@ -13649,7 +13649,7 @@
           "evidence_level": "corroborated",
           "label": "Ophthalmic and retinal optics",
           "legacy_claim_ids": [
-            "CV083"
+            "wayne-h-knox:CV083"
           ],
           "material_hash": "7fb3267aec8516fb2b3e0bb0b14f5be53758eecdac0ad8bfce33727ca98735ae",
           "revision": 1,
@@ -13673,7 +13673,7 @@
           "evidence_level": "corroborated",
           "label": "Laser-matter interaction and processing",
           "legacy_claim_ids": [
-            "CV096"
+            "wayne-h-knox:CV096"
           ],
           "material_hash": "182e01b27268ea46ca0f1933ef260881500d83896f14bdca0f8110f74ce07e71",
           "revision": 1,
@@ -13768,7 +13768,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical energy storage",
           "legacy_claim_ids": [
-            "CV171"
+            "wenjie-zang:CV171"
           ],
           "material_hash": "a6680e95233fb92f29edac3f426820c03070fe0f9f19a76187ad0887bab28215",
           "revision": 1,
@@ -13792,7 +13792,7 @@
           "evidence_level": "direct",
           "label": "Heterogeneous catalysis",
           "legacy_claim_ids": [
-            "CV139"
+            "wenjie-zang:CV139"
           ],
           "material_hash": "1f0413de04b9007e7fe398cd35dbf70951d116af154335ff160d7b69c773bb57",
           "revision": 1,
@@ -13854,7 +13854,7 @@
           "evidence_level": "direct",
           "label": "Mechanobiology and mechanotransduction",
           "legacy_claim_ids": [
-            "CV113"
+            "whasil-lee:CV113"
           ],
           "material_hash": "a12f0cde6291a11e27ac570f9fcad9d82489e1377bba8672b15f6caa2860a9f3",
           "revision": 1,
@@ -13877,7 +13877,7 @@
           "evidence_level": "direct",
           "label": "Tissue biomechanics",
           "legacy_claim_ids": [
-            "CV112"
+            "whasil-lee:CV112"
           ],
           "material_hash": "b2c926b5aba7f9bda673383d1d8f8df0d9d41ef8e9e44afb9bc55bcd4c803c09",
           "revision": 1,
@@ -13900,7 +13900,7 @@
           "evidence_level": "direct",
           "label": "Musculoskeletal biomechanics and rehabilitation",
           "legacy_claim_ids": [
-            "CV114"
+            "whasil-lee:CV114"
           ],
           "material_hash": "50127da673798ad37c074c713ebe1ecab9c9cbc583e174862d161557588c0d9b",
           "revision": 1,
@@ -13956,7 +13956,7 @@
           "evidence_level": "corroborated",
           "label": "RF and microwave electronics",
           "legacy_claim_ids": [
-            "CV043"
+            "william-renninger:CV043"
           ],
           "material_hash": "6521705cca71d5fbd38ac38dcada05bbe23b5d08fb62ac3cce42c8329c99c758",
           "revision": 1,
@@ -13979,7 +13979,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "william-renninger:CV093"
           ],
           "material_hash": "a54aaf2f763892edf48ec7d78f2e4b477d290db052b5fb1f26803115c4eb6f49",
           "revision": 1,
@@ -14002,7 +14002,7 @@
           "evidence_level": "corroborated",
           "label": "Excitons, polaritons, and light-matter coupling",
           "legacy_claim_ids": [
-            "CV109"
+            "william-renninger:CV109"
           ],
           "material_hash": "b629f2350a3d427dbf892ef43e1379f1f3c37df3f5b0f583ec8764c20f7e95d2",
           "revision": 1,
@@ -14058,7 +14058,7 @@
           "evidence_level": "direct",
           "label": "High-power and high-energy laser systems",
           "legacy_claim_ids": [
-            "CV095"
+            "wolfgang-theobald:CV095"
           ],
           "material_hash": "cba758aacba37b91adf1e2e548647274564ecc71e947e71b3fbcd0e03c850152",
           "revision": 1,
@@ -14080,7 +14080,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "wolfgang-theobald:CV093"
           ],
           "material_hash": "4cf5b9e1295cc51474519bf4b695aa934d1a8a224ecf194a1d919500a2ef4c99",
           "revision": 1,
@@ -14102,7 +14102,7 @@
           "evidence_level": "direct",
           "label": "Laser-plasma interaction",
           "legacy_claim_ids": [
-            "CV197"
+            "wolfgang-theobald:CV197"
           ],
           "material_hash": "756050510a3496ccfa93021db4e2df025edd6fee4df0632bc3aee0ac00a800a4",
           "revision": 1,
@@ -14158,7 +14158,7 @@
           "evidence_level": "direct",
           "label": "Thin-film deposition and atomic layer deposition",
           "legacy_claim_ids": [
-            "CV167"
+            "wyatt-e-tenhaeff:CV167"
           ],
           "material_hash": "442de1a6e4c641df6a2d52f0265dc0d9cfaccc8b217f7c28f6a2b159554b304d",
           "revision": 1,
@@ -14182,7 +14182,7 @@
           "evidence_level": "direct",
           "label": "Electrochemical energy storage",
           "legacy_claim_ids": [
-            "CV171"
+            "wyatt-e-tenhaeff:CV171"
           ],
           "material_hash": "4e28fc0c1524322bc555417cc9a0fd3669907667cbfbe74c424eaf527c9b0771",
           "revision": 1,
@@ -14206,7 +14206,7 @@
           "evidence_level": "direct",
           "label": "Polymer membranes and separations",
           "legacy_claim_ids": [
-            "CV154"
+            "wyatt-e-tenhaeff:CV154"
           ],
           "material_hash": "df53817c28e4c8d6fc740ea8eee5c16c61aa7c6c2869fb900d3c8c413c07551a",
           "revision": 1,
@@ -14411,7 +14411,7 @@
           "evidence_level": "direct",
           "label": "Terahertz science and imaging",
           "legacy_claim_ids": [
-            "CV094"
+            "xi-cheng-zhang:CV094"
           ],
           "material_hash": "9f06cc209410c46615b656576fe40257ee5d5d240e04b6ef243937138cd0cf56",
           "revision": 1,
@@ -14434,7 +14434,7 @@
           "evidence_level": "direct",
           "label": "Ultrafast optics and spectroscopy",
           "legacy_claim_ids": [
-            "CV093"
+            "xi-cheng-zhang:CV093"
           ],
           "material_hash": "86cbe9e46448527583b1d06cec83ca02aedbd3f12efdb6ea0f1dd9d4fae515cd",
           "revision": 1,
@@ -14457,7 +14457,7 @@
           "evidence_level": "direct",
           "label": "Laser-matter interaction and processing",
           "legacy_claim_ids": [
-            "CV096"
+            "xi-cheng-zhang:CV096"
           ],
           "material_hash": "aa46eb32651cc11867660260b4f6376734db2b5eccfd7104b499ad44c18cb6cf",
           "revision": 1,
@@ -14551,7 +14551,7 @@
           "evidence_level": "direct",
           "label": "GPU and heterogeneous accelerators",
           "legacy_claim_ids": [
-            "CV037"
+            "yanan-guo:CV037"
           ],
           "material_hash": "e3e2fe8cf7415330cfc0849c23bc59327d0a9bcaeaa76835984346276498f1ae",
           "revision": 1,
@@ -14575,7 +14575,7 @@
           "evidence_level": "direct",
           "label": "Memory systems and data locality",
           "legacy_claim_ids": [
-            "CV039"
+            "yanan-guo:CV039"
           ],
           "material_hash": "d3ba8a72af4cb6fcc4f6224137f9349a40371ad957ed959b1df648dde208e773",
           "revision": 1,
@@ -14599,7 +14599,7 @@
           "evidence_level": "direct",
           "label": "Hardware security",
           "legacy_claim_ids": [
-            "CV045"
+            "yanan-guo:CV045"
           ],
           "material_hash": "d28058946a5496879e5a0873b7a3213c5f357354ec710d60e158dbf705e38783",
           "revision": 1,
@@ -14661,7 +14661,7 @@
           "evidence_level": "direct",
           "label": "Polymer membranes and separations",
           "legacy_claim_ids": [
-            "CV154"
+            "yasemin-basdogan:CV154"
           ],
           "material_hash": "80964d1bb6678d4040d975e98e8c4ff20ffbfcf9c8c73fc5456a2b43c60f7134",
           "revision": 1,
@@ -14686,7 +14686,7 @@
           "evidence_level": "direct",
           "label": "Atomistic and molecular simulation",
           "legacy_claim_ids": [
-            "CV161"
+            "yasemin-basdogan:CV161"
           ],
           "material_hash": "013ef873441d49a428972bb309e44e16b21acb94b97e74f14cc0844f3ccb3675",
           "revision": 1,
@@ -14711,7 +14711,7 @@
           "evidence_level": "direct",
           "label": "Theoretical and computational chemistry",
           "legacy_claim_ids": [
-            "CV149"
+            "yasemin-basdogan:CV149"
           ],
           "material_hash": "c72c2911c92399bf50d96571a08ba426b105124e16679e26a3d8040cdde4f6bb",
           "revision": 1,
@@ -14945,7 +14945,7 @@
           "evidence_level": "direct",
           "label": "Computational imaging",
           "legacy_claim_ids": [
-            "CV064"
+            "yuhao-zhu:CV064"
           ],
           "material_hash": "96aacfa41614eb0e3f2667329a4611a1fa8b79cce608be038233c4b574d5df0f",
           "revision": 1,
@@ -14968,7 +14968,7 @@
           "evidence_level": "direct",
           "label": "Augmented and virtual reality",
           "legacy_claim_ids": [
-            "CV055"
+            "yuhao-zhu:CV055"
           ],
           "material_hash": "2f441daba3c0386782a28502f38108b4a0375308bd8315d0e3861844be67d2f0",
           "revision": 1,
@@ -14991,7 +14991,7 @@
           "evidence_level": "direct",
           "label": "Computer architecture",
           "legacy_claim_ids": [
-            "CV035"
+            "yuhao-zhu:CV035"
           ],
           "material_hash": "d96fa5f3f7c04ee4114e80ee11746c8ad68163b8856a9807c137a7502c1bfd8d",
           "revision": 1,
@@ -15051,7 +15051,7 @@
           "evidence_level": "corroborated",
           "label": "Behavioral sensing and modeling",
           "legacy_claim_ids": [
-            "CV059"
+            "yukang-yan:CV059"
           ],
           "material_hash": "b86a890a794057d93de461216484db830ec39c288f030736c8918d4e10701460",
           "revision": 1,
@@ -15075,7 +15075,7 @@
           "evidence_level": "direct",
           "label": "Tangible and embodied interfaces",
           "legacy_claim_ids": [
-            "CV056"
+            "yukang-yan:CV056"
           ],
           "material_hash": "daa0cfdbf6efbc025a1031c532967887c27487e02a7b8b5db904eea47ad73b76",
           "revision": 1,
@@ -15099,7 +15099,7 @@
           "evidence_level": "direct",
           "label": "Augmented and virtual reality",
           "legacy_claim_ids": [
-            "CV055"
+            "yukang-yan:CV055"
           ],
           "material_hash": "935bb912f8ccfac911aa6d350b61b55f2df0fa941e68afdc70c65ed133e850a1",
           "revision": 1,
@@ -15159,7 +15159,7 @@
           "evidence_level": "corroborated",
           "label": "Thin-film deposition and atomic layer deposition",
           "legacy_claim_ids": [
-            "CV167"
+            "zachary-robinson:CV167"
           ],
           "material_hash": "5df97de80cd5377d59ed9c89906d0e8fd6dcc553bfed31a9ab1e443358f13ff1",
           "revision": 1,
@@ -15185,7 +15185,7 @@
           "evidence_level": "corroborated",
           "label": "Hydrogen, tritium, and isotope systems",
           "legacy_claim_ids": [
-            "CV174"
+            "zachary-robinson:CV174"
           ],
           "material_hash": "bbdc8042c0b54da948c19ef2c2514491ddf23b73740789cf557d8e4165694764",
           "revision": 1,
@@ -15211,7 +15211,7 @@
           "evidence_level": "corroborated",
           "label": "Fusion targets, cryogenics, and fuel cycle",
           "legacy_claim_ids": [
-            "CV201"
+            "zachary-robinson:CV201"
           ],
           "material_hash": "80e1a3076f0472cef2fa5fb5fc512bbdd157c5a2650bc65912b1cd65eb1067fe",
           "revision": 1,
@@ -15271,7 +15271,7 @@
           "evidence_level": "direct",
           "label": "Analog and mixed-signal electronics",
           "legacy_claim_ids": [
-            "CV042"
+            "zeljko-ignjatovic:CV042"
           ],
           "material_hash": "83460715666bfcf05ccd38089c1f5ec5840ffd24879b5a30ffab550f3a25ed31",
           "revision": 1,
@@ -15293,7 +15293,7 @@
           "evidence_level": "direct",
           "label": "Integrated circuit design",
           "legacy_claim_ids": [
-            "CV040"
+            "zeljko-ignjatovic:CV040"
           ],
           "material_hash": "67fd68bc8abf1756cd27b39d38e70708ba420e96957a58048c51228fa8e54d71",
           "revision": 1,
@@ -15345,7 +15345,7 @@
           "evidence_level": "direct",
           "label": "Affective and social computing",
           "legacy_claim_ids": [
-            "CV058"
+            "zhen-bai:CV058"
           ],
           "material_hash": "f04a3363012d655ffb3e71de9cfed2485bbb4dfa8af4b9d541332a654adba243",
           "revision": 1,
@@ -15368,7 +15368,7 @@
           "evidence_level": "direct",
           "label": "Tangible and embodied interfaces",
           "legacy_claim_ids": [
-            "CV056"
+            "zhen-bai:CV056"
           ],
           "material_hash": "c113c6620bee0f90f01c3aad8bcb628d8e6e4dc8d520e64b5bd3d4fae06b6484",
           "revision": 1,
@@ -15391,7 +15391,7 @@
           "evidence_level": "direct",
           "label": "Augmented and virtual reality",
           "legacy_claim_ids": [
-            "CV055"
+            "zhen-bai:CV055"
           ],
           "material_hash": "62255f7cb2b229ff1a3e46fc97242bf12087656c44b777f82cc49a0eae264f1a",
           "revision": 1,
@@ -15454,7 +15454,7 @@
           "evidence_level": "direct",
           "label": "Music information and performance technology",
           "legacy_claim_ids": [
-            "CV067"
+            "zhiyao-duan:CV067"
           ],
           "material_hash": "dcb93bfe92368fac3b88f56bf2c75e9e3ab8a5a8580791c06a9f26e2a9f966ad",
           "revision": 1,
@@ -15478,7 +15478,7 @@
           "evidence_level": "direct",
           "label": "Audio and speech machine learning",
           "legacy_claim_ids": [
-            "CV014"
+            "zhiyao-duan:CV014"
           ],
           "material_hash": "aa3b7ab12ea18e0927997347b3b4ec3eb9745cc51c986efefc0d7b267ac4dd83",
           "revision": 1,
@@ -15502,7 +15502,7 @@
           "evidence_level": "direct",
           "label": "Search and information retrieval",
           "legacy_claim_ids": [
-            "CV020"
+            "zhiyao-duan:CV020"
           ],
           "material_hash": "6f03dcaac3067567d567461ae51a8983a26c3b714736fb4d9157edf982a26a3d",
           "revision": 1,
