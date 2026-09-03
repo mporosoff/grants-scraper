@@ -40,6 +40,7 @@
     answering: false,
     searchActivityOwner: 0,
     historyStateTimer: 0,
+    historyStatePending: false,
     historyRestoreDepth: 0,
   };
 
@@ -306,18 +307,38 @@
     replaceHistoryStateIfChanged({ ...(history.state || {}), ...historyViewState() });
   }
 
-  function scheduleCurrentHistoryViewState() {
-    if (state.historyRestoreDepth) return;
-    clearTimeout(state.historyStateTimer);
+  function armHistoryStateThrottle() {
     state.historyStateTimer = setTimeout(() => {
       state.historyStateTimer = 0;
+      if (state.historyRestoreDepth) {
+        state.historyStatePending = false;
+        return;
+      }
+      if (!state.historyStatePending) return;
+      state.historyStatePending = false;
       recordCurrentHistoryViewState();
+      armHistoryStateThrottle();
     }, 250);
   }
 
+  function scheduleCurrentHistoryViewState() {
+    if (state.historyRestoreDepth) return;
+    if (state.historyStateTimer) {
+      state.historyStatePending = true;
+      return;
+    }
+    state.historyStatePending = false;
+    recordCurrentHistoryViewState();
+    armHistoryStateThrottle();
+  }
+
   function writeHistoryUrl(url, mode = "replace", departureHistoryState = null) {
-    if (!location.protocol.startsWith("http") || state.historyRestoreDepth) return;
+    if (!location.protocol.startsWith("http")) return;
     const nextUrl = new URL(url, location.href).href;
+    if (state.historyRestoreDepth) {
+      if (mode === "replace") replaceHistoryStateIfChanged(history.state, nextUrl);
+      return;
+    }
     if (mode === "push" && nextUrl !== location.href) {
       replaceHistoryStateIfChanged({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) });
       history.pushState(historyViewState(), "", nextUrl);
@@ -1301,6 +1322,7 @@
     window.addEventListener("popstate", async event => {
       clearTimeout(state.historyStateTimer);
       state.historyStateTimer = 0;
+      state.historyStatePending = false;
       state.historyRestoreDepth += 1;
       try {
         const restored = core.stateFromSearch(location.search);
