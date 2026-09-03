@@ -69,7 +69,12 @@ def canonical_sort_name(value: object) -> str:
     parts = display_name.split()
     if len(parts) < 2:
         return display_name
-    suffix = parts.pop() if re.fullmatch(r"(?:Jr\.?|Sr\.?|II|III|IV)", parts[-1], re.I) else ""
+    final_token = parts[-1]
+    roman_suffix = final_token != "I" and re.fullmatch(
+        r"(?=[MDCLXVI]+$)M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})",
+        final_token,
+    )
+    suffix = parts.pop() if re.fullmatch(r"(?:Jr\.?|Sr\.?)", final_token, re.I) or roman_suffix else ""
     family = parts.pop()
     return f"{family}, {' '.join(parts)}{' ' + suffix if suffix else ''}"
 

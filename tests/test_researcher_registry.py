@@ -54,6 +54,9 @@ class ResearcherRegistryTests(unittest.TestCase):
     def test_canonical_sort_name_keeps_suffixes_after_the_given_name(self):
         self.assertEqual(canonical_sort_name("Edward Brown III"), "Brown, Edward III")
         self.assertEqual(canonical_sort_name("Martin Luther King Jr."), "King, Martin Luther Jr.")
+        self.assertEqual(canonical_sort_name("John Smith V"), "Smith, John V")
+        self.assertEqual(canonical_sort_name("John Smith VI"), "Smith, John VI")
+        self.assertEqual(canonical_sort_name("Alex Li"), "Li, Alex")
 
     def test_legacy_claim_ids_are_bounded_global_strings(self):
         claims = [claim for researcher in self.registry["researchers"] for claim in researcher["claims"]]

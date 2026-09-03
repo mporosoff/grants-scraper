@@ -244,6 +244,9 @@ test("correction approval defaults apply submitted additions and retirements", (
   );
   assert.equal(canonicalSortName("Edward Brown III"), "Brown, Edward III");
   assert.equal(canonicalSortName("Martin Luther King Jr."), "King, Martin Luther Jr.");
+  assert.equal(canonicalSortName("John Smith V"), "Smith, John V");
+  assert.equal(canonicalSortName("John Smith VI"), "Smith, John VI");
+  assert.equal(canonicalSortName("Alex Li"), "Li, Alex");
   assert.equal(seedApprovedProfile({
     proposed_profile: { display_name: "Edward Brown III", claims: [], source_urls: [] },
   }, "2026-09-03").sort_name, "Brown, Edward III");
