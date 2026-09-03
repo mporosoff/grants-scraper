@@ -202,7 +202,12 @@ test("Funding Finder panels are lazy, rerender-safe, independently owned, and ac
   assert.match(page, /assets\/opportunity-team\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /assets\/opportunity-team-panel\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /id="filter-team-ready"[^>]+aria-pressed="false"/);
+  assert.match(page, /data\/researcher_directory\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /data\/opportunity_team_index\.js\?v=[a-f0-9]{64}/);
+  assert.ok(
+    page.indexOf("data/researcher_directory.js") < page.indexOf("assets/opportunity-team.js"),
+    "the canonical researcher directory must load before the opportunity-team validator",
+  );
   assert.match(appSource, /teamAvailable \? `<button class="source-action opportunity-team-trigger"/);
   assert.match(appSource, /data-opportunity-team="\$\{escapeAttribute\(id\)\}"/);
   assert.match(appSource, /data-opportunity-team-broad="\$\{isBroadOpportunity\(record\)\}"/);

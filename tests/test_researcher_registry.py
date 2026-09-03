@@ -76,6 +76,14 @@ class ResearcherRegistryTests(unittest.TestCase):
             self.assertEqual(metadata["researcher_id"], profiles[name]["researcher_id"])
             self.assertEqual(metadata["claim_refs"], profiles[name]["claim_refs"])
 
+    def test_department_projection_keeps_legacy_lookup_name_and_canonical_display_name(self):
+        profile = next(
+            row for row in matching_profiles(self.registry)
+            if row["researcher_id"] == "urh-000014"
+        )
+        self.assertEqual(profile["name"], "Astrid M. Muller")
+        self.assertEqual(profile["resolved_name"], "Astrid M. Müller")
+
     def test_cosmetic_and_scientific_changes_have_bounded_dependency_effects(self):
         renamed = copy.deepcopy(self.registry)
         renamed["researchers"][0]["display_name"] += " Test"

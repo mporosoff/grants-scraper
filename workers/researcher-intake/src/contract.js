@@ -116,7 +116,7 @@ export function validateAdminProfile(value, researcherId) {
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
   const claims = value.claims.map((claim, index) => {
-    const claimAllowed = new Set(["claim_id", "revision", "status", "label", "category", "type", "evidence", "source_urls", "verified_on", "evidence_level", "legacy_claim_ids", "material_hash"]);
+    const claimAllowed = new Set(["claim_id", "revision", "status", "label", "category", "categories", "type", "evidence", "source_urls", "verified_on", "evidence_level", "legacy_claim_ids", "material_hash"]);
     exactFields(claim, claimAllowed, "Claim");
     const claimId = text(claim.claim_id, 40, "Claim identifier") || (researcherId ? `${researcherId}-c${String(index + 1).padStart(3, "0")}` : "");
     if (claimId && !/^urh-[0-9]{6}-c[0-9]{3}$/.test(claimId)) fail("invalid_claim_id", "A claim identifier is invalid.");
@@ -124,9 +124,12 @@ export function validateAdminProfile(value, researcherId) {
     if (claimId && claimIds.has(claimId)) fail("invalid_claim_id", "Claim identifiers must be unique.");
     if (claimId) claimIds.add(claimId);
     if (!CLAIM_STATUSES.has(claim.status) || !EVIDENCE_LEVELS.has(claim.evidence_level)) fail("invalid_claim", "A claim state is invalid.");
+    const category = text(claim.category, 140, "Claim category", true);
+    const categories = list(claim.categories || [category], 12, 140, "Claim categories", true);
+    if (!categories.includes(category)) fail("invalid_claim", "Claim categories must include the primary category.");
     return {
       claim_id: claimId, revision: Math.max(1, Number(claim.revision) || 1), status: claim.status,
-      label: text(claim.label, 180, "Claim label", true), category: text(claim.category, 140, "Claim category", true),
+      label: text(claim.label, 180, "Claim label", true), category, categories,
       type: text(claim.type, 80, "Claim type", true), evidence: text(claim.evidence, 500, "Claim evidence", true),
       source_urls: urls(claim.source_urls, true), verified_on: text(claim.verified_on, 10, "Claim verification date", true),
       evidence_level: claim.evidence_level, legacy_claim_ids: list(claim.legacy_claim_ids || [], 10, 80, "Legacy claim identifier"),

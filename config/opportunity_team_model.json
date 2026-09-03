@@ -25,6 +25,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000001-c001",
           "claim_revision": 1,
@@ -35,6 +38,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000001-c002",
           "claim_revision": 1,
@@ -72,6 +78,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000002-c001",
           "claim_revision": 1,
@@ -114,6 +123,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000003-c001",
           "claim_revision": 1,
@@ -124,6 +136,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000003-c002",
           "claim_revision": 1,
@@ -134,6 +149,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000003-c003",
           "claim_revision": 1,
@@ -175,6 +193,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000004-c001",
           "claim_revision": 1,
@@ -185,6 +206,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000004-c002",
           "claim_revision": 1,
@@ -195,6 +219,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000004-c003",
           "claim_revision": 1,
@@ -235,6 +262,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000005-c001",
           "claim_revision": 1,
@@ -245,6 +275,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000005-c002",
           "claim_revision": 1,
@@ -255,6 +288,10 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c003",
           "claim_revision": 1,
@@ -265,6 +302,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c004",
           "claim_revision": 1,
@@ -275,6 +316,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c005",
           "claim_revision": 1,
@@ -285,6 +330,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c006",
           "claim_revision": 1,
@@ -295,6 +344,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c007",
           "claim_revision": 1,
@@ -305,6 +358,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000005-c008",
           "claim_revision": 1,
@@ -342,6 +399,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000006-c001",
           "claim_revision": 1,
@@ -352,6 +412,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000006-c002",
           "claim_revision": 1,
@@ -395,6 +458,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000007-c001",
           "claim_revision": 1,
@@ -405,6 +471,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000007-c002",
           "claim_revision": 1,
@@ -415,6 +484,12 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Environmental science",
+            "Infectious disease",
+            "Public health"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000007-c003",
           "claim_revision": 1,
@@ -425,6 +500,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Environmental science",
+            "Infectious disease",
+            "Public health"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000007-c004",
           "claim_revision": 1,
@@ -435,6 +516,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Environmental science",
+            "Infectious disease",
+            "Public health"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000007-c005",
           "claim_revision": 1,
@@ -445,6 +532,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Environmental science",
+            "Infectious disease",
+            "Public health"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000007-c006",
           "claim_revision": 1,
@@ -455,6 +548,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Environmental science",
+            "Infectious disease",
+            "Public health"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000007-c007",
           "claim_revision": 1,
@@ -495,6 +594,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000008-c001",
           "claim_revision": 1,
@@ -532,6 +634,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000009-c001",
           "claim_revision": 1,
@@ -542,6 +647,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000009-c002",
           "claim_revision": 1,
@@ -577,6 +685,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000010-c001",
           "claim_revision": 1,
@@ -612,6 +723,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000011-c001",
           "claim_revision": 1,
@@ -651,6 +765,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000012-c001",
           "claim_revision": 1,
@@ -661,6 +778,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000012-c002",
           "claim_revision": 1,
@@ -671,6 +791,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000012-c003",
           "claim_revision": 1,
@@ -718,6 +841,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000013-c001",
           "claim_revision": 1,
@@ -728,6 +854,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000013-c002",
           "claim_revision": 1,
@@ -768,6 +897,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000014-c001",
           "claim_revision": 1,
@@ -778,6 +910,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000014-c002",
           "claim_revision": 1,
@@ -788,6 +923,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000014-c003",
           "claim_revision": 1,
@@ -798,6 +936,13 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c004",
           "claim_revision": 1,
@@ -808,6 +953,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c005",
           "claim_revision": 1,
@@ -818,6 +970,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c006",
           "claim_revision": 1,
@@ -828,6 +987,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c007",
           "claim_revision": 1,
@@ -838,6 +1004,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c008",
           "claim_revision": 1,
@@ -848,6 +1021,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000014-c009",
           "claim_revision": 1,
@@ -886,6 +1066,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000015-c001",
           "claim_revision": 1,
@@ -896,6 +1079,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000015-c002",
           "claim_revision": 1,
@@ -906,6 +1092,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000015-c003",
           "claim_revision": 1,
@@ -945,6 +1134,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000016-c001",
           "claim_revision": 1,
@@ -955,6 +1147,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000016-c002",
           "claim_revision": 1,
@@ -965,6 +1160,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000016-c003",
           "claim_revision": 1,
@@ -998,6 +1196,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000017-c001",
           "claim_revision": 1,
@@ -1008,6 +1209,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000017-c002",
           "claim_revision": 1,
@@ -1018,6 +1222,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000017-c003",
           "claim_revision": 1,
@@ -1053,6 +1260,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000018-c001",
           "claim_revision": 1,
@@ -1092,6 +1302,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000019-c001",
           "claim_revision": 1,
@@ -1102,6 +1315,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000019-c002",
           "claim_revision": 1,
@@ -1112,6 +1328,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000019-c003",
           "claim_revision": 1,
@@ -1151,6 +1370,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000020-c001",
           "claim_revision": 1,
@@ -1161,6 +1383,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000020-c002",
           "claim_revision": 1,
@@ -1171,6 +1396,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000020-c003",
           "claim_revision": 1,
@@ -1208,6 +1436,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000021-c001",
           "claim_revision": 1,
@@ -1218,6 +1449,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000021-c002",
           "claim_revision": 1,
@@ -1257,6 +1491,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000022-c001",
           "claim_revision": 1,
@@ -1267,6 +1504,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000022-c002",
           "claim_revision": 1,
@@ -1306,6 +1546,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000023-c001",
           "claim_revision": 1,
@@ -1342,6 +1585,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000024-c001",
           "claim_revision": 1,
@@ -1378,6 +1624,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000025-c001",
           "claim_revision": 1,
@@ -1388,6 +1637,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000025-c002",
           "claim_revision": 1,
@@ -1428,6 +1680,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000026-c001",
           "claim_revision": 1,
@@ -1464,6 +1719,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000027-c001",
           "claim_revision": 1,
@@ -1474,6 +1732,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000027-c002",
           "claim_revision": 1,
@@ -1484,6 +1745,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000027-c003",
           "claim_revision": 1,
@@ -1523,6 +1787,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000028-c001",
           "claim_revision": 1,
@@ -1533,6 +1800,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000028-c002",
           "claim_revision": 1,
@@ -1543,6 +1813,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000028-c003",
           "claim_revision": 1,
@@ -1580,6 +1853,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000029-c001",
           "claim_revision": 1,
@@ -1590,6 +1866,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000029-c002",
           "claim_revision": 1,
@@ -1600,6 +1879,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000029-c003",
           "claim_revision": 1,
@@ -1637,6 +1919,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000030-c001",
           "claim_revision": 1,
@@ -1672,6 +1957,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000031-c001",
           "claim_revision": 1,
@@ -1682,6 +1970,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000031-c002",
           "claim_revision": 1,
@@ -1692,6 +1983,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000031-c003",
           "claim_revision": 1,
@@ -1729,6 +2023,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000032-c001",
           "claim_revision": 1,
@@ -1739,6 +2036,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000032-c002",
           "claim_revision": 1,
@@ -1749,6 +2049,10 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c003",
           "claim_revision": 1,
@@ -1759,6 +2063,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c004",
           "claim_revision": 1,
@@ -1769,6 +2077,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c005",
           "claim_revision": 1,
@@ -1779,6 +2091,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c006",
           "claim_revision": 1,
@@ -1789,6 +2105,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c007",
           "claim_revision": 1,
@@ -1799,6 +2119,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000032-c008",
           "claim_revision": 1,
@@ -1835,6 +2159,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000033-c001",
           "claim_revision": 1,
@@ -1845,6 +2172,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000033-c002",
           "claim_revision": 1,
@@ -1855,6 +2185,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000033-c003",
           "claim_revision": 1,
@@ -1893,6 +2226,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000034-c001",
           "claim_revision": 1,
@@ -1903,6 +2239,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000034-c002",
           "claim_revision": 1,
@@ -1913,6 +2252,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000034-c003",
           "claim_revision": 1,
@@ -1949,6 +2291,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000035-c001",
           "claim_revision": 1,
@@ -1959,6 +2304,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000035-c002",
           "claim_revision": 1,
@@ -1969,6 +2317,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000035-c003",
           "claim_revision": 1,
@@ -2004,6 +2355,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000036-c001",
           "claim_revision": 1,
@@ -2014,6 +2368,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000036-c002",
           "claim_revision": 1,
@@ -2024,6 +2381,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000036-c003",
           "claim_revision": 1,
@@ -2064,6 +2424,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000037-c001",
           "claim_revision": 1,
@@ -2074,6 +2437,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000037-c002",
           "claim_revision": 1,
@@ -2084,6 +2450,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000037-c003",
           "claim_revision": 1,
@@ -2121,6 +2490,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000038-c001",
           "claim_revision": 1,
@@ -2131,6 +2503,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000038-c002",
           "claim_revision": 1,
@@ -2166,6 +2541,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000039-c001",
           "claim_revision": 1,
@@ -2201,6 +2579,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000040-c001",
           "claim_revision": 1,
@@ -2241,6 +2622,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000041-c001",
           "claim_revision": 1,
@@ -2251,6 +2635,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000041-c002",
           "claim_revision": 1,
@@ -2294,6 +2681,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Interdisciplinary research"
+          ],
           "category": "Interdisciplinary research",
           "claim_id": "urh-000042-c001",
           "claim_revision": 1,
@@ -2330,6 +2720,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000043-c001",
           "claim_revision": 1,
@@ -2366,6 +2759,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000044-c001",
           "claim_revision": 1,
@@ -2376,6 +2772,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000044-c002",
           "claim_revision": 1,
@@ -2414,6 +2813,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000045-c001",
           "claim_revision": 1,
@@ -2458,6 +2860,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000046-c001",
           "claim_revision": 1,
@@ -2468,6 +2873,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000046-c002",
           "claim_revision": 1,
@@ -2478,6 +2886,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000046-c003",
           "claim_revision": 1,
@@ -2488,6 +2899,13 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000046-c004",
           "claim_revision": 1,
@@ -2498,6 +2916,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000046-c005",
           "claim_revision": 1,
@@ -2508,6 +2933,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000046-c006",
           "claim_revision": 1,
@@ -2518,6 +2950,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000046-c007",
           "claim_revision": 1,
@@ -2528,6 +2967,13 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Environmental science",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000046-c008",
           "claim_revision": 1,
@@ -2565,6 +3011,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000047-c001",
           "claim_revision": 1,
@@ -2575,6 +3024,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000047-c002",
           "claim_revision": 1,
@@ -2616,6 +3068,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000048-c001",
           "claim_revision": 1,
@@ -2656,6 +3111,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000049-c001",
           "claim_revision": 1,
@@ -2666,6 +3124,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000049-c002",
           "claim_revision": 1,
@@ -2676,6 +3137,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000049-c003",
           "claim_revision": 1,
@@ -2716,6 +3180,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000050-c001",
           "claim_revision": 1,
@@ -2752,6 +3219,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000051-c001",
           "claim_revision": 1,
@@ -2784,6 +3254,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000052-c001",
           "claim_revision": 1,
@@ -2794,6 +3267,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000052-c002",
           "claim_revision": 1,
@@ -2829,6 +3305,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Interdisciplinary research"
+          ],
           "category": "Interdisciplinary research",
           "claim_id": "urh-000053-c001",
           "claim_revision": 1,
@@ -2864,6 +3343,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000054-c001",
           "claim_revision": 1,
@@ -2874,6 +3356,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000054-c002",
           "claim_revision": 1,
@@ -2884,6 +3369,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000054-c003",
           "claim_revision": 1,
@@ -2923,6 +3411,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000055-c001",
           "claim_revision": 1,
@@ -2933,6 +3424,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000055-c002",
           "claim_revision": 1,
@@ -2973,6 +3467,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000056-c001",
           "claim_revision": 1,
@@ -2983,6 +3480,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000056-c002",
           "claim_revision": 1,
@@ -3027,6 +3527,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000057-c001",
           "claim_revision": 1,
@@ -3037,6 +3540,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000057-c002",
           "claim_revision": 1,
@@ -3047,6 +3553,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000057-c003",
           "claim_revision": 1,
@@ -3087,6 +3596,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000058-c001",
           "claim_revision": 1,
@@ -3097,6 +3609,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000058-c002",
           "claim_revision": 1,
@@ -3107,6 +3622,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000058-c003",
           "claim_revision": 1,
@@ -3141,6 +3659,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000059-c001",
           "claim_revision": 1,
@@ -3151,6 +3672,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000059-c002",
           "claim_revision": 1,
@@ -3161,6 +3685,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000059-c003",
           "claim_revision": 1,
@@ -3197,6 +3724,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000060-c001",
           "claim_revision": 1,
@@ -3207,6 +3737,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000060-c002",
           "claim_revision": 1,
@@ -3244,6 +3777,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000061-c001",
           "claim_revision": 1,
@@ -3254,6 +3790,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000061-c002",
           "claim_revision": 1,
@@ -3264,6 +3803,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000061-c003",
           "claim_revision": 1,
@@ -3301,6 +3843,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000062-c001",
           "claim_revision": 1,
@@ -3311,6 +3856,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000062-c002",
           "claim_revision": 1,
@@ -3351,6 +3899,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000063-c001",
           "claim_revision": 1,
@@ -3361,6 +3912,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000063-c002",
           "claim_revision": 1,
@@ -3371,6 +3925,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000063-c003",
           "claim_revision": 1,
@@ -3405,6 +3962,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000064-c001",
           "claim_revision": 1,
@@ -3441,6 +4001,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000065-c001",
           "claim_revision": 1,
@@ -3451,6 +4014,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000065-c002",
           "claim_revision": 1,
@@ -3461,6 +4027,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000065-c003",
           "claim_revision": 1,
@@ -3497,6 +4066,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000066-c001",
           "claim_revision": 1,
@@ -3507,6 +4079,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000066-c002",
           "claim_revision": 1,
@@ -3549,6 +4124,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000067-c001",
           "claim_revision": 1,
@@ -3559,6 +4137,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000067-c002",
           "claim_revision": 1,
@@ -3569,6 +4150,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000067-c003",
           "claim_revision": 1,
@@ -3616,6 +4200,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000068-c001",
           "claim_revision": 1,
@@ -3626,6 +4213,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000068-c002",
           "claim_revision": 1,
@@ -3636,6 +4226,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000068-c003",
           "claim_revision": 1,
@@ -3671,6 +4264,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Interdisciplinary research"
+          ],
           "category": "Interdisciplinary research",
           "claim_id": "urh-000069-c001",
           "claim_revision": 1,
@@ -3710,6 +4306,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000070-c001",
           "claim_revision": 1,
@@ -3720,6 +4319,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000070-c002",
           "claim_revision": 1,
@@ -3730,6 +4332,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000070-c003",
           "claim_revision": 1,
@@ -3768,6 +4373,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000071-c001",
           "claim_revision": 1,
@@ -3778,6 +4386,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000071-c002",
           "claim_revision": 1,
@@ -3820,6 +4431,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000072-c001",
           "claim_revision": 1,
@@ -3830,6 +4444,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000072-c002",
           "claim_revision": 1,
@@ -3840,6 +4457,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000072-c003",
           "claim_revision": 1,
@@ -3877,6 +4497,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000073-c001",
           "claim_revision": 1,
@@ -3914,6 +4537,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000074-c001",
           "claim_revision": 1,
@@ -3950,6 +4576,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000075-c001",
           "claim_revision": 1,
@@ -3960,6 +4589,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000075-c002",
           "claim_revision": 1,
@@ -3970,6 +4602,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000075-c003",
           "claim_revision": 1,
@@ -4007,6 +4642,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000076-c001",
           "claim_revision": 1,
@@ -4044,6 +4682,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000077-c001",
           "claim_revision": 1,
@@ -4054,6 +4695,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000077-c002",
           "claim_revision": 1,
@@ -4091,6 +4735,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000078-c001",
           "claim_revision": 1,
@@ -4101,6 +4748,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000078-c002",
           "claim_revision": 1,
@@ -4111,6 +4761,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000078-c003",
           "claim_revision": 1,
@@ -4147,6 +4800,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000079-c001",
           "claim_revision": 1,
@@ -4157,6 +4813,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000079-c002",
           "claim_revision": 1,
@@ -4167,6 +4826,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000079-c003",
           "claim_revision": 1,
@@ -4203,6 +4865,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000080-c001",
           "claim_revision": 1,
@@ -4213,6 +4878,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000080-c002",
           "claim_revision": 1,
@@ -4223,6 +4891,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000080-c003",
           "claim_revision": 1,
@@ -4261,6 +4932,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000081-c001",
           "claim_revision": 1,
@@ -4271,6 +4945,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000081-c002",
           "claim_revision": 1,
@@ -4306,6 +4983,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000082-c001",
           "claim_revision": 1,
@@ -4316,6 +4996,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000082-c002",
           "claim_revision": 1,
@@ -4326,6 +5009,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000082-c003",
           "claim_revision": 1,
@@ -4364,6 +5050,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000083-c001",
           "claim_revision": 1,
@@ -4374,6 +5063,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000083-c002",
           "claim_revision": 1,
@@ -4384,6 +5076,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000083-c003",
           "claim_revision": 1,
@@ -4422,6 +5117,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000084-c001",
           "claim_revision": 1,
@@ -4432,6 +5130,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000084-c002",
           "claim_revision": 1,
@@ -4442,6 +5143,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000084-c003",
           "claim_revision": 1,
@@ -4478,6 +5182,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Algorithms, theory, and optimization"
+          ],
           "category": "Algorithms, theory, and optimization",
           "claim_id": "urh-000085-c001",
           "claim_revision": 1,
@@ -4516,6 +5223,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000086-c001",
           "claim_revision": 1,
@@ -4526,6 +5236,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000086-c002",
           "claim_revision": 1,
@@ -4536,6 +5249,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000086-c003",
           "claim_revision": 1,
@@ -4573,6 +5289,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000087-c001",
           "claim_revision": 1,
@@ -4615,6 +5334,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000088-c001",
           "claim_revision": 1,
@@ -4625,6 +5347,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000088-c002",
           "claim_revision": 1,
@@ -4635,6 +5360,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000088-c003",
           "claim_revision": 1,
@@ -4674,6 +5402,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000089-c001",
           "claim_revision": 1,
@@ -4684,6 +5415,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000089-c002",
           "claim_revision": 1,
@@ -4724,6 +5458,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000090-c001",
           "claim_revision": 1,
@@ -4760,6 +5497,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000091-c001",
           "claim_revision": 1,
@@ -4770,6 +5510,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000091-c002",
           "claim_revision": 1,
@@ -4780,6 +5523,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000091-c003",
           "claim_revision": 1,
@@ -4819,6 +5565,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000092-c001",
           "claim_revision": 1,
@@ -4829,6 +5578,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000092-c002",
           "claim_revision": 1,
@@ -4839,6 +5591,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000092-c003",
           "claim_revision": 1,
@@ -4849,6 +5604,12 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000092-c004",
           "claim_revision": 1,
@@ -4859,6 +5620,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000092-c005",
           "claim_revision": 1,
@@ -4869,6 +5636,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000092-c006",
           "claim_revision": 1,
@@ -4879,6 +5652,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000092-c007",
           "claim_revision": 1,
@@ -4889,6 +5668,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Carbon management",
           "claim_id": "urh-000092-c008",
           "claim_revision": 1,
@@ -4924,6 +5709,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000093-c001",
           "claim_revision": 1,
@@ -4962,6 +5750,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000094-c001",
           "claim_revision": 1,
@@ -4972,6 +5763,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000094-c002",
           "claim_revision": 1,
@@ -5008,6 +5802,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000095-c001",
           "claim_revision": 1,
@@ -5018,6 +5815,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000095-c002",
           "claim_revision": 1,
@@ -5053,6 +5853,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000096-c001",
           "claim_revision": 1,
@@ -5091,6 +5894,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000097-c001",
           "claim_revision": 1,
@@ -5101,6 +5907,11 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c002",
           "claim_revision": 1,
@@ -5111,6 +5922,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c003",
           "claim_revision": 1,
@@ -5121,6 +5937,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c004",
           "claim_revision": 1,
@@ -5131,6 +5952,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c005",
           "claim_revision": 1,
@@ -5141,6 +5967,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c006",
           "claim_revision": 1,
@@ -5151,6 +5982,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Catalysis and reaction engineering",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Catalysis and reaction engineering",
           "claim_id": "urh-000097-c007",
           "claim_revision": 1,
@@ -5187,6 +6023,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000098-c001",
           "claim_revision": 1,
@@ -5197,6 +6036,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000098-c002",
           "claim_revision": 1,
@@ -5235,6 +6077,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000099-c001",
           "claim_revision": 1,
@@ -5245,6 +6090,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000099-c002",
           "claim_revision": 1,
@@ -5255,6 +6103,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000099-c003",
           "claim_revision": 1,
@@ -5294,6 +6145,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000100-c001",
           "claim_revision": 1,
@@ -5304,6 +6158,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000100-c002",
           "claim_revision": 1,
@@ -5314,6 +6171,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000100-c003",
           "claim_revision": 1,
@@ -5351,6 +6211,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000101-c001",
           "claim_revision": 1,
@@ -5361,6 +6224,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000101-c002",
           "claim_revision": 1,
@@ -5397,6 +6263,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000102-c001",
           "claim_revision": 1,
@@ -5438,6 +6307,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000103-c001",
           "claim_revision": 1,
@@ -5448,6 +6320,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000103-c002",
           "claim_revision": 1,
@@ -5458,6 +6333,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000103-c003",
           "claim_revision": 1,
@@ -5468,6 +6346,10 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c004",
           "claim_revision": 1,
@@ -5478,6 +6360,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c005",
           "claim_revision": 1,
@@ -5488,6 +6374,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c006",
           "claim_revision": 1,
@@ -5498,6 +6388,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c007",
           "claim_revision": 1,
@@ -5508,6 +6402,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c008",
           "claim_revision": 1,
@@ -5518,6 +6416,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Manufacturing",
           "claim_id": "urh-000103-c009",
           "claim_revision": 1,
@@ -5555,6 +6457,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000104-c001",
           "claim_revision": 1,
@@ -5565,6 +6470,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000104-c002",
           "claim_revision": 1,
@@ -5575,6 +6483,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000104-c003",
           "claim_revision": 1,
@@ -5616,6 +6527,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000105-c001",
           "claim_revision": 1,
@@ -5626,6 +6540,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000105-c002",
           "claim_revision": 1,
@@ -5636,6 +6553,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000105-c003",
           "claim_revision": 1,
@@ -5676,6 +6596,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000106-c001",
           "claim_revision": 1,
@@ -5686,6 +6609,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000106-c002",
           "claim_revision": 1,
@@ -5723,6 +6649,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000107-c001",
           "claim_revision": 1,
@@ -5733,6 +6662,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000107-c002",
           "claim_revision": 1,
@@ -5743,6 +6675,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000107-c003",
           "claim_revision": 1,
@@ -5782,6 +6717,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000108-c001",
           "claim_revision": 1,
@@ -5792,6 +6730,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000108-c002",
           "claim_revision": 1,
@@ -5802,6 +6743,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000108-c003",
           "claim_revision": 1,
@@ -5839,6 +6783,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000109-c001",
           "claim_revision": 1,
@@ -5849,6 +6796,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000109-c002",
           "claim_revision": 1,
@@ -5859,6 +6809,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000109-c003",
           "claim_revision": 1,
@@ -5901,6 +6854,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000110-c001",
           "claim_revision": 1,
@@ -5911,6 +6867,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000110-c002",
           "claim_revision": 1,
@@ -5921,6 +6880,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000110-c003",
           "claim_revision": 1,
@@ -5961,6 +6923,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000111-c001",
           "claim_revision": 1,
@@ -5971,6 +6936,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000111-c002",
           "claim_revision": 1,
@@ -5981,6 +6949,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000111-c003",
           "claim_revision": 1,
@@ -5991,6 +6962,10 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c004",
           "claim_revision": 1,
@@ -6001,6 +6976,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c005",
           "claim_revision": 1,
@@ -6011,6 +6990,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c006",
           "claim_revision": 1,
@@ -6021,6 +7004,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c007",
           "claim_revision": 1,
@@ -6031,6 +7018,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c008",
           "claim_revision": 1,
@@ -6041,6 +7032,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Manufacturing"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000111-c009",
           "claim_revision": 1,
@@ -6079,6 +7074,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000112-c001",
           "claim_revision": 1,
@@ -6089,6 +7087,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000112-c002",
           "claim_revision": 1,
@@ -6099,6 +7100,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000112-c003",
           "claim_revision": 1,
@@ -6140,6 +7144,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000113-c001",
           "claim_revision": 1,
@@ -6150,6 +7157,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000113-c002",
           "claim_revision": 1,
@@ -6160,6 +7170,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000113-c003",
           "claim_revision": 1,
@@ -6200,6 +7213,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000114-c001",
           "claim_revision": 1,
@@ -6236,6 +7252,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000115-c001",
           "claim_revision": 1,
@@ -6246,6 +7265,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000115-c002",
           "claim_revision": 1,
@@ -6256,6 +7278,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000115-c003",
           "claim_revision": 1,
@@ -6291,6 +7316,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000116-c001",
           "claim_revision": 1,
@@ -6301,6 +7329,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000116-c002",
           "claim_revision": 1,
@@ -6336,6 +7367,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Interdisciplinary research"
+          ],
           "category": "Interdisciplinary research",
           "claim_id": "urh-000117-c001",
           "claim_revision": 1,
@@ -6374,6 +7408,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000118-c001",
           "claim_revision": 1,
@@ -6384,6 +7421,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000118-c002",
           "claim_revision": 1,
@@ -6394,6 +7434,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000118-c003",
           "claim_revision": 1,
@@ -6430,6 +7473,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000119-c001",
           "claim_revision": 1,
@@ -6440,6 +7486,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000119-c002",
           "claim_revision": 1,
@@ -6477,6 +7526,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000120-c001",
           "claim_revision": 1,
@@ -6487,6 +7539,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Mechanics, fluids, structures, and transport"
+          ],
           "category": "Mechanics, fluids, structures, and transport",
           "claim_id": "urh-000120-c002",
           "claim_revision": 1,
@@ -6497,6 +7552,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000120-c003",
           "claim_revision": 1,
@@ -6535,6 +7593,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000121-c001",
           "claim_revision": 1,
@@ -6545,6 +7606,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000121-c002",
           "claim_revision": 1,
@@ -6555,6 +7619,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Biotechnology and biological systems"
+          ],
           "category": "Biotechnology and biological systems",
           "claim_id": "urh-000121-c003",
           "claim_revision": 1,
@@ -6589,6 +7656,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000122-c001",
           "claim_revision": 1,
@@ -6599,6 +7669,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000122-c002",
           "claim_revision": 1,
@@ -6609,6 +7682,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000122-c003",
           "claim_revision": 1,
@@ -6648,6 +7724,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000123-c001",
           "claim_revision": 1,
@@ -6658,6 +7737,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000123-c002",
           "claim_revision": 1,
@@ -6696,6 +7778,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000124-c001",
           "claim_revision": 1,
@@ -6706,6 +7791,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000124-c002",
           "claim_revision": 1,
@@ -6716,6 +7804,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000124-c003",
           "claim_revision": 1,
@@ -6753,6 +7844,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000125-c001",
           "claim_revision": 1,
@@ -6763,6 +7857,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000125-c002",
           "claim_revision": 1,
@@ -6773,6 +7870,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000125-c003",
           "claim_revision": 1,
@@ -6783,6 +7883,12 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c004",
           "claim_revision": 1,
@@ -6793,6 +7899,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c005",
           "claim_revision": 1,
@@ -6803,6 +7915,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c006",
           "claim_revision": 1,
@@ -6813,6 +7931,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c007",
           "claim_revision": 1,
@@ -6823,6 +7947,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c008",
           "claim_revision": 1,
@@ -6833,6 +7963,12 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000125-c009",
           "claim_revision": 1,
@@ -6876,6 +8012,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000126-c001",
           "claim_revision": 1,
@@ -6886,6 +8025,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000126-c002",
           "claim_revision": 1,
@@ -6924,6 +8066,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000127-c001",
           "claim_revision": 1,
@@ -6934,6 +8079,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000127-c002",
           "claim_revision": 1,
@@ -6969,6 +8117,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000128-c001",
           "claim_revision": 1,
@@ -7008,6 +8159,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000129-c001",
           "claim_revision": 1,
@@ -7018,6 +8172,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000129-c002",
           "claim_revision": 1,
@@ -7028,6 +8185,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000129-c003",
           "claim_revision": 1,
@@ -7063,6 +8223,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000130-c001",
           "claim_revision": 1,
@@ -7073,6 +8236,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000130-c002",
           "claim_revision": 1,
@@ -7083,6 +8249,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000130-c003",
           "claim_revision": 1,
@@ -7127,6 +8296,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000131-c001",
           "claim_revision": 1,
@@ -7137,6 +8309,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000131-c002",
           "claim_revision": 1,
@@ -7147,6 +8322,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000131-c003",
           "claim_revision": 1,
@@ -7186,6 +8364,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000132-c001",
           "claim_revision": 1,
@@ -7196,6 +8377,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000132-c002",
           "claim_revision": 1,
@@ -7206,6 +8390,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000132-c003",
           "claim_revision": 1,
@@ -7242,6 +8429,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000133-c001",
           "claim_revision": 1,
@@ -7252,6 +8442,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000133-c002",
           "claim_revision": 1,
@@ -7262,6 +8455,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000133-c003",
           "claim_revision": 1,
@@ -7328,6 +8524,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000135-c001",
           "claim_revision": 1,
@@ -7366,6 +8565,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000136-c001",
           "claim_revision": 1,
@@ -7376,6 +8578,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000136-c002",
           "claim_revision": 1,
@@ -7414,6 +8619,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000137-c001",
           "claim_revision": 1,
@@ -7424,6 +8632,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000137-c002",
           "claim_revision": 1,
@@ -7462,6 +8673,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000138-c001",
           "claim_revision": 1,
@@ -7472,6 +8686,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000138-c002",
           "claim_revision": 1,
@@ -7482,6 +8699,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000138-c003",
           "claim_revision": 1,
@@ -7519,6 +8739,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Interdisciplinary research"
+          ],
           "category": "Interdisciplinary research",
           "claim_id": "urh-000139-c001",
           "claim_revision": 1,
@@ -7553,6 +8776,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000140-c001",
           "claim_revision": 1,
@@ -7563,6 +8789,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000140-c002",
           "claim_revision": 1,
@@ -7573,6 +8802,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000140-c003",
           "claim_revision": 1,
@@ -7644,6 +8876,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000142-c001",
           "claim_revision": 1,
@@ -7654,6 +8889,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000142-c002",
           "claim_revision": 1,
@@ -7689,6 +8927,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000143-c001",
           "claim_revision": 1,
@@ -7699,6 +8940,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000143-c002",
           "claim_revision": 1,
@@ -7709,6 +8953,9 @@
           "type": "Phenomenon"
         },
         {
+          "categories": [
+            "Biomedical engineering and neuroscience"
+          ],
           "category": "Biomedical engineering and neuroscience",
           "claim_id": "urh-000143-c003",
           "claim_revision": 1,
@@ -7744,6 +8991,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000144-c001",
           "claim_revision": 1,
@@ -7754,6 +9004,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000144-c002",
           "claim_revision": 1,
@@ -7764,6 +9017,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Quantum science and electronic materials"
+          ],
           "category": "Quantum science and electronic materials",
           "claim_id": "urh-000144-c003",
           "claim_revision": 1,
@@ -7800,6 +9056,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000145-c001",
           "claim_revision": 1,
@@ -7810,6 +9069,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000145-c002",
           "claim_revision": 1,
@@ -7820,6 +9082,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000145-c003",
           "claim_revision": 1,
@@ -7859,6 +9124,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000146-c001",
           "claim_revision": 1,
@@ -7869,6 +9137,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000146-c002",
           "claim_revision": 1,
@@ -7879,6 +9150,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000146-c003",
           "claim_revision": 1,
@@ -7889,6 +9163,11 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c004",
           "claim_revision": 1,
@@ -7899,6 +9178,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c005",
           "claim_revision": 1,
@@ -7909,6 +9193,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c006",
           "claim_revision": 1,
@@ -7919,6 +9208,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c007",
           "claim_revision": 1,
@@ -7929,6 +9223,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c008",
           "claim_revision": 1,
@@ -7939,6 +9238,11 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Energy",
+            "Manufacturing",
+            "Materials science"
+          ],
           "category": "Energy",
           "claim_id": "urh-000146-c009",
           "claim_revision": 1,
@@ -7977,6 +9281,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000147-c001",
           "claim_revision": 1,
@@ -7987,6 +9294,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000147-c002",
           "claim_revision": 1,
@@ -7997,6 +9307,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Optics, photonics, and lasers"
+          ],
           "category": "Optics, photonics, and lasers",
           "claim_id": "urh-000147-c003",
           "claim_revision": 1,
@@ -8064,6 +9377,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000149-c001",
           "claim_revision": 1,
@@ -8074,6 +9390,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000149-c002",
           "claim_revision": 1,
@@ -8084,6 +9403,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000149-c003",
           "claim_revision": 1,
@@ -8127,6 +9449,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000150-c001",
           "claim_revision": 1,
@@ -8137,6 +9462,9 @@
           "type": "Material / system"
         },
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000150-c002",
           "claim_revision": 1,
@@ -8147,6 +9475,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Chemistry, catalysis, and molecular systems"
+          ],
           "category": "Chemistry, catalysis, and molecular systems",
           "claim_id": "urh-000150-c003",
           "claim_revision": 1,
@@ -8157,6 +9488,14 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c004",
           "claim_revision": 1,
@@ -8167,6 +9506,14 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c005",
           "claim_revision": 1,
@@ -8177,6 +9524,14 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c006",
           "claim_revision": 1,
@@ -8187,6 +9542,14 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c007",
           "claim_revision": 1,
@@ -8197,6 +9560,14 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c008",
           "claim_revision": 1,
@@ -8207,6 +9578,14 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Artificial intelligence and machine learning",
+            "Carbon management",
+            "Catalysis and reaction engineering",
+            "Energy",
+            "Materials science",
+            "Separations and membranes"
+          ],
           "category": "Artificial intelligence and machine learning",
           "claim_id": "urh-000150-c009",
           "claim_revision": 1,
@@ -8246,6 +9625,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000151-c001",
           "claim_revision": 1,
@@ -8256,6 +9638,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000151-c002",
           "claim_revision": 1,
@@ -8266,6 +9651,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000151-c003",
           "claim_revision": 1,
@@ -8304,6 +9692,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000152-c001",
           "claim_revision": 1,
@@ -8314,6 +9705,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000152-c002",
           "claim_revision": 1,
@@ -8324,6 +9718,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000152-c003",
           "claim_revision": 1,
@@ -8360,6 +9757,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Materials, polymers, and manufacturing"
+          ],
           "category": "Materials, polymers, and manufacturing",
           "claim_id": "urh-000153-c001",
           "claim_revision": 1,
@@ -8370,6 +9770,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "Energy, environment, and sustainability"
+          ],
           "category": "Energy, environment, and sustainability",
           "claim_id": "urh-000153-c002",
           "claim_revision": 1,
@@ -8380,6 +9783,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Fusion, plasma, and high-energy-density science"
+          ],
           "category": "Fusion, plasma, and high-energy-density science",
           "claim_id": "urh-000153-c003",
           "claim_revision": 1,
@@ -8412,6 +9818,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000154-c001",
           "claim_revision": 1,
@@ -8422,6 +9831,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Computer systems, security, and networks"
+          ],
           "category": "Computer systems, security, and networks",
           "claim_id": "urh-000154-c002",
           "claim_revision": 1,
@@ -8464,6 +9876,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000155-c001",
           "claim_revision": 1,
@@ -8474,6 +9889,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000155-c002",
           "claim_revision": 1,
@@ -8484,6 +9902,9 @@
           "type": "Platform"
         },
         {
+          "categories": [
+            "Human-centered computing, language, and XR"
+          ],
           "category": "Human-centered computing, language, and XR",
           "claim_id": "urh-000155-c003",
           "claim_revision": 1,
@@ -8523,6 +9944,9 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Signals, imaging, audio, and sensing"
+          ],
           "category": "Signals, imaging, audio, and sensing",
           "claim_id": "urh-000156-c001",
           "claim_revision": 1,
@@ -8533,6 +9957,9 @@
           "type": "Application"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000156-c002",
           "claim_revision": 1,
@@ -8543,6 +9970,9 @@
           "type": "Method"
         },
         {
+          "categories": [
+            "AI, data, and computational methods"
+          ],
           "category": "AI, data, and computational methods",
           "claim_id": "urh-000156-c003",
           "claim_revision": 1,
@@ -8581,6 +10011,10 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c001",
           "claim_revision": 1,
@@ -8591,6 +10025,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c002",
           "claim_revision": 1,
@@ -8601,6 +10039,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c003",
           "claim_revision": 1,
@@ -8611,6 +10053,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c004",
           "claim_revision": 1,
@@ -8621,6 +10067,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c005",
           "claim_revision": 1,
@@ -8631,6 +10081,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000157-c006",
           "claim_revision": 1,
@@ -8669,6 +10123,10 @@
       "status": "active",
       "terms": [
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c001",
           "claim_revision": 1,
@@ -8679,6 +10137,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c002",
           "claim_revision": 1,
@@ -8689,6 +10151,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c003",
           "claim_revision": 1,
@@ -8699,6 +10165,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c004",
           "claim_revision": 1,
@@ -8709,6 +10179,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c005",
           "claim_revision": 1,
@@ -8719,6 +10193,10 @@
           "type": "Capability"
         },
         {
+          "categories": [
+            "Biology and biotechnology",
+            "Materials science"
+          ],
           "category": "Biology and biotechnology",
           "claim_id": "urh-000158-c006",
           "claim_revision": 1,
@@ -8731,7 +10209,7 @@
       ]
     }
   ],
-  "generation_id": "44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff",
+  "generation_id": "6cc44ca08426ad32ec47f8d63cf47c48db4526848e5f1ab0b2d5e1137f950a71",
   "limitations": [
     "The directory may omit relevant faculty and does not imply availability or eligibility.",
     "Only the listed opportunity scopes have a reviewed role model; broad parent programs never receive a team proposal.",
@@ -10010,7 +11488,7 @@
     "unadmitted": 3
   },
   "release_state": "evidence_calibrated_pilot",
-  "researcher_registry_generation": "a19cece6fee307eeb5a54c7fca74f115db0434c1638cc3384f2a016b6eb8085b",
+  "researcher_registry_generation": "815b57cbb354e1e410b942a24d95c1c89d161208c9adcd4f1802c6f6144aa26c",
   "schema_version": 1,
   "source_hashes": {
     "benchmark_lock": "8c1ae23b0104611e0a7ba3cd802b7c56af9c9b9c2c396b1be3413e43e2b0d255",

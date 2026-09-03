@@ -223,9 +223,63 @@ jobs:
             --data-binary @/tmp/publication-complete.json \
             "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/complete"
 
-      - name: Mark a failed publication without changing the public registry
+      - name: Reconcile a failed publication without misreporting a merged change
         if: ${{ failure() }}
+        env:
+          PUBLICATION_PR_URL: ${{ steps.pull-request.outputs.url }}
+          KNOWN_MERGE_SHA: ${{ steps.merge.outputs.sha }}
         run: |
+          merge_sha="$KNOWN_MERGE_SHA"
+          pr_state=""
+          if [ -z "$merge_sha" ] && [ -n "$PUBLICATION_PR_URL" ]; then
+            pr_state="$(gh pr view "$PUBLICATION_PR_URL" --json state --jq .state 2>/dev/null || true)"
+            if [ "$pr_state" = "MERGED" ]; then
+              merge_sha="$(gh pr view "$PUBLICATION_PR_URL" --json mergeCommit --jq .mergeCommit.oid)"
+            fi
+          fi
+
+          if [ -n "$merge_sha" ]; then
+            expected="$(jq -r '.registry_generation // empty' data/researcher_registry_manifest.json 2>/dev/null || true)"
+            researcher_id="$(jq -r '.changes[0].researcher_id // empty' /tmp/researcher-dependency-report.json 2>/dev/null || true)"
+            display_name="$(jq -r '.approved_profile.display_name // empty' /tmp/approved-researcher-submission.json 2>/dev/null || true)"
+            for attempt in $(seq 1 36); do
+              curl --fail --silent --show-error --max-time 15 \
+                "$SITE_ROOT/data/researcher_registry_manifest.json?reconcile=$merge_sha" \
+                -o /tmp/live-researcher-manifest.json || true
+              live="$(jq -r '.registry_generation // empty' /tmp/live-researcher-manifest.json 2>/dev/null || true)"
+              if [ -n "$expected" ] && [ "$live" = "$expected" ] && [ -n "$researcher_id" ] && [ -n "$display_name" ]; then
+                if curl --fail --silent --show-error --max-time 15 \
+                    "$SITE_ROOT/data/researcher_directory.js?reconcile=$merge_sha" \
+                    -o /tmp/live-researcher-directory.js \
+                  && python -c 'import json,pathlib,sys; source=pathlib.Path("/tmp/live-researcher-directory.js").read_text(); data=json.loads(source[source.index("{"):].rstrip().rstrip(";")); expected,researcher_id,display_name=sys.argv[1:]; assert data["registry_generation"] == expected; assert len([row for row in data["researchers"] if row["id"] == researcher_id and row["name"] == display_name]) == 1' \
+                    "$expected" "$researcher_id" "$display_name"; then
+                  verified_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+                  jq -n \
+                    --argjson revision "$APPROVED_REVISION" \
+                    --arg sha "$merge_sha" \
+                    --arg generation "$expected" \
+                    --arg verified "$verified_at" \
+                    '{expected_revision:$revision,commit_sha:$sha,registry_generation:$generation,deployment_result:"github_pages_succeeded_after_reconciliation",public_verified_at:$verified}' \
+                    > /tmp/publication-reconciled.json
+                  if curl --fail --silent --show-error --max-time 20 \
+                      -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+                      -H "Content-Type: application/json" \
+                      --data-binary @/tmp/publication-reconciled.json \
+                      "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/complete"; then
+                    echo "Reconciled the merged registry publication at $merge_sha."
+                    exit 0
+                  fi
+                fi
+              fi
+              sleep 10
+            done
+            echo "::error::The registry PR merged at $merge_sha, but the exact public generation could not be reconciled. The queue record remains in publishing state for operator recovery."
+            exit 0
+          fi
+
+          if [ "$pr_state" = "OPEN" ]; then
+            gh pr merge "$PUBLICATION_PR_URL" --disable-auto || true
+          fi
           jq -n --argjson revision "$APPROVED_REVISION" \
             '{expected_revision:$revision,failure_code:"publication_workflow_failed",deployment_result:"workflow_failed"}' \
             > /tmp/publication-failed.json

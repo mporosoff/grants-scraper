@@ -4,10 +4,12 @@ import test from "node:test";
 
 import { enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
 import { createHandler } from "../../workers/researcher-intake/src/index.js";
+import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, migration, workflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, workflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
+  readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
   readFile(new URL("workers/researcher-intake/wrangler.jsonc", root), "utf8"),
@@ -160,5 +162,33 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /Refuse every non-allowlisted path/);
   assert.match(workflow, /config\/researcher_registry\.json/);
   assert.match(workflow, /Mark the queue record published only after live verification/);
+  assert.match(workflow, /Reconcile a failed publication without misreporting a merged change/);
+  assert.match(workflow, /if \[ -n "\$merge_sha" \]; then/);
+  assert.match(workflow, /queue record remains in publishing state for operator recovery/);
+  assert.match(workflow, /--disable-auto/);
   assert.doesNotMatch(workflow, /playwright|test:e2e/);
+});
+
+test("publication completion is idempotent after a network-ambiguous callback", async () => {
+  const published = {
+    submission_id: "rs_aaaaaaaaaaaaaaaaaaaaaaaa",
+    state: "published",
+    revision: 4,
+    published_commit_sha: "b".repeat(40),
+    published_registry_generation: "c".repeat(64),
+  };
+  const store = new ResearcherSubmissionStore({});
+  store.byId = async () => published;
+  const result = await store.markPublished(published.submission_id, {
+    expectedRevision: 3,
+    commitSha: published.published_commit_sha,
+    registryGeneration: published.published_registry_generation,
+    deploymentResult: "github_pages_succeeded_after_reconciliation",
+    verifiedAt: "2026-09-03T12:00:00Z",
+  }, "2026-09-03T12:01:00Z");
+  assert.equal(result, published);
+});
+
+test("retention clears either private field independently", () => {
+  assert.match(storeSource, /contact_email IS NOT NULL OR submitter_note IS NOT NULL/);
 });

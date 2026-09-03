@@ -140,6 +140,22 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
         self.assertIn("--catalog data/opportunities.js", workflow)
         self.assertIn("--out data/faculty_matches.js", workflow)
 
+    def test_generated_javascript_uses_platform_independent_line_endings(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            catalog_path = Path(temp_dir) / "catalog.js"
+            output_path = Path(temp_dir) / "matches.js"
+            catalog_path.write_text(
+                "globalThis.GRANT_CATALOG={\"opportunities\":[]};\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            registry = load_registry()
+            match_to_catalog(
+                matching_profiles(registry), str(catalog_path), str(output_path),
+                registry_generation=registry["registry_generation"],
+            )
+            self.assertNotIn(b"\r\n", output_path.read_bytes())
+
 
 if __name__ == "__main__":
     unittest.main()

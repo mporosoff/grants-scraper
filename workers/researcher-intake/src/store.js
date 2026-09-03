@@ -104,6 +104,12 @@ export class ResearcherSubmissionStore {
 
   async markPublished(id, values, now) {
     const current = await this.byId(id);
+    if (current?.state === "published"
+        && current.revision === values.expectedRevision + 1
+        && current.published_commit_sha === values.commitSha
+        && current.published_registry_generation === values.registryGeneration) {
+      return current;
+    }
     if (!current || current.state !== "publishing" || current.revision !== values.expectedRevision) return null;
     const nextRevision = current.revision + 1;
     const result = await this.db.prepare(`UPDATE researcher_submissions SET state = 'published', revision = ?, updated_at = ?,
@@ -141,7 +147,7 @@ export class ResearcherSubmissionStore {
       this.db.prepare(`DELETE FROM researcher_submissions
         WHERE state IN ('rejected', 'superseded') AND updated_at < ?`).bind(rejectedCutoff),
       this.db.prepare(`UPDATE researcher_submissions SET contact_email = NULL, submitter_note = NULL
-        WHERE contact_email IS NOT NULL AND updated_at < ?`).bind(contactCutoff),
+        WHERE (contact_email IS NOT NULL OR submitter_note IS NOT NULL) AND updated_at < ?`).bind(contactCutoff),
     ]);
     return results.reduce((sum, result) => sum + Number(result.meta?.changes || 0), 0);
   }

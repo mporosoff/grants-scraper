@@ -53,7 +53,7 @@ def content_hash(value: object) -> str:
 def material_claim_hash(claim: dict) -> str:
     material = {
         key: claim.get(key)
-        for key in ("status", "label", "category", "type", "evidence", "source_urls", "evidence_level")
+        for key in ("status", "label", "category", "categories", "type", "evidence", "source_urls", "evidence_level")
     }
     return content_hash(material)
 
@@ -173,6 +173,12 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
                 raise ValueError(f"{claim_id} has an invalid status")
             for field, maximum in (("label", 180), ("category", 140), ("type", 80), ("evidence", 500)):
                 _require_text(claim.get(field), f"{claim_id}.{field}", maximum)
+            categories = claim.get("categories")
+            if not isinstance(categories, list) or not categories or len(categories) > 12:
+                raise ValueError(f"{claim_id}.categories must contain 1-12 values")
+            normalized_categories = [_require_text(value, f"{claim_id}.categories", 140) for value in categories]
+            if len(set(normalized_categories)) != len(normalized_categories) or claim["category"] not in normalized_categories:
+                raise ValueError(f"{claim_id}.categories must be unique and include the primary category")
             _validate_urls(claim.get("source_urls"), f"{claim_id}.source_urls")
             if claim.get("evidence_level") not in EVIDENCE_LEVELS:
                 raise ValueError(f"{claim_id} has an invalid evidence_level")
@@ -250,6 +256,7 @@ def directory_projection(registry: dict) -> dict:
                 "status": claim["status"],
                 "label": claim["label"],
                 "category": claim["category"],
+                "categories": claim["categories"],
                 "type": claim["type"],
                 "evidence": claim["evidence"],
                 "source_urls": claim["source_urls"],
@@ -283,6 +290,7 @@ def legacy_faculty_projection(registry: dict) -> list[dict]:
             "claim_revision": claim["revision"],
             "label": claim["label"],
             "category": claim["category"],
+            "categories": claim["categories"],
             "type": claim["type"],
             "evidence": claim["evidence"],
             "evidence_tier": claim["evidence_level"],
@@ -298,14 +306,24 @@ def matching_profiles(registry: dict, *, visibility: str = "department") -> list
         if row["status"] != "active" or row["pool_visibility"] != visibility:
             continue
         claims = [claim for claim in row["claims"] if claim["status"] == "active"]
+        # Keep the pre-registry lookup key when a migrated profile has an alias.
+        # The canonical name remains available as resolved_name and in the public
+        # directory, while existing saved teams and forward-match consumers keep
+        # resolving the legacy spelling without creating a duplicate researcher.
+        matching_name = (row.get("aliases") or [row["display_name"]])[0]
         profiles.append({
             "researcher_id": row["researcher_id"],
             "legacy_ids": row["legacy_ids"],
-            "name": row["display_name"],
+            "name": matching_name,
             "resolved_name": row["display_name"],
             "research_summary": row["research_summary"],
             "key_terms": [claim["label"] for claim in claims],
-            "domains": sorted({claim["category"] for claim in claims if claim["category"]}),
+            "domains": sorted({
+                category
+                for claim in claims
+                for category in (claim.get("categories") or [claim["category"]])
+                if category
+            }),
             "claim_refs": [{"claim_id": claim["claim_id"], "revision": claim["revision"]} for claim in claims],
             "openalex_id": (row.get("external_ids") or {}).get("openalex", ""),
             "works_count": (row.get("metrics") or {}).get("openalex_works_count"),
@@ -497,6 +515,7 @@ def apply_approved_submission(registry: dict, approved: dict, expected_generatio
     for index, claim in enumerate(target.get("claims", []), start=1):
         value = copy.deepcopy(claim)
         value["claim_id"] = value.get("claim_id") or f"{researcher_id}-c{index:03d}"
+        value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
         if old and material_claim_hash(value) != old["material_hash"]:
             value["revision"] = old["revision"] + 1
@@ -548,6 +567,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
                 "status": "active",
                 "label": label,
                 "category": term.get("category") or "Interdisciplinary research",
+                "categories": [term.get("category") or "Interdisciplinary research"],
                 "type": term.get("type") or "Capability",
                 "evidence": term.get("evidence") or label,
                 "source_urls": source_urls,
@@ -569,6 +589,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
                 "status": "active",
                 "label": label,
                 "category": (forward_domains or ["Interdisciplinary research"])[0],
+                "categories": list(dict.fromkeys(forward_domains or ["Interdisciplinary research"])),
                 "type": "Capability",
                 "evidence": label,
                 "source_urls": source_urls,
@@ -620,6 +641,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
             claim = {
                 "claim_id": f"{researcher_id}-c{len(claims) + 1:03d}", "revision": 1, "status": "active",
                 "label": label, "category": (profile.get("domains") or ["Interdisciplinary research"])[0],
+                "categories": list(dict.fromkeys(profile.get("domains") or ["Interdisciplinary research"])),
                 "type": "Capability", "evidence": label, "source_urls": [department_source],
                 "verified_on": "2026-09-03", "evidence_level": "administrator_reviewed", "legacy_claim_ids": [],
             }
