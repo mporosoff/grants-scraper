@@ -5,6 +5,29 @@ function parseJson(value, fallback = null) {
 export class ResearcherSubmissionStore {
   constructor(db) { this.db = db; }
 
+  auditStatement({ id, fromState, toState, actor, revision, reason, now }) {
+    return this.db.prepare(`INSERT INTO researcher_submission_transitions
+      (submission_id, from_state, to_state, actor, revision, reason, created_at)
+      SELECT ?, ?, ?, ?, ?, ?, ?
+      WHERE EXISTS (
+        SELECT 1 FROM researcher_submissions
+        WHERE submission_id = ? AND state = ? AND revision = ? AND updated_at = ?
+      )`)
+      .bind(
+        id, fromState, toState, actor, revision, reason || null, now,
+        id, toState, revision, now,
+      );
+  }
+
+  async commitStateChange(update, audit, id) {
+    const [updateResult, auditResult] = await this.db.batch([update, audit]);
+    const updated = Number(updateResult.meta?.changes || 0);
+    const audited = Number(auditResult.meta?.changes || 0);
+    if (updated === 0 && audited === 0) return null;
+    if (updated !== 1 || audited !== 1) throw new Error("Researcher submission state and audit history diverged.");
+    return this.byId(id);
+  }
+
   async byIdempotencyKey(key) {
     return this.db.prepare("SELECT * FROM researcher_submissions WHERE idempotency_key = ?").bind(key).first();
   }
@@ -68,7 +91,10 @@ export class ResearcherSubmissionStore {
     };
   }
 
-  async transition({ id, fromStates, toState, expectedRevision, actor, reason, approvedProfile, now }) {
+  async transition({
+    id, fromStates, toState, expectedRevision, actor, reason, approvedProfile,
+    publicationStartedAt = null, now,
+  }) {
     const current = await this.byId(id);
     if (!current || current.revision !== expectedRevision || !fromStates.includes(current.state)) return null;
     const placeholders = fromStates.map(() => "?").join(", ");
@@ -77,28 +103,26 @@ export class ResearcherSubmissionStore {
       state = ?, revision = ?, updated_at = ?, administrator_email = ?, administrator_reason = ?,
       approved_profile_json = COALESCE(?, approved_profile_json),
       approved_at = CASE WHEN ? = 'approved' THEN ? ELSE approved_at END,
+      publication_started_at = COALESCE(?, publication_started_at),
       failure_code = CASE WHEN ? = 'publication_failed' THEN failure_code ELSE NULL END
       WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})`)
       .bind(
         toState, nextRevision, now, actor, reason || null,
         approvedProfile ? JSON.stringify(approvedProfile) : null,
-        toState, now, toState, id, expectedRevision, ...fromStates,
+        toState, now, publicationStartedAt, toState, id, expectedRevision, ...fromStates,
       );
-    const result = await update.run();
-    if (Number(result.meta?.changes || 0) !== 1) return null;
-    await this.db.prepare(`INSERT INTO researcher_submission_transitions
-      (submission_id, from_state, to_state, actor, revision, reason, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)`)
-      .bind(id, current.state, toState, actor, nextRevision, reason || null, now).run();
-    return this.byId(id);
+    const audit = this.auditStatement({
+      id, fromState: current.state, toState, actor, revision: nextRevision, reason, now,
+    });
+    return this.commitStateChange(update, audit, id);
   }
 
   async markPublishing(id, expectedRevision, actor, now) {
     const row = await this.transition({
       id, fromStates: ["approved", "publication_failed"], toState: "publishing",
-      expectedRevision, actor, reason: "Registry-only publication dispatched", now,
+      expectedRevision, actor, reason: "Registry-only publication dispatched",
+      publicationStartedAt: now, now,
     });
-    if (row) await this.db.prepare("UPDATE researcher_submissions SET publication_started_at = ? WHERE submission_id = ?").bind(now, id).run();
     return row;
   }
 
@@ -110,19 +134,18 @@ export class ResearcherSubmissionStore {
     const placeholders = fromStates.map(() => "?").join(", ");
     const nextRevision = expectedRevision + 1;
     const auditReason = reason || `Rebased from registry ${current.base_registry_generation} to ${nextGeneration}; administrator re-review required`;
-    const result = await this.db.prepare(`UPDATE researcher_submissions SET
+    const update = this.db.prepare(`UPDATE researcher_submissions SET
       state = 'under_review', base_registry_generation = ?, revision = ?, updated_at = ?,
       administrator_email = ?, administrator_reason = ?, approved_at = NULL,
       publication_started_at = NULL, failure_code = NULL, deployment_result = NULL
       WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})
         AND base_registry_generation <> ?`)
-      .bind(nextGeneration, nextRevision, now, actor, auditReason, id, expectedRevision, ...fromStates, nextGeneration).run();
-    if (Number(result.meta?.changes || 0) !== 1) return null;
-    await this.db.prepare(`INSERT INTO researcher_submission_transitions
-      (submission_id, from_state, to_state, actor, revision, reason, created_at)
-      VALUES (?, ?, 'under_review', ?, ?, ?, ?)`)
-      .bind(id, current.state, actor, nextRevision, auditReason, now).run();
-    return this.byId(id);
+      .bind(nextGeneration, nextRevision, now, actor, auditReason, id, expectedRevision, ...fromStates, nextGeneration);
+    const audit = this.auditStatement({
+      id, fromState: current.state, toState: "under_review", actor,
+      revision: nextRevision, reason: auditReason, now,
+    });
+    return this.commitStateChange(update, audit, id);
   }
 
   async markPublished(id, values, now) {
@@ -135,32 +158,30 @@ export class ResearcherSubmissionStore {
     }
     if (!current || current.state !== "publishing" || current.revision !== values.expectedRevision) return null;
     const nextRevision = current.revision + 1;
-    const result = await this.db.prepare(`UPDATE researcher_submissions SET state = 'published', revision = ?, updated_at = ?,
+    const update = this.db.prepare(`UPDATE researcher_submissions SET state = 'published', revision = ?, updated_at = ?,
       published_at = ?, published_commit_sha = ?, published_registry_generation = ?, deployment_result = ?,
       public_verified_at = ?, failure_code = NULL, contact_email = NULL, submitter_note = NULL
       WHERE submission_id = ? AND state = 'publishing' AND revision = ?`)
-      .bind(nextRevision, now, now, values.commitSha, values.registryGeneration, values.deploymentResult, values.verifiedAt, id, current.revision).run();
-    if (Number(result.meta?.changes || 0) !== 1) return null;
-    await this.db.prepare(`INSERT INTO researcher_submission_transitions
-      (submission_id, from_state, to_state, actor, revision, reason, created_at)
-      VALUES (?, 'publishing', 'published', 'publication_workflow', ?, ?, ?)`)
-      .bind(id, nextRevision, values.commitSha, now).run();
-    return this.byId(id);
+      .bind(nextRevision, now, now, values.commitSha, values.registryGeneration, values.deploymentResult, values.verifiedAt, id, current.revision);
+    const audit = this.auditStatement({
+      id, fromState: "publishing", toState: "published", actor: "publication_workflow",
+      revision: nextRevision, reason: values.commitSha, now,
+    });
+    return this.commitStateChange(update, audit, id);
   }
 
   async markPublicationFailed(id, values, now) {
     const current = await this.byId(id);
     if (!current || current.state !== "publishing" || current.revision !== values.expectedRevision) return null;
     const nextRevision = current.revision + 1;
-    const result = await this.db.prepare(`UPDATE researcher_submissions SET state = 'publication_failed', revision = ?,
+    const update = this.db.prepare(`UPDATE researcher_submissions SET state = 'publication_failed', revision = ?,
       updated_at = ?, failure_code = ?, deployment_result = ? WHERE submission_id = ? AND state = 'publishing' AND revision = ?`)
-      .bind(nextRevision, now, values.failureCode, values.deploymentResult || null, id, current.revision).run();
-    if (Number(result.meta?.changes || 0) !== 1) return null;
-    await this.db.prepare(`INSERT INTO researcher_submission_transitions
-      (submission_id, from_state, to_state, actor, revision, reason, created_at)
-      VALUES (?, 'publishing', 'publication_failed', 'publication_workflow', ?, ?, ?)`)
-      .bind(id, nextRevision, values.failureCode, now).run();
-    return this.byId(id);
+      .bind(nextRevision, now, values.failureCode, values.deploymentResult || null, id, current.revision);
+    const audit = this.auditStatement({
+      id, fromState: "publishing", toState: "publication_failed", actor: "publication_workflow",
+      revision: nextRevision, reason: values.failureCode, now,
+    });
+    return this.commitStateChange(update, audit, id);
   }
 
   async cleanup(now, rejectedRetentionDays, contactRetentionDays) {
@@ -170,7 +191,7 @@ export class ResearcherSubmissionStore {
       this.db.prepare(`DELETE FROM researcher_submissions
         WHERE state IN ('rejected', 'superseded') AND updated_at < ?`).bind(rejectedCutoff),
       this.db.prepare(`UPDATE researcher_submissions SET contact_email = NULL, submitter_note = NULL
-        WHERE (contact_email IS NOT NULL OR submitter_note IS NOT NULL) AND updated_at < ?`).bind(contactCutoff),
+        WHERE (contact_email IS NOT NULL OR submitter_note IS NOT NULL) AND created_at < ?`).bind(contactCutoff),
     ]);
     return results.reduce((sum, result) => sum + Number(result.meta?.changes || 0), 0);
   }

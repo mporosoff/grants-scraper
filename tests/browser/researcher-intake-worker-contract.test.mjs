@@ -4,14 +4,15 @@ import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
-import { createHandler } from "../../workers/researcher-intake/src/index.js";
+import { createHandler, seedApprovedProfile } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, storeSource, migration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, transitionMigration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
+  readFile(new URL("workers/researcher-intake/migrations/0002_unique_transition_revisions.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-researcher-intake.yml", root), "utf8"),
@@ -126,6 +127,44 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
   }, ""), /valid YYYY-MM-DD calendar date/);
 });
 
+test("correction approval defaults apply submitted additions and retirements", () => {
+  const current = {
+    name: "Ada Lovelace", aliases: [], orcid_id: "", home_unit: "Computing",
+    relationship: "internal_affiliated_researcher", pool_visibility: "institution",
+    auto_proposable: true, status: "active", research_summary: "Existing summary",
+    source_urls: ["https://example.edu/old"],
+    claims: [
+      {
+        claim_id: "urh-000001-c001", revision: 1, status: "active", label: "Analytical engines",
+        category: "Computing", categories: ["Computing"], type: "Capability",
+        evidence: "Published analytical engine research.", source_urls: ["https://example.edu/old"],
+        evidence_level: "direct", legacy_claim_ids: [],
+      },
+      {
+        claim_id: "urh-000001-c002", revision: 1, status: "retired", label: "Formal logic",
+        category: "Computing", categories: ["Computing"], type: "Capability",
+        evidence: "Published formal logic research.", source_urls: ["https://example.edu/old"],
+        evidence_level: "direct", legacy_claim_ids: [],
+      },
+    ],
+  };
+  const seeded = seedApprovedProfile({
+    current_profile: current,
+    proposed_profile: {
+      display_name: "Ada Lovelace", orcid_id: "", home_unit: "Computing",
+      research_summary: "Updated summary", claims: ["Formal logic", "Program synthesis"],
+      source_urls: ["https://example.edu/new"],
+    },
+  }, "2026-09-03");
+  assert.deepEqual(
+    seeded.claims.map(claim => [claim.label, claim.status]),
+    [["Analytical engines", "retired"], ["Formal logic", "active"], ["Program synthesis", "active"]],
+  );
+  assert.deepEqual(seeded.claims[2].categories, ["Interdisciplinary research"]);
+  assert.deepEqual(seeded.claims[2].source_urls, ["https://example.edu/new"]);
+  assert.doesNotThrow(() => validateAdminProfile(seeded, "urh-000001"));
+});
+
 test("public creation is rate bounded, idempotent, and returns the same private receipt", async () => {
   const store = new MemoryStore();
   const handler = createHandler({ storeFactory: () => store, now: () => new Date("2026-09-03T12:00:00Z") });
@@ -205,6 +244,7 @@ test("queue schema, worker config, and publication workflow preserve the registr
   for (const state of ["pending", "under_review", "changes_requested", "approved", "publishing", "published", "rejected", "publication_failed", "superseded"]) {
     assert.match(migration, new RegExp(`'${state}'`));
   }
+  assert.match(transitionMigration, /UNIQUE INDEX IF NOT EXISTS researcher_submission_transitions_revision_idx/);
   assert.match(wrangler, /SUBMISSION_RATE_LIMITER/);
   assert.match(workerSource, /cf-access-jwt-assertion/);
   assert.match(workerSource, /crypto\.subtle\.verify/);
@@ -237,6 +277,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);
+  assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
+  assert.doesNotMatch(workerSource, /function defaultProfile\(/);
   assert.doesNotMatch(workflow, /playwright|test:e2e/);
 });
 
@@ -244,6 +286,7 @@ test("a failed stale publication can be rebased only through an audited re-revie
   const database = new DatabaseSync(":memory:");
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(migration);
+  database.exec(transitionMigration);
   const store = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await store.create({
     submissionId: "rs_aaaaaaaaaaaaaaaaaaaaaaaa", idempotencyKey: "12345678-1234-4234-8234-123456789abc",
@@ -277,6 +320,46 @@ test("a failed stale publication can be rebased only through an audited re-revie
     from_state: "publication_failed", to_state: "under_review", revision: rebased.revision,
     reason: `Rebased from registry ${"a".repeat(64)} to ${"b".repeat(64)}; administrator re-review required`,
   });
+  assert.equal(transitions.length, rebased.revision);
+  assert.equal(new Set(transitions.map(row => row.revision)).size, transitions.length);
+});
+
+test("state updates roll back when their audit insert fails", async () => {
+  const database = new DatabaseSync(":memory:");
+  database.exec("PRAGMA foreign_keys = ON");
+  database.exec(migration);
+  database.exec(transitionMigration);
+  const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
+  const created = await normalStore.create({
+    submissionId: "rs_bbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "22345678-1234-4234-8234-123456789abc",
+    payloadHash: "d".repeat(64), receiptTokenHash: "e".repeat(64), submissionType: "new_researcher_nomination",
+    sourceSurface: "faculty_interests", researcherId: null, baseRegistryGeneration: "a".repeat(64),
+    proposedProfile: submission().proposed_profile, contactEmail: "ada@example.edu", submitterNote: "Review",
+    privacyNoticeVersion: "2026-09-03", createdAt: "2026-09-03T12:00:00.000Z",
+  });
+  class FailingAuditD1 extends SqliteD1 {
+    async batch(statements) {
+      this.database.exec("BEGIN IMMEDIATE");
+      try {
+        statements[0].execute();
+        throw new Error("simulated audit failure");
+      } finally {
+        this.database.exec("ROLLBACK");
+      }
+    }
+  }
+  const store = new ResearcherSubmissionStore(new FailingAuditD1(database));
+  await assert.rejects(
+    store.transition({
+      id: created.submission_id, fromStates: ["pending"], toState: "under_review",
+      expectedRevision: created.revision, actor: "admin@example.edu", reason: "Review",
+      now: "2026-09-03T12:01:00.000Z",
+    }),
+    /simulated audit failure/,
+  );
+  const unchanged = database.prepare("SELECT state, revision FROM researcher_submissions WHERE submission_id = ?").get(created.submission_id);
+  assert.deepEqual({ ...unchanged }, { state: "pending", revision: 1 });
+  assert.equal(database.prepare("SELECT COUNT(*) AS count FROM researcher_submission_transitions WHERE submission_id = ?").get(created.submission_id).count, 1);
 });
 
 test("publication completion is idempotent after a network-ambiguous callback", async () => {
@@ -299,6 +382,29 @@ test("publication completion is idempotent after a network-ambiguous callback", 
   assert.equal(result, published);
 });
 
-test("retention clears either private field independently", () => {
+test("retention clears private fields from collection time despite later activity", async () => {
   assert.match(storeSource, /contact_email IS NOT NULL OR submitter_note IS NOT NULL/);
+  assert.match(storeSource, /AND created_at < \?/);
+  const database = new DatabaseSync(":memory:");
+  database.exec("PRAGMA foreign_keys = ON");
+  database.exec(migration);
+  database.exec(transitionMigration);
+  const store = new ResearcherSubmissionStore(new SqliteD1(database));
+  const created = await store.create({
+    submissionId: "rs_cccccccccccccccccccccccc", idempotencyKey: "32345678-1234-4234-8234-123456789abc",
+    payloadHash: "d".repeat(64), receiptTokenHash: "e".repeat(64), submissionType: "new_researcher_nomination",
+    sourceSurface: "faculty_interests", researcherId: null, baseRegistryGeneration: "a".repeat(64),
+    proposedProfile: submission().proposed_profile, contactEmail: "ada@example.edu", submitterNote: "Review",
+    privacyNoticeVersion: "2026-09-03", createdAt: "2026-01-01T00:00:00.000Z",
+  });
+  await store.transition({
+    id: created.submission_id, fromStates: ["pending"], toState: "under_review",
+    expectedRevision: created.revision, actor: "admin@example.edu", reason: "Review",
+    now: "2026-03-30T00:00:00.000Z",
+  });
+  await store.cleanup("2026-04-02T00:00:00.000Z", 90, 90);
+  const retained = await store.byId(created.submission_id);
+  assert.equal(retained.state, "under_review");
+  assert.equal(retained.contact_email, null);
+  assert.equal(retained.submitter_note, null);
 });
