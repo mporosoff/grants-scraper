@@ -128,28 +128,38 @@ jobs:
             exit 1
           fi
       - name: Configure the Award abuse-control identity secret
+        id: worker-secret
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           AWARD_RATE_LIMIT_SECRET: ${{ secrets.AWARD_RATE_LIMIT_SECRET }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
           if [ -z "$AWARD_RATE_LIMIT_SECRET" ]; then
             echo "::error::AWARD_RATE_LIMIT_SECRET is required for privacy-bounded abuse control."
             exit 1
           fi
-          printf '%s' "$AWARD_RATE_LIMIT_SECRET" | npx --yes wrangler@4.125.0 secret put AWARD_RATE_LIMIT_SECRET --config workers/award-api/wrangler.jsonc
+          secret_file="$(mktemp)"
+          chmod 600 "$secret_file"
+          printf '%s' "$AWARD_RATE_LIMIT_SECRET" | jq -Rs '{AWARD_RATE_LIMIT_SECRET: .}' > "$secret_file"
+          echo "secrets_file=$secret_file" >> "$GITHUB_OUTPUT"
       - name: Deploy the committed Award Worker
         id: worker-deploy
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: >-
-          npx --yes wrangler@4.125.0 deploy
-          --config workers/award-api/wrangler.jsonc
-          --message "protected-main:${GITHUB_SHA}; protected main deployment"
+        shell: bash
+        run: |
+          secret_file="${{ steps.worker-secret.outputs.secrets_file }}"
+          if [ ! -s "$secret_file" ]; then
+            echo "::error::The prepared Award Worker secret file is missing."
+            exit 1
+          fi
+          trap 'rm -f -- "$secret_file"' EXIT
+          npx --yes wrangler@4.125.0 deploy \
+            --config workers/award-api/wrangler.jsonc \
+            --secrets-file "$secret_file" \
+            --message "protected-main:${GITHUB_SHA}; protected main deployment"
       - name: Wait for the Award Worker health contract
         id: worker-health
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
