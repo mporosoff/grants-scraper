@@ -3737,7 +3737,7 @@
 
   function updateSavedSearchAlertUi() {
     const button = $("alert-new-matches");
-    const panel = $("alerts-panel");
+    const panel = $("saved-panel");
     const enabled = Boolean(state.searched && state.query);
     if (button) {
       button.disabled = !enabled;
@@ -3751,7 +3751,7 @@
         : "Run a typed funding search to enable this alert.";
     }
     if ($("alert-panel-summary")) {
-      $("alert-panel-summary").textContent = enabled ? "Ready" : "Available after search";
+      $("alert-panel-summary").textContent = enabled ? "Email alert ready" : "View saved items";
     }
     panel?.classList.toggle("alert-ready", enabled);
     if (enabled && panel && !savedSearchAlertIntroduced) {

@@ -150,6 +150,9 @@ test("investigator names use consistent display capitalization without changing 
   assert.equal(product.displayInvestigatorName("ANNE-MARIE O’NEILL"), "Anne-Marie O’Neill");
   assert.equal(product.displayInvestigatorName("MCDONALD, SIOBHAN III"), "McDonald, Siobhan III");
   assert.equal(product.displayInvestigatorName("de Vries, Anna"), "de Vries, Anna");
+  assert.equal(product.displayInvestigatorName("TIMOTHY Der Ver DYE"), "Timothy Der Ver Dye");
+  assert.equal(product.displayInvestigatorName("MICHAEL Andres WELTE"), "Michael Andres Welte");
+  assert.equal(product.displayInvestigatorName("McDONALD, Siobhan PhD"), "McDonald, Siobhan PhD");
   for (const [published, display] of [
     ["JANE DOE JR", "Jane Doe Jr"],
     ["JANE DOE SR.", "Jane Doe Sr."],
