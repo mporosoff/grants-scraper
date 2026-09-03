@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { enforceClaimContinuity, enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
-import { createHandler, reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry } from "../../workers/researcher-intake/src/index.js";
+import { canonicalSortName, createHandler, reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
@@ -170,7 +170,7 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
 
 test("correction approval defaults apply submitted additions and retirements", () => {
   const current = {
-    name: "Ada Lovelace", aliases: [], orcid_id: "0000-0002-1825-0097", home_unit: "Computing",
+    name: "Ada Lovelace", sort_name: "Lovelace, Ada", aliases: [], orcid_id: "0000-0002-1825-0097", home_unit: "Computing",
     relationship: "internal_affiliated_researcher", pool_visibility: "institution",
     auto_proposable: true, status: "active", research_summary: "Existing summary",
     source_urls: ["https://example.edu/old"],
@@ -203,6 +203,7 @@ test("correction approval defaults apply submitted additions and retirements", (
   );
   assert.deepEqual(seeded.claims[2].categories, ["Interdisciplinary research"]);
   assert.deepEqual(seeded.claims[2].source_urls, ["https://example.edu/new"]);
+  assert.equal(seeded.sort_name, current.sort_name);
   assert.equal(seeded.orcid_id, "");
   const cleared = seedApprovedProfile({
     current_profile: current,
@@ -241,6 +242,11 @@ test("correction approval defaults apply submitted additions and retirements", (
     }, current),
     /New claims cannot assign legacy claim identifiers/,
   );
+  assert.equal(canonicalSortName("Edward Brown III"), "Brown, Edward III");
+  assert.equal(canonicalSortName("Martin Luther King Jr."), "King, Martin Luther Jr.");
+  assert.equal(seedApprovedProfile({
+    proposed_profile: { display_name: "Edward Brown III", claims: [], source_urls: [] },
+  }, "2026-09-03").sort_name, "Brown, Edward III");
 });
 
 test("publication retries revalidate corrected approvals against the live registry", async () => {

@@ -67,6 +67,8 @@
     }).slice(0, 12);
   }
   function renderResearcherOptions(query) {
+    activeResearcherOption = -1;
+    element("researcher-search").removeAttribute("aria-activedescendant");
     researcherCandidates = matchingResearchers(query);
     var list = element("researcher-options");
     list.textContent = "";

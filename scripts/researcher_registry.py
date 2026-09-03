@@ -64,6 +64,16 @@ def registry_generation(registry: dict) -> str:
     return content_hash(payload)
 
 
+def canonical_sort_name(value: object) -> str:
+    display_name = str(value or "").strip()
+    parts = display_name.split()
+    if len(parts) < 2:
+        return display_name
+    suffix = parts.pop() if re.fullmatch(r"(?:Jr\.?|Sr\.?|II|III|IV)", parts[-1], re.I) else ""
+    family = parts.pop()
+    return f"{family}, {' '.join(parts)}{' ' + suffix if suffix else ''}"
+
+
 def _require_text(value: object, label: str, maximum: int) -> str:
     text = str(value or "").strip()
     if not text or len(text) > maximum:
@@ -779,8 +789,7 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
             "Published research capabilities are listed below."
         )
         display_name = source["name"]
-        sort_parts = display_name.split()
-        sort_name = f"{sort_parts[-1]}, {' '.join(sort_parts[:-1])}" if len(sort_parts) > 1 else display_name
+        sort_name = canonical_sort_name(display_name)
         researcher = {
             "researcher_id": researcher_id,
             "display_name": display_name,
@@ -817,10 +826,9 @@ def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_pat
             }
             claim["material_hash"] = material_claim_hash(claim)
             claims.append(claim)
-        parts = forward_name.split()
         researchers.append({
             "researcher_id": researcher_id, "display_name": forward_name,
-            "sort_name": f"{parts[-1]}, {' '.join(parts[:-1])}", "aliases": [],
+            "sort_name": canonical_sort_name(forward_name), "aliases": [],
             "legacy_ids": [re.sub(r"[^a-z0-9]+", "-", folded_name(forward_name)).strip("-")],
             "orcid_id": "", "home_unit": "Chemical & Sustainability Engineering",
             "relationship": "hajim_core_faculty", "pool_visibility": "department",

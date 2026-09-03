@@ -32,6 +32,7 @@ test("both public entry points disclose and use one bounded intake contract", ()
   assert.match(page, /&copy; 2026 Marc D\. Porosoff/);
   assert.match(pageScript, /researcherSortName\(left\)\.localeCompare\(researcherSortName\(right\)/);
   assert.match(pageScript, /profile\.sort_name/);
+  assert.match(pageScript, /function renderResearcherOptions\(query\) \{\s*activeResearcherOption = -1;\s*element\("researcher-search"\)\.removeAttribute\("aria-activedescendant"\)/);
   assert.match(pageScript, /event\.key === "ArrowDown"/);
   assert.match(pageScript, /data-researcher-index/);
   assert.match(page, /id="review-consent"/);

@@ -9,6 +9,7 @@ import unittest
 from scripts.researcher_registry import (
     apply_approved_submission,
     canonical_bytes,
+    canonical_sort_name,
     dependency_report,
     directory_projection,
     legacy_faculty_projection,
@@ -49,6 +50,10 @@ class ResearcherRegistryTests(unittest.TestCase):
             for claim in researcher["claims"]:
                 self.assertTrue(claim["claim_id"].startswith(researcher["researcher_id"] + "-c"))
                 self.assertEqual(claim["material_hash"], material_claim_hash(claim))
+
+    def test_canonical_sort_name_keeps_suffixes_after_the_given_name(self):
+        self.assertEqual(canonical_sort_name("Edward Brown III"), "Brown, Edward III")
+        self.assertEqual(canonical_sort_name("Martin Luther King Jr."), "King, Martin Luther Jr.")
 
     def test_legacy_claim_ids_are_bounded_global_strings(self):
         claims = [claim for researcher in self.registry["researchers"] for claim in researcher["claims"]]

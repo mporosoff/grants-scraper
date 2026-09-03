@@ -328,14 +328,20 @@ export async function reconcilePublication({ store, current, expectedRevision, a
   return published;
 }
 
+export function canonicalSortName(value) {
+  const name = String(value || "").trim();
+  const parts = name.split(/\s+/).filter(Boolean);
+  if (parts.length < 2) return name;
+  const suffix = /^(?:jr\.?|sr\.?|ii|iii|iv)$/i.test(parts.at(-1)) ? parts.pop() : "";
+  const family = parts.pop();
+  return `${family}, ${parts.join(" ")}${suffix ? ` ${suffix}` : ""}`;
+}
+
 export function seedApprovedProfile(value, today = new Date().toISOString().slice(0, 10)) {
   const proposed = value.proposed_profile || {};
   const current = value.current_profile;
   const name = proposed.display_name || current?.name || "";
-  const parts = name.trim().split(/\s+/);
-  const sortName = parts.length > 1
-    ? `${parts.at(-1)}, ${parts.slice(0, -1).join(" ")}`
-    : name;
+  const sortName = current?.sort_name && name === current.name ? current.sort_name : canonicalSortName(name);
   const sources = proposed.source_urls?.length ? proposed.source_urls : (current?.source_urls || []);
   const claimKey = label => String(label || "")
     .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
