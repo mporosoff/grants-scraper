@@ -538,24 +538,24 @@
       : (safeAggregate.awards || []).map(evidenceId);
     let answer;
     if (resolvedIntent === "investigators") {
-      const people = safeAggregate.investigators.map(person => `${displayInvestigatorName(person.name)} (${person.projects} award${person.projects === 1 ? "" : "s"} in the result snapshot)`);
-      answer = people.length ? `Investigators in the result snapshot: ${people.join("; ")}.` : "No investigator names appear in the matching result snapshot.";
+      const people = safeAggregate.investigators.map(person => `${displayInvestigatorName(person.name)} (${person.projects} award${person.projects === 1 ? "" : "s"} in these results)`);
+      answer = people.length ? `Investigators in these results: ${people.join("; ")}.` : "No investigator names appear in these results.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
-      answer = programs.length ? `Programs in the result snapshot: ${programs.join("; ")}.` : "No program labels appear in the matching result snapshot.";
+      answer = programs.length ? `Programs in these results: ${programs.join("; ")}.` : "No program labels appear in these results.";
     } else if (resolvedIntent === "years") {
       answer = safeAggregate.year_start
-        ? `The matching result snapshot spans ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
-        : "The matching result snapshot does not contain a usable award year.";
+        ? `These results span ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
+        : "These results do not contain a usable award year.";
     } else if (resolvedIntent === "count") {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot.`;
+      answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results.`;
     } else if (resolvedIntent === "awards") {
       const titles = (Array.isArray(safeAggregate.ordered_refs) ? safeAggregate.ordered_refs : safeAggregate.awards || [])
         .slice(0, 8)
         .map(award => clean(award?.title, 180) || clean(award?.evidence_id, 120) || `${award.source} ${award.award_id}`);
-      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot: ${titles.join("; ")}.` : "No matching awards are in the result snapshot.";
+      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.` : "No matching awards are in these results.";
     } else {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot for evidence-grounded interpretation.`;
+      answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} available for this answer.`;
     }
     const searched = sources.map(source => clean(source?.source, 10)).filter(Boolean);
     const usableStatuses = new Set(["ok", "complete", "partial", "safety_bounded"]);

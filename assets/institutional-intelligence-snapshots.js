@@ -81,9 +81,20 @@
     return `ii-evidence-${clean(id, 140).replace(/[^A-Za-z0-9_-]+/g, "-")}`;
   }
 
+  function syncResultsNote() {
+    const status = $("ii-status");
+    const sources = $("ii-source-status");
+    const visible = Boolean(status.textContent.trim())
+      || (!sources.classList.contains("hidden") && Boolean(sources.textContent.trim()));
+    const note = $("ii-results-note");
+    note.classList.toggle("hidden", !visible);
+    note.classList.toggle("error-text", status.classList.contains("error-text"));
+  }
+
   function setStatus(message, error = false) {
     $("ii-status").textContent = message;
     $("ii-status").classList.toggle("error-text", error);
+    syncResultsNote();
   }
 
   function setSearchActivity(active, owner = 0) {
@@ -403,13 +414,13 @@
       const payload = await response.json().catch(() => null);
       if (!response.ok) {
         const error = new Error(payload?.error?.code === "snapshot_expired"
-          ? "This result snapshot expired. Rebuild the submitted search to continue."
+          ? "These saved results have expired. Run the same search again to continue."
           : awardProduct.serviceIssueText(payload) || "The award service could not complete this request.");
         error.code = payload?.error?.code || "service_unavailable";
         error.payload = payload;
         throw error;
       }
-      if (!payload || payload.schema_version !== 1 || !clean(payload.snapshot_id, 100)) throw new Error("The award service returned an invalid snapshot response.");
+      if (!payload || payload.schema_version !== 1 || !clean(payload.snapshot_id, 100)) throw new Error("The award service returned results in an unexpected format.");
       return payload;
     } finally {
       clearTimeout(timer);
@@ -450,7 +461,7 @@
   function renderAbstract(value) {
     const paragraphs = String(value || "").replace(/\r\n?/g, "\n").trim().split(/\n\s*\n+/)
       .map(paragraph => paragraph.replace(/\s+/g, " ").trim()).filter(Boolean);
-    return (paragraphs.length ? paragraphs : ["Abstract not loaded in this compact snapshot. Use the official source record for full project text."])
+    return (paragraphs.length ? paragraphs : ["Abstract not loaded here. Use the official source record for the full project text."])
       .map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join("");
   }
 
@@ -487,33 +498,30 @@
   }
 
   function sourceStatusText(source) {
-    const message = state.sourceMessages.get(source.source);
-    if (message) return message;
-    if (source.status === "complete") return `${source.source} complete · ${source.result_count.toLocaleString()} awards · exact source total`;
-    if (source.status === "safety_bounded") return `${source.source} safety-bounded · at least ${source.result_count.toLocaleString()} normalized awards available`;
-    if (source.status === "partial") return `${source.source} partial · at least ${source.result_count.toLocaleString()} normalized awards available`;
-    if (source.status === "rate_limited") return `${source.source} is rate-limited. Other source results remain available.`;
-    if (source.status === "unsupported") return `${source.source} does not support this query shape. Other source results remain available.`;
-    if (source.error?.code === "source_timeout") return `${source.source} timed out before completing. Other source results remain available.`;
-    return `${source.source} is temporarily unavailable. Other source results remain available.`;
-  }
-
-  function unavailableSourceSummary(sources) {
-    const failures = sources.filter(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
-    if (!failures.length) return "";
-    const labels = failures.map(source => {
-      if (source.error?.code === "source_timeout") return `${source.source} timed out`;
-      if (source.status === "rate_limited") return `${source.source} was rate-limited`;
-      if (source.status === "unsupported") return `${source.source} does not support these filters`;
-      return `${source.source} did not load`;
-    });
-    return ` ${labels.join("; ")}; results from completed sources are shown.`;
+    const count = Number(source.result_count || 0);
+    const awards = `${count.toLocaleString()} award${count === 1 ? "" : "s"}`;
+    if (source.status === "complete") return `${source.source}: all ${awards}`;
+    if (["safety_bounded", "partial"].includes(source.status)) return `${source.source}: at least ${awards}`;
+    if (source.status === "rate_limited") return `${source.source}: temporarily limited`;
+    if (source.status === "unsupported") return `${source.source}: these filters are not supported`;
+    if (source.error?.code === "source_timeout") return `${source.source}: timed out`;
+    return `${source.source}: temporarily unavailable`;
   }
 
   function renderSourceStatus() {
     const sources = state.snapshot?.sources || [];
-    $("ii-source-status").innerHTML = sources.map(source => `<li data-status="${escapeAttribute(source.status)}">${escapeHtml(sourceStatusText(source))}</li>`).join("");
-    $("ii-source-status").classList.toggle("hidden", !sources.length);
+    const resultLimits = sources.some(source => ["safety_bounded", "partial"].includes(source.status));
+    const sourceFailures = sources.some(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
+    const notes = [];
+    if (resultLimits) notes.push("Some databases cap how many results they return, so “at least” means more matches may exist.");
+    if (sourceFailures) notes.push("Results from databases that did load are still shown.");
+    const list = $("ii-source-status");
+    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures ? "limited" : "complete"}">
+      <span class="ii-source-status-summary"><strong>Results by source:</strong> ${escapeHtml(sources.map(sourceStatusText).join(" · "))}</span>
+      ${notes.length ? `<span class="ii-source-status-help">${escapeHtml(notes.join(" "))}</span>` : ""}
+    </li>` : "";
+    list.classList.toggle("hidden", !sources.length);
+    syncResultsNote();
     const actions = [];
     for (const source of sources) {
       const offset = state.sourceOffsets.get(source.source) || 0;
@@ -525,10 +533,10 @@
     }
     $("ii-pagination").classList.toggle("hidden", !sources.length);
     $("ii-page-label").textContent = actions.length
-      ? "Optional card hydration is source-specific and limited to 25 records per agency per action. Most recent available awards load first. Snapshot totals and pages do not depend on card hydration."
+      ? "Load more project details from a specific source. Newest awards load first; the result count and pages will not change."
       : state.snapshot?.completeness === "complete"
-        ? "All source batches in this exact result snapshot are available."
-        : "All records found within the disclosed upstream safety bounds are available; this is not claimed as a complete institutional history.";
+        ? "All available project details are loaded."
+        : "All awards returned by the databases are available here; some databases may have additional matches.";
     $("ii-load-more-actions").innerHTML = actions.join("");
   }
 
@@ -559,8 +567,8 @@
     $("ii-card-page-label").textContent = pagination.end
       ? exact
         ? `Awards ${pagination.start}–${pagination.end} of ${total.toLocaleString()} · Page ${pagination.page} of ${pagination.page_count}`
-        : `Awards ${pagination.start}–${pagination.end} of at least ${total.toLocaleString()} available · Page ${pagination.page} (partial result set)`
-      : exact ? "No awards matched this view." : "No awards were available within the current partial result set.";
+        : `Awards ${pagination.start}–${pagination.end} of at least ${total.toLocaleString()} · Page ${pagination.page}`
+      : exact ? "No awards matched this view." : "No awards were available in the returned results.";
     $("ii-card-previous").disabled = state.busyDepth > 0 || !pagination.has_previous;
     $("ii-card-next").disabled = state.busyDepth > 0 || !pagination.has_next;
     const knownPages = pagination.page_count || pagination.available_page_count;
@@ -588,17 +596,17 @@
       ? `${state.submitted.year_start}–${state.submitted.year_end}`
       : state.submitted?.year_start ? `${state.submitted.year_start} onward` : state.submitted?.year_end ? `through ${state.submitted.year_end}` : "all available years";
     const totalText = payload.completeness === "complete"
-      ? `${payload.exact_total.toLocaleString()} exact matching award${payload.exact_total === 1 ? "" : "s"}`
-      : `at least ${payload.at_least.toLocaleString()} matching award${payload.at_least === 1 ? "" : "s"} within the disclosed source bounds`;
-    $("ii-result-scope").textContent = `Requested award years: ${requestedYears}. This stable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}, ordered by award or action date, then project start, then award year; missing dates sort last.`;
+      ? `${payload.exact_total.toLocaleString()} matching award${payload.exact_total === 1 ? "" : "s"}`
+      : `at least ${payload.at_least.toLocaleString()} matching award${payload.at_least === 1 ? "" : "s"}`;
+    $("ii-result-scope").textContent = `Search years: ${requestedYears}. Results retrieved on ${payload.as_of.slice(0, 10)} include ${totalText}. Newest awards appear first; awards without dates appear last.`;
     const years = payload.aggregate.year_start
       ? payload.aggregate.year_start === payload.aggregate.year_end ? String(payload.aggregate.year_start) : `${payload.aggregate.year_start}–${payload.aggregate.year_end}`
       : "Not listed";
-    const scope = payload.completeness === "complete" ? "in complete result" : "in available partial result";
+    const scope = payload.completeness === "complete" ? "in all results" : "in available results";
     $("ii-metrics").innerHTML = [
       [payload.aggregate.project_count, `Projects ${scope}`],
-      [payload.aggregate.investigator_count, `Investigator identities ${scope}`],
-      [payload.aggregate.program_count, `Distinct programs ${scope}`],
+      [payload.aggregate.investigator_count, `Investigators ${scope}`],
+      [payload.aggregate.program_count, `Programs ${scope}`],
       [years, `Years represented ${scope}`],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
     renderFacetSelect($("ii-investigators"), state.baseAggregate.investigators || [], "investigator");
@@ -609,16 +617,16 @@
     const activeFacetLabel = payload.facet?.type === "investigator"
       ? awardProduct.displayInvestigatorName(payload.facet.label)
       : payload.facet?.label;
-    $("ii-active-facet-label").textContent = active ? `Active ${payload.facet.type} drill-down: ${activeFacetLabel}` : "";
+    $("ii-active-facet-label").textContent = active ? `Filtering by ${payload.facet.type}: ${activeFacetLabel}` : "";
     if (active && payload.facet.type === "investigator") {
       const group = state.investigatorGroups.get(payload.facet.key);
       $("ii-investigator-variants").textContent = group
         ? `${awardProduct.displayInvestigatorName(group.name)} · ${group.projects} award${group.projects === 1 ? "" : "s"}. Source name variants: ${group.variants.map(variant => `${awardProduct.displayInvestigatorName(variant.name)} (${variant.source})`).join("; ")}.`
-        : "The selected investigator identity is no longer present in this snapshot.";
+        : "The selected investigator is no longer available in these results.";
     } else {
-      $("ii-investigator-variants").textContent = "Select an investigator to filter this snapshot without starting another upstream search.";
+      $("ii-investigator-variants").textContent = "Select an investigator to filter these results without running a new search.";
     }
-    $("ii-awards").innerHTML = awards.length ? awards.map(awardCard).join("") : "<p>No normalized public award records matched this view.</p>";
+    $("ii-awards").innerHTML = awards.length ? awards.map(awardCard).join("") : "<p>No public award records matched these filters.</p>";
     renderPagination();
     renderSourceStatus();
     renderQuestionAnswer();
@@ -743,15 +751,15 @@
       return await fetchPage({ page, pageSize, facet, historyMode, focus, departureHistoryState });
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
-      setStatus("The result snapshot expired. Rebuilding the submitted search before restoring this view…");
+      setStatus("These saved results expired. Running the same search again to restore this view…");
       const retryView = page !== 1 || facet?.type !== "all";
       const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode, focus, departureHistoryState });
       if (!payload) return null;
       if (!retryView) {
-        setStatus("The expired result snapshot was rebuilt from the submitted search.");
+        setStatus("The search was refreshed.");
         return payload;
       }
-      setStatus("The expired result snapshot was rebuilt and the requested view was restored.");
+      setStatus("The search was refreshed and returned you to the same view.");
       return payload;
     }
   }
@@ -763,7 +771,7 @@
     state.controller = new AbortController();
     setSearchActivity(true, sequence);
     setBusy(true);
-    setStatus("Building a stable, safety-bounded NSF, NIH, and DOE result snapshot…");
+    setStatus("Searching NSF, NIH, and DOE…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
@@ -782,10 +790,9 @@
       const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
       commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
       const exact = snapshot.completeness === "complete";
-      const sourceIssue = unavailableSourceSummary(snapshot.sources || []);
-      setStatus((exact
-        ? `${snapshot.exact_total.toLocaleString()} exact matching award${snapshot.exact_total === 1 ? "" : "s"} are available in this stable snapshot.`
-        : `${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} are available within disclosed safety bounds; incomplete sources are labeled below.`) + sourceIssue);
+      setStatus(exact
+        ? `${snapshot.exact_total.toLocaleString()} matching award${snapshot.exact_total === 1 ? "" : "s"} found across all selected sources.`
+        : `At least ${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} found in the available source results.`);
       if (focusResults) requestAnimationFrame(() => {
         const heading = $("ii-output-heading");
         heading?.focus({ preventScroll: true });
@@ -794,7 +801,7 @@
       return { payload: state.pagePayload, aggregate: state.aggregate };
     } catch (error) {
       if (sequence !== state.sequence) return null;
-      if (error?.name === "AbortError") setStatus("The result snapshot search timed out. Retry later.", true);
+      if (error?.name === "AbortError") setStatus("The award search timed out. Try again.", true);
       else setStatus(error?.message || "Funded award search could not be completed.", true);
       return null;
     } finally {
@@ -810,7 +817,7 @@
       const payload = await fetchPageWithRecovery({ page: 1, facet: requestedFacet, historyMode, focus });
       if (!payload) return;
       clearQuestionState();
-      setStatus(state.facet.type === "all" ? "Showing all awards in the submitted result snapshot." : `Showing the ${state.pagePayload.facet.label} drill-down within the same result snapshot.`);
+      setStatus(state.facet.type === "all" ? "Showing all results." : `Filtering these results by ${state.pagePayload.facet.label}.`);
     } catch (error) {
       restoreCommittedViewControls();
       setStatus(error?.message || "The requested drill-down could not be loaded.", true);
@@ -834,9 +841,9 @@
     const loaded = [...state.residentAwards.values()].filter(award => clean(award.source, 10).toUpperCase() === source).length;
     const message = batch.source_total !== null
       ? batch.loaded_through >= batch.source_total
-        ? `Loaded remaining ${actualAdded} ${source} award${actualAdded === 1 ? "" : "s"}; all ${batch.source_total} ${source} awards are available as hydrated cards.`
-        : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"}; ${loaded} of ${batch.source_total} are hydrated. Most recent first.`
-      : `Loaded ${actualAdded} additional ${source} award${actualAdded === 1 ? "" : "s"} after normalization; ${loaded} are hydrated within the partial source snapshot.`;
+        ? `Loaded the remaining ${actualAdded} ${source} award${actualAdded === 1 ? "" : "s"}; full details are now available for all ${batch.source_total}.`
+        : `Loaded ${actualAdded} more ${source} award${actualAdded === 1 ? "" : "s"}. Full details are available for ${loaded} of ${batch.source_total}; newest first.`
+      : `Loaded ${actualAdded} more ${source} award${actualAdded === 1 ? "" : "s"}. Full details are now available for ${loaded}.`;
     state.sourceMessages.set(source, message);
     return message;
   }
@@ -862,7 +869,7 @@
         if (error?.code !== "snapshot_expired") throw error;
         if (!batchIsCurrent()) return;
         rebuilt = true;
-        setStatus("The result snapshot expired. Rebuilding the submitted search before restoring source hydration…");
+        setStatus("These saved results expired. Running the same search again before loading more details…");
         const restored = await rebuildSubmittedSnapshotView({ ...requestedView, historyMode: "replace" });
         if (!restored) return;
         snapshotId = state.snapshot?.snapshot_id;
@@ -878,15 +885,15 @@
           if (!Number.isInteger(nextOffset) || nextOffset <= offset) break;
           offset = nextOffset;
         }
-        message ||= `${source} source hydration was already restored by the rebuilt snapshot.`;
+        message ||= `${source} details were already restored when the search refreshed.`;
       }
       if (!batchIsCurrent()) return;
       renderSourceStatus();
-      setStatus(rebuilt ? `The expired result snapshot was rebuilt before source hydration resumed. ${message}` : message);
+      setStatus(rebuilt ? `The search was refreshed before more details loaded. ${message}` : message);
       renderQuestionAnswer();
     } catch (error) {
       if (!batchIsCurrent()) return;
-      setStatus(`${source} card hydration failed. Existing results remain available.`, true);
+      setStatus(`${source} details could not be loaded. Existing results remain available.`, true);
     } finally {
       setBusy(false);
     }
@@ -911,7 +918,7 @@
       && pageRequestSequence === state.pageRequestSequence
       && state.snapshot?.snapshot_id === previous;
     setBusy(true);
-    setStatus(`Retrying ${source}; successful source results remain available…`);
+    setStatus(`Retrying ${source}. Results already loaded will stay available…`);
     try {
       let rebuilt = false;
       let result;
@@ -922,7 +929,7 @@
         if (!retryIsCurrent()) return;
         rebuilt = true;
         const pageSize = state.pageSize;
-        setStatus(`The result snapshot expired. Rebuilding the submitted search before retrying ${source}…`);
+        setStatus(`These saved results expired. Running the same search again before retrying ${source}…`);
         const restored = await rebuildSubmittedSnapshotView({
           page: 1,
           pageSize,
@@ -932,7 +939,7 @@
         if (!restored) return;
         const refreshedSource = state.snapshot?.sources?.find(item => item.source === source);
         if (!refreshedSource || !["unavailable", "rate_limited"].includes(refreshedSource.status)) {
-          state.sourceMessages.set(source, `${source} no longer requires a retry after the expired result snapshot was rebuilt.`);
+          state.sourceMessages.set(source, `${source} became available when the search refreshed.`);
           renderSourceStatus();
           setStatus(state.sourceMessages.get(source));
           return;
@@ -944,12 +951,12 @@
       }
       if (!retryIsCurrent()) return;
       commitSnapshotResult(result.staged, { historyMode: "replace" });
-      state.sourceMessages.set(source, `${source} recovered. The successor snapshot retained the other successful sources.`);
+      state.sourceMessages.set(source, `${source} is available again. Results from other sources were kept.`);
       renderSourceStatus();
-      setStatus(`${rebuilt ? "The expired result snapshot was rebuilt before " : ""}${source} recovered in successor snapshot ${result.snapshot.snapshot_id.slice(0, 12)}…; successful source results were retained.`);
+      setStatus(`${rebuilt ? "The search was refreshed before " : ""}${source} became available again. Results from other sources were kept.`);
     } catch (error) {
       if (!retryIsCurrent()) return;
-      state.sourceMessages.set(source, `${source} retry did not recover. Existing snapshot results remain available.`);
+      state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
       renderSourceStatus();
       setStatus(state.sourceMessages.get(source), true);
     } finally {
@@ -982,8 +989,8 @@
     let structured = "";
     if (intent === "investigators") {
       summary = investigators.length
-        ? `${investigators.length.toLocaleString()} investigator ${investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
-        : "No investigator names appear in the matching result snapshot.";
+        ? `${investigators.length.toLocaleString()} investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : "No investigator names appear in these results.";
       structured = answerTable({
         label: "Investigators in the matching awards",
         headers: ["Investigator", "Awards"],
@@ -992,7 +999,7 @@
     } else if (intent === "programs") {
       summary = programs.length
         ? `${programs.length.toLocaleString()} program${programs.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
-        : "No program labels appear in the matching result snapshot.";
+        : "No program labels appear in these results.";
       structured = answerTable({
         label: "Programs in the matching awards",
         headers: ["Program", "Awards"],
@@ -1024,9 +1031,9 @@
     const evidence = snapshot.evidencePack.awards.filter(item => ids.has(item.evidence_id));
     $("ii-answer-evidence").innerHTML = evidence.length
       ? `<h4>Supporting award evidence</h4><ul class="ii-evidence-list">${evidence.map(item => `<li><a href="#${escapeAttribute(evidenceDomId(item.evidence_id))}" data-ii-evidence-link="${escapeAttribute(item.evidence_id)}">${escapeHtml(item.evidence_id)}</a><span class="ii-evidence-title">${escapeHtml(item.title || "Title not listed")}</span></li>`).join("")}</ul>`
-      : "<h4>Supporting award evidence</h4><p>No hydrated supporting award card is currently available.</p>";
+      : "<h4>Supporting award evidence</h4><p>No award with full details is currently available.</p>";
     const incomplete = state.snapshot.completeness !== "complete";
-    $("ii-answer-limitations").textContent = `${snapshot.aggregate.project_count} normalized awards informed the server aggregate. ${snapshot.evidencePack.awards.length} hydrated public records supplied bounded card evidence.${incomplete ? " One or more sources reached a disclosed safety bound or failed, so this is not a complete institutional history." : " All requested sources were exhausted within the published architecture bounds."}${state.question.translationFallback ? " Provider translation was unavailable, so visible filters and deterministic intent were used." : ""}${snapshot.narrativeFailure ? " Narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
+    $("ii-answer-limitations").textContent = `${snapshot.aggregate.project_count} awards were counted. ${snapshot.evidencePack.awards.length} records with full details were available for this answer.${incomplete ? " Some sources limit returned results or did not load, so this may not cover the institution’s full award history." : " All selected sources were searched completely."}${state.question.translationFallback ? " The question could not be translated automatically, so the visible filters were used." : ""}${snapshot.narrativeFailure ? " The written summary was unavailable or could not be verified, so the direct answer is shown." : ""}`;
     $("ii-update-answer").classList.toggle("hidden", snapshot.signature === answerEvidenceSignature());
   }
 
@@ -1407,7 +1414,7 @@
       try {
         await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         state.snapshot = { ...state.snapshot, ...state.pagePayload };
-        setStatus("Restored the shared result snapshot and page.");
+        setStatus("Opened the shared results from this link.");
       } catch (error) {
         setStatus(error.message, true);
       } finally {

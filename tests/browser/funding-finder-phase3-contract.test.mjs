@@ -505,7 +505,7 @@ test("deterministic institutional answers and bounded narrative citations use on
   const programs = core.deterministicInstitutionAnswer({ question: "Which programs funded catalysis?", intent: "programs", aggregate, sources });
   assert.match(programs.answer, /Office of Basic Energy Sciences/);
   const count = core.deterministicInstitutionAnswer({ question: "How many projects?", intent: "count", aggregate, sources });
-  assert.match(count.answer, /^2 normalized matching awards/);
+  assert.match(count.answer, /^2 matching awards/);
   const years = core.deterministicInstitutionAnswer({ question: "Which years?", intent: "years", aggregate, sources });
   assert.match(years.answer, /2021 through 2024/);
 

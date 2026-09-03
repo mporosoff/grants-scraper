@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
   <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=header-cleanup-20260902">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=results-note-20260903">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -88,7 +88,7 @@
             <div>
               <p class="eyebrow">Public award evidence</p>
               <h2 id="ii-heading">Find funded projects and understand the result set</h2>
-              <p>Search by institution, topic, program, investigator, program officer, agency, or year. The same normalized records power factual counts, investigator and program drill-downs, and the underlying compact project cards.</p>
+              <p>Search by institution, topic, program, investigator, program officer, agency, or year. The same award records power counts, investigator and program filters, and the project cards below.</p>
             </div>
           </div>
 
@@ -141,8 +141,10 @@
             </div>
           </form>
 
-          <div class="ii-status" id="ii-status" role="status" aria-live="polite"></div>
-          <ul class="ii-source-status hidden" id="ii-source-status" aria-label="Award source status"></ul>
+          <div class="ii-results-note hidden" id="ii-results-note">
+            <div class="ii-status" id="ii-status" role="status" aria-live="polite"></div>
+            <ul class="ii-source-status hidden" id="ii-source-status" aria-label="Award source status"></ul>
+          </div>
 
           <details class="ii-ask" id="ii-ask">
             <summary>
@@ -202,7 +204,7 @@
                 <select id="ii-investigators" aria-labelledby="ii-investigators-heading" disabled>
                   <option value="all">All investigators</option>
                 </select>
-                <p class="ii-facet-detail" id="ii-investigator-variants" aria-live="polite">Select an investigator to filter this result snapshot without starting another upstream search.</p>
+                <p class="ii-facet-detail" id="ii-investigator-variants" aria-live="polite">Select an investigator to filter these results without running a new search.</p>
               </section>
               <section aria-labelledby="ii-programs-heading">
                 <h3 id="ii-programs-heading">Programs</h3>
@@ -330,10 +332,10 @@
   <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/award-api-config.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/funded-awards-core.js?v=investigator-case-20260903"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=investigator-case-20260903"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=results-note-20260903"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
   <script src="./assets/site-help.js?v=ai-boundaries-20260901"></script>
   <script src="./assets/funded-awards.js?v=investigator-case-20260903"></script>
-  <script src="./assets/institutional-intelligence-snapshots.js?v=investigator-case-20260903"></script>
+  <script src="./assets/institutional-intelligence-snapshots.js?v=results-note-20260903"></script>
 </body>
 </html>

@@ -212,8 +212,8 @@
   display: inline-block;
 }
 
-.ii-status {
-  margin-top: 14px;
+.ii-results-note {
+  margin-top: 12px;
   padding: 10px 12px;
   color: #36536f;
   font-size: .78rem;
@@ -221,39 +221,59 @@
   border-radius: 8px;
 }
 
+.ii-results-note.error-text {
+  color: #8a2430;
+  background: var(--danger-bg);
+}
+
+.ii-status {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  background: transparent;
+}
+
 .ii-status:empty {
   display: none;
 }
 
 .ii-status.error-text {
-  color: #8a2430;
-  background: var(--danger-bg);
+  color: inherit;
+  background: transparent;
 }
 
 .ii-source-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 12px 0 0;
+  display: block;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.ii-source-status li {
-  padding: 5px 8px;
-  color: #2e567f;
-  font-size: .71rem;
-  font-weight: 800;
-  background: #eaf2fb;
-  border-radius: 7px;
+.ii-status:not(:empty) + .ii-source-status {
+  margin-top: 5px;
 }
 
-.ii-source-status li[data-status="unavailable"],
-.ii-source-status li[data-status="rate_limited"],
-.ii-source-status li[data-status="safety_bounded"],
-.ii-source-status li[data-status="unsupported"] {
+.ii-source-status li {
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  background: transparent;
+}
+
+.ii-source-status-summary {
+  display: block;
+}
+
+.ii-source-status-help {
+  display: block;
+  margin-top: 3px;
+  font-size: .72rem;
+}
+
+.ii-source-status li[data-status="limited"] .ii-source-status-help {
   color: #8a3600;
-  background: #fff0df;
 }
 
 .ii-output {
