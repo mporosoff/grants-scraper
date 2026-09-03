@@ -676,12 +676,16 @@ def apply_approved_submission(
         value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
         if old:
+            if value.get("legacy_claim_ids") != old.get("legacy_claim_ids", []):
+                raise ValueError("existing legacy claim IDs must remain attached to their original claim")
             value["revision"] = (
                 old["revision"] + 1
                 if material_claim_hash(value) != old["material_hash"]
                 else old["revision"]
             )
         else:
+            if value.get("legacy_claim_ids"):
+                raise ValueError("new claims cannot assign legacy claim IDs")
             value["revision"] = 1
         value["material_hash"] = material_claim_hash(value)
         normalized_claims.append(value)

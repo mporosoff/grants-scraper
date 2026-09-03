@@ -114,7 +114,7 @@ export function validateSubmission(value) {
   };
 }
 
-export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds = []) {
+export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds = [], reservedOrcidIds = []) {
   const allowed = new Set([
     "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship", "pool_visibility",
     "auto_proposable", "status", "research_summary", "source_urls", "source_checked_date", "claims",
@@ -128,6 +128,9 @@ export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds
   }
   const sources = urls(value.source_urls, true);
   const sourceCheckedDate = calendarDate(value.source_checked_date, "Source checked date");
+  const orcidId = normalizeOrcid(value.orcid_id);
+  const occupiedOrcids = new Set([...reservedOrcidIds].map(value => String(value).toUpperCase()));
+  if (orcidId && occupiedOrcids.has(orcidId)) fail("duplicate_orcid", "That ORCID iD already belongs to another researcher.", 409);
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
   const legacyClaimIds = new Set([...reservedLegacyClaimIds].map(value => String(value).toLocaleLowerCase()));
@@ -169,7 +172,7 @@ export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds
   }
   return {
     display_name: text(value.display_name, 120, "Display name", true), sort_name: text(value.sort_name, 140, "Sort name", true),
-    aliases: list(value.aliases || [], 20, 120, "Alias"), orcid_id: normalizeOrcid(value.orcid_id),
+    aliases: list(value.aliases || [], 20, 120, "Alias"), orcid_id: orcidId,
     home_unit: text(value.home_unit, 180, "Unit", true), relationship: value.relationship,
     pool_visibility: value.pool_visibility, auto_proposable: value.auto_proposable, status: value.status,
     research_summary: text(value.research_summary, 1200, "Research summary"), source_urls: sources,
@@ -187,7 +190,13 @@ export function enforceSubmittedRelationship(approvedProfile, proposedProfile) {
 }
 
 export function enforceClaimContinuity(approvedProfile, currentProfile) {
-  if (!currentProfile) return approvedProfile;
+  if (!currentProfile) {
+    if (approvedProfile.claims.some(claim => claim.legacy_claim_ids.length)) {
+      fail("invalid_claim_set", "New claims cannot assign legacy claim identifiers.");
+    }
+    return approvedProfile;
+  }
+  const previousClaims = new Map((currentProfile.claims || []).map(claim => [claim.claim_id, claim]));
   const previousIds = new Set((currentProfile.claims || []).map(claim => claim.claim_id));
   const submittedIds = new Set(approvedProfile.claims.map(claim => claim.claim_id).filter(Boolean));
   if ([...previousIds].some(claimId => !submittedIds.has(claimId))) {
@@ -195,6 +204,18 @@ export function enforceClaimContinuity(approvedProfile, currentProfile) {
   }
   if ([...submittedIds].some(claimId => !previousIds.has(claimId))) {
     fail("invalid_claim_set", "New claims must leave the claim identifier empty.");
+  }
+  for (const claim of approvedProfile.claims) {
+    const previous = previousClaims.get(claim.claim_id);
+    if (!previous) {
+      if (claim.legacy_claim_ids.length) fail("invalid_claim_set", "New claims cannot assign legacy claim identifiers.");
+      continue;
+    }
+    const previousLegacyIds = previous.legacy_claim_ids || [];
+    if (claim.legacy_claim_ids.length !== previousLegacyIds.length
+        || claim.legacy_claim_ids.some((value, index) => value !== previousLegacyIds[index])) {
+      fail("invalid_claim_set", "Existing legacy claim identifiers must remain attached to their original claim.");
+    }
   }
   return approvedProfile;
 }

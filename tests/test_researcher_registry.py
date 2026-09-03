@@ -265,6 +265,26 @@ class ResearcherRegistryTests(unittest.TestCase):
                 "approved_at": "2026-09-03T12:00:00Z", "approved_profile": omitted_profile,
             }, self.registry["registry_generation"])
 
+        reassigned_legacy_profile = copy.deepcopy(approved_profile)
+        legacy_claim_id = reassigned_legacy_profile["claims"][0]["legacy_claim_ids"].pop()
+        reassigned_legacy_profile["claims"][1]["legacy_claim_ids"].append(legacy_claim_id)
+        with self.assertRaisesRegex(ValueError, r"remain attached to their original claim"):
+            apply_approved_submission(self.registry, {
+                "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+                "approved_at": "2026-09-03T12:00:00Z", "approved_profile": reassigned_legacy_profile,
+            }, self.registry["registry_generation"])
+
+        invented_legacy_profile = copy.deepcopy(approved_profile)
+        new_claim = copy.deepcopy(invented_legacy_profile["claims"][0])
+        new_claim["claim_id"] = ""
+        new_claim["legacy_claim_ids"] = ["invented:CV001"]
+        invented_legacy_profile["claims"].append(new_claim)
+        with self.assertRaisesRegex(ValueError, r"new claims cannot assign legacy claim IDs"):
+            apply_approved_submission(self.registry, {
+                "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+                "approved_at": "2026-09-03T12:00:00Z", "approved_profile": invented_legacy_profile,
+            }, self.registry["registry_generation"])
+
     def test_data_only_add_retire_rename_and_pool_changes_remain_valid(self):
         added, _ = apply_approved_submission(self.registry, {
             "schema_version": 1,

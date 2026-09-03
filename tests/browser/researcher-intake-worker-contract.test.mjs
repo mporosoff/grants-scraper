@@ -162,6 +162,10 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
     () => validateAdminProfile({ ...dateProfile, claims: [{ ...validClaim, legacy_claim_ids: ["ada:CV001"] }] }, "", ["ADA:cv001"]),
     /globally unique strings/,
   );
+  assert.throws(
+    () => validateAdminProfile({ ...dateProfile, orcid_id: "0000-0002-1825-0097", claims: [] }, "", [], ["0000-0002-1825-0097"]),
+    /already belongs to another researcher/,
+  );
 });
 
 test("correction approval defaults apply submitted additions and retirements", () => {
@@ -175,7 +179,7 @@ test("correction approval defaults apply submitted additions and retirements", (
         claim_id: "urh-000001-c001", revision: 1, status: "active", label: "Analytical engines",
         category: "Computing", categories: ["Computing"], type: "Capability",
         evidence: "Published analytical engine research.", source_urls: ["https://example.edu/old"],
-        evidence_level: "direct", legacy_claim_ids: [],
+        evidence_level: "direct", legacy_claim_ids: ["ada-lovelace:CV001"],
       },
       {
         claim_id: "urh-000001-c002", revision: 1, status: "retired", label: "Formal logic",
@@ -222,6 +226,20 @@ test("correction approval defaults apply submitted additions and retirements", (
       claims: validated.claims.map((claim, index) => index === 2 ? { ...claim, claim_id: "urh-000001-c999" } : claim),
     }, current),
     /New claims must leave the claim identifier empty/,
+  );
+  assert.throws(
+    () => enforceClaimContinuity({
+      ...validated,
+      claims: validated.claims.map((claim, index) => index === 0 ? { ...claim, legacy_claim_ids: [] } : claim),
+    }, current),
+    /remain attached to their original claim/,
+  );
+  assert.throws(
+    () => enforceClaimContinuity({
+      ...validated,
+      claims: validated.claims.map((claim, index) => index === 2 ? { ...claim, legacy_claim_ids: ["invented:CV001"] } : claim),
+    }, current),
+    /New claims cannot assign legacy claim identifiers/,
   );
 });
 

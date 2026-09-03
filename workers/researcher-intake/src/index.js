@@ -511,12 +511,13 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           }
           const currentProfile = directory?.researchers?.find(row => row.id === current.researcher_id) || null;
           if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
-          const reservedLegacyClaimIds = directory.researchers
-            .filter(row => row.id !== current.researcher_id)
+          const otherProfiles = directory.researchers.filter(row => row.id !== current.researcher_id);
+          const reservedLegacyClaimIds = otherProfiles
             .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
+          const reservedOrcidIds = otherProfiles.map(row => row.orcid_id).filter(Boolean);
           const approvedProfile = enforceClaimContinuity(
             enforceSubmittedRelationship(
-              validateAdminProfile(body.approved_profile, current.researcher_id, reservedLegacyClaimIds),
+              validateAdminProfile(body.approved_profile, current.researcher_id, reservedLegacyClaimIds, reservedOrcidIds),
               JSON.parse(current.proposed_profile_json),
             ),
             currentProfile,
