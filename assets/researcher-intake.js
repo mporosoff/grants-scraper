@@ -161,6 +161,12 @@
     }).filter(Boolean);
   }
 
+  function uniqueRegistryMatchId(matches) {
+    if (!Array.isArray(matches) || matches.length !== 1) return "";
+    var id = String(matches[0] && matches[0].researcher && matches[0].researcher.id || "");
+    return /^urh-[0-9]{6}$/.test(id) ? id : "";
+  }
+
   async function submit(submission, options) {
     options = options || {};
     var endpoint = String(options.endpoint || DEFAULT_ENDPOINT).replace(/\/$/, "");
@@ -205,6 +211,7 @@
     createIdempotencyKey: createIdempotencyKey,
     buildSubmission: buildSubmission,
     findPossibleDuplicates: findPossibleDuplicates,
+    uniqueRegistryMatchId: uniqueRegistryMatchId,
     submit: submit,
     downloadFallback: downloadFallback,
   });

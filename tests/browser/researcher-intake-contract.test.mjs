@@ -67,6 +67,25 @@ test("identity signals warn but never merge ambiguous candidates", () => {
   assert.equal(matches.length, 2);
   assert.equal(matches.every(item => item.researcher.id), true);
   assert.equal("merged" in matches[0], false);
-  assert.match(team, /registryMatches\.length === 1\) registryId/);
+  assert.equal(intake.uniqueRegistryMatchId(matches), "");
+  assert.equal(intake.uniqueRegistryMatchId([matches[0]]), "urh-000001");
+  assert.match(team, /INTAKE_API\.uniqueRegistryMatchId\(registryMatches\)/);
+  assert.doesNotMatch(team, /existingProfile\s*&&\s*existingProfile\.registry_id/);
   assert.match(team, /Nothing is merged automatically when identity is ambiguous/);
+});
+
+test("Team Match revalidates a persisted association from the edited identity", () => {
+  const intake = api();
+  const directory = { researchers: [
+    { id: "urh-000001", name: "Ada Lovelace", aliases: [], orcid_id: "0000-0002-1825-0097", source_urls: ["https://example.edu/ada"] },
+    { id: "urh-000002", name: "Grace Hopper", aliases: [], orcid_id: "0000-0002-1694-233X", source_urls: ["https://example.edu/grace"] },
+  ] };
+  const editedMatches = intake.findPossibleDuplicates(directory, {
+    display_name: "Grace Hopper", orcid_id: "0000-0002-1694-233X", source_urls: ["https://example.edu/grace"],
+  });
+  assert.equal(intake.uniqueRegistryMatchId(editedMatches), "urh-000002");
+  const unrelated = intake.findPossibleDuplicates(directory, {
+    display_name: "Katherine Johnson", orcid_id: "", source_urls: ["https://example.edu/katherine"],
+  });
+  assert.equal(intake.uniqueRegistryMatchId(unrelated), "");
 });

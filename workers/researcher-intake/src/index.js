@@ -243,11 +243,11 @@ async function notifyOwner(env, submission, fetchImpl, event = "pending") {
   });
 }
 async function dispatchPublication(env, row, fetchImpl) {
-  if (!env.GITHUB_PUBLICATION_TOKEN) fail("publication_not_configured", "Registry publication is not configured.", 503);
+  if (!env.GITHUB_DISPATCH_TOKEN) fail("publication_not_configured", "Registry publication is not configured.", 503);
   const response = await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/dispatches`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${env.GITHUB_PUBLICATION_TOKEN}`, Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`, Accept: "application/vnd.github+json",
       "Content-Type": "application/json", "User-Agent": "funding-finder-researcher-intake",
       "X-GitHub-Api-Version": "2022-11-28",
     },

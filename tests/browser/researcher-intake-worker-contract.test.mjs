@@ -8,11 +8,12 @@ import { createHandler } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, storeSource, migration, workflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, workflow, deploymentWorkflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
+  readFile(new URL(".github/workflows/deploy-researcher-intake.yml", root), "utf8"),
   readFile(new URL("workers/researcher-intake/wrangler.jsonc", root), "utf8"),
 ]);
 
@@ -111,6 +112,17 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
     () => enforceSubmittedRelationship(validateAdminProfile(external, ""), { relationship_note: "External collaborator" }),
     /cannot be published as core or internal faculty/,
   );
+  const dateProfile = { ...base, auto_proposable: false };
+  assert.throws(() => validateAdminProfile({ ...dateProfile, source_checked_date: "2026-02-30" }, ""), /valid YYYY-MM-DD calendar date/);
+  assert.throws(() => validateAdminProfile({
+    ...dateProfile,
+    claims: [{
+      claim_id: "", revision: 1, status: "active", label: "Analytical engines",
+      category: "Computational methods", categories: ["Computational methods"], type: "Capability",
+      evidence: "Published analytical engine research.", source_urls: ["https://example.edu/ada"],
+      verified_on: "2026-99-99", evidence_level: "administrator_reviewed", legacy_claim_ids: [],
+    }],
+  }, ""), /valid YYYY-MM-DD calendar date/);
 });
 
 test("public creation is rate bounded, idempotent, and returns the same private receipt", async () => {
@@ -197,7 +209,12 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workerSource, /crypto\.subtle\.verify/);
   assert.match(workerSource, /cdn-cgi\/access\/certs/);
   assert.match(workerSource, /ACCESS_AUD/);
-  assert.match(workerSource, /GITHUB_PUBLICATION_TOKEN/);
+  assert.match(workerSource, /GITHUB_DISPATCH_TOKEN/);
+  assert.doesNotMatch(workerSource, /GITHUB_PUBLICATION_TOKEN/);
+  assert.match(deploymentWorkflow, /RESEARCHER_GITHUB_DISPATCH_TOKEN/);
+  assert.doesNotMatch(deploymentWorkflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
+  assert.match(deploymentWorkflow, /GITHUB_PUBLICATION_TOKEN:null/);
+  assert.match(workflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   assert.match(workerSource, /submission_id: row\.submission_id, approved_revision: row\.revision/);
   assert.doesNotMatch(workerSource.slice(workerSource.indexOf("client_payload"), workerSource.indexOf("client_payload") + 260), /approved_profile|repository_path|command/);
   assert.match(workflow, /Refuse every non-allowlisted path/);
@@ -206,9 +223,12 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /Reconcile a failed publication without misreporting a merged change/);
   assert.match(workflow, /if \[ -n "\$merge_sha" \]; then/);
   assert.match(workflow, /queue record remains in publishing state for operator recovery/);
-  assert.match(workflow, /--disable-auto/);
-  assert.match(workflow, /--json state,mergeCommit,autoMergeRequest/);
-  assert.match(workflow, /Auto-merge is not confirmed disabled/);
+  assert.match(workflow, /gh pr close "\$PUBLICATION_PR_URL"/);
+  assert.match(workflow, /--json state,mergeCommit/);
+  assert.doesNotMatch(workflow, /--disable-auto|autoMergeRequest/);
+  assert.match(workflow, /registry PR is not confirmed closed and safe from a later merge/);
+  assert.ok(workflow.indexOf('gh pr close "$PUBLICATION_PR_URL"') < workflow.indexOf('[ "$pr_state" != "CLOSED" ]'));
+  assert.ok(workflow.indexOf('[ "$pr_state" != "CLOSED" ]') < workflow.indexOf('"$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"'));
   assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);

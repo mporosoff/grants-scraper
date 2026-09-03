@@ -38,7 +38,7 @@ jobs:
           ACCESS_AUD: ${{ secrets.RESEARCHER_ACCESS_AUD }}
           RECEIPT_TOKEN_SECRET: ${{ secrets.RESEARCHER_RECEIPT_TOKEN_SECRET }}
           REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
-          GITHUB_PUBLICATION_TOKEN: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+          GITHUB_DISPATCH_TOKEN: ${{ secrets.RESEARCHER_GITHUB_DISPATCH_TOKEN }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           ADMIN_NOTIFICATION_EMAIL: ${{ secrets.RESEARCHER_ADMIN_NOTIFICATION_EMAIL }}
           NOTIFICATION_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
@@ -50,7 +50,7 @@ jobs:
           test -n "$ACCESS_AUD"
           test -n "$RECEIPT_TOKEN_SECRET"
           test -n "$REGISTRY_WORKFLOW_TOKEN"
-          test -n "$GITHUB_PUBLICATION_TOKEN"
+          test -n "$GITHUB_DISPATCH_TOKEN"
           test -n "$RESEND_API_KEY"
           test -n "$ADMIN_NOTIFICATION_EMAIL"
           test -n "$NOTIFICATION_FROM"
@@ -68,7 +68,7 @@ jobs:
           ACCESS_AUD: ${{ secrets.RESEARCHER_ACCESS_AUD }}
           RECEIPT_TOKEN_SECRET: ${{ secrets.RESEARCHER_RECEIPT_TOKEN_SECRET }}
           REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
-          GITHUB_PUBLICATION_TOKEN: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+          GITHUB_DISPATCH_TOKEN: ${{ secrets.RESEARCHER_GITHUB_DISPATCH_TOKEN }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           ADMIN_NOTIFICATION_EMAIL: ${{ secrets.RESEARCHER_ADMIN_NOTIFICATION_EMAIL }}
           NOTIFICATION_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
@@ -78,7 +78,7 @@ jobs:
           test -n "$ACCESS_AUD"
           test -n "$RECEIPT_TOKEN_SECRET"
           test -n "$REGISTRY_WORKFLOW_TOKEN"
-          test -n "$GITHUB_PUBLICATION_TOKEN"
+          test -n "$GITHUB_DISPATCH_TOKEN"
           test -n "$RESEND_API_KEY"
           test -n "$ADMIN_NOTIFICATION_EMAIL"
           test -n "$NOTIFICATION_FROM"
@@ -88,11 +88,11 @@ jobs:
             --arg access_aud "$ACCESS_AUD" \
             --arg receipt "$RECEIPT_TOKEN_SECRET" \
             --arg workflow "$REGISTRY_WORKFLOW_TOKEN" \
-            --arg github "$GITHUB_PUBLICATION_TOKEN" \
+            --arg github_dispatch "$GITHUB_DISPATCH_TOKEN" \
             --arg resend "$RESEND_API_KEY" \
             --arg notify "$ADMIN_NOTIFICATION_EMAIL" \
             --arg from "$NOTIFICATION_FROM" \
-            '{ADMIN_EMAILS:$admin,ACCESS_TEAM_DOMAIN:$access_domain,ACCESS_AUD:$access_aud,RECEIPT_TOKEN_SECRET:$receipt,REGISTRY_WORKFLOW_TOKEN:$workflow,GITHUB_PUBLICATION_TOKEN:$github,RESEND_API_KEY:$resend,ADMIN_NOTIFICATION_EMAIL:$notify,NOTIFICATION_FROM:$from}' \
+            '{ADMIN_EMAILS:$admin,ACCESS_TEAM_DOMAIN:$access_domain,ACCESS_AUD:$access_aud,RECEIPT_TOKEN_SECRET:$receipt,REGISTRY_WORKFLOW_TOKEN:$workflow,GITHUB_DISPATCH_TOKEN:$github_dispatch,GITHUB_PUBLICATION_TOKEN:null,RESEND_API_KEY:$resend,ADMIN_NOTIFICATION_EMAIL:$notify,NOTIFICATION_FROM:$from}' \
             > /tmp/researcher-intake-secrets.json
           npx --yes wrangler@4.125.0 secret bulk /tmp/researcher-intake-secrets.json --config workers/researcher-intake/wrangler.jsonc
       - name: Deploy the intake Worker

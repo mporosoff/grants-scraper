@@ -47,6 +47,21 @@ function urls(value, required = false) {
     return parsed.toString();
   });
 }
+function calendarDate(value, label) {
+  const normalized = text(value, 10, label, true);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalized);
+  if (!match) fail("invalid_date", `${label} must be a valid YYYY-MM-DD calendar date.`);
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const parsed = new Date(0);
+  parsed.setUTCHours(0, 0, 0, 0);
+  parsed.setUTCFullYear(year, month - 1, day);
+  if (year < 1 || parsed.getUTCFullYear() !== year || parsed.getUTCMonth() !== month - 1 || parsed.getUTCDate() !== day) {
+    fail("invalid_date", `${label} must be a valid YYYY-MM-DD calendar date.`);
+  }
+  return normalized;
+}
 function normalizeOrcid(value) {
   const compact = String(value || "").toUpperCase().replace(/[^0-9X]/g, "");
   if (!compact) return "";
@@ -112,7 +127,7 @@ export function validateAdminProfile(value, researcherId) {
     fail("invalid_admin_policy", "This researcher cannot be automatically proposed under the selected policy.");
   }
   const sources = urls(value.source_urls, true);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value.source_checked_date || ""))) fail("invalid_source_date", "A source checked date is required.");
+  const sourceCheckedDate = calendarDate(value.source_checked_date, "Source checked date");
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
   const claims = value.claims.map((claim, index) => {
@@ -131,7 +146,7 @@ export function validateAdminProfile(value, researcherId) {
       claim_id: claimId, revision: Math.max(1, Number(claim.revision) || 1), status: claim.status,
       label: text(claim.label, 180, "Claim label", true), category, categories,
       type: text(claim.type, 80, "Claim type", true), evidence: text(claim.evidence, 500, "Claim evidence", true),
-      source_urls: urls(claim.source_urls, true), verified_on: text(claim.verified_on, 10, "Claim verification date", true),
+      source_urls: urls(claim.source_urls, true), verified_on: calendarDate(claim.verified_on, "Claim verification date"),
       evidence_level: claim.evidence_level, legacy_claim_ids: list(claim.legacy_claim_ids || [], 10, 80, "Legacy claim identifier"),
       ...(claim.material_hash ? { material_hash: text(claim.material_hash, 64, "Material hash", true) } : {}),
     };
@@ -145,7 +160,7 @@ export function validateAdminProfile(value, researcherId) {
     home_unit: text(value.home_unit, 180, "Unit", true), relationship: value.relationship,
     pool_visibility: value.pool_visibility, auto_proposable: value.auto_proposable, status: value.status,
     research_summary: text(value.research_summary, 1200, "Research summary"), source_urls: sources,
-    source_checked_date: value.source_checked_date, claims,
+    source_checked_date: sourceCheckedDate, claims,
   };
 }
 

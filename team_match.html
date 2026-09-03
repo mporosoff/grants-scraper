@@ -363,7 +363,7 @@
 <script src="assets/team-hybrid.js?v=app-1.3.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=6cc44ca08426ad32ec47f8d63cf47c48db4526848e5f1ab0b2d5e1137f950a71"></script>
-<script src="assets/researcher-intake.js?v=phase1-20260903"></script>
+<script src="assets/researcher-intake.js?v=phase1-20260903-2"></script>
 <script src="assets/team-matcher.js?v=6cc44ca08426ad32ec47f8d63cf47c48db4526848e5f1ab0b2d5e1137f950a71"></script>
 <script src="data/researcher_directory.js?v=6cc44ca08426ad32ec47f8d63cf47c48db4526848e5f1ab0b2d5e1137f950a71"></script>
 <script src="data/opportunity_team_index.js?v=6cc44ca08426ad32ec47f8d63cf47c48db4526848e5f1ab0b2d5e1137f950a71"></script>
@@ -1606,10 +1606,8 @@
     if (submitForReview && INTAKE_API) {
       try { sourceUrls = INTAKE_API.normalizeUrls($("team-source-urls").value); } catch (_error) {}
     }
-    var existingProfile = editingExternalId ? externalProfile(editingExternalId) : null;
     var registryMatches = possibleRegistryMatches(name, normalizedOrcid, sourceUrls);
-    var registryId = existingProfile && existingProfile.registry_id || "";
-    if (!registryId && registryMatches.length === 1) registryId = registryMatches[0].researcher.id;
+    var registryId = INTAKE_API ? INTAKE_API.uniqueRegistryMatchId(registryMatches) : "";
     var savedProfile = Object.assign({ name: name, keywords: keywords, registry_id: registryId }, orcidData);
     if (editingExternalId) {
       next = next.map(function (profile) {
