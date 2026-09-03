@@ -76,11 +76,11 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The September 2, 2026 build contains 1,400 open or current forecasted funding
-opportunities (1,086 posted and 314 forecasted) rather than the former 48-record
+The September 3, 2026 build contains 1,397 open or current forecasted funding
+opportunities (1,079 posted and 318 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
-Current published sources are ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,327),
-NASA ROSES (4), NYSERDA (36), U.S. National Science Foundation (1), VPR funding digest
+Current published sources are ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,324),
+NASA ROSES (3), NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest
 (limited submissions & foundations) (21); additional sources are enabled only after a
 sustainable public ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
@@ -605,18 +605,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The September 2, 2026 catalog contains 1,400 current posted or forecasted opportunities:
+The September 3, 2026 catalog contains 1,397 current posted or forecasted opportunities:
 
-- 295 have a defensible direct announcement attachment (196 high confidence, 99 medium
+- 287 have a defensible direct announcement attachment (195 high confidence, 92 medium
   confidence);
-- another 615 use an official source page as their primary route;
-- the remaining 490 use the official Grants.gov record as their primary route;
-- 714 contain an agency notice URL across all route types;
-- 423 preserve an official deadline time or timezone;
-- 138 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
+- another 619 use an official source page as their primary route;
+- the remaining 491 use the official Grants.gov record as their primary route;
+- 720 contain an agency notice URL across all route types;
+- 419 preserve an official deadline time or timezone;
+- 132 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
   verification;
-- 598 (42.7%) have an official per-award floor or ceiling;
-- 868 (62.0%) have at least one structured funding amount; and
+- 602 (43.1%) have an official per-award floor or ceiling;
+- 864 (61.8%) have at least one structured funding amount; and
 - zero have a past structured close date and zero have a detected XML/detail-API
   deadline conflict in this build.
 <!-- catalog-evidence:end -->

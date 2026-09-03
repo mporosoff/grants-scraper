@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -273,6 +273,15 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-09 | The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
+  </entry>
+  <entry>
+    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363113"/>
+    <id>urn:funding-finder:grants-gov:363113</id>
+    <updated>2027-01-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration | Closes 2027-02-03 | The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
   </entry>
   <entry>
     <title>Bridge2AI Network for AI Health Science</title>
@@ -604,16 +613,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-02-01 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362965"/>
-    <id>urn:funding-finder:grants-gov:362965</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
   </entry>
 </feed>

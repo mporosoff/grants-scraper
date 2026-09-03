@@ -4,16 +4,17 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
-    <title>ROSES25: A.17 Hydrosphere</title>
-    <link href="https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO"/>
-    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-A.17-c0957a7778</id>
+    <title>ROSES 2025: A.17 Hydrosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363789"/>
+    <id>urn:funding-finder:grants-gov:363789</id>
     <updated>2026-09-02T00:00:00Z</updated>
     <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2027-01-28 | NASA ROSES-2025 program element A.17, appendix division A. Published status: dated; due dates as printed: 10/08/2026 (Step-1) | 1/28/2027 (Step-2). Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
+    <summary>NASA Headquarters | Closes 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended September 2, 2026. This amendment adds this new program element to ROSES-2025. Step-1 proposals are due October 8, 2026, and Step-2 proposals are due January 28, 2027. Any proposal not preced…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.16 Cryosphere</title>

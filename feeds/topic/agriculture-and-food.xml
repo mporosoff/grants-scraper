@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -81,6 +81,29 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Emergency Citrus Disease Research and Extension Pre-Applications</title>
+    <link href="https://www.grants.gov/search-results-detail/363785"/>
+    <id>urn:funding-finder:grants-gov:363785</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | In FY 2026, the ECDRE program, under Assistance Listing 10.309, is soliciting proposals to develop effective tactics and strategies to control HLB and its disease complex for financially sustainable citrus production in the United States. All projects funded by the ECDRE program will incorporate collaborative approaches that integrate available knowledge to develop new solutions that can be deploy…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Extension Program Special Emphasis</title>
+    <link href="https://www.grants.gov/search-results-detail/363784"/>
+    <id>urn:funding-finder:grants-gov:363784</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
   </entry>
   <entry>
     <title>Fiscal Year 2027 Regional Nutrition Hubs</title>
@@ -270,17 +293,6 @@
     <summary>National Institute of Food and Agriculture | Closes 2026-10-15 | The purpose of HEC, under assistance listing 10.217, is to strengthen institutional capacities, including curriculum, faculty, scientific instrumentation, and student recruitment and retention. The HEC program is focused on developing and improving formal master’s or doctorate degree-level food and agricultural sciences education and first professional degree-level education in veterinary medicine…</summary>
   </entry>
   <entry>
-    <title>Increasing Market Opportunities in Vietnam for U.S. Innovative Biofertilizer Exporters</title>
-    <link href="https://www.grants.gov/search-results-detail/363449"/>
-    <id>urn:funding-finder:grants-gov:363449</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>Foreign Agricultural Service | Closes 2026-09-02 | Fertilize Right Vietnam (FR Vietnam) is a program implemented by USDA/FAS since 2023. USDA’s official partner is the Ministry of Agriculture and Environment (MAE) and an implementing partner from an international agricultural research organization. The objectives of FR Vietnam are to (1) increase fertilizer-use efficiency, (2) enhance fertilizer effectiveness, and (3) develop alternatives to tradi…</summary>
-  </entry>
-  <entry>
     <title>International Programs &amp; Trade, Invasive Species Program Funding Opportunity</title>
     <link href="https://www.grants.gov/search-results-detail/363287"/>
     <id>urn:funding-finder:grants-gov:363287</id>
@@ -403,6 +415,16 @@
     <category term="Agriculture and food"/>
     <category term="Cybersecurity"/>
     <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
+  </entry>
+  <entry>
+    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
+    <link href="https://www.grants.gov/search-results-detail/360510"/>
+    <id>urn:funding-finder:grants-gov:360510</id>
+    <updated>2026-06-26T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Transportation"/>
+    <summary>Administration for Community Living | Closes 2026-09-04 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
@@ -665,28 +687,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Closes 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
-  </entry>
-  <entry>
-    <title>Animal Food Regulatory Program Standards Implementation Development and Maintenance, with Mutual Reliance Initiatives Clinical Trials Not Allowed</title>
-    <link href="https://www.grants.gov/search-results-detail/359816"/>
-    <id>urn:funding-finder:grants-gov:359816</id>
-    <updated>2025-06-25T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Public health"/>
-    <summary>Food and Drug Administration | Closes 2027-04-01 | The purpose of this Notice of Funding Opportunity (NOFO) is to advance efforts for a nationally integrated animal food safety system providing state animal food regulatory programs the ability to achieve full implementation of the Animal Food Regulatory Program Standards (AFRPS) within 5 years and to maintain full implementation. This NOFO will also fund optional projects for state animal food reg…</summary>
-  </entry>
-  <entry>
-    <title>Support for Research Excellence (SuRE) Award (R16 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358829"/>
-    <id>urn:funding-finder:grants-gov:358829</id>
-    <updated>2025-06-13T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2028-09-07 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
   </entry>
 </feed>

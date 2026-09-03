@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -95,16 +95,6 @@
     <author><name>Assistant Secretary for Preparedness and Response</name></author>
     <category term="Cybersecurity"/>
     <summary>Assistant Secretary for Preparedness and Response | Closes 2026-09-18 | A trauma system is, “…an organized, inclusive approach to facilitating and coordinating a multidisciplinary system response to severely injured patients.”[14] Coordination across prehospital entities (e.g., EMS) and hospitals signal an effective trauma system, where patients can get the right level of care they need. Access to trauma care in the United States is inconsistent. For example, 1 in 3 A…</summary>
-  </entry>
-  <entry>
-    <title>FY26 National Dam Safety Program State Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363603"/>
-    <id>urn:funding-finder:grants-gov:363603</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-09-02 | The National Dam Safety Program (NDSP) is a partnership of states, federal agencies, and other stakeholders to promote the establishment and maintenance of effective federal and state dam safety programs to reduce the risk to human life, property, and the environment from dam related hazards.</summary>
   </entry>
   <entry>
     <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
@@ -711,5 +701,16 @@
     <category term="Environmental science"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2028-05-07 | The National Institutes of Health (NIH) awards senior individual research training fellowships to experienced scientists who wish to make major changes in the direction of their research careers or who wish to broaden their scientific background by acquiring new research capabilities as independent investigators in research fields relevant to the missions of participating NIH Institutes and Center…</summary>
+  </entry>
+  <entry>
+    <title>NIGMS National and Regional Resources (R24 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358934"/>
+    <id>urn:funding-finder:grants-gov:358934</id>
+    <updated>2025-06-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>National Institutes of Health | Closes 2027-06-14 | This Notice of Funding Opportunity (NOFO) encourages applications for support of resources that will provide access to state-of-the-art equipment, technologies, research tools, materials, organisms, software, and/or services to a substantial regional (multi-state) or national user base. Only those resources with technical capabilities that fall within the NIGMS-supported program areas are eligible…</summary>
   </entry>
 </feed>

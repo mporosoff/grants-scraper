@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -573,6 +573,20 @@
     <summary>Centers for Disease Control - NCIPC | Closes 2027-05-04 | The National Violent Death Reporting System (NVDRS) is CDC's state-based surveillance system for violent deaths and suicides. NVDRS combines information from death certificates, coroner or medical examiner reports, including toxicology reports, and law enforcement reports to provide comprehensive, incident-level data on the circumstances surrounding violent deaths. Through this Notice of Funding O…</summary>
   </entry>
   <entry>
+    <title>Tribal Colleges Extension Program Special Emphasis</title>
+    <link href="https://www.grants.gov/search-results-detail/363784"/>
+    <id>urn:funding-finder:grants-gov:363784</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
+  </entry>
+  <entry>
     <title>Clinical and Translational Science Award</title>
     <link href="https://www.grants.gov/search-results-detail/363244"/>
     <id>urn:funding-finder:grants-gov:363244</id>
@@ -626,15 +640,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Institutional Mentored Research Career Development Program for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363245"/>
-    <id>urn:funding-finder:grants-gov:363245</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-02-12 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
 </feed>

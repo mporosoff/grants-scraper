@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,28 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: A.17 Hydrosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363789"/>
+    <id>urn:funding-finder:grants-gov:363789</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended September 2, 2026. This amendment adds this new program element to ROSES-2025. Step-1 proposals are due October 8, 2026, and Step-2 proposals are due January 28, 2027. Any proposal not preced…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363786"/>
+    <id>urn:funding-finder:grants-gov:363786</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
@@ -72,18 +94,6 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: Amended August 31, 2026. This amendment releases the final text for this program element, which was previously TBD. Mandatory NOIs are due October 15, 2026, and proposals are due December 3, 2026. There are several major changes since the pr…</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363735"/>
-    <id>urn:funding-finder:grants-gov:363735</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>U.S. Mission to Australia 2026 Annual Program Statement</title>
@@ -667,16 +677,5 @@
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
-  </entry>
-  <entry>
-    <title>Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
-    <link href="https://www.grants.gov/search-results-detail/362836"/>
-    <id>urn:funding-finder:grants-gov:362836</id>
-    <updated>2026-06-16T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Transportation"/>
-    <summary>Office of Naval Research | Closes 2026-11-16 | The proposed topic will develop and mature Communications and Networking technologies for Naval operations. Background: A Design for Maritime Superiority (2018) describes an operational architecture for distributed maritime operations (DMO) that "... will provide accurate, timely, and analyzed information to units, warfighting groups, and fleets." A critical component of this architecture is the N…</summary>
   </entry>
 </feed>
