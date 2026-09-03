@@ -150,6 +150,17 @@ test("investigator names use consistent display capitalization without changing 
   assert.equal(product.displayInvestigatorName("ANNE-MARIE O’NEILL"), "Anne-Marie O’Neill");
   assert.equal(product.displayInvestigatorName("MCDONALD, SIOBHAN III"), "McDonald, Siobhan III");
   assert.equal(product.displayInvestigatorName("de Vries, Anna"), "de Vries, Anna");
+  for (const [published, display] of [
+    ["JANE DOE JR", "Jane Doe Jr"],
+    ["JANE DOE SR.", "Jane Doe Sr."],
+    ["JANE DOE II", "Jane Doe II"],
+    ["JANE DOE MD", "Jane Doe MD"],
+    ["jane doe phd", "Jane Doe PhD"],
+    ["JANE DOE PH.D.", "Jane Doe Ph.D."],
+    ["JANE DOE DDS", "Jane Doe DDS"],
+    ["JANE DOE DVM", "Jane Doe DVM"],
+    ["JANE DOE ESQ", "Jane Doe Esq"],
+  ]) assert.equal(product.displayInvestigatorName(published), display);
 
   const summary = product.institutionSummary([
     {

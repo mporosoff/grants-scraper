@@ -5,6 +5,23 @@
   const DOE_PAGE_LIMIT = 10;
   const AWARD_YEAR_MIN = 1989;
   const AWARD_YEAR_MAX = 2100;
+  const INVESTIGATOR_SUFFIXES = Object.freeze({
+    jr: "Jr",
+    sr: "Sr",
+    ii: "II",
+    iii: "III",
+    iv: "IV",
+    vi: "VI",
+    vii: "VII",
+    viii: "VIII",
+    ix: "IX",
+    x: "X",
+    md: "MD",
+    phd: "PhD",
+    dds: "DDS",
+    dvm: "DVM",
+    esq: "Esq",
+  });
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
@@ -24,7 +41,10 @@
       .toLocaleLowerCase("en-US")
       .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
       .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`)
-      .replace(/([\s,])(?:Ii|Iii|Iv|Vi|Vii|Viii|Ix|X)\.?$/u, match => match.toLocaleUpperCase("en-US"));
+      .replace(
+        /([\s,])(Jr|Sr|Ii|Iii|Iv|Vi|Vii|Viii|Ix|X|Md|Phd|Dds|Dvm|Esq)(\.)?$/u,
+        (_match, prefix, suffix, period = "") => `${prefix}${INVESTIGATOR_SUFFIXES[suffix.toLocaleLowerCase("en-US")]}${period}`,
+      );
   }
 
   function year(value) {
