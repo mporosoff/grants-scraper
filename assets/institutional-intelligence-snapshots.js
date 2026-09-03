@@ -39,7 +39,8 @@
     questionSubmitting: false,
     answering: false,
     searchActivityOwner: 0,
-    historyStateFrame: 0,
+    historyStateTimer: 0,
+    historyRestoreDepth: 0,
   };
 
   function clean(value, maximum = 500) {
@@ -285,33 +286,43 @@
     return { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
   }
 
+  function serializedHistoryState(value) {
+    try {
+      return JSON.stringify(value || null);
+    } catch {
+      return "";
+    }
+  }
+
+  function replaceHistoryStateIfChanged(value, url = location.href) {
+    const nextUrl = new URL(url, location.href).href;
+    if (nextUrl === location.href && serializedHistoryState(value) === serializedHistoryState(history.state)) return false;
+    history.replaceState(value, "", nextUrl);
+    return true;
+  }
+
   function recordCurrentHistoryViewState() {
-    if (!location.protocol.startsWith("http")) return;
-    history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", location.href);
+    if (!location.protocol.startsWith("http") || state.historyRestoreDepth) return;
+    replaceHistoryStateIfChanged({ ...(history.state || {}), ...historyViewState() });
   }
 
   function scheduleCurrentHistoryViewState() {
-    if (state.historyStateFrame) return;
-    const scheduledUrl = location.href;
-    state.historyStateFrame = requestAnimationFrame(() => {
-      state.historyStateFrame = requestAnimationFrame(() => {
-        state.historyStateFrame = 0;
-        if (location.href !== scheduledUrl) {
-          scheduleCurrentHistoryViewState();
-          return;
-        }
-        recordCurrentHistoryViewState();
-      });
-    });
+    if (state.historyRestoreDepth) return;
+    clearTimeout(state.historyStateTimer);
+    state.historyStateTimer = setTimeout(() => {
+      state.historyStateTimer = 0;
+      recordCurrentHistoryViewState();
+    }, 250);
   }
 
   function writeHistoryUrl(url, mode = "replace", departureHistoryState = null) {
     if (!location.protocol.startsWith("http")) return;
-    if (mode === "push") {
-      history.replaceState({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) }, "", location.href);
-      history.pushState(historyViewState(), "", url);
+    const nextUrl = new URL(url, location.href).href;
+    if (mode === "push" && nextUrl !== location.href) {
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) });
+      history.pushState(historyViewState(), "", nextUrl);
     } else {
-      history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", url);
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...historyViewState() }, nextUrl);
     }
     scheduleCurrentHistoryViewState();
   }
@@ -1288,17 +1299,21 @@
     $("ii-update-answer").addEventListener("click", refreshQuestionAnswer);
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
-      const restored = core.stateFromSearch(location.search);
-      if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return clearSearch({ historyMode: "replace" });
-      state.sequence += 1;
-      state.pageRequestSequence += 1;
-      state.controller?.abort();
-      setSearchActivity(false);
-      resetResultState();
-      applyFormState(restored);
-      state.controller = new AbortController();
-      setBusy(true);
+      state.historyRestoreDepth += 1;
       try {
+        const restored = core.stateFromSearch(location.search);
+        if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) {
+          clearSearch({ historyMode: "replace" });
+          return;
+        }
+        state.sequence += 1;
+        state.pageRequestSequence += 1;
+        state.controller?.abort();
+        setSearchActivity(false);
+        resetResultState();
+        applyFormState(restored);
+        state.controller = new AbortController();
+        setBusy(true);
         if (restored.snapshot_id) {
           state.submitted = submittedCriteria(restored);
           state.snapshot = { snapshot_id: restored.snapshot_id, sources: state.snapshot?.sources || [] };
@@ -1310,9 +1325,11 @@
         setStatus(error.message, true);
       } finally {
         setBusy(false);
+        state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
         requestAnimationFrame(() => {
           if (event.state?.focusId) $(event.state.focusId)?.focus({ preventScroll: true });
           if (Number.isFinite(event.state?.scrollY)) window.scrollTo({ top: event.state.scrollY });
+          scheduleCurrentHistoryViewState();
         });
       }
     });

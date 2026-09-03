@@ -331,8 +331,9 @@ test("explicit year language deterministically overrides an incorrect model tran
 
 test("snapshot URLs and replacement results have one committed owner", () => {
   const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
-  assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
-  assert.match(historySource, /requestAnimationFrame\([\s\S]*requestAnimationFrame\([\s\S]*recordCurrentHistoryViewState\(\)/);
+  assert.match(historySource, /mode === "push"[\s\S]*replaceHistoryStateIfChanged\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
+  assert.match(historySource, /clearTimeout\(state\.historyStateTimer\)[\s\S]*setTimeout\([\s\S]*recordCurrentHistoryViewState\(\)[\s\S]*250/);
+  assert.match(historySource, /nextUrl === location\.href[\s\S]*serializedHistoryState\(value\) === serializedHistoryState\(history\.state\)[\s\S]*return false/);
   const syncUrlSource = appSource.slice(appSource.indexOf("function syncUrl("), appSource.indexOf("async function postJson("));
   assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
   assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
@@ -372,6 +373,69 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+});
+
+test("one ordinary URL-state action coalesces repeated replaceState requests", () => {
+  const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
+  const timers = new Map();
+  let timerSequence = 0;
+  let replaceWrites = 0;
+  let pushWrites = 0;
+  const location = { protocol: "https:", href: "https://example.test/funded_awards.html", search: "" };
+  const history = {
+    state: null,
+    replaceState(value, _unused, url) {
+      replaceWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+    pushState(value, _unused, url) {
+      pushWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+  };
+  const harness = {
+    URL,
+    location,
+    history,
+    window: { scrollY: 420 },
+    document: { activeElement: { id: "ii-topic" } },
+    state: { historyStateTimer: 0, historyRestoreDepth: 0, submitted: null, snapshot: null },
+    setTimeout(callback) {
+      const id = ++timerSequence;
+      timers.set(id, callback);
+      return id;
+    },
+    clearTimeout(id) { timers.delete(id); },
+  };
+  harness.globalThis = harness;
+  vm.createContext(harness);
+  vm.runInContext(`${historySource}\nglobalThis.writeHistoryUrlForTest = writeHistoryUrl;`, harness);
+  const target = new URL("https://example.test/funded_awards.html?ii=1&ii_topic=catalysis");
+  for (let index = 0; index < 150; index += 1) harness.writeHistoryUrlForTest(target, "replace");
+  for (const callback of [...timers.values()]) callback();
+  assert.equal(replaceWrites, 1, "identical logical writes must collapse to one URL replacement");
+  assert.equal(pushWrites, 0);
+});
+
+test("mobile editable controls keep a 16px floor without disabling page zoom", async () => {
+  const [appStyles, alertsStyles, awardsStyles, intelligenceStyles, fundedPage] = await Promise.all([
+    readFile(new URL("assets/app.css", root), "utf8"),
+    readFile(new URL("assets/alerts.css", root), "utf8"),
+    readFile(new URL("assets/funded-awards.css", root), "utf8"),
+    readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
+    readFile(new URL("funded_awards.html", root), "utf8"),
+  ]);
+  const mobileFloor = appStyles.slice(appStyles.lastIndexOf("@media (max-width: 820px)"));
+  assert.match(mobileFloor, /input,[\s\S]*select,[\s\S]*textarea,[\s\S]*contenteditable[\s\S]*font-size:\s*max\(16px, 1em\)\s*!important/);
+  assert.match(alertsStyles, /\.alert-field-grid input,[\s\S]*\.alert-field-grid select/);
+  assert.match(awardsStyles, /\.award-field input,[\s\S]*\.award-field select/);
+  assert.match(intelligenceStyles, /\.ii-form input,[\s\S]*\.ii-ask textarea,[\s\S]*\.ii-key-fields select/);
+  assert.match(fundedPage, /name="viewport" content="width=device-width, initial-scale=1"/);
+  assert.doesNotMatch(fundedPage, /user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i);
 });
 
 test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {

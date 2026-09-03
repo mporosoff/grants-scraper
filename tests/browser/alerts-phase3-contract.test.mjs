@@ -800,6 +800,14 @@ test("alert deployment and privacy contracts preserve Phase 3 behavior through P
   assert.match(awards, /Email alerts for this program/);
   assert.match(alerts, /secure Manage alerts link/);
   assert.match(alerts, /Pursuit status and notes, profile\/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser/);
+  assert.equal((alerts.match(/id="alert-cadence"/g) || []).length, 1, "the modal has one cadence selector");
+  assert.match(alerts, /<select id="alert-cadence" name="cadence">/);
+  assert.doesNotMatch(alerts, /<input[^>]+(?:name|id)="(?:cadence|frequency)"/i);
+  for (const trigger of ["deadline_changed", "amended", "closing_reminders", "status_changed"])
+    assert.match(alerts, new RegExp(`name="trigger" value="${trigger}"`));
+  const requestBody = alerts.slice(alerts.indexOf("const body ="), alerts.indexOf("submitButton.disabled"));
+  assert.equal((requestBody.match(/cadence:/g) || []).length, 1, "the payload has one canonical cadence field");
+  assert.doesNotMatch(requestBody, /frequency\s*:/);
   assert.match(worker, /RESEND_WEBHOOK_SECRET/);
   assert.match(migration, /UNIQUE \(subscription_id, event_key\)/);
   assert.match(migration, /subscription_qualifications/);
