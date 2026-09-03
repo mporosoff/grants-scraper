@@ -253,8 +253,9 @@
   }
 
   function contactLine(person, source, officialUrl) {
-    const name = clean(person?.name) || "Name not listed";
+    const publishedName = clean(person?.name);
     const role = clean(person?.role) || "Contact";
+    const name = (/investigator/i.test(role) ? productApi.displayInvestigatorName(publishedName) : publishedName) || "Name not listed";
     const email = clean(person?.email);
     const contactUrl = safeUrl(person?.official_contact_url || officialUrl);
     const identity = `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)}`;
@@ -270,7 +271,7 @@
     const id = clean(award.award_id) || `result-${position}`;
     const investigators = Array.isArray(award.principal_investigators) ? award.principal_investigators : [];
     const programContacts = Array.isArray(award.program_contacts) ? award.program_contacts : [];
-    const primaryNames = investigators.map(person => clean(person?.name)).filter(Boolean);
+    const primaryNames = investigators.map(person => productApi.displayInvestigatorName(person?.name)).filter(Boolean);
     const institution = clean(award?.institution?.normalized_name || award?.institution?.name) || "Institution not listed";
     const program = clean(award.program_name) || (award.program_codes || []).map(clean).filter(Boolean).join(", ") || "Program not listed";
     const dates = [formatDate(award.project_start), formatDate(award.project_end)].join(" – ");
@@ -328,7 +329,7 @@
       return;
     }
     const investigators = summary.investigators.slice(0, 12).map(person => (
-      `<button class="pi-summary-button" type="button" data-award-pi="${escapeAttribute(person.name)}">${escapeHtml(person.name)} · ${person.projects.toLocaleString()} ${person.projects === 1 ? "project" : "projects"}</button>`
+      `<button class="pi-summary-button" type="button" data-award-pi="${escapeAttribute(person.query || person.name)}">${escapeHtml(person.name)} · ${person.projects.toLocaleString()} ${person.projects === 1 ? "project" : "projects"}</button>`
     )).join("");
     node.innerHTML = `<h3 id="institution-summary-heading">${escapeHtml(summary.institution)}</h3>
       <p class="summary-counts"><span><strong>${summary.projects.toLocaleString()}</strong> funded projects in this result page</span><span><strong>${summary.investigators.length.toLocaleString()}</strong> investigators</span></p>
@@ -344,7 +345,7 @@
       return;
     }
     const investigators = new Set(results.flatMap(award => (
-      (award.principal_investigators || []).map(person => clean(person?.name)).filter(Boolean)
+      (award.principal_investigators || []).map(person => productApi.displayInvestigatorName(person?.name)).filter(Boolean)
     )));
     const institutions = new Set(results.map(award => clean(award?.institution?.normalized_name || award?.institution?.name)).filter(Boolean));
     const yearRange = productApi.awardYearRange(results) || "Years not listed";

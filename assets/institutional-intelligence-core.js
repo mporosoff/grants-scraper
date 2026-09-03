@@ -32,6 +32,10 @@
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
   }
 
+  function displayInvestigatorName(value) {
+    return globalThis.FUNDING_AWARD_PRODUCT?.displayInvestigatorName?.(value) || clean(value, 300);
+  }
+
   function snapshotFacetKey(value) {
     const key = String(value || "").replace(/\s+/g, " ").trim();
     return key.length <= SNAPSHOT_FACET_KEY_MAX_LENGTH ? key : "";
@@ -180,7 +184,7 @@
     if (!published) return null;
     published = published
       .replace(/^(?:(?:dr|doctor|prof|professor|mr|mrs|ms|miss|mx)\.?\s+)+/iu, "")
-      .replace(/(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?$/iu, "")
+      .replace(/(?:(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?)+$/iu, "")
       .trim();
     const commaParts = published.split(",").map(part => clean(part, 160)).filter(Boolean);
     let tokens;
@@ -276,7 +280,7 @@
         ? `${token.replace(/\.+$/u, "")}.`
         : token).join(" ")
       : "";
-    return [entry.first_display, middle, entry.family_display].filter(Boolean).join(" ");
+    return displayInvestigatorName([entry.first_display, middle, entry.family_display].filter(Boolean).join(" "));
   }
 
   function groupInvestigators(awards) {
@@ -498,7 +502,7 @@
         program: clean(award?.program_name || award?.activity_code || award?.program_codes?.[0], 200),
         year: validYear(award?.award_year),
         investigators: (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
-          .map(person => clean(person?.name, 160)).filter(Boolean).slice(0, 8),
+          .map(person => displayInvestigatorName(person?.name)).filter(Boolean).slice(0, 8),
         abstract_excerpt: clean(award?.abstract, QUESTION_ABSTRACT_LIMIT),
       };
       const bytes = JSON.stringify(record).length + (awards.length ? 1 : 0);
@@ -534,7 +538,7 @@
       : (safeAggregate.awards || []).map(evidenceId);
     let answer;
     if (resolvedIntent === "investigators") {
-      const people = safeAggregate.investigators.map(person => `${person.name} (${person.projects} award${person.projects === 1 ? "" : "s"} in the result snapshot)`);
+      const people = safeAggregate.investigators.map(person => `${displayInvestigatorName(person.name)} (${person.projects} award${person.projects === 1 ? "" : "s"} in the result snapshot)`);
       answer = people.length ? `Investigators in the result snapshot: ${people.join("; ")}.` : "No investigator names appear in the matching result snapshot.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
