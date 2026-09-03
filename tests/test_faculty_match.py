@@ -9,6 +9,7 @@ from scripts.faculty_match import (
     THEME_LEXICON,
     match_to_catalog,
 )
+from scripts.researcher_registry import load_registry, matching_profiles
 
 
 class FacultyMatchRelevanceTests(unittest.TestCase):
@@ -22,7 +23,11 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
                 + ";\n",
                 encoding="utf-8",
             )
-            return match_to_catalog([], str(catalog_path), str(output_path))
+            registry = load_registry()
+            return match_to_catalog(
+                matching_profiles(registry), str(catalog_path), str(output_path),
+                registry_generation=registry["registry_generation"],
+            )
 
     def test_broad_catalog_topics_cannot_create_a_research_match(self):
         result = self._match([{
@@ -130,7 +135,8 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
             encoding="utf-8"
         )
 
-        self.assertIn("python -m scripts.faculty_match match", workflow)
+        self.assertIn("python -m scripts.faculty_match", workflow)
+        self.assertIn("--registry config/researcher_registry.json", workflow)
         self.assertIn("--catalog data/opportunities.js", workflow)
         self.assertIn("--out data/faculty_matches.js", workflow)
 

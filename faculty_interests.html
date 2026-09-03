@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Propose a correction to a Funding Finder researcher profile or nominate a researcher for administrator review.">
+  <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/faculty_interests.html">
+  <meta property="og:site_name" content="Funding Finder">
+  <meta property="og:title" content="Configure Faculty Interests | Funding Finder">
+  <meta property="og:description" content="Propose researcher-profile corrections and broader-pool nominations for administrator review.">
+  <title>Configure Faculty Interests | Funding Finder</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260812">
+  <link rel="stylesheet" href="./assets/brand.css?v=20260812">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/faculty-interests.css?v=phase1-20260903b">
+</head>
+<body>
+  <a class="skip-link" href="#researcher-request-form">Skip to researcher request form</a>
+  <header class="site-header">
+    <a class="brand" href="./match_explorer.html" aria-label="Funding Finder home">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span><strong>Funding Finder</strong><small>Research funding tools</small></span>
+    </a>
+    <div class="header-actions">
+      <nav class="site-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="./match_explorer.html">Funding Finder</a>
+        <a href="./team_match.html">Team Match</a>
+        <a href="./funded_awards.html">Funded Awards</a>
+        <a href="./faculty_interests.html" aria-current="page">Configure Faculty Interests</a>
+      </nav>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="interests-main">
+    <section class="interests-hero" aria-labelledby="page-title">
+      <p class="eyebrow">Researcher directory</p>
+      <h1 id="page-title">Configure Faculty Interests</h1>
+      <p>Propose a correction to a published profile or nominate a missing internal or external researcher for the shared pool.</p>
+      <p class="notice"><strong>Submitting does not publish a change.</strong> The current profile remains active until an administrator approves the request and the validated deployment succeeds.</p>
+    </section>
+
+    <form class="request-card" id="researcher-request-form" novalidate>
+      <fieldset class="request-kind">
+        <legend>What would you like to do?</legend>
+        <label><input type="radio" name="request_type" value="profile_correction" checked><span><strong>Correct an existing profile</strong><small>Review and edit currently published information.</small></span></label>
+        <label><input type="radio" name="request_type" value="new_researcher_nomination"><span><strong>Nominate a missing researcher</strong><small>Suggest an internal or external researcher for the broader pool.</small></span></label>
+      </fieldset>
+
+      <div class="field-grid">
+        <label class="span-2" id="existing-wrap" for="existing-researcher">Published researcher
+          <select id="existing-researcher"><option value="">Choose a researcher</option></select>
+          <span class="field-note">Selecting a person prefills the published profile. A stable registry ID, not the name, identifies the correction.</span>
+        </label>
+        <label for="display-name">Preferred public display name
+          <input id="display-name" type="text" maxlength="120" autocomplete="name" required>
+        </label>
+        <label for="home-unit">Unit or department
+          <input id="home-unit" type="text" maxlength="180" autocomplete="organization">
+        </label>
+        <label for="orcid-id">ORCID iD <span class="field-note">optional</span>
+          <input id="orcid-id" type="text" maxlength="40" inputmode="text" placeholder="0000-0002-1825-0097">
+        </label>
+        <label id="relationship-wrap" for="relationship-note">Relationship to the institution
+          <select id="relationship-note">
+            <option value="">Choose one</option>
+            <option>University of Rochester faculty or staff</option>
+            <option>University of Rochester affiliate</option>
+            <option>External collaborator</option>
+            <option>Other or unsure</option>
+          </select>
+          <span class="field-note">This is context only. The administrator controls the published relationship and eligibility.</span>
+        </label>
+        <label class="span-2" for="research-summary">Public research summary
+          <textarea id="research-summary" maxlength="1200" placeholder="A short, source-supported description of the researcher’s work."></textarea>
+        </label>
+        <label class="span-2" for="research-claims">Research interests and expertise
+          <textarea id="research-claims" maxlength="2200" required placeholder="Enter one specific capability per line."></textarea>
+          <span class="field-note">Use concise, evidence-backed statements. Scientific additions or meaning changes trigger dependency review.</span>
+        </label>
+        <label class="span-2" for="source-urls">Supporting source links
+          <textarea id="source-urls" maxlength="4000" placeholder="https://www.rochester.edu/…"></textarea>
+          <span class="field-note">One HTTPS link per line. A credible identity or institutional source is required for a new researcher.</span>
+        </label>
+        <label for="contact-email">Contact email <span class="field-note">optional, private</span>
+          <input id="contact-email" type="email" maxlength="254" autocomplete="email">
+        </label>
+        <label for="submitter-note">Explanation or note <span class="field-note">optional, private</span>
+          <textarea id="submitter-note" maxlength="1000"></textarea>
+        </label>
+      </div>
+
+      <p class="duplicate-warning" id="duplicate-warning" role="status" hidden></p>
+      <section class="submission-preview" aria-labelledby="submission-preview-heading">
+        <h2 id="submission-preview-heading">What will be sent</h2>
+        <p>Only the fields in this form: the selected stable profile ID, name, research summary, expertise statements, ORCID iD, unit, relationship note, supporting links, optional contact email, and optional note. Browser-local teams, saved researchers, imported publication text, search history, uploaded files, and API keys are not sent.</p>
+      </section>
+      <label class="consent"><input id="review-consent" type="checkbox" required><span>I choose to submit these fields for administrator review under privacy notice version 2026-09-03. I understand that approval is not guaranteed.</span></label>
+      <div class="form-actions">
+        <button class="primary" id="submit-request" type="submit">Submit for administrator review</button>
+        <button class="secondary" id="download-request" type="button" hidden>Download bounded request JSON</button>
+      </div>
+      <p class="form-status" id="request-status" aria-live="polite"></p>
+    </form>
+
+    <section class="receipt" id="receipt" aria-labelledby="receipt-heading" hidden>
+      <h2 id="receipt-heading">Request received</h2>
+      <p>Status identifier: <code id="receipt-id"></code></p>
+      <p><a id="receipt-link" href="#">View the non-sensitive submission status</a>. Keep this link; contact information and proposed private notes are never shown there.</p>
+    </section>
+    <p class="privacy-footnote">Rejected requests and private contact information are retained only for the bounded administrative period described by the submission service. Published researcher information remains auditable through repository history.</p>
+  </main>
+
+  <script src="./assets/site-nav.js?v=brand-2026-08-12"></script>
+  <script src="./data/researcher_directory.js?v=a19cece6fee307eeb5a54c7fca74f115db0434c1638cc3384f2a016b6eb8085b"></script>
+  <script src="./assets/researcher-intake.js?v=phase1-20260903"></script>
+  <script src="./assets/faculty-interests.js?v=phase1-20260903"></script>
+</body>
+</html>

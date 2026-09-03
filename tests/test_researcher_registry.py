@@ -1,0 +1,184 @@
+from __future__ import annotations
+
+import copy
+import json
+from pathlib import Path
+import re
+import unittest
+
+from scripts.researcher_registry import (
+    apply_approved_submission,
+    canonical_bytes,
+    dependency_report,
+    directory_projection,
+    legacy_faculty_projection,
+    load_registry,
+    material_claim_hash,
+    matching_profiles,
+    registry_counts,
+    registry_generation,
+    validate_registry,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY_PATH = ROOT / "config" / "researcher_registry.json"
+TEAM_MODEL_PATH = ROOT / "config" / "opportunity_team_model.json"
+
+
+def assignment_json(path: Path) -> dict:
+    source = path.read_text(encoding="utf-8")
+    return json.loads(source[source.index("{"):].rstrip().rstrip(";"))
+
+
+class ResearcherRegistryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = load_registry(REGISTRY_PATH)
+        cls.team_model = json.loads(TEAM_MODEL_PATH.read_text(encoding="utf-8"))
+
+    def test_generation_ids_and_claim_ownership_are_stable(self):
+        self.assertEqual(self.registry["registry_generation"], registry_generation(self.registry))
+        self.assertGreaterEqual(len(self.registry["researchers"]), 158)
+        researcher_ids = {row["researcher_id"] for row in self.registry["researchers"]}
+        self.assertEqual(len(researcher_ids), len(self.registry["researchers"]))
+        self.assertTrue(all(re.fullmatch(r"urh-[0-9]{6}", value) for value in researcher_ids))
+        for researcher in self.registry["researchers"]:
+            self.assertNotIn(researcher["researcher_id"], researcher["legacy_ids"])
+            for claim in researcher["claims"]:
+                self.assertTrue(claim["claim_id"].startswith(researcher["researcher_id"] + "-c"))
+                self.assertEqual(claim["material_hash"], material_claim_hash(claim))
+
+    def test_public_directory_and_manifest_are_exact_registry_projections(self):
+        directory = assignment_json(ROOT / "data" / "researcher_directory.js")
+        manifest = json.loads((ROOT / "data" / "researcher_registry_manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(directory, directory_projection(self.registry))
+        self.assertEqual(manifest["registry_generation"], self.registry["registry_generation"])
+        self.assertEqual(manifest["counts"], registry_counts(self.registry))
+        self.assertEqual(manifest["researcher_ids"], [row["researcher_id"] for row in self.registry["researchers"]])
+
+    def test_team_model_researcher_projection_and_references_resolve(self):
+        self.assertEqual(self.team_model["faculty"], legacy_faculty_projection(self.registry))
+        identities = {row["researcher_id"] for row in self.registry["researchers"]}
+        for opportunity in self.team_model["opportunities"]:
+            for member in opportunity["members"]:
+                self.assertIn(member["faculty_id"], identities)
+            for role in opportunity["roles"]:
+                self.assertTrue(set(role["candidate_ids"]).issubset(identities))
+                self.assertTrue(set(role["alternative_ids"]).issubset(identities))
+
+    def test_department_forward_matcher_uses_registry_claims(self):
+        generated = assignment_json(ROOT / "data" / "faculty_matches.js")
+        profiles = {row["name"]: row for row in matching_profiles(self.registry)}
+        self.assertEqual(generated["registry_generation"], self.registry["registry_generation"])
+        self.assertEqual(set(generated["faculty"]), set(profiles))
+        for name, metadata in generated["faculty"].items():
+            self.assertEqual(metadata["researcher_id"], profiles[name]["researcher_id"])
+            self.assertEqual(metadata["claim_refs"], profiles[name]["claim_refs"])
+
+    def test_cosmetic_and_scientific_changes_have_bounded_dependency_effects(self):
+        renamed = copy.deepcopy(self.registry)
+        renamed["researchers"][0]["display_name"] += " Test"
+        renamed.pop("registry_generation")
+        renamed["registry_generation"] = registry_generation(renamed)
+        cosmetic = dependency_report(self.registry, renamed, self.team_model)
+        self.assertEqual(cosmetic["affected_team_scopes"], [])
+
+        selected_id = self.team_model["opportunities"][0]["members"][0]["faculty_id"]
+        scientific = copy.deepcopy(self.registry)
+        researcher = next(row for row in scientific["researchers"] if row["researcher_id"] == selected_id)
+        researcher["claims"][0]["evidence"] += " (reviewed update)"
+        researcher["claims"][0]["material_hash"] = material_claim_hash(researcher["claims"][0])
+        scientific.pop("registry_generation")
+        scientific["registry_generation"] = registry_generation(scientific)
+        report = dependency_report(self.registry, scientific, self.team_model)
+        self.assertTrue(report["affected_team_scopes"])
+        expected = {
+            opportunity["id"]
+            for opportunity in self.team_model["opportunities"]
+            if selected_id in {member["faculty_id"] for member in opportunity["members"]}
+            or any(selected_id in role["candidate_ids"] + role["alternative_ids"] for role in opportunity["roles"])
+        }
+        self.assertEqual({row["scope_id"] for row in report["affected_team_scopes"]}, expected)
+
+    def test_approved_updates_are_registry_only_and_claim_revisions_increment(self):
+        target = copy.deepcopy(self.registry["researchers"][0])
+        old_revision = target["claims"][0]["revision"]
+        target["claims"][0]["evidence"] += " reviewed"
+        approved_profile = {
+            key: target[key]
+            for key in (
+                "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
+                "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
+                "source_checked_date", "claims",
+            )
+        }
+        updated, _ = apply_approved_submission(self.registry, {
+            "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+            "approved_at": "2026-09-03T12:00:00Z", "approved_profile": approved_profile,
+        }, self.registry["registry_generation"])
+        updated_target = next(row for row in updated["researchers"] if row["researcher_id"] == target["researcher_id"])
+        self.assertEqual(updated_target["claims"][0]["revision"], old_revision + 1)
+        self.assertNotEqual(updated["registry_generation"], self.registry["registry_generation"])
+
+    def test_data_only_add_retire_rename_and_pool_changes_remain_valid(self):
+        added, _ = apply_approved_submission(self.registry, {
+            "schema_version": 1,
+            "state": "approved",
+            "researcher_id": None,
+            "approved_at": "2026-09-03T12:00:00Z",
+            "approved_profile": {
+                "display_name": "Example Researcher",
+                "sort_name": "Researcher, Example",
+                "aliases": [],
+                "orcid_id": "",
+                "home_unit": "Example unit",
+                "relationship": "reference_only_researcher",
+                "pool_visibility": "hidden",
+                "auto_proposable": False,
+                "status": "active",
+                "research_summary": "A bounded registry acceptance fixture.",
+                "source_urls": ["https://example.edu/researcher"],
+                "source_checked_date": "2026-09-03",
+                "claims": [{
+                    "claim_id": "", "revision": 1, "status": "active",
+                    "label": "Example capability", "category": "Interdisciplinary research",
+                    "type": "Capability", "evidence": "Example capability",
+                    "source_urls": ["https://example.edu/researcher"],
+                    "verified_on": "2026-09-03", "evidence_level": "administrator_reviewed",
+                    "legacy_claim_ids": [],
+                }],
+            },
+        }, self.registry["registry_generation"])
+        self.assertEqual(registry_counts(added)["total"], registry_counts(self.registry)["total"] + 1)
+        added_target = next(row for row in added["researchers"] if row["display_name"] == "Example Researcher")
+        self.assertTrue(added_target["claims"][0]["claim_id"].startswith(added_target["researcher_id"]))
+
+        changed = copy.deepcopy(self.registry)
+        target = next(row for row in changed["researchers"] if row["auto_proposable"] and len(row["claims"]) >= 2)
+        stable_id = target["researcher_id"]
+        original_pool = registry_counts(changed)["pool_counts"]
+        target["display_name"] += " Renamed"
+        target["auto_proposable"] = False
+        target["claims"][0]["status"] = "retired"
+        target["claims"][0]["material_hash"] = material_claim_hash(target["claims"][0])
+        changed.pop("registry_generation")
+        changed["registry_generation"] = registry_generation(changed)
+        self.assertEqual(validate_registry(changed), changed)
+        changed_target = next(row for row in changed["researchers"] if row["researcher_id"] == stable_id)
+        self.assertEqual(changed_target["researcher_id"], stable_id)
+        self.assertNotEqual(registry_counts(changed)["pool_counts"], original_pool)
+
+    def test_no_parallel_hard_coded_faculty_source_remains(self):
+        matcher = (ROOT / "scripts" / "faculty_match.py").read_text(encoding="utf-8")
+        runtime = (ROOT / "assets" / "opportunity-team.js").read_text(encoding="utf-8")
+        self.assertFalse((ROOT / "faculty_profiles.json").exists())
+        for symbol in ("FACULTY_KEYTERMS", "FACULTY_RESEARCH_SUMMARIES", "FACULTY_DOMAINS"):
+            self.assertNotIn(symbol, matcher)
+        self.assertNotRegex(runtime, r"faculty\.length\s*!==\s*\d+")
+        self.assertNotRegex(runtime, r"pools\.main\s*!==\s*\d+")
+        self.assertIn("directory.counts", runtime)
+
+
+if __name__ == "__main__":
+    unittest.main()

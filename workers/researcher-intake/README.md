@@ -1,0 +1,9 @@
+# Funding Finder researcher intake
+
+This Worker is the single private queue for researcher corrections and broader-pool nominations submitted from the public Configure Faculty Interests page or Team Match. Public requests are schema-bounded, origin-restricted, rate-limited, idempotent, and stored in the existing private Funding Finder D1 database. Contact email and submitter notes never enter public projections.
+
+Cloudflare Access must protect `/admin*`. The Worker independently verifies the Access JWT signature, issuer, audience, expiry, and allowlisted email, so a missing or incomplete Access configuration fails closed. Approval accepts only structured researcher fields, verifies the live registry generation, records an audited transition, and dispatches only a submission ID, approved revision, and expected generation to the registry publication workflow.
+
+Required secret bindings are `ADMIN_EMAILS`, `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`, `RECEIPT_TOKEN_SECRET`, `REGISTRY_WORKFLOW_TOKEN`, `GITHUB_PUBLICATION_TOKEN`, `RESEND_API_KEY`, `ADMIN_NOTIFICATION_EMAIL`, and `NOTIFICATION_FROM`. `ACCESS_TEAM_DOMAIN` is the full `https://<team>.cloudflareaccess.com` domain and `ACCESS_AUD` is the protected application's audience tag. The deployment stops before touching D1 when any required credential or notification binding is missing. Rejected records and private contact fields default to a 90-day retention window; published records clear contact data immediately.
+
+`GITHUB_PUBLICATION_TOKEN` must be scoped to repository dispatch for this repository. `REGISTRY_WORKFLOW_TOKEN` must match the GitHub Actions secret of the same purpose. Neither credential is returned by any browser route.

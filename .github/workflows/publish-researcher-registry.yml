@@ -1,0 +1,236 @@
+name: Publish approved researcher registry change
+
+on:
+  repository_dispatch:
+    types: [researcher-registry-publish]
+  workflow_dispatch:
+    inputs:
+      submission_id:
+        description: Approved submission ID
+        required: true
+        type: string
+      approved_revision:
+        description: Approved queue revision
+        required: true
+        type: string
+      expected_registry_generation:
+        description: Expected base registry generation
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: read
+
+concurrency:
+  group: researcher-registry-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      INTAKE_ORIGIN: https://funding-finder-researchers.urochestercheme.workers.dev
+      SITE_ROOT: https://mporosoff.github.io/grants-scraper
+      GH_TOKEN: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+      REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
+      SUBMISSION_ID: ${{ github.event.client_payload.submission_id || inputs.submission_id }}
+      APPROVED_REVISION: ${{ github.event.client_payload.approved_revision || inputs.approved_revision }}
+      EXPECTED_GENERATION: ${{ github.event.client_payload.expected_registry_generation || inputs.expected_registry_generation }}
+    steps:
+      - name: Validate the bounded dispatch envelope
+        run: |
+          [[ "$SUBMISSION_ID" =~ ^rs_[a-f0-9]{24}$ ]]
+          [[ "$APPROVED_REVISION" =~ ^[0-9]+$ ]]
+          [[ "$EXPECTED_GENERATION" =~ ^[a-f0-9]{64}$ ]]
+          test -n "$REGISTRY_WORKFLOW_TOKEN"
+          test -n "$GH_TOKEN"
+
+      - name: Check out protected main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - uses: pnpm/action-setup@v6
+        with:
+          version: "11.19.0"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: python -m pip install -r requirements.txt
+      - run: pnpm install --frozen-lockfile
+
+      - name: Retrieve the server-approved structured record
+        run: |
+          curl --fail --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+            "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID" \
+            -o /tmp/approved-researcher-submission.json
+          jq -e \
+            --arg id "$SUBMISSION_ID" \
+            --argjson revision "$APPROVED_REVISION" \
+            --arg generation "$EXPECTED_GENERATION" \
+            '.schema_version == 1 and .state == "approved" and .submission_id == $id and .revision == $revision and .base_registry_generation == $generation' \
+            /tmp/approved-researcher-submission.json >/dev/null
+
+      - name: Apply only the approved registry record and rebuild projections
+        run: |
+          cp config/researcher_registry.json /tmp/researcher-registry-before.json
+          python -m scripts.researcher_registry apply \
+            --submission /tmp/approved-researcher-submission.json \
+            --expected-generation "$EXPECTED_GENERATION" \
+            --dependency-report /tmp/researcher-dependency-report.json
+          python -m scripts.researcher_registry build \
+            --version-target match_explorer.html \
+            --version-target team_match.html
+          python -m scripts.researcher_registry validate
+          node tools/build_search_release_package.mjs --write
+
+      - name: Refuse every non-allowlisted path
+        run: |
+          git diff --name-only > /tmp/researcher-changed-paths.txt
+          test -s /tmp/researcher-changed-paths.txt
+          if grep -Ev '^(config/researcher_registry\.json|config/opportunity_team_model\.json|data/researcher_directory\.js|data/researcher_registry_manifest\.json|data/faculty_matches\.js|data/opportunity_team_index\.js|data/opportunity_teams\.js|data/search-v2-release\.json|faculty_interests\.html|match_explorer\.html|team_match\.html)$' /tmp/researcher-changed-paths.txt; then
+            echo "::error::Approved researcher publication attempted a non-allowlisted path."
+            exit 1
+          fi
+
+      - name: Run focused registry and browser contracts
+        run: |
+          python -m unittest tests.test_researcher_registry tests.test_opportunity_team_model tests.test_pages_entrypoint
+          node tools/build_search_release_package.mjs --check
+          node --test \
+            tests/browser/researcher-registry-contract.test.mjs \
+            tests/browser/researcher-intake-contract.test.mjs \
+            tests/browser/opportunity-team-contract.test.mjs \
+            tests/browser/navigation-contract.test.mjs \
+            tests/browser/team-researchers-contract.test.mjs
+
+      - name: Create a checks-gated registry-only pull request
+        id: pull-request
+        run: |
+          branch="automation/researcher-registry-${SUBMISSION_ID}-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add \
+            config/researcher_registry.json \
+            config/opportunity_team_model.json \
+            data/researcher_directory.js \
+            data/researcher_registry_manifest.json \
+            data/faculty_matches.js \
+            data/opportunity_team_index.js \
+            data/opportunity_teams.js \
+            data/search-v2-release.json \
+            faculty_interests.html \
+            match_explorer.html \
+            team_match.html
+          git diff --cached --quiet && { echo "::error::Approved submission produced no registry change."; exit 1; }
+          git commit -m "data: publish researcher submission $SUBMISSION_ID"
+          git push origin "$branch"
+          pr_url="$(gh pr create --base main --head "$branch" \
+            --title "Publish approved researcher registry change" \
+            --body "Registry-only publication for approved submission \`$SUBMISSION_ID\`. The approved queue revision is \`$APPROVED_REVISION\`; generated projections and the bounded dependency report were validated before this PR was opened.")"
+          gh pr merge "$pr_url" --squash --auto --delete-branch
+          echo "url=$pr_url" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for the protected pull request to merge
+        id: merge
+        run: |
+          for attempt in $(seq 1 90); do
+            state="$(gh pr view '${{ steps.pull-request.outputs.url }}' --json state --jq .state)"
+            if [ "$state" = "MERGED" ]; then
+              merge_sha="$(gh pr view '${{ steps.pull-request.outputs.url }}' --json mergeCommit --jq .mergeCommit.oid)"
+              echo "sha=$merge_sha" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if [ "$state" = "CLOSED" ]; then
+              echo "::error::The registry-only pull request closed without merging."
+              exit 1
+            fi
+            sleep 20
+          done
+          echo "::error::The registry-only pull request did not merge within 30 minutes."
+          exit 1
+
+      - name: Wait for exact-merge Pages deployment
+        run: |
+          merge_sha='${{ steps.merge.outputs.sha }}'
+          run_id=""
+          for attempt in $(seq 1 60); do
+            run_id="$(gh run list --workflow pages.yml --commit "$merge_sha" --json databaseId --jq '.[0].databaseId // empty')"
+            [ -n "$run_id" ] && break
+            sleep 10
+          done
+          test -n "$run_id"
+          gh run watch "$run_id" --exit-status
+
+      - name: Verify the live registry generation and affected profile
+        id: live
+        run: |
+          expected="$(jq -r .registry_generation data/researcher_registry_manifest.json)"
+          researcher_id="$(jq -r '.changes[0].researcher_id // empty' /tmp/researcher-dependency-report.json)"
+          display_name="$(jq -r '.approved_profile.display_name' /tmp/approved-researcher-submission.json)"
+          for attempt in $(seq 1 36); do
+            curl --fail --silent --show-error --max-time 15 \
+              "$SITE_ROOT/data/researcher_registry_manifest.json?verify=${{ steps.merge.outputs.sha }}" \
+              -o /tmp/live-researcher-manifest.json || true
+            live="$(jq -r '.registry_generation // empty' /tmp/live-researcher-manifest.json 2>/dev/null || true)"
+            if [ "$live" = "$expected" ]; then
+              curl --fail --silent --show-error --max-time 15 \
+                "$SITE_ROOT/data/researcher_directory.js?verify=${{ steps.merge.outputs.sha }}" \
+                -o /tmp/live-researcher-directory.js
+              python - "$expected" "$researcher_id" "$display_name" <<'PY'
+          import json, pathlib, sys
+          source = pathlib.Path('/tmp/live-researcher-directory.js').read_text()
+          data = json.loads(source[source.index('{'):].rstrip().rstrip(';'))
+          expected, researcher_id, display_name = sys.argv[1:]
+          assert data['registry_generation'] == expected
+          matches = [row for row in data['researchers'] if row['name'] == display_name]
+          assert researcher_id
+          matches = [row for row in matches if row['id'] == researcher_id]
+          assert len(matches) == 1
+          PY
+              echo "generation=$expected" >> "$GITHUB_OUTPUT"
+              echo "verified_at=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::GitHub Pages did not serve the approved registry generation."
+          exit 1
+
+      - name: Mark the queue record published only after live verification
+        run: |
+          jq -n \
+            --argjson revision "$APPROVED_REVISION" \
+            --arg sha '${{ steps.merge.outputs.sha }}' \
+            --arg generation '${{ steps.live.outputs.generation }}' \
+            --arg verified '${{ steps.live.outputs.verified_at }}' \
+            '{expected_revision:$revision,commit_sha:$sha,registry_generation:$generation,deployment_result:"github_pages_succeeded",public_verified_at:$verified}' \
+            > /tmp/publication-complete.json
+          curl --fail --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/publication-complete.json \
+            "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/complete"
+
+      - name: Mark a failed publication without changing the public registry
+        if: ${{ failure() }}
+        run: |
+          jq -n --argjson revision "$APPROVED_REVISION" \
+            '{expected_revision:$revision,failure_code:"publication_workflow_failed",deployment_result:"workflow_failed"}' \
+            > /tmp/publication-failed.json
+          curl --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/publication-failed.json \
+            "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail" || true

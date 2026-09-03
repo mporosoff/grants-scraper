@@ -1,0 +1,72 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import vm from "node:vm";
+
+const root = new URL("../../", import.meta.url);
+const [source, page, team] = await Promise.all([
+  readFile(new URL("assets/researcher-intake.js", root), "utf8"),
+  readFile(new URL("faculty_interests.html", root), "utf8"),
+  readFile(new URL("team_match.html", root), "utf8"),
+]);
+
+function api() {
+  const sandbox = { URL, Uint8Array, Blob, setTimeout() {}, globalThis: null };
+  sandbox.globalThis = sandbox;
+  sandbox.crypto = { randomUUID: () => "12345678-1234-4234-8234-123456789abc" };
+  vm.runInNewContext(source, sandbox);
+  return sandbox.FUNDING_RESEARCHER_INTAKE;
+}
+
+test("both public entry points disclose and use one bounded intake contract", () => {
+  assert.match(page, /Configure Faculty Interests/);
+  assert.match(page, /Submitting does not publish a change/);
+  assert.match(page, /id="existing-researcher"/);
+  assert.match(page, /id="review-consent"/);
+  assert.match(page, /assets\/researcher-intake\.js/);
+  assert.match(team, /id="submit-researcher-review" type="checkbox"/);
+  assert.match(team, /Save locally and submit for review/);
+  assert.match(team, /Local save completed\. The review request was not sent/);
+  assert.match(team, /assets\/researcher-intake\.js/);
+  assert.ok(team.indexOf("persistExternal(next)") < team.indexOf("INTAKE_API.submit(lastResearcherSubmission)"));
+});
+
+test("unchecked Team Match submission remains browser-local by default", () => {
+  assert.doesNotMatch(team, /id="submit-researcher-review"[^>]*checked/);
+  assert.match(team, /if \(!submitForReview\)/);
+  assert.match(team, /closeExternalEditor\(\);[\s\S]*?return;[\s\S]*?INTAKE_API\.buildSubmission/);
+});
+
+test("the shared browser builder emits only consented allowlisted fields", () => {
+  const intake = api();
+  const submission = intake.buildSubmission({
+    submissionType: "new_researcher_nomination", sourceSurface: "team_match",
+    researcherId: "", baseRegistryGeneration: "a".repeat(64), displayName: "Ada Lovelace",
+    homeUnit: "External", relationshipNote: "External collaborator",
+    researchSummary: "Computational research.", claims: ["Analytical engines", "Computational methods"],
+    sourceUrls: "https://example.edu/ada", orcidId: "0000-0002-1825-0097",
+    contactEmail: "ADA@example.edu", note: "Please review", submittedForAdminReview: true,
+    idempotencyKey: "12345678-1234-4234-8234-123456789abc",
+  });
+  assert.deepEqual(Object.keys(submission), [
+    "schema_version", "idempotency_key", "submission_type", "source_surface", "researcher_id",
+    "base_registry_generation", "proposed_profile", "submitter", "consent",
+  ]);
+  assert.equal(submission.submitter.contact_email, "ada@example.edu");
+  assert.equal(submission.consent.submitted_for_admin_review, true);
+  assert.equal(JSON.stringify(submission).includes("publication_text"), false);
+  assert.equal(JSON.stringify(submission).includes("team_members"), false);
+});
+
+test("identity signals warn but never merge ambiguous candidates", () => {
+  const intake = api();
+  const matches = intake.findPossibleDuplicates({ researchers: [
+    { id: "urh-000001", name: "Ada Lovelace", aliases: [], orcid_id: "", source_urls: ["https://example.edu/ada"] },
+    { id: "urh-000002", name: "Ada M. Lovelace", aliases: ["Ada Lovelace"], orcid_id: "", source_urls: [] },
+  ] }, { display_name: "Ada Lovelace", source_urls: ["https://example.edu/ada"] });
+  assert.equal(matches.length, 2);
+  assert.equal(matches.every(item => item.researcher.id), true);
+  assert.equal("merged" in matches[0], false);
+  assert.match(team, /registryMatches\.length === 1\) registryId/);
+  assert.match(team, /Nothing is merged automatically when identity is ambiguous/);
+});

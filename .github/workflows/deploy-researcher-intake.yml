@@ -1,0 +1,113 @@
+name: Deploy researcher intake
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "workers/researcher-intake/**"
+      - ".github/workflows/deploy-researcher-intake.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-researcher-intake
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Validate Worker contracts
+        run: |
+          node --check workers/researcher-intake/src/contract.js
+          node --check workers/researcher-intake/src/store.js
+          node --check workers/researcher-intake/src/index.js
+          node --test tests/browser/researcher-intake-worker-contract.test.mjs
+      - name: Validate required deployment configuration
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_EMAILS: ${{ secrets.RESEARCHER_ADMIN_EMAILS }}
+          ACCESS_TEAM_DOMAIN: ${{ secrets.RESEARCHER_ACCESS_TEAM_DOMAIN }}
+          ACCESS_AUD: ${{ secrets.RESEARCHER_ACCESS_AUD }}
+          RECEIPT_TOKEN_SECRET: ${{ secrets.RESEARCHER_RECEIPT_TOKEN_SECRET }}
+          REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
+          GITHUB_PUBLICATION_TOKEN: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_NOTIFICATION_EMAIL: ${{ secrets.RESEARCHER_ADMIN_NOTIFICATION_EMAIL }}
+          NOTIFICATION_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$ADMIN_EMAILS"
+          test -n "$ACCESS_TEAM_DOMAIN"
+          test -n "$ACCESS_AUD"
+          test -n "$RECEIPT_TOKEN_SECRET"
+          test -n "$REGISTRY_WORKFLOW_TOKEN"
+          test -n "$GITHUB_PUBLICATION_TOKEN"
+          test -n "$RESEND_API_KEY"
+          test -n "$ADMIN_NOTIFICATION_EMAIL"
+          test -n "$NOTIFICATION_FROM"
+      - name: Apply D1 migrations
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 d1 migrations apply funding-finder-alerts --remote --config workers/researcher-intake/wrangler.jsonc
+      - name: Configure private Worker bindings
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_EMAILS: ${{ secrets.RESEARCHER_ADMIN_EMAILS }}
+          ACCESS_TEAM_DOMAIN: ${{ secrets.RESEARCHER_ACCESS_TEAM_DOMAIN }}
+          ACCESS_AUD: ${{ secrets.RESEARCHER_ACCESS_AUD }}
+          RECEIPT_TOKEN_SECRET: ${{ secrets.RESEARCHER_RECEIPT_TOKEN_SECRET }}
+          REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
+          GITHUB_PUBLICATION_TOKEN: ${{ secrets.RESEARCHER_GITHUB_PUBLICATION_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_NOTIFICATION_EMAIL: ${{ secrets.RESEARCHER_ADMIN_NOTIFICATION_EMAIL }}
+          NOTIFICATION_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
+        run: |
+          test -n "$ADMIN_EMAILS"
+          test -n "$ACCESS_TEAM_DOMAIN"
+          test -n "$ACCESS_AUD"
+          test -n "$RECEIPT_TOKEN_SECRET"
+          test -n "$REGISTRY_WORKFLOW_TOKEN"
+          test -n "$GITHUB_PUBLICATION_TOKEN"
+          test -n "$RESEND_API_KEY"
+          test -n "$ADMIN_NOTIFICATION_EMAIL"
+          test -n "$NOTIFICATION_FROM"
+          jq -n \
+            --arg admin "$ADMIN_EMAILS" \
+            --arg access_domain "$ACCESS_TEAM_DOMAIN" \
+            --arg access_aud "$ACCESS_AUD" \
+            --arg receipt "$RECEIPT_TOKEN_SECRET" \
+            --arg workflow "$REGISTRY_WORKFLOW_TOKEN" \
+            --arg github "$GITHUB_PUBLICATION_TOKEN" \
+            --arg resend "$RESEND_API_KEY" \
+            --arg notify "$ADMIN_NOTIFICATION_EMAIL" \
+            --arg from "$NOTIFICATION_FROM" \
+            '{ADMIN_EMAILS:$admin,ACCESS_TEAM_DOMAIN:$access_domain,ACCESS_AUD:$access_aud,RECEIPT_TOKEN_SECRET:$receipt,REGISTRY_WORKFLOW_TOKEN:$workflow,GITHUB_PUBLICATION_TOKEN:$github,RESEND_API_KEY:$resend,ADMIN_NOTIFICATION_EMAIL:$notify,NOTIFICATION_FROM:$from}' \
+            > /tmp/researcher-intake-secrets.json
+          npx --yes wrangler@4.125.0 secret bulk /tmp/researcher-intake-secrets.json --config workers/researcher-intake/wrangler.jsonc
+      - name: Deploy the intake Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.125.0 deploy --config workers/researcher-intake/wrangler.jsonc
+      - name: Verify the public health route
+        run: |
+          for attempt in $(seq 1 12); do
+            health="$(curl --fail --silent --show-error --max-time 10 -H 'Origin: https://mporosoff.github.io' 'https://funding-finder-researchers.urochestercheme.workers.dev/health' || true)"
+            if jq -e '.ok == true and .schema_version == 1' <<<"$health" >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::The researcher intake Worker did not become healthy."
+          exit 1

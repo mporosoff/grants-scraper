@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="opportunity-team-generation" content="d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0" />
+<meta name="opportunity-team-generation" content="44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="theme-color" content="#001e5f" />
@@ -124,6 +124,17 @@
   .researcher-actions .save-researcher{border-color:var(--blue);background:var(--blue);color:#fff;}
   .researcher-actions .delete-researcher{margin-left:auto;border-color:#e0aab1;color:#9b2735;background:#fff6f7;}
   .editor-message{min-height:1.2em;margin:8px 0 0;color:#9b2735;font-size:.78rem;}
+  .review-option{display:flex;gap:9px;align-items:flex-start;margin-top:14px;padding:12px;color:var(--ink);font-size:.8rem;background:#fff;border:1px solid #c7d7e8;border-radius:10px;}
+  .review-option input{margin-top:4px;}
+  .review-option strong,.review-option span{display:block;}
+  .review-option span span{margin-top:3px;color:var(--muted);font-size:.73rem;font-weight:400;}
+  .review-submission-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:11px;padding:13px;border:1px solid #d6e0eb;border-radius:10px;background:#fff;}
+  .review-submission-fields[hidden]{display:none;}
+  .review-submission-fields label{display:grid;gap:5px;color:var(--navy);font-size:.78rem;font-weight:700;}
+  .review-submission-fields input,.review-submission-fields select,.review-submission-fields textarea{width:100%;padding:9px 10px;color:var(--ink);font:inherit;font-weight:400;border:1px solid var(--line-strong);border-radius:8px;}
+  .review-submission-fields textarea{min-height:70px;resize:vertical;}
+  .review-span{grid-column:1/-1;}
+  .review-fallback{margin-top:9px;color:var(--blue-dark);background:#fff;border:1px solid #9ab5d3;border-radius:8px;padding:7px 10px;font:inherit;font-size:.76rem;font-weight:750;cursor:pointer;}
   .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
   .toolrow .search{flex:1;min-width:220px;}
   .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
@@ -197,7 +208,7 @@
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   footer.note .app-version{font-weight:800;}
   .hide{display:none !important;}
-  @media (max-width:700px){.wrap{width:min(100% - 24px,1240px);padding-top:18px}.researcher-paths{grid-template-columns:1fr}.researcher-fields{grid-template-columns:1fr}.researcher-keywords{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
+  @media (max-width:700px){.wrap{width:min(100% - 24px,1240px);padding-top:18px}.researcher-paths,.review-submission-fields{grid-template-columns:1fr}.researcher-fields{grid-template-columns:1fr}.researcher-keywords,.review-span{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -214,6 +225,7 @@
       <a href="./match_explorer.html">Funding Finder</a>
       <a href="./team_match.html" aria-current="page">Team Match</a>
       <a href="./funded_awards.html">Funded Awards</a>
+      <a href="./faculty_interests.html">Configure Faculty Interests</a>
     </nav>
     <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
     <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
@@ -240,7 +252,7 @@
       <div class="researcher-paths">
         <section class="researcher-path" aria-labelledby="faculty-search-heading">
           <h3 id="faculty-search-heading">Search Hajim faculty at the University of Rochester</h3>
-          <p>Search 156 source-traceable directory profiles. Main-pool and standby status are shown explicitly.</p>
+          <p>Search the current source-traceable directory. Main-pool and standby status are shown explicitly.</p>
           <div class="faculty-combobox">
             <input id="faculty-search" type="search" role="combobox" aria-labelledby="faculty-search-heading" aria-autocomplete="list" aria-expanded="false" aria-controls="faculty-suggestions" autocomplete="off" placeholder="Search name, department, or research capability" />
             <button id="show-faculty-suggestions" type="button" aria-label="Show Hajim faculty suggestions">Show</button>
@@ -283,12 +295,38 @@
           <span class="field-note"><span>Separate keywords with commas or new lines.</span><span id="external-keyword-count">0 keywords</span></span>
         </label>
       </div>
+      <label class="review-option" for="submit-researcher-review">
+        <input id="submit-researcher-review" type="checkbox" />
+        <span><strong>Submit this researcher for administrator review and possible inclusion in the shared researcher pool</strong><span>The researcher is saved only in this browser unless you check this box and submit. If checked, the name, research interests, ORCID iD, optional source links, and contact information entered below will be sent to the site administrator for review. Approval is not guaranteed.</span></span>
+      </label>
+      <div class="review-submission-fields" id="review-submission-fields" hidden>
+        <label for="team-relationship">Relationship to the institution
+          <select id="team-relationship" required>
+            <option value="">Choose one</option>
+            <option>University of Rochester faculty or staff</option>
+            <option>University of Rochester affiliate</option>
+            <option>Collaborator at another institution</option>
+            <option>Other or unsure</option>
+          </select>
+        </label>
+        <label for="team-contact-email">Submitter contact email <span class="field-note">optional, private</span>
+          <input id="team-contact-email" type="email" maxlength="254" autocomplete="email" />
+        </label>
+        <label class="review-span" for="team-source-urls">Supporting source links
+          <textarea id="team-source-urls" maxlength="4000" placeholder="One HTTPS link per line" required></textarea>
+        </label>
+        <label class="review-span" for="team-submitter-note">Note <span class="field-note">optional, private</span>
+          <textarea id="team-submitter-note" maxlength="1000"></textarea>
+        </label>
+        <p class="review-span field-note" id="team-duplicate-warning" role="status"></p>
+      </div>
       <div class="researcher-actions">
-        <button class="save-researcher" type="submit">Save researcher</button>
+        <button class="save-researcher" id="save-researcher" type="submit">Save researcher</button>
         <button id="cancel-external" type="button">Cancel</button>
         <button class="delete-researcher" id="delete-external" type="button" hidden>Delete researcher</button>
       </div>
       <p class="editor-message" id="external-editor-message" aria-live="polite"></p>
+      <button class="review-fallback" id="team-download-request" type="button" hidden>Download bounded request JSON</button>
     </form>
   </div>
 
@@ -319,15 +357,17 @@
 <script src="./data/opportunities.js?v=catalog-20260903T144010663677Z"></script>
 <script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
-<script src="assets/search-retrieval.js?v=d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0"></script>
+<script src="assets/search-retrieval.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
 <script src="assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
 <script src="assets/team-hybrid.js?v=app-1.3.0"></script>
 <script src="assets/orcid.js?v=orcid-2026-08-13"></script>
-<script src="assets/team-researchers.js?v=d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0"></script>
-<script src="assets/team-matcher.js?v=d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0"></script>
-<script src="data/opportunity_team_index.js?v=d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0"></script>
-<script src="assets/opportunity-team.js?v=d5e3b14ca06181c90e6f542c7c01d75b0c8aaf3e8420663ed02965ed4aee1ad0"></script>
+<script src="assets/team-researchers.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
+<script src="assets/researcher-intake.js?v=phase1-20260903"></script>
+<script src="assets/team-matcher.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
+<script src="data/researcher_directory.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
+<script src="data/opportunity_team_index.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
+<script src="assets/opportunity-team.js?v=44fcedd1f0809f78660ecd6944bb59a9faa94f940564aa7739515f8710eb2fff"></script>
 <script src="assets/site-help.js?v=ai-boundaries-20260901"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
@@ -338,6 +378,7 @@
   var catalogData = globalThis.GRANT_CATALOG || {};
   var catalog = catalogData.opportunities || [];
   var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
+  var INTAKE_API = globalThis.FUNDING_RESEARCHER_INTAKE || null;
   var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
   var SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG || null;
@@ -436,6 +477,8 @@
   var externalStorage = null;
   var editingExternalId = "";
   var editingOrcidData = null;
+  var researcherSubmissionKey = "";
+  var lastResearcherSubmission = null;
   var storageAvailable = true;
   var themeState = {};
 
@@ -1423,11 +1466,16 @@
   function closeExternalEditor() {
     editingExternalId = "";
     editingOrcidData = null;
+    researcherSubmissionKey = "";
+    lastResearcherSubmission = null;
     $("external-researcher-form").hidden = true;
     $("external-researcher-form").reset();
     $("external-editor-message").textContent = "";
     renderExternalOrcidStatus("", false);
     $("delete-external").hidden = true;
+    $("review-submission-fields").hidden = true;
+    $("team-download-request").hidden = true;
+    $("save-researcher").textContent = "Save researcher";
     $("add-researcher").setAttribute("aria-expanded", $("researcher-picker").hidden ? "false" : "true");
     updateKeywordCount();
   }
@@ -1443,11 +1491,17 @@
       return;
     }
     editingExternalId = profile ? profile.id : "";
+    researcherSubmissionKey = "";
+    lastResearcherSubmission = null;
     closeFacultySuggestions(false);
     $("external-editor-heading").textContent = profile ? "Edit researcher" : "Add a new researcher";
     $("external-name").value = profile ? profile.name : "";
     $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
     $("external-orcid").value = profile ? profile.orcid_id || "" : "";
+    $("submit-researcher-review").checked = false;
+    $("review-submission-fields").hidden = true;
+    $("team-download-request").hidden = true;
+    $("save-researcher").textContent = "Save researcher";
     editingOrcidData = profile && profile.orcid_text ? {
       orcid_id: profile.orcid_id,
       orcid_name: profile.orcid_name,
@@ -1479,7 +1533,38 @@
     return result;
   }
 
-  function saveExternal(event) {
+  function possibleRegistryMatches(name, orcid, sources) {
+    if (!INTAKE_API || !globalThis.RESEARCHER_DIRECTORY) return [];
+    return INTAKE_API.findPossibleDuplicates(globalThis.RESEARCHER_DIRECTORY, {
+      display_name: name, orcid_id: orcid, source_urls: sources || []
+    });
+  }
+
+  function updateTeamReviewFields() {
+    var checked = $("submit-researcher-review").checked;
+    $("review-submission-fields").hidden = !checked;
+    $("team-relationship").required = checked;
+    $("team-source-urls").required = checked;
+    $("save-researcher").textContent = checked ? "Save locally and submit for review" : "Save researcher";
+    if (!checked) {
+      $("team-duplicate-warning").textContent = "";
+      $("team-download-request").hidden = true;
+    }
+  }
+
+  function updateTeamDuplicateWarning() {
+    if (!$("submit-researcher-review").checked) return;
+    var sources = [];
+    try { sources = INTAKE_API ? INTAKE_API.normalizeUrls($("team-source-urls").value) : []; } catch (_error) {}
+    var candidates = possibleRegistryMatches($("external-name").value, $("external-orcid").value, sources);
+    $("team-duplicate-warning").textContent = candidates.length
+      ? "Possible existing profile: " + candidates.slice(0, 3).map(function (item) {
+          return item.researcher.name + " (" + item.reasons.join(", ") + ")";
+        }).join("; ") + ". Nothing is merged automatically when identity is ambiguous."
+      : "";
+  }
+
+  async function saveExternal(event) {
     event.preventDefault();
     var name = $("external-name").value.replace(/\s+/g, " ").trim();
     var keywords = keywordInput();
@@ -1516,7 +1601,16 @@
           orcid_source: "",
           orcid_updated_at: ""
         };
-    var savedProfile = Object.assign({ name: name, keywords: keywords }, orcidData);
+    var submitForReview = $("submit-researcher-review").checked;
+    var sourceUrls = [];
+    if (submitForReview && INTAKE_API) {
+      try { sourceUrls = INTAKE_API.normalizeUrls($("team-source-urls").value); } catch (_error) {}
+    }
+    var existingProfile = editingExternalId ? externalProfile(editingExternalId) : null;
+    var registryMatches = possibleRegistryMatches(name, normalizedOrcid, sourceUrls);
+    var registryId = existingProfile && existingProfile.registry_id || "";
+    if (!registryId && registryMatches.length === 1) registryId = registryMatches[0].researcher.id;
+    var savedProfile = Object.assign({ name: name, keywords: keywords, registry_id: registryId }, orcidData);
     if (editingExternalId) {
       next = next.map(function (profile) {
         return profile.id === editingExternalId
@@ -1537,7 +1631,6 @@
     var autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected.length < MAX;
     var selectedKey = externalKey(savedId);
     if (autoSelected) selected.push(selectedKey);
-    closeExternalEditor();
     if (autoSelected) scheduleTeamRefresh(selectedKey);
     else {
       updateToggles();
@@ -1551,10 +1644,44 @@
         ? name + " was updated for this tab."
         : name + (autoSelected ? " was added to this tab and selected." : " was added to this tab.");
     }
-    renderExternalStatus(
-      successMessage,
-      !result.saved
-    );
+    renderExternalStatus(successMessage, !result.saved);
+    if (!submitForReview) {
+      closeExternalEditor();
+      renderExternalStatus(successMessage, !result.saved);
+      return;
+    }
+    if (!wasEditing) editingExternalId = savedId;
+    try {
+      if (!INTAKE_API || !globalThis.RESEARCHER_DIRECTORY) throw new Error("The administrator review helper is unavailable.");
+      if (!researcherSubmissionKey) researcherSubmissionKey = INTAKE_API.createIdempotencyKey();
+      lastResearcherSubmission = INTAKE_API.buildSubmission({
+        submissionType: registryId ? "profile_correction" : "new_researcher_nomination",
+        sourceSurface: "team_match",
+        researcherId: registryId,
+        baseRegistryGeneration: globalThis.RESEARCHER_DIRECTORY.registry_generation,
+        displayName: name,
+        homeUnit: "",
+        orcidId: normalizedOrcid,
+        researchSummary: "",
+        claims: keywords,
+        sourceUrls: $("team-source-urls").value,
+        relationshipNote: $("team-relationship").value,
+        contactEmail: $("team-contact-email").value,
+        note: $("team-submitter-note").value,
+        idempotencyKey: researcherSubmissionKey,
+        submittedForAdminReview: true
+      });
+      $("save-researcher").disabled = true;
+      $("external-editor-message").textContent = "Saved locally. Sending the separate administrator review request…";
+      var receipt = await INTAKE_API.submit(lastResearcherSubmission);
+      closeExternalEditor();
+      renderExternalStatus(successMessage + " Administrator review request " + receipt.submission_id + " was received.", !result.saved);
+    } catch (error) {
+      $("external-editor-message").textContent = "Local save completed. The review request was not sent: " + (error && error.message ? error.message : String(error));
+      $("team-download-request").hidden = !lastResearcherSubmission;
+    } finally {
+      $("save-researcher").disabled = false;
+    }
   }
 
   function deleteExternal() {
@@ -1736,6 +1863,13 @@
     $("cancel-external").addEventListener("click", closeExternalEditor);
     $("delete-external").addEventListener("click", deleteExternal);
     $("external-researcher-form").addEventListener("submit", saveExternal);
+    $("submit-researcher-review").addEventListener("change", updateTeamReviewFields);
+    ["external-name", "external-orcid", "team-source-urls"].forEach(function (id) {
+      $(id).addEventListener("input", updateTeamDuplicateWarning);
+    });
+    $("team-download-request").addEventListener("click", function () {
+      if (lastResearcherSubmission && INTAKE_API) INTAKE_API.downloadFallback(lastResearcherSubmission);
+    });
     $("external-keywords").addEventListener("input", updateKeywordCount);
     $("import-external-orcid").addEventListener("click", importExternalOrcid);
     $("external-orcid").addEventListener("input", function () {
