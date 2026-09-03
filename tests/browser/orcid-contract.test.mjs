@@ -6,7 +6,13 @@ import vm from "node:vm";
 const source = await readFile(new URL("../../assets/orcid.js", import.meta.url), "utf8");
 
 function loadApi() {
-  const context = { Date, Error, Math, Number, Object, Set, String, encodeURIComponent };
+  class TestEvent {
+    constructor(type, options = {}) {
+      this.type = type;
+      this.bubbles = Boolean(options.bubbles);
+    }
+  }
+  const context = { Date, Error, Event: TestEvent, Math, Number, Object, Set, String, encodeURIComponent };
   context.globalThis = context;
   vm.runInNewContext(source, context);
   return context.FUNDING_ORCID;
@@ -51,6 +57,7 @@ test("formats ORCID entry, accepts compact IDs, and rejects invalid checksums", 
 test("binds a 19-character auto-formatting input contract", () => {
   const api = loadApi();
   const listeners = {};
+  let dispatchedEvent = null;
   const input = {
     autocomplete: "",
     dataset: {},
@@ -58,22 +65,32 @@ test("binds a 19-character auto-formatting input contract", () => {
     maxLength: 0,
     pattern: "",
     value: "",
-    addEventListener(type, listener) { listeners[type] = listener; },
+    addEventListener(type, listener) { (listeners[type] ||= []).push(listener); },
+    dispatchEvent(event) {
+      dispatchedEvent = event;
+      (listeners[event.type] || []).forEach(listener => listener(event));
+      return true;
+    },
   };
   api.bindInput(input);
   assert.equal(input.maxLength, 19);
   assert.equal(input.inputMode, "text");
   assert.match(input.pattern, /\[0-9\]\{4\}/);
   input.value = "00000002182500971234";
-  listeners.input();
+  listeners.input[0]();
   assert.equal(input.value, "0000-0002-1825-0097");
+  let downstreamInputCount = 0;
+  input.addEventListener("input", () => { downstreamInputCount += 1; });
   let prevented = false;
-  listeners.paste({
+  listeners.paste[0]({
     clipboardData: { getData: () => "https://orcid.org/0000-0002-1825-0097" },
     preventDefault() { prevented = true; },
   });
   assert.equal(prevented, true);
   assert.equal(input.value, "0000-0002-1825-0097");
+  assert.equal(dispatchedEvent.type, "input");
+  assert.equal(dispatchedEvent.bubbles, true);
+  assert.equal(downstreamInputCount, 1);
 });
 
 test("parses ORCID-linked publications into bounded matching context", () => {
