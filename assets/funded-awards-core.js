@@ -22,10 +22,26 @@
     dvm: "DVM",
     esq: "Esq",
   });
+  const INVESTIGATOR_SUFFIX_CHAIN = /((?:[,\s]+(?:Jr|Sr|Ii|Iii|Iv|Vi|Vii|Viii|Ix|X|M\.?D|Ph\.?D|Dds|Dvm|Esq)\.?)+)$/iu;
+  const INVESTIGATOR_SUFFIX_TOKEN = /([,\s]+)([^\s,]+)/gu;
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
     return text.slice(0, maximum);
+  }
+
+  function restoreInvestigatorSuffixes(value) {
+    return value.replace(INVESTIGATOR_SUFFIX_CHAIN, chain => chain.replace(
+      INVESTIGATOR_SUFFIX_TOKEN,
+      (match, separator, token) => {
+        const period = token.endsWith(".") ? "." : "";
+        const unpunctuated = period ? token.slice(0, -1) : token;
+        const key = unpunctuated.replaceAll(".", "").toLocaleLowerCase("en-US");
+        const display = INVESTIGATOR_SUFFIXES[key];
+        if (!display) return match;
+        return `${separator}${unpunctuated.includes(".") ? unpunctuated : display}${period}`;
+      },
+    ));
   }
 
   function displayInvestigatorName(value) {
@@ -37,14 +53,10 @@
     const hasUpper = casedLetters.some(character => character === character.toLocaleUpperCase("en-US"));
     const hasLower = casedLetters.some(character => character === character.toLocaleLowerCase("en-US"));
     if (!casedLetters.length || hasUpper && hasLower) return name;
-    return name
+    return restoreInvestigatorSuffixes(name
       .toLocaleLowerCase("en-US")
       .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
-      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`)
-      .replace(
-        /([\s,])(Jr|Sr|Ii|Iii|Iv|Vi|Vii|Viii|Ix|X|Md|Phd|Dds|Dvm|Esq)(\.)?$/u,
-        (_match, prefix, suffix, period = "") => `${prefix}${INVESTIGATOR_SUFFIXES[suffix.toLocaleLowerCase("en-US")]}${period}`,
-      );
+      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`));
   }
 
   function year(value) {

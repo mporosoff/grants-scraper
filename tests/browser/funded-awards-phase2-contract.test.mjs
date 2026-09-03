@@ -160,6 +160,8 @@ test("investigator names use consistent display capitalization without changing 
     ["JANE DOE DDS", "Jane Doe DDS"],
     ["JANE DOE DVM", "Jane Doe DVM"],
     ["JANE DOE ESQ", "Jane Doe Esq"],
+    ["JANE DOE, MD, PHD", "Jane Doe, MD, PhD"],
+    ["jane doe md phd", "Jane Doe MD PhD"],
   ]) assert.equal(product.displayInvestigatorName(published), display);
 
   const summary = product.institutionSummary([

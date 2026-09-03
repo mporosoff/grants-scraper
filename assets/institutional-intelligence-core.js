@@ -184,7 +184,7 @@
     if (!published) return null;
     published = published
       .replace(/^(?:(?:dr|doctor|prof|professor|mr|mrs|ms|miss|mx)\.?\s+)+/iu, "")
-      .replace(/(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?$/iu, "")
+      .replace(/(?:(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?)+$/iu, "")
       .trim();
     const commaParts = published.split(",").map(part => clean(part, 160)).filter(Boolean);
     let tokens;

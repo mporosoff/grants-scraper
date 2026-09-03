@@ -222,6 +222,17 @@ test("investigator capitalization is consistent across snapshot controls, cards,
     "gerard j. buckley",
   ], "source spellings stay intact for identity-aware upstream queries");
 
+  const credentialAggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "JANE DOE, MD, PHD" }] }),
+    award({ source: "NIH", award_id: "NIH-2", principal_investigators: [{ name: "Jane Doe" }] }),
+  ]);
+  assert.equal(credentialAggregate.investigators.length, 1);
+  assert.equal(credentialAggregate.investigators[0].name, "Jane Doe");
+  assert.deepEqual(plain(credentialAggregate.investigators[0].variants.map(item => item.name)), [
+    "JANE DOE, MD, PHD",
+    "Jane Doe",
+  ]);
+
   assert.match(appSource, /investigators\.map\(person => awardProduct\.displayInvestigatorName\(person\?\.name\)\)/);
   assert.match(appSource, /kind === "investigator" \? awardProduct\.displayInvestigatorName\(item\.name\)/);
   assert.match(appSource, /awardProduct\.displayInvestigatorName\(payload\.facet\.label\)/);
