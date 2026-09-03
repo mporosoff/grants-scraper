@@ -42,6 +42,8 @@
     historyStateTimer: 0,
     historyStatePending: false,
     historyRestoreDepth: 0,
+    historyEntrySequence: 0,
+    historyViewCache: new Map(),
   };
 
   function clean(value, maximum = 500) {
@@ -283,8 +285,30 @@
     return Boolean(value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
   }
 
-  function historyViewState() {
-    return { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
+  function nextHistoryEntryId() {
+    state.historyEntrySequence += 1;
+    return `ii-${Date.now().toString(36)}-${state.historyEntrySequence.toString(36)}`;
+  }
+
+  function historyViewState({ freshEntry = false } = {}) {
+    const entryId = freshEntry ? "" : String(history.state?.iiEntryId || "");
+    return { scrollY: window.scrollY, focusId: document.activeElement?.id || "", iiEntryId: entryId || nextHistoryEntryId() };
+  }
+
+  function rememberHistoryViewState(viewState) {
+    if (!viewState?.iiEntryId) return viewState;
+    state.historyViewCache.delete(viewState.iiEntryId);
+    state.historyViewCache.set(viewState.iiEntryId, viewState);
+    if (state.historyViewCache.size > 100) state.historyViewCache.delete(state.historyViewCache.keys().next().value);
+    return viewState;
+  }
+
+  function captureCurrentHistoryViewState(options) {
+    return rememberHistoryViewState(historyViewState(options));
+  }
+
+  function latestHistoryViewState(entryState = history.state) {
+    return state.historyViewCache.get(entryState?.iiEntryId) || entryState || {};
   }
 
   function serializedHistoryState(value) {
@@ -302,9 +326,10 @@
     return true;
   }
 
-  function recordCurrentHistoryViewState() {
+  function recordCurrentHistoryViewState(viewState = null) {
     if (!location.protocol.startsWith("http") || state.historyRestoreDepth) return;
-    replaceHistoryStateIfChanged({ ...(history.state || {}), ...historyViewState() });
+    const currentViewState = rememberHistoryViewState(viewState || captureCurrentHistoryViewState());
+    replaceHistoryStateIfChanged({ ...(history.state || {}), ...currentViewState });
   }
 
   function armHistoryStateThrottle() {
@@ -316,19 +341,20 @@
       }
       if (!state.historyStatePending) return;
       state.historyStatePending = false;
-      recordCurrentHistoryViewState();
+      recordCurrentHistoryViewState(latestHistoryViewState());
       armHistoryStateThrottle();
     }, 250);
   }
 
   function scheduleCurrentHistoryViewState() {
     if (state.historyRestoreDepth) return;
+    const currentViewState = captureCurrentHistoryViewState();
     if (state.historyStateTimer) {
       state.historyStatePending = true;
       return;
     }
     state.historyStatePending = false;
-    recordCurrentHistoryViewState();
+    recordCurrentHistoryViewState(currentViewState);
     armHistoryStateThrottle();
   }
 
@@ -339,11 +365,13 @@
       if (mode === "replace") replaceHistoryStateIfChanged(history.state, nextUrl);
       return;
     }
+    const currentViewState = captureCurrentHistoryViewState();
     if (mode === "push" && nextUrl !== location.href) {
-      replaceHistoryStateIfChanged({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) });
-      history.pushState(historyViewState(), "", nextUrl);
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...rememberHistoryViewState(departureHistoryState || currentViewState) });
+      const nextViewState = captureCurrentHistoryViewState({ freshEntry: true });
+      history.pushState(nextViewState, "", nextUrl);
     } else {
-      replaceHistoryStateIfChanged({ ...(history.state || {}), ...historyViewState() }, nextUrl);
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...currentViewState }, nextUrl);
     }
     scheduleCurrentHistoryViewState();
   }
@@ -1320,6 +1348,7 @@
     $("ii-update-answer").addEventListener("click", refreshQuestionAnswer);
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
+      const restoredViewState = latestHistoryViewState(event.state);
       clearTimeout(state.historyStateTimer);
       state.historyStateTimer = 0;
       state.historyStatePending = false;
@@ -1350,8 +1379,8 @@
       } finally {
         setBusy(false);
         requestAnimationFrame(() => {
-          if (event.state?.focusId) $(event.state.focusId)?.focus({ preventScroll: true });
-          if (Number.isFinite(event.state?.scrollY)) window.scrollTo({ top: event.state.scrollY });
+          if (restoredViewState.focusId) $(restoredViewState.focusId)?.focus({ preventScroll: true });
+          if (Number.isFinite(restoredViewState.scrollY)) window.scrollTo({ top: restoredViewState.scrollY });
           state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
           scheduleCurrentHistoryViewState();
         });
