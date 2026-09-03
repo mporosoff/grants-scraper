@@ -233,6 +233,15 @@ test("investigator capitalization is consistent across snapshot controls, cards,
     "Jane Doe",
   ]);
 
+  const mixedCaseAggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "TIMOTHY Der Ver DYE" }] }),
+    award({ source: "NIH", award_id: "NIH-3", principal_investigators: [{ name: "MICHAEL Andres WELTE" }] }),
+  ]);
+  assert.deepEqual(plain(mixedCaseAggregate.investigators.map(item => item.name)), [
+    "Timothy Der Ver Dye",
+    "Michael Andres Welte",
+  ]);
+
   assert.match(appSource, /investigators\.map\(person => awardProduct\.displayInvestigatorName\(person\?\.name\)\)/);
   assert.match(appSource, /kind === "investigator" \? awardProduct\.displayInvestigatorName\(item\.name\)/);
   assert.match(appSource, /awardProduct\.displayInvestigatorName\(payload\.facet\.label\)/);

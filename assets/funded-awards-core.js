@@ -24,6 +24,7 @@
   });
   const INVESTIGATOR_SUFFIX_CHAIN = /((?:[,\s]+(?:Jr|Sr|Ii|Iii|Iv|Vi|Vii|Viii|Ix|X|M\.?D|Ph\.?D|Dds|Dvm|Esq)\.?)+)$/iu;
   const INVESTIGATOR_SUFFIX_TOKEN = /([,\s]+)([^\s,]+)/gu;
+  const INVESTIGATOR_NAME_TOKEN = /\p{L}+(?:[.'’\-]\p{L}+)*/gu;
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
@@ -44,6 +45,13 @@
     ));
   }
 
+  function isUppercaseInvestigatorToken(value) {
+    const letters = Array.from(value).filter(character => /\p{L}/u.test(character));
+    return Boolean(letters.length && letters.every(character => (
+      character === character.toLocaleUpperCase("en-US")
+    )));
+  }
+
   function displayInvestigatorName(value) {
     const name = clean(value, 300);
     if (!name) return "";
@@ -52,11 +60,15 @@
     ));
     const hasUpper = casedLetters.some(character => character === character.toLocaleUpperCase("en-US"));
     const hasLower = casedLetters.some(character => character === character.toLocaleLowerCase("en-US"));
-    if (!casedLetters.length || hasUpper && hasLower) return name;
-    return restoreInvestigatorSuffixes(name
+    if (!casedLetters.length) return name;
+    const titleCase = text => text
       .toLocaleLowerCase("en-US")
       .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
-      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`));
+      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`);
+    const normalized = hasUpper && hasLower
+      ? name.replace(INVESTIGATOR_NAME_TOKEN, token => isUppercaseInvestigatorToken(token) ? titleCase(token) : token)
+      : titleCase(name);
+    return restoreInvestigatorSuffixes(normalized);
   }
 
   function year(value) {

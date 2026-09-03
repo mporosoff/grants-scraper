@@ -51,9 +51,6 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   await page.locator("[data-pursuit-status]").selectOption("pursuing");
   await page.locator("[data-pursuit-note]").fill("Draft due Friday");
 
-  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#alerts-panel > summary").click();
-  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
   await page.locator("#alert-new-matches").click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(dialog).toBeVisible();
@@ -88,9 +85,9 @@ test("Unit C alert dialog locks the page, traps focus, scrolls internally, and r
   await page.setViewportSize({ width: 320, height: 480 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
-  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#alerts-panel > summary").click();
-  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#saved-panel > summary").click();
+  await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.scrollIntoViewIfNeeded();
   const scrollBefore = await page.evaluate(() => window.scrollY);
@@ -180,9 +177,9 @@ test("Unit C alert dialog preserves its recovery state and restores focus after 
   await page.setViewportSize({ width: 390, height: 520 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
-  await expect(page.locator("#alerts-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#alerts-panel > summary").click();
-  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#saved-panel > summary").click();
+  await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
@@ -317,7 +314,8 @@ for (const fixture of alertErrorCases) {
     mockAlerts(page, fixture);
     await openFundingFinder(page);
     await runFundingSearch(page, "hydrogen catalysis");
-    await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
+    await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+    await page.locator("#saved-panel > summary").click();
     await page.locator("#alert-new-matches").click();
     const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
     await dialog.locator("#alert-email").fill("researcher@example.edu");
