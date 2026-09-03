@@ -12597,7 +12597,7 @@
       ]
     }
   ],
-  "generation_id": "2e7055bed2e08149149f198a0094ff958b2a544fd2cbaceea1a01792f65ca567",
+  "generation_id": "1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314",
   "limitations": [
     "The directory may omit relevant faculty and does not imply availability or eligibility.",
     "Only the listed opportunity scopes have a reviewed role model; broad parent programs never receive a team proposal.",
@@ -13876,7 +13876,7 @@
     "unadmitted": 3
   },
   "release_state": "evidence_calibrated_pilot",
-  "researcher_registry_generation": "8442b0d30fe8b3c04563579f0caea91a81384a9d76401c06960026d6ea28a8df",
+  "researcher_registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
   "schema_version": 1,
   "source_hashes": {
     "benchmark_lock": "8c1ae23b0104611e0a7ba3cd802b7c56af9c9b9c2c396b1be3413e43e2b0d255",

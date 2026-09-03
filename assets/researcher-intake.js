@@ -105,7 +105,7 @@
     }
     var rawOrcid = normalizeText(input.orcidId);
     var orcid = rawOrcid ? normalizeOrcid(rawOrcid) : "";
-    if (rawOrcid && !orcid) throw new Error("Enter a valid ORCID iD.");
+    if (rawOrcid && !orcid) throw new Error("Enter a valid ORCID.");
     var email = bounded(input.contactEmail, MAX.contactEmail, "Contact email", false).toLowerCase();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Enter a valid contact email.");
     if (input.submittedForAdminReview !== true) throw new Error("Confirm that you want administrator review.");
@@ -155,7 +155,7 @@
       var reasons = [];
       var names = [researcher.name].concat(researcher.aliases || []).map(normalizeIdentity);
       if (name && names.includes(name)) reasons.push("same normalized name");
-      if (orcid && researcher.orcid_id === orcid) reasons.push("same ORCID iD");
+      if (orcid && researcher.orcid_id === orcid) reasons.push("same ORCID");
       if ((researcher.source_urls || []).some(function (url) {
         try { return sources.has(new URL(url).origin + new URL(url).pathname.replace(/\/$/, "").toLowerCase()); }
         catch (_error) { return false; }

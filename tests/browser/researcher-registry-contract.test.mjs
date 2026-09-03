@@ -42,6 +42,8 @@ test("stable researcher and claim identities preserve every legacy browser ID", 
   const legacy = new Set();
   directory.researchers.forEach(researcher => {
     assert.match(researcher.id, /^urh-[0-9]{6}$/);
+    assert.equal(typeof researcher.sort_name, "string");
+    assert.ok(researcher.sort_name.includes(","));
     assert.ok(researcher.legacy_ids.length >= 1);
     researcher.legacy_ids.forEach(id => {
       assert.equal(legacy.has(id), false);

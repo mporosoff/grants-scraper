@@ -254,6 +254,7 @@ def directory_projection(registry: dict) -> dict:
             "id": row["researcher_id"],
             "legacy_ids": row["legacy_ids"],
             "name": row["display_name"],
+            "sort_name": row["sort_name"],
             "aliases": row["aliases"],
             "home_unit": row["home_unit"],
             "relationship": row["relationship"],

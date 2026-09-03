@@ -4,9 +4,10 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [source, page, team] = await Promise.all([
+const [source, page, pageScript, team] = await Promise.all([
   readFile(new URL("assets/researcher-intake.js", root), "utf8"),
   readFile(new URL("faculty_interests.html", root), "utf8"),
+  readFile(new URL("assets/faculty-interests.js", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
 ]);
 
@@ -20,10 +21,22 @@ function api() {
 
 test("both public entry points disclose and use one bounded intake contract", () => {
   assert.match(page, /Configure Faculty Interests/);
-  assert.match(page, /Submitting does not publish a change/);
+  assert.match(page, /shared pool\. <strong>Submitting does not publish a change\.<\/strong> The current profile/);
+  assert.doesNotMatch(page, /class="notice"/);
+  assert.match(page, /Add a missing researcher/);
+  assert.doesNotMatch(page, /ORCID iD/);
   assert.match(page, /id="existing-researcher"/);
+  assert.match(page, /id="researcher-search"[^>]*type="search"[^>]*role="combobox"[^>]*aria-controls="researcher-options"/);
+  assert.match(page, /id="researcher-options"[^>]*role="listbox"/);
+  assert.match(page, /class="span-2" for="submitter-note"/);
+  assert.match(page, /&copy; 2026 Marc D\. Porosoff/);
+  assert.match(pageScript, /researcherSortName\(left\)\.localeCompare\(researcherSortName\(right\)/);
+  assert.match(pageScript, /profile\.sort_name/);
+  assert.match(pageScript, /event\.key === "ArrowDown"/);
+  assert.match(pageScript, /data-researcher-index/);
   assert.match(page, /id="review-consent"/);
   assert.match(page, /assets\/researcher-intake\.js/);
+  assert.match(team, /connect-src[^;"]*https:\/\/funding-finder-researchers\.urochestercheme\.workers\.dev/);
   assert.match(team, /id="submit-researcher-review" type="checkbox"/);
   assert.match(team, /Save locally and submit for review/);
   assert.match(team, /Local save completed\. The review request was not sent/);

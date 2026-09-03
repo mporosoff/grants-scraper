@@ -71,6 +71,10 @@ class ResearcherRegistryTests(unittest.TestCase):
         directory = assignment_json(ROOT / "data" / "researcher_directory.js")
         manifest = json.loads((ROOT / "data" / "researcher_registry_manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(directory, directory_projection(self.registry))
+        self.assertEqual(
+            [row["sort_name"] for row in directory["researchers"]],
+            [row["sort_name"] for row in self.registry["researchers"]],
+        )
         self.assertEqual(manifest["registry_generation"], self.registry["registry_generation"])
         self.assertEqual(manifest["counts"], registry_counts(self.registry))
         self.assertEqual(manifest["researcher_ids"], [row["researcher_id"] for row in self.registry["researchers"]])
