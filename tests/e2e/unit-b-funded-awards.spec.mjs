@@ -69,7 +69,7 @@ test("each agency hydrates independently in batches no larger than 25", async ({
     const button = page.locator(`[data-ii-load-source="${source}"]`);
     await expect(button).toContainText(`Load up to 25 more ${source} awards`);
     await button.click();
-    await expect(page.locator("#ii-status")).toContainText(`Loaded remaining 1 ${source} award`);
+    await expect(page.locator("#ii-status")).toContainText(`Loaded the remaining 1 ${source} award`);
     await expect(button).toHaveCount(0);
   }
   const batchCalls = calls.filter(call => call.source && Number.isInteger(call.offset));
@@ -339,7 +339,7 @@ test("an expired snapshot is rebuilt before the requested page is restored", asy
   const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   await page.locator('[data-ii-page-number="2"]').click();
   await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
-  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt");
+  await expect(page.locator("#ii-status")).toContainText("search was refreshed");
   const refreshedSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(refreshedSnapshot).not.toBe(originalSnapshot);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
@@ -352,8 +352,8 @@ test("an expired snapshot is rebuilt before source hydration resumes at the requ
   await searchTopic(page, "hydration-expiry");
   const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   await page.locator('[data-ii-load-source="NSF"]').click();
-  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt before source hydration resumed");
-  await expect(page.locator("#ii-source-status")).toContainText("50 of 51 are hydrated");
+  await expect(page.locator("#ii-status")).toContainText("search was refreshed before more details loaded");
+  await expect(page.locator("#ii-status")).toContainText("Full details are available for 50 of 51");
   const rebuiltSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(rebuiltSnapshot).not.toBe(originalSnapshot);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
@@ -376,7 +376,7 @@ test("a fallback source-batch controller and ownership guard prevent late hydrat
   });
   await searchTopic(page, "batch-back-ownership");
   await page.locator('[data-ii-load-source="NSF"]').click();
-  await expect(page.locator("#ii-status")).toContainText("NSF card hydration failed");
+  await expect(page.locator("#ii-status")).toContainText("NSF details could not be loaded");
   await page.locator('[data-ii-load-source="NSF"]').click();
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_snapshot=/);
@@ -397,7 +397,7 @@ test("history restoration cannot mix a newer snapshot question into an older sna
   await page.locator("#ii-question").fill("How many awards are in this result?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();
-  await expect(page.locator("#ii-direct-answer")).toContainText("2 normalized matching awards");
+  await expect(page.locator("#ii-direct-answer")).toContainText("2 matching awards");
   const newerSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(newerSnapshot).not.toBe(olderSnapshot);
   await page.goBack();
@@ -471,14 +471,14 @@ test("investigator and program drill-downs filter the same snapshot and clear in
 test("failed-source retry creates a successor without discarding successful cards", async ({ page }) => {
   const { runtimeErrors } = await openSearch(page, { failNih: true, resultCountPerSource: { NSF: 2, NIH: 0, DOE: 2 } });
   await searchTopic(page, "partial", "all");
-  await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable");
-  await expect(page.locator("#ii-card-page-label")).toContainText("at least 4 available");
+  await expect(page.locator("#ii-source-status")).toContainText("NIH: temporarily unavailable");
+  await expect(page.locator("#ii-card-page-label")).toContainText("of at least 4");
   await page.locator("#ii-programs").selectOption({ label: "NSF · Plasma Physics (2)" });
   await expect(page.locator("#ii-active-facet")).toBeVisible();
   const retainedIds = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId).sort());
   const previousUrl = page.url();
   await page.locator('[data-ii-retry-source="NIH"]').click();
-  await expect(page.locator("#ii-status")).toContainText("NIH recovered in successor snapshot");
+  await expect(page.locator("#ii-status")).toContainText("NIH became available again");
   const afterIds = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId).sort());
   expect(afterIds).toEqual(expect.arrayContaining(retainedIds));
   expect(afterIds.length).toBe(5);
@@ -496,9 +496,9 @@ test("an expired snapshot is rebuilt before a failed source retry creates its su
   });
   await searchTopic(page, "expired-partial", "all");
   const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
-  await expect(page.locator("#ii-source-status")).toContainText("NIH is temporarily unavailable");
+  await expect(page.locator("#ii-source-status")).toContainText("NIH: temporarily unavailable");
   await page.locator('[data-ii-retry-source="NIH"]').click();
-  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt before NIH recovered in successor snapshot");
+  await expect(page.locator("#ii-status")).toContainText("search was refreshed before NIH became available again");
   await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–5 of 5");
   const successorSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(successorSnapshot).not.toBe(originalSnapshot);
@@ -538,8 +538,8 @@ test("questions use full server aggregates and bounded hydrated evidence", async
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await page.locator("#ii-question").fill("How many awards are in this result?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("78 normalized matching awards");
-  await expect(page.locator("#ii-answer-limitations")).toContainText("78 normalized awards informed the server aggregate");
+  await expect(page.locator("#ii-direct-answer")).toContainText("78 matching awards");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("78 awards were counted");
   expect(runtimeErrors).toEqual([]);
 });
 

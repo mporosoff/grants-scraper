@@ -537,8 +537,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(styles, /\.ii-search-spinner\s*\{[^}]*display:\s*inline-block/);
   assert.match(appSource, /function setSearchActivity\(active, owner = 0\)[\s\S]*aria-busy[\s\S]*ii-search-spinner[\s\S]*Searching awards…/);
   assert.match(appSource, /setSearchActivity\(true, sequence\)[\s\S]*try \{[\s\S]*setSearchActivity\(false, sequence\)[\s\S]*setBusy\(false\)/);
-  assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*timed out before completing\. Other source results remain available\./);
-  assert.match(appSource, /unavailableSourceSummary\(snapshot\.sources \|\| \[\]\)/);
+  assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*source\.source}: timed out/);
   assert.doesNotMatch(page, /Funded Award Intelligence/);
   assert.match(page, /aria-labelledby="ii-heading"[\s\S]*<h2 id="ii-heading">Find funded projects/);
   assert.match(page, /id="award-search-form"[^>]*hidden/);
@@ -602,4 +601,21 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);
   assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);
+});
+
+test("result completeness is explained in one compact, plain-language status block", () => {
+  const sourceStatusSource = appSource.slice(
+    appSource.indexOf("function sourceStatusText("),
+    appSource.indexOf("function renderFacetSelect("),
+  );
+  assert.match(page, /id="ii-results-note"[^>]*>[\s\S]*id="ii-status" role="status" aria-live="polite"[\s\S]*id="ii-source-status"/);
+  assert.match(styles, /\.ii-results-note\s*\{[^}]*padding:\s*10px 12px/);
+  assert.match(styles, /\.ii-source-status li\s*\{[^}]*padding:\s*0;[^}]*background:\s*transparent/);
+  assert.match(sourceStatusSource, /source\.status === "complete"[\s\S]*source\.source}: all/);
+  assert.match(sourceStatusSource, /\["safety_bounded", "partial"\][\s\S]*source\.source}: at least/);
+  assert.match(sourceStatusSource, /“at least” means more matches may exist/);
+  assert.match(sourceStatusSource, /list\.innerHTML = sources\.length \? `<li/);
+  assert.doesNotMatch(sourceStatusSource, /sources\.map\(source => `<li/);
+  assert.match(appSource, /setStatus\("Opened the shared results from this link\."\)/);
+  assert.doesNotMatch(appSource, /Restored the shared result snapshot|safety-bounded ·|normalized awards available|exact source total/);
 });
