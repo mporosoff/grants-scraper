@@ -18,6 +18,15 @@ Worker normalizes public NSF Awards and NIH RePORTER responses. The Worker has
 no source credential or durable user/account history; only successful
 per-source responses enter its one-hour public cache.
 
+Configure Faculty Interests is the fourth public, self-canonical route. It
+reads the generated researcher directory and sends only explicitly consented,
+schema-bounded correction or nomination fields to a rate-limited Cloudflare
+Worker. The durable queue and optional contact details are private; `/admin*`
+requires a cryptographically verified Cloudflare Access assertion and an
+allowlisted administrator email. Approved changes publish through a
+registry-only protected pull request and are marked complete only after the
+matching GitHub Pages generation is live-verified.
+
 ## Architecture
 
 ```text

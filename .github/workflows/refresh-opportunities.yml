@@ -11,6 +11,8 @@ on:
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
       - "scripts/faculty_match.py"
+      - "scripts/researcher_registry.py"
+      - "config/researcher_registry.json"
       - "scripts/program_areas.py"
       - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
@@ -258,9 +260,9 @@ jobs:
           --fail-on-degraded
       - name: Rebuild faculty metadata and live team-matcher configuration
         run: >-
-          python -m scripts.faculty_match match
+          python -m scripts.faculty_match
           --catalog data/opportunities.js
-          --profiles faculty_profiles.json
+          --registry config/researcher_registry.json
           --out data/faculty_matches.js
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
@@ -549,6 +551,9 @@ jobs:
           for team_asset in \
             data/opportunity_team_index.js \
             data/opportunity_teams.js \
+            data/faculty_matches.js \
+            data/researcher_directory.js \
+            data/researcher_registry_manifest.json \
             assets/opportunity-team.js \
             assets/opportunity-team-panel.js \
             assets/app.js \

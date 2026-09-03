@@ -123,9 +123,12 @@ each person, keeps missing roles visible, and supports remove/replacement and a
 manual-collaborator path. Broad parent programs never receive an automatic team.
 Generated team membership is rechecked against the same runtime catalog
 currentness and publication-eligible child-topic contracts used by ordinary
-search. Team Match's local directory distinguishes 118 main-pool, 35 standby,
-and 3 directory-only profiles while preserving saved researchers, ORCID, and
-the four-person limit. See `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md`.
+search. Team Match derives its current main, standby, and directory-only counts
+from the canonical researcher registry while preserving saved researchers,
+ORCID, and the four-person limit. The fourth public surface, Configure Faculty
+Interests, accepts bounded profile corrections and nominations for protected
+administrator review; Team Match remains browser-local unless its separate
+review checkbox is selected. See `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md`.
 
 Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
 Office of Science awards through the sources' native fields, keeps the adapters

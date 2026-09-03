@@ -24,11 +24,15 @@ from pathlib import Path
 import re
 import unicodedata
 
+from scripts.researcher_registry import (
+    legacy_faculty_projection,
+    load_registry,
+    registry_counts,
+)
+
 
 SCHEMA_VERSION = 1
 BROWSER_SCHEMA_VERSION = 1
-SOURCE_ROSTER_COUNTS = {"total": 156, "rankable": 145, "unrankable": 11}
-POOL_COUNTS = {"main": 118, "standby": 35, "unadmitted": 3}
 MAX_BROWSER_BYTES = 220_000
 MAX_INDEX_BYTES = 4_096
 VERSIONED_ASSETS = (
@@ -37,11 +41,13 @@ VERSIONED_ASSETS = (
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",
+    "data/researcher_directory.js",
     "data/opportunity_team_index.js",
 )
 CONTENT_HASHED_ASSETS = (
     "assets/app.css",
     "assets/app.js",
+    "data/faculty_matches.js",
 )
 
 
@@ -141,68 +147,24 @@ def _expansion_lookup(faculty_model: dict) -> dict[str, dict]:
     }
 
 
-def build_config(faculty_model: dict, gate: dict, source_hashes: dict) -> dict:
-    source_contract = faculty_model.get("source_contract") or {}
-    summary = faculty_model.get("summary") or {}
-    actual_source_counts = {
-        "total": int(source_contract.get("faculty_count") or 0),
-        "rankable": int(source_contract.get("faculty_count") or 0)
-        - int((source_contract.get("claim_audit_status_counts") or {}).get(
-            "unrankable — no official interests", 0
-        )),
-        "unrankable": int((source_contract.get("claim_audit_status_counts") or {}).get(
-            "unrankable — no official interests", 0
-        )),
-    }
-    actual_pool_counts = {
-        "main": int(summary.get("main_pool_candidates") or 0),
-        "standby": int(summary.get("standby") or 0),
-        "unadmitted": int(summary.get("unadmitted") or 0),
-    }
-    if actual_source_counts != SOURCE_ROSTER_COUNTS:
-        raise ValueError(f"Roster contract changed: {actual_source_counts}")
-    if actual_pool_counts != POOL_COUNTS:
-        raise ValueError(f"Pool contract changed: {actual_pool_counts}")
-
-    faculty_ids = _faculty_ids(faculty_model["faculty"])
-    term_by_id = {row["term_id"]: row for row in faculty_model["terms"]}
-    faculty_rows = []
-    for row in faculty_model["faculty"]:
-        term_ids = list(row.get("retained_term_ids") or [])
-        labels = list(row.get("retained_terms") or [])
-        evidence = list(row.get("retained_evidence") or [])
-        tiers = list(row.get("evidence_tiers") or [])
-        if not (len(term_ids) == len(labels) == len(evidence) == len(tiers)):
-            raise ValueError(f"Misaligned faculty evidence for {row['faculty_name']}")
-        terms = []
-        for term_id, label, phrase, tier in zip(term_ids, labels, evidence, tiers):
-            definition = term_by_id.get(term_id) or {}
-            if definition and label != definition.get("term"):
-                raise ValueError(f"Term label mismatch for {term_id}")
-            terms.append({
-                "id": term_id,
-                "label": label,
-                "category": definition.get("category") or "",
-                "type": definition.get("term_type") or "",
-                "evidence": phrase,
-                "evidence_tier": tier,
-            })
-        sources = list(dict.fromkeys(row.get("source_urls") or []))
-        if not sources or not row.get("source_checked_date"):
-            raise ValueError(f"Missing source provenance for {row['faculty_name']}")
-        faculty_rows.append({
-            "id": faculty_ids[row["faculty_name"]],
-            "name": row["faculty_name"],
-            "home_unit": row.get("home_unit") or "",
-            "relationship": row.get("relationship") or "",
-            "pool_state": _pool_state(row.get("decision") or ""),
-            "claim_status": row.get("claim_audit_status") or "",
-            "official_interests": list(row.get("official_interests") or []),
-            "terms": terms,
-            "source_urls": sources,
-            "source_checked_date": row["source_checked_date"],
-        })
-    faculty_rows.sort(key=lambda item: (item["name"].casefold(), item["id"]))
+def build_config(
+    faculty_model: dict,
+    gate: dict,
+    source_hashes: dict,
+    researcher_registry: dict,
+) -> dict:
+    faculty_rows = legacy_faculty_projection(researcher_registry)
+    faculty_ids = {row["name"]: row["id"] for row in faculty_rows}
+    missing = sorted(
+        row["faculty_name"]
+        for row in faculty_model.get("faculty", [])
+        if row["faculty_name"] not in faculty_ids
+    )
+    if missing:
+        raise ValueError(
+            "The calibration source contains researchers that are not in the "
+            f"canonical registry: {missing}"
+        )
 
     by_name = {row["name"]: row for row in faculty_rows}
     faculty_names = list(faculty_ids)
@@ -299,8 +261,12 @@ def build_config(faculty_model: dict, gate: dict, source_hashes: dict) -> dict:
         "method_version": "opportunity-team-role-evidence-v3",
         "release_state": "evidence_calibrated_pilot",
         "source_hashes": source_hashes,
-        "source_roster_counts": SOURCE_ROSTER_COUNTS,
-        "pool_counts": POOL_COUNTS,
+        "source_roster_counts": {
+            key: registry_counts(researcher_registry)[key]
+            for key in ("total", "rankable", "unrankable")
+        },
+        "pool_counts": registry_counts(researcher_registry)["pool_counts"],
+        "researcher_registry_generation": researcher_registry["registry_generation"],
         "faculty": faculty_rows,
         "opportunities": opportunity_rows,
         "limitations": [
@@ -315,20 +281,6 @@ def build_config(faculty_model: dict, gate: dict, source_hashes: dict) -> dict:
 
 
 def browser_projection(config: dict) -> dict:
-    faculty = [{
-        "id": row["id"],
-        "name": row["name"],
-        "home_unit": row["home_unit"],
-        "pool_state": row["pool_state"],
-        "claim_status": row["claim_status"],
-        "terms": [{
-            "label": term["label"],
-            "evidence": term["evidence"],
-            "evidence_tier": term["evidence_tier"],
-        } for term in row["terms"]],
-        "source_url": row["source_urls"][0],
-        "source_checked_date": row["source_checked_date"],
-    } for row in config["faculty"]]
     return {
         "schema_version": BROWSER_SCHEMA_VERSION,
         "generation_id": config["generation_id"],
@@ -337,7 +289,7 @@ def browser_projection(config: dict) -> dict:
         "source_hashes": config["source_hashes"],
         "source_roster_counts": config["source_roster_counts"],
         "pool_counts": config["pool_counts"],
-        "faculty": faculty,
+        "researcher_registry_generation": config["researcher_registry_generation"],
         "opportunities": config["opportunities"],
         "limitations": config["limitations"],
     }
@@ -417,6 +369,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--faculty-model", type=Path, required=True)
     parser.add_argument("--gate-model", type=Path, required=True)
+    parser.add_argument("--registry", type=Path, default=Path("config/researcher_registry.json"))
     parser.add_argument("--config-out", type=Path, default=Path("config/opportunity_team_model.json"))
     parser.add_argument("--browser-out", type=Path, default=Path("data/opportunity_teams.js"))
     parser.add_argument("--index-out", type=Path, default=Path("data/opportunity_team_index.js"))
@@ -432,7 +385,7 @@ def main() -> None:
         "faculty_expansion_lock": str(gate.get("meta", {}).get("faculty_expansion_lock") or ""),
         "team_gate_lock": str(gate.get("meta", {}).get("gate_lock") or ""),
     }
-    config = build_config(faculty_model, gate, source_hashes)
+    config = build_config(faculty_model, gate, source_hashes, load_registry(args.registry))
     write_outputs(config, args.config_out, args.browser_out, args.index_out)
     for target in args.version_target:
         update_version_target(target, config["generation_id"])

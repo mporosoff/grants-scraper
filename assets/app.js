@@ -972,7 +972,7 @@
   async function importOrcidProfile() {
     const button = $("import-orcid");
     button.disabled = true;
-    renderOrcidStatus("Looking up public publications linked to this ORCID iD…");
+    renderOrcidStatus("Looking up public publications linked to this ORCID…");
     try {
       const imported = await ORCID_API.fetchProfile($("orcid-id").value);
       $("orcid-id").value = imported.orcidId;
