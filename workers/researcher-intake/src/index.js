@@ -1,4 +1,4 @@
-import { enforceSubmittedRelationship, fail, validateAdminProfile, validateSubmission } from "./contract.js";
+import { enforceClaimContinuity, enforceSubmittedRelationship, fail, validateAdminProfile, validateSubmission } from "./contract.js";
 import { ResearcherSubmissionStore } from "./store.js";
 
 const MAX_REQUEST_BYTES = 32_768;
@@ -361,11 +361,11 @@ export function seedApprovedProfile(value, today = new Date().toISOString().slic
     }
     return {
       display_name: name, sort_name: sortName, aliases: current.aliases || [],
-      orcid_id: proposed.orcid_id || current.orcid_id || "",
+      orcid_id: Object.prototype.hasOwnProperty.call(proposed, "orcid_id") ? proposed.orcid_id : (current.orcid_id || ""),
       home_unit: proposed.home_unit || current.home_unit,
       relationship: current.relationship, pool_visibility: current.pool_visibility,
       auto_proposable: current.auto_proposable, status: current.status,
-      research_summary: proposed.research_summary || current.research_summary,
+      research_summary: Object.prototype.hasOwnProperty.call(proposed, "research_summary") ? proposed.research_summary : current.research_summary,
       source_urls: sources, source_checked_date: today, claims,
     };
   }
@@ -493,11 +493,22 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           });
         }
         if (body.action === "approve") {
-          const manifest = await currentManifest(env, fetchImpl);
+          const [manifest, directory] = await Promise.all([
+            currentManifest(env, fetchImpl),
+            current.researcher_id ? currentDirectory(env, fetchImpl) : Promise.resolve(null),
+          ]);
           if (manifest.registry_generation !== current.base_registry_generation) fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
-          const approvedProfile = enforceSubmittedRelationship(
-            validateAdminProfile(body.approved_profile, current.researcher_id),
-            JSON.parse(current.proposed_profile_json),
+          if (current.researcher_id && (!directory || directory.registry_generation !== manifest.registry_generation)) {
+            fail("registry_unavailable", "The current researcher directory could not be verified.", 503);
+          }
+          const currentProfile = directory?.researchers?.find(row => row.id === current.researcher_id) || null;
+          if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
+          const approvedProfile = enforceClaimContinuity(
+            enforceSubmittedRelationship(
+              validateAdminProfile(body.approved_profile, current.researcher_id),
+              JSON.parse(current.proposed_profile_json),
+            ),
+            currentProfile,
           );
           const approved = await store.transition({ id: current.submission_id, fromStates: ["pending", "under_review", "changes_requested"], toState: "approved", expectedRevision, actor, reason, approvedProfile, now: now().toISOString() });
           if (!approved) fail("state_conflict", "The submission changed while you were reviewing it.", 409);

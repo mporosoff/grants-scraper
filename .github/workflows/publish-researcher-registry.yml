@@ -325,8 +325,15 @@ jobs:
           jq -n --argjson revision "$APPROVED_REVISION" \
             '{expected_revision:$revision,failure_code:"publication_workflow_failed",deployment_result:"workflow_failed"}' \
             > /tmp/publication-failed.json
-          curl --silent --show-error --max-time 20 \
-            -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
-            -H "Content-Type: application/json" \
-            --data-binary @/tmp/publication-failed.json \
-            "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail" || true
+          for attempt in $(seq 1 6); do
+            if curl --fail --silent --show-error --max-time 20 \
+                -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+                -H "Content-Type: application/json" \
+                --data-binary @/tmp/publication-failed.json \
+                "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Unable to move the confirmed-unmerged publication out of publishing after bounded retries."
+          exit 1

@@ -240,6 +240,14 @@ class ResearcherRegistryTests(unittest.TestCase):
                 "approved_at": "2026-09-03T12:00:00Z", "approved_profile": invalid_profile,
             }, self.registry["registry_generation"])
 
+        omitted_profile = copy.deepcopy(approved_profile)
+        omitted_profile["claims"] = omitted_profile["claims"][1:]
+        with self.assertRaisesRegex(ValueError, r"must remain present and be retired"):
+            apply_approved_submission(self.registry, {
+                "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+                "approved_at": "2026-09-03T12:00:00Z", "approved_profile": omitted_profile,
+            }, self.registry["registry_generation"])
+
     def test_data_only_add_retire_rename_and_pool_changes_remain_valid(self):
         added, _ = apply_approved_submission(self.registry, {
             "schema_version": 1,

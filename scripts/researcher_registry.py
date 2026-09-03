@@ -624,11 +624,28 @@ def apply_approved_submission(
             target[key] = copy.deepcopy(proposed[key])
     target["orcid_id"] = _normalize_orcid(target.get("orcid_id")) if target.get("orcid_id") else ""
     target["source_checked_date"] = target.get("source_checked_date") or approved.get("approved_at", "")[:10]
+    submitted_claim_ids = {
+        str(claim.get("claim_id") or "")
+        for claim in target.get("claims", [])
+        if claim.get("claim_id")
+    }
+    missing_claim_ids = sorted(set(previous_claims) - submitted_claim_ids)
+    if missing_claim_ids:
+        raise ValueError(
+            f"existing claims must remain present and be retired instead of removed: {missing_claim_ids}"
+        )
+    used_claim_ids = set(previous_claims)
+    next_claim_number = max(
+        [int(claim_id.rsplit("-c", 1)[-1]) for claim_id in used_claim_ids] or [0]
+    ) + 1
     normalized_claims = []
-    for index, claim in enumerate(target.get("claims", []), start=1):
+    for claim in target.get("claims", []):
         value = copy.deepcopy(claim)
-        if is_nomination and value.get("claim_id"):
+        requested_claim_id = str(value.get("claim_id") or "")
+        if is_nomination and requested_claim_id:
             raise ValueError("nomination claims cannot preassign claim IDs")
+        if requested_claim_id and requested_claim_id not in previous_claims:
+            raise ValueError("new claims cannot preassign claim IDs")
         requested_revision = value.get("revision")
         if (
             not isinstance(requested_revision, int)
@@ -636,7 +653,14 @@ def apply_approved_submission(
             or requested_revision < 1
         ):
             raise ValueError("approved claim revision must be a positive integer")
-        value["claim_id"] = value.get("claim_id") or f"{researcher_id}-c{index:03d}"
+        if requested_claim_id:
+            value["claim_id"] = requested_claim_id
+        else:
+            while f"{researcher_id}-c{next_claim_number:03d}" in used_claim_ids:
+                next_claim_number += 1
+            value["claim_id"] = f"{researcher_id}-c{next_claim_number:03d}"
+            used_claim_ids.add(value["claim_id"])
+            next_claim_number += 1
         value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
         if old:

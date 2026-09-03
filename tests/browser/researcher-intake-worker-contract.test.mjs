@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
-import { enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
+import { enforceClaimContinuity, enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
 import { createHandler, reconcilePublication, seedApprovedProfile } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
@@ -148,7 +148,7 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
 
 test("correction approval defaults apply submitted additions and retirements", () => {
   const current = {
-    name: "Ada Lovelace", aliases: [], orcid_id: "", home_unit: "Computing",
+    name: "Ada Lovelace", aliases: [], orcid_id: "0000-0002-1825-0097", home_unit: "Computing",
     relationship: "internal_affiliated_researcher", pool_visibility: "institution",
     auto_proposable: true, status: "active", research_summary: "Existing summary",
     source_urls: ["https://example.edu/old"],
@@ -181,7 +181,30 @@ test("correction approval defaults apply submitted additions and retirements", (
   );
   assert.deepEqual(seeded.claims[2].categories, ["Interdisciplinary research"]);
   assert.deepEqual(seeded.claims[2].source_urls, ["https://example.edu/new"]);
-  assert.doesNotThrow(() => validateAdminProfile(seeded, "urh-000001"));
+  assert.equal(seeded.orcid_id, "");
+  const cleared = seedApprovedProfile({
+    current_profile: current,
+    proposed_profile: {
+      display_name: "Ada Lovelace", orcid_id: "", home_unit: "Computing",
+      research_summary: "", claims: ["Formal logic"], source_urls: ["https://example.edu/new"],
+    },
+  }, "2026-09-03");
+  assert.equal(cleared.orcid_id, "");
+  assert.equal(cleared.research_summary, "");
+  const validated = validateAdminProfile(seeded, "urh-000001");
+  assert.equal(validated.claims[2].claim_id, "");
+  assert.doesNotThrow(() => enforceClaimContinuity(validated, current));
+  assert.throws(
+    () => enforceClaimContinuity({ ...validated, claims: validated.claims.slice(1) }, current),
+    /marked retired instead of being removed/,
+  );
+  assert.throws(
+    () => enforceClaimContinuity({
+      ...validated,
+      claims: validated.claims.map((claim, index) => index === 2 ? { ...claim, claim_id: "urh-000001-c999" } : claim),
+    }, current),
+    /New claims must leave the claim identifier empty/,
+  );
 });
 
 test("public creation is rate bounded, idempotent, and returns the same private receipt", async () => {
@@ -295,6 +318,10 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /--json state,mergeCommit/);
   assert.doesNotMatch(workflow, /--disable-auto|autoMergeRequest/);
   assert.match(workflow, /registry PR is not confirmed closed and safe from a later merge/);
+  const failureCallback = workflow.slice(workflow.indexOf("publication-failed.json"));
+  assert.match(failureCallback, /for attempt in \$\(seq 1 6\)/);
+  assert.match(failureCallback, /curl --fail --silent --show-error/);
+  assert.doesNotMatch(failureCallback, /\/internal\/publications\/\$SUBMISSION_ID\/fail" \|\| true/);
   assert.ok(workflow.indexOf('gh pr close "$PUBLICATION_PR_URL"') < workflow.indexOf('[ "$pr_state" != "CLOSED" ]'));
   assert.ok(workflow.indexOf('[ "$pr_state" != "CLOSED" ]') < workflow.indexOf('"$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"'));
   assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));

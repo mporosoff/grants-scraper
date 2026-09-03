@@ -130,13 +130,13 @@ export function validateAdminProfile(value, researcherId) {
   const sourceCheckedDate = calendarDate(value.source_checked_date, "Source checked date");
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
-  const claims = value.claims.map((claim, index) => {
+  const claims = value.claims.map(claim => {
     const claimAllowed = new Set(["claim_id", "revision", "status", "label", "category", "categories", "type", "evidence", "source_urls", "verified_on", "evidence_level", "legacy_claim_ids", "material_hash"]);
     exactFields(claim, claimAllowed, "Claim");
     if (!Number.isInteger(claim.revision) || claim.revision < 1) {
       fail("invalid_claim", "A claim revision must be a positive integer.");
     }
-    const claimId = text(claim.claim_id, 40, "Claim identifier") || (researcherId ? `${researcherId}-c${String(index + 1).padStart(3, "0")}` : "");
+    const claimId = text(claim.claim_id, 40, "Claim identifier");
     if (claimId && !/^urh-[0-9]{6}-c[0-9]{3}$/.test(claimId)) fail("invalid_claim_id", "A claim identifier is invalid.");
     if (claimId && !researcherId) fail("invalid_claim_id", "Nomination claims cannot preassign claim identifiers.");
     if (claimId && researcherId && !claimId.startsWith(`${researcherId}-c`)) fail("invalid_claim_id", "A claim identifier belongs to another researcher.");
@@ -173,6 +173,19 @@ export function enforceSubmittedRelationship(approvedProfile, proposedProfile) {
   if (["external collaborator", "collaborator at another institution"].includes(note)
       && ["hajim_core_faculty", "internal_affiliated_researcher"].includes(approvedProfile.relationship)) {
     fail("invalid_admin_policy", "A submitted external collaborator cannot be published as core or internal faculty.");
+  }
+  return approvedProfile;
+}
+
+export function enforceClaimContinuity(approvedProfile, currentProfile) {
+  if (!currentProfile) return approvedProfile;
+  const previousIds = new Set((currentProfile.claims || []).map(claim => claim.claim_id));
+  const submittedIds = new Set(approvedProfile.claims.map(claim => claim.claim_id).filter(Boolean));
+  if ([...previousIds].some(claimId => !submittedIds.has(claimId))) {
+    fail("invalid_claim_set", "Existing claims must remain present and be marked retired instead of being removed.");
+  }
+  if ([...submittedIds].some(claimId => !previousIds.has(claimId))) {
+    fail("invalid_claim_set", "New claims must leave the claim identifier empty.");
   }
   return approvedProfile;
 }
