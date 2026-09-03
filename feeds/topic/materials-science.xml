@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -14,6 +14,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Materials science"/>
     <summary>National Institutes of Health | Closes 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
+  </entry>
+  <entry>
+    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
+    <link href="https://www.grants.gov/search-results-detail/363793"/>
+    <id>urn:funding-finder:grants-gov:363793</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Community development"/>
+    <category term="Manufacturing"/>
+    <category term="Materials science"/>
+    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-03 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
@@ -38,17 +49,6 @@
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
     <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
-  </entry>
-  <entry>
-    <title>Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363722"/>
-    <id>urn:funding-finder:grants-gov:363722</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Community development"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-09-02 | U.S. Embassy Tunis and the Bureau of Near Eastern Affairs' Office of Assistance Coordination (NEA/AC) seek applications for the “Safeguarding U.S. Critical Minerals Supply Chains- Tunisia” program, a commercial diplomacy initiative to support transparent, private-sector-led investment in phosphate development, optimize downstream mineral processing to meet international standards, and strengthen t…</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>

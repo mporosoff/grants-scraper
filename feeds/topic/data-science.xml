@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -119,6 +119,20 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Extension Program Special Emphasis</title>
+    <link href="https://www.grants.gov/search-results-detail/363784"/>
+    <id>urn:funding-finder:grants-gov:363784</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
   </entry>
   <entry>
     <title>21st Century Museum Professionals Program (2027)</title>
@@ -726,16 +740,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2026-11-06 | Department of Army: The Department of War (DoW) announces the Fiscal Year 2027 Defense University Research Instrumentation Program (DURIP). DURIP is designed to improve the capabilities of accredited United States (U.S.) institutions of higher education to conduct research and to educate scientists and engineers in areas important to national defense, by providing funds for the acquisition of rese…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363378"/>
-    <id>urn:funding-finder:grants-gov:363378</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Office of Naval Research</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Office of Naval Research | Closes 2026-11-06 | In accordance with EO 14332, Improving Oversight of Federal Grantmaking, dated 7 August 2025, and EO 14303, Restoring Gold Standard Science, dated 23 May 2025, this Announcement seeksproposals from universities to purchase equipment and instrumentation in support of research in areas of interest to the DoW, reflecting the basic research priorities for the Department of War and advancing the admini…</summary>
   </entry>
 </feed>

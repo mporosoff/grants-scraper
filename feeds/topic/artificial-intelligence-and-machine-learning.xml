@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -62,6 +62,20 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | The Centers for Disease Control and Prevention's (CDC) National Center for Injury Prevention and Control (NCIPC) is soliciting investigator-initiated gold standard research proposals to rigorously evaluate programs and policies for their impact on primary prevention of child sexual abuse (CSA) or problematic sexual behavior (PSB) among youth. For the purposes of this NOFO: CSA is defined as sexual…</summary>
+  </entry>
+  <entry>
+    <title>Tribal Colleges Extension Program Special Emphasis</title>
+    <link href="https://www.grants.gov/search-results-detail/363784"/>
+    <id>urn:funding-finder:grants-gov:363784</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
   </entry>
   <entry>
     <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
@@ -729,17 +743,5 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Office of Naval Research | Closes 2026-11-06 | In accordance with EO 14332, Improving Oversight of Federal Grantmaking, dated 7 August 2025, and EO 14303, Restoring Gold Standard Science, dated 23 May 2025, this Announcement seeksproposals from universities to purchase equipment and instrumentation in support of research in areas of interest to the DoW, reflecting the basic research priorities for the Department of War and advancing the admini…</summary>
-  </entry>
-  <entry>
-    <title>AI Partnership &amp; Exchange for Tech Leaders (APEX)</title>
-    <link href="https://www.grants.gov/search-results-detail/363315"/>
-    <id>urn:funding-finder:grants-gov:363315</id>
-    <updated>2026-07-26T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-08 | Program Purpose: The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the AI Partnership &amp; Exchange for Tech Leaders. The goal of this program is to connect rising Saudi Artificial Intelligence (AI) leaders with American experts in business, tech, and academia. This initiative helps participants build professional networks, study U.S. techno…</summary>
   </entry>
 </feed>

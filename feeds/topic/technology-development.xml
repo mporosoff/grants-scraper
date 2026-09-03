@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -146,6 +146,15 @@
     <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-26 | PURPOSENIOSH intends to support the Centers of Excellence in Total Worker Health® (TWH). These Centers will conduct rigorous research and translation activities to prevent harmful exposures, improve working conditions, and advance worker well-being. The Centers will develop practical, scalable solutions for employers and workers. All projects must use the NIOSH Worker Well-Being Questionnaire (Wel…</summary>
   </entry>
   <entry>
+    <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
+    <link href="https://www.grants.gov/search-results-detail/362349"/>
+    <id>urn:funding-finder:grants-gov:362349</id>
+    <updated>2026-11-10T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <category term="Technology development"/>
+    <summary>Centers for Disease Control - NCHHSTP | Closes 2027-01-11 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025: Prevent new STIs.…</summary>
+  </entry>
+  <entry>
     <title>Small Business Transition Grant for New Entrepreneurs (Parent R43/R44 Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/362576"/>
     <id>urn:funding-finder:grants-gov:362576</id>
@@ -175,15 +184,6 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
-  </entry>
-  <entry>
-    <title>Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
-    <link href="https://www.grants.gov/search-results-detail/362349"/>
-    <id>urn:funding-finder:grants-gov:362349</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Technology development"/>
-    <summary>Centers for Disease Control - NCHHSTP | Closes 2026-10-31 | CDC is funding programs that track, prevent, and control sexually transmitted infections (STI) in state, district, territorial, and city or county health departments. The purpose of this NOFO is to track, prevent, and control three common STIs: syphilis, gonorrhea, and chlamydia. The NOFO supports the goals of the Sexually Transmitted Infections National Strategic Plan 2021-2025: Prevent new STIs.…</summary>
   </entry>
   <entry>
     <title>Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science</title>

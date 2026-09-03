@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -929,6 +929,15 @@
     <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
   </entry>
   <entry>
+    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363113"/>
+    <id>urn:funding-finder:grants-gov:363113</id>
+    <updated>2027-01-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration | Closes 2027-02-03 | The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
+  </entry>
+  <entry>
     <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Coordinating Center (CCC) and Data Coordinating Center (DCC)</title>
     <link href="https://www.grants.gov/search-results-detail/363555"/>
     <id>urn:funding-finder:grants-gov:363555</id>
@@ -945,16 +954,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
-  </entry>
-  <entry>
-    <title>Behavioral Health Integration Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363650"/>
-    <id>urn:funding-finder:grants-gov:363650</id>
-    <updated>2027-01-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Closes 2027-03-01 | The purpose of the BH2I program is to improve the physical, mental, social, and spiritual health of American Indian and Alaska Native (AI/AN) individuals by expanding integrated, coordinated behavioral health care. The program supports Tribal and Urban Indian Organization (UIO) health systems in delivering culturally responsive, trauma-informed services that integrate behavioral health with primar…</summary>
   </entry>
 </feed>

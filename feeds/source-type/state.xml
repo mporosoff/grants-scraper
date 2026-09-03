@@ -4,8 +4,16 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>New York Economy-Wide Regulation Model Design and Build</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001HwzX6AAJ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP6224</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <summary>NYSERDA | Closes 2026-11-30 | NYSERDA is developing a new modeling toolkit to evaluate potential carbon pricing mechanisms, such as an economy-wide cap-and-invest program or carbon fee for New York State. This open-source model would inform future carbon pricing policy and program decisions and provide inputs for separate secondary analyses, including air quality, jobs, household costs, and electricity sector modeling.</summary>
+  </entry>
   <entry>
     <title>Energy-Focused Air Quality and Health Effects Research</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ"/>

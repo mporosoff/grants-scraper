@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-09-02T20:04:33Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -532,16 +532,6 @@
     <summary>Bureau of African Affairs | Closes 2027-05-31 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
-    <title>FY26 National Dam Safety Program State Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363603"/>
-    <id>urn:funding-finder:grants-gov:363603</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>Department of Homeland Security - FEMA</name></author>
-    <category term="Environmental science"/>
-    <category term="Cybersecurity"/>
-    <summary>Department of Homeland Security - FEMA | Closes 2026-09-02 | The National Dam Safety Program (NDSP) is a partnership of states, federal agencies, and other stakeholders to promote the establishment and maintenance of effective federal and state dam safety programs to reduce the risk to human life, property, and the environment from dam related hazards.</summary>
-  </entry>
-  <entry>
     <title>NIDA Core "Center of Transformative Science" Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/362314"/>
     <id>urn:funding-finder:grants-gov:362314</id>
@@ -667,5 +657,15 @@
     <category term="Manufacturing"/>
     <category term="Transportation"/>
     <summary>Geological Survey | Closes 2026-09-11 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50-65 billion…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Bureau of Land Management Threatened and Endangered Species - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363534"/>
+    <id>urn:funding-finder:grants-gov:363534</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Threatened and Endangered Species Program (T&amp;E) focuses on conservation and recovery of endangered, threatened and BLM Sensitive Species (collectively referred to as BLM Special Status Species) and their habitats to help inform a balance of multiple uses of BLM-managed lands, including the Nation"s need for domestic sources of energy, minerals, timber, grazing, recreation, and fish and wil…</summary>
   </entry>
 </feed>
