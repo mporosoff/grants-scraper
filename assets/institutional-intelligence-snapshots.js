@@ -316,7 +316,7 @@
   }
 
   function writeHistoryUrl(url, mode = "replace", departureHistoryState = null) {
-    if (!location.protocol.startsWith("http")) return;
+    if (!location.protocol.startsWith("http") || state.historyRestoreDepth) return;
     const nextUrl = new URL(url, location.href).href;
     if (mode === "push" && nextUrl !== location.href) {
       replaceHistoryStateIfChanged({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) });
@@ -1299,6 +1299,8 @@
     $("ii-update-answer").addEventListener("click", refreshQuestionAnswer);
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
+      clearTimeout(state.historyStateTimer);
+      state.historyStateTimer = 0;
       state.historyRestoreDepth += 1;
       try {
         const restored = core.stateFromSearch(location.search);
@@ -1325,10 +1327,10 @@
         setStatus(error.message, true);
       } finally {
         setBusy(false);
-        state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
         requestAnimationFrame(() => {
           if (event.state?.focusId) $(event.state.focusId)?.focus({ preventScroll: true });
           if (Number.isFinite(event.state?.scrollY)) window.scrollTo({ top: event.state.scrollY });
+          state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
           scheduleCurrentHistoryViewState();
         });
       }

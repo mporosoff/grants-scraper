@@ -338,23 +338,24 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
     readFile(new URL("assets/app.js", root)),
   ]);
   const releaseKey = "post-phase4-abc-20260829";
-  const appCssHash = createHash("sha256").update(appCss).digest("hex");
+  const alertStylesReleaseKey = "ui-runtime-20260903";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   for (const asset of [
-    "alerts.css",
     "alerts.js",
     "award-api-config.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  assert.match(fundedAwards, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundedAwards, /institutional-intelligence-core\.js\?v=ai-feedback-20260901/);
-  assert.match(fundedAwards, new RegExp(`app\\.css\\?v=${appCssHash}`));
+  assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundedAwards, /ai-provider\.js\?v=ai-boundaries-20260901/);
   assert.match(fundedAwards, /institutional-intelligence\.css\?v=header-cleanup-20260902/);
   assert.match(fundedAwards, /institutional-intelligence-snapshots\.js\?v=ui-runtime-20260903/);
-  for (const asset of ["alerts.css", "alerts.js"])
-    assert.match(fundingFinder, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  assert.match(fundingFinder, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
+  assert.match(fundingFinder, new RegExp(`alerts\\.js\\?v=${releaseKey}`));
   const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
   assert.ok(opportunityTeamGeneration);
+  const appCssHash = createHash("sha256").update(appCss).digest("hex");
   assert.match(fundingFinder, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(fundingFinder, new RegExp(`app\\.js\\?v=${appJsHash}`));
   assert.match(teamMatch, new RegExp(`app\\.css\\?v=${appCssHash}`));

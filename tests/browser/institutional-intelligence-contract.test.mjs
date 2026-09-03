@@ -419,9 +419,17 @@ test("one ordinary URL-state action coalesces repeated replaceState requests", (
   for (const callback of [...timers.values()]) callback();
   assert.equal(replaceWrites, 1, "identical logical writes must collapse to one URL replacement");
   assert.equal(pushWrites, 0);
+
+  harness.state.historyRestoreDepth = 1;
+  harness.writeHistoryUrlForTest(new URL("https://example.test/funded_awards.html?ii=1&ii_topic=restored"), "replace");
+  assert.equal(replaceWrites, 1, "popstate restoration must not write departing view state into the destination entry");
+
+  const restorationSource = appSource.slice(appSource.indexOf('window.addEventListener("popstate"'), appSource.indexOf("async function initialize("));
+  assert.match(restorationSource, /clearTimeout\(state\.historyStateTimer\)[\s\S]*historyRestoreDepth \+= 1/);
+  assert.ok(restorationSource.indexOf("historyRestoreDepth = Math.max") > restorationSource.indexOf("window.scrollTo"), "restoration remains guarded until focus and scroll are restored");
 });
 
-test("mobile editable controls keep a 16px floor without disabling page zoom", async () => {
+test("touch-first editable controls keep a 16px floor without disabling page zoom", async () => {
   const [appStyles, alertsStyles, awardsStyles, intelligenceStyles, fundedPage] = await Promise.all([
     readFile(new URL("assets/app.css", root), "utf8"),
     readFile(new URL("assets/alerts.css", root), "utf8"),
@@ -429,8 +437,9 @@ test("mobile editable controls keep a 16px floor without disabling page zoom", a
     readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
     readFile(new URL("funded_awards.html", root), "utf8"),
   ]);
-  const mobileFloor = appStyles.slice(appStyles.lastIndexOf("@media (max-width: 820px)"));
+  const mobileFloor = alertsStyles.slice(alertsStyles.lastIndexOf("@media (hover: none) and (pointer: coarse)"));
   assert.match(mobileFloor, /input,[\s\S]*select,[\s\S]*textarea,[\s\S]*contenteditable[\s\S]*font-size:\s*max\(16px, 1em\)\s*!important/);
+  assert.doesNotMatch(appStyles, /@media \(hover: none\) and \(pointer: coarse\)/, "the shared app stylesheet must remain unchanged for Team Match");
   assert.match(alertsStyles, /\.alert-field-grid input,[\s\S]*\.alert-field-grid select/);
   assert.match(awardsStyles, /\.award-field input,[\s\S]*\.award-field select/);
   assert.match(intelligenceStyles, /\.ii-form input,[\s\S]*\.ii-ask textarea,[\s\S]*\.ii-key-fields select/);

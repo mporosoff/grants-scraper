@@ -4556,15 +4556,3 @@ body.chat-expanded .result-assistant.needs-chat-key .chat {
   border-radius: 8px;
   cursor: pointer;
 }
-
-/* iOS Safari zooms focused form controls whose computed text size is below
-   16px. Many compact controls intentionally inherit smaller label text on
-   desktop, so raise only the mobile floor without restricting page zoom. */
-@media (max-width: 820px) {
-  input,
-  select,
-  textarea,
-  [contenteditable]:not([contenteditable="false"]) {
-    font-size: max(16px, 1em) !important;
-  }
-}
