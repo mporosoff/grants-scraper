@@ -139,8 +139,10 @@ jobs:
           pr_url="$(gh pr create --base main --head "$branch" \
             --title "Publish approved researcher registry change" \
             --body "Registry-only publication for approved submission \`$SUBMISSION_ID\`. The approved queue revision is \`$APPROVED_REVISION\`; generated projections and the bounded dependency report were validated before this PR was opened.")"
-          gh pr merge "$pr_url" --squash --auto --delete-branch
           echo "url=$pr_url" >> "$GITHUB_OUTPUT"
+
+      - name: Enable checks-gated auto-merge
+        run: gh pr merge '${{ steps.pull-request.outputs.url }}' --squash --auto --delete-branch
 
       - name: Wait for the protected pull request to merge
         id: merge
@@ -231,10 +233,35 @@ jobs:
         run: |
           merge_sha="$KNOWN_MERGE_SHA"
           pr_state=""
+          auto_merge_enabled="unknown"
+
+          refresh_pr() {
+            local snapshot=""
+            for attempt in $(seq 1 5); do
+              if snapshot="$(gh pr view "$PUBLICATION_PR_URL" --json state,mergeCommit,autoMergeRequest 2>/dev/null)"; then
+                pr_state="$(jq -r '.state // empty' <<<"$snapshot")"
+                merge_sha="$(jq -r '.mergeCommit.oid // empty' <<<"$snapshot")"
+                auto_merge_enabled="$(jq -r 'if .autoMergeRequest == null then "false" else "true" end' <<<"$snapshot")"
+                [ -n "$pr_state" ] && return 0
+              fi
+              sleep 5
+            done
+            return 1
+          }
+
           if [ -z "$merge_sha" ] && [ -n "$PUBLICATION_PR_URL" ]; then
-            pr_state="$(gh pr view "$PUBLICATION_PR_URL" --json state --jq .state 2>/dev/null || true)"
-            if [ "$pr_state" = "MERGED" ]; then
-              merge_sha="$(gh pr view "$PUBLICATION_PR_URL" --json mergeCommit --jq .mergeCommit.oid)"
+            if ! refresh_pr; then
+              echo "::error::Unable to confirm the registry PR state. The queue record remains in publishing state for operator recovery."
+              exit 0
+            fi
+            if [ "$pr_state" = "OPEN" ]; then
+              if [ "$auto_merge_enabled" = "true" ]; then
+                gh pr merge "$PUBLICATION_PR_URL" --disable-auto || true
+              fi
+              if ! refresh_pr; then
+                echo "::error::Unable to confirm that auto-merge is disabled. The queue record remains in publishing state for operator recovery."
+                exit 0
+              fi
             fi
           fi
 
@@ -277,8 +304,15 @@ jobs:
             exit 0
           fi
 
-          if [ "$pr_state" = "OPEN" ]; then
-            gh pr merge "$PUBLICATION_PR_URL" --disable-auto || true
+          if [ -n "$PUBLICATION_PR_URL" ]; then
+            if [ "$pr_state" = "OPEN" ] && [ "$auto_merge_enabled" != "false" ]; then
+              echo "::error::Auto-merge is not confirmed disabled. The queue record remains in publishing state for operator recovery."
+              exit 0
+            fi
+            if [ "$pr_state" != "OPEN" ] && [ "$pr_state" != "CLOSED" ]; then
+              echo "::error::The registry PR is not confirmed safe from a later merge. The queue record remains in publishing state for operator recovery."
+              exit 0
+            fi
           fi
           jq -n --argjson revision "$APPROVED_REVISION" \
             '{expected_revision:$revision,failure_code:"publication_workflow_failed",deployment_result:"workflow_failed"}' \

@@ -102,6 +102,29 @@ export class ResearcherSubmissionStore {
     return row;
   }
 
+  async rebase({ id, expectedRevision, nextGeneration, actor, reason, now }) {
+    const fromStates = ["pending", "under_review", "changes_requested", "publication_failed"];
+    const current = await this.byId(id);
+    if (!current || current.revision !== expectedRevision || !fromStates.includes(current.state)
+        || current.base_registry_generation === nextGeneration) return null;
+    const placeholders = fromStates.map(() => "?").join(", ");
+    const nextRevision = expectedRevision + 1;
+    const auditReason = reason || `Rebased from registry ${current.base_registry_generation} to ${nextGeneration}; administrator re-review required`;
+    const result = await this.db.prepare(`UPDATE researcher_submissions SET
+      state = 'under_review', base_registry_generation = ?, revision = ?, updated_at = ?,
+      administrator_email = ?, administrator_reason = ?, approved_at = NULL,
+      publication_started_at = NULL, failure_code = NULL, deployment_result = NULL
+      WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})
+        AND base_registry_generation <> ?`)
+      .bind(nextGeneration, nextRevision, now, actor, auditReason, id, expectedRevision, ...fromStates, nextGeneration).run();
+    if (Number(result.meta?.changes || 0) !== 1) return null;
+    await this.db.prepare(`INSERT INTO researcher_submission_transitions
+      (submission_id, from_state, to_state, actor, revision, reason, created_at)
+      VALUES (?, ?, 'under_review', ?, ?, ?, ?)`)
+      .bind(id, current.state, actor, nextRevision, auditReason, now).run();
+    return this.byId(id);
+  }
+
   async markPublished(id, values, now) {
     const current = await this.byId(id);
     if (current?.state === "published"

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
@@ -62,6 +63,34 @@ function base64url(value) {
   return Buffer.from(typeof value === "string" ? value : JSON.stringify(value)).toString("base64url");
 }
 
+class D1Statement {
+  constructor(database, sql, values = []) { this.database = database; this.sql = sql; this.values = values; }
+  bind(...values) { return new D1Statement(this.database, this.sql, values); }
+  execute() {
+    const result = this.database.prepare(this.sql).run(...this.values);
+    return { success: true, meta: { changes: Number(result.changes || 0) } };
+  }
+  async run() { return this.execute(); }
+  async first() { return this.database.prepare(this.sql).get(...this.values) || null; }
+  async all() { return { results: this.database.prepare(this.sql).all(...this.values) }; }
+}
+
+class SqliteD1 {
+  constructor(database) { this.database = database; }
+  prepare(sql) { return new D1Statement(this.database, sql); }
+  async batch(statements) {
+    this.database.exec("BEGIN IMMEDIATE");
+    try {
+      const results = statements.map(statement => statement.execute());
+      this.database.exec("COMMIT");
+      return results;
+    } catch (error) {
+      this.database.exec("ROLLBACK");
+      throw error;
+    }
+  }
+}
+
 test("server contract rejects unknown fields and identity contradictions", () => {
   assert.throws(() => validateSubmission({ ...submission(), browser_local_team: ["private"] }), /unsupported fields/);
   assert.throws(() => validateSubmission({ ...submission(), researcher_id: "urh-000001" }), /cannot claim an existing identity/);
@@ -102,6 +131,18 @@ test("public creation is rate bounded, idempotent, and returns the same private 
   assert.equal(secondBody.submission_id, firstBody.submission_id);
   assert.equal(secondBody.status_url, firstBody.status_url);
   assert.equal(store.rows.size, 1);
+});
+
+test("accepted local development origins receive matching CORS headers", async () => {
+  const handler = createHandler({ storeFactory: () => new MemoryStore() });
+  for (const origin of ["http://localhost:8000", "http://127.0.0.1:5500"]) {
+    const response = await handler(new Request("https://worker.example/submissions", {
+      method: "OPTIONS", headers: { Origin: origin },
+    }), environment());
+    assert.equal(response.status, 204);
+    assert.equal(response.headers.get("access-control-allow-origin"), origin);
+    assert.equal(response.headers.get("vary"), "Origin");
+  }
 });
 
 test("admin and publication routes fail closed without their independent credentials", async () => {
@@ -166,7 +207,51 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /if \[ -n "\$merge_sha" \]; then/);
   assert.match(workflow, /queue record remains in publishing state for operator recovery/);
   assert.match(workflow, /--disable-auto/);
+  assert.match(workflow, /--json state,mergeCommit,autoMergeRequest/);
+  assert.match(workflow, /Auto-merge is not confirmed disabled/);
+  assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));
+  assert.match(workerSource, /body\.action === "rebase"/);
+  assert.match(workerSource, /store\.rebase/);
   assert.doesNotMatch(workflow, /playwright|test:e2e/);
+});
+
+test("a failed stale publication can be rebased only through an audited re-review transition", async () => {
+  const database = new DatabaseSync(":memory:");
+  database.exec("PRAGMA foreign_keys = ON");
+  database.exec(migration);
+  const store = new ResearcherSubmissionStore(new SqliteD1(database));
+  const created = await store.create({
+    submissionId: "rs_aaaaaaaaaaaaaaaaaaaaaaaa", idempotencyKey: "12345678-1234-4234-8234-123456789abc",
+    payloadHash: "d".repeat(64), receiptTokenHash: "e".repeat(64), submissionType: "new_researcher_nomination",
+    sourceSurface: "faculty_interests", researcherId: null, baseRegistryGeneration: "a".repeat(64),
+    proposedProfile: submission().proposed_profile, contactEmail: "ada@example.edu", submitterNote: "Review",
+    privacyNoticeVersion: "2026-09-03", createdAt: "2026-09-03T12:00:00.000Z",
+  });
+  const approved = await store.transition({
+    id: created.submission_id, fromStates: ["pending"], toState: "approved", expectedRevision: created.revision,
+    actor: "admin@example.edu", reason: "Approved", approvedProfile: { display_name: "Ada Lovelace" }, now: "2026-09-03T12:01:00.000Z",
+  });
+  const publishing = await store.markPublishing(approved.submission_id, approved.revision, "admin@example.edu", "2026-09-03T12:02:00.000Z");
+  const failed = await store.markPublicationFailed(publishing.submission_id, {
+    expectedRevision: publishing.revision, failureCode: "stale_registry_generation", deploymentResult: "workflow_failed",
+  }, "2026-09-03T12:03:00.000Z");
+  const rebased = await store.rebase({
+    id: failed.submission_id, expectedRevision: failed.revision, nextGeneration: "b".repeat(64),
+    actor: "admin@example.edu", reason: "", now: "2026-09-03T12:04:00.000Z",
+  });
+  assert.equal(rebased.state, "under_review");
+  assert.equal(rebased.revision, failed.revision + 1);
+  assert.equal(rebased.base_registry_generation, "b".repeat(64));
+  assert.equal(rebased.failure_code, null);
+  assert.equal(rebased.deployment_result, null);
+  assert.equal(rebased.publication_started_at, null);
+  assert.equal(rebased.approved_at, null);
+  assert.deepEqual(JSON.parse(rebased.approved_profile_json), { display_name: "Ada Lovelace" });
+  const transitions = database.prepare("SELECT from_state, to_state, revision, reason FROM researcher_submission_transitions WHERE submission_id = ? ORDER BY transition_id").all(rebased.submission_id);
+  assert.deepEqual({ ...transitions.at(-1) }, {
+    from_state: "publication_failed", to_state: "under_review", revision: rebased.revision,
+    reason: `Rebased from registry ${"a".repeat(64)} to ${"b".repeat(64)}; administrator re-review required`,
+  });
 });
 
 test("publication completion is idempotent after a network-ambiguous callback", async () => {
