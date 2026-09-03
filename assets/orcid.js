@@ -41,15 +41,28 @@
 
   function bindInput(input) {
     if (!input || input.dataset.orcidFormatting === "true") return input;
+    const applyFormatting = () => {
+      const formatted = formatInput(input.value);
+      if (input.value !== formatted) input.value = formatted;
+    };
     input.dataset.orcidFormatting = "true";
     input.maxLength = 19;
     input.inputMode = "text";
     input.autocomplete = "off";
     input.pattern = "[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]";
-    input.addEventListener("input", () => {
-      const formatted = formatInput(input.value);
-      if (input.value !== formatted) input.value = formatted;
+    input.addEventListener("paste", event => {
+      const pasted = event.clipboardData?.getData("text") || "";
+      const formatted = formatInput(pasted);
+      if (formatted.length !== 19) return;
+      event.preventDefault();
+      input.value = formatted;
+      if (typeof input.dispatchEvent === "function" && typeof Event === "function") {
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      } else {
+        applyFormatting();
+      }
     });
+    input.addEventListener("input", applyFormatting);
     input.value = formatInput(input.value);
     return input;
   }

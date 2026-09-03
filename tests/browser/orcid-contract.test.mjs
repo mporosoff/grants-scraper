@@ -67,6 +67,13 @@ test("binds a 19-character auto-formatting input contract", () => {
   input.value = "00000002182500971234";
   listeners.input();
   assert.equal(input.value, "0000-0002-1825-0097");
+  let prevented = false;
+  listeners.paste({
+    clipboardData: { getData: () => "https://orcid.org/0000-0002-1825-0097" },
+    preventDefault() { prevented = true; },
+  });
+  assert.equal(prevented, true);
+  assert.equal(input.value, "0000-0002-1825-0097");
 });
 
 test("parses ORCID-linked publications into bounded matching context", () => {
