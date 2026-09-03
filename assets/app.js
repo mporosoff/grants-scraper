@@ -48,7 +48,6 @@
   let pendingCatalogAction = null;
   let catalogActionSequence = 0;
   let firstSearchMarked = false;
-  let savedSearchAlertIntroduced = false;
   const BROAD_OPPORTUNITY_RE = /broad agency announcement|\bbaa\b|continuation of solicitation|office of science financial assistance|long[\s-]?range|research announcement|\broses\b|omnibus|unsolicited proposal|open topic|financial assistance program|annual program statement|office[ -]wide|open[ -]scope solicitation/i;
 
   // --- Anonymous usage logging (Cloudflare Worker + KV) --------------------
@@ -3754,10 +3753,6 @@
       $("alert-panel-summary").textContent = enabled ? "Email alert ready" : "View saved items";
     }
     panel?.classList.toggle("alert-ready", enabled);
-    if (enabled && panel && !savedSearchAlertIntroduced) {
-      if (!globalThis.matchMedia?.("(max-width: 820px)").matches) panel.open = true;
-      savedSearchAlertIntroduced = true;
-    }
   }
 
   function paginationItems(currentPage, totalPages) {

@@ -171,7 +171,7 @@ test("desktop aligns query, submit, and upload while tablet and smaller widths s
   assert.match(mobile, /\.ai-refine-actions \{[\s\S]*?flex-direction: column;/);
 });
 
-test("saved opportunities and email alerts share one panel with the existing responsive open behavior", () => {
+test("saved opportunities and email alerts share one panel without revealing saved notes after a search", () => {
   const $ = load(page);
   assert.equal($("#alerts-panel").length, 0);
   assert.equal($("#saved-panel .profile-search-alert").length, 1);
@@ -179,6 +179,6 @@ test("saved opportunities and email alerts share one panel with the existing res
   assert.match($("#saved-panel > summary strong").text(), /Saved opportunities and email alerts/);
   assert.match(app, /const panel = \$\("saved-panel"\)/);
   assert.match(styles, /\.saved-panel\.alert-ready > summary #alert-panel-summary/);
-  assert.match(app, /if \(!globalThis\.matchMedia\?\.\("\(max-width: 820px\)"\)\.matches\) panel\.open = true/);
-  assert.match(app, /savedSearchAlertIntroduced = true/);
+  assert.doesNotMatch(app, /panel\.open = true/);
+  assert.doesNotMatch(app, /savedSearchAlertIntroduced/);
 });

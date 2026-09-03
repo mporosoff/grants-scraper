@@ -83,7 +83,8 @@ test("Funding Finder has no serious or critical violations across critical state
   await scan(page, "funding-saved-storage-error-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 900 });
   mockAlerts(page);
-  await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#saved-panel > summary").click();
   await page.locator("#alert-new-matches").click();
   const alertDialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(alertDialog).toBeVisible();

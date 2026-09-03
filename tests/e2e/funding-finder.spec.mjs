@@ -314,7 +314,8 @@ for (const fixture of alertErrorCases) {
     mockAlerts(page, fixture);
     await openFundingFinder(page);
     await runFundingSearch(page, "hydrogen catalysis");
-    await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
+    await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+    await page.locator("#saved-panel > summary").click();
     await page.locator("#alert-new-matches").click();
     const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
     await dialog.locator("#alert-email").fill("researcher@example.edu");

@@ -45,6 +45,13 @@
     ));
   }
 
+  function isUppercaseInvestigatorToken(value) {
+    const letters = Array.from(value).filter(character => /\p{L}/u.test(character));
+    return Boolean(letters.length && letters.every(character => (
+      character === character.toLocaleUpperCase("en-US")
+    )));
+  }
+
   function displayInvestigatorName(value) {
     const name = clean(value, 300);
     if (!name) return "";
@@ -59,7 +66,7 @@
       .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
       .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`);
     const normalized = hasUpper && hasLower
-      ? name.replace(INVESTIGATOR_NAME_TOKEN, token => /\p{Lu}{2,}/u.test(token) ? titleCase(token) : token)
+      ? name.replace(INVESTIGATOR_NAME_TOKEN, token => isUppercaseInvestigatorToken(token) ? titleCase(token) : token)
       : titleCase(name);
     return restoreInvestigatorSuffixes(normalized);
   }
