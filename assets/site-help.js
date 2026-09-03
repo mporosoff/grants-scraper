@@ -21,7 +21,7 @@
         <div>
           <span class="help-kicker">Start here</span>
           <h3 id="help-start-title">Search is free. Hosted AI is included.</h3>
-          <p>Funding Finder searches current public opportunities, Funded Awards explores historical NSF, NIH, and DOE projects, and Team Match finds calls for a group. Strong matching and structured award searches do not require an account or your own API key.</p>
+          <p>Funding Finder searches current public opportunities, Funded Awards explores historical NSF, NIH, DOE, and DoD projects, and Team Match finds calls for a group. Strong matching and structured award searches do not require an account or your own API key.</p>
         </div>
         <ol class="help-steps">
           <li><span>1</span><div><strong>Describe what you want to fund</strong><small>Use a topic, method, population, goal, or opportunity number. You may also upload a funding-notice PDF.</small></div></li>
@@ -129,7 +129,7 @@
       <section class="help-section" id="help-awards">
         <div class="help-section-heading">
           <span class="help-section-number">05</span>
-          <div><h3>Explore Funded Awards</h3><p>Use one Funded Award Intelligence search for normalized public NSF, NIH, and DOE Office of Science records without using the opportunity-vector corpus.</p></div>
+          <div><h3>Explore Funded Awards</h3><p>Use one Funded Award Intelligence search for normalized public NSF, NIH, DOE Office of Science, and DoD USAspending records without using the opportunity-vector corpus.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
@@ -138,7 +138,7 @@
           </div>
           <div class="help-card">
             <h4>Start from a current opportunity</h4>
-            <p><strong>View funded awards ↗</strong> carries exact NSF or NIH identifiers, reviewed NSF parent mappings, or defensible DOE FOA/program mappings into Funded Awards. When equivalence is uncertain, the product offers a controlled source search instead of claiming an exact match.</p>
+            <p><strong>View funded awards ↗</strong> carries exact NSF or NIH identifiers, reviewed NSF parent mappings, or defensible DOE FOA/program mappings into Funded Awards. DoD award cards link back to a catalog opportunity only when the USAspending funding-opportunity number has exactly one catalog match. When equivalence is uncertain, the product does not claim a match.</p>
           </div>
         </div>
       </section>
@@ -151,7 +151,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Resolve an institution</h4>
-            <p>Use the optional institution field in Funded Award Intelligence and start typing a name, acronym, or alias. Autocomplete uses the open Research Organization Registry (ROR), while award requests preserve the canonical and source-specific institution identities used by NSF, NIH, and DOE.</p>
+            <p>Use the optional institution field in Funded Award Intelligence and start typing a name, acronym, or alias. Autocomplete uses the open Research Organization Registry (ROR), while award requests preserve the canonical and source-specific institution identities used by NSF, NIH, DOE, and DoD.</p>
           </div>
           <div class="help-card">
             <h4>Filter or ask a question</h4>

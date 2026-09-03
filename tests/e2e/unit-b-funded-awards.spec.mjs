@@ -57,15 +57,15 @@ test("program filtering requires one source before a snapshot is created", async
   const { calls } = await openSearch(page);
   await page.locator("#ii-program").fill("BES");
   await page.locator("#ii-search").click();
-  await expect(page.locator("#ii-status")).toContainText("Choose NSF, NIH, or DOE");
+  await expect(page.locator("#ii-status")).toContainText("Choose NSF, NIH, DOE, or DoD");
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(0);
 });
 
 test("each agency hydrates independently in batches no larger than 25", async ({ page }) => {
-  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 26, NIH: 26, DOE: 26 } });
+  const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 26, NIH: 26, DOE: 26, DOD: 26 } });
   await searchTopic(page, "catalysis", "all");
-  await expect(page.locator("#ii-metrics .ii-metric").first()).toContainText("78");
-  for (const source of ["NSF", "NIH", "DOE"]) {
+  await expect(page.locator("#ii-metrics .ii-metric").first()).toContainText("104");
+  for (const source of ["NSF", "NIH", "DOE", "DOD"]) {
     const button = page.locator(`[data-ii-load-source="${source}"]`);
     await expect(button).toContainText(`Load up to 25 more ${source} awards`);
     await button.click();
@@ -73,7 +73,7 @@ test("each agency hydrates independently in batches no larger than 25", async ({
     await expect(button).toHaveCount(0);
   }
   const batchCalls = calls.filter(call => call.source && Number.isInteger(call.offset));
-  expect(batchCalls.map(call => [call.source, call.offset])).toEqual([["NSF", 25], ["NIH", 25], ["DOE", 25]]);
+  expect(batchCalls.map(call => [call.source, call.offset])).toEqual([["NSF", 25], ["NIH", 25], ["DOE", 25], ["DOD", 25]]);
   expect(runtimeErrors).toEqual([]);
 });
 

@@ -126,6 +126,7 @@ test("existing institution identities retain source-specific award query identif
   assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
   assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
   assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
+  assert.deepEqual(rochester.sources.DOD.uei, ["F27KDXZMF9Y8"]);
   const mit = institutionFromRor(rankRorOrganizations(aliases.MIT.items, "MIT")[0], "Massachusetts Institute of Technology");
   assert.equal(mit.ror_id, "https://ror.org/042nb2s44");
   assert.equal(mit.sources.NSF.search_name, "Massachusetts Institute of Technology");
@@ -148,7 +149,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
     year_end: 2026,
   });
   assert.deepEqual(plain(request), {
-    sources: ["NSF", "NIH", "DOE"],
+    sources: ["NSF", "NIH", "DOE", "DOD"],
     criteria: {
       institution: "Massachusetts Institute of Technology",
       institution_id: "https://ror.org/042nb2s44",
@@ -176,7 +177,10 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.throws(() => core.buildAwardRequest({ agency: "all" }), /Enter an institution, topic, program, investigator, or program officer/);
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
-  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, DOE, or DoD/);
+  assert.deepEqual(plain(core.programCriterion("DOD", "12.800")), { program: "12.800" });
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", pi: "Ada Investigator" }), /do not provide investigator fields/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", program_officer: "Alex Officer" }), /do not provide program-officer fields/);
   assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
@@ -594,8 +598,13 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     deploymentSource.indexOf("Run bounded exact-source smokes"),
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
-  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.2\.0"/);
-  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.2\.0"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.3\.0"/);
+  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.3\.0"/);
+  assert.match(appSource, /\$\{displaySource\} · \$\{mechanism\}/);
+  assert.match(appSource, /Assistance Listing:/);
+  assert.match(appSource, /USAspending does not publish investigator names or an award abstract/);
+  assert.match(appSource, /isDod \? "" : `<details class="ii-award-abstract"/);
+  assert.match(appSource, /Original funding opportunity/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(

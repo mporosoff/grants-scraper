@@ -100,7 +100,7 @@ test("standalone searches use source-native criteria and never opportunity seman
     year_end: "2026",
     offset: 0,
   }, null, 25);
-  assert.deepEqual(Array.from(topic.sources), ["NSF", "NIH", "DOE"]);
+  assert.deepEqual(Array.from(topic.sources), ["NSF", "NIH", "DOE", "DOD"]);
   assert.equal(topic.limit, 10, "a mixed-source request honors the polite DOE page bound");
   assert.equal(topic.criteria.topic, "CO2 hydrogenation methanol catalyst");
   assert.equal(topic.criteria.institution, "University of Rochester");
@@ -123,6 +123,15 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.deepEqual(Array.from(doeProgram.sources), ["DOE"]);
   assert.deepEqual(JSON.parse(JSON.stringify(doeProgram.criteria)), { program: "Catalysis" });
   assert.equal(doeProgram.limit, 10);
+  const dodProgram = product.buildRequest({
+    mode: "program",
+    agency: "DOD",
+    query: "12.800",
+    offset: 0,
+  }, null, 25);
+  assert.deepEqual(Array.from(dodProgram.sources), ["DOD"]);
+  assert.deepEqual(JSON.parse(JSON.stringify(dodProgram.criteria)), { program: "12.800" });
+  assert.throws(() => product.buildRequest({ mode: "program", agency: "DOD", query: "Defense Research" }, null, 25), /Assistance Listing/);
   assert.deepEqual(JSON.parse(JSON.stringify(product.buildRequest({
     mode: "pi", agency: "NSF", query: "Ada Investigator", offset: 0,
   }, null, 25).criteria)), { pi: "Ada Investigator" });
@@ -192,7 +201,7 @@ test("investigator names use consistent display capitalization without changing 
 });
 
 test("the standalone product exposes the Phase 2 controls, state, provenance, and source isolation", () => {
-  assert.match(page, /<h1 id="page-title">See what NSF, NIH, and DOE have funded<\/h1>/);
+  assert.match(page, /<h1 id="page-title">See what NSF, NIH, DOE, and DoD have funded<\/h1>/);
   for (const id of [
     "selected-opportunity", "award-search-form", "award-query", "search-mode",
     "award-institution", "award-agency", "year-start", "year-end",
@@ -240,6 +249,17 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(page, /<a class="skip-link" href="#institutional-intelligence">/);
   assert.match(page, /id="award-results"[^>]*tabindex="-1"/);
   assert.match(page, /tabindex="-1">Funded projects/);
+});
+
+test("DoD cards expose source-accurate assistance details without empty scientific sections", () => {
+  assert.match(page, /<option value="DOD">Department of Defense<\/option>/);
+  assert.match(appSource, /source\.toUpperCase\(\) === "DOD" \? "DoD"/);
+  assert.match(appSource, /Assistance Listing:/);
+  assert.match(appSource, /Obligated amount/);
+  assert.match(appSource, /Principal investigator and scientific abstract are not provided by USAspending/);
+  assert.match(appSource, /isDod \? `[^`]*award-source-limitation[^`]*` : `<section class="award-abstract"/s);
+  assert.match(appSource, /View original funding opportunity/);
+  assert.match(styles, /\.award-source-limitation/);
 });
 
 test("the historical Phase 2 evidence remains authoritative while Phase 4 extends its adapter boundary", () => {

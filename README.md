@@ -127,9 +127,12 @@ search. Team Match's local directory distinguishes 118 main-pool, 35 standby,
 and 3 directory-only profiles while preserving saved researchers, ORCID, and
 the four-person limit. See `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md`.
 
-Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
-Office of Science awards through the sources' native fields, keeps the adapters
-separate, and preserves direct-field or official-record contact provenance.
+Funded Awards is the third public surface. It searches public NSF, NIH, DOE
+Office of Science, and DoD assistance awards through the sources' native fields,
+keeps the adapters separate, and preserves direct-field or official-record
+contact provenance. DoD records come from USAspending and are limited to prime
+Project Grants and Cooperative Agreements; they do not provide investigator
+names or award abstracts.
 Eligible Funding Finder cards open it in a new tab only for exact or explicitly
 reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
 title similarity.
@@ -269,9 +272,9 @@ support it.
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public opportunity search and AI-refinement interface |
 | `team_match.html` | Public multi-researcher opportunity-matching interface |
-| `funded_awards.html` | Public NSF/NIH/DOE historical-award search, Institutional Intelligence, and current-opportunity deep links |
+| `funded_awards.html` | Public NSF/NIH/DOE/DoD historical-award search, Institutional Intelligence, and exact current-opportunity deep links |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
-| `assets/award-links.js` | Exact NIH and exact/reviewed-parent NSF opportunity-to-award mappings |
+| `assets/award-links.js` | Exact NIH/DOE and exact/reviewed-parent NSF opportunity-to-award mappings plus fail-closed DoD award-to-opportunity links |
 | `assets/funded-awards-core.js` | Source-native award-query, institution-summary, and pagination contracts |
 | `assets/institutional-intelligence-core.js` | Structured institution filters, URL state, and normalized award aggregation |
 | `assets/institutional-intelligence.js` | ROR autocomplete, institutional drill-downs, and optional shared-provider question translation |
@@ -320,7 +323,7 @@ support it.
 | `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
 | `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md` | Opportunity-role evidence, team assembly, replacement, and staged expansion contract |
 | `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
-| `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, and ROR normalization Worker |
+| `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, DoD, and ROR normalization Worker |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |

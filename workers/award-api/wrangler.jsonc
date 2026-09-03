@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "funding-finder-award-api",
   "main": "src/index.js",
-  "compatibility_date": "2026-08-23",
+  "compatibility_date": "2026-09-03",
   "workers_dev": true,
   "limits": {
     "cpu_ms": 250

@@ -1,4 +1,4 @@
-const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE"]);
+const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE", "DOD"]);
 export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
 export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
@@ -438,6 +438,7 @@ function sourceState(source, payload, normalizedResultCount = null) {
     safety_bound_reached: payload.safety_bound_reached === true,
     year_filter: payload.year_filter,
     health: payload.health,
+    capabilities: payload.capabilities,
     retrieved_at: payload.retrieved_at,
     recency_order: complete ? "verified_complete_snapshot" : "available_snapshot_only",
   };

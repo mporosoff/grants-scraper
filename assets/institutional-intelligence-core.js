@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+  const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
     "ii_topic", "ii_pi", "ii_pi_identity", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
@@ -83,7 +83,7 @@
     const value = clean(program, 160);
     if (!value) return {};
     if (!SOURCE_NAMES.includes(source)) {
-      throw new Error("Choose NSF, NIH, or DOE before filtering by a program.");
+      throw new Error("Choose NSF, NIH, DOE, or DoD before filtering by a program.");
     }
     if (source === "DOE") {
       const office = DOE_PROGRAM_OFFICES.get(identityKey(value));
@@ -110,6 +110,12 @@
     const topic = clean(state?.topic, 500);
     const pi = clean(state?.pi, 160);
     const programOfficer = clean(state?.program_officer, 160);
+    if (agency === "DOD" && pi) {
+      throw new Error("DoD USAspending records do not provide investigator fields. Remove the investigator filter or choose another agency.");
+    }
+    if (agency === "DOD" && programOfficer) {
+      throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
+    }
     const yearStart = validYear(state?.year_start);
     const yearEnd = validYear(state?.year_end);
     if (topic) criteria.topic = topic;
@@ -471,7 +477,7 @@
     const uniqueIds = new Set();
     for (const award of Array.isArray(results) ? results : []) {
       const id = evidenceId(award);
-      if (!/^(?:NSF|NIH|DOE):.+/.test(id) || uniqueIds.has(id)) continue;
+      if (!/^(?:NSF|NIH|DOE|DOD):.+/.test(id) || uniqueIds.has(id)) continue;
       uniqueIds.add(id);
       unique.push(award);
     }
@@ -539,7 +545,12 @@
     let answer;
     if (resolvedIntent === "investigators") {
       const people = safeAggregate.investigators.map(person => `${displayInvestigatorName(person.name)} (${person.projects} award${person.projects === 1 ? "" : "s"} in these results)`);
-      answer = people.length ? `Investigators in these results: ${people.join("; ")}.` : "No investigator names appear in these results.";
+      const includesDod = sources.some(source => clean(source?.source, 10).toUpperCase() === "DOD");
+      answer = people.length
+        ? `Listed investigators in these results: ${people.join("; ")}.`
+        : includesDod
+          ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards, so this is not evidence that those projects have no investigators."
+          : "No investigator names appear in these results.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
       answer = programs.length ? `Programs in these results: ${programs.join("; ")}.` : "No program labels appear in these results.";
@@ -712,7 +723,7 @@
         const candidate = clean(match[1], 160)
           .replace(/[.,;:]+$/u, "")
           .replace(/^(?:Dr|Doctor|Prof|Professor|Mr|Ms|Mrs|Mx)\.?\s+/u, "");
-        if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        if (/\b(?:DOD|DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
         if (identityKey(candidate) === identityKey(topic)) continue;

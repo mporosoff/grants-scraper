@@ -39,6 +39,11 @@
     return String(value || "").replace(/\s+/g, " ").trim();
   }
 
+  function sourceLabel(value) {
+    const source = clean(value);
+    return source.toUpperCase() === "DOD" ? "DoD" : source;
+  }
+
   function renderAbstract(value) {
     const sourceText = String(value ?? "").replace(/\r\n?/g, "\n").trim();
     const paragraphs = sourceText
@@ -178,7 +183,7 @@
         : "topic";
     $("award-query").value = query;
     $("search-mode").value = validModes.includes(requestedMode) ? requestedMode : inferredMode;
-    $("award-agency").value = ["NSF", "NIH", "DOE"].includes(params.get("agency")) ? params.get("agency") : "all";
+    $("award-agency").value = ["NSF", "NIH", "DOE", "DOD"].includes(params.get("agency")) ? params.get("agency") : "all";
     const defaultInstitution = loadDefaultInstitution();
     const urlInstitution = clean(params.get("institution"));
     $("award-institution").value = urlInstitution || defaultInstitution;
@@ -279,27 +284,40 @@
       .map(person => contactLine(person, award.source, officialUrl))
       .join("");
     const awardYear = productApi.awardYear(award.award_year);
+    const isDod = clean(award.source).toUpperCase() === "DOD";
+    const displaySource = sourceLabel(award.source);
+    const mechanism = clean(award.funding_mechanism);
+    const subagency = clean(award.subagency || award.agency);
+    const assistanceListings = (Array.isArray(award.program_codes) ? award.program_codes : [])
+      .map(clean).filter(Boolean).join(", ");
+    const fundingOpportunity = linksApi.opportunityForAward?.(award) || null;
+    const fundingOpportunityUrl = fundingOpportunity ? linksApi.opportunityHref?.(fundingOpportunity) || "" : "";
+    const investigatorSummary = primaryNames.join(" · ") || "Investigator not listed";
+    const amountLabel = isDod ? "Obligated amount" : "Award amount";
     return `<article class="award-card" data-source="${escapeAttribute(award.source)}" data-award-id="${escapeAttribute(id)}" aria-labelledby="award-title-${position}">
       <div class="award-card-topline">
-        <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : "open"}">${escapeHtml(award.source)}</span>
+        <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : isDod ? "dod" : "open"}">${escapeHtml(isDod && mechanism ? `${displaySource} · ${mechanism}` : displaySource)}</span>
         <span class="opportunity-number">Award ${escapeHtml(id)}</span>
         ${awardYear !== null ? `<span class="listed-date">Award year ${escapeHtml(awardYear)}</span>` : ""}
       </div>
       <h4 id="award-title-${position}">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h4>
-      <p class="award-people"><strong>${escapeHtml(primaryNames.join(" · ") || "Investigator not listed")}</strong> · ${escapeHtml(institution)}</p>
-      <p class="award-program-line">${escapeHtml(award.agency || award.source)} · ${escapeHtml(program)}</p>
+      <p class="award-people">${isDod ? `<strong>${escapeHtml(institution)}</strong>` : `<strong>${escapeHtml(investigatorSummary)}</strong> · ${escapeHtml(institution)}`}</p>
+      <p class="award-program-line">${escapeHtml(isDod ? subagency : award.agency || displaySource)} · ${escapeHtml(program)}</p>
+      ${isDod && assistanceListings ? `<p class="award-program-line"><strong>Assistance Listing:</strong> ${escapeHtml(assistanceListings)}</p>` : ""}
+      ${award.organization_department ? `<p class="award-program-line"><strong>Awarding office:</strong> ${escapeHtml(award.organization_department)}</p>` : ""}
       <div class="award-facts">
         <div class="award-fact"><span>Project dates</span><strong>${escapeHtml(dates)}</strong></div>
-        <div class="award-fact"><span>Award amount</span><strong>${escapeHtml(formatMoney(award.total_award))}</strong></div>
+        <div class="award-fact"><span>${escapeHtml(amountLabel)}</span><strong>${escapeHtml(formatMoney(award.total_award))}</strong></div>
         <div class="award-fact"><span>Amount basis</span><strong>${escapeHtml(clean(award.award_amount_basis)?.replaceAll("_", " ") || "Not listed")}</strong></div>
       </div>
-      <section class="award-abstract" aria-label="Award abstract">
+      ${isDod ? `<p class="award-source-limitation">Principal investigator and scientific abstract are not provided by USAspending.</p>` : `<section class="award-abstract" aria-label="Award abstract">
         <h5>Abstract</h5>
         ${renderAbstract(award.abstract)}
-      </section>
+      </section>`}
       ${contacts ? `<section class="award-contacts" aria-label="Public award contacts"><h5>Investigators and program contacts</h5><ul>${contacts}</ul></section>` : ""}
       <div class="award-card-actions">
         ${officialUrl ? `<a class="source-action primary" href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">View official award ↗</a>` : ""}
+        ${fundingOpportunityUrl ? `<a class="source-action secondary" href="${escapeAttribute(fundingOpportunityUrl)}" target="_blank" rel="noopener">View original funding opportunity ↗</a>` : ""}
       </div>
     </article>`;
   }
@@ -332,7 +350,7 @@
       `<button class="pi-summary-button" type="button" data-award-pi="${escapeAttribute(person.query || person.name)}">${escapeHtml(person.name)} · ${person.projects.toLocaleString()} ${person.projects === 1 ? "project" : "projects"}</button>`
     )).join("");
     node.innerHTML = `<h3 id="institution-summary-heading">${escapeHtml(summary.institution)}</h3>
-      <p class="summary-counts"><span><strong>${summary.projects.toLocaleString()}</strong> funded projects in this result page</span><span><strong>${summary.investigators.length.toLocaleString()}</strong> investigators</span></p>
+      <p class="summary-counts"><span><strong>${summary.projects.toLocaleString()}</strong> funded projects in this result page</span><span><strong>${summary.investigators.length.toLocaleString()}</strong> listed investigators</span></p>
       ${investigators ? `<div class="pi-summary-list" aria-label="Filter by investigator">${investigators}</div>` : ""}`;
     node.classList.remove("hidden");
   }
@@ -349,7 +367,7 @@
     )));
     const institutions = new Set(results.map(award => clean(award?.institution?.normalized_name || award?.institution?.name)).filter(Boolean));
     const yearRange = productApi.awardYearRange(results) || "Years not listed";
-    node.innerHTML = `<h3>Result-page summary</h3><p class="summary-counts"><span><strong>${results.length.toLocaleString()}</strong> funded projects</span><span><strong>${investigators.size.toLocaleString()}</strong> unique investigators</span><span><strong>${institutions.size.toLocaleString()}</strong> institutions</span><span>${escapeHtml(yearRange)}</span></p>`;
+    node.innerHTML = `<h3>Result-page summary</h3><p class="summary-counts"><span><strong>${results.length.toLocaleString()}</strong> funded projects</span><span><strong>${investigators.size.toLocaleString()}</strong> unique listed investigators</span><span><strong>${institutions.size.toLocaleString()}</strong> institutions</span><span>${escapeHtml(yearRange)}</span></p>`;
     node.classList.remove("hidden");
   }
 
@@ -368,7 +386,7 @@
         if (!records.length) return "";
         const cards = records.map(award => awardCard(award, position++)).join("");
         return `<section class="award-source-section" aria-labelledby="source-${source.toLowerCase()}">
-          <div class="award-source-heading"><h3 id="source-${source.toLowerCase()}">${escapeHtml(source)} awards</h3><p>Source-native order; no cross-source reranking</p></div>
+          <div class="award-source-heading"><h3 id="source-${source.toLowerCase()}">${escapeHtml(sourceLabel(source))} awards</h3><p>Source-native order; no cross-source reranking</p></div>
           <div class="award-card-list">${cards}</div>
         </section>`;
       }).join("");
@@ -532,7 +550,7 @@
       $("award-results").classList.add("hidden");
       $("ii-institution").value = institution;
       $("ii-institution").dispatchEvent(new Event("input", { bubbles: true }));
-      $("ii-agency").value = ["NSF", "NIH", "DOE"].includes(source) ? source : "all";
+      $("ii-agency").value = ["NSF", "NIH", "DOE", "DOD"].includes(source) ? source : "all";
       $("ii-program").value = "";
       $("ii-topic").value = "";
       $("ii-pi").value = investigator;
