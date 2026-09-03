@@ -104,12 +104,15 @@ export class ResearcherSubmissionStore {
       approved_profile_json = COALESCE(?, approved_profile_json),
       approved_at = CASE WHEN ? = 'approved' THEN ? ELSE approved_at END,
       publication_started_at = COALESCE(?, publication_started_at),
-      failure_code = CASE WHEN ? = 'publication_failed' THEN failure_code ELSE NULL END
+      failure_code = CASE WHEN ? = 'publication_failed' THEN failure_code ELSE NULL END,
+      publication_target_pr_url = CASE WHEN ? = 'publishing' THEN NULL ELSE publication_target_pr_url END,
+      publication_target_registry_generation = CASE WHEN ? = 'publishing' THEN NULL ELSE publication_target_registry_generation END
       WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})`)
       .bind(
         toState, nextRevision, now, actor, reason || null,
         approvedProfile ? JSON.stringify(approvedProfile) : null,
-        toState, now, publicationStartedAt, toState, id, expectedRevision, ...fromStates,
+        toState, now, publicationStartedAt, toState, toState, toState,
+        id, expectedRevision, ...fromStates,
       );
     const audit = this.auditStatement({
       id, fromState: current.state, toState, actor, revision: nextRevision, reason, now,
@@ -126,6 +129,30 @@ export class ResearcherSubmissionStore {
     return row;
   }
 
+  async recordPublicationTarget(id, values, now) {
+    const current = await this.byId(id);
+    if (current?.state === "publishing"
+        && current.revision === values.expectedRevision
+        && current.publication_target_pr_url === values.prUrl
+        && current.publication_target_registry_generation === values.registryGeneration) {
+      return current;
+    }
+    if (!current || current.state !== "publishing" || current.revision !== values.expectedRevision
+        || current.publication_target_pr_url || current.publication_target_registry_generation) return null;
+    const result = await this.db.prepare(`UPDATE researcher_submissions SET
+      publication_target_pr_url = ?, publication_target_registry_generation = ?, updated_at = ?
+      WHERE submission_id = ? AND state = 'publishing' AND revision = ?
+        AND publication_target_pr_url IS NULL AND publication_target_registry_generation IS NULL`)
+      .bind(values.prUrl, values.registryGeneration, now, id, values.expectedRevision).run();
+    if (Number(result.meta?.changes || 0) === 1) return this.byId(id);
+    const raced = await this.byId(id);
+    return raced?.state === "publishing"
+      && raced.revision === values.expectedRevision
+      && raced.publication_target_pr_url === values.prUrl
+      && raced.publication_target_registry_generation === values.registryGeneration
+      ? raced : null;
+  }
+
   async rebase({ id, expectedRevision, nextGeneration, actor, reason, now }) {
     const fromStates = ["pending", "under_review", "changes_requested", "approved", "publication_failed"];
     const current = await this.byId(id);
@@ -137,7 +164,8 @@ export class ResearcherSubmissionStore {
     const update = this.db.prepare(`UPDATE researcher_submissions SET
       state = 'under_review', base_registry_generation = ?, revision = ?, updated_at = ?,
       administrator_email = ?, administrator_reason = ?, approved_profile_json = NULL, approved_at = NULL,
-      publication_started_at = NULL, failure_code = NULL, deployment_result = NULL
+      publication_started_at = NULL, publication_target_pr_url = NULL,
+      publication_target_registry_generation = NULL, failure_code = NULL, deployment_result = NULL
       WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})
         AND base_registry_generation <> ?`)
       .bind(nextGeneration, nextRevision, now, actor, auditReason, id, expectedRevision, ...fromStates, nextGeneration);
@@ -164,7 +192,7 @@ export class ResearcherSubmissionStore {
       WHERE submission_id = ? AND state = 'publishing' AND revision = ?`)
       .bind(nextRevision, now, now, values.commitSha, values.registryGeneration, values.deploymentResult, values.verifiedAt, id, current.revision);
     const audit = this.auditStatement({
-      id, fromState: "publishing", toState: "published", actor: "publication_workflow",
+      id, fromState: "publishing", toState: "published", actor: values.actor || "publication_workflow",
       revision: nextRevision, reason: values.commitSha, now,
     });
     return this.commitStateChange(update, audit, id);
@@ -178,7 +206,7 @@ export class ResearcherSubmissionStore {
       updated_at = ?, failure_code = ?, deployment_result = ? WHERE submission_id = ? AND state = 'publishing' AND revision = ?`)
       .bind(nextRevision, now, values.failureCode, values.deploymentResult || null, id, current.revision);
     const audit = this.auditStatement({
-      id, fromState: "publishing", toState: "publication_failed", actor: "publication_workflow",
+      id, fromState: "publishing", toState: "publication_failed", actor: values.actor || "publication_workflow",
       revision: nextRevision, reason: values.failureCode, now,
     });
     return this.commitStateChange(update, audit, id);

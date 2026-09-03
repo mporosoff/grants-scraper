@@ -4,15 +4,16 @@ import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
-import { createHandler, seedApprovedProfile } from "../../workers/researcher-intake/src/index.js";
+import { createHandler, reconcilePublication, seedApprovedProfile } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, storeSource, migration, transitionMigration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, transitionMigration, targetMigration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0002_unique_transition_revisions.sql", root), "utf8"),
+  readFile(new URL("workers/researcher-intake/migrations/0003_publication_recovery_target.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-researcher-intake.yml", root), "utf8"),
@@ -137,6 +138,12 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
       /positive integer/,
     );
   }
+  assert.throws(
+    () => validateAdminProfile({
+      ...dateProfile, claims: [{ ...validClaim, claim_id: "urh-999999-c001" }],
+    }, ""),
+    /cannot preassign claim identifiers/,
+  );
 });
 
 test("correction approval defaults apply submitted additions and retirements", () => {
@@ -257,6 +264,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
     assert.match(migration, new RegExp(`'${state}'`));
   }
   assert.match(transitionMigration, /UNIQUE INDEX IF NOT EXISTS researcher_submission_transitions_revision_idx/);
+  assert.match(targetMigration, /publication_target_pr_url/);
+  assert.match(targetMigration, /publication_target_registry_generation/);
   assert.match(wrangler, /SUBMISSION_RATE_LIMITER/);
   assert.match(workerSource, /cf-access-jwt-assertion/);
   assert.match(workerSource, /crypto\.subtle\.verify/);
@@ -277,6 +286,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /Refuse every non-allowlisted path/);
   assert.match(workflow, /config\/researcher_registry\.json/);
   assert.match(workflow, /Mark the queue record published only after live verification/);
+  assert.match(workflow, /Record the recoverable publication target before merge/);
+  assert.match(workflow, /\/internal\/publications\/\$SUBMISSION_ID\/target/);
   assert.match(workflow, /Reconcile a failed publication without misreporting a merged change/);
   assert.match(workflow, /if \[ -n "\$merge_sha" \]; then/);
   assert.match(workflow, /queue record remains in publishing state for operator recovery/);
@@ -287,11 +298,15 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.ok(workflow.indexOf('gh pr close "$PUBLICATION_PR_URL"') < workflow.indexOf('[ "$pr_state" != "CLOSED" ]'));
   assert.ok(workflow.indexOf('[ "$pr_state" != "CLOSED" ]') < workflow.indexOf('"$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"'));
   assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));
+  assert.ok(workflow.indexOf("Record the recoverable publication target before merge") < workflow.indexOf("Enable checks-gated auto-merge"));
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);
   assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
   assert.match(workerSource, /\["approved", "publication_failed"\]\.includes\(current\.state\)/);
+  assert.match(workerSource, /body\.action === "reconcile_publish"/);
+  assert.match(workerSource, /data-action="reconcile_publish"/);
+  assert.match(workerSource, /publication_target_registry_generation/);
   assert.match(storeSource, /"changes_requested", "approved", "publication_failed"/);
   assert.doesNotMatch(workflow, /playwright|test:e2e/);
 });
@@ -301,6 +316,7 @@ test("a failed stale publication can be rebased only through an audited re-revie
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(migration);
   database.exec(transitionMigration);
+  database.exec(targetMigration);
   const store = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await store.create({
     submissionId: "rs_aaaaaaaaaaaaaaaaaaaaaaaa", idempotencyKey: "12345678-1234-4234-8234-123456789abc",
@@ -343,6 +359,7 @@ test("state updates roll back when their audit insert fails", async () => {
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(migration);
   database.exec(transitionMigration);
+  database.exec(targetMigration);
   const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await normalStore.create({
     submissionId: "rs_bbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "22345678-1234-4234-8234-123456789abc",
@@ -381,6 +398,7 @@ test("an approved record can resume publication or rebase after a transient tran
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(migration);
   database.exec(transitionMigration);
+  database.exec(targetMigration);
   const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
   async function approvedRecord(id, key) {
     const created = await normalStore.create({
@@ -419,6 +437,24 @@ test("an approved record can resume publication or rebase after a transient tran
   assert.equal(stillApproved.revision, resumable.revision);
   const publishing = await normalStore.markPublishing(stillApproved.submission_id, stillApproved.revision, "admin@example.edu", "2026-09-03T12:03:00.000Z");
   assert.equal(publishing.state, "publishing");
+  const targeted = await normalStore.recordPublicationTarget(publishing.submission_id, {
+    expectedRevision: publishing.revision,
+    prUrl: "https://github.com/mporosoff/grants-scraper/pull/999",
+    registryGeneration: "c".repeat(64),
+  }, "2026-09-03T12:03:10.000Z");
+  assert.equal(targeted.publication_target_registry_generation, "c".repeat(64));
+  assert.equal((await normalStore.recordPublicationTarget(publishing.submission_id, {
+    expectedRevision: publishing.revision,
+    prUrl: "https://github.com/mporosoff/grants-scraper/pull/999",
+    registryGeneration: "c".repeat(64),
+  }, "2026-09-03T12:03:20.000Z")).revision, publishing.revision);
+  const failed = await normalStore.markPublicationFailed(publishing.submission_id, {
+    expectedRevision: publishing.revision, failureCode: "pull_request_closed",
+    deploymentResult: "pull_request_closed_without_merge",
+  }, "2026-09-03T12:03:30.000Z");
+  const retried = await normalStore.markPublishing(failed.submission_id, failed.revision, "admin@example.edu", "2026-09-03T12:03:40.000Z");
+  assert.equal(retried.publication_target_pr_url, null);
+  assert.equal(retried.publication_target_registry_generation, null);
 
   const stale = await approvedRecord("rs_eeeeeeeeeeeeeeeeeeeeeeee", "52345678-1234-4234-8234-123456789abc");
   const rebased = await normalStore.rebase({
@@ -427,6 +463,69 @@ test("an approved record can resume publication or rebase after a transient tran
   });
   assert.equal(rebased.state, "under_review");
   assert.equal(rebased.approved_profile_json, null);
+});
+
+test("publishing reconciliation requires a merged pull request and the exact live generation", async () => {
+  const targetGeneration = "c".repeat(64);
+  const mergeCommit = "b".repeat(40);
+  const current = {
+    submission_id: "rs_ffffffffffffffffffffffff", state: "publishing", revision: 3,
+    publication_target_pr_url: "https://github.com/mporosoff/grants-scraper/pull/999",
+    publication_target_registry_generation: targetGeneration,
+  };
+  const env = {
+    GITHUB_REPOSITORY: "mporosoff/grants-scraper", GITHUB_DISPATCH_TOKEN: "github-token",
+    REGISTRY_MANIFEST_URL: "https://site.example/data/researcher_registry_manifest.json",
+  };
+  function fetchFor({ merged = true, generation = targetGeneration } = {}) {
+    return async url => {
+      if (url === "https://api.github.com/repos/mporosoff/grants-scraper/pulls/999") {
+        return new Response(JSON.stringify({ state: "closed", merged, merge_commit_sha: merged ? mergeCommit : null }));
+      }
+      if (url === env.REGISTRY_MANIFEST_URL) {
+        return new Response(JSON.stringify({ registry_generation: generation }));
+      }
+      throw new Error(`Unexpected URL ${url}`);
+    };
+  }
+  const publishedCalls = [];
+  const store = {
+    async markPublished(id, values) {
+      publishedCalls.push({ id, values });
+      return { ...current, state: "published", revision: 4 };
+    },
+  };
+  const published = await reconcilePublication({
+    store, current, expectedRevision: 3, actor: "admin@example.edu", env,
+    fetchImpl: fetchFor(), timestamp: "2026-09-03T12:05:00.000Z",
+  });
+  assert.equal(published.state, "published");
+  assert.equal(publishedCalls[0].values.commitSha, mergeCommit);
+  assert.equal(publishedCalls[0].values.registryGeneration, targetGeneration);
+  assert.equal(publishedCalls[0].values.actor, "admin@example.edu");
+
+  await assert.rejects(
+    reconcilePublication({
+      store, current, expectedRevision: 3, actor: "admin@example.edu", env,
+      fetchImpl: fetchFor({ generation: "a".repeat(64) }), timestamp: "2026-09-03T12:06:00.000Z",
+    }),
+    /not served yet/,
+  );
+  assert.equal(publishedCalls.length, 1);
+
+  const failureCalls = [];
+  const failed = await reconcilePublication({
+    store: {
+      async markPublicationFailed(id, values) {
+        failureCalls.push({ id, values });
+        return { ...current, state: "publication_failed", revision: 4 };
+      },
+    },
+    current, expectedRevision: 3, actor: "admin@example.edu", env,
+    fetchImpl: fetchFor({ merged: false }), timestamp: "2026-09-03T12:07:00.000Z",
+  });
+  assert.equal(failed.state, "publication_failed");
+  assert.equal(failureCalls[0].values.actor, "admin@example.edu");
 });
 
 test("publication completion is idempotent after a network-ambiguous callback", async () => {
@@ -456,6 +555,7 @@ test("retention clears private fields from collection time despite later activit
   database.exec("PRAGMA foreign_keys = ON");
   database.exec(migration);
   database.exec(transitionMigration);
+  database.exec(targetMigration);
   const store = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await store.create({
     submissionId: "rs_cccccccccccccccccccccccc", idempotencyKey: "32345678-1234-4234-8234-123456789abc",

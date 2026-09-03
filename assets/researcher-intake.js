@@ -36,22 +36,25 @@
     return compact.slice(0, 4) + "-" + compact.slice(4, 8) + "-" + compact.slice(8, 12) + "-" + compact.slice(12);
   }
 
-  function parseLines(value, maximum, normalizer) {
+  function parseLines(value, maximum, normalizer, label) {
     var seen = new Set();
     var output = [];
     String(value || "").split(/[\n,]+/).forEach(function (item) {
       var normalized = (normalizer || normalizeText)(item);
       var key = normalized.toLowerCase();
-      if (normalized && !seen.has(key) && output.length < maximum) {
+      if (normalized && !seen.has(key)) {
         seen.add(key);
         output.push(normalized);
       }
     });
+    if (output.length > maximum) {
+      throw new Error("Use no more than " + maximum + " " + label + ".");
+    }
     return output;
   }
 
   function normalizeUrls(value) {
-    return parseLines(value, MAX.sources).map(function (item) {
+    return parseLines(value, MAX.sources, null, "source links").map(function (item) {
       var url;
       try { url = new URL(item); } catch (_error) { throw new Error("Use complete HTTPS source links."); }
       if (url.protocol !== "https:" || url.username || url.password || item.length > 500) {
@@ -91,7 +94,7 @@
       throw new Error("Choose the existing researcher whose profile should change.");
     }
     var displayName = bounded(input.displayName, MAX.displayName, "Researcher name", true);
-    var claims = parseLines(input.claims, MAX.claims);
+    var claims = parseLines(input.claims, MAX.claims, null, "research interests");
     if (!claims.length) throw new Error("Add at least one specific research interest.");
     claims.forEach(function (claim) {
       if (claim.length > MAX.claim) throw new Error("Each research interest must be 180 characters or fewer.");

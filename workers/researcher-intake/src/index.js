@@ -259,6 +259,75 @@ async function dispatchPublication(env, row, fetchImpl) {
   if (!response.ok) fail("publication_dispatch_failed", "The publication workflow could not be started.", 503);
 }
 
+function publicationPullRequestTarget(env, value) {
+  const repository = String(env.GITHUB_REPOSITORY || "");
+  if (!/^[a-z0-9_.-]+\/[a-z0-9_.-]+$/i.test(repository)) {
+    fail("publication_not_configured", "Registry publication is not configured.", 503);
+  }
+  let parsed;
+  try { parsed = new URL(String(value || "")); }
+  catch { fail("invalid_publication_target", "The publication pull request is invalid."); }
+  const prefix = `/${repository}/pull/`;
+  const number = parsed.pathname.startsWith(prefix) ? parsed.pathname.slice(prefix.length) : "";
+  if (parsed.origin !== "https://github.com" || parsed.search || parsed.hash || !/^[1-9][0-9]*$/.test(number)) {
+    fail("invalid_publication_target", "The publication pull request is invalid.");
+  }
+  return {
+    url: `https://github.com/${repository}/pull/${number}`,
+    apiUrl: `https://api.github.com/repos/${repository}/pulls/${number}`,
+  };
+}
+
+async function publicationPullRequest(env, value, fetchImpl) {
+  if (!env.GITHUB_DISPATCH_TOKEN) fail("publication_not_configured", "Registry publication is not configured.", 503);
+  const target = publicationPullRequestTarget(env, value);
+  const response = await fetchImpl(target.apiUrl, { headers: {
+    Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`, Accept: "application/vnd.github+json",
+    "User-Agent": "funding-finder-researcher-intake", "X-GitHub-Api-Version": "2022-11-28",
+  } });
+  if (!response.ok) fail("publication_status_unavailable", "The publication pull request could not be verified.", 503);
+  const pullRequest = await response.json();
+  if (!["open", "closed"].includes(pullRequest.state)
+      || (pullRequest.merged && !/^[a-f0-9]{40}$/.test(pullRequest.merge_commit_sha || ""))) {
+    fail("publication_status_unavailable", "The publication pull request returned an invalid state.", 503);
+  }
+  return pullRequest;
+}
+
+export async function reconcilePublication({ store, current, expectedRevision, actor, env, fetchImpl, timestamp }) {
+  if (current.state !== "publishing" || current.revision !== expectedRevision) {
+    fail("state_conflict", "Only the current publishing revision can be reconciled.", 409);
+  }
+  if (!/^[a-f0-9]{64}$/.test(current.publication_target_registry_generation || "")
+      || !current.publication_target_pr_url) {
+    fail("publication_target_unavailable", "This publication does not have a recoverable target.", 409);
+  }
+  const pullRequest = await publicationPullRequest(env, current.publication_target_pr_url, fetchImpl);
+  if (pullRequest.state === "open") {
+    fail("publication_in_progress", "The publication pull request is still open.", 409);
+  }
+  if (!pullRequest.merged) {
+    const failed = await store.markPublicationFailed(current.submission_id, {
+      expectedRevision, failureCode: "publication_pull_request_closed",
+      deploymentResult: "pull_request_closed_without_merge", actor,
+    }, timestamp);
+    if (!failed) fail("state_conflict", "The publication state changed.", 409);
+    return failed;
+  }
+  const manifest = await currentManifest(env, fetchImpl);
+  if (manifest.registry_generation !== current.publication_target_registry_generation) {
+    fail("publication_not_live", "The merged registry generation is not served yet. Try reconciliation again later.", 409);
+  }
+  const published = await store.markPublished(current.submission_id, {
+    expectedRevision, commitSha: pullRequest.merge_commit_sha,
+    registryGeneration: current.publication_target_registry_generation,
+    deploymentResult: "github_pages_succeeded_after_admin_reconciliation",
+    verifiedAt: timestamp, actor,
+  }, timestamp);
+  if (!published) fail("state_conflict", "The publication state changed.", 409);
+  return published;
+}
+
 export function seedApprovedProfile(value, today = new Date().toISOString().slice(0, 10)) {
   const proposed = value.proposed_profile || {};
   const current = value.current_profile;
@@ -310,7 +379,7 @@ export function seedApprovedProfile(value, today = new Date().toISOString().slic
   };
 }
 
-const ADMIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Researcher review | Funding Finder</title><link rel="stylesheet" href="/admin/styles.css"></head><body><main><header><p>Funding Finder administration</p><h1>Researcher submissions</h1><p>Review the current and proposed public values before publishing a registry-only change.</p></header><section id="queue" aria-live="polite">Loading queue…</section><section id="detail" hidden><button id="back" type="button">Back to queue</button><h2 id="detail-title"></h2><div class="columns"><div><h3>Current</h3><pre id="current"></pre></div><div><h3>Proposed</h3><pre id="proposed"></pre></div></div><p id="signals"></p><label>Approved registry profile JSON<textarea id="approved" rows="22"></textarea></label><label>Administrator reason<input id="reason" maxlength="500"></label><div class="actions"><button data-action="start_review">Start review</button><button data-action="rebase">Rebase onto current registry</button><button data-action="approve">Approve or edit and publish</button><button data-action="request_changes">Request changes</button><button data-action="reject">Reject</button><button data-action="retry_publish">Retry publication</button></div><p id="admin-status" aria-live="polite"></p></section></main><script src="/admin/app.js"></script></body></html>`;
+const ADMIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Researcher review | Funding Finder</title><link rel="stylesheet" href="/admin/styles.css"></head><body><main><header><p>Funding Finder administration</p><h1>Researcher submissions</h1><p>Review the current and proposed public values before publishing a registry-only change.</p></header><section id="queue" aria-live="polite">Loading queue…</section><section id="detail" hidden><button id="back" type="button">Back to queue</button><h2 id="detail-title"></h2><div class="columns"><div><h3>Current</h3><pre id="current"></pre></div><div><h3>Proposed</h3><pre id="proposed"></pre></div></div><p id="signals"></p><label>Approved registry profile JSON<textarea id="approved" rows="22"></textarea></label><label>Administrator reason<input id="reason" maxlength="500"></label><div class="actions"><button data-action="start_review">Start review</button><button data-action="rebase">Rebase onto current registry</button><button data-action="approve">Approve or edit and publish</button><button data-action="request_changes">Request changes</button><button data-action="reject">Reject</button><button data-action="retry_publish">Retry publication</button><button data-action="reconcile_publish">Reconcile publication</button></div><p id="admin-status" aria-live="polite"></p></section></main><script src="/admin/app.js"></script></body></html>`;
 const ADMIN_CSS = `:root{font-family:Inter,system-ui,sans-serif;color:#17293f;background:#f3f6fb}body{margin:0}main{width:min(1180px,calc(100% - 32px));margin:auto;padding:30px 0}header{padding:20px 24px;color:#fff;background:#001e5f;border-radius:14px}header p,header h1{margin:4px 0}.queue{width:100%;margin-top:20px;border-collapse:collapse;background:#fff}.queue th,.queue td{padding:10px;border:1px solid #d6e0eb;text-align:left}.queue button,.actions button,#back{padding:8px 11px;font:inherit;font-weight:700}.columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.columns>div{min-width:0;padding:12px;background:#fff;border:1px solid #d6e0eb;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}label{display:grid;gap:5px;margin-top:12px;font-weight:700}textarea,input{padding:10px;font:inherit;border:1px solid #9db2c8;border-radius:8px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}@media(max-width:760px){.columns{grid-template-columns:1fr}}`;
 const ADMIN_JS = `(() => {"use strict";let active=null;const q=document.getElementById("queue"),d=document.getElementById("detail"),status=document.getElementById("admin-status");const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));async function api(path,options){const r=await fetch(path,options);const v=await r.json();if(!r.ok)throw new Error(v.error?.message||"Request failed");return v}async function load(){q.textContent="Loading queue…";const v=await api("/admin/api/submissions");q.innerHTML='<table class="queue"><thead><tr><th>Researcher</th><th>Request</th><th>Source</th><th>Trust</th><th>Effect</th><th>State</th><th>Submitted</th><th>Action</th></tr></thead><tbody>'+v.submissions.map(x=>'<tr><td>'+esc(x.proposed_profile.display_name)+'</td><td>'+esc(x.submission_type)+'</td><td>'+esc(x.source_surface)+'</td><td>'+esc(JSON.stringify(x.trust_signals))+'</td><td>'+esc(x.material_effect.classification+"; "+x.material_effect.changed_claims+" claim change(s); "+x.material_effect.affected_team_scopes.length+" team scope(s)")+'</td><td>'+esc(x.state)+'</td><td>'+esc(x.created_at)+'</td><td><button data-id="'+esc(x.submission_id)+'">Open</button></td></tr>').join("")+'</tbody></table>';q.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>open(b.dataset.id))}async function open(id){active=await api("/admin/api/submissions/"+encodeURIComponent(id));q.hidden=true;d.hidden=false;document.getElementById("detail-title").textContent=active.proposed_profile.display_name+" — "+active.state;document.getElementById("current").textContent=JSON.stringify(active.current_profile,null,2);document.getElementById("proposed").textContent=JSON.stringify(active.proposed_profile,null,2);document.getElementById("signals").textContent="Identity signals: "+JSON.stringify(active.duplicate_candidates)+" | Material effect: "+JSON.stringify(active.material_effect)+" | Validator warnings: "+JSON.stringify(active.validator_warnings);document.getElementById("approved").value=JSON.stringify(active.approved_profile,null,2);status.textContent=""}document.getElementById("back").onclick=()=>{d.hidden=true;q.hidden=false;load()};document.querySelectorAll("[data-action]").forEach(b=>b.onclick=async()=>{if(!active)return;let profile=null;try{if(["approve","retry_publish"].includes(b.dataset.action))profile=JSON.parse(document.getElementById("approved").value)}catch{status.textContent="Approved profile JSON is invalid.";return}b.disabled=true;try{const v=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id)+"/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:b.dataset.action,expected_revision:active.revision,approved_profile:profile,reason:document.getElementById("reason").value})});status.textContent="State: "+v.state;active=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id));}catch(e){status.textContent=e.message}finally{b.disabled=false}});load().catch(e=>q.textContent=e.message)})();`;
 
@@ -458,6 +527,15 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           }
           return json(200, { submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision });
         }
+        if (body.action === "reconcile_publish") {
+          const reconciled = await reconcilePublication({
+            store, current, expectedRevision, actor, env, fetchImpl, timestamp: now().toISOString(),
+          });
+          if (reconciled.state === "publication_failed") {
+            context.waitUntil(notifyOwner(env, reconciled, fetchImpl, "publication_failed").catch(() => undefined));
+          }
+          return json(200, { submission_id: reconciled.submission_id, state: reconciled.state, revision: reconciled.revision });
+        }
         const state = body.action === "request_changes" ? "changes_requested" : body.action === "reject" ? "rejected" : body.action === "start_review" ? "under_review" : "";
         if (!state) fail("invalid_action", "The administrator action is invalid.");
         if (["changes_requested", "rejected"].includes(state) && !reason) fail("reason_required", "A reason is required for this action.");
@@ -475,6 +553,22 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           researcher_id: row.researcher_id, base_registry_generation: row.base_registry_generation,
           approved_at: row.approved_at, approved_profile: JSON.parse(row.approved_profile_json),
         });
+      }
+      const publicationTargetMatch = path.match(/^\/internal\/publications\/(rs_[a-f0-9]{24})\/target$/);
+      if (publicationTargetMatch && request.method === "POST") {
+        requireInternal(request, env);
+        const body = await readJson(request);
+        const expectedRevision = Number(body.expected_revision);
+        const registryGeneration = String(body.registry_generation || "");
+        if (!Number.isInteger(expectedRevision) || expectedRevision < 1 || !/^[a-f0-9]{64}$/.test(registryGeneration)) {
+          fail("invalid_publication_target", "The publication target is invalid.");
+        }
+        const target = publicationPullRequestTarget(env, body.publication_pr_url);
+        const result = await store.recordPublicationTarget(publicationTargetMatch[1], {
+          expectedRevision, prUrl: target.url, registryGeneration,
+        }, now().toISOString());
+        if (!result) fail("state_conflict", "The publication state changed.", 409);
+        return json(200, { submission_id: result.submission_id, state: result.state, revision: result.revision });
       }
       const completionMatch = path.match(/^\/internal\/publications\/(rs_[a-f0-9]{24})\/(complete|fail)$/);
       if (completionMatch && request.method === "POST") {

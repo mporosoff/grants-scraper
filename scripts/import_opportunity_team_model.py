@@ -47,6 +47,7 @@ VERSIONED_ASSETS = (
 CONTENT_HASHED_ASSETS = (
     "assets/app.css",
     "assets/app.js",
+    "data/faculty_matches.js",
 )
 
 

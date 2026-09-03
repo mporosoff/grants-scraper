@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../../", import.meta.url);
-const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSource, runtime] = await Promise.all([
+const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSource, runtime, teamPage] = await Promise.all([
   readFile(new URL("config/researcher_registry.json", root), "utf8").then(JSON.parse),
   readFile(new URL("data/researcher_registry_manifest.json", root), "utf8").then(JSON.parse),
   readFile(new URL("data/researcher_directory.js", root), "utf8"),
@@ -11,6 +12,7 @@ const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSo
   readFile(new URL("config/opportunity_team_model.json", root), "utf8").then(JSON.parse),
   readFile(new URL("data/opportunity_teams.js", root), "utf8"),
   readFile(new URL("assets/opportunity-team.js", root), "utf8"),
+  readFile(new URL("team_match.html", root), "utf8"),
 ]);
 
 function assignmentJson(source) {
@@ -21,6 +23,7 @@ test("one generated registry generation owns every public researcher projection"
   const directory = assignmentJson(directorySource);
   const matches = assignmentJson(matchesSource);
   const teamData = assignmentJson(teamDataSource);
+  const matchesVersion = createHash("sha256").update(matchesSource).digest("hex");
   assert.equal(registry.schema_version, 3);
   assert.match(registry.registry_generation, /^[a-f0-9]{64}$/);
   assert.equal(directory.registry_generation, registry.registry_generation);
@@ -28,6 +31,8 @@ test("one generated registry generation owns every public researcher projection"
   assert.equal(matches.registry_generation, registry.registry_generation);
   assert.equal(teamModel.researcher_registry_generation, registry.registry_generation);
   assert.equal(teamData.researcher_registry_generation, registry.registry_generation);
+  assert.match(teamPage, new RegExp(`data/faculty_matches\\.js\\?v=${matchesVersion}`));
+  assert.match(teamPage, /M\.registry_generation !== globalThis\.RESEARCHER_DIRECTORY\.registry_generation/);
   assert.equal(directory.researchers.length, manifest.counts.total);
   assert.equal(new Set(directory.researchers.map(row => row.id)).size, directory.researchers.length);
 });

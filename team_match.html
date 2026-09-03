@@ -355,7 +355,7 @@
 <script src="assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260903T144010663677Z"></script>
-<script src="data/faculty_matches.js?v=graded-team-themes-v1"></script>
+<script src="data/faculty_matches.js?v=b1e3c63eeac81739c3841317ac6580e4f3a956e4da439f4356f3d83cb15f93ff"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
 <script src="assets/search-retrieval.js?v=8d2f8d53cb7fe9e4b8fc74d264eaad01651797f1dab2c19cf055585ea5be71e1"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
@@ -1750,6 +1750,10 @@
     if (!M) {
       $("view").innerHTML = '<div class="empty">Couldn\'t find <code>data/faculty_matches.js</code>.<br>' +
         "Run <code>python -m scripts.faculty_match --registry config/researcher_registry.json --catalog data/opportunities.js --out data/faculty_matches.js</code> and commit the generated file.</div>";
+      return;
+    }
+    if (globalThis.RESEARCHER_DIRECTORY && M.registry_generation !== globalThis.RESEARCHER_DIRECTORY.registry_generation) {
+      $("view").innerHTML = '<div class="empty">Researcher matching data is being updated. Refresh this page before building a team.</div>';
       return;
     }
     if (!TEAM_API || !SEARCH_API || !MATCHER_API) {

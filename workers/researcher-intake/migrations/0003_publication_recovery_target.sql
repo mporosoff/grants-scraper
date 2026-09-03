@@ -1,0 +1,2 @@
+ALTER TABLE researcher_submissions ADD COLUMN publication_target_pr_url TEXT;
+ALTER TABLE researcher_submissions ADD COLUMN publication_target_registry_generation TEXT;

@@ -220,6 +220,18 @@ class ResearcherRegistryTests(unittest.TestCase):
         self.assertEqual(updated_target["claims"][0]["revision"], old_revision + 1)
         self.assertNotEqual(updated["registry_generation"], self.registry["registry_generation"])
 
+        unchanged_profile = {
+            key: copy.deepcopy(updated_target[key])
+            for key in approved_profile
+        }
+        unchanged_profile["claims"][0]["revision"] = 1
+        unchanged, _ = apply_approved_submission(updated, {
+            "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+            "approved_at": "2026-09-03T12:05:00Z", "approved_profile": unchanged_profile,
+        }, updated["registry_generation"])
+        unchanged_target = next(row for row in unchanged["researchers"] if row["researcher_id"] == target["researcher_id"])
+        self.assertEqual(unchanged_target["claims"][0]["revision"], old_revision + 1)
+
         invalid_profile = copy.deepcopy(approved_profile)
         invalid_profile["claims"][0]["revision"] = 0
         with self.assertRaisesRegex(ValueError, r"positive integer"):
@@ -260,6 +272,20 @@ class ResearcherRegistryTests(unittest.TestCase):
         self.assertEqual(registry_counts(added)["total"], registry_counts(self.registry)["total"] + 1)
         added_target = next(row for row in added["researchers"] if row["display_name"] == "Example Researcher")
         self.assertTrue(added_target["claims"][0]["claim_id"].startswith(added_target["researcher_id"]))
+        preassigned_profile = {
+            key: copy.deepcopy(added_target[key])
+            for key in (
+                "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
+                "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
+                "source_checked_date", "claims",
+            )
+        }
+        preassigned_profile["claims"][0]["claim_id"] = "urh-999999-c001"
+        with self.assertRaisesRegex(ValueError, r"cannot preassign claim IDs"):
+            apply_approved_submission(self.registry, {
+                "schema_version": 1, "state": "approved", "researcher_id": None,
+                "approved_at": "2026-09-03T12:00:00Z", "approved_profile": preassigned_profile,
+            }, self.registry["registry_generation"])
 
         changed = copy.deepcopy(self.registry)
         target = next(row for row in changed["researchers"] if row["auto_proposable"] and len(row["claims"]) >= 2)

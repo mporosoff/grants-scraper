@@ -138,6 +138,7 @@ export function validateAdminProfile(value, researcherId) {
     }
     const claimId = text(claim.claim_id, 40, "Claim identifier") || (researcherId ? `${researcherId}-c${String(index + 1).padStart(3, "0")}` : "");
     if (claimId && !/^urh-[0-9]{6}-c[0-9]{3}$/.test(claimId)) fail("invalid_claim_id", "A claim identifier is invalid.");
+    if (claimId && !researcherId) fail("invalid_claim_id", "Nomination claims cannot preassign claim identifiers.");
     if (claimId && researcherId && !claimId.startsWith(`${researcherId}-c`)) fail("invalid_claim_id", "A claim identifier belongs to another researcher.");
     if (claimId && claimIds.has(claimId)) fail("invalid_claim_id", "Claim identifiers must be unique.");
     if (claimId) claimIds.add(claimId);

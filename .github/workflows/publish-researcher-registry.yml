@@ -141,6 +141,21 @@ jobs:
             --body "Registry-only publication for approved submission \`$SUBMISSION_ID\`. The approved queue revision is \`$APPROVED_REVISION\`; generated projections and the bounded dependency report were validated before this PR was opened.")"
           echo "url=$pr_url" >> "$GITHUB_OUTPUT"
 
+      - name: Record the recoverable publication target before merge
+        run: |
+          target_generation="$(jq -r .registry_generation data/researcher_registry_manifest.json)"
+          jq -n \
+            --argjson revision "$APPROVED_REVISION" \
+            --arg url '${{ steps.pull-request.outputs.url }}' \
+            --arg generation "$target_generation" \
+            '{expected_revision:$revision,publication_pr_url:$url,registry_generation:$generation}' \
+            > /tmp/publication-target.json
+          curl --fail --silent --show-error --max-time 20 \
+            -H "Authorization: Bearer $REGISTRY_WORKFLOW_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/publication-target.json \
+            "$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/target"
+
       - name: Enable checks-gated auto-merge
         run: gh pr merge '${{ steps.pull-request.outputs.url }}' --squash --auto --delete-branch
 
@@ -297,7 +312,7 @@ jobs:
               fi
               sleep 10
             done
-            echo "::error::The registry PR merged at $merge_sha, but the exact public generation could not be reconciled. The queue record remains in publishing state for operator recovery."
+            echo "::error::The registry PR merged at $merge_sha, but the exact public generation could not be reconciled. The queue record remains in publishing state; use Reconcile publication after Pages catches up."
             exit 0
           fi
 

@@ -524,13 +524,13 @@ def build_outputs(
     team_model = synchronize_opportunity_team_model(registry, team_model_path)
     from scripts.import_opportunity_team_model import update_version_target, write_outputs
     write_outputs(team_model, team_model_path, Path("data/opportunity_teams.js"), Path("data/opportunity_team_index.js"))
+    from scripts.faculty_match import match_to_catalog
+    match_to_catalog(matching_profiles(registry), str(catalog_path), str(faculty_matches_path), registry_generation=registry["registry_generation"])
     for target in version_targets:
         update_version_target(target, team_model["generation_id"])
     interests_page = Path("faculty_interests.html")
     if interests_page.exists():
         _update_directory_version_target(interests_page, registry["registry_generation"])
-    from scripts.faculty_match import match_to_catalog
-    match_to_catalog(matching_profiles(registry), str(catalog_path), str(faculty_matches_path), registry_generation=registry["registry_generation"])
     return {"registry": registry, "directory": projection, "team_model": team_model}
 
 
@@ -591,6 +591,7 @@ def apply_approved_submission(
         raise ValueError("approved_profile is required")
     output = copy.deepcopy(registry)
     researcher_id = str(approved.get("researcher_id") or "")
+    is_nomination = not researcher_id
     by_id = {row["researcher_id"]: row for row in output["researchers"]}
     if researcher_id:
         if researcher_id not in by_id:
@@ -626,6 +627,8 @@ def apply_approved_submission(
     normalized_claims = []
     for index, claim in enumerate(target.get("claims", []), start=1):
         value = copy.deepcopy(claim)
+        if is_nomination and value.get("claim_id"):
+            raise ValueError("nomination claims cannot preassign claim IDs")
         requested_revision = value.get("revision")
         if (
             not isinstance(requested_revision, int)
@@ -636,10 +639,14 @@ def apply_approved_submission(
         value["claim_id"] = value.get("claim_id") or f"{researcher_id}-c{index:03d}"
         value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
-        if old and material_claim_hash(value) != old["material_hash"]:
-            value["revision"] = old["revision"] + 1
+        if old:
+            value["revision"] = (
+                old["revision"] + 1
+                if material_claim_hash(value) != old["material_hash"]
+                else old["revision"]
+            )
         else:
-            value["revision"] = requested_revision
+            value["revision"] = 1
         value["material_hash"] = material_claim_hash(value)
         normalized_claims.append(value)
     target["claims"] = normalized_claims

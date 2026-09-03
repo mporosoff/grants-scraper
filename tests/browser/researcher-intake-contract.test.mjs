@@ -39,7 +39,7 @@ test("unchecked Team Match submission remains browser-local by default", () => {
 
 test("the shared browser builder emits only consented allowlisted fields", () => {
   const intake = api();
-  const submission = intake.buildSubmission({
+  const input = {
     submissionType: "new_researcher_nomination", sourceSurface: "team_match",
     researcherId: "", baseRegistryGeneration: "a".repeat(64), displayName: "Ada Lovelace",
     homeUnit: "External", relationshipNote: "External collaborator",
@@ -47,7 +47,8 @@ test("the shared browser builder emits only consented allowlisted fields", () =>
     sourceUrls: "https://example.edu/ada", orcidId: "0000-0002-1825-0097",
     contactEmail: "ADA@example.edu", note: "Please review", submittedForAdminReview: true,
     idempotencyKey: "12345678-1234-4234-8234-123456789abc",
-  });
+  };
+  const submission = intake.buildSubmission(input);
   assert.deepEqual(Object.keys(submission), [
     "schema_version", "idempotency_key", "submission_type", "source_surface", "researcher_id",
     "base_registry_generation", "proposed_profile", "submitter", "consent",
@@ -56,6 +57,14 @@ test("the shared browser builder emits only consented allowlisted fields", () =>
   assert.equal(submission.consent.submitted_for_admin_review, true);
   assert.equal(JSON.stringify(submission).includes("publication_text"), false);
   assert.equal(JSON.stringify(submission).includes("team_members"), false);
+  assert.throws(
+    () => intake.buildSubmission({ ...input, claims: Array.from({ length: 13 }, (_, index) => `Interest ${index}`) }),
+    /no more than 12 research interests/,
+  );
+  assert.throws(
+    () => intake.buildSubmission({ ...input, sourceUrls: Array.from({ length: 9 }, (_, index) => `https:\/\/example.edu\/${index}`).join("\n") }),
+    /no more than 8 source links/,
+  );
 });
 
 test("identity signals warn but never merge ambiguous candidates", () => {
