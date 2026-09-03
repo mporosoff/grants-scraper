@@ -11,6 +11,22 @@
     return text.slice(0, maximum);
   }
 
+  function displayInvestigatorName(value) {
+    const name = clean(value, 300);
+    if (!name) return "";
+    const casedLetters = [...name].filter(character => (
+      character.toLocaleUpperCase("en-US") !== character.toLocaleLowerCase("en-US")
+    ));
+    const hasUpper = casedLetters.some(character => character === character.toLocaleUpperCase("en-US"));
+    const hasLower = casedLetters.some(character => character === character.toLocaleLowerCase("en-US"));
+    if (!casedLetters.length || hasUpper && hasLower) return name;
+    return name
+      .toLocaleLowerCase("en-US")
+      .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
+      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`)
+      .replace(/([\s,])(?:Ii|Iii|Iv|Vi|Vii|Viii|Ix|X)\.?$/u, match => match.toLocaleUpperCase("en-US"));
+  }
+
   function year(value) {
     const number = Number(value);
     return Number.isInteger(number) && number >= AWARD_YEAR_MIN && number <= AWARD_YEAR_MAX ? number : null;
@@ -172,14 +188,17 @@
       for (const person of Array.isArray(award.principal_investigators) ? award.principal_investigators : []) {
         const name = clean(person?.name, 300);
         if (!name) continue;
-        people.set(name, (people.get(name) || 0) + 1);
+        const displayName = displayInvestigatorName(name);
+        const key = displayName.normalize("NFKC").toLocaleLowerCase("en-US");
+        const existing = people.get(key);
+        if (existing) existing.projects += 1;
+        else people.set(key, { name: displayName, query: name, projects: 1 });
       }
     }
     return {
       institution: results.find(item => clean(item?.institution?.normalized_name))?.institution?.normalized_name || requested,
       projects: results.length,
-      investigators: [...people.entries()]
-        .map(([name, projects]) => ({ name, projects }))
+      investigators: [...people.values()]
         .sort((a, b) => b.projects - a.projects || a.name.localeCompare(b.name)),
     };
   }
@@ -199,6 +218,7 @@
     boundedErrorCode,
     buildRequest,
     canPageForward,
+    displayInvestigatorName,
     institutionSummary,
     paginationLabel,
     presentFiniteNumber,

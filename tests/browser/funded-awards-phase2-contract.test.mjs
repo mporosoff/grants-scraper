@@ -144,6 +144,34 @@ test("standalone searches use source-native criteria and never opportunity seman
   assert.doesNotMatch(coreSource + appSource, /FUNDING_HYBRID_SEARCH|voyage|embedding|vectorUrl/i);
 });
 
+test("investigator names use consistent display capitalization without changing source queries", () => {
+  assert.equal(product.displayInvestigatorName("GERARD J. BUCKLEY"), "Gerard J. Buckley");
+  assert.equal(product.displayInvestigatorName("anissa f brown"), "Anissa F Brown");
+  assert.equal(product.displayInvestigatorName("ANNE-MARIE O’NEILL"), "Anne-Marie O’Neill");
+  assert.equal(product.displayInvestigatorName("MCDONALD, SIOBHAN III"), "McDonald, Siobhan III");
+  assert.equal(product.displayInvestigatorName("de Vries, Anna"), "de Vries, Anna");
+
+  const summary = product.institutionSummary([
+    {
+      institution: { normalized_name: "University of Rochester" },
+      principal_investigators: [{ name: "GERARD J. BUCKLEY" }],
+    },
+    {
+      institution: { normalized_name: "University of Rochester" },
+      principal_investigators: [{ name: "gerard j. buckley" }],
+    },
+  ], "University of Rochester");
+  assert.deepEqual(JSON.parse(JSON.stringify(summary.investigators)), [{
+    name: "Gerard J. Buckley",
+    query: "GERARD J. BUCKLEY",
+    projects: 2,
+  }]);
+
+  assert.match(appSource, /primaryNames = investigators\.map\(person => productApi\.displayInvestigatorName/);
+  assert.match(appSource, /data-award-pi="\$\{escapeAttribute\(person\.query \|\| person\.name\)\}"/);
+  assert.match(appSource, /new Set\(results\.flatMap[\s\S]*productApi\.displayInvestigatorName/);
+});
+
 test("the standalone product exposes the Phase 2 controls, state, provenance, and source isolation", () => {
   assert.match(page, /<h1 id="page-title">See what NSF, NIH, and DOE have funded<\/h1>/);
   for (const id of [

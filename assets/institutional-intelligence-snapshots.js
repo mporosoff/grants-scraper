@@ -455,8 +455,9 @@
   }
 
   function contactLine(person, source, officialUrl) {
-    const name = clean(person?.name, 300) || "Name not listed";
     const role = clean(person?.role, 160) || "Contact";
+    const publishedName = clean(person?.name, 300);
+    const name = (/investigator/i.test(role) ? awardProduct.displayInvestigatorName(publishedName) : publishedName) || "Name not listed";
     const email = clean(person?.email, 320);
     const contactUrl = safeUrl(person?.official_contact_url || officialUrl);
     if (email) return `<li><strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)} · <a href="mailto:${escapeAttribute(email)}">${escapeHtml(email)}</a><span class="ii-contact-provenance">Direct ${escapeHtml(source)} source field</span></li>`;
@@ -477,7 +478,7 @@
     return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(awardKey(award))}" tabindex="-1">
       <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(recency)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
-      <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.map(person => person.name).filter(Boolean).join(", "))}` : ""}</p>
+      <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.map(person => awardProduct.displayInvestigatorName(person?.name)).filter(Boolean).join(", "))}` : ""}</p>
       <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(program?.label || award?.subagency || "Not listed")}</p>
       ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
       <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
@@ -537,7 +538,8 @@
     else state.programGroups = new Map(items.map(item => [item.key, item]));
     select.innerHTML = `<option value="all">${allLabel}</option>${items.map(item => {
       const value = kind === "investigator" ? item.identity_key : item.key;
-      return `<option value="${escapeAttribute(value)}">${escapeHtml(kind === "investigator" ? item.name : item.label)} (${item.projects})</option>`;
+      const label = kind === "investigator" ? awardProduct.displayInvestigatorName(item.name) : item.label;
+      return `<option value="${escapeAttribute(value)}">${escapeHtml(label)} (${item.projects})</option>`;
     }).join("")}`;
     select.disabled = state.busyDepth > 0 || items.length === 0;
     select.value = state.facet.type === kind ? state.facet.key : "all";
@@ -604,11 +606,14 @@
     const active = payload.facet?.type !== "all";
     $("ii-active-facet").classList.toggle("hidden", !active);
     $("ii-clear-facet").disabled = state.busyDepth > 0 || !active;
-    $("ii-active-facet-label").textContent = active ? `Active ${payload.facet.type} drill-down: ${payload.facet.label}` : "";
+    const activeFacetLabel = payload.facet?.type === "investigator"
+      ? awardProduct.displayInvestigatorName(payload.facet.label)
+      : payload.facet?.label;
+    $("ii-active-facet-label").textContent = active ? `Active ${payload.facet.type} drill-down: ${activeFacetLabel}` : "";
     if (active && payload.facet.type === "investigator") {
       const group = state.investigatorGroups.get(payload.facet.key);
       $("ii-investigator-variants").textContent = group
-        ? `${group.name} · ${group.projects} award${group.projects === 1 ? "" : "s"}. Source-published variants: ${group.variants.map(variant => `${variant.name} (${variant.source})`).join("; ")}.`
+        ? `${awardProduct.displayInvestigatorName(group.name)} · ${group.projects} award${group.projects === 1 ? "" : "s"}. Source name variants: ${group.variants.map(variant => `${awardProduct.displayInvestigatorName(variant.name)} (${variant.source})`).join("; ")}.`
         : "The selected investigator identity is no longer present in this snapshot.";
     } else {
       $("ii-investigator-variants").textContent = "Select an investigator to filter this snapshot without starting another upstream search.";
@@ -982,7 +987,7 @@
       structured = answerTable({
         label: "Investigators in the matching awards",
         headers: ["Investigator", "Awards"],
-        rows: investigators.map(person => `<tr><th scope="row">${escapeHtml(person.name)}</th><td>${Number(person.projects || 0).toLocaleString()}</td></tr>`),
+        rows: investigators.map(person => `<tr><th scope="row">${escapeHtml(awardProduct.displayInvestigatorName(person.name))}</th><td>${Number(person.projects || 0).toLocaleString()}</td></tr>`),
       });
     } else if (intent === "programs") {
       summary = programs.length

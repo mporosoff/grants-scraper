@@ -206,6 +206,30 @@ test("aggregates returned awards and preserves investigator and program drill-do
   assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "Catalysis Science" && item.parent_label === "Office of Basic Energy Sciences"));
 });
 
+test("investigator capitalization is consistent across snapshot controls, cards, and answers", () => {
+  const aggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "GERARD J. BUCKLEY" }] }),
+    award({
+      source: "NIH",
+      award_id: "NIH-1",
+      principal_investigators: [{ name: "gerard j. buckley" }],
+    }),
+  ]);
+  assert.equal(aggregate.investigators.length, 1);
+  assert.equal(aggregate.investigators[0].name, "Gerard J. Buckley");
+  assert.deepEqual(plain(aggregate.investigators[0].variants.map(item => item.name)), [
+    "GERARD J. BUCKLEY",
+    "gerard j. buckley",
+  ], "source spellings stay intact for identity-aware upstream queries");
+
+  assert.match(appSource, /investigators\.map\(person => awardProduct\.displayInvestigatorName\(person\?\.name\)\)/);
+  assert.match(appSource, /kind === "investigator" \? awardProduct\.displayInvestigatorName\(item\.name\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(payload\.facet\.label\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(variant\.name\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(person\.name\)/);
+  assert.match(coreSource, /investigators:[\s\S]*displayInvestigatorName\(person\?\.name\)/);
+});
+
 test("share URLs round-trip institution and all transparent filters", () => {
   const url = core.urlForState("https://example.test/funded_awards.html?opportunity=123&q=opportunities", {
     open: true,
