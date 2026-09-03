@@ -39,7 +39,11 @@
     questionSubmitting: false,
     answering: false,
     searchActivityOwner: 0,
-    historyStateFrame: 0,
+    historyStateTimer: 0,
+    historyStatePending: false,
+    historyRestoreDepth: 0,
+    historyEntrySequence: 0,
+    historyViewCache: new Map(),
   };
 
   function clean(value, maximum = 500) {
@@ -281,37 +285,93 @@
     return Boolean(value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
   }
 
-  function historyViewState() {
-    return { scrollY: window.scrollY, focusId: document.activeElement?.id || "" };
+  function nextHistoryEntryId() {
+    state.historyEntrySequence += 1;
+    return `ii-${Date.now().toString(36)}-${state.historyEntrySequence.toString(36)}`;
   }
 
-  function recordCurrentHistoryViewState() {
-    if (!location.protocol.startsWith("http")) return;
-    history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", location.href);
+  function historyViewState({ freshEntry = false } = {}) {
+    const entryId = freshEntry ? "" : String(history.state?.iiEntryId || "");
+    return { scrollY: window.scrollY, focusId: document.activeElement?.id || "", iiEntryId: entryId || nextHistoryEntryId() };
+  }
+
+  function rememberHistoryViewState(viewState) {
+    if (!viewState?.iiEntryId) return viewState;
+    state.historyViewCache.delete(viewState.iiEntryId);
+    state.historyViewCache.set(viewState.iiEntryId, viewState);
+    if (state.historyViewCache.size > 100) state.historyViewCache.delete(state.historyViewCache.keys().next().value);
+    return viewState;
+  }
+
+  function captureCurrentHistoryViewState(options) {
+    return rememberHistoryViewState(historyViewState(options));
+  }
+
+  function latestHistoryViewState(entryState = history.state) {
+    return state.historyViewCache.get(entryState?.iiEntryId) || entryState || {};
+  }
+
+  function serializedHistoryState(value) {
+    try {
+      return JSON.stringify(value || null);
+    } catch {
+      return "";
+    }
+  }
+
+  function replaceHistoryStateIfChanged(value, url = location.href) {
+    const nextUrl = new URL(url, location.href).href;
+    if (nextUrl === location.href && serializedHistoryState(value) === serializedHistoryState(history.state)) return false;
+    history.replaceState(value, "", nextUrl);
+    return true;
+  }
+
+  function recordCurrentHistoryViewState(viewState = null) {
+    if (!location.protocol.startsWith("http") || state.historyRestoreDepth) return;
+    const currentViewState = rememberHistoryViewState(viewState || captureCurrentHistoryViewState());
+    replaceHistoryStateIfChanged({ ...(history.state || {}), ...currentViewState });
+  }
+
+  function armHistoryStateThrottle() {
+    state.historyStateTimer = setTimeout(() => {
+      state.historyStateTimer = 0;
+      if (state.historyRestoreDepth) {
+        state.historyStatePending = false;
+        return;
+      }
+      if (!state.historyStatePending) return;
+      state.historyStatePending = false;
+      recordCurrentHistoryViewState(latestHistoryViewState());
+      armHistoryStateThrottle();
+    }, 250);
   }
 
   function scheduleCurrentHistoryViewState() {
-    if (state.historyStateFrame) return;
-    const scheduledUrl = location.href;
-    state.historyStateFrame = requestAnimationFrame(() => {
-      state.historyStateFrame = requestAnimationFrame(() => {
-        state.historyStateFrame = 0;
-        if (location.href !== scheduledUrl) {
-          scheduleCurrentHistoryViewState();
-          return;
-        }
-        recordCurrentHistoryViewState();
-      });
-    });
+    if (state.historyRestoreDepth) return;
+    const currentViewState = captureCurrentHistoryViewState();
+    if (state.historyStateTimer) {
+      state.historyStatePending = true;
+      return;
+    }
+    state.historyStatePending = false;
+    recordCurrentHistoryViewState(currentViewState);
+    armHistoryStateThrottle();
   }
 
   function writeHistoryUrl(url, mode = "replace", departureHistoryState = null) {
     if (!location.protocol.startsWith("http")) return;
-    if (mode === "push") {
-      history.replaceState({ ...(history.state || {}), ...(departureHistoryState || historyViewState()) }, "", location.href);
-      history.pushState(historyViewState(), "", url);
+    const nextUrl = new URL(url, location.href).href;
+    if (state.historyRestoreDepth) {
+      if (mode === "replace") replaceHistoryStateIfChanged(history.state, nextUrl);
+      return;
+    }
+    const currentViewState = captureCurrentHistoryViewState();
+    if (mode === "push" && nextUrl !== location.href) {
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...rememberHistoryViewState(departureHistoryState || currentViewState) });
+      const nextViewState = captureCurrentHistoryViewState({ freshEntry: true });
+      history.pushState(nextViewState, "", nextUrl);
     } else {
-      history.replaceState({ ...(history.state || {}), ...historyViewState() }, "", url);
+      replaceHistoryStateIfChanged({ ...(history.state || {}), ...currentViewState }, nextUrl);
     }
     scheduleCurrentHistoryViewState();
   }
@@ -1288,17 +1348,25 @@
     $("ii-update-answer").addEventListener("click", refreshQuestionAnswer);
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
-      const restored = core.stateFromSearch(location.search);
-      if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return clearSearch({ historyMode: "replace" });
-      state.sequence += 1;
-      state.pageRequestSequence += 1;
-      state.controller?.abort();
-      setSearchActivity(false);
-      resetResultState();
-      applyFormState(restored);
-      state.controller = new AbortController();
-      setBusy(true);
+      const restoredViewState = latestHistoryViewState(event.state);
+      clearTimeout(state.historyStateTimer);
+      state.historyStateTimer = 0;
+      state.historyStatePending = false;
+      state.historyRestoreDepth += 1;
       try {
+        const restored = core.stateFromSearch(location.search);
+        if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) {
+          clearSearch({ historyMode: "replace" });
+          return;
+        }
+        state.sequence += 1;
+        state.pageRequestSequence += 1;
+        state.controller?.abort();
+        setSearchActivity(false);
+        resetResultState();
+        applyFormState(restored);
+        state.controller = new AbortController();
+        setBusy(true);
         if (restored.snapshot_id) {
           state.submitted = submittedCriteria(restored);
           state.snapshot = { snapshot_id: restored.snapshot_id, sources: state.snapshot?.sources || [] };
@@ -1311,8 +1379,10 @@
       } finally {
         setBusy(false);
         requestAnimationFrame(() => {
-          if (event.state?.focusId) $(event.state.focusId)?.focus({ preventScroll: true });
-          if (Number.isFinite(event.state?.scrollY)) window.scrollTo({ top: event.state.scrollY });
+          if (restoredViewState.focusId) $(restoredViewState.focusId)?.focus({ preventScroll: true });
+          if (Number.isFinite(restoredViewState.scrollY)) window.scrollTo({ top: restoredViewState.scrollY });
+          state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
+          scheduleCurrentHistoryViewState();
         });
       }
     });

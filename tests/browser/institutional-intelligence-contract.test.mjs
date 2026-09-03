@@ -330,9 +330,11 @@ test("explicit year language deterministically overrides an incorrect model tran
 });
 
 test("snapshot URLs and replacement results have one committed owner", () => {
-  const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
-  assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
-  assert.match(historySource, /requestAnimationFrame\([\s\S]*requestAnimationFrame\([\s\S]*recordCurrentHistoryViewState\(\)/);
+  const historySource = appSource.slice(appSource.indexOf("function nextHistoryEntryId("), appSource.indexOf("async function postJson("));
+  assert.match(historySource, /mode === "push"[\s\S]*replaceHistoryStateIfChanged\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
+  assert.match(historySource, /function armHistoryStateThrottle\([\s\S]*setTimeout\([\s\S]*recordCurrentHistoryViewState\(latestHistoryViewState\(\)\)[\s\S]*armHistoryStateThrottle\(\)[\s\S]*250/);
+  assert.match(historySource, /state\.historyRestoreDepth[\s\S]*mode === "replace"[\s\S]*replaceHistoryStateIfChanged\(history\.state, nextUrl\)/);
+  assert.match(historySource, /nextUrl === location\.href[\s\S]*serializedHistoryState\(value\) === serializedHistoryState\(history\.state\)[\s\S]*return false/);
   const syncUrlSource = appSource.slice(appSource.indexOf("function syncUrl("), appSource.indexOf("async function postJson("));
   assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
   assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
@@ -372,6 +374,111 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+});
+
+test("one ordinary URL-state action coalesces repeated replaceState requests", () => {
+  const historySource = appSource.slice(appSource.indexOf("function nextHistoryEntryId("), appSource.indexOf("async function postJson("));
+  const timers = new Map();
+  let timerSequence = 0;
+  let replaceWrites = 0;
+  let pushWrites = 0;
+  const location = { protocol: "https:", href: "https://example.test/funded_awards.html", search: "" };
+  const history = {
+    state: null,
+    replaceState(value, _unused, url) {
+      replaceWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+    pushState(value, _unused, url) {
+      pushWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+  };
+  const harness = {
+    URL,
+    location,
+    history,
+    window: { scrollY: 420 },
+    document: { activeElement: { id: "ii-topic" } },
+    state: {
+      historyStateTimer: 0,
+      historyStatePending: false,
+      historyRestoreDepth: 0,
+      historyEntrySequence: 0,
+      historyViewCache: new Map(),
+      submitted: null,
+      snapshot: null,
+    },
+    setTimeout(callback) {
+      const id = ++timerSequence;
+      timers.set(id, callback);
+      return id;
+    },
+    clearTimeout(id) { timers.delete(id); },
+  };
+  function runNextTimer() {
+    const next = timers.entries().next().value;
+    assert.ok(next, "a history-state throttle timer should be armed");
+    timers.delete(next[0]);
+    next[1]();
+  }
+  harness.globalThis = harness;
+  vm.createContext(harness);
+  vm.runInContext(`${historySource}\nglobalThis.writeHistoryUrlForTest = writeHistoryUrl;\nglobalThis.scheduleHistoryStateForTest = scheduleCurrentHistoryViewState;\nglobalThis.latestHistoryViewStateForTest = latestHistoryViewState;`, harness);
+  const target = new URL("https://example.test/funded_awards.html?ii=1&ii_topic=catalysis");
+  for (let index = 0; index < 150; index += 1) harness.writeHistoryUrlForTest(target, "replace");
+  runNextTimer();
+  assert.equal(replaceWrites, 1, "identical logical writes must collapse to one URL replacement");
+  assert.equal(pushWrites, 0);
+
+  const restoredHistoryState = history.state;
+  harness.state.historyRestoreDepth = 1;
+  harness.writeHistoryUrlForTest(new URL("https://example.test/funded_awards.html?ii=1&ii_topic=restored"), "replace");
+  assert.equal(replaceWrites, 2, "snapshot recovery may replace the canonical URL during restoration");
+  assert.equal(history.state, restoredHistoryState, "canonical recovery must preserve the destination entry's restored view state");
+  harness.writeHistoryUrlForTest(new URL(location.href), "replace");
+  assert.equal(replaceWrites, 2, "identical restoration writes must be skipped");
+
+  harness.state.historyRestoreDepth = 0;
+  harness.clearTimeout(harness.state.historyStateTimer);
+  harness.state.historyStateTimer = 0;
+  harness.state.historyStatePending = false;
+  const writesBeforeScroll = replaceWrites;
+  for (let index = 0; index < 150; index += 1) {
+    harness.window.scrollY = 500 + index;
+    harness.scheduleHistoryStateForTest();
+  }
+  assert.equal(history.state.scrollY, 500, "the serialized state is rate limited to the leading view");
+  assert.equal(harness.latestHistoryViewStateForTest(history.state).scrollY, 649, "the entry cache retains the latest pending view before traversal");
+  runNextTimer();
+  assert.equal(replaceWrites - writesBeforeScroll, 2, "a burst records one leading and one throttled trailing view state");
+
+  const restorationSource = appSource.slice(appSource.indexOf('window.addEventListener("popstate"'), appSource.indexOf("async function initialize("));
+  assert.match(restorationSource, /const restoredViewState = latestHistoryViewState\(event\.state\)[\s\S]*clearTimeout\(state\.historyStateTimer\)[\s\S]*historyStatePending = false[\s\S]*historyRestoreDepth \+= 1/);
+  assert.match(restorationSource, /restoredViewState\.focusId[\s\S]*restoredViewState\.scrollY/);
+  assert.ok(restorationSource.indexOf("historyRestoreDepth = Math.max") > restorationSource.indexOf("window.scrollTo"), "restoration remains guarded until focus and scroll are restored");
+});
+
+test("touch-first editable controls keep a 16px floor without disabling page zoom", async () => {
+  const [appStyles, alertsStyles, awardsStyles, intelligenceStyles, fundedPage] = await Promise.all([
+    readFile(new URL("assets/app.css", root), "utf8"),
+    readFile(new URL("assets/alerts.css", root), "utf8"),
+    readFile(new URL("assets/funded-awards.css", root), "utf8"),
+    readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
+    readFile(new URL("funded_awards.html", root), "utf8"),
+  ]);
+  const mobileFloor = alertsStyles.slice(alertsStyles.lastIndexOf("@media (hover: none) and (pointer: coarse)"));
+  assert.match(mobileFloor, /input,[\s\S]*select,[\s\S]*textarea,[\s\S]*contenteditable[\s\S]*font-size:\s*max\(16px, 1em\)\s*!important/);
+  assert.doesNotMatch(appStyles, /@media \(hover: none\) and \(pointer: coarse\)/, "the shared app stylesheet must remain unchanged for Team Match");
+  assert.match(alertsStyles, /\.alert-field-grid input,[\s\S]*\.alert-field-grid select/);
+  assert.match(awardsStyles, /\.award-field input,[\s\S]*\.award-field select/);
+  assert.match(intelligenceStyles, /\.ii-form input,[\s\S]*\.ii-ask textarea,[\s\S]*\.ii-key-fields select/);
+  assert.match(fundedPage, /name="viewport" content="width=device-width, initial-scale=1"/);
+  assert.doesNotMatch(fundedPage, /user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i);
 });
 
 test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
