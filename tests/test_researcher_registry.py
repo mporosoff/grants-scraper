@@ -57,6 +57,8 @@ class ResearcherRegistryTests(unittest.TestCase):
         self.assertEqual(canonical_sort_name("John Smith V"), "Smith, John V")
         self.assertEqual(canonical_sort_name("John Smith VI"), "Smith, John VI")
         self.assertEqual(canonical_sort_name("Alex Li"), "Li, Alex")
+        self.assertEqual(canonical_sort_name("Alex LI"), "LI, Alex")
+        self.assertEqual(canonical_sort_name("Malcolm X"), "X, Malcolm")
 
     def test_legacy_claim_ids_are_bounded_global_strings(self):
         claims = [claim for researcher in self.registry["researchers"] for claim in researcher["claims"]]

@@ -335,7 +335,7 @@ export function canonicalSortName(value) {
   const finalToken = parts.at(-1);
   const romanSuffix = finalToken !== "I"
     && /^(?=[MDCLXVI]+$)M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})$/.test(finalToken);
-  const suffix = /^(?:jr\.?|sr\.?)$/i.test(finalToken) || romanSuffix ? parts.pop() : "";
+  const suffix = parts.length > 2 && (/^(?:jr\.?|sr\.?)$/i.test(finalToken) || romanSuffix) ? parts.pop() : "";
   const family = parts.pop();
   return `${family}, ${parts.join(" ")}${suffix ? ` ${suffix}` : ""}`;
 }
