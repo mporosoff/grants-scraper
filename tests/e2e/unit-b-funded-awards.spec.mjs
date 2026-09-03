@@ -69,7 +69,7 @@ test("each agency hydrates independently in batches no larger than 25", async ({
     const button = page.locator(`[data-ii-load-source="${source}"]`);
     await expect(button).toContainText(`Load up to 25 more ${source} awards`);
     await button.click();
-    await expect(page.locator("#ii-status")).toContainText(`Loaded remaining 1 ${source} award`);
+    await expect(page.locator("#ii-status")).toContainText(`Loaded the remaining 1 ${source} award`);
     await expect(button).toHaveCount(0);
   }
   const batchCalls = calls.filter(call => call.source && Number.isInteger(call.offset));
@@ -376,7 +376,7 @@ test("a fallback source-batch controller and ownership guard prevent late hydrat
   });
   await searchTopic(page, "batch-back-ownership");
   await page.locator('[data-ii-load-source="NSF"]').click();
-  await expect(page.locator("#ii-status")).toContainText("NSF card hydration failed");
+  await expect(page.locator("#ii-status")).toContainText("NSF details could not be loaded");
   await page.locator('[data-ii-load-source="NSF"]').click();
   await page.goBack();
   await expect(page).not.toHaveURL(/ii_snapshot=/);
@@ -397,7 +397,7 @@ test("history restoration cannot mix a newer snapshot question into an older sna
   await page.locator("#ii-question").fill("How many awards are in this result?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();
-  await expect(page.locator("#ii-direct-answer")).toContainText("2 normalized matching awards");
+  await expect(page.locator("#ii-direct-answer")).toContainText("2 matching awards");
   const newerSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(newerSnapshot).not.toBe(olderSnapshot);
   await page.goBack();
@@ -538,7 +538,7 @@ test("questions use full server aggregates and bounded hydrated evidence", async
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await page.locator("#ii-question").fill("How many awards are in this result?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("78 normalized matching awards");
+  await expect(page.locator("#ii-direct-answer")).toContainText("78 matching awards");
   await expect(page.locator("#ii-answer-limitations")).toContainText("78 awards were counted");
   expect(runtimeErrors).toEqual([]);
 });
