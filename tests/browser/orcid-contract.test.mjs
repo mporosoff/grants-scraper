@@ -37,11 +37,36 @@ function payload() {
   };
 }
 
-test("normalizes ORCID URLs and rejects invalid checksums", () => {
+test("formats ORCID entry, accepts compact IDs, and rejects invalid checksums", () => {
   const api = loadApi();
+  assert.equal(api.formatInput("0000000218250097"), "0000-0002-1825-0097");
+  assert.equal(api.formatInput("0000000218"), "0000-0002-18");
+  assert.equal(api.formatInput("00000002182500971234"), "0000-0002-1825-0097");
   assert.equal(api.normalizeId("https://orcid.org/0000-0002-1825-0097/"), "0000-0002-1825-0097");
+  assert.equal(api.normalizeId("0000000218250097"), "0000-0002-1825-0097");
   assert.equal(api.normalizeId("0000-0002-1825-0098"), "");
   assert.equal(api.normalizeId("not-an-orcid"), "");
+});
+
+test("binds a 19-character auto-formatting input contract", () => {
+  const api = loadApi();
+  const listeners = {};
+  const input = {
+    autocomplete: "",
+    dataset: {},
+    inputMode: "",
+    maxLength: 0,
+    pattern: "",
+    value: "",
+    addEventListener(type, listener) { listeners[type] = listener; },
+  };
+  api.bindInput(input);
+  assert.equal(input.maxLength, 19);
+  assert.equal(input.inputMode, "text");
+  assert.match(input.pattern, /\[0-9\]\{4\}/);
+  input.value = "00000002182500971234";
+  listeners.input();
+  assert.equal(input.value, "0000-0002-1825-0097");
 });
 
 test("parses ORCID-linked publications into bounded matching context", () => {

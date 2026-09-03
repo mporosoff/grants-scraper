@@ -182,7 +182,7 @@
       (missingSkills.length ? '<section class="opportunity-team-gaps"><h5>Missing skills to recruit</h5><ul>' + missingSkills.map(function (skill) { return '<li>' + escapeHtml(skill) + '</li>'; }).join("") + '</ul></section>' : '') +
       replacement +
       '<div class="opportunity-team-next"><a class="button secondary" href="' + escapeHtml(teamMatchHref(view)) + '">Continue in Team Match</a>' +
-      '<a class="source-action" href="team_match.html?manual=1&opportunity=' + encodeURIComponent(view.opportunity.id) + '">Add a researcher manually</a></div>' +
+      '<a class="source-action" href="faculty_interests.html?mode=add&return=team_match&opportunity=' + encodeURIComponent(view.opportunity.id) + '">Add a missing researcher</a></div>' +
       '<p class="opportunity-team-caveat">This is an evidence-calibrated planning aid, not a statement of eligibility, availability, willingness, or sponsor fit. Verify the official notice and contact each proposed investigator.</p>';
   }
 

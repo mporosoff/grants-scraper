@@ -232,7 +232,8 @@ test("Funding Finder panels are lazy, rerender-safe, independently owned, and ac
   assert.match(panelSource, /if \(event\.key === "Escape"/);
   assert.match(panelSource, /aria-labelledby/);
   assert.match(panelSource, /aria-live/);
-  assert.match(panelSource, /Add a researcher manually/);
+  assert.match(panelSource, /Add a missing researcher/);
+  assert.match(panelSource, /faculty_interests\.html\?mode=add&return=team_match&opportunity=/);
   assert.match(panelSource, /No additional internal faculty member has source-backed evidence/);
   assert.doesNotMatch([page, teamPage, teamSource, panelSource].join("\n"), /\.xlsx|config\/opportunity_team_model\.json/i);
 });
@@ -313,16 +314,17 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
   assert.equal(await timeoutScope.OpportunityTeam.loadData(data.generation_id), data);
 });
 
-test("Team Match exposes separate directory and manual paths while retaining ORCID", () => {
+test("Team Match exposes directory and governed missing-researcher paths", () => {
   assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
   assert.match(teamPage, /id="faculty-suggestions" role="listbox"/);
   assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
-  assert.match(teamPage, /id="manual-researcher"/);
-  assert.match(teamPage, /Add a researcher manually/);
+  assert.match(teamPage, /id="missing-researcher"/);
+  assert.match(teamPage, /faculty_interests\.html\?mode=add&amp;return=team_match/);
   assert.match(teamPage, /OPPORTUNITY_TEAM_API\.searchFaculty/);
   assert.match(teamPage, /pool_state === "unadmitted"/);
   assert.match(teamPage, /Standby - one retained capability/);
-  assert.match(teamPage, /ORCID_API\.fetchProfile/);
+  assert.doesNotMatch(teamPage, /ORCID_API|external-researcher-form|researcher-intake\.js/);
   assert.match(teamPage, /selected\.length >= MAX/);
   assert.match(teamPage, /applyProposedTeamFromUrl/);
+  assert.match(teamPage, /params\.get\("local"\)/);
 });

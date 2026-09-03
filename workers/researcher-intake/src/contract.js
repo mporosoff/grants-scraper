@@ -65,12 +65,12 @@ function calendarDate(value, label) {
 function normalizeOrcid(value) {
   const compact = String(value || "").toUpperCase().replace(/[^0-9X]/g, "");
   if (!compact) return "";
-  if (!/^[0-9]{15}[0-9X]$/.test(compact)) fail("invalid_orcid", "The ORCID iD is invalid.");
+  if (!/^[0-9]{15}[0-9X]$/.test(compact)) fail("invalid_orcid", "The ORCID is invalid.");
   let total = 0;
   for (let index = 0; index < 15; index += 1) total = (total + Number(compact[index])) * 2;
   const result = (12 - (total % 11)) % 11;
   const check = result === 10 ? "X" : String(result);
-  if (check !== compact[15]) fail("invalid_orcid", "The ORCID iD is invalid.");
+  if (check !== compact[15]) fail("invalid_orcid", "The ORCID is invalid.");
   return `${compact.slice(0, 4)}-${compact.slice(4, 8)}-${compact.slice(8, 12)}-${compact.slice(12)}`;
 }
 
@@ -102,7 +102,7 @@ export function validateSubmission(value) {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fail("invalid_email", "The contact email is invalid.");
   exactFields(value.consent, new Set(["submitted_for_admin_review", "privacy_notice_version"]), "Consent");
   if (value.consent.submitted_for_admin_review !== true || text(value.consent.privacy_notice_version, 40, "Privacy notice", true) !== "2026-09-03") {
-    fail("consent_required", "Explicit consent under the current privacy notice is required.");
+    fail("consent_required", "Explicit consent to administrator review is required.");
   }
   return {
     schema_version: 1, idempotency_key: idempotencyKey,
@@ -130,7 +130,7 @@ export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds
   const sourceCheckedDate = calendarDate(value.source_checked_date, "Source checked date");
   const orcidId = normalizeOrcid(value.orcid_id);
   const occupiedOrcids = new Set([...reservedOrcidIds].map(value => String(value).toUpperCase()));
-  if (orcidId && occupiedOrcids.has(orcidId)) fail("duplicate_orcid", "That ORCID iD already belongs to another researcher.", 409);
+  if (orcidId && occupiedOrcids.has(orcidId)) fail("duplicate_orcid", "That ORCID already belongs to another researcher.", 409);
   if (!Array.isArray(value.claims) || value.claims.length > 20) fail("invalid_claims", "Approved claims are invalid.");
   const claimIds = new Set();
   const legacyClaimIds = new Set([...reservedLegacyClaimIds].map(value => String(value).toLocaleLowerCase()));

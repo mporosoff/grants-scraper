@@ -251,7 +251,7 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
   await expect(page.getByRole("combobox", { name: /Search Hajim faculty/i })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Add a researcher manually" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Configure a missing researcher" })).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
   await addDepartmentResearcher(page, "Alexander A. Shestopalov");
   await addDepartmentResearcher(page, "Allison J. Lopatkin");

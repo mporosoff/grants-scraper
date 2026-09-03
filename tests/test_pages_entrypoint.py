@@ -89,9 +89,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn('name="robots" content="noindex', team_html)
         self.assertIn("<title>Team Match | Funding Finder</title>", team_html)
         self.assertIn('id="add-researcher"', team_html)
-        self.assertIn('id="external-researcher-form"', team_html)
-        self.assertIn('id="external-name"', team_html)
-        self.assertIn('id="external-keywords"', team_html)
+        self.assertNotIn('id="external-researcher-form"', team_html)
+        self.assertNotIn('id="external-name"', team_html)
+        self.assertNotIn('id="external-keywords"', team_html)
+        self.assertIn('id="researcher-choice"', team_html)
+        self.assertIn('id="remove-saved-researcher"', team_html)
+        self.assertIn('id="missing-researcher"', team_html)
         self.assertIn('assets/team-researchers.js', team_html)
         self.assertIn('assets/search-query.js', team_html)
         self.assertIn('href="./team_match.html"', explorer_html)
@@ -275,7 +278,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         release_version = "filters-2026-08-13"
-        feature_version = "orcid-2026-08-13"
+        feature_version = "orcid-format-20260903"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
         self.assertIn(
@@ -342,7 +345,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=ai-boundaries-20260901"></script>',
+            '<script src="./assets/site-help.js?v=researcher-flow-20260903"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

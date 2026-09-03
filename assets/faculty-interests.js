@@ -2,6 +2,8 @@
   "use strict";
   var intake = globalThis.FUNDING_RESEARCHER_INTAKE;
   var directory = globalThis.RESEARCHER_DIRECTORY;
+  var orcidApi = globalThis.FUNDING_ORCID;
+  var teamApi = globalThis.FUNDING_TEAM_RESEARCHERS;
   var form = document.getElementById("researcher-request-form");
   var status = document.getElementById("request-status");
   var fallback = document.getElementById("download-request");
@@ -9,6 +11,16 @@
   var idempotencyKey = "";
   var researcherCandidates = [];
   var activeResearcherOption = -1;
+  var activeRequestType = "";
+  var modeDrafts = {
+    profile_correction: null,
+    new_researcher_nomination: null,
+  };
+  var draftFieldIds = [
+    "researcher-search", "existing-researcher", "display-name", "home-unit", "orcid-id",
+    "relationship-note", "research-summary", "research-claims", "source-urls", "contact-email",
+    "submitter-note", "review-consent",
+  ];
 
   function element(id) { return document.getElementById(id); }
   function selectedType() { return form.elements.request_type.value; }
@@ -18,9 +30,6 @@
   }
   function activeClaims(profile) {
     return (profile.claims || []).filter(function (claim) { return claim.status === "active"; });
-  }
-  function findResearcher(id) {
-    return (directory.researchers || []).find(function (profile) { return profile.id === id; }) || null;
   }
   function normalized(value) {
     return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -98,6 +107,15 @@
       ? researcherCandidates.length + " matching researcher" + (researcherCandidates.length === 1 ? "" : "s") + ", ordered by last name."
       : "Showing the first 12 researchers by last name. Type to search the full directory.";
   }
+  function fillProfile(profile) {
+    element("display-name").value = profile ? profile.name : "";
+    element("home-unit").value = profile ? profile.home_unit : "";
+    element("orcid-id").value = profile ? profile.orcid_id || "" : "";
+    if (orcidApi) element("orcid-id").value = orcidApi.formatInput(element("orcid-id").value);
+    element("research-summary").value = profile ? profile.research_summary || "" : "";
+    element("research-claims").value = profile ? activeClaims(profile).map(function (claim) { return claim.label; }).join("\n") : "";
+    element("source-urls").value = profile ? (profile.source_urls || []).join("\n") : "";
+  }
   function selectResearcher(profile) {
     if (!profile) return;
     element("existing-researcher").value = profile.id;
@@ -109,26 +127,44 @@
     fallback.hidden = true;
     setStatus("", "");
   }
-  function fillProfile(profile) {
-    element("display-name").value = profile ? profile.name : "";
-    element("home-unit").value = profile ? profile.home_unit : "";
-    element("orcid-id").value = profile ? profile.orcid_id || "" : "";
-    element("research-summary").value = profile ? profile.research_summary || "" : "";
-    element("research-claims").value = profile ? activeClaims(profile).map(function (claim) { return claim.label; }).join("\n") : "";
-    element("source-urls").value = profile ? (profile.source_urls || []).join("\n") : "";
+  function captureDraft() {
+    var draft = {};
+    draftFieldIds.forEach(function (id) {
+      var field = element(id);
+      draft[id] = field.type === "checkbox" ? field.checked : field.value;
+    });
+    return draft;
+  }
+  function blankDraft() {
+    var draft = {};
+    draftFieldIds.forEach(function (id) { draft[id] = id === "review-consent" ? false : ""; });
+    return draft;
+  }
+  function restoreDraft(draft) {
+    draftFieldIds.forEach(function (id) {
+      var field = element(id);
+      var value = draft && Object.prototype.hasOwnProperty.call(draft, id) ? draft[id] : (id === "review-consent" ? false : "");
+      if (field.type === "checkbox") field.checked = Boolean(value);
+      else field.value = value;
+    });
+    if (orcidApi) element("orcid-id").value = orcidApi.formatInput(element("orcid-id").value);
+  }
+  function resetActiveDraft() {
+    modeDrafts[selectedType()] = null;
+    restoreDraft(blankDraft());
+    element("researcher-search-status").textContent = "Search the published directory by name or department. Results are ordered by last name.";
+    renderDuplicates();
   }
   function updateType() {
-    var correction = selectedType() === "profile_correction";
+    var nextType = selectedType();
+    if (activeRequestType && activeRequestType !== nextType) modeDrafts[activeRequestType] = captureDraft();
+    activeRequestType = nextType;
+    var correction = nextType === "profile_correction";
     element("existing-wrap").classList.toggle("hidden", !correction);
     element("relationship-wrap").classList.toggle("hidden", correction);
+    element("local-save-wrap").hidden = correction;
     element("researcher-search").required = correction;
-    if (!correction) {
-      element("existing-researcher").value = "";
-      element("researcher-search").value = "";
-      fillProfile(null);
-    } else if (element("existing-researcher").value) {
-      fillProfile(findResearcher(element("existing-researcher").value));
-    }
+    restoreDraft(modeDrafts[nextType] || blankDraft());
     hideResearcherOptions();
     idempotencyKey = "";
     fallback.hidden = true;
@@ -164,6 +200,69 @@
         }).join("; ") + ". Administrators will review identity; nothing is merged automatically."
       : "";
   }
+  function safeStorage() {
+    try { return globalThis.localStorage; }
+    catch (_error) { return null; }
+  }
+  function addLocally() {
+    if (!teamApi || !orcidApi) {
+      setStatus("Browser-only Team Match profiles are unavailable because a helper did not load.", "error");
+      return;
+    }
+    var name = inputValue("display-name").replace(/\s+/g, " ").trim();
+    var keywords = teamApi.parseKeywords(inputValue("research-claims"), 50);
+    var rawOrcid = inputValue("orcid-id").trim();
+    var orcidId = rawOrcid ? orcidApi.normalizeId(rawOrcid) : "";
+    if (name.length < 2) {
+      setStatus("Enter the researcher's name before adding this profile locally.", "error");
+      element("display-name").focus();
+      return;
+    }
+    if (keywords.length < teamApi.MIN_KEYWORDS || keywords.length > teamApi.MAX_KEYWORDS) {
+      setStatus("Add three to eight distinct research interests for Team Match; about five works best.", "error");
+      element("research-claims").focus();
+      return;
+    }
+    if (rawOrcid && !orcidId) {
+      setStatus("Enter a valid ORCID, including all 16 characters, or leave it blank.", "error");
+      element("orcid-id").focus();
+      return;
+    }
+    var storage = safeStorage();
+    var loaded = teamApi.load(storage);
+    if (!loaded.available) {
+      setStatus("Browser storage is unavailable, so this researcher cannot be carried into Team Match.", "error");
+      return;
+    }
+    var duplicate = loaded.profiles.find(function (profile) {
+      return profile.name.toLowerCase() === name.toLowerCase() || (orcidId && profile.orcid_id === orcidId);
+    });
+    if (duplicate) {
+      setStatus(duplicate.name + " is already stored in this browser.", "error");
+      return;
+    }
+    if (loaded.profiles.length >= teamApi.MAX_EXTERNAL) {
+      setStatus("You can store up to four browser-only researchers. Remove one in Team Match before adding another.", "error");
+      return;
+    }
+    var savedId = teamApi.createId(name, loaded.profiles);
+    var profile = {
+      id: savedId, registry_id: "", name: name, keywords: keywords,
+      orcid_id: orcidId, orcid_name: "", orcid_text: "", orcid_work_count: 0,
+      orcid_total_work_count: 0, orcid_source: "", orcid_updated_at: "",
+    };
+    var result = teamApi.save(storage, loaded.profiles.concat(profile));
+    if (!result.saved) {
+      setStatus(result.error || "This researcher could not be stored in the browser.", "error");
+      return;
+    }
+    resetActiveDraft();
+    if (new URLSearchParams(location.search).get("return") === "team_match") {
+      location.assign("./team_match.html?local=" + encodeURIComponent(savedId));
+      return;
+    }
+    setStatus(name + " was stored only in this browser for Team Match. It was not submitted for catalog review.", "success");
+  }
   async function submitRequest(event) {
     event.preventDefault();
     fallback.hidden = true;
@@ -178,8 +277,11 @@
       element("receipt-id").textContent = receipt.submission_id;
       element("receipt-link").href = receipt.status_url;
       element("receipt").hidden = false;
+      modeDrafts[selectedType()] = null;
+      resetActiveDraft();
       setStatus("Request received. The currently published profile remains active until approval and deployment succeed.", "success");
       idempotencyKey = "";
+      currentSubmission = null;
     } catch (error) {
       setStatus(error.message + " Your form is still here; you may retry or download the bounded request.", "error");
       fallback.hidden = false;
@@ -190,6 +292,9 @@
   }
 
   if (!intake || !directory || !form) return;
+  var query = new URLSearchParams(location.search);
+  if (query.get("mode") === "add") form.elements.request_type.value = "new_researcher_nomination";
+  if (orcidApi) orcidApi.bindInput(element("orcid-id"));
   form.addEventListener("change", function (event) {
     if (event.target.name === "request_type") updateType();
     renderDuplicates();
@@ -230,6 +335,7 @@
     element(id).addEventListener("input", renderDuplicates);
   });
   form.addEventListener("submit", submitRequest);
+  element("add-locally").addEventListener("click", addLocally);
   fallback.addEventListener("click", function () { if (currentSubmission) intake.downloadFallback(currentSubmission); });
   updateType();
 })();

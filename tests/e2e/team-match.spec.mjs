@@ -18,7 +18,7 @@ async function assertNoHorizontalOverflow(page) {
   expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.client);
 }
 
-test("Team Match supports department, manual, duplicate, team-size, history, and mobile workflows", async ({ page }) => {
+test("Team Match supports directory, browser-only, team-size, history, and mobile workflows", async ({ page }) => {
   await page.addInitScript(() => {
     const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
     globalThis.setTimeout = (callback, delay, ...args) => (
@@ -46,11 +46,13 @@ test("Team Match supports department, manual, duplicate, team-size, history, and
   await expect(page.locator("#count")).toContainText("fit every selected researcher");
 
   await page.locator("#add-researcher").click();
-  await page.locator("#manual-researcher").click();
-  await expect(page.locator("#external-researcher-form")).toBeVisible();
-  await page.locator("#external-name").fill("Gate Four Researcher");
-  await page.locator("#external-keywords").fill("catalysis, electrochemistry, chemical engineering, carbon capture");
-  await page.getByRole("button", { name: /Save researcher/i }).click();
+  await page.locator("#missing-researcher").click();
+  await expect(page).toHaveURL(/faculty_interests\.html\?mode=add&return=team_match/);
+  await expect(page.getByRole("radio", { name: /Add a missing researcher/ })).toBeChecked();
+  await page.locator("#display-name").fill("Gate Four Researcher");
+  await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nchemical engineering\ncarbon capture");
+  await page.locator("#add-locally").click();
+  await expect(page).toHaveURL(/team_match\.html\?local=ext-gate-four-researcher/);
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
   await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));

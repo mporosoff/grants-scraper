@@ -23,7 +23,7 @@
 <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg" />
 <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster" />
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.crossref.org https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-researchers.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'" />
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://funding-finder-voyage-search.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'" />
 <title>Team Match | Funding Finder</title>
 <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/team_match.html" />
 <link rel="icon" href="./assets/icons/faculty-pairing.ico?v=20260815" sizes="any" />
@@ -53,7 +53,7 @@
   .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;margin:22px 0 6px;}
   .panel h2{margin:0 0 4px;font-size:.98rem;color:var(--navy);}
   .panel .hint{margin:0 0 12px;color:var(--muted);font-size:.82rem;}
-  .pi-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .pi-grid{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;}
   .pi-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--surface-alt);border:1px solid var(--line-strong);color:var(--ink);border-radius:999px;padding:7px 13px;font:inherit;font-size:.86rem;cursor:pointer;transition:all .12s;}
   .pi-toggle:hover{border-color:var(--blue);}
   .pi-toggle .dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-strong);flex:none;}
@@ -61,16 +61,16 @@
   .pi-toggle.on .dot{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px #fff;}
   .pi-toggle[disabled]{opacity:.4;cursor:not-allowed;}
   .pi-toggle[hidden]{display:none;}
-  .pi-entry{display:inline-flex;align-items:center;gap:4px;}
+  .pi-entry{display:inline-flex;flex:0 1 260px;min-width:0;align-items:center;gap:4px;}
+  .pi-entry .pi-toggle{flex:1;min-width:0;justify-content:flex-start;}
   .pi-entry.just-added .pi-toggle,.st-card.just-added{animation:team-member-highlight 1.4s ease-out;}
   .pi-toggle.external{border-style:dashed;background:#f2fbf7;}
   .pi-toggle.external .dot{border-color:#5aa88a;background:#d7f2e7;}
   .pi-toggle.external.on .dot{background:var(--success);border-color:var(--success);}
   .pi-toggle.add-researcher{border-style:dashed;border-color:#8ab2e8;background:var(--blue-soft);color:var(--blue-dark);font-weight:700;}
   .pi-toggle.add-researcher .dot{display:grid;place-items:center;border:0;background:var(--blue);color:#fff;font-size:.9rem;line-height:1;}
-  .pi-edit{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line-strong);border-radius:50%;background:var(--surface);color:var(--blue-dark);font:inherit;cursor:pointer;}
-  .pi-edit:hover{border-color:var(--blue);background:var(--blue-soft);}
-  .pi-edit[disabled]{opacity:.4;cursor:not-allowed;}
+  .pi-delete{display:grid;flex:0 0 30px;place-items:center;width:30px;height:30px;border:1px solid #e0aab1;border-radius:50%;background:#fff6f7;color:#9b2735;font:inherit;font-weight:800;cursor:pointer;}
+  .pi-delete:hover{border-color:#9b2735;background:#fdebed;}
   .researcher-picker{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin-top:12px;padding:12px;border:1px solid #bed2eb;border-radius:11px;background:#f7faff;}
   .researcher-picker[hidden]{display:none;}
   .researcher-picker label{display:grid;flex:1;min-width:min(100%,280px);gap:5px;color:var(--navy);font-size:.8rem;font-weight:750;}
@@ -93,8 +93,10 @@
   .faculty-suggestions li[aria-disabled="true"]{cursor:not-allowed;opacity:.62;}
   .faculty-suggestions strong,.faculty-suggestions span{display:block;}
   .faculty-suggestions span{color:var(--muted);font-size:.72rem;}
-  .manual-researcher-button{width:100%;padding:10px 12px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.84rem;font-weight:750;cursor:pointer;}
-  .saved-researcher-row{display:flex;align-items:end;gap:8px;width:100%;}
+  .missing-researcher-button{display:block;width:100%;padding:10px 12px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.84rem;font-weight:750;text-align:center;text-decoration:none;cursor:pointer;}
+  .saved-researcher-row{display:flex;flex-wrap:wrap;align-items:end;gap:8px;width:100%;}
+  .saved-researcher-row label{flex:1 1 300px;}
+  .saved-researcher-row .remove-saved-researcher{border-color:#d59ba4;background:#fff6f7;color:#8d2230;}
   @keyframes team-add-spin{to{transform:rotate(360deg);}}
   @keyframes team-member-highlight{0%,35%{box-shadow:0 0 0 4px rgb(28 101 190 / 24%);border-color:var(--blue);}100%{box-shadow:none;}}
   @media (prefers-reduced-motion:reduce){
@@ -102,45 +104,14 @@
     .pi-entry.just-added .pi-toggle,.st-card.just-added{animation:none;box-shadow:0 0 0 3px rgb(28 101 190 / 24%);border-color:var(--blue);}
   }
   .external-status{margin:9px 2px 0;color:var(--muted);font-size:.78rem;}
+  .external-status[hidden]{display:none;}
   .external-status.error{color:#9b2735;}
-  .researcher-editor{margin:14px 0 2px;padding:16px;border:1px solid #bed2eb;border-radius:12px;background:#f7faff;}
-  .researcher-editor[hidden]{display:none;}
-  .researcher-editor h3{margin:0 0 3px;color:var(--navy);font-size:1rem;}
-  .researcher-editor > p{margin:0 0 13px;color:var(--muted);font-size:.8rem;}
-  .researcher-fields{display:grid;grid-template-columns:minmax(180px,.75fr) minmax(280px,1.6fr);gap:12px;}
-  .researcher-fields label{display:grid;gap:5px;color:var(--navy);font-size:.8rem;font-weight:700;}
-  .researcher-fields input,.researcher-fields textarea{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-weight:400;}
-  .researcher-fields textarea{resize:vertical;min-height:76px;}
-  .researcher-keywords{grid-column:1/-1;}
-  .team-orcid-row{display:flex;gap:7px;align-items:stretch;margin-top:5px;}
-  .team-orcid-row input{margin:0;min-width:0;}
-  .team-orcid-row button{flex:none;padding:8px 11px;border:1px solid #78ad96;border-radius:9px;background:#f2fbf7;color:#146143;font:inherit;font-size:.76rem;font-weight:800;cursor:pointer;}
-  .team-orcid-row button:disabled{cursor:wait;opacity:.65;}
-  .team-orcid-status{display:block;min-height:1.2em;margin-top:4px;color:#527367;font-size:.72rem;font-weight:400;}
-  .team-orcid-status.error{color:#9b2735;}
-  .field-note{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.73rem;font-weight:400;}
-  .researcher-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:13px;}
-  .researcher-actions button{border:1px solid var(--line-strong);border-radius:9px;padding:8px 13px;background:#fff;color:var(--ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;}
-  .researcher-actions .save-researcher{border-color:var(--blue);background:var(--blue);color:#fff;}
-  .researcher-actions .delete-researcher{margin-left:auto;border-color:#e0aab1;color:#9b2735;background:#fff6f7;}
-  .editor-message{min-height:1.2em;margin:8px 0 0;color:#9b2735;font-size:.78rem;}
-  .review-option{display:flex;gap:9px;align-items:flex-start;margin-top:14px;padding:12px;color:var(--ink);font-size:.8rem;background:#fff;border:1px solid #c7d7e8;border-radius:10px;}
-  .review-option input{margin-top:4px;}
-  .review-option strong,.review-option span{display:block;}
-  .review-option span span{margin-top:3px;color:var(--muted);font-size:.73rem;font-weight:400;}
-  .review-submission-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:11px;padding:13px;border:1px solid #d6e0eb;border-radius:10px;background:#fff;}
-  .review-submission-fields[hidden]{display:none;}
-  .review-submission-fields label{display:grid;gap:5px;color:var(--navy);font-size:.78rem;font-weight:700;}
-  .review-submission-fields input,.review-submission-fields select,.review-submission-fields textarea{width:100%;padding:9px 10px;color:var(--ink);font:inherit;font-weight:400;border:1px solid var(--line-strong);border-radius:8px;}
-  .review-submission-fields textarea{min-height:70px;resize:vertical;}
-  .review-span{grid-column:1/-1;}
-  .review-fallback{margin-top:9px;color:var(--blue-dark);background:#fff;border:1px solid #9ab5d3;border-radius:8px;padding:7px 10px;font:inherit;font-size:.76rem;font-weight:750;cursor:pointer;}
   .toolrow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:14px;}
   .toolrow .search{flex:1;min-width:220px;}
   .toolrow input[type=search]{width:100%;padding:10px 13px;font:inherit;color:var(--ink);background:var(--surface-alt);border:1px solid var(--line-strong);border-radius:10px;}
   .linkbtn{background:none;border:none;color:var(--blue-dark);font:inherit;font-size:.84rem;cursor:pointer;padding:6px 4px;text-decoration:underline;}
-  .selected-terms{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px;}
-  .st-card{background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:9px 13px;font-size:.8rem;max-width:100%;}
+  .selected-terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin:16px 0 4px;}
+  .st-card{min-width:0;max-width:100%;background:var(--blue-soft);border:1px solid #cfe0fb;border-radius:12px;padding:9px 13px;font-size:.8rem;}
   .st-card .who{font-weight:700;color:var(--navy);}
   .st-card .terms{color:var(--blue-dark);margin-top:2px;font-size:.75rem;}
   .st-card .summary{color:#586a82;margin-top:5px;font-size:.75rem;line-height:1.4;max-width:560px;}
@@ -208,7 +179,7 @@
   footer.note{margin-top:26px;color:var(--muted);font-size:.8rem;text-align:center;}
   footer.note .app-version{font-weight:800;}
   .hide{display:none !important;}
-  @media (max-width:700px){.wrap{width:min(100% - 24px,1240px);padding-top:18px}.researcher-paths,.review-submission-fields{grid-template-columns:1fr}.researcher-fields{grid-template-columns:1fr}.researcher-keywords,.review-span{grid-column:auto}.researcher-actions .delete-researcher{margin-left:0}.team-orcid-row{flex-direction:column}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
+  @media (max-width:700px){.wrap{width:min(100% - 24px,1240px);padding-top:18px}.researcher-paths,.selected-terms{grid-template-columns:1fr}.pi-entry{flex-basis:100%}.team-result-card .key-facts,.team-result-card .detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -236,7 +207,7 @@
 <div class="wrap">
   <header class="page">
     <h1>Research team and funding collaboration finder</h1>
-    <p>Add two to four researchers to find funding opportunities that fit the team. Search the Hajim directory or add any collaborator by name, research keywords, or ORCID iD.</p>
+    <p>Add two to four researchers to find funding opportunities that fit the team. Search the Hajim directory or add a missing researcher through Configure Faculty Interests.</p>
   </header>
 
   <div class="panel">
@@ -260,74 +231,20 @@
           </div>
           <p class="researcher-picker-status" id="faculty-search-status" role="status" aria-live="polite"></p>
         </section>
-        <section class="researcher-path" aria-labelledby="manual-researcher-heading">
-          <h3 id="manual-researcher-heading">Add a researcher manually</h3>
-          <p>For collaborators outside Hajim or anyone missing from the directory.</p>
-          <button class="manual-researcher-button" id="manual-researcher" type="button">Add a researcher manually</button>
+        <section class="researcher-path" aria-labelledby="missing-researcher-heading">
+          <h3 id="missing-researcher-heading">Add a missing researcher</h3>
+          <p>Request catalog review or create a browser-only profile for Team Match.</p>
+          <a class="missing-researcher-button" id="missing-researcher" href="./faculty_interests.html?mode=add&amp;return=team_match">Configure a missing researcher</a>
         </section>
       </div>
       <div class="saved-researcher-row" id="saved-researcher-row" hidden>
         <label for="researcher-choice">Saved researchers<select id="researcher-choice"><option value="">Choose a saved researcher</option></select></label>
         <button id="choose-researcher" type="button" disabled>Add saved researcher</button>
+        <button class="remove-saved-researcher" id="remove-saved-researcher" type="button" disabled>Remove from browser</button>
       </div>
       <p class="researcher-picker-status" id="researcher-picker-status" role="status" aria-live="polite"></p>
     </div>
-    <p class="external-status" id="external-status" aria-live="polite">Researchers you add are saved only in this browser.</p>
-    <form class="researcher-editor" id="external-researcher-form" hidden>
-      <h3 id="external-editor-heading">Add a new researcher</h3>
-      <p>Add a name and three to eight specific research keywords, import public publication topics with an ORCID iD, or combine both.</p>
-      <div class="researcher-fields">
-        <label for="external-name">
-          Researcher name
-          <input id="external-name" type="text" maxlength="80" autocomplete="off" placeholder="Example: Ada Lovelace" required />
-        </label>
-        <label for="external-orcid">
-          ORCID iD <span class="field-note">optional publication import</span>
-          <span class="team-orcid-row">
-            <input id="external-orcid" type="text" maxlength="40" autocomplete="off" placeholder="0000-0002-1825-0097" />
-            <button id="import-external-orcid" type="button">Import ORCID</button>
-          </span>
-          <span class="team-orcid-status" id="external-orcid-status" aria-live="polite"></span>
-        </label>
-        <label class="researcher-keywords" for="external-keywords">
-          Research keywords
-          <textarea id="external-keywords" maxlength="520" placeholder="Example: carbon capture, heterogeneous catalysis, membrane separations, CO2 conversion, electrochemistry" required></textarea>
-          <span class="field-note"><span>Separate keywords with commas or new lines.</span><span id="external-keyword-count">0 keywords</span></span>
-        </label>
-      </div>
-      <label class="review-option" for="submit-researcher-review">
-        <input id="submit-researcher-review" type="checkbox" />
-        <span><strong>Submit this researcher for administrator review and possible inclusion in the shared researcher pool</strong><span>The researcher is saved only in this browser unless you check this box and submit. If checked, the name, research interests, ORCID iD, optional source links, and contact information entered below will be sent to the site administrator for review. Approval is not guaranteed.</span></span>
-      </label>
-      <div class="review-submission-fields" id="review-submission-fields" hidden>
-        <label for="team-relationship">Relationship to the institution
-          <select id="team-relationship" required>
-            <option value="">Choose one</option>
-            <option>University of Rochester faculty or staff</option>
-            <option>University of Rochester affiliate</option>
-            <option>Collaborator at another institution</option>
-            <option>Other or unsure</option>
-          </select>
-        </label>
-        <label for="team-contact-email">Submitter contact email <span class="field-note">optional, private</span>
-          <input id="team-contact-email" type="email" maxlength="254" autocomplete="email" />
-        </label>
-        <label class="review-span" for="team-source-urls">Supporting source links
-          <textarea id="team-source-urls" maxlength="4000" placeholder="One HTTPS link per line" required></textarea>
-        </label>
-        <label class="review-span" for="team-submitter-note">Note <span class="field-note">optional, private</span>
-          <textarea id="team-submitter-note" maxlength="1000"></textarea>
-        </label>
-        <p class="review-span field-note" id="team-duplicate-warning" role="status"></p>
-      </div>
-      <div class="researcher-actions">
-        <button class="save-researcher" id="save-researcher" type="submit">Save researcher</button>
-        <button id="cancel-external" type="button">Cancel</button>
-        <button class="delete-researcher" id="delete-external" type="button" hidden>Delete researcher</button>
-      </div>
-      <p class="editor-message" id="external-editor-message" aria-live="polite"></p>
-      <button class="review-fallback" id="team-download-request" type="button" hidden>Download bounded request JSON</button>
-    </form>
+    <p class="external-status" id="external-status" aria-live="polite" hidden></p>
   </div>
 
   <div id="selected-terms" class="selected-terms"></div>
@@ -341,7 +258,7 @@
   <div id="view" class="result-list"></div>
 
   <footer class="note">
-    <p>Team Match screens current parent opportunities and publication-eligible child topics using the same local fielded and optional hosted semantic search assets as Funding Finder. Every displayed opportunity must also pass the team-specific evidence check for every selected researcher. Archived calls are excluded. Researchers you add and imported public ORCID-linked publication metadata are stored only in this browser.</p>
+    <p>Team Match screens current parent opportunities and publication-eligible child topics using the same local fielded and optional hosted semantic search assets as Funding Finder. Every displayed opportunity must also pass the team-specific evidence check for every selected researcher. Archived calls are excluded. Browser-only researcher profiles are stored only on this device.</p>
     <p>Enhanced ordering may send a bounded aggregate of selected research keywords and theme labels. Researcher names and publication text are not sent. The hosted ranking can only reorder opportunities that already passed every-researcher local fit.</p>
     <p class="app-version" data-app-version></p>
     <section class="legal-notice" id="use-notice" aria-label="Use and copyright notice">
@@ -361,14 +278,12 @@
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
 <script src="assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
 <script src="assets/team-hybrid.js?v=app-1.3.0"></script>
-<script src="assets/orcid.js?v=orcid-2026-08-13"></script>
 <script src="assets/team-researchers.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-<script src="assets/researcher-intake.js?v=phase1-20260903-3"></script>
 <script src="assets/team-matcher.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
 <script src="data/researcher_directory.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
 <script src="data/opportunity_team_index.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
 <script src="assets/opportunity-team.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-<script src="assets/site-help.js?v=ai-boundaries-20260901"></script>
+<script src="assets/site-help.js?v=researcher-flow-20260903"></script>
 <script src="assets/site-nav.js?v=brand-2026-08-12"></script>
 <script>
 (function () {
@@ -378,8 +293,6 @@
   var catalogData = globalThis.GRANT_CATALOG || {};
   var catalog = catalogData.opportunities || [];
   var TEAM_API = globalThis.FUNDING_TEAM_RESEARCHERS || null;
-  var INTAKE_API = globalThis.FUNDING_RESEARCHER_INTAKE || null;
-  var ORCID_API = globalThis.FUNDING_ORCID || null;
   var SEARCH_API = globalThis.FUNDING_SEARCH_QUERY || null;
   var SEARCH_V2_CONFIG = globalThis.FUNDING_SEARCH_V2_CONFIG || null;
   var RETRIEVAL_API = globalThis.FUNDING_RETRIEVAL || null;
@@ -414,7 +327,6 @@
     SEARCH_ENGINE = null;
   }
   var MAX = 4;
-  var MAX_EXTERNAL = (TEAM_API && TEAM_API.MAX_EXTERNAL) || 4;
   var TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch";
   var pendingHistoryScroll = null;
   var recentlyAddedMember = "";
@@ -475,10 +387,6 @@
     };
   });
   var externalStorage = null;
-  var editingExternalId = "";
-  var editingOrcidData = null;
-  var researcherSubmissionKey = "";
-  var lastResearcherSubmission = null;
   var storageAvailable = true;
   var themeState = {};
 
@@ -1176,12 +1084,9 @@
   }
 
   function renderExternalStatus(message, isError) {
-    var count = externalResearchers.length;
-    var base = count
-      ? count + " of " + MAX_EXTERNAL + " researcher" + (count === 1 ? "" : "s") + " saved on this device."
-      : "Researchers you add are saved only in this browser (up to " + MAX_EXTERNAL + ").";
-    if (!storageAvailable) base = "Researchers you add are available in this tab only; browser storage is unavailable.";
-    $("external-status").textContent = message ? base + " " + message : base;
+    var text = message || (!storageAvailable ? "Browser-only researchers are available in this tab only because browser storage is unavailable." : "");
+    $("external-status").textContent = text;
+    $("external-status").hidden = !text;
     $("external-status").classList.toggle("error", Boolean(isError));
   }
 
@@ -1208,6 +1113,7 @@
     $("saved-researcher-row").hidden = choice.options.length <= 1;
     choice.value = "";
     $("choose-researcher").disabled = true;
+    $("remove-saved-researcher").disabled = true;
   }
 
   function closeFacultySuggestions(clearStatus) {
@@ -1285,7 +1191,7 @@
     if (!TEAM_DIRECTORY_DATA || selected.length >= MAX) return;
     var profile = TEAM_DIRECTORY_DATA.faculty.find(function (item) { return item.id === facultyId; });
     if (!profile || profile.pool_state === "unadmitted") {
-      $("faculty-search-status").textContent = "This directory-only profile has no retained matching capability. Use the manual path if you have better evidence.";
+      $("faculty-search-status").textContent = "This directory-only profile has no retained matching capability. Use Add a missing researcher if you have better evidence.";
       return;
     }
     var key = directoryFacultyKey(profile);
@@ -1324,14 +1230,14 @@
       toggleButton.addEventListener("click", function () { toggle(member); });
       entry.appendChild(toggleButton);
       if (profile) {
-        var editButton = document.createElement("button");
-        editButton.type = "button";
-        editButton.className = "pi-edit";
-        editButton.setAttribute("aria-label", "Edit " + profile.name);
-        editButton.title = "Edit " + profile.name;
-        editButton.innerHTML = "&#9998;";
-        editButton.addEventListener("click", function () { openExternalEditor(profile.id); });
-        entry.appendChild(editButton);
+        var deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "pi-delete";
+        deleteButton.setAttribute("aria-label", "Remove " + profile.name + " from this browser");
+        deleteButton.title = "Remove from this browser";
+        deleteButton.innerHTML = "&times;";
+        deleteButton.addEventListener("click", function () { removeExternalProfile(profile); });
+        entry.appendChild(deleteButton);
       }
       grid.insertBefore(entry, addButton);
     });
@@ -1348,7 +1254,6 @@
     if (selected.length >= MAX) return;
     var picker = $("researcher-picker");
     var opening = picker.hidden;
-    if (opening) closeExternalEditor();
     picker.hidden = !opening;
     $("add-researcher").setAttribute("aria-expanded", opening ? "true" : "false");
     if (opening) {
@@ -1361,14 +1266,16 @@
 
   function handleTeamDirectoryFailure() {
     closeFacultySuggestions(false);
-    $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Add a researcher manually instead, or select Show to retry.";
+    $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Use Add a missing researcher, or select Show to retry.";
   }
 
   function setResearcherAddBusy(busy, member) {
     var choice = $("researcher-choice");
     var button = $("choose-researcher");
+    var removeButton = $("remove-saved-researcher");
     choice.disabled = busy;
     button.disabled = busy || !choice.value;
+    removeButton.disabled = busy || !choice.value;
     button.textContent = busy ? "Adding…" : "Add to team";
     if (busy) button.setAttribute("aria-busy", "true");
     else button.removeAttribute("aria-busy");
@@ -1409,120 +1316,6 @@
     }, 25);
   }
 
-  function keywordInput() {
-    return TEAM_API ? TEAM_API.parseKeywords($("external-keywords").value, 50) : [];
-  }
-  function renderExternalOrcidStatus(message, isError) {
-    var status = $("external-orcid-status");
-    status.textContent = message || "";
-    status.classList.toggle("error", Boolean(isError));
-  }
-  function mergeExternalKeywords(additions) {
-    var merged = TEAM_API.parseKeywords(keywordInput().concat(additions || []), TEAM_API.MAX_KEYWORDS);
-    $("external-keywords").value = merged.join(", ");
-    updateKeywordCount();
-    return merged;
-  }
-  async function importExternalOrcid() {
-    if (!ORCID_API) {
-      renderExternalOrcidStatus("The ORCID publication helper did not load. Refresh and try again.", true);
-      return;
-    }
-    var button = $("import-external-orcid");
-    button.disabled = true;
-    renderExternalOrcidStatus("Looking up public publications linked to this ORCID iD…", false);
-    try {
-      var imported = await ORCID_API.fetchProfile($("external-orcid").value);
-      $("external-orcid").value = imported.orcidId;
-      if (!$("external-name").value.trim() && imported.name) $("external-name").value = imported.name;
-      var merged = mergeExternalKeywords(imported.keywords);
-      editingOrcidData = {
-        orcid_id: imported.orcidId,
-        orcid_name: imported.name,
-        orcid_text: imported.publicationText,
-        orcid_work_count: imported.importedWorkCount,
-        orcid_total_work_count: imported.totalWorkCount,
-        orcid_source: imported.source,
-        orcid_updated_at: imported.updatedAt
-      };
-      renderExternalOrcidStatus(
-        imported.importedWorkCount + " public publications imported" +
-        (merged.length < TEAM_API.MIN_KEYWORDS ? "; add enough manual keywords to reach three." : "."),
-        false
-      );
-    } catch (error) {
-      editingOrcidData = null;
-      renderExternalOrcidStatus(error && error.message ? error.message : String(error), true);
-    } finally {
-      button.disabled = false;
-    }
-  }
-
-  function updateKeywordCount() {
-    var count = keywordInput().length;
-    $("external-keyword-count").textContent = count + " keyword" + (count === 1 ? "" : "s");
-  }
-
-  function closeExternalEditor() {
-    editingExternalId = "";
-    editingOrcidData = null;
-    researcherSubmissionKey = "";
-    lastResearcherSubmission = null;
-    $("external-researcher-form").hidden = true;
-    $("external-researcher-form").reset();
-    $("external-editor-message").textContent = "";
-    renderExternalOrcidStatus("", false);
-    $("delete-external").hidden = true;
-    $("review-submission-fields").hidden = true;
-    $("team-download-request").hidden = true;
-    $("save-researcher").textContent = "Save researcher";
-    $("add-researcher").setAttribute("aria-expanded", $("researcher-picker").hidden ? "false" : "true");
-    updateKeywordCount();
-  }
-
-  function openExternalEditor(id) {
-    if (!TEAM_API) {
-      renderExternalStatus("The researcher helper did not load. Refresh the page and try again.", true);
-      return;
-    }
-    var profile = id ? externalProfile(id) : null;
-    if (!profile && externalResearchers.length >= MAX_EXTERNAL) {
-      renderExternalStatus("Delete or edit a saved researcher before adding another.", true);
-      return;
-    }
-    editingExternalId = profile ? profile.id : "";
-    researcherSubmissionKey = "";
-    lastResearcherSubmission = null;
-    closeFacultySuggestions(false);
-    $("external-editor-heading").textContent = profile ? "Edit researcher" : "Add a new researcher";
-    $("external-name").value = profile ? profile.name : "";
-    $("external-keywords").value = profile ? profile.keywords.join(", ") : "";
-    $("external-orcid").value = profile ? profile.orcid_id || "" : "";
-    $("submit-researcher-review").checked = false;
-    $("review-submission-fields").hidden = true;
-    $("team-download-request").hidden = true;
-    $("save-researcher").textContent = "Save researcher";
-    editingOrcidData = profile && profile.orcid_text ? {
-      orcid_id: profile.orcid_id,
-      orcid_name: profile.orcid_name,
-      orcid_text: profile.orcid_text,
-      orcid_work_count: profile.orcid_work_count,
-      orcid_total_work_count: profile.orcid_total_work_count,
-      orcid_source: profile.orcid_source,
-      orcid_updated_at: profile.orcid_updated_at
-    } : null;
-    renderExternalOrcidStatus(editingOrcidData
-      ? profile.orcid_work_count + " ORCID-linked publications are included in this profile."
-      : "", false);
-    $("delete-external").hidden = !profile;
-    $("external-editor-message").textContent = "";
-    $("researcher-picker").hidden = true;
-    $("external-researcher-form").hidden = false;
-    $("add-researcher").setAttribute("aria-expanded", "true");
-    updateKeywordCount();
-    $("external-name").focus();
-  }
-
   function persistExternal(nextProfiles) {
     var result = TEAM_API.save(externalStorage, nextProfiles);
     externalResearchers = result.profiles;
@@ -1533,169 +1326,22 @@
     return result;
   }
 
-  function possibleRegistryMatches(name, orcid, sources) {
-    if (!INTAKE_API || !globalThis.RESEARCHER_DIRECTORY) return [];
-    return INTAKE_API.findPossibleDuplicates(globalThis.RESEARCHER_DIRECTORY, {
-      display_name: name, orcid_id: orcid, source_urls: sources || []
-    });
-  }
-
-  function updateTeamReviewFields() {
-    var checked = $("submit-researcher-review").checked;
-    $("review-submission-fields").hidden = !checked;
-    $("team-relationship").required = checked;
-    $("team-source-urls").required = checked;
-    $("save-researcher").textContent = checked ? "Save locally and submit for review" : "Save researcher";
-    if (!checked) {
-      $("team-duplicate-warning").textContent = "";
-      $("team-download-request").hidden = true;
-    }
-  }
-
-  function updateTeamDuplicateWarning() {
-    if (!$("submit-researcher-review").checked) return;
-    var sources = [];
-    try { sources = INTAKE_API ? INTAKE_API.normalizeUrls($("team-source-urls").value) : []; } catch (_error) {}
-    var candidates = possibleRegistryMatches($("external-name").value, $("external-orcid").value, sources);
-    $("team-duplicate-warning").textContent = candidates.length
-      ? "Possible existing profile: " + candidates.slice(0, 3).map(function (item) {
-          return item.researcher.name + " (" + item.reasons.join(", ") + ")";
-        }).join("; ") + ". Nothing is merged automatically when identity is ambiguous."
-      : "";
-  }
-
-  async function saveExternal(event) {
-    event.preventDefault();
-    var name = $("external-name").value.replace(/\s+/g, " ").trim();
-    var keywords = keywordInput();
-    if (name.length < 2) {
-      $("external-editor-message").textContent = "Enter the researcher's name.";
-      $("external-name").focus();
-      return;
-    }
-    if (keywords.length < TEAM_API.MIN_KEYWORDS || keywords.length > TEAM_API.MAX_KEYWORDS) {
-      $("external-editor-message").textContent = "Add three to eight distinct research keywords; about five works best.";
-      $("external-keywords").focus();
-      return;
-    }
-    var duplicate = externalResearchers.some(function (profile) {
-      return profile.id !== editingExternalId && profile.name.toLowerCase() === name.toLowerCase();
-    });
-    if (duplicate) {
-      $("external-editor-message").textContent = "A saved researcher already uses that name.";
-      $("external-name").focus();
-      return;
-    }
-
-    var next = externalResearchers.slice(0);
-    var savedId = editingExternalId;
-    var normalizedOrcid = ORCID_API ? ORCID_API.normalizeId($("external-orcid").value) : "";
-    var orcidData = editingOrcidData && editingOrcidData.orcid_id === normalizedOrcid
-      ? editingOrcidData
-      : {
-          orcid_id: normalizedOrcid,
-          orcid_name: "",
-          orcid_text: "",
-          orcid_work_count: 0,
-          orcid_total_work_count: 0,
-          orcid_source: "",
-          orcid_updated_at: ""
-        };
-    var submitForReview = $("submit-researcher-review").checked;
-    var sourceUrls = [];
-    if (submitForReview && INTAKE_API) {
-      try { sourceUrls = INTAKE_API.normalizeUrls($("team-source-urls").value); } catch (_error) {}
-    }
-    var registryMatches = possibleRegistryMatches(name, normalizedOrcid, sourceUrls);
-    var registryId = INTAKE_API ? INTAKE_API.uniqueRegistryMatchId(registryMatches) : "";
-    var savedProfile = Object.assign({ name: name, keywords: keywords, registry_id: registryId }, orcidData);
-    if (editingExternalId) {
-      next = next.map(function (profile) {
-        return profile.id === editingExternalId
-          ? Object.assign({ id: profile.id }, savedProfile)
-          : profile;
-      });
-    } else {
-      if (next.length >= MAX_EXTERNAL) {
-        $("external-editor-message").textContent = "You can save up to four researchers.";
-        return;
-      }
-      savedId = TEAM_API.createId(name, next);
-      next.push(Object.assign({ id: savedId }, savedProfile));
-    }
-
-    var wasEditing = Boolean(editingExternalId);
-    var result = persistExternal(next);
-    var autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected.length < MAX;
-    var selectedKey = externalKey(savedId);
-    if (autoSelected) selected.push(selectedKey);
-    if (autoSelected) scheduleTeamRefresh(selectedKey);
-    else {
-      updateToggles();
-      refresh();
-    }
-    var successMessage = wasEditing
-      ? name + " was updated."
-      : name + (autoSelected ? " was saved and selected." : " was saved. Select them when you are ready.");
-    if (!result.saved) {
-      successMessage = wasEditing
-        ? name + " was updated for this tab."
-        : name + (autoSelected ? " was added to this tab and selected." : " was added to this tab.");
-    }
-    renderExternalStatus(successMessage, !result.saved);
-    if (!submitForReview) {
-      closeExternalEditor();
-      renderExternalStatus(successMessage, !result.saved);
-      return;
-    }
-    if (!wasEditing) editingExternalId = savedId;
-    try {
-      if (!INTAKE_API || !globalThis.RESEARCHER_DIRECTORY) throw new Error("The administrator review helper is unavailable.");
-      if (!researcherSubmissionKey) researcherSubmissionKey = INTAKE_API.createIdempotencyKey();
-      lastResearcherSubmission = INTAKE_API.buildSubmission({
-        submissionType: registryId ? "profile_correction" : "new_researcher_nomination",
-        sourceSurface: "team_match",
-        researcherId: registryId,
-        baseRegistryGeneration: globalThis.RESEARCHER_DIRECTORY.registry_generation,
-        displayName: name,
-        homeUnit: "",
-        orcidId: normalizedOrcid,
-        researchSummary: "",
-        claims: keywords,
-        sourceUrls: $("team-source-urls").value,
-        relationshipNote: $("team-relationship").value,
-        contactEmail: $("team-contact-email").value,
-        note: $("team-submitter-note").value,
-        idempotencyKey: researcherSubmissionKey,
-        submittedForAdminReview: true
-      });
-      $("save-researcher").disabled = true;
-      $("external-editor-message").textContent = "Saved locally. Sending the separate administrator review request…";
-      var receipt = await INTAKE_API.submit(lastResearcherSubmission);
-      closeExternalEditor();
-      renderExternalStatus(successMessage + " Administrator review request " + receipt.submission_id + " was received.", !result.saved);
-    } catch (error) {
-      $("external-editor-message").textContent = "Local save completed. The review request was not sent: " + (error && error.message ? error.message : String(error));
-      $("team-download-request").hidden = !lastResearcherSubmission;
-    } finally {
-      $("save-researcher").disabled = false;
-    }
-  }
-
-  function deleteExternal() {
-    var profile = externalProfile(editingExternalId);
-    if (!profile || !globalThis.confirm("Delete " + profile.name + " from this browser?")) return;
+  function removeExternalProfile(profile) {
+    if (!profile || !globalThis.confirm("Remove " + profile.name + " from this browser?")) return;
     var key = externalKey(profile.id);
     var result = persistExternal(externalResearchers.filter(function (item) { return item.id !== profile.id; }));
     selected = selected.filter(function (member) { return member !== key; });
-    closeExternalEditor();
-    renderExternalButtons();
     updateToggles();
     refresh();
     renderExternalStatus(
-      profile.name + (result.saved ? " was removed." : " was removed for this tab."),
+      profile.name + (result.saved ? " was removed from this browser." : " was removed for this tab."),
       !result.saved
     );
+  }
+
+  function removeChosenResearcher() {
+    var profile = externalProfile($("researcher-choice").value);
+    if (profile) removeExternalProfile(profile);
   }
 
   function updateToggles() {
@@ -1703,7 +1349,6 @@
     renderExternalButtons();
     $("add-researcher").disabled = atMax;
     $("add-researcher").title = atMax ? "The team already has four researchers" : "Add a researcher";
-    $("manual-researcher").disabled = atMax || externalResearchers.length >= MAX_EXTERNAL;
     $("faculty-search").disabled = atMax;
     $("show-faculty-suggestions").disabled = atMax;
     if (atMax) closeFacultySuggestions(false);
@@ -1725,8 +1370,13 @@
 
   async function applyProposedTeamFromUrl() {
     var params = new URLSearchParams(location.search);
+    if (params.get("manual") === "1") {
+      location.replace("./faculty_interests.html?mode=add&return=team_match");
+      return;
+    }
     var proposed = String(params.get("proposed") || "").split(",").filter(Boolean).slice(0, MAX);
-    if (!proposed.length && params.get("manual") !== "1") return;
+    var localId = String(params.get("local") || "");
+    if (!proposed.length && !localId) return;
     if (proposed.length) {
       try {
         var data = await ensureTeamDirectory();
@@ -1740,10 +1390,23 @@
           renderExternalStatus("Loaded " + selected.length + " proposed team member" + (selected.length === 1 ? "" : "s") + " from Funding Finder.", false);
         }
       } catch (_error) {
-        renderExternalStatus("The proposed Hajim team could not be restored. You can still add researchers manually.", true);
+        renderExternalStatus("The proposed Hajim team could not be restored. You can still search the directory or add a missing researcher.", true);
       }
     }
-    if (params.get("manual") === "1" && selected.length < MAX) openExternalEditor("");
+    if (localId) {
+      var profile = externalProfile(localId);
+      var localKey = profile ? externalKey(profile.id) : "";
+      if (!profile) renderExternalStatus("That browser-only researcher is no longer available.", true);
+      else if (selected.indexOf(localKey) !== -1) renderExternalStatus(profile.name + " is already on the team.", false);
+      else if (selected.length >= MAX) renderExternalStatus(profile.name + " was stored, but the current team already has four researchers.", true);
+      else {
+        selected.push(localKey);
+        themeState = {};
+        teamHybridState = idleTeamHybridState();
+        recentlyAddedMember = localKey;
+        renderExternalStatus(profile.name + " was stored in this browser and added to the team.", false);
+      }
+    }
   }
 
   async function init() {
@@ -1825,12 +1488,10 @@
     $("add-researcher").addEventListener("click", toggleResearcherPicker);
     $("researcher-choice").addEventListener("change", function () {
       $("choose-researcher").disabled = !$("researcher-choice").value;
+      $("remove-saved-researcher").disabled = !$("researcher-choice").value;
     });
     $("choose-researcher").addEventListener("click", chooseResearcher);
-    $("manual-researcher").addEventListener("click", function () {
-      $("researcher-picker").hidden = true;
-      openExternalEditor("");
-    });
+    $("remove-saved-researcher").addEventListener("click", removeChosenResearcher);
     $("faculty-search").addEventListener("input", function () { renderFacultySuggestions(false); });
     $("show-faculty-suggestions").addEventListener("mousedown", function (event) {
       event.preventDefault();
@@ -1862,33 +1523,10 @@
     $("faculty-search").addEventListener("blur", function () {
       setTimeout(function () { closeFacultySuggestions(false); }, 0);
     });
-    $("cancel-external").addEventListener("click", closeExternalEditor);
-    $("delete-external").addEventListener("click", deleteExternal);
-    $("external-researcher-form").addEventListener("submit", saveExternal);
-    $("submit-researcher-review").addEventListener("change", updateTeamReviewFields);
-    ["external-name", "external-orcid", "team-source-urls"].forEach(function (id) {
-      $(id).addEventListener("input", updateTeamDuplicateWarning);
-    });
-    $("team-download-request").addEventListener("click", function () {
-      if (lastResearcherSubmission && INTAKE_API) INTAKE_API.downloadFallback(lastResearcherSubmission);
-    });
-    $("external-keywords").addEventListener("input", updateKeywordCount);
-    $("import-external-orcid").addEventListener("click", importExternalOrcid);
-    $("external-orcid").addEventListener("input", function () {
-      var normalized = ORCID_API ? ORCID_API.normalizeId($("external-orcid").value) : "";
-      if (editingOrcidData && normalized !== editingOrcidData.orcid_id) editingOrcidData = null;
-      renderExternalOrcidStatus($("external-orcid").value.trim()
-        ? "Select “Import ORCID” to derive research topics from public publications."
-        : "", false);
-    });
     $("view").addEventListener("click", function (event) {
       var button = event.target.closest("[data-team-calendar]");
       if (button) addTeamDeadlineToCalendar(button.getAttribute("data-team-calendar"));
     });
-    if (!ORCID_API) {
-      $("import-external-orcid").disabled = true;
-      renderExternalOrcidStatus("ORCID import is unavailable because its helper did not load.", true);
-    }
     teamMatchInitialized = true;
     updateToggles();
     refresh();

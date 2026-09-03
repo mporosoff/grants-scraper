@@ -64,7 +64,7 @@
             <ul>
               <li><strong>Profile:</strong> save a short research description and keywords on this device for reuse.</li>
               <li><strong>CV:</strong> extract a bounded excerpt in the browser; the original file is not retained.</li>
-              <li><strong>ORCID:</strong> import public Crossref publication metadata linked to an ORCID iD and combine its topics with your description, keywords, or CV.</li>
+              <li><strong>ORCID:</strong> import public Crossref publication metadata linked to an ORCID and combine its topics with your description, keywords, or CV.</li>
               <li><strong>Filters:</strong> narrow by status, discipline, agency, eligibility, deadline, award size, instrument, and more.</li>
               <li><strong>Browse the catalog:</strong> leave the query blank or use Public catalog when you want to scan everything current.</li>
             </ul>
@@ -168,7 +168,7 @@
         <div class="help-grid">
           <div class="help-card">
             <h4>Build a team</h4>
-            <p>Select two to four researchers. Choose department faculty or save another researcher using specific research keywords, an ORCID publication import, or both.</p>
+            <p>Select two to four researchers. Choose department faculty or use Configure Faculty Interests to add a browser-only missing researcher for Team Match.</p>
           </div>
           <div class="help-card">
             <h4>Steer the themes</h4>

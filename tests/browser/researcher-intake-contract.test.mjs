@@ -4,11 +4,12 @@ import test from "node:test";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
-const [source, page, pageScript, team] = await Promise.all([
+const [source, page, pageScript, team, contractSource] = await Promise.all([
   readFile(new URL("assets/researcher-intake.js", root), "utf8"),
   readFile(new URL("faculty_interests.html", root), "utf8"),
   readFile(new URL("assets/faculty-interests.js", root), "utf8"),
   readFile(new URL("team_match.html", root), "utf8"),
+  readFile(new URL("workers/researcher-intake/src/contract.js", root), "utf8"),
 ]);
 
 function api() {
@@ -19,7 +20,7 @@ function api() {
   return sandbox.FUNDING_RESEARCHER_INTAKE;
 }
 
-test("both public entry points disclose and use one bounded intake contract", () => {
+test("Configure Faculty Interests discloses separate reviewed and browser-only paths", () => {
   assert.match(page, /Configure Faculty Interests/);
   assert.match(page, /shared pool\. <strong>Submitting does not publish a change\.<\/strong> The current profile/);
   assert.doesNotMatch(page, /class="notice"/);
@@ -36,19 +37,36 @@ test("both public entry points disclose and use one bounded intake contract", ()
   assert.match(pageScript, /event\.key === "ArrowDown"/);
   assert.match(pageScript, /data-researcher-index/);
   assert.match(page, /id="review-consent"/);
+  assert.doesNotMatch(page, /privacy notice version/);
+  assert.doesNotMatch(contractSource, /under the current privacy notice/i);
+  assert.match(page, /id="add-locally"[^>]*>Add locally</);
+  assert.match(page, /Stored only in this browser for Team Match/);
+  assert.match(page, /not submitted for administrator review or considered for the full catalog/);
+  assert.match(page, /connect-src[^;"]*https:\/\/funding-finder-researchers\.urochestercheme\.workers\.dev/);
+  assert.match(page, /data-orcid-input/);
+  assert.match(page, /assets\/orcid\.js/);
+  assert.match(page, /assets\/team-researchers\.js/);
   assert.match(page, /assets\/researcher-intake\.js/);
-  assert.match(team, /connect-src[^;"]*https:\/\/funding-finder-researchers\.urochestercheme\.workers\.dev/);
-  assert.match(team, /id="submit-researcher-review" type="checkbox"/);
-  assert.match(team, /Save locally and submit for review/);
-  assert.match(team, /Local save completed\. The review request was not sent/);
-  assert.match(team, /assets\/researcher-intake\.js/);
-  assert.ok(team.indexOf("persistExternal(next)") < team.indexOf("INTAKE_API.submit(lastResearcherSubmission)"));
+  assert.match(team, /faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(team, /id="remove-saved-researcher"/);
+  assert.doesNotMatch(team, /external-researcher-form|assets\/researcher-intake\.js/);
+  assert.doesNotMatch(team, /funding-finder-researchers\.urochestercheme\.workers\.dev/);
 });
 
-test("unchecked Team Match submission remains browser-local by default", () => {
-  assert.doesNotMatch(team, /id="submit-researcher-review"[^>]*checked/);
-  assert.match(team, /if \(!submitForReview\)/);
-  assert.match(team, /closeExternalEditor\(\);[\s\S]*?return;[\s\S]*?INTAKE_API\.buildSubmission/);
+test("mode-specific drafts persist until a successful action", () => {
+  assert.match(pageScript, /var modeDrafts = \{/);
+  assert.match(pageScript, /modeDrafts\[activeRequestType\] = captureDraft\(\)/);
+  assert.match(pageScript, /restoreDraft\(modeDrafts\[nextType\] \|\| blankDraft\(\)\)/);
+  assert.match(pageScript, /if \(query\.get\("mode"\) === "add"\) form\.elements\.request_type\.value = "new_researcher_nomination"/);
+  const submitStart = pageScript.indexOf("  async function submitRequest(event) {");
+  const submitEnd = pageScript.indexOf("\n\n  if (!intake", submitStart);
+  const submitSource = pageScript.slice(submitStart, submitEnd);
+  assert.match(submitSource, /await intake\.submit\(currentSubmission\)[\s\S]*?resetActiveDraft\(\)/);
+  assert.match(submitSource, /catch \(error\) \{[\s\S]*?Your form is still here/);
+  const failedSubmit = submitSource.slice(submitSource.lastIndexOf("    } catch (error) {"), submitSource.indexOf("    } finally"));
+  assert.doesNotMatch(failedSubmit, /resetActiveDraft/);
+  assert.match(pageScript, /TEAM_API|teamApi\.save/);
+  assert.match(pageScript, /team_match\.html\?local=/);
 });
 
 test("the shared browser builder emits only consented allowlisted fields", () => {
@@ -92,9 +110,9 @@ test("identity signals warn but never merge ambiguous candidates", () => {
   assert.equal("merged" in matches[0], false);
   assert.equal(intake.uniqueRegistryMatchId(matches), "");
   assert.equal(intake.uniqueRegistryMatchId([matches[0]]), "urh-000001");
-  assert.match(team, /INTAKE_API\.uniqueRegistryMatchId\(registryMatches\)/);
-  assert.doesNotMatch(team, /existingProfile\s*&&\s*existingProfile\.registry_id/);
-  assert.match(team, /Nothing is merged automatically when identity is ambiguous/);
+  assert.match(pageScript, /intake\.findPossibleDuplicates\(directory/);
+  assert.match(pageScript, /nothing is merged automatically/i);
+  assert.doesNotMatch(team, /INTAKE_API|uniqueRegistryMatchId/);
 });
 
 test("Team Match revalidates a persisted association from the edited identity", () => {

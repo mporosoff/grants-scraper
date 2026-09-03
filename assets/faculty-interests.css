@@ -42,7 +42,8 @@ a { color: var(--blue-dark); }
 .field-grid textarea { min-height: 92px; resize: vertical; }
 .span-2 { grid-column: 1 / -1; }
 .field-note { color: var(--muted); font-size: .73rem; font-weight: 400; }
-.field-label { display: flex; flex-wrap: wrap; gap: 5px; align-items: baseline; }
+.field-label { display: block; min-height: 1.5em; line-height: 1.5; }
+.field-label .field-note { margin-left: 5px; }
 .researcher-combobox { position: relative; }
 .researcher-options { position: absolute; z-index: 30; top: calc(100% + 5px); right: 0; left: 0; max-height: 300px; overflow-y: auto; background: #fff; border: 1px solid #aebfd2; border-radius: 9px; box-shadow: 0 14px 32px rgb(0 30 95 / 16%); }
 .researcher-options button { display: grid; width: 100%; gap: 2px; padding: 11px 13px; color: var(--ink); text-align: left; background: #fff; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; }
@@ -58,6 +59,11 @@ a { color: var(--blue-dark); }
 .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 15px; color: var(--ink); font-size: .82rem; }
 .consent input { margin-top: 4px; }
 .form-actions { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 16px; }
+.local-save { display: flex; gap: 18px; align-items: center; justify-content: space-between; margin-top: 16px; padding: 15px; background: #f5f8fc; border: 1px solid var(--line); border-radius: 11px; }
+.local-save[hidden] { display: none; }
+.local-save h2 { margin: 0 0 3px; color: var(--navy); font-size: .92rem; }
+.local-save p { margin: 0; color: var(--muted); font-size: .78rem; }
+.local-save button { flex: 0 0 auto; }
 .primary,
 .secondary { min-height: 42px; padding: 9px 14px; font: inherit; font-weight: 800; border-radius: 9px; cursor: pointer; }
 .primary { color: #fff; background: var(--blue); border: 1px solid var(--blue); }
@@ -84,5 +90,7 @@ a { color: var(--blue-dark); }
   .request-kind,
   .field-grid { grid-template-columns: 1fr; }
   .span-2 { grid-column: auto; }
+  .local-save { align-items: stretch; flex-direction: column; }
+  .local-save button { width: 100%; }
   .interests-footer { width: min(100% - 22px, 1060px); }
 }
