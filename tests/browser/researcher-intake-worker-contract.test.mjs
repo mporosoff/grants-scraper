@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
 import { enforceClaimContinuity, enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
-import { createHandler, reconcilePublication, seedApprovedProfile } from "../../workers/researcher-intake/src/index.js";
+import { createHandler, reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
@@ -243,6 +243,52 @@ test("correction approval defaults apply submitted additions and retirements", (
   );
 });
 
+test("publication retries revalidate corrected approvals against the live registry", async () => {
+  const registryGeneration = "a".repeat(64);
+  const currentProfile = {
+    id: "urh-000001", name: "Ada Lovelace", aliases: [], orcid_id: "", home_unit: "Computing",
+    relationship: "internal_affiliated_researcher", pool_visibility: "institution",
+    auto_proposable: true, status: "active", research_summary: "Existing summary",
+    source_urls: ["https://example.edu/ada"],
+    claims: [{
+      claim_id: "urh-000001-c001", revision: 1, status: "active", label: "Analytical engines",
+      category: "Computing", categories: ["Computing"], type: "Capability",
+      evidence: "Published analytical engine research.", source_urls: ["https://example.edu/ada"],
+      verified_on: "2026-09-03", evidence_level: "direct", legacy_claim_ids: ["ada-lovelace:CV001"],
+    }],
+  };
+  const otherProfile = {
+    id: "urh-000002", name: "Grace Hopper", orcid_id: "0000-0002-1825-0097", claims: [],
+  };
+  const approvedProfile = {
+    display_name: currentProfile.name, sort_name: "Lovelace, Ada", aliases: [],
+    orcid_id: otherProfile.orcid_id, home_unit: currentProfile.home_unit,
+    relationship: currentProfile.relationship, pool_visibility: currentProfile.pool_visibility,
+    auto_proposable: currentProfile.auto_proposable, status: currentProfile.status,
+    research_summary: currentProfile.research_summary, source_urls: currentProfile.source_urls,
+    source_checked_date: "2026-09-03", claims: currentProfile.claims,
+  };
+  const current = {
+    researcher_id: currentProfile.id, base_registry_generation: registryGeneration,
+    proposed_profile_json: JSON.stringify({ relationship_note: "University researcher" }),
+  };
+  const env = { REGISTRY_MANIFEST_URL: "https://example.test/manifest.json", PUBLIC_SITE_ROOT: "https://example.test" };
+  const directory = { registry_generation: registryGeneration, researchers: [currentProfile, otherProfile] };
+  const fetchImpl = async url => url === env.REGISTRY_MANIFEST_URL
+    ? Response.json({ registry_generation: registryGeneration })
+    : new Response(`window.RESEARCHER_DIRECTORY = ${JSON.stringify(directory)};`);
+
+  await assert.rejects(
+    validateApprovalAgainstCurrentRegistry(current, approvedProfile, env, fetchImpl),
+    /already belongs to another researcher/,
+  );
+  const corrected = await validateApprovalAgainstCurrentRegistry(
+    current, { ...approvedProfile, orcid_id: "" }, env, fetchImpl,
+  );
+  assert.equal(corrected.orcid_id, "");
+  assert.deepEqual(corrected.claims[0].legacy_claim_ids, currentProfile.claims[0].legacy_claim_ids);
+});
+
 test("public creation is rate bounded, idempotent, and returns the same private receipt", async () => {
   const store = new MemoryStore();
   const handler = createHandler({ storeFactory: () => store, now: () => new Date("2026-09-03T12:00:00Z") });
@@ -391,6 +437,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.ok(workflow.indexOf("Record the recoverable publication target before merge") < workflow.indexOf("Enable checks-gated auto-merge"));
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);
+  assert.match(workerSource, /body\.action === "retry_publish"[\s\S]*validateApprovalAgainstCurrentRegistry\(current, body\.approved_profile/);
+  assert.match(workerSource, /store\.markPublishing\(current\.submission_id, expectedRevision, actor, now\(\)\.toISOString\(\), approvedProfile\)/);
   assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
   assert.match(workerSource, /\["approved", "publication_failed"\]\.includes\(current\.state\)/);
@@ -542,9 +590,13 @@ test("an approved record can resume publication or rebase after a transient tran
     expectedRevision: publishing.revision, failureCode: "pull_request_closed",
     deploymentResult: "pull_request_closed_without_merge",
   }, "2026-09-03T12:03:30.000Z");
-  const retried = await normalStore.markPublishing(failed.submission_id, failed.revision, "admin@example.edu", "2026-09-03T12:03:40.000Z");
+  const correctedProfile = { display_name: "Ada Lovelace", orcid_id: "" };
+  const retried = await normalStore.markPublishing(
+    failed.submission_id, failed.revision, "admin@example.edu", "2026-09-03T12:03:40.000Z", correctedProfile,
+  );
   assert.equal(retried.publication_target_pr_url, null);
   assert.equal(retried.publication_target_registry_generation, null);
+  assert.deepEqual(JSON.parse(retried.approved_profile_json), correctedProfile);
 
   const stale = await approvedRecord("rs_eeeeeeeeeeeeeeeeeeeeeeee", "52345678-1234-4234-8234-123456789abc");
   const rebased = await normalStore.rebase({

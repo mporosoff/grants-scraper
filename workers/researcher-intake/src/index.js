@@ -379,6 +379,32 @@ export function seedApprovedProfile(value, today = new Date().toISOString().slic
   };
 }
 
+export async function validateApprovalAgainstCurrentRegistry(current, submittedProfile, env, fetchImpl) {
+  const [manifest, directory] = await Promise.all([
+    currentManifest(env, fetchImpl),
+    currentDirectory(env, fetchImpl),
+  ]);
+  if (manifest.registry_generation !== current.base_registry_generation) {
+    fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
+  }
+  if (!directory || directory.registry_generation !== manifest.registry_generation || !Array.isArray(directory.researchers)) {
+    fail("registry_unavailable", "The current researcher directory could not be verified.", 503);
+  }
+  const currentProfile = directory.researchers.find(row => row.id === current.researcher_id) || null;
+  if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
+  const otherProfiles = directory.researchers.filter(row => row.id !== current.researcher_id);
+  const reservedLegacyClaimIds = otherProfiles
+    .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
+  const reservedOrcidIds = otherProfiles.map(row => row.orcid_id).filter(Boolean);
+  return enforceClaimContinuity(
+    enforceSubmittedRelationship(
+      validateAdminProfile(submittedProfile, current.researcher_id, reservedLegacyClaimIds, reservedOrcidIds),
+      JSON.parse(current.proposed_profile_json),
+    ),
+    currentProfile,
+  );
+}
+
 const ADMIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Researcher review | Funding Finder</title><link rel="stylesheet" href="/admin/styles.css"></head><body><main><header><p>Funding Finder administration</p><h1>Researcher submissions</h1><p>Review the current and proposed public values before publishing a registry-only change.</p></header><section id="queue" aria-live="polite">Loading queue…</section><section id="detail" hidden><button id="back" type="button">Back to queue</button><h2 id="detail-title"></h2><div class="columns"><div><h3>Current</h3><pre id="current"></pre></div><div><h3>Proposed</h3><pre id="proposed"></pre></div></div><p id="signals"></p><label>Approved registry profile JSON<textarea id="approved" rows="22"></textarea></label><label>Administrator reason<input id="reason" maxlength="500"></label><div class="actions"><button data-action="start_review">Start review</button><button data-action="rebase">Rebase onto current registry</button><button data-action="approve">Approve or edit and publish</button><button data-action="request_changes">Request changes</button><button data-action="reject">Reject</button><button data-action="retry_publish">Retry publication</button><button data-action="reconcile_publish">Reconcile publication</button></div><p id="admin-status" aria-live="polite"></p></section></main><script src="/admin/app.js"></script></body></html>`;
 const ADMIN_CSS = `:root{font-family:Inter,system-ui,sans-serif;color:#17293f;background:#f3f6fb}body{margin:0}main{width:min(1180px,calc(100% - 32px));margin:auto;padding:30px 0}header{padding:20px 24px;color:#fff;background:#001e5f;border-radius:14px}header p,header h1{margin:4px 0}.queue{width:100%;margin-top:20px;border-collapse:collapse;background:#fff}.queue th,.queue td{padding:10px;border:1px solid #d6e0eb;text-align:left}.queue button,.actions button,#back{padding:8px 11px;font:inherit;font-weight:700}.columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.columns>div{min-width:0;padding:12px;background:#fff;border:1px solid #d6e0eb;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}label{display:grid;gap:5px;margin-top:12px;font-weight:700}textarea,input{padding:10px;font:inherit;border:1px solid #9db2c8;border-radius:8px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}@media(max-width:760px){.columns{grid-template-columns:1fr}}`;
 const ADMIN_JS = `(() => {"use strict";let active=null;const q=document.getElementById("queue"),d=document.getElementById("detail"),status=document.getElementById("admin-status");const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));async function api(path,options){const r=await fetch(path,options);const v=await r.json();if(!r.ok)throw new Error(v.error?.message||"Request failed");return v}async function load(){q.textContent="Loading queue…";const v=await api("/admin/api/submissions");q.innerHTML='<table class="queue"><thead><tr><th>Researcher</th><th>Request</th><th>Source</th><th>Trust</th><th>Effect</th><th>State</th><th>Submitted</th><th>Action</th></tr></thead><tbody>'+v.submissions.map(x=>'<tr><td>'+esc(x.proposed_profile.display_name)+'</td><td>'+esc(x.submission_type)+'</td><td>'+esc(x.source_surface)+'</td><td>'+esc(JSON.stringify(x.trust_signals))+'</td><td>'+esc(x.material_effect.classification+"; "+x.material_effect.changed_claims+" claim change(s); "+x.material_effect.affected_team_scopes.length+" team scope(s)")+'</td><td>'+esc(x.state)+'</td><td>'+esc(x.created_at)+'</td><td><button data-id="'+esc(x.submission_id)+'">Open</button></td></tr>').join("")+'</tbody></table>';q.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>open(b.dataset.id))}async function open(id){active=await api("/admin/api/submissions/"+encodeURIComponent(id));q.hidden=true;d.hidden=false;document.getElementById("detail-title").textContent=active.proposed_profile.display_name+" — "+active.state;document.getElementById("current").textContent=JSON.stringify(active.current_profile,null,2);document.getElementById("proposed").textContent=JSON.stringify(active.proposed_profile,null,2);document.getElementById("signals").textContent="Identity signals: "+JSON.stringify(active.duplicate_candidates)+" | Material effect: "+JSON.stringify(active.material_effect)+" | Validator warnings: "+JSON.stringify(active.validator_warnings);document.getElementById("approved").value=JSON.stringify(active.approved_profile,null,2);status.textContent=""}document.getElementById("back").onclick=()=>{d.hidden=true;q.hidden=false;load()};document.querySelectorAll("[data-action]").forEach(b=>b.onclick=async()=>{if(!active)return;let profile=null;try{if(["approve","retry_publish"].includes(b.dataset.action))profile=JSON.parse(document.getElementById("approved").value)}catch{status.textContent="Approved profile JSON is invalid.";return}b.disabled=true;try{const v=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id)+"/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:b.dataset.action,expected_revision:active.revision,approved_profile:profile,reason:document.getElementById("reason").value})});status.textContent="State: "+v.state;active=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id));}catch(e){status.textContent=e.message}finally{b.disabled=false}});load().catch(e=>q.textContent=e.message)})();`;
@@ -501,27 +527,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           });
         }
         if (body.action === "approve") {
-          const [manifest, directory] = await Promise.all([
-            currentManifest(env, fetchImpl),
-            currentDirectory(env, fetchImpl),
-          ]);
-          if (manifest.registry_generation !== current.base_registry_generation) fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
-          if (!directory || directory.registry_generation !== manifest.registry_generation || !Array.isArray(directory.researchers)) {
-            fail("registry_unavailable", "The current researcher directory could not be verified.", 503);
-          }
-          const currentProfile = directory?.researchers?.find(row => row.id === current.researcher_id) || null;
-          if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
-          const otherProfiles = directory.researchers.filter(row => row.id !== current.researcher_id);
-          const reservedLegacyClaimIds = otherProfiles
-            .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
-          const reservedOrcidIds = otherProfiles.map(row => row.orcid_id).filter(Boolean);
-          const approvedProfile = enforceClaimContinuity(
-            enforceSubmittedRelationship(
-              validateAdminProfile(body.approved_profile, current.researcher_id, reservedLegacyClaimIds, reservedOrcidIds),
-              JSON.parse(current.proposed_profile_json),
-            ),
-            currentProfile,
-          );
+          const approvedProfile = await validateApprovalAgainstCurrentRegistry(current, body.approved_profile, env, fetchImpl);
           const approved = await store.transition({ id: current.submission_id, fromStates: ["pending", "under_review", "changes_requested"], toState: "approved", expectedRevision, actor, reason, approvedProfile, now: now().toISOString() });
           if (!approved) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
           const publishing = await store.markPublishing(approved.submission_id, approved.revision, actor, now().toISOString());
@@ -538,9 +544,8 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           if (!["approved", "publication_failed"].includes(current.state)) {
             fail("state_conflict", "Only an approved or failed publication can be retried.", 409);
           }
-          const manifest = await currentManifest(env, fetchImpl);
-          if (manifest.registry_generation !== current.base_registry_generation) fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
-          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString());
+          const approvedProfile = await validateApprovalAgainstCurrentRegistry(current, body.approved_profile, env, fetchImpl);
+          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString(), approvedProfile);
           if (!publishing) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
           try { await dispatchPublication(env, publishing, fetchImpl); }
           catch (error) {
