@@ -220,6 +220,14 @@ class ResearcherRegistryTests(unittest.TestCase):
         self.assertEqual(updated_target["claims"][0]["revision"], old_revision + 1)
         self.assertNotEqual(updated["registry_generation"], self.registry["registry_generation"])
 
+        invalid_profile = copy.deepcopy(approved_profile)
+        invalid_profile["claims"][0]["revision"] = 0
+        with self.assertRaisesRegex(ValueError, r"positive integer"):
+            apply_approved_submission(self.registry, {
+                "schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+                "approved_at": "2026-09-03T12:00:00Z", "approved_profile": invalid_profile,
+            }, self.registry["registry_generation"])
+
     def test_data_only_add_retire_rename_and_pool_changes_remain_valid(self):
         added, _ = apply_approved_submission(self.registry, {
             "schema_version": 1,

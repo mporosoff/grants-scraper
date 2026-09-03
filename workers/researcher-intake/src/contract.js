@@ -133,6 +133,9 @@ export function validateAdminProfile(value, researcherId) {
   const claims = value.claims.map((claim, index) => {
     const claimAllowed = new Set(["claim_id", "revision", "status", "label", "category", "categories", "type", "evidence", "source_urls", "verified_on", "evidence_level", "legacy_claim_ids", "material_hash"]);
     exactFields(claim, claimAllowed, "Claim");
+    if (!Number.isInteger(claim.revision) || claim.revision < 1) {
+      fail("invalid_claim", "A claim revision must be a positive integer.");
+    }
     const claimId = text(claim.claim_id, 40, "Claim identifier") || (researcherId ? `${researcherId}-c${String(index + 1).padStart(3, "0")}` : "");
     if (claimId && !/^urh-[0-9]{6}-c[0-9]{3}$/.test(claimId)) fail("invalid_claim_id", "A claim identifier is invalid.");
     if (claimId && researcherId && !claimId.startsWith(`${researcherId}-c`)) fail("invalid_claim_id", "A claim identifier belongs to another researcher.");
@@ -143,7 +146,7 @@ export function validateAdminProfile(value, researcherId) {
     const categories = list(claim.categories || [category], 12, 140, "Claim categories", true);
     if (!categories.includes(category)) fail("invalid_claim", "Claim categories must include the primary category.");
     return {
-      claim_id: claimId, revision: Math.max(1, Number(claim.revision) || 1), status: claim.status,
+      claim_id: claimId, revision: claim.revision, status: claim.status,
       label: text(claim.label, 180, "Claim label", true), category, categories,
       type: text(claim.type, 80, "Claim type", true), evidence: text(claim.evidence, 500, "Claim evidence", true),
       source_urls: urls(claim.source_urls, true), verified_on: calendarDate(claim.verified_on, "Claim verification date"),

@@ -125,6 +125,18 @@ test("administrator policy cannot elevate hidden or inactive researchers automat
       verified_on: "2026-99-99", evidence_level: "administrator_reviewed", legacy_claim_ids: [],
     }],
   }, ""), /valid YYYY-MM-DD calendar date/);
+  const validClaim = {
+    claim_id: "", revision: 1, status: "active", label: "Analytical engines",
+    category: "Computational methods", categories: ["Computational methods"], type: "Capability",
+    evidence: "Published analytical engine research.", source_urls: ["https://example.edu/ada"],
+    verified_on: "2026-09-03", evidence_level: "administrator_reviewed", legacy_claim_ids: [],
+  };
+  for (const revision of [0, -1, 1.5, "1"]) {
+    assert.throws(
+      () => validateAdminProfile({ ...dateProfile, claims: [{ ...validClaim, revision }] }, ""),
+      /positive integer/,
+    );
+  }
 });
 
 test("correction approval defaults apply submitted additions and retirements", () => {
@@ -279,6 +291,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workerSource, /store\.rebase/);
   assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
+  assert.match(workerSource, /\["approved", "publication_failed"\]\.includes\(current\.state\)/);
+  assert.match(storeSource, /"changes_requested", "approved", "publication_failed"/);
   assert.doesNotMatch(workflow, /playwright|test:e2e/);
 });
 
@@ -314,7 +328,7 @@ test("a failed stale publication can be rebased only through an audited re-revie
   assert.equal(rebased.deployment_result, null);
   assert.equal(rebased.publication_started_at, null);
   assert.equal(rebased.approved_at, null);
-  assert.deepEqual(JSON.parse(rebased.approved_profile_json), { display_name: "Ada Lovelace" });
+  assert.equal(rebased.approved_profile_json, null);
   const transitions = database.prepare("SELECT from_state, to_state, revision, reason FROM researcher_submission_transitions WHERE submission_id = ? ORDER BY transition_id").all(rebased.submission_id);
   assert.deepEqual({ ...transitions.at(-1) }, {
     from_state: "publication_failed", to_state: "under_review", revision: rebased.revision,
@@ -360,6 +374,59 @@ test("state updates roll back when their audit insert fails", async () => {
   const unchanged = database.prepare("SELECT state, revision FROM researcher_submissions WHERE submission_id = ?").get(created.submission_id);
   assert.deepEqual({ ...unchanged }, { state: "pending", revision: 1 });
   assert.equal(database.prepare("SELECT COUNT(*) AS count FROM researcher_submission_transitions WHERE submission_id = ?").get(created.submission_id).count, 1);
+});
+
+test("an approved record can resume publication or rebase after a transient transition failure", async () => {
+  const database = new DatabaseSync(":memory:");
+  database.exec("PRAGMA foreign_keys = ON");
+  database.exec(migration);
+  database.exec(transitionMigration);
+  const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
+  async function approvedRecord(id, key) {
+    const created = await normalStore.create({
+      submissionId: id, idempotencyKey: key, payloadHash: "d".repeat(64), receiptTokenHash: "e".repeat(64),
+      submissionType: "new_researcher_nomination", sourceSurface: "faculty_interests", researcherId: null,
+      baseRegistryGeneration: "a".repeat(64), proposedProfile: submission().proposed_profile,
+      contactEmail: "ada@example.edu", submitterNote: "Review", privacyNoticeVersion: "2026-09-03",
+      createdAt: "2026-09-03T12:00:00.000Z",
+    });
+    return normalStore.transition({
+      id: created.submission_id, fromStates: ["pending"], toState: "approved",
+      expectedRevision: created.revision, actor: "admin@example.edu", reason: "Approved",
+      approvedProfile: { display_name: "Ada Lovelace" }, now: "2026-09-03T12:01:00.000Z",
+    });
+  }
+  class FailingAuditD1 extends SqliteD1 {
+    async batch(statements) {
+      this.database.exec("BEGIN IMMEDIATE");
+      try {
+        statements[0].execute();
+        throw new Error("simulated publishing transition failure");
+      } finally {
+        this.database.exec("ROLLBACK");
+      }
+    }
+  }
+
+  const resumable = await approvedRecord("rs_dddddddddddddddddddddddd", "42345678-1234-4234-8234-123456789abc");
+  const failingStore = new ResearcherSubmissionStore(new FailingAuditD1(database));
+  await assert.rejects(
+    failingStore.markPublishing(resumable.submission_id, resumable.revision, "admin@example.edu", "2026-09-03T12:02:00.000Z"),
+    /simulated publishing transition failure/,
+  );
+  const stillApproved = await normalStore.byId(resumable.submission_id);
+  assert.equal(stillApproved.state, "approved");
+  assert.equal(stillApproved.revision, resumable.revision);
+  const publishing = await normalStore.markPublishing(stillApproved.submission_id, stillApproved.revision, "admin@example.edu", "2026-09-03T12:03:00.000Z");
+  assert.equal(publishing.state, "publishing");
+
+  const stale = await approvedRecord("rs_eeeeeeeeeeeeeeeeeeeeeeee", "52345678-1234-4234-8234-123456789abc");
+  const rebased = await normalStore.rebase({
+    id: stale.submission_id, expectedRevision: stale.revision, nextGeneration: "b".repeat(64),
+    actor: "admin@example.edu", reason: "", now: "2026-09-03T12:04:00.000Z",
+  });
+  assert.equal(rebased.state, "under_review");
+  assert.equal(rebased.approved_profile_json, null);
 });
 
 test("publication completion is idempotent after a network-ambiguous callback", async () => {

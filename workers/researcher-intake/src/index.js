@@ -443,7 +443,9 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           return json(200, { submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision });
         }
         if (body.action === "retry_publish") {
-          if (current.state !== "publication_failed") fail("state_conflict", "Only a failed publication can be retried.", 409);
+          if (!["approved", "publication_failed"].includes(current.state)) {
+            fail("state_conflict", "Only an approved or failed publication can be retried.", 409);
+          }
           const manifest = await currentManifest(env, fetchImpl);
           if (manifest.registry_generation !== current.base_registry_generation) fail("stale_registry_generation", "The registry changed. Rebase and review this request again.", 409);
           const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString());

@@ -167,7 +167,11 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
             if not CLAIM_ID.fullmatch(claim_id) or not claim_id.startswith(f"{researcher_id}-c") or claim_id in claim_ids:
                 raise ValueError(f"duplicate, invalid, or misowned claim ID: {claim_id!r}")
             claim_ids.add(claim_id)
-            if not isinstance(claim.get("revision"), int) or claim["revision"] < 1:
+            if (
+                not isinstance(claim.get("revision"), int)
+                or isinstance(claim["revision"], bool)
+                or claim["revision"] < 1
+            ):
                 raise ValueError(f"{claim_id}.revision must be a positive integer")
             if claim.get("status") not in CLAIM_STATUSES:
                 raise ValueError(f"{claim_id} has an invalid status")
@@ -622,13 +626,20 @@ def apply_approved_submission(
     normalized_claims = []
     for index, claim in enumerate(target.get("claims", []), start=1):
         value = copy.deepcopy(claim)
+        requested_revision = value.get("revision")
+        if (
+            not isinstance(requested_revision, int)
+            or isinstance(requested_revision, bool)
+            or requested_revision < 1
+        ):
+            raise ValueError("approved claim revision must be a positive integer")
         value["claim_id"] = value.get("claim_id") or f"{researcher_id}-c{index:03d}"
         value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
         if old and material_claim_hash(value) != old["material_hash"]:
             value["revision"] = old["revision"] + 1
         else:
-            value["revision"] = int(value.get("revision") or 1)
+            value["revision"] = requested_revision
         value["material_hash"] = material_claim_hash(value)
         normalized_claims.append(value)
     target["claims"] = normalized_claims

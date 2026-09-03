@@ -127,7 +127,7 @@ export class ResearcherSubmissionStore {
   }
 
   async rebase({ id, expectedRevision, nextGeneration, actor, reason, now }) {
-    const fromStates = ["pending", "under_review", "changes_requested", "publication_failed"];
+    const fromStates = ["pending", "under_review", "changes_requested", "approved", "publication_failed"];
     const current = await this.byId(id);
     if (!current || current.revision !== expectedRevision || !fromStates.includes(current.state)
         || current.base_registry_generation === nextGeneration) return null;
@@ -136,7 +136,7 @@ export class ResearcherSubmissionStore {
     const auditReason = reason || `Rebased from registry ${current.base_registry_generation} to ${nextGeneration}; administrator re-review required`;
     const update = this.db.prepare(`UPDATE researcher_submissions SET
       state = 'under_review', base_registry_generation = ?, revision = ?, updated_at = ?,
-      administrator_email = ?, administrator_reason = ?, approved_at = NULL,
+      administrator_email = ?, administrator_reason = ?, approved_profile_json = NULL, approved_at = NULL,
       publication_started_at = NULL, failure_code = NULL, deployment_result = NULL
       WHERE submission_id = ? AND revision = ? AND state IN (${placeholders})
         AND base_registry_generation <> ?`)
