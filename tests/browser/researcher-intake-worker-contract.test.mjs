@@ -8,11 +8,12 @@ import { createHandler } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, storeSource, migration, workflow, deploymentWorkflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
+  readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-researcher-intake.yml", root), "utf8"),
   readFile(new URL("workers/researcher-intake/wrangler.jsonc", root), "utf8"),
 ]);
@@ -215,6 +216,10 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.doesNotMatch(deploymentWorkflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   assert.match(deploymentWorkflow, /GITHUB_PUBLICATION_TOKEN:null/);
   assert.match(workflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
+  const publicationGroup = workflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
+  const refreshGroup = refreshWorkflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
+  assert.equal(publicationGroup, "funding-finder-coordinated-release");
+  assert.equal(publicationGroup, refreshGroup);
   assert.match(workerSource, /submission_id: row\.submission_id, approved_revision: row\.revision/);
   assert.doesNotMatch(workerSource.slice(workerSource.indexOf("client_payload"), workerSource.indexOf("client_payload") + 260), /approved_profile|repository_path|command/);
   assert.match(workflow, /Refuse every non-allowlisted path/);

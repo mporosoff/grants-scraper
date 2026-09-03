@@ -294,6 +294,7 @@ def legacy_faculty_projection(registry: dict) -> list[dict]:
             "type": claim["type"],
             "evidence": claim["evidence"],
             "evidence_tier": claim["evidence_level"],
+            "source_urls": claim["source_urls"],
         } for claim in row["claims"] if claim["status"] == "active"],
         "source_urls": row["source_urls"],
         "source_checked_date": row["source_checked_date"],
@@ -366,8 +367,108 @@ def _identity_map(registry: dict) -> dict[str, str]:
     return result
 
 
+def _team_profile_changed(previous: dict, current: dict) -> bool:
+    fields = (
+        "relationship", "pool_visibility", "auto_proposable", "status", "pool_state",
+        "official_interests", "source_urls",
+    )
+    if any(previous.get(field) != current.get(field) for field in fields):
+        return True
+    term_fields = (
+        "claim_id", "claim_revision", "label", "category", "categories", "type",
+        "evidence", "evidence_tier",
+    )
+    previous_terms = [
+        {field: term.get(field) for field in term_fields}
+        for term in previous.get("terms", [])
+    ]
+    current_terms = [
+        {field: term.get(field) for field in term_fields}
+        for term in current.get("terms", [])
+    ]
+    if previous_terms != current_terms:
+        return True
+    # Older checked-in projections did not retain claim-level sources. Once a
+    # projection contains them, every later publication must preserve or
+    # explicitly recalibrate those evidence links.
+    if any("source_urls" in term for term in previous.get("terms", [])):
+        previous_sources = [term.get("source_urls", []) for term in previous.get("terms", [])]
+        current_sources = [term.get("source_urls", []) for term in current.get("terms", [])]
+        if previous_sources != current_sources:
+            return True
+    return False
+
+
+def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
+    """Reject registry changes that would silently stale calibrated team evidence."""
+    identities = _identity_map(registry)
+    researchers = {row["researcher_id"]: row for row in registry["researchers"]}
+    projection = {row["id"]: row for row in legacy_faculty_projection(registry)}
+    previous_profiles: dict[str, dict] = {}
+    for row in model.get("faculty", []):
+        for identity in [row.get("id"), *(row.get("legacy_ids") or [])]:
+            if identity:
+                previous_profiles[str(identity)] = row
+
+    affected: dict[str, set[str]] = {}
+    for opportunity in model.get("opportunities", []):
+        scope_id = str(opportunity.get("id") or "unknown-scope")
+        raw_references = {
+            str(member.get("faculty_id") or "")
+            for member in opportunity.get("members", [])
+        }
+        for role in opportunity.get("roles", []):
+            raw_references.update(str(value) for value in role.get("candidate_ids", []))
+            raw_references.update(str(value) for value in role.get("alternative_ids", []))
+        for raw_identity in raw_references:
+            if raw_identity not in identities:
+                raise ValueError(f"opportunity team references unknown researcher {raw_identity!r}")
+            researcher_id = identities[raw_identity]
+            current = projection[researcher_id]
+            previous = previous_profiles.get(raw_identity) or previous_profiles.get(researcher_id)
+            if (
+                previous is None
+                or current["status"] != "active"
+                or not current["auto_proposable"]
+                or current["pool_state"] not in {"main", "standby"}
+                or _team_profile_changed(previous, current)
+            ):
+                affected.setdefault(scope_id, set()).add(researcher_id)
+
+        for member in opportunity.get("members", []):
+            raw_identity = str(member.get("faculty_id") or "")
+            if raw_identity not in identities:
+                continue
+            researcher_id = identities[raw_identity]
+            active_claims = [
+                claim for claim in researchers[researcher_id]["claims"]
+                if claim["status"] == "active"
+            ]
+            evidence_term = str(member.get("evidence_term") or "").casefold()
+            evidence_phrase = str(member.get("evidence_phrase") or "").casefold()
+            source_url = str(member.get("source_url") or "")
+            if not any(
+                claim["label"].casefold() == evidence_term
+                and evidence_phrase in claim["evidence"].casefold()
+                and source_url in claim["source_urls"]
+                for claim in active_claims
+            ):
+                affected.setdefault(scope_id, set()).add(researcher_id)
+
+    if affected:
+        details = "; ".join(
+            f"{scope_id}: {', '.join(sorted(researcher_ids))}"
+            for scope_id, researcher_ids in sorted(affected.items())
+        )
+        raise ValueError(
+            "calibrated opportunity-team scopes require recalibration after "
+            f"evidence-bearing researcher changes ({details})"
+        )
+
+
 def synchronize_opportunity_team_model(registry: dict, path: Path) -> dict:
     model = json.loads(path.read_text(encoding="utf-8"))
+    validate_opportunity_team_dependencies(registry, model)
     identities = _identity_map(registry)
     for opportunity in model.get("opportunities", []):
         for member in opportunity.get("members", []):
@@ -406,6 +507,8 @@ def build_outputs(
     version_targets: Iterable[Path] = (),
 ) -> dict:
     registry = load_registry(registry_path)
+    team_model_source = json.loads(team_model_path.read_text(encoding="utf-8"))
+    validate_opportunity_team_dependencies(registry, team_model_source)
     projection = directory_projection(registry)
     _write_javascript(directory_path, PUBLIC_DIRECTORY_GLOBAL, projection)
     _write_json(manifest_path, {
@@ -468,7 +571,12 @@ def _normalize_orcid(value: object) -> str:
     return "-".join(compact[index:index + 4] for index in range(0, 16, 4)) if len(compact) == 16 else ""
 
 
-def apply_approved_submission(registry: dict, approved: dict, expected_generation: str) -> tuple[dict, dict]:
+def apply_approved_submission(
+    registry: dict,
+    approved: dict,
+    expected_generation: str,
+    team_model: dict | None = None,
+) -> tuple[dict, dict]:
     validate_registry(registry)
     if registry["registry_generation"] != expected_generation:
         raise ValueError("approved submission is stale and must return to administrator review")
@@ -528,7 +636,9 @@ def apply_approved_submission(registry: dict, approved: dict, expected_generatio
     output.pop("registry_generation", None)
     output["registry_generation"] = registry_generation(output)
     validate_registry(output)
-    return output, dependency_report(registry, output, {"opportunities": []})
+    if team_model is not None:
+        validate_opportunity_team_dependencies(output, team_model)
+    return output, dependency_report(registry, output, team_model or {"opportunities": []})
 
 
 def migrate_legacy(team_model_path: Path, faculty_matches_path: Path, output_path: Path) -> dict:
@@ -699,9 +809,10 @@ def main() -> None:
     else:
         registry = load_registry(args.registry)
         approved = json.loads(args.submission.read_text(encoding="utf-8"))
-        updated, _ = apply_approved_submission(registry, approved, args.expected_generation)
         model = json.loads(Path("config/opportunity_team_model.json").read_text(encoding="utf-8"))
-        report = dependency_report(registry, updated, model)
+        updated, report = apply_approved_submission(
+            registry, approved, args.expected_generation, team_model=model
+        )
         _write_json(args.registry, updated)
         _write_json(args.dependency_report, report)
         print(f"Applied approved submission; generation={updated['registry_generation']}")

@@ -24,7 +24,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: researcher-registry-publication
+  group: funding-finder-coordinated-release
   cancel-in-progress: false
 
 jobs:

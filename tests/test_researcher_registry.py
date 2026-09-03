@@ -18,6 +18,7 @@ from scripts.researcher_registry import (
     registry_counts,
     registry_generation,
     validate_registry,
+    validate_opportunity_team_dependencies,
 )
 
 
@@ -108,6 +109,96 @@ class ResearcherRegistryTests(unittest.TestCase):
             or any(selected_id in role["candidate_ids"] + role["alternative_ids"] for role in opportunity["roles"])
         }
         self.assertEqual({row["scope_id"] for row in report["affected_team_scopes"]}, expected)
+
+    def test_team_calibrations_reject_referenced_evidence_changes(self):
+        validate_opportunity_team_dependencies(self.registry, self.team_model)
+        selected = self.team_model["opportunities"][0]["members"][0]
+        changed = copy.deepcopy(self.registry)
+        researcher = next(
+            row for row in changed["researchers"]
+            if row["researcher_id"] == selected["faculty_id"]
+        )
+        claim = next(
+            claim for claim in researcher["claims"]
+            if claim["status"] == "active" and claim["label"] == selected["evidence_term"]
+        )
+        claim["status"] = "retired"
+        claim["material_hash"] = material_claim_hash(claim)
+        changed.pop("registry_generation")
+        changed["registry_generation"] = registry_generation(changed)
+        validate_registry(changed)
+        with self.assertRaisesRegex(
+            ValueError,
+            r"calibrated opportunity-team scopes require recalibration.*urh-[0-9]{6}",
+        ):
+            validate_opportunity_team_dependencies(changed, self.team_model)
+        approved_profile = {
+            key: researcher[key]
+            for key in (
+                "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
+                "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
+                "source_checked_date", "claims",
+            )
+        }
+        with self.assertRaisesRegex(ValueError, r"require recalibration"):
+            apply_approved_submission(
+                self.registry,
+                {
+                    "schema_version": 1,
+                    "state": "approved",
+                    "researcher_id": selected["faculty_id"],
+                    "approved_at": "2026-09-03T12:00:00Z",
+                    "approved_profile": approved_profile,
+                },
+                self.registry["registry_generation"],
+                team_model=self.team_model,
+            )
+
+        ineligible = copy.deepcopy(self.registry)
+        researcher = next(
+            row for row in ineligible["researchers"]
+            if row["researcher_id"] == selected["faculty_id"]
+        )
+        researcher["status"] = "inactive"
+        researcher["auto_proposable"] = False
+        ineligible.pop("registry_generation")
+        ineligible["registry_generation"] = registry_generation(ineligible)
+        validate_registry(ineligible)
+        with self.assertRaisesRegex(ValueError, r"require recalibration"):
+            validate_opportunity_team_dependencies(ineligible, self.team_model)
+
+    def test_unreferenced_and_cosmetic_edits_do_not_invalidate_team_calibrations(self):
+        referenced = {
+            identity
+            for opportunity in self.team_model["opportunities"]
+            for identity in (
+                [member["faculty_id"] for member in opportunity["members"]]
+                + [
+                    value
+                    for role in opportunity["roles"]
+                    for field in ("candidate_ids", "alternative_ids")
+                    for value in role[field]
+                ]
+            )
+        }
+        changed = copy.deepcopy(self.registry)
+        unreferenced = next(
+            row for row in changed["researchers"]
+            if row["researcher_id"] not in referenced
+            and row["status"] == "active"
+            and row["auto_proposable"]
+        )
+        unreferenced["status"] = "inactive"
+        unreferenced["auto_proposable"] = False
+        referenced_profile = next(
+            row for row in changed["researchers"]
+            if row["researcher_id"] in referenced
+        )
+        referenced_profile["display_name"] += " Renamed"
+        changed.pop("registry_generation")
+        changed["registry_generation"] = registry_generation(changed)
+        validate_registry(changed)
+        validate_opportunity_team_dependencies(changed, self.team_model)
 
     def test_approved_updates_are_registry_only_and_claim_revisions_increment(self):
         target = copy.deepcopy(self.registry["researchers"][0])
