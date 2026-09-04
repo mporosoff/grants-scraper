@@ -2,6 +2,9 @@
   "use strict";
 
   const STORAGE_KEY = "funding-finder.external-researchers.v1";
+  const HANDOFF_STORAGE_KEY = "funding-finder.team-handoff.v1";
+  const HANDOFF_TTL_MS = 15 * 60 * 1000;
+  const HANDOFF_TOKEN_PATTERN = /^[a-f0-9]{32}$/;
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
@@ -144,6 +147,142 @@
       return { profiles: normalized, saved: true, error: "" };
     } catch (_error) {
       return { profiles: normalized, saved: false, error: "Changes are available in this tab but could not be saved on this device." };
+    }
+  }
+
+  function normalizeHandoffIdentities(value) {
+    if (!Array.isArray(value)) return [];
+    const output = [];
+    const used = new Set();
+    for (const raw of value) {
+      if (!raw || typeof raw !== "object" || output.length >= MAX_EXTERNAL - 1) break;
+      let identity = null;
+      if (raw.kind === "directory" && /^urh-[0-9]{6}$/.test(String(raw.id || ""))) {
+        identity = { kind: "directory", id: String(raw.id) };
+      } else if (raw.kind === "external" && /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(raw.id || ""))) {
+        identity = { kind: "external", id: String(raw.id) };
+      } else if (raw.kind === "faculty_name") {
+        const name = cleanText(raw.name, 80);
+        if (name) identity = { kind: "faculty_name", name };
+      }
+      const key = identity && `${identity.kind}:${identity.id || identity.name}`;
+      if (!identity || used.has(key)) continue;
+      used.add(key);
+      output.push(identity);
+    }
+    return output;
+  }
+
+  function normalizeHandoffToken(value) {
+    const token = String(value || "").trim().toLowerCase();
+    return HANDOFF_TOKEN_PATTERN.test(token) ? token : "";
+  }
+
+  function createHandoffToken() {
+    try {
+      const bytes = new Uint8Array(16);
+      globalThis.crypto.getRandomValues(bytes);
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function normalizeHandoff(value, now = Date.now()) {
+    if (!value || typeof value !== "object") return null;
+    const createdAt = Number(value.created_at);
+    if (!Number.isFinite(createdAt) || createdAt > now + 60_000 || now - createdAt > HANDOFF_TTL_MS) return null;
+    const token = normalizeHandoffToken(value.token);
+    if (!token) return null;
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.added_external_id || ""))
+      ? String(value.added_external_id)
+      : "";
+    return {
+      selectedIdentities: normalizeHandoffIdentities(value.selected_identities),
+      addedExternalId,
+      createdAt,
+      token,
+    };
+  }
+
+  function loadHandoff(storage, expectedToken = "", now = Date.now()) {
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
+      const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+      if (!raw) return { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
+      const handoff = normalizeHandoff(JSON.parse(raw), now);
+      if (!handoff) {
+        storage.removeItem(HANDOFF_STORAGE_KEY);
+        return { handoff: null, available: true, discarded: true, mismatched: false, error: "" };
+      }
+      if (requestedToken && handoff.token !== requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
+      return { handoff, available: true, discarded: false, mismatched: false, error: "" };
+    } catch (_error) {
+      return { handoff: null, available: false, discarded: false, mismatched: false, error: "The browser-only team handoff could not be read in this tab." };
+    }
+  }
+
+  function saveHandoff(storage, value = {}, now = Date.now()) {
+    const selectedIdentities = normalizeHandoffIdentities(value.selectedIdentities);
+    const requestedToken = String(value.token || "");
+    const token = requestedToken ? normalizeHandoffToken(requestedToken) : createHandoffToken();
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.addedExternalId || ""))
+      ? String(value.addedExternalId)
+      : "";
+    if (!token) return { handoff: null, saved: false, error: "The browser-only team handoff could not be secured in this tab." };
+    const handoff = { selectedIdentities, addedExternalId, createdAt: now, token };
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      storage.setItem(HANDOFF_STORAGE_KEY, JSON.stringify({
+        selected_identities: selectedIdentities,
+        added_external_id: addedExternalId,
+        created_at: now,
+        token,
+      }));
+      return { handoff, saved: true, error: "" };
+    } catch (_error) {
+      return { handoff, saved: false, error: "The browser-only team handoff could not be saved in this tab." };
+    }
+  }
+
+  function completeHandoff(storage, addedExternalId, expectedToken = "", now = Date.now()) {
+    let loaded = { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
+    if (expectedToken) {
+      loaded = loadHandoff(storage, expectedToken, now);
+      if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
+      if (loaded.discarded || loaded.mismatched || !loaded.handoff) {
+        return { handoff: null, saved: false, error: "The browser-only team handoff is unavailable, expired, or belongs to another navigation." };
+      }
+    } else if (!clearHandoff(storage)) {
+      return { handoff: null, saved: false, error: "The browser-only team handoff could not be reset in this tab." };
+    }
+    return saveHandoff(storage, {
+      selectedIdentities: loaded.handoff ? loaded.handoff.selectedIdentities : [],
+      addedExternalId,
+      token: loaded.handoff ? loaded.handoff.token : "",
+    }, now);
+  }
+
+  function clearHandoff(storage, expectedToken = "") {
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) return false;
+      if (requestedToken) {
+        const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+        if (!raw) return true;
+        if (normalizeHandoffToken(JSON.parse(raw).token) !== requestedToken) return false;
+      }
+      storage.removeItem(HANDOFF_STORAGE_KEY);
+      return true;
+    } catch (_error) {
+      return false;
     }
   }
 
@@ -500,6 +639,8 @@
 
   globalThis.FUNDING_TEAM_RESEARCHERS = Object.freeze({
     STORAGE_KEY,
+    HANDOFF_STORAGE_KEY,
+    HANDOFF_TTL_MS,
     MAX_EXTERNAL,
     MIN_KEYWORDS,
     MAX_KEYWORDS,
@@ -508,6 +649,10 @@
     normalizeProfiles,
     load,
     save,
+    loadHandoff,
+    saveHandoff,
+    completeHandoff,
+    clearHandoff,
     inferDomains,
     buildMatches,
     intersectMemberMatches,
