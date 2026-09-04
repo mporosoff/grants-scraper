@@ -1,4 +1,5 @@
 import json
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,6 +9,7 @@ from scripts.faculty_match import (
     BRIDGE_THEMES,
     THEME_LEXICON,
     match_to_catalog,
+    update_version_target,
 )
 from scripts.researcher_registry import load_registry, matching_profiles
 
@@ -139,6 +141,45 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
         self.assertIn("--registry config/researcher_registry.json", workflow)
         self.assertIn("--catalog data/opportunities.js", workflow)
         self.assertIn("--out data/faculty_matches.js", workflow)
+        self.assertIn("--version-target team_match.html", workflow)
+
+    def test_version_target_tracks_exact_generated_match_bytes(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            matches_path = root / "data" / "faculty_matches.js"
+            matches_path.parent.mkdir()
+            matches_path.write_bytes(b"globalThis.FACULTY_MATCHES={};\n")
+            page_path = root / "team_match.html"
+            page_path.write_text(
+                '<script src="data/faculty_matches.js?v=stale"></script>\r\n',
+                encoding="utf-8",
+                newline="",
+            )
+
+            digest = update_version_target(page_path, matches_path)
+
+            expected = hashlib.sha256(matches_path.read_bytes()).hexdigest()
+            self.assertEqual(digest, expected)
+            self.assertIn(f"data/faculty_matches.js?v={expected}", page_path.read_text(encoding="utf-8"))
+            self.assertNotIn(b"\r\n", page_path.read_bytes())
+
+    def test_version_target_requires_one_exact_reference(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            matches_path = root / "matches.js"
+            matches_path.write_text("matches", encoding="utf-8")
+            for name, source in {
+                "missing": "<html></html>\n",
+                "duplicate": (
+                    '<script src="data/faculty_matches.js?v=one"></script>\n'
+                    '<script src="./data/faculty_matches.js?v=two"></script>\n'
+                ),
+            }.items():
+                with self.subTest(name=name):
+                    page_path = root / f"{name}.html"
+                    page_path.write_text(source, encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "Expected one faculty-matches version reference"):
+                        update_version_target(page_path, matches_path)
 
     def test_generated_javascript_uses_platform_independent_line_endings(self):
         with tempfile.TemporaryDirectory() as temp_dir:
