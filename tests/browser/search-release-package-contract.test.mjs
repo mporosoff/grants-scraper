@@ -105,7 +105,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
     "Rebuild every production document vector",
     "Build the current/previous Worker compatibility package",
     "Verify the complete search package is internally consistent",
-    "Run real-browser product and accessibility gates",
+    "Run browser and search-package regression gates",
     "Refuse to deploy a stale generation",
     "Deploy the compatibility Worker before publishing Pages assets",
     "Commit refreshed catalog",
@@ -127,13 +127,12 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   assert.match(workflow, /gh api --method POST "repos\/\$\{GITHUB_REPOSITORY\}\/statuses\/\$\{head_sha\}"/);
   assert.match(workflow, /-f context=python/);
   assert.match(workflow, /-f context=browser/);
-  assert.match(workflow, /pnpm test:e2e/);
-  assert.match(workflow, /-f context=e2e/);
+  assert.doesNotMatch(workflow, /playwright|test:e2e|-f context=e2e/i);
   const generatedCommitStatuses = workflow.slice(
     workflow.indexOf('head_sha="$(git rev-parse HEAD)"'),
     workflow.indexOf("if ! pr_url="),
   );
-  for (const context of ["python", "browser", "e2e"]) {
+  for (const context of ["python", "browser"]) {
     assert.match(generatedCommitStatuses, new RegExp(`-f context=${context}`));
   }
   assert.match(workflow, /gh pr create/);

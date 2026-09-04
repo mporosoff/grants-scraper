@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
@@ -51,6 +52,12 @@ test("Configure Faculty Interests discloses separate reviewed and browser-only p
   assert.match(team, /id="remove-saved-researcher"/);
   assert.doesNotMatch(team, /external-researcher-form|assets\/researcher-intake\.js/);
   assert.doesNotMatch(team, /funding-finder-researchers\.urochestercheme\.workers\.dev/);
+});
+
+test("Configure uses the faculty-interests helper content digest as its cache key", () => {
+  const expected = createHash("sha256").update(pageScript).digest("hex");
+  const version = page.match(/assets\/faculty-interests\.js\?v=([a-f0-9]{64})/)?.[1];
+  assert.equal(version, expected);
 });
 
 test("mode-specific drafts persist until a successful action", () => {
