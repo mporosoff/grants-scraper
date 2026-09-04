@@ -204,6 +204,10 @@
     try { return globalThis.localStorage; }
     catch (_error) { return null; }
   }
+  function teamHandoffToken() {
+    var token = new URLSearchParams(location.search).get("team_handoff") || "";
+    return /^[a-f0-9]{32}$/.test(token) ? token : "";
+  }
   function addLocally() {
     if (!teamApi || !orcidApi) {
       setStatus("Browser-only Team Match profiles are unavailable because a helper did not load.", "error");
@@ -258,7 +262,11 @@
     }
     resetActiveDraft();
     if (new URLSearchParams(location.search).get("return") === "team_match") {
-      location.assign("./team_match.html?local=" + encodeURIComponent(savedId));
+      var returnUrl = new URL("./team_match.html", location.href);
+      returnUrl.searchParams.set("local", savedId);
+      var handoffToken = teamHandoffToken();
+      if (handoffToken) returnUrl.searchParams.set("team_handoff", handoffToken);
+      location.assign(returnUrl.href);
       return;
     }
     setStatus(name + " was stored only in this browser for Team Match. It was not submitted for catalog review.", "success");

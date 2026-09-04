@@ -150,14 +150,29 @@
     }
   }
 
-  function saveTeamHandoff(storage, teamState, now = Date.now()) {
-    if (!storage || !teamState || typeof teamState !== "object") return false;
+  function createTeamHandoffToken(cryptoImpl = globalThis.crypto) {
+    try {
+      const bytes = new Uint8Array(16);
+      cryptoImpl.getRandomValues(bytes);
+      return [...bytes].map(byte => byte.toString(16).padStart(2, "0")).join("");
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function validTeamHandoffToken(value) {
+    return typeof value === "string" && /^[a-f0-9]{32}$/.test(value);
+  }
+
+  function saveTeamHandoff(storage, teamState, token, now = Date.now()) {
+    if (!storage || !teamState || typeof teamState !== "object" || !validTeamHandoffToken(token)) return false;
     const savedAt = Number(now);
     if (!Number.isFinite(savedAt)) return false;
     try {
       const serialized = JSON.stringify({
-        schema_version: 1,
+        schema_version: 2,
         saved_at: savedAt,
+        token,
         team_state: teamState,
       });
       if (serialized.length > MAX_HANDOFF_BYTES) return false;
@@ -168,29 +183,39 @@
     }
   }
 
-  function consumeTeamHandoff(storage, now = Date.now()) {
-    if (!storage) return null;
+  function consumeTeamHandoff(storage, token, now = Date.now()) {
+    if (!storage || !validTeamHandoffToken(token)) return null;
     let serialized = "";
     try {
       serialized = String(storage.getItem(HANDOFF_STORAGE_KEY) || "");
-      storage.removeItem(HANDOFF_STORAGE_KEY);
     } catch (_error) {
       return null;
     }
-    if (!serialized || serialized.length > MAX_HANDOFF_BYTES) return null;
+    if (!serialized) return null;
+    if (serialized.length > MAX_HANDOFF_BYTES) {
+      try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_error) {}
+      return null;
+    }
     try {
       const payload = JSON.parse(serialized);
       const age = Number(now) - Number(payload.saved_at);
       if (
-        payload.schema_version !== 1
+        payload.schema_version !== 2
+        || !validTeamHandoffToken(payload.token)
         || !payload.team_state
         || typeof payload.team_state !== "object"
         || !Number.isFinite(age)
         || age < 0
         || age > HANDOFF_TTL_MS
-      ) return null;
+      ) {
+        try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_error) {}
+        return null;
+      }
+      if (payload.token !== token) return null;
+      storage.removeItem(HANDOFF_STORAGE_KEY);
       return payload.team_state;
     } catch (_error) {
+      try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_storageError) {}
       return null;
     }
   }
@@ -558,6 +583,7 @@
     normalizeProfiles,
     load,
     save,
+    createTeamHandoffToken,
     saveTeamHandoff,
     consumeTeamHandoff,
     inferDomains,

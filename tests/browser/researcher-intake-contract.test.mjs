@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
@@ -53,6 +54,12 @@ test("Configure Faculty Interests discloses separate reviewed and browser-only p
   assert.doesNotMatch(team, /funding-finder-researchers\.urochestercheme\.workers\.dev/);
 });
 
+test("Configure uses the faculty-interests helper content digest as its cache key", () => {
+  const expected = createHash("sha256").update(pageScript).digest("hex");
+  const version = page.match(/assets\/faculty-interests\.js\?v=([a-f0-9]{64})/)?.[1];
+  assert.equal(version, expected);
+});
+
 test("mode-specific drafts persist until a successful action", () => {
   assert.match(pageScript, /var modeDrafts = \{/);
   assert.match(pageScript, /modeDrafts\[activeRequestType\] = captureDraft\(\)/);
@@ -66,7 +73,8 @@ test("mode-specific drafts persist until a successful action", () => {
   const failedSubmit = submitSource.slice(submitSource.lastIndexOf("    } catch (error) {"), submitSource.indexOf("    } finally"));
   assert.doesNotMatch(failedSubmit, /resetActiveDraft/);
   assert.match(pageScript, /TEAM_API|teamApi\.save/);
-  assert.match(pageScript, /team_match\.html\?local=/);
+  assert.match(pageScript, /function teamHandoffToken\(\)[\s\S]*?new URLSearchParams\(location\.search\)\.get\("team_handoff"\)[\s\S]*?\^\[a-f0-9\]\{32\}\$/);
+  assert.match(pageScript, /new URL\("\.\/team_match\.html", location\.href\)[\s\S]*?searchParams\.set\("local", savedId\)[\s\S]*?searchParams\.set\("team_handoff", handoffToken\)/);
 });
 
 test("the shared browser builder emits only consented allowlisted fields", () => {

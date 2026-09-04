@@ -151,11 +151,12 @@ test("opens an accessible bounded faculty combobox", () => {
 
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
-  assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
-  assert.match(teamPage, /function preserveMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveTeamHandoff\(safeSessionStorage\(\), saved\)/);
-  assert.match(teamPage, /function restoreMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.consumeTeamHandoff\(safeSessionStorage\(\)\)/);
+  assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\(preserveMissingResearcherHandoff\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)\)/);
+  assert.match(teamPage, /function preserveMissingResearcherHandoff\(targetUrl\)[\s\S]*?TEAM_API\.createTeamHandoffToken\(globalThis\.crypto\)[\s\S]*?TEAM_API\.saveTeamHandoff\(safeSessionStorage\(\), saved, token\)[\s\S]*?searchParams\.set\("team_handoff", token\)/);
+  assert.match(teamPage, /function restoreMissingResearcherHandoff\(\)[\s\S]*?params\.get\("team_handoff"\)[\s\S]*?TEAM_API\.consumeTeamHandoff\(safeSessionStorage\(\), token\)/);
+  assert.match(teamPage, /cleaned\.searchParams\.delete\("team_handoff"\)/);
   assert.match(teamPage, /restoreMissingResearcherHandoff\(\);[\s\S]*?if \(teamHistoryNeedsDirectory\(\)\)/);
-  assert.match(teamPage, /\$\("missing-researcher"\)\.addEventListener\("click", preserveMissingResearcherHandoff\)/);
+  assert.match(teamPage, /\$\("missing-researcher"\)\.addEventListener\("click", function \(event\) \{[\s\S]*?event\.currentTarget\.href = preserveMissingResearcherHandoff\(event\.currentTarget\.href\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
@@ -279,6 +280,13 @@ test("normalizes and saves no more than four external researchers", () => {
 test("preserves one bounded same-tab team handoff and consumes it exactly once", () => {
   const { team } = loadApis();
   const storage = memoryStorage();
+  const token = team.createTeamHandoffToken({
+    getRandomValues(bytes) {
+      bytes.forEach((_value, index) => { bytes[index] = index; });
+      return bytes;
+    },
+  });
+  const unrelatedToken = "f".repeat(32);
   const state = {
     selected: ["Alexander A. Shestopalov", "Allison J. Lopatkin"],
     selectedIdentities: [
@@ -290,16 +298,19 @@ test("preserves one bounded same-tab team handoff and consumes it exactly once",
     scrollY: 420,
   };
 
-  assert.equal(team.saveTeamHandoff(storage, state, 1_000), true);
+  assert.equal(token, "000102030405060708090a0b0c0d0e0f");
+  assert.equal(team.saveTeamHandoff(storage, state, token, 1_000), true);
+  assert.equal(team.consumeTeamHandoff(storage, unrelatedToken, 2_000), null);
   assert.equal(
-    JSON.stringify(team.consumeTeamHandoff(storage, 2_000)),
+    JSON.stringify(team.consumeTeamHandoff(storage, token, 2_000)),
     JSON.stringify(state),
   );
-  assert.equal(team.consumeTeamHandoff(storage, 2_000), null);
+  assert.equal(team.consumeTeamHandoff(storage, token, 2_000), null);
 
-  assert.equal(team.saveTeamHandoff(storage, state, 1_000), true);
-  assert.equal(team.consumeTeamHandoff(storage, 1_000 + team.HANDOFF_TTL_MS + 1), null);
-  assert.equal(team.saveTeamHandoff(storage, { filter: "x".repeat(9_000) }, 1_000), false);
+  assert.equal(team.saveTeamHandoff(storage, state, token, 1_000), true);
+  assert.equal(team.consumeTeamHandoff(storage, token, 1_000 + team.HANDOFF_TTL_MS + 1), null);
+  assert.equal(team.saveTeamHandoff(storage, { filter: "x".repeat(9_000) }, token, 1_000), false);
+  assert.equal(team.saveTeamHandoff(storage, state, "not-a-valid-token", 1_000), false);
 });
 
 test("drops standalone umbrella keywords from external profiles", () => {
