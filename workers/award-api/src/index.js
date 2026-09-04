@@ -352,9 +352,15 @@ async function sourceCacheRequest(source, request, asOf) {
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
+async function requestDeadlineOperation(operation, monotonicNow, operationDeadline, timeoutMs) {
+  return operationDeadline === null
+    ? operation()
+    : withinOperationBudget(operation, monotonicNow, operationDeadline, timeoutMs);
+}
+
 async function sourceWrapperOperation(source, operation, monotonicNow, operationDeadline, timeoutMs) {
   return source === "DOD"
-    ? withinOperationBudget(operation, monotonicNow, operationDeadline, timeoutMs)
+    ? requestDeadlineOperation(operation, monotonicNow, operationDeadline, timeoutMs)
     : operation();
 }
 
@@ -497,9 +503,12 @@ async function runInstitutionResolution({
 }) {
   if (request?.resolved) return request.resolved;
   if (!request?.id || !request?.name) return null;
-  const withinRequestDeadline = operation => operationDeadline === null
-    ? operation()
-    : withinOperationBudget(operation, monotonicNow, operationDeadline, operationTimeoutMs);
+  const withinRequestDeadline = operation => requestDeadlineOperation(
+    operation,
+    monotonicNow,
+    operationDeadline,
+    operationTimeoutMs,
+  );
   const identity = await withinRequestDeadline(() => sha256Hex(stableJson({
     source: "ROR-identity",
     adapter_version: ROR_ADAPTER_VERSION,
@@ -636,34 +645,47 @@ function snapshotCacheRequest(snapshotId) {
   return new Request(`https://award-snapshot.internal/v1/${snapshotId}`);
 }
 
-async function loadSnapshot(cache, snapshotId) {
+async function loadSnapshot(cache, snapshotId, {
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+} = {}) {
   if (!cache) return null;
   try {
-    const response = await cache.match(snapshotCacheRequest(snapshotId));
-    if (!response) return null;
-    const snapshot = await response.json();
+    const snapshot = await requestDeadlineOperation(async () => {
+      const response = await cache.match(snapshotCacheRequest(snapshotId));
+      return response ? response.json() : null;
+    }, monotonicNow, operationDeadline, operationTimeoutMs);
     return snapshot?.snapshot_contract_version === 1 && snapshot?.snapshot_id === snapshotId
       && Array.isArray(snapshot?.awards) && snapshot?.source_metadata
       ? snapshot
       : null;
-  } catch {
+  } catch (cause) {
+    if (operationDeadline !== null && cause instanceof AwardSourceError && cause.code === "source_timeout") {
+      throw cause;
+    }
     return null;
   }
 }
 
-async function storeSnapshot(cache, snapshot, cacheTtl) {
+async function storeSnapshot(cache, snapshot, cacheTtl, {
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+} = {}) {
   if (!cache) return false;
   const key = snapshotCacheRequest(snapshot.snapshot_id);
   try {
-    await cache.put(key, new Response(JSON.stringify(snapshot), {
-      headers: {
-        "Cache-Control": `public, max-age=${cacheTtl}`,
-        "Content-Type": "application/json; charset=utf-8",
-        ETag: `"${snapshot.snapshot_id}"`,
-      },
-    }));
-    const stored = await cache.match(key);
-    return Boolean(stored);
+    return await requestDeadlineOperation(async () => {
+      await cache.put(key, new Response(JSON.stringify(snapshot), {
+        headers: {
+          "Cache-Control": `public, max-age=${cacheTtl}`,
+          "Content-Type": "application/json; charset=utf-8",
+          ETag: `"${snapshot.snapshot_id}"`,
+        },
+      }));
+      return Boolean(await cache.match(key));
+    }, monotonicNow, operationDeadline, operationTimeoutMs);
   } catch {
     return false;
   }
@@ -937,7 +959,7 @@ export function createHandler({
           sourcePayloads,
         });
         snapshot.runtime_request = normalized;
-        if (!await storeSnapshot(cacheStore, snapshot, config.cacheTtl)) {
+        if (!await storeSnapshot(cacheStore, snapshot, config.cacheTtl, { monotonicNow, operationDeadline })) {
           return error(origin, 503, "snapshot_store_unavailable");
         }
         return json(origin, 200, publicSnapshot(snapshot));
@@ -968,7 +990,15 @@ export function createHandler({
       }
       const action = validateSnapshotRetry(body);
       if (!action) return error(origin, 400, "invalid_request");
-      const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+      const operationDeadline = action.source === "DOD"
+        ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+        : null;
+      let snapshot;
+      try {
+        snapshot = await loadSnapshot(cacheStore, action.snapshotId, { monotonicNow, operationDeadline });
+      } catch {
+        return error(origin, 503, "snapshot_store_unavailable");
+      }
       if (!snapshot) return error(origin, 410, "snapshot_expired");
       const normalized = snapshot.runtime_request;
       if (!normalized?.sources?.includes(action.source)) return error(origin, 400, "invalid_source");
@@ -986,6 +1016,8 @@ export function createHandler({
         guard,
         rateLimit: config.awardSourceLimit,
         onlySource: action.source,
+        monotonicNow,
+        operationDeadline,
       });
       if (replacement[action.source]?.status) {
         const rateLimited = ["rate_limited", "source_rate_limited"].includes(replacement[action.source].error?.code);
@@ -1015,7 +1047,7 @@ export function createHandler({
       });
       successor.runtime_request = normalized;
       successor.predecessor_snapshot_id = snapshot.snapshot_id;
-      if (!await storeSnapshot(cacheStore, successor, config.cacheTtl)) {
+      if (!await storeSnapshot(cacheStore, successor, config.cacheTtl, { monotonicNow, operationDeadline })) {
         return error(origin, 503, "snapshot_store_unavailable");
       }
       return json(origin, 200, {

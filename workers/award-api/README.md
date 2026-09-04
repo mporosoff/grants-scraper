@@ -71,12 +71,13 @@ enrichment remains capped at 25 records with concurrency three. Each
 USAspending search request has a 20-second deadline, and the complete DoD
 operation, including server-validated ROR identity resolution and optional
 detail enrichment, shares a 100-second budget below the browser's 120-second
-deadline. The ROR identity cache and guard, source cache and guard, and detail
-cache operations are each capped at two seconds within that shared budget; the
-ROR request itself receives only the remaining budget. Cache failures remain
-non-fatal. Reaching the upstream ceiling is reported as a safety-bound
-diagnostic, but it does not advertise a client next page unless a normalized
-lookahead record was actually collected.
+deadline. The ROR identity cache and guard, source cache and guard, detail
+cache, and required DoD snapshot read/write verification operations are each
+capped at two seconds within that shared budget; the ROR request itself receives
+only the remaining budget. Optional cache failures remain non-fatal, while a
+required snapshot persistence failure returns promptly. Reaching the upstream
+ceiling is reported as a safety-bound diagnostic, but it does not advertise a
+client next page unless a normalized lookahead record was actually collected.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other sources.
