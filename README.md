@@ -135,7 +135,10 @@ Office of Science, and DoD assistance awards through the sources' native fields,
 keeps the adapters separate, and preserves direct-field or official-record
 contact provenance. DoD records come from USAspending and are limited to prime
 Project Grants and Cooperative Agreements; they do not provide investigator
-names or award abstracts.
+names or award abstracts. NSF, NIH, and DOE use the Award Worker; the page runs
+the same normalized DoD adapter over USAspending's official browser CORS
+transport because USAspending rejects Cloudflare Worker egress, then merges the
+record into the shared result and snapshot contracts.
 Eligible Funding Finder cards open it in a new tab only for exact or explicitly
 reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
 title similarity.

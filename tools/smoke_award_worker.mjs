@@ -1,3 +1,5 @@
+import { searchDodFromBrowser } from "../assets/dod-awards-browser.mjs";
+
 const baseUrl = String(process.env.AWARD_API_URL || "https://funding-finder-award-api.urochestercheme.workers.dev/").trim();
 const origin = "https://mporosoff.github.io";
 
@@ -34,6 +36,12 @@ if (health.credentials_required !== false) {
 }
 if (!["NSF", "NIH", "DOE", "DOD"].every(source => health.sources?.includes(source))) {
   throw new Error("Award Worker health did not advertise all four isolated sources.");
+}
+if (health.source_transports?.NSF !== "worker_proxy"
+  || health.source_transports?.NIH !== "worker_proxy"
+  || health.source_transports?.DOE !== "worker_proxy"
+  || health.source_transports?.DOD !== "browser_direct_cors") {
+  throw new Error("Award Worker health did not advertise the production source-transport boundary.");
 }
 if (health.institution_registry?.source !== "ROR") {
   throw new Error("Award Worker health did not advertise the ROR institution registry boundary.");
@@ -77,7 +85,6 @@ for (const body of [
   { sources: ["NSF"], criteria: { award_id: "2605508", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
   { sources: ["NIH"], criteria: { core_project_number: "K12GM106997", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
   { sources: ["DOE"], criteria: { award_id: "DE-SC0020230", institution: "University of Rochester", institution_id: "university-of-rochester" }, limit: 1, offset: 0 },
-  { sources: ["DOD"], criteria: { award_id: "FA9550261B195" }, limit: 1, offset: 0 },
 ]) {
   const payload = await jsonRequest("awards/search", {
     method: "POST",
@@ -90,15 +97,30 @@ for (const body of [
   if (payload.results[0].source !== body.sources[0] || !payload.results[0].official_award_url) {
     throw new Error(`${body.sources[0]} exact-ID smoke returned an invalid normalized record.`);
   }
-  if (body.sources[0] === "DOD" && (payload.results[0].schema_version !== 1
-    || payload.results[0].award_id !== body.criteria.award_id
-    || !/UNIVERSITY OF MARYLAND/i.test(payload.results[0].institution?.name || "")
-    || !["Project Grant", "Cooperative Agreement"].includes(payload.results[0].funding_mechanism)
-    || payload.results[0].award_amount_basis !== "total_obligation"
-    || !payload.results[0].opportunity_numbers?.includes("NOFOAFRLAFOSR20250002")
-    || !payload.results[0].official_award_url.includes("usaspending.gov/award/"))) {
-    throw new Error("DOD exact-ID smoke did not return the expected USAspending obligation record.");
-  }
 }
 
-console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, and exact NSF/NIH/DOE/DoD source smokes passed.");
+const corsResponses = [];
+const dodPayload = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
+  limit: 1,
+  fetchImpl: async (url, options) => {
+    const response = await fetch(url, options);
+    corsResponses.push(response.headers.get("access-control-allow-origin"));
+    return response;
+  },
+});
+if (dodPayload.status
+  || dodPayload.results?.length !== 1
+  || dodPayload.results[0].schema_version !== 1
+  || dodPayload.results[0].source !== "DOD"
+  || dodPayload.results[0].award_id !== "FA9550261B195"
+  || !/UNIVERSITY OF MARYLAND/i.test(dodPayload.results[0].institution?.name || "")
+  || !["Project Grant", "Cooperative Agreement"].includes(dodPayload.results[0].funding_mechanism)
+  || dodPayload.results[0].award_amount_basis !== "total_obligation"
+  || !dodPayload.results[0].opportunity_numbers?.includes("NOFOAFRLAFOSR20250002")
+  || !dodPayload.results[0].official_award_url.includes("usaspending.gov/award/")
+  || !corsResponses.length
+  || corsResponses.some(value => value !== "*")) {
+  throw new Error("DOD browser-CORS exact-ID smoke did not return the expected USAspending obligation record.");
+}
+
+console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, exact NSF/NIH/DOE Worker smokes, and the exact DoD browser-CORS smoke passed.");

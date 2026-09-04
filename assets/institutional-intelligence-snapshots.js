@@ -9,6 +9,7 @@
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
   if (!core || !awardProduct || !api || !credentials || !$(`institutional-intelligence`)) return;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904", document.baseURI).href;
 
   const state = {
     selectedInstitution: null,
@@ -24,6 +25,7 @@
     controller: null,
     submitted: null,
     snapshot: null,
+    localSnapshot: null,
     pagePayload: null,
     aggregate: null,
     baseAggregate: null,
@@ -46,6 +48,12 @@
     historyEntrySequence: 0,
     historyViewCache: new Map(),
   };
+  let dodBrowserModulePromise = null;
+
+  function dodBrowserModule() {
+    dodBrowserModulePromise ||= import(DOD_BROWSER_MODULE_URL);
+    return dodBrowserModulePromise;
+  }
 
   function clean(value, maximum = 500) {
     return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -660,6 +668,25 @@
   }
 
   async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller }) {
+    if (String(snapshotId || "").startsWith("local-dod-")) {
+      const dod = await dodBrowserModule();
+      const snapshot = state.localSnapshot?.snapshot_id === snapshotId
+        ? state.localSnapshot
+        : dod.loadLocalSnapshot(snapshotId);
+      if (!snapshot) {
+        const expired = new Error("These saved results have expired. Run the same search again to continue.");
+        expired.code = "snapshot_expired";
+        throw expired;
+      }
+      state.localSnapshot = snapshot;
+      const payload = dod.localSnapshotPage(snapshot, { page, pageSize, facet });
+      if (!payload) {
+        const invalid = new Error("The requested page or filter is not available.");
+        invalid.code = "invalid_page_or_facet";
+        throw invalid;
+      }
+      return payload;
+    }
     return postJson(api.snapshotPageUrl, {
       snapshot_id: snapshotId,
       page,
@@ -668,7 +695,7 @@
     }, controller);
   }
 
-  function stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState = null }) {
+  function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, questionState = null }) {
     const residentAwards = new Map();
     const sourceOffsets = new Map();
     const absorb = awards => {
@@ -686,6 +713,7 @@
     return {
       submitted: submittedCriteria(submitted),
       snapshot: { ...snapshot, ...pagePayload, snapshot_id: pagePayload.snapshot_id },
+      localSnapshot,
       pagePayload,
       page: pagePayload.pagination.page,
       pageSize: pagePayload.pagination.page_size,
@@ -701,6 +729,7 @@
   function commitSnapshotResult(staged, { historyMode = "replace", focus = false, departureHistoryState = null } = {}) {
     state.submitted = staged.submitted;
     state.snapshot = staged.snapshot;
+    state.localSnapshot = staged.localSnapshot;
     state.pagePayload = staged.pagePayload;
     state.page = staged.page;
     state.pageSize = staged.pageSize;
@@ -786,6 +815,52 @@
     }
   }
 
+  async function preparedSnapshotSearch({ request, submitted, pageSize, questionState = null, controller = state.controller }) {
+    if (!request.sources.includes("DOD")) {
+      const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria }, controller);
+      const pagePayload = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize,
+        facet: { type: "all", key: "" },
+        controller,
+      });
+      return stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState });
+    }
+    const dod = await dodBrowserModule();
+    const workerSources = request.sources.filter(source => source !== "DOD");
+    const [workerResult, dodResult] = await Promise.allSettled([
+      workerSources.length
+        ? postJson(api.snapshotUrl, { sources: workerSources, criteria: request.criteria }, controller)
+        : Promise.resolve(null),
+      dod.searchDodFromBrowser(request.criteria, {
+        limit: 25,
+        offset: 0,
+        scanAll: true,
+        selectedInstitution: state.selectedInstitution,
+        signal: controller?.signal,
+      }),
+    ]);
+    const workerSnapshot = workerResult.status === "fulfilled" ? workerResult.value : null;
+    const dodPayload = dodResult.status === "fulfilled"
+      ? dodResult.value
+      : { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } };
+    const hybrid = await dod.createHybridSnapshot({ request, workerSnapshot, dodPayload });
+    dod.persistLocalSnapshot(hybrid.snapshot);
+    const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
+      page: 1,
+      pageSize,
+      facet: { type: "all", key: "" },
+    });
+    return stagedSnapshotResult({
+      submitted,
+      snapshot: hybrid.public,
+      pagePayload,
+      localSnapshot: hybrid.snapshot,
+      questionState,
+    });
+  }
+
   async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, questionState = null, searchState = null, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     const sequence = ++state.sequence;
     state.pageRequestSequence += 1;
@@ -800,17 +875,15 @@
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
       const submitted = submittedCriteria(current);
       const pageSize = current.page_size || 10;
-      const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria });
-      if (sequence !== state.sequence) return null;
-      const initialPage = await requestSnapshotPage({
-        snapshotId: snapshot.snapshot_id,
-        page: 1,
+      const staged = await preparedSnapshotSearch({
+        request,
+        submitted,
         pageSize,
-        facet: { type: "all", key: "" },
+        questionState: questionSearch ? questionState : null,
       });
       if (sequence !== state.sequence) return null;
-      const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
       commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
+      const snapshot = staged.snapshot;
       const exact = snapshot.completeness === "complete";
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} matching award${snapshot.exact_total === 1 ? "" : "s"} found across all selected sources.`
@@ -849,6 +922,23 @@
   }
 
   async function requestSourceBatch(source, offset, snapshotId = state.snapshot?.snapshot_id) {
+    if (String(snapshotId || "").startsWith("local-dod-")) {
+      const dod = await dodBrowserModule();
+      const snapshot = state.localSnapshot?.snapshot_id === snapshotId
+        ? state.localSnapshot
+        : dod.loadLocalSnapshot(snapshotId);
+      if (!snapshot) {
+        const expired = new Error("snapshot_expired");
+        expired.code = "snapshot_expired";
+        throw expired;
+      }
+      state.localSnapshot = snapshot;
+      return dod.localSnapshotSourceBatch(snapshot, {
+        source,
+        offset,
+        facet: { type: "all", key: "" },
+      });
+    }
     return postJson(api.snapshotBatchUrl, {
       snapshot_id: snapshotId,
       source,
@@ -933,6 +1023,34 @@
   }
 
   async function retrySource(source) {
+    if (state.localSnapshot) {
+      const submitted = { ...state.submitted, page_size: state.pageSize };
+      const request = core.buildAwardRequest({ ...submitted, offset: 0 }, 10);
+      const controller = state.controller?.signal?.aborted ? new AbortController() : state.controller || new AbortController();
+      setBusy(true);
+      setStatus(`Retrying ${source}. Results already loaded will stay available…`);
+      try {
+        const staged = await preparedSnapshotSearch({ request, submitted, pageSize: state.pageSize, controller });
+        const recovered = staged.snapshot.sources.find(item => item.source === source);
+        if (!recovered || ["unavailable", "rate_limited"].includes(recovered.status)) {
+          state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
+          renderSourceStatus();
+          setStatus(state.sourceMessages.get(source), true);
+          return;
+        }
+        commitSnapshotResult(staged, { historyMode: "replace" });
+        state.sourceMessages.set(source, `${source} is available again. Results from other sources were kept.`);
+        renderSourceStatus();
+        setStatus(state.sourceMessages.get(source));
+      } catch {
+        state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
+        renderSourceStatus();
+        setStatus(state.sourceMessages.get(source), true);
+      } finally {
+        setBusy(false);
+      }
+      return;
+    }
     let previous = state.snapshot.snapshot_id;
     let sequence = state.sequence;
     let pageRequestSequence = ++state.pageRequestSequence;
@@ -1264,6 +1382,7 @@
 
   function resetResultState() {
     state.snapshot = null;
+    state.localSnapshot = null;
     state.pagePayload = null;
     state.aggregate = null;
     state.baseAggregate = null;

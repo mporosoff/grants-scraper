@@ -390,12 +390,16 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const postJsonSource = appSource.slice(appSource.indexOf("async function postJson("), appSource.indexOf("function absorbAwards("));
   assert.match(postJsonSource, /activeController\.signal\.aborted[\s\S]*activeController = new AbortController\(\)[\s\S]*controller === state\.controller[\s\S]*state\.controller = activeController/);
 
+  const preparedSource = appSource.slice(appSource.indexOf("async function preparedSnapshotSearch("), appSource.indexOf("async function runSearch("));
+  const createIndex = preparedSource.indexOf("await postJson(api.snapshotUrl");
+  const initialPageIndex = preparedSource.indexOf("await requestSnapshotPage");
+  const stageIndex = preparedSource.indexOf("stagedSnapshotResult(");
+  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
+  assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
-  const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
-  const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
-  const stageIndex = runSearchSource.indexOf("stagedSnapshotResult(");
+  const prepareIndex = runSearchSource.indexOf("await preparedSnapshotSearch(");
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
-  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
+  assert.ok(prepareIndex > -1 && commitIndex > prepareIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
   assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
   assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);

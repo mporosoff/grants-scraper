@@ -3,10 +3,21 @@
 This Worker is the historical-award data boundary established in Phase 1 and
 extended with an isolated Department of Defense adapter backed by USAspending. It exposes:
 
-- `POST /awards/search` for bounded NSF, NIH RePORTER, DOE Office of
-  Science PAMS, and DoD USAspending searches normalized to one award schema; and
+- `POST /awards/search` for bounded NSF, NIH RePORTER, and DOE Office of
+  Science PAMS searches normalized to one award schema;
+- snapshot endpoints for the server-returned sources; and
 - `GET /health` for the enabled sources, adapter versions, cache ceiling, and
   credential requirement only.
+
+In production, the page imports the same DoD adapter and snapshot primitives
+from this package but makes the USAspending network requests from the browser.
+USAspending returns `Access-Control-Allow-Origin: *` for these public endpoints,
+while its edge rejects Cloudflare Worker egress. `source_transports.DOD` therefore
+reports `browser_direct_cors`, and a direct DoD request to the production Worker
+fails fast with `client_direct_required` instead of waiting on an unreachable
+upstream. The page merges the normalized DoD result into the same result and
+snapshot contracts used for the other sources; this is a transport boundary,
+not a second DoD schema or search implementation.
 
 The Worker follows the existing Funding Finder service pattern: strict request
 bounds, dependency-injected source calls, deterministic fixtures, explicit
@@ -43,7 +54,7 @@ are reported as unsupported without discarding successful results from other
 selected sources.
 
 The DoD adapter calls USAspending's prime-award search and award-detail
-endpoints. Every request is restricted to Department of Defense assistance
+endpoints through the production browser transport. Every request is restricted to Department of Defense assistance
 award types `04` (Project Grant) and `05` (Cooperative Agreement). Contracts,
 IDVs, direct payments, loans, subawards, and separate SBIR or DTIC feeds are
 outside this catalog. Detail enrichment is bounded to the returned page,
@@ -69,13 +80,13 @@ institution and normalized year validation. Up to 12 upstream pages may be
 inspected to fill the bounded first normalized snapshot page, while detail
 enrichment remains capped at 25 records with concurrency three. Each
 USAspending search request has a 20-second deadline, and the complete DoD
-operation, including server-validated ROR identity resolution and optional
+operation, including ROR identity resolution and optional
 detail enrichment, shares a 100-second budget below the browser's 120-second
-deadline. The ROR identity cache and guard, source cache and guard, detail
-cache, and required DoD snapshot read/write verification operations are each
-capped at two seconds within that shared budget; the ROR request itself receives
-only the remaining budget. Optional cache failures remain non-fatal, while a
-required snapshot persistence failure returns promptly. Reaching the upstream
+deadline. Browser source and detail cache operations are capped at two seconds,
+successful entries are retained for one hour, and cache failures remain
+non-fatal. Four-source snapshots reuse the shared snapshot primitives and are
+kept in bounded one-hour browser session storage; NSF, NIH, and DOE snapshots
+remain in the Worker cache. Reaching the upstream
 ceiling is reported as a safety-bound diagnostic, but it does not advertise a
 client next page unless a normalized lookahead record was actually collected.
 
@@ -98,10 +109,11 @@ catalog. No name-to-email inference or page reveal automation is performed.
 
 ## Cache and credentials
 
-Successful per-source responses use the Cloudflare Cache API for one hour.
-Failures are never cached, and a cache failure falls through to the official
-source without coupling NSF, NIH, DOE, and DoD availability. All four public
-sources are account-free; this Worker has no source API-key binding.
+Successful NSF, NIH, and DOE responses use the Cloudflare Cache API for one
+hour. Successful DoD source and detail responses use the browser Cache API for
+one hour. Failures are never cached, and a cache failure falls through to the
+official source without coupling source availability. All four public sources
+are account-free; neither transport has a source API-key binding.
 
 The DOE adapter uses the account-free PAMS public WebForms search documented in
 `docs/DOE_PAMS_PUBLIC_AWARD_RECONNAISSANCE.md`. It obtains fresh view-state per
@@ -122,7 +134,8 @@ catalog record matches. Zero or multiple matches fail closed.
 
 The protected-main `Deploy Funded Awards service` workflow validates the award
 contracts, deploys this Worker, waits for its public health contract, runs one
-exact bounded smoke for each of NSF, NIH, DOE, and DoD, and then verifies that
+exact bounded Worker smoke for each of NSF, NIH, and DOE plus one exact DoD
+browser-transport smoke against the official CORS responses, and then verifies that
 GitHub Pages serves the same committed Funded Awards page. If a prior Worker exists, a failed
 health, source, or Pages check automatically restores that version. The live
 smoke set contains one exact, bounded query per source; pull-request CI uses

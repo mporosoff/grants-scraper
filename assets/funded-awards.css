@@ -602,9 +602,12 @@
 
 @media (max-width: 540px) {
   .header-context-pill {
+    box-sizing: border-box;
+    flex: 0 1 96px;
     min-width: 0;
     max-width: 96px;
     overflow: hidden;
+    overflow-wrap: anywhere;
     padding: 6px 8px;
     font-size: .62rem;
     line-height: 1.2;

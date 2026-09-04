@@ -5,13 +5,14 @@ import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
 const [
-  page, linksSource, coreSource, appSource, styles, fundingApp,
+  page, linksSource, coreSource, appSource, dodBrowserSource, styles, fundingApp,
   phase1Evidence, phase2Evidence, deployWorkflow, workerSmoke,
 ] = await Promise.all([
   readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("assets/award-links.js", root), "utf8"),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
   readFile(new URL("assets/funded-awards.js", root), "utf8"),
+  readFile(new URL("assets/dod-awards-browser.mjs", root), "utf8"),
   readFile(new URL("assets/funded-awards.css", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("evaluation/funded_awards_phase1.json", root), "utf8").then(JSON.parse),
@@ -222,6 +223,7 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.doesNotMatch(page, /Advanced: investigator or program officer/);
   assert.match(page, /role="status" aria-live="polite"/);
   assert.match(page, /funding-finder-award-api\.urochestercheme\.workers\.dev/);
+  assert.match(page, /connect-src[^;]*https:\/\/api\.usaspending\.gov[^;]*https:\/\/api\.ror\.org/);
   assert.match(page, /assets\/award-links\.js/);
   assert.match(page, /data\/opportunities\.js/);
   assert.match(appSource, /Direct \$\{escapeHtml\(source\)\} source field/);
@@ -248,7 +250,7 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(appSource, /split\(\/\\n\\s\*\\n\+\//);
   assert.doesNotMatch(appSource, /View source query/);
   assert.match(styles, /\.award-abstract p \+ p/);
-  assert.match(styles, /@media \(max-width: 540px\) \{[\s\S]*?\.header-context-pill \{[\s\S]*?max-width: 96px;[\s\S]*?overflow: hidden;[\s\S]*?white-space: normal;/);
+  assert.match(styles, /@media \(max-width: 540px\) \{[\s\S]*?\.header-context-pill \{[\s\S]*?flex: 0 1 96px;[\s\S]*?max-width: 96px;[\s\S]*?overflow: hidden;[\s\S]*?overflow-wrap: anywhere;[\s\S]*?white-space: normal;/);
   assert.doesNotMatch(appSource, /invent|generated interpretation|success rate/i);
   assert.doesNotMatch(appSource, /\.at\(/);
   assert.match(styles, /@media \(max-width: 390px\)/);
@@ -267,6 +269,10 @@ test("DoD cards expose source-accurate assistance details without empty scientif
   assert.match(appSource, /Principal investigator and scientific abstract are not provided by USAspending/);
   assert.match(appSource, /isDod \? `[^`]*award-source-limitation[^`]*` : `<section class="award-abstract"/s);
   assert.match(appSource, /View original funding opportunity/);
+  assert.match(appSource, /browserIntegratedSearch[\s\S]*searchDodFromBrowser[\s\S]*mergeSearchPayload/);
+  assert.match(dodBrowserSource, /from "\.\.\/workers\/award-api\/src\/adapters\/dod\.js"/);
+  assert.match(dodBrowserSource, /buildAwardSnapshot[\s\S]*snapshotPage[\s\S]*snapshotSourceBatch/);
+  assert.match(dodBrowserSource, /credentials: "omit"[\s\S]*referrerPolicy: "no-referrer"/);
   assert.match(styles, /\.award-source-limitation/);
 });
 
@@ -297,6 +303,9 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(workerSmoke, /award_id: "2605508"/);
   assert.match(workerSmoke, /core_project_number: "K12GM106997"/);
   assert.match(workerSmoke, /award_id: "DE-SC0020230"/);
+  assert.match(workerSmoke, /searchDodFromBrowser\(\{ award_id: "FA9550261B195" \}/);
+  assert.match(workerSmoke, /access-control-allow-origin/);
+  assert.match(deployWorkflow, /source_transports\.DOD[\s\S]*browser_direct_cors/);
   assert.match(workerSmoke, /source\?\.source[\s\S]*source\?\.status[\s\S]*source\?\.error\?\.code/);
   assert.match(workerSmoke, /failureDetail\(payload\)/);
   assert.doesNotMatch(deployWorkflow + workerSmoke, /query_baseline|p9_scoring|vector|semantic/i);

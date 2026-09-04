@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/deploy-award-api.yml"
       - "assets/award-api-config.js"
+      - "assets/dod-awards-browser.mjs"
       - "assets/award-links.js"
       - "assets/funded-awards-core.js"
       - "assets/funded-awards.css"
@@ -52,6 +53,7 @@ jobs:
         run: >-
           node --check tools/classify_worker_deployment.mjs &&
           node --check assets/award-links.js &&
+          node --check assets/dod-awards-browser.mjs &&
           node --check assets/app.js &&
           node --check assets/funded-awards-core.js &&
           node --check assets/funded-awards.js &&
@@ -67,7 +69,7 @@ jobs:
           node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
           node --check workers/award-api/src/adapters/dod.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/dod-award-api-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/dod-award-api-contract.test.mjs tests/browser/dod-browser-transport-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -175,6 +177,7 @@ jobs:
               && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.3.0" \
               && test "$(jq -r '.institution_resolution // empty' <<<"$health" 2>/dev/null)" = "curated-or-server-validated-ror" \
               && test "$(jq -r '.adapter_versions.DOD // empty' <<<"$health" 2>/dev/null)" = "1.0.0" \
+              && test "$(jq -r '.source_transports.DOD // empty' <<<"$health" 2>/dev/null)" = "browser_direct_cors" \
               && test "$(jq -r '.source_capabilities.DOD.award_scope // empty' <<<"$health" 2>/dev/null)" = "prime_assistance_awards_04_05_only" \
               && test "$(jq -r '.complete_result_snapshots.contract_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.complete_result_snapshots.ordering_version // empty' <<<"$health" 2>/dev/null)" = "award-recency-v1" \
