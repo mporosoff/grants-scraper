@@ -8,6 +8,7 @@ This benchmark compares OpenAI GPT-5.6 Luna with Cloudflare Workers AI Gemma 4 2
 2. **Chat with results**
 3. **Chat with NOFO**
 4. **Ask about this institution**: question translation and bounded narrative synthesis
+5. **Ask about a Program Officer snapshot**: dual-axis question planning and bounded evidence synthesis
 
 The existing evaluation export is optional background evidence only; no additional feedback exports are required for this benchmark.
 
@@ -36,7 +37,7 @@ The separate `BENCHMARK_TOKEN` is machine-generated during setup. It is not the 
 
 ## Test cases and review
 
-The committed suite contains six focused cases, one for each production structured-response contract. Every case runs three times per model by default, for 36 total requests. Requests are interleaved in a seeded random order.
+The committed suite contains eight focused cases, one for each production structured-response contract. Every case runs three times per model by default, for 48 total requests. Requests are interleaved in a seeded random order.
 
 The runner saves after every response and can resume the same exact configuration. When all calls finish it creates:
 
@@ -44,7 +45,7 @@ The runner saves after every response and can resume the same exact configuratio
 - `blind-review.json`: paired responses labelled only A and B for human review
 - `blind-key.json`: the A/B identity key, to be opened only after review
 
-Human review asks for a preference plus 1–5 scores for factual grounding and usefulness. The default review contains six short A/B pairs—one per contract—while the other runs measure consistency automatically. It covers the four priority features rather than ordinary search.
+Human review asks for a preference plus 1–5 scores for factual grounding and usefulness. The default review contains eight short A/B pairs—one per contract—while the other runs measure consistency automatically. It covers the five priority features rather than ordinary search.
 
 ## Commands
 

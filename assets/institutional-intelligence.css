@@ -98,6 +98,82 @@
   border-radius: 12px;
 }
 
+.ii-po-scope {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(240px, .8fr) minmax(220px, .7fr);
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  color: #183c61;
+  background: #eaf4ff;
+  border: 1px solid #b8d8f6;
+  border-radius: 10px;
+}
+
+.ii-po-scope.hidden {
+  display: none;
+}
+
+.ii-po-scope h3,
+.ii-po-scope p,
+.ii-po-scope dl {
+  margin: 0;
+}
+
+.ii-po-scope h3 {
+  margin: 3px 0 5px;
+  color: var(--navy);
+}
+
+.ii-po-scope .eyebrow {
+  color: #004eaf;
+}
+
+.ii-po-scope .ii-field-status {
+  color: #40566f;
+}
+
+.ii-po-scope dl {
+  display: grid;
+  gap: 6px;
+}
+
+.ii-po-scope dl div {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.ii-po-scope dt {
+  color: #526b84;
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ii-po-scope dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.ii-po-scope > label {
+  display: grid;
+  gap: 6px;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.ii-po-action {
+  margin-top: 8px;
+}
+
+.ii-po-action .text-button {
+  text-align: left;
+}
+
 .ii-institution-field,
 .ii-filter-grid label,
 .ii-ask-body > label,
@@ -303,7 +379,7 @@
 
 .ii-metrics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   margin-top: 15px;
 }
@@ -334,7 +410,7 @@
 
 .ii-drilldowns {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin-top: 18px;
 }
@@ -820,6 +896,11 @@
 
   .ii-drilldowns {
     grid-template-columns: 1fr;
+  }
+
+  .ii-po-scope {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 
   .ii-filter-grid {

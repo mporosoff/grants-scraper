@@ -2,10 +2,12 @@
   "use strict";
 
   const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
+  const PROGRAM_OFFICER_SOURCES = new Set(["NSF", "NIH", "DOE"]);
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
     "ii_topic", "ii_pi", "ii_pi_identity", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
     "ii_snapshot", "ii_page", "ii_page_size", "ii_facet", "ii_facet_key",
+    "ii_mode", "ii_po_source", "ii_po_name", "ii_po_key", "ii_year_preset",
   ];
   const LEGACY_SEARCH_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start", "year_end", "pi", "program_officer", "offset",
@@ -22,7 +24,7 @@
     ["faculty early career development", "NSF-CAREER"],
     ["faculty early career development program", "NSF-CAREER"],
   ]);
-  const ANSWER_INTENTS = new Set(["count", "investigators", "programs", "years", "awards", "narrative"]);
+  const ANSWER_INTENTS = new Set(["count", "investigators", "institutions", "programs", "years", "awards", "narrative"]);
   const QUESTION_EVIDENCE_LIMIT = 24;
   const QUESTION_ABSTRACT_LIMIT = 800;
   const QUESTION_PAYLOAD_LIMIT = 18_000;
@@ -48,6 +50,57 @@
       .replace(/&/g, " and ")
       .replace(/[^a-z0-9]+/g, " ")
       .trim();
+  }
+
+  const PERSON_NAME_SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv", "v"]);
+  const NON_PERSON_CONTACT_TERMS = new Set([
+    "administration", "administrator", "agency", "branch", "bureau", "center", "centre",
+    "association", "committee", "company", "contact", "corporation", "council", "department", "desk",
+    "division", "foundation", "general", "grants", "group", "headquarters", "help", "helpdesk", "hotline",
+    "hq", "inc", "institute", "institution", "laboratory", "llc", "office", "program", "programme",
+    "service", "staff", "support", "team", "unit", "university",
+  ]);
+
+  function contactNameToken(value) {
+    return String(value || "")
+      .normalize("NFKD")
+      .replace(/\p{M}+/gu, "")
+      .toLocaleLowerCase("en-US")
+      .replace(/[’]/g, "'")
+      .replace(/[‐‑‒–—]/g, "-")
+      .replace(/[^\p{L}\p{N}]+/gu, "")
+      .trim();
+  }
+
+  function programContactKey(value) {
+    const published = clean(value, 300);
+    if (!published || /@|https?:|\d{3,}/iu.test(published)) return "";
+    const commaParts = published.split(",").map(part => clean(part, 160)).filter(Boolean);
+    const trailingSuffix = commaParts.length === 2
+      && commaParts[1].split(/\s+/u).filter(Boolean).length === 1
+      && PERSON_NAME_SUFFIXES.has(contactNameToken(commaParts[1]));
+    const displayTokens = trailingSuffix
+      ? [...commaParts[0].split(/\s+/u), ...commaParts[1].split(/\s+/u)]
+      : commaParts.length >= 2
+        ? [...commaParts[1].split(/\s+/u), ...commaParts[0].split(/\s+/u), ...commaParts.slice(2).flatMap(part => part.split(/\s+/u))]
+        : published.split(/\s+/u);
+    const tokens = displayTokens.map(contactNameToken).filter(Boolean);
+    if (tokens.length < 2 || tokens.length > 7) return "";
+    if (tokens.some(token => NON_PERSON_CONTACT_TERMS.has(token) || token.length > 40)) return "";
+    if (tokens.slice(0, -1).some(token => PERSON_NAME_SUFFIXES.has(token))) return "";
+    return `program-contact-v1:${tokens.join("|")}`;
+  }
+
+  function searchableProgramContact(contact, source) {
+    const normalizedSource = clean(source, 10).toUpperCase();
+    const sourceName = clean(contact?.source_display_name || contact?.name, 300);
+    const key = programContactKey(sourceName);
+    return Boolean(PROGRAM_OFFICER_SOURCES.has(normalizedSource)
+      && contact?.searchable_program_contact === true
+      && key
+      && sourceName.length <= 160
+      && key === clean(contact?.program_contact_key, 300)
+      && clean(contact?.program_contact_identity, 340) === `${normalizedSource}:${key}`);
   }
 
   function isProgramIdentity(candidate, program) {
@@ -100,6 +153,48 @@
   function buildAwardRequest(state, limit = 10) {
     const institution = clean(state?.institution, 300);
     const agency = clean(state?.agency, 10).toUpperCase();
+    const mode = clean(state?.mode, 40);
+    const poSource = clean(state?.program_officer_source || agency, 10).toUpperCase();
+    const rawYearStart = state?.year_start;
+    const rawYearEnd = state?.year_end;
+    const hasYearStart = rawYearStart !== undefined && rawYearStart !== null && String(rawYearStart).trim() !== "";
+    const hasYearEnd = rawYearEnd !== undefined && rawYearEnd !== null && String(rawYearEnd).trim() !== "";
+    const yearStart = validYear(rawYearStart);
+    const yearEnd = validYear(rawYearEnd);
+    if ((hasYearStart && !yearStart) || (hasYearEnd && !yearEnd)) {
+      throw new Error("Enter years from 1989 through 2100.");
+    }
+    if (mode === "program_officer") {
+      const displayName = clean(state?.program_officer_display_name || state?.program_officer, 300);
+      const contactKey = clean(state?.program_contact_key, 300);
+      const yearPreset = clean(state?.year_preset, 20);
+      if (!PROGRAM_OFFICER_SOURCES.has(poSource) || !displayName || !contactKey || programContactKey(displayName) !== contactKey) {
+        throw new Error("This Program Officer search identity is invalid. Start again from a funded-award contact.");
+      }
+      if (!["recent5", "all", "custom"].includes(yearPreset)) throw new Error("Choose a Program Officer year range.");
+      const criteria = {
+        mode: "program_officer",
+        program_officer: displayName,
+        program_contact_key: contactKey,
+        year_preset: yearPreset,
+      };
+      if (yearPreset === "recent5" && (yearStart || yearEnd)) {
+        if (!yearStart || !yearEnd || yearEnd - yearStart !== 4) throw new Error("Recent 5 years must include five consecutive source award years.");
+        criteria.year_start = yearStart;
+        criteria.year_end = yearEnd;
+      } else if (yearPreset === "custom") {
+        if (!yearStart && !yearEnd) throw new Error("Enter a From or Through year for a custom range.");
+        if (yearStart) criteria.year_start = yearStart;
+        if (yearEnd) criteria.year_end = yearEnd;
+      } else if (yearPreset === "all" && (yearStart || yearEnd)) {
+        throw new Error("All available years cannot include custom year bounds.");
+      }
+      if (yearStart && yearEnd && yearEnd < yearStart) throw new Error("The ending year must be the same as or later than the starting year.");
+      if (yearStart && yearEnd && yearEnd - yearStart + 1 > 50) {
+        throw new Error("Choose a year range of 50 years or fewer.");
+      }
+      return { sources: [poSource], criteria, limit: Math.min(25, Math.max(1, Number(limit) || 10)), offset: 0 };
+    }
     const sources = sourcesForAgency(agency);
     const criteria = {
       ...programCriterion(agency, state?.program),
@@ -116,8 +211,6 @@
     if (agency === "DOD" && programOfficer) {
       throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
     }
-    const yearStart = validYear(state?.year_start);
-    const yearEnd = validYear(state?.year_end);
     if (topic) criteria.topic = topic;
     if (pi) criteria.pi = pi;
     if (programOfficer) criteria.program_officer = programOfficer;
@@ -461,6 +554,7 @@
     if (ANSWER_INTENTS.has(requested)) return requested;
     const text = clean(question, 1_000).toLocaleLowerCase("en-US");
     if (/\bwho\b|investigator|researcher|faculty|\bpi\b/.test(text)) return "investigators";
+    if (/institution|organization|university|college|recipient/.test(text)) return "institutions";
     if (/program|mechanism|office/.test(text)) return "programs";
     if (/\bwhen\b|\byear/.test(text)) return "years";
     if (/how many|count|number of/.test(text)) return "count";
@@ -551,6 +645,9 @@
         : includesDod
           ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards, so this is not evidence that those projects have no investigators."
           : "No investigator names appear in these results.";
+    } else if (resolvedIntent === "institutions") {
+      const institutions = (safeAggregate.institutions || []).map(institution => `${institution.name} (${institution.projects})`);
+      answer = institutions.length ? `Recipient institutions in these results: ${institutions.join("; ")}.` : "No recipient institution names appear in these results.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
       answer = programs.length ? `Programs in these results: ${programs.join("; ")}.` : "No program labels appear in these results.";
@@ -564,7 +661,11 @@
       const titles = (Array.isArray(safeAggregate.ordered_refs) ? safeAggregate.ordered_refs : safeAggregate.awards || [])
         .slice(0, 8)
         .map(award => clean(award?.title, 180) || clean(award?.evidence_id, 120) || `${award.source} ${award.award_id}`);
-      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.` : "No matching awards are in these results.";
+      answer = titles.length
+        ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.`
+        : safeAggregate.project_count > 0
+          ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results; award titles are unavailable in this view.`
+          : "No matching awards are in these results.";
     } else {
       answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} available for this answer.`;
     }
@@ -610,28 +711,188 @@
     };
   }
 
+  const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
+    "count", "investigators", "institutions", "programs", "years", "awards",
+  ]);
+  const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
+  const PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS = new Map([
+    ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+    ["c", new Set(["language", "programming"])],
+    ["k", new Set(["means"])],
+    ["p", new Set(["value", "values"])],
+    ["q", new Set(["learning"])],
+    ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+    ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+    ["x", new Set(["ray", "rays"])],
+  ]);
+
+  function programOfficerPlanTokens(value) {
+    return clean(value, 120)
+      .normalize("NFKD")
+      .replace(/\p{M}+/gu, "")
+      .toLocaleLowerCase("en-US")
+      .match(/[\p{L}\p{N}]+/gu) || [];
+  }
+
+  function admissibleProgramOfficerPlanToken(token, tokens, index) {
+    if (token.length >= 3) return true;
+    if (PROGRAM_OFFICER_SHORT_CONCEPTS.has(token)) return true;
+    if (token.length === 1 && PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS.get(token)?.has(tokens[index + 1])) return true;
+    return /\p{L}/u.test(token) && /\p{N}/u.test(token);
+  }
+
+  function validateProgramOfficerQuestionPlan(value) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+    const intent = clean(value.intent, 30);
+    if (!PROGRAM_OFFICER_ANSWER_INTENTS.has(intent)) return null;
+    const normalizeTerms = (terms, maximum) => {
+      if (!Array.isArray(terms) || terms.length > maximum) return null;
+      const normalized = [];
+      const seen = new Set();
+      for (const candidate of terms) {
+        if (typeof candidate !== "string" || candidate.length > 120 || /[\r\n\t]/u.test(candidate)) return null;
+        const term = clean(candidate, 120);
+        const tokens = programOfficerPlanTokens(term);
+        if (!term || !tokens.length || tokens.some((token, index) => !admissibleProgramOfficerPlanToken(token, tokens, index))) return null;
+        const key = tokens.join(" ");
+        if (!seen.has(key)) {
+          seen.add(key);
+          normalized.push(term);
+        }
+      }
+      return normalized;
+    };
+    const concepts = normalizeTerms(value.concepts, 16);
+    const phrases = normalizeTerms(value.phrases, 8);
+    const exclusions = normalizeTerms(value.exclusions, 8);
+    if (!concepts || !phrases || !exclusions) return null;
+    const topical = concepts.length > 0;
+    if (topical !== (phrases.length > 0) || (!topical && exclusions.length)) return null;
+    return { intent, concepts, phrases, exclusions };
+  }
+
+  function programOfficerScopeText(snapshot) {
+    const officer = snapshot?.program_officer || {};
+    const source = clean(officer.source, 10) || "source";
+    const name = clean(officer.display_name, 300) || "the exact source-listed contact";
+    const years = officer.year_start && officer.year_end
+      ? `source award years ${officer.year_start}–${officer.year_end}`
+      : officer.year_start ? `source award years ${officer.year_start} onward`
+        : officer.year_end ? `source award years through ${officer.year_end}` : "all available source award years";
+    const total = snapshot?.completeness === "complete"
+      ? `${Number(snapshot.exact_total || 0).toLocaleString()} ${source} award${snapshot.exact_total === 1 ? "" : "s"}`
+      : `at least ${Number(snapshot?.at_least || 0).toLocaleString()} available ${source} award${snapshot?.at_least === 1 ? "" : "s"}`;
+    return { source, name, years, total };
+  }
+
+  function deterministicProgramOfficerAnswer({ question = "", intent = "", aggregate, snapshot, evidencePack = null } = {}) {
+    const scope = programOfficerScopeText(snapshot);
+    const evidence = Array.isArray(evidencePack?.awards) ? evidencePack.awards : [];
+    if (evidencePack?.retrieval) {
+      const retrievedCount = Number(evidencePack?.retrieval?.records_with_score);
+      const count = Number.isInteger(retrievedCount) && retrievedCount >= 0 ? retrievedCount : evidence.length;
+      const matchedAggregate = evidencePack?.matched_aggregate || {};
+      let matchedDetails = "";
+      if (count && intent === "investigators") {
+        const people = Array.isArray(matchedAggregate.investigators) ? matchedAggregate.investigators : [];
+        const total = Number(matchedAggregate.investigator_count || people.length);
+        matchedDetails = people.length
+          ? ` Matching investigators: ${people.map(person => `${person.name} (${person.projects} matching award${person.projects === 1 ? "" : "s"})`).join("; ")}.${total > people.length ? ` Showing ${people.length} of ${total}.` : ""}`
+          : " No investigator names appear in the matching records.";
+      } else if (count && intent === "institutions") {
+        const institutions = Array.isArray(matchedAggregate.institutions) ? matchedAggregate.institutions : [];
+        const total = Number(matchedAggregate.institution_count || institutions.length);
+        matchedDetails = institutions.length
+          ? ` Matching recipient institutions: ${institutions.map(institution => `${institution.name} (${institution.projects})`).join("; ")}.${total > institutions.length ? ` Showing ${institutions.length} of ${total}.` : ""}`
+          : " No recipient institution names appear in the matching records.";
+      } else if (count && intent === "programs") {
+        const programs = Array.isArray(matchedAggregate.programs) ? matchedAggregate.programs : [];
+        const total = Number(matchedAggregate.program_count || programs.length);
+        matchedDetails = programs.length
+          ? ` Matching programs: ${programs.map(program => `${program.label} (${program.projects})`).join("; ")}.${total > programs.length ? ` Showing ${programs.length} of ${total}.` : ""}`
+          : " No program labels appear in the matching records.";
+      } else if (count && intent === "years") {
+        matchedDetails = matchedAggregate.year_start
+          ? ` The matching records span ${matchedAggregate.year_start}${matchedAggregate.year_end !== matchedAggregate.year_start ? ` through ${matchedAggregate.year_end}` : ""}.`
+          : " The matching records do not contain a usable award year.";
+      }
+      const evidenceDetails = count > evidence.length
+        ? evidence.length
+          ? ` The evidence list shows the ${evidence.length} highest-scoring records within its published bound.`
+          : " The bounded evidence list contains no records."
+        : "";
+      const answer = count
+        ? snapshot?.completeness === "complete"
+          ? `I found ${count.toLocaleString()} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.”${matchedDetails}${evidenceDetails}`
+          : `I found ${count.toLocaleString()} related project${count === 1 ? "" : "s"} among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.”${matchedDetails}${evidenceDetails} The source snapshot is incomplete.`
+        : snapshot?.completeness === "complete"
+          ? `No related project was identified among the ${scope.total} from ${scope.years} returned for the exact source-listed name “${scope.name}.” This is a scoped snapshot result, not a complete-career claim.`
+          : "No related project was identified in the available records, but the source snapshot is incomplete, so this is not a negative finding.";
+      return { answer, intent, evidence_ids: evidence.map(item => clean(item?.evidence_id, 120)).filter(Boolean) };
+    }
+    const deterministic = deterministicInstitutionAnswer({ question, intent, aggregate, sources: snapshot?.sources || [] });
+    return {
+      ...deterministic,
+      answer: `${deterministic.answer} Scope: ${scope.total} from ${scope.years}, post-validated to the exact source-listed name “${scope.name}.”`,
+    };
+  }
+
+  function programOfficerProviderPayload({ question, snapshot, retrievalPlan = null, evidencePack }) {
+    const officer = snapshot?.program_officer || {};
+    return {
+      question: clean(question, 1_000),
+      locked_scope: {
+        source: clean(officer.source, 10),
+        exact_source_display_name: clean(officer.display_name, 300),
+        year_preset: clean(officer.year_preset, 20),
+        year_start: validYear(officer.year_start),
+        year_end: validYear(officer.year_end),
+      },
+      deterministic_retrieval_plan: retrievalPlan,
+      public_award_evidence: Array.isArray(evidencePack?.awards) ? evidencePack.awards : [],
+    };
+  }
+
   function stateFromSearch(search) {
     const params = new URLSearchParams(search || "");
+    const lockedModeRequested = params.get("ii_mode") === "program_officer";
+    const mode = lockedModeRequested ? "program_officer" : "standard";
+    const poSource = PROGRAM_OFFICER_SOURCES.has(clean(params.get("ii_po_source"), 10).toUpperCase())
+      ? clean(params.get("ii_po_source"), 10).toUpperCase() : "";
+    const poName = clean(params.get("ii_po_name"), 300);
+    const poKey = clean(params.get("ii_po_key"), 300);
+    const yearPreset = ["recent5", "all", "custom"].includes(params.get("ii_year_preset")) ? params.get("ii_year_preset") : "";
+    const validPo = mode === "program_officer" && poSource && poName && poKey
+      && programContactKey(poName) === poKey && yearPreset;
     const state = {
       open: true,
       institution: clean(params.get("ii_institution") || params.get("institution"), 300),
       ror_id: clean(params.get("ii_ror"), 100),
-      agency: SOURCE_NAMES.includes(clean(params.get("ii_agency") || params.get("agency"), 10).toUpperCase())
+      agency: (validPo ? poSource : "") || (SOURCE_NAMES.includes(clean(params.get("ii_agency") || params.get("agency"), 10).toUpperCase())
         ? clean(params.get("ii_agency") || params.get("agency"), 10).toUpperCase()
-        : "all",
+        : "all"),
       program: clean(params.get("ii_program") || (params.get("mode") === "program" ? params.get("q") : ""), 160),
       topic: clean(params.get("ii_topic") || (!params.get("mode") || params.get("mode") === "topic" ? params.get("q") : ""), 500),
       pi: clean(params.get("ii_pi") || params.get("pi") || (params.get("mode") === "pi" ? params.get("q") : ""), 160),
-      program_officer: clean(params.get("ii_program_officer") || params.get("program_officer") || (params.get("mode") === "program_officer" ? params.get("q") : ""), 160),
+      program_officer: lockedModeRequested
+        ? (validPo ? poName : "")
+        : clean(params.get("ii_program_officer") || params.get("program_officer") || (params.get("mode") === "program_officer" ? params.get("q") : ""), 160),
       year_start: /^\d{4}$/.test(params.get("ii_year_start") || params.get("year_start") || "") ? (params.get("ii_year_start") || params.get("year_start")) : "",
       year_end: /^\d{4}$/.test(params.get("ii_year_end") || params.get("year_end") || "") ? (params.get("ii_year_end") || params.get("year_end")) : "",
       offset: Math.max(0, Math.min(1_000, Number(params.get("ii_offset") || params.get("offset")) || 0)),
       snapshot_id: clean(params.get("ii_snapshot"), 100),
       page: Math.max(1, Number.parseInt(params.get("ii_page") || "1", 10) || 1),
       page_size: [10, 25, 50].includes(Number(params.get("ii_page_size"))) ? Number(params.get("ii_page_size")) : 10,
-      facet_type: ["all", "investigator", "program"].includes(params.get("ii_facet")) ? params.get("ii_facet") : "all",
+      facet_type: ["all", "investigator", "program", "institution"].includes(params.get("ii_facet")) ? params.get("ii_facet") : "all",
       facet_key: snapshotFacetKey(params.get("ii_facet_key")),
     };
+    if (validPo) Object.assign(state, {
+      mode: "program_officer",
+      program_officer_source: poSource,
+      program_officer_display_name: poName,
+      program_contact_key: poKey,
+      year_preset: yearPreset,
+    });
     if (state.pi && params.get("ii_pi_identity") === "1") state.pi_identity = true;
     return state;
   }
@@ -641,6 +902,19 @@
     MANAGED_PARAMS.forEach(key => url.searchParams.delete(key));
     LEGACY_SEARCH_PARAMS.forEach(key => url.searchParams.delete(key));
     if (state?.open || clean(state?.institution)) url.searchParams.set("ii", "1");
+    if (state?.mode === "program_officer") {
+      const source = clean(state.program_officer_source || state.agency, 10).toUpperCase();
+      const displayName = clean(state.program_officer_display_name || state.program_officer, 300);
+      const contactKey = clean(state.program_contact_key, 300);
+      const yearPreset = clean(state.year_preset, 20);
+      if (PROGRAM_OFFICER_SOURCES.has(source) && displayName && programContactKey(displayName) === contactKey && ["recent5", "all", "custom"].includes(yearPreset)) {
+        url.searchParams.set("ii_mode", "program_officer");
+        url.searchParams.set("ii_po_source", source);
+        url.searchParams.set("ii_po_name", displayName);
+        url.searchParams.set("ii_po_key", contactKey);
+        url.searchParams.set("ii_year_preset", yearPreset);
+      }
+    }
     if (clean(state?.institution)) url.searchParams.set("ii_institution", clean(state.institution, 300));
     if (clean(state?.ror_id)) url.searchParams.set("ii_ror", clean(state.ror_id, 100));
     if (SOURCE_NAMES.includes(clean(state?.agency, 10).toUpperCase())) url.searchParams.set("ii_agency", clean(state.agency, 10).toUpperCase());
@@ -648,7 +922,7 @@
     if (clean(state?.topic)) url.searchParams.set("ii_topic", clean(state.topic, 500));
     if (clean(state?.pi)) url.searchParams.set("ii_pi", clean(state.pi, 160));
     if (clean(state?.pi) && state?.pi_identity === true) url.searchParams.set("ii_pi_identity", "1");
-    if (clean(state?.program_officer)) url.searchParams.set("ii_program_officer", clean(state.program_officer, 160));
+    if (state?.mode !== "program_officer" && clean(state?.program_officer)) url.searchParams.set("ii_program_officer", clean(state.program_officer, 160));
     if (validYear(state?.year_start)) url.searchParams.set("ii_year_start", String(state.year_start));
     if (validYear(state?.year_end)) url.searchParams.set("ii_year_end", String(state.year_end));
     if (Number(state?.offset) > 0) url.searchParams.set("ii_offset", String(Math.max(0, Math.min(1_000, Number(state.offset)))));
@@ -656,7 +930,7 @@
     if (Number(state?.page) > 1) url.searchParams.set("ii_page", String(Math.max(1, Number(state.page) || 1)));
     if ([10, 25, 50].includes(Number(state?.page_size)) && Number(state.page_size) !== 10) url.searchParams.set("ii_page_size", String(state.page_size));
     const facetKey = snapshotFacetKey(state?.facet_key);
-    if (["investigator", "program"].includes(state?.facet_type) && facetKey) {
+    if (["investigator", "program", "institution"].includes(state?.facet_type) && facetKey) {
       url.searchParams.set("ii_facet", state.facet_type);
       url.searchParams.set("ii_facet_key", facetKey);
     }
@@ -752,6 +1026,7 @@
     chooseInstitution,
     compactPageNumbers,
     deterministicInstitutionAnswer,
+    deterministicProgramOfficerAnswer,
     evidenceId,
     explicitInvestigator,
     groupInvestigators,
@@ -760,9 +1035,13 @@
     normalizedInvestigatorName,
     programDescriptors,
     programCriterion,
+    programContactKey,
+    programOfficerProviderPayload,
+    validateProgramOfficerQuestionPlan,
     questionEvidencePack,
     questionProviderPayload,
     requiresExplicitInstitutionSelection,
+    searchableProgramContact,
     sanitizeQuestionPlan,
     sanitizeAnswerIntent,
     sourcesForAgency,

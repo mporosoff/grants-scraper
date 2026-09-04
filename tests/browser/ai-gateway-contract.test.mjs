@@ -154,6 +154,47 @@ function sampleUser(operation) {
       current_filters: filters(),
       question: "How many DOE BES awards?",
     },
+    program_officer_question_plan: {
+      question: "Which investigators work on quantum sensing?",
+      locked_scope: {
+        source: "NSF",
+        exact_source_display_name: "Doe, Jane A.",
+        year_preset: "recent5",
+        year_start: 2022,
+        year_end: 2026,
+      },
+    },
+    program_officer_evidence_answer: {
+      question: "Which investigators work on quantum sensing?",
+      locked_scope: {
+        source: "NSF",
+        exact_source_display_name: "Doe, Jane A.",
+        year_preset: "recent5",
+        year_start: 2022,
+        year_end: 2026,
+      },
+      deterministic_retrieval_plan: {
+        intent: "investigators",
+        concepts: ["quantum", "sensing"],
+        phrases: ["quantum sensing"],
+        exclusions: [],
+      },
+      public_award_evidence: [{
+        evidence_id: "NSF:123",
+        snapshot_position: 1,
+        source: "NSF",
+        award_id: "123",
+        title: "Quantum sensing platform",
+        program: "Engineering",
+        program_office: "Directorate for Engineering",
+        year: 2025,
+        investigators: ["A. Researcher"],
+        institution: "Example University",
+        abstract_excerpt: "Public quantum sensing evidence.",
+        deterministic_score: 401,
+        matched_fields: ["title", "abstract"],
+      }],
+    },
     institution_narrative: {
       question: "What themes appear?",
       institution: { id: "https://ror.org/example", canonical_name: "Example University" },
@@ -291,6 +332,8 @@ test("hosted routing includes the preview-feedback override for structured NOFO 
     result_chat: ["luna"],
     notice_chat: ["luna", "gemma"],
     institution_question_translation: ["gemma"],
+    program_officer_question_plan: ["gemma"],
+    program_officer_evidence_answer: ["luna"],
     institution_narrative: ["luna"],
   });
   assert.equal(HOSTED_MODELS.luna, "gpt-5.6-luna");
@@ -301,14 +344,53 @@ test("hosted routing includes the preview-feedback override for structured NOFO 
   assert.match(PRODUCTION_PROMPTS.refinement_shortlist, /Do not return an empty matches array merely because fit is imperfect/);
   assert.match(PRODUCTION_PROMPTS.notice_chat, /exact columns Item, Answer, and Source/);
   assert.match(PRODUCTION_PROMPTS.institution_question_translation, /since 2024.*leave year_end empty/);
+  assert.match(PRODUCTION_PROMPTS.program_officer_question_plan, /Intent always describes the requested answer/);
+  assert.match(PRODUCTION_PROMPTS.program_officer_evidence_answer, /exact supplied evidence_ids/);
 });
 
-test("all six browser payload families satisfy the exact Worker input policy", () => {
+test("all eight browser payload families satisfy the exact Worker input policy", () => {
   for (const operation of Object.keys(OPERATION_ROUTES)) {
     const user = JSON.stringify(sampleUser(operation));
     assert.ok(user.length < MAX_USER_CHARS);
     assert.deepEqual(validateOperationUser(operation, user), sampleUser(operation));
   }
+});
+
+test("Program Officer gateway inputs preserve locked source scope and dual-axis plans", () => {
+  const question = sampleUser("program_officer_question_plan");
+  const badSource = structuredClone(question);
+  badSource.locked_scope.source = "DOD";
+  assert.equal(validateOperationUser("program_officer_question_plan", JSON.stringify(badSource)), null);
+
+  const evidence = sampleUser("program_officer_evidence_answer");
+  const broadEvidence = structuredClone(evidence);
+  broadEvidence.deterministic_retrieval_plan.concepts = [];
+  broadEvidence.deterministic_retrieval_plan.phrases = [];
+  assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(broadEvidence)), null);
+
+  const ambiguousSymbol = structuredClone(evidence);
+  ambiguousSymbol.deterministic_retrieval_plan.concepts = ["As", "toxicity"];
+  ambiguousSymbol.deterministic_retrieval_plan.phrases = ["As toxicity"];
+  assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(ambiguousSymbol)), null);
+
+  for (const concept of ["T cells", "B lymphocytes", "X-rays", "R language", "C programming", "Q-learning", "k-means", "p-values"]) {
+    const contextualSingle = structuredClone(evidence);
+    contextualSingle.deterministic_retrieval_plan.concepts = [concept];
+    contextualSingle.deterministic_retrieval_plan.phrases = [concept];
+    assert.deepEqual(
+      validateOperationUser("program_officer_evidence_answer", JSON.stringify(contextualSingle)),
+      contextualSingle,
+      `${concept} must survive the gateway's exact retrieval-plan policy`,
+    );
+  }
+  const bareSingle = structuredClone(evidence);
+  bareSingle.deterministic_retrieval_plan.concepts = ["T"];
+  bareSingle.deterministic_retrieval_plan.phrases = ["T"];
+  assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(bareSingle)), null);
+
+  const wrongFacet = structuredClone(evidence);
+  wrongFacet.public_award_evidence[0].matched_fields = ["contact"];
+  assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(wrongFacet)), null);
 });
 
 test("search plans accept every selectable facet value without widening unrelated arrays", () => {

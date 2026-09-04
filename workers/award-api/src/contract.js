@@ -81,6 +81,90 @@ export function makeContact({ name, role, email, officialContactUrl, sourceField
   };
 }
 
+const PERSON_NAME_SUFFIXES = new Set(["jr", "sr", "ii", "iii", "iv", "v"]);
+const NON_PERSON_CONTACT_TERMS = new Set([
+  "administration", "administrator", "agency", "branch", "bureau", "center", "centre",
+  "association", "committee", "company", "contact", "corporation", "council", "department", "desk",
+  "division", "foundation", "general", "grants", "group", "headquarters", "help", "helpdesk", "hotline",
+  "hq", "inc", "institute", "institution", "laboratory", "llc", "office", "program", "programme",
+  "service", "staff", "support", "team", "unit", "university",
+]);
+
+function contactNameToken(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/\p{M}+/gu, "")
+    .toLocaleLowerCase("en-US")
+    .replace(/[’]/g, "'")
+    .replace(/[‐‑‒–—]/g, "-")
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+    .trim();
+}
+
+function parsedProgramContactName(value) {
+  const published = cleanText(value, 300);
+  if (!published || /@|https?:|\d{3,}/iu.test(published)) return null;
+  const commaParts = published.split(",").map(part => cleanText(part, 160)).filter(Boolean);
+  let displayTokens;
+  const trailingSuffix = commaParts.length === 2
+    && commaParts[1].split(/\s+/u).filter(Boolean).length === 1
+    && PERSON_NAME_SUFFIXES.has(contactNameToken(commaParts[1]));
+  if (trailingSuffix) {
+    displayTokens = [...commaParts[0].split(/\s+/u), ...commaParts[1].split(/\s+/u)];
+  } else if (commaParts.length >= 2) {
+    const suffix = commaParts.length >= 3 ? commaParts.slice(2) : [];
+    displayTokens = [
+      ...commaParts[1].split(/\s+/u),
+      ...commaParts[0].split(/\s+/u),
+      ...suffix.flatMap(part => part.split(/\s+/u)),
+    ];
+  } else {
+    displayTokens = published.split(/\s+/u);
+  }
+  const tokens = displayTokens.map(contactNameToken).filter(Boolean);
+  if (tokens.length < 2 || tokens.length > 7) return null;
+  const words = new Set(tokens);
+  if ([...words].some(token => NON_PERSON_CONTACT_TERMS.has(token))) return null;
+  if (tokens.slice(0, -1).some(token => PERSON_NAME_SUFFIXES.has(token))) return null;
+  if (tokens.some(token => token.length > 40)) return null;
+  return { published, tokens };
+}
+
+export function programContactKey(value) {
+  const parsed = parsedProgramContactName(value);
+  return parsed ? `program-contact-v1:${parsed.tokens.join("|")}` : null;
+}
+
+export function isPersonLikeProgramContactName(value) {
+  return Boolean(parsedProgramContactName(value));
+}
+
+export function makeProgramContact({ source, sourceDisplayName, ...fields }) {
+  const contact = makeContact(fields);
+  if (!contact) return null;
+  const published = cleanText(sourceDisplayName || fields.name, 300);
+  const contactKey = programContactKey(published);
+  const normalizedSource = cleanText(source, 10)?.toUpperCase();
+  return {
+    ...contact,
+    source_display_name: published,
+    program_contact_key: contactKey,
+    program_contact_identity: normalizedSource && contactKey ? `${normalizedSource}:${contactKey}` : null,
+    searchable_program_contact: Boolean(normalizedSource && contactKey && published.length <= 160),
+  };
+}
+
+export function awardMatchesProgramContact(award, source, contactKey) {
+  const normalizedSource = cleanText(source, 10)?.toUpperCase();
+  const expectedKey = cleanText(contactKey, 300);
+  if (!normalizedSource || !expectedKey || cleanText(award?.source, 10)?.toUpperCase() !== normalizedSource) return false;
+  return (Array.isArray(award?.program_contacts) ? award.program_contacts : []).some(contact => (
+    contact?.searchable_program_contact === true
+    && cleanText(contact?.program_contact_key, 300) === expectedKey
+    && programContactKey(contact?.source_display_name || contact?.name) === expectedKey
+  ));
+}
+
 export function awardRecord(fields) {
   return {
     schema_version: AWARD_SCHEMA_VERSION,

@@ -135,6 +135,57 @@
         ],
       },
     }),
+    program_officer_question_plan: Object.freeze({
+      name: "program_officer_question_plan_v1",
+      description: "A bounded deterministic-retrieval plan for one locked Program Officer award snapshot.",
+      schema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          intent: {
+            type: "string",
+            enum: ["count", "investigators", "institutions", "programs", "years", "awards"],
+          },
+          concepts: {
+            ...stringArray(16, 120),
+            uniqueItems: true,
+          },
+          phrases: {
+            ...stringArray(8, 120),
+            uniqueItems: true,
+          },
+          exclusions: {
+            ...stringArray(8, 120),
+            uniqueItems: true,
+          },
+        },
+        required: ["intent", "concepts", "phrases", "exclusions"],
+      },
+    }),
+    program_officer_evidence_answer: Object.freeze({
+      name: "program_officer_evidence_answer_v1",
+      description: "Evidence-cited claims grounded only in a supplied bounded set of Program Officer award records.",
+      schema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          claims: {
+            type: "array",
+            maxItems: 6,
+            items: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                text: { type: "string", maxLength: 700 },
+                evidence_ids: stringArray(8, 120),
+              },
+              required: ["text", "evidence_ids"],
+            },
+          },
+        },
+        required: ["claims"],
+      },
+    }),
     institution_narrative: Object.freeze({
       name: "institution_narrative_synthesis_v1",
       description: "Evidence-cited narrative claims grounded in supplied public award fields.",

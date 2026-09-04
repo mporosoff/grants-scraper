@@ -5,7 +5,14 @@ extended with an isolated Department of Defense adapter backed by USAspending. I
 
 - `POST /awards/search` for bounded NSF, NIH RePORTER, and DOE Office of
   Science PAMS searches normalized to one award schema;
-- snapshot endpoints for the server-returned sources; and
+- `POST /awards/snapshots` plus `/page`, `/batch`, and `/retry` for immutable,
+  server-authoritative result snapshots;
+- `POST /awards/snapshots/evidence` for bounded deterministic retrieval over
+  an unexpired Program Officer snapshot. Evidence requests declare
+  `"plan_format": "provider-concepts-v1"` and carry a provider-generated,
+  browser-validated plan of at most 16 concepts, eight ranking phrases, and
+  eight exclusions. The Worker never interprets the raw question. Matching
+  tokenizes up to 20,000 retained abstract characters per award; and
 - `GET /health` for the enabled sources, adapter versions, cache ceiling, and
   credential requirement only.
 
@@ -107,9 +114,44 @@ email fields, so DOE contact emails remain null. USAspending does not expose
 award-level investigator or program-contact fields for the DoD records in this
 catalog. No name-to-email inference or page reveal automation is performed.
 
+Person-like program contacts also receive a deterministic same-source identity
+made from the source, exact source-published display name, and a comparison key.
+The key normalizes display-only Unicode, case, whitespace, punctuation, and
+comma ordering while preserving substantive tokens, middle initials, and
+suffixes. It never uses email, crosses sources, or infers aliases. Dedicated
+Program Officer snapshots send the exact source name upstream and then reject
+every returned award whose normalized `program_contacts` do not contain that
+same key before totals, facets, pages, or evidence are computed.
+
+Program Officer snapshot criteria use `mode: "program_officer"`, one source,
+the exact `program_officer` name, `program_contact_key`, and a `year_preset` of
+`recent5`, `all`, or `custom`. The recent preset derives five inclusive source
+award years from the snapshot's single UTC clock. Public metadata discloses the
+exact or lower-bound total, source/coverage state, abstract coverage, expiry,
+and post-validation counts.
+
+The evidence endpoint accepts only a snapshot ID, a strict bounded topical plan,
+and a limit no greater than 24. Every provider concept must occur in the same
+record; an exclusion disqualifies a record; phrases affect deterministic ordering
+but cannot admit a record. It scores the complete stored snapshot without
+changing membership, returns at most 800 abstract characters per record and
+18,000 serialized evidence characters, and never stores the plan. Title
+matches outweigh abstract matches; program/office fields are supporting
+signals, and investigator/institution fields are weak signals. The endpoint
+uses the existing origin, body-size, expiration, and Durable Object abuse-control
+contracts. The `provider-concepts-v1` plan and `program-officer-evidence-v4`
+scoring contracts keep one-letter scientific concepts only when the same term
+pairs them with a bounded qualifying word, including T/B cells, X-rays, R/C
+language, Q-learning, k-means, and p-values. A bare one-letter term remains
+invalid. Alphanumeric formulas such as `CO2`, `H2`, and `As2O3` and the short
+allowlist `AI`, `ML`, and `pH` are accepted; ambiguous alphabetic two-letter
+tokens such as `Am`, `As`, `At`, `Be`, `He`, and `In` are rejected, so the
+provider must return full names. No capitalization, punctuation, bracket, or
+neighbor confers chemical meaning. It creates no corpus or database.
+
 ## Cache and credentials
 
-Successful NSF, NIH, and DOE responses use the Cloudflare Cache API for one
+Successful NSF, NIH, and DOE responses and immutable Worker snapshots use the Cloudflare Cache API for one
 hour. Successful DoD source and detail responses use the browser Cache API for
 one hour. Failures are never cached, and a cache failure falls through to the
 official source without coupling source availability. All four public sources

@@ -376,13 +376,21 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(config, /"cpu_ms": 250/);
 });
 
-test("the integrated A-C browser release uses one fresh cache key for every changed served asset", async () => {
-  const [fundedAwards, fundingFinder, teamMatch, appCss, appJs] = await Promise.all([
+test("the integrated A-C browser release uses content-addressed keys for changed served assets", async () => {
+  const [
+    fundedAwards, fundingFinder, teamMatch, appCss, appJs, aiProvider,
+    awardApiConfig, institutionalCss, institutionalCore, institutionalSnapshots,
+  ] = await Promise.all([
     readFile(new URL("funded_awards.html", root), "utf8"),
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("team_match.html", root), "utf8"),
     readFile(new URL("assets/app.css", root)),
     readFile(new URL("assets/app.js", root)),
+    readFile(new URL("assets/ai-provider.js", root)),
+    readFile(new URL("assets/award-api-config.js", root)),
+    readFile(new URL("assets/institutional-intelligence.css", root)),
+    readFile(new URL("assets/institutional-intelligence-core.js", root)),
+    readFile(new URL("assets/institutional-intelligence-snapshots.js", root)),
   ]);
   const releaseKey = "post-phase4-abc-20260829";
   const alertStylesReleaseKey = "ui-runtime-20260903";
@@ -391,26 +399,29 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   const dodBrowserReleaseKey = "dod-browser-20260904-r2";
   const fundedAwardsStylesReleaseKey = "source-pill-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
-  for (const asset of [
-    "alerts.js",
-    "award-api-config.js",
-  ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
+  const aiProviderHash = createHash("sha256").update(aiProvider).digest("hex");
+  const awardApiConfigHash = createHash("sha256").update(awardApiConfig).digest("hex");
+  const institutionalCssHash = createHash("sha256").update(institutionalCss).digest("hex");
+  const institutionalCoreHash = createHash("sha256").update(institutionalCore).digest("hex");
+  const institutionalSnapshotsHash = createHash("sha256").update(institutionalSnapshots).digest("hex");
+  assert.match(fundedAwards, new RegExp(`alerts\\.js\\?v=${releaseKey}`));
+  assert.match(fundedAwards, new RegExp(`award-api-config\\.js\\?v=${awardApiConfigHash}`));
   assert.match(fundedAwards, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${dodStatusReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodBrowserReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`institutional-intelligence-core\\.js\\?v=${dodReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`institutional-intelligence-snapshots\\.js\\?v=${dodBrowserReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-core\\.js\\?v=${institutionalCoreHash}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-snapshots\\.js\\?v=${institutionalSnapshotsHash}`));
   assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
-  assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${dodReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${aiProviderHash}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${institutionalCssHash}`));
   assert.match(fundedAwards, new RegExp(`funded-awards\\.css\\?v=${fundedAwardsStylesReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.js\\?v=${releaseKey}`));
   assert.match(fundingFinder, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
-  assert.match(fundingFinder, new RegExp(`ai-provider\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundingFinder, new RegExp(`ai-provider\\.js\\?v=${aiProviderHash}`));
   assert.match(fundingFinder, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
   assert.ok(opportunityTeamGeneration);

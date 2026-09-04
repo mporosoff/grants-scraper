@@ -5,12 +5,13 @@ import vm from "node:vm";
 import { load } from "cheerio";
 
 const root = new URL("../../", import.meta.url);
-const [page, app, styles, help, institution] = await Promise.all([
+const [page, app, styles, help, institution, institutionSnapshots] = await Promise.all([
   readFile(new URL("match_explorer.html", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL("assets/app.css", root), "utf8"),
   readFile(new URL("assets/site-help.js", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence.js", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
 ]);
 
 test("primary search owns the only Find funding control and the optional AI section is distinct", () => {
@@ -71,11 +72,16 @@ test("every AI consumer names one shared structured-result operation", () => {
   ]) {
     assert.match(app, new RegExp(`providerStructured\\(\\s*"${operation}"`));
   }
-  for (const operation of ["institution_question_translation", "institution_narrative"]) {
-    assert.match(institution, new RegExp(`operation: "${operation}"`));
+  for (const operation of [
+    "institution_question_translation",
+    "institution_narrative",
+    "program_officer_question_plan",
+    "program_officer_evidence_answer",
+  ]) {
+    assert.match(`${institution}\n${institutionSnapshots}`, new RegExp(`operation: "${operation}"`));
   }
-  assert.doesNotMatch(`${app}\n${institution}`, /providerJson/);
-  assert.doesNotMatch(`${app}\n${institution}`, /output_schema/);
+  assert.doesNotMatch(`${app}\n${institution}\n${institutionSnapshots}`, /providerJson/);
+  assert.doesNotMatch(`${app}\n${institution}\n${institutionSnapshots}`, /output_schema/);
 });
 
 test("AI refinement requires a usable result context and a ready hosted or user-connected provider", () => {

@@ -123,8 +123,8 @@ test("FF-BUG-010 Durable Object counters are atomic, source-scoped, and roll ove
   assert.equal((await consume(limiter, { bucket: "unbounded:caller" })).response.status, 400);
 });
 
-test("every advertised award adapter has an accepted source-rate bucket", async () => {
-  const expected = Object.keys(ADAPTER_VERSIONS).map(source => `award:${source}`).sort();
+test("every advertised award adapter and the snapshot-evidence endpoint have accepted rate buckets", async () => {
+  const expected = [...Object.keys(ADAPTER_VERSIONS).map(source => `award:${source}`), "award:evidence"].sort();
   const actual = [...BUCKETS].filter(bucket => bucket.startsWith("award:")).sort();
   assert.deepEqual(actual, expected);
 
@@ -157,7 +157,7 @@ test("FF-BUG-010 Award and ROR limits protect only cache misses and never store 
   assert.equal(limitedAward.status, 429);
   assert.equal(limitedAward.headers.get("retry-after"), "60");
   assert.deepEqual((await limitedAward.json()).sources, [{
-    source: "NSF", status: "unavailable", error: { code: "rate_limited" },
+    source: "NSF", status: "rate_limited", error: { code: "rate_limited" },
   }]);
   assert.equal((await handler(awardRequest("photocatalysis", "203.0.113.18"), activeEnv)).status, 200);
 
