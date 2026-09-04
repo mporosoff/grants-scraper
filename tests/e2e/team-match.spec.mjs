@@ -115,6 +115,50 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });
 
+test("a deferred four-person team cannot lose a member through Configure", async ({ page }) => {
+  mockHybrid(page);
+  const errors = watchRuntimeErrors(page);
+  await openTeamMatch(page);
+  const selectedIdentities = [];
+  for (const name of [
+    "Alexander A. Shestopalov",
+    "Allison J. Lopatkin",
+    "Astrid M. Müller",
+    "Zachary Robinson",
+  ]) {
+    const added = await addDepartmentResearcher(page, name);
+    selectedIdentities.push({ kind: "directory", id: added.value });
+  }
+  await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
+  await expect(page.locator("#add-researcher")).toBeHidden();
+  await page.evaluate(identities => {
+    history.replaceState({
+      fundingFinderTeamMatch: {
+        selected: [],
+        selectedIdentities: identities,
+        themeState: {},
+        filter: "",
+        scrollY: 0,
+      },
+    }, "");
+  }, selectedIdentities);
+
+  await page.route("**/data/opportunity_teams.js*", route => route.fulfill({
+    status: 503,
+    contentType: "text/javascript",
+    body: "",
+  }));
+  await page.reload();
+  await expect(page.locator("#external-status")).toContainText("saved team is preserved", { timeout: 30_000 });
+  await expect(page.locator("#add-researcher")).toBeVisible();
+  await page.locator("#add-researcher").click();
+  await expect(page.locator("#faculty-search-status")).toContainText("preserved four-person team", { timeout: 30_000 });
+  await expect(page.locator("#missing-researcher")).toBeDisabled();
+  await expect(page.locator("#missing-researcher")).toHaveAttribute("title", /already has four researchers/);
+  expect(await page.evaluate(() => sessionStorage.getItem("funding-finder.team-handoff.v1"))).toBeNull();
+  expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
+});
+
 test("enhanced ordering can reorder only locally eligible every-member-fit results", async ({ page }) => {
   const calls = mockHybrid(page, { reverseRerank: true, rerankDelayMs: 900 });
   await openTeamMatch(page);

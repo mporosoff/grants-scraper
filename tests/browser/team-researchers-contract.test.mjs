@@ -151,7 +151,8 @@ test("the missing-researcher path opens Configure with add mode selected", () =>
   assert.match(teamPage, /id="missing-researcher" type="button"/);
   assert.doesNotMatch(teamPage, /id="missing-researcher"[^>]+href=/);
   assert.match(teamPage, /function handoffSelectedIdentities\(\)[\s\S]*?teamHistoryRestoreDeferred[\s\S]*?saved\.selectedIdentities/);
-  assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: handoffSelectedIdentities\(\)/);
+  assert.match(teamPage, /var selectedIdentities = handoffSelectedIdentities\(\);[\s\S]*?if \(selectedIdentities\.length >= MAX\)[\s\S]*?remove one before configuring another researcher/);
+  assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: selectedIdentities/);
   assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match&handoff=" \+ encodeURIComponent\(result\.handoff\.token\)\)/);
   assert.match(teamPage, /var handoffToken = String\(params\.get\("handoff"\)[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\), handoffToken\)[\s\S]*?finishTeamHandoff\(handoffToken\)/);
   assert.match(teamPage, /function finishTeamHandoff\(handoffToken\)[\s\S]*?clearHandoff\(safeHandoffStorage\(\), handoffToken\)[\s\S]*?saveTeamHistory\(\)[\s\S]*?searchParams\.delete\("handoff"\)[\s\S]*?history\.replaceState\(history\.state/);
@@ -212,7 +213,9 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
   assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
-  assert.match(teamPage, /function handoffSelectedIdentities\(\)[\s\S]*?history\.state\[TEAM_HISTORY_STATE_KEY\][\s\S]*?saved\.selectedIdentities\.slice\(0, MAX - 1\)/);
+  assert.match(teamPage, /function handoffSelectedIdentities\(\)[\s\S]*?history\.state\[TEAM_HISTORY_STATE_KEY\][\s\S]*?saved\.selectedIdentities\.slice\(0, MAX\)/);
+  assert.match(teamPage, /var preservedTeamAtMax = teamHistoryRestoreDeferred && handoffSelectedIdentities\(\)\.length >= MAX;[\s\S]*?\$\("missing-researcher"\)\.disabled = atMax \|\| preservedTeamAtMax/);
+  assert.match(teamPage, /function handleTeamDirectoryFailure\(\)[\s\S]*?preservedTeamAtMax[\s\S]*?Select Show to retry before changing the preserved four-person team/);
   assert.match(teamPage, /handoff\.selectedIdentities[\s\S]*?externalProfile\(handoff\.addedExternalId\)[\s\S]*?selected\.push\(localKey\)/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
   assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);

@@ -94,6 +94,7 @@
   .faculty-suggestions strong,.faculty-suggestions span{display:block;}
   .faculty-suggestions span{color:var(--muted);font-size:.72rem;}
   .missing-researcher-button{display:block;width:100%;padding:10px 12px;border:1px solid var(--blue);border-radius:9px;background:var(--blue);color:#fff;font:inherit;font-size:.84rem;font-weight:750;text-align:center;text-decoration:none;cursor:pointer;}
+  .missing-researcher-button:disabled{opacity:.5;cursor:not-allowed;}
   .saved-researcher-row{display:flex;flex-wrap:wrap;align-items:end;gap:8px;width:100%;}
   .saved-researcher-row label{flex:1 1 300px;}
   .saved-researcher-row .remove-saved-researcher{border-color:#d59ba4;background:#fff6f7;color:#8d2230;}
@@ -1273,7 +1274,10 @@
 
   function handleTeamDirectoryFailure() {
     closeFacultySuggestions(false);
-    $("faculty-search-status").textContent = "The Hajim directory is temporarily unavailable. Use Add a missing researcher, or select Show to retry.";
+    var preservedTeamAtMax = teamHistoryRestoreDeferred && handoffSelectedIdentities().length >= MAX;
+    $("faculty-search-status").textContent = preservedTeamAtMax
+      ? "The Hajim directory is temporarily unavailable. Select Show to retry before changing the preserved four-person team."
+      : "The Hajim directory is temporarily unavailable. Use Add a missing researcher, or select Show to retry.";
   }
 
   function setResearcherAddBusy(busy, member) {
@@ -1353,23 +1357,32 @@
 
   function updateToggles() {
     var atMax = selected.length >= MAX;
+    var preservedTeamAtMax = teamHistoryRestoreDeferred && handoffSelectedIdentities().length >= MAX;
     renderExternalButtons();
     $("add-researcher").disabled = atMax;
     $("add-researcher").title = atMax ? "The team already has four researchers" : "Add a researcher";
     $("faculty-search").disabled = atMax;
     $("show-faculty-suggestions").disabled = atMax;
+    $("missing-researcher").disabled = atMax || preservedTeamAtMax;
+    $("missing-researcher").title = preservedTeamAtMax
+      ? "The preserved team already has four researchers"
+      : atMax
+      ? "The team already has four researchers"
+      : "Configure a missing researcher";
     if (atMax) closeFacultySuggestions(false);
-    $("team-hint").textContent = selected.length < 2
+    $("team-hint").textContent = preservedTeamAtMax
+      ? "Your four-person saved team is preserved. Retry the Hajim faculty directory before changing its members."
+      : selected.length < 2
       ? "Add two to four researchers to see funding opportunities that fit everyone on the team."
       : "Showing only calls that fit all " + selected.length + " selected researchers. Adding a researcher can only narrow these results.";
   }
 
   function handoffSelectedIdentities() {
-    if (!teamHistoryRestoreDeferred) return selected.slice(0, MAX - 1).map(teamMemberIdentity);
+    if (!teamHistoryRestoreDeferred) return selected.slice(0, MAX).map(teamMemberIdentity);
     var saved = history.state && history.state[TEAM_HISTORY_STATE_KEY];
     if (!saved || typeof saved !== "object") return [];
-    if (Array.isArray(saved.selectedIdentities)) return saved.selectedIdentities.slice(0, MAX - 1);
-    return (Array.isArray(saved.selected) ? saved.selected : []).slice(0, MAX - 1).map(function (member) {
+    if (Array.isArray(saved.selectedIdentities)) return saved.selectedIdentities.slice(0, MAX);
+    return (Array.isArray(saved.selected) ? saved.selected : []).slice(0, MAX).map(function (member) {
       return isExternalKey(member)
         ? { kind: "external", id: externalId(member) }
         : { kind: "faculty_name", name: String(member || "") };
@@ -1381,8 +1394,13 @@
       renderExternalStatus("Your current team cannot be carried through Configure because the browser-only helper is unavailable.", true);
       return;
     }
+    var selectedIdentities = handoffSelectedIdentities();
+    if (selectedIdentities.length >= MAX) {
+      renderExternalStatus("Your preserved team already has four researchers. Retry the Hajim faculty directory and remove one before configuring another researcher.", true);
+      return;
+    }
     var result = TEAM_API.saveHandoff(safeHandoffStorage(), {
-      selectedIdentities: handoffSelectedIdentities()
+      selectedIdentities: selectedIdentities
     });
     if (!result.saved) {
       renderExternalStatus("Your current team could not be carried through Configure in this tab. Saved researchers will remain available in Team Match.", true);
