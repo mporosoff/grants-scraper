@@ -7,6 +7,7 @@
   const productApi = globalThis.FUNDING_AWARD_PRODUCT;
   const apiConfig = globalThis.FUNDING_AWARD_API_CONFIG;
   const alertsApi = globalThis.FUNDING_ALERTS;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904-r2", document.baseURI).href;
   const INSTITUTION_STORAGE_KEY = "funding-finder.awards.institution.v1";
   const MANAGED_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start",
@@ -21,6 +22,17 @@
     sequence: 0,
     abortController: null,
   };
+  let dodBrowserModulePromise = null;
+
+  function dodBrowserModule() {
+    if (!dodBrowserModulePromise) {
+      dodBrowserModulePromise = import(DOD_BROWSER_MODULE_URL).catch(error => {
+        dodBrowserModulePromise = null;
+        throw error;
+      });
+    }
+    return dodBrowserModulePromise;
+  }
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -401,6 +413,75 @@
     $("award-page-label").textContent = productApi.paginationLabel(payload);
   }
 
+  async function workerSearch(requestBody, signal) {
+    const response = await fetch(apiConfig.searchUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+      credentials: "omit",
+      referrerPolicy: "origin",
+      signal,
+    });
+    const payload = await response.json().catch(() => null);
+    if (!productApi.validatePayload(payload)) {
+      const error = new Error(productApi.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
+      error.code = productApi.boundedErrorCode(payload) || "invalid_response";
+      throw error;
+    }
+    return { response, payload };
+  }
+
+  function payloadWithUnavailableDod(requestBody, workerPayload = null) {
+    const workerSources = new Map((workerPayload?.sources || []).map(source => [source.source, source]));
+    return {
+      schema_version: 1,
+      request: {
+        sources: [...requestBody.sources],
+        criteria: { ...requestBody.criteria },
+        limit: requestBody.limit,
+        offset: requestBody.offset,
+      },
+      results: Array.isArray(workerPayload?.results) ? workerPayload.results : [],
+      sources: requestBody.sources.map(source => source === "DOD"
+        ? { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } }
+        : workerSources.get(source) || { source, status: "unavailable", error: { code: "service_unavailable" } }),
+      pagination: { limit: requestBody.limit, offset: requestBody.offset },
+    };
+  }
+
+  async function browserIntegratedSearch(requestBody, controller) {
+    if (!requestBody.sources.includes("DOD")) return workerSearch(requestBody, controller.signal);
+    const workerSources = requestBody.sources.filter(source => source !== "DOD");
+    const workerRequest = { ...requestBody, sources: workerSources };
+    const [workerResult, dodResult] = await Promise.allSettled([
+      workerSources.length ? workerSearch(workerRequest, controller.signal) : Promise.resolve(null),
+      dodBrowserModule().then(async dod => ({
+        dod,
+        payload: await dod.searchDodFromBrowser(requestBody.criteria, {
+          limit: requestBody.limit,
+          offset: requestBody.offset,
+          signal: controller.signal,
+        }),
+      })),
+    ]);
+    const worker = workerResult.status === "fulfilled" ? workerResult.value : null;
+    if (dodResult.status !== "fulfilled") {
+      return {
+        response: { ok: false },
+        payload: payloadWithUnavailableDod(requestBody, worker?.payload || null),
+      };
+    }
+    const { dod, payload: dodPayload } = dodResult.value;
+    return {
+      response: { ok: Boolean(workerSources.length ? worker?.response?.ok : true) && !dodPayload?.status },
+      payload: dod.mergeSearchPayload({
+        request: requestBody,
+        workerPayload: worker?.payload || null,
+        dodPayload,
+      }),
+    };
+  }
+
   async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false, submittedState = null } = {}) {
     const searchState = submittedState ? { ...submittedState } : formState();
     if (offset !== null) searchState.offset = Math.max(0, Math.min(1_000, offset));
@@ -424,15 +505,7 @@
     setStatus(`Searching ${requestBody.sources.join(" and ")} public award records…`);
     const timeout = setTimeout(() => controller.abort(), apiConfig.timeoutMs);
     try {
-      const response = await fetch(apiConfig.searchUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-        credentials: "omit",
-        referrerPolicy: "origin",
-        signal: controller.signal,
-      });
-      const payload = await response.json().catch(() => null);
+      const { response, payload } = await browserIntegratedSearch(requestBody, controller);
       if (sequence !== state.sequence) return;
       if (!productApi.validatePayload(payload)) {
         const error = new Error(productApi.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");

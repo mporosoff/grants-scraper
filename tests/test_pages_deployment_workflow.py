@@ -37,6 +37,13 @@ class PagesDeploymentWorkflowTests(unittest.TestCase):
         self.assertIn("path: .", self.workflow)
         self.assertIn("steps.deployment.outputs.page_url", self.workflow)
 
+    def test_stamps_the_exact_commit_inside_the_published_artifact(self):
+        stamp = self.workflow.index("printf '%s\\n' \"$GITHUB_SHA\" > pages-release-sha.txt")
+        package = self.workflow.index("actions/upload-pages-artifact@v5")
+        deploy = self.workflow.index("actions/deploy-pages@v5")
+        self.assertLess(stamp, package)
+        self.assertLess(package, deploy)
+
 
 if __name__ == "__main__":
     unittest.main()

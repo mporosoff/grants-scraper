@@ -1,10 +1,10 @@
 # Institutional Intelligence architecture and ROR reconnaissance
 
-Checked: 2026-09-03 (America/New_York)
+Checked: 2026-09-04 (America/New_York)
 
 ## Product boundary
 
-Institutional Intelligence is a Funded Awards section in `funded_awards.html`. It is not loaded by Funding Finder or Team Match and does not introduce another opportunity or award search system. Legacy Institutional Intelligence URLs on Funding Finder redirect to the corresponding state on Funded Awards. The browser sends transparent structured filters to the existing Funded Awards Worker, which queries and normalizes NSF, NIH, DOE, and DoD records through isolated source adapters. No award embeddings, semantic award corpus, reranking, collaborator recommendation, or funding-fit score is involved.
+Institutional Intelligence is a Funded Awards section in `funded_awards.html`. It is not loaded by Funding Finder or Team Match and does not introduce another opportunity or award search system. Legacy Institutional Intelligence URLs on Funding Finder redirect to the corresponding state on Funded Awards. The browser sends transparent structured filters through the existing Funded Awards architecture. NSF, NIH, and DOE use the Worker transport. DoD uses the same committed normalized adapter through USAspending's official browser CORS transport because USAspending rejects Cloudflare Worker egress. The browser then uses the shared snapshot primitives to form one four-source snapshot; local hybrid snapshots are retained in bounded one-hour session storage so page, facet, retry, history, and restoration behavior stays unified. No award embeddings, semantic award corpus, reranking, collaborator recommendation, or funding-fit score is involved.
 
 Summaries cover only the normalized records returned on the current source-native result page. The interface states that additional source results may exist and links every displayed project to its official sponsor record. It does not treat a first page as an exhaustive institutional portfolio.
 
@@ -60,7 +60,7 @@ Program filters preserve source semantics:
 
 ## Privacy and optional natural language
 
-All structured filters, alias resolution, aggregation, URLs, history, and drill-downs work without an AI key. Institution and award filters are public research queries sent only to the Award Worker and official public registries/sponsor sources.
+All structured filters, alias resolution, aggregation, URLs, history, and drill-downs work without an AI key. Institution and award filters are public research queries sent only to the Award Worker and official public registries/sponsor sources. USAspending requests omit credentials and referrers; successful DoD source and detail responses use a one-hour browser cache, and failed responses are not cached.
 
 The optional question translator uses `FUNDING_AI.providerJson` and `FUNDING_CREDENTIALS`, including the same provider, model, and `funding-finder.credentials.v1` browser-local key store as Funding Finder. Setup inside Institutional Intelligence writes to that same store and synchronizes the main provider controls. No key is sent to the Award Worker.
 

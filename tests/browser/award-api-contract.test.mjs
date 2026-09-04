@@ -505,6 +505,12 @@ test("Worker validates bounded public requests and exposes no credential require
     schema_version: 1,
     sources: ["NSF", "NIH", "DOE", "DOD"],
     adapter_versions: ADAPTER_VERSIONS,
+    source_transports: {
+      NSF: "worker_proxy",
+      NIH: "worker_proxy",
+      DOE: "worker_proxy",
+      DOD: "worker_proxy",
+    },
     institution_registry: { source: "ROR", adapter_version: "1.3.0" },
     institution_resolution: "curated-or-server-validated-ror",
     normalized_paging: {
@@ -679,6 +685,39 @@ test("DoD works alone and a USAspending outage leaves NSF, NIH, and DOE usable",
   for (const source of ["NSF", "NIH", "DOE"]) {
     assert.equal(isolated.sources.find(item => item.source === source).status, "ok");
   }
+});
+
+test("production transport mode routes DoD to the official browser CORS adapter without delaying Worker sources", async () => {
+  const handler = createHandler({ fetchImpl: fixtureFetch(), now: fixedNow });
+  const directEnv = { ...env, DOD_DELIVERY_MODE: "browser_direct_cors" };
+  const health = await handler(workerRequest(null, { path: "/health", method: "GET" }), directEnv);
+  assert.equal((await health.json()).source_transports.DOD, "browser_direct_cors");
+
+  const dodOnly = await handler(workerRequest(query(
+    { award_id: "FA9550261B195" },
+    ["DOD"],
+    1,
+  )), directEnv);
+  assert.equal(dodOnly.status, 400);
+  assert.deepEqual((await dodOnly.json()).sources[0], {
+    source: "DOD",
+    status: "unsupported",
+    error: { code: "client_direct_required" },
+  });
+
+  const combined = await handler(workerRequest(query(
+    { topic: "carbon dioxide" },
+    ["NSF", "NIH", "DOE", "DOD"],
+    1,
+  )), directEnv);
+  assert.equal(combined.status, 200);
+  const payload = await combined.json();
+  assert.deepEqual(payload.results.map(item => item.source).sort(), ["DOE", "DOD", "NIH", "NSF"].filter(source => source !== "DOD"));
+  assert.deepEqual(payload.sources.find(item => item.source === "DOD"), {
+    source: "DOD",
+    status: "unsupported",
+    error: { code: "client_direct_required" },
+  });
 });
 
 test("Worker caches only successful per-source results for the bounded TTL", async () => {

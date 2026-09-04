@@ -1,6 +1,6 @@
 # DoD USAspending award adapter
 
-Checked: 2026-09-03 (America/New_York)
+Checked: 2026-09-04 (America/New_York)
 
 ## Public-source boundary
 
@@ -8,6 +8,17 @@ The DoD adapter uses the account-free USAspending API:
 
 - `POST https://api.usaspending.gov/api/v2/search/spending_by_award/`
 - `GET https://api.usaspending.gov/api/v2/awards/{generated_unique_award_id}/`
+
+The official API responses advertise `Access-Control-Allow-Origin: *`. The
+production page therefore executes the shared DoD adapter in the browser and
+merges its normalized output back into the existing Funded Awards result and
+snapshot contracts. This transport is necessary because a protected deployment
+proved that USAspending rejects Cloudflare Worker egress even though the same
+bounded request succeeds directly. The Worker health contract advertises
+`source_transports.DOD: browser_direct_cors`, and production Worker requests for
+DoD fail fast with `client_direct_required`; NSF, NIH, and DOE remain Worker
+proxied. There is still one DoD adapter, normalized schema, card renderer, and
+snapshot implementation.
 
 Every search is restricted to the awarding top-tier agency `Department of
 Defense`, prime awards (`subawards: false`, `spending_level: awards`), and award
@@ -17,7 +28,8 @@ subawards, and separate SBIR or DTIC feeds are not part of this catalog.
 
 The search endpoint supplies the bounded result page. Detail calls are made
 only for records returned to the caller or admitted to the active snapshot,
-with concurrency three and successful-detail caching. A failed detail call
+with concurrency three and one-hour browser Cache API storage for successful
+source and detail responses. Cache access is capped at two seconds. A failed detail call
 retains the base search record rather than converting the source to a failure;
 the response marks detail health as degraded, and both the standalone and
 snapshot interfaces display the number of unavailable public detail records.
@@ -86,6 +98,7 @@ closed; titles and descriptions are never used for fuzzy matching.
 ## Validation policy
 
 Pull-request tests use the committed search and detail fixtures and never call
-USAspending live. The protected post-deployment smoke uses the exact FAIN above
+USAspending live. The protected post-deployment smoke uses the exact FAIN above,
+verifies that the official search and detail responses retain wildcard CORS,
 and verifies a normalized DoD result with a USAspending profile and
-`total_obligation` amount basis.
+`total_obligation` amount basis through the production browser transport.

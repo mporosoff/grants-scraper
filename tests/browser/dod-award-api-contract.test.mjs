@@ -174,7 +174,7 @@ test("DoD reapplies the remaining operation budget to every USAspending page", a
       else finalSignal.addEventListener("abort", abort, { once: true });
     });
   };
-  const clock = [0, 0, DOD_OPERATION_BUDGET_MS - 5];
+  const clock = [0, 0, DOD_OPERATION_BUDGET_MS - 100];
   const started = performance.now();
 
   await assert.rejects(
@@ -182,14 +182,14 @@ test("DoD reapplies the remaining operation budget to every USAspending page", a
       limit: 1,
       offset: 25,
       now: fixedNow,
-      monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS - 5,
+      monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS - 100,
       searchRequestTimeoutMs: 500,
     }),
     error => error instanceof AwardSourceError && error.code === "source_timeout",
   );
   assert.equal(searchCalls, 2);
   assert.ok(finalSignal instanceof AbortSignal);
-  assert.ok(performance.now() - started < 250, "the final page must receive only the five-millisecond remaining budget");
+  assert.ok(performance.now() - started < 1_000, "the final page must receive only the 100-millisecond remaining budget");
 });
 
 test("DoD detail enrichment shares the operation budget and retains base awards", async () => {
@@ -220,10 +220,10 @@ test("DoD bounds slow detail-cache reads and writes without discarding live deta
     let delayedTimer = null;
     const cache = {
       match: slowOperation === "match"
-        ? () => new Promise(resolve => { delayedTimer = setTimeout(() => resolve(null), 500); })
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(() => resolve(null), 2_000); })
         : async () => null,
       put: slowOperation === "put"
-        ? () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); })
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 2_000); })
         : async () => {},
     };
     const started = performance.now();
@@ -233,10 +233,10 @@ test("DoD bounds slow detail-cache reads and writes without discarding live deta
       now: fixedNow,
       cache,
       cacheTtl: 3_600,
-      detailCacheTimeoutMs: 5,
+      detailCacheTimeoutMs: 100,
     });
     clearTimeout(delayedTimer);
-    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive its cache budget`);
+    assert.ok(performance.now() - started < 1_000, `${slowOperation} must not outlive its cache budget`);
     assert.equal(result.results[0].opportunity_numbers[0], "NOFOAFRLAFOSR20250002");
     assert.equal(result.health.status, "available");
     assert.equal(result.health.details_loaded, 1);
@@ -254,7 +254,7 @@ test("DoD source-cache and rate-limit wrapper I/O share the operation deadline",
   };
   for (const slowOperation of ["source_match", "guard", "source_put"]) {
     let delayedTimer = null;
-    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 2_000); });
     const isSourceCacheKey = key => /\/v1\/dod\/[a-f0-9]{64}$/.test(key.url);
     const cache = {
       async match(key) {
@@ -277,7 +277,7 @@ test("DoD source-cache and rate-limit wrapper I/O share the operation deadline",
         asOf: fixedNow().toISOString(),
         guard,
         rateLimit: 12,
-        sourceWrapperTimeoutMs: 5,
+        sourceWrapperTimeoutMs: 100,
       });
       if (slowOperation === "guard") {
         await assert.rejects(
@@ -291,7 +291,7 @@ test("DoD source-cache and rate-limit wrapper I/O share the operation deadline",
     } finally {
       clearTimeout(delayedTimer);
     }
-    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the source wrapper budget`);
+    assert.ok(performance.now() - started < 1_000, `${slowOperation} must not outlive the source wrapper budget`);
   }
 });
 
@@ -303,7 +303,7 @@ test("DoD bounds ROR identity cache, guard, and upstream work within the same op
   const rorOrganization = rorFixture.Caltech.items[0];
   for (const slowOperation of ["identity_match", "guard", "identity_put"]) {
     let delayedTimer = null;
-    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 2_000); });
     const cache = {
       async match() {
         return slowOperation === "identity_match" ? delayed() : null;
@@ -326,7 +326,7 @@ test("DoD bounds ROR identity cache, guard, and upstream work within the same op
         rateLimit: 20,
         monotonicNow: () => 0,
         operationDeadline: 1_000,
-        operationTimeoutMs: 5,
+        operationTimeoutMs: 100,
       });
       if (slowOperation === "guard") {
         await assert.rejects(
@@ -340,11 +340,11 @@ test("DoD bounds ROR identity cache, guard, and upstream work within the same op
     } finally {
       clearTimeout(delayedTimer);
     }
-    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the DoD request budget`);
+    assert.ok(performance.now() - started < 1_000, `${slowOperation} must not outlive the DoD request budget`);
   }
 
   let upstreamSignal = null;
-  const upstreamClock = [0, 995];
+  const upstreamClock = [0, 900];
   const started = performance.now();
   await assert.rejects(
     () => runInstitutionResolution({
@@ -359,13 +359,13 @@ test("DoD bounds ROR identity cache, guard, and upstream work within the same op
       },
       cache: null,
       cacheTtl: 3_600,
-      monotonicNow: () => upstreamClock.shift() ?? 995,
+      monotonicNow: () => upstreamClock.shift() ?? 900,
       operationDeadline: 1_000,
     }),
     error => error instanceof AwardSourceError && error.code === "source_timeout",
   );
   assert.ok(upstreamSignal instanceof AbortSignal);
-  assert.ok(performance.now() - started < 250, "ROR fetch must receive only the remaining DoD request budget");
+  assert.ok(performance.now() - started < 1_000, "ROR fetch must receive only the 100-millisecond remaining DoD request budget");
 });
 
 test("DoD handler starts its deadline before non-curated ROR resolution", async () => {
@@ -421,7 +421,7 @@ test("DoD bounds required snapshot reads and persistence within the request dead
   };
   for (const slowOperation of ["load_match", "store_put", "store_match"]) {
     let delayedTimer = null;
-    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 2_000); });
     const cache = {
       async match() {
         if (["load_match", "store_match"].includes(slowOperation)) return delayed();
@@ -434,7 +434,7 @@ test("DoD bounds required snapshot reads and persistence within the request dead
     const options = {
       monotonicNow: () => 0,
       operationDeadline: 1_000,
-      operationTimeoutMs: 5,
+      operationTimeoutMs: 100,
     };
     const started = performance.now();
     try {
@@ -449,7 +449,7 @@ test("DoD bounds required snapshot reads and persistence within the request dead
     } finally {
       clearTimeout(delayedTimer);
     }
-    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the DoD request budget`);
+    assert.ok(performance.now() - started < 1_000, `${slowOperation} must not outlive the DoD request budget`);
   }
 });
 

@@ -52,6 +52,7 @@ const WORKER_RESOURCE_BUDGET = Object.freeze({
 });
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
+const DOD_BROWSER_DELIVERY = "browser_direct_cors";
 const ADAPTER_VERSIONS = {
   NSF: NSF_ADAPTER_VERSION,
   NIH: NIH_ADAPTER_VERSION,
@@ -129,6 +130,9 @@ function serviceConfig(env) {
     awardSourceLimit: boundedInteger(env?.AWARD_SOURCE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
     rorSearchLimit: boundedInteger(env?.ROR_SEARCH_RATE_LIMIT, { minimum: 1, maximum: 240 }),
     rorResolveLimit: boundedInteger(env?.ROR_RESOLVE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
+    dodDeliveryMode: String(env?.DOD_DELIVERY_MODE || "worker_proxy") === DOD_BROWSER_DELIVERY
+      ? DOD_BROWSER_DELIVERY
+      : "worker_proxy",
     rateLimitSecret: Boolean(String(env?.AWARD_RATE_LIMIT_SECRET || "")),
     rateLimitBinding: Boolean(
       env?.AWARD_RATE_LIMITER
@@ -721,6 +725,7 @@ async function runSnapshotSources({
   onlySource = "",
   monotonicNow = () => performance.now(),
   operationDeadline = null,
+  dodDeliveryMode = "worker_proxy",
 }) {
   const selectedSources = onlySource ? [onlySource] : normalized.sources;
   const request = {
@@ -732,6 +737,9 @@ async function runSnapshotSources({
     includeAbstracts: false,
   };
   const settled = await Promise.all(selectedSources.map(async source => {
+    if (source === "DOD" && dodDeliveryMode === DOD_BROWSER_DELIVERY) {
+      return { source, status: "unsupported", error: { code: "client_direct_required" } };
+    }
     try {
       return await runSource({
         source,
@@ -803,6 +811,12 @@ export function createHandler({
         schema_version: AWARD_SCHEMA_VERSION,
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
+        source_transports: {
+          NSF: "worker_proxy",
+          NIH: "worker_proxy",
+          DOE: "worker_proxy",
+          DOD: config.dodDeliveryMode,
+        },
         institution_registry: { source: "ROR", adapter_version: ROR_ADAPTER_VERSION },
         institution_resolution: "curated-or-server-validated-ror",
         normalized_paging: {
@@ -950,6 +964,7 @@ export function createHandler({
           rateLimit: config.awardSourceLimit,
           monotonicNow,
           operationDeadline,
+          dodDeliveryMode: config.dodDeliveryMode,
         });
         const snapshot = buildAwardSnapshot({
           snapshotId,
@@ -1018,6 +1033,7 @@ export function createHandler({
         onlySource: action.source,
         monotonicNow,
         operationDeadline,
+        dodDeliveryMode: config.dodDeliveryMode,
       });
       if (replacement[action.source]?.status) {
         const rateLimited = ["rate_limited", "source_rate_limited"].includes(replacement[action.source].error?.code);
@@ -1101,6 +1117,9 @@ export function createHandler({
     const cacheStore = cache || globalThis.caches?.default || null;
     const asOf = current.toISOString();
     const settled = await Promise.all(normalized.sources.map(async source => {
+      if (source === "DOD" && config.dodDeliveryMode === DOD_BROWSER_DELIVERY) {
+        return { source, status: "unsupported", error: { code: "client_direct_required" } };
+      }
       try {
         return await runSource({
           source,
