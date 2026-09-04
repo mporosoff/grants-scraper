@@ -190,12 +190,12 @@
     try {
       if (!storage) throw new Error("Storage unavailable");
       const raw = storage.getItem(HANDOFF_STORAGE_KEY);
-      if (!raw) return { handoff: null, available: true, error: "" };
+      if (!raw) return { handoff: null, available: true, discarded: false, error: "" };
       const handoff = normalizeHandoff(JSON.parse(raw), now);
       if (!handoff) storage.removeItem(HANDOFF_STORAGE_KEY);
-      return { handoff, available: true, error: "" };
+      return { handoff, available: true, discarded: !handoff, error: "" };
     } catch (_error) {
-      return { handoff: null, available: false, error: "The browser-only team handoff could not be read in this tab." };
+      return { handoff: null, available: false, discarded: false, error: "The browser-only team handoff could not be read in this tab." };
     }
   }
 
@@ -221,6 +221,9 @@
   function completeHandoff(storage, addedExternalId, now = Date.now()) {
     const loaded = loadHandoff(storage, now);
     if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
+    if (loaded.discarded) {
+      return { handoff: null, saved: false, error: "The browser-only team handoff is unavailable or expired." };
+    }
     return saveHandoff(storage, {
       selectedIdentities: loaded.handoff ? loaded.handoff.selectedIdentities : [],
       addedExternalId,

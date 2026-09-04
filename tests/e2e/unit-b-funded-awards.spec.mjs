@@ -19,6 +19,15 @@ async function searchTopic(page, topic = "catalysis", agency = "NSF") {
   await page.locator("#ii-topic").fill(topic);
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-output")).toBeVisible();
+  await expect(page).toHaveURL(/ii_snapshot=/);
+  await expect(page.locator("#ii-search")).toBeEnabled();
+}
+
+async function askDeterministicQuestion(page, question = "How many awards are in this result?") {
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-question").fill(question);
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
 }
 
 for (const count of [0, 1, 9, 10, 11, 25, 26, 50, 51]) {
@@ -173,9 +182,7 @@ test("a failed facet preserves its evidence answer and a committed facet clears 
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "facet-answer-commit", "NIH");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
-  await page.locator("#ii-question").fill("How many awards are in this result?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await askDeterministicQuestion(page);
   const committedAnswer = await page.locator("#ii-direct-answer").textContent();
 
   await page.locator("#ii-programs").selectOption({ label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
@@ -298,9 +305,7 @@ test("failed creation and initial-page replacements retain one coherent owner be
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "stable-owner", "NSF");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
-  await page.locator("#ii-question").fill("How many awards are in this result?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await askDeterministicQuestion(page);
   const stableUrl = page.url();
   const stableSnapshot = new URL(stableUrl).searchParams.get("ii_snapshot");
   const stableEvidence = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId));
@@ -399,9 +404,7 @@ test("history restoration cannot mix a newer snapshot question into an older sna
   await searchTopic(page, "older-snapshot");
   const olderSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
-  await page.locator("#ii-question").fill("How many awards are in this result?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await askDeterministicQuestion(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("2 matching awards");
   const newerSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(newerSnapshot).not.toBe(olderSnapshot);
@@ -541,8 +544,7 @@ test("questions use full server aggregates and bounded hydrated evidence", async
   await page.goto("/funded_awards.html?ii=1&ii_institution=University+of+Rochester");
   await expect(page.locator("#ii-output")).toBeVisible();
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
-  await page.locator("#ii-question").fill("How many awards are in this result?");
-  await page.locator("#ii-ask-button").click();
+  await askDeterministicQuestion(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("78 matching awards");
   await expect(page.locator("#ii-answer-limitations")).toContainText("78 awards were counted");
   expect(runtimeErrors).toEqual([]);

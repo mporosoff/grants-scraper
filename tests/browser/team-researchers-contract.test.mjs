@@ -291,8 +291,15 @@ test("keeps a bounded expiring team handoff in browser storage", () => {
   assert.equal(team.clearHandoff(storage), true);
   assert.equal(team.loadHandoff(storage, now + 2_000).handoff, null);
 
+  const direct = team.completeHandoff(storage, "ext-standalone-researcher", now + 3_000);
+  assert.equal(direct.saved, true);
+  assert.deepEqual(Array.from(direct.handoff.selectedIdentities), []);
+  assert.equal(team.clearHandoff(storage), true);
+
   team.saveHandoff(storage, { selectedIdentities: [] }, now);
-  assert.equal(team.loadHandoff(storage, now + team.HANDOFF_TTL_MS + 1).handoff, null);
+  const expired = team.completeHandoff(storage, "ext-too-late-researcher", now + team.HANDOFF_TTL_MS + 1);
+  assert.equal(expired.saved, false);
+  assert.match(expired.error, /unavailable or expired/);
   assert.equal(storage.getItem(team.HANDOFF_STORAGE_KEY), null);
 });
 
