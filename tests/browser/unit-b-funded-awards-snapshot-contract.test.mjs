@@ -10,6 +10,7 @@ import {
   aggregateSnapshotAwards,
   buildAwardSnapshot,
   compareAwardsByRecency,
+  programDescriptors,
   publicSnapshot,
   snapshotPage,
   snapshotSourceBatch,
@@ -132,12 +133,21 @@ test("Unit B aggregates and investigator/program facets are computed from the fu
 });
 
 test("Unit B exposes every retained DoD Assistance Listing as a distinct selectable program facet", () => {
-  const dodAward = award(1, "DOD", {
+  const dodAward = award(2, "DOD", {
     subagency: "Department of the Air Force",
     program_name: "Air Force Defense Research Sciences Program",
     program_codes: ["12.800", "12.810", "12.800"],
   });
-  const value = snapshot({ DOD: sourcePayload("DOD", [dodAward]) }, ["DOD"]);
+  const olderTitledAward = award(1, "DOD", {
+    subagency: "Department of the Air Force",
+    program_name: "Other Defense Program",
+    program_codes: ["12.810"],
+  });
+  const direct = programDescriptors(dodAward);
+  assert.equal(direct.find(program => program.query === "12.810").leaf_label,
+    "Assistance Listing 12.810", "a secondary listing remains explicit when that award has no title for it");
+
+  const value = snapshot({ DOD: sourcePayload("DOD", [dodAward, olderTitledAward]) }, ["DOD"]);
   const programs = value.base_aggregate.programs;
 
   assert.equal(value.base_aggregate.program_count, 2);
@@ -146,7 +156,9 @@ test("Unit B exposes every retained DoD Assistance Listing as a distinct selecta
   assert.equal(programs.find(program => program.query === "12.800").leaf_label,
     "Air Force Defense Research Sciences Program (12.800)");
   assert.equal(programs.find(program => program.query === "12.810").leaf_label,
-    "Assistance Listing 12.810");
+    "Other Defense Program (12.810)", "a later available official title upgrades the shared code facet");
+  assert.equal(programs.find(program => program.query === "12.800").projects, 1);
+  assert.equal(programs.find(program => program.query === "12.810").projects, 2);
   assert.equal(new Set(programs.map(program => program.key)).size, 2);
 
   for (const program of programs) {
@@ -156,7 +168,10 @@ test("Unit B exposes every retained DoD Assistance Listing as a distinct selecta
       facet: { type: "program", key: program.key },
     });
     assert.equal(page.facet.label, program.label);
-    assert.deepEqual(page.batches.flatMap(batch => batch.results.map(item => item.award_id)), [dodAward.award_id]);
+    const expectedIds = program.query === "12.810"
+      ? [dodAward.award_id, olderTitledAward.award_id]
+      : [dodAward.award_id];
+    assert.deepEqual(page.batches.flatMap(batch => batch.results.map(item => item.award_id)), expectedIds);
   }
 });
 

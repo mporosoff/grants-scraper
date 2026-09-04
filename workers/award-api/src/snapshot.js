@@ -363,6 +363,17 @@ function programDescriptors(award, cache = null) {
   return descriptors;
 }
 
+function preferredProgramDescriptor(current, candidate) {
+  if (!current) return { ...candidate, projects: 0, award_keys: [] };
+  const fallbackLabel = `Assistance Listing ${clean(current.query, 100)}`;
+  const candidateFallbackLabel = `Assistance Listing ${clean(candidate.query, 100)}`;
+  const currentIsDodFallback = current.source === "DOD" && current.leaf_label === fallbackLabel;
+  const candidateHasDodTitle = candidate.source === "DOD" && candidate.leaf_label !== candidateFallbackLabel;
+  return currentIsDodFallback && candidateHasDodTitle
+    ? { ...candidate, projects: current.projects, award_keys: current.award_keys }
+    : current;
+}
+
 export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = {}) {
   const awards = alreadyNormalized ? values : deduplicateAwards(values);
   const factsCache = new WeakMap();
@@ -395,7 +406,7 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
     const source = facts.source;
     if (agencyTotals.has(source)) agencyTotals.set(source, agencyTotals.get(source) + 1);
     for (const descriptor of programDescriptors(award, programCache)) {
-      const current = programs.get(descriptor.key) || { ...descriptor, projects: 0, award_keys: [] };
+      const current = preferredProgramDescriptor(programs.get(descriptor.key), descriptor);
       current.projects += 1;
       current.award_keys.push(awardKey(award));
       programs.set(descriptor.key, current);
