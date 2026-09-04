@@ -40,8 +40,8 @@ export async function fetchSourceText(fetchImpl, url, options = {}, {
   }
 }
 
-export async function fetchSourceJson(fetchImpl, url, options = {}) {
-  const { body } = await fetchSourceText(fetchImpl, url, options);
+export async function fetchSourceJson(fetchImpl, url, options = {}, requestLimits = {}) {
+  const { body } = await fetchSourceText(fetchImpl, url, options, requestLimits);
   try {
     return JSON.parse(body);
   } catch {

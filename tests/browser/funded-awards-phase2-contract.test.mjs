@@ -297,5 +297,7 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(workerSmoke, /award_id: "2605508"/);
   assert.match(workerSmoke, /core_project_number: "K12GM106997"/);
   assert.match(workerSmoke, /award_id: "DE-SC0020230"/);
+  assert.match(workerSmoke, /source\?\.source[\s\S]*source\?\.status[\s\S]*source\?\.error\?\.code/);
+  assert.match(workerSmoke, /failureDetail\(payload\)/);
   assert.doesNotMatch(deployWorkflow + workerSmoke, /query_baseline|p9_scoring|vector|semantic/i);
 });

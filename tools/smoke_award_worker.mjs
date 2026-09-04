@@ -1,6 +1,17 @@
 const baseUrl = String(process.env.AWARD_API_URL || "https://funding-finder-award-api.urochestercheme.workers.dev/").trim();
 const origin = "https://mporosoff.github.io";
 
+function failureDetail(payload) {
+  const sources = Array.isArray(payload?.sources) ? payload.sources : [];
+  const sourceDetails = sources.map(source => [
+    source?.source,
+    source?.status,
+    source?.error?.code,
+  ].filter(Boolean).join(":"))
+    .filter(Boolean);
+  return sourceDetails.join(", ") || payload?.error?.code || "unknown_error";
+}
+
 async function jsonRequest(path, options = {}) {
   const response = await fetch(new URL(path, baseUrl), {
     ...options,
@@ -8,7 +19,9 @@ async function jsonRequest(path, options = {}) {
     signal: AbortSignal.timeout(45_000),
   });
   const payload = await response.json();
-  if (!response.ok) throw new Error(`${path} returned ${response.status}`);
+  if (!response.ok) {
+    throw new Error(`${path} returned ${response.status} (${failureDetail(payload)})`);
+  }
   return payload;
 }
 

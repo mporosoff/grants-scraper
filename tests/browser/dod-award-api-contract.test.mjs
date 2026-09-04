@@ -8,6 +8,7 @@ import {
   DOD_CAPABILITIES,
   DOD_DETAIL_URL,
   DOD_MAX_UPSTREAM_PAGES,
+  DOD_SEARCH_REQUEST_TIMEOUT_MS,
   DOD_SEARCH_URL,
   buildDodRequest,
   normalizeDodAward,
@@ -52,6 +53,7 @@ function fixtureFetch({ detailFails = false, calls = [], searchPayload = searchF
 
 test("DoD search uses only prime 04/05 assistance awards and supported exact filters", () => {
   assert.equal(DOD_ADAPTER_VERSION, "1.0.0");
+  assert.equal(DOD_SEARCH_REQUEST_TIMEOUT_MS, 20_000);
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const body = buildDodRequest({
     award_id: "fa9550261b195",
@@ -103,6 +105,30 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
     );
   }
   assert.equal(DOD_CAPABILITIES.fields.abstract, "unavailable_at_source");
+});
+
+test("DoD search applies its bounded USAspending deadline", async () => {
+  let searchSignal = null;
+  const fetchImpl = async (url, options = {}) => {
+    assert.equal(String(url), DOD_SEARCH_URL);
+    searchSignal = options.signal;
+    return new Promise((resolve, reject) => {
+      const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
+      if (searchSignal.aborted) abort();
+      else searchSignal.addEventListener("abort", abort, { once: true });
+    });
+  };
+
+  await assert.rejects(
+    () => searchDod(fetchImpl, { award_id: "FA9550261B195" }, {
+      limit: 1,
+      offset: 0,
+      now: fixedNow,
+      searchRequestTimeoutMs: 5,
+    }),
+    error => error instanceof AwardSourceError && error.code === "source_timeout",
+  );
+  assert.ok(searchSignal instanceof AbortSignal);
 });
 
 test("DoD normalization preserves obligations, Assistance Listing, office, and official links", () => {

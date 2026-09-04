@@ -18,6 +18,7 @@ export const DOD_MAX_RESULTS = 25;
 export const DOD_UPSTREAM_PAGE_SIZE = 25;
 export const DOD_MAX_UPSTREAM_PAGES = 12;
 export const DOD_DETAIL_CONCURRENCY = 3;
+export const DOD_SEARCH_REQUEST_TIMEOUT_MS = 20_000;
 
 const DOD_AGENCY_NAME = "Department of Defense";
 const DOD_AWARD_TYPE_CODES = Object.freeze(["04", "05"]);
@@ -493,6 +494,7 @@ export async function searchDod(fetchImpl, criteria, {
   scanAll = false,
   cache = null,
   cacheTtl = 3_600,
+  searchRequestTimeoutMs = DOD_SEARCH_REQUEST_TIMEOUT_MS,
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
   const retrievedAt = now().toISOString();
@@ -536,7 +538,7 @@ export async function searchDod(fetchImpl, criteria, {
         method: "POST",
         headers: REQUEST_HEADERS,
         body: JSON.stringify(body),
-      });
+      }, { timeoutMs: searchRequestTimeoutMs });
       const parsed = searchRecords(payload, query.page);
       progressed = true;
       query.fetched = true;
