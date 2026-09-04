@@ -250,7 +250,8 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(appSource, /split\(\/\\n\\s\*\\n\+\//);
   assert.doesNotMatch(appSource, /View source query/);
   assert.match(styles, /\.award-abstract p \+ p/);
-  assert.match(styles, /@media \(max-width: 540px\) \{[\s\S]*?\.header-context-pill \{[\s\S]*?flex: 0 1 96px;[\s\S]*?max-width: 96px;[\s\S]*?overflow: hidden;[\s\S]*?overflow-wrap: anywhere;[\s\S]*?white-space: normal;/);
+  assert.match(page, /header-context-agencies[\s\S]*?header-context-agency">NSF[\s\S]*?header-context-separator">·[\s\S]*?header-context-agency">NIH[\s\S]*?header-context-row-break">·[\s\S]*?header-context-agency">DOE[\s\S]*?header-context-separator">·[\s\S]*?header-context-agency">DoD/);
+  assert.match(styles, /@media \(max-width: 540px\) \{[\s\S]*?\.header-context-pill \{[\s\S]*?flex: 0 1 96px;[\s\S]*?max-width: 96px;[\s\S]*?overflow: hidden;[\s\S]*?overflow-wrap: anywhere;[\s\S]*?white-space: normal;[\s\S]*?\.header-context-agencies \{[\s\S]*?display: grid;[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto minmax\(0, 1fr\);[\s\S]*?\.header-context-row-break \{[\s\S]*?display: none;/);
   assert.doesNotMatch(appSource, /invent|generated interpretation|success rate/i);
   assert.doesNotMatch(appSource, /\.at\(/);
   assert.match(styles, /@media \(max-width: 390px\)/);

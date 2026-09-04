@@ -68,19 +68,34 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   const pill = page.locator(".header-context-pill");
   await expect(pill).toHaveText("NSF · NIH · DOE · DoD");
   await expect(pill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
+  await expect(pill.locator(".header-context-row-break")).toBeHidden();
   const geometry = await pill.evaluate(element => {
     const bounds = element.getBoundingClientRect();
+    const agencies = [...element.querySelectorAll(".header-context-agency")].map(agency => {
+      const agencyBounds = agency.getBoundingClientRect();
+      return {
+        centerX: agencyBounds.left + agencyBounds.width / 2,
+        top: agencyBounds.top,
+      };
+    });
     return {
       left: bounds.left,
       right: bounds.right,
       viewportWidth: window.innerWidth,
       contentWidth: element.scrollWidth,
       visibleWidth: element.clientWidth,
+      agencies,
     };
   });
   expect(geometry.left).toBeGreaterThanOrEqual(0);
   expect(geometry.right).toBeLessThanOrEqual(geometry.viewportWidth);
   expect(geometry.contentWidth).toBeLessThanOrEqual(geometry.visibleWidth);
+  expect(geometry.agencies).toHaveLength(4);
+  expect(Math.abs(geometry.agencies[0].centerX - geometry.agencies[2].centerX)).toBeLessThanOrEqual(1);
+  expect(Math.abs(geometry.agencies[1].centerX - geometry.agencies[3].centerX)).toBeLessThanOrEqual(1);
+  expect(Math.abs(geometry.agencies[0].top - geometry.agencies[1].top)).toBeLessThanOrEqual(1);
+  expect(Math.abs(geometry.agencies[2].top - geometry.agencies[3].top)).toBeLessThanOrEqual(1);
+  expect(geometry.agencies[2].top).toBeGreaterThan(geometry.agencies[0].top);
 });
 
 test("the frozen NIH example opens its exact opportunity mapping", async ({ page, context }) => {

@@ -298,5 +298,6 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   const statusPill = page.locator(".header-context-pill");
   await expect(statusPill).toHaveText("NSF · NIH · DOE · DoD");
   await expect(statusPill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
+  await expect(statusPill.locator(".header-context-row-break")).toBeHidden();
   expect(await statusPill.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
 });
