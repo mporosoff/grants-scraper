@@ -6,13 +6,14 @@ import {
   finiteNumber,
   isoDate,
   makeContact,
+  makeProgramContact,
   uniqueStrings,
 } from "../contract.js";
 import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { recordSatisfiesYearFilter, requestedYearRange, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NSF_ADAPTER_VERSION = "1.4.0";
+export const NSF_ADAPTER_VERSION = "1.5.0";
 const NSF_API = "https://api.nsf.gov/services/v1/awards";
 export const NSF_UPSTREAM_PAGE_SIZE = 25;
 export const NSF_MAX_UPSTREAM_PAGES = 12;
@@ -120,7 +121,9 @@ export function normalizeNsfAward(raw, { retrievedAt, sourceUrl }) {
   const estimatedAmount = finiteNumber(raw.estimatedTotalAmt);
   const obligatedAmount = finiteNumber(raw.fundsObligatedAmt);
   const totalAward = estimatedAmount ?? obligatedAmount;
-  const po = makeContact({
+  const po = makeProgramContact({
+    source: "NSF",
+    sourceDisplayName: raw.poName,
     name: raw.poName,
     role: "Program Officer",
     email: raw.poEmail,

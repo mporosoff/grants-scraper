@@ -4,8 +4,8 @@ This Worker powers the optional hosted AI features without exposing a provider k
 
 The browser sends only a supported operation name and its bounded user payload. The Worker owns the production prompts, schemas, and model routing:
 
-- Gemma: search phrase expansion and institution-question translation
-- GPT-5.6 Luna: candidate assessment, results chat, and institution narrative
+- Gemma: search phrase expansion, institution-question translation, and Program Officer question planning
+- GPT-5.6 Luna: candidate assessment, results chat, institution narrative, and Program Officer evidence synthesis
 - NOFO chat: Luna first for consistent structured presentation, with Gemma as the bounded fallback
 
 The Worker does not log or store prompts or responses. OpenAI requests set `store: false`; every operation has an exact bounded input contract; request and output sizes are bounded; browser origins are allowlisted; and every response is validated against the operation schema.

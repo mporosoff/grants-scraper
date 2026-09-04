@@ -256,6 +256,143 @@ function validInstitutionTranslation(value) {
     && boundedText(value.question, 1_000, { empty: false });
 }
 
+const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
+  "count", "investigators", "institutions", "programs", "years", "awards",
+]);
+const PROGRAM_OFFICER_SOURCES = new Set(["NSF", "NIH", "DOE"]);
+const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
+const PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS = new Map([
+  ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["c", new Set(["language", "programming"])],
+  ["k", new Set(["means"])],
+  ["p", new Set(["value", "values"])],
+  ["q", new Set(["learning"])],
+  ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+  ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["x", new Set(["ray", "rays"])],
+]);
+
+function validProgramOfficerYear(value) {
+  return value === null || (Number.isInteger(value) && value >= 1989 && value <= 2100);
+}
+
+function validProgramOfficerScope(value) {
+  if (!hasOnlyKeys(value, [
+    "source", "exact_source_display_name", "year_preset", "year_start", "year_end",
+  ], [
+    "source", "exact_source_display_name", "year_preset", "year_start", "year_end",
+  ])) return false;
+  if (!PROGRAM_OFFICER_SOURCES.has(value.source)
+      || !boundedText(value.exact_source_display_name, 300, { empty: false })
+      || !["recent5", "all", "custom"].includes(value.year_preset)
+      || !validProgramOfficerYear(value.year_start)
+      || !validProgramOfficerYear(value.year_end)) return false;
+  if (value.year_start !== null && value.year_end !== null && value.year_end < value.year_start) return false;
+  if (value.year_preset === "all") return value.year_start === null && value.year_end === null;
+  if (value.year_preset === "recent5") {
+    return value.year_start !== null
+      && value.year_end !== null
+      && value.year_end - value.year_start === 4;
+  }
+  return value.year_start !== null || value.year_end !== null;
+}
+
+function programOfficerTokens(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/\p{M}+/gu, "")
+    .toLocaleLowerCase("en-US")
+    .match(/[\p{L}\p{N}]+/gu) || [];
+}
+
+function validProgramOfficerPlanTerms(value, maximum) {
+  if (!Array.isArray(value) || value.length > maximum) return false;
+  const seen = new Set();
+  for (const term of value) {
+    if (!boundedText(term, 120, { empty: false }) || /[\r\n\t]/u.test(term)) return false;
+    const tokens = programOfficerTokens(term);
+    if (!tokens.length || tokens.some((token, index) => (
+      token.length < 3
+      && !PROGRAM_OFFICER_SHORT_CONCEPTS.has(token)
+      && !(token.length === 1 && PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS.get(token)?.has(tokens[index + 1]))
+      && !(/\p{L}/u.test(token) && /\p{N}/u.test(token))
+    ))) return false;
+    const key = tokens.join(" ");
+    if (seen.has(key)) return false;
+    seen.add(key);
+  }
+  return true;
+}
+
+function validProgramOfficerPlan(value, { topicalRequired = false } = {}) {
+  if (!hasOnlyKeys(value, ["intent", "concepts", "phrases", "exclusions"], [
+    "intent", "concepts", "phrases", "exclusions",
+  ])
+      || !PROGRAM_OFFICER_ANSWER_INTENTS.has(value.intent)
+      || !validProgramOfficerPlanTerms(value.concepts, 16)
+      || !validProgramOfficerPlanTerms(value.phrases, 8)
+      || !validProgramOfficerPlanTerms(value.exclusions, 8)) return false;
+  const topical = value.concepts.length > 0;
+  return topical === (value.phrases.length > 0)
+    && (topical || value.exclusions.length === 0)
+    && (!topicalRequired || topical);
+}
+
+function validProgramOfficerQuestionPlan(value) {
+  return hasOnlyKeys(value, ["question", "locked_scope"], ["question", "locked_scope"])
+    && boundedText(value.question, 1_000, { empty: false })
+    && validProgramOfficerScope(value.locked_scope)
+    && JSON.stringify(value).length <= 2_000;
+}
+
+function validProgramOfficerEvidenceRecord(value) {
+  return hasOnlyKeys(value, [
+    "evidence_id", "snapshot_position", "source", "award_id", "title", "program",
+    "program_office", "year", "investigators", "institution", "abstract_excerpt",
+    "deterministic_score", "matched_fields",
+  ], [
+    "evidence_id", "snapshot_position", "source", "award_id", "title", "program",
+    "program_office", "year", "investigators", "institution", "abstract_excerpt",
+    "deterministic_score", "matched_fields",
+  ])
+    && boundedText(value.evidence_id, 120, { empty: false })
+    && Number.isInteger(value.snapshot_position) && value.snapshot_position >= 1
+    && PROGRAM_OFFICER_SOURCES.has(value.source)
+    && boundedText(value.award_id, 120, { empty: false })
+    && boundedText(value.title, 500)
+    && boundedText(value.program, 200)
+    && boundedText(value.program_office, 300)
+    && validProgramOfficerYear(value.year)
+    && boundedStringList(value.investigators, 8, 160)
+    && boundedText(value.institution, 300)
+    && boundedText(value.abstract_excerpt, 800)
+    && Number.isSafeInteger(value.deterministic_score) && value.deterministic_score >= 1
+    && Array.isArray(value.matched_fields)
+    && value.matched_fields.length <= 6
+    && new Set(value.matched_fields).size === value.matched_fields.length
+    && value.matched_fields.every(field => [
+      "title", "abstract", "program", "year", "investigators", "institution",
+    ].includes(field));
+}
+
+function validProgramOfficerEvidenceAnswer(value) {
+  const awards = value?.public_award_evidence;
+  return hasOnlyKeys(value, [
+    "question", "locked_scope", "deterministic_retrieval_plan", "public_award_evidence",
+  ], [
+    "question", "locked_scope", "deterministic_retrieval_plan", "public_award_evidence",
+  ])
+    && boundedText(value.question, 1_000, { empty: false })
+    && validProgramOfficerScope(value.locked_scope)
+    && validProgramOfficerPlan(value.deterministic_retrieval_plan, { topicalRequired: true })
+    && Array.isArray(awards)
+    && awards.length >= 1
+    && awards.length <= 24
+    && awards.every(validProgramOfficerEvidenceRecord)
+    && JSON.stringify(awards).length <= 18_000
+    && JSON.stringify(value).length <= 24_000;
+}
+
 function validAwardEvidence(value) {
   return hasOnlyKeys(value, [
     "evidence_id", "source", "award_id", "title", "program", "year",
@@ -308,6 +445,8 @@ const VALIDATORS = Object.freeze({
   result_chat: validResultChat,
   notice_chat: validNoticeChat,
   institution_question_translation: validInstitutionTranslation,
+  program_officer_question_plan: validProgramOfficerQuestionPlan,
+  program_officer_evidence_answer: validProgramOfficerEvidenceAnswer,
   institution_narrative: validInstitutionNarrative,
 });
 

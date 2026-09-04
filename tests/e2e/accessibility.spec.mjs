@@ -118,21 +118,27 @@ test("Funding Finder has no serious or critical violations across critical state
 test("Funded Awards Institutional Intelligence has no serious or critical violations", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
-  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
-    status: 200,
-    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify(openAiStructuredResponse({
-      agency: "DOE",
-      program: "BES",
-      topic: "",
-      pi: "",
-      program_officer: "",
-      year_start: "",
-      year_end: "",
-      answer_intent: "investigators",
-      narrative_needed: false,
-    })),
-  }));
+  await page.route("https://api.openai.com/v1/responses", route => {
+    const operation = route.request().postDataJSON()?.text?.format?.name;
+    const value = operation === "program_officer_question_plan_v1"
+      ? { intent: "count", concepts: [], phrases: [], exclusions: [] }
+      : {
+        agency: "DOE",
+        program: "BES",
+        topic: "",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "investigators",
+        narrative_needed: false,
+      };
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify(openAiStructuredResponse(value)),
+    });
+  });
   mockAwards(page);
   await page.goto("/funded_awards.html");
   await page.locator("#ii-institution").fill("MIT");
@@ -153,6 +159,23 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.locator("#ii-clear").click();
+  await page.locator("#ii-agency").selectOption("NSF");
+  await page.locator("#ii-topic").fill("program officer accessibility");
+  await page.locator("#ii-search").click();
+  await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
+  await expect(page.locator("#ii-po-scope")).toBeVisible();
+  await expect(page.locator("#ii-institution")).toBeDisabled();
+  await scan(page, "funded-awards-program-officer-snapshot", testInfo);
+  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await page.locator("#ii-question").fill("How many awards are in this snapshot?");
+  await page.locator("#ii-ask-button").click();
+  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await scan(page, "funded-awards-program-officer-answer", testInfo);
+  await page.setViewportSize({ width: 320, height: 720 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await scan(page, "funded-awards-program-officer-mobile", testInfo);
 });
 
 test("shared Help remains visible and current across every desktop and mobile surface", async ({ page }, testInfo) => {

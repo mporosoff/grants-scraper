@@ -181,6 +181,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.deepEqual(plain(core.programCriterion("DOD", "12.800")), { program: "12.800" });
   assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", pi: "Ada Investigator" }), /do not provide investigator fields/);
   assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", program_officer: "Alex Officer" }), /do not provide program-officer fields/);
+  assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1988, year_end: 2020 }), /1989 through 2100/);
   assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
@@ -247,7 +248,7 @@ test("investigator capitalization is consistent across snapshot controls, cards,
   ]);
 
   assert.match(appSource, /investigators\.map\(person => awardProduct\.displayInvestigatorName\(person\?\.name\)\)/);
-  assert.match(appSource, /kind === "investigator" \? awardProduct\.displayInvestigatorName\(item\.name\)/);
+  assert.match(appSource, /kind === "investigator"[\s\S]{0,80}\? awardProduct\.displayInvestigatorName\(item\.name\)/);
   assert.match(appSource, /awardProduct\.displayInvestigatorName\(payload\.facet\.label\)/);
   assert.match(appSource, /awardProduct\.displayInvestigatorName\(variant\.name\)/);
   assert.match(appSource, /awardProduct\.displayInvestigatorName\(person\.name\)/);
@@ -544,8 +545,9 @@ test("touch-first editable controls keep a 16px floor without disabling page zoo
 test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
   assert.match(appSource, /function answerTable\(\{ label, headers, rows \}\)[\s\S]*class="ii-answer-table-wrap"[\s\S]*<table class="ii-answer-table">/);
   assert.match(appSource, /const investigators = Array\.isArray\(aggregate\.investigators\)/);
-  assert.match(appSource, /intent === "investigators"[\s\S]*label: "Investigators in the matching awards"[\s\S]*headers: \["Investigator", "Awards"\]/);
-  assert.match(appSource, /intent === "programs"[\s\S]*label: "Programs in the matching awards"[\s\S]*headers: \["Program", "Awards"\]/);
+  assert.match(appSource, /intent === "investigators"[\s\S]*label: boundedLabel\("Investigators in the matching awards", investigatorCount, investigators\.length\)[\s\S]*headers: \["Investigator", "Awards"\]/);
+  assert.match(appSource, /intent === "institutions"[\s\S]*label: boundedLabel\("Recipient institutions in the matching awards", institutionCount, institutions\.length\)[\s\S]*headers: \["Institution", "Awards"\]/);
+  assert.match(appSource, /intent === "programs"[\s\S]*label: boundedLabel\("Programs in the matching awards", programCount, programs\.length\)[\s\S]*headers: \["Program", "Awards"\]/);
   assert.match(appSource, /intent === "years"[\s\S]*label: "Award years in the matching awards"[\s\S]*headers: \["Year", "Awards"\]/);
   assert.match(appSource, /\$\("ii-direct-answer"\)\.innerHTML = renderDirectAnswer\(snapshot\)/);
   assert.match(styles, /\.ii-answer-table-wrap\s*\{/);

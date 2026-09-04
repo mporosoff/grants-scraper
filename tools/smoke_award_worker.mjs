@@ -57,6 +57,7 @@ if (health.abuse_control?.ready !== true
   || health.abuse_control?.client_identity !== "hmac-derived"
   || health.abuse_control?.window_seconds !== 60
   || health.abuse_control?.limits?.award_source !== 12
+  || health.abuse_control?.limits?.snapshot_evidence !== 12
   || health.abuse_control?.limits?.ror_search !== 60
   || health.abuse_control?.limits?.ror_resolution !== 20) {
   throw new Error("Award Worker health did not advertise the deployed abuse-control contract.");

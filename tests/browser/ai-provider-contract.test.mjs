@@ -112,6 +112,18 @@ const samples = {
     answer_intent: "programs",
     narrative_needed: false,
   },
+  program_officer_question_plan: {
+    intent: "awards",
+    concepts: ["carbon dioxide", "conversion"],
+    phrases: ["carbon dioxide conversion"],
+    exclusions: ["combustion"],
+  },
+  program_officer_evidence_answer: {
+    claims: [{
+      text: "The supplied award describes carbon dioxide conversion.",
+      evidence_ids: ["NSF:123"],
+    }],
+  },
   institution_narrative: {
     claims: [{
       text: "The supplied titles describe catalysis.",
@@ -120,14 +132,14 @@ const samples = {
   },
 };
 
-test("all six AI consumers use stable strict JSON schemas", async () => {
+test("all eight AI consumers use stable strict JSON schemas", async () => {
   const provider = await loadProvider();
   assert.deepEqual(
     Object.keys(provider.STRUCTURED_OPERATIONS).sort(),
     Object.keys(samples).sort(),
   );
   const names = Object.values(provider.STRUCTURED_OPERATIONS).map(item => item.name);
-  assert.equal(new Set(names).size, 6);
+  assert.equal(new Set(names).size, 8);
   for (const [operation, value] of Object.entries(samples)) {
     const contract = provider.STRUCTURED_OPERATIONS[operation];
     assert.match(contract.name, /^[a-z0-9_]+_v1$/);

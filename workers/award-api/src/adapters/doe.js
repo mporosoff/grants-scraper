@@ -7,6 +7,7 @@ import {
   finiteNumber,
   isoDate,
   makeContact,
+  makeProgramContact,
   safeOfficialUrl,
   uniqueStrings,
 } from "../contract.js";
@@ -14,7 +15,7 @@ import { AwardSourceError, fetchSourceText } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { recordSatisfiesYearFilter, requestedYearRange, yearFilterDiagnostics } from "../year-filter.js";
 
-export const DOE_ADAPTER_VERSION = "1.3.1";
+export const DOE_ADAPTER_VERSION = "1.4.0";
 export const DOE_SEARCH_URL = "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx";
 export const DOE_MAX_RESULTS = 10;
 export const DOE_MAX_OFFSET = 100;
@@ -334,7 +335,9 @@ export function normalizeDoeAward(raw, { retrievedAt, abstract = null } = {}) {
     sourceField: "PI",
     sourceUrl: officialUrl,
   });
-  const manager = makeContact({
+  const manager = makeProgramContact({
+    source: "DOE",
+    sourceDisplayName: raw.program_manager,
     name: displayPersonName(raw.program_manager),
     role: "Program Manager",
     email: null,

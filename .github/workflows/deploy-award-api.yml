@@ -69,7 +69,7 @@ jobs:
           node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
           node --check workers/award-api/src/adapters/dod.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/dod-award-api-contract.test.mjs tests/browser/dod-browser-transport-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/dod-award-api-contract.test.mjs tests/browser/dod-browser-transport-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/program-officer-award-navigation-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -204,8 +204,21 @@ jobs:
               && test "$(jq -r '.complete_result_snapshots.batch_ceiling_per_agency // empty' <<<"$health" 2>/dev/null)" = "25" \
               && test "$(jq -c '.complete_result_snapshots.page_sizes // empty' <<<"$health" 2>/dev/null)" = "[10,25,50]" \
               && test "$(jq -r '.complete_result_snapshots.cache_scope // empty' <<<"$health" 2>/dev/null)" = "cloudflare-datacenter" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.endpoint // empty' <<<"$health" 2>/dev/null)" = "/awards/snapshots/evidence" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.plan_format // empty' <<<"$health" 2>/dev/null)" = "provider-concepts-v1" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.scoring_version // empty' <<<"$health" 2>/dev/null)" = "program-officer-evidence-v4" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.concept_coverage // empty' <<<"$health" 2>/dev/null)" = "all_provider_concepts_same_record" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_concepts // empty' <<<"$health" 2>/dev/null)" = "16" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_phrases // empty' <<<"$health" 2>/dev/null)" = "8" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_exclusions // empty' <<<"$health" 2>/dev/null)" = "8" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_records // empty' <<<"$health" 2>/dev/null)" = "24" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.matched_facet_limit // empty' <<<"$health" 2>/dev/null)" = "12" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.abstract_characters_per_record // empty' <<<"$health" 2>/dev/null)" = "800" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.indexed_abstract_characters_per_record // empty' <<<"$health" 2>/dev/null)" = "20000" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.serialized_characters // empty' <<<"$health" 2>/dev/null)" = "18000" \
               && test "$(jq -r '.abuse_control.ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.abuse_control.provider // empty' <<<"$health" 2>/dev/null)" = "cloudflare-durable-object" \
+              && test "$(jq -r '.abuse_control.limits.snapshot_evidence // empty' <<<"$health" 2>/dev/null)" = "12" \
               && test "$(jq -r '.abuse_control.storage // empty' <<<"$health" 2>/dev/null)" = "sqlite"; then
               exit 0
             fi

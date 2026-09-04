@@ -299,12 +299,14 @@ export function mockAwards(target, {
   snapshotCreateDelayMs = 0,
   snapshotPageExpireAtCall = 0,
   snapshotPageFailAtCalls = [],
+  snapshotEvidenceExpireAtCall = 0,
   snapshotBatchExpireAtCall = 0,
   snapshotBatchDelaysMs = [],
   snapshotRetryExpireAtCall = 0,
   failSnapshotCreateForTopics = [],
   failSnapshotInitialPageForTopics = [],
   enforceYearFilters = false,
+  programOfficerSourceFailures = {},
   sourceFailures = {},
   sourceFailuresByOffset = {},
 } = {}) {
@@ -312,6 +314,7 @@ export function mockAwards(target, {
   const snapshots = new Map();
   let snapshotSequence = 0;
   let snapshotPageCallCount = 0;
+  let snapshotEvidenceCallCount = 0;
   let snapshotBatchCallCount = 0;
   let snapshotRetryCallCount = 0;
   const configuredDodCount = Math.max(0, Number(
@@ -518,7 +521,7 @@ export function mockAwards(target, {
       activity_code: null,
       funding_mechanism: "Grant",
       title: "Collaborative Research: Warm Dense Matter",
-      abstract: "This project studies CO₂ conversion, warm dense matter, plasma, and materials under extreme conditions.\n\nThis source-provided second paragraph remains separate.",
+      abstract: "This project studies CO₂ (carbon dioxide) conversion, warm dense matter, plasma, and materials under extreme conditions.\n\nThis source-provided second paragraph remains separate.",
       project_start: "2026-09-01",
       project_end: "2029-08-31",
       award_year: 2026,
@@ -527,7 +530,7 @@ export function mockAwards(target, {
       institution: { name: "University of Rochester", normalized_name: "University of Rochester", identifiers: { uei: "F27KDXZMF9Y8", ipf: null, other: null } },
       organization_department: null,
       principal_investigators: [{ name: "Vasily Karasiev", role: "Principal Investigator", email: "vkarasev@example.edu", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508" }],
-      program_contacts: [{ name: "Vladimir Lukin", role: "Program Officer", email: "vlukin@nsf.gov", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508" }],
+      program_contacts: [{ name: "Vladimir Lukin", role: "Program Officer", email: "vlukin@nsf.gov", official_contact_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508", source_display_name: "Vladimir Lukin", program_contact_key: "program-contact-v1:vladimir|lukin", program_contact_identity: "NSF:program-contact-v1:vladimir|lukin", searchable_program_contact: true }],
       official_award_url: "https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2605508",
       annual_support: [],
       source_provenance: { source_url: "https://api.nsf.gov/services/v1/awards.json", retrieved_at: retrievedAt, source_record_id: "2605508", adapter_version: "1.0.0" },
@@ -553,7 +556,7 @@ export function mockAwards(target, {
       award_amount_basis: "returned_support_years",
       organization_department: "Medicine",
       principal_investigators: [{ name: "Stephen Dewhurst", role: "Contact Principal Investigator", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475" }],
-      program_contacts: [{ name: "Anissa Brown", role: "Program Official", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475" }],
+      program_contacts: [{ name: "Anissa Brown", role: "Program Official", email: null, official_contact_url: "https://reporter.nih.gov/project-details/10875475", source_display_name: "Anissa Brown", program_contact_key: "program-contact-v1:anissa|brown", program_contact_identity: "NIH:program-contact-v1:anissa|brown", searchable_program_contact: true }],
       official_award_url: "https://reporter.nih.gov/project-details/10875475",
       annual_support: [{ fiscal_year: 2026, award_amount: 500000 }],
       source_provenance: { source_url: "https://api.reporter.nih.gov/v2/projects/search", retrieved_at: retrievedAt, source_record_id: "10875475", adapter_version: "1.0.0" },
@@ -614,6 +617,7 @@ export function mockAwards(target, {
     const snapshotAggregate = records => {
       const people = new Map();
       const programs = new Map();
+      const institutions = new Map();
       const years = new Map();
       const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0], ["DOD", 0]]);
       records.forEach(record => {
@@ -635,19 +639,56 @@ export function mockAwards(target, {
           current.award_keys.push(`${record.source}:${record.award_id}`);
           programs.set(key, current);
         }
+        const institutionName = record.institution?.normalized_name || record.institution?.name;
+        if (institutionName) {
+          const key = `institution:${String(institutionName).toLowerCase().replace(/\W+/g, "-")}`;
+          const current = institutions.get(key) || { key, name: institutionName, projects: 0, variants: [], award_keys: [] };
+          current.projects += 1;
+          current.award_keys.push(`${record.source}:${record.award_id}`);
+          if (!current.variants.includes(institutionName)) current.variants.push(institutionName);
+          institutions.set(key, current);
+        }
       });
       const orderedYears = [...years.entries()].sort(([left], [right]) => left - right);
       return {
         project_count: records.length,
         investigator_count: people.size,
+        institution_count: institutions.size,
         program_count: programs.size,
         year_start: orderedYears[0]?.[0] || null,
         year_end: orderedYears.at(-1)?.[0] || null,
         represented_years: orderedYears.map(([year, projects]) => ({ year, projects })),
         agency_totals: [...agencyTotals].map(([source, projects]) => ({ source, projects })),
         investigators: [...people.values()],
+        institutions: [...institutions.values()],
         programs: [...programs.values()],
         ordered_refs: records.map((record, index) => ({ position: index + 1, evidence_id: `${record.source}:${record.award_id}`, source: record.source, award_id: record.award_id, title: record.title, award_year: record.award_year })),
+      };
+    };
+    const matchedAggregate = records => {
+      const aggregate = snapshotAggregate(records);
+      const rank = (values, label) => values
+        .map(value => ({ [label]: value[label], projects: value.projects }))
+        .sort((left, right) => right.projects - left.projects || String(left[label]).localeCompare(String(right[label]), "en-US"))
+        .slice(0, 12);
+      return {
+        project_count: aggregate.project_count,
+        investigator_count: aggregate.investigator_count,
+        institution_count: aggregate.institution_count,
+        program_count: aggregate.program_count,
+        year_start: aggregate.year_start,
+        year_end: aggregate.year_end,
+        represented_years: aggregate.represented_years,
+        agency_totals: aggregate.agency_totals,
+        investigators: rank(aggregate.investigators, "name"),
+        institutions: rank(aggregate.institutions, "name"),
+        programs: rank(aggregate.programs, "label"),
+        facet_limit: 12,
+        facets_truncated: {
+          investigators: aggregate.investigator_count > 12,
+          institutions: aggregate.institution_count > 12,
+          programs: aggregate.program_count > 12,
+        },
       };
     };
     const publicSnapshot = snapshot => ({
@@ -656,14 +697,19 @@ export function mockAwards(target, {
       snapshot_id: snapshot.snapshot_id,
       query_id: snapshot.query_id,
       as_of: snapshot.as_of,
+      expires_at: snapshot.expires_at,
       ordering_version: "award-recency-v1",
       batch_ceiling_per_agency: 25,
       request: snapshot.request,
       completeness: snapshot.completeness,
+      coverage_state: snapshot.completeness === "complete" ? "complete" : snapshot.records.length ? "partial" : "unavailable",
       exact_total: snapshot.exact_total,
       at_least: snapshot.records.length,
       recency_order: snapshot.completeness === "complete" ? "verified_most_recent_to_older" : "available_snapshot_recent_to_older",
       sources: snapshot.sources,
+      mode: snapshot.mode,
+      program_officer: snapshot.program_officer,
+      abstract_coverage: snapshot.abstract_coverage,
       base_aggregate: snapshot.aggregate,
       initial_batches: snapshot.request.sources.map(source => {
         const results = snapshot.records.filter(record => record.source === source).slice(0, 25);
@@ -673,10 +719,11 @@ export function mockAwards(target, {
     });
     const snapshotView = (snapshot, facet) => {
       if (!facet || facet.type === "all") return { facet: { type: "all", key: "", label: "All awards" }, records: snapshot.records };
-      const groups = facet.type === "investigator" ? snapshot.aggregate.investigators : snapshot.aggregate.programs;
+      const groups = facet.type === "investigator" ? snapshot.aggregate.investigators
+        : facet.type === "institution" ? snapshot.aggregate.institutions : snapshot.aggregate.programs;
       const group = groups.find(item => (facet.type === "investigator" ? item.identity_key : item.key) === facet.key);
       const allowed = new Set(group?.award_keys || []);
-      return { facet: { type: facet.type, key: facet.key, label: facet.type === "investigator" ? group?.name : group?.label }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
+      return { facet: { type: facet.type, key: facet.key, label: facet.type === "program" ? group?.label : group?.name }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
     };
     if (requestUrl.pathname === "/awards/snapshots" && request.method() === "POST") {
       if (
@@ -691,13 +738,20 @@ export function mockAwards(target, {
         return;
       }
       const sources = body.sources;
+      const snapshotCriteria = { ...body.criteria };
+      if (snapshotCriteria.mode === "program_officer" && snapshotCriteria.year_preset === "recent5" && !snapshotCriteria.year_start && !snapshotCriteria.year_end) {
+        snapshotCriteria.year_start = 2022;
+        snapshotCriteria.year_end = 2026;
+      }
       const records = [];
       const sourceStates = [];
       for (const source of sources) {
         const configuredFlag = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
         const recoveringHybridSource = sources.length === 1 && calls.some(call => Array.isArray(call.sources) && call.sources.length > 1 && call.sources.includes(source));
         const failed = configuredFlag && !recoveringHybridSource;
-        const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
+        const configuredFailure = (snapshotCriteria.mode === "program_officer" ? programOfficerSourceFailures[source] : null)
+          || sourceFailures[source]
+          || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
         if (configuredFailure) {
           sourceStates.push({ source, status: configuredFailure.status || "unavailable", result_count: 0, total_count: null, error: { code: configuredFailure.code || "source_unavailable" } });
           continue;
@@ -709,17 +763,103 @@ export function mockAwards(target, {
         const count = recoveringHybridSource && configuredFlag
           ? Math.max(1, Number(configuredCount) || 0)
           : Math.max(0, Number(configuredCount) || 0);
-        for (let index = 0; index < count; index += 1) records.push(index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] });
+        for (let index = 0; index < count; index += 1) {
+          const record = index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] };
+          if (snapshotCriteria.mode !== "program_officer" || record.program_contacts?.some(contact => contact.program_contact_key === snapshotCriteria.program_contact_key)) records.push(record);
+        }
         const partial = Array.isArray(hasMoreBySource[source]) ? hasMoreBySource[source].length > 0 : Boolean(hasMoreBySource[source]);
         sourceStates.push({ source, status: partial ? "safety_bounded" : "complete", result_count: count, total_count: partial ? null : count, at_least: count, safety_bound_reached: partial, adapter_version: "1.1.0", retrieved_at: retrievedAt });
       }
       const complete = sourceStates.every(source => source.status === "complete");
       const snapshotId = String(++snapshotSequence).padStart(64, "a");
-      const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, request: { sources, criteria: body.criteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null };
+      const programOfficer = snapshotCriteria.mode === "program_officer" ? { source: sources[0], display_name: snapshotCriteria.program_officer, contact_key: snapshotCriteria.program_contact_key, year_preset: snapshotCriteria.year_preset, year_start: snapshotCriteria.year_start || null, year_end: snapshotCriteria.year_end || null, membership_rule: "exact_same_source_program_contact_key" } : null;
+      const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, expires_at: "2026-08-24T21:00:00.000Z", request: { sources, criteria: snapshotCriteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null, mode: programOfficer ? "program_officer" : "standard", program_officer: programOfficer };
       snapshot.aggregate = snapshotAggregate(records);
+      snapshot.abstract_coverage = { total_records: records.length, records_with_abstract: records.filter(record => record.abstract).length, records_without_abstract: records.filter(record => !record.abstract).length, percentage: records.length ? 100 : 0 };
       snapshots.set(snapshotId, snapshot);
       if (Number(snapshotCreateDelayMs) > 0) await new Promise(resolve => setTimeout(resolve, Number(snapshotCreateDelayMs)));
       await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(publicSnapshot(snapshot)) });
+      return;
+    }
+    if (requestUrl.pathname === "/awards/snapshots/evidence" && request.method() === "POST") {
+      snapshotEvidenceCallCount += 1;
+      if (body.plan_format !== "provider-concepts-v1") {
+        await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_request" } }) });
+        return;
+      }
+      if (snapshotEvidenceCallCount === Number(snapshotEvidenceExpireAtCall)) {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      const snapshot = snapshots.get(body.snapshot_id);
+      if (!snapshot || snapshot.mode !== "program_officer") {
+        await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
+        return;
+      }
+      const shortConcepts = new Set(["ai", "ml", "ph"]);
+      const contextualSingleConcepts = new Map([
+        ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+        ["c", new Set(["language", "programming"])],
+        ["k", new Set(["means"])],
+        ["p", new Set(["value", "values"])],
+        ["q", new Set(["learning"])],
+        ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+        ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+        ["x", new Set(["ray", "rays"])],
+      ]);
+      const answerIntents = new Set(["count", "investigators", "institutions", "programs", "years", "awards"]);
+      const normalizedEvidenceTokens = value => (String(value || "")
+        .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || [])
+        .map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token);
+      const admissible = (token, tokens, index) => token.length >= 3
+        || shortConcepts.has(token)
+        || (token.length === 1 && contextualSingleConcepts.get(token)?.has(tokens[index + 1]))
+        || (/\p{L}/u.test(token) && /\p{N}/u.test(token));
+      const admittedEvidenceTokens = value => {
+        const tokens = normalizedEvidenceTokens(value);
+        return tokens.filter((token, index) => admissible(token, tokens, index));
+      };
+      const plan = body.retrieval_plan;
+      const exactPlanKeys = plan && typeof plan === "object" && !Array.isArray(plan)
+        && Object.keys(plan).sort().join("|") === "concepts|exclusions|intent|phrases";
+      const normalizeTerms = (values, minimum, maximum) => {
+        if (!Array.isArray(values) || values.length < minimum || values.length > maximum) return null;
+        const terms = values.map(value => normalizedEvidenceTokens(value));
+        return terms.some(tokens => !tokens.length || tokens.some((token, index) => !admissible(token, tokens, index))) ? null : terms;
+      };
+      const concepts = exactPlanKeys && answerIntents.has(plan.intent) ? normalizeTerms(plan.concepts, 1, 16) : null;
+      const phrases = exactPlanKeys ? normalizeTerms(plan.phrases, 1, 8) : null;
+      const exclusions = exactPlanKeys ? normalizeTerms(plan.exclusions, 0, 8) : null;
+      if (!concepts || !phrases || !exclusions) {
+        await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_evidence_request" } }) });
+        return;
+      }
+      const requiredConcepts = [...new Set(concepts.flat())];
+      const scored = snapshot.records.map((record, position) => {
+        const recordValues = [
+          record.title,
+          record.abstract,
+          record.program_name,
+          record.activity_code,
+          record.subagency,
+          record.award_year,
+          ...(record.program_codes || []),
+          ...(record.principal_investigators || []).map(person => person.name),
+          record.institution?.normalized_name || record.institution?.name,
+        ].filter(Boolean);
+        const recordTokens = new Set(recordValues.flatMap(admittedEvidenceTokens));
+        if (!requiredConcepts.every(concept => recordTokens.has(concept))
+          || exclusions.some(exclusion => exclusion.every(token => recordTokens.has(token)))) return null;
+        const titleTokens = new Set(admittedEvidenceTokens(record.title));
+        const abstractTokens = new Set(admittedEvidenceTokens(record.abstract));
+        const score = phrases.reduce((total, phrase) => total
+          + phrase.filter(token => titleTokens.has(token)).length * 100
+          + phrase.filter(token => abstractTokens.has(token)).length * 28, 0);
+        return { record, position, score };
+      }).filter(Boolean).sort((left, right) => right.score - left.score || left.position - right.position);
+      const matchedRecords = scored.map(item => item.record);
+      const awards = scored.slice(0, body.limit).map(({ record, position, score }) => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: position + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: score, matched_fields: ["title", "abstract"] }));
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(matchedRecords), retrieval: { scoring_version: "program-officer-evidence-v4", plan_format: "provider-concepts-v1", answer_intent: plan.intent, concept_coverage: "all_provider_concepts_same_record", required_concept_count: requiredConcepts.length, phrase_count: phrases.length, exclusion_count: exclusions.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { concepts: 16, phrases: 8, exclusions: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
@@ -795,7 +935,22 @@ export function mockAwards(target, {
         snapshot_id: String(++snapshotSequence).padStart(64, "c"),
         records,
         sources: snapshot.sources.map(source => source.source === body.source
-          ? { ...source, status: "complete", result_count: recoveredCount, total_count: recoveredCount }
+          ? {
+              ...source,
+              status: "complete",
+              result_count: recoveredCount,
+              total_count: recoveredCount,
+              ...(snapshot.mode === "program_officer" ? { contact_post_validation: {
+                version: "program-contact-v1",
+                source: body.source,
+                display_name: snapshot.program_officer.display_name,
+                contact_key: snapshot.program_officer.contact_key,
+                returned_count: recoveredCount,
+                retained_count: recoveredCount,
+                rejected_count: 0,
+                complete: true,
+              } } : {}),
+            }
           : source),
       };
       successor.completeness = successor.sources.every(source => source.status === "complete") ? "complete" : "partial";

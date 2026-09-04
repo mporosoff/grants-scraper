@@ -21,6 +21,8 @@ export const OPERATION_ROUTES = Object.freeze({
   result_chat: Object.freeze(["luna"]),
   notice_chat: Object.freeze(["luna", "gemma"]),
   institution_question_translation: Object.freeze(["gemma"]),
+  program_officer_question_plan: Object.freeze(["gemma"]),
+  program_officer_evidence_answer: Object.freeze(["luna"]),
   institution_narrative: Object.freeze(["luna"]),
 });
 

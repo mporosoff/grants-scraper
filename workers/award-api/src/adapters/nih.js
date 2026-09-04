@@ -6,6 +6,7 @@ import {
   finiteNumber,
   isoDate,
   makeContact,
+  makeProgramContact,
   safeOfficialUrl,
   uniqueStrings,
 } from "../contract.js";
@@ -13,7 +14,7 @@ import { AwardSourceError, fetchSourceJson } from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { nihFiscalYears, recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
-export const NIH_ADAPTER_VERSION = "1.4.3";
+export const NIH_ADAPTER_VERSION = "1.5.0";
 export const NIH_API = "https://api.reporter.nih.gov/v2/projects/search";
 export const NIH_UPSTREAM_PAGE_SIZE = 100;
 export const NIH_MAX_UPSTREAM_PAGES = 12;
@@ -126,8 +127,11 @@ function nihProgramContacts(records, officialUrl, sourceUrl) {
   for (const raw of records) {
     for (const person of Array.isArray(raw.program_officers) ? raw.program_officers : []) {
       const email = cleanEmail(person.email);
-      const contact = makeContact({
-        name: person.full_name || [person.first_name, person.middle_name, person.last_name].filter(Boolean).join(" "),
+      const sourceDisplayName = person.full_name || [person.first_name, person.middle_name, person.last_name].filter(Boolean).join(" ");
+      const contact = makeProgramContact({
+        source: "NIH",
+        sourceDisplayName,
+        name: sourceDisplayName,
         role: "Program Official",
         email,
         officialContactUrl: officialUrl,

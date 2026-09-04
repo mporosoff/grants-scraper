@@ -82,13 +82,15 @@ function environment(overrides = {}) {
   };
 }
 
-test("benchmark covers the six production contracts behind the four priority features", () => {
+test("benchmark covers the eight production contracts behind the five priority features", () => {
   assert.deepEqual(
     [...new Set(BENCHMARK_CASES.map(item => item.operation))].sort(),
     [
       "institution_narrative",
       "institution_question_translation",
       "notice_chat",
+      "program_officer_evidence_answer",
+      "program_officer_question_plan",
       "refinement_shortlist",
       "result_chat",
       "search_plan",
@@ -96,7 +98,7 @@ test("benchmark covers the six production contracts behind the four priority fea
   );
   assert.deepEqual(
     [...new Set(BENCHMARK_CASES.map(item => item.feature))].sort(),
-    ["Ask about this institution", "Chat with NOFO", "Chat with results", "Enhance with AI"],
+    ["Ask about a Program Officer snapshot", "Ask about this institution", "Chat with NOFO", "Chat with results", "Enhance with AI"],
   );
 });
 
@@ -113,12 +115,15 @@ test("every benchmark fixture is accepted by its production gateway input contra
 test("benchmark prompt copies remain pinned to the production call sites", async () => {
   const app = (await readFile(path.join(root, "assets", "app.js"), "utf8")).replaceAll('\\"', '"');
   const institution = (await readFile(path.join(root, "assets", "institutional-intelligence.js"), "utf8")).replaceAll('\\"', '"');
+  const snapshots = (await readFile(path.join(root, "assets", "institutional-intelligence-snapshots.js"), "utf8")).replaceAll('\\"', '"');
   assert.ok(app.includes(PRODUCTION_PROMPTS.search_plan));
   assert.ok(app.includes(PRODUCTION_PROMPTS.result_chat));
   assert.ok(app.includes(PRODUCTION_PROMPTS.notice_chat));
   assert.ok(app.includes(PRODUCTION_PROMPTS.refinement_shortlist.replace("at most 12 matches", "at most ${MAX_AI_MATCHES} matches")));
   assert.ok(institution.includes(PRODUCTION_PROMPTS.institution_question_translation));
   assert.ok(institution.includes(PRODUCTION_PROMPTS.institution_narrative));
+  assert.ok(snapshots.includes(PRODUCTION_PROMPTS.program_officer_question_plan));
+  assert.ok(snapshots.includes(PRODUCTION_PROMPTS.program_officer_evidence_answer));
 });
 
 test("private endpoint fails closed when the token is absent or wrong", async () => {

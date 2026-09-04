@@ -28,6 +28,7 @@
     snapshotPageUrl: new URL("awards/snapshots/page", baseUrl).href,
     snapshotBatchUrl: new URL("awards/snapshots/batch", baseUrl).href,
     snapshotRetryUrl: new URL("awards/snapshots/retry", baseUrl).href,
+    snapshotEvidenceUrl: new URL("awards/snapshots/evidence", baseUrl).href,
     timeoutMs: 120_000,
     maxResultsPerSource: 25,
   });

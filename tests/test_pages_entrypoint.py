@@ -290,8 +290,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
+        ai_provider_hash = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "ai-provider.js").read_bytes()
+        ).hexdigest()
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=dod-awards-20260903"></script>',
+            f'<script src="./assets/ai-provider.js?v={ai_provider_hash}"></script>',
             explorer_html,
         )
         self.assertIn(
