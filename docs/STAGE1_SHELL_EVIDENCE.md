@@ -52,3 +52,7 @@ One shared controller owns transient disclosure/action-list positioning and nati
 - Shared header navigation now participates in normal flex layout to reserve space for the catalog, Workspace and Help at desktop widths.
 - Dedicated manual E2E files have selector/routing updates for the moved controls only. They were not run or enabled. No workflow changed.
 - Search/AI/team panels, algorithms, query/history writers, CSV serializer, alert API/payload builders, storage module, researcher intake/admin logic, generated researcher/team data and Funded Awards query/transport code are unchanged. Public HTML bindings and the search release manifest are coherently refreshed for changed shell assets.
+
+## First protected round and consolidated remediation
+
+PR #137 candidate `8275e677bba3b70d9dcb23fa6a4b773f83e4507b`: automated Codex review completed clean (2026-09-04 20:32:43 UTC, completed summary and configured bot thumbs-up; unchanged head throughout). Protected run `33916459536` passed Python and found three stale browser contracts. Read-only audit of the complete related reference family found: former combined saved/alert markup, a saved-status assertion requiring adjacent attributes, and a hard-coded Funded Awards app.css version. One batch updates only these assertions to the new canonical structure and exact content hash; no product code changes. The new candidate requires its own protected checks and one exact-head re-review before merge.

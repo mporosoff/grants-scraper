@@ -55,7 +55,7 @@ test("FF-BUG-001 keeps absent numeric values distinct from explicit zero", () =>
 });
 
 test("FF-BUG-011 exposes an accessible saved-storage failure channel for every UI mutation", () => {
-  assert.match(page, /id="saved-status" role="status" aria-live="polite"/);
+  assert.match(page, /id="saved-status"[^>]*role="status" aria-live="polite"/);
   const mutationUi = appSource.slice(
     appSource.indexOf("function savedMutationFailed"),
     appSource.indexOf("function openOpportunityAlert"),
