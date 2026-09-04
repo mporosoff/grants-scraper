@@ -335,7 +335,11 @@ test("administrator assets present a bounded review and a full action outcome", 
   assert.match(ADMIN_JS, /Shared directory pages are ignored as identity evidence/);
   assert.match(ADMIN_JS, /showOutcome\(action, response/);
   assert.match(ADMIN_JS, /approvedEditor\.addEventListener\("input", previewApprovedEditor\)/);
-  assert.match(ADMIN_JS, /showOutcome\(action, response, reason \|\| response\.administrator_reason \|\| "", profile\)/);
+  assert.match(ADMIN_JS, /active\.publication_target_pr_url && active\.state === "publishing"/);
+  assert.match(ADMIN_JS, /const actionReason = action === "reconcile_publish" \? "" : reason/);
+  assert.match(ADMIN_JS, /reason: actionReason/);
+  assert.match(ADMIN_JS, /const outcomeReason = action === "reconcile_publish" \? "" : \(actionReason \|\| response\.administrator_reason \|\| ""\)/);
+  assert.match(ADMIN_JS, /showOutcome\(action, response, outcomeReason, profile\)/);
   assert.doesNotMatch(ADMIN_JS, /JSON\.stringify\(item\.trust_signals\)/);
 });
 

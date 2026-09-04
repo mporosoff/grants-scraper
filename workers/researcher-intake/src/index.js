@@ -708,7 +708,7 @@ const ADMIN_JS = `(() => {
     }[active.state] || [];
     const stale = (active.validator_warnings || []).some(warning => warning.includes("older registry generation"));
     if (stale && ["pending", "under_review", "changes_requested", "approved", "publication_failed"].includes(active.state)) visible.unshift("rebase");
-    if (active.publication_target_pr_url && ["publishing", "publication_failed"].includes(active.state)) visible.push("reconcile_publish");
+    if (active.publication_target_pr_url && active.state === "publishing") visible.push("reconcile_publish");
     document.querySelectorAll("[data-action]").forEach(button => {
       button.hidden = !visible.includes(button.dataset.action);
       button.disabled = false;
@@ -802,11 +802,13 @@ const ADMIN_JS = `(() => {
       document.querySelectorAll("[data-action]").forEach(actionButton => { actionButton.disabled = true; });
       status.hidden = true;
       try {
+        const actionReason = action === "reconcile_publish" ? "" : reason;
         const response = await api("/admin/api/submissions/" + encodeURIComponent(active.submission_id) + "/action", {
           method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action, expected_revision: active.revision, approved_profile: profile, reason }),
+          body: JSON.stringify({ action, expected_revision: active.revision, approved_profile: profile, reason: actionReason }),
         });
-        showOutcome(action, response, reason || response.administrator_reason || "", profile);
+        const outcomeReason = action === "reconcile_publish" ? "" : (actionReason || response.administrator_reason || "");
+        showOutcome(action, response, outcomeReason, profile);
       } catch (error) {
         const submissionId = active.submission_id;
         if (["approve", "retry_publish"].includes(action) && error.status >= 500) {
