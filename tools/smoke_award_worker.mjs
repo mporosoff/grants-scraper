@@ -102,8 +102,10 @@ for (const body of [
 const corsResponses = [];
 const dodPayload = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
   limit: 1,
-  fetchImpl: async (url, options) => {
-    const response = await fetch(url, options);
+  fetchImpl: async (url, options = {}) => {
+    const headers = new Headers(options.headers);
+    headers.set("Origin", origin);
+    const response = await fetch(url, { ...options, headers });
     corsResponses.push(response.headers.get("access-control-allow-origin"));
     return response;
   },
