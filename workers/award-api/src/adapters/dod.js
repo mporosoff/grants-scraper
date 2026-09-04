@@ -7,7 +7,13 @@ import {
   safeOfficialUrl,
   uniqueStrings,
 } from "../contract.js";
-import { AwardSourceError, fetchSourceJson } from "../http.js";
+import {
+  AwardSourceError,
+  SOURCE_TIMEOUT_MS,
+  boundedRequestTimeout,
+  fetchSourceJson,
+  withinOperationBudget,
+} from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
@@ -18,6 +24,10 @@ export const DOD_MAX_RESULTS = 25;
 export const DOD_UPSTREAM_PAGE_SIZE = 25;
 export const DOD_MAX_UPSTREAM_PAGES = 12;
 export const DOD_DETAIL_CONCURRENCY = 3;
+export const DOD_SEARCH_REQUEST_TIMEOUT_MS = 20_000;
+export const DOD_OPERATION_BUDGET_MS = 100_000;
+export const DOD_DETAIL_CACHE_TIMEOUT_MS = 2_000;
+export const DOD_SOURCE_WRAPPER_TIMEOUT_MS = 2_000;
 
 const DOD_AGENCY_NAME = "Department of Defense";
 const DOD_AWARD_TYPE_CODES = Object.freeze(["04", "05"]);
@@ -287,15 +297,21 @@ function detailCacheRequest(generatedId) {
   return new Request(`https://award-cache.internal/v1/dod-detail/${encodeURIComponent(generatedId)}`);
 }
 
-async function readDetail(fetchImpl, generatedId, { cache, cacheTtl }) {
+async function readDetail(fetchImpl, generatedId, {
+  cache,
+  cacheTtl,
+  detailCacheTimeoutMs,
+  monotonicNow,
+  operationDeadline,
+}) {
   const key = detailCacheRequest(generatedId);
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) {
-        const payload = await cached.json();
-        if (cleanText(payload?.generated_unique_award_id, 300) === generatedId) return { payload, cache: "hit" };
-      }
+      const payload = await withinOperationBudget(async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      }, monotonicNow, operationDeadline, detailCacheTimeoutMs);
+      if (cleanText(payload?.generated_unique_award_id, 300) === generatedId) return { payload, cache: "hit" };
     } catch {
       // A detail-cache outage must not discard the base USAspending award.
     }
@@ -303,16 +319,23 @@ async function readDetail(fetchImpl, generatedId, { cache, cacheTtl }) {
   const encodedId = encodeURIComponent(generatedId);
   const payload = await fetchSourceJson(fetchImpl, `${DOD_DETAIL_URL}/${encodedId}/`, {
     headers: { Accept: "application/json" },
+  }, {
+    timeoutMs: boundedRequestTimeout(monotonicNow, operationDeadline, SOURCE_TIMEOUT_MS),
   });
   if (cleanText(payload?.generated_unique_award_id, 300) !== generatedId) sourceInvalid();
   if (cache) {
     try {
-      await cache.put(key, new Response(JSON.stringify(payload), {
-        headers: {
-          "Cache-Control": `public, max-age=${cacheTtl}`,
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      }));
+      await withinOperationBudget(
+        () => cache.put(key, new Response(JSON.stringify(payload), {
+          headers: {
+            "Cache-Control": `public, max-age=${cacheTtl}`,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })),
+        monotonicNow,
+        operationDeadline,
+        detailCacheTimeoutMs,
+      );
     } catch {
       // Successful live detail data remains usable if cache storage fails.
     }
@@ -490,11 +513,16 @@ export async function searchDod(fetchImpl, criteria, {
   limit = DOD_MAX_RESULTS,
   offset = 0,
   now = () => new Date(),
+  monotonicNow = () => performance.now(),
+  operationDeadline: inheritedOperationDeadline = null,
   scanAll = false,
   cache = null,
   cacheTtl = 3_600,
+  searchRequestTimeoutMs = DOD_SEARCH_REQUEST_TIMEOUT_MS,
+  detailCacheTimeoutMs = DOD_DETAIL_CACHE_TIMEOUT_MS,
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
+  const operationDeadline = inheritedOperationDeadline ?? monotonicNow() + DOD_OPERATION_BUDGET_MS;
   const retrievedAt = now().toISOString();
   const yearFilter = yearFilterDiagnostics(criteria);
   const targetCount = scanAll ? DOD_MAX_RESULTS : offset + limit + 1;
@@ -536,6 +564,8 @@ export async function searchDod(fetchImpl, criteria, {
         method: "POST",
         headers: REQUEST_HEADERS,
         body: JSON.stringify(body),
+      }, {
+        timeoutMs: boundedRequestTimeout(monotonicNow, operationDeadline, searchRequestTimeoutMs),
       });
       const parsed = searchRecords(payload, query.page);
       progressed = true;
@@ -570,7 +600,13 @@ export async function searchDod(fetchImpl, criteria, {
   const selected = scanAll
     ? sourceScoped.slice(0, DOD_MAX_RESULTS)
     : sourceScoped.slice(offset, offset + limit);
-  const enrichment = await enrichDetails(fetchImpl, selected, { cache, cacheTtl });
+  const enrichment = await enrichDetails(fetchImpl, selected, {
+    cache,
+    cacheTtl,
+    detailCacheTimeoutMs,
+    monotonicNow,
+    operationDeadline,
+  });
   // Current search rows were already validated before slicing. Detail payloads
   // enrich them but do not own award ID, recipient identity, or signed year.
   const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, {

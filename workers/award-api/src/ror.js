@@ -1,5 +1,5 @@
 import { cleanText, uniqueStrings } from "./contract.js";
-import { AwardSourceError, fetchSourceJson } from "./http.js";
+import { AwardSourceError, SOURCE_TIMEOUT_MS, fetchSourceJson } from "./http.js";
 
 const ROR_API = "https://api.ror.org/v2/organizations";
 const ROR_ADAPTER_VERSION = "1.3.0";
@@ -152,12 +152,12 @@ export async function searchRor(fetchImpl, query, { limit = ROR_RESULT_LIMIT } =
   };
 }
 
-export async function resolveRorOrganization(fetchImpl, id) {
+export async function resolveRorOrganization(fetchImpl, id, { timeoutMs = SOURCE_TIMEOUT_MS } = {}) {
   const url = rorRecordUrl(id);
   if (!url) throw new AwardSourceError("invalid_institution_identity", "unsupported");
   const payload = await fetchSourceJson(fetchImpl, url, {
     headers: { Accept: "application/json" },
-  });
+  }, { timeoutMs });
   const organization = normalizeRorOrganization(payload, "");
   if (!organization || organization.id !== safeRorId(id)) {
     throw new AwardSourceError("source_invalid_response");

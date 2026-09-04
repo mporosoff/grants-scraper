@@ -1,6 +1,17 @@
 const baseUrl = String(process.env.AWARD_API_URL || "https://funding-finder-award-api.urochestercheme.workers.dev/").trim();
 const origin = "https://mporosoff.github.io";
 
+function failureDetail(payload) {
+  const sources = Array.isArray(payload?.sources) ? payload.sources : [];
+  const sourceDetails = sources.map(source => [
+    source?.source,
+    source?.status,
+    source?.error?.code,
+  ].filter(Boolean).join(":"))
+    .filter(Boolean);
+  return sourceDetails.join(", ") || payload?.error?.code || "unknown_error";
+}
+
 async function jsonRequest(path, options = {}) {
   const response = await fetch(new URL(path, baseUrl), {
     ...options,
@@ -8,7 +19,9 @@ async function jsonRequest(path, options = {}) {
     signal: AbortSignal.timeout(45_000),
   });
   const payload = await response.json();
-  if (!response.ok) throw new Error(`${path} returned ${response.status}`);
+  if (!response.ok) {
+    throw new Error(`${path} returned ${response.status} (${failureDetail(payload)})`);
+  }
   return payload;
 }
 
@@ -45,6 +58,9 @@ if (health.normalized_paging?.NSF?.upstream_pages !== 12
   || health.normalized_paging?.DOE?.maximum_normalized_offset !== 100
   || health.normalized_paging?.DOE?.maximum_identity_queries !== 3
   || health.normalized_paging?.DOD?.upstream_page_size !== 25
+  || health.normalized_paging?.DOD?.detail_cache_timeout_ms !== 2_000
+  || health.normalized_paging?.DOD?.operation_budget_ms !== 100_000
+  || health.normalized_paging?.DOD?.source_wrapper_timeout_ms !== 2_000
   || health.source_capabilities?.DOD?.award_scope !== "prime_assistance_awards_04_05_only") {
   throw new Error("Award Worker health did not advertise the bounded normalized paging contract.");
 }

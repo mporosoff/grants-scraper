@@ -6,20 +6,33 @@ import vm from "node:vm";
 import {
   DOD_ADAPTER_VERSION,
   DOD_CAPABILITIES,
+  DOD_DETAIL_CACHE_TIMEOUT_MS,
   DOD_DETAIL_URL,
   DOD_MAX_UPSTREAM_PAGES,
+  DOD_OPERATION_BUDGET_MS,
+  DOD_SEARCH_REQUEST_TIMEOUT_MS,
   DOD_SEARCH_URL,
+  DOD_SOURCE_WRAPPER_TIMEOUT_MS,
   buildDodRequest,
   normalizeDodAward,
   searchDod,
 } from "../../workers/award-api/src/adapters/dod.js";
 import { AwardSourceError } from "../../workers/award-api/src/http.js";
+import {
+  createHandler,
+  loadSnapshot,
+  runInstitutionResolution,
+  runSource,
+  storeSnapshot,
+} from "../../workers/award-api/src/index.js";
 import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
+import { buildAwardSnapshot } from "../../workers/award-api/src/snapshot.js";
 
 const root = new URL("../../", import.meta.url);
-const [searchFixture, detailFixture, linksSource] = await Promise.all([
+const [searchFixture, detailFixture, rorFixture, linksSource] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/dod_search_results.json", root), "utf8").then(JSON.parse),
   readFile(new URL("tests/fixtures/awards/dod_award_detail.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/award-links.js", root), "utf8"),
 ]);
 const fixedNow = () => new Date("2026-09-03T14:00:00.000Z");
@@ -34,6 +47,27 @@ function memoryCache() {
     async put(request, response) {
       values.set(request.url, response.clone());
     },
+  };
+}
+
+function awardWorkerEnv() {
+  const limiter = {
+    idFromName: name => name,
+    get: () => ({
+      fetch: async () => new Response(JSON.stringify({ success: true }), {
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
+  };
+  return {
+    AWARD_API_ENABLED: "true",
+    CACHE_TTL_SECONDS: "3600",
+    MAX_SOURCE_RESULTS: "25",
+    AWARD_SOURCE_RATE_LIMIT: "12",
+    ROR_SEARCH_RATE_LIMIT: "60",
+    ROR_RESOLVE_RATE_LIMIT: "20",
+    AWARD_RATE_LIMIT_SECRET: "deterministic-award-rate-limit-secret",
+    AWARD_RATE_LIMITER: limiter,
   };
 }
 
@@ -52,6 +86,11 @@ function fixtureFetch({ detailFails = false, calls = [], searchPayload = searchF
 
 test("DoD search uses only prime 04/05 assistance awards and supported exact filters", () => {
   assert.equal(DOD_ADAPTER_VERSION, "1.0.0");
+  assert.equal(DOD_SEARCH_REQUEST_TIMEOUT_MS, 20_000);
+  assert.equal(DOD_OPERATION_BUDGET_MS, 100_000);
+  assert.equal(DOD_DETAIL_CACHE_TIMEOUT_MS, 2_000);
+  assert.equal(DOD_SOURCE_WRAPPER_TIMEOUT_MS, 2_000);
+  assert.ok(DOD_OPERATION_BUDGET_MS < 120_000);
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const body = buildDodRequest({
     award_id: "fa9550261b195",
@@ -103,6 +142,368 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
     );
   }
   assert.equal(DOD_CAPABILITIES.fields.abstract, "unavailable_at_source");
+});
+
+test("DoD reapplies the remaining operation budget to every USAspending page", async () => {
+  const records = Array.from({ length: 25 }, (_, index) => ({
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": `FA9550BUDGET${String(index + 1).padStart(2, "0")}`,
+    generated_internal_id: `ASST_NON_FA9550BUDGET${String(index + 1).padStart(2, "0")}_097`,
+  }));
+  let searchCalls = 0;
+  let finalSignal = null;
+  const fetchImpl = async (url, options = {}) => {
+    assert.equal(String(url), DOD_SEARCH_URL);
+    searchCalls += 1;
+    if (searchCalls === 1) {
+      return new Response(JSON.stringify({
+        results: records,
+        page_metadata: {
+          page: 1,
+          total: 50,
+          hasNext: true,
+          last_record_unique_id: 9100,
+          last_record_sort_value: records.at(-1)["Award ID"],
+        },
+      }), { headers: { "Content-Type": "application/json" } });
+    }
+    finalSignal = options.signal;
+    return new Promise((resolve, reject) => {
+      const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
+      if (finalSignal.aborted) abort();
+      else finalSignal.addEventListener("abort", abort, { once: true });
+    });
+  };
+  const clock = [0, 0, DOD_OPERATION_BUDGET_MS - 5];
+  const started = performance.now();
+
+  await assert.rejects(
+    () => searchDod(fetchImpl, {}, {
+      limit: 1,
+      offset: 25,
+      now: fixedNow,
+      monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS - 5,
+      searchRequestTimeoutMs: 500,
+    }),
+    error => error instanceof AwardSourceError && error.code === "source_timeout",
+  );
+  assert.equal(searchCalls, 2);
+  assert.ok(finalSignal instanceof AbortSignal);
+  assert.ok(performance.now() - started < 250, "the final page must receive only the five-millisecond remaining budget");
+});
+
+test("DoD detail enrichment shares the operation budget and retains base awards", async () => {
+  let detailCalls = 0;
+  const clock = [0, 0, DOD_OPERATION_BUDGET_MS + 1];
+  const fetchImpl = async (url) => {
+    if (String(url) === DOD_SEARCH_URL) {
+      return new Response(JSON.stringify(searchFixture), { headers: { "Content-Type": "application/json" } });
+    }
+    detailCalls += 1;
+    return new Response(JSON.stringify(detailFixture), { headers: { "Content-Type": "application/json" } });
+  };
+  const result = await searchDod(fetchImpl, {}, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+    monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS + 1,
+  });
+  assert.equal(detailCalls, 0);
+  assert.equal(result.results[0].award_id, "FA9550261B195");
+  assert.equal(result.health.status, "degraded");
+  assert.equal(result.health.detail_requests, 1);
+  assert.equal(result.health.details_failed, 1);
+});
+
+test("DoD bounds slow detail-cache reads and writes without discarding live detail", async () => {
+  for (const slowOperation of ["match", "put"]) {
+    let delayedTimer = null;
+    const cache = {
+      match: slowOperation === "match"
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(() => resolve(null), 500); })
+        : async () => null,
+      put: slowOperation === "put"
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); })
+        : async () => {},
+    };
+    const started = performance.now();
+    const result = await searchDod(fixtureFetch(), {}, {
+      limit: 1,
+      offset: 0,
+      now: fixedNow,
+      cache,
+      cacheTtl: 3_600,
+      detailCacheTimeoutMs: 5,
+    });
+    clearTimeout(delayedTimer);
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive its cache budget`);
+    assert.equal(result.results[0].opportunity_numbers[0], "NOFOAFRLAFOSR20250002");
+    assert.equal(result.health.status, "available");
+    assert.equal(result.health.details_loaded, 1);
+  }
+});
+
+test("DoD source-cache and rate-limit wrapper I/O share the operation deadline", async () => {
+  const request = {
+    publicCriteria: { award_id: "FA9550261B195" },
+    resolvedCriteria: { award_id: "FA9550261B195" },
+    limit: 1,
+    offset: 0,
+    scanAll: false,
+    includeAbstracts: true,
+  };
+  for (const slowOperation of ["source_match", "guard", "source_put"]) {
+    let delayedTimer = null;
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const isSourceCacheKey = key => /\/v1\/dod\/[a-f0-9]{64}$/.test(key.url);
+    const cache = {
+      async match(key) {
+        if (slowOperation === "source_match" && isSourceCacheKey(key)) return delayed();
+        return null;
+      },
+      async put(key) {
+        if (slowOperation === "source_put" && isSourceCacheKey(key)) await delayed();
+      },
+    };
+    const guard = slowOperation === "guard" ? delayed : async () => true;
+    const started = performance.now();
+    try {
+      const operation = runSource({
+        source: "DOD",
+        request,
+        fetchImpl: fixtureFetch(),
+        cache,
+        cacheTtl: 3_600,
+        asOf: fixedNow().toISOString(),
+        guard,
+        rateLimit: 12,
+        sourceWrapperTimeoutMs: 5,
+      });
+      if (slowOperation === "guard") {
+        await assert.rejects(
+          operation,
+          error => error instanceof AwardSourceError && error.code === "source_timeout",
+        );
+      } else {
+        const result = await operation;
+        assert.equal(result.results[0].award_id, "FA9550261B195");
+      }
+    } finally {
+      clearTimeout(delayedTimer);
+    }
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the source wrapper budget`);
+  }
+});
+
+test("DoD bounds ROR identity cache, guard, and upstream work within the same operation deadline", async () => {
+  const request = {
+    id: "https://ror.org/05dxps055",
+    name: "California Institute of Technology",
+  };
+  const rorOrganization = rorFixture.Caltech.items[0];
+  for (const slowOperation of ["identity_match", "guard", "identity_put"]) {
+    let delayedTimer = null;
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const cache = {
+      async match() {
+        return slowOperation === "identity_match" ? delayed() : null;
+      },
+      async put() {
+        if (slowOperation === "identity_put") await delayed();
+      },
+    };
+    const guard = slowOperation === "guard" ? delayed : async () => true;
+    const started = performance.now();
+    try {
+      const operation = runInstitutionResolution({
+        request,
+        fetchImpl: async () => new Response(JSON.stringify(rorOrganization), {
+          headers: { "Content-Type": "application/json" },
+        }),
+        cache,
+        cacheTtl: 3_600,
+        guard,
+        rateLimit: 20,
+        monotonicNow: () => 0,
+        operationDeadline: 1_000,
+        operationTimeoutMs: 5,
+      });
+      if (slowOperation === "guard") {
+        await assert.rejects(
+          operation,
+          error => error instanceof AwardSourceError && error.code === "source_timeout",
+        );
+      } else {
+        const institution = await operation;
+        assert.equal(institution.ror_id, request.id);
+      }
+    } finally {
+      clearTimeout(delayedTimer);
+    }
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the DoD request budget`);
+  }
+
+  let upstreamSignal = null;
+  const upstreamClock = [0, 995];
+  const started = performance.now();
+  await assert.rejects(
+    () => runInstitutionResolution({
+      request,
+      fetchImpl: async (_url, options = {}) => {
+        upstreamSignal = options.signal;
+        return new Promise((resolve, reject) => {
+          const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
+          if (upstreamSignal.aborted) abort();
+          else upstreamSignal.addEventListener("abort", abort, { once: true });
+        });
+      },
+      cache: null,
+      cacheTtl: 3_600,
+      monotonicNow: () => upstreamClock.shift() ?? 995,
+      operationDeadline: 1_000,
+    }),
+    error => error instanceof AwardSourceError && error.code === "source_timeout",
+  );
+  assert.ok(upstreamSignal instanceof AbortSignal);
+  assert.ok(performance.now() - started < 250, "ROR fetch must receive only the remaining DoD request budget");
+});
+
+test("DoD handler starts its deadline before non-curated ROR resolution", async () => {
+  let elapsed = 0;
+  let dodSearchCalls = 0;
+  const handler = createHandler({
+    now: fixedNow,
+    monotonicNow: () => elapsed,
+    fetchImpl: async (url) => {
+      if (String(url).includes("api.ror.org/v2/organizations/05dxps055")) {
+        elapsed = DOD_OPERATION_BUDGET_MS + 1;
+        return new Response(JSON.stringify(rorFixture.Caltech.items[0]), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      if (String(url) === DOD_SEARCH_URL) dodSearchCalls += 1;
+      return new Response(JSON.stringify(searchFixture), {
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  });
+  const response = await handler(new Request("https://award.test/awards/search", {
+    method: "POST",
+    headers: { Origin: "http://localhost:8000", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sources: ["DOD"],
+      criteria: {
+        institution: "California Institute of Technology",
+        institution_id: "https://ror.org/05dxps055",
+      },
+      limit: 1,
+      offset: 0,
+    }),
+  }), awardWorkerEnv());
+  const payload = await response.json();
+  assert.equal(response.status, 503, JSON.stringify(payload));
+  assert.equal(dodSearchCalls, 0, "elapsed ROR work must leave no fresh DoD source budget");
+  assert.deepEqual(payload.results, []);
+  assert.deepEqual(payload.sources, [{
+    source: "DOD",
+    status: "unavailable",
+    error: { code: "source_timeout" },
+  }]);
+});
+
+test("DoD bounds required snapshot reads and persistence within the request deadline", async () => {
+  const snapshotId = "a".repeat(64);
+  const snapshot = {
+    snapshot_contract_version: 1,
+    snapshot_id: snapshotId,
+    awards: [],
+    source_metadata: {},
+  };
+  for (const slowOperation of ["load_match", "store_put", "store_match"]) {
+    let delayedTimer = null;
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const cache = {
+      async match() {
+        if (["load_match", "store_match"].includes(slowOperation)) return delayed();
+        return new Response(JSON.stringify(snapshot), { headers: { "Content-Type": "application/json" } });
+      },
+      async put() {
+        if (slowOperation === "store_put") await delayed();
+      },
+    };
+    const options = {
+      monotonicNow: () => 0,
+      operationDeadline: 1_000,
+      operationTimeoutMs: 5,
+    };
+    const started = performance.now();
+    try {
+      if (slowOperation === "load_match") {
+        await assert.rejects(
+          () => loadSnapshot(cache, snapshotId, options),
+          error => error instanceof AwardSourceError && error.code === "source_timeout",
+        );
+      } else {
+        assert.equal(await storeSnapshot(cache, snapshot, 3_600, options), false);
+      }
+    } finally {
+      clearTimeout(delayedTimer);
+    }
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the DoD request budget`);
+  }
+});
+
+test("DoD snapshot retry inherits the request-entry deadline after snapshot loading", async () => {
+  const snapshotId = "c".repeat(64);
+  const original = buildAwardSnapshot({
+    snapshotId,
+    queryId: "d".repeat(64),
+    asOf: fixedNow().toISOString(),
+    request: { sources: ["DOD"], criteria: { award_id: "FA9550261B195" } },
+    sourcePayloads: {
+      DOD: { source: "DOD", status: "unavailable", error: { code: "source_timeout" } },
+    },
+  });
+  original.runtime_request = {
+    sources: ["DOD"],
+    publicCriteria: { award_id: "FA9550261B195" },
+    resolvedCriteria: { award_id: "FA9550261B195" },
+    limit: 1,
+    offset: 0,
+    scanAll: true,
+    includeAbstracts: false,
+  };
+  let elapsed = 0;
+  let dodSearchCalls = 0;
+  const cache = {
+    async match(request) {
+      if (String(request.url).includes("award-snapshot.internal")) {
+        elapsed = DOD_OPERATION_BUDGET_MS + 1;
+        return new Response(JSON.stringify(original), { headers: { "Content-Type": "application/json" } });
+      }
+      return null;
+    },
+    async put() {},
+  };
+  const handler = createHandler({
+    cache,
+    now: fixedNow,
+    monotonicNow: () => elapsed,
+    fetchImpl: async () => {
+      dodSearchCalls += 1;
+      return new Response(JSON.stringify(searchFixture), { headers: { "Content-Type": "application/json" } });
+    },
+  });
+  const response = await handler(new Request("https://award.test/awards/snapshots/retry", {
+    method: "POST",
+    headers: { Origin: "http://localhost:8000", "Content-Type": "application/json" },
+    body: JSON.stringify({ snapshot_id: snapshotId, source: "DOD" }),
+  }), awardWorkerEnv());
+  const payload = await response.json();
+  assert.equal(response.status, 503, JSON.stringify(payload));
+  assert.equal(dodSearchCalls, 0, "snapshot read time must not be followed by a fresh DoD budget");
+  assert.equal(payload.retry.source, "DOD");
+  assert.equal(payload.retry.error.code, "source_timeout");
 });
 
 test("DoD normalization preserves obligations, Assistance Listing, office, and official links", () => {
