@@ -3,8 +3,8 @@ import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 
-import { createHandler } from "../../workers/award-api/src/index.js";
-import { AwardRateLimiter } from "../../workers/award-api/src/rate-limit.js";
+import { ADAPTER_VERSIONS, createHandler } from "../../workers/award-api/src/index.js";
+import { AwardRateLimiter, BUCKETS } from "../../workers/award-api/src/rate-limit.js";
 
 const root = new URL("../../", import.meta.url);
 const [nsfFixture, rorFixture] = await Promise.all([
@@ -121,6 +121,19 @@ test("FF-BUG-010 Durable Object counters are atomic, source-scoped, and roll ove
     "SELECT request_count FROM counters WHERE bucket='award:NSF'",
   ).get().request_count, 1);
   assert.equal((await consume(limiter, { bucket: "unbounded:caller" })).response.status, 400);
+});
+
+test("every advertised award adapter has an accepted source-rate bucket", async () => {
+  const expected = Object.keys(ADAPTER_VERSIONS).map(source => `award:${source}`).sort();
+  const actual = [...BUCKETS].filter(bucket => bucket.startsWith("award:")).sort();
+  assert.deepEqual(actual, expected);
+
+  const limiter = new AwardRateLimiter(context());
+  for (const bucket of expected) {
+    const attempt = await consume(limiter, { bucket, limit: 1 });
+    assert.equal(attempt.response.status, 200, `${bucket} should be accepted`);
+    assert.equal(attempt.body.success, true, `${bucket} should receive its first request`);
+  }
 });
 
 test("FF-BUG-010 Award and ROR limits protect only cache misses and never store a raw address", async () => {
