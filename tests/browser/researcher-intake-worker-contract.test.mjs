@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
+import { load as loadHtml } from "cheerio";
 
 import { enforceClaimContinuity, enforceSubmittedRelationship, validateAdminProfile, validateSubmission } from "../../workers/researcher-intake/src/contract.js";
-import { canonicalSortName, createHandler, reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry } from "../../workers/researcher-intake/src/index.js";
+import {
+  ADMIN_CSS, ADMIN_HTML, ADMIN_JS, canonicalSortName, createHandler, duplicateCandidates,
+  reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry,
+} from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
 
 const root = new URL("../../", import.meta.url);
@@ -254,6 +258,57 @@ test("correction approval defaults apply submitted additions and retirements", (
   }, "2026-09-03").sort_name, "Brown, Edward III");
 });
 
+test("identity review ignores the selected profile and shared directory links but keeps real conflicts", () => {
+  const sharedSource = "https://example.edu/faculty";
+  const current = {
+    id: "urh-000001", name: "Ada Lovelace", aliases: ["Augusta Ada King"],
+    orcid_id: "0000-0002-1825-0097", source_urls: [sharedSource, "https://example.edu/ada"],
+  };
+  const otherResearchers = Array.from({ length: 59 }, (_, index) => ({
+    id: `urh-${String(index + 2).padStart(6, "0")}`,
+    name: `Researcher ${index + 2}`, aliases: [], orcid_id: "", source_urls: [sharedSource],
+  }));
+  const directory = { researchers: [current, ...otherResearchers] };
+  const correction = {
+    submission_type: "profile_correction", researcher_id: current.id,
+    proposed_profile: {
+      display_name: current.name, orcid_id: current.orcid_id,
+      source_urls: [sharedSource, "https://example.edu/ada"],
+    },
+  };
+  assert.deepEqual(duplicateCandidates(directory, correction), []);
+  assert.deepEqual(duplicateCandidates(directory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "A Different Person", orcid_id: "", source_urls: [sharedSource] },
+  }), []);
+  assert.deepEqual(duplicateCandidates(directory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "Ada Lovelace", orcid_id: "", source_urls: ["https://new.example/ada"] },
+  }), [{ researcher_id: current.id, display_name: current.name, reasons: ["same_name"] }]);
+  assert.deepEqual(duplicateCandidates(directory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "A. King", orcid_id: "", source_urls: ["https://example.edu/ada#research"] },
+  }), [{ researcher_id: current.id, display_name: current.name, reasons: ["same_unique_source"] }]);
+});
+
+test("administrator assets present a bounded review and a full action outcome", () => {
+  assert.doesNotThrow(() => new Function(ADMIN_JS));
+  const $ = loadHtml(ADMIN_HTML);
+  const ids = $("[id]").map((_, element) => $(element).attr("id")).get();
+  assert.equal(new Set(ids).size, ids.length);
+  for (const id of ["queue-view", "detail", "comparison", "approved", "admin-status", "outcome", "outcome-back"]) {
+    assert.equal($(`#${id}`).length, 1);
+  }
+  assert.match(ADMIN_HTML, /id="comparison"/);
+  assert.match(ADMIN_HTML, /id="outcome"/);
+  assert.match(ADMIN_HTML, /Advanced: inspect or edit the complete registry record/);
+  assert.match(ADMIN_CSS, /\.queue-card/);
+  assert.match(ADMIN_CSS, /grid-template-columns:minmax\(200px,1\.4fr\)/);
+  assert.match(ADMIN_JS, /Shared directory pages are ignored as identity evidence/);
+  assert.match(ADMIN_JS, /showOutcome\(action, response/);
+  assert.doesNotMatch(ADMIN_JS, /JSON\.stringify\(item\.trust_signals\)/);
+});
+
 test("publication retries revalidate corrected approvals against the live registry", async () => {
   const registryGeneration = "a".repeat(64);
   const currentProfile = {
@@ -292,6 +347,12 @@ test("publication retries revalidate corrected approvals against the live regist
   await assert.rejects(
     validateApprovalAgainstCurrentRegistry(current, approvedProfile, env, fetchImpl),
     /already belongs to another researcher/,
+  );
+  await assert.rejects(
+    validateApprovalAgainstCurrentRegistry(current, {
+      ...approvedProfile, display_name: otherProfile.name, sort_name: "Hopper, Grace", orcid_id: "",
+    }, env, fetchImpl),
+    error => error.code === "identity_conflict" && /conflicts with an existing researcher identity/.test(error.message),
   );
   const corrected = await validateApprovalAgainstCurrentRegistry(
     current, { ...approvedProfile, orcid_id: "" }, env, fetchImpl,
@@ -449,6 +510,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);
   assert.match(workerSource, /body\.action === "retry_publish"[\s\S]*validateApprovalAgainstCurrentRegistry\(current, body\.approved_profile/);
+  assert.match(workerSource, /Start review before approving this request/);
+  assert.match(workerSource, /fail\("identity_conflict"/);
   assert.match(workerSource, /store\.markPublishing\(current\.submission_id, expectedRevision, actor, now\(\)\.toISOString\(\), approvedProfile\)/);
   assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
