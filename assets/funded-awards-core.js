@@ -269,6 +269,19 @@
     ));
   }
 
+  function enrichmentWarnings(source) {
+    const count = value => {
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number > 0 ? number : 0;
+    };
+    const abstracts = count(source?.health?.abstracts_failed);
+    const details = count(source?.health?.details_failed);
+    return [
+      abstracts ? `${abstracts.toLocaleString()} public ${abstracts === 1 ? "abstract" : "abstracts"} unavailable` : "",
+      details ? `${details.toLocaleString()} public award ${details === 1 ? "detail" : "details"} unavailable` : "",
+    ].filter(Boolean);
+  }
+
   globalThis.FUNDING_AWARD_PRODUCT = Object.freeze({
     awardYear,
     awardYearRange,
@@ -276,6 +289,7 @@
     buildRequest,
     canPageForward,
     displayInvestigatorName,
+    enrichmentWarnings,
     institutionSummary,
     paginationLabel,
     presentFiniteNumber,

@@ -37,13 +37,13 @@ function memoryCache() {
   };
 }
 
-function fixtureFetch({ detailFails = false, calls = [], searchPayload = searchFixture } = {}) {
+function fixtureFetch({ detailFails = false, calls = [], searchPayload = searchFixture, detailPayload = detailFixture } = {}) {
   return async (url, options = {}) => {
     calls.push({ url: String(url), options });
     if (String(url).startsWith(DOD_DETAIL_URL)) {
       return detailFails
         ? new Response("unavailable", { status: 503 })
-        : new Response(JSON.stringify(detailFixture), { headers: { "Content-Type": "application/json" } });
+        : new Response(JSON.stringify(detailPayload), { headers: { "Content-Type": "application/json" } });
     }
     assert.equal(String(url), DOD_SEARCH_URL);
     return new Response(JSON.stringify(searchPayload), { headers: { "Content-Type": "application/json" } });
@@ -136,6 +136,32 @@ test("DoD normalization preserves obligations, Assistance Listing, office, and o
   assert.deepEqual(award.program_contacts, []);
   assert.deepEqual(award.annual_support, []);
   assert.equal(award.official_award_url, "https://www.usaspending.gov/award/ASST_NON_FA9550261B195_097/");
+});
+
+test("DoD preserves multiple Assistance Listings and makes an exact queried listing primary", async () => {
+  const detail = structuredClone(detailFixture);
+  detail.cfda_info = [
+    { cfda_number: "12.810", cfda_title: "Other Defense Program" },
+    { cfda_number: "12.800", cfda_title: "Air Force Defense Research Sciences Program" },
+    { cfda_number: "invalid", cfda_title: "Invalid Program" },
+    { cfda_number: "12.810", cfda_title: "Duplicate Defense Program" },
+  ];
+  const raw = {
+    generated_id: searchFixture.results[0].generated_internal_id,
+    award_id: searchFixture.results[0]["Award ID"],
+    award_type: searchFixture.results[0]["Award Type"],
+  };
+  const unfiltered = normalizeDodAward(raw, { detail, retrievedAt: fixedNow().toISOString() });
+  assert.deepEqual(unfiltered.program_codes, ["12.810", "12.800"]);
+  assert.equal(unfiltered.program_name, "Other Defense Program");
+
+  const searched = await searchDod(fixtureFetch({ detailPayload: detail }), { program: "12.800" }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.deepEqual(searched.results[0].program_codes, ["12.800", "12.810"]);
+  assert.equal(searched.results[0].program_name, "Air Force Defense Research Sciences Program");
 });
 
 test("DoD search enriches bounded returned records, caches details, and retains base records on detail failure", async () => {

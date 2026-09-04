@@ -631,6 +631,9 @@ test("result completeness is explained in one compact, plain-language status blo
   assert.match(styles, /\.ii-source-status li\s*\{[^}]*padding:\s*0;[^}]*background:\s*transparent/);
   assert.match(sourceStatusSource, /source\.status === "complete"[\s\S]*source\.source}: all/);
   assert.match(sourceStatusSource, /\["safety_bounded", "partial"\][\s\S]*source\.source}: at least/);
+  assert.match(sourceStatusSource, /awardProduct\.enrichmentWarnings\(source\)/);
+  assert.match(sourceStatusSource, /source\.health\?\.status === "degraded"/);
+  assert.match(sourceStatusSource, /Base award records remain available when optional public details cannot be loaded/);
   assert.match(sourceStatusSource, /“at least” means more matches may exist/);
   assert.match(sourceStatusSource, /list\.innerHTML = sources\.length \? `<li/);
   assert.doesNotMatch(sourceStatusSource, /sources\.map\(source => `<li/);

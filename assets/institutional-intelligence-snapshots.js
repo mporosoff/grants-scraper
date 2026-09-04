@@ -515,23 +515,30 @@
   function sourceStatusText(source) {
     const count = Number(source.result_count || 0);
     const awards = `${count.toLocaleString()} award${count === 1 ? "" : "s"}`;
-    if (source.status === "complete") return `${source.source}: all ${awards}`;
-    if (["safety_bounded", "partial"].includes(source.status)) return `${source.source}: at least ${awards}`;
-    if (source.status === "rate_limited") return `${source.source}: temporarily limited`;
-    if (source.status === "unsupported") return `${source.source}: these filters are not supported`;
-    if (source.error?.code === "source_timeout") return `${source.source}: timed out`;
-    return `${source.source}: temporarily unavailable`;
+    let summary;
+    if (source.status === "complete") summary = `${source.source}: all ${awards}`;
+    else if (["safety_bounded", "partial"].includes(source.status)) summary = `${source.source}: at least ${awards}`;
+    else if (source.status === "rate_limited") summary = `${source.source}: temporarily limited`;
+    else if (source.status === "unsupported") summary = `${source.source}: these filters are not supported`;
+    else if (source.error?.code === "source_timeout") summary = `${source.source}: timed out`;
+    else summary = `${source.source}: temporarily unavailable`;
+    const warnings = awardProduct.enrichmentWarnings(source);
+    return warnings.length ? `${summary}; ${warnings.join("; ")}` : summary;
   }
 
   function renderSourceStatus() {
     const sources = state.snapshot?.sources || [];
     const resultLimits = sources.some(source => ["safety_bounded", "partial"].includes(source.status));
     const sourceFailures = sources.some(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
+    const enrichmentFailures = sources.some(source => (
+      source.health?.status === "degraded" || awardProduct.enrichmentWarnings(source).length > 0
+    ));
     const notes = [];
     if (resultLimits) notes.push("Some databases cap how many results they return, so “at least” means more matches may exist.");
     if (sourceFailures) notes.push("Results from databases that did load are still shown.");
+    if (enrichmentFailures) notes.push("Base award records remain available when optional public details cannot be loaded.");
     const list = $("ii-source-status");
-    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures ? "limited" : "complete"}">
+    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures || enrichmentFailures ? "limited" : "complete"}">
       <span class="ii-source-status-summary"><strong>Results by source:</strong> ${escapeHtml(sources.map(sourceStatusText).join(" · "))}</span>
       ${notes.length ? `<span class="ii-source-status-help">${escapeHtml(notes.join(" "))}</span>` : ""}
     </li>` : "";

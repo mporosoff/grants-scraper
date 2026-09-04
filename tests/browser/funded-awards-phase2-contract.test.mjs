@@ -150,6 +150,12 @@ test("standalone searches use source-native criteria and never opportunity seman
     sources: [{ status: "ok", has_more: true, result_count: 25, total_count: null, raw_record_count: 100 }],
     pagination: { offset: 25, limit: 25 },
   }), true);
+  assert.deepEqual(Array.from(product.enrichmentWarnings({
+    health: { abstracts_failed: 1, details_failed: 2 },
+  })), [
+    "1 public abstract unavailable",
+    "2 public award details unavailable",
+  ]);
   assert.doesNotMatch(coreSource + appSource, /FUNDING_HYBRID_SEARCH|voyage|embedding|vectorUrl/i);
 });
 
@@ -222,8 +228,8 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(appSource, /View contact on official award page/);
   assert.match(appSource, /Official \$\{escapeHtml\(source\)\} record/);
   assert.match(appSource, /source-native order; no cross-source reranking/i);
-  assert.match(appSource, /source\.health\?\.details_failed/);
-  assert.match(appSource, /public award \$\{detailWarning === 1 \? "detail" : "details"\} unavailable/);
+  assert.match(appSource, /productApi\.enrichmentWarnings\(source\)/);
+  assert.match(appSource, /source\.health\?\.status === "degraded"/);
   assert.match(appSource, /history\[mode === "push" \? "pushState" : "replaceState"\]/);
   assert.match(appSource, /addEventListener\("popstate"/);
   assert.match(appSource, /params\.get\("institution"\)/);

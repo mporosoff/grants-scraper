@@ -320,6 +320,9 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(app, /snapshotPageUrl/);
   assert.match(app, /data-ii-load-source/);
   assert.match(app, /data-ii-retry-source/);
+  assert.match(app, /awardProduct\.enrichmentWarnings\(source\)/);
+  assert.match(app, /source\.health\?\.status === "degraded"/);
+  assert.match(app, /Base award records remain available when optional public details cannot be loaded/);
   const bodyRead = app.indexOf("await response.json().catch(() => null)");
   const timeoutRelease = app.indexOf("clearTimeout(timer)", bodyRead);
   assert.ok(bodyRead > -1 && timeoutRelease > bodyRead, "the bounded request timer must remain active while the response body is read");
@@ -347,12 +350,10 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
     "award-api-config.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundedAwards, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${dodStatusReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodStatusReleaseKey}`));
-  for (const asset of [
-    "institutional-intelligence-core.js",
-    "institutional-intelligence-snapshots.js",
-  ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-core\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-snapshots\\.js\\?v=${dodStatusReleaseKey}`));
   assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${dodReleaseKey}`));

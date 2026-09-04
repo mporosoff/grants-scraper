@@ -322,14 +322,23 @@ function detailPeriod(detail) {
   };
 }
 
-function detailListing(detail) {
-  const listings = Array.isArray(detail.cfda_info) ? detail.cfda_info : [];
-  const first = listings.map(object).find(item => assistanceListing(item.cfda_number));
-  const code = assistanceListing(firstText(first?.cfda_number, detail.cfda_number));
-  return {
-    code,
-    title: firstText(first?.cfda_title, detail.cfda_title),
-  };
+function detailListings(detail, requestedProgram = null) {
+  const values = [
+    ...(Array.isArray(detail.cfda_info) ? detail.cfda_info : []),
+    { cfda_number: detail.cfda_number, cfda_title: detail.cfda_title },
+  ];
+  const byCode = new Map();
+  for (const value of values.map(object)) {
+    const code = assistanceListing(value.cfda_number);
+    if (!code) continue;
+    const title = firstText(value.cfda_title);
+    const existing = byCode.get(code);
+    if (!existing || (!existing.title && title)) byCode.set(code, { code, title });
+  }
+  const requested = assistanceListing(requestedProgram);
+  const listings = [...byCode.values()];
+  if (!requested) return listings;
+  return listings.sort((left, right) => Number(right.code === requested) - Number(left.code === requested));
 }
 
 function detailOpportunity(detail) {
@@ -349,12 +358,13 @@ function uniqueBaseAwards(values) {
   });
 }
 
-export function normalizeDodAward(raw, { detail = null, retrievedAt } = {}) {
+export function normalizeDodAward(raw, { detail = null, retrievedAt, requestedProgram = null } = {}) {
   const sourceDetail = object(detail);
   const agency = detailAgency(sourceDetail);
   const recipient = detailRecipient(sourceDetail);
   const period = detailPeriod(sourceDetail);
-  const listing = detailListing(sourceDetail);
+  const listings = detailListings(sourceDetail, requestedProgram);
+  const primaryListing = listings[0] || {};
   const opportunityNumber = detailOpportunity(sourceDetail);
   const generatedId = firstText(sourceDetail.generated_unique_award_id, raw.generated_id);
   const officialUrl = safeOfficialUrl(
@@ -373,8 +383,8 @@ export function normalizeDodAward(raw, { detail = null, retrievedAt } = {}) {
     source: "DOD",
     agency: agency.agency || raw.agency || DOD_AGENCY_NAME,
     subagency: agency.subagency || raw.subagency,
-    program_name: listing.title,
-    program_codes: uniqueStrings([listing.code]),
+    program_name: primaryListing.title,
+    program_codes: uniqueStrings(listings.map(listing => listing.code)),
     opportunity_numbers: uniqueStrings([opportunityNumber]),
     activity_code: null,
     funding_mechanism: mechanism,
@@ -509,7 +519,11 @@ export async function searchDod(fetchImpl, criteria, {
     ? sourceScoped.slice(0, DOD_MAX_RESULTS)
     : sourceScoped.slice(offset, offset + limit);
   const enrichment = await enrichDetails(fetchImpl, selected, { cache, cacheTtl });
-  const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, { detail, retrievedAt }))
+  const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, {
+    detail,
+    retrievedAt,
+    requestedProgram: criteria.program,
+  }))
     .filter(award => !criteria.award_id || award.award_id === exactAwardId(criteria.award_id))
     .filter(award => recordSatisfiesYearFilter(award.award_year, criteria, yearFilter))
     .filter(award => recordMatchesInstitution(award, criteria._institution, "DOD"))

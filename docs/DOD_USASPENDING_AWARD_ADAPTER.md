@@ -19,8 +19,12 @@ The search endpoint supplies the bounded result page. Detail calls are made
 only for records returned to the caller or admitted to the active snapshot,
 with concurrency three and successful-detail caching. A failed detail call
 retains the base search record rather than converting the source to a failure;
-the response marks detail health as degraded and the interface displays the
-number of unavailable public detail records.
+the response marks detail health as degraded, and both the standalone and
+snapshot interfaces display the number of unavailable public detail records.
+All valid Assistance Listings returned by award detail are retained. When the
+search uses an exact Assistance Listing filter, that listing is placed first
+and supplies the card's program name while the other listings remain available
+for facets and provenance.
 Later result pages use USAspending's stable Award ID ordering and are reached
 sequentially from page one with the paired `last_record_unique_id` and
 `last_record_sort_value` continuation values. The adapter never jumps directly

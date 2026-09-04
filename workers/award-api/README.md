@@ -49,8 +49,10 @@ IDVs, direct payments, loans, subawards, and separate SBIR or DTIC feeds are
 outside this catalog. Detail enrichment is bounded to the returned page,
 concurrent in groups of three, and cached on successful responses. If a detail
 record fails, the base search result remains available with honest null fields,
-the source health is marked degraded, and the interface reports the failed-detail
-count.
+the source health is marked degraded, and both award interfaces report the
+failed-detail count. All valid Assistance Listings from award detail are
+retained; an exact queried listing is ordered first and supplies the displayed
+program name without discarding the award's other listings.
 Later USAspending result pages use stable Award ID ordering and are traversed
 sequentially with the paired continuation values returned by the preceding
 page; direct page jumps are not used. DoD offsets are applied after exact
