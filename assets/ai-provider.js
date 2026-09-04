@@ -3,8 +3,10 @@
 
   const OPENAI_MODEL = "gpt-5.6-luna";
   const ANTHROPIC_MODEL = "claude-sonnet-5";
+  const HOSTED_PROVIDER = "hosted";
   const MAX_OUTPUT_TOKENS = 5000;
-  const REQUEST_TIMEOUT_MS = 45_000;
+  const MAX_USER_CHARS = 170_000;
+  const REQUEST_TIMEOUT_MS = 60_000;
   const MAX_ATTEMPTS = 2;
 
   const stringArray = (maximum, itemMaximum = 240, minimum = 0) => ({
@@ -107,7 +109,7 @@
         type: "object",
         additionalProperties: false,
         properties: {
-          agency: { type: "string", enum: ["all", "NSF", "NIH", "DOE"] },
+          agency: { type: "string", enum: ["all", "NSF", "NIH", "DOE", "DOD"] },
           program: { type: "string", maxLength: 160 },
           topic: { type: "string", maxLength: 500 },
           pi: { type: "string", maxLength: 160 },
@@ -142,7 +144,7 @@
         properties: {
           intent: {
             type: "string",
-            enum: ["topical", "count", "investigators", "institutions", "programs", "years", "awards"],
+            enum: ["count", "investigators", "institutions", "programs", "years", "awards"],
           },
           concepts: {
             ...stringArray(16, 120),
@@ -213,7 +215,7 @@
   const ERROR_MESSAGES = Object.freeze({
     authentication: "The provider rejected this API key. Check or replace the key, then try again.",
     authorization_model: "This provider account cannot use the selected model. Check model access, then try again.",
-    quota_rate: "The provider reported a quota or rate limit. Check provider usage and billing, then try again.",
+    quota_rate: "The AI service is temporarily rate limited. Try again later; if you selected your own provider, also check its usage and billing.",
     unsupported_contract: "The selected provider or model does not support the required structured-response contract.",
     network_cors: "The browser could not reach the AI provider. Check the network and provider browser-access settings, then try again.",
     timeout: "The AI provider request timed out. Your search and entered information were preserved; try again.",
@@ -222,6 +224,7 @@
     schema_validation: "The AI provider response did not match the required structure after one bounded retry.",
     malformed: "The AI provider returned malformed structured data after one bounded retry.",
     provider_unavailable: "The AI provider is temporarily unavailable. Your search and entered information were preserved; try again later.",
+    request_too_large: "This AI request contains too much context. Shorten the question or document, then try again.",
   });
 
   class ProviderStructuredError extends Error {
@@ -266,6 +269,10 @@
     if (Array.isArray(value)) {
       if (Number.isInteger(schema.minItems) && value.length < schema.minItems) return `${path}:minItems`;
       if (Number.isInteger(schema.maxItems) && value.length > schema.maxItems) return `${path}:maxItems`;
+      if (schema.uniqueItems === true) {
+        const serialized = value.map(item => JSON.stringify(item));
+        if (new Set(serialized).size !== serialized.length) return `${path}:uniqueItems`;
+      }
       for (let index = 0; index < value.length; index += 1) {
         const problem = schemaProblem(value[index], schema.items || {}, `${path}[${index}]`);
         if (problem) return problem;
@@ -313,13 +320,21 @@
     maxProperties: value => `Must contain no more than ${value} properties.`,
   });
 
+  const OPENAI_UNSUPPORTED_SCHEMA_CONSTRAINTS = Object.freeze({
+    uniqueItems: value => value ? "Items must be unique." : "",
+  });
+
   function schemaForProvider(schema, provider) {
     if (Array.isArray(schema)) return schema.map(value => schemaForProvider(value, provider));
     if (!plainObject(schema)) return schema;
     const result = {};
     const notes = [];
     for (const [key, value] of Object.entries(schema)) {
-      const explain = provider === "anthropic" && ANTHROPIC_UNSUPPORTED_SCHEMA_CONSTRAINTS[key];
+      const explain = provider === "anthropic"
+        ? ANTHROPIC_UNSUPPORTED_SCHEMA_CONSTRAINTS[key]
+        : provider === "openai"
+          ? OPENAI_UNSUPPORTED_SCHEMA_CONSTRAINTS[key]
+          : null;
       if (explain) {
         const note = explain(value);
         if (note) notes.push(note);
@@ -355,6 +370,23 @@
 
   function providerFailure(envelope, status) {
     throw new ProviderStructuredError(classifyProviderEnvelope(envelope, status));
+  }
+
+  function hostedFailure(envelope, status) {
+    const code = String(envelope?.error?.code || "").toLowerCase();
+    if (status === 429 || /rate_limit|budget_limit/.test(code)) {
+      throw new ProviderStructuredError("quota_rate");
+    }
+    if (status === 408 || status === 504 || /timeout/.test(code)) {
+      throw new ProviderStructuredError("timeout");
+    }
+    if (status === 413 || /request_too_large/.test(code)) {
+      throw new ProviderStructuredError("request_too_large");
+    }
+    if (status === 400 || /invalid|unsupported|schema/.test(code)) {
+      throw new ProviderStructuredError("unsupported_contract");
+    }
+    throw new ProviderStructuredError("provider_unavailable");
   }
 
   async function fetchJsonBounded(fetchImpl, url, options, timeoutMs) {
@@ -434,6 +466,25 @@
     const retryInstruction = attempt
       ? "\n\nReturn a smaller complete response that still matches the supplied schema. Shorten prose and include fewer optional list items."
       : "";
+    if (provider === HOSTED_PROVIDER) {
+      const endpoint = String(globalThis.FUNDING_AI_GATEWAY?.endpoint || "").trim();
+      if (!endpoint) throw new ProviderStructuredError("provider_unavailable");
+      const { response, data, malformed } = await fetchJsonBounded(
+        fetchImpl,
+        endpoint,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ operation, user }),
+        },
+        timeoutMs,
+      );
+      if (!response.ok) hostedFailure(data, response.status);
+      if (malformed || !plainObject(data) || !plainObject(data.output)) {
+        throw new ProviderStructuredError("malformed", { retryable: true });
+      }
+      return JSON.stringify(data.output);
+    }
     if (provider === "anthropic") {
       const { response, data, malformed } = await fetchJsonBounded(
         fetchImpl,
@@ -486,7 +537,7 @@
               type: "json_schema",
               name: contract.name,
               description: contract.description,
-              schema: contract.schema,
+              schema: schemaForProvider(contract.schema, "openai"),
               strict: true,
             },
           },
@@ -512,13 +563,16 @@
     timeoutMs = REQUEST_TIMEOUT_MS,
   }) {
     const cleanKey = String(key || "").trim();
-    if (!cleanKey) {
+    if (provider !== HOSTED_PROVIDER && !cleanKey) {
       throw new Error(
         "Enter an API key to use AI refinement. Public catalog search does not require one.",
       );
     }
     if (typeof fetchImpl !== "function") throw new ProviderStructuredError("network_cors");
     if (!STRUCTURED_OPERATIONS[operation]) throw new ProviderStructuredError("unsupported_contract");
+    if (typeof user !== "string" || !user.trim() || user.length > MAX_USER_CHARS) {
+      throw new ProviderStructuredError("request_too_large");
+    }
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt += 1) {
       try {
@@ -557,6 +611,8 @@
 
   globalThis.FUNDING_AI = Object.freeze({
     ANTHROPIC_MODEL,
+    HOSTED_PROVIDER,
+    MAX_USER_CHARS,
     OPENAI_MODEL,
     ProviderStructuredError,
     STRUCTURED_OPERATIONS,

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,83 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: A.17 Hydrosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363789"/>
+    <id>urn:funding-finder:grants-gov:363789</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended September 2, 2026. This amendment adds this new program element to ROSES-2025. Step-1 proposals are due October 8, 2026, and Step-2 proposals are due January 28, 2027. Any proposal not preced…</summary>
+  </entry>
+  <entry>
+    <title>Egypt Annual Program Statement</title>
+    <link href="https://www.grants.gov/search-results-detail/363786"/>
+    <id>urn:funding-finder:grants-gov:363786</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Bureau of Near Eastern Affairs</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
+  </entry>
+  <entry>
+    <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363757"/>
+    <id>urn:funding-finder:grants-gov:363757</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support for Regional State Engagement with the United States (U.S.) Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and State government representatives in four (4) specific regions (Eastern Region, Western Region, Midwestern Region, or Southern Region of the United States) …</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: A.16 Cryosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363759"/>
+    <id>urn:funding-finder:grants-gov:363759</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-12-04 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. NOTICE: Amended September 1, 2026. This amendment adds this new program element to ROSES-2025. Mandatory Notices of Intent (see Section 4) are due by October 16, 2026, and proposals are due December 4, 2026. Any proposal not preceded by an on-time N…</summary>
+  </entry>
+  <entry>
+    <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>
+    <link href="https://www.grants.gov/search-results-detail/363734"/>
+    <id>urn:funding-finder:grants-gov:363734</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
+  </entry>
+  <entry>
+    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363754"/>
+    <id>urn:funding-finder:grants-gov:363754</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: D.4 Theoretical and Computational Astrophysics Networks</title>
+    <link href="https://www.grants.gov/search-results-detail/363747"/>
+    <id>urn:funding-finder:grants-gov:363747</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: Amended August 31, 2026. This amendment releases the final text for this program element, which was previously TBD. Mandatory NOIs are due October 15, 2026, and proposals are due December 3, 2026. There are several major changes since the pr…</summary>
   </entry>
   <entry>
     <title>U.S. Mission to Australia 2026 Annual Program Statement</title>
@@ -52,22 +129,6 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
-  </entry>
-  <entry>
-    <title>Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363633"/>
-    <id>urn:funding-finder:grants-gov:363633</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
     <title>Cold Chain Grants for Emergency Food Assistance</title>
@@ -174,21 +235,6 @@
     <summary>NYSERDA | Closes 2026-10-28 | Supporting research to improve the scientific and technical foundation for addressing key policy-relevant questions related to air quality and health effects research, Program Opportunity Notice (PON) 6220, Energy-Related Air Quality and Health Effects Research, is available through NYSERDA.rnPON 6220 focuses on: 1) pollutant trends analysis, source apportionment, and accountability studies; 2) po…</summary>
   </entry>
   <entry>
-    <title>Promoting Responsible Investment and Rights-Respecting Production Models</title>
-    <link href="https://www.grants.gov/search-results-detail/363609"/>
-    <id>urn:funding-finder:grants-gov:363609</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-08-31 | This program will help responsible businesses counter unfair competition from production models relying on forced labor, worker exploitation, and other violations or abuses of internationally recognized labor rights. The program will also promote worker upskilling by working with leading foreign companies in critical industries to develop and strengthen private-sector workforce development practic…</summary>
-  </entry>
-  <entry>
     <title>Annual Recurring University Training and Research</title>
     <link href="https://www.grants.gov/search-results-detail/363594"/>
     <id>urn:funding-finder:grants-gov:363594</id>
@@ -200,19 +246,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-10-16 | Annual Recurring University Training and ResearchThe purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communiti…</summary>
-  </entry>
-  <entry>
-    <title>Syria Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363578"/>
-    <id>urn:funding-finder:grants-gov:363578</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>Bureau of Near Eastern Affairs</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Bureau of Near Eastern Affairs | Closes 2026-08-31 | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination of the U.S. Department of State announces an open competition for organizations to submit a statement of interest (SOI) for innovative foreign assistance programs benefiting partner countries that also advance U.S. commercial diplomacy and put American interests first. SOI must demonstrate how projects will leverage foreign assi…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
@@ -283,18 +316,6 @@
     <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Threatened and Endangered Species Program (T&amp;E) focuses on conservation and recovery of endangered, threatened and BLM Sensitive Species (collectively referred to as BLM Special Status Species) and their habitats to help inform a balance of multiple uses of BLM-managed lands, including the Nation"s need for domestic sources of energy, minerals, timber, grazing, recreation, and fish and wil…</summary>
   </entry>
   <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Rocky Mountain Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363385"/>
-    <id>urn:funding-finder:grants-gov:363385</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Closes 2026-08-29 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in processing and analyzing of data from the Surface Water and Ocean Topography (SWOT) mission. The project will advance hydrologic decision making from remotely sensed water surface elevation by making available water surface elevation data at unprecedented scales. Research Scientists in the Observi…</summary>
-  </entry>
-  <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
     <link href="https://www.grants.gov/search-results-detail/363375"/>
     <id>urn:funding-finder:grants-gov:363375</id>
@@ -322,28 +343,6 @@
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
-  </entry>
-  <entry>
-    <title>U.S.-ASEAN Road to 50: Rising Leaders Forum</title>
-    <link href="https://www.grants.gov/search-results-detail/363316"/>
-    <id>urn:funding-finder:grants-gov:363316</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to ASEAN</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>U.S. Mission to ASEAN | Closes 2026-08-30 | The U.S. Mission to ASEAN (USASEAN) Public Diplomacy Section (PDS) announces an open competition for applications to develop, organize, and oversee the U.S.-ASEAN Road to 50: Rising Leaders Forum. This one-day Jakarta workshop will gather approximately 50 rising leaders selected exclusively from the USASEAN alumni networks across Southeast Asia. Celebrating 50 years of partnership, this forum look…</summary>
-  </entry>
-  <entry>
-    <title>New York State Clean Energy Internship Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000000MdhViAAJ"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON4000</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <summary>NYSERDA | Closes 2026-08-31 | Provides funding to eligible clean energy businesses, organizations, and local municipalities hiring interns to perform meaningful work in the clean energy sector. Both clean energy employers and interns can apply to participate in the program. Accepted employers will select, interview, and hire interns, and NYSERDA provides reimbursement on a percentage of the interns’ wages.</summary>
   </entry>
   <entry>
     <title>Empire Building Challenge: Hospitals</title>
@@ -404,7 +403,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. NOTICE: Amended July 27, 2026. This amendment presents a new program element in ROSES-2025. Mandatory NOIs (see Section 3.1) are due by September 10, 2026, and proposals are due by October 26, 2026. The 7-page limit to the S/T/M Section and requir…</summary>
+    <summary>NASA Headquarters | Closes 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: Corrected, August 28, 2026. The Open Science and Data Management Plan was added to Table D.8-1 in Section 3.4. New text is in bold. The due dates remain unchanged. NOTICE: Amended July 27, 2026. This amendment presents a new program eleme…</summary>
   </entry>
   <entry>
     <title>Upstate Through Wall Heat Pump Demonstration Program</title>
@@ -639,17 +638,6 @@
     <summary>NASA Headquarters | Closes 2026-11-06 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in t…</summary>
   </entry>
   <entry>
-    <title>Healthy Homes Production Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362368"/>
-    <id>urn:funding-finder:grants-gov:362368</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-08-31 | The Healthy Homes Production Program (HHP) is part of HUD"s overall Healthy Homes Initiative launched in 1999. The program takes a comprehensive approach to addressing multiple childhood diseases and injuries in the home by focusing on housing-related hazards in a coordinated fashion, rather than addressing a single hazard at a time. The program builds upon HUD"s successful Lead Hazard Control pro…</summary>
-  </entry>
-  <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
     <link href="https://www.grants.gov/search-results-detail/363224"/>
     <id>urn:funding-finder:grants-gov:363224</id>
@@ -660,17 +648,6 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year 2026 United States Marine Highway Program (USMHP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362478"/>
-    <id>urn:funding-finder:grants-gov:362478</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Maritime Administration</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Cybersecurity"/>
-    <summary>Maritime Administration | Closes 2026-08-31 | The United States Marine Highway Program (USMHP), codified at 46 U.S.C. 55601, was originally established by Section 1121 of the Energy Independence and Security Act of 2007 to reduce landside congestion through the designation of Marine Highway Routes. The USMHP statute authorizes the U.S. Department of Transportation (“Department” or “DOT”) to make grants to implement Projects or components of P…</summary>
   </entry>
   <entry>
     <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
@@ -687,5 +664,18 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+  </entry>
+  <entry>
+    <title>Middle East Regional Cooperation (MERC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363070"/>
+    <id>urn:funding-finder:grants-gov:363070</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Assistance Coordination</name></author>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
 </feed>

@@ -1,4 +1,80 @@
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import vm from "node:vm";
 import { expect } from "@playwright/test";
+
+const [frozenFundingCatalogSource, searchQuerySource] = await Promise.all([
+  readFile(new URL("../fixtures/frozen/funding-catalog.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/search-query.js", import.meta.url), "utf8"),
+]);
+const frozenCatalogContext = {};
+frozenCatalogContext.globalThis = frozenCatalogContext;
+vm.createContext(frozenCatalogContext);
+vm.runInContext(searchQuerySource, frozenCatalogContext);
+vm.runInContext(frozenFundingCatalogSource, frozenCatalogContext);
+const frozenCatalog = frozenCatalogContext.GRANT_CATALOG;
+const timestamp = String(frozenCatalog.generated_at).match(
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?Z$/,
+);
+if (!timestamp) throw new Error("Frozen catalog timestamp must be canonical UTC.");
+const frozenAssetVersion = `catalog-${timestamp.slice(1, 4).join("")}T${timestamp.slice(4, 7).join("")}${String(timestamp[7] || "").padEnd(6, "0").slice(0, 6)}Z`;
+const frozenStatusIdentity = Object.entries(frozenCatalog.status_counts)
+  .filter(([_status, count]) => Number(count) > 0)
+  .sort(([left], [right]) => left.localeCompare(right))
+  .map(([status, count]) => `${status}=${count}`)
+  .join(",");
+const frozenCatalogMetadataSource = `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
+  schema_version: 1,
+  catalog_schema_version: frozenCatalog.schema_version,
+  generated_at: frozenCatalog.generated_at,
+  pipeline_generated_at: frozenCatalog.generated_at,
+  record_count: frozenCatalog.record_count,
+  status_counts: frozenCatalog.status_counts,
+  asset_version: frozenAssetVersion,
+  catalog_url: `./data/opportunities.js?v=${frozenAssetVersion}`,
+  release_identity: [
+    `catalog-v${frozenCatalog.schema_version}`,
+    frozenAssetVersion,
+    `records=${frozenCatalog.record_count}`,
+    `documents=${frozenCatalog.search_index.document_count}`,
+    `terms=${Object.keys(frozenCatalog.search_index.postings).length}`,
+    `status=${frozenStatusIdentity}`,
+  ].join(":"),
+})};`;
+const frozenSubtopicCatalogSource = `globalThis.SUBTOPIC_CATALOG=${JSON.stringify({
+  schema_version: 1,
+  generation: { as_of: "2026-09-01" },
+  parent_count: 1,
+  record_count: 1,
+  records: {
+    "363616": {
+      segmentation_method: "frozen_fixture",
+      subtopic_count: 1,
+      subtopics: [{
+        id: "363616:fixture-child",
+        subtopic_id: "363616:fixture-child",
+        parent_id: "363616",
+        parent_opportunity_number: "26-518",
+        title: "Catalysis and Reaction Engineering",
+        summary: "Publication-eligible catalysis science and reaction engineering research.",
+        description: "Publication-eligible catalysis science and reaction engineering research.",
+        child_type: "subject",
+        publication_state: "publishable",
+        status: "posted",
+        topic_areas: ["Catalysis and reaction engineering"],
+        program_area_labels: ["Catalysis and reaction engineering"],
+      }],
+    },
+  },
+  search_index: {
+    algorithm: "bm25",
+    document_count: 1,
+    average_document_length: 1,
+    document_lengths: [1],
+    record_ids: ["363616:fixture-child"],
+    postings: {},
+  },
+})};`;
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
 const AWARD_WORKER_ORIGIN = "https://funding-finder-award-api.urochestercheme.workers.dev";
@@ -112,9 +188,103 @@ export function mockHybrid(page, {
   return calls;
 }
 
+export async function mockFrozenFundingCatalog(target) {
+  await target.route("**/data/catalog-metadata.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenCatalogMetadataSource,
+  }));
+  await target.route("**/data/opportunities.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenFundingCatalogSource,
+  }));
+}
+
+export async function mockFrozenFundingSearchPackage(page) {
+  await mockFrozenFundingCatalog(page);
+  await page.route("**/data/subtopics.js*", route => route.fulfill({
+    status: 200,
+    contentType: "text/javascript",
+    body: frozenSubtopicCatalogSource,
+  }));
+
+  let packagePromise = null;
+  const buildPackage = () => {
+    if (packagePromise) return packagePromise;
+    packagePromise = (async () => {
+      const { corpus, corpusSha256 } = await page.evaluate(async () => {
+        const value = globalThis.FUNDING_HYBRID_SEARCH.buildCorpus({
+          parentCatalog: globalThis.GRANT_CATALOG,
+          childCatalog: globalThis.FUNDING_RETRIEVAL.createChildCatalog(
+            globalThis.SUBTOPIC_CATALOG,
+          ),
+        });
+        return {
+          corpus: value,
+          corpusSha256: await globalThis.FUNDING_HYBRID_SEARCH.corpusHash(value),
+        };
+      });
+      const vectors = Buffer.alloc(corpus.length * 1024 * 2);
+      corpus.forEach((_passage, index) => vectors.writeUInt16LE(0x3c00, index * 1024 * 2));
+      const vectorSha256 = createHash("sha256").update(vectors).digest("hex");
+      return {
+        vectors,
+        manifest: {
+          schema_version: 1,
+          generated_at: "2026-09-01T12:00:00Z",
+          model: "voyage-4-lite",
+          provider_revision: "frozen-e2e-fixture",
+          response_model: "voyage-4-lite",
+          input_type: "document",
+          source_output_dtype: "float",
+          dimension: 1024,
+          dtype: "float16-le",
+          byte_order: "little-endian",
+          passage_count: corpus.length,
+          parent_passage_count: corpus.filter(item => item.passage_kind === "parent").length,
+          child_passage_count: corpus.filter(item => item.passage_kind !== "parent").length,
+          corpus_sha256: corpusSha256,
+          vector_sha256: vectorSha256,
+          vector_bytes: vectors.length,
+          model_space_fingerprint: "0".repeat(64),
+          model_space: { canary_set_version: 1, canary_count: 1 },
+          passages: corpus.map((passage, vectorRow) => ({
+            passage_id: passage.passage_id,
+            parent_id: passage.parent_id,
+            passage_kind: passage.passage_kind,
+            record_id: passage.record_id,
+            text_sha256: createHash("sha256").update(passage.text).digest("hex"),
+            vector_row: vectorRow,
+          })),
+        },
+      };
+    })();
+    return packagePromise;
+  };
+
+  await page.route("**/data/search-v2-voyage-manifest.json*", async route => {
+    const fixture = await buildPackage();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(fixture.manifest),
+    });
+  });
+  await page.route("**/data/search-v2-voyage-vectors.f16*", async route => {
+    const fixture = await buildPackage();
+    await route.fulfill({
+      status: 200,
+      contentType: "application/octet-stream",
+      body: fixture.vectors,
+    });
+  });
+}
+
 export function mockAwards(target, {
   awardOverridesBySource = {},
   failDoe = false,
+  failDod = false,
   failNih = false,
   failNsf = false,
   hasMoreBySource = {},
@@ -164,7 +334,7 @@ export function mockAwards(target, {
             registry: {
               source: "ROR",
               status: "rate_limited",
-              adapter_version: "1.1.0",
+              adapter_version: "1.3.0",
               error: { code: "rate_limited" },
             },
           }),
@@ -214,7 +384,7 @@ export function mockAwards(target, {
           schema_version: 1,
           query: requestUrl.searchParams.get("query"),
           institutions,
-          registry: { source: "ROR", status: "available", adapter_version: "1.1.0", license: "CC0-1.0", cache: "miss" },
+          registry: { source: "ROR", status: "available", adapter_version: "1.3.0", license: "CC0-1.0", cache: "miss" },
         }),
       });
       return;
@@ -302,13 +472,39 @@ export function mockAwards(target, {
       annual_support: [],
       source_provenance: { source_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx", retrieved_at: retrievedAt, source_record_id: "DE-SC0020230", adapter_version: "1.0.0" },
     };
-    const templateFor = source => ({ ...(source === "NSF" ? nsf : source === "NIH" ? nih : doe), ...(awardOverridesBySource[source] || {}) });
+    const dod = {
+      ...nsf,
+      award_id: "FA9550261B195",
+      source_record_ids: ["FA9550261B195", "ASST_NON_FA9550261B195_097"],
+      source: "DOD",
+      agency: "Department of Defense",
+      subagency: "Department of the Air Force",
+      program_name: "Air Force Defense Research Sciences Program",
+      program_codes: ["12.800"],
+      opportunity_numbers: ["NOFOAFRLAFOSR20250002"],
+      activity_code: null,
+      funding_mechanism: "Project Grant",
+      title: "CENTER OF EXCELLENCE: MULTISCALE NONEQUILIBRIUM TRANSPORT",
+      abstract: null,
+      project_start: "2026-09-01",
+      project_end: "2031-08-31",
+      award_year: 2026,
+      total_award: 3000000,
+      award_amount_basis: "total_obligation",
+      organization_department: "AIR FORCE OFFICE OF SCIENTIFIC RESEARCH",
+      principal_investigators: [],
+      program_contacts: [],
+      official_award_url: "https://www.usaspending.gov/award/ASST_NON_FA9550261B195_097/",
+      annual_support: [],
+      source_provenance: { source_url: "https://www.usaspending.gov/award/ASST_NON_FA9550261B195_097/", retrieved_at: retrievedAt, source_record_id: "ASST_NON_FA9550261B195_097", adapter_version: "1.0.0" },
+    };
+    const templateFor = source => ({ ...(source === "NSF" ? nsf : source === "NIH" ? nih : source === "DOE" ? doe : dod), ...(awardOverridesBySource[source] || {}) });
     const snapshotAggregate = records => {
       const people = new Map();
       const programs = new Map();
       const institutions = new Map();
       const years = new Map();
-      const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0]]);
+      const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0], ["DOD", 0]]);
       records.forEach(record => {
         agencyTotals.set(record.source, (agencyTotals.get(record.source) || 0) + 1);
         if (Number.isInteger(record.award_year)) years.set(record.award_year, (years.get(record.award_year) || 0) + 1);
@@ -432,7 +628,7 @@ export function mockAwards(target, {
       const records = [];
       const sourceStates = [];
       for (const source of sources) {
-        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
+        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
         const configuredFailure = (snapshotCriteria.mode === "program_officer" ? programOfficerSourceFailures[source] : null)
           || sourceFailures[source]
           || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
@@ -441,7 +637,9 @@ export function mockAwards(target, {
           continue;
         }
         const template = templateFor(source);
-        const configuredCount = typeof resultCountPerSource === "object" ? resultCountPerSource[source] : resultCountPerSource;
+        const configuredCount = typeof resultCountPerSource === "object"
+          ? resultCountPerSource[source]
+          : source === "DOD" ? 0 : resultCountPerSource;
         const count = Math.max(0, Number(configuredCount) || 0);
         for (let index = 0; index < count; index += 1) {
           const record = index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] };
@@ -476,6 +674,7 @@ export function mockAwards(target, {
         return;
       }
       const shortConcepts = new Set(["ai", "ml", "ph"]);
+      const answerIntents = new Set(["count", "investigators", "institutions", "programs", "years", "awards"]);
       const normalizedEvidenceTokens = value => (String(value || "")
         .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || [])
         .map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token);
@@ -488,7 +687,7 @@ export function mockAwards(target, {
         const terms = values.map(value => normalizedEvidenceTokens(value));
         return terms.some(tokens => !tokens.length || tokens.some(token => !admissible(token))) ? null : terms;
       };
-      const concepts = exactPlanKeys && plan.intent === "topical" ? normalizeTerms(plan.concepts, 1, 16) : null;
+      const concepts = exactPlanKeys && answerIntents.has(plan.intent) ? normalizeTerms(plan.concepts, 1, 16) : null;
       const phrases = exactPlanKeys ? normalizeTerms(plan.phrases, 1, 8) : null;
       const exclusions = exactPlanKeys ? normalizeTerms(plan.exclusions, 0, 8) : null;
       if (!concepts || !phrases || !exclusions) {
@@ -520,7 +719,7 @@ export function mockAwards(target, {
       }).filter(Boolean).sort((left, right) => right.score - left.score || left.position - right.position);
       const matchedRecords = scored.map(item => item.record);
       const awards = scored.slice(0, body.limit).map(({ record, position, score }) => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: position + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: score, matched_fields: ["title", "abstract"] }));
-      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(matchedRecords), retrieval: { scoring_version: "program-officer-evidence-v3", plan_format: "provider-concepts-v1", concept_coverage: "all_provider_concepts_same_record", required_concept_count: requiredConcepts.length, phrase_count: phrases.length, exclusion_count: exclusions.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { concepts: 16, phrases: 8, exclusions: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(matchedRecords), retrieval: { scoring_version: "program-officer-evidence-v3", plan_format: "provider-concepts-v1", answer_intent: plan.intent, concept_coverage: "all_provider_concepts_same_record", required_concept_count: requiredConcepts.length, phrase_count: phrases.length, exclusion_count: exclusions.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { concepts: 16, phrases: 8, exclusions: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {
@@ -560,7 +759,7 @@ export function mockAwards(target, {
         exact_total: snapshot.completeness === "complete" ? view.records.length : null,
         at_least: view.records.length,
         pagination: { page: body.page, page_size: body.page_size, start: selected.length ? start + 1 : 0, end: start + selected.length, page_count: snapshot.completeness === "complete" ? pageCount : null, available_page_count: pageCount, has_previous: body.page > 1, has_next: body.page < pageCount },
-        batches: ["NSF", "NIH", "DOE"].map(source => ({ source, actual_added: selected.filter(record => record.source === source).length, results: selected.filter(record => record.source === source).map((record, index) => ({ ...record, snapshot_position: start + selected.indexOf(record) + 1 })) })).filter(batch => batch.results.length),
+        batches: ["NSF", "NIH", "DOE", "DOD"].map(source => ({ source, actual_added: selected.filter(record => record.source === source).length, results: selected.filter(record => record.source === source).map((record, index) => ({ ...record, snapshot_position: start + selected.indexOf(record) + 1 })) })).filter(batch => batch.results.length),
       };
       await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload) });
       return;
@@ -624,7 +823,7 @@ export function mockAwards(target, {
     const results = [];
     const sources = [];
     for (const source of body.sources) {
-      const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
+      const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
       const configuredFailureEntry = sourceFailuresByOffset[`${source}:${body.offset}`]
         || sourceFailures[source]
         || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
@@ -638,12 +837,12 @@ export function mockAwards(target, {
           error: { code: configuredFailure.code || "source_unavailable" },
         });
       } else {
-        const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
+        const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : source === "DOE" ? doe : dod;
         const template = { ...baseTemplate, ...(awardOverridesBySource[source] || {}) };
         const configuredCount = resultCountBySourceOffset[`${source}:${body.offset}`] ?? (
           typeof resultCountPerSource === "object"
             ? resultCountPerSource[source]
-            : resultCountPerSource
+            : source === "DOD" ? 0 : resultCountPerSource
         );
         const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {
@@ -761,10 +960,16 @@ export async function runFundingSearch(page, query) {
 }
 
 export async function waitForHybridSettled(page) {
-  await expect(page.locator("#potential-status")).toContainText(
-    /Potential matching completed|temporarily|needs the topic layer|unavailable/,
-    { timeout: 30_000 },
-  );
+  await expect.poll(async () => {
+    const status = page.locator("#potential-status");
+    const text = (await status.textContent() || "").trim();
+    if (/temporarily|needs the topic layer|unavailable/i.test(text)) return "settled";
+    if (!(await status.evaluate(node => node.classList.contains("hidden")))) return "pending";
+    const counts = (await page.locator("#result-tier-counts").textContent() || "").trim();
+    return /\d+ strong match(?:es)? · \d+ potential match(?:es)?/i.test(counts)
+      ? "settled"
+      : "pending";
+  }, { timeout: 30_000 }).toBe("settled");
 }
 
 export async function downloadText(page, selector) {
@@ -782,26 +987,33 @@ export function csvRows(csv) {
   return csv.trim().split(/\r?\n/).slice(1);
 }
 
-export async function addDepartmentResearcher(page, optionIndex = 0) {
-  const candidates = [
-    "Yasemin Basdogan",
-    "Siddharth Deshpande",
-    "Marc D. Porosoff",
-    "Astrid M. Müller",
-  ];
-  const selectedLabels = await page.locator("#pi-grid [data-member-entry] .pi-toggle").evaluateAll(buttons => (
-    buttons.map(button => button.getAttribute("aria-label") || "")
-  ));
-  const available = candidates.filter(name => !selectedLabels.includes(`Remove ${name} from team`));
-  const label = available[Math.min(optionIndex, Math.max(0, available.length - 1))];
-  expect(label).toBeTruthy();
-  if (await page.locator("#researcher-picker").isHidden()) await page.locator("#add-researcher").click();
-  await page.locator("#researcher-search").fill(label);
-  const option = page.locator("#researcher-options [role=option]", { hasText: label }).first();
-  await expect(option).toBeVisible({ timeout: 10_000 });
+export async function configurePersonalProvider(page, key, provider = "openai") {
+  const setup = page.locator(".provider-setup");
+  if (!(await setup.evaluate(details => details.open))) {
+    await setup.locator(":scope > summary").click();
+  }
+  await page.locator("#k-provider").selectOption(provider);
+  await expect(page.locator("#k-key")).toBeVisible();
+  await page.locator("#k-key").fill(key);
+}
+
+export async function addDepartmentResearcher(page, researcherName) {
+  const picker = page.locator("#researcher-picker");
+  if (await picker.isHidden()) await page.locator("#add-researcher").click();
+  await expect(page.locator("#faculty-search-status")).toContainText(/Search by name|Hajim facult/, { timeout: 30_000 });
+  await page.locator("#faculty-search").fill(researcherName);
+  const options = page.locator('#faculty-suggestions [role="option"]:not([aria-disabled="true"])');
+  const option = options.filter({ hasText: researcherName }).first();
+  await expect(option).toBeVisible({ timeout: 30_000 });
+  await expect(option.locator("strong")).toHaveText(researcherName);
   const value = await option.getAttribute("data-faculty-id");
+  const entries = page.locator("#pi-grid [data-member-entry]");
+  const priorCount = await entries.count();
   await option.click();
-  await expect(page.getByRole("button", { name: `Remove ${label} from team` })).toBeVisible();
+  await expect(entries).toHaveCount(priorCount + 1);
+  const addedButton = entries.nth(priorCount).locator(".pi-toggle");
+  await expect(addedButton).toBeVisible();
+  const label = (await addedButton.textContent()).trim();
   return { label, value };
 }
 

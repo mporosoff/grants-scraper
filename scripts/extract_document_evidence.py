@@ -223,6 +223,24 @@ def utc_now():
     return datetime.now(timezone.utc)
 
 
+def parse_now(value):
+    """Parse an explicit clock override for deterministic offline builds."""
+    text = str(value or "").strip()
+    if text.endswith("Z"):
+        text = f"{text[:-1]}+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "--now must be an ISO 8601 timestamp with a timezone"
+        ) from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise argparse.ArgumentTypeError(
+            "--now must be an ISO 8601 timestamp with a timezone"
+        )
+    return parsed.astimezone(timezone.utc)
+
+
 def empty_cache():
     return {
         "schema_version": EVIDENCE_SCHEMA_VERSION,
@@ -2536,6 +2554,15 @@ def parse_args(argv=None):
         help="Recheck unchanged source URLs after this many days (default: 14).",
     )
     parser.add_argument(
+        "--now",
+        type=parse_now,
+        default=None,
+        help=(
+            "Override the current time with a timezone-aware ISO 8601 "
+            "timestamp for deterministic offline builds."
+        ),
+    )
+    parser.add_argument(
         "--enable-subtopics",
         action="store_true",
         help=(
@@ -2574,7 +2601,11 @@ def main(argv=None):
     catalog = read_catalog(args.catalog)
     cache = read_cache(args.cache)
     if args.revalidate_program_areas_only:
-        enriched, cache, changed_ids = revalidate_program_areas_only(catalog, cache)
+        enriched, cache, changed_ids = revalidate_program_areas_only(
+            catalog,
+            cache,
+            now=args.now,
+        )
         write_cache(cache, args.cache)
         write_catalog(enriched, args.catalog)
         print(
@@ -2590,6 +2621,7 @@ def main(argv=None):
         request_delay=args.request_delay,
         recheck_days=args.recheck_days,
         enable_subtopics=args.enable_subtopics,
+        now=args.now,
     )
     write_cache(cache, args.cache)
     if args.enable_subtopics:
@@ -2598,7 +2630,7 @@ def main(argv=None):
         from scripts import subtopic_records
         from scripts.currentness import filter_current
 
-        as_of = iso_utc(utc_now())[:10]
+        as_of = iso_utc(args.now or utc_now())[:10]
         current_records, _ = filter_current(
             enriched["opportunities"], date.fromisoformat(as_of)
         )

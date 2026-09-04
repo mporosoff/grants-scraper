@@ -23,7 +23,8 @@
   <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-award-api.urochestercheme.workers.dev https://funding-finder-alerts.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
+  <meta name="opportunity-team-generation" content="1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.openai.com https://api.anthropic.com https://api.crossref.org https://cloudflareinsights.com https://funding-usage.urochestercheme.workers.dev https://funding-finder-voyage-search.urochestercheme.workers.dev https://funding-finder-award-api.urochestercheme.workers.dev https://funding-finder-alerts.urochestercheme.workers.dev https://funding-finder-ai.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'">
   <title>Funding Finder</title>
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/">
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
@@ -32,9 +33,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=ai-additive-20260829">
+  <link rel="stylesheet" href="./assets/app.css?v=c2143acd9b48ac5b2de181e93e2483053648788f52b0d9295a9807366004a1d3">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
-  <link rel="stylesheet" href="./assets/alerts.css?v=post-phase4-abc-20260829">
+  <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -52,6 +53,7 @@
         <a href="./match_explorer.html" aria-current="page">Funding Finder</a>
         <a href="./team_match.html">Team Match</a>
         <a href="./funded_awards.html">Funded Awards</a>
+        <a href="./faculty_interests.html">Configure Faculty Interests</a>
       </nav>
       <div class="catalog-pill" id="catalog-pill" aria-live="polite" aria-label="Catalog details are available">
         <span class="status-dot" aria-hidden="true"></span>
@@ -71,13 +73,12 @@
       <div class="hero-copy">
         <p class="eyebrow">One search, improved by the context you add</p>
         <h1 id="page-title">Find funding in a few clear steps</h1>
-        <p class="lede">Start with a topic, then optionally add your profile, CV, or filters. A typed topic can use the site-managed service to add Potential matches from the public catalog. Profile, CV, and ORCID context improve local matching and are used by AI only when you explicitly connect and use your own provider.</p>
       </div>
 
       <ol class="workflow-map" aria-label="Suggested funding search steps">
         <li><strong>1</strong><span><b>Search or add a notice</b><small>Recommended</small></span></li>
         <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
-        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional user-connected AI</small></span></li>
+        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional hosted AI</small></span></li>
       </ol>
 
       <form class="search-workflow" id="search-form" role="search">
@@ -92,23 +93,16 @@
           </div>
           <div class="search-form nofo-drop-zone" id="nofo-drop-zone">
             <label class="sr-only" for="query">Search funding opportunities</label>
-            <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing">
-            <button class="button primary find-button" id="find-funding" type="submit"><span class="find-button-label">Find funding</span></button>
+            <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing" data-nofo-drop-target="true">
             <input class="sr-only" id="nofo-file" type="file" accept=".pdf,application/pdf" aria-label="Choose a NOFO or FOA PDF">
             <label class="nofo-upload-button" for="nofo-file">
               <span aria-hidden="true">&#8679;</span>
               <span><strong>Drop or upload a NOFO</strong><small>PDF only</small></span>
             </label>
+            <button class="button primary find-button" id="find-funding" type="submit"><span class="find-button-label">Find funding</span></button>
           </div>
           <div class="search-status" id="search-status" aria-live="polite"></div>
-          <div class="nofo-upload-status" id="nofo-upload-status" aria-live="polite">Your PDF stays in this tab and is sent to your selected AI provider only when you ask a question.</div>
-          <div class="quick-searches" aria-label="Example searches">
-            <span>Examples:</span>
-            <button type="button" data-example-query="carbon capture and utilization">Carbon capture</button>
-            <button type="button" data-example-query="early career investigator">Early career</button>
-            <button type="button" data-example-query="rural public health">Rural health</button>
-            <button type="button" data-example-query="artificial intelligence manufacturing">AI + manufacturing</button>
-          </div>
+          <div class="nofo-upload-status" id="nofo-upload-status" aria-live="polite"></div>
         </section>
 
         <section class="workflow-step context-step" aria-labelledby="context-step-heading">
@@ -117,7 +111,6 @@
             <div>
               <p class="eyebrow">Improve relevance <span class="optional-label">Optional</span></p>
               <h2 id="context-step-heading">Add context and narrow the search</h2>
-              <p>Each item you add improves ranking or removes results that do not fit. Skip anything you do not know.</p>
             </div>
           </div>
 
@@ -166,12 +159,12 @@
 
                 <div class="orcid-importer">
                   <div>
-                    <strong>Import publications with an ORCID iD</strong>
-                    <span>Uses public Crossref metadata linked to the ORCID iD; imported topics supplement anything you enter above.</span>
+                    <strong>Import publications with an ORCID</strong>
+                    <span>Uses public Crossref metadata linked to the ORCID; imported topics supplement anything you enter above.</span>
                   </div>
                   <div class="orcid-input-row">
-                    <label class="sr-only" for="orcid-id">ORCID iD</label>
-                    <input id="orcid-id" type="text" inputmode="text" autocomplete="off" maxlength="40" placeholder="0000-0002-1825-0097">
+                    <label class="sr-only" for="orcid-id">ORCID</label>
+                    <input id="orcid-id" type="text" inputmode="text" autocomplete="off" maxlength="19" data-orcid-input placeholder="0000-0002-1825-0097">
                     <button class="button secondary" id="import-orcid" type="button">Import ORCID</button>
                   </div>
                   <div class="orcid-status" id="orcid-status" aria-live="polite">No ORCID publications imported.</div>
@@ -206,31 +199,6 @@
                 </div>
                 <div class="profile-status" id="profile-status" aria-live="polite"></div>
 
-              </div>
-            </details>
-
-            <details class="context-card alerts-panel" id="alerts-panel">
-              <summary>
-                <span>
-                  <strong>Email alerts</strong>
-                  <small>Receive future Strong matches for a typed funding search</small>
-                </span>
-                <span class="summary-action" id="alert-panel-summary">Available after search</span>
-              </summary>
-              <div class="context-card-body">
-                <section class="profile-search-alert" aria-labelledby="profile-search-alert-heading">
-                  <div>
-                    <p class="eyebrow">Saved-search email alert</p>
-                    <h3 id="profile-search-alert-heading">Watch your overall funding search</h3>
-                    <p>Run a typed Funding Finder search, then save it here to receive only future new Strong matches across the catalog. Current Strong matches become the baseline, so creating the alert does not email existing results.</p>
-                    <p class="profile-search-alert-privacy">Your typed search and public filters define the alert. Research profile, CV, ORCID publication text, saved notes, and documents stay in this browser.</p>
-                  </div>
-                  <div class="profile-search-alert-actions">
-                    <button class="button primary" id="alert-new-matches" type="button" aria-describedby="profile-search-alert-status" disabled>Save this search as an email alert</button>
-                    <button class="text-button" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How search alerts work</button>
-                    <p id="profile-search-alert-status" role="status" aria-live="polite">Run a typed funding search to enable this alert.</p>
-                  </div>
-                </section>
               </div>
             </details>
 
@@ -348,40 +316,38 @@
             <div>
               <p class="eyebrow">Optional after a search</p>
               <h2 id="launch-step-heading">Expand and refine your search with AI</h2>
-              <p>Connect your own provider only if you want AI to expand terminology, refine the current catalog results, or answer questions about them.</p>
             </div>
           </div>
           <details class="provider-setup">
             <summary>
               <span>
-                <strong>Connect an AI provider</strong>
-                <small>Provider, key, cost, Help, and privacy details</small>
+                <strong>AI service and privacy</strong>
+                <small>Hosted AI is included; personal provider keys remain optional</small>
               </span>
               <span id="provider-state">Not configured</span>
             </summary>
             <div class="provider-setup-body">
-              <p class="provider-explanation"><strong>What your connected AI changes:</strong> after catalog search, it can use the profile context you enabled, try alternative scientific phrases, assess up to 32 locally qualified catalog candidates, and answer questions about results or an uploaded notice. Refinement only adds evidence-qualified Strong matches; it never removes ordinary results or searches outside the funding catalog.</p>
-              <p class="key-help"><strong>You do not need a key for normal search.</strong> AI refinement requires your own provider key. Create a separate, limited-use key and review its spending controls before saving it here: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
+              <p class="key-help"><strong>No API key is required.</strong> Funding Finder routes each feature through its tested hosted model.</p>
               <div class="provider-fields">
                 <label>
                   Provider
                   <select id="k-provider">
+                    <option value="hosted" selected>Funding Finder AI (included)</option>
                     <option value="openai">OpenAI</option>
                     <option value="anthropic">Anthropic</option>
                   </select>
                 </label>
-                <label>
+                <label id="provider-key-field" class="hidden">
                   API key
                   <input id="k-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
                 </label>
               </div>
-              <div class="credential-actions">
+              <div class="credential-actions hidden" id="credential-actions">
                 <button class="button secondary" id="save-key" type="button">Save key on this device</button>
                 <button class="text-button" id="clear-key" type="button">Remove key</button>
               </div>
               <div class="credential-status" id="key-storage-status" aria-live="polite"></div>
-              <p class="privacy-note">A saved key stays in this browser's local storage until you remove it. Anyone using this browser profile could use it, so do not save a key on a shared device. Research text and an enabled CV excerpt go directly to the selected provider only when you choose AI refinement or chat.</p>
-              <p class="cost-note">Your connected AI uses two bounded calls for refinement: alternative scientific phrases, then assessment of at most 32 locally qualified candidates. Local Strong matching does not use a model; hosted Potential matching uses the site's service and key.</p>
+              <p class="privacy-note">Hosted AI sends only the bounded information needed for the feature to Funding Finder's protected Cloudflare service; provider keys are never sent to the browser. If you choose your own provider, a saved key stays in this browser's local storage until you remove it. Advanced users may instead select OpenAI or Anthropic and provide their own limited-use key after reviewing its spending controls: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
             </div>
           </details>
           <div class="ai-refine-actions">
@@ -390,7 +356,7 @@
               <span id="ai-refine-label">Expand and refine these results with AI</span>
             </button>
             <button class="button secondary hidden" id="restore-ai-refinement" type="button">Restore original results</button>
-            <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search and enter or save an AI provider key to enable refinement.</p>
+            <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search to enable hosted AI refinement.</p>
           </div>
           <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
         </section>
@@ -403,43 +369,49 @@
     </div>
 
     <div class="workspace">
-      <section class="results-column" aria-labelledby="results-heading">
+      <section class="results-column" aria-label="Funding opportunities">
         <details class="saved-panel" id="saved-panel">
           <summary>
-            <span><strong>★ Saved opportunities</strong> <small id="saved-count">(0)</small></span>
-            <span class="summary-action">View your saved list</span>
+            <span><strong>★ Saved opportunities and email alerts</strong> <small id="saved-count">(0)</small></span>
+            <span class="summary-action" id="alert-panel-summary">View saved items</span>
           </summary>
           <div class="saved-body">
             <div class="saved-list" id="saved-list"></div>
             <button class="text-button hidden" id="clear-saved" type="button">Clear all saved</button>
+            <section class="profile-search-alert" aria-labelledby="profile-search-alert-heading">
+              <div>
+                <h3 id="profile-search-alert-heading">Email alerts for this search</h3>
+                <p>Receive email only when a future opportunity becomes a new Strong match. Current results will not be emailed.</p>
+                <p class="profile-search-alert-privacy">Only your typed search and public filters are saved. Profiles, files, notes, and AI chats stay in this browser.</p>
+              </div>
+              <div class="profile-search-alert-actions">
+                <button class="button primary" id="alert-new-matches" type="button" aria-describedby="profile-search-alert-status" disabled>Save this search as an email alert</button>
+                <button class="text-button" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How search alerts work</button>
+                <p id="profile-search-alert-status" role="status" aria-live="polite">Run a typed funding search to enable this alert.</p>
+              </div>
+            </section>
           </div>
         </details>
         <p class="saved-storage-status hidden" id="saved-status" role="status" aria-live="polite"></p>
         <div class="results-toolbar search-not-started" id="results-toolbar">
+          <p class="search-status result-tier-counts" id="result-tier-counts" role="status" aria-live="polite" aria-atomic="true"></p>
           <div class="toolbar-actions">
-            <button class="button secondary" id="export-csv" type="button">Export CSV</button>
-            <button class="button secondary" id="export-ics" type="button">Export deadlines</button>
+            <button class="button primary" id="export-csv" type="button">Export CSV</button>
+            <button class="button primary team-ready-filter" id="filter-team-ready" type="button" aria-pressed="false" disabled>Build a team</button>
             <button class="button primary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Chat with your results</button>
           </div>
-          <div class="toolbar-lower-row">
-            <div class="results-summary">
-              <p class="eyebrow" id="results-mode">Ready when you are</p>
-              <h2 id="results-heading" aria-live="polite" aria-atomic="true"><span id="result-count"></span> <span id="result-label">Your matches will appear here</span></h2>
-              <p class="result-range" id="result-range"></p>
-            </div>
-            <div class="toolbar-controls">
-              <label>
-                <span>Sort</span>
-                <select id="sort">
-                  <option value="relevance">Relevance</option>
-                  <option value="deadline">Deadline: soonest</option>
-                  <option value="posted">Recently posted</option>
-                  <option value="award">Largest award</option>
-                  <option value="agency">Agency</option>
-                  <option value="title">Title</option>
-                </select>
-              </label>
-            </div>
+          <div class="toolbar-controls">
+            <label>
+              <span>Sort</span>
+              <select id="sort">
+                <option value="relevance">Relevance</option>
+                <option value="deadline">Deadline: soonest</option>
+                <option value="posted">Recently posted</option>
+                <option value="award">Largest award</option>
+                <option value="agency">Agency</option>
+                <option value="title">Title</option>
+              </select>
+            </label>
           </div>
         </div>
 
@@ -467,6 +439,7 @@
             <div class="chat-key-fields">
               <label>Provider
                 <select id="chat-k-provider">
+                  <option value="hosted">Funding Finder AI (included)</option>
                   <option value="openai">OpenAI</option>
                   <option value="anthropic">Anthropic</option>
                 </select>
@@ -489,7 +462,7 @@
             </div>
             <form class="chat-form" id="chat-form">
               <label class="sr-only" id="chat-input-label" for="chat-input">Ask about the current funding results</label>
-              <textarea id="chat-input" rows="3" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
+              <textarea id="chat-input" rows="3" maxlength="3000" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
               <button class="button primary" id="chat-submit" type="submit"><span>Send</span></button>
               <p class="chat-keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift+Enter for a new line</p>
             </form>
@@ -603,31 +576,36 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./assets/app-config.js?v=app-1.3.0-script-timeout2"></script>
+  <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
   <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
-  <script src="./data/catalog-metadata.js?v=catalog-20260828T211742197473Z"></script>
+  <script src="./data/catalog-metadata.js?v=catalog-20260903T144010663677Z"></script>
   <script src="./assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"></script>
-  <script src="./assets/orcid.js?v=orcid-2026-08-13"></script>
-  <script src="./assets/profile.js?v=audit-2026-08-13"></script>
+  <script src="./assets/orcid.js?v=orcid-format-20260903"></script>
+  <script src="./assets/profile.js?v=ai-boundaries-20260901"></script>
   <script src="./assets/profile-ranking.js?v=relevance-2026-08-15-v6"></script>
   <script src="./assets/nofo.js?v=filters-2026-08-13"></script>
   <script src="./assets/review.js?v=filters-2026-08-13"></script>
-  <script src="./assets/credentials.js?v=filters-2026-08-13"></script>
-  <script src="./assets/ai-provider.js?v=program-officer-qna-20260830"></script>
-  <script src="./assets/chat-ui.js?v=filters-2026-08-13"></script>
-  <script src="./assets/result-workflow.js?v=ai-additive-20260829"></script>
-  <script src="./assets/award-links.js?v=phase3-program-watches"></script>
+  <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
+  <script src="./assets/ai-gateway-config.js?v=hosted-ai-20260831"></script>
+  <script src="./assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"></script>
+  <script src="./assets/chat-ui.js?v=chat-output-fixes-20260830"></script>
+  <script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>
+  <script src="./assets/award-links.js?v=dod-awards-20260903"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
   <script src="./assets/search-query.js?v=app-1.3.0"></script>
-  <script src="./assets/search-retrieval.js?v=app-1.3.0"></script>
+  <script src="./assets/search-retrieval.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
   <script src="./assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
   <script src="./assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
-  <script src="./assets/site-help.js?v=unified-ui-20260825"></script>
+  <script src="./data/researcher_directory.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+  <script src="./data/opportunity_team_index.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+  <script src="./assets/opportunity-team.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+  <script src="./assets/opportunity-team-panel.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+  <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
   <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=ai-additive-20260829"></script>
+  <script src="./assets/app.js?v=48ec185e8a787447f1202dac38cb866adcfe6cd44461f9789cb336cdaf21b35d"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

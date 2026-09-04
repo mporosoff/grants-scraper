@@ -1,28 +1,9 @@
-"""Phase 4 engine: ChemE faculty publication profiles + solicitation matching.
+"""Generate conservative opportunity matches from the canonical researcher registry.
 
-Two stages:
-
-1. ``build_profiles`` — for each Chemical & Sustainability Engineering faculty
-   member, resolve their OpenAlex author record (preferring University of
-   Rochester affiliation) and build a research profile from their top OpenAlex
-   concepts/topics and recent publication titles. Writes ``faculty_profiles.json``.
-   OpenAlex is free and needs no key; ``OPENALEX_MAILTO`` can opt into its
-   polite pool without hard-coding a personal address.
-
-2. ``match_to_catalog`` — score every opportunity in ``data/opportunities.js``
-   against each faculty profile by topic/keyword overlap, and emit
-   ``data/faculty_matches.js`` for the (forthcoming) internal team-match page,
-   including simple multi-PI groupings for large/center solicitations.
-
-Stage 1 is runnable now (network only). Stage 2 is wired into the catalog
-pipeline and intentionally conservative: focused research concepts establish
-eligibility, catalog topics only corroborate that evidence, and recency is
-balanced with relevance after low-confidence matches are removed.
-
-Usage:
-    python -m scripts.faculty_match profiles --out faculty_profiles.json
-    python -m scripts.faculty_match match --catalog data/opportunities.js \
-        --profiles faculty_profiles.json --out data/faculty_matches.js
+Researcher identity, summaries, claims, and source provenance live only in
+``config/researcher_registry.json``. This module combines its department
+projection with the current opportunity catalog and emits the legacy-compatible
+``data/faculty_matches.js`` consumer used by Team Match.
 """
 
 from __future__ import annotations
@@ -30,114 +11,12 @@ from __future__ import annotations
 import argparse
 from datetime import date
 import json
-import os
+from pathlib import Path
 import re
-import time
-import urllib.parse
-import urllib.request
+
 
 from scripts.currentness import record_is_current
-
-OPENALEX = "https://api.openalex.org"
-OPENALEX_MAILTO = os.environ.get("OPENALEX_MAILTO", "").strip()
-ROCHESTER_HINT = "university of rochester"        # exclude "Rochester Institute of Technology"
-
-# Core Chemical & Sustainability Engineering faculty (Hajim, 2026).
-FACULTY = [
-    "Mitchell Anthamatten", "Yasemin Basdogan", "Pooja Rajendra Bhalode",
-    "Siddharth Deshpande", "Gang Fan", "David G. Foster",
-    "Darren Lipomi", "Allison J. Lopatkin", "Astrid M. Muller",
-    "Marc D. Porosoff", "Alexander A. Shestopalov", "Wyatt E. Tenhaeff",
-    "Matthew Z. Yates",
-]
-
-
-def _get(url: str) -> dict:
-    request_url = url
-    user_agent = "Funding-Finder-FacultyMatch/1.0"
-    if OPENALEX_MAILTO:
-        sep = "&" if "?" in url else "?"
-        request_url = f"{url}{sep}mailto={urllib.parse.quote(OPENALEX_MAILTO)}"
-        user_agent = f"{user_agent} ({OPENALEX_MAILTO})"
-    req = urllib.request.Request(
-        request_url,
-        headers={"User-Agent": user_agent},
-    )
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
-
-
-def _affiliation_names(author: dict) -> str:
-    names = []
-    for inst in author.get("last_known_institutions") or []:
-        if inst.get("display_name"):
-            names.append(inst["display_name"])
-    for aff in author.get("affiliations") or []:
-        inst = (aff.get("institution") or {})
-        if inst.get("display_name"):
-            names.append(inst["display_name"])
-    return " | ".join(names)
-
-
-def find_author(name: str) -> dict | None:
-    """Best OpenAlex author for a name that is actually affiliated with the
-    University of Rochester. Returns None when no confident UR match exists, so
-    we omit the person rather than attach a same-named stranger's publications
-    (that kind of mis-resolution previously produced incorrect profiles)."""
-    data = _get(f"{OPENALEX}/authors?search={urllib.parse.quote(name)}&per_page=15")
-    results = data.get("results") or []
-    rochester = [a for a in results
-                 if ROCHESTER_HINT in _affiliation_names(a).lower()]
-    if not rochester:
-        return None
-    best = max(rochester, key=lambda a: a.get("works_count") or 0)
-    best["_matched_rochester"] = True
-    return best
-
-
-def recent_titles(author_id: str, limit: int = 12) -> list[str]:
-    aid = author_id.rsplit("/", 1)[-1]
-    data = _get(
-        f"{OPENALEX}/works?filter=author.id:{aid}"
-        f"&sort=publication_date:desc&per_page={limit}"
-    )
-    return [w.get("display_name") for w in (data.get("results") or [])
-            if w.get("display_name")]
-
-
-def build_profiles() -> list[dict]:
-    profiles = []
-    for name in FACULTY:
-        try:
-            author = find_author(name)
-        except Exception as exc:  # network hiccup: record and continue
-            profiles.append({"name": name, "error": str(exc)})
-            continue
-        if not author:
-            profiles.append({"name": name,
-                             "error": "no University of Rochester match in OpenAlex"})
-            continue
-        concepts = [c.get("display_name") for c in (author.get("x_concepts") or [])
-                    if (c.get("score") or 0) >= 10][:12]
-        topics = [t.get("display_name") for t in (author.get("topics") or [])][:8]
-        try:
-            titles = recent_titles(author.get("id", ""))
-        except Exception:
-            titles = []
-        profiles.append({
-            "name": name,
-            "openalex_id": author.get("id"),
-            "resolved_name": author.get("display_name"),
-            "affiliation": _affiliation_names(author),
-            "matched_rochester": author.get("_matched_rochester", False),
-            "works_count": author.get("works_count"),
-            "concepts": concepts,
-            "topics": topics,
-            "recent_titles": titles,
-        })
-        time.sleep(0.3)
-    return profiles
-
+from scripts.researcher_registry import load_registry, matching_profiles
 
 # --------------------------------------------------------------------------- #
 # Stage 2: match profiles against the opportunity catalog (v1 keyword/topic)
@@ -153,172 +32,6 @@ applications application advancing advanced approaches approach based using thei
 which will been more also may can under new toward towards related general
 foundation opportunity opportunities proposal proposals faculty investigator
 investigators""".split())
-
-# Focused research concepts per PI, verified against the University of Rochester
-# Chemical and Sustainability Engineering faculty directory and supplemented by
-# recent publications. These override OpenAlex's auto topics, which mis-resolved
-# several people and attached over-broad tags. Each phrase is specific enough to
-# establish fit while broad enough to catch adjacent funding language.
-FACULTY_KEYTERMS: dict[str, list[str]] = {
-    "Mitchell Anthamatten": [
-        "macromolecular self-assembly", "associative and functional polymers",
-        "nanostructured polymer materials", "polymer interfacial phenomena",
-        "optoelectronic polymer materials", "vapor deposition polymerization"],
-    "Yasemin Basdogan": [
-        "machine learning for computational materials design",
-        "molecular dynamics simulation", "quantum chemistry",
-        "polymer solution modeling", "computational catalysis",
-        "CO2 separation membranes"],
-    "Pooja Rajendra Bhalode": [
-        "process systems engineering", "multiscale molecules-to-systems modeling",
-        "physics and data-driven hybrid modeling", "powder flow modeling",
-        "sustainable process design", "solvent-based extraction"],
-    "Siddharth Deshpande": [
-        "atomic modeling of solid-liquid interfaces",
-        "atomic modeling of solid-gas interfaces",
-        "machine learning for catalyst discovery", "heterogeneous catalysis",
-        "electrocatalysis at interfaces", "battery interface modeling"],
-    "Gang Fan": [
-        "bio-inspired catalysis", "polymer chemistry and plastic upcycling",
-        "bioelectrochemistry", "biosensors", "synthetic biology",
-        "metabolic engineering for environmental remediation"],
-    "David G. Foster": [
-        "transport phenomena", "computational fluid dynamics",
-        "microfluidic cancer cell capture", "nanoparticle capture coatings",
-        "biomedical transport modeling", "fluid mechanics education"],
-    "Darren Lipomi": [
-        "organic and flexible electronics", "conducting polymers",
-        "stretchable semiconductors", "mechanical properties of organic electronics",
-        "electrotactile haptics", "wearable bioelectronic interfaces"],
-    "Allison J. Lopatkin": [
-        "antibiotic resistance", "plasmid dynamics and horizontal gene transfer",
-        "engineered microbial communities", "microbial systems biology",
-        "metabolic engineering", "computational models of bacterial resistance"],
-    "Astrid M. Muller": [
-        "electrocatalytic aqueous PFAS defluorination",
-        "organic electrooxidation through water activation",
-        "selective carbon dioxide reduction", "electrode microenvironments",
-        "pulsed-laser nanoparticle synthesis", "nanocatalyst structure-function"],
-    "Marc D. Porosoff": [
-        "carbon dioxide capture and conversion", "heterogeneous thermal catalysis",
-        "catalyst structure-property relationships", "reactive separations",
-        "C1 chemistry and light alkane upgrading",
-        "catalyst representation with large language models"],
-    "Alexander A. Shestopalov": [
-        "surface chemistry and molecular monolayers",
-        "surface patterning and contact printing", "nanostructured materials",
-        "interfacial thermodynamics", "organic thin-film coatings",
-        "self-assembled monolayers"],
-    "Wyatt E. Tenhaeff": [
-        "lithium metal batteries", "solid electrolyte interphase",
-        "solid-state battery electrolytes", "battery interfacial engineering",
-        "polymer thin-film electrolytes", "vacuum deposition processing"],
-    "Matthew Z. Yates": [
-        "functional surfaces and coatings", "sorbent polymers for chemical sensing",
-        "waveguide-enhanced Raman sensing", "electrochemical sensors",
-        "electrochemical surface modification", "open-source electrochemistry hardware"],
-}
-
-# Human-readable synthesis of each official profile. The matcher uses the
-# focused concepts above, while these summaries preserve the broader research
-# context that motivated those concepts and can be shown by the interface.
-FACULTY_RESEARCH_SUMMARIES: dict[str, str] = {
-    "Mitchell Anthamatten": (
-        "Develops associative and functional polymers, macromolecular self-assembly, "
-        "nanostructured and optoelectronic polymer materials, and vapor-deposited "
-        "polymer interfaces."
-    ),
-    "Yasemin Basdogan": (
-        "Uses quantum chemistry, molecular dynamics, and machine learning to design "
-        "polymers, solutions, catalytic materials, and separation media."
-    ),
-    "Pooja Rajendra Bhalode": (
-        "Builds multiscale, physics-informed, and data-driven process models for "
-        "sustainable process systems, powder flow, and solvent-based separations."
-    ),
-    "Siddharth Deshpande": (
-        "Models solid-liquid and solid-gas interfaces and develops data-driven methods "
-        "for heterogeneous catalysis, electrocatalysis, and battery interfaces."
-    ),
-    "Gang Fan": (
-        "Combines polymer chemistry, bio-inspired catalysis, synthetic biology, "
-        "bioelectrochemistry, and metabolic engineering for plastic upcycling, sensing, "
-        "and environmental remediation."
-    ),
-    "David G. Foster": (
-        "Studies transport phenomena and computational fluid dynamics, including "
-        "microfluidic and nanoparticle-coating approaches for capturing circulating cells."
-    ),
-    "Darren Lipomi": (
-        "Develops conducting and semiconducting polymers for flexible electronics, "
-        "wearable biointerfaces, medical devices, and electrotactile haptics."
-    ),
-    "Allison J. Lopatkin": (
-        "Uses systems and synthetic biology, microbial community engineering, mathematical "
-        "modeling, and machine learning to study metabolism, horizontal gene transfer, and "
-        "antibiotic resistance."
-    ),
-    "Astrid M. Muller": (
-        "Develops nanocatalysts and electrode microenvironments for aqueous PFAS "
-        "defluorination, selective carbon dioxide reduction, and organic electrooxidation, "
-        "including controlled pulsed-laser synthesis."
-    ),
-    "Marc D. Porosoff": (
-        "Develops heterogeneous thermal catalysts and reactive separations for carbon "
-        "dioxide capture and conversion, C1 chemistry, and light-alkane upgrading, with "
-        "data and language-model representations of catalyst behavior."
-    ),
-    "Alexander A. Shestopalov": (
-        "Studies molecularly engineered surfaces, monolayers, surface patterning, "
-        "nanostructured materials, organic coatings, and interfacial thermodynamics."
-    ),
-    "Wyatt E. Tenhaeff": (
-        "Engineers interfaces, solid electrolytes, and polymer thin films for solid-state "
-        "and lithium-metal batteries using thin-film synthesis and vacuum processing."
-    ),
-    "Matthew Z. Yates": (
-        "Develops functional surfaces and coatings, electrochemical and Raman sensors, "
-        "surface-modification methods, and open-source electrochemistry hardware."
-    ),
-}
-
-# Curated program-topic domains per PI, drawn from the catalog's controlled
-# ``topic_areas`` vocabulary. Chosen conservatively and only where central to the
-# person's work. These tags can corroborate concept-level evidence, but never
-# establish a match by themselves because catalog topic tagging is intentionally
-# broad and occasionally noisy.
-FACULTY_DOMAINS: dict[str, list[str]] = {
-    "Mitchell Anthamatten": ["Materials science", "Manufacturing"],
-    "Yasemin Basdogan": [
-        "Catalysis and reaction engineering", "Separations and membranes",
-        "Materials science", "Carbon management",
-        "Artificial intelligence and machine learning", "Energy"],
-    "Pooja Rajendra Bhalode": [
-        "Manufacturing", "Artificial intelligence and machine learning"],
-    "Siddharth Deshpande": [
-        "Catalysis and reaction engineering", "Energy", "Materials science",
-        "Artificial intelligence and machine learning"],
-    "Gang Fan": [
-        "Biology and biotechnology", "Catalysis and reaction engineering",
-        "Carbon management", "Materials science", "Environmental science"],
-    "David G. Foster": ["Materials science", "Biology and biotechnology"],
-    "Darren Lipomi": ["Materials science", "Manufacturing"],
-    "Allison J. Lopatkin": [
-        "Biology and biotechnology", "Infectious disease", "Public health",
-        "Environmental science"],
-    "Astrid M. Muller": [
-        "Catalysis and reaction engineering", "Energy", "Carbon management",
-        "Environmental science", "Materials science"],
-    "Marc D. Porosoff": [
-        "Catalysis and reaction engineering", "Carbon management", "Energy",
-        "Materials science"],
-    "Alexander A. Shestopalov": ["Materials science", "Manufacturing"],
-    "Wyatt E. Tenhaeff": ["Energy", "Materials science", "Manufacturing"],
-    "Matthew Z. Yates": [
-        "Materials science", "Separations and membranes",
-        "Catalysis and reaction engineering"],
-}
-
 
 def _load_catalog(path: str) -> list[dict]:
     with open(path, encoding="utf-8") as catalog_file:
@@ -360,17 +73,8 @@ def _phrase_hit(sig: list[str], opp_tokens: list[str]) -> bool:
 
 
 def _key_terms(profile: dict) -> list[str]:
-    """5-8 descriptive key phrases for a PI: a hand-curated override if provided,
-    otherwise the PI's top OpenAlex research topics."""
-    if profile["name"] in FACULTY_KEYTERMS:
-        return [t for t in FACULTY_KEYTERMS[profile["name"]] if t][:8]
-    seen, terms = set(), []
-    for t in (profile.get("topics") or []):
-        t = re.sub(r"\s+", " ", t or "").strip()
-        if t and t.lower() not in seen:
-            seen.add(t.lower())
-            terms.append(t)
-    return terms[:8]
+    """Return active, registry-reviewed matching claims."""
+    return [str(term).strip() for term in profile.get("key_terms", []) if str(term).strip()]
 
 
 # --------------------------------------------------------------------------- #
@@ -601,12 +305,9 @@ def _pi_domains(profile: dict) -> list[str]:
             if any(k in text for k in kws)]
 
 
-def _domains_for(name: str, profile: dict) -> list[str]:
-    """Curated program-topic domains if we have them (the norm), otherwise fall
-    back to the auto lexicon for any faculty not yet hand-curated."""
-    if name in FACULTY_DOMAINS:
-        return list(FACULTY_DOMAINS[name])
-    return _pi_domains(profile)
+def _domains_for(_name: str, profile: dict) -> list[str]:
+    """Return registry-reviewed catalog domains for a researcher."""
+    return [str(domain).strip() for domain in profile.get("domains", []) if str(domain).strip()]
 
 
 def _niche_topics(catalog: list[dict]) -> set[str]:
@@ -662,7 +363,7 @@ def _recency_score(value: str, newest_value: str) -> float:
 
 
 def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
-                     top_n: int = 25) -> dict:
+                     top_n: int = 25, registry_generation: str = "") -> dict:
     """Match every PI against the catalog and emit a per-PI index the team page
     uses to compute mutual interests for any chosen subset.
 
@@ -679,31 +380,29 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
     ]
     niche = _niche_topics(catalog)
 
-    # Roster = the full FACULTY list, so hand-curated people with no OpenAlex
-    # profile are still included. Curated key terms / domains
-    # take precedence; OpenAlex only supplies resolved_name / works_count.
-    prof_by_name = {p.get("name"): p for p in profiles if p.get("name")}
     faculty_meta: dict[str, dict] = {}
     faculty_terms: dict[str, list[str]] = {}
     faculty_doms: dict[str, set] = {}
-    for name in FACULTY:
-        p = prof_by_name.get(name) or {"name": name}
-        terms = _key_terms(p)
-        doms = set(_domains_for(name, p))
-        if not terms and not doms:
+    for profile in profiles:
+        name = str(profile.get("name") or "").strip()
+        terms = _key_terms(profile)
+        doms = set(_domains_for(name, profile))
+        if not name or (not terms and not doms):
             continue
-        resolved = name if p.get("error") else (p.get("resolved_name") or name)
         faculty_terms[name] = terms
         faculty_doms[name] = doms
         faculty_meta[name] = {
-            "resolved_name": resolved,
-            "openalex_id": None if p.get("error") else p.get("openalex_id"),
-            "works_count": None if p.get("error") else p.get("works_count"),
-            "research_summary": FACULTY_RESEARCH_SUMMARIES.get(name, ""),
+            "researcher_id": profile.get("researcher_id") or "",
+            "legacy_ids": profile.get("legacy_ids") or [],
+            "resolved_name": profile.get("resolved_name") or name,
+            "openalex_id": profile.get("openalex_id") or None,
+            "works_count": profile.get("works_count"),
+            "research_summary": profile.get("research_summary") or "",
             "key_terms": terms,
             "domains": sorted(doms),
+            "claim_refs": profile.get("claim_refs") or [],
         }
-    term_sig = {name: [(t, _sig_words(t)) for t in terms]
+    term_sig = {name: [(term, _sig_words(term)) for term in terms]
                 for name, terms in faculty_terms.items()}
 
     pi_matches: dict[str, list] = {name: [] for name in faculty_meta}
@@ -791,6 +490,8 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
         -g["team_size"], -g["total_score"], (g["title"] or "").lower()))
 
     out = {
+        "registry_generation": registry_generation,
+        "faculty_count": len(faculty_meta),
         "catalog_size": len(catalog),
         "niche_topics": sorted(niche),
         "faculty": faculty_meta,
@@ -801,40 +502,26 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
         "agency_scope": AGENCY_SCOPE,
         "broad_pattern": BROAD_PATTERN,
     }
-    # Write canonical UTF-8/LF bytes directly. Text-mode output translates
-    # newlines on Windows, so a release manifest generated before `git add`
-    # can otherwise hash CRLF worktree bytes while Git publishes LF bytes.
-    serialized = (
-        "/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n"
-        "globalThis.FACULTY_MATCHES="
-        + json.dumps(out, ensure_ascii=False)
-        + ";\n"
-    )
-    with open(out_path, "wb") as fh:
-        fh.write(serialized.encode("utf-8"))
+    with open(out_path, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write("/* Generated by scripts/faculty_match.py. Do not edit by hand. */\n")
+        fh.write("globalThis.FACULTY_MATCHES=")
+        json.dump(out, fh, ensure_ascii=False)
+        fh.write(";\n")
     return out
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser()
-    sub = ap.add_subparsers(dest="cmd", required=True)
-    p1 = sub.add_parser("profiles")
-    p1.add_argument("--out", default="faculty_profiles.json")
-    p2 = sub.add_parser("match")
-    p2.add_argument("--catalog", default="data/opportunities.js")
-    p2.add_argument("--profiles", default="faculty_profiles.json")
-    p2.add_argument("--out", default="data/faculty_matches.js")
-    args = ap.parse_args()
 
-    if args.cmd == "profiles":
-        profiles = build_profiles()
-        with open(args.out, "w", encoding="utf-8") as fh:
-            json.dump(profiles, fh, ensure_ascii=False, indent=2)
-        print(f"wrote {args.out} ({len(profiles)} faculty)")
-    elif args.cmd == "match":
-        profiles = json.load(open(args.profiles, encoding="utf-8"))
-        out = match_to_catalog(profiles, args.catalog, args.out)
-        print(f"wrote {args.out}: {len(out['multi_pi_suggestions'])} multi-PI suggestions")
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--catalog", default="data/opportunities.js")
+    parser.add_argument("--registry", type=Path, default=Path("config/researcher_registry.json"))
+    parser.add_argument("--out", default="data/faculty_matches.js")
+    parser.add_argument("--top", type=int, default=25)
+    args = parser.parse_args()
+    registry = load_registry(args.registry)
+    profiles = matching_profiles(registry)
+    output = match_to_catalog(profiles, args.catalog, args.out, top_n=args.top, registry_generation=registry["registry_generation"])
+    print(f"wrote {args.out} ({len(output['faculty'])} department researchers; registry={registry['registry_generation']})")
 
 
 if __name__ == "__main__":

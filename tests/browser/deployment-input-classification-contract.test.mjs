@@ -228,6 +228,15 @@ test("Award workflow classifies before mutation and retains Pages validation on 
     awardWorkflow.indexOf("\n      - name: Deploy the committed Award Worker"),
     awardWorkflow.indexOf("\n      - name:", awardWorkflow.indexOf("Configure the Award abuse-control identity secret")),
   );
+  const awardSecretStep = workflowStep(awardWorkflow, "Configure the Award abuse-control identity secret");
+  assert.match(awardSecretStep, /id: worker-secret/);
+  assert.match(awardSecretStep, /secret_file="\$\(mktemp\)"[\s\S]*chmod 600 "\$secret_file"/);
+  assert.match(awardSecretStep, /jq -Rs '\{AWARD_RATE_LIMIT_SECRET: \.\}' > "\$secret_file"/);
+  assert.doesNotMatch(awardSecretStep, /wrangler[^\n]*secret put/);
+  const awardDeployStep = workflowStep(awardWorkflow, "Deploy the committed Award Worker");
+  assert.match(awardDeployStep, /secret_file="\$\{\{ steps\.worker-secret\.outputs\.secrets_file \}\}"/);
+  assert.match(awardDeployStep, /trap 'rm -f -- "\$secret_file"' EXIT/);
+  assert.match(awardDeployStep, /wrangler@4\.125\.0 deploy[\s\S]*--secrets-file "\$secret_file"/);
 });
 
 test("Award Worker live smoke exercises investigator facets from the direct page aggregate", () => {

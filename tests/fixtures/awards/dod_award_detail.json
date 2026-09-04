@@ -1,0 +1,36 @@
+{
+  "generated_unique_award_id": "ASST_NON_FA9550261B195_097",
+  "fain": "FA9550261B195",
+  "description": "MURI: PHYSICS AND APPLICATIONS OF INTENSE, SPATIOTEMPORALLY STRUCTURED LIGHT FIELDS",
+  "type": "04",
+  "total_obligation": 3000000,
+  "date_signed": "2026-08-28",
+  "period_of_performance": {
+    "start_date": "2026-09-01",
+    "end_date": "2031-08-31",
+    "last_modified_date": "2026-09-01"
+  },
+  "recipient": {
+    "recipient_name": "UNIVERSITY OF MARYLAND, COLLEGE PARK",
+    "recipient_uei": "NPU8ULVAAS23"
+  },
+  "awarding_agency": {
+    "toptier_agency": {
+      "name": "Department of Defense"
+    },
+    "subtier_agency": {
+      "name": "Department of the Air Force"
+    },
+    "office_agency_name": "FA9550  AFRL AFOSR"
+  },
+  "cfda_info": [
+    {
+      "cfda_number": "12.800",
+      "cfda_title": "Air Force Defense Research Sciences Program"
+    }
+  ],
+  "funding_opportunity": {
+    "number": "NOFOAFRLAFOSR20250002",
+    "goals": "Support fundamental research aligned with Department of the Air Force priorities."
+  }
+}

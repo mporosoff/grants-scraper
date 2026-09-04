@@ -5,6 +5,12 @@ import vm from "node:vm";
 
 const root = new URL("../", import.meta.url);
 
+test("provider requests use the bounded 60-second default timeout", async () => {
+  const source = await readFile(new URL("../assets/ai-provider.js", root), "utf8");
+  assert.match(source, /REQUEST_TIMEOUT_MS = 60_000/);
+  assert.match(source, /Math\.min\(60_000,/);
+});
+
 async function loadProvider(overrides = {}) {
   const source = await readFile(new URL("../assets/ai-provider.js", root), "utf8");
   const context = { AbortController, clearTimeout, console, setTimeout, ...overrides };
@@ -107,7 +113,7 @@ const samples = {
     narrative_needed: false,
   },
   program_officer_question_plan: {
-    intent: "topical",
+    intent: "awards",
     concepts: ["carbon dioxide", "conversion"],
     phrases: ["carbon dioxide conversion"],
     exclusions: ["combustion"],
@@ -172,10 +178,46 @@ test("OpenAI uses strict Responses JSON Schema, store false, and raw output item
     type: "json_schema",
     name: "funding_search_plan_v1",
     description: provider.STRUCTURED_OPERATIONS.search_plan.description,
-    schema: JSON.parse(JSON.stringify(provider.STRUCTURED_OPERATIONS.search_plan.schema)),
+    schema: JSON.parse(JSON.stringify(provider.schemaForProvider(
+      provider.STRUCTURED_OPERATIONS.search_plan.schema,
+      "openai",
+    ))),
     strict: true,
   });
   assert.equal(body.max_output_tokens, 5000);
+  assert.equal(JSON.stringify(result), JSON.stringify(samples.search_plan));
+});
+
+test("hosted AI requires no browser key and sends no browser-owned prompt or model", async () => {
+  const endpoint = "https://funding-finder-ai.example/v1/structured";
+  const provider = await loadProvider({
+    FUNDING_AI_GATEWAY: { endpoint, modelLabel: "routed" },
+  });
+  let request;
+  const result = await provider.structuredResult({
+    provider: "hosted",
+    key: "",
+    operation: "search_plan",
+    system: "This browser prompt must not cross the gateway boundary.",
+    user: JSON.stringify({ topic: "catalysis" }),
+    fetchImpl: async (url, options) => {
+      request = { url, options, body: JSON.parse(options.body) };
+      return jsonResponse({
+        output: samples.search_plan,
+        route: { model: "gemma", fallback_used: false },
+      });
+    },
+  });
+
+  assert.equal(provider.HOSTED_PROVIDER, "hosted");
+  assert.equal(request.url, endpoint);
+  assert.deepEqual(request.body, {
+    operation: "search_plan",
+    user: JSON.stringify({ topic: "catalysis" }),
+  });
+  assert.equal("system" in request.body, false);
+  assert.equal("model" in request.body, false);
+  assert.equal("Authorization" in request.options.headers, false);
   assert.equal(JSON.stringify(result), JSON.stringify(samples.search_plan));
 });
 
@@ -236,6 +278,19 @@ test("Anthropic schema adaptation preserves strict local bounds without mutating
   assert.equal(adapted.properties.matches.items.properties.score.maximum, undefined);
   assert.match(adapted.properties.matches.items.properties.score.description, /less than or equal to 100/);
   assert.equal(provider.schemaForProvider(canonical, "openai").properties.matches.maxItems, 12);
+
+  const searchCanonical = provider.STRUCTURED_OPERATIONS.search_plan.schema;
+  const openAISearchSchema = provider.schemaForProvider(searchCanonical, "openai");
+  assert.equal(searchCanonical.properties.search_terms.uniqueItems, true);
+  assert.equal(openAISearchSchema.properties.search_terms.uniqueItems, undefined);
+  assert.match(openAISearchSchema.properties.search_terms.description, /Items must be unique/);
+  assert.throws(
+    () => provider.validateStructuredValue({
+      ...samples.search_plan,
+      search_terms: ["catalysis", "catalysis", "electrocatalysis", "reaction mechanisms", "active sites"],
+    }, searchCanonical),
+    error => error.category === "schema_validation",
+  );
 
   assert.throws(
     () => provider.validateStructuredValue({
@@ -439,6 +494,29 @@ test("missing keys and unsupported operations fail before any provider request",
     }),
     error => error.category === "unsupported_contract",
   );
+  assert.equal(calls, 0);
+});
+
+test("browser adapters reject empty and oversized context before any hosted or personal provider request", async () => {
+  const provider = await loadProvider({
+    FUNDING_AI_GATEWAY: { endpoint: "https://funding-finder-ai.example/v1/structured" },
+  });
+  let calls = 0;
+  for (const [selectedProvider, key] of [["hosted", ""], ["openai", "test-key"]]) {
+    for (const user of ["", "x".repeat(provider.MAX_USER_CHARS + 1)]) {
+      await assert.rejects(
+        provider.structuredResult({
+          provider: selectedProvider,
+          key,
+          operation: "search_plan",
+          system: "Create a search plan.",
+          user,
+          fetchImpl: async () => { calls += 1; },
+        }),
+        error => error.category === "request_too_large",
+      );
+    }
+  }
   assert.equal(calls, 0);
 });
 

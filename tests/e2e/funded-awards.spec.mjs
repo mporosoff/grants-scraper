@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import {
   mockAwards,
   mockAlerts,
+  mockFrozenFundingCatalog,
   mockHybrid,
   openFundingFinder,
   runFundingSearch,
@@ -10,7 +11,30 @@ import {
 // Snapshot-native standalone coverage lives in unit-b-funded-awards.spec.mjs.
 // These tests retain the exact-opportunity and cross-product compatibility surface.
 
+async function openFrozenAwardFromFundingFinder(page, context, opportunityId, query) {
+  await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
+  await mockFrozenFundingCatalog(context);
+  mockHybrid(page);
+  const awardCalls = mockAwards(context);
+  await openFundingFinder(page);
+  await runFundingSearch(page, query);
+
+  const card = page.locator(`[data-opportunity-id="${opportunityId}"]`);
+  await expect(card).toBeVisible();
+  const link = card.locator("[data-funded-awards]");
+  await expect(link).toHaveAttribute("href", new RegExp(`funded_awards\\.html\\?opportunity=${opportunityId}$`));
+  await expect(link).toHaveAttribute("target", "_blank");
+  await expect(link).toHaveAttribute("rel", "noopener");
+  const [awardsPage] = await Promise.all([
+    page.waitForEvent("popup"),
+    link.click(),
+  ]);
+  await awardsPage.waitForLoadState("domcontentloaded");
+  return { awardsPage, awardCalls };
+}
+
 test("standalone paging and investigator handoff retain the submitted year range", async ({ page }) => {
+  await mockFrozenFundingCatalog(page);
   const calls = mockAwards(page, {
     hasMoreBySource: { NSF: [0] },
     resultCountPerSource: { NSF: 1 },
@@ -42,8 +66,8 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/funded_awards.html");
   const pill = page.locator(".header-context-pill");
-  await expect(pill).toHaveText("NSF · NIH · DOE");
-  await expect(pill).toHaveAttribute("aria-label", "NSF, NIH, and DOE award sources available");
+  await expect(pill).toHaveText("NSF · NIH · DOE · DoD");
+  await expect(pill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
   const geometry = await pill.evaluate(element => {
     const bounds = element.getBoundingClientRect();
     return {
@@ -59,20 +83,8 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   expect(geometry.contentWidth).toBeLessThanOrEqual(geometry.visibleWidth);
 });
 
-test("eligible Funding Finder results open Funded Awards in a new tab with the exact NIH opportunity selected", async ({ page, context }) => {
-  await page.clock.setFixedTime(new Date("2026-08-28T12:00:00Z"));
-  mockHybrid(page);
-  const awardCalls = mockAwards(context);
-  await openFundingFinder(page);
-  await runFundingSearch(page, "PAR-26-114");
-  const card = page.locator('[data-opportunity-id="361187"]');
-  await expect(card).toBeVisible();
-  const link = card.locator("[data-funded-awards]");
-  await expect(link).toHaveAttribute("target", "_blank");
-  const [awardsPage] = await Promise.all([
-    page.waitForEvent("popup"),
-    link.click(),
-  ]);
+test("the frozen NIH example opens its exact opportunity mapping", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "361187", "PAR-26-114");
   await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("Lasker Clinical Research Scholar");
   await expect(awardsPage.locator("#selected-mapping-note")).toContainText("exact NIH opportunity number PAR-26-114");
   await expect(awardsPage.locator(".award-card[data-source='NIH']")).toHaveCount(1);
@@ -81,17 +93,8 @@ test("eligible Funding Finder results open Funded Awards in a new tab with the e
   expect(awardCalls[0].criteria.opportunity_number).toBe("PAR-26-114");
 });
 
-test("an eligible DOE Office of Science result opens the exact PAMS FOA search without a program-equivalence claim", async ({ page, context }) => {
-  mockHybrid(page);
-  const awardCalls = mockAwards(context);
-  await openFundingFinder(page);
-  await runFundingSearch(page, "DE-FOA-0003612");
-  const card = page.locator('[data-opportunity-id="361526"]');
-  await expect(card).toBeVisible();
-  const [awardsPage] = await Promise.all([
-    page.waitForEvent("popup"),
-    card.locator("[data-funded-awards]").click(),
-  ]);
+test("the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "361526", "DE-FOA-0003612");
   await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("The Genesis Mission");
   await expect(awardsPage.locator("#selected-mapping-note")).toContainText("exact DOE Office of Science FOA DE-FOA-0003612");
   await expect(awardsPage.locator(".award-card[data-source='DOE']")).toHaveCount(1);
@@ -102,17 +105,8 @@ test("an eligible DOE Office of Science result opens the exact PAMS FOA search w
   await expect(awardsPage.locator("#watch-selected-program")).toBeHidden();
 });
 
-test("the reviewed NSF CBET parent opens its exact current and predecessor program group", async ({ page, context }) => {
-  mockHybrid(page);
-  const awardCalls = mockAwards(context);
-  await openFundingFinder(page);
-  await runFundingSearch(page, "26-518");
-  const card = page.locator('[data-opportunity-id="363616"]');
-  await expect(card).toBeVisible();
-  const [awardsPage] = await Promise.all([
-    page.waitForEvent("popup"),
-    card.locator("[data-funded-awards]").click(),
-  ]);
+test("the frozen NSF CBET example opens its reviewed current and predecessor program group", async ({ page, context }) => {
+  const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "363616", "26-518");
   await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("Chemical, Bioengineering, Energy, and Transport Systems");
   await expect(awardsPage.locator("#selected-mapping-note")).toContainText("reviewed predecessor program-element codes");
   await expect(awardsPage.locator(".award-card[data-source='NSF']")).toHaveCount(1);

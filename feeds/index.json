@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-08-28T21:17:09Z",
-  "excluded_noncurrent": 13,
+  "generated_at": "2026-09-03T14:39:56Z",
+  "excluded_noncurrent": 12,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1430
+      "count": 1397
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1371
+      "count": 1339
     },
     {
       "title": "Funding Finder | Internal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml",
-      "count": 22
+      "count": 21
     },
     {
       "title": "Funding Finder | State",
@@ -25,17 +25,17 @@
     {
       "title": "Funding Finder | Agriculture and food",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml",
-      "count": 110
+      "count": 106
     },
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 223
+      "count": 224
     },
     {
       "title": "Funding Finder | Arts and culture",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml",
-      "count": 107
+      "count": 111
     },
     {
       "title": "Funding Finder | Biology and biotechnology",
@@ -45,7 +45,7 @@
     {
       "title": "Funding Finder | Cancer",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml",
-      "count": 111
+      "count": 105
     },
     {
       "title": "Funding Finder | Carbon management",
@@ -65,62 +65,62 @@
     {
       "title": "Funding Finder | Community development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml",
-      "count": 55
+      "count": 53
     },
     {
       "title": "Funding Finder | Cybersecurity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml",
-      "count": 195
+      "count": 182
     },
     {
       "title": "Funding Finder | Data science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml",
-      "count": 223
+      "count": 226
     },
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 514
+      "count": 501
     },
     {
       "title": "Funding Finder | Energy",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml",
-      "count": 117
+      "count": 113
     },
     {
       "title": "Funding Finder | Environmental science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml",
-      "count": 272
+      "count": 262
     },
     {
       "title": "Funding Finder | Health equity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml",
-      "count": 24
+      "count": 23
     },
     {
       "title": "Funding Finder | Infectious disease",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml",
-      "count": 61
+      "count": 57
     },
     {
       "title": "Funding Finder | Manufacturing",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml",
-      "count": 67
+      "count": 63
     },
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 40
+      "count": 39
     },
     {
       "title": "Funding Finder | Neuroscience",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml",
-      "count": 81
+      "count": 87
     },
     {
       "title": "Funding Finder | Public health",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml",
-      "count": 149
+      "count": 147
     },
     {
       "title": "Funding Finder | Quantum science",
@@ -140,22 +140,22 @@
     {
       "title": "Funding Finder | Space and aeronautics",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml",
-      "count": 23
+      "count": 27
     },
     {
       "title": "Funding Finder | Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 171
+      "count": 165
     },
     {
       "title": "Funding Finder | Transportation",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml",
-      "count": 138
+      "count": 123
     },
     {
       "title": "Funding Finder | Water",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml",
-      "count": 30
+      "count": 27
     },
     {
       "title": "Opportunity changes",

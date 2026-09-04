@@ -652,7 +652,7 @@ html.help-open {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1220px) {
   .site-header {
     position: sticky;
     min-height: 64px;

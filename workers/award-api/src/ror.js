@@ -1,8 +1,8 @@
 import { cleanText, uniqueStrings } from "./contract.js";
-import { AwardSourceError, fetchSourceJson } from "./http.js";
+import { AwardSourceError, SOURCE_TIMEOUT_MS, fetchSourceJson } from "./http.js";
 
 const ROR_API = "https://api.ror.org/v2/organizations";
-const ROR_ADAPTER_VERSION = "1.1.0";
+const ROR_ADAPTER_VERSION = "1.3.0";
 const ROR_RESULT_LIMIT = 8;
 
 function identityKey(value) {
@@ -52,19 +52,26 @@ function candidateScore(candidate, query) {
   const canonicalKey = identityKey(candidate.canonical_name);
   const aliasKeys = candidate.aliases.map(identityKey);
   const acronymKeys = candidate.acronyms.map(identityKey);
+  const canonicalUniversityKey = `university of ${queryKey}`;
+  const canonicalNamedUniversityKey = `${queryKey} university`;
+  const commonUniversityShorthand = canonicalKey === canonicalUniversityKey
+    || canonicalKey === `the ${canonicalUniversityKey}`
+    || canonicalKey === canonicalNamedUniversityKey;
   let score = canonicalKey === queryKey
     ? 120
     : aliasKeys.includes(queryKey)
       ? 100
       : acronymKeys.includes(queryKey)
         ? 90
-        : canonicalKey.startsWith(queryKey)
-          ? 65
-          : canonicalKey.includes(queryKey)
-            ? 45
-            : 20;
+        : commonUniversityShorthand
+          ? 80
+          : canonicalKey.startsWith(queryKey)
+            ? 65
+            : canonicalKey.includes(queryKey)
+              ? 45
+              : 20;
 
-  // NSF, NIH, and DOE are U.S. funders. This corpus-specific tie-break keeps
+  // NSF, NIH, DOE, and DoD are U.S. funders. This corpus-specific tie-break keeps
   // ambiguous short acronyms such as MIT, UVA, RIT, and UCLA deterministic
   // without hiding the lower-ranked ROR candidates from the typeahead.
   if (candidate.location.country_code === "US") score += 24;
@@ -145,12 +152,12 @@ export async function searchRor(fetchImpl, query, { limit = ROR_RESULT_LIMIT } =
   };
 }
 
-export async function resolveRorOrganization(fetchImpl, id) {
+export async function resolveRorOrganization(fetchImpl, id, { timeoutMs = SOURCE_TIMEOUT_MS } = {}) {
   const url = rorRecordUrl(id);
   if (!url) throw new AwardSourceError("invalid_institution_identity", "unsupported");
   const payload = await fetchSourceJson(fetchImpl, url, {
     headers: { Accept: "application/json" },
-  });
+  }, { timeoutMs });
   const organization = normalizeRorOrganization(payload, "");
   if (!organization || organization.id !== safeRorId(id)) {
     throw new AwardSourceError("source_invalid_response");

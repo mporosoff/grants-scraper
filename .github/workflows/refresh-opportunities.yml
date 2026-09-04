@@ -11,6 +11,8 @@ on:
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
       - "scripts/faculty_match.py"
+      - "scripts/researcher_registry.py"
+      - "config/researcher_registry.json"
       - "scripts/program_areas.py"
       - "scripts/sources/**"
       - "scripts/update_catalog_docs.py"
@@ -31,6 +33,7 @@ on:
         type: boolean
 
 permissions:
+  actions: write
   contents: write
   issues: write
   pull-requests: write
@@ -58,8 +61,6 @@ jobs:
         with:
           node-version: "22"
       - run: python -m pip install -r requirements.txt
-      - name: Verify the reviewed Hajim faculty directory
-        run: python -m scripts.hajim_faculty_directory --check
       - name: Verify the committed search package
         run: node tools/build_search_release_package.mjs --check
       - name: Run the complete Python product gate
@@ -199,7 +200,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: "11.19.0"
       - name: Preserve the prior catalog for change detection
@@ -259,12 +260,10 @@ jobs:
           --fail-on-degraded
       - name: Rebuild faculty metadata and live team-matcher configuration
         run: >-
-          python -m scripts.faculty_match match
+          python -m scripts.faculty_match
           --catalog data/opportunities.js
-          --profiles faculty_profiles.json
+          --registry config/researcher_registry.json
           --out data/faculty_matches.js
-      - name: Verify the reviewed Hajim faculty directory
-        run: python -m scripts.hajim_faculty_directory --check
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
           python -m scripts.build_changes
@@ -442,7 +441,7 @@ jobs:
           # would abort the commit and stop the nightly publishing entirely.
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/hajim-faculty-directory.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
+          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
           if [ -f data/subtopics.js ]; then
             git add data/subtopics.js
           fi
@@ -505,6 +504,12 @@ jobs:
             exit 1
           fi
           echo "merge_sha=$merge_sha" >> "$GITHUB_OUTPUT"
+      - name: Dispatch refreshed catalog to GitHub Pages
+        if: success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
       - name: Verify GitHub Pages serves the coordinated search package
         id: pages-verify
         if: success()
@@ -543,49 +548,25 @@ jobs:
             echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
             exit 1
           fi
-          directory_generation="$(sed -n 's/.*name="hajim-faculty-directory-generation" content="\([a-f0-9]\{64\}\)".*/\1/p' team_match.html)"
-          if [ -z "$directory_generation" ]; then
-            echo "::error::Team Match does not declare a valid faculty-directory generation."
-            exit 1
-          fi
-          expected_team_sha="$(jq -r '.source_hashes["team_match.html"]' data/search-v2-release.json)"
-          expected_directory_sha="$(jq -r '.source_hashes["data/hajim-faculty-directory.js"]' data/search-v2-release.json)"
-          pages_base="https://mporosoff.github.io/grants-scraper"
-          live_team_path="${RUNNER_TEMP}/team-match-${candidate_sha}.html"
-          curl --fail --silent --show-error --max-time 30 \
-            "${pages_base}/team_match.html?candidate=${candidate_sha}" --output "$live_team_path"
-          live_team_sha="$(sha256sum "$live_team_path" | awk '{print $1}')"
-          if [ "$live_team_sha" != "$expected_team_sha" ]; then
-            echo "::error::GitHub Pages served Team Match HTML from a different release."
-            exit 1
-          fi
-          if ! grep -Fq "name=\"hajim-faculty-directory-generation\" content=\"${directory_generation}\"" "$live_team_path"; then
-            echo "::error::GitHub Pages served Team Match with a different faculty-directory generation."
-            exit 1
-          fi
-          mapfile -t team_runtime_entries < <(jq -r '.runtime_cache_keys | to_entries[] | "\(.key)\t\(.value)"' data/search-v2-release.json)
-          if [ "${#team_runtime_entries[@]}" -eq 0 ]; then
-            echo "::error::The release manifest has no versioned Team Match runtimes."
-            exit 1
-          fi
-          for runtime_entry in "${team_runtime_entries[@]}"; do
-            IFS=$'\t' read -r runtime_path runtime_key <<<"$runtime_entry"
-            expected_runtime_sha="$(jq -r --arg path "$runtime_path" '.source_hashes[$path] // empty' data/search-v2-release.json)"
-            if [ -z "$expected_runtime_sha" ] || ! grep -Fq "${runtime_path}?v=${runtime_key}" "$live_team_path"; then
-              echo "::error::Team Match does not publish the manifest cache key for ${runtime_path}."
-              exit 1
-            fi
-            live_runtime_sha="$(curl --fail --silent --show-error --max-time 45 "${pages_base}/${runtime_path}?v=${runtime_key}" | sha256sum | awk '{print $1}')"
-            if [ "$live_runtime_sha" != "$expected_runtime_sha" ]; then
-              echo "::error::GitHub Pages served ${runtime_path} bytes from a different release."
+          for team_asset in \
+            data/opportunity_team_index.js \
+            data/opportunity_teams.js \
+            data/faculty_matches.js \
+            data/researcher_directory.js \
+            data/researcher_registry_manifest.json \
+            assets/opportunity-team.js \
+            assets/opportunity-team-panel.js \
+            assets/app.js \
+            match_explorer.html \
+            team_match.html; do
+            expected_team_sha="$(jq -r --arg path "$team_asset" '.source_hashes[$path] // empty' data/search-v2-release.json)"
+            live_team_sha="$(curl --fail --silent --show-error --max-time 45 \
+              "https://mporosoff.github.io/grants-scraper/${team_asset}?candidate=${candidate_sha}" | sha256sum | awk '{print $1}')"
+            if [ -z "$expected_team_sha" ] || [ "$live_team_sha" != "$expected_team_sha" ]; then
+              echo "::error::GitHub Pages served mismatched opportunity-team asset ${team_asset}."
               exit 1
             fi
           done
-          live_directory_sha="$(curl --fail --silent --show-error --max-time 45 "${pages_base}/data/hajim-faculty-directory.js?v=${directory_generation}" | sha256sum | awk '{print $1}')"
-          if [ "$live_directory_sha" != "$expected_directory_sha" ]; then
-            echo "::error::GitHub Pages served faculty-directory bytes from a different generation."
-            exit 1
-          fi
       - name: Run a real provider smoke after Pages propagation
         id: pages-worker-smoke
         run: node tools/smoke_search_worker.mjs

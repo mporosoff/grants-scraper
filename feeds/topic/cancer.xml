@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -194,6 +194,27 @@
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
   </entry>
   <entry>
+    <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360606"/>
+    <id>urn:funding-finder:grants-gov:360606</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+  </entry>
+  <entry>
+    <title>Cancer Advancement through Partnerships in Research and Infrastructure (CAPRI) (U54 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360393"/>
+    <id>urn:funding-finder:grants-gov:360393</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Closes 2027-01-25 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered for funding. This funding opportunity seeks to supp…</summary>
+  </entry>
+  <entry>
     <title>NCI Research Specialist (Clinician Scientist) Award (R50 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362277"/>
     <id>urn:funding-finder:grants-gov:362277</id>
@@ -242,17 +263,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Technology development"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Research Network on Antimicrobial Resistance</title>
-    <link href="https://www.grants.gov/search-results-detail/361065"/>
-    <id>urn:funding-finder:grants-gov:361065</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-09-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by continuing support for a Clinical Research Network on Antimicrobial Resistance (AMR). AMR is a major health challenge that limits treatment options and allows resistant infections to persist. Individuals with chronic conditions like diabetes and cancer are particularly vulnerable, resulting in increas…</summary>
   </entry>
   <entry>
     <title>Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)</title>
@@ -393,47 +403,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Closes 2026-11-11 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits research projects that investigate actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy. The goal of the Precision Approaches in Radiation Synthetic Combinations (PAIRS) program is to develop radiation-synthetic combination strategies and facili…</summary>
   </entry>
   <entry>
-    <title>DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:grants-gov:362259</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Data science"/>
-    <category term="Public health"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Data Science Award (DSA) supports research that develops or uses quantitative and analytical approaches, processes and/or systems to obtain knowledge and insight from large and/or complex sets of prostate cancer data in one or more of the following research areas: Analysis of clinically annotated datasets; analysis of -om…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Early Investigator Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362260"/>
-    <id>urn:funding-finder:grants-gov:362260</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <category term="Education and workforce"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Early Investigator Research Award (EIRA) supports prostate cancer research conducted by investigators in the early stages of their careers with guidance from an experienced mentor. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Investigator: Serves as the pr…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362261"/>
-    <id>urn:funding-finder:grants-gov:362261</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Idea Development Award (IDA) supports new ideas that represent innovative approaches to prostate cancer research and have the potential to make an important contribution to the PCRP mission. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · New Investigator Category: In add…</summary>
-  </entry>
-  <entry>
-    <title>DoW Prostate Cancer, Physician Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362262"/>
-    <id>urn:funding-finder:grants-gov:362262</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Prostate Cancer Research Program (PCRP) Physician Research Award (PRA) Supports a mentored research experience to prepare physicians with clinical duties for careers in prostate cancer research. All applications must address one of the FY26 PCRP Overarching Challenges. Distinctive Features: · Early-Career Clinician Investigator: Serves as the Principal Investig…</summary>
-  </entry>
-  <entry>
     <title>NCI Community Oncology Research Program (NCORP) Academic Community Sites (UG1 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/359132"/>
     <id>urn:funding-finder:grants-gov:359132</id>
@@ -532,33 +501,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-05 | Summary: The fiscal year 2026 (FY26) Peer Reviewed Cancer Research Program (PRCRP) Impact Award supports mature research that will have a near-term impact on clinical cancer care in one of the congressionally directed FY26 PRCRP Topic Areas. Applicants must consider how the research project will lead to the advancement of knowledge in cancer research, patient care and/or treatment options in the M…</summary>
   </entry>
   <entry>
-    <title>DoW Lung Cancer Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362243"/>
-    <id>urn:funding-finder:grants-gov:362243</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Idea Development Award (IDA) supports conceptually innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress toward eradicating deaths and suffering from lung cancer. This mechanism promotes new ideas that are in the early stages of development and h…</summary>
-  </entry>
-  <entry>
-    <title>DoW Lung Cancer Patient-Centered Outcomes and Survivorship Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362247"/>
-    <id>urn:funding-finder:grants-gov:362247</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Patient-Centered Outcomes and Survivorship Award (PCOSA) promotes evidence-based and patient-centered approaches to improve health and lung cancer related outcomes and enhance the patient experience in defined populations. Research must address at least one of the FY26 LCRP areas of emphasis in the Health Outcomes and Survivo…</summary>
-  </entry>
-  <entry>
-    <title>DoW Lung Cancer Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362250"/>
-    <id>urn:funding-finder:grants-gov:362250</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-09-02 | Summary: The fiscal year 2026 (FY26) Lung Cancer Research Program (LCRP) Translational Research Award (TRA) supports advanced translational research that will foster transformation of promising ideas in lung cancer into clinical applications. Research must address at least one of the FY26 LCRP areas of emphasis. Distinctive Features: This funding mechanism intends to support a broad range of trans…</summary>
-  </entry>
-  <entry>
     <title>DoW Breast Cancer, Breakthrough Award Level 3</title>
     <link href="https://www.grants.gov/search-results-detail/362203"/>
     <id>urn:funding-finder:grants-gov:362203</id>
@@ -624,5 +566,63 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Education and workforce"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: Created in FY23, the Ovarian Cancer Clinical Trial Academy (OCCTA) supports the next generation of Early-Career Investigators (ECIs) in clinical trial research to produce effective treatments and cures for ovarian cancer. The OCCTA, through its Leadership, provides for professional and leadership development of the ECIs to include skills and competencies needed to execute clinical trials,…</summary>
+  </entry>
+  <entry>
+    <title>DoW, Ovarian Cancer, Pilot Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362209"/>
+    <id>urn:funding-finder:grants-gov:362209</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <category term="Technology development"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-01 | Summary: The Ovarian Cancer Pilot Award supports research that expands or modifies current thinking about and/or approaches in ovarian cancer, exploring innovative concepts or theories in ovarian cancer that could ultimately lead to critical discoveries or major advancements that will drive the field forward. Distinctive Features: Innovation is key. Research projects that demonstrate exceptional s…</summary>
+  </entry>
+  <entry>
+    <title>DoW Pancreatic Cancer Research Program, Focused Pilot Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362193"/>
+    <id>urn:funding-finder:grants-gov:362193</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Focused Pilot Award supports the exploration and development of impactful and innovative concepts under a patient-centered focus area of pancreatic cancer research that could ultimately lead to major advancements that will have a profound effect on patients’ overall quality of life. The research this award supports sho…</summary>
+  </entry>
+  <entry>
+    <title>DoW Pancreatic Cancer Research Program, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362190"/>
+    <id>urn:funding-finder:grants-gov:362190</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Idea Development Award supports the development of innovative, high-risk/high-reward research that could lead to critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with pancreatic cancer. This award mechanism supports innovative ideas with the potential to yie…</summary>
+  </entry>
+  <entry>
+    <title>DoW Pancreatic Cancer Research Program, Translational Research Partnership Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362191"/>
+    <id>urn:funding-finder:grants-gov:362191</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Cancer"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-07 | Summary: The fiscal year 2026 (FY26) Pancreatic Cancer Research Program (PCARP) Translational Research Partnership Award supports partnerships between clinicians, population scientists, applied scientists and/or basic scientists that will accelerate the movement of promising ideas in pancreatic cancer toward clinical applications. The partnership must include at least one member with expertise in …</summary>
+  </entry>
+  <entry>
+    <title>Research Opportunities in Cancer Epidemiology Cohort Studies (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359091"/>
+    <id>urn:funding-finder:grants-gov:359091</id>
+    <updated>2026-05-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Closes 2029-07-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) encourages grant applications to support research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and sharing of data a…</summary>
+  </entry>
+  <entry>
+    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360946"/>
+    <id>urn:funding-finder:grants-gov:360946</id>
+    <updated>2026-02-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-02-08 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications to support the validation of molecular/cellular/imaging markers (referred to as "markers" or "biomarkers") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment, as well as markers for cancer prevention and control. The appl…</summary>
   </entry>
 </feed>

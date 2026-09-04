@@ -7,6 +7,10 @@ const source = await readFile(
   new URL("../../assets/credentials.js", import.meta.url),
   "utf8",
 );
+const appSource = await readFile(
+  new URL("../../assets/app.js", import.meta.url),
+  "utf8",
+);
 
 function memoryStorage(initial = {}) {
   const values = new Map(Object.entries(initial));
@@ -54,6 +58,59 @@ test("keeps OpenAI and Anthropic keys separate and clears one at a time", () => 
   assert.equal(credentials.clearKey("openai", storage), true);
   assert.equal(credentials.loadKey("openai", storage), "");
   assert.equal(credentials.loadKey("anthropic", storage), "sk-ant-test");
+  assert.equal(credentials.resolveProvider("openai", storage), "anthropic");
+});
+
+test("shares the saved provider choice across Funding Finder pages", () => {
+  const storage = memoryStorage();
+  const credentials = loadModule(storage);
+
+  credentials.saveKey("anthropic", "sk-ant-test", storage);
+  assert.equal(credentials.resolveProvider("openai", storage), "anthropic");
+  credentials.saveKey("openai", "sk-openai-test", storage);
+  assert.equal(credentials.resolveProvider("openai", storage), "openai");
+  assert.equal(credentials.resolveProvider("anthropic", storage), "anthropic");
+  credentials.clearKey("anthropic", storage);
+  assert.equal(credentials.resolveProvider("anthropic", storage), "openai");
+});
+
+test("an absent page-level provider honors the most recently saved provider", () => {
+  const storage = memoryStorage();
+  const credentials = loadModule(storage);
+
+  credentials.saveKey("openai", "sk-openai-test", storage);
+  credentials.saveKey("anthropic", "sk-ant-test", storage);
+  assert.equal(credentials.resolveProvider("", storage), "anthropic");
+  assert.equal(credentials.resolveProvider(undefined, storage), "anthropic");
+  assert.equal(credentials.resolveProvider("openai", storage), "openai");
+});
+
+test("Funding Finder keeps an explicit personal provider choice and limits hosted fallback to startup", () => {
+  const loader = appSource.slice(
+    appSource.indexOf("function loadProviderKey"),
+    appSource.indexOf("function bindEvents"),
+  );
+  const bindings = appSource.slice(
+    appSource.indexOf("function bindEvents"),
+    appSource.indexOf("function syncHeaderHeight"),
+  );
+  const initialization = appSource.slice(
+    appSource.indexOf("function initializeShell"),
+    appSource.indexOf("initializeShell();"),
+  );
+
+  assert.match(loader, /preferStored = false/);
+  assert.match(loader, /fallbackToHosted = false/);
+  assert.match(loader, /preferStored[\s\S]*?CREDENTIAL_API\.resolveProvider\(""\)/);
+  assert.match(
+    loader,
+    /if \(fallbackToHosted && !key && provider !== "hosted"\)[\s\S]*?if \(alternativeKey\)[\s\S]*?else \{\s*provider = "hosted";/,
+  );
+  assert.match(bindings, /\$\("k-provider"\)\.addEventListener\("change", \(\) => \{\s*loadProviderKey\(\{ announce: true \}\)/);
+  assert.match(
+    initialization,
+    /loadProviderKey\(\{[\s\S]*?preferStored: !state\.profile\.saved,[\s\S]*?fallbackToHosted: true,[\s\S]*?\}\)/,
+  );
 });
 
 test("fails closed for malformed storage and bounds saved values", () => {

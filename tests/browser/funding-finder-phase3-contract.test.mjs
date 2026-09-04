@@ -316,6 +316,27 @@ test("ambiguous acronyms require selection while unique canonical names and alia
   assert.equal(core.chooseInstitution("California Institute of Technology", canonical)?.id, "https://ror.org/05dxps055");
 });
 
+test("common university shorthand ranks the canonical university without hiding other ROR candidates", () => {
+  const organization = (id, name, types = ["education"]) => ({
+    id: `https://ror.org/${id}`,
+    names: [{ value: name, types: ["ror_display"] }],
+    types,
+    status: "active",
+    locations: [{ geonames_details: { name: "Rochester", country_name: "United States", country_code: "US" } }],
+  });
+  const candidates = [
+    organization("022kthw22", "University of Rochester"),
+    organization("00v4yb702", "Rochester Institute of Technology"),
+    organization("0abcde123", "Rochester General Hospital", ["healthcare"]),
+    organization("0abcde124", "Rochester Engineering Society", ["nonprofit"]),
+  ];
+  const ranked = rankRorOrganizations(candidates, "rochester");
+  assert.equal(ranked[0].canonical_name, "University of Rochester");
+  assert.deepEqual(new Set(ranked.map(item => item.canonical_name)), new Set(candidates.map(item => item.names[0].value)));
+  assert.equal(ranked.every(item => item.match.type === "keyword"), true);
+  assert.equal(core.chooseInstitution("rochester", ranked), null);
+});
+
 test("the Worker validates and caches uncurated ROR identity without trusting the submitted name", async () => {
   const mitRecord = aliases.MIT.items.find(item => item.id === "https://ror.org/042nb2s44");
   const cache = memoryCache();
@@ -481,10 +502,19 @@ test("deterministic institutional answers and bounded narrative citations use on
   assert.match(who.answer, /Ada Researcher/);
   assert.deepEqual(who.has_more, ["DOE"]);
   assert.deepEqual(who.unavailable, ["NIH"]);
+  const dodAggregate = core.aggregateAwards([normalizedAward({ source: "DOD", id: "DOD-1", name: "" })]);
+  const dodWho = core.deterministicInstitutionAnswer({
+    question: "Who worked on this DoD award?",
+    intent: "investigators",
+    aggregate: dodAggregate,
+    sources: [{ source: "DOD", status: "complete" }],
+  });
+  assert.match(dodWho.answer, /does not provide investigator metadata/);
+  assert.match(dodWho.answer, /not evidence that those projects have no investigators/);
   const programs = core.deterministicInstitutionAnswer({ question: "Which programs funded catalysis?", intent: "programs", aggregate, sources });
   assert.match(programs.answer, /Office of Basic Energy Sciences/);
   const count = core.deterministicInstitutionAnswer({ question: "How many projects?", intent: "count", aggregate, sources });
-  assert.match(count.answer, /^2 normalized matching awards/);
+  assert.match(count.answer, /^2 matching awards/);
   const years = core.deterministicInstitutionAnswer({ question: "Which years?", intent: "years", aggregate, sources });
   assert.match(years.answer, /2021 through 2024/);
 
@@ -506,12 +536,13 @@ test("deterministic institutional answers and bounded narrative citations use on
     ...Array.from({ length: 30 }, (_, index) => normalizedAward({ source: "NSF", id: `NSF-${index}`, name: `NSF Person ${index}` })),
     ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "NIH", id: `NIH-${index}`, name: `NIH Person ${index}` })),
     ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "DOE", id: `DOE-${index}`, name: `DOE Person ${index}` })),
+    ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "DOD", id: `DOD-${index}`, name: "", title: `DoD title ${index}` })),
   ];
   const balanced = core.questionEvidencePack(sourceHeavy);
-  assert.deepEqual(Array.from(balanced.awards.slice(0, 3), award => award.source), ["NSF", "NIH", "DOE"]);
+  assert.deepEqual(Array.from(balanced.awards.slice(0, 4), award => award.source), ["NSF", "NIH", "DOE", "DOD"]);
   assert.deepEqual(
-    Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [source, balanced.awards.filter(award => award.source === source).length])),
-    { NSF: 16, NIH: 4, DOE: 4 },
+    Object.fromEntries(["NSF", "NIH", "DOE", "DOD"].map(source => [source, balanced.awards.filter(award => award.source === source).length])),
+    { NSF: 12, NIH: 4, DOE: 4, DOD: 4 },
   );
 });
 
@@ -534,7 +565,9 @@ test("question-provider payloads enforce privacy boundaries and malformed respon
   }
   assert.equal(payload.public_award_evidence[0].abstract_excerpt.length, 800);
   assert.throws(() => ai.extractJson("not valid JSON"), error => error.category === "malformed");
-  assert.match(pageSource, /Structured award search and institution resolution do not require an AI key/);
+  assert.doesNotMatch(pageSource, /Structured award search and institution resolution do not require an AI key/);
+  assert.match(pageSource, /id="ii-status" role="status" aria-live="polite"><\/div>/);
+  assert.match(appSource, /setStatus\(""\)/);
   assert.match(pageSource, /Update answer using loaded records/);
   assert.match(appSource, /snapshot\.signature === answerEvidenceSignature\(\)/);
   const loadMoreSource = appSource.slice(appSource.indexOf("async function loadMoreSource"), appSource.indexOf("function clearSearch"));

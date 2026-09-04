@@ -7,6 +7,7 @@
   const productApi = globalThis.FUNDING_AWARD_PRODUCT;
   const apiConfig = globalThis.FUNDING_AWARD_API_CONFIG;
   const alertsApi = globalThis.FUNDING_ALERTS;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904-r2", document.baseURI).href;
   const INSTITUTION_STORAGE_KEY = "funding-finder.awards.institution.v1";
   const MANAGED_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start",
@@ -21,6 +22,17 @@
     sequence: 0,
     abortController: null,
   };
+  let dodBrowserModulePromise = null;
+
+  function dodBrowserModule() {
+    if (!dodBrowserModulePromise) {
+      dodBrowserModulePromise = import(DOD_BROWSER_MODULE_URL).catch(error => {
+        dodBrowserModulePromise = null;
+        throw error;
+      });
+    }
+    return dodBrowserModulePromise;
+  }
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -37,6 +49,11 @@
 
   function clean(value) {
     return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function sourceLabel(value) {
+    const source = clean(value);
+    return source.toUpperCase() === "DOD" ? "DoD" : source;
   }
 
   function renderAbstract(value) {
@@ -178,7 +195,7 @@
         : "topic";
     $("award-query").value = query;
     $("search-mode").value = validModes.includes(requestedMode) ? requestedMode : inferredMode;
-    $("award-agency").value = ["NSF", "NIH", "DOE"].includes(params.get("agency")) ? params.get("agency") : "all";
+    $("award-agency").value = ["NSF", "NIH", "DOE", "DOD"].includes(params.get("agency")) ? params.get("agency") : "all";
     const defaultInstitution = loadDefaultInstitution();
     const urlInstitution = clean(params.get("institution"));
     $("award-institution").value = urlInstitution || defaultInstitution;
@@ -253,8 +270,9 @@
   }
 
   function contactLine(person, source, officialUrl) {
-    const name = clean(person?.name) || "Name not listed";
+    const publishedName = clean(person?.name);
     const role = clean(person?.role) || "Contact";
+    const name = (/investigator/i.test(role) ? productApi.displayInvestigatorName(publishedName) : publishedName) || "Name not listed";
     const email = clean(person?.email);
     const contactUrl = safeUrl(person?.official_contact_url || officialUrl);
     const identity = `<strong>${escapeHtml(name)}</strong> · ${escapeHtml(role)}`;
@@ -270,7 +288,7 @@
     const id = clean(award.award_id) || `result-${position}`;
     const investigators = Array.isArray(award.principal_investigators) ? award.principal_investigators : [];
     const programContacts = Array.isArray(award.program_contacts) ? award.program_contacts : [];
-    const primaryNames = investigators.map(person => clean(person?.name)).filter(Boolean);
+    const primaryNames = investigators.map(person => productApi.displayInvestigatorName(person?.name)).filter(Boolean);
     const institution = clean(award?.institution?.normalized_name || award?.institution?.name) || "Institution not listed";
     const program = clean(award.program_name) || (award.program_codes || []).map(clean).filter(Boolean).join(", ") || "Program not listed";
     const dates = [formatDate(award.project_start), formatDate(award.project_end)].join(" – ");
@@ -278,27 +296,40 @@
       .map(person => contactLine(person, award.source, officialUrl))
       .join("");
     const awardYear = productApi.awardYear(award.award_year);
+    const isDod = clean(award.source).toUpperCase() === "DOD";
+    const displaySource = sourceLabel(award.source);
+    const mechanism = clean(award.funding_mechanism);
+    const subagency = clean(award.subagency || award.agency);
+    const assistanceListings = (Array.isArray(award.program_codes) ? award.program_codes : [])
+      .map(clean).filter(Boolean).join(", ");
+    const fundingOpportunity = linksApi.opportunityForAward?.(award) || null;
+    const fundingOpportunityUrl = fundingOpportunity ? linksApi.opportunityHref?.(fundingOpportunity) || "" : "";
+    const investigatorSummary = primaryNames.join(" · ") || "Investigator not listed";
+    const amountLabel = isDod ? "Obligated amount" : "Award amount";
     return `<article class="award-card" data-source="${escapeAttribute(award.source)}" data-award-id="${escapeAttribute(id)}" aria-labelledby="award-title-${position}">
       <div class="award-card-topline">
-        <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : "open"}">${escapeHtml(award.source)}</span>
+        <span class="badge ${award.source === "NIH" ? "candidate" : award.source === "DOE" ? "review" : isDod ? "dod" : "open"}">${escapeHtml(isDod && mechanism ? `${displaySource} · ${mechanism}` : displaySource)}</span>
         <span class="opportunity-number">Award ${escapeHtml(id)}</span>
         ${awardYear !== null ? `<span class="listed-date">Award year ${escapeHtml(awardYear)}</span>` : ""}
       </div>
       <h4 id="award-title-${position}">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h4>
-      <p class="award-people"><strong>${escapeHtml(primaryNames.join(" · ") || "Investigator not listed")}</strong> · ${escapeHtml(institution)}</p>
-      <p class="award-program-line">${escapeHtml(award.agency || award.source)} · ${escapeHtml(program)}</p>
+      <p class="award-people">${isDod ? `<strong>${escapeHtml(institution)}</strong>` : `<strong>${escapeHtml(investigatorSummary)}</strong> · ${escapeHtml(institution)}`}</p>
+      <p class="award-program-line">${escapeHtml(isDod ? subagency : award.agency || displaySource)} · ${escapeHtml(program)}</p>
+      ${isDod && assistanceListings ? `<p class="award-program-line"><strong>Assistance Listing:</strong> ${escapeHtml(assistanceListings)}</p>` : ""}
+      ${award.organization_department ? `<p class="award-program-line"><strong>Awarding office:</strong> ${escapeHtml(award.organization_department)}</p>` : ""}
       <div class="award-facts">
         <div class="award-fact"><span>Project dates</span><strong>${escapeHtml(dates)}</strong></div>
-        <div class="award-fact"><span>Award amount</span><strong>${escapeHtml(formatMoney(award.total_award))}</strong></div>
+        <div class="award-fact"><span>${escapeHtml(amountLabel)}</span><strong>${escapeHtml(formatMoney(award.total_award))}</strong></div>
         <div class="award-fact"><span>Amount basis</span><strong>${escapeHtml(clean(award.award_amount_basis)?.replaceAll("_", " ") || "Not listed")}</strong></div>
       </div>
-      <section class="award-abstract" aria-label="Award abstract">
+      ${isDod ? `<p class="award-source-limitation">Principal investigator and scientific abstract are not provided by USAspending.</p>` : `<section class="award-abstract" aria-label="Award abstract">
         <h5>Abstract</h5>
         ${renderAbstract(award.abstract)}
-      </section>
+      </section>`}
       ${contacts ? `<section class="award-contacts" aria-label="Public award contacts"><h5>Investigators and program contacts</h5><ul>${contacts}</ul></section>` : ""}
       <div class="award-card-actions">
         ${officialUrl ? `<a class="source-action primary" href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">View official award ↗</a>` : ""}
+        ${fundingOpportunityUrl ? `<a class="source-action secondary" href="${escapeAttribute(fundingOpportunityUrl)}" target="_blank" rel="noopener">View original funding opportunity ↗</a>` : ""}
       </div>
     </article>`;
   }
@@ -309,9 +340,11 @@
     list.innerHTML = payload.sources.map(source => {
       if (source.status === "ok") {
         const cache = source.cache === "hit" ? "cached" : "live";
-        const abstractWarning = Number(source.health?.abstracts_failed || 0);
+        const enrichmentWarnings = productApi.enrichmentWarnings(source);
+        const enrichmentWarning = enrichmentWarnings.map(message => ` · ${escapeHtml(message)}`).join("");
         const boundWarning = source.safety_bound_reached === true ? " · upstream scan bound reached" : "";
-        return `<li${abstractWarning || boundWarning ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${abstractWarning ? ` · ${abstractWarning.toLocaleString()} public ${abstractWarning === 1 ? "abstract" : "abstracts"} unavailable` : ""}${boundWarning}</li>`;
+        const degraded = source.health?.status === "degraded" || enrichmentWarnings.length > 0 || Boolean(boundWarning);
+        return `<li${degraded ? ' class="source-degraded"' : ""}>${escapeHtml(source.source)} available · ${Number(source.result_count || 0).toLocaleString()} returned · ${cache}${enrichmentWarning}${boundWarning}</li>`;
       }
       const suffix = hasHealthySource ? " Other sources remain usable." : "";
       return `<li class="source-unavailable" data-status="${escapeAttribute(source.status || "unavailable")}">${escapeHtml(productApi.sourceIssueText(source))}${escapeHtml(suffix)}</li>`;
@@ -328,10 +361,10 @@
       return;
     }
     const investigators = summary.investigators.slice(0, 12).map(person => (
-      `<button class="pi-summary-button" type="button" data-award-pi="${escapeAttribute(person.name)}">${escapeHtml(person.name)} · ${person.projects.toLocaleString()} ${person.projects === 1 ? "project" : "projects"}</button>`
+      `<button class="pi-summary-button" type="button" data-award-pi="${escapeAttribute(person.query || person.name)}">${escapeHtml(person.name)} · ${person.projects.toLocaleString()} ${person.projects === 1 ? "project" : "projects"}</button>`
     )).join("");
     node.innerHTML = `<h3 id="institution-summary-heading">${escapeHtml(summary.institution)}</h3>
-      <p class="summary-counts"><span><strong>${summary.projects.toLocaleString()}</strong> funded projects in this result page</span><span><strong>${summary.investigators.length.toLocaleString()}</strong> investigators</span></p>
+      <p class="summary-counts"><span><strong>${summary.projects.toLocaleString()}</strong> funded projects in this result page</span><span><strong>${summary.investigators.length.toLocaleString()}</strong> listed investigators</span></p>
       ${investigators ? `<div class="pi-summary-list" aria-label="Filter by investigator">${investigators}</div>` : ""}`;
     node.classList.remove("hidden");
   }
@@ -344,11 +377,11 @@
       return;
     }
     const investigators = new Set(results.flatMap(award => (
-      (award.principal_investigators || []).map(person => clean(person?.name)).filter(Boolean)
+      (award.principal_investigators || []).map(person => productApi.displayInvestigatorName(person?.name)).filter(Boolean)
     )));
     const institutions = new Set(results.map(award => clean(award?.institution?.normalized_name || award?.institution?.name)).filter(Boolean));
     const yearRange = productApi.awardYearRange(results) || "Years not listed";
-    node.innerHTML = `<h3>Result-page summary</h3><p class="summary-counts"><span><strong>${results.length.toLocaleString()}</strong> funded projects</span><span><strong>${investigators.size.toLocaleString()}</strong> unique investigators</span><span><strong>${institutions.size.toLocaleString()}</strong> institutions</span><span>${escapeHtml(yearRange)}</span></p>`;
+    node.innerHTML = `<h3>Result-page summary</h3><p class="summary-counts"><span><strong>${results.length.toLocaleString()}</strong> funded projects</span><span><strong>${investigators.size.toLocaleString()}</strong> unique listed investigators</span><span><strong>${institutions.size.toLocaleString()}</strong> institutions</span><span>${escapeHtml(yearRange)}</span></p>`;
     node.classList.remove("hidden");
   }
 
@@ -367,7 +400,7 @@
         if (!records.length) return "";
         const cards = records.map(award => awardCard(award, position++)).join("");
         return `<section class="award-source-section" aria-labelledby="source-${source.toLowerCase()}">
-          <div class="award-source-heading"><h3 id="source-${source.toLowerCase()}">${escapeHtml(source)} awards</h3><p>Source-native order; no cross-source reranking</p></div>
+          <div class="award-source-heading"><h3 id="source-${source.toLowerCase()}">${escapeHtml(sourceLabel(source))} awards</h3><p>Source-native order; no cross-source reranking</p></div>
           <div class="award-card-list">${cards}</div>
         </section>`;
       }).join("");
@@ -378,6 +411,75 @@
     pagination.classList.toggle("hidden", offset === 0 && !canNext);
     syncPaginationControls();
     $("award-page-label").textContent = productApi.paginationLabel(payload);
+  }
+
+  async function workerSearch(requestBody, signal) {
+    const response = await fetch(apiConfig.searchUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody),
+      credentials: "omit",
+      referrerPolicy: "origin",
+      signal,
+    });
+    const payload = await response.json().catch(() => null);
+    if (!productApi.validatePayload(payload)) {
+      const error = new Error(productApi.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
+      error.code = productApi.boundedErrorCode(payload) || "invalid_response";
+      throw error;
+    }
+    return { response, payload };
+  }
+
+  function payloadWithUnavailableDod(requestBody, workerPayload = null) {
+    const workerSources = new Map((workerPayload?.sources || []).map(source => [source.source, source]));
+    return {
+      schema_version: 1,
+      request: {
+        sources: [...requestBody.sources],
+        criteria: { ...requestBody.criteria },
+        limit: requestBody.limit,
+        offset: requestBody.offset,
+      },
+      results: Array.isArray(workerPayload?.results) ? workerPayload.results : [],
+      sources: requestBody.sources.map(source => source === "DOD"
+        ? { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } }
+        : workerSources.get(source) || { source, status: "unavailable", error: { code: "service_unavailable" } }),
+      pagination: { limit: requestBody.limit, offset: requestBody.offset },
+    };
+  }
+
+  async function browserIntegratedSearch(requestBody, controller) {
+    if (!requestBody.sources.includes("DOD")) return workerSearch(requestBody, controller.signal);
+    const workerSources = requestBody.sources.filter(source => source !== "DOD");
+    const workerRequest = { ...requestBody, sources: workerSources };
+    const [workerResult, dodResult] = await Promise.allSettled([
+      workerSources.length ? workerSearch(workerRequest, controller.signal) : Promise.resolve(null),
+      dodBrowserModule().then(async dod => ({
+        dod,
+        payload: await dod.searchDodFromBrowser(requestBody.criteria, {
+          limit: requestBody.limit,
+          offset: requestBody.offset,
+          signal: controller.signal,
+        }),
+      })),
+    ]);
+    const worker = workerResult.status === "fulfilled" ? workerResult.value : null;
+    if (dodResult.status !== "fulfilled") {
+      return {
+        response: { ok: false },
+        payload: payloadWithUnavailableDod(requestBody, worker?.payload || null),
+      };
+    }
+    const { dod, payload: dodPayload } = dodResult.value;
+    return {
+      response: { ok: Boolean(workerSources.length ? worker?.response?.ok : true) && !dodPayload?.status },
+      payload: dod.mergeSearchPayload({
+        request: requestBody,
+        workerPayload: worker?.payload || null,
+        dodPayload,
+      }),
+    };
   }
 
   async function search({ historyMode = "replace", offset = null, focusResults = false, scrollResults = false, submittedState = null } = {}) {
@@ -403,15 +505,7 @@
     setStatus(`Searching ${requestBody.sources.join(" and ")} public award records…`);
     const timeout = setTimeout(() => controller.abort(), apiConfig.timeoutMs);
     try {
-      const response = await fetch(apiConfig.searchUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-        credentials: "omit",
-        referrerPolicy: "origin",
-        signal: controller.signal,
-      });
-      const payload = await response.json().catch(() => null);
+      const { response, payload } = await browserIntegratedSearch(requestBody, controller);
       if (sequence !== state.sequence) return;
       if (!productApi.validatePayload(payload)) {
         const error = new Error(productApi.serviceIssueText(payload) || "The award service returned an invalid response. Retry later.");
@@ -531,7 +625,7 @@
       $("award-results").classList.add("hidden");
       $("ii-institution").value = institution;
       $("ii-institution").dispatchEvent(new Event("input", { bubbles: true }));
-      $("ii-agency").value = ["NSF", "NIH", "DOE"].includes(source) ? source : "all";
+      $("ii-agency").value = ["NSF", "NIH", "DOE", "DOD"].includes(source) ? source : "all";
       $("ii-program").value = "";
       $("ii-topic").value = "";
       $("ii-pi").value = investigator;

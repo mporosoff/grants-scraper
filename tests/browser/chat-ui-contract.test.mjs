@@ -98,3 +98,27 @@ test("labels optional result narrowing clearly for singular and plural sets", as
   );
   assert.equal(chatUi.focusActionLabel(0), "");
 });
+
+test("copies one assistant output as plain source text", async () => {
+  const chatUi = await loadChatUi();
+  let copied = "";
+  const result = await chatUi.copyText("  **Best fit**\n\n- Opportunity A  ", {
+    clipboard: { writeText: async value => { copied = value; } },
+  });
+
+  assert.equal(result, true);
+  assert.equal(copied, "**Best fit**\n\n- Opportunity A");
+  assert.equal(await chatUi.copyText("", { clipboard: { writeText: async () => {} } }), false);
+});
+
+test("a completed answer opens at its beginning instead of pinning chat to the bottom", async () => {
+  const app = await readFile(new URL("../assets/app.js", root), "utf8");
+  const renderChatSource = app.slice(
+    app.indexOf("function renderChat("),
+    app.indexOf("function renderChatResultReferences("),
+  );
+  assert.match(renderChatSource, /scrollToLatestAssistant = false/);
+  assert.match(renderChatSource, /data-message-role="\$\{escapeAttribute\(message\.role\)\}"/);
+  assert.match(renderChatSource, /latestAssistant\.offsetTop - messages\.offsetTop/);
+  assert.match(app, /renderChat\(\{ scrollToLatestAssistant: true \}\)/);
+});

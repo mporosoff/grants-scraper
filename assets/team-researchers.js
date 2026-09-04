@@ -112,6 +112,7 @@
         : "";
       output.push({
         id,
+        registry_id: /^urh-[0-9]{6}$/.test(String(raw.registry_id || "")) ? String(raw.registry_id) : "",
         name,
         keywords,
         orcid_id: orcidId,
@@ -182,16 +183,11 @@
   }
 
   function recordIsCurrent(record, now = new Date()) {
-    const status = String(record?.status || "").trim().toLowerCase();
-    if (["archived", "closed", "cancelled", "canceled", "withdrawn", "expired"].includes(status)) {
-      return false;
+    const shared = globalThis.FUNDING_RETRIEVAL?.recordIsCurrent;
+    if (typeof shared !== "function") {
+      throw new Error("Researcher matching requires the shared funding currentness contract.");
     }
-    const today = now.toISOString().slice(0, 10);
-    const archiveDate = String(record?.archive_date || "").slice(0, 10);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(archiveDate) && archiveDate <= today) return false;
-    const closeDate = String(record?.close_date || "").slice(0, 10);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(closeDate) && closeDate < today && !record?.rolling) return false;
-    return true;
+    return shared(record, now);
   }
 
   function recencyScore(value, newestValue) {

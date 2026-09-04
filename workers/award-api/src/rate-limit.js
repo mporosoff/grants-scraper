@@ -3,6 +3,7 @@ const BUCKETS = new Set([
   "award:NIH",
   "award:DOE",
   "award:evidence",
+  "award:DOD",
   "ror:search",
   "ror:resolve",
 ]);

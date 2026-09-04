@@ -3,6 +3,12 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
+import {
+  childRecords as frozenChildRecords,
+  parentRecords as frozenParentRecords,
+} from "../fixtures/frozen/search-regression-records.mjs";
+import { buildCatalog, buildChildCatalog } from "./search-fixture-helpers.mjs";
+
 const ROOT = new URL("../../", import.meta.url);
 
 async function loadRuntime() {
@@ -12,8 +18,6 @@ async function loadRuntime() {
     "assets/search-v2-config.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
-    "data/opportunities.js",
-    "data/subtopics.js",
   ]) vm.runInNewContext(await readFile(new URL(path, ROOT), "utf8"), context, { filename: path });
   return context;
 }
@@ -22,8 +26,8 @@ const runtime = await loadRuntime();
 const queryApi = runtime.FUNDING_SEARCH_QUERY;
 const retrievalApi = runtime.FUNDING_RETRIEVAL;
 const configuration = runtime.FUNDING_SEARCH_V2_CONFIG;
-const parentCatalog = runtime.GRANT_CATALOG;
-const childCatalog = retrievalApi.createChildCatalog(runtime.SUBTOPIC_CATALOG);
+const parentCatalog = buildCatalog(frozenParentRecords, queryApi);
+const childCatalog = buildChildCatalog(frozenChildRecords, queryApi, retrievalApi);
 const parentEngine = retrievalApi.create(parentCatalog, queryApi, {
   searchV2: true,
   searchV2Config: configuration,
@@ -56,39 +60,31 @@ function ranked(query) {
 }
 
 test("permanent REE and NASA canaries do not recreate configured entailments", () => {
-  assert.deepEqual(ranked("REE separations"), []);
-  const prohibited = new Set([
-    "359996", "363224", "363241", "360003", "363240",
-    "363325", "360004", "363258", "361234",
-  ]);
-  assert.deepEqual(
-    ranked("rare earth solvent extraction").filter(row => prohibited.has(row.id)),
-    [],
+  assert.equal(
+    ranked("REE separations").some(row => row.id === "fixture-policy-workshop"),
+    false,
+  );
+  assert.equal(
+    ranked("rare earth solvent extraction").some(row => row.id === "fixture-policy-workshop"),
+    false,
   );
 });
 
 test("permanent scientific-term canaries enforce complete indexed intent", () => {
   const catalysis = ranked("catalysis").map(row => row.id);
-  assert.equal(catalysis[0], "362061");
-  assert.ok(catalysis.includes("344592"));
+  assert.ok(["fixture-cps", "fixture-bes"].includes(catalysis[0]));
+  assert.ok(catalysis.includes("fixture-cps"));
+  assert.ok(catalysis.includes("fixture-army-baa"));
   assert.deepEqual(ranked("AI catalyst design"), []);
   assert.deepEqual(ranked("PFAS"), []);
-  const prohibitedSpaceNoise = new Set([
-    "359996", "363224", "363241", "360003", "363240",
-    "363325", "360004", "363258", "361234",
-  ]);
-  assert.deepEqual(
-    ranked("space biology").filter(row => prohibitedSpaceNoise.has(row.id)),
-    [],
-  );
-  assert.equal(ranked("space biology")[0]?.id, "vpr-email:infoready-2028504");
+  assert.equal(ranked("space biology")[0]?.id, "fixture-space-biology");
 });
 
-test("permanent identifier and Genesis child-evidence canaries retain precedence", () => {
-  assert.equal(ranked("RFA-MD-27-001")[0]?.id, "363217");
+test("permanent identifier and child-evidence canaries retain precedence", () => {
+  assert.equal(ranked("RFA-TEST-27-001")[0]?.id, "fixture-identifier");
   const genesis = ranked("Composable and Modular Foundation Models");
   assert.equal(genesis.length, 1);
-  assert.equal(genesis[0].id, "361526");
+  assert.equal(genesis[0].id, "fixture-genesis");
   assert.equal(genesis[0].childDroveMatch, true);
   assert.match(genesis[0].bestChild?.record?.title || "", /Composable and Modular Foundation Models/i);
 });

@@ -65,7 +65,7 @@ test("DOE remains an isolated, bounded, fail-closed PAMS adapter", () => {
   assert.match(adapter, /opportunity_numbers/);
   assert.match(adapter, /recordMatchesInstitution/);
   assert.match(adapter, /status: abstracts\.failed \? "degraded" : "available"/);
-  assert.match(worker, /adapters = \{ NSF: searchNsf, NIH: searchNih, DOE: searchDoe \}/);
+  assert.match(worker, /adapters = \{ NSF: searchNsf, NIH: searchNih, DOE: searchDoe, DOD: searchDod \}/);
   assert.match(worker, /Promise\.all\(normalized\.sources\.map/);
   assert.match(worker, /sourceSummary/);
   assert.match(institutions, /DOE: \{ search_name: cleanName, uei: \[\] \}/);
@@ -73,7 +73,7 @@ test("DOE remains an isolated, bounded, fail-closed PAMS adapter", () => {
 });
 
 test("Funded Awards exposes source-native DOE searches without award vectors or reranking", () => {
-  assert.deepEqual(Array.from(product.sourcesForAgency("all")), ["NSF", "NIH", "DOE"]);
+  assert.deepEqual(Array.from(product.sourcesForAgency("all")), ["NSF", "NIH", "DOE", "DOD"]);
   const searches = [
     { state: { mode: "topic", agency: "DOE", query: "carbon dioxide" }, criterion: "topic" },
     { state: { mode: "program", agency: "DOE", query: "Catalysis" }, criterion: "program" },

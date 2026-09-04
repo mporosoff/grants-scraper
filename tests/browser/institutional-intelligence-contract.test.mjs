@@ -12,6 +12,7 @@ const root = new URL("../../", import.meta.url);
 const [
   aliases, fundedCoreSource, coreSource, appSource, page, fundingPage, teamPage, styles,
   credentialsSource, doeForm, fundingAppSource, deploymentSource,
+  awardSmokeSource,
 ] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/funded-awards-core.js", root), "utf8"),
@@ -25,6 +26,7 @@ const [
   readFile(new URL("tests/fixtures/awards/doe_search_form.html", root), "utf8"),
   readFile(new URL("assets/app.js", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
+  readFile(new URL("tools/smoke_award_worker.mjs", root), "utf8"),
 ]);
 
 const sandbox = { URL, URLSearchParams };
@@ -124,6 +126,7 @@ test("existing institution identities retain source-specific award query identif
   assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
   assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
   assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
+  assert.deepEqual(rochester.sources.DOD.uei, ["F27KDXZMF9Y8"]);
   const mit = institutionFromRor(rankRorOrganizations(aliases.MIT.items, "MIT")[0], "Massachusetts Institute of Technology");
   assert.equal(mit.ror_id, "https://ror.org/042nb2s44");
   assert.equal(mit.sources.NSF.search_name, "Massachusetts Institute of Technology");
@@ -146,7 +149,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
     year_end: 2026,
   });
   assert.deepEqual(plain(request), {
-    sources: ["NSF", "NIH", "DOE"],
+    sources: ["NSF", "NIH", "DOE", "DOD"],
     criteria: {
       institution: "Massachusetts Institute of Technology",
       institution_id: "https://ror.org/042nb2s44",
@@ -174,7 +177,10 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.throws(() => core.buildAwardRequest({ agency: "all" }), /Enter an institution, topic, program, investigator, or program officer/);
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
-  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, DOE, or DoD/);
+  assert.deepEqual(plain(core.programCriterion("DOD", "12.800")), { program: "12.800" });
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", pi: "Ada Investigator" }), /do not provide investigator fields/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", program_officer: "Alex Officer" }), /do not provide program-officer fields/);
   assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
@@ -202,6 +208,50 @@ test("aggregates returned awards and preserves investigator and program drill-do
   assert.deepEqual(plain(ada.variants.map(item => item.source)), ["NSF", "NIH"]);
   assert.ok(aggregate.programs.some(item => item.source === "NIH" && item.query === "R01"));
   assert.ok(aggregate.programs.some(item => item.source === "DOE" && item.query === "Catalysis Science" && item.parent_label === "Office of Basic Energy Sciences"));
+});
+
+test("investigator capitalization is consistent across snapshot controls, cards, and answers", () => {
+  const aggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "GERARD J. BUCKLEY" }] }),
+    award({
+      source: "NIH",
+      award_id: "NIH-1",
+      principal_investigators: [{ name: "gerard j. buckley" }],
+    }),
+  ]);
+  assert.equal(aggregate.investigators.length, 1);
+  assert.equal(aggregate.investigators[0].name, "Gerard J. Buckley");
+  assert.deepEqual(plain(aggregate.investigators[0].variants.map(item => item.name)), [
+    "GERARD J. BUCKLEY",
+    "gerard j. buckley",
+  ], "source spellings stay intact for identity-aware upstream queries");
+
+  const credentialAggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "JANE DOE, MD, PHD" }] }),
+    award({ source: "NIH", award_id: "NIH-2", principal_investigators: [{ name: "Jane Doe" }] }),
+  ]);
+  assert.equal(credentialAggregate.investigators.length, 1);
+  assert.equal(credentialAggregate.investigators[0].name, "Jane Doe");
+  assert.deepEqual(plain(credentialAggregate.investigators[0].variants.map(item => item.name)), [
+    "JANE DOE, MD, PHD",
+    "Jane Doe",
+  ]);
+
+  const mixedCaseAggregate = core.aggregateAwards([
+    award({ principal_investigators: [{ name: "TIMOTHY Der Ver DYE" }] }),
+    award({ source: "NIH", award_id: "NIH-3", principal_investigators: [{ name: "MICHAEL Andres WELTE" }] }),
+  ]);
+  assert.deepEqual(plain(mixedCaseAggregate.investigators.map(item => item.name)), [
+    "Timothy Der Ver Dye",
+    "Michael Andres Welte",
+  ]);
+
+  assert.match(appSource, /investigators\.map\(person => awardProduct\.displayInvestigatorName\(person\?\.name\)\)/);
+  assert.match(appSource, /kind === "investigator"[\s\S]{0,80}\? awardProduct\.displayInvestigatorName\(item\.name\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(payload\.facet\.label\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(variant\.name\)/);
+  assert.match(appSource, /awardProduct\.displayInvestigatorName\(person\.name\)/);
+  assert.match(coreSource, /investigators:[\s\S]*displayInvestigatorName\(person\?\.name\)/);
 });
 
 test("share URLs round-trip institution and all transparent filters", () => {
@@ -277,10 +327,62 @@ test("explicitly named investigators survive an incomplete question translation"
   assert.equal(core.explicitInvestigator("Which programs have catalysis awards?"), "");
 });
 
+test("explicit year language deterministically overrides an incorrect model translation", () => {
+  const current = { institution: "University of Rochester", agency: "all" };
+  const since = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "How many awards funded in catalysis since 2024?",
+  );
+  assert.equal(since.year_start, 2024);
+  assert.equal(since.year_end, "");
+
+  const onward = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "2024" },
+    current,
+    "Show awards from 2024 onward",
+  );
+  assert.equal(onward.year_start, 2024);
+  assert.equal(onward.year_end, "");
+
+  const oneYear = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "2024", year_end: "" },
+    current,
+    "Show awards in 2024",
+  );
+  assert.equal(oneYear.year_start, 2024);
+  assert.equal(oneYear.year_end, 2024);
+
+  const range = core.sanitizeQuestionPlan(
+    { agency: "all", year_start: "", year_end: "" },
+    current,
+    "Show awards from 2022 through 2024",
+  );
+  assert.equal(range.year_start, 2022);
+  assert.equal(range.year_end, 2024);
+
+  for (const question of [
+    "Show awards from 2021–2025",
+    "Show awards from 2021 — 2025",
+    "Show awards from 2021 until 2025",
+    "Show awards between 2021 and 2025",
+  ]) {
+    const bounded = core.sanitizeQuestionPlan(
+      { agency: "all", year_start: "2021", year_end: "" },
+      current,
+      question,
+    );
+    assert.equal(bounded.year_start, 2021, question);
+    assert.equal(bounded.year_end, 2025, question);
+  }
+});
+
 test("snapshot URLs and replacement results have one committed owner", () => {
-  const historySource = appSource.slice(appSource.indexOf("function historyViewState("), appSource.indexOf("async function postJson("));
-  assert.match(historySource, /mode === "push"[\s\S]*history\.replaceState\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
-  assert.match(historySource, /requestAnimationFrame\([\s\S]*requestAnimationFrame\([\s\S]*recordCurrentHistoryViewState\(\)/);
+  const historySource = appSource.slice(appSource.indexOf("function nextHistoryEntryId("), appSource.indexOf("async function postJson("));
+  assert.match(historySource, /mode === "push"[\s\S]*replaceHistoryStateIfChanged\([\s\S]*history\.pushState\([\s\S]*scheduleCurrentHistoryViewState\(\)/);
+  assert.match(historySource, /function armHistoryStateThrottle\([\s\S]*setTimeout\([\s\S]*recordCurrentHistoryViewState\(latestHistoryViewState\(\)\)[\s\S]*armHistoryStateThrottle\(\)[\s\S]*250/);
+  assert.match(historySource, /state\.historyRestoreDepth[\s\S]*mode === "replace"[\s\S]*replaceHistoryStateIfChanged\(history\.state, nextUrl\)/);
+  assert.match(historySource, /nextUrl === location\.href[\s\S]*serializedHistoryState\(value\) === serializedHistoryState\(history\.state\)[\s\S]*return false/);
   const syncUrlSource = appSource.slice(appSource.indexOf("function syncUrl("), appSource.indexOf("async function postJson("));
   assert.match(syncUrlSource, /state\.submitted && state\.snapshot\?\.snapshot_id[\s\S]*\{ \.\.\.state\.submitted, \.\.\.snapshotViewState\(\) \}/);
   assert.doesNotMatch(syncUrlSource, /\.\.\.formState\(\)[\s\S]*\.\.\.formState\(\)/);
@@ -288,13 +390,21 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const postJsonSource = appSource.slice(appSource.indexOf("async function postJson("), appSource.indexOf("function absorbAwards("));
   assert.match(postJsonSource, /activeController\.signal\.aborted[\s\S]*activeController = new AbortController\(\)[\s\S]*controller === state\.controller[\s\S]*state\.controller = activeController/);
 
+  const preparedSource = appSource.slice(appSource.indexOf("async function preparedSnapshotSearch("), appSource.indexOf("async function runSearch("));
+  const createIndex = preparedSource.indexOf("await postJson(api.snapshotUrl");
+  const initialPageIndex = preparedSource.indexOf("await requestSnapshotPage");
+  const stageIndex = preparedSource.indexOf("stagedSnapshotResult(");
+  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
+  assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*rehydrateWorkerSnapshot\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
+  assert.match(preparedSource, /dodBrowserModule\(\)\.then[\s\S]*workerSnapshot[\s\S]*applyClientSnapshotOverlay\([\s\S]*clientSnapshotOverlay/);
+  assert.match(appSource, /restoredClientSnapshotOverlay\([\s\S]*buildAwardRequest\(\{ \.\.\.state\.submitted[\s\S]*requestedSources\.includes\("DOD"\) && !returnedSources\.has\("DOD"\)[\s\S]*__clientSnapshotOverlay/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
-  const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
-  const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
-  const stageIndex = runSearchSource.indexOf("stagedSnapshotResult(");
+  const prepareIndex = runSearchSource.indexOf("await preparedSnapshotSearch(");
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
-  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
+  assert.ok(prepareIndex > -1 && commitIndex > prepareIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
+  assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
+  assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
 
   const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
   for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
@@ -318,16 +428,149 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+  assert.match(retrySource, /stagedSourceRetry\([\s\S]*successorOverlay[\s\S]*clientSnapshotOverlay: successorOverlay/);
+  assert.match(retrySource, /stagedHybridSourceRetry\([\s\S]*sources: \[source\][\s\S]*replaceHybridSnapshotSource\(/);
+  assert.match(retrySource, /source === "DOD"[\s\S]*rehydrateWorkerSnapshot\([\s\S]*snapshot: hydratedBaseSnapshot/);
+  assert.match(retrySource, /if \(state\.localSnapshot \|\| \(state\.clientSnapshotOverlay && source === "DOD"\)\)/);
+  assert.match(retrySource, /const retryIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === previous[\s\S]*if \(!retryIsCurrent\(\)\) return;[\s\S]*commitSnapshotResult\(result\.staged/);
+  assert.doesNotMatch(retrySource, /preparedSnapshotSearch\(\{ request, submitted/);
+});
+
+test("one ordinary URL-state action coalesces repeated replaceState requests", () => {
+  const historySource = appSource.slice(appSource.indexOf("function nextHistoryEntryId("), appSource.indexOf("async function postJson("));
+  const timers = new Map();
+  let timerSequence = 0;
+  let replaceWrites = 0;
+  let pushWrites = 0;
+  const location = { protocol: "https:", href: "https://example.test/funded_awards.html", search: "" };
+  const history = {
+    state: null,
+    replaceState(value, _unused, url) {
+      replaceWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+    pushState(value, _unused, url) {
+      pushWrites += 1;
+      this.state = value;
+      location.href = new URL(url, location.href).href;
+      location.search = new URL(location.href).search;
+    },
+  };
+  const harness = {
+    URL,
+    location,
+    history,
+    window: { scrollY: 420 },
+    document: { activeElement: { id: "ii-topic" } },
+    state: {
+      historyStateTimer: 0,
+      historyStatePending: false,
+      historyRestoreDepth: 0,
+      historyEntrySequence: 0,
+      historyViewCache: new Map(),
+      submitted: null,
+      snapshot: null,
+    },
+    setTimeout(callback) {
+      const id = ++timerSequence;
+      timers.set(id, callback);
+      return id;
+    },
+    clearTimeout(id) { timers.delete(id); },
+  };
+  function runNextTimer() {
+    const next = timers.entries().next().value;
+    assert.ok(next, "a history-state throttle timer should be armed");
+    timers.delete(next[0]);
+    next[1]();
+  }
+  harness.globalThis = harness;
+  vm.createContext(harness);
+  vm.runInContext(`${historySource}\nglobalThis.writeHistoryUrlForTest = writeHistoryUrl;\nglobalThis.scheduleHistoryStateForTest = scheduleCurrentHistoryViewState;\nglobalThis.latestHistoryViewStateForTest = latestHistoryViewState;`, harness);
+  const target = new URL("https://example.test/funded_awards.html?ii=1&ii_topic=catalysis");
+  for (let index = 0; index < 150; index += 1) harness.writeHistoryUrlForTest(target, "replace");
+  runNextTimer();
+  assert.equal(replaceWrites, 1, "identical logical writes must collapse to one URL replacement");
+  assert.equal(pushWrites, 0);
+
+  const restoredHistoryState = history.state;
+  harness.state.historyRestoreDepth = 1;
+  harness.writeHistoryUrlForTest(new URL("https://example.test/funded_awards.html?ii=1&ii_topic=restored"), "replace");
+  assert.equal(replaceWrites, 2, "snapshot recovery may replace the canonical URL during restoration");
+  assert.equal(history.state, restoredHistoryState, "canonical recovery must preserve the destination entry's restored view state");
+  harness.writeHistoryUrlForTest(new URL(location.href), "replace");
+  assert.equal(replaceWrites, 2, "identical restoration writes must be skipped");
+
+  harness.state.historyRestoreDepth = 0;
+  harness.clearTimeout(harness.state.historyStateTimer);
+  harness.state.historyStateTimer = 0;
+  harness.state.historyStatePending = false;
+  const writesBeforeScroll = replaceWrites;
+  for (let index = 0; index < 150; index += 1) {
+    harness.window.scrollY = 500 + index;
+    harness.scheduleHistoryStateForTest();
+  }
+  assert.equal(history.state.scrollY, 500, "the serialized state is rate limited to the leading view");
+  assert.equal(harness.latestHistoryViewStateForTest(history.state).scrollY, 649, "the entry cache retains the latest pending view before traversal");
+  runNextTimer();
+  assert.equal(replaceWrites - writesBeforeScroll, 2, "a burst records one leading and one throttled trailing view state");
+
+  const restorationSource = appSource.slice(appSource.indexOf('window.addEventListener("popstate"'), appSource.indexOf("async function initialize("));
+  assert.match(restorationSource, /const restoredViewState = latestHistoryViewState\(event\.state\)[\s\S]*clearTimeout\(state\.historyStateTimer\)[\s\S]*historyStatePending = false[\s\S]*historyRestoreDepth \+= 1/);
+  assert.match(restorationSource, /restoredViewState\.focusId[\s\S]*restoredViewState\.scrollY/);
+  assert.ok(restorationSource.indexOf("historyRestoreDepth = Math.max") > restorationSource.indexOf("window.scrollTo"), "restoration remains guarded until focus and scroll are restored");
+});
+
+test("touch-first editable controls keep a 16px floor without disabling page zoom", async () => {
+  const [appStyles, alertsStyles, awardsStyles, intelligenceStyles, fundedPage] = await Promise.all([
+    readFile(new URL("assets/app.css", root), "utf8"),
+    readFile(new URL("assets/alerts.css", root), "utf8"),
+    readFile(new URL("assets/funded-awards.css", root), "utf8"),
+    readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
+    readFile(new URL("funded_awards.html", root), "utf8"),
+  ]);
+  const mobileFloor = alertsStyles.slice(alertsStyles.lastIndexOf("@media (hover: none) and (pointer: coarse)"));
+  assert.match(mobileFloor, /input,[\s\S]*select,[\s\S]*textarea,[\s\S]*contenteditable[\s\S]*font-size:\s*max\(16px, 1em\)\s*!important/);
+  assert.doesNotMatch(appStyles, /@media \(hover: none\) and \(pointer: coarse\)/, "the shared app stylesheet must remain unchanged for Team Match");
+  assert.match(alertsStyles, /\.alert-field-grid input,[\s\S]*\.alert-field-grid select/);
+  assert.match(awardsStyles, /\.award-field input,[\s\S]*\.award-field select/);
+  assert.match(intelligenceStyles, /\.ii-form input,[\s\S]*\.ii-ask textarea,[\s\S]*\.ii-key-fields select/);
+  assert.match(fundedPage, /name="viewport" content="width=device-width, initial-scale=1"/);
+  assert.doesNotMatch(fundedPage, /user-scalable\s*=\s*no|maximum-scale\s*=\s*1/i);
+});
+
+test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
+  assert.match(appSource, /function answerTable\(\{ label, headers, rows \}\)[\s\S]*class="ii-answer-table-wrap"[\s\S]*<table class="ii-answer-table">/);
+  assert.match(appSource, /const investigators = Array\.isArray\(aggregate\.investigators\)/);
+  assert.match(appSource, /intent === "investigators"[\s\S]*label: "Investigators in the matching awards"[\s\S]*headers: \["Investigator", "Awards"\]/);
+  assert.match(appSource, /intent === "programs"[\s\S]*label: "Programs in the matching awards"[\s\S]*headers: \["Program", "Awards"\]/);
+  assert.match(appSource, /intent === "years"[\s\S]*label: "Award years in the matching awards"[\s\S]*headers: \["Year", "Awards"\]/);
+  assert.match(appSource, /\$\("ii-direct-answer"\)\.innerHTML = renderDirectAnswer\(snapshot\)/);
+  assert.match(styles, /\.ii-answer-table-wrap\s*\{/);
+  assert.match(styles, /\.ii-answer-table\s*\{/);
 });
 
 test("the feature is Funded Awards-only, responsive, accessible, no-key capable, and shares AI credentials", () => {
   assert.match(page, /id="institutional-intelligence"/);
   assert.match(page, /role="combobox"[\s\S]*aria-controls="ii-institution-options"/);
+  assert.match(page, /id="ii-institution"[^>]*placeholder="Try URochester, MIT, JHU, or a full name"/);
+  assert.doesNotMatch(page, /id="ii-institution"[^>]*placeholder="[^"]*RIT/);
   assert.match(page, /id="ii-status" role="status" aria-live="polite"/);
-  assert.match(page, /Funded Award Intelligence/);
+  assert.match(page, /id="ii-search"[^>]*aria-busy="false"[\s\S]*class="find-button-spinner ii-search-spinner hidden" id="ii-search-spinner"[^>]*aria-hidden="true"[\s\S]*id="ii-search-label">Search funded awards/);
+  assert.match(styles, /\.ii-search-spinner\s*\{[^}]*display:\s*inline-block/);
+  assert.match(appSource, /function setSearchActivity\(active, owner = 0\)[\s\S]*aria-busy[\s\S]*ii-search-spinner[\s\S]*Searching awards…/);
+  assert.match(appSource, /setSearchActivity\(true, sequence\)[\s\S]*try \{[\s\S]*setSearchActivity\(false, sequence\)[\s\S]*setBusy\(false\)/);
+  assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*source\.source}: timed out/);
+  assert.doesNotMatch(page, /Funded Award Intelligence/);
+  assert.match(page, /aria-labelledby="ii-heading"[\s\S]*<h2 id="ii-heading">Find funded projects/);
   assert.match(page, /id="award-search-form"[^>]*hidden/);
   assert.match(page, /id="ii-program-officer"/);
-  assert.match(page, /Structured award search and institution resolution do not require an AI key/);
+  assert.doesNotMatch(page, /Structured award search and institution resolution do not require an AI key/);
+  assert.match(page, /id="ii-status" role="status" aria-live="polite"><\/div>/);
+  assert.match(styles, /\.ii-status:empty\s*\{[^}]*display:\s*none/);
+  assert.match(appSource, /setStatus\(""\)/);
   assert.match(page, /assets\/institutional-intelligence-snapshots\.js/);
   assert.match(page, /Research Organization Registry \(ROR\)/);
   assert.doesNotMatch(page, /Optional institution identity:/);
@@ -341,13 +584,21 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.doesNotMatch(appSource, /searchUrl|awards\/search/);
   assert.match(page, /id="ii-card-pagination"[\s\S]*>Previous<[\s\S]*id="ii-card-page-numbers"[\s\S]*>Next</);
   assert.match(page, /id="ii-page-size"[\s\S]*value="10"[\s\S]*value="25"[\s\S]*value="50"/);
-  assert.match(styles, /@media \(max-width: 780px\)[\s\S]*\.ii-shell-heading \{[\s\S]*display: none/);
+  assert.doesNotMatch(page + styles, /ii-shell-heading/);
   assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
   assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence-snapshots\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
   assert.match(styles, /@media \(max-width: 520px\)/);
   assert.match(appSource, /credentials\.loadKey\(provider\)/);
   assert.match(appSource, /credentials\.saveKey\(provider, key\)/);
+  assert.match(appSource, /credentials\.resolveProvider\(provider\)/);
+  assert.ok(
+    appSource.indexOf("credentials.resolveProvider(provider)")
+      < appSource.indexOf('if (!["hosted", "openai", "anthropic"].includes(provider)) provider = "hosted";'),
+  );
+  assert.match(page, /value="hosted" selected>Funding Finder AI \(included\)/);
+  assert.match(page, /assets\/ai-gateway-config\.js/);
+  assert.match(appSource, /provider === "hosted" \|\| Boolean\(credentials\.loadKey\(provider\)\)/);
   assert.match(appSource, /\$\("k-provider"\)/);
   assert.doesNotMatch(appSource, /localStorage\.(?:setItem|getItem)|funding-finder\.institutional.*key/i);
   assert.match(credentialsSource, /funding-finder\.credentials\.v1/);
@@ -359,7 +610,13 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     deploymentSource.indexOf("Run bounded exact-source smokes"),
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
-  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.1\.0"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.3\.0"/);
+  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.3\.0"/);
+  assert.match(appSource, /\$\{displaySource\} · \$\{mechanism\}/);
+  assert.match(appSource, /Assistance Listing:/);
+  assert.match(appSource, /USAspending does not publish investigator names or an award abstract/);
+  assert.match(appSource, /isDod \? "" : `<details class="ii-award-abstract"/);
+  assert.match(appSource, /Original funding opportunity/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(
@@ -368,8 +625,30 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   );
   assert.match(askQuestionSource, /if \(state\.questionSubmitting\) return;[\s\S]*state\.questionSubmitting = true;[\s\S]*setBusy\(true\);[\s\S]*await resolveTypedInstitution\(\)/);
   assert.match(askQuestionSource, /const questionSequence = \+\+state\.questionSequence;[\s\S]*if \(questionSequence !== state\.questionSequence\) return;/);
+  assert.match(askQuestionSource, /refreshProvider\(\{ preferMain: false \}\)/);
+  assert.match(askQuestionSource, /sanitizeQuestionPlan\(plan, current, question\)/);
   assert.match(askQuestionSource, /finally \{[\s\S]*if \(questionSequence === state\.questionSequence\) \{[\s\S]*state\.questionSubmitting = false;[\s\S]*setBusy\(false\)/);
   assert.match(askQuestionSource, /const questionState = \{[\s\S]*runSearch\(\{ historyMode: "push", resolveInstitution: false, focusResults: true, questionSearch: true, questionState, searchState: next \}\)/);
   assert.match(askQuestionSource, /refreshQuestionAnswer\(\)/);
   assert.match(appSource, /\$\("ii-question"\)\.addEventListener\("keydown"[\s\S]*event\.key !== "Enter"[\s\S]*event\.repeat[\s\S]*askQuestion\(\)/);
+});
+
+test("result completeness is explained in one compact, plain-language status block", () => {
+  const sourceStatusSource = appSource.slice(
+    appSource.indexOf("function sourceStatusText("),
+    appSource.indexOf("function renderFacetSelect("),
+  );
+  assert.match(page, /id="ii-results-note"[^>]*>[\s\S]*id="ii-status" role="status" aria-live="polite"[\s\S]*id="ii-source-status"/);
+  assert.match(styles, /\.ii-results-note\s*\{[^}]*padding:\s*10px 12px/);
+  assert.match(styles, /\.ii-source-status li\s*\{[^}]*padding:\s*0;[^}]*background:\s*transparent/);
+  assert.match(sourceStatusSource, /source\.status === "complete"[\s\S]*source\.source}: all/);
+  assert.match(sourceStatusSource, /\["safety_bounded", "partial"\][\s\S]*source\.source}: at least/);
+  assert.match(sourceStatusSource, /awardProduct\.enrichmentWarnings\(source\)/);
+  assert.match(sourceStatusSource, /source\.health\?\.status === "degraded"/);
+  assert.match(sourceStatusSource, /Base award records remain available when optional public details cannot be loaded/);
+  assert.match(sourceStatusSource, /“at least” means more matches may exist/);
+  assert.match(sourceStatusSource, /list\.innerHTML = sources\.length \? `<li/);
+  assert.doesNotMatch(sourceStatusSource, /sources\.map\(source => `<li/);
+  assert.match(appSource, /setStatus\("Opened the shared results from this link\."\)/);
+  assert.doesNotMatch(appSource, /Restored the shared result snapshot|safety-bounded ·|normalized awards available|exact source total/);
 });

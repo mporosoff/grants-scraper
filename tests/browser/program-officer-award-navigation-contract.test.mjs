@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
@@ -21,14 +22,16 @@ import {
 } from "../../workers/award-api/src/snapshot.js";
 
 const root = new URL("../../", import.meta.url);
-const [coreSource, pageSource, appSource, aiSource, configSource, deploySource] = await Promise.all([
+const [coreSource, pageSource, appSource, aiSource, configSource, deploySource, styleSource] = await Promise.all([
   readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
   readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
   readFile(new URL("assets/ai-provider.js", root), "utf8"),
   readFile(new URL("assets/award-api-config.js", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
+  readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
 ]);
+const contentDigest = value => createHash("sha256").update(value).digest("hex");
 const sandbox = { URL, URLSearchParams };
 vm.createContext(sandbox);
 vm.runInContext(coreSource, sandbox);
@@ -116,8 +119,8 @@ function programOfficerSnapshot(records = Array.from({ length: 30 }, (_, index) 
   });
 }
 
-function retrievalPlan(concepts, { phrases = concepts, exclusions = [] } = {}) {
-  return { intent: "topical", concepts, phrases, exclusions };
+function retrievalPlan(concepts, { phrases = concepts, exclusions = [], intent = "awards" } = {}) {
+  return { intent, concepts, phrases, exclusions };
 }
 
 test("Program Officer identity is strict, same-source, person-like, and browser/server coherent", () => {
@@ -164,6 +167,22 @@ test("Program Officer request, URL, and immutable recent-five-year restoration p
     limit: 25,
     offset: 0,
   });
+  assert.throws(() => core.buildAwardRequest({
+    mode: "program_officer",
+    program_officer_source: "DOD",
+    program_officer_display_name: "Doe, Jane A., Jr.",
+    program_contact_key: key,
+    year_preset: "all",
+  }), /identity is invalid/);
+  assert.equal(validateSnapshotCreate({
+    sources: ["DOD"],
+    criteria: {
+      mode: "program_officer",
+      program_officer: "Doe, Jane A., Jr.",
+      program_contact_key: key,
+      year_preset: "all",
+    },
+  }, { maxResults: 25 }), null, "crafted DoD Program Officer snapshots are rejected server-side");
   const url = core.urlForState("https://example.test/funded_awards.html?unrelated=kept", {
     open: true,
     mode: "program_officer",
@@ -244,7 +263,7 @@ test("full-snapshot deterministic evidence finds beyond-page matches with stable
   assert.ok(largeEvidence.retrieval.serialized_characters <= SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT);
   const largeAnswer = plain(core.deterministicProgramOfficerAnswer({
     question: "Which projects involve catalysis carbon dioxide conversion?",
-    intent: "topical",
+    intent: "awards",
     aggregate: large.base_aggregate,
     snapshot: large,
     evidencePack: largeEvidence,
@@ -296,24 +315,33 @@ test("provider concepts gate admission, phrases rank, exclusions filter, and sho
   assert.equal(core.validateProgramOfficerQuestionPlan({ intent: "count", concepts: ["catalysis"], phrases: [], exclusions: [] }), null);
 });
 
-test("explicit award-year qualifiers use structured metadata and retain topical aggregate facets", () => {
+test("topic-qualified answer intents use structured metadata and retain investigator and institution facets", () => {
   const snapshot = programOfficerSnapshot([
     award(301, { award_year: 2023, award_date: "2023-06-01", principal_investigators: [{ name: "Earlier Researcher" }] }),
     award(302, { award_year: 2024, award_date: "2024-06-01", principal_investigators: [{ name: "Target Researcher" }] }),
   ]);
-  const evidence = snapshotEvidence(snapshot, { plan: retrievalPlan(["2024"]), limit: 24 });
+  const evidence = snapshotEvidence(snapshot, { plan: retrievalPlan(["2024"], { intent: "investigators" }), limit: 24 });
   assert.deepEqual(evidence.awards.map(item => item.award_id), ["NSF-302"]);
   assert.deepEqual(evidence.awards[0].matched_fields, ["year"]);
   const answer = plain(core.deterministicProgramOfficerAnswer({
     question: "Who received awards in FY2024?",
-    intent: "topical",
-    aggregateIntent: "investigators",
+    intent: "investigators",
     aggregate: snapshot.base_aggregate,
     snapshot,
     evidencePack: evidence,
   }));
   assert.match(answer.answer, /Matching investigators: Target Researcher/);
   assert.doesNotMatch(answer.answer, /Earlier Researcher/);
+  const institutionEvidence = snapshotEvidence(snapshot, { plan: retrievalPlan(["2024"], { intent: "institutions" }), limit: 24 });
+  const institutionAnswer = plain(core.deterministicProgramOfficerAnswer({
+    question: "Which institutions received awards in FY2024?",
+    intent: "institutions",
+    aggregate: snapshot.base_aggregate,
+    snapshot,
+    evidencePack: institutionEvidence,
+  }));
+  assert.match(institutionAnswer.answer, /Matching recipient institutions: Beta Laboratory/);
+  assert.doesNotMatch(institutionAnswer.answer, /Alpha University/);
 });
 
 test("provider plans cannot broaden locked snapshot membership or invent award identifiers", () => {
@@ -343,9 +371,9 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   assert.equal(snapshotPage(legacyCached, { page: 1, pageSize: 10, facet: { type: "institution", key: "missing" } }), null);
   const incomplete = programOfficerSnapshot([], { complete: false });
   assert.equal(incomplete.coverage_state, "safety_bounded");
-  const answer = plain(core.deterministicProgramOfficerAnswer({ question: "What involved quantum sensing?", intent: "topical", aggregate: incomplete.base_aggregate, snapshot: incomplete, evidencePack: { awards: [] } }));
+  const answer = plain(core.deterministicProgramOfficerAnswer({ question: "What involved quantum sensing?", intent: "awards", aggregate: incomplete.base_aggregate, snapshot: incomplete, evidencePack: { awards: [], retrieval: { records_with_score: 0 } } }));
   assert.equal(answer.answer, "No related project was identified in the available records, but the source snapshot is incomplete, so this is not a negative finding.");
-  const completeNegative = plain(core.deterministicProgramOfficerAnswer({ question: "What involved quantum sensing?", intent: "topical", aggregate: complete.base_aggregate, snapshot: complete, evidencePack: { awards: [] } }));
+  const completeNegative = plain(core.deterministicProgramOfficerAnswer({ question: "What involved quantum sensing?", intent: "awards", aggregate: complete.base_aggregate, snapshot: complete, evidencePack: { awards: [], retrieval: { records_with_score: 0 } } }));
   assert.match(completeNegative.answer, /scoped snapshot result, not a complete-career claim/);
   const partialPayload = sourcePayload([award(1)]);
   partialPayload.total_count = null;
@@ -476,11 +504,15 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
 });
 
 test("served page exposes one coherent Program Officer cache identity and the browser uses full-snapshot evidence", () => {
-  const key = "po-award-navigation-20260830-13";
-  for (const asset of ["institutional-intelligence.css", "award-api-config.js", "institutional-intelligence-core.js", "institutional-intelligence-snapshots.js"]) {
-    assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${key}`));
+  for (const [asset, source] of [
+    ["institutional-intelligence.css", styleSource],
+    ["award-api-config.js", configSource],
+    ["institutional-intelligence-core.js", coreSource],
+    ["institutional-intelligence-snapshots.js", appSource],
+    ["ai-provider.js", aiSource],
+  ]) {
+    assert.match(pageSource, new RegExp(`${asset.replace(".", "\\.")}\\?v=${contentDigest(source)}`));
   }
-  assert.match(pageSource, /ai-provider\.js\?v=program-officer-qna-20260830/);
   assert.match(appSource, /Search this contact’s recent/);
   assert.match(pageSource, /id="ii-year-preset"/);
   assert.match(pageSource, /id="ii-institutions"/);
@@ -489,7 +521,8 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.match(appSource, /plan_format: "provider-concepts-v1"/);
   assert.match(appSource, /operation: "program_officer_question_plan"/);
   assert.match(appSource, /operation: "program_officer_evidence_answer"/);
-  assert.match(appSource, /Program Officer Q&A is disabled until you connect an AI provider key/);
+  assert.match(appSource, /Hosted AI included/);
+  assert.match(appSource, /questionState\.provider === "hosted"/);
   assert.match(aiSource, /program_officer_question_plan_v1/);
   assert.match(aiSource, /program_officer_evidence_answer_v1/);
   assert.doesNotMatch(coreSource, /programOfficerRetrievalPhrases|caseSensitiveScientificSymbols|explicit_notation/);

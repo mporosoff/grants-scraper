@@ -5,9 +5,10 @@ import test from "node:test";
 const root = new URL("../../", import.meta.url);
 
 test("supports one guided funding search, cited FOA evidence, reusable profiles, and optional AI refinement", async () => {
-  const [prototype, script, profileScript, nofoScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
+  const [prototype, script, retrievalScript, profileScript, nofoScript, reviewScript, credentialsScript, providerScript, css] = await Promise.all([
     readFile(new URL("match_explorer.html", root), "utf8"),
     readFile(new URL("assets/app.js", root), "utf8"),
+    readFile(new URL("assets/search-retrieval.js", root), "utf8"),
     readFile(new URL("assets/profile.js", root), "utf8"),
     readFile(new URL("assets/nofo.js", root), "utf8"),
     readFile(new URL("assets/review.js", root), "utf8"),
@@ -31,7 +32,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="count-archived"/);
   assert.match(prototype, /id="sort"/);
   assert.match(prototype, /id="export-csv"/);
-  assert.match(prototype, /id="export-ics"/);
+  assert.doesNotMatch(prototype + script, /id="export-ics"|\$\("export-ics"\)/);
+  assert.match(prototype, /class="button primary" id="export-csv"/);
+  assert.match(prototype, /class="button primary team-ready-filter" id="filter-team-ready"/);
+  assert.match(script, /function scrollToSearchWorkspace\(\)[\s\S]*?\$\("saved-panel"\)\.scrollIntoView/);
   assert.doesNotMatch(prototype, /id="compare-panel"|data-compare=/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);
@@ -64,7 +68,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype, /Open larger chat/);
   assert.match(prototype, /id="chat-submit"/);
   assert.match(prototype, /Enter to send/);
-  assert.match(prototype, /id="result-label"/);
+  assert.doesNotMatch(prototype, /id="(?:results-heading|result-count|result-label|results-mode|result-range)"|class="results-summary"|class="toolbar-lower-row"/);
   assert.match(prototype, /Chat with your results/);
   assert.match(prototype, /Minimum per-award amount/);
   assert.match(prototype, /not endorsed or certified/);
@@ -118,10 +122,13 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(script, /async function initializeCatalog/);
   assert.match(script, /ensureCatalogReady/);
   assert.match(script, /function profileAcronymContext/);
-  assert.match(script, /no AI call was made/);
+  assert.match(script, /Interpreted .* using/);
   assert.match(script, /function recordIsCurrent/);
   assert.match(script, /function recordIsAvailable/);
-  assert.match(script, /record\.archive_date <= asOf/);
+  assert.match(script, /return RETRIEVAL_API\.recordIsArchived\(record, asOf\)/);
+  assert.match(script, /return RETRIEVAL_API\.recordIsCurrent\(record, asOf\)/);
+  assert.match(retrievalScript, /archiveDate <= today/);
+  assert.match(retrievalScript, /function recordIsCurrent/);
   assert.match(script, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(script, /status === "archived"/);
   assert.match(script, /Archived included/);
@@ -177,10 +184,10 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(css, /\.match-explanation/);
   assert.match(css, /\.matched-topics/);
   assert.doesNotMatch(script, />FOA changed</);
-  assert.match(script, /AI retrieval candidate set/);
-  assert.match(script, /result-label/);
+  assert.doesNotMatch(script, /AI retrieval candidate set|updateResultHeading|result-label/);
   assert.match(script, /MAX_AI_CANDIDATES = 32/);
-  assert.match(script, /MAX_CHAT_RESULTS = 20/);
+  assert.match(script, /MAX_CHAT_RESULTS = 10/);
+  assert.match(script, /data-chat-copy-message/);
   assert.match(script, /async function refineWithAi/);
   assert.match(script, /async function askResults/);
   assert.match(script, /async function openNofoFromFile/);
@@ -234,7 +241,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(reviewScript, /FUNDING_CREDENTIALS/);
   assert.doesNotMatch(prototype, /Phase 3 deployment/);
   assert.doesNotMatch(prototype, /id="profile-search"|id="remember-profile"/);
-  assert.match(prototype, /Your matches will appear here/);
+  assert.doesNotMatch(prototype, /Your matches will appear here/);
   assert.match(script, /id="browse-all"/);
   assert.match(script, /function browseAllOpportunities/);
   assert.match(css, /\/\* Unified search workflow \*\//);

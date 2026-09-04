@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+  const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
+  const PROGRAM_OFFICER_SOURCES = new Set(["NSF", "NIH", "DOE"]);
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
     "ii_topic", "ii_pi", "ii_pi_identity", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
@@ -31,6 +32,10 @@
 
   function clean(value, maximum = 500) {
     return String(value || "").replace(/\s+/g, " ").trim().slice(0, maximum);
+  }
+
+  function displayInvestigatorName(value) {
+    return globalThis.FUNDING_AWARD_PRODUCT?.displayInvestigatorName?.(value) || clean(value, 300);
   }
 
   function snapshotFacetKey(value) {
@@ -90,7 +95,7 @@
     const normalizedSource = clean(source, 10).toUpperCase();
     const sourceName = clean(contact?.source_display_name || contact?.name, 300);
     const key = programContactKey(sourceName);
-    return Boolean(SOURCE_NAMES.includes(normalizedSource)
+    return Boolean(PROGRAM_OFFICER_SOURCES.has(normalizedSource)
       && contact?.searchable_program_contact === true
       && key
       && sourceName.length <= 160
@@ -131,7 +136,7 @@
     const value = clean(program, 160);
     if (!value) return {};
     if (!SOURCE_NAMES.includes(source)) {
-      throw new Error("Choose NSF, NIH, or DOE before filtering by a program.");
+      throw new Error("Choose NSF, NIH, DOE, or DoD before filtering by a program.");
     }
     if (source === "DOE") {
       const office = DOE_PROGRAM_OFFICES.get(identityKey(value));
@@ -154,7 +159,7 @@
       const displayName = clean(state?.program_officer_display_name || state?.program_officer, 300);
       const contactKey = clean(state?.program_contact_key, 300);
       const yearPreset = clean(state?.year_preset, 20);
-      if (!SOURCE_NAMES.includes(poSource) || !displayName || !contactKey || programContactKey(displayName) !== contactKey) {
+      if (!PROGRAM_OFFICER_SOURCES.has(poSource) || !displayName || !contactKey || programContactKey(displayName) !== contactKey) {
         throw new Error("This Program Officer search identity is invalid. Start again from a funded-award contact.");
       }
       if (!["recent5", "all", "custom"].includes(yearPreset)) throw new Error("Choose a Program Officer year range.");
@@ -190,6 +195,12 @@
     const topic = clean(state?.topic, 500);
     const pi = clean(state?.pi, 160);
     const programOfficer = clean(state?.program_officer, 160);
+    if (agency === "DOD" && pi) {
+      throw new Error("DoD USAspending records do not provide investigator fields. Remove the investigator filter or choose another agency.");
+    }
+    if (agency === "DOD" && programOfficer) {
+      throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
+    }
     const yearStart = validYear(state?.year_start);
     const yearEnd = validYear(state?.year_end);
     if (topic) criteria.topic = topic;
@@ -264,7 +275,7 @@
     if (!published) return null;
     published = published
       .replace(/^(?:(?:dr|doctor|prof|professor|mr|mrs|ms|miss|mx)\.?\s+)+/iu, "")
-      .replace(/(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?$/iu, "")
+      .replace(/(?:(?:,?\s+|,)(?:jr|sr|ii|iii|iv|ph\.?d\.?|m\.?d\.?|dds|dvm|esq)\.?)+$/iu, "")
       .trim();
     const commaParts = published.split(",").map(part => clean(part, 160)).filter(Boolean);
     let tokens;
@@ -360,7 +371,7 @@
         ? `${token.replace(/\.+$/u, "")}.`
         : token).join(" ")
       : "";
-    return [entry.first_display, middle, entry.family_display].filter(Boolean).join(" ");
+    return displayInvestigatorName([entry.first_display, middle, entry.family_display].filter(Boolean).join(" "));
   }
 
   function groupInvestigators(awards) {
@@ -552,7 +563,7 @@
     const uniqueIds = new Set();
     for (const award of Array.isArray(results) ? results : []) {
       const id = evidenceId(award);
-      if (!/^(?:NSF|NIH|DOE):.+/.test(id) || uniqueIds.has(id)) continue;
+      if (!/^(?:NSF|NIH|DOE|DOD):.+/.test(id) || uniqueIds.has(id)) continue;
       uniqueIds.add(id);
       unique.push(award);
     }
@@ -583,7 +594,7 @@
         program: clean(award?.program_name || award?.activity_code || award?.program_codes?.[0], 200),
         year: validYear(award?.award_year),
         investigators: (Array.isArray(award?.principal_investigators) ? award.principal_investigators : [])
-          .map(person => clean(person?.name, 160)).filter(Boolean).slice(0, 8),
+          .map(person => displayInvestigatorName(person?.name)).filter(Boolean).slice(0, 8),
         abstract_excerpt: clean(award?.abstract, QUESTION_ABSTRACT_LIMIT),
       };
       const bytes = JSON.stringify(record).length + (awards.length ? 1 : 0);
@@ -619,27 +630,32 @@
       : (safeAggregate.awards || []).map(evidenceId);
     let answer;
     if (resolvedIntent === "investigators") {
-      const people = safeAggregate.investigators.map(person => `${person.name} (${person.projects} award${person.projects === 1 ? "" : "s"} in the result snapshot)`);
-      answer = people.length ? `Investigators in the result snapshot: ${people.join("; ")}.` : "No investigator names appear in the matching result snapshot.";
+      const people = safeAggregate.investigators.map(person => `${displayInvestigatorName(person.name)} (${person.projects} award${person.projects === 1 ? "" : "s"} in these results)`);
+      const includesDod = sources.some(source => clean(source?.source, 10).toUpperCase() === "DOD");
+      answer = people.length
+        ? `Listed investigators in these results: ${people.join("; ")}.`
+        : includesDod
+          ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards, so this is not evidence that those projects have no investigators."
+          : "No investigator names appear in these results.";
     } else if (resolvedIntent === "institutions") {
       const institutions = (safeAggregate.institutions || []).map(institution => `${institution.name} (${institution.projects})`);
-      answer = institutions.length ? `Recipient institutions in the result snapshot: ${institutions.join("; ")}.` : "No recipient institution names appear in the matching result snapshot.";
+      answer = institutions.length ? `Recipient institutions in these results: ${institutions.join("; ")}.` : "No recipient institution names appear in these results.";
     } else if (resolvedIntent === "programs") {
       const programs = safeAggregate.programs.map(program => `${program.label} (${program.projects})`);
-      answer = programs.length ? `Programs in the result snapshot: ${programs.join("; ")}.` : "No program labels appear in the matching result snapshot.";
+      answer = programs.length ? `Programs in these results: ${programs.join("; ")}.` : "No program labels appear in these results.";
     } else if (resolvedIntent === "years") {
       answer = safeAggregate.year_start
-        ? `The matching result snapshot spans ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
-        : "The matching result snapshot does not contain a usable award year.";
+        ? `These results span ${safeAggregate.year_start}${safeAggregate.year_end !== safeAggregate.year_start ? ` through ${safeAggregate.year_end}` : ""}.`
+        : "These results do not contain a usable award year.";
     } else if (resolvedIntent === "count") {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot.`;
+      answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results.`;
     } else if (resolvedIntent === "awards") {
       const titles = (Array.isArray(safeAggregate.ordered_refs) ? safeAggregate.ordered_refs : safeAggregate.awards || [])
         .slice(0, 8)
         .map(award => clean(award?.title, 180) || clean(award?.evidence_id, 120) || `${award.source} ${award.award_id}`);
-      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot: ${titles.join("; ")}.` : "No matching awards are in the result snapshot.";
+      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.` : "No matching awards are in these results.";
     } else {
-      answer = `${safeAggregate.project_count} normalized matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in the result snapshot for evidence-grounded interpretation.`;
+      answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} available for this answer.`;
     }
     const searched = sources.map(source => clean(source?.source, 10)).filter(Boolean);
     const usableStatuses = new Set(["ok", "complete", "partial", "safety_bounded"]);
@@ -683,8 +699,8 @@
     };
   }
 
-  const PROGRAM_OFFICER_QUESTION_INTENTS = new Set([
-    "topical", "count", "investigators", "institutions", "programs", "years", "awards",
+  const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
+    "count", "investigators", "institutions", "programs", "years", "awards",
   ]);
   const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
 
@@ -705,7 +721,7 @@
   function validateProgramOfficerQuestionPlan(value) {
     if (!value || typeof value !== "object" || Array.isArray(value)) return null;
     const intent = clean(value.intent, 30);
-    if (!PROGRAM_OFFICER_QUESTION_INTENTS.has(intent)) return null;
+    if (!PROGRAM_OFFICER_ANSWER_INTENTS.has(intent)) return null;
     const normalizeTerms = (terms, maximum) => {
       if (!Array.isArray(terms) || terms.length > maximum) return null;
       const normalized = [];
@@ -727,11 +743,8 @@
     const phrases = normalizeTerms(value.phrases, 8);
     const exclusions = normalizeTerms(value.exclusions, 8);
     if (!concepts || !phrases || !exclusions) return null;
-    if (intent === "topical") {
-      if (!concepts.length || !phrases.length) return null;
-    } else if (concepts.length || phrases.length || exclusions.length) {
-      return null;
-    }
+    const topical = concepts.length > 0;
+    if (topical !== (phrases.length > 0) || (!topical && exclusions.length)) return null;
     return { intent, concepts, phrases, exclusions };
   }
 
@@ -749,33 +762,33 @@
     return { source, name, years, total };
   }
 
-  function deterministicProgramOfficerAnswer({ question = "", intent = "", aggregateIntent = "", aggregate, snapshot, evidencePack = null } = {}) {
+  function deterministicProgramOfficerAnswer({ question = "", intent = "", aggregate, snapshot, evidencePack = null } = {}) {
     const scope = programOfficerScopeText(snapshot);
     const evidence = Array.isArray(evidencePack?.awards) ? evidencePack.awards : [];
-    if (intent === "topical") {
+    if (evidencePack?.retrieval) {
       const retrievedCount = Number(evidencePack?.retrieval?.records_with_score);
       const count = Number.isInteger(retrievedCount) && retrievedCount >= 0 ? retrievedCount : evidence.length;
       const matchedAggregate = evidencePack?.matched_aggregate || {};
       let matchedDetails = "";
-      if (count && aggregateIntent === "investigators") {
+      if (count && intent === "investigators") {
         const people = Array.isArray(matchedAggregate.investigators) ? matchedAggregate.investigators : [];
         const total = Number(matchedAggregate.investigator_count || people.length);
         matchedDetails = people.length
           ? ` Matching investigators: ${people.map(person => `${person.name} (${person.projects} matching award${person.projects === 1 ? "" : "s"})`).join("; ")}.${total > people.length ? ` Showing ${people.length} of ${total}.` : ""}`
           : " No investigator names appear in the matching records.";
-      } else if (count && aggregateIntent === "institutions") {
+      } else if (count && intent === "institutions") {
         const institutions = Array.isArray(matchedAggregate.institutions) ? matchedAggregate.institutions : [];
         const total = Number(matchedAggregate.institution_count || institutions.length);
         matchedDetails = institutions.length
           ? ` Matching recipient institutions: ${institutions.map(institution => `${institution.name} (${institution.projects})`).join("; ")}.${total > institutions.length ? ` Showing ${institutions.length} of ${total}.` : ""}`
           : " No recipient institution names appear in the matching records.";
-      } else if (count && aggregateIntent === "programs") {
+      } else if (count && intent === "programs") {
         const programs = Array.isArray(matchedAggregate.programs) ? matchedAggregate.programs : [];
         const total = Number(matchedAggregate.program_count || programs.length);
         matchedDetails = programs.length
           ? ` Matching programs: ${programs.map(program => `${program.label} (${program.projects})`).join("; ")}.${total > programs.length ? ` Showing ${programs.length} of ${total}.` : ""}`
           : " No program labels appear in the matching records.";
-      } else if (count && aggregateIntent === "years") {
+      } else if (count && intent === "years") {
         matchedDetails = matchedAggregate.year_start
           ? ` The matching records span ${matchedAggregate.year_start}${matchedAggregate.year_end !== matchedAggregate.year_start ? ` through ${matchedAggregate.year_end}` : ""}.`
           : " The matching records do not contain a usable award year.";
@@ -821,7 +834,7 @@
     const params = new URLSearchParams(search || "");
     const lockedModeRequested = params.get("ii_mode") === "program_officer";
     const mode = lockedModeRequested ? "program_officer" : "standard";
-    const poSource = SOURCE_NAMES.includes(clean(params.get("ii_po_source"), 10).toUpperCase())
+    const poSource = PROGRAM_OFFICER_SOURCES.has(clean(params.get("ii_po_source"), 10).toUpperCase())
       ? clean(params.get("ii_po_source"), 10).toUpperCase() : "";
     const poName = clean(params.get("ii_po_name"), 300);
     const poKey = clean(params.get("ii_po_key"), 300);
@@ -871,7 +884,7 @@
       const displayName = clean(state.program_officer_display_name || state.program_officer, 300);
       const contactKey = clean(state.program_contact_key, 300);
       const yearPreset = clean(state.year_preset, 20);
-      if (SOURCE_NAMES.includes(source) && displayName && programContactKey(displayName) === contactKey && ["recent5", "all", "custom"].includes(yearPreset)) {
+      if (PROGRAM_OFFICER_SOURCES.has(source) && displayName && programContactKey(displayName) === contactKey && ["recent5", "all", "custom"].includes(yearPreset)) {
         url.searchParams.set("ii_mode", "program_officer");
         url.searchParams.set("ii_po_source", source);
         url.searchParams.set("ii_po_name", displayName);
@@ -915,8 +928,26 @@
     return compact;
   }
 
-  function sanitizeQuestionPlan(plan, currentState) {
+  function sanitizeQuestionPlan(plan, currentState, question = "") {
     const agency = clean(plan?.agency, 10).toUpperCase();
+    const questionText = clean(question, 1_000);
+    let yearStart = validYear(plan?.year_start) || "";
+    let yearEnd = validYear(plan?.year_end) || "";
+    const explicitRange = questionText.match(
+      /\b(?:from|between)\s+((?:19|20)\d{2})(?:\s+(?:through|to|until|and)\s+|\s*[-\u2013\u2014]\s*)((?:19|20)\d{2})\b/i,
+    );
+    const onward = questionText.match(/\b(?:since|from)\s+((?:19|20)\d{2})(?:\s+onward)?\b/i);
+    const singleYear = questionText.match(/\b(?:in|during)\s+((?:19|20)\d{2})\b/i);
+    if (explicitRange) {
+      yearStart = validYear(explicitRange[1]) || "";
+      yearEnd = validYear(explicitRange[2]) || "";
+    } else if (onward) {
+      yearStart = validYear(onward[1]) || "";
+      yearEnd = "";
+    } else if (singleYear) {
+      yearStart = validYear(singleYear[1]) || "";
+      yearEnd = yearStart;
+    }
     return {
       ...currentState,
       agency: SOURCE_NAMES.includes(agency) ? agency : "all",
@@ -924,8 +955,8 @@
       topic: clean(plan?.topic, 500),
       pi: clean(plan?.pi, 160),
       program_officer: clean(plan?.program_officer, 160),
-      year_start: validYear(plan?.year_start) || "",
-      year_end: validYear(plan?.year_end) || "",
+      year_start: yearStart,
+      year_end: yearEnd,
     };
   }
 
@@ -943,7 +974,7 @@
         const candidate = clean(match[1], 160)
           .replace(/[.,;:]+$/u, "")
           .replace(/^(?:Dr|Doctor|Prof|Professor|Mr|Ms|Mrs|Mx)\.?\s+/u, "");
-        if (/\b(?:DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
+        if (/\b(?:DOD|DOE|NIH|NSF|BES)\b/.test(candidate)) continue;
         if (DOE_PROGRAM_OFFICES.has(identityKey(candidate))) continue;
         if (isProgramIdentity(candidate, program)) continue;
         if (identityKey(candidate) === identityKey(topic)) continue;

@@ -792,12 +792,25 @@ test("alert deployment and privacy contracts preserve Phase 3 behavior through P
     readFile(new URL("evaluation/alerts_phase3.json", root), "utf8"),
   ]);
   assert.match(page, /Save this search as an email alert/);
-  assert.match(page, /Watch your overall funding search/);
+  assert.match(page, /<strong>★ Saved opportunities and email alerts<\/strong>/);
+  assert.match(page, /<div class="saved-body">[\s\S]*<section class="profile-search-alert"/);
+  assert.match(page, /<h3 id="profile-search-alert-heading">Email alerts for this search<\/h3>/);
+  assert.doesNotMatch(page, /id="alerts-panel"/);
+  assert.match(page, /Current results will not be emailed/);
+  assert.doesNotMatch(page, /Watch your overall funding search|Saved-search email alert/);
   assert.match(page, /How search alerts work/);
   assert.match(page, /data-help-section="help-alerts"/);
   assert.match(awards, /Email alerts for this program/);
   assert.match(alerts, /secure Manage alerts link/);
   assert.match(alerts, /Pursuit status and notes, profile\/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser/);
+  assert.equal((alerts.match(/id="alert-cadence"/g) || []).length, 1, "the modal has one cadence selector");
+  assert.match(alerts, /<select id="alert-cadence" name="cadence">/);
+  assert.doesNotMatch(alerts, /<input[^>]+(?:name|id)="(?:cadence|frequency)"/i);
+  for (const trigger of ["deadline_changed", "amended", "closing_reminders", "status_changed"])
+    assert.match(alerts, new RegExp(`name="trigger" value="${trigger}"`));
+  const requestBody = alerts.slice(alerts.indexOf("const body ="), alerts.indexOf("submitButton.disabled"));
+  assert.equal((requestBody.match(/cadence:/g) || []).length, 1, "the payload has one canonical cadence field");
+  assert.doesNotMatch(requestBody, /frequency\s*:/);
   assert.match(worker, /RESEND_WEBHOOK_SECRET/);
   assert.match(migration, /UNIQUE \(subscription_id, event_key\)/);
   assert.match(migration, /subscription_qualifications/);

@@ -195,6 +195,24 @@
       : "";
   }
 
+  function opportunityForAward(award, records = globalThis.GRANT_CATALOG?.opportunities) {
+    if (clean(award?.source).toUpperCase() !== "DOD" || !Array.isArray(records)) return null;
+    const numbers = [...new Set((Array.isArray(award?.opportunity_numbers) ? award.opportunity_numbers : [])
+      .map(value => clean(value).toUpperCase()).filter(Boolean))];
+    const matches = [];
+    for (const number of numbers) {
+      const exact = records.filter(record => clean(record?.opportunity_number).toUpperCase() === number);
+      if (exact.length !== 1) return null;
+      if (!matches.includes(exact[0])) matches.push(exact[0]);
+    }
+    return matches.length === 1 ? matches[0] : null;
+  }
+
+  function opportunityHref(record) {
+    const number = clean(record?.opportunity_number);
+    return number ? `./match_explorer.html?q=${encodeURIComponent(number)}` : "";
+  }
+
   globalThis.FUNDING_AWARD_LINKS = Object.freeze({
     fundedAwardsHref,
     isDoeOfficeScience,
@@ -203,6 +221,8 @@
     nsfProgramElementCode,
     programIdentityById,
     programIdentityForOpportunity,
+    opportunityForAward,
+    opportunityHref,
     reviewedMappings,
   });
 })();

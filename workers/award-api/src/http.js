@@ -10,6 +10,27 @@ export class AwardSourceError extends Error {
   }
 }
 
+export function boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout) {
+  const remaining = Math.floor(operationDeadline - monotonicNow());
+  if (remaining <= 0) throw new AwardSourceError("source_timeout");
+  return Math.min(maximumTimeout, remaining);
+}
+
+export async function withinOperationBudget(operation, monotonicNow, operationDeadline, maximumTimeout) {
+  const timeoutMs = boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout);
+  let timer;
+  try {
+    return await Promise.race([
+      Promise.resolve().then(operation),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new AwardSourceError("source_timeout")), timeoutMs);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function fetchSourceText(fetchImpl, url, options = {}, {
   maximumBytes = MAX_SOURCE_RESPONSE_BYTES,
   timeoutMs = SOURCE_TIMEOUT_MS,
@@ -40,8 +61,8 @@ export async function fetchSourceText(fetchImpl, url, options = {}, {
   }
 }
 
-export async function fetchSourceJson(fetchImpl, url, options = {}) {
-  const { body } = await fetchSourceText(fetchImpl, url, options);
+export async function fetchSourceJson(fetchImpl, url, options = {}, requestLimits = {}) {
+  const { body } = await fetchSourceText(fetchImpl, url, options, requestLimits);
   try {
     return JSON.parse(body);
   } catch {

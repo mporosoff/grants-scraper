@@ -160,15 +160,20 @@ test("additive merge preserves every ordinary tier and relative order while limi
   });
   assert.equal(selected.additions.length, 12);
   assert.deepEqual(ids(selected.additions), [
-    "new-17", "new-16", "new-15", "new-14", "new-13", "new-12",
-    "new-11", "new-10", "new-9", "new-8", "new-7", "new-6",
+    "new-0", "new-2", "new-3", "new-4", "new-5", "new-6",
+    "new-7", "new-8", "new-9", "new-10", "new-11", "new-12",
   ]);
+  assert.deepEqual(
+    Array.from(selected.additions, match => selected.assessments.get(match.id).score),
+    [100, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88],
+  );
 
   const combined = workflow.mergeAdditiveResults({ baseline, additions: selected.additions });
-  assert.deepEqual(ids(combined).slice(0, 2), ["strong-a", "strong-b"]);
+  assert.deepEqual(ids(combined).slice(0, 2), ["new-0", "new-2"]);
+  assert.deepEqual(ids(combined).slice(-4), ["strong-a", "strong-b", "potential-a", "potential-b"]);
   assert.deepEqual(ids(combined).slice(-2), ["potential-a", "potential-b"]);
   assert.ok(baseline.ids.every(id => ids(combined).includes(id)));
-  assert.ok(combined.slice(2, -2).every(match => (
+  assert.ok(combined.slice(0, 12).every(match => (
     match.workflowTier === "strong" && match.aiIdentified === true
   )));
 });
@@ -240,6 +245,10 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
     appSource.indexOf("function currentChatIds"),
     appSource.indexOf("function hasNofoDocument"),
   );
+  const resultsChat = appSource.slice(
+    appSource.indexOf("async function askResults"),
+    appSource.indexOf("function providerLabel"),
+  );
   const refineControl = appSource.slice(
     appSource.indexOf("function updateAiRefineControl"),
     appSource.indexOf("function setRefinementBusy"),
@@ -254,12 +263,18 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(refine, /retrieve: phrase => computeMatches\(phrase, "relevance"\)\.matches/);
   assert.doesNotMatch(refine, /expandedQuery|coverage: false|scheduleHybridSearch/);
   assert.match(refine, /researcher_profile: enabledProfileContext/);
+  assert.match(resultsChat, /researcher_profile: refinementProfileContext\(\)/);
+  assert.doesNotMatch(resultsChat, /researcher_profile: profileContext\(/);
+  assert.match(refine, /const routeExamples = phrases\.slice\(0, 3\)/);
   assert.match(appSource, /function refinementProfileContext\(\)[\s\S]*?state\.profile\.active[\s\S]*?: null/);
   assert.match(profileSource, /profile\.include_cv_in_ai && profile\.cv_text/);
   assert.match(restore, /restoreOrdinaryBaseline\(baseline\)/);
   assert.match(restore, /clearResultFocusPreservingConversation\(\)/);
   assert.doesNotMatch(restore, /clearAiState|clearNofoState|savedItems|savedIds|k-key|currentProfile/);
   assert.match(chatIds, /currentDisplayMatches\(\)[\s\S]*?slice\(0, MAX_CHAT_RESULTS\)/);
+  assert.match(appSource, /MAX_CHAT_RESULTS = 10/);
+  assert.match(appSource, /data-chat-copy-message/);
+  assert.match(appSource, /CHAT_UI\.copyText\(message\.text\)/);
   assert.match(appSource, /knownResultIds\([\s\S]*?answer\.referenced_result_ids[\s\S]*?8/);
   assert.match(appSource, /AI refinement was cleared because the search criteria changed/);
   assert.match(appSource, /state\.refinement\.requestSequence \+= 1/);
@@ -285,8 +300,8 @@ test("one accessible restore control and search-input controls have the required
     pageSource.indexOf('id="nofo-drop-zone"'),
     pageSource.indexOf('id="search-status"'),
   );
-  assert.ok(searchArea.indexOf('id="query"') < searchArea.indexOf('id="find-funding"'));
-  assert.ok(searchArea.indexOf('id="find-funding"') < searchArea.indexOf('id="nofo-file"'));
+  assert.ok(searchArea.indexOf('id="query"') < searchArea.indexOf('id="nofo-file"'));
+  assert.ok(searchArea.indexOf('class="nofo-upload-button"') < searchArea.indexOf('id="find-funding"'));
   assert.equal((pageSource.match(/id="restore-ai-refinement"/g) || []).length, 1);
   assert.equal((pageSource.match(/>Restore original results<\/button>/g) || []).length, 1);
   assert.doesNotMatch(pageSource, /Hide AI/);

@@ -100,7 +100,7 @@ test("workflow metadata keeps Strong/Potential tier separate from AI provenance"
 });
 
 test("AI candidates use the same pagination, save, calendar, chat-jump, and official-link paths", () => {
-  assert.match(searchPage, /assets\/result-workflow\.js\?v=ai-additive-20260829/);
+  assert.match(searchPage, /assets\/result-workflow\.js\?v=ai-feedback-20260901/);
   assert.match(app, /candidateMatches: new Map\(\)/);
   assert.match(app, /RESULT_WORKFLOW_API\.resolveCandidateMatches/);
   assert.match(app, /Math\.ceil\(currentDisplayMatches\(\)\.length \/ PAGE_SIZE\)/);
@@ -117,7 +117,7 @@ test("exports and user-connected AI contexts carry bounded workflow evidence", (
     "Potential evidence source field",
     "Potential evidence excerpt",
   ]) assert.match(app, new RegExp(`"${heading}"`));
-  assert.match(app, /compactResultRecord\(record, match\)/);
+  assert.match(app, /compactResultRecord\(record, match, 360,/);
   assert.match(app, /current_results:[\s\S]*?map\(evaluationResultMetadata\)/);
   assert.match(app, /ai_addition_results:[\s\S]*?map\(evaluationResultMetadata\)/);
   assert.match(app, /workflow_tier \\"strong\\" means a conservative local match/);
@@ -133,7 +133,7 @@ test("hosted Potential matching remains query-only while the page explains the b
   assert.doesNotMatch(launch, /profile|cv_text|orcid/i);
   assert.match(searchPage, /hosted Potential matching requires a typed topic/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
-  assert.match(help, /When you explicitly use AI refinement or chat/);
+  assert.match(help, /When you explicitly use AI refinement, chat, or an institution question/);
 });
 
 test("pending work is shared, filter updates are debounced, and Retry-After disables retry", () => {

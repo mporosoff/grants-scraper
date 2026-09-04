@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/deploy-award-api.yml"
       - "assets/award-api-config.js"
+      - "assets/dod-awards-browser.mjs"
       - "assets/award-links.js"
       - "assets/funded-awards-core.js"
       - "assets/funded-awards.css"
@@ -40,7 +41,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: "11.19.0"
       - uses: actions/setup-node@v6
@@ -52,6 +53,7 @@ jobs:
         run: >-
           node --check tools/classify_worker_deployment.mjs &&
           node --check assets/award-links.js &&
+          node --check assets/dod-awards-browser.mjs &&
           node --check assets/app.js &&
           node --check assets/funded-awards-core.js &&
           node --check assets/funded-awards.js &&
@@ -66,7 +68,8 @@ jobs:
           node --check workers/award-api/src/adapters/nsf.js &&
           node --check workers/award-api/src/adapters/nih.js &&
           node --check workers/award-api/src/adapters/doe.js &&
-          node --test tests/browser/award-api-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/program-officer-award-navigation-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
+          node --check workers/award-api/src/adapters/dod.js &&
+          node --test tests/browser/award-api-contract.test.mjs tests/browser/dod-award-api-contract.test.mjs tests/browser/dod-browser-transport-contract.test.mjs tests/browser/award-api-rate-limit-contract.test.mjs tests/browser/deployment-input-classification-contract.test.mjs tests/browser/funded-awards-phase2-contract.test.mjs tests/browser/funded-awards-phase4-contract.test.mjs tests/browser/funding-finder-phase3-contract.test.mjs tests/browser/institutional-intelligence-contract.test.mjs tests/browser/program-officer-award-navigation-contract.test.mjs tests/browser/unit-b-funded-awards-snapshot-contract.test.mjs
       - name: Capture and verify the protected main release base
         id: release-base
         shell: bash
@@ -118,6 +121,26 @@ jobs:
           else
             echo "No prior Award Worker deployment was found; this is a first deployment." >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Wait for Pages to publish the browser-first DoD client
+        id: pages-client-ready
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        shell: bash
+        run: |
+          verified=false
+          for attempt in $(seq 1 24); do
+            rm -f -- /tmp/pages-release-sha.txt
+            curl --fail --silent --show-error --connect-timeout 5 --max-time 10 "https://mporosoff.github.io/grants-scraper/pages-release-sha.txt?pre-worker=${GITHUB_SHA}-${attempt}" -o /tmp/pages-release-sha.txt || true
+            published_pages_sha="$(tr -d '\r\n' < /tmp/pages-release-sha.txt 2>/dev/null || true)"
+            if [ "$published_pages_sha" = "$GITHUB_SHA" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::Pages did not publish the browser-first DoD client before the Worker transport switch. The existing Worker was left unchanged."
+            exit 1
+          fi
       - name: Reconfirm protected main immediately before Award Worker mutation
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash
@@ -128,28 +151,38 @@ jobs:
             exit 1
           fi
       - name: Configure the Award abuse-control identity secret
+        id: worker-secret
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           AWARD_RATE_LIMIT_SECRET: ${{ secrets.AWARD_RATE_LIMIT_SECRET }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
           if [ -z "$AWARD_RATE_LIMIT_SECRET" ]; then
             echo "::error::AWARD_RATE_LIMIT_SECRET is required for privacy-bounded abuse control."
             exit 1
           fi
-          printf '%s' "$AWARD_RATE_LIMIT_SECRET" | npx --yes wrangler@4.125.0 secret put AWARD_RATE_LIMIT_SECRET --config workers/award-api/wrangler.jsonc
+          secret_file="$(mktemp)"
+          chmod 600 "$secret_file"
+          printf '%s' "$AWARD_RATE_LIMIT_SECRET" | jq -Rs '{AWARD_RATE_LIMIT_SECRET: .}' > "$secret_file"
+          echo "secrets_file=$secret_file" >> "$GITHUB_OUTPUT"
       - name: Deploy the committed Award Worker
         id: worker-deploy
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: >-
-          npx --yes wrangler@4.125.0 deploy
-          --config workers/award-api/wrangler.jsonc
-          --message "protected-main:${GITHUB_SHA}; protected main deployment"
+        shell: bash
+        run: |
+          secret_file="${{ steps.worker-secret.outputs.secrets_file }}"
+          if [ ! -s "$secret_file" ]; then
+            echo "::error::The prepared Award Worker secret file is missing."
+            exit 1
+          fi
+          trap 'rm -f -- "$secret_file"' EXIT
+          npx --yes wrangler@4.125.0 deploy \
+            --config workers/award-api/wrangler.jsonc \
+            --secrets-file "$secret_file" \
+            --message "protected-main:${GITHUB_SHA}; protected main deployment"
       - name: Wait for the Award Worker health contract
         id: worker-health
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
@@ -161,8 +194,11 @@ jobs:
               && test "$(jq -r '.schema_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.credentials_required | tostring' <<<"$health" 2>/dev/null)" = "false" \
               && test "$(jq -r '.institution_registry.source // empty' <<<"$health" 2>/dev/null)" = "ROR" \
-              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.1.0" \
+              && test "$(jq -r '.institution_registry.adapter_version // empty' <<<"$health" 2>/dev/null)" = "1.3.0" \
               && test "$(jq -r '.institution_resolution // empty' <<<"$health" 2>/dev/null)" = "curated-or-server-validated-ror" \
+              && test "$(jq -r '.adapter_versions.DOD // empty' <<<"$health" 2>/dev/null)" = "1.0.0" \
+              && test "$(jq -r '.source_transports.DOD // empty' <<<"$health" 2>/dev/null)" = "browser_direct_cors" \
+              && test "$(jq -r '.source_capabilities.DOD.award_scope // empty' <<<"$health" 2>/dev/null)" = "prime_assistance_awards_04_05_only" \
               && test "$(jq -r '.complete_result_snapshots.contract_version // empty' <<<"$health" 2>/dev/null)" = "1" \
               && test "$(jq -r '.complete_result_snapshots.ordering_version // empty' <<<"$health" 2>/dev/null)" = "award-recency-v1" \
               && test "$(jq -r '.complete_result_snapshots.batch_ceiling_per_agency // empty' <<<"$health" 2>/dev/null)" = "25" \

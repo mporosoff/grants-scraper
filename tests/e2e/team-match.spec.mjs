@@ -18,7 +18,7 @@ async function assertNoHorizontalOverflow(page) {
   expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.client);
 }
 
-test("Team Match supports Hajim search, external researchers, team size, history, keyboard, and mobile workflows", async ({ page }) => {
+test("Team Match supports directory, browser-only, team-size, history, and mobile workflows", async ({ page }) => {
   await page.addInitScript(() => {
     const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
     globalThis.setTimeout = (callback, delay, ...args) => (
@@ -33,39 +33,39 @@ test("Team Match supports Hajim search, external researchers, team size, history
   await expect(page.locator("#add-researcher")).toBeVisible();
 
   await page.locator("#add-researcher").click();
-  await expect(page.locator("#researcher-search")).toBeFocused();
-  await page.locator("#researcher-search").fill("Marc D. Porosoff");
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press("Enter");
-  const firstLabel = "Marc D. Porosoff";
-  await expect(page.locator("#researcher-picker-status")).toContainText(`${firstLabel} was added`);
-  await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
+  await expect(page.locator("#faculty-search-status")).toContainText("Search by name", { timeout: 30_000 });
+  await page.locator("#show-faculty-suggestions").click();
+  await expect(page.locator('#faculty-suggestions [role="option"]:not([aria-disabled="true"])').first()).toBeVisible();
+  const first = await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  const firstValue = first.value;
+  const firstLabel = first.label;
+  await expect(page.locator("#external-status")).toContainText(`${firstLabel} was added from the`);
 
-  const second = await addDepartmentResearcher(page, 0);
+  const second = await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#selected-terms .st-card")).toHaveCount(2);
   await expect(page.locator("#count")).toContainText("fit every selected researcher");
 
-  await page.locator("#add-external-researcher").click();
-  await expect(page.locator("#external-researcher-form")).toBeVisible();
-  await page.locator("#external-name").fill("Gate Four Researcher");
-  await page.locator("#external-keywords").fill("catalysis, electrochemistry, chemical engineering, carbon capture");
-  await page.getByRole("button", { name: /Save researcher/i }).click();
+  await page.locator("#add-researcher").click();
+  await page.locator("#missing-researcher").click();
+  await expect(page).toHaveURL(/faculty_interests\.html\?mode=add&return=team_match/);
+  await expect(page.getByRole("radio", { name: /Add a missing researcher/ })).toBeChecked();
+  await page.locator("#display-name").fill("Gate Four Researcher");
+  await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nchemical engineering\ncarbon capture");
+  await page.locator("#add-locally").click();
+  await expect(page).toHaveURL(/team_match\.html\?local=ext-gate-four-researcher/);
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Add saved Gate Four Researcher to team" })).toHaveCount(0);
+  await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
 
-  const fourth = await addDepartmentResearcher(page, 0);
+  const fourth = await addDepartmentResearcher(page, "Astrid M. Müller");
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
   await expect(page.locator("#add-researcher")).toBeHidden();
-  await expect(page.locator("#add-external-researcher")).toBeHidden();
   await page.getByRole("button", { name: `Remove ${fourth.label} from team` }).click();
   await expect(page.locator("#add-researcher")).toBeVisible();
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.emulateMedia({ forcedColors: "active" });
   await assertNoHorizontalOverflow(page);
-  await page.emulateMedia({ forcedColors: "none", reducedMotion: "reduce" });
   await page.setViewportSize({ width: 320, height: 720 });
   await assertNoHorizontalOverflow(page);
 
@@ -81,52 +81,12 @@ test("Team Match supports Hajim search, external researchers, team size, history
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });
 
-test("the Hajim directory is lazy, bounded, keyboard operable, and separate from external entry", async ({ page }) => {
-  mockHybrid(page);
-  let directoryRequests = 0;
-  page.on("request", request => {
-    if (/data\/hajim-faculty-directory\.js/.test(request.url())) directoryRequests += 1;
-  });
-  await openTeamMatch(page);
-  expect(directoryRequests).toBe(0);
-  await page.locator("#add-researcher").click();
-  await expect.poll(() => directoryRequests).toBe(1);
-  await page.locator("#researcher-search").fill("engineering");
-  await expect(page.locator("#researcher-options [role=option]")).toHaveCount(12);
-  await page.keyboard.press("ArrowDown");
-  await expect(page.locator("#researcher-search")).toHaveAttribute("aria-activedescendant", /researcher-option-0/);
-  await page.keyboard.press("Escape");
-  await expect(page.locator("#researcher-options")).toBeHidden();
-  await page.keyboard.press("Escape");
-  await expect(page.locator("#researcher-picker")).toBeHidden();
-  await expect(page.locator("#add-researcher")).toBeFocused();
-  await page.locator("#add-external-researcher").click();
-  await expect(page.locator("#external-researcher-form")).toBeVisible();
-});
-
-test("directory failure leaves the external researcher workflow usable", async ({ page }) => {
-  mockHybrid(page);
-  await page.route("**/data/hajim-faculty-directory.js*", route => route.fulfill({
-    status: 503,
-    contentType: "text/javascript",
-    body: "",
-  }));
-  await openTeamMatch(page);
-  await page.locator("#add-researcher").click();
-  await expect(page.locator("#researcher-picker-status")).toContainText(/could not be loaded/i);
-  await page.locator("#add-external-researcher").click();
-  await page.locator("#external-name").fill("Outside Collaborator");
-  await page.locator("#external-keywords").fill("quantum sensing, microfluidic transport, laser diagnostics");
-  await page.getByRole("button", { name: /Save researcher/i }).click();
-  await expect(page.getByRole("button", { name: "Remove Outside Collaborator from team" })).toBeVisible();
-});
-
 test("enhanced ordering can reorder only locally eligible every-member-fit results", async ({ page }) => {
   const calls = mockHybrid(page, { reverseRerank: true, rerankDelayMs: 900 });
   await openTeamMatch(page);
-  const first = await addDepartmentResearcher(page, 0);
-  const second = await addDepartmentResearcher(page, 0);
-  await expect(page.locator("#team-hybrid-status")).toContainText(/Finding enhanced ordering|Enhanced ordering is applied/);
+  const first = await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  const second = await addDepartmentResearcher(page, "Allison J. Lopatkin");
+  await expect(page.locator("#team-hybrid-status")).toContainText(/Finding enhanced ordering/);
   const localIds = await page.locator("#view .team-result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
   expect(localIds.length).toBeGreaterThan(0);
   await expect(page.locator("#team-hybrid-status")).toContainText(/Enhanced ordering is applied/, { timeout: 30_000 });
@@ -141,15 +101,15 @@ test("enhanced ordering can reorder only locally eligible every-member-fit resul
   )));
   expect(fitNames.length).toBeGreaterThan(0);
   for (const names of fitNames) expect(names).toEqual(expected);
-  await expect(page.locator("#researcher-picker-status")).toContainText("was added");
+  await expect(page.locator("#researcher-picker-status")).toHaveText("");
   await expect(page.locator("#team-hybrid-status")).toContainText("Enhanced ordering");
 });
 
 test("Team Match sidecar failure keeps parent-level matching and disables enhanced ordering", async ({ page }) => {
   const calls = mockHybrid(page);
   await openTeamMatch(page, { sidecarFailure: true });
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#team-topic-layer-status")).toContainText(/Parent-level team matching still works/i);
   await expect(page.locator("#view .team-result-card").first()).toBeVisible();
   expect(calls.embed).toHaveLength(0);
@@ -160,8 +120,8 @@ test("Team Match sidecar failure keeps parent-level matching and disables enhanc
 test("enhanced-ordering failure leaves local team-fit results usable with a nontechnical message", async ({ page }) => {
   const calls = mockHybrid(page, { failEveryEmbed: true, retryAfter: 1 });
   await openTeamMatch(page);
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   const localIds = await page.locator("#view .team-result-card").evaluateAll(cards => cards.map(card => card.dataset.opportunityId));
   expect(localIds.length).toBeGreaterThan(0);
   await expect(page.locator("#team-hybrid-status")).toContainText(/Showing the local team-fit order.*temporarily limited/i, { timeout: 30_000 });

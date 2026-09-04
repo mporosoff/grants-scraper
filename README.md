@@ -1,6 +1,6 @@
 # Funding Finder
 
-A public funding-opportunity search engine with optional AI refinement and browser-based NOFO chat.
+A public funding-opportunity search engine with optional hosted AI refinement and browser-based NOFO chat.
 
 Open the application:
 
@@ -12,7 +12,7 @@ Anyone can search the comprehensive catalog without an account or API key. The b
 
 - full-text search across current Grants.gov opportunities;
 - a built-in Help guide covering search, uploaded notices, result tools, team
-  matching, privacy, troubleshooting, and optional OpenAI/Anthropic API keys;
+  matching, privacy, troubleshooting, hosted AI, and optional personal OpenAI/Anthropic API keys;
 - drag-and-drop NOFO/FOA PDF chat with automatic catalog-record matching;
 - one-click browsing of the complete current catalog without search terms;
 - filters for status, discipline, topic, agency, eligibility, instrument,
@@ -70,27 +70,26 @@ profile-only admission gate; CV and ORCID terms still rerank the admitted set
 but cannot broaden it. CV/ORCID terms serve as the fallback gate only when the
 manual profile fields are blank.
 
-Local Strong and profile-ranked search make zero model calls. Hosted Potential
-matching does not require a user key. Separately, a user may enter an OpenAI or
-Anthropic key to:
+Hosted Potential matching does not require a user key. Funding Finder also provides hosted AI,
+with optional personal OpenAI or Anthropic keys retained as an advanced
+alternative, to:
 
 1. create 5–16 independent, meaningful scientific phrases and retrieve each
    through the existing filtered local Strong matcher;
 2. assess at most 32 new locally qualified candidates and add at most 12 while
    preserving every ordinary Strong and Potential result; and
-3. ask grounded follow-up questions over the top 20 active results.
+3. ask grounded follow-up questions over the top 10 active results.
 
 “Chat with your results” appears with the returned result set and can answer
-questions over the top 20 ordinary search results without requiring a prior AI
+questions over the top 10 ordinary search results without requiring a prior AI
 rerank. It uses the same responsive result workflow on desktop and mobile.
 
 A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
 main search box. Funding Finder extracts page-marked text in the browser, tries
 to match the notice to an existing opportunity number or distinctive catalog
 title, shows the matched card with save/calendar/source actions, and opens a
-document-grounded “Chat with the NOFO” workspace. If no key is configured, the
-workspace prompts for one without losing the uploaded document. A missing
-catalog match does not prevent document chat.
+document-grounded “Chat with the NOFO” workspace. No visitor key is required.
+A missing catalog match does not prevent document chat.
 
 When the scheduled Phase 3 pipeline has analyzed an official notice, the
 result card shows document version/change status and compact cited facts for
@@ -101,8 +100,10 @@ single result; AI may cite only evidence identifiers that the browser supplied.
 
 The original CV or uploaded notice file is never retained. A bounded CV excerpt
 is sent only when the user enables that option and explicitly runs AI
-refinement or chat. An API
-key is tab-only unless the user explicitly saves it on that device. Saved keys
+refinement or chat. Hosted requests pass through the protected Funding Finder
+AI gateway, which owns the fixed prompts, schemas, feature-level model routing,
+rate limits, and provider secret. An optional personal API key is tab-only
+unless the user explicitly saves it on that device. Saved keys
 are isolated from profiles and reviewer data, have a visible saved/loaded
 status and removal control, and never enter GitHub, URLs, exports, or an
 application database. Extracted uploaded-notice text, the additive refinement overlay, and chat
@@ -115,28 +116,29 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
-Team Match lazy-loads a reviewed, searchable Hajim faculty directory only when
-faculty search is opened (or a saved team needs restoration). The compact asset
-contains 156 reviewed workbook profiles plus the separately retained David G.
-Foster profile, 202 controlled terms, 460 primary-anchor mappings, and 94
-context-only mappings. Existing curated Chemical & Sustainability Engineering
-profiles remain authoritative for matching; other Hajim profiles may be
-admitted only through reviewed primary anchors. Context-only mappings support
-search and inspection but cannot create an opportunity match. External
-researchers remain a separate, browser-local workflow with optional ORCID
-publication import.
+Funding Finder also has a staged opportunity-to-team pilot for ten calibrated,
+specific opportunity scopes. It proposes complementary three- or four-person
+teams from source-traceable Hajim capability evidence, explains the team and
+each person, keeps missing roles visible, and supports remove/replacement and a
+manual-collaborator path. Broad parent programs never receive an automatic team.
+Generated team membership is rechecked against the same runtime catalog
+currentness and publication-eligible child-topic contracts used by ordinary
+search. Team Match derives its current main, standby, and directory-only counts
+from the canonical researcher registry while preserving saved researchers,
+ORCID, and the four-person limit. The fourth public surface, Configure Faculty
+Interests, accepts bounded profile corrections and nominations for protected
+administrator review; Team Match remains browser-local unless its separate
+review checkbox is selected. See `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md`.
 
-The source workbook is never committed or loaded in the browser. To refresh the
-projection from the reviewed import artifact, verify its documented SHA-256 and
-run `python -m scripts.hajim_faculty_directory --write --source <workbook.xlsx>`,
-then rebuild the coordinated release manifest. The generator synchronizes the
-content-derived HTML generation identity; `--check` verifies the committed
-asset, identity, source hash, counts, evidence roles, and size budgets without
-requiring the workbook.
-
-Funded Awards is the third public surface. It searches public NSF, NIH, and DOE
-Office of Science awards through the sources' native fields, keeps the adapters
-separate, and preserves direct-field or official-record contact provenance.
+Funded Awards is the third public surface. It searches public NSF, NIH, DOE
+Office of Science, and DoD assistance awards through the sources' native fields,
+keeps the adapters separate, and preserves direct-field or official-record
+contact provenance. DoD records come from USAspending and are limited to prime
+Project Grants and Cooperative Agreements; they do not provide investigator
+names or award abstracts. NSF, NIH, and DOE use the Award Worker; the page runs
+the same normalized DoD adapter over USAspending's official browser CORS
+transport because USAspending rejects Cloudflare Worker egress, then merges the
+record into the shared result and snapshot contracts.
 Eligible Funding Finder cards open it in a new tab only for exact or explicitly
 reviewed controlled mappings; unmapped opportunities are never assigned by fuzzy
 title similarity.
@@ -154,16 +156,16 @@ Person-like source-published program contacts can start a locked, single-source
 Program Officer snapshot for recent five, all available, or custom source award
 years. Exact same-source post-validation removes partial-name results before
 totals or evidence. Deterministic portfolio browsing and aggregate facts need no
-AI. Open-ended Program Officer Q&A is disabled without a user-connected provider
-key. With a key, provider-native structured output supplies only a bounded intent,
-concept, phrase, and exclusion plan; the Worker then applies deterministic
+AI. For an explicit Program Officer question, the selected hosted or user-connected
+provider supplies only a bounded answer intent, concept, phrase, and exclusion
+plan; the Worker then applies deterministic
 full-snapshot retrieval capped at 24 public records, 800 abstract characters per
 record, and 18,000 serialized evidence characters before the provider receives
 that bounded evidence for a cited answer. The model never owns membership,
 totals, completeness, eligibility, ranking, or award IDs.
 The interface discloses completeness and abstract coverage and never describes
 the result as a complete career portfolio. An optional institution question translator
-uses the same browser-local Funding Finder provider configuration; it only creates
+uses the same hosted-by-default Funding Finder provider configuration; it only creates
 a transparent filter plan and does not search or rank an award-vector corpus.
 
 Funding Finder search criteria are shareable page parameters and can appear in
@@ -271,13 +273,13 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-August 28, 2026 build contains 1,430 current funding opportunities (1,115 posted and 315
-forecasted) from ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,357), NASA ROSES (2),
-NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest (limited
-submissions & foundations) (22), with no deadline before the catalog date. It provides a
-direct official announcement for 339 records, an official source-page route for another
-615, and the official Grants.gov record for the remaining 476. Across all route types,
-723 records also contain an official source URL.
+September 3, 2026 build contains 1,397 current funding opportunities (1,079 posted and
+318 forecasted) from ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,324), NASA ROSES
+(3), NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest (limited
+submissions & foundations) (21), with no deadline before the catalog date. It provides a
+direct official announcement for 287 records, an official source-page route for another
+619, and the official Grants.gov record for the remaining 491. Across all route types,
+720 records also contain an official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive
@@ -292,15 +294,17 @@ support it.
 | `index.html` | Redirects GitHub Pages to the application |
 | `match_explorer.html` | Public opportunity search and AI-refinement interface |
 | `team_match.html` | Public multi-researcher opportunity-matching interface |
-| `funded_awards.html` | Public NSF/NIH/DOE historical-award search, Institutional Intelligence, and current-opportunity deep links |
+| `funded_awards.html` | Public NSF/NIH/DOE/DoD historical-award search, Institutional Intelligence, and exact current-opportunity deep links |
 | `assets/app.js` | Search, cited source evidence, review/export, profile ranking, AI matching, and chat |
-| `assets/award-links.js` | Exact NIH and exact/reviewed-parent NSF opportunity-to-award mappings |
+| `assets/award-links.js` | Exact NIH/DOE and exact/reviewed-parent NSF opportunity-to-award mappings plus fail-closed DoD award-to-opportunity links |
 | `assets/funded-awards-core.js` | Source-native award-query, institution-summary, and pagination contracts |
 | `assets/institutional-intelligence-core.js` | Structured institution filters, URL state, and normalized award aggregation |
 | `assets/institutional-intelligence.js` | ROR autocomplete, institutional drill-downs, and optional shared-provider question translation |
 | `assets/search-retrieval.js` | Local BM25 candidate retrieval, fuzzy matching, concept coverage, and topic reranking |
 | `assets/profile-ranking.js` | Weighted profile/CV terms, profile-only concept coverage, eligibility, and career-fit evidence |
 | `assets/team-researchers.js` | Device-local external researchers and shared hybrid researcher-to-opportunity matching |
+| `assets/opportunity-team.js` | Lazy content-identified faculty directory and deterministic role/team engine |
+| `assets/opportunity-team-panel.js` | Funding Finder team proposal, missing-role, remove, replacement, and focus lifecycle |
 | `assets/search-query.js` | Conservative abbreviation and scientific word-form expansion |
 | `assets/profile.js` | Local profile/feedback storage and CV extraction |
 | `assets/nofo.js` | Browser-only NOFO PDF extraction, opportunity-number detection, and catalog matching |
@@ -310,7 +314,9 @@ support it.
 | `assets/app.css` | Responsive application styles |
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
-| `data/hajim-faculty-directory.js` | Compact reviewed Hajim faculty search and primary/context evidence projection |
+| `data/opportunity_team_index.js` | Tiny eager index of reviewed team-ready opportunity scopes; contains no faculty or role graph |
+| `data/opportunity_teams.js` | Compact generated faculty directory and ten-scope role/team projection |
+| `config/opportunity_team_model.json` | Canonical source-traceable faculty and opportunity-role model |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
 | `data/source_records.json` | Per-source records and refresh diagnostics for enabled external sources |
@@ -327,7 +333,7 @@ support it.
 | `scripts/build_changes.py` | Rolling new/deadline/amendment/closing/closure event feeds |
 | `scripts/check_links.py` | Bounded official-link health and redirect monitor |
 | `scripts/currentness.py` | Shared runtime expiration and non-funding gate |
-| `scripts/hajim_faculty_directory.py` | Deterministic workbook import, validation, cache identity, and browser projection generator |
+| `scripts/import_opportunity_team_model.py` | Deterministic reduction of offline calibration artifacts and shared generation identity |
 | `scripts/alert_match.py` | Server-side saved-search matcher shared by the optional digest bundle |
 | `feeds/` | Generated public Atom feeds and feed directory |
 | `docs/weekly-alerts/` | Private-repository pilot bundle for consent-based weekly email digests |
@@ -337,8 +343,9 @@ support it.
 | `evaluation/README.md` | Pilot export, privacy, and aggregation workflow |
 | `evaluation/PHASE3_REVIEW.md` | Deployment-review storage, return, and reporting procedure |
 | `docs/POST_RELEASE_HARDENING.md` | v1.2.1 release lifecycle, operating limits, verification, and rollback |
+| `docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md` | Opportunity-role evidence, team assembly, replacement, and staged expansion contract |
 | `workers/search-voyage-proxy/` | Bounded hosted embedding/reranking proxy and compatibility allowlists |
-| `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, and ROR normalization Worker |
+| `workers/award-api/` | Bounded, source-isolated NSF, NIH, DOE, DoD, and ROR normalization Worker |
 | `PROJECT.md` | Product decisions, architecture, and roadmap |
 | `tests/` | Pipeline and public-page regression checks |
 | `docs/HOSTING.md` | Deployment and privacy boundary |
@@ -360,8 +367,9 @@ For implementation pull requests, use this review and test workflow:
   time, and do not manually trigger duplicate full suites for the same commit.
 - Request one comprehensive automated review before the final gate where
   practical. After addressing it, request one final review of the exact head.
-- Require one complete protected Python, browser-contract, frozen-query,
-  frozen-P9, and Playwright product/accessibility run on the exact final commit.
+- Require one complete protected Python, browser-contract, frozen-query, and
+  frozen-P9 run on the exact final commit. E2E/Playwright runs are reserved for
+  a separately authorized manual validation task under `AGENTS.md`.
 - If the final exact-head review finds a consequential defect, fix it, request
   another exact-head review, and rerun that final gate. Otherwise, do not add
   ceremonial reruns.

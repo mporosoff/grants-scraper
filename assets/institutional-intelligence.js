@@ -4,6 +4,7 @@
   const $ = id => document.getElementById(id);
   const core = globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE;
   const awardProduct = globalThis.FUNDING_AWARD_PRODUCT;
+  const awardLinks = globalThis.FUNDING_AWARD_LINKS;
   const apiConfig = globalThis.FUNDING_AWARD_API_CONFIG;
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
@@ -33,7 +34,7 @@
     questionSubmitting: false,
     answering: false,
   };
-  const SOURCE_LIMITS = Object.freeze({ NSF: 25, NIH: 25, DOE: 10 });
+  const SOURCE_LIMITS = Object.freeze({ NSF: 25, NIH: 25, DOE: 10, DOD: 25 });
   const AWARDS_PER_PAGE = 10;
 
   function clean(value, maximum = 500) {
@@ -340,6 +341,8 @@
 
   function awardCard(award, { hidden = false } = {}) {
     const source = clean(award?.source, 10) || "Source";
+    const isDod = source.toUpperCase() === "DOD";
+    const displaySource = isDod ? "DoD" : source;
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
     const investigatorRecords = Array.isArray(award?.principal_investigators) ? award.principal_investigators : [];
@@ -353,14 +356,20 @@
     const contacts = [...investigatorRecords, ...programContacts]
       .map(person => contactLine(person, source, officialUrl))
       .join("");
+    const fundingOpportunity = awardLinks?.opportunityForAward?.(award) || null;
+    const fundingOpportunityUrl = fundingOpportunity ? awardLinks?.opportunityHref?.(fundingOpportunity) || "" : "";
+    const mechanism = clean(award?.funding_mechanism, 160);
     return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(core.evidenceId(award))}" tabindex="-1"${hidden ? " hidden" : ""}>
-      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(year)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
+      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(isDod && mechanism ? `${displaySource} · ${mechanism}` : displaySource)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(year)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.join(", "))}` : ""}</p>
-      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(program?.label || award?.subagency || "Not listed")}${programCodes.length ? ` <span class="ii-contact-provenance">Source code${programCodes.length === 1 ? "" : "s"}: ${escapeHtml(programCodes.join(", "))}</span>` : ""}</p>
+      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(isDod ? award?.program_name || "Not listed" : program?.label || award?.subagency || "Not listed")}${programCodes.length ? ` <span class="ii-contact-provenance">${isDod ? "Assistance Listing" : `Source code${programCodes.length === 1 ? "" : "s"}`}: ${escapeHtml(programCodes.join(", "))}</span>` : ""}</p>
+      ${isDod && award?.subagency ? `<p class="ii-award-program"><strong>DoD component:</strong> ${escapeHtml(award.subagency)}</p>` : ""}
+      ${award?.organization_department ? `<p class="ii-award-program"><strong>Awarding office:</strong> ${escapeHtml(award.organization_department)}</p>` : ""}
+      ${isDod ? `<p class="ii-award-program"><strong>Source limitation:</strong> USAspending does not provide investigator names or an award abstract for this DoD assistance record.</p>` : ""}
       ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
-      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
-      <details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>
+      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(displaySource)} record ↗</a>` : "Official link not listed"}${fundingOpportunityUrl ? `<a href="${escapeAttribute(fundingOpportunityUrl)}" target="_blank" rel="noopener">Original funding opportunity ↗</a>` : ""}</div>
+      ${isDod ? "" : `<details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>`}
     </article>`;
   }
 
@@ -540,9 +549,12 @@
     let summary = snapshot.deterministic.answer;
     let structured = "";
     if (intent === "investigators") {
+      const includesDod = (snapshot.sources || []).some(source => source?.source === "DOD");
       summary = aggregate.investigators.length
-        ? `${aggregate.investigators.length.toLocaleString()} investigator ${aggregate.investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} loaded award${aggregate.project_count === 1 ? "" : "s"}.`
-        : "No investigator names appear in the loaded matching awards.";
+        ? `${aggregate.investigators.length.toLocaleString()} listed investigator ${aggregate.investigators.length === 1 ? "identity appears" : "identities appear"} in ${aggregate.project_count.toLocaleString()} loaded award${aggregate.project_count === 1 ? "" : "s"}.`
+        : includesDod
+          ? "No investigator names are listed in the loaded matching awards. USAspending does not provide investigator metadata for DoD awards."
+          : "No investigator names appear in the loaded matching awards.";
       structured = answerTable({
         label: "Investigators in the answer evidence",
         headers: ["Investigator", "Awards"],
@@ -656,8 +668,8 @@
     let narrativeFailure = false;
     if (allowNarrative && questionState.narrativeNeeded) {
       const provider = questionState.provider;
-      const key = credentials.loadKey(provider);
-      if (key) {
+      const key = provider === "hosted" ? "" : credentials.loadKey(provider);
+      if (provider === "hosted" || key) {
         try {
           const providerPayload = core.questionProviderPayload({
             question: questionState.question,
@@ -671,7 +683,7 @@
             key,
             operation: "institution_narrative",
             fetchImpl: globalThis.fetch,
-            system: "Synthesize only the supplied public award titles and abstract excerpts when narrative interpretation is useful. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite one or more exact supplied evidence IDs. Do not use model pretraining, add facts, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML. If the evidence cannot support a claim, omit it.",
+            system: "Synthesize only the supplied public award titles and abstract excerpts when narrative interpretation is useful. DoD USAspending records do not provide investigator names or award abstracts; treat those fields as unavailable, not evidence of absence. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite one or more exact supplied evidence IDs. Do not use model pretraining, add facts, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML. If the evidence cannot support a claim, omit it.",
             user: JSON.stringify(providerPayload),
           });
           narrative = core.validateNarrativeAnswer(proposed, evidencePack.awards);
@@ -724,7 +736,7 @@
       : "Not listed";
     $("ii-metrics").innerHTML = [
       [aggregate.project_count, "Projects loaded"],
-      [aggregate.investigator_count, "Investigator identities in loaded results"],
+      [aggregate.investigator_count, "Listed investigator identities in loaded results"],
       [aggregate.program_count, "Distinct programs in loaded results"],
       [years, "Years represented in loaded awards"],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
@@ -817,7 +829,7 @@
     state.loadingSource = "";
     state.searchController = new AbortController();
     setBusy(true);
-    setStatus("Searching normalized public NSF, NIH, and DOE award records…");
+    setStatus("Searching normalized public NSF, NIH, DOE, and DoD award records…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       if (!questionSearch) {
@@ -1093,32 +1105,44 @@
     $("ii-question-answer").classList.add("hidden");
     $("ii-pagination").classList.add("hidden");
     $("ii-card-pagination").classList.add("hidden");
-    setStatus("Structured award search and institution resolution do not require an AI key.");
+    setStatus("");
     syncUrl({ open: true }, historyMode);
   }
 
   function modelForProvider(provider) {
+    if (provider === "hosted") {
+      return globalThis.FUNDING_AI_GATEWAY?.modelLabel
+        || "Gemma + GPT-5.6 Luna, routed by feature";
+    }
     return provider === "anthropic" ? ai?.ANTHROPIC_MODEL : ai?.OPENAI_MODEL;
   }
 
   function refreshProvider({ preferMain = true } = {}) {
-    let provider = preferMain ? clean($("k-provider")?.value, 20) : clean($("ii-provider").value, 20);
-    if (!new Set(["openai", "anthropic"]).has(provider)) provider = "openai";
-    if (preferMain && !credentials.loadKey(provider)) {
+    let provider = preferMain
+      ? clean($("k-provider")?.value || $("ii-provider")?.value || "hosted", 20)
+      : clean($("ii-provider").value, 20);
+    if (!new Set(["hosted", "openai", "anthropic"]).has(provider)) provider = "hosted";
+    if (preferMain && provider !== "hosted" && !credentials.loadKey(provider)) {
       const alternative = provider === "openai" ? "anthropic" : "openai";
       if (credentials.loadKey(alternative)) provider = alternative;
     }
     $("ii-provider").value = provider;
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-    const configured = Boolean(credentials.loadKey(provider));
-    $("ii-ai-state").textContent = configured
-      ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
-      : "Connect a provider to translate questions";
-    $("ii-key-setup").classList.toggle("hidden", configured);
-    $("ii-key-status").textContent = configured
-      ? "Using the Funding Finder key already saved on this device."
-      : `No ${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is saved on this device.`;
+    const configured = provider === "hosted" || Boolean(credentials.loadKey(provider));
+    $("ii-ai-state").textContent = provider === "hosted"
+      ? "Hosted AI included"
+      : configured
+        ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
+        : "Connect a provider to translate questions";
+    $("ii-key-setup").classList.remove("hidden");
+    $("ii-key-field")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-save-key")?.classList.toggle("hidden", provider === "hosted" || configured);
+    $("ii-key-status").textContent = provider === "hosted"
+      ? "Funding Finder's hosted AI is ready. No key is required on this device."
+      : configured
+        ? "Using the Funding Finder key already saved on this device."
+        : `No ${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is saved on this device.`;
     return { provider, configured };
   }
 
@@ -1147,8 +1171,9 @@
 
   function inferQuestionAgency(plan, question) {
     const agency = clean(plan?.agency, 10).toUpperCase();
-    if (["NSF", "NIH", "DOE"].includes(agency)) return agency;
+    if (["NSF", "NIH", "DOE", "DOD"].includes(agency)) return agency;
     const combined = `${clean(question)} ${clean(plan?.program)}`;
+    if (/\b(DOD)\b|DEPARTMENT OF DEFENSE/i.test(combined)) return "DOD";
     if (/\b(DOE|BES|SC-\d+)/i.test(combined)) return "DOE";
     if (/\bNIH\b|\b[RKUPFT]\d{2}\b/i.test(combined)) return "NIH";
     if (/\bNSF\b/i.test(combined)) return "NSF";
@@ -1158,7 +1183,7 @@
   function renderQuestionPlan(value, intent = "", note = "") {
     const labels = [
       value.institution ? `Institution: ${value.institution}` : "",
-      `Agency: ${value.agency === "all" ? "NSF + NIH + DOE" : value.agency}`,
+      `Agency: ${value.agency === "all" ? "NSF + NIH + DOE + DoD" : value.agency}`,
       value.program ? `Program: ${value.program}` : "",
       value.topic ? `Topic: ${value.topic}` : "",
       value.pi ? `Investigator: ${value.pi}` : "",
@@ -1190,8 +1215,8 @@
       return;
     }
     const { provider, configured } = refreshProvider();
-    const key = credentials.loadKey(provider);
-    if (!configured || !key) {
+    const key = provider === "hosted" ? "" : credentials.loadKey(provider);
+    if (!configured || (provider !== "hosted" && !key)) {
       $("ii-key-setup").classList.remove("hidden");
       $("ii-key-status").textContent = "No key is configured, so the answer will use the visible filters and deterministic loaded-award evidence. Save a key to enable question translation and bounded narrative synthesis.";
     }
@@ -1202,7 +1227,7 @@
     try {
       const current = formState();
       let plan = { ...current };
-      let translationFallback = !configured || !key;
+      let translationFallback = !configured || (provider !== "hosted" && !key);
       if (!translationFallback) {
         try {
           const translated = await ai.structuredResult({
@@ -1210,7 +1235,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Preserve explicit user constraints.",
+            system: "Translate one question about public NSF, NIH, DOE, or DoD funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, DOE, or DOD), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. DoD PI and program-officer filters are unavailable; DoD program searches require an Assistance Listing code such as 12.800. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({
               institution: current.institution,
               current_filters: {
@@ -1240,7 +1265,7 @@
       ];
       const explicitPi = core.explicitInvestigator(question, current.institution, plan.program, institutionAliases, plan.topic);
       if (explicitPi && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = explicitPi;
-      const next = core.sanitizeQuestionPlan(plan, current);
+      const next = core.sanitizeQuestionPlan(plan, current, question);
       const intent = core.sanitizeAnswerIntent(plan, question);
       applyFormState(next);
       state.selectedInstitution = {
@@ -1263,7 +1288,7 @@
       const outcome = await runSearch({ historyMode: "push", resolveInstitution: false, offset: 0, focusResults: true, questionSearch: true });
       if (outcome) await refreshQuestionAnswer({ allowNarrative: true });
     } catch (error) {
-      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available without AI.`;
+      $("ii-question-plan").textContent = `The evidence-grounded question could not be completed: ${error?.message || String(error)} Structured filters remain available.`;
     }
     } finally {
       state.questionSubmitting = false;
@@ -1377,7 +1402,7 @@
         $("ii-source-status").classList.add("hidden");
         $("ii-pagination").classList.add("hidden");
         $("ii-card-pagination").classList.add("hidden");
-        setStatus("Structured award search and institution resolution do not require an AI key.");
+        setStatus("");
       }
     });
   }

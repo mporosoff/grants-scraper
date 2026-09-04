@@ -4,6 +4,7 @@ import {
   addDepartmentResearcher,
   mockAwards,
   mockAlerts,
+  mockFrozenFundingSearchPackage,
   mockHybrid,
   openAiStructuredResponse,
   openFundingFinder,
@@ -33,6 +34,7 @@ async function scan(page, label, testInfo) {
 }
 
 test("Funding Finder has no serious or critical violations across critical states", async ({ page, context }, testInfo) => {
+  await mockFrozenFundingSearchPackage(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(page);
   mockAwards(page);
@@ -81,7 +83,8 @@ test("Funding Finder has no serious or critical violations across critical state
   await scan(page, "funding-saved-storage-error-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 900 });
   mockAlerts(page);
-  await expect(page.locator("#alerts-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
+  await page.locator("#saved-panel > summary").click();
   await page.locator("#alert-new-matches").click();
   const alertDialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(alertDialog).toBeVisible();
@@ -101,10 +104,11 @@ test("Funding Finder has no serious or critical violations across critical state
   await expect(chatButton).toBeFocused();
 
   const fallback = await context.newPage();
+  await mockFrozenFundingSearchPackage(fallback);
   await fallback.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(fallback, { failEveryEmbed: true, retryAfter: 10 });
   await openFundingFinder(fallback);
-  await runFundingSearch(fallback, "DE-FOA-0003600");
+  await runFundingSearch(fallback, "hydrogen catalysis");
   await expect(fallback.locator("#potential-status")).toContainText(/temporarily limited/i, { timeout: 30_000 });
   await expect(fallback.locator("#retry-potential")).toBeDisabled();
   await scan(fallback, "funding-potential-fallback", testInfo);
@@ -175,6 +179,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
 });
 
 test("shared Help remains visible and current across every desktop and mobile surface", async ({ page }, testInfo) => {
+  await mockFrozenFundingSearchPackage(page);
   mockHybrid(page);
   mockAwards(page);
   const surfaces = [
@@ -217,7 +222,7 @@ test("shared Help remains visible and current across every desktop and mobile su
 
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/match_explorer.html");
-  await page.locator("#alerts-panel > summary").click();
+  await page.locator("#saved-panel > summary").click();
   const alertHelp = page.getByRole("button", { name: "How search alerts work" });
   await expect(alertHelp).toBeVisible();
   await alertHelp.click();
@@ -229,6 +234,7 @@ test("shared Help remains visible and current across every desktop and mobile su
 });
 
 test("shared navigation and primary content geometry stay aligned across all three pages", async ({ page }) => {
+  await mockFrozenFundingSearchPackage(page);
   mockHybrid(page);
   mockAwards(page);
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -267,11 +273,11 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.locator("#add-researcher").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
-  await expect(page.getByLabel("Search Hajim faculty at the University of Rochester")).toBeVisible();
+  await expect(page.getByRole("combobox", { name: /Search Hajim faculty/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Configure a missing researcher" })).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
-  await page.locator("#add-researcher").click();
-  await addDepartmentResearcher(page, 0);
-  await addDepartmentResearcher(page, 0);
+  await addDepartmentResearcher(page, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(page, "Allison J. Lopatkin");
   await expect(page.locator("#view .team-result-card").first()).toBeVisible();
   await expect(page.locator("#team-hybrid-status")).toContainText(/Enhanced ordering is applied/, { timeout: 30_000 });
   await scan(page, "team-two-person-results", testInfo);
@@ -280,8 +286,8 @@ test("Team Match has no serious or critical violations across picker, results, a
   await fallback.emulateMedia({ reducedMotion: "reduce" });
   mockHybrid(fallback, { failEveryEmbed: true, retryAfter: 1 });
   await openTeamMatch(fallback);
-  await addDepartmentResearcher(fallback, 0);
-  await addDepartmentResearcher(fallback, 0);
+  await addDepartmentResearcher(fallback, "Alexander A. Shestopalov");
+  await addDepartmentResearcher(fallback, "Allison J. Lopatkin");
   await expect(fallback.locator("#team-hybrid-status")).toContainText(/local team-fit order.*temporarily limited/i, { timeout: 30_000 });
   await scan(fallback, "team-enhanced-fallback", testInfo);
   await fallback.close();
@@ -305,7 +311,7 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.locator("#ii-institution").fill("University of Rochester");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
-  await expect(page.locator("#ii-source-status")).toContainText("does not support this query shape");
+  await expect(page.locator("#ii-source-status")).toContainText("these filters are not supported");
   await expect(page.locator("#ii-source-status")).toContainText("temporarily unavailable");
   await expect(page.locator('[data-ii-retry-source="DOE"]')).toBeVisible();
   await expect(page.locator(".ii-award-kicker")).toContainText("Amount not listed");
@@ -313,7 +319,7 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.setViewportSize({ width: 320, height: 720 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   const statusPill = page.locator(".header-context-pill");
-  await expect(statusPill).toHaveText("NSF · NIH · DOE");
-  await expect(statusPill).toHaveAttribute("aria-label", "NSF, NIH, and DOE award sources available");
+  await expect(statusPill).toHaveText("NSF · NIH · DOE · DoD");
+  await expect(statusPill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
   expect(await statusPill.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
 });

@@ -1,4 +1,4 @@
-const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE"]);
+const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE", "DOD"]);
 export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
 export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
@@ -12,6 +12,9 @@ export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 export const SNAPSHOT_EVIDENCE_PLAN_FORMAT = "provider-concepts-v1";
 const EN_COLLATOR = new Intl.Collator("en-US");
 const SHORT_RETRIEVAL_CONCEPTS = new Set(["ai", "ml", "ph"]);
+const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
+  "count", "investigators", "institutions", "programs", "years", "awards",
+]);
 
 function clean(value, maximum = 500) {
   const text = String(value ?? "");
@@ -320,6 +323,28 @@ function programDescriptors(award, cache = null) {
   const parent = clean(award?.subagency, 300);
   const sourceCodes = [...new Set((Array.isArray(award?.program_codes) ? award.program_codes : [])
     .map(value => clean(value, 100)).filter(Boolean))];
+  if (source === "DOD" && sourceCodes.length) {
+    const primaryTitle = clean(award?.program_name, 260);
+    const descriptors = sourceCodes.map((code, index) => {
+      const leaf = clean(index === 0 && primaryTitle
+        ? `${primaryTitle} (${code})`
+        : `Assistance Listing ${code}`, 300);
+      const distinctChild = Boolean(parent && identityKey(parent) !== identityKey(leaf));
+      return {
+        key: `${source}:assistance-listing:${identityKey(code)}`,
+        source,
+        parent_label: parent || null,
+        leaf_label: leaf,
+        leaf_role: "assistance_listing",
+        query: code,
+        query_role: "assistance_listing_code",
+        source_codes: [code],
+        label: `${source} · ${distinctChild ? `${parent} › ${leaf}` : leaf}`,
+      };
+    });
+    cache?.set(cacheKey, descriptors);
+    return descriptors;
+  }
   const code = sourceCodes[0] || "";
   const sourceLeaf = source === "NIH"
     ? clean(award?.activity_code || award?.program_name || code, 300)
@@ -347,6 +372,17 @@ function programDescriptors(award, cache = null) {
   }];
   cache?.set(cacheKey, descriptors);
   return descriptors;
+}
+
+function preferredProgramDescriptor(current, candidate) {
+  if (!current) return { ...candidate, projects: 0, award_keys: [] };
+  const fallbackLabel = `Assistance Listing ${clean(current.query, 100)}`;
+  const candidateFallbackLabel = `Assistance Listing ${clean(candidate.query, 100)}`;
+  const currentIsDodFallback = current.source === "DOD" && current.leaf_label === fallbackLabel;
+  const candidateHasDodTitle = candidate.source === "DOD" && candidate.leaf_label !== candidateFallbackLabel;
+  return currentIsDodFallback && candidateHasDodTitle
+    ? { ...candidate, projects: current.projects, award_keys: current.award_keys }
+    : current;
 }
 
 export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = {}) {
@@ -395,7 +431,7 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
       institutions.set(key, current);
     }
     for (const descriptor of programDescriptors(award, programCache)) {
-      const current = programs.get(descriptor.key) || { ...descriptor, projects: 0, award_keys: [] };
+      const current = preferredProgramDescriptor(programs.get(descriptor.key), descriptor);
       current.projects += 1;
       current.award_keys.push(awardKey(award));
       programs.set(descriptor.key, current);
@@ -466,6 +502,7 @@ function sourceState(source, payload, normalizedResultCount = null) {
     year_filter: payload.year_filter,
     health: payload.health,
     contact_post_validation: payload.contact_post_validation,
+    capabilities: payload.capabilities,
     retrieved_at: payload.retrieved_at,
     recency_order: complete ? "verified_complete_snapshot" : "available_snapshot_only",
   };
@@ -706,10 +743,6 @@ function admissibleRetrievalToken(token) {
   return /\p{L}/u.test(token) && /\p{N}/u.test(token);
 }
 
-function retrievalTokens(value, maximum) {
-  return [...new Set(normalizedRetrievalTokens(value, maximum).filter(admissibleRetrievalToken))];
-}
-
 function normalizedPlanTerms(values, { minimum, maximum }) {
   if (!Array.isArray(values) || values.length < minimum || values.length > maximum) return null;
   const terms = [];
@@ -730,12 +763,12 @@ function normalizedPlanTerms(values, { minimum, maximum }) {
 export function normalizeEvidencePlan(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   if (Object.keys(value).sort().join("|") !== "concepts|exclusions|intent|phrases") return null;
-  if (value.intent !== "topical") return null;
+  if (!PROGRAM_OFFICER_ANSWER_INTENTS.has(value.intent)) return null;
   const concepts = normalizedPlanTerms(value.concepts, { minimum: 1, maximum: 16 });
   const phrases = normalizedPlanTerms(value.phrases, { minimum: 1, maximum: 8 });
   const exclusions = normalizedPlanTerms(value.exclusions, { minimum: 0, maximum: 8 });
   if (!concepts || !phrases || !exclusions) return null;
-  return { intent: "topical", concepts, phrases, exclusions };
+  return { intent: value.intent, concepts, phrases, exclusions };
 }
 
 function evidenceFieldValues(award) {
@@ -893,6 +926,7 @@ export function snapshotEvidence(snapshot, { plan, limit = SNAPSHOT_EVIDENCE_LIM
     retrieval: {
       scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
       plan_format: SNAPSHOT_EVIDENCE_PLAN_FORMAT,
+      answer_intent: normalizedPlan.intent,
       concept_coverage: "all_provider_concepts_same_record",
       required_concept_count: requiredConcepts.length,
       phrase_count: normalizedPlan.phrases.length,

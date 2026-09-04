@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import vm from "node:vm";
 import { load } from "cheerio";
 
 const root = new URL("../../", import.meta.url);
@@ -19,29 +20,46 @@ test("primary search owns the only Find funding control and the optional AI sect
   assert.equal($(".primary-step #nofo-drop-zone #find-funding").length, 1);
   const children = $("#nofo-drop-zone").children().toArray();
   const queryIndex = children.findIndex(node => $(node).attr("id") === "query");
+  const uploadIndex = children.findIndex(node => $(node).hasClass("nofo-upload-button"));
   const findIndex = children.findIndex(node => $(node).attr("id") === "find-funding");
-  assert.equal(findIndex, queryIndex + 1, "the submit control stays immediately beside the main query field");
+  assert.ok(queryIndex < uploadIndex, "the PDF upload follows the main query field");
+  assert.ok(uploadIndex < findIndex, "the PDF upload precedes Find funding on desktop and mobile");
+  assert.equal($("#query").attr("data-nofo-drop-target"), "true");
   assert.equal($("#launch-step-heading").text().trim(), "Expand and refine your search with AI");
   assert.equal($(".provider-setup #ai-refine").length, 0);
   assert.equal($(".launch-step > .ai-refine-actions #ai-refine").length, 1);
   assert.equal($("#ai-refine").attr("aria-describedby"), "ai-refine-requirement");
   assert.equal($("#ai-refine-requirement").attr("aria-live"), "polite");
-  assert.equal($("#results-heading").attr("aria-live"), "polite");
-  assert.equal($("#results-heading").attr("aria-atomic"), "true");
+  assert.equal($(".results-column").attr("aria-label"), "Funding opportunities");
+  assert.equal($("#results").attr("aria-live"), "polite");
 });
 
-test("provider setup retains key, cost, help, and privacy details without repeating full privacy copy", () => {
+test("the main query accepts file drops through the existing local NOFO pipeline", () => {
+  const dropBinding = app.slice(
+    app.indexOf('const dropZone = $("nofo-drop-zone")'),
+    app.indexOf('$("catalog-retry").addEventListener'),
+  );
+  assert.match(dropBinding, /const isFileDrag = event =>/);
+  assert.match(dropBinding, /if \(!isFileDrag\(event\)\) return;[\s\S]*?event\.preventDefault\(\)/);
+  assert.match(dropBinding, /const files = \[\.\.\.\(event\.dataTransfer\?\.files \|\| \[\]\)\]/);
+  assert.match(dropBinding, /if \(!files\.length\) return;[\s\S]*?openNofoFromFile\(files\[0\]\)/);
+  assert.match(styles, /\.nofo-drop-zone\.is-dragging #query\s*\{/);
+});
+
+test("provider setup retains key, help, and privacy details without repeating removed copy", () => {
   const $ = load(page);
   const details = $(".provider-setup").text();
   assert.match(details, /Provider/);
   assert.match(details, /API key/);
   assert.match(details, /spending controls/);
   assert.match(details, /saved key stays in this browser/);
-  assert.match(details, /two bounded calls/);
+  assert.match(details, /No API key is required/);
+  assert.match(details, /Advanced users may instead select OpenAI or Anthropic/);
+  assert.doesNotMatch(details, /two bounded calls|What hosted AI changes/);
   assert.doesNotMatch(page, /<strong>What leaves this page:<\/strong>/);
   assert.doesNotMatch(page, /<strong>URLs and anonymous usage:<\/strong>/);
   assert.match(help, /Hosted Potential matching/);
-  assert.match(help, /User-connected AI tools/);
+  assert.match(help, /Hosted AI tools/);
   assert.match(help, /URLs and anonymous measurement/);
 });
 
@@ -66,14 +84,14 @@ test("every AI consumer names one shared structured-result operation", () => {
   assert.doesNotMatch(`${app}\n${institution}\n${institutionSnapshots}`, /output_schema/);
 });
 
-test("AI refinement requires both a usable result context and an entered or saved key", () => {
+test("AI refinement requires a usable result context and a ready hosted or user-connected provider", () => {
   const control = app.slice(
     app.indexOf("function updateAiRefineControl"),
     app.indexOf("function setAiBusy"),
   );
   assert.match(control, /const hasContext = aiRefineHasContext\(\)/);
   assert.match(control, /const searchIsCurrent = aiRefineSearchIsCurrent\(\)/);
-  assert.match(control, /const hasKey = Boolean\(\$\("k-key"\)\.value\.trim\(\)\)/);
+  assert.match(control, /const hasConnection = providerReady\(\)/);
   for (const guard of [
     /state\.ai\.busy/,
     /state\.refinement\.busy/,
@@ -81,7 +99,7 @@ test("AI refinement requires both a usable result context and an entered or save
     /uploadedNofoActive/,
     /!hasContext/,
     /!searchIsCurrent/,
-    /!hasKey/,
+    /!hasConnection/,
   ]) assert.match(control, guard);
   assert.match(control, /aria-disabled/);
   assert.match(control, /ai-refine-requirement/);
@@ -92,27 +110,81 @@ test("AI refinement requires both a usable result context and an entered or save
   assert.match(providerState, /updateAiRefineControl\(\)/);
 });
 
-test("one polite result heading owns total, Strong, Potential, pending, fallback, and AI counts", () => {
-  const heading = app.slice(
-    app.indexOf("function updateResultHeading"),
-    app.indexOf("function renderResults"),
-  );
-  assert.match(heading, /opportunity/);
-  assert.match(heading, /counts\.strong/);
-  assert.match(heading, /counts\.potential/);
-  assert.match(heading, /finding potential matches/);
-  assert.match(heading, /potential matches unavailable/);
-  assert.match(heading, /counts\.aiIdentified/);
-  assert.match(heading, /AI identified/);
-  assert.match(heading, /textContent !== summary/);
+test("one compact live tier count replaces normal tier explanations while preserving empty guidance", () => {
+  const $ = load(page);
+  for (const id of ["results-heading", "result-count", "result-label", "results-mode", "result-range"]) {
+    assert.equal(page.includes(`id="${id}"`), false, id);
+  }
+  for (const className of ["results-summary", "toolbar-lower-row"]) {
+    assert.equal(page.includes(`class="${className}"`), false, className);
+  }
+  assert.equal($("#result-tier-counts").length, 1);
+  assert.equal($("#result-tier-counts").attr("role"), "status");
+  assert.equal($("#result-tier-counts").attr("aria-live"), "polite");
+  assert.equal($("#result-tier-counts").attr("aria-atomic"), "true");
+  assert.equal($("#results-toolbar > #result-tier-counts").length, 1);
+  assert.match(page, /class="results-toolbar[^>]*" id="results-toolbar"[\s\S]*?id="result-tier-counts"[\s\S]*?class="toolbar-actions"/);
+  assert.match(page, /class="toolbar-controls"[\s\S]*?id="sort"/);
+  assert.doesNotMatch(app, /updateResultHeading|results-heading|result-count|result-label|results-mode|result-range/);
+  assert.match(styles, /\.result-tier-counts\s*\{[^}]*font-size:\s*\.9rem/);
+  assert.match(styles, /\.results-toolbar\.search-not-started\s*\{[^}]*display:\s*none/);
   assert.doesNotMatch(app, /\$\("search-status"\)\.textContent = `\$\{state\.strongMatches\.length/);
+  const countSource = app.slice(
+    app.indexOf("function compactResultCounts"),
+    app.indexOf("function syncStateToUrl"),
+  );
+  const context = {
+    RESULT_WORKFLOW_API: {
+      workflowTier(match) { return match.workflowTier === "potential" ? "potential" : "strong"; },
+    },
+  };
+  vm.runInNewContext(`${countSource}\nthis.compactResultCounts = compactResultCounts; this.shouldShowNoStrongNotice = shouldShowNoStrongNotice;`, context);
+  const nineStrong = Array.from({ length: 9 }, () => ({ workflowTier: "strong" }));
+  const twelvePotential = Array.from({ length: 12 }, () => ({ workflowTier: "potential" }));
+  assert.equal(
+    context.compactResultCounts([...nineStrong, ...twelvePotential]),
+    "9 strong matches · 12 potential matches",
+  );
+  assert.equal(
+    context.compactResultCounts([
+      { workflowTier: "strong", aiIdentified: true },
+      { workflowTier: "potential" },
+    ]),
+    "1 strong match · 1 potential match · 1 AI-identified match",
+  );
+  assert.equal(context.compactResultCounts([]), "0 strong matches · 0 potential matches");
+  assert.equal(context.shouldShowNoStrongNotice([{ workflowTier: "potential" }]), true);
+  assert.equal(context.shouldShowNoStrongNotice([{ workflowTier: "strong" }]), false);
+  assert.equal(context.shouldShowNoStrongNotice([
+    { workflowTier: "strong", aiIdentified: true },
+    { workflowTier: "potential" },
+  ]), false);
+  assert.equal(context.shouldShowNoStrongNotice([]), false);
+  const render = app.slice(app.indexOf("function renderResults"), app.indexOf("function renderActiveFilters"));
+  assert.match(render, /result-tier-counts"\)\.textContent = compactResultCounts\(display\)/);
+  assert.doesNotMatch(render, /result-tier-heading|Supported by conservative local evidence|Additional leads from the broader hybrid search/);
+  assert.match(render, /const noStrongNotice = shouldShowNoStrongNotice\(display\)[\s\S]*?No strong matches found\.<\/h3><p>The broader search found potential matches below for you to review\.<\/p>/);
+  assert.match(render, /\$\("results"\)\.innerHTML = noStrongNotice \+ groups\.map/);
 });
 
 test("desktop aligns query, submit, and upload while tablet and smaller widths stack safely", () => {
   assert.match(styles, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto auto;/);
   const tablet = styles.slice(styles.lastIndexOf("@media (max-width: 820px)"));
   assert.match(tablet, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(tablet, /\.find-button \{[\s\S]*?width: 100%;/);
+  assert.match(tablet, /\.nofo-upload-button \{[\s\S]*?order: 1;[\s\S]*?width: 100%;/);
+  assert.match(tablet, /\.find-button \{[\s\S]*?order: 2;[\s\S]*?width: 100%;/);
   const mobile = styles.slice(styles.lastIndexOf("@media (max-width: 540px)"));
   assert.match(mobile, /\.ai-refine-actions \{[\s\S]*?flex-direction: column;/);
+});
+
+test("saved opportunities and email alerts share one panel without revealing saved notes after a search", () => {
+  const $ = load(page);
+  assert.equal($("#alerts-panel").length, 0);
+  assert.equal($("#saved-panel .profile-search-alert").length, 1);
+  assert.equal($("#saved-panel").closest("form").length, 0, "saved items and alerts stay outside search configuration");
+  assert.match($("#saved-panel > summary strong").text(), /Saved opportunities and email alerts/);
+  assert.match(app, /const panel = \$\("saved-panel"\)/);
+  assert.match(styles, /\.saved-panel\.alert-ready > summary #alert-panel-summary/);
+  assert.doesNotMatch(app, /panel\.open = true/);
+  assert.doesNotMatch(app, /savedSearchAlertIntroduced/);
 });

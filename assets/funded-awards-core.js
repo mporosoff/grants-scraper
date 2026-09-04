@@ -1,14 +1,74 @@
 (() => {
   "use strict";
 
-  const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+  const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
   const DOE_PAGE_LIMIT = 10;
   const AWARD_YEAR_MIN = 1989;
   const AWARD_YEAR_MAX = 2100;
+  const INVESTIGATOR_SUFFIXES = Object.freeze({
+    jr: "Jr",
+    sr: "Sr",
+    ii: "II",
+    iii: "III",
+    iv: "IV",
+    vi: "VI",
+    vii: "VII",
+    viii: "VIII",
+    ix: "IX",
+    x: "X",
+    md: "MD",
+    phd: "PhD",
+    dds: "DDS",
+    dvm: "DVM",
+    esq: "Esq",
+  });
+  const INVESTIGATOR_SUFFIX_CHAIN = /((?:[,\s]+(?:Jr|Sr|Ii|Iii|Iv|Vi|Vii|Viii|Ix|X|M\.?D|Ph\.?D|Dds|Dvm|Esq)\.?)+)$/iu;
+  const INVESTIGATOR_SUFFIX_TOKEN = /([,\s]+)([^\s,]+)/gu;
+  const INVESTIGATOR_NAME_TOKEN = /\p{L}+(?:[.'’\-]\p{L}+)*/gu;
 
   function clean(value, maximum = 500) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
     return text.slice(0, maximum);
+  }
+
+  function restoreInvestigatorSuffixes(value) {
+    return value.replace(INVESTIGATOR_SUFFIX_CHAIN, chain => chain.replace(
+      INVESTIGATOR_SUFFIX_TOKEN,
+      (match, separator, token) => {
+        const period = token.endsWith(".") ? "." : "";
+        const unpunctuated = period ? token.slice(0, -1) : token;
+        const key = unpunctuated.replaceAll(".", "").toLocaleLowerCase("en-US");
+        const display = INVESTIGATOR_SUFFIXES[key];
+        if (!display) return match;
+        return `${separator}${unpunctuated.includes(".") ? unpunctuated : display}${period}`;
+      },
+    ));
+  }
+
+  function isUppercaseInvestigatorToken(value) {
+    const letters = Array.from(value).filter(character => /\p{L}/u.test(character));
+    return Boolean(letters.length && letters.every(character => (
+      character === character.toLocaleUpperCase("en-US")
+    )));
+  }
+
+  function displayInvestigatorName(value) {
+    const name = clean(value, 300);
+    if (!name) return "";
+    const casedLetters = [...name].filter(character => (
+      character.toLocaleUpperCase("en-US") !== character.toLocaleLowerCase("en-US")
+    ));
+    const hasUpper = casedLetters.some(character => character === character.toLocaleUpperCase("en-US"));
+    const hasLower = casedLetters.some(character => character === character.toLocaleLowerCase("en-US"));
+    if (!casedLetters.length) return name;
+    const titleCase = text => text
+      .toLocaleLowerCase("en-US")
+      .replace(/(^|[\s,.'’\-])(\p{L})/gu, (_match, prefix, letter) => `${prefix}${letter.toLocaleUpperCase("en-US")}`)
+      .replace(/\bMc(\p{Ll})/gu, (_match, letter) => `Mc${letter.toLocaleUpperCase("en-US")}`);
+    const normalized = hasUpper && hasLower
+      ? name.replace(INVESTIGATOR_NAME_TOKEN, token => isUppercaseInvestigatorToken(token) ? titleCase(token) : token)
+      : titleCase(name);
+    return restoreInvestigatorSuffixes(normalized);
   }
 
   function year(value) {
@@ -102,7 +162,7 @@
     if (mode !== "program") return { topic: value };
     const source = clean(agency, 10).toUpperCase();
     if (!SOURCE_NAMES.includes(source)) {
-      throw new Error("Choose NSF, NIH, or DOE when searching by program identifier or name.");
+      throw new Error("Choose NSF, NIH, DOE, or DoD when searching by program identifier or name.");
     }
     if (source === "NSF") {
       const pdCode = globalThis.FUNDING_AWARD_LINKS?.nsfProgramElementCode(value);
@@ -113,6 +173,12 @@
       return value.includes("-")
         ? { opportunity_number: value.toUpperCase() }
         : { program: value.toUpperCase() };
+    }
+    if (source === "DOD") {
+      if (!/^\d{2}\.\d{3}$/.test(value)) {
+        throw new Error("DoD program searches require an Assistance Listing code such as 12.800.");
+      }
+      return { program: value };
     }
     return /^DE-FOA-\d+$/i.test(value)
       ? { opportunity_number: value.toUpperCase() }
@@ -126,6 +192,13 @@
     const institution = clean(state.institution, 300);
     const pi = clean(state.pi, 160);
     const programOfficer = clean(state.program_officer, 160);
+    const requestedAgency = clean(state.agency, 10).toUpperCase();
+    if (requestedAgency === "DOD" && pi) {
+      throw new Error("DoD USAspending records do not provide investigator fields. Remove the investigator filter or choose another agency.");
+    }
+    if (requestedAgency === "DOD" && programOfficer) {
+      throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
+    }
     const yearStart = year(state.year_start);
     const yearEnd = year(state.year_end);
     if (institution) criteria.institution = institution;
@@ -172,14 +245,17 @@
       for (const person of Array.isArray(award.principal_investigators) ? award.principal_investigators : []) {
         const name = clean(person?.name, 300);
         if (!name) continue;
-        people.set(name, (people.get(name) || 0) + 1);
+        const displayName = displayInvestigatorName(name);
+        const key = displayName.normalize("NFKC").toLocaleLowerCase("en-US");
+        const existing = people.get(key);
+        if (existing) existing.projects += 1;
+        else people.set(key, { name: displayName, query: name, projects: 1 });
       }
     }
     return {
       institution: results.find(item => clean(item?.institution?.normalized_name))?.institution?.normalized_name || requested,
       projects: results.length,
-      investigators: [...people.entries()]
-        .map(([name, projects]) => ({ name, projects }))
+      investigators: [...people.values()]
         .sort((a, b) => b.projects - a.projects || a.name.localeCompare(b.name)),
     };
   }
@@ -193,12 +269,27 @@
     ));
   }
 
+  function enrichmentWarnings(source) {
+    const count = value => {
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number > 0 ? number : 0;
+    };
+    const abstracts = count(source?.health?.abstracts_failed);
+    const details = count(source?.health?.details_failed);
+    return [
+      abstracts ? `${abstracts.toLocaleString()} public ${abstracts === 1 ? "abstract" : "abstracts"} unavailable` : "",
+      details ? `${details.toLocaleString()} public award ${details === 1 ? "detail" : "details"} unavailable` : "",
+    ].filter(Boolean);
+  }
+
   globalThis.FUNDING_AWARD_PRODUCT = Object.freeze({
     awardYear,
     awardYearRange,
     boundedErrorCode,
     buildRequest,
     canPageForward,
+    displayInvestigatorName,
+    enrichmentWarnings,
     institutionSummary,
     paginationLabel,
     presentFiniteNumber,

@@ -16,17 +16,12 @@
   box-shadow: var(--shadow);
 }
 
-.ii-shell-heading,
 .ii-ask > summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
   padding: 20px 24px;
-}
-
-.ii-shell-heading {
-  min-height: 68px;
 }
 
 .ii-ask > summary::-webkit-details-marker {
@@ -51,18 +46,11 @@
   content: "−";
 }
 
-.ii-shell-heading > span:first-child,
 .ii-ask > summary > span:first-child {
   display: grid;
   gap: 2px;
 }
 
-.ii-shell-heading strong {
-  color: var(--navy);
-  font-size: 1.05rem;
-}
-
-.ii-shell-heading small,
 .ii-ask > summary small {
   color: #617188;
   font-size: .76rem;
@@ -76,8 +64,7 @@
 }
 
 .ii-body {
-  padding: 0 24px 26px;
-  border-top: 1px solid var(--line);
+  padding: 26px 24px;
 }
 
 .ii-optional {
@@ -297,8 +284,12 @@
   margin-top: 17px;
 }
 
-.ii-status {
-  margin-top: 14px;
+.ii-search-spinner {
+  display: inline-block;
+}
+
+.ii-results-note {
+  margin-top: 12px;
   padding: 10px 12px;
   color: #36536f;
   font-size: .78rem;
@@ -306,35 +297,59 @@
   border-radius: 8px;
 }
 
-.ii-status.error-text {
+.ii-results-note.error-text {
   color: #8a2430;
   background: var(--danger-bg);
 }
 
+.ii-status {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  background: transparent;
+}
+
+.ii-status:empty {
+  display: none;
+}
+
+.ii-status.error-text {
+  color: inherit;
+  background: transparent;
+}
+
 .ii-source-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 12px 0 0;
+  display: block;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.ii-source-status li {
-  padding: 5px 8px;
-  color: #2e567f;
-  font-size: .71rem;
-  font-weight: 800;
-  background: #eaf2fb;
-  border-radius: 7px;
+.ii-status:not(:empty) + .ii-source-status {
+  margin-top: 5px;
 }
 
-.ii-source-status li[data-status="unavailable"],
-.ii-source-status li[data-status="rate_limited"],
-.ii-source-status li[data-status="safety_bounded"],
-.ii-source-status li[data-status="unsupported"] {
+.ii-source-status li {
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  background: transparent;
+}
+
+.ii-source-status-summary {
+  display: block;
+}
+
+.ii-source-status-help {
+  display: block;
+  margin-top: 3px;
+  font-size: .72rem;
+}
+
+.ii-source-status li[data-status="limited"] .ii-source-status-help {
   color: #8a3600;
-  background: #fff0df;
 }
 
 .ii-output {
@@ -699,6 +714,10 @@
   border-left-color: #b16400;
 }
 
+.ii-award-card[data-source="DOD"] {
+  border-left-color: #8b5a16;
+}
+
 .ii-award-kicker {
   display: flex;
   flex-wrap: wrap;
@@ -896,9 +915,6 @@
     grid-template-columns: 1fr;
   }
 
-  .ii-shell-heading {
-    display: none;
-  }
 }
 
 @media (max-width: 520px) {

@@ -72,23 +72,20 @@ function buildIndex(records, query) {
   };
 }
 
-test("wires the researcher picker and editor into a syntactically valid page", () => {
+test("wires the researcher picker and governed missing-researcher handoff into a valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
-  assert.match(teamPage, /id="add-external-researcher"/);
   assert.match(teamPage, /id="researcher-picker"/);
-  assert.match(teamPage, /id="researcher-search"[^>]+role="combobox"/);
-  assert.match(teamPage, /id="researcher-options" role="listbox"/);
-  assert.match(teamPage, /id="external-researcher-form"/);
-  assert.match(teamPage, /id="external-orcid"/);
-  assert.match(teamPage, /id="import-external-orcid"/);
-  assert.match(teamPage, /assets\/orcid\.js/);
+  assert.match(teamPage, /id="researcher-choice"/);
+  assert.match(teamPage, /id="choose-researcher"/);
+  assert.match(teamPage, /id="missing-researcher"[^>]+faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(teamPage, /id="remove-saved-researcher"/);
+  assert.doesNotMatch(teamPage, /id="external-researcher-form"|id="external-orcid"|assets\/orcid\.js|assets\/researcher-intake\.js/);
   assert.match(teamPage, /assets\/team-researchers\.js/);
-  assert.match(teamPage, /assets\/hajim-faculty-directory\.js/);
   assert.match(teamPage, /assets\/team-matcher\.js/);
   assert.match(teamPage, /assets\/search-retrieval\.js/);
   assert.match(teamPage, /assets\/search-hybrid\.js/);
   assert.match(teamPage, /assets\/team-hybrid\.js/);
-  assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API, \{ catalogRole: "parent" \}\)/);
+  assert.match(teamPage, /MATCHER_API\.create\(catalogData, M \|\| \{\}, SEARCH_API\)/);
   assert.match(teamPage, /function rebuildResearcherMatches/);
   assert.match(teamPage, /function memberProfile/);
   assert.match(teamPage, /function opportunityCard/);
@@ -114,33 +111,62 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with unified Hajim search and separate external controls instead of a faculty wall", () => {
+test("starts with one Add researcher control and separates directory from missing-researcher setup", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
-  assert.match(grid, />\s*Search Hajim faculty\s*<\/button>/);
-  assert.match(grid, />\s*Add an external researcher\s*<\/button>/);
-  assert.equal((grid.match(/class="pi-toggle/g) || []).length, 2);
+  assert.match(grid, />\s*Add researcher\s*<\/button>/);
+  assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
-  assert.doesNotMatch(teamPage, /<select[^>]+researcher-choice|facultyGroup\.label/);
-  assert.match(teamPage, /HAJIM_API\.search\(hajimDirectory, query/);
-  assert.match(teamPage, /limit: HAJIM_API\.MAX_RESULTS/);
-  assert.match(teamPage, /Add saved " \+ profile\.name/);
+  assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
+  assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
+  assert.match(teamPage, /id="missing-researcher"/);
+  assert.match(teamPage, /Add a missing researcher/);
+  assert.doesNotMatch(teamPage, /Add a researcher manually/);
+  assert.doesNotMatch(teamPage, /facultyGroup\.label = "Department faculty"/);
+  assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
 });
 
-test("opens and lazy-loads the accessible faculty typeahead", () => {
+test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /picker\.hidden = !opening/);
-  assert.match(teamPage, /function ensureFacultyDirectory\(\)/);
-  assert.match(teamPage, /HAJIM_API\.load\(\)/);
-  assert.match(teamPage, /\$\("researcher-search"\)\.focus\(\)/);
+  assert.doesNotMatch(teamPage, /\$\("researcher-choice"\)\.focus\(\)/);
   assert.match(teamPage, /aria-autocomplete="list"/);
+  assert.match(teamPage, /aria-controls="faculty-suggestions"/);
   assert.match(teamPage, /aria-activedescendant/);
+  assert.match(teamPage, /event\.key === "ArrowDown"/);
+  assert.match(teamPage, /event\.key === "Enter"/);
+  assert.match(teamPage, /event\.key === "Escape"/);
+  assert.match(teamPage, /\$\("show-faculty-suggestions"\)\.addEventListener\("mousedown", function \(event\) \{[\s\S]*?event\.preventDefault\(\)/);
 });
 
-test("announces loading, search results, selection, and recoverable directory failures", () => {
+test("the missing-researcher path opens Configure with add mode selected", () => {
+  assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
+  assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
+  assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
+  assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
+});
+
+test("shows an accessible progress state while adding a researcher", () => {
   assert.match(teamPage, /id="researcher-picker-status" role="status" aria-live="polite"/);
-  assert.match(teamPage, /Loading the reviewed Hajim faculty directory/);
-  assert.match(teamPage, /suggestion.*Use arrow keys and Enter to select/);
-  assert.match(teamPage, /was added\. Search for another researcher/);
-  assert.match(teamPage, /directory could not be loaded.*add an external researcher/i);
+  assert.match(teamPage, /function setResearcherAddBusy\(busy, member\)/);
+  assert.match(teamPage, /button\.textContent = busy \? "Adding…" : "Add to team"/);
+  assert.match(teamPage, /button\.setAttribute\("aria-busy", "true"\)/);
+  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
+  assert.match(teamPage, /setResearcherAddBusy\(true, member\);[\s\S]*?selected\.push\(member\)[\s\S]*?scheduleTeamRefresh\(member\)/);
+  assert.match(teamPage, /setResearcherAddBusy\(false, member\)/);
+});
+
+test("directory selection paints, highlights, focuses, and announces before matching", () => {
+  assert.match(teamPage, /function scheduleTeamRefresh\(member\)/);
+  assert.match(teamPage, /recentlyAddedMember = member/);
+  assert.match(teamPage, /renderSelectedResearcherCards\(\)/);
+  assert.match(teamPage, /\$\("view"\)\.setAttribute\("aria-busy", "true"\)/);
+  assert.match(teamPage, /Updating opportunities for /);
+  assert.match(teamPage, /selectedButton\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(teamPage, /className = "pi-entry" \+ \(member === recentlyAddedMember \? " just-added" : ""\)/);
+  const chooseStart = teamPage.indexOf("  function chooseFaculty(facultyId) {");
+  const chooseEnd = teamPage.indexOf("  function renderExternalButtons() {", chooseStart);
+  const chooseSource = teamPage.slice(chooseStart, chooseEnd);
+  assert.ok(chooseSource.indexOf("renderExternalStatus") < chooseSource.indexOf("scheduleTeamRefresh(key)"));
+  assert.doesNotMatch(chooseSource, /\n\s*refresh\(\);/);
 });
 
 test("preserves native scroll restoration and omits the catalog-count hero line", () => {
@@ -149,33 +175,58 @@ test("preserves native scroll restoration and omits the catalog-count hero line"
   assert.doesNotMatch(teamPage, /window\.scrollTo\(0, 0\)/);
   assert.match(teamPage, /TEAM_HISTORY_STATE_KEY = "fundingFinderTeamMatch"/);
   assert.match(teamPage, /window\.addEventListener\("pagehide", saveTeamHistory\)/);
+  assert.match(teamPage, /selectedIdentities:/);
+  assert.match(teamPage, /kind: "directory"/);
+  assert.match(teamPage, /function teamHistoryNeedsDirectory\(\)/);
+  assert.match(teamPage, /if \(teamHistoryNeedsDirectory\(\)\) \{[\s\S]*?teamHistoryRestoreDeferred = true;[\s\S]*?await ensureTeamDirectory\(\)/);
   assert.match(teamPage, /restoreTeamHistory\(\)/);
   assert.match(teamPage, /finishHistoryRestore\(\)/);
   assert.doesNotMatch(teamPage, /id="meta-line"/);
   assert.doesNotMatch(teamPage, /department faculty profiles|live graded matching across/);
 });
 
-test("supports repeated selection, removal, editing, and the four-person maximum", () => {
-  assert.match(teamPage, /function addHajimResearcher\(member\)/);
-  assert.match(teamPage, /selected\.indexOf\(member\) !== -1/);
-  assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
-  assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
-  assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
-  assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
-  assert.match(teamPage, /autoSelected = !wasEditing && selected\.length < MAX/);
-  assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
-  assert.match(teamPage, /ORCID_API\.fetchProfile/);
+test("a transient directory failure preserves history until a successful retry", () => {
+  assert.match(teamPage, /var teamHistoryRestoreDeferred = false/);
+  const saveStart = teamPage.indexOf("  function saveTeamHistory() {");
+  const saveEnd = teamPage.indexOf("  function teamHistoryNeedsDirectory() {", saveStart);
+  const saveSource = teamPage.slice(saveStart, saveEnd);
+  assert.match(saveSource, /if \(teamHistoryRestoreDeferred\) return/);
+  assert.ok(saveSource.indexOf("teamHistoryRestoreDeferred") < saveSource.indexOf("history.replaceState"));
+  assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
+  assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
+  assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
+  assert.match(teamPage, /if \(localId\) \{[\s\S]*?selected\.push\(localKey\)/);
+  assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
+  assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
+  assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);
 });
 
-test("uses the requested external-researcher path and preserves local-only privacy messaging", () => {
+test("supports repeated selection, browser removal, and the four-person maximum", () => {
+  assert.match(teamPage, /function chooseResearcher\(\)/);
+  assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
+  assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
+  assert.match(teamPage, /if \(profile\) \{[\s\S]*?removeExternalProfile\(profile\)/);
+  assert.match(teamPage, /id="remove-saved-researcher"/);
+  assert.match(teamPage, /function removeChosenResearcher\(\)/);
+  assert.match(teamPage, /confirm\("Remove " \+ profile\.name \+ " from this browser\?"\)/);
+  assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
+  assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
+  assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
+  assert.match(teamPage, /\.pi-entry\{display:inline-flex;flex:0 1 260px/);
+  assert.match(teamPage, /\.selected-terms\{display:grid;grid-template-columns:repeat\(auto-fit,minmax\(260px,1fr\)\)/);
+  assert.match(teamPage, /\.st-card\{min-width:0;max-width:100%/);
+  assert.doesNotMatch(teamPage, /ORCID_API|INTAKE_API|openExternalEditor/);
+});
+
+test("uses neutral visitor-facing researcher terminology", () => {
   const visibleText = teamPage
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ");
+  assert.doesNotMatch(visibleText, /\b(?:internal|external)\b/i);
   assert.doesNotMatch(teamPage, /\(internal\)/i);
-  assert.match(visibleText, /Add an external researcher/);
-  assert.match(visibleText, /Researchers you add are saved only in this browser/);
+  assert.match(visibleText, /Browser-only researcher profiles are stored only on this device/);
 });
 
 test("normalizes and saves no more than four external researchers", () => {
@@ -254,7 +305,6 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         title: "Data-driven reaction discovery",
         description: "Catalytic conversion, reaction kinetics, and machine learning catalyst screening.",
         topic_areas: ["Catalysis and reaction engineering", "Artificial intelligence and machine learning"],
-        status: "posted",
         posted_date: "2026-08-08",
         close_date: "2026-08-20",
       },
@@ -263,7 +313,6 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         title: "General materials program",
         description: "A broad program for technology development.",
         topic_areas: ["Materials science", "Technology development"],
-        status: "posted",
         posted_date: "2026-08-09",
         close_date: "2026-10-01",
       },
@@ -273,7 +322,6 @@ test("graded team scoring combines evidence, supports scope-only BAAs, and rejec
         description: "Meritorious research across a spectrum of science and engineering.",
         agency: "Office of Naval Research",
         topic_areas: [],
-        status: "posted",
         posted_date: "2025-01-01",
         close_date: "2026-10-01",
       },

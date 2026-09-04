@@ -99,10 +99,15 @@ test("Team Match metadata and history use public researcher/team behavior", () =
   assert.doesNotMatch(teamPage, /history\.scrollRestoration\s*=|window\.scrollTo\(0, 0\)/);
   assert.match(teamPage, /window\.addEventListener\("pagehide", saveTeamHistory\)/);
   assert.match(teamPage, /history\.replaceState\(Object\.assign/);
-  assert.match(teamPage, /function addHajimResearcher\(member\)/);
-  assert.match(teamPage, /toggle\(member\);[\s\S]*setResearcherPickerStatus\(profile\.name \+ " was added\./);
-  assert.match(teamPage, /if \(selected\.length >= MAX\)[\s\S]*else \{[\s\S]*\$\("researcher-search"\)\.focus\(\);/);
+  assert.match(teamPage, /"Adding " \+ memberName\(member\) \+ " to the team…"/);
   assert.match(teamPage, /Finding enhanced ordering for the locally eligible team matches/);
+  assert.equal((teamPage.match(/id="filter"/g) || []).length, 1);
+  const resultsSearch = teamPage.indexOf('id="results-search"');
+  const resultsView = teamPage.indexOf('id="view"');
+  assert.ok(resultsSearch > -1 && resultsSearch < resultsView, "the existing filter sits immediately before the generated results area");
+  assert.match(teamPage, /id="results-search"[\s\S]*?id="filter"[\s\S]*?id="view"/);
+  assert.match(teamPage, /\$\("results-search"\)\.classList\.add\("hide"\)/);
+  assert.match(teamPage, /\$\("results-search"\)\.classList\.toggle\("hide", !all\.length\);[\s\S]*?all = all\.filter/);
   assert.match(hosting, /Team Match is also a public, self-canonical product route and is intentionally\s+indexable/);
 });
 

@@ -27,6 +27,9 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         funded_html = (REPOSITORY_ROOT / "funded_awards.html").read_text(
             encoding="utf-8"
         )
+        interests_html = (REPOSITORY_ROOT / "faculty_interests.html").read_text(
+            encoding="utf-8"
+        )
         team_researchers_js = (
             REPOSITORY_ROOT / "assets" / "team-researchers.js"
         ).read_text(encoding="utf-8")
@@ -71,7 +74,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         # a static og:url prevents preview caches from collapsing every shared
         # search onto a stale bare-page object; rel=canonical remains available
         # to search engines, and the requested query/hash stays untouched.
-        for page in (index_html, explorer_html, team_html, funded_html):
+        for page in (index_html, explorer_html, team_html, funded_html, interests_html):
             self.assertNotIn('property="og:url"', page)
             self.assertIn('rel="canonical"', page)
 
@@ -86,9 +89,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn('name="robots" content="noindex', team_html)
         self.assertIn("<title>Team Match | Funding Finder</title>", team_html)
         self.assertIn('id="add-researcher"', team_html)
-        self.assertIn('id="external-researcher-form"', team_html)
-        self.assertIn('id="external-name"', team_html)
-        self.assertIn('id="external-keywords"', team_html)
+        self.assertNotIn('id="external-researcher-form"', team_html)
+        self.assertNotIn('id="external-name"', team_html)
+        self.assertNotIn('id="external-keywords"', team_html)
+        self.assertIn('id="researcher-choice"', team_html)
+        self.assertIn('id="remove-saved-researcher"', team_html)
+        self.assertIn('id="missing-researcher"', team_html)
         self.assertIn('assets/team-researchers.js', team_html)
         self.assertIn('assets/search-query.js', team_html)
         self.assertIn('href="./team_match.html"', explorer_html)
@@ -105,6 +111,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn('assets/site-nav.js', team_html)
         self.assertIn('assets/site-help.js', explorer_html)
         self.assertIn('assets/site-help.js', team_html)
+        for page in (explorer_html, team_html, funded_html, interests_html):
+            self.assertIn('href="./faculty_interests.html"', page)
+        self.assertIn('href="./faculty_interests.html" aria-current="page"', interests_html)
+        self.assertIn('data/researcher_directory.js', interests_html)
+        self.assertIn('assets/researcher-intake.js', interests_html)
+        self.assertIn('assets/faculty-interests.js', interests_html)
+        self.assertIn('id="researcher-request-form"', interests_html)
+        self.assertIn('id="review-consent"', interests_html)
         for page in (explorer_html, team_html):
             self.assertIn("not an official source of record", page)
             self.assertIn("&copy; 2026 Marc D. Porosoff", page)
@@ -166,6 +180,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_js = (
             REPOSITORY_ROOT / "assets" / "app.js"
         ).read_text(encoding="utf-8")
+        opportunity_team_generation = json.loads(
+            (REPOSITORY_ROOT / "config" / "opportunity_team_model.json").read_text(
+                encoding="utf-8"
+            )
+        )["generation_id"]
         ai_provider_js = (
             REPOSITORY_ROOT / "assets" / "ai-provider.js"
         ).read_text(encoding="utf-8")
@@ -187,6 +206,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         application_css = (
             REPOSITORY_ROOT / "assets" / "app.css"
         ).read_text(encoding="utf-8")
+        app_script_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.js").read_bytes()
+        ).hexdigest()
+        app_style_version = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "app.css").read_bytes()
+        ).hexdigest()
 
         self.assertIn('id="query"', explorer_html)
         self.assertIn('id="nofo-drop-zone"', explorer_html)
@@ -233,7 +258,12 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertNotIn("Open larger chat", explorer_html)
         self.assertIn("Enter to send", explorer_html)
         self.assertIn("Export CSV", explorer_html)
-        self.assertIn('id="result-label"', explorer_html)
+        for removed_result_summary in (
+            'id="results-heading"', 'id="result-count"', 'id="result-label"',
+            'id="results-mode"', 'id="result-range"', 'class="results-summary"',
+            'class="toolbar-lower-row"',
+        ):
+            self.assertNotIn(removed_result_summary, explorer_html)
         search_v2_version = "app-1.3.0"
         self.assertIn(
             '<script src="./data/catalog-metadata.js?v=catalog-',
@@ -248,37 +278,45 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         release_version = "filters-2026-08-13"
-        feature_version = "orcid-2026-08-13"
+        feature_version = "orcid-format-20260903"
         search_version = "relevance-2026-08-15-v6"
         style_version = "unified-ui-20260825"
-        app_style_version = "ai-additive-20260829"
         self.assertIn(
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
-        for asset in (
-            "nofo.js", "review.js", "credentials.js",
-            "chat-ui.js", "saved.js",
-        ):
+        for asset in ("nofo.js", "review.js", "saved.js"):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
+        ai_provider_hash = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "ai-provider.js").read_bytes()
+        ).hexdigest()
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=program-officer-qna-20260830"></script>',
+            f'<script src="./assets/ai-provider.js?v={ai_provider_hash}"></script>',
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/result-workflow.js?v=ai-additive-20260829"></script>',
+            '<script src="./assets/award-links.js?v=dod-awards-20260903"></script>',
             explorer_html,
         )
+        self.assertIn(
+            '<script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>',
+            explorer_html,
+        )
+        for asset in ("credentials.js", "chat-ui.js"):
+            self.assertIn(
+                f'<script src="./assets/{asset}?v=chat-output-fixes-20260830"></script>',
+                explorer_html,
+            )
         for asset in ("orcid.js",):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={feature_version}"></script>',
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/profile.js?v=audit-2026-08-13"></script>',
+            '<script src="./assets/profile.js?v=ai-boundaries-20260901"></script>',
             explorer_html,
         )
         self.assertIn(f'assets/app-config.js?v={search_v2_version}', explorer_html)
@@ -302,7 +340,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-retrieval.js?v={opportunity_team_generation}"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -310,11 +348,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/app.js?v=ai-additive-20260829"></script>',
+            f'<script src="./assets/app.js?v={app_script_version}"></script>',
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/site-help.js?v={style_version}"></script>',
+            '<script src="./assets/site-help.js?v=dod-awards-20260903"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)
@@ -323,7 +361,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("globalThis.FUNDING_RETRIEVAL", application_js)
         self.assertIn("searchEngine.score", application_js)
         self.assertIn("MAX_AI_CANDIDATES = 32", application_js)
-        self.assertIn("MAX_CHAT_RESULTS = 20", application_js)
+        self.assertIn("MAX_CHAT_RESULTS = 10", application_js)
         self.assertIn("NEW_RELEVANT_MAX_AGE_DAYS = 14", application_js)
         self.assertIn("NEW_RELEVANT_MIN_SCORE_RATIO = .2", application_js)
         self.assertIn("function announcementAgeDays", application_js)
@@ -394,15 +432,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("globalThis.FUNDING_CREDENTIALS", application_js)
         self.assertIn("funding-finder.credentials.v1", credentials_js)
         self.assertIn("localStorage", credentials_js)
-        self.assertIn("AI retrieval candidate set", application_js)
+        self.assertNotIn("AI retrieval candidate set", application_js)
         self.assertIn('id="browse-all"', application_js)
         self.assertIn("function browseAllOpportunities", application_js)
-        self.assertIn("function updateResultHeading(display)", application_js)
-        self.assertIn(
-            '`${total.toLocaleString()} ${total === 1 ? "opportunity" : "opportunities"}`',
-            application_js,
-        )
-        self.assertIn('$("result-label").textContent = ""', application_js)
+        self.assertNotIn("function updateResultHeading(display)", application_js)
+        self.assertNotIn('$("result-label")', application_js)
         self.assertIn("api.openai.com/v1/responses", ai_provider_js)
         self.assertIn("api.anthropic.com/v1/messages", ai_provider_js)
         self.assertRegex(

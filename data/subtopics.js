@@ -12,7 +12,7 @@ globalThis.SUBTOPIC_CATALOG={
   "top_level_fetch_failure_count": 51
  },
  "parent_count": 28,
- "record_count": 441,
+ "record_count": 444,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -11749,13 +11749,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "345327": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "345738": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -17231,20 +17224,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "359103": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359104": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "359123": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -17610,6 +17589,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359733": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "359740": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -18008,6 +17994,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "359940": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "359941": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -18105,61 +18098,6 @@ globalThis.SUBTOPIC_CATALOG={
      },
      "title": "Rapid Response and Novel Research in Earth Science",
      "title_fingerprint": "3356a78a",
-     "topic_areas": []
-    }
-   ]
-  },
-  "360003": {
-   "segmentation_method": "nasa_roses_table",
-   "subtopic_count": 1,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "amended": true,
-     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={9E3216E9-ADB7-B72A-A1D7-12EC8050DC3F}&path=&method=init",
-     "child_type": "subject",
-     "confidence": "high",
-     "division": "A",
-     "evidence_anchor": null,
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-20",
-     "native_deadline_text": "N/A | No Due Date [4]",
-     "native_status": "no_due_date",
-     "opportunity_id": "360003:a-10",
-     "ordinal_label": "A.10",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": null,
-     "page_start": null,
-     "parent_id": "360003",
-     "parent_opportunity_number": "NNH25ZDA001N-INNOVATE",
-     "pattern_family": null,
-     "program_area_labels": [],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": null,
-     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
-     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
-     "source_role": "authoritative_announcement",
-     "source_version": {
-      "amendment": null,
-      "year": 2025
-     },
-     "status": "posted",
-     "subtopic_code": "A.10",
-     "subtopic_code_norm": "a-10",
-     "subtopic_id": "360003:a-10",
-     "subtopic_ordinal": 9,
-     "subtopic_source": "native",
-     "summary": "NASA ROSES program element A.10: INNOVATE.",
-     "term_display": {
-      "innovate": "INNOVATE",
-      "rose": "ROSES"
-     },
-     "title": "INNOVATE",
-     "title_fingerprint": "9c75a6f1",
      "topic_areas": []
     }
    ]
@@ -21152,13 +21090,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "360298": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "360324": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -21270,7 +21201,28 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "360393": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360398": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "360400": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360404": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -21299,6 +21251,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360455": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360458": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -21389,6 +21348,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "360574": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "360581": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -21404,6 +21370,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360593": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360606": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -21523,6 +21496,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360664": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360674": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27153,18 +27133,18 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
+  "360679": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "360698": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_extractable_text",
-   "subtopics": []
-  },
-  "360704": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "360710": {
@@ -27182,6 +27162,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360874": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360875": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27224,6 +27211,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360906": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360909": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27714,6 +27708,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "361213": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "361214": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -28058,6 +28059,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361480": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "361518": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34096,20 +34104,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361918": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361929": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361931": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34117,21 +34111,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361937": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
-   "subtopics": []
-  },
   "361952": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361987": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34208,13 +34188,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362065": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362077": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34236,13 +34209,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362099": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362101": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34251,13 +34217,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362108": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362168": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34509,13 +34468,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362243": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362244": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34537,21 +34489,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362247": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362248": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362250": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34566,34 +34504,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362254": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362259": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362260": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362261": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362262": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34705,13 +34615,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362317": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362319": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34776,27 +34679,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362364": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362367": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362368": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362369": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34888,13 +34770,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362470": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362478": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35069,13 +34944,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362670": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362671": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35104,20 +34972,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362682": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362688": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362715": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35139,13 +34993,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362721": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362722": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35154,13 +35001,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362723": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362725": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35362,25 +35202,11 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362900": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362905": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362911": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
+   "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
   "362917": {
@@ -35460,13 +35286,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362956": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362957": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35475,13 +35294,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362958": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362960": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35607,13 +35419,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363024": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363025": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35636,13 +35441,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363039": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363040": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35930,13 +35728,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363073": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363084": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36001,13 +35792,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363115": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363120": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36323,13 +36107,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363239": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363240": {
    "segmentation_method": "nasa_roses_table",
    "subtopic_count": 1,
@@ -36561,20 +36338,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363270": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363271": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363272": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36597,13 +36360,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363277": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363280": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36660,13 +36416,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363292": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363293": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36932,13 +36681,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363305": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363306": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37142,20 +36884,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363316": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363318": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363321": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37293,20 +37021,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363333": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363334": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363335": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37314,35 +37028,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363336": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363337": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363338": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363339": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363340": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37385,13 +37071,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363350": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363351": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37461,20 +37140,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363370": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363371": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363372": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37517,13 +37182,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363380": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363381": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37543,20 +37201,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363385": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363388": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
   "363389": {
@@ -37601,21 +37245,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363399": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363400": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363404": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37720,13 +37350,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363425": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363426": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37734,63 +37357,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363428": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363430": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363431": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363436": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363437": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363439": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363440": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363441": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363445": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37805,13 +37372,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363448": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363449": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37833,13 +37393,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363455": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363456": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38313,13 +37866,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363479": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363480": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39221,13 +38767,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363527": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363530": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39292,13 +38831,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363541": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363543": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39431,13 +38963,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363578": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363579": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39523,13 +39048,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363592": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363593": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39670,13 +39188,6 @@ globalThis.SUBTOPIC_CATALOG={
     }
    ]
   },
-  "363595": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363599": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39699,48 +39210,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363602": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363603": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363604": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363605": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363606": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363608": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363609": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39838,20 +39307,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363626": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363627": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363628": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39874,13 +39329,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363632": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363633": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39922,20 +39370,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363639": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363640": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363641": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39943,21 +39377,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363642": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363645": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363646": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39986,6 +39406,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363650": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363651": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40062,20 +39489,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363665": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363666": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363667": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40132,13 +39545,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363675": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363678": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40182,13 +39588,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363684": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363685": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40279,13 +39678,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363706": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363708": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40342,13 +39734,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363719": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363720": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40357,13 +39742,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363721": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363722": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40412,6 +39790,606 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363733": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363736": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363738": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_extractable_text",
+   "subtopics": []
+  },
+  "363739": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363742": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363743": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363744": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363745": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363746": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363748": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363749": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363751": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363752": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363754": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363757": {
+   "segmentation_method": "heading_font",
+   "subtopic_count": 4,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "evidence_anchor": "p6",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-02",
+     "last_verified": "2026-09-02",
+     "opportunity_id": "363757:ta-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 6,
+     "page_start": 6,
+     "parent_id": "363757",
+     "parent_opportunity_number": "DE-FOA-0003617",
+     "pattern_family": "topic_area",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic Area 1",
+     "subtopic_code_norm": "ta-1",
+     "subtopic_id": "363757:ta-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "• Approximate total available funding: $1,700,000.00 • Approximate number of awards: 1 • Approximate dollar amount of individual awards: $1,400,000.00–$1,700,000.00 • Minimum cost share required: No cost share for this project • Approximate award project period: 60 Months • Anticipated length of budget periods: 12 Months",
+     "term_display": {
+      "000.00": "000.00",
+      "12": "12",
+      "400": "400",
+      "60": "60",
+      "700": "700",
+      "amount": "amount",
+      "anticipat": "Anticipated",
+      "approximate": "Approximate",
+      "area": "Area",
+      "available": "available",
+      "budget": "budget",
+      "cost": "cost",
+      "dollar": "dollar",
+      "eastern": "Eastern",
+      "fund": "funding",
+      "individual": "individual",
+      "length": "length",
+      "minimum": "Minimum",
+      "month": "Months",
+      "no": "No",
+      "number": "number",
+      "period": "period",
+      "region": "Region",
+      "requir": "required",
+      "share": "share",
+      "topic": "Topic",
+      "total": "total"
+     },
+     "title": "Eastern Region",
+     "title_fingerprint": "8ab01506",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "evidence_anchor": "p6",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-02",
+     "last_verified": "2026-09-02",
+     "opportunity_id": "363757:ta-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 6,
+     "page_start": 6,
+     "parent_id": "363757",
+     "parent_opportunity_number": "DE-FOA-0003617",
+     "pattern_family": "topic_area",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic Area 2",
+     "subtopic_code_norm": "ta-2",
+     "subtopic_id": "363757:ta-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "• Approximate total available funding: $1,700,000.00 • Approximate number of awards: 1 • Approximate dollar amount of individual awards: $1,400,000.00–$1,700,000.00 • Minimum cost share required: No cost share with this project • Approximate award project period: 60 Months • Anticipated length of budget periods: 12 Months",
+     "term_display": {
+      "000.00": "000.00",
+      "12": "12",
+      "400": "400",
+      "60": "60",
+      "700": "700",
+      "amount": "amount",
+      "anticipat": "Anticipated",
+      "approximate": "Approximate",
+      "area": "Area",
+      "available": "available",
+      "budget": "budget",
+      "cost": "cost",
+      "dollar": "dollar",
+      "fund": "funding",
+      "individual": "individual",
+      "length": "length",
+      "midwestern": "Midwestern",
+      "minimum": "Minimum",
+      "month": "Months",
+      "no": "No",
+      "number": "number",
+      "period": "period",
+      "region": "Region",
+      "requir": "required",
+      "share": "share",
+      "topic": "Topic",
+      "total": "total"
+     },
+     "title": "Midwestern Region",
+     "title_fingerprint": "6cedc4db",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "evidence_anchor": "p6",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-02",
+     "last_verified": "2026-09-02",
+     "opportunity_id": "363757:ta-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 7,
+     "page_start": 6,
+     "parent_id": "363757",
+     "parent_opportunity_number": "DE-FOA-0003617",
+     "pattern_family": "topic_area",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic Area 3",
+     "subtopic_code_norm": "ta-3",
+     "subtopic_id": "363757:ta-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "• Approximate total available funding: $1,700,000.00 • Approximate number of awards: 1 • Approximate dollar amount of individual awards: $1,600,000.00–$1,700,000.00 • Minimum cost share required: No cost share with this project • Approximate award project period: 60 Months • Anticipated length of budget periods: 12 Months",
+     "term_display": {
+      "000.00": "000.00",
+      "12": "12",
+      "60": "60",
+      "600": "600",
+      "700": "700",
+      "amount": "amount",
+      "anticipat": "Anticipated",
+      "approximate": "Approximate",
+      "area": "Area",
+      "available": "available",
+      "budget": "budget",
+      "cost": "cost",
+      "dollar": "dollar",
+      "fund": "funding",
+      "individual": "individual",
+      "length": "length",
+      "minimum": "Minimum",
+      "month": "Months",
+      "no": "No",
+      "number": "number",
+      "period": "period",
+      "region": "Region",
+      "requir": "required",
+      "share": "share",
+      "southern": "Southern",
+      "topic": "Topic",
+      "total": "total"
+     },
+     "title": "Southern Region",
+     "title_fingerprint": "78b6c37b",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "evidence_anchor": "p7",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-02",
+     "last_verified": "2026-09-02",
+     "opportunity_id": "363757:ta-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 7,
+     "page_start": 7,
+     "parent_id": "363757",
+     "parent_opportunity_number": "DE-FOA-0003617",
+     "pattern_family": "topic_area",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic Area 4",
+     "subtopic_code_norm": "ta-4",
+     "subtopic_id": "363757:ta-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "• Approximate total available funding: $1,700,000.00 • Approximate number of awards: 1 • Approximate dollar amount of individual awards: $1,600,000.00–$1,700,000.00 • Minimum cost share required: No cost share with this project • Approximate award project period: 60 Months • Anticipated length of budget periods: 12 Months 2. Period of Performance We anticipate making awards under multiple budget periods. If applicable, project continuation will depend on available funding and our Go/No-Go decision which will be made at the conclusion of a budget period.",
+     "term_display": {
+      "000.00": "000.00",
+      "12": "12",
+      "60": "60",
+      "600": "600",
+      "700": "700",
+      "admini": "Admini",
+      "amount": "amount",
+      "anticipat": "Anticipated",
+      "anticipate": "anticipate",
+      "applicable": "applicable",
+      "approximate": "Approximate",
+      "area": "Area",
+      "available": "available",
+      "budget": "budget",
+      "complete": "complete",
+      "conclusion": "conclusion",
+      "continuation": "continuation",
+      "cost": "cost",
+      "decision": "decision",
+      "depend": "depend",
+      "dollar": "dollar",
+      "find": "find",
+      "fund": "funding",
+      "go": "Go",
+      "if": "If",
+      "individual": "individual",
+      "information": "information",
+      "length": "length",
+      "list": "list",
+      "made": "made",
+      "mak": "making",
+      "minimum": "Minimum",
+      "month": "Months",
+      "multiple": "multiple",
+      "no": "No",
+      "no-go": "No-Go",
+      "nofo": "NOFO",
+      "number": "number",
+      "our": "our",
+      "part": "Part",
+      "performance": "Performance",
+      "period": "period",
+      "post-award": "post-award",
+      "share": "share"
+     },
+     "title": "Western Region",
+     "title_fingerprint": "cb1d139b",
+     "topic_areas": []
+    }
+   ]
+  },
+  "363758": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363760": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363762": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363763": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363764": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363765": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363766": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363767": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363768": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363769": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363770": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363771": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363772": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363773": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363775": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363776": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363777": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363778": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363780": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363781": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363782": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363783": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363784": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363785": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363786": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363788": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363790": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_extractable_text",
+   "subtopics": []
+  },
+  "363791": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_extractable_text",
+   "subtopics": []
+  },
+  "363792": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_extractable_text",
+   "subtopics": []
+  },
+  "363793": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40443,8 +40421,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 135.08898305084745,
-  "document_count": 236,
+  "average_document_length": 135.63829787234042,
+  "document_count": 235,
   "document_lengths": [
    836,
    401,
@@ -40543,7 +40521,6 @@ globalThis.SUBTOPIC_CATALOG={
    381,
    192,
    10,
-   6,
    8,
    12,
    5,
@@ -40693,23 +40670,23 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "01": [
-    99,
+    98,
     1
    ],
    "04": [
-    225,
+    224,
     1
    ],
    "05": [
-    99,
+    98,
     1
    ],
    "06": [
-    225,
+    224,
     1
    ],
    "08": [
-    224,
+    223,
     1
    ],
    "09": [
@@ -40877,11 +40854,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    99,
+    98,
     1,
-    225,
+    224,
     1,
-    232,
+    231,
     1
    ],
    "0d": [
@@ -40901,13 +40878,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
+    222,
+    1,
     223,
     1,
-    224,
+    225,
     1,
-    226,
-    1,
-    232,
+    231,
     2
    ],
    "10-1000x": [
@@ -40963,9 +40940,9 @@ globalThis.SUBTOPIC_CATALOG={
    "11": [
     3,
     2,
-    225,
+    224,
     1,
-    226,
+    225,
     1
    ],
    "110": [
@@ -41213,7 +41190,7 @@ globalThis.SUBTOPIC_CATALOG={
    "15": [
     5,
     2,
-    223,
+    222,
     1
    ],
    "16": [
@@ -41255,7 +41232,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     2,
-    224,
+    223,
     2
    ],
    "200": [
@@ -41431,17 +41408,17 @@ globalThis.SUBTOPIC_CATALOG={
    "2026": [
     95,
     8,
-    99,
+    98,
     2,
-    223,
+    222,
     1,
+    223,
+    2,
     224,
     2,
     225,
-    2,
-    226,
     1,
-    232,
+    231,
     2
    ],
    "2030": [
@@ -41481,7 +41458,7 @@ globalThis.SUBTOPIC_CATALOG={
    "25": [
     10,
     2,
-    99,
+    98,
     1
    ],
    "25th": [
@@ -41493,7 +41470,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    232,
+    231,
     1
    ],
    "27": [
@@ -41807,7 +41784,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    169,
+    168,
     1
    ],
    "40": [
@@ -42451,13 +42428,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    104,
+    103,
     1,
-    117,
+    116,
     1,
-    139,
+    138,
     1,
-    143,
+    142,
+    1,
+    146,
     1,
     147,
     1,
@@ -42471,9 +42450,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     152,
     1,
-    153,
+    191,
     1,
-    192,
+    202,
     1,
     203,
     1,
@@ -42487,9 +42466,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     208,
     1,
-    209,
-    1,
-    223,
+    222,
     1
    ],
    "accelerate": [
@@ -42501,15 +42478,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    182,
+    181,
     1
    ],
    "accelerator": [
-    112,
+    111,
     1,
-    189,
+    188,
     2,
-    190,
+    189,
     1
    ],
    "accelerometer": [
@@ -42667,7 +42644,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    110,
+    109,
+    1,
+    177,
     1,
     178,
     1,
@@ -42676,8 +42655,6 @@ globalThis.SUBTOPIC_CATALOG={
     180,
     1,
     181,
-    1,
-    182,
     1
    ],
    "achievable": [
@@ -42949,7 +42926,7 @@ globalThis.SUBTOPIC_CATALOG={
    "actuator": [
     37,
     1,
-    190,
+    189,
     1
    ],
    "acute": [
@@ -43269,7 +43246,7 @@ globalThis.SUBTOPIC_CATALOG={
    "adoption": [
     16,
     1,
-    146,
+    145,
     1
    ],
    "adsorption": [
@@ -43355,7 +43332,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    100,
+    99,
+    1,
+    120,
     1,
     121,
     1,
@@ -43367,15 +43346,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     125,
     1,
-    126,
+    148,
     1,
-    149,
+    177,
     1,
-    178,
+    219,
     1,
-    220,
-    1,
-    222,
+    221,
     1
    ],
    "advance": [
@@ -43473,7 +43450,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    209,
+    208,
     1
    ],
    "advantage": [
@@ -43499,7 +43476,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    161,
+    160,
     1
    ],
    "advantageou": [
@@ -43535,7 +43512,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     2,
-    213,
+    212,
     1
    ],
    "adversary": [
@@ -43683,7 +43660,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     89,
     3,
-    205,
+    204,
     1
    ],
    "agent-bas": [
@@ -43691,7 +43668,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "agentic": [
-    121,
+    120,
     1
    ],
    "aggressive": [
@@ -43767,15 +43744,17 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     89,
     2,
-    106,
+    105,
     1,
-    118,
+    117,
     1,
-    146,
+    145,
+    1,
+    153,
     1,
     154,
     1,
-    155,
+    156,
     1,
     157,
     1,
@@ -43793,13 +43772,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     164,
     1,
-    165,
+    178,
     1,
-    179,
+    191,
     1,
-    192,
+    206,
     1,
-    207,
+    208,
     1,
     209,
     1,
@@ -43809,35 +43788,35 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    213,
+    214,
     1,
     215,
-    1,
-    216,
     1
    ],
    "ai-accelerat": [
-    180,
+    179,
     1
    ],
    "ai-assist": [
-    141,
+    140,
+    1,
+    143,
     1,
     144,
-    1,
-    145,
     1
    ],
    "ai-driven": [
-    110,
+    109,
     1,
-    119,
+    118,
+    1,
+    120,
     1,
     121,
     1,
-    122,
+    167,
     1,
-    168,
+    177,
     1,
     178,
     1,
@@ -43847,35 +43826,33 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     181,
     1,
-    182,
+    188,
     1,
-    189,
+    202,
     1,
-    203,
+    212,
     1,
     213,
     1,
     214,
     1,
-    215,
-    1,
-    217,
+    216,
     1
    ],
    "ai-enabl": [
     82,
     10,
-    123,
+    122,
     1,
-    125,
+    124,
     1,
-    131,
+    130,
     1,
-    133,
+    132,
     1,
-    181,
+    180,
     1,
-    187,
+    186,
     1
    ],
    "ai-integration": [
@@ -43947,7 +43924,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "aiop": [
-    179,
+    178,
     1
    ],
    "air": [
@@ -44105,17 +44082,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    106,
+    105,
+    1,
+    156,
     1,
     157,
     1,
     158,
-    1,
+    2,
     159,
     2,
     160,
-    2,
-    161,
     1
    ],
    "algorithmic": [
@@ -44315,9 +44292,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "america": [
-    102,
+    101,
     1,
-    108,
+    107,
+    1,
+    131,
     1,
     132,
     1,
@@ -44331,7 +44310,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     137,
     1,
-    138,
+    165,
     1,
     166,
     1,
@@ -44350,18 +44329,16 @@ globalThis.SUBTOPIC_CATALOG={
     173,
     1,
     174,
-    1,
-    175,
     1
    ],
    "american": [
-    115,
+    114,
+    1,
+    196,
     1,
     197,
     1,
     198,
-    1,
-    199,
     1
    ],
    "amo": [
@@ -44517,9 +44494,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     8,
-    134,
+    133,
     1,
-    197,
+    196,
     1
    ],
    "analyst": [
@@ -44627,7 +44604,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "angstrom": [
-    166,
+    165,
     1
    ],
    "animal": [
@@ -44991,7 +44968,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "application-aware": [
-    157,
+    156,
     1
    ],
    "application-specific": [
@@ -45127,7 +45104,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    149,
+    148,
     1
    ],
    "appropriate": [
@@ -45225,9 +45202,9 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    167,
+    166,
     1,
-    168,
+    167,
     1
    ],
    "arctic": [
@@ -46191,15 +46168,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    120,
+    119,
     1,
-    182,
+    181,
+    1,
+    215,
     1,
     216,
     1,
     217,
-    1,
-    218,
     1
    ],
    "artificially": [
@@ -46357,13 +46334,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    116,
+    115,
+    1,
+    199,
     1,
     200,
     1,
     201,
-    1,
-    202,
     1
    ],
    "assimilation": [
@@ -46503,7 +46480,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     1,
-    224,
+    223,
     1
    ],
    "atmospheric": [
@@ -46517,7 +46494,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     1,
-    194,
+    193,
     1
    ],
    "atom": [
@@ -46561,7 +46538,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    215,
+    214,
     1
    ],
    "attacker": [
@@ -46657,7 +46634,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    204,
+    203,
     1
    ],
    "automatic": [
@@ -46701,11 +46678,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    110,
+    109,
     1,
-    140,
+    139,
     1,
-    142,
+    141,
+    1,
+    177,
     1,
     178,
     1,
@@ -46714,8 +46693,6 @@ globalThis.SUBTOPIC_CATALOG={
     180,
     1,
     181,
-    1,
-    182,
     1
    ],
    "autonomously": [
@@ -47513,7 +47490,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    220,
+    219,
     1
    ],
    "behavioral": [
@@ -47753,7 +47730,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     67,
     1,
-    130,
+    129,
     1
    ],
    "bio-chemical": [
@@ -47871,9 +47848,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     79,
     2,
-    131,
+    130,
     1,
-    138,
+    137,
     1
    ],
    "biology": [
@@ -47919,9 +47896,9 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     6,
     1,
-    127,
+    126,
     1,
-    185,
+    184,
     1
    ],
    "biomolecule": [
@@ -47935,7 +47912,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "bioreactor": [
-    131,
+    130,
     1
    ],
    "biosens": [
@@ -47945,7 +47922,7 @@ globalThis.SUBTOPIC_CATALOG={
    "biosphere": [
     3,
     1,
-    225,
+    224,
     1
    ],
    "biosynthetic": [
@@ -47973,7 +47950,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    101,
+    100,
+    1,
+    126,
     1,
     127,
     1,
@@ -47982,8 +47961,6 @@ globalThis.SUBTOPIC_CATALOG={
     129,
     1,
     130,
-    1,
-    131,
     1
    ],
    "biotronic": [
@@ -48021,7 +47998,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "blanket": [
-    151,
+    150,
     1
    ],
    "blast": [
@@ -48271,7 +48248,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "breed": [
-    151,
+    150,
     1
    ],
    "brenda": [
@@ -48847,7 +48824,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "carbon": [
-    221,
+    220,
     1
    ],
    "carbon-carbon": [
@@ -48909,9 +48886,9 @@ globalThis.SUBTOPIC_CATALOG={
    "catalyst": [
     26,
     1,
-    188,
+    187,
     1,
-    228,
+    227,
     1
    ],
    "catalytic": [
@@ -48981,11 +48958,11 @@ globalThis.SUBTOPIC_CATALOG={
    "center": [
     93,
     1,
-    109,
+    108,
     1,
-    176,
+    175,
     2,
-    177,
+    176,
     2
    ],
    "central": [
@@ -49263,9 +49240,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     86,
     1,
-    144,
+    143,
     1,
-    220,
+    219,
     1
    ],
    "characterize": [
@@ -49311,7 +49288,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cheaper": [
-    103,
+    102,
+    1,
+    138,
     1,
     139,
     1,
@@ -49326,8 +49305,6 @@ globalThis.SUBTOPIC_CATALOG={
     144,
     1,
     145,
-    1,
-    146,
     1
    ],
    "chemical": [
@@ -49357,9 +49334,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     1,
-    121,
+    120,
     1,
-    200,
+    199,
     1
    ],
    "chemicalthe": [
@@ -49449,9 +49426,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     1,
-    170,
+    169,
     1,
-    182,
+    181,
     1
    ],
    "circular": [
@@ -49533,7 +49510,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    146,
+    145,
     1
    ],
    "classifier": [
@@ -49613,7 +49590,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     92,
     2,
-    194,
+    193,
     1
    ],
    "cloudlet": [
@@ -49633,7 +49610,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cmm": [
-    138,
+    137,
     1
    ],
    "co-crystal": [
@@ -49665,11 +49642,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "co2": [
-    221,
+    220,
     1
    ],
    "coal": [
-    233,
+    232,
     1
    ],
    "coating": [
@@ -49687,21 +49664,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     38,
     1,
-    117,
+    116,
     1,
+    202,
+    2,
     203,
-    2,
-    204,
     1,
-    205,
+    204,
     2,
+    205,
+    1,
     206,
     1,
     207,
-    1,
-    208,
     2,
-    209,
+    208,
     1
    ],
    "coefficient": [
@@ -50121,9 +50098,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
-    173,
+    172,
     1,
-    175,
+    174,
     1
    ],
    "communist": [
@@ -50145,7 +50122,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    129,
+    128,
     1
    ],
    "compar": [
@@ -50497,7 +50474,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    216,
+    215,
     1
    ],
    "complexe": [
@@ -50539,7 +50516,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    193,
+    192,
     1
    ],
    "compliant": [
@@ -50595,13 +50572,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     5,
-    120,
+    119,
+    1,
+    215,
     1,
     216,
     1,
     217,
-    1,
-    218,
     1
    ],
    "component-level": [
@@ -50615,7 +50592,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "composable": [
-    212,
+    211,
     1
    ],
    "compose": [
@@ -50717,13 +50694,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    165,
+    164,
     1,
-    167,
+    166,
     1,
-    175,
+    174,
     1,
-    182,
+    181,
     1
    ],
    "computation": [
@@ -50751,7 +50728,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    174,
+    173,
     1
    ],
    "computational": [
@@ -50835,7 +50812,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     2,
-    158,
+    157,
     2
    ],
    "computationally": [
@@ -50855,7 +50832,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "compute-in-memory": [
-    169,
+    168,
     1
    ],
    "computer": [
@@ -51171,7 +51148,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    149,
+    148,
     1
    ],
    "confirm": [
@@ -51229,7 +51206,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    137,
+    136,
     1
    ],
    "connectivity": [
@@ -51239,7 +51216,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     75,
     1,
-    175,
+    174,
     1
    ],
    "conop": [
@@ -51413,7 +51390,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     1,
-    141,
+    140,
     1
    ],
    "consumption": [
@@ -51659,11 +51636,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    163,
+    162,
     1,
-    202,
+    201,
     1,
-    217,
+    216,
     1
    ],
    "controll": [
@@ -51763,7 +51740,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     75,
     1,
-    188,
+    187,
     1
    ],
    "convert": [
@@ -51859,7 +51836,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     42,
     1,
-    157,
+    156,
     1
    ],
    "correctness": [
@@ -51879,7 +51856,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     43,
     1,
-    180,
+    179,
     1
    ],
    "correlative": [
@@ -51901,17 +51878,17 @@ globalThis.SUBTOPIC_CATALOG={
    "cosmic": [
     49,
     1,
-    191,
+    190,
     1
    ],
    "cosmo": [
-    113,
+    112,
+    1,
+    190,
     1,
     191,
     1,
     192,
-    1,
-    193,
     1
    ],
    "cost": [
@@ -52223,7 +52200,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    102,
+    101,
+    1,
+    131,
     1,
     132,
     1,
@@ -52236,8 +52215,6 @@ globalThis.SUBTOPIC_CATALOG={
     136,
     1,
     137,
-    1,
-    138,
     1
    ],
    "critically": [
@@ -52325,7 +52302,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "crust": [
-    201,
+    200,
     1
    ],
    "cryptographic": [
@@ -52379,7 +52356,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "curation": [
-    117,
+    116,
+    1,
+    202,
     1,
     203,
     1,
@@ -52392,8 +52371,6 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     208,
-    1,
-    209,
     1
    ],
    "current": [
@@ -52709,13 +52686,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cybersecurity": [
     87,
     2,
-    119,
+    118,
+    1,
+    212,
     1,
     213,
     1,
     214,
-    1,
-    215,
     1
    ],
    "cyberspace": [
@@ -52735,9 +52712,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    143,
+    142,
     1,
-    150,
+    149,
     1
    ],
    "damage": [
@@ -52891,17 +52868,17 @@ globalThis.SUBTOPIC_CATALOG={
     9,
     94,
     1,
-    109,
+    108,
     1,
+    175,
+    2,
     176,
     2,
-    177,
-    2,
-    208,
+    207,
     1,
-    211,
+    210,
     1,
-    214,
+    213,
     1
    ],
    "data-driven": [
@@ -52915,7 +52892,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    218,
+    217,
     1
    ],
    "data-feed": [
@@ -52943,7 +52920,7 @@ globalThis.SUBTOPIC_CATALOG={
    "dataset": [
     68,
     1,
-    193,
+    192,
     1
    ],
    "datatype": [
@@ -52956,8 +52933,6 @@ globalThis.SUBTOPIC_CATALOG={
     96,
     1,
     97,
-    1,
-    98,
     1
    ],
    "david": [
@@ -53351,7 +53326,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "deliver": [
-    103,
+    102,
+    1,
+    138,
     1,
     139,
     1,
@@ -53366,8 +53343,6 @@ globalThis.SUBTOPIC_CATALOG={
     144,
     1,
     145,
-    1,
-    146,
     1
    ],
    "delivery": [
@@ -53377,7 +53352,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    104,
+    103,
+    1,
+    146,
     1,
     147,
     1,
@@ -53390,8 +53367,6 @@ globalThis.SUBTOPIC_CATALOG={
     151,
     1,
     152,
-    1,
-    153,
     1
    ],
    "demand": [
@@ -53867,23 +53842,25 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    111,
+    110,
+    1,
+    129,
     1,
     130,
     1,
-    131,
+    138,
     1,
-    139,
+    142,
     1,
-    143,
+    144,
     1,
-    145,
+    161,
     1,
-    162,
+    167,
     1,
-    168,
+    169,
     1,
-    170,
+    181,
     1,
     182,
     1,
@@ -53897,9 +53874,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     187,
     1,
-    188,
-    1,
-    217,
+    216,
     1
    ],
    "designer": [
@@ -54021,7 +53996,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    215,
+    214,
     1
    ],
    "detectivity": [
@@ -54429,31 +54404,31 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     4,
-    117,
+    116,
     1,
-    132,
+    131,
     1,
-    142,
+    141,
     1,
-    146,
+    145,
     1,
-    187,
+    186,
+    1,
+    202,
     1,
     203,
     1,
     204,
-    1,
-    205,
     2,
+    205,
+    1,
     206,
     1,
     207,
     1,
     208,
     1,
-    209,
-    1,
-    219,
+    218,
     1
    ],
    "developmental": [
@@ -54507,7 +54482,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     93,
     1,
-    167,
+    166,
     1
    ],
    "devis": [
@@ -54531,9 +54506,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     92,
     1,
-    181,
+    180,
     1,
-    220,
+    219,
     1
    ],
    "diamond": [
@@ -54651,11 +54626,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    190,
+    189,
     1
    ],
    "digitalization": [
-    124,
+    123,
     1
    ],
    "digitally": [
@@ -54705,7 +54680,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "dioxide": [
-    221,
+    220,
     1
    ],
    "direct": [
@@ -55073,7 +55048,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    106,
+    105,
+    1,
+    156,
     1,
     157,
     1,
@@ -55082,8 +55059,6 @@ globalThis.SUBTOPIC_CATALOG={
     159,
     1,
     160,
-    1,
-    161,
     1
    ],
    "discovery": [
@@ -55127,13 +55102,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    107,
+    106,
     1,
-    112,
+    111,
     1,
-    117,
+    116,
     1,
-    133,
+    132,
+    1,
+    161,
     1,
     162,
     1,
@@ -55141,7 +55118,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     164,
     1,
-    165,
+    186,
     1,
     187,
     1,
@@ -55149,9 +55126,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     189,
     1,
-    190,
+    192,
     1,
-    193,
+    202,
     1,
     203,
     1,
@@ -55164,8 +55141,6 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     208,
-    1,
-    209,
     1
    ],
    "discrete": [
@@ -55251,7 +55226,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "disposition": [
-    145,
+    144,
     1
    ],
    "disrupt": [
@@ -55459,7 +55434,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     98,
     1,
-    99,
+    222,
     1,
     223,
     1,
@@ -55467,9 +55442,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     225,
     1,
-    226,
-    1,
-    232,
+    231,
     1
    ],
    "dmitry": [
@@ -55679,7 +55652,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    146,
+    145,
     1
    ],
    "dod": [
@@ -55755,7 +55728,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "domestic": [
-    143,
+    142,
     1
    ],
    "dominance": [
@@ -55970,12 +55943,10 @@ globalThis.SUBTOPIC_CATALOG={
     96,
     1,
     97,
-    1,
-    98,
     1
    ],
    "dune": [
-    192,
+    191,
     1
    ],
    "dur": [
@@ -55999,7 +55970,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "durability": [
-    217,
+    216,
     1
    ],
    "duration": [
@@ -56089,7 +56060,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     4,
-    178,
+    177,
     1
    ],
    "dynamical": [
@@ -56209,7 +56180,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     96,
     1,
-    223,
+    222,
     1
    ],
    "ease": [
@@ -56237,17 +56208,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    134,
+    133,
     1
    ],
    "economy": [
-    115,
+    114,
+    1,
+    196,
     1,
     197,
     1,
     198,
-    1,
-    199,
     1
    ],
    "ecosystem": [
@@ -56495,7 +56466,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    146,
+    145,
     1
    ],
    "efficiently": [
@@ -56669,7 +56640,7 @@ globalThis.SUBTOPIC_CATALOG={
    "electrochemical": [
     10,
     6,
-    188,
+    187,
     1
    ],
    "electrochemistry": [
@@ -56855,9 +56826,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    173,
+    172,
     1,
-    174,
+    173,
     1
    ],
    "electronically": [
@@ -56945,7 +56916,7 @@ globalThis.SUBTOPIC_CATALOG={
    "em": [
     80,
     3,
-    154,
+    153,
     1
    ],
    "email": [
@@ -56971,7 +56942,7 @@ globalThis.SUBTOPIC_CATALOG={
    "embodi": [
     6,
     2,
-    182,
+    181,
     1
    ],
    "embodiment": [
@@ -57167,7 +57138,7 @@ globalThis.SUBTOPIC_CATALOG={
     6
    ],
    "emulation": [
-    170,
+    169,
     1
    ],
    "enabl": [
@@ -57209,7 +57180,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    226,
+    225,
     1
    ],
    "enable": [
@@ -57369,7 +57340,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "end": [
-    145,
+    144,
     1
    ],
    "end-to-end": [
@@ -57483,19 +57454,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
+    102,
+    1,
     103,
     1,
-    104,
+    113,
     1,
-    114,
+    115,
     1,
-    116,
+    119,
     1,
-    120,
+    122,
     1,
-    123,
+    125,
     1,
-    126,
+    138,
     1,
     139,
     1,
@@ -57525,27 +57498,25 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     152,
     1,
-    153,
+    187,
     1,
-    188,
+    193,
     1,
     194,
-    1,
-    195,
     2,
-    196,
+    195,
+    1,
+    199,
     1,
     200,
     1,
     201,
     1,
-    202,
+    215,
     1,
     216,
     1,
     217,
-    1,
-    218,
     1
    ],
    "energyg": [
@@ -57645,13 +57616,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    129,
+    128,
     1,
-    131,
+    130,
     1,
-    133,
+    132,
     1,
-    152,
+    151,
     1
    ],
    "engineerable": [
@@ -57697,17 +57668,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    112,
+    111,
+    1,
+    188,
     1,
     189,
     1,
-    190,
+    218,
     1,
-    219,
+    220,
     1,
-    221,
-    1,
-    227,
+    226,
     1
    ],
    "enhance": [
@@ -57749,7 +57720,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     67,
     1,
-    230,
+    229,
     1
    ],
    "enhancer": [
@@ -57995,9 +57966,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    171,
+    170,
     1,
-    178,
+    177,
     1
    ],
    "environment-task-technology": [
@@ -58167,7 +58138,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     27,
     1,
-    157,
+    156,
     1
    ],
    "error-correction": [
@@ -58177,7 +58148,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "erupt": [
-    227,
+    226,
     1
    ],
    "es": [
@@ -58471,7 +58442,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    201,
+    200,
     1
    ],
    "evolutionary": [
@@ -58803,7 +58774,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "expedit": [
-    193,
+    192,
     1
    ],
    "expeditionary": [
@@ -59187,7 +59158,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "extraction": [
-    135,
+    134,
     1
    ],
    "extraordinary": [
@@ -59257,7 +59228,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     3,
-    123,
+    122,
     1
    ],
    "extreme-scale": [
@@ -59357,11 +59328,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    143,
+    142,
     1,
-    189,
+    188,
     1,
-    226,
+    225,
     1
    ],
    "fact": [
@@ -59469,7 +59440,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    103,
+    102,
+    1,
+    138,
     1,
     139,
     1,
@@ -59484,8 +59457,6 @@ globalThis.SUBTOPIC_CATALOG={
     144,
     1,
     145,
-    1,
-    146,
     1
    ],
    "fate": [
@@ -59503,7 +59474,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    158,
+    157,
     1
    ],
    "favor": [
@@ -59551,7 +59522,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     2,
-    206,
+    205,
     1
    ],
    "feedback-loop": [
@@ -59677,9 +59648,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     2,
-    219,
+    218,
     1,
-    229,
+    228,
     1
    ],
    "field-generat": [
@@ -59687,7 +59658,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "field-test": [
-    222,
+    221,
     1
    ],
    "fight": [
@@ -59729,7 +59700,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "finder": [
-    136,
+    135,
     1
    ],
    "finite": [
@@ -59815,7 +59786,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    176,
+    175,
     1
    ],
    "flexible": [
@@ -59867,13 +59838,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     51,
     1,
-    120,
+    119,
     1,
-    216,
+    215,
     2,
-    217,
+    216,
     1,
-    218,
+    217,
     1
    ],
    "fluctuat": [
@@ -59903,13 +59874,13 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     38,
     1,
-    120,
+    119,
+    1,
+    215,
     1,
     216,
     1,
     217,
-    1,
-    218,
     1
    ],
    "fluorine-contain": [
@@ -60315,11 +60286,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    155,
+    154,
     1,
-    191,
+    190,
     1,
-    212,
+    211,
     1
    ],
    "foundational": [
@@ -60515,7 +60486,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     3,
-    99,
+    98,
     1
    ],
    "four": [
@@ -60533,11 +60504,11 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "fracture": [
+    200,
+    1,
     201,
     1,
-    202,
-    1,
-    220,
+    219,
     1
    ],
    "fragment": [
@@ -60673,9 +60644,9 @@ globalThis.SUBTOPIC_CATALOG={
    "fuel": [
     59,
     1,
-    143,
+    142,
     2,
-    150,
+    149,
     1
    ],
    "fulda": [
@@ -60699,7 +60670,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
-    229,
+    228,
     1
    ],
    "fully": [
@@ -60767,7 +60738,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    183,
+    182,
     1
    ],
    "functionality": [
@@ -60783,7 +60754,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    111,
+    110,
+    1,
+    182,
     1,
     183,
     1,
@@ -60794,8 +60767,6 @@ globalThis.SUBTOPIC_CATALOG={
     186,
     1,
     187,
-    1,
-    188,
     1
    ],
    "functionalization": [
@@ -60949,7 +60920,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    104,
+    103,
+    1,
+    146,
     1,
     147,
     1,
@@ -60960,12 +60933,10 @@ globalThis.SUBTOPIC_CATALOG={
     150,
     1,
     151,
-    1,
-    152,
     2,
-    153,
+    152,
     1,
-    190,
+    189,
     1
    ],
    "future": [
@@ -61151,11 +61122,11 @@ globalThis.SUBTOPIC_CATALOG={
    "gas": [
     1,
     2,
-    219,
+    218,
     1,
-    221,
+    220,
     1,
-    234,
+    233,
     1
    ],
    "gase": [
@@ -61519,9 +61490,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    204,
+    203,
     1,
-    211,
+    210,
     1
    ],
    "generic": [
@@ -61543,7 +61514,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "genotype": [
-    128,
+    127,
     1
    ],
    "geo-physical": [
@@ -61557,7 +61528,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geological": [
-    136,
+    135,
     1
    ],
    "geometric": [
@@ -61609,7 +61580,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geothermal": [
-    235,
+    234,
     1
    ],
    "gerde": [
@@ -61881,13 +61852,13 @@ globalThis.SUBTOPIC_CATALOG={
    "grid": [
     49,
     1,
-    115,
+    114,
     1,
+    196,
+    2,
     197,
     2,
     198,
-    2,
-    199,
     1
    ],
    "ground": [
@@ -62029,11 +62000,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "habitable": [
-    232,
+    231,
     1
    ],
    "hadronic": [
-    161,
+    160,
     1
    ],
    "half-live": [
@@ -62055,7 +62026,7 @@ globalThis.SUBTOPIC_CATALOG={
    "handl": [
     15,
     1,
-    181,
+    180,
     1
    ],
    "handle": [
@@ -62103,7 +62074,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    175,
+    174,
     1
    ],
    "harikumar": [
@@ -62123,7 +62094,7 @@ globalThis.SUBTOPIC_CATALOG={
    "harsh": [
     35,
     1,
-    171,
+    170,
     1
    ],
    "harvest": [
@@ -62187,7 +62158,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "heliophysic": [
-    99,
+    98,
     1
    ],
    "help": [
@@ -62369,7 +62340,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    193,
+    192,
     1
    ],
    "high-altitude": [
@@ -62587,7 +62558,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hits": [
-    231,
+    230,
     1
    ],
    "hoc": [
@@ -62713,7 +62684,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hpc": [
-    117,
+    116,
+    1,
+    202,
     1,
     203,
     1,
@@ -62726,8 +62699,6 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     208,
-    1,
-    209,
     2
    ],
    "hsi": [
@@ -62973,7 +62944,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     73,
     1,
-    159,
+    158,
     1
    ],
    "hybridiz": [
@@ -62985,11 +62956,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hydrocarbon": [
-    231,
+    230,
     1
    ],
    "hydrologic": [
-    200,
+    199,
     1
    ],
    "hydrophobicity": [
@@ -63015,7 +62986,7 @@ globalThis.SUBTOPIC_CATALOG={
    "hypothesi": [
     4,
     1,
-    211,
+    210,
     1
    ],
    "hysteresi": [
@@ -63505,7 +63476,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    164,
+    163,
     1
    ],
    "image": [
@@ -63633,7 +63604,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    154,
+    153,
     1
    ],
    "implication": [
@@ -64313,19 +64284,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    100,
+    99,
+    1,
+    120,
     1,
     121,
     1,
     122,
     1,
     123,
-    1,
-    124,
     2,
-    125,
+    124,
     1,
-    126,
+    125,
     1
    ],
    "industry": [
@@ -64333,7 +64304,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    146,
+    145,
     1
    ],
    "inelastic": [
@@ -64641,9 +64612,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     34,
     1,
-    230,
+    229,
     1,
-    231,
+    230,
     1
    ],
    "infrastructure-less": [
@@ -64710,8 +64681,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "innovate": [
     76,
-    1,
-    97,
     1
    ],
    "innovation": [
@@ -64993,15 +64962,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    131,
+    130,
     1,
-    152,
+    151,
     1,
-    175,
+    174,
     1,
-    190,
+    189,
     1,
-    208,
+    207,
     1
    ],
    "integrative": [
@@ -65019,7 +64988,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     74,
     1,
-    214,
+    213,
     1
    ],
    "intelligence": [
@@ -65073,17 +65042,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    120,
+    119,
     1,
-    182,
+    181,
     1,
-    208,
+    207,
+    1,
+    215,
     1,
     216,
     1,
     217,
-    1,
-    218,
     2
    ],
    "intelligent": [
@@ -65287,7 +65256,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     4,
-    191,
+    190,
     1
    ],
    "interactional": [
@@ -65821,7 +65790,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    232,
+    231,
     1
    ],
    "invincible": [
@@ -65903,7 +65872,7 @@ globalThis.SUBTOPIC_CATALOG={
    "isolation": [
     93,
     1,
-    137,
+    136,
     1
    ],
    "isomer": [
@@ -66181,7 +66150,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "keeper": [
-    136,
+    135,
     1
    ],
    "key": [
@@ -66521,19 +66490,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     2,
-    110,
+    109,
     1,
-    178,
+    177,
     2,
+    178,
+    1,
     179,
     1,
     180,
     1,
     181,
     1,
-    182,
-    1,
-    228,
+    227,
     1
    ],
    "lack": [
@@ -66765,11 +66734,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     29,
     1,
-    109,
+    108,
+    1,
+    175,
     1,
     176,
-    1,
-    177,
     1
    ],
    "leap": [
@@ -66891,7 +66860,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "legacy": [
-    146,
+    145,
     1
    ],
    "length": [
@@ -67097,9 +67066,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "licens": [
-    139,
+    138,
     1,
-    143,
+    142,
     1
    ],
    "lidar": [
@@ -67439,7 +67408,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    176,
+    175,
     1
    ],
    "local": [
@@ -67605,7 +67574,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    206,
+    205,
     1
    ],
    "loosely": [
@@ -67699,7 +67668,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "low-temperature": [
-    174,
+    173,
     1
    ],
    "lower": [
@@ -68117,7 +68086,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    177,
+    176,
     1
    ],
    "manager": [
@@ -68127,9 +68096,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "mandatory": [
-    224,
+    223,
     1,
-    232,
+    231,
     1
    ],
    "maneuver": [
@@ -68275,25 +68244,25 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    100,
+    99,
     1,
+    120,
+    2,
     121,
-    2,
+    1,
     122,
-    1,
-    123,
     2,
-    124,
+    123,
     1,
+    124,
+    2,
     125,
     2,
-    126,
-    2,
-    141,
+    140,
     1,
-    166,
+    165,
     1,
-    172,
+    171,
     1
    ],
    "manufacture": [
@@ -68333,7 +68302,7 @@ globalThis.SUBTOPIC_CATALOG={
     7
    ],
    "mapp": [
-    132,
+    131,
     1
    ],
    "maps": [
@@ -68377,7 +68346,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "market": [
-    134,
+    133,
     1
    ],
    "markovian": [
@@ -68531,20 +68500,22 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    111,
+    110,
     1,
-    122,
+    121,
     1,
-    126,
+    125,
     1,
-    133,
+    132,
+    1,
+    146,
     1,
     147,
     1,
-    148,
+    166,
     1,
-    167,
-    1,
+    182,
+    2,
     183,
     2,
     184,
@@ -68554,8 +68525,6 @@ globalThis.SUBTOPIC_CATALOG={
     186,
     2,
     187,
-    2,
-    188,
     1
    ],
    "materials-by-design": [
@@ -68637,7 +68606,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     83,
     2,
-    210,
+    209,
     1
    ],
    "mathematically": [
@@ -69383,7 +69352,7 @@ globalThis.SUBTOPIC_CATALOG={
    "microbial": [
     19,
     9,
-    129,
+    128,
     1
    ],
    "microbiological": [
@@ -69403,10 +69372,12 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "microelectronic": [
-    108,
+    107,
     1,
-    166,
+    165,
     2,
+    166,
+    1,
     167,
     1,
     168,
@@ -69414,16 +69385,14 @@ globalThis.SUBTOPIC_CATALOG={
     169,
     1,
     170,
-    1,
+    2,
     171,
     2,
     172,
-    2,
+    1,
     173,
     1,
     174,
-    1,
-    175,
     1
    ],
    "microenvironment": [
@@ -69441,7 +69410,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "microphysic": [
-    194,
+    193,
     1
    ],
    "microscale": [
@@ -69593,7 +69562,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     1,
-    102,
+    101,
+    1,
+    131,
     1,
     132,
     1,
@@ -69606,8 +69577,6 @@ globalThis.SUBTOPIC_CATALOG={
     136,
     1,
     137,
-    1,
-    138,
     1
    ],
    "minima": [
@@ -69787,7 +69756,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    215,
+    214,
     1
    ],
    "mitochondria": [
@@ -69861,7 +69830,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    146,
+    145,
     1
    ],
    "ml-bas": [
@@ -70059,19 +70028,19 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     5,
-    134,
+    133,
     1,
-    155,
+    154,
     1,
-    191,
+    190,
     1,
-    197,
+    196,
     1,
-    212,
+    211,
+    1,
+    214,
     1,
     215,
-    1,
-    216,
     1
    ],
    "model-bas": [
@@ -70317,7 +70286,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "modular": [
-    212,
+    211,
     1
    ],
    "modularity": [
@@ -70691,9 +70660,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    208,
+    207,
     1,
-    211,
+    210,
     1
    ],
    "multi-particle": [
@@ -70719,7 +70688,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     63,
     1,
-    222,
+    221,
     1
    ],
    "multi-specy": [
@@ -71349,11 +71318,11 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     89,
     7,
-    165,
+    164,
     1,
-    173,
+    172,
     1,
-    179,
+    178,
     1
    ],
    "network-bas": [
@@ -71365,7 +71334,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "neuman": [
-    167,
+    166,
     1
    ],
    "neumann": [
@@ -71411,7 +71380,7 @@ globalThis.SUBTOPIC_CATALOG={
    "neuro-symbolic": [
     40,
     1,
-    205,
+    204,
     1
    ],
    "neuro-synaptic": [
@@ -71445,9 +71414,9 @@ globalThis.SUBTOPIC_CATALOG={
    "neuromorphic": [
     24,
     1,
-    175,
+    174,
     1,
-    182,
+    181,
     1
    ],
    "neuron": [
@@ -71648,8 +71617,6 @@ globalThis.SUBTOPIC_CATALOG={
     96,
     1,
     97,
-    1,
-    98,
     1
    ],
    "node": [
@@ -71665,9 +71632,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "noi": [
-    224,
+    223,
     1,
-    232,
+    231,
     1
    ],
    "noise": [
@@ -71811,13 +71778,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "non-volatile": [
-    169,
+    168,
     1
    ],
    "non-von": [
     68,
     1,
-    167,
+    166,
     1
    ],
    "non-von-neumann": [
@@ -71869,7 +71836,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     4,
-    160,
+    159,
     1
    ],
    "nonlinearity": [
@@ -72071,12 +72038,14 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     93,
     3,
-    103,
+    102,
     1,
-    105,
+    104,
     1,
-    139,
+    138,
     2,
+    139,
+    1,
     140,
     1,
     141,
@@ -72088,16 +72057,14 @@ globalThis.SUBTOPIC_CATALOG={
     144,
     1,
     145,
-    1,
-    146,
     2,
+    153,
+    1,
     154,
     1,
     155,
     1,
-    156,
-    1,
-    161,
+    160,
     1
    ],
    "nuclear-scale": [
@@ -72265,7 +72232,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "observatory": [
-    232,
+    231,
     1
    ],
    "obstacle": [
@@ -72563,11 +72530,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "oil": [
-    219,
+    218,
     1,
-    221,
+    220,
     1,
-    234,
+    233,
     1
    ],
    "oleophobicity": [
@@ -72813,13 +72780,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    140,
+    139,
     1,
-    179,
+    178,
     1,
-    198,
+    197,
     1,
-    228,
+    227,
     1
    ],
    "operational": [
@@ -72857,7 +72824,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    218,
+    217,
     1
    ],
    "operationally": [
@@ -72985,13 +72952,13 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     2,
-    156,
+    155,
     1,
-    159,
+    158,
     1,
-    198,
+    197,
     1,
-    203,
+    202,
     1
    ],
    "optimize": [
@@ -73505,13 +73472,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    112,
+    111,
+    1,
+    188,
     1,
     189,
     1,
     190,
-    1,
-    191,
     1
    ],
    "particular": [
@@ -73589,7 +73556,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "partnership": [
-    209,
+    208,
     1
    ],
    "paskova": [
@@ -73651,7 +73618,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    138,
+    137,
     1
    ],
    "pattern": [
@@ -73907,9 +73874,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     6,
-    206,
+    205,
     1,
-    217,
+    216,
     1
    ],
    "performance-driven": [
@@ -73999,7 +73966,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "petabyte-scale": [
-    193,
+    192,
     1
    ],
    "pfas": [
@@ -74195,7 +74162,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "phenotype": [
-    128,
+    127,
     1
    ],
    "photoacoustic": [
@@ -74347,15 +74314,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    113,
+    112,
     1,
-    160,
+    159,
     1,
-    191,
+    190,
     2,
-    192,
+    191,
     1,
-    193,
+    192,
     1
    ],
    "physical": [
@@ -74411,7 +74378,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     4,
-    182,
+    181,
     1
    ],
    "physically": [
@@ -74425,11 +74392,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     45,
     1,
-    170,
+    169,
     1
    ],
    "physics-inform": [
-    216,
+    215,
     1
    ],
    "physiological": [
@@ -74499,7 +74466,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "planetary": [
-    226,
+    225,
     1
    ],
    "planktonic": [
@@ -74531,11 +74498,11 @@ globalThis.SUBTOPIC_CATALOG={
    "plant": [
     3,
     1,
+    138,
+    1,
     139,
     1,
-    140,
-    1,
-    152,
+    151,
     1
    ],
    "plasma": [
@@ -74545,19 +74512,19 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     33,
     1,
-    153,
+    152,
     1,
-    160,
+    159,
     1
    ],
    "plasma-enabl": [
-    172,
+    171,
     1
    ],
    "plasma-fac": [
-    148,
+    147,
     1,
-    186,
+    185,
     1
    ],
    "plasmonic": [
@@ -74781,7 +74748,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "port": [
-    203,
+    202,
     1
    ],
    "portable": [
@@ -75013,19 +74980,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    115,
+    114,
+    1,
+    138,
     1,
     139,
     1,
-    140,
+    172,
     1,
-    173,
+    196,
     1,
     197,
     1,
     198,
-    1,
-    199,
     1
    ],
    "powertrain": [
@@ -75105,7 +75072,7 @@ globalThis.SUBTOPIC_CATALOG={
    "precursor": [
     33,
     1,
-    232,
+    231,
     1
    ],
    "predicability": [
@@ -75145,17 +75112,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    114,
+    113,
+    1,
+    193,
     1,
     194,
     1,
     195,
-    1,
-    196,
     1
    ],
    "predictable": [
-    111,
+    110,
+    1,
+    182,
     1,
     183,
     1,
@@ -75166,8 +75135,6 @@ globalThis.SUBTOPIC_CATALOG={
     186,
     1,
     187,
-    1,
-    188,
     1
    ],
    "predictably": [
@@ -75209,9 +75176,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    196,
+    195,
     1,
-    206,
+    205,
     1
    ],
    "predictive": [
@@ -75231,7 +75198,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     11,
-    129,
+    128,
     1
    ],
    "predominately": [
@@ -75381,7 +75348,7 @@ globalThis.SUBTOPIC_CATALOG={
    "primitive": [
     0,
     3,
-    182,
+    181,
     1
    ],
    "principle": [
@@ -75707,7 +75674,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "problem-to-code": [
-    204,
+    203,
     1
    ],
    "procedural": [
@@ -75821,15 +75788,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    122,
+    121,
     1,
-    131,
+    130,
     1,
-    135,
+    134,
     1,
-    150,
+    149,
     1,
-    156,
+    155,
     1
    ],
    "process-property": [
@@ -75881,9 +75848,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    124,
+    123,
     1,
-    222,
+    221,
     1
    ],
    "processing-microstructure-property": [
@@ -75905,7 +75872,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     41,
     1,
-    222,
+    221,
     1
    ],
    "produce": [
@@ -75931,11 +75898,13 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     61,
     1,
-    227,
+    226,
     1
    ],
    "productivity": [
-    100,
+    99,
+    1,
+    120,
     1,
     121,
     1,
@@ -75946,8 +75915,6 @@ globalThis.SUBTOPIC_CATALOG={
     124,
     1,
     125,
-    1,
-    126,
     1
    ],
    "profile": [
@@ -76041,7 +76008,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     81,
     1,
-    220,
+    219,
     1
    ],
    "propellant": [
@@ -76125,7 +76092,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "proppant": [
-    220,
+    219,
     1
    ],
    "propulsion": [
@@ -76209,7 +76176,7 @@ globalThis.SUBTOPIC_CATALOG={
    "prototyp": [
     36,
     1,
-    182,
+    181,
     1
    ],
    "prototype": [
@@ -76221,7 +76188,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    229,
+    228,
     1
    ],
    "protrusion": [
@@ -76247,7 +76214,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    214,
+    213,
     1
    ],
    "provid": [
@@ -76521,7 +76488,7 @@ globalThis.SUBTOPIC_CATALOG={
    "qualification": [
     36,
     1,
-    187,
+    186,
     1
    ],
    "qualitative": [
@@ -76561,7 +76528,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1,
-    199,
+    198,
     1
    ],
    "quantify": [
@@ -76655,16 +76622,18 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     21,
+    105,
+    1,
     106,
     1,
-    107,
+    156,
     1,
     157,
-    1,
-    158,
     2,
-    159,
+    158,
     1,
+    159,
+    2,
     160,
     2,
     161,
@@ -76675,9 +76644,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     164,
     2,
-    165,
-    2,
-    183,
+    182,
     1
    ],
    "quantum-bas": [
@@ -76685,7 +76652,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quantum-classical": [
-    159,
+    158,
     1
    ],
    "quantum-to-classical": [
@@ -76693,13 +76660,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quark": [
-    113,
+    112,
+    1,
+    190,
     1,
     191,
     1,
     192,
-    1,
-    193,
     1
    ],
    "quasi-static": [
@@ -77089,7 +77056,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    131,
+    130,
     1
    ],
    "reaction-diffusion": [
@@ -77177,7 +77144,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    215,
+    214,
     1
    ],
    "real-world": [
@@ -77207,15 +77174,15 @@ globalThis.SUBTOPIC_CATALOG={
    "realiz": [
     85,
     1,
-    107,
+    106,
+    1,
+    161,
     1,
     162,
     1,
     163,
     1,
     164,
-    1,
-    165,
     1
    ],
    "realizable": [
@@ -77253,13 +77220,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     16,
     8,
-    118,
+    117,
     1,
-    210,
+    209,
     2,
-    211,
+    210,
     1,
-    212,
+    211,
     1
    ],
    "reasonable": [
@@ -77295,7 +77262,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "recenter": [
-    108,
+    107,
+    1,
+    165,
     1,
     166,
     1,
@@ -77314,8 +77283,6 @@ globalThis.SUBTOPIC_CATALOG={
     173,
     1,
     174,
-    1,
-    175,
     1
    ],
    "recently": [
@@ -77411,9 +77378,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    219,
+    218,
     1,
-    221,
+    220,
     1
    ],
    "recurrence": [
@@ -77507,7 +77474,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "reenvision": [
-    100,
+    99,
+    1,
+    120,
     1,
     121,
     1,
@@ -77518,8 +77487,6 @@ globalThis.SUBTOPIC_CATALOG={
     124,
     1,
     125,
-    1,
-    126,
     1
    ],
    "refer": [
@@ -77743,7 +77710,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     2,
-    146,
+    145,
     1
    ],
    "relevance": [
@@ -77871,7 +77838,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     3,
-    181,
+    180,
     1
    ],
    "remotely": [
@@ -78119,9 +78086,9 @@ globalThis.SUBTOPIC_CATALOG={
    "reservoir": [
     3,
     2,
-    219,
+    218,
     1,
-    221,
+    220,
     1
    ],
    "resilience": [
@@ -78147,9 +78114,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    213,
+    212,
     1,
-    218,
+    217,
     1
    ],
    "resiliency": [
@@ -78165,7 +78132,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    230,
+    229,
     1
    ],
    "resistant": [
@@ -78217,9 +78184,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     68,
     1,
-    132,
+    131,
     1,
-    227,
+    226,
     1
    ],
    "resource-efficient": [
@@ -78295,13 +78262,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "restoration": [
-    105,
+    104,
+    1,
+    153,
     1,
     154,
     1,
     155,
-    1,
-    156,
     1
    ],
    "restrict": [
@@ -78375,7 +78342,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    146,
+    145,
     1
    ],
    "revis": [
@@ -78383,17 +78350,19 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "revitalization": [
-    105,
+    104,
+    1,
+    153,
     1,
     154,
     1,
     155,
-    1,
-    156,
     1
    ],
    "revolution": [
-    101,
+    100,
+    1,
+    126,
     1,
     127,
     1,
@@ -78402,8 +78371,6 @@ globalThis.SUBTOPIC_CATALOG={
     129,
     1,
     130,
-    1,
-    131,
     1
    ],
    "revolutionary": [
@@ -78535,7 +78502,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rite": [
-    230,
+    229,
     1
    ],
    "rl": [
@@ -78543,7 +78510,7 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "roadmap": [
-    154,
+    153,
     1
    ],
    "robb": [
@@ -78637,9 +78604,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    178,
+    177,
     1,
-    182,
+    181,
     1
    ],
    "robust": [
@@ -78687,7 +78654,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     57,
     1,
-    213,
+    212,
     1
    ],
    "rock": [
@@ -78721,7 +78688,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     98,
     1,
-    99,
+    222,
     1,
     223,
     1,
@@ -78729,9 +78696,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     225,
     1,
-    226,
-    1,
-    232,
+    231,
     1
    ],
    "rotary-w": [
@@ -78829,7 +78794,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "safer": [
-    103,
+    102,
+    1,
+    138,
     1,
     139,
     1,
@@ -78844,8 +78811,6 @@ globalThis.SUBTOPIC_CATALOG={
     144,
     1,
     145,
-    1,
-    146,
     1
    ],
    "safety": [
@@ -78937,9 +78902,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    101,
+    100,
     1,
-    115,
+    114,
+    1,
+    126,
     1,
     127,
     1,
@@ -78949,13 +78916,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     130,
     1,
-    131,
+    196,
     1,
     197,
     1,
     198,
-    1,
-    199,
     1
    ],
    "scalability": [
@@ -79025,15 +78990,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     71,
     1,
-    166,
+    165,
     1,
-    188,
+    187,
     1
    ],
    "scale-bridg": [
     46,
     1,
-    155,
+    154,
     1
    ],
    "scale-resolv": [
@@ -79045,7 +79010,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    131,
+    130,
     1
    ],
    "scatter": [
@@ -79287,29 +79252,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     96,
     1,
-    98,
+    97,
     1,
-    119,
+    118,
     1,
-    127,
+    126,
     1,
-    153,
+    152,
     1,
-    158,
+    157,
     1,
-    180,
+    179,
     1,
-    192,
+    191,
+    1,
+    212,
     1,
     213,
     1,
     214,
     1,
-    215,
+    225,
     1,
-    226,
-    1,
-    232,
+    231,
     1
    ],
    "scientific": [
@@ -79353,20 +79318,22 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     2,
+    116,
+    1,
     117,
     1,
-    118,
+    202,
     1,
     203,
-    1,
-    204,
     2,
+    204,
+    1,
     205,
     1,
     206,
-    1,
-    207,
     2,
+    207,
+    1,
     208,
     1,
     209,
@@ -79374,8 +79341,6 @@ globalThis.SUBTOPIC_CATALOG={
     210,
     1,
     211,
-    1,
-    212,
     1
    ],
    "scientifically": [
@@ -79463,9 +79428,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "secur": [
-    102,
+    101,
     1,
-    109,
+    108,
+    1,
+    131,
     1,
     132,
     1,
@@ -79479,11 +79446,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     137,
     1,
-    138,
+    175,
     1,
     176,
-    1,
-    177,
     1
    ],
    "secure": [
@@ -79497,7 +79462,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    143,
+    142,
     1
    ],
    "security": [
@@ -79825,7 +79790,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    164,
+    163,
     1
    ],
    "sense": [
@@ -79909,7 +79874,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    174,
+    173,
     1
    ],
    "sensor-selection": [
@@ -80375,7 +80340,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    170,
+    169,
     1
    ],
    "simulator": [
@@ -80431,11 +80396,11 @@ globalThis.SUBTOPIC_CATALOG={
    "site": [
     92,
     1,
-    144,
+    143,
     1,
-    219,
+    218,
     1,
-    231,
+    230,
     1
    ],
    "situation": [
@@ -80579,7 +80544,7 @@ globalThis.SUBTOPIC_CATALOG={
    "smart": [
     17,
     1,
-    125,
+    124,
     1
    ],
    "smoothness": [
@@ -80695,7 +80660,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    207,
+    206,
     1
    ],
    "soil": [
@@ -80705,7 +80670,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "solar": [
-    98,
+    97,
     1
    ],
    "soldier": [
@@ -80841,7 +80806,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    223,
+    222,
     1
    ],
    "solv": [
@@ -81635,15 +81600,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "step-1": [
-    99,
+    98,
     1,
-    225,
+    224,
     1
    ],
    "step-2": [
-    99,
+    98,
     1,
-    225,
+    224,
     1
    ],
    "stephanie": [
@@ -81793,13 +81758,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    116,
+    115,
+    1,
+    199,
     1,
     200,
     1,
     201,
-    1,
-    202,
     1
    ],
    "strategically": [
@@ -81975,9 +81940,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     86,
     1,
-    147,
+    146,
     1,
-    184,
+    183,
     1
    ],
    "structure": [
@@ -82131,7 +82096,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sub-1-nm": [
-    166,
+    165,
     1
    ],
    "sub-10-micrometer": [
@@ -82229,13 +82194,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "subsurface": [
-    116,
+    115,
     1,
-    200,
+    199,
     2,
-    201,
+    200,
     1,
-    202,
+    201,
     2
    ],
    "subsystem": [
@@ -82545,7 +82510,9 @@ globalThis.SUBTOPIC_CATALOG={
    "supply": [
     91,
     3,
-    102,
+    101,
+    1,
+    131,
     1,
     132,
     1,
@@ -82559,9 +82526,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     137,
     1,
-    138,
-    1,
-    143,
+    142,
     1
    ],
    "supportive": [
@@ -82761,7 +82726,7 @@ globalThis.SUBTOPIC_CATALOG={
    "symbolic": [
     15,
     1,
-    210,
+    209,
     1
    ],
    "symmetry": [
@@ -83015,31 +82980,31 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     9,
-    98,
+    97,
     1,
-    107,
+    106,
     1,
-    123,
+    122,
     1,
-    152,
+    151,
+    1,
+    160,
     1,
     161,
-    1,
+    2,
     162,
     2,
     163,
-    2,
+    1,
     164,
     1,
-    165,
+    174,
     1,
-    175,
+    189,
     1,
-    190,
+    217,
     1,
-    218,
-    1,
-    229,
+    228,
     1
    ],
    "system-level": [
@@ -83649,13 +83614,15 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    120,
+    119,
     1,
-    135,
+    134,
     1,
-    153,
+    152,
     1,
-    169,
+    168,
+    1,
+    215,
     1,
     216,
     1,
@@ -83663,13 +83630,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     218,
     1,
-    219,
+    221,
     1,
-    222,
+    226,
     1,
-    227,
-    1,
-    230,
+    229,
     1
    ],
    "technology-enhanc": [
@@ -83833,9 +83798,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    219,
+    218,
     1,
-    231,
+    230,
     1
    ],
    "testbed": [
@@ -84091,7 +84056,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    177,
+    176,
     1
    ],
    "thermoconductive": [
@@ -84531,7 +84496,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tolerant": [
-    158,
+    157,
     1
    ],
    "tomography": [
@@ -84587,9 +84552,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     1,
-    146,
+    145,
     1,
-    158,
+    157,
     1
    ],
    "toopology": [
@@ -85251,15 +85216,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     74,
     1,
-    105,
+    104,
+    1,
+    153,
     1,
     154,
     1,
     155,
     1,
-    156,
-    1,
-    175,
+    174,
     1
    ],
    "transformation": [
@@ -85351,7 +85316,9 @@ globalThis.SUBTOPIC_CATALOG={
    "translation": [
     23,
     1,
-    117,
+    116,
+    1,
+    202,
     1,
     203,
     1,
@@ -85364,8 +85331,6 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     208,
-    1,
-    209,
     1
    ],
    "transmission": [
@@ -85411,7 +85376,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     54,
     1,
-    200,
+    199,
     1
    ],
    "trapp": [
@@ -85439,9 +85404,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    156,
+    155,
     1,
-    222,
+    221,
     1
    ],
    "tremendou": [
@@ -85461,9 +85426,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tritium": [
-    150,
+    149,
     1,
-    151,
+    150,
     1
    ],
    "trivial": [
@@ -85493,9 +85458,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     14,
     2,
-    207,
+    206,
     1,
-    210,
+    209,
     1
    ],
    "try": [
@@ -85537,7 +85502,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    194,
+    193,
     1
    ],
    "turbulent": [
@@ -85555,7 +85520,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     36,
     1,
-    190,
+    189,
     1
    ],
    "twist": [
@@ -85669,19 +85634,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    109,
+    108,
     1,
-    114,
+    113,
+    1,
+    175,
     1,
     176,
     1,
-    177,
+    193,
     1,
     194,
     1,
     195,
-    1,
-    196,
     1
    ],
    "uas": [
@@ -85829,7 +85794,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    199,
+    198,
     1
    ],
    "uncertainty-aware": [
@@ -85849,9 +85814,9 @@ globalThis.SUBTOPIC_CATALOG={
    "unconventional": [
     68,
     1,
-    219,
+    218,
     1,
-    221,
+    220,
     1
    ],
    "uncover": [
@@ -86029,7 +85994,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     5,
-    180,
+    179,
     1
    ],
    "understandable": [
@@ -86099,13 +86064,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     1,
-    113,
+    112,
+    1,
+    190,
     1,
     191,
     1,
     192,
-    1,
-    193,
     1
    ],
    "unintentional": [
@@ -86167,7 +86132,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    228,
+    227,
     1
    ],
    "universal": [
@@ -86199,13 +86164,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unleash": [
-    116,
+    115,
+    1,
+    199,
     1,
     200,
     1,
     201,
-    1,
-    202,
     1
    ],
    "unless": [
@@ -86305,7 +86270,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    188,
+    187,
     1
    ],
    "updat": [
@@ -86329,7 +86294,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "upper": [
-    201,
+    200,
     1
    ],
    "uq": [
@@ -86493,9 +86458,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    146,
+    145,
     1,
-    227,
+    226,
     1
    ],
    "utilize": [
@@ -86557,9 +86522,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    228,
+    227,
     1,
-    229,
+    228,
     1
    ],
    "validity": [
@@ -86801,7 +86766,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    214,
+    213,
     1
    ],
    "versa": [
@@ -87317,15 +87282,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     1,
-    114,
+    113,
+    1,
+    193,
     1,
     194,
-    1,
-    195,
     2,
-    196,
+    195,
     1,
-    222,
+    221,
     1
    ],
    "wave": [
@@ -87475,7 +87440,7 @@ globalThis.SUBTOPIC_CATALOG={
    "week": [
     49,
     1,
-    196,
+    195,
     1
    ],
    "weight": [
@@ -87585,7 +87550,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    220,
+    219,
     1
    ],
    "well-be": [
@@ -88047,13 +88012,13 @@ globalThis.SUBTOPIC_CATALOG={
    "workflow": [
     88,
     4,
-    119,
+    118,
+    1,
+    212,
     1,
     213,
     1,
     214,
-    1,
-    215,
     1
    ],
    "workforce": [
@@ -88079,7 +88044,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     58,
     1,
-    232,
+    231,
     1
    ],
    "worst": [
@@ -88131,7 +88096,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    196,
+    195,
     1
    ],
    "yet": [
@@ -88273,7 +88238,6 @@ globalThis.SUBTOPIC_CATALOG={
    "345241:tdac-baa-024",
    "345241:tdac-baa-026",
    "359996:a-4",
-   "360003:a-10",
    "360004:c-2",
    "361234:b-2",
    "361526:challenge-1",
@@ -88414,5 +88378,5 @@ globalThis.SUBTOPIC_CATALOG={
    "363594:c-1"
   ]
  },
- "searchable_record_count": 236
+ "searchable_record_count": 235
 };

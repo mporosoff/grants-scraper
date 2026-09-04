@@ -58,3 +58,15 @@
   .alert-field-grid { display: grid; }
   .alert-dialog-actions .button { width: 100%; }
 }
+
+/* iOS Safari zooms focused form controls whose computed text size is below
+   16px. Compact controls inherit smaller label text on desktop, so apply the
+   floor only on touch-first devices, including phones in landscape. */
+@media (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea,
+  [contenteditable]:not([contenteditable="false"]) {
+    font-size: max(16px, 1em) !important;
+  }
+}

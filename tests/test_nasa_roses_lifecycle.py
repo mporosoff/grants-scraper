@@ -275,6 +275,29 @@ class HealthIsEvaluatedBeforeRemovalTests(LifecycleHarness):
         self.assertIsNone(summary["sources"][0]["error"])
         self.assertConsistent(catalog)
 
+    def test_a_non_roses_nasa_notice_does_not_degrade_the_refresh(self):
+        """Regression for the SSERVI CAN-5 false-positive on 2026-09-02."""
+        sservi = grants_gov_record(
+            opportunity_id="363734",
+            opportunity_number="NNH26ZDA016C",
+            title=(
+                "Solar System Exploration Research Virtual Institute "
+                "Cooperative Agreement Notice-5 (SSERVI CAN-5)"
+            ),
+        )
+        summary, catalog, roses = self.refresh(
+            payload([target_element(["N/A", FUTURE])]),
+            catalog_extra=[sservi],
+        )
+        self.assertEqual(summary["sources"][0]["status"], "refreshed")
+        self.assertIsNone(summary["sources"][0]["error"])
+        self.assertEqual(len(roses), 1)
+        self.assertTrue(any(
+            record.get("opportunity_number") == "NNH26ZDA016C"
+            for record in catalog["opportunities"]
+        ))
+        self.assertConsistent(catalog)
+
 
 class DuplicateAppendixCodeLifecycleTests(LifecycleHarness):
     """A repeated appendix code must not cost the public catalog an opportunity.

@@ -81,7 +81,7 @@
       no_cost_share: false,
       profile_search_active: false,
       personalize: false,
-      ai_provider: "openai",
+      ai_provider: "hosted",
       sort: "deadline",
       facets: Object.fromEntries(FACET_NAMES.map(name => [name, []])),
     };
@@ -112,9 +112,9 @@
       no_cost_share: source.no_cost_share === true,
       profile_search_active: source.profile_search_active === true,
       personalize: source.personalize === true,
-      ai_provider: source.ai_provider === "anthropic"
-        ? "anthropic"
-        : "openai",
+      ai_provider: ["hosted", "openai", "anthropic"].includes(source.ai_provider)
+        ? source.ai_provider
+        : "hosted",
       sort: SORT_MODES.has(source.sort) ? source.sort : "deadline",
       facets: Object.fromEntries(
         FACET_NAMES.map(name => [name, cleanStringArray(facets[name])]),

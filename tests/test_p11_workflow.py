@@ -8,6 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "refresh-opportunities.yml"
 TEST_WORKFLOW = ROOT / ".github" / "workflows" / "tests.yml"
+MANUAL_E2E_WORKFLOW = ROOT / ".github" / "workflows" / "e2e-manual.yml"
 
 
 class P11WorkflowTests(unittest.TestCase):
@@ -59,6 +60,7 @@ class P11WorkflowTests(unittest.TestCase):
 
     def test_tests_workflow_runs_once_per_pr_head_and_again_on_main(self):
         source = TEST_WORKFLOW.read_text(encoding="utf-8")
+        manual_e2e = MANUAL_E2E_WORKFLOW.read_text(encoding="utf-8")
         self.assertRegex(
             source,
             re.compile(
@@ -72,7 +74,7 @@ class P11WorkflowTests(unittest.TestCase):
             "  cancel-in-progress: true",
             source,
         )
-        for job in ("python", "browser", "e2e"):
+        for job in ("python", "browser"):
             self.assertRegex(source, rf"(?m)^  {job}:$")
         for command in (
             "python -m tools.run_refresh_validation",
@@ -80,9 +82,17 @@ class P11WorkflowTests(unittest.TestCase):
             "node --test tests/browser/*.test.mjs",
             "node tools/query_baseline.mjs --check",
             "node tools/p9_scoring_probe.mjs --check",
-            "pnpm test:e2e",
         ):
             self.assertIn(command, source)
+        self.assertNotRegex(source, r"(?m)^  e2e:$")
+        self.assertNotIn("playwright", source.lower())
+        self.assertNotIn("pnpm test:e2e", source)
+        self.assertRegex(manual_e2e, r"(?m)^on:\n  workflow_dispatch:$")
+        self.assertNotIn("pull_request:", manual_e2e)
+        self.assertNotRegex(manual_e2e, r"(?m)^  push:$")
+        self.assertRegex(manual_e2e, r"(?m)^  e2e:$")
+        self.assertIn("pnpm exec playwright install --with-deps chromium", manual_e2e)
+        self.assertIn("pnpm test:e2e", manual_e2e)
 
     def test_document_degradation_routes_to_the_existing_degraded_channel(self):
         source = WORKFLOW.read_text(encoding="utf-8")

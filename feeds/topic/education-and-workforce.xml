@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-08-28T21:17:09Z</updated>
+  <updated>2026-09-03T14:39:56Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -257,6 +257,15 @@
     <summary>Health Resources and Services Administration | Closes 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
   </entry>
   <entry>
+    <title>Human Trafficking Youth Prevention Education (HTYPE) Demonstration Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363751"/>
+    <id>urn:funding-finder:grants-gov:363751</id>
+    <updated>2027-01-09T00:00:00Z</updated>
+    <author><name>Administration for Children and Families-IOAS-OTIP</name></author>
+    <category term="Education and workforce"/>
+    <summary>Administration for Children and Families-IOAS-OTIP | Closes 2027-03-10 | The purpose of the HTYPE Demonstration Program is to fund local education agencies (LEAs) to establish, expand, and support programs to educate school staff to recognize and respond to signs of human trafficking and to provide age-appropriate information to students on how to avoid becoming victims of human trafficking. LEAs, with the support of a nonprofit or nongovernmental organization (NGO) pa…</summary>
+  </entry>
+  <entry>
     <title>Health Workforce Research Center (HWRC)</title>
     <link href="https://www.grants.gov/search-results-detail/363112"/>
     <id>urn:funding-finder:grants-gov:363112</id>
@@ -264,6 +273,15 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-09 | The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
+  </entry>
+  <entry>
+    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363113"/>
+    <id>urn:funding-finder:grants-gov:363113</id>
+    <updated>2027-01-04T00:00:00Z</updated>
+    <author><name>Health Resources and Services Administration</name></author>
+    <category term="Education and workforce"/>
+    <summary>Health Resources and Services Administration | Closes 2027-02-03 | The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
   </entry>
   <entry>
     <title>Bridge2AI Network for AI Health Science</title>
@@ -303,6 +321,26 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
+  </entry>
+  <entry>
+    <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
+    <link href="https://www.grants.gov/search-results-detail/363749"/>
+    <id>urn:funding-finder:grants-gov:363749</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | The purpose of this award is to strengthen capacity and performance of national immunization programs in countries of the Eastern Mediterranean Region (EMR) to achieve regional vaccine preventable disease (VPD) control, elimination and eradication targets (i.e., polio eradication, measles and rubella elimination), reduce VPD-related morbidity and mortality, and address emerging public health threa…</summary>
+  </entry>
+  <entry>
+    <title>Informing global polio eradication efforts through innovative modeling approaches</title>
+    <link href="https://www.grants.gov/search-results-detail/363748"/>
+    <id>urn:funding-finder:grants-gov:363748</id>
+    <updated>2026-12-14T00:00:00Z</updated>
+    <author><name>Centers for Disease Control-GHC</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control-GHC | Closes 2027-02-12 | This NOFO will provide critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response, optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches. It will also build capacity for a diverse public health workforce of statistical and mathematical modelers. Additionally, models will assess economic implications …</summary>
   </entry>
   <entry>
     <title>NIOSH Centers for Agriculture, Forestry, and Fishing Safety and Health (U54)</title>
@@ -360,6 +398,16 @@
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+  </entry>
+  <entry>
+    <title>NIOSH Mentored Research Scientist Development Award (K01)</title>
+    <link href="https://www.grants.gov/search-results-detail/363783"/>
+    <id>urn:funding-finder:grants-gov:363783</id>
+    <updated>2026-11-30T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-29 | The National Institute for Occupational Safety and Health (NIOSH) K01 grant provides "protected time" for a supervised career development experience in occupational health and safety research. NIOSH supports the mentoring of junior investigators during the critical transition from postdoctoral training to securing independent R01 funding. We hope to foster investigators' careers, who are vital for…</summary>
   </entry>
   <entry>
     <title>NIDDK Multi-Purpose Resource-Related, Multi-Component Research Services Centers Cooperative Agreement (U2C - Clinical Trial Optional)</title>
@@ -565,54 +613,5 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Closes 2027-02-01 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: NIH Research Evaluation and Commercialization Hubs (REACH) (SB0 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/362965"/>
-    <id>urn:funding-finder:grants-gov:362965</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
-  </entry>
-  <entry>
-    <title>Comprehensive Housing Counseling (CHC) and the Housing Counseling Training (HCT) NOFO (FY2026)</title>
-    <link href="https://www.grants.gov/search-results-detail/362014"/>
-    <id>urn:funding-finder:grants-gov:362014</id>
-    <updated>2026-09-30T00:00:00Z</updated>
-    <author><name>Department of Housing and Urban Development</name></author>
-    <category term="Education and workforce"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-11-30 | The purpose of HUD’s Housing Counseling Grant Program is to provide funds to HUD-approved housing counseling agencies that provide counseling and advice to tenants and homeowners, with respect to property maintenance, financial management and literacy, and other matters as may be appropriate to assist program clients in improving their housing conditions, meeting their financial needs, and fulfill…</summary>
-  </entry>
-  <entry>
-    <title>Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363047"/>
-    <id>urn:funding-finder:grants-gov:363047</id>
-    <updated>2026-09-17T00:00:00Z</updated>
-    <author><name>Administration for Children and Families</name></author>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children and Families | Closes 2026-11-17 | The U.S. Department of Health and Human Services (HHS), Administration for Children and Families (ACF), seeks applications for the Preschool Development Grant Birth through Five (PDG B-5) SMART Grant: Strategic Measurement, Analytics, and Results using Technology. This funding opportunity will support states and territories to make targeted, one-year investments in statewide early care and educati…</summary>
-  </entry>
-  <entry>
-    <title>FY26 US DOT Drone Infrastructure Inspection Grants (DIIG) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363242"/>
-    <id>urn:funding-finder:grants-gov:363242</id>
-    <updated>2026-09-15T00:00:00Z</updated>
-    <author><name>69A345 Office of the Under Secretary for Policy</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
-  </entry>
-  <entry>
-    <title>Teaching Health Center Graduate Medical Education (THCGME) Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363324"/>
-    <id>urn:funding-finder:grants-gov:363324</id>
-    <updated>2026-09-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2026-11-16 | The purpose of the THCGME Program is to prepare residents to provide high-quality care, particularly in rural and medically underserved communities, while developing the competencies they need to serve a wide range of populations and communities. The THCGME does this by providing funding to support the training of residents in HRSA-supported primary care residency training programs in community-ba…</summary>
   </entry>
 </feed>

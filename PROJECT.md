@@ -42,18 +42,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, or persistent user-managed opportunity files. Team Match publishes one reviewed, read-only Hajim faculty directory; user-added researcher profiles remain device-local. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
-
-### 2.1.1 Reviewed faculty selection, not a faculty-opportunity graph
-
-Team Match lazy-loads a compact faculty directory generated deterministically
-from a hash-pinned reviewed workbook. The browser never loads the workbook or a
-precomputed all-faculty/all-opportunity graph. Search may use names, home units,
-and reviewed evidence terminology, but only primary-anchor mappings enter the
-existing on-demand Team Match matcher. Context-only mappings remain
-non-admitting. Existing curated Chemical & Sustainability Engineering profiles
-remain the matching authority when directory and curated identities coincide;
-external researchers and optional ORCID publication data remain browser-local.
+There are no public accounts, installations, private faculty accounts, or persistent user-managed opportunity files. A canonical, source-traceable researcher registry generates the public directory used by Team Match and the staged ten-scope opportunity-to-team pilot. Configure Faculty Interests and an unchecked-by-default Team Match option can send a bounded correction or nomination to a private, Access-protected administrator queue; no submission changes the public registry without review, a registry-only pull request, protected checks, deployment, and live verification. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 
@@ -87,12 +76,12 @@ verified. Degradation exits visibly and opens or updates an owner-facing GitHub
 issue. UR InfoReady is a disabled shell pending a stable permissioned route.
 
 <!-- catalog-summary:start -->
-The August 28, 2026 build contains 1,430 open or current forecasted funding
-opportunities (1,115 posted and 315 forecasted) rather than the former 48-record
+The September 3, 2026 build contains 1,397 open or current forecasted funding
+opportunities (1,079 posted and 318 forecasted) rather than the former 48-record
 engineering shortlist. It contains no record with a deadline before the catalog date.
-Current published sources are ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,357),
-NASA ROSES (2), NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest
-(limited submissions & foundations) (22); additional sources are enabled only after a
+Current published sources are ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,324),
+NASA ROSES (3), NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest
+(limited submissions & foundations) (21); additional sources are enabled only after a
 sustainable public ingestion path and health bounds are verified.
 <!-- catalog-summary:end -->
 
@@ -616,18 +605,18 @@ presented as the FOA.
 ### Current evidence baseline
 
 <!-- catalog-evidence:start -->
-The August 28, 2026 catalog contains 1,430 current posted or forecasted opportunities:
+The September 3, 2026 catalog contains 1,397 current posted or forecasted opportunities:
 
-- 339 have a defensible direct announcement attachment (229 high confidence, 110 medium
+- 287 have a defensible direct announcement attachment (195 high confidence, 92 medium
   confidence);
-- another 615 use an official source page as their primary route;
-- the remaining 476 use the official Grants.gov record as their primary route;
-- 723 contain an agency notice URL across all route types;
-- 446 preserve an official deadline time or timezone;
-- 140 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
+- another 619 use an official source page as their primary route;
+- the remaining 491 use the official Grants.gov record as their primary route;
+- 720 contain an agency notice URL across all route types;
+- 419 preserve an official deadline time or timezone;
+- 132 carry a preliminary-stage signal, including 1 narrative dates visibly marked for
   verification;
-- 641 (44.8%) have an official per-award floor or ceiling;
-- 905 (63.3%) have at least one structured funding amount; and
+- 602 (43.1%) have an official per-award floor or ceiling;
+- 864 (61.8%) have at least one structured funding amount; and
 - zero have a past structured close date and zero have a detected XML/detail-API
   deadline conflict in this build.
 <!-- catalog-evidence:end -->
@@ -978,6 +967,14 @@ provider is the maintainable path if the pilot justifies personalized alerts.
   must not be silently merged or cited as though they came from one document.
 - The application remains usable on current mobile and desktop browsers.
 - Every added source has an identified maintenance strategy.
+- Opportunity-to-team proposals use only a specific parent, a currently
+  publication-eligible child, or an official declared branch. Broad parents
+  never receive an automatic team.
+- Every proposed person and required role retains inspectable source evidence;
+  adjacent or provisional replacement evidence cannot silently complete a
+  missing role.
+- Generated team membership never overrides current runtime catalog status,
+  dates, or child publication eligibility.
 
 ---
 
@@ -986,7 +983,9 @@ provider is the maintainable path if the pilot justifies personalized alerts.
 - a 48-record discipline-specific shortlist;
 - local storage as the funding database;
 - AI calls for every keyword search;
-- automated faculty scraping, unreviewed inferred faculty vocabulary, or a precomputed faculty-opportunity graph;
+- private faculty accounts or untraceable scraped faculty identities;
+- treating faculty-faculty similarity or team-permutation counts as proof of a
+  high-quality opportunity team;
 - user-managed JSON files;
 - a Python installation for end users;
 - scraping Duke, Pivot-RP, or other licensed databases;
