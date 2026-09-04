@@ -520,6 +520,8 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(deploymentWorkflow, /RESEARCHER_GITHUB_DISPATCH_TOKEN/);
   assert.doesNotMatch(deploymentWorkflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   assert.match(deploymentWorkflow, /GITHUB_PUBLICATION_TOKEN:null/);
+  assert.match(deploymentWorkflow, /pnpm\/action-setup@v6/);
+  assert.ok(deploymentWorkflow.indexOf("pnpm install --frozen-lockfile") < deploymentWorkflow.indexOf("node --test tests\/browser\/researcher-intake-worker-contract.test.mjs"));
   assert.match(workflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   const publicationGroup = workflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
   const refreshGroup = refreshWorkflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
