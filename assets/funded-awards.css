@@ -600,6 +600,15 @@
   }
 }
 
+.header-context-agencies {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header-context-separator {
+  margin: 0 6px;
+}
+
 @media (max-width: 540px) {
   .header-context-pill {
     box-sizing: border-box;
@@ -614,6 +623,30 @@
     text-align: center;
     text-overflow: clip;
     white-space: normal;
+  }
+
+  .header-context-agencies {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    min-width: 0;
+    column-gap: 3px;
+    row-gap: 1px;
+  }
+
+  .header-context-agency {
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .header-context-separator {
+    margin: 0;
+    text-align: center;
+  }
+
+  .header-context-row-break {
+    display: none;
   }
 
   .header-context-pill::before {

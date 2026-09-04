@@ -2,9 +2,9 @@
   "use strict";
 
   const STORAGE_KEY = "funding-finder.external-researchers.v1";
-  const HANDOFF_STORAGE_KEY = "funding-finder.team-match-handoff.v1";
-  const HANDOFF_TTL_MS = 2 * 60 * 60 * 1000;
-  const MAX_HANDOFF_BYTES = 8_192;
+  const HANDOFF_STORAGE_KEY = "funding-finder.team-handoff.v1";
+  const HANDOFF_TTL_MS = 15 * 60 * 1000;
+  const HANDOFF_TOKEN_PATTERN = /^[a-f0-9]{32}$/;
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
@@ -150,73 +150,139 @@
     }
   }
 
-  function createTeamHandoffToken(cryptoImpl = globalThis.crypto) {
+  function normalizeHandoffIdentities(value) {
+    if (!Array.isArray(value)) return [];
+    const output = [];
+    const used = new Set();
+    for (const raw of value) {
+      if (!raw || typeof raw !== "object" || output.length >= MAX_EXTERNAL - 1) break;
+      let identity = null;
+      if (raw.kind === "directory" && /^urh-[0-9]{6}$/.test(String(raw.id || ""))) {
+        identity = { kind: "directory", id: String(raw.id) };
+      } else if (raw.kind === "external" && /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(raw.id || ""))) {
+        identity = { kind: "external", id: String(raw.id) };
+      } else if (raw.kind === "faculty_name") {
+        const name = cleanText(raw.name, 80);
+        if (name) identity = { kind: "faculty_name", name };
+      }
+      const key = identity && `${identity.kind}:${identity.id || identity.name}`;
+      if (!identity || used.has(key)) continue;
+      used.add(key);
+      output.push(identity);
+    }
+    return output;
+  }
+
+  function normalizeHandoffToken(value) {
+    const token = String(value || "").trim().toLowerCase();
+    return HANDOFF_TOKEN_PATTERN.test(token) ? token : "";
+  }
+
+  function createHandoffToken() {
     try {
       const bytes = new Uint8Array(16);
-      cryptoImpl.getRandomValues(bytes);
-      return [...bytes].map(byte => byte.toString(16).padStart(2, "0")).join("");
+      globalThis.crypto.getRandomValues(bytes);
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
     } catch (_error) {
       return "";
     }
   }
 
-  function validTeamHandoffToken(value) {
-    return typeof value === "string" && /^[a-f0-9]{32}$/.test(value);
+  function normalizeHandoff(value, now = Date.now()) {
+    if (!value || typeof value !== "object") return null;
+    const createdAt = Number(value.created_at);
+    if (!Number.isFinite(createdAt) || createdAt > now + 60_000 || now - createdAt > HANDOFF_TTL_MS) return null;
+    const token = normalizeHandoffToken(value.token);
+    if (!token) return null;
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.added_external_id || ""))
+      ? String(value.added_external_id)
+      : "";
+    return {
+      selectedIdentities: normalizeHandoffIdentities(value.selected_identities),
+      addedExternalId,
+      createdAt,
+      token,
+    };
   }
 
-  function saveTeamHandoff(storage, teamState, token, now = Date.now()) {
-    if (!storage || !teamState || typeof teamState !== "object" || !validTeamHandoffToken(token)) return false;
-    const savedAt = Number(now);
-    if (!Number.isFinite(savedAt)) return false;
+  function loadHandoff(storage, expectedToken = "", now = Date.now()) {
     try {
-      const serialized = JSON.stringify({
-        schema_version: 2,
-        saved_at: savedAt,
+      if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
+      const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+      if (!raw) return { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
+      const handoff = normalizeHandoff(JSON.parse(raw), now);
+      if (!handoff) {
+        storage.removeItem(HANDOFF_STORAGE_KEY);
+        return { handoff: null, available: true, discarded: true, mismatched: false, error: "" };
+      }
+      if (requestedToken && handoff.token !== requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
+      return { handoff, available: true, discarded: false, mismatched: false, error: "" };
+    } catch (_error) {
+      return { handoff: null, available: false, discarded: false, mismatched: false, error: "The browser-only team handoff could not be read in this tab." };
+    }
+  }
+
+  function saveHandoff(storage, value = {}, now = Date.now()) {
+    const selectedIdentities = normalizeHandoffIdentities(value.selectedIdentities);
+    const requestedToken = String(value.token || "");
+    const token = requestedToken ? normalizeHandoffToken(requestedToken) : createHandoffToken();
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.addedExternalId || ""))
+      ? String(value.addedExternalId)
+      : "";
+    if (!token) return { handoff: null, saved: false, error: "The browser-only team handoff could not be secured in this tab." };
+    const handoff = { selectedIdentities, addedExternalId, createdAt: now, token };
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      storage.setItem(HANDOFF_STORAGE_KEY, JSON.stringify({
+        selected_identities: selectedIdentities,
+        added_external_id: addedExternalId,
+        created_at: now,
         token,
-        team_state: teamState,
-      });
-      if (serialized.length > MAX_HANDOFF_BYTES) return false;
-      storage.setItem(HANDOFF_STORAGE_KEY, serialized);
+      }));
+      return { handoff, saved: true, error: "" };
+    } catch (_error) {
+      return { handoff, saved: false, error: "The browser-only team handoff could not be saved in this tab." };
+    }
+  }
+
+  function completeHandoff(storage, addedExternalId, expectedToken = "", now = Date.now()) {
+    let loaded = { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
+    if (expectedToken) {
+      loaded = loadHandoff(storage, expectedToken, now);
+      if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
+      if (loaded.discarded || loaded.mismatched || !loaded.handoff) {
+        return { handoff: null, saved: false, error: "The browser-only team handoff is unavailable, expired, or belongs to another navigation." };
+      }
+    } else if (!clearHandoff(storage)) {
+      return { handoff: null, saved: false, error: "The browser-only team handoff could not be reset in this tab." };
+    }
+    return saveHandoff(storage, {
+      selectedIdentities: loaded.handoff ? loaded.handoff.selectedIdentities : [],
+      addedExternalId,
+      token: loaded.handoff ? loaded.handoff.token : "",
+    }, now);
+  }
+
+  function clearHandoff(storage, expectedToken = "") {
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) return false;
+      if (requestedToken) {
+        const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+        if (!raw) return true;
+        if (normalizeHandoffToken(JSON.parse(raw).token) !== requestedToken) return false;
+      }
+      storage.removeItem(HANDOFF_STORAGE_KEY);
       return true;
     } catch (_error) {
       return false;
-    }
-  }
-
-  function consumeTeamHandoff(storage, token, now = Date.now()) {
-    if (!storage || !validTeamHandoffToken(token)) return null;
-    let serialized = "";
-    try {
-      serialized = String(storage.getItem(HANDOFF_STORAGE_KEY) || "");
-    } catch (_error) {
-      return null;
-    }
-    if (!serialized) return null;
-    if (serialized.length > MAX_HANDOFF_BYTES) {
-      try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_error) {}
-      return null;
-    }
-    try {
-      const payload = JSON.parse(serialized);
-      const age = Number(now) - Number(payload.saved_at);
-      if (
-        payload.schema_version !== 2
-        || !validTeamHandoffToken(payload.token)
-        || !payload.team_state
-        || typeof payload.team_state !== "object"
-        || !Number.isFinite(age)
-        || age < 0
-        || age > HANDOFF_TTL_MS
-      ) {
-        try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_error) {}
-        return null;
-      }
-      if (payload.token !== token) return null;
-      storage.removeItem(HANDOFF_STORAGE_KEY);
-      return payload.team_state;
-    } catch (_error) {
-      try { storage.removeItem(HANDOFF_STORAGE_KEY); } catch (_storageError) {}
-      return null;
     }
   }
 
@@ -583,9 +649,10 @@
     normalizeProfiles,
     load,
     save,
-    createTeamHandoffToken,
-    saveTeamHandoff,
-    consumeTeamHandoff,
+    loadHandoff,
+    saveHandoff,
+    completeHandoff,
+    clearHandoff,
     inferDomains,
     buildMatches,
     intersectMemberMatches,

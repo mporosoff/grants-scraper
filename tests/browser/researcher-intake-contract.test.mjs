@@ -48,7 +48,7 @@ test("Configure Faculty Interests discloses separate reviewed and browser-only p
   assert.match(page, /assets\/orcid\.js/);
   assert.match(page, /assets\/team-researchers\.js/);
   assert.match(page, /assets\/researcher-intake\.js/);
-  assert.match(team, /faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(team, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match&handoff=" \+ encodeURIComponent\(result\.handoff\.token\)\)/);
   assert.match(team, /id="remove-saved-researcher"/);
   assert.doesNotMatch(team, /external-researcher-form|assets\/researcher-intake\.js/);
   assert.doesNotMatch(team, /funding-finder-researchers\.urochestercheme\.workers\.dev/);
@@ -73,8 +73,10 @@ test("mode-specific drafts persist until a successful action", () => {
   const failedSubmit = submitSource.slice(submitSource.lastIndexOf("    } catch (error) {"), submitSource.indexOf("    } finally"));
   assert.doesNotMatch(failedSubmit, /resetActiveDraft/);
   assert.match(pageScript, /TEAM_API|teamApi\.save/);
-  assert.match(pageScript, /function teamHandoffToken\(\)[\s\S]*?new URLSearchParams\(location\.search\)\.get\("team_handoff"\)[\s\S]*?\^\[a-f0-9\]\{32\}\$/);
-  assert.match(pageScript, /new URL\("\.\/team_match\.html", location\.href\)[\s\S]*?searchParams\.set\("local", savedId\)[\s\S]*?searchParams\.set\("team_handoff", handoffToken\)/);
+  assert.match(pageScript, /var expectedHandoffToken = returnParams\.get\("handoff"\) \|\| ""/);
+  assert.match(pageScript, /teamApi\.completeHandoff\(safeHandoffStorage\(\), savedId, expectedHandoffToken\)/);
+  assert.match(pageScript, /location\.assign\("\.\/team_match\.html\?handoff=" \+ encodeURIComponent\(handoff\.handoff\.token\)\)/);
+  assert.doesNotMatch(pageScript, /new URLSearchParams\(\{ local: savedId \}\)|returnParams\.set|[?&]locals?=/);
 });
 
 test("the shared browser builder emits only consented allowlisted fields", () => {
