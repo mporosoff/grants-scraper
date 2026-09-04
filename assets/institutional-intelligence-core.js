@@ -155,6 +155,15 @@
     const agency = clean(state?.agency, 10).toUpperCase();
     const mode = clean(state?.mode, 40);
     const poSource = clean(state?.program_officer_source || agency, 10).toUpperCase();
+    const rawYearStart = state?.year_start;
+    const rawYearEnd = state?.year_end;
+    const hasYearStart = rawYearStart !== undefined && rawYearStart !== null && String(rawYearStart).trim() !== "";
+    const hasYearEnd = rawYearEnd !== undefined && rawYearEnd !== null && String(rawYearEnd).trim() !== "";
+    const yearStart = validYear(rawYearStart);
+    const yearEnd = validYear(rawYearEnd);
+    if ((hasYearStart && !yearStart) || (hasYearEnd && !yearEnd)) {
+      throw new Error("Enter years from 1989 through 2100.");
+    }
     if (mode === "program_officer") {
       const displayName = clean(state?.program_officer_display_name || state?.program_officer, 300);
       const contactKey = clean(state?.program_contact_key, 300);
@@ -169,8 +178,6 @@
         program_contact_key: contactKey,
         year_preset: yearPreset,
       };
-      const yearStart = validYear(state?.year_start);
-      const yearEnd = validYear(state?.year_end);
       if (yearPreset === "recent5" && (yearStart || yearEnd)) {
         if (!yearStart || !yearEnd || yearEnd - yearStart !== 4) throw new Error("Recent 5 years must include five consecutive source award years.");
         criteria.year_start = yearStart;
@@ -204,8 +211,6 @@
     if (agency === "DOD" && programOfficer) {
       throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
     }
-    const yearStart = validYear(state?.year_start);
-    const yearEnd = validYear(state?.year_end);
     if (topic) criteria.topic = topic;
     if (pi) criteria.pi = pi;
     if (programOfficer) criteria.program_officer = programOfficer;

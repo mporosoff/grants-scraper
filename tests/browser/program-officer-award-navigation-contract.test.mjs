@@ -185,6 +185,15 @@ test("Program Officer request, URL, and immutable recent-five-year restoration p
   };
   assert.equal(core.buildAwardRequest({ ...customRange, year_end: 2038 }).criteria.year_end, 2038, "a 50-year custom range remains valid");
   assert.throws(() => core.buildAwardRequest({ ...customRange, year_end: 2039 }), /50 years or fewer/);
+  assert.deepEqual(plain(core.buildAwardRequest({ ...customRange, year_start: "", year_end: 2020 }).criteria), {
+    mode: "program_officer",
+    program_officer: "Doe, Jane A., Jr.",
+    program_contact_key: key,
+    year_preset: "custom",
+    year_end: 2020,
+  }, "one valid custom endpoint remains an intentional open range");
+  assert.throws(() => core.buildAwardRequest({ ...customRange, year_start: 1988, year_end: 2020 }), /1989 through 2100/);
+  assert.throws(() => core.buildAwardRequest({ ...customRange, year_start: 2020, year_end: 2101 }), /1989 through 2100/);
   assert.equal(validateSnapshotCreate({
     sources: ["DOD"],
     criteria: {
