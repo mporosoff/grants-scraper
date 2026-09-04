@@ -261,6 +261,16 @@ const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
 ]);
 const PROGRAM_OFFICER_SOURCES = new Set(["NSF", "NIH", "DOE"]);
 const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
+const PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS = new Map([
+  ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["c", new Set(["language", "programming"])],
+  ["k", new Set(["means"])],
+  ["p", new Set(["value", "values"])],
+  ["q", new Set(["learning"])],
+  ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+  ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["x", new Set(["ray", "rays"])],
+]);
 
 function validProgramOfficerYear(value) {
   return value === null || (Number.isInteger(value) && value >= 1989 && value <= 2100);
@@ -301,9 +311,10 @@ function validProgramOfficerPlanTerms(value, maximum) {
   for (const term of value) {
     if (!boundedText(term, 120, { empty: false }) || /[\r\n\t]/u.test(term)) return false;
     const tokens = programOfficerTokens(term);
-    if (!tokens.length || tokens.some(token => (
+    if (!tokens.length || tokens.some((token, index) => (
       token.length < 3
       && !PROGRAM_OFFICER_SHORT_CONCEPTS.has(token)
+      && !(token.length === 1 && PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS.get(token)?.has(tokens[index + 1]))
       && !(/\p{L}/u.test(token) && /\p{N}/u.test(token))
     ))) return false;
     const key = tokens.join(" ");

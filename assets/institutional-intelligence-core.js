@@ -653,7 +653,11 @@
       const titles = (Array.isArray(safeAggregate.ordered_refs) ? safeAggregate.ordered_refs : safeAggregate.awards || [])
         .slice(0, 8)
         .map(award => clean(award?.title, 180) || clean(award?.evidence_id, 120) || `${award.source} ${award.award_id}`);
-      answer = titles.length ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.` : "No matching awards are in these results.";
+      answer = titles.length
+        ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results: ${titles.join("; ")}.`
+        : safeAggregate.project_count > 0
+          ? `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} in these results; award titles are unavailable in this view.`
+          : "No matching awards are in these results.";
     } else {
       answer = `${safeAggregate.project_count} matching award${safeAggregate.project_count === 1 ? " is" : "s are"} available for this answer.`;
     }
@@ -703,6 +707,16 @@
     "count", "investigators", "institutions", "programs", "years", "awards",
   ]);
   const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
+  const PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS = new Map([
+    ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+    ["c", new Set(["language", "programming"])],
+    ["k", new Set(["means"])],
+    ["p", new Set(["value", "values"])],
+    ["q", new Set(["learning"])],
+    ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+    ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+    ["x", new Set(["ray", "rays"])],
+  ]);
 
   function programOfficerPlanTokens(value) {
     return clean(value, 120)
@@ -712,9 +726,10 @@
       .match(/[\p{L}\p{N}]+/gu) || [];
   }
 
-  function admissibleProgramOfficerPlanToken(token) {
+  function admissibleProgramOfficerPlanToken(token, tokens, index) {
     if (token.length >= 3) return true;
     if (PROGRAM_OFFICER_SHORT_CONCEPTS.has(token)) return true;
+    if (token.length === 1 && PROGRAM_OFFICER_CONTEXTUAL_SINGLE_CONCEPTS.get(token)?.has(tokens[index + 1])) return true;
     return /\p{L}/u.test(token) && /\p{N}/u.test(token);
   }
 
@@ -730,7 +745,7 @@
         if (typeof candidate !== "string" || candidate.length > 120 || /[\r\n\t]/u.test(candidate)) return null;
         const term = clean(candidate, 120);
         const tokens = programOfficerPlanTokens(term);
-        if (!term || !tokens.length || tokens.some(token => !admissibleProgramOfficerPlanToken(token))) return null;
+        if (!term || !tokens.length || tokens.some((token, index) => !admissibleProgramOfficerPlanToken(token, tokens, index))) return null;
         const key = tokens.join(" ");
         if (!seen.has(key)) {
           seen.add(key);

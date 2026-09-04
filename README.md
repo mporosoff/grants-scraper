@@ -158,7 +158,9 @@ years. Exact same-source post-validation removes partial-name results before
 totals or evidence. Deterministic portfolio browsing and aggregate facts need no
 AI. For an explicit Program Officer question, the selected hosted or user-connected
 provider supplies only a bounded answer intent, concept, phrase, and exclusion
-plan; the Worker then applies deterministic
+plan. Meaningful one-letter scientific terms remain paired with a bounded
+qualifier such as T cells, X-rays, or R language; bare one-letter terms are
+rejected. The Worker then applies deterministic
 full-snapshot retrieval capped at 24 public records, 800 abstract characters per
 record, and 18,000 serialized evidence characters before the provider receives
 that bounded evidence for a cited answer. The model never owns membership,

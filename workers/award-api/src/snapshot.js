@@ -7,11 +7,21 @@ export const SNAPSHOT_EVIDENCE_LIMIT = 24;
 export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT = 20_000;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
-export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v3";
+export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v4";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
 export const SNAPSHOT_EVIDENCE_PLAN_FORMAT = "provider-concepts-v1";
 const EN_COLLATOR = new Intl.Collator("en-US");
 const SHORT_RETRIEVAL_CONCEPTS = new Set(["ai", "ml", "ph"]);
+const CONTEXTUAL_SINGLE_RETRIEVAL_CONCEPTS = new Map([
+  ["b", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["c", new Set(["language", "programming"])],
+  ["k", new Set(["means"])],
+  ["p", new Set(["value", "values"])],
+  ["q", new Set(["learning"])],
+  ["r", new Set(["computing", "language", "package", "packages", "programming", "software"])],
+  ["t", new Set(["cell", "cells", "lymphocyte", "lymphocytes"])],
+  ["x", new Set(["ray", "rays"])],
+]);
 const PROGRAM_OFFICER_ANSWER_INTENTS = new Set([
   "count", "investigators", "institutions", "programs", "years", "awards",
 ]);
@@ -737,9 +747,10 @@ function normalizedRetrievalTokens(value, maximum = 4_000) {
     .map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token);
 }
 
-function admissibleRetrievalToken(token) {
+function admissibleRetrievalToken(token, tokens, index) {
   if (token.length >= 3) return true;
   if (SHORT_RETRIEVAL_CONCEPTS.has(token)) return true;
+  if (token.length === 1 && CONTEXTUAL_SINGLE_RETRIEVAL_CONCEPTS.get(token)?.has(tokens[index + 1])) return true;
   return /\p{L}/u.test(token) && /\p{N}/u.test(token);
 }
 
@@ -751,7 +762,7 @@ function normalizedPlanTerms(values, { minimum, maximum }) {
     if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
     const text = clean(value, 120);
     const tokens = normalizedRetrievalTokens(text, 120);
-    if (!text || !tokens.length || tokens.some(token => !admissibleRetrievalToken(token))) return null;
+    if (!text || !tokens.length || tokens.some((token, index) => !admissibleRetrievalToken(token, tokens, index))) return null;
     const key = tokens.join(" ");
     if (seen.has(key)) continue;
     seen.add(key);
@@ -807,7 +818,8 @@ function scoreEvidenceAward(award, phrases, requiredConcepts, exclusions) {
     institution: { token: 3, phrase: 5 },
   };
   const fieldEntries = Object.entries(fields).map(([field, value]) => {
-    const ordered = normalizedRetrievalTokens(value, fieldLimits[field]).filter(admissibleRetrievalToken);
+    const tokens = normalizedRetrievalTokens(value, fieldLimits[field]);
+    const ordered = tokens.filter((token, index) => admissibleRetrievalToken(token, tokens, index));
     return [field, { ordered, tokens: new Set(ordered) }];
   });
   const awardConcepts = new Set(fieldEntries.flatMap(([, entry]) => [...entry.tokens]));

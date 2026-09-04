@@ -373,6 +373,21 @@ test("Program Officer gateway inputs preserve locked source scope and dual-axis 
   ambiguousSymbol.deterministic_retrieval_plan.phrases = ["As toxicity"];
   assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(ambiguousSymbol)), null);
 
+  for (const concept of ["T cells", "B lymphocytes", "X-rays", "R language", "C programming", "Q-learning", "k-means", "p-values"]) {
+    const contextualSingle = structuredClone(evidence);
+    contextualSingle.deterministic_retrieval_plan.concepts = [concept];
+    contextualSingle.deterministic_retrieval_plan.phrases = [concept];
+    assert.deepEqual(
+      validateOperationUser("program_officer_evidence_answer", JSON.stringify(contextualSingle)),
+      contextualSingle,
+      `${concept} must survive the gateway's exact retrieval-plan policy`,
+    );
+  }
+  const bareSingle = structuredClone(evidence);
+  bareSingle.deterministic_retrieval_plan.concepts = ["T"];
+  bareSingle.deterministic_retrieval_plan.phrases = ["T"];
+  assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(bareSingle)), null);
+
   const wrongFacet = structuredClone(evidence);
   wrongFacet.public_award_evidence[0].matched_fields = ["contact"];
   assert.equal(validateOperationUser("program_officer_evidence_answer", JSON.stringify(wrongFacet)), null);

@@ -139,12 +139,15 @@ changing membership, returns at most 800 abstract characters per record and
 matches outweigh abstract matches; program/office fields are supporting
 signals, and investigator/institution fields are weak signals. The endpoint
 uses the existing origin, body-size, expiration, and Durable Object abuse-control
-contracts. Its tokenizer is deliberately conservative: alphanumeric formulas
-such as `CO2`, `H2`, and `As2O3` and the short allowlist `AI`, `ML`, and `pH` are
-accepted; ambiguous alphabetic two-letter tokens such as `Am`, `As`, `At`, `Be`,
-`He`, and `In` are rejected, so the provider must return full names. No
-capitalization, punctuation, bracket, neighbor, or notation inference is used.
-It creates no corpus or database.
+contracts. The `provider-concepts-v1` plan and `program-officer-evidence-v4`
+scoring contracts keep one-letter scientific concepts only when the same term
+pairs them with a bounded qualifying word, including T/B cells, X-rays, R/C
+language, Q-learning, k-means, and p-values. A bare one-letter term remains
+invalid. Alphanumeric formulas such as `CO2`, `H2`, and `As2O3` and the short
+allowlist `AI`, `ML`, and `pH` are accepted; ambiguous alphabetic two-letter
+tokens such as `Am`, `As`, `At`, `Be`, `He`, and `In` are rejected, so the
+provider must return full names. No capitalization, punctuation, bracket, or
+neighbor confers chemical meaning. It creates no corpus or database.
 
 ## Cache and credentials
 

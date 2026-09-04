@@ -129,7 +129,7 @@ if (investigator?.identity_key && !facetVerified) {
 const programOfficerEvidenceContract = contract.program_officer_evidence;
 if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
   || programOfficerEvidenceContract.plan_format !== "provider-concepts-v1"
-  || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v3"
+  || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v4"
   || programOfficerEvidenceContract.concept_coverage !== "all_provider_concepts_same_record"
   || programOfficerEvidenceContract.maximum_concepts !== 16
   || programOfficerEvidenceContract.maximum_phrases !== 8

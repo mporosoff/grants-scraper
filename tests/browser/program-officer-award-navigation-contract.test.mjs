@@ -296,6 +296,14 @@ test("provider concepts gate admission, phrases rank, exclusions filter, and sho
     award(206, { title: "ML control of CO2", abstract: "pH monitoring and carbon conversion." }),
     award(207, { title: "Arsenic toxicity", abstract: "As2O3 exposure mechanisms." }),
     award(208, { title: "Toxicity as a concern", abstract: "General exposure mechanisms." }),
+    award(209, { title: "T cells for immunotherapy", abstract: "Adaptive immune response." }),
+    award(210, { title: "B lymphocytes in vaccine response", abstract: "Humoral immunity." }),
+    award(211, { title: "X-rays for materials imaging", abstract: "Coherent diffraction." }),
+    award(212, { title: "R language methods", abstract: "Statistical computing." }),
+    award(213, { title: "C programming for scientific software", abstract: "Numerical methods." }),
+    award(214, { title: "Q-learning for robotic control", abstract: "Reinforcement learning." }),
+    award(215, { title: "k-means for materials discovery", abstract: "Clustering methods." }),
+    award(216, { title: "p-values in clinical trials", abstract: "Statistical inference." }),
   ]);
   assert.deepEqual(snapshotEvidence(scientific, { plan: retrievalPlan(["AI", "H2"], { phrases: ["AI safety H2"] }), limit: 24 }).awards.map(item => item.award_id), ["NSF-205"]);
   assert.deepEqual(snapshotEvidence(scientific, { plan: retrievalPlan(["ML", "CO2", "pH"], { phrases: ["ML CO2 pH"] }), limit: 24 }).awards.map(item => item.award_id), ["NSF-206"]);
@@ -303,6 +311,22 @@ test("provider concepts gate admission, phrases rank, exclusions filter, and sho
   for (const symbol of ["Am", "As", "At", "Be", "He", "In"]) {
     assert.equal(snapshotEvidence(scientific, { plan: retrievalPlan([symbol, "toxicity"]), limit: 24 }), null, `${symbol} must be rejected without chemical inference`);
   }
+  for (const [concept, awardId] of [
+    ["T cells", "NSF-209"],
+    ["B lymphocytes", "NSF-210"],
+    ["X-rays", "NSF-211"],
+    ["R language", "NSF-212"],
+    ["C programming", "NSF-213"],
+    ["Q-learning", "NSF-214"],
+    ["k-means", "NSF-215"],
+    ["p-values", "NSF-216"],
+  ]) {
+    const contextualPlan = retrievalPlan([concept]);
+    assert.deepEqual(snapshotEvidence(scientific, { plan: contextualPlan, limit: 24 }).awards.map(item => item.award_id), [awardId]);
+    assert.deepEqual(plain(core.validateProgramOfficerQuestionPlan(contextualPlan)), contextualPlan);
+  }
+  assert.equal(snapshotEvidence(scientific, { plan: retrievalPlan(["T"]), limit: 24 }), null, "a one-letter concept without its scientific qualifier is rejected");
+  assert.equal(core.validateProgramOfficerQuestionPlan(retrievalPlan(["A study"])), null, "ordinary one-letter grammar cannot become a retrieval concept");
 
   const longAbstract = `${"background context ".repeat(260)}terminalconcept evidence`;
   assert.ok(longAbstract.indexOf("terminalconcept") > 4_000 && longAbstract.length < SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT);
@@ -379,6 +403,17 @@ test("snapshot-native institutions, coverage, abstract facts, and absence langua
   const institution = complete.base_aggregate.institutions.find(item => item.name === "Alpha University");
   const page = snapshotPage(complete, { page: 1, pageSize: 10, facet: { type: "institution", key: institution.key } });
   assert.equal(page.aggregate.project_count, institution.projects);
+  assert.deepEqual(page.base_aggregate.ordered_refs, [], "facet payloads stay bounded instead of duplicating full award references");
+  const renderPageSource = appSource.slice(appSource.indexOf("function baseAggregateForPage"), appSource.indexOf("async function fetchPage"));
+  assert.match(renderPageSource, /ordered_refs: Array\.isArray\(previous\?\.ordered_refs\) \? previous\.ordered_refs : \[\]/);
+  assert.match(renderPageSource, /state\.baseAggregate = baseAggregateForPage\(payload, state\.baseAggregate\)/);
+  const countOnlyAnswer = plain(core.deterministicInstitutionAnswer({
+    question: "Which awards are in this snapshot?",
+    intent: "awards",
+    aggregate: { ...complete.base_aggregate, ordered_refs: [] },
+    sources: complete.sources,
+  }));
+  assert.equal(countOnlyAnswer.answer, "30 matching awards are in these results; award titles are unavailable in this view.");
   const legacyCached = structuredClone(complete);
   delete legacyCached.base_aggregate.institutions;
   assert.deepEqual(snapshotPage(legacyCached, { page: 1, pageSize: 10 }).aggregate.institutions, [], "pre-deploy cached snapshots remain readable during rollout");
@@ -542,7 +577,7 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.doesNotMatch(coreSource, /programOfficerRetrievalPhrases|caseSensitiveScientificSymbols|explicit_notation/);
   assert.match(appSource, /records_scanned/);
   assert.doesNotMatch(appSource.slice(appSource.indexOf("function programOfficerEvidence"), appSource.indexOf("function refreshProgramOfficerQuestionAnswer")), /residentAwards/);
-  assert.match(deploySource, /program-officer-evidence-v3/);
+  assert.match(deploySource, /program-officer-evidence-v4/);
   assert.match(deploySource, /provider-concepts-v1/);
   assert.match(deploySource, /all_provider_concepts_same_record/);
   assert.match(deploySource, /matched_facet_limit/);

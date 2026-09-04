@@ -206,7 +206,7 @@ jobs:
               && test "$(jq -r '.complete_result_snapshots.cache_scope // empty' <<<"$health" 2>/dev/null)" = "cloudflare-datacenter" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.endpoint // empty' <<<"$health" 2>/dev/null)" = "/awards/snapshots/evidence" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.plan_format // empty' <<<"$health" 2>/dev/null)" = "provider-concepts-v1" \
-              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.scoring_version // empty' <<<"$health" 2>/dev/null)" = "program-officer-evidence-v3" \
+              && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.scoring_version // empty' <<<"$health" 2>/dev/null)" = "program-officer-evidence-v4" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.concept_coverage // empty' <<<"$health" 2>/dev/null)" = "all_provider_concepts_same_record" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_concepts // empty' <<<"$health" 2>/dev/null)" = "16" \
               && test "$(jq -r '.complete_result_snapshots.program_officer_evidence.maximum_phrases // empty' <<<"$health" 2>/dev/null)" = "8" \
