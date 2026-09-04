@@ -20,6 +20,7 @@ export const DOD_MAX_UPSTREAM_PAGES = 12;
 export const DOD_DETAIL_CONCURRENCY = 3;
 export const DOD_SEARCH_REQUEST_TIMEOUT_MS = 20_000;
 export const DOD_OPERATION_BUDGET_MS = 100_000;
+export const DOD_DETAIL_CACHE_TIMEOUT_MS = 2_000;
 
 const DOD_AGENCY_NAME = "Department of Defense";
 const DOD_AWARD_TYPE_CODES = Object.freeze(["04", "05"]);
@@ -295,20 +296,36 @@ function boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout) 
   return Math.min(maximumTimeout, remaining);
 }
 
+async function withinOperationBudget(operation, monotonicNow, operationDeadline, maximumTimeout) {
+  const timeoutMs = boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout);
+  let timer;
+  try {
+    return await Promise.race([
+      Promise.resolve().then(operation),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new AwardSourceError("source_timeout")), timeoutMs);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function readDetail(fetchImpl, generatedId, {
   cache,
   cacheTtl,
+  detailCacheTimeoutMs,
   monotonicNow,
   operationDeadline,
 }) {
   const key = detailCacheRequest(generatedId);
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) {
-        const payload = await cached.json();
-        if (cleanText(payload?.generated_unique_award_id, 300) === generatedId) return { payload, cache: "hit" };
-      }
+      const payload = await withinOperationBudget(async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      }, monotonicNow, operationDeadline, detailCacheTimeoutMs);
+      if (cleanText(payload?.generated_unique_award_id, 300) === generatedId) return { payload, cache: "hit" };
     } catch {
       // A detail-cache outage must not discard the base USAspending award.
     }
@@ -322,12 +339,17 @@ async function readDetail(fetchImpl, generatedId, {
   if (cleanText(payload?.generated_unique_award_id, 300) !== generatedId) sourceInvalid();
   if (cache) {
     try {
-      await cache.put(key, new Response(JSON.stringify(payload), {
-        headers: {
-          "Cache-Control": `public, max-age=${cacheTtl}`,
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      }));
+      await withinOperationBudget(
+        () => cache.put(key, new Response(JSON.stringify(payload), {
+          headers: {
+            "Cache-Control": `public, max-age=${cacheTtl}`,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })),
+        monotonicNow,
+        operationDeadline,
+        detailCacheTimeoutMs,
+      );
     } catch {
       // Successful live detail data remains usable if cache storage fails.
     }
@@ -510,6 +532,7 @@ export async function searchDod(fetchImpl, criteria, {
   cache = null,
   cacheTtl = 3_600,
   searchRequestTimeoutMs = DOD_SEARCH_REQUEST_TIMEOUT_MS,
+  detailCacheTimeoutMs = DOD_DETAIL_CACHE_TIMEOUT_MS,
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
   const operationDeadline = monotonicNow() + DOD_OPERATION_BUDGET_MS;
@@ -593,6 +616,7 @@ export async function searchDod(fetchImpl, criteria, {
   const enrichment = await enrichDetails(fetchImpl, selected, {
     cache,
     cacheTtl,
+    detailCacheTimeoutMs,
     monotonicNow,
     operationDeadline,
   });

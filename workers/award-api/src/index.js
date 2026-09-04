@@ -6,6 +6,7 @@ import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.
 import {
   DOD_ADAPTER_VERSION,
   DOD_CAPABILITIES,
+  DOD_DETAIL_CACHE_TIMEOUT_MS,
   DOD_DETAIL_CONCURRENCY,
   DOD_MAX_RESULTS,
   DOD_MAX_UPSTREAM_PAGES,
@@ -691,6 +692,7 @@ export function createHandler({
             maximum_normalized_results: DOD_MAX_RESULTS,
             maximum_detail_requests: DOD_MAX_RESULTS,
             detail_concurrency: DOD_DETAIL_CONCURRENCY,
+            detail_cache_timeout_ms: DOD_DETAIL_CACHE_TIMEOUT_MS,
             operation_budget_ms: DOD_OPERATION_BUDGET_MS,
             snapshot_behavior: "bounded-first-normalized-page",
           },

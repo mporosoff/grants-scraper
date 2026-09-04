@@ -6,6 +6,7 @@ import vm from "node:vm";
 import {
   DOD_ADAPTER_VERSION,
   DOD_CAPABILITIES,
+  DOD_DETAIL_CACHE_TIMEOUT_MS,
   DOD_DETAIL_URL,
   DOD_MAX_UPSTREAM_PAGES,
   DOD_OPERATION_BUDGET_MS,
@@ -56,6 +57,7 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.equal(DOD_ADAPTER_VERSION, "1.0.0");
   assert.equal(DOD_SEARCH_REQUEST_TIMEOUT_MS, 20_000);
   assert.equal(DOD_OPERATION_BUDGET_MS, 100_000);
+  assert.equal(DOD_DETAIL_CACHE_TIMEOUT_MS, 2_000);
   assert.ok(DOD_OPERATION_BUDGET_MS < 120_000);
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const body = buildDodRequest({
@@ -179,6 +181,34 @@ test("DoD detail enrichment shares the operation budget and retains base awards"
   assert.equal(result.health.status, "degraded");
   assert.equal(result.health.detail_requests, 1);
   assert.equal(result.health.details_failed, 1);
+});
+
+test("DoD bounds slow detail-cache reads and writes without discarding live detail", async () => {
+  for (const slowOperation of ["match", "put"]) {
+    let delayedTimer = null;
+    const cache = {
+      match: slowOperation === "match"
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(() => resolve(null), 500); })
+        : async () => null,
+      put: slowOperation === "put"
+        ? () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); })
+        : async () => {},
+    };
+    const started = performance.now();
+    const result = await searchDod(fixtureFetch(), {}, {
+      limit: 1,
+      offset: 0,
+      now: fixedNow,
+      cache,
+      cacheTtl: 3_600,
+      detailCacheTimeoutMs: 5,
+    });
+    clearTimeout(delayedTimer);
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive its cache budget`);
+    assert.equal(result.results[0].opportunity_numbers[0], "NOFOAFRLAFOSR20250002");
+    assert.equal(result.health.status, "available");
+    assert.equal(result.health.details_loaded, 1);
+  }
 });
 
 test("DoD normalization preserves obligations, Assistance Listing, office, and official links", () => {
