@@ -544,8 +544,9 @@ test("touch-first editable controls keep a 16px floor without disabling page zoo
 test("snapshot question answers render investigator, program, and year lists as accessible tables", () => {
   assert.match(appSource, /function answerTable\(\{ label, headers, rows \}\)[\s\S]*class="ii-answer-table-wrap"[\s\S]*<table class="ii-answer-table">/);
   assert.match(appSource, /const investigators = Array\.isArray\(aggregate\.investigators\)/);
-  assert.match(appSource, /intent === "investigators"[\s\S]*label: "Investigators in the matching awards"[\s\S]*headers: \["Investigator", "Awards"\]/);
-  assert.match(appSource, /intent === "programs"[\s\S]*label: "Programs in the matching awards"[\s\S]*headers: \["Program", "Awards"\]/);
+  assert.match(appSource, /intent === "investigators"[\s\S]*label: boundedLabel\("Investigators in the matching awards", investigatorCount, investigators\.length\)[\s\S]*headers: \["Investigator", "Awards"\]/);
+  assert.match(appSource, /intent === "institutions"[\s\S]*label: boundedLabel\("Recipient institutions in the matching awards", institutionCount, institutions\.length\)[\s\S]*headers: \["Institution", "Awards"\]/);
+  assert.match(appSource, /intent === "programs"[\s\S]*label: boundedLabel\("Programs in the matching awards", programCount, programs\.length\)[\s\S]*headers: \["Program", "Awards"\]/);
   assert.match(appSource, /intent === "years"[\s\S]*label: "Award years in the matching awards"[\s\S]*headers: \["Year", "Awards"\]/);
   assert.match(appSource, /\$\("ii-direct-answer"\)\.innerHTML = renderDirectAnswer\(snapshot\)/);
   assert.match(styles, /\.ii-answer-table-wrap\s*\{/);

@@ -342,6 +342,20 @@ test("topic-qualified answer intents use structured metadata and retain investig
   }));
   assert.match(institutionAnswer.answer, /Matching recipient institutions: Beta Laboratory/);
   assert.doesNotMatch(institutionAnswer.answer, /Alpha University/);
+  const refreshSource = appSource.slice(
+    appSource.indexOf("async function refreshProgramOfficerQuestionAnswer"),
+    appSource.indexOf("async function refreshQuestionAnswer"),
+  );
+  assert.match(refreshSource, /const aggregateSource = topical \? evidencePack\.matched_aggregate : baseAggregate;/);
+  assert.match(refreshSource, /ordered_refs: topical \? \[\] :/);
+  const renderSource = appSource.slice(
+    appSource.indexOf("function renderDirectAnswer"),
+    appSource.indexOf("function renderQuestionAnswer"),
+  );
+  assert.match(renderSource, /aggregate\.investigator_count/);
+  assert.match(renderSource, /aggregate\.institution_count/);
+  assert.match(renderSource, /aggregate\.program_count/);
+  assert.match(renderSource, /Showing the.*most frequent below/);
 });
 
 test("provider plans cannot broaden locked snapshot membership or invent award identifiers", () => {

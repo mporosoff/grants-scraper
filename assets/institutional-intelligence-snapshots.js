@@ -1440,35 +1440,41 @@
     const institutions = Array.isArray(aggregate.institutions) ? aggregate.institutions : [];
     const programs = Array.isArray(aggregate.programs) ? aggregate.programs : [];
     const representedYears = Array.isArray(aggregate.represented_years) ? aggregate.represented_years : [];
+    const count = (value, fallback) => Number.isInteger(Number(value)) && Number(value) >= 0 ? Number(value) : fallback;
+    const projectCount = count(aggregate.project_count, 0);
+    const investigatorCount = count(aggregate.investigator_count, investigators.length);
+    const institutionCount = count(aggregate.institution_count, institutions.length);
+    const programCount = count(aggregate.program_count, programs.length);
+    const boundedLabel = (label, total, visible) => total > visible ? `${label} (showing ${visible} of ${total})` : label;
     const includesDod = (state.snapshot?.sources || []).some(source => source?.source === "DOD");
     let summary = snapshot.deterministic.answer;
     let structured = "";
     if (intent === "investigators") {
-      summary = investigators.length
-        ? `${investigators.length.toLocaleString()} listed investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+      summary = investigatorCount
+        ? `${investigatorCount.toLocaleString()} listed investigator${investigatorCount === 1 ? " appears" : "s appear"} in ${projectCount.toLocaleString()} matching award${projectCount === 1 ? "" : "s"}.${investigatorCount > investigators.length ? ` Showing the ${investigators.length.toLocaleString()} most frequent below.` : ""}`
         : includesDod
           ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards."
           : "No investigator names appear in these results.";
       structured = answerTable({
-        label: "Investigators in the matching awards",
+        label: boundedLabel("Investigators in the matching awards", investigatorCount, investigators.length),
         headers: ["Investigator", "Awards"],
         rows: investigators.map(person => `<tr><th scope="row">${escapeHtml(awardProduct.displayInvestigatorName(person.name))}</th><td>${Number(person.projects || 0).toLocaleString()}</td></tr>`),
       });
     } else if (intent === "institutions") {
-      summary = institutions.length
-        ? `${institutions.length.toLocaleString()} recipient institution${institutions.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+      summary = institutionCount
+        ? `${institutionCount.toLocaleString()} recipient institution${institutionCount === 1 ? " appears" : "s appear"} in ${projectCount.toLocaleString()} matching award${projectCount === 1 ? "" : "s"}.${institutionCount > institutions.length ? ` Showing the ${institutions.length.toLocaleString()} most frequent below.` : ""}`
         : "No recipient institution names appear in these results.";
       structured = answerTable({
-        label: "Recipient institutions in the matching awards",
+        label: boundedLabel("Recipient institutions in the matching awards", institutionCount, institutions.length),
         headers: ["Institution", "Awards"],
         rows: institutions.map(institution => `<tr><th scope="row">${escapeHtml(institution.name)}</th><td>${Number(institution.projects || 0).toLocaleString()}</td></tr>`),
       });
     } else if (intent === "programs") {
-      summary = programs.length
-        ? `${programs.length.toLocaleString()} program${programs.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+      summary = programCount
+        ? `${programCount.toLocaleString()} program${programCount === 1 ? " appears" : "s appear"} in ${projectCount.toLocaleString()} matching award${projectCount === 1 ? "" : "s"}.${programCount > programs.length ? ` Showing the ${programs.length.toLocaleString()} most frequent below.` : ""}`
         : "No program labels appear in these results.";
       structured = answerTable({
-        label: "Programs in the matching awards",
+        label: boundedLabel("Programs in the matching awards", programCount, programs.length),
         headers: ["Program", "Awards"],
         rows: programs.map(program => `<tr><th scope="row">${escapeHtml(program.label)}</th><td>${Number(program.projects || 0).toLocaleString()}</td></tr>`),
       });
@@ -1578,10 +1584,19 @@
       ? `AI interpretation · ${intent} within ${retrievalPlan.concepts.length} bounded concept${retrievalPlan.concepts.length === 1 ? "" : "s"} · deterministic full-snapshot retrieval`
       : `AI interpretation · ${intent} aggregate · deterministic full-snapshot facts`;
     $("ii-question-plan").classList.remove("hidden");
-    const aggregate = { ...(state.baseAggregate || state.aggregate), awards: [], ordered_refs: state.baseAggregate?.ordered_refs || state.pagePayload?.aggregate?.ordered_refs || [] };
+    const baseAggregate = state.baseAggregate || state.aggregate;
     const evidencePack = topical
       ? await programOfficerEvidence(questionState, retrievalPlan)
       : { awards: [], retrieval: null };
+    const aggregateSource = topical ? evidencePack.matched_aggregate : baseAggregate;
+    if (!aggregateSource || typeof aggregateSource !== "object" || Array.isArray(aggregateSource)) {
+      throw new Error("The deterministic Program Officer aggregate was unavailable.");
+    }
+    const aggregate = {
+      ...aggregateSource,
+      awards: [],
+      ordered_refs: topical ? [] : baseAggregate?.ordered_refs || state.pagePayload?.aggregate?.ordered_refs || [],
+    };
     const deterministic = core.deterministicProgramOfficerAnswer({
       question: questionState.question,
       intent,
