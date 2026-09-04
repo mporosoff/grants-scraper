@@ -160,7 +160,32 @@ function requestCursor(cursor) {
   return parsed;
 }
 
-export function buildDodRequest(criteria, { page = 1, cursor = null, now = () => new Date() } = {}) {
+function recipientSearchTerms(criteria) {
+  if (!criteria._institution || criteria.award_id) return [null];
+  const identity = criteria._institution.sources?.DOD || {};
+  const ueis = uniqueStrings(identity.uei || [])
+    .map(value => cleanText(value, 40))
+    .filter(Boolean)
+    .slice(0, 3);
+  if (ueis.length) return ueis;
+  const names = uniqueStrings([
+    identity.search_name,
+    identity.search_names,
+    criteria._institution.canonical_name,
+  ])
+    .map(value => cleanText(value, 300))
+    .filter(Boolean)
+    .slice(0, 3);
+  if (!names.length) unsupported();
+  return names;
+}
+
+export function buildDodRequest(criteria, {
+  page = 1,
+  cursor = null,
+  now = () => new Date(),
+  recipientSearch = null,
+} = {}) {
   if (
     criteria.core_project_number
     || criteria.opportunity_number
@@ -183,12 +208,10 @@ export function buildDodRequest(criteria, { page = 1, cursor = null, now = () =>
   if (criteria.award_id) filters.award_ids = [exactAwardId(criteria.award_id)];
   if (criteria.topic) filters.description = criteria.topic;
   if (criteria.program) filters.program_numbers = [criteria.program];
-  if (criteria._institution) {
-    const identity = criteria._institution.sources?.DOD || {};
-    const uei = (identity.uei || []).map(value => cleanText(value, 40)).find(Boolean);
-    const name = cleanText(identity.search_name || criteria._institution.canonical_name, 300);
-    if (!uei && !name) unsupported();
-    filters.recipient_search_text = [uei || name];
+  if (criteria._institution && !criteria.award_id) {
+    const search = cleanText(recipientSearch || recipientSearchTerms(criteria)[0], 300);
+    if (!search) unsupported();
+    filters.recipient_search_text = [search];
   }
   return {
     subawards: false,
@@ -366,40 +389,41 @@ export function normalizeDodAward(raw, { detail = null, retrievedAt, requestedPr
   const listings = detailListings(sourceDetail, requestedProgram);
   const primaryListing = listings[0] || {};
   const opportunityNumber = detailOpportunity(sourceDetail);
-  const generatedId = firstText(sourceDetail.generated_unique_award_id, raw.generated_id);
+  const generatedId = firstText(raw.generated_id, sourceDetail.generated_unique_award_id);
   const officialUrl = safeOfficialUrl(
     generatedId ? `https://${DOD_PROFILE_HOST}/award/${encodeURIComponent(generatedId)}/` : null,
     [DOD_PROFILE_HOST],
   );
-  const awardDate = isoDate(firstText(sourceDetail.date_signed, raw.base_obligation_date));
+  const awardDate = isoDate(firstText(raw.base_obligation_date, sourceDetail.date_signed));
   const awardYear = Number(awardDate?.slice(0, 4)) || null;
   const detailType = cleanText(sourceDetail.type, 20);
-  const mechanism = DOD_AWARD_TYPE_CODES.includes(detailType)
+  const detailMechanism = DOD_AWARD_TYPE_CODES.includes(detailType)
     ? (detailType === "04" ? "Project Grant" : "Cooperative Agreement")
-    : raw.award_type;
+    : null;
+  const obligation = finiteNumber(raw.total_obligation) ?? finiteNumber(sourceDetail.total_obligation);
   return awardRecord({
-    award_id: exactAwardId(firstText(sourceDetail.fain, raw.award_id)),
+    // The current search row owns every field used to form the paging sequence.
+    // Award detail is optional, cached enrichment and cannot invalidate that row.
+    award_id: exactAwardId(firstText(raw.award_id, sourceDetail.fain)),
     source_record_ids: uniqueStrings([raw.award_id, generatedId]),
     source: "DOD",
-    agency: agency.agency || raw.agency || DOD_AGENCY_NAME,
-    subagency: agency.subagency || raw.subagency,
+    agency: raw.agency || agency.agency || DOD_AGENCY_NAME,
+    subagency: raw.subagency || agency.subagency,
     program_name: primaryListing.title,
     program_codes: uniqueStrings(listings.map(listing => listing.code)),
     opportunity_numbers: uniqueStrings([opportunityNumber]),
     activity_code: null,
-    funding_mechanism: mechanism,
-    title: cleanSourceText(firstText(sourceDetail.description, raw.description), 20_000),
+    funding_mechanism: raw.award_type || detailMechanism,
+    title: cleanSourceText(firstText(raw.description, sourceDetail.description), 20_000),
     abstract: null,
     award_date: awardDate,
-    project_start: period.start || raw.project_start,
-    project_end: period.end || raw.project_end,
+    project_start: raw.project_start || period.start,
+    project_end: raw.project_end || period.end,
     award_year: awardYear,
-    total_award: finiteNumber(sourceDetail.total_obligation ?? raw.total_obligation),
-    award_amount_basis: finiteNumber(sourceDetail.total_obligation ?? raw.total_obligation) === null
-      ? null
-      : "total_obligation",
-    institution: normalizeInstitution(recipient.name || raw.recipient_name, {
-      uei: recipient.uei || raw.recipient_uei,
+    total_award: obligation,
+    award_amount_basis: obligation === null ? null : "total_obligation",
+    institution: normalizeInstitution(raw.recipient_name || recipient.name, {
+      uei: raw.recipient_uei || recipient.uei,
     }),
     organization_department: agency.office,
     principal_investigators: [],
@@ -449,6 +473,7 @@ function emptyPayload(retrievedAt, criteria) {
     raw_record_count: 0,
     upstream_total_count: 0,
     upstream_pages: 0,
+    upstream_queries: 0,
     safety_bound_reached: false,
     has_more: false,
     capabilities: DOD_CAPABILITIES,
@@ -471,70 +496,99 @@ export async function searchDod(fetchImpl, criteria, {
   const yearFilter = yearFilterDiagnostics(criteria);
   const targetCount = scanAll ? DOD_MAX_RESULTS : offset + limit + 1;
   const maximumPages = criteria.award_id ? 1 : DOD_MAX_UPSTREAM_PAGES;
-  const firstRequest = buildDodRequest(criteria, { page: 1, now });
+  const searchTerms = recipientSearchTerms(criteria);
+  const firstRequest = buildDodRequest(criteria, {
+    page: 1,
+    now,
+    recipientSearch: searchTerms[0],
+  });
   if (!firstRequest) return emptyPayload(retrievedAt, criteria);
 
-  const pages = [];
-  const seenCursors = new Set();
+  const queries = searchTerms.map((recipientSearch, index) => ({
+    recipientSearch,
+    page: 1,
+    cursor: null,
+    firstRequest: index === 0 ? firstRequest : null,
+    seenCursors: new Set(),
+    fetched: false,
+    exhausted: false,
+    total: null,
+  }));
   const seenAwards = new Set();
   const sourceScoped = [];
-  let cursor = null;
   let rawRecordCount = 0;
-  let upstreamTotal = null;
-  let upstreamExhausted = false;
-  for (let page = 1; page <= maximumPages; page += 1) {
-    const body = page === 1 ? firstRequest : buildDodRequest(criteria, { page, cursor, now });
-    const payload = await fetchSourceJson(fetchImpl, DOD_SEARCH_URL, {
-      method: "POST",
-      headers: REQUEST_HEADERS,
-      body: JSON.stringify(body),
-    });
-    const parsed = searchRecords(payload, page);
-    pages.push(parsed);
-    rawRecordCount += parsed.records.length;
-    if (upstreamTotal === null && parsed.total !== null) upstreamTotal = parsed.total;
-    const baseAwards = uniqueBaseAwards(parsed.records.map(baseRawAward).filter(Boolean));
-    for (const raw of baseAwards) {
-      const key = raw.generated_id || raw.award_id;
-      if (!key || seenAwards.has(key)) continue;
-      seenAwards.add(key);
-      const award = normalizeDodAward(raw, { retrievedAt });
-      if (criteria.award_id && award.award_id !== exactAwardId(criteria.award_id)) continue;
-      if (!recordSatisfiesYearFilter(award.award_year, criteria, yearFilter)) continue;
-      if (!recordMatchesInstitution(award, criteria._institution, "DOD")) continue;
-      sourceScoped.push(raw);
+  let upstreamPages = 0;
+  while (upstreamPages < maximumPages) {
+    let progressed = false;
+    for (const query of queries) {
+      if (query.exhausted || upstreamPages >= maximumPages) continue;
+      const body = query.firstRequest || buildDodRequest(criteria, {
+        page: query.page,
+        cursor: query.cursor,
+        now,
+        recipientSearch: query.recipientSearch,
+      });
+      query.firstRequest = null;
+      const payload = await fetchSourceJson(fetchImpl, DOD_SEARCH_URL, {
+        method: "POST",
+        headers: REQUEST_HEADERS,
+        body: JSON.stringify(body),
+      });
+      const parsed = searchRecords(payload, query.page);
+      progressed = true;
+      query.fetched = true;
+      upstreamPages += 1;
+      rawRecordCount += parsed.records.length;
+      if (query.total === null && parsed.total !== null) query.total = parsed.total;
+      const baseAwards = uniqueBaseAwards(parsed.records.map(baseRawAward).filter(Boolean));
+      for (const raw of baseAwards) {
+        const key = raw.generated_id || raw.award_id;
+        if (!key || seenAwards.has(key)) continue;
+        const award = normalizeDodAward(raw, { retrievedAt });
+        if (criteria.award_id && award.award_id !== exactAwardId(criteria.award_id)) continue;
+        if (!recordSatisfiesYearFilter(award.award_year, criteria, yearFilter)) continue;
+        if (!recordMatchesInstitution(award, criteria._institution, "DOD")) continue;
+        seenAwards.add(key);
+        sourceScoped.push(raw);
+      }
+      if (!parsed.hasNext || criteria.award_id) {
+        query.exhausted = true;
+        continue;
+      }
+      const cursorKey = `${parsed.cursor.last_record_sort_value}\u0000${parsed.cursor.last_record_unique_id}`;
+      if (query.seenCursors.has(cursorKey)) sourceInvalid();
+      query.seenCursors.add(cursorKey);
+      query.cursor = parsed.cursor;
+      query.page += 1;
     }
-    if (!parsed.hasNext) {
-      upstreamExhausted = true;
-      break;
-    }
-    const cursorKey = `${parsed.cursor.last_record_sort_value}\u0000${parsed.cursor.last_record_unique_id}`;
-    if (seenCursors.has(cursorKey)) sourceInvalid();
-    seenCursors.add(cursorKey);
-    cursor = parsed.cursor;
-    if (sourceScoped.length >= targetCount) break;
+    if (sourceScoped.length >= targetCount || !progressed || queries.every(query => query.exhausted)) break;
   }
 
   const selected = scanAll
     ? sourceScoped.slice(0, DOD_MAX_RESULTS)
     : sourceScoped.slice(offset, offset + limit);
   const enrichment = await enrichDetails(fetchImpl, selected, { cache, cacheTtl });
+  // Current search rows were already validated before slicing. Detail payloads
+  // enrich them but do not own award ID, recipient identity, or signed year.
   const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, {
     detail,
     retrievedAt,
     requestedProgram: criteria.program,
   }))
-    .filter(award => !criteria.award_id || award.award_id === exactAwardId(criteria.award_id))
-    .filter(award => recordSatisfiesYearFilter(award.award_year, criteria, yearFilter))
-    .filter(award => recordMatchesInstitution(award, criteria._institution, "DOD"))
     .map(award => attachResolvedInstitution(award, criteria._institution));
+  const processed = queries.filter(query => query.fetched);
+  const processedQueries = processed.length;
+  const upstreamTotal = processed.length && processed.every(query => query.total !== null)
+    ? processed.reduce((sum, query) => sum + query.total, 0)
+    : null;
+  const upstreamExhausted = queries.length > 0 && queries.every(query => query.fetched && query.exhausted);
   const outputTruncated = scanAll && sourceScoped.length > selected.length;
-  const upstreamMayHaveMore = !upstreamExhausted && pages.at(-1)?.hasNext === true;
+  const upstreamMayHaveMore = queries.some(query => query.fetched && !query.exhausted);
   const safetyBoundReached = scanAll
     ? Boolean(outputTruncated || upstreamMayHaveMore)
     : Boolean(
       upstreamMayHaveMore
-      && pages.length >= maximumPages
+      && upstreamPages >= maximumPages
       && sourceScoped.length < targetCount
     );
   const hasMore = sourceScoped.length > offset + limit;
@@ -549,7 +603,8 @@ export async function searchDod(fetchImpl, criteria, {
     total_count: totalCount,
     raw_record_count: rawRecordCount,
     upstream_total_count: upstreamTotal,
-    upstream_pages: pages.length,
+    upstream_pages: upstreamPages,
+    upstream_queries: processedQueries,
     safety_bound_reached: safetyBoundReached,
     has_more: scanAll ? false : hasMore,
     capabilities: DOD_CAPABILITIES,

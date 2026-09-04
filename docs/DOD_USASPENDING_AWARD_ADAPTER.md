@@ -25,6 +25,12 @@ All valid Assistance Listings returned by award detail are retained. When the
 search uses an exact Assistance Listing filter, that listing is placed first
 and supplies the card's program name while the other listings remain available
 for facets and provenance.
+The current search row is authoritative for award ID, recipient identity,
+signed year, and the other overlapping base fields used to form a page; cached
+detail can enrich but cannot invalidate or relabel that selected row. For a
+ROR-resolved institution without a curated UEI, up to three validated canonical
+or alias names are queried fairly within the same 12-page source budget and
+deduplicated before exact institution validation.
 Later result pages use USAspending's stable Award ID ordering and are reached
 sequentially from page one with the paired `last_record_unique_id` and
 `last_record_sort_value` continuation values. The adapter never jumps directly

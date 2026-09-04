@@ -72,7 +72,7 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.deepEqual(body.filters.award_ids, ["FA9550261B195"]);
   assert.equal(body.filters.description, "multiscale transport");
   assert.deepEqual(body.filters.program_numbers, ["12.800"]);
-  assert.deepEqual(body.filters.recipient_search_text, ["F27KDXZMF9Y8"]);
+  assert.equal(body.filters.recipient_search_text, undefined, "exact award lookup is validated locally without an alias-sensitive recipient query");
   assert.deepEqual(body.filters.time_period, [{
     start_date: "2025-01-01",
     end_date: "2026-12-31",
@@ -82,6 +82,9 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.equal(body.sort, "Award ID");
   assert.equal(body.last_record_unique_id, 4201);
   assert.equal(body.last_record_sort_value, "FA9550261B195");
+
+  const institutionBody = buildDodRequest({ _institution: institution }, { now: fixedNow });
+  assert.deepEqual(institutionBody.filters.recipient_search_text, ["F27KDXZMF9Y8"]);
 
   assert.throws(
     () => buildDodRequest({}, { page: 2, now: fixedNow }),
@@ -412,6 +415,137 @@ test("DoD offsets follow the normalized institution sequence and snapshots scan 
   assert.equal(snapshot.has_more, false);
   assert.equal(snapshot.upstream_pages, 2);
   assert.equal(snapshot.health.detail_requests, 3);
+});
+
+test("DoD paging keeps current search-row identity and year authoritative over cached detail", async () => {
+  const institution = resolveInstitution({ id: "university-of-rochester" });
+  const searchPayload = structuredClone(searchFixture);
+  searchPayload.results[0]["Recipient Name"] = "UNIVERSITY OF ROCHESTER";
+  searchPayload.results[0]["Recipient UEI"] = "F27KDXZMF9Y8";
+  searchPayload.results[0]["Base Obligation Date"] = "2026-02-03";
+  searchPayload.results[0]["Start Date"] = "2026-03-01";
+  searchPayload.results[0]["End Date"] = "2030-02-28";
+  searchPayload.results[0]["Award Amount"] = 4_000_000;
+  searchPayload.results[0].Description = "CURRENT SEARCH DESCRIPTION";
+  const staleDetail = structuredClone(detailFixture);
+  staleDetail.fain = "STALE-DETAIL-ID";
+  staleDetail.date_signed = "2018-01-15";
+  staleDetail.type = "05";
+  staleDetail.total_obligation = 1;
+  staleDetail.description = "STALE DETAIL DESCRIPTION";
+  staleDetail.period_of_performance = { start_date: "2018-02-01", end_date: "2019-02-01" };
+  staleDetail.recipient = {
+    recipient_name: "ROCHESTER INSTITUTE OF TECHNOLOGY",
+    recipient_uei: "STALEUEI123",
+  };
+  staleDetail.awarding_agency = {
+    toptier_agency: { name: "Department of Energy" },
+    subtier_agency: { name: "Office of Science" },
+    office_agency_name: "FA9550 AFRL AFOSR",
+  };
+
+  const result = await searchDod(fixtureFetch({ searchPayload, detailPayload: staleDetail }), {
+    _institution: institution,
+    year_start: 2026,
+    year_end: 2026,
+  }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.equal(result.results.length, 1);
+  assert.equal(result.results[0].award_id, "FA9550261B195");
+  assert.equal(result.results[0].award_year, 2026);
+  assert.equal(result.results[0].award_date, "2026-02-03");
+  assert.equal(result.results[0].institution.name, "UNIVERSITY OF ROCHESTER");
+  assert.equal(result.results[0].institution.identifiers.uei, "F27KDXZMF9Y8");
+  assert.equal(result.results[0].agency, "Department of Defense");
+  assert.equal(result.results[0].funding_mechanism, "Project Grant");
+  assert.equal(result.results[0].title, "CURRENT SEARCH DESCRIPTION");
+  assert.equal(result.results[0].project_start, "2026-03-01");
+  assert.equal(result.results[0].project_end, "2030-02-28");
+  assert.equal(result.results[0].total_award, 4_000_000);
+  assert.deepEqual(result.results[0].program_codes, ["12.800"], "detail-only enrichment remains available");
+  assert.equal(result.health.detail_requests, 1);
+});
+
+test("DoD fairly queries the bounded validated ROR name set when no UEI is available", async () => {
+  const canonicalName = "California Institute of Technology";
+  const aliases = ["Caltech", "California Tech", "CIT"];
+  const institution = {
+    id: "https://ror.org/05dxps055",
+    ror_id: "https://ror.org/05dxps055",
+    canonical_name: canonicalName,
+    aliases,
+    acronyms: [],
+    match_names: [canonicalName, ...aliases],
+    identity_source: "ROR",
+    sources: {
+      DOD: {
+        search_name: canonicalName,
+        search_names: [canonicalName, ...aliases],
+        uei: [],
+      },
+    },
+  };
+  const falsePositive = {
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": "FA9550CANONICALFALSE",
+    "Recipient Name": "CALIFORNIA STATE UNIVERSITY",
+    "Recipient UEI": "WRONGUEI123",
+    generated_internal_id: "ASST_NON_FA9550CANONICALFALSE_097",
+  };
+  const aliasRecord = {
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": "FA9550CALTECH",
+    "Recipient Name": "CALTECH",
+    "Recipient UEI": null,
+    generated_internal_id: "ASST_NON_FA9550CALTECH_097",
+  };
+  const aliasLookahead = {
+    ...aliasRecord,
+    "Award ID": "FA9550CALTECHLOOKAHEAD",
+    generated_internal_id: "ASST_NON_FA9550CALTECHLOOKAHEAD_097",
+  };
+  const recipientQueries = [];
+  let detailRequests = 0;
+  const fetchImpl = async (url, options = {}) => {
+    if (String(url) === DOD_SEARCH_URL) {
+      const body = JSON.parse(options.body);
+      const search = body.filters.recipient_search_text[0];
+      recipientQueries.push(search);
+      const canonical = search === canonicalName;
+      const alias = search === "Caltech";
+      return new Response(JSON.stringify({
+        results: canonical ? [falsePositive] : alias ? [aliasRecord, aliasLookahead] : [],
+        page_metadata: {
+          page: 1,
+          total: canonical ? 1_000 : alias ? 2 : 0,
+          hasNext: canonical,
+          last_record_unique_id: canonical ? 9301 : null,
+          last_record_sort_value: canonical ? falsePositive["Award ID"] : "None",
+        },
+      }), { headers: { "Content-Type": "application/json" } });
+    }
+    detailRequests += 1;
+    return new Response(JSON.stringify({
+      ...detailFixture,
+      generated_unique_award_id: aliasRecord.generated_internal_id,
+      fain: aliasRecord["Award ID"],
+    }), { headers: { "Content-Type": "application/json" } });
+  };
+
+  const result = await searchDod(fetchImpl, { _institution: institution }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.deepEqual(recipientQueries, [canonicalName, "Caltech", "California Tech"]);
+  assert.equal(recipientQueries.includes("CIT"), false, "validated name queries remain capped at three");
+  assert.deepEqual(result.results.map(award => award.award_id), ["FA9550CALTECH"]);
+  assert.equal(result.upstream_queries, 3);
+  assert.equal(result.upstream_pages, 3);
+  assert.equal(detailRequests, 1);
 });
 
 test("DoD normalized snapshot scans stop at the advertised upstream-page bound", async () => {

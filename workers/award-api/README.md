@@ -53,6 +53,11 @@ the source health is marked degraded, and both award interfaces report the
 failed-detail count. All valid Assistance Listings from award detail are
 retained; an exact queried listing is ordered first and supplies the displayed
 program name without discarding the award's other listings.
+Search-row award ID, recipient identity, signed year, and overlapping base
+fields remain authoritative so optional cached detail cannot invalidate a
+selected page. When a ROR identity has no curated UEI, DoD fairly traverses up
+to three validated recipient names within the shared 12-page source bound,
+deduplicates the union, and applies exact institution validation before paging.
 Later USAspending result pages use stable Award ID ordering and are traversed
 sequentially with the paired continuation values returned by the preceding
 page; direct page jumps are not used. DoD offsets are applied after exact
