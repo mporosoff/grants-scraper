@@ -9,6 +9,7 @@ import {
   DOD_DETAIL_CONCURRENCY,
   DOD_MAX_RESULTS,
   DOD_MAX_UPSTREAM_PAGES,
+  DOD_OPERATION_BUDGET_MS,
   DOD_UPSTREAM_PAGE_SIZE,
   searchDod,
 } from "./adapters/dod.js";
@@ -690,6 +691,7 @@ export function createHandler({
             maximum_normalized_results: DOD_MAX_RESULTS,
             maximum_detail_requests: DOD_MAX_RESULTS,
             detail_concurrency: DOD_DETAIL_CONCURRENCY,
+            operation_budget_ms: DOD_OPERATION_BUDGET_MS,
             snapshot_behavior: "bounded-first-normalized-page",
           },
         },

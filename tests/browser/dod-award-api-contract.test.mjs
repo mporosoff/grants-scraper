@@ -8,6 +8,7 @@ import {
   DOD_CAPABILITIES,
   DOD_DETAIL_URL,
   DOD_MAX_UPSTREAM_PAGES,
+  DOD_OPERATION_BUDGET_MS,
   DOD_SEARCH_REQUEST_TIMEOUT_MS,
   DOD_SEARCH_URL,
   buildDodRequest,
@@ -54,6 +55,8 @@ function fixtureFetch({ detailFails = false, calls = [], searchPayload = searchF
 test("DoD search uses only prime 04/05 assistance awards and supported exact filters", () => {
   assert.equal(DOD_ADAPTER_VERSION, "1.0.0");
   assert.equal(DOD_SEARCH_REQUEST_TIMEOUT_MS, 20_000);
+  assert.equal(DOD_OPERATION_BUDGET_MS, 100_000);
+  assert.ok(DOD_OPERATION_BUDGET_MS < 120_000);
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const body = buildDodRequest({
     award_id: "fa9550261b195",
@@ -107,28 +110,75 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.equal(DOD_CAPABILITIES.fields.abstract, "unavailable_at_source");
 });
 
-test("DoD search applies its bounded USAspending deadline", async () => {
-  let searchSignal = null;
+test("DoD reapplies the remaining operation budget to every USAspending page", async () => {
+  const records = Array.from({ length: 25 }, (_, index) => ({
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": `FA9550BUDGET${String(index + 1).padStart(2, "0")}`,
+    generated_internal_id: `ASST_NON_FA9550BUDGET${String(index + 1).padStart(2, "0")}_097`,
+  }));
+  let searchCalls = 0;
+  let finalSignal = null;
   const fetchImpl = async (url, options = {}) => {
     assert.equal(String(url), DOD_SEARCH_URL);
-    searchSignal = options.signal;
+    searchCalls += 1;
+    if (searchCalls === 1) {
+      return new Response(JSON.stringify({
+        results: records,
+        page_metadata: {
+          page: 1,
+          total: 50,
+          hasNext: true,
+          last_record_unique_id: 9100,
+          last_record_sort_value: records.at(-1)["Award ID"],
+        },
+      }), { headers: { "Content-Type": "application/json" } });
+    }
+    finalSignal = options.signal;
     return new Promise((resolve, reject) => {
       const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
-      if (searchSignal.aborted) abort();
-      else searchSignal.addEventListener("abort", abort, { once: true });
+      if (finalSignal.aborted) abort();
+      else finalSignal.addEventListener("abort", abort, { once: true });
     });
   };
+  const clock = [0, 0, DOD_OPERATION_BUDGET_MS - 5];
+  const started = performance.now();
 
   await assert.rejects(
-    () => searchDod(fetchImpl, { award_id: "FA9550261B195" }, {
+    () => searchDod(fetchImpl, {}, {
       limit: 1,
-      offset: 0,
+      offset: 25,
       now: fixedNow,
-      searchRequestTimeoutMs: 5,
+      monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS - 5,
+      searchRequestTimeoutMs: 500,
     }),
     error => error instanceof AwardSourceError && error.code === "source_timeout",
   );
-  assert.ok(searchSignal instanceof AbortSignal);
+  assert.equal(searchCalls, 2);
+  assert.ok(finalSignal instanceof AbortSignal);
+  assert.ok(performance.now() - started < 250, "the final page must receive only the five-millisecond remaining budget");
+});
+
+test("DoD detail enrichment shares the operation budget and retains base awards", async () => {
+  let detailCalls = 0;
+  const clock = [0, 0, DOD_OPERATION_BUDGET_MS + 1];
+  const fetchImpl = async (url) => {
+    if (String(url) === DOD_SEARCH_URL) {
+      return new Response(JSON.stringify(searchFixture), { headers: { "Content-Type": "application/json" } });
+    }
+    detailCalls += 1;
+    return new Response(JSON.stringify(detailFixture), { headers: { "Content-Type": "application/json" } });
+  };
+  const result = await searchDod(fetchImpl, {}, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+    monotonicNow: () => clock.shift() ?? DOD_OPERATION_BUDGET_MS + 1,
+  });
+  assert.equal(detailCalls, 0);
+  assert.equal(result.results[0].award_id, "FA9550261B195");
+  assert.equal(result.health.status, "degraded");
+  assert.equal(result.health.detail_requests, 1);
+  assert.equal(result.health.details_failed, 1);
 });
 
 test("DoD normalization preserves obligations, Assistance Listing, office, and official links", () => {
