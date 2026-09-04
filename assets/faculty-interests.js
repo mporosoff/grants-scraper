@@ -259,8 +259,11 @@
     resetActiveDraft();
     if (new URLSearchParams(location.search).get("return") === "team_match") {
       var returnParams = new URLSearchParams({ local: savedId });
-      var proposed = new URLSearchParams(location.search).get("proposed");
-      if (proposed) returnParams.set("proposed", proposed);
+      var sourceParams = new URLSearchParams(location.search);
+      ["proposed", "locals"].forEach(function (key) {
+        var value = sourceParams.get(key);
+        if (value) returnParams.set(key, value);
+      });
       location.assign("./team_match.html?" + returnParams.toString());
       return;
     }

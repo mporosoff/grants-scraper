@@ -139,7 +139,8 @@ test("opens an accessible bounded faculty combobox", () => {
 
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
-  assert.match(teamPage, /var proposed = selected\.map\([\s\S]*?faculty\[member\]\.directory_id[\s\S]*?missingResearcherUrl \+= "&proposed=" \+ encodeURIComponent\(proposed\.join\(","\)\)/);
+  assert.match(teamPage, /var retainedLocal = \[\][\s\S]*?retainedLocal\.push\(externalId\(member\)\)[\s\S]*?missingResearcherUrl \+= "&locals=" \+ encodeURIComponent\(retainedLocal\.join\(","\)\)/);
+  assert.match(teamPage, /params\.get\("locals"\)[\s\S]*?localIds\.push\(primaryLocalId\)[\s\S]*?localIds\.forEach\(function \(localId\)/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
@@ -196,7 +197,7 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
   assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
-  assert.match(teamPage, /if \(localId\) \{[\s\S]*?selected\.push\(localKey\)/);
+  assert.match(teamPage, /localIds\.forEach\(function \(localId\) \{[\s\S]*?selected\.push\(localKey\)/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
   assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
   assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);

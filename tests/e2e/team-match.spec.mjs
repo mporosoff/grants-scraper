@@ -53,10 +53,24 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nchemical engineering\ncarbon capture");
   await page.locator("#add-locally").click();
   await expect(page).toHaveURL(/team_match\.html\?local=ext-gate-four-researcher/);
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
   await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
+
+  await page.locator("#add-researcher").click();
+  await page.locator("#missing-researcher").click();
+  await expect(page.getByRole("radio", { name: /Add a missing researcher/ })).toBeChecked();
+  await page.locator("#display-name").fill("Gate Five Researcher");
+  await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nreaction engineering");
+  await page.locator("#add-locally").click();
+  await expect(page).toHaveURL(/team_match\.html\?.*local=ext-gate-five-researcher/);
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
+  await page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true }).click();
+  await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(3);
 
   const fourth = await addDepartmentResearcher(page, "Astrid M. Müller");
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
@@ -76,7 +90,7 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await page.goBack();
   await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });

@@ -1346,11 +1346,15 @@
 
   function updateToggles() {
     var atMax = selected.length >= MAX;
-    var proposed = selected.map(function (member) {
-      return isExternalKey(member) ? "" : faculty[member] && faculty[member].directory_id;
-    }).filter(Boolean).slice(0, MAX - 1);
+    var proposed = [];
+    var retainedLocal = [];
+    selected.slice(0, MAX - 1).forEach(function (member) {
+      if (isExternalKey(member)) retainedLocal.push(externalId(member));
+      else if (faculty[member] && faculty[member].directory_id) proposed.push(faculty[member].directory_id);
+    });
     var missingResearcherUrl = "./faculty_interests.html?mode=add&return=team_match";
     if (proposed.length) missingResearcherUrl += "&proposed=" + encodeURIComponent(proposed.join(","));
+    if (retainedLocal.length) missingResearcherUrl += "&locals=" + encodeURIComponent(retainedLocal.join(","));
     $("missing-researcher").setAttribute("href", missingResearcherUrl);
     renderExternalButtons();
     $("add-researcher").disabled = atMax;
@@ -1381,8 +1385,11 @@
       return;
     }
     var proposed = String(params.get("proposed") || "").split(",").filter(Boolean).slice(0, MAX);
-    var localId = String(params.get("local") || "");
-    if (!proposed.length && !localId) return;
+    var primaryLocalId = String(params.get("local") || "");
+    var localIds = String(params.get("locals") || "").split(",").filter(Boolean);
+    if (primaryLocalId) localIds.push(primaryLocalId);
+    localIds = Array.from(new Set(localIds)).slice(0, MAX);
+    if (!proposed.length && !localIds.length) return;
     if (proposed.length) {
       try {
         var data = await ensureTeamDirectory();
@@ -1399,20 +1406,26 @@
         renderExternalStatus("The proposed Hajim team could not be restored. You can still search the directory or add a missing researcher.", true);
       }
     }
-    if (localId) {
+    localIds.forEach(function (localId) {
       var profile = externalProfile(localId);
       var localKey = profile ? externalKey(profile.id) : "";
-      if (!profile) renderExternalStatus("That browser-only researcher is no longer available.", true);
-      else if (selected.indexOf(localKey) !== -1) renderExternalStatus(profile.name + " is already on the team.", false);
-      else if (selected.length >= MAX) renderExternalStatus(profile.name + " was stored, but the current team already has four researchers.", true);
-      else {
+      var isPrimary = localId === primaryLocalId;
+      if (!profile) {
+        if (isPrimary) renderExternalStatus("That browser-only researcher is no longer available.", true);
+      } else if (selected.indexOf(localKey) !== -1) {
+        if (isPrimary) renderExternalStatus(profile.name + " is already on the team.", false);
+      } else if (selected.length >= MAX) {
+        if (isPrimary) renderExternalStatus(profile.name + " was stored, but the current team already has four researchers.", true);
+      } else {
         selected.push(localKey);
         themeState = {};
         teamHybridState = idleTeamHybridState();
-        recentlyAddedMember = localKey;
-        renderExternalStatus(profile.name + " was stored in this browser and added to the team.", false);
+        if (isPrimary) {
+          recentlyAddedMember = localKey;
+          renderExternalStatus(profile.name + " was stored in this browser and added to the team.", false);
+        }
       }
-    }
+    });
   }
 
   async function init() {
