@@ -24,6 +24,14 @@ const [workerSource, storeSource, migration, transitionMigration, targetMigratio
   readFile(new URL("workers/researcher-intake/wrangler.jsonc", root), "utf8"),
 ]);
 
+function assertOrdered(source, before, after) {
+  const beforeIndex = source.indexOf(before);
+  const afterIndex = source.indexOf(after);
+  assert.notEqual(beforeIndex, -1, `Missing expected earlier marker: ${before}`);
+  assert.notEqual(afterIndex, -1, `Missing expected later marker: ${after}`);
+  assert.ok(beforeIndex < afterIndex, `Expected ${before} before ${after}`);
+}
+
 function submission(overrides = {}) {
   return {
     schema_version: 1,
@@ -521,7 +529,7 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.doesNotMatch(deploymentWorkflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   assert.match(deploymentWorkflow, /GITHUB_PUBLICATION_TOKEN:null/);
   assert.match(deploymentWorkflow, /pnpm\/action-setup@v6/);
-  assert.ok(deploymentWorkflow.indexOf("pnpm install --frozen-lockfile") < deploymentWorkflow.indexOf("node --test tests\/browser\/researcher-intake-worker-contract.test.mjs"));
+  assertOrdered(deploymentWorkflow, "pnpm install --frozen-lockfile", "node --test tests/browser/researcher-intake-worker-contract.test.mjs");
   assert.match(workflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
   const publicationGroup = workflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
   const refreshGroup = refreshWorkflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
@@ -545,10 +553,10 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(failureCallback, /for attempt in \$\(seq 1 6\)/);
   assert.match(failureCallback, /curl --fail --silent --show-error/);
   assert.doesNotMatch(failureCallback, /\/internal\/publications\/\$SUBMISSION_ID\/fail" \|\| true/);
-  assert.ok(workflow.indexOf('gh pr close "$PUBLICATION_PR_URL"') < workflow.indexOf('[ "$pr_state" != "CLOSED" ]'));
-  assert.ok(workflow.indexOf('[ "$pr_state" != "CLOSED" ]') < workflow.indexOf('"$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"'));
-  assert.ok(workflow.indexOf('echo "url=$pr_url"') < workflow.indexOf("Enable checks-gated auto-merge"));
-  assert.ok(workflow.indexOf("Record the recoverable publication target before merge") < workflow.indexOf("Enable checks-gated auto-merge"));
+  assertOrdered(workflow, 'gh pr close "$PUBLICATION_PR_URL"', '[ "$pr_state" != "CLOSED" ]');
+  assertOrdered(workflow, '[ "$pr_state" != "CLOSED" ]', '"$INTAKE_ORIGIN/internal/publications/$SUBMISSION_ID/fail"');
+  assertOrdered(workflow, 'echo "url=$pr_url"', "Enable checks-gated auto-merge");
+  assertOrdered(workflow, "Record the recoverable publication target before merge", "Enable checks-gated auto-merge");
   assert.match(workerSource, /body\.action === "rebase"/);
   assert.match(workerSource, /store\.rebase/);
   assert.match(workerSource, /body\.action === "retry_publish"[\s\S]*validateApprovalAgainstCurrentRegistry\(current, body\.approved_profile/);
