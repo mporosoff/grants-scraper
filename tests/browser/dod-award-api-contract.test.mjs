@@ -18,13 +18,18 @@ import {
   searchDod,
 } from "../../workers/award-api/src/adapters/dod.js";
 import { AwardSourceError } from "../../workers/award-api/src/http.js";
-import { runSource } from "../../workers/award-api/src/index.js";
+import {
+  createHandler,
+  runInstitutionResolution,
+  runSource,
+} from "../../workers/award-api/src/index.js";
 import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
 
 const root = new URL("../../", import.meta.url);
-const [searchFixture, detailFixture, linksSource] = await Promise.all([
+const [searchFixture, detailFixture, rorFixture, linksSource] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/dod_search_results.json", root), "utf8").then(JSON.parse),
   readFile(new URL("tests/fixtures/awards/dod_award_detail.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("tests/fixtures/awards/ror_aliases.json", root), "utf8").then(JSON.parse),
   readFile(new URL("assets/award-links.js", root), "utf8"),
 ]);
 const fixedNow = () => new Date("2026-09-03T14:00:00.000Z");
@@ -264,6 +269,139 @@ test("DoD source-cache and rate-limit wrapper I/O share the operation deadline",
     }
     assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the source wrapper budget`);
   }
+});
+
+test("DoD bounds ROR identity cache, guard, and upstream work within the same operation deadline", async () => {
+  const request = {
+    id: "https://ror.org/05dxps055",
+    name: "California Institute of Technology",
+  };
+  const rorOrganization = rorFixture.Caltech.items[0];
+  for (const slowOperation of ["identity_match", "guard", "identity_put"]) {
+    let delayedTimer = null;
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const cache = {
+      async match() {
+        return slowOperation === "identity_match" ? delayed() : null;
+      },
+      async put() {
+        if (slowOperation === "identity_put") await delayed();
+      },
+    };
+    const guard = slowOperation === "guard" ? delayed : async () => true;
+    const started = performance.now();
+    try {
+      const operation = runInstitutionResolution({
+        request,
+        fetchImpl: async () => new Response(JSON.stringify(rorOrganization), {
+          headers: { "Content-Type": "application/json" },
+        }),
+        cache,
+        cacheTtl: 3_600,
+        guard,
+        rateLimit: 20,
+        monotonicNow: () => 0,
+        operationDeadline: 1_000,
+        operationTimeoutMs: 5,
+      });
+      if (slowOperation === "guard") {
+        await assert.rejects(
+          operation,
+          error => error instanceof AwardSourceError && error.code === "source_timeout",
+        );
+      } else {
+        const institution = await operation;
+        assert.equal(institution.ror_id, request.id);
+      }
+    } finally {
+      clearTimeout(delayedTimer);
+    }
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the DoD request budget`);
+  }
+
+  let upstreamSignal = null;
+  const upstreamClock = [0, 995];
+  const started = performance.now();
+  await assert.rejects(
+    () => runInstitutionResolution({
+      request,
+      fetchImpl: async (_url, options = {}) => {
+        upstreamSignal = options.signal;
+        return new Promise((resolve, reject) => {
+          const abort = () => reject(Object.assign(new Error("aborted"), { name: "AbortError" }));
+          if (upstreamSignal.aborted) abort();
+          else upstreamSignal.addEventListener("abort", abort, { once: true });
+        });
+      },
+      cache: null,
+      cacheTtl: 3_600,
+      monotonicNow: () => upstreamClock.shift() ?? 995,
+      operationDeadline: 1_000,
+    }),
+    error => error instanceof AwardSourceError && error.code === "source_timeout",
+  );
+  assert.ok(upstreamSignal instanceof AbortSignal);
+  assert.ok(performance.now() - started < 250, "ROR fetch must receive only the remaining DoD request budget");
+});
+
+test("DoD handler starts its deadline before non-curated ROR resolution", async () => {
+  let elapsed = 0;
+  let dodSearchCalls = 0;
+  const handler = createHandler({
+    now: fixedNow,
+    monotonicNow: () => elapsed,
+    fetchImpl: async (url) => {
+      if (String(url).includes("api.ror.org/v2/organizations/05dxps055")) {
+        elapsed = DOD_OPERATION_BUDGET_MS + 1;
+        return new Response(JSON.stringify(rorFixture.Caltech.items[0]), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      if (String(url) === DOD_SEARCH_URL) dodSearchCalls += 1;
+      return new Response(JSON.stringify(searchFixture), {
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  });
+  const limiter = {
+    idFromName: name => name,
+    get: () => ({
+      fetch: async () => new Response(JSON.stringify({ success: true }), {
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
+  };
+  const response = await handler(new Request("https://award.test/awards/search", {
+    method: "POST",
+    headers: { Origin: "http://localhost:8000", "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sources: ["DOD"],
+      criteria: {
+        institution: "California Institute of Technology",
+        institution_id: "https://ror.org/05dxps055",
+      },
+      limit: 1,
+      offset: 0,
+    }),
+  }), {
+    AWARD_API_ENABLED: "true",
+    CACHE_TTL_SECONDS: "3600",
+    MAX_SOURCE_RESULTS: "25",
+    AWARD_SOURCE_RATE_LIMIT: "12",
+    ROR_SEARCH_RATE_LIMIT: "60",
+    ROR_RESOLVE_RATE_LIMIT: "20",
+    AWARD_RATE_LIMIT_SECRET: "deterministic-award-rate-limit-secret",
+    AWARD_RATE_LIMITER: limiter,
+  });
+  const payload = await response.json();
+  assert.equal(response.status, 503, JSON.stringify(payload));
+  assert.equal(dodSearchCalls, 0, "elapsed ROR work must leave no fresh DoD source budget");
+  assert.deepEqual(payload.results, []);
+  assert.deepEqual(payload.sources, [{
+    source: "DOD",
+    status: "unavailable",
+    error: { code: "source_timeout" },
+  }]);
 });
 
 test("DoD normalization preserves obligations, Assistance Listing, office, and official links", () => {

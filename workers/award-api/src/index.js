@@ -1,5 +1,10 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
-import { AwardSourceError, withinOperationBudget } from "./http.js";
+import {
+  AwardSourceError,
+  SOURCE_TIMEOUT_MS,
+  boundedRequestTimeout,
+  withinOperationBudget,
+} from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
@@ -363,10 +368,19 @@ async function runSource({
   guard = null,
   rateLimit = null,
   monotonicNow = () => performance.now(),
+  operationDeadline: inheritedOperationDeadline = null,
   sourceWrapperTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
 }) {
-  const operationDeadline = source === "DOD" ? monotonicNow() + DOD_OPERATION_BUDGET_MS : null;
-  const key = await sourceCacheRequest(source, request, asOf);
+  const operationDeadline = source === "DOD"
+    ? inheritedOperationDeadline ?? monotonicNow() + DOD_OPERATION_BUDGET_MS
+    : null;
+  const key = await sourceWrapperOperation(
+    source,
+    () => sourceCacheRequest(source, request, asOf),
+    monotonicNow,
+    operationDeadline,
+    sourceWrapperTimeoutMs,
+  );
   if (cache) {
     try {
       const payload = await sourceWrapperOperation(source, async () => {
@@ -470,35 +484,53 @@ async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl, guard =
   return payload;
 }
 
-async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl, guard = null, rateLimit = null }) {
+async function runInstitutionResolution({
+  request,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  guard = null,
+  rateLimit = null,
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+}) {
   if (request?.resolved) return request.resolved;
   if (!request?.id || !request?.name) return null;
-  const identity = await sha256Hex(stableJson({
+  const withinRequestDeadline = operation => operationDeadline === null
+    ? operation()
+    : withinOperationBudget(operation, monotonicNow, operationDeadline, operationTimeoutMs);
+  const identity = await withinRequestDeadline(() => sha256Hex(stableJson({
     source: "ROR-identity",
     adapter_version: ROR_ADAPTER_VERSION,
     id: request.id,
-  }));
+  })));
   const key = new Request(`https://award-cache.internal/v1/ror-identity/${identity}`);
   let organization = null;
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) organization = await cached.json();
+      organization = await withinRequestDeadline(async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      });
     } catch {
       // Exact ROR resolution can continue if the shared cache is unavailable.
     }
   }
   if (!organization) {
-    if (guard) await guard("ror:resolve", rateLimit);
-    organization = await resolveRorOrganization(fetchImpl, request.id);
+    if (guard) await withinRequestDeadline(() => guard("ror:resolve", rateLimit));
+    const timeoutMs = operationDeadline === null
+      ? SOURCE_TIMEOUT_MS
+      : boundedRequestTimeout(monotonicNow, operationDeadline, SOURCE_TIMEOUT_MS);
+    organization = await resolveRorOrganization(fetchImpl, request.id, { timeoutMs });
     if (cache) {
       try {
-        await cache.put(key, new Response(JSON.stringify(organization), {
+        await withinRequestDeadline(() => cache.put(key, new Response(JSON.stringify(organization), {
           headers: {
             "Cache-Control": `public, max-age=${cacheTtl}`,
             "Content-Type": "application/json; charset=utf-8",
           },
-        }));
+        })));
       } catch {
         // A cache write failure must not discard a validated ROR identity.
       }
@@ -656,7 +688,18 @@ function snapshotRequestIdentity(normalized, asOf) {
   return { publicRequest, cacheIdentity: stableJson(publicRequest) };
 }
 
-async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit, onlySource = "" }) {
+async function runSnapshotSources({
+  normalized,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  asOf,
+  guard,
+  rateLimit,
+  onlySource = "",
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+}) {
   const selectedSources = onlySource ? [onlySource] : normalized.sources;
   const request = {
     ...normalized,
@@ -668,7 +711,18 @@ async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf
   };
   const settled = await Promise.all(selectedSources.map(async source => {
     try {
-      return await runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit });
+      return await runSource({
+        source,
+        request,
+        fetchImpl,
+        cache,
+        cacheTtl,
+        asOf,
+        guard,
+        rateLimit,
+        monotonicNow,
+        operationDeadline,
+      });
     } catch (cause) {
       return sourceFailure(source, cause);
     }
@@ -676,7 +730,16 @@ async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf
   return Object.fromEntries(selectedSources.map((source, index) => [source, settled[index]]));
 }
 
-async function resolveRequestInstitution({ normalized, fetchImpl, cache, cacheTtl, guard, rateLimit }) {
+async function resolveRequestInstitution({
+  normalized,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  guard,
+  rateLimit,
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+}) {
   if (!normalized.institutionRequest || normalized.institutionRequest.resolved) return normalized;
   const institution = await runInstitutionResolution({
     request: normalized.institutionRequest,
@@ -685,6 +748,8 @@ async function resolveRequestInstitution({ normalized, fetchImpl, cache, cacheTt
     cacheTtl,
     guard,
     rateLimit,
+    monotonicNow,
+    operationDeadline,
   });
   if (!institution) throw new AwardSourceError("invalid_request", "unsupported");
   normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
@@ -695,9 +760,11 @@ export function createHandler({
   fetchImpl = fetch,
   cache = null,
   now = () => new Date(),
+  monotonicNow = () => performance.now(),
   rateLimitProbeTimeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS,
 } = {}) {
   return async function handle(request, env) {
+    const operationStartedAt = monotonicNow();
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(origin, 403, "origin_not_allowed");
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: responseHeaders(origin) });
@@ -826,6 +893,9 @@ export function createHandler({
       if (path === "/awards/snapshots") {
         const normalized = validateSnapshotCreate(body, config);
         if (!normalized) return error(origin, 400, "invalid_request");
+        const operationDeadline = normalized.sources.includes("DOD")
+          ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+          : null;
         try {
           await resolveRequestInstitution({
             normalized,
@@ -834,6 +904,8 @@ export function createHandler({
             cacheTtl: config.cacheTtl,
             guard,
             rateLimit: config.rorResolveLimit,
+            monotonicNow,
+            operationDeadline,
           });
         } catch (cause) {
           if (cause instanceof AwardSourceError && cause.kind === "rate_limited") {
@@ -854,6 +926,8 @@ export function createHandler({
           asOf,
           guard,
           rateLimit: config.awardSourceLimit,
+          monotonicNow,
+          operationDeadline,
         });
         const snapshot = buildAwardSnapshot({
           snapshotId,
@@ -957,6 +1031,9 @@ export function createHandler({
     }
     const normalized = validateRequest(body, config);
     if (!normalized) return error(origin, 400, "invalid_request");
+    const operationDeadline = normalized.sources.includes("DOD")
+      ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+      : null;
     if (normalized.institutionRequest && !normalized.institutionRequest.resolved) {
       const cacheStore = cache || globalThis.caches?.default || null;
       try {
@@ -967,6 +1044,8 @@ export function createHandler({
           cacheTtl: config.cacheTtl,
           guard,
           rateLimit: config.rorResolveLimit,
+          monotonicNow,
+          operationDeadline,
         });
         if (!institution) return error(origin, 400, "invalid_request");
         normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
@@ -1000,6 +1079,8 @@ export function createHandler({
           asOf,
           guard,
           rateLimit: config.awardSourceLimit,
+          monotonicNow,
+          operationDeadline,
         });
       } catch (cause) {
         return sourceFailure(source, cause);

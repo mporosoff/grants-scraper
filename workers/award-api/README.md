@@ -69,12 +69,14 @@ institution and normalized year validation. Up to 12 upstream pages may be
 inspected to fill the bounded first normalized snapshot page, while detail
 enrichment remains capped at 25 records with concurrency three. Each
 USAspending search request has a 20-second deadline, and the complete DoD
-operation, including optional detail enrichment, shares a 100-second budget
-below the browser's 120-second deadline. The source cache, rate-limit guard,
-and detail-cache operations are each capped at two seconds within that shared
-budget. Cache failures remain non-fatal. Reaching the upstream ceiling is
-reported as a safety-bound diagnostic, but it does not advertise a client next
-page unless a normalized lookahead record was actually collected.
+operation, including server-validated ROR identity resolution and optional
+detail enrichment, shares a 100-second budget below the browser's 120-second
+deadline. The ROR identity cache and guard, source cache and guard, and detail
+cache operations are each capped at two seconds within that shared budget; the
+ROR request itself receives only the remaining budget. Cache failures remain
+non-fatal. Reaching the upstream ceiling is reported as a safety-bound
+diagnostic, but it does not advertise a client next page unless a normalized
+lookahead record was actually collected.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other sources.
