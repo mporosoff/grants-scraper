@@ -311,6 +311,11 @@ export function mergeSearchPayload({ request, workerPayload = null, dodPayload =
 }
 
 function resultsForSource(snapshot, source) {
+  if (Array.isArray(snapshot?.awards)) {
+    return snapshot.awards
+      .filter(award => clean(award?.source, 10).toUpperCase() === source)
+      .map(({ snapshot_position: _snapshotPosition, ...award }) => award);
+  }
   return (snapshot?.initial_batches || [])
     .filter(batch => clean(batch?.source, 10).toUpperCase() === source)
     .flatMap(batch => Array.isArray(batch?.results) ? batch.results : [])
@@ -324,6 +329,7 @@ function sourcePayloadFromSnapshot(snapshot, source) {
   }
   const results = resultsForSource(snapshot, source);
   return {
+    ...(snapshot?.source_metadata?.[source] || {}),
     source,
     adapter_version: state.adapter_version,
     cache: state.cache,
@@ -381,6 +387,49 @@ export async function createHybridSnapshot({ request, workerSnapshot = null, dod
     sourcePayloads,
   });
   return { snapshot, public: publicSnapshot(snapshot) };
+}
+
+export async function replaceHybridSnapshotSource({
+  snapshot,
+  source,
+  sourceSnapshot = null,
+  sourcePayload = null,
+} = {}) {
+  const normalizedSource = clean(source, 10).toUpperCase();
+  const requestedSources = Array.isArray(snapshot?.request?.sources)
+    ? snapshot.request.sources.map(value => clean(value, 10).toUpperCase()).filter(value => SOURCE_NAMES.includes(value))
+    : [];
+  if (!snapshot || !requestedSources.includes(normalizedSource)) {
+    throw new Error("invalid_snapshot_source");
+  }
+  const replacement = sourcePayload || sourcePayloadFromSnapshot(sourceSnapshot, normalizedSource);
+  const sourcePayloads = Object.fromEntries(requestedSources.map(value => [
+    value,
+    value === normalizedSource ? replacement : sourcePayloadFromSnapshot(snapshot, value),
+  ]));
+  const asOf = clean(sourceSnapshot?.as_of || replacement?.retrieved_at, 40) || new Date().toISOString();
+  const digest = await sha256Hex(stableJson({
+    predecessor_snapshot_id: snapshot.snapshot_id,
+    source: normalizedSource,
+    as_of: asOf,
+    replacement,
+  }));
+  const successor = buildAwardSnapshot({
+    snapshotId: `${LOCAL_SNAPSHOT_PREFIX}${digest.slice(0, 48)}`,
+    queryId: clean(snapshot.query_id, 100) || await sha256Hex(stableJson({
+      request: snapshot.request,
+      ordering_version: AWARD_ORDERING_VERSION,
+    })),
+    asOf,
+    request: {
+      ...snapshot.request,
+      sources: requestedSources,
+      ordering_version: AWARD_ORDERING_VERSION,
+      delivery: { ...(snapshot.request.delivery || {}), DOD: "browser_direct_cors" },
+    },
+    sourcePayloads,
+  });
+  return { snapshot: successor, public: publicSnapshot(successor) };
 }
 
 export function isLocalDodSnapshotId(value) {

@@ -270,6 +270,8 @@ test("DoD cards expose source-accurate assistance details without empty scientif
   assert.match(appSource, /isDod \? `[^`]*award-source-limitation[^`]*` : `<section class="award-abstract"/s);
   assert.match(appSource, /View original funding opportunity/);
   assert.match(appSource, /browserIntegratedSearch[\s\S]*searchDodFromBrowser[\s\S]*mergeSearchPayload/);
+  assert.match(appSource, /Promise\.allSettled\([\s\S]*dodBrowserModule\(\)\.then[\s\S]*payloadWithUnavailableDod/);
+  assert.match(appSource, /dodBrowserModulePromise = import\([\s\S]*dodBrowserModulePromise = null/);
   assert.match(dodBrowserSource, /from "\.\.\/workers\/award-api\/src\/adapters\/dod\.js"/);
   assert.match(dodBrowserSource, /buildAwardSnapshot[\s\S]*snapshotPage[\s\S]*snapshotSourceBatch/);
   assert.match(dodBrowserSource, /credentials: "omit"[\s\S]*referrerPolicy: "no-referrer"/);

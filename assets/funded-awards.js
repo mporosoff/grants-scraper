@@ -25,7 +25,12 @@
   let dodBrowserModulePromise = null;
 
   function dodBrowserModule() {
-    dodBrowserModulePromise ||= import(DOD_BROWSER_MODULE_URL);
+    if (!dodBrowserModulePromise) {
+      dodBrowserModulePromise = import(DOD_BROWSER_MODULE_URL).catch(error => {
+        dodBrowserModulePromise = null;
+        throw error;
+      });
+    }
     return dodBrowserModulePromise;
   }
 
@@ -426,23 +431,47 @@
     return { response, payload };
   }
 
+  function payloadWithUnavailableDod(requestBody, workerPayload = null) {
+    const workerSources = new Map((workerPayload?.sources || []).map(source => [source.source, source]));
+    return {
+      schema_version: 1,
+      request: {
+        sources: [...requestBody.sources],
+        criteria: { ...requestBody.criteria },
+        limit: requestBody.limit,
+        offset: requestBody.offset,
+      },
+      results: Array.isArray(workerPayload?.results) ? workerPayload.results : [],
+      sources: requestBody.sources.map(source => source === "DOD"
+        ? { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } }
+        : workerSources.get(source) || { source, status: "unavailable", error: { code: "service_unavailable" } }),
+      pagination: { limit: requestBody.limit, offset: requestBody.offset },
+    };
+  }
+
   async function browserIntegratedSearch(requestBody, controller) {
     if (!requestBody.sources.includes("DOD")) return workerSearch(requestBody, controller.signal);
-    const dod = await dodBrowserModule();
     const workerSources = requestBody.sources.filter(source => source !== "DOD");
     const workerRequest = { ...requestBody, sources: workerSources };
     const [workerResult, dodResult] = await Promise.allSettled([
       workerSources.length ? workerSearch(workerRequest, controller.signal) : Promise.resolve(null),
-      dod.searchDodFromBrowser(requestBody.criteria, {
-        limit: requestBody.limit,
-        offset: requestBody.offset,
-        signal: controller.signal,
-      }),
+      dodBrowserModule().then(async dod => ({
+        dod,
+        payload: await dod.searchDodFromBrowser(requestBody.criteria, {
+          limit: requestBody.limit,
+          offset: requestBody.offset,
+          signal: controller.signal,
+        }),
+      })),
     ]);
     const worker = workerResult.status === "fulfilled" ? workerResult.value : null;
-    const dodPayload = dodResult.status === "fulfilled"
-      ? dodResult.value
-      : { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } };
+    if (dodResult.status !== "fulfilled") {
+      return {
+        response: { ok: false },
+        payload: payloadWithUnavailableDod(requestBody, worker?.payload || null),
+      };
+    }
+    const { dod, payload: dodPayload } = dodResult.value;
     return {
       response: { ok: Boolean(workerSources.length ? worker?.response?.ok : true) && !dodPayload?.status },
       payload: dod.mergeSearchPayload({

@@ -26,6 +26,7 @@
     submitted: null,
     snapshot: null,
     localSnapshot: null,
+    clientSnapshotOverlay: null,
     pagePayload: null,
     aggregate: null,
     baseAggregate: null,
@@ -51,7 +52,12 @@
   let dodBrowserModulePromise = null;
 
   function dodBrowserModule() {
-    dodBrowserModulePromise ||= import(DOD_BROWSER_MODULE_URL);
+    if (!dodBrowserModulePromise) {
+      dodBrowserModulePromise = import(DOD_BROWSER_MODULE_URL).catch(error => {
+        dodBrowserModulePromise = null;
+        throw error;
+      });
+    }
     return dodBrowserModulePromise;
   }
 
@@ -667,7 +673,35 @@
     });
   }
 
-  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller }) {
+  function unavailableDodSource() {
+    return {
+      source: "DOD",
+      status: "unavailable",
+      result_count: 0,
+      total_count: null,
+      error: { code: "source_unavailable" },
+    };
+  }
+
+  function applyClientSnapshotOverlay(payload, overlay = state.clientSnapshotOverlay) {
+    if (!payload || !overlay || overlay.snapshotId !== payload.snapshot_id) return payload;
+    const sources = new Map((payload.sources || []).map(source => [source.source, source]));
+    const requestedSources = overlay.requestedSources || [];
+    const atLeast = Number(payload.at_least) || 0;
+    return {
+      ...payload,
+      ...(payload.request ? { request: { ...payload.request, sources: [...requestedSources] } } : {}),
+      completeness: atLeast ? "partial" : "unavailable",
+      exact_total: null,
+      recency_order: "available_snapshot_recent_to_older",
+      sources: requestedSources.map(source => source === "DOD"
+        ? unavailableDodSource()
+        : sources.get(source) || { source, status: "unavailable", result_count: 0, total_count: null, error: { code: "service_unavailable" } }),
+      ...(payload.pagination ? { pagination: { ...payload.pagination, page_count: null } } : {}),
+    };
+  }
+
+  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
     if (String(snapshotId || "").startsWith("local-dod-")) {
       const dod = await dodBrowserModule();
       const snapshot = state.localSnapshot?.snapshot_id === snapshotId
@@ -678,24 +712,25 @@
         expired.code = "snapshot_expired";
         throw expired;
       }
-      state.localSnapshot = snapshot;
       const payload = dod.localSnapshotPage(snapshot, { page, pageSize, facet });
       if (!payload) {
         const invalid = new Error("The requested page or filter is not available.");
         invalid.code = "invalid_page_or_facet";
         throw invalid;
       }
+      Object.defineProperty(payload, "__localSnapshot", { value: snapshot });
       return payload;
     }
-    return postJson(api.snapshotPageUrl, {
+    const payload = await postJson(api.snapshotPageUrl, {
       snapshot_id: snapshotId,
       page,
       page_size: pageSize,
       facet: { type: facet.type, key: facet.key },
     }, controller);
+    return applyClientSnapshotOverlay(payload, clientOverlay);
   }
 
-  function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, questionState = null }) {
+  function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, clientSnapshotOverlay = null, questionState = null }) {
     const residentAwards = new Map();
     const sourceOffsets = new Map();
     const absorb = awards => {
@@ -714,6 +749,7 @@
       submitted: submittedCriteria(submitted),
       snapshot: { ...snapshot, ...pagePayload, snapshot_id: pagePayload.snapshot_id },
       localSnapshot,
+      clientSnapshotOverlay,
       pagePayload,
       page: pagePayload.pagination.page,
       pageSize: pagePayload.pagination.page_size,
@@ -730,6 +766,7 @@
     state.submitted = staged.submitted;
     state.snapshot = staged.snapshot;
     state.localSnapshot = staged.localSnapshot;
+    state.clientSnapshotOverlay = staged.clientSnapshotOverlay;
     state.pagePayload = staged.pagePayload;
     state.page = staged.page;
     state.pageSize = staged.pageSize;
@@ -764,6 +801,7 @@
       throw error;
     }
     if (requestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== snapshotId) return null;
+    if (payload.__localSnapshot) state.localSnapshot = payload.__localSnapshot;
     state.page = payload.pagination.page;
     state.pageSize = payload.pagination.page_size;
     state.facet = { type: payload.facet.type, key: payload.facet.key };
@@ -827,24 +865,47 @@
       });
       return stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState });
     }
-    const dod = await dodBrowserModule();
     const workerSources = request.sources.filter(source => source !== "DOD");
     const [workerResult, dodResult] = await Promise.allSettled([
       workerSources.length
         ? postJson(api.snapshotUrl, { sources: workerSources, criteria: request.criteria }, controller)
         : Promise.resolve(null),
-      dod.searchDodFromBrowser(request.criteria, {
-        limit: 25,
-        offset: 0,
-        scanAll: true,
-        selectedInstitution: state.selectedInstitution,
-        signal: controller?.signal,
-      }),
+      dodBrowserModule().then(async dod => ({
+        dod,
+        payload: await dod.searchDodFromBrowser(request.criteria, {
+          limit: 25,
+          offset: 0,
+          scanAll: true,
+          selectedInstitution: state.selectedInstitution,
+          signal: controller?.signal,
+        }),
+      })),
     ]);
     const workerSnapshot = workerResult.status === "fulfilled" ? workerResult.value : null;
-    const dodPayload = dodResult.status === "fulfilled"
-      ? dodResult.value
-      : { source: "DOD", status: "unavailable", error: { code: "source_unavailable" } };
+    if (dodResult.status !== "fulfilled") {
+      if (!workerSnapshot) throw dodResult.reason;
+      const clientSnapshotOverlay = {
+        snapshotId: workerSnapshot.snapshot_id,
+        requestedSources: [...request.sources],
+      };
+      const snapshot = applyClientSnapshotOverlay(workerSnapshot, clientSnapshotOverlay);
+      const pagePayload = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize,
+        facet: { type: "all", key: "" },
+        controller,
+        clientOverlay: clientSnapshotOverlay,
+      });
+      return stagedSnapshotResult({
+        submitted,
+        snapshot,
+        pagePayload,
+        clientSnapshotOverlay,
+        questionState,
+      });
+    }
+    const { dod, payload: dodPayload } = dodResult.value;
     const hybrid = await dod.createHybridSnapshot({ request, workerSnapshot, dodPayload });
     dod.persistLocalSnapshot(hybrid.snapshot);
     const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
@@ -932,12 +993,13 @@
         expired.code = "snapshot_expired";
         throw expired;
       }
-      state.localSnapshot = snapshot;
-      return dod.localSnapshotSourceBatch(snapshot, {
+      const payload = dod.localSnapshotSourceBatch(snapshot, {
         source,
         offset,
         facet: { type: "all", key: "" },
       });
+      if (payload) Object.defineProperty(payload, "__localSnapshot", { value: snapshot });
+      return payload;
     }
     return postJson(api.snapshotBatchUrl, {
       snapshot_id: snapshotId,
@@ -948,6 +1010,7 @@
   }
 
   function applySourceBatch(source, batch) {
+    if (batch.__localSnapshot) state.localSnapshot = batch.__localSnapshot;
     const actualAdded = absorbAwards(batch.results);
     state.sourceOffsets.set(source, batch.loaded_through);
     const loaded = [...state.residentAwards.values()].filter(award => clean(award.source, 10).toUpperCase() === source).length;
@@ -1022,27 +1085,88 @@
     return { snapshot, staged: stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage }) };
   }
 
+  async function stagedHybridSourceRetry({ source, baseSnapshot, request, submitted, pageSize, controller }) {
+    const dod = await dodBrowserModule();
+    let sourcePayload = null;
+    let sourceSnapshot = null;
+    if (source === "DOD") {
+      sourcePayload = await dod.searchDodFromBrowser(request.criteria, {
+        limit: 25,
+        offset: 0,
+        scanAll: true,
+        selectedInstitution: state.selectedInstitution,
+        signal: controller.signal,
+      });
+    } else {
+      sourceSnapshot = await postJson(api.snapshotUrl, {
+        sources: [source],
+        criteria: request.criteria,
+      }, controller);
+    }
+    const hybrid = await dod.replaceHybridSnapshotSource({
+      snapshot: baseSnapshot,
+      source,
+      sourceSnapshot,
+      sourcePayload,
+    });
+    const recovered = hybrid.public.sources.find(item => item.source === source);
+    if (!recovered || ["unavailable", "rate_limited", "unsupported"].includes(recovered.status)) {
+      return { recovered, staged: null };
+    }
+    dod.persistLocalSnapshot(hybrid.snapshot);
+    const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
+      page: 1,
+      pageSize,
+      facet: { type: "all", key: "" },
+    });
+    return {
+      recovered,
+      staged: stagedSnapshotResult({
+        submitted,
+        snapshot: hybrid.public,
+        pagePayload,
+        localSnapshot: hybrid.snapshot,
+      }),
+    };
+  }
+
   async function retrySource(source) {
-    if (state.localSnapshot) {
+    if (state.localSnapshot || state.clientSnapshotOverlay) {
+      const baseSnapshot = state.localSnapshot || state.snapshot;
+      const previous = state.snapshot.snapshot_id;
+      const sequence = state.sequence;
+      const pageRequestSequence = ++state.pageRequestSequence;
+      const retryIsCurrent = () => sequence === state.sequence
+        && pageRequestSequence === state.pageRequestSequence
+        && state.snapshot?.snapshot_id === previous;
       const submitted = { ...state.submitted, page_size: state.pageSize };
       const request = core.buildAwardRequest({ ...submitted, offset: 0 }, 10);
-      const controller = state.controller?.signal?.aborted ? new AbortController() : state.controller || new AbortController();
+      if (!state.controller || state.controller.signal.aborted) state.controller = new AbortController();
+      const controller = state.controller;
       setBusy(true);
       setStatus(`Retrying ${source}. Results already loaded will stay available…`);
       try {
-        const staged = await preparedSnapshotSearch({ request, submitted, pageSize: state.pageSize, controller });
-        const recovered = staged.snapshot.sources.find(item => item.source === source);
-        if (!recovered || ["unavailable", "rate_limited"].includes(recovered.status)) {
+        const result = await stagedHybridSourceRetry({
+          source,
+          baseSnapshot,
+          request,
+          submitted,
+          pageSize: state.pageSize,
+          controller,
+        });
+        if (!retryIsCurrent()) return;
+        if (!result.staged) {
           state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
           renderSourceStatus();
           setStatus(state.sourceMessages.get(source), true);
           return;
         }
-        commitSnapshotResult(staged, { historyMode: "replace" });
+        commitSnapshotResult(result.staged, { historyMode: "replace" });
         state.sourceMessages.set(source, `${source} is available again. Results from other sources were kept.`);
         renderSourceStatus();
         setStatus(state.sourceMessages.get(source));
       } catch {
+        if (!retryIsCurrent()) return;
         state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
         renderSourceStatus();
         setStatus(state.sourceMessages.get(source), true);
@@ -1383,6 +1507,7 @@
   function resetResultState() {
     state.snapshot = null;
     state.localSnapshot = null;
+    state.clientSnapshotOverlay = null;
     state.pagePayload = null;
     state.aggregate = null;
     state.baseAggregate = null;

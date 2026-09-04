@@ -396,6 +396,7 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const stageIndex = preparedSource.indexOf("stagedSnapshotResult(");
   assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
   assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
+  assert.match(preparedSource, /dodBrowserModule\(\)\.then[\s\S]*workerSnapshot[\s\S]*applyClientSnapshotOverlay\([\s\S]*clientSnapshotOverlay/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
   const prepareIndex = runSearchSource.indexOf("await preparedSnapshotSearch(");
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
@@ -426,6 +427,9 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+  assert.match(retrySource, /stagedHybridSourceRetry\([\s\S]*sources: \[source\][\s\S]*replaceHybridSnapshotSource\(/);
+  assert.match(retrySource, /const retryIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === previous[\s\S]*if \(!retryIsCurrent\(\)\) return;[\s\S]*commitSnapshotResult\(result\.staged/);
+  assert.doesNotMatch(retrySource, /preparedSnapshotSearch\(\{ request, submitted/);
 });
 
 test("one ordinary URL-state action coalesces repeated replaceState requests", () => {

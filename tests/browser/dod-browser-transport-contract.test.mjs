@@ -9,6 +9,7 @@ import {
   localSnapshotPage,
   mergeSearchPayload,
   persistLocalSnapshot,
+  replaceHybridSnapshotSource,
   searchDodFromBrowser,
 } from "../../assets/dod-awards-browser.mjs";
 import { buildAwardSnapshot, publicSnapshot } from "../../workers/award-api/src/snapshot.js";
@@ -284,6 +285,74 @@ test("hybrid snapshots retain exact paging, source totals, recency, and DoD prog
   });
   assert.equal(facet.exact_total, 1);
   assert.equal(facet.batches.flatMap(batch => batch.results)[0].source, "DOD");
+});
+
+test("hybrid source replacement changes only the retried source and retains successful awards", async () => {
+  const originalNsf = nsfAward();
+  const workerFull = buildAwardSnapshot({
+    snapshotId: "c".repeat(64),
+    queryId: "d".repeat(64),
+    asOf: "2026-09-04T12:00:00.000Z",
+    request: { sources: ["NSF"], criteria: { topic: "light" } },
+    sourcePayloads: {
+      NSF: {
+        source: "NSF",
+        adapter_version: "1.0.0",
+        retrieved_at: "2026-09-04T12:00:00.000Z",
+        total_count: 1,
+        has_more: false,
+        safety_bound_reached: false,
+        results: [originalNsf],
+      },
+    },
+  });
+  const dod = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
+    limit: 25,
+    scanAll: true,
+    fetchImpl: fixtureFetch(),
+    now: fixedNow,
+  });
+  const original = await createHybridSnapshot({
+    request: { sources: ["NSF", "DOD"], criteria: { topic: "light" } },
+    workerSnapshot: publicSnapshot(workerFull),
+    dodPayload: dod,
+  });
+  const replacementNsf = {
+    ...originalNsf,
+    award_id: "2605509",
+    source_record_ids: ["2605509"],
+    title: "Replacement NSF project",
+    source_provenance: { ...originalNsf.source_provenance, source_record_id: "2605509" },
+  };
+  const replacementFull = buildAwardSnapshot({
+    snapshotId: "e".repeat(64),
+    queryId: "f".repeat(64),
+    asOf: "2026-09-04T12:05:00.000Z",
+    request: { sources: ["NSF"], criteria: { topic: "light" } },
+    sourcePayloads: {
+      NSF: {
+        source: "NSF",
+        adapter_version: "1.0.0",
+        retrieved_at: "2026-09-04T12:05:00.000Z",
+        total_count: 1,
+        has_more: false,
+        safety_bound_reached: false,
+        results: [replacementNsf],
+      },
+    },
+  });
+  const successor = await replaceHybridSnapshotSource({
+    snapshot: original.snapshot,
+    source: "NSF",
+    sourceSnapshot: publicSnapshot(replacementFull),
+  });
+  assert.notEqual(successor.snapshot.snapshot_id, original.snapshot.snapshot_id);
+  assert.deepEqual(successor.snapshot.awards.map(award => `${award.source}:${award.award_id}`).sort(), [
+    "DOD:FA9550261B195",
+    "NSF:2605509",
+  ]);
+  assert.equal(successor.snapshot.awards.some(award => award.award_id === "2605508"), false);
+  assert.equal(successor.snapshot.sources.find(source => source.source === "DOD").status, "complete");
 });
 
 test("hybrid snapshots are session-restorable without becoming shared server snapshots", async () => {
