@@ -7,26 +7,11 @@ export const SNAPSHOT_EVIDENCE_LIMIT = 24;
 export const SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT = 800;
 export const SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT = 20_000;
 export const SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT = 18_000;
-export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v2";
+export const SNAPSHOT_EVIDENCE_SCORING_VERSION = "program-officer-evidence-v3";
 export const SNAPSHOT_EVIDENCE_FACET_LIMIT = 12;
-export const SNAPSHOT_EVIDENCE_PHRASE_FORMAT = "normalized-concepts-v2";
+export const SNAPSHOT_EVIDENCE_PLAN_FORMAT = "provider-concepts-v1";
 const EN_COLLATOR = new Intl.Collator("en-US");
-const CASE_SENSITIVE_SCIENTIFIC_SYMBOLS = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
-const AMBIGUOUS_SYMBOL_NAMES = new Map([
-  ["Am", "americium"],
-  ["As", "arsenic"],
-  ["At", "astatine"],
-  ["Be", "beryllium"],
-  ["He", "helium"],
-  ["In", "indium"],
-]);
-const GENERIC_RETRIEVAL_TERMS = new Set([
-  "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
-  "find", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
-  "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies", "subject", "subjects",
-  "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what",
-  "there", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
-]);
+const SHORT_RETRIEVAL_CONCEPTS = new Set(["ai", "ml", "ph"]);
 
 function clean(value, maximum = 500) {
   const text = String(value ?? "");
@@ -706,104 +691,51 @@ function publicAggregate(aggregate, { includeOrderedRefs = true } = {}) {
   };
 }
 
-function retrievalTokenEntries(value, maximum = 4_000) {
-  const text = clean(value, maximum)
-    .normalize("NFKD")
-    .replace(/\p{M}+/gu, "");
-  return [...text.matchAll(/[\p{L}\p{N}]+/gu)].map(match => {
-    const source = match[0];
-    const normalized = source.toLocaleLowerCase("en-US");
-    const after = text.slice((match.index || 0) + source.length);
-    return {
-      source,
-      normalized: /^fy(?:19|20)\d{2}$/u.test(normalized) ? normalized.slice(2) : normalized,
-      explicit_notation: /^(?:\d+(?:[+-])?|[+-])/u.test(after)
-        || /^-(?:based|containing|doped|rich|treated)\b/iu.test(after)
-        || /^\s*\(\s*(?:[IVX]{1,4}|[+-]?\d{1,2}[+-]?)\s*\)/u.test(after),
-    };
-  });
-}
-
 function normalizedRetrievalTokens(value, maximum = 4_000) {
-  return retrievalTokenEntries(value, maximum).map(entry => entry.normalized);
+  return (clean(value, maximum)
+    .normalize("NFKD")
+    .replace(/\p{M}+/gu, "")
+    .toLocaleLowerCase("en-US")
+    .match(/[\p{L}\p{N}]+/gu) || [])
+    .map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token);
 }
 
-function queryConceptKey(entry) {
-  return CASE_SENSITIVE_SCIENTIFIC_SYMBOLS.has(entry.source) ? `case:${entry.source}` : entry.normalized;
+function admissibleRetrievalToken(token) {
+  if (token.length >= 3) return true;
+  if (SHORT_RETRIEVAL_CONCEPTS.has(token)) return true;
+  return /\p{L}/u.test(token) && /\p{N}/u.test(token);
 }
 
-function retrievalTokens(value, maximum, confirmedSymbols) {
-  const tokens = [];
-  for (const entry of retrievalTokenEntries(value, maximum)) {
-    if (entry.normalized.length < 2 || GENERIC_RETRIEVAL_TERMS.has(entry.normalized)) continue;
-    tokens.push(entry.normalized);
-    if (entry.source === "pH"
-      || (AMBIGUOUS_SYMBOL_NAMES.has(entry.source)
-        && (confirmedSymbols.has(entry.source) || entry.explicit_notation))) {
-      tokens.push(`case:${entry.source}`);
-    }
-  }
-  return [...new Set(tokens)];
+function retrievalTokens(value, maximum) {
+  return [...new Set(normalizedRetrievalTokens(value, maximum).filter(admissibleRetrievalToken))];
 }
 
-function officerNameSequences(displayName) {
-  const noise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
-  const tokensFor = value => normalizedRetrievalTokens(value)
-    .filter(token => token && !noise.has(token));
-  const sequences = [];
-  const add = tokens => {
-    const key = tokens.join(" ");
-    if (tokens.length >= 2 && !sequences.some(sequence => sequence.join(" ") === key)) sequences.push(tokens);
-  };
-  const comma = String(displayName || "").indexOf(",");
-  if (comma >= 0) {
-    const surname = tokensFor(String(displayName).slice(0, comma));
-    const given = tokensFor(String(displayName).slice(comma + 1));
-    add([...given, ...surname]);
-    add([...surname, ...given]);
-    if (given.length > 1) {
-      add([given[0], ...surname]);
-      add([...surname, given[0]]);
-    }
-  } else {
-    const natural = tokensFor(displayName);
-    add(natural);
-    if (natural.length > 2) add([natural[0], natural.at(-1)]);
-  }
-  return sequences.sort((left, right) => right.length - left.length);
-}
-
-function stripOfficerNameOccurrences(entries, sequences) {
-  const removed = new Set();
-  for (const sequence of sequences) {
-    for (let index = 0; index <= entries.length - sequence.length; index += 1) {
-      if (sequence.every((token, offset) => !removed.has(index + offset) && entries[index + offset].normalized === token)) {
-        sequence.forEach((_token, offset) => removed.add(index + offset));
-        index += sequence.length - 1;
-      }
-    }
-  }
-  return entries.filter((_entry, index) => !removed.has(index));
-}
-
-export function normalizeEvidencePhrases(values) {
-  if (!Array.isArray(values) || values.length < 1 || values.length > 8) return null;
-  const phrases = [];
+function normalizedPlanTerms(values, { minimum, maximum }) {
+  if (!Array.isArray(values) || values.length < minimum || values.length > maximum) return null;
+  const terms = [];
   const seen = new Set();
   for (const value of values) {
     if (typeof value !== "string" || value.length > 120 || /[\r\n\t]/u.test(value)) return null;
     const text = clean(value, 120);
-    if (!text) return null;
-    const rawEntries = retrievalTokenEntries(text);
-    const tokens = [...new Set(rawEntries
-      .filter(entry => entry.normalized.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(entry.normalized))
-      .map(queryConceptKey))];
+    const tokens = normalizedRetrievalTokens(text, 120);
+    if (!text || !tokens.length || tokens.some(token => !admissibleRetrievalToken(token))) return null;
     const key = tokens.join(" ");
-    if (!key || seen.has(key)) continue;
+    if (seen.has(key)) continue;
     seen.add(key);
-    phrases.push({ key, tokens, raw_entries: rawEntries });
+    terms.push({ key, tokens });
   }
-  return phrases.length ? phrases : [];
+  return terms.length >= minimum ? terms : null;
+}
+
+export function normalizeEvidencePlan(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  if (Object.keys(value).sort().join("|") !== "concepts|exclusions|intent|phrases") return null;
+  if (value.intent !== "topical") return null;
+  const concepts = normalizedPlanTerms(value.concepts, { minimum: 1, maximum: 16 });
+  const phrases = normalizedPlanTerms(value.phrases, { minimum: 1, maximum: 8 });
+  const exclusions = normalizedPlanTerms(value.exclusions, { minimum: 0, maximum: 8 });
+  if (!concepts || !phrases || !exclusions) return null;
+  return { intent: "topical", concepts, phrases, exclusions };
 }
 
 function evidenceFieldValues(award) {
@@ -823,7 +755,7 @@ function evidenceFieldValues(award) {
   };
 }
 
-function scoreEvidenceAward(award, phrases, requiredConcepts) {
+function scoreEvidenceAward(award, phrases, requiredConcepts, exclusions) {
   const fields = evidenceFieldValues(award);
   const fieldLimits = {
     title: 1_000,
@@ -833,10 +765,6 @@ function scoreEvidenceAward(award, phrases, requiredConcepts) {
     investigators: 4_000,
     institution: 500,
   };
-  const allFieldTokens = new Set(normalizedRetrievalTokens(Object.values(fields).join(" "), SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT + 10_000));
-  const confirmedSymbols = new Set([...AMBIGUOUS_SYMBOL_NAMES]
-    .filter(([_symbol, name]) => allFieldTokens.has(name))
-    .map(([symbol]) => symbol));
   const weights = {
     title: { token: 100, phrase: 180 },
     abstract: { token: 28, phrase: 55 },
@@ -845,16 +773,20 @@ function scoreEvidenceAward(award, phrases, requiredConcepts) {
     investigators: { token: 4, phrase: 7 },
     institution: { token: 3, phrase: 5 },
   };
-  const fieldEntries = Object.entries(fields).map(([field, value]) => [field, new Set(retrievalTokens(value, fieldLimits[field], confirmedSymbols))]);
-  const awardConcepts = new Set(fieldEntries.flatMap(([, tokens]) => [...tokens]));
+  const fieldEntries = Object.entries(fields).map(([field, value]) => {
+    const ordered = normalizedRetrievalTokens(value, fieldLimits[field]).filter(admissibleRetrievalToken);
+    return [field, { ordered, tokens: new Set(ordered) }];
+  });
+  const awardConcepts = new Set(fieldEntries.flatMap(([, entry]) => [...entry.tokens]));
   if (requiredConcepts.some(concept => !awardConcepts.has(concept))) return { score: 0, matched_fields: [] };
-  let score = 0;
+  if (exclusions.some(exclusion => exclusion.tokens.every(token => awardConcepts.has(token)))) return { score: 0, matched_fields: [] };
+  let score = 1;
   const matchedFields = new Set();
-  for (const [field, fieldTokens] of fieldEntries) {
-    if (!fieldTokens.size) continue;
-    const normalizedField = [...fieldTokens].join(" ");
+  for (const [field, entry] of fieldEntries) {
+    if (!entry.tokens.size) continue;
+    const normalizedField = entry.ordered.join(" ");
     for (const phrase of phrases) {
-      const overlap = phrase.tokens.filter(token => fieldTokens.has(token)).length;
+      const overlap = phrase.tokens.filter(token => entry.tokens.has(token)).length;
       if (!overlap) continue;
       matchedFields.add(field);
       score += Math.min(4, overlap) * weights[field].token;
@@ -910,28 +842,16 @@ function publicMatchedAggregate(awards) {
   };
 }
 
-export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_LIMIT, phraseFormat = SNAPSHOT_EVIDENCE_PHRASE_FORMAT } = {}) {
+export function snapshotEvidence(snapshot, { plan, limit = SNAPSHOT_EVIDENCE_LIMIT, planFormat = SNAPSHOT_EVIDENCE_PLAN_FORMAT } = {}) {
   if (snapshot?.mode !== "program_officer" || !snapshot?.program_officer) return null;
-  const submittedPhrases = normalizeEvidencePhrases(phrases);
+  const normalizedPlan = normalizeEvidencePlan(plan);
   const normalizedLimit = Number(limit);
-  if (phraseFormat !== SNAPSHOT_EVIDENCE_PHRASE_FORMAT || submittedPhrases === null || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
-  const nameSequences = officerNameSequences(snapshot.program_officer.display_name);
-  const seenPhrases = new Set();
-  const normalizedPhrases = [];
-  for (const phrase of submittedPhrases) {
-    const tokens = [...new Set(stripOfficerNameOccurrences(phrase.raw_entries, nameSequences)
-      .filter(entry => entry.normalized.length >= 2 && !GENERIC_RETRIEVAL_TERMS.has(entry.normalized))
-      .map(queryConceptKey))];
-    const key = tokens.join(" ");
-    if (!key || seenPhrases.has(key)) continue;
-    seenPhrases.add(key);
-    normalizedPhrases.push({ key, tokens });
-  }
-  const requiredConcepts = [...new Set(normalizedPhrases.flatMap(phrase => phrase.tokens))];
+  if (planFormat !== SNAPSHOT_EVIDENCE_PLAN_FORMAT || !normalizedPlan || !Number.isInteger(normalizedLimit) || normalizedLimit < 1 || normalizedLimit > SNAPSHOT_EVIDENCE_LIMIT) return null;
+  const requiredConcepts = [...new Set(normalizedPlan.concepts.flatMap(concept => concept.tokens))];
   const scored = snapshot.awards.map((award, position) => ({
     award,
     position,
-    ...scoreEvidenceAward(award, normalizedPhrases, requiredConcepts),
+    ...scoreEvidenceAward(award, normalizedPlan.phrases, requiredConcepts, normalizedPlan.exclusions),
   })).filter(item => item.score > 0).sort((left, right) => (
     right.score - left.score
     || left.position - right.position
@@ -972,14 +892,19 @@ export function snapshotEvidence(snapshot, { phrases, limit = SNAPSHOT_EVIDENCE_
     matched_aggregate: publicMatchedAggregate(scored.map(item => item.award)),
     retrieval: {
       scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
-      concept_coverage: "all_substantive_query_concepts_same_record",
+      plan_format: SNAPSHOT_EVIDENCE_PLAN_FORMAT,
+      concept_coverage: "all_provider_concepts_same_record",
       required_concept_count: requiredConcepts.length,
+      phrase_count: normalizedPlan.phrases.length,
+      exclusion_count: normalizedPlan.exclusions.length,
       records_scanned: snapshot.awards.length,
       records_with_score: scored.length,
       records_selected: awards.length,
       serialized_characters: JSON.stringify(awards).length,
       limits: {
+        concepts: 16,
         phrases: 8,
+        exclusions: 8,
         records: SNAPSHOT_EVIDENCE_LIMIT,
         abstract_characters_per_record: SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,
         serialized_characters: SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,

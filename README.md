@@ -153,9 +153,14 @@ and direct pages of 10, 25, or 50; card hydration never changes those facts.
 Person-like source-published program contacts can start a locked, single-source
 Program Officer snapshot for recent five, all available, or custom source award
 years. Exact same-source post-validation removes partial-name results before
-totals or evidence. Aggregate questions need no AI; optional topical questions
-use deterministic full-snapshot Worker retrieval capped at 24 public records,
-800 abstract characters per record, and 18,000 serialized evidence characters.
+totals or evidence. Deterministic portfolio browsing and aggregate facts need no
+AI. Open-ended Program Officer Q&A is disabled without a user-connected provider
+key. With a key, provider-native structured output supplies only a bounded intent,
+concept, phrase, and exclusion plan; the Worker then applies deterministic
+full-snapshot retrieval capped at 24 public records, 800 abstract characters per
+record, and 18,000 serialized evidence characters before the provider receives
+that bounded evidence for a cited answer. The model never owns membership,
+totals, completeness, eligibility, ranking, or award IDs.
 The interface discloses completeness and abstract coverage and never describes
 the result as a complete career portfolio. An optional institution question translator
 uses the same browser-local Funding Finder provider configuration; it only creates

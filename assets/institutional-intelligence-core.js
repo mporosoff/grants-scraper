@@ -683,124 +683,56 @@
     };
   }
 
-  function programOfficerAggregateIntent(question, lockedDisplayName = "") {
-    const text = clean(question, 1_000).toLocaleLowerCase("en-US");
-    const intentText = text.replace(/\bprogram\s+(?:contact|official|officer)s?\b/gu, " ");
-    if (/how many|\bcount\b|number of/.test(text)) return "count";
-    if (/\bwho\b|investigator|researcher|\bpi\b/.test(text)) return "investigators";
-    if (/\bwhere\b|institution|organization|university|college|recipient/.test(text)) return "institutions";
-    if (/\bprograms?\b|mechanism|activity|office/.test(intentText)) return "programs";
-    if (/\bwhen\b|\byear|timeline|chronolog|oldest|newest|earliest|latest|recent/.test(text)) return "years";
-    if (/(?:\blist\b|\bshow\b).{0,24}(?:awards?|projects?)|which (?:awards?|projects?) (?:are |were )?(?:in|on|from) (?:this|the) snapshot|award titles?|project titles?|next page|previous page/.test(text)) return "awards";
-    const phrases = programOfficerRetrievalPhrases(question, lockedDisplayName);
-    if (text && Array.isArray(phrases) && phrases.length === 0) return "awards";
-    return "";
-  }
+  const PROGRAM_OFFICER_QUESTION_INTENTS = new Set([
+    "topical", "count", "investigators", "institutions", "programs", "years", "awards",
+  ]);
+  const PROGRAM_OFFICER_SHORT_CONCEPTS = new Set(["ai", "ml", "ph"]);
 
-  function programOfficerRetrievalPhrases(question, lockedDisplayName = "") {
-    const ignored = new Set([
-      "about", "all", "also", "and", "any", "are", "available", "award", "awards", "been", "can", "contact", "contacts", "could",
-      "area", "areas", "category", "categories", "college", "colleges", "count", "did", "does", "domain", "domains", "field", "fields", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "into",
-      "institution", "institutions", "investigator", "investigators",
-      "involve", "involved", "involves", "involving", "kind", "kinds", "manage", "managed", "many", "matching", "officer", "officers", "official", "officials",
-      "find", "number", "organization", "organizations", "overview", "please", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "study", "studies",
-      "subject", "subjects", "summarize", "summary", "support", "supported", "supports", "tell", "that", "the", "their", "them", "theme", "themes", "then", "these", "topic", "topics", "type", "types",
-      "pi", "there", "they", "this", "those", "timeline", "university", "universities", "use", "uses", "using", "was", "were", "what", "when", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
-    ]);
-    const shortNoise = new Set(["am", "an", "as", "at", "be", "by", "do", "he", "if", "in", "is", "it", "me", "my", "of", "oh", "ok", "on", "or", "so", "to", "up", "us", "we"]);
-    const caseSensitiveScientificSymbols = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
-    const questionSourceTokens = (clean(question, 1_000)
-      .normalize("NFKD")
-      .replace(/\p{M}+/gu, "")
-      .match(/[\p{L}\p{N}]+/gu) || []);
-    const scientificShorts = new Set(questionSourceTokens
-      .filter(token => token.length === 2 && (
-        /^[A-Z0-9]{2}$/u.test(token)
-        || /\d/u.test(token)
-        || caseSensitiveScientificSymbols.has(token)
-      ))
-      .map(token => token.toLocaleLowerCase("en-US")));
-    const normalizedTokens = (value, maximum) => clean(value, maximum)
+  function programOfficerPlanTokens(value) {
+    return clean(value, 120)
       .normalize("NFKD")
       .replace(/\p{M}+/gu, "")
       .toLocaleLowerCase("en-US")
-      .match(/[\p{L}\p{N}]+/gu)?.map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token) || [];
-    const requestPrefixStarters = new Set([
-      "are", "can", "could", "do", "find", "give", "help", "i", "is", "kindly", "list", "may", "please", "provide", "show", "tell", "we", "will", "would",
-    ]);
-    const requestPrefixTerms = new Set([
-      "a", "about", "an", "any", "are", "can", "could", "d", "display", "do", "fetch", "find", "for", "get", "give", "have", "help", "i", "identify", "if", "is", "kindly", "know", "like", "list", "locate", "look", "looking", "m", "may", "me", "need", "of", "please", "provide", "re", "retrieve", "return", "search", "see", "share", "show", "some", "surface", "tell", "the", "there", "to", "us", "want", "we", "whether", "will", "would", "you",
-    ]);
-    const stripLeadingRequest = tokens => {
-      if (!requestPrefixStarters.has(tokens[0])) return tokens;
-      let index = 0;
-      while (index < tokens.length && requestPrefixTerms.has(tokens[index])) index += 1;
-      return tokens.slice(index);
-    };
-    const nameNoise = new Set(["doctor", "professor", "junior", "senior", "jr", "sr", "ii", "iii", "iv"]);
-    const nameTokens = value => normalizedTokens(value, 300)
-      .filter(token => token && !nameNoise.has(token));
-    const nameSequences = [];
-    const addNameSequence = tokens => {
-      const key = tokens.join(" ");
-      if (tokens.length >= 2 && !nameSequences.some(sequence => sequence.join(" ") === key)) nameSequences.push(tokens);
-    };
-    const comma = lockedDisplayName.indexOf(",");
-    if (comma >= 0) {
-      const surname = nameTokens(lockedDisplayName.slice(0, comma));
-      const given = nameTokens(lockedDisplayName.slice(comma + 1));
-      addNameSequence([...given, ...surname]);
-      addNameSequence([...surname, ...given]);
-      if (given.length > 1) {
-        addNameSequence([given[0], ...surname]);
-        addNameSequence([...surname, given[0]]);
-      }
-    } else {
-      const natural = nameTokens(lockedDisplayName);
-      addNameSequence(natural);
-      if (natural.length > 2) addNameSequence([natural[0], natural.at(-1)]);
-    }
-    nameSequences.sort((left, right) => right.length - left.length);
-    const allQuestionTokens = normalizedTokens(question, 1_000);
-    const questionTokens = stripLeadingRequest(allQuestionTokens);
-    const strippedPrefixLength = allQuestionTokens.length - questionTokens.length;
-    const removed = new Set();
-    for (const sequence of nameSequences) {
-      for (let index = 0; index <= questionTokens.length - sequence.length; index += 1) {
-        if (sequence.every((token, offset) => !removed.has(index + offset) && questionTokens[index + offset] === token)) {
-          sequence.forEach((_token, offset) => removed.add(index + offset));
-          index += sequence.length - 1;
+      .match(/[\p{L}\p{N}]+/gu) || [];
+  }
+
+  function admissibleProgramOfficerPlanToken(token) {
+    if (token.length >= 3) return true;
+    if (PROGRAM_OFFICER_SHORT_CONCEPTS.has(token)) return true;
+    return /\p{L}/u.test(token) && /\p{N}/u.test(token);
+  }
+
+  function validateProgramOfficerQuestionPlan(value) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+    const intent = clean(value.intent, 30);
+    if (!PROGRAM_OFFICER_QUESTION_INTENTS.has(intent)) return null;
+    const normalizeTerms = (terms, maximum) => {
+      if (!Array.isArray(terms) || terms.length > maximum) return null;
+      const normalized = [];
+      const seen = new Set();
+      for (const candidate of terms) {
+        if (typeof candidate !== "string" || candidate.length > 120 || /[\r\n\t]/u.test(candidate)) return null;
+        const term = clean(candidate, 120);
+        const tokens = programOfficerPlanTokens(term);
+        if (!term || !tokens.length || tokens.some(token => !admissibleProgramOfficerPlanToken(token))) return null;
+        const key = tokens.join(" ");
+        if (!seen.has(key)) {
+          seen.add(key);
+          normalized.push(term);
         }
       }
+      return normalized;
+    };
+    const concepts = normalizeTerms(value.concepts, 16);
+    const phrases = normalizeTerms(value.phrases, 8);
+    const exclusions = normalizeTerms(value.exclusions, 8);
+    if (!concepts || !phrases || !exclusions) return null;
+    if (intent === "topical") {
+      if (!concepts.length || !phrases.length) return null;
+    } else if (concepts.length || phrases.length || exclusions.length) {
+      return null;
     }
-    const tokens = questionTokens.map((token, index) => {
-      const sourceToken = questionSourceTokens[strippedPrefixLength + index] || "";
-      return {
-        key: caseSensitiveScientificSymbols.has(sourceToken) ? `case:${sourceToken}` : token,
-        output: caseSensitiveScientificSymbols.has(sourceToken) ? sourceToken : token,
-        token,
-        index,
-      };
-    }).filter(item => (
-      (item.token.length >= 3 || (item.token.length === 2 && (!shortNoise.has(item.token) || scientificShorts.has(item.token))))
-      && !removed.has(item.index)
-      && !ignored.has(item.token)
-    ));
-    const unique = [...new Map(tokens.map(item => [item.key, item.output])).values()];
-    if (!unique.length) return [];
-    const phrases = [];
-    for (const token of unique) {
-      if (token.length > 120) return null;
-      const slot = phrases.findIndex(phrase => phrase.length + token.length + 1 <= 120);
-      if (slot >= 0) {
-        phrases[slot] = `${phrases[slot]} ${token}`;
-      } else if (phrases.length < 8) {
-        phrases.push(token);
-      } else {
-        return null;
-      }
-    }
-    return phrases;
+    return { intent, concepts, phrases, exclusions };
   }
 
   function programOfficerScopeText(snapshot) {
@@ -869,24 +801,18 @@
     };
   }
 
-  function programOfficerProviderPayload({ question, snapshot, evidencePack }) {
+  function programOfficerProviderPayload({ question, snapshot, retrievalPlan = null, evidencePack }) {
     const officer = snapshot?.program_officer || {};
     return {
       question: clean(question, 1_000),
       locked_scope: {
-        snapshot_id: clean(snapshot?.snapshot_id, 100),
         source: clean(officer.source, 10),
         exact_source_display_name: clean(officer.display_name, 300),
-        contact_key: clean(officer.contact_key, 300),
         year_preset: clean(officer.year_preset, 20),
         year_start: validYear(officer.year_start),
         year_end: validYear(officer.year_end),
-        completeness: clean(snapshot?.completeness, 40),
-        exact_total: snapshot?.completeness === "complete" ? Number(snapshot?.exact_total || 0) : null,
-        at_least: Number(snapshot?.at_least || 0),
-        abstract_coverage: snapshot?.abstract_coverage || null,
       },
-      deterministic_retrieval: evidencePack?.retrieval || null,
+      deterministic_retrieval_plan: retrievalPlan,
       public_award_evidence: Array.isArray(evidencePack?.awards) ? evidencePack.awards : [],
     };
   }
@@ -1056,9 +982,8 @@
     programDescriptors,
     programCriterion,
     programContactKey,
-    programOfficerAggregateIntent,
     programOfficerProviderPayload,
-    programOfficerRetrievalPhrases,
+    validateProgramOfficerQuestionPlan,
     questionEvidencePack,
     questionProviderPayload,
     requiresExplicitInstitutionSelection,

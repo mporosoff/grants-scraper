@@ -114,21 +114,27 @@ test("Funding Finder has no serious or critical violations across critical state
 test("Funded Awards Institutional Intelligence has no serious or critical violations", async ({ page }, testInfo) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
-  await page.route("https://api.openai.com/v1/responses", route => route.fulfill({
-    status: 200,
-    headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
-    body: JSON.stringify(openAiStructuredResponse({
-      agency: "DOE",
-      program: "BES",
-      topic: "",
-      pi: "",
-      program_officer: "",
-      year_start: "",
-      year_end: "",
-      answer_intent: "investigators",
-      narrative_needed: false,
-    })),
-  }));
+  await page.route("https://api.openai.com/v1/responses", route => {
+    const operation = route.request().postDataJSON()?.text?.format?.name;
+    const value = operation === "program_officer_question_plan_v1"
+      ? { intent: "count", concepts: [], phrases: [], exclusions: [] }
+      : {
+        agency: "DOE",
+        program: "BES",
+        topic: "",
+        pi: "",
+        program_officer: "",
+        year_start: "",
+        year_end: "",
+        answer_intent: "investigators",
+        narrative_needed: false,
+      };
+    return route.fulfill({
+      status: 200,
+      headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json" },
+      body: JSON.stringify(openAiStructuredResponse(value)),
+    });
+  });
   mockAwards(page);
   await page.goto("/funded_awards.html");
   await page.locator("#ii-institution").fill("MIT");

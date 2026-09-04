@@ -128,10 +128,12 @@ if (investigator?.identity_key && !facetVerified) {
 
 const programOfficerEvidenceContract = contract.program_officer_evidence;
 if (programOfficerEvidenceContract?.endpoint !== "/awards/snapshots/evidence"
-  || programOfficerEvidenceContract.phrase_format !== "normalized-concepts-v2"
-  || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v2"
-  || programOfficerEvidenceContract.concept_coverage !== "all_substantive_query_concepts_same_record"
+  || programOfficerEvidenceContract.plan_format !== "provider-concepts-v1"
+  || programOfficerEvidenceContract.scoring_version !== "program-officer-evidence-v3"
+  || programOfficerEvidenceContract.concept_coverage !== "all_provider_concepts_same_record"
+  || programOfficerEvidenceContract.maximum_concepts !== 16
   || programOfficerEvidenceContract.maximum_phrases !== 8
+  || programOfficerEvidenceContract.maximum_exclusions !== 8
   || programOfficerEvidenceContract.maximum_records !== 24
   || programOfficerEvidenceContract.matched_facet_limit !== 12
   || programOfficerEvidenceContract.abstract_characters_per_record !== 800
@@ -220,10 +222,11 @@ for (const source of ["NSF", "NIH", "DOE"]) {
     evidenceSeed ||= records[0] || null;
   }
   if (!evidenceSeed) throw new Error(`${source} recent-five Program Officer snapshot unexpectedly had no retained record.`);
+  const evidenceConcept = (String(evidenceSeed.title || "").match(/[\p{L}\p{N}]{3,}/u) || ["research"])[0];
   const evidence = await post("awards/snapshots/evidence", {
     snapshot_id: recent.snapshot_id,
-    phrases: [String(evidenceSeed.title || "public research award").slice(0, 120)],
-    phrase_format: "normalized-concepts-v2",
+    retrieval_plan: { intent: "topical", concepts: [evidenceConcept], phrases: [evidenceConcept], exclusions: [] },
+    plan_format: "provider-concepts-v1",
     limit: 24,
   });
   if (evidence.mode !== "program_officer"

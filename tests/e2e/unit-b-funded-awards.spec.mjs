@@ -17,6 +17,27 @@ async function searchTopic(page, topic = "catalysis", agency = "NSF") {
   await expect(page.locator("#ii-output")).toBeVisible();
 }
 
+async function routeProgramOfficerProvider(page, {
+  plan = { intent: "topical", concepts: ["carbon", "dioxide", "conversion"], phrases: ["carbon dioxide conversion"], exclusions: [] },
+  claims = [{ text: "The supplied awards support the requested topic.", evidence_ids: ["NSF:2605508"] }],
+} = {}) {
+  const calls = [];
+  await page.route("https://api.openai.com/v1/responses", async route => {
+    const request = route.request().postDataJSON();
+    calls.push(request);
+    const value = request.text?.format?.name === "program_officer_question_plan_v1" ? plan : { claims };
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(openAiStructuredResponse(value)) });
+  });
+  return calls;
+}
+
+async function configureProgramOfficerProvider(page) {
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-key").fill("sk-program-officer-e2e-test");
+  await page.locator("#ii-save-key").click();
+  await expect(page.locator("#ii-question")).toBeEnabled();
+}
+
 for (const count of [0, 1, 9, 10, 11, 25, 26, 50, 51]) {
   test(`snapshot pagination handles exactly ${count} matching awards`, async ({ page }) => {
     const { runtimeErrors } = await openSearch(page, { resultCountPerSource: count });
@@ -573,100 +594,63 @@ test("source-listed Program Officer actions create locked, navigable snapshots w
   expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
 });
 
-test("Program Officer questions use the full stored snapshot while keeping visible cards bounded", async ({ page }) => {
+test("Program Officer AI Q&A is key-gated, provider-planned, deterministic, bounded, and cited", async ({ page }) => {
+  const providerCalls = [];
+  await page.route("https://api.openai.com/v1/responses", async route => {
+    const request = route.request().postDataJSON();
+    providerCalls.push(request);
+    const operation = request.text?.format?.name;
+    const value = operation === "program_officer_question_plan_v1"
+      ? (providerCalls.filter(call => call.text?.format?.name === operation).length === 1
+        ? { intent: "topical", concepts: ["carbon", "dioxide", "conversion"], phrases: ["carbon dioxide conversion"], exclusions: [] }
+        : { intent: "count", concepts: [], phrases: [], exclusions: [] })
+      : { claims: [{ text: "The supplied awards describe carbon dioxide conversion work.", evidence_ids: ["NSF:2605508"] }] };
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(openAiStructuredResponse(value)) });
+  });
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 30 });
   await searchTopic(page, "full-snapshot-question", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
   await expect(page.locator("#ii-po-scope")).toBeVisible();
-  const createCount = calls.filter(call => Array.isArray(call.sources)).length;
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await expect(page.locator("#ii-question")).toBeDisabled();
+  await expect(page.locator("#ii-ask-button")).toBeDisabled();
+  await expect(page.locator("#ii-ai-state")).toContainText("Q&A is disabled until you connect an AI provider key");
+  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(10);
+  await expect(page.locator("#ii-card-page-label")).toContainText("of 30");
+
+  await page.locator("#ii-provider").selectOption("openai");
+  await page.locator("#ii-key").fill("sk-program-officer-test");
+  await page.locator("#ii-save-key").click();
+  await expect(page.locator("#ii-question")).toBeEnabled();
   await page.locator("#ii-question").fill("Which projects involve carbon dioxide conversion?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();
   await expect(page.locator("#ii-direct-answer")).toContainText("related projects");
+  await expect(page.locator("#ii-direct-answer")).toContainText("supplied awards describe carbon dioxide conversion work");
   await expect(page.locator("#ii-answer-limitations")).toContainText("scanned all 30 stored records");
-  await expect(page.locator("#ii-answer-limitations")).toContainText("did not rely on the visible page");
-  await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(10);
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(1);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  await page.locator("#ii-question").fill("Which investigators work on carbon dioxide conversion?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("Matching investigators: Vasily Karasiev");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(2);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  await page.locator("#ii-question").fill("Which investigators received awards in FY2026?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("Matching investigators: Vasily Karasiev");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  await page.locator("#ii-question").fill("What awards did Vladimir Lukin fund?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
-
-  await page.locator("#ii-question").fill("Where did Vladimir Lukin fund projects?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("Recipient institutions in the result snapshot");
-  await expect(page.locator("#ii-direct-answer")).toContainText("University of Rochester");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(3);
-
-  await page.locator("#ii-question").fill("Where did Vladimir Lukin fund carbon dioxide conversion projects?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("Matching recipient institutions: University of Rochester");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(4);
-
-  await page.locator("#ii-question").fill("Could you find awards about carbon dioxide conversion?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(5);
-
-  await page.locator("#ii-question").fill("Can you help me find projects about carbon dioxide conversion?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 related projects");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(6);
-
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  const beyondPageLink = page.locator("#ii-answer-evidence [data-ii-evidence-link]").nth(10);
-  const beyondId = await beyondPageLink.getAttribute("data-ii-evidence-link");
-  await beyondPageLink.click();
-  await expect(page.locator(`[data-evidence-id="${beyondId}"]`)).toBeFocused();
-  await expect(page).toHaveURL(/ii_page=2/);
-
-  await page.locator("#ii-question").fill("Which projects involve AI?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("No related project");
-  const shortConceptCalls = calls.filter(call => Array.isArray(call.phrases));
-  expect(shortConceptCalls).toHaveLength(7);
-  expect(shortConceptCalls.at(-1)).toMatchObject({ phrases: ["ai"], phrase_format: "normalized-concepts-v2" });
-
-  const evidenceCalls = calls.filter(call => Array.isArray(call.phrases)).length;
-  const overCapacityQuestion = `Which projects involve ${Array.from({ length: 9 }, (_, index) => String.fromCharCode(97 + index).repeat(105)).join(" ")}?`;
-  await page.locator("#ii-question").fill(overCapacityQuestion);
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-plan")).toContainText("too many distinct concepts");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
+  await expect(page.locator("#ii-answer-limitations")).toContainText("membership, totals, completeness, eligibility, and ranking stayed deterministic");
+  expect(providerCalls.map(call => call.text?.format?.name)).toEqual([
+    "program_officer_question_plan_v1",
+    "program_officer_evidence_answer_v1",
+  ]);
+  const evidenceCalls = calls.filter(call => call.retrieval_plan);
+  expect(evidenceCalls).toHaveLength(1);
+  expect(evidenceCalls[0]).toMatchObject({
+    plan_format: "provider-concepts-v1",
+    retrieval_plan: { intent: "topical", concepts: ["carbon", "dioxide", "conversion"], phrases: ["carbon dioxide conversion"], exclusions: [] },
+    limit: 24,
+  });
+  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
 
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("30 normalized matching awards");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  await page.locator("#ii-question").fill("What kinds of projects did they fund?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
-
-  await page.locator("#ii-question").fill("What research did they fund?");
-  await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(evidenceCalls);
-  expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
+  expect(calls.filter(call => call.retrieval_plan)).toHaveLength(1);
+  expect(providerCalls.map(call => call.text?.format?.name)).toEqual([
+    "program_officer_question_plan_v1",
+    "program_officer_evidence_answer_v1",
+    "program_officer_question_plan_v1",
+  ]);
   expect(runtimeErrors).toEqual([]);
 });
 
@@ -692,6 +676,7 @@ test("an expired Program Officer page rebuild preserves exact contact, preset, y
 });
 
 test("expired Program Officer evidence rebuilds the exact scope and restores the requested page", async ({ page }) => {
+  await routeProgramOfficerProvider(page);
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 30, snapshotEvidenceExpireAtCall: 1 });
   await searchTopic(page, "program-officer-evidence-expiry", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
@@ -699,6 +684,7 @@ test("expired Program Officer evidence rebuilds the exact scope and restores the
   await page.locator("#ii-card-next").click();
   await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await configureProgramOfficerProvider(page);
   await page.locator("#ii-question").fill("Which projects involve carbon dioxide conversion?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("related projects");
@@ -711,7 +697,7 @@ test("expired Program Officer evidence rebuilds the exact scope and restores the
   await expect(page).toHaveURL(/ii_page=2/);
   expect(new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(firstSnapshot);
   expect(calls.filter(call => call.criteria?.mode === "program_officer")).toHaveLength(2);
-  expect(calls.filter(call => Array.isArray(call.phrases))).toHaveLength(2);
+  expect(calls.filter(call => call.retrieval_plan)).toHaveLength(2);
   expect(runtimeErrors.filter(error => !error.includes("410 (Gone)"))).toEqual([]);
 });
 
@@ -738,6 +724,10 @@ test("a rate-limited Program Officer source retries into an exact-scope successo
 });
 
 test("an incomplete Program Officer snapshot never turns a deterministic topical miss into a negative finding", async ({ page }) => {
+  await routeProgramOfficerProvider(page, {
+    plan: { intent: "topical", concepts: ["quantum", "sensing"], phrases: ["quantum sensing"], exclusions: [] },
+    claims: [],
+  });
   const { runtimeErrors } = await openSearch(page, {
     resultCountPerSource: 3,
     hasMoreBySource: { NSF: [0] },
@@ -746,6 +736,7 @@ test("an incomplete Program Officer snapshot never turns a deterministic topical
   await searchTopic(page, "partial-contact", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await configureProgramOfficerProvider(page);
   await page.locator("#ii-question").fill("Which projects involve quantum sensing?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("No related project was identified in the available records, but the source snapshot is incomplete, so this is not a negative finding.");

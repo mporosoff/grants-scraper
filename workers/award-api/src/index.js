@@ -18,7 +18,7 @@ import {
   SNAPSHOT_EVIDENCE_FACET_LIMIT,
   SNAPSHOT_EVIDENCE_INDEXED_ABSTRACT_LIMIT,
   SNAPSHOT_EVIDENCE_LIMIT,
-  SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
+  SNAPSHOT_EVIDENCE_PLAN_FORMAT,
   SNAPSHOT_EVIDENCE_PAYLOAD_LIMIT,
   SNAPSHOT_EVIDENCE_SCORING_VERSION,
   SNAPSHOT_FACET_KEY_MAX_LENGTH,
@@ -635,13 +635,12 @@ function validateSnapshotRetry(body) {
 }
 
 function validateSnapshotEvidence(body) {
-  if (!exactKeys(body, ["snapshot_id", "phrases", "phrase_format", "limit"])) return null;
+  if (!exactKeys(body, ["snapshot_id", "retrieval_plan", "plan_format", "limit"])) return null;
   const snapshotId = validateSnapshotId(body.snapshot_id);
   const limit = boundedInteger(body.limit, { minimum: 1, maximum: SNAPSHOT_EVIDENCE_LIMIT });
-  if (!snapshotId || !limit || body.phrase_format !== SNAPSHOT_EVIDENCE_PHRASE_FORMAT || !Array.isArray(body.phrases) || body.phrases.length < 1 || body.phrases.length > 8) return null;
-  const phrases = body.phrases.map(value => normalizedString(value, 120));
-  if (phrases.some(value => !value)) return null;
-  return { snapshotId, phrases, phraseFormat: body.phrase_format, limit };
+  if (!snapshotId || !limit || body.plan_format !== SNAPSHOT_EVIDENCE_PLAN_FORMAT
+    || !body.retrieval_plan || typeof body.retrieval_plan !== "object" || Array.isArray(body.retrieval_plan)) return null;
+  return { snapshotId, plan: body.retrieval_plan, planFormat: body.plan_format, limit };
 }
 
 function snapshotCacheRequest(snapshotId) {
@@ -776,10 +775,12 @@ export function createHandler({
           resource_budget: WORKER_RESOURCE_BUDGET,
           program_officer_evidence: {
             endpoint: "/awards/snapshots/evidence",
-            phrase_format: SNAPSHOT_EVIDENCE_PHRASE_FORMAT,
+            plan_format: SNAPSHOT_EVIDENCE_PLAN_FORMAT,
             scoring_version: SNAPSHOT_EVIDENCE_SCORING_VERSION,
-            concept_coverage: "all_substantive_query_concepts_same_record",
+            concept_coverage: "all_provider_concepts_same_record",
+            maximum_concepts: 16,
             maximum_phrases: 8,
+            maximum_exclusions: 8,
             maximum_records: SNAPSHOT_EVIDENCE_LIMIT,
             matched_facet_limit: SNAPSHOT_EVIDENCE_FACET_LIMIT,
             abstract_characters_per_record: SNAPSHOT_EVIDENCE_ABSTRACT_LIMIT,

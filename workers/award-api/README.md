@@ -9,8 +9,9 @@ extended through the isolated DOE adapter in Phase 4. It exposes:
   server-authoritative result snapshots;
 - `POST /awards/snapshots/evidence` for bounded deterministic retrieval over
   an unexpired Program Officer snapshot. Evidence requests declare
-  `"phrase_format": "normalized-concepts-v2"`; phrases are browser-normalized
-  substantive concepts and are not reinterpreted as raw questions. Matching
+  `"plan_format": "provider-concepts-v1"` and carry a provider-generated,
+  browser-validated plan of at most 16 concepts, eight ranking phrases, and
+  eight exclusions. The Worker never interprets the raw question. Matching
   tokenizes up to 20,000 retained abstract characters per award; and
 - `GET /health` for the enabled sources, adapter versions, cache ceiling, and
   credential requirement only.
@@ -77,14 +78,21 @@ award years from the snapshot's single UTC clock. Public metadata discloses the
 exact or lower-bound total, source/coverage state, abstract coverage, expiry,
 and post-validation counts.
 
-The evidence endpoint accepts only a snapshot ID, one to eight bounded phrases,
-and a limit no greater than 24. It scores the complete stored snapshot without
+The evidence endpoint accepts only a snapshot ID, a strict bounded topical plan,
+and a limit no greater than 24. Every provider concept must occur in the same
+record; an exclusion disqualifies a record; phrases affect deterministic ordering
+but cannot admit a record. It scores the complete stored snapshot without
 changing membership, returns at most 800 abstract characters per record and
-18,000 serialized evidence characters, and never stores the phrases. Title
+18,000 serialized evidence characters, and never stores the plan. Title
 matches outweigh abstract matches; program/office fields are supporting
 signals, and investigator/institution fields are weak signals. The endpoint
 uses the existing origin, body-size, expiration, and Durable Object abuse-control
-contracts. It creates no corpus or database.
+contracts. Its tokenizer is deliberately conservative: alphanumeric formulas
+such as `CO2`, `H2`, and `As2O3` and the short allowlist `AI`, `ML`, and `pH` are
+accepted; ambiguous alphabetic two-letter tokens such as `Am`, `As`, `At`, `Be`,
+`He`, and `In` are rejected, so the provider must return full names. No
+capitalization, punctuation, bracket, neighbor, or notation inference is used.
+It creates no corpus or database.
 
 ## Cache and credentials
 

@@ -462,7 +462,7 @@ export function mockAwards(target, {
     }
     if (requestUrl.pathname === "/awards/snapshots/evidence" && request.method() === "POST") {
       snapshotEvidenceCallCount += 1;
-      if (body.phrase_format !== "normalized-concepts-v2") {
+      if (body.plan_format !== "provider-concepts-v1") {
         await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_request" } }) });
         return;
       }
@@ -475,57 +475,28 @@ export function mockAwards(target, {
         await route.fulfill({ status: 410, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "snapshot_expired" } }) });
         return;
       }
-      const genericTerms = new Set([
-        "about", "all", "also", "and", "any", "are", "area", "areas", "available", "award", "awards", "been", "can", "category", "categories", "college", "colleges", "could", "count", "did", "does", "domain", "domains", "field", "fields",
-        "find", "for", "from", "fund", "funded", "funding", "got", "grant", "grants", "has", "have", "held", "hold", "holds", "how", "institution", "institutions", "into", "investigator", "investigators",
-        "involve", "involved", "involves", "involving", "kind", "kinds", "many", "matching", "number", "organization", "organizations", "program", "programs", "project", "projects", "receive", "received", "receives", "recipient", "recipients", "record", "records", "related", "relevant", "research", "researcher", "researchers", "result", "results", "snapshot", "snapshots", "source", "subject", "subjects",
-        "study", "studies", "support", "supported", "supports", "that", "the", "their", "theme", "themes", "then", "this", "those", "timeline", "topic", "topics", "type", "types", "university", "universities", "use", "uses", "using", "was", "were", "what", "when",
-        "there", "where", "which", "who", "why", "with", "work", "would", "year", "years", "you", "your",
-      ]);
-      const caseSensitiveScientificSymbols = new Set(["Am", "As", "At", "Be", "He", "In", "pH"]);
-      const ambiguousSymbolNames = new Map([["Am", "americium"], ["As", "arsenic"], ["At", "astatine"], ["Be", "beryllium"], ["He", "helium"], ["In", "indium"]]);
-      const evidenceTokenEntries = value => {
-        const text = String(value || "").normalize("NFKD").replace(/\p{M}+/gu, "");
-        return [...text.matchAll(/[\p{L}\p{N}]+/gu)].map(match => {
-          const source = match[0];
-          const lowered = source.toLowerCase();
-          const after = text.slice((match.index || 0) + source.length);
-          return {
-            source,
-            normalized: /^fy(?:19|20)\d{2}$/u.test(lowered) ? lowered.slice(2) : lowered,
-            explicit_notation: /^(?:\d+(?:[+-])?|[+-])/u.test(after)
-              || /^-(?:based|containing|doped|rich|treated)\b/iu.test(after)
-              || /^\s*\(\s*(?:[IVX]{1,4}|[+-]?\d{1,2}[+-]?)\s*\)/u.test(after),
-          };
-        });
+      const shortConcepts = new Set(["ai", "ml", "ph"]);
+      const normalizedEvidenceTokens = value => (String(value || "")
+        .normalize("NFKD").replace(/\p{M}+/gu, "").toLowerCase().match(/[\p{L}\p{N}]+/gu) || [])
+        .map(token => /^fy(?:19|20)\d{2}$/u.test(token) ? token.slice(2) : token);
+      const admissible = token => token.length >= 3 || shortConcepts.has(token) || (/\p{L}/u.test(token) && /\p{N}/u.test(token));
+      const plan = body.retrieval_plan;
+      const exactPlanKeys = plan && typeof plan === "object" && !Array.isArray(plan)
+        && Object.keys(plan).sort().join("|") === "concepts|exclusions|intent|phrases";
+      const normalizeTerms = (values, minimum, maximum) => {
+        if (!Array.isArray(values) || values.length < minimum || values.length > maximum) return null;
+        const terms = values.map(value => normalizedEvidenceTokens(value));
+        return terms.some(tokens => !tokens.length || tokens.some(token => !admissible(token))) ? null : terms;
       };
-      const normalizedEvidenceTokens = value => evidenceTokenEntries(value).map(entry => entry.normalized);
-      const queryConceptKey = entry => caseSensitiveScientificSymbols.has(entry.source) ? `case:${entry.source}` : entry.normalized;
-      const evidenceTokens = (value, confirmedSymbols) => evidenceTokenEntries(value).flatMap(entry => {
-        if (entry.normalized.length < 2 || genericTerms.has(entry.normalized)) return [];
-        return entry.source === "pH" || (ambiguousSymbolNames.has(entry.source) && (confirmedSymbols.has(entry.source) || entry.explicit_notation))
-          ? [entry.normalized, `case:${entry.source}`]
-          : [entry.normalized];
-      });
-      const lockedName = normalizedEvidenceTokens(snapshot.program_officer.display_name);
-      const nameSequences = lockedName.length >= 2 ? [lockedName, [...lockedName].reverse()] : [];
-      const stripNameOccurrences = entries => {
-        const removed = new Set();
-        for (const sequence of nameSequences) {
-          for (let index = 0; index <= entries.length - sequence.length; index += 1) {
-            if (sequence.every((token, offset) => !removed.has(index + offset) && entries[index + offset].normalized === token)) {
-              sequence.forEach((_token, offset) => removed.add(index + offset));
-              index += sequence.length - 1;
-            }
-          }
-        }
-        return entries.filter((_entry, index) => !removed.has(index));
-      };
-      const requiredConcepts = [...new Set(body.phrases
-        .flatMap(phrase => stripNameOccurrences(evidenceTokenEntries(phrase)))
-        .filter(entry => entry.normalized.length >= 2 && !genericTerms.has(entry.normalized))
-        .map(queryConceptKey))];
-      const scored = snapshot.records.filter(record => {
+      const concepts = exactPlanKeys && plan.intent === "topical" ? normalizeTerms(plan.concepts, 1, 16) : null;
+      const phrases = exactPlanKeys ? normalizeTerms(plan.phrases, 1, 8) : null;
+      const exclusions = exactPlanKeys ? normalizeTerms(plan.exclusions, 0, 8) : null;
+      if (!concepts || !phrases || !exclusions) {
+        await route.fulfill({ status: 400, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, error: { code: "invalid_evidence_request" } }) });
+        return;
+      }
+      const requiredConcepts = [...new Set(concepts.flat())];
+      const scored = snapshot.records.map((record, position) => {
         const recordValues = [
           record.title,
           record.abstract,
@@ -537,15 +508,19 @@ export function mockAwards(target, {
           ...(record.principal_investigators || []).map(person => person.name),
           record.institution?.normalized_name || record.institution?.name,
         ].filter(Boolean);
-        const normalizedRecordTokens = new Set(recordValues.flatMap(value => normalizedEvidenceTokens(value)));
-        const confirmedSymbols = new Set([...ambiguousSymbolNames]
-          .filter(([_symbol, name]) => normalizedRecordTokens.has(name))
-          .map(([symbol]) => symbol));
-        const recordTokens = new Set(recordValues.flatMap(value => evidenceTokens(value, confirmedSymbols)));
-        return requiredConcepts.length > 0 && requiredConcepts.every(concept => recordTokens.has(concept));
-      });
-      const awards = scored.slice(0, body.limit).map(record => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: snapshot.records.indexOf(record) + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: 100, matched_fields: ["title", "abstract"] }));
-      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(scored), retrieval: { scoring_version: "program-officer-evidence-v2", concept_coverage: "all_substantive_query_concepts_same_record", required_concept_count: requiredConcepts.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { phrases: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
+        const recordTokens = new Set(recordValues.flatMap(value => normalizedEvidenceTokens(value)).filter(admissible));
+        if (!requiredConcepts.every(concept => recordTokens.has(concept))
+          || exclusions.some(exclusion => exclusion.every(token => recordTokens.has(token)))) return null;
+        const titleTokens = new Set(normalizedEvidenceTokens(record.title).filter(admissible));
+        const abstractTokens = new Set(normalizedEvidenceTokens(record.abstract).filter(admissible));
+        const score = phrases.reduce((total, phrase) => total
+          + phrase.filter(token => titleTokens.has(token)).length * 100
+          + phrase.filter(token => abstractTokens.has(token)).length * 28, 0);
+        return { record, position, score };
+      }).filter(Boolean).sort((left, right) => right.score - left.score || left.position - right.position);
+      const matchedRecords = scored.map(item => item.record);
+      const awards = scored.slice(0, body.limit).map(({ record, position, score }) => ({ evidence_id: `${record.source}:${record.award_id}`, snapshot_position: position + 1, source: record.source, award_id: record.award_id, title: record.title, program: record.program_name, program_office: record.subagency, year: record.award_year, investigators: record.principal_investigators.map(person => person.name), institution: record.institution.normalized_name, abstract_excerpt: record.abstract, deterministic_score: score, matched_fields: ["title", "abstract"] }));
+      await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify({ schema_version: 1, snapshot_id: snapshot.snapshot_id, as_of: snapshot.as_of, expires_at: snapshot.expires_at, mode: snapshot.mode, program_officer: snapshot.program_officer, completeness: snapshot.completeness, coverage_state: snapshot.completeness, exact_total: snapshot.exact_total, at_least: snapshot.records.length, year_scope: { preset: snapshot.program_officer.year_preset, start: snapshot.program_officer.year_start, end: snapshot.program_officer.year_end }, abstract_coverage: snapshot.abstract_coverage, matched_aggregate: matchedAggregate(matchedRecords), retrieval: { scoring_version: "program-officer-evidence-v3", plan_format: "provider-concepts-v1", concept_coverage: "all_provider_concepts_same_record", required_concept_count: requiredConcepts.length, phrase_count: phrases.length, exclusion_count: exclusions.length, records_scanned: snapshot.records.length, records_with_score: scored.length, records_selected: awards.length, serialized_characters: JSON.stringify(awards).length, limits: { concepts: 16, phrases: 8, exclusions: 8, records: 24, abstract_characters_per_record: 800, serialized_characters: 18000 } }, awards }) });
       return;
     }
     if (requestUrl.pathname === "/awards/snapshots/page" && request.method() === "POST") {

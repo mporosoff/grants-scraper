@@ -265,7 +265,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=ai-additive-20260829"></script>',
+            '<script src="./assets/ai-provider.js?v=program-officer-qna-20260830"></script>',
             explorer_html,
         )
         self.assertIn(

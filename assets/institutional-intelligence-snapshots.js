@@ -86,9 +86,13 @@
   function setBusy(busy) {
     state.busyDepth = Math.max(0, state.busyDepth + (busy ? 1 : -1));
     const active = state.busyDepth > 0;
+    const programOfficerQuestionBlocked = Boolean(
+      state.programOfficerScope && !credentials.loadKey(clean($("ii-provider")?.value, 20)),
+    );
     $("ii-search").disabled = active;
     $("ii-clear").disabled = active;
-    $("ii-ask-button").disabled = active || state.questionSubmitting;
+    $("ii-question").disabled = programOfficerQuestionBlocked;
+    $("ii-ask-button").disabled = active || state.questionSubmitting || programOfficerQuestionBlocked;
     $("ii-output").setAttribute("aria-busy", active ? "true" : "false");
     $("ii-card-previous").disabled = active || !state.pagePayload?.pagination?.has_previous;
     $("ii-card-next").disabled = active || !state.pagePayload?.pagination?.has_next;
@@ -318,13 +322,16 @@
     $("ii-po-name").textContent = state.programOfficerScope?.display_name || "";
     $("ii-po-source").textContent = state.programOfficerScope?.source || "";
     $("ii-institution-field").classList.toggle("hidden", officerMode);
-    $("ii-ask-heading").textContent = officerMode ? "Optional: Ask about this Program Officer snapshot" : "Optional: Ask about this institution";
-    $("ii-ask-summary").textContent = officerMode ? "Answer from the full stored source snapshot, not only visible cards" : "Answer from returned public NSF, NIH, and DOE award evidence";
+    $("ii-ask-heading").textContent = officerMode ? "Optional AI Q&A about this Program Officer snapshot" : "Optional: Ask about this institution";
+    $("ii-ask-summary").textContent = officerMode ? "Requires a connected provider to interpret the question; deterministic retrieval still uses the full stored snapshot" : "Answer from returned public NSF, NIH, and DOE award evidence";
     $("ii-question-label").textContent = officerMode ? `Question about ${state.programOfficerScope?.display_name || "this exact source-listed contact"}` : "Question about the selected institution";
+    $("ii-key-heading").textContent = officerMode ? "Connect the AI provider required for Program Officer Q&A" : "Connect the same optional AI provider used by Funding Finder";
     $("ii-question").placeholder = officerMode ? "Example: Which projects involve catalysis?" : "Who at this institution has received awards from DOE BES?";
+    $("ii-ask-button").textContent = officerMode ? "Ask with connected AI provider" : "Answer using public awards";
     $("ii-privacy-note").textContent = officerMode
-      ? "The key stays in the same browser-local Funding Finder credential store. An explicit topical question may send the question, locked public source/contact/year/snapshot metadata, and at most 24 bounded public award records or abstract excerpts directly to that provider. It never sends the full snapshot, profiles, CVs, ORCID or faculty data, uploaded notices, saved notes, alerts, unrelated chat, or provider keys. Source facts and deterministic retrieval, not model pretraining, remain authoritative."
+      ? "The key stays in the same browser-local Funding Finder credential store. Each question first sends only the question and locked public scope for provider-native structured interpretation. Deterministic code then searches the complete immutable snapshot and sends at most 24 highest-ranked public award records or excerpts for a cited answer. The provider never receives the full snapshot, profiles, CVs, ORCID or faculty data, uploaded notices, saved notes, alerts, unrelated chat, or provider keys. Deterministic snapshot membership, totals, completeness, eligibility, and ranking remain authoritative."
       : "The key stays in the same browser-local Funding Finder credential store. An explicit AI question may send the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts directly to that provider. It never sends profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated award records, not model pretraining, remain authoritative.";
+    refreshProvider();
   }
 
   function hasSearchState(value) {
@@ -995,7 +1002,7 @@
     if (state.snapshot.mode === "program_officer") {
       const coverage = state.snapshot.abstract_coverage || {};
       const retrieval = snapshot.evidencePack.retrieval;
-      $("ii-answer-limitations").textContent = `Source facts come from the immutable ${state.snapshot.program_officer.source} snapshot of ${state.snapshot.at_least} post-validated awards for the exact source-listed contact. ${retrieval ? `Deterministic retrieval scanned all ${retrieval.records_scanned} stored records and selected ${retrieval.records_selected}; it did not rely on the visible page. ` : "The answer used the full stored aggregate; it did not rely on the visible page. "}${coverage.records_with_abstract || 0} of ${coverage.total_records || 0} records include source abstract text.${incomplete ? " The source snapshot is incomplete, so absence is not a negative finding." : " The source result was exhausted for this exact scoped query."}${snapshot.narrative ? " Model interpretation is shown only in separately cited claims; the snapshot and deterministic retrieval remain authoritative." : " No model interpretation was required."}${snapshot.narrativeFailure ? " Optional narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
+      $("ii-answer-limitations").textContent = `Source facts come from the immutable ${state.snapshot.program_officer.source} snapshot of ${state.snapshot.at_least} post-validated awards for the exact source-listed contact. ${retrieval ? `Deterministic retrieval scanned all ${retrieval.records_scanned} stored records and selected ${retrieval.records_selected}; it did not rely on the visible page. ` : "The answer used the full stored aggregate; it did not rely on the visible page. "}${coverage.records_with_abstract || 0} of ${coverage.total_records || 0} records include source abstract text.${incomplete ? " The source snapshot is incomplete, so absence is not a negative finding." : " The source result was exhausted for this exact scoped query."} The connected model interpreted the question only; snapshot membership, totals, completeness, eligibility, and ranking stayed deterministic.${snapshot.narrative ? " Model synthesis is shown only in separately cited claims." : " No award-record synthesis was needed."}${snapshot.narrativeFailure ? " Bounded narrative synthesis was unavailable or failed evidence validation, so only the deterministic result is shown." : ""}`;
       $("ii-update-answer").classList.add("hidden");
     } else {
       $("ii-answer-limitations").textContent = `${snapshot.aggregate.project_count} normalized awards informed the server aggregate. ${snapshot.evidencePack.awards.length} hydrated public records supplied bounded card evidence.${incomplete ? " One or more sources reached a disclosed safety bound or failed, so this is not a complete institutional history." : " All requested sources were exhausted within the published architecture bounds."}${state.question.translationFallback ? " Provider translation was unavailable, so visible filters and deterministic intent were used." : ""}${snapshot.narrativeFailure ? " Narrative synthesis was unavailable or failed evidence validation, so the deterministic answer is shown." : ""}`;
@@ -1003,16 +1010,15 @@
     }
   }
 
-  async function programOfficerEvidence(questionState, phrases = core.programOfficerRetrievalPhrases(questionState.question, state.snapshot?.program_officer?.display_name)) {
-    if (phrases === null) throw new Error("This question contains too many distinct concepts for bounded retrieval. Shorten it and try again.");
-    if (!phrases.length) return {
-      schema_version: 1,
+  async function programOfficerEvidence(questionState, retrievalPlan) {
+    const requestBody = {
       snapshot_id: state.snapshot.snapshot_id,
-      retrieval: { records_scanned: state.snapshot.at_least, records_with_score: 0, records_selected: 0 },
-      awards: [],
+      retrieval_plan: retrievalPlan,
+      plan_format: "provider-concepts-v1",
+      limit: 24,
     };
     try {
-      return await postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, phrase_format: "normalized-concepts-v2", limit: 24 });
+      return await postJson(api.snapshotEvidenceUrl, requestBody);
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
       setStatus("The Program Officer snapshot expired. Rebuilding the same locked contact and year scope before answering…");
@@ -1033,18 +1039,41 @@
           historyMode: "replace",
         });
       }
-      return postJson(api.snapshotEvidenceUrl, { snapshot_id: state.snapshot.snapshot_id, phrases, phrase_format: "normalized-concepts-v2", limit: 24 });
+      return postJson(api.snapshotEvidenceUrl, { ...requestBody, snapshot_id: state.snapshot.snapshot_id });
     }
   }
 
   async function refreshProgramOfficerQuestionAnswer(questionState, questionSequence) {
-    const lockedDisplayName = state.snapshot?.program_officer?.display_name || "";
-    const phrases = core.programOfficerRetrievalPhrases(questionState.question, lockedDisplayName);
-    const aggregateIntent = core.programOfficerAggregateIntent(questionState.question, lockedDisplayName);
-    const intent = phrases === null || phrases.length ? "topical" : (aggregateIntent || "awards");
+    const key = credentials.loadKey(questionState.provider);
+    if (!key) throw new Error("Connect an OpenAI or Anthropic API key to use Program Officer topical Q&A. Deterministic portfolio browsing and aggregate facts remain available without AI.");
+    const proposedPlan = await ai.structuredResult({
+      provider: questionState.provider,
+      key,
+      operation: "program_officer_question_plan",
+      fetchImpl: globalThis.fetch,
+      system: "Translate one question about a locked public Program Officer award snapshot into a bounded deterministic retrieval plan. Return only intent, concepts, phrases, and exclusions. Use intent topical only when award-record evidence is needed; otherwise choose count, investigators, institutions, programs, years, or awards and return empty arrays. For topical plans, return 1-16 concrete concepts, 1-8 useful phrases, and at most 8 exclusions. Preserve explicit alphanumeric formulas such as CO2, H2, and As2O3 and the short concepts AI, ML, and pH. Never return ambiguous alphabetic two-letter symbols such as Am, As, At, Be, He, or In; use full names such as americium, arsenic, astatine, beryllium, helium, or indium. Do not answer the question, select awards, calculate totals, assess completeness, invent award IDs, or broaden the locked contact/source/year scope.",
+      user: JSON.stringify({
+        question: questionState.question,
+        locked_scope: {
+          source: state.snapshot?.program_officer?.source,
+          exact_source_display_name: state.snapshot?.program_officer?.display_name,
+          year_preset: state.snapshot?.program_officer?.year_preset,
+          year_start: state.snapshot?.program_officer?.year_start,
+          year_end: state.snapshot?.program_officer?.year_end,
+        },
+      }),
+    });
+    const retrievalPlan = core.validateProgramOfficerQuestionPlan(proposedPlan);
+    if (!retrievalPlan) throw new Error("The connected provider did not return a safe bounded Program Officer retrieval plan. Try a clearer question using full scientific names.");
+    const intent = retrievalPlan.intent;
+    $("ii-question-plan").textContent = intent === "topical"
+      ? `Provider interpretation · topical · ${retrievalPlan.concepts.length} bounded concept${retrievalPlan.concepts.length === 1 ? "" : "s"} · deterministic full-snapshot retrieval`
+      : `Provider interpretation · ${intent} aggregate · deterministic full-snapshot facts`;
+    $("ii-question-plan").classList.remove("hidden");
+    const aggregateIntent = intent === "topical" ? "" : intent;
     const aggregate = { ...(state.baseAggregate || state.aggregate), awards: [], ordered_refs: state.baseAggregate?.ordered_refs || state.pagePayload?.aggregate?.ordered_refs || [] };
     const evidencePack = intent === "topical"
-      ? await programOfficerEvidence(questionState, phrases)
+      ? await programOfficerEvidence(questionState, retrievalPlan)
       : { awards: [], retrieval: null };
     const deterministic = core.deterministicProgramOfficerAnswer({
       question: questionState.question,
@@ -1056,16 +1085,15 @@
     });
     let narrative = null;
     let narrativeFailure = false;
-    const key = credentials.loadKey(questionState.provider);
-    if (intent === "topical" && evidencePack.awards.length && key) {
+    if (intent === "topical" && evidencePack.awards.length) {
       try {
         const proposed = await ai.structuredResult({
           provider: questionState.provider,
           key,
-          operation: "institution_narrative",
+          operation: "program_officer_evidence_answer",
           fetchImpl: globalThis.fetch,
-          system: "Interpret only the supplied public award evidence within the locked Program Officer snapshot. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not broaden the contact, source, years, or evidence; do not infer aliases, identities, roles, or negative career conclusions; do not recommend, rank, or return HTML.",
-          user: JSON.stringify(core.programOfficerProviderPayload({ question: questionState.question, snapshot: state.snapshot, evidencePack })),
+          system: "Answer only from the supplied bounded, deterministically selected public award evidence. Return claims, an array of at most six concise objects containing text and exact supplied evidence_ids. Do not decide or restate portfolio membership, totals, completeness, or ranking; do not invent or alter award IDs; do not use model pretraining; do not broaden the contact, source, years, concepts, or evidence; do not infer aliases, identities, roles, negative career conclusions, or recommendations; and do not return HTML.",
+          user: JSON.stringify(core.programOfficerProviderPayload({ question: questionState.question, snapshot: state.snapshot, retrievalPlan, evidencePack })),
         });
         narrative = core.validateNarrativeAnswer(proposed, evidencePack.awards);
         narrativeFailure = !narrative;
@@ -1075,7 +1103,7 @@
     }
     if (questionSequence !== state.questionSequence || state.question !== questionState) return;
     questionState.intent = intent;
-    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, signature: answerEvidenceSignature() };
+    questionState.snapshot = { aggregate, evidencePack, deterministic, narrative, narrativeFailure, retrievalPlan, signature: answerEvidenceSignature() };
     state.answering = false;
     renderQuestionAnswer();
   }
@@ -1176,9 +1204,20 @@
     $("ii-model").textContent = modelForProvider(provider) || "Funding Finder default";
     $("ii-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
     const configured = Boolean(credentials.loadKey(provider));
-    $("ii-ai-state").textContent = configured ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured` : "No AI key required for deterministic answers";
+    const programOfficerMode = Boolean(state.programOfficerScope);
+    $("ii-ai-state").textContent = configured
+      ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} · ${modelForProvider(provider)} configured`
+      : programOfficerMode
+        ? "Program Officer Q&A is disabled until you connect an AI provider key. Portfolio browsing and aggregate facts remain available."
+        : "No AI key required for deterministic answers";
     $("ii-key-setup").classList.toggle("hidden", configured);
-    $("ii-key-status").textContent = configured ? "Using the Funding Finder key already saved on this device." : "Optional. Deterministic questions work without a key.";
+    $("ii-key-status").textContent = configured
+      ? "Using the Funding Finder key already saved on this device."
+      : programOfficerMode
+        ? "Required only for open-ended Program Officer Q&A. Deterministic portfolio cards, facets, totals, and aggregate facts do not use AI."
+        : "Optional. Deterministic questions work without a key.";
+    $("ii-question").disabled = programOfficerMode && !configured;
+    $("ii-ask-button").disabled = state.busyDepth > 0 || state.questionSubmitting || (programOfficerMode && !configured);
     return { provider, configured };
   }
 
@@ -1203,7 +1242,10 @@
       const question = clean($("ii-question").value, 1_000);
       if (!question) throw new Error("Enter a question first.");
       if (state.snapshot?.mode === "program_officer") {
-        const { provider } = refreshProvider();
+        const { provider, configured } = refreshProvider();
+        if (!configured || !credentials.loadKey(provider)) {
+          throw new Error("Connect an OpenAI or Anthropic API key to enable Program Officer Q&A. Deterministic portfolio browsing and aggregate facts remain available without AI.");
+        }
         const questionState = { question, intent: "", filters: state.submitted, provider, narrativeNeeded: true, translationFallback: false, snapshot: null };
         state.question = questionState;
         $("ii-question-plan").textContent = `Locked evidence plan · exact ${state.snapshot.program_officer.source} contact ${state.snapshot.program_officer.display_name} · ${state.snapshot.program_officer.year_preset} source award years · full stored snapshot`;
