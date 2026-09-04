@@ -158,26 +158,58 @@ async function currentFacultyMatches(env, fetchImpl) {
 function normalized(value) {
   return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
-function duplicateCandidates(directory, detail) {
+function identityNameKey(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\p{M}]+/gu, " ")
+    .trim();
+}
+function sourceIdentityKey(value) {
+  try {
+    const parsed = new URL(String(value || ""));
+    parsed.hash = "";
+    return `${parsed.host.toLocaleLowerCase()}${parsed.pathname.replace(/\/+$/, "") || "/"}${parsed.search}`;
+  } catch {
+    return "";
+  }
+}
+export function duplicateCandidates(directory, detail) {
   if (!directory) return [];
   const profile = detail.proposed_profile || {};
-  const name = normalized(profile.display_name);
-  const sources = new Set(profile.source_urls || []);
-  return (directory.researchers || []).map(researcher => {
+  const names = new Set([profile.display_name, ...(profile.aliases || [])].map(identityNameKey).filter(Boolean));
+  const researchers = directory.researchers || [];
+  const sourceOwners = new Map();
+  for (const researcher of researchers) {
+    for (const source of new Set((researcher.source_urls || []).map(sourceIdentityKey).filter(Boolean))) {
+      sourceOwners.set(source, (sourceOwners.get(source) || 0) + 1);
+    }
+  }
+  const uniqueSources = new Set((profile.source_urls || [])
+    .map(sourceIdentityKey)
+    .filter(source => source && sourceOwners.get(source) === 1));
+  return researchers.map(researcher => {
+    if (detail.researcher_id && researcher.id === detail.researcher_id) return null;
     const reasons = [];
-    if ([researcher.name, ...(researcher.aliases || [])].map(normalized).includes(name)) reasons.push("normalized_name");
-    if (profile.orcid_id && profile.orcid_id === researcher.orcid_id) reasons.push("orcid");
-    if ((researcher.source_urls || []).some(url => sources.has(url))) reasons.push("source");
+    if ([researcher.name, ...(researcher.aliases || [])].map(identityNameKey).some(name => names.has(name))) reasons.push("same_name");
+    if (profile.orcid_id && profile.orcid_id === researcher.orcid_id) reasons.push("same_orcid");
+    if ((researcher.source_urls || []).map(sourceIdentityKey).some(source => uniqueSources.has(source))) reasons.push("same_unique_source");
     return reasons.length ? { researcher_id: researcher.id, display_name: researcher.name, reasons } : null;
   }).filter(Boolean);
 }
-function trustSignals(detail, duplicates) {
+function trustSignals(directory, detail, duplicates) {
   const profile = detail.proposed_profile || {};
+  const stableIdVerified = Boolean(detail.researcher_id
+    && directory && (directory.researchers || []).some(researcher => researcher.id === detail.researcher_id));
   return {
-    stable_id: Boolean(detail.researcher_id),
-    orcid: Boolean(profile.orcid_id),
+    identity_status: duplicates.length ? "conflict"
+      : detail.researcher_id ? stableIdVerified ? "matched_existing_profile" : "stable_id_unverified"
+      : "no_conflicts_found",
+    stable_id_verified: stableIdVerified,
+    orcid_present: Boolean(profile.orcid_id),
     source_count: (profile.source_urls || []).length,
-    possible_duplicate_count: duplicates.length,
+    identity_conflict_count: duplicates.length,
   };
 }
 function validatorWarnings(directory, detail, duplicates) {
@@ -188,7 +220,7 @@ function validatorWarnings(directory, detail, duplicates) {
     warnings.push("The correction's stable researcher ID is not in the current directory.");
   }
   if (detail.submission_type === "new_researcher_nomination" && !(detail.proposed_profile.source_urls || []).length) warnings.push("A new researcher requires at least one credible source.");
-  if (duplicates.length > 1) warnings.push("Multiple possible identities require explicit administrator resolution; no automatic merge is allowed.");
+  if (duplicates.length) warnings.push(`${duplicates.length} potential identity conflict${duplicates.length === 1 ? "" : "s"} must be resolved before publication.`);
   return warnings;
 }
 function materialEffect(directory, teamData, facultyMatches, detail) {
@@ -405,18 +437,394 @@ export async function validateApprovalAgainstCurrentRegistry(current, submittedP
   const reservedLegacyClaimIds = otherProfiles
     .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
   const reservedOrcidIds = otherProfiles.map(row => row.orcid_id).filter(Boolean);
-  return enforceClaimContinuity(
-    enforceSubmittedRelationship(
-      validateAdminProfile(submittedProfile, current.researcher_id, reservedLegacyClaimIds, reservedOrcidIds),
-      JSON.parse(current.proposed_profile_json),
-    ),
-    currentProfile,
+  const validated = enforceSubmittedRelationship(
+    validateAdminProfile(submittedProfile, current.researcher_id, reservedLegacyClaimIds, reservedOrcidIds),
+    JSON.parse(current.proposed_profile_json),
   );
+  const identityConflicts = duplicateCandidates(directory, {
+    submission_type: current.submission_type,
+    researcher_id: current.researcher_id,
+    proposed_profile: validated,
+  });
+  if (identityConflicts.length) {
+    fail("identity_conflict", "This approval still conflicts with an existing researcher identity. Resolve the name, ORCID, or person-specific source before publishing.", 409);
+  }
+  return enforceClaimContinuity(validated, currentProfile);
 }
 
-const ADMIN_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Researcher review | Funding Finder</title><link rel="stylesheet" href="/admin/styles.css"></head><body><main><header><p>Funding Finder administration</p><h1>Researcher submissions</h1><p>Review the current and proposed public values before publishing a registry-only change.</p></header><section id="queue" aria-live="polite">Loading queue…</section><section id="detail" hidden><button id="back" type="button">Back to queue</button><h2 id="detail-title"></h2><div class="columns"><div><h3>Current</h3><pre id="current"></pre></div><div><h3>Proposed</h3><pre id="proposed"></pre></div></div><p id="signals"></p><label>Approved registry profile JSON<textarea id="approved" rows="22"></textarea></label><label>Administrator reason<input id="reason" maxlength="500"></label><div class="actions"><button data-action="start_review">Start review</button><button data-action="rebase">Rebase onto current registry</button><button data-action="approve">Approve or edit and publish</button><button data-action="request_changes">Request changes</button><button data-action="reject">Reject</button><button data-action="retry_publish">Retry publication</button><button data-action="reconcile_publish">Reconcile publication</button></div><p id="admin-status" aria-live="polite"></p></section></main><script src="/admin/app.js"></script></body></html>`;
-const ADMIN_CSS = `:root{font-family:Inter,system-ui,sans-serif;color:#17293f;background:#f3f6fb}body{margin:0}main{width:min(1180px,calc(100% - 32px));margin:auto;padding:30px 0}header{padding:20px 24px;color:#fff;background:#001e5f;border-radius:14px}header p,header h1{margin:4px 0}.queue{width:100%;margin-top:20px;border-collapse:collapse;background:#fff}.queue th,.queue td{padding:10px;border:1px solid #d6e0eb;text-align:left}.queue button,.actions button,#back{padding:8px 11px;font:inherit;font-weight:700}.columns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.columns>div{min-width:0;padding:12px;background:#fff;border:1px solid #d6e0eb;border-radius:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}label{display:grid;gap:5px;margin-top:12px;font-weight:700}textarea,input{padding:10px;font:inherit;border:1px solid #9db2c8;border-radius:8px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}@media(max-width:760px){.columns{grid-template-columns:1fr}}`;
-const ADMIN_JS = `(() => {"use strict";let active=null;const q=document.getElementById("queue"),d=document.getElementById("detail"),status=document.getElementById("admin-status");const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));async function api(path,options){const r=await fetch(path,options);const v=await r.json();if(!r.ok)throw new Error(v.error?.message||"Request failed");return v}async function load(){q.textContent="Loading queue…";const v=await api("/admin/api/submissions");q.innerHTML='<table class="queue"><thead><tr><th>Researcher</th><th>Request</th><th>Source</th><th>Trust</th><th>Effect</th><th>State</th><th>Submitted</th><th>Action</th></tr></thead><tbody>'+v.submissions.map(x=>'<tr><td>'+esc(x.proposed_profile.display_name)+'</td><td>'+esc(x.submission_type)+'</td><td>'+esc(x.source_surface)+'</td><td>'+esc(JSON.stringify(x.trust_signals))+'</td><td>'+esc(x.material_effect.classification+"; "+x.material_effect.changed_claims+" claim change(s); "+x.material_effect.affected_team_scopes.length+" team scope(s)")+'</td><td>'+esc(x.state)+'</td><td>'+esc(x.created_at)+'</td><td><button data-id="'+esc(x.submission_id)+'">Open</button></td></tr>').join("")+'</tbody></table>';q.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>open(b.dataset.id))}async function open(id){active=await api("/admin/api/submissions/"+encodeURIComponent(id));q.hidden=true;d.hidden=false;document.getElementById("detail-title").textContent=active.proposed_profile.display_name+" — "+active.state;document.getElementById("current").textContent=JSON.stringify(active.current_profile,null,2);document.getElementById("proposed").textContent=JSON.stringify(active.proposed_profile,null,2);document.getElementById("signals").textContent="Identity signals: "+JSON.stringify(active.duplicate_candidates)+" | Material effect: "+JSON.stringify(active.material_effect)+" | Validator warnings: "+JSON.stringify(active.validator_warnings);document.getElementById("approved").value=JSON.stringify(active.approved_profile,null,2);status.textContent=""}document.getElementById("back").onclick=()=>{d.hidden=true;q.hidden=false;load()};document.querySelectorAll("[data-action]").forEach(b=>b.onclick=async()=>{if(!active)return;let profile=null;try{if(["approve","retry_publish"].includes(b.dataset.action))profile=JSON.parse(document.getElementById("approved").value)}catch{status.textContent="Approved profile JSON is invalid.";return}b.disabled=true;try{const v=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id)+"/action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:b.dataset.action,expected_revision:active.revision,approved_profile:profile,reason:document.getElementById("reason").value})});status.textContent="State: "+v.state;active=await api("/admin/api/submissions/"+encodeURIComponent(active.submission_id));}catch(e){status.textContent=e.message}finally{b.disabled=false}});load().catch(e=>q.textContent=e.message)})();`;
+const ADMIN_HTML = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Researcher review | Funding Finder</title>
+  <link rel="stylesheet" href="/admin/styles.css">
+</head>
+<body>
+<main>
+  <header id="main-hero" class="hero">
+    <p class="eyebrow">Funding Finder administration</p>
+    <h1>Researcher submissions</h1>
+    <p>Review proposed public values and their effect before publishing a registry-only change.</p>
+  </header>
+
+  <section id="queue-view" aria-labelledby="queue-title">
+    <div class="section-heading">
+      <div><p class="eyebrow dark">Review queue</p><h2 id="queue-title">Requests needing attention</h2></div>
+      <p id="queue-count" class="count"></p>
+    </div>
+    <div id="queue" aria-live="polite">Loading queue…</div>
+  </section>
+
+  <section id="detail" hidden aria-labelledby="detail-title">
+    <button id="back" class="text-button" type="button">← Back to queue</button>
+    <div class="detail-heading">
+      <div><p id="detail-kicker" class="eyebrow dark"></p><h2 id="detail-title"></h2><p id="detail-meta" class="muted"></p></div>
+      <span id="detail-state" class="badge"></span>
+    </div>
+
+    <div id="warnings" class="notice warning" hidden></div>
+
+    <section class="panel" aria-labelledby="comparison-title">
+      <div class="panel-heading"><div><h3 id="comparison-title">What would change</h3><p>Current and proposed public values are aligned field by field.</p></div></div>
+      <div class="comparison-head" aria-hidden="true"><span>Field</span><span>Current</span><span>Proposed</span></div>
+      <div id="comparison"></div>
+      <div id="claim-changes" class="claim-changes"></div>
+    </section>
+
+    <div class="summary-grid">
+      <section class="panel" aria-labelledby="identity-title"><h3 id="identity-title">Identity review</h3><div id="identity"></div></section>
+      <section class="panel" aria-labelledby="effect-title"><h3 id="effect-title">Publication effect</h3><div id="effect"></div></section>
+    </div>
+
+    <section class="panel" aria-labelledby="submission-title">
+      <h3 id="submission-title">Submission details</h3><div id="submission-details"></div>
+    </section>
+
+    <section class="panel decision" aria-labelledby="decision-title">
+      <h3 id="decision-title">Administrator decision</h3>
+      <p>The approved record below preserves administrator-controlled policy, evidence, and identifiers. The proposal above contains only fields a submitter is allowed to suggest.</p>
+      <div id="approved-summary" class="approved-summary"></div>
+      <details class="technical"><summary>Advanced: inspect or edit the complete registry record</summary>
+        <p>Use this only when the generated approved record needs a policy or evidence correction.</p>
+        <label for="approved">Complete approved registry record (JSON)</label>
+        <textarea id="approved" rows="22" spellcheck="false"></textarea>
+      </details>
+      <details class="technical"><summary>Technical submission data</summary>
+        <div class="technical-grid"><div><h4>Current registry data</h4><pre id="technical-current"></pre></div><div><h4>Submitted proposal</h4><pre id="technical-proposed"></pre></div></div>
+      </details>
+      <label for="reason">Administrator reason <span class="muted">(required when requesting changes or rejecting)</span></label>
+      <input id="reason" maxlength="500" autocomplete="off">
+      <div class="actions">
+        <button data-action="start_review" type="button">Start review</button>
+        <button data-action="rebase" type="button">Rebase onto current registry</button>
+        <button data-action="approve" class="primary" type="button">Approve and start publication</button>
+        <button data-action="request_changes" type="button">Request changes</button>
+        <button data-action="reject" class="danger" type="button">Reject</button>
+        <button data-action="retry_publish" class="primary" type="button">Retry publication</button>
+        <button data-action="reconcile_publish" type="button">Check publication result</button>
+      </div>
+      <p id="action-note" class="muted"></p>
+      <div id="admin-status" class="notice error" role="alert" hidden></div>
+    </section>
+  </section>
+
+  <section id="outcome" class="outcome" hidden tabindex="-1" aria-labelledby="outcome-title">
+    <p class="eyebrow dark">Administrator action complete</p>
+    <div id="outcome-icon" class="outcome-icon" aria-hidden="true">✓</div>
+    <h2 id="outcome-title"></h2>
+    <p id="outcome-message" class="outcome-message"></p>
+    <dl id="outcome-details" class="outcome-details"></dl>
+    <div id="outcome-confirmation" class="notice"></div>
+    <div class="actions centered"><button id="outcome-review" type="button" hidden>Continue reviewing</button><button id="outcome-back" class="primary" type="button">Back to queue</button></div>
+  </section>
+</main>
+<script src="/admin/app.js"></script>
+</body>
+</html>`;
+const ADMIN_CSS = `:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17293f;background:#f4f7fb;line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input,textarea{font:inherit}button{cursor:pointer;border:1px solid #9fb0c2;border-radius:8px;background:#fff;color:#17293f;padding:9px 13px;font-weight:750}button:hover:not(:disabled){background:#edf3fa}button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}button.primary{color:#fff;background:#0057b8;border-color:#0057b8}button.primary:hover:not(:disabled){background:#00468f}button.danger{color:#9d2027;border-color:#d9a0a4}main{width:min(1120px,calc(100% - 32px));margin:auto;padding:28px 0 56px}.hero{padding:28px 34px;color:#fff;background:#14245f;border-radius:18px;box-shadow:0 10px 30px rgba(24,42,77,.08)}.hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:8px 0}.hero p:last-child{margin:0;max-width:780px;font-size:1.08rem}.eyebrow{margin:0;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.eyebrow.dark{color:#51657b}.section-heading,.detail-heading,.panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.section-heading{margin:32px 0 14px}.section-heading h2,.detail-heading h2{margin:2px 0 0}.count{margin:8px 0;color:#51657b}.queue-list{display:grid;gap:12px}.queue-card{display:grid;grid-template-columns:minmax(200px,1.4fr) minmax(0,3fr) auto;gap:22px;align-items:center;background:#fff;border:1px solid #d8e1eb;border-radius:12px;padding:18px 20px;box-shadow:0 3px 10px rgba(23,41,63,.03)}.queue-card h3{margin:0 0 8px;font-size:1.15rem}.queue-card dl,.compact-dl,.outcome-details{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 12px;margin:0}.queue-card dt,.compact-dl dt,.outcome-details dt{font-weight:750;color:#51657b}.queue-card dd,.compact-dl dd,.outcome-details dd{margin:0;min-width:0;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px}.badge,.tag{display:inline-flex;align-items:center;width:max-content;border-radius:999px;padding:3px 9px;background:#e8eef7;color:#273b54;font-size:.8rem;font-weight:800}.badge.conflict,.tag.conflict{background:#fff0d5;color:#744600}.badge.good,.tag.good{background:#def5e8;color:#155c35}.badge.pending{background:#e8eef7}.badge.review{background:#e1edff;color:#134f91}.badge.failed{background:#fee5e7;color:#8d1f28}.empty{padding:40px 24px;text-align:center;background:#fff;border:1px dashed #bdcad8;border-radius:12px}.text-button{border:0;background:transparent;padding:8px 0;color:#0057b8}.detail-heading{margin:16px 0 20px;align-items:center}.muted{color:#607388;font-weight:400}.panel{min-width:0;margin-top:14px;padding:20px;background:#fff;border:1px solid #d8e1eb;border-radius:12px}.panel h3{margin:0 0 10px}.panel h4{margin:8px 0}.panel p{margin:4px 0}.comparison-head,.comparison-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:18px}.comparison-head{padding:10px 12px;color:#51657b;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid #d8e1eb}.comparison-row{padding:13px 12px;border-bottom:1px solid #e5ebf2}.comparison-row:last-child{border-bottom:0}.field-label{font-weight:800}.value{min-width:0;overflow-wrap:anywhere}.value.empty{padding:0;text-align:left;background:transparent;border:0;color:#738397;font-style:italic}.link-list,.clean-list{margin:4px 0;padding-left:20px}.link-list a{overflow-wrap:anywhere;color:#0057b8}.claim-changes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}.claim-group{padding:14px;border-radius:10px;background:#f4f7fb}.claim-group h4{margin:0 0 6px}.claim-group.added{background:#eaf7ef}.claim-group.retired{background:#fff1f1}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.notice{padding:13px 15px;border-radius:9px;background:#edf4ff;border:1px solid #c6daf6}.notice.warning{margin:12px 0;background:#fff7e6;border-color:#edd19b}.notice.error{margin-top:12px;background:#fff0f1;border-color:#e9b9bd;color:#812129}.notice ul{margin:3px 0;padding-left:20px}.decision>p{max-width:850px}.approved-summary{margin:14px 0;padding:14px;background:#f6f8fb;border-radius:9px}.technical{margin-top:12px;border-top:1px solid #e1e7ee;padding-top:12px}.technical summary{cursor:pointer;color:#31485f;font-weight:750}.technical p{color:#607388}.technical-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.technical-grid>div{min-width:0}pre{max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fc;border:1px solid #e0e6ed;border-radius:8px;padding:10px;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}label{display:block;margin-top:14px;font-weight:750}textarea,input{width:100%;margin-top:6px;padding:10px;border:1px solid #9db0c5;border-radius:8px;background:#fff;color:#17293f}textarea{resize:vertical;font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.actions.centered{justify-content:center}.outcome{max-width:720px;margin:34px auto 0;padding:36px;background:#fff;border:1px solid #d8e1eb;border-radius:16px;text-align:center;box-shadow:0 10px 30px rgba(24,42,77,.07)}.outcome-icon{display:grid;place-items:center;width:58px;height:58px;margin:16px auto;border-radius:50%;background:#def5e8;color:#155c35;font-size:1.8rem;font-weight:900}.outcome h2{margin:8px 0;font-size:2rem}.outcome-message{font-size:1.08rem;color:#51657b}.outcome-details{max-width:560px;margin:24px auto;text-align:left}.outcome .notice{text-align:left}@media(max-width:820px){.queue-card{grid-template-columns:1fr}.queue-card button{width:100%}.summary-grid,.claim-changes,.technical-grid{grid-template-columns:1fr}.comparison-head{display:none}.comparison-row{grid-template-columns:1fr;gap:6px}.comparison-row .value:before{display:block;color:#607388;font-size:.75rem;font-weight:800;text-transform:uppercase}.comparison-row .value.current:before{content:"Current"}.comparison-row .value.proposed:before{content:"Proposed"}}@media(max-width:520px){main{width:min(100% - 20px,1120px);padding-top:10px}.hero{padding:22px 20px;border-radius:12px}.section-heading,.detail-heading{align-items:flex-start;flex-direction:column}.panel{padding:16px}}`;
+const ADMIN_JS = `(() => {
+  "use strict";
+  let active = null;
+  const hero = document.getElementById("main-hero");
+  const queueView = document.getElementById("queue-view");
+  const queue = document.getElementById("queue");
+  const detail = document.getElementById("detail");
+  const outcome = document.getElementById("outcome");
+  const status = document.getElementById("admin-status");
+  const approvedEditor = document.getElementById("approved");
+  const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "'": "&#39;",
+  })[character]);
+  const labels = {
+    profile_correction: "Profile correction", new_researcher_nomination: "New researcher nomination",
+    faculty_interests: "Faculty interests", team_match: "Team Match",
+    pending: "Pending", under_review: "Under review", changes_requested: "Changes requested",
+    approved: "Approved", publishing: "Publishing", publication_failed: "Publication failed",
+    published: "Published", rejected: "Rejected", superseded: "Superseded",
+    cosmetic: "Cosmetic", administrative: "Administrative", scientific: "Scientific", new_researcher: "New researcher",
+    hajim_core_faculty: "Hajim core faculty", internal_affiliated_researcher: "Internal affiliated researcher",
+    external_collaborator: "External collaborator", reference_only_researcher: "Reference-only researcher",
+    department: "Department", institution: "Institution", approved_collaborator: "Approved collaborator",
+    reference_only: "Reference only", hidden: "Hidden",
+  };
+  function label(value) { return labels[value] || String(value || "").replace(/_/g, " "); }
+  function formatTime(value) {
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? String(value || "Not available") : new Intl.DateTimeFormat(undefined, {
+      dateStyle: "medium", timeStyle: "short",
+    }).format(parsed);
+  }
+  function stateClass(value) {
+    if (value === "under_review" || value === "changes_requested") return "review";
+    if (value === "publication_failed" || value === "rejected") return "failed";
+    if (value === "published") return "good";
+    return "pending";
+  }
+  function valueHtml(value) {
+    if (value == null || value === "") return '<span class="value empty">Not provided</span>';
+    return '<span class="value">' + esc(value) + "</span>";
+  }
+  function listHtml(values, emptyText) {
+    const items = Array.isArray(values) ? values.filter(Boolean) : [];
+    if (!items.length) return '<span class="value empty">' + esc(emptyText || "None") + "</span>";
+    return '<ul class="clean-list">' + items.map(value => "<li>" + esc(value) + "</li>").join("") + "</ul>";
+  }
+  function linksHtml(values) {
+    const items = Array.isArray(values) ? values.filter(value => String(value).startsWith("https://")) : [];
+    if (!items.length) return '<span class="value empty">No source links</span>';
+    return '<ul class="link-list">' + items.map(value => '<li><a href="' + esc(value) + '" target="_blank" rel="noreferrer">' + esc(value) + "</a></li>").join("") + "</ul>";
+  }
+  async function api(path, options) {
+    const response = await fetch(path, options);
+    const value = await response.json();
+    if (!response.ok) {
+      const error = new Error(value.error && value.error.message || "Request failed");
+      error.code = value.error && value.error.code || "request_failed";
+      error.status = response.status;
+      throw error;
+    }
+    return value;
+  }
+  function identityText(signals) {
+    if (signals.identity_conflict_count) return signals.identity_conflict_count + " identity conflict" + (signals.identity_conflict_count === 1 ? "" : "s");
+    if (signals.stable_id_verified) return "Existing profile verified";
+    if (signals.identity_status === "stable_id_unverified") return "Researcher ID could not be verified";
+    return "No existing identity conflict found";
+  }
+  function effectText(effect) {
+    const claims = effect.changed_claims === 1 ? "1 research-interest change" : effect.changed_claims + " research-interest changes";
+    const teams = effect.affected_team_scopes.length === 1 ? "1 team scope" : effect.affected_team_scopes.length + " team scopes";
+    return label(effect.classification) + " · " + claims + " · " + teams;
+  }
+  async function load() {
+    active = null;
+    detail.hidden = true;
+    outcome.hidden = true;
+    queueView.hidden = false;
+    hero.hidden = false;
+    queue.textContent = "Loading queue…";
+    const value = await api("/admin/api/submissions");
+    document.getElementById("queue-count").textContent = value.submissions.length + (value.submissions.length === 1 ? " request" : " requests");
+    if (!value.submissions.length) {
+      queue.innerHTML = '<div class="empty"><h3>The queue is clear</h3><p>There are no active researcher requests.</p></div>';
+      return;
+    }
+    queue.innerHTML = '<div class="queue-list">' + value.submissions.map(item => {
+      const conflict = item.trust_signals.identity_conflict_count > 0;
+      return '<article class="queue-card">' +
+        '<div><h3>' + esc(item.proposed_profile.display_name) + '</h3><div class="tags"><span class="badge ' + stateClass(item.state) + '">' + esc(label(item.state)) + '</span><span class="tag ' + (conflict ? "conflict" : "good") + '">' + esc(identityText(item.trust_signals)) + "</span></div></div>" +
+        '<dl><dt>Request</dt><dd>' + esc(label(item.submission_type)) + '</dd><dt>Submitted from</dt><dd>' + esc(label(item.source_surface)) + '</dd><dt>Effect</dt><dd>' + esc(effectText(item.material_effect)) + '</dd><dt>Submitted</dt><dd>' + esc(formatTime(item.created_at)) + "</dd></dl>" +
+        '<button type="button" data-id="' + esc(item.submission_id) + '">Open review</button></article>';
+    }).join("") + "</div>";
+    queue.querySelectorAll("[data-id]").forEach(button => { button.onclick = () => open(button.dataset.id).catch(showFatal); });
+  }
+  function comparisonRow(field, current, proposed, renderer) {
+    const render = renderer || valueHtml;
+    return '<div class="comparison-row"><div class="field-label">' + esc(field) + '</div><div class="value current">' + render(current) + '</div><div class="value proposed">' + render(proposed) + "</div></div>";
+  }
+  function renderComparison() {
+    const current = active.current_profile || {};
+    const proposed = active.proposed_profile || {};
+    document.getElementById("comparison").innerHTML =
+      comparisonRow("Name", current.name, proposed.display_name) +
+      comparisonRow("Home unit", current.home_unit, proposed.home_unit) +
+      comparisonRow("ORCID", current.orcid_id, proposed.orcid_id) +
+      comparisonRow("Research summary", current.research_summary, proposed.research_summary) +
+      comparisonRow("Source links", current.source_urls, proposed.source_urls, linksHtml);
+    const changes = active.material_effect.claim_changes;
+    document.getElementById("claim-changes").innerHTML =
+      '<div class="claim-group added"><h4>Added interests</h4>' + listHtml(changes.additions, "No additions") + "</div>" +
+      '<div class="claim-group retired"><h4>Retired interests</h4>' + listHtml(changes.retirements, "No retirements") + "</div>" +
+      '<div class="claim-group"><h4>Unchanged interests</h4>' + listHtml(changes.unchanged, "None") + "</div>";
+  }
+  function renderIdentity() {
+    const signals = active.trust_signals;
+    const conflicts = active.duplicate_candidates || [];
+    let html = '<dl class="compact-dl"><dt>Status</dt><dd>' + esc(identityText(signals)) + '</dd><dt>Stable ID</dt><dd>' + (signals.stable_id_verified ? "Verified" : "Not applicable") + '</dd><dt>ORCID</dt><dd>' + (signals.orcid_present ? "Provided" : "Not provided") + '</dd><dt>Sources</dt><dd>' + esc(signals.source_count) + "</dd></dl>";
+    if (conflicts.length) {
+      html += '<h4>Profiles requiring resolution</h4><ul class="clean-list">' + conflicts.map(candidate => "<li>" + esc(candidate.display_name) + " (" + esc(candidate.researcher_id) + ") — " + esc(candidate.reasons.map(label).join(", ")) + "</li>").join("") + "</ul>";
+    } else {
+      html += '<p class="muted">Shared directory pages are ignored as identity evidence.</p>';
+    }
+    document.getElementById("identity").innerHTML = html;
+  }
+  function renderEffect() {
+    const effect = active.material_effect;
+    document.getElementById("effect").innerHTML = '<dl class="compact-dl"><dt>Classification</dt><dd>' + esc(label(effect.classification)) + '</dd><dt>Research interests</dt><dd>' + esc(effect.changed_claims) + ' changed</dd><dt>Opportunity matches</dt><dd>' + esc(effect.affected_matches.length) + '</dd><dt>Team scopes</dt><dd>' + esc(effect.affected_team_scopes.length) + '</dd></dl><h4>Generated files</h4>' + listHtml(effect.generated_outputs, "None");
+  }
+  function renderApprovedSummary(profile = {}) {
+    const activeClaims = (profile.claims || []).filter(claim => claim.status === "active").map(claim => claim.label);
+    const retiredClaims = (profile.claims || []).filter(claim => claim.status === "retired").map(claim => claim.label);
+    document.getElementById("approved-summary").innerHTML = '<dl class="compact-dl"><dt>Name</dt><dd>' + esc(profile.display_name) + '</dd><dt>Relationship</dt><dd>' + esc(label(profile.relationship)) + '</dd><dt>Visibility</dt><dd>' + esc(label(profile.pool_visibility)) + '</dd><dt>Active interests</dt><dd>' + esc(activeClaims.length) + '</dd><dt>Retired interests</dt><dd>' + esc(retiredClaims.length) + '</dd><dt>Automatically proposed</dt><dd>' + (profile.auto_proposable ? "Yes" : "No") + "</dd></dl>";
+  }
+  function previewApprovedEditor() {
+    try {
+      const profile = JSON.parse(approvedEditor.value);
+      if (!profile || typeof profile !== "object" || Array.isArray(profile)) throw new Error("invalid profile");
+      approvedEditor.removeAttribute("aria-invalid");
+      renderApprovedSummary(profile);
+      return { ok: true, profile };
+    } catch {
+      approvedEditor.setAttribute("aria-invalid", "true");
+      document.getElementById("approved-summary").innerHTML = '<div class="notice warning">The approval preview is unavailable until the complete registry record contains valid JSON.</div>';
+      return { ok: false, profile: null };
+    }
+  }
+  function renderWarnings() {
+    const warnings = active.validator_warnings || [];
+    const box = document.getElementById("warnings");
+    box.hidden = !warnings.length;
+    box.innerHTML = warnings.length ? "<strong>Resolve before publication</strong><ul>" + warnings.map(warning => "<li>" + esc(warning) + "</li>").join("") + "</ul>" : "";
+  }
+  function renderActions() {
+    const visible = {
+      pending: ["start_review", "request_changes", "reject"],
+      under_review: ["approve", "request_changes", "reject"],
+      changes_requested: ["start_review", "reject"],
+      approved: ["retry_publish"],
+      publication_failed: ["retry_publish"],
+      publishing: [],
+    }[active.state] || [];
+    const stale = (active.validator_warnings || []).some(warning => warning.includes("older registry generation"));
+    if (stale && ["pending", "under_review", "changes_requested", "approved", "publication_failed"].includes(active.state)) visible.unshift("rebase");
+    if (active.publication_target_pr_url && active.state === "publishing") visible.push("reconcile_publish");
+    document.querySelectorAll("[data-action]").forEach(button => {
+      button.hidden = !visible.includes(button.dataset.action);
+      button.disabled = false;
+    });
+    const conflict = active.trust_signals.identity_conflict_count > 0;
+    const publicationButton = Array.from(document.querySelectorAll('[data-action="approve"], [data-action="retry_publish"]')).find(button => !button.hidden);
+    if (publicationButton && !publicationButton.hidden && stale) publicationButton.disabled = true;
+    document.getElementById("action-note").textContent = conflict ? "Resolve the identity conflict in the advanced approved record. The server will verify it again before publication." : stale ? "Rebase this request before publication." : active.state === "pending" ? "Start review before approval becomes available." : "";
+  }
+  async function open(id) {
+    active = await api("/admin/api/submissions/" + encodeURIComponent(id));
+    queueView.hidden = true;
+    outcome.hidden = true;
+    detail.hidden = false;
+    hero.hidden = true;
+    document.getElementById("detail-kicker").textContent = label(active.submission_type);
+    document.getElementById("detail-title").textContent = active.proposed_profile.display_name;
+    document.getElementById("detail-meta").textContent = "Submitted " + formatTime(active.created_at) + " · " + active.submission_id;
+    const state = document.getElementById("detail-state");
+    state.textContent = label(active.state);
+    state.className = "badge " + stateClass(active.state);
+    renderWarnings();
+    renderComparison();
+    renderIdentity();
+    renderEffect();
+    document.getElementById("submission-details").innerHTML = '<dl class="compact-dl"><dt>Source</dt><dd>' + esc(label(active.source_surface)) + '</dd><dt>Contact</dt><dd>' + esc(active.contact_email || "Not provided") + '</dd><dt>Submitter note</dt><dd>' + esc(active.submitter_note || "None") + '</dd><dt>Registry generation</dt><dd>' + esc(active.base_registry_generation) + "</dd></dl>";
+    approvedEditor.value = JSON.stringify(active.approved_profile, null, 2);
+    approvedEditor.removeAttribute("aria-invalid");
+    renderApprovedSummary(active.approved_profile);
+    document.getElementById("technical-current").textContent = JSON.stringify(active.current_profile, null, 2);
+    document.getElementById("technical-proposed").textContent = JSON.stringify(active.proposed_profile, null, 2);
+    document.getElementById("reason").value = "";
+    status.hidden = true;
+    status.textContent = "";
+    renderActions();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function outcomeCopy(action, state) {
+    if (action === "reject") return ["Request rejected", "This researcher request has been removed from the active review queue.", "No registry change was published."];
+    if (action === "request_changes") return ["Changes requested", "The decision and reason were recorded for this researcher request.", "No registry change was published."];
+    if (action === "start_review") return ["Review started", "The request is now marked as under review.", "No registry change was published."];
+    if (action === "rebase") return ["Request rebased", "The request now uses the current researcher registry and requires review again.", "No registry change was published."];
+    if (action === "approve" || action === "retry_publish") return ["Publication started", "A checks-gated registry publication has been dispatched.", "The public registry will not change unless its pull request passes the required checks and merges."];
+    if (action === "reconcile_publish" && state === "published") return ["Publication verified", "The researcher registry change is live.", "The queue record is now complete."];
+    if (action === "reconcile_publish" && state === "publication_failed") return ["Publication did not complete", "The publication result was recorded for follow-up.", "Review the failure before retrying."];
+    return ["Action recorded", "The researcher request was updated.", "Review the queue for its current status."];
+  }
+  function showOutcome(action, response, reason, approvedProfile) {
+    const copy = outcomeCopy(action, response.state);
+    detail.hidden = true;
+    queueView.hidden = true;
+    outcome.hidden = false;
+    hero.hidden = true;
+    document.getElementById("outcome-title").textContent = copy[0];
+    document.getElementById("outcome-message").textContent = copy[1];
+    document.getElementById("outcome-confirmation").textContent = copy[2];
+    const researcherName = approvedProfile && approvedProfile.display_name || active.proposed_profile.display_name;
+    document.getElementById("outcome-details").innerHTML = '<dt>Researcher</dt><dd>' + esc(researcherName) + '</dd><dt>Submission</dt><dd>' + esc(response.submission_id) + '</dd><dt>State</dt><dd>' + esc(label(response.state)) + '</dd><dt>Recorded</dt><dd>' + esc(formatTime(response.updated_at)) + '</dd>' + (reason ? '<dt>Reason</dt><dd>' + esc(reason) + "</dd>" : "");
+    const continueButton = document.getElementById("outcome-review");
+    continueButton.hidden = !["under_review", "changes_requested"].includes(response.state);
+    continueButton.onclick = () => open(response.submission_id).catch(showFatal);
+    outcome.focus();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  function showFatal(error) {
+    queue.textContent = error.message || "The administrator page could not be loaded.";
+  }
+  document.getElementById("back").onclick = () => load().catch(showFatal);
+  document.getElementById("outcome-back").onclick = () => load().catch(showFatal);
+  document.querySelectorAll("[data-action]").forEach(button => {
+    button.onclick = async () => {
+      if (!active) return;
+      const action = button.dataset.action;
+      const reason = document.getElementById("reason").value.trim();
+      if (["request_changes", "reject"].includes(action) && !reason) {
+        status.textContent = "Enter an administrator reason before completing this action.";
+        status.hidden = false;
+        document.getElementById("reason").focus();
+        return;
+      }
+      let profile = null;
+      if (["approve", "retry_publish"].includes(action)) {
+        const preview = previewApprovedEditor();
+        if (!preview.ok) {
+          status.textContent = "The complete approved registry record contains invalid JSON.";
+          status.hidden = false;
+          return;
+        }
+        profile = preview.profile;
+      }
+      document.querySelectorAll("[data-action]").forEach(actionButton => { actionButton.disabled = true; });
+      status.hidden = true;
+      try {
+        const actionReason = action === "reconcile_publish" ? "" : reason;
+        const response = await api("/admin/api/submissions/" + encodeURIComponent(active.submission_id) + "/action", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, expected_revision: active.revision, approved_profile: profile, reason: actionReason }),
+        });
+        const outcomeReason = action === "reconcile_publish" ? "" : (actionReason || response.administrator_reason || "");
+        showOutcome(action, response, outcomeReason, profile);
+      } catch (error) {
+        const submissionId = active.submission_id;
+        if (["approve", "retry_publish"].includes(action) && error.status >= 500) {
+          try { await open(submissionId); } catch { /* Keep the original publication error visible. */ }
+        }
+        status.textContent = error.message;
+        status.hidden = false;
+        renderActions();
+      }
+    };
+  });
+  approvedEditor.addEventListener("input", previewApprovedEditor);
+  load().catch(showFatal);
+})();`;
+
+export { ADMIN_CSS, ADMIN_HTML, ADMIN_JS };
 
 export function createHandler({ storeFactory = env => new ResearcherSubmissionStore(env.SUBMISSIONS_DB), fetchImpl = (...args) => fetch(...args), now = () => new Date() } = {}) {
   return async function handle(request, env, context = { waitUntil() {} }) {
@@ -485,7 +893,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
         return json(200, { submissions: submissions.map(detail => {
           const duplicates = duplicateCandidates(directory, detail);
           return {
-            ...detail, trust_signals: trustSignals(detail, duplicates),
+            ...detail, trust_signals: trustSignals(directory, detail, duplicates),
             material_effect: materialEffect(directory, teamData, facultyMatches, detail),
             validator_warnings: validatorWarnings(directory, detail, duplicates),
           };
@@ -507,7 +915,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
             proposed_profile: detail.proposed_profile, current_profile: currentProfile,
           }, now().toISOString().slice(0, 10)),
           current_profile: currentProfile, duplicate_candidates: duplicates,
-          trust_signals: trustSignals(detail, duplicates),
+          trust_signals: trustSignals(directory, detail, duplicates),
           material_effect: materialEffect(directory, teamData, facultyMatches, detail),
           validator_warnings: validatorWarnings(directory, detail, duplicates),
         });
@@ -532,12 +940,16 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           if (!rebased) fail("state_conflict", "The submission changed before it could be rebased.", 409);
           return json(200, {
             submission_id: rebased.submission_id, state: rebased.state, revision: rebased.revision,
-            base_registry_generation: rebased.base_registry_generation,
+            base_registry_generation: rebased.base_registry_generation, updated_at: rebased.updated_at,
+            administrator_reason: rebased.administrator_reason || "",
           });
         }
         if (body.action === "approve") {
+          if (current.state !== "under_review") {
+            fail("state_conflict", "Start review before approving this request.", 409);
+          }
           const approvedProfile = await validateApprovalAgainstCurrentRegistry(current, body.approved_profile, env, fetchImpl);
-          const approved = await store.transition({ id: current.submission_id, fromStates: ["pending", "under_review", "changes_requested"], toState: "approved", expectedRevision, actor, reason, approvedProfile, now: now().toISOString() });
+          const approved = await store.transition({ id: current.submission_id, fromStates: ["under_review"], toState: "approved", expectedRevision, actor, reason, approvedProfile, now: now().toISOString() });
           if (!approved) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
           const publishing = await store.markPublishing(approved.submission_id, approved.revision, actor, now().toISOString());
           if (!publishing) fail("state_conflict", "The submission changed before publication started.", 409);
@@ -547,14 +959,17 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
             if (failed) context.waitUntil(notifyOwner(env, failed, fetchImpl, "publication_failed").catch(() => undefined));
             throw error;
           }
-          return json(200, { submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision });
+          return json(200, {
+            submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision,
+            updated_at: publishing.updated_at, administrator_reason: reason,
+          });
         }
         if (body.action === "retry_publish") {
           if (!["approved", "publication_failed"].includes(current.state)) {
             fail("state_conflict", "Only an approved or failed publication can be retried.", 409);
           }
           const approvedProfile = await validateApprovalAgainstCurrentRegistry(current, body.approved_profile, env, fetchImpl);
-          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString(), approvedProfile);
+          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString(), approvedProfile, reason);
           if (!publishing) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
           try { await dispatchPublication(env, publishing, fetchImpl); }
           catch (error) {
@@ -562,7 +977,10 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
             if (failed) context.waitUntil(notifyOwner(env, failed, fetchImpl, "publication_failed").catch(() => undefined));
             throw error;
           }
-          return json(200, { submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision });
+          return json(200, {
+            submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision,
+            updated_at: publishing.updated_at, administrator_reason: publishing.administrator_reason || "",
+          });
         }
         if (body.action === "reconcile_publish") {
           const reconciled = await reconcilePublication({
@@ -571,14 +989,21 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           if (reconciled.state === "publication_failed") {
             context.waitUntil(notifyOwner(env, reconciled, fetchImpl, "publication_failed").catch(() => undefined));
           }
-          return json(200, { submission_id: reconciled.submission_id, state: reconciled.state, revision: reconciled.revision });
+          return json(200, {
+            submission_id: reconciled.submission_id, state: reconciled.state, revision: reconciled.revision,
+            updated_at: reconciled.updated_at, administrator_reason: reconciled.administrator_reason || "",
+          });
         }
         const state = body.action === "request_changes" ? "changes_requested" : body.action === "reject" ? "rejected" : body.action === "start_review" ? "under_review" : "";
         if (!state) fail("invalid_action", "The administrator action is invalid.");
         if (["changes_requested", "rejected"].includes(state) && !reason) fail("reason_required", "A reason is required for this action.");
-        const updated = await store.transition({ id: current.submission_id, fromStates: ["pending", "under_review", "changes_requested"], toState: state, expectedRevision, actor, reason, now: now().toISOString() });
+        const fromStates = body.action === "start_review" ? ["pending", "changes_requested"] : ["pending", "under_review", "changes_requested"];
+        const updated = await store.transition({ id: current.submission_id, fromStates, toState: state, expectedRevision, actor, reason, now: now().toISOString() });
         if (!updated) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
-        return json(200, { submission_id: updated.submission_id, state: updated.state, revision: updated.revision });
+        return json(200, {
+          submission_id: updated.submission_id, state: updated.state, revision: updated.revision,
+          updated_at: updated.updated_at, administrator_reason: updated.administrator_reason || "",
+        });
       }
       const publicationMatch = path.match(/^\/internal\/publications\/(rs_[a-f0-9]{24})$/);
       if (publicationMatch && request.method === "GET") {

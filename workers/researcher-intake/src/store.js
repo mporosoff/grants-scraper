@@ -120,10 +120,10 @@ export class ResearcherSubmissionStore {
     return this.commitStateChange(update, audit, id);
   }
 
-  async markPublishing(id, expectedRevision, actor, now, approvedProfile = null) {
+  async markPublishing(id, expectedRevision, actor, now, approvedProfile = null, reason = "") {
     const row = await this.transition({
       id, fromStates: ["approved", "publication_failed"], toState: "publishing",
-      expectedRevision, actor, reason: "Registry-only publication dispatched",
+      expectedRevision, actor, reason: reason || "Registry-only publication dispatched",
       approvedProfile, publicationStartedAt: now, now,
     });
     return row;
