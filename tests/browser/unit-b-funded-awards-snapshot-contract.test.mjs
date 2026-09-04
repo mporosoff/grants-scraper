@@ -10,6 +10,7 @@ import {
   aggregateSnapshotAwards,
   buildAwardSnapshot,
   compareAwardsByRecency,
+  programDescriptors,
   publicSnapshot,
   snapshotPage,
   snapshotSourceBatch,
@@ -84,14 +85,14 @@ test("Unit B exact boundaries page without truncation, duplication, or empty fin
 });
 
 test("Unit B hydrates each requested agency independently in batches no larger than 25", () => {
-  const sourcePayloads = Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [
+  const sourcePayloads = Object.fromEntries(["NSF", "NIH", "DOE", "DOD"].map(source => [
     source,
     sourcePayload(source, Array.from({ length: 51 }, (_, index) => award(index, source))),
   ]));
   const value = snapshot(sourcePayloads);
   const initial = publicSnapshot(value).initial_batches;
-  assert.deepEqual(initial.map(batch => [batch.source, batch.actual_added]), [["NSF", 25], ["NIH", 25], ["DOE", 25]]);
-  for (const source of ["NSF", "NIH", "DOE"]) {
+  assert.deepEqual(initial.map(batch => [batch.source, batch.actual_added]), [["NSF", 25], ["NIH", 25], ["DOE", 25], ["DOD", 25]]);
+  for (const source of ["NSF", "NIH", "DOE", "DOD"]) {
     const second = snapshotSourceBatch(value, { source, offset: 25, facet: { type: "all", key: "" } });
     const final = snapshotSourceBatch(value, { source, offset: 50, facet: { type: "all", key: "" } });
     assert.equal(second.actual_added, 25);
@@ -129,6 +130,49 @@ test("Unit B aggregates and investigator/program facets are computed from the fu
   const programPage = snapshotPage(value, { page: 1, pageSize: 10, facet: { type: "program", key: program.key } });
   assert.equal(programPage.aggregate.project_count, program.projects);
   assert.equal(programPage.base_aggregate.project_count, 26);
+});
+
+test("Unit B exposes every retained DoD Assistance Listing as a distinct selectable program facet", () => {
+  const dodAward = award(2, "DOD", {
+    subagency: "Department of the Air Force",
+    program_name: "Air Force Defense Research Sciences Program",
+    program_codes: ["12.800", "12.810", "12.800"],
+  });
+  const olderTitledAward = award(1, "DOD", {
+    subagency: "Department of the Air Force",
+    program_name: "Other Defense Program",
+    program_codes: ["12.810"],
+  });
+  const direct = programDescriptors(dodAward);
+  assert.equal(direct.find(program => program.query === "12.810").leaf_label,
+    "Assistance Listing 12.810", "a secondary listing remains explicit when that award has no title for it");
+
+  const value = snapshot({ DOD: sourcePayload("DOD", [dodAward, olderTitledAward]) }, ["DOD"]);
+  const programs = value.base_aggregate.programs;
+
+  assert.equal(value.base_aggregate.program_count, 2);
+  assert.deepEqual(programs.map(program => program.query).sort(), ["12.800", "12.810"]);
+  assert.deepEqual(programs.map(program => program.source_codes), [["12.800"], ["12.810"]]);
+  assert.equal(programs.find(program => program.query === "12.800").leaf_label,
+    "Air Force Defense Research Sciences Program (12.800)");
+  assert.equal(programs.find(program => program.query === "12.810").leaf_label,
+    "Other Defense Program (12.810)", "a later available official title upgrades the shared code facet");
+  assert.equal(programs.find(program => program.query === "12.800").projects, 1);
+  assert.equal(programs.find(program => program.query === "12.810").projects, 2);
+  assert.equal(new Set(programs.map(program => program.key)).size, 2);
+
+  for (const program of programs) {
+    const page = snapshotPage(value, {
+      page: 1,
+      pageSize: 10,
+      facet: { type: "program", key: program.key },
+    });
+    assert.equal(page.facet.label, program.label);
+    const expectedIds = program.query === "12.810"
+      ? [dodAward.award_id, olderTitledAward.award_id]
+      : [dodAward.award_id];
+    assert.deepEqual(page.batches.flatMap(batch => batch.results.map(item => item.award_id)), expectedIds);
+  }
 });
 
 test("Unit B preserves complete opaque program facet keys through page and batch validation", async () => {
@@ -320,11 +364,14 @@ test("Unit B active page and Worker expose snapshot-only architecture and direct
   assert.match(app, /snapshotPageUrl/);
   assert.match(app, /data-ii-load-source/);
   assert.match(app, /data-ii-retry-source/);
+  assert.match(app, /awardProduct\.enrichmentWarnings\(source\)/);
+  assert.match(app, /source\.health\?\.status === "degraded"/);
+  assert.match(app, /Base award records remain available when optional public details cannot be loaded/);
   const bodyRead = app.indexOf("await response.json().catch(() => null)");
   const timeoutRelease = app.indexOf("clearTimeout(timer)", bodyRead);
   assert.ok(bodyRead > -1 && timeoutRelease > bodyRead, "the bounded request timer must remain active while the response body is read");
   assert.match(worker, /failure_policy: "successful-sources-retained-retry-creates-successor"/);
-  assert.match(worker, /maximum_snapshot_create_subrequests: 50/);
+  assert.match(worker, /maximum_snapshot_create_subrequests: 141/);
   assert.match(config, /snapshotBatchUrl/);
   assert.match(config, /"cpu_ms": 250/);
 });
@@ -339,27 +386,31 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   ]);
   const releaseKey = "post-phase4-abc-20260829";
   const alertStylesReleaseKey = "ui-runtime-20260903";
-  const investigatorCaseReleaseKey = "investigator-case-20260903";
-  const investigatorMixedCaseReleaseKey = "investigator-mixed-case-20260903";
-  const resultsNoteReleaseKey = "results-note-20260903";
+  const dodReleaseKey = "dod-awards-20260903";
+  const dodStatusReleaseKey = "dod-awards-20260904";
+  const dodBrowserReleaseKey = "dod-browser-20260904-r2";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   for (const asset of [
     "alerts.js",
     "award-api-config.js",
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundedAwards, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${investigatorMixedCaseReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${investigatorCaseReleaseKey}`));
-  for (const asset of [
-    "institutional-intelligence-core.js",
-    "institutional-intelligence-snapshots.js",
-  ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${resultsNoteReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${dodStatusReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodBrowserReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-core\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence-snapshots\\.js\\?v=${dodBrowserReleaseKey}`));
   assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
-  assert.match(fundedAwards, /ai-provider\.js\?v=ai-boundaries-20260901/);
-  assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${resultsNoteReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards\\.css\\?v=${dodBrowserReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.js\\?v=${releaseKey}`));
+  assert.match(fundingFinder, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundingFinder, new RegExp(`ai-provider\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundingFinder, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
   assert.ok(opportunityTeamGeneration);
   const appCssHash = createHash("sha256").update(appCss).digest("hex");
@@ -367,7 +418,6 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   assert.match(fundingFinder, new RegExp(`app\\.js\\?v=${appJsHash}`));
   assert.match(teamMatch, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(fundingFinder, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
-  assert.match(fundingFinder, /ai-provider\.js\?v=ai-boundaries-20260901/);
   assert.match(fundingFinder, /result-workflow\.js\?v=ai-feedback-20260901/);
 });
 
@@ -375,7 +425,7 @@ test("Unit B aggregate helper deduplicates source plus award ID", () => {
   const duplicate = award(1);
   const aggregate = aggregateSnapshotAwards([duplicate, { ...duplicate }, award(1, "NIH")]);
   assert.equal(aggregate.project_count, 2);
-  assert.deepEqual(aggregate.agency_totals, [{ source: "NSF", projects: 1 }, { source: "NIH", projects: 1 }, { source: "DOE", projects: 0 }]);
+  assert.deepEqual(aggregate.agency_totals, [{ source: "NSF", projects: 1 }, { source: "NIH", projects: 1 }, { source: "DOE", projects: 0 }, { source: "DOD", projects: 0 }]);
   const value = snapshot({ NSF: sourcePayload("NSF", [duplicate, { ...duplicate }]) }, ["NSF"]);
   assert.equal(value.sources[0].result_count, 1);
   const batch = snapshotSourceBatch(value, { source: "NSF", offset: 1, facet: { type: "all", key: "" } });
@@ -383,8 +433,8 @@ test("Unit B aggregate helper deduplicates source plus award ID", () => {
   assert.equal(batch.additional_available, false);
 });
 
-test("Unit B 1,650-award architecture stays bounded for the deployed Workers Paid target", () => {
-  const sourcePayloads = Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [
+test("Unit B 2,200-award architecture stays bounded for the deployed Workers Paid target", () => {
+  const sourcePayloads = Object.fromEntries(["NSF", "NIH", "DOE", "DOD"].map(source => [
     source,
     sourcePayload(source, Array.from({ length: 550 }, (_, index) => award(index, source, {
       program_name: `Program ${index % 20}`,
@@ -395,7 +445,7 @@ test("Unit B 1,650-award architecture stays bounded for the deployed Workers Pai
   const createPayload = publicSnapshot(value);
   const pagePayload = snapshotPage(value, { page: 1, pageSize: 50, facet: { type: "all", key: "" } });
 
-  assert.equal(value.exact_total, 1_650);
+  assert.equal(value.exact_total, 2_200);
   assert.equal(createPayload.base_aggregate, undefined, "the create response must not duplicate the page aggregate");
   assert.ok(pagePayload.aggregate.investigators.every(item => item.award_keys === undefined));
   assert.ok(pagePayload.aggregate.programs.every(item => item.award_keys === undefined));

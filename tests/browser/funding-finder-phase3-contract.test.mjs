@@ -502,6 +502,15 @@ test("deterministic institutional answers and bounded narrative citations use on
   assert.match(who.answer, /Ada Researcher/);
   assert.deepEqual(who.has_more, ["DOE"]);
   assert.deepEqual(who.unavailable, ["NIH"]);
+  const dodAggregate = core.aggregateAwards([normalizedAward({ source: "DOD", id: "DOD-1", name: "" })]);
+  const dodWho = core.deterministicInstitutionAnswer({
+    question: "Who worked on this DoD award?",
+    intent: "investigators",
+    aggregate: dodAggregate,
+    sources: [{ source: "DOD", status: "complete" }],
+  });
+  assert.match(dodWho.answer, /does not provide investigator metadata/);
+  assert.match(dodWho.answer, /not evidence that those projects have no investigators/);
   const programs = core.deterministicInstitutionAnswer({ question: "Which programs funded catalysis?", intent: "programs", aggregate, sources });
   assert.match(programs.answer, /Office of Basic Energy Sciences/);
   const count = core.deterministicInstitutionAnswer({ question: "How many projects?", intent: "count", aggregate, sources });
@@ -527,12 +536,13 @@ test("deterministic institutional answers and bounded narrative citations use on
     ...Array.from({ length: 30 }, (_, index) => normalizedAward({ source: "NSF", id: `NSF-${index}`, name: `NSF Person ${index}` })),
     ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "NIH", id: `NIH-${index}`, name: `NIH Person ${index}` })),
     ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "DOE", id: `DOE-${index}`, name: `DOE Person ${index}` })),
+    ...Array.from({ length: 4 }, (_, index) => normalizedAward({ source: "DOD", id: `DOD-${index}`, name: "", title: `DoD title ${index}` })),
   ];
   const balanced = core.questionEvidencePack(sourceHeavy);
-  assert.deepEqual(Array.from(balanced.awards.slice(0, 3), award => award.source), ["NSF", "NIH", "DOE"]);
+  assert.deepEqual(Array.from(balanced.awards.slice(0, 4), award => award.source), ["NSF", "NIH", "DOE", "DOD"]);
   assert.deepEqual(
-    Object.fromEntries(["NSF", "NIH", "DOE"].map(source => [source, balanced.awards.filter(award => award.source === source).length])),
-    { NSF: 16, NIH: 4, DOE: 4 },
+    Object.fromEntries(["NSF", "NIH", "DOE", "DOD"].map(source => [source, balanced.awards.filter(award => award.source === source).length])),
+    { NSF: 12, NIH: 4, DOE: 4, DOD: 4 },
   );
 });
 

@@ -109,7 +109,7 @@
         type: "object",
         additionalProperties: false,
         properties: {
-          agency: { type: "string", enum: ["all", "NSF", "NIH", "DOE"] },
+          agency: { type: "string", enum: ["all", "NSF", "NIH", "DOE", "DOD"] },
           program: { type: "string", maxLength: 160 },
           topic: { type: "string", maxLength: 500 },
           pi: { type: "string", maxLength: 160 },

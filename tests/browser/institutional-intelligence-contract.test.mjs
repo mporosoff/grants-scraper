@@ -126,6 +126,7 @@ test("existing institution identities retain source-specific award query identif
   assert.deepEqual(rochester.sources.NSF.uei, ["F27KDXZMF9Y8"]);
   assert.deepEqual(rochester.sources.NIH.ipf, ["7047101"]);
   assert.equal(rochester.sources.DOE.search_name, "University of Rochester");
+  assert.deepEqual(rochester.sources.DOD.uei, ["F27KDXZMF9Y8"]);
   const mit = institutionFromRor(rankRorOrganizations(aliases.MIT.items, "MIT")[0], "Massachusetts Institute of Technology");
   assert.equal(mit.ror_id, "https://ror.org/042nb2s44");
   assert.equal(mit.sources.NSF.search_name, "Massachusetts Institute of Technology");
@@ -148,7 +149,7 @@ test("structured filters reuse the normalized cross-agency award request contrac
     year_end: 2026,
   });
   assert.deepEqual(plain(request), {
-    sources: ["NSF", "NIH", "DOE"],
+    sources: ["NSF", "NIH", "DOE", "DOD"],
     criteria: {
       institution: "Massachusetts Institute of Technology",
       institution_id: "https://ror.org/042nb2s44",
@@ -176,7 +177,10 @@ test("structured filters reuse the normalized cross-agency award request contrac
   assert.throws(() => core.buildAwardRequest({ agency: "all" }), /Enter an institution, topic, program, investigator, or program officer/);
   assert.deepEqual(plain(core.programCriterion("DOE", "BES")), { program_office: "SC-32" });
   assert.deepEqual(plain(core.programCriterion("NIH", "R01")), { program: "R01" });
-  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, or DOE/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "all", program: "Catalysis" }), /Choose NSF, NIH, DOE, or DoD/);
+  assert.deepEqual(plain(core.programCriterion("DOD", "12.800")), { program: "12.800" });
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", pi: "Ada Investigator" }), /do not provide investigator fields/);
+  assert.throws(() => core.buildAwardRequest({ institution: "MIT", agency: "DOD", program_officer: "Alex Officer" }), /do not provide program-officer fields/);
   assert.throws(() => core.buildAwardRequest({ topic: "catalysis", agency: "NSF", year_start: 1989, year_end: 2100 }), /50 years or fewer/);
   const form = buildDoeSearchForm(doeForm, { program_office: "SC-32" });
   assert.deepEqual(JSON.parse(form.get("ctl00_MainContent_pnlSearch_srchOrgCode_ClientState")), {
@@ -386,12 +390,18 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const postJsonSource = appSource.slice(appSource.indexOf("async function postJson("), appSource.indexOf("function absorbAwards("));
   assert.match(postJsonSource, /activeController\.signal\.aborted[\s\S]*activeController = new AbortController\(\)[\s\S]*controller === state\.controller[\s\S]*state\.controller = activeController/);
 
+  const preparedSource = appSource.slice(appSource.indexOf("async function preparedSnapshotSearch("), appSource.indexOf("async function runSearch("));
+  const createIndex = preparedSource.indexOf("await postJson(api.snapshotUrl");
+  const initialPageIndex = preparedSource.indexOf("await requestSnapshotPage");
+  const stageIndex = preparedSource.indexOf("stagedSnapshotResult(");
+  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
+  assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*rehydrateWorkerSnapshot\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
+  assert.match(preparedSource, /dodBrowserModule\(\)\.then[\s\S]*workerSnapshot[\s\S]*applyClientSnapshotOverlay\([\s\S]*clientSnapshotOverlay/);
+  assert.match(appSource, /restoredClientSnapshotOverlay\([\s\S]*buildAwardRequest\(\{ \.\.\.state\.submitted[\s\S]*requestedSources\.includes\("DOD"\) && !returnedSources\.has\("DOD"\)[\s\S]*__clientSnapshotOverlay/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
-  const createIndex = runSearchSource.indexOf("await postJson(api.snapshotUrl");
-  const initialPageIndex = runSearchSource.indexOf("await requestSnapshotPage");
-  const stageIndex = runSearchSource.indexOf("stagedSnapshotResult(");
+  const prepareIndex = runSearchSource.indexOf("await preparedSnapshotSearch(");
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");
-  assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex && commitIndex > stageIndex);
+  assert.ok(prepareIndex > -1 && commitIndex > prepareIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
   assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
   assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
@@ -418,6 +428,12 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+  assert.match(retrySource, /stagedSourceRetry\([\s\S]*successorOverlay[\s\S]*clientSnapshotOverlay: successorOverlay/);
+  assert.match(retrySource, /stagedHybridSourceRetry\([\s\S]*sources: \[source\][\s\S]*replaceHybridSnapshotSource\(/);
+  assert.match(retrySource, /source === "DOD"[\s\S]*rehydrateWorkerSnapshot\([\s\S]*snapshot: hydratedBaseSnapshot/);
+  assert.match(retrySource, /if \(state\.localSnapshot \|\| \(state\.clientSnapshotOverlay && source === "DOD"\)\)/);
+  assert.match(retrySource, /const retryIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === previous[\s\S]*if \(!retryIsCurrent\(\)\) return;[\s\S]*commitSnapshotResult\(result\.staged/);
+  assert.doesNotMatch(retrySource, /preparedSnapshotSearch\(\{ request, submitted/);
 });
 
 test("one ordinary URL-state action coalesces repeated replaceState requests", () => {
@@ -594,8 +610,13 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
     deploymentSource.indexOf("Run bounded exact-source smokes"),
   );
   assert.match(workerHealthGate, /institution_registry\.source[\s\S]*= "ROR"/);
-  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.2\.0"/);
-  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.2\.0"/);
+  assert.match(workerHealthGate, /institution_registry\.adapter_version[\s\S]*= "1\.3\.0"/);
+  assert.match(awardSmokeSource, /institution_registry\?\.adapter_version !== "1\.3\.0"/);
+  assert.match(appSource, /\$\{displaySource\} · \$\{mechanism\}/);
+  assert.match(appSource, /Assistance Listing:/);
+  assert.match(appSource, /USAspending does not publish investigator names or an award abstract/);
+  assert.match(appSource, /isDod \? "" : `<details class="ii-award-abstract"/);
+  assert.match(appSource, /Original funding opportunity/);
   assert.doesNotMatch(coreSource + appSource, /embedding|voyage|semantic|rerank/i);
   assert.match(appSource, /explicitInvestigator\(question, current\.institution, plan\.program/);
   const askQuestionSource = appSource.slice(
@@ -622,6 +643,9 @@ test("result completeness is explained in one compact, plain-language status blo
   assert.match(styles, /\.ii-source-status li\s*\{[^}]*padding:\s*0;[^}]*background:\s*transparent/);
   assert.match(sourceStatusSource, /source\.status === "complete"[\s\S]*source\.source}: all/);
   assert.match(sourceStatusSource, /\["safety_bounded", "partial"\][\s\S]*source\.source}: at least/);
+  assert.match(sourceStatusSource, /awardProduct\.enrichmentWarnings\(source\)/);
+  assert.match(sourceStatusSource, /source\.health\?\.status === "degraded"/);
+  assert.match(sourceStatusSource, /Base award records remain available when optional public details cannot be loaded/);
   assert.match(sourceStatusSource, /“at least” means more matches may exist/);
   assert.match(sourceStatusSource, /list\.innerHTML = sources\.length \? `<li/);
   assert.doesNotMatch(sourceStatusSource, /sources\.map\(source => `<li/);

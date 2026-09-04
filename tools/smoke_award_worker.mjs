@@ -1,5 +1,19 @@
+import { searchDodFromBrowser } from "../assets/dod-awards-browser.mjs";
+import { DOD_SEARCH_URL } from "../workers/award-api/src/adapters/dod.js";
+
 const baseUrl = String(process.env.AWARD_API_URL || "https://funding-finder-award-api.urochestercheme.workers.dev/").trim();
 const origin = "https://mporosoff.github.io";
+
+function failureDetail(payload) {
+  const sources = Array.isArray(payload?.sources) ? payload.sources : [];
+  const sourceDetails = sources.map(source => [
+    source?.source,
+    source?.status,
+    source?.error?.code,
+  ].filter(Boolean).join(":"))
+    .filter(Boolean);
+  return sourceDetails.join(", ") || payload?.error?.code || "unknown_error";
+}
 
 async function jsonRequest(path, options = {}) {
   const response = await fetch(new URL(path, baseUrl), {
@@ -8,7 +22,9 @@ async function jsonRequest(path, options = {}) {
     signal: AbortSignal.timeout(45_000),
   });
   const payload = await response.json();
-  if (!response.ok) throw new Error(`${path} returned ${response.status}`);
+  if (!response.ok) {
+    throw new Error(`${path} returned ${response.status} (${failureDetail(payload)})`);
+  }
   return payload;
 }
 
@@ -19,13 +35,19 @@ if (health.service !== "available" || health.schema_version !== 1) {
 if (health.credentials_required !== false) {
   throw new Error("Award Worker unexpectedly reports a credential requirement.");
 }
-if (!["NSF", "NIH", "DOE"].every(source => health.sources?.includes(source))) {
-  throw new Error("Award Worker health did not advertise all three isolated sources.");
+if (!["NSF", "NIH", "DOE", "DOD"].every(source => health.sources?.includes(source))) {
+  throw new Error("Award Worker health did not advertise all four isolated sources.");
+}
+if (health.source_transports?.NSF !== "worker_proxy"
+  || health.source_transports?.NIH !== "worker_proxy"
+  || health.source_transports?.DOE !== "worker_proxy"
+  || health.source_transports?.DOD !== "browser_direct_cors") {
+  throw new Error("Award Worker health did not advertise the production source-transport boundary.");
 }
 if (health.institution_registry?.source !== "ROR") {
   throw new Error("Award Worker health did not advertise the ROR institution registry boundary.");
 }
-if (health.institution_registry?.adapter_version !== "1.2.0"
+if (health.institution_registry?.adapter_version !== "1.3.0"
   || health.institution_resolution !== "curated-or-server-validated-ror") {
   throw new Error("Award Worker health did not advertise trusted Phase 3 ROR resolution.");
 }
@@ -43,7 +65,12 @@ if (health.normalized_paging?.NSF?.upstream_pages !== 12
   || health.normalized_paging?.NSF?.maximum_identity_queries !== 3
   || health.normalized_paging?.NIH?.upstream_page_size !== 100
   || health.normalized_paging?.DOE?.maximum_normalized_offset !== 100
-  || health.normalized_paging?.DOE?.maximum_identity_queries !== 3) {
+  || health.normalized_paging?.DOE?.maximum_identity_queries !== 3
+  || health.normalized_paging?.DOD?.upstream_page_size !== 25
+  || health.normalized_paging?.DOD?.detail_cache_timeout_ms !== 2_000
+  || health.normalized_paging?.DOD?.operation_budget_ms !== 100_000
+  || health.normalized_paging?.DOD?.source_wrapper_timeout_ms !== 2_000
+  || health.source_capabilities?.DOD?.award_scope !== "prime_assistance_awards_04_05_only") {
   throw new Error("Award Worker health did not advertise the bounded normalized paging contract.");
 }
 
@@ -73,4 +100,58 @@ for (const body of [
   }
 }
 
-console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, and exact institution-validated NSF/NIH/DOE source smokes passed.");
+const corsResponses = [];
+const preflightResponse = await fetch(DOD_SEARCH_URL, {
+  method: "OPTIONS",
+  headers: {
+    Origin: origin,
+    "Access-Control-Request-Method": "POST",
+    "Access-Control-Request-Headers": "content-type",
+  },
+  signal: AbortSignal.timeout(45_000),
+});
+const preflightOrigin = preflightResponse.headers.get("access-control-allow-origin");
+const preflightMethods = new Set(
+  String(preflightResponse.headers.get("access-control-allow-methods") || "")
+    .split(",")
+    .map(value => value.trim().toUpperCase())
+    .filter(Boolean),
+);
+const preflightHeaders = new Set(
+  String(preflightResponse.headers.get("access-control-allow-headers") || "")
+    .split(",")
+    .map(value => value.trim().toLowerCase())
+    .filter(Boolean),
+);
+if (!preflightResponse.ok
+  || !["*", origin].includes(preflightOrigin)
+  || (!preflightMethods.has("POST") && !preflightMethods.has("*"))
+  || (!preflightHeaders.has("content-type") && !preflightHeaders.has("*"))) {
+  throw new Error("DOD browser-CORS preflight did not allow the USAspending JSON search request.");
+}
+const dodPayload = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
+  limit: 1,
+  fetchImpl: async (url, options = {}) => {
+    const headers = new Headers(options.headers);
+    headers.set("Origin", origin);
+    const response = await fetch(url, { ...options, headers });
+    corsResponses.push(response.headers.get("access-control-allow-origin"));
+    return response;
+  },
+});
+if (dodPayload.status
+  || dodPayload.results?.length !== 1
+  || dodPayload.results[0].schema_version !== 1
+  || dodPayload.results[0].source !== "DOD"
+  || dodPayload.results[0].award_id !== "FA9550261B195"
+  || !/UNIVERSITY OF MARYLAND/i.test(dodPayload.results[0].institution?.name || "")
+  || !["Project Grant", "Cooperative Agreement"].includes(dodPayload.results[0].funding_mechanism)
+  || dodPayload.results[0].award_amount_basis !== "total_obligation"
+  || !dodPayload.results[0].opportunity_numbers?.includes("NOFOAFRLAFOSR20250002")
+  || !dodPayload.results[0].official_award_url.includes("usaspending.gov/award/")
+  || !corsResponses.length
+  || corsResponses.some(value => value !== "*")) {
+  throw new Error("DOD browser-CORS exact-ID smoke did not return the expected USAspending obligation record.");
+}
+
+console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, exact NSF/NIH/DOE Worker smokes, and the DoD browser-CORS preflight and exact-award smoke passed.");

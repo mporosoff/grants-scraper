@@ -4,10 +4,12 @@
   const $ = id => document.getElementById(id);
   const core = globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE;
   const awardProduct = globalThis.FUNDING_AWARD_PRODUCT;
+  const awardLinks = globalThis.FUNDING_AWARD_LINKS;
   const api = globalThis.FUNDING_AWARD_API_CONFIG;
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
   if (!core || !awardProduct || !api || !credentials || !$(`institutional-intelligence`)) return;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904-r2", document.baseURI).href;
 
   const state = {
     selectedInstitution: null,
@@ -23,6 +25,8 @@
     controller: null,
     submitted: null,
     snapshot: null,
+    localSnapshot: null,
+    clientSnapshotOverlay: null,
     pagePayload: null,
     aggregate: null,
     baseAggregate: null,
@@ -45,6 +49,17 @@
     historyEntrySequence: 0,
     historyViewCache: new Map(),
   };
+  let dodBrowserModulePromise = null;
+
+  function dodBrowserModule() {
+    if (!dodBrowserModulePromise) {
+      dodBrowserModulePromise = import(DOD_BROWSER_MODULE_URL).catch(error => {
+        dodBrowserModulePromise = null;
+        throw error;
+      });
+    }
+    return dodBrowserModulePromise;
+  }
 
   function clean(value, maximum = 500) {
     return String(value ?? "").replace(/\s+/g, " ").trim().slice(0, maximum);
@@ -479,6 +494,7 @@
 
   function awardCard(award) {
     const source = clean(award?.source, 10) || "Source";
+    const displaySource = source.toUpperCase() === "DOD" ? "DoD" : source;
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
     const investigators = Array.isArray(award?.principal_investigators) ? award.principal_investigators : [];
@@ -486,37 +502,57 @@
       .map(person => contactLine(person, source, officialUrl)).join("");
     const program = core.programDescriptors(award)[0] || null;
     const recency = clean(award?.award_date || award?.project_start || award?.award_year, 40) || "Date not listed";
+    const isDod = source.toUpperCase() === "DOD";
+    const mechanism = clean(award?.funding_mechanism, 160);
+    const assistanceListings = (Array.isArray(award?.program_codes) ? award.program_codes : [])
+      .map(value => clean(value, 100)).filter(Boolean).join(", ");
+    const fundingOpportunity = awardLinks?.opportunityForAward?.(award) || null;
+    const fundingOpportunityUrl = fundingOpportunity ? awardLinks?.opportunityHref?.(fundingOpportunity) || "" : "";
+    const sourceLimitation = isDod
+      ? "USAspending does not publish investigator names or an award abstract for this DoD assistance record."
+      : "";
     return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(awardKey(award))}" tabindex="-1">
-      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(recency)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
+      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(isDod && mechanism ? `${displaySource} · ${mechanism}` : displaySource)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(recency)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.map(person => awardProduct.displayInvestigatorName(person?.name)).filter(Boolean).join(", "))}` : ""}</p>
-      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(program?.label || award?.subagency || "Not listed")}</p>
+      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(isDod ? award?.program_name || "Not listed" : program?.label || award?.subagency || "Not listed")}</p>
+      ${isDod && award?.subagency ? `<p class="ii-award-program"><strong>DoD component:</strong> ${escapeHtml(award.subagency)}</p>` : ""}
+      ${isDod && assistanceListings ? `<p class="ii-award-program"><strong>Assistance Listing:</strong> ${escapeHtml(assistanceListings)}</p>` : ""}
+      ${award?.organization_department ? `<p class="ii-award-program"><strong>Awarding office:</strong> ${escapeHtml(award.organization_department)}</p>` : ""}
+      ${sourceLimitation ? `<p class="ii-award-program"><strong>Source limitation:</strong> ${escapeHtml(sourceLimitation)}</p>` : ""}
       ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
-      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
-      <details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>
+      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(displaySource)} record ↗</a>` : "Official link not listed"}${fundingOpportunityUrl ? `<a href="${escapeAttribute(fundingOpportunityUrl)}" target="_blank" rel="noopener">Original funding opportunity ↗</a>` : ""}</div>
+      ${isDod ? "" : `<details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>`}
     </article>`;
   }
 
   function sourceStatusText(source) {
     const count = Number(source.result_count || 0);
     const awards = `${count.toLocaleString()} award${count === 1 ? "" : "s"}`;
-    if (source.status === "complete") return `${source.source}: all ${awards}`;
-    if (["safety_bounded", "partial"].includes(source.status)) return `${source.source}: at least ${awards}`;
-    if (source.status === "rate_limited") return `${source.source}: temporarily limited`;
-    if (source.status === "unsupported") return `${source.source}: these filters are not supported`;
-    if (source.error?.code === "source_timeout") return `${source.source}: timed out`;
-    return `${source.source}: temporarily unavailable`;
+    let summary;
+    if (source.status === "complete") summary = `${source.source}: all ${awards}`;
+    else if (["safety_bounded", "partial"].includes(source.status)) summary = `${source.source}: at least ${awards}`;
+    else if (source.status === "rate_limited") summary = `${source.source}: temporarily limited`;
+    else if (source.status === "unsupported") summary = `${source.source}: these filters are not supported`;
+    else if (source.error?.code === "source_timeout") summary = `${source.source}: timed out`;
+    else summary = `${source.source}: temporarily unavailable`;
+    const warnings = awardProduct.enrichmentWarnings(source);
+    return warnings.length ? `${summary}; ${warnings.join("; ")}` : summary;
   }
 
   function renderSourceStatus() {
     const sources = state.snapshot?.sources || [];
     const resultLimits = sources.some(source => ["safety_bounded", "partial"].includes(source.status));
     const sourceFailures = sources.some(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
+    const enrichmentFailures = sources.some(source => (
+      source.health?.status === "degraded" || awardProduct.enrichmentWarnings(source).length > 0
+    ));
     const notes = [];
     if (resultLimits) notes.push("Some databases cap how many results they return, so “at least” means more matches may exist.");
     if (sourceFailures) notes.push("Results from databases that did load are still shown.");
+    if (enrichmentFailures) notes.push("Base award records remain available when optional public details cannot be loaded.");
     const list = $("ii-source-status");
-    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures ? "limited" : "complete"}">
+    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures || enrichmentFailures ? "limited" : "complete"}">
       <span class="ii-source-status-summary"><strong>Results by source:</strong> ${escapeHtml(sources.map(sourceStatusText).join(" · "))}</span>
       ${notes.length ? `<span class="ii-source-status-help">${escapeHtml(notes.join(" "))}</span>` : ""}
     </li>` : "";
@@ -605,7 +641,7 @@
     const scope = payload.completeness === "complete" ? "in all results" : "in available results";
     $("ii-metrics").innerHTML = [
       [payload.aggregate.project_count, `Projects ${scope}`],
-      [payload.aggregate.investigator_count, `Investigators ${scope}`],
+      [payload.aggregate.investigator_count, `Listed investigators ${scope}`],
       [payload.aggregate.program_count, `Programs ${scope}`],
       [years, `Years represented ${scope}`],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
@@ -637,16 +673,86 @@
     });
   }
 
-  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller }) {
-    return postJson(api.snapshotPageUrl, {
+  function unavailableDodSource() {
+    return {
+      source: "DOD",
+      status: "unavailable",
+      result_count: 0,
+      total_count: null,
+      error: { code: "source_unavailable" },
+    };
+  }
+
+  function applyClientSnapshotOverlay(payload, overlay = state.clientSnapshotOverlay) {
+    if (!payload || !overlay || overlay.snapshotId !== payload.snapshot_id) return payload;
+    const sources = new Map((payload.sources || []).map(source => [source.source, source]));
+    const requestedSources = overlay.requestedSources || [];
+    const atLeast = Number(payload.at_least) || 0;
+    return {
+      ...payload,
+      ...(payload.request ? { request: { ...payload.request, sources: [...requestedSources] } } : {}),
+      completeness: atLeast ? "partial" : "unavailable",
+      exact_total: null,
+      recency_order: "available_snapshot_recent_to_older",
+      sources: requestedSources.map(source => source === "DOD"
+        ? unavailableDodSource()
+        : sources.get(source) || { source, status: "unavailable", result_count: 0, total_count: null, error: { code: "service_unavailable" } }),
+      ...(payload.pagination ? { pagination: { ...payload.pagination, page_count: null } } : {}),
+    };
+  }
+
+  function restoredClientSnapshotOverlay(payload, snapshotId) {
+    if (!state.submitted || !Array.isArray(payload?.sources)) return null;
+    let requestedSources;
+    try {
+      requestedSources = core.buildAwardRequest({ ...state.submitted, offset: 0 }, 10).sources;
+    } catch {
+      return null;
+    }
+    const returnedSources = new Set(payload.sources.map(source => clean(source?.source, 10).toUpperCase()));
+    const expectedWorkerSources = requestedSources.filter(source => source !== "DOD");
+    const matchesFallbackShape = expectedWorkerSources.length > 0
+      && returnedSources.size === expectedWorkerSources.length
+      && expectedWorkerSources.every(source => returnedSources.has(source));
+    return requestedSources.includes("DOD") && !returnedSources.has("DOD") && matchesFallbackShape
+      ? { snapshotId, requestedSources: [...requestedSources] }
+      : null;
+  }
+
+  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
+    if (String(snapshotId || "").startsWith("local-dod-")) {
+      const dod = await dodBrowserModule();
+      const snapshot = state.localSnapshot?.snapshot_id === snapshotId
+        ? state.localSnapshot
+        : dod.loadLocalSnapshot(snapshotId);
+      if (!snapshot) {
+        const expired = new Error("These saved results have expired. Run the same search again to continue.");
+        expired.code = "snapshot_expired";
+        throw expired;
+      }
+      const payload = dod.localSnapshotPage(snapshot, { page, pageSize, facet });
+      if (!payload) {
+        const invalid = new Error("The requested page or filter is not available.");
+        invalid.code = "invalid_page_or_facet";
+        throw invalid;
+      }
+      Object.defineProperty(payload, "__localSnapshot", { value: snapshot });
+      return payload;
+    }
+    const payload = await postJson(api.snapshotPageUrl, {
       snapshot_id: snapshotId,
       page,
       page_size: pageSize,
       facet: { type: facet.type, key: facet.key },
     }, controller);
+    const matchingOverlay = clientOverlay?.snapshotId === snapshotId ? clientOverlay : null;
+    const overlay = matchingOverlay || restoredClientSnapshotOverlay(payload, snapshotId);
+    const integrated = applyClientSnapshotOverlay(payload, overlay);
+    Object.defineProperty(integrated, "__clientSnapshotOverlay", { value: overlay });
+    return integrated;
   }
 
-  function stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState = null }) {
+  function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, clientSnapshotOverlay = null, questionState = null }) {
     const residentAwards = new Map();
     const sourceOffsets = new Map();
     const absorb = awards => {
@@ -664,6 +770,8 @@
     return {
       submitted: submittedCriteria(submitted),
       snapshot: { ...snapshot, ...pagePayload, snapshot_id: pagePayload.snapshot_id },
+      localSnapshot,
+      clientSnapshotOverlay,
       pagePayload,
       page: pagePayload.pagination.page,
       pageSize: pagePayload.pagination.page_size,
@@ -679,6 +787,8 @@
   function commitSnapshotResult(staged, { historyMode = "replace", focus = false, departureHistoryState = null } = {}) {
     state.submitted = staged.submitted;
     state.snapshot = staged.snapshot;
+    state.localSnapshot = staged.localSnapshot;
+    state.clientSnapshotOverlay = staged.clientSnapshotOverlay;
     state.pagePayload = staged.pagePayload;
     state.page = staged.page;
     state.pageSize = staged.pageSize;
@@ -713,6 +823,10 @@
       throw error;
     }
     if (requestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== snapshotId) return null;
+    if (payload.__localSnapshot) state.localSnapshot = payload.__localSnapshot;
+    if (Object.prototype.hasOwnProperty.call(payload, "__clientSnapshotOverlay")) {
+      state.clientSnapshotOverlay = payload.__clientSnapshotOverlay;
+    }
     state.page = payload.pagination.page;
     state.pageSize = payload.pagination.page_size;
     state.facet = { type: payload.facet.type, key: payload.facet.key };
@@ -764,6 +878,87 @@
     }
   }
 
+  async function preparedSnapshotSearch({ request, submitted, pageSize, questionState = null, controller = state.controller }) {
+    if (!request.sources.includes("DOD")) {
+      const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria }, controller);
+      const pagePayload = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize,
+        facet: { type: "all", key: "" },
+        controller,
+      });
+      return stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState });
+    }
+    const workerSources = request.sources.filter(source => source !== "DOD");
+    const [workerResult, dodResult] = await Promise.allSettled([
+      workerSources.length
+        ? postJson(api.snapshotUrl, { sources: workerSources, criteria: request.criteria }, controller)
+        : Promise.resolve(null),
+      dodBrowserModule().then(async dod => ({
+        dod,
+        payload: await dod.searchDodFromBrowser(request.criteria, {
+          limit: 25,
+          offset: 0,
+          scanAll: true,
+          selectedInstitution: state.selectedInstitution,
+          signal: controller?.signal,
+        }),
+      })),
+    ]);
+    const workerSnapshot = workerResult.status === "fulfilled" ? workerResult.value : null;
+    if (dodResult.status !== "fulfilled") {
+      if (!workerSnapshot) throw dodResult.reason;
+      const clientSnapshotOverlay = {
+        snapshotId: workerSnapshot.snapshot_id,
+        requestedSources: [...request.sources],
+      };
+      const snapshot = applyClientSnapshotOverlay(workerSnapshot, clientSnapshotOverlay);
+      const pagePayload = await requestSnapshotPage({
+        snapshotId: snapshot.snapshot_id,
+        page: 1,
+        pageSize,
+        facet: { type: "all", key: "" },
+        controller,
+        clientOverlay: clientSnapshotOverlay,
+      });
+      return stagedSnapshotResult({
+        submitted,
+        snapshot,
+        pagePayload,
+        clientSnapshotOverlay,
+        questionState,
+      });
+    }
+    const { dod, payload: dodPayload } = dodResult.value;
+    const hydratedWorkerSnapshot = workerSnapshot
+      ? await dod.rehydrateWorkerSnapshot({
+        snapshot: workerSnapshot,
+        request,
+        loadBatch: ({ snapshotId, source, offset }) => postJson(api.snapshotBatchUrl, {
+          snapshot_id: snapshotId,
+          source,
+          offset,
+          facet: { type: "all", key: "" },
+        }, controller),
+      })
+      : null;
+    const hybrid = await dod.createHybridSnapshot({ request, workerSnapshot: hydratedWorkerSnapshot, dodPayload });
+    dod.persistLocalSnapshot(hybrid.snapshot);
+    const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
+      page: 1,
+      pageSize,
+      facet: { type: "all", key: "" },
+    });
+    return stagedSnapshotResult({
+      submitted,
+      snapshot: hybrid.public,
+      pagePayload,
+      localSnapshot: hybrid.snapshot,
+      questionState,
+    });
+  }
+
   async function runSearch({ historyMode = "replace", resolveInstitution = true, focusResults = false, questionSearch = false, questionState = null, searchState = null, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     const sequence = ++state.sequence;
     state.pageRequestSequence += 1;
@@ -771,24 +966,22 @@
     state.controller = new AbortController();
     setSearchActivity(true, sequence);
     setBusy(true);
-    setStatus("Searching NSF, NIH, and DOE…");
+    setStatus("Searching NSF, NIH, DOE, and DoD…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
       const submitted = submittedCriteria(current);
       const pageSize = current.page_size || 10;
-      const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria });
-      if (sequence !== state.sequence) return null;
-      const initialPage = await requestSnapshotPage({
-        snapshotId: snapshot.snapshot_id,
-        page: 1,
+      const staged = await preparedSnapshotSearch({
+        request,
+        submitted,
         pageSize,
-        facet: { type: "all", key: "" },
+        questionState: questionSearch ? questionState : null,
       });
       if (sequence !== state.sequence) return null;
-      const staged = stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage, questionState: questionSearch ? questionState : null });
       commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
+      const snapshot = staged.snapshot;
       const exact = snapshot.completeness === "complete";
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} matching award${snapshot.exact_total === 1 ? "" : "s"} found across all selected sources.`
@@ -827,6 +1020,24 @@
   }
 
   async function requestSourceBatch(source, offset, snapshotId = state.snapshot?.snapshot_id) {
+    if (String(snapshotId || "").startsWith("local-dod-")) {
+      const dod = await dodBrowserModule();
+      const snapshot = state.localSnapshot?.snapshot_id === snapshotId
+        ? state.localSnapshot
+        : dod.loadLocalSnapshot(snapshotId);
+      if (!snapshot) {
+        const expired = new Error("snapshot_expired");
+        expired.code = "snapshot_expired";
+        throw expired;
+      }
+      const payload = dod.localSnapshotSourceBatch(snapshot, {
+        source,
+        offset,
+        facet: { type: "all", key: "" },
+      });
+      if (payload) Object.defineProperty(payload, "__localSnapshot", { value: snapshot });
+      return payload;
+    }
     return postJson(api.snapshotBatchUrl, {
       snapshot_id: snapshotId,
       source,
@@ -836,6 +1047,7 @@
   }
 
   function applySourceBatch(source, batch) {
+    if (batch.__localSnapshot) state.localSnapshot = batch.__localSnapshot;
     const actualAdded = absorbAwards(batch.results);
     state.sourceOffsets.set(source, batch.loaded_through);
     const loaded = [...state.residentAwards.values()].filter(award => clean(award.source, 10).toUpperCase() === source).length;
@@ -899,18 +1111,145 @@
     }
   }
 
-  async function stagedSourceRetry(source, snapshotId, pageSize, submitted) {
-    const snapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+  async function stagedSourceRetry(source, snapshotId, pageSize, submitted, clientOverlay = state.clientSnapshotOverlay) {
+    const rawSnapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+    const successorOverlay = clientOverlay?.snapshotId === snapshotId
+      ? { ...clientOverlay, snapshotId: rawSnapshot.snapshot_id }
+      : null;
+    const snapshot = applyClientSnapshotOverlay(rawSnapshot, successorOverlay);
     const initialPage = await requestSnapshotPage({
       snapshotId: snapshot.snapshot_id,
       page: 1,
       pageSize,
       facet: { type: "all", key: "" },
+      clientOverlay: successorOverlay,
     });
-    return { snapshot, staged: stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage }) };
+    return {
+      snapshot,
+      staged: stagedSnapshotResult({
+        submitted,
+        snapshot,
+        pagePayload: initialPage,
+        clientSnapshotOverlay: successorOverlay,
+      }),
+    };
+  }
+
+  async function stagedHybridSourceRetry({ source, baseSnapshot, request, submitted, pageSize, controller }) {
+    const dod = await dodBrowserModule();
+    let sourcePayload = null;
+    let sourceSnapshot = null;
+    let hydratedBaseSnapshot = baseSnapshot;
+    if (source === "DOD") {
+      [sourcePayload, hydratedBaseSnapshot] = await Promise.all([
+        dod.searchDodFromBrowser(request.criteria, {
+          limit: 25,
+          offset: 0,
+          scanAll: true,
+          selectedInstitution: state.selectedInstitution,
+          signal: controller.signal,
+        }),
+        Array.isArray(baseSnapshot?.awards)
+          ? Promise.resolve(baseSnapshot)
+          : dod.rehydrateWorkerSnapshot({
+            snapshot: baseSnapshot,
+            request,
+            loadBatch: ({ snapshotId, source: workerSource, offset }) => postJson(api.snapshotBatchUrl, {
+              snapshot_id: snapshotId,
+              source: workerSource,
+              offset,
+              facet: { type: "all", key: "" },
+            }, controller),
+          }),
+      ]);
+    } else {
+      const freshSourceSnapshot = await postJson(api.snapshotUrl, {
+        sources: [source],
+        criteria: request.criteria,
+      }, controller);
+      sourceSnapshot = await dod.rehydrateWorkerSnapshot({
+        snapshot: freshSourceSnapshot,
+        request: { ...request, sources: [source] },
+        loadBatch: ({ snapshotId, source: workerSource, offset }) => postJson(api.snapshotBatchUrl, {
+          snapshot_id: snapshotId,
+          source: workerSource,
+          offset,
+          facet: { type: "all", key: "" },
+        }, controller),
+      });
+    }
+    const hybrid = await dod.replaceHybridSnapshotSource({
+      snapshot: hydratedBaseSnapshot,
+      source,
+      sourceSnapshot,
+      sourcePayload,
+    });
+    const recovered = hybrid.public.sources.find(item => item.source === source);
+    if (!recovered || ["unavailable", "rate_limited", "unsupported"].includes(recovered.status)) {
+      return { recovered, staged: null };
+    }
+    dod.persistLocalSnapshot(hybrid.snapshot);
+    const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
+      page: 1,
+      pageSize,
+      facet: { type: "all", key: "" },
+    });
+    return {
+      recovered,
+      staged: stagedSnapshotResult({
+        submitted,
+        snapshot: hybrid.public,
+        pagePayload,
+        localSnapshot: hybrid.snapshot,
+      }),
+    };
   }
 
   async function retrySource(source) {
+    if (state.localSnapshot || (state.clientSnapshotOverlay && source === "DOD")) {
+      const baseSnapshot = state.localSnapshot || state.snapshot;
+      const previous = state.snapshot.snapshot_id;
+      const sequence = state.sequence;
+      const pageRequestSequence = ++state.pageRequestSequence;
+      const retryIsCurrent = () => sequence === state.sequence
+        && pageRequestSequence === state.pageRequestSequence
+        && state.snapshot?.snapshot_id === previous;
+      const submitted = { ...state.submitted, page_size: state.pageSize };
+      const request = core.buildAwardRequest({ ...submitted, offset: 0 }, 10);
+      if (!state.controller || state.controller.signal.aborted) state.controller = new AbortController();
+      const controller = state.controller;
+      setBusy(true);
+      setStatus(`Retrying ${source}. Results already loaded will stay available…`);
+      try {
+        const result = await stagedHybridSourceRetry({
+          source,
+          baseSnapshot,
+          request,
+          submitted,
+          pageSize: state.pageSize,
+          controller,
+        });
+        if (!retryIsCurrent()) return;
+        if (!result.staged) {
+          state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
+          renderSourceStatus();
+          setStatus(state.sourceMessages.get(source), true);
+          return;
+        }
+        commitSnapshotResult(result.staged, { historyMode: "replace" });
+        state.sourceMessages.set(source, `${source} is available again. Results from other sources were kept.`);
+        renderSourceStatus();
+        setStatus(state.sourceMessages.get(source));
+      } catch {
+        if (!retryIsCurrent()) return;
+        state.sourceMessages.set(source, `${source} is still unavailable. Results already loaded remain available.`);
+        renderSourceStatus();
+        setStatus(state.sourceMessages.get(source), true);
+      } finally {
+        setBusy(false);
+      }
+      return;
+    }
     let previous = state.snapshot.snapshot_id;
     let sequence = state.sequence;
     let pageRequestSequence = ++state.pageRequestSequence;
@@ -985,12 +1324,15 @@
     const investigators = Array.isArray(aggregate.investigators) ? aggregate.investigators : [];
     const programs = Array.isArray(aggregate.programs) ? aggregate.programs : [];
     const representedYears = Array.isArray(aggregate.represented_years) ? aggregate.represented_years : [];
+    const includesDod = (state.snapshot?.sources || []).some(source => source?.source === "DOD");
     let summary = snapshot.deterministic.answer;
     let structured = "";
     if (intent === "investigators") {
       summary = investigators.length
-        ? `${investigators.length.toLocaleString()} investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
-        : "No investigator names appear in these results.";
+        ? `${investigators.length.toLocaleString()} listed investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : includesDod
+          ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards."
+          : "No investigator names appear in these results.";
       structured = answerTable({
         label: "Investigators in the matching awards",
         headers: ["Investigator", "Awards"],
@@ -1071,7 +1413,7 @@
             key,
             operation: "institution_narrative",
             fetchImpl: globalThis.fetch,
-            system: "Synthesize only the supplied public award titles and abstract excerpts. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not use model pretraining, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML.",
+            system: "Synthesize only the supplied public award titles and abstract excerpts. DoD USAspending records do not provide investigator names or award abstracts; treat those fields as unavailable, not evidence of absence. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not use model pretraining, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML.",
             user: JSON.stringify(providerPayload),
           });
           narrative = core.validateNarrativeAnswer(proposed, evidencePack.awards);
@@ -1184,7 +1526,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
+            system: "Translate one question about public NSF, NIH, DOE, or DoD funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, DOE, or DOD), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. DoD PI and program-officer filters are unavailable; DoD program searches require an Assistance Listing code such as 12.800. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({ institution: current.institution, current_filters: currentFilters, question }),
           });
           if (!translated || typeof translated !== "object" || Array.isArray(translated)) throw new Error("invalid_translation");
@@ -1196,9 +1538,9 @@
       }
       if (questionSequence !== state.questionSequence) return;
       const upper = `${question} ${clean(plan.program)}`.toUpperCase();
-      plan.agency = ["NSF", "NIH", "DOE"].includes(clean(plan.agency, 10).toUpperCase())
+      plan.agency = ["NSF", "NIH", "DOE", "DOD"].includes(clean(plan.agency, 10).toUpperCase())
         ? clean(plan.agency, 10).toUpperCase()
-        : /\bNSF\b/.test(upper) ? "NSF" : /\bNIH\b/.test(upper) ? "NIH" : /\bDOE\b|\bBES\b|\bSC-\d+\b/.test(upper) ? "DOE" : "all";
+        : /\bNSF\b/.test(upper) ? "NSF" : /\bNIH\b/.test(upper) ? "NIH" : /\bDOD\b|DEPARTMENT OF DEFENSE/.test(upper) ? "DOD" : /\bDOE\b|\bBES\b|\bSC-\d+\b/.test(upper) ? "DOE" : "all";
       const investigator = core.explicitInvestigator(question, current.institution, plan.program, [...(state.selectedInstitution?.aliases || []), ...(state.selectedInstitution?.acronyms || [])], plan.topic);
       if (investigator && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = investigator;
       if (/\bBES\b/i.test(question) && !clean(plan.program)) plan.program = "BES";
@@ -1239,6 +1581,8 @@
 
   function resetResultState() {
     state.snapshot = null;
+    state.localSnapshot = null;
+    state.clientSnapshotOverlay = null;
     state.pagePayload = null;
     state.aggregate = null;
     state.baseAggregate = null;

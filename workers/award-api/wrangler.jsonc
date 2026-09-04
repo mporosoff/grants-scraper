@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "funding-finder-award-api",
   "main": "src/index.js",
-  "compatibility_date": "2026-08-23",
+  "compatibility_date": "2026-09-03",
   "workers_dev": true,
   "limits": {
     "cpu_ms": 250
@@ -13,7 +13,8 @@
     "MAX_SOURCE_RESULTS": "25",
     "AWARD_SOURCE_RATE_LIMIT": "12",
     "ROR_SEARCH_RATE_LIMIT": "60",
-    "ROR_RESOLVE_RATE_LIMIT": "20"
+    "ROR_RESOLVE_RATE_LIMIT": "20",
+    "DOD_DELIVERY_MODE": "browser_direct_cors"
   },
   "durable_objects": {
     "bindings": [

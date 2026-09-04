@@ -1,8 +1,25 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
-import { AwardSourceError } from "./http.js";
+import {
+  AwardSourceError,
+  SOURCE_TIMEOUT_MS,
+  boundedRequestTimeout,
+  withinOperationBudget,
+} from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
+import {
+  DOD_ADAPTER_VERSION,
+  DOD_CAPABILITIES,
+  DOD_DETAIL_CACHE_TIMEOUT_MS,
+  DOD_DETAIL_CONCURRENCY,
+  DOD_MAX_RESULTS,
+  DOD_MAX_UPSTREAM_PAGES,
+  DOD_OPERATION_BUDGET_MS,
+  DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+  DOD_UPSTREAM_PAGE_SIZE,
+  searchDod,
+} from "./adapters/dod.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
 import { AwardRateLimiter } from "./rate-limit.js";
@@ -28,17 +45,19 @@ const WORKER_RESOURCE_BUDGET = Object.freeze({
   configured_cpu_ms: 250,
   memory_mb: 128,
   platform_subrequests_per_request: 10_000,
-  maximum_snapshot_create_subrequests: 50,
-  maximum_snapshot_create_cache_api_calls: 10,
-  maximum_snapshot_create_upstream_and_guard_subrequests: 40,
-  maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+  maximum_snapshot_create_subrequests: 141,
+  maximum_snapshot_create_cache_api_calls: 62,
+  maximum_snapshot_create_upstream_and_guard_subrequests: 78,
+  maximum_snapshot_create_subrequests_without_ror_resolution: 139,
 });
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
-const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
+const DOD_BROWSER_DELIVERY = "browser_direct_cors";
 const ADAPTER_VERSIONS = {
   NSF: NSF_ADAPTER_VERSION,
   NIH: NIH_ADAPTER_VERSION,
   DOE: DOE_ADAPTER_VERSION,
+  DOD: DOD_ADAPTER_VERSION,
 };
 const SEARCH_FIELDS = [
   "award_id",
@@ -111,6 +130,9 @@ function serviceConfig(env) {
     awardSourceLimit: boundedInteger(env?.AWARD_SOURCE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
     rorSearchLimit: boundedInteger(env?.ROR_SEARCH_RATE_LIMIT, { minimum: 1, maximum: 240 }),
     rorResolveLimit: boundedInteger(env?.ROR_RESOLVE_RATE_LIMIT, { minimum: 1, maximum: 120 }),
+    dodDeliveryMode: String(env?.DOD_DELIVERY_MODE || "worker_proxy") === DOD_BROWSER_DELIVERY
+      ? DOD_BROWSER_DELIVERY
+      : "worker_proxy",
     rateLimitSecret: Boolean(String(env?.AWARD_RATE_LIMIT_SECRET || "")),
     rateLimitBinding: Boolean(
       env?.AWARD_RATE_LIMITER
@@ -334,37 +356,87 @@ async function sourceCacheRequest(source, request, asOf) {
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
-async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard = null, rateLimit = null }) {
-  const key = await sourceCacheRequest(source, request, asOf);
+async function requestDeadlineOperation(operation, monotonicNow, operationDeadline, timeoutMs) {
+  return operationDeadline === null
+    ? operation()
+    : withinOperationBudget(operation, monotonicNow, operationDeadline, timeoutMs);
+}
+
+async function sourceWrapperOperation(source, operation, monotonicNow, operationDeadline, timeoutMs) {
+  return source === "DOD"
+    ? requestDeadlineOperation(operation, monotonicNow, operationDeadline, timeoutMs)
+    : operation();
+}
+
+async function runSource({
+  source,
+  request,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  asOf,
+  guard = null,
+  rateLimit = null,
+  monotonicNow = () => performance.now(),
+  operationDeadline: inheritedOperationDeadline = null,
+  sourceWrapperTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+}) {
+  const operationDeadline = source === "DOD"
+    ? inheritedOperationDeadline ?? monotonicNow() + DOD_OPERATION_BUDGET_MS
+    : null;
+  const key = await sourceWrapperOperation(
+    source,
+    () => sourceCacheRequest(source, request, asOf),
+    monotonicNow,
+    operationDeadline,
+    sourceWrapperTimeoutMs,
+  );
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) {
-        const payload = await cached.json();
-        if (payload?.source === source && Array.isArray(payload.results)) return { ...payload, cache: "hit" };
-      }
+      const payload = await sourceWrapperOperation(source, async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      }, monotonicNow, operationDeadline, sourceWrapperTimeoutMs);
+      if (payload?.source === source && Array.isArray(payload.results)) return { ...payload, cache: "hit" };
     } catch {
       // A cache outage must not make either official source unavailable.
     }
   }
-  if (guard) await guard(`award:${source}`, rateLimit);
+  if (guard) {
+    await sourceWrapperOperation(
+      source,
+      () => guard(`award:${source}`, rateLimit),
+      monotonicNow,
+      operationDeadline,
+      sourceWrapperTimeoutMs,
+    );
+  }
   const options = {
     limit: request.limit,
     offset: request.offset,
     now: () => new Date(asOf),
     scanAll: request.scanAll === true,
     includeAbstracts: request.includeAbstracts !== false,
+    cache,
+    cacheTtl,
+    ...(source === "DOD" ? { monotonicNow, operationDeadline } : {}),
   };
-  const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
+  const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe, DOD: searchDod };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
     try {
-      await cache.put(key, new Response(JSON.stringify(payload), {
-        headers: {
-          "Cache-Control": `public, max-age=${cacheTtl}`,
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      }));
+      await sourceWrapperOperation(
+        source,
+        () => cache.put(key, new Response(JSON.stringify(payload), {
+          headers: {
+            "Cache-Control": `public, max-age=${cacheTtl}`,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })),
+        monotonicNow,
+        operationDeadline,
+        sourceWrapperTimeoutMs,
+      );
     } catch {
       // Successful live source data remains usable when cache writes fail.
     }
@@ -422,35 +494,56 @@ async function runInstitutionSearch({ query, fetchImpl, cache, cacheTtl, guard =
   return payload;
 }
 
-async function runInstitutionResolution({ request, fetchImpl, cache, cacheTtl, guard = null, rateLimit = null }) {
+async function runInstitutionResolution({
+  request,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  guard = null,
+  rateLimit = null,
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+}) {
   if (request?.resolved) return request.resolved;
   if (!request?.id || !request?.name) return null;
-  const identity = await sha256Hex(stableJson({
+  const withinRequestDeadline = operation => requestDeadlineOperation(
+    operation,
+    monotonicNow,
+    operationDeadline,
+    operationTimeoutMs,
+  );
+  const identity = await withinRequestDeadline(() => sha256Hex(stableJson({
     source: "ROR-identity",
     adapter_version: ROR_ADAPTER_VERSION,
     id: request.id,
-  }));
+  })));
   const key = new Request(`https://award-cache.internal/v1/ror-identity/${identity}`);
   let organization = null;
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) organization = await cached.json();
+      organization = await withinRequestDeadline(async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      });
     } catch {
       // Exact ROR resolution can continue if the shared cache is unavailable.
     }
   }
   if (!organization) {
-    if (guard) await guard("ror:resolve", rateLimit);
-    organization = await resolveRorOrganization(fetchImpl, request.id);
+    if (guard) await withinRequestDeadline(() => guard("ror:resolve", rateLimit));
+    const timeoutMs = operationDeadline === null
+      ? SOURCE_TIMEOUT_MS
+      : boundedRequestTimeout(monotonicNow, operationDeadline, SOURCE_TIMEOUT_MS);
+    organization = await resolveRorOrganization(fetchImpl, request.id, { timeoutMs });
     if (cache) {
       try {
-        await cache.put(key, new Response(JSON.stringify(organization), {
+        await withinRequestDeadline(() => cache.put(key, new Response(JSON.stringify(organization), {
           headers: {
             "Cache-Control": `public, max-age=${cacheTtl}`,
             "Content-Type": "application/json; charset=utf-8",
           },
-        }));
+        })));
       } catch {
         // A cache write failure must not discard a validated ROR identity.
       }
@@ -476,6 +569,7 @@ function sourceSummary(payload) {
     retrieved_at: payload.retrieved_at,
     ...(payload.year_filter ? { year_filter: payload.year_filter } : {}),
     ...(payload.health ? { health: payload.health } : {}),
+    ...(payload.capabilities ? { capabilities: payload.capabilities } : {}),
   };
 }
 
@@ -555,34 +649,47 @@ function snapshotCacheRequest(snapshotId) {
   return new Request(`https://award-snapshot.internal/v1/${snapshotId}`);
 }
 
-async function loadSnapshot(cache, snapshotId) {
+async function loadSnapshot(cache, snapshotId, {
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+} = {}) {
   if (!cache) return null;
   try {
-    const response = await cache.match(snapshotCacheRequest(snapshotId));
-    if (!response) return null;
-    const snapshot = await response.json();
+    const snapshot = await requestDeadlineOperation(async () => {
+      const response = await cache.match(snapshotCacheRequest(snapshotId));
+      return response ? response.json() : null;
+    }, monotonicNow, operationDeadline, operationTimeoutMs);
     return snapshot?.snapshot_contract_version === 1 && snapshot?.snapshot_id === snapshotId
       && Array.isArray(snapshot?.awards) && snapshot?.source_metadata
       ? snapshot
       : null;
-  } catch {
+  } catch (cause) {
+    if (operationDeadline !== null && cause instanceof AwardSourceError && cause.code === "source_timeout") {
+      throw cause;
+    }
     return null;
   }
 }
 
-async function storeSnapshot(cache, snapshot, cacheTtl) {
+async function storeSnapshot(cache, snapshot, cacheTtl, {
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  operationTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+} = {}) {
   if (!cache) return false;
   const key = snapshotCacheRequest(snapshot.snapshot_id);
   try {
-    await cache.put(key, new Response(JSON.stringify(snapshot), {
-      headers: {
-        "Cache-Control": `public, max-age=${cacheTtl}`,
-        "Content-Type": "application/json; charset=utf-8",
-        ETag: `"${snapshot.snapshot_id}"`,
-      },
-    }));
-    const stored = await cache.match(key);
-    return Boolean(stored);
+    return await requestDeadlineOperation(async () => {
+      await cache.put(key, new Response(JSON.stringify(snapshot), {
+        headers: {
+          "Cache-Control": `public, max-age=${cacheTtl}`,
+          "Content-Type": "application/json; charset=utf-8",
+          ETag: `"${snapshot.snapshot_id}"`,
+        },
+      }));
+      return Boolean(await cache.match(key));
+    }, monotonicNow, operationDeadline, operationTimeoutMs);
   } catch {
     return false;
   }
@@ -607,7 +714,19 @@ function snapshotRequestIdentity(normalized, asOf) {
   return { publicRequest, cacheIdentity: stableJson(publicRequest) };
 }
 
-async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit, onlySource = "" }) {
+async function runSnapshotSources({
+  normalized,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  asOf,
+  guard,
+  rateLimit,
+  onlySource = "",
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+  dodDeliveryMode = "worker_proxy",
+}) {
   const selectedSources = onlySource ? [onlySource] : normalized.sources;
   const request = {
     ...normalized,
@@ -618,8 +737,22 @@ async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf
     includeAbstracts: false,
   };
   const settled = await Promise.all(selectedSources.map(async source => {
+    if (source === "DOD" && dodDeliveryMode === DOD_BROWSER_DELIVERY) {
+      return { source, status: "unsupported", error: { code: "client_direct_required" } };
+    }
     try {
-      return await runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard, rateLimit });
+      return await runSource({
+        source,
+        request,
+        fetchImpl,
+        cache,
+        cacheTtl,
+        asOf,
+        guard,
+        rateLimit,
+        monotonicNow,
+        operationDeadline,
+      });
     } catch (cause) {
       return sourceFailure(source, cause);
     }
@@ -627,7 +760,16 @@ async function runSnapshotSources({ normalized, fetchImpl, cache, cacheTtl, asOf
   return Object.fromEntries(selectedSources.map((source, index) => [source, settled[index]]));
 }
 
-async function resolveRequestInstitution({ normalized, fetchImpl, cache, cacheTtl, guard, rateLimit }) {
+async function resolveRequestInstitution({
+  normalized,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  guard,
+  rateLimit,
+  monotonicNow = () => performance.now(),
+  operationDeadline = null,
+}) {
   if (!normalized.institutionRequest || normalized.institutionRequest.resolved) return normalized;
   const institution = await runInstitutionResolution({
     request: normalized.institutionRequest,
@@ -636,6 +778,8 @@ async function resolveRequestInstitution({ normalized, fetchImpl, cache, cacheTt
     cacheTtl,
     guard,
     rateLimit,
+    monotonicNow,
+    operationDeadline,
   });
   if (!institution) throw new AwardSourceError("invalid_request", "unsupported");
   normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
@@ -646,9 +790,11 @@ export function createHandler({
   fetchImpl = fetch,
   cache = null,
   now = () => new Date(),
+  monotonicNow = () => performance.now(),
   rateLimitProbeTimeoutMs = RATE_LIMIT_HEALTH_TIMEOUT_MS,
 } = {}) {
   return async function handle(request, env) {
+    const operationStartedAt = monotonicNow();
     const origin = request.headers.get("origin") || "";
     if (!allowedOrigin(origin)) return error(origin, 403, "origin_not_allowed");
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: responseHeaders(origin) });
@@ -665,13 +811,31 @@ export function createHandler({
         schema_version: AWARD_SCHEMA_VERSION,
         sources: SOURCE_NAMES,
         adapter_versions: ADAPTER_VERSIONS,
+        source_transports: {
+          NSF: "worker_proxy",
+          NIH: "worker_proxy",
+          DOE: "worker_proxy",
+          DOD: config.dodDeliveryMode,
+        },
         institution_registry: { source: "ROR", adapter_version: ROR_ADAPTER_VERSION },
         institution_resolution: "curated-or-server-validated-ror",
         normalized_paging: {
           NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
           NIH: { upstream_pages: 12, upstream_page_size: 100 },
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+          DOD: {
+            upstream_pages: DOD_MAX_UPSTREAM_PAGES,
+            upstream_page_size: DOD_UPSTREAM_PAGE_SIZE,
+            maximum_normalized_results: DOD_MAX_RESULTS,
+            maximum_detail_requests: DOD_MAX_RESULTS,
+            detail_concurrency: DOD_DETAIL_CONCURRENCY,
+            detail_cache_timeout_ms: DOD_DETAIL_CACHE_TIMEOUT_MS,
+            operation_budget_ms: DOD_OPERATION_BUDGET_MS,
+            source_wrapper_timeout_ms: DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+            snapshot_behavior: "bounded-first-normalized-page",
+          },
         },
+        source_capabilities: { DOD: DOD_CAPABILITIES },
         complete_result_snapshots: {
           contract_version: 1,
           ordering_version: AWARD_ORDERING_VERSION,
@@ -765,6 +929,9 @@ export function createHandler({
       if (path === "/awards/snapshots") {
         const normalized = validateSnapshotCreate(body, config);
         if (!normalized) return error(origin, 400, "invalid_request");
+        const operationDeadline = normalized.sources.includes("DOD")
+          ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+          : null;
         try {
           await resolveRequestInstitution({
             normalized,
@@ -773,6 +940,8 @@ export function createHandler({
             cacheTtl: config.cacheTtl,
             guard,
             rateLimit: config.rorResolveLimit,
+            monotonicNow,
+            operationDeadline,
           });
         } catch (cause) {
           if (cause instanceof AwardSourceError && cause.kind === "rate_limited") {
@@ -793,6 +962,9 @@ export function createHandler({
           asOf,
           guard,
           rateLimit: config.awardSourceLimit,
+          monotonicNow,
+          operationDeadline,
+          dodDeliveryMode: config.dodDeliveryMode,
         });
         const snapshot = buildAwardSnapshot({
           snapshotId,
@@ -802,7 +974,7 @@ export function createHandler({
           sourcePayloads,
         });
         snapshot.runtime_request = normalized;
-        if (!await storeSnapshot(cacheStore, snapshot, config.cacheTtl)) {
+        if (!await storeSnapshot(cacheStore, snapshot, config.cacheTtl, { monotonicNow, operationDeadline })) {
           return error(origin, 503, "snapshot_store_unavailable");
         }
         return json(origin, 200, publicSnapshot(snapshot));
@@ -833,7 +1005,15 @@ export function createHandler({
       }
       const action = validateSnapshotRetry(body);
       if (!action) return error(origin, 400, "invalid_request");
-      const snapshot = await loadSnapshot(cacheStore, action.snapshotId);
+      const operationDeadline = action.source === "DOD"
+        ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+        : null;
+      let snapshot;
+      try {
+        snapshot = await loadSnapshot(cacheStore, action.snapshotId, { monotonicNow, operationDeadline });
+      } catch {
+        return error(origin, 503, "snapshot_store_unavailable");
+      }
       if (!snapshot) return error(origin, 410, "snapshot_expired");
       const normalized = snapshot.runtime_request;
       if (!normalized?.sources?.includes(action.source)) return error(origin, 400, "invalid_source");
@@ -851,6 +1031,9 @@ export function createHandler({
         guard,
         rateLimit: config.awardSourceLimit,
         onlySource: action.source,
+        monotonicNow,
+        operationDeadline,
+        dodDeliveryMode: config.dodDeliveryMode,
       });
       if (replacement[action.source]?.status) {
         const rateLimited = ["rate_limited", "source_rate_limited"].includes(replacement[action.source].error?.code);
@@ -880,7 +1063,7 @@ export function createHandler({
       });
       successor.runtime_request = normalized;
       successor.predecessor_snapshot_id = snapshot.snapshot_id;
-      if (!await storeSnapshot(cacheStore, successor, config.cacheTtl)) {
+      if (!await storeSnapshot(cacheStore, successor, config.cacheTtl, { monotonicNow, operationDeadline })) {
         return error(origin, 503, "snapshot_store_unavailable");
       }
       return json(origin, 200, {
@@ -896,6 +1079,9 @@ export function createHandler({
     }
     const normalized = validateRequest(body, config);
     if (!normalized) return error(origin, 400, "invalid_request");
+    const operationDeadline = normalized.sources.includes("DOD")
+      ? operationStartedAt + DOD_OPERATION_BUDGET_MS
+      : null;
     if (normalized.institutionRequest && !normalized.institutionRequest.resolved) {
       const cacheStore = cache || globalThis.caches?.default || null;
       try {
@@ -906,6 +1092,8 @@ export function createHandler({
           cacheTtl: config.cacheTtl,
           guard,
           rateLimit: config.rorResolveLimit,
+          monotonicNow,
+          operationDeadline,
         });
         if (!institution) return error(origin, 400, "invalid_request");
         normalized.resolvedCriteria = { ...normalized.resolvedCriteria, _institution: institution };
@@ -929,6 +1117,9 @@ export function createHandler({
     const cacheStore = cache || globalThis.caches?.default || null;
     const asOf = current.toISOString();
     const settled = await Promise.all(normalized.sources.map(async source => {
+      if (source === "DOD" && config.dodDeliveryMode === DOD_BROWSER_DELIVERY) {
+        return { source, status: "unsupported", error: { code: "client_direct_required" } };
+      }
       try {
         return await runSource({
           source,
@@ -939,6 +1130,8 @@ export function createHandler({
           asOf,
           guard,
           rateLimit: config.awardSourceLimit,
+          monotonicNow,
+          operationDeadline,
         });
       } catch (cause) {
         return sourceFailure(source, cause);
@@ -978,6 +1171,7 @@ export {
   SNAPSHOT_PATHS,
   createUpstreamGuard,
   loadSnapshot,
+  runSource,
   serviceConfig,
   storeSnapshot,
   validateSnapshotBatch,

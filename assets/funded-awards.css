@@ -334,6 +334,15 @@
   border-top-color: #21705e;
 }
 
+.award-card[data-source="DOD"] {
+  border-top-color: #8b5a16;
+}
+
+.badge.dod {
+  color: #70420b;
+  background: #fff0d5;
+}
+
 .award-card-topline {
   display: flex;
   flex-wrap: wrap;
@@ -444,6 +453,17 @@
 
 .award-abstract p + p {
   margin-top: .85rem;
+}
+
+.award-source-limitation {
+  margin: 15px 0 0;
+  padding: 10px 12px;
+  color: #60451f;
+  font-size: .8rem;
+  line-height: 1.45;
+  background: #fff8ea;
+  border-left: 3px solid #b77a20;
+  border-radius: 0 7px 7px 0;
 }
 
 .award-card-actions {
@@ -582,11 +602,22 @@
 
 @media (max-width: 540px) {
   .header-context-pill {
-    max-width: none;
-    overflow: visible;
+    box-sizing: border-box;
+    flex: 0 1 96px;
+    min-width: 0;
+    max-width: 96px;
+    overflow: hidden;
+    overflow-wrap: anywhere;
     padding: 6px 8px;
     font-size: .62rem;
+    line-height: 1.2;
+    text-align: center;
     text-overflow: clip;
+    white-space: normal;
+  }
+
+  .header-context-pill::before {
+    flex: 0 0 6px;
   }
 }
 

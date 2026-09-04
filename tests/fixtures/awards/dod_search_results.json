@@ -1,0 +1,26 @@
+{
+  "spending_level": "awards",
+  "limit": 25,
+  "results": [
+    {
+      "Award ID": "FA9550261B195",
+      "Recipient Name": "UNIVERSITY OF MARYLAND, COLLEGE PARK",
+      "Recipient UEI": "NPU8ULVAAS23",
+      "Start Date": "2026-09-01",
+      "End Date": "2031-08-31",
+      "Award Amount": 3000000,
+      "Awarding Agency": "Department of Defense",
+      "Awarding Sub Agency": "Department of the Air Force",
+      "Description": "MURI: PHYSICS AND APPLICATIONS OF INTENSE, SPATIOTEMPORALLY STRUCTURED LIGHT FIELDS",
+      "Base Obligation Date": "2026-08-28",
+      "Award Type": "PROJECT GRANT (B)",
+      "generated_internal_id": "ASST_NON_FA9550261B195_097"
+    }
+  ],
+  "page_metadata": {
+    "page": 1,
+    "hasNext": false,
+    "last_record_unique_id": null,
+    "last_record_sort_value": "None"
+  }
+}

@@ -23,6 +23,10 @@ import {
   normalizeNihProject,
   searchNih,
 } from "../../workers/award-api/src/adapters/nih.js";
+import {
+  DOD_DETAIL_URL,
+  DOD_SEARCH_URL,
+} from "../../workers/award-api/src/adapters/dod.js";
 import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
 import {
   ADAPTER_VERSIONS,
@@ -44,7 +48,7 @@ const allowRateLimits = {
 const root = new URL("../../", import.meta.url);
 const [
   nsfFixture, nihFixture, doeFormFixture, doeResultsPage1, doeResultsPage2,
-  doeAbstractFixture, packageSource, phase1Evidence,
+  doeAbstractFixture, dodSearchFixture, dodDetailFixture, packageSource, phase1Evidence,
 ] = await Promise.all([
   readFile(new URL("tests/fixtures/awards/nsf_award.json", root), "utf8").then(JSON.parse),
   readFile(new URL("tests/fixtures/awards/nih_project_years.json", root), "utf8").then(JSON.parse),
@@ -52,6 +56,8 @@ const [
   readFile(new URL("tests/fixtures/awards/doe_search_results_page1.html", root), "utf8"),
   readFile(new URL("tests/fixtures/awards/doe_search_results_page2.html", root), "utf8"),
   readFile(new URL("tests/fixtures/awards/doe_public_abstract.html", root), "utf8"),
+  readFile(new URL("tests/fixtures/awards/dod_search_results.json", root), "utf8").then(JSON.parse),
+  readFile(new URL("tests/fixtures/awards/dod_award_detail.json", root), "utf8").then(JSON.parse),
   readFile(new URL("package.json", root), "utf8").then(JSON.parse),
   readFile(new URL("evaluation/funded_awards_phase1.json", root), "utf8").then(JSON.parse),
 ]);
@@ -81,7 +87,7 @@ function query(criteria, sources = ["NSF", "NIH"], limit = 25, offset = 0) {
   return { sources, criteria, limit, offset };
 }
 
-function fixtureFetch({ failDoe = false, failNih = false, failNsf = false, calls = [] } = {}) {
+function fixtureFetch({ failDod = false, failDoe = false, failNih = false, failNsf = false, calls = [] } = {}) {
   return async (url, options = {}) => {
     calls.push({ url: String(url), options });
     if (String(url).includes("api.nsf.gov")) {
@@ -101,6 +107,16 @@ function fixtureFetch({ failDoe = false, failNih = false, failNsf = false, calls
         return new Response(body, { headers: { "Content-Type": "text/html" } });
       }
       return new Response(doeFormFixture, { headers: { "Content-Type": "text/html" } });
+    }
+    if (String(url) === DOD_SEARCH_URL) {
+      return failDod
+        ? new Response("unavailable", { status: 503 })
+        : new Response(JSON.stringify(dodSearchFixture), { headers: { "Content-Type": "application/json" } });
+    }
+    if (String(url).startsWith(DOD_DETAIL_URL)) {
+      return failDod
+        ? new Response("unavailable", { status: 503 })
+        : new Response(JSON.stringify(dodDetailFixture), { headers: { "Content-Type": "application/json" } });
     }
     if (failNih) return new Response("unavailable", { status: 503 });
     const body = JSON.parse(options.body || "{}");
@@ -487,14 +503,64 @@ test("Worker validates bounded public requests and exposes no credential require
   assert.deepEqual(await health.json(), {
     service: "available",
     schema_version: 1,
-    sources: ["NSF", "NIH", "DOE"],
+    sources: ["NSF", "NIH", "DOE", "DOD"],
     adapter_versions: ADAPTER_VERSIONS,
-    institution_registry: { source: "ROR", adapter_version: "1.2.0" },
+    source_transports: {
+      NSF: "worker_proxy",
+      NIH: "worker_proxy",
+      DOE: "worker_proxy",
+      DOD: "worker_proxy",
+    },
+    institution_registry: { source: "ROR", adapter_version: "1.3.0" },
     institution_resolution: "curated-or-server-validated-ror",
     normalized_paging: {
       NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
       NIH: { upstream_pages: 12, upstream_page_size: 100 },
       DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+      DOD: {
+        upstream_pages: 12,
+        upstream_page_size: 25,
+        maximum_normalized_results: 25,
+        maximum_detail_requests: 25,
+        detail_concurrency: 3,
+        detail_cache_timeout_ms: 2_000,
+        operation_budget_ms: 100_000,
+        source_wrapper_timeout_ms: 2_000,
+        snapshot_behavior: "bounded-first-normalized-page",
+      },
+    },
+    source_capabilities: {
+      DOD: {
+        filters: {
+          award_id: "supported_exact",
+          topic: "supported_description",
+          institution: "supported_uei_or_exact_name",
+          year_start: "supported_date_signed",
+          year_end: "supported_date_signed",
+          program: "supported_assistance_listing_code_only",
+          opportunity_number: "unavailable",
+          core_project_number: "unavailable",
+          program_codes: "unavailable",
+          program_office: "unavailable",
+          pi: "unavailable",
+          program_officer: "unavailable",
+        },
+        fields: {
+          description: "available",
+          institution: "available",
+          recipient_uei: "available_when_reported",
+          assistance_listing: "detail_enrichment",
+          award_amount: "total_obligation",
+          project_dates: "available",
+          abstract: "unavailable_at_source",
+          principal_investigators: "unavailable_at_source",
+          program_contacts: "unavailable_at_source",
+          annual_support: "unavailable_at_source",
+          opportunity_number: "detail_enrichment",
+          awarding_office: "detail_enrichment",
+        },
+        award_scope: "prime_assistance_awards_04_05_only",
+      },
     },
     complete_result_snapshots: {
       contract_version: 1,
@@ -509,10 +575,10 @@ test("Worker validates bounded public requests and exposes no credential require
         configured_cpu_ms: 250,
         memory_mb: 128,
         platform_subrequests_per_request: 10_000,
-        maximum_snapshot_create_subrequests: 50,
-        maximum_snapshot_create_cache_api_calls: 10,
-        maximum_snapshot_create_upstream_and_guard_subrequests: 40,
-        maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+        maximum_snapshot_create_subrequests: 141,
+        maximum_snapshot_create_cache_api_calls: 62,
+        maximum_snapshot_create_upstream_and_guard_subrequests: 78,
+        maximum_snapshot_create_subrequests_without_ror_resolution: 139,
       },
     },
     abuse_control: {
@@ -587,6 +653,71 @@ test("a PAMS failure is isolated from unchanged NSF and NIH adapters", async () 
   });
   assert.equal(payload.sources.find(item => item.source === "NSF").status, "ok");
   assert.equal(payload.sources.find(item => item.source === "NIH").status, "ok");
+});
+
+test("DoD works alone and a USAspending outage leaves NSF, NIH, and DOE usable", async () => {
+  const availableHandler = createHandler({ fetchImpl: fixtureFetch(), now: fixedNow });
+  const availableResponse = await availableHandler(workerRequest(query(
+    { award_id: "FA9550261B195" },
+    ["DOD"],
+    1,
+  )), env);
+  assert.equal(availableResponse.status, 200);
+  const available = await availableResponse.json();
+  assert.equal(available.results[0].source, "DOD");
+  assert.equal(available.results[0].award_id, "FA9550261B195");
+  assert.equal(available.sources[0].status, "ok");
+
+  const isolatedHandler = createHandler({ fetchImpl: fixtureFetch({ failDod: true }), now: fixedNow });
+  const isolatedResponse = await isolatedHandler(workerRequest(query(
+    { topic: "carbon dioxide" },
+    ["NSF", "NIH", "DOE", "DOD"],
+    1,
+  )), env);
+  assert.equal(isolatedResponse.status, 200);
+  const isolated = await isolatedResponse.json();
+  assert.deepEqual(isolated.results.map(item => item.source).sort(), ["DOE", "NIH", "NSF"]);
+  assert.deepEqual(isolated.sources.find(item => item.source === "DOD"), {
+    source: "DOD",
+    status: "unavailable",
+    error: { code: "source_unavailable" },
+  });
+  for (const source of ["NSF", "NIH", "DOE"]) {
+    assert.equal(isolated.sources.find(item => item.source === source).status, "ok");
+  }
+});
+
+test("production transport mode routes DoD to the official browser CORS adapter without delaying Worker sources", async () => {
+  const handler = createHandler({ fetchImpl: fixtureFetch(), now: fixedNow });
+  const directEnv = { ...env, DOD_DELIVERY_MODE: "browser_direct_cors" };
+  const health = await handler(workerRequest(null, { path: "/health", method: "GET" }), directEnv);
+  assert.equal((await health.json()).source_transports.DOD, "browser_direct_cors");
+
+  const dodOnly = await handler(workerRequest(query(
+    { award_id: "FA9550261B195" },
+    ["DOD"],
+    1,
+  )), directEnv);
+  assert.equal(dodOnly.status, 400);
+  assert.deepEqual((await dodOnly.json()).sources[0], {
+    source: "DOD",
+    status: "unsupported",
+    error: { code: "client_direct_required" },
+  });
+
+  const combined = await handler(workerRequest(query(
+    { topic: "carbon dioxide" },
+    ["NSF", "NIH", "DOE", "DOD"],
+    1,
+  )), directEnv);
+  assert.equal(combined.status, 200);
+  const payload = await combined.json();
+  assert.deepEqual(payload.results.map(item => item.source).sort(), ["DOE", "DOD", "NIH", "NSF"].filter(source => source !== "DOD"));
+  assert.deepEqual(payload.sources.find(item => item.source === "DOD"), {
+    source: "DOD",
+    status: "unsupported",
+    error: { code: "client_direct_required" },
+  });
 });
 
 test("Worker caches only successful per-source results for the bounded TTL", async () => {

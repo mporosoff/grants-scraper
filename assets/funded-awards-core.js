@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+  const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
   const DOE_PAGE_LIMIT = 10;
   const AWARD_YEAR_MIN = 1989;
   const AWARD_YEAR_MAX = 2100;
@@ -162,7 +162,7 @@
     if (mode !== "program") return { topic: value };
     const source = clean(agency, 10).toUpperCase();
     if (!SOURCE_NAMES.includes(source)) {
-      throw new Error("Choose NSF, NIH, or DOE when searching by program identifier or name.");
+      throw new Error("Choose NSF, NIH, DOE, or DoD when searching by program identifier or name.");
     }
     if (source === "NSF") {
       const pdCode = globalThis.FUNDING_AWARD_LINKS?.nsfProgramElementCode(value);
@@ -173,6 +173,12 @@
       return value.includes("-")
         ? { opportunity_number: value.toUpperCase() }
         : { program: value.toUpperCase() };
+    }
+    if (source === "DOD") {
+      if (!/^\d{2}\.\d{3}$/.test(value)) {
+        throw new Error("DoD program searches require an Assistance Listing code such as 12.800.");
+      }
+      return { program: value };
     }
     return /^DE-FOA-\d+$/i.test(value)
       ? { opportunity_number: value.toUpperCase() }
@@ -186,6 +192,13 @@
     const institution = clean(state.institution, 300);
     const pi = clean(state.pi, 160);
     const programOfficer = clean(state.program_officer, 160);
+    const requestedAgency = clean(state.agency, 10).toUpperCase();
+    if (requestedAgency === "DOD" && pi) {
+      throw new Error("DoD USAspending records do not provide investigator fields. Remove the investigator filter or choose another agency.");
+    }
+    if (requestedAgency === "DOD" && programOfficer) {
+      throw new Error("DoD USAspending records do not provide program-officer fields. Remove the program-officer filter or choose another agency.");
+    }
     const yearStart = year(state.year_start);
     const yearEnd = year(state.year_end);
     if (institution) criteria.institution = institution;
@@ -256,6 +269,19 @@
     ));
   }
 
+  function enrichmentWarnings(source) {
+    const count = value => {
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number > 0 ? number : 0;
+    };
+    const abstracts = count(source?.health?.abstracts_failed);
+    const details = count(source?.health?.details_failed);
+    return [
+      abstracts ? `${abstracts.toLocaleString()} public ${abstracts === 1 ? "abstract" : "abstracts"} unavailable` : "",
+      details ? `${details.toLocaleString()} public award ${details === 1 ? "detail" : "details"} unavailable` : "",
+    ].filter(Boolean);
+  }
+
   globalThis.FUNDING_AWARD_PRODUCT = Object.freeze({
     awardYear,
     awardYearRange,
@@ -263,6 +289,7 @@
     buildRequest,
     canPageForward,
     displayInvestigatorName,
+    enrichmentWarnings,
     institutionSummary,
     paginationLabel,
     presentFiniteNumber,

@@ -638,6 +638,10 @@
   border-left-color: #b16400;
 }
 
+.ii-award-card[data-source="DOD"] {
+  border-left-color: #8b5a16;
+}
+
 .ii-award-kicker {
   display: flex;
   flex-wrap: wrap;
