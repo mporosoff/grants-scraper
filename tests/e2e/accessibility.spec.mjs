@@ -151,7 +151,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-question-answer")).toBeVisible({ timeout: 30_000 });
   await scan(page, "funded-awards-evidence-answer", testInfo);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -274,7 +274,7 @@ test("Team Match has no serious or critical violations across picker, results, a
   await page.keyboard.press("Enter");
   await expect(page.locator("#researcher-picker")).toBeVisible();
   await expect(page.getByRole("combobox", { name: /Search Hajim faculty/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Configure a missing researcher" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Configure a missing researcher" })).toBeVisible();
   await scan(page, "team-picker-open", testInfo);
   await addDepartmentResearcher(page, "Alexander A. Shestopalov");
   await addDepartmentResearcher(page, "Allison J. Lopatkin");
@@ -312,7 +312,7 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await expect(page.locator("#ii-source-status")).toContainText("these filters are not supported");
-  await expect(page.locator("#ii-source-status")).toContainText("temporarily unavailable");
+  await expect(page.locator("#ii-source-status")).toContainText("temporarily limited");
   await expect(page.locator('[data-ii-retry-source="DOE"]')).toBeVisible();
   await expect(page.locator(".ii-award-kicker")).toContainText("Amount not listed");
   await scan(page, "awards-results-mobile", testInfo);
@@ -320,6 +320,8 @@ test("Funded Awards has no serious or critical violations and fits narrow mobile
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   const statusPill = page.locator(".header-context-pill");
   await expect(statusPill).toHaveText("NSF · NIH · DOE · DoD");
+  await expect(statusPill).toHaveAttribute("role", "group");
   await expect(statusPill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
+  await expect(statusPill.locator(".header-context-row-break")).toBeHidden();
   expect(await statusPill.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
 });

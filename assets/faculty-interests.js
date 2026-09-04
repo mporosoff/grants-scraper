@@ -204,6 +204,10 @@
     try { return globalThis.localStorage; }
     catch (_error) { return null; }
   }
+  function safeHandoffStorage() {
+    try { return globalThis.sessionStorage; }
+    catch (_error) { return null; }
+  }
   function addLocally() {
     if (!teamApi || !orcidApi) {
       setStatus("Browser-only Team Match profiles are unavailable because a helper did not load.", "error");
@@ -257,8 +261,15 @@
       return;
     }
     resetActiveDraft();
-    if (new URLSearchParams(location.search).get("return") === "team_match") {
-      location.assign("./team_match.html?local=" + encodeURIComponent(savedId));
+    var returnParams = new URLSearchParams(location.search);
+    if (returnParams.get("return") === "team_match") {
+      var expectedHandoffToken = returnParams.get("handoff") || "";
+      var handoff = teamApi.completeHandoff(safeHandoffStorage(), savedId, expectedHandoffToken);
+      if (!handoff.saved) {
+        setStatus("This researcher was stored in this browser, but the team handoff is unavailable in this tab. Open Team Match to add the saved researcher.", "success");
+        return;
+      }
+      location.assign("./team_match.html?handoff=" + encodeURIComponent(handoff.handoff.token));
       return;
     }
     setStatus(name + " was stored only in this browser for Team Match. It was not submitted for catalog review.", "success");

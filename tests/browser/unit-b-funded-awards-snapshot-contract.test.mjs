@@ -397,6 +397,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   const dodReleaseKey = "dod-awards-20260903";
   const dodStatusReleaseKey = "dod-awards-20260904";
   const dodBrowserReleaseKey = "dod-browser-20260904-r2";
+  const fundedAwardsStylesReleaseKey = "source-pill-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   const aiProviderHash = createHash("sha256").update(aiProvider).digest("hex");
   const awardApiConfigHash = createHash("sha256").update(awardApiConfig).digest("hex");
@@ -414,7 +415,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${aiProviderHash}`));
   assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${institutionalCssHash}`));
-  assert.match(fundedAwards, new RegExp(`funded-awards\\.css\\?v=${dodBrowserReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards\\.css\\?v=${fundedAwardsStylesReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));

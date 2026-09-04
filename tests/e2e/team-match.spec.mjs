@@ -19,6 +19,10 @@ async function assertNoHorizontalOverflow(page) {
 }
 
 test("Team Match supports directory, browser-only, team-size, history, and mobile workflows", async ({ page }) => {
+  const navigationUrls = [];
+  page.on("request", request => {
+    if (request.isNavigationRequest()) navigationUrls.push(request.url());
+  });
   await page.addInitScript(() => {
     const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
     globalThis.setTimeout = (callback, delay, ...args) => (
@@ -46,17 +50,40 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await expect(page.locator("#count")).toContainText("fit every selected researcher");
 
   await page.locator("#add-researcher").click();
+  await expect(page.locator("#missing-researcher")).toHaveJSProperty("tagName", "BUTTON");
+  await expect(page.locator("#missing-researcher")).not.toHaveAttribute("href", /.+/);
   await page.locator("#missing-researcher").click();
   await expect(page).toHaveURL(/faculty_interests\.html\?mode=add&return=team_match/);
   await expect(page.getByRole("radio", { name: /Add a missing researcher/ })).toBeChecked();
   await page.locator("#display-name").fill("Gate Four Researcher");
   await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nchemical engineering\ncarbon capture");
   await page.locator("#add-locally").click();
-  await expect(page).toHaveURL(/team_match\.html\?local=ext-gate-four-researcher/);
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
+  await expect(page).toHaveURL(/team_match\.html/);
+  expect(page.url()).not.toContain("ext-gate-four-researcher");
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect.poll(() => new URL(page.url()).searchParams.get("handoff")).toBeNull();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect(page.locator("#external-status")).toBeHidden();
   await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
+
+  await page.locator("#add-researcher").click();
+  await page.locator("#missing-researcher").click();
+  await expect(page.getByRole("radio", { name: /Add a missing researcher/ })).toBeChecked();
+  await page.locator("#display-name").fill("Gate Five Researcher");
+  await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nreaction engineering");
+  await page.locator("#add-locally").click();
+  await expect(page).toHaveURL(/team_match\.html/);
+  expect(page.url()).not.toContain("ext-gate-five-researcher");
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect.poll(() => new URL(page.url()).searchParams.get("handoff")).toBeNull();
+  await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
+  await page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true }).click();
+  await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(3);
 
   const fourth = await addDepartmentResearcher(page, "Astrid M. Müller");
   await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
@@ -76,8 +103,59 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await page.goBack();
   await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
+  const handoffTokens = navigationUrls.map(url => new URL(url).searchParams.get("handoff")).filter(Boolean);
+  expect(handoffTokens).toHaveLength(4);
+  expect(handoffTokens.every(token => /^[a-f0-9]{32}$/.test(token))).toBe(true);
+  expect(handoffTokens[0]).toBe(handoffTokens[1]);
+  expect(handoffTokens[2]).toBe(handoffTokens[3]);
+  expect(handoffTokens[2]).not.toBe(handoffTokens[0]);
+  expect(navigationUrls.some(url => /ext-gate-(?:four|five)-researcher|[?&]locals?=/.test(url))).toBe(false);
+  expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
+});
+
+test("a deferred four-person team cannot lose a member through Configure", async ({ page }) => {
+  mockHybrid(page);
+  const errors = watchRuntimeErrors(page);
+  await openTeamMatch(page);
+  const selectedIdentities = [];
+  for (const name of [
+    "Alexander A. Shestopalov",
+    "Allison J. Lopatkin",
+    "Astrid M. Müller",
+    "Zachary Robinson",
+  ]) {
+    const added = await addDepartmentResearcher(page, name);
+    selectedIdentities.push({ kind: "directory", id: added.value });
+  }
+  await expect(page.locator("#pi-grid [data-member-entry]")).toHaveCount(4);
+  await expect(page.locator("#add-researcher")).toBeHidden();
+  await page.evaluate(identities => {
+    history.replaceState({
+      fundingFinderTeamMatch: {
+        selected: [],
+        selectedIdentities: identities,
+        themeState: {},
+        filter: "",
+        scrollY: 0,
+      },
+    }, "");
+  }, selectedIdentities);
+
+  await page.route("**/data/opportunity_teams.js*", route => route.fulfill({
+    status: 503,
+    contentType: "text/javascript",
+    body: "",
+  }));
+  await page.reload();
+  await expect(page.locator("#external-status")).toContainText("saved team is preserved", { timeout: 30_000 });
+  await expect(page.locator("#add-researcher")).toBeVisible();
+  await page.locator("#add-researcher").click();
+  await expect(page.locator("#faculty-search-status")).toContainText("preserved four-person team", { timeout: 30_000 });
+  await expect(page.locator("#missing-researcher")).toBeDisabled();
+  await expect(page.locator("#missing-researcher")).toHaveAttribute("title", /already has four researchers/);
+  expect(await page.evaluate(() => sessionStorage.getItem("funding-finder.team-handoff.v1"))).toBeNull();
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });
 
