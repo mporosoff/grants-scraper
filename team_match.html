@@ -1346,6 +1346,12 @@
 
   function updateToggles() {
     var atMax = selected.length >= MAX;
+    var proposed = selected.map(function (member) {
+      return isExternalKey(member) ? "" : faculty[member] && faculty[member].directory_id;
+    }).filter(Boolean).slice(0, MAX - 1);
+    var missingResearcherUrl = "./faculty_interests.html?mode=add&return=team_match";
+    if (proposed.length) missingResearcherUrl += "&proposed=" + encodeURIComponent(proposed.join(","));
+    $("missing-researcher").setAttribute("href", missingResearcherUrl);
     renderExternalButtons();
     $("add-researcher").disabled = atMax;
     $("add-researcher").title = atMax ? "The team already has four researchers" : "Add a researcher";

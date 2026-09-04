@@ -67,6 +67,7 @@ test("the Funded Awards status badge remains complete inside a narrow mobile hea
   await page.goto("/funded_awards.html");
   const pill = page.locator(".header-context-pill");
   await expect(pill).toHaveText("NSF · NIH · DOE · DoD");
+  await expect(pill).toHaveAttribute("role", "group");
   await expect(pill).toHaveAttribute("aria-label", "NSF, NIH, DOE, and DoD award sources available");
   await expect(pill.locator(".header-context-row-break")).toBeHidden();
   const geometry = await pill.evaluate(element => {

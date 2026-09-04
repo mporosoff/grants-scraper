@@ -78,6 +78,7 @@ const frozenSubtopicCatalogSource = `globalThis.SUBTOPIC_CATALOG=${JSON.stringif
 
 const WORKER_ORIGIN = "https://funding-finder-voyage-search.urochestercheme.workers.dev";
 const AWARD_WORKER_ORIGIN = "https://funding-finder-award-api.urochestercheme.workers.dev";
+const USA_SPENDING_ORIGIN = "https://api.usaspending.gov";
 const ALERTS_WORKER_ORIGIN = "https://funding-finder-alerts.urochestercheme.workers.dev";
 
 function corsHeaders(extra = {}) {
@@ -295,6 +296,7 @@ export function mockAwards(target, {
   registryRateLimited = false,
   responseDelaysBySourceOffset = {},
   snapshotPageDelayMs = 0,
+  snapshotCreateDelayMs = 0,
   snapshotPageExpireAtCall = 0,
   snapshotPageFailAtCalls = [],
   snapshotBatchExpireAtCall = 0,
@@ -312,6 +314,119 @@ export function mockAwards(target, {
   let snapshotPageCallCount = 0;
   let snapshotBatchCallCount = 0;
   let snapshotRetryCallCount = 0;
+  const configuredDodCount = Math.max(0, Number(
+    typeof resultCountPerSource === "object" ? resultCountPerSource.DOD : 0,
+  ) || 0);
+  const dodRowsByGeneratedId = new Map();
+  target.route(`${USA_SPENDING_ORIGIN}/**`, async route => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({ status: 204, headers: corsHeaders() });
+      return;
+    }
+    const requestUrl = new URL(request.url());
+    const configuredFailure = sourceFailures.DOD || (failDod ? { code: "source_unavailable" } : null);
+    if (configuredFailure) {
+      await route.fulfill({
+        status: 503,
+        headers: corsHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ detail: configuredFailure.code || "source_unavailable" }),
+      });
+      return;
+    }
+    if (requestUrl.pathname === "/api/v2/search/spending_by_award/" && request.method() === "POST") {
+      const body = request.postDataJSON();
+      const page = Math.max(1, Number(body.page) || 1);
+      const limit = Math.max(1, Number(body.limit) || 25);
+      const start = (page - 1) * limit;
+      const end = Math.min(start + limit, configuredDodCount);
+      const searchTerm = String(body.filters?.recipient_search_text?.[0] || "").trim();
+      const recipientUei = /^[A-Z0-9]{12}$/i.test(searchTerm) ? searchTerm.toUpperCase() : "NPU8ULVAAS23";
+      const knownRecipientNames = {
+        F27KDXZMF9Y8: "University of Rochester",
+        NPU8ULVAAS23: "University of Maryland, College Park",
+      };
+      const recipientName = searchTerm && !/^[A-Z0-9]{12}$/i.test(searchTerm)
+        ? searchTerm
+        : knownRecipientNames[recipientUei] || "University of Rochester";
+      const dateFilter = body.filters?.time_period?.[0];
+      const signedYear = Number(String(dateFilter?.start_date || "2026").slice(0, 4)) || 2026;
+      const requestedAwardId = String(body.filters?.award_ids?.[0] || "").trim();
+      const results = [];
+      for (let index = start; index < end; index += 1) {
+        const awardId = index === 0 && requestedAwardId
+          ? requestedAwardId
+          : `FA9550261B${String(195 + index).padStart(3, "0")}`;
+        const generatedId = `ASST_NON_${awardId}_097`;
+        const row = {
+          "Award ID": awardId,
+          "Recipient Name": recipientName.toUpperCase(),
+          "Recipient UEI": recipientUei,
+          "Start Date": `${signedYear}-09-01`,
+          "End Date": `${signedYear + 5}-08-31`,
+          "Award Amount": 3_000_000 + index,
+          "Awarding Agency": "Department of Defense",
+          "Awarding Sub Agency": "Department of the Air Force",
+          Description: `CENTER OF EXCELLENCE ${index + 1}: MULTISCALE NONEQUILIBRIUM TRANSPORT`,
+          "Base Obligation Date": `${signedYear}-08-28`,
+          "Award Type": "PROJECT GRANT (B)",
+          generated_internal_id: generatedId,
+        };
+        dodRowsByGeneratedId.set(generatedId, row);
+        results.push(row);
+      }
+      const hasNext = end < configuredDodCount;
+      await route.fulfill({
+        status: 200,
+        headers: corsHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({
+          spending_level: "awards",
+          limit,
+          results,
+          page_metadata: {
+            page,
+            total: configuredDodCount,
+            hasNext,
+            last_record_unique_id: hasNext ? end : null,
+            last_record_sort_value: hasNext ? results.at(-1)?.["Award ID"] : null,
+          },
+        }),
+      });
+      return;
+    }
+    const detailMatch = requestUrl.pathname.match(/^\/api\/v2\/awards\/(ASST_[^/]+)\/$/i);
+    if (detailMatch && request.method() === "GET") {
+      const generatedId = decodeURIComponent(detailMatch[1]);
+      const row = dodRowsByGeneratedId.get(generatedId);
+      if (!row) {
+        await route.fulfill({ status: 404, headers: corsHeaders({ "Content-Type": "application/json" }), body: "{}" });
+        return;
+      }
+      await route.fulfill({
+        status: 200,
+        headers: corsHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({
+          generated_unique_award_id: generatedId,
+          fain: row["Award ID"],
+          description: row.Description,
+          type: "04",
+          total_obligation: row["Award Amount"],
+          date_signed: row["Base Obligation Date"],
+          period_of_performance: { start_date: row["Start Date"], end_date: row["End Date"] },
+          recipient: { recipient_name: row["Recipient Name"], recipient_uei: row["Recipient UEI"] },
+          awarding_agency: {
+            toptier_agency: { name: "Department of Defense" },
+            subtier_agency: { name: "Department of the Air Force" },
+            office_agency_name: "FA9550 AFRL AFOSR",
+          },
+          cfda_info: [{ cfda_number: "12.800", cfda_title: "Air Force Defense Research Sciences Program" }],
+          funding_opportunity: { number: "NOFOAFRLAFOSR20250002" },
+        }),
+      });
+      return;
+    }
+    await route.fulfill({ status: 404, headers: corsHeaders({ "Content-Type": "application/json" }), body: "{}" });
+  });
   target.route(`${AWARD_WORKER_ORIGIN}/**`, async route => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
@@ -564,7 +679,10 @@ export function mockAwards(target, {
       return { facet: { type: facet.type, key: facet.key, label: facet.type === "investigator" ? group?.name : group?.label }, records: snapshot.records.filter(record => allowed.has(`${record.source}:${record.award_id}`)) };
     };
     if (requestUrl.pathname === "/awards/snapshots" && request.method() === "POST") {
-      if (failSnapshotCreateForTopics.includes(body.criteria?.topic)) {
+      if (
+        failSnapshotCreateForTopics.includes(body.criteria?.topic)
+        || failSnapshotInitialPageForTopics.includes(body.criteria?.topic)
+      ) {
         await route.fulfill({
           status: 503,
           headers: corsHeaders({ "Content-Type": "application/json" }),
@@ -576,7 +694,9 @@ export function mockAwards(target, {
       const records = [];
       const sourceStates = [];
       for (const source of sources) {
-        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
+        const configuredFlag = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
+        const recoveringHybridSource = sources.length === 1 && calls.some(call => Array.isArray(call.sources) && call.sources.length > 1 && call.sources.includes(source));
+        const failed = configuredFlag && !recoveringHybridSource;
         const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
         if (configuredFailure) {
           sourceStates.push({ source, status: configuredFailure.status || "unavailable", result_count: 0, total_count: null, error: { code: configuredFailure.code || "source_unavailable" } });
@@ -586,7 +706,9 @@ export function mockAwards(target, {
         const configuredCount = typeof resultCountPerSource === "object"
           ? resultCountPerSource[source]
           : source === "DOD" ? 0 : resultCountPerSource;
-        const count = Math.max(0, Number(configuredCount) || 0);
+        const count = recoveringHybridSource && configuredFlag
+          ? Math.max(1, Number(configuredCount) || 0)
+          : Math.max(0, Number(configuredCount) || 0);
         for (let index = 0; index < count; index += 1) records.push(index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] });
         const partial = Array.isArray(hasMoreBySource[source]) ? hasMoreBySource[source].length > 0 : Boolean(hasMoreBySource[source]);
         sourceStates.push({ source, status: partial ? "safety_bounded" : "complete", result_count: count, total_count: partial ? null : count, at_least: count, safety_bound_reached: partial, adapter_version: "1.1.0", retrieved_at: retrievedAt });
@@ -596,6 +718,7 @@ export function mockAwards(target, {
       const snapshot = { snapshot_id: snapshotId, query_id: String(snapshotSequence).padStart(64, "b"), as_of: retrievedAt, request: { sources, criteria: body.criteria }, records, sources: sourceStates, completeness: complete ? "complete" : records.length ? "partial" : "unavailable", exact_total: complete ? records.length : null };
       snapshot.aggregate = snapshotAggregate(records);
       snapshots.set(snapshotId, snapshot);
+      if (Number(snapshotCreateDelayMs) > 0) await new Promise(resolve => setTimeout(resolve, Number(snapshotCreateDelayMs)));
       await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(publicSnapshot(snapshot)) });
       return;
     }

@@ -66,7 +66,8 @@ test("mode-specific drafts persist until a successful action", () => {
   const failedSubmit = submitSource.slice(submitSource.lastIndexOf("    } catch (error) {"), submitSource.indexOf("    } finally"));
   assert.doesNotMatch(failedSubmit, /resetActiveDraft/);
   assert.match(pageScript, /TEAM_API|teamApi\.save/);
-  assert.match(pageScript, /team_match\.html\?local=/);
+  assert.match(pageScript, /new URLSearchParams\(\{ local: savedId \}\)/);
+  assert.match(pageScript, /get\("proposed"\)[\s\S]*?returnParams\.set\("proposed", proposed\)[\s\S]*?team_match\.html\?" \+ returnParams\.toString\(\)/);
 });
 
 test("the shared browser builder emits only consented allowlisted fields", () => {

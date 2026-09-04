@@ -258,7 +258,10 @@
     }
     resetActiveDraft();
     if (new URLSearchParams(location.search).get("return") === "team_match") {
-      location.assign("./team_match.html?local=" + encodeURIComponent(savedId));
+      var returnParams = new URLSearchParams({ local: savedId });
+      var proposed = new URLSearchParams(location.search).get("proposed");
+      if (proposed) returnParams.set("proposed", proposed);
+      location.assign("./team_match.html?" + returnParams.toString());
       return;
     }
     setStatus(name + " was stored only in this browser for Team Match. It was not submitted for catalog review.", "success");

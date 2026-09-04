@@ -139,6 +139,7 @@ test("opens an accessible bounded faculty combobox", () => {
 
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
+  assert.match(teamPage, /var proposed = selected\.map\([\s\S]*?faculty\[member\]\.directory_id[\s\S]*?missingResearcherUrl \+= "&proposed=" \+ encodeURIComponent\(proposed\.join\(","\)\)/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
