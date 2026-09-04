@@ -306,6 +306,9 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(workerSmoke, /core_project_number: "K12GM106997"/);
   assert.match(workerSmoke, /award_id: "DE-SC0020230"/);
   assert.match(workerSmoke, /searchDodFromBrowser\(\{ award_id: "FA9550261B195" \}/);
+  assert.match(workerSmoke, /fetch\(DOD_SEARCH_URL, \{[\s\S]*method: "OPTIONS"[\s\S]*"Access-Control-Request-Method": "POST"[\s\S]*"Access-Control-Request-Headers": "content-type"/);
+  assert.match(workerSmoke, /preflightResponse\.ok[\s\S]*preflightMethods\.has\("POST"\)[\s\S]*preflightHeaders\.has\("content-type"\)/);
+  assert.ok(workerSmoke.indexOf("await fetch(DOD_SEARCH_URL") < workerSmoke.indexOf("await searchDodFromBrowser"));
   assert.match(workerSmoke, /new Headers\(options\.headers\)[\s\S]*headers\.set\("Origin", origin\)[\s\S]*fetch\(url, \{ \.\.\.options, headers \}\)/);
   assert.match(workerSmoke, /access-control-allow-origin/);
   assert.match(deployWorkflow, /source_transports\.DOD[\s\S]*browser_direct_cors/);

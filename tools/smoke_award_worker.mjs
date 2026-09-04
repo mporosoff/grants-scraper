@@ -1,4 +1,5 @@
 import { searchDodFromBrowser } from "../assets/dod-awards-browser.mjs";
+import { DOD_SEARCH_URL } from "../workers/award-api/src/adapters/dod.js";
 
 const baseUrl = String(process.env.AWARD_API_URL || "https://funding-finder-award-api.urochestercheme.workers.dev/").trim();
 const origin = "https://mporosoff.github.io";
@@ -100,6 +101,34 @@ for (const body of [
 }
 
 const corsResponses = [];
+const preflightResponse = await fetch(DOD_SEARCH_URL, {
+  method: "OPTIONS",
+  headers: {
+    Origin: origin,
+    "Access-Control-Request-Method": "POST",
+    "Access-Control-Request-Headers": "content-type",
+  },
+  signal: AbortSignal.timeout(45_000),
+});
+const preflightOrigin = preflightResponse.headers.get("access-control-allow-origin");
+const preflightMethods = new Set(
+  String(preflightResponse.headers.get("access-control-allow-methods") || "")
+    .split(",")
+    .map(value => value.trim().toUpperCase())
+    .filter(Boolean),
+);
+const preflightHeaders = new Set(
+  String(preflightResponse.headers.get("access-control-allow-headers") || "")
+    .split(",")
+    .map(value => value.trim().toLowerCase())
+    .filter(Boolean),
+);
+if (!preflightResponse.ok
+  || !["*", origin].includes(preflightOrigin)
+  || (!preflightMethods.has("POST") && !preflightMethods.has("*"))
+  || (!preflightHeaders.has("content-type") && !preflightHeaders.has("*"))) {
+  throw new Error("DOD browser-CORS preflight did not allow the USAspending JSON search request.");
+}
 const dodPayload = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
   limit: 1,
   fetchImpl: async (url, options = {}) => {
@@ -125,4 +154,4 @@ if (dodPayload.status
   throw new Error("DOD browser-CORS exact-ID smoke did not return the expected USAspending obligation record.");
 }
 
-console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, exact NSF/NIH/DOE Worker smokes, and the exact DoD browser-CORS smoke passed.");
+console.log("Award Worker health, abuse control, trusted ROR identity, normalized paging bounds, exact NSF/NIH/DOE Worker smokes, and the DoD browser-CORS preflight and exact-award smoke passed.");
