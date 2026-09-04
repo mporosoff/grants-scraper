@@ -2,6 +2,9 @@
   "use strict";
 
   const STORAGE_KEY = "funding-finder.external-researchers.v1";
+  const HANDOFF_STORAGE_KEY = "funding-finder.team-match-handoff.v1";
+  const HANDOFF_TTL_MS = 2 * 60 * 60 * 1000;
+  const MAX_HANDOFF_BYTES = 8_192;
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
@@ -144,6 +147,51 @@
       return { profiles: normalized, saved: true, error: "" };
     } catch (_error) {
       return { profiles: normalized, saved: false, error: "Changes are available in this tab but could not be saved on this device." };
+    }
+  }
+
+  function saveTeamHandoff(storage, teamState, now = Date.now()) {
+    if (!storage || !teamState || typeof teamState !== "object") return false;
+    const savedAt = Number(now);
+    if (!Number.isFinite(savedAt)) return false;
+    try {
+      const serialized = JSON.stringify({
+        schema_version: 1,
+        saved_at: savedAt,
+        team_state: teamState,
+      });
+      if (serialized.length > MAX_HANDOFF_BYTES) return false;
+      storage.setItem(HANDOFF_STORAGE_KEY, serialized);
+      return true;
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function consumeTeamHandoff(storage, now = Date.now()) {
+    if (!storage) return null;
+    let serialized = "";
+    try {
+      serialized = String(storage.getItem(HANDOFF_STORAGE_KEY) || "");
+      storage.removeItem(HANDOFF_STORAGE_KEY);
+    } catch (_error) {
+      return null;
+    }
+    if (!serialized || serialized.length > MAX_HANDOFF_BYTES) return null;
+    try {
+      const payload = JSON.parse(serialized);
+      const age = Number(now) - Number(payload.saved_at);
+      if (
+        payload.schema_version !== 1
+        || !payload.team_state
+        || typeof payload.team_state !== "object"
+        || !Number.isFinite(age)
+        || age < 0
+        || age > HANDOFF_TTL_MS
+      ) return null;
+      return payload.team_state;
+    } catch (_error) {
+      return null;
     }
   }
 
@@ -500,6 +548,8 @@
 
   globalThis.FUNDING_TEAM_RESEARCHERS = Object.freeze({
     STORAGE_KEY,
+    HANDOFF_STORAGE_KEY,
+    HANDOFF_TTL_MS,
     MAX_EXTERNAL,
     MIN_KEYWORDS,
     MAX_KEYWORDS,
@@ -508,6 +558,8 @@
     normalizeProfiles,
     load,
     save,
+    saveTeamHandoff,
+    consumeTeamHandoff,
     inferDomains,
     buildMatches,
     intersectMemberMatches,

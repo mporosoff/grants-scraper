@@ -44,6 +44,7 @@ function memoryStorage() {
   return {
     getItem(key) { return values.has(key) ? values.get(key) : null; },
     setItem(key, value) { values.set(key, value); },
+    removeItem(key) { values.delete(key); },
   };
 }
 
@@ -140,6 +141,10 @@ test("opens an accessible bounded faculty combobox", () => {
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
+  assert.match(teamPage, /function preserveMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveTeamHandoff\(safeSessionStorage\(\), saved\)/);
+  assert.match(teamPage, /function restoreMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.consumeTeamHandoff\(safeSessionStorage\(\)\)/);
+  assert.match(teamPage, /restoreMissingResearcherHandoff\(\);[\s\S]*?if \(teamHistoryNeedsDirectory\(\)\)/);
+  assert.match(teamPage, /\$\("missing-researcher"\)\.addEventListener\("click", preserveMissingResearcherHandoff\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
@@ -258,6 +263,32 @@ test("normalizes and saves no more than four external researchers", () => {
   }]);
   assert.equal(withOrcid.profiles[0].orcid_id, "0000-0002-1825-0097");
   assert.match(withOrcid.profiles[0].orcid_text, /Ionic liquid/);
+});
+
+test("preserves one bounded same-tab team handoff and consumes it exactly once", () => {
+  const { team } = loadApis();
+  const storage = memoryStorage();
+  const state = {
+    selected: ["Alexander A. Shestopalov", "Allison J. Lopatkin"],
+    selectedIdentities: [
+      { kind: "directory", id: "urh-000001" },
+      { kind: "directory", id: "urh-000002" },
+    ],
+    themeState: { "Hydrogen systems": true },
+    filter: "electrochemistry",
+    scrollY: 420,
+  };
+
+  assert.equal(team.saveTeamHandoff(storage, state, 1_000), true);
+  assert.equal(
+    JSON.stringify(team.consumeTeamHandoff(storage, 2_000)),
+    JSON.stringify(state),
+  );
+  assert.equal(team.consumeTeamHandoff(storage, 2_000), null);
+
+  assert.equal(team.saveTeamHandoff(storage, state, 1_000), true);
+  assert.equal(team.consumeTeamHandoff(storage, 1_000 + team.HANDOFF_TTL_MS + 1), null);
+  assert.equal(team.saveTeamHandoff(storage, { filter: "x".repeat(9_000) }, 1_000), false);
 });
 
 test("drops standalone umbrella keywords from external profiles", () => {
