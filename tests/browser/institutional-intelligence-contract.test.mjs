@@ -428,7 +428,9 @@ test("snapshot URLs and replacement results have one committed owner", () => {
 
   const retrySource = appSource.slice(appSource.indexOf("async function stagedSourceRetry("), appSource.indexOf("function answerEvidenceSignature("));
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
+  assert.match(retrySource, /stagedSourceRetry\([\s\S]*successorOverlay[\s\S]*clientSnapshotOverlay: successorOverlay/);
   assert.match(retrySource, /stagedHybridSourceRetry\([\s\S]*sources: \[source\][\s\S]*replaceHybridSnapshotSource\(/);
+  assert.match(retrySource, /if \(state\.localSnapshot \|\| \(state\.clientSnapshotOverlay && source === "DOD"\)\)/);
   assert.match(retrySource, /const retryIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === previous[\s\S]*if \(!retryIsCurrent\(\)\) return;[\s\S]*commitSnapshotResult\(result\.staged/);
   assert.doesNotMatch(retrySource, /preparedSnapshotSearch\(\{ request, submitted/);
 });

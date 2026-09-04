@@ -121,6 +121,30 @@ jobs:
           else
             echo "No prior Award Worker deployment was found; this is a first deployment." >> "$GITHUB_STEP_SUMMARY"
           fi
+      - name: Wait for Pages to publish the browser-first DoD client
+        id: pages-client-ready
+        if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
+        shell: bash
+        run: |
+          candidate_page_hash="$(sha256sum funded_awards.html | awk '{print $1}')"
+          candidate_client_hash="$(sha256sum assets/dod-awards-browser.mjs | awk '{print $1}')"
+          verified=false
+          for attempt in $(seq 1 24); do
+            rm -f -- /tmp/funded_awards.pre-worker.html /tmp/dod-awards-browser.pre-worker.mjs
+            curl --fail --silent --show-error --connect-timeout 5 --max-time 10 "https://mporosoff.github.io/grants-scraper/funded_awards.html?pre-worker=${GITHUB_SHA}" -o /tmp/funded_awards.pre-worker.html || true
+            curl --fail --silent --show-error --connect-timeout 5 --max-time 10 "https://mporosoff.github.io/grants-scraper/assets/dod-awards-browser.mjs?pre-worker=${GITHUB_SHA}" -o /tmp/dod-awards-browser.pre-worker.mjs || true
+            live_page_hash="$(sha256sum /tmp/funded_awards.pre-worker.html 2>/dev/null | awk '{print $1}')"
+            live_client_hash="$(sha256sum /tmp/dod-awards-browser.pre-worker.mjs 2>/dev/null | awk '{print $1}')"
+            if [ "$live_page_hash" = "$candidate_page_hash" ] && [ "$live_client_hash" = "$candidate_client_hash" ]; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::Pages did not publish the browser-first DoD client before the Worker transport switch. The existing Worker was left unchanged."
+            exit 1
+          fi
       - name: Reconfirm protected main immediately before Award Worker mutation
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash

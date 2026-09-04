@@ -308,6 +308,10 @@ test("Award service delivery follows the protected main and rollback pattern", (
   assert.match(workerSmoke, /searchDodFromBrowser\(\{ award_id: "FA9550261B195" \}/);
   assert.match(workerSmoke, /access-control-allow-origin/);
   assert.match(deployWorkflow, /source_transports\.DOD[\s\S]*browser_direct_cors/);
+  const pagesClientGate = deployWorkflow.indexOf("Wait for Pages to publish the browser-first DoD client");
+  const workerDeploy = deployWorkflow.indexOf("Deploy the committed Award Worker");
+  assert.ok(pagesClientGate > -1 && workerDeploy > pagesClientGate);
+  assert.match(deployWorkflow, /sha256sum funded_awards\.html[\s\S]*sha256sum assets\/dod-awards-browser\.mjs[\s\S]*The existing Worker was left unchanged/);
   assert.match(workerSmoke, /source\?\.source[\s\S]*source\?\.status[\s\S]*source\?\.error\?\.code/);
   assert.match(workerSmoke, /failureDetail\(payload\)/);
   assert.doesNotMatch(deployWorkflow + workerSmoke, /query_baseline|p9_scoring|vector|semantic/i);

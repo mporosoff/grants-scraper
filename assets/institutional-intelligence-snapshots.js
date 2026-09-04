@@ -1099,15 +1099,28 @@
     }
   }
 
-  async function stagedSourceRetry(source, snapshotId, pageSize, submitted) {
-    const snapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+  async function stagedSourceRetry(source, snapshotId, pageSize, submitted, clientOverlay = state.clientSnapshotOverlay) {
+    const rawSnapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+    const successorOverlay = clientOverlay?.snapshotId === snapshotId
+      ? { ...clientOverlay, snapshotId: rawSnapshot.snapshot_id }
+      : null;
+    const snapshot = applyClientSnapshotOverlay(rawSnapshot, successorOverlay);
     const initialPage = await requestSnapshotPage({
       snapshotId: snapshot.snapshot_id,
       page: 1,
       pageSize,
       facet: { type: "all", key: "" },
+      clientOverlay: successorOverlay,
     });
-    return { snapshot, staged: stagedSnapshotResult({ submitted, snapshot, pagePayload: initialPage }) };
+    return {
+      snapshot,
+      staged: stagedSnapshotResult({
+        submitted,
+        snapshot,
+        pagePayload: initialPage,
+        clientSnapshotOverlay: successorOverlay,
+      }),
+    };
   }
 
   async function stagedHybridSourceRetry({ source, baseSnapshot, request, submitted, pageSize, controller }) {
@@ -1156,7 +1169,7 @@
   }
 
   async function retrySource(source) {
-    if (state.localSnapshot || state.clientSnapshotOverlay) {
+    if (state.localSnapshot || (state.clientSnapshotOverlay && source === "DOD")) {
       const baseSnapshot = state.localSnapshot || state.snapshot;
       const previous = state.snapshot.snapshot_id;
       const sequence = state.sequence;
