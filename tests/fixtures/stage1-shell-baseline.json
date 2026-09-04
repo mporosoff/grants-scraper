@@ -1,0 +1,71 @@
+{
+  "record": {
+    "opportunity_id": "stage1-fixture",
+    "opportunity_number": "STAGE-1",
+    "title": "Fixture, official notice",
+    "agency": "NSF",
+    "source": "Grants.gov",
+    "status": "posted",
+    "close_date": "2026-12-31",
+    "primary_document_url": "https://www.nsf.gov/notice.pdf",
+    "funding_opportunity_url": "https://www.nsf.gov/funding/notice",
+    "detail_page": "https://www.grants.gov/search-results-detail/stage1-fixture",
+    "contact_email": "public@example.org"
+  },
+  "source": {
+    "url": "https://www.nsf.gov/notice.pdf",
+    "html": "<a class=\"source-action primary\" data-source-open=\"foa\" href=\"https://www.nsf.gov/notice.pdf\" target=\"_blank\" rel=\"noopener\">Open official FOA ↗</a><a class=\"source-action\" data-source-open=\"grants\" href=\"https://www.grants.gov/search-results-detail/stage1-fixture\" target=\"_blank\" rel=\"noopener\">Grants.gov record ↗</a><a class=\"source-action\" data-source-open=\"agency\" href=\"https://www.nsf.gov/funding/notice\" target=\"_blank\" rel=\"noopener\">Agency notice ↗</a>",
+    "note": "FOA selected from official Grants.gov attachment metadata (review confidence). Confirm that it is the current amended notice."
+  },
+  "contact": "<a class=\"source-action\" href=\"mailto:public@example.org?subject=Question%20about%20STAGE-1\" aria-label=\"Email public@example.org\" title=\"public@example.org · public@example.org\">Program contact</a>",
+  "csv": "\"Title\",\"Agency\",\"Source\",\"Status\",\"Opportunity number\",\"Deadline\",\"Posted\",\"Award floor\",\"Award ceiling\",\"Program funding\",\"Expected awards\",\"Deadline evidence\",\"Preliminary deadline\",\"Funding evidence\",\"Funding instruments\",\"Categories\",\"Disciplines\",\"Topics\",\"Eligible applicants\",\"Limited submission\",\"Cost share required\",\"Contact name\",\"Contact email\",\"Contact phone\",\"Contact role\",\"Preliminary stage\",\"Workflow tier\",\"AI identified\",\"AI discovery phrases\",\"Potential evidence source field\",\"Potential evidence source label\",\"Potential evidence excerpt\",\"AI verdict\",\"AI score\",\"AI rationale\",\"Document evidence status\",\"Document version\",\"Document SHA-256\",\"Cited FOA facts\",\"Citation URLs\",\"Source review queue\",\"Reviewer source verdict\",\"Reviewer checked field\",\"Primary FOA URL\",\"Agency notice URL\",\"Source record URL\"\r\n\"Fixture, official notice\",\"NSF\",\"Grants.gov\",\"posted\",\"STAGE-1\",\"2026-12-31\",\"\",\"\",\"\",\"\",\"\",\"Grants.gov structured record\",\"\",\"Grants.gov XML extract\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"public@example.org\",\"\",\"\",\"\",\"Strong\",\"No\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"https://www.nsf.gov/notice.pdf\",\"https://www.nsf.gov/funding/notice\",\"https://www.grants.gov/search-results-detail/stage1-fixture\"",
+  "url": "https://example.org/match_explorer.html?q=carbon+capture&f_agency=NSF",
+  "searchAlert": {
+    "type": "saved_search",
+    "definition": {
+      "query": "carbon capture",
+      "filters": {
+        "agencies": [
+          "NSF"
+        ]
+      },
+      "currentness": "current_only",
+      "strong_contract_version": "funding-search-v2-strong-1",
+      "include_potential": false
+    },
+    "baselineOpportunityIds": [
+      "stage1-fixture"
+    ],
+    "summary": "New Strong matches for “carbon capture” using the current public filters. Browser-local profile, CV, ORCID, documents, and chat are excluded.",
+    "focus": {
+      "value": "",
+      "checked": false
+    }
+  },
+  "opportunityAlert": {
+    "type": "opportunity",
+    "definition": {
+      "opportunity_id": "stage1-fixture",
+      "triggers": [
+        "deadline_changed",
+        "amended",
+        "closing_reminders",
+        "status_changed"
+      ]
+    },
+    "summary": "Fixture, official notice · NSF",
+    "focus": null
+  },
+  "functionHashes": {
+    "exportCsv": "99d4278f91ef06e32f07a2fe70ecc620bee50cd31c45e5f885ba880903c41b4c",
+    "syncStateToUrl": "cdd92506211bd6759f925dbce78e82a75a142e0e30af768ad58428b12927cd49",
+    "hydrateStateFromUrl": "dddf387a7cd6aa9c844babb9bef48540c94f78a87281b227c37b88c0970bfd8c",
+    "savedSearchAlertDefinition": "b2689fae846fe18ec4f7a254e9409fc7bfd591ba5bb6ad4a03181e71492866d0",
+    "openSavedSearchAlert": "7c281171ff399f1d5c210573c82f9fbfb63cd7249d777f10136a0370c7cf9ee0",
+    "openOpportunityAlert": "a15b6bccac37de9e30334afff33caef27f0f857f96d3e9cf39ee782ea6a87103",
+    "openProgramAlert": "f3a103604f38ba1107dc8df46ef8c5b8f742f2c223880fe3c158801394921c6b",
+    "officialActions": "311272c9c58f97493f46b1e17f1d863fbbc21750f3449914992602af33d7bf5f",
+    "opportunityTeamScopeId": "00d6a7735aa50f2f269eab57ceec860cfd56713c4313327f62f36f78bba246b4",
+    "opportunityHasAvailableTeam": "83f2f9dfdfed9bd4ec07e07c411884841ad6d61b9f0c269745c96cbefcdea7fb"
+  }
+}

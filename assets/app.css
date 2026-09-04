@@ -2424,28 +2424,6 @@ textarea:focus {
   border-color: #f0d38a;
 }
 
-.saved-panel {
-  margin: 0 0 14px;
-  scroll-margin-top: 128px;
-  border: 1px solid #e3e7ec;
-  border-radius: 12px;
-  background: #fff;
-}
-
-.saved-panel > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 16px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.saved-body {
-  padding: 0 16px 14px;
-}
-
 .saved-storage-status {
   margin: 0.65rem 0 0;
   font-weight: 700;
@@ -2480,16 +2458,6 @@ textarea:focus {
   border: 1px solid #c9d9ee;
   border-radius: 12px;
   background: linear-gradient(135deg, #f5f9ff, #fffdf3);
-}
-
-.saved-panel > summary #alert-panel-summary {
-  min-width: 9rem;
-  text-align: center;
-}
-
-.saved-panel.alert-ready > summary #alert-panel-summary {
-  color: #0b5d3b;
-  background: #e7f7ef;
 }
 
 .profile-search-alert .eyebrow {
@@ -4555,4 +4523,19 @@ body.chat-expanded .result-assistant.needs-chat-key .chat {
   border: 1px solid var(--line, #d6dde6);
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* Stage 1 results controls keep their existing state owners. */
+.results-toolbar { scroll-margin-top: 100px; gap: 10px; }
+.results-toolbar .toolbar-actions { display: flex; flex-direction: row; flex-wrap: wrap; align-items: end; gap: 8px; }
+.results-toolbar .toolbar-actions > .button { width: auto; }
+.results-toolbar .toolbar-controls { margin-right: auto; }
+.team-ready-filter[hidden] { display: none; }
+.team-ready-filter[aria-pressed="true"] { color: #001e5f; background: #ffd82b; border-color: #b39713; }
+.card-actions { align-items: center; }
+@media (max-width: 540px) {
+  .results-toolbar .toolbar-controls { flex: 1 1 100%; }
+  .results-toolbar .toolbar-controls label, .results-toolbar .toolbar-controls select { width: 100%; }
+  .card-actions { display: flex; flex-wrap: wrap; }
+  .card-actions > .source-action { width: auto; }
 }

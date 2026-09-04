@@ -9,30 +9,15 @@ test.beforeEach(async ({ page }) => {
   mockHybrid(page);
 });
 
-test("search lands on saved opportunities with all three blue result actions visible", async ({ page }) => {
+test("search lands on compact results with utilities reachable through More", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openFundingFinder(page);
   await runFundingSearch(page, "catalysis");
-
-  await expect.poll(() => page.locator("#saved-panel").evaluate(element => {
-    const top = Math.round(element.getBoundingClientRect().top);
-    return top >= 72 && top <= 90;
-  })).toBe(true);
-  const geometry = await page.evaluate(() => {
-    const saved = document.querySelector("#saved-panel").getBoundingClientRect();
-    const toolbar = document.querySelector("#results-toolbar").getBoundingClientRect();
-    return {
-      savedTop: saved.top,
-      toolbarTop: toolbar.top,
-      toolbarBottom: toolbar.bottom,
-      viewportHeight: window.innerHeight,
-    };
-  });
-  expect(geometry.toolbarTop).toBeGreaterThanOrEqual(geometry.savedTop);
-  expect(geometry.toolbarBottom).toBeLessThanOrEqual(geometry.viewportHeight);
-  await expect(page.locator("#export-csv")).toHaveClass(/\bprimary\b/);
-  await expect(page.locator("#filter-team-ready")).toHaveClass(/\bprimary\b/);
-  await expect(page.locator("#open-results-chat")).toHaveClass(/\bprimary\b/);
+  await expect(page.locator("#personal-workspace")).not.toHaveAttribute("open", "");
+  await expect(page.locator("#open-results-chat")).toHaveText("Ask AI");
+  await expect(page.locator("#filter-team-ready")).toHaveText("Team options only");
+  await page.locator('[data-shell-menu="results"]').click();
+  await expect(page.locator("#export-csv")).toBeVisible();
   await expect(page.locator("#export-ics")).toHaveCount(0);
 });
 

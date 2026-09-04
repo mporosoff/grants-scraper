@@ -10,6 +10,7 @@
   if (!menu || !header) return;
 
   function setOpen(open, returnFocus = false) {
+    if (!open) globalThis.SiteShell?.closeMenu({ restoreFocus: false });
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
     menu.classList.toggle("is-open", open);
@@ -21,6 +22,7 @@
   });
 
   menu.addEventListener("click", event => {
+    if (event.target.closest("[data-shell-menu]")) return;
     if (event.target.closest("a, button")) setOpen(false);
   });
 
@@ -36,7 +38,7 @@
     }
   });
 
-  const desktop = globalThis.matchMedia?.("(min-width: 821px)");
+  const desktop = globalThis.matchMedia?.("(min-width: 1221px)");
   desktop?.addEventListener?.("change", event => {
     if (event.matches) setOpen(false);
   });

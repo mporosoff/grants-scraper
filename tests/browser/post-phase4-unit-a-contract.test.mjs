@@ -173,18 +173,15 @@ test("desktop aligns query, submit, and upload while tablet and smaller widths s
   assert.match(tablet, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
   assert.match(tablet, /\.nofo-upload-button \{[\s\S]*?order: 1;[\s\S]*?width: 100%;/);
   assert.match(tablet, /\.find-button \{[\s\S]*?order: 2;[\s\S]*?width: 100%;/);
-  const mobile = styles.slice(styles.lastIndexOf("@media (max-width: 540px)"));
+  const mobile = styles;
   assert.match(mobile, /\.ai-refine-actions \{[\s\S]*?flex-direction: column;/);
 });
 
-test("saved opportunities and email alerts share one panel without revealing saved notes after a search", () => {
+test("saved opportunities and current-search alerts share Workspace outside the result stream", () => {
   const $ = load(page);
-  assert.equal($("#alerts-panel").length, 0);
-  assert.equal($("#saved-panel .profile-search-alert").length, 1);
-  assert.equal($("#saved-panel").closest("form").length, 0, "saved items and alerts stay outside search configuration");
-  assert.match($("#saved-panel > summary strong").text(), /Saved opportunities and email alerts/);
-  assert.match(app, /const panel = \$\("saved-panel"\)/);
-  assert.match(styles, /\.saved-panel\.alert-ready > summary #alert-panel-summary/);
-  assert.doesNotMatch(app, /panel\.open = true/);
-  assert.doesNotMatch(app, /savedSearchAlertIntroduced/);
+  assert.equal($("#personal-workspace .profile-search-alert").length, 1);
+  assert.equal($("#personal-workspace").closest("form, .results-column").length, 0);
+  assert.equal($("#personal-workspace").attr("open"), undefined);
+  assert.equal($("#saved-panel").length, 0);
+  assert.doesNotMatch(app, /savedSearchAlertIntroduced|alert-panel-summary/);
 });
