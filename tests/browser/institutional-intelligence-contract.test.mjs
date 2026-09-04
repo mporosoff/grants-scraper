@@ -395,7 +395,7 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   const initialPageIndex = preparedSource.indexOf("await requestSnapshotPage");
   const stageIndex = preparedSource.indexOf("stagedSnapshotResult(");
   assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
-  assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
+  assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*rehydrateWorkerSnapshot\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
   assert.match(preparedSource, /dodBrowserModule\(\)\.then[\s\S]*workerSnapshot[\s\S]*applyClientSnapshotOverlay\([\s\S]*clientSnapshotOverlay/);
   assert.match(appSource, /restoredClientSnapshotOverlay\([\s\S]*buildAwardRequest\(\{ \.\.\.state\.submitted[\s\S]*requestedSources\.includes\("DOD"\) && !returnedSources\.has\("DOD"\)[\s\S]*__clientSnapshotOverlay/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
@@ -430,6 +430,7 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.match(retrySource, /stagedSourceRetry\(source, previous[\s\S]*error\?\.code !== "snapshot_expired"[\s\S]*rebuildSubmittedSnapshotView\([\s\S]*stagedSourceRetry\(source, previous/);
   assert.match(retrySource, /stagedSourceRetry\([\s\S]*successorOverlay[\s\S]*clientSnapshotOverlay: successorOverlay/);
   assert.match(retrySource, /stagedHybridSourceRetry\([\s\S]*sources: \[source\][\s\S]*replaceHybridSnapshotSource\(/);
+  assert.match(retrySource, /source === "DOD"[\s\S]*rehydrateWorkerSnapshot\([\s\S]*snapshot: hydratedBaseSnapshot/);
   assert.match(retrySource, /if \(state\.localSnapshot \|\| \(state\.clientSnapshotOverlay && source === "DOD"\)\)/);
   assert.match(retrySource, /const retryIsCurrent = \(\)[\s\S]*state\.snapshot\?\.snapshot_id === previous[\s\S]*if \(!retryIsCurrent\(\)\) return;[\s\S]*commitSnapshotResult\(result\.staged/);
   assert.doesNotMatch(retrySource, /preparedSnapshotSearch\(\{ request, submitted/);

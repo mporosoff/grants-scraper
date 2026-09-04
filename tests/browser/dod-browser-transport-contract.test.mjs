@@ -9,10 +9,11 @@ import {
   localSnapshotPage,
   mergeSearchPayload,
   persistLocalSnapshot,
+  rehydrateWorkerSnapshot,
   replaceHybridSnapshotSource,
   searchDodFromBrowser,
 } from "../../assets/dod-awards-browser.mjs";
-import { buildAwardSnapshot, publicSnapshot } from "../../workers/award-api/src/snapshot.js";
+import { buildAwardSnapshot, publicSnapshot, snapshotPage, snapshotSourceBatch } from "../../workers/award-api/src/snapshot.js";
 
 const root = new URL("../../", import.meta.url);
 const [searchFixture, detailFixture, rorFixture] = await Promise.all([
@@ -353,6 +354,72 @@ test("hybrid source replacement changes only the retried source and retains succ
   ]);
   assert.equal(successor.snapshot.awards.some(award => award.award_id === "2605508"), false);
   assert.equal(successor.snapshot.sources.find(source => source.source === "DOD").status, "complete");
+});
+
+test("worker snapshots rehydrate every retained award before initial and restored hybrid conversion", async () => {
+  const sourceAwards = Array.from({ length: 31 }, (_, index) => ({
+    ...nsfAward(),
+    award_id: `26055${String(index).padStart(2, "0")}`,
+    source_record_ids: [`26055${String(index).padStart(2, "0")}`],
+    title: `NSF project ${index + 1}`,
+    source_provenance: {
+      ...nsfAward().source_provenance,
+      source_record_id: `26055${String(index).padStart(2, "0")}`,
+    },
+  }));
+  const workerFull = buildAwardSnapshot({
+    snapshotId: "1".repeat(64),
+    queryId: "2".repeat(64),
+    asOf: "2026-09-04T12:00:00.000Z",
+    request: { sources: ["NSF"], criteria: { topic: "light" } },
+    sourcePayloads: {
+      NSF: {
+        source: "NSF",
+        adapter_version: "1.0.0",
+        retrieved_at: "2026-09-04T12:00:00.000Z",
+        total_count: sourceAwards.length,
+        has_more: false,
+        safety_bound_reached: false,
+        results: sourceAwards,
+      },
+    },
+  });
+  const request = { sources: ["NSF", "DOD"], criteria: { topic: "light" } };
+  const loadOffsets = [];
+  const loadBatch = async ({ snapshotId, source, offset }) => {
+    assert.equal(snapshotId, workerFull.snapshot_id);
+    loadOffsets.push(offset);
+    return snapshotSourceBatch(workerFull, { source, offset, facet: { type: "all", key: "" } });
+  };
+
+  const fromInitial = await rehydrateWorkerSnapshot({ snapshot: publicSnapshot(workerFull), request, loadBatch });
+  assert.deepEqual(loadOffsets, [25]);
+  assert.equal(fromInitial.awards.length, 31);
+  assert.deepEqual(fromInitial.request.sources, ["NSF", "DOD"]);
+
+  loadOffsets.length = 0;
+  const restoredPage = snapshotPage(workerFull, { page: 1, pageSize: 10, facet: { type: "all", key: "" } });
+  const fromRestoredPage = await rehydrateWorkerSnapshot({ snapshot: restoredPage, request, loadBatch });
+  assert.deepEqual(loadOffsets, [0, 25]);
+  assert.equal(fromRestoredPage.awards.length, 31);
+  assert.deepEqual(fromRestoredPage.request.sources, ["NSF", "DOD"]);
+
+  const dod = await searchDodFromBrowser({ award_id: "FA9550261B195" }, {
+    limit: 25,
+    scanAll: true,
+    fetchImpl: fixtureFetch(),
+    now: fixedNow,
+  });
+  const hybrid = await createHybridSnapshot({ request, workerSnapshot: fromRestoredPage, dodPayload: dod });
+  assert.equal(hybrid.snapshot.awards.length, 32);
+  assert.deepEqual(hybrid.snapshot.sources.map(source => [source.source, source.result_count]), [["NSF", 31], ["DOD", 1]]);
+  const restoredRetrySuccessor = await replaceHybridSnapshotSource({
+    snapshot: fromRestoredPage,
+    source: "DOD",
+    sourcePayload: dod,
+  });
+  assert.equal(restoredRetrySuccessor.snapshot.awards.length, 32);
+  assert.deepEqual(restoredRetrySuccessor.snapshot.sources.map(source => [source.source, source.result_count]), [["NSF", 31], ["DOD", 1]]);
 });
 
 test("hybrid snapshots are session-restorable without becoming shared server snapshots", async () => {

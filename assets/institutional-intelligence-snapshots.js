@@ -9,7 +9,7 @@
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
   if (!core || !awardProduct || !api || !credentials || !$(`institutional-intelligence`)) return;
-  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904", document.baseURI).href;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904-r2", document.baseURI).href;
 
   const state = {
     selectedInstitution: null,
@@ -931,7 +931,19 @@
       });
     }
     const { dod, payload: dodPayload } = dodResult.value;
-    const hybrid = await dod.createHybridSnapshot({ request, workerSnapshot, dodPayload });
+    const hydratedWorkerSnapshot = workerSnapshot
+      ? await dod.rehydrateWorkerSnapshot({
+        snapshot: workerSnapshot,
+        request,
+        loadBatch: ({ snapshotId, source, offset }) => postJson(api.snapshotBatchUrl, {
+          snapshot_id: snapshotId,
+          source,
+          offset,
+          facet: { type: "all", key: "" },
+        }, controller),
+      })
+      : null;
+    const hybrid = await dod.createHybridSnapshot({ request, workerSnapshot: hydratedWorkerSnapshot, dodPayload });
     dod.persistLocalSnapshot(hybrid.snapshot);
     const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
       page: 1,
@@ -1127,22 +1139,47 @@
     const dod = await dodBrowserModule();
     let sourcePayload = null;
     let sourceSnapshot = null;
+    let hydratedBaseSnapshot = baseSnapshot;
     if (source === "DOD") {
-      sourcePayload = await dod.searchDodFromBrowser(request.criteria, {
-        limit: 25,
-        offset: 0,
-        scanAll: true,
-        selectedInstitution: state.selectedInstitution,
-        signal: controller.signal,
-      });
+      [sourcePayload, hydratedBaseSnapshot] = await Promise.all([
+        dod.searchDodFromBrowser(request.criteria, {
+          limit: 25,
+          offset: 0,
+          scanAll: true,
+          selectedInstitution: state.selectedInstitution,
+          signal: controller.signal,
+        }),
+        Array.isArray(baseSnapshot?.awards)
+          ? Promise.resolve(baseSnapshot)
+          : dod.rehydrateWorkerSnapshot({
+            snapshot: baseSnapshot,
+            request,
+            loadBatch: ({ snapshotId, source: workerSource, offset }) => postJson(api.snapshotBatchUrl, {
+              snapshot_id: snapshotId,
+              source: workerSource,
+              offset,
+              facet: { type: "all", key: "" },
+            }, controller),
+          }),
+      ]);
     } else {
-      sourceSnapshot = await postJson(api.snapshotUrl, {
+      const freshSourceSnapshot = await postJson(api.snapshotUrl, {
         sources: [source],
         criteria: request.criteria,
       }, controller);
+      sourceSnapshot = await dod.rehydrateWorkerSnapshot({
+        snapshot: freshSourceSnapshot,
+        request: { ...request, sources: [source] },
+        loadBatch: ({ snapshotId, source: workerSource, offset }) => postJson(api.snapshotBatchUrl, {
+          snapshot_id: snapshotId,
+          source: workerSource,
+          offset,
+          facet: { type: "all", key: "" },
+        }, controller),
+      });
     }
     const hybrid = await dod.replaceHybridSnapshotSource({
-      snapshot: baseSnapshot,
+      snapshot: hydratedBaseSnapshot,
       source,
       sourceSnapshot,
       sourcePayload,

@@ -348,6 +348,71 @@ function sourcePayloadFromSnapshot(snapshot, source) {
   };
 }
 
+function hydrationFailure(code = "invalid_snapshot_rehydration") {
+  const error = new Error(code);
+  error.code = code;
+  return error;
+}
+
+export async function rehydrateWorkerSnapshot({ snapshot, request, loadBatch } = {}) {
+  const snapshotId = clean(snapshot?.snapshot_id, 100);
+  const requestedSources = Array.isArray(request?.sources)
+    ? request.sources.map(source => clean(source, 10).toUpperCase()).filter(source => SOURCE_NAMES.includes(source))
+    : [];
+  const workerSources = requestedSources.filter(source => source !== DOD_SOURCE);
+  if (!snapshot || !snapshotId || !requestedSources.length) throw hydrationFailure();
+  const hydratedRequest = {
+    ...(snapshot.request || {}),
+    ...(request || {}),
+    sources: requestedSources,
+    criteria: { ...(snapshot.request?.criteria || {}), ...(request?.criteria || {}) },
+  };
+  if (Array.isArray(snapshot.awards)) return { ...snapshot, request: hydratedRequest };
+
+  const sourceStates = new Map((snapshot.sources || []).map(state => [clean(state?.source, 10).toUpperCase(), state]));
+  const initialBatches = Array.isArray(snapshot.initial_batches) ? snapshot.initial_batches : [];
+  const awardsBySource = await Promise.all(workerSources.map(async source => {
+    const sourceState = sourceStates.get(source);
+    if (!sourceState) throw hydrationFailure();
+    if (["unavailable", "rate_limited", "unsupported"].includes(sourceState.status)) return [];
+    const expectedCount = Number(sourceState.result_count);
+    if (!Number.isInteger(expectedCount) || expectedCount < 0) throw hydrationFailure();
+    if (!expectedCount) return [];
+
+    const results = [];
+    let offset = 0;
+    const acceptBatch = batch => {
+      const batchSource = clean(batch?.source, 10).toUpperCase();
+      const batchSnapshotId = clean(batch?.snapshot_id, 100);
+      const batchOffset = Number(batch?.offset);
+      const loadedThrough = Number(batch?.loaded_through);
+      const batchResults = Array.isArray(batch?.results) ? batch.results : null;
+      if (batchSnapshotId !== snapshotId || batchSource !== source || batchOffset !== offset
+          || !Number.isInteger(loadedThrough) || loadedThrough <= offset || !batchResults
+          || loadedThrough !== offset + batchResults.length || loadedThrough > expectedCount) {
+        throw hydrationFailure();
+      }
+      results.push(...batchResults);
+      offset = loadedThrough;
+      if (batch.additional_available !== (offset < expectedCount)) throw hydrationFailure();
+    };
+
+    const initial = initialBatches.find(batch => clean(batch?.source, 10).toUpperCase() === source && Number(batch?.offset) === 0);
+    if (initial) acceptBatch(initial);
+    while (offset < expectedCount) {
+      if (typeof loadBatch !== "function") throw hydrationFailure();
+      acceptBatch(await loadBatch({ snapshotId, source, offset }));
+    }
+    return results;
+  }));
+
+  return {
+    ...snapshot,
+    request: hydratedRequest,
+    awards: awardsBySource.flat(),
+  };
+}
+
 async function sha256Hex(value) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");

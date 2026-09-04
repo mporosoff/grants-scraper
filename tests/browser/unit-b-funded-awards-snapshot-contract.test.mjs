@@ -388,7 +388,7 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   const alertStylesReleaseKey = "ui-runtime-20260903";
   const dodReleaseKey = "dod-awards-20260903";
   const dodStatusReleaseKey = "dod-awards-20260904";
-  const dodBrowserReleaseKey = "dod-browser-20260904";
+  const dodBrowserReleaseKey = "dod-browser-20260904-r2";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   for (const asset of [
     "alerts.js",
