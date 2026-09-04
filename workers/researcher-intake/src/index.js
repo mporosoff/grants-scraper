@@ -158,11 +158,19 @@ async function currentFacultyMatches(env, fetchImpl) {
 function normalized(value) {
   return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
+function identityNameKey(value) {
+  return String(value || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\p{M}]+/gu, " ")
+    .trim();
+}
 function sourceIdentityKey(value) {
   try {
     const parsed = new URL(String(value || ""));
     parsed.hash = "";
-    return `${parsed.hostname.toLocaleLowerCase()}${parsed.pathname.replace(/\/+$/, "") || "/"}${parsed.search}`;
+    return `${parsed.host.toLocaleLowerCase()}${parsed.pathname.replace(/\/+$/, "") || "/"}${parsed.search}`;
   } catch {
     return "";
   }
@@ -170,7 +178,7 @@ function sourceIdentityKey(value) {
 export function duplicateCandidates(directory, detail) {
   if (!directory) return [];
   const profile = detail.proposed_profile || {};
-  const name = normalized(profile.display_name);
+  const names = new Set([profile.display_name, ...(profile.aliases || [])].map(identityNameKey).filter(Boolean));
   const researchers = directory.researchers || [];
   const sourceOwners = new Map();
   for (const researcher of researchers) {
@@ -184,7 +192,7 @@ export function duplicateCandidates(directory, detail) {
   return researchers.map(researcher => {
     if (detail.researcher_id && researcher.id === detail.researcher_id) return null;
     const reasons = [];
-    if (name && [researcher.name, ...(researcher.aliases || [])].map(normalized).includes(name)) reasons.push("same_name");
+    if ([researcher.name, ...(researcher.aliases || [])].map(identityNameKey).some(name => names.has(name))) reasons.push("same_name");
     if (profile.orcid_id && profile.orcid_id === researcher.orcid_id) reasons.push("same_orcid");
     if ((researcher.source_urls || []).map(sourceIdentityKey).some(source => uniqueSources.has(source))) reasons.push("same_unique_source");
     return reasons.length ? { researcher_id: researcher.id, display_name: researcher.name, reasons } : null;

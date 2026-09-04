@@ -289,6 +289,34 @@ test("identity review ignores the selected profile and shared directory links bu
     submission_type: "new_researcher_nomination", researcher_id: null,
     proposed_profile: { display_name: "A. King", orcid_id: "", source_urls: ["https://example.edu/ada#research"] },
   }), [{ researcher_id: current.id, display_name: current.name, reasons: ["same_unique_source"] }]);
+  assert.deepEqual(duplicateCandidates(directory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: {
+      display_name: "A Different Person", aliases: ["Augusta Ada King"],
+      orcid_id: "", source_urls: ["https://new.example/person"],
+    },
+  }), [{ researcher_id: current.id, display_name: current.name, reasons: ["same_name"] }]);
+
+  const unicodeDirectory = { researchers: [{
+    id: "urh-000061", name: "李雷", aliases: [], orcid_id: "", source_urls: ["https://example.cn/li-lei"],
+  }] };
+  assert.deepEqual(duplicateCandidates(unicodeDirectory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "李雷", aliases: [], orcid_id: "", source_urls: ["https://new.example/li"] },
+  }), [{ researcher_id: "urh-000061", display_name: "李雷", reasons: ["same_name"] }]);
+
+  const defaultPortDirectory = { researchers: [{
+    id: "urh-000062", name: "Port Example", aliases: [], orcid_id: "", source_urls: ["https://example.edu/path"],
+  }] };
+  assert.deepEqual(duplicateCandidates(defaultPortDirectory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "Different Name", aliases: [], orcid_id: "", source_urls: ["https://example.edu:8443/path"] },
+  }), []);
+  defaultPortDirectory.researchers[0].source_urls = ["https://example.edu:8443/path"];
+  assert.deepEqual(duplicateCandidates(defaultPortDirectory, {
+    submission_type: "new_researcher_nomination", researcher_id: null,
+    proposed_profile: { display_name: "Different Name", aliases: [], orcid_id: "", source_urls: ["https://example.edu:8443/path#bio"] },
+  }), [{ researcher_id: "urh-000062", display_name: "Port Example", reasons: ["same_unique_source"] }]);
 });
 
 test("administrator assets present a bounded review and a full action outcome", () => {
@@ -351,6 +379,12 @@ test("publication retries revalidate corrected approvals against the live regist
   await assert.rejects(
     validateApprovalAgainstCurrentRegistry(current, {
       ...approvedProfile, display_name: otherProfile.name, sort_name: "Hopper, Grace", orcid_id: "",
+    }, env, fetchImpl),
+    error => error.code === "identity_conflict" && /conflicts with an existing researcher identity/.test(error.message),
+  );
+  await assert.rejects(
+    validateApprovalAgainstCurrentRegistry(current, {
+      ...approvedProfile, aliases: [otherProfile.name], orcid_id: "",
     }, env, fetchImpl),
     error => error.code === "identity_conflict" && /conflicts with an existing researcher identity/.test(error.message),
   );
