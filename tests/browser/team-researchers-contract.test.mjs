@@ -78,7 +78,7 @@ test("wires the researcher picker and governed missing-researcher handoff into a
   assert.match(teamPage, /id="researcher-picker"/);
   assert.match(teamPage, /id="researcher-choice"/);
   assert.match(teamPage, /id="choose-researcher"/);
-  assert.match(teamPage, /id="missing-researcher"[^>]+faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(teamPage, /<button class="missing-researcher-button" id="missing-researcher" type="button">/);
   assert.match(teamPage, /id="remove-saved-researcher"/);
   assert.doesNotMatch(teamPage, /id="external-researcher-form"|id="external-orcid"|assets\/orcid\.js|assets\/researcher-intake\.js/);
   assert.match(teamPage, /assets\/team-researchers\.js/);
@@ -139,9 +139,12 @@ test("opens an accessible bounded faculty combobox", () => {
 });
 
 test("the missing-researcher path opens Configure with add mode selected", () => {
-  assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
+  assert.match(teamPage, /id="missing-researcher" type="button"/);
+  assert.doesNotMatch(teamPage, /id="missing-researcher"[^>]+href=/);
   assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: selected\.slice\(0, MAX - 1\)\.map\(teamMemberIdentity\)/);
-  assert.match(teamPage, /params\.get\("handoff"\) === "1"[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\)\)[\s\S]*?TEAM_API\.clearHandoff\(safeHandoffStorage\(\)\)/);
+  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
+  assert.match(teamPage, /params\.get\("handoff"\) === "1"[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\)\)[\s\S]*?finishTeamHandoff\(\)/);
+  assert.match(teamPage, /function finishTeamHandoff\(\)[\s\S]*?clearHandoff[\s\S]*?saveTeamHistory\(\)[\s\S]*?searchParams\.delete\("handoff"\)[\s\S]*?history\.replaceState\(history\.state/);
   assert.doesNotMatch(teamPage, /params\.get\("locals?"\)|[?&]locals?=/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);

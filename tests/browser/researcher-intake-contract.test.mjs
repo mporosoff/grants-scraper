@@ -47,7 +47,7 @@ test("Configure Faculty Interests discloses separate reviewed and browser-only p
   assert.match(page, /assets\/orcid\.js/);
   assert.match(page, /assets\/team-researchers\.js/);
   assert.match(page, /assets\/researcher-intake\.js/);
-  assert.match(team, /faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(team, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.match(team, /id="remove-saved-researcher"/);
   assert.doesNotMatch(team, /external-researcher-form|assets\/researcher-intake\.js/);
   assert.doesNotMatch(team, /funding-finder-researchers\.urochestercheme\.workers\.dev/);

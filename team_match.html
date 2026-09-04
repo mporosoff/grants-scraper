@@ -234,7 +234,7 @@
         <section class="researcher-path" aria-labelledby="missing-researcher-heading">
           <h3 id="missing-researcher-heading">Add a missing researcher</h3>
           <p>Request catalog review or create a browser-only profile for Team Match.</p>
-          <a class="missing-researcher-button" id="missing-researcher" href="./faculty_interests.html?mode=add&amp;return=team_match">Configure a missing researcher</a>
+          <button class="missing-researcher-button" id="missing-researcher" type="button">Configure a missing researcher</button>
         </section>
       </div>
       <div class="saved-researcher-row" id="saved-researcher-row" hidden>
@@ -1365,13 +1365,23 @@
   }
 
   function prepareMissingResearcherHandoff() {
-    if (!TEAM_API) return;
-    var result = TEAM_API.saveHandoff(safeHandoffStorage(), {
-      selectedIdentities: selected.slice(0, MAX - 1).map(teamMemberIdentity)
-    });
-    if (!result.saved) {
-      renderExternalStatus("Your current team could not be carried through Configure in this tab. Saved researchers will remain available in Team Match.", true);
+    if (TEAM_API) {
+      var result = TEAM_API.saveHandoff(safeHandoffStorage(), {
+        selectedIdentities: selected.slice(0, MAX - 1).map(teamMemberIdentity)
+      });
+      if (!result.saved) {
+        renderExternalStatus("Your current team could not be carried through Configure in this tab. Saved researchers will remain available in Team Match.", true);
+      }
     }
+    location.assign("./faculty_interests.html?mode=add&return=team_match");
+  }
+
+  function finishTeamHandoff() {
+    TEAM_API.clearHandoff(safeHandoffStorage());
+    saveTeamHistory();
+    var cleanUrl = new URL(location.href);
+    cleanUrl.searchParams.delete("handoff");
+    history.replaceState(history.state, "", cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
   }
   function btnId(n) { return n.replace(/[^a-z0-9]/gi, ""); }
 
@@ -1443,7 +1453,7 @@
       recentlyAddedMember = localKey;
       renderExternalStatus(profile.name + " was stored in this browser and added to the team.", false);
     }
-    TEAM_API.clearHandoff(safeHandoffStorage());
+    finishTeamHandoff();
   }
 
   async function init() {

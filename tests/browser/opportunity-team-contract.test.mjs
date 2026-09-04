@@ -318,13 +318,14 @@ test("Team Match exposes directory and governed missing-researcher paths", () =>
   assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
   assert.match(teamPage, /id="faculty-suggestions" role="listbox"/);
   assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
-  assert.match(teamPage, /id="missing-researcher"/);
-  assert.match(teamPage, /faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(teamPage, /id="missing-researcher" type="button"/);
+  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.match(teamPage, /OPPORTUNITY_TEAM_API\.searchFaculty/);
   assert.match(teamPage, /pool_state === "unadmitted"/);
   assert.match(teamPage, /Standby - one retained capability/);
   assert.doesNotMatch(teamPage, /ORCID_API|external-researcher-form|researcher-intake\.js/);
   assert.match(teamPage, /selected\.length >= MAX/);
   assert.match(teamPage, /applyProposedTeamFromUrl/);
-  assert.match(teamPage, /params\.get\("local"\)/);
+  assert.match(teamPage, /params\.get\("handoff"\)/);
+  assert.doesNotMatch(teamPage, /params\.get\("locals?"\)|[?&]locals?=/);
 });
