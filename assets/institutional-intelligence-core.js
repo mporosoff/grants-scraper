@@ -183,6 +183,9 @@
         throw new Error("All available years cannot include custom year bounds.");
       }
       if (yearStart && yearEnd && yearEnd < yearStart) throw new Error("The ending year must be the same as or later than the starting year.");
+      if (yearStart && yearEnd && yearEnd - yearStart + 1 > 50) {
+        throw new Error("Choose a year range of 50 years or fewer.");
+      }
       return { sources: [poSource], criteria, limit: Math.min(25, Math.max(1, Number(limit) || 10)), offset: 0 };
     }
     const sources = sourcesForAgency(agency);

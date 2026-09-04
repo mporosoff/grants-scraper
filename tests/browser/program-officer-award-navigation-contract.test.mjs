@@ -175,6 +175,16 @@ test("Program Officer request, URL, and immutable recent-five-year restoration p
     program_contact_key: key,
     year_preset: "all",
   }), /identity is invalid/);
+  const customRange = {
+    mode: "program_officer",
+    program_officer_source: "NSF",
+    program_officer_display_name: "Doe, Jane A., Jr.",
+    program_contact_key: key,
+    year_preset: "custom",
+    year_start: 1989,
+  };
+  assert.equal(core.buildAwardRequest({ ...customRange, year_end: 2038 }).criteria.year_end, 2038, "a 50-year custom range remains valid");
+  assert.throws(() => core.buildAwardRequest({ ...customRange, year_end: 2039 }), /50 years or fewer/);
   assert.equal(validateSnapshotCreate({
     sources: ["DOD"],
     criteria: {
