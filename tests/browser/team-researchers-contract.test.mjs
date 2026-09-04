@@ -26,7 +26,16 @@ function assignmentJson(source) {
 }
 
 function loadApis() {
-  const context = { globalThis: {} };
+  const context = {
+    globalThis: {
+      crypto: {
+        getRandomValues(bytes) {
+          bytes.fill(0x7a);
+          return bytes;
+        },
+      },
+    },
+  };
   vm.runInNewContext(querySource, context);
   vm.runInNewContext(retrievalSource, context);
   vm.runInNewContext(teamSource, context);
@@ -141,10 +150,11 @@ test("opens an accessible bounded faculty combobox", () => {
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /id="missing-researcher" type="button"/);
   assert.doesNotMatch(teamPage, /id="missing-researcher"[^>]+href=/);
-  assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: selected\.slice\(0, MAX - 1\)\.map\(teamMemberIdentity\)/);
-  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
-  assert.match(teamPage, /params\.get\("handoff"\) === "1"[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\)\)[\s\S]*?finishTeamHandoff\(\)/);
-  assert.match(teamPage, /function finishTeamHandoff\(\)[\s\S]*?clearHandoff[\s\S]*?saveTeamHistory\(\)[\s\S]*?searchParams\.delete\("handoff"\)[\s\S]*?history\.replaceState\(history\.state/);
+  assert.match(teamPage, /function handoffSelectedIdentities\(\)[\s\S]*?teamHistoryRestoreDeferred[\s\S]*?saved\.selectedIdentities/);
+  assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: handoffSelectedIdentities\(\)/);
+  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match&handoff=" \+ encodeURIComponent\(result\.handoff\.token\)\)/);
+  assert.match(teamPage, /var handoffToken = String\(params\.get\("handoff"\)[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\), handoffToken\)[\s\S]*?finishTeamHandoff\(handoffToken\)/);
+  assert.match(teamPage, /function finishTeamHandoff\(handoffToken\)[\s\S]*?clearHandoff\(safeHandoffStorage\(\), handoffToken\)[\s\S]*?saveTeamHistory\(\)[\s\S]*?searchParams\.delete\("handoff"\)[\s\S]*?history\.replaceState\(history\.state/);
   assert.doesNotMatch(teamPage, /params\.get\("locals?"\)|[?&]locals?=/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
@@ -202,6 +212,7 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
   assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
+  assert.match(teamPage, /function handoffSelectedIdentities\(\)[\s\S]*?history\.state\[TEAM_HISTORY_STATE_KEY\][\s\S]*?saved\.selectedIdentities\.slice\(0, MAX - 1\)/);
   assert.match(teamPage, /handoff\.selectedIdentities[\s\S]*?externalProfile\(handoff\.addedExternalId\)[\s\S]*?selected\.push\(localKey\)/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
   assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
@@ -272,6 +283,7 @@ test("keeps a bounded expiring team handoff in browser storage", () => {
   const storage = memoryStorage();
   const now = Date.parse("2026-09-04T12:00:00Z");
   const saved = team.saveHandoff(storage, {
+    token: "11".repeat(16),
     selectedIdentities: [
       { kind: "external", id: "ext-gate-four-researcher" },
       { kind: "directory", id: "urh-000005" },
@@ -284,22 +296,30 @@ test("keeps a bounded expiring team handoff in browser storage", () => {
   assert.deepEqual(Array.from(saved.handoff.selectedIdentities, identity => identity.kind), [
     "external", "directory", "faculty_name",
   ]);
+  assert.equal(saved.handoff.token, "11".repeat(16));
 
-  const completed = team.completeHandoff(storage, "ext-gate-five-researcher", now + 1_000);
+  const mismatched = team.completeHandoff(storage, "ext-wrong-navigation", "22".repeat(16), now + 500);
+  assert.equal(mismatched.saved, false);
+  assert.equal(team.loadHandoff(storage, "11".repeat(16), now + 750).handoff.addedExternalId, "");
+
+  const completed = team.completeHandoff(storage, "ext-gate-five-researcher", "11".repeat(16), now + 1_000);
   assert.equal(completed.saved, true);
-  assert.equal(team.loadHandoff(storage, now + 2_000).handoff.addedExternalId, "ext-gate-five-researcher");
-  assert.equal(team.clearHandoff(storage), true);
-  assert.equal(team.loadHandoff(storage, now + 2_000).handoff, null);
+  assert.equal(completed.handoff.token, "11".repeat(16));
+  assert.equal(team.loadHandoff(storage, "11".repeat(16), now + 2_000).handoff.addedExternalId, "ext-gate-five-researcher");
+  assert.equal(team.clearHandoff(storage, "11".repeat(16)), true);
+  assert.equal(team.loadHandoff(storage, "", now + 2_000).handoff, null);
 
-  const direct = team.completeHandoff(storage, "ext-standalone-researcher", now + 3_000);
+  team.saveHandoff(storage, { token: "33".repeat(16), selectedIdentities: [{ kind: "directory", id: "urh-000005" }] }, now + 2_500);
+  const direct = team.completeHandoff(storage, "ext-standalone-researcher", "", now + 3_000);
   assert.equal(direct.saved, true);
   assert.deepEqual(Array.from(direct.handoff.selectedIdentities), []);
+  assert.notEqual(direct.handoff.token, "33".repeat(16));
   assert.equal(team.clearHandoff(storage), true);
 
-  team.saveHandoff(storage, { selectedIdentities: [] }, now);
-  const expired = team.completeHandoff(storage, "ext-too-late-researcher", now + team.HANDOFF_TTL_MS + 1);
+  team.saveHandoff(storage, { token: "44".repeat(16), selectedIdentities: [] }, now);
+  const expired = team.completeHandoff(storage, "ext-too-late-researcher", "44".repeat(16), now + team.HANDOFF_TTL_MS + 1);
   assert.equal(expired.saved, false);
-  assert.match(expired.error, /unavailable or expired/);
+  assert.match(expired.error, /unavailable, expired, or belongs to another navigation/);
   assert.equal(storage.getItem(team.HANDOFF_STORAGE_KEY), null);
 });
 

@@ -319,7 +319,7 @@ test("Team Match exposes directory and governed missing-researcher paths", () =>
   assert.match(teamPage, /id="faculty-suggestions" role="listbox"/);
   assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
   assert.match(teamPage, /id="missing-researcher" type="button"/);
-  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
+  assert.match(teamPage, /location\.assign\("\.\/faculty_interests\.html\?mode=add&return=team_match&handoff=" \+ encodeURIComponent\(result\.handoff\.token\)\)/);
   assert.match(teamPage, /OPPORTUNITY_TEAM_API\.searchFaculty/);
   assert.match(teamPage, /pool_state === "unadmitted"/);
   assert.match(teamPage, /Standby - one retained capability/);

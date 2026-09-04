@@ -4,6 +4,7 @@
   const STORAGE_KEY = "funding-finder.external-researchers.v1";
   const HANDOFF_STORAGE_KEY = "funding-finder.team-handoff.v1";
   const HANDOFF_TTL_MS = 15 * 60 * 1000;
+  const HANDOFF_TOKEN_PATTERN = /^[a-f0-9]{32}$/;
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
@@ -172,10 +173,27 @@
     return output;
   }
 
+  function normalizeHandoffToken(value) {
+    const token = String(value || "").trim().toLowerCase();
+    return HANDOFF_TOKEN_PATTERN.test(token) ? token : "";
+  }
+
+  function createHandoffToken() {
+    try {
+      const bytes = new Uint8Array(16);
+      globalThis.crypto.getRandomValues(bytes);
+      return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+    } catch (_error) {
+      return "";
+    }
+  }
+
   function normalizeHandoff(value, now = Date.now()) {
     if (!value || typeof value !== "object") return null;
     const createdAt = Number(value.created_at);
     if (!Number.isFinite(createdAt) || createdAt > now + 60_000 || now - createdAt > HANDOFF_TTL_MS) return null;
+    const token = normalizeHandoffToken(value.token);
+    if (!token) return null;
     const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.added_external_id || ""))
       ? String(value.added_external_id)
       : "";
@@ -183,34 +201,49 @@
       selectedIdentities: normalizeHandoffIdentities(value.selected_identities),
       addedExternalId,
       createdAt,
+      token,
     };
   }
 
-  function loadHandoff(storage, now = Date.now()) {
+  function loadHandoff(storage, expectedToken = "", now = Date.now()) {
     try {
       if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
       const raw = storage.getItem(HANDOFF_STORAGE_KEY);
-      if (!raw) return { handoff: null, available: true, discarded: false, error: "" };
+      if (!raw) return { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
       const handoff = normalizeHandoff(JSON.parse(raw), now);
-      if (!handoff) storage.removeItem(HANDOFF_STORAGE_KEY);
-      return { handoff, available: true, discarded: !handoff, error: "" };
+      if (!handoff) {
+        storage.removeItem(HANDOFF_STORAGE_KEY);
+        return { handoff: null, available: true, discarded: true, mismatched: false, error: "" };
+      }
+      if (requestedToken && handoff.token !== requestedToken) {
+        return { handoff: null, available: true, discarded: false, mismatched: true, error: "" };
+      }
+      return { handoff, available: true, discarded: false, mismatched: false, error: "" };
     } catch (_error) {
-      return { handoff: null, available: false, discarded: false, error: "The browser-only team handoff could not be read in this tab." };
+      return { handoff: null, available: false, discarded: false, mismatched: false, error: "The browser-only team handoff could not be read in this tab." };
     }
   }
 
   function saveHandoff(storage, value = {}, now = Date.now()) {
     const selectedIdentities = normalizeHandoffIdentities(value.selectedIdentities);
+    const requestedToken = String(value.token || "");
+    const token = requestedToken ? normalizeHandoffToken(requestedToken) : createHandoffToken();
     const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.addedExternalId || ""))
       ? String(value.addedExternalId)
       : "";
-    const handoff = { selectedIdentities, addedExternalId, createdAt: now };
+    if (!token) return { handoff: null, saved: false, error: "The browser-only team handoff could not be secured in this tab." };
+    const handoff = { selectedIdentities, addedExternalId, createdAt: now, token };
     try {
       if (!storage) throw new Error("Storage unavailable");
       storage.setItem(HANDOFF_STORAGE_KEY, JSON.stringify({
         selected_identities: selectedIdentities,
         added_external_id: addedExternalId,
         created_at: now,
+        token,
       }));
       return { handoff, saved: true, error: "" };
     } catch (_error) {
@@ -218,21 +251,34 @@
     }
   }
 
-  function completeHandoff(storage, addedExternalId, now = Date.now()) {
-    const loaded = loadHandoff(storage, now);
-    if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
-    if (loaded.discarded) {
-      return { handoff: null, saved: false, error: "The browser-only team handoff is unavailable or expired." };
+  function completeHandoff(storage, addedExternalId, expectedToken = "", now = Date.now()) {
+    let loaded = { handoff: null, available: true, discarded: false, mismatched: false, error: "" };
+    if (expectedToken) {
+      loaded = loadHandoff(storage, expectedToken, now);
+      if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
+      if (loaded.discarded || loaded.mismatched || !loaded.handoff) {
+        return { handoff: null, saved: false, error: "The browser-only team handoff is unavailable, expired, or belongs to another navigation." };
+      }
+    } else if (!clearHandoff(storage)) {
+      return { handoff: null, saved: false, error: "The browser-only team handoff could not be reset in this tab." };
     }
     return saveHandoff(storage, {
       selectedIdentities: loaded.handoff ? loaded.handoff.selectedIdentities : [],
       addedExternalId,
+      token: loaded.handoff ? loaded.handoff.token : "",
     }, now);
   }
 
-  function clearHandoff(storage) {
+  function clearHandoff(storage, expectedToken = "") {
     try {
       if (!storage) throw new Error("Storage unavailable");
+      const requestedToken = normalizeHandoffToken(expectedToken);
+      if (expectedToken && !requestedToken) return false;
+      if (requestedToken) {
+        const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+        if (!raw) return true;
+        if (normalizeHandoffToken(JSON.parse(raw).token) !== requestedToken) return false;
+      }
       storage.removeItem(HANDOFF_STORAGE_KEY);
       return true;
     } catch (_error) {

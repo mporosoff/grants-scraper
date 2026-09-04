@@ -105,7 +105,12 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
-  expect(navigationUrls.filter(url => new URL(url).searchParams.get("handoff") === "1")).toHaveLength(2);
+  const handoffTokens = navigationUrls.map(url => new URL(url).searchParams.get("handoff")).filter(Boolean);
+  expect(handoffTokens).toHaveLength(4);
+  expect(handoffTokens.every(token => /^[a-f0-9]{32}$/.test(token))).toBe(true);
+  expect(handoffTokens[0]).toBe(handoffTokens[1]);
+  expect(handoffTokens[2]).toBe(handoffTokens[3]);
+  expect(handoffTokens[2]).not.toBe(handoffTokens[0]);
   expect(navigationUrls.some(url => /ext-gate-(?:four|five)-researcher|[?&]locals?=/.test(url))).toBe(false);
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });
