@@ -5,8 +5,8 @@ import test from "node:test";
 import { shellDom } from "../helpers/shell-dom.mjs";
 const shell = await readFile(new URL("../../assets/site-shell.js", import.meta.url), "utf8");
 const nav = await readFile(new URL("../../assets/site-nav.js", import.meta.url), "utf8");
-function fixture() {
-  const dom = shellDom(`<header class="site-header"><button id="hamburger" data-nav-toggle aria-controls="navigation" aria-expanded="false"></button><nav id="navigation"><button id="more" data-shell-menu="navigation" aria-controls="actions" aria-expanded="false">More</button><div id="actions" hidden><button id="route" data-workspace-open data-shell-focus="alert" data-shell-mirror="alert">Create alert</button><a id="link" href="./faculty_interests.html">Update researcher profile</a></div></nav><button id="workspace" data-workspace-open>Workspace</button></header><main id="results"><button id="card" data-card-more="one" data-shell-menu="card" aria-controls="site-action-list">More</button></main><dialog id="personal-workspace" data-shell-drawer><button id="close" data-workspace-close data-shell-initial-focus>Close</button><button id="alert" disabled>Alert</button></dialog><p id="status" data-shell-status="personal-workspace"></p><button id="outside">Outside</button>`);
+function fixture(options) {
+  const dom = shellDom(`<header class="site-header"><button id="hamburger" data-nav-toggle aria-controls="navigation" aria-expanded="false"></button><nav id="navigation"><button id="more" data-shell-menu="navigation" aria-controls="actions" aria-expanded="false">More</button><div id="actions" hidden><button id="route" data-workspace-open data-shell-focus="alert" data-shell-mirror="alert">Create alert</button><a id="link" href="./faculty_interests.html">Update researcher profile</a></div></nav><button id="workspace" data-workspace-open>Workspace</button></header><main id="results"><button id="card" data-card-more="one" data-shell-menu="card" aria-controls="site-action-list">More</button></main><dialog id="personal-workspace" data-shell-drawer><button id="close" data-workspace-close data-shell-initial-focus>Close</button><button id="alert" disabled>Alert</button></dialog><p id="status" data-shell-status="personal-workspace"></p><button id="outside">Outside</button>`, options);
   vm.createContext(dom.context);
   vm.runInContext(shell, dom.context);
   vm.runInContext(nav, dom.context);
@@ -35,6 +35,35 @@ test("nested mobile disclosure, Escape, outside click, Tab exit and terminal nav
   const count = [...dom.listeners.values()].reduce((n, entries) => n + entries.length, 0);
   vm.runInContext(shell, dom.context);
   assert.equal([...dom.listeners.values()].reduce((n, entries) => n + entries.length, 0), count);
+});
+
+test("without Popover support all dismissal paths hide menus and restore the appropriate focus", async () => {
+  const dom = fixture({ popover: false });
+  const closed = () => {
+    assert.equal(dom.get("actions").hidden, true);
+    assert.equal(dom.get("more").getAttribute("aria-expanded"), "false");
+  };
+  dom.click("more"); dom.esc(); closed();
+  assert.equal(dom.document.activeElement.id, "more");
+  dom.click("more"); dom.dispatch("pointerdown", dom.get("outside")); closed();
+  dom.click("more"); dom.get("outside").focus(); closed();
+  assert.equal(dom.document.activeElement.id, "outside");
+  dom.click("more"); dom.click("link"); closed();
+  dom.click("more"); dom.click("more"); closed();
+  dom.click("more"); dom.click("workspace"); closed();
+  dom.click("close");
+  dom.click("more"); dom.dispatch("scroll", dom.document.body); closed();
+  dom.context.SiteShell.registerMenu("card", () => [{ label: "Track", html: '<button id="watch">Alert</button>' }]);
+  dom.click("card"); dom.click("watch");
+  assert.equal(dom.document.activeElement.id, "card");
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(dom.get("watch"), null);
+  dom.click("card"); dom.dispatch("funding-finder:before-results-render", dom.document.body);
+  assert.equal(dom.get("site-action-list").hidden, true);
+  dom.click("card"); dom.get("card").remove(); dom.mutate();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(dom.get("site-action-list").hidden, true);
+  assert.equal(dom.get("watch"), null);
 });
 test("drawer alert route mirrors availability and returns to exact results opener, without another submission", () => {
   const dom = fixture();

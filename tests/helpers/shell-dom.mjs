@@ -1,6 +1,6 @@
 // Small DOM/event fixture for shell contracts; no browser or E2E runner.
 import { load } from "cheerio";
-export function shellDom(html) {
+export function shellDom(html, { popover = true } = {}) {
   const $ = load(html);
   const wrappers = new Map(), listeners = new Map(), observers = [];
   const windowListeners = [];
@@ -27,7 +27,11 @@ export function shellDom(html) {
       querySelectorAll: selector => $(node).find(selector).toArray().map(wrap),
       closest: selector => wrap($(node).closest(selector)[0]),
       contains: other => node === nodeOf(other) || $(nodeOf(other)).parents().toArray().includes(node),
-      matches: selector => selector === ":popover-open" ? !!node.popoverOpen : $(node).is(selector),
+      matches: selector => {
+        if (selector !== ":popover-open") return $(node).is(selector);
+        if (!popover) throw new SyntaxError("Unsupported pseudo-class :popover-open");
+        return !!node.popoverOpen;
+      },
       getClientRects: () => $(node).parents().addBack().toArray().some(parent => $(parent).attr("hidden") !== undefined) ? [] : [{}],
       getBoundingClientRect: () => el.rect || { left: 0, top: 0, right: 280, bottom: 200, width: 280, height: 200 },
       focus() { document.activeElement = el; dispatch("focusin", el); },
@@ -37,8 +41,10 @@ export function shellDom(html) {
       replaceChildren: (...values) => { $(node).empty(); el.append(...values); },
       insertAdjacentHTML: (_, value) => $(node).append(value),
       remove: () => $(node).remove(),
-      showPopover() { node.popoverOpen = true; },
-      hidePopover() { node.popoverOpen = false; },
+      ...(popover ? {
+        showPopover() { node.popoverOpen = true; },
+        hidePopover() { node.popoverOpen = false; },
+      } : {}),
       showModal() { $(node).attr("open", ""); },
       close() { $(node).removeAttr("open"); dispatch("close", el); },
       addEventListener(type, listener) { add(type, listener, false, el); },

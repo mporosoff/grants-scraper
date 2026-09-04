@@ -23,7 +23,9 @@
     const { opener, menu } = activeMenu;
     activeMenu = null;
     opener.setAttribute("aria-expanded", "false");
-    if (menu.matches(":popover-open")) menu.hidePopover();
+    // Legacy browsers use the fixed-position fallback and do not recognize
+    // :popover-open. Feature-detect before evaluating the native selector.
+    if (typeof menu.hidePopover === "function" && menu.matches(":popover-open")) menu.hidePopover();
     menu.hidden = true;
     if (restoreFocus) restore(opener);
     // Keep the activated node attached through event propagation so existing
