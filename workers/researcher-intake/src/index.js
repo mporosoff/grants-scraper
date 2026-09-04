@@ -949,7 +949,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
             fail("state_conflict", "Only an approved or failed publication can be retried.", 409);
           }
           const approvedProfile = await validateApprovalAgainstCurrentRegistry(current, body.approved_profile, env, fetchImpl);
-          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString(), approvedProfile);
+          const publishing = await store.markPublishing(current.submission_id, expectedRevision, actor, now().toISOString(), approvedProfile, reason);
           if (!publishing) fail("state_conflict", "The submission changed while you were reviewing it.", 409);
           try { await dispatchPublication(env, publishing, fetchImpl); }
           catch (error) {
@@ -959,7 +959,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
           }
           return json(200, {
             submission_id: publishing.submission_id, state: "publishing", revision: publishing.revision,
-            updated_at: publishing.updated_at, administrator_reason: reason,
+            updated_at: publishing.updated_at, administrator_reason: publishing.administrator_reason || "",
           });
         }
         if (body.action === "reconcile_publish") {

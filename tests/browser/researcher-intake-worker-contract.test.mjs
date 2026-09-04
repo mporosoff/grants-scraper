@@ -546,7 +546,7 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workerSource, /body\.action === "retry_publish"[\s\S]*validateApprovalAgainstCurrentRegistry\(current, body\.approved_profile/);
   assert.match(workerSource, /Start review before approving this request/);
   assert.match(workerSource, /fail\("identity_conflict"/);
-  assert.match(workerSource, /store\.markPublishing\(current\.submission_id, expectedRevision, actor, now\(\)\.toISOString\(\), approvedProfile\)/);
+  assert.match(workerSource, /store\.markPublishing\(current\.submission_id, expectedRevision, actor, now\(\)\.toISOString\(\), approvedProfile, reason\)/);
   assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
   assert.match(workerSource, /\["approved", "publication_failed"\]\.includes\(current\.state\)/);
@@ -701,10 +701,15 @@ test("an approved record can resume publication or rebase after a transient tran
   const correctedProfile = { display_name: "Ada Lovelace", orcid_id: "" };
   const retried = await normalStore.markPublishing(
     failed.submission_id, failed.revision, "admin@example.edu", "2026-09-03T12:03:40.000Z", correctedProfile,
+    "Retry after correcting the approved source",
   );
   assert.equal(retried.publication_target_pr_url, null);
   assert.equal(retried.publication_target_registry_generation, null);
+  assert.equal(retried.administrator_reason, "Retry after correcting the approved source");
   assert.deepEqual(JSON.parse(retried.approved_profile_json), correctedProfile);
+  const retryTransition = database.prepare(`SELECT reason FROM researcher_submission_transitions
+    WHERE submission_id = ? AND revision = ?`).get(retried.submission_id, retried.revision);
+  assert.equal(retryTransition.reason, "Retry after correcting the approved source");
 
   const stale = await approvedRecord("rs_eeeeeeeeeeeeeeeeeeeeeeee", "52345678-1234-4234-8234-123456789abc");
   const rebased = await normalStore.rebase({
