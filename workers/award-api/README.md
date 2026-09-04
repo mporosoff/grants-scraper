@@ -51,7 +51,10 @@ concurrent in groups of three, and cached on successful responses. If a detail
 record fails, the base search result remains available with honest null fields.
 Later USAspending result pages use stable Award ID ordering and are traversed
 sequentially with the paired continuation values returned by the preceding
-page; direct page jumps are not used.
+page; direct page jumps are not used. DoD offsets are applied after exact
+institution and normalized year validation. Up to 12 upstream pages may be
+inspected to fill the bounded first normalized snapshot page, while detail
+enrichment remains capped at 25 records with concurrency three.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other sources.

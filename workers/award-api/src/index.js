@@ -3,7 +3,15 @@ import { AwardSourceError } from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
-import { DOD_ADAPTER_VERSION, DOD_CAPABILITIES, searchDod } from "./adapters/dod.js";
+import {
+  DOD_ADAPTER_VERSION,
+  DOD_CAPABILITIES,
+  DOD_DETAIL_CONCURRENCY,
+  DOD_MAX_RESULTS,
+  DOD_MAX_UPSTREAM_PAGES,
+  DOD_UPSTREAM_PAGE_SIZE,
+  searchDod,
+} from "./adapters/dod.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
 import { AwardRateLimiter } from "./rate-limit.js";
@@ -29,10 +37,10 @@ const WORKER_RESOURCE_BUDGET = Object.freeze({
   configured_cpu_ms: 250,
   memory_mb: 128,
   platform_subrequests_per_request: 10_000,
-  maximum_snapshot_create_subrequests: 130,
+  maximum_snapshot_create_subrequests: 141,
   maximum_snapshot_create_cache_api_calls: 62,
-  maximum_snapshot_create_upstream_and_guard_subrequests: 67,
-  maximum_snapshot_create_subrequests_without_ror_resolution: 128,
+  maximum_snapshot_create_upstream_and_guard_subrequests: 78,
+  maximum_snapshot_create_subrequests_without_ror_resolution: 139,
 });
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
 const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
@@ -677,10 +685,12 @@ export function createHandler({
           NIH: { upstream_pages: 12, upstream_page_size: 100 },
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
           DOD: {
-            upstream_page_size: 25,
-            maximum_normalized_results: 25,
-            detail_concurrency: 3,
-            snapshot_behavior: "bounded-first-page",
+            upstream_pages: DOD_MAX_UPSTREAM_PAGES,
+            upstream_page_size: DOD_UPSTREAM_PAGE_SIZE,
+            maximum_normalized_results: DOD_MAX_RESULTS,
+            maximum_detail_requests: DOD_MAX_RESULTS,
+            detail_concurrency: DOD_DETAIL_CONCURRENCY,
+            snapshot_behavior: "bounded-first-normalized-page",
           },
         },
         source_capabilities: { DOD: DOD_CAPABILITIES },

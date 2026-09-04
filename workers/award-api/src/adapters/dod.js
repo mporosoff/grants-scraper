@@ -16,6 +16,7 @@ export const DOD_SEARCH_URL = "https://api.usaspending.gov/api/v2/search/spendin
 export const DOD_DETAIL_URL = "https://api.usaspending.gov/api/v2/awards";
 export const DOD_MAX_RESULTS = 25;
 export const DOD_UPSTREAM_PAGE_SIZE = 25;
+export const DOD_MAX_UPSTREAM_PAGES = 12;
 export const DOD_DETAIL_CONCURRENCY = 3;
 
 const DOD_AGENCY_NAME = "Department of Defense";
@@ -457,14 +458,21 @@ export async function searchDod(fetchImpl, criteria, {
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
   const retrievedAt = now().toISOString();
-  const lastPage = Math.floor((offset + limit - 1) / DOD_UPSTREAM_PAGE_SIZE) + 1;
+  const yearFilter = yearFilterDiagnostics(criteria);
+  const targetCount = scanAll ? DOD_MAX_RESULTS : offset + limit + 1;
+  const maximumPages = criteria.award_id ? 1 : DOD_MAX_UPSTREAM_PAGES;
   const firstRequest = buildDodRequest(criteria, { page: 1, now });
   if (!firstRequest) return emptyPayload(retrievedAt, criteria);
 
   const pages = [];
   const seenCursors = new Set();
+  const seenAwards = new Set();
+  const sourceScoped = [];
   let cursor = null;
-  for (let page = 1; page <= lastPage; page += 1) {
+  let rawRecordCount = 0;
+  let upstreamTotal = null;
+  let upstreamExhausted = false;
+  for (let page = 1; page <= maximumPages; page += 1) {
     const body = page === 1 ? firstRequest : buildDodRequest(criteria, { page, cursor, now });
     const payload = await fetchSourceJson(fetchImpl, DOD_SEARCH_URL, {
       method: "POST",
@@ -473,33 +481,62 @@ export async function searchDod(fetchImpl, criteria, {
     });
     const parsed = searchRecords(payload, page);
     pages.push(parsed);
-    if (!parsed.hasNext) break;
+    rawRecordCount += parsed.records.length;
+    if (upstreamTotal === null && parsed.total !== null) upstreamTotal = parsed.total;
+    const baseAwards = uniqueBaseAwards(parsed.records.map(baseRawAward).filter(Boolean));
+    for (const raw of baseAwards) {
+      const key = raw.generated_id || raw.award_id;
+      if (!key || seenAwards.has(key)) continue;
+      seenAwards.add(key);
+      const award = normalizeDodAward(raw, { retrievedAt });
+      if (criteria.award_id && award.award_id !== exactAwardId(criteria.award_id)) continue;
+      if (!recordSatisfiesYearFilter(award.award_year, criteria, yearFilter)) continue;
+      if (!recordMatchesInstitution(award, criteria._institution, "DOD")) continue;
+      sourceScoped.push(raw);
+    }
+    if (!parsed.hasNext) {
+      upstreamExhausted = true;
+      break;
+    }
     const cursorKey = `${parsed.cursor.last_record_sort_value}\u0000${parsed.cursor.last_record_unique_id}`;
     if (seenCursors.has(cursorKey)) sourceInvalid();
     seenCursors.add(cursorKey);
     cursor = parsed.cursor;
+    if (sourceScoped.length >= targetCount) break;
   }
 
-  const rawRecords = pages.flatMap(page => page.records);
-  const selected = uniqueBaseAwards(rawRecords.slice(offset, offset + limit).map(baseRawAward).filter(Boolean));
+  const selected = scanAll
+    ? sourceScoped.slice(0, DOD_MAX_RESULTS)
+    : sourceScoped.slice(offset, offset + limit);
   const enrichment = await enrichDetails(fetchImpl, selected, { cache, cacheTtl });
-  const yearFilter = yearFilterDiagnostics(criteria);
   const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, { detail, retrievedAt }))
     .filter(award => !criteria.award_id || award.award_id === exactAwardId(criteria.award_id))
     .filter(award => recordSatisfiesYearFilter(award.award_year, criteria, yearFilter))
     .filter(award => recordMatchesInstitution(award, criteria._institution, "DOD"))
     .map(award => attachResolvedInstitution(award, criteria._institution));
-  const last = pages.at(-1);
-  const hasMore = Boolean(last?.hasNext || rawRecords.length > offset + limit);
+  const outputTruncated = scanAll && sourceScoped.length > selected.length;
+  const upstreamMayHaveMore = !upstreamExhausted && pages.at(-1)?.hasNext === true;
+  const safetyBoundReached = scanAll
+    ? Boolean(outputTruncated || upstreamMayHaveMore)
+    : Boolean(
+      upstreamMayHaveMore
+      && pages.length >= maximumPages
+      && sourceScoped.length < targetCount
+    );
+  const hasMore = sourceScoped.length > offset + limit || safetyBoundReached;
+  const exactScopedTotal = upstreamExhausted && !outputTruncated ? sourceScoped.length : null;
+  const totalCount = criteria._institution || criteria.year_start || criteria.year_end
+    ? exactScopedTotal
+    : upstreamTotal ?? exactScopedTotal;
   return {
     source: "DOD",
     adapter_version: DOD_ADAPTER_VERSION,
     retrieved_at: retrievedAt,
-    total_count: criteria._institution || criteria.year_start || criteria.year_end ? null : last?.total ?? null,
-    raw_record_count: rawRecords.length,
-    upstream_total_count: last?.total ?? null,
+    total_count: totalCount,
+    raw_record_count: rawRecordCount,
+    upstream_total_count: upstreamTotal,
     upstream_pages: pages.length,
-    safety_bound_reached: scanAll && hasMore,
+    safety_bound_reached: safetyBoundReached,
     has_more: scanAll ? false : hasMore,
     capabilities: DOD_CAPABILITIES,
     year_filter: yearFilter,

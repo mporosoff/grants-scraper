@@ -7,6 +7,7 @@ import {
   DOD_ADAPTER_VERSION,
   DOD_CAPABILITIES,
   DOD_DETAIL_URL,
+  DOD_MAX_UPSTREAM_PAGES,
   DOD_SEARCH_URL,
   buildDodRequest,
   normalizeDodAward,
@@ -61,7 +62,7 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
     _institution: institution,
   }, {
     page: 2,
-    cursor: { last_record_unique_id: 4201, last_record_sort_value: "2026-08-28" },
+    cursor: { last_record_unique_id: 4201, last_record_sort_value: "FA9550261B195" },
     now: fixedNow,
   });
   assert.equal(body.subawards, false);
@@ -80,7 +81,7 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.equal(body.page, 2);
   assert.equal(body.sort, "Award ID");
   assert.equal(body.last_record_unique_id, 4201);
-  assert.equal(body.last_record_sort_value, "2026-08-28");
+  assert.equal(body.last_record_sort_value, "FA9550261B195");
 
   assert.throws(
     () => buildDodRequest({}, { page: 2, now: fixedNow }),
@@ -228,7 +229,7 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
         assert.equal(body.last_record_sort_value, undefined);
       } else {
         assert.equal(body.last_record_unique_id, 9025);
-        assert.equal(body.last_record_sort_value, "2026-08-04");
+        assert.equal(body.last_record_sort_value, "FA9550PAGE25");
       }
       return new Response(JSON.stringify({
         spending_level: "awards",
@@ -238,7 +239,7 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
           page,
           hasNext: page === 1,
           last_record_unique_id: page === 1 ? 9025 : null,
-          last_record_sort_value: page === 1 ? "2026-08-04" : "None",
+          last_record_sort_value: page === 1 ? "FA9550PAGE25" : "None",
         },
       }), { headers: { "Content-Type": "application/json" } });
     }
@@ -294,6 +295,141 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
   assert.equal(maximumActiveDetails, 3);
 });
 
+test("DoD offsets follow the normalized institution sequence and snapshots scan bounded later pages", async () => {
+  const institution = resolveInstitution({ id: "university-of-rochester" });
+  const validRecord = index => ({
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": `FA9550VALID${String(index).padStart(2, "0")}`,
+    "Recipient Name": "UNIVERSITY OF ROCHESTER",
+    "Recipient UEI": "F27KDXZMF9Y8",
+    generated_internal_id: `ASST_NON_FA9550VALID${String(index).padStart(2, "0")}_097`,
+  });
+  const falsePositives = Array.from({ length: 24 }, (_, index) => ({
+    ...structuredClone(searchFixture.results[0]),
+    "Award ID": `FA9550FALSE${String(index + 1).padStart(2, "0")}`,
+    "Recipient Name": "ROCHESTER INSTITUTE OF TECHNOLOGY",
+    "Recipient UEI": `WRONGUEI${String(index + 1).padStart(2, "0")}`,
+    generated_internal_id: `ASST_NON_FA9550FALSE${String(index + 1).padStart(2, "0")}_097`,
+  }));
+  const recordsByPage = [
+    [validRecord(1), ...falsePositives],
+    [validRecord(2), validRecord(3)],
+  ];
+  const makeFetch = () => {
+    const calls = [];
+    return {
+      calls,
+      fetchImpl: async (url, options = {}) => {
+        calls.push({ url: String(url), options });
+        if (String(url) === DOD_SEARCH_URL) {
+          const body = JSON.parse(options.body);
+          if (body.page === 2) {
+            assert.equal(body.last_record_unique_id, 9100);
+            assert.equal(body.last_record_sort_value, "FA9550FALSE24");
+          }
+          return new Response(JSON.stringify({
+            results: recordsByPage[body.page - 1],
+            page_metadata: {
+              page: body.page,
+              total: 27,
+              hasNext: body.page === 1,
+              last_record_unique_id: body.page === 1 ? 9100 : null,
+              last_record_sort_value: body.page === 1 ? "FA9550FALSE24" : "None",
+            },
+          }), { headers: { "Content-Type": "application/json" } });
+        }
+        const generatedId = decodeURIComponent(String(url).split("/").filter(Boolean).at(-1));
+        const record = recordsByPage.flat().find(item => item.generated_internal_id === generatedId);
+        assert.ok(record, `unexpected detail request for ${generatedId}`);
+        return new Response(JSON.stringify({
+          ...detailFixture,
+          generated_unique_award_id: generatedId,
+          fain: record["Award ID"],
+          recipient: {
+            recipient_name: record["Recipient Name"],
+            recipient_uei: record["Recipient UEI"],
+          },
+        }), { headers: { "Content-Type": "application/json" } });
+      },
+    };
+  };
+
+  const pagedFetch = makeFetch();
+  const paged = await searchDod(pagedFetch.fetchImpl, { _institution: institution }, {
+    limit: 1,
+    offset: 1,
+    now: fixedNow,
+  });
+  assert.deepEqual(paged.results.map(award => award.award_id), ["FA9550VALID02"]);
+  assert.equal(paged.has_more, true);
+  assert.equal(paged.total_count, 3);
+  assert.equal(paged.raw_record_count, 27);
+  assert.equal(paged.upstream_pages, 2);
+  assert.equal(paged.health.detail_requests, 1);
+
+  const snapshotFetch = makeFetch();
+  const snapshot = await searchDod(snapshotFetch.fetchImpl, { _institution: institution }, {
+    limit: 25,
+    offset: 0,
+    scanAll: true,
+    now: fixedNow,
+  });
+  assert.deepEqual(snapshot.results.map(award => award.award_id), [
+    "FA9550VALID01",
+    "FA9550VALID02",
+    "FA9550VALID03",
+  ]);
+  assert.equal(snapshot.total_count, 3);
+  assert.equal(snapshot.safety_bound_reached, false);
+  assert.equal(snapshot.has_more, false);
+  assert.equal(snapshot.upstream_pages, 2);
+  assert.equal(snapshot.health.detail_requests, 3);
+});
+
+test("DoD normalized snapshot scans stop at the advertised upstream-page bound", async () => {
+  const institution = resolveInstitution({ id: "university-of-rochester" });
+  let pageCalls = 0;
+  const fetchImpl = async (url, options = {}) => {
+    assert.equal(String(url), DOD_SEARCH_URL, "rejected recipient rows must not trigger detail requests");
+    pageCalls += 1;
+    const body = JSON.parse(options.body);
+    if (body.page > 1) {
+      assert.equal(body.last_record_unique_id, 9200 + body.page - 1);
+      assert.equal(body.last_record_sort_value, `FA9550BOUND${body.page - 1}`);
+    }
+    return new Response(JSON.stringify({
+      results: Array.from({ length: 25 }, (_, index) => ({
+        ...structuredClone(searchFixture.results[0]),
+        "Award ID": `FA9550BOUND${body.page}-${index}`,
+        "Recipient Name": "ROCHESTER INSTITUTE OF TECHNOLOGY",
+        "Recipient UEI": `WRONGBOUND${body.page}-${index}`,
+        generated_internal_id: `ASST_NON_FA9550BOUND${body.page}-${index}_097`,
+      })),
+      page_metadata: {
+        page: body.page,
+        total: 10_000,
+        hasNext: true,
+        last_record_unique_id: 9200 + body.page,
+        last_record_sort_value: `FA9550BOUND${body.page}`,
+      },
+    }), { headers: { "Content-Type": "application/json" } });
+  };
+  const bounded = await searchDod(fetchImpl, { _institution: institution }, {
+    limit: 25,
+    offset: 0,
+    scanAll: true,
+    now: fixedNow,
+  });
+  assert.equal(pageCalls, DOD_MAX_UPSTREAM_PAGES);
+  assert.equal(bounded.upstream_pages, DOD_MAX_UPSTREAM_PAGES);
+  assert.equal(bounded.raw_record_count, DOD_MAX_UPSTREAM_PAGES * 25);
+  assert.equal(bounded.total_count, null);
+  assert.equal(bounded.safety_bound_reached, true);
+  assert.equal(bounded.has_more, false);
+  assert.deepEqual(bounded.results, []);
+  assert.equal(bounded.health.detail_requests, 0);
+});
+
 test("DoD later-page search fails closed when USAspending omits or repeats its continuation cursor", async () => {
   for (const mode of ["missing", "repeated"]) {
     let pageCalls = 0;
@@ -303,7 +439,7 @@ test("DoD later-page search fails closed when USAspending omits or repeats its c
       const page = JSON.parse(options.body).page;
       const cursor = mode === "missing"
         ? {}
-        : { last_record_unique_id: 77, last_record_sort_value: "2026-08-01" };
+        : { last_record_unique_id: 77, last_record_sort_value: "FA9550CURSOR25" };
       return new Response(JSON.stringify({
         results: Array.from({ length: 25 }, (_, index) => ({
           ...structuredClone(searchFixture.results[0]),

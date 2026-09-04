@@ -511,7 +511,14 @@ test("Worker validates bounded public requests and exposes no credential require
       NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
       NIH: { upstream_pages: 12, upstream_page_size: 100 },
       DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
-      DOD: { upstream_page_size: 25, maximum_normalized_results: 25, detail_concurrency: 3, snapshot_behavior: "bounded-first-page" },
+      DOD: {
+        upstream_pages: 12,
+        upstream_page_size: 25,
+        maximum_normalized_results: 25,
+        maximum_detail_requests: 25,
+        detail_concurrency: 3,
+        snapshot_behavior: "bounded-first-normalized-page",
+      },
     },
     source_capabilities: {
       DOD: {
@@ -559,10 +566,10 @@ test("Worker validates bounded public requests and exposes no credential require
         configured_cpu_ms: 250,
         memory_mb: 128,
         platform_subrequests_per_request: 10_000,
-        maximum_snapshot_create_subrequests: 130,
+        maximum_snapshot_create_subrequests: 141,
         maximum_snapshot_create_cache_api_calls: 62,
-        maximum_snapshot_create_upstream_and_guard_subrequests: 67,
-        maximum_snapshot_create_subrequests_without_ror_resolution: 128,
+        maximum_snapshot_create_upstream_and_guard_subrequests: 78,
+        maximum_snapshot_create_subrequests_without_ror_resolution: 139,
       },
     },
     abuse_control: {

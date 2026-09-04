@@ -22,7 +22,10 @@ retains the base search record rather than converting the source to a failure.
 Later result pages use USAspending's stable Award ID ordering and are reached
 sequentially from page one with the paired `last_record_unique_id` and
 `last_record_sort_value` continuation values. The adapter never jumps directly
-to a later sorted page.
+to a later sorted page. Public offsets are applied only after award-scope,
+deduplication, year, and exact institution validation. The adapter may inspect
+up to 12 upstream pages to assemble the first 25 normalized snapshot records,
+but detail enrichment remains capped at those 25 admitted records.
 
 ## Representative record
 
