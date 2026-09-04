@@ -44,6 +44,7 @@ function memoryStorage() {
   return {
     getItem(key) { return values.has(key) ? values.get(key) : null; },
     setItem(key, value) { values.set(key, value); },
+    removeItem(key) { values.delete(key); },
   };
 }
 
@@ -139,8 +140,9 @@ test("opens an accessible bounded faculty combobox", () => {
 
 test("the missing-researcher path opens Configure with add mode selected", () => {
   assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
-  assert.match(teamPage, /var retainedLocal = \[\][\s\S]*?retainedLocal\.push\(externalId\(member\)\)[\s\S]*?missingResearcherUrl \+= "&locals=" \+ encodeURIComponent\(retainedLocal\.join\(","\)\)/);
-  assert.match(teamPage, /params\.get\("locals"\)[\s\S]*?localIds\.push\(primaryLocalId\)[\s\S]*?localIds\.forEach\(function \(localId\)/);
+  assert.match(teamPage, /function prepareMissingResearcherHandoff\(\)[\s\S]*?TEAM_API\.saveHandoff\(safeHandoffStorage\(\), \{[\s\S]*?selectedIdentities: selected\.slice\(0, MAX - 1\)\.map\(teamMemberIdentity\)/);
+  assert.match(teamPage, /params\.get\("handoff"\) === "1"[\s\S]*?TEAM_API\.loadHandoff\(safeHandoffStorage\(\)\)[\s\S]*?TEAM_API\.clearHandoff\(safeHandoffStorage\(\)\)/);
+  assert.doesNotMatch(teamPage, /params\.get\("locals?"\)|[?&]locals?=/);
   assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
   assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
@@ -197,7 +199,7 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
   assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
-  assert.match(teamPage, /localIds\.forEach\(function \(localId\) \{[\s\S]*?selected\.push\(localKey\)/);
+  assert.match(teamPage, /handoff\.selectedIdentities[\s\S]*?externalProfile\(handoff\.addedExternalId\)[\s\S]*?selected\.push\(localKey\)/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
   assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
   assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);
@@ -260,6 +262,35 @@ test("normalizes and saves no more than four external researchers", () => {
   }]);
   assert.equal(withOrcid.profiles[0].orcid_id, "0000-0002-1825-0097");
   assert.match(withOrcid.profiles[0].orcid_text, /Ionic liquid/);
+});
+
+test("keeps a bounded expiring team handoff in browser storage", () => {
+  const { team } = loadApis();
+  const storage = memoryStorage();
+  const now = Date.parse("2026-09-04T12:00:00Z");
+  const saved = team.saveHandoff(storage, {
+    selectedIdentities: [
+      { kind: "external", id: "ext-gate-four-researcher" },
+      { kind: "directory", id: "urh-000005" },
+      { kind: "directory", id: "urh-000005" },
+      { kind: "faculty_name", name: "Legacy Researcher" },
+      { kind: "external", id: "invalid name" },
+    ],
+  }, now);
+  assert.equal(saved.saved, true);
+  assert.deepEqual(Array.from(saved.handoff.selectedIdentities, identity => identity.kind), [
+    "external", "directory", "faculty_name",
+  ]);
+
+  const completed = team.completeHandoff(storage, "ext-gate-five-researcher", now + 1_000);
+  assert.equal(completed.saved, true);
+  assert.equal(team.loadHandoff(storage, now + 2_000).handoff.addedExternalId, "ext-gate-five-researcher");
+  assert.equal(team.clearHandoff(storage), true);
+  assert.equal(team.loadHandoff(storage, now + 2_000).handoff, null);
+
+  team.saveHandoff(storage, { selectedIdentities: [] }, now);
+  assert.equal(team.loadHandoff(storage, now + team.HANDOFF_TTL_MS + 1).handoff, null);
+  assert.equal(storage.getItem(team.HANDOFF_STORAGE_KEY), null);
 });
 
 test("drops standalone umbrella keywords from external profiles", () => {

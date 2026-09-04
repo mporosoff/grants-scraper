@@ -19,6 +19,10 @@ async function assertNoHorizontalOverflow(page) {
 }
 
 test("Team Match supports directory, browser-only, team-size, history, and mobile workflows", async ({ page }) => {
+  const navigationUrls = [];
+  page.on("request", request => {
+    if (request.isNavigationRequest()) navigationUrls.push(request.url());
+  });
   await page.addInitScript(() => {
     const nativeSetTimeout = globalThis.setTimeout.bind(globalThis);
     globalThis.setTimeout = (callback, delay, ...args) => (
@@ -52,8 +56,9 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await page.locator("#display-name").fill("Gate Four Researcher");
   await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nchemical engineering\ncarbon capture");
   await page.locator("#add-locally").click();
-  await expect(page).toHaveURL(/team_match\.html\?local=ext-gate-four-researcher/);
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/team_match\.html\?handoff=1/);
+  expect(page.url()).not.toContain("ext-gate-four-researcher");
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
   await expect(page.locator("#researcher-choice option", { hasText: "Gate Four Researcher" })).toHaveCount(0);
   const selectedMembers = await page.locator("#pi-grid [data-member-entry]").evaluateAll(entries => entries.map(entry => entry.dataset.memberEntry));
   expect(new Set(selectedMembers).size).toBe(3);
@@ -64,9 +69,10 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await page.locator("#display-name").fill("Gate Five Researcher");
   await page.locator("#research-claims").fill("catalysis\nelectrochemistry\nreaction engineering");
   await page.locator("#add-locally").click();
-  await expect(page).toHaveURL(/team_match\.html\?.*local=ext-gate-five-researcher/);
-  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/team_match\.html\?handoff=1/);
+  expect(page.url()).not.toContain("ext-gate-five-researcher");
+  await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true })).toBeVisible({ timeout: 30_000 });
   await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
   await page.getByRole("button", { name: "Remove Gate Five Researcher from team", exact: true }).click();
@@ -92,6 +98,7 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
+  expect(navigationUrls.some(url => /ext-gate-(?:four|five)-researcher|[?&]locals?=/.test(url))).toBe(false);
   expect(errors.filter(error => !error.includes("Failed to load resource"))).toEqual([]);
 });
 

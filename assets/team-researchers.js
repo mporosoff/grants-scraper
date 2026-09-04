@@ -2,6 +2,8 @@
   "use strict";
 
   const STORAGE_KEY = "funding-finder.external-researchers.v1";
+  const HANDOFF_STORAGE_KEY = "funding-finder.team-handoff.v1";
+  const HANDOFF_TTL_MS = 15 * 60 * 1000;
   const MAX_EXTERNAL = 4;
   const MIN_KEYWORDS = 3;
   const MAX_KEYWORDS = 8;
@@ -144,6 +146,94 @@
       return { profiles: normalized, saved: true, error: "" };
     } catch (_error) {
       return { profiles: normalized, saved: false, error: "Changes are available in this tab but could not be saved on this device." };
+    }
+  }
+
+  function normalizeHandoffIdentities(value) {
+    if (!Array.isArray(value)) return [];
+    const output = [];
+    const used = new Set();
+    for (const raw of value) {
+      if (!raw || typeof raw !== "object" || output.length >= MAX_EXTERNAL - 1) break;
+      let identity = null;
+      if (raw.kind === "directory" && /^urh-[0-9]{6}$/.test(String(raw.id || ""))) {
+        identity = { kind: "directory", id: String(raw.id) };
+      } else if (raw.kind === "external" && /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(raw.id || ""))) {
+        identity = { kind: "external", id: String(raw.id) };
+      } else if (raw.kind === "faculty_name") {
+        const name = cleanText(raw.name, 80);
+        if (name) identity = { kind: "faculty_name", name };
+      }
+      const key = identity && `${identity.kind}:${identity.id || identity.name}`;
+      if (!identity || used.has(key)) continue;
+      used.add(key);
+      output.push(identity);
+    }
+    return output;
+  }
+
+  function normalizeHandoff(value, now = Date.now()) {
+    if (!value || typeof value !== "object") return null;
+    const createdAt = Number(value.created_at);
+    if (!Number.isFinite(createdAt) || createdAt > now + 60_000 || now - createdAt > HANDOFF_TTL_MS) return null;
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.added_external_id || ""))
+      ? String(value.added_external_id)
+      : "";
+    return {
+      selectedIdentities: normalizeHandoffIdentities(value.selected_identities),
+      addedExternalId,
+      createdAt,
+    };
+  }
+
+  function loadHandoff(storage, now = Date.now()) {
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      const raw = storage.getItem(HANDOFF_STORAGE_KEY);
+      if (!raw) return { handoff: null, available: true, error: "" };
+      const handoff = normalizeHandoff(JSON.parse(raw), now);
+      if (!handoff) storage.removeItem(HANDOFF_STORAGE_KEY);
+      return { handoff, available: true, error: "" };
+    } catch (_error) {
+      return { handoff: null, available: false, error: "The browser-only team handoff could not be read in this tab." };
+    }
+  }
+
+  function saveHandoff(storage, value = {}, now = Date.now()) {
+    const selectedIdentities = normalizeHandoffIdentities(value.selectedIdentities);
+    const addedExternalId = /^ext-[a-z0-9][a-z0-9-]{0,47}$/.test(String(value.addedExternalId || ""))
+      ? String(value.addedExternalId)
+      : "";
+    const handoff = { selectedIdentities, addedExternalId, createdAt: now };
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      storage.setItem(HANDOFF_STORAGE_KEY, JSON.stringify({
+        selected_identities: selectedIdentities,
+        added_external_id: addedExternalId,
+        created_at: now,
+      }));
+      return { handoff, saved: true, error: "" };
+    } catch (_error) {
+      return { handoff, saved: false, error: "The browser-only team handoff could not be saved in this tab." };
+    }
+  }
+
+  function completeHandoff(storage, addedExternalId, now = Date.now()) {
+    const loaded = loadHandoff(storage, now);
+    if (!loaded.available) return { handoff: null, saved: false, error: loaded.error };
+    return saveHandoff(storage, {
+      selectedIdentities: loaded.handoff ? loaded.handoff.selectedIdentities : [],
+      addedExternalId,
+    }, now);
+  }
+
+  function clearHandoff(storage) {
+    try {
+      if (!storage) throw new Error("Storage unavailable");
+      storage.removeItem(HANDOFF_STORAGE_KEY);
+      return true;
+    } catch (_error) {
+      return false;
     }
   }
 
@@ -500,6 +590,8 @@
 
   globalThis.FUNDING_TEAM_RESEARCHERS = Object.freeze({
     STORAGE_KEY,
+    HANDOFF_STORAGE_KEY,
+    HANDOFF_TTL_MS,
     MAX_EXTERNAL,
     MIN_KEYWORDS,
     MAX_KEYWORDS,
@@ -508,6 +600,10 @@
     normalizeProfiles,
     load,
     save,
+    loadHandoff,
+    saveHandoff,
+    completeHandoff,
+    clearHandoff,
     inferDomains,
     buildMatches,
     intersectMemberMatches,

@@ -176,6 +176,11 @@ boundary, not an institutional credential vault or a local copy of the
 funding catalog. Shared search URLs take precedence over saved profile and
 preference ranking until the user activates them.
 
+The Team Match to Configure round trip uses a separate, tab-scoped handoff
+record for at most 15 minutes. It contains at most three selected researcher
+identities and the newly stored browser-only profile identifier, is consumed
+after a successful return, and is never placed in a URL or network request.
+
 Search criteria are serialized into the Funding Finder page URL so browser
 back/forward navigation, refresh, and copied links can restore a search. Those
 criteria can therefore appear in browser history and in any shared URL. A
