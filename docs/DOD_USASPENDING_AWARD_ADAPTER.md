@@ -24,7 +24,8 @@ snapshot interfaces display the number of unavailable public detail records.
 All valid Assistance Listings returned by award detail are retained. When the
 search uses an exact Assistance Listing filter, that listing is placed first
 and supplies the card's program name while the other listings remain available
-for facets and provenance.
+for facets and provenance. If cached or unavailable detail omits the queried
+listing, the exact code is still retained first without inventing a title.
 The current search row is authoritative for award ID, recipient identity,
 signed year, and the other overlapping base fields used to form a page; cached
 detail can enrich but cannot invalidate or relabel that selected row. For a

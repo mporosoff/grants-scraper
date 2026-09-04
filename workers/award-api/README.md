@@ -52,7 +52,9 @@ record fails, the base search result remains available with honest null fields,
 the source health is marked degraded, and both award interfaces report the
 failed-detail count. All valid Assistance Listings from award detail are
 retained; an exact queried listing is ordered first and supplies the displayed
-program name without discarding the award's other listings.
+program name without discarding the award's other listings. If stale or
+unavailable detail omits it, the exact queried code is still retained first
+without inventing a title.
 Search-row award ID, recipient identity, signed year, and overlapping base
 fields remain authoritative so optional cached detail cannot invalidate a
 selected page. When a ROR identity has no curated UEI, DoD fairly traverses up

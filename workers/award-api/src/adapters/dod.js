@@ -361,7 +361,10 @@ function detailListings(detail, requestedProgram = null) {
   const requested = assistanceListing(requestedProgram);
   const listings = [...byCode.values()];
   if (!requested) return listings;
-  return listings.sort((left, right) => Number(right.code === requested) - Number(left.code === requested));
+  const matching = byCode.get(requested);
+  return matching
+    ? [matching, ...listings.filter(listing => listing.code !== requested)]
+    : [{ code: requested, title: null }, ...listings];
 }
 
 function detailOpportunity(detail) {

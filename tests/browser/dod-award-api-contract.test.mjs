@@ -165,6 +165,24 @@ test("DoD preserves multiple Assistance Listings and makes an exact queried list
   });
   assert.deepEqual(searched.results[0].program_codes, ["12.800", "12.810"]);
   assert.equal(searched.results[0].program_name, "Air Force Defense Research Sciences Program");
+
+  const staleDetail = structuredClone(detailFixture);
+  staleDetail.cfda_info = [{ cfda_number: "12.810", cfda_title: "Other Defense Program" }];
+  const stale = await searchDod(fixtureFetch({ detailPayload: staleDetail }), { program: "12.800" }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.deepEqual(stale.results[0].program_codes, ["12.800", "12.810"]);
+  assert.equal(stale.results[0].program_name, null, "a stale detail title must not relabel the exact queried listing");
+
+  const unavailable = await searchDod(fixtureFetch({ detailFails: true }), { program: "12.800" }, {
+    limit: 1,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.deepEqual(unavailable.results[0].program_codes, ["12.800"]);
+  assert.equal(unavailable.results[0].program_name, null);
 });
 
 test("DoD search enriches bounded returned records, caches details, and retains base records on detail failure", async () => {
