@@ -9,6 +9,7 @@ projection with the current opportunity catalog and emits the legacy-compatible
 from __future__ import annotations
 
 import argparse
+import hashlib
 from datetime import date
 import json
 from pathlib import Path
@@ -510,6 +511,21 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
     return out
 
 
+def update_version_target(path: Path, matches_path: Path) -> str:
+    """Bind one Team Match page to the exact generated faculty-match bytes."""
+    digest = hashlib.sha256(matches_path.read_bytes()).hexdigest()
+    source = path.read_text(encoding="utf-8")
+    updated, count = re.subn(
+        r'((?:\./)?data/faculty_matches\.js\?v=)[^"\']+',
+        rf"\g<1>{digest}",
+        source,
+    )
+    if count != 1:
+        raise ValueError(f"Expected one faculty-matches version reference in {path}")
+    path.write_text(updated, encoding="utf-8", newline="\n")
+    return digest
+
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -517,10 +533,13 @@ def main() -> None:
     parser.add_argument("--registry", type=Path, default=Path("config/researcher_registry.json"))
     parser.add_argument("--out", default="data/faculty_matches.js")
     parser.add_argument("--top", type=int, default=25)
+    parser.add_argument("--version-target", action="append", type=Path, default=[])
     args = parser.parse_args()
     registry = load_registry(args.registry)
     profiles = matching_profiles(registry)
     output = match_to_catalog(profiles, args.catalog, args.out, top_n=args.top, registry_generation=registry["registry_generation"])
+    for target in args.version_target:
+        update_version_target(target, Path(args.out))
     print(f"wrote {args.out} ({len(output['faculty'])} department researchers; registry={registry['registry_generation']})")
 
 

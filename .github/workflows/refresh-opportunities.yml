@@ -263,6 +263,7 @@ jobs:
           --catalog data/opportunities.js
           --registry config/researcher_registry.json
           --out data/faculty_matches.js
+          --version-target team_match.html
       - name: Build deadline, amendment, closing-soon, and closure events
         run: >-
           python -m scripts.build_changes
