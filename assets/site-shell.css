@@ -1,0 +1,93 @@
+/* Shared native drawer and ordinary disclosure/action-list primitives. */
+.shell-action-list[hidden], .workspace-badge[hidden] { display: none !important; }
+.shell-action-list {
+  position: fixed;
+  inset: auto;
+  z-index: 100;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: min(15rem, calc(100vw - 16px));
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  color: #173a60;
+  background: #fff;
+  border: 1px solid #abbcd0;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px #08162730;
+  font: 400 .88rem/1.4 InterVariable, Inter, Aptos, "Segoe UI", sans-serif;
+}
+.shell-action-list a, .shell-action-list button {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: #173a60;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  text-align: left;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+}
+.shell-action-list :is(a, button):hover { background: #edf3fc; color: #001e5f; }
+.shell-action-list :is(a, button):focus-visible { outline: 2px solid #005fcc; outline-offset: -2px; }
+.shell-action-list button:disabled { opacity: .55; cursor: default; }
+.shell-action-group + .shell-action-group { margin-top: 6px; border-top: 1px solid #d6e0eb; }
+.shell-action-heading { margin: 9px 12px 3px; color: #53647a; font-size: .75rem; font-weight: 800; }
+html.shell-drawer-open { overflow: hidden; }
+.workspace-drawer {
+  box-sizing: border-box;
+  width: min(480px, 100vw);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 0 0 auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  color: #173a60;
+  background: #fff;
+  border: 0;
+  border-left: 1px solid #abbcd0;
+  box-shadow: -15px 0 50px #08162730;
+}
+.workspace-drawer::backdrop { background: #081627a8; }
+.workspace-drawer *, .workspace-drawer *::before, .workspace-drawer *::after { box-sizing: border-box; }
+.workspace-drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px; border-bottom: 1px solid #d6e0eb; }
+.workspace-drawer-header h2 { margin: 0; font-size: 1.4rem; }
+.workspace-drawer-body { padding: 20px; }
+.workspace-drawer section + section { margin-top: 24px; padding-top: 20px; border-top: 1px solid #d6e0eb; }
+.workspace-drawer .profile-search-alert { display: block; padding: 16px; }
+.workspace-drawer .profile-search-alert-actions { margin-top: 16px; }
+.workspace-drawer :is(input, select, textarea) { max-width: 100%; }
+.workspace-drawer .saved-item { align-items: flex-start; flex-wrap: wrap; overflow-wrap: anywhere; }
+.workspace-drawer .saved-content { flex-basis: 100%; }
+.workspace-drawer .saved-item-actions { display: flex; gap: 16px; }
+.workspace-drawer .pursuit-controls { grid-template-columns: minmax(0, 1fr); }
+.workspace-drawer .pursuit-controls :is(select, textarea) { width: 100%; min-height: 44px; padding: 8px; border: 1px solid #abbcd0; border-radius: 6px; font: inherit; }
+.workspace-trigger { position: relative; display: inline-flex; flex: none; align-items: center; gap: 6px; min-height: 38px; padding: 7px 10px; border: 1px solid #ffffff38; border-radius: 9px; color: #fff; background: #ffffff0c; font-family: inherit; font-size: .79rem; font-weight: 750; line-height: 1; cursor: pointer; }
+.workspace-badge { min-width: 1.3em; padding: 2px 4px; color: #001e5f; background: #ffd82b; border-radius: 20px; font-size: .7rem; }
+.workspace-save-status { position: fixed; z-index: 35; right: 12px; bottom: 12px; max-width: min(28rem, calc(100vw - 24px)); padding: 10px 14px; color: #173a60; background: #fff; border: 1px solid #9db3ca; border-radius: 10px; box-shadow: 0 4px 18px #08162730; pointer-events: none; }
+@media (max-width: 540px) {
+  .workspace-drawer { width: 100vw; border: 0; }
+  .workspace-drawer-body, .workspace-drawer-header { padding: 16px; }
+  .workspace-drawer :is(input, select, textarea) { font-size: 16px; }
+  .workspace-trigger { width: 38px; min-width: 38px; padding: 0; justify-content: center; }
+  .workspace-trigger-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .workspace-badge { position: absolute; top: -6px; right: -5px; }
+}
+@media (forced-colors: active) {
+  .shell-action-list, .workspace-drawer, .workspace-trigger, .workspace-badge, .workspace-save-status { border: 1px solid CanvasText; }
+  .shell-action-list :is(a, button):focus-visible { outline-color: Highlight; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-drawer, .shell-action-list { scroll-behavior: auto; }
+}

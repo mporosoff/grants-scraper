@@ -83,8 +83,8 @@ test("Funding Finder has no serious or critical violations across critical state
   await scan(page, "funding-saved-storage-error-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 900 });
   mockAlerts(page);
-  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#saved-panel > summary").click();
+  await expect(page.locator("#personal-workspace")).not.toHaveAttribute("open", "");
+  await page.locator(".workspace-trigger").click();
   await page.locator("#alert-new-matches").click();
   const alertDialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
   await expect(alertDialog).toBeVisible();
@@ -95,6 +95,7 @@ test("Funding Finder has no serious or critical violations across critical state
   await page.keyboard.press("Escape");
   await page.setViewportSize({ width: 1280, height: 900 });
   await expect(page.locator("#alert-new-matches")).toBeFocused();
+  await page.locator("[data-workspace-close]").click();
   const chatButton = page.locator("#open-results-chat");
   await chatButton.click();
   await expect(page.locator("#result-assistant")).toBeVisible();
@@ -222,13 +223,14 @@ test("shared Help remains visible and current across every desktop and mobile su
 
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/match_explorer.html");
-  await page.locator("#saved-panel > summary").click();
+  await page.locator(".workspace-trigger").click();
   const alertHelp = page.getByRole("button", { name: "How search alerts work" });
   await expect(alertHelp).toBeVisible();
   await alertHelp.click();
-  await expect(page.getByRole("dialog").locator("#help-alerts")).toBeVisible();
+  await expect(page.locator("#help-guide #help-alerts")).toBeVisible();
   await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBeGreaterThan(0);
   await page.keyboard.press("Escape");
+  if (await page.locator("#personal-workspace[open]").count()) await page.locator("[data-workspace-close]").click();
   await page.getByRole("button", { name: "Help" }).click();
   await expect.poll(() => page.locator(".help-dialog-body").evaluate(element => element.scrollTop)).toBe(0);
 });

@@ -1113,6 +1113,7 @@ export async function waitForHybridSettled(page) {
 }
 
 export async function downloadText(page, selector) {
+  if (selector === "#export-csv") await page.locator('[data-shell-menu="results"]').click();
   const [download] = await Promise.all([
     page.waitForEvent("download"),
     page.locator(selector).click(),

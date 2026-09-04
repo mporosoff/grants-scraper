@@ -47,7 +47,7 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   await runFundingSearch(page, "hydrogen catalysis");
   const card = page.locator("#results .result-card").first();
   await card.locator("[data-save]").click();
-  await page.locator("#saved-panel > summary").click();
+  await page.locator(".workspace-trigger").click();
   await page.locator("[data-pursuit-status]").selectOption("pursuing");
   await page.locator("[data-pursuit-note]").fill("Draft due Friday");
 
@@ -72,7 +72,7 @@ test("watchlist pursuit state stays local and saved-search alerts send only type
   expect(serialized).not.toMatch(/Draft due Friday|profile_text|cv_text|orcid_text|chat|uploaded/i);
   await page.keyboard.press("Escape");
   await page.reload();
-  await page.locator("#saved-panel > summary").click();
+  await page.locator(".workspace-trigger").click();
   await expect(page.locator("[data-pursuit-status]")).toHaveValue("pursuing");
   await expect(page.locator("[data-pursuit-note]")).toHaveValue("Draft due Friday");
   await page.setViewportSize({ width: 320, height: 720 });
@@ -85,9 +85,9 @@ test("Unit C alert dialog locks the page, traps focus, scrolls internally, and r
   await page.setViewportSize({ width: 320, height: 480 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
-  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#saved-panel > summary").click();
-  await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#personal-workspace")).not.toHaveAttribute("open", "");
+  await page.locator(".workspace-trigger").click();
+  await expect(page.locator("#personal-workspace")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.scrollIntoViewIfNeeded();
   const scrollBefore = await page.evaluate(() => window.scrollY);
@@ -177,9 +177,9 @@ test("Unit C alert dialog preserves its recovery state and restores focus after 
   await page.setViewportSize({ width: 390, height: 520 });
   await openFundingFinder(page);
   await runFundingSearch(page, "hydrogen catalysis");
-  await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
-  await page.locator("#saved-panel > summary").click();
-  await expect(page.locator("#saved-panel")).toHaveAttribute("open", "");
+  await expect(page.locator("#personal-workspace")).not.toHaveAttribute("open", "");
+  await page.locator(".workspace-trigger").click();
+  await expect(page.locator("#personal-workspace")).toHaveAttribute("open", "");
   const invoker = page.locator("#alert-new-matches");
   await invoker.click();
   const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
@@ -220,7 +220,7 @@ test("saved-item write rejection restores durable UI state across every mutation
   await expect(cards.nth(1)).toBeVisible();
   await cards.first().locator("[data-save]").click();
   await expect(cards.first().locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
-  await page.locator("#saved-panel > summary").click();
+  await page.locator(".workspace-trigger").click();
   await expect(page.locator("#saved-count")).toHaveText("(1)");
 
   await page.evaluate(() => {
@@ -230,8 +230,10 @@ test("saved-item write rejection restores durable UI state across every mutation
     localStorage.setItem("funding-finder.saved.v1", JSON.stringify(items));
     globalThis.__rejectSavedWrites = true;
   });
+  await page.locator("[data-workspace-close]").click();
   await cards.first().locator("[data-save]").click();
   await expect(cards.first().locator("[data-save]")).toHaveAttribute("aria-pressed", "true");
+  await page.locator(".workspace-trigger").click();
   await expect(page.locator("#saved-status")).toContainText("last saved version is still shown");
   await expect(page.locator("#saved-count")).toHaveText("(1)");
   await expect(page.locator("[data-pursuit-status]")).toHaveValue("pursuing");
@@ -251,6 +253,7 @@ test("saved-item write rejection restores durable UI state across every mutation
   await page.locator("#clear-saved").click();
   await expect(page.locator("#saved-count")).toHaveText("(1)");
 
+  await page.locator("[data-workspace-close]").click();
   await cards.nth(1).locator("[data-save]").click();
   await expect(cards.nth(1).locator("[data-save]")).toHaveAttribute("aria-pressed", "false");
   await expect(page.locator("#saved-count")).toHaveText("(1)");
@@ -314,8 +317,8 @@ for (const fixture of alertErrorCases) {
     mockAlerts(page, fixture);
     await openFundingFinder(page);
     await runFundingSearch(page, "hydrogen catalysis");
-    await expect(page.locator("#saved-panel")).not.toHaveAttribute("open", "");
-    await page.locator("#saved-panel > summary").click();
+    await expect(page.locator("#personal-workspace")).not.toHaveAttribute("open", "");
+    await page.locator(".workspace-trigger").click();
     await page.locator("#alert-new-matches").click();
     const dialog = page.getByRole("dialog", { name: "Save this search as an email alert" });
     await dialog.locator("#alert-email").fill("researcher@example.edu");
@@ -482,7 +485,9 @@ test("Strong and Potential membership survives sorting, filters trigger one sema
   const save = card.locator("[data-save]");
   await save.click();
   await expect(save).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator("[data-calendar]:not([disabled])").first()).toBeVisible();
+  await card.locator("[data-card-more]").click();
+  await expect(page.locator("[data-calendar]")).toBeVisible();
+  await page.keyboard.press("Escape");
 
   const query = await page.locator("#query").inputValue();
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));

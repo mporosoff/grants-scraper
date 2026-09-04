@@ -33,9 +33,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=c2143acd9b48ac5b2de181e93e2483053648788f52b0d9295a9807366004a1d3">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/app.css?v=75dd51158d2ca8f4b968f5ff1bc7b858bf3c0d27db90821bec393cd8730d7d1d">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=542297108fb69a73ecb2aab8ececb66b0347d5915936bb21e061871065ae177c">
   <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=bda8b8c68dc25d4c9651898ff5d646be191f2d9897d0e4f91334e14c9eff7d63">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -53,7 +54,12 @@
         <a href="./match_explorer.html" aria-current="page">Funding Finder</a>
         <a href="./team_match.html">Team Match</a>
         <a href="./funded_awards.html">Funded Awards</a>
-        <a href="./faculty_interests.html">Configure Faculty Interests</a>
+        <div class="site-nav-utility">
+          <button type="button" data-shell-menu="navigation" aria-expanded="false" aria-controls="navigation-more" aria-label="More navigation options">More <span aria-hidden="true">▾</span></button>
+          <div class="shell-action-list" id="navigation-more" hidden>
+            <a href="./faculty_interests.html">Update researcher profile</a>
+          </div>
+        </div>
       </nav>
       <div class="catalog-pill" id="catalog-pill" aria-live="polite" aria-label="Catalog details are available">
         <span class="status-dot" aria-hidden="true"></span>
@@ -61,12 +67,43 @@
           <strong>Catalog</strong>
         </span>
       </div>
+      <button class="workspace-trigger" type="button" data-workspace-open aria-haspopup="dialog" aria-controls="personal-workspace" aria-label="Workspace, no saved opportunities"><span aria-hidden="true">☆</span><span class="workspace-trigger-label">Workspace</span><span class="workspace-badge" data-workspace-badge aria-hidden="true" hidden></span></button>
       <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
       </button>
     </div>
   </header>
+
+  <dialog id="personal-workspace" class="workspace-drawer" data-shell-drawer aria-labelledby="personal-workspace-heading" aria-describedby="personal-workspace-description">
+    <div class="workspace-drawer-header">
+      <h2 id="personal-workspace-heading">Workspace</h2>
+      <button type="button" class="button secondary" data-workspace-close data-shell-initial-focus aria-label="Close Workspace">Close</button>
+    </div>
+    <div class="workspace-drawer-body">
+      <p id="personal-workspace-description">Saved opportunities stay on this device. Create email alerts for future updates.</p>
+      <section aria-labelledby="workspace-saved-heading">
+        <h3 id="workspace-saved-heading">Saved opportunities <small id="saved-count">(0)</small></h3>
+        <div class="saved-list" id="saved-list"></div>
+        <button class="text-button hidden" id="clear-saved" type="button">Clear all saved</button>
+      </section>
+            <section class="profile-search-alert" id="workspace-email-alerts" aria-labelledby="profile-search-alert-heading">
+              <div>
+                <h3 id="profile-search-alert-heading">Email alerts</h3>
+                <p>Receive email only when a future opportunity becomes a new Strong match. Current results will not be emailed.</p>
+                <p class="profile-search-alert-privacy">Only your typed search and public filters are saved. Profiles, files, notes, and AI chats stay in this browser.</p>
+              </div>
+              <p>Manage verified alerts from the secure links in your alert emails.</p>
+              <div class="profile-search-alert-actions">
+                <button class="button primary" id="alert-new-matches" type="button" aria-describedby="profile-search-alert-status" disabled>Save this search as an email alert</button>
+                <button class="text-button" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How search alerts work</button>
+                <p id="profile-search-alert-status" role="status" aria-live="polite">Run a typed funding search to enable this alert.</p>
+              </div>
+            </section>
+    </div>
+  </dialog>
+  <p class="saved-storage-status workspace-save-status hidden" id="saved-status" data-shell-status="personal-workspace" role="status" aria-live="polite" aria-atomic="true"></p>
+
 
   <main>
     <section class="hero" aria-labelledby="page-title">
@@ -370,37 +407,11 @@
 
     <div class="workspace">
       <section class="results-column" aria-label="Funding opportunities">
-        <details class="saved-panel" id="saved-panel">
-          <summary>
-            <span><strong>★ Saved opportunities and email alerts</strong> <small id="saved-count">(0)</small></span>
-            <span class="summary-action" id="alert-panel-summary">View saved items</span>
-          </summary>
-          <div class="saved-body">
-            <div class="saved-list" id="saved-list"></div>
-            <button class="text-button hidden" id="clear-saved" type="button">Clear all saved</button>
-            <section class="profile-search-alert" aria-labelledby="profile-search-alert-heading">
-              <div>
-                <h3 id="profile-search-alert-heading">Email alerts for this search</h3>
-                <p>Receive email only when a future opportunity becomes a new Strong match. Current results will not be emailed.</p>
-                <p class="profile-search-alert-privacy">Only your typed search and public filters are saved. Profiles, files, notes, and AI chats stay in this browser.</p>
-              </div>
-              <div class="profile-search-alert-actions">
-                <button class="button primary" id="alert-new-matches" type="button" aria-describedby="profile-search-alert-status" disabled>Save this search as an email alert</button>
-                <button class="text-button" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How search alerts work</button>
-                <p id="profile-search-alert-status" role="status" aria-live="polite">Run a typed funding search to enable this alert.</p>
-              </div>
-            </section>
-          </div>
-        </details>
-        <p class="saved-storage-status hidden" id="saved-status" role="status" aria-live="polite"></p>
         <div class="results-toolbar search-not-started" id="results-toolbar">
           <p class="search-status result-tier-counts" id="result-tier-counts" role="status" aria-live="polite" aria-atomic="true"></p>
           <div class="toolbar-actions">
-            <button class="button primary" id="export-csv" type="button">Export CSV</button>
-            <button class="button primary team-ready-filter" id="filter-team-ready" type="button" aria-pressed="false" disabled>Build a team</button>
-            <button class="button primary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Chat with your results</button>
-          </div>
-          <div class="toolbar-controls">
+            <button class="button secondary team-ready-filter" id="filter-team-ready" type="button" aria-pressed="false" hidden>Team options only</button>
+            <div class="toolbar-controls">
             <label>
               <span>Sort</span>
               <select id="sort">
@@ -412,6 +423,13 @@
                 <option value="title">Title</option>
               </select>
             </label>
+            </div>
+            <button class="button secondary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
+            <button class="button secondary" type="button" data-shell-menu="results" aria-label="More results actions" aria-expanded="false" aria-controls="results-more-actions">More <span aria-hidden="true">▾</span></button>
+            <div class="shell-action-list" id="results-more-actions" hidden>
+              <button id="export-csv" type="button">Export CSV</button>
+              <button type="button" data-workspace-open data-shell-focus="alert-new-matches" data-shell-mirror="alert-new-matches" disabled>Create email alert for this search</button>
+            </div>
           </div>
         </div>
 
@@ -576,6 +594,7 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
+  <script src="./assets/site-shell.js?v=bdf07a7ac2135ec590533c0ef06ea179dff981dda8736017bf30e876eee3f523"></script>
   <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
   <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
   <script src="./data/catalog-metadata.js?v=catalog-20260904T142536901876Z"></script>
@@ -604,8 +623,8 @@
   <script src="./assets/opportunity-team.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
   <script src="./assets/opportunity-team-panel.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
   <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
-  <script src="./assets/site-nav.js?v=filters-2026-08-13"></script>
-  <script src="./assets/app.js?v=48ec185e8a787447f1202dac38cb866adcfe6cd44461f9789cb336cdaf21b35d"></script>
+  <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
+  <script src="./assets/app.js?v=509a4d52fad4bedfb660c0c21f4ad2a6e9e193e6e8b031fccb459910d20609ba"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

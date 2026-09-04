@@ -4,6 +4,9 @@
   let catalog = null;
   const $ = id => document.getElementById(id);
   const PAGE_SIZE = 20;
+  const cardMenuActions = new Map();
+  let savedStatusTimer;
+  globalThis.SiteShell?.registerMenu("card", opener => cardMenuActions.get(opener.dataset.cardMore));
   const POTENTIAL_MATCH_LIMIT = 12;
   const MAX_AI_CANDIDATES = 32;
   const MAX_AI_MATCHES = 12;
@@ -2211,7 +2214,7 @@
   }
 
   function scrollToSearchWorkspace() {
-    $("saved-panel").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("results-toolbar").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function startSearch() {
@@ -2979,6 +2982,14 @@
     const programIdentity = AWARD_LINKS_API?.programIdentityForOpportunity?.(record) || null;
     const proposedTeamScope = opportunityTeamScopeId(match, record);
     const teamAvailable = opportunityHasAvailableTeam(match);
+    const sourceAnchors = actions.html.match(/<a\b[\s\S]*?<\/a>/g) || [];
+    const primarySource = sourceAnchors.find(anchor => anchor.includes('class="source-action primary"')) || "";
+    cardMenuActions.set(id, [
+      { label: "Analyze", html: `<button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI about this opportunity</button>${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}` },
+      { label: "Track", html: `<button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Create email alert</button>${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Create program alert</button>` : ""}<button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add deadline to calendar</button>` },
+      { label: "Sources", html: sourceAnchors.filter(anchor => anchor !== primarySource).join("") },
+      { label: "Contact", html: contactAction },
+    ]);
 
     return `<article class="result-card${match.aiIdentified ? " ai-match" : ""}${match.workflowTier === "potential" ? " potential-match" : ""}" data-opportunity-id="${escapeAttribute(id)}" tabindex="-1">
       <div class="card-topline">
@@ -3032,14 +3043,9 @@
         </div>
       </details>
       <div class="card-actions">
-        ${actions.html}
-        ${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
-        <button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Email alert</button>
-        ${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Program email alert</button>` : ""}
+        ${primarySource}
         ${teamAvailable ? `<button class="source-action opportunity-team-trigger" type="button" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>` : ""}
-        <button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI</button>
-        ${contactAction}
-        <button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
+        <button class="source-action" type="button" data-shell-menu="card" data-card-more="${escapeAttribute(id)}" aria-expanded="false" aria-controls="site-action-list" aria-label="More actions for ${escapeAttribute(record.title)}">More <span aria-hidden="true">⋯</span></button>
       </div>
       ${EVALUATION_MODE ? sourceReviewControls(record) : ""}
       ${EVALUATION_MODE ? `<details class="result-feedback-toggle">
@@ -3580,6 +3586,8 @@
     status.textContent = message;
     status.classList.toggle("hidden", !message);
     status.classList.toggle("error-text", error);
+    clearTimeout(savedStatusTimer);
+    if (message && !error) savedStatusTimer = setTimeout(() => setSavedStatus(), 5000);
   }
 
   function savedMutationFailed(result, { id = "", control = "" } = {}) {
@@ -3610,6 +3618,11 @@
     const count = $("saved-count");
     const items = state.savedItems || [];
     if (count) count.textContent = `(${items.length})`;
+    const badge = document.querySelector("[data-workspace-badge]");
+    if (badge) { badge.textContent = String(items.length); badge.hidden = !items.length; }
+    document.querySelector(".workspace-trigger")?.setAttribute("aria-label", items.length
+      ? `Workspace, ${items.length} saved ${items.length === 1 ? "opportunity" : "opportunities"}`
+      : "Workspace, no saved opportunities");
     if (!list) return;
     if (!items.length) {
       list.innerHTML = `<p class="privacy-note">No saved opportunities yet. Select “☆ Save” on any result to keep it here on this device.</p>`;
@@ -3657,6 +3670,9 @@
     if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
+    setSavedStatus(result.saved ? "Opportunity saved to Workspace on this device." : "Opportunity removed from saved items.");
+    const saveControl = [...document.querySelectorAll("[data-save]")].find(node => node.dataset.save === id);
+    saveControl?.focus({ preventScroll: true });
   }
 
   function removeSaved(id) {
@@ -3736,7 +3752,6 @@
 
   function updateSavedSearchAlertUi() {
     const button = $("alert-new-matches");
-    const panel = $("saved-panel");
     const enabled = Boolean(state.searched && state.query);
     if (button) {
       button.disabled = !enabled;
@@ -3749,10 +3764,10 @@
         ? `Ready to save the current “${state.query}” search. Existing Strong matches will become the baseline.`
         : "Run a typed funding search to enable this alert.";
     }
-    if ($("alert-panel-summary")) {
-      $("alert-panel-summary").textContent = enabled ? "Email alert ready" : "View saved items";
-    }
-    panel?.classList.toggle("alert-ready", enabled);
+    document.querySelectorAll('[data-shell-mirror="alert-new-matches"]').forEach(command => {
+      command.disabled = !button || button.disabled;
+      command.title = button?.title || "";
+    });
   }
 
   function paginationItems(currentPage, totalPages) {
@@ -3837,6 +3852,7 @@
 
   function renderResults() {
     document.dispatchEvent(new CustomEvent("funding-finder:before-results-render"));
+    cardMenuActions.clear();
     renderHybridStatus();
     updateSavedSearchAlertUi();
     if (!state.searched) {
@@ -3854,6 +3870,7 @@
       $("pagination").classList.add("hidden");
       $("export-csv").disabled = true;
       $("filter-team-ready").disabled = true;
+      $("filter-team-ready").hidden = true;
       $("filter-team-ready").setAttribute("aria-pressed", "false");
       $("open-results-chat").disabled = true;
       updateAiRefineControl();
@@ -3871,6 +3888,7 @@
     $("result-tier-counts").textContent = compactResultCounts(display) +
       (state.teamReadyOnly ? " · Team-building opportunities only" : "");
     $("filter-team-ready").disabled = !state.teamReadyOnly && !availableTeamCount;
+    $("filter-team-ready").hidden = !state.teamReadyOnly && !availableTeamCount;
     $("filter-team-ready").setAttribute("aria-pressed", state.teamReadyOnly ? "true" : "false");
     $("filter-team-ready").title = state.teamReadyOnly
       ? "Show every matching opportunity again"
@@ -3899,7 +3917,7 @@
       const potentialCompleted = strongPotentialWorkflow && state.hybrid.active;
       $("results").innerHTML = `<div class="empty-state">
         <h3>${state.teamReadyOnly ? "No team-building opportunities in these results" : hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
-        <p>${state.teamReadyOnly ? "Select Build a team again to return to every matching opportunity." : hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
+        <p>${state.teamReadyOnly ? "Select Team options only again to return to every matching opportunity." : hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
         ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
         <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
       </div>`;
@@ -4658,9 +4676,9 @@
     $("chat-panel-copy").textContent = documentChat
       ? "Ask about the uploaded notice. Answers are grounded in the locally extracted PDF text and include page references when the source supports them."
       : "Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.";
-    $("open-results-chat").textContent = documentChat
-      ? "Chat with the uploaded NOFO"
-      : "Chat with your results";
+    $("open-results-chat").textContent = "Ask AI";
+    $("open-results-chat").setAttribute("aria-label", documentChat
+      ? "Ask AI about the uploaded NOFO" : "Ask AI about these results");
     $("chat").setAttribute("aria-label", documentChat
       ? "Chat with the uploaded funding notice"
       : "Chat with the current funding results");
@@ -5233,10 +5251,10 @@
       const remove = event.target.closest("[data-remove-saved]");
       if (remove) { removeSaved(remove.dataset.removeSaved); return; }
       const watchOpportunity = event.target.closest("[data-watch-opportunity]");
-      if (watchOpportunity) { openOpportunityAlert(watchOpportunity.dataset.watchOpportunity, watchOpportunity); return; }
+      if (watchOpportunity) { openOpportunityAlert(watchOpportunity.dataset.watchOpportunity, globalThis.SiteShell?.actionOpener(watchOpportunity) || watchOpportunity); return; }
       const watchProgram = event.target.closest("[data-watch-program]");
       if (watchProgram) {
-        openProgramAlert(watchProgram.dataset.watchProgram, watchProgram.dataset.watchProgramLabel, watchProgram);
+        openProgramAlert(watchProgram.dataset.watchProgram, watchProgram.dataset.watchProgramLabel, globalThis.SiteShell?.actionOpener(watchProgram) || watchProgram);
       }
     });
     $("saved-list")?.addEventListener("change", event => {
@@ -5448,7 +5466,12 @@
       }
       const chatButton = event.target.closest("[data-chat-record]");
       if (chatButton) {
+        const opener = globalThis.SiteShell?.actionOpener(chatButton);
         focusChatOnRecord(chatButton.dataset.chatRecord);
+        if (opener?.dataset.cardMore) {
+          chatReturnFocus = [...document.querySelectorAll("[data-card-more]")]
+            .find(node => node.dataset.cardMore === opener.dataset.cardMore);
+        }
       }
     });
     let sourceNoteTimer;

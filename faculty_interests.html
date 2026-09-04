@@ -12,8 +12,9 @@
   <title>Configure Faculty Interests | Funding Finder</title>
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260812">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
+  <link rel="stylesheet" href="./assets/site-nav.css?v=542297108fb69a73ecb2aab8ececb66b0347d5915936bb21e061871065ae177c">
   <link rel="stylesheet" href="./assets/faculty-interests.css?v=researcher-flow-20260903">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=bda8b8c68dc25d4c9651898ff5d646be191f2d9897d0e4f91334e14c9eff7d63">
 </head>
 <body>
   <a class="skip-link" href="#researcher-request-form">Skip to researcher request form</a>
@@ -27,7 +28,12 @@
         <a href="./match_explorer.html">Funding Finder</a>
         <a href="./team_match.html">Team Match</a>
         <a href="./funded_awards.html">Funded Awards</a>
-        <a href="./faculty_interests.html" aria-current="page">Configure Faculty Interests</a>
+        <div class="site-nav-utility">
+          <button type="button" data-shell-menu="navigation" aria-expanded="false" aria-controls="navigation-more" aria-current="page" aria-label="More, current page: Update researcher profile">More <span aria-hidden="true">▾</span></button>
+          <div class="shell-action-list" id="navigation-more" hidden>
+            <a href="./faculty_interests.html" aria-current="page">Update researcher profile</a>
+          </div>
+        </div>
       </nav>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
@@ -130,7 +136,8 @@
     <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. All rights reserved. Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author.</p>
   </footer>
 
-  <script src="./assets/site-nav.js?v=brand-2026-08-12"></script>
+  <script src="./assets/site-shell.js?v=bdf07a7ac2135ec590533c0ef06ea179dff981dda8736017bf30e876eee3f523"></script>
+  <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
   <script src="./data/researcher_directory.js?v=e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12"></script>
   <script src="./assets/orcid.js?v=orcid-format-20260903"></script>
   <script src="./assets/team-researchers.js?v=746ef7f98652fdef45d0ac346e93a706adebd7a1f772ab972aee033b5c95c774"></script>

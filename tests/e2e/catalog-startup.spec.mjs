@@ -320,8 +320,9 @@ test("catalog failure preserves entered and saved state and retry completes the 
   await expect(page.locator("#research-profile")).toHaveValue("Electrochemical reaction engineering");
   await expect(page.locator("#deadline-from")).toHaveValue("2026-09-01");
   await expect(page.locator("#saved-count")).toHaveText("(1)");
-  await page.locator("#saved-panel > summary").click();
+  await page.locator(".workspace-trigger").click();
   await expect(page.locator("[data-pursuit-note]")).toHaveValue("Keep this note");
+  await page.locator("[data-workspace-close]").click();
   await page.locator("#catalog-retry").click();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 45_000 });
   expect(attempts).toBe(2);

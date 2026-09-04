@@ -399,6 +399,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   const dodBrowserReleaseKey = "dod-browser-20260904-r2";
   const fundedAwardsStylesReleaseKey = "source-pill-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
+  const appCssHash = createHash("sha256").update(appCss).digest("hex");
   const aiProviderHash = createHash("sha256").update(aiProvider).digest("hex");
   const awardApiConfigHash = createHash("sha256").update(awardApiConfig).digest("hex");
   const institutionalCssHash = createHash("sha256").update(institutionalCss).digest("hex");
@@ -411,7 +412,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodBrowserReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`institutional-intelligence-core\\.js\\?v=${institutionalCoreHash}`));
   assert.match(fundedAwards, new RegExp(`institutional-intelligence-snapshots\\.js\\?v=${institutionalSnapshotsHash}`));
-  assert.match(fundedAwards, /app\.css\?v=presentation-cleanup-20260830/);
+  assert.match(fundedAwards, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(fundedAwards, /ai-gateway-config\.js\?v=hosted-ai-20260831/);
   assert.match(fundedAwards, new RegExp(`ai-provider\\.js\\?v=${aiProviderHash}`));
   assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${institutionalCssHash}`));
@@ -425,7 +426,6 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   assert.match(fundingFinder, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
   assert.ok(opportunityTeamGeneration);
-  const appCssHash = createHash("sha256").update(appCss).digest("hex");
   assert.match(fundingFinder, new RegExp(`app\\.css\\?v=${appCssHash}`));
   assert.match(fundingFinder, new RegExp(`app\\.js\\?v=${appJsHash}`));
   assert.match(teamMatch, new RegExp(`app\\.css\\?v=${appCssHash}`));

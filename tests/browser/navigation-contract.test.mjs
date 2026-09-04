@@ -44,7 +44,7 @@ test("mobile navigation is accessible and safely dismissible", () => {
   assert.match(navigationScript, /event\.key === "Escape"/);
   assert.match(navigationScript, /pointerdown/);
   assert.match(navigationStyles, /@media \(max-width: 1220px\)/);
-  assert.match(navigationStyles, /\.site-nav\s*\{[\s\S]*?left:\s*50%[\s\S]*?transform:\s*translateX\(-50%\)/);
+  assert.match(navigationStyles, /\.site-nav\s*\{[\s\S]*?position:\s*static[\s\S]*?margin-right:\s*auto/);
   assert.match(navigationStyles, /\.nav-toggle\s*\{[\s\S]*?display:\s*none/);
   assert.match(navigationStyles, /\.site-nav\.is-open\s*\{[\s\S]*?display:\s*flex/);
   assert.match(navigationStyles, /\.site-help-button\s*\{[\s\S]*?display:\s*inline-flex/);

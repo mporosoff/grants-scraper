@@ -402,7 +402,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("function evidenceRows", application_js)
         self.assertIn("function programContactAction", application_js)
         self.assertIn("Show full description &amp; details", application_js)
-        self.assertIn(">Ask AI</button>", application_js)
+        self.assertIn(">Ask AI about this opportunity</button>", application_js)
         self.assertIn(">Program contact</a>", application_js)
         self.assertIn("function amendmentOverview", application_js)
         self.assertIn("function amendmentNotice", application_js)
