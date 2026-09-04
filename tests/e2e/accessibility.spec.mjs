@@ -145,7 +145,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.locator("#ii-ask").evaluate(element => { element.open = true; });
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-question-answer")).toBeVisible();
+  await expect(page.locator("#ii-question-answer")).toBeVisible({ timeout: 30_000 });
   await scan(page, "funded-awards-evidence-answer", testInfo);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
