@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
@@ -9,6 +10,7 @@ const [
   teamSource,
   matcherSource,
   teamPage,
+  facultyInterestsPage,
   catalogSource,
   facultyMatchesSource,
 ] = await Promise.all([
@@ -17,6 +19,7 @@ const [
   readFile(new URL("../../assets/team-researchers.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/team-matcher.js", import.meta.url), "utf8"),
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
+  readFile(new URL("../../faculty_interests.html", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
 ]);
@@ -47,6 +50,14 @@ function memoryStorage() {
     removeItem(key) { values.delete(key); },
   };
 }
+
+test("every page uses the team researcher helper content digest as its cache key", () => {
+  const expected = createHash("sha256").update(teamSource).digest("hex");
+  for (const page of [teamPage, facultyInterestsPage]) {
+    const version = page.match(/assets\/team-researchers\.js\?v=([a-f0-9]{64})/)?.[1];
+    assert.equal(version, expected);
+  }
+});
 
 function buildIndex(records, query) {
   const postings = {};
