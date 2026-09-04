@@ -311,7 +311,8 @@ test("Award service delivery follows the protected main and rollback pattern", (
   const pagesClientGate = deployWorkflow.indexOf("Wait for Pages to publish the browser-first DoD client");
   const workerDeploy = deployWorkflow.indexOf("Deploy the committed Award Worker");
   assert.ok(pagesClientGate > -1 && workerDeploy > pagesClientGate);
-  assert.match(deployWorkflow, /sha256sum funded_awards\.html[\s\S]*sha256sum assets\/dod-awards-browser\.mjs[\s\S]*The existing Worker was left unchanged/);
+  assert.match(deployWorkflow, /pages-release-sha\.txt\?pre-worker=\$\{GITHUB_SHA\}-\$\{attempt\}[\s\S]*published_pages_sha[\s\S]*"\$GITHUB_SHA"[\s\S]*The existing Worker was left unchanged/);
+  assert.doesNotMatch(deployWorkflow, /candidate_client_hash|candidate_page_hash/);
   assert.match(workerSmoke, /source\?\.source[\s\S]*source\?\.status[\s\S]*source\?\.error\?\.code/);
   assert.match(workerSmoke, /failureDetail\(payload\)/);
   assert.doesNotMatch(deployWorkflow + workerSmoke, /query_baseline|p9_scoring|vector|semantic/i);

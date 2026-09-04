@@ -26,6 +26,9 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
+      - name: Stamp the exact published commit
+        shell: bash
+        run: printf '%s\n' "$GITHUB_SHA" > pages-release-sha.txt
       - name: Package the static site
         uses: actions/upload-pages-artifact@v5
         with:
