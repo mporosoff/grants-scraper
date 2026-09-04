@@ -240,7 +240,7 @@ test("cards remain title and abstract centric with responsive and accessible lay
   assert.match(appSource, /split\(\/\\n\\s\*\\n\+\//);
   assert.doesNotMatch(appSource, /View source query/);
   assert.match(styles, /\.award-abstract p \+ p/);
-  assert.match(styles, /\.header-context-pill \{[\s\S]*max-width: none/);
+  assert.match(styles, /@media \(max-width: 540px\) \{[\s\S]*?\.header-context-pill \{[\s\S]*?max-width: 96px;[\s\S]*?overflow: hidden;[\s\S]*?white-space: normal;/);
   assert.doesNotMatch(appSource, /invent|generated interpretation|success rate/i);
   assert.doesNotMatch(appSource, /\.at\(/);
   assert.match(styles, /@media \(max-width: 390px\)/);

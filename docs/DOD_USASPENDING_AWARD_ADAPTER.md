@@ -19,6 +19,10 @@ The search endpoint supplies the bounded result page. Detail calls are made
 only for records returned to the caller or admitted to the active snapshot,
 with concurrency three and successful-detail caching. A failed detail call
 retains the base search record rather than converting the source to a failure.
+Later result pages use USAspending's stable Award ID ordering and are reached
+sequentially from page one with the paired `last_record_unique_id` and
+`last_record_sort_value` continuation values. The adapter never jumps directly
+to a later sorted page.
 
 ## Representative record
 

@@ -602,11 +602,19 @@
 
 @media (max-width: 540px) {
   .header-context-pill {
-    max-width: none;
-    overflow: visible;
+    min-width: 0;
+    max-width: 96px;
+    overflow: hidden;
     padding: 6px 8px;
     font-size: .62rem;
+    line-height: 1.2;
+    text-align: center;
     text-overflow: clip;
+    white-space: normal;
+  }
+
+  .header-context-pill::before {
+    flex: 0 0 6px;
   }
 }
 

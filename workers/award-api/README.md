@@ -49,6 +49,9 @@ IDVs, direct payments, loans, subawards, and separate SBIR or DTIC feeds are
 outside this catalog. Detail enrichment is bounded to the returned page,
 concurrent in groups of three, and cached on successful responses. If a detail
 record fails, the base search result remains available with honest null fields.
+Later USAspending result pages use stable Award ID ordering and are traversed
+sequentially with the paired continuation values returned by the preceding
+page; direct page jumps are not used.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other sources.

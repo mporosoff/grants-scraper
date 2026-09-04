@@ -132,7 +132,34 @@ function dateFilter(criteria, now) {
   }];
 }
 
-export function buildDodRequest(criteria, { page = 1, now = () => new Date() } = {}) {
+function paginationCursor(cursor) {
+  if (!cursor) return null;
+  const rawUniqueId = cursor.last_record_unique_id;
+  const uniqueId = rawUniqueId === null || rawUniqueId === undefined ? Number.NaN : Number(rawUniqueId);
+  const rawSortValue = cursor.last_record_sort_value;
+  const sortValue = typeof rawSortValue === "string" ? rawSortValue.trim() : "";
+  if (
+    !Number.isSafeInteger(uniqueId)
+    || uniqueId <= 0
+    || !sortValue
+    || sortValue.length > 300
+    || /^(?:none|null)$/i.test(sortValue)
+    || /[\u0000-\u001f\u007f]/.test(sortValue)
+  ) return null;
+  return {
+    last_record_unique_id: uniqueId,
+    last_record_sort_value: sortValue,
+  };
+}
+
+function requestCursor(cursor) {
+  if (!cursor) return {};
+  const parsed = paginationCursor(cursor);
+  if (!parsed) sourceInvalid();
+  return parsed;
+}
+
+export function buildDodRequest(criteria, { page = 1, cursor = null, now = () => new Date() } = {}) {
   if (
     criteria.core_project_number
     || criteria.opportunity_number
@@ -142,6 +169,8 @@ export function buildDodRequest(criteria, { page = 1, now = () => new Date() } =
     || criteria.program_officer
   ) unsupported();
   if (criteria.program && !ASSISTANCE_LISTING_PATTERN.test(criteria.program)) unsupported();
+  const continuation = requestCursor(cursor);
+  if (!Number.isInteger(page) || page < 1 || (page === 1 && cursor) || (page > 1 && !cursor)) sourceInvalid();
 
   const timePeriod = dateFilter(criteria, now);
   if (timePeriod === null) return null;
@@ -167,12 +196,13 @@ export function buildDodRequest(criteria, { page = 1, now = () => new Date() } =
     fields: searchFields(),
     page,
     limit: DOD_UPSTREAM_PAGE_SIZE,
-    sort: "Base Obligation Date",
+    sort: "Award ID",
     order: "desc",
+    ...continuation,
   };
 }
 
-function searchRecords(payload) {
+function searchRecords(payload, expectedPage) {
   if (!payload || typeof payload !== "object") sourceInvalid();
   const records = Array.isArray(payload.results)
     ? payload.results
@@ -180,14 +210,18 @@ function searchRecords(payload) {
   if (!Array.isArray(records)) sourceInvalid();
   const page = object(payload.page_metadata);
   const pageNumber = Number(page.page);
+  const hasNext = page.hasNext;
   const parsedTotal = page.total === null || page.total === undefined ? null : Number(page.total);
   const total = Number.isFinite(parsedTotal) && parsedTotal >= 0 ? parsedTotal : null;
-  if (!Number.isInteger(pageNumber) || pageNumber < 1) sourceInvalid();
+  if (!Number.isInteger(pageNumber) || pageNumber !== expectedPage || typeof hasNext !== "boolean") sourceInvalid();
+  const cursor = paginationCursor(page);
+  if (hasNext && !cursor) sourceInvalid();
   return {
     records,
     page: pageNumber,
     total,
-    hasNext: page.hasNext === true,
+    hasNext,
+    cursor,
   };
 }
 
@@ -423,28 +457,31 @@ export async function searchDod(fetchImpl, criteria, {
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
   const retrievedAt = now().toISOString();
-  const firstPage = Math.floor(offset / DOD_UPSTREAM_PAGE_SIZE) + 1;
-  const localOffset = offset % DOD_UPSTREAM_PAGE_SIZE;
   const lastPage = Math.floor((offset + limit - 1) / DOD_UPSTREAM_PAGE_SIZE) + 1;
-  const firstRequest = buildDodRequest(criteria, { page: firstPage, now });
+  const firstRequest = buildDodRequest(criteria, { page: 1, now });
   if (!firstRequest) return emptyPayload(retrievedAt, criteria);
 
   const pages = [];
-  for (let page = firstPage; page <= lastPage; page += 1) {
-    const body = buildDodRequest(criteria, { page, now });
+  const seenCursors = new Set();
+  let cursor = null;
+  for (let page = 1; page <= lastPage; page += 1) {
+    const body = page === 1 ? firstRequest : buildDodRequest(criteria, { page, cursor, now });
     const payload = await fetchSourceJson(fetchImpl, DOD_SEARCH_URL, {
       method: "POST",
       headers: REQUEST_HEADERS,
       body: JSON.stringify(body),
     });
-    const parsed = searchRecords(payload);
+    const parsed = searchRecords(payload, page);
     pages.push(parsed);
     if (!parsed.hasNext) break;
+    const cursorKey = `${parsed.cursor.last_record_sort_value}\u0000${parsed.cursor.last_record_unique_id}`;
+    if (seenCursors.has(cursorKey)) sourceInvalid();
+    seenCursors.add(cursorKey);
+    cursor = parsed.cursor;
   }
 
   const rawRecords = pages.flatMap(page => page.records);
-  const baseAwards = rawRecords.map(baseRawAward).filter(Boolean);
-  const selected = uniqueBaseAwards(baseAwards.slice(localOffset, localOffset + limit));
+  const selected = uniqueBaseAwards(rawRecords.slice(offset, offset + limit).map(baseRawAward).filter(Boolean));
   const enrichment = await enrichDetails(fetchImpl, selected, { cache, cacheTtl });
   const yearFilter = yearFilterDiagnostics(criteria);
   const normalized = enrichment.output.map(({ raw, detail }) => normalizeDodAward(raw, { detail, retrievedAt }))
@@ -453,7 +490,7 @@ export async function searchDod(fetchImpl, criteria, {
     .filter(award => recordMatchesInstitution(award, criteria._institution, "DOD"))
     .map(award => attachResolvedInstitution(award, criteria._institution));
   const last = pages.at(-1);
-  const hasMore = Boolean(last?.hasNext || baseAwards.length > localOffset + limit);
+  const hasMore = Boolean(last?.hasNext || rawRecords.length > offset + limit);
   return {
     source: "DOD",
     adapter_version: DOD_ADAPTER_VERSION,

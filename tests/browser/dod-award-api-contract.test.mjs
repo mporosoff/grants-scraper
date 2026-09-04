@@ -59,7 +59,11 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
     year_start: 2025,
     year_end: 2026,
     _institution: institution,
-  }, { page: 2, now: fixedNow });
+  }, {
+    page: 2,
+    cursor: { last_record_unique_id: 4201, last_record_sort_value: "2026-08-28" },
+    now: fixedNow,
+  });
   assert.equal(body.subawards, false);
   assert.equal(body.spending_level, "awards");
   assert.deepEqual(body.filters.award_type_codes, ["04", "05"]);
@@ -74,7 +78,14 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
     date_type: "date_signed",
   }]);
   assert.equal(body.page, 2);
-  assert.equal(body.sort, "Base Obligation Date");
+  assert.equal(body.sort, "Award ID");
+  assert.equal(body.last_record_unique_id, 4201);
+  assert.equal(body.last_record_sort_value, "2026-08-28");
+
+  assert.throws(
+    () => buildDodRequest({}, { page: 2, now: fixedNow }),
+    error => error instanceof AwardSourceError && error.code === "source_invalid_response",
+  );
 
   for (const criteria of [
     { pi: "Jane Doe" },
@@ -210,12 +221,25 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
   const fetchImpl = async (url, options = {}) => {
     calls.push({ url: String(url), options });
     if (String(url) === DOD_SEARCH_URL) {
-      const page = JSON.parse(options.body).page;
+      const body = JSON.parse(options.body);
+      const page = body.page;
+      if (page === 1) {
+        assert.equal(body.last_record_unique_id, undefined);
+        assert.equal(body.last_record_sort_value, undefined);
+      } else {
+        assert.equal(body.last_record_unique_id, 9025);
+        assert.equal(body.last_record_sort_value, "2026-08-04");
+      }
       return new Response(JSON.stringify({
         spending_level: "awards",
         limit: 25,
         results: page === 1 ? records.slice(0, 25) : records.slice(25),
-        page_metadata: { page, hasNext: page === 1 },
+        page_metadata: {
+          page,
+          hasNext: page === 1,
+          last_record_unique_id: page === 1 ? 9025 : null,
+          last_record_sort_value: page === 1 ? "2026-08-04" : "None",
+        },
       }), { headers: { "Content-Type": "application/json" } });
     }
     activeDetails += 1;
@@ -231,13 +255,13 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
     }), { headers: { "Content-Type": "application/json" } });
   };
   const paged = await searchDod(fetchImpl, {}, {
-    limit: 2,
-    offset: 24,
+    limit: 1,
+    offset: 25,
     now: fixedNow,
   });
-  assert.deepEqual(paged.results.map(award => award.award_id), ["FA9550PAGE25", "FA9550PAGE26"]);
+  assert.deepEqual(paged.results.map(award => award.award_id), ["FA9550PAGE26"]);
   assert.equal(calls.filter(call => call.url === DOD_SEARCH_URL).length, 2);
-  assert.equal(paged.health.detail_requests, 2);
+  assert.equal(paged.health.detail_requests, 1);
   assert.ok(maximumActiveDetails <= 3);
 
   const concurrencyPayload = {
@@ -268,6 +292,33 @@ test("DoD pagination crosses an upstream page boundary without exceeding the thr
   assert.equal(bounded.results.length, 7);
   assert.equal(bounded.health.detail_requests, 7);
   assert.equal(maximumActiveDetails, 3);
+});
+
+test("DoD later-page search fails closed when USAspending omits or repeats its continuation cursor", async () => {
+  for (const mode of ["missing", "repeated"]) {
+    let pageCalls = 0;
+    const fetchImpl = async (url, options = {}) => {
+      if (String(url) !== DOD_SEARCH_URL) throw new Error("detail enrichment must not start");
+      pageCalls += 1;
+      const page = JSON.parse(options.body).page;
+      const cursor = mode === "missing"
+        ? {}
+        : { last_record_unique_id: 77, last_record_sort_value: "2026-08-01" };
+      return new Response(JSON.stringify({
+        results: Array.from({ length: 25 }, (_, index) => ({
+          ...structuredClone(searchFixture.results[0]),
+          "Award ID": `FA9550CURSOR${page}${index}`,
+          generated_internal_id: `ASST_NON_FA9550CURSOR${page}${index}_097`,
+        })),
+        page_metadata: { page, hasNext: true, ...cursor },
+      }), { headers: { "Content-Type": "application/json" } });
+    };
+    await assert.rejects(
+      () => searchDod(fetchImpl, {}, { limit: 1, offset: mode === "missing" ? 25 : 50, now: fixedNow }),
+      error => error instanceof AwardSourceError && error.code === "source_invalid_response",
+    );
+    assert.equal(pageCalls, mode === "missing" ? 1 : 2);
+  }
 });
 
 test("DoD award-to-opportunity links require exactly one exact current-catalog match", () => {
