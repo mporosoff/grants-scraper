@@ -48,13 +48,18 @@ award types `04` (Project Grant) and `05` (Cooperative Agreement). Contracts,
 IDVs, direct payments, loans, subawards, and separate SBIR or DTIC feeds are
 outside this catalog. Detail enrichment is bounded to the returned page,
 concurrent in groups of three, and cached on successful responses. If a detail
-record fails, the base search result remains available with honest null fields.
+record fails, the base search result remains available with honest null fields,
+the source health is marked degraded, and the interface reports the failed-detail
+count.
 Later USAspending result pages use stable Award ID ordering and are traversed
 sequentially with the paired continuation values returned by the preceding
 page; direct page jumps are not used. DoD offsets are applied after exact
 institution and normalized year validation. Up to 12 upstream pages may be
 inspected to fill the bounded first normalized snapshot page, while detail
-enrichment remains capped at 25 records with concurrency three.
+enrichment remains capped at 25 records with concurrency three. Reaching that
+upstream ceiling is reported as a safety-bound diagnostic, but it does not
+advertise a client next page unless a normalized lookahead record was actually
+collected.
 
 The response returns a flat normalized `results` list and a per-source status.
 One source failure never discards successful results from the other sources.

@@ -18,7 +18,9 @@ subawards, and separate SBIR or DTIC feeds are not part of this catalog.
 The search endpoint supplies the bounded result page. Detail calls are made
 only for records returned to the caller or admitted to the active snapshot,
 with concurrency three and successful-detail caching. A failed detail call
-retains the base search record rather than converting the source to a failure.
+retains the base search record rather than converting the source to a failure;
+the response marks detail health as degraded and the interface displays the
+number of unavailable public detail records.
 Later result pages use USAspending's stable Award ID ordering and are reached
 sequentially from page one with the paired `last_record_unique_id` and
 `last_record_sort_value` continuation values. The adapter never jumps directly
@@ -26,6 +28,9 @@ to a later sorted page. Public offsets are applied only after award-scope,
 deduplication, year, and exact institution validation. The adapter may inspect
 up to 12 upstream pages to assemble the first 25 normalized snapshot records,
 but detail enrichment remains capped at those 25 admitted records.
+The safety-bound flag remains true when that ceiling prevents a complete scan,
+but `has_more` is true only when the adapter has already collected a normalized
+lookahead record that the next client page can reach.
 
 ## Representative record
 

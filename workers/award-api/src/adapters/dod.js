@@ -523,7 +523,7 @@ export async function searchDod(fetchImpl, criteria, {
       && pages.length >= maximumPages
       && sourceScoped.length < targetCount
     );
-  const hasMore = sourceScoped.length > offset + limit || safetyBoundReached;
+  const hasMore = sourceScoped.length > offset + limit;
   const exactScopedTotal = upstreamExhausted && !outputTruncated ? sourceScoped.length : null;
   const totalCount = criteria._institution || criteria.year_start || criteria.year_end
     ? exactScopedTotal
@@ -542,7 +542,7 @@ export async function searchDod(fetchImpl, criteria, {
     year_filter: yearFilter,
     results: normalized,
     health: {
-      status: "available",
+      status: enrichment.failed ? "degraded" : "available",
       detail_requests: enrichment.requested,
       details_loaded: enrichment.loaded,
       details_failed: enrichment.failed,

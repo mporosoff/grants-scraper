@@ -222,6 +222,8 @@ test("the standalone product exposes the Phase 2 controls, state, provenance, an
   assert.match(appSource, /View contact on official award page/);
   assert.match(appSource, /Official \$\{escapeHtml\(source\)\} record/);
   assert.match(appSource, /source-native order; no cross-source reranking/i);
+  assert.match(appSource, /source\.health\?\.details_failed/);
+  assert.match(appSource, /public award \$\{detailWarning === 1 \? "detail" : "details"\} unavailable/);
   assert.match(appSource, /history\[mode === "push" \? "pushState" : "replaceState"\]/);
   assert.match(appSource, /addEventListener\("popstate"/);
   assert.match(appSource, /params\.get\("institution"\)/);

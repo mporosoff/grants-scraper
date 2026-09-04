@@ -152,6 +152,7 @@ test("DoD search enriches bounded returned records, caches details, and retains 
   assert.equal(first.results[0].funding_mechanism, "Project Grant");
   assert.equal(first.results[0].opportunity_numbers[0], "NOFOAFRLAFOSR20250002");
   assert.equal(first.upstream_total_count, null);
+  assert.equal(first.health.status, "available");
   assert.equal(first.health.detail_requests, 1);
   assert.equal(first.health.details_loaded, 1);
   assert.equal(first.health.detail_cache_hits, 0);
@@ -176,6 +177,7 @@ test("DoD search enriches bounded returned records, caches details, and retains 
   assert.equal(degraded.results.length, 1);
   assert.equal(degraded.results[0].award_id, "FA9550261B195");
   assert.equal(degraded.results[0].opportunity_numbers.length, 0);
+  assert.equal(degraded.health.status, "degraded");
   assert.equal(degraded.health.details_failed, 1);
 });
 
@@ -428,6 +430,18 @@ test("DoD normalized snapshot scans stop at the advertised upstream-page bound",
   assert.equal(bounded.has_more, false);
   assert.deepEqual(bounded.results, []);
   assert.equal(bounded.health.detail_requests, 0);
+
+  pageCalls = 0;
+  const paged = await searchDod(fetchImpl, { _institution: institution }, {
+    limit: 25,
+    offset: 0,
+    now: fixedNow,
+  });
+  assert.equal(pageCalls, DOD_MAX_UPSTREAM_PAGES);
+  assert.equal(paged.safety_bound_reached, true);
+  assert.equal(paged.has_more, false, "an upstream safety ceiling is not a reachable normalized next page");
+  assert.deepEqual(paged.results, []);
+  assert.equal(paged.health.detail_requests, 0);
 });
 
 test("DoD later-page search fails closed when USAspending omits or repeats its continuation cursor", async () => {

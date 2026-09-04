@@ -340,6 +340,7 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   const releaseKey = "post-phase4-abc-20260829";
   const alertStylesReleaseKey = "ui-runtime-20260903";
   const dodReleaseKey = "dod-awards-20260903";
+  const dodStatusReleaseKey = "dod-awards-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   for (const asset of [
     "alerts.js",
@@ -347,7 +348,7 @@ test("the integrated A-C browser release uses one fresh cache key for every chan
   ]) assert.match(fundedAwards, new RegExp(`${asset.replace(".", "\\.")}\\?v=${releaseKey}`));
   assert.match(fundedAwards, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`funded-awards-core\\.js\\?v=${dodReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`funded-awards\\.js\\?v=${dodStatusReleaseKey}`));
   for (const asset of [
     "institutional-intelligence-core.js",
     "institutional-intelligence-snapshots.js",
