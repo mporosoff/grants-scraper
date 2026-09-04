@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -176,6 +176,17 @@
     <category term="Health equity"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-02-16 | The National Institute on Minority Health and Health Disparities (NIMHD), intends to publish a Notice of Funding Opportunity (NOFO) for planning grants to support preparatory, feasibility, and pilot activities that advance intervention development or solutions-oriented etiologic studies aimed at improving health and reducing health disparities outcomes among Native Hawaiian and Pacific Islander (N…</summary>
+  </entry>
+  <entry>
+    <title>GLS Campus Suicide Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363809"/>
+    <id>urn:funding-finder:grants-gov:363809</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to support a comprehensive, public health, and evidence-based approach for colleges and universities that: improves access to behavioral health services for all college students, including those at risk for suicide, depression, serious mental illness, and substance use disorders that can lead to school failure; prevents and mitigates suicide, mental health conditions…</summary>
   </entry>
   <entry>
     <title>National Urban Indian Health Program (Education and Research)</title>
@@ -643,16 +654,5 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
   </entry>
 </feed>

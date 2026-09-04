@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -127,6 +127,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs. In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363800"/>
+    <id>urn:funding-finder:grants-gov:363800</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
   </entry>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -321,6 +331,26 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-03-18 | The Rural Residency Planning and Development (RRPD) program improves and expands rural health care access. It does this by developing new, accredited, sustainable rural residency programs, including rural track programs (RTPs). Newly created rural physician residency programs increase training and ultimately practice in rural areas to address physician shortages. The RRPD program provides start-up…</summary>
+  </entry>
+  <entry>
+    <title>GLS Campus Suicide Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363809"/>
+    <id>urn:funding-finder:grants-gov:363809</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to support a comprehensive, public health, and evidence-based approach for colleges and universities that: improves access to behavioral health services for all college students, including those at risk for suicide, depression, serious mental illness, and substance use disorders that can lead to school failure; prevents and mitigates suicide, mental health conditions…</summary>
+  </entry>
+  <entry>
+    <title>Providers Clinical Support System - Universities</title>
+    <link href="https://www.grants.gov/search-results-detail/363806"/>
+    <id>urn:funding-finder:grants-gov:363806</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Education and workforce"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to fully prepare graduate-level health professional students to understand, identify, intervene, and treat patients with a substance use, misuse and substance use disorder upon becoming licensed practitioners.</summary>
   </entry>
   <entry>
     <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
@@ -583,35 +613,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <summary>Health Resources and Services Administration | Closes 2027-01-18 | The purpose of this cooperative agreement is to provide tools, training and technical assistance (TA) to RWHAP Parts A and B recipients and their planning bodies to support integrated HIV prevention and care planning, maximizing resources and stregthening the system of HIV care and treatment.</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362977"/>
-    <id>urn:funding-finder:grants-gov:362977</id>
-    <updated>2026-10-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
-  </entry>
-  <entry>
-    <title>CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence</title>
-    <link href="https://www.grants.gov/search-results-detail/363055"/>
-    <id>urn:funding-finder:grants-gov:363055</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Education and workforce"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | The Centers for Disease Control and Prevention’s (CDC) National Center for Injury Prevention and Control (NCIPC) seeks investigator-initiated research proposals to expand the evidence base for the prevention of violence among youth aged 10 to 24 years. The purpose of this announcement is to fund the National Centers of Excellence in Youth Violence Prevention (or Youth Violence Prevention Centers; …</summary>
-  </entry>
-  <entry>
-    <title>RNomics Outreach and Coordination (ROC) Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363476"/>
-    <id>urn:funding-finder:grants-gov:363476</id>
-    <updated>2026-10-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2027-02-01 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
 </feed>

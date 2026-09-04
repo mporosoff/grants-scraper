@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -81,6 +81,18 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363796"/>
+    <id>urn:funding-finder:grants-gov:363796</id>
+    <updated>2026-09-03T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-11-04 | The 1890 CBG program, under Assistance Listing Number 10.216 is designed specifically to build the institutional teaching, research, and extension capacities of the eligible institutions through cooperative programs with Federal and non-Federal entities. The 1890 CBG Program supports Executive Order 14283, “White House Initiative to Promote Excellence and Innovation at Historically Black Colleges …</summary>
   </entry>
   <entry>
     <title>Emergency Citrus Disease Research and Extension Pre-Applications</title>
@@ -672,20 +684,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Food and Drug Administration | Closes 2028-05-16 | The purpose of this Notice of Funding Opportunity (NOFO) is to fund clinical trials of products evaluating efficacy and/or safety in support of a new indication or change in labeling to address unmet needs in rare diseases or conditions. Additionally, through the funding of collaborative, efficient, and/or innovative clinical trials, FDA expects to increase the number of approved treatments for ra…</summary>
-  </entry>
-  <entry>
-    <title>National Science Foundation Translation to Practice</title>
-    <link href="https://www.grants.gov/search-results-detail/359966"/>
-    <id>urn:funding-finder:grants-gov:359966</id>
-    <updated>2025-07-09T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
   </entry>
 </feed>
