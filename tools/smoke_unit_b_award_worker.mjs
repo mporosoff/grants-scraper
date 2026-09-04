@@ -225,7 +225,7 @@ for (const source of ["NSF", "NIH", "DOE"]) {
   const evidenceConcept = (String(evidenceSeed.title || "").match(/[\p{L}\p{N}]{3,}/u) || ["research"])[0];
   const evidence = await post("awards/snapshots/evidence", {
     snapshot_id: recent.snapshot_id,
-    retrieval_plan: { intent: "topical", concepts: [evidenceConcept], phrases: [evidenceConcept], exclusions: [] },
+    retrieval_plan: { intent: "awards", concepts: [evidenceConcept], phrases: [evidenceConcept], exclusions: [] },
     plan_format: "provider-concepts-v1",
     limit: 24,
   });

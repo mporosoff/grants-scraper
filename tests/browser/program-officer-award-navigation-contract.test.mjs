@@ -22,13 +22,14 @@ import {
 } from "../../workers/award-api/src/snapshot.js";
 
 const root = new URL("../../", import.meta.url);
-const [coreSource, pageSource, appSource, aiSource, configSource, deploySource, styleSource] = await Promise.all([
+const [coreSource, pageSource, appSource, aiSource, configSource, deploySource, smokeSource, styleSource] = await Promise.all([
   readFile(new URL("assets/institutional-intelligence-core.js", root), "utf8"),
   readFile(new URL("funded_awards.html", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
   readFile(new URL("assets/ai-provider.js", root), "utf8"),
   readFile(new URL("assets/award-api-config.js", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
+  readFile(new URL("tools/smoke_unit_b_award_worker.mjs", root), "utf8"),
   readFile(new URL("assets/institutional-intelligence.css", root), "utf8"),
 ]);
 const contentDigest = value => createHash("sha256").update(value).digest("hex");
@@ -537,6 +538,7 @@ test("evidence endpoint is Program-Officer-only, origin-protected, expiration-aw
   assert.equal(response.status, 200);
   assert.equal((await response.json()).retrieval.records_scanned, 30);
   assert.ok(buckets.includes("award:evidence"));
+  assert.equal((await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, retrieval_plan: retrievalPlan(["catalysis"], { intent: "topical" }), limit: 24 })), env)).status, 400, "unsupported answer intents are rejected");
   const privatePhrase = "retrieval-private-marker";
   assert.equal((await handler(request(evidenceBody({ snapshot_id: snapshot.snapshot_id, retrieval_plan: retrievalPlan([privatePhrase]), limit: 24 })), env)).status, 200);
   const storedSnapshot = await [...cache.values.entries()].find(([url]) => url.includes("award-snapshot.internal"))[1].clone().text();
@@ -582,4 +584,6 @@ test("served page exposes one coherent Program Officer cache identity and the br
   assert.match(deploySource, /all_provider_concepts_same_record/);
   assert.match(deploySource, /matched_facet_limit/);
   assert.match(deploySource, /indexed_abstract_characters_per_record/);
+  assert.match(smokeSource, /retrieval_plan: \{ intent: "awards", concepts: \[evidenceConcept\]/);
+  assert.doesNotMatch(smokeSource, /intent: "topical"/);
 });
