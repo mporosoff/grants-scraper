@@ -131,6 +131,35 @@ test("Unit B aggregates and investigator/program facets are computed from the fu
   assert.equal(programPage.base_aggregate.project_count, 26);
 });
 
+test("Unit B exposes every retained DoD Assistance Listing as a distinct selectable program facet", () => {
+  const dodAward = award(1, "DOD", {
+    subagency: "Department of the Air Force",
+    program_name: "Air Force Defense Research Sciences Program",
+    program_codes: ["12.800", "12.810", "12.800"],
+  });
+  const value = snapshot({ DOD: sourcePayload("DOD", [dodAward]) }, ["DOD"]);
+  const programs = value.base_aggregate.programs;
+
+  assert.equal(value.base_aggregate.program_count, 2);
+  assert.deepEqual(programs.map(program => program.query).sort(), ["12.800", "12.810"]);
+  assert.deepEqual(programs.map(program => program.source_codes), [["12.800"], ["12.810"]]);
+  assert.equal(programs.find(program => program.query === "12.800").leaf_label,
+    "Air Force Defense Research Sciences Program (12.800)");
+  assert.equal(programs.find(program => program.query === "12.810").leaf_label,
+    "Assistance Listing 12.810");
+  assert.equal(new Set(programs.map(program => program.key)).size, 2);
+
+  for (const program of programs) {
+    const page = snapshotPage(value, {
+      page: 1,
+      pageSize: 10,
+      facet: { type: "program", key: program.key },
+    });
+    assert.equal(page.facet.label, program.label);
+    assert.deepEqual(page.batches.flatMap(batch => batch.results.map(item => item.award_id)), [dodAward.award_id]);
+  }
+});
+
 test("Unit B preserves complete opaque program facet keys through page and batch validation", async () => {
   class MemoryCache {
     constructor() { this.values = new Map(); }

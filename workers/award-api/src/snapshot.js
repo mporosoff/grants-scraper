@@ -312,6 +312,28 @@ function programDescriptors(award, cache = null) {
   const parent = clean(award?.subagency, 300);
   const sourceCodes = [...new Set((Array.isArray(award?.program_codes) ? award.program_codes : [])
     .map(value => clean(value, 100)).filter(Boolean))];
+  if (source === "DOD" && sourceCodes.length) {
+    const primaryTitle = clean(award?.program_name, 260);
+    const descriptors = sourceCodes.map((code, index) => {
+      const leaf = clean(index === 0 && primaryTitle
+        ? `${primaryTitle} (${code})`
+        : `Assistance Listing ${code}`, 300);
+      const distinctChild = Boolean(parent && identityKey(parent) !== identityKey(leaf));
+      return {
+        key: `${source}:assistance-listing:${identityKey(code)}`,
+        source,
+        parent_label: parent || null,
+        leaf_label: leaf,
+        leaf_role: "assistance_listing",
+        query: code,
+        query_role: "assistance_listing_code",
+        source_codes: [code],
+        label: `${source} · ${distinctChild ? `${parent} › ${leaf}` : leaf}`,
+      };
+    });
+    cache?.set(cacheKey, descriptors);
+    return descriptors;
+  }
   const code = sourceCodes[0] || "";
   const sourceLeaf = source === "NIH"
     ? clean(award?.activity_code || award?.program_name || code, 300)
