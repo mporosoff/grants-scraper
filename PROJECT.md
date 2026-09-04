@@ -42,7 +42,7 @@ GitHub Pages is the only active product surface:
 
 https://mporosoff.github.io/grants-scraper/
 
-There are no accounts, installations, private faculty accounts, or persistent user-managed opportunity files. A compact public, source-traceable Hajim faculty directory supports Team Match and a staged ten-scope opportunity-to-team pilot; it is a generated planning asset rather than a user profile system. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
+There are no public accounts, installations, private faculty accounts, or persistent user-managed opportunity files. A canonical, source-traceable researcher registry generates the public directory used by Team Match and the staged ten-scope opportunity-to-team pilot. Configure Faculty Interests and an unchecked-by-default Team Match option can send a bounded correction or nomination to a private, Access-protected administrator queue; no submission changes the public registry without review, a registry-only pull request, protected checks, deployment, and live verification. An uploaded notice exists only in page memory. The retired server experiment remains available in Git history, not in the active product tree or CI.
 
 ### 2.2 Comprehensive catalog, not a curated shortlist
 

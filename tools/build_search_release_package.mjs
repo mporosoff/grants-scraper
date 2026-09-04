@@ -222,8 +222,11 @@ async function run() {
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",
+    "data/faculty_matches.js",
     "data/opportunity_team_index.js",
     "data/opportunity_teams.js",
+    "data/researcher_directory.js",
+    "data/researcher_registry_manifest.json",
     "match_explorer.html",
     "team_match.html",
     WORKER_SOURCE_PATH,
@@ -241,7 +244,7 @@ async function run() {
     passage_count: manifest.passage_count,
     worker_allowlist_sha256: sha256(allowlistBytes),
     source_hashes: sourceHashes,
-    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team index and projection",
+    atomic_publication_contract: "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team and researcher-registry projections",
   };
   const releaseBytes = jsonBytes(release);
 

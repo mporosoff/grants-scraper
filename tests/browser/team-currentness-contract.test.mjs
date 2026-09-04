@@ -175,6 +175,11 @@ test("Team Match cache and release identities cover the changed page", () => {
   assert.match(teamPage, new RegExp(`assets/search-retrieval\\.js\\?v=${generation}`));
   assert.match(teamPage, new RegExp(`assets/opportunity-team\\.js\\?v=${generation}`));
   assert.equal(release.source_hashes["team_match.html"], teamPageHash);
+  assert.doesNotMatch(teamPage, /python -m scripts\.faculty_match match/);
+  assert.match(
+    teamPage,
+    /python -m scripts\.faculty_match --registry config\/researcher_registry\.json --catalog data\/opportunities\.js --out data\/faculty_matches\.js/,
+  );
 });
 
 test("Funding Finder and Team Match delegate to one shared currentness contract", () => {

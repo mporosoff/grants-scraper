@@ -72,15 +72,14 @@ function buildIndex(records, query) {
   };
 }
 
-test("wires the researcher picker and editor into a syntactically valid page", () => {
+test("wires the researcher picker and governed missing-researcher handoff into a valid page", () => {
   assert.match(teamPage, /id="add-researcher"/);
   assert.match(teamPage, /id="researcher-picker"/);
   assert.match(teamPage, /id="researcher-choice"/);
   assert.match(teamPage, /id="choose-researcher"/);
-  assert.match(teamPage, /id="external-researcher-form"/);
-  assert.match(teamPage, /id="external-orcid"/);
-  assert.match(teamPage, /id="import-external-orcid"/);
-  assert.match(teamPage, /assets\/orcid\.js/);
+  assert.match(teamPage, /id="missing-researcher"[^>]+faculty_interests\.html\?mode=add&amp;return=team_match/);
+  assert.match(teamPage, /id="remove-saved-researcher"/);
+  assert.doesNotMatch(teamPage, /id="external-researcher-form"|id="external-orcid"|assets\/orcid\.js|assets\/researcher-intake\.js/);
   assert.match(teamPage, /assets\/team-researchers\.js/);
   assert.match(teamPage, /assets\/team-matcher\.js/);
   assert.match(teamPage, /assets\/search-retrieval\.js/);
@@ -112,15 +111,16 @@ test("wires the researcher picker and editor into a syntactically valid page", (
   assert.doesNotThrow(() => new Function(inlineScripts[0]));
 });
 
-test("starts with one Add researcher control and separates directory from manual entry", () => {
+test("starts with one Add researcher control and separates directory from missing-researcher setup", () => {
   const grid = teamPage.match(/<div class="pi-grid" id="pi-grid">([\s\S]*?)<\/div>/)?.[1] || "";
   assert.match(grid, />\s*Add researcher\s*<\/button>/);
   assert.equal((grid.match(/class="pi-toggle/g) || []).length, 1);
   assert.doesNotMatch(teamPage, /names\.forEach\(function \(n\) \{[\s\S]*?grid\.insertBefore/);
   assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
   assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
-  assert.match(teamPage, /id="manual-researcher"/);
-  assert.match(teamPage, /Add a researcher manually/);
+  assert.match(teamPage, /id="missing-researcher"/);
+  assert.match(teamPage, /Add a missing researcher/);
+  assert.doesNotMatch(teamPage, /Add a researcher manually/);
   assert.doesNotMatch(teamPage, /facultyGroup\.label = "Department faculty"/);
   assert.match(teamPage, /selected\.indexOf\(key\) === -1/);
 });
@@ -137,8 +137,10 @@ test("opens an accessible bounded faculty combobox", () => {
   assert.match(teamPage, /\$\("show-faculty-suggestions"\)\.addEventListener\("mousedown", function \(event\) \{[\s\S]*?event\.preventDefault\(\)/);
 });
 
-test("the prominent manual path opens the researcher editor directly", () => {
-  assert.match(teamPage, /\$\("manual-researcher"\)\.addEventListener\("click", function \(\) \{[\s\S]*?openExternalEditor\(""\)/);
+test("the missing-researcher path opens Configure with add mode selected", () => {
+  assert.match(teamPage, /href="\.\/faculty_interests\.html\?mode=add&amp;return=team_match"/);
+  assert.match(teamPage, /params\.get\("manual"\) === "1"[\s\S]*?location\.replace\("\.\/faculty_interests\.html\?mode=add&return=team_match"\)/);
+  assert.doesNotMatch(teamPage, /openExternalEditor|external-researcher-form/);
   assert.match(teamPage, /\$\("choose-researcher"\)\.addEventListener\("click", chooseResearcher\)/);
 });
 
@@ -193,22 +195,27 @@ test("a transient directory failure preserves history until a successful retry",
   assert.match(teamPage, /function restoreDeferredTeamHistory\(\) \{[\s\S]*?teamHistoryRestoreDeferred = false;[\s\S]*?restoreTeamHistory\(\);[\s\S]*?if \(teamMatchInitialized\)/);
   assert.match(teamPage, /rebuildResearcherMatches\(\);[\s\S]*?restoreDeferredTeamHistory\(\);[\s\S]*?return data/);
   assert.match(teamPage, /if \(teamHistoryRestoreDeferred\) \{[\s\S]*?Your saved team is preserved/);
-  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
+  assert.match(teamPage, /if \(localId\) \{[\s\S]*?selected\.push\(localKey\)/);
   assert.match(teamPage, /teamMatchInitialized = true;[\s\S]*?updateToggles\(\);[\s\S]*?refresh\(\);[\s\S]*?finishHistoryRestore\(\)/);
   assert.match(teamPage, /function handleTeamDirectoryFailure\(\) \{[\s\S]*?select Show to retry/);
   assert.match(teamPage, /ensureTeamDirectory\(\)[\s\S]*?renderFacultySuggestions\(true\); \}\)[\s\S]*?\.catch\(handleTeamDirectoryFailure\)/);
 });
 
-test("supports repeated selection, removal, editing, and the four-person maximum", () => {
+test("supports repeated selection, browser removal, and the four-person maximum", () => {
   assert.match(teamPage, /function chooseResearcher\(\)/);
   assert.match(teamPage, /if \(selected\.indexOf\(member\) !== -1\)/);
   assert.match(teamPage, /toggleButton\.setAttribute\("aria-label", "Remove "/);
-  assert.match(teamPage, /if \(profile\) \{[\s\S]*?openExternalEditor\(profile\.id\)/);
+  assert.match(teamPage, /if \(profile\) \{[\s\S]*?removeExternalProfile\(profile\)/);
+  assert.match(teamPage, /id="remove-saved-researcher"/);
+  assert.match(teamPage, /function removeChosenResearcher\(\)/);
+  assert.match(teamPage, /confirm\("Remove " \+ profile\.name \+ " from this browser\?"\)/);
   assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
   assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
-  assert.match(teamPage, /autoSelected = !wasEditing && !teamHistoryRestoreDeferred && selected\.length < MAX/);
   assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
-  assert.match(teamPage, /ORCID_API\.fetchProfile/);
+  assert.match(teamPage, /\.pi-entry\{display:inline-flex;flex:0 1 260px/);
+  assert.match(teamPage, /\.selected-terms\{display:grid;grid-template-columns:repeat\(auto-fit,minmax\(260px,1fr\)\)/);
+  assert.match(teamPage, /\.st-card\{min-width:0;max-width:100%/);
+  assert.doesNotMatch(teamPage, /ORCID_API|INTAKE_API|openExternalEditor/);
 });
 
 test("uses neutral visitor-facing researcher terminology", () => {
@@ -219,7 +226,7 @@ test("uses neutral visitor-facing researcher terminology", () => {
     .replace(/\s+/g, " ");
   assert.doesNotMatch(visibleText, /\b(?:internal|external)\b/i);
   assert.doesNotMatch(teamPage, /\(internal\)/i);
-  assert.match(visibleText, /Researchers you add are saved only in this browser/);
+  assert.match(visibleText, /Browser-only researcher profiles are stored only on this device/);
 });
 
 test("normalizes and saves no more than four external researchers", () => {

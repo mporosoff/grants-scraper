@@ -26,12 +26,50 @@
       .slice(0, maximum);
   }
 
+  function formatInput(value) {
+    let raw = String(value || "").trim().toUpperCase();
+    const urlMatch = raw.match(/ORCID\.ORG\/([^/?#]*)/i);
+    if (urlMatch) raw = urlMatch[1];
+    const characters = [];
+    for (const character of raw) {
+      if (/\d/.test(character)) characters.push(character);
+      else if (character === "X" && characters.length === 15) characters.push(character);
+      if (characters.length >= 16) break;
+    }
+    return characters.join("").match(/.{1,4}/g)?.join("-") || "";
+  }
+
+  function bindInput(input) {
+    if (!input || input.dataset.orcidFormatting === "true") return input;
+    const applyFormatting = () => {
+      const formatted = formatInput(input.value);
+      if (input.value !== formatted) input.value = formatted;
+    };
+    input.dataset.orcidFormatting = "true";
+    input.maxLength = 19;
+    input.inputMode = "text";
+    input.autocomplete = "off";
+    input.pattern = "[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]";
+    input.addEventListener("paste", event => {
+      const pasted = event.clipboardData?.getData("text") || "";
+      const formatted = formatInput(pasted);
+      if (formatted.length !== 19) return;
+      event.preventDefault();
+      input.value = formatted;
+      if (typeof input.dispatchEvent === "function" && typeof Event === "function") {
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      } else {
+        applyFormatting();
+      }
+    });
+    input.addEventListener("input", applyFormatting);
+    input.value = formatInput(input.value);
+    return input;
+  }
+
   function normalizeId(value, { validate = true } = {}) {
-    const match = String(value || "").trim().toUpperCase().match(
-      /(?:HTTPS?:\/\/(?:WWW\.)?ORCID\.ORG\/)?(\d{4}-\d{4}-\d{4}-\d{3}[\dX])(?:\/?(?:\?.*)?)?$/i,
-    );
-    if (!match) return "";
-    const id = match[1].toUpperCase();
+    const id = formatInput(value);
+    if (!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(id)) return "";
     if (!validate) return id;
     const compact = id.replace(/-/g, "");
     let total = 0;
@@ -103,7 +141,7 @@
 
   function parseWorks(payload, orcidId) {
     const id = normalizeId(orcidId);
-    if (!id) throw new Error("Enter a valid ORCID iD, including all 16 characters.");
+    if (!id) throw new Error("Enter a valid ORCID, including all 16 characters.");
     const items = Array.isArray(payload?.message?.items) ? payload.message.items : [];
     const names = new Map();
     const works = [];
@@ -140,14 +178,14 @@
       totalWorkCount: Math.max(works.length, Number(payload?.message?.["total-results"] || 0)),
       keywords,
       publicationText,
-      source: "Crossref metadata linked to the supplied ORCID iD",
+      source: "Crossref metadata linked to the supplied ORCID",
       updatedAt: new Date().toISOString(),
     };
   }
 
   async function fetchProfile(value, options = {}) {
     const id = normalizeId(value);
-    if (!id) throw new Error("Enter a valid ORCID iD, such as 0000-0002-1825-0097.");
+    if (!id) throw new Error("Enter a valid ORCID, such as 0000-0002-1825-0097.");
     const fetchImpl = options.fetchImpl || globalThis.fetch;
     if (typeof fetchImpl !== "function") throw new Error("ORCID publication lookup is unavailable in this browser.");
     const maximum = Math.max(1, Math.min(Number(options.maxWorks) || MAX_IMPORTED_WORKS, 100));
@@ -170,7 +208,7 @@
     }
     const parsed = parseWorks(await response.json(), id);
     if (!parsed.works.length) {
-      throw new Error("No public Crossref publications linked to this ORCID iD were found. Add keywords or a CV instead.");
+      throw new Error("No public Crossref publications linked to this ORCID were found. Add keywords or a CV instead.");
     }
     return parsed;
   }
@@ -181,8 +219,14 @@
     MAX_IMPORTED_WORKS,
     MAX_PUBLICATION_TEXT,
     fetchProfile,
+    formatInput,
+    bindInput,
     keywordCandidates,
     normalizeId,
     parseWorks,
   });
+
+  if (typeof document !== "undefined") {
+    document.querySelectorAll("[data-orcid-input]").forEach(bindInput);
+  }
 })();

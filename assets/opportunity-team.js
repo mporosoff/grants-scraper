@@ -69,15 +69,49 @@
   function validateData(data, expectedGenerationId) {
     var source = data && data.source_roster_counts;
     var pools = data && data.pool_counts;
+    var directory = global.RESEARCHER_DIRECTORY;
     if (!data || data.schema_version !== SCHEMA_VERSION ||
         !/^[a-f0-9]{64}$/.test(data.generation_id || "") ||
         (expectedGenerationId && data.generation_id !== expectedGenerationId) ||
-        !Array.isArray(data.faculty) || !Array.isArray(data.opportunities) ||
-        data.faculty.length !== 156 || data.opportunities.length !== 10 ||
-        !source || source.total !== 156 || source.rankable !== 145 || source.unrankable !== 11 ||
-        !pools || pools.main !== 118 || pools.standby !== 35 || pools.unadmitted !== 3) {
+        !Array.isArray(data.opportunities) || data.opportunities.length !== 10 ||
+        !source || !pools || !directory || directory.schema_version !== 1 ||
+        directory.registry_generation !== data.researcher_registry_generation ||
+        !Array.isArray(directory.researchers) || !directory.counts ||
+        source.total !== directory.counts.total ||
+        source.rankable !== directory.counts.rankable ||
+        source.unrankable !== directory.counts.unrankable ||
+        pools.main !== directory.counts.pool_counts.main ||
+        pools.standby !== directory.counts.pool_counts.standby ||
+        pools.unadmitted !== directory.counts.pool_counts.unadmitted) {
       throw new Error("The opportunity-team data has an incompatible identity or roster contract.");
     }
+    data.faculty = directory.researchers.map(function (researcher) {
+      return {
+        id: researcher.id,
+        legacy_ids: researcher.legacy_ids || [],
+        name: researcher.name,
+        home_unit: researcher.home_unit,
+        relationship: researcher.relationship,
+        pool_visibility: researcher.pool_visibility,
+        auto_proposable: researcher.auto_proposable,
+        status: researcher.status,
+        pool_state: researcher.pool_state,
+        claim_status: "registry-reviewed",
+        terms: (researcher.claims || []).filter(function (claim) {
+          return claim.status === "active";
+        }).map(function (claim) {
+          return {
+            claim_id: claim.claim_id,
+            claim_revision: claim.revision,
+            label: claim.label,
+            evidence: claim.evidence,
+            evidence_tier: claim.evidence_level,
+          };
+        }),
+        source_url: researcher.source_url,
+        source_checked_date: researcher.source_checked_date,
+      };
+    });
     var facultyIds = new Set();
     data.faculty.forEach(function (profile) {
       if (!profile || !profile.id || !profile.name || facultyIds.has(profile.id) ||
@@ -232,7 +266,11 @@
 
   function create(data) {
     validateData(data);
-    var facultyById = new Map(data.faculty.map(function (profile) { return [profile.id, profile]; }));
+    var facultyById = new Map();
+    data.faculty.forEach(function (profile) {
+      facultyById.set(profile.id, profile);
+      (profile.legacy_ids || []).forEach(function (legacyId) { facultyById.set(legacyId, profile); });
+    });
     var opportunityById = new Map(data.opportunities.map(function (opportunity) { return [opportunity.id, opportunity]; }));
     var opportunitiesByParent = new Map();
     data.opportunities.forEach(function (opportunity) {

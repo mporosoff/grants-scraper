@@ -15,6 +15,7 @@ from scripts.import_opportunity_team_model import (
     availability_projection,
     browser_projection,
 )
+from scripts.researcher_registry import legacy_faculty_projection, load_registry, registry_counts
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +29,7 @@ class OpportunityTeamModelTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+        cls.registry = load_registry(ROOT / "config" / "researcher_registry.json")
         cls.browser_bytes = BROWSER_PATH.read_bytes()
         cls.index_bytes = INDEX_PATH.read_bytes()
 
@@ -50,18 +52,18 @@ class OpportunityTeamModelTests(unittest.TestCase):
         for path in (CONFIG_PATH, BROWSER_PATH, INDEX_PATH, ROOT / "match_explorer.html", ROOT / "team_match.html"):
             self.assertNotIn(b"\r\n", path.read_bytes(), f"{path.name} must be platform-stable LF")
 
-    def test_roster_and_pool_contracts_are_explicit(self):
+    def test_roster_and_pool_contracts_are_generated_from_the_registry(self):
+        counts = registry_counts(self.registry)
         self.assertEqual(self.config["source_roster_counts"], {
-            "total": 156,
-            "rankable": 145,
-            "unrankable": 11,
+            key: counts[key] for key in ("total", "rankable", "unrankable")
         })
-        self.assertEqual(self.config["pool_counts"], {
-            "main": 118,
-            "standby": 35,
-            "unadmitted": 3,
-        })
-        self.assertEqual(len(self.config["faculty"]), 156)
+        self.assertEqual(self.config["pool_counts"], counts["pool_counts"])
+        self.assertEqual(
+            self.config["researcher_registry_generation"],
+            self.registry["registry_generation"],
+        )
+        self.assertEqual(self.config["faculty"], legacy_faculty_projection(self.registry))
+        self.assertEqual(len(self.config["faculty"]), counts["total"])
         states = {state: 0 for state in ("main", "standby", "unadmitted")}
         for profile in self.config["faculty"]:
             states[profile["pool_state"]] += 1

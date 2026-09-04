@@ -112,6 +112,7 @@
         : "";
       output.push({
         id,
+        registry_id: /^urh-[0-9]{6}$/.test(String(raw.registry_id || "")) ? String(raw.registry_id) : "",
         name,
         keywords,
         orcid_id: orcidId,

@@ -3,9 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 
-const [indexSource, dataSource, teamSource, retrievalSource, panelSource, appSource, page, teamPage] = await Promise.all([
+const [indexSource, dataSource, directorySource, teamSource, retrievalSource, panelSource, appSource, page, teamPage] = await Promise.all([
   readFile(new URL("../../data/opportunity_team_index.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunity_teams.js", import.meta.url), "utf8"),
+  readFile(new URL("../../data/researcher_directory.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/opportunity-team.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/opportunity-team-panel.js", import.meta.url), "utf8"),
@@ -28,10 +29,12 @@ function loadApi() {
   vm.runInNewContext(indexSource, context);
   vm.runInNewContext(retrievalSource, context);
   vm.runInNewContext(dataSource, context);
+  vm.runInNewContext(directorySource, context);
   vm.runInNewContext(teamSource, context);
   return {
     api: context.globalThis.OpportunityTeam,
     data: context.globalThis.OPPORTUNITY_TEAM_DATA,
+    directory: context.globalThis.RESEARCHER_DIRECTORY,
   };
 }
 
@@ -53,11 +56,11 @@ function record(id, overrides = {}) {
   };
 }
 
-test("validates the content-identified 156-person staged directory", () => {
+test("validates the registry-identified staged directory without fixed counts", () => {
   const { api, data } = loadApi();
   assert.equal(api.validateData(data, data.generation_id), data);
-  assert.deepEqual({ ...data.source_roster_counts }, { total: 156, rankable: 145, unrankable: 11 });
-  assert.deepEqual({ ...data.pool_counts }, { main: 118, standby: 35, unadmitted: 3 });
+  assert.equal(data.source_roster_counts.total, data.faculty.length);
+  assert.equal(Object.values(data.pool_counts).reduce((sum, value) => sum + value, 0), data.faculty.length);
   assert.equal(api.searchFaculty(data, "Porosoff")[0].name, "Marc D. Porosoff");
   assert.ok(api.searchFaculty(data, "optical", { limit: 12 }).length > 1);
   assert.equal(api.searchFaculty(data, "x").length, 0);
@@ -199,7 +202,12 @@ test("Funding Finder panels are lazy, rerender-safe, independently owned, and ac
   assert.match(page, /assets\/opportunity-team\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /assets\/opportunity-team-panel\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /id="filter-team-ready"[^>]+aria-pressed="false"/);
+  assert.match(page, /data\/researcher_directory\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /data\/opportunity_team_index\.js\?v=[a-f0-9]{64}/);
+  assert.ok(
+    page.indexOf("data/researcher_directory.js") < page.indexOf("assets/opportunity-team.js"),
+    "the canonical researcher directory must load before the opportunity-team validator",
+  );
   assert.match(appSource, /teamAvailable \? `<button class="source-action opportunity-team-trigger"/);
   assert.match(appSource, /data-opportunity-team="\$\{escapeAttribute\(id\)\}"/);
   assert.match(appSource, /data-opportunity-team-broad="\$\{isBroadOpportunity\(record\)\}"/);
@@ -224,7 +232,8 @@ test("Funding Finder panels are lazy, rerender-safe, independently owned, and ac
   assert.match(panelSource, /if \(event\.key === "Escape"/);
   assert.match(panelSource, /aria-labelledby/);
   assert.match(panelSource, /aria-live/);
-  assert.match(panelSource, /Add a researcher manually/);
+  assert.match(panelSource, /Add a missing researcher/);
+  assert.match(panelSource, /faculty_interests\.html\?mode=add&return=team_match&opportunity=/);
   assert.match(panelSource, /No additional internal faculty member has source-backed evidence/);
   assert.doesNotMatch([page, teamPage, teamSource, panelSource].join("\n"), /\.xlsx|config\/opportunity_team_model\.json/i);
 });
@@ -247,16 +256,18 @@ test("the eager availability index is exact, bounded, and omits the full team gr
 
 test("a stale or stalled lazy projection is discarded and retryable", async () => {
   const removed = [];
+  const loaded = loadApi();
   const scope = {
     OPPORTUNITY_TEAM_DATA: { schema_version: 99 },
     OPPORTUNITY_TEAM_INDEX: loadIndex(),
+    RESEARCHER_DIRECTORY: loaded.directory,
   };
   const staleScript = { remove() { removed.push("stale"); } };
   const document = {
     querySelectorAll() { return [staleScript]; },
   };
   vm.runInNewContext(teamSource, { globalThis: scope, document });
-  const { data } = loadApi();
+  const { data } = loaded;
   await assert.rejects(
     scope.OpportunityTeam.loadData(data.generation_id),
     /incompatible identity or roster contract/,
@@ -270,6 +281,7 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
   const detached = [];
   const timeoutScope = {
     OPPORTUNITY_TEAM_INDEX: loadIndex(),
+    RESEARCHER_DIRECTORY: loaded.directory,
     FUNDING_FINDER_APP: {
       boundedScripts: {
         sidecar: {
@@ -302,16 +314,17 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
   assert.equal(await timeoutScope.OpportunityTeam.loadData(data.generation_id), data);
 });
 
-test("Team Match exposes separate directory and manual paths while retaining ORCID", () => {
+test("Team Match exposes directory and governed missing-researcher paths", () => {
   assert.match(teamPage, /id="faculty-search"[^>]+role="combobox"/);
   assert.match(teamPage, /id="faculty-suggestions" role="listbox"/);
   assert.match(teamPage, /Search Hajim faculty at the University of Rochester/);
-  assert.match(teamPage, /id="manual-researcher"/);
-  assert.match(teamPage, /Add a researcher manually/);
+  assert.match(teamPage, /id="missing-researcher"/);
+  assert.match(teamPage, /faculty_interests\.html\?mode=add&amp;return=team_match/);
   assert.match(teamPage, /OPPORTUNITY_TEAM_API\.searchFaculty/);
   assert.match(teamPage, /pool_state === "unadmitted"/);
   assert.match(teamPage, /Standby - one retained capability/);
-  assert.match(teamPage, /ORCID_API\.fetchProfile/);
+  assert.doesNotMatch(teamPage, /ORCID_API|external-researcher-form|researcher-intake\.js/);
   assert.match(teamPage, /selected\.length >= MAX/);
   assert.match(teamPage, /applyProposedTeamFromUrl/);
+  assert.match(teamPage, /params\.get\("local"\)/);
 });
