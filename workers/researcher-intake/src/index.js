@@ -552,6 +552,7 @@ const ADMIN_JS = `(() => {
   const detail = document.getElementById("detail");
   const outcome = document.getElementById("outcome");
   const status = document.getElementById("admin-status");
+  const approvedEditor = document.getElementById("approved");
   const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "'": "&#39;",
   })[character]);
@@ -672,11 +673,23 @@ const ADMIN_JS = `(() => {
     const effect = active.material_effect;
     document.getElementById("effect").innerHTML = '<dl class="compact-dl"><dt>Classification</dt><dd>' + esc(label(effect.classification)) + '</dd><dt>Research interests</dt><dd>' + esc(effect.changed_claims) + ' changed</dd><dt>Opportunity matches</dt><dd>' + esc(effect.affected_matches.length) + '</dd><dt>Team scopes</dt><dd>' + esc(effect.affected_team_scopes.length) + '</dd></dl><h4>Generated files</h4>' + listHtml(effect.generated_outputs, "None");
   }
-  function renderApprovedSummary() {
-    const profile = active.approved_profile || {};
+  function renderApprovedSummary(profile = {}) {
     const activeClaims = (profile.claims || []).filter(claim => claim.status === "active").map(claim => claim.label);
     const retiredClaims = (profile.claims || []).filter(claim => claim.status === "retired").map(claim => claim.label);
     document.getElementById("approved-summary").innerHTML = '<dl class="compact-dl"><dt>Name</dt><dd>' + esc(profile.display_name) + '</dd><dt>Relationship</dt><dd>' + esc(label(profile.relationship)) + '</dd><dt>Visibility</dt><dd>' + esc(label(profile.pool_visibility)) + '</dd><dt>Active interests</dt><dd>' + esc(activeClaims.length) + '</dd><dt>Retired interests</dt><dd>' + esc(retiredClaims.length) + '</dd><dt>Automatically proposed</dt><dd>' + (profile.auto_proposable ? "Yes" : "No") + "</dd></dl>";
+  }
+  function previewApprovedEditor() {
+    try {
+      const profile = JSON.parse(approvedEditor.value);
+      if (!profile || typeof profile !== "object" || Array.isArray(profile)) throw new Error("invalid profile");
+      approvedEditor.removeAttribute("aria-invalid");
+      renderApprovedSummary(profile);
+      return { ok: true, profile };
+    } catch {
+      approvedEditor.setAttribute("aria-invalid", "true");
+      document.getElementById("approved-summary").innerHTML = '<div class="notice warning">The approval preview is unavailable until the complete registry record contains valid JSON.</div>';
+      return { ok: false, profile: null };
+    }
   }
   function renderWarnings() {
     const warnings = active.validator_warnings || [];
@@ -722,8 +735,9 @@ const ADMIN_JS = `(() => {
     renderIdentity();
     renderEffect();
     document.getElementById("submission-details").innerHTML = '<dl class="compact-dl"><dt>Source</dt><dd>' + esc(label(active.source_surface)) + '</dd><dt>Contact</dt><dd>' + esc(active.contact_email || "Not provided") + '</dd><dt>Submitter note</dt><dd>' + esc(active.submitter_note || "None") + '</dd><dt>Registry generation</dt><dd>' + esc(active.base_registry_generation) + "</dd></dl>";
-    renderApprovedSummary();
-    document.getElementById("approved").value = JSON.stringify(active.approved_profile, null, 2);
+    approvedEditor.value = JSON.stringify(active.approved_profile, null, 2);
+    approvedEditor.removeAttribute("aria-invalid");
+    renderApprovedSummary(active.approved_profile);
     document.getElementById("technical-current").textContent = JSON.stringify(active.current_profile, null, 2);
     document.getElementById("technical-proposed").textContent = JSON.stringify(active.proposed_profile, null, 2);
     document.getElementById("reason").value = "";
@@ -742,7 +756,7 @@ const ADMIN_JS = `(() => {
     if (action === "reconcile_publish" && state === "publication_failed") return ["Publication did not complete", "The publication result was recorded for follow-up.", "Review the failure before retrying."];
     return ["Action recorded", "The researcher request was updated.", "Review the queue for its current status."];
   }
-  function showOutcome(action, response, reason) {
+  function showOutcome(action, response, reason, approvedProfile) {
     const copy = outcomeCopy(action, response.state);
     detail.hidden = true;
     queueView.hidden = true;
@@ -751,7 +765,8 @@ const ADMIN_JS = `(() => {
     document.getElementById("outcome-title").textContent = copy[0];
     document.getElementById("outcome-message").textContent = copy[1];
     document.getElementById("outcome-confirmation").textContent = copy[2];
-    document.getElementById("outcome-details").innerHTML = '<dt>Researcher</dt><dd>' + esc(active.proposed_profile.display_name) + '</dd><dt>Submission</dt><dd>' + esc(response.submission_id) + '</dd><dt>State</dt><dd>' + esc(label(response.state)) + '</dd><dt>Recorded</dt><dd>' + esc(formatTime(response.updated_at)) + '</dd>' + (reason ? '<dt>Reason</dt><dd>' + esc(reason) + "</dd>" : "");
+    const researcherName = approvedProfile && approvedProfile.display_name || active.proposed_profile.display_name;
+    document.getElementById("outcome-details").innerHTML = '<dt>Researcher</dt><dd>' + esc(researcherName) + '</dd><dt>Submission</dt><dd>' + esc(response.submission_id) + '</dd><dt>State</dt><dd>' + esc(label(response.state)) + '</dd><dt>Recorded</dt><dd>' + esc(formatTime(response.updated_at)) + '</dd>' + (reason ? '<dt>Reason</dt><dd>' + esc(reason) + "</dd>" : "");
     const continueButton = document.getElementById("outcome-review");
     continueButton.hidden = !["under_review", "changes_requested"].includes(response.state);
     continueButton.onclick = () => open(response.submission_id).catch(showFatal);
@@ -775,12 +790,14 @@ const ADMIN_JS = `(() => {
         return;
       }
       let profile = null;
-      try {
-        if (["approve", "retry_publish"].includes(action)) profile = JSON.parse(document.getElementById("approved").value);
-      } catch {
-        status.textContent = "The complete approved registry record contains invalid JSON.";
-        status.hidden = false;
-        return;
+      if (["approve", "retry_publish"].includes(action)) {
+        const preview = previewApprovedEditor();
+        if (!preview.ok) {
+          status.textContent = "The complete approved registry record contains invalid JSON.";
+          status.hidden = false;
+          return;
+        }
+        profile = preview.profile;
       }
       document.querySelectorAll("[data-action]").forEach(actionButton => { actionButton.disabled = true; });
       status.hidden = true;
@@ -789,7 +806,7 @@ const ADMIN_JS = `(() => {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ action, expected_revision: active.revision, approved_profile: profile, reason }),
         });
-        showOutcome(action, response, reason || response.administrator_reason || "");
+        showOutcome(action, response, reason || response.administrator_reason || "", profile);
       } catch (error) {
         const submissionId = active.submission_id;
         if (["approve", "retry_publish"].includes(action) && error.status >= 500) {
@@ -801,6 +818,7 @@ const ADMIN_JS = `(() => {
       }
     };
   });
+  approvedEditor.addEventListener("input", previewApprovedEditor);
   load().catch(showFatal);
 })();`;
 

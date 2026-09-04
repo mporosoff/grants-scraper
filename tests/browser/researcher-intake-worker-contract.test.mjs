@@ -334,6 +334,8 @@ test("administrator assets present a bounded review and a full action outcome", 
   assert.match(ADMIN_CSS, /grid-template-columns:minmax\(200px,1\.4fr\)/);
   assert.match(ADMIN_JS, /Shared directory pages are ignored as identity evidence/);
   assert.match(ADMIN_JS, /showOutcome\(action, response/);
+  assert.match(ADMIN_JS, /approvedEditor\.addEventListener\("input", previewApprovedEditor\)/);
+  assert.match(ADMIN_JS, /showOutcome\(action, response, reason \|\| response\.administrator_reason \|\| "", profile\)/);
   assert.doesNotMatch(ADMIN_JS, /JSON\.stringify\(item\.trust_signals\)/);
 });
 
