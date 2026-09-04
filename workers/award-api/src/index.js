@@ -1,5 +1,5 @@
 import { AWARD_SCHEMA_VERSION, cleanText } from "./contract.js";
-import { AwardSourceError } from "./http.js";
+import { AwardSourceError, withinOperationBudget } from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
@@ -11,6 +11,7 @@ import {
   DOD_MAX_RESULTS,
   DOD_MAX_UPSTREAM_PAGES,
   DOD_OPERATION_BUDGET_MS,
+  DOD_SOURCE_WRAPPER_TIMEOUT_MS,
   DOD_UPSTREAM_PAGE_SIZE,
   searchDod,
 } from "./adapters/dod.js";
@@ -346,20 +347,46 @@ async function sourceCacheRequest(source, request, asOf) {
   return new Request(`https://award-cache.internal/v1/${source.toLowerCase()}/${identity}`);
 }
 
-async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, guard = null, rateLimit = null }) {
+async function sourceWrapperOperation(source, operation, monotonicNow, operationDeadline, timeoutMs) {
+  return source === "DOD"
+    ? withinOperationBudget(operation, monotonicNow, operationDeadline, timeoutMs)
+    : operation();
+}
+
+async function runSource({
+  source,
+  request,
+  fetchImpl,
+  cache,
+  cacheTtl,
+  asOf,
+  guard = null,
+  rateLimit = null,
+  monotonicNow = () => performance.now(),
+  sourceWrapperTimeoutMs = DOD_SOURCE_WRAPPER_TIMEOUT_MS,
+}) {
+  const operationDeadline = source === "DOD" ? monotonicNow() + DOD_OPERATION_BUDGET_MS : null;
   const key = await sourceCacheRequest(source, request, asOf);
   if (cache) {
     try {
-      const cached = await cache.match(key);
-      if (cached) {
-        const payload = await cached.json();
-        if (payload?.source === source && Array.isArray(payload.results)) return { ...payload, cache: "hit" };
-      }
+      const payload = await sourceWrapperOperation(source, async () => {
+        const cached = await cache.match(key);
+        return cached ? cached.json() : null;
+      }, monotonicNow, operationDeadline, sourceWrapperTimeoutMs);
+      if (payload?.source === source && Array.isArray(payload.results)) return { ...payload, cache: "hit" };
     } catch {
       // A cache outage must not make either official source unavailable.
     }
   }
-  if (guard) await guard(`award:${source}`, rateLimit);
+  if (guard) {
+    await sourceWrapperOperation(
+      source,
+      () => guard(`award:${source}`, rateLimit),
+      monotonicNow,
+      operationDeadline,
+      sourceWrapperTimeoutMs,
+    );
+  }
   const options = {
     limit: request.limit,
     offset: request.offset,
@@ -368,17 +395,24 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, gu
     includeAbstracts: request.includeAbstracts !== false,
     cache,
     cacheTtl,
+    ...(source === "DOD" ? { monotonicNow, operationDeadline } : {}),
   };
   const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe, DOD: searchDod };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
     try {
-      await cache.put(key, new Response(JSON.stringify(payload), {
-        headers: {
-          "Cache-Control": `public, max-age=${cacheTtl}`,
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      }));
+      await sourceWrapperOperation(
+        source,
+        () => cache.put(key, new Response(JSON.stringify(payload), {
+          headers: {
+            "Cache-Control": `public, max-age=${cacheTtl}`,
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })),
+        monotonicNow,
+        operationDeadline,
+        sourceWrapperTimeoutMs,
+      );
     } catch {
       // Successful live source data remains usable when cache writes fail.
     }
@@ -694,6 +728,7 @@ export function createHandler({
             detail_concurrency: DOD_DETAIL_CONCURRENCY,
             detail_cache_timeout_ms: DOD_DETAIL_CACHE_TIMEOUT_MS,
             operation_budget_ms: DOD_OPERATION_BUDGET_MS,
+            source_wrapper_timeout_ms: DOD_SOURCE_WRAPPER_TIMEOUT_MS,
             snapshot_behavior: "bounded-first-normalized-page",
           },
         },
@@ -1004,6 +1039,7 @@ export {
   SNAPSHOT_PATHS,
   createUpstreamGuard,
   loadSnapshot,
+  runSource,
   serviceConfig,
   storeSnapshot,
   validateSnapshotBatch,

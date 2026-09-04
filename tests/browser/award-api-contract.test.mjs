@@ -519,6 +519,7 @@ test("Worker validates bounded public requests and exposes no credential require
         detail_concurrency: 3,
         detail_cache_timeout_ms: 2_000,
         operation_budget_ms: 100_000,
+        source_wrapper_timeout_ms: 2_000,
         snapshot_behavior: "bounded-first-normalized-page",
       },
     },

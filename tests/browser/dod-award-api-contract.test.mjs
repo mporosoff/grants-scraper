@@ -12,11 +12,13 @@ import {
   DOD_OPERATION_BUDGET_MS,
   DOD_SEARCH_REQUEST_TIMEOUT_MS,
   DOD_SEARCH_URL,
+  DOD_SOURCE_WRAPPER_TIMEOUT_MS,
   buildDodRequest,
   normalizeDodAward,
   searchDod,
 } from "../../workers/award-api/src/adapters/dod.js";
 import { AwardSourceError } from "../../workers/award-api/src/http.js";
+import { runSource } from "../../workers/award-api/src/index.js";
 import { resolveInstitution } from "../../workers/award-api/src/institutions.js";
 
 const root = new URL("../../", import.meta.url);
@@ -58,6 +60,7 @@ test("DoD search uses only prime 04/05 assistance awards and supported exact fil
   assert.equal(DOD_SEARCH_REQUEST_TIMEOUT_MS, 20_000);
   assert.equal(DOD_OPERATION_BUDGET_MS, 100_000);
   assert.equal(DOD_DETAIL_CACHE_TIMEOUT_MS, 2_000);
+  assert.equal(DOD_SOURCE_WRAPPER_TIMEOUT_MS, 2_000);
   assert.ok(DOD_OPERATION_BUDGET_MS < 120_000);
   const institution = resolveInstitution({ id: "university-of-rochester" });
   const body = buildDodRequest({
@@ -208,6 +211,58 @@ test("DoD bounds slow detail-cache reads and writes without discarding live deta
     assert.equal(result.results[0].opportunity_numbers[0], "NOFOAFRLAFOSR20250002");
     assert.equal(result.health.status, "available");
     assert.equal(result.health.details_loaded, 1);
+  }
+});
+
+test("DoD source-cache and rate-limit wrapper I/O share the operation deadline", async () => {
+  const request = {
+    publicCriteria: { award_id: "FA9550261B195" },
+    resolvedCriteria: { award_id: "FA9550261B195" },
+    limit: 1,
+    offset: 0,
+    scanAll: false,
+    includeAbstracts: true,
+  };
+  for (const slowOperation of ["source_match", "guard", "source_put"]) {
+    let delayedTimer = null;
+    const delayed = () => new Promise(resolve => { delayedTimer = setTimeout(resolve, 500); });
+    const isSourceCacheKey = key => /\/v1\/dod\/[a-f0-9]{64}$/.test(key.url);
+    const cache = {
+      async match(key) {
+        if (slowOperation === "source_match" && isSourceCacheKey(key)) return delayed();
+        return null;
+      },
+      async put(key) {
+        if (slowOperation === "source_put" && isSourceCacheKey(key)) await delayed();
+      },
+    };
+    const guard = slowOperation === "guard" ? delayed : async () => true;
+    const started = performance.now();
+    try {
+      const operation = runSource({
+        source: "DOD",
+        request,
+        fetchImpl: fixtureFetch(),
+        cache,
+        cacheTtl: 3_600,
+        asOf: fixedNow().toISOString(),
+        guard,
+        rateLimit: 12,
+        sourceWrapperTimeoutMs: 5,
+      });
+      if (slowOperation === "guard") {
+        await assert.rejects(
+          operation,
+          error => error instanceof AwardSourceError && error.code === "source_timeout",
+        );
+      } else {
+        const result = await operation;
+        assert.equal(result.results[0].award_id, "FA9550261B195");
+      }
+    } finally {
+      clearTimeout(delayedTimer);
+    }
+    assert.ok(performance.now() - started < 250, `${slowOperation} must not outlive the source wrapper budget`);
   }
 });
 

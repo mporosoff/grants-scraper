@@ -7,7 +7,13 @@ import {
   safeOfficialUrl,
   uniqueStrings,
 } from "../contract.js";
-import { AwardSourceError, SOURCE_TIMEOUT_MS, fetchSourceJson } from "../http.js";
+import {
+  AwardSourceError,
+  SOURCE_TIMEOUT_MS,
+  boundedRequestTimeout,
+  fetchSourceJson,
+  withinOperationBudget,
+} from "../http.js";
 import { attachResolvedInstitution, normalizeInstitution, recordMatchesInstitution } from "../institutions.js";
 import { recordSatisfiesYearFilter, yearFilterDiagnostics } from "../year-filter.js";
 
@@ -21,6 +27,7 @@ export const DOD_DETAIL_CONCURRENCY = 3;
 export const DOD_SEARCH_REQUEST_TIMEOUT_MS = 20_000;
 export const DOD_OPERATION_BUDGET_MS = 100_000;
 export const DOD_DETAIL_CACHE_TIMEOUT_MS = 2_000;
+export const DOD_SOURCE_WRAPPER_TIMEOUT_MS = 2_000;
 
 const DOD_AGENCY_NAME = "Department of Defense";
 const DOD_AWARD_TYPE_CODES = Object.freeze(["04", "05"]);
@@ -290,27 +297,6 @@ function detailCacheRequest(generatedId) {
   return new Request(`https://award-cache.internal/v1/dod-detail/${encodeURIComponent(generatedId)}`);
 }
 
-function boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout) {
-  const remaining = Math.floor(operationDeadline - monotonicNow());
-  if (remaining <= 0) throw new AwardSourceError("source_timeout");
-  return Math.min(maximumTimeout, remaining);
-}
-
-async function withinOperationBudget(operation, monotonicNow, operationDeadline, maximumTimeout) {
-  const timeoutMs = boundedRequestTimeout(monotonicNow, operationDeadline, maximumTimeout);
-  let timer;
-  try {
-    return await Promise.race([
-      Promise.resolve().then(operation),
-      new Promise((_, reject) => {
-        timer = setTimeout(() => reject(new AwardSourceError("source_timeout")), timeoutMs);
-      }),
-    ]);
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 async function readDetail(fetchImpl, generatedId, {
   cache,
   cacheTtl,
@@ -528,6 +514,7 @@ export async function searchDod(fetchImpl, criteria, {
   offset = 0,
   now = () => new Date(),
   monotonicNow = () => performance.now(),
+  operationDeadline: inheritedOperationDeadline = null,
   scanAll = false,
   cache = null,
   cacheTtl = 3_600,
@@ -535,7 +522,7 @@ export async function searchDod(fetchImpl, criteria, {
   detailCacheTimeoutMs = DOD_DETAIL_CACHE_TIMEOUT_MS,
 } = {}) {
   if (limit > DOD_MAX_RESULTS) unsupported();
-  const operationDeadline = monotonicNow() + DOD_OPERATION_BUDGET_MS;
+  const operationDeadline = inheritedOperationDeadline ?? monotonicNow() + DOD_OPERATION_BUDGET_MS;
   const retrievedAt = now().toISOString();
   const yearFilter = yearFilterDiagnostics(criteria);
   const targetCount = scanAll ? DOD_MAX_RESULTS : offset + limit + 1;

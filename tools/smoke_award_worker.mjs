@@ -60,6 +60,7 @@ if (health.normalized_paging?.NSF?.upstream_pages !== 12
   || health.normalized_paging?.DOD?.upstream_page_size !== 25
   || health.normalized_paging?.DOD?.detail_cache_timeout_ms !== 2_000
   || health.normalized_paging?.DOD?.operation_budget_ms !== 100_000
+  || health.normalized_paging?.DOD?.source_wrapper_timeout_ms !== 2_000
   || health.source_capabilities?.DOD?.award_scope !== "prime_assistance_awards_04_05_only") {
   throw new Error("Award Worker health did not advertise the bounded normalized paging contract.");
 }
