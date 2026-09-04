@@ -4,6 +4,7 @@
   const $ = id => document.getElementById(id);
   const core = globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE;
   const awardProduct = globalThis.FUNDING_AWARD_PRODUCT;
+  const awardLinks = globalThis.FUNDING_AWARD_LINKS;
   const api = globalThis.FUNDING_AWARD_API_CONFIG;
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
@@ -479,6 +480,7 @@
 
   function awardCard(award) {
     const source = clean(award?.source, 10) || "Source";
+    const displaySource = source.toUpperCase() === "DOD" ? "DoD" : source;
     const title = clean(award?.title, 1_000) || "Untitled funded project";
     const officialUrl = safeUrl(award?.official_award_url);
     const investigators = Array.isArray(award?.principal_investigators) ? award.principal_investigators : [];
@@ -486,37 +488,57 @@
       .map(person => contactLine(person, source, officialUrl)).join("");
     const program = core.programDescriptors(award)[0] || null;
     const recency = clean(award?.award_date || award?.project_start || award?.award_year, 40) || "Date not listed";
+    const isDod = source.toUpperCase() === "DOD";
+    const mechanism = clean(award?.funding_mechanism, 160);
+    const assistanceListings = (Array.isArray(award?.program_codes) ? award.program_codes : [])
+      .map(value => clean(value, 100)).filter(Boolean).join(", ");
+    const fundingOpportunity = awardLinks?.opportunityForAward?.(award) || null;
+    const fundingOpportunityUrl = fundingOpportunity ? awardLinks?.opportunityHref?.(fundingOpportunity) || "" : "";
+    const sourceLimitation = isDod
+      ? "USAspending does not publish investigator names or an award abstract for this DoD assistance record."
+      : "";
     return `<article class="ii-award-card" id="${escapeAttribute(evidenceDomId(award))}" data-source="${escapeAttribute(source)}" data-evidence-id="${escapeAttribute(awardKey(award))}" tabindex="-1">
-      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(source)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(recency)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
+      <div class="ii-award-kicker"><span class="ii-award-source">${escapeHtml(isDod && mechanism ? `${displaySource} · ${mechanism}` : displaySource)}</span><span>${escapeHtml(award?.award_id || "ID not listed")}</span><span>${escapeHtml(recency)}</span><span>${escapeHtml(formatMoney(award?.total_award))}</span></div>
       <h3>${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>` : escapeHtml(title)}</h3>
       <p class="ii-award-meta">${escapeHtml(award?.institution?.normalized_name || award?.institution?.name || "Institution not listed")}${investigators.length ? ` · ${escapeHtml(investigators.map(person => awardProduct.displayInvestigatorName(person?.name)).filter(Boolean).join(", "))}` : ""}</p>
-      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(program?.label || award?.subagency || "Not listed")}</p>
+      <p class="ii-award-program"><strong>Program:</strong> ${escapeHtml(isDod ? award?.program_name || "Not listed" : program?.label || award?.subagency || "Not listed")}</p>
+      ${isDod && award?.subagency ? `<p class="ii-award-program"><strong>DoD component:</strong> ${escapeHtml(award.subagency)}</p>` : ""}
+      ${isDod && assistanceListings ? `<p class="ii-award-program"><strong>Assistance Listing:</strong> ${escapeHtml(assistanceListings)}</p>` : ""}
+      ${award?.organization_department ? `<p class="ii-award-program"><strong>Awarding office:</strong> ${escapeHtml(award.organization_department)}</p>` : ""}
+      ${sourceLimitation ? `<p class="ii-award-program"><strong>Source limitation:</strong> ${escapeHtml(sourceLimitation)}</p>` : ""}
       ${contacts ? `<section class="ii-award-contacts" aria-label="Public award contacts"><h4>Investigators and program contacts</h4><ul>${contacts}</ul></section>` : ""}
-      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(source)} record ↗</a>` : "Official link not listed"}</div>
-      <details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>
+      <div class="ii-award-actions">${officialUrl ? `<a href="${escapeAttribute(officialUrl)}" target="_blank" rel="noopener">Official ${escapeHtml(displaySource)} record ↗</a>` : "Official link not listed"}${fundingOpportunityUrl ? `<a href="${escapeAttribute(fundingOpportunityUrl)}" target="_blank" rel="noopener">Original funding opportunity ↗</a>` : ""}</div>
+      ${isDod ? "" : `<details class="ii-award-abstract"><summary>Project abstract</summary>${renderAbstract(award?.abstract)}</details>`}
     </article>`;
   }
 
   function sourceStatusText(source) {
     const count = Number(source.result_count || 0);
     const awards = `${count.toLocaleString()} award${count === 1 ? "" : "s"}`;
-    if (source.status === "complete") return `${source.source}: all ${awards}`;
-    if (["safety_bounded", "partial"].includes(source.status)) return `${source.source}: at least ${awards}`;
-    if (source.status === "rate_limited") return `${source.source}: temporarily limited`;
-    if (source.status === "unsupported") return `${source.source}: these filters are not supported`;
-    if (source.error?.code === "source_timeout") return `${source.source}: timed out`;
-    return `${source.source}: temporarily unavailable`;
+    let summary;
+    if (source.status === "complete") summary = `${source.source}: all ${awards}`;
+    else if (["safety_bounded", "partial"].includes(source.status)) summary = `${source.source}: at least ${awards}`;
+    else if (source.status === "rate_limited") summary = `${source.source}: temporarily limited`;
+    else if (source.status === "unsupported") summary = `${source.source}: these filters are not supported`;
+    else if (source.error?.code === "source_timeout") summary = `${source.source}: timed out`;
+    else summary = `${source.source}: temporarily unavailable`;
+    const warnings = awardProduct.enrichmentWarnings(source);
+    return warnings.length ? `${summary}; ${warnings.join("; ")}` : summary;
   }
 
   function renderSourceStatus() {
     const sources = state.snapshot?.sources || [];
     const resultLimits = sources.some(source => ["safety_bounded", "partial"].includes(source.status));
     const sourceFailures = sources.some(source => ["unavailable", "rate_limited", "unsupported"].includes(source.status));
+    const enrichmentFailures = sources.some(source => (
+      source.health?.status === "degraded" || awardProduct.enrichmentWarnings(source).length > 0
+    ));
     const notes = [];
     if (resultLimits) notes.push("Some databases cap how many results they return, so “at least” means more matches may exist.");
     if (sourceFailures) notes.push("Results from databases that did load are still shown.");
+    if (enrichmentFailures) notes.push("Base award records remain available when optional public details cannot be loaded.");
     const list = $("ii-source-status");
-    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures ? "limited" : "complete"}">
+    list.innerHTML = sources.length ? `<li data-status="${resultLimits || sourceFailures || enrichmentFailures ? "limited" : "complete"}">
       <span class="ii-source-status-summary"><strong>Results by source:</strong> ${escapeHtml(sources.map(sourceStatusText).join(" · "))}</span>
       ${notes.length ? `<span class="ii-source-status-help">${escapeHtml(notes.join(" "))}</span>` : ""}
     </li>` : "";
@@ -605,7 +627,7 @@
     const scope = payload.completeness === "complete" ? "in all results" : "in available results";
     $("ii-metrics").innerHTML = [
       [payload.aggregate.project_count, `Projects ${scope}`],
-      [payload.aggregate.investigator_count, `Investigators ${scope}`],
+      [payload.aggregate.investigator_count, `Listed investigators ${scope}`],
       [payload.aggregate.program_count, `Programs ${scope}`],
       [years, `Years represented ${scope}`],
     ].map(([value, label]) => `<div class="ii-metric"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`).join("");
@@ -771,7 +793,7 @@
     state.controller = new AbortController();
     setSearchActivity(true, sequence);
     setBusy(true);
-    setStatus("Searching NSF, NIH, and DOE…");
+    setStatus("Searching NSF, NIH, DOE, and DoD…");
     try {
       if (resolveInstitution) await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
@@ -985,12 +1007,15 @@
     const investigators = Array.isArray(aggregate.investigators) ? aggregate.investigators : [];
     const programs = Array.isArray(aggregate.programs) ? aggregate.programs : [];
     const representedYears = Array.isArray(aggregate.represented_years) ? aggregate.represented_years : [];
+    const includesDod = (state.snapshot?.sources || []).some(source => source?.source === "DOD");
     let summary = snapshot.deterministic.answer;
     let structured = "";
     if (intent === "investigators") {
       summary = investigators.length
-        ? `${investigators.length.toLocaleString()} investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
-        : "No investigator names appear in these results.";
+        ? `${investigators.length.toLocaleString()} listed investigator${investigators.length === 1 ? " appears" : "s appear"} in ${aggregate.project_count.toLocaleString()} matching award${aggregate.project_count === 1 ? "" : "s"}.`
+        : includesDod
+          ? "No investigator names are listed in these results. USAspending does not provide investigator metadata for DoD awards."
+          : "No investigator names appear in these results.";
       structured = answerTable({
         label: "Investigators in the matching awards",
         headers: ["Investigator", "Awards"],
@@ -1071,7 +1096,7 @@
             key,
             operation: "institution_narrative",
             fetchImpl: globalThis.fetch,
-            system: "Synthesize only the supplied public award titles and abstract excerpts. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not use model pretraining, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML.",
+            system: "Synthesize only the supplied public award titles and abstract excerpts. DoD USAspending records do not provide investigator names or award abstracts; treat those fields as unavailable, not evidence of absence. Return JSON with claims, an array of at most six objects containing text and evidence_ids. Every claim must cite exact supplied evidence IDs. Do not use model pretraining, infer identities or contacts, recommend collaborators, rank investigators, score fit, or return HTML.",
             user: JSON.stringify(providerPayload),
           });
           narrative = core.validateNarrativeAnswer(proposed, evidencePack.awards);
@@ -1184,7 +1209,7 @@
             key,
             operation: "institution_question_translation",
             fetchImpl: globalThis.fetch,
-            system: "Translate one question about public NSF, NIH, or DOE funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, or DOE), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
+            system: "Translate one question about public NSF, NIH, DOE, or DoD funded awards into structured filters and a bounded answer intent. Return only JSON with agency (all, NSF, NIH, DOE, or DOD), program, topic, pi, program_officer, year_start, year_end, answer_intent (count, investigators, programs, years, awards, or narrative), and narrative_needed (boolean). Use empty strings for absent filters. Put an explicitly named investigator in pi unless the question clearly identifies that person as a program officer. DoD PI and program-officer filters are unavailable; DoD program searches require an Assistance Listing code such as 12.800. Do not answer the question, name awards, infer contacts, recommend collaborators, rank investigators, score funding fit, or invent facts. Request narrative only when returned titles or abstract excerpts require interpretation; counts, names, programs, years, and award lists are deterministic. DOE Basic Energy Sciences is agency DOE and program BES. NIH programs use activity codes when stated. Interpret time phrases explicitly: 'since 2024' and 'from 2024 onward' set year_start to 2024 and leave year_end empty; 'in 2024' sets both year_start and year_end to 2024; bounded ranges set both endpoints. Preserve explicit user constraints.",
             user: JSON.stringify({ institution: current.institution, current_filters: currentFilters, question }),
           });
           if (!translated || typeof translated !== "object" || Array.isArray(translated)) throw new Error("invalid_translation");
@@ -1196,9 +1221,9 @@
       }
       if (questionSequence !== state.questionSequence) return;
       const upper = `${question} ${clean(plan.program)}`.toUpperCase();
-      plan.agency = ["NSF", "NIH", "DOE"].includes(clean(plan.agency, 10).toUpperCase())
+      plan.agency = ["NSF", "NIH", "DOE", "DOD"].includes(clean(plan.agency, 10).toUpperCase())
         ? clean(plan.agency, 10).toUpperCase()
-        : /\bNSF\b/.test(upper) ? "NSF" : /\bNIH\b/.test(upper) ? "NIH" : /\bDOE\b|\bBES\b|\bSC-\d+\b/.test(upper) ? "DOE" : "all";
+        : /\bNSF\b/.test(upper) ? "NSF" : /\bNIH\b/.test(upper) ? "NIH" : /\bDOD\b|DEPARTMENT OF DEFENSE/.test(upper) ? "DOD" : /\bDOE\b|\bBES\b|\bSC-\d+\b/.test(upper) ? "DOE" : "all";
       const investigator = core.explicitInvestigator(question, current.institution, plan.program, [...(state.selectedInstitution?.aliases || []), ...(state.selectedInstitution?.acronyms || [])], plan.topic);
       if (investigator && !clean(plan.pi) && !clean(plan.program_officer)) plan.pi = investigator;
       if (/\bBES\b/i.test(question) && !clean(plan.program)) plan.program = "BES";

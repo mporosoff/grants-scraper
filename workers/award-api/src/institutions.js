@@ -56,6 +56,7 @@ export function resolveInstitution({ id, name } = {}) {
       NSF: { search_name: cleanName, uei: [] },
       NIH: { search_names: [cleanName], uei: [], ipf: [] },
       DOE: { search_name: cleanName, uei: [] },
+      DOD: { search_name: cleanName, search_names: [cleanName], uei: [] },
     },
     keys: new Set([identityKey(cleanName)]),
   };
@@ -84,6 +85,7 @@ export function institutionFromRor(candidate, submittedName) {
       NSF: { search_name: canonicalName, search_names: [canonicalName, ...defensibleAliases], uei: [] },
       NIH: { search_names: [canonicalName, ...defensibleAliases], uei: [], ipf: [] },
       DOE: { search_name: canonicalName, search_names: [canonicalName, ...defensibleAliases], uei: [] },
+      DOD: { search_name: canonicalName, search_names: [canonicalName, ...defensibleAliases], uei: [] },
     },
   };
 }

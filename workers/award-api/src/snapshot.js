@@ -1,4 +1,4 @@
-const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE"]);
+const SOURCE_NAMES = Object.freeze(["NSF", "NIH", "DOE", "DOD"]);
 export const AWARD_ORDERING_VERSION = "award-recency-v1";
 export const SNAPSHOT_BATCH_SIZE = 25;
 export const SNAPSHOT_FACET_KEY_MAX_LENGTH = 1_024;
@@ -312,6 +312,28 @@ function programDescriptors(award, cache = null) {
   const parent = clean(award?.subagency, 300);
   const sourceCodes = [...new Set((Array.isArray(award?.program_codes) ? award.program_codes : [])
     .map(value => clean(value, 100)).filter(Boolean))];
+  if (source === "DOD" && sourceCodes.length) {
+    const primaryTitle = clean(award?.program_name, 260);
+    const descriptors = sourceCodes.map((code, index) => {
+      const leaf = clean(index === 0 && primaryTitle
+        ? `${primaryTitle} (${code})`
+        : `Assistance Listing ${code}`, 300);
+      const distinctChild = Boolean(parent && identityKey(parent) !== identityKey(leaf));
+      return {
+        key: `${source}:assistance-listing:${identityKey(code)}`,
+        source,
+        parent_label: parent || null,
+        leaf_label: leaf,
+        leaf_role: "assistance_listing",
+        query: code,
+        query_role: "assistance_listing_code",
+        source_codes: [code],
+        label: `${source} · ${distinctChild ? `${parent} › ${leaf}` : leaf}`,
+      };
+    });
+    cache?.set(cacheKey, descriptors);
+    return descriptors;
+  }
   const code = sourceCodes[0] || "";
   const sourceLeaf = source === "NIH"
     ? clean(award?.activity_code || award?.program_name || code, 300)
@@ -339,6 +361,17 @@ function programDescriptors(award, cache = null) {
   }];
   cache?.set(cacheKey, descriptors);
   return descriptors;
+}
+
+function preferredProgramDescriptor(current, candidate) {
+  if (!current) return { ...candidate, projects: 0, award_keys: [] };
+  const fallbackLabel = `Assistance Listing ${clean(current.query, 100)}`;
+  const candidateFallbackLabel = `Assistance Listing ${clean(candidate.query, 100)}`;
+  const currentIsDodFallback = current.source === "DOD" && current.leaf_label === fallbackLabel;
+  const candidateHasDodTitle = candidate.source === "DOD" && candidate.leaf_label !== candidateFallbackLabel;
+  return currentIsDodFallback && candidateHasDodTitle
+    ? { ...candidate, projects: current.projects, award_keys: current.award_keys }
+    : current;
 }
 
 export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = {}) {
@@ -373,7 +406,7 @@ export function aggregateSnapshotAwards(values, { alreadyNormalized = false } = 
     const source = facts.source;
     if (agencyTotals.has(source)) agencyTotals.set(source, agencyTotals.get(source) + 1);
     for (const descriptor of programDescriptors(award, programCache)) {
-      const current = programs.get(descriptor.key) || { ...descriptor, projects: 0, award_keys: [] };
+      const current = preferredProgramDescriptor(programs.get(descriptor.key), descriptor);
       current.projects += 1;
       current.award_keys.push(awardKey(award));
       programs.set(descriptor.key, current);
@@ -438,6 +471,7 @@ function sourceState(source, payload, normalizedResultCount = null) {
     safety_bound_reached: payload.safety_bound_reached === true,
     year_filter: payload.year_filter,
     health: payload.health,
+    capabilities: payload.capabilities,
     retrieved_at: payload.retrieved_at,
     recency_order: complete ? "verified_complete_snapshot" : "available_snapshot_only",
   };

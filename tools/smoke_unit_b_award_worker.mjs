@@ -49,7 +49,7 @@ if (contract?.contract_version !== 1
 }
 
 const snapshot = await post("awards/snapshots", {
-  sources: ["NSF", "NIH", "DOE"],
+  sources: ["NSF", "NIH", "DOE", "DOD"],
   criteria: {
     institution: "University of Rochester",
     institution_id: "university-of-rochester",
@@ -62,8 +62,8 @@ if (snapshot.snapshot_contract_version !== 1
   || !/^[0-9a-f]{64}$/.test(snapshot.snapshot_id || "")
   || snapshot.batch_ceiling_per_agency !== 25
   || !["complete", "partial", "unavailable"].includes(snapshot.completeness)
-  || snapshot.sources?.length !== 3
-  || snapshot.initial_batches?.length !== 3
+  || snapshot.sources?.length !== 4
+  || snapshot.initial_batches?.length !== 4
   || snapshot.initial_batches.some(batch => batch.actual_added > 25)) {
   throw new Error("The broad-year Unit B snapshot did not satisfy its bounded public contract.");
 }

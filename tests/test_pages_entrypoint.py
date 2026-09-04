@@ -291,7 +291,11 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
                 explorer_html,
             )
         self.assertIn(
-            '<script src="./assets/ai-provider.js?v=ai-boundaries-20260901"></script>',
+            '<script src="./assets/ai-provider.js?v=dod-awards-20260903"></script>',
+            explorer_html,
+        )
+        self.assertIn(
+            '<script src="./assets/award-links.js?v=dod-awards-20260903"></script>',
             explorer_html,
         )
         self.assertIn(
@@ -345,7 +349,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=researcher-flow-20260903"></script>',
+            '<script src="./assets/site-help.js?v=dod-awards-20260903"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

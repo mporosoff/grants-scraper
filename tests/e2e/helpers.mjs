@@ -284,6 +284,7 @@ export async function mockFrozenFundingSearchPackage(page) {
 export function mockAwards(target, {
   awardOverridesBySource = {},
   failDoe = false,
+  failDod = false,
   failNih = false,
   failNsf = false,
   hasMoreBySource = {},
@@ -330,7 +331,7 @@ export function mockAwards(target, {
             registry: {
               source: "ROR",
               status: "rate_limited",
-              adapter_version: "1.2.0",
+              adapter_version: "1.3.0",
               error: { code: "rate_limited" },
             },
           }),
@@ -380,7 +381,7 @@ export function mockAwards(target, {
           schema_version: 1,
           query: requestUrl.searchParams.get("query"),
           institutions,
-          registry: { source: "ROR", status: "available", adapter_version: "1.2.0", license: "CC0-1.0", cache: "miss" },
+          registry: { source: "ROR", status: "available", adapter_version: "1.3.0", license: "CC0-1.0", cache: "miss" },
         }),
       });
       return;
@@ -468,12 +469,38 @@ export function mockAwards(target, {
       annual_support: [],
       source_provenance: { source_url: "https://pamspublic.science.energy.gov/WebPAMSExternal/Interface/Awards/AwardSearchExternal.aspx", retrieved_at: retrievedAt, source_record_id: "DE-SC0020230", adapter_version: "1.0.0" },
     };
-    const templateFor = source => ({ ...(source === "NSF" ? nsf : source === "NIH" ? nih : doe), ...(awardOverridesBySource[source] || {}) });
+    const dod = {
+      ...nsf,
+      award_id: "FA9550261B195",
+      source_record_ids: ["FA9550261B195", "ASST_NON_FA9550261B195_097"],
+      source: "DOD",
+      agency: "Department of Defense",
+      subagency: "Department of the Air Force",
+      program_name: "Air Force Defense Research Sciences Program",
+      program_codes: ["12.800"],
+      opportunity_numbers: ["NOFOAFRLAFOSR20250002"],
+      activity_code: null,
+      funding_mechanism: "Project Grant",
+      title: "CENTER OF EXCELLENCE: MULTISCALE NONEQUILIBRIUM TRANSPORT",
+      abstract: null,
+      project_start: "2026-09-01",
+      project_end: "2031-08-31",
+      award_year: 2026,
+      total_award: 3000000,
+      award_amount_basis: "total_obligation",
+      organization_department: "AIR FORCE OFFICE OF SCIENTIFIC RESEARCH",
+      principal_investigators: [],
+      program_contacts: [],
+      official_award_url: "https://www.usaspending.gov/award/ASST_NON_FA9550261B195_097/",
+      annual_support: [],
+      source_provenance: { source_url: "https://www.usaspending.gov/award/ASST_NON_FA9550261B195_097/", retrieved_at: retrievedAt, source_record_id: "ASST_NON_FA9550261B195_097", adapter_version: "1.0.0" },
+    };
+    const templateFor = source => ({ ...(source === "NSF" ? nsf : source === "NIH" ? nih : source === "DOE" ? doe : dod), ...(awardOverridesBySource[source] || {}) });
     const snapshotAggregate = records => {
       const people = new Map();
       const programs = new Map();
       const years = new Map();
-      const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0]]);
+      const agencyTotals = new Map([["NSF", 0], ["NIH", 0], ["DOE", 0], ["DOD", 0]]);
       records.forEach(record => {
         agencyTotals.set(record.source, (agencyTotals.get(record.source) || 0) + 1);
         if (Number.isInteger(record.award_year)) years.set(record.award_year, (years.get(record.award_year) || 0) + 1);
@@ -549,14 +576,16 @@ export function mockAwards(target, {
       const records = [];
       const sourceStates = [];
       for (const source of sources) {
-        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
+        const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
         const configuredFailure = sourceFailures[source] || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
         if (configuredFailure) {
           sourceStates.push({ source, status: configuredFailure.status || "unavailable", result_count: 0, total_count: null, error: { code: configuredFailure.code || "source_unavailable" } });
           continue;
         }
         const template = templateFor(source);
-        const configuredCount = typeof resultCountPerSource === "object" ? resultCountPerSource[source] : resultCountPerSource;
+        const configuredCount = typeof resultCountPerSource === "object"
+          ? resultCountPerSource[source]
+          : source === "DOD" ? 0 : resultCountPerSource;
         const count = Math.max(0, Number(configuredCount) || 0);
         for (let index = 0; index < count; index += 1) records.push(index === 0 ? template : { ...template, award_id: `${template.award_id}-${index}`, source_record_ids: [`${template.source_record_ids[0]}-${index}`] });
         const partial = Array.isArray(hasMoreBySource[source]) ? hasMoreBySource[source].length > 0 : Boolean(hasMoreBySource[source]);
@@ -607,7 +636,7 @@ export function mockAwards(target, {
         exact_total: snapshot.completeness === "complete" ? view.records.length : null,
         at_least: view.records.length,
         pagination: { page: body.page, page_size: body.page_size, start: selected.length ? start + 1 : 0, end: start + selected.length, page_count: snapshot.completeness === "complete" ? pageCount : null, available_page_count: pageCount, has_previous: body.page > 1, has_next: body.page < pageCount },
-        batches: ["NSF", "NIH", "DOE"].map(source => ({ source, actual_added: selected.filter(record => record.source === source).length, results: selected.filter(record => record.source === source).map((record, index) => ({ ...record, snapshot_position: start + selected.indexOf(record) + 1 })) })).filter(batch => batch.results.length),
+        batches: ["NSF", "NIH", "DOE", "DOD"].map(source => ({ source, actual_added: selected.filter(record => record.source === source).length, results: selected.filter(record => record.source === source).map((record, index) => ({ ...record, snapshot_position: start + selected.indexOf(record) + 1 })) })).filter(batch => batch.results.length),
       };
       await route.fulfill({ status: 200, headers: corsHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload) });
       return;
@@ -656,7 +685,7 @@ export function mockAwards(target, {
     const results = [];
     const sources = [];
     for (const source of body.sources) {
-      const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : failDoe;
+      const failed = source === "NSF" ? failNsf : source === "NIH" ? failNih : source === "DOE" ? failDoe : source === "DOD" ? failDod : false;
       const configuredFailureEntry = sourceFailuresByOffset[`${source}:${body.offset}`]
         || sourceFailures[source]
         || (failed ? { status: "unavailable", code: "source_unavailable" } : null);
@@ -670,12 +699,12 @@ export function mockAwards(target, {
           error: { code: configuredFailure.code || "source_unavailable" },
         });
       } else {
-        const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : doe;
+        const baseTemplate = source === "NSF" ? nsf : source === "NIH" ? nih : source === "DOE" ? doe : dod;
         const template = { ...baseTemplate, ...(awardOverridesBySource[source] || {}) };
         const configuredCount = resultCountBySourceOffset[`${source}:${body.offset}`] ?? (
           typeof resultCountPerSource === "object"
             ? resultCountPerSource[source]
-            : resultCountPerSource
+            : source === "DOD" ? 0 : resultCountPerSource
         );
         const resultCount = Math.max(0, Math.min(Number(body.limit) || 1, Number(configuredCount) || 0));
         for (let index = 0; index < resultCount; index += 1) {

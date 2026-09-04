@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Search public NSF, NIH, and DOE Office of Science funded-project titles, abstracts, investigators, institutions, programs, and official award records.">
+  <meta name="description" content="Search public NSF, NIH, DOE Office of Science, and DoD funded-project records, institutions, programs, and official award pages.">
   <meta name="theme-color" content="#001e5f">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Funding Finder">
   <meta property="og:title" content="Funded Awards | Funding Finder">
-  <meta property="og:description" content="Search public NSF, NIH, and DOE Office of Science funded projects, programs, investigators, institutions, and official award records.">
+  <meta property="og:description" content="Search public NSF, NIH, DOE Office of Science, and DoD funded projects, programs, institutions, and official award records.">
   <meta property="og:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta property="og:image:url" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta property="og:image:secure_url" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
@@ -19,7 +19,7 @@
   <meta property="og:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Funded Awards | Funding Finder">
-  <meta name="twitter:description" content="Search public NSF, NIH, and DOE Office of Science funded projects, programs, investigators, institutions, and official award records.">
+  <meta name="twitter:description" content="Search public NSF, NIH, DOE Office of Science, and DoD funded projects, programs, institutions, and official award records.">
   <meta name="twitter:image" content="https://mporosoff.github.io/grants-scraper/assets/social/funding-finder-link-preview.jpg">
   <meta name="twitter:image:alt" content="Funding Finder: Find the right funding faster">
   <meta name="referrer" content="no-referrer">
@@ -31,9 +31,9 @@
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
   <link rel="stylesheet" href="./assets/app.css?v=presentation-cleanup-20260830">
   <link rel="stylesheet" href="./assets/site-nav.css?v=unified-ui-20260825">
-  <link rel="stylesheet" href="./assets/funded-awards.css?v=unified-award-intelligence-20260825">
+  <link rel="stylesheet" href="./assets/funded-awards.css?v=dod-awards-20260903">
   <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=results-note-20260903">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=dod-awards-20260903">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -53,7 +53,7 @@
         <a href="./funded_awards.html" aria-current="page">Funded Awards</a>
         <a href="./faculty_interests.html">Configure Faculty Interests</a>
       </nav>
-      <span class="header-context-pill" aria-label="NSF, NIH, and DOE award sources available">NSF · NIH · DOE</span>
+      <span class="header-context-pill" aria-label="NSF, NIH, DOE, and DoD award sources available">NSF · NIH · DOE · DoD</span>
       <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
@@ -64,8 +64,8 @@
   <main class="awards-main">
     <section class="awards-hero" aria-labelledby="page-title">
       <p class="eyebrow">Historical award intelligence</p>
-      <h1 id="page-title">See what NSF, NIH, and DOE have funded</h1>
-      <p>Search and summarize public project titles, abstracts, investigators, institutions, programs, and program officers in one place. Current Funding Finder opportunities still use exact or controlled historical mappings where available.</p>
+      <h1 id="page-title">See what NSF, NIH, DOE, and DoD have funded</h1>
+      <p>Search and summarize public funded-project records, institutions, programs, and source-listed contacts in one place. DoD records come from USAspending and do not include investigator names or award abstracts. Current Funding Finder opportunities still use exact or controlled historical mappings where available.</p>
     </section>
 
     <section class="selected-opportunity hidden" id="selected-opportunity" aria-labelledby="selected-opportunity-heading">
@@ -106,14 +106,15 @@
             <div class="ii-filter-grid">
               <label>Agency
                 <select id="ii-agency">
-                  <option value="all">NSF + NIH + DOE</option>
+                  <option value="all">NSF + NIH + DOE + DoD</option>
                   <option value="NSF">NSF</option>
                   <option value="NIH">NIH</option>
                   <option value="DOE">DOE Office of Science</option>
+                  <option value="DOD">Department of Defense</option>
                 </select>
               </label>
               <label>Program
-                <input id="ii-program" type="text" autocomplete="off" placeholder="Example: BES, Catalysis, R01, or NSF program">
+                <input id="ii-program" type="text" autocomplete="off" placeholder="Example: BES, R01, NSF program, or 12.800">
               </label>
               <label>Topic
                 <input id="ii-topic" type="search" autocomplete="off" placeholder="Example: catalysis">
@@ -131,7 +132,7 @@
                 <input id="ii-year-end" type="number" inputmode="numeric" min="1989" max="2100" placeholder="Any" aria-describedby="ii-year-help">
               </label>
             </div>
-            <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps only to the published PAMS organization identity SC-32.</p>
+            <p class="ii-program-help">Program filtering is source-native: select an agency first. NIH uses activity codes; DOE BES maps to PAMS identity SC-32; DoD requires a numeric Assistance Listing such as 12.800.</p>
             <p class="ii-program-help" id="ii-year-help">Leave both year fields blank to search all available years. Edited filters apply after you choose Search funded awards.</p>
             <div class="ii-actions">
               <button class="button primary" id="ii-search" type="submit" aria-busy="false">
@@ -149,7 +150,7 @@
 
           <details class="ii-ask" id="ii-ask">
             <summary>
-              <span><strong>Optional: Ask about this institution</strong><small>Answer from returned public NSF, NIH, and DOE award evidence</small></span>
+              <span><strong>Optional: Ask about this institution</strong><small>Answer from returned public NSF, NIH, DOE, and DoD award evidence</small></span>
               <span id="ii-ai-state">Hosted AI included</span>
             </summary>
             <div class="ii-ask-body">
@@ -259,10 +260,11 @@
         <label class="award-field" for="award-agency">
           <span>Agency</span>
           <select id="award-agency" name="agency">
-            <option value="all">NSF + NIH + DOE</option>
+            <option value="all">NSF + NIH + DOE + DoD</option>
             <option value="NSF">NSF</option>
             <option value="NIH">NIH</option>
             <option value="DOE">DOE Office of Science</option>
+            <option value="DOD">Department of Defense</option>
           </select>
         </label>
       </div>
@@ -292,7 +294,7 @@
         <button class="button primary" id="search-awards" type="submit">Search funded awards</button>
         <button class="button secondary" id="clear-award-search" type="button">Clear search</button>
       </div>
-      <p class="award-search-help">Choose a research topic, program, principal investigator, or program officer search. Topic searches use each source's native public award search. For program search, use an NSF PD/program-element identifier or program name, an NIH FOA/activity code, or a DOE Office of Science FOA/program area. Selected opportunities use exact source identifiers or reviewed NSF parent mappings—never the opportunity-vector corpus.</p>
+      <p class="award-search-help">Choose a research topic, program, principal investigator, or program officer search. Topic searches use each source's native public award search. For program search, use an NSF PD/program-element identifier or program name, an NIH FOA/activity code, a DOE Office of Science FOA/program area, or a DoD Assistance Listing code. DoD does not support investigator or program-officer filters. Selected opportunities use exact source identifiers or reviewed NSF parent mappings—never the opportunity-vector corpus.</p>
     </form>
 
     <section class="award-output hidden" id="award-results" aria-labelledby="award-results-heading" aria-busy="false" tabindex="-1">
@@ -317,7 +319,7 @@
   </main>
 
   <footer class="awards-footer">
-    <p><strong>Source notice:</strong> Award information comes from public NSF Award Search, NIH RePORTER, and DOE Office of Science PAMS records. Missing values are shown as not listed; contact details are never inferred.</p>
+    <p><strong>Source notice:</strong> Award information comes from public NSF Award Search, NIH RePORTER, DOE Office of Science PAMS, and USAspending DoD prime assistance records. DoD coverage is limited to Project Grants (04) and Cooperative Agreements (05); contracts, IDVs, SBIR-specific feeds, and subawards are excluded. Missing values are shown as not listed or unavailable at the source; contact details are never inferred.</p>
     <p>Funding Finder is not an official source of record. Verify material details on the linked official award page.</p>
     <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. All rights reserved. Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author.</p>
   </footer>
@@ -326,17 +328,17 @@
   <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
   <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
   <script src="./assets/ai-gateway-config.js?v=hosted-ai-20260831"></script>
-  <script src="./assets/ai-provider.js?v=ai-boundaries-20260901"></script>
+  <script src="./assets/ai-provider.js?v=dod-awards-20260903"></script>
   <script src="./data/opportunities.js?v=catalog-20260825T105031Z"></script>
-  <script src="./assets/award-links.js?v=phase4-doe-awards"></script>
+  <script src="./assets/award-links.js?v=dod-awards-20260903"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
   <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
   <script src="./assets/award-api-config.js?v=post-phase4-abc-20260829"></script>
-  <script src="./assets/funded-awards-core.js?v=investigator-mixed-case-20260903"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=results-note-20260903"></script>
+  <script src="./assets/funded-awards-core.js?v=dod-awards-20260904"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=dod-awards-20260903"></script>
   <script src="./assets/site-nav.js?v=funded-awards-phase2"></script>
-  <script src="./assets/site-help.js?v=researcher-flow-20260903"></script>
-  <script src="./assets/funded-awards.js?v=investigator-case-20260903"></script>
-  <script src="./assets/institutional-intelligence-snapshots.js?v=results-note-20260903"></script>
+  <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
+  <script src="./assets/funded-awards.js?v=dod-awards-20260904"></script>
+  <script src="./assets/institutional-intelligence-snapshots.js?v=dod-awards-20260904"></script>
 </body>
 </html>

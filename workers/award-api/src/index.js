@@ -3,6 +3,15 @@ import { AwardSourceError } from "./http.js";
 import { institutionFromRor, resolveInstitution } from "./institutions.js";
 import { ROR_ADAPTER_VERSION, resolveRorOrganization, searchRor } from "./ror.js";
 import { DOE_ADAPTER_VERSION, DOE_MAX_RESULTS, searchDoe } from "./adapters/doe.js";
+import {
+  DOD_ADAPTER_VERSION,
+  DOD_CAPABILITIES,
+  DOD_DETAIL_CONCURRENCY,
+  DOD_MAX_RESULTS,
+  DOD_MAX_UPSTREAM_PAGES,
+  DOD_UPSTREAM_PAGE_SIZE,
+  searchDod,
+} from "./adapters/dod.js";
 import { NIH_ADAPTER_VERSION, searchNih } from "./adapters/nih.js";
 import { NSF_ADAPTER_VERSION, searchNsf } from "./adapters/nsf.js";
 import { AwardRateLimiter } from "./rate-limit.js";
@@ -28,17 +37,18 @@ const WORKER_RESOURCE_BUDGET = Object.freeze({
   configured_cpu_ms: 250,
   memory_mb: 128,
   platform_subrequests_per_request: 10_000,
-  maximum_snapshot_create_subrequests: 50,
-  maximum_snapshot_create_cache_api_calls: 10,
-  maximum_snapshot_create_upstream_and_guard_subrequests: 40,
-  maximum_snapshot_create_subrequests_without_ror_resolution: 46,
+  maximum_snapshot_create_subrequests: 141,
+  maximum_snapshot_create_cache_api_calls: 62,
+  maximum_snapshot_create_upstream_and_guard_subrequests: 78,
+  maximum_snapshot_create_subrequests_without_ror_resolution: 139,
 });
 const PRODUCTION_ORIGIN = "https://mporosoff.github.io";
-const SOURCE_NAMES = ["NSF", "NIH", "DOE"];
+const SOURCE_NAMES = ["NSF", "NIH", "DOE", "DOD"];
 const ADAPTER_VERSIONS = {
   NSF: NSF_ADAPTER_VERSION,
   NIH: NIH_ADAPTER_VERSION,
   DOE: DOE_ADAPTER_VERSION,
+  DOD: DOD_ADAPTER_VERSION,
 };
 const SEARCH_FIELDS = [
   "award_id",
@@ -354,8 +364,10 @@ async function runSource({ source, request, fetchImpl, cache, cacheTtl, asOf, gu
     now: () => new Date(asOf),
     scanAll: request.scanAll === true,
     includeAbstracts: request.includeAbstracts !== false,
+    cache,
+    cacheTtl,
   };
-  const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe };
+  const adapters = { NSF: searchNsf, NIH: searchNih, DOE: searchDoe, DOD: searchDod };
   const payload = await adapters[source](fetchImpl, request.resolvedCriteria, options);
   if (cache) {
     try {
@@ -476,6 +488,7 @@ function sourceSummary(payload) {
     retrieved_at: payload.retrieved_at,
     ...(payload.year_filter ? { year_filter: payload.year_filter } : {}),
     ...(payload.health ? { health: payload.health } : {}),
+    ...(payload.capabilities ? { capabilities: payload.capabilities } : {}),
   };
 }
 
@@ -671,7 +684,16 @@ export function createHandler({
           NSF: { upstream_pages: 12, upstream_page_size: 25, maximum_identity_queries: 3 },
           NIH: { upstream_pages: 12, upstream_page_size: 100 },
           DOE: { upstream_pages: 10, maximum_normalized_offset: 100, maximum_identity_queries: 3 },
+          DOD: {
+            upstream_pages: DOD_MAX_UPSTREAM_PAGES,
+            upstream_page_size: DOD_UPSTREAM_PAGE_SIZE,
+            maximum_normalized_results: DOD_MAX_RESULTS,
+            maximum_detail_requests: DOD_MAX_RESULTS,
+            detail_concurrency: DOD_DETAIL_CONCURRENCY,
+            snapshot_behavior: "bounded-first-normalized-page",
+          },
         },
+        source_capabilities: { DOD: DOD_CAPABILITIES },
         complete_result_snapshots: {
           contract_version: 1,
           ordering_version: AWARD_ORDERING_VERSION,

@@ -23,6 +23,11 @@
         "DOE": {
           "search_name": "University of Rochester",
           "uei": ["F27KDXZMF9Y8"]
+        },
+        "DOD": {
+          "search_name": "University of Rochester",
+          "search_names": ["University of Rochester"],
+          "uei": ["F27KDXZMF9Y8"]
         }
       }
     }
