@@ -397,6 +397,7 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.ok(createIndex > -1 && initialPageIndex > createIndex && stageIndex > initialPageIndex);
   assert.match(preparedSource, /Promise\.allSettled\([\s\S]*searchDodFromBrowser\([\s\S]*createHybridSnapshot\([\s\S]*persistLocalSnapshot\([\s\S]*stagedSnapshotResult\(/);
   assert.match(preparedSource, /dodBrowserModule\(\)\.then[\s\S]*workerSnapshot[\s\S]*applyClientSnapshotOverlay\([\s\S]*clientSnapshotOverlay/);
+  assert.match(appSource, /restoredClientSnapshotOverlay\([\s\S]*buildAwardRequest\(\{ \.\.\.state\.submitted[\s\S]*requestedSources\.includes\("DOD"\) && !returnedSources\.has\("DOD"\)[\s\S]*__clientSnapshotOverlay/);
   const runSearchSource = appSource.slice(appSource.indexOf("async function runSearch("), appSource.indexOf("async function changeFacet("));
   const prepareIndex = runSearchSource.indexOf("await preparedSnapshotSearch(");
   const commitIndex = runSearchSource.indexOf("commitSnapshotResult(");

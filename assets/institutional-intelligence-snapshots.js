@@ -701,6 +701,24 @@
     };
   }
 
+  function restoredClientSnapshotOverlay(payload, snapshotId) {
+    if (!state.submitted || !Array.isArray(payload?.sources)) return null;
+    let requestedSources;
+    try {
+      requestedSources = core.buildAwardRequest({ ...state.submitted, offset: 0 }, 10).sources;
+    } catch {
+      return null;
+    }
+    const returnedSources = new Set(payload.sources.map(source => clean(source?.source, 10).toUpperCase()));
+    const expectedWorkerSources = requestedSources.filter(source => source !== "DOD");
+    const matchesFallbackShape = expectedWorkerSources.length > 0
+      && returnedSources.size === expectedWorkerSources.length
+      && expectedWorkerSources.every(source => returnedSources.has(source));
+    return requestedSources.includes("DOD") && !returnedSources.has("DOD") && matchesFallbackShape
+      ? { snapshotId, requestedSources: [...requestedSources] }
+      : null;
+  }
+
   async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
     if (String(snapshotId || "").startsWith("local-dod-")) {
       const dod = await dodBrowserModule();
@@ -727,7 +745,11 @@
       page_size: pageSize,
       facet: { type: facet.type, key: facet.key },
     }, controller);
-    return applyClientSnapshotOverlay(payload, clientOverlay);
+    const matchingOverlay = clientOverlay?.snapshotId === snapshotId ? clientOverlay : null;
+    const overlay = matchingOverlay || restoredClientSnapshotOverlay(payload, snapshotId);
+    const integrated = applyClientSnapshotOverlay(payload, overlay);
+    Object.defineProperty(integrated, "__clientSnapshotOverlay", { value: overlay });
+    return integrated;
   }
 
   function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, clientSnapshotOverlay = null, questionState = null }) {
@@ -802,6 +824,9 @@
     }
     if (requestSequence !== state.pageRequestSequence || state.snapshot?.snapshot_id !== snapshotId) return null;
     if (payload.__localSnapshot) state.localSnapshot = payload.__localSnapshot;
+    if (Object.prototype.hasOwnProperty.call(payload, "__clientSnapshotOverlay")) {
+      state.clientSnapshotOverlay = payload.__clientSnapshotOverlay;
+    }
     state.page = payload.pagination.page;
     state.pageSize = payload.pagination.page_size;
     state.facet = { type: payload.facet.type, key: payload.facet.key };
