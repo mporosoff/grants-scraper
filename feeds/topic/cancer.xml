@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -166,20 +166,10 @@
     <summary>National Institutes of Health | Closes 2026-11-20 | This notice of funding opportunity (NOFO) will invite applications for the Research Specialist Award (R50), which provides salary support for exceptional, non-tenure track scientists working in research laboratories and core facilities who make essential contributions to cancer research. The R50 is intended to support stable, long-term research careers for highly skilled scientists who contribute …</summary>
   </entry>
   <entry>
-    <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
-    <link href="https://www.grants.gov/search-results-detail/363281"/>
-    <id>urn:funding-finder:grants-gov:363281</id>
-    <updated>2026-09-02T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
-  </entry>
-  <entry>
     <title>DoW Breast Cancer, Breakthrough Award Levels 1 and 2</title>
     <link href="https://www.grants.gov/search-results-detail/363670"/>
     <id>urn:funding-finder:grants-gov:363670</id>
-    <updated>2026-09-01T00:00:00Z</updated>
+    <updated>2026-09-03T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Breakthrough Award mechanism supports promising research with high potential to lead to or make breakthroughs in breast cancer. All applications must address at least one of the FY26 BCRP overarching challenges or provide adequate justification for exception. Applications must address the challenge in a way that can lead to…</summary>
@@ -188,10 +178,29 @@
     <title>DoW Breast Cancer, Clinical Research Extension Award</title>
     <link href="https://www.grants.gov/search-results-detail/363671"/>
     <id>urn:funding-finder:grants-gov:363671</id>
-    <updated>2026-09-01T00:00:00Z</updated>
+    <updated>2026-09-03T00:00:00Z</updated>
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Cancer"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-11-18 | Summary: The fiscal year 2026 (FY26) Breast Cancer Research Program (BCRP) Clinical Research Extension Award supports research that extends the data collection, follow-up, and analysis of breast cancer clinical studies. The intent of this award mechanism is to increase the clinically relevant impact of breast cancer patient participation in clinical studies by addressing the knowledge lost due to …</summary>
+  </entry>
+  <entry>
+    <title>Cancer Prevention and Control Programs for State, Territorial, and Tribal Organizations</title>
+    <link href="https://www.grants.gov/search-results-detail/363814"/>
+    <id>urn:funding-finder:grants-gov:363814</id>
+    <updated>2026-09-03T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Cancer"/>
+    <summary>Centers for Disease Control - NCCDPHP | Closes 2027-02-05 | Since 1990, CDC's Division of Cancer Prevention and Control (DCPC) has been working with national organizations, state, territory, freely associated state, and tribal health agencies, and other key groups to develop, implement, and promote effective strategies for preventing and controlling cancer. DCPC's overall mission is to work toward having all people free of cancer while improving health out…</summary>
+  </entry>
+  <entry>
+    <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
+    <link href="https://www.grants.gov/search-results-detail/363281"/>
+    <id>urn:funding-finder:grants-gov:363281</id>
+    <updated>2026-09-02T00:00:00Z</updated>
+    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Cancer"/>
+    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
   </entry>
   <entry>
     <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
@@ -613,16 +622,5 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2029-07-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) encourages grant applications to support research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and sharing of data a…</summary>
-  </entry>
-  <entry>
-    <title>Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360946"/>
-    <id>urn:funding-finder:grants-gov:360946</id>
-    <updated>2026-02-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-02-08 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications to support the validation of molecular/cellular/imaging markers (referred to as "markers" or "biomarkers") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment, as well as markers for cancer prevention and control. The appl…</summary>
   </entry>
 </feed>

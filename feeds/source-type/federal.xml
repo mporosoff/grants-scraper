@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -320,6 +320,40 @@
     <summary>National Institutes of Health | Closes 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs. In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development…</summary>
   </entry>
   <entry>
+    <title>NIH Director's New Innovator Award (DP2 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363799"/>
+    <id>urn:funding-finder:grants-gov:363799</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-08-19 | The NIH Director's New Innovator Award supports exceptionally creative early-stage investigators pursuing bold, innovative research with the potential to transform important areas of science relevant to the NIH mission. Applications are welcome across all fields relevant to NIH. The award complements other NIH programs that support early-stage investigators and is part of the NIH Common Fund's Hig…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Transformative Research Award (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363802"/>
+    <id>urn:funding-finder:grants-gov:363802</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-03 | The NIH Director's Transformative Research Award supports individual scientists and research teams pursuing bold, groundbreaking, and unconventional research with the potential to transform science, create new scientific paradigms, establish new clinical approaches, or develop transformative technologies. The Transformative Research Award is part of the NIH Common Fund's High-Risk, High-Reward Res…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Pioneer Award (DP1 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363801"/>
+    <id>urn:funding-finder:grants-gov:363801</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-09 | The NIH Director's Pioneer Award supports exceptionally creative scientists pursuing bold, innovative research with the potential to transform important areas of science relevant to the NIH mission. Proposed projects must explore new scientific directions that differ substantially from the investigator's current research and from existing work in the field. Applications are welcome across all area…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363800"/>
+    <id>urn:funding-finder:grants-gov:363800</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
+  </entry>
+  <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
     <link href="https://www.grants.gov/search-results-detail/362948"/>
     <id>urn:funding-finder:grants-gov:362948</id>
@@ -539,39 +573,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Indian Health Service | Closes 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Epidemiology Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/363492"/>
-    <id>urn:funding-finder:grants-gov:363492</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Public health"/>
-    <summary>Indian Health Service | Closes 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
-  </entry>
-  <entry>
-    <title>Tribal Management Development</title>
-    <link href="https://www.grants.gov/search-results-detail/363498"/>
-    <id>urn:funding-finder:grants-gov:363498</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Self-Governance - Negotiation</title>
-    <link href="https://www.grants.gov/search-results-detail/363499"/>
-    <id>urn:funding-finder:grants-gov:363499</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
-  </entry>
-  <entry>
-    <title>Tribal Self-Governance - Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363504"/>
-    <id>urn:funding-finder:grants-gov:363504</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service | Closes 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -540,15 +540,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>Geological Survey | Closes 2026-09-11 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruc…</summary>
   </entry>
   <entry>
-    <title>Center for Inherited Disease Research (CIDR) High Throughput Sequencing and Genotyping Resource Access (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362723"/>
-    <id>urn:funding-finder:grants-gov:362723</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2026-09-03 | The Center for Inherited Disease Research (CIDR) carries out high-throughput genotyping and sequencing and supports statistical genetics services designed to 1) aid identification of genes or genetic modifications that contribute to human health and disease or 2) enhance the classification and characterization of well-phenotyped specimens by the addition of genotype or next-generation sequence dat…</summary>
-  </entry>
-  <entry>
     <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
     <link href="https://www.grants.gov/search-results-detail/360906"/>
     <id>urn:funding-finder:grants-gov:360906</id>
@@ -677,5 +668,17 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2026-10-09 | The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
+  </entry>
+  <entry>
+    <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
+    <link href="https://www.grants.gov/search-results-detail/363101"/>
+    <id>urn:funding-finder:grants-gov:363101</id>
+    <updated>2026-07-07T00:00:00Z</updated>
+    <author><name>Bureau of Land Management</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -14,6 +14,16 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2027-10-12 | The biphasic award will provide up to 5 years of support in two phases. The initial, mentored career development phase will provide 1-2 years of support for needed career development to facilitate a timely transition of promising postdoctoral researchers from their mentored postdoctoral research positions to independent, tenure-track or equivalent research-intensive faculty positions. The second p…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363800"/>
+    <id>urn:funding-finder:grants-gov:363800</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
   </entry>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -161,6 +171,15 @@
     <category term="Education and workforce"/>
     <category term="Transportation"/>
     <summary>69A345 Office of the Under Secretary for Policy | Closes 2026-11-15 | The Drone Infrastructure Inspection Grants (DIIG) Program will provide grants to eligible government entities to facilitate the use of small Unmanned Aircraft Systems (UAS), referred to herein as drones, in critical infrastructure inspection. The objective is to increase the widespread adoption of drones and relevant technologies in support of more efficient Inspection, Operation, Construction, Ma…</summary>
+  </entry>
+  <entry>
+    <title>FY26 Atlantic Gateway, Arlington to Alexandria Fourth Track - CMAQ Funds</title>
+    <link href="https://www.grants.gov/search-results-detail/363798"/>
+    <id>urn:funding-finder:grants-gov:363798</id>
+    <updated>2026-09-03T00:00:00Z</updated>
+    <author><name>DOT - Federal Railroad Administration</name></author>
+    <category term="Transportation"/>
+    <summary>DOT - Federal Railroad Administration | Closes 2026-09-09 | The Project includes the construction of approximately six miles of new fourth track on the CSX Richmond, Fredericksburg, and Potomac Subdivision, primarily on the east side of the right-of-way.</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -356,19 +375,6 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>DOT Federal Highway Administration | Closes 2026-09-09 | The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
-  </entry>
-  <entry>
-    <title>DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
-    <link href="https://www.grants.gov/search-results-detail/363486"/>
-    <id>urn:funding-finder:grants-gov:363486</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>Bureau of Democracy Human Rights and Labor</name></author>
-    <category term="Arts and culture"/>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Democracy Human Rights and Labor | Closes 2026-09-03 | This program will counter forced labor in seafood supply chains associated with countries that have signed Agreements on Reciprocal Trade (ART) in East Asia and the Pacific (excluding Indonesia and the Philippines) and the Western Hemisphere, as well as other strategically important countries and prospective ART partners where engagement advances U.S. economic, trade, and maritime interests.</summary>
   </entry>
   <entry>
     <title>Development of Fiscal Year 2027 Commercial Vehicle Safety Plans to Support National Safety Goals</title>
@@ -629,14 +635,5 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
-  </entry>
-  <entry>
-    <title>DoW Autism Career Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362529"/>
-    <id>urn:funding-finder:grants-gov:362529</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Transportation"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-22 | Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism. Distinctive Features: ﻿Applications …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -323,6 +323,35 @@
     <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
   </entry>
   <entry>
+    <title>Children's Mental Health Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363812"/>
+    <id>urn:funding-finder:grants-gov:363812</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Public health"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to provide comprehensive community mental health services to children, youth, and young adults, birth through age 21 with a serious emotional disturbance, which may include efforts to identify and serve children at risk, and their families.</summary>
+  </entry>
+  <entry>
+    <title>GLS Campus Suicide Prevention</title>
+    <link href="https://www.grants.gov/search-results-detail/363809"/>
+    <id>urn:funding-finder:grants-gov:363809</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to support a comprehensive, public health, and evidence-based approach for colleges and universities that: improves access to behavioral health services for all college students, including those at risk for suicide, depression, serious mental illness, and substance use disorders that can lead to school failure; prevents and mitigates suicide, mental health conditions…</summary>
+  </entry>
+  <entry>
+    <title>State Pilot Program for Treatment for Pregnant and Postpartum Women</title>
+    <link href="https://www.grants.gov/search-results-detail/363808"/>
+    <id>urn:funding-finder:grants-gov:363808</id>
+    <updated>2026-12-15T00:00:00Z</updated>
+    <author><name>Substance Abuse and Mental Health Services Adminis</name></author>
+    <category term="Public health"/>
+    <summary>Substance Abuse and Mental Health Services Adminis | Forecasted | The purpose of this program is to strengthen and expand the state system’s ability to provide integrated, evidence-based substance used disorder and maternal mental health services for pregnant and post-partum women and their families.</summary>
+  </entry>
+  <entry>
     <title>Capacity Building for National Immunization Programs in the Eastern Mediterranean Region</title>
     <link href="https://www.grants.gov/search-results-detail/363749"/>
     <id>urn:funding-finder:grants-gov:363749</id>
@@ -607,38 +636,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Research Education Program for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363248"/>
-    <id>urn:funding-finder:grants-gov:363248</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant for the Clinical and Translational Science Awards Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363246"/>
-    <id>urn:funding-finder:grants-gov:363246</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
-  </entry>
-  <entry>
-    <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
-    <link href="https://www.grants.gov/search-results-detail/363253"/>
-    <id>urn:funding-finder:grants-gov:363253</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
 </feed>

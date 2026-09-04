@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-03T14:39:56Z</updated>
+  <updated>2026-09-04T12:44:15Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -318,6 +318,40 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Closes 2027-05-25 | The overall goal of the NIH Ruth L. Kirschstein National Research Service Award (NRSA) program is to help ensure that a pool of highly trained scientists is available in appropriate scientific disciplines to address the Nation's biomedical, behavioral, and clinical research needs. In alignment with the goal of the NRSA program, the Medical Scientist Training Program (MSTP) supports the development…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's New Innovator Award (DP2 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363799"/>
+    <id>urn:funding-finder:grants-gov:363799</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-08-19 | The NIH Director's New Innovator Award supports exceptionally creative early-stage investigators pursuing bold, innovative research with the potential to transform important areas of science relevant to the NIH mission. Applications are welcome across all fields relevant to NIH. The award complements other NIH programs that support early-stage investigators and is part of the NIH Common Fund's Hig…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Transformative Research Award (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363802"/>
+    <id>urn:funding-finder:grants-gov:363802</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-03 | The NIH Director's Transformative Research Award supports individual scientists and research teams pursuing bold, groundbreaking, and unconventional research with the potential to transform science, create new scientific paradigms, establish new clinical approaches, or develop transformative technologies. The Transformative Research Award is part of the NIH Common Fund's High-Risk, High-Reward Res…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Pioneer Award (DP1 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363801"/>
+    <id>urn:funding-finder:grants-gov:363801</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Closes 2027-09-09 | The NIH Director's Pioneer Award supports exceptionally creative scientists pursuing bold, innovative research with the potential to transform important areas of science relevant to the NIH mission. Proposed projects must explore new scientific directions that differ substantially from the investigator's current research and from existing work in the field. Applications are welcome across all area…</summary>
+  </entry>
+  <entry>
+    <title>NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363800"/>
+    <id>urn:funding-finder:grants-gov:363800</id>
+    <updated>2027-03-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Closes 2027-09-10 | The NIH Director's Early Independence Award supports outstanding early-career investigators who are ready to pursue independent research soon after completing their doctoral degree or post-graduate clinical training, without following the traditional postdoctoral path. The award is designed to accelerate the transition to an independent research career. Applications are welcome across all fields r…</summary>
   </entry>
   <entry>
     <title>Improved Drug Susceptibility Testing (DST) for Mycobacteria</title>
@@ -916,43 +950,5 @@
     <category term="Public health"/>
     <category term="Transportation"/>
     <summary>Centers for Disease Control - NCIPC | Closes 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
-  </entry>
-  <entry>
-    <title>Asthma and Allergic Diseases Cooperative Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/362953"/>
-    <id>urn:funding-finder:grants-gov:362953</id>
-    <updated>2027-01-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Asthma and Allergic Diseases Cooperative Research Centers (AADCRC). The AADCRC program serves as the cornerstone of NIAID's efforts to promote clinical and basic research in diseases including asthma, upper airway allergic/inflammatory diseases, food and drug allergie…</summary>
-  </entry>
-  <entry>
-    <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363113"/>
-    <id>urn:funding-finder:grants-gov:363113</id>
-    <updated>2027-01-04T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Closes 2027-02-03 | The Children’s Hospitals Graduate Medical Education (CHGME) Payment Program funds freestanding, children's hospitals. The money helps their graduate medical education (GME) programs train resident physicians and dentists.</summary>
-  </entry>
-  <entry>
-    <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Coordinating Center (CCC) and Data Coordinating Center (DCC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363555"/>
-    <id>urn:funding-finder:grants-gov:363555</id>
-    <updated>2027-01-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The SIREN Network performs clinical trials that impact the care of individuals with a n…</summary>
-  </entry>
-  <entry>
-    <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Enrollment Hubs</title>
-    <link href="https://www.grants.gov/search-results-detail/363556"/>
-    <id>urn:funding-finder:grants-gov:363556</id>
-    <updated>2027-01-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
   </entry>
 </feed>
