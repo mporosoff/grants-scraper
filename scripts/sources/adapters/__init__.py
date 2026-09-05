@@ -18,6 +18,7 @@ from . import vpr_email      # noqa: F401  (VPR email digest)
 from . import jhu_fellowships  # noqa: F401  (JHU RDT fellowship lists)
 from . import nasa_roses  # noqa: F401  (NASA ROSES native; disabled)
 from . import arpa_h  # noqa: F401  (official ARPA-H current opportunities)
+from . import darpa_iarpa  # noqa: F401  (individual DARPA and IARPA research calls)
 
 __all__ = ["rss", "nsf_cbet", "sample", "nyserda", "ur_infoready", "doe_exchange",
-           "nspires", "vpr_email", "jhu_fellowships", "nasa_roses", "arpa_h"]
+           "nspires", "vpr_email", "jhu_fellowships", "nasa_roses", "arpa_h", "darpa_iarpa"]

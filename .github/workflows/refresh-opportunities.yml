@@ -8,6 +8,7 @@ on:
       - ".github/workflows/refresh-opportunities.yml"
       - "requirements.txt"
       - "scripts/build_catalog.py"
+      - "scripts/solicitation_identity.py"
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
       - "scripts/faculty_match.py"

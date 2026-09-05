@@ -44,6 +44,7 @@ from scripts.build_catalog import (
 from .registry import REGISTRY, AdapterResult, collect
 from .validate import filter_publishable, within_health_bounds
 from .discoverability import augment_records
+from scripts.solicitation_identity import research_solicitation_key
 
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
@@ -376,13 +377,16 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     combined = [normalize_record_facets(dict(record)) for record in base]
     external = [normalize_record_facets(dict(record)) for record in external]
     seen_identity = {record_identity(r) for r in combined}
-    base_titles = {_norm_title(r) for r in combined if r.get("title")}
+    # These research calls have an authoritative sponsor + solicitation key.
+    # Titles can be shared by distinct calls, and numbers by distinct sponsors.
+    unscoped = [r for r in combined if not research_solicitation_key(r)]
+    base_titles = {_norm_title(r) for r in unscoped if r.get("title")}
     canonical_titles = {
-        _canonical_title(r) for r in combined if _canonical_title(r)
+        _canonical_title(r) for r in unscoped if _canonical_title(r)
     }
     base_numbers = {
         _norm_number(r.get("opportunity_number"))
-        for r in combined if r.get("opportunity_number")
+        for r in unscoped if r.get("opportunity_number")
     }
 
     added = dropped_identity = dropped_crossdup = 0
@@ -394,7 +398,8 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
         number = _norm_number(record.get("opportunity_number"))
         title = _norm_title(record)
         canonical_title = _canonical_title(record)
-        if (
+        scoped = research_solicitation_key(record)
+        if not scoped and (
             (number and number in base_numbers)
             or title in base_titles
             or (canonical_title and canonical_title in canonical_titles)
@@ -403,11 +408,11 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
             continue
         seen_identity.add(identity)
         combined.append(record)
-        if number:
+        if number and not scoped:
             base_numbers.add(number)
-        if title:
+        if title and not scoped:
             base_titles.add(title)
-        if canonical_title:
+        if canonical_title and not scoped:
             canonical_titles.add(canonical_title)
         added += 1
 

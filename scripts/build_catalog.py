@@ -756,6 +756,11 @@ def iter_catalog_records(xml_stream, as_of):
 
 
 def record_identity(record):
+    from scripts.solicitation_identity import research_solicitation_key
+
+    scoped = research_solicitation_key(record)
+    if scoped:
+        return f"solicitation:{scoped[0]}:{scoped[1]}"
     number = re.sub(
         r"\s+", "", str(record.get("opportunity_number") or "")
     ).casefold()
