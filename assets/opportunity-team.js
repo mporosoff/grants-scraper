@@ -308,7 +308,12 @@
       var record = options.record || null;
       var parentId = String(options.parentId || recordId(record));
       var requestedId = String(options.scopeId || "");
-      var scopes = scopesFor(parentId);
+      var publishedChildren = options.childCatalog && options.childCatalog.opportunities;
+      var scopes = scopesFor(parentId).filter(function (scope) {
+        return scope.record_type !== "publishable_child" || !Array.isArray(publishedChildren) || publishedChildren.some(function (child) {
+          return childId(child) === scope.id && String(child.parent_id || "") === parentId;
+        });
+      });
       var opportunity = requestedId ? opportunityById.get(requestedId) : null;
       if (!opportunity && scopes.length === 1 && scopes[0].record_type === "specific_parent") {
         opportunity = scopes[0];

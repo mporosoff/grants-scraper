@@ -277,7 +277,9 @@
     if (!current || !panelOwned(current) || !current.engine) return;
     var sequence = ++current.scopeSequence;
     var tentative = current.engine.opportunityById.get(current.scopeId);
-    var needChildren = tentative && tentative.record_type === "publishable_child";
+    var needChildren = tentative ? tentative.record_type === "publishable_child" : current.engine.scopesFor(current.parentId).some(function (scope) {
+      return scope.record_type === "publishable_child";
+    });
     var childReady = needChildren ? loadChildCatalog() : Promise.resolve(null);
     childReady.then(function (childCatalog) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
