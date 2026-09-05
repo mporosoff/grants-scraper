@@ -46,6 +46,10 @@ test("Stage 4 preserves every pre-existing control, form rule, source badge and 
     assert.equal($(".public-page-header").length, 1);
     assert.equal($("#primary-navigation > a").length, 3);
     assert.equal($("[data-workspace-open]").length, 0, "No unsupported page-local workspace");
+    assert.equal($("[data-shell-close]").length, 0, "Only the shell's supported close attribute is used");
+    for (const dialog of $("dialog[data-shell-drawer]").toArray()) {
+      assert.equal($(dialog).find("[data-shell-drawer-close]").length, 1, "One visible close control delegated to SiteShell");
+    }
   }
   const $ = load(researcher);
   assert.match($("h1").text(), /^Update researcher profile$/);
@@ -85,7 +89,8 @@ test("Team sheet moves the exact controls, retains values/listeners, restores fo
   dom.click("add-researcher");
   dom.api.updateTeamSummary(["Ada", "Grace"], false);
   assert.equal(dom.get("team-selected-summary").textContent, "2 selected · Ada · Grace");
-  dom.context.SiteShell.closeDrawer();
+  dom.dispatch("click", dom.get("team-editor-sheet").querySelector("[data-shell-drawer-close]"));
+  assert.equal(dom.get("team-editor-sheet").open, false, "The visible Done button closes the sheet");
   assert.equal(dom.document.activeElement.id, "edit-team");
   assert.equal(dom.get("external-status").parentElement.id, "team-status-home");
   dom.resize(false);
@@ -149,7 +154,8 @@ test("Award AI uses the shared modal lifecycle, one status owner, exact close fo
   assert.equal(dom.document.activeElement.id, "ii-question");
   assert.equal(dom.get("ii-results-note").parentElement.id, "awards-ai");
   dom.get("ii-question").value = "Who has NSF awards?";
-  dom.context.SiteShell.closeDrawer();
+  dom.dispatch("click", dom.get("awards-ai").querySelector("[data-shell-drawer-close]"));
+  assert.equal(dom.api.awardAiOpen(), false, "The visible Close button closes Ask AI");
   assert.equal(dom.document.activeElement.id, "open-awards-ai");
   assert.equal(dom.get("ii-results-note").parentElement.id, "awards-status-home");
   dom.click("open-awards-ai");

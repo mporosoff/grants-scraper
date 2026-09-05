@@ -76,3 +76,15 @@ at 320 px. No Playwright or E2E suite was run.
 
 Exact-head protected CI, completed review, merge and deployment evidence are recorded
 in the PR and local completion report after the candidate is validated.
+
+## Completed review remediation
+
+The completed review of `55470a862ac41ab0c31578b2404d549f40d9e9da` found that both
+new drawer close buttons used an unsupported attribute. The read-only invariant audit
+covered all public drawer open/close attributes, the shell's delegated click handler,
+native cancellation/backdrop paths, initial focus, status return callbacks, evidence
+navigation, history transitions and breakpoint cleanup. Both buttons and the team
+initial-focus selector now use the existing `data-shell-drawer-close` contract.
+The lifecycle tests activate the actual visible buttons through the shared event
+handler and verify closure, exact opener focus, status return and queued close/reopen.
+No new close listener or lifecycle owner was introduced.

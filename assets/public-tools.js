@@ -27,7 +27,7 @@
     const sheetBody = $("team-editor-sheet-body");
     const opener = $("edit-team");
     const mobile = matchMedia("(max-width: 800px)");
-    const open = target => shell.openDrawer(sheet, opener, target || sheet.querySelector("[data-shell-close]"), {
+    const open = target => shell.openDrawer(sheet, opener, target || sheet.querySelector("[data-shell-drawer-close]"), {
       onClose: () => $("team-status-home").append($("external-status")),
     });
     function placeEditor() {
