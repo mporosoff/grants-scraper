@@ -5,15 +5,18 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+import tempfile
 import unittest
 
 from scripts.import_opportunity_team_model import (
+    CONTENT_HASHED_ASSETS,
     MAX_BROWSER_BYTES,
     MAX_INDEX_BYTES,
     _canonical_bytes,
     _generated_javascript,
     availability_projection,
     browser_projection,
+    update_version_target,
 )
 from scripts.researcher_registry import legacy_faculty_projection, load_registry, registry_counts
 
@@ -115,17 +118,42 @@ class OpportunityTeamModelTests(unittest.TestCase):
             self.assertIn(f"data/opportunity_team_index.js?v={generation}", source)
             self.assertNotIn("hajim-pr1", source)
         page = (ROOT / "match_explorer.html").read_text(encoding="utf-8")
-        for path in (
-            "assets/search-retrieval.js",
-            "assets/opportunity-team-panel.js",
-        ):
+        for path in ("assets/search-retrieval.js",):
             self.assertIn(f'{path}?v={generation}', page)
+        panel_hash = hashlib.sha256((ROOT / "assets/opportunity-team-panel.js").read_bytes()).hexdigest()
+        self.assertIn(f"assets/opportunity-team-panel.js?v={panel_hash}", page)
         app_css_hash = hashlib.sha256((ROOT / "assets" / "app.css").read_bytes()).hexdigest()
         app_js_hash = hashlib.sha256((ROOT / "assets" / "app.js").read_bytes()).hexdigest()
         self.assertIn(f"assets/app.css?v={app_css_hash}", page)
         self.assertIn(f"assets/app.js?v={app_js_hash}", page)
         team_page = (ROOT / "team_match.html").read_text(encoding="utf-8")
         self.assertIn(f"assets/app.css?v={app_css_hash}", team_page)
+
+    def test_refresh_binds_team_drawer_code_without_changing_model_generation(self):
+        generation = self.config["generation_id"]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for asset in CONTENT_HASHED_ASSETS:
+                target = root / asset
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(f"fixture {asset}".encode())
+            page = root / "match_explorer.html"
+            page.write_text(
+                '<meta name="opportunity-team-generation" content="' + generation + '">'
+                '<script src="assets/opportunity-team.js?v=old"></script>'
+                '<script src="assets/opportunity-team-panel.js?v=old"></script>',
+                encoding="utf-8",
+            )
+            update_version_target(page, generation)
+            first = page.read_text(encoding="utf-8")
+            panel = root / "assets/opportunity-team-panel.js"
+            panel.write_bytes(b"changed drawer only")
+            update_version_target(page, generation)
+            updated = page.read_text(encoding="utf-8")
+            self.assertNotEqual(first, updated)
+            self.assertIn(GENERATION_MARKER.format(generation=generation), updated)
+            self.assertIn(f'assets/opportunity-team.js?v={generation}', updated)
+            self.assertIn(f'assets/opportunity-team-panel.js?v={hashlib.sha256(panel.read_bytes()).hexdigest()}', updated)
 
     def test_browser_projection_stays_compact(self):
         self.assertLessEqual(len(self.browser_bytes), MAX_BROWSER_BYTES)

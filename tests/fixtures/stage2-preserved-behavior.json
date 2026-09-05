@@ -1,0 +1,40 @@
+{
+  "base": "42ec9a74c9c58269e89e5ed2acad4e2c536af989",
+  "files": {
+    "assets/opportunity-team.js": "292760bf31de3b556e82421ef554d15a47efeb49173ce293b86fba3f015b3bb1",
+    "assets/team-matcher.js": "d0eab9f806cfb4e552e8f130f36c662d265bb1214c73d0ccb2d0a5d0e62b6efc",
+    "assets/team-researchers.js": "746ef7f98652fdef45d0ac346e93a706adebd7a1f772ab972aee033b5c95c774",
+    "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
+    "assets/credentials.js": "36eb3a0a64432842ea9c0fd5bc662eb185f413524a1272e5ccf54ea68152026d",
+    "assets/nofo.js": "1e3f9c53b25bb14636ace7d24af8d8a2b8f82498adce06e6cf0a906fb5484211",
+    "assets/ai-provider.js": "6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+    "assets/search-retrieval.js": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d"
+  },
+  "prechangeArtifactHashes": {
+    "data/opportunity_teams.js": "c1565c72119be7bd2861a91168ece6fd3dfb11b1c3cf1acf0a2800a24d53331d",
+    "data/opportunity_team_index.js": "a54f9aef5216faa1e161372593af05357f7d43372f5cec760d01e521a2d3527c",
+    "data/faculty_matches.js": "a2d3173f6d43b72bb091a3f71ee6a9b0ef5a7bd287a44607c4ec5e8ceede42b1",
+    "data/researcher_directory.js": "3889ec91790eb3d846c6f67e51320494037c430fed61e73dc1113c7bd414ba45",
+    "config/researcher_registry.json": "66788fcc053fe18801e84562a6a585beae1389687b73196abb15901f0b9d95fa"
+  },
+  "functions": {
+    "assets/app.js#currentChatIds": "102540ee67f40220522a0db1f9a525d3d52a6624fc6f5803ed5e24d4702d6b2a",
+    "assets/app.js#currentModel": "ae4381f11b2e5514fd123f8b23516f5fead0bddb0c88cd0871ae4c004d249f94",
+    "assets/app.js#providerReady": "16a1a623a97671e1b4af0129c650d0fcb53ea6aa3a39a996c53ab9381e2ba66f",
+    "assets/app.js#providerStructured": "1dbbb8b9a23a29a52a9ac69b6519c11a5360541527cbb000e2c482d6097e6427",
+    "assets/app.js#compactResultRecord": "2520077fa6a3a88f13da21e6a5e294d64e374dd6c49b509a1e9ba6636c9a97b5",
+    "assets/app.js#boundedConversationHistory": "3dcf68ac9ad9cf5a6d03a0379cd4759ac8c404ab04a8651ac840dc5cd49b8777",
+    "assets/app.js#refinementProfileContext": "d10897b37d4aa5b8642d78470de438ab1379c4bc99a16ae816c47dabd0b39ad6",
+    "assets/opportunity-team-panel.js#teamMatchHref": "2acb9f0861d80d6f4bb2b870f51d55a64b07898dc3619814329d9a2ee37f443e",
+    "assets/opportunity-team-panel.js#memberCard": "1f37053874295a3da7e6593c15f0eafa39bc5354212a7b125aa978b74e6f063a",
+    "assets/opportunity-team-panel.js#roleRow": "fc5890981ef16176f400928d26a4dfacd1690bba2a5b6467b215114e6c0ab3d2",
+    "assets/opportunity-team-panel.js#renderProposal": "459f572ebc6ab9bdb939f041e4e6dcb96675af35c8005dc55cbf2f25efcf6280",
+    "assets/opportunity-team-panel.js#renderScopeChoice": "b6a01199fef1f81b9b8347004023cb1a9196773c787b03ce23242b816a0b4ad7",
+    "assets/opportunity-team-panel.js#renderUnavailable": "36be65aa61a18df8ae4aca826466434be03c086c2e2d529b062bf87a4d8f578a",
+    "assets/opportunity-team-panel.js#loadChildCatalog": "22f6211c16902b82ca681a17ee630a76af0b7bd8aae00fed47dbeaaa117ec0ad"
+  },
+  "requests": {
+    "askNofo": "3f53e13ee96d88e03813040ebdacdb3f2c9c744d65f73b76fde3f35f74878018",
+    "askResults": "e6485f7019fac82d1981af0ae0b24b0ad713034cd19d9eb2e8e8c835f6d208f3"
+  }
+}

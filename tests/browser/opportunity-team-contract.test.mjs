@@ -197,7 +197,7 @@ test("removal exposes missing roles and replacements cannot silently claim unaud
   assert.ok(afterAlternative.roles.some(role => role.selected_alternative_ids.includes(alternative.profile.id)));
 });
 
-test("Funding Finder panels are lazy, rerender-safe, independently owned, and accessible", () => {
+test("Funding Finder team proposals are lazy, rerender-safe and use the shared drawer", () => {
   assert.match(page, /meta name="opportunity-team-generation" content="[a-f0-9]{64}"/);
   assert.match(page, /assets\/opportunity-team\.js\?v=[a-f0-9]{64}/);
   assert.match(page, /assets\/opportunity-team-panel\.js\?v=[a-f0-9]{64}/);
@@ -227,9 +227,10 @@ test("Funding Finder panels are lazy, rerender-safe, independently owned, and ac
   assert.match(panelSource, /function currentForElement\(element\)/);
   assert.match(panelSource, /openPanels\.set\(panel, current\)/);
   assert.match(panelSource, /function closeAll\(\)/);
-  assert.doesNotMatch(panelSource, /panelShell[\s\S]{0,200}closeAll\(/);
+  assert.match(panelSource, /SiteShell.openDrawer\(drawer, trigger/);
+  assert.match(panelSource, /onClose: closeAll/);
   assert.match(panelSource, /funding-finder:before-results-render/);
-  assert.match(panelSource, /if \(event\.key === "Escape"/);
+  assert.doesNotMatch(panelSource, /addEventListener\("keydown"/);
   assert.match(panelSource, /aria-labelledby/);
   assert.match(panelSource, /aria-live/);
   assert.match(panelSource, /Add a missing researcher/);

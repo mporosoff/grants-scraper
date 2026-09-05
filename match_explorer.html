@@ -33,10 +33,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=75dd51158d2ca8f4b968f5ff1bc7b858bf3c0d27db90821bec393cd8730d7d1d">
+  <link rel="stylesheet" href="./assets/app.css?v=ce8c417f8aec77c4693f3b3344165ffa781cdee8c4b7a4e9781fa74e80fc0946">
   <link rel="stylesheet" href="./assets/site-nav.css?v=542297108fb69a73ecb2aab8ececb66b0347d5915936bb21e061871065ae177c">
   <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
-  <link rel="stylesheet" href="./assets/site-shell.css?v=bda8b8c68dc25d4c9651898ff5d646be191f2d9897d0e4f91334e14c9eff7d63">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=cf5dee497c6bd7bcd414f24c5a87274726e73a6098f963b145c33aef7f5fa4dc">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -75,6 +75,48 @@
     </div>
   </header>
 
+  <dialog class="site-drawer site-drawer-wide result-assistant" id="result-assistant" data-shell-drawer aria-labelledby="chat-heading" aria-describedby="chat-panel-copy">
+          <div class="ai-heading">
+            <span class="spark" aria-hidden="true">✦</span>
+            <div>
+              <p class="eyebrow" id="chat-eyebrow">Result-aware AI workspace</p>
+              <h2 id="chat-heading">Chat with your results</h2>
+            </div>
+            <button class="button secondary chat-size-toggle" id="toggle-chat-size" type="button" data-shell-drawer-close>Close chat</button>
+          </div>
+          <p class="panel-copy" id="chat-panel-copy">Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.</p>
+          <div class="nofo-chat-context hidden" id="nofo-chat-context"></div>
+          <div id="chat-provider-slot"></div>
+          <section class="chat" id="chat" aria-label="Chat with the current funding results">
+            <p class="chat-summary" id="chat-summary"></p>
+            <div class="suggestion-list" id="chat-suggestions"></div>
+            <div class="messages" id="chat-messages" aria-live="polite" aria-label="Conversation"></div>
+            <div class="chat-thinking hidden" id="chat-thinking" role="status" aria-live="polite">
+              <span class="thinking-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>Reviewing the connected opportunities and their evidence…</span>
+            </div>
+            <form class="chat-form" id="chat-form">
+              <label class="sr-only" id="chat-input-label" for="chat-input">Ask about the current funding results</label>
+              <textarea id="chat-input" rows="3" maxlength="3000" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
+              <button class="button primary" id="chat-submit" type="submit"><span>Send</span></button>
+              <p class="chat-keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift+Enter for a new line</p>
+            </form>
+            <div class="chat-actions">
+              <button class="text-button hidden" id="clear-ai" type="button">Return to the full search results</button>
+              <button class="text-button hidden" id="reset-narrowing" type="button">Restore the connected result set</button>
+            </div>
+          </section>
+          <p class="privacy-note chat-privacy" id="chat-privacy">Chat uses the selected AI provider. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
+        </dialog>
+
+  <dialog class="site-drawer site-drawer-wide team-builder-drawer" id="team-builder" data-shell-drawer aria-labelledby="team-builder-heading">
+    <div class="site-drawer-header">
+      <h2 id="team-builder-heading">Team Builder</h2>
+      <button class="button secondary" type="button" data-shell-drawer-close aria-label="Close Team Builder">Close</button>
+    </div>
+    <div id="team-builder-content"></div>
+  </dialog>
+
   <dialog id="personal-workspace" class="workspace-drawer" data-shell-drawer aria-labelledby="personal-workspace-heading" aria-describedby="personal-workspace-description">
     <div class="workspace-drawer-header">
       <h2 id="personal-workspace-heading">Workspace</h2>
@@ -102,7 +144,7 @@
             </section>
     </div>
   </dialog>
-  <p class="saved-storage-status workspace-save-status hidden" id="saved-status" data-shell-status="personal-workspace" role="status" aria-live="polite" aria-atomic="true"></p>
+  <p class="saved-storage-status workspace-save-status hidden" id="saved-status" data-shell-status="personal-workspace result-assistant" role="status" aria-live="polite" aria-atomic="true"></p>
 
 
   <main>
@@ -355,7 +397,8 @@
               <h2 id="launch-step-heading">Expand and refine your search with AI</h2>
             </div>
           </div>
-          <details class="provider-setup">
+          <div id="search-provider-slot">
+          <details class="provider-setup" id="provider-setup">
             <summary>
               <span>
                 <strong>AI service and privacy</strong>
@@ -387,6 +430,7 @@
               <p class="privacy-note">Hosted AI sends only the bounded information needed for the feature to Funding Finder's protected Cloudflare service; provider keys are never sent to the browser. If you choose your own provider, a saved key stays in this browser's local storage until you remove it. Advanced users may instead select OpenAI or Anthropic and provide their own limited-use key after reviewing its spending controls: <a href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" target="_blank" rel="noopener noreferrer">OpenAI key and project limits</a> or <a href="https://support.anthropic.com/en/articles/9767949-api-key-best-practices-keeping-your-keys-safe-and-secure" target="_blank" rel="noopener noreferrer">Anthropic key safety and limits</a>.</p>
             </div>
           </details>
+          </div>
           <div class="ai-refine-actions">
             <button class="button ai-button" id="ai-refine" type="button" aria-describedby="ai-refine-requirement" disabled>
               <span aria-hidden="true">✦</span>
@@ -424,7 +468,7 @@
               </select>
             </label>
             </div>
-            <button class="button secondary results-chat-launch" id="open-results-chat" type="button" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
+            <button class="button secondary results-chat-launch" id="open-results-chat" type="button" aria-haspopup="dialog" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
             <button class="button secondary" type="button" data-shell-menu="results" aria-label="More results actions" aria-expanded="false" aria-controls="results-more-actions">More <span aria-hidden="true">▾</span></button>
             <div class="shell-action-list" id="results-more-actions" hidden>
               <button id="export-csv" type="button">Export CSV</button>
@@ -438,59 +482,6 @@
         <div class="notice warning hidden" id="stale-warning"></div>
         <div class="potential-status hidden" id="potential-status" role="status" aria-live="polite"></div>
 
-        <section class="ai-panel result-assistant hidden" id="result-assistant" role="dialog" aria-modal="true" aria-labelledby="chat-heading">
-          <div class="ai-heading">
-            <span class="spark" aria-hidden="true">✦</span>
-            <div>
-              <p class="eyebrow" id="chat-eyebrow">Result-aware AI workspace</p>
-              <h2 id="chat-heading">Chat with your results</h2>
-            </div>
-            <button class="button secondary chat-size-toggle" id="toggle-chat-size" type="button">Close chat</button>
-          </div>
-          <p class="panel-copy" id="chat-panel-copy">Compare, question, or focus the opportunities already in your search. Every named opportunity links back to its result card and official source.</p>
-          <div class="nofo-chat-context hidden" id="nofo-chat-context"></div>
-          <section class="chat-key-prompt hidden" id="chat-key-prompt" aria-labelledby="chat-key-heading">
-            <div>
-              <strong id="chat-key-heading">Connect an AI provider to start chatting</strong>
-              <p>The key is used directly from this browser. Save it only on a device you trust.</p>
-            </div>
-            <div class="chat-key-fields">
-              <label>Provider
-                <select id="chat-k-provider">
-                  <option value="hosted">Funding Finder AI (included)</option>
-                  <option value="openai">OpenAI</option>
-                  <option value="anthropic">Anthropic</option>
-                </select>
-              </label>
-              <label>API key
-                <input id="chat-k-key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
-              </label>
-            </div>
-            <label class="chat-save-key"><input id="chat-save-key" type="checkbox" checked> Save this key on this device</label>
-            <button class="button primary" id="connect-chat-key" type="button">Save key and start chatting</button>
-            <p class="credential-status" id="chat-key-status" aria-live="polite"></p>
-          </section>
-          <section class="chat" id="chat" aria-label="Chat with the current funding results">
-            <p class="chat-summary" id="chat-summary"></p>
-            <div class="suggestion-list" id="chat-suggestions"></div>
-            <div class="messages" id="chat-messages" aria-live="polite" aria-label="Conversation"></div>
-            <div class="chat-thinking hidden" id="chat-thinking" role="status" aria-live="polite">
-              <span class="thinking-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span>Reviewing the connected opportunities and their evidence…</span>
-            </div>
-            <form class="chat-form" id="chat-form">
-              <label class="sr-only" id="chat-input-label" for="chat-input">Ask about the current funding results</label>
-              <textarea id="chat-input" rows="3" maxlength="3000" placeholder="Which opportunities best fit a university-led pilot, and why?"></textarea>
-              <button class="button primary" id="chat-submit" type="submit"><span>Send</span></button>
-              <p class="chat-keyboard-hint">Enter to send <span aria-hidden="true">·</span> Shift+Enter for a new line</p>
-            </form>
-            <div class="chat-actions">
-              <button class="text-button hidden" id="clear-ai" type="button">Return to the full search results</button>
-              <button class="text-button hidden" id="reset-narrowing" type="button">Restore the connected result set</button>
-            </div>
-          </section>
-          <p class="privacy-note chat-privacy" id="chat-privacy">Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.</p>
-        </section>
 
         <div class="result-list" id="results" aria-live="polite"></div>
 
@@ -594,7 +585,7 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./assets/site-shell.js?v=bdf07a7ac2135ec590533c0ef06ea179dff981dda8736017bf30e876eee3f523"></script>
+  <script src="./assets/site-shell.js?v=7f63f3be997b62f36042378a3e2f637a474cd50cab307d83bf5d2dc32b96ff70"></script>
   <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
   <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
   <script src="./data/catalog-metadata.js?v=catalog-20260904T142536901876Z"></script>
@@ -621,10 +612,10 @@
   <script src="./data/researcher_directory.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
   <script src="./data/opportunity_team_index.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
   <script src="./assets/opportunity-team.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-  <script src="./assets/opportunity-team-panel.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+  <script src="./assets/opportunity-team-panel.js?v=ec1c1f36f615f21ed3641332a93f30d7451d2bec9d236c4ab7d3c98952f82282"></script>
   <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/app.js?v=509a4d52fad4bedfb660c0c21f4ad2a6e9e193e6e8b031fccb459910d20609ba"></script>
+  <script src="./assets/app.js?v=406f469a2724be3eed6283af451b6e56b0c793d40544802a07356de772464c7e"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>
