@@ -239,6 +239,11 @@ for (const mode of ["", "uploaded-nofo"]) {
       assert.ok(requests[2].payload.conversation.every(message => !Object.hasOwn(message, "contextIds")), "Local evidence scope metadata must not leak through the provider conversation boundary");
       requests[2].resolve({ answer: "Deadline not listed", referenced_result_ids: ["one"] });
       await followUp;
+      sandbox.retrieveChatContext = async () => ({ ids: [], mode: "unavailable_follow_up", matches: new Map() });
+      await sandbox.askResults("Which of those has a 2027 deadline?");
+      assert.match(state.ai.messages.at(-1).text, /previous answer has no opportunities available/);
+      assert.equal(requests.length, 3, "An unavailable prior comparison must not send a new set to the provider");
+      assert.equal(state.ai.busy, false);
     }
   });
 }

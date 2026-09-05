@@ -5035,10 +5035,13 @@
     const eligible = new Set(eligibleIds);
     const query = CHAT_UI.retrievalQuery(question);
     if (state.ai.mode === "foa-focus") return { ids: eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: "focused_opportunity" };
-    const previous = [...messages].reverse().find(message => message.role === "assistant" && (message.contextIds || message.resultIds)?.length);
-    if (!query) {
+    const previous = [...messages].reverse().find(message => message.role === "assistant" && (Array.isArray(message.contextIds) || Array.isArray(message.resultIds)));
+    if (!query || (previous && CHAT_UI.isResultFollowUp(question))) {
       const ids = CHAT_UI.knownResultIds(previous?.contextIds || previous?.resultIds, eligibleIds, MAX_CHAT_RESULTS);
-      return { ids: ids.length ? ids : eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: ids.length ? "connected_follow_up" : "initial_comparison" };
+      return {
+        ids: previous ? ids : eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(),
+        mode: previous ? (ids.length ? "connected_follow_up" : "unavailable_follow_up") : "initial_comparison",
+      };
     }
     // Local and semantic retrieval both search the full eligible set, independently of page/sort.
     const local = computeMatches(query, "relevance", { context: "" }).matches
@@ -5090,16 +5093,21 @@
     $("chat-input").blur();
     renderChat();
     setAiBusy(true);
-    setAiStatus(CHAT_UI.retrievalQuery(cleanQuestion)
-      ? `Searching ${eligibleIds.length.toLocaleString()} eligible opportunities for your question…`
-      : "Preparing the opportunity comparison…");
+    setAiStatus("Preparing your answer…");
     try {
       const retrieval = await retrieveChatContext(cleanQuestion, eligibleIds, requestMessages);
       if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
       const contextIds = retrieval.ids;
       if (!contextIds.length) {
-        state.ai.messages.push({ role: "assistant", text: `I did not find supported matches for “${retrieval.query}” within the ${eligibleIds.length.toLocaleString()} eligible results.${retrieval.mode === "local_retrieval" ? " Semantic retrieval is temporarily unavailable; this used local search." : ""} Try refining the topic or broadening your search filters.`, resultIds: [] });
-        setAiStatus("No supported matches were found within the current search scope.");
+        const unavailableFollowUp = retrieval.mode === "unavailable_follow_up";
+        state.ai.messages.push({
+          role: "assistant",
+          text: unavailableFollowUp
+            ? "The previous answer has no opportunities available in the current results. Ask about a new topic or adjust your filters to start another comparison."
+            : `I did not find supported matches for “${retrieval.query}” within the ${eligibleIds.length.toLocaleString()} eligible results.${retrieval.mode === "local_retrieval" ? " Semantic retrieval is temporarily unavailable; this used local search." : ""} Try refining the topic or broadening your search filters.`,
+          resultIds: [],
+        });
+        setAiStatus(unavailableFollowUp ? "The previous comparison has no currently eligible opportunities." : "No supported matches were found within the current search scope.");
         renderChat({ scrollToLatestAssistant: true });
         return;
       }

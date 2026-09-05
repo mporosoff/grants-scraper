@@ -65,6 +65,35 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.deepEqual([...reorderedFollowUp.ids], [...initial.ids], "Follow-ups preserve every supplied record, independently of model references and result ordering");
   const filteredFollowUp = await context.retrieveChatContext("What are their deadlines?", ids.slice(1), compared);
   assert.deepEqual([...filteredFollowUp.ids], [...initial.ids].slice(1), "Changed eligibility still excludes records outside the current search");
+  for (const question of [
+    "Which of those has a 2027 deadline?",
+    "Which of those has a 2028 deadline instead?",
+    "Which has a deadline after January 2027?",
+    "Which awards offer over $500,000 per year?",
+    "Are any of these eligible for early-career investigators?",
+    "Does it require an industry partner?",
+    "Which of those fit heterogeneous catalysis?",
+    "Compare the previous opportunities by application effort.",
+  ]) {
+    const followUp = await context.retrieveChatContext(question, [...ids].reverse(), compared);
+    assert.equal(followUp.mode, "connected_follow_up", question);
+    assert.deepEqual([...followUp.ids], [...initial.ids], question);
+  }
+  for (const question of ["heterogeneous catalysis", "Instead, find heterogeneous catalysis.", "New topic: heterogeneous catalysis"]) {
+    const changedTopic = await context.retrieveChatContext(question, ids, compared);
+    assert.deepEqual([...changedTopic.ids], ["70"], "A new topic must retrieve across the eligible set despite prior comparison records");
+    assert.equal(changedTopic.mode, "local_retrieval");
+  }
+  assert.equal(ui.isResultFollowUp("Instead of those, find homogeneous catalysis"), false);
+  assert.equal(ui.isResultFollowUp("New topic: CO2 electroreduction"), false);
+  assert.equal(ui.isResultFollowUp("What are the deadlines for homogeneous catalysis?"), false);
+  assert.equal(ui.isResultFollowUp("Find IT research opportunities"), false, "The IT abbreviation must not be treated as a pronoun");
+  assert.equal(ui.isResultFollowUp("Find catalysis opportunities with budgets above $500,000"), false);
+  for (const [eligible, history] of [[ids.slice(10), compared], [ids, [...compared, { role: "assistant", resultIds: [] }]]]) {
+    const unavailable = await context.retrieveChatContext("Which of those has a 2027 deadline?", eligible, history);
+    assert.equal(unavailable.mode, "unavailable_follow_up");
+    assert.deepEqual([...unavailable.ids], [], "An unavailable or empty previous answer must never silently use another comparison");
+  }
   const small = await context.retrieveChatContext("What are their deadlines?", ids.slice(0, 8), []);
   assert.equal(ui.resultContextLabel(small.mode, small.ids.length, 8), "Comparison of all 8 current results");
 });

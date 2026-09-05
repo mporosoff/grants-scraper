@@ -268,9 +268,23 @@
   function retrievalQuery(question) {
     const filler = new Set("a an the and or for to of in on with at by from about into is are was were be been being do does did can could would should will may might i we you me my our your it its they their them this that these those what which who when where why how please find search show give list name tell suggest recommend compare explain describe discuss opportunities opportunity funding funded funds fund grants grant calls call programs program options option results result matches match fit fits best good few some any more other available current catalog full together pursue suitable relevant relate related help need want looking look ones instead details detail additional support supports supported".split(" "));
     const facts = new Set("deadline deadlines dates date eligibility eligible requirements requirement amounts amount budget budgets award awards duration durations contact contacts officer officers submission submissions apply applying cited cited source sources evidence verify verification stage stages actually open closed forecasted project projects".split(" "));
-    const tokens = String(question || "").match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
+    const scopedQuestion = String(question || "").replace(/^\s*(?:please\s+)?(?:(?:new|different|another|unrelated)\s+(?:topic|search)|(?:switch|change)\s+(?:the\s+)?topics?|start\s+over)\s*[:,.;-]?\s*/i, "");
+    const tokens = scopedQuestion.match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
     const substantive = tokens.filter(word => !filler.has(word.toLowerCase()) && !facts.has(word.toLowerCase()));
     return substantive.join(" ").slice(0, 500);
+  }
+
+  function isResultFollowUp(question) {
+    const text = String(question || "").toLowerCase();
+    // An explicit change of topic takes precedence over references to the old set.
+    if (/\b(?:new|different|another|unrelated)\s+(?:topic|search)\b|\b(?:switch|change)\s+(?:the\s+)?topics?\b|\bstart\s+over\b|\binstead(?:\s+of\s+(?:those|these|them))?[,\s]+(?:find|search|look|show)\b|\b(?:find|search)\b.*\binstead\b/.test(text)) return false;
+    if (/\b(?:those|these|them|their)\b|\b(?:this|that|previous|last|same)\s+(?:opportunit(?:y|ies)|calls?|grants?|programs?|awards?|options?|results?|set|comparison|answer)\b|\b(?:mentioned|listed|shown|discussed|compared)\s+(?:above|earlier|previously)\b/.test(text)
+      || /\b(?:it|its|It|Its)\b/.test(String(question || ""))) return true;
+    const query = retrievalQuery(question);
+    if (!query) return true;
+    // Date and amount qualifiers do not turn a factual comparison into a new topic.
+    const qualifiers = new Set("has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
+    return query.split(/\s+/).every(word => qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word));
   }
 
   function evidenceExcerpt(text, query, maximum = 1600) {
@@ -298,7 +312,7 @@
   function resultScopeSummary(count, limit) {
     const first = Math.min(count, limit);
     const comparison = count > limit ? `the first ${first} results in the current order` : `all ${count} results`;
-    return `Topic questions search all ${count.toLocaleString()} results and select up to ${limit}. General comparisons start with ${comparison}; follow-ups keep the previous answer’s records.`;
+    return `Topic questions search all ${count.toLocaleString()} results and select up to ${limit}. General comparisons start with ${comparison}. Ask about those results to keep the previous answer’s records, or name a new topic to search again.`;
   }
 
   function resultContextLabel(mode, count, total) {
@@ -312,6 +326,7 @@
 
   globalThis.FUNDING_CHAT_UI = Object.freeze({
     retrievalQuery,
+    isResultFollowUp,
     evidenceExcerpt,
     resolveEvidenceLinks,
     resultScopeSummary,
