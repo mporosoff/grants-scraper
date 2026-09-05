@@ -3,7 +3,7 @@
 
   const release = Object.freeze({
     version: "1.3.0",
-    updated: "2026-08-30",
+    updated: "2026-09-05",
   });
   const productionFlags = Object.freeze({
     subtopics: true,

@@ -3667,6 +3667,7 @@
     const list = $("saved-list");
     const count = $("saved-count");
     const items = state.savedItems || [];
+    updateSavedOpportunityAlertUi();
     if (count) count.textContent = `(${items.length})`;
     const badge = document.querySelector("[data-workspace-badge]");
     if (badge) { badge.textContent = String(items.length); badge.hidden = !items.length; }
@@ -3746,10 +3747,11 @@
   }
 
   function openOpportunityAlert(id, focus) {
-    if (!state.ready) {
+    const saved = state.savedItems.find(item => SAVED_API.idOf(item) === id);
+    if (!state.ready && !saved) {
       return runCatalogAction(() => openOpportunityAlert(id, focus));
     }
-    const record = recordById(id);
+    const record = (state.ready ? recordById(id) : null) || saved;
     if (!record || !ALERTS_API?.open) return;
     ALERTS_API.open({
       type: "opportunity",
@@ -3784,6 +3786,27 @@
       strong_contract_version: "funding-search-v2-strong-1",
       include_potential: false,
     };
+  }
+
+  function openSavedOpportunityAlert() {
+    if (!state.savedItems.length || !ALERTS_API?.open) return;
+    ALERTS_API.open({
+      type: "saved_opportunities",
+      definition: { triggers: ["deadline_changed", "amended", "closing_reminders", "status_changed"] },
+      savedOpportunities: state.savedItems.map(item => ({ id: SAVED_API.idOf(item), title: item.title })),
+      summary: "Watch selected saved opportunities for deadline changes, amendments, closing reminders, and status changes. No funding search is needed.",
+      focus: $("alert-saved-opportunities"),
+    });
+  }
+
+  function updateSavedOpportunityAlertUi() {
+    const count = state.savedItems.length;
+    const button = $("alert-saved-opportunities");
+    if (button) button.disabled = !count;
+    const status = $("saved-opportunity-alert-status");
+    if (status) status.textContent = count
+      ? `${count} saved ${count === 1 ? "opportunity is" : "opportunities are"} available to watch. Choose which ones to include.`
+      : "Save an opportunity to enable this alert. No search is required.";
   }
 
   function openSavedSearchAlert() {
@@ -5305,6 +5328,7 @@
       renderResults();
     });
     $("alert-new-matches")?.addEventListener("click", openSavedSearchAlert);
+    $("alert-saved-opportunities")?.addEventListener("click", openSavedOpportunityAlert);
     $("clear-saved")?.addEventListener("click", clearSaved);
     document.addEventListener("click", event => {
       const refine = event.target.closest("[data-refine-open]");

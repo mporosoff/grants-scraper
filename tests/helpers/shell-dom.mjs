@@ -19,6 +19,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
       get value() { return $(node).val() || ""; }, set value(value) { $(node).val(value); },
       get hidden() { return $(node).attr("hidden") !== undefined; }, set hidden(value) { value ? $(node).attr("hidden", "") : $(node).removeAttr("hidden"); },
       get disabled() { return $(node).attr("disabled") !== undefined; }, set disabled(value) { value ? $(node).attr("disabled", "") : $(node).removeAttr("disabled"); },
+      get checked() { return $(node).attr("checked") !== undefined; }, set checked(value) { value ? $(node).attr("checked", "") : $(node).removeAttr("checked"); },
       get open() { return $(node).attr("open") !== undefined; }, set open(value) { value ? $(node).attr("open", "") : $(node).removeAttr("open"); },
       get isConnected() { return $(node).parents("html").length > 0; },
       get parentElement() { return wrap(node.parent?.type === "tag" ? node.parent : null); },

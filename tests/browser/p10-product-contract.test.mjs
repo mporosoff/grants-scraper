@@ -43,7 +43,7 @@ test("v1.3 production feature flags enable topics, explanations, and hybrid sear
     { subtopics: true, matchExplanations: true, searchV2: true },
   );
   assert.equal(local.release.version, "1.3.0");
-  assert.equal(local.release.updated, "2026-08-30");
+  assert.equal(local.release.updated, "2026-09-05");
   assert.equal(production.boundedScripts.catalog.timeoutMs, 600_000);
   assert.equal(production.boundedScripts.sidecar.timeoutMs, 60_000);
   assert.equal(typeof production.boundedScripts.catalog.setTimeout, "function");

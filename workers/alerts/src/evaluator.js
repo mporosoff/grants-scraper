@@ -117,7 +117,7 @@ async function enqueue(store, subscription, value, now, evaluationContext = {}) 
 }
 
 export function baselineIds(subscription, suppliedIds = []) {
-  if (subscription.type === "opportunity") return [subscription.definition.opportunity_id];
+  if (subscription.type === "opportunity") return subscription.definition.opportunity_ids || [subscription.definition.opportunity_id];
   if (subscription.type === "program") return [];
   return [...new Set(suppliedIds.map(String).filter(Boolean))];
 }
@@ -219,11 +219,12 @@ function relevantChanges(
 
 async function evaluateOpportunity(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
-  const id = definition.opportunity_id;
+  const ids = new Set(definition.opportunity_ids || [definition.opportunity_id]);
   const triggers = new Set(definition.triggers);
   let matched = 0;
   for (const event of changes) {
-    if (String(event.opportunity_id) !== id) continue;
+    const id = String(event.opportunity_id);
+    if (!ids.has(id)) continue;
     const kind = event.type === "closed_or_removed" ? "status_changed" : event.type;
     if (!triggers.has(kind)) continue;
     const inserted = await enqueue(store, subscription, {
@@ -235,19 +236,21 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
     if (inserted) matched += 1;
   }
   if (triggers.has("closing_reminders")) {
-    const record = assets.catalog.opportunities.find(item => recordId(item) === id);
-    const remaining = record
-      ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), record.close_date)
-      : null;
-    const threshold = [7, 14, 30].find(value => remaining === value);
-    if (threshold) {
-      const inserted = await enqueue(store, subscription, {
-        eventKey: `closing:${id}:${record.close_date}:${threshold}`,
-        eventKind: "closing_reminder",
-        opportunityId: id,
-        payload: payloadFor(record, `${threshold}-day closing reminder`, env),
-      }, now, evaluationContext);
-      if (inserted) matched += 1;
+    for (const id of ids) {
+      const record = assets.catalog.opportunities.find(item => recordId(item) === id);
+      const remaining = record
+        ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), record.close_date)
+        : null;
+      const threshold = [7, 14, 30].find(value => remaining === value);
+      if (threshold) {
+        const inserted = await enqueue(store, subscription, {
+          eventKey: `closing:${id}:${record.close_date}:${threshold}`,
+          eventKind: "closing_reminder",
+          opportunityId: id,
+          payload: payloadFor(record, `${threshold}-day closing reminder`, env),
+        }, now, evaluationContext);
+        if (inserted) matched += 1;
+      }
     }
   }
   return matched;
