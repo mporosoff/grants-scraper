@@ -134,6 +134,42 @@ def scopes(parent_path="data/opportunities.js", child_path="data/subtopics.js"):
     return result
 
 
+def source_fingerprints(model, candidates, parent_path="data/opportunities.js"):
+    """Track all published scope kinds without admitting broad parents to generation."""
+    fingerprints = {scope["id"]: scope["source_fingerprint"] for scope in candidates}
+    branches = [row for row in model["opportunities"] if row["record_type"] == "declared_branch"]
+    if branches:
+        parents = {str(row["opportunity_id"]): row for row in _load_catalog(parent_path)}
+        for branch in branches:
+            parent = parents.get(branch["parent_id"])
+            if not parent or not record_is_current(parent)[0]:
+                continue
+            # Declared branches remain bounded, curated scopes. Their source
+            # dependency includes the parent notice and the retained declaration;
+            # they never become broad-parent generation candidates.
+            fingerprints[branch["id"]] = content_hash({
+                "scope": {key: branch.get(key) for key in
+                          ("id", "parent_id", "record_type", "scope_label", "objective", "source_url")},
+                "parent": {key: clean(parent.get(key)) for key in
+                           ("title", "description", "document_search_text", "primary_document_url",
+                            "funding_opportunity_url", "detail_page", "opportunity_number", "agency")},
+            })
+    return fingerprints
+
+
+def invalidate_stale_sources(model, fingerprints):
+    affected = []
+    for row in model["opportunities"]:
+        fingerprint = fingerprints.get(row["id"])
+        # Missing baselines fail closed. Registration of an existing curated
+        # baseline is an explicit migration, never an automatic refresh action.
+        if not fingerprint or row.get("source_fingerprint") != fingerprint:
+            row["review_state"] = "needs_revalidation"
+            row["revalidation_reason"] = "The official opportunity scope changed or is no longer eligible."
+            affected.append(row["id"])
+    return affected
+
+
 def eligible_claims(registry):
     result = {}
     for person in registry["researchers"]:
@@ -354,12 +390,8 @@ def main():
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
     pipeline_hash = content_hash([VERSION, MODEL, DECOMPOSE, ADJUDICATE, VERIFY])
     candidates = scopes()
-    by_id = {s["id"]: s for s in candidates}
     existing = {row["id"]: row for row in model["opportunities"]}
-    for row in model["opportunities"]:
-        if row.get("generator_version") and (row["id"] not in by_id or row.get("source_fingerprint") != by_id[row["id"]]["source_fingerprint"]):
-            row["review_state"] = "needs_revalidation"
-            row["revalidation_reason"] = "The official opportunity scope changed or is no longer eligible."
+    affected_sources = invalidate_stale_sources(model, source_fingerprints(model, candidates))
     attempts = model.setdefault("generation_attempts", {})
     def attempt_key(scope):
         return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation])
@@ -368,7 +400,8 @@ def main():
                    or existing[s["id"]].get("pipeline_hash") != pipeline_hash)))
                and attempts.get(s["id"]) != attempt_key(s)]
     report = {"version": VERSION, "model": MODEL, "registry_generation": registry["registry_generation"],
-              "eligible_scopes": len(candidates), "pending_scopes": len(pending), "results": []}
+              "eligible_scopes": len(candidates), "pending_scopes": len(pending),
+              "source_invalidations": affected_sources, "results": []}
     if args.generate and claims and pending:
         provider = Provider(args.cache)
         ids = list(claims)

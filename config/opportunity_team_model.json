@@ -12747,7 +12747,7 @@
     "363618": "f3541a7d5140dc5cc31f820bb9e4d208f377969a48d0f6021137274ba6ce45df",
     "363623": "7dcbdddab6e6ce632e2007d43e4bf34675a7ea23f9e90827c315d671ec829d4c"
   },
-  "generation_id": "46678c209f883551ae77ea980aa4900a8daac399f76cdeefbf4d3f06a570c942",
+  "generation_id": "ef6189e3fcccd203d9dcc665217f42fed86be1986b8853cda20b9d3fc4a316d4",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -12866,6 +12866,7 @@
         }
       ],
       "scope_label": "Fundamental studies of superconducting qubits",
+      "source_fingerprint": "db30a27db65962943f15c173a4059e1de5cc77171257d90949259d548a41850f",
       "source_url": "https://files.simpler.grants.gov/opportunities/9feba724-7117-42d6-b42c-2a649f4ef2ec/attachments/b5f76cf3-171a-4ac5-bd2e-bf9134aedf99/W911NF21S0009_LPS_Qubit_Collaboratory_Special_Notice.pdf",
       "why_team": "Singh contributes quantum-material modeling, Blok contributes quantum measurement in microwave circuits, and Wu contributes RF control electronics. This is a coherent supporting core, but it cannot be called a superconducting-qubit team without a Josephson-device experimentalist."
     },
@@ -13025,6 +13026,7 @@
         }
       ],
       "scope_label": "Optoelectronic materials, devices, and integrated components",
+      "source_fingerprint": "5dfbd8eb2aec670cab2622d598fdd7d54bf1efa82959b599b9533c5c03bd85b4",
       "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
       "why_team": "Vamivakas owns active optical materials, Harding owns thin-film fabrication, Cardenas owns integrated-device design, and Zuegel owns laser/source performance. The four roles form a complete materials-to-device-to-source chain despite the graph's large raw combination count."
     },
@@ -13142,6 +13144,7 @@
         }
       ],
       "scope_label": "Multimodal synthetic data for Army machine learning",
+      "source_fingerprint": "23c7433b678c6501ee97c9de0f01d5f7ea744752bbd6ec0da872d4b8921e6a47",
       "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
       "why_team": "Cetin represents sensed data, Luo supplies recognition, and Gopalaswamy supplies surrogate-model fidelity. Their roles form a data-to-decision chain. The core is not complete because none of the three has source evidence for generative synthetic-data methods; that capability must be added explicitly."
     },
@@ -13275,6 +13278,7 @@
         }
       ],
       "scope_label": "Living-human high-resolution inner-ear imaging",
+      "source_fingerprint": "ff0caa6162d37567f4e3456878ba496e5dcd1d3bdb89df13a816fdb5d0d461e0",
       "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DC-25-003.html",
       "why_team": "Lee supplies the inner-ear domain anchor, Giacomelli supplies a high-resolution biomedical imaging platform, and Fienup supplies reconstruction and performance validation. The skills are complementary rather than merely similar. The team remains incomplete until a clinical otologist or vestibular investigator with awake-human study access is added."
     },
@@ -13403,6 +13407,7 @@
         }
       ],
       "scope_label": "Structural biology of HIV and infectious-disease complexes",
+      "source_fingerprint": "9875af8e2a67a32d13ae3e63c19a198661b90c92fa5e73d3a0532a9434ffd20b",
       "source_url": "https://www.grants.gov/search-results-detail/361050",
       "why_team": "Huo, Nilsson, and Partridge cover computation, functional molecular behavior, and design, while Berger contributes biomedical spectroscopic measurement. The graph had counted this opportunity as complete, but the team lacks direct high-resolution biomolecular structure-determination evidence and infectious-disease structural leadership, so it is deliberately conditional."
     },
@@ -13515,6 +13520,7 @@
         }
       ],
       "scope_label": "Brain-behavior quantification and synchronization",
+      "source_fingerprint": "330a7ae72c5492a6b22fbaffcf0c48e94ed62c6d5360431ca5c2a622dbcff485",
       "source_url": "https://www.grants.gov/search-results-detail/361205",
       "why_team": "Jacobs supplies neural/perceptual modeling, while Hoque and Yan supply behavioral measurement and dynamic user-state analysis. The team covers the computational and behavioral half of the opportunity but needs an experimental neural-recording investigator and peripheral-physiology instrumentation expertise."
     },
@@ -13664,6 +13670,7 @@
         }
       ],
       "scope_label": "Electrochemical energy-conversion catalyst discovery and scale-up",
+      "source_fingerprint": "73a1123aaf0aa328c0cb1b235e126d8f6f3f9a35cbcb800119a9ff727276c6df",
       "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350589",
       "why_team": "Müller defines the electrochemical interface, Porosoff designs the catalyst, Knowles makes and characterizes the material, and Bhalode connects it to monitored processing and scale-up. Each person owns a distinct stage of the discovery-to-deployment chain, making this the strongest complete-team case in the gate."
     },
@@ -13776,6 +13783,7 @@
         }
       ],
       "scope_label": "Desalination and water-purification research",
+      "source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
       "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354243",
       "why_team": "Müller anchors water-treatment chemistry, Tenhaeff adds membrane materials, and Storer adds multiscale transport context. That combination is scientifically adjacent and potentially useful, but it lacks a pilot-scale desalination engineer and a water-process energy-optimization lead."
     },
@@ -13886,6 +13894,7 @@
         }
       ],
       "scope_label": "Nonlinear inertial sensing and adaptive control for tactical navigation",
+      "source_fingerprint": "680f970dca797d2d0aad6e9dc5e1705090ac7fab6124f99cc73e0dc33da18cf0",
       "source_url": "https://sam.gov/opp/966ffe20bcc3435cb3d0027c1ac08416/view",
       "why_team": "Ignjatovic, Kose, and Renninger form an electronics/readout subteam, not a complete inertial-navigation team. The case is intentionally retained as a fail: three adjacent electronics profiles cannot substitute for MEMS physics, nonlinear resonator modeling, and adaptive control."
     },
@@ -14015,6 +14024,7 @@
         }
       ],
       "scope_label": "Critical-material recovery from manufacturing and postconsumer scrap",
+      "source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
       "source_url": "https://www.energy.gov/cmei/ammto/critical-minerals-and-materials-accelerator-0",
       "why_team": "Bhalode, Abdolrahim, and Funkenbusch span feed handling, phase/purity characterization, and manufacturing validation; Anthamatten supplies interfacial-material context. The group is a credible process core, but it needs a direct critical-mineral recovery chemist before it becomes a complete team."
     },
