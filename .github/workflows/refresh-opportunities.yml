@@ -443,7 +443,7 @@ jobs:
         # activity, and diff-stable serialization means a quiet stretch can
         # produce no commit at all -- so the schedule can lapse with no error
         # anywhere. Writing this unconditionally guarantees one commit per
-        # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md Ã‚Â§16.3.
+        # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md §16.3.
         run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last_build
       - name: Recheck main immediately before refresh publication
         shell: bash
