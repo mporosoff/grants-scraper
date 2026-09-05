@@ -543,7 +543,7 @@ test("an expired snapshot is rebuilt before a failed source retry creates its su
   const originalSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   await expect(page.locator("#ii-source-status")).toContainText("NIH: temporarily unavailable");
   await page.locator('[data-ii-retry-source="NIH"]').click();
-  await expect(page.locator("#ii-status")).toContainText("search was refreshed before NIH became available again");
+  await expect(page.locator("#ii-status")).toContainText("expired result snapshot was rebuilt before NIH recovered");
   await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–1 of 1");
   const successorSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   expect(successorSnapshot).not.toBe(originalSnapshot);
@@ -668,7 +668,7 @@ test("Program Officer AI Q&A is hosted by default, provider-planned, determinist
 
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
-  await expect(page.locator("#ii-direct-answer")).toContainText("30 normalized matching awards");
+  await expect(page.locator("#ii-direct-answer")).toContainText("30 matching awards");
   expect(calls.filter(call => call.retrieval_plan)).toHaveLength(1);
   expect(providerCalls.map(call => call.text?.format?.name)).toEqual([
     "program_officer_question_plan_v1",
@@ -733,8 +733,8 @@ test("a rate-limited Program Officer source retries into an exact-scope successo
   await searchTopic(page, "program-officer-rate-limit", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
   const limitedSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
-  await expect(page.locator("#ii-source-status")).toContainText("NSF is rate-limited; no exact total is available");
-  await expect(page.locator("#ii-card-page-label")).toContainText("No awards were available within the current partial result set");
+  await expect(page.locator("#ii-source-status")).toContainText("NSF: temporarily limited");
+  await expect(page.locator("#ii-card-page-label")).toContainText("No awards were available in the returned results.");
   await page.locator('[data-ii-retry-source="NSF"]').click();
   await expect(page.locator("#ii-status")).toContainText("NSF recovered in successor snapshot");
   await expect(page.locator("#ii-po-scope")).toBeVisible();
@@ -788,7 +788,7 @@ test("questions use full server aggregates and bounded hydrated evidence", async
   await openAwardAi(page);
   await askDeterministicQuestion(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("78 matching awards");
-  await expect(page.locator("#ii-answer-limitations")).toContainText("78 awards were counted");
+  await expect(page.locator("#ii-answer-limitations")).toContainText("78 normalized awards informed the server aggregate");
   expect(runtimeErrors).toEqual([]);
 });
 

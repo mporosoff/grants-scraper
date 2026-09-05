@@ -68,3 +68,18 @@ The dedicated Playwright cleanup updates assertions for renamed copy and require
 opening the mobile team editor before interacting with its controls. Complete
 protected CI, exact-head review, manual E2E results and post-merge deployment
 evidence are recorded in PR #140 and `outputs/stage5` once completed.
+
+The broader E2E audit also routes profile, filter and provider interactions through
+the visible Refine Search drawer, closes it before returning to the page, and waits
+for ordinary search settlement before opening a transient card menu. Existing
+ranking, CSV, identity, stale-response, consent, provider and history assertions are
+retained. Geometry checks measure containment and non-overlap without assuming
+the retired vertical action stack or an absolutely centered navigation cluster.
+The earlier Stage 2 whole-file freeze for `team-researchers.js` is superseded only
+for optional institution normalization; the function-level baseline freezes its
+remaining pre-existing functions and the additive metadata tests cover the change.
+
+The first complete manual E2E attempt on `77ce7a7` was interrupted after the
+systematic stale-control failures were audited. It is diagnostic evidence, not
+passing validation. The corrected candidate receives a fresh complete manual E2E
+run and protected CI; automatic refresh continues to exclude E2E.

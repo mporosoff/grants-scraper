@@ -1,3 +1,4 @@
+import { openFundingRefine, closeFundingRefine } from "./public-tool-workflow.mjs";
 import { selectAwardFacet } from "./public-tool-workflow.mjs";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -1095,6 +1096,7 @@ export async function openTeamMatch(page, { sidecarFailure = false } = {}) {
 }
 
 export async function runFundingSearch(page, query) {
+  await closeFundingRefine(page);
   await page.locator("#query").fill(query);
   await page.locator("#find-funding").click();
   await expect(page.locator("#results .result-card").first()).toBeVisible({ timeout: 30_000 });
@@ -1114,7 +1116,10 @@ export async function waitForHybridSettled(page) {
 }
 
 export async function downloadText(page, selector) {
-  if (selector === "#export-csv") await page.locator('[data-shell-menu="results"]').click();
+  if (selector === "#export-csv") {
+    await closeFundingRefine(page);
+    await page.locator('[data-shell-menu="results"]').click();
+  }
   const [download] = await Promise.all([
     page.waitForEvent("download"),
     page.locator(selector).click(),
@@ -1130,6 +1135,7 @@ export function csvRows(csv) {
 }
 
 export async function configurePersonalProvider(page, key, provider = "openai") {
+  if (!(await page.locator("#result-assistant").isVisible())) await openFundingRefine(page);
   const setup = page.locator(".provider-setup");
   if (!(await setup.evaluate(details => details.open))) {
     await setup.locator(":scope > summary").click();

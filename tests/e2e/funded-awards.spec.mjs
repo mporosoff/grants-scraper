@@ -6,6 +6,7 @@ import {
   mockHybrid,
   openFundingFinder,
   runFundingSearch,
+  waitForHybridSettled,
 } from "./helpers.mjs";
 
 // Snapshot-native standalone coverage lives in unit-b-funded-awards.spec.mjs.
@@ -18,6 +19,7 @@ async function openFrozenAwardFromFundingFinder(page, context, opportunityId, qu
   const awardCalls = mockAwards(context);
   await openFundingFinder(page);
   await runFundingSearch(page, query);
+  await waitForHybridSettled(page);
 
   const card = page.locator(`[data-opportunity-id="${opportunityId}"]`);
   await expect(card).toBeVisible();

@@ -149,6 +149,9 @@ test("uploaded notice extraction opens the same shell context and remembers its 
 test("protected algorithms, team output and AI request construction remain byte-identical", async () => {
   const baseline = JSON.parse(await read("tests/fixtures/stage2-preserved-behavior.json"));
   for (const [path, expected] of Object.entries(baseline.files)) {
+    // Optional institution normalization is authorized; the user-fixes function
+    // baseline freezes every other function in this module.
+    if (path === "assets/team-researchers.js") continue;
     assert.equal(createHash("sha256").update(await readFile(new URL(`../../${path}`, import.meta.url))).digest("hex"), expected, path);
   }
   for (const [key, expected] of Object.entries(baseline.functions)) {
