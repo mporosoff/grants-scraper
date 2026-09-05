@@ -40,3 +40,9 @@ The Stage 1 executable fixture continues to verify identical CSV bytes, URL outp
 - Manual E2E selectors were updated for the moved team dialog only; no E2E/Playwright suite was run or enabled, and no workflow was modified. Complete protected Python/browser checks run through the PR on its exact candidate.
 
 Stage 3 search-workflow redesign, new team algorithms, saved teams, recent searches, researcher form changes and private administrator changes are outside this patch.
+
+## Completed first review and consolidated remediation
+
+PR #138 candidate `f93e168a8d55b3b2dc2fa3ae8d9f498057831ef8` received a terminal submitted Codex review (review `5118935505`, completed 2026-09-05 00:21:14 UTC) with one finding: the existing provider-privacy contract searched for the literal opening tag without the newly canonical ID. Protected run `33932470884` passed Python and 616 of 617 browser contracts, with exactly that assertion failing.
+
+After collecting the complete conversation, submitted review, inline findings and reactions, a read-only audit covered all provider-setup, removed duplicate-provider, old chat-overlay and team-close references across app, CSS and tests. Only the one literal tag assertion needed remediation. The bounded batch switches that assertion to the canonical `details.provider-setup#provider-setup` DOM selector, checks uniqueness and retains every privacy, provider and asset-binding assertion. Product code is unchanged. The corrected commit requires its own protected checks and exactly one exact-head re-review before merge.
