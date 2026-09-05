@@ -28,6 +28,7 @@
     return unique([
       ...(profile?.key_terms || []),
       ...(profile?.keywords || []),
+      ...(profile?.capability_phrases || []),
     ]);
   }
 
@@ -36,11 +37,12 @@
     const memberTerms = members.map(profileTerms);
     const maximumDepth = Math.max(0, ...memberTerms.map(terms => terms.length));
     const candidates = [];
-    memberTerms.forEach(terms => {
-      if (terms[0]) candidates.push(terms[0]);
-    });
+    const perMemberBudget = Math.floor((MAX_QUERY_CHARS - Math.max(0, members.length - 1) * 2) / Math.max(1, members.length));
+    const anchors = memberTerms.map(terms => terms.find(term => term.length <= perMemberBudget));
+    if (anchors.some(anchor => !anchor)) return "";
+    candidates.push(...anchors);
     candidates.push(...unique((themes || []).map(theme => theme?.label || theme)));
-    for (let depth = 1; depth < maximumDepth; depth += 1) {
+    for (let depth = 0; depth < maximumDepth; depth += 1) {
       memberTerms.forEach(terms => {
         if (terms[depth]) candidates.push(terms[depth]);
       });
@@ -55,14 +57,27 @@
     return phrases.join("; ");
   }
 
-  function teamSignature(profiles, themes = []) {
+  function teamContext(profiles) {
+    // Used only by the local acronym resolver. The shared client sends only
+    // the resulting bounded scientific query to the hosted service.
+    return (profiles || []).map(profile => [
+      ...profileTerms(profile),
+      clean(profile?.research_summary || profile?.summary),
+      clean(profile?.publication_text).slice(0, 12000),
+    ].filter(Boolean).join(". ")).join(". ").slice(0, 24000);
+  }
+
+  function teamSignature(profiles, themes = [], eligibleParentIds = null) {
     const memberPart = (profiles || []).map(profile => [
-      clean(profile?.name).toLowerCase(),
-      ...profileTerms(profile).map(term => term.toLowerCase()),
+      clean(profile?.researcher_id || profile?.id || profile?.name),
+      ...profileTerms(profile),
+      clean(profile?.research_summary || profile?.summary),
+      clean(profile?.publication_text).slice(0, 12000),
     ].join("|")).join("||");
     const themePart = unique((themes || []).map(theme => theme?.label || theme))
       .map(theme => theme.toLowerCase()).sort().join("|");
-    return `${memberPart}::${themePart}`;
+    const eligibility = eligibleParentIds == null ? null : [...eligibleParentIds].map(String).sort();
+    return JSON.stringify([memberPart, themePart, eligibility]);
   }
 
   function resultId(result) {
@@ -104,14 +119,15 @@
       cached: false,
     });
 
-    function run({ profiles = [], themes = [] } = {}) {
-      const signature = teamSignature(profiles, themes);
+    function run({ profiles = [], themes = [], eligibleParentIds = null } = {}) {
+      const eligible = eligibleParentIds == null ? null : new Set([...eligibleParentIds].map(String));
+      const signature = teamSignature(profiles, themes, eligible);
       if (searches.has(signature)) return searches.get(signature).then(outcome => {
         lastState = Object.freeze({ ...outcome, request_count: requestCount, cached: true });
         return lastState;
       });
       const query = buildTeamQuery(profiles, themes);
-      if (!client?.configured || !query) {
+      if (!client?.configured || !query || eligible?.size === 0) {
         const fallback = Promise.resolve().then(() => {
           lastState = Object.freeze({
           signature,
@@ -119,7 +135,7 @@
           rankById: new Map(),
           enhanced: false,
           fallback: true,
-          reason: client?.configured ? "empty_query" : "proxy_unconfigured",
+          reason: !client?.configured ? "proxy_unconfigured" : eligible?.size === 0 ? "no_eligible_opportunities" : "empty_query",
           reason_category: "unavailable",
           request_count: requestCount,
           cached: false,
@@ -131,7 +147,9 @@
         return fallback;
       }
       requestCount += 1;
-      const pending = client.search(query, { context: query }).then(outcome => {
+      const pending = Promise.resolve().then(() => client.search(query, {
+        context: teamContext(profiles), eligibleParentIds: eligible,
+      })).then(outcome => {
         const rankById = new Map((outcome?.parents || []).map((parent, index) => [
           clean(parent.parent_id),
           Number(parent.hybrid_rank || index + 1),
@@ -183,6 +201,7 @@
     CANONICALIZATION_SAFETY_CHARS,
     MAX_QUERY_CHARS,
     buildTeamQuery,
+    teamContext,
     teamSignature,
     applyHybridRanking,
     failureCategory,

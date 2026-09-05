@@ -35,6 +35,7 @@ function loadApi() {
     api: context.globalThis.OpportunityTeam,
     data: context.globalThis.OPPORTUNITY_TEAM_DATA,
     directory: context.globalThis.RESEARCHER_DIRECTORY,
+    index: context.globalThis.OPPORTUNITY_TEAM_INDEX,
   };
 }
 
@@ -67,6 +68,86 @@ test("validates the registry-identified staged directory without fixed counts", 
   assert.equal(api.searchFaculty(data, "", { showAll: true }).length, 12);
 });
 
+test("scope availability grows without a fixed pilot count and rejects mismatched counts", () => {
+  const { api, data, index } = loadApi();
+  const additional = JSON.parse(JSON.stringify(data.opportunities[0]));
+  additional.id = "new-specific-scope";
+  data.opportunities.push(additional);
+  index.scopes.push({ id: additional.id, parent_id: additional.parent_id, record_type: additional.record_type });
+  data.scope_count = data.opportunities.length;
+  index.scope_count = index.scopes.length;
+  api.validateData(data);
+  index.scope_count += 1;
+  assert.throws(() => api.validateData(data), /incompatible/);
+});
+
+test("stale teams are withheld without blocking the directory or unaffected scopes", () => {
+  const { api, data, index } = loadApi();
+  data.opportunities[0].review_state = "needs_revalidation";
+  index.scopes[0].review_state = "needs_revalidation";
+  const engine = api.create(data);
+  assert.equal(api.availableScopes().some(scope => scope.id === data.opportunities[0].id), false);
+  assert.ok(api.searchFaculty(data, "Porosoff").length);
+  assert.throws(() => engine.proposal(data.opportunities[0]), /revalidation/);
+  assert.ok(engine.proposal(data.opportunities[1]).selectedIds.length);
+});
+
+test("proposed variants are distinct and never reintroduce an excluded researcher", () => {
+  const { api, data } = loadApi();
+  const engine = api.create(data);
+  const opportunity = data.opportunities.find(scope => scope.roles.some(role => role.alternative_ids.length && role.coverage === "direct"));
+  const state = engine.proposal(opportunity);
+  const options = engine.proposalOptions(state);
+  assert.ok(options.length >= 1 && options.length <= 3);
+  assert.equal(new Set(options.map(option => [...option.state.selectedIds].sort().join("|"))).size, options.length);
+  const excluded = state.selectedIds[0];
+  const removed = engine.removeMember(state, excluded);
+  assert.ok(engine.proposalOptions(removed).every(option => !option.state.selectedIds.includes(excluded)));
+});
+
+test("an unsupported matched child falls back to the parent's topic selector", () => {
+  const source = appSource.match(/function opportunityTeamScopeId\(match, record\) \{[\s\S]*?\n  \}/)[0];
+  const context = { OPPORTUNITY_TEAM_API: { hasAvailableScope: ({scopeId}) => scopeId === "parent:supported" },
+    recordId: record => record.id, isBroadOpportunity: () => true };
+  vm.runInNewContext(source, context);
+  const match = id => ({ childDroveMatch: true, bestChild: { record: { subtopic_id: id } } });
+  assert.equal(context.opportunityTeamScopeId(match("parent:unsupported"), {id: "parent"}), "");
+  assert.equal(context.opportunityTeamScopeId(match("parent:supported"), {id: "parent"}), "parent:supported");
+});
+
+test("equal-coverage options start with direct experience and expose method transfer", () => {
+  const { api, data } = loadApi();
+  const opportunity = data.opportunities.find(scope => scope.id === "344592:ab-0054");
+  const engine = api.create(data);
+  const view = engine.proposalView(engine.proposal(opportunity));
+  const conversion = view.roles.find(role => /wavelength conversion/i.test(role.label));
+  assert.equal(conversion.directEvidence, true);
+  assert.ok(view.roles.some(role => role.filled && !role.directEvidence));
+  const options = engine.proposalOptions(engine.proposal(opportunity));
+  assert.ok(options.every(option => option.direct <= options[0].direct));
+});
+
+test("a generated alternative retains its exact claim evidence instead of generic profile terms", () => {
+  const { api, data, directory } = loadApi();
+  const opportunity = data.opportunities[0];
+  const person = directory.researchers.find(person => person.status === "active" && person.auto_proposable &&
+    person.claims.some(claim => claim.status === "active") && !opportunity.members.some(member => member.faculty_id === person.id));
+  const claim = person.claims.find(claim => claim.status === "active");
+  const role = opportunity.roles[0];
+  role.candidate_ids.push(person.id);
+  role.coverage = "direct";
+  role.claim_refs = [{ researcher_id: person.id, claim_id: claim.claim_id, revision: claim.revision,
+    coverage: "direct", reason: "This exact source supports the alternative's scientific role." }];
+  const engine = api.create(data);
+  const state = engine.proposal(opportunity);
+  state.selectedIds[0] = person.id;
+  const member = engine.proposalView(state).selected.find(member => member.profile.id === person.id);
+  assert.equal(member.evidence.evidence_term, claim.label);
+  assert.equal(member.evidence.evidence_phrase, claim.evidence);
+  assert.equal(member.evidence.source_url, claim.source_urls[0]);
+  assert.match(member.evidence.why_person, /exact source/);
+});
+
 test("admits only current specific parents, eligible children, and declared branches", () => {
   const { api, data } = loadApi();
   const engine = api.create(data);
@@ -88,7 +169,9 @@ test("admits only current specific parents, eligible children, and declared bran
   });
   assert.equal(broad.ok, false);
   assert.equal(broad.reason, "specific_scope_required");
-  assert.equal(broad.scopes.length, 2);
+  assert.ok(broad.scopes.some(scope => scope.id === "344592:ab-0019"));
+  assert.ok(broad.scopes.some(scope => scope.id === "344592:ab-0079"));
+  assert.ok(broad.scopes.every(scope => scope.record_type !== "specific_parent"));
 
   const missingChild = engine.resolveScope({
     parentId: "361526",

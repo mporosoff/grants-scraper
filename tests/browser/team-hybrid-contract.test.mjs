@@ -58,6 +58,17 @@ test("team query derives a phrase-boundary limit from the shared client contract
   assert.doesNotMatch(query, /researcher name must remain private/);
 });
 
+test("query budgeting never silently omits a selected researcher's interests", () => {
+  const api = loadApi();
+  const oversized = Array.from({ length: 4 }, (_, i) => ({ key_terms: [`member ${i} ${"long ".repeat(34)}`] }));
+  assert.equal(api.buildTeamQuery(oversized), "", "unrepresentable teams use the local fallback");
+  oversized[0].capability_phrases = ["specific catalyst synthesis"];
+  for (let i = 1; i < oversized.length; i++) oversized[i].capability_phrases = [`specific method ${i}`];
+  const query = api.buildTeamQuery(oversized);
+  assert.match(query, /specific catalyst synthesis/);
+  for (let i = 1; i < oversized.length; i++) assert.ok(query.includes(`specific method ${i}`));
+});
+
 test("uses at most one shared hybrid request per team recomputation", async () => {
   const api = loadApi();
   let requests = 0;
@@ -166,4 +177,47 @@ test("Team Match reuses the frozen hybrid client, vector assets, and proxy hands
   assert.match(hybridSource, /manifest\.corpus_sha256 !== localCorpusHash/);
   assert.match(hybridSource, /vector_hash_mismatch/);
   assert.match(hybridSource, /strongestParents\(passages\)/);
+});
+
+test("team reranking restricts candidates to the full-team intersection and refreshes when eligibility changes", async () => {
+  const api = loadApi();
+  const calls = [];
+  const coordinator = api.createCoordinator({ client: {
+    configured: true,
+    async search(query, options) { calls.push({ query, options }); return { parents: [] }; },
+  } });
+  await coordinator.run({ profiles, eligibleParentIds: new Set(["fit-a"]) });
+  await coordinator.run({ profiles, eligibleParentIds: new Set(["fit-b"]) });
+  assert.equal(calls.length, 2);
+  assert.deepEqual([...calls[0].options.eligibleParentIds], ["fit-a"]);
+  assert.deepEqual([...calls[1].options.eligibleParentIds], ["fit-b"]);
+  await coordinator.run({ profiles, eligibleParentIds: new Set() });
+  assert.equal(calls.length, 2, "empty intersections do not spend an API request");
+  assert.match(page, /eligibleParentIds: lastHybridEligibleIds/);
+});
+
+test("profile corrections invalidate cached acronym context without sending it as the query", async () => {
+  const api = loadApi();
+  const calls = [];
+  const coordinator = api.createCoordinator({ client: {
+    configured: true,
+    async search(query, options) { calls.push({ query, options }); return { parents: [] }; },
+  } });
+  const before = [{ name: "Private Name", keywords: ["CARS"], research_summary: "Coherent anti-Stokes Raman spectroscopy (CARS)" }];
+  const after = [{ ...before[0], research_summary: "Computer aided routing systems (CARS)" }];
+  await coordinator.run({ profiles: before });
+  await coordinator.run({ profiles: after });
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].query, "CARS");
+  assert.match(calls[0].options.context, /Coherent anti-Stokes/);
+  assert.doesNotMatch(calls[0].options.context, /Private Name/);
+  assert.notEqual(api.teamSignature(before), api.teamSignature([{ ...before[0], keywords: ["cars"] }]));
+});
+
+test("synchronous provider errors preserve local team matching", async () => {
+  const api = loadApi();
+  const outcome = await api.createCoordinator({ client: {
+    configured: true, search() { throw new Error("unavailable"); },
+  } }).run({ profiles });
+  assert.equal(outcome.fallback, true);
 });

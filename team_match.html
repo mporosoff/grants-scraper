@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="opportunity-team-generation" content="1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314" />
+<meta name="opportunity-team-generation" content="46678c209f883551ae77ea980aa4900a8daac399f76cdeefbf4d3f06a570c942" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Add two to four researchers to find funding opportunities that fit the whole team." />
 <meta name="theme-color" content="#001e5f" />
@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=70b636fc5196454bb8cc05f3bd312abfe000c60798fb6ef1802abcb3bab2a459" />
+<link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c" />
 <link rel="stylesheet" href="./assets/team-match.css?v=76f0877d11cf15c13a65c499a0cd423b5ea251695b133e505b8db479d9f286db">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cd9a00eac9820fcf0e581a30e3514737859c975a45dd3dece8c9f17e3b24a951">
@@ -152,17 +152,17 @@
   <script src="assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260905T101141854819Z"></script>
-<script src="data/faculty_matches.js?v=edcd1e312672266bd22c726daafcf6fe7b41f712e394b696733e6236e048bfb5"></script>
+<script src="data/faculty_matches.js?v=a4f15cc6cd31d1a0502684fad5f520fec691776d669f63c9682eb149c6324f92"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
-<script src="assets/search-retrieval.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+<script src="assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
 <script src="assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
-<script src="assets/team-hybrid.js?v=app-1.3.0"></script>
+<script src="assets/team-hybrid.js?v=00a14620c5288c0793939cd69f1b9f43314b2855eb071b5b0d7afca1c06f9e8d"></script>
 <script src="assets/team-researchers.js?v=9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e"></script>
-<script src="assets/team-matcher.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-<script src="data/researcher_directory.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-<script src="data/opportunity_team_index.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
-<script src="assets/opportunity-team.js?v=1a88d7402b62e22051583937b45f32069efbceeefbbd46e932979b248d25b314"></script>
+<script src="assets/team-matcher.js?v=09cecc8d245f78f667c003df1613978eab4108fc7b9667e71185226f5a665f21"></script>
+<script src="data/researcher_directory.js?v=46678c209f883551ae77ea980aa4900a8daac399f76cdeefbf4d3f06a570c942"></script>
+<script src="data/opportunity_team_index.js?v=46678c209f883551ae77ea980aa4900a8daac399f76cdeefbf4d3f06a570c942"></script>
+<script src="assets/opportunity-team.js?v=2fb7bcf9d0a6aeb53291a97ebcadb34576190664d46477759515be2668083d34"></script>
 <script src="assets/site-help.js?v=dod-awards-20260903"></script>
 <script src="assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
 <script>
@@ -199,6 +199,7 @@
   var teamHybridState = idleTeamHybridState();
   var lastHybridProfiles = [];
   var lastHybridThemes = [];
+  var lastHybridEligibleIds = new Set();
   try {
     SEARCH_ENGINE = RETRIEVAL_API && SEARCH_API
       ? RETRIEVAL_API.create(catalogData, SEARCH_API)
@@ -285,6 +286,7 @@
         resolved_name: profile.name,
         research_summary: (profile.terms || []).map(function (term) { return term.evidence; }).filter(Boolean).join("; "),
         key_terms: terms,
+        capability_phrases: (profile.terms || []).map(function (term) { return term.evidence; }).filter(Boolean),
         domains: TEAM_API ? TEAM_API.inferDomains(terms) : [],
         directory_id: profile.id,
         pool_state: profile.pool_state,
@@ -335,6 +337,7 @@
     return {
       name: key,
       key_terms: metadata.key_terms || [],
+      capability_phrases: metadata.capability_phrases || [],
       research_summary: metadata.research_summary || "",
       domains: metadata.domains || []
     };
@@ -764,8 +767,9 @@
     }
     var all = buildShared();
     all.sort(balancedRanking);
+    lastHybridEligibleIds = new Set(all.map(function (entry) { return String(entry.d.id); }));
     var hybridSignature = TEAM_HYBRID_API
-      ? TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes)
+      ? TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes, lastHybridEligibleIds)
       : "";
     if (teamHybridState.status === "ready" && teamHybridState.signature === hybridSignature) {
       all = TEAM_HYBRID_API.applyHybridRanking(all, teamHybridState.rankById);
@@ -845,9 +849,10 @@
     renderTeamHybridStatus();
     TEAM_HYBRID_COORDINATOR.run({
       profiles: lastHybridProfiles,
-      themes: lastHybridThemes
+      themes: lastHybridThemes,
+      eligibleParentIds: lastHybridEligibleIds
     }).then(function (outcome) {
-      var currentSignature = TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes);
+      var currentSignature = TEAM_HYBRID_API.teamSignature(lastHybridProfiles, lastHybridThemes, lastHybridEligibleIds);
       if (outcome.signature !== currentSignature) return;
       teamHybridState = {
         signature: outcome.signature,

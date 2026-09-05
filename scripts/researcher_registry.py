@@ -363,6 +363,7 @@ def matching_profiles(registry: dict, *, visibility: str = "department") -> list
             "resolved_name": row["display_name"],
             "research_summary": row["research_summary"],
             "key_terms": [claim["label"] for claim in claims],
+            "capability_phrases": list(dict.fromkeys(claim["evidence"] for claim in claims)),
             "domains": sorted({
                 category
                 for claim in claims
@@ -456,7 +457,10 @@ def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
 
     affected: dict[str, set[str]] = {}
     for opportunity in model.get("opportunities", []):
+        if opportunity.get("review_state") == "needs_revalidation":
+            continue
         scope_id = str(opportunity.get("id") or "unknown-scope")
+        exact_claims = bool(opportunity.get("roles")) and all("claim_refs" in role for role in opportunity["roles"])
         raw_references = {
             str(member.get("faculty_id") or "")
             for member in opportunity.get("members", [])
@@ -475,9 +479,19 @@ def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
                 or current["status"] != "active"
                 or not current["auto_proposable"]
                 or current["pool_state"] not in {"main", "standby"}
-                or _team_profile_changed(previous, current)
+                or (not exact_claims and _team_profile_changed(previous, current))
             ):
                 affected.setdefault(scope_id, set()).add(researcher_id)
+
+        if exact_claims:
+            for role in opportunity["roles"]:
+                for reference in role["claim_refs"]:
+                    researcher_id = str(reference.get("researcher_id") or "")
+                    person = researchers.get(researcher_id, {})
+                    claim = next((c for c in person.get("claims", []) if c["claim_id"] == reference.get("claim_id")), None)
+                    if (not claim or claim["status"] != "active" or claim["revision"] != reference.get("revision")
+                            or claim["material_hash"] != reference.get("material_hash")):
+                        affected.setdefault(scope_id, set()).add(researcher_id)
 
         for member in opportunity.get("members", []):
             raw_identity = str(member.get("faculty_id") or "")
@@ -510,9 +524,21 @@ def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
         )
 
 
-def synchronize_opportunity_team_model(registry: dict, path: Path) -> dict:
-    model = json.loads(path.read_text(encoding="utf-8"))
-    validate_opportunity_team_dependencies(registry, model)
+def synchronize_opportunity_team_model(registry: dict, path: Path, *, model: dict | None = None, write: bool = True) -> dict:
+    model = model if model is not None else json.loads(path.read_text(encoding="utf-8"))
+    # An approved profile correction must be publishable even when an existing
+    # team depended on the old evidence. Withhold only those stale proposals.
+    # This state persists across subsequent rebuilds until explicit revalidation.
+    for opportunity in model.get("opportunities", []):
+        try:
+            validate_opportunity_team_dependencies(registry, {
+                "faculty": model.get("faculty", []), "opportunities": [opportunity],
+            })
+        except ValueError as error:
+            if "require recalibration" not in str(error):
+                raise
+            opportunity["review_state"] = "needs_revalidation"
+            opportunity["revalidation_reason"] = "Researcher eligibility or supporting claims changed."
     identities = _identity_map(registry)
     for opportunity in model.get("opportunities", []):
         for member in opportunity.get("members", []):
@@ -537,7 +563,8 @@ def synchronize_opportunity_team_model(registry: dict, path: Path) -> dict:
     model["faculty"] = legacy_faculty_projection(registry)
     model.pop("generation_id", None)
     model["generation_id"] = content_hash(model)
-    _write_json(path, model)
+    if write:
+        _write_json(path, model)
     return model
 
 
@@ -551,8 +578,7 @@ def build_outputs(
     version_targets: Iterable[Path] = (),
 ) -> dict:
     registry = load_registry(registry_path)
-    team_model_source = json.loads(team_model_path.read_text(encoding="utf-8"))
-    validate_opportunity_team_dependencies(registry, team_model_source)
+    team_model = synchronize_opportunity_team_model(registry, team_model_path)
     projection = directory_projection(registry)
     _write_javascript(directory_path, PUBLIC_DIRECTORY_GLOBAL, projection)
     _write_json(manifest_path, {
@@ -561,7 +587,6 @@ def build_outputs(
         "counts": projection["counts"],
         "researcher_ids": [row["id"] for row in projection["researchers"]],
     })
-    team_model = synchronize_opportunity_team_model(registry, team_model_path)
     from scripts.import_opportunity_team_model import update_version_target, write_outputs
     write_outputs(team_model, team_model_path, Path("data/opportunity_teams.js"), Path("data/opportunity_team_index.js"))
     from scripts.faculty_match import match_to_catalog
@@ -722,8 +747,6 @@ def apply_approved_submission(
     output.pop("registry_generation", None)
     output["registry_generation"] = registry_generation(output)
     validate_registry(output)
-    if team_model is not None:
-        validate_opportunity_team_dependencies(output, team_model)
     return output, dependency_report(registry, output, team_model or {"opportunities": []})
 
 

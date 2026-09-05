@@ -33,17 +33,18 @@ from scripts.researcher_registry import (
 
 SCHEMA_VERSION = 1
 BROWSER_SCHEMA_VERSION = 1
-MAX_BROWSER_BYTES = 220_000
-MAX_INDEX_BYTES = 4_096
+MAX_BROWSER_BYTES = 2_000_000
+MAX_INDEX_BYTES = 262_144
 VERSIONED_ASSETS = (
-    "assets/search-retrieval.js",
-    "assets/team-matcher.js",
-    "assets/team-researchers.js",
-    "assets/opportunity-team.js",
     "data/researcher_directory.js",
     "data/opportunity_team_index.js",
 )
 CONTENT_HASHED_ASSETS = (
+    "assets/search-retrieval.js",
+    "assets/team-matcher.js",
+    "assets/team-hybrid.js",
+    "assets/opportunity-team.js",
+    "assets/team-researchers.js",
     "assets/opportunity-team-panel.js",
     "assets/app.css",
     "assets/app.js",
@@ -284,6 +285,7 @@ def browser_projection(config: dict) -> dict:
     return {
         "schema_version": BROWSER_SCHEMA_VERSION,
         "generation_id": config["generation_id"],
+        "scope_count": len(config["opportunities"]),
         "method_version": config["method_version"],
         "release_state": config["release_state"],
         "source_hashes": config["source_hashes"],
@@ -300,10 +302,12 @@ def availability_projection(config: dict) -> dict:
     return {
         "schema_version": BROWSER_SCHEMA_VERSION,
         "generation_id": config["generation_id"],
+        "scope_count": len(config["opportunities"]),
         "scopes": [{
             "id": row["id"],
             "parent_id": row["parent_id"],
             "record_type": row["record_type"],
+            **({"review_state": row["review_state"]} if "review_state" in row else {}),
         } for row in config["opportunities"]],
     }
 
@@ -326,22 +330,25 @@ def write_outputs(
     config_out.parent.mkdir(parents=True, exist_ok=True)
     browser_out.parent.mkdir(parents=True, exist_ok=True)
     index_out.parent.mkdir(parents=True, exist_ok=True)
-    config_out.write_text(
-        json.dumps(config, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
-        newline="\n",
-    )
     projection = browser_projection(config)
     browser_bytes = _generated_javascript("OPPORTUNITY_TEAM_DATA", projection)
     if len(browser_bytes) > MAX_BROWSER_BYTES:
         raise ValueError(f"Browser team projection exceeds {MAX_BROWSER_BYTES:,} bytes")
-    browser_out.write_bytes(browser_bytes)
     index_bytes = _generated_javascript(
         "OPPORTUNITY_TEAM_INDEX",
         availability_projection(config),
     )
     if len(index_bytes) > MAX_INDEX_BYTES:
         raise ValueError(f"Browser team index exceeds {MAX_INDEX_BYTES:,} bytes")
+    if len(config["opportunities"]) > 2000:
+        raise ValueError("Browser team scope count exceeds 2,000")
+    # Validate both projections before changing any published artifact.
+    config_out.write_text(
+        json.dumps(config, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    browser_out.write_bytes(browser_bytes)
     index_out.write_bytes(index_bytes)
 
 

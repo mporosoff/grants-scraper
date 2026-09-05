@@ -12,6 +12,7 @@ on:
       - "scripts/extract_document_evidence.py"
       - "scripts/faculty_match.py"
       - "scripts/researcher_registry.py"
+      - "scripts/build_opportunity_teams.py"
       - "config/researcher_registry.json"
       - "scripts/program_areas.py"
       - "scripts/sources/**"
@@ -282,6 +283,21 @@ jobs:
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
+      - name: Invalidate proposed teams whose public scope or researcher evidence changed
+        run: python -m scripts.build_opportunity_teams --write
+      - name: Restore public-evidence team-generation cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/opportunity-teams
+          key: opportunity-teams-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: opportunity-teams-${{ runner.os }}-
+      - name: Generate bounded new and changed proposed teams
+        timeout-minutes: 20
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+        run: python -m scripts.build_opportunity_teams --generate --max-scopes 10 --write
       - name: Rebuild every production document vector
         id: semantic-vectors
         env:
@@ -439,6 +455,7 @@ jobs:
           # The file does not exist until --enable-subtopics is on, so the path
           # is passed through git ls-files to stay a no-op until then.
           git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
+          git add config/opportunity_team_model.json data/opportunity_teams.js data/opportunity_team_index.js evaluation/opportunity_team_generation.json
           if [ -f data/subtopics.js ]; then
             git add data/subtopics.js
           fi

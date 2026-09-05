@@ -1,0 +1,415 @@
+{
+  "version": "opportunity-teams-2",
+  "model": "claude-sonnet-5",
+  "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+  "eligible_scopes": 1551,
+  "pending_scopes": 1543,
+  "results": [
+    {
+      "scope_id": "344592:ab-0013",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0025",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0034",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0035",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "329432",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "332894",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "353936",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360006",
+      "state": "unsuitable_scope"
+    },
+    {
+      "scope_id": "362063",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363616",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363618",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0001",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0002",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0003",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0005",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0006",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0007",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0008",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0010",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0011",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0012",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0015",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0016",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0017",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0018",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0020",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0021",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0022",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0023",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0026",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0027",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0029",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0030",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0031",
+      "state": "unavailable",
+      "error_type": "ValueError"
+    },
+    {
+      "scope_id": "344592:ab-0032",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0033",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0036",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0037",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0038",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0039",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0040",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0041",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0042",
+      "state": "unavailable",
+      "error_type": "ValueError"
+    },
+    {
+      "scope_id": "344592:ab-0043",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0044",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0045",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0046",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0047",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0048",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0049",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0050",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0051",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0052",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0053",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0054",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0055",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0056",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0057",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0058",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0059",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0060",
+      "state": "unavailable",
+      "error_type": "ValueError"
+    },
+    {
+      "scope_id": "344592:ab-0061",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0062",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0063",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0064",
+      "state": "unavailable",
+      "error_type": "ValueError"
+    },
+    {
+      "scope_id": "344592:ab-0065",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0066",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0067",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0069",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0070",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0071",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0075",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0076",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0077",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0078",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0080",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0081",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0082",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0083",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0096",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0097",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0098",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "344592:ab-0099",
+      "state": "unavailable",
+      "error_type": "ValueError"
+    },
+    {
+      "scope_id": "344592:ab-0100",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0101",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "344592:ab-0102",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-001",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-002",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-003",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-005",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-006",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-010",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-011",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-012",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "345241:tdac-baa-017",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "345241:tdac-baa-020",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-022",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-026",
+      "state": "not_specific"
+    }
+  ],
+  "provider_requests": 196
+}
