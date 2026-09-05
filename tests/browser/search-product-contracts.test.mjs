@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { load } from "cheerio";
 
 const root = new URL("../../", import.meta.url);
 const [app, appCss, hybrid, help, searchPage, teamPage, readme, hosting] = await Promise.all([
@@ -31,11 +32,9 @@ test("user-facing copy distinguishes local, hosted, and user-connected processin
 });
 
 test("AI service and privacy copy stays compact and keeps advanced-key guidance with privacy", () => {
-  const start = searchPage.indexOf('<details class="provider-setup">');
-  const end = searchPage.indexOf("</details>", start);
-  assert.notEqual(start, -1);
-  assert.notEqual(end, -1);
-  const setup = searchPage.slice(start, end);
+  const providerSetup = load(searchPage)("details.provider-setup#provider-setup");
+  assert.equal(providerSetup.length, 1);
+  const setup = providerSetup.html();
 
   assert.doesNotMatch(setup, /What hosted AI changes|Hosted refinement uses two bounded calls/);
   assert.doesNotMatch(setup, /provider-explanation|cost-note/);

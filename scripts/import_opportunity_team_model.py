@@ -40,11 +40,11 @@ VERSIONED_ASSETS = (
     "assets/team-matcher.js",
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
-    "assets/opportunity-team-panel.js",
     "data/researcher_directory.js",
     "data/opportunity_team_index.js",
 )
 CONTENT_HASHED_ASSETS = (
+    "assets/opportunity-team-panel.js",
     "assets/app.css",
     "assets/app.js",
     "data/faculty_matches.js",

@@ -104,24 +104,44 @@
 
   function finishDrawer(dialog) {
     if (activeDrawer?.dialog !== dialog) return;
-    const { opener, status } = activeDrawer;
+    const { opener, status, onClose, resolveOpener, closeOptions = {} } = activeDrawer;
     activeDrawer = null;
     if (status) dialog.after(status);
     document.documentElement.classList.remove("shell-drawer-open");
-    restore(opener);
+    opener?.setAttribute("aria-expanded", "false");
+    dialog.removeAttribute("data-shell-context");
+    onClose?.();
+    if (closeOptions.restoreFocus !== false) {
+      restore(resolveOpener?.() || opener);
+      // A result render can replace the opener after its before-render event.
+      queueMicrotask(() => {
+        if (!activeDrawer && !opener?.isConnected) restore(resolveOpener?.());
+      });
+    }
   }
 
-  function openDrawer(dialog, opener, target) {
+  function closeDrawer(dialog = activeDrawer?.dialog, options = {}) {
+    if (!dialog || activeDrawer?.dialog !== dialog) return;
+    activeDrawer.closeOptions = options;
+    dialog.close();
+    // Native close events are queued. Complete ownership now so another
+    // drawer can open without losing the outgoing content's cleanup.
+    finishDrawer(dialog);
+  }
+
+  function openDrawer(dialog, opener, target, options = {}) {
     if (!dialog) return;
     closeMenu({ restoreFocus: false });
-    if (activeDrawer && activeDrawer.dialog !== dialog) activeDrawer.dialog.close();
+    if (activeDrawer && activeDrawer.dialog !== dialog) closeDrawer(activeDrawer.dialog, { restoreFocus: false });
     if (!dialog.open) {
       // A single status node stays perceivable both inside an open modal and
       // outside it when closed; never create a second announcement owner.
-      const status = [...document.querySelectorAll("[data-shell-status]")].find(node => node.dataset.shellStatus === dialog.id);
-      activeDrawer = { dialog, opener, status };
+      const status = [...document.querySelectorAll("[data-shell-status]")].find(node => node.dataset.shellStatus.split(/\s+/).includes(dialog.id));
+      activeDrawer = { dialog, opener, status, onClose: options.onClose, resolveOpener: options.resolveOpener };
       if (status) dialog.append(status);
       document.documentElement.classList.add("shell-drawer-open");
+      if (options.context) dialog.setAttribute("data-shell-context", options.context);
+      opener?.setAttribute("aria-expanded", "true");
       try { dialog.showModal(); } catch (error) { finishDrawer(dialog); throw error; }
     }
     const initial = target || dialog.querySelector("[data-shell-initial-focus]") || focusable(dialog)[0];
@@ -144,10 +164,10 @@
       return;
     }
     const closer = target.closest("[data-workspace-close], [data-shell-drawer-close]");
-    if (closer) closer.closest("dialog[data-shell-drawer]")?.close();
+    if (closer) closeDrawer(closer.closest("dialog[data-shell-drawer]"));
     if (target === activeDrawer?.dialog) {
       const box = target.getBoundingClientRect();
-      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) target.close();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeDrawer(target);
     }
   }, true);
   document.addEventListener("keydown", event => {
@@ -163,7 +183,10 @@
   document.addEventListener("focusin", event => {
     if (activeMenu && !activeMenu.menu.contains(event.target) && event.target !== activeMenu.opener) closeMenu({ restoreFocus: false });
   });
-  document.addEventListener("close", event => finishDrawer(event.target), true);
+  document.addEventListener("close", event => {
+    // Ignore an earlier close event if this dialog has already been reopened.
+    if (!event.target.open) finishDrawer(event.target);
+  }, true);
   document.addEventListener("funding-finder:before-results-render", () => {
     const opener = activeMenu?.opener;
     const id = opener?.dataset.cardMore;
@@ -188,6 +211,6 @@
   globalThis.SiteShell = Object.freeze({
     registerMenu: (name, provider) => providers.set(name, provider),
     actionOpener: action => actionOwners.get(action) || action,
-    closeMenu, openDrawer,
+    closeMenu, openDrawer, closeDrawer,
   });
 })();

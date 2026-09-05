@@ -24,7 +24,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="nofo-drop-zone"/);
   assert.match(prototype, /id="nofo-file"/);
   assert.match(prototype, /id="nofo-chat-context"/);
-  assert.match(prototype, /id="chat-key-prompt"/);
+  assert.match(prototype, /id="chat-provider-slot"/);
   assert.match(prototype, /id="facet-discipline"/);
   assert.match(prototype, /id="facet-agency"/);
   assert.match(prototype, /id="flag-evidence"/);
@@ -64,7 +64,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.match(prototype, /id="chat-thinking"/);
   assert.match(prototype, /id="open-results-chat"/);
   assert.match(prototype, /id="toggle-chat-size"/);
-  assert.match(prototype, /role="dialog" aria-modal="true"/);
+  assert.match(prototype, /<dialog[^>]+id="result-assistant"[^>]+data-shell-drawer/);
   assert.doesNotMatch(prototype, /Open larger chat/);
   assert.match(prototype, /id="chat-submit"/);
   assert.match(prototype, /Enter to send/);
@@ -201,29 +201,25 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(script, /NOFO_CHAT_SUGGESTIONS/);
   assert.match(script, /state\.ai\.mode = "uploaded-nofo"/);
   assert.match(script, /\$\("open-results-chat"\)\.addEventListener\("click", openExpandedChat\)/);
-  assert.match(script, /\$\("result-assistant"\)\.classList\.remove\("hidden"\)/);
-  assert.match(script, /\$\("result-assistant"\)\?\.classList\.add\("hidden"\)/);
+  assert.match(script, /SiteShell.openDrawer\(dialog, opener/);
+  assert.match(script, /SiteShell\?\.closeDrawer\(\$\("result-assistant"\)/);
   assert.match(script, /referenced_result_ids/);
   assert.match(script, /focus_result_ids/);
   assert.match(script, /data-chat-jump/);
   assert.match(script, /event\.key !== "Enter"[\s\S]*?askResults\(/);
-  assert.match(script, /document\.documentElement\.classList\.add\("chat-expanded"\)/);
-  assert.match(script, /document\.documentElement\.classList\.remove\("chat-expanded"\)/);
+  assert.doesNotMatch(script, /chat-expanded|chatReturnFocus/);
   assert.doesNotMatch(script, /chat-thinking"\)\.scrollIntoView/);
-  assert.match(css, /body\.chat-expanded/);
+  assert.match(css, /\.result-assistant\.site-drawer/);
   assert.match(
     css,
-    /\.result-assistant\.document-chat\s*\{[^}]*grid-template-columns:\s*minmax\(300px, 380px\) minmax\(0, 1fr\)/s,
+    /\.result-assistant\.document-chat\[open\]\s*\{[^}]*grid-template-columns:\s*minmax\(260px, 320px\) minmax\(0, 1fr\)/s,
   );
   assert.match(css, /\.nofo-match-actions > \*\s*\{[^}]*white-space:\s*nowrap/s);
   assert.match(
     css,
     /\.messages\s*\{[^}]*align-content:\s*start[^}]*overscroll-behavior-y:\s*contain/s,
   );
-  assert.match(
-    css,
-    /html\.chat-expanded,\s*body\.chat-expanded\s*\{[^}]*overflow:\s*hidden[^}]*overscroll-behavior:\s*none/s,
-  );
+  assert.doesNotMatch(css, /chat-expanded/);
   assert.match(css, /\.chat-thinking/);
   assert.match(css, /\.chat-table-wrap/);
   assert.match(css, /\.chat-table th/);

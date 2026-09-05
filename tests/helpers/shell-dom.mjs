@@ -1,6 +1,6 @@
 // Small DOM/event fixture for shell contracts; no browser or E2E runner.
 import { load } from "cheerio";
-export function shellDom(html, { popover = true } = {}) {
+export function shellDom(html, { popover = true, deferredClose = false } = {}) {
   const $ = load(html);
   const wrappers = new Map(), listeners = new Map(), observers = [];
   const windowListeners = [];
@@ -14,15 +14,18 @@ export function shellDom(html, { popover = true } = {}) {
       get id() { return $(node).attr("id"); }, set id(value) { $(node).attr("id", value); },
       get className() { return $(node).attr("class"); }, set className(value) { $(node).attr("class", value); },
       get textContent() { return $(node).text(); }, set textContent(value) { $(node).text(value); },
+      get innerHTML() { return $(node).html(); }, set innerHTML(value) { $(node).html(value); },
+      get value() { return $(node).val() || ""; }, set value(value) { $(node).val(value); },
       get hidden() { return $(node).attr("hidden") !== undefined; }, set hidden(value) { value ? $(node).attr("hidden", "") : $(node).removeAttr("hidden"); },
       get disabled() { return $(node).attr("disabled") !== undefined; }, set disabled(value) { value ? $(node).attr("disabled", "") : $(node).removeAttr("disabled"); },
-      get open() { return $(node).attr("open") !== undefined; },
+      get open() { return $(node).attr("open") !== undefined; }, set open(value) { value ? $(node).attr("open", "") : $(node).removeAttr("open"); },
       get isConnected() { return $(node).parents("html").length > 0; },
       get clientWidth() { return 320; },
       get dataset() { return new Proxy({}, { get: (_, key) => $(node).attr(`data-${key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)}`) }); },
       classList: { add: value => $(node).addClass(value), remove: value => $(node).removeClass(value), contains: value => $(node).hasClass(value), toggle: (value, on) => $(node).toggleClass(value, on) },
       getAttribute: name => $(node).attr(name) ?? null,
       setAttribute: (name, value) => $(node).attr(name, String(value)),
+      removeAttribute: name => $(node).removeAttr(name),
       querySelector: selector => wrap($(node).find(selector)[0]),
       querySelectorAll: selector => $(node).find(selector).toArray().map(wrap),
       closest: selector => wrap($(node).closest(selector)[0]),
@@ -37,6 +40,7 @@ export function shellDom(html, { popover = true } = {}) {
       focus() { document.activeElement = el; dispatch("focusin", el); },
       scrollIntoView() { el.scrolled = true; },
       append: (...values) => values.forEach(value => $(node).append(nodeOf(value))),
+      appendChild: value => $(node).append(nodeOf(value)),
       after: value => $(node).after(nodeOf(value)),
       replaceChildren: (...values) => { $(node).empty(); el.append(...values); },
       insertAdjacentHTML: (_, value) => $(node).append(value),
@@ -46,7 +50,7 @@ export function shellDom(html, { popover = true } = {}) {
         hidePopover() { node.popoverOpen = false; },
       } : {}),
       showModal() { $(node).attr("open", ""); },
-      close() { $(node).removeAttr("open"); dispatch("close", el); },
+      close() { $(node).removeAttr("open"); deferredClose ? setTimeout(() => dispatch("close", el), 0) : dispatch("close", el); },
       addEventListener(type, listener) { add(type, listener, false, el); },
     };
     wrappers.set(node, el);

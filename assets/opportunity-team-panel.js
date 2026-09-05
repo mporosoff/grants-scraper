@@ -27,9 +27,9 @@
   function panelOwned(current) {
     if (!current || !current.trigger || !current.panel ||
         !current.trigger.isConnected || !current.panel.isConnected) return false;
-    var card = current.trigger.closest(".result-card");
-    return Boolean(card && card === current.panel.closest(".result-card") &&
-      card.contains(current.trigger) && card.contains(current.panel));
+    var drawer = document.getElementById("team-builder");
+    return Boolean(current.trigger.closest(".result-card") && drawer && drawer.open &&
+      drawer.contains(current.panel));
   }
 
   function closePanel(current, options) {
@@ -39,12 +39,12 @@
     if (trigger) {
       trigger.setAttribute("aria-expanded", "false");
       trigger.removeAttribute("aria-controls");
-      if (options.restoreFocus && trigger.isConnected) trigger.focus();
     }
     if (current.panel) {
       openPanels.delete(current.panel);
       current.panel.remove();
     }
+    global.SiteShell?.closeDrawer(document.getElementById("team-builder"), options);
   }
 
   function closeAll() {
@@ -66,15 +66,21 @@
   }
 
   function currentForTrigger(trigger) {
-    var panelId = trigger && trigger.getAttribute("aria-controls");
-    var panel = panelId ? document.getElementById(panelId) : null;
-    var current = panel ? openPanels.get(panel) : null;
-    return current && current.trigger === trigger ? current : null;
+    return Array.from(openPanels.values()).find(function (current) {
+      return current.trigger === trigger;
+    }) || null;
   }
 
   function panelShell(trigger, parentId, scopeId) {
     var card = trigger.closest(".result-card");
     if (!card) return null;
+    var drawer = document.getElementById("team-builder");
+    var content = document.getElementById("team-builder-content");
+    if (!drawer || !content || !global.SiteShell?.openDrawer) {
+      document.getElementById("search-status").textContent = "Team Builder is temporarily unavailable. Ordinary search and Team Match remain available.";
+      return null;
+    }
+    closeAll();
     panelSequence += 1;
     var panelId = "opportunity-team-panel-" + safeId(parentId) + "-" + panelSequence;
     var panel = document.createElement("section");
@@ -82,12 +88,11 @@
     panel.id = panelId;
     panel.setAttribute("aria-labelledby", panelId + "-heading");
     panel.innerHTML = '<div class="opportunity-team-heading"><div><p class="eyebrow">Opportunity-to-team pilot</p>' +
-      '<h4 id="' + panelId + '-heading" tabindex="-1">Proposed research team</h4></div>' +
-      '<button type="button" class="opportunity-team-close" data-opportunity-team-close aria-label="Close proposed research team">Close</button></div>' +
+      '<h4 id="' + panelId + '-heading" tabindex="-1">Proposed research team</h4></div></div>' +
       '<div class="opportunity-team-body" role="status" aria-live="polite"><p>Loading the evidence-calibrated role model…</p></div>';
-    card.appendChild(panel);
+    content.appendChild(panel);
     trigger.setAttribute("aria-expanded", "true");
-    trigger.setAttribute("aria-controls", panelId);
+    trigger.setAttribute("aria-controls", "team-builder");
     var current = {
       trigger: trigger,
       panel: panel,
@@ -99,9 +104,26 @@
       engine: null,
       state: null,
       childCatalog: null,
+      scopeSequence: 0,
     };
     openPanels.set(panel, current);
-    panel.querySelector("h4").focus();
+    try {
+      // Presentation adapter over the existing reviewed scope/proposal API.
+      global.SiteShell.openDrawer(drawer, trigger, panel.querySelector("h4"), {
+        context: "team",
+        onClose: closeAll,
+        resolveOpener: function () {
+          return Array.from(document.querySelectorAll("[data-opportunity-team]")).find(function (node) {
+            return node.getAttribute("data-opportunity-team") === String(parentId) &&
+              node.getAttribute("data-opportunity-team-scope") === String(scopeId || "");
+          }) || document.getElementById("open-results-chat");
+        },
+      });
+    } catch (_error) {
+      closeAll();
+      document.getElementById("search-status").textContent = "Team Builder could not open. Ordinary search and Team Match remain available.";
+      return null;
+    }
     return current;
   }
 
@@ -240,11 +262,12 @@
 
   function resolveCurrent(current) {
     if (!current || !panelOwned(current) || !current.engine) return;
+    var sequence = ++current.scopeSequence;
     var tentative = current.engine.opportunityById.get(current.scopeId);
     var needChildren = tentative && tentative.record_type === "publishable_child";
     var childReady = needChildren ? loadChildCatalog() : Promise.resolve(null);
     childReady.then(function (childCatalog) {
-      if (!reconcile(current)) return;
+      if (!reconcile(current) || current.scopeSequence !== sequence) return;
       current.childCatalog = childCatalog;
       var outcome = current.engine.resolveScope({
         parentId: current.parentId,
@@ -262,7 +285,7 @@
       current.state = current.engine.proposal(outcome.opportunity);
       renderProposal(current);
     }).catch(function (error) {
-      if (reconcile(current)) renderFailure(current, error);
+      if (reconcile(current) && current.scopeSequence === sequence) renderFailure(current, error);
     });
   }
 
@@ -300,10 +323,6 @@
       return;
     }
     var current = currentForElement(event.target);
-    if (event.target.closest("[data-opportunity-team-close]") && current) {
-      closePanel(current, { restoreFocus: true });
-      return;
-    }
     if (event.target.closest("[data-opportunity-team-retry]") && current) {
       loadCurrent(current);
       return;
@@ -336,11 +355,6 @@
     if (!reconcile(current) || !event.target.matches("[data-opportunity-team-replacement]")) return;
     var button = current.panel.querySelector("[data-opportunity-team-add-replacement]");
     if (button) button.disabled = !event.target.value;
-  });
-
-  document.addEventListener("keydown", function (event) {
-    var current = currentForElement(event.target);
-    if (event.key === "Escape" && reconcile(current)) closePanel(current, { restoreFocus: true });
   });
 
   document.addEventListener("funding-finder:before-results-render", function () {

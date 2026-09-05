@@ -87,6 +87,41 @@ test("drawer alert route mirrors availability and returns to exact results opene
   dom.dispatch("click", dom.get("personal-workspace"), { clientX: 300, clientY: 300 });
   assert.equal(dom.get("personal-workspace").open, false);
 });
+
+test("drawer switches clean up synchronously and stale native close events cannot detach reopened ownership", async () => {
+  const dom = fixture({ deferredClose: true });
+  const drawer = dom.document.createElement("dialog");
+  drawer.id = "analysis";
+  drawer.innerHTML = '<button id="analysis-close" data-shell-drawer-close>Close</button>';
+  dom.document.body.append(drawer);
+  let closes = 0;
+  dom.click("workspace");
+  dom.context.SiteShell.openDrawer(drawer, dom.get("card"), dom.get("analysis-close"), {
+    context: "opportunity", onClose: () => closes++,
+    resolveOpener: () => dom.get("card"),
+  });
+  assert.equal(dom.get("personal-workspace").open, false);
+  assert.equal(dom.get("personal-workspace").contains(dom.get("status")), false);
+  assert.equal(drawer.getAttribute("data-shell-context"), "opportunity");
+  dom.context.SiteShell.closeDrawer(drawer, { restoreFocus: false });
+  assert.equal(closes, 1);
+  dom.context.SiteShell.openDrawer(drawer, dom.get("card"), dom.get("analysis-close"), { onClose: () => closes++, resolveOpener: () => dom.get("card") });
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(drawer.open, true);
+  assert.equal(closes, 1);
+  dom.context.SiteShell.closeDrawer(drawer);
+  const oldOpener = dom.get("card");
+  oldOpener.after(dom.document.createElement("button"));
+  oldOpener.remove();
+  const replacement = dom.document.createElement("button");
+  replacement.id = "card";
+  dom.get("results").append(replacement);
+  await Promise.resolve();
+  assert.equal(dom.document.activeElement, replacement);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.equal(closes, 2);
+  assert.equal(dom.document.documentElement.classList.contains("shell-drawer-open"), false);
+});
 test("single card menu delegates original data, fits at 320px, and cleans up after action/rerender", async () => {
   const dom = fixture();
   dom.context.SiteShell.registerMenu("card", () => [{ label: "Track", html: '<button id="watch" data-watch-opportunity="one">Alert</button>' }]);

@@ -243,7 +243,7 @@
       model: "",
     },
   };
-  let chatReturnFocus = null;
+  let providerSetupWasOpen = false;
   let searchEngine = null;
   let childCatalog = null;
   let childSearchEngine = null;
@@ -2042,6 +2042,7 @@
     $("clear-ai").classList.add("hidden");
     $("reset-narrowing").classList.add("hidden");
     $("ai-status").classList.add("hidden");
+    setAiBusy(false);
     closeExpandedChat();
   }
 
@@ -2394,9 +2395,9 @@
     }
   }
 
-  async function openNofoFromFile(file) {
+  async function openNofoFromFile(file, opener = document.activeElement) {
     if (!file) return;
-    if (!state.ready) return runCatalogAction(() => openNofoFromFile(file));
+    if (!state.ready) return runCatalogAction(() => openNofoFromFile(file, opener));
     const fileInput = $("nofo-file");
     fileInput.disabled = true;
     $("nofo-drop-zone").classList.remove("is-dragging");
@@ -2460,7 +2461,7 @@
       recordDeploymentUsage("nofo_uploads");
       renderResults();
       renderChat();
-      openExpandedChat();
+      openExpandedChat(opener);
     } catch (error) {
       clearNofoState({ clearStatus: false });
       setNofoUploadStatus(error?.message || String(error), true);
@@ -3044,8 +3045,8 @@
       </details>
       <div class="card-actions">
         ${primarySource}
-        ${teamAvailable ? `<button class="source-action opportunity-team-trigger" type="button" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>` : ""}
-        <button class="source-action" type="button" data-shell-menu="card" data-card-more="${escapeAttribute(id)}" aria-expanded="false" aria-controls="site-action-list" aria-label="More actions for ${escapeAttribute(record.title)}">More <span aria-hidden="true">⋯</span></button>
+        ${teamAvailable ? `<button class="source-action opportunity-team-trigger" type="button" aria-haspopup="dialog" data-opportunity-team="${escapeAttribute(id)}" data-opportunity-team-scope="${escapeAttribute(proposedTeamScope)}" data-opportunity-team-broad="${isBroadOpportunity(record)}" aria-expanded="false">Build a team</button>` : ""}
+        <button class="source-action" type="button" data-shell-menu="card" data-card-more="${escapeAttribute(id)}" aria-expanded="false" aria-controls="site-action-list" aria-label="More actions for ${escapeAttribute(record.title)}">More <span aria-hidden="true">▾</span></button>
       </div>
       ${EVALUATION_MODE ? sourceReviewControls(record) : ""}
       ${EVALUATION_MODE ? `<details class="result-feedback-toggle">
@@ -4631,27 +4632,11 @@
     requestAnimationFrame(() => $("chat-input")?.focus());
   }
 
-  function renderChatKeyPrompt() {
-    const prompt = $("chat-key-prompt");
-    const ready = providerReady();
-    prompt.classList.toggle("hidden", ready);
-    $("result-assistant").classList.toggle("needs-chat-key", !ready);
-    if (ready) {
-      $("chat-key-status").textContent = "";
-      return;
-    }
-    const provider = $("k-provider").value;
-    if (document.activeElement !== $("chat-k-provider")) {
-      $("chat-k-provider").value = provider;
-    }
-    $("chat-k-key").closest("label")?.classList.remove("hidden");
-    $("chat-save-key").closest("label")?.classList.remove("hidden");
-    $("chat-k-key").placeholder = $("chat-k-provider").value === "anthropic"
-      ? "sk-ant-..."
-      : "sk-...";
-    $("connect-chat-key").textContent = $("chat-save-key").checked
-      ? "Save key and start chatting"
-      : "Use key for this tab";
+  function renderChatProviderState() {
+    if (!providerReady() && $("result-assistant").open) $("provider-setup").open = true;
+    const canAsk = state.searched && chatHasContext() && providerReady() && !state.ai.busy;
+    $("chat-input").disabled = !canAsk;
+    $("chat-submit").disabled = !canAsk;
   }
 
   function renderChat({ scrollToLatestAssistant = false } = {}) {
@@ -4661,7 +4646,7 @@
     const canAsk = canChat && providerReady();
     $("result-assistant").classList.toggle("document-chat", documentChat);
     $("open-results-chat").disabled = !canChat;
-    if (!canChat && document.body.classList.contains("chat-expanded")) {
+    if (!canChat && $("result-assistant").open) {
       closeExpandedChat({ restoreFocus: false });
     }
     $("chat-eyebrow").textContent = documentChat
@@ -4689,10 +4674,10 @@
       ? "Ask about the uploaded funding notice"
       : "Ask about the current funding results";
     $("chat-privacy").textContent = documentChat
-      ? "Chat uses the AI provider configured above. Only the bounded PDF text, your question, recent conversation, and optional matched public catalog metadata are sent."
-      : "Chat uses the AI provider configured above. Only the bounded result context, your question, and the profile context you enabled are sent.";
+      ? "Chat uses the selected AI provider. Only the bounded PDF text, your question, recent conversation, and optional matched public catalog metadata are sent."
+      : "Chat uses the selected AI provider. Only the bounded result context, your question, and the profile context you enabled are sent.";
     renderNofoContext();
-    renderChatKeyPrompt();
+    renderChatProviderState();
     const suggestions = !documentChat && state.ai.active && state.ai.suggestions.length
       ? state.ai.suggestions
       : DEFAULT_CHAT_SUGGESTIONS;
@@ -4768,37 +4753,46 @@
       : "";
   }
 
-  function openExpandedChat() {
+  function chatOpener(opener) {
+    const cardId = opener?.dataset?.cardMore;
+    return () => cardId
+      ? [...document.querySelectorAll("[data-card-more]")].find(node => node.dataset.cardMore === cardId) || $("open-results-chat")
+      : opener?.isConnected && opener !== document.body ? opener : $("open-results-chat");
+  }
+
+  function openExpandedChat(opener = document.activeElement) {
     if (!state.searched || !chatHasContext()) return;
-    chatReturnFocus = document.activeElement;
-    $("result-assistant").classList.remove("hidden");
-    document.documentElement.classList.add("chat-expanded");
-    document.body.classList.add("chat-expanded");
-    $("open-results-chat").setAttribute("aria-expanded", "true");
-    const messages = $("chat-messages");
-    messages.scrollTop = messages.scrollHeight;
-    if (providerReady()) {
-      $("chat-input").focus();
-    } else {
-      $("chat-k-provider").focus();
+    if (opener?.currentTarget) opener = opener.currentTarget;
+    const dialog = $("result-assistant");
+    const setup = $("provider-setup");
+    const returnProviderSetup = () => {
+      $("search-provider-slot").append(setup);
+      setup.open = providerSetupWasOpen;
+      $("open-results-chat").setAttribute("aria-expanded", "false");
+    };
+    try {
+      if (!globalThis.SiteShell?.openDrawer) throw new Error("The shared drawer is unavailable.");
+      if (!dialog.open) {
+        providerSetupWasOpen = setup.open;
+        $("chat-provider-slot").append(setup);
+        setup.open = !providerReady();
+      }
+      globalThis.SiteShell.openDrawer(dialog, opener, providerReady() ? $("chat-input") : $("k-provider"), {
+        context: state.ai.mode === "uploaded-nofo" ? "notice" : state.ai.mode === "foa-focus" ? "opportunity" : "results",
+        resolveOpener: chatOpener(opener),
+        onClose: returnProviderSetup,
+      });
+      $("open-results-chat").setAttribute("aria-expanded", "true");
+      const messages = $("chat-messages");
+      messages.scrollTop = messages.scrollHeight;
+    } catch (_error) {
+      returnProviderSetup();
+      setAiStatus("Ask AI is temporarily unavailable. Your search results remain available.", true);
     }
   }
 
   function closeExpandedChat({ restoreFocus = true } = {}) {
-    const wasExpanded = document.body.classList.contains("chat-expanded");
-    document.documentElement.classList.remove("chat-expanded");
-    document.body.classList.remove("chat-expanded");
-    $("result-assistant")?.classList.add("hidden");
-    $("open-results-chat")?.setAttribute("aria-expanded", "false");
-    if (restoreFocus && wasExpanded) {
-      const target = chatReturnFocus?.isConnected
-        && chatReturnFocus !== document.body
-        && !chatReturnFocus.closest?.("#result-assistant")
-        ? chatReturnFocus
-        : $("open-results-chat");
-      requestAnimationFrame(() => target?.focus());
-    }
-    chatReturnFocus = null;
+    globalThis.SiteShell?.closeDrawer($("result-assistant"), { restoreFocus });
   }
 
   function jumpToResultFromChat(id) {
@@ -4838,9 +4832,10 @@
     return true;
   }
 
-  function focusChatOnRecord(id) {
+  function focusChatOnRecord(id, opener) {
     const record = catalog.opportunities.find(item => recordId(item) === id);
     if (!record) return;
+    closeExpandedChat({ restoreFocus: false });
     clearNofoState();
     state.ai.active = true;
     state.ai.mode = "foa-focus";
@@ -4856,17 +4851,19 @@
       "What eligibility or application requirements still need manual verification?",
     ];
     state.ai.messages = [];
+    $("chat-input").value = "";
+    setAiBusy(false);
     state.page = 1;
     renderResults();
     renderChat();
-    openExpandedChat();
+    openExpandedChat(opener);
   }
 
   function promptForChatKey(message = "Enter an API key to start chatting.") {
-    $("chat-key-status").textContent = message;
-    renderChatKeyPrompt();
     openExpandedChat();
-    $("chat-k-key").focus();
+    $("provider-setup").open = true;
+    updateProviderState(message);
+    $("k-key").focus();
   }
 
   async function askNofo(question) {
@@ -4884,6 +4881,9 @@
     state.ai.messages.push({ role: "user", text: boundedQuestion });
     $("chat-input").value = "";
     renderChat();
+    const requestMessages = state.ai.messages;
+    const requestMode = state.ai.mode;
+    const requestSearch = state.ordinarySearchSignature;
     setAiBusy(true);
     setAiStatus(`Reviewing ${state.nofo.fileName}…`);
     try {
@@ -4912,6 +4912,7 @@
           prompt_version: "uploaded-nofo-chat-v1",
         }),
       );
+      if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
       const pages = [...new Set(
         (Array.isArray(answer.page_references) ? answer.page_references : [])
           .map(value => Number(String(value).match(/\d+/)?.[0]))
@@ -4936,6 +4937,7 @@
       );
       renderChat({ scrollToLatestAssistant: true });
     } catch (error) {
+      if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
       state.ai.messages.push({
         role: "assistant",
         text: `I could not complete that request: ${error?.message || String(error)}`,
@@ -4943,7 +4945,7 @@
       setAiStatus(error?.message || String(error), true);
       renderChat({ scrollToLatestAssistant: true });
     } finally {
-      setAiBusy(false);
+      if (state.ai.messages === requestMessages) setAiBusy(false);
     }
   }
 
@@ -5005,6 +5007,9 @@
     state.ai.messages.push({ role: "user", text: cleanQuestion });
     $("chat-input").value = "";
     renderChat();
+    const requestMessages = state.ai.messages;
+    const requestMode = state.ai.mode;
+    const requestSearch = state.ordinarySearchSignature;
     setAiBusy(true);
     setAiStatus(`Reviewing the ${contextLabel}…`);
     try {
@@ -5021,6 +5026,7 @@
           prompt_version: PROMPT_VERSION,
         }),
       );
+      if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
       let note = "";
       const requestedFocusIds = CHAT_UI.knownResultIds(
         answer.focus_result_ids || answer.keep_ids,
@@ -5057,6 +5063,7 @@
       setAiStatus("Answer grounded in the current result context. Verify decisive details in the official notice.");
       renderChat({ scrollToLatestAssistant: true });
     } catch (error) {
+      if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
       state.ai.messages.push({
         role: "assistant",
         text: `I could not complete that request: ${error?.message || String(error)}`,
@@ -5064,7 +5071,7 @@
       setAiStatus(error?.message || String(error), true);
       renderChat({ scrollToLatestAssistant: true });
     } finally {
-      setAiBusy(false);
+      if (state.ai.messages === requestMessages) setAiBusy(false);
     }
   }
 
@@ -5098,7 +5105,7 @@
     );
     $("save-key").disabled = hosted || !key || isSaved;
     $("clear-key").disabled = hosted;
-    if ($("chat-key-prompt")) renderChatKeyPrompt();
+    renderChatProviderState();
     updateAiRefineControl();
   }
 
@@ -5132,11 +5139,7 @@
         ? `${providerLabel()} key loaded from this device.`
         : "",
     );
-    if ($("chat-k-provider")) {
-      $("chat-k-provider").value = $("k-provider").value;
-      $("chat-k-key").value = "";
-      renderChatKeyPrompt();
-    }
+
   }
 
   function bindEvents() {
@@ -5467,11 +5470,7 @@
       const chatButton = event.target.closest("[data-chat-record]");
       if (chatButton) {
         const opener = globalThis.SiteShell?.actionOpener(chatButton);
-        focusChatOnRecord(chatButton.dataset.chatRecord);
-        if (opener?.dataset.cardMore) {
-          chatReturnFocus = [...document.querySelectorAll("[data-card-more]")]
-            .find(node => node.dataset.cardMore === opener.dataset.cardMore);
-        }
+        focusChatOnRecord(chatButton.dataset.chatRecord, opener);
       }
     });
     let sourceNoteTimer;
@@ -5564,52 +5563,6 @@
       updateProviderState(`${providerLabel()} key removed from this device.`);
       $("k-key").focus();
     });
-    $("chat-k-provider").addEventListener("change", () => {
-      const provider = $("chat-k-provider").value;
-      const hosted = provider === "hosted";
-      $("chat-k-key").value = hosted ? "" : CREDENTIAL_API.loadKey(provider);
-      $("chat-k-key").closest("label")?.classList.toggle("hidden", hosted);
-      $("chat-save-key").closest("label")?.classList.toggle("hidden", hosted);
-      $("chat-k-key").placeholder = provider === "anthropic" ? "sk-ant-..." : "sk-...";
-      $("chat-key-status").textContent = hosted
-        ? "Funding Finder's hosted AI does not require a key. Select the button to continue."
-        : $("chat-k-key").value
-        ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key found on this device. Select the button to use it.`
-        : `Enter a ${provider === "anthropic" ? "Anthropic" : "OpenAI"} API key.`;
-      $("connect-chat-key").textContent = hosted
-        ? "Use hosted AI and start chatting"
-        : $("chat-save-key").checked
-          ? "Save key and start chatting"
-          : "Use key for this tab";
-    });
-    $("chat-k-key").addEventListener("input", () => {
-      $("chat-key-status").textContent = "";
-    });
-    $("chat-save-key").addEventListener("change", renderChatKeyPrompt);
-    $("connect-chat-key").addEventListener("click", () => {
-      const provider = $("chat-k-provider").value;
-      const key = $("chat-k-key").value.trim();
-      if (provider !== "hosted" && !key) {
-        $("chat-key-status").textContent = "Enter an API key first.";
-        $("chat-k-key").focus();
-        return;
-      }
-      $("k-provider").value = provider;
-      $("k-key").value = key;
-      let message = provider === "hosted"
-        ? "Funding Finder's hosted AI is ready."
-        : `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key is ready for this tab.`;
-      if (provider !== "hosted" && $("chat-save-key").checked) {
-        const result = CREDENTIAL_API.saveKey(provider, key);
-        message = result.saved
-          ? `${provider === "anthropic" ? "Anthropic" : "OpenAI"} key saved on this device.`
-          : "The key is ready for this tab, but this browser could not save it.";
-      }
-      updateProviderState(message);
-      scheduleProfileSave();
-      renderChat();
-      $("chat-input").focus();
-    });
     $("ai-refine").addEventListener("click", refineWithAi);
     $("restore-ai-refinement").addEventListener("click", restoreOriginalResults);
     $("clear-ai").addEventListener("click", () => {
@@ -5627,7 +5580,7 @@
     $("chat-input").addEventListener("keydown", event => {
       if (event.key !== "Enter" || event.shiftKey || event.isComposing) return;
       event.preventDefault();
-      // Send directly so Enter works in both the inline and expanded chat.
+      // Keep Enter/Shift+Enter behavior in the shared Ask AI drawer.
       const question = $("chat-input").value.trim();
       if (question && !state.ai.busy) askResults(question);
     });
@@ -5638,7 +5591,6 @@
       askResults(button.dataset.chatSuggestion);
     });
     $("open-results-chat").addEventListener("click", openExpandedChat);
-    $("toggle-chat-size").addEventListener("click", closeExpandedChat);
     $("chat-messages").addEventListener("click", event => {
       const copy = event.target.closest("[data-chat-copy-message]");
       if (copy) {
@@ -5682,11 +5634,6 @@
       }
       const jump = event.target.closest("[data-chat-jump]");
       if (jump) jumpToResultFromChat(jump.dataset.chatJump);
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && document.body.classList.contains("chat-expanded")) {
-        closeExpandedChat();
-      }
     });
     $("reset-narrowing").addEventListener("click", () => {
       state.ai.currentIds = [...state.ai.originalIds];

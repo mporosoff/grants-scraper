@@ -2767,62 +2767,7 @@ textarea:focus {
   color: #8b3f37;
 }
 
-.chat-key-prompt {
-  margin: 10px 18px 12px;
-  padding: 14px;
-  color: #344a64;
-  background: #fff8e8;
-  border: 1px solid #ead49f;
-  border-radius: 10px;
-}
 
-.chat-key-prompt > div:first-child p {
-  margin: 3px 0 10px;
-  color: #6d6147;
-  font-size: .72rem;
-}
-
-.chat-key-fields {
-  display: grid;
-  grid-template-columns: minmax(130px, .32fr) minmax(0, 1fr);
-  gap: 9px;
-}
-
-.chat-key-fields label,
-.chat-save-key {
-  color: #5f563f;
-  font-size: .7rem;
-  font-weight: 750;
-}
-
-.chat-key-fields select,
-.chat-key-fields input {
-  display: block;
-  width: 100%;
-  min-height: 40px;
-  margin-top: 4px;
-  padding: 7px 9px;
-  font-size: .78rem;
-}
-
-.chat-save-key {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 10px 0;
-}
-
-.chat-save-key input {
-  width: 15px;
-  height: 15px;
-  margin: 0;
-  accent-color: var(--blue);
-}
-
-.chat-key-prompt .credential-status {
-  min-height: 0;
-  margin: 7px 0 0;
-}
 
 .suggestion-list {
   display: flex;
@@ -3671,25 +3616,6 @@ footer p {
   margin-top: 8px;
 }
 
-.result-assistant {
-  margin: 0;
-}
-
-.result-assistant .ai-heading,
-.result-assistant > .panel-copy,
-.result-assistant > .chat-privacy {
-  margin-right: 18px;
-  margin-left: 18px;
-}
-
-.result-assistant .ai-heading {
-  padding-top: 17px;
-}
-
-.result-assistant .chat {
-  margin: 0 18px;
-}
-
 .evaluation-tools {
   width: min(1240px, calc(100% - 28px));
   margin: 0 auto 38px;
@@ -4104,353 +4030,63 @@ footer p {
   }
 }
 
-html.chat-expanded,
-body.chat-expanded {
-  height: 100%;
-  overflow: hidden;
-  overscroll-behavior: none;
-}
-
-body.chat-expanded::before {
-  position: fixed;
-  z-index: 69;
-  inset: 0;
-  content: "";
-  background: rgba(10, 25, 44, .66);
-  backdrop-filter: blur(3px);
-}
-
-body.chat-expanded .result-assistant {
-  position: fixed;
-  z-index: 70;
-  top: 3vh;
-  right: max(18px, calc((100vw - 1120px) / 2));
-  bottom: 3vh;
-  left: max(18px, calc((100vw - 1120px) / 2));
-  display: flex;
-  flex-direction: column;
-  max-height: none;
-  margin: 0;
-  padding: 24px 28px 18px;
-  overflow: hidden;
-  background: white;
-  border-color: #adc4e2;
-  box-shadow: 0 26px 80px rgba(4, 18, 38, .35);
-}
-
-body.chat-expanded .result-assistant .ai-heading,
-body.chat-expanded .result-assistant > .panel-copy,
-body.chat-expanded .result-assistant > .nofo-chat-context,
-body.chat-expanded .result-assistant > .chat-key-prompt,
-body.chat-expanded .result-assistant > .chat-privacy,
-body.chat-expanded .result-assistant .chat {
-  width: 100%;
-  margin-right: 0;
-  margin-left: 0;
-}
-
-body.chat-expanded .result-assistant .ai-heading {
-  padding-top: 0;
-}
-
-body.chat-expanded .result-assistant > .panel-copy {
-  margin-bottom: 8px;
-}
-
-body.chat-expanded .result-assistant .chat {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
-}
-
-body.chat-expanded .messages {
-  flex: 1;
-  min-height: 180px;
-  max-height: none;
-  padding: 8px 4px 14px;
-  overscroll-behavior: contain;
-}
-
-body.chat-expanded .message {
-  padding: 14px 16px;
-  font-size: .92rem;
-}
-
-body.chat-expanded .chat-form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 110px;
-  gap: 0 10px;
-}
-
-body.chat-expanded .chat-form textarea {
-  grid-row: 1 / 3;
-  min-height: 78px;
-}
-
-body.chat-expanded .chat-form .button {
-  align-self: stretch;
-  margin-top: 0;
-}
-
-body.chat-expanded .chat-keyboard-hint {
-  align-self: end;
-  margin-bottom: 3px;
-}
-
-body.chat-expanded .chat-privacy {
-  margin-top: 10px;
-  padding-top: 9px;
-}
-
-@media (max-width: 700px) {
-  .result-assistant .ai-heading {
-    flex-wrap: wrap;
-  }
-
-  body.chat-expanded .chat-size-toggle {
-    width: auto;
-    min-height: 42px;
-    margin-left: auto;
-  }
-
-  .message {
-    max-width: 100%;
-    font-size: .84rem;
-  }
-
-  .chat-result-reference {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .chat-result-actions {
-    justify-content: flex-start;
-  }
-
-  body.chat-expanded .result-assistant {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100dvh;
-    max-height: 100dvh;
-    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(9px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
-    border: 0;
-    border-radius: 0;
-  }
-
-  body.chat-expanded .result-assistant .ai-heading {
-    flex-wrap: nowrap;
-    gap: 8px;
-  }
-
-  body.chat-expanded .result-assistant .ai-heading h2 {
-    font-size: 1.15rem;
-  }
-
-  body.chat-expanded .result-assistant > .panel-copy,
-  body.chat-expanded .result-assistant > .nofo-chat-context,
-  body.chat-expanded .result-assistant > .chat-key-prompt,
-  body.chat-expanded .result-assistant > .chat-privacy {
-    font-size: .7rem;
-  }
-
-  .nofo-context-heading {
-    flex-direction: column;
-  }
-
-  .nofo-match-record {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .nofo-match-actions {
-    justify-content: flex-start;
-  }
-
-  .chat-key-fields {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  body.chat-expanded .suggestion-list {
-    flex-wrap: nowrap;
-    padding-bottom: 4px;
-    overflow-x: auto;
-  }
-
-  body.chat-expanded .suggestion-list button {
-    flex: 0 0 220px;
-  }
-
-  body.chat-expanded .chat-form {
-    display: block;
-  }
-
-  body.chat-expanded .chat-form .button {
-    min-height: 46px;
-    margin-top: 7px;
-  }
-}
-
-/* Uploaded notices use the assistant as a dedicated workspace. Keeping the
-   document context beside the conversation gives the chat enough room to be
-   useful without losing the catalog actions that prompted it. */
-body.chat-expanded .result-assistant.document-chat {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-  gap: 10px 24px;
-  width: 100%;
-  height: 100dvh;
-  max-height: 100dvh;
-  padding: 22px clamp(20px, 3vw, 42px) 15px;
-  border: 0;
+/* Contextual tools share the site's native drawer lifecycle and geometry. */
+.result-assistant.site-drawer {
+  padding: 22px;
   border-radius: 0;
+  overflow-wrap: anywhere;
 }
-
-body.chat-expanded .document-chat .ai-heading {
-  grid-row: 1;
-  grid-column: 1 / -1;
+.result-assistant .ai-heading { padding-top: 0; flex-wrap: wrap; gap: 12px; }
+.result-assistant .ai-heading h2 { font-size: 1.35rem; }
+.result-assistant .chat-size-toggle { min-height: 44px; }
+.result-assistant > .panel-copy { margin-top: 14px; }
+.result-assistant #chat-provider-slot { margin: 14px 0; }
+.result-assistant .provider-setup { margin: 0; }
+.result-assistant .provider-setup summary { flex-wrap: wrap; }
+.result-assistant .provider-setup-body { padding: 14px; }
+.result-assistant .chat { min-width: 0; margin: 16px 0; }
+.result-assistant .messages { min-height: 160px; max-height: 50dvh; padding: 8px 4px 14px; }
+.result-assistant .message { padding: 14px 16px; font-size: .92rem; }
+.result-assistant .chat-form { display: grid; grid-template-columns: minmax(0, 1fr) 110px; gap: 8px 10px; }
+.result-assistant .chat-form textarea { grid-row: 1 / 3; min-height: 90px; }
+.result-assistant .chat-form .button { align-self: stretch; margin-top: 0; }
+.result-assistant .chat-keyboard-hint { align-self: end; margin-bottom: 3px; }
+.result-assistant .chat-privacy { margin-top: 10px; padding-top: 9px; }
+.result-assistant.document-chat[open] {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 12px 20px;
+  align-content: start;
 }
-
-body.chat-expanded .document-chat > .panel-copy {
-  grid-row: 2;
-  grid-column: 1 / -1;
-  margin: 0;
-}
-
-body.chat-expanded .document-chat > .nofo-chat-context {
-  grid-row: 3 / 5;
-  grid-column: 1;
-  align-self: start;
-  max-height: 100%;
-  margin: 0;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
-}
-
-body.chat-expanded .document-chat > .chat-key-prompt {
-  grid-row: 3;
-  grid-column: 2;
-  margin: 0;
-}
-
-body.chat-expanded .document-chat .chat {
-  grid-row: 3;
-  grid-column: 2;
-  min-width: 0;
-  margin-top: 0;
-}
-
-body.chat-expanded .document-chat > .chat-privacy {
-  grid-row: 4;
-  grid-column: 2;
-  margin: 0;
-}
-
-body.chat-expanded .document-chat .chat-summary {
-  margin: 0 0 10px;
-}
-
-body.chat-expanded .document-chat .messages {
-  min-height: 300px;
-  padding: 12px 8px 18px 0;
-}
-
-body.chat-expanded .document-chat .nofo-match-record {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-body.chat-expanded .document-chat .nofo-context-heading {
-  flex-direction: column;
-}
-
-body.chat-expanded .document-chat .nofo-context-tools {
-  justify-content: flex-start;
-}
-
-body.chat-expanded .document-chat .nofo-match-actions {
-  justify-content: flex-start;
-}
-
+.document-chat .ai-heading, .document-chat > .panel-copy, .document-chat #chat-provider-slot { grid-column: 1 / -1; }
+.document-chat > .nofo-chat-context { grid-column: 1; grid-row: 4 / 6; align-self: start; margin: 0; }
+.document-chat .chat { grid-column: 2; grid-row: 4; margin: 0; }
+.document-chat > .chat-privacy { grid-column: 2; grid-row: 5; }
+.document-chat .nofo-match-record { grid-template-columns: minmax(0, 1fr); }
+.document-chat .nofo-context-heading { flex-direction: column; }
+.document-chat .nofo-context-tools, .document-chat .nofo-match-actions { justify-content: flex-start; }
+.team-builder-drawer .opportunity-team-panel { margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+.team-builder-drawer .opportunity-team-body { min-width: 0; overflow-wrap: anywhere; }
+.team-builder-drawer .opportunity-team-remove { flex-shrink: 0; }
+.team-builder-drawer .opportunity-team-replacement select { max-width: 100%; }
 @media (max-width: 900px) {
-  body.chat-expanded .result-assistant.document-chat {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    padding: max(15px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(11px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
-  }
-
-  body.chat-expanded .document-chat > .panel-copy {
-    flex: none;
-  }
-
-  body.chat-expanded .document-chat > .nofo-chat-context {
-    flex: none;
-    align-self: stretch;
-    max-height: 220px;
-  }
-
-  body.chat-expanded .document-chat > .chat-key-prompt {
-    flex: 1;
-    overflow-y: auto;
-  }
-
-  body.chat-expanded .document-chat .chat {
-    flex: 1;
-    width: 100%;
-    min-height: 0;
-  }
-
-  body.chat-expanded .document-chat > .chat-privacy {
-    flex: none;
-  }
-
-  body.chat-expanded .document-chat .messages {
-    min-height: 170px;
-  }
+  .result-assistant.document-chat[open] { display: block; }
+  .document-chat > .nofo-chat-context { margin: 14px 0; }
 }
-
 @media (max-width: 700px) {
-  body.chat-expanded .document-chat > .panel-copy {
-    display: none;
-  }
-
-  body.chat-expanded .document-chat > .nofo-chat-context {
-    max-height: 210px;
-    padding: 12px;
-  }
-
-  body.chat-expanded .document-chat .nofo-context-heading {
-    flex-direction: column;
-  }
-
-  body.chat-expanded .document-chat .nofo-context-tools {
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  body.chat-expanded .document-chat .messages {
-    min-height: 145px;
-    padding-top: 6px;
-  }
-
-  body.chat-expanded .document-chat .chat-summary {
-    margin-bottom: 7px;
-  }
+  .result-assistant.site-drawer { padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+  .result-assistant .ai-heading h2 { font-size: 1.15rem; }
+  .result-assistant .spark { display: none; }
+  .result-assistant .message { max-width: 100%; padding: 12px; font-size: .88rem; }
+  .result-assistant .chat-form { display: block; }
+  .result-assistant .chat-form .button { min-height: 46px; margin-top: 8px; }
+  .result-assistant .chat-result-reference, .result-assistant .provider-fields { grid-template-columns: minmax(0, 1fr); }
+  .result-assistant .chat-result-actions { justify-content: flex-start; }
+  .result-assistant .nofo-context-heading { flex-direction: column; }
+  .team-builder-drawer .opportunity-team-status { flex-wrap: wrap; }
 }
 
-body.chat-expanded .result-assistant.needs-chat-key {
-  overflow-y: auto;
-}
-
-body.chat-expanded .result-assistant.needs-chat-key .chat {
-  display: none;
-}
 
 /* Funding Finder intentionally keeps one consistent light theme, including when
    the browser or operating system requests dark mode. */

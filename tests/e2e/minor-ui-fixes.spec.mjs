@@ -21,31 +21,24 @@ test("search lands on compact results with utilities reachable through More", as
   await expect(page.locator("#export-ics")).toHaveCount(0);
 });
 
-test("more than one opportunity team can remain open without reusing the prior panel", async ({ page }) => {
+test("Team Builder replaces the closed context without reusing the prior proposal", async ({ page }) => {
   await openFundingFinder(page);
   await page.locator("#browse-all").click();
-  await expect(page.locator("#filter-team-ready")).toBeEnabled();
   await page.locator("#filter-team-ready").click();
-
   const triggers = page.locator("#results [data-opportunity-team]");
   await expect.poll(() => triggers.count()).toBeGreaterThanOrEqual(2);
   await triggers.nth(0).click();
-  await expect(page.locator(".opportunity-team-panel")).toHaveCount(1);
-  const firstPanelId = await triggers.nth(0).getAttribute("aria-controls");
+  await expect(page.locator("#team-builder")).toBeVisible();
+  const firstPanelId = await page.locator(".opportunity-team-panel").getAttribute("id");
+  await page.locator("#team-builder [data-shell-drawer-close]").click();
+  await expect(triggers.nth(0)).toBeFocused();
   await triggers.nth(1).click();
-  await expect(page.locator(".opportunity-team-panel")).toHaveCount(2);
-  const secondPanelId = await triggers.nth(1).getAttribute("aria-controls");
-  expect(secondPanelId).not.toBe(firstPanelId);
-  await expect(triggers.nth(0)).toHaveAttribute("aria-expanded", "true");
-  await expect(triggers.nth(1)).toHaveAttribute("aria-expanded", "true");
-  await expect(page.locator(`#${firstPanelId}`)).toBeVisible();
-  await expect(page.locator(`#${secondPanelId}`)).toBeVisible();
-
-  await page.locator(`#${firstPanelId} [data-opportunity-team-close]`).click();
+  await expect(page.locator(".opportunity-team-panel")).toHaveCount(1);
   await expect(page.locator(`#${firstPanelId}`)).toHaveCount(0);
-  await expect(page.locator(`#${secondPanelId}`)).toBeVisible();
   await expect(triggers.nth(0)).toHaveAttribute("aria-expanded", "false");
-  await expect(triggers.nth(1)).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("Escape");
+  await expect(triggers.nth(1)).toBeFocused();
+  await expect(page.locator(".opportunity-team-panel")).toHaveCount(0);
 });
 
 test("Funded Awards opens directly on the working search without the redundant banner", async ({ page }) => {
