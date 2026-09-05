@@ -21,6 +21,14 @@ checks bind generation time, model, dimension and passage count to the current
 manifest. Historical data hashes remain recorded as audit evidence, not as a ban
 on future refreshes or reviewed registry changes.
 
+An immutable baseline from protected main records all 158 existing researcher IDs,
+their legacy mappings, and 432 claim IDs with legacy mappings, revisions and material
+hashes. Current registry publication must retain these addressable identities;
+revisions cannot regress, and unchanged revisions cannot silently change claim
+material. Reviewed content changes, additional identities and retired claims remain
+possible. Fault-injection tests reject removed, renumbered or reassigned identities
+independently of whether someone also rebuilds every generated projection.
+
 The mobile clipping regression now waits for an actual team member before testing
 headings, badges and rows at normal and enlarged text sizes; the loading placeholder
 cannot satisfy the test. This follow-up changes only validation and documentation.

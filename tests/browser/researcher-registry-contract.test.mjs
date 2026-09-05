@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { assertResearcherIdentities } from "../helpers/assert-researcher-identities.mjs";
 
 const root = new URL("../../", import.meta.url);
 const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSource, runtime, teamPage] = await Promise.all([
@@ -18,6 +19,43 @@ const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSo
 function assignmentJson(source) {
   return JSON.parse(source.slice(source.indexOf("{")).trim().replace(/;$/, ""));
 }
+
+const identityBaseline = JSON.parse(await readFile(new URL("tests/fixtures/researcher-identity-baseline.json", root), "utf8"));
+
+test("existing researcher, legacy and claim mappings survive mutable registry publication", () => {
+  assertResearcherIdentities(registry, identityBaseline);
+  const updated = { researchers: structuredClone(identityBaseline.researchers) };
+  const person = updated.researchers[0];
+  person.display_name = "Reviewed display-name correction";
+  person.home_unit = "Reviewed unit correction";
+  person.institution = { name: "Reviewed institution", ror_id: "" };
+  person.status = "inactive";
+  person.claims[0].revision += 1;
+  person.claims[0].material_hash = "a".repeat(64);
+  person.claims[0].status = "retired";
+  person.claims.push({ claim_id: `${person.researcher_id}-c999`, legacy_claim_ids: [], revision: 1, material_hash: "b".repeat(64) });
+  updated.researchers.push({ researcher_id: "urh-999999", legacy_ids: ["new-researcher"], claims: [] });
+  assertResearcherIdentities(updated, identityBaseline);
+});
+
+test("consistent regeneration cannot hide reassigned or removed historical identities", () => {
+  const corruptions = [
+    rows => rows.shift(),
+    rows => { rows[0].researcher_id = "urh-999999"; },
+    rows => { [rows[0].legacy_ids, rows[1].legacy_ids] = [rows[1].legacy_ids, rows[0].legacy_ids]; },
+    rows => { rows[0].legacy_ids = []; },
+    rows => rows[0].claims.shift(),
+    rows => { rows[0].claims[0].claim_id = `${rows[0].researcher_id}-c999`; },
+    rows => { rows[0].claims[0].legacy_claim_ids = []; },
+    rows => { rows[0].claims[0].revision = 0; },
+    rows => { rows[0].claims[0].material_hash = "c".repeat(64); },
+  ];
+  for (const corrupt of corruptions) {
+    const changed = { researchers: structuredClone(identityBaseline.researchers) };
+    corrupt(changed.researchers);
+    assert.throws(() => assertResearcherIdentities(changed, identityBaseline));
+  }
+});
 
 test("one generated registry generation owns every public researcher projection", () => {
   const directory = assignmentJson(directorySource);
