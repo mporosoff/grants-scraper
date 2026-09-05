@@ -146,10 +146,26 @@ test("Repeated team breakpoints never leave focus in the hidden sidebar or mobil
   assert.equal(dom.document.activeElement.id, "edit-team");
   dom.resize(false);
   assert.equal(dom.document.activeElement, sidebar, "The closed sheet's opener also disappears on desktop");
+  for (let cycle = 0; cycle < 3; cycle += 1) {
+    dom.resize(true);
+    assert.equal(sheet.open, false, "A dismissed editor stays closed after a desktop round trip");
+    assert.equal(dom.document.activeElement.id, "edit-team");
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal(dom.get("external-status").parentElement.id, "team-status-home");
+    assert.equal(dom.document.documentElement.classList.contains("shell-drawer-open"), false);
+    dom.resize(false);
+    assert.equal(dom.document.activeElement, sidebar);
+  }
   dom.get("filter").focus();
   dom.resize(true);
   assert.equal(sheet.open, false, "Resizing while working in results must not open a modal");
   assert.equal(dom.document.activeElement.id, "filter");
+  dom.click("edit-team");
+  assert.equal(sheet.open, true, "Explicit reopening resets the intent after dismissal");
+  dom.resize(false);
+  dom.resize(true);
+  assert.equal(sheet.open, true);
+  assert.equal(dom.document.activeElement, done);
 });
 
 test("Award history restores every switcher and panel focus target to its corresponding view", () => {

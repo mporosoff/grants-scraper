@@ -1,3 +1,4 @@
+import { openAwardAi, closeAwardAi } from "./public-tool-workflow.mjs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import {
@@ -149,7 +150,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await scan(page, "funded-awards-institutional-intelligence", testInfo);
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible({ timeout: 30_000 });
@@ -161,6 +162,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 800 });
+  await closeAwardAi(page);
   await page.locator("#ii-clear").click();
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("program officer accessibility");
@@ -169,7 +171,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await expect(page.locator("#ii-po-scope")).toBeVisible();
   await expect(page.locator("#ii-institution")).toBeDisabled();
   await scan(page, "funded-awards-program-officer-snapshot", testInfo);
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();

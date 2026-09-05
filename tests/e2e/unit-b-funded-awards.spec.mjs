@@ -1,3 +1,4 @@
+import { openAwardAi, closeAwardAi, selectAwardFacet, showAwardView, openAwardAdvanced } from "./public-tool-workflow.mjs";
 import { expect, test } from "@playwright/test";
 
 import { chooseInvestigator, mockAwards, openAiStructuredResponse, watchRuntimeErrors } from "./helpers.mjs";
@@ -77,6 +78,7 @@ test("topic and program-officer filters create one immutable snapshot request", 
   const { calls, runtimeErrors } = await openSearch(page);
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("electrocatalysis");
+  await openAwardAdvanced(page);
   await page.locator("#ii-program-officer").fill("Alex Officer");
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card")).toHaveCount(1);
@@ -117,6 +119,7 @@ test("numbered navigation, page size, and history keep one stable view", async (
   await searchTopic(page, "paging");
   await page.locator('[data-ii-page-number="5"]').click();
   await expect(page.locator("#ii-card-page-label")).toContainText("Awards 41–50 of 51 · Page 5 of 6");
+  await showAwardView(page, "projects");
   await page.locator("#ii-page-size").selectOption("25");
   await expect(page.locator("#ii-card-page-label")).toContainText("Awards 26–50 of 51 · Page 2 of 3");
   await expect(page).toHaveURL(/ii_page_size=25/);
@@ -178,7 +181,7 @@ test("snapshot navigation controls stay locked until one requested view is commi
 test("failed facet and page-size requests restore the committed view controls", async ({ page }) => {
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 2, snapshotPageFailAtCalls: [3, 4] });
   await searchTopic(page, "view-control-rollback", "NIH");
-  await page.locator("#ii-programs").selectOption({ label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
+  await selectAwardFacet(page, "programs", { label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
   await expect(page.locator("#ii-active-facet")).toContainText(NIH_WORKER_PROGRAM_LABEL);
   const committedUrl = page.url();
   const committedProgram = await page.locator("#ii-programs").inputValue();
@@ -190,6 +193,7 @@ test("failed facet and page-size requests restore the committed view controls", 
   await expect(page.locator("#ii-active-facet")).toContainText(NIH_WORKER_PROGRAM_LABEL);
   expect(page.url()).toBe(committedUrl);
 
+  await showAwardView(page, "projects");
   await page.locator("#ii-page-size").selectOption("25");
   await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
   await expect(page.locator("#ii-page-size")).toHaveValue("10");
@@ -202,20 +206,22 @@ test("a failed facet preserves its evidence answer and a committed facet clears 
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 2, snapshotPageFailAtCalls: [3] });
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "facet-answer-commit", "NIH");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await askDeterministicQuestion(page);
   const committedAnswer = await page.locator("#ii-direct-answer").textContent();
 
-  await page.locator("#ii-programs").selectOption({ label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
+  await selectAwardFacet(page, "programs", { label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
   await expect(page.locator("#ii-status")).toHaveClass(/error-text/);
+  await openAwardAi(page);
   await expect(page.locator("#ii-question-answer")).toBeVisible();
   await expect(page.locator("#ii-direct-answer")).toHaveText(committedAnswer);
   await expect(page.locator("#ii-question-plan")).toBeVisible();
 
-  await page.locator("#ii-programs").selectOption({ label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
+  await selectAwardFacet(page, "programs", { label: `${NIH_WORKER_PROGRAM_LABEL} (2)` });
   await expect(page.locator("#ii-active-facet")).toContainText(NIH_WORKER_PROGRAM_LABEL);
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
-  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await openAwardAi(page);
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
+  await expect(page.locator("#ii-question-plan")).toHaveClass(/hidden/);
   expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
 });
 
@@ -240,21 +246,25 @@ test("provider synthesis retains the evidence signature captured before later hy
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "signature-race", "all");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-provider").selectOption("openai");
   await page.locator("#ii-key").fill("sk-signature-race-test");
   await page.locator("#ii-save-key").click();
   await page.locator("#ii-question").fill("Summarize these awards.");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-direct-answer")).toContainText("Initial evidence summary.");
+  await closeAwardAi(page);
 
   await page.locator('[data-ii-load-source="NSF"]').click();
+  await openAwardAi(page);
   await expect(page.locator("#ii-update-answer")).toBeVisible();
   await page.locator("#ii-update-answer").click();
   await expect.poll(() => providerCalls.length).toBe(3);
+  await closeAwardAi(page);
   await page.locator('[data-ii-load-source="NIH"]').click();
   releaseUpdate();
   await expect.poll(() => updateFulfilled).toBe(true);
+  await openAwardAi(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("Updated evidence summary.");
   await expect(page.locator("#ii-update-answer")).toBeVisible();
   expect(runtimeErrors).toEqual([]);
@@ -276,12 +286,13 @@ test("draft filters never relabel an active snapshot during page, size, facet, s
   await expect(page.locator("#ii-topic")).toHaveValue("unsubmitted-draft");
   await expect(page.locator("#ii-agency")).toHaveValue("NIH");
 
+  await showAwardView(page, "projects");
   await page.locator("#ii-page-size").selectOption("25");
   await expect(page.locator("#ii-card-page-label")).toContainText("Page 1");
   activeUrl = new URL(page.url());
   expect(activeUrl.searchParams.get("ii_topic")).toBe("committed-criteria");
   expect(activeUrl.searchParams.get("ii_agency")).toBeNull();
-  await page.locator("#ii-programs").selectOption({ label: `${NIH_PROGRAM_LABEL} (26)` });
+  await selectAwardFacet(page, "programs", { label: `${NIH_PROGRAM_LABEL} (26)` });
   await expect(page.locator("#ii-active-facet")).toContainText(NIH_PROGRAM_LABEL);
   activeUrl = new URL(page.url());
   expect(activeUrl.searchParams.get("ii_topic")).toBe("committed-criteria");
@@ -325,13 +336,14 @@ test("failed creation and initial-page replacements retain one coherent owner be
   });
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "stable-owner", "NSF");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await askDeterministicQuestion(page);
   const stableUrl = page.url();
   const stableSnapshot = new URL(stableUrl).searchParams.get("ii_snapshot");
   const stableEvidence = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId));
 
   for (const topic of ["fail-create", "fail-initial-page"]) {
+    await closeAwardAi(page);
     await page.locator("#ii-topic").fill(topic);
     await page.locator("#ii-search").click();
     await expect(page.locator("#ii-search")).toBeEnabled();
@@ -339,28 +351,32 @@ test("failed creation and initial-page replacements retain one coherent owner be
     expect(page.url()).toBe(stableUrl);
     expect(await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId))).toEqual(stableEvidence);
     await expect(page.locator("#ii-topic")).toHaveValue(topic);
+    await openAwardAi(page);
     await expect(page.locator("#ii-question-answer")).toBeVisible();
   }
 
+  await closeAwardAi(page);
   await page.locator("#ii-topic").fill("successful-owner");
   await page.locator("#ii-agency").selectOption("NIH");
   await page.locator("#ii-search").click();
   await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).not.toBe(stableSnapshot);
   const successfulUrl = page.url();
   await expect(page.locator("#ii-awards .ii-award-card[data-source='NIH']")).toHaveCount(2);
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
-  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await openAwardAi(page);
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
+  await expect(page.locator("#ii-question-plan")).toHaveClass(/hidden/);
 
   await page.goBack();
   await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(stableSnapshot);
   await expect(page.locator("#ii-topic")).toHaveValue("stable-owner");
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
   expect(await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId))).toEqual(stableEvidence);
   await page.goForward();
   await expect(page).toHaveURL(successfulUrl);
   await expect(page.locator("#ii-topic")).toHaveValue("successful-owner");
   await expect(page.locator("#ii-awards .ii-award-card[data-source='NIH']")).toHaveCount(2);
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
+  await openAwardAi(page);
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
   expect(runtimeErrors.filter(error => !error.includes("503 (Service Unavailable)"))).toEqual([]);
 });
 
@@ -424,7 +440,7 @@ test("history restoration cannot mix a newer snapshot question into an older sna
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "older-snapshot");
   const olderSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await askDeterministicQuestion(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("2 matching awards");
   const newerSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
@@ -432,8 +448,8 @@ test("history restoration cannot mix a newer snapshot question into an older sna
   await page.goBack();
   await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(olderSnapshot);
   await expect(page.locator("#ii-card-page-label")).toContainText("Awards 1–2 of 2");
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
-  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
+  await expect(page.locator("#ii-question-plan")).toHaveClass(/hidden/);
   await expect(page.locator("#ii-question")).toHaveValue("");
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(2);
   expect(runtimeErrors).toEqual([]);
@@ -461,7 +477,7 @@ test("an in-flight newer-snapshot narrative cannot repopulate restored history",
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "older-snapshot");
   const olderSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-provider").selectOption("openai");
   await page.locator("#ii-key").fill("sk-history-generation-test");
   await page.locator("#ii-save-key").click();
@@ -473,8 +489,8 @@ test("an in-flight newer-snapshot narrative cannot repopulate restored history",
   await expect.poll(() => new URL(page.url()).searchParams.get("ii_snapshot")).toBe(olderSnapshot);
   releaseNarrative();
   await expect.poll(() => narrativeFulfilled).toBe(true);
-  await expect(page.locator("#ii-question-answer")).toBeHidden();
-  await expect(page.locator("#ii-question-plan")).toBeHidden();
+  await expect(page.locator("#ii-question-answer")).toHaveClass(/hidden/);
+  await expect(page.locator("#ii-question-plan")).toHaveClass(/hidden/);
   await expect(page.locator("#ii-question")).toHaveValue("");
   expect(runtimeErrors).toEqual([]);
 });
@@ -483,7 +499,7 @@ test("investigator and program drill-downs filter the same snapshot and clear in
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 3, NIH: 2, DOE: 4 } });
   await searchTopic(page, "cross-agency", "all");
   const createCount = calls.filter(call => Array.isArray(call.sources)).length;
-  await page.locator("#ii-investigators").selectOption({ label: "Marc Porosoff (4)" });
+  await selectAwardFacet(page, "investigators", { label: "Marc Porosoff (4)" });
   await expect(page.locator("#ii-active-facet")).toContainText("Marc Porosoff");
   await expect(page.locator("#ii-metrics .ii-metric").first()).toContainText("4");
   await expect(page).toHaveURL(/ii_facet=investigator/);
@@ -491,7 +507,7 @@ test("investigator and program drill-downs filter the same snapshot and clear in
   await page.locator("#ii-clear-facet").click();
   await expect(page.locator("#ii-active-facet")).toBeHidden();
   await expect(page.locator("#ii-metrics .ii-metric").first()).toContainText("9");
-  await page.locator("#ii-programs").selectOption({ label: `${NIH_PROGRAM_LABEL} (2)` });
+  await selectAwardFacet(page, "programs", { label: `${NIH_PROGRAM_LABEL} (2)` });
   await expect(page.locator("#ii-active-facet")).toContainText(NIH_PROGRAM_LABEL);
   expect(calls.filter(call => Array.isArray(call.sources))).toHaveLength(createCount);
   expect(runtimeErrors).toEqual([]);
@@ -502,7 +518,7 @@ test("failed-source retry creates a successor without discarding successful card
   await searchTopic(page, "partial", "all");
   await expect(page.locator("#ii-source-status")).toContainText("NIH: temporarily unavailable");
   await expect(page.locator("#ii-card-page-label")).toContainText("of at least 4");
-  await page.locator("#ii-programs").selectOption({ label: `${NSF_PROGRAM_LABEL} (2)` });
+  await selectAwardFacet(page, "programs", { label: `${NSF_PROGRAM_LABEL} (2)` });
   await expect(page.locator("#ii-active-facet")).toBeVisible();
   const retainedIds = await page.locator("#ii-awards .ii-award-card").evaluateAll(cards => cards.map(card => card.dataset.evidenceId).sort());
   const previousUrl = page.url();
@@ -619,7 +635,7 @@ test("Program Officer AI Q&A is hosted by default, provider-planned, determinist
   await searchTopic(page, "full-snapshot-question", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
   await expect(page.locator("#ii-po-scope")).toBeVisible();
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await expect(page.locator("#ii-question")).toBeEnabled();
   await expect(page.locator("#ii-ask-button")).toBeEnabled();
   await expect(page.locator("#ii-ai-state")).toContainText("Hosted AI included");
@@ -691,7 +707,7 @@ test("expired Program Officer evidence rebuilds the exact scope and restores the
   const firstSnapshot = new URL(page.url()).searchParams.get("ii_snapshot");
   await page.locator("#ii-card-next").click();
   await expect(page.locator("#ii-card-page-label")).toContainText("Page 2 of 3");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await configureProgramOfficerProvider(page);
   await page.locator("#ii-question").fill("Which projects involve carbon dioxide conversion?");
   await page.locator("#ii-ask-button").click();
@@ -743,7 +759,7 @@ test("an incomplete Program Officer snapshot never turns a deterministic topical
   });
   await searchTopic(page, "partial-contact", "NSF");
   await page.getByRole("button", { name: "Search this contact’s recent NSF awards" }).first().click();
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await configureProgramOfficerProvider(page);
   await page.locator("#ii-question").fill("Which projects involve quantum sensing?");
   await page.locator("#ii-ask-button").click();
@@ -769,7 +785,7 @@ test("questions use full server aggregates and bounded hydrated evidence", async
   const { runtimeErrors } = await openSearch(page, { resultCountPerSource: { NSF: 26, NIH: 26, DOE: 26 } });
   await page.goto("/funded_awards.html?ii=1&ii_institution=University+of+Rochester");
   await expect(page.locator("#ii-output")).toBeVisible();
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await askDeterministicQuestion(page);
   await expect(page.locator("#ii-direct-answer")).toContainText("78 matching awards");
   await expect(page.locator("#ii-answer-limitations")).toContainText("78 awards were counted");
@@ -787,11 +803,13 @@ test("optional provider translation remains strict and feeds the snapshot reques
     });
   });
   const { calls, runtimeErrors } = await openSearch(page);
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-provider").selectOption("openai");
   await page.locator("#ii-key").fill("sk-unit-b-provider-test");
   await page.locator("#ii-save-key").click();
+  await closeAwardAi(page);
   await page.locator("#ii-institution").fill("University of Rochester");
+  await openAwardAi(page);
   await page.locator("#ii-question").fill("How many DOE BES awards were funded from 2020 through 2026?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-plan")).toContainText("Agency: DOE");
@@ -818,7 +836,7 @@ test("question translation locks newer searches until its owned snapshot is comm
   const { calls, runtimeErrors } = await openSearch(page, { resultCountPerSource: 26 });
   await page.locator("#ii-institution").fill("University of Rochester");
   await searchTopic(page, "manual-owner", "NSF");
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-provider").selectOption("openai");
   await page.locator("#ii-key").fill("sk-question-lock-test");
   await page.locator("#ii-save-key").click();

@@ -1,3 +1,4 @@
+import { selectAwardFacet } from "./public-tool-workflow.mjs";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
@@ -1162,7 +1163,7 @@ export async function chooseInvestigator(page, name) {
   const option = page.locator("#ii-investigators option").filter({ hasText: name }).first();
   const value = await option.getAttribute("value");
   expect(value).toBeTruthy();
-  await page.locator("#ii-investigators").selectOption(value);
+  await selectAwardFacet(page, "investigators", value);
 }
 
 export async function mockOpenAiBroadening(page, {

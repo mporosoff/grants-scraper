@@ -15,10 +15,13 @@ native queued close/reopen, status relocation, all four award view buttons and t
 panel controls, invalid/restored advanced fields, AI evidence routing, and the
 existing history focus/scroll capture and restoration owner.
 
-- Repeated team breakpoint changes carry sidebar focus back into the mobile editor.
+- Repeated team breakpoint changes carry open-sheet sidebar focus back into the mobile editor.
   A focused mobile Edit team button transfers to the visible sidebar on desktop.
   Resizing while working in results does not open a modal. Exact editor nodes,
   values, selection, listener ownership and matching remain unchanged.
+  The resumed workflow audit also preserves an explicitly dismissed sheet across
+  a desktop round trip; see `PUBLIC_WORKFLOW_ROBUSTNESS.md` for that correction
+  and the shared asset maintenance command.
 - Award history restoration derives the visible view from either its switcher
   button or the panel containing the focus target. The existing history controller
   still owns URLs, snapshots, focus IDs, scroll and write throttling.

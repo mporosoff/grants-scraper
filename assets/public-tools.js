@@ -27,6 +27,7 @@
     const sheetBody = $("team-editor-sheet-body");
     const opener = $("edit-team");
     const mobile = matchMedia("(max-width: 800px)");
+    let resumeSheetFromSidebar = false;
     const open = target => shell.openDrawer(sheet, opener, target || sheet.querySelector("[data-shell-drawer-close]"), {
       onClose: () => $("team-status-home").append($("external-status")),
     });
@@ -35,11 +36,14 @@
       const editing = teamEditor.contains(focused);
       if (mobile.matches) {
         sheetBody.append(teamEditor);
-        // Sidebar focus is the desktop fallback for the sheet's own controls.
-        // Carry that context through repeated breakpoint changes as well.
-        if (editing || focused === sidebar) open(editing ? focused : null);
+        // Desktop uses the same focus fallback for an open sheet and its closed
+        // opener. Only the former carries an intent to resume the mobile sheet.
+        if (editing || (focused === sidebar && resumeSheetFromSidebar)) open(editing ? focused : null);
+        else if (focused === sidebar) opener.focus({ preventScroll: true });
+        resumeSheetFromSidebar = false;
       } else {
         const wasOpen = sheet.open;
+        resumeSheetFromSidebar = wasOpen;
         shell.closeDrawer(sheet, { restoreFocus: false });
         sidebar.append(teamEditor);
         if (wasOpen || focused === opener) (editing && !focused.disabled ? focused : sidebar).focus({ preventScroll: true });

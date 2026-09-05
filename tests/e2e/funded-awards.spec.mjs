@@ -21,7 +21,8 @@ async function openFrozenAwardFromFundingFinder(page, context, opportunityId, qu
 
   const card = page.locator(`[data-opportunity-id="${opportunityId}"]`);
   await expect(card).toBeVisible();
-  const link = card.locator("[data-funded-awards]");
+  await card.locator('[data-shell-menu="card"]').click();
+  const link = page.locator("#site-action-list [data-funded-awards]");
   await expect(link).toHaveAttribute("href", new RegExp(`funded_awards\\.html\\?opportunity=${opportunityId}$`));
   await expect(link).toHaveAttribute("target", "_blank");
   await expect(link).toHaveAttribute("rel", "noopener");
