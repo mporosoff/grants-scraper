@@ -108,7 +108,8 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.equal(ui.retrievalQuery("Which cannot be funded?"), ui.retrievalQuery("Which can't be funded?"));
   assert.equal(ui.isResultFollowUp("Which cannot support heterogeneous catalysis?"), false, "Normalizing negation must not discard a new scientific topic");
   const ordinaryMatcher = context.computeMatches;
-  for (const topic of ["AM", "DARE", "MIN", "MAX"]) {
+  for (const topic of ["AM", "DARE", "MIN", "MAX", "CAN", "OR", "IT", "ITS"]) {
+    assert.equal(ui.retrievalQuery(`Which opportunities support ${topic}?`), topic, "Topic abbreviations survive filler and fact-word filtering");
     context.computeMatches = query => { assert.equal(query, topic); return { matches: [{ index: 70 }] }; };
     const changedTopic = await context.retrieveChatContext(`Which opportunities support ${topic}?`, ids, compared);
     assert.equal(changedTopic.mode, "local_retrieval", topic);

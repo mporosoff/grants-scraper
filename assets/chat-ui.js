@@ -273,7 +273,7 @@
       .replace(/\b([\p{L}]+)['’](?:s|re|ve|ll|d)\b/giu, "$1")
       .replace(/^\s*(?:please\s+)?(?:(?:new|different|another|unrelated)\s+(?:topic|search)|(?:switch|change)\s+(?:the\s+)?topics?|start\s+over)\s*[:,.;-]?\s*/i, "");
     const tokens = scopedQuestion.match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
-    const substantive = tokens.filter(word => word === "IT" || (!filler.has(word.toLowerCase()) && !facts.has(word.toLowerCase())));
+    const substantive = tokens.filter(word => /^[A-Z]{2,}$/.test(word) || (!filler.has(word.toLowerCase()) && !facts.has(word.toLowerCase())));
     return substantive.join(" ").slice(0, 500);
   }
 
