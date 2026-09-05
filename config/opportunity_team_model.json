@@ -12626,7 +12626,10 @@
     "318918": "e3053a6fef5b862e4a38f7a5bf64de83c715c6942b4802cd1aa50bb1937012cc",
     "320087": "92992d0df17dc3041b06e89d0fee9e21258cf43cbee0a253fb8339492c0756a5",
     "320098": "2050e1b4fe765bbbc82a0ff19d2271f9bea99d3b503095bff3da3fd17098e508",
-    "324369": "03fde927fae6ae2d5316970a223956fa8852ba90baddf798bd94964f08bdbd7e",
+    "324369": {
+      "key": "ca7e7bdb7ae198731a397b4654da34672ad221bfaf3abad72dd70cad7d6ba265",
+      "state": "not_specific"
+    },
     "325500": {
       "key": "ddade3273b86b9a4173cd69f29802f95a48130dc3f97e80e86cb96bca807859d",
       "state": "not_specific"
@@ -12654,6 +12657,10 @@
     "332894": "92b9fd183def0337b491ccdb6a8b25ddf7955965d71cba54c4eeabdf8e7f67cf",
     "339728": {
       "key": "8198bc1b459de7128d8b2230587506c3449c4d034e6d2dc5e2b6127a8002d961",
+      "state": "not_specific"
+    },
+    "340544": {
+      "key": "0a74b52cd684831e81454f95d2689eac4998d7c85c46de1c0528e32f60dcb4a3",
       "state": "not_specific"
     },
     "340828": {
@@ -12771,6 +12778,10 @@
     "345241:tdac-baa-020": "81bf25fbbe0f58a8613cc47b60f4a023914e4a17390d8767f831a708cc9715f4",
     "345241:tdac-baa-022": "0ae72f45587a3072c7ffa4e1f29b7ea9fc6a81899ec17ef8113b7f589c1e38f7",
     "345241:tdac-baa-026": "2e1e94d93869bad0d63a0e1eb17d16a313444207bd39b3e4885cd160b6fbd0f9",
+    "347026": {
+      "key": "f09c08970fa2e77dd184ecda28dd5deecd01125d9ec722f012f752356a97913b",
+      "state": "not_specific"
+    },
     "347679": {
       "key": "259d7a3c2be6788d867d4912f94b0ccae482a515f4beecbf50215da619cedb6a",
       "state": "not_specific"
@@ -12793,6 +12804,10 @@
       "key": "1f3f66eaa2539ad71f612475cfd538e1d3dce836bfc98e826de2cba41a3eb9ec",
       "state": "not_specific"
     },
+    "350485": {
+      "key": "cc87e2d63fbc708a8f7b6a2c299560d88783a6ad50ee8be4507000dab744aabf",
+      "state": "not_specific"
+    },
     "351057": {
       "key": "4e4509c405c9dbd59d42278d4fd135311937f2b00dcc496904b016859e1aa0a5",
       "state": "not_specific"
@@ -12805,10 +12820,26 @@
     },
     "353055": "0771e1b694b1bab6e15c6c7a32db7a7991006622d8f15a5f108f43967ba578f2",
     "353353": "ccd4d16019bc0042dc299dc987f205b40921d66ca50543a8eaab60606489aa08",
+    "353413": {
+      "key": "dcfe6f92a55258cf0dfa298720ff6fe12eb5812bdb8e217d1136a1b09754a808",
+      "state": "not_specific"
+    },
+    "353709": {
+      "key": "4332904a606b8d4215452aa648e246e74f45788db71e01da082fe476f4cf76b2",
+      "state": "not_specific"
+    },
+    "353710": {
+      "key": "a4111141d5965bdda5000129a9f29e0dc3dd7abb507280b7f814f5d61abb85aa",
+      "state": "not_specific"
+    },
     "353936": "6f1799305924322af34d56691e84f399f5840f97059995531158540ed546d121",
     "355196": "e1445b9b0904149dc1d8c2ba9173f0640aff196add97a7bdf08aaf9af87dfbf2",
     "356055": "284921bcedaca9f7057379ba57cb4002a3c09cffae07605ef6808b27bbab6677",
     "356205": "53edf37b08c5c8d0fc50683f4fa3f5c44220201e73bb89d1c01882eab7fe5e91",
+    "356517": {
+      "key": "366a2485fbed9bc9f077551252571031f5dc3905140f846c64bb2ec293bd077d",
+      "state": "insufficient_evidence"
+    },
     "356530": "0e967e7a6de811b50f3d6e71354ae56e1c80127a0612c2d8948dd6c7085787e1",
     "356536": "8b19530df1e16ca9e73788503c86d9abf9249532e2a35fd4985eb1939a841863",
     "356538": "cafdc5e065d818ddbc6fb057b500a597f6990aa1ffb912731a81efddc29a2946",
@@ -12826,6 +12857,10 @@
       "key": "726e0fe7bf4c2ace0f15f1e3fedaf85946d2496264059f65dad4e0f9513515fa",
       "state": "proposed"
     },
+    "356811": {
+      "key": "790521708104f1c572df9c9fb93673ad064e2e60b6b5379c04426982eec43f45",
+      "state": "proposed"
+    },
     "356874": {
       "key": "f3bffe52adeb34c6af10d93d1ec41bac89e254acfb528af71db54de038061eff",
       "state": "proposed"
@@ -12835,6 +12870,10 @@
       "state": "insufficient_evidence"
     },
     "356888": "c1f4207e1458aeaa4616deb40472f2bf6f5881dafb5aaa3f77d510052702560e",
+    "356902": {
+      "key": "54ea91e15e85ae5ed5b2882eaa3a9ad7ee07e0de39484b473e3f7a207b9d3cbf",
+      "state": "not_specific"
+    },
     "356903": {
       "key": "e8d0a5d941d4ceda5f65e18756031d1a74ef543ce03b8fbc902d845980cc55c8",
       "state": "proposed"
@@ -12870,12 +12909,24 @@
     },
     "357018": "04b13ddcf656f5be598ea110a37aea75171303d634e458e120d5fbefef5d4714",
     "357019": "1864a71d276e1b153d694a0db11648cae2f6f0c59f4045e33ed5b1d17c3c4338",
+    "357067": {
+      "key": "d48c92d951f16b6a630b5672a2beedca504d1c284d45aa9a99a95fc10f655729",
+      "state": "not_specific"
+    },
+    "357075": {
+      "key": "7aab0b8761053a7cc3fcacbffb83be019e7d5f6f3568fef3d3fd457a4bf03d3f",
+      "state": "not_specific"
+    },
     "357105": {
       "key": "b7818d7a6210b0f207c7f768410de2dd4765719a7a5be6e4ac6564d8ff7fc9c2",
       "state": "not_specific"
     },
     "357112": {
       "key": "11f0c3ee940c97fbfb805c8085fd3f7846b657776e431af8a8916fbad3bcb20f",
+      "state": "not_specific"
+    },
+    "357121": {
+      "key": "36a098b8f71f3051822ba06b3e934f1895519094a801aaa428660a3b88c90105",
       "state": "not_specific"
     },
     "357137": "e00d5f5f065552d737792ff9afa2add2e778c11ec81a81331d2d0462da830cec",
@@ -12892,9 +12943,17 @@
       "key": "3cdfcea441618ed105ecd00394421f3738ca20e9ade281de2f806e6ab17655d2",
       "state": "insufficient_evidence"
     },
+    "357187": {
+      "key": "1a0f3885005e0c3124c2b39f2b229aeeaa77eb25404667f4143b805d30df0b4b",
+      "state": "insufficient_evidence"
+    },
     "357206": {
       "key": "7de6393f00ccf9543d3523e5e679cc64ac575c5f7ba685cd2f0a7a6744582b76",
       "state": "not_specific"
+    },
+    "357250": {
+      "key": "f5949e24474c09605560c8feffcc801a89240ad2ef63cb8d30df6e3ec592685c",
+      "state": "insufficient_evidence"
     },
     "357308": "f91f5c084f600036a1b253e9df949038a1f9fdb0ca0515d76e770ff1e4c7e071",
     "357309": "743f7181cb91709610bdfb7bc5af8435d6c2fa82bdbfa7a3ab6868c7f2e0b240",
@@ -12919,6 +12978,22 @@
     },
     "357377": "519d864679e372d8f73b216a12e6262f1d15d0f27d44539977a0faf6114828cf",
     "357378": "25e650693d2ead8448d89b0648d141347e0e0e8b331ca0cd9b48562121ef57af",
+    "357430": {
+      "key": "87ed04dea3fd040759624e856cf8266ad19bfa927b2388d70678c0a35d3221a0",
+      "state": "proposed"
+    },
+    "357492": {
+      "key": "28b4ef62307080189b017bd371000cdc17f0147c8cd08cd7198a198363e9f571",
+      "state": "proposed"
+    },
+    "357570": {
+      "key": "f02bf487db2b2ce5140084e2b2b1474be9d4ffba848151f66cd2a8572905d0e2",
+      "state": "insufficient_evidence"
+    },
+    "357578": {
+      "key": "2594c1908f25a9d0dee321731c9d9e8a8bf6329f4ace729e13bb0f311447096a",
+      "state": "not_specific"
+    },
     "357579": "445970f8bdf94541cd70c5239987dbad37def0654c2a41dbf8e15f17a5088022",
     "357580": {
       "key": "f34633afcd679ebdae3d15f5e8dbdba66f5600366512568fa50f21e3d2fb7aff",
@@ -12956,6 +13031,10 @@
       "key": "86091ec6c9677717500c1291075d79940b0c700bc24fb3c716d5430fc081b0c0",
       "state": "not_specific"
     },
+    "358569": {
+      "key": "81931c43ecef0bf1a936e65624f153001c41dd35bc1b8aec11833dc11e14637b",
+      "state": "not_specific"
+    },
     "358684": {
       "key": "0764ba99514a941e5aee0cf9e2c114ca4421ceee2dfb81bb895fc1a0882096c8",
       "state": "not_specific"
@@ -12966,6 +13045,10 @@
       "state": "not_specific"
     },
     "358863": "e5900097a9ebd31d1594c2e0a2a830538bbb71b7f6d33cac23469a34f7e40a5f",
+    "358955": {
+      "key": "6d93879728b973424edc546f8a499331f3ce48dc25cdc00fde10d808cd27113d",
+      "state": "not_specific"
+    },
     "359003": "ca6353c95f65e5061546d5fd783833e6221552de7f627b93c8fe9057981cc1e0",
     "359004": {
       "key": "05385378080b394c443c56085da026d1dbe2182b3a8503f2e202b3d83e62511c",
@@ -12995,9 +13078,25 @@
     "359649": "6ebe03aed8abccd632aa59f096162f6f427a8f7295878e86241942571e520089",
     "359666": "55e140ac0aa32cdf90fe3253554d4548c4fb5d7c2a88722e1e33d22c271febf2",
     "359695": "75072a3ed35ed4dbd3a75db7a480022f968cfd3937564e0c30420ad2d1268ece",
+    "359696": {
+      "key": "3bf2be03745a7364f61955a05e169fd771e287d0ba3dd8685684114cc7d01e10",
+      "state": "proposed"
+    },
     "359725": "304a4f549f771e891851b3fb2e706e073c41f434e344d848a9f6a72c9eff9a7c",
+    "359732": {
+      "key": "46d5c0de4ed053679bca62091512d0727466f6bf5cafcb3127275d80f59da683",
+      "state": "not_specific"
+    },
+    "359740": {
+      "key": "1d864b4ca7f3b4b1e7e4b371577bdf53b4e57c48f4a147070684d71d28b7d9dd",
+      "state": "insufficient_evidence"
+    },
     "359855": {
       "key": "fb55cc737161eb54050298ee5720db58700c244bd0db302433b787f859694729",
+      "state": "not_specific"
+    },
+    "359940": {
+      "key": "4908d475344f24dc8b6767011487ec4b5822b8fec82e0d74654cb2b2f2224479",
       "state": "not_specific"
     },
     "359949": {
@@ -13036,9 +13135,21 @@
       "key": "fe5140e5304fc5310c55adababe9f04a08f4fe36eb434e322161f11e00b90338",
       "state": "not_specific"
     },
+    "360574": {
+      "key": "fc825e8e155096300172876f974e8df2fdc6e80718b39d3ef23f93d991bbb90f",
+      "state": "not_specific"
+    },
+    "360606": {
+      "key": "e11e8dfe3c8c97767557932b6e0f8ad4ce2ef293f7f30b02646047517570f90c",
+      "state": "proposed"
+    },
     "360660": {
       "key": "436b1136e8bd57c24fc4429339774d5384e641e72cde8a0e3399a801dec2515b",
       "state": "not_specific"
+    },
+    "360676": {
+      "key": "b4f7c2aa273b8be4f69f0c9aa9b9220034926d6b28145ff9c2ac881dfb09b815",
+      "state": "insufficient_evidence"
     },
     "360698": "b7fa8881846267d460828d21a89738de6b4cb7b96f65c88e7fd28afa92e7a28a",
     "360881": "82b5517a4d7481aead7f85bf40f34e27b11ea55534145fecf268aa5fa0fd2d90",
@@ -13054,9 +13165,25 @@
       "key": "0fd956e86222c4ebb174b1972bef5806697e85920ef38443f852c8e51ef8a0c2",
       "state": "not_specific"
     },
+    "360909": {
+      "key": "8a91849940eabda6c6edf821850d1baaea7dd1bf2eee4686b47c16da46973d79",
+      "state": "not_specific"
+    },
     "360910": {
       "key": "a27bcab4f08e64e21c84c54b9927a1dc0dfb0f70ab391f20c6aa79feb0c740fe",
       "state": "not_specific"
+    },
+    "360947": {
+      "key": "4a8a546a282a417bd7318ec20953a1cf9213010d7bbef3592f920ea285e58a3a",
+      "state": "not_specific"
+    },
+    "360954": {
+      "key": "0993d905cbb2c3651ea4232794bb199e5f7a48e797857b81abe561da3b1e5c10",
+      "state": "not_specific"
+    },
+    "361008": {
+      "key": "98a1e6c82b7ef799c00d07c66eba4c17d39150c4f4cfe913dc553face3070e4d",
+      "state": "proposed"
     },
     "361104": {
       "key": "d7d98d22ef9240b3f2aeadd6a1937d6251b0366a368bb800ed682d5873640fdf",
@@ -13090,12 +13217,24 @@
       "key": "c6ed1625de4c93bc102f65c191bc8ff81c8ca2602d05275fc5f6fb5612dba558",
       "state": "not_specific"
     },
+    "361411": {
+      "key": "31ba30fc8955dd9373ec64223077a7ec10f1bc11e7f51c0fcbf5b39ab4813d7b",
+      "state": "insufficient_evidence"
+    },
     "361426": {
       "key": "6f32818bc4acf58ec2870fe3d507bfe7b08e71212f611d085a23151594196b44",
       "state": "not_specific"
     },
+    "361427": {
+      "key": "58d0ac523e20b4f2918b31d4f5f135616ec3e54612208a7eed7ba4ded312653e",
+      "state": "not_specific"
+    },
     "361449": {
       "key": "882ef84957f21a54d844ccebaa3da93feeb37d9c254637b69bab5cd648b34f49",
+      "state": "not_specific"
+    },
+    "361452": {
+      "key": "b3ea79c1cffed054c4a5a8bec8a862a46600b280e0a529cb6d56774effaef63e",
       "state": "not_specific"
     },
     "361520": "f9216bdd50eb6aad69d325dad0ee5fd1acf390681bf3186199c42335db614c25",
@@ -13118,13 +13257,25 @@
       "key": "31cfd819fed4cb16a34b5b43d330af0b4879aa0f06c3049dc49d21885acb2853",
       "state": "not_specific"
     },
+    "362177": {
+      "key": "c17db8fb5a4244adf74d9e3be990a980e69e1783c82eab0fc781c9f49466dd2b",
+      "state": "not_specific"
+    },
     "362183": "66987ed2e2013062548811e3bb4bc01fed076168d77319f78fcbb681f093d92a",
     "362184": "b7acd5119ccf3006206f66964d467fe92f47217ef8febb8e247b427d95e69692",
     "362185": "996e992d2d2bf012c88f98233320b23f9bb1c24d084cd758450b1c707e90344a",
     "362186": "3777bbb04f2454290f4829399beb371d1a6d7c6eb725ff7121ca87927e2e7159",
+    "362193": {
+      "key": "cc5a18ab7b41424b5cdbf5739f9244647089ed960292080cd64fe35a738e40e0",
+      "state": "not_specific"
+    },
     "362194": {
       "key": "764b35fead796f0f6c7241fab22c27d7720c2a787165622c1fa9ea46fa9ba0d6",
       "state": "rejected_evidence"
+    },
+    "362196": {
+      "key": "834dea701f8e86da064b7eb7b1942b6c6ba9f8a1a7ad72981322171a10bf103b",
+      "state": "insufficient_evidence"
     },
     "362197": {
       "key": "c642c43bf9bf88796569730ba39ea02e3dfe95d6e5a662c4e16d6f6ce9e9f90d",
@@ -13134,9 +13285,21 @@
       "key": "2b6ae468539e4332db3ec0ef52a68e7d9cc95da2b18c052548d640b643dad3a1",
       "state": "not_specific"
     },
+    "362205": {
+      "key": "9b9608dd4926b8a2a94fb361e95cac06a44bc3f7c71a1041f74e528e2b7bb237",
+      "state": "not_specific"
+    },
     "362218": "cf98e93e9361185bb13a53b6248b9ab1caa889462f4125e28b2e9df68daeaa47",
+    "362222": {
+      "key": "447e6bfb2a837a85f2a93a262a789dbac77ef9fb392e9d8d5424c8f9a32827b5",
+      "state": "not_specific"
+    },
     "362225": {
       "key": "bf40093856ed3b48a3ed527b75eebe584423f8d74adbddb4f6f238dd019d5ee3",
+      "state": "not_specific"
+    },
+    "362272": {
+      "key": "e71ce11efc3018dce6728be715e556a18cb93073552e7fd61eb6ca80a46a7a6e",
       "state": "not_specific"
     },
     "362302": {
@@ -13155,9 +13318,21 @@
     "362597": "fb9caab52fb704fa1f0a21e503f7262df06512deca8d9b1529b767462777084d",
     "362607": "d6c79853d98a4d675174287e5fedf8eb101b9415a4b7ebbcdeecb128ea27916b",
     "362722": "d4f8a9e416ceedde025ea6c3553224911a4f2e09936ba85a01c50d735cbeadd8",
+    "362752": {
+      "key": "5d5988ad369c7f94a793501867cec585ce31ffae5ebbf66ba2d509000e270474",
+      "state": "not_specific"
+    },
+    "362855": {
+      "key": "ba3885f3c0bd5f48d47bb13c694a05b9431a82106d9d7080711d10ea00e045d0",
+      "state": "not_specific"
+    },
     "362856": {
       "key": "627f3850a6313fc52e4e9371bd2954abb5931d768d776ff53ece47d08bfe92dc",
       "state": "rejected_evidence"
+    },
+    "362857": {
+      "key": "fa34c9e3b84c39f56c86760e4b3a556ac04e5da6a24b04deaa44f6d56e98ca9c",
+      "state": "not_specific"
     },
     "362947": "7584abbe9fed07acd74b3590433ba9beac6816208060228c8810dc9123e47359",
     "362948": {
@@ -13177,23 +13352,59 @@
       "state": "not_specific"
     },
     "363065:c-1": "dc4534bf18498c37608187bd784b92857e564f0070a00ae98556502715cb20fc",
+    "363095": {
+      "key": "af6a005e61a3d2ad37cc7abaa3da27d9965c022ca0c92573976c58eade4da8a0",
+      "state": "proposed"
+    },
     "363107": {
       "key": "5f341485708d9d1d0ed2006a8ed749500f8b93ab00f57f354caf8e69dfbcbc03",
       "state": "not_specific"
     },
     "363168": "345bef89273c417504d0194322435b721aed473b973926aef781b7424a9a29c1",
     "363169": "53c47ae2d586aae23343e3226b9ed7a54bb1df3704a096c7378cc7138574ef93",
+    "363179": {
+      "key": "89115a118788a45bd5c76ed827667c1e54036736183b8b4ceedd6eca2b79010b",
+      "state": "proposed"
+    },
     "363210": {
       "key": "a768f4672b7c51527af25b53393212ce62644c255255f5455642b18a888cace0",
       "state": "proposed"
     },
+    "363223": {
+      "key": "1329511ac0c7ec2b7d9518490d17cb2535ed1e2814fa658b8c495576e9a7e266",
+      "state": "not_specific"
+    },
+    "363244": {
+      "key": "d9161029dc8c6a224c5b5ffaec7c249d46a262ffc0772e066b8e364316b9b5b5",
+      "state": "not_specific"
+    },
+    "363250": {
+      "key": "dae8d8df7dc1e997fc1a2003728d583723e0d8379aedbe0ea68c682f33a0477a",
+      "state": "not_specific"
+    },
+    "363251": {
+      "key": "ff9eb74320a5362667db2738d9c045228ab6cd3c871dd35b4407612ad2e606b4",
+      "state": "not_specific"
+    },
     "363268": "8ab0020668b3e0d5f2923524b140b9ffa3a451b4092821395356df501e274b09",
+    "363281": {
+      "key": "53d2eebcb8b994c852af3f6df443fa2d360e1d16b9b45621003e81746d965c1b",
+      "state": "not_specific"
+    },
+    "363302:a-1": {
+      "key": "34bab45d68116eac77743164cb8869b5df7bf2c2cf4bc0b3f3eb9dade7b6909e",
+      "state": "not_specific"
+    },
     "363448": {
       "key": "89f8d71acbfe52ae8a2d6377bc3254876f2a1e85ec8da328c17ef43b452749e8",
       "state": "not_specific"
     },
     "363455": "9a5da0e90a84e3eefcaab27ddd662d1ba66b4e2b7e59071f9c8ae999840b77f8",
     "363538": "86eb0e3ba532d19e5f2d461e5c07e476ece78b663530eb3157d475c562d4f080",
+    "363557": {
+      "key": "970c25e5ebb2daf9d358d39cf5402dac5d3fe7b80f7af33eaf7cf8d78142a05e",
+      "state": "insufficient_evidence"
+    },
     "363589": {
       "key": "a5b2a210459d845bcc844c40ee74779642be87048df8bb181defaea1ebba8ca1",
       "state": "not_specific"
@@ -13207,9 +13418,17 @@
     "363618": "f3541a7d5140dc5cc31f820bb9e4d208f377969a48d0f6021137274ba6ce45df",
     "363620": "3d4871f2e41bfbbce409b19774c2c3f3ad284251875bafcc010dc13577702f11",
     "363621": "0d447e14e3a19d48a8c33e46fa5089995fe656c68fb3f957403d685889b7ad9d",
+    "363622": {
+      "key": "b4283ea4a7af592310deed52409261282c1493ba14f5955c88cff97ace7fec24",
+      "state": "proposed"
+    },
     "363623": "7dcbdddab6e6ce632e2007d43e4bf34675a7ea23f9e90827c315d671ec829d4c",
     "363670": {
       "key": "80bf42c7c94cce83acb0cdb8f5fee7b485f64d71a5aad666b7a2c64c3910c66a",
+      "state": "not_specific"
+    },
+    "363671": {
+      "key": "176c576ffe2ec80b7d88235e16d8937176ab947133a00617e60314e7dc4015de",
       "state": "not_specific"
     },
     "363678": "64f83dcf9fdd77901f9c94435c8257d4cf4d3ad4de369a77c39c0558cabaf2b2",
@@ -13222,8 +13441,20 @@
       "key": "271abf51b32e363ee808d327bfd389c36984cf164ba7edf17adf06e8b3b9b6cf",
       "state": "not_specific"
     },
+    "363734": {
+      "key": "85f2553a3eb58be62c9d8a2088019ef45555c936287ce9ff15a87a9965592737",
+      "state": "not_specific"
+    },
     "363747": {
       "key": "f0b29cd2c74975a4655796a88ca42a0b4b39063ab481d246cbae26b4cb556536",
+      "state": "not_specific"
+    },
+    "363759": {
+      "key": "6911bb47ff50d928de40099edba055b24910a74b34ce2a0f4ac7a1d52579b690",
+      "state": "not_specific"
+    },
+    "363764": {
+      "key": "dd51fc7431831622dbb0c40db51b2b9a81bcc31da81cf7e5526127d5cd835221",
       "state": "not_specific"
     },
     "363789": "34911a9dfa090675495311e8dd00cedefd8c426f0ceef559d336af2c3c45a074",
@@ -13240,9 +13471,13 @@
     "arpa-h:tigar": "4af0fd9878fb4014bb2280b87639678b6d1a5bdbb6d9cced30ad87b6a7ebd2d4",
     "nsf-cbet:PD-26-370Y": "13d934b64bc2fd35a79a0af80ea0d31ee34a2d5da6678ddbed888ad5743b658f",
     "nyserda:PON6004": "244e00d708f9821d44597cc68ac02ae7fc1b69b3c3af5cf85aa7558800edb1c0",
+    "nyserda:RFQL5312": {
+      "key": "fa35536e6b002d69202596ae7354f8e69f7995d16745f6f1749794c1bf56fa75",
+      "state": "not_specific"
+    },
     "vpr-email:infoready-2028504": "992da3f7f468a75a59a56b1e955e45aed1a7d856c23a5af5d64f91e11dc3e4e3"
   },
-  "generation_id": "7830d2d2f8c58b9e3a4287300cd2f6584f0219c5a74fe62b5a7fb85da8e72be3",
+  "generation_id": "05879415e35a3ad08d326428b4df6644911d1272c4201109e817d2b33bcfb9d8",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -30729,6 +30964,2052 @@
         }
       ],
       "why_team": "Michael Giacomelli contributes assay developer. Regine Choe contributes assay developer."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "360606",
+      "members": [
+        {
+          "claim_id": "urh-000037-c002",
+          "claim_revision": 1,
+          "contribution": "Blood Brain Barrier Pharmacology Specialist",
+          "evidence_phrase": "glymphatic and perivascular fluid transport",
+          "evidence_term": "Cerebral fluid mechanics and glymphatic transport",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000037",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
+          "why_person": "Expertise in glymphatic and perivascular fluid transport offers transferable mechanistic insight into how agents distribute across brain barriers, relevant to but distinct from direct BBB drug-crossing pharmacology studies."
+        },
+        {
+          "claim_id": "urh-000089-c001",
+          "claim_revision": 1,
+          "contribution": "IND-Enabling Toxicology/Regulatory Scientist",
+          "evidence_phrase": "cutaneous barrier toxicology models",
+          "evidence_term": "Toxicology and biological-effects models",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000089",
+          "source_url": "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
+          "why_person": "Toxicology modeling experience with cutaneous barrier systems provides transferable methodological grounding for designing IND-enabling toxicology studies, though the tissue context (skin vs. CNS) differs from GBM-specific requirements."
+        },
+        {
+          "claim_id": "urh-000158-c005",
+          "claim_revision": 1,
+          "contribution": "Preclinical Drug Development Lead",
+          "evidence_phrase": "controlled drug delivery",
+          "evidence_term": "controlled drug delivery",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000158",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/",
+          "why_person": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies."
+        }
+      ],
+      "missing_skills": [
+        "Early-Phase Clinical Trial Investigator"
+      ],
+      "objective": "Develop novel or repurposed therapeutic agents capable of crossing the blood brain barrier for adult glioblastoma, advancing them from late preclinical development through IND-enabling studies into early-phase (Phase 0/1) clinical trials.",
+      "opportunity_number": "RFA-CA-27-005",
+      "parent_id": "360606",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Biomaterials and engineered living materials",
+            "Synthetic biology",
+            "controlled drug delivery"
+          ],
+          "alternative_ids": [
+            "urh-000007",
+            "urh-000015",
+            "urh-000019"
+          ],
+          "candidate_ids": [
+            "urh-000158"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000158-c005",
+              "coverage": "method_transfer",
+              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
+              "reason": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000007-c001",
+              "coverage": "adjacent",
+              "material_hash": "6ea9df9184427c3978eb3d6a46b2603943096048f2ebfab2610fa2e20e611ee2",
+              "reason": "Synthetic-biology approaches to resistance are relevant to drug mechanism design but represent a distinct discipline from the hands-on preclinical-to-IND development pipeline required.",
+              "researcher_id": "urh-000007",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000015-c001",
+              "coverage": "adjacent",
+              "material_hash": "87f06d9152ee3ba326d305b2ad784832d74b21b1221bdcc3bd4355bc2337d4e7",
+              "reason": "Supramolecular biomaterial design offers potential delivery-platform know-how but is a materials-science specialty, not evidence of leading preclinical drug development toward IND.",
+              "researcher_id": "urh-000015",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000019-c001",
+              "coverage": "adjacent",
+              "material_hash": "c37fd4a21cfa66628cf132ad29f237f7d352b0628887c066cef5f2fead69d11c",
+              "reason": "Amyloid-inspired biomaterial work is tangential materials expertise that could inform delivery vehicles but does not show direct preclinical drug-development leadership experience.",
+              "researcher_id": "urh-000019",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Preclinical Drug Development Lead",
+          "rationale": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies. Synthetic-biology approaches to resistance are relevant to drug mechanism design but represent a distinct discipline from the hands-on preclinical-to-IND development pipeline required. Supramolecular biomaterial design offers potential delivery-platform know-how but is a materials-science specialty, not evidence of leading preclinical drug development toward IND. Amyloid-inspired biomaterial work is tangential materials expertise that could inform delivery vehicles but does not show direct preclinical drug-development leadership experience.",
+          "required": true,
+          "source_quote": "driving therapeutic agent(s) from pre-clinical development, through investigational new drugs (IND) studies",
+          "source_url": "https://www.grants.gov/search-results-detail/360606"
+        },
+        {
+          "accepted_terms": [
+            "Cerebral fluid mechanics and glymphatic transport",
+            "Organ-on-chip and microphysiological systems",
+            "biomedical transport modeling"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000037",
+            "urh-000066",
+            "urh-000083",
+            "urh-000157"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000066-c001",
+              "coverage": "method_transfer",
+              "material_hash": "8819341f0ab836e6dadf346d642402f8d6cba11b06d022090d3489a81668f8a2",
+              "reason": "Organ-on-chip blood-brain-barrier models provide a directly transferable in vitro method for evaluating agent permeability across the BBB, though not equivalent to in vivo/clinical BBB pharmacology testing.",
+              "researcher_id": "urh-000066",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000037-c002",
+              "coverage": "method_transfer",
+              "material_hash": "81d614e6fab534f8f05b49ad19cdcf69fadc54014f0eb81ad00ceeb9eed4fa55",
+              "reason": "Expertise in glymphatic and perivascular fluid transport offers transferable mechanistic insight into how agents distribute across brain barriers, relevant to but distinct from direct BBB drug-crossing pharmacology studies.",
+              "researcher_id": "urh-000037",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000083-c002",
+              "coverage": "method_transfer",
+              "material_hash": "0b08b36638acacdd969db3fe145e39ce100349178bd798894a6f4144c0294254",
+              "reason": "AI-based velocimetry of cerebral fluid flow supplies a transferable quantitative method for studying transport dynamics relevant to BBB penetration, without direct pharmacology testing experience.",
+              "researcher_id": "urh-000083",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "method_transfer",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling methods can be applied to simulate agent movement across the BBB, supporting but not equating to direct experimental BBB pharmacology work.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Blood Brain Barrier Pharmacology Specialist",
+          "rationale": "Organ-on-chip blood-brain-barrier models provide a directly transferable in vitro method for evaluating agent permeability across the BBB, though not equivalent to in vivo/clinical BBB pharmacology testing. Expertise in glymphatic and perivascular fluid transport offers transferable mechanistic insight into how agents distribute across brain barriers, relevant to but distinct from direct BBB drug-crossing pharmacology studies. AI-based velocimetry of cerebral fluid flow supplies a transferable quantitative method for studying transport dynamics relevant to BBB penetration, without direct pharmacology testing experience. Biomedical transport modeling methods can be applied to simulate agent movement across the BBB, supporting but not equating to direct experimental BBB pharmacology work.",
+          "required": true,
+          "source_quote": "developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically",
+          "source_url": "https://www.grants.gov/search-results-detail/360606"
+        },
+        {
+          "accepted_terms": [
+            "Toxicology and biological-effects models"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000089"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000089-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
+              "reason": "Toxicology modeling experience with cutaneous barrier systems provides transferable methodological grounding for designing IND-enabling toxicology studies, though the tissue context (skin vs. CNS) differs from GBM-specific requirements.",
+              "researcher_id": "urh-000089",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "IND-Enabling Toxicology/Regulatory Scientist",
+          "rationale": "Toxicology modeling experience with cutaneous barrier systems provides transferable methodological grounding for designing IND-enabling toxicology studies, though the tissue context (skin vs. CNS) differs from GBM-specific requirements.",
+          "required": true,
+          "source_quote": "through investigational new drugs (IND) studies, into pilot clinical studies in humans",
+          "source_url": "https://www.grants.gov/search-results-detail/360606"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Early-Phase Clinical Trial Investigator",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "into pilot clinical studies in humans",
+          "source_url": "https://www.grants.gov/search-results-detail/360606"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-5",
+          "label": "Repurposed Agent Preclinical Evaluator",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "agents or combinations approved for other indications and repurposed for treatment of GBM following appropriate preclinical studies",
+          "source_url": "https://www.grants.gov/search-results-detail/360606"
+        }
+      ],
+      "scope_label": "Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)",
+      "source_fingerprint": "46bba26f0b9c124cdac257c5299210fc8b9af5898b0a300d300ae82b1e74b566",
+      "source_url": "https://www.grants.gov/search-results-detail/360606",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000037",
+            "urh-000089",
+            "urh-000158"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000066",
+            "urh-000089",
+            "urh-000158"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000083",
+            "urh-000089",
+            "urh-000158"
+          ]
+        }
+      ],
+      "why_team": "Douglas H. Kelley contributes blood brain barrier pharmacology specialist. Lisa A. DeLouise contributes ind-enabling toxicology/regulatory scientist. Melodie I. Lawton contributes preclinical drug development lead."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "BRAIN Initiative: Brain Behavior Quantification and Synchronization- Next Generation Sensor Technology Development (U01 Clinical Trial Optional)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "pass",
+      "generator_version": "opportunity-teams-2",
+      "id": "356811",
+      "members": [
+        {
+          "claim_id": "urh-000041-c001",
+          "claim_revision": 1,
+          "contribution": "Neural Recording Synchronization Specialist",
+          "evidence_phrase": "multimodal behavioral-signal analysis",
+          "evidence_term": "Behavioral sensing and modeling",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000041",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+          "why_person": "Multimodal behavioral-signal analysis methods can be transferred to align sensor data with neural recordings, but no direct synchronization pipeline experience is shown."
+        },
+        {
+          "claim_id": "urh-000032-c008",
+          "claim_revision": 1,
+          "contribution": "Sensor/Bioelectronic Device Engineer",
+          "evidence_phrase": "wearable bioelectronic interfaces",
+          "evidence_term": "wearable bioelectronic interfaces",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000032",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "why_person": "Experience designing wearable bioelectronic interfaces directly supports development of next-generation sensor/bioelectronic devices, though not specifically tied to brain-recording synchronization."
+        }
+      ],
+      "missing_skills": [],
+      "objective": "Develop next-generation sensor and bioelectronic devices that synchronize with brain recordings to generate computational models of naturalistic human and animal behavior.",
+      "opportunity_number": "RFA-MH-26-140",
+      "parent_id": "356811",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Electronic-photonic integration",
+            "biosensors",
+            "electrochemical sensors",
+            "wearable bioelectronic interfaces"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000016",
+            "urh-000032",
+            "urh-000046",
+            "urh-000097"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000032-c008",
+              "coverage": "direct",
+              "material_hash": "e40d25e6b316d88abf77e9ed944f52c6631b16d17e3552dba901bc54b666d118",
+              "reason": "Experience designing wearable bioelectronic interfaces directly supports development of next-generation sensor/bioelectronic devices, though not specifically tied to brain-recording synchronization.",
+              "researcher_id": "urh-000032",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000046-c007",
+              "coverage": "direct",
+              "material_hash": "c10d999ebdcfc40e7fdc79fd026f058095c6b2dc4142b2ac3897bb2b868118a8",
+              "reason": "Background in biosensor design provides direct sensor fabrication expertise relevant to device development, without evidence of neural-sync integration.",
+              "researcher_id": "urh-000046",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000016-c003",
+              "coverage": "method_transfer",
+              "material_hash": "e1812533ac14e216aa8cafad404668e720e1f6afcfbd784f67c733b91459d0e6",
+              "reason": "Silicon-photonic ring-resonator biosensor fabrication offers transferable device-engineering methods applicable to novel sensor design, though not built for brain interfacing.",
+              "researcher_id": "urh-000016",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000097-c005",
+              "coverage": "method_transfer",
+              "material_hash": "6cfaa8e0102127b62228fd1b79b557f5645312dcbc08718b11ab61df8683022a",
+              "reason": "Electrochemical sensor development provides transferable fabrication know-how for new sensing modalities, not specific to neural synchronization hardware.",
+              "researcher_id": "urh-000097",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Sensor/Bioelectronic Device Engineer",
+          "rationale": "Experience designing wearable bioelectronic interfaces directly supports development of next-generation sensor/bioelectronic devices, though not specifically tied to brain-recording synchronization. Background in biosensor design provides direct sensor fabrication expertise relevant to device development, without evidence of neural-sync integration. Silicon-photonic ring-resonator biosensor fabrication offers transferable device-engineering methods applicable to novel sensor design, though not built for brain interfacing. Electrochemical sensor development provides transferable fabrication know-how for new sensing modalities, not specific to neural synchronization hardware.",
+          "required": true,
+          "source_quote": "next generation sensor and bioelectronic device development that will synchronize with brain recordings",
+          "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-140.html"
+        },
+        {
+          "accepted_terms": [
+            "Auditory neuroscience and hearing technology",
+            "Behavioral sensing and modeling",
+            "Neural computation and perception"
+          ],
+          "alternative_ids": [
+            "urh-000039",
+            "urh-000114"
+          ],
+          "candidate_ids": [
+            "urh-000041",
+            "urh-000152"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000041-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+              "reason": "Multimodal behavioral-signal analysis methods can be transferred to align sensor data with neural recordings, but no direct synchronization pipeline experience is shown.",
+              "researcher_id": "urh-000041",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000152-c001",
+              "coverage": "method_transfer",
+              "material_hash": "b86a890a794057d93de461216484db830ec39c288f030736c8918d4e10701460",
+              "reason": "Multimodal user-state sensing techniques are methodologically relevant to combining sensor streams with brain data, though not demonstrated with actual neural recordings.",
+              "researcher_id": "urh-000152",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000114-c001",
+              "coverage": "adjacent",
+              "material_hash": "bba4f1167f34ae05db2f3565a4a38d250a09a20ebddbd89300ef840103ca32ff",
+              "reason": "Expertise in neural population coding/decoding relates to brain-recording analysis but does not address sensor synchronization methods.",
+              "researcher_id": "urh-000114",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000039-c001",
+              "coverage": "adjacent",
+              "material_hash": "b6d7dd3b05055c64b0c4f7db136e720d8e0ac7a3a9aacb1f8f418b80a49528b0",
+              "reason": "Auditory cortical encoding research involves neural recordings but lacks evidence of integrating external sensor data streams.",
+              "researcher_id": "urh-000039",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Neural Recording Synchronization Specialist",
+          "rationale": "Multimodal behavioral-signal analysis methods can be transferred to align sensor data with neural recordings, but no direct synchronization pipeline experience is shown. Multimodal user-state sensing techniques are methodologically relevant to combining sensor streams with brain data, though not demonstrated with actual neural recordings. Expertise in neural population coding/decoding relates to brain-recording analysis but does not address sensor synchronization methods. Auditory cortical encoding research involves neural recordings but lacks evidence of integrating external sensor data streams.",
+          "required": true,
+          "source_quote": "acquire data and synchronize it with simultaneous brain recordings to build computational models",
+          "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-140.html"
+        },
+        {
+          "accepted_terms": [
+            "Affective and social computing",
+            "Behavioral sensing and modeling"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000041",
+            "urh-000072",
+            "urh-000152",
+            "urh-000155"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000041-c001",
+              "coverage": "direct",
+              "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+              "reason": "Multimodal behavioral-signal analysis directly supports building computational models of behavior from combined data sources.",
+              "researcher_id": "urh-000041",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000072-c001",
+              "coverage": "direct",
+              "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+              "reason": "Computer-vision-based modeling for social/behavioral science directly supports quantitative behavior modeling goals.",
+              "researcher_id": "urh-000072",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c001",
+              "coverage": "direct",
+              "material_hash": "f04a3363012d655ffb3e71de9cfed2485bbb4dfa8af4b9d541332a654adba243",
+              "reason": "Machine-learning models of human interaction provide direct methodological grounding for computational behavior modeling.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000152-c001",
+              "coverage": "method_transfer",
+              "material_hash": "b86a890a794057d93de461216484db830ec39c288f030736c8918d4e10701460",
+              "reason": "Multimodal user-state sensing offers transferable modeling approaches applicable to behavior quantification, though not validated on brain-synchronized data.",
+              "researcher_id": "urh-000152",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Computational Behavior Modeler",
+          "rationale": "Multimodal behavioral-signal analysis directly supports building computational models of behavior from combined data sources. Computer-vision-based modeling for social/behavioral science directly supports quantitative behavior modeling goals. Machine-learning models of human interaction provide direct methodological grounding for computational behavior modeling. Multimodal user-state sensing offers transferable modeling approaches applicable to behavior quantification, though not validated on brain-synchronized data.",
+          "required": true,
+          "source_quote": "The sensor and neural recording data will be used to generate new computational models of behavior in human and animal models",
+          "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-140.html"
+        },
+        {
+          "accepted_terms": [
+            "Affective and social computing",
+            "Behavioral sensing and modeling"
+          ],
+          "alternative_ids": [
+            "urh-000155"
+          ],
+          "candidate_ids": [
+            "urh-000041",
+            "urh-000072",
+            "urh-000152"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000072-c001",
+              "coverage": "direct",
+              "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+              "reason": "Computer-vision techniques for social and behavioral science directly address naturalistic behavior quantification.",
+              "researcher_id": "urh-000072",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000041-c001",
+              "coverage": "direct",
+              "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+              "reason": "Multimodal behavioral-signal analysis directly supports quantifying complex naturalistic behavior.",
+              "researcher_id": "urh-000041",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000152-c001",
+              "coverage": "method_transfer",
+              "material_hash": "b86a890a794057d93de461216484db830ec39c288f030736c8918d4e10701460",
+              "reason": "Multimodal user-state sensing methods can be transferred to naturalistic behavior quantification but lack demonstrated field application.",
+              "researcher_id": "urh-000152",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c001",
+              "coverage": "adjacent",
+              "material_hash": "f04a3363012d655ffb3e71de9cfed2485bbb4dfa8af4b9d541332a654adba243",
+              "reason": "Affective/social computing models relate to human interaction analysis but do not directly address naturalistic setting quantification.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Naturalistic Behavior Quantification Researcher",
+          "rationale": "Computer-vision techniques for social and behavioral science directly address naturalistic behavior quantification. Multimodal behavioral-signal analysis directly supports quantifying complex naturalistic behavior. Multimodal user-state sensing methods can be transferred to naturalistic behavior quantification but lack demonstrated field application. Affective/social computing models relate to human interaction analysis but do not directly address naturalistic setting quantification.",
+          "required": false,
+          "source_quote": "lack of quantitative approaches and models to understand the complexity of human and animal behavior in naturalistic settings",
+          "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-140.html"
+        }
+      ],
+      "scope_label": "BRAIN Initiative: Brain Behavior Quantification and Synchronization- Next Generation Sensor Technology Development (U01 Clinical Trial Optional)",
+      "source_fingerprint": "14bd068555f62530c27e1374db02c515231ee66225d980d6d2b6d1944e40fc47",
+      "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-140.html",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000041",
+            "urh-000032"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000041",
+            "urh-000046"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000041",
+            "urh-000016"
+          ]
+        }
+      ],
+      "why_team": "Ehsan Hoque contributes neural recording synchronization specialist. Darren Lipomi contributes sensor/bioelectronic device engineer."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Transformative Non-Invasive/Minimally Invasive Technologies for Imaging the Olfactory System Across Scales (R01 CT Optional)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "359696",
+      "members": [
+        {
+          "claim_id": "urh-000009-c002",
+          "claim_revision": 1,
+          "contribution": "Molecular/Biochemistry Probe Specialist",
+          "evidence_phrase": "diffuse biomedical tissue spectroscopy",
+          "evidence_term": "Biomedical optics and tissue spectroscopy",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000009",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
+          "why_person": "Diffuse biomedical tissue spectroscopy experience provides a transferable optical-biochemical sensing method, though it has not been applied to olfactory epithelium or bulb targets."
+        },
+        {
+          "claim_id": "urh-000040-c001",
+          "claim_revision": 1,
+          "contribution": "Imaging Technology Developer (Bioengineering/Biophysics)",
+          "evidence_phrase": "intravital multiphoton tumor imaging",
+          "evidence_term": "High-resolution biomedical microscopy and histology imaging",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000040",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html",
+          "why_person": "Experience with intravital multiphoton tumor imaging demonstrates high-resolution in vivo optical imaging skill transferable to visualizing olfactory epithelium/bulb tissue, though not developed for the olfactory system specifically."
+        }
+      ],
+      "missing_skills": [
+        "Olfaction Biology Expert"
+      ],
+      "objective": "Develop and/or adapt transformative non-invasive/minimally invasive imaging technologies capable of visualizing the living human peripheral and central olfactory system (e.g., olfactory epithelium, olfactory bulb) at high spatial and temporal resolution to advance understanding of olfactory biology and disorders.",
+      "opportunity_number": "RFA-DC-27-003",
+      "parent_id": "359696",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Biomedical optics and tissue spectroscopy",
+            "Computational imaging",
+            "High-resolution biomedical microscopy and histology imaging"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000040",
+            "urh-000067",
+            "urh-000115",
+            "urh-000116"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000040-c001",
+              "coverage": "method_transfer",
+              "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+              "reason": "Experience with intravital multiphoton tumor imaging demonstrates high-resolution in vivo optical imaging skill transferable to visualizing olfactory epithelium/bulb tissue, though not developed for the olfactory system specifically.",
+              "researcher_id": "urh-000040",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000115-c001",
+              "coverage": "method_transfer",
+              "material_hash": "577fabe9425db35fccac1de3ae904b02c62b54de8c5ce37123f0f10a7f1637f6",
+              "reason": "Intravital multiphoton tissue imaging expertise offers a credible optical imaging platform transferable to olfactory tissue visualization, but lacks demonstrated olfactory application.",
+              "researcher_id": "urh-000115",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000116-c001",
+              "coverage": "method_transfer",
+              "material_hash": "8b1cc9fa78630e2a748c384dcea30424a4d4a4161f562c49adfd95f9a2f85429",
+              "reason": "Near-infrared tissue spectroscopy skills align with the hemodynamic imaging approaches sought for central olfactory targets, though prior work is not olfactory-specific.",
+              "researcher_id": "urh-000116",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000067-c001",
+              "coverage": "method_transfer",
+              "material_hash": "3967a6518a58a931d12fde8eef36e0d5eb292678350c0f8e706ddc8b2929a5c9",
+              "reason": "Computational imaging through optical aberrations provides a transferable method for correcting distortions in deep or narrow anatomical imaging (e.g., olfactory bulb), but has not been applied to olfactory targets.",
+              "researcher_id": "urh-000067",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Imaging Technology Developer (Bioengineering/Biophysics)",
+          "rationale": "Experience with intravital multiphoton tumor imaging demonstrates high-resolution in vivo optical imaging skill transferable to visualizing olfactory epithelium/bulb tissue, though not developed for the olfactory system specifically. Intravital multiphoton tissue imaging expertise offers a credible optical imaging platform transferable to olfactory tissue visualization, but lacks demonstrated olfactory application. Near-infrared tissue spectroscopy skills align with the hemodynamic imaging approaches sought for central olfactory targets, though prior work is not olfactory-specific. Computational imaging through optical aberrations provides a transferable method for correcting distortions in deep or narrow anatomical imaging (e.g., olfactory bulb), but has not been applied to olfactory targets.",
+          "required": true,
+          "source_quote": "Recent advances in minimally invasive and non-invasive imaging technologies, such as cell specific biomarkers, fluorescence imaging, specialized endoscopes, optical and acoustic imaging",
+          "source_url": "https://www.grants.gov/search-results-detail/359696"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-2",
+          "label": "Olfaction Biology Expert",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "projects should engage multidisciplinary teams combining expertise in olfaction, biomedical imaging, biochemistry, bioengineering, and biophysics",
+          "source_url": "https://www.grants.gov/search-results-detail/359696"
+        },
+        {
+          "accepted_terms": [
+            "Biomedical optics and tissue spectroscopy",
+            "Fluorescence and Raman optical methods",
+            "Ultrafast optics and spectroscopy"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000009",
+            "urh-000035",
+            "urh-000098"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000098-c001",
+              "coverage": "method_transfer",
+              "material_hash": "cfdfded0182cd8f120eeb3a30efba6615542794fa655505480d87bbc3ee3c11d",
+              "reason": "Fluorescence-lifetime imaging microscopy expertise supports molecular-level optical imaging methods relevant to biomarker visualization, without direct olfactory system application.",
+              "researcher_id": "urh-000098",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000035-c003",
+              "coverage": "method_transfer",
+              "material_hash": "e26aec6c81b18d7a33ba011b7c9f4de7ce5bd4ca0888063ef62d42595a3edded",
+              "reason": "Time-resolved spectroscopy of molecular chromophores offers transferable methodology for probing molecular signals relevant to biochemical imaging, but not demonstrated in olfactory tissue.",
+              "researcher_id": "urh-000035",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000009-c002",
+              "coverage": "method_transfer",
+              "material_hash": "d84aeeaec19da68f0c9540ca0bf58f463c8351c89718df4e58eab4b01ed70678",
+              "reason": "Diffuse biomedical tissue spectroscopy experience provides a transferable optical-biochemical sensing method, though it has not been applied to olfactory epithelium or bulb targets.",
+              "researcher_id": "urh-000009",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Molecular/Biochemistry Probe Specialist",
+          "rationale": "Fluorescence-lifetime imaging microscopy expertise supports molecular-level optical imaging methods relevant to biomarker visualization, without direct olfactory system application. Time-resolved spectroscopy of molecular chromophores offers transferable methodology for probing molecular signals relevant to biochemical imaging, but not demonstrated in olfactory tissue. Diffuse biomedical tissue spectroscopy experience provides a transferable optical-biochemical sensing method, though it has not been applied to olfactory epithelium or bulb targets.",
+          "required": true,
+          "source_quote": "such as cell specific biomarkers, fluorescence imaging, specialized endoscopes, optical and acoustic imaging, molecular imaging",
+          "source_url": "https://www.grants.gov/search-results-detail/359696"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Clinical/Translational Olfactory Disorder Researcher",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "Imaging the olfactory system in the laboratory and in the clinic is essential to understanding underlying biological mechanisms as well as the etiology of an olfactory disorder.",
+          "source_url": "https://www.grants.gov/search-results-detail/359696"
+        }
+      ],
+      "scope_label": "Transformative Non-Invasive/Minimally Invasive Technologies for Imaging the Olfactory System Across Scales (R01 CT Optional)",
+      "source_fingerprint": "06562a9a12383f093366acec315fdf7d64db9d2ba6e8135d3802d5f91d5ab373",
+      "source_url": "https://www.grants.gov/search-results-detail/359696",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000009",
+            "urh-000040"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000009",
+            "urh-000067"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000009",
+            "urh-000115"
+          ]
+        }
+      ],
+      "why_team": "Andrew J. Berger contributes molecular/biochemistry probe specialist. Edward Brown III contributes imaging technology developer (bioengineering/biophysics)."
+    },
+    {
+      "agency": "U.S. National Science Foundation",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "pass",
+      "generator_version": "opportunity-teams-2",
+      "id": "363622",
+      "members": [
+        {
+          "claim_id": "urh-000099-c003",
+          "claim_revision": 1,
+          "contribution": "Computer Architecture/Systems Engineer",
+          "evidence_phrase": "architecture for emerging computing paradigms",
+          "evidence_term": "Computer architecture",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000099",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+          "why_person": "Experience designing architecture for emerging computing paradigms directly supports development of novel computing architectures central to this role."
+        },
+        {
+          "claim_id": "urh-000102-c001",
+          "claim_revision": 1,
+          "contribution": "Wave Dynamics Physicist",
+          "evidence_phrase": "nonparaxial structured-wave propagation",
+          "evidence_term": "Wave propagation and optical coherence",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000102",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/alonso_miguel/index.html",
+          "why_person": "Research on nonparaxial structured-wave propagation directly addresses foundational wave dynamics relevant to wave-based computing, though not tied to a computing implementation."
+        }
+      ],
+      "missing_skills": [],
+      "objective": "Develop foundational wave-based computing approaches that harness principles of wave dynamics for novel computing architectures, with potential integration with materials science, quantum science, or AI applications.",
+      "opportunity_number": "26-524",
+      "parent_id": "363622",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Finite-element and computational mechanics",
+            "Integrated photonics",
+            "Wave propagation and optical coherence"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000065",
+            "urh-000102",
+            "urh-000112",
+            "urh-000139"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000102-c001",
+              "coverage": "direct",
+              "material_hash": "69c2850de9ad07b4dc9b7e345716f07ff38b5092ab3a37a00c92f05d5d98b579",
+              "reason": "Research on nonparaxial structured-wave propagation directly addresses foundational wave dynamics relevant to wave-based computing, though not tied to a computing implementation.",
+              "researcher_id": "urh-000102",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000065-c002",
+              "coverage": "method_transfer",
+              "material_hash": "0f2eccf7be33531c03a4b0a829e607dc41e1bc182132403f59b819e6473f8fab",
+              "reason": "Optical coherence modeling techniques for microscopy involve wave propagation methods that could transfer to modeling wave dynamics for computing, though the original application is unrelated to computation.",
+              "researcher_id": "urh-000065",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000112-c001",
+              "coverage": "method_transfer",
+              "material_hash": "6fc764c40c4c2812261a798ed62e109a9a321a16c00e543991ed8ea27245615f",
+              "reason": "Chip-scale photonic signal processing expertise involves wave-based physical phenomena that could transfer to wave-based computing architectures, though the claim centers on signal processing rather than computing paradigms.",
+              "researcher_id": "urh-000112",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000139-c001",
+              "coverage": "method_transfer",
+              "material_hash": "9ee5b3ee0e5c5e251707aa3bc50e28c8a93050aef7cc121cb56b2c282d874dc9",
+              "reason": "Optomechanical finite-element analysis demonstrates modeling of coupled wave/mechanical systems, a methodology transferable to simulating wave-based computing devices, though not directly applied to computing.",
+              "researcher_id": "urh-000139",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Wave Dynamics Physicist",
+          "rationale": "Research on nonparaxial structured-wave propagation directly addresses foundational wave dynamics relevant to wave-based computing, though not tied to a computing implementation. Optical coherence modeling techniques for microscopy involve wave propagation methods that could transfer to modeling wave dynamics for computing, though the original application is unrelated to computation. Chip-scale photonic signal processing expertise involves wave-based physical phenomena that could transfer to wave-based computing architectures, though the claim centers on signal processing rather than computing paradigms. Optomechanical finite-element analysis demonstrates modeling of coupled wave/mechanical systems, a methodology transferable to simulating wave-based computing devices, though not directly applied to computing.",
+          "required": true,
+          "source_quote": "support foundational and transformative research to advance the development of computing approaches that harness the principles of wave dynamics",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26524"
+        },
+        {
+          "accepted_terms": [
+            "Computer architecture",
+            "RF and microwave electronics"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000091",
+            "urh-000099",
+            "urh-000144",
+            "urh-000151"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000099-c003",
+              "coverage": "direct",
+              "material_hash": "b69b9566f285eedaf5f22316f8ea6a92d64ae28d1bb9750d0511d76a5a78abe9",
+              "reason": "Experience designing architecture for emerging computing paradigms directly supports development of novel computing architectures central to this role.",
+              "researcher_id": "urh-000099",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000151-c003",
+              "coverage": "method_transfer",
+              "material_hash": "d96fa5f3f7c04ee4114e80ee11746c8ad68163b8856a9807c137a7502c1bfd8d",
+              "reason": "Perceptually aware computer architecture design shows general architecture expertise transferable to wave-based computing systems, though the specific application domain differs.",
+              "researcher_id": "urh-000151",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000144-c001",
+              "coverage": "method_transfer",
+              "material_hash": "6521705cca71d5fbd38ac38dcada05bbe23b5d08fb62ac3cce42c8329c99c758",
+              "reason": "Optomechanical microwave-photonic signal processing experience offers system-level integration skills transferable to building wave-based computing hardware, though not itself a computing architecture contribution.",
+              "researcher_id": "urh-000144",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000091-c001",
+              "coverage": "method_transfer",
+              "material_hash": "7e55dd2c0a2faa843d113d90be05d3bef1dd87afd7b67879ade0fb501d643365",
+              "reason": "RF and microwave circuit expertise for quantum simulation could transfer to building wave-manipulating computing hardware, though the claim's context is quantum simulation rather than computer architecture.",
+              "researcher_id": "urh-000091",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Computer Architecture/Systems Engineer",
+          "rationale": "Experience designing architecture for emerging computing paradigms directly supports development of novel computing architectures central to this role. Perceptually aware computer architecture design shows general architecture expertise transferable to wave-based computing systems, though the specific application domain differs. Optomechanical microwave-photonic signal processing experience offers system-level integration skills transferable to building wave-based computing hardware, though not itself a computing architecture contribution. RF and microwave circuit expertise for quantum simulation could transfer to building wave-manipulating computing hardware, though the claim's context is quantum simulation rather than computer architecture.",
+          "required": true,
+          "source_quote": "advance the development of computing approaches that harness the principles of wave dynamics",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26524"
+        },
+        {
+          "accepted_terms": [
+            "Quantum and topological materials",
+            "Semiconductor nanomaterials",
+            "Two-dimensional and van der Waals materials",
+            "nanostructured materials"
+          ],
+          "alternative_ids": [
+            "urh-000005",
+            "urh-000075",
+            "urh-000126",
+            "urh-000129"
+          ],
+          "candidate_ids": [],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000129-c003",
+              "coverage": "adjacent",
+              "material_hash": "9cc83e6cc39b260549fb010d310b8be90b62b57f55a3e38329ee1370de1b120a",
+              "reason": "Expertise in van der Waals quantum materials is materials-science relevant but the claim does not address fabrication or integration into wave-based computing devices.",
+              "researcher_id": "urh-000129",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000126-c002",
+              "coverage": "adjacent",
+              "material_hash": "b9373b03f569e5c2a54a0b850d0ad33caab396a2789f98bea2a6006241a49e75",
+              "reason": "Work on topological quantum phases falls within quantum materials science but lacks connection to wave-based device fabrication or computing application.",
+              "researcher_id": "urh-000126",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000005-c005",
+              "coverage": "adjacent",
+              "material_hash": "15f0f18353a55e1fc57ee8464d7c46e917c5a9e32f13178c1ccc435cba6d6b48",
+              "reason": "General nanostructured materials expertise is materials-science adjacent but does not demonstrate work on wave-based computing devices specifically.",
+              "researcher_id": "urh-000005",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000075-c001",
+              "coverage": "adjacent",
+              "material_hash": "da9efae97831967639dcf83a05549353f062e4d6a8485da37a10584d2b327e10",
+              "reason": "Semiconductor nanomaterials work on quantum-dot qubits is materials-relevant but focused on qubit fabrication, not wave-based computing device materials.",
+              "researcher_id": "urh-000075",
+              "revision": 1
+            }
+          ],
+          "coverage": "adjacent",
+          "id": "role-3",
+          "label": "Materials Scientist for Wave-Based Devices",
+          "rationale": "Expertise in van der Waals quantum materials is materials-science relevant but the claim does not address fabrication or integration into wave-based computing devices. Work on topological quantum phases falls within quantum materials science but lacks connection to wave-based device fabrication or computing application. General nanostructured materials expertise is materials-science adjacent but does not demonstrate work on wave-based computing devices specifically. Semiconductor nanomaterials work on quantum-dot qubits is materials-relevant but focused on qubit fabrication, not wave-based computing device materials.",
+          "required": false,
+          "source_quote": "materials science quantum science advanced computing artificial intelligence",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26524"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Industry Collaborator (GOALI)",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "The EFRI WBC program encourages collaboration with industry. Proposers may consider using a formal mechanism, such as NSF Grant Opportunities for Academic Liaison with Industry (GOALI).",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26524"
+        }
+      ],
+      "scope_label": "EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)",
+      "source_fingerprint": "db63663d811efe2948ce0fdb8ec9a527b95af123d493202ffb92bb2c28288875",
+      "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26524",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000099",
+            "urh-000102"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000065",
+            "urh-000099"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000091",
+            "urh-000102"
+          ]
+        }
+      ],
+      "why_team": "Michael Huang contributes computer architecture/systems engineer. Miguel A. Alonso contributes wave dynamics physicist."
+    },
+    {
+      "agency": "U.S. National Science Foundation",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "361008",
+      "members": [
+        {
+          "claim_id": "urh-000050-c001",
+          "claim_revision": 1,
+          "contribution": "Data Scientist",
+          "evidence_phrase": "graph signal processing",
+          "evidence_term": "Graph and network analytics",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000050",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
+          "why_person": "Graph signal processing is a quantitative analysis technique transferable to modeling relational education data, though not applied to such data in the evidence."
+        },
+        {
+          "claim_id": "urh-000119-c002",
+          "claim_revision": 1,
+          "contribution": "Learning Scientist",
+          "evidence_phrase": "Bayesian models of perceptual learning",
+          "evidence_term": "Visual neuroscience and vision rehabilitation",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000119",
+          "source_url": "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
+          "why_person": "Research on Bayesian models of perceptual learning is basic-science-of-learning work matching the role's focus on studying learning mechanisms, though not specific to math education."
+        },
+        {
+          "claim_id": "urh-000155-c002",
+          "claim_revision": 1,
+          "contribution": "Dataset Developer",
+          "evidence_phrase": "embodied conversational agents for learning",
+          "evidence_term": "Tangible and embodied interfaces",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000155",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
+          "why_person": "Embodied conversational agents for learning could produce new interaction datasets, a transferable capability for dataset creation rather than demonstrated math-education dataset work."
+        }
+      ],
+      "missing_skills": [
+        "Education Practitioner"
+      ],
+      "objective": "Create a research network (Phase I of CAMEL) that generates or enhances a high-value dataset to advance K-12 mathematics learning and education, integrating basic learning science, education practice, and data science.",
+      "opportunity_number": "26-501",
+      "parent_id": "361008",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Augmented and virtual reality",
+            "Behavioral sensing and modeling",
+            "Tangible and embodied interfaces",
+            "Visual neuroscience and vision rehabilitation"
+          ],
+          "alternative_ids": [
+            "urh-000155"
+          ],
+          "candidate_ids": [
+            "urh-000072",
+            "urh-000119"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000119-c002",
+              "coverage": "direct",
+              "material_hash": "6ec618df96adfe5742e02f754a151d593764cd2181f774861671b7acce918222",
+              "reason": "Research on Bayesian models of perceptual learning is basic-science-of-learning work matching the role's focus on studying learning mechanisms, though not specific to math education.",
+              "researcher_id": "urh-000119",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000072-c001",
+              "coverage": "method_transfer",
+              "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+              "reason": "Computer-vision methods for social and behavioral science provide a transferable technique for capturing learner behavior signals, though the evidence shows no direct learning-science research application.",
+              "researcher_id": "urh-000072",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c002",
+              "coverage": "adjacent",
+              "material_hash": "c113c6620bee0f90f01c3aad8bcb628d8e6e4dc8d520e64b5bd3d4fae06b6484",
+              "reason": "Building embodied conversational agents for learning is educational-technology development, adjacent to but not itself basic science-of-learning research.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c003",
+              "coverage": "adjacent",
+              "material_hash": "62255f7cb2b229ff1a3e46fc97242bf12087656c44b777f82cc49a0eae264f1a",
+              "reason": "Tangible/AR learning interface design is technology innovation for learning, adjacent to the basic-science-of-learning role rather than a direct fit.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Learning Scientist",
+          "rationale": "Research on Bayesian models of perceptual learning is basic-science-of-learning work matching the role's focus on studying learning mechanisms, though not specific to math education. Computer-vision methods for social and behavioral science provide a transferable technique for capturing learner behavior signals, though the evidence shows no direct learning-science research application. Building embodied conversational agents for learning is educational-technology development, adjacent to but not itself basic science-of-learning research. Tangible/AR learning interface design is technology innovation for learning, adjacent to the basic-science-of-learning role rather than a direct fit.",
+          "required": true,
+          "source_quote": "researchers who study the basic science of learning",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26501"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-2",
+          "label": "Education Practitioner",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "education practitioners, and data scientists",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26501"
+        },
+        {
+          "accepted_terms": [
+            "Graph and network analytics",
+            "Large language models",
+            "Natural language processing"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000050",
+            "urh-000051",
+            "urh-000055"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000050-c001",
+              "coverage": "method_transfer",
+              "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b",
+              "reason": "Graph signal processing is a quantitative analysis technique transferable to modeling relational education data, though not applied to such data in the evidence.",
+              "researcher_id": "urh-000050",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000051-c001",
+              "coverage": "method_transfer",
+              "material_hash": "be7ce5366bb191494c94af882cb86479195e4d0a9016d8dc726fcd8c77071bf6",
+              "reason": "Complex-network statistical physics offers transferable analytic tools for large relational datasets, extendable to education/learning network data but not demonstrated there.",
+              "researcher_id": "urh-000051",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000055-c001",
+              "coverage": "method_transfer",
+              "material_hash": "4ee3a7f1fcbedea026d374880d21e6e67df233936e12d99820f77a9b8ad963eb",
+              "reason": "Evaluation methodology for language-model reasoning is a transferable data-science technique for analyzing text-based learning data, not itself education-specific.",
+              "researcher_id": "urh-000055",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000055-c002",
+              "coverage": "method_transfer",
+              "material_hash": "557abe29a3eed6d8458e4a1a4ebd9c058930cef6640ee99fa20d24942b459d9f",
+              "reason": "Expertise in large language model reasoning provides transferable computational methods for dataset analysis pipelines, though not applied to education datasets.",
+              "researcher_id": "urh-000055",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Data Scientist",
+          "rationale": "Graph signal processing is a quantitative analysis technique transferable to modeling relational education data, though not applied to such data in the evidence. Complex-network statistical physics offers transferable analytic tools for large relational datasets, extendable to education/learning network data but not demonstrated there. Evaluation methodology for language-model reasoning is a transferable data-science technique for analyzing text-based learning data, not itself education-specific. Expertise in large language model reasoning provides transferable computational methods for dataset analysis pipelines, though not applied to education datasets.",
+          "required": true,
+          "source_quote": "education practitioners, and data scientists",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26501"
+        },
+        {
+          "accepted_terms": [
+            "Augmented and virtual reality",
+            "Behavioral sensing and modeling",
+            "Tangible and embodied interfaces"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000072",
+            "urh-000155"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000072-c001",
+              "coverage": "method_transfer",
+              "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+              "reason": "Computer-vision techniques for capturing social/behavioral signals are transferable to generating behavioral datasets, though not shown in a math-education context.",
+              "researcher_id": "urh-000072",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c002",
+              "coverage": "method_transfer",
+              "material_hash": "c113c6620bee0f90f01c3aad8bcb628d8e6e4dc8d520e64b5bd3d4fae06b6484",
+              "reason": "Embodied conversational agents for learning could produce new interaction datasets, a transferable capability for dataset creation rather than demonstrated math-education dataset work.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000155-c003",
+              "coverage": "method_transfer",
+              "material_hash": "62255f7cb2b229ff1a3e46fc97242bf12087656c44b777f82cc49a0eae264f1a",
+              "reason": "Development of tangible/AR learning interfaces offers a transferable route to generating novel learner-interaction datasets, though not shown as math-specific dataset generation.",
+              "researcher_id": "urh-000155",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Dataset Developer",
+          "rationale": "Computer-vision techniques for capturing social/behavioral signals are transferable to generating behavioral datasets, though not shown in a math-education context. Embodied conversational agents for learning could produce new interaction datasets, a transferable capability for dataset creation rather than demonstrated math-education dataset work. Development of tangible/AR learning interfaces offers a transferable route to generating novel learner-interaction datasets, though not shown as math-specific dataset generation.",
+          "required": true,
+          "source_quote": "generation of high value datasets that aim to advance math learning and education",
+          "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26501"
+        }
+      ],
+      "scope_label": "Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12",
+      "source_fingerprint": "e6474ec1b6e4cdbe0d5f7ba93cc80287449d970a3da94f05d52808daea2baf83",
+      "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26501",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000050",
+            "urh-000119",
+            "urh-000155"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000051",
+            "urh-000119",
+            "urh-000155"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000055",
+            "urh-000119",
+            "urh-000155"
+          ]
+        }
+      ],
+      "why_team": "Gonzalo Mateos contributes data scientist. Robert A. Jacobs contributes learning scientist. Zhen Bai contributes dataset developer."
+    },
+    {
+      "agency": "National Telecommunications and Information Admini",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "363179",
+      "members": [
+        {
+          "claim_id": "urh-000073-c001",
+          "claim_revision": 1,
+          "contribution": "Security Engineer",
+          "evidence_phrase": "compiler-enforced systems security",
+          "evidence_term": "Compilers and runtime systems",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000073",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html",
+          "why_person": "Compiler-enforced systems security methods can inform secure compute environment design, but evidence does not extend to RAN or network security deployment."
+        },
+        {
+          "claim_id": "urh-000099-c001",
+          "claim_revision": 1,
+          "contribution": "RAN AI Systems Architect",
+          "evidence_phrase": "non-von-Neumann computing accelerators",
+          "evidence_term": "GPU and heterogeneous accelerators",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000099",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+          "why_person": "Experience designing non-von-Neumann computing accelerators transfers to building the compute substrate needed for AI-native RAN, but is not RAN-specific or deployed in wireless network hardware."
+        }
+      ],
+      "missing_skills": [
+        "Business Case / Commercialization Analyst"
+      ],
+      "objective": "Develop a secure compute environment enabling native AI capabilities in the Radio Access Network (RAN) that generate operator revenue and cost savings, and demonstrate a business case for at least one AI-enabled service, accelerating commercial deployment of open, interoperable, secure RAN equipment.",
+      "opportunity_number": "NTIA-PWSCIF-26-01",
+      "parent_id": "363179",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Compilers and runtime systems",
+            "Computer architecture",
+            "GPU and heterogeneous accelerators"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000099",
+            "urh-000127"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000099-c001",
+              "coverage": "method_transfer",
+              "material_hash": "07a73eca7f3c0fbf8821397e0840e97f09a73e2957278fc230e623638e131787",
+              "reason": "Experience designing non-von-Neumann computing accelerators transfers to building the compute substrate needed for AI-native RAN, but is not RAN-specific or deployed in wireless network hardware.",
+              "researcher_id": "urh-000099",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000099-c003",
+              "coverage": "method_transfer",
+              "material_hash": "b69b9566f285eedaf5f22316f8ea6a92d64ae28d1bb9750d0511d76a5a78abe9",
+              "reason": "Computer architecture work for emerging computing paradigms provides transferable systems-design skill for a secure AI compute environment, though not demonstrated in RAN or telecom contexts.",
+              "researcher_id": "urh-000099",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000127-c001",
+              "coverage": "method_transfer",
+              "material_hash": "d2e5a0619446876d0b8bd94f261c55866ae146191e71a2afe771101cdd65d8a6",
+              "reason": "Program transformation for heterogeneous architectures is relevant to enabling AI workloads on diverse compute platforms, but lacks direct RAN or edge-network application evidence.",
+              "researcher_id": "urh-000127",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000127-c002",
+              "coverage": "method_transfer",
+              "material_hash": "8b0c749da020a1e7aa0e73a56098c26e872a26515c48a91d7ecab2804dc3157d",
+              "reason": "GPU compiler optimization expertise transfers to tuning AI compute environments for performance, but does not show RAN deployment or wireless-specific experience.",
+              "researcher_id": "urh-000127",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "RAN AI Systems Architect",
+          "rationale": "Experience designing non-von-Neumann computing accelerators transfers to building the compute substrate needed for AI-native RAN, but is not RAN-specific or deployed in wireless network hardware. Computer architecture work for emerging computing paradigms provides transferable systems-design skill for a secure AI compute environment, though not demonstrated in RAN or telecom contexts. Program transformation for heterogeneous architectures is relevant to enabling AI workloads on diverse compute platforms, but lacks direct RAN or edge-network application evidence. GPU compiler optimization expertise transfers to tuning AI compute environments for performance, but does not show RAN deployment or wireless-specific experience.",
+          "required": true,
+          "source_quote": "support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN)",
+          "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+        },
+        {
+          "accepted_terms": [
+            "Compilers and runtime systems",
+            "GPU and heterogeneous accelerators",
+            "Hardware security"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000073",
+            "urh-000124",
+            "urh-000149"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000124-c003",
+              "coverage": "method_transfer",
+              "material_hash": "a22d24586d18f6e40589aba2e416fccb7d4c81ad59ae3d8147213291b4d6763e",
+              "reason": "Secure mixed-signal hardware design experience is methodologically relevant to building a security plan for compute hardware, but not shown in RAN or telecom security contexts.",
+              "researcher_id": "urh-000124",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000149-c003",
+              "coverage": "method_transfer",
+              "material_hash": "d28058946a5496879e5a0873b7a3213c5f357354ec710d60e158dbf705e38783",
+              "reason": "Work on software-hardware security boundaries transfers to securing a compute environment, though not demonstrated for RAN systems specifically.",
+              "researcher_id": "urh-000149",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000149-c001",
+              "coverage": "method_transfer",
+              "material_hash": "e3e2fe8cf7415330cfc0849c23bc59327d0a9bcaeaa76835984346276498f1ae",
+              "reason": "GPU security architecture experience is transferable to hardening AI compute accelerators, but not validated for RAN network security requirements.",
+              "researcher_id": "urh-000149",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000073-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1ca4684a8c9bc2ba7008218d5932f1f779f897933a9d8df7b5eaa4b8ac6f1d08",
+              "reason": "Compiler-enforced systems security methods can inform secure compute environment design, but evidence does not extend to RAN or network security deployment.",
+              "researcher_id": "urh-000073",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Security Engineer",
+          "rationale": "Secure mixed-signal hardware design experience is methodologically relevant to building a security plan for compute hardware, but not shown in RAN or telecom security contexts. Work on software-hardware security boundaries transfers to securing a compute environment, though not demonstrated for RAN systems specifically. GPU security architecture experience is transferable to hardening AI compute accelerators, but not validated for RAN network security requirements. Compiler-enforced systems security methods can inform secure compute environment design, but evidence does not extend to RAN or network security deployment.",
+          "required": true,
+          "source_quote": "4.5 Security Plan .................................................................................................................... 23",
+          "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-3",
+          "label": "Business Case / Commercialization Analyst",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "demonstrate a business case for one or more services that leverage these capabilities, accelerating commercial deployments",
+          "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Interoperability/Standards Engineer",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "the export of open, interoperable, and secure equipment",
+          "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-5",
+          "label": "Technical Maturity/Deliverables Lead",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "Section 3 (Technical Maturity Requirements) describes the technical maturity requirements that all projects must meet before exiting the period of performance",
+          "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
+        }
+      ],
+      "scope_label": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
+      "source_fingerprint": "29f629367fe53b3b3ba2afc771cde8f91cf161c1085feafcac8c388b1e7491f4",
+      "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000073",
+            "urh-000099"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000073",
+            "urh-000127"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000099",
+            "urh-000124"
+          ]
+        }
+      ],
+      "why_team": "John Criswell contributes security engineer. Michael Huang contributes ran ai systems architect."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Early Stage Testing of Pharmacologic or Neuromodulatory Device-based Interventions for the Treatment of Mental Disorders (R33- Clinical Trial Required)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "357430",
+      "members": [
+        {
+          "claim_id": "urh-000014-c007",
+          "claim_revision": 1,
+          "contribution": "Pharmacologic or Device Intervention Specialist",
+          "evidence_phrase": "electrode microenvironments",
+          "evidence_term": "electrode microenvironments",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000014",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "why_person": "Knowledge of electrode microenvironments provides transferable insight into electrode-tissue interface considerations relevant to neuromodulation device design, without direct evidence of building or testing a clinical neuromodulatory device."
+        },
+        {
+          "claim_id": "urh-000041-c001",
+          "claim_revision": 1,
+          "contribution": "Target Engagement / Mechanism-of-Action Scientist",
+          "evidence_phrase": "multimodal behavioral-signal analysis",
+          "evidence_term": "Behavioral sensing and modeling",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000041",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+          "why_person": "Multimodal behavioral-signal analysis methods can transfer to linking neurophysiological target engagement with behavioral/clinical outcomes, but the claim shows no prior application to mechanism-of-action or intervention testing."
+        }
+      ],
+      "missing_skills": [
+        "Clinical Trial Principal Investigator (Experimental Therapeutics Lead)",
+        "Biostatistician for Dose-Response Modeling"
+      ],
+      "objective": "Conduct an R33 clinical trial applying an experimental therapeutics approach to early stage testing of a pharmacologic (novel mechanism) or device-based neuromodulatory intervention for a mental disorder, using a protocol designed to test the presumed mechanism of action and demonstrate that target modulation produces a dose-dependent neurophysiological/clinical/behavioral effect.",
+      "opportunity_number": "PAR-25-183",
+      "parent_id": "357430",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-1",
+          "label": "Clinical Trial Principal Investigator (Experimental Therapeutics Lead)",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "NIMH requires an experimental therapeutics approach for the development and testing of therapeutic interventions",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html"
+        },
+        {
+          "accepted_terms": [
+            "Toxicology and biological-effects models",
+            "controlled drug delivery",
+            "electrode microenvironments",
+            "wearable bioelectronic interfaces"
+          ],
+          "alternative_ids": [
+            "urh-000032"
+          ],
+          "candidate_ids": [
+            "urh-000014",
+            "urh-000036",
+            "urh-000158"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000036-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1111090fada29b917e60adfe915054a0a2b329d060751694370a4c421eb4d1cc",
+              "reason": "Experience characterizing bioeffects of therapeutic ultrasound offers transferable methodology for evaluating dose-dependent effects of ultrasound-based neuromodulatory devices, but is not specific to mental-disorder targets or clinical trial device deployment.",
+              "researcher_id": "urh-000036",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000032-c008",
+              "coverage": "adjacent",
+              "material_hash": "e40d25e6b316d88abf77e9ed944f52c6631b16d17e3552dba901bc54b666d118",
+              "reason": "Development of wearable bioelectronic interfaces reflects general device/interface engineering skill but the evidence does not clearly indicate neuromodulatory delivery or clinical device application, so it does not directly transfer to this role's intervention testing task.",
+              "researcher_id": "urh-000032",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000158-c005",
+              "coverage": "method_transfer",
+              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
+              "reason": "Background in controlled drug delivery formulation is transferable to designing pharmacologic intervention delivery approaches, though the evidence is generic and not tied to CNS targets or novel mechanism-of-action agents.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000014-c007",
+              "coverage": "method_transfer",
+              "material_hash": "7f1c7f578c4b5aa0f162dce088dd85449b55a08a2bf0930ea1cd1c5a1b56f08a",
+              "reason": "Knowledge of electrode microenvironments provides transferable insight into electrode-tissue interface considerations relevant to neuromodulation device design, without direct evidence of building or testing a clinical neuromodulatory device.",
+              "researcher_id": "urh-000014",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Pharmacologic or Device Intervention Specialist",
+          "rationale": "Experience characterizing bioeffects of therapeutic ultrasound offers transferable methodology for evaluating dose-dependent effects of ultrasound-based neuromodulatory devices, but is not specific to mental-disorder targets or clinical trial device deployment. Development of wearable bioelectronic interfaces reflects general device/interface engineering skill but the evidence does not clearly indicate neuromodulatory delivery or clinical device application, so it does not directly transfer to this role's intervention testing task. Background in controlled drug delivery formulation is transferable to designing pharmacologic intervention delivery approaches, though the evidence is generic and not tied to CNS targets or novel mechanism-of-action agents. Knowledge of electrode microenvironments provides transferable insight into electrode-tissue interface considerations relevant to neuromodulation device design, without direct evidence of building or testing a clinical neuromodulatory device.",
+          "required": true,
+          "source_quote": "early stage testing of pharmacologic interventions with novel mechanisms of actions or device-based interventions",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html"
+        },
+        {
+          "accepted_terms": [
+            "Behavioral sensing and modeling",
+            "Neural computation and perception"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000041",
+            "urh-000114"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000114-c001",
+              "coverage": "method_transfer",
+              "material_hash": "bba4f1167f34ae05db2f3565a4a38d250a09a20ebddbd89300ef840103ca32ff",
+              "reason": "Quantitative neural population coding/decoding methods are transferable to characterizing neurophysiological changes from target modulation, supporting mechanism-of-action analysis, though not previously applied to an intervention-testing context.",
+              "researcher_id": "urh-000114",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000041-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+              "reason": "Multimodal behavioral-signal analysis methods can transfer to linking neurophysiological target engagement with behavioral/clinical outcomes, but the claim shows no prior application to mechanism-of-action or intervention testing.",
+              "researcher_id": "urh-000041",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Target Engagement / Mechanism-of-Action Scientist",
+          "rationale": "Quantitative neural population coding/decoding methods are transferable to characterizing neurophysiological changes from target modulation, supporting mechanism-of-action analysis, though not previously applied to an intervention-testing context. Multimodal behavioral-signal analysis methods can transfer to linking neurophysiological target engagement with behavioral/clinical outcomes, but the claim shows no prior application to mechanism-of-action or intervention testing.",
+          "required": true,
+          "source_quote": "the presumed mechanism of action of the intervention is adequately tested",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html"
+        },
+        {
+          "accepted_terms": [
+            "biomedical transport modeling"
+          ],
+          "alternative_ids": [
+            "urh-000157"
+          ],
+          "candidate_ids": [],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "adjacent",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling reflects quantitative pharmacokinetic/engineering modeling skill but is a distinct discipline from clinical trial biostatistics needed for dose-response analysis, so it does not directly transfer to this role's statistical modeling task.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            }
+          ],
+          "coverage": "adjacent",
+          "id": "role-4",
+          "label": "Biostatistician for Dose-Response Modeling",
+          "rationale": "Biomedical transport modeling reflects quantitative pharmacokinetic/engineering modeling skill but is a distinct discipline from clinical trial biostatistics needed for dose-response analysis, so it does not directly transfer to this role's statistical modeling task.",
+          "required": true,
+          "source_quote": "target modulation yields a dose-dependent neurophysiological/clinical/behavioral effect",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html"
+        }
+      ],
+      "scope_label": "Early Stage Testing of Pharmacologic or Neuromodulatory Device-based Interventions for the Treatment of Mental Disorders (R33- Clinical Trial Required)",
+      "source_fingerprint": "13ea93d34632d1e2dc4587bbe870b35e042c1e94813748ad0298d967f84b4c7f",
+      "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000014",
+            "urh-000041"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000014",
+            "urh-000114"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000036",
+            "urh-000041"
+          ]
+        }
+      ],
+      "why_team": "Astrid M. Müller contributes pharmacologic or device intervention specialist. Ehsan Hoque contributes target engagement / mechanism-of-action scientist."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "NCCIH Natural Product Early Phase Clinical Trial Award (R33 Clinical Trial Required)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "357492",
+      "members": [
+        {
+          "claim_id": "urh-000046-c007",
+          "claim_revision": 1,
+          "contribution": "Target Engagement Biomarker Specialist",
+          "evidence_phrase": "biosensors",
+          "evidence_term": "biosensors",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000046",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "why_person": "Biosensor development skills are methodologically transferable to designing assays that quantify target engagement, but no evidence ties this work to human biomarker or clinical target-engagement measurement."
+        },
+        {
+          "claim_id": "urh-000111-c009",
+          "claim_revision": 1,
+          "contribution": "Pharmacological/Formulation Specialist",
+          "evidence_phrase": "solvent-based extraction",
+          "evidence_term": "solvent-based extraction",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000111",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "why_person": "Solvent-based extraction expertise supports producing standardized natural-product preparations needed for dose/formulation optimization, but lacks evidence of clinical formulation or regulatory-grade standardization work."
+        }
+      ],
+      "missing_skills": [
+        "Early Phase Clinical Trial Investigator",
+        "Biostatistician for Milestone-Driven Trial Design"
+      ],
+      "objective": "Conduct an investigator-initiated, early phase (R33) clinical trial of a natural product (botanical, dietary supplement, probiotic, or standardized nutritional compound) to replicate its impact on target engagement in humans and assess the association between target engagement and functional/clinical outcomes, optionally optimizing dose, formulation, combination, or responsive population.",
+      "opportunity_number": "PAR-25-270",
+      "parent_id": "357492",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-1",
+          "label": "Early Phase Clinical Trial Investigator",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "investigator-initiated, early phase, clinical trials of natural products (i.e., botanicals, dietary supplements, and probiotics)",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-2",
+          "label": "Biostatistician for Milestone-Driven Trial Design",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "Clinical trials submitted under this NOFO are expected to be hypothesis based, milestone-driven, and directly related to the research priorities and mission of NCCIH",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html"
+        },
+        {
+          "accepted_terms": [
+            "biomaterials",
+            "biomedical transport modeling",
+            "controlled drug delivery",
+            "solvent-based extraction"
+          ],
+          "alternative_ids": [
+            "urh-000157"
+          ],
+          "candidate_ids": [
+            "urh-000111",
+            "urh-000158"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000158-c005",
+              "coverage": "method_transfer",
+              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
+              "reason": "Experience engineering controlled drug delivery systems provides transferable formulation-science methodology applicable to optimizing dose/formulation of a natural product, though not demonstrated on botanicals or in clinical settings.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000111-c009",
+              "coverage": "method_transfer",
+              "material_hash": "4a6ad18d63ce87644cf42e23fd5a0d08c7d69ee918b6339c1293ef89e93251c6",
+              "reason": "Solvent-based extraction expertise supports producing standardized natural-product preparations needed for dose/formulation optimization, but lacks evidence of clinical formulation or regulatory-grade standardization work.",
+              "researcher_id": "urh-000111",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "adjacent",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling is a broad, unspecified technique with no explicit connection to natural-product formulation, dosing, or delivery-optimization work shown.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000158-c003",
+              "coverage": "adjacent",
+              "material_hash": "06513f2f851a2234d5138e1c03b3869a689eca742e236bc0184fb89bb55a4ae3",
+              "reason": "General biomaterials background is tangential to formulation of natural products; no explicit link to dose, delivery, or supplement formulation work is shown.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Pharmacological/Formulation Specialist",
+          "rationale": "Experience engineering controlled drug delivery systems provides transferable formulation-science methodology applicable to optimizing dose/formulation of a natural product, though not demonstrated on botanicals or in clinical settings. Solvent-based extraction expertise supports producing standardized natural-product preparations needed for dose/formulation optimization, but lacks evidence of clinical formulation or regulatory-grade standardization work. Biomedical transport modeling is a broad, unspecified technique with no explicit connection to natural-product formulation, dosing, or delivery-optimization work shown. General biomaterials background is tangential to formulation of natural products; no explicit link to dose, delivery, or supplement formulation work is shown.",
+          "required": true,
+          "source_quote": "optimize the impact of the natural product on target engagement by optimizing the delivery of the natural product through examination of different doses or formulations",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html"
+        },
+        {
+          "accepted_terms": [
+            "Toxicology and biological-effects models",
+            "biosensors",
+            "multiscale molecules-to-systems modeling"
+          ],
+          "alternative_ids": [
+            "urh-000089",
+            "urh-000111"
+          ],
+          "candidate_ids": [
+            "urh-000046"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000046-c007",
+              "coverage": "method_transfer",
+              "material_hash": "c10d999ebdcfc40e7fdc79fd026f058095c6b2dc4142b2ac3897bb2b868118a8",
+              "reason": "Biosensor development skills are methodologically transferable to designing assays that quantify target engagement, but no evidence ties this work to human biomarker or clinical target-engagement measurement.",
+              "researcher_id": "urh-000046",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000089-c001",
+              "coverage": "adjacent",
+              "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
+              "reason": "Toxicology and biological-effects modeling relates broadly to assessing biological impact but does not address target engagement measurement or clinical outcome correlation.",
+              "researcher_id": "urh-000089",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000111-c005",
+              "coverage": "adjacent",
+              "material_hash": "a439f94bbb0c82bd2f44cbc2aa8a1504e5fcb43e2d74df739bc4701f7ef8fe80",
+              "reason": "Multiscale molecules-to-systems modeling is conceptually related to understanding target engagement mechanisms but shows no direct application to biomarker assay development or human trial data analysis.",
+              "researcher_id": "urh-000111",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Target Engagement Biomarker Specialist",
+          "rationale": "Biosensor development skills are methodologically transferable to designing assays that quantify target engagement, but no evidence ties this work to human biomarker or clinical target-engagement measurement. Toxicology and biological-effects modeling relates broadly to assessing biological impact but does not address target engagement measurement or clinical outcome correlation. Multiscale molecules-to-systems modeling is conceptually related to understanding target engagement mechanisms but shows no direct application to biomarker assay development or human trial data analysis.",
+          "required": true,
+          "source_quote": "replicate the impact of the natural product on target engagement when used by humans, and assess whether there is an association between the degree of the impact on target engagement and functional or clinical outcomes",
+          "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html"
+        }
+      ],
+      "scope_label": "NCCIH Natural Product Early Phase Clinical Trial Award (R33 Clinical Trial Required)",
+      "source_fingerprint": "f550f9636d9e6c07ffb5304f553b1dc38ed8436916732810499572e742e79877",
+      "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000046",
+            "urh-000111"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000046",
+            "urh-000158"
+          ]
+        }
+      ],
+      "why_team": "Gang Fan contributes target engagement biomarker specialist. Pooja Rajendra Bhalode contributes pharmacological/formulation specialist."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "363095",
+      "members": [
+        {
+          "claim_id": "urh-000025-c002",
+          "claim_revision": 1,
+          "contribution": "Preclinical Pharmacology/Toxicology Scientist",
+          "evidence_phrase": "inner-ear pharmacokinetics",
+          "evidence_term": "Vestibular and inner-ear therapeutics",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000025",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
+          "why_person": "Demonstrated inner-ear pharmacokinetic modeling shows transferable PK methodology applicable to general preclinical PK evaluation, though not evidenced in a systemic small-molecule drug context."
+        },
+        {
+          "claim_id": "urh-000158-c005",
+          "claim_revision": 1,
+          "contribution": "Formulation and GMP Manufacturing Specialist",
+          "evidence_phrase": "controlled drug delivery",
+          "evidence_term": "controlled drug delivery",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000158",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/",
+          "why_person": "Controlled drug delivery expertise directly supports the formulation development activities central to this role."
+        }
+      ],
+      "missing_skills": [
+        "Medicinal Chemistry Lead",
+        "Clinical Development Coordinator",
+        "Project Principal Investigator/Program Coordination"
+      ],
+      "objective": "Advance promising small-molecule therapeutic candidates from investigator-initiated discovery through preclinical development and into Phase I clinical testing, leveraging NIH-supported subject matter experts and CROs for medicinal chemistry, pharmacokinetics/toxicology, formulation, and GMP synthesis.",
+      "opportunity_number": "PAR-28-043",
+      "parent_id": "363095",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-1",
+          "label": "Medicinal Chemistry Lead",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "capabilities in medicinal chemistry, pharmacokinetics, toxicology, formulation development, GMP synthesis, and Phase I clinical testing",
+          "source_url": "https://www.grants.gov/search-results-detail/363095"
+        },
+        {
+          "accepted_terms": [
+            "Toxicology and biological-effects models",
+            "Vestibular and inner-ear therapeutics",
+            "biomedical transport modeling"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000025",
+            "urh-000089",
+            "urh-000157"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000025-c002",
+              "coverage": "method_transfer",
+              "material_hash": "8a5b02d4378f669e895e1ea14f639643f4e8635ed2d1f0c759acee25d64af000",
+              "reason": "Demonstrated inner-ear pharmacokinetic modeling shows transferable PK methodology applicable to general preclinical PK evaluation, though not evidenced in a systemic small-molecule drug context.",
+              "researcher_id": "urh-000025",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000089-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
+              "reason": "Cutaneous barrier toxicology modeling reflects transferable toxicological modeling skills applicable to preclinical safety assessment, though the tissue/route context differs from systemic small-molecule toxicology.",
+              "researcher_id": "urh-000089",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "method_transfer",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling expertise can inform pharmacokinetic/biodistribution assessment methodology, though not directly tied to small-molecule PK studies.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Preclinical Pharmacology/Toxicology Scientist",
+          "rationale": "Demonstrated inner-ear pharmacokinetic modeling shows transferable PK methodology applicable to general preclinical PK evaluation, though not evidenced in a systemic small-molecule drug context. Cutaneous barrier toxicology modeling reflects transferable toxicological modeling skills applicable to preclinical safety assessment, though the tissue/route context differs from systemic small-molecule toxicology. Biomedical transport modeling expertise can inform pharmacokinetic/biodistribution assessment methodology, though not directly tied to small-molecule PK studies.",
+          "required": true,
+          "source_quote": "medicinal chemistry, pharmacokinetics, toxicology, formulation development, GMP synthesis, and Phase I clinical testing",
+          "source_url": "https://www.grants.gov/search-results-detail/363095"
+        },
+        {
+          "accepted_terms": [
+            "controlled drug delivery",
+            "solvent-based extraction"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000111",
+            "urh-000158"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000158-c005",
+              "coverage": "direct",
+              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
+              "reason": "Controlled drug delivery expertise directly supports the formulation development activities central to this role.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000111-c009",
+              "coverage": "method_transfer",
+              "material_hash": "4a6ad18d63ce87644cf42e23fd5a0d08c7d69ee918b6339c1293ef89e93251c6",
+              "reason": "Solvent-based extraction techniques are methodologically transferable to purification steps relevant to GMP synthesis, but the evidence does not describe GMP manufacturing or regulatory compliance experience.",
+              "researcher_id": "urh-000111",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Formulation and GMP Manufacturing Specialist",
+          "rationale": "Controlled drug delivery expertise directly supports the formulation development activities central to this role. Solvent-based extraction techniques are methodologically transferable to purification steps relevant to GMP synthesis, but the evidence does not describe GMP manufacturing or regulatory compliance experience.",
+          "required": true,
+          "source_quote": "formulation development, GMP synthesis, and Phase I clinical testing",
+          "source_url": "https://www.grants.gov/search-results-detail/363095"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Clinical Development Coordinator",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "contract research organizations (CROs) with capabilities in medicinal chemistry, pharmacokinetics, toxicology, formulation development, GMP synthesis, and Phase I clinical testing",
+          "source_url": "https://www.grants.gov/search-results-detail/363095"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-5",
+          "label": "Project Principal Investigator/Program Coordination",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "The project principal investigator(s) and NIH program staff will work jointly with NIH-supported subject matter experts to coordinate and participate in all scientific and technical management aspects of the project.",
+          "source_url": "https://www.grants.gov/search-results-detail/363095"
+        }
+      ],
+      "scope_label": "Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development",
+      "source_fingerprint": "52882569a76d0c687e6490f37b9ed9d5bac342569f9670956fce8f42b562600b",
+      "source_url": "https://www.grants.gov/search-results-detail/363095",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000025",
+            "urh-000158"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000089",
+            "urh-000158"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000157",
+            "urh-000158"
+          ]
+        }
+      ],
+      "why_team": "Choongheon Lee contributes preclinical pharmacology/toxicology scientist. Melodie I. Lawton contributes formulation and gmp manufacturing specialist."
     }
   ],
   "pool_counts": {
