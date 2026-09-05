@@ -131,7 +131,7 @@ test("hosted Potential matching remains query-only while the page explains the b
   );
   assert.match(launch, /context: ""/);
   assert.doesNotMatch(launch, /profile|cv_text|orcid/i);
-  assert.match(searchPage, /hosted Potential matching requires a typed topic/);
+  assert.match(searchPage, /[Hh]osted Potential matching requires a typed topic/);
   assert.match(help, /Your CV, full profile, researcher names, and ORCID publication text are not sent/);
   assert.match(help, /When you explicitly use AI refinement, chat, or an institution question/);
 });

@@ -43,3 +43,13 @@ Focused validation before PR:
 - No private files, live alert submission or paid AI operation was used. Existing runtime fixtures verify CV/notice extraction, request/privacy payloads, and async AI/team lifecycle behavior.
 
 Complete protected Python/browser gates and the configured comprehensive review run through the PR on the exact committed candidate. This document records pre-PR evidence, not a claim that pending review or deployment has completed. No workflow or automatic-refresh policy is changed; E2E remains manual-only and was not run or polled.
+
+## Completed review and consolidated remediation
+
+PR #139 candidate `32bdcd9f1e038cd870f447b8bb8039df62b5e9a6` received a terminal Codex review (`5119125245`, 2026-09-05 01:10:33 UTC) with one finding: native form validation could block submission while an invalid Refine control was in the closed drawer. Protected run `33935125796` passed Python and 629 of 630 browser contracts; the single browser failure was a case-sensitive assertion for the now sentence-initial word “Hosted.”
+
+After collecting the full conversation, submitted review, inline thread and reactions, the read-only audit covered all search-form constraints, nested disclosures, native/canonical/Enter submission paths, profile validation focus, status custody and hosted-query privacy copy/contracts. The bounded remediation adds one capturing invalid-event owner to the existing form. Native validation continues to block an invalid submission; the handler opens Refine and all ancestor disclosures, focuses the first invalid control, announces the browser's validation message through the existing live status, and leaves values unchanged. Additional invalid controls in the same validation pass cannot steal focus. The privacy-copy assertion accepts sentence-initial capitalization while retaining the same typed-topic and private-context restrictions. No search eligibility, native constraints or payload logic is bypassed.
+
+All 50 targeted remediation contracts passed. Native verification reproduced the reported flow with `award-min=500` and both the drawer and nested Deadline and award disclosure closed: Find funding reopened the drawer, expanded the disclosure, focused the field and announced its native validation message. Changing the amount to `1000` and pressing Enter submitted successfully through the original form and retained the expected query/filter URL.
+
+The corrected candidate requires its own protected gates and exactly one exact-head re-review. No edits were made while the first review was pending.

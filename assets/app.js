@@ -2230,6 +2230,9 @@
     const dialog = $("refine-search");
     const section = sectionId ? $(sectionId) : null;
     if (section?.tagName === "DETAILS") section.open = true;
+    for (let disclosure = target?.closest("details"); disclosure && dialog.contains(disclosure); disclosure = disclosure.parentElement?.closest("details")) {
+      disclosure.open = true;
+    }
     const restoreStatus = () => $("search-ai-status-slot").append($("ai-status"));
     try {
       if (!globalThis.SiteShell?.openDrawer) throw new Error("Search drawer unavailable");
@@ -5185,6 +5188,19 @@
       event.preventDefault();
       startSearch();
     });
+    let invalidSearchField = null;
+    $("search-form").addEventListener("invalid", event => {
+      const field = event.target;
+      if (!field.closest("#refine-search")) return;
+      // Native validation still blocks submission. Reveal its first failing
+      // control even when the drawer or a nested filter disclosure is closed.
+      event.preventDefault();
+      if (invalidSearchField) return;
+      invalidSearchField = field;
+      setTimeout(() => { invalidSearchField = null; }, 0);
+      $("search-status").textContent = field.validationMessage || "Check this search setting before trying again.";
+      openRefineSearch(document.activeElement, "", field);
+    }, true);
     $("query").addEventListener("input", invalidateRefinementForCriteriaChange);
     $("nofo-file").addEventListener("change", event => {
       const file = event.target.files?.[0];

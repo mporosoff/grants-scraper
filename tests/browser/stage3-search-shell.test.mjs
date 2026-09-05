@@ -213,6 +213,41 @@ test("successful search closes Refine, compacts the header and focuses its retai
   assert.match($("search-status").textContent, /Search complete/);
 });
 
+test("native invalid events reopen Refine and all nested disclosures at the first invalid field without submitting", async () => {
+  const dom = fixture();
+  const { context, $, document, state } = dom;
+  const source = fn("bindEvents");
+  const binding = source.slice(source.indexOf("    let invalidSearchField = null;"), source.indexOf('    $("query").addEventListener("input"'));
+  assert.match(binding, /addEventListener\("invalid",[\s\S]*\}, true\)/);
+  assert.equal((source.match(/addEventListener\("invalid"/g) || []).length, 1);
+  assert.doesNotMatch(page + app, /novalidate|formnovalidate|noValidate|formNoValidate/);
+  vm.runInContext(binding, context);
+  const field = $("award-min");
+  field.value = "500";
+  field.validationMessage = "Please enter a valid value. The two nearest valid values are 0 and 1000.";
+  $("find-funding").focus();
+  const invalid = dom.dispatch("invalid", field);
+  assert.equal(invalid.prevented, true);
+  assert.equal($("refine-search").open, true);
+  assert.equal($("filter-panel").open, true);
+  assert.equal(field.closest("details").open, true);
+  assert.equal(document.activeElement, field);
+  assert.equal($("search-status").textContent, field.validationMessage);
+  assert.equal($("refine-search").contains($("search-status")), true);
+  assert.equal(state.searched, false);
+  assert.equal(field.value, "500");
+  $("orcid-id").validationMessage = "Another invalid field";
+  dom.dispatch("invalid", $("orcid-id"));
+  assert.equal(document.activeElement, field, "later invalid controls cannot steal the first field's focus");
+  assert.equal(dom.dispatch("invalid", $("query")).prevented, false, "other form controls retain their native handling");
+  context.SiteShell.closeDrawer($("refine-search"));
+  assert.equal(document.activeElement, $("find-funding"));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  dom.dispatch("invalid", $("orcid-id"));
+  assert.equal(document.activeElement, $("orcid-id"));
+  assert.equal($("profile-builder").open, true);
+});
+
 test("the drawer submit routes to the original form and canonical submitter through the existing delegate", () => {
   const source = fn("bindEvents");
   assert.equal((source.match(/\$\("search-form"\)\.addEventListener\("submit"/g) || []).length, 1);
