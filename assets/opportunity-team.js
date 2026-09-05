@@ -243,7 +243,9 @@
     var value = normalize(query);
     if (!options.showAll && value.length < 2) return [];
     var terms = value.split(" ").filter(Boolean);
-    return (data.faculty || []).map(function (profile) {
+    return (data.faculty || []).filter(function (profile) {
+      return (!profile.status || profile.status === "active") && profile.pool_visibility !== "hidden";
+    }).map(function (profile) {
       var name = normalize(profile.name);
       var unit = normalize(profile.home_unit);
       var capabilities = normalize((profile.terms || []).map(function (term) {

@@ -81,6 +81,17 @@ test("scope availability grows without a fixed pilot count and rejects mismatche
   assert.throws(() => api.validateData(data), /incompatible/);
 });
 
+test("directory search omits inactive, departed, and hidden researchers while preserving identities", () => {
+  const { api, data } = loadApi();
+  api.validateData(data, data.generation_id);
+  const original = api.searchFaculty(data, "Porosoff")[0];
+  for (const changes of [{ status: "inactive" }, { status: "departed" }, { pool_visibility: "hidden" }]) {
+    const changed = { ...data, faculty: data.faculty.map(row => row.id === original.id ? { ...row, ...changes } : row) };
+    assert.equal(api.searchFaculty(changed, "Porosoff").length, 0);
+    assert.ok(changed.faculty.some(row => row.id === original.id));
+  }
+});
+
 test("stale teams are withheld without blocking the directory or unaffected scopes", () => {
   const { api, data, index } = loadApi();
   data.opportunities[0].review_state = "needs_revalidation";

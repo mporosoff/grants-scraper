@@ -10,14 +10,16 @@ import {
   reconcilePublication, seedApprovedProfile, validateApprovalAgainstCurrentRegistry,
 } from "../../workers/researcher-intake/src/index.js";
 import { ResearcherSubmissionStore } from "../../workers/researcher-intake/src/store.js";
+import { catalogRemovalProfile, validateCatalogRemoval, validateCatalogRemovalApproval } from "../../workers/researcher-intake/src/catalog.js";
 
 const root = new URL("../../", import.meta.url);
-const [workerSource, storeSource, migration, transitionMigration, targetMigration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
+const [workerSource, storeSource, migration, transitionMigration, targetMigration, catalogMigration, workflow, refreshWorkflow, deploymentWorkflow, wrangler] = await Promise.all([
   readFile(new URL("workers/researcher-intake/src/index.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/src/store.js", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0001_researcher_submissions.sql", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0002_unique_transition_revisions.sql", root), "utf8"),
   readFile(new URL("workers/researcher-intake/migrations/0003_publication_recovery_target.sql", root), "utf8"),
+  readFile(new URL("workers/researcher-intake/migrations/0004_catalog_removals.sql", root), "utf8"),
   readFile(new URL(".github/workflows/publish-researcher-registry.yml", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-researcher-intake.yml", root), "utf8"),
@@ -508,7 +510,7 @@ test("administrator access cryptographically verifies issuer, audience, expiry, 
     headers: { "Cf-Access-Jwt-Assertion": assertion },
   }), env);
   assert.equal(response.status, 200);
-  assert.match(await response.text(), /Researcher submissions/);
+  assert.match(await response.text(), /Researcher administration/);
 });
 
 test("queue schema, worker config, and publication workflow preserve the registry-only boundary", () => {
@@ -563,7 +565,7 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workerSource, /Start review before approving this request/);
   assert.match(workerSource, /fail\("identity_conflict"/);
   assert.match(workerSource, /store\.markPublishing\(current\.submission_id, expectedRevision, actor, now\(\)\.toISOString\(\), approvedProfile, reason\)/);
-  assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| seedApprovedProfile/);
+  assert.match(workerSource, /approved_profile: detail\.approved_profile \|\| \(detail\.catalog_action/);
   assert.doesNotMatch(workerSource, /function defaultProfile\(/);
   assert.match(workerSource, /\["approved", "publication_failed"\]\.includes\(current\.state\)/);
   assert.match(workerSource, /body\.action === "reconcile_publish"/);
@@ -579,6 +581,7 @@ test("a failed stale publication can be rebased only through an audited re-revie
   database.exec(migration);
   database.exec(transitionMigration);
   database.exec(targetMigration);
+  database.exec(catalogMigration);
   const store = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await store.create({
     submissionId: "rs_aaaaaaaaaaaaaaaaaaaaaaaa", idempotencyKey: "12345678-1234-4234-8234-123456789abc",
@@ -622,6 +625,7 @@ test("state updates roll back when their audit insert fails", async () => {
   database.exec(migration);
   database.exec(transitionMigration);
   database.exec(targetMigration);
+  database.exec(catalogMigration);
   const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await normalStore.create({
     submissionId: "rs_bbbbbbbbbbbbbbbbbbbbbbbb", idempotencyKey: "22345678-1234-4234-8234-123456789abc",
@@ -661,6 +665,7 @@ test("an approved record can resume publication or rebase after a transient tran
   database.exec(migration);
   database.exec(transitionMigration);
   database.exec(targetMigration);
+  database.exec(catalogMigration);
   const normalStore = new ResearcherSubmissionStore(new SqliteD1(database));
   async function approvedRecord(id, key) {
     const created = await normalStore.create({
@@ -827,6 +832,7 @@ test("retention clears private fields from collection time despite later activit
   database.exec(migration);
   database.exec(transitionMigration);
   database.exec(targetMigration);
+  database.exec(catalogMigration);
   const store = new ResearcherSubmissionStore(new SqliteD1(database));
   const created = await store.create({
     submissionId: "rs_cccccccccccccccccccccccc", idempotencyKey: "32345678-1234-4234-8234-123456789abc",
@@ -845,4 +851,165 @@ test("retention clears private fields from collection time despite later activit
   assert.equal(retained.state, "under_review");
   assert.equal(retained.contact_email, null);
   assert.equal(retained.submitter_note, null);
+});
+
+async function catalogHarness() {
+  const database = new DatabaseSync(":memory:");
+  for (const sql of [migration, transitionMigration, targetMigration, catalogMigration]) database.exec(sql);
+  const store = new ResearcherSubmissionStore(new SqliteD1(database));
+  const person = {
+    id: "urh-000001", name: "Ada Lovelace", sort_name: "Lovelace, Ada", aliases: [], orcid_id: "",
+    home_unit: "Computing", relationship: "hajim_core_faculty", pool_visibility: "department",
+    status: "active", auto_proposable: true, research_summary: "Computational methods.",
+    source_urls: ["https://example.edu/ada"], source_checked_date: "2026-08-01",
+    claims: [{ claim_id: "urh-000001-c001", revision: 2, status: "active", label: "Analytical engines",
+      category: "Computing", categories: ["Computing"], type: "Capability", evidence: "Published analytical engine research.",
+      source_urls: ["https://example.edu/ada"], verified_on: "2026-08-01", evidence_level: "direct", legacy_claim_ids: [] }],
+  };
+  const directory = { registry_generation: "a".repeat(64), researchers: [person] };
+  const pair = await crypto.subtle.generateKey({ name: "RSASSA-PKCS1-v1_5", modulusLength: 2048,
+    publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" }, true, ["sign", "verify"]);
+  const publicKey = await crypto.subtle.exportKey("jwk", pair.publicKey);
+  publicKey.kid = "catalog-test";
+  const header = base64url({ alg: "RS256", kid: publicKey.kid });
+  const payload = base64url({ iss: "https://test.cloudflareaccess.com", aud: ["catalog-admin"],
+    exp: Math.floor(Date.now() / 1000) + 600, email: "admin@example.edu" });
+  const signingInput = header + "." + payload;
+  const signature = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", pair.privateKey, new TextEncoder().encode(signingInput));
+  const token = signingInput + "." + Buffer.from(signature).toString("base64url");
+  const env = { ...environment(), ADMIN_EMAILS: "admin@example.edu", ACCESS_TEAM_DOMAIN: "https://test.cloudflareaccess.com",
+    ACCESS_AUD: "catalog-admin", PUBLIC_SITE_ROOT: "https://site.example", REGISTRY_MANIFEST_URL: "https://site.example/manifest.json",
+    GITHUB_REPOSITORY: "test/repo", GITHUB_DISPATCH_TOKEN: "fake-test-token" };
+  const dispatches = [];
+  const fetchImpl = async (url, options) => {
+    if (url.endsWith("/certs")) return Response.json({ keys: [publicKey] });
+    if (url === env.REGISTRY_MANIFEST_URL) return Response.json({ registry_generation: directory.registry_generation });
+    if (url.includes("researcher_directory.js")) return new Response("globalThis.RESEARCHER_DIRECTORY = " + JSON.stringify(directory) + ";");
+    if (url.includes("opportunity_teams.js")) return new Response(JSON.stringify({ opportunities: [{ id: "topic-1", members: [{ faculty_id: person.id }] }] }));
+    if (url.includes("faculty_matches.js")) return new Response(JSON.stringify({ faculty: { Ada: { researcher_id: person.id } }, pi_matches: { Ada: [{ id: "call-1" }] } }));
+    if (url.endsWith("/dispatches")) { dispatches.push(JSON.parse(options.body)); return new Response(null, { status: 204 }); }
+    throw new Error("Unexpected fetch " + url);
+  };
+  const handler = createHandler({ storeFactory: () => store, fetchImpl });
+  const request = async (path, body, headers = {}) => handler(new Request("https://worker.example" + path, {
+    method: body ? "POST" : "GET", headers: { "Cf-Access-Jwt-Assertion": token, "Content-Type": "application/json",
+      Origin: "https://worker.example", ...headers }, ...(body ? { body: JSON.stringify(body) } : {}),
+  }), env);
+  const removal = (overrides = {}) => ({ researcher_id: person.id, base_registry_generation: directory.registry_generation,
+    action: "retired", reason: "Retired this academic year", idempotency_key: crypto.randomUUID(), ...overrides });
+  return { database, store, person, directory, dispatches, request, removal, env, fetchImpl };
+}
+
+test("admin catalog removal preserves evidence, requires approval, and publishes through the existing workflow", async () => {
+  const h = await catalogHarness();
+  try {
+    const listing = await h.request("/admin/api/catalog");
+    assert.equal(listing.status, 200);
+    assert.equal((await listing.json()).researchers[0].name, "Ada Lovelace");
+    const body = h.removal();
+    const created = await h.request("/admin/api/catalog", body);
+    assert.equal(created.status, 201);
+    const result = await created.json();
+    assert.equal(result.state, "pending");
+    const path = "/admin/api/submissions/" + result.submission_id;
+    const detail = await (await h.request(path)).json();
+    assert.equal(detail.catalog_action, "retired");
+    assert.equal(detail.approved_profile.status, "inactive");
+    assert.equal(detail.approved_profile.pool_visibility, "hidden");
+    assert.equal(detail.approved_profile.auto_proposable, false);
+    assert.deepEqual(Object.keys(detail.approved_profile).sort(), ["auto_proposable", "pool_visibility", "status"]);
+    assert.deepEqual(detail.current_profile.claims, h.person.claims);
+    assert.deepEqual(detail.material_effect.affected_team_scopes, ["topic-1"]);
+    assert.deepEqual(detail.material_effect.affected_matches, ["call-1"]);
+    assert.equal(detail.material_effect.classification, "catalog_removal");
+    assert.equal(detail.transitions[0].actor, "admin@example.edu");
+    assert.match(detail.transitions[0].reason, /retired/);
+    assert.equal(h.dispatches.length, 0);
+    const premature = await h.request(path + "/action", { action: "approve", expected_revision: 1, approved_profile: detail.approved_profile });
+    assert.equal(premature.status, 409);
+    const reviewing = await h.request(path + "/action", { action: "start_review", expected_revision: 1, reason: detail.administrator_reason });
+    assert.equal(reviewing.status, 200);
+    const tampered = await h.request(path + "/action", { action: "approve", expected_revision: 2,
+      approved_profile: { ...detail.approved_profile, research_summary: "Unrelated edit" } });
+    assert.equal(tampered.status, 409);
+    const published = await h.request(path + "/action", { action: "approve", expected_revision: 2,
+      approved_profile: detail.approved_profile, reason: detail.administrator_reason });
+    assert.equal(published.status, 200);
+    assert.equal((await published.json()).state, "publishing");
+    assert.equal(h.dispatches.length, 1);
+    assert.equal(h.dispatches[0].event_type, "researcher-registry-publish");
+    const repeatedApproval = await h.request(path + "/action", { action: "approve", expected_revision: 2, approved_profile: detail.approved_profile });
+    assert.equal(repeatedApproval.status, 409);
+    assert.equal(h.dispatches.length, 1);
+    h.directory.registry_generation = "b".repeat(64);
+    const replay = await h.request("/admin/api/catalog", body);
+    assert.equal(replay.status, 200);
+    assert.equal((await replay.json()).submission_id, result.submission_id);
+  } finally { h.database.close(); }
+});
+
+test("admin catalog rejects unauthorized, cross-origin, stale, unknown, invalid, and duplicate removal requests", async () => {
+  const h = await catalogHarness();
+  try {
+    assert.equal((await h.request("/admin/api/catalog", undefined, { "Cf-Access-Jwt-Assertion": "" })).status, 403);
+    assert.equal((await h.request("/admin/api/catalog", h.removal(), { "Cf-Access-Jwt-Assertion": "" })).status, 403);
+    assert.equal((await h.request("/admin/api/catalog", h.removal(), { Origin: "https://evil.example" })).status, 403);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ base_registry_generation: "c".repeat(64) }))).status, 409);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ researcher_id: "urh-999999" }))).status, 404);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ reason: "" }))).status, 400);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ action: "delete" }))).status, 400);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ approved_profile: {} }))).status, 400);
+    const body = h.removal();
+    const responses = await Promise.all([h.request("/admin/api/catalog", body), h.request("/admin/api/catalog", body)]);
+    assert.deepEqual(responses.map(row => row.status).sort(), [200, 201]);
+    const results = await Promise.all(responses.map(row => row.json()));
+    assert.equal(results[0].submission_id, results[1].submission_id);
+    assert.equal((await h.request("/admin/api/catalog", { ...body, action: "departed" })).status, 409);
+    assert.equal((await h.request("/admin/api/catalog", h.removal())).status, 409);
+    assert.equal(h.database.prepare("SELECT COUNT(*) AS n FROM researcher_submissions").get().n, 1);
+    assert.equal(h.dispatches.length, 0);
+  } finally { h.database.close(); }
+});
+
+test("removal intent survives a registry rebase without reviving or rewriting research claims", async () => {
+  const h = await catalogHarness();
+  try {
+    const created = await (await h.request("/admin/api/catalog", h.removal({ action: "departed" }))).json();
+    const path = "/admin/api/submissions/" + created.submission_id;
+    const oldDetail = await (await h.request(path)).json();
+    h.directory.registry_generation = "d".repeat(64);
+    h.person.claims[0].label = "Updated current research";
+    h.person.claims[0].revision += 1;
+    const stale = await validateApprovalAgainstCurrentRegistry(await h.store.byId(created.submission_id), oldDetail.approved_profile, h.env, h.fetchImpl).catch(error => error);
+    assert.equal(stale.code, "stale_registry_generation");
+    const rebased = await h.request(path + "/action", { action: "rebase", expected_revision: 1 });
+    assert.equal(rebased.status, 200);
+    const detail = await (await h.request(path)).json();
+    assert.equal(detail.catalog_action, "departed");
+    assert.equal(detail.approved_profile.status, "departed");
+    assert.equal(detail.current_profile.claims[0].label, "Updated current research");
+    assert.equal(detail.current_profile.claims[0].revision, 3);
+    assert.equal(detail.material_effect.changed_claims, 0);
+    const checked = await validateApprovalAgainstCurrentRegistry(await h.store.byId(created.submission_id), detail.approved_profile, h.env, h.fetchImpl);
+    assert.equal(checked.auto_proposable, false);
+  } finally { h.database.close(); }
+});
+
+test("all current catalog profiles can be removed without inventing evidence or discarding identities", async () => {
+  const source = await readFile(new URL("data/researcher_directory.js", root), "utf8");
+  const directory = JSON.parse(source.slice(source.indexOf("{")).trim().replace(/;$/, ""));
+  for (const person of directory.researchers) {
+    for (const action of ["retired", "departed", "inactive"]) {
+      const profile = catalogRemovalProfile(person, action);
+      assert.doesNotThrow(() => validateCatalogRemovalApproval(person, action, profile), person.name);
+      assert.deepEqual(Object.keys(profile).sort(), ["auto_proposable", "pool_visibility", "status"]);
+      assert.equal(profile.status, action === "departed" ? "departed" : "inactive");
+    }
+  }
+  assert.throws(() => validateSubmission({ ...submission(), catalog_action: "retired" }), /unsupported fields/);
+  assert.throws(() => validateCatalogRemoval(null), /invalid/);
+  const dom = loadHtml(ADMIN_HTML);
+  assert.equal(dom("#catalog-removal").length, 1);
+  assert.deepEqual(dom("#catalog-action option").map((_, el) => dom(el).attr("value")).get(), ["retired", "departed", "inactive"]);
+  assert.equal(dom("#catalog-submit").text(), "Review removal");
 });

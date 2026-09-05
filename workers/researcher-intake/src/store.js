@@ -42,19 +42,19 @@ export class ResearcherSubmissionStore {
         submission_id, idempotency_key, payload_hash, receipt_token_hash, schema_version,
         submission_type, source_surface, researcher_id, base_registry_generation,
         proposed_profile_json, contact_email, submitter_note, privacy_notice_version,
-        state, revision, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 1, ?, ?)`)
+        state, revision, created_at, updated_at, catalog_action, administrator_email, administrator_reason
+      ) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', 1, ?, ?, ?, ?, ?)`)
         .bind(
           row.submissionId, row.idempotencyKey, row.payloadHash, row.receiptTokenHash,
           row.submissionType, row.sourceSurface, row.researcherId,
           row.baseRegistryGeneration, JSON.stringify(row.proposedProfile),
           row.contactEmail || null, row.submitterNote || null, row.privacyNoticeVersion,
-          row.createdAt, row.createdAt,
+          row.createdAt, row.createdAt, row.catalogAction || null, row.actor || null, row.reason || null,
         ),
       this.db.prepare(`INSERT INTO researcher_submission_transitions
         (submission_id, from_state, to_state, actor, revision, reason, created_at)
-        VALUES (?, NULL, 'pending', 'public_submitter', 1, NULL, ?)`)
-        .bind(row.submissionId, row.createdAt),
+        VALUES (?, NULL, 'pending', ?, 1, ?, ?)`)
+        .bind(row.submissionId, row.actor || "public_submitter", row.reason || null, row.createdAt),
     ];
     await this.db.batch(statements);
     return this.byId(row.submissionId);
@@ -71,11 +71,17 @@ export class ResearcherSubmissionStore {
   async listQueue(limit = 100) {
     const result = await this.db.prepare(`SELECT submission_id, submission_type, source_surface,
       researcher_id, proposed_profile_json, base_registry_generation, state, revision,
-      created_at, updated_at, failure_code
+      created_at, updated_at, failure_code, catalog_action, administrator_reason
       FROM researcher_submissions
       WHERE state NOT IN ('published', 'rejected', 'superseded')
       ORDER BY created_at ASC LIMIT ?`).bind(limit).all();
     return (result.results || []).map(row => ({ ...row, proposed_profile: parseJson(row.proposed_profile_json, {}) }));
+  }
+
+  async activeCatalogRemoval(researcherId) {
+    return this.db.prepare(`SELECT submission_id FROM researcher_submissions
+      WHERE researcher_id = ? AND catalog_action IS NOT NULL
+        AND state NOT IN ('published', 'rejected', 'superseded')`).bind(researcherId).first();
   }
 
   async adminDetail(id) {
