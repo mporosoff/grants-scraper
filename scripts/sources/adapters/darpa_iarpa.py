@@ -39,6 +39,7 @@ _NOT_ACCEPTING = re.compile(
     r"proposals are not (?:being )?(?:requested|accepted))\b|"
     r"\b(?:call|solicitation|opportunity|submissions?|proposals?|submission window)\s+"
     r"(?:(?:is|are|has been|have been)\s+)?(?:now\s+)?closed\b|"
+    r"\bstatus\s*[:\-\u2013\u2014]\s*closed\b|"
     r"^\s*closed(?:\s*[:\u2014\u2013]|\s+-\s+|\s*$)|\(\s*closed\s*\)", re.I
 )
 
@@ -46,6 +47,27 @@ _NOT_ACCEPTING = re.compile(
 def plain(html):
     html = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", html or "", flags=re.I | re.S)
     return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", html))).strip()
+
+
+def not_accepting(html):
+    # Preserve standalone HTML status markers that disappear into prose when
+    # flattened, without mistaking technical terms such as closed-loop for one.
+    return bool(_NOT_ACCEPTING.search(plain(html))
+                or re.search(r">\s*closed[.!]?\s*<", html or "", re.I))
+
+
+def darpa_in_scope(row):
+    text = " ".join(plain(row.get(field)) for field in (
+        "title", "field_body_with_summary", "field_body_with_summary_1"
+    ))
+    return bool(_DARPA_SCOPE.search(text))
+
+
+def darpa_excluded(row):
+    text = " ".join(row.get(field) or "" for field in (
+        "title", "field_body_with_summary", "field_body_with_summary_1"
+    ))
+    return not darpa_in_scope(row) or _NON_CALL.search(plain(row["title"])) or not_accepting(text)
 
 
 def official_url(value, base, host, prefix=None):
@@ -100,6 +122,7 @@ def darpa_inventory(rows):
     if not isinstance(rows, list) or not rows or len(rows) > 2000:
         raise ValueError("DARPA opportunity inventory missing or unexpected shape")
     grouped = {}
+    conflicts = set()
     required = {"title", "field_opportunity_number", "field_close_date", "field_external_url"}
     for row in rows:
         if not isinstance(row, dict) or not required.issubset(row):
@@ -110,14 +133,9 @@ def darpa_inventory(rows):
         if not child:
             if _PARENT.fullmatch(key):
                 continue  # Recognized umbrellas are a legitimate non-child population.
-            text = " ".join(plain(row.get(field)) for field in (
-                "title", "field_body_with_summary", "field_body_with_summary_1"
-            ))
             # A nonempty inventory is not sufficient proof of a healthy zero:
             # in-scope research rows with unknown identifiers mean parser drift.
-            if (key.startswith("darpapa") or _DARPA_SCOPE.search(text)) and not (
-                _NON_CALL.search(plain(row["title"])) or _NOT_ACCEPTING.search(text)
-            ):
+            if not darpa_excluded(row):
                 raise ValueError(f"Unrecognized DARPA research solicitation number: {number!r}")
             continue
         number = "DARPA-PA-" + "-".join(child.groups())
@@ -128,10 +146,17 @@ def darpa_inventory(rows):
                 if len(value or "") > len(prior.get(field) or ""):
                     prior[field] = value
             elif prior.get(field) and value and prior[field] != value and field in required:
-                raise ValueError(f"Conflicting DARPA inventory rows for {number}")
+                conflicts.add(key)
             elif value and not prior.get(field):
                 prior[field] = value
-    return list(grouped.values())
+    # A child-shaped number alone does not establish Disruption/QBI scope.
+    # Filter after joining summaries and before fetching any detail pages, so
+    # an unrelated or explicitly closed program cannot fail this adapter.
+    selected = [row for row in grouped.values() if not darpa_excluded(row)]
+    for row in selected:
+        if normalized_number(row["field_opportunity_number"]) in conflicts:
+            raise ValueError(f"Conflicting DARPA inventory rows for {row['field_opportunity_number']}")
+    return selected
 
 
 def darpa_program_url(row):
@@ -269,20 +294,15 @@ class DarpaIarpaAdapter(SourceAdapter):
         for row in rows:
             number = plain(row["field_opportunity_number"]).upper()
             summary = plain(row.get("field_body_with_summary") or row.get("field_body_with_summary_1"))
-            text = row["title"] + " " + summary
-            if _NON_CALL.search(row["title"]) or _NOT_ACCEPTING.search(text):
-                skipped["darpa_not_actionable_research"] += 1
-                continue
-            if (not _DARPA_SCOPE.search(text)
-                    or not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I)):
-                raise ValueError(f"DARPA child research scope/submission evidence missing: {number}")
+            if not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I):
+                raise ValueError(f"DARPA child research submission evidence missing: {number}")
             url = darpa_program_url(row)
             if not url or not notice_url(row["field_external_url"]):
                 raise ValueError(f"DARPA required official route missing or unsupported: {number}")
             if url not in pages:
                 raise ValueError(f"DARPA detail page missing: {url}")
             block = darpa_opportunity_block(pages[url], number)
-            if _NOT_ACCEPTING.search(plain(block)):
+            if not_accepting(block):
                 skipped["darpa_not_accepting"] += 1
                 continue
             close = labelled_date(block, "Deadline")

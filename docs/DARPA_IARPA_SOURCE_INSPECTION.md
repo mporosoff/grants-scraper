@@ -16,6 +16,10 @@ One enabled `darpa-iarpa` adapter discovers individual DARPA PA topics, requires
 Disruption/QBI research submission language, and confirms the exact child
 number, official solicitation link and current date on its linked program page.
 It does not infer an application date from an event or an umbrella PA.
+Child-shaped PA numbers for other programs are excluded before detail fetching;
+only established Disruption/QBI scope makes submission evidence required.
+Explicit closed status markers, including standalone HTML labels, exclude the
+corresponding child while leaving its open siblings available.
 
 | Individual call | Solicitation | Program-page submission deadline |
 |---|---|---|

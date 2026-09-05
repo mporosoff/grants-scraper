@@ -178,6 +178,38 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(set(call.args[0] for call in get.call_args_list), set(pages))
         self.assertEqual(get.call_count, 5)
 
+    def test_unrelated_pa_children_are_excluded_before_detail_fetch(self):
+        data = with_iarpa()
+        seed = next(row for row in data["darpa"] if row["field_opportunity_number"] == "DARPA-PA-25-07-06")
+        other = {**seed, "title": "Other program research", "field_opportunity_number": "DARPA-PA-26-99-01",
+                 "field_body_with_summary": '<p>Inviting submissions for another program. <a href="/research/programs/unrelated">Program</a></p>',
+                 "field_body_with_summary_1": ""}
+        data["darpa"].extend([other, {**other, "field_external_url": "https://sam.gov/search/"},
+                              {**other, "field_opportunity_number": "DARPA-PA-FY26-UNRELATED"}])
+        pages = {DARPA_LIST: json.dumps(data["darpa"]), IARPA_LIST: data["iarpa"], **data["pages"]}
+        instance = adapter()
+        with patch.object(instance._client, "get_text", side_effect=pages.__getitem__) as get:
+            self.assertEqual(instance.collect(), records(with_iarpa()))
+        self.assertFalse(any("unrelated" in call.args[0] for call in get.call_args_list))
+        data["darpa"] = [other]
+        data["iarpa"] = payload()["iarpa"]
+        with patch.object(instance, "fetch", return_value=data):
+            published, results = collect([instance])
+        self.assertEqual(published, [])
+        self.assertTrue(results[0].ok)
+
+    def test_darpa_explicit_closed_markers_exclude_only_the_exact_call(self):
+        for marker in ["Status: CLOSED", "Status — CLOSED", "<strong>CLOSED</strong>", "<span>Closed.</span>"]:
+            data = with_iarpa()
+            data["pages"][QBI] = data["pages"][QBI].replace(
+                "Nov. 30, 2026", f"Nov. 30, 2026</p><p>{marker}")
+            instance = adapter()
+            with self.subTest(marker=marker), patch.object(instance, "fetch", return_value=data):
+                published, results = collect([instance])
+                self.assertTrue(results[0].ok)
+                self.assertEqual(len(published), 4)
+                self.assertNotIn("DARPA-PA-26-02-02", [r["opportunity_number"] for r in published])
+
 
 class IarpaTests(unittest.TestCase):
     def test_open_research_call_uses_proposal_date_and_own_sponsor(self):
@@ -254,7 +286,13 @@ class ConfirmationHealthTests(unittest.TestCase):
         for row in data["darpa"]:
             row["field_body_with_summary"] = ""
             row["field_body_with_summary_1"] = ""
-        self.assert_degraded(data, "scope/submission evidence")
+        self.assert_degraded(data, "research submission evidence")
+        data = payload()
+        for row in data["darpa"]:
+            if row["field_opportunity_number"].startswith("DARPA-PA-"):
+                row["field_body_with_summary"] = "Disruption Opportunity: research details."
+                row["field_body_with_summary_1"] = ""
+        self.assert_degraded(data, "research submission evidence")
 
     def test_inverted_windows_degrade_for_both_sponsors(self):
         data = payload()
