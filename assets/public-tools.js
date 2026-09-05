@@ -35,12 +35,14 @@
       const editing = teamEditor.contains(focused);
       if (mobile.matches) {
         sheetBody.append(teamEditor);
-        if (editing) open(focused);
+        // Sidebar focus is the desktop fallback for the sheet's own controls.
+        // Carry that context through repeated breakpoint changes as well.
+        if (editing || focused === sidebar) open(editing ? focused : null);
       } else {
         const wasOpen = sheet.open;
         shell.closeDrawer(sheet, { restoreFocus: false });
         sidebar.append(teamEditor);
-        if (wasOpen) (editing && !focused.disabled ? focused : sidebar).focus({ preventScroll: true });
+        if (wasOpen || focused === opener) (editing && !focused.disabled ? focused : sidebar).focus({ preventScroll: true });
       }
       document.documentElement.classList.add("team-sheet-ready");
     }
@@ -87,7 +89,8 @@
     if (!target) return;
     if (awardDialog?.contains(target) && !awardDialog.open) return awardOpener.focus({ preventScroll: true });
     const panel = target.closest("[data-award-view-panel]");
-    if (panel) showAwardView(panel.dataset.awardViewPanel);
+    const view = target.dataset.awardView || panel?.dataset.awardViewPanel;
+    if (view) showAwardView(view);
     revealField(target);
     target.focus({ preventScroll: true });
   }

@@ -50,6 +50,9 @@
     const topEdge = viewport?.offsetTop || 0;
     const gap = 8;
     menu.style.maxWidth = `${Math.max(0, width - 2 * gap)}px`;
+    // Pinch zoom can make the visual viewport narrower than the CSS minimum.
+    // Constrain both bounds so the minimum cannot override the maximum.
+    menu.style.minWidth = `min(15rem, ${Math.max(0, width - 2 * gap)}px)`;
     menu.style.maxHeight = `${Math.max(0, height - 2 * gap)}px`;
     const anchor = opener.getBoundingClientRect();
     const box = menu.getBoundingClientRect();

@@ -124,6 +124,54 @@ test("Award hierarchy keeps canonical primary/advanced criteria, counts, facets,
   assert.equal($("[data-award-view-panel] #ii-source-status").length, 0);
 });
 
+test("Repeated team breakpoints never leave focus in the hidden sidebar or mobile opener", async () => {
+  const dom = fixture(team, true);
+  const sheet = dom.get("team-editor-sheet"), sidebar = dom.get("team-sidebar");
+  const done = sheet.querySelector("[data-shell-drawer-close]");
+  const editor = dom.get("team-editor-content");
+  dom.click("edit-team");
+  assert.equal(dom.document.activeElement, done);
+  for (let cycle = 0; cycle < 3; cycle += 1) {
+    dom.resize(false);
+    assert.equal(dom.document.activeElement, sidebar);
+    assert.equal(sheet.open, false);
+    dom.resize(true);
+    assert.equal(sheet.open, true);
+    assert.equal(dom.document.activeElement, done);
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal(sheet.open, true, "Queued native close must not disturb the reopened editor");
+    assert.equal(dom.get("team-editor-content"), editor);
+  }
+  dom.dispatch("click", done);
+  assert.equal(dom.document.activeElement.id, "edit-team");
+  dom.resize(false);
+  assert.equal(dom.document.activeElement, sidebar, "The closed sheet's opener also disappears on desktop");
+  dom.get("filter").focus();
+  dom.resize(true);
+  assert.equal(sheet.open, false, "Resizing while working in results must not open a modal");
+  assert.equal(dom.document.activeElement.id, "filter");
+});
+
+test("Award history restores every switcher and panel focus target to its corresponding view", () => {
+  const dom = fixture(awards);
+  const targets = {
+    projects: ["award-view-projects", "ii-page-size"],
+    investigators: ["award-view-investigators", "ii-investigators"],
+    programs: ["award-view-programs", "ii-programs"],
+    institutions: ["award-view-institutions", "ii-institutions"],
+  };
+  for (const [view, ids] of Object.entries(targets)) for (const id of ids) {
+    assert.ok(dom.get(id), id);
+    dom.api.resetAwardViews();
+    dom.api.restoreAwardFocus(id);
+    assert.equal(dom.document.activeElement.id, id);
+    for (const other of Object.keys(targets)) {
+      assert.equal(dom.get(`award-${other}`).hidden, other !== view);
+      assert.equal(dom.get(`award-view-${other}`).getAttribute("aria-pressed"), String(other === view));
+    }
+  }
+});
+
 test("Award views are presentation only and preserve canonical facet values, page controls and history focus", () => {
   const dom = fixture(awards);
   dom.get("ii-investigators").value = "all";

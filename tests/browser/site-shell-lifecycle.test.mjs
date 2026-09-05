@@ -150,3 +150,29 @@ test("single card menu delegates original data, fits at 320px, and cleans up aft
   assert.equal(menu.hidden, true);
   assert.equal(menu.querySelectorAll("button").length, 0);
 });
+
+test("menus fit every release width and the smaller panned visual viewport during pinch zoom", () => {
+  const dom = fixture();
+  // The viewport listener is registered at initialization, so use the existing
+  // window resize callback to exercise the same positioning function.
+  const reposition = dom.windowListeners.find(item => item.type === "resize").callback;
+  const menu = dom.get("actions");
+  const viewport = { width: 320, height: 640, offsetLeft: 0, offsetTop: 0 };
+  dom.context.visualViewport = viewport;
+  menu.getBoundingClientRect = () => ({
+    width: Math.min(280, parseFloat(menu.style.maxWidth)),
+    height: Math.min(400, parseFloat(menu.style.maxHeight)),
+  });
+  dom.click("more");
+  for (const width of [320, 360, 390, 430, 768, 1280, 160]) {
+    Object.assign(viewport, { width, height: width === 160 ? 220 : 640, offsetLeft: width === 160 ? 70 : 0, offsetTop: 35 });
+    dom.get("more").rect = { right: viewport.offsetLeft + width - 4, top: 600, bottom: 638 };
+    reposition();
+    const box = menu.getBoundingClientRect();
+    assert.equal(menu.style.minWidth, `min(15rem, ${width - 16}px)`, "A layout-viewport minimum cannot override the visual-viewport maximum");
+    assert.ok(parseFloat(menu.style.left) >= viewport.offsetLeft + 8);
+    assert.ok(parseFloat(menu.style.left) + box.width <= viewport.offsetLeft + width - 8);
+    assert.ok(parseFloat(menu.style.top) >= viewport.offsetTop + 8);
+    assert.ok(parseFloat(menu.style.top) + box.height <= viewport.offsetTop + viewport.height - 8);
+  }
+});
