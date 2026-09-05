@@ -29,6 +29,14 @@ material. Reviewed content changes, additional identities and retired claims rem
 possible. Fault-injection tests reject removed, renumbered or reassigned identities
 independently of whether someone also rebuilds every generated projection.
 
+The historical fixture is supplemented by the protected pre-change registry on
+every run. PR/push CI fetches the event's protected base SHA explicitly (including
+with shallow checkouts); refresh and registry-publication checks compare their
+uncommitted output with checked-out main. Thus newly accepted researchers and
+claims become protected automatically after publication, without rewriting the
+historical fixture. A next-generation regression proves those additions cannot
+subsequently disappear. Missing protected baseline provenance fails the CI gate.
+
 The mobile clipping regression now waits for an actual team member before testing
 headings, badges and rows at normal and enlarged text sizes; the loading placeholder
 cannot satisfy the test. This follow-up changes only validation and documentation.
