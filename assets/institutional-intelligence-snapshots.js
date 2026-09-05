@@ -366,7 +366,7 @@
     $("ii-po-source").textContent = state.programOfficerScope?.source || "";
     $("ii-institution-field").classList.toggle("hidden", officerMode);
     $("ii-ask-heading").textContent = officerMode ? "Optional AI Q&A about this Program Officer snapshot" : "Optional: Ask about this institution";
-    $("ii-ask-summary").textContent = officerMode ? "Hosted AI interprets the question; deterministic retrieval still uses the full stored snapshot" : "Answer from returned public NSF, NIH, DOE, and DoD award evidence";
+    $("ii-ask-summary").textContent = officerMode ? "Hosted AI interprets the question; deterministic retrieval still uses the full stored snapshot" : "Select an institution in the search form, then ask a question to start a search of public NSF, NIH, DOE, and DoD awards. Answers use the returned award evidence.";
     $("ii-question-label").textContent = officerMode ? `Question about ${state.programOfficerScope?.display_name || "this exact source-listed contact"}` : "Question about the selected institution";
     $("ii-key-heading").textContent = officerMode ? "Choose hosted AI or an optional personal provider" : "Choose hosted AI or the optional personal provider used by Funding Finder";
     $("ii-question").placeholder = officerMode ? "Example: Which projects involve catalysis?" : "Who at this institution has received awards from DOE BES?";

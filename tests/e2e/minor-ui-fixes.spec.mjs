@@ -50,6 +50,13 @@ test("Funded Awards opens directly on the working search without the redundant b
   );
   await expect(page.locator("#ii-form")).toBeVisible();
   await expect(page.locator(".ii-shell-heading")).toHaveCount(0);
+  for (let cycle = 0; cycle < 2; cycle += 1) {
+    await page.locator("#open-awards-ai").click();
+    await expect(page.locator("#ii-ask-summary")).toContainText("ask a question to start a search");
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#open-awards-ai")).toBeFocused();
+    await page.locator("#ii-clear").click();
+  }
   await expect(page.getByText("Funded Award Intelligence", { exact: true })).toHaveCount(0);
   expect(runtimeErrors).toEqual([]);
 });
