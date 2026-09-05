@@ -51,6 +51,8 @@ faculty.csv
 .pnpm-store/
 .wrangler/
 node_modules/
+.cache/
+audit-*.log
 playwright-report/
 test-results/
 

@@ -1,0 +1,66 @@
+{
+  "reviewed_source_commit": "5ce46c8c25cd89d907845c085be75d140cbb093b",
+  "scope_count": 10,
+  "scopes": [
+    {
+      "scope_id": "332894:superconducting-qubits",
+      "record_type": "declared_branch",
+      "source_fingerprint": "db30a27db65962943f15c173a4059e1de5cc77171257d90949259d548a41850f",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "344592:ab-0019",
+      "record_type": "publishable_child",
+      "source_fingerprint": "5dfbd8eb2aec670cab2622d598fdd7d54bf1efa82959b599b9533c5c03bd85b4",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "344592:ab-0079",
+      "record_type": "publishable_child",
+      "source_fingerprint": "23c7433b678c6501ee97c9de0f01d5f7ea744752bbd6ec0da872d4b8921e6a47",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "358021",
+      "record_type": "specific_parent",
+      "source_fingerprint": "ff0caa6162d37567f4e3456878ba496e5dcd1d3bdb89df13a816fdb5d0d461e0",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "361050",
+      "record_type": "specific_parent",
+      "source_fingerprint": "9875af8e2a67a32d13ae3e63c19a198661b90c92fa5e73d3a0532a9434ffd20b",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "361205",
+      "record_type": "specific_parent",
+      "source_fingerprint": "330a7ae72c5492a6b22fbaffcf0c48e94ed62c6d5360431ca5c2a622dbcff485",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "361526:g-12",
+      "record_type": "publishable_child",
+      "source_fingerprint": "73a1123aaf0aa328c0cb1b235e126d8f6f3f9a35cbcb800119a9ff727276c6df",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "363375",
+      "record_type": "specific_parent",
+      "source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "363489",
+      "record_type": "specific_parent",
+      "source_fingerprint": "680f970dca797d2d0aad6e9dc5e1705090ac7fab6124f99cc73e0dc33da18cf0",
+      "matches_reviewed_source": true
+    },
+    {
+      "scope_id": "eere-exchange:DE-TA1-0003589",
+      "record_type": "declared_branch",
+      "source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
+      "matches_reviewed_source": true
+    }
+  ]
+}

@@ -340,7 +340,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-retrieval.js?v={opportunity_team_generation}"></script>',
+            f'<script src="./assets/search-retrieval.js?v={hashlib.sha256((REPOSITORY_ROOT / "assets/search-retrieval.js").read_bytes()).hexdigest()}"></script>',
             explorer_html,
         )
         self.assertIn(

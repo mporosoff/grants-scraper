@@ -2948,7 +2948,15 @@
   function opportunityTeamScopeId(match, record) {
     const child = match?.childDroveMatch ? match.bestChild?.record : null;
     const childIdentifier = child?.subtopic_id || child?.opportunity_id || "";
-    if (childIdentifier) return String(childIdentifier);
+    if (childIdentifier) {
+      try {
+        return OPPORTUNITY_TEAM_API?.hasAvailableScope({
+          parentId: recordId(record), scopeId: String(childIdentifier),
+        }) ? String(childIdentifier) : "";
+      } catch (_error) {
+        return String(childIdentifier);
+      }
+    }
     return isBroadOpportunity(record) ? "" : recordId(record);
   }
 
@@ -3933,8 +3941,8 @@
     $("filter-team-ready").title = state.teamReadyOnly
       ? "Show every matching opportunity again"
       : availableTeamCount
-        ? `Show only the ${availableTeamCount} matching ${availableTeamCount === 1 ? "opportunity" : "opportunities"} with a reviewed team model`
-        : "No matching opportunity currently has a reviewed team model";
+        ? `Show only the ${availableTeamCount} matching ${availableTeamCount === 1 ? "opportunity" : "opportunities"} with a proposed team`
+        : "No matching opportunity currently has a proposed team";
     focusLinkedOpportunity(display);
     const totalPages = Math.max(1, Math.ceil(display.length / PAGE_SIZE));
     state.page = Math.min(state.page, totalPages);

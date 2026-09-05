@@ -516,6 +516,22 @@ test("team matching resolves a researcher acronym from local profile context", (
   );
 });
 
+test("source capability phrases improve matching and a corrected profile replaces prior interests", () => {
+  const { query, matcher } = loadApis();
+  const catalog = { opportunities: [
+    { opportunity_id: "optics", status: "posted", title: "Freeform optical system design", description: "Design and characterize freeform optical systems.", close_date: "2026-12-31" },
+    { opportunity_id: "catalysis", status: "posted", title: "Electrocatalyst synthesis", description: "Synthesis and characterization of electrocatalysts for oxygen reduction.", close_date: "2026-12-31" },
+  ] };
+  const config = { theme_lexicon: { Methods: ["freeform optical system design", "electrocatalyst synthesis"] } };
+  const options = { now: new Date("2026-09-05T00:00:00Z") };
+  const engine = matcher.create(catalog, config, query, options);
+  const profile = { name: "Researcher", domains: ["Methods"], key_terms: [], keywords: [], capability_phrases: ["freeform optical system design"] };
+  assert.deepEqual(Array.from(engine.matchProfile(profile), match => match.id), ["optics"]);
+  profile.capability_phrases = ["electrocatalyst synthesis"];
+  assert.deepEqual(Array.from(engine.matchProfile(profile), match => match.id), ["catalysis"]);
+  assert.equal(JSON.stringify(engine.matchProfile(profile)), JSON.stringify(matcher.create(catalog, config, query, options).matchProfile(profile)), "same-object edits must match a fresh engine, including vocabulary scores");
+});
+
 test("builds opportunity matches from an external researcher's keywords", () => {
   const { query, retrieval, team } = loadApis();
   const records = [

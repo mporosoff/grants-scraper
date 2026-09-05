@@ -1,0 +1,2321 @@
+{
+  "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+  "counts": {
+    "total": 158,
+    "rankable": 155,
+    "unrankable": 3,
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 121,
+      "standby": 34,
+      "unadmitted": 3
+    },
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    },
+    "status_counts": {
+      "active": 158
+    }
+  },
+  "active_claim_distribution": {
+    "0": 3,
+    "1": 34,
+    "2": 35,
+    "3": 72,
+    "6": 2,
+    "7": 2,
+    "8": 4,
+    "9": 6
+  },
+  "rows": [
+    {
+      "researcher_id": "urh-000001",
+      "name": "Aaron Bauer",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000002",
+      "name": "Aaron White",
+      "active_claim_count": 1,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/white_aaron/index.html",
+        "https://aaronstevenwhite.io/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.sas.rochester.edu/lin/news/2026-03-18-white.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000003",
+      "name": "Adam Sefkow",
+      "active_claim_count": 3,
+      "official_interest_count": 7,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
+        "https://hajim.rochester.edu/me/sites/sefkow/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000004",
+      "name": "Agnes E. Thorarinsdottir",
+      "active_claim_count": 3,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
+        "https://sas.rochester.edu/chm/groups/thorarinsdottir/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://sas.rochester.edu/chm/groups/thorarinsdottir/index.php/research/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000005",
+      "name": "Alexander A. Shestopalov",
+      "active_claim_count": 8,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+        "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000006",
+      "name": "Alice C. Quillen",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-09-01",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html",
+        "https://astro.pas.rochester.edu/~aquillen/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4118",
+        "https://www.sciencedirect.com/author/7005482444/alice-c-quillen"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000007",
+      "name": "Allison J. Lopatkin",
+      "active_claim_count": 7,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+        "https://lopatkinlab.com/index.html",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://lopatkinlab.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000008",
+      "name": "Andrea Pickel",
+      "active_claim_count": 1,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/pickel_andrea/index.html",
+        "https://labsites.rochester.edu/pickel/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000009",
+      "name": "Andrew J. Berger",
+      "active_claim_count": 2,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-09-01",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
+        "https://blogs.rochester.edu/bslrochester ",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000010",
+      "name": "Andrew N. Jordan",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/jordan_andrew/index.html",
+        "https://sites.google.com/view/andrewnjordan/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000011",
+      "name": "Anne E. Luebke",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/luebke_anne/index.html",
+        "https://www.urmc.rochester.edu/labs/luebke.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000012",
+      "name": "Anne S. Meyer",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
+        "https://sites.google.com/site/annemeyerlab/home",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000013",
+      "name": "Anson Kahng",
+      "active_claim_count": 2,
+      "official_interest_count": 13,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html",
+        "https://ansonkahng.com",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000014",
+      "name": "Astrid M. Müller",
+      "active_claim_count": 9,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+        "https://astridmuellergroup.org",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000015",
+      "name": "Benjamin E. Partridge",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
+        "https://sas.rochester.edu/chm/groups/partridge/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000016",
+      "name": "Benjamin L. Miller",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
+        "https://www.urmc.rochester.edu/labs/Miller-Lab/",
+        "https://www.urmc.rochester.edu/people/21977435-benjamin-l-miller",
+        "https://www.urmc.rochester.edu/labs/benjamin-miller.aspx",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000017",
+      "name": "Benjamin Storer",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://bastorer.github.io/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC10732517/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000018",
+      "name": "Benjamín Castañeda",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/castaneda-benjamin/index.html",
+        "https://www.urmc.rochester.edu/labs/global-health-medical-devices-lab",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000019",
+      "name": "Bradley L. Nilsson",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
+        "https://www.sas.rochester.edu/chm/groups/nilsson/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000020",
+      "name": "Brandon R. Barnett",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
+        "https://sas.rochester.edu/chm/groups/barnett",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.sas.rochester.edu/chm/people/faculty/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000021",
+      "name": "Brian Kruschwitz",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000022",
+      "name": "Chen Ding",
+      "active_claim_count": 2,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html",
+        "https://www.cs.rochester.edu/u/cding/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000023",
+      "name": "Chenliang Xu",
+      "active_claim_count": 1,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/xu_chenliang/index.html",
+        "https://www.cs.rochester.edu/u/cxu22/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000024",
+      "name": "Cherice Natasha Hill",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/hill_cherice/index.html",
+        "https://www.urmc.rochester.edu/labs/cherice-hill-lab.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+        "https://www.urmc.rochester.edu/labs/cherice-hill-lab"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000025",
+      "name": "Choongheon Lee",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000026",
+      "name": "Christopher Kanan",
+      "active_claim_count": 1,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/kanan_chris/index.html",
+        "https://chriskanan.com/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://chriskanan.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000027",
+      "name": "Chuang Ren",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000028",
+      "name": "Chunlei Guo",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
+        "https://hajim.rochester.edu/optics/sites/guo",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000029",
+      "name": "Danae Polsin",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000030",
+      "name": "Daniel Gildea",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/gildea_daniel/index.html",
+        "https://www.cs.rochester.edu/~gildea/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000031",
+      "name": "Daniel Stefankovic",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
+        "https://www.cs.rochester.edu/u/stefanko/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000032",
+      "name": "Darren Lipomi",
+      "active_claim_count": 8,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-09-01",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+        "https://www.lipomigroup.org",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+        "https://www.lipomigroup.org/pubs",
+        "https://www.lipomigroup.org/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000033",
+      "name": "David R. Harding",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000034",
+      "name": "David R. Williams",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
+        "https://aria.cvs.rochester.edu/#&amp;panel1-1",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.urmc.rochester.edu/people/112358817-david-r-williams",
+        "https://aria.cvs.rochester.edu/team/williams/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000035",
+      "name": "David W. McCamant",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
+        "https://www.sas.rochester.edu/chm/groups/mccamant/index.php",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000036",
+      "name": "Diane Dalecki",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
+        "https://www.urmc.rochester.edu/labs/dalecki.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000037",
+      "name": "Douglas H. Kelley",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
+        "https://hajim.rochester.edu/me/sites/kelley/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000038",
+      "name": "Eby G. Friedman",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/friedman_eby/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000039",
+      "name": "Edmund Lalor",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/lalor_edmund/index.html",
+        "https://www.urmc.rochester.edu/labs/lalor.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000040",
+      "name": "Edward Brown III",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html",
+        "https://www.urmc.rochester.edu/labs/brown.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000041",
+      "name": "Ehsan Hoque",
+      "active_claim_count": 2,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+        "https://hoques.com/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://hoques.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000042",
+      "name": "Eileen Otte",
+      "active_claim_count": 1,
+      "official_interest_count": 10,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/otte-eileen/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000043",
+      "name": "Elena Lomakina",
+      "active_claim_count": 1,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.urmc.rochester.edu/people/23097780-elena-lomakina",
+        "https://www.urmc.rochester.edu/labs/waugh.aspx",
+        "https://hajim.rochester.edu/bme/people/research_faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000044",
+      "name": "Ellen Matson",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/matson-ellen/index.html",
+        "https://www.ellenmatsonlab.com/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.ellenmatsonlab.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000045",
+      "name": "Fatemeh Nargesian",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html",
+        "https://fnargesian.com/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://fnargesian.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000046",
+      "name": "Gang Fan",
+      "active_claim_count": 8,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+        "https://www.gangfanclub.com/",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.gangfanclub.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000047",
+      "name": "Gary W. Wicks",
+      "active_claim_count": 2,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/wicks_gary/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=6914"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000048",
+      "name": "Gaurav Sharma",
+      "active_claim_count": 1,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/sharma_gaurav/index.html",
+        "https://www.ece.rochester.edu/~gsharma/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000049",
+      "name": "Gilbert 'Rip' Collins",
+      "active_claim_count": 3,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000050",
+      "name": "Gonzalo Mateos",
+      "active_claim_count": 1,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
+        "https://www.ece.rochester.edu/~gmateosb/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000051",
+      "name": "Gourab Ghoshal",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/ghoshal_gourab/index.html",
+        "https://gghoshal.pas.rochester.edu/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.pas.rochester.edu/people/faculty/ghoshal_gourab/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000052",
+      "name": "Greg Schmidt",
+      "active_claim_count": 2,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/schmidt_greg/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000053",
+      "name": "Gregory Heyworth",
+      "active_claim_count": 1,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html",
+        "https://lazarusprojectimaging.com/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://lazarusprojectimaging.com",
+        "https://sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000054",
+      "name": "Hanan Dery",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=14832"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000055",
+      "name": "Hangfeng He",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/hangfeng_he/index.html",
+        "https://hornhehhf.github.io/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://hornhehhf.github.io",
+        "https://www.cs.rochester.edu/u/www/people/faculty/hangfeng_he/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000056",
+      "name": "Hesam Askari",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/askari_hesam/index.html",
+        "https://www.hajim.rochester.edu/me/sites/askari/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/me/sites/askari/publications/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000057",
+      "name": "Hui Wu",
+      "active_claim_count": 3,
+      "official_interest_count": 10,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
+        "https://www.hajim.rochester.edu/ece/sites/laics/",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000058",
+      "name": "Hussein Aluie",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
+        "https://www.complexflowgroup.com/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://journals.aps.org/prfluids/abstract/10.1103/PhysRevFluids.8.114601"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000059",
+      "name": "Ibrahim Mohammad",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/about/faculty/new2425.html",
+        "https://hajim.rochester.edu/me/sites/kelley/papers/MohammadDissertation.pdf"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000060",
+      "name": "Ignacio Franco",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-09-01",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html",
+        "https://sas.rochester.edu/chm/groups/franco/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000061",
+      "name": "J. Ryan Rygg",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000062",
+      "name": "Jack G. Mottley",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000063",
+      "name": "Jaime Cardenas",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
+        "https://www.hajim.rochester.edu/optics/cardenas/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000064",
+      "name": "Jake Bromage",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/bromage_jake/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000065",
+      "name": "James M. Zavislan",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.urmc.rochester.edu/people/112359210-james-m-zavislan"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000066",
+      "name": "James McGrath",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/mcgrath_james/index.html",
+        "https://www.urmc.rochester.edu/labs/mcgrath.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000067",
+      "name": "James R. Fienup",
+      "active_claim_count": 3,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
+        "https://labsites.rochester.edu/fienup/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000068",
+      "name": "Jannick Rolland",
+      "active_claim_count": 3,
+      "official_interest_count": 13,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
+        "https://odalab-spectrum.org/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000069",
+      "name": "Jennifer D. T. Kruschwitz",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_jen/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://opg.optica.org/ao/abstract.cfm?uri=ao-65-5-A12"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000070",
+      "name": "Jessica Shang",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
+        "https://labsites.rochester.edu/shanglab/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000071",
+      "name": "Jiaming Liang",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html",
+        "https://jiaming-liang.github.io/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000072",
+      "name": "Jiebo Luo",
+      "active_claim_count": 3,
+      "official_interest_count": 7,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
+        "https://www.cs.rochester.edu/u/jluo/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=85"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000073",
+      "name": "John Criswell",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html",
+        "https://www.cs.rochester.edu/u/criswell/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000074",
+      "name": "John Lambropoulos",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/lambropoulos_john/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000075",
+      "name": "John M. Nichol",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
+        "https://labsites.rochester.edu/nicholgroup",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://labsites.rochester.edu/nicholgroup/publications/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000076",
+      "name": "John Palastro",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/palastro_john/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000077",
+      "name": "Jonathan D. Zuegel",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000078",
+      "name": "Jonathan Davies",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000079",
+      "name": "Jong Hoon Nam",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
+        "https://www.urmc.rochester.edu/labs/nam.aspx",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000080",
+      "name": "Julie Bentley",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=15875"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000081",
+      "name": "Kaave Hosseini",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html",
+        "https://www.cs.rochester.edu/u/shossei2/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000082",
+      "name": "Kathryn Knowles",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
+        "https://www.sas.rochester.edu/chm/groups/knowles/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000083",
+      "name": "Kimberly Boster",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+        "https://hajim.rochester.edu/me/sites/kelley/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000084",
+      "name": "Krystel Huxlin",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
+        "https://www.urmc.rochester.edu/people/23346062-krystel-huxlin",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000085",
+      "name": "Lane A. Hemaspaandra",
+      "active_claim_count": 1,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/hemaspaandra_lane/index.html",
+        "https://www.cs.rochester.edu/u/lane/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000086",
+      "name": "Laura Slane",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000087",
+      "name": "Laurel H. Carney",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/carney_laurel/index.html",
+        "https://www.urmc.rochester.edu/labs/carney.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000088",
+      "name": "Lewis Rothberg",
+      "active_claim_count": 3,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
+        "https://www.sas.rochester.edu/chm/groups/rothberg/index.htm",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000089",
+      "name": "Lisa A. DeLouise",
+      "active_claim_count": 2,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
+        "https://www.urmc.rochester.edu/labs/delouise.aspx",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000090",
+      "name": "Lisha Chen",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/chen_lisha/index.html",
+        "https://lisha-chen.github.io/www/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://lisha-chen.github.io",
+        "https://hajim.rochester.edu/ece/people/faculty/chen_lisha/index.html",
+        "https://lisha-chen.github.io/www/publication.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000091",
+      "name": "Machiel Blok",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+        "https://labsites.rochester.edu/bloklab/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.pas.rochester.edu/people/faculty/blok_machiel/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000092",
+      "name": "Marc D. Porosoff",
+      "active_claim_count": 8,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+        "https://www.porosoffresearchgroup.com",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000093",
+      "name": "Marisol Herrera-Perez",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/herrera-perez_marisol/index.html",
+        "https://herreralab.org",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000094",
+      "name": "Mark Bocko",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4165"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000095",
+      "name": "Mark Buckley",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
+        "https://www.urmc.rochester.edu/labs/buckley.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000096",
+      "name": "Marvin Doyley",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/affiliated-faculty/doyley_marvin/index.html",
+        "https://www.ece.rochester.edu/projects/doyley_lab/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000097",
+      "name": "Matthew Z. Yates",
+      "active_claim_count": 7,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000098",
+      "name": "Michael Giacomelli",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html",
+        "https://www.urmc.rochester.edu/labs/giacomelli.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000099",
+      "name": "Michael Huang",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+        "https://www.hajim.rochester.edu/ece/sites/michaelhuang/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000100",
+      "name": "Michael T. Ruggiero",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
+        "https://ruggedthz.com/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://ruggedthz.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000101",
+      "name": "Michele Cotrufo",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
+        "https://cotruforesearchlab.github.io/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000102",
+      "name": "Miguel A. Alonso",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/alonso_miguel/index.html",
+        "https://miguel.alonso.perso.centrale-med.fr",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://cv.hal.science/miguel-a-alonso"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000103",
+      "name": "Mitchell Anthamatten",
+      "active_claim_count": 9,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000104",
+      "name": "Mujdat Cetin",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000105",
+      "name": "Niaz Abdolrahim",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
+        "https://www.hajim.rochester.edu/me/sites/abdolrahim/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/me/sites/abdolrahim/publications/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000106",
+      "name": "Nicholas P. Bigelow",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html",
+        "https://www.pas.rochester.edu/~catgroup/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.rochester.edu/newscenter/nicholas-bigelow-michael-scott-aaas-fellows-508742/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000107",
+      "name": "Nickolas A. Vamivakas",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
+        "https://labsites.rochester.edu/vamivakaslab/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000108",
+      "name": "Pablo A. Postigo",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
+        "https://www.postigolab.com",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://hajim.rochester.edu/about/faculty/new2122.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000109",
+      "name": "Paul D. Funkenbusch",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000110",
+      "name": "Pengfei Huo",
+      "active_claim_count": 3,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
+        "https://huogroup.github.io/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://huogroup.github.io"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000111",
+      "name": "Pooja Rajendra Bhalode",
+      "active_claim_count": 9,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+        "https://sites.google.com/view/pooja-bhalode/",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000112",
+      "name": "Qiang Lin",
+      "active_claim_count": 3,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
+        "https://photonlab.hajim.rochester.edu/",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://photonlab.hajim.rochester.edu"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000113",
+      "name": "Rachel Glade",
+      "active_claim_count": 3,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
+        "https://www.rachelglade.com/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.rachelglade.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000114",
+      "name": "Ralf Haefner",
+      "active_claim_count": 1,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/haefner_ralf/index.html",
+        "https://www2.bcs.rochester.edu/sites/haefnerlab/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000115",
+      "name": "Rebecca Irwin",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
+        "https://www.urmc.rochester.edu/labs/irwin-lab",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000116",
+      "name": "Regine Choe",
+      "active_claim_count": 2,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
+        "https://www.urmc.rochester.edu/labs/choe.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000117",
+      "name": "Renato Perucchio",
+      "active_claim_count": 1,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/perucchio_renato/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000118",
+      "name": "Riccardo Betti",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000119",
+      "name": "Robert A. Jacobs",
+      "active_claim_count": 2,
+      "official_interest_count": 2,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
+        "https://www2.bcs.rochester.edu/sites/jacobslab/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000120",
+      "name": "Robert Boyd",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
+        "https://www.hajim.rochester.edu/optics/sites/boyd/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.boydnlo.ca/publications/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000121",
+      "name": "Robert Clark",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000122",
+      "name": "Roman Sobolewski",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.sas.rochester.edu/pas/people/faculty/sobolewski_roman/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000123",
+      "name": "Sean Regan",
+      "active_claim_count": 2,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/regan_sean/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000124",
+      "name": "Selcuk Kose",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
+        "https://selcukkose.com/",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000125",
+      "name": "Siddharth Deshpande",
+      "active_claim_count": 9,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+        "https://www.atomicinterfaces.org",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000126",
+      "name": "Sobhit Singh",
+      "active_claim_count": 2,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
+        "https://sites.google.com/view/sobhit-singh",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000127",
+      "name": "Sreepathi Pai",
+      "active_claim_count": 2,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/pai_sreepathi/index.html",
+        "https://www.cs.rochester.edu/u/sree/",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000128",
+      "name": "Stephen McAleavey",
+      "active_claim_count": 1,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/mcaleavey_stephen/index.html",
+        "https://www.urmc.rochester.edu/labs/mcaleavey.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000129",
+      "name": "Stephen Wu",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
+        "https://labsites.rochester.edu/swulab/",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000130",
+      "name": "Susana Marcos",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
+        "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab.aspx",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.urmc.rochester.edu/people/112362803-susana-marcos",
+        "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000131",
+      "name": "Suxing Hu",
+      "active_claim_count": 3,
+      "official_interest_count": 9,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
+        "https://www.lle.rochester.edu/index.php/education/research-areas/high-energy-density-physics-hedp-theory-group/",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000132",
+      "name": "Svetlana G. Lukishova",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000133",
+      "name": "Thomas G. Brown",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000134",
+      "name": "Thomas M. Howard",
+      "active_claim_count": 0,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/howard_tom/index.html",
+        "https://www.cs.rochester.edu/people/faculty/howard_thomas/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "no retained claim"
+    },
+    {
+      "researcher_id": "urh-000135",
+      "name": "Timothy M. Baran",
+      "active_claim_count": 1,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/baran-timothy/index.html",
+        "https://www.urmc.rochester.edu/labs/baran.aspx",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.urmc.rochester.edu/people/112359996-timothy-m-baran"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000136",
+      "name": "Todd D. Krauss",
+      "active_claim_count": 2,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/krauss_todd/index.html",
+        "https://www.krausslab.com",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000137",
+      "name": "Valeri Goncharov",
+      "active_claim_count": 2,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000139",
+      "name": "Victor L. Genberg",
+      "active_claim_count": 1,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/genberg_victor/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "single retained capability"
+    },
+    {
+      "researcher_id": "urh-000140",
+      "name": "Wayne H. Knox",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/news-events/colloquia/archives/2025/2025-01-27-wayne-knox.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000141",
+      "name": "Wendi Heinzelman",
+      "active_claim_count": 0,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/heinzelman_wendi/index.html",
+        "https://www.ece.rochester.edu/~wheinzel/index.html",
+        "https://www.cs.rochester.edu/people/faculty/heinzelman_wendi/index.html",
+        "https://hajim.rochester.edu/ece/heinzelman/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "no retained claim"
+    },
+    {
+      "researcher_id": "urh-000142",
+      "name": "Wenjie Zang",
+      "active_claim_count": 2,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/zang-wenjie/index.html",
+        "https://www.zang-research.com",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000143",
+      "name": "Whasil Lee",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
+        "https://www.urmc.rochester.edu/labs/whasil-lee.aspx",
+        "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000144",
+      "name": "William Renninger",
+      "active_claim_count": 3,
+      "official_interest_count": 1,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
+        "https://labsites.rochester.edu/renninger/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000145",
+      "name": "Wolfgang Theobald",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000146",
+      "name": "Wyatt E. Tenhaeff",
+      "active_claim_count": 9,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+        "https://tenhaeff.weebly.com/",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000147",
+      "name": "Xi-Cheng Zhang",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
+        "https://labsites.rochester.edu/zhang/",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000148",
+      "name": "Xiangxiang Xu",
+      "active_claim_count": 0,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/xu_xiangxiang/index.html",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/about/faculty/new2526.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": "no retained claim"
+    },
+    {
+      "researcher_id": "urh-000149",
+      "name": "Yanan Guo",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
+        "https://yananguo.com/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://yananguo.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "active_claim_count": 9,
+      "official_interest_count": 7,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+        "https://www.basdoganlab.com/",
+        "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.basdoganlab.com"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000151",
+      "name": "Yuhao Zhu",
+      "active_claim_count": 3,
+      "official_interest_count": 5,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
+        "https://yuhaozhu.com",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000152",
+      "name": "Yukang Yan",
+      "active_claim_count": 3,
+      "official_interest_count": 3,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
+        "https://rochester-bear-lab.github.io/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://rochester-bear-lab.github.io"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000153",
+      "name": "Zachary Robinson",
+      "active_claim_count": 3,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
+        "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://events.uvm.edu/event/physics-colloquium-with-zachary-robinson",
+        "https://avssymposium.org/ALD2026/Sessions/Schedule/88476",
+        "https://avs72.avs.org/committee/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000154",
+      "name": "Zeljko Ignjatovic",
+      "active_claim_count": 2,
+      "official_interest_count": 0,
+      "source_checked_date": "2026-09-01",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/ignjatovic_zeljko/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000155",
+      "name": "Zhen Bai",
+      "active_claim_count": 3,
+      "official_interest_count": 8,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
+        "https://www.cs.rochester.edu/u/zbai7",
+        "https://www.cs.rochester.edu/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000156",
+      "name": "Zhiyao Duan",
+      "active_claim_count": 3,
+      "official_interest_count": 4,
+      "source_checked_date": "2026-08-29",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
+        "https://www.ece.rochester.edu/~zduan/",
+        "https://www.cs.rochester.edu/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000157",
+      "name": "David G. Foster",
+      "active_claim_count": 6,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-09-03",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    },
+    {
+      "researcher_id": "urh-000158",
+      "name": "Melodie I. Lawton",
+      "active_claim_count": 6,
+      "official_interest_count": 6,
+      "source_checked_date": "2026-09-03",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/che/people/faculty/"
+      ],
+      "all_claims_have_evidence_and_sources": true,
+      "coverage_followup": ""
+    }
+  ],
+  "interpretation": "Few claims identify profiles to inspect; they do not prove missing expertise. Existing evidence phrases can improve retrieval immediately. Add scientific claims only from verified sources or approved profile updates."
+}

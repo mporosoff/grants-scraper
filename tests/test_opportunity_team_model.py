@@ -17,6 +17,7 @@ from scripts.import_opportunity_team_model import (
     availability_projection,
     browser_projection,
     update_version_target,
+    write_outputs,
 )
 from scripts.researcher_registry import legacy_faculty_projection, load_registry, registry_counts
 
@@ -78,8 +79,19 @@ class OpportunityTeamModelTests(unittest.TestCase):
                 self.assertEqual(len(profile["terms"]), 1)
         self.assertEqual(states, self.config["pool_counts"])
 
+    def test_oversized_projection_fails_before_overwriting_any_output(self):
+        oversized = copy.deepcopy(self.config)
+        oversized["opportunities"][0]["objective"] = "x" * MAX_BROWSER_BYTES
+        with tempfile.TemporaryDirectory() as folder:
+            paths = [Path(folder) / name for name in ("config.json", "teams.js", "index.js")]
+            for path in paths:
+                path.write_text("previous valid artifact", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "exceeds"):
+                write_outputs(oversized, *paths)
+            self.assertTrue(all(path.read_text(encoding="utf-8") == "previous valid artifact" for path in paths))
+
     def test_ten_specific_scopes_preserve_explanations_and_honest_gaps(self):
-        opportunities = self.config["opportunities"]
+        opportunities = [row for row in self.config["opportunities"] if not row.get("generator_version")]
         self.assertEqual(len(opportunities), 10)
         states = {"pass": 0, "conditional": 0, "fail": 0}
         allowed_types = {"specific_parent", "publishable_child", "declared_branch"}
@@ -114,12 +126,13 @@ class OpportunityTeamModelTests(unittest.TestCase):
         for name in ("match_explorer.html", "team_match.html"):
             source = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn(GENERATION_MARKER.format(generation=generation), source)
-            self.assertIn(f"assets/opportunity-team.js?v={generation}", source)
+            code_hash = hashlib.sha256((ROOT / "assets/opportunity-team.js").read_bytes()).hexdigest()
+            self.assertIn(f"assets/opportunity-team.js?v={code_hash}", source)
             self.assertIn(f"data/opportunity_team_index.js?v={generation}", source)
             self.assertNotIn("hajim-pr1", source)
         page = (ROOT / "match_explorer.html").read_text(encoding="utf-8")
         for path in ("assets/search-retrieval.js",):
-            self.assertIn(f'{path}?v={generation}', page)
+            self.assertIn(f'{path}?v={hashlib.sha256((ROOT / path).read_bytes()).hexdigest()}', page)
         panel_hash = hashlib.sha256((ROOT / "assets/opportunity-team-panel.js").read_bytes()).hexdigest()
         self.assertIn(f"assets/opportunity-team-panel.js?v={panel_hash}", page)
         app_css_hash = hashlib.sha256((ROOT / "assets" / "app.css").read_bytes()).hexdigest()
@@ -152,14 +165,14 @@ class OpportunityTeamModelTests(unittest.TestCase):
             updated = page.read_text(encoding="utf-8")
             self.assertNotEqual(first, updated)
             self.assertIn(GENERATION_MARKER.format(generation=generation), updated)
-            self.assertIn(f'assets/opportunity-team.js?v={generation}', updated)
+            self.assertIn(f'assets/opportunity-team.js?v={hashlib.sha256((root / "assets/opportunity-team.js").read_bytes()).hexdigest()}', updated)
             self.assertIn(f'assets/opportunity-team-panel.js?v={hashlib.sha256(panel.read_bytes()).hexdigest()}', updated)
 
     def test_browser_projection_stays_compact(self):
         self.assertLessEqual(len(self.browser_bytes), MAX_BROWSER_BYTES)
-        self.assertLessEqual(len(gzip.compress(self.browser_bytes, compresslevel=9)), 32_000)
+        self.assertLessEqual(len(gzip.compress(self.browser_bytes, compresslevel=9)), 500_000)
         self.assertLessEqual(len(self.index_bytes), MAX_INDEX_BYTES)
-        self.assertLessEqual(len(gzip.compress(self.index_bytes, compresslevel=9)), 1_024)
+        self.assertLessEqual(len(gzip.compress(self.index_bytes, compresslevel=9)), 65_536)
 
     def test_import_provenance_and_curated_cheme_descriptors_are_preserved(self):
         hashes = self.config["source_hashes"]

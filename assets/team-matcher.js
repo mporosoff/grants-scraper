@@ -93,6 +93,10 @@
     return [...new Set(values.filter(Boolean))];
   }
 
+  function profilePhrases(profile) {
+    return uniq([...(profile.key_terms || []), ...(profile.keywords || []), ...(profile.capability_phrases || [])]);
+  }
+
   function create(catalogData, config = {}, searchApi = null, options = {}) {
     const rawRecords = Array.isArray(catalogData?.opportunities)
       ? catalogData.opportunities
@@ -203,8 +207,7 @@
 
     function profileContext(profile) {
       return [
-        ...(profile.key_terms || []),
-        ...(profile.keywords || []),
+        ...profilePhrases(profile),
         profile.research_summary || profile.summary || "",
         String(profile.publication_text || "").slice(0, 12_000),
       ].filter(Boolean).join(". ").slice(0, 24_000);
@@ -244,10 +247,11 @@
     }
 
     function profileVocabulary(profile) {
-      if (profileVocabularyCache.has(profile)) return profileVocabularyCache.get(profile);
-      const terms = new Set();
       const context = profileContext(profile);
-      for (const phrase of profile.key_terms || profile.keywords || []) {
+      const cached = profileVocabularyCache.get(profile);
+      if (cached?.context === context) return cached.values;
+      const terms = new Set();
+      for (const phrase of profilePhrases(profile)) {
         groupDefinitions(phrase, context).forEach(group => {
           if (group.source) terms.add(group.source);
           (group.terms || []).forEach(item => {
@@ -256,7 +260,7 @@
         });
       }
       const values = [...terms];
-      profileVocabularyCache.set(profile, values);
+      profileVocabularyCache.set(profile, { context, values });
       return values;
     }
 
@@ -380,7 +384,7 @@
       let signalCount = 0;
       const context = profileContext(profile);
 
-      for (const phrase of profile.key_terms || profile.keywords || []) {
+      for (const phrase of profilePhrases(profile)) {
         const evidence = phraseEvidence(phrase, prepared, context);
         if (!evidence) continue;
         phraseScore += evidence.score;

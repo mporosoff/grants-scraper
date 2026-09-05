@@ -400,6 +400,7 @@ def match_to_catalog(profiles: list[dict], catalog_path: str, out_path: str,
             "works_count": profile.get("works_count"),
             "research_summary": profile.get("research_summary") or "",
             "key_terms": terms,
+            "capability_phrases": profile.get("capability_phrases") or [],
             "domains": sorted(doms),
             "claim_refs": profile.get("claim_refs") or [],
         }

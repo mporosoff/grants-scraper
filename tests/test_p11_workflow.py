@@ -22,20 +22,25 @@ class P11WorkflowTests(unittest.TestCase):
     def document_step(self):
         return next(step for step in self.steps() if "id: document_evidence" in step)
 
-    def test_anthropic_secret_is_exposed_only_to_document_evidence(self):
+    def test_anthropic_secret_is_scoped_to_document_evidence_and_team_generation(self):
         source = WORKFLOW.read_text(encoding="utf-8")
-        self.assertEqual(source.count("secrets.ANTHROPIC_API_KEY"), 1)
+        self.assertEqual(source.count("secrets.ANTHROPIC_API_KEY"), 2)
         document = self.document_step()
         self.assertIn(
             "        env:\n          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}",
             document,
         )
         for step in self.steps():
-            if "id: document_evidence" in step:
+            if "id: document_evidence" in step or "name: Generate bounded new and changed proposed teams" in step:
                 continue
             self.assertNotIn("ANTHROPIC_API_KEY", step)
         job_preamble = source.split("      - name:", 1)[0]
         self.assertNotIn("ANTHROPIC_API_KEY", job_preamble)
+        team = next(step for step in self.steps() if "name: Generate bounded new and changed proposed teams" in step)
+        self.assertIn("--max-scopes 10 --write", team)
+        self.assertIn("timeout-minutes: 20", team)
+        self.assertIn("continue-on-error: true", team)
+        self.assertIn("secrets.ANTHROPIC_API_KEY", team)
 
     def test_document_step_enables_topics_with_two_explicit_budgets(self):
         document = self.document_step()

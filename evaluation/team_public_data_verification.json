@@ -1,0 +1,7 @@
+{
+  "public_url": "https://mporosoff.github.io/grants-scraper/data/researcher_directory.js",
+  "http_status": 200,
+  "eligible_claim_count": 432,
+  "all_outgoing_claim_text_matches_public_site": true,
+  "public_registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12"
+}

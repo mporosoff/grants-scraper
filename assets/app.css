@@ -1185,6 +1185,12 @@ textarea:focus {
   text-transform: capitalize;
 }
 
+.opportunity-team-scope-options button[aria-pressed="true"] {
+  border-color: var(--ur-meliora-blue, #021bc3);
+  box-shadow: inset 0 0 0 1px var(--ur-meliora-blue, #021bc3);
+  background: #edf3ff;
+}
+
 .opportunity-team-next {
   justify-content: flex-start;
   align-items: center;

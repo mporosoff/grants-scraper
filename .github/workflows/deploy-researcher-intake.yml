@@ -31,6 +31,7 @@ jobs:
       - name: Validate Worker contracts
         run: |
           node --check workers/researcher-intake/src/contract.js
+          node --check workers/researcher-intake/src/catalog.js
           node --check workers/researcher-intake/src/store.js
           node --check workers/researcher-intake/src/index.js
           node --test tests/browser/researcher-intake-worker-contract.test.mjs

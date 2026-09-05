@@ -87,9 +87,9 @@
     panel.className = "opportunity-team-panel";
     panel.id = panelId;
     panel.setAttribute("aria-labelledby", panelId + "-heading");
-    panel.innerHTML = '<div class="opportunity-team-heading"><div><p class="eyebrow">Opportunity-to-team pilot</p>' +
+    panel.innerHTML = '<div class="opportunity-team-heading"><div><p class="eyebrow">Proposed Team</p>' +
       '<h4 id="' + panelId + '-heading" tabindex="-1">Proposed research team</h4></div></div>' +
-      '<div class="opportunity-team-body" role="status" aria-live="polite"><p>Loading the evidence-calibrated role model…</p></div>';
+      '<div class="opportunity-team-body" role="status" aria-live="polite"><p>Loading proposed teams…</p></div>';
     content.appendChild(panel);
     trigger.setAttribute("aria-expanded", "true");
     trigger.setAttribute("aria-controls", "team-builder");
@@ -135,7 +135,7 @@
   }
 
   function stateLabel(view) {
-    if (view.complete && view.opportunity.gate_state === "pass") return "Complete reviewed internal team";
+    if (view.complete && view.opportunity.gate_state === "pass") return "Proposed team with required roles covered";
     if (view.opportunity.gate_state === "fail") return "Insufficient internal role coverage";
     return "Credible internal core with missing skills";
   }
@@ -144,12 +144,12 @@
     var profile = item.profile;
     var evidence = item.evidence;
     var why = evidence && evidence.why_person || (item.roles.length
-      ? profile.name + " has source-backed capability evidence adjacent to " + item.roles.map(function (role) { return role.label; }).join(" and ") + "; the role transfer still requires review."
+      ? profile.name + " has source-backed capability evidence adjacent to " + item.roles.map(function (role) { return role.label; }).join(" and ") + "; exact role coverage remains unconfirmed."
       : "This person remains on the proposed team, but no required role is currently attributed to them.");
     var evidenceLine = evidence
       ? '<p><strong>Evidence:</strong> ' + escapeHtml(evidence.evidence_term) + ' — ' + escapeHtml(evidence.evidence_phrase) + '</p>'
-      : '<p><strong>Evidence:</strong> ' + escapeHtml((profile.terms || []).slice(0, 2).map(function (term) { return term.label; }).join(" · ") || "No retained capability") + '</p>';
-    var source = evidence && evidence.source_url || profile.source_url;
+      : '<p><strong>Evidence:</strong> ' + escapeHtml((item.relevantTerms || []).slice(0, 2).map(function (term) { return term.label + " — " + term.evidence; }).join(" · ") || "No retained capability for this role") + '</p>';
+    var source = evidence && evidence.source_url || (item.relevantTerms || []).flatMap(function (term) { return term.source_urls; })[0] || profile.source_url;
     return '<article class="opportunity-team-member"><div class="opportunity-team-member-title"><div><h5>' + escapeHtml(profile.name) + '</h5><p>' + escapeHtml(profile.home_unit) + '</p></div>' +
       '<button type="button" class="opportunity-team-remove" data-opportunity-team-remove="' + escapeHtml(profile.id) + '" aria-label="Remove ' + escapeHtml(profile.name) + ' from this proposed team">Remove</button></div>' +
       (evidence ? '<p class="opportunity-team-contribution"><strong>Contribution:</strong> ' + escapeHtml(evidence.contribution) + '</p>' : '') +
@@ -164,11 +164,11 @@
     var alternativeNames = role.selected_alternative_ids.map(function (identifier) {
       return engine.facultyById.get(identifier).name;
     });
-    var label = role.filled ? "Covered" : alternativeNames.length ? "Role review required" : role.coverage === "adjacent" ? "Adjacent support only" : "Missing";
+    var label = role.filled ? (role.directEvidence ? "Direct evidence" : "Supported by method transfer") : alternativeNames.length ? "Coverage unconfirmed" : role.coverage === "adjacent" ? "Adjacent support only" : role.required === false ? "Optional extension" : "Missing";
     return '<li class="opportunity-team-role ' + (role.filled ? "filled" : "missing") + '"><div><strong>' + escapeHtml(role.label) + '</strong>' +
       '<span class="opportunity-team-role-state">' + escapeHtml(label) + '</span></div>' +
       (selectedNames.length ? '<p>Attributed to ' + escapeHtml(selectedNames.join(" and ")) + '.</p>' : '') +
-      (alternativeNames.length ? '<p>Source-backed alternative under review: ' + escapeHtml(alternativeNames.join(" and ")) + '.</p>' : '') +
+      (alternativeNames.length ? '<p>Possible source-backed alternative: ' + escapeHtml(alternativeNames.join(" and ")) + '.</p>' : '') +
       '<p>' + escapeHtml(role.rationale) + '</p>' +
       '<a href="' + escapeHtml(role.source_url) + '" target="_blank" rel="noopener">Opportunity role source ↗</a></li>';
   }
@@ -179,7 +179,16 @@
     var body = current.panel.querySelector(".opportunity-team-body");
     var replacementId = current.panel.id + "-replacement";
     var rolesId = current.panel.id + "-roles";
-    var missingSkills = view.opportunity.missing_skills.slice();
+    var options = current.engine.proposalOptions(current.state);
+    var originalIds = view.opportunity.members.map(function (member) { return member.faculty_id; }).sort().join("|");
+    var whyTeam = view.selectedIds.slice().sort().join("|") === originalIds ? view.opportunity.why_team :
+      view.selected.map(function (member) {
+        var supported = member.roles.filter(function (role) { return role.selected_candidate_ids.includes(member.profile.id); });
+        return member.profile.name + (supported.length ? " contributes to " + supported.map(function (role) { return role.label; }).join(" and ") : " offers possible support with role coverage unconfirmed") + ".";
+      }).join(" ") + (view.complete ? "" : " The remaining role gaps are listed below.");
+    var missingSkills = view.opportunity.missing_skills.filter(function (skill) {
+      return !view.roles.some(function (role) { return role.label === skill && role.filled; });
+    });
     view.unfilledRoles.forEach(function (role) {
       if (!missingSkills.includes(role.label)) missingSkills.push(role.label);
     });
@@ -187,19 +196,22 @@
       ? '<div class="opportunity-team-replacement"><label for="' + replacementId + '">Source-backed replacement options</label>' +
         '<div><select id="' + replacementId + '" data-opportunity-team-replacement><option value="">Choose a replacement</option>' +
         view.replacements.map(function (item) {
-          return '<option value="' + escapeHtml(item.profile.id) + '">' + escapeHtml(item.profile.name) + ' — ' + escapeHtml(item.roles.map(function (role) { return role.label; }).join("; ")) + (item.reviewed ? '' : ' (role review required)') + '</option>';
+          return '<option value="' + escapeHtml(item.profile.id) + '">' + escapeHtml(item.profile.name) + ' — ' + escapeHtml(item.roles.map(function (role) { return role.label; }).join("; ")) + (item.reviewed ? '' : ' (coverage unconfirmed)') + '</option>';
         }).join("") + '</select><button type="button" data-opportunity-team-add-replacement disabled>Add to team</button></div></div>'
       : '<p class="opportunity-team-no-replacement">' + (view.selectedIds.length >= 4
-        ? "Remove a team member to compare reviewed replacements."
+        ? "Remove a team member to compare replacement options."
         : "No additional internal faculty member has source-backed evidence for the currently missing roles.") + '</p>';
     body.removeAttribute("role");
-    body.innerHTML = '<div class="opportunity-team-status"><span class="badge ' + (view.complete ? "open" : "warning") + '">' + escapeHtml(stateLabel(view)) + '</span>' +
+    body.innerHTML = (options.length > 1 ? '<div class="opportunity-team-scope-options" aria-label="Proposed team options">' + options.map(function (option, index) {
+      var selected = option.state.selectedIds.slice().sort().join("|") === view.selectedIds.slice().sort().join("|");
+      return '<button type="button" aria-pressed="' + selected + '" data-opportunity-team-variant="' + index + '"><strong>Team option ' + (index + 1) + '</strong><span>' + escapeHtml(option.label) + '</span></button>';
+    }).join("") + '</div>' : '') + '<div class="opportunity-team-status"><span class="badge ' + (view.complete ? "open" : "warning") + '">' + escapeHtml(stateLabel(view)) + '</span>' +
       '<span>' + view.selectedIds.length + ' of 4 team slots used</span></div>' +
       '<h5 class="opportunity-team-scope">' + escapeHtml(view.opportunity.scope_label) + '</h5>' +
       '<p><strong>Specific objective:</strong> ' + escapeHtml(view.opportunity.objective) + '</p>' +
-      '<div class="opportunity-team-why"><strong>Why this team</strong><p>' + escapeHtml(view.opportunity.why_team) + '</p></div>' +
+      '<div class="opportunity-team-why"><strong>Why this team</strong><p>' + escapeHtml(whyTeam) + '</p></div>' +
       '<div class="opportunity-team-members">' + view.selected.map(memberCard).join("") + '</div>' +
-      '<section class="opportunity-team-roles" aria-labelledby="' + rolesId + '"><h5 id="' + rolesId + '">Required roles and evidence</h5><ul>' +
+      '<section class="opportunity-team-roles" aria-labelledby="' + rolesId + '"><h5 id="' + rolesId + '">Roles for this research approach</h5><ul>' +
       view.roles.map(function (role) { return roleRow(role, current.engine); }).join("") + '</ul></section>' +
       (missingSkills.length ? '<section class="opportunity-team-gaps"><h5>Missing skills to recruit</h5><ul>' + missingSkills.map(function (skill) { return '<li>' + escapeHtml(skill) + '</li>'; }).join("") + '</ul></section>' : '') +
       replacement +
@@ -212,7 +224,7 @@
     if (!reconcile(current)) return;
     var body = current.panel.querySelector(".opportunity-team-body");
     body.removeAttribute("role");
-    body.innerHTML = '<h5>Choose a specific opportunity topic</h5><p>This parent call is too broad for automatic team assembly. Select one reviewed child or declared branch.</p>' +
+    body.innerHTML = '<h5>Choose a specific opportunity topic</h5><p>This parent call is too broad for automatic team assembly. Select a specific child topic or declared branch.</p>' +
       '<div class="opportunity-team-scope-options">' + scopes.map(function (scope) {
         return '<button type="button" data-opportunity-team-scope="' + escapeHtml(scope.id) + '"><strong>' + escapeHtml(scope.scope_label) + '</strong><span>' + escapeHtml(scope.record_type.replace(/_/g, " ")) + '</span></button>';
       }).join("") + '</div>';
@@ -225,9 +237,10 @@
       return;
     }
     var messages = {
-      unsupported_scope: "This opportunity does not yet have a reviewed role-and-team model.",
+      unsupported_scope: "This opportunity does not yet have a proposed team for a specific research topic.",
       not_current: "This opportunity is no longer current, so its saved team model is not displayed.",
       broad_parent_rejected: "A broad parent program cannot receive an automatic team proposal. Choose a specific child or declared branch.",
+      needs_revalidation: "Researcher interests or eligibility changed. This team is awaiting revalidation; current profiles remain available in Team Match.",
       child_not_publication_eligible: "The selected child topic is not currently publication-eligible, so it cannot support a team proposal.",
       currentness_unavailable: "The authoritative opportunity-currentness check is unavailable.",
     };
@@ -264,7 +277,9 @@
     if (!current || !panelOwned(current) || !current.engine) return;
     var sequence = ++current.scopeSequence;
     var tentative = current.engine.opportunityById.get(current.scopeId);
-    var needChildren = tentative && tentative.record_type === "publishable_child";
+    var needChildren = tentative ? tentative.record_type === "publishable_child" : current.engine.scopesFor(current.parentId).some(function (scope) {
+      return scope.record_type === "publishable_child";
+    });
     var childReady = needChildren ? loadChildCatalog() : Promise.resolve(null);
     childReady.then(function (childCatalog) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
@@ -335,6 +350,12 @@
       return;
     }
     var remove = event.target.closest("[data-opportunity-team-remove]");
+    var variant = event.target.closest("[data-opportunity-team-variant]");
+    if (variant && reconcile(current) && current.state) {
+      var option = current.engine.proposalOptions(current.state)[Number(variant.getAttribute("data-opportunity-team-variant"))];
+      if (option) { current.state = option.state; renderProposal(current); }
+      return;
+    }
     if (remove && reconcile(current) && current.state) {
       current.state = current.engine.removeMember(current.state, remove.getAttribute("data-opportunity-team-remove"));
       renderProposal(current);

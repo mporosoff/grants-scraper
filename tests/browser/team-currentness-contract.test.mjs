@@ -165,15 +165,17 @@ test("child evidence can help only runtime-current parents and final rows stay e
   assert.deepEqual(Array.from(childDriven.result.topicMatches, row => row.id), ["topic-current"]);
 });
 
-test("Team Match cache and release identities cover the changed page", () => {
+test("Team Match cache and release identities cover the changed page", async () => {
   const release = JSON.parse(releaseSource);
   const teamPageHash = createHash("sha256").update(teamPage).digest("hex");
   const generation = teamPage.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
 
   assert.ok(generation);
-  assert.match(teamPage, new RegExp(`assets/team-matcher\\.js\\?v=${generation}`));
-  assert.match(teamPage, new RegExp(`assets/search-retrieval\\.js\\?v=${generation}`));
-  assert.match(teamPage, new RegExp(`assets/opportunity-team\\.js\\?v=${generation}`));
+  for (const asset of ["team-matcher", "search-retrieval", "opportunity-team"]) {
+    const bytes = await readFile(new URL(`../../assets/${asset}.js`, import.meta.url));
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    assert.match(teamPage, new RegExp(`assets/${asset}\\.js\\?v=${hash}`));
+  }
   assert.equal(release.source_hashes["team_match.html"], teamPageHash);
   assert.doesNotMatch(teamPage, /python -m scripts\.faculty_match match/);
   assert.match(

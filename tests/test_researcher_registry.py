@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import unittest
+import tempfile
 
 from scripts.researcher_registry import (
     apply_approved_submission,
@@ -20,6 +21,7 @@ from scripts.researcher_registry import (
     registry_generation,
     validate_registry,
     validate_opportunity_team_dependencies,
+    synchronize_opportunity_team_model,
 )
 
 
@@ -194,8 +196,7 @@ class ResearcherRegistryTests(unittest.TestCase):
                 "source_checked_date", "claims",
             )
         }
-        with self.assertRaisesRegex(ValueError, r"require recalibration"):
-            apply_approved_submission(
+        updated, report = apply_approved_submission(
                 self.registry,
                 {
                     "schema_version": 1,
@@ -206,7 +207,18 @@ class ResearcherRegistryTests(unittest.TestCase):
                 },
                 self.registry["registry_generation"],
                 team_model=self.team_model,
-            )
+        )
+        self.assertTrue(report["affected_team_scopes"])
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "teams.json"
+            path.write_text(json.dumps(self.team_model), encoding="utf-8")
+            synchronized = synchronize_opportunity_team_model(updated, path)
+            stale = {row["id"] for row in synchronized["opportunities"] if row.get("review_state") == "needs_revalidation"}
+            self.assertIn(self.team_model["opportunities"][0]["id"], stale)
+            previously_stale = {row["id"] for row in self.team_model["opportunities"] if row.get("review_state") == "needs_revalidation"}
+            self.assertTrue(stale.issubset(previously_stale | {row["scope_id"] for row in report["affected_team_scopes"]}))
+            again = synchronize_opportunity_team_model(updated, path)
+            self.assertEqual(stale, {row["id"] for row in again["opportunities"] if row.get("review_state") == "needs_revalidation"})
 
         ineligible = copy.deepcopy(self.registry)
         researcher = next(
@@ -220,6 +232,56 @@ class ResearcherRegistryTests(unittest.TestCase):
         validate_registry(ineligible)
         with self.assertRaisesRegex(ValueError, r"require recalibration"):
             validate_opportunity_team_dependencies(ineligible, self.team_model)
+
+    def test_admin_removal_preserves_identity_and_evidence_and_withholds_affected_teams(self):
+        scope = next(row for row in self.team_model["opportunities"]
+                     if row.get("review_state") != "needs_revalidation")
+        identity = scope["members"][0]["faculty_id"]
+        original = next(row for row in self.registry["researchers"] if row["researcher_id"] == identity)
+        for status in ("inactive", "departed"):
+            with self.subTest(status=status):
+                updated, report = apply_approved_submission(
+                    self.registry,
+                    {"schema_version": 1, "state": "approved", "researcher_id": identity,
+                     "approved_profile": {"status": status, "pool_visibility": "hidden", "auto_proposable": False}},
+                    self.registry["registry_generation"], team_model=self.team_model,
+                )
+                person = next(row for row in updated["researchers"] if row["researcher_id"] == identity)
+                for key in original:
+                    if key not in {"status", "pool_visibility", "auto_proposable"}:
+                        self.assertEqual(person[key], original[key], key)
+                self.assertEqual(len(updated["researchers"]), len(self.registry["researchers"]))
+                self.assertNotIn(identity, {row["researcher_id"] for row in matching_profiles(updated)})
+                directory_person = next(row for row in directory_projection(updated)["researchers"] if row["id"] == identity)
+                self.assertEqual(directory_person["pool_state"], "unadmitted")
+                self.assertTrue(report["affected_team_scopes"])
+                with tempfile.TemporaryDirectory() as folder:
+                    path = Path(folder) / "teams.json"
+                    path.write_text(json.dumps(self.team_model), encoding="utf-8")
+                    model = synchronize_opportunity_team_model(updated, path)
+                    stale = {row["id"] for row in model["opportunities"] if row.get("review_state") == "needs_revalidation"}
+                    self.assertIn(scope["id"], stale)
+                    valid_before = {row["id"] for row in self.team_model["opportunities"]
+                                    if row.get("review_state") != "needs_revalidation"}
+                    affected = {row["scope_id"] for row in report["affected_team_scopes"]}
+                    self.assertTrue((stale & valid_before).issubset(affected))
+
+    def test_generated_teams_depend_on_exact_claims_not_every_interest_of_a_person(self):
+        generated = next(row for row in self.team_model["opportunities"] if row.get("generator_version") and row.get("review_state") != "needs_revalidation")
+        model = {"faculty": self.team_model["faculty"], "opportunities": [generated]}
+        changed = copy.deepcopy(self.registry)
+        member = generated["members"][0]
+        person = next(row for row in changed["researchers"] if row["researcher_id"] == member["faculty_id"])
+        claim = next(claim for claim in person["claims"] if claim["claim_id"] == member["claim_id"])
+        additional = copy.deepcopy(claim)
+        additional["claim_id"] += "-new"
+        additional["label"] = "A newly approved independent interest"
+        additional["material_hash"] = material_claim_hash(additional)
+        person["claims"].append(additional)
+        validate_opportunity_team_dependencies(changed, model)
+        claim["revision"] += 1
+        with self.assertRaisesRegex(ValueError, "require recalibration"):
+            validate_opportunity_team_dependencies(changed, model)
 
     def test_unreferenced_and_cosmetic_edits_do_not_invalidate_team_calibrations(self):
         referenced = {

@@ -1,5 +1,6 @@
 import { enforceClaimContinuity, enforceSubmittedRelationship, fail, validateAdminProfile, validateSubmission } from "./contract.js";
 import { ResearcherSubmissionStore } from "./store.js";
+import { catalogRemovalProfile, catalogRemovalProposal, validateCatalogRemoval, validateCatalogRemovalApproval } from "./catalog.js";
 
 const MAX_REQUEST_BYTES = 32_768;
 const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
@@ -234,7 +235,7 @@ function materialEffect(directory, teamData, facultyMatches, detail) {
     generated_outputs: generatedOutputs, affected_matches: [], affected_team_scopes: [],
   };
   const oldClaims = (current.claims || []).filter(claim => claim.status === "active");
-  const nextClaims = detail.proposed_profile.claims || [];
+  const nextClaims = detail.catalog_action ? oldClaims.map(claim => claim.label) : detail.proposed_profile.claims || [];
   const oldByLabel = new Map(oldClaims.map(claim => [normalized(claim.label), claim.label]));
   const nextByLabel = new Map(nextClaims.map(label => [normalized(label), label]));
   const additions = [...nextByLabel].filter(([key]) => !oldByLabel.has(key)).map(([, label]) => label);
@@ -244,16 +245,18 @@ function materialEffect(directory, teamData, facultyMatches, detail) {
   const institutionChanged = detail.proposed_profile.institution !== undefined &&
     ["name", "ror_id"].some(key => (current.institution?.[key] || "") !== (detail.proposed_profile.institution[key] || ""));
   const administrative = institutionChanged || current.home_unit !== detail.proposed_profile.home_unit || current.orcid_id !== detail.proposed_profile.orcid_id;
-  const affected = scientific && teamData ? (teamData.opportunities || []).filter(scope => {
+  const eligibilityChanged = Boolean(detail.catalog_action) || Boolean(detail.approved_profile
+    && ["status", "pool_visibility", "auto_proposable"].some(key => detail.approved_profile[key] !== current[key]));
+  const affected = (scientific || eligibilityChanged) && teamData ? (teamData.opportunities || []).filter(scope => {
     if ((scope.members || []).some(member => member.faculty_id === current.id)) return true;
     return (scope.roles || []).some(role => [...(role.candidate_ids || []), ...(role.alternative_ids || [])].includes(current.id));
   }).map(scope => scope.id) : [];
   const matchingEntry = facultyMatches && Object.entries(facultyMatches.faculty || {}).find(([, profile]) => profile.researcher_id === current.id);
-  const affectedMatches = scientific && matchingEntry
+  const affectedMatches = (scientific || eligibilityChanged) && matchingEntry
     ? ((facultyMatches.pi_matches || {})[matchingEntry[0]] || []).map(match => match.id)
     : [];
   return {
-    classification: scientific ? "scientific" : administrative ? "administrative" : "cosmetic",
+    classification: detail.catalog_action ? "catalog_removal" : scientific ? "scientific" : administrative || eligibilityChanged ? "administrative" : "cosmetic",
     changed_claims: additions.length + retirements.length,
     claim_changes: { additions, retirements, unchanged },
     generated_outputs: generatedOutputs,
@@ -439,6 +442,7 @@ export async function validateApprovalAgainstCurrentRegistry(current, submittedP
   }
   const currentProfile = directory.researchers.find(row => row.id === current.researcher_id) || null;
   if (current.researcher_id && !currentProfile) fail("registry_unavailable", "The current researcher profile could not be verified.", 503);
+  if (current.catalog_action) return validateCatalogRemovalApproval(currentProfile, current.catalog_action, submittedProfile);
   const otherProfiles = directory.researchers.filter(row => row.id !== current.researcher_id);
   const reservedLegacyClaimIds = otherProfiles
     .flatMap(row => (row.claims || []).flatMap(claim => Array.isArray(claim.legacy_claim_ids) ? claim.legacy_claim_ids : []));
@@ -470,11 +474,27 @@ const ADMIN_HTML = `<!doctype html>
 <main>
   <header id="main-hero" class="hero">
     <p class="eyebrow">Funding Finder administration</p>
-    <h1>Researcher submissions</h1>
-    <p>Review proposed public values and their effect before publishing a registry-only change.</p>
+    <h1>Researcher administration</h1>
+    <p>Review profile updates and keep the active researcher catalog current.</p>
   </header>
 
   <section id="queue-view" aria-labelledby="queue-title">
+    <section class="panel" aria-labelledby="catalog-title">
+      <h2 id="catalog-title">Manage researcher catalog</h2>
+      <p>Remove a researcher from active matching and proposed teams. Their stable identity and research history remain available.</p>
+      <form id="catalog-removal">
+        <label for="catalog-search">Find a researcher</label>
+        <input id="catalog-search" type="search" placeholder="Search by name or department" autocomplete="off">
+        <label for="catalog-researcher">Researcher</label>
+        <select id="catalog-researcher" required size="6" aria-describedby="catalog-selection"><option value="">Loading catalog…</option></select>
+        <p id="catalog-selection" class="muted" aria-live="polite">Choose a researcher to prepare a removal.</p>
+        <label for="catalog-reason">Administrator note (optional)</label>
+        <input id="catalog-reason" maxlength="440" autocomplete="off">
+        <p>The next screen shows the change for review. Removal takes effect after the approved publication completes.</p>
+        <button id="catalog-submit" type="submit" disabled>Remove researcher</button>
+        <p id="catalog-status" role="alert"></p>
+      </form>
+    </section>
     <div class="section-heading">
       <div><p class="eyebrow dark">Review queue</p><h2 id="queue-title">Requests needing attention</h2></div>
       <p id="queue-count" class="count"></p>
@@ -548,7 +568,7 @@ const ADMIN_HTML = `<!doctype html>
 <script src="/admin/app.js"></script>
 </body>
 </html>`;
-const ADMIN_CSS = `:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17293f;background:#f4f7fb;line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input,textarea{font:inherit}button{cursor:pointer;border:1px solid #9fb0c2;border-radius:8px;background:#fff;color:#17293f;padding:9px 13px;font-weight:750}button:hover:not(:disabled){background:#edf3fa}button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}button.primary{color:#fff;background:#0057b8;border-color:#0057b8}button.primary:hover:not(:disabled){background:#00468f}button.danger{color:#9d2027;border-color:#d9a0a4}main{width:min(1120px,calc(100% - 32px));margin:auto;padding:28px 0 56px}.hero{padding:28px 34px;color:#fff;background:#14245f;border-radius:18px;box-shadow:0 10px 30px rgba(24,42,77,.08)}.hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:8px 0}.hero p:last-child{margin:0;max-width:780px;font-size:1.08rem}.eyebrow{margin:0;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.eyebrow.dark{color:#51657b}.section-heading,.detail-heading,.panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.section-heading{margin:32px 0 14px}.section-heading h2,.detail-heading h2{margin:2px 0 0}.count{margin:8px 0;color:#51657b}.queue-list{display:grid;gap:12px}.queue-card{display:grid;grid-template-columns:minmax(200px,1.4fr) minmax(0,3fr) auto;gap:22px;align-items:center;background:#fff;border:1px solid #d8e1eb;border-radius:12px;padding:18px 20px;box-shadow:0 3px 10px rgba(23,41,63,.03)}.queue-card h3{margin:0 0 8px;font-size:1.15rem}.queue-card dl,.compact-dl,.outcome-details{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 12px;margin:0}.queue-card dt,.compact-dl dt,.outcome-details dt{font-weight:750;color:#51657b}.queue-card dd,.compact-dl dd,.outcome-details dd{margin:0;min-width:0;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px}.badge,.tag{display:inline-flex;align-items:center;width:max-content;border-radius:999px;padding:3px 9px;background:#e8eef7;color:#273b54;font-size:.8rem;font-weight:800}.badge.conflict,.tag.conflict{background:#fff0d5;color:#744600}.badge.good,.tag.good{background:#def5e8;color:#155c35}.badge.pending{background:#e8eef7}.badge.review{background:#e1edff;color:#134f91}.badge.failed{background:#fee5e7;color:#8d1f28}.empty{padding:40px 24px;text-align:center;background:#fff;border:1px dashed #bdcad8;border-radius:12px}.text-button{border:0;background:transparent;padding:8px 0;color:#0057b8}.detail-heading{margin:16px 0 20px;align-items:center}.muted{color:#607388;font-weight:400}.panel{min-width:0;margin-top:14px;padding:20px;background:#fff;border:1px solid #d8e1eb;border-radius:12px}.panel h3{margin:0 0 10px}.panel h4{margin:8px 0}.panel p{margin:4px 0}.comparison-head,.comparison-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:18px}.comparison-head{padding:10px 12px;color:#51657b;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid #d8e1eb}.comparison-row{padding:13px 12px;border-bottom:1px solid #e5ebf2}.comparison-row:last-child{border-bottom:0}.field-label{font-weight:800}.value{min-width:0;overflow-wrap:anywhere}.value.empty{padding:0;text-align:left;background:transparent;border:0;color:#738397;font-style:italic}.link-list,.clean-list{margin:4px 0;padding-left:20px}.link-list a{overflow-wrap:anywhere;color:#0057b8}.claim-changes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}.claim-group{padding:14px;border-radius:10px;background:#f4f7fb}.claim-group h4{margin:0 0 6px}.claim-group.added{background:#eaf7ef}.claim-group.retired{background:#fff1f1}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.notice{padding:13px 15px;border-radius:9px;background:#edf4ff;border:1px solid #c6daf6}.notice.warning{margin:12px 0;background:#fff7e6;border-color:#edd19b}.notice.error{margin-top:12px;background:#fff0f1;border-color:#e9b9bd;color:#812129}.notice ul{margin:3px 0;padding-left:20px}.decision>p{max-width:850px}.approved-summary{margin:14px 0;padding:14px;background:#f6f8fb;border-radius:9px}.technical{margin-top:12px;border-top:1px solid #e1e7ee;padding-top:12px}.technical summary{cursor:pointer;color:#31485f;font-weight:750}.technical p{color:#607388}.technical-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.technical-grid>div{min-width:0}pre{max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fc;border:1px solid #e0e6ed;border-radius:8px;padding:10px;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}label{display:block;margin-top:14px;font-weight:750}textarea,input{width:100%;margin-top:6px;padding:10px;border:1px solid #9db0c5;border-radius:8px;background:#fff;color:#17293f}textarea{resize:vertical;font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.actions.centered{justify-content:center}.outcome{max-width:720px;margin:34px auto 0;padding:36px;background:#fff;border:1px solid #d8e1eb;border-radius:16px;text-align:center;box-shadow:0 10px 30px rgba(24,42,77,.07)}.outcome-icon{display:grid;place-items:center;width:58px;height:58px;margin:16px auto;border-radius:50%;background:#def5e8;color:#155c35;font-size:1.8rem;font-weight:900}.outcome h2{margin:8px 0;font-size:2rem}.outcome-message{font-size:1.08rem;color:#51657b}.outcome-details{max-width:560px;margin:24px auto;text-align:left}.outcome .notice{text-align:left}@media(max-width:820px){.queue-card{grid-template-columns:1fr}.queue-card button{width:100%}.summary-grid,.claim-changes,.technical-grid{grid-template-columns:1fr}.comparison-head{display:none}.comparison-row{grid-template-columns:1fr;gap:6px}.comparison-row .value:before{display:block;color:#607388;font-size:.75rem;font-weight:800;text-transform:uppercase}.comparison-row .value.current:before{content:"Current"}.comparison-row .value.proposed:before{content:"Proposed"}}@media(max-width:520px){main{width:min(100% - 20px,1120px);padding-top:10px}.hero{padding:22px 20px;border-radius:12px}.section-heading,.detail-heading{align-items:flex-start;flex-direction:column}.panel{padding:16px}}`;
+const ADMIN_CSS = `:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17293f;background:#f4f7fb;line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid #9fb0c2;border-radius:8px;background:#fff;color:#17293f;padding:9px 13px;font-weight:750}button:hover:not(:disabled){background:#edf3fa}button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}button.primary{color:#fff;background:#0057b8;border-color:#0057b8}button.primary:hover:not(:disabled){background:#00468f}button.danger{color:#9d2027;border-color:#d9a0a4}main{width:min(1120px,calc(100% - 32px));margin:auto;padding:28px 0 56px}.hero{padding:28px 34px;color:#fff;background:#14245f;border-radius:18px;box-shadow:0 10px 30px rgba(24,42,77,.08)}.hero h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:8px 0}.hero p:last-child{margin:0;max-width:780px;font-size:1.08rem}.eyebrow{margin:0;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.eyebrow.dark{color:#51657b}.section-heading,.detail-heading,.panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.section-heading{margin:32px 0 14px}.section-heading h2,.detail-heading h2{margin:2px 0 0}.count{margin:8px 0;color:#51657b}.queue-list{display:grid;gap:12px}.queue-card{display:grid;grid-template-columns:minmax(200px,1.4fr) minmax(0,3fr) auto;gap:22px;align-items:center;background:#fff;border:1px solid #d8e1eb;border-radius:12px;padding:18px 20px;box-shadow:0 3px 10px rgba(23,41,63,.03)}.queue-card h3{margin:0 0 8px;font-size:1.15rem}.queue-card dl,.compact-dl,.outcome-details{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 12px;margin:0}.queue-card dt,.compact-dl dt,.outcome-details dt{font-weight:750;color:#51657b}.queue-card dd,.compact-dl dd,.outcome-details dd{margin:0;min-width:0;overflow-wrap:anywhere}.tags{display:flex;flex-wrap:wrap;gap:6px}.badge,.tag{display:inline-flex;align-items:center;width:max-content;border-radius:999px;padding:3px 9px;background:#e8eef7;color:#273b54;font-size:.8rem;font-weight:800}.badge.conflict,.tag.conflict{background:#fff0d5;color:#744600}.badge.good,.tag.good{background:#def5e8;color:#155c35}.badge.pending{background:#e8eef7}.badge.review{background:#e1edff;color:#134f91}.badge.failed{background:#fee5e7;color:#8d1f28}.empty{padding:40px 24px;text-align:center;background:#fff;border:1px dashed #bdcad8;border-radius:12px}.text-button{border:0;background:transparent;padding:8px 0;color:#0057b8}.detail-heading{margin:16px 0 20px;align-items:center}.muted{color:#607388;font-weight:400}.panel{min-width:0;margin-top:14px;padding:20px;background:#fff;border:1px solid #d8e1eb;border-radius:12px}.panel h3{margin:0 0 10px}.panel h4{margin:8px 0}.panel p{margin:4px 0}.comparison-head,.comparison-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:18px}.comparison-head{padding:10px 12px;color:#51657b;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid #d8e1eb}.comparison-row{padding:13px 12px;border-bottom:1px solid #e5ebf2}.comparison-row:last-child{border-bottom:0}.field-label{font-weight:800}.value{min-width:0;overflow-wrap:anywhere}.value.empty{padding:0;text-align:left;background:transparent;border:0;color:#738397;font-style:italic}.link-list,.clean-list{margin:4px 0;padding-left:20px}.link-list a{overflow-wrap:anywhere;color:#0057b8}.claim-changes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}.claim-group{padding:14px;border-radius:10px;background:#f4f7fb}.claim-group h4{margin:0 0 6px}.claim-group.added{background:#eaf7ef}.claim-group.retired{background:#fff1f1}.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.notice{padding:13px 15px;border-radius:9px;background:#edf4ff;border:1px solid #c6daf6}.notice.warning{margin:12px 0;background:#fff7e6;border-color:#edd19b}.notice.error{margin-top:12px;background:#fff0f1;border-color:#e9b9bd;color:#812129}.notice ul{margin:3px 0;padding-left:20px}.decision>p{max-width:850px}.approved-summary{margin:14px 0;padding:14px;background:#f6f8fb;border-radius:9px}.technical{margin-top:12px;border-top:1px solid #e1e7ee;padding-top:12px}.technical summary{cursor:pointer;color:#31485f;font-weight:750}.technical p{color:#607388}.technical-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.technical-grid>div{min-width:0}pre{max-height:420px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f9fc;border:1px solid #e0e6ed;border-radius:8px;padding:10px;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}label{display:block;margin-top:14px;font-weight:750}textarea,input,select{width:100%;margin-top:6px;padding:10px;border:1px solid #9db0c5;border-radius:8px;background:#fff;color:#17293f}textarea{resize:vertical;font:13px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.actions.centered{justify-content:center}.outcome{max-width:720px;margin:34px auto 0;padding:36px;background:#fff;border:1px solid #d8e1eb;border-radius:16px;text-align:center;box-shadow:0 10px 30px rgba(24,42,77,.07)}.outcome-icon{display:grid;place-items:center;width:58px;height:58px;margin:16px auto;border-radius:50%;background:#def5e8;color:#155c35;font-size:1.8rem;font-weight:900}.outcome h2{margin:8px 0;font-size:2rem}.outcome-message{font-size:1.08rem;color:#51657b}.outcome-details{max-width:560px;margin:24px auto;text-align:left}.outcome .notice{text-align:left}@media(max-width:820px){.queue-card{grid-template-columns:1fr}.queue-card button{width:100%}.summary-grid,.claim-changes,.technical-grid{grid-template-columns:1fr}.comparison-head{display:none}.comparison-row{grid-template-columns:1fr;gap:6px}.comparison-row .value:before{display:block;color:#607388;font-size:.75rem;font-weight:800;text-transform:uppercase}.comparison-row .value.current:before{content:"Current"}.comparison-row .value.proposed:before{content:"Proposed"}}@media(max-width:520px){main{width:min(100% - 20px,1120px);padding-top:10px}.hero{padding:22px 20px;border-radius:12px}.section-heading,.detail-heading{align-items:flex-start;flex-direction:column}.panel{padding:16px}}`;
 const ADMIN_JS = `(() => {
   "use strict";
   let active = null;
@@ -559,6 +579,12 @@ const ADMIN_JS = `(() => {
   const outcome = document.getElementById("outcome");
   const status = document.getElementById("admin-status");
   const approvedEditor = document.getElementById("approved");
+  let catalog = null;
+  let catalogRequestKey = null;
+  const catalogSearch = document.getElementById("catalog-search");
+  const catalogResearcher = document.getElementById("catalog-researcher");
+  const catalogStatus = document.getElementById("catalog-status");
+  const catalogSubmit = document.getElementById("catalog-submit");
   const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "'": "&#39;",
   })[character]);
@@ -572,7 +598,8 @@ const ADMIN_JS = `(() => {
     hajim_core_faculty: "Hajim core faculty", internal_affiliated_researcher: "Internal affiliated researcher",
     external_collaborator: "External collaborator", reference_only_researcher: "Reference-only researcher",
     department: "Department", institution: "Institution", approved_collaborator: "Approved collaborator",
-    reference_only: "Reference only", hidden: "Hidden",
+    reference_only: "Reference only", hidden: "Hidden", active: "Active", inactive: "Inactive", departed: "Departed",
+    catalog_removal: "Catalog removal", remove_researcher: "Remove researcher",
   };
   function label(value) { return labels[value] || String(value || "").replace(/_/g, " "); }
   function formatTime(value) {
@@ -630,6 +657,7 @@ const ADMIN_JS = `(() => {
     queueView.hidden = false;
     hero.hidden = false;
     queue.textContent = "Loading queue…";
+    loadCatalog().catch(error => { catalogStatus.textContent = error.message; });
     const value = await api("/admin/api/submissions");
     document.getElementById("queue-count").textContent = value.submissions.length + (value.submissions.length === 1 ? " request" : " requests");
     if (!value.submissions.length) {
@@ -640,7 +668,7 @@ const ADMIN_JS = `(() => {
       const conflict = item.trust_signals.identity_conflict_count > 0;
       return '<article class="queue-card">' +
         '<div><h3>' + esc(item.proposed_profile.display_name) + '</h3><div class="tags"><span class="badge ' + stateClass(item.state) + '">' + esc(label(item.state)) + '</span><span class="tag ' + (conflict ? "conflict" : "good") + '">' + esc(identityText(item.trust_signals)) + "</span></div></div>" +
-        '<dl><dt>Request</dt><dd>' + esc(label(item.submission_type)) + '</dd><dt>Submitted from</dt><dd>' + esc(label(item.source_surface)) + '</dd><dt>Effect</dt><dd>' + esc(effectText(item.material_effect)) + '</dd><dt>Submitted</dt><dd>' + esc(formatTime(item.created_at)) + "</dd></dl>" +
+        '<dl><dt>Request</dt><dd>' + esc(item.catalog_action ? "Catalog removal · " + label(item.catalog_action) : label(item.submission_type)) + '</dd><dt>Submitted from</dt><dd>' + esc(item.catalog_action ? "Admin catalog" : label(item.source_surface)) + '</dd><dt>Effect</dt><dd>' + esc(effectText(item.material_effect)) + '</dd><dt>Submitted</dt><dd>' + esc(formatTime(item.created_at)) + "</dd></dl>" +
         '<button type="button" data-id="' + esc(item.submission_id) + '">Open review</button></article>';
     }).join("") + "</div>";
     queue.querySelectorAll("[data-id]").forEach(button => { button.onclick = () => open(button.dataset.id).catch(showFatal); });
@@ -649,6 +677,55 @@ const ADMIN_JS = `(() => {
     const render = renderer || valueHtml;
     return '<div class="comparison-row"><div class="field-label">' + esc(field) + '</div><div class="value current">' + render(current) + '</div><div class="value proposed">' + render(proposed) + "</div></div>";
   }
+  function renderCatalog() {
+    const selectedId = catalogResearcher.value;
+    const query = catalogSearch.value.trim().toLocaleLowerCase();
+    const people = (catalog?.researchers || []).filter(row => !query || (row.name + " " + row.home_unit).toLocaleLowerCase().includes(query));
+    catalogResearcher.innerHTML = '<option value="">Choose a researcher</option>' + people.map(row =>
+      '<option value="' + esc(row.id) + '"' + (row.status !== "active" && row.pool_visibility === "hidden" ? " disabled" : "") + '>' +
+      esc(row.name + " · " + row.home_unit + " · " + label(row.status)) + "</option>").join("");
+    catalogResearcher.value = people.some(row => row.id === selectedId) ? selectedId : "";
+    updateCatalogSelection();
+  }
+  function updateCatalogSelection() {
+    const person = catalog?.researchers.find(row => row.id === catalogResearcher.value);
+    catalogSubmit.disabled = !person || (person.status !== "active" && person.pool_visibility === "hidden");
+    document.getElementById("catalog-selection").textContent = person
+      ? "Removal selected for " + person.name + " (" + person.home_unit + "). Their research claims and history will be preserved."
+      : "Choose a researcher to prepare a removal.";
+  }
+  async function loadCatalog() {
+    catalog = null;
+    catalogSubmit.disabled = true;
+    catalogStatus.textContent = "";
+    catalog = await api("/admin/api/catalog");
+    renderCatalog();
+  }
+  catalogSearch.addEventListener("input", renderCatalog);
+  catalogResearcher.addEventListener("change", updateCatalogSelection);
+  document.getElementById("catalog-removal").addEventListener("input", () => { catalogRequestKey = null; });
+  document.getElementById("catalog-removal").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!catalog || catalogSubmit.disabled || !catalogResearcher.value) return;
+    catalogSubmit.disabled = true;
+    catalogStatus.textContent = "";
+    catalogRequestKey ||= crypto.randomUUID();
+    try {
+      const response = await api("/admin/api/catalog", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          researcher_id: catalogResearcher.value, base_registry_generation: catalog.registry_generation,
+          action: "remove_researcher", reason: document.getElementById("catalog-reason").value.trim(),
+          idempotency_key: catalogRequestKey,
+        }),
+      });
+      await open(response.submission_id);
+      catalogRequestKey = null;
+    } catch (error) {
+      catalogStatus.textContent = error.message;
+      updateCatalogSelection();
+    }
+  });
   function renderComparison() {
     const current = active.current_profile || {};
     const proposed = active.proposed_profile || {};
@@ -659,7 +736,10 @@ const ADMIN_JS = `(() => {
       comparisonRow("ROR identity", current.institution?.ror_id, proposed.institution?.ror_id ?? current.institution?.ror_id) +
       comparisonRow("ORCID", current.orcid_id, proposed.orcid_id) +
       comparisonRow("Research summary", current.research_summary, proposed.research_summary) +
-      comparisonRow("Source links", current.source_urls, proposed.source_urls, linksHtml);
+      comparisonRow("Source links", current.source_urls, proposed.source_urls, linksHtml) +
+      (active.catalog_action ? comparisonRow("Catalog status", label(current.status), label(active.approved_profile.status)) +
+        comparisonRow("Visibility", label(current.pool_visibility), "Hidden") +
+        comparisonRow("Automatically proposed", current.auto_proposable ? "Yes" : "No", "No") : "");
     const changes = active.material_effect.claim_changes;
     document.getElementById("claim-changes").innerHTML =
       '<div class="claim-group added"><h4>Added interests</h4>' + listHtml(changes.additions, "No additions") + "</div>" +
@@ -682,9 +762,10 @@ const ADMIN_JS = `(() => {
     document.getElementById("effect").innerHTML = '<dl class="compact-dl"><dt>Classification</dt><dd>' + esc(label(effect.classification)) + '</dd><dt>Research interests</dt><dd>' + esc(effect.changed_claims) + ' changed</dd><dt>Opportunity matches</dt><dd>' + esc(effect.affected_matches.length) + '</dd><dt>Team scopes</dt><dd>' + esc(effect.affected_team_scopes.length) + '</dd></dl><h4>Generated files</h4>' + listHtml(effect.generated_outputs, "None");
   }
   function renderApprovedSummary(profile = {}) {
+    if (active?.catalog_action) profile = { ...active.current_profile, display_name: active.current_profile?.name, ...profile };
     const activeClaims = (profile.claims || []).filter(claim => claim.status === "active").map(claim => claim.label);
     const retiredClaims = (profile.claims || []).filter(claim => claim.status === "retired").map(claim => claim.label);
-    document.getElementById("approved-summary").innerHTML = '<dl class="compact-dl"><dt>Name</dt><dd>' + esc(profile.display_name) + '</dd><dt>Relationship</dt><dd>' + esc(label(profile.relationship)) + '</dd><dt>Visibility</dt><dd>' + esc(label(profile.pool_visibility)) + '</dd><dt>Active interests</dt><dd>' + esc(activeClaims.length) + '</dd><dt>Retired interests</dt><dd>' + esc(retiredClaims.length) + '</dd><dt>Automatically proposed</dt><dd>' + (profile.auto_proposable ? "Yes" : "No") + "</dd></dl>";
+    document.getElementById("approved-summary").innerHTML = '<dl class="compact-dl"><dt>Name</dt><dd>' + esc(profile.display_name) + '</dd><dt>Catalog status</dt><dd>' + esc(label(profile.status)) + '</dd><dt>Relationship</dt><dd>' + esc(label(profile.relationship)) + '</dd><dt>Visibility</dt><dd>' + esc(label(profile.pool_visibility)) + '</dd><dt>Active interests</dt><dd>' + esc(activeClaims.length) + '</dd><dt>Retired interests</dt><dd>' + esc(retiredClaims.length) + '</dd><dt>Automatically proposed</dt><dd>' + (profile.auto_proposable ? "Yes" : "No") + "</dd></dl>";
   }
   function previewApprovedEditor() {
     try {
@@ -732,7 +813,7 @@ const ADMIN_JS = `(() => {
     outcome.hidden = true;
     detail.hidden = false;
     hero.hidden = true;
-    document.getElementById("detail-kicker").textContent = label(active.submission_type);
+    document.getElementById("detail-kicker").textContent = active.catalog_action ? "Remove researcher" : label(active.submission_type);
     document.getElementById("detail-title").textContent = active.proposed_profile.display_name;
     document.getElementById("detail-meta").textContent = "Submitted " + formatTime(active.created_at) + " · " + active.submission_id;
     const state = document.getElementById("detail-state");
@@ -748,7 +829,7 @@ const ADMIN_JS = `(() => {
     renderApprovedSummary(active.approved_profile);
     document.getElementById("technical-current").textContent = JSON.stringify(active.current_profile, null, 2);
     document.getElementById("technical-proposed").textContent = JSON.stringify(active.proposed_profile, null, 2);
-    document.getElementById("reason").value = "";
+    document.getElementById("reason").value = active.catalog_action ? active.administrator_reason || "" : "";
     status.hidden = true;
     status.textContent = "";
     renderActions();
@@ -893,6 +974,56 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
       if (path === "/admin/styles.css" && request.method === "GET") { await adminActor(request, env, fetchImpl); return text(200, ADMIN_CSS, "text/css; charset=utf-8"); }
       if (path === "/admin/app.js" && request.method === "GET") { await adminActor(request, env, fetchImpl); return text(200, ADMIN_JS, "text/javascript; charset=utf-8"); }
       if (path === "/admin" && request.method === "GET") { await adminActor(request, env, fetchImpl); return html(200, ADMIN_HTML); }
+      if (path === "/admin/api/catalog" && ["GET", "POST"].includes(request.method)) {
+        const actor = await adminActor(request, env, fetchImpl);
+        if (request.method === "POST" && origin && origin !== url.origin) fail("admin_origin_not_allowed", "Administrator origin is not allowed.", 403);
+        const removal = request.method === "POST" ? validateCatalogRemoval(await readJson(request)) : null;
+        // Replay accepted requests even if the public generation has since changed.
+        const key = removal ? "catalog-" + removal.idempotency_key : "";
+        const payloadHash = removal ? await sha256(JSON.stringify(removal)) : "";
+        const replay = row => {
+          if (!safeEqual(row.payload_hash, payloadHash) || !row.catalog_action) fail("idempotency_conflict", "That request identifier was already used for different content.", 409);
+          return json(200, { submission_id: row.submission_id, state: row.state, duplicate: true });
+        };
+        const existing = removal ? await store.byIdempotencyKey(key) : null;
+        if (existing) return replay(existing);
+        const [manifest, directory] = await Promise.all([currentManifest(env, fetchImpl), currentDirectory(env, fetchImpl)]);
+        if (!directory || directory.registry_generation !== manifest.registry_generation || !Array.isArray(directory.researchers)) {
+          fail("registry_unavailable", "The current researcher catalog could not be verified.", 503);
+        }
+        if (!removal) return json(200, {
+          registry_generation: manifest.registry_generation,
+          researchers: directory.researchers.map(row => ({
+            id: row.id, name: row.name, home_unit: row.home_unit, status: row.status, pool_visibility: row.pool_visibility,
+          })),
+        });
+        if (removal.base_registry_generation !== manifest.registry_generation) fail("stale_registry_generation", "The catalog changed. Reload it before preparing a removal.", 409);
+        const person = directory.researchers.find(row => row.id === removal.researcher_id);
+        if (!person) fail("not_found", "Researcher not found in the current catalog.", 404);
+        if (person.status !== "active" && person.pool_visibility === "hidden" && !person.auto_proposable) fail("already_removed", "This researcher is already removed from the active catalog.", 409);
+        const reason = removal.reason || "Remove researcher from the active catalog.";
+        const checkPending = async () => {
+          if (await store.activeCatalogRemoval(person.id)) fail("catalog_removal_pending", "This researcher already has a removal request. Open it in the review queue.", 409);
+        };
+        await checkPending();
+        let row;
+        try {
+          row = await store.create({
+            submissionId: "rs_" + randomToken(12), idempotencyKey: key, payloadHash,
+            receiptTokenHash: await sha256(randomToken()), submissionType: "profile_correction",
+            sourceSurface: "faculty_interests", researcherId: person.id,
+            baseRegistryGeneration: manifest.registry_generation, proposedProfile: catalogRemovalProposal(person),
+            privacyNoticeVersion: "admin-catalog-v1", createdAt: now().toISOString(),
+            catalogAction: removal.action, actor, reason,
+          });
+        } catch (error) {
+          const winner = await store.byIdempotencyKey(key);
+          if (winner) return replay(winner);
+          await checkPending();
+          throw error;
+        }
+        return json(201, { submission_id: row.submission_id, state: row.state, duplicate: false });
+      }
       if (path === "/admin/api/submissions" && request.method === "GET") {
         await adminActor(request, env, fetchImpl);
         const [submissions, directory, teamData, facultyMatches] = await Promise.all([
@@ -919,9 +1050,11 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
         const currentProfile = directory && directory.researchers.find(row => row.id === detail.researcher_id) || null;
         return json(200, {
           ...detail, contact_email: detail.contact_email || "", submitter_note: detail.submitter_note || "",
-          approved_profile: detail.approved_profile || seedApprovedProfile({
+          proposed_profile: detail.catalog_action && currentProfile ? catalogRemovalProposal(currentProfile) : detail.proposed_profile,
+          approved_profile: detail.approved_profile || (detail.catalog_action
+            ? catalogRemovalProfile(currentProfile, detail.catalog_action) : seedApprovedProfile({
             proposed_profile: detail.proposed_profile, current_profile: currentProfile,
-          }, now().toISOString().slice(0, 10)),
+          }, now().toISOString().slice(0, 10))),
           current_profile: currentProfile, duplicate_candidates: duplicates,
           trust_signals: trustSignals(directory, detail, duplicates),
           material_effect: materialEffect(directory, teamData, facultyMatches, detail),
