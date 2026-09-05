@@ -1,0 +1,11 @@
+{
+  "reason": "Legacy malformed JSON was incorrectly memoized as a scientific rejection. Exact current-input legacy keys are removed so the scheduled generator can retry.",
+  "requeued": [
+    {
+      "scope_id": "356811",
+      "state": "rejected_evidence",
+      "error_type": "JSONDecodeError",
+      "reason": "Expecting ':' delimiter: line 1 column 1076 (char 1075)"
+    }
+  ]
+}

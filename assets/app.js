@@ -2957,7 +2957,14 @@
         return String(childIdentifier);
       }
     }
-    return isBroadOpportunity(record) ? "" : recordId(record);
+    const parentId = recordId(record);
+    try {
+      // Published child scopes determine the selector, even when the parent's
+      // title and synopsis do not happen to match an umbrella-call phrase.
+      if (OPPORTUNITY_TEAM_API?.hasAvailableScope({ parentId, scopeId: parentId })) return parentId;
+      if (OPPORTUNITY_TEAM_API?.hasAvailableScope({ parentId })) return "";
+    } catch (_error) { /* Existing fallback remains unavailable until data loads. */ }
+    return isBroadOpportunity(record) ? "" : parentId;
   }
 
   function resultCard(match, resultPosition) {

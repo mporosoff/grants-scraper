@@ -292,12 +292,35 @@ jobs:
           key: opportunity-teams-${{ runner.os }}-${{ github.run_id }}
           restore-keys: opportunity-teams-${{ runner.os }}-
       - name: Generate bounded new and changed proposed teams
+        id: team-generation
         timeout-minutes: 20
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
-        run: python -m scripts.build_opportunity_teams --generate --max-scopes 10 --write
+        run: python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
+      - name: Report automatic team coverage and remaining work
+        if: always()
+        env:
+          TEAM_GENERATION_OUTCOME: ${{ steps.team-generation.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          report_path = Path("evaluation/opportunity_team_generation.json")
+          report = json.loads(report_path.read_text()) if report_path.exists() else {}
+          coverage = report.get("coverage_after", {})
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write("\n### Automatic proposed teams\n\n")
+              summary.write(f"Generation step: {os.environ['TEAM_GENERATION_OUTCOME']}.\n\n")
+              summary.write(f"Candidate coverage: {coverage.get('parent_calls', 'unknown')} distinct calls, "
+                            f"{coverage.get('scopes', 'unknown')} bounded topics, "
+                            f"{coverage.get('team_combinations', 'unknown')} stored team combinations.\n\n")
+              summary.write(f"Assessed this run: {len(report.get('results', []))}; "
+                            f"pending: {report.get('pending_after', 'unknown')}. "
+                            f"Outcomes: {json.dumps(report.get('outcomes', {}), sort_keys=True)}.\n\n")
+              summary.write("Source/profile invalidation runs before provider generation. Unavailable responses remain retryable; broad or unsupported scopes do not receive teams.\n")
+          PY
       - name: Rebuild every production document vector
         id: semantic-vectors
         env:

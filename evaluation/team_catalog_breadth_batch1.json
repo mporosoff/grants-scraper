@@ -1,0 +1,434 @@
+{
+  "version": "opportunity-teams-2",
+  "model": "claude-sonnet-5",
+  "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+  "eligible_scopes": 1551,
+  "pending_scopes": 1418,
+  "source_invalidations": [],
+  "coverage_before": {
+    "scopes": 44,
+    "parent_calls": 12,
+    "team_combinations": 104
+  },
+  "results": [
+    {
+      "scope_id": "361520",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "360543",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "295449",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "arpa-h:tigar",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359666",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362597",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363789",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363621",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363065:2",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356982",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "361186",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363168",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363684",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "nsf-cbet:PD-26-370Y",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356888",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357979",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362947",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357002",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357019",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359068",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "308873",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363815",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362186",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "vpr-email:infoready-2028504",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359499",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363538",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359696",
+      "state": "unavailable",
+      "error_type": "RuntimeError",
+      "reason": "incomplete model response"
+    },
+    {
+      "scope_id": "356538",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357651",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360398",
+      "state": "unavailable",
+      "error_type": "RuntimeError",
+      "reason": "incomplete model response"
+    },
+    {
+      "scope_id": "362183",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356637",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "356981",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363169",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357579",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357337",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359003",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359271",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357137",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357748",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357627",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359649",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356530",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363678",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "45810",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360534",
+      "state": "unavailable",
+      "error_type": "RuntimeError",
+      "reason": "incomplete model response"
+    },
+    {
+      "scope_id": "nyserda:PON6004",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363455",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "103313",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357330",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359695",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "362524",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362185",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "355196",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "353353",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356925",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "357334",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "358863",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "352635",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362520",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "361831",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356205",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363268",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362184",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359725",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356610",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363612",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360446",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356536",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356927",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "358114",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360223",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362607",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357309",
+      "state": "rejected_evidence",
+      "error_type": "ValueError",
+      "reason": "role quote is not in this exact scope"
+    },
+    {
+      "scope_id": "360881",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363622",
+      "state": "unavailable",
+      "error_type": "RuntimeError",
+      "reason": "incomplete model response"
+    },
+    {
+      "scope_id": "356879",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362952",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360536",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357308",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362304",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "275109",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362551",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357712",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "357346",
+      "state": "unavailable",
+      "error_type": "RuntimeError",
+      "reason": "incomplete model response"
+    },
+    {
+      "scope_id": "362305",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357962",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "347680",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "361287",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "361833",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363620",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "358823",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357378",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362954",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "320098",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357377",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357182",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362722",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362996",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "341997",
+      "state": "not_specific"
+    }
+  ],
+  "provider_requests": 184,
+  "coverage_after": {
+    "scopes": 64,
+    "parent_calls": 32,
+    "team_combinations": 159
+  },
+  "pending_after": 1323
+}

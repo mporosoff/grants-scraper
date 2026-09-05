@@ -1,0 +1,22 @@
+{
+  "version": "opportunity-teams-2",
+  "model": "claude-sonnet-5",
+  "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+  "eligible_scopes": 1551,
+  "pending_scopes": 1228,
+  "source_invalidations": [],
+  "assembly_updates": [],
+  "coverage_before": {
+    "scopes": 73,
+    "parent_calls": 44,
+    "team_combinations": 189
+  },
+  "results": [],
+  "coverage_after": {
+    "scopes": 73,
+    "parent_calls": 44,
+    "team_combinations": 189
+  },
+  "pending_after": 1228,
+  "outcomes": {}
+}
