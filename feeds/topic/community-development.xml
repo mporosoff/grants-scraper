@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/community-development.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Veterans Legacy Grants Program</title>
@@ -92,6 +92,18 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Outreach and Assistance for Veteran Farmers and Ranchers Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363816"/>
+    <id>urn:funding-finder:grants-gov:363816</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-10 | The purpose of the OAVFR program, under assistance listing number 10.443, is to assist Veterans in owning and operating farms and ranches and to ensure they are knowledgeable and participating in full range of USDA programs. With OAVFR funding, recipient organizations can provide outreach, technical assistance, and education in agriculture, agribusiness, forestry, and agricultural-related services…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Extension Program Special Emphasis</title>

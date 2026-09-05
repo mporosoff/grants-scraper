@@ -4,8 +4,56 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A25-301</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Selective Harnessing of Intrinsic Neuroplasticity Engineering (SHINE)</title>
+    <link href="https://sam.gov/opp/0396f5debf814299b35bcb146365d675/view"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-3f359d639f6d327f</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
+    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-779bd2ee55b34b8e</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>Simons Foundation</name></author>
+    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
+  </entry>
+  <entry>
+    <title>Defense Advanced Research Projects Agency (DARPA)</title>
+    <link href="https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-123</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-04-16</summary>
+  </entry>
+  <entry>
+    <title>Research Areas</title>
+    <link href="https://sam.gov/opp/b77f1caefb244d1193ded7f6187ede52/view"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-40c8bd8449be89b5</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-08-27</summary>
+  </entry>
+  <entry>
+    <title>NSF Research in the Formation of Engineers program</title>
+    <link href="https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
   <entry>
     <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
     <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>

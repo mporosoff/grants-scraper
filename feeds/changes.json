@@ -1,8 +1,2509 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-04T14:25:33Z",
+  "generated_at": "2026-09-05T10:11:38Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "f8b55e89a6c58730377a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "359197",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "359197",
+        "opportunity_number": "NOT-DK-26-303",
+        "title": "Kidney Precision Medicine Project Central Hub",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-05",
+        "close_date": "2026-10-05",
+        "last_updated": "2025-09-24",
+        "version": "Forecast 2",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359197",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "ee5805682c416df05a6a",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363815",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363815",
+        "opportunity_number": "DE-FOA-0003647",
+        "title": "Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)",
+        "agency": "Golden Field Office",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-12-01",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Energy",
+          "Manufacturing",
+          "Carbon management",
+          "Climate change"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Individuals",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 2000000,
+        "award_ceiling": 20000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363815",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "eca79dfb8f2391374580",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363821",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363821",
+        "opportunity_number": "W9126G262SOI9557",
+        "title": "Aquatic Fauna and Primary Production in the Florida Everglades",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 996800,
+        "award_ceiling": 4984000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363821",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354984"
+      }
+    },
+    {
+      "id": "de56869d27d62e95f60d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "362265",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "362265",
+        "opportunity_number": "HT942526PRCRPIA",
+        "title": "DoW Peer Reviewed Cancer, Idea Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-06",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Cancer",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362265",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351810"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "db531bec1dcf3dfb2ed1",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "362268",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "362268",
+        "opportunity_number": "HT942526PRCRPCTA",
+        "title": "DoW Peer Reviewed Cancer, Clinical Trial Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-06",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Cancer"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362268",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351813"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "d77f97c96ead35c5dceb",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363586",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363586",
+        "opportunity_number": "SB-OEDCS-26-002",
+        "title": "MANUFACTURING AND SMALL BUSINESS CYBERSECURITY RESILIENCE PROGRAM 2026",
+        "agency": "Small Business Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-13",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-08-13",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Cybersecurity",
+          "Education and workforce",
+          "Manufacturing"
+        ],
+        "disciplines": [
+          "Business and Economic Development"
+        ],
+        "applicant_types": [
+          "State governments",
+          "Public and state institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement",
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 2500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363586",
+        "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=127571",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354562"
+      }
+    },
+    {
+      "id": "d73536dffff306dcb571",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363820",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363820",
+        "opportunity_number": "W9126G262SOI9486",
+        "title": "American Crocodile Monitoring as an Indicator of Hydrologic Restoration in the Southern Estuaries for the U.S. Army Corps of Engineers, Jacksonville District.",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 143325,
+        "award_ceiling": 791961,
+        "detail_page": "https://www.grants.gov/search-results-detail/363820",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354983"
+      }
+    },
+    {
+      "id": "d1186ff871bdfe2e58d9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363421",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363421",
+        "opportunity_number": "HRSA-27-008",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 7",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 650000,
+        "award_ceiling": 10117000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363421",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "ce61ae42534c29a09e0f",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363733",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363733",
+        "opportunity_number": "O-BJA-2026-172719",
+        "title": "OJP FY 2026 Special Attorneys Program Round 8",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-28",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 3000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363733",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172719",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "c6a775914541d9261e74",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "362267",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "362267",
+        "opportunity_number": "HT942526PRCRPIPA",
+        "title": "DoW, Peer Reviewed Cancer, Impact Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-06",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Cancer"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362267",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351811"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "c12c881158b7a697996e",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "360510",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360510",
+        "opportunity_number": "HHS-2026-ACL-AOA-DASG-0012",
+        "title": "Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations",
+        "agency": "Administration for Community Living",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-26",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-09-02",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Agriculture and food",
+          "Transportation"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 30000,
+        "award_ceiling": 600000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360510",
+        "funding_opportunity_url": "https://acl.gov/grants/open-opportunities",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354323"
+      }
+    },
+    {
+      "id": "bf9ea16a350e8b66786b",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363819",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363819",
+        "opportunity_number": "W9126G262SOI9482",
+        "title": "Juvenile Sportfish Community and Habitat Suitability in Florida Bay",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 2494000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363819",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354982"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "b9f025791c22f402b185",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363816",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363816",
+        "opportunity_number": "USDA-NIFA-ICGP-012261",
+        "title": "Outreach and Assistance for Veteran Farmers and Ranchers Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Community development",
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 1500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363816",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/outreach-assistance-veteran-farmers-ranchers-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354980"
+      }
+    },
+    {
+      "id": "b9cc520dbfcf7096b63d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363822",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363822",
+        "opportunity_number": "W9126G262SOI9558",
+        "title": "American Alligators as Ecological Indicators of Everglades Restoration",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 391856,
+        "award_ceiling": 1546800,
+        "detail_page": "https://www.grants.gov/search-results-detail/363822",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354985"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "b84c70f56402a95fa062",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363821",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363821",
+        "opportunity_number": "W9126G262SOI9557",
+        "title": "Aquatic Fauna and Primary Production in the Florida Everglades",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 996800,
+        "award_ceiling": 4984000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363821",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354984"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "b30af5c86f4e100e2df5",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363733",
+      "detail": "2026-09-14 → 2026-09-21",
+      "record": {
+        "opportunity_id": "363733",
+        "opportunity_number": "O-BJA-2026-172719",
+        "title": "OJP FY 2026 Special Attorneys Program Round 8",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-28",
+        "close_date": "2026-09-21",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Federally recognized Native American tribal governments",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 3000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363733",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172719",
+        "primary_document_url": null
+      },
+      "old_deadline": "2026-09-14",
+      "new_deadline": "2026-09-21"
+    },
+    {
+      "id": "b20f16d28e8a068a2761",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363420",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363420",
+        "opportunity_number": "HRSA-27-007",
+        "title": "Fiscal Year (FY) Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 566100,
+        "award_ceiling": 15336000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363420",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "ae7680adeedbaaf4d45b",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363419",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363419",
+        "opportunity_number": "HRSA-27-006",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 398400,
+        "award_ceiling": 22025000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363419",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "9ed447189c37892df45e",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363818",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363818",
+        "opportunity_number": "USDA-NIFA-WAMS-011117",
+        "title": "Science, Technology, Engineering, and Mathematics Fields",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 25000,
+        "award_ceiling": 200000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363818",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/science-technology-engineering-mathematics-fields-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354981"
+      }
+    },
+    {
+      "id": "96def9100e6d5f20ae7d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "361438",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "361438",
+        "opportunity_number": "PAR-26-150",
+        "title": "Early-Onset Cancers: Investigating Etiology, Mechanisms, and Early Detection Strategies (RP1 Clinical Trials Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-06-30",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-03-10",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Cancer"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361438",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "9588486baa83965c449f",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363710",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363710",
+        "opportunity_number": "O-BJA-2026-172706",
+        "title": "BJA FY 2026 Crisis Response Training Program",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-25",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-08-25",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Neuroscience",
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 650000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363710",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172706",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "8e5ec6bd94cd75050588",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363820",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363820",
+        "opportunity_number": "W9126G262SOI9486",
+        "title": "American Crocodile Monitoring as an Indicator of Hydrologic Restoration in the Southern Estuaries for the U.S. Army Corps of Engineers, Jacksonville District.",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 143325,
+        "award_ceiling": 791961,
+        "detail_page": "https://www.grants.gov/search-results-detail/363820",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354983"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "8d9cb6641ecc90781cb3",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "349976",
+      "detail": "Deadline 2026-09-05",
+      "record": {
+        "opportunity_id": "349976",
+        "opportunity_number": "PAR-24-027",
+        "title": "Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-08-24",
+        "close_date": "2026-09-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/349976",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-027.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-09-05"
+    },
+    {
+      "id": "8cd1a3a9ad48b93afa46",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:vpr-779bd2ee55b34b8e",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-779bd2ee55b34b8e",
+        "opportunity_number": null,
+        "title": "Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)",
+        "agency": "Simons Foundation",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-12-01",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons",
+        "funding_opportunity_url": "https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "8cb35065fd5f04089123",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "355940",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "355940",
+        "opportunity_number": "HHS-2025-IHS-ALZ-0001",
+        "title": "Dementia CAReS Grants for American Indian and Alaska Native Communities",
+        "agency": "Indian Health Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": "2026-09-04",
+        "version": "Forecast 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 750000,
+        "award_ceiling": 750000,
+        "detail_page": "https://www.grants.gov/search-results-detail/355940",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "87c4b27bf61839013de4",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363823",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363823",
+        "opportunity_number": "W9126G262SOI9597",
+        "title": "Wading Bird Response to Ecosystem Restoration in Southwest Florida",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 1960000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363823",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354986"
+      }
+    },
+    {
+      "id": "7cf46a13e542f5c90b76",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363226",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363226",
+        "opportunity_number": "FOA-ILAB-26-42",
+        "title": "Better Tools for Fair Cotton: Traceability Solutions to Protect U.S. Supply Chains from Chinese Forced Labor",
+        "agency": "Bureau of International Labor Affairs",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-05",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-07-17",
+        "version": "Forecast 2",
+        "topic_areas": [
+          "Manufacturing"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 6000000,
+        "award_ceiling": 6000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363226",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "7ba4accda55b4c5fbd15",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:25-301",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "vpr-email:25-301",
+        "opportunity_number": "25-301",
+        "title": "NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-10-05",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "7a7d78797aeb6385e892",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363816",
+      "detail": "Deadline 2026-09-10",
+      "record": {
+        "opportunity_id": "363816",
+        "opportunity_number": "USDA-NIFA-ICGP-012261",
+        "title": "Outreach and Assistance for Veteran Farmers and Ranchers Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-09-10",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Community development",
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 1500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363816",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/outreach-assistance-veteran-farmers-ranchers-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354980"
+      },
+      "deadline": "2026-09-10"
+    },
+    {
+      "id": "7493cfbc6bcd1a43c501",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:26-123",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:26-123",
+        "opportunity_number": "26-123",
+        "title": "Defense Advanced Research Projects Agency (DARPA)",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-04-16",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view",
+        "funding_opportunity_url": "https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "734278bb2c146c62351f",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:vpr-e4cc1ac2aa40787d",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-e4cc1ac2aa40787d",
+        "opportunity_number": null,
+        "title": "NSF Research in the Formation of Engineers program",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "7200bbbf1b3f5ea90ec8",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363419",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363419",
+        "opportunity_number": "HRSA-27-006",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 398400,
+        "award_ceiling": 22025000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363419",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "6ed01e625f7e72202d58",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363457",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363457",
+        "opportunity_number": "G26AS00155",
+        "title": "Cooperative Agreement for Affiliated Partner with the Great Lakes - Northern Forest Cooperative Ecosystem Studies Unit (CESU)",
+        "agency": "Geological Survey",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-04",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-08-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 276000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363457",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "6c316b74efde65587baa",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363823",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363823",
+        "opportunity_number": "W9126G262SOI9597",
+        "title": "Wading Bird Response to Ecosystem Restoration in Southwest Florida",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 1960000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363823",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354986"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "694b027816ac950408f2",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "361451",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "361451",
+        "opportunity_number": "RFA-NS-26-031",
+        "title": "Exposomic Contributions to ADRD Pathology and Resilience",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-01",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-03-11",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Community development",
+          "Environmental science",
+          "Health equity",
+          "Neuroscience"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361451",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "66b36defa779c48811e6",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363470",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363470",
+        "opportunity_number": "OFOP0003546",
+        "title": "Project Constellation: Building a Constellation of Outer Space Partners at the UN",
+        "agency": "U.S. Mission to the International Organizations",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-05",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-08-05",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science",
+          "Technology development"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 4750000,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363470",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354384"
+      }
+    },
+    {
+      "id": "5de45ba6b6e151243719",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "361447",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "361447",
+        "opportunity_number": "PAR-26-129",
+        "title": "Systematic Testing of Radionuclides in Preclinical Experiments (STRIPE, RP1 Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-06-15",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-03-11",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Biology and biotechnology",
+          "Cancer"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361447",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "54ede5e3ff3404f1df50",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363822",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363822",
+        "opportunity_number": "W9126G262SOI9558",
+        "title": "American Alligators as Ecological Indicators of Everglades Restoration",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 3",
+        "topic_areas": [
+          "Environmental science",
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 391856,
+        "award_ceiling": 1546800,
+        "detail_page": "https://www.grants.gov/search-results-detail/363822",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354985"
+      }
+    },
+    {
+      "id": "50ac081df95fe0949d06",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "360294",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "360294",
+        "opportunity_number": "HHS-2026-IHS-ALZ-0001",
+        "title": "Addressing Dementia in Tribal and Urban Indian Communities: CAReS Program",
+        "agency": "Indian Health Service",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-06-30",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-06-30",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Arts and culture",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 250000,
+        "award_ceiling": 750000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360294",
+        "funding_opportunity_url": "https://www.ihs.gov/dgm/funding/",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353517"
+      }
+    },
+    {
+      "id": "4f40ad26d196f126aa18",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363657",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363657",
+        "opportunity_number": "EPA-OW-OWM-26-03",
+        "title": "Innovative Water Infrastructure Workforce Development Grant",
+        "agency": "Environmental Protection Agency",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science",
+          "Public health",
+          "Water"
+        ],
+        "disciplines": [
+          "Education"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 7800000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363657",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354700"
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "4e1d757e8ad97901417a",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363721",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363721",
+        "opportunity_number": "W9126G262RFP9554",
+        "title": "Conservation and Forestry Program Support (2026-2031) for Environmental Natural Resources Management Division, Directorate of Public Works, Joint Readiness Training Center and Fort Polk, Louisiana",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-26",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 4",
+        "topic_areas": [
+          "Education and workforce",
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1250000,
+        "award_ceiling": 7593600,
+        "detail_page": "https://www.grants.gov/search-results-detail/363721",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "48ac144b455b93a5ae66",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "349976",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "349976",
+        "opportunity_number": "PAR-24-027",
+        "title": "Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-08-24",
+        "close_date": "2026-09-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/349976",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-027.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3f157539ba3dc2ebdf3c",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363788",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363788",
+        "opportunity_number": "RD-ET-RDA-26-002",
+        "title": "Improving the Capacity of Tribal Communities to Identify Emerging Drug Threats",
+        "agency": "Office of National Drug Control Policy",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-02",
+        "close_date": "2026-09-13",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 300000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363788",
+        "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=127826",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "3d62253839315f5d5bcb",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "359199",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "359199",
+        "opportunity_number": "NOT-DK-26-302",
+        "title": "Kidney Precision Medicine Project Tissue Interrogation Sites",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-05",
+        "close_date": "2026-10-05",
+        "last_updated": "2025-09-24",
+        "version": "Forecast 2",
+        "topic_areas": [
+          "Arts and culture"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359199",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "37c77ec070bf9e3b18d4",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363421",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363421",
+        "opportunity_number": "HRSA-27-008",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 7",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 650000,
+        "award_ceiling": 10117000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363421",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "375c2bcf2e7fe42a5219",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363817",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363817",
+        "opportunity_number": "W9126G262SOI0520",
+        "title": "Groundwater and Surficial Water Salinity Changes in Everglades National Park using Aerial Electromagnetic Surveys",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 300000,
+        "award_ceiling": 1657690,
+        "detail_page": "https://www.grants.gov/search-results-detail/363817",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "34c9f08fe35e850218b1",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "361411",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "361411",
+        "opportunity_number": "PAR-26-132",
+        "title": "Expanding the Therapeutic Pipeline for Treating and Preventing Alzheimer's Disease and Related Dementias: Preclinical Validation and Drug Discovery for Novel Candidate Targets (U01 Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-31",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-03-04",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361411",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "2f57fab3198b2a47800d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363420",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363420",
+        "opportunity_number": "HRSA-27-007",
+        "title": "Fiscal Year (FY) Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 566100,
+        "award_ceiling": 15336000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363420",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "28dd327de777a4fd9673",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "349976",
+      "detail": "2026-10-30 → 2026-09-05",
+      "record": {
+        "opportunity_id": "349976",
+        "opportunity_number": "PAR-24-027",
+        "title": "Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2023-08-24",
+        "close_date": "2026-09-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/349976",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-027.html",
+        "primary_document_url": null
+      },
+      "old_deadline": "2026-10-30",
+      "new_deadline": "2026-09-05"
+    },
+    {
+      "id": "26af0e8d9d62e8aab4e5",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "357194",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "357194",
+        "opportunity_number": "PAR-25-228",
+        "title": "Investigator Initiated Innovation in Computational Genomics and Data Science (R01 Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-11-18",
+        "close_date": "2027-09-07",
+        "last_updated": "2024-11-18",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Data science",
+          "Education and workforce",
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Environmental science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/357194",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-228.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "259ca14bd04a0287eb6b",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363819",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "363819",
+        "opportunity_number": "W9126G262SOI9482",
+        "title": "Juvenile Sportfish Community and Habitat Suitability in Florida Bay",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Water"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 350000,
+        "award_ceiling": 2494000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363819",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354982"
+      }
+    },
+    {
+      "id": "24b0a9dbf149c1bdad53",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:vpr-3f359d639f6d327f",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-3f359d639f6d327f",
+        "opportunity_number": null,
+        "title": "Selective Harnessing of Intrinsic Neuroplasticity Engineering (SHINE)",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-10-09",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": 2000000,
+        "detail_page": "https://sam.gov/opp/0396f5debf814299b35bcb146365d675/view",
+        "funding_opportunity_url": "https://sam.gov/opp/0396f5debf814299b35bcb146365d675/view",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "219bfb5e4efdaedd34f8",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:25-301",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:25-301",
+        "opportunity_number": "25-301",
+        "title": "NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-10-05",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "142c843cfdc4bf26c7b1",
+      "type": "amended",
+      "label": "Opportunity amended",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363423",
+      "detail": "Official source record changed",
+      "record": {
+        "opportunity_id": "363423",
+        "opportunity_number": "HRSA-27-005",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1216000,
+        "award_ceiling": 19182000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363423",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0d58ed9a6093d64ba37a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363818",
+      "detail": "Deadline 2026-09-14",
+      "record": {
+        "opportunity_id": "363818",
+        "opportunity_number": "USDA-NIFA-WAMS-011117",
+        "title": "Science, Technology, Engineering, and Mathematics Fields",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-09-14",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Agriculture and food",
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 25000,
+        "award_ceiling": 200000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363818",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/science-technology-engineering-mathematics-fields-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354981"
+      },
+      "deadline": "2026-09-14"
+    },
+    {
+      "id": "0c86f274402ee5dbd789",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363423",
+      "detail": "Deadline 2026-10-05",
+      "record": {
+        "opportunity_id": "363423",
+        "opportunity_number": "HRSA-27-005",
+        "title": "Fiscal Year (FY) 2027 Service Area Competition (SAC)",
+        "agency": "Health Resources and Services Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-09-11",
+        "close_date": "2026-10-05",
+        "last_updated": "2026-09-04",
+        "version": "Forecast 9",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1216000,
+        "award_ceiling": 19182000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363423",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-05"
+    },
+    {
+      "id": "0a8e86fa696208428412",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "363674",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363674",
+        "opportunity_number": "FR-CRS-22-006",
+        "title": "FY26-22-Baltimore Penn Station Facility Improvements",
+        "agency": "DOT - Federal Railroad Administration",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-20",
+        "close_date": "2026-09-04",
+        "last_updated": "2026-08-20",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Transportation"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 5000000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363674",
+        "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=124200",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "08a08049842627df33df",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "357195",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "357195",
+        "opportunity_number": "PAR-25-229",
+        "title": "Investigator Initiated Innovation in Computational Genomics and Data Science (R21 Clinical Trial Not Allowed)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-11-18",
+        "close_date": "2027-09-07",
+        "last_updated": "2024-11-18",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Data science",
+          "Education and workforce",
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Environmental science",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/357195",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-229.html",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "06d7bbc267908af6c8dd",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-05T10:08:13.857021Z",
+      "opportunity_id": "vpr-email:vpr-40c8bd8449be89b5",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-40c8bd8449be89b5",
+        "opportunity_number": null,
+        "title": "Research Areas",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-08-27",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://sam.gov/opp/b77f1caefb244d1193ded7f6187ede52/view",
+        "funding_opportunity_url": "https://sam.gov/opp/b77f1caefb244d1193ded7f6187ede52/view",
+        "primary_document_url": null
+      }
+    },
     {
       "id": "f426a0ea76693f4c6a0c",
       "type": "closed_or_removed",

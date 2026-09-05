@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,18 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363815"/>
+    <id>urn:funding-finder:grants-gov:363815</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
+    <summary>Golden Field Office | Closes 2026-12-01 | DOE CMEI is dedicated to securing America’s energy future by reinforcing domestic critical mineral supply chains, driving next-generation energy technology and manufacturing research, and promoting affordable, consumer-friendly solutions. CMEI’s AFFO is issuing this ASPECT NOFO, DE-FOA-0003647, to support research, development, and pre-pilot testing of innovative technologies that produce chemical…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.17 Hydrosphere</title>
@@ -664,18 +676,5 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
-  </entry>
-  <entry>
-    <title>Middle East Regional Cooperation (MERC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363070"/>
-    <id>urn:funding-finder:grants-gov:363070</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Assistance Coordination</name></author>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
 </feed>
