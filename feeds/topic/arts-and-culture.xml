@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -540,16 +540,6 @@
     <summary>National Institutes of Health | Closes 2026-10-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
   <entry>
-    <title>Addressing Dementia in Tribal and Urban Indian Communities: CAReS Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360294"/>
-    <id>urn:funding-finder:grants-gov:360294</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Closes 2026-09-04 | This program is intended to support Tribal and Urban Indian communities in strengthening dementia care and services for American Indian and Alaska Native (AI/AN) people. Rooted in Indigenous values and community self-determination, the program will fund meaningful, measurable improvements that span the full dementia care continuum, from early recognition to caregiver support. Option A - Dementia C…</summary>
-  </entry>
-  <entry>
     <title>Scholarly Editions and Translations</title>
     <link href="https://www.grants.gov/search-results-detail/363014"/>
     <id>urn:funding-finder:grants-gov:363014</id>
@@ -651,5 +641,14 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Park Service | Closes 2026-09-08 | The Southwest Border Resource Protection Program (SWBRPP) provides financial assistance to National Park Service (NPS) units, as well as educational institutions, nonprofit organizations, tribes, and local and state agencies to improve resource stewardship, achieve international cooperation, provide meaningful interpretation and conduct scientific research, which will lead to increased appreciatio…</summary>
+  </entry>
+  <entry>
+    <title>Partnership Agreement Grants, FY 2027</title>
+    <link href="https://www.grants.gov/search-results-detail/362676"/>
+    <id>urn:funding-finder:grants-gov:362676</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>National Endowment for the Arts</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Endowment for the Arts | Closes 2026-09-29 | The National Endowment for the Arts’ State &amp; Regional Partnership Agreement grants are awarded to the nation’s 56 state and jurisdictional arts agencies (SAAs), and the six regional arts organizations (RAOs) whose members comprise SAAs.</summary>
   </entry>
 </feed>

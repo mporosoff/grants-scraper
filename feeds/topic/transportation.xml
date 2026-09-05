@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -259,15 +259,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
-  </entry>
-  <entry>
-    <title>FY26-22-Baltimore Penn Station Facility Improvements</title>
-    <link href="https://www.grants.gov/search-results-detail/363674"/>
-    <id>urn:funding-finder:grants-gov:363674</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>DOT - Federal Railroad Administration</name></author>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Railroad Administration | Closes 2026-09-04 | This grant will fund multimodal infrastructure investments around Baltimore Penn Station to improve transit, walking, and bicycling connections to support the station’s role as an intermodal hub in the heart of Baltimore City and to enable passenger traffic through the Station to grow.</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
@@ -534,16 +525,6 @@
     <summary>DOT - Federal Transit Administration | Closes 2026-09-09 | The Federal Transit Administration (FTA) announces the opportunity to apply for $11,959,671 million in Fiscal Year (FY) 2024, 2025, and 2026 competitive grant funding to support transit services for the FY 2026 Innovative Coordinated Access and Mobility (ICAM) pilot program. Under the ICAM pilot program, funds awarded will finance innovative capital projects for the transportation-disadvantaged, w…</summary>
   </entry>
   <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living | Closes 2026-09-04 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
-  </entry>
-  <entry>
     <title>Institutional Mentored Career Development Award (Parent K12) (Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361251"/>
     <id>urn:funding-finder:grants-gov:361251</id>
@@ -635,5 +616,24 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Closes 2029-07-16 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) announces a program that provides NIAMS-supported K01, K08, K23, and K25 recipients the opportunity to apply for the Small Grant (R03) during the second to fourth year of their K award, as well as to provide support to recipients of significant career development awards from federal or non-federal organizations that …</summary>
+  </entry>
+  <entry>
+    <title>DoW Autism Career Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362529"/>
+    <id>urn:funding-finder:grants-gov:362529</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Transportation"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-22 | Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism. Distinctive Features: ﻿Applications …</summary>
+  </entry>
+  <entry>
+    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
+    <link href="https://www.grants.gov/search-results-detail/362393"/>
+    <id>urn:funding-finder:grants-gov:362393</id>
+    <updated>2026-05-14T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Space and aeronautics"/>
+    <category term="Transportation"/>
+    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
   </entry>
 </feed>

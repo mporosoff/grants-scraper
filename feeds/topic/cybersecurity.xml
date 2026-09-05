@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -169,17 +169,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-10-16 | Annual Recurring University Training and ResearchThe purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communiti…</summary>
-  </entry>
-  <entry>
-    <title>MANUFACTURING AND SMALL BUSINESS CYBERSECURITY RESILIENCE PROGRAM 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363586"/>
-    <id>urn:funding-finder:grants-gov:363586</id>
-    <updated>2026-08-13T00:00:00Z</updated>
-    <author><name>Small Business Administration</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>Small Business Administration | Closes 2026-09-04 | The purpose of this Funding Opportunity is to invite proposals for funding to deliver technical assistance to small businesses. Only applications from the states of Indiana, Ohio, or Virginia that have experience in managing a state-wide, regional or nationwide cybersecurity training program will be considered for funding via this announcement. Applicants must be states, state entities or designat…</summary>
   </entry>
   <entry>
     <title>FY26 - Stopping Threats On Pedestrian Competitive Grant Program (Bollards)</title>
@@ -712,5 +701,15 @@
     <category term="Education and workforce"/>
     <category term="Cybersecurity"/>
     <summary>National Institutes of Health | Closes 2027-06-14 | This Notice of Funding Opportunity (NOFO) encourages applications for support of resources that will provide access to state-of-the-art equipment, technologies, research tools, materials, organisms, software, and/or services to a substantial regional (multi-state) or national user base. Only those resources with technical capabilities that fall within the NIGMS-supported program areas are eligible…</summary>
+  </entry>
+  <entry>
+    <title>Department of War Cyber Service Academy (DoW CSA)</title>
+    <link href="https://www.grants.gov/search-results-detail/358380"/>
+    <id>urn:funding-finder:grants-gov:358380</id>
+    <updated>2025-01-23T00:00:00Z</updated>
+    <author><name>Washington Headquarters Services</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <summary>Washington Headquarters Services | Closes 2030-01-22 | See the "Related Documents" and "Package" tabs for the complete application package, including the full text of the Notice of Funding Opportunity. The Department of War (DoW) Cyber Service Academy (CSA) is authorized by Chapter 112 of Title 10, United States Code, Section 2200. The purpose of the program is to support the recruitment of new cyber talent and the retention of current highly skilled …</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-09-04T14:25:22Z</updated>
+  <updated>2026-09-05T10:11:28Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -81,6 +81,28 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>Outreach and Assistance for Veteran Farmers and Ranchers Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363816"/>
+    <id>urn:funding-finder:grants-gov:363816</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-10 | The purpose of the OAVFR program, under assistance listing number 10.443, is to assist Veterans in owning and operating farms and ranches and to ensure they are knowledgeable and participating in full range of USDA programs. With OAVFR funding, recipient organizations can provide outreach, technical assistance, and education in agriculture, agribusiness, forestry, and agricultural-related services…</summary>
+  </entry>
+  <entry>
+    <title>Science, Technology, Engineering, and Mathematics Fields</title>
+    <link href="https://www.grants.gov/search-results-detail/363818"/>
+    <id>urn:funding-finder:grants-gov:363818</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>National Institute of Food and Agriculture</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <summary>National Institute of Food and Agriculture | Closes 2026-09-14 | The STEM program, under assistance listing number 10.318, will support projects that increase participation from rural areas. NIFA intends for this program to address educational needs through research and extension activities within broadly defined areas of the food and agricultural sciences and their allied disciplines. Projects must focus on an audience of K-14 students (kindergarten through tw…</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -429,16 +451,6 @@
     <summary>Health Resources and Services Administration | Closes 2026-09-09 | The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits.</summary>
   </entry>
   <entry>
-    <title>Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:grants-gov:360510</id>
-    <updated>2026-06-26T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Transportation"/>
-    <summary>Administration for Community Living | Closes 2026-09-04 | Grants awarded under this announcement are to provide disaster reimbursement and assistance funds to those State Units on Aging (SUAs), and federally recognized Tribal Organizations who are currently receiving a grant under Title VI of the Older Americans Act (OAA), as amended. Total funding available for disaster assistance is subject to the availability of funds appropriated. The estimated numbe…</summary>
-  </entry>
-  <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
     <link href="https://www.grants.gov/search-results-detail/362787"/>
     <id>urn:funding-finder:grants-gov:362787</id>
@@ -675,14 +687,5 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
     <summary>Food and Drug Administration | Closes 2028-02-08 | The purpose of this notice of funding opportunity (NOFO) is to support efficient and innovative natural history studies that advance medical product development in rare diseases/conditions with unmet needs. Through the support of natural history studies with high quality and interpretable data elements, FDA expects to address critical knowledge gaps, remove major barriers to progress in the field,…</summary>
-  </entry>
-  <entry>
-    <title>Reissue of RFA-FD-23-001- Clinical Studies of Orphan Products Addressing Unmet Needs of Rare Diseases (R01 Clinical Trials Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360008"/>
-    <id>urn:funding-finder:grants-gov:360008</id>
-    <updated>2025-07-11T00:00:00Z</updated>
-    <author><name>Food and Drug Administration</name></author>
-    <category term="Agriculture and food"/>
-    <summary>Food and Drug Administration | Closes 2028-05-16 | The purpose of this Notice of Funding Opportunity (NOFO) is to fund clinical trials of products evaluating efficacy and/or safety in support of a new indication or change in labeling to address unmet needs in rare diseases or conditions. Additionally, through the funding of collaborative, efficient, and/or innovative clinical trials, FDA expects to increase the number of approved treatments for ra…</summary>
   </entry>
 </feed>
