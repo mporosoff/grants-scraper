@@ -26,6 +26,11 @@ remain preserved in `outputs/stage5`.
   cancellation, request sequencing and timeout prevent late responses from changing
   a different draft. A complete typed name remains usable during lookup failure.
 
+ROR choices display the city and country from the award API's normalized location
+fields, matching Funded Awards. A duplicate-name regression uses the real Worker
+normalizer to ensure different institutions remain distinguishable and keyboard
+selection retains the intended canonical ROR identity.
+
 ## Institution data and governance
 
 The additive optional field is `institution: { name, ror_id }`, bounded to 300

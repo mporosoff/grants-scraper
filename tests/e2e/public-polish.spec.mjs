@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { normalizeRorOrganization } from "../../workers/award-api/src/ror.js";
 import { mockAwards, mockHybrid, openFundingFinder, runFundingSearch } from "./helpers.mjs";
 
 test("Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text", async ({ page }) => {
@@ -93,4 +94,31 @@ test("Late ROR responses and lookup failures cannot overwrite a different resear
   await expect(page.locator("#institution-status")).toContainText("temporarily unavailable");
   await expect(page.locator("#institution-name")).toHaveValue("Example University");
   await expect(page.locator("#institution-ror-id")).toHaveValue("");
+});
+
+test("ROR suggestions distinguish identical names using the actual API city and country fields", async ({ page }) => {
+  const institutions = [
+    ["https://ror.org/05dxps055", "Rochester", "United States", "US"],
+    ["https://ror.org/04mtcj695", "Kabacan", "Philippines", "PH"],
+  ].map(([id, city, country, code]) => normalizeRorOrganization({
+    id, names: [{ value: "Example Research Institute", types: ["ror_display"] }],
+    locations: [{ geonames_details: { name: city, country_name: country, country_code: code } }],
+    status: "active", types: ["education"],
+  }, "Example"));
+  await page.route("**/institutions/search?*", route => route.fulfill({ json: { institutions } }));
+  await page.setViewportSize({ width: 320, height: 780 });
+  await page.goto("/faculty_interests.html?mode=add");
+  const input = page.locator("#institution-name");
+  await input.fill("Example");
+  const options = page.locator("#institution-options [role='option']");
+  await expect(options).toHaveText([
+    "Example Research Institute · Rochester, United States",
+    "Example Research Institute · Kabacan, Philippines",
+  ]);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await input.press("ArrowDown");
+  await input.press("ArrowDown");
+  await input.press("Enter");
+  await expect(input).toHaveValue("Example Research Institute");
+  await expect(page.locator("#institution-ror-id")).toHaveValue("https://ror.org/04mtcj695");
 });

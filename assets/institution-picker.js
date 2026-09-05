@@ -49,7 +49,8 @@
           option.type = "button"; option.id = `${list.id}-${index}`;
           option.setAttribute("role", "option"); option.setAttribute("aria-selected", "false");
           option.dataset.institutionIndex = String(index);
-          option.textContent = item.canonical_name + (item.location?.country_name ? ` · ${item.location.country_name}` : "");
+          const location = [item.location?.city, item.location?.country].filter(value => typeof value === "string" && value.trim()).join(", ");
+          option.textContent = item.canonical_name + (location ? ` · ${location}` : "");
           list.append(option);
         });
         list.classList.toggle("hidden", !candidates.length);
