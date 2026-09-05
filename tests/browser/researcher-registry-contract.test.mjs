@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { assertResearcherIdentities } from "../helpers/assert-researcher-identities.mjs";
 
 const root = new URL("../../", import.meta.url);
 const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSource, runtime, teamPage] = await Promise.all([
@@ -18,6 +21,68 @@ const [registry, manifest, directorySource, matchesSource, teamModel, teamDataSo
 function assignmentJson(source) {
   return JSON.parse(source.slice(source.indexOf("{")).trim().replace(/;$/, ""));
 }
+
+const identityBaseline = JSON.parse(await readFile(new URL("tests/fixtures/researcher-identity-baseline.json", root), "utf8"));
+// PR/push CI explicitly supplies the protected pre-change SHA. Refresh and
+// publication validate an uncommitted registry against their checked-out main.
+const protectedRef = process.env.RESEARCHER_IDENTITY_BASE_SHA || "HEAD";
+if (protectedRef !== "HEAD") assert.match(protectedRef, /^[a-f0-9]{40}$/);
+const publishedSource = spawnSync("git", ["show", `${protectedRef}:config/researcher_registry.json`], {
+  cwd: fileURLToPath(root), encoding: "utf8",
+});
+assert.equal(publishedSource.status, 0, `Cannot load protected registry identity baseline: ${publishedSource.stderr}`);
+const publishedRegistry = JSON.parse(publishedSource.stdout);
+
+test("existing researcher, legacy and claim mappings survive mutable registry publication", () => {
+  assertResearcherIdentities(registry, identityBaseline);
+  assertResearcherIdentities(registry, publishedRegistry);
+  const updated = { researchers: structuredClone(identityBaseline.researchers) };
+  const person = updated.researchers[0];
+  person.display_name = "Reviewed display-name correction";
+  person.home_unit = "Reviewed unit correction";
+  person.institution = { name: "Reviewed institution", ror_id: "" };
+  person.status = "inactive";
+  person.claims[0].revision += 1;
+  person.claims[0].material_hash = "a".repeat(64);
+  person.claims[0].status = "retired";
+  person.claims.push({ claim_id: `${person.researcher_id}-c999`, legacy_claim_ids: [], revision: 1, material_hash: "b".repeat(64) });
+  updated.researchers.push({ researcher_id: "urh-999999", legacy_ids: ["new-researcher"], claims: [] });
+  assertResearcherIdentities(updated, identityBaseline);
+  // Once this valid addition is the published baseline, the next generation
+  // must retain both newly accepted identities without updating the old fixture.
+  const next = structuredClone(updated);
+  next.researchers.pop();
+  assert.throws(() => assertResearcherIdentities(next, updated), /Missing stable researcher urh-999999/);
+  const missingClaim = structuredClone(updated);
+  missingClaim.researchers[0].claims.pop();
+  assert.throws(() => assertResearcherIdentities(missingClaim, updated), /Missing stable claim .*c999/);
+});
+
+test("protected PR and push gates fetch the pre-change registry while refresh and publication use their current checkout", async () => {
+  const workflow = await readFile(new URL(".github/workflows/tests.yml", root), "utf8");
+  assert.match(workflow, /RESEARCHER_IDENTITY_BASE_SHA: \$\{\{ github\.event\.pull_request\.base\.sha \|\| github\.event\.before \}\}/);
+  assert.match(workflow, /git fetch --no-tags --depth=1 origin "\$RESEARCHER_IDENTITY_BASE_SHA"/);
+  assert.ok(workflow.indexOf("Fetch the protected researcher identity baseline") < workflow.indexOf("node --test tests/browser/*.test.mjs"));
+});
+
+test("consistent regeneration cannot hide reassigned or removed historical identities", () => {
+  const corruptions = [
+    rows => rows.shift(),
+    rows => { rows[0].researcher_id = "urh-999999"; },
+    rows => { [rows[0].legacy_ids, rows[1].legacy_ids] = [rows[1].legacy_ids, rows[0].legacy_ids]; },
+    rows => { rows[0].legacy_ids = []; },
+    rows => rows[0].claims.shift(),
+    rows => { rows[0].claims[0].claim_id = `${rows[0].researcher_id}-c999`; },
+    rows => { rows[0].claims[0].legacy_claim_ids = []; },
+    rows => { rows[0].claims[0].revision = 0; },
+    rows => { rows[0].claims[0].material_hash = "c".repeat(64); },
+  ];
+  for (const corrupt of corruptions) {
+    const changed = { researchers: structuredClone(identityBaseline.researchers) };
+    corrupt(changed.researchers);
+    assert.throws(() => assertResearcherIdentities(changed, identityBaseline));
+  }
+});
 
 test("one generated registry generation owns every public researcher projection", () => {
   const directory = assignmentJson(directorySource);

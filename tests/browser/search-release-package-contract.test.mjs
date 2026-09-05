@@ -36,6 +36,10 @@ function sha256(value) {
 }
 
 test("release manifest, vector binary, and Worker allowlist identify one current corpus", async () => {
+  assert.equal(release.generated_at, manifest.generated_at);
+  assert.equal(release.model, manifest.model);
+  assert.equal(release.dimension, manifest.dimension);
+  assert.equal(release.passage_count, manifest.passage_count);
   assert.equal(release.current_corpus_sha256, manifest.corpus_sha256);
   assert.equal(release.vector_sha256, manifest.vector_sha256);
   assert.equal(sha256(vectors), manifest.vector_sha256);

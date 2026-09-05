@@ -31,9 +31,19 @@ jobs:
 
   browser:
     runs-on: ubuntu-latest
+    env:
+      RESEARCHER_IDENTITY_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
 
     steps:
       - uses: actions/checkout@v6
+      - name: Fetch the protected researcher identity baseline
+        shell: bash
+        run: |
+          if ! [[ "$RESEARCHER_IDENTITY_BASE_SHA" =~ ^[a-f0-9]{40}$ ]] || [[ "$RESEARCHER_IDENTITY_BASE_SHA" =~ ^0+$ ]]; then
+            echo "::error::A protected base commit is required for researcher identity validation."
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin "$RESEARCHER_IDENTITY_BASE_SHA"
       - uses: pnpm/action-setup@v6
         with:
           version: "11.19.0"

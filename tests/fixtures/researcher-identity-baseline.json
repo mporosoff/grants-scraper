@@ -1,0 +1,4560 @@
+{
+  "protected_main": "824f79f05599686185714b9057d40d3cd256fc94",
+  "researchers": [
+    {
+      "researcher_id": "urh-000001",
+      "legacy_ids": [
+        "aaron-bauer"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000001-c001",
+          "legacy_claim_ids": [
+            "aaron-bauer:CV077"
+          ],
+          "revision": 1,
+          "material_hash": "021c69f835af98e7fbb49a443959b0fac28d37a240a94082dfb3e42b5625df83"
+        },
+        {
+          "claim_id": "urh-000001-c002",
+          "legacy_claim_ids": [
+            "aaron-bauer:CV055"
+          ],
+          "revision": 1,
+          "material_hash": "efc776b8702269b450367465cb6b665a334569da7bc642d99509f012ea7ab21f"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000002",
+      "legacy_ids": [
+        "aaron-white"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000002-c001",
+          "legacy_claim_ids": [
+            "aaron-white:CV011"
+          ],
+          "revision": 1,
+          "material_hash": "8f99e81139afa500a08492f454d93a25aa123368c8a19698f71ebb698d7fa2c5"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000003",
+      "legacy_ids": [
+        "adam-sefkow"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000003-c001",
+          "legacy_claim_ids": [
+            "adam-sefkow:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "594381bcea67353a0a58202c7ab55eb72cdad05d89d8ee85e9759ea23ca25d31"
+        },
+        {
+          "claim_id": "urh-000003-c002",
+          "legacy_claim_ids": [
+            "adam-sefkow:CV187"
+          ],
+          "revision": 1,
+          "material_hash": "bbb86c7800c817846cd632595a00dde32ef971ddf5730e7b953ad43741cff27d"
+        },
+        {
+          "claim_id": "urh-000003-c003",
+          "legacy_claim_ids": [
+            "adam-sefkow:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "e054926892fe0aff8efcf751bd8396dc78fa31793f1d44585c97cc732d0fe677"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000004",
+      "legacy_ids": [
+        "agnes-e-thorarinsdottir"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000004-c001",
+          "legacy_claim_ids": [
+            "agnes-e-thorarinsdottir:CV147"
+          ],
+          "revision": 1,
+          "material_hash": "ffa0d843fe4f788c67d517b2b4b8a358879b642cb515bff775140f476319629d"
+        },
+        {
+          "claim_id": "urh-000004-c002",
+          "legacy_claim_ids": [
+            "agnes-e-thorarinsdottir:CV140"
+          ],
+          "revision": 1,
+          "material_hash": "895c82adc8dc102fb34a26898d7a06b1051a128c55fadb54b8cbc94c94e912b3"
+        },
+        {
+          "claim_id": "urh-000004-c003",
+          "legacy_claim_ids": [
+            "agnes-e-thorarinsdottir:CV144"
+          ],
+          "revision": 1,
+          "material_hash": "00e061215706a935711a66a103408913039d10fc94cb5cf6dd47cc0480188b04"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000005",
+      "legacy_ids": [
+        "alexander-a-shestopalov"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000005-c001",
+          "legacy_claim_ids": [
+            "alexander-a-shestopalov:CV145"
+          ],
+          "revision": 1,
+          "material_hash": "966b46476308c47802376440ac3bd10231e97417bbfc9abff55ae1f5ff456d4b"
+        },
+        {
+          "claim_id": "urh-000005-c002",
+          "legacy_claim_ids": [
+            "alexander-a-shestopalov:CV166"
+          ],
+          "revision": 1,
+          "material_hash": "f35e54b2dd20ec8867862b7dc99219780dbbefc644026e7ebb5f4d9472d059b4"
+        },
+        {
+          "claim_id": "urh-000005-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "1ca833af9b55c7ff8a78ae24dde4871136ef254268efcbe85193e3ca646a0a55"
+        },
+        {
+          "claim_id": "urh-000005-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6b123d290d3093166bcde03d13462ffd1ae97fc6ab169cae86f95624fa31f1f9"
+        },
+        {
+          "claim_id": "urh-000005-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "15f0f18353a55e1fc57ee8464d7c46e917c5a9e32f13178c1ccc435cba6d6b48"
+        },
+        {
+          "claim_id": "urh-000005-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "05cb48e12c7b050aa59363fa6eaca566a2ff1d249867a000911c8577e28f8f25"
+        },
+        {
+          "claim_id": "urh-000005-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "afe145f22a98ddf68f967c90c03e894aa1a446b36659c0bce13e5e4b4cb05f13"
+        },
+        {
+          "claim_id": "urh-000005-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "2fbf0c4fa9d8c1f20a590520b599b30d1561be5cceb16522caa0d4dad077ef37"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000006",
+      "legacy_ids": [
+        "alice-c-quillen"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000006-c001",
+          "legacy_claim_ids": [
+            "alice-c-quillen:CV165"
+          ],
+          "revision": 1,
+          "material_hash": "191c9827d4614f2ba0ec3202c94232b15c688139052ae2b3ac59fab6b3e841cc"
+        },
+        {
+          "claim_id": "urh-000006-c002",
+          "legacy_claim_ids": [
+            "alice-c-quillen:CV192"
+          ],
+          "revision": 1,
+          "material_hash": "43f8cc5b8bcfcd3e5197758e1926fb59a0c19a67e5bbddc5c30febbeb3505a2a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000007",
+      "legacy_ids": [
+        "allison-j-lopatkin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000007-c001",
+          "legacy_claim_ids": [
+            "allison-j-lopatkin:CV133"
+          ],
+          "revision": 1,
+          "material_hash": "6ea9df9184427c3978eb3d6a46b2603943096048f2ebfab2610fa2e20e611ee2"
+        },
+        {
+          "claim_id": "urh-000007-c002",
+          "legacy_claim_ids": [
+            "allison-j-lopatkin:CV134"
+          ],
+          "revision": 1,
+          "material_hash": "3118b37693a0fa197dab120824c5efa361a44118d95ca36c229ffd44cfd8734b"
+        },
+        {
+          "claim_id": "urh-000007-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "5140e277855ce65dd5acaecb871b5962c1fc88b2722101bc8827ce2ab0f3eed8"
+        },
+        {
+          "claim_id": "urh-000007-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "bef90ad9f673f0415edca32a1f9da89f909720a1a9c6f1c9c1d4e70d37d91634"
+        },
+        {
+          "claim_id": "urh-000007-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "d354cc2245ade5b6a7086de53382e55357d55e24bd746152540f2ad61f69bc55"
+        },
+        {
+          "claim_id": "urh-000007-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "7da5bb9b6c322594fa005093542fd91bb9fc46442963d76002496c09f95a30b1"
+        },
+        {
+          "claim_id": "urh-000007-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "9a1893b6f7bed305843867442316aa2b3ebd6a87449cd74d204a5e99f363eb76"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000008",
+      "legacy_ids": [
+        "andrea-pickel"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000008-c001",
+          "legacy_claim_ids": [
+            "andrea-pickel:CV170"
+          ],
+          "revision": 1,
+          "material_hash": "214fb0d6660ae787aa615c5a2f46455de18644e3d211fce01bcc1dc37e7bf5a4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000009",
+      "legacy_ids": [
+        "andrew-j-berger"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000009-c001",
+          "legacy_claim_ids": [
+            "andrew-j-berger:CV086"
+          ],
+          "revision": 1,
+          "material_hash": "a9c86b377e45dbf8294ba113889db2a72ccd9d84d14d11d68ea9cdfb71ef0b40"
+        },
+        {
+          "claim_id": "urh-000009-c002",
+          "legacy_claim_ids": [
+            "andrew-j-berger:CV084"
+          ],
+          "revision": 1,
+          "material_hash": "d84aeeaec19da68f0c9540ca0bf58f463c8351c89718df4e58eab4b01ed70678"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000010",
+      "legacy_ids": [
+        "andrew-n-jordan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000010-c001",
+          "legacy_claim_ids": [
+            "andrew-n-jordan:CV100"
+          ],
+          "revision": 1,
+          "material_hash": "fb99d29bf43b62025d860fab0aeea8f55625978bd900215e875852bc51e799bb"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000011",
+      "legacy_ids": [
+        "anne-e-luebke"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000011-c001",
+          "legacy_claim_ids": [
+            "anne-e-luebke:CV125"
+          ],
+          "revision": 1,
+          "material_hash": "11c257c97eb7f447b9b639ab83d350138480291fda5d37b95e50582d217051d3"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000012",
+      "legacy_ids": [
+        "anne-s-meyer"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000012-c001",
+          "legacy_claim_ids": [
+            "anne-s-meyer:CV130"
+          ],
+          "revision": 1,
+          "material_hash": "eb0268f79d2bbbe66005b39829d8eacc3b7ec55fb2a8e94c87b586b7d2c0b2b4"
+        },
+        {
+          "claim_id": "urh-000012-c002",
+          "legacy_claim_ids": [
+            "anne-s-meyer:CV133"
+          ],
+          "revision": 1,
+          "material_hash": "fb692841254aaeeb1a7f7dadbfef096082101936012cd552bc4f88aadef1c02c"
+        },
+        {
+          "claim_id": "urh-000012-c003",
+          "legacy_claim_ids": [
+            "anne-s-meyer:CV138"
+          ],
+          "revision": 1,
+          "material_hash": "b0abfa2f1e275f65d284fae7c1440b3f3ffe3ad36efffe745151b11f65369fd6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000013",
+      "legacy_ids": [
+        "anson-kahng"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000013-c001",
+          "legacy_claim_ids": [
+            "anson-kahng:CV029"
+          ],
+          "revision": 1,
+          "material_hash": "c34a593c5b690792f62a00168b0e0a179bf6a287382edd9b719e2ad8877f48dd"
+        },
+        {
+          "claim_id": "urh-000013-c002",
+          "legacy_claim_ids": [
+            "anson-kahng:CV030"
+          ],
+          "revision": 1,
+          "material_hash": "fe929c7676883a09f2d630e7e94963952525d03a972b484fc7b370b8437cea9d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000014",
+      "legacy_ids": [
+        "astrid-m-muller"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000014-c001",
+          "legacy_claim_ids": [
+            "astrid-m-muller:CV179"
+          ],
+          "revision": 1,
+          "material_hash": "ea53054382f60bf62a9736d140530aed008ce6c45c5e9bfde4ace757a15321ba"
+        },
+        {
+          "claim_id": "urh-000014-c002",
+          "legacy_claim_ids": [
+            "astrid-m-muller:CV145"
+          ],
+          "revision": 1,
+          "material_hash": "fe97ae9e8a480ac710311b4473d1f98e18778848eb24f6b9aea5168c1cd11e6f"
+        },
+        {
+          "claim_id": "urh-000014-c003",
+          "legacy_claim_ids": [
+            "astrid-m-muller:CV140"
+          ],
+          "revision": 1,
+          "material_hash": "39a59cb1e0ba430ef3242e25c70bdbce62f43eba253497a2f3c183074aadfd3a"
+        },
+        {
+          "claim_id": "urh-000014-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "eae37bc30ebf7eb3bf44cad7013d73bb6402cfed1ec4fade40aa6309c8795bf9"
+        },
+        {
+          "claim_id": "urh-000014-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "519fb0ef870418dc1c69896e0aa2330424db2a9cdb73539b5e5ff38fee80e4c4"
+        },
+        {
+          "claim_id": "urh-000014-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "28bebee1dfae6cf4ce31607bcec2d9ccf218e0559b94d5a9eb2d0fc98dbaab7e"
+        },
+        {
+          "claim_id": "urh-000014-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "7f1c7f578c4b5aa0f162dce088dd85449b55a08a2bf0930ea1cd1c5a1b56f08a"
+        },
+        {
+          "claim_id": "urh-000014-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "da5b9d35b537b356122a091f2a1cc62e486ced5f22f6922bcdfae8837d2da3b1"
+        },
+        {
+          "claim_id": "urh-000014-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "f3fb3d38db600f28d89878acffb9318fde300e6ca7bfc90c1afed517e840f8c0"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000015",
+      "legacy_ids": [
+        "benjamin-e-partridge"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000015-c001",
+          "legacy_claim_ids": [
+            "benjamin-e-partridge:CV130"
+          ],
+          "revision": 1,
+          "material_hash": "87f06d9152ee3ba326d305b2ad784832d74b21b1221bdcc3bd4355bc2337d4e7"
+        },
+        {
+          "claim_id": "urh-000015-c002",
+          "legacy_claim_ids": [
+            "benjamin-e-partridge:CV150"
+          ],
+          "revision": 1,
+          "material_hash": "b698cf7a1fe7d90f7f4c8d7c0615508450505b713676785311c88a2aa9c960ff"
+        },
+        {
+          "claim_id": "urh-000015-c003",
+          "legacy_claim_ids": [
+            "benjamin-e-partridge:CV137"
+          ],
+          "revision": 1,
+          "material_hash": "bd3280e34b63e0719c07de787edfdfc5b8162620435f9e66f683182d979a0013"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000016",
+      "legacy_ids": [
+        "benjamin-l-miller"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000016-c001",
+          "legacy_claim_ids": [
+            "benjamin-l-miller:CV088"
+          ],
+          "revision": 1,
+          "material_hash": "7a40fe6fb2c8d6fd5f923a789bd3a4ad792ce2e955ca75083ceba8eb209a02db"
+        },
+        {
+          "claim_id": "urh-000016-c002",
+          "legacy_claim_ids": [
+            "benjamin-l-miller:CV117"
+          ],
+          "revision": 1,
+          "material_hash": "34af66add2fe5a787fe278a7676c9c40de3a4582e0ec53084e36d1e3d91f92c1"
+        },
+        {
+          "claim_id": "urh-000016-c003",
+          "legacy_claim_ids": [
+            "benjamin-l-miller:CV044"
+          ],
+          "revision": 1,
+          "material_hash": "e1812533ac14e216aa8cafad404668e720e1f6afcfbd784f67c733b91459d0e6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000017",
+      "legacy_ids": [
+        "benjamin-storer"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000017-c001",
+          "legacy_claim_ids": [
+            "benjamin-storer:CV180"
+          ],
+          "revision": 1,
+          "material_hash": "012c514b09c7b5e04174f8993a2c629e6e6aba518c9cbfe195eb2962b56e1cd6"
+        },
+        {
+          "claim_id": "urh-000017-c002",
+          "legacy_claim_ids": [
+            "benjamin-storer:CV185"
+          ],
+          "revision": 1,
+          "material_hash": "6a5e3fe584a7e4a09e628deabba71d885f9abcc9ea1f02f73e595f8a35e95dd6"
+        },
+        {
+          "claim_id": "urh-000017-c003",
+          "legacy_claim_ids": [
+            "benjamin-storer:CV186"
+          ],
+          "revision": 1,
+          "material_hash": "dcc9ffb96406a1ef3b381a666ff5b570662277c7b22665e84ba71773043d855e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000018",
+      "legacy_ids": [
+        "benjamin-castaneda"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000018-c001",
+          "legacy_claim_ids": [
+            "benjamin-castaneda:CV121"
+          ],
+          "revision": 1,
+          "material_hash": "4dc5416999f971562b384b077c78bcf012dbaf3272ef3ab463a8715ac0cac928"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000019",
+      "legacy_ids": [
+        "bradley-l-nilsson"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000019-c001",
+          "legacy_claim_ids": [
+            "bradley-l-nilsson:CV130"
+          ],
+          "revision": 1,
+          "material_hash": "c37fd4a21cfa66628cf132ad29f237f7d352b0628887c066cef5f2fead69d11c"
+        },
+        {
+          "claim_id": "urh-000019-c002",
+          "legacy_claim_ids": [
+            "bradley-l-nilsson:CV150"
+          ],
+          "revision": 1,
+          "material_hash": "1647311cc8b2050f3b8709e3fd56ac1ac096aff39628d5ae3845e780eb37d460"
+        },
+        {
+          "claim_id": "urh-000019-c003",
+          "legacy_claim_ids": [
+            "bradley-l-nilsson:CV137"
+          ],
+          "revision": 1,
+          "material_hash": "fd4528cb872bbcf38b39f4ac8ed57cd0c954b1c8ecd2f1c8803b3643ccc46c7b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000020",
+      "legacy_ids": [
+        "brandon-r-barnett"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000020-c001",
+          "legacy_claim_ids": [
+            "brandon-r-barnett:CV146"
+          ],
+          "revision": 1,
+          "material_hash": "01bd82b090808287e4c2eb145364f73a1d9fdf6865482180387eb21976d57fc3"
+        },
+        {
+          "claim_id": "urh-000020-c002",
+          "legacy_claim_ids": [
+            "brandon-r-barnett:CV144"
+          ],
+          "revision": 1,
+          "material_hash": "94561139637351a315c5d9e39515aedcea9934291ebaab09e380f82a62ca3e3c"
+        },
+        {
+          "claim_id": "urh-000020-c003",
+          "legacy_claim_ids": [
+            "brandon-r-barnett:CV174"
+          ],
+          "revision": 1,
+          "material_hash": "56c0358b6389d825f5888347d3cf1920116454b358a93af927f06008cd20a34b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000021",
+      "legacy_ids": [
+        "brian-kruschwitz"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000021-c001",
+          "legacy_claim_ids": [
+            "brian-kruschwitz:CV095"
+          ],
+          "revision": 1,
+          "material_hash": "d74a169de69095434721e01d2aba87a96476c750cd9d3943e660145bfc2683b7"
+        },
+        {
+          "claim_id": "urh-000021-c002",
+          "legacy_claim_ids": [
+            "brian-kruschwitz:CV082"
+          ],
+          "revision": 1,
+          "material_hash": "58d9ed39663d87bb8ce62f39fd8948ba62611f931148c37978facbc1fe417953"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000022",
+      "legacy_ids": [
+        "chen-ding"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000022-c001",
+          "legacy_claim_ids": [
+            "chen-ding:CV038"
+          ],
+          "revision": 1,
+          "material_hash": "747c6035eeb02a479d55bf11fca7afd8ae664af40762fe1b2e91ba71aac85278"
+        },
+        {
+          "claim_id": "urh-000022-c002",
+          "legacy_claim_ids": [
+            "chen-ding:CV039"
+          ],
+          "revision": 1,
+          "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000023",
+      "legacy_ids": [
+        "chenliang-xu"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000023-c001",
+          "legacy_claim_ids": [
+            "chenliang-xu:CV013"
+          ],
+          "revision": 1,
+          "material_hash": "c819c3c09b9345cb57ddb661d1a202664fb688215ad2967b078a1b288db847ee"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000024",
+      "legacy_ids": [
+        "cherice-natasha-hill"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000024-c001",
+          "legacy_claim_ids": [
+            "cherice-natasha-hill:CV114"
+          ],
+          "revision": 1,
+          "material_hash": "4bb4ad95f7b7584845e965f7bf40ea6fefc716cf588a882e4346d1a997906c2c"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000025",
+      "legacy_ids": [
+        "choongheon-lee"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000025-c001",
+          "legacy_claim_ids": [
+            "choongheon-lee:CV125"
+          ],
+          "revision": 1,
+          "material_hash": "45d3698527d732372007bacf3ecda71d8a524c02571c52dff33fb221235382e4"
+        },
+        {
+          "claim_id": "urh-000025-c002",
+          "legacy_claim_ids": [
+            "choongheon-lee:CV126"
+          ],
+          "revision": 1,
+          "material_hash": "8a5b02d4378f669e895e1ea14f639643f4e8635ed2d1f0c759acee25d64af000"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000026",
+      "legacy_ids": [
+        "christopher-kanan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000026-c001",
+          "legacy_claim_ids": [
+            "christopher-kanan:CV013"
+          ],
+          "revision": 1,
+          "material_hash": "1713aca320ef557346b87978f7347a3215c7d1edba2db4c58909f2dfc22fee1c"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000027",
+      "legacy_ids": [
+        "chuang-ren"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000027-c001",
+          "legacy_claim_ids": [
+            "chuang-ren:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "361f6880fd82419fdbd7eba61d1f72add14dd52e5ec4b1ac604ea4ddc2a715d8"
+        },
+        {
+          "claim_id": "urh-000027-c002",
+          "legacy_claim_ids": [
+            "chuang-ren:CV197"
+          ],
+          "revision": 1,
+          "material_hash": "12bcdc6724f3f74adab06025676df65d030479741d2a85a2266b3b9baf382fad"
+        },
+        {
+          "claim_id": "urh-000027-c003",
+          "legacy_claim_ids": [
+            "chuang-ren:CV198"
+          ],
+          "revision": 1,
+          "material_hash": "28991c632c89ccdd10441f50942435f59098d36934454a2154ea8343dffafd37"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000028",
+      "legacy_ids": [
+        "chunlei-guo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000028-c001",
+          "legacy_claim_ids": [
+            "chunlei-guo:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "adf48567b82ee6d80640f33ed129f92e7389d469e3686f2501f88b3b60aa89f3"
+        },
+        {
+          "claim_id": "urh-000028-c002",
+          "legacy_claim_ids": [
+            "chunlei-guo:CV096"
+          ],
+          "revision": 1,
+          "material_hash": "d018e23ec4c54aa40baefc9a732aca59b9ef457c8a9a9ed9e8722d3b14750707"
+        },
+        {
+          "claim_id": "urh-000028-c003",
+          "legacy_claim_ids": [
+            "chunlei-guo:CV166"
+          ],
+          "revision": 1,
+          "material_hash": "3d59c359cd1ca7e9bd76a6d9c016132d0444d6155f3f807da217bbad0633ac9e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000029",
+      "legacy_ids": [
+        "danae-polsin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000029-c001",
+          "legacy_claim_ids": [
+            "danae-polsin:CV160"
+          ],
+          "revision": 1,
+          "material_hash": "f109aa0f8bef3ab7a67f505bc1a48a76c61ab868aa5be2716427dc0894d74980"
+        },
+        {
+          "claim_id": "urh-000029-c002",
+          "legacy_claim_ids": [
+            "danae-polsin:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "87db1e48633ddac70c2c23965b97e5d82f002a99c9026a503209cdec1abad75e"
+        },
+        {
+          "claim_id": "urh-000029-c003",
+          "legacy_claim_ids": [
+            "danae-polsin:CV200"
+          ],
+          "revision": 1,
+          "material_hash": "b8a716eda67a334b84ca806a5573cc5fef86fbf59df6cfb1b67b79e134825c13"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000030",
+      "legacy_ids": [
+        "daniel-gildea"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000030-c001",
+          "legacy_claim_ids": [
+            "daniel-gildea:CV011"
+          ],
+          "revision": 1,
+          "material_hash": "1eb251aa2ba086d619d21405b90f445cec571c6d848eb9d366f8dae40376d013"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000031",
+      "legacy_ids": [
+        "daniel-stefankovic"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000031-c001",
+          "legacy_claim_ids": [
+            "daniel-stefankovic:CV024"
+          ],
+          "revision": 1,
+          "material_hash": "ad080b75435521026f2feb4594f8e2f7ce80e42cc6f97ca19f305a865014ff0f"
+        },
+        {
+          "claim_id": "urh-000031-c002",
+          "legacy_claim_ids": [
+            "daniel-stefankovic:CV025"
+          ],
+          "revision": 1,
+          "material_hash": "c025d77b285d9147fa06eb8267659bcab2b7e7bcef2a5858294171428d89c09c"
+        },
+        {
+          "claim_id": "urh-000031-c003",
+          "legacy_claim_ids": [
+            "daniel-stefankovic:CV026"
+          ],
+          "revision": 1,
+          "material_hash": "d482808316aac4c31ac5bd20e47b060689c19329007bfee498dccc13a3e50483"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000032",
+      "legacy_ids": [
+        "darren-lipomi"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000032-c001",
+          "legacy_claim_ids": [
+            "darren-lipomi:CV056"
+          ],
+          "revision": 1,
+          "material_hash": "ef8cbd1386ee280d1b34b7b5611dc5b3641358f819beb56c88257de4d19a1a4a"
+        },
+        {
+          "claim_id": "urh-000032-c002",
+          "legacy_claim_ids": [
+            "darren-lipomi:CV153"
+          ],
+          "revision": 1,
+          "material_hash": "d7eb7aa53bd588551a9683c2badab3c57a000a9136fbddf379055f6341260137"
+        },
+        {
+          "claim_id": "urh-000032-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "0e4b7e4db658534065f8c6b552449bcd71d88286cf63bfebe8524ed0a5a5d5cd"
+        },
+        {
+          "claim_id": "urh-000032-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "4d5e75872085710bbccbafd06f0f7f8bc127f0dd828dede70566cc98feadee99"
+        },
+        {
+          "claim_id": "urh-000032-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "4cc41542053baab1b227d3592a15103c9a29adca814b499f824b0eb833f379eb"
+        },
+        {
+          "claim_id": "urh-000032-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "52e999e5f8dbfbae3d2454f7bf6927e972b93af5be4bdd345b0571be3b40526e"
+        },
+        {
+          "claim_id": "urh-000032-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "55cf1cb5343717e5546da4deb7bd096f42249b2c7326fab4820bec6b143a6d34"
+        },
+        {
+          "claim_id": "urh-000032-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "e40d25e6b316d88abf77e9ed944f52c6631b16d17e3552dba901bc54b666d118"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000033",
+      "legacy_ids": [
+        "david-r-harding"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000033-c001",
+          "legacy_claim_ids": [
+            "david-r-harding:CV167"
+          ],
+          "revision": 1,
+          "material_hash": "18d9d6155b4586e3a340f1eb71aad7a6465675d53fa21010c5d0d640b18e6851"
+        },
+        {
+          "claim_id": "urh-000033-c002",
+          "legacy_claim_ids": [
+            "david-r-harding:CV174"
+          ],
+          "revision": 1,
+          "material_hash": "b3e73a228987d5e220b330d185d1439d6c94d75e9bcd98b98006c6b767574bbd"
+        },
+        {
+          "claim_id": "urh-000033-c003",
+          "legacy_claim_ids": [
+            "david-r-harding:CV201"
+          ],
+          "revision": 1,
+          "material_hash": "cf8b8c8c3cef0907a9f022c28b2e8a408fa7180d539be391bb5ceadbfdc60498"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000034",
+      "legacy_ids": [
+        "david-r-williams"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000034-c001",
+          "legacy_claim_ids": [
+            "david-r-williams:CV064"
+          ],
+          "revision": 1,
+          "material_hash": "1bce8e460e779e6fcc8c4c89723d5c1f5fa320691d3793e2eb88af9f61b667e3"
+        },
+        {
+          "claim_id": "urh-000034-c002",
+          "legacy_claim_ids": [
+            "david-r-williams:CV073"
+          ],
+          "revision": 1,
+          "material_hash": "503a7715a3ef4eb085306a90ff81d20b07d7038fd5527acc2e5bbbacc50efa68"
+        },
+        {
+          "claim_id": "urh-000034-c003",
+          "legacy_claim_ids": [
+            "david-r-williams:CV083"
+          ],
+          "revision": 1,
+          "material_hash": "5c27d6da64d45b5610ca84703065237419408c9792e6cdab4aa3d38a5fb32716"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000035",
+      "legacy_ids": [
+        "david-w-mccamant"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000035-c001",
+          "legacy_claim_ids": [
+            "david-w-mccamant:CV086"
+          ],
+          "revision": 1,
+          "material_hash": "263cf28102f262030bff3f67c38bd1bc792f1d7e244c39f26edb470d52d3f45b"
+        },
+        {
+          "claim_id": "urh-000035-c002",
+          "legacy_claim_ids": [
+            "david-w-mccamant:CV161"
+          ],
+          "revision": 1,
+          "material_hash": "9f2fe79368cada22115daa95b350acd69c3fdd41086b4d5ef2b6b75e0a18c2ec"
+        },
+        {
+          "claim_id": "urh-000035-c003",
+          "legacy_claim_ids": [
+            "david-w-mccamant:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "e26aec6c81b18d7a33ba011b7c9f4de7ce5bd4ca0888063ef62d42595a3edded"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000036",
+      "legacy_ids": [
+        "diane-dalecki"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000036-c001",
+          "legacy_claim_ids": [
+            "diane-dalecki:CV132"
+          ],
+          "revision": 1,
+          "material_hash": "1111090fada29b917e60adfe915054a0a2b329d060751694370a4c421eb4d1cc"
+        },
+        {
+          "claim_id": "urh-000036-c002",
+          "legacy_claim_ids": [
+            "diane-dalecki:CV116"
+          ],
+          "revision": 1,
+          "material_hash": "8ee3afb7fccf6a183b34c419c30beef6c7710bc5634d6fc0884593b4abaa77fd"
+        },
+        {
+          "claim_id": "urh-000036-c003",
+          "legacy_claim_ids": [
+            "diane-dalecki:CV190"
+          ],
+          "revision": 1,
+          "material_hash": "c92002151cb65d7b51bdd5af54fd5f91706f4de9ea47d804032c801f065dc587"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000037",
+      "legacy_ids": [
+        "douglas-h-kelley"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000037-c001",
+          "legacy_claim_ids": [
+            "douglas-h-kelley:CV171"
+          ],
+          "revision": 1,
+          "material_hash": "0bc28259a8a595c5ac5bb4aeeedfbe42048e7e3dd9d6c3c05bff9da12d00fa81"
+        },
+        {
+          "claim_id": "urh-000037-c002",
+          "legacy_claim_ids": [
+            "douglas-h-kelley:CV124"
+          ],
+          "revision": 1,
+          "material_hash": "81d614e6fab534f8f05b49ad19cdcf69fadc54014f0eb81ad00ceeb9eed4fa55"
+        },
+        {
+          "claim_id": "urh-000037-c003",
+          "legacy_claim_ids": [
+            "douglas-h-kelley:CV126"
+          ],
+          "revision": 1,
+          "material_hash": "83455e7d2bc0f4885190b5da684783d508f1f298a335924aa38f25ed3acbb663"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000038",
+      "legacy_ids": [
+        "eby-g-friedman"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000038-c001",
+          "legacy_claim_ids": [
+            "eby-g-friedman:CV041"
+          ],
+          "revision": 1,
+          "material_hash": "86780feac63539601136c1b2a83780504eafb2cbf7928a707354e4ed44bbddc1"
+        },
+        {
+          "claim_id": "urh-000038-c002",
+          "legacy_claim_ids": [
+            "eby-g-friedman:CV040"
+          ],
+          "revision": 1,
+          "material_hash": "8c38ec2589478e8bc87ffc574544c28005c7815c3e7933962ef932008ed486a4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000039",
+      "legacy_ids": [
+        "edmund-lalor"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000039-c001",
+          "legacy_claim_ids": [
+            "edmund-lalor:CV125"
+          ],
+          "revision": 1,
+          "material_hash": "b6d7dd3b05055c64b0c4f7db136e720d8e0ac7a3a9aacb1f8f418b80a49528b0"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000040",
+      "legacy_ids": [
+        "edward-brown-iii"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000040-c001",
+          "legacy_claim_ids": [
+            "edward-brown-iii:CV075"
+          ],
+          "revision": 1,
+          "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000041",
+      "legacy_ids": [
+        "ehsan-hoque"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000041-c001",
+          "legacy_claim_ids": [
+            "ehsan-hoque:CV059"
+          ],
+          "revision": 1,
+          "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3"
+        },
+        {
+          "claim_id": "urh-000041-c002",
+          "legacy_claim_ids": [
+            "ehsan-hoque:CV058"
+          ],
+          "revision": 1,
+          "material_hash": "f5a79229ff8842767badf891b2e03bca548f3c3ffd84aea5b94d6bfdb9487a84"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000042",
+      "legacy_ids": [
+        "eileen-otte"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000042-c001",
+          "legacy_claim_ids": [
+            "eileen-otte:CV090"
+          ],
+          "revision": 1,
+          "material_hash": "8a8c1403ad703de3296be78fd1ecebaedddbc439c7b7c281a75181e9f3bd25ce"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000043",
+      "legacy_ids": [
+        "elena-lomakina"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000043-c001",
+          "legacy_claim_ids": [
+            "elena-lomakina:CV115"
+          ],
+          "revision": 1,
+          "material_hash": "70d1bb16c61b3eba8643fbff0671f836696ce62e8310099b0345b1f556ac8aad"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000044",
+      "legacy_ids": [
+        "ellen-matson"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000044-c001",
+          "legacy_claim_ids": [
+            "ellen-matson:CV146"
+          ],
+          "revision": 1,
+          "material_hash": "2296b2e20b7d89cb516a9b6bd04a256774179c319b434cf290e7d9bf76de2029"
+        },
+        {
+          "claim_id": "urh-000044-c002",
+          "legacy_claim_ids": [
+            "ellen-matson:CV147"
+          ],
+          "revision": 1,
+          "material_hash": "7fbdc97dbc2b81d854431e60054a5b5f5358692fab8e7283afc47f0f9a7b8111"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000045",
+      "legacy_ids": [
+        "fatemeh-nargesian"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000045-c001",
+          "legacy_claim_ids": [
+            "fatemeh-nargesian:CV020"
+          ],
+          "revision": 1,
+          "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000046",
+      "legacy_ids": [
+        "gang-fan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000046-c001",
+          "legacy_claim_ids": [
+            "gang-fan:CV179"
+          ],
+          "revision": 1,
+          "material_hash": "b065d77b83391d3e8487dbe2f20dd12b0460363373f5b991d80923f12623f621"
+        },
+        {
+          "claim_id": "urh-000046-c002",
+          "legacy_claim_ids": [
+            "gang-fan:CV133"
+          ],
+          "revision": 1,
+          "material_hash": "5e6685fc12fdf1db983888d71e7a2db5893b32c038cad219062199310fb1a38d"
+        },
+        {
+          "claim_id": "urh-000046-c003",
+          "legacy_claim_ids": [
+            "gang-fan:CV134"
+          ],
+          "revision": 1,
+          "material_hash": "5006a2bc1e9e63f8ba24ff7dbc819988d3c73db3459ccfd78eceebdad98aa464"
+        },
+        {
+          "claim_id": "urh-000046-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "e3cc6eaa2fe50132edf94671324411350161d095bd4374c90a34044f2273a22e"
+        },
+        {
+          "claim_id": "urh-000046-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6c863cb7900a2dee87f7b600062abf5d07d7e82a46ce5f4b8763ff5406793369"
+        },
+        {
+          "claim_id": "urh-000046-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "725e5d9d8d9942915370966e253ea4db044287ae7736b4a1832aac47ae552a17"
+        },
+        {
+          "claim_id": "urh-000046-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "c10d999ebdcfc40e7fdc79fd026f058095c6b2dc4142b2ac3897bb2b868118a8"
+        },
+        {
+          "claim_id": "urh-000046-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "55d1693c2ecff72deedfe5c6ce1e3f2f7bbdbcfdc9ee2d2f5beee2f12c9c608e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000047",
+      "legacy_ids": [
+        "gary-w-wicks"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000047-c001",
+          "legacy_claim_ids": [
+            "gary-w-wicks:CV167"
+          ],
+          "revision": 1,
+          "material_hash": "36971d0aadda12e19ed66c16f37e9a625247207a7af65d4b2672463c979f42f3"
+        },
+        {
+          "claim_id": "urh-000047-c002",
+          "legacy_claim_ids": [
+            "gary-w-wicks:CV107"
+          ],
+          "revision": 1,
+          "material_hash": "255e53d4edd5c6ad415bd331880fa4e3105f6a61cb39722559386ed622b2317c"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000048",
+      "legacy_ids": [
+        "gaurav-sharma"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000048-c001",
+          "legacy_claim_ids": [
+            "gaurav-sharma:CV013"
+          ],
+          "revision": 1,
+          "material_hash": "fba0f9ad566b36343760c3740b29c3858535a7b665fefe1c4552da322a05aa4c"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000049",
+      "legacy_ids": [
+        "gilbert-rip-collins"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000049-c001",
+          "legacy_claim_ids": [
+            "gilbert-rip-collins:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "09a08be764f2a912ec12b5690fad1cf69585f147f0105033556c612286c76029"
+        },
+        {
+          "claim_id": "urh-000049-c002",
+          "legacy_claim_ids": [
+            "gilbert-rip-collins:CV200"
+          ],
+          "revision": 1,
+          "material_hash": "7964768ea061032fe9c57b44b68e697c0b94e5676ff83837e6e8793431e38648"
+        },
+        {
+          "claim_id": "urh-000049-c003",
+          "legacy_claim_ids": [
+            "gilbert-rip-collins:CV192"
+          ],
+          "revision": 1,
+          "material_hash": "daa22ec3434e9c71faffe07c6d682b8e494a34a3f4b94a4b699dfa5bac1a0ea4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000050",
+      "legacy_ids": [
+        "gonzalo-mateos"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000050-c001",
+          "legacy_claim_ids": [
+            "gonzalo-mateos:CV021"
+          ],
+          "revision": 1,
+          "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000051",
+      "legacy_ids": [
+        "gourab-ghoshal"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000051-c001",
+          "legacy_claim_ids": [
+            "gourab-ghoshal:CV021"
+          ],
+          "revision": 1,
+          "material_hash": "be7ce5366bb191494c94af882cb86479195e4d0a9016d8dc726fcd8c77071bf6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000052",
+      "legacy_ids": [
+        "greg-schmidt"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000052-c001",
+          "legacy_claim_ids": [
+            "greg-schmidt:CV077"
+          ],
+          "revision": 1,
+          "material_hash": "5aabe1224988e82496650cb267bfe98cb194c51db1c97c99fee521c62b677084"
+        },
+        {
+          "claim_id": "urh-000052-c002",
+          "legacy_claim_ids": [
+            "greg-schmidt:CV080"
+          ],
+          "revision": 1,
+          "material_hash": "5f53edb37a11afaf57802cef81010da6aa4f3d4d5fc490db7d845dffb10c96ce"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000053",
+      "legacy_ids": [
+        "gregory-heyworth"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000053-c001",
+          "legacy_claim_ids": [
+            "gregory-heyworth:CV074"
+          ],
+          "revision": 1,
+          "material_hash": "c9edfe6e4159e523e37aba40bee41c849ffceb560652c22aa77ab80efa8ce990"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000054",
+      "legacy_ids": [
+        "hanan-dery"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000054-c001",
+          "legacy_claim_ids": [
+            "hanan-dery:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "04211dcd879f88c90435500b2b8a3011105a8055c27a4f9078d5c83e03b98a38"
+        },
+        {
+          "claim_id": "urh-000054-c002",
+          "legacy_claim_ids": [
+            "hanan-dery:CV108"
+          ],
+          "revision": 1,
+          "material_hash": "a8d228dfcb57779abab41771de8834d6ab1b322352f442025ccc559567c3acea"
+        },
+        {
+          "claim_id": "urh-000054-c003",
+          "legacy_claim_ids": [
+            "hanan-dery:CV106"
+          ],
+          "revision": 1,
+          "material_hash": "642465ddb884db279c106201b4a0e715430049d3b5064f2b4eaba5b1e7e325b3"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000055",
+      "legacy_ids": [
+        "hangfeng-he"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000055-c001",
+          "legacy_claim_ids": [
+            "hangfeng-he:CV011"
+          ],
+          "revision": 1,
+          "material_hash": "4ee3a7f1fcbedea026d374880d21e6e67df233936e12d99820f77a9b8ad963eb"
+        },
+        {
+          "claim_id": "urh-000055-c002",
+          "legacy_claim_ids": [
+            "hangfeng-he:CV012"
+          ],
+          "revision": 1,
+          "material_hash": "557abe29a3eed6d8458e4a1a4ebd9c058930cef6640ee99fa20d24942b459d9f"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000056",
+      "legacy_ids": [
+        "hesam-askari"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000056-c001",
+          "legacy_claim_ids": [
+            "hesam-askari:CV165"
+          ],
+          "revision": 1,
+          "material_hash": "42f9f943afc716285379e9853fde5876b86fcb54a93fc9b6a4ef3fc3a0a31fce"
+        },
+        {
+          "claim_id": "urh-000056-c002",
+          "legacy_claim_ids": [
+            "hesam-askari:CV183"
+          ],
+          "revision": 1,
+          "material_hash": "3753846059496d281e4995c520cd1a0852a6cd3d4c857f3d624f08cd55e8ac62"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000057",
+      "legacy_ids": [
+        "hui-wu"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000057-c001",
+          "legacy_claim_ids": [
+            "hui-wu:CV043"
+          ],
+          "revision": 1,
+          "material_hash": "3c9c410ff0ca69e30d8b25ed0f6efb986469c88211d5cca0b20b48a6c0bb13d6"
+        },
+        {
+          "claim_id": "urh-000057-c002",
+          "legacy_claim_ids": [
+            "hui-wu:CV088"
+          ],
+          "revision": 1,
+          "material_hash": "62263e024ce6f3f8b613c9141c2f1ba97d84514ef4c981b4136076af92086e78"
+        },
+        {
+          "claim_id": "urh-000057-c003",
+          "legacy_claim_ids": [
+            "hui-wu:CV044"
+          ],
+          "revision": 1,
+          "material_hash": "3b0c838ac55b9fa6079f8472b877ab3ce6327051f2f3fd89ad087a79fd289fab"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000058",
+      "legacy_ids": [
+        "hussein-aluie"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000058-c001",
+          "legacy_claim_ids": [
+            "hussein-aluie:CV180"
+          ],
+          "revision": 1,
+          "material_hash": "fc815aaec31ac8176cf8b71a43268aa12ab0c07b6758a1f24f06c79b5ed84bcc"
+        },
+        {
+          "claim_id": "urh-000058-c002",
+          "legacy_claim_ids": [
+            "hussein-aluie:CV185"
+          ],
+          "revision": 1,
+          "material_hash": "9007f77c65cb4a827b73c34f7cc6322f5d7ee4d65e43f20aa48d7ec0b8db2301"
+        },
+        {
+          "claim_id": "urh-000058-c003",
+          "legacy_claim_ids": [
+            "hussein-aluie:CV187"
+          ],
+          "revision": 1,
+          "material_hash": "51f52e8ad4441a84fb7a593b2d434190b0d9fd9efe14141785cd49ccac13345d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000059",
+      "legacy_ids": [
+        "ibrahim-mohammad"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000059-c001",
+          "legacy_claim_ids": [
+            "ibrahim-mohammad:CV171"
+          ],
+          "revision": 1,
+          "material_hash": "dd57474cc9f2e3a17a17dd366752beee1418135b95f660d6ed6b09dd1df25fca"
+        },
+        {
+          "claim_id": "urh-000059-c002",
+          "legacy_claim_ids": [
+            "ibrahim-mohammad:CV187"
+          ],
+          "revision": 1,
+          "material_hash": "e5b31e177bc5dab43c292307db2390e12a1909d24e2973ac70077b113ec4181b"
+        },
+        {
+          "claim_id": "urh-000059-c003",
+          "legacy_claim_ids": [
+            "ibrahim-mohammad:CV173"
+          ],
+          "revision": 1,
+          "material_hash": "0949d6710bcd3f861c0b7c4667109c47b95659202d7ad07340ec4517920015f8"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000060",
+      "legacy_ids": [
+        "ignacio-franco"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000060-c001",
+          "legacy_claim_ids": [
+            "ignacio-franco:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "2fae45a9cf7d8c0a383a82b97963cb8e529718cf08931d723fce03477de23b22"
+        },
+        {
+          "claim_id": "urh-000060-c002",
+          "legacy_claim_ids": [
+            "ignacio-franco:CV111"
+          ],
+          "revision": 1,
+          "material_hash": "92c98fa5f118a189d9ae009ec6d24aa6225a975300bda777b17e4954ac2875e4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000061",
+      "legacy_ids": [
+        "j-ryan-rygg"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000061-c001",
+          "legacy_claim_ids": [
+            "j-ryan-rygg:CV160"
+          ],
+          "revision": 1,
+          "material_hash": "49afad7fe202b62d1186b96039a8943c27afada41fa899f31477061926f215b2"
+        },
+        {
+          "claim_id": "urh-000061-c002",
+          "legacy_claim_ids": [
+            "j-ryan-rygg:CV200"
+          ],
+          "revision": 1,
+          "material_hash": "68e4738fa2e56752a0b89f68ec6d3bd3888d3532a81100b836b51604d942a369"
+        },
+        {
+          "claim_id": "urh-000061-c003",
+          "legacy_claim_ids": [
+            "j-ryan-rygg:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "529be6053af37a4f806dae69e4c69f0641713d81c900c941bde729e123455444"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000062",
+      "legacy_ids": [
+        "jack-g-mottley"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000062-c001",
+          "legacy_claim_ids": [
+            "jack-g-mottley:CV067"
+          ],
+          "revision": 1,
+          "material_hash": "8118682351ab24f1c31a0d4e7d33f449cf6824e86ab24a6b4699d86e300121ac"
+        },
+        {
+          "claim_id": "urh-000062-c002",
+          "legacy_claim_ids": [
+            "jack-g-mottley:CV190"
+          ],
+          "revision": 1,
+          "material_hash": "ab6fd9b03fc7d723e83ca32ffa970b81f6b7a82992ea4c5f886f2c0d458bf28d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000063",
+      "legacy_ids": [
+        "jaime-cardenas"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000063-c001",
+          "legacy_claim_ids": [
+            "jaime-cardenas:CV087"
+          ],
+          "revision": 1,
+          "material_hash": "187bd3e103bfe38e47c826d98c9420d1cf40d162fb6c9be32daa68265c981ae3"
+        },
+        {
+          "claim_id": "urh-000063-c002",
+          "legacy_claim_ids": [
+            "jaime-cardenas:CV088"
+          ],
+          "revision": 1,
+          "material_hash": "a4fcd3b944506072d2224bf1f2e828c58de6cebb51836e6d04fd3e2e15d22285"
+        },
+        {
+          "claim_id": "urh-000063-c003",
+          "legacy_claim_ids": [
+            "jaime-cardenas:CV089"
+          ],
+          "revision": 1,
+          "material_hash": "6a73514007e141605b63f78368ccf45c75924771dfc49c53081d6abc9ec73ca2"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000064",
+      "legacy_ids": [
+        "jake-bromage"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000064-c001",
+          "legacy_claim_ids": [
+            "jake-bromage:CV095"
+          ],
+          "revision": 1,
+          "material_hash": "0ab05d7069361fe615377114c6946eaf6ab08b04fef959d3e85a2a4428b6e1a3"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000065",
+      "legacy_ids": [
+        "james-m-zavislan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000065-c001",
+          "legacy_claim_ids": [
+            "james-m-zavislan:CV080"
+          ],
+          "revision": 1,
+          "material_hash": "ef4a439c6780c0e11bd7cac7815fdc49358a6df39ac3d399e55e93b7171a05c5"
+        },
+        {
+          "claim_id": "urh-000065-c002",
+          "legacy_claim_ids": [
+            "james-m-zavislan:CV081"
+          ],
+          "revision": 1,
+          "material_hash": "0f2eccf7be33531c03a4b0a829e607dc41e1bc182132403f59b819e6473f8fab"
+        },
+        {
+          "claim_id": "urh-000065-c003",
+          "legacy_claim_ids": [
+            "james-m-zavislan:CV079"
+          ],
+          "revision": 1,
+          "material_hash": "e9039d43ba1802023a97c11bfa981f008d79d70998577a663cce02d2c3a25621"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000066",
+      "legacy_ids": [
+        "james-mcgrath"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000066-c001",
+          "legacy_claim_ids": [
+            "james-mcgrath:CV117"
+          ],
+          "revision": 1,
+          "material_hash": "8819341f0ab836e6dadf346d642402f8d6cba11b06d022090d3489a81668f8a2"
+        },
+        {
+          "claim_id": "urh-000066-c002",
+          "legacy_claim_ids": [
+            "james-mcgrath:CV119"
+          ],
+          "revision": 1,
+          "material_hash": "899d03b9172727f99f1fd10c110c6f974d7496f5e88c9e77cce5148a8c1d6e1b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000067",
+      "legacy_ids": [
+        "james-r-fienup"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000067-c001",
+          "legacy_claim_ids": [
+            "james-r-fienup:CV064"
+          ],
+          "revision": 1,
+          "material_hash": "3967a6518a58a931d12fde8eef36e0d5eb292678350c0f8e706ddc8b2929a5c9"
+        },
+        {
+          "claim_id": "urh-000067-c002",
+          "legacy_claim_ids": [
+            "james-r-fienup:CV073"
+          ],
+          "revision": 1,
+          "material_hash": "e9f5e809ce5051470a104f078ce6717a4d9c21552a13018a89988b9b87b5f234"
+        },
+        {
+          "claim_id": "urh-000067-c003",
+          "legacy_claim_ids": [
+            "james-r-fienup:CV065"
+          ],
+          "revision": 1,
+          "material_hash": "3492602b97bcb91d676f19df59183ba8c48a91c1475dee8c9d8d9a147041cf78"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000068",
+      "legacy_ids": [
+        "jannick-rolland"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000068-c001",
+          "legacy_claim_ids": [
+            "jannick-rolland:CV080"
+          ],
+          "revision": 1,
+          "material_hash": "ca7f92dbf84aa98eb197913996bc6e3ed3039ac1d2eae152d355f46e13d29305"
+        },
+        {
+          "claim_id": "urh-000068-c002",
+          "legacy_claim_ids": [
+            "jannick-rolland:CV077"
+          ],
+          "revision": 1,
+          "material_hash": "49154120ff6de7aaa2c3854665252f04c3d05d6c847dfa13e0fee352296c5358"
+        },
+        {
+          "claim_id": "urh-000068-c003",
+          "legacy_claim_ids": [
+            "jannick-rolland:CV055"
+          ],
+          "revision": 1,
+          "material_hash": "194183ef2a968f6423551a6946516686efbdc40bfc900666ac0afefa0b8a950f"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000069",
+      "legacy_ids": [
+        "jennifer-d-t-kruschwitz"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000069-c001",
+          "legacy_claim_ids": [
+            "jennifer-d-t-kruschwitz:CV074"
+          ],
+          "revision": 1,
+          "material_hash": "88826a6bee1877febd4e47dbce1299f7e7bf97e21e66e6ad75d9d3569ce8e5f8"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000070",
+      "legacy_ids": [
+        "jessica-shang"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000070-c001",
+          "legacy_claim_ids": [
+            "jessica-shang:CV185"
+          ],
+          "revision": 1,
+          "material_hash": "dc20bde54e2ac73ab57c2ed7a3267a8a18941981e809041598c03f963387b87d"
+        },
+        {
+          "claim_id": "urh-000070-c002",
+          "legacy_claim_ids": [
+            "jessica-shang:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "bb4d1b15824895c26b9257c87bb169bd78a1967130b75c7fe1516deeda75240b"
+        },
+        {
+          "claim_id": "urh-000070-c003",
+          "legacy_claim_ids": [
+            "jessica-shang:CV188"
+          ],
+          "revision": 1,
+          "material_hash": "5657d159785dac73dd3ebae7be043f042ccbced93f5a9cb385cb1047fafdcdc4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000071",
+      "legacy_ids": [
+        "jiaming-liang"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000071-c001",
+          "legacy_claim_ids": [
+            "jiaming-liang:CV024"
+          ],
+          "revision": 1,
+          "material_hash": "9f6942e54a6ad7b8e8c3bfa1e869ee3f313bd51539cb73b3d6e30c2ff11ffc2f"
+        },
+        {
+          "claim_id": "urh-000071-c002",
+          "legacy_claim_ids": [
+            "jiaming-liang:CV029"
+          ],
+          "revision": 1,
+          "material_hash": "4c6ff03c9dd508b281337ccfd101605c1029708764f2280297c56837fdc2e37a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000072",
+      "legacy_ids": [
+        "jiebo-luo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000072-c001",
+          "legacy_claim_ids": [
+            "jiebo-luo:CV059"
+          ],
+          "revision": 1,
+          "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3"
+        },
+        {
+          "claim_id": "urh-000072-c002",
+          "legacy_claim_ids": [
+            "jiebo-luo:CV058"
+          ],
+          "revision": 1,
+          "material_hash": "db30275f96001e7090aff1d477102e6ea85d0607f391082f68c646a2dbb1b1a1"
+        },
+        {
+          "claim_id": "urh-000072-c003",
+          "legacy_claim_ids": [
+            "jiebo-luo:CV013"
+          ],
+          "revision": 1,
+          "material_hash": "eb9584116982ea3cbc36f1af8fdc0b6cd040e6d859a6502d61b7badb6bde0de1"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000073",
+      "legacy_ids": [
+        "john-criswell"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000073-c001",
+          "legacy_claim_ids": [
+            "john-criswell:CV038"
+          ],
+          "revision": 1,
+          "material_hash": "1ca4684a8c9bc2ba7008218d5932f1f779f897933a9d8df7b5eaa4b8ac6f1d08"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000074",
+      "legacy_ids": [
+        "john-lambropoulos"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000074-c001",
+          "legacy_claim_ids": [
+            "john-lambropoulos:CV078"
+          ],
+          "revision": 1,
+          "material_hash": "0d3a68d8296f8fe02f535a61afaf291470ca714e49914b4806b03a509a7ccbac"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000075",
+      "legacy_ids": [
+        "john-m-nichol"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000075-c001",
+          "legacy_claim_ids": [
+            "john-m-nichol:CV158"
+          ],
+          "revision": 1,
+          "material_hash": "da9efae97831967639dcf83a05549353f062e4d6a8485da37a10584d2b327e10"
+        },
+        {
+          "claim_id": "urh-000075-c002",
+          "legacy_claim_ids": [
+            "john-m-nichol:CV108"
+          ],
+          "revision": 1,
+          "material_hash": "b4365bfa995b012b2b19e583f703e1206eb58cbc2b4d2729c3f240063cd46731"
+        },
+        {
+          "claim_id": "urh-000075-c003",
+          "legacy_claim_ids": [
+            "john-m-nichol:CV099"
+          ],
+          "revision": 1,
+          "material_hash": "38401c44bd108eac1c4580959633972e632fc41b07d1921e2f24f9a3c2192c4a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000076",
+      "legacy_ids": [
+        "john-palastro"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000076-c001",
+          "legacy_claim_ids": [
+            "john-palastro:CV197"
+          ],
+          "revision": 1,
+          "material_hash": "9a492ec71cdf3087ff4ef71e39b1e8235bdb5a1042b70ebd5f6b880d84561285"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000077",
+      "legacy_ids": [
+        "jonathan-d-zuegel"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000077-c001",
+          "legacy_claim_ids": [
+            "jonathan-d-zuegel:CV095"
+          ],
+          "revision": 1,
+          "material_hash": "9494963a5f4aa783a2d8cc6ff0e735836ba1b32c6d6f616547adf6aa38cd94de"
+        },
+        {
+          "claim_id": "urh-000077-c002",
+          "legacy_claim_ids": [
+            "jonathan-d-zuegel:CV091"
+          ],
+          "revision": 1,
+          "material_hash": "aeefd5eab21d952fecd5d1fa35f2d0bbd571ec1af9a70098485ac9c501611fc2"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000078",
+      "legacy_ids": [
+        "jonathan-davies"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000078-c001",
+          "legacy_claim_ids": [
+            "jonathan-davies:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "076c3670568c0e5a34930bde813ddcc95350708f6b4580a99d9c2200c0a72a20"
+        },
+        {
+          "claim_id": "urh-000078-c002",
+          "legacy_claim_ids": [
+            "jonathan-davies:CV197"
+          ],
+          "revision": 1,
+          "material_hash": "3429079c39a73809de6722853d1a7ce45c230fdf448f9b5c731aed34abc705ec"
+        },
+        {
+          "claim_id": "urh-000078-c003",
+          "legacy_claim_ids": [
+            "jonathan-davies:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "32ca8e759eafab53f3a05ca5a36e985c069acfbc6a587b6f0e7ca71b234587d6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000079",
+      "legacy_ids": [
+        "jong-hoon-nam"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000079-c001",
+          "legacy_claim_ids": [
+            "jong-hoon-nam:CV125"
+          ],
+          "revision": 1,
+          "material_hash": "c778e71d6190348ee33e040172bdbbdea1470584d02a5c65931d0676c6bbd4ce"
+        },
+        {
+          "claim_id": "urh-000079-c002",
+          "legacy_claim_ids": [
+            "jong-hoon-nam:CV126"
+          ],
+          "revision": 1,
+          "material_hash": "cd22fce752f8038f4274213a0444f59bcac3f6a6d27cf29391f7f9cac857ccc7"
+        },
+        {
+          "claim_id": "urh-000079-c003",
+          "legacy_claim_ids": [
+            "jong-hoon-nam:CV115"
+          ],
+          "revision": 1,
+          "material_hash": "7e52fb6188ad242271f7e2fbf1eab349f0d3d9055a9a65837af88cc7e8a8a549"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000080",
+      "legacy_ids": [
+        "julie-bentley"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000080-c001",
+          "legacy_claim_ids": [
+            "julie-bentley:CV077"
+          ],
+          "revision": 1,
+          "material_hash": "5f7c450ed0ad86a7f6829051612cacc484288d9f2d17cd738ac5ae2b58377225"
+        },
+        {
+          "claim_id": "urh-000080-c002",
+          "legacy_claim_ids": [
+            "julie-bentley:CV078"
+          ],
+          "revision": 1,
+          "material_hash": "09a1b6b0025480159d0f05c3f92ee422a98c2550fb4761dbd596a11dbe539d90"
+        },
+        {
+          "claim_id": "urh-000080-c003",
+          "legacy_claim_ids": [
+            "julie-bentley:CV079"
+          ],
+          "revision": 1,
+          "material_hash": "4c73b77a067056e14ddcc1b2c254696f7b82f400ec11261d4cfd403b82bc3699"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000081",
+      "legacy_ids": [
+        "kaave-hosseini"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000081-c001",
+          "legacy_claim_ids": [
+            "kaave-hosseini:CV025"
+          ],
+          "revision": 1,
+          "material_hash": "5796a5bd2deae55877c97df8aa2998a6d6e6e524fec2232af144e3c1f3efb142"
+        },
+        {
+          "claim_id": "urh-000081-c002",
+          "legacy_claim_ids": [
+            "kaave-hosseini:CV026"
+          ],
+          "revision": 1,
+          "material_hash": "934dec20172695fa43fced58b8449a2f64463494cf1e95a02ebfce208771bb06"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000082",
+      "legacy_ids": [
+        "kathryn-knowles"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000082-c001",
+          "legacy_claim_ids": [
+            "kathryn-knowles:CV146"
+          ],
+          "revision": 1,
+          "material_hash": "5dd0479c800fd02986cd282cafca5718076aaad11b0c132f13953708978d40e5"
+        },
+        {
+          "claim_id": "urh-000082-c002",
+          "legacy_claim_ids": [
+            "kathryn-knowles:CV163"
+          ],
+          "revision": 1,
+          "material_hash": "cf7bf47f14cd6967ad796cf3ff850784c0cf379ba60446c5b0d7f1e956557433"
+        },
+        {
+          "claim_id": "urh-000082-c003",
+          "legacy_claim_ids": [
+            "kathryn-knowles:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "84cbbc95dd884992324ab279c26173b506eefbef64f5e9f865e8f58edb516462"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000083",
+      "legacy_ids": [
+        "kimberly-boster"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000083-c001",
+          "legacy_claim_ids": [
+            "kimberly-boster:CV021"
+          ],
+          "revision": 1,
+          "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d"
+        },
+        {
+          "claim_id": "urh-000083-c002",
+          "legacy_claim_ids": [
+            "kimberly-boster:CV124"
+          ],
+          "revision": 1,
+          "material_hash": "0b08b36638acacdd969db3fe145e39ce100349178bd798894a6f4144c0294254"
+        },
+        {
+          "claim_id": "urh-000083-c003",
+          "legacy_claim_ids": [
+            "kimberly-boster:CV170"
+          ],
+          "revision": 1,
+          "material_hash": "06b8857782eb10163c3e848c9b98c17f2c0b905d40707b71f77e2b7717d7772c"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000084",
+      "legacy_ids": [
+        "krystel-huxlin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000084-c001",
+          "legacy_claim_ids": [
+            "krystel-huxlin:CV127"
+          ],
+          "revision": 1,
+          "material_hash": "3cea1372bf2ca586a901ab220f6422c5ae0c07a69211586068d03e8234f71e0c"
+        },
+        {
+          "claim_id": "urh-000084-c002",
+          "legacy_claim_ids": [
+            "krystel-huxlin:CV082"
+          ],
+          "revision": 1,
+          "material_hash": "5e928ad2e2ef4d1983a71eaeb7c45742a36c2f197cac723400b084611e656da0"
+        },
+        {
+          "claim_id": "urh-000084-c003",
+          "legacy_claim_ids": [
+            "krystel-huxlin:CV083"
+          ],
+          "revision": 1,
+          "material_hash": "a131a4cfbae1ac6e4c09528f928bc219b49c5a2938a7c549f899e987b6b03d33"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000085",
+      "legacy_ids": [
+        "lane-a-hemaspaandra"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000085-c001",
+          "legacy_claim_ids": [
+            "lane-a-hemaspaandra:CV030"
+          ],
+          "revision": 1,
+          "material_hash": "f5c30e22a1e37be77b14b292c4be41a6e355c96a05e4e4d9d940f98b219f5ceb"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000086",
+      "legacy_ids": [
+        "laura-slane"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000086-c001",
+          "legacy_claim_ids": [
+            "laura-slane:CV112"
+          ],
+          "revision": 1,
+          "material_hash": "f6eb9e4cc2665e1a83c09c138d2f75317f3f6885a738d262314ee7c2f34ebf92"
+        },
+        {
+          "claim_id": "urh-000086-c002",
+          "legacy_claim_ids": [
+            "laura-slane:CV114"
+          ],
+          "revision": 1,
+          "material_hash": "c3479d61adeaa9e95286166258b02c16cf638bd68467870c25e0f21079bf76ef"
+        },
+        {
+          "claim_id": "urh-000086-c003",
+          "legacy_claim_ids": [
+            "laura-slane:CV121"
+          ],
+          "revision": 1,
+          "material_hash": "3a16d9b3b6c03930b2f36379755f7d899b2a7c70136b2273208a28fcee593221"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000087",
+      "legacy_ids": [
+        "laurel-h-carney"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000087-c001",
+          "legacy_claim_ids": [
+            "laurel-h-carney:CV125"
+          ],
+          "revision": 1,
+          "material_hash": "bdc9a13d0a75469b0bd9cf3ce64bb08bbca928e0435daca07d7d2bc734c946cb"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000088",
+      "legacy_ids": [
+        "lewis-rothberg"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000088-c001",
+          "legacy_claim_ids": [
+            "lewis-rothberg:CV107"
+          ],
+          "revision": 1,
+          "material_hash": "932895b187b9de574063fca1c4d0a4281fa0756a510f07101b8cccb8866b5124"
+        },
+        {
+          "claim_id": "urh-000088-c002",
+          "legacy_claim_ids": [
+            "lewis-rothberg:CV153"
+          ],
+          "revision": 1,
+          "material_hash": "ebe769219c428a67a27d664e2b27b3c7763792c9e206d33fd911ba6b9af7089a"
+        },
+        {
+          "claim_id": "urh-000088-c003",
+          "legacy_claim_ids": [
+            "lewis-rothberg:CV155"
+          ],
+          "revision": 1,
+          "material_hash": "9e2878877c19521607c36e547ae81954550d4795bd41a90fe3514cd822d59753"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000089",
+      "legacy_ids": [
+        "lisa-a-delouise"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000089-c001",
+          "legacy_claim_ids": [
+            "lisa-a-delouise:CV132"
+          ],
+          "revision": 1,
+          "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af"
+        },
+        {
+          "claim_id": "urh-000089-c002",
+          "legacy_claim_ids": [
+            "lisa-a-delouise:CV117"
+          ],
+          "revision": 1,
+          "material_hash": "0716dbdc77f21e81636148d9e0497bdf000f27a932c4f1abb75a9338dfc3fe68"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000090",
+      "legacy_ids": [
+        "lisha-chen"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000090-c001",
+          "legacy_claim_ids": [
+            "lisha-chen:CV014"
+          ],
+          "revision": 1,
+          "material_hash": "da825b9814d4b0da9342630f6ea6031ac2f1df8b180e9acde28d80a2aaf38437"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000091",
+      "legacy_ids": [
+        "machiel-blok"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000091-c001",
+          "legacy_claim_ids": [
+            "machiel-blok:CV043"
+          ],
+          "revision": 1,
+          "material_hash": "7e55dd2c0a2faa843d113d90be05d3bef1dd87afd7b67879ade0fb501d643365"
+        },
+        {
+          "claim_id": "urh-000091-c002",
+          "legacy_claim_ids": [
+            "machiel-blok:CV100"
+          ],
+          "revision": 1,
+          "material_hash": "f56a3d0f57dad71ab3940f41f4ae5eb4e19c965700f5943ca34376fea4be452b"
+        },
+        {
+          "claim_id": "urh-000091-c003",
+          "legacy_claim_ids": [
+            "machiel-blok:CV099"
+          ],
+          "revision": 1,
+          "material_hash": "fc2a7fa210632d6e2dad75690525f4a46c005830f31376f664526095a52ffe43"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000092",
+      "legacy_ids": [
+        "marc-d-porosoff"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000092-c001",
+          "legacy_claim_ids": [
+            "marc-d-porosoff:CV139"
+          ],
+          "revision": 1,
+          "material_hash": "14923dce29673ea3b5d7949f6aaba6359d3e6af4e5ee747c4e9960065ac6d2f9"
+        },
+        {
+          "claim_id": "urh-000092-c002",
+          "legacy_claim_ids": [
+            "marc-d-porosoff:CV011"
+          ],
+          "revision": 1,
+          "material_hash": "9bd9010ef7b394f39a59685af3fff1039a145d86ad9652e5719c2fbb719c97fc"
+        },
+        {
+          "claim_id": "urh-000092-c003",
+          "legacy_claim_ids": [
+            "marc-d-porosoff:CV141"
+          ],
+          "revision": 1,
+          "material_hash": "4de8cc52a010ef0a5442bf15a4302270a2e5a472054a9e62efb704ddf72eefba"
+        },
+        {
+          "claim_id": "urh-000092-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6b2a6396996a87c6e8de4f8b0bb76dd7e0034f4b3aa74f9ec169b6225f9e9dfd"
+        },
+        {
+          "claim_id": "urh-000092-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "ca5f9fd106a19cf4ff9fe0df8d078302597ca47e8ba794b991b8f404766d99b4"
+        },
+        {
+          "claim_id": "urh-000092-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "74ef1eb2c1e205dac862dc27fd41f7471b807e08cba08330923238420eeddcd0"
+        },
+        {
+          "claim_id": "urh-000092-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "669d66d18a6b04edae23a344404f94664de39da616696c3222a9d30e885419f9"
+        },
+        {
+          "claim_id": "urh-000092-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "9db5c0fb3e2181db5e4000d04b6972d1ac20759ab62eade9c2b820dbfcc1f8d8"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000093",
+      "legacy_ids": [
+        "marisol-herrera-perez"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000093-c001",
+          "legacy_claim_ids": [
+            "marisol-herrera-perez:CV113"
+          ],
+          "revision": 1,
+          "material_hash": "45a5837c687a860a7d270c5c7b1189089ab952c2802daa0e1f43fa7af7ff44bb"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000094",
+      "legacy_ids": [
+        "mark-bocko"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000094-c001",
+          "legacy_claim_ids": [
+            "mark-bocko:CV190"
+          ],
+          "revision": 1,
+          "material_hash": "11f05059c0a35fb829721ebad4fdd6ce5e9932420b1ca6f17f0cf03221d14691"
+        },
+        {
+          "claim_id": "urh-000094-c002",
+          "legacy_claim_ids": [
+            "mark-bocko:CV067"
+          ],
+          "revision": 1,
+          "material_hash": "aeebb4167b502dfc6cef5519ede919de7ccbdf707a866986bc58ca4df19b4f6b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000095",
+      "legacy_ids": [
+        "mark-buckley"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000095-c001",
+          "legacy_claim_ids": [
+            "mark-buckley:CV112"
+          ],
+          "revision": 1,
+          "material_hash": "822b95b94bd54b1823cd2674406d3a39fde57581d2cbb4007d3877cc93edf06e"
+        },
+        {
+          "claim_id": "urh-000095-c002",
+          "legacy_claim_ids": [
+            "mark-buckley:CV114"
+          ],
+          "revision": 1,
+          "material_hash": "51e5b9700832746d7c3849536749ec123ea3d517d140cbf1737462d60d2988a6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000096",
+      "legacy_ids": [
+        "marvin-doyley"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000096-c001",
+          "legacy_claim_ids": [
+            "marvin-doyley:CV121"
+          ],
+          "revision": 1,
+          "material_hash": "2ac758c334e296cc3667c395dd7bb6947577918649227a8f8aa34be7b0c75a5d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000097",
+      "legacy_ids": [
+        "matthew-z-yates"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000097-c001",
+          "legacy_claim_ids": [
+            "matthew-z-yates:CV147"
+          ],
+          "revision": 1,
+          "material_hash": "31bd7969ccebc184f9977642089ea22bf6065de45d015b0fa6677147d760eba2"
+        },
+        {
+          "claim_id": "urh-000097-c002",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "5c42736d2abb01c4397fdc1ed1298a8da8ebe09dbaa1e801a1e7dea7dc28f313"
+        },
+        {
+          "claim_id": "urh-000097-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "91cc82d0b9c050a5ef799c664bee6d1ab6fda82ef01efdb3ac0b5aa41ebfff8d"
+        },
+        {
+          "claim_id": "urh-000097-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "b13796dc969294b02906688e85fd329e242cca4a1c0e8250cc10f036ff4f02f6"
+        },
+        {
+          "claim_id": "urh-000097-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6cfaa8e0102127b62228fd1b79b557f5645312dcbc08718b11ab61df8683022a"
+        },
+        {
+          "claim_id": "urh-000097-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "77b4daf0d1c94a48c70499c666770c9dcfd209d2210add5c8be8150bc0f94132"
+        },
+        {
+          "claim_id": "urh-000097-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "84e72fa9c8015a5d7ab9a506b6a2db3cb4ee31d3e2281ad7e26c12565c7fa3d2"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000098",
+      "legacy_ids": [
+        "michael-giacomelli"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000098-c001",
+          "legacy_claim_ids": [
+            "michael-giacomelli:CV086"
+          ],
+          "revision": 1,
+          "material_hash": "cfdfded0182cd8f120eeb3a30efba6615542794fa655505480d87bbc3ee3c11d"
+        },
+        {
+          "claim_id": "urh-000098-c002",
+          "legacy_claim_ids": [
+            "michael-giacomelli:CV075"
+          ],
+          "revision": 1,
+          "material_hash": "98c18c7784a7f99bfacc3d700b422c783168bfa1796f18adb475afdf122fc5aa"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000099",
+      "legacy_ids": [
+        "michael-huang"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000099-c001",
+          "legacy_claim_ids": [
+            "michael-huang:CV037"
+          ],
+          "revision": 1,
+          "material_hash": "07a73eca7f3c0fbf8821397e0840e97f09a73e2957278fc230e623638e131787"
+        },
+        {
+          "claim_id": "urh-000099-c002",
+          "legacy_claim_ids": [
+            "michael-huang:CV039"
+          ],
+          "revision": 1,
+          "material_hash": "546cced7889989722f44d64f308461e1b12b2b3e634ab7564d6a6745bafca0a8"
+        },
+        {
+          "claim_id": "urh-000099-c003",
+          "legacy_claim_ids": [
+            "michael-huang:CV035"
+          ],
+          "revision": 1,
+          "material_hash": "b69b9566f285eedaf5f22316f8ea6a92d64ae28d1bb9750d0511d76a5a78abe9"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000100",
+      "legacy_ids": [
+        "michael-t-ruggiero"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000100-c001",
+          "legacy_claim_ids": [
+            "michael-t-ruggiero:CV094"
+          ],
+          "revision": 1,
+          "material_hash": "a25cda37c3979a3d9fb6d65c4c657ad19c6e3fcd4864f267391f94218ad3f6cf"
+        },
+        {
+          "claim_id": "urh-000100-c002",
+          "legacy_claim_ids": [
+            "michael-t-ruggiero:CV160"
+          ],
+          "revision": 1,
+          "material_hash": "4cd46c8f331622581bd3fdf64b9e88e5977e8b197db2509cd1eb0bb95a7ea7f7"
+        },
+        {
+          "claim_id": "urh-000100-c003",
+          "legacy_claim_ids": [
+            "michael-t-ruggiero:CV163"
+          ],
+          "revision": 1,
+          "material_hash": "2a7871f5d810d3548305f8a4e757b384151870b5fd9eee1ada50b347f7ce4231"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000101",
+      "legacy_ids": [
+        "michele-cotrufo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000101-c001",
+          "legacy_claim_ids": [
+            "michele-cotrufo:CV104"
+          ],
+          "revision": 1,
+          "material_hash": "3f365d6cb0bb1711dc13e823e96cf8acaff280e49c6d8c4df3ecf3a6da9f642b"
+        },
+        {
+          "claim_id": "urh-000101-c002",
+          "legacy_claim_ids": [
+            "michele-cotrufo:CV091"
+          ],
+          "revision": 1,
+          "material_hash": "0ead47576092ffd30ac43e97ac5b154ffff23c40aa51f5feb4b22ca9eddf1a60"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000102",
+      "legacy_ids": [
+        "miguel-a-alonso"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000102-c001",
+          "legacy_claim_ids": [
+            "miguel-a-alonso:CV081"
+          ],
+          "revision": 1,
+          "material_hash": "69c2850de9ad07b4dc9b7e345716f07ff38b5092ab3a37a00c92f05d5d98b579"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000103",
+      "legacy_ids": [
+        "mitchell-anthamatten"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000103-c001",
+          "legacy_claim_ids": [
+            "mitchell-anthamatten:CV145"
+          ],
+          "revision": 1,
+          "material_hash": "b11af3f200258996c0a4996b0705e43aa7486c9edf09aa7caa1e3c3919efd037"
+        },
+        {
+          "claim_id": "urh-000103-c002",
+          "legacy_claim_ids": [
+            "mitchell-anthamatten:CV150"
+          ],
+          "revision": 1,
+          "material_hash": "7cc1bfc11aca690769846365329011c93e29d8ee10e5d242afeba44d77aa6eb4"
+        },
+        {
+          "claim_id": "urh-000103-c003",
+          "legacy_claim_ids": [
+            "mitchell-anthamatten:CV155"
+          ],
+          "revision": 1,
+          "material_hash": "1f00d87383804d0abdf184ec301abe68768e39566e758eb8d48f70e68862944c"
+        },
+        {
+          "claim_id": "urh-000103-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "0ddf0aea9225ed6c139fa8b7ce9125f0e6b9498875f0789f93c69f03cb186926"
+        },
+        {
+          "claim_id": "urh-000103-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "2898a7b28c6fe5685b054c2656bbd26ce73404e3dbb3c2ee5d0224a6ebb8b2f3"
+        },
+        {
+          "claim_id": "urh-000103-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "ade373cf4ccd12db9d0d48882fe6af094fad2635e1d019eca92379909aeaa643"
+        },
+        {
+          "claim_id": "urh-000103-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "37c62d86e125b3bbae97b732e31a45a5dc90cbafc8e9a8a63b4466a23fc7cbd6"
+        },
+        {
+          "claim_id": "urh-000103-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "9e73a9673da18d9980717c140641c8cb156bbb8b25baf80210af2e45ce50ebd9"
+        },
+        {
+          "claim_id": "urh-000103-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "27de251fb530550e77bb901ccc2e681aaef908173696d61eff88547632aa6c81"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000104",
+      "legacy_ids": [
+        "mujdat-cetin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000104-c001",
+          "legacy_claim_ids": [
+            "mujdat-cetin:CV064"
+          ],
+          "revision": 1,
+          "material_hash": "503d6a2baabba56b1e3b339bca2da4939bf768f3871728c90491d88c724a4a2b"
+        },
+        {
+          "claim_id": "urh-000104-c002",
+          "legacy_claim_ids": [
+            "mujdat-cetin:CV073"
+          ],
+          "revision": 1,
+          "material_hash": "e3fd489a781c639301f59eaf471e0655760bc9d11ec3e519dbb15d53329ce395"
+        },
+        {
+          "claim_id": "urh-000104-c003",
+          "legacy_claim_ids": [
+            "mujdat-cetin:CV065"
+          ],
+          "revision": 1,
+          "material_hash": "cd193313ed209fdf2a40c487845a68815b29c981ee633d7176abe25e7cd5d298"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000105",
+      "legacy_ids": [
+        "niaz-abdolrahim"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000105-c001",
+          "legacy_claim_ids": [
+            "niaz-abdolrahim:CV160"
+          ],
+          "revision": 1,
+          "material_hash": "322098b3ecc8b3146d947af0386f6902a0e178a336da0a46c0d14bad2f8e3bd4"
+        },
+        {
+          "claim_id": "urh-000105-c002",
+          "legacy_claim_ids": [
+            "niaz-abdolrahim:CV144"
+          ],
+          "revision": 1,
+          "material_hash": "9793d8e17107049b9dcb29dff76cbf9300713fc3ccfd44ed9e4f4c288ffa6278"
+        },
+        {
+          "claim_id": "urh-000105-c003",
+          "legacy_claim_ids": [
+            "niaz-abdolrahim:CV163"
+          ],
+          "revision": 1,
+          "material_hash": "8bbc0d12448aef24ed1e684dc98589d962f1a5eec5e7d86c798292ecc652876d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000106",
+      "legacy_ids": [
+        "nicholas-p-bigelow"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000106-c001",
+          "legacy_claim_ids": [
+            "nicholas-p-bigelow:CV086"
+          ],
+          "revision": 1,
+          "material_hash": "b9f2a45ed74d030594c8973632a4e83e60eecf7654f36111dfdb9a21813755ae"
+        },
+        {
+          "claim_id": "urh-000106-c002",
+          "legacy_claim_ids": [
+            "nicholas-p-bigelow:CV100"
+          ],
+          "revision": 1,
+          "material_hash": "cb7f51df4196eba49c9a8a79838d2aae3e843968288b1654a4a7095f2f387df0"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000107",
+      "legacy_ids": [
+        "nickolas-a-vamivakas"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000107-c001",
+          "legacy_claim_ids": [
+            "nickolas-a-vamivakas:CV092"
+          ],
+          "revision": 1,
+          "material_hash": "de85b21e03365a76b001965b41827070b315ef931bcfbc0484bc8b75dea54b28"
+        },
+        {
+          "claim_id": "urh-000107-c002",
+          "legacy_claim_ids": [
+            "nickolas-a-vamivakas:CV104"
+          ],
+          "revision": 1,
+          "material_hash": "aae25c95f5fd84a79ec8ab6839e2a6221075e65753846e9a701275564f737dc1"
+        },
+        {
+          "claim_id": "urh-000107-c003",
+          "legacy_claim_ids": [
+            "nickolas-a-vamivakas:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "aeaa3c4a80fc9cf09aaf48f8db9071e3a569c1e6f0aaa45fbaf0ba33dadba8d4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000108",
+      "legacy_ids": [
+        "pablo-a-postigo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000108-c001",
+          "legacy_claim_ids": [
+            "pablo-a-postigo:CV104"
+          ],
+          "revision": 1,
+          "material_hash": "587fc58e6307af57d9c5a79d9e3e1259745b59b8eb39b57efdd8bb60988896b1"
+        },
+        {
+          "claim_id": "urh-000108-c002",
+          "legacy_claim_ids": [
+            "pablo-a-postigo:CV158"
+          ],
+          "revision": 1,
+          "material_hash": "6d503576b7462ef9f80d02db6ccd29ac1067dab97db9bd21fe90053156a0b007"
+        },
+        {
+          "claim_id": "urh-000108-c003",
+          "legacy_claim_ids": [
+            "pablo-a-postigo:CV089"
+          ],
+          "revision": 1,
+          "material_hash": "e0cdc97ce16bc31bb8ee3bf3fd1d52e265cbc97342af64e9cfb3369ae6bb90b6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000109",
+      "legacy_ids": [
+        "paul-d-funkenbusch"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000109-c001",
+          "legacy_claim_ids": [
+            "paul-d-funkenbusch:CV169"
+          ],
+          "revision": 1,
+          "material_hash": "f46bfd569062603d8471a0a68a28d04e36f6777fa53942970ac1dc00397aace3"
+        },
+        {
+          "claim_id": "urh-000109-c002",
+          "legacy_claim_ids": [
+            "paul-d-funkenbusch:CV130"
+          ],
+          "revision": 1,
+          "material_hash": "e81566bf5af9d22fba8fb82c9baa97cb470d520c92ae2d59f3c21d724ce0b790"
+        },
+        {
+          "claim_id": "urh-000109-c003",
+          "legacy_claim_ids": [
+            "paul-d-funkenbusch:CV162"
+          ],
+          "revision": 1,
+          "material_hash": "6370e302dec63d41a7ab4e0aa607a0f681ed353af470a46eaba68f44ba2ec796"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000110",
+      "legacy_ids": [
+        "pengfei-huo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000110-c001",
+          "legacy_claim_ids": [
+            "pengfei-huo:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "40d74640a6852e68cf0d75f5d73318cf443ddc06a3f00e0ed1f57cc00fd3f8e3"
+        },
+        {
+          "claim_id": "urh-000110-c002",
+          "legacy_claim_ids": [
+            "pengfei-huo:CV161"
+          ],
+          "revision": 1,
+          "material_hash": "a9ebf60a55d8da306d5f8a2ce820e68eabb88047814048a46d3bc4cf7917b9ac"
+        },
+        {
+          "claim_id": "urh-000110-c003",
+          "legacy_claim_ids": [
+            "pengfei-huo:CV111"
+          ],
+          "revision": 1,
+          "material_hash": "3f045f3eabe282b83270cdef6d2ab002fefa7e9a2c5ca3437a7a82ddf2a1427a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000111",
+      "legacy_ids": [
+        "pooja-rajendra-bhalode"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000111-c001",
+          "legacy_claim_ids": [
+            "pooja-rajendra-bhalode:CV169"
+          ],
+          "revision": 1,
+          "material_hash": "c18707da525b77498692563c1d1ff0aeda899d060c3513fc04d4d4969927b5a8"
+        },
+        {
+          "claim_id": "urh-000111-c002",
+          "legacy_claim_ids": [
+            "pooja-rajendra-bhalode:CV189"
+          ],
+          "revision": 1,
+          "material_hash": "810c4c0da16824eeaf4ec8f0bfbd8ce1eafe68f4100bac38a65e06ecdfc118d3"
+        },
+        {
+          "claim_id": "urh-000111-c003",
+          "legacy_claim_ids": [
+            "pooja-rajendra-bhalode:CV017"
+          ],
+          "revision": 1,
+          "material_hash": "ceadf0867e9afd183f7040cef9287e4ad8c15c3f6dce7697cee5de0ef3879d2d"
+        },
+        {
+          "claim_id": "urh-000111-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "7740a9302bf71e54b32dda72a7c961c398654b481576b7e04130090880b46abb"
+        },
+        {
+          "claim_id": "urh-000111-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "a439f94bbb0c82bd2f44cbc2aa8a1504e5fcb43e2d74df739bc4701f7ef8fe80"
+        },
+        {
+          "claim_id": "urh-000111-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "c2ee10a9fc4129bd04d1713fb02f25103f0ddc93f9303f2f0aa74dbf0c9d77c1"
+        },
+        {
+          "claim_id": "urh-000111-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "8f2e86f5431d7215c02b372c51d466d10aeb996b30d7e13def4bc1424aa71605"
+        },
+        {
+          "claim_id": "urh-000111-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "321fbd47eefae23d25f8b1cf17f4411bfa21f519ca6cca8cb3d342a6589a89ee"
+        },
+        {
+          "claim_id": "urh-000111-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "4a6ad18d63ce87644cf42e23fd5a0d08c7d69ee918b6339c1293ef89e93251c6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000112",
+      "legacy_ids": [
+        "qiang-lin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000112-c001",
+          "legacy_claim_ids": [
+            "qiang-lin:CV087"
+          ],
+          "revision": 1,
+          "material_hash": "6fc764c40c4c2812261a798ed62e109a9a321a16c00e543991ed8ea27245615f"
+        },
+        {
+          "claim_id": "urh-000112-c002",
+          "legacy_claim_ids": [
+            "qiang-lin:CV092"
+          ],
+          "revision": 1,
+          "material_hash": "2aa711e6793f83f2a8c2c3e1c1b68b54d787335120184300b559514a86dd978d"
+        },
+        {
+          "claim_id": "urh-000112-c003",
+          "legacy_claim_ids": [
+            "qiang-lin:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "39aa910cbe7899c5d10ca622f46b31d5e05bccb1dd34ab6e5aea9f20e7926dea"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000113",
+      "legacy_ids": [
+        "rachel-glade"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000113-c001",
+          "legacy_claim_ids": [
+            "rachel-glade:CV180"
+          ],
+          "revision": 1,
+          "material_hash": "317be2855863e57fed82ac73979104b55274226b763b3c9d3bace398ad0123e6"
+        },
+        {
+          "claim_id": "urh-000113-c002",
+          "legacy_claim_ids": [
+            "rachel-glade:CV189"
+          ],
+          "revision": 1,
+          "material_hash": "ddfd70258e9f7a63c3532661c89e9fe6b8dd7bcddae515d3ece226c385a35788"
+        },
+        {
+          "claim_id": "urh-000113-c003",
+          "legacy_claim_ids": [
+            "rachel-glade:CV165"
+          ],
+          "revision": 1,
+          "material_hash": "b5f58a7ed03b911dbfb99d2c4ae2894917d8721cf4b3cea48ad5daa723f25645"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000114",
+      "legacy_ids": [
+        "ralf-haefner"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000114-c001",
+          "legacy_claim_ids": [
+            "ralf-haefner:CV128"
+          ],
+          "revision": 1,
+          "material_hash": "bba4f1167f34ae05db2f3565a4a38d250a09a20ebddbd89300ef840103ca32ff"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000115",
+      "legacy_ids": [
+        "rebecca-irwin"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000115-c001",
+          "legacy_claim_ids": [
+            "rebecca-irwin:CV075"
+          ],
+          "revision": 1,
+          "material_hash": "577fabe9425db35fccac1de3ae904b02c62b54de8c5ce37123f0f10a7f1637f6"
+        },
+        {
+          "claim_id": "urh-000115-c002",
+          "legacy_claim_ids": [
+            "rebecca-irwin:CV116"
+          ],
+          "revision": 1,
+          "material_hash": "c2d6da631ca1a0f939515e337855ae1d6c3ef0c5617ac12ee5e871943dd42197"
+        },
+        {
+          "claim_id": "urh-000115-c003",
+          "legacy_claim_ids": [
+            "rebecca-irwin:CV113"
+          ],
+          "revision": 1,
+          "material_hash": "ed3451122d4c77488e33c9398ff1993396cc944e3619b40f8f3bffb6453947b6"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000116",
+      "legacy_ids": [
+        "regine-choe"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000116-c001",
+          "legacy_claim_ids": [
+            "regine-choe:CV084"
+          ],
+          "revision": 1,
+          "material_hash": "8b1cc9fa78630e2a748c384dcea30424a4d4a4161f562c49adfd95f9a2f85429"
+        },
+        {
+          "claim_id": "urh-000116-c002",
+          "legacy_claim_ids": [
+            "regine-choe:CV122"
+          ],
+          "revision": 1,
+          "material_hash": "a4f1dca86b885ed0465f4c99f61de90853c92240d9bfc2ee487b17b481fd8715"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000117",
+      "legacy_ids": [
+        "renato-perucchio"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000117-c001",
+          "legacy_claim_ids": [
+            "renato-perucchio:CV182"
+          ],
+          "revision": 1,
+          "material_hash": "80a4e8b28bdbf34d71a525b4f6bfab935395535ce6c4ed078c117d13e7cc647e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000118",
+      "legacy_ids": [
+        "riccardo-betti"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000118-c001",
+          "legacy_claim_ids": [
+            "riccardo-betti:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "3ea8718ebf4a124ad8602894d1e004d28d0df12e0549eff0d84d783cb9116861"
+        },
+        {
+          "claim_id": "urh-000118-c002",
+          "legacy_claim_ids": [
+            "riccardo-betti:CV195"
+          ],
+          "revision": 1,
+          "material_hash": "17113045d9b9835235333dfa39d60c6f269fad912c1b03b630b6762da78a2321"
+        },
+        {
+          "claim_id": "urh-000118-c003",
+          "legacy_claim_ids": [
+            "riccardo-betti:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "eed01d966358bdb11ee5b18d7d0d741e2714e0cee3ad4263127e65e020b805f3"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000119",
+      "legacy_ids": [
+        "robert-a-jacobs"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000119-c001",
+          "legacy_claim_ids": [
+            "robert-a-jacobs:CV128"
+          ],
+          "revision": 1,
+          "material_hash": "83e06ea66a4cf553025f351ffc77f00c82c8784fa32ab0fb9d94decf88425237"
+        },
+        {
+          "claim_id": "urh-000119-c002",
+          "legacy_claim_ids": [
+            "robert-a-jacobs:CV127"
+          ],
+          "revision": 1,
+          "material_hash": "6ec618df96adfe5742e02f754a151d593764cd2181f774861671b7acce918222"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000120",
+      "legacy_ids": [
+        "robert-boyd"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000120-c001",
+          "legacy_claim_ids": [
+            "robert-boyd:CV092"
+          ],
+          "revision": 1,
+          "material_hash": "2f025fefe771b116632069f2e49312b6fbf84b430e808c2daeb623e43762ce21"
+        },
+        {
+          "claim_id": "urh-000120-c002",
+          "legacy_claim_ids": [
+            "robert-boyd:CV185"
+          ],
+          "revision": 1,
+          "material_hash": "09a86a15315b21f2cadbe6e0f2de1d643afbef814135055f24f3050b9b8bbd67"
+        },
+        {
+          "claim_id": "urh-000120-c003",
+          "legacy_claim_ids": [
+            "robert-boyd:CV091"
+          ],
+          "revision": 1,
+          "material_hash": "34f70a1aef261b80d36be31b3c3cb2887cfe84f7f67419087f09b855afad2b72"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000121",
+      "legacy_ids": [
+        "robert-clark"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000121-c001",
+          "legacy_claim_ids": [
+            "robert-clark:CV116"
+          ],
+          "revision": 1,
+          "material_hash": "bf39d4e7414901d9737fc696c585d1cae93d4b489e141dd613dc819e92025df3"
+        },
+        {
+          "claim_id": "urh-000121-c002",
+          "legacy_claim_ids": [
+            "robert-clark:CV168"
+          ],
+          "revision": 1,
+          "material_hash": "44fcd7cada73930c58fbebd9cb9c457ffcdc88d286313406b92199831b3ad0e2"
+        },
+        {
+          "claim_id": "urh-000121-c003",
+          "legacy_claim_ids": [
+            "robert-clark:CV138"
+          ],
+          "revision": 1,
+          "material_hash": "96be712daa4a5709982ad06599eb4769e81c99d198c44f3d278f9756007bd683"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000122",
+      "legacy_ids": [
+        "roman-sobolewski"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000122-c001",
+          "legacy_claim_ids": [
+            "roman-sobolewski:CV094"
+          ],
+          "revision": 1,
+          "material_hash": "3af36e983ce8d42451cb7b73153e63209f8298153e9dec6ce4eeb9ade3be13ec"
+        },
+        {
+          "claim_id": "urh-000122-c002",
+          "legacy_claim_ids": [
+            "roman-sobolewski:CV104"
+          ],
+          "revision": 1,
+          "material_hash": "564fbe360a6bfbe3a08aa4564fe67df1d1b9dcc4952baceb17ef3cec5f59ab97"
+        },
+        {
+          "claim_id": "urh-000122-c003",
+          "legacy_claim_ids": [
+            "roman-sobolewski:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "d34bbb1b2bd4e553cc61c086d87812f17511e6c3c6c494f64b9931b871adf75f"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000123",
+      "legacy_ids": [
+        "sean-regan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000123-c001",
+          "legacy_claim_ids": [
+            "sean-regan:CV196"
+          ],
+          "revision": 1,
+          "material_hash": "2bdace9257e1bc0db849d9d793fdd9181788d9c17bebb479f6fb676344b801e4"
+        },
+        {
+          "claim_id": "urh-000123-c002",
+          "legacy_claim_ids": [
+            "sean-regan:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "78ac5c8c8d9e1013c51320e1aee38e301cf38efb6a6874ffe08ca064a15fe14e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000124",
+      "legacy_ids": [
+        "selcuk-kose"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000124-c001",
+          "legacy_claim_ids": [
+            "selcuk-kose:CV041"
+          ],
+          "revision": 1,
+          "material_hash": "8f626679b7c4641414814b4f0bcdec7ec4dd16f38285b22e9885f2b5b1197c69"
+        },
+        {
+          "claim_id": "urh-000124-c002",
+          "legacy_claim_ids": [
+            "selcuk-kose:CV042"
+          ],
+          "revision": 1,
+          "material_hash": "5832e869bb05a4ae1e5d4ac56b53e61acdf63f7d1b73b8b198e64bcb7c05fd84"
+        },
+        {
+          "claim_id": "urh-000124-c003",
+          "legacy_claim_ids": [
+            "selcuk-kose:CV045"
+          ],
+          "revision": 1,
+          "material_hash": "a22d24586d18f6e40589aba2e416fccb7d4c81ad59ae3d8147213291b4d6763e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000125",
+      "legacy_ids": [
+        "siddharth-deshpande"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000125-c001",
+          "legacy_claim_ids": [
+            "siddharth-deshpande:CV147"
+          ],
+          "revision": 1,
+          "material_hash": "f957c3c83c9edec1f388074837d2a70dcf07a17fefdb4b6af8a122ed56f0e6d7"
+        },
+        {
+          "claim_id": "urh-000125-c002",
+          "legacy_claim_ids": [
+            "siddharth-deshpande:CV171"
+          ],
+          "revision": 1,
+          "material_hash": "9ac576f680771756451dc0995c79ae2dcc89f5e207d709025d468432a13ed2da"
+        },
+        {
+          "claim_id": "urh-000125-c003",
+          "legacy_claim_ids": [
+            "siddharth-deshpande:CV140"
+          ],
+          "revision": 1,
+          "material_hash": "a48d60b84d4cc2d40b24309e8ee1cdfcfe7bc0615da48fcb0054dee4c850c9ca"
+        },
+        {
+          "claim_id": "urh-000125-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "2c73c89a6a150cd081c9fba4692d4e349754a5a9287a1b0f6afda27610e5e3e7"
+        },
+        {
+          "claim_id": "urh-000125-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "38c7812bafcdc1f179dfea47b72bd446355e65fe8a295245c0b06c2ff0e5c77f"
+        },
+        {
+          "claim_id": "urh-000125-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "74f0205c3ab390d0732936df9ff85094a61f14c132a9427d3232c8164989f097"
+        },
+        {
+          "claim_id": "urh-000125-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "79b7e03fc691a70bd69f6e2b27411314cc49b31e305b5108adcd9fc2911e6571"
+        },
+        {
+          "claim_id": "urh-000125-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "b3eb1342fdaeefdfbb6fa8332bd891a6c77c29ee3177446b52026cb130592c43"
+        },
+        {
+          "claim_id": "urh-000125-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6f278c4f4b9ed1614d8c1bf2fcbc3ea317e9f8cae343426e41552ac15fc867dd"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000126",
+      "legacy_ids": [
+        "sobhit-singh"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000126-c001",
+          "legacy_claim_ids": [
+            "sobhit-singh:CV161"
+          ],
+          "revision": 1,
+          "material_hash": "a3427e9528babfb6925aab9ce6bb07f1379dd1e4894663589a0a5dae657063f3"
+        },
+        {
+          "claim_id": "urh-000126-c002",
+          "legacy_claim_ids": [
+            "sobhit-singh:CV105"
+          ],
+          "revision": 1,
+          "material_hash": "b9373b03f569e5c2a54a0b850d0ad33caab396a2789f98bea2a6006241a49e75"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000127",
+      "legacy_ids": [
+        "sreepathi-pai"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000127-c001",
+          "legacy_claim_ids": [
+            "sreepathi-pai:CV038"
+          ],
+          "revision": 1,
+          "material_hash": "d2e5a0619446876d0b8bd94f261c55866ae146191e71a2afe771101cdd65d8a6"
+        },
+        {
+          "claim_id": "urh-000127-c002",
+          "legacy_claim_ids": [
+            "sreepathi-pai:CV037"
+          ],
+          "revision": 1,
+          "material_hash": "8b0c749da020a1e7aa0e73a56098c26e872a26515c48a91d7ecab2804dc3157d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000128",
+      "legacy_ids": [
+        "stephen-mcaleavey"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000128-c001",
+          "legacy_claim_ids": [
+            "stephen-mcaleavey:CV121"
+          ],
+          "revision": 1,
+          "material_hash": "cc3be4e31302b6b0e519a66c586f20994307cf326cd44337f5ec3e52983ace0a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000129",
+      "legacy_ids": [
+        "stephen-wu"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000129-c001",
+          "legacy_claim_ids": [
+            "stephen-wu:CV105"
+          ],
+          "revision": 1,
+          "material_hash": "98fe269e35d3ae14f622eaf16417fa15e2ddc1c63d16bf12224f74ebcbd79dcb"
+        },
+        {
+          "claim_id": "urh-000129-c002",
+          "legacy_claim_ids": [
+            "stephen-wu:CV108"
+          ],
+          "revision": 1,
+          "material_hash": "4c5b362e51a32e582ef54313b5bd6d6ad03f6d5ee27079c10b62c51930d1c3d9"
+        },
+        {
+          "claim_id": "urh-000129-c003",
+          "legacy_claim_ids": [
+            "stephen-wu:CV106"
+          ],
+          "revision": 1,
+          "material_hash": "9cc83e6cc39b260549fb010d310b8be90b62b57f55a3e38329ee1370de1b120a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000130",
+      "legacy_ids": [
+        "susana-marcos"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000130-c001",
+          "legacy_claim_ids": [
+            "susana-marcos:CV079"
+          ],
+          "revision": 1,
+          "material_hash": "a4e55a3926e10b81a24f0bc6fc8fdc1cee5160749c53a247c8f1fb7ccaf11833"
+        },
+        {
+          "claim_id": "urh-000130-c002",
+          "legacy_claim_ids": [
+            "susana-marcos:CV083"
+          ],
+          "revision": 1,
+          "material_hash": "8e992ffb45ce1b98ebefcd98786c6da24bde3ed18551499906b6188bacf515ce"
+        },
+        {
+          "claim_id": "urh-000130-c003",
+          "legacy_claim_ids": [
+            "susana-marcos:CV082"
+          ],
+          "revision": 1,
+          "material_hash": "0607e1a69dc62098e026196093287631c59ad63be2866aa4b41b713d88ccec66"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000131",
+      "legacy_ids": [
+        "suxing-hu"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000131-c001",
+          "legacy_claim_ids": [
+            "suxing-hu:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "e36e5e659694e04f8df9a9bf22cc7f178f464e1d8f679b58428546bf5a14b0aa"
+        },
+        {
+          "claim_id": "urh-000131-c002",
+          "legacy_claim_ids": [
+            "suxing-hu:CV195"
+          ],
+          "revision": 1,
+          "material_hash": "0d62072cf2db12fcb4587debbf78907663c088c571a55adca46724be5645246e"
+        },
+        {
+          "claim_id": "urh-000131-c003",
+          "legacy_claim_ids": [
+            "suxing-hu:CV201"
+          ],
+          "revision": 1,
+          "material_hash": "597725d4f7ced3361943ac3c7fd96bf4bdebed7acca6fa08d3b224b1d647728f"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000132",
+      "legacy_ids": [
+        "svetlana-g-lukishova"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000132-c001",
+          "legacy_claim_ids": [
+            "svetlana-g-lukishova:CV092"
+          ],
+          "revision": 1,
+          "material_hash": "9efae7c01b86d3631a47b7146d8002a05344dac56fcd7ed6526696abff7df89c"
+        },
+        {
+          "claim_id": "urh-000132-c002",
+          "legacy_claim_ids": [
+            "svetlana-g-lukishova:CV104"
+          ],
+          "revision": 1,
+          "material_hash": "8cc1cf9790c7b5cc4ae2748675f43e6774e499fc00dd1191441dee1263acb7d2"
+        },
+        {
+          "claim_id": "urh-000132-c003",
+          "legacy_claim_ids": [
+            "svetlana-g-lukishova:CV091"
+          ],
+          "revision": 1,
+          "material_hash": "b57a9ba5af6767859a48bce804dcffa76662a3c9ff8c9ed41d332cffdc8ba18d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000133",
+      "legacy_ids": [
+        "thomas-g-brown"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000133-c001",
+          "legacy_claim_ids": [
+            "thomas-g-brown:CV080"
+          ],
+          "revision": 1,
+          "material_hash": "b4fc4cf5eab5f9d44c897b59dc4e4c38e47572ddc67777c5f7ae6b2d2b0cf6d6"
+        },
+        {
+          "claim_id": "urh-000133-c002",
+          "legacy_claim_ids": [
+            "thomas-g-brown:CV087"
+          ],
+          "revision": 1,
+          "material_hash": "4b337441241cfd5918f2de99deb6e0c511aefc3ec6fae9c257f03b05785027bb"
+        },
+        {
+          "claim_id": "urh-000133-c003",
+          "legacy_claim_ids": [
+            "thomas-g-brown:CV077"
+          ],
+          "revision": 1,
+          "material_hash": "81ee56dda101cf5a528ed8aa8a250b379a7fdd606fb5ba08bbbd42a1f11d3294"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000134",
+      "legacy_ids": [
+        "thomas-m-howard"
+      ],
+      "claims": []
+    },
+    {
+      "researcher_id": "urh-000135",
+      "legacy_ids": [
+        "timothy-m-baran"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000135-c001",
+          "legacy_claim_ids": [
+            "timothy-m-baran:CV122"
+          ],
+          "revision": 1,
+          "material_hash": "9e8082503ed08dd25e68658f1e40e3f7e45b176bd30b9df4ef0e69ecb479520a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000136",
+      "legacy_ids": [
+        "todd-d-krauss"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000136-c001",
+          "legacy_claim_ids": [
+            "todd-d-krauss:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "3818fc8be571e96f79898bcde425c414347aad0ff6d04b7dd2959e1ce7e50e42"
+        },
+        {
+          "claim_id": "urh-000136-c002",
+          "legacy_claim_ids": [
+            "todd-d-krauss:CV158"
+          ],
+          "revision": 1,
+          "material_hash": "f352fe5ce0a5c646dd9a7cddb4287f036e9500a54d88a5602cbbd1093dd79470"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000137",
+      "legacy_ids": [
+        "valeri-goncharov"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000137-c001",
+          "legacy_claim_ids": [
+            "valeri-goncharov:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "9463e925958cba4a4454a16a48a0f714558f9fe5712adc892c99b21601952848"
+        },
+        {
+          "claim_id": "urh-000137-c002",
+          "legacy_claim_ids": [
+            "valeri-goncharov:CV202"
+          ],
+          "revision": 1,
+          "material_hash": "efb7cec9ddcb4ea8711a875dcd3093868865a9399778855932794e61e48ae126"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000138",
+      "legacy_ids": [
+        "varchas-gopalaswamy"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000138-c001",
+          "legacy_claim_ids": [
+            "varchas-gopalaswamy:CV017"
+          ],
+          "revision": 1,
+          "material_hash": "0540e9a50c1ca06fb354d2c92e3fe1f7c3ad63c1552266bd262540ef12d37e5f"
+        },
+        {
+          "claim_id": "urh-000138-c002",
+          "legacy_claim_ids": [
+            "varchas-gopalaswamy:CV193"
+          ],
+          "revision": 1,
+          "material_hash": "a710c9cb474db0b804f089800d66be550243b956259f38a0e607321e0743ef75"
+        },
+        {
+          "claim_id": "urh-000138-c003",
+          "legacy_claim_ids": [
+            "varchas-gopalaswamy:CV195"
+          ],
+          "revision": 1,
+          "material_hash": "8c709d6c016ec0026e5aecb364c3ff636f0d1e0a034675a0a401aca3f144c216"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000139",
+      "legacy_ids": [
+        "victor-l-genberg"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000139-c001",
+          "legacy_claim_ids": [
+            "victor-l-genberg:CV182"
+          ],
+          "revision": 1,
+          "material_hash": "9ee5b3ee0e5c5e251707aa3bc50e28c8a93050aef7cc121cb56b2c282d874dc9"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000140",
+      "legacy_ids": [
+        "wayne-h-knox"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000140-c001",
+          "legacy_claim_ids": [
+            "wayne-h-knox:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "240053c6c1715b898b628e45509f09ce5b811d544692fe8cc1289a5a10fef1a1"
+        },
+        {
+          "claim_id": "urh-000140-c002",
+          "legacy_claim_ids": [
+            "wayne-h-knox:CV083"
+          ],
+          "revision": 1,
+          "material_hash": "7fb3267aec8516fb2b3e0bb0b14f5be53758eecdac0ad8bfce33727ca98735ae"
+        },
+        {
+          "claim_id": "urh-000140-c003",
+          "legacy_claim_ids": [
+            "wayne-h-knox:CV096"
+          ],
+          "revision": 1,
+          "material_hash": "182e01b27268ea46ca0f1933ef260881500d83896f14bdca0f8110f74ce07e71"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000141",
+      "legacy_ids": [
+        "wendi-heinzelman"
+      ],
+      "claims": []
+    },
+    {
+      "researcher_id": "urh-000142",
+      "legacy_ids": [
+        "wenjie-zang"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000142-c001",
+          "legacy_claim_ids": [
+            "wenjie-zang:CV171"
+          ],
+          "revision": 1,
+          "material_hash": "a6680e95233fb92f29edac3f426820c03070fe0f9f19a76187ad0887bab28215"
+        },
+        {
+          "claim_id": "urh-000142-c002",
+          "legacy_claim_ids": [
+            "wenjie-zang:CV139"
+          ],
+          "revision": 1,
+          "material_hash": "1f0413de04b9007e7fe398cd35dbf70951d116af154335ff160d7b69c773bb57"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000143",
+      "legacy_ids": [
+        "whasil-lee"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000143-c001",
+          "legacy_claim_ids": [
+            "whasil-lee:CV113"
+          ],
+          "revision": 1,
+          "material_hash": "a12f0cde6291a11e27ac570f9fcad9d82489e1377bba8672b15f6caa2860a9f3"
+        },
+        {
+          "claim_id": "urh-000143-c002",
+          "legacy_claim_ids": [
+            "whasil-lee:CV112"
+          ],
+          "revision": 1,
+          "material_hash": "b2c926b5aba7f9bda673383d1d8f8df0d9d41ef8e9e44afb9bc55bcd4c803c09"
+        },
+        {
+          "claim_id": "urh-000143-c003",
+          "legacy_claim_ids": [
+            "whasil-lee:CV114"
+          ],
+          "revision": 1,
+          "material_hash": "50127da673798ad37c074c713ebe1ecab9c9cbc583e174862d161557588c0d9b"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000144",
+      "legacy_ids": [
+        "william-renninger"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000144-c001",
+          "legacy_claim_ids": [
+            "william-renninger:CV043"
+          ],
+          "revision": 1,
+          "material_hash": "6521705cca71d5fbd38ac38dcada05bbe23b5d08fb62ac3cce42c8329c99c758"
+        },
+        {
+          "claim_id": "urh-000144-c002",
+          "legacy_claim_ids": [
+            "william-renninger:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "a54aaf2f763892edf48ec7d78f2e4b477d290db052b5fb1f26803115c4eb6f49"
+        },
+        {
+          "claim_id": "urh-000144-c003",
+          "legacy_claim_ids": [
+            "william-renninger:CV109"
+          ],
+          "revision": 1,
+          "material_hash": "b629f2350a3d427dbf892ef43e1379f1f3c37df3f5b0f583ec8764c20f7e95d2"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000145",
+      "legacy_ids": [
+        "wolfgang-theobald"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000145-c001",
+          "legacy_claim_ids": [
+            "wolfgang-theobald:CV095"
+          ],
+          "revision": 1,
+          "material_hash": "cba758aacba37b91adf1e2e548647274564ecc71e947e71b3fbcd0e03c850152"
+        },
+        {
+          "claim_id": "urh-000145-c002",
+          "legacy_claim_ids": [
+            "wolfgang-theobald:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "4cf5b9e1295cc51474519bf4b695aa934d1a8a224ecf194a1d919500a2ef4c99"
+        },
+        {
+          "claim_id": "urh-000145-c003",
+          "legacy_claim_ids": [
+            "wolfgang-theobald:CV197"
+          ],
+          "revision": 1,
+          "material_hash": "756050510a3496ccfa93021db4e2df025edd6fee4df0632bc3aee0ac00a800a4"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000146",
+      "legacy_ids": [
+        "wyatt-e-tenhaeff"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000146-c001",
+          "legacy_claim_ids": [
+            "wyatt-e-tenhaeff:CV167"
+          ],
+          "revision": 1,
+          "material_hash": "442de1a6e4c641df6a2d52f0265dc0d9cfaccc8b217f7c28f6a2b159554b304d"
+        },
+        {
+          "claim_id": "urh-000146-c002",
+          "legacy_claim_ids": [
+            "wyatt-e-tenhaeff:CV171"
+          ],
+          "revision": 1,
+          "material_hash": "4e28fc0c1524322bc555417cc9a0fd3669907667cbfbe74c424eaf527c9b0771"
+        },
+        {
+          "claim_id": "urh-000146-c003",
+          "legacy_claim_ids": [
+            "wyatt-e-tenhaeff:CV154"
+          ],
+          "revision": 1,
+          "material_hash": "df53817c28e4c8d6fc740ea8eee5c16c61aa7c6c2869fb900d3c8c413c07551a"
+        },
+        {
+          "claim_id": "urh-000146-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "49e69ca6becc5e6193d1108fec0ed69b177b36c75b72c78f4f41236f118dfddd"
+        },
+        {
+          "claim_id": "urh-000146-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "db88e8c17760fe9bfe64a9249e31831fecad2ca798e99c6942ebe6fcfc95a56d"
+        },
+        {
+          "claim_id": "urh-000146-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "1e2b3c19d9b3a824131ab6bb64e55c2d70745bf764901057b6a61c43c00320d0"
+        },
+        {
+          "claim_id": "urh-000146-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "0198e315dff528a503529e217bb06e8010e9912206022579373ed0f926005f5b"
+        },
+        {
+          "claim_id": "urh-000146-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "79e5a4828224c61eb91f34299ca13561e778b792342b02fba329494cff883cb2"
+        },
+        {
+          "claim_id": "urh-000146-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "8ece87b537d6aafe46a37bfcb855b8fc2414eccb3ce863ce34d997208ec9f50e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000147",
+      "legacy_ids": [
+        "xi-cheng-zhang"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000147-c001",
+          "legacy_claim_ids": [
+            "xi-cheng-zhang:CV094"
+          ],
+          "revision": 1,
+          "material_hash": "9f06cc209410c46615b656576fe40257ee5d5d240e04b6ef243937138cd0cf56"
+        },
+        {
+          "claim_id": "urh-000147-c002",
+          "legacy_claim_ids": [
+            "xi-cheng-zhang:CV093"
+          ],
+          "revision": 1,
+          "material_hash": "86cbe9e46448527583b1d06cec83ca02aedbd3f12efdb6ea0f1dd9d4fae515cd"
+        },
+        {
+          "claim_id": "urh-000147-c003",
+          "legacy_claim_ids": [
+            "xi-cheng-zhang:CV096"
+          ],
+          "revision": 1,
+          "material_hash": "aa46eb32651cc11867660260b4f6376734db2b5eccfd7104b499ad44c18cb6cf"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000148",
+      "legacy_ids": [
+        "xiangxiang-xu"
+      ],
+      "claims": []
+    },
+    {
+      "researcher_id": "urh-000149",
+      "legacy_ids": [
+        "yanan-guo"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000149-c001",
+          "legacy_claim_ids": [
+            "yanan-guo:CV037"
+          ],
+          "revision": 1,
+          "material_hash": "e3e2fe8cf7415330cfc0849c23bc59327d0a9bcaeaa76835984346276498f1ae"
+        },
+        {
+          "claim_id": "urh-000149-c002",
+          "legacy_claim_ids": [
+            "yanan-guo:CV039"
+          ],
+          "revision": 1,
+          "material_hash": "d3ba8a72af4cb6fcc4f6224137f9349a40371ad957ed959b1df648dde208e773"
+        },
+        {
+          "claim_id": "urh-000149-c003",
+          "legacy_claim_ids": [
+            "yanan-guo:CV045"
+          ],
+          "revision": 1,
+          "material_hash": "d28058946a5496879e5a0873b7a3213c5f357354ec710d60e158dbf705e38783"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000150",
+      "legacy_ids": [
+        "yasemin-basdogan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000150-c001",
+          "legacy_claim_ids": [
+            "yasemin-basdogan:CV154"
+          ],
+          "revision": 1,
+          "material_hash": "80964d1bb6678d4040d975e98e8c4ff20ffbfcf9c8c73fc5456a2b43c60f7134"
+        },
+        {
+          "claim_id": "urh-000150-c002",
+          "legacy_claim_ids": [
+            "yasemin-basdogan:CV161"
+          ],
+          "revision": 1,
+          "material_hash": "013ef873441d49a428972bb309e44e16b21acb94b97e74f14cc0844f3ccb3675"
+        },
+        {
+          "claim_id": "urh-000150-c003",
+          "legacy_claim_ids": [
+            "yasemin-basdogan:CV149"
+          ],
+          "revision": 1,
+          "material_hash": "c72c2911c92399bf50d96571a08ba426b105124e16679e26a3d8040cdde4f6bb"
+        },
+        {
+          "claim_id": "urh-000150-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "658116c56815806d169911daf9e46f04d5e51cccf9963815fed59c20094321c5"
+        },
+        {
+          "claim_id": "urh-000150-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "3c7557109b33917ff7f4abc0e45d9e5a83a88f088a54755fe3de177213d0b4a0"
+        },
+        {
+          "claim_id": "urh-000150-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "134ccdb0b835dcb556a8f0f6a6753e4a051fecdc6aa87f79f5328f3df851168e"
+        },
+        {
+          "claim_id": "urh-000150-c007",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "6bf375ba0941fb08fb3da5d12aa27ef1b3009b272de07f0b7a1a8ce93b04cef6"
+        },
+        {
+          "claim_id": "urh-000150-c008",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "dc2fa07d334d11c2673c51f504bb6c0faf877211871958bac5f8e11225560fca"
+        },
+        {
+          "claim_id": "urh-000150-c009",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "871f66dbf762c806d45394814c38cd5756e6e1591b2adfdf4e16c7d10a3deb1e"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000151",
+      "legacy_ids": [
+        "yuhao-zhu"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000151-c001",
+          "legacy_claim_ids": [
+            "yuhao-zhu:CV064"
+          ],
+          "revision": 1,
+          "material_hash": "96aacfa41614eb0e3f2667329a4611a1fa8b79cce608be038233c4b574d5df0f"
+        },
+        {
+          "claim_id": "urh-000151-c002",
+          "legacy_claim_ids": [
+            "yuhao-zhu:CV055"
+          ],
+          "revision": 1,
+          "material_hash": "2f441daba3c0386782a28502f38108b4a0375308bd8315d0e3861844be67d2f0"
+        },
+        {
+          "claim_id": "urh-000151-c003",
+          "legacy_claim_ids": [
+            "yuhao-zhu:CV035"
+          ],
+          "revision": 1,
+          "material_hash": "d96fa5f3f7c04ee4114e80ee11746c8ad68163b8856a9807c137a7502c1bfd8d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000152",
+      "legacy_ids": [
+        "yukang-yan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000152-c001",
+          "legacy_claim_ids": [
+            "yukang-yan:CV059"
+          ],
+          "revision": 1,
+          "material_hash": "b86a890a794057d93de461216484db830ec39c288f030736c8918d4e10701460"
+        },
+        {
+          "claim_id": "urh-000152-c002",
+          "legacy_claim_ids": [
+            "yukang-yan:CV056"
+          ],
+          "revision": 1,
+          "material_hash": "daa0cfdbf6efbc025a1031c532967887c27487e02a7b8b5db904eea47ad73b76"
+        },
+        {
+          "claim_id": "urh-000152-c003",
+          "legacy_claim_ids": [
+            "yukang-yan:CV055"
+          ],
+          "revision": 1,
+          "material_hash": "935bb912f8ccfac911aa6d350b61b55f2df0fa941e68afdc70c65ed133e850a1"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000153",
+      "legacy_ids": [
+        "zachary-robinson"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000153-c001",
+          "legacy_claim_ids": [
+            "zachary-robinson:CV167"
+          ],
+          "revision": 1,
+          "material_hash": "5df97de80cd5377d59ed9c89906d0e8fd6dcc553bfed31a9ab1e443358f13ff1"
+        },
+        {
+          "claim_id": "urh-000153-c002",
+          "legacy_claim_ids": [
+            "zachary-robinson:CV174"
+          ],
+          "revision": 1,
+          "material_hash": "bbdc8042c0b54da948c19ef2c2514491ddf23b73740789cf557d8e4165694764"
+        },
+        {
+          "claim_id": "urh-000153-c003",
+          "legacy_claim_ids": [
+            "zachary-robinson:CV201"
+          ],
+          "revision": 1,
+          "material_hash": "80e1a3076f0472cef2fa5fb5fc512bbdd157c5a2650bc65912b1cd65eb1067fe"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000154",
+      "legacy_ids": [
+        "zeljko-ignjatovic"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000154-c001",
+          "legacy_claim_ids": [
+            "zeljko-ignjatovic:CV042"
+          ],
+          "revision": 1,
+          "material_hash": "83460715666bfcf05ccd38089c1f5ec5840ffd24879b5a30ffab550f3a25ed31"
+        },
+        {
+          "claim_id": "urh-000154-c002",
+          "legacy_claim_ids": [
+            "zeljko-ignjatovic:CV040"
+          ],
+          "revision": 1,
+          "material_hash": "67fd68bc8abf1756cd27b39d38e70708ba420e96957a58048c51228fa8e54d71"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000155",
+      "legacy_ids": [
+        "zhen-bai"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000155-c001",
+          "legacy_claim_ids": [
+            "zhen-bai:CV058"
+          ],
+          "revision": 1,
+          "material_hash": "f04a3363012d655ffb3e71de9cfed2485bbb4dfa8af4b9d541332a654adba243"
+        },
+        {
+          "claim_id": "urh-000155-c002",
+          "legacy_claim_ids": [
+            "zhen-bai:CV056"
+          ],
+          "revision": 1,
+          "material_hash": "c113c6620bee0f90f01c3aad8bcb628d8e6e4dc8d520e64b5bd3d4fae06b6484"
+        },
+        {
+          "claim_id": "urh-000155-c003",
+          "legacy_claim_ids": [
+            "zhen-bai:CV055"
+          ],
+          "revision": 1,
+          "material_hash": "62255f7cb2b229ff1a3e46fc97242bf12087656c44b777f82cc49a0eae264f1a"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000156",
+      "legacy_ids": [
+        "zhiyao-duan"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000156-c001",
+          "legacy_claim_ids": [
+            "zhiyao-duan:CV067"
+          ],
+          "revision": 1,
+          "material_hash": "dcb93bfe92368fac3b88f56bf2c75e9e3ab8a5a8580791c06a9f26e2a9f966ad"
+        },
+        {
+          "claim_id": "urh-000156-c002",
+          "legacy_claim_ids": [
+            "zhiyao-duan:CV014"
+          ],
+          "revision": 1,
+          "material_hash": "aa3b7ab12ea18e0927997347b3b4ec3eb9745cc51c986efefc0d7b267ac4dd83"
+        },
+        {
+          "claim_id": "urh-000156-c003",
+          "legacy_claim_ids": [
+            "zhiyao-duan:CV020"
+          ],
+          "revision": 1,
+          "material_hash": "6f03dcaac3067567d567461ae51a8983a26c3b714736fb4d9157edf982a26a3d"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000157",
+      "legacy_ids": [
+        "david-g-foster"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000157-c001",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "999a5ea1e4372f347865e963bbc71d9e3547f6b08448c7b8c3669971ee1e0b65"
+        },
+        {
+          "claim_id": "urh-000157-c002",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "4ba32f8323de85f4d57a4c693eb6ff6dac6b3fa42715186e8a9e442271ffca4c"
+        },
+        {
+          "claim_id": "urh-000157-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "b6c43b3b00f513df9570488f3521938afd4c3545d622d4a4a97f759a558016bf"
+        },
+        {
+          "claim_id": "urh-000157-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "06b54a23623abc62e59ea8acd2abd4a190a61a4f079ffbf3ebcc65ead23f9119"
+        },
+        {
+          "claim_id": "urh-000157-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f"
+        },
+        {
+          "claim_id": "urh-000157-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "b558dbd51eccc8b1eddf27497eed24eae429d1839c0a0c8455f46b4ab781af10"
+        }
+      ]
+    },
+    {
+      "researcher_id": "urh-000158",
+      "legacy_ids": [
+        "melodie-i-lawton"
+      ],
+      "claims": [
+        {
+          "claim_id": "urh-000158-c001",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "bb034536da6bbea3b7af6f4e3ce878fc61d3a0ddbabb66dedce1446f89ae3e7c"
+        },
+        {
+          "claim_id": "urh-000158-c002",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "075415d6b8a4952e68feaf77f628d225c296674dd2160cc8a1dbbc48c7692853"
+        },
+        {
+          "claim_id": "urh-000158-c003",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "06513f2f851a2234d5138e1c03b3869a689eca742e236bc0184fb89bb55a4ae3"
+        },
+        {
+          "claim_id": "urh-000158-c004",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "15d9b32a5eb84824ab97bd93de91b928cf81282f779b56776d9f098f8908eb04"
+        },
+        {
+          "claim_id": "urh-000158-c005",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a"
+        },
+        {
+          "claim_id": "urh-000158-c006",
+          "legacy_claim_ids": [],
+          "revision": 1,
+          "material_hash": "20b090052f881d0f9f4a1d4b9667ace64469f11bca00b2a18a30f8b733ff855b"
+        }
+      ]
+    }
+  ]
+}
