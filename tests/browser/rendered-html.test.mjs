@@ -19,8 +19,8 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
 
   assert.match(prototype, /id="query"/);
   assert.match(prototype, /<meta name="color-scheme" content="light">/);
-  assert.match(prototype, /<h1 id="page-title">Find funding in a few clear steps<\/h1>/);
-  assert.match(prototype, /What are you looking to fund or review\?/);
+  assert.match(prototype, /<h1 id="page-title">What are you looking to fund\?<\/h1>/);
+  assert.match(prototype, /Search funding opportunities/);
   assert.match(prototype, /id="nofo-drop-zone"/);
   assert.match(prototype, /id="nofo-file"/);
   assert.match(prototype, /id="nofo-chat-context"/);
@@ -35,7 +35,7 @@ test("supports one guided funding search, cited FOA evidence, reusable profiles,
   assert.doesNotMatch(prototype + script, /id="export-ics"|\$\("export-ics"\)/);
   assert.match(prototype, /id="export-csv"/);
   assert.match(prototype, /class="button secondary team-ready-filter" id="filter-team-ready"/);
-  assert.match(script, /function scrollToSearchWorkspace\(\)[\s\S]*?\$\("results-toolbar"\)\.scrollIntoView/);
+  assert.match(script, /function scrollToSearchWorkspace\(\)[\s\S]*?\$\("funding-search"\)\.scrollIntoView/);
   assert.doesNotMatch(prototype, /id="compare-panel"|data-compare=/);
   assert.match(prototype, /id="k-provider"/);
   assert.match(prototype, /id="k-key"/);

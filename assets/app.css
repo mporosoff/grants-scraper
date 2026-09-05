@@ -4030,6 +4030,66 @@ footer p {
   }
 }
 
+/* Funding Finder keeps one search form and one copy of its refine controls. */
+.funding-search { padding: 36px clamp(14px, 3vw, 30px) 28px; scroll-margin-top: 80px; }
+.funding-search h1 { max-width: none; font-size: clamp(1.75rem, 3.5vw, 2.8rem); line-height: 1.15; }
+.funding-search .search-introduction { max-width: 760px; margin-bottom: 20px; color: #e0eaff; }
+.funding-search .search-workflow { padding: 16px; border-radius: 14px; box-shadow: none; }
+.funding-search .search-form { margin: 0; }
+.funding-search .find-button { min-width: 145px; padding-inline: 18px; }
+.funding-search .search-guidance { margin: 10px 0 0; color: var(--muted); font-size: .78rem; }
+.search-summary-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-top: 10px; }
+.search-summary-row p { margin: 0; color: var(--muted); font-size: .8rem; }
+.search-summary-row p:empty, .funding-search .search-status:empty, .funding-search .nofo-upload-status:empty { display: none; }
+.search-refine-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
+.search-refine-actions > button { min-height: 44px; }
+.funding-search [hidden] { display: none !important; }
+.funding-search.has-results { padding-top: 18px; padding-bottom: 16px; background: #edf2fb; color: var(--navy); }
+.funding-search.has-results::after, .funding-search.has-results .hero-copy > .eyebrow,
+.funding-search.has-results .search-introduction, .funding-search.has-results .search-guidance { display: none; }
+.funding-search.has-results h1 { margin-bottom: 10px; font-size: 1rem; letter-spacing: 0; }
+.funding-search.has-results .search-workflow { padding: 0; overflow: visible; border: 0; background: transparent; }
+.results-toolbar.results-empty .toolbar-controls { display: none; }
+.results-toolbar [hidden] { display: none !important; }
+.initial-empty-state { min-height: 0; padding: 0; border: 0; background: transparent; }
+.search-ai-status { width: min(1180px, calc(100% - 28px)); margin: 12px auto; }
+.site-drawer.refine-search-drawer { width: min(660px, 100vw); overflow-wrap: anywhere; }
+.refine-search-drawer #refine-search-description { margin: 0; padding: 16px 20px; color: var(--muted); font-size: .86rem; }
+.refine-search-body { padding: 0 20px; }
+.refine-search-body > * + * { margin-top: 16px; }
+.refine-search-drawer .profile-fields, .refine-search-drawer .provider-fields { grid-template-columns: minmax(0, 1fr); }
+.refine-search-drawer :is(.orcid-importer, .cv-uploader) { grid-template-columns: minmax(0, 1fr); }
+.refine-search-drawer .profile-builder { margin: 0; }
+.refine-search-drawer :is(input, select, textarea) { max-width: 100%; }
+.refine-search-drawer .context-card > summary, .refine-search-drawer .provider-setup summary { flex-wrap: wrap; }
+.refine-search-drawer .refine-ai { padding: 16px; background: #eef5ff; border: 1px solid var(--line); border-radius: 12px; }
+.refine-search-drawer .refine-ai h3 { margin: 0 0 12px; font-size: 1rem; }
+.refine-search-drawer .search-ai-status { width: auto; margin: 12px 0 0; }
+.refine-search-footer { padding: 20px; }
+.refine-search-footer p { color: var(--muted); font-size: .8rem; }
+.refine-search-drawer > .search-status { margin: 0; padding: 0 20px 20px; }
+@media (max-width: 820px) {
+  .funding-search .search-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; padding: 8px; }
+  .funding-search #query { grid-column: 1 / -1; }
+  .funding-search .find-button { min-width: 0; padding-inline: 8px; }
+  .funding-search .nofo-upload-button { min-width: 0; padding-inline: 8px; }
+}
+@media (max-width: 700px) {
+  .site-drawer.refine-search-drawer { width: 100vw; }
+  .refine-search-body { padding: 0 14px; }
+  .refine-search-drawer .orcid-input-row { flex-wrap: wrap; }
+  .refine-search-drawer .orcid-input-row > :is(input, button) { min-width: 0; width: 100%; }
+  .refine-search-drawer .range-grid { grid-template-columns: minmax(0, 1fr); }
+  .refine-search-drawer .panel-heading { flex-wrap: wrap; }
+  .refine-search-footer .button { width: 100%; }
+  .funding-search.has-results { padding-top: 12px; padding-bottom: 12px; }
+  .funding-search .search-workflow { padding: 10px; }
+  .funding-search.has-results .search-workflow { padding: 0; }
+}
+@media (forced-colors: active) {
+  .funding-search.has-results, .refine-search-drawer .refine-ai { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
+}
+
 /* Contextual tools share the site's native drawer lifecycle and geometry. */
 .result-assistant.site-drawer {
   padding: 22px;

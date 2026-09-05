@@ -1,0 +1,285 @@
+{
+  "base": "d0d7a8a2401a0489b63ad8b0d909b434898b4697",
+  "functions": {
+    "runSearch": "71a5129b81bfcd1070195bd64f2d9d004a4fc316f8ea7acb0fa55feea63333a3",
+    "computeMatches": "1bacdfca90e53842eadfcdea90677ece55adfd803c03891dcf33385e2aa2db74",
+    "syncStateToUrl": "cdd92506211bd6759f925dbce78e82a75a142e0e30af768ad58428b12927cd49",
+    "currentPreferences": "fc879dc0bd7f19fc00a3e7d05f1f648f65a3174eaf6eceade7fdaa1678a3a556",
+    "currentProfile": "f6063c5e207777bb66c5a7801e31b95acfae0ba6cb4ff54b5f1d63bc3a42fb19",
+    "refreshProfileQuery": "d942a65012ea9a7389e340b823f55f3d6a45fa4fd4f0b8ff58e87a281320907a",
+    "importOrcidProfile": "44b31e3aa65e4d38fa909330dcc2e0460453bc708cd5794936a09ea57d145ece",
+    "removeOrcidProfile": "05e3f25dbc00c075d7626fd0a678ac81aad0405bb3c27090abb367e76ba60d07",
+    "savedSearchAlertDefinition": "b2689fae846fe18ec4f7a254e9409fc7bfd591ba5bb6ad4a03181e71492866d0",
+    "exportCsv": "99d4278f91ef06e32f07a2fe70ecc620bee50cd31c45e5f885ba880903c41b4c",
+    "clearEverything": "7765b6f874348831b6d6a5725babc6e303db02a1e4334997c3a84bf333feecb5",
+    "resetFilterControls": "bef945ca7d14a1c6c4a0934a32ce2f63f1532650e92534e5a4d7a3d4173d0a2d",
+    "selectedFilterCount": "40cbfd96337610f4d4bdbe0e3f749216ad25fdf9ee8fd9dae17e8d6bd40730e4",
+    "profileTermQuery": "90d1e6767bf89b57cb2fe120dd2dcf8687fc3b65cee5f9057ec9aeb7044f7810",
+    "providerStructured": "1dbbb8b9a23a29a52a9ac69b6519c11a5360541527cbb000e2c482d6097e6427"
+  },
+  "controls": [
+    {
+      "tag": "textarea",
+      "attributes": {
+        "id": "research-profile",
+        "rows": "4",
+        "placeholder": "Example: We develop electrochemical and catalytic routes that turn captured CO2 into fuels and chemicals."
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "expertise-keywords",
+        "type": "text",
+        "autocomplete": "off",
+        "placeholder": "Catalysis, CO2 conversion, reactor design"
+      }
+    },
+    {
+      "tag": "select",
+      "attributes": {
+        "id": "applicant-context"
+      },
+      "options": "\n                      <option value=\"higher_education\">College or university</option>\n                      <option value=\"nonprofit\">Nonprofit organization</option>\n                      <option value=\"small_business\">Small business</option>\n                      <option value=\"individual\">Individual investigator</option>\n                      <option value=\"government\">Government entity</option>\n                      <option value=\"tribal\">Tribal organization</option>\n                      <option value=\"other\">Other or mixed team</option>\n                    "
+    },
+    {
+      "tag": "select",
+      "attributes": {
+        "id": "career-stage"
+      },
+      "options": "\n                      <option value=\"any\">Any / not specified</option>\n                      <option value=\"trainee\">Trainee or postdoctoral</option>\n                      <option value=\"early_career\">Early-career investigator</option>\n                      <option value=\"established\">Established investigator</option>\n                    "
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "orcid-id",
+        "type": "text",
+        "inputmode": "text",
+        "autocomplete": "off",
+        "maxlength": "19",
+        "data-orcid-input": "",
+        "placeholder": "0000-0002-1825-0097"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "button secondary",
+        "id": "import-orcid",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "text-button hidden",
+        "id": "remove-orcid",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "class": "cv-input",
+        "id": "cv-file",
+        "type": "file",
+        "aria-label": "Choose CV",
+        "accept": ".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "text-button hidden",
+        "id": "remove-cv",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "use-profile",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "include-cv-ai",
+        "type": "checkbox",
+        "checked": ""
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "button secondary",
+        "id": "save-profile",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "text-button",
+        "id": "clear-profile",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "text-button",
+        "id": "clear-filters",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "checkbox",
+        "id": "status-posted",
+        "checked": ""
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "checkbox",
+        "id": "status-forecasted",
+        "checked": ""
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "checkbox",
+        "id": "status-archived"
+      }
+    },
+    {
+      "tag": "select",
+      "attributes": {
+        "id": "audience-filter"
+      },
+      "options": "\n                      <option value=\"all\">All applicants</option>\n                      <option value=\"faculty\">Faculty / PI grants</option>\n                      <option value=\"postdoc\">Postdoctoral fellowships</option>\n                      <option value=\"grad\">Graduate student fellowships</option>\n                      <option value=\"undergrad\">Undergraduate (REU, etc.)</option>\n                    "
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "search",
+        "data-facet-search": "topic",
+        "placeholder": "Find a topic"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "search",
+        "data-facet-search": "agency",
+        "placeholder": "Find an agency"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "type": "search",
+        "data-facet-search": "eligibility",
+        "placeholder": "Find applicant type"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "deadline-from",
+        "type": "date"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "deadline-to",
+        "type": "date"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "award-min",
+        "type": "number",
+        "min": "0",
+        "step": "1000",
+        "inputmode": "numeric",
+        "placeholder": "100,000"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "flag-evidence",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "flag-preliminary",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "flag-limited",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "flag-early-career",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "flag-no-cost-share",
+        "type": "checkbox"
+      }
+    },
+    {
+      "tag": "select",
+      "attributes": {
+        "id": "k-provider"
+      },
+      "options": "\n                    <option value=\"hosted\" selected=\"\">Funding Finder AI (included)</option>\n                    <option value=\"openai\">OpenAI</option>\n                    <option value=\"anthropic\">Anthropic</option>\n                  "
+    },
+    {
+      "tag": "input",
+      "attributes": {
+        "id": "k-key",
+        "type": "password",
+        "autocomplete": "off",
+        "spellcheck": "false",
+        "placeholder": "sk-..."
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "button secondary",
+        "id": "save-key",
+        "type": "button"
+      }
+    },
+    {
+      "tag": "button",
+      "attributes": {
+        "class": "text-button",
+        "id": "clear-key",
+        "type": "button"
+      }
+    }
+  ]
+}

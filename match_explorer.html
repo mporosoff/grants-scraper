@@ -33,7 +33,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=ce8c417f8aec77c4693f3b3344165ffa781cdee8c4b7a4e9781fa74e80fc0946">
+  <link rel="stylesheet" href="./assets/app.css?v=e65143c9760bd39454f619594dd28614a21f75551ce1828228d2db75ba6b3ef2">
   <link rel="stylesheet" href="./assets/site-nav.css?v=542297108fb69a73ecb2aab8ececb66b0347d5915936bb21e061871065ae177c">
   <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cf5dee497c6bd7bcd414f24c5a87274726e73a6098f963b145c33aef7f5fa4dc">
@@ -148,52 +148,42 @@
 
 
   <main>
-    <section class="hero" aria-labelledby="page-title">
+    <section class="hero funding-search" id="funding-search" aria-labelledby="page-title">
       <div class="hero-copy">
-        <p class="eyebrow">One search, improved by the context you add</p>
-        <h1 id="page-title">Find funding in a few clear steps</h1>
+        <p class="eyebrow">Current opportunities. Official sources.</p>
+        <h1 id="page-title">What are you looking to fund?</h1>
+        <p class="search-introduction">Search by topic, method, goal, or opportunity number. You can also upload a funding notice to review it with AI.</p>
       </div>
-
-      <ol class="workflow-map" aria-label="Suggested funding search steps">
-        <li><strong>1</strong><span><b>Search or add a notice</b><small>Recommended</small></span></li>
-        <li><strong>2</strong><span><b>Add context</b><small>Optional profile, CV, and filters</small></span></li>
-        <li><strong>3</strong><span><b>Expand and refine</b><small>Optional hosted AI</small></span></li>
-      </ol>
-
       <form class="search-workflow" id="search-form" role="search">
-        <section class="workflow-step primary-step" aria-labelledby="search-step-heading">
-          <div class="step-heading">
-            <span class="step-number">1</span>
-            <div>
-              <p class="eyebrow">Start here</p>
-              <h2 id="search-step-heading">What are you looking to fund or review?</h2>
-              <p>Search by topic, method, population, goal, or opportunity number. You can also drop a NOFO, FOA, or other funding-notice PDF into the search box to chat with it. Leave the search blank if your profile or filters provide enough context for local matching; hosted Potential matching requires a typed topic.</p>
-            </div>
-          </div>
           <div class="search-form nofo-drop-zone" id="nofo-drop-zone">
             <label class="sr-only" for="query">Search funding opportunities</label>
             <input id="query" name="q" type="search" autocomplete="off" placeholder="Example: carbon capture catalysts for sustainable manufacturing" data-nofo-drop-target="true">
             <input class="sr-only" id="nofo-file" type="file" accept=".pdf,application/pdf" aria-label="Choose a NOFO or FOA PDF">
             <label class="nofo-upload-button" for="nofo-file">
               <span aria-hidden="true">&#8679;</span>
-              <span><strong>Drop or upload a NOFO</strong><small>PDF only</small></span>
+              <span><strong>Upload notice</strong><small>NOFO / FOA PDF</small></span>
             </label>
             <button class="button primary find-button" id="find-funding" type="submit"><span class="find-button-label">Find funding</span></button>
           </div>
-          <div class="search-status" id="search-status" aria-live="polite"></div>
+          <div class="search-status" id="search-status" data-shell-status="refine-search" aria-live="polite"></div>
           <div class="nofo-upload-status" id="nofo-upload-status" aria-live="polite"></div>
-        </section>
-
-        <section class="workflow-step context-step" aria-labelledby="context-step-heading">
-          <div class="step-heading">
-            <span class="step-number">2</span>
-            <div>
-              <p class="eyebrow">Improve relevance <span class="optional-label">Optional</span></p>
-              <h2 id="context-step-heading">Add context and narrow the search</h2>
-            </div>
+        <p class="search-guidance">Leave the search blank to use a profile or filters for local Strong matching. Hosted Potential matching requires a typed topic.</p>
+        <div class="search-summary-row">
+          <p id="search-context-summary" role="status" aria-live="polite"></p>
+          <div class="search-refine-actions">
+            <button class="text-button" id="add-research-context" type="button" data-refine-open="profile-builder" aria-haspopup="dialog" aria-controls="refine-search">Add research context</button>
+            <button class="text-button" id="add-search-filters" type="button" data-refine-open="filter-panel" aria-haspopup="dialog" aria-controls="refine-search">Add filters</button>
+            <button class="button secondary" id="open-refine-search" type="button" data-refine-open="" aria-haspopup="dialog" aria-controls="refine-search" hidden>Refine search</button>
+            <button class="text-button" id="clear-search" type="button" hidden>Clear search</button>
           </div>
-
-          <div class="context-grid">
+        </div>
+        <dialog class="site-drawer refine-search-drawer" id="refine-search" data-shell-drawer aria-labelledby="refine-search-heading" aria-describedby="refine-search-description">
+          <div class="site-drawer-header">
+            <h2 id="refine-search-heading" tabindex="-1">Refine search</h2>
+            <button class="button secondary" type="button" data-shell-drawer-close aria-label="Close Refine Search">Close</button>
+          </div>
+          <p id="refine-search-description">Add research context or narrow the same search. Your entries stay here when you close this drawer.</p>
+          <div class="refine-search-body">
             <details class="context-card profile-builder" id="profile-builder">
               <summary>
                 <span>
@@ -386,17 +376,8 @@
                 </details>
               </div>
             </details>
-          </div>
-        </section>
-
-        <section class="workflow-step launch-step" aria-labelledby="launch-step-heading">
-          <div class="step-heading">
-            <span class="step-number">3</span>
-            <div>
-              <p class="eyebrow">Optional after a search</p>
-              <h2 id="launch-step-heading">Expand and refine your search with AI</h2>
-            </div>
-          </div>
+            <section class="refine-ai" id="refine-ai" aria-labelledby="refine-ai-heading" hidden>
+              <h3 id="refine-ai-heading">Optional AI refinement</h3>
           <div id="search-provider-slot">
           <details class="provider-setup" id="provider-setup">
             <summary>
@@ -439,10 +420,16 @@
             <button class="button secondary hidden" id="restore-ai-refinement" type="button">Restore original results</button>
             <p class="ai-refine-requirement" id="ai-refine-requirement" role="status" aria-live="polite">Run a funding search to enable hosted AI refinement.</p>
           </div>
-          <div class="ai-status hidden" id="ai-status" aria-live="polite"></div>
-        </section>
+            </section>
+          </div>
+          <div class="refine-search-footer">
+            <p>Filters update existing results as you change them. Select Find funding to apply edited profile text.</p>
+            <button class="button primary" id="refine-find-funding" type="button" data-search-submit>Find funding</button>
+          </div>
+        </dialog>
       </form>
     </section>
+    <div id="search-ai-status-slot"><div class="ai-status hidden search-ai-status" id="ai-status" aria-live="polite"></div></div>
 
     <div class="notice error hidden" id="catalog-error" role="alert">
       <span id="catalog-error-message"></span>
@@ -469,7 +456,7 @@
             </label>
             </div>
             <button class="button secondary results-chat-launch" id="open-results-chat" type="button" aria-haspopup="dialog" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
-            <button class="button secondary" type="button" data-shell-menu="results" aria-label="More results actions" aria-expanded="false" aria-controls="results-more-actions">More <span aria-hidden="true">▾</span></button>
+            <button class="button secondary" id="results-more-trigger" type="button" data-shell-menu="results" aria-label="More results actions" aria-expanded="false" aria-controls="results-more-actions">More <span aria-hidden="true">▾</span></button>
             <div class="shell-action-list" id="results-more-actions" hidden>
               <button id="export-csv" type="button">Export CSV</button>
               <button type="button" data-workspace-open data-shell-focus="alert-new-matches" data-shell-mirror="alert-new-matches" disabled>Create email alert for this search</button>
@@ -615,7 +602,7 @@
   <script src="./assets/opportunity-team-panel.js?v=ec1c1f36f615f21ed3641332a93f30d7451d2bec9d236c4ab7d3c98952f82282"></script>
   <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/app.js?v=406f469a2724be3eed6283af451b6e56b0c793d40544802a07356de772464c7e"></script>
+  <script src="./assets/app.js?v=99ed8400ef3c178278a9d4bb884b3a30f3bf32f083e12471e6232a4395ac371c"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

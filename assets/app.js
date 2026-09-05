@@ -323,6 +323,7 @@
   function setCatalogControlsBusy(busy) {
     const controls = document.querySelectorAll([
       "#find-funding",
+      "#refine-find-funding",
       "#nofo-file",
       "#browse-all",
       "[data-watch-opportunity]",
@@ -2204,6 +2205,44 @@
     $("filter-summary").textContent = count
       ? `${count} selected`
       : "Add filters";
+    renderSearchShell();
+  }
+
+  function renderSearchShell() {
+    const searched = state.searched;
+    $("funding-search").classList.toggle("has-results", searched);
+    $("page-title").textContent = searched ? "Funding search" : "What are you looking to fund?";
+    $("add-research-context").hidden = searched;
+    $("add-search-filters").hidden = searched;
+    $("open-refine-search").hidden = !searched;
+    $("clear-search").hidden = !searched;
+    $("refine-ai").hidden = !searched;
+    const count = selectedFilterCount() + ($("audience-filter").value !== "all" ? 1 : 0);
+    const summary = [
+      state.profile.active ? "Profile active" : "",
+      count ? `${count} ${count === 1 ? "filter" : "filters"}` : "",
+      state.refinement.active ? "AI refinement active" : "",
+    ].filter(Boolean).join(" · ");
+    $("search-context-summary").textContent = summary || (searched ? "No profile or added filters" : "");
+  }
+
+  function openRefineSearch(opener, sectionId = "", target = null) {
+    const dialog = $("refine-search");
+    const section = sectionId ? $(sectionId) : null;
+    if (section?.tagName === "DETAILS") section.open = true;
+    const restoreStatus = () => $("search-ai-status-slot").append($("ai-status"));
+    try {
+      if (!globalThis.SiteShell?.openDrawer) throw new Error("Search drawer unavailable");
+      $("refine-ai").append($("ai-status"));
+      globalThis.SiteShell.openDrawer(dialog, opener, target || section?.querySelector("summary") || $("refine-search-heading"), {
+        context: "refine",
+        onClose: restoreStatus,
+        resolveOpener: () => opener?.isConnected && !opener.hidden ? opener : $("open-refine-search"),
+      });
+    } catch (_error) {
+      restoreStatus();
+      $("search-status").textContent = "Refine Search could not open. Your entries are preserved; topic search is still available.";
+    }
   }
 
   function hasSearchCriteria() {
@@ -2215,7 +2254,8 @@
   }
 
   function scrollToSearchWorkspace() {
-    $("results-toolbar").scrollIntoView({ behavior: "smooth", block: "start" });
+    if ($("refine-search").open) globalThis.SiteShell.closeDrawer($("refine-search"));
+    $("funding-search").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function startSearch() {
@@ -2225,20 +2265,19 @@
     if ($("use-profile").checked && !profileHasContent()) {
       $("search-status").textContent =
         "Add profile information or turn off “Use this profile” before searching.";
-      $("profile-builder").open = true;
-      $("research-profile").focus();
+      openRefineSearch($("find-funding"), "profile-builder", $("research-profile"));
       return;
     }
     if (state.profile.active && !built.terms.length) {
       $("search-status").textContent =
         "Add a few concrete expertise keywords so the profile can improve ranking.";
-      $("profile-builder").open = true;
-      $("expertise-keywords").focus();
+      openRefineSearch($("find-funding"), "profile-builder", $("expertise-keywords"));
       return;
     }
     if (!hasSearchCriteria()) {
       $("search-status").textContent =
         "Enter a topic, use a profile, or select at least one filter to start.";
+      if ($("refine-search").open) globalThis.SiteShell.closeDrawer($("refine-search"), { restoreFocus: false });
       $("query").focus();
       return;
     }
@@ -3856,14 +3895,12 @@
     cardMenuActions.clear();
     renderHybridStatus();
     updateSavedSearchAlertUi();
+    renderSearchShell();
     if (!state.searched) {
       $("results-toolbar").classList.add("search-not-started");
       $("result-tier-counts").textContent = "";
       $("results").innerHTML = `<div class="empty-state initial-empty-state">
-        <span class="empty-step-number" aria-hidden="true">1</span>
-        <h3>Search or add a funding notice above</h3>
-        <p>Describe the work and select “Find funding,” or drop a NOFO/FOA PDF into the search box to open document chat.</p>
-        <button class="button secondary browse-all-button" id="browse-all" type="button">Browse all current opportunities</button>
+        <button class="text-button browse-all-button" id="browse-all" type="button">Browse all current opportunities</button>
       </div>`;
       $("browse-all")?.addEventListener("click", browseAllOpportunities);
       $("page-label").textContent = "";
@@ -3901,6 +3938,8 @@
     state.page = Math.min(state.page, totalPages);
     const start = (state.page - 1) * PAGE_SIZE;
     const page = display.slice(start, start + PAGE_SIZE);
+    $("results-toolbar").classList.toggle("results-empty", !display.length);
+    $("results-more-trigger").hidden = !display.length && !state.query;
     $("results-toolbar").classList.remove("search-not-started");
     const profileGateTermCount = state.profile.admissionTerms.length
       || state.profile.terms.length;
@@ -3917,13 +3956,10 @@
       const potentialUnavailable = strongPotentialWorkflow && Boolean(state.hybrid.fallbackReason);
       const potentialCompleted = strongPotentialWorkflow && state.hybrid.active;
       $("results").innerHTML = `<div class="empty-state">
-        <h3>${state.teamReadyOnly ? "No team-building opportunities in these results" : hasNofoDocument() ? "No catalog record matched this notice" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
+        <h3>${state.teamReadyOnly ? "No team-building opportunities in these results" : hasNofoDocument() ? "No catalog record matched this notice" : waitingForPotential ? "Checking for potential matches" : potentialUnavailable ? "Broader search is temporarily unavailable" : strongPotentialWorkflow ? "No strong matches found" : "No opportunities matched"}</h3>
         <p>${state.teamReadyOnly ? "Select Team options only again to return to every matching opportunity." : hasNofoDocument() ? "You can still ask questions about the uploaded PDF in document chat. Try searching its opportunity number manually if you expect a catalog record." : waitingForPotential ? "We’re checking public opportunity text for potential matches. These may be useful leads, but you should verify the official scope." : potentialUnavailable ? "Local Strong matching completed. Broader Potential matching is temporarily unavailable." : potentialCompleted ? "Potential matching also completed and found no additional eligible results." : strongPotentialWorkflow ? "Try adjusting the search terms or filters." : "Try fewer terms, remove a filter, include forecasted opportunities, or use optional AI expansion to translate the idea into catalog terminology."}</p>
-        ${!hasNofoDocument() && aiRefineHasContext() ? `<button class="button ai-button" id="empty-ai-refine" type="button"><span aria-hidden="true">✦</span> Broaden this search with AI</button>` : ""}
-        <button class="button secondary" id="empty-clear" type="button">Clear search and filters</button>
+        ${state.teamReadyOnly ? '<button class="button secondary" type="button" data-empty-action="team">Show all matching opportunities</button>' : hasNofoDocument() ? '<button class="button secondary" type="button" data-empty-action="chat">Ask about the uploaded notice</button>' : !waitingForPotential ? '<button class="button secondary" type="button" data-refine-open="filter-panel">Refine search</button>' : ""}
       </div>`;
-      $("empty-clear")?.addEventListener("click", clearEverything);
-      $("empty-ai-refine")?.addEventListener("click", refineWithAi);
     } else if (APP_CONFIG?.flags?.searchV2 && state.query && !state.ai.active) {
       const groups = [];
       page.forEach((match, index) => {
@@ -4537,7 +4573,7 @@
       recordDeploymentUsage("ai_matches");
       setAiStatus(`AI added ${selected.additions.length} new evidence-qualified Strong ${selected.additions.length === 1 ? "match" : "matches"}. Every original Strong and Potential result remains in place.`);
       renderResults();
-      $("results").scrollIntoView({ behavior: "smooth", block: "start" });
+      if ($("refine-search").open) scrollToSearchWorkspace();
     } catch (error) {
       if (state.refinement.requestSequence === sequence) {
         setAiStatus(`${error?.message || String(error)} Your original results are unchanged.`, true);
@@ -4646,6 +4682,7 @@
     const canAsk = canChat && providerReady();
     $("result-assistant").classList.toggle("document-chat", documentChat);
     $("open-results-chat").disabled = !canChat;
+    $("open-results-chat").hidden = !canChat;
     if (!canChat && $("result-assistant").open) {
       closeExpandedChat({ restoreFocus: false });
     }
@@ -5220,6 +5257,10 @@
       }
     });
     $("clear-filters").addEventListener("click", clearFiltersOnly);
+    $("clear-search").addEventListener("click", () => {
+      clearEverything();
+      $("query").focus({ preventScroll: true });
+    });
     $("sort").addEventListener("change", () => {
       state.sort = $("sort").value;
       runSearch();
@@ -5243,6 +5284,15 @@
     $("alert-new-matches")?.addEventListener("click", openSavedSearchAlert);
     $("clear-saved")?.addEventListener("click", clearSaved);
     document.addEventListener("click", event => {
+      const refine = event.target.closest("[data-refine-open]");
+      if (refine) { openRefineSearch(refine, refine.dataset.refineOpen); return; }
+      if (event.target.closest("[data-search-submit]")) {
+        $("search-form").requestSubmit($("find-funding"));
+        return;
+      }
+      const emptyAction = event.target.closest("[data-empty-action]");
+      if (emptyAction?.dataset.emptyAction === "team") { $("filter-team-ready").click(); return; }
+      if (emptyAction?.dataset.emptyAction === "chat") { openExpandedChat(emptyAction); return; }
       const save = event.target.closest("[data-save]");
       if (save) { toggleSave(save.dataset.save); return; }
       const calendar = event.target.closest("[data-calendar]");

@@ -14,10 +14,10 @@ const [page, app, styles, help, institution, institutionSnapshots] = await Promi
   readFile(new URL("assets/institutional-intelligence-snapshots.js", root), "utf8"),
 ]);
 
-test("primary search owns the only Find funding control and the optional AI section is distinct", () => {
+test("primary search owns the canonical submit control and the optional AI section is distinct", () => {
   const $ = load(page);
   assert.equal($("#find-funding").length, 1);
-  assert.equal($(".primary-step #nofo-drop-zone #find-funding").length, 1);
+  assert.equal($("#search-form #nofo-drop-zone #find-funding").length, 1);
   const children = $("#nofo-drop-zone").children().toArray();
   const queryIndex = children.findIndex(node => $(node).attr("id") === "query");
   const uploadIndex = children.findIndex(node => $(node).hasClass("nofo-upload-button"));
@@ -25,9 +25,9 @@ test("primary search owns the only Find funding control and the optional AI sect
   assert.ok(queryIndex < uploadIndex, "the PDF upload follows the main query field");
   assert.ok(uploadIndex < findIndex, "the PDF upload precedes Find funding on desktop and mobile");
   assert.equal($("#query").attr("data-nofo-drop-target"), "true");
-  assert.equal($("#launch-step-heading").text().trim(), "Expand and refine your search with AI");
+  assert.equal($("#refine-ai-heading").text().trim(), "Optional AI refinement");
   assert.equal($(".provider-setup #ai-refine").length, 0);
-  assert.equal($(".launch-step > .ai-refine-actions #ai-refine").length, 1);
+  assert.equal($("#refine-ai > .ai-refine-actions #ai-refine").length, 1);
   assert.equal($("#ai-refine").attr("aria-describedby"), "ai-refine-requirement");
   assert.equal($("#ai-refine-requirement").attr("aria-live"), "polite");
   assert.equal($(".results-column").attr("aria-label"), "Funding opportunities");
@@ -167,12 +167,13 @@ test("one compact live tier count replaces normal tier explanations while preser
   assert.match(render, /\$\("results"\)\.innerHTML = noStrongNotice \+ groups\.map/);
 });
 
-test("desktop aligns query, submit, and upload while tablet and smaller widths stack safely", () => {
+test("desktop aligns query, submit, and upload while tablet and smaller widths wrap safely", () => {
   assert.match(styles, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto auto;/);
   const tablet = styles.slice(styles.lastIndexOf("@media (max-width: 820px)"));
-  assert.match(tablet, /\.search-workflow \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\);/);
-  assert.match(tablet, /\.nofo-upload-button \{[\s\S]*?order: 1;[\s\S]*?width: 100%;/);
-  assert.match(tablet, /\.find-button \{[\s\S]*?order: 2;[\s\S]*?width: 100%;/);
+  assert.match(tablet, /\.funding-search \.search-form \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) minmax\(0, 1fr\);/);
+  assert.match(tablet, /\.funding-search #query \{[^}]*grid-column: 1 \/ -1/);
+  assert.match(tablet, /\.funding-search \.nofo-upload-button \{[^}]*min-width: 0/);
+  assert.match(tablet, /\.funding-search \.find-button \{[^}]*min-width: 0/);
   const mobile = styles;
   assert.match(mobile, /\.ai-refine-actions \{[\s\S]*?flex-direction: column;/);
 });
