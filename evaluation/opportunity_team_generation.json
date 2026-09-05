@@ -3,90 +3,51 @@
   "model": "claude-sonnet-5",
   "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
   "eligible_scopes": 1551,
-  "pending_scopes": 1448,
+  "pending_scopes": 1428,
+  "source_invalidations": [],
   "results": [
     {
-      "scope_id": "361526:a-21",
+      "scope_id": "361526:b-1",
       "state": "not_specific"
     },
     {
-      "scope_id": "361526:c-2",
+      "scope_id": "361526:c-5",
       "state": "not_specific"
     },
     {
-      "scope_id": "361526:c-12",
+      "scope_id": "361526:g-5",
       "state": "not_specific"
     },
     {
-      "scope_id": "363065:c-1",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "363617",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "358022",
-      "state": "proposed"
-    },
-    {
-      "scope_id": "344592:ab-0042",
-      "state": "proposed"
-    },
-    {
-      "scope_id": "362061",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "302273",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "356055",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "350018",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "362062",
-      "state": "not_specific"
-    },
-    {
-      "scope_id": "353055",
+      "scope_id": "356811",
       "state": "rejected_evidence",
       "error_type": "JSONDecodeError",
-      "reason": "Expecting ':' delimiter: line 6 column 10 (char 1038)"
+      "reason": "Expecting ':' delimiter: line 1 column 1076 (char 1075)"
     },
     {
-      "scope_id": "363613",
+      "scope_id": "363614",
       "state": "not_specific"
     },
     {
-      "scope_id": "362218",
+      "scope_id": "361207",
       "state": "not_specific"
     },
     {
-      "scope_id": "357018",
+      "scope_id": "361249",
       "state": "not_specific"
     },
     {
-      "scope_id": "351715",
+      "scope_id": "359648",
       "state": "not_specific"
     },
     {
-      "scope_id": "363623",
+      "scope_id": "359270",
       "state": "not_specific"
     },
     {
-      "scope_id": "361304",
-      "state": "proposed"
-    },
-    {
-      "scope_id": "363615",
+      "scope_id": "360698",
       "state": "not_specific"
     }
   ],
-  "provider_requests": 51
+  "provider_requests": 36
 }
