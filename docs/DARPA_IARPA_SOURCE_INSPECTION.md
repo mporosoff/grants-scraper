@@ -65,6 +65,15 @@ adapter clears its cached rows and publishes zero with degraded diagnostics.
 Verified empty inventories remain healthy. Removed calls disappear on the
 next successful source refresh.
 
+Required confirmation failures are distinct from exclusions. An otherwise
+actionable child with a missing or unsupported program/solicitation route,
+missing exact action link, unrecognized status, missing/unparseable submission
+date or implausible date degrades the source. DARPA also requires its program
+block and inventory to identify the same SAM notice, allowing the public and
+workspace URL forms of that notice. Explicit non-call/closed statuses and
+verified expired or future submission windows are normal exclusions. Missing
+proof cannot silently turn a populated research inventory into a healthy zero.
+
 ## Site wiring and verification
 
 Registration uses the existing refresh workflow, with the identity module

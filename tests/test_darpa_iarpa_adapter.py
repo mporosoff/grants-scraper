@@ -139,9 +139,8 @@ class InventoryTests(unittest.TestCase):
         data["darpa"] = [{**seed, "field_opportunity_number": "DARPA-PA-25-07"}]
         self.assertEqual(records(data), [])
 
-    def test_expired_missing_and_future_open_dates_never_admit_a_call(self):
+    def test_expired_and_future_open_dates_never_admit_a_call(self):
         for original, replacement in [("Nov. 30, 2026", "Aug. 30, 2026"),
-                                      ("Nov. 30, 2026", "TBD"),
                                       ("March 9, 2026", "December 9, 2026")]:
             data = payload()
             data["pages"][QBI] = data["pages"][QBI].replace(original, replacement)
@@ -162,12 +161,13 @@ class InventoryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             records(data)
 
-    def test_unofficial_and_non_notice_action_links_are_rejected(self):
+    def test_unofficial_and_non_notice_action_links_degrade(self):
         for bad in ["https://sam.gov.evil.test/", "https://sam.gov/search/", "javascript:alert(1)"]:
             data = payload()
             for row in data["darpa"]:
                 row["field_external_url"] = bad
-            self.assertEqual(records(data), [])
+            with self.assertRaisesRegex(ValueError, "required official route"):
+                records(data)
 
     def test_fetch_is_bounded_to_official_inventories_and_programs(self):
         data = payload()
@@ -204,12 +204,82 @@ class IarpaTests(unittest.TestCase):
             html = data["pages"][IARPA_PROGRAM]
             html = html.replace('>Proposal Due Date</h3>', f'>{label}</h3>').replace("October 15, 2026", value)
             data["pages"][IARPA_PROGRAM] = html
-            self.assertTrue(all(r["agency"] != IARPA for r in records(data)))
+            with self.assertRaisesRegex(ValueError, "submission deadline"):
+                records(data)
 
     def test_other_solicitation_link_does_not_confirm_current_row(self):
         data = with_iarpa()
         data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("IARPA-BAA-26-01", "IARPA-BAA-25-01")
-        self.assertTrue(all(r["agency"] != IARPA for r in records(data)))
+        with self.assertRaisesRegex(ValueError, "exact solicitation action"):
+            records(data)
+
+
+class ConfirmationHealthTests(unittest.TestCase):
+    def assert_degraded(self, data, message):
+        instance = adapter()
+        with patch.object(instance, "fetch", return_value=data):
+            published, results = collect([instance])
+        self.assertEqual(published, [])
+        self.assertFalse(results[0].ok)
+        self.assertIn(message, results[0].error)
+        cache = {"sources": {instance.slug: {"records": records(), "fetched_at": "2026-09-04"}}}
+        live, updated, summary = resolve_live_records(results, cache, AS_OF)
+        self.assertEqual(live, [])
+        self.assertEqual(updated["sources"][instance.slug]["records"], [])
+        self.assertEqual(summary[0]["status"], "failed_no_fallback")
+
+    def test_moved_darpa_program_routes_cannot_be_a_healthy_empty_refresh(self):
+        data = payload()
+        for row in data["darpa"]:
+            for field in ("field_body_with_summary", "field_body_with_summary_1"):
+                row[field] = row[field].replace("/research/programs/", "/new-program-route/")
+        self.assert_degraded(data, "required official route")
+
+    def test_darpa_missing_confirmation_paths_degrade_even_with_healthy_siblings(self):
+        for old, new, message in [
+            ("Nov. 30, 2026", "TBD", "submission deadline"),
+            ("Nov. 30, 2026", "Nov. 30, 2099", "Implausible"),
+            ("March 9, 2026", "TBD", "publication date"),
+            ("Solicitation | Stage A", "Learn more", "exact solicitation action"),
+            ("4a1aad28cb2a4b2ab1ee408c639202ef", "00000000000000000000000000000000", "conflicting exact"),
+            ("https://sam.gov/opp/", "https://sam.gov/new-route/", "exact solicitation action"),
+        ]:
+            data = payload()
+            data["pages"][QBI] = data["pages"][QBI].replace(old, new)
+            with self.subTest(message=message, old=old):
+                self.assert_degraded(data, message)
+
+    def test_darpa_missing_submission_language_degrades(self):
+        data = payload()
+        for row in data["darpa"]:
+            row["field_body_with_summary"] = ""
+            row["field_body_with_summary_1"] = ""
+        self.assert_degraded(data, "scope/submission evidence")
+
+    def test_iarpa_missing_confirmation_paths_degrade(self):
+        for old, new, message in [
+            ("<br>OPEN", "<br>STATUS UNKNOWN", "unrecognized research solicitation status"),
+            ("baa_content_status", "changed_status_class", "status markup missing"),
+            ("https://sam.gov/opp/", "https://sam.gov/new-route/", "exact solicitation action"),
+            (">Proposal Due Date</h3>", ">Response date</h3>", "submission deadline"),
+            ("October 15, 2026", "TBD", "submission deadline"),
+            ("October 15, 2026", "October 15, 2099", "Implausible"),
+            ("August 1, 2026", "TBD", "release date unparseable"),
+        ]:
+            data = with_iarpa()
+            data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace(old, new)
+            with self.subTest(message=message, old=old):
+                self.assert_degraded(data, message)
+
+    def test_verified_closed_and_expired_calls_remain_normal_exclusions(self):
+        data = with_iarpa()
+        data["pages"][QBI] = data["pages"][QBI].replace("Nov. 30, 2026", "Aug. 30, 2026")
+        data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("<br>OPEN", "<br>CLOSED")
+        instance = adapter()
+        with patch.object(instance, "fetch", return_value=data):
+            published, results = collect([instance])
+        self.assertTrue(results[0].ok)
+        self.assertEqual(len(published), 3)
 
     def test_page_failure_clears_entire_adapter_snapshot(self):
         instance = adapter()

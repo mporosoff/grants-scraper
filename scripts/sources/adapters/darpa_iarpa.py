@@ -71,9 +71,11 @@ def parsed_date(text):
 
 
 def current(close, opened, as_of):
-    return bool(close and as_of.isoformat() <= close
-                and (date.fromisoformat(close) - as_of).days <= 366 * 6
-                and (not opened or opened <= as_of.isoformat()))
+    if not close:
+        raise ValueError("Missing or unparseable research submission deadline")
+    if (date.fromisoformat(close) - as_of).days > 366 * 6:
+        raise ValueError("Implausible research submission deadline")
+    return as_of.isoformat() <= close and (not opened or opened <= as_of.isoformat())
 
 
 def darpa_inventory(rows):
@@ -236,28 +238,38 @@ class DarpaIarpaAdapter(SourceAdapter):
             number = plain(row["field_opportunity_number"]).upper()
             summary = plain(row.get("field_body_with_summary") or row.get("field_body_with_summary_1"))
             text = row["title"] + " " + summary
-            if (_NON_CALL.search(row["title"]) or _NOT_ACCEPTING.search(text)
-                    or not _DARPA_SCOPE.search(text)
-                    or not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I)):
+            if _NON_CALL.search(row["title"]) or _NOT_ACCEPTING.search(text):
                 skipped["darpa_not_actionable_research"] += 1
                 continue
+            if (not _DARPA_SCOPE.search(text)
+                    or not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I)):
+                raise ValueError(f"DARPA child research scope/submission evidence missing: {number}")
             url = darpa_program_url(row)
             if not url or not notice_url(row["field_external_url"]):
-                skipped["darpa_missing_official_route"] += 1
-                continue
+                raise ValueError(f"DARPA required official route missing or unsupported: {number}")
             if url not in pages:
                 raise ValueError(f"DARPA detail page missing: {url}")
             block = darpa_opportunity_block(pages[url], number)
-            links = [notice_url(href) for href, label in _LINK.findall(block) if re.search(r"solicitation", plain(label), re.I)]
-            action = next((link for link in links if link), None)
-            if not action or _NOT_ACCEPTING.search(plain(block)):
+            if _NOT_ACCEPTING.search(plain(block)):
                 skipped["darpa_not_accepting"] += 1
                 continue
             close = labelled_date(block, "Deadline")
             opened = labelled_date(block, "Published")
+            if not opened:
+                raise ValueError(f"DARPA publication date missing or unparseable: {number}")
             if not current(close, opened, as_of):
-                skipped["darpa_no_current_submission_date"] += 1
+                skipped["darpa_outside_submission_window"] += 1
                 continue
+            links = [notice_url(href) for href, label in _LINK.findall(block) if re.search(r"solicitation", plain(label), re.I)]
+            if not links or any(not link for link in links):
+                raise ValueError(f"DARPA exact solicitation action missing or unsupported: {number}")
+            # Both sources must identify the same notice. The public and
+            # workspace SAM routes are equivalent presentations of that ID.
+            notice_ids = {urlparse(link).path.rstrip("/").split("/")[-2].lower() for link in links}
+            expected_id = urlparse(row["field_external_url"]).path.rstrip("/").split("/")[-2].lower()
+            if notice_ids != {expected_id}:
+                raise ValueError(f"DARPA conflicting exact solicitation action: {number}")
+            action = links[0]
             if close != row["field_close_date"]:
                 date_overrides.append({"number": number, "listing_date": row["field_close_date"], "program_date": close, "source_url": url})
             description = darpa_description(pages[url], summary)
@@ -283,18 +295,18 @@ class DarpaIarpaAdapter(SourceAdapter):
             if not status:
                 raise ValueError(f"IARPA solicitation status markup missing: {row['url']}")
             status_text = plain(status.group(1)) if status else ""
-            if (not re.search(r"\bOPEN\b", status_text, re.I)
-                    or not re.search(r"BROAD AGENCY ANNOUNCEMENT|research solicitation|\bBAA\b", status_text, re.I)
-                    or _NON_CALL.search(status_text) or _NOT_ACCEPTING.search(status_text)):
+            if _NON_CALL.search(status_text) or _NOT_ACCEPTING.search(status_text):
                 skipped["iarpa_not_open_research"] += 1
                 continue
+            if (not re.search(r"\bOPEN\b", status_text, re.I)
+                    or not re.search(r"BROAD AGENCY ANNOUNCEMENT|research solicitation|\bBAA\b", status_text, re.I)):
+                raise ValueError(f"IARPA unrecognized research solicitation status: {row['number']}")
             # Link identity must match the listing's solicitation, not an RFI
             # or proposers' day link elsewhere on the same program page.
             action = next((notice_url(href) for href, label in _LINK.findall(html)
                            if normalized_number(plain(label)) == normalized_number(row["number"]) and notice_url(href)), None)
             if not action:
-                skipped["iarpa_no_exact_solicitation_link"] += 1
-                continue
+                raise ValueError(f"IARPA exact solicitation action missing or unsupported: {row['number']}")
             fields = iarpa_fields(html)
             if not fields:
                 raise ValueError(f"IARPA solicitation date markup missing: {row['url']}")
@@ -303,8 +315,10 @@ class DarpaIarpaAdapter(SourceAdapter):
             date_text = fields.get("proposal due date")
             close = parsed_date(date_text)
             opened = parsed_date(fields.get("release date"))
+            if fields.get("release date") and not opened:
+                raise ValueError(f"IARPA release date unparseable: {row['number']}")
             if not current(close, opened, as_of):
-                skipped["iarpa_no_current_submission_date"] += 1
+                skipped["iarpa_outside_submission_window"] += 1
                 continue
             description = re.search(r'<meta\b[^>]*name="description"[^>]*content="([^"]*)"', html, re.I)
             description = plain(description.group(1)) if description else row["title"]
