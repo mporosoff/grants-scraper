@@ -3,51 +3,269 @@
   "model": "claude-sonnet-5",
   "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
   "eligible_scopes": 1551,
-  "pending_scopes": 1428,
+  "pending_scopes": 1228,
   "source_invalidations": [],
+  "assembly_updates": [],
+  "coverage_before": {
+    "scopes": 73,
+    "parent_calls": 44,
+    "team_combinations": 189
+  },
   "results": [
     {
-      "scope_id": "361526:b-1",
+      "scope_id": "363250",
       "state": "not_specific"
     },
     {
-      "scope_id": "361526:c-5",
+      "scope_id": "363671",
       "state": "not_specific"
     },
     {
-      "scope_id": "361526:g-5",
+      "scope_id": "360574",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363251",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360947",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363244",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363759",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363764",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359940",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363281",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "360606",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362752",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363734",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359740",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "360909",
       "state": "not_specific"
     },
     {
       "scope_id": "356811",
-      "state": "rejected_evidence",
-      "error_type": "JSONDecodeError",
-      "reason": "Expecting ':' delimiter: line 1 column 1076 (char 1075)"
+      "state": "proposed"
     },
     {
-      "scope_id": "363614",
+      "scope_id": "359696",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363622",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "352947",
+      "state": "unavailable",
+      "error_type": "ReadTimeout",
+      "reason": "HTTPSConnectionPool(host='api.anthropic.com', port=443): Read timed out. (read timeout=55)"
+    },
+    {
+      "scope_id": "363557",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "362272",
       "state": "not_specific"
     },
     {
-      "scope_id": "361207",
+      "scope_id": "360676",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "353709",
       "state": "not_specific"
     },
     {
-      "scope_id": "361249",
+      "scope_id": "362855",
       "state": "not_specific"
     },
     {
-      "scope_id": "359648",
+      "scope_id": "347026",
       "state": "not_specific"
     },
     {
-      "scope_id": "359270",
+      "scope_id": "350485",
       "state": "not_specific"
     },
     {
-      "scope_id": "360698",
+      "scope_id": "361008",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363179",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "360954",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362196",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "362205",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356902",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "361427",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357430",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "358955",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357578",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "361452",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362177",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "358569",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "356517",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "361411",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "363302:a-1",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357250",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "357067",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362193",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "353710",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "324369",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "362222",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "340544",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357075",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "359732",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357492",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363223",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357121",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "357570",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "353413",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "nyserda:RFQL5312",
+      "state": "not_specific"
+    },
+    {
+      "scope_id": "363095",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357187",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "362857",
       "state": "not_specific"
     }
   ],
-  "provider_requests": 36
+  "provider_requests": 113,
+  "coverage_after": {
+    "scopes": 82,
+    "parent_calls": 53,
+    "team_combinations": 215
+  },
+  "pending_after": 1169,
+  "outcomes": {
+    "insufficient_evidence": 9,
+    "not_specific": 41,
+    "proposed": 9,
+    "unavailable": 1
+  }
 }
