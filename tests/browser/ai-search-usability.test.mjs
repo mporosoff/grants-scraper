@@ -89,6 +89,21 @@ test("question retrieval finds records beyond the first page without escaping th
     assert.deepEqual([...changedTopic.ids], ["70"], "A new topic must retrieve across the eligible set despite prior comparison records");
     assert.equal(changedTopic.mode, "local_retrieval");
   }
+  for (const forms of [
+    ["cannot", "can't", "can’t", "can not"], ["couldn't", "could not"],
+    ["won't", "will not"], ["wouldn't", "would not"], ["shouldn't", "should not"],
+    ["mustn't", "must not"], ["needn't", "need not"], ["shan't", "shall not"],
+    ["oughtn't", "ought not"], ["daren't", "dare not"],
+  ]) {
+    for (const form of forms) {
+      const question = `Which ${form} be funded?`;
+      const followUp = await context.retrieveChatContext(question, ids, compared);
+      assert.equal(followUp.mode, "connected_follow_up", question);
+      assert.deepEqual([...followUp.ids], [...initial.ids], question);
+    }
+  }
+  assert.equal(ui.retrievalQuery("Which cannot be funded?"), ui.retrievalQuery("Which can't be funded?"));
+  assert.equal(ui.isResultFollowUp("Which cannot support heterogeneous catalysis?"), false, "Normalizing negation must not discard a new scientific topic");
   assert.equal(ui.isResultFollowUp("Instead of those, find homogeneous catalysis"), false);
   assert.equal(ui.isResultFollowUp("New topic: CO2 electroreduction"), false);
   assert.equal(ui.isResultFollowUp("What are the deadlines for homogeneous catalysis?"), false);

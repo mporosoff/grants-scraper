@@ -269,7 +269,7 @@
     const filler = new Set("a an the and or for to of in on with at by from about into is are was were be been being do does did can could would should will may might i we you me my our your it its they their them this that these those what which who when where why how please find search show give list name tell suggest recommend compare explain describe discuss opportunities opportunity funding funded funds fund grants grant calls call programs program options option results result matches match fit fits best good few some any more other available current catalog full together pursue suitable relevant relate related help need want looking look ones instead details detail additional support supports supported".split(" "));
     const facts = new Set("deadline deadlines dates date eligibility eligible requirements requirement amounts amount budget budgets award awards duration durations contact contacts officer officers submission submissions apply applying cited cited source sources evidence verify verification stage stages actually open closed forecasted project projects".split(" "));
     const scopedQuestion = String(question || "")
-      .replace(/\b(?:isn|aren|wasn|weren|don|doesn|didn|can|couldn|wouldn|shouldn|hasn|haven|hadn|won)['’]t\b/gi, "not")
+      .replace(/\bcannot\b|\b[\p{L}]+n['’]t\b/giu, "not")
       .replace(/\b([\p{L}]+)['’](?:s|re|ve|ll|d)\b/giu, "$1")
       .replace(/^\s*(?:please\s+)?(?:(?:new|different|another|unrelated)\s+(?:topic|search)|(?:switch|change)\s+(?:the\s+)?topics?|start\s+over)\s*[:,.;-]?\s*/i, "");
     const tokens = scopedQuestion.match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
@@ -287,7 +287,7 @@
     const query = retrievalQuery(question);
     if (!query) return true;
     // Date and amount qualifiers do not turn a factual comparison into a new topic.
-    const qualifiers = new Set("not has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
+    const qualifiers = new Set("not must shall ought dare am has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
     return query.split(/\s+/).every(word => qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word));
   }
 
