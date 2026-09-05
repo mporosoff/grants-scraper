@@ -264,7 +264,41 @@
     return copied;
   }
 
+  // Remove conversational scaffolding, keeping scientific modifiers and identifiers.
+  function retrievalQuery(question) {
+    const filler = new Set("a an the and or for to of in on with at by from about into is are was were be been being do does did can could would should will may might i we you me my our your it its they their them this that these those what which who when where why how please find search show give list name tell suggest recommend compare explain describe discuss opportunities opportunity funding funded funds fund grants grant calls call programs program options option results result matches match fit fits best good few some any more other available current catalog full together pursue suitable relevant relate related help need want looking look ones instead details detail additional support supports supported".split(" "));
+    const facts = new Set("deadline deadlines dates date eligibility eligible requirements requirement amounts amount budget budgets award awards duration durations contact contacts officer officers submission submissions apply applying cited cited source sources evidence verify verification stage stages actually open closed forecasted project projects".split(" "));
+    const tokens = String(question || "").match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
+    const substantive = tokens.filter(word => !filler.has(word.toLowerCase()) && !facts.has(word.toLowerCase()));
+    return substantive.join(" ").slice(0, 500);
+  }
+
+  function evidenceExcerpt(text, query, maximum = 1600) {
+    const source = String(text || "");
+    if (source.length <= maximum) return source;
+    const terms = retrievalQuery(query).toLowerCase().split(/\s+/).filter(term => term.length > 2);
+    let best = 0, bestScore = 0;
+    for (let start = 0; start < source.length; start += Math.floor(maximum / 2)) {
+      const window = source.slice(start, start + maximum).toLowerCase();
+      const score = terms.reduce((sum, term) => sum + (window.includes(term) ? 1 : 0), 0);
+      if (score > bestScore) { best = start; bestScore = score; }
+    }
+    return `${best ? "…" : ""}${source.slice(best, best + maximum)}${best + maximum < source.length ? "…" : ""}`;
+  }
+
+  function resolveEvidenceLinks(text, citations) {
+    const known = new Map((citations || []).map(item => [item.evidence_id, item]));
+    return String(text || "").replace(/\[([^\]\n]+)\]\(([^\s)]+)\)/g, (original, label, id) => {
+      const citation = known.get(id);
+      const url = citation && safeUrl(citation.url);
+      return url ? `[Official notice](${url})` : original;
+    });
+  }
+
   globalThis.FUNDING_CHAT_UI = Object.freeze({
+    retrievalQuery,
+    evidenceExcerpt,
+    resolveEvidenceLinks,
     renderRichText,
     knownResultIds,
     focusActionLabel,

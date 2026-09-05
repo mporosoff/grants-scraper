@@ -423,14 +423,27 @@
         if (role.coverage === "gap" || role.coverage === "adjacent") return;
         candidatesForRole(role).forEach(function (candidate) {
           var identifier = candidate.id;
-          if (selectedIds.has(identifier) || excludedIds.has(identifier) || !facultyById.has(identifier)) return;
+          if (selectedIds.has(identifier) || !eligibleProfile(facultyById.get(identifier))) return;
           var item = candidates.get(identifier) || { profile: facultyById.get(identifier), roles: [], reviewed: true };
           item.roles.push(role);
           if (!candidate.reviewed) item.reviewed = false;
           candidates.set(identifier, item);
         });
       });
+      // Removal affects the current selection and automatic alternatives, not the
+      // user's ability to explicitly restore an eligible member of this proposal.
+      excludedIds.forEach(function (identifier) {
+        if (selectedIds.has(identifier) || !eligibleProfile(facultyById.get(identifier))) return;
+        var supportedRoles = roles.filter(function (role) {
+          return candidatesForRole(role).some(function (candidate) { return candidate.id === identifier && candidate.reviewed; });
+        });
+        if (!supportedRoles.length && !opportunity.members.some(function (member) { return member.faculty_id === identifier; })) return;
+        var item = candidates.get(identifier) || { profile: facultyById.get(identifier), roles: supportedRoles, reviewed: true };
+        item.previouslySelected = true;
+        candidates.set(identifier, item);
+      });
       var replacements = Array.from(candidates.values()).sort(function (left, right) {
+        if (Boolean(left.previouslySelected) !== Boolean(right.previouslySelected)) return left.previouslySelected ? -1 : 1;
         return right.roles.length - left.roles.length || poolRank(left.profile.pool_state) - poolRank(right.profile.pool_state) ||
           left.profile.name.localeCompare(right.profile.name);
       });

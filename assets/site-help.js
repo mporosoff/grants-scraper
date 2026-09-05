@@ -95,7 +95,7 @@
           <div><strong>Why this matched</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
-          <div><strong>Ask AI</strong><span>Discuss one opportunity or the leading results using hosted AI or an optional personal provider.</span></div>
+          <div><strong>Ask AI</strong><span>Narrow to 100 or fewer results, then ask a question. AI retrieves relevant records across that set. Use a card’s More menu to discuss just that opportunity. Hosted AI and optional personal providers are available.</span></div>
         </div>
         <p class="help-footnote">“Recently posted” uses the catalog's listed or first-seen date. “Relevance” combines the words and concepts in your query, profile, and filters. Recently posted and closing-soon labels help with timing but do not replace deadline verification.</p>
       </section>

@@ -33,6 +33,7 @@
     facet: { type: "all", key: "" },
     page: 1,
     pageSize: 10,
+    sort: "newest",
     residentAwards: new Map(),
     sourceOffsets: new Map(),
     sourceMessages: new Map(),
@@ -141,6 +142,9 @@
     $("ii-card-next").disabled = active || !state.pagePayload?.pagination?.has_next;
     $("ii-card-page-numbers").querySelectorAll("button").forEach(button => { button.disabled = active; });
     $("ii-page-size").disabled = active || !state.pagePayload;
+    $("ii-sort").disabled = active || !state.pagePayload;
+    $("ii-ask-button").setAttribute("aria-busy", String(state.questionSubmitting));
+    $("ii-ask-button").textContent = state.questionSubmitting ? "Searching and reviewing evidence…" : "Ask AI";
     $("ii-investigators").disabled = active || state.investigatorGroups.size === 0;
     $("ii-programs").disabled = active || state.programGroups.size === 0;
     $("ii-institutions").disabled = active || state.institutionGroups.size === 0;
@@ -265,6 +269,7 @@
       snapshot_id: state.snapshot?.snapshot_id || "",
       page: state.page,
       page_size: state.pageSize,
+      sort: state.sort,
       facet_type: state.facet.type,
       facet_key: state.facet.key,
     };
@@ -323,6 +328,7 @@
       snapshot_id: state.snapshot?.snapshot_id || "",
       page: state.page,
       page_size: state.pageSize,
+      sort: state.sort,
       facet_type: state.facet.type,
       facet_key: state.facet.key,
     };
@@ -348,6 +354,8 @@
     $("ii-page-size").value = String(value.page_size || 10);
     state.page = value.page || 1;
     state.pageSize = value.page_size || 10;
+    state.sort = ["newest", "oldest", "title", "agency"].includes(value.sort) ? value.sort : "newest";
+    $("ii-sort").value = state.sort;
     state.facet = { type: value.facet_type || "all", key: value.facet_key || "" };
     state.selectedInstitution = !officerMode && value.institution ? {
       id: value.ror_id || "", canonical_name: value.institution, aliases: [], acronyms: [], registryMetadataLoaded: false,
@@ -824,7 +832,7 @@
       : null;
   }
 
-  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
+  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, sort = state.sort, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
     if (String(snapshotId || "").startsWith("local-dod-")) {
       const dod = await dodBrowserModule();
       const snapshot = state.localSnapshot?.snapshot_id === snapshotId
@@ -835,7 +843,7 @@
         expired.code = "snapshot_expired";
         throw expired;
       }
-      const payload = dod.localSnapshotPage(snapshot, { page, pageSize, facet });
+      const payload = dod.localSnapshotPage(snapshot, { page, pageSize, facet, sort });
       if (!payload) {
         const invalid = new Error("The requested page or filter is not available.");
         invalid.code = "invalid_page_or_facet";
@@ -848,6 +856,7 @@
       snapshot_id: snapshotId,
       page,
       page_size: pageSize,
+      sort,
       facet: { type: facet.type, key: facet.key },
     }, controller);
     const matchingOverlay = clientOverlay?.snapshotId === snapshotId ? clientOverlay : null;
@@ -880,6 +889,7 @@
       pagePayload,
       page: pagePayload.pagination.page,
       pageSize: pagePayload.pagination.page_size,
+      sort: pagePayload.sort || "newest",
       facet: { type: pagePayload.facet.type, key: pagePayload.facet.key },
       aggregate: { ...pagePayload.aggregate, awards: pageAwards(pagePayload) },
       baseAggregate: baseAggregateForPage(pagePayload),
@@ -897,6 +907,8 @@
     state.pagePayload = staged.pagePayload;
     state.page = staged.page;
     state.pageSize = staged.pageSize;
+    state.sort = staged.sort;
+    $("ii-sort").value = state.sort;
     state.facet = staged.facet;
     state.aggregate = staged.aggregate;
     state.baseAggregate = staged.baseAggregate;
@@ -918,13 +930,13 @@
     syncUrl(historyMode, departureHistoryState);
   }
 
-  async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
+  async function fetchPage({ page = state.page, pageSize = state.pageSize, facet = state.facet, sort = state.sort, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     if (!state.snapshot?.snapshot_id) return null;
     const requestSequence = ++state.pageRequestSequence;
     const snapshotId = state.snapshot.snapshot_id;
     let payload;
     try {
-      payload = await requestSnapshotPage({ snapshotId, page, pageSize, facet });
+      payload = await requestSnapshotPage({ snapshotId, page, pageSize, facet, sort });
     } catch (error) {
       if (requestSequence !== state.pageRequestSequence) return null;
       throw error;
@@ -936,6 +948,8 @@
     }
     state.page = payload.pagination.page;
     state.pageSize = payload.pagination.page_size;
+    state.sort = payload.sort || "newest";
+    $("ii-sort").value = state.sort;
     state.facet = { type: payload.facet.type, key: payload.facet.key };
     state.pagePayload = payload;
     state.snapshot = { ...state.snapshot, ...payload, snapshot_id: payload.snapshot_id };
@@ -948,9 +962,9 @@
     return payload;
   }
 
-  async function rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode = "replace", focus = false, departureHistoryState = null }) {
+  async function rebuildSubmittedSnapshotView({ page, pageSize, facet, sort = state.sort, historyMode = "replace", focus = false, departureHistoryState = null }) {
     const requestedFacet = facet?.type === "all" ? { type: "all", key: "" } : { type: facet.type, key: facet.key };
-    const retryView = page !== 1 || requestedFacet.type !== "all";
+    const retryView = page !== 1 || requestedFacet.type !== "all" || sort !== "newest";
     const submitted = {
       ...(state.submitted || submittedCriteria(formState())),
       snapshot_id: "",
@@ -968,17 +982,17 @@
     });
     if (!refreshed) return null;
     if (!retryView) return state.pagePayload;
-    return fetchPage({ page, pageSize, facet: requestedFacet, historyMode, focus, departureHistoryState });
+    return fetchPage({ page, pageSize, facet: requestedFacet, sort, historyMode, focus, departureHistoryState });
   }
 
-  async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
+  async function fetchPageWithRecovery({ page = state.page, pageSize = state.pageSize, facet = state.facet, sort = state.sort, historyMode = "replace", focus = false, departureHistoryState = historyMode === "push" ? historyViewState() : null } = {}) {
     try {
-      return await fetchPage({ page, pageSize, facet, historyMode, focus, departureHistoryState });
+      return await fetchPage({ page, pageSize, facet, sort, historyMode, focus, departureHistoryState });
     } catch (error) {
       if (error?.code !== "snapshot_expired") throw error;
       setStatus("These saved results expired. Running the same search again to restore this view…");
       const retryView = page !== 1 || facet?.type !== "all";
-      const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, historyMode, focus, departureHistoryState });
+      const payload = await rebuildSubmittedSnapshotView({ page, pageSize, facet, sort, historyMode, focus, departureHistoryState });
       if (!payload) return null;
       if (!retryView) {
         setStatus("The search was refreshed.");
@@ -1059,6 +1073,7 @@
     const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
       page: 1,
       pageSize,
+      sort: state.sort,
       facet: { type: "all", key: "" },
     });
     return stagedSnapshotResult({
@@ -1310,6 +1325,7 @@
     const pagePayload = dod.localSnapshotPage(hybrid.snapshot, {
       page: 1,
       pageSize,
+      sort: state.sort,
       facet: { type: "all", key: "" },
     });
     return {
@@ -1714,10 +1730,13 @@
       : null);
     if (!reference) return;
     const targetFacet = (facetReference || state.facet.type === "all") ? state.facet : { type: "all", key: "" };
+    // Evidence-pack positions use the canonical newest-first snapshot unless a
+    // reference in the currently sorted view supplies the position.
+    const targetSort = facetReference || fullReference ? state.sort : "newest";
     const page = Math.floor((reference.position - 1) / state.pageSize) + 1;
-    if (page !== state.page || targetFacet.type !== state.facet.type || targetFacet.key !== state.facet.key) {
+    if (page !== state.page || targetSort !== state.sort || targetFacet.type !== state.facet.type || targetFacet.key !== state.facet.key) {
       setBusy(true);
-      try { await fetchPageWithRecovery({ page, facet: targetFacet, historyMode: "push" }); } finally { setBusy(false); }
+      try { await fetchPageWithRecovery({ page, facet: targetFacet, sort: targetSort, historyMode: "push" }); } finally { setBusy(false); }
     }
     requestAnimationFrame(() => {
       const card = $(evidenceDomId(evidenceId));
@@ -1782,6 +1801,9 @@
     state.answering = false;
     $("ii-question-answer").classList.add("hidden");
     setBusy(true);
+    $("ii-question-plan").textContent = "Interpreting your question and searching public award evidence…";
+    $("ii-question-plan").classList.remove("hidden");
+    $("ii-question")?.blur();
     try {
       const question = clean($("ii-question").value, 1_000);
       if (!question) throw new Error("Enter a question first.");
@@ -1887,6 +1909,8 @@
     state.facet = { type: "all", key: "" };
     state.page = 1;
     state.pageSize = 10;
+    state.sort = "newest";
+    $("ii-sort").value = state.sort;
     state.residentAwards.clear();
     state.sourceOffsets.clear();
     state.sourceMessages.clear();
@@ -2007,6 +2031,15 @@
       setSelectedInstitution(state.registryCandidates[Number(option.dataset.iiInstitutionIndex)]);
       $("ii-institution").focus();
     });
+    $("ii-sort").addEventListener("change", () => {
+      if (state.busyDepth || !state.snapshot) return;
+      const sort = $("ii-sort").value;
+      setBusy(true);
+      fetchPageWithRecovery({ page: 1, sort, historyMode: "push", focus: true }).catch(error => {
+        $("ii-sort").value = state.sort;
+        setStatus(error.message, true);
+      }).finally(() => setBusy(false));
+    });
     $("ii-form").addEventListener("submit", event => { event.preventDefault(); if (!state.busyDepth) runSearch({ historyMode: "push", focusResults: true }); });
     $("ii-clear").addEventListener("click", () => { if (!state.busyDepth) clearSearch(); });
     $("ii-clear-facet").addEventListener("click", () => { if (!state.busyDepth) changeFacet("all", ""); });
@@ -2112,7 +2145,7 @@
         if (restored.snapshot_id) {
           state.submitted = submittedCriteria(restored);
           state.snapshot = { snapshot_id: restored.snapshot_id, sources: state.snapshot?.sources || [] };
-          await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
+          await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, sort: restored.sort, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         } else {
           await runSearch({ historyMode: "replace", resolveInstitution: false, searchState: restored });
         }
@@ -2145,7 +2178,7 @@
       state.controller = new AbortController();
       setBusy(true);
       try {
-        await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
+        await fetchPageWithRecovery({ page: restored.page, pageSize: restored.page_size, sort: restored.sort, facet: { type: restored.facet_type, key: restored.facet_key }, historyMode: "replace" });
         state.snapshot = { ...state.snapshot, ...state.pagePayload };
         setStatus("Opened the shared results from this link.");
       } catch (error) {

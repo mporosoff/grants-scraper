@@ -32,10 +32,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26" />
+<link rel="stylesheet" href="./assets/app.css?v=62b66ed72f7271268a03ddd44158438c81b59efcb4b16f0d8d58c025375e96bd" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c" />
-<link rel="stylesheet" href="./assets/team-match.css?v=76f0877d11cf15c13a65c499a0cd423b5ea251695b133e505b8db479d9f286db">
-  <link rel="stylesheet" href="./assets/site-shell.css?v=e224b9558c5bb430ce941f0fd7996c0396d915f64b4052dbb923d52f26e3e229">
+<link rel="stylesheet" href="./assets/team-match.css?v=98d36cb84c41b9377e9165ef9bb71c42d54990d1bbb47402349a7f3cd0824563">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=6b129b2ad8b3e18616e2fb78b7425118b5eec36f12d099c1c35123d02074ae2e">
   <link rel="stylesheet" href="./assets/public-tools.css?v=bd38620a4641cb5797c6ee30ed1ad011bdd442fc411df746d654018878e17f39">
 </head>
 <body>
@@ -148,7 +148,7 @@
   <div class="site-drawer-header"><h2 id="team-editor-heading">Edit your team</h2><button class="public-action" type="button" data-shell-drawer-close>Done</button></div>
   <div id="team-editor-sheet-body"></div>
 </dialog>
-<script src="./assets/site-shell.js?v=62e4d07df6f5012cd0374b5c24ff3fbb9dd0316ca85cc5602f2bc80caab33e86"></script>
+<script src="./assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"></script>
 <script src="./assets/public-tools.js?v=1bfe9d1871a1ac91a9937a557fe6b43d1593cba74e0c09faacc712c57f8d3068"></script>
   <script src="assets/app-config.js?v=app-1.3.0-updated-20260905"></script>
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
@@ -163,8 +163,8 @@
 <script src="assets/team-matcher.js?v=09cecc8d245f78f667c003df1613978eab4108fc7b9667e71185226f5a665f21"></script>
 <script src="data/researcher_directory.js?v=05879415e35a3ad08d326428b4df6644911d1272c4201109e817d2b33bcfb9d8"></script>
 <script src="data/opportunity_team_index.js?v=05879415e35a3ad08d326428b4df6644911d1272c4201109e817d2b33bcfb9d8"></script>
-<script src="assets/opportunity-team.js?v=856e16b61c3a56ea04ce76c6fcbba36484c1e61bb51d753ef1c66ba53dca2293"></script>
-<script src="assets/site-help.js?v=cc01d88ac0c554198dd9ffdd9f1b58f9493b01936ceb3942a351133a508521f4"></script>
+<script src="assets/opportunity-team.js?v=62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e"></script>
+<script src="assets/site-help.js?v=63cec9354fb7934186374cac7930949bdbb80ab199a7c09a76e4a2941201172a"></script>
 <script src="assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
 <script>
 (function () {
@@ -482,6 +482,10 @@
     }
     return links.join("");
   }
+  var teamCardActions = new Map();
+  if (globalThis.SiteShell) globalThis.SiteShell.registerMenu("team-card", function (opener) {
+    return [{ label: "Opportunity actions", html: teamCardActions.get(opener.dataset.teamMore) || "" }];
+  });
   function opportunityCard(entry, position) {
     var d = entry.d;
     var record = d.record || {};
@@ -509,7 +513,13 @@
       d.closingSoon ? '<span class="badge warning">Closing soon</span>' : ""
     ].filter(Boolean).join("");
     var opportunityNumber = record.opportunity_number || record.opportunity_id || d.id || "";
-    return '<article class="result-card team-result-card' + (d.broad ? " broad-card" : "") + '" data-opportunity-id="' + esc(d.id) + '">' +
+    var sourceAnchors = teamOfficialActions(record).match(/<a\b[\s\S]*?<\/a>/g) || [];
+    var primarySource = sourceAnchors.find(function (anchor) { return anchor.indexOf('class="source-action primary"') !== -1; }) || sourceAnchors[0] || "";
+    teamCardActions.set(String(d.id), sourceAnchors.filter(function (anchor) { return anchor !== primarySource; }).join("") +
+      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '">Open in Funding Finder</a>' +
+      '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + '>Add to calendar</button>' +
+      (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : ""));
+    return '<article class="result-card team-result-card' + (d.broad ? " broad-card" : "") + '" data-opportunity-id="' + esc(d.id) + '" tabindex="-1">' +
       '<div class="card-topline"><span class="result-position">Team match ' + position + '</span>' +
       '<span class="badge ' + status + '">' + statusLabel + "</span>" +
       (listed ? '<span class="listed-date">Listed ' + esc(formatDate(listed)) + "</span>" : "") +
@@ -540,10 +550,9 @@
         '<div><dt>Program contact</dt><dd>' + (contactEmail ? '<a href="mailto:' + esc(contactEmail) + '">' + esc(contactName) + "</a>" : esc(contactName)) + "</dd></div>" +
         '<div><dt>Source</dt><dd>' + esc(record.source || "Not listed") + "</dd></div>" +
       "</dl>" + (record.close_date_note ? '<p class="description"><strong>Deadline note:</strong> ' + esc(record.close_date_note) + "</p>" : "") + "</div></details>" +
-      '<div class="card-actions">' + teamOfficialActions(record) +
-      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '" target="_blank" rel="noopener">Open in Funding Finder</a>' +
-      '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + ">Add to calendar</button>" +
-      (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : "") + "</div></article>";
+      '<div class="card-actions">' + primarySource +
+      '<button class="source-action" type="button" data-shell-menu="team-card" data-team-more="' + esc(d.id) + '" aria-expanded="false" aria-controls="site-action-list" aria-label="More actions for ' + esc(d.title) + '">More <span aria-hidden="true">▾</span></button></div></article>';
+
   }
   function calendarText(value) {
     return String(value || "").replace(/\\/g, "\\\\").replace(/\r?\n/g, "\\n").replace(/([,;])/g, "\\$1");
@@ -766,6 +775,7 @@
       renderTeamHybridStatus();
       return;
     }
+    teamCardActions.clear();
     var all = buildShared();
     all.sort(balancedRanking);
     lastHybridEligibleIds = new Set(all.map(function (entry) { return String(entry.d.id); }));
@@ -1491,7 +1501,7 @@
     $("faculty-search").addEventListener("blur", function () {
       setTimeout(function () { closeFacultySuggestions(false); }, 0);
     });
-    $("view").addEventListener("click", function (event) {
+    document.addEventListener("click", function (event) {
       var button = event.target.closest("[data-team-calendar]");
       if (button) addTeamDeadlineToCalendar(button.getAttribute("data-team-calendar"));
     });

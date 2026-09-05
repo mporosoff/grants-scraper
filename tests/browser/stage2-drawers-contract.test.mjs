@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import test from "node:test";
 import vm from "node:vm";
+import { validateOperationUser } from "../../workers/ai-gateway/src/input-policy.js";
 import { load } from "cheerio";
 import { shellDom } from "../helpers/shell-dom.mjs";
 
@@ -169,7 +170,7 @@ test("protected algorithms, team output and AI request construction remain byte-
 function requestFixture(mode) {
   const controls = new Map();
   const $ = id => {
-    if (!controls.has(id)) controls.set(id, { value: "" });
+    if (!controls.has(id)) controls.set(id, { value: "", blur() {} });
     return controls.get(id);
   };
   const state = {
@@ -180,16 +181,18 @@ function requestFixture(mode) {
   const record = { opportunity_id: "one", title: "Public fixture" };
   const requests = [];
   const sandbox = {
-    state, $, catalog: { opportunities: [record] }, MAX_AI_MESSAGE_CHARS: 3000, MAX_NOFO_AI_CHARS: 2000, MAX_CHAT_RESULTS: 10, PROMPT_VERSION: "fixture",
+    state, $, catalog: { opportunities: [record] }, MAX_AI_MESSAGE_CHARS: 3000, MAX_NOFO_AI_CHARS: 2000, MAX_CHAT_RESULTS: 10, MAX_CHAT_SCOPE: 100, PROMPT_VERSION: "fixture",
     hasNofoDocument: () => mode === "uploaded-nofo", providerReady: () => true,
     currentChatIds: () => ["one"], currentDisplayMatches: () => [{ index: 0 }],
-    recordId: item => item.opportunity_id, compactRecord: item => item, compactResultRecord: item => item,
+    recordId: item => item.opportunity_id, compactRecord: item => item, compactResultRecord: item => ({ id: item.opportunity_id, title: item.title }), boundRecordPayload: item => item,
+    retrieveChatContext: async () => ({ ids: ["one"], query: "fixture", mode: "local_retrieval", matches: new Map() }),
     evidenceFacts: () => [], refinementProfileContext: () => null, boundedConversationHistory: value => value.slice(-4),
     setAiBusy: value => { state.ai.busy = value; }, renderChat() {}, setAiStatus() {}, recordDeploymentUsage() {}, currentModel: () => "fixture",
     applyChatFocus: () => false,
-    CHAT_UI: { knownResultIds: (ids = []) => ids.filter(id => id === "one") },
+    CHAT_UI: { resolveEvidenceLinks: value => value, knownResultIds: (ids = []) => ids.filter(id => id === "one"), evidenceExcerpt: value => String(value || "") },
     FUNDING_AI: { knownEvidenceCitations: () => [] },
     providerStructured(operation, system, json) {
+      if (operation === "result_chat") assert.ok(validateOperationUser(operation, json), "the actual chat payload must satisfy the hosted provider boundary");
       return new Promise((resolve, reject) => requests.push({ operation, system, payload: JSON.parse(json), resolve, reject }));
     },
   };
@@ -203,6 +206,7 @@ for (const mode of ["", "uploaded-nofo"]) {
     for (const reject of [false, true]) {
       const { sandbox, state, requests } = requestFixture(mode);
       const pending = sandbox.askResults("What does the public notice establish?");
+      await new Promise(resolve => setImmediate(resolve));
       assert.equal(requests.length, 1);
       assert.equal(requests[0].operation, mode ? "notice_chat" : "result_chat");
       state.ai.messages = [{ role: "user", text: "New opportunity question" }];
@@ -217,11 +221,13 @@ for (const mode of ["", "uploaded-nofo"]) {
   test(`${mode || "results"} chat still completes, displays failures, and allows a retry in its own context`, async () => {
     const { sandbox, state, requests } = requestFixture(mode);
     const failure = sandbox.askResults("First question");
+    await new Promise(resolve => setImmediate(resolve));
     requests[0].reject(new Error("Provider unavailable"));
     await failure;
     assert.match(state.ai.messages.at(-1).text, /Provider unavailable/);
     assert.equal(state.ai.busy, false);
     const retry = sandbox.askResults("Retry the question");
+    await new Promise(resolve => setImmediate(resolve));
     requests[1].resolve({ answer: "Public evidence", page_references: [1], referenced_result_ids: ["one"] });
     await retry;
     assert.equal(state.ai.messages.at(-1).text, "Public evidence");
@@ -232,6 +238,7 @@ for (const mode of ["", "uploaded-nofo"]) {
 test("a changed search cannot receive an old response even when its conversation is intentionally retained", async () => {
   const { sandbox, state, requests } = requestFixture("");
   const pending = sandbox.askResults("Old search question");
+  await new Promise(resolve => setImmediate(resolve));
   state.ordinarySearchSignature = "new-search";
   requests[0].resolve({ answer: "Old search answer", result_action: "focus", focus_result_ids: ["one"] });
   await pending;

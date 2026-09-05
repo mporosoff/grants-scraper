@@ -10,7 +10,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
     if (!node) return null;
     if (wrappers.has(node)) return wrappers.get(node);
     const el = {
-      node, style: {}, scrollLeft: 0, scrollTop: 0,
+      node, style: { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; } }, scrollLeft: 0, scrollTop: 0,
       get tagName() { return node.name?.toUpperCase(); },
       get id() { return $(node).attr("id"); }, set id(value) { $(node).attr("id", value); },
       get className() { return $(node).attr("class"); }, set className(value) { $(node).attr("class", value); },

@@ -6,7 +6,7 @@
   const MANAGED_PARAMS = [
     "ii", "ii_institution", "ii_ror", "ii_agency", "ii_program",
     "ii_topic", "ii_pi", "ii_pi_identity", "ii_program_officer", "ii_year_start", "ii_year_end", "ii_offset",
-    "ii_snapshot", "ii_page", "ii_page_size", "ii_facet", "ii_facet_key",
+    "ii_snapshot", "ii_page", "ii_page_size", "ii_sort", "ii_facet", "ii_facet_key",
     "ii_mode", "ii_po_source", "ii_po_name", "ii_po_key", "ii_year_preset",
   ];
   const LEGACY_SEARCH_PARAMS = [
@@ -881,6 +881,7 @@
       year_end: /^\d{4}$/.test(params.get("ii_year_end") || params.get("year_end") || "") ? (params.get("ii_year_end") || params.get("year_end")) : "",
       offset: Math.max(0, Math.min(1_000, Number(params.get("ii_offset") || params.get("offset")) || 0)),
       snapshot_id: clean(params.get("ii_snapshot"), 100),
+      sort: ["newest", "oldest", "title", "agency"].includes(params.get("ii_sort")) ? params.get("ii_sort") : "newest",
       page: Math.max(1, Number.parseInt(params.get("ii_page") || "1", 10) || 1),
       page_size: [10, 25, 50].includes(Number(params.get("ii_page_size"))) ? Number(params.get("ii_page_size")) : 10,
       facet_type: ["all", "investigator", "program", "institution"].includes(params.get("ii_facet")) ? params.get("ii_facet") : "all",
@@ -929,6 +930,7 @@
     if (clean(state?.snapshot_id, 100)) url.searchParams.set("ii_snapshot", clean(state.snapshot_id, 100));
     if (Number(state?.page) > 1) url.searchParams.set("ii_page", String(Math.max(1, Number(state.page) || 1)));
     if ([10, 25, 50].includes(Number(state?.page_size)) && Number(state.page_size) !== 10) url.searchParams.set("ii_page_size", String(state.page_size));
+    if (["oldest", "title", "agency"].includes(state?.sort)) url.searchParams.set("ii_sort", state.sort);
     const facetKey = snapshotFacetKey(state?.facet_key);
     if (["investigator", "program", "institution"].includes(state?.facet_type) && facetKey) {
       url.searchParams.set("ii_facet", state.facet_type);

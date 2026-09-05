@@ -219,6 +219,15 @@ test("Unit B preserves complete opaque program facet keys through page and batch
   }), env);
   assert.equal(pageResponse.status, 200);
   assert.equal((await pageResponse.json()).facet.key, program.key);
+  const sortedResponse = await handler(request("/awards/snapshots/page", {
+    snapshot_id: value.snapshot_id, page: 1, page_size: 10, facet, sort: "title",
+  }), env);
+  assert.equal(sortedResponse.status, 200);
+  assert.equal((await sortedResponse.json()).sort, "title");
+  const invalidSort = await handler(request("/awards/snapshots/page", {
+    snapshot_id: value.snapshot_id, page: 1, page_size: 10, facet, sort: "random",
+  }), env);
+  assert.equal(invalidSort.status, 400);
   const batchResponse = await handler(request("/awards/snapshots/batch", {
     snapshot_id: value.snapshot_id, source: "NSF", offset: 0, facet,
   }), env);

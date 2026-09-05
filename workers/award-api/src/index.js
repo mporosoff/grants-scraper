@@ -705,13 +705,16 @@ function validateSnapshotId(value) {
 }
 
 function validateSnapshotPage(body) {
-  if (!exactKeys(body, ["snapshot_id", "page", "page_size", "facet"])) return null;
+  if (!exactKeys(body, ["snapshot_id", "page", "page_size", "facet"])
+      && !exactKeys(body, ["snapshot_id", "page", "page_size", "facet", "sort"])) return null;
+  const sort = body.sort ?? "newest";
+  if (!["newest", "oldest", "title", "agency"].includes(sort)) return null;
   const snapshotId = validateSnapshotId(body.snapshot_id);
   const page = boundedInteger(body.page, { minimum: 1, maximum: 100_000 });
   const pageSize = boundedInteger(body.page_size, { minimum: 1, maximum: 50 });
   const facet = validateFacet(body.facet);
   if (!snapshotId || !page || !SNAPSHOT_PAGE_SIZES.includes(pageSize) || !facet) return null;
-  return { snapshotId, page, pageSize, facet };
+  return { snapshotId, page, pageSize, facet, sort };
 }
 
 function validateSnapshotBatch(body) {
@@ -1121,6 +1124,7 @@ export function createHandler({
           snapshot_id: snapshot.snapshot_id,
           facet: action.facet,
           page_size: action.pageSize,
+          sort: action.sort,
           ordering_version: snapshot.ordering_version,
         }));
         return json(origin, 200, payload);
