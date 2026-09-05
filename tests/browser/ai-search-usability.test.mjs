@@ -31,133 +31,46 @@ test("question retrieval keeps scientific qualifiers and recognizes factual foll
   assert.equal(ui.resolveEvidenceLinks("[unknown](missing)", []), "[unknown](missing)");
 });
 
-test("question retrieval finds records beyond the first page without escaping the filtered set", async () => {
-  const catalog = { opportunities: Array.from({ length: 80 }, (_, index) => ({ opportunity_id: String(index) })) };
-  let remoteScope;
+test("every bounded result is included regardless of question wording or previous references", async () => {
   const context = {
-    CHAT_UI: ui, catalog, MAX_CHAT_RESULTS: 10, state: { ai: { mode: "results" } },
-    recordId: record => record.opportunity_id,
-    computeMatches: query => { assert.equal(query, "heterogeneous catalysis"); return { matches: [{ index: 70 }, { index: 79 }] }; },
-    hybridCanRun: () => true,
-    hybridSearchClient: { search: async (_query, options) => { remoteScope = options.eligibleParentIds; return { parents: [{ index: 75 }, { index: 79 }] }; } },
-    hybridMatches: parents => parents,
+    CHAT_UI: ui, MAX_CHAT_RESULTS: 10, state: { ai: { mode: "results" } },
+    computeMatches: () => { throw new Error("Chat must use the full current set without another retrieval"); },
+    hybridSearchClient: { search: () => { throw new Error("Chat must not substitute another subset"); } },
   };
   vm.createContext(context); vm.runInContext(fn(app, "retrieveChatContext"), context);
-  const ids = Array.from({ length: 78 }, (_, index) => String(index));
-  const result = await context.retrieveChatContext("What opportunities fit heterogeneous catalysis?", ids, []);
-  assert.deepEqual([...result.ids], ["70", "75"]);
-  assert.equal(remoteScope.size, 78);
-  assert.equal(remoteScope.has("79"), false);
-  context.hybridSearchClient.search = async () => { throw new Error("offline"); };
-  const fallback = await context.retrieveChatContext("heterogeneous catalysis", ids, []);
-  assert.deepEqual([...fallback.ids], ["70"]);
-  assert.equal(fallback.mode, "local_retrieval");
-  const followUp = await context.retrieveChatContext("What are their deadlines?", ids, [{ role: "assistant", resultIds: ["75", "79"] }]);
-  assert.deepEqual([...followUp.ids], ["75"]);
-
-  const initial = await context.retrieveChatContext("Compare the cited award amounts and project durations.", ids, []);
-  assert.equal(initial.mode, "initial_comparison");
-  assert.deepEqual([...initial.ids], ids.slice(0, 10));
-  assert.match(ui.resultScopeSummary(ids.length, 10), /General comparisons start with the first 10 results in the current order/);
-  assert.match(ui.resultContextLabel(initial.mode, initial.ids.length, ids.length), /other 68 results are outside this comparison/);
-  const compared = [{ role: "assistant", contextIds: initial.ids, resultIds: initial.ids.slice(0, 2) }];
-  const reorderedFollowUp = await context.retrieveChatContext("What are their deadlines?", [...ids].reverse(), compared);
-  assert.equal(reorderedFollowUp.mode, "connected_follow_up");
-  assert.deepEqual([...reorderedFollowUp.ids], [...initial.ids], "Follow-ups preserve every supplied record, independently of model references and result ordering");
-  const filteredFollowUp = await context.retrieveChatContext("What are their deadlines?", ids.slice(1), compared);
-  assert.deepEqual([...filteredFollowUp.ids], [...initial.ids].slice(1), "Changed eligibility still excludes records outside the current search");
+  const ids = [...Array.from({ length: 9 }, (_, index) => String(index)), "75"];
+  const previous = [{ role: "assistant", contextIds: ["77", "78"], resultIds: ["78"] }];
   for (const question of [
-    "Which of those has a 2027 deadline?",
-    "Which one has a 2027 deadline?",
-    "What's the deadline?",
-    "Does that one require an industry partner?",
-    "Can either one support an early-career investigator?",
-    "Which of those has a 2028 deadline instead?",
-    "Which has a deadline after January 2027?",
-    "Which awards offer over $500,000 per year?",
-    "Which awards offer over USD 500,000?",
-    "Which have USD budgets?",
-    "Which have EUR amounts?",
-    "Which are due in MAY?",
-    "Which have JANUARY deadlines?",
-    "Which have deadlines before JANUARY 2027?",
-    "Which have deadlines before MAR 2027?",
-    "Are any of these eligible for early-career investigators?",
-    "Does it require an industry partner?",
-    "Which of those fit heterogeneous catalysis?",
-    "Compare the previous opportunities by application effort.",
-    "Show the deadlines instead.",
-    "Instead, show those amounts.",
+    "What opportunities fit heterogeneous catalysis?", "Which of those has more funding instead?",
+    "Which of those has a 2027 deadline?", "Which one has a 2027 deadline?", "What are their deadlines?",
+    "Which cannot be funded?", "Which can't be funded?", "Which have USD budgets?", "Which are due in MAY?",
+    "Which opportunities support AM?", "Which opportunities support CAN?", "Which opportunities support OR?",
+    "Show me other opportunities instead", "Instead, show other opportunities", "New topic: CO2 electroreduction",
   ]) {
-    const followUp = await context.retrieveChatContext(question, [...ids].reverse(), compared);
-    assert.equal(followUp.mode, "connected_follow_up", question);
-    assert.deepEqual([...followUp.ids], [...initial.ids], question);
+    const result = await context.retrieveChatContext(question, ids, previous);
+    assert.equal(result.mode, "complete_results");
+    assert.deepEqual([...result.ids], ids, question);
   }
-  for (const question of ["heterogeneous catalysis", "Instead, find heterogeneous catalysis.", "New topic: heterogeneous catalysis"]) {
-    const changedTopic = await context.retrieveChatContext(question, ids, compared);
-    assert.deepEqual([...changedTopic.ids], ["70"], "A new topic must retrieve across the eligible set despite prior comparison records");
-    assert.equal(changedTopic.mode, "local_retrieval");
-  }
-  for (const forms of [
-    ["cannot", "can't", "can’t", "can not"], ["couldn't", "could not"],
-    ["won't", "will not"], ["wouldn't", "would not"], ["shouldn't", "should not"],
-    ["mustn't", "must not"], ["needn't", "need not"], ["shan't", "shall not"],
-    ["oughtn't", "ought not"], ["daren't", "dare not"],
-  ]) {
-    for (const form of forms) {
-      const question = `Which ${form} be funded?`;
-      const followUp = await context.retrieveChatContext(question, ids, compared);
-      assert.equal(followUp.mode, "connected_follow_up", question);
-      assert.deepEqual([...followUp.ids], [...initial.ids], question);
-    }
-  }
-  assert.equal(ui.retrievalQuery("Which cannot be funded?"), ui.retrievalQuery("Which can't be funded?"));
-  assert.equal(ui.isResultFollowUp("Which cannot support heterogeneous catalysis?"), false, "Normalizing negation must not discard a new scientific topic");
-  const ordinaryMatcher = context.computeMatches;
-  for (const topic of ["AM", "DARE", "MIN", "MAX", "CAN", "OR", "IT", "ITS", "USD", "MAY"]) {
-    assert.equal(ui.retrievalQuery(`Which opportunities support ${topic}?`), topic, "Topic abbreviations survive filler and fact-word filtering");
-    context.computeMatches = query => { assert.equal(query, topic); return { matches: [{ index: 70 }] }; };
-    const changedTopic = await context.retrieveChatContext(`Which opportunities support ${topic}?`, ids, compared);
-    assert.equal(changedTopic.mode, "local_retrieval", topic);
-    assert.deepEqual([...changedTopic.ids], ["70"], "Uppercase topical abbreviations must retrieve beyond the prior comparison");
-  }
-  context.computeMatches = ordinaryMatcher;
-  assert.equal(ui.isResultFollowUp("Instead of those, find homogeneous catalysis"), false);
-  assert.equal(ui.isResultFollowUp("New topic: CO2 electroreduction"), false);
-  assert.equal(ui.isResultFollowUp("What are the deadlines for homogeneous catalysis?"), false);
-  assert.equal(ui.isResultFollowUp("Find IT research opportunities"), false, "The IT abbreviation must not be treated as a pronoun");
-  assert.equal(ui.isResultFollowUp("Find catalysis opportunities with budgets above $500,000"), false);
-  assert.equal(ui.isResultFollowUp("Which one-carbon metabolism opportunities are available?"), false);
-  assert.equal(ui.retrievalQuery("What's available for heterogeneous catalysis?"), "heterogeneous catalysis");
-  for (const question of [
-    "Instead, show other opportunities", "Show me other opportunities instead",
-    "Look for other opportunities instead", "Find other opportunities instead", "Search for other opportunities instead",
-    "List other options instead", "Give me different calls instead", "Recommend other programs instead",
-    "New search: other opportunities", "Start over",
-  ]) {
-    for (const history of [[], compared, [...compared, { role: "assistant", resultIds: [] }]]) {
-      const restart = await context.retrieveChatContext(question, ids, history);
-      assert.equal(restart.mode, "needs_topic", question);
-      assert.deepEqual([...restart.ids], [], "A restart without a topic must not reuse or substitute comparison records");
-    }
-  }
-  for (const [eligible, history] of [[ids.slice(10), compared], [ids, [...compared, { role: "assistant", resultIds: [] }]]]) {
-    const unavailable = await context.retrieveChatContext("Which of those has a 2027 deadline?", eligible, history);
-    assert.equal(unavailable.mode, "unavailable_follow_up");
-    assert.deepEqual([...unavailable.ids], [], "An unavailable or empty previous answer must never silently use another comparison");
-  }
-  const small = await context.retrieveChatContext("What are their deadlines?", ids.slice(0, 8), []);
-  assert.equal(ui.resultContextLabel(small.mode, small.ids.length, 8), "Comparison of all 8 current results");
+  const reordered = await context.retrieveChatContext("Compare their budgets", [...ids].reverse(), previous);
+  assert.deepEqual([...reordered.ids], [...ids].reverse());
+  const filtered = await context.retrieveChatContext("What are their deadlines?", ids.slice(1), previous);
+  assert.deepEqual([...filtered.ids], ids.slice(1), "Only the current eligible set is supplied");
+  const broad = await context.retrieveChatContext("Compare the opportunities", [...ids, "76"], previous);
+  assert.deepEqual([...broad.ids], [], "An oversized scope must never be silently truncated");
+  assert.match(ui.resultScopeSummary(10, 10), /all 10 current results/);
+  assert.match(ui.resultScopeSummary(11, 10), /Narrow to 10 or fewer/);
+  assert.equal(ui.resultContextLabel("complete_results", 10), "All 10 current results included");
 });
 
-test("broad browsing is blocked at 101 results, while bounded and uploaded contexts remain usable", () => {
-  const context = { MAX_CHAT_SCOPE: 100, currentChatIds: () => Array(100).fill("a"), hasNofoDocument: () => false };
+test("broad browsing is blocked at 11 results, while bounded and uploaded contexts remain usable", () => {
+  const context = { MAX_CHAT_SCOPE: 10, currentChatIds: () => Array(10).fill("a"), hasNofoDocument: () => false };
   vm.createContext(context); vm.runInContext(fn(app, "chatHasContext"), context);
   assert.equal(context.chatHasContext(), true);
-  context.currentChatIds = () => Array(101).fill("a");
+  context.currentChatIds = () => Array(11).fill("a");
   assert.equal(context.chatHasContext(), false);
   context.hasNofoDocument = () => true;
   assert.equal(context.chatHasContext(), true);
+  assert.match(app, /const MAX_CHAT_SCOPE = MAX_CHAT_RESULTS/);
   assert.match(page, /aria-describedby="chat-scope-hint"/);
 });
 

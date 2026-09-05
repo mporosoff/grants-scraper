@@ -78,9 +78,9 @@ alternative, to:
    through the existing filtered local Strong matcher;
 2. assess at most 32 new locally qualified candidates and add at most 12 while
    preserving every ordinary Strong and Potential result; and
-3. ask grounded follow-up questions over up to 10 question-relevant records retrieved from the active results.
+3. ask grounded follow-up questions about every active result after narrowing to 10 or fewer opportunities.
 
-“Chat with your results” is enabled after narrowing to 100 or fewer results. Topic questions retrieve relevant evidence across that entire filtered set using local and Voyage search before selecting at most 10 records for the answer. An initial deadline, amount, or eligibility comparison uses the first 10 results in the current order (or all results when fewer); the introduction and answer disclose that scope. Factual follow-ups preserve the previous answer’s complete evidence set, including records the model did not name, while still respecting current filters. Single-opportunity and uploaded-notice chat remain available independently of the general result count. The mobile composer stays within the visible viewport as the keyboard opens.
+“Chat with your results” is enabled after narrowing to 10 or fewer results, matching the provider's ten-record boundary. Every current result is included in every question and follow-up, with question-relevant description excerpts and matched child-topic evidence. Chat does not guess when to substitute a new subset based on wording; change the search or filters to discuss different opportunities. The main Funding Finder and Team Match searches continue using their full catalog local and semantic pipelines. Single-opportunity and uploaded-notice chat remain available independently of the general result count. The mobile composer stays within the visible viewport as the keyboard opens.
 
 A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
 main search box. Funding Finder extracts page-marked text in the browser, tries

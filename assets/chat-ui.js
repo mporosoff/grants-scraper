@@ -278,28 +278,6 @@
     return substantive.join(" ").slice(0, 500);
   }
 
-  function isResultFollowUp(question) {
-    const text = String(question || "").toLowerCase();
-    // An explicit change of topic takes precedence over references to the old set.
-    const otherResults = /\b(?:other|different|new|another|more|alternative)\s+(?:funding\s+)?(?:opportunit(?:y|ies)|options?|results?|programs?|calls?|grants?|funding)\b/.test(text);
-    if (/\b(?:new|different|another|unrelated)\s+(?:topic|search)\b|\b(?:switch|change)\s+(?:the\s+)?topics?\b|\bstart\s+over\b|\binstead\s+of\s+(?:those|these|them)\b/.test(text)
-      || (otherResults && /\binstead\b/.test(text))) return false;
-    if (/\b(?:those|these|them|their)\b|\b(?:this|that|previous|last|same)\s+(?:opportunit(?:y|ies)|calls?|grants?|programs?|awards?|options?|results?|set|comparison|answer)\b|\b(?:mentioned|listed|shown|discussed|compared)\s+(?:above|earlier|previously)\b/.test(text)
-      || /\b(?:which|this|that|either|each)\s+one\b(?!-)|\b(?:does|is|can|will|would|could|should)\s+(?:(?:either|each|any)\s+)?one\b(?!-)/.test(text)
-      || /\b(?:it|its|It|Its)\b/.test(String(question || ""))) return true;
-    const query = retrievalQuery(question);
-    if (!query) return true;
-    // Date and amount qualifiers do not turn a factual comparison into a new topic.
-    const qualifiers = new Set("not must shall ought dare am has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
-    const numericUnits = new Set("usd eur gbp january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
-    const unitContext = /\d/.test(query) || /\b(?:amounts?|budgets?|costs?|dollars?|ceilings?|floors?|due|deadlines?|dates?|months?|years?|closing|windows?|submissions?|applications?)\b/.test(text);
-    return query.split(/\s+/).every(word => {
-      // Uppercase topical abbreviations (for example AM or DARE) are not verbs.
-      if (/^[A-Z]{2,}$/.test(word) && !(numericUnits.has(word.toLowerCase()) && unitContext)) return false;
-      return qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word);
-    });
-  }
-
   function evidenceExcerpt(text, query, maximum = 1600) {
     const source = String(text || "");
     if (source.length <= maximum) return source;
@@ -323,23 +301,17 @@
   }
 
   function resultScopeSummary(count, limit) {
-    const first = Math.min(count, limit);
-    const comparison = count > limit ? `the first ${first} results in the current order` : `all ${count} results`;
-    return `Topic questions search all ${count.toLocaleString()} results and select up to ${limit}. General comparisons start with ${comparison}. Ask about those results to keep the previous answer’s records, or name a new topic to search again.`;
+    if (count > limit) return `Narrow to ${limit} or fewer results so every result can be included.`;
+    return `AI can use all ${count} current ${count === 1 ? "result" : "results"}. Ask about fit, deadlines, amounts, or eligibility. Change your search or filters to discuss other opportunities.`;
   }
 
-  function resultContextLabel(mode, count, total) {
-    if (mode === "initial_comparison") return count < total
-      ? `Comparison of the first ${count} of ${total} results in the current order; the other ${total - count} results are outside this comparison`
-      : `Comparison of all ${total} current results`;
-    if (mode === "connected_follow_up") return `Comparison of ${count} opportunities from the previous answer, within ${total} currently eligible results`;
+  function resultContextLabel(mode, count) {
     if (mode === "focused_opportunity") return "Single connected opportunity";
-    return `${count} question-relevant records selected from ${total} eligible results`;
+    return `All ${count} current ${count === 1 ? "result" : "results"} included`;
   }
 
   globalThis.FUNDING_CHAT_UI = Object.freeze({
     retrievalQuery,
-    isResultFollowUp,
     evidenceExcerpt,
     resolveEvidenceLinks,
     resultScopeSummary,

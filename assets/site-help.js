@@ -95,7 +95,7 @@
           <div><strong>Why this matched</strong><span>Open a short evidence-based explanation when that feature is enabled.</span></div>
           <div><strong>Export CSV</strong><span>Download the current result set for further review.</span></div>
           <div><strong>Official source</strong><span>Open the agency notice, FOA, or Grants.gov record.</span></div>
-          <div><strong>Ask AI</strong><span>Narrow to 100 or fewer results. Topic questions search that set and select up to 10 records. General comparisons start with the first 10 in the current order. Ask about those results to continue the comparison, or name a new topic to search again. Use a card’s More menu to discuss one opportunity.</span></div>
+          <div><strong>Ask AI</strong><span>Narrow to 10 or fewer results so every result can be included in the answer. Ask about fit, deadlines, amounts, or eligibility. Change your search or filters to discuss other opportunities. Use a card’s More menu to discuss one opportunity.</span></div>
         </div>
         <p class="help-footnote">“Recently posted” uses the catalog's listed or first-seen date. “Relevance” combines the words and concepts in your query, profile, and filters. Recently posted and closing-soon labels help with timing but do not replace deadline verification.</p>
       </section>
