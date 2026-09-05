@@ -288,7 +288,12 @@
     if (!query) return true;
     // Date and amount qualifiers do not turn a factual comparison into a new topic.
     const qualifiers = new Set("not must shall ought dare am has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
-    return query.split(/\s+/).every(word => qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word));
+    const numericUnits = new Set("usd eur gbp january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
+    return query.split(/\s+/).every(word => {
+      // Uppercase topical abbreviations (for example AM or DARE) are not verbs.
+      if (/^[A-Z]{2,}$/.test(word) && !(numericUnits.has(word.toLowerCase()) && /\d/.test(query))) return false;
+      return qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word);
+    });
   }
 
   function evidenceExcerpt(text, query, maximum = 1600) {

@@ -75,6 +75,9 @@ test("question retrieval finds records beyond the first page without escaping th
     "Which of those has a 2028 deadline instead?",
     "Which has a deadline after January 2027?",
     "Which awards offer over $500,000 per year?",
+    "Which awards offer over USD 500,000?",
+    "Which have deadlines before JANUARY 2027?",
+    "Which have deadlines before MAR 2027?",
     "Are any of these eligible for early-career investigators?",
     "Does it require an industry partner?",
     "Which of those fit heterogeneous catalysis?",
@@ -104,6 +107,14 @@ test("question retrieval finds records beyond the first page without escaping th
   }
   assert.equal(ui.retrievalQuery("Which cannot be funded?"), ui.retrievalQuery("Which can't be funded?"));
   assert.equal(ui.isResultFollowUp("Which cannot support heterogeneous catalysis?"), false, "Normalizing negation must not discard a new scientific topic");
+  const ordinaryMatcher = context.computeMatches;
+  for (const topic of ["AM", "DARE", "MIN", "MAX"]) {
+    context.computeMatches = query => { assert.equal(query, topic); return { matches: [{ index: 70 }] }; };
+    const changedTopic = await context.retrieveChatContext(`Which opportunities support ${topic}?`, ids, compared);
+    assert.equal(changedTopic.mode, "local_retrieval", topic);
+    assert.deepEqual([...changedTopic.ids], ["70"], "Uppercase topical abbreviations must retrieve beyond the prior comparison");
+  }
+  context.computeMatches = ordinaryMatcher;
   assert.equal(ui.isResultFollowUp("Instead of those, find homogeneous catalysis"), false);
   assert.equal(ui.isResultFollowUp("New topic: CO2 electroreduction"), false);
   assert.equal(ui.isResultFollowUp("What are the deadlines for homogeneous catalysis?"), false);
