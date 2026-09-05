@@ -351,6 +351,12 @@ test("removal exposes missing roles and replacements cannot silently claim unaud
   assert.equal(afterRemoval.selected.length, 3);
   assert.ok(afterRemoval.unfilledRoles.length >= 1);
   assert.ok(afterRemoval.replacements.length >= 1);
+  const original = afterRemoval.replacements.find(item => item.profile.id === removedId);
+  assert.ok(original, "a removed original member remains available for explicit restoration");
+  assert.equal(original.previouslySelected, true);
+  const restored = engine.proposalView(engine.addReplacement(state, removedId));
+  assert.equal(restored.complete, initial.complete);
+  assert.ok(restored.selectedIds.includes(removedId));
   const alternative = afterRemoval.replacements.find(item => !item.reviewed);
   assert.ok(alternative, "expected an evidence-backed alternative requiring role review");
   state = engine.addReplacement(state, alternative.profile.id);

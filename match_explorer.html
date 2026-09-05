@@ -33,10 +33,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/funding-finder-180.png?v=20260815">
   <link rel="manifest" href="./assets/icons/funding-finder.webmanifest?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26">
+  <link rel="stylesheet" href="./assets/app.css?v=d386ce5443d9a02160d9201ed0fb52d07a342bf0bedb2057af74f62c457c4a69">
   <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c">
   <link rel="stylesheet" href="./assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031">
-  <link rel="stylesheet" href="./assets/site-shell.css?v=e224b9558c5bb430ce941f0fd7996c0396d915f64b4052dbb923d52f26e3e229">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7">
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to results</a>
@@ -457,12 +457,13 @@
               </select>
             </label>
             </div>
-            <button class="button secondary results-chat-launch" id="open-results-chat" type="button" aria-haspopup="dialog" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
+            <button class="button secondary results-chat-launch" aria-describedby="chat-scope-hint" id="open-results-chat" type="button" aria-haspopup="dialog" aria-controls="result-assistant" aria-expanded="false" disabled>Ask AI</button>
             <button class="button secondary" id="results-more-trigger" type="button" data-shell-menu="results" aria-label="More results actions" aria-expanded="false" aria-controls="results-more-actions">More <span aria-hidden="true">▾</span></button>
             <div class="shell-action-list" id="results-more-actions" hidden>
               <button id="export-csv" type="button">Export CSV</button>
               <button type="button" data-workspace-open data-shell-focus="alert-new-matches" data-shell-mirror="alert-new-matches" disabled>Create email alert for this search</button>
             </div>
+            <p id="chat-scope-hint" class="chat-scope-hint" role="status" hidden></p>
           </div>
         </div>
 
@@ -574,7 +575,7 @@
   <noscript>
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
-  <script src="./assets/site-shell.js?v=62e4d07df6f5012cd0374b5c24ff3fbb9dd0316ca85cc5602f2bc80caab33e86"></script>
+  <script src="./assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"></script>
   <script src="./assets/app-config.js?v=app-1.3.0-updated-20260905"></script>
   <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
   <script src="./data/catalog-metadata.js?v=catalog-20260905T162417967782Z"></script>
@@ -587,7 +588,7 @@
   <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
   <script src="./assets/ai-gateway-config.js?v=hosted-ai-20260831"></script>
   <script src="./assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"></script>
-  <script src="./assets/chat-ui.js?v=chat-output-fixes-20260830"></script>
+  <script src="./assets/chat-ui.js?v=d1983375ed391af14d00388edac6a4a763e4cbd71cba809971d9bee9b203c13b"></script>
   <script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>
   <script src="./assets/award-links.js?v=dod-awards-20260903"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
@@ -600,11 +601,11 @@
   <script src="./assets/match-explain.js?v=app-1.3.0"></script>
   <script src="./data/researcher_directory.js?v=05879415e35a3ad08d326428b4df6644911d1272c4201109e817d2b33bcfb9d8"></script>
   <script src="./data/opportunity_team_index.js?v=05879415e35a3ad08d326428b4df6644911d1272c4201109e817d2b33bcfb9d8"></script>
-  <script src="./assets/opportunity-team.js?v=856e16b61c3a56ea04ce76c6fcbba36484c1e61bb51d753ef1c66ba53dca2293"></script>
-  <script src="./assets/opportunity-team-panel.js?v=297dd44ea6f23182c2cf655a87e55daa093190598ba02d81d2cc798b03c13759"></script>
-  <script src="./assets/site-help.js?v=cc01d88ac0c554198dd9ffdd9f1b58f9493b01936ceb3942a351133a508521f4"></script>
+  <script src="./assets/opportunity-team.js?v=62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e"></script>
+  <script src="./assets/opportunity-team-panel.js?v=becaf61f7a0469c9981b55a7b1c47925b40d96f92eff64d69c7615a2cade5058"></script>
+  <script src="./assets/site-help.js?v=dc5c807403d29ec449ac53269a7a689896f36ee220bb7478d0e28473ee914fa5"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/app.js?v=654efe716acf80c6b881e62aa882fe79484c759c1b50d8eea639e555a772af70"></script>
+  <script src="./assets/app.js?v=4eb11a627a833551644f4394513b10f9a6eff610467f4efd9d8a3baeb625e3b9"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

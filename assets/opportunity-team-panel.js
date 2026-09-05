@@ -196,7 +196,7 @@
       ? '<div class="opportunity-team-replacement"><label for="' + replacementId + '">Source-backed replacement options</label>' +
         '<div><select id="' + replacementId + '" data-opportunity-team-replacement><option value="">Choose a replacement</option>' +
         view.replacements.map(function (item) {
-          return '<option value="' + escapeHtml(item.profile.id) + '">' + escapeHtml(item.profile.name) + ' — ' + escapeHtml(item.roles.map(function (role) { return role.label; }).join("; ")) + (item.reviewed ? '' : ' (coverage unconfirmed)') + '</option>';
+          return '<option value="' + escapeHtml(item.profile.id) + '">' + escapeHtml(item.profile.name) + ' — ' + (item.previouslySelected ? 'Previously selected · ' : '') + escapeHtml(item.roles.map(function (role) { return role.label; }).join("; ")) + (item.reviewed ? '' : ' (coverage unconfirmed)') + '</option>';
         }).join("") + '</select><button type="button" data-opportunity-team-add-replacement disabled>Add to team</button></div></div>'
       : '<p class="opportunity-team-no-replacement">' + (view.selectedIds.length >= 4
         ? "Remove a team member to compare replacement options."

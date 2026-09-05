@@ -271,7 +271,10 @@ test("runtime owns a separate refinement overlay, stale identity checks, exact r
   assert.match(restore, /restoreOrdinaryBaseline\(baseline\)/);
   assert.match(restore, /clearResultFocusPreservingConversation\(\)/);
   assert.doesNotMatch(restore, /clearAiState|clearNofoState|savedItems|savedIds|k-key|currentProfile/);
-  assert.match(chatIds, /currentDisplayMatches\(\)[\s\S]*?slice\(0, MAX_CHAT_RESULTS\)/);
+  assert.match(chatIds, /currentDisplayMatches\(\)/);
+  assert.doesNotMatch(chatIds, /slice\(/, "The gate must count the full eligible scope before allowing chat");
+  assert.match(resultsChat, /eligibleIds.length > MAX_CHAT_SCOPE/);
+  assert.match(resultsChat, /await retrieveChatContext\(cleanQuestion, eligibleIds\)/);
   assert.match(appSource, /MAX_CHAT_RESULTS = 10/);
   assert.match(appSource, /data-chat-copy-message/);
   assert.match(appSource, /CHAT_UI\.copyText\(message\.text\)/);

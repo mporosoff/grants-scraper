@@ -90,14 +90,19 @@ function deduplicateAwards(values) {
   return sortAwards(uniqueAwards(values));
 }
 
-function sortAwards(values) {
+export const AWARD_SORTS = Object.freeze(["newest", "oldest", "title", "agency"]);
+
+function sortAwards(values, sort = "newest") {
   return values.map(award => ({
     award,
     recency: awardRecency(award).date,
     source: clean(award?.source, 10),
     id: clean(award?.award_id, 120),
   })).sort((left, right) => (
-    (right.recency > left.recency ? 1 : right.recency < left.recency ? -1 : 0)
+    (sort === "title" ? EN_COLLATOR.compare(clean(left.award?.title, 1000), clean(right.award?.title, 1000)) : 0)
+    || (sort === "agency" ? EN_COLLATOR.compare(left.source, right.source) : 0)
+    || (!left.recency - !right.recency)
+    || (sort === "oldest" ? 1 : -1) * (left.recency > right.recency ? 1 : left.recency < right.recency ? -1 : 0)
     || EN_COLLATOR.compare(left.source, right.source)
     || EN_COLLATOR.compare(left.id, right.id)
   )).map(item => item.award);
@@ -655,7 +660,8 @@ export function snapshotSourceBatch(snapshot, { source, offset = 0, facet = { ty
   };
 }
 
-export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type: "all", key: "" } } = {}) {
+export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type: "all", key: "" }, sort = "newest" } = {}) {
+  if (!AWARD_SORTS.includes(sort)) return null;
   const normalizedPage = Number(page);
   const normalizedPageSize = Number(pageSize);
   if (!Number.isInteger(normalizedPage) || normalizedPage < 1 || !SNAPSHOT_PAGE_SIZES.includes(normalizedPageSize)) return null;
@@ -664,11 +670,12 @@ export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type
   const availablePages = Math.max(1, Math.ceil(view.awards.length / normalizedPageSize));
   if (normalizedPage > availablePages) return null;
   const start = (normalizedPage - 1) * normalizedPageSize;
-  const selected = view.awards.slice(start, start + normalizedPageSize);
+  const ordered = sortAwards(view.awards, sort);
+  const selected = ordered.slice(start, start + normalizedPageSize);
   const allAwards = view.facet.type === "all";
-  const aggregate = allAwards
+  const aggregate = allAwards && sort === "newest"
     ? snapshot.base_aggregate
-    : aggregateSnapshotAwards(view.awards, { alreadyNormalized: true });
+    : aggregateSnapshotAwards(ordered, { alreadyNormalized: true });
   return {
     schema_version: 1,
     snapshot_contract_version: 1,
@@ -690,6 +697,7 @@ export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type
     ...(allAwards ? {} : { base_aggregate: publicAggregate(snapshot.base_aggregate, { includeOrderedRefs: false }) }),
     aggregate: publicAggregate(aggregate),
     facet: view.facet,
+    sort,
     pagination: {
       page: normalizedPage,
       page_size: normalizedPageSize,

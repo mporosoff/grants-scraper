@@ -219,6 +219,15 @@ test("Unit B preserves complete opaque program facet keys through page and batch
   }), env);
   assert.equal(pageResponse.status, 200);
   assert.equal((await pageResponse.json()).facet.key, program.key);
+  const sortedResponse = await handler(request("/awards/snapshots/page", {
+    snapshot_id: value.snapshot_id, page: 1, page_size: 10, facet, sort: "title",
+  }), env);
+  assert.equal(sortedResponse.status, 200);
+  assert.equal((await sortedResponse.json()).sort, "title");
+  const invalidSort = await handler(request("/awards/snapshots/page", {
+    snapshot_id: value.snapshot_id, page: 1, page_size: 10, facet, sort: "random",
+  }), env);
+  assert.equal(invalidSort.status, 400);
   const batchResponse = await handler(request("/awards/snapshots/batch", {
     snapshot_id: value.snapshot_id, source: "NSF", offset: 0, facet,
   }), env);
@@ -397,7 +406,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   const helpReleaseKey = createHash("sha256").update(await readFile(new URL("assets/site-help.js", root))).digest("hex");
   const dodReleaseKey = "dod-awards-20260903";
   const dodStatusReleaseKey = "dod-awards-20260904";
-  const dodBrowserReleaseKey = "dod-browser-20260904-r2";
+  const dodBrowserReleaseKey = createHash("sha256").update(await readFile(new URL("assets/funded-awards.js", root))).digest("hex");
   const fundedAwardsStylesReleaseKey = "source-pill-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   const appCssHash = createHash("sha256").update(appCss).digest("hex");

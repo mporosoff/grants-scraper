@@ -4246,3 +4246,32 @@ footer p {
   .card-actions { display: flex; flex-wrap: wrap; }
   .card-actions > .source-action { width: auto; }
 }
+
+/* Keep the composer visible; the conversation owns its own scrolling. */
+.result-assistant.site-drawer[open] { display: flex; flex-direction: column; overflow: hidden; }
+.result-assistant > .ai-heading { flex: none; }
+.result-assistant .chat { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; margin: 8px 0; }
+.result-assistant .messages { flex: 1 1 auto; min-height: 60px; max-height: none; overflow-y: auto; overscroll-behavior: contain; }
+.result-assistant .chat-form, .result-assistant .chat-thinking { flex: none; }
+.result-assistant .chat-summary { margin: 0 0 8px; }
+.result-assistant .suggestion-list { flex: none; max-height: 90px; overflow-y: auto; margin-bottom: 8px; }
+.result-assistant .chat-form { padding-top: 8px; border-top: 1px solid var(--line); background: #fff; }
+.result-assistant .chat-thinking { margin: 4px 0; }
+.result-assistant .chat-actions:has(> .hidden):not(:has(> :not(.hidden))) { display: none; }
+.result-assistant.document-chat > .nofo-chat-context { max-height: 25dvh; overflow-y: auto; flex: none; }
+.result-assistant #chat-provider-slot:has(.provider-setup[open]) { max-height: 35dvh; overflow-y: auto; flex: none; }
+@media (max-width: 700px) {
+  .result-assistant.site-drawer { padding: 12px; }
+  .result-assistant > .panel-copy { display: none; }
+  .result-assistant > .chat-privacy { font-size: .65rem; flex: none; }
+  .result-assistant .ai-heading h2 { font-size: 1.1rem; }
+  .result-assistant #chat-provider-slot { margin: 6px 0; }
+  .result-assistant .chat-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .result-assistant .chat-form textarea { grid-row: auto; min-height: 64px; max-height: 110px; }
+  .result-assistant .chat-keyboard-hint { display: none; }
+  .result-assistant .suggestion-list { display: none; }
+  .result-assistant .chat-summary { font-size: .74rem; }
+  .result-assistant .chat-form .button { width: auto; min-width: 70px; }
+}
+
+.chat-scope-hint { flex-basis: 100%; margin: 0; max-width: 420px; color: var(--muted); font-size: .76rem; line-height: 1.4; }

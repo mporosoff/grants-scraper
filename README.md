@@ -78,11 +78,9 @@ alternative, to:
    through the existing filtered local Strong matcher;
 2. assess at most 32 new locally qualified candidates and add at most 12 while
    preserving every ordinary Strong and Potential result; and
-3. ask grounded follow-up questions over the top 10 active results.
+3. ask grounded follow-up questions about every active result after narrowing to 10 or fewer opportunities.
 
-“Chat with your results” appears with the returned result set and can answer
-questions over the top 10 ordinary search results without requiring a prior AI
-rerank. It uses the same responsive result workflow on desktop and mobile.
+“Chat with your results” is enabled after narrowing to 10 or fewer results, matching the provider's ten-record boundary. Every current result is included in every question and follow-up, with question-relevant description excerpts and matched child-topic evidence. Chat does not guess when to substitute a new subset based on wording; change the search or filters to discuss different opportunities. The main Funding Finder and Team Match searches continue using their full catalog local and semantic pipelines. Single-opportunity and uploaded-notice chat remain available independently of the general result count. The mobile composer stays within the visible viewport as the keyboard opens.
 
 A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
 main search box. Funding Finder extracts page-marked text in the browser, tries

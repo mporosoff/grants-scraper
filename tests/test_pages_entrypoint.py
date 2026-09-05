@@ -305,11 +305,17 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             '<script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>',
             explorer_html,
         )
-        for asset in ("credentials.js", "chat-ui.js"):
-            self.assertIn(
-                f'<script src="./assets/{asset}?v=chat-output-fixes-20260830"></script>',
-                explorer_html,
-            )
+        self.assertIn(
+            '<script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>',
+            explorer_html,
+        )
+        chat_ui_hash = hashlib.sha256(
+            (REPOSITORY_ROOT / "assets" / "chat-ui.js").read_bytes()
+        ).hexdigest()
+        self.assertIn(
+            f'<script src="./assets/chat-ui.js?v={chat_ui_hash}"></script>',
+            explorer_html,
+        )
         for asset in ("orcid.js",):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={feature_version}"></script>',

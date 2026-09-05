@@ -283,6 +283,7 @@ test("share URLs round-trip institution and all transparent filters", () => {
     year_end: "2026",
     offset: 0,
     snapshot_id: "",
+    sort: "newest",
     page: 1,
     page_size: 10,
     facet_type: "all",

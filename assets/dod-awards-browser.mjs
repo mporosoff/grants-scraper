@@ -11,7 +11,7 @@ import {
   publicSnapshot,
   snapshotPage,
   snapshotSourceBatch,
-} from "../workers/award-api/src/snapshot.js";
+} from "../workers/award-api/src/snapshot.js?v=ee132943b9a06d94e6f89beaa971de14840e4fd24c027de789012b34211d1405";
 import { AwardSourceError } from "../workers/award-api/src/http.js";
 
 const DOD_SOURCE = "DOD";

@@ -29,12 +29,12 @@
   <link rel="icon" href="./favicon.ico?v=20260815" sizes="any">
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260815">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
-  <link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26">
+  <link rel="stylesheet" href="./assets/app.css?v=d386ce5443d9a02160d9201ed0fb52d07a342bf0bedb2057af74f62c457c4a69">
   <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=source-pill-20260904">
   <link rel="stylesheet" href="./assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031">
-  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=2e97d6825743647486066ba8d1874f44a2a4e251095cff32a41d4c68dcf97279">
-  <link rel="stylesheet" href="./assets/site-shell.css?v=e224b9558c5bb430ce941f0fd7996c0396d915f64b4052dbb923d52f26e3e229">
+  <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=0c394a8c1b612870195a78ccf97a2c6421be8a735a1e9198e5def64771a8c204">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7">
   <link rel="stylesheet" href="./assets/public-tools.css?v=bd38620a4641cb5797c6ee30ed1ad011bdd442fc411df746d654018878e17f39">
 </head>
 <body>
@@ -238,6 +238,10 @@
               <button class="text-button" id="ii-clear-facet" type="button">Clear active drill-down</button>
             </div>
             <section id="award-projects" data-award-view-panel="projects" aria-label="Projects">
+            <div class="ii-sort-toolbar">
+              <label for="ii-sort">Sort by <select id="ii-sort" aria-describedby="ii-sort-note"><option value="newest">Newest awards</option><option value="oldest">Oldest awards</option><option value="title">Title A–Z</option><option value="agency">Agency A–Z</option></select></label>
+              <p id="ii-sort-note">Applies to all awards in these results. Dates use the award date, project start, or award year when available.</p>
+            </div>
             <div class="ii-awards" id="ii-awards" aria-live="polite"></div>
             <nav class="ii-card-pagination hidden" id="ii-card-pagination" aria-label="Award result pages">
               <div class="ii-page-summary">
@@ -396,7 +400,7 @@
   </footer>
 
   <noscript><div class="notice error">JavaScript is required to search funded awards.</div></noscript>
-  <script src="./assets/site-shell.js?v=62e4d07df6f5012cd0374b5c24ff3fbb9dd0316ca85cc5602f2bc80caab33e86"></script>
+  <script src="./assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"></script>
   <script src="./assets/public-tools.js?v=1bfe9d1871a1ac91a9937a557fe6b43d1593cba74e0c09faacc712c57f8d3068"></script>
   <script src="./assets/app-config.js?v=app-1.3.0-updated-20260905"></script>
   <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
@@ -408,10 +412,10 @@
   <script src="./assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"></script>
   <script src="./assets/award-api-config.js?v=921c9b9a8d84b20db73cdbd4b8e8075667c3f29b184801e82b8724b6a3484cc1"></script>
   <script src="./assets/funded-awards-core.js?v=dod-awards-20260904"></script>
-  <script src="./assets/institutional-intelligence-core.js?v=98fb65a05104f94e81d0a70fd32ef4816be36ff34680a8b2920572f357ff9fba"></script>
+  <script src="./assets/institutional-intelligence-core.js?v=87904d3d696d915ad2b91b3efc5efd5689a08ba821a77a4e15c11ba2541afe30"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/site-help.js?v=cc01d88ac0c554198dd9ffdd9f1b58f9493b01936ceb3942a351133a508521f4"></script>
-  <script src="./assets/funded-awards.js?v=dod-browser-20260904-r2"></script>
-  <script src="./assets/institutional-intelligence-snapshots.js?v=f49e91dc7c89b4044f0bf6ff84560f391764711e7a4216244491e6dc4c12475e"></script>
+  <script src="./assets/site-help.js?v=dc5c807403d29ec449ac53269a7a689896f36ee220bb7478d0e28473ee914fa5"></script>
+  <script src="./assets/funded-awards.js?v=0614ffd7dbb31dbd408d88a4f7b289d7e6029baa162cba712d46c6cb8c77a11b"></script>
+  <script src="./assets/institutional-intelligence-snapshots.js?v=a83de1913f957079ee7bb46c2c35e2603240281b6400d212f55ea651ae634226"></script>
 </body>
 </html>

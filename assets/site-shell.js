@@ -111,10 +111,29 @@
     focusable(menu)[0]?.focus({ preventScroll: true });
   }
 
+  function fitDrawerToViewport() {
+    const dialog = activeDrawer?.dialog;
+    if (!dialog) return;
+    const viewport = globalThis.visualViewport;
+    const height = viewport?.height || globalThis.innerHeight;
+    if (height) dialog.style.setProperty("--drawer-viewport-height", `${Math.round(height)}px`);
+    dialog.style.setProperty("--drawer-viewport-top", `${Math.round(viewport?.offsetTop || 0)}px`);
+    const focused = document.activeElement;
+    if (dialog.contains(focused) && focused?.matches("input, textarea, select")) {
+      const box = focused.getBoundingClientRect();
+      const top = viewport?.offsetTop || 0;
+      if (box.top < top || box.bottom > top + height) focused.scrollIntoView({ block: "nearest", behavior: "instant" });
+    }
+  }
+  globalThis.visualViewport?.addEventListener("resize", fitDrawerToViewport);
+  globalThis.visualViewport?.addEventListener("scroll", fitDrawerToViewport);
+
   function finishDrawer(dialog) {
     if (activeDrawer?.dialog !== dialog) return;
     const { opener, status, onClose, resolveOpener, closeOptions = {} } = activeDrawer;
     activeDrawer = null;
+    dialog.style.removeProperty("--drawer-viewport-height");
+    dialog.style.removeProperty("--drawer-viewport-top");
     if (status) dialog.after(status);
     document.documentElement.classList.remove("shell-drawer-open");
     opener?.setAttribute("aria-expanded", "false");
@@ -156,6 +175,8 @@
     const initial = target || dialog.querySelector("[data-shell-initial-focus]") || focusable(dialog)[0];
     initial?.focus({ preventScroll: true });
     if (target) target.scrollIntoView({ block: "nearest" });
+    fitDrawerToViewport();
+    globalThis.requestAnimationFrame?.(fitDrawerToViewport);
   }
 
   document.addEventListener("click", event => {

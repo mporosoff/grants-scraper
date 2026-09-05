@@ -113,3 +113,7 @@ html.shell-drawer-open { overflow: hidden; overscroll-behavior: none; }
 @media (prefers-reduced-motion: reduce) {
   .site-drawer, .workspace-drawer, .shell-action-list { scroll-behavior: auto; }
 }
+
+@media (max-width: 700px) {
+  .site-drawer[open] { top: var(--drawer-viewport-top, 0px); height: var(--drawer-viewport-height, 100dvh); max-height: var(--drawer-viewport-height, 100dvh); }
+}

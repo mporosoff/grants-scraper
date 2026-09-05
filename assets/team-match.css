@@ -106,8 +106,6 @@
 
   #view.result-list{padding-top:0;}
   .team-result-card{margin-bottom:0;}
-  .team-result-card.broad-card{border-left:4px solid var(--gold);}
-  .team-result-card .agency{padding-bottom:10px;margin:0 0 10px;color:#516178;font-size:.84rem;font-weight:700;border-bottom:1px solid #dfe6ee;}
   .team-result-card .badge{float:none;margin-left:0;text-align:left;}
   .team-result-card .team-overlap{margin:12px 0 4px;padding:11px 12px;background:#f3f7fc;border:1px solid #d4dfeb;border-radius:9px;}
   .team-result-card .team-overlap > strong{display:block;margin-bottom:7px;color:var(--navy);font-size:.75rem;}
@@ -116,7 +114,6 @@
   .team-result-card .team-overlap summary{width:max-content;color:var(--blue-dark);font-size:.72rem;font-weight:750;cursor:pointer;}
   .team-result-card .matched-themes{margin:10px 0 0;padding-top:9px;border-top:1px solid #d4dfeb;}
   .team-result-card .scope-note{margin:9px 0 0;}
-  .team-result-card .detail-grid dt{color:#617087;font-size:.68rem;font-weight:850;text-transform:uppercase;}
   .team-result-card .detail-grid dd{overflow-wrap:anywhere;}
   .agency{margin:0;color:var(--muted);font-size:.84rem;}
   .listed{margin:5px 0 0;font-size:.8rem;color:var(--blue-dark);font-weight:700;}
