@@ -437,6 +437,60 @@ test("opportunity lifecycle verifies, sends exactly once, and stops after unsubs
   assert.equal(provider.messages.length, 2);
 });
 
+test("group watches canonicalize IDs, bound fan-out, and preserve the single-opportunity identity", () => {
+  const normalize = definition => normalizeSubscription({ type: "opportunity", cadence: "weekly", definition });
+  const triggers = ["amended", "closing_reminders"];
+  assert.deepEqual(normalize({ opportunity_ids: ["b", "a", "b"], triggers }).definition,
+    { opportunity_ids: ["a", "b"], triggers });
+  assert.deepEqual(normalize({ opportunity_ids: ["a"], triggers }), normalize({ opportunity_id: "a", triggers }));
+  for (const opportunity_ids of [[], [""], [null], [4], ["x".repeat(201)], Array.from({ length: 26 }, (_, i) => String(i))]) {
+    assert.equal(normalize({ opportunity_ids, triggers }), null);
+  }
+  assert.equal(normalize({ opportunity_ids: ["a"], opportunity_id: "a", triggers }), null);
+  assert.equal(normalize({ opportunity_ids: ["a"], triggers, note: "private" }), null);
+  assert.equal(normalize({ opportunity_ids: ["a"], triggers: [] }), null);
+});
+
+test("one verified group watches only its chosen IDs, deduplicates changes and reminders, and unsubscribes together", async () => {
+  const store = new MemoryStore();
+  const provider = new MockEmailProvider();
+  const records = ["first", "second", "excluded"].map(id => record({ opportunity_id: id, close_date: "2026-10-01" }));
+  const state = assets({ records, matcher: { matchIds() { throw new Error("Group watches must not run a search"); } } });
+  let token = 0;
+  const handler = createHandler({
+    storeFactory: () => store, providerFactory: () => provider, assetLoader: async () => state,
+    now: () => fixedNow, tokenFactory: () => `${++token}`.padStart(43, "g"),
+  });
+  const body = subscriptionBody("opportunity", { opportunity_ids: ["second", "first"], triggers: ["amended", "status_changed", "closing_reminders"] });
+  assert.equal((await post(handler, "/subscriptions", body)).status, 202);
+  assert.equal(provider.messages.length, 1, "one verification email covers the selected group");
+  assert.equal(store.subscriptions.size, 1);
+  const sub = [...store.subscriptions.values()][0];
+  assert.equal(sub.active, 0);
+  assert.deepEqual([...store.qual.get(sub.id).keys()].sort(), ["first", "second"]);
+  await verifyLatest(handler, provider);
+  const person = [...store.subscribers.values()][0];
+  const managed = await handler(new Request(`https://alerts.example.test/manage?token=${person.manage_token}`), env);
+  assert.match(await managed.text(), /Saved opportunities \(2\): first, second/);
+  // Reordering the same selection reuses the verified subscription.
+  body.subscription.definition.opportunity_ids.reverse();
+  assert.equal((await post(handler, "/subscriptions", body)).status, 202);
+  assert.equal(store.subscriptions.size, 1);
+  state.changes.events = records.map((record, i) => ({ id: `group-${i}`, type: i === 1 ? "closed_or_removed" : "amended", changed_at: "2026-09-02T00:00:00Z", opportunity_id: record.opportunity_id, record }));
+  for (let i = 0; i < 2; i++) await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
+  const notifications = [...store.events.values()].filter(event => event.message_kind === "notification");
+  assert.equal(notifications.length, 4, "one amendment, one closure, and two closing reminders");
+  assert.deepEqual([...new Set(notifications.map(event => event.opportunity_id))].sort(), ["first", "second"]);
+  assert.equal(notifications.filter(event => event.event_kind === "status_changed").length, 1);
+  await dispatchNotifications({ store, provider, env, now: fixedNow });
+  const unsub = await handler(new Request(`https://alerts.example.test/unsubscribe?token=${person.manage_token}&subscription=${sub.id}`, { method: "POST", body: "List-Unsubscribe=One-Click" }), env);
+  assert.equal(unsub.status, 200);
+  state.changes.generated_at = "2026-09-03T00:00:00Z";
+  state.changes.events.push({ ...state.changes.events[0], id: "after-unsubscribe", changed_at: state.changes.generated_at });
+  await evaluateSubscriptions({ store, assets: state, env, now: fixedNow });
+  assert.equal([...store.events.values()].filter(event => event.message_kind === "notification").length, 4);
+});
+
 test("opportunity watches send the exact 30, 14, and 7 day reminders once", async () => {
   const store = new MemoryStore();
   const provider = new MockEmailProvider();

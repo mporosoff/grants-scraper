@@ -4,9 +4,11 @@
   const config = globalThis.FUNDING_ALERTS_CONFIG || {};
   const TYPE_LABELS = Object.freeze({
     opportunity: "Watch this opportunity",
+    saved_opportunities: "Watch saved opportunities",
     saved_search: "Save this search as an email alert",
     program: "Watch this program",
   });
+  const MAX_WATCHED_OPPORTUNITIES = 25;
   let dialog = null;
   let current = null;
   let restoreFocus = null;
@@ -127,6 +129,11 @@
           <button class="alert-dialog-close" type="button" aria-label="Close alert setup">×</button>
         </div>
         <p id="alert-dialog-summary"></p>
+        <fieldset class="alert-saved-fields hidden" id="alert-saved-fields">
+          <legend>Choose saved opportunities</legend>
+          <p>Choose up to ${MAX_WATCHED_OPPORTUNITIES} opportunities per alert. This alert watches this selection; saving or removing items later does not change it. Manage delivery from the links in your alert emails.</p>
+          <div class="alert-saved-options" id="alert-saved-options"></div>
+        </fieldset>
         <fieldset class="alert-trigger-fields hidden" id="alert-trigger-fields">
           <legend>Email me when</legend>
           <label><input type="checkbox" name="trigger" value="deadline_changed" checked> Deadline changes</label>
@@ -146,7 +153,7 @@
           </label>
         </div>
         <p class="alert-management"><strong>After verification:</strong> every Funding Finder alert email includes a secure Manage alerts link where you can change frequency, pause or resume delivery, or unsubscribe.</p>
-        <p class="alert-privacy"><strong>Stored for this alert:</strong> your email address, the watched ID or typed query and filters, cadence, verification state, and delivery history. Pursuit status and notes, profile/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser and are never sent to the Alerts Worker.</p>
+        <p class="alert-privacy"><strong>Stored for this alert:</strong> your email address, the watched opportunity IDs or typed query and filters, cadence, verification state, and delivery history. Pursuit status and notes, profile/CV text, ORCID publication text, uploaded documents, and AI chat stay in this browser and are never sent to the Alerts Worker.</p>
         <p class="alert-search-baseline hidden" id="alert-search-baseline">The current Strong matches become the starting baseline. They will not trigger email; only a future new or newly qualifying Strong match can alert you. Potential matches are excluded.</p>
         <div class="alert-dialog-actions">
           <button class="button primary" id="alert-submit" type="submit">Send verification email</button>
@@ -216,7 +223,15 @@
     const status = dialog.querySelector("#alert-dialog-status");
     const submitButton = dialog.querySelector("#alert-submit");
     const definition = { ...current.definition };
-    if (current.type === "opportunity") {
+    if (current.type === "saved_opportunities") {
+      definition.opportunity_ids = [...dialog.querySelectorAll('input[name="saved-opportunity"]:checked')]
+        .map(input => input.value);
+      if (!definition.opportunity_ids.length || definition.opportunity_ids.length > MAX_WATCHED_OPPORTUNITIES) {
+        setSubmitStatus(status, `Choose between 1 and ${MAX_WATCHED_OPPORTUNITIES} saved opportunities.`, { error: true });
+        return;
+      }
+    }
+    if (["opportunity", "saved_opportunities"].includes(current.type)) {
       definition.triggers = triggers();
       if (!definition.triggers.length) {
         setSubmitStatus(status, "Choose at least one change to watch.", { error: true });
@@ -229,7 +244,7 @@
         ? current.baselineOpportunityIds
         : [],
       subscription: {
-        type: current.type,
+        type: current.type === "saved_opportunities" ? "opportunity" : current.type,
         cadence: dialog.querySelector("#alert-cadence").value,
         definition,
       },
@@ -285,9 +300,11 @@
 
   function open({
     type, definition, summary = "", focus = document.activeElement,
-    baselineOpportunityIds = [],
+    baselineOpportunityIds = [], savedOpportunities = [],
   } = {}) {
     if (!TYPE_LABELS[type] || !definition || typeof definition !== "object") return false;
+    const saved = [...new Map(savedOpportunities.filter(item => item?.id).map(item => [String(item.id), item])).values()];
+    if (type === "saved_opportunities" && !saved.length) return false;
     ensureDialog();
     current = {
       type,
@@ -299,7 +316,14 @@
     restoreFocus = focus?.isConnected ? focus : restoreFocus;
     dialog.querySelector("#alert-dialog-title").textContent = TYPE_LABELS[type];
     dialog.querySelector("#alert-dialog-summary").textContent = summary;
-    dialog.querySelector("#alert-trigger-fields").classList.toggle("hidden", type !== "opportunity");
+    dialog.querySelector("#alert-saved-fields").classList.toggle("hidden", type !== "saved_opportunities");
+    dialog.querySelector("#alert-saved-options").innerHTML = type === "saved_opportunities"
+      ? saved.map((item, index) => `<label><input type="checkbox" name="saved-opportunity" value="${escapeHtml(item.id)}"${index < MAX_WATCHED_OPPORTUNITIES ? " checked" : ""}> <span>${escapeHtml(item.title || item.id)}</span></label>`).join("")
+      : "";
+    dialog.querySelector("#alert-trigger-fields").classList.toggle("hidden", !["opportunity", "saved_opportunities"].includes(type));
+    dialog.querySelectorAll('input[name="trigger"]').forEach(input => {
+      input.checked = !Array.isArray(definition.triggers) || definition.triggers.includes(input.value);
+    });
     dialog.querySelector("#alert-search-baseline").classList.toggle("hidden", type !== "saved_search");
     setSubmitStatus(dialog.querySelector("#alert-dialog-status"), "");
     dialog.querySelector("#alert-cadence").value = type === "saved_search" ? "weekly" : "immediate";

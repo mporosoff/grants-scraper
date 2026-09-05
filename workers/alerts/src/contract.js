@@ -2,6 +2,7 @@ export const ALERT_SCHEMA_VERSION = 4;
 export const STRONG_CONTRACT_VERSION = "funding-search-v2-strong-1";
 export const SUBSCRIPTION_TYPES = Object.freeze(["opportunity", "saved_search", "program"]);
 export const CADENCES = Object.freeze(["immediate", "weekly"]);
+export const MAX_WATCHED_OPPORTUNITIES = 25;
 export const OPPORTUNITY_TRIGGERS = Object.freeze([
   "deadline_changed", "amended", "closing_reminders", "status_changed",
 ]);
@@ -77,13 +78,19 @@ export function normalizeSubscription(value, linksApi = globalThis.FUNDING_AWARD
   if (containsPrivateFields(value.definition)) return null;
   let definition = null;
   if (type === "opportunity") {
-    if (!exactKeys(value.definition, ["opportunity_id", "triggers"])) return null;
-    const opportunityId = clean(value.definition.opportunity_id, 200);
+    const grouped = exactKeys(value.definition, ["opportunity_ids", "triggers"]);
+    if (!grouped && !exactKeys(value.definition, ["opportunity_id", "triggers"])) return null;
+    const rawIds = grouped ? value.definition.opportunity_ids : [value.definition.opportunity_id];
+    if (!Array.isArray(rawIds) || !rawIds.length || rawIds.length > MAX_WATCHED_OPPORTUNITIES
+      || rawIds.some(id => typeof id !== "string" || !id.trim() || id.length > 200)) return null;
+    const opportunityIds = [...new Set(rawIds.map(id => clean(id, 200)))].sort();
     const triggers = Array.isArray(value.definition.triggers)
       ? [...new Set(value.definition.triggers.map(item => clean(item, 40)))]
       : [];
-    if (!opportunityId || !triggers.length || triggers.some(item => !OPPORTUNITY_TRIGGERS.includes(item))) return null;
-    definition = { opportunity_id: opportunityId, triggers: triggers.sort() };
+    if (!triggers.length || triggers.some(item => !OPPORTUNITY_TRIGGERS.includes(item))) return null;
+    definition = opportunityIds.length === 1
+      ? { opportunity_id: opportunityIds[0], triggers: triggers.sort() }
+      : { opportunity_ids: opportunityIds, triggers: triggers.sort() };
   } else if (type === "program") {
     if (!exactKeys(value.definition, ["program_id"])) return null;
     const identity = linksApi?.programIdentityById?.(value.definition.program_id);

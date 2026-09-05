@@ -1,4 +1,6 @@
 /* Shared public tool hierarchy; domain-specific controls retain their own styles. */
+.public-empty { background: var(--surface); border: 1px dashed var(--line-strong); border-radius: var(--radius); padding: 32px 22px; text-align: center; color: var(--muted); }
+.ii-body:has(> #ii-output:not(.hidden), > #ii-output[aria-busy="true"]) > #ii-initial-placeholder { display: none; }
 .public-main { width: min(1240px, calc(100% - 36px)); margin: 0 auto; padding-top: 26px; }
 .public-page-header { padding: 20px 0 !important; color: var(--ink) !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .public-page-header h1 { margin: 0; color: var(--navy); font-size: clamp(1.55rem, 3vw, 2rem) !important; line-height: 1.2; }

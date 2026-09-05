@@ -103,13 +103,14 @@
       <section class="help-section" id="help-alerts">
         <div class="help-section-heading">
           <span class="help-section-number">04</span>
-          <div><h3>Configure personalized email alerts</h3><p>Saved-search alerts are the primary way to follow your broader interests. Optional opportunity and controlled-program watches are available when you need a narrower alert.</p></div>
+          <div><h3>Configure personalized email alerts</h3><p>Follow changes to saved opportunities, new Strong matches to a search, or updates to a specific program.</p></div>
         </div>
         <div class="help-grid">
           <div class="help-card">
             <h4>Choose what to watch in the GUI</h4>
             <ul>
-              <li><strong>Overall search and interests:</strong> open <em>Research profile, ORCID, CV, and search alerts</em>, run a typed Funding Finder search, then choose <em>Save this search as an email alert</em> in that pane. The alert follows future new Strong matches to the typed search and public filters across the catalog. Existing Strong matches become the baseline and do not immediately generate email.</li>
+              <li><strong>Saved opportunities together:</strong> open <em>Workspace</em> and choose <em>Create alert for saved opportunities</em>. Select up to 25 saved opportunities, choose the changes to watch, and verify one email alert. No search is required. The alert watches that selection; later changes to this browser's saved list do not change it.</li>
+              <li><strong>Overall search and interests:</strong> run a typed Funding Finder search, then open <em>Workspace</em> and choose <em>Save this search as an email alert</em>. The alert follows future new Strong matches to the typed search and public filters across the catalog. Existing Strong matches become the baseline and do not immediately generate email.</li>
               <li><strong>One opportunity:</strong> choose <em>Email alert</em> on a result card or in Saved opportunities, then select deadline, amendment, reminder, and status triggers.</li>
               <li><strong>One program:</strong> choose <em>Program email alert</em> on an eligible result, or <em>Email alerts for this program</em> from an eligible Funded Awards deep link. Program watches use only controlled stable identities.</li>
             </ul>

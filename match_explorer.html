@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
   <link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26">
   <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c">
-  <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
+  <link rel="stylesheet" href="./assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cd9a00eac9820fcf0e581a30e3514737859c975a45dd3dece8c9f17e3b24a951">
 </head>
 <body>
@@ -132,11 +132,13 @@
             <section class="profile-search-alert" id="workspace-email-alerts" aria-labelledby="profile-search-alert-heading">
               <div>
                 <h3 id="profile-search-alert-heading">Email alerts</h3>
-                <p>Receive email only when a future opportunity becomes a new Strong match. Current results will not be emailed.</p>
-                <p class="profile-search-alert-privacy">Only your typed search and public filters are saved. Profiles, files, notes, and AI chats stay in this browser.</p>
+                <p>Watch saved opportunities for changes, or follow future new Strong matches to a search. Current results will not be emailed.</p>
+                <p class="profile-search-alert-privacy">Only the selected opportunity IDs or your typed search and public filters are saved with your email alert. Profiles, files, notes, and AI chats stay in this browser.</p>
               </div>
               <p>Manage verified alerts from the secure links in your alert emails.</p>
               <div class="profile-search-alert-actions">
+                <button class="button primary" id="alert-saved-opportunities" type="button" aria-describedby="saved-opportunity-alert-status" disabled>Create alert for saved opportunities</button>
+                <p id="saved-opportunity-alert-status" role="status" aria-live="polite">Save an opportunity to enable this alert. No search is required.</p>
                 <button class="button primary" id="alert-new-matches" type="button" aria-describedby="profile-search-alert-status" disabled>Save this search as an email alert</button>
                 <button class="text-button" type="button" data-help-open data-help-section="help-alerts" aria-haspopup="dialog" aria-controls="help-guide">How search alerts work</button>
                 <p id="profile-search-alert-status" role="status" aria-live="polite">Run a typed funding search to enable this alert.</p>
@@ -573,7 +575,7 @@
     <div class="notice error">JavaScript is required to search the opportunity catalog.</div>
   </noscript>
   <script src="./assets/site-shell.js?v=62e4d07df6f5012cd0374b5c24ff3fbb9dd0316ca85cc5602f2bc80caab33e86"></script>
-  <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
+  <script src="./assets/app-config.js?v=app-1.3.0-updated-20260905"></script>
   <script src="./assets/search-v2-config.js?v=app-1.3.0"></script>
   <script src="./data/catalog-metadata.js?v=catalog-20260905T140525774503Z"></script>
   <script src="./assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"></script>
@@ -589,7 +591,7 @@
   <script src="./assets/result-workflow.js?v=ai-feedback-20260901"></script>
   <script src="./assets/award-links.js?v=dod-awards-20260903"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
-  <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"></script>
   <script src="./assets/saved.js?v=filters-2026-08-13"></script>
   <script src="./assets/search-query.js?v=app-1.3.0"></script>
   <script src="./assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d"></script>
@@ -600,9 +602,9 @@
   <script src="./data/opportunity_team_index.js?v=716e681317789179aa29d81f246ec65d610f061949ce0cc36c616833d807f3f9"></script>
   <script src="./assets/opportunity-team.js?v=d4d3bce6dce29bb397b5a5b8d5a02c39541dfa814b7d149986cda0022b536dcb"></script>
   <script src="./assets/opportunity-team-panel.js?v=297dd44ea6f23182c2cf655a87e55daa093190598ba02d81d2cc798b03c13759"></script>
-  <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
+  <script src="./assets/site-help.js?v=cc01d88ac0c554198dd9ffdd9f1b58f9493b01936ceb3942a351133a508521f4"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/app.js?v=51277d4ce815fd568ab741281ed5479c6a02e07ac6004248b7f348487c30eebb"></script>
+  <script src="./assets/app.js?v=4bcf8cb978217e2a82c92e6cefd75111b099e28e40bb04f307a22fd06728331d"></script>
   <script src="./assets/analytics.js?v=app-1.3.0"></script>
 </body>
 </html>

@@ -352,7 +352,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            '<script src="./assets/site-help.js?v=dod-awards-20260903"></script>',
+            f'<script src="./assets/site-help.js?v={hashlib.sha256((REPOSITORY_ROOT / "assets/site-help.js").read_bytes()).hexdigest()}"></script>',
             explorer_html,
         )
         self.assertIn("globalThis.FUNDING_CATALOG_LOADER", application_js)

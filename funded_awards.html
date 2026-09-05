@@ -32,10 +32,10 @@
   <link rel="stylesheet" href="./assets/app.css?v=11d93e6d25a47f22b06e63baa78729a86afc1e89b3d2d914e6baeb4f28443a26">
   <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c">
   <link rel="stylesheet" href="./assets/funded-awards.css?v=source-pill-20260904">
-  <link rel="stylesheet" href="./assets/alerts.css?v=ui-runtime-20260903">
+  <link rel="stylesheet" href="./assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031">
   <link rel="stylesheet" href="./assets/institutional-intelligence.css?v=2e97d6825743647486066ba8d1874f44a2a4e251095cff32a41d4c68dcf97279">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cd9a00eac9820fcf0e581a30e3514737859c975a45dd3dece8c9f17e3b24a951">
-  <link rel="stylesheet" href="./assets/public-tools.css?v=7c3a9c5718cf984979cc271fed4f18c28324b4b8ee73f7be744cd19de65fbdd7">
+  <link rel="stylesheet" href="./assets/public-tools.css?v=bd38620a4641cb5797c6ee30ed1ad011bdd442fc411df746d654018878e17f39">
 </head>
 <body>
   <a class="skip-link" href="#institutional-intelligence">Skip to funded-award search</a>
@@ -193,6 +193,7 @@
               <button class="public-action" id="open-awards-ai" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="awards-ai">Search with AI</button>
               <p id="ii-result-scope"></p>
             </div>
+          <div class="public-empty" id="ii-initial-placeholder">Search an institution, topic, or program to explore funded projects and see their award summary.</div>
           <div id="awards-status-home">
           <div class="ii-results-note hidden" id="ii-results-note" data-shell-status="awards-ai">
             <div class="ii-status" id="ii-status" role="status" aria-live="polite"></div>
@@ -388,6 +389,7 @@
   </dialog>
 
   <footer class="awards-footer">
+    <p class="app-version" data-app-version></p>
     <p><strong>Source notice:</strong> Award information comes from public NSF Award Search, NIH RePORTER, DOE Office of Science PAMS, and USAspending DoD prime assistance records. DoD coverage is limited to Project Grants (04) and Cooperative Agreements (05); contracts, IDVs, SBIR-specific feeds, and subawards are excluded. Missing values are shown as not listed or unavailable at the source; contact details are never inferred.</p>
     <p>Funding Finder is not an official source of record. Verify material details on the linked official award page.</p>
     <p class="copyright-notice">&copy; 2026 Marc D. Porosoff. All rights reserved. Personal, non-commercial use is permitted. All other use, including modification, redistribution, and commercial or organizational use, requires written permission from the author.</p>
@@ -396,19 +398,19 @@
   <noscript><div class="notice error">JavaScript is required to search funded awards.</div></noscript>
   <script src="./assets/site-shell.js?v=62e4d07df6f5012cd0374b5c24ff3fbb9dd0316ca85cc5602f2bc80caab33e86"></script>
   <script src="./assets/public-tools.js?v=1bfe9d1871a1ac91a9937a557fe6b43d1593cba74e0c09faacc712c57f8d3068"></script>
-  <script src="./assets/app-config.js?v=app-1.3.0-updated-20260830"></script>
+  <script src="./assets/app-config.js?v=app-1.3.0-updated-20260905"></script>
   <script src="./assets/credentials.js?v=chat-output-fixes-20260830"></script>
   <script src="./assets/ai-gateway-config.js?v=hosted-ai-20260831"></script>
   <script src="./assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"></script>
   <script src="./data/opportunities.js?v=catalog-20260825T105031Z"></script>
   <script src="./assets/award-links.js?v=dod-awards-20260903"></script>
   <script src="./assets/alerts-config.js?v=phase3-alerts"></script>
-  <script src="./assets/alerts.js?v=post-phase4-abc-20260829"></script>
+  <script src="./assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"></script>
   <script src="./assets/award-api-config.js?v=921c9b9a8d84b20db73cdbd4b8e8075667c3f29b184801e82b8724b6a3484cc1"></script>
   <script src="./assets/funded-awards-core.js?v=dod-awards-20260904"></script>
   <script src="./assets/institutional-intelligence-core.js?v=98fb65a05104f94e81d0a70fd32ef4816be36ff34680a8b2920572f357ff9fba"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
-  <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
+  <script src="./assets/site-help.js?v=cc01d88ac0c554198dd9ffdd9f1b58f9493b01936ceb3942a351133a508521f4"></script>
   <script src="./assets/funded-awards.js?v=dod-browser-20260904-r2"></script>
   <script src="./assets/institutional-intelligence-snapshots.js?v=f49e91dc7c89b4044f0bf6ff84560f391764711e7a4216244491e6dc4c12475e"></script>
 </body>

@@ -112,7 +112,9 @@ async function rateLimit(store, request, action, limit, seconds, now) {
 
 function definitionSummary(subscription) {
   const definition = JSON.parse(subscription.definition_json);
-  if (subscription.type === "opportunity") return `Opportunity ${definition.opportunity_id}`;
+  if (subscription.type === "opportunity") return definition.opportunity_ids
+    ? `Saved opportunities (${definition.opportunity_ids.length}): ${definition.opportunity_ids.join(", ")}`
+    : `Opportunity ${definition.opportunity_id}`;
   if (subscription.type === "program") {
     return LINKS_API.programIdentityById(definition.program_id)?.label || definition.program_id;
   }

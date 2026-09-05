@@ -392,8 +392,9 @@ test("the integrated A-C browser release uses content-addressed keys for changed
     readFile(new URL("assets/institutional-intelligence-core.js", root)),
     readFile(new URL("assets/institutional-intelligence-snapshots.js", root)),
   ]);
-  const releaseKey = "post-phase4-abc-20260829";
-  const alertStylesReleaseKey = "ui-runtime-20260903";
+  const releaseKey = createHash("sha256").update(await readFile(new URL("assets/alerts.js", root))).digest("hex");
+  const alertStylesReleaseKey = createHash("sha256").update(await readFile(new URL("assets/alerts.css", root))).digest("hex");
+  const helpReleaseKey = createHash("sha256").update(await readFile(new URL("assets/site-help.js", root))).digest("hex");
   const dodReleaseKey = "dod-awards-20260903";
   const dodStatusReleaseKey = "dod-awards-20260904";
   const dodBrowserReleaseKey = "dod-browser-20260904-r2";
@@ -418,10 +419,10 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   assert.match(fundedAwards, new RegExp(`institutional-intelligence\\.css\\?v=${institutionalCssHash}`));
   assert.match(fundedAwards, new RegExp(`funded-awards\\.css\\?v=${fundedAwardsStylesReleaseKey}`));
   assert.match(fundedAwards, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
-  assert.match(fundedAwards, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundedAwards, new RegExp(`site-help\\.js\\?v=${helpReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.css\\?v=${alertStylesReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`alerts\\.js\\?v=${releaseKey}`));
-  assert.match(fundingFinder, new RegExp(`site-help\\.js\\?v=${dodReleaseKey}`));
+  assert.match(fundingFinder, new RegExp(`site-help\\.js\\?v=${helpReleaseKey}`));
   assert.match(fundingFinder, new RegExp(`ai-provider\\.js\\?v=${aiProviderHash}`));
   assert.match(fundingFinder, new RegExp(`award-links\\.js\\?v=${dodReleaseKey}`));
   const opportunityTeamGeneration = fundingFinder.match(/meta name="opportunity-team-generation" content="([a-f0-9]{64})"/)?.[1];
