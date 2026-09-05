@@ -1091,7 +1091,7 @@ export async function openTeamMatch(page, { sidecarFailure = false } = {}) {
   }
   await page.goto("/team_match.html?gate4-e2e=1");
   await expect(page.locator("#add-researcher")).toBeVisible({ timeout: 30_000 });
-  await expect(page.locator("#view")).toContainText(/Pick at least two researchers/);
+  await expect(page.locator("#view")).toContainText(/Add at least two researchers/);
 }
 
 export async function runFundingSearch(page, query) {

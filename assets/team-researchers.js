@@ -115,6 +115,10 @@
         : "";
       output.push({
         id,
+        ...(raw.institution && cleanText(raw.institution.name, 300) ? { institution: {
+          name: cleanText(raw.institution.name, 300),
+          ror_id: /^https:\/\/ror\.org\/0[a-z0-9]{8}$/.test(String(raw.institution.ror_id || "")) ? String(raw.institution.ror_id) : "",
+        } } : {}),
         registry_id: /^urh-[0-9]{6}$/.test(String(raw.registry_id || "")) ? String(raw.registry_id) : "",
         name,
         keywords,

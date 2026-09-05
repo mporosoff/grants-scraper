@@ -241,7 +241,9 @@ function materialEffect(directory, teamData, facultyMatches, detail) {
   const retirements = [...oldByLabel].filter(([key]) => !nextByLabel.has(key)).map(([, label]) => label);
   const unchanged = [...oldByLabel].filter(([key]) => nextByLabel.has(key)).map(([, label]) => label);
   const scientific = additions.length > 0 || retirements.length > 0;
-  const administrative = current.home_unit !== detail.proposed_profile.home_unit || current.orcid_id !== detail.proposed_profile.orcid_id;
+  const institutionChanged = detail.proposed_profile.institution !== undefined &&
+    ["name", "ror_id"].some(key => (current.institution?.[key] || "") !== (detail.proposed_profile.institution[key] || ""));
+  const administrative = institutionChanged || current.home_unit !== detail.proposed_profile.home_unit || current.orcid_id !== detail.proposed_profile.orcid_id;
   const affected = scientific && teamData ? (teamData.opportunities || []).filter(scope => {
     if ((scope.members || []).some(member => member.faculty_id === current.id)) return true;
     return (scope.roles || []).some(role => [...(role.candidate_ids || []), ...(role.alternative_ids || [])].includes(current.id));
@@ -375,6 +377,8 @@ export function canonicalSortName(value) {
 export function seedApprovedProfile(value, today = new Date().toISOString().slice(0, 10)) {
   const proposed = value.proposed_profile || {};
   const current = value.current_profile;
+  const institution = proposed.institution ?? current?.institution;
+  const institutionFields = institution === undefined ? {} : { institution: { ...institution } };
   const name = proposed.display_name || current?.name || "";
   const sortName = current?.sort_name && name === current.name ? current.sort_name : canonicalSortName(name);
   const sources = proposed.source_urls?.length ? proposed.source_urls : (current?.source_urls || []);
@@ -402,6 +406,7 @@ export function seedApprovedProfile(value, today = new Date().toISOString().slic
     }
     return {
       display_name: name, sort_name: sortName, aliases: current.aliases || [],
+      ...institutionFields,
       orcid_id: Object.prototype.hasOwnProperty.call(proposed, "orcid_id") ? proposed.orcid_id : (current.orcid_id || ""),
       home_unit: proposed.home_unit || current.home_unit,
       relationship: current.relationship, pool_visibility: current.pool_visibility,
@@ -412,6 +417,7 @@ export function seedApprovedProfile(value, today = new Date().toISOString().slic
   }
   return {
     display_name: name, sort_name: sortName, aliases: [], orcid_id: proposed.orcid_id,
+    ...institutionFields,
     home_unit: proposed.home_unit || "Pending administrator classification",
     relationship: "reference_only_researcher", pool_visibility: "hidden",
     auto_proposable: false, status: "active", research_summary: proposed.research_summary,
@@ -649,6 +655,8 @@ const ADMIN_JS = `(() => {
     document.getElementById("comparison").innerHTML =
       comparisonRow("Name", current.name, proposed.display_name) +
       comparisonRow("Home unit", current.home_unit, proposed.home_unit) +
+      comparisonRow("Institution", current.institution?.name, proposed.institution?.name ?? current.institution?.name) +
+      comparisonRow("ROR identity", current.institution?.ror_id, proposed.institution?.ror_id ?? current.institution?.ror_id) +
       comparisonRow("ORCID", current.orcid_id, proposed.orcid_id) +
       comparisonRow("Research summary", current.research_summary, proposed.research_summary) +
       comparisonRow("Source links", current.source_urls, proposed.source_urls, linksHtml);

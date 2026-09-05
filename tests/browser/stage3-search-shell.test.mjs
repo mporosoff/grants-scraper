@@ -94,7 +94,7 @@ test("initial, searched/restored and cleared states change the shell without cha
   state.query = "inner ear";
   context.renderResults();
   assert.equal($("funding-search").classList.contains("has-results"), true);
-  assert.equal($("page-title").textContent, "Funding search");
+  assert.equal($("page-title").textContent, "What are you looking to fund?");
   assert.equal($("open-refine-search").hidden, false);
   assert.equal($("clear-search").hidden, false);
   assert.equal($("add-research-context").hidden, true);

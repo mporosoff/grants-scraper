@@ -12,6 +12,7 @@
   var researcherCandidates = [];
   var activeResearcherOption = -1;
   var activeRequestType = "";
+  var institutionPicker;
   var modeDrafts = {
     profile_correction: null,
     new_researcher_nomination: null,
@@ -19,7 +20,7 @@
   var draftFieldIds = [
     "researcher-search", "existing-researcher", "display-name", "home-unit", "orcid-id",
     "relationship-note", "research-summary", "research-claims", "source-urls", "contact-email",
-    "submitter-note", "review-consent",
+    "submitter-note", "review-consent", "institution-name", "institution-ror-id",
   ];
 
   function element(id) { return document.getElementById(id); }
@@ -110,6 +111,7 @@
   function fillProfile(profile) {
     element("display-name").value = profile ? profile.name : "";
     element("home-unit").value = profile ? profile.home_unit : "";
+    institutionPicker?.setValue(profile?.institution?.name || "", profile?.institution?.ror_id || "");
     element("orcid-id").value = profile ? profile.orcid_id || "" : "";
     if (orcidApi) element("orcid-id").value = orcidApi.formatInput(element("orcid-id").value);
     element("research-summary").value = profile ? profile.research_summary || "" : "";
@@ -148,6 +150,7 @@
       else field.value = value;
     });
     if (orcidApi) element("orcid-id").value = orcidApi.formatInput(element("orcid-id").value);
+    institutionPicker?.setValue(element("institution-name").value, element("institution-ror-id").value);
   }
   function resetActiveDraft() {
     modeDrafts[selectedType()] = null;
@@ -178,6 +181,7 @@
       researcherId: inputValue("existing-researcher"),
       baseRegistryGeneration: directory.registry_generation,
       displayName: inputValue("display-name"), homeUnit: inputValue("home-unit"),
+      institution: { name: inputValue("institution-name"), ror_id: inputValue("institution-ror-id") },
       orcidId: inputValue("orcid-id"), researchSummary: inputValue("research-summary"),
       claims: inputValue("research-claims"), sourceUrls: inputValue("source-urls"),
       relationshipNote: inputValue("relationship-note"), contactEmail: inputValue("contact-email"),
@@ -255,6 +259,7 @@
       orcid_id: orcidId, orcid_name: "", orcid_text: "", orcid_work_count: 0,
       orcid_total_work_count: 0, orcid_source: "", orcid_updated_at: "",
     };
+    if (inputValue("institution-name").trim()) profile.institution = { name: inputValue("institution-name").trim(), ror_id: inputValue("institution-ror-id") };
     var result = teamApi.save(storage, loaded.profiles.concat(profile));
     if (!result.saved) {
       setStatus(result.error || "This researcher could not be stored in the browser.", "error");
@@ -303,6 +308,11 @@
   }
 
   if (!intake || !directory || !form) return;
+  if (globalThis.FUNDING_INSTITUTION_PICKER) institutionPicker = globalThis.FUNDING_INSTITUTION_PICKER.create({
+    input: element("institution-name"), idInput: element("institution-ror-id"),
+    list: element("institution-options"), status: element("institution-status"),
+    onChange: function () { idempotencyKey = ""; fallback.hidden = true; },
+  });
   var query = new URLSearchParams(location.search);
   if (query.get("mode") === "add") form.elements.request_type.value = "new_researcher_nomination";
   if (orcidApi) orcidApi.bindInput(element("orcid-id"));

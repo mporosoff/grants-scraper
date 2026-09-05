@@ -4,6 +4,13 @@
 .public-page-header h1 { margin: 0; color: var(--navy); font-size: clamp(1.55rem, 3vw, 2rem) !important; line-height: 1.2; }
 .public-page-header p:last-child { max-width: 850px; margin: 10px 0 0 !important; color: #52647a !important; font-size: .92rem; }
 .public-page-header .eyebrow { color: #52647a; }
+.public-page-header.public-funding-hero { padding: clamp(22px, 4vw, 46px) !important; border-radius: 16px !important; background: radial-gradient(circle at 80% 10%, rgba(0, 102, 253, .45), transparent 30%), linear-gradient(135deg, #001e5f 0%, #012a85 62%, #021bc3 100%) !important; }
+.public-funding-hero h1 { color: #fff; font-size: clamp(1.75rem, 3.5vw, 2.8rem) !important; }
+.public-funding-hero .eyebrow, .public-funding-hero p:last-child { color: #e0eaff !important; }
+@media (forced-colors: active) {
+  .public-page-header.public-funding-hero { background: Canvas !important; border: 1px solid CanvasText !important; }
+  .public-funding-hero h1, .public-funding-hero .eyebrow, .public-funding-hero p:last-child { color: CanvasText !important; }
+}
 .public-results-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 0; }
 .public-results-header > div { min-width: 0; }
 .public-results-header h2 { margin: 0 0 5px; color: var(--navy); font-size: 1.2rem; }

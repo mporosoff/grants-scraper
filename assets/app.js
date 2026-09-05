@@ -2211,7 +2211,6 @@
   function renderSearchShell() {
     const searched = state.searched;
     $("funding-search").classList.toggle("has-results", searched);
-    $("page-title").textContent = searched ? "Funding search" : "What are you looking to fund?";
     $("add-research-context").hidden = searched;
     $("add-search-filters").hidden = searched;
     $("open-refine-search").hidden = !searched;

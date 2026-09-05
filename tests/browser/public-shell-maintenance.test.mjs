@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 import test from "node:test";
-import { PUBLIC_PAGES, SHELL_ASSETS, syncPublicShellAssets } from "../../tools/sync_public_shell_assets.mjs";
+import { PUBLIC_PAGES, SHELL_ASSETS, REQUIRED_ASSETS, syncPublicShellAssets } from "../../tools/sync_public_shell_assets.mjs";
 import { openAwardAi, closeAwardAi, showAwardView, selectAwardFacet, openAwardAdvanced } from "../e2e/public-tool-workflow.mjs";
 
 test("All public shell references match served bytes before release", async () => {
@@ -19,10 +19,10 @@ test("Shared asset updates cover every public page, preserve unrelated identitie
     await mkdir(new URL("assets/", root));
     for (const asset of SHELL_ASSETS) await writeFile(new URL(asset, root), `${asset}\n`);
     const unrelated = '<script src="data/faculty_matches.js?v=exact-binding"></script><script src="assets/app.js?v=existing"></script>';
-    const source = '<script src="./assets/site-shell.js?v=old"></script><link href=\'assets/site-nav.css\'>' + unrelated;
-    for (const page of PUBLIC_PAGES) await writeFile(new URL(page, root), source);
-    assert.equal((await syncPublicShellAssets({ root })).length, PUBLIC_PAGES.length * 2);
-    assert.equal(await readFile(new URL(PUBLIC_PAGES[0], root), "utf8"), source, "Check is read-only");
+    const sources = new Map(PUBLIC_PAGES.map(page => [page, REQUIRED_ASSETS[page].map(asset => asset.endsWith(".js") ? `<script src="./${asset}?v=old"></script>` : `<link rel="stylesheet" href='${asset}'>`).join("") + unrelated]));
+    for (const [page, source] of sources) await writeFile(new URL(page, root), source);
+    assert.equal((await syncPublicShellAssets({ root })).length, Object.values(REQUIRED_ASSETS).flat().length);
+    assert.equal(await readFile(new URL(PUBLIC_PAGES[0], root), "utf8"), sources.get(PUBLIC_PAGES[0]), "Check is read-only");
     await syncPublicShellAssets({ root, write: true });
     for (const page of PUBLIC_PAGES) {
       const html = await readFile(new URL(page, root), "utf8");
@@ -32,6 +32,18 @@ test("Shared asset updates cover every public page, preserve unrelated identitie
     assert.deepEqual(await syncPublicShellAssets({ root, write: true }), []);
     await writeFile(new URL("assets/site-shell.js", root), "next release\n");
     assert.equal((await syncPublicShellAssets({ root })).length, PUBLIC_PAGES.length);
+    const good = new Map(await Promise.all(PUBLIC_PAGES.map(async page => [page, await readFile(new URL(page, root), "utf8")])));
+    for (const page of PUBLIC_PAGES) for (const asset of REQUIRED_ASSETS[page]) {
+      const original = good.get(page);
+      const tag = original.match(new RegExp(`<[^>]+(?:src|href)=["'](?:\\./)?${asset.replaceAll(".", "\\.")}\\?v=[^>]+>(?:</script>)?`))?.[0];
+      assert.ok(tag, asset);
+      for (const replacement of ["", `<!--${tag}-->`, tag + tag]) {
+        await writeFile(new URL(page, root), original.replace(tag, replacement));
+        for (const write of [false, true]) await assert.rejects(syncPublicShellAssets({ root, write }), /requires exactly one/);
+        assert.equal(await readFile(new URL(page, root), "utf8"), original.replace(tag, replacement), "An invalid integration is never rewritten");
+      }
+      await writeFile(new URL(page, root), original);
+    }
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 

@@ -20,6 +20,15 @@
     return String(value == null ? "" : value).normalize("NFKC").replace(/\s+/g, " ").trim();
   }
 
+  function institutionFields(value) {
+    if (value === undefined) return {};
+    if (!value || typeof value !== "object" || Array.isArray(value) || Object.keys(value).some(key => !["name", "ror_id"].includes(key))) throw new Error("Institution information is invalid.");
+    var name = bounded(value.name, 300, "Institution name", false);
+    var id = bounded(value.ror_id, 40, "ROR identity", false);
+    if (id && (!name || !/^https:\/\/ror\.org\/0[a-z0-9]{8}$/.test(id))) throw new Error("Choose a valid ROR institution or enter its complete name.");
+    return { institution: { name: name, ror_id: id } };
+  }
+
   function normalizeIdentity(value) {
     return normalizeText(value).normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
       .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -121,6 +130,7 @@
       researcher_id: researcherId || null,
       base_registry_generation: generation,
       proposed_profile: {
+        ...institutionFields(input.institution),
         display_name: displayName,
         orcid_id: orcid,
         home_unit: bounded(input.homeUnit, MAX.homeUnit, "Unit", false),

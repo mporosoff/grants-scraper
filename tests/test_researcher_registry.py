@@ -51,6 +51,29 @@ class ResearcherRegistryTests(unittest.TestCase):
                 self.assertTrue(claim["claim_id"].startswith(researcher["researcher_id"] + "-c"))
                 self.assertEqual(claim["material_hash"], material_claim_hash(claim))
 
+    def test_optional_institution_is_reviewed_metadata_without_claim_or_identity_changes(self):
+        target = copy.deepcopy(self.registry["researchers"][0])
+        profile = {key: target[key] for key in (
+            "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
+            "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
+            "source_checked_date", "claims",
+        )}
+        profile["institution"] = {"name": "California Institute of Technology", "ror_id": "https://ror.org/05dxps055"}
+        approved = {"schema_version": 1, "state": "approved", "researcher_id": target["researcher_id"],
+                    "approved_at": "2026-09-05T12:00:00Z", "approved_profile": profile}
+        updated, _ = apply_approved_submission(self.registry, approved, self.registry["registry_generation"])
+        row = next(row for row in updated["researchers"] if row["researcher_id"] == target["researcher_id"])
+        self.assertEqual(row["claims"], target["claims"])
+        self.assertEqual(row["legacy_ids"], target["legacy_ids"])
+        self.assertEqual(row["auto_proposable"], target["auto_proposable"])
+        public = next(row for row in directory_projection(updated)["researchers"] if row["id"] == target["researcher_id"])
+        self.assertEqual(public["institution"], profile["institution"])
+        for invalid in ({"name": "X", "ror_id": "https://evil.example/05dxps055"}, {"name": "X" * 301, "ror_id": ""}, {"name": "", "ror_id": "https://ror.org/05dxps055"}):
+            bad = copy.deepcopy(approved)
+            bad["approved_profile"]["institution"] = invalid
+            with self.assertRaisesRegex(ValueError, "institution"):
+                apply_approved_submission(self.registry, bad, self.registry["registry_generation"])
+
     def test_canonical_sort_name_keeps_suffixes_after_the_given_name(self):
         self.assertEqual(canonical_sort_name("Edward Brown III"), "Brown, Edward III")
         self.assertEqual(canonical_sort_name("Martin Luther King Jr."), "King, Martin Luther Jr.")

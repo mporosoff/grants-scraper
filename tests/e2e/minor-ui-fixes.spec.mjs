@@ -46,7 +46,7 @@ test("Funded Awards opens directly on the working search without the redundant b
   page.on("pageerror", error => runtimeErrors.push(error.message));
   await page.goto("/funded_awards.html");
   await expect(page.locator("#ii-heading")).toHaveText(
-    "Find funded projects and understand the result set",
+    "Search funded awards",
   );
   await expect(page.locator("#ii-form")).toBeVisible();
   await expect(page.locator(".ii-shell-heading")).toHaveCount(0);

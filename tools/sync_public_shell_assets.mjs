@@ -3,6 +3,7 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
+import { load } from "cheerio";
 
 export const PUBLIC_PAGES = Object.freeze([
   "match_explorer.html", "team_match.html", "funded_awards.html", "faculty_interests.html",
@@ -15,6 +16,14 @@ export const SHELL_ASSETS = Object.freeze([
   "institutional-intelligence-snapshots.js",
 ].map(name => `assets/${name}`));
 
+const common = ["site-shell.js", "site-shell.css", "site-nav.js", "site-nav.css"];
+export const REQUIRED_ASSETS = Object.freeze(Object.fromEntries(Object.entries({
+  "match_explorer.html": common,
+  "team_match.html": [...common, "public-tools.js", "public-tools.css", "team-match.css"],
+  "funded_awards.html": [...common, "public-tools.js", "public-tools.css", "institutional-intelligence-snapshots.js"],
+  "faculty_interests.html": [...common, "public-tools.css"],
+}).map(([page, names]) => [page, Object.freeze(names.map(name => `assets/${name}`))])));
+
 export async function syncPublicShellAssets({ root = new URL("../", import.meta.url), write = false } = {}) {
   const hashes = new Map(await Promise.all(SHELL_ASSETS.map(async asset => [
     asset, createHash("sha256").update(await readFile(new URL(asset, root))).digest("hex"),
@@ -23,18 +32,25 @@ export async function syncPublicShellAssets({ root = new URL("../", import.meta.
   const updates = [];
   for (const page of PUBLIC_PAGES) {
     const source = await readFile(new URL(page, root), "utf8");
-    let references = 0;
+    const $ = load(source);
+    const references = new Map();
+    $("script[src], link[rel='stylesheet'][href]").each((_, node) => {
+      const asset = ($(node).attr(node.name === "script" ? "src" : "href") || "").split(/[?#]/, 1)[0].replace(/^\.\//, "");
+      if (node.name !== (asset.endsWith(".js") ? "script" : "link")) return;
+      references.set(asset, (references.get(asset) || 0) + 1);
+    });
+    for (const asset of REQUIRED_ASSETS[page]) {
+      if (references.get(asset) !== 1) throw new Error(`${page}: requires exactly one ${asset} integration.`);
+    }
     const updated = source.replace(/\b(src|href)=(['"])([^'"]+)\2/g, (original, attr, quote, reference) => {
       const path = reference.split(/[?#]/, 1)[0];
       const asset = path.replace(/^\.\//, "");
       if (!hashes.has(asset)) return original;
-      references += 1;
       const expected = `${path}?v=${hashes.get(asset)}`;
       if (reference === expected) return original;
       changes.push({ page, asset, reference, expected });
       return `${attr}=${quote}${expected}${quote}`;
     });
-    if (!references) throw new Error(`${page}: no public shell assets found; check the shared page integration.`);
     if (updated !== source) updates.push([page, updated]);
   }
   // Read and validate the complete family before writing any page.

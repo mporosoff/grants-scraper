@@ -12,7 +12,7 @@ const ALLOWED_SUBMISSION_FIELDS = new Set([
   "base_registry_generation", "proposed_profile", "submitter", "consent",
 ]);
 const ALLOWED_PROFILE_FIELDS = new Set([
-  "display_name", "orcid_id", "home_unit", "relationship_note", "research_summary", "claims", "source_urls",
+  "display_name", "orcid_id", "home_unit", "relationship_note", "research_summary", "claims", "source_urls", "institution",
 ]);
 
 function fail(code, message, status = 400) {
@@ -37,6 +37,15 @@ function list(value, maximum, itemMaximum, label, required = false) {
     seen.add(key);
     return true;
   });
+}
+
+function institutionFields(value) {
+  if (value === undefined) return {};
+  exactFields(value, new Set(["name", "ror_id"]), "Institution");
+  const name = text(value.name, 300, "Institution name");
+  const id = text(value.ror_id, 40, "ROR identity");
+  if (id && (!name || !/^https:\/\/ror\.org\/0[a-z0-9]{8}$/.test(id))) fail("invalid_institution", "Institution ROR identity is invalid.");
+  return { institution: { name, ror_id: id } };
 }
 function urls(value, required = false) {
   return list(value, 8, 500, "Source links", required).map(item => {
@@ -89,6 +98,7 @@ export function validateSubmission(value) {
   if (!/^[a-f0-9]{64}$/.test(generation)) fail("invalid_registry_generation", "The registry generation is invalid.");
   exactFields(value.proposed_profile, ALLOWED_PROFILE_FIELDS, "Proposed profile");
   const proposed = {
+    ...institutionFields(value.proposed_profile.institution),
     display_name: text(value.proposed_profile.display_name, 120, "Researcher name", true),
     orcid_id: normalizeOrcid(value.proposed_profile.orcid_id),
     home_unit: text(value.proposed_profile.home_unit, 180, "Unit"),
@@ -117,7 +127,7 @@ export function validateSubmission(value) {
 export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds = [], reservedOrcidIds = []) {
   const allowed = new Set([
     "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship", "pool_visibility",
-    "auto_proposable", "status", "research_summary", "source_urls", "source_checked_date", "claims",
+    "auto_proposable", "status", "research_summary", "source_urls", "source_checked_date", "claims", "institution",
   ]);
   exactFields(value, allowed, "Approved profile");
   if (!RELATIONSHIPS.has(value.relationship) || !VISIBILITIES.has(value.pool_visibility) || !STATUSES.has(value.status) || typeof value.auto_proposable !== "boolean") {
@@ -172,6 +182,7 @@ export function validateAdminProfile(value, researcherId, reservedLegacyClaimIds
   }
   return {
     display_name: text(value.display_name, 120, "Display name", true), sort_name: text(value.sort_name, 140, "Sort name", true),
+    ...institutionFields(value.institution),
     aliases: list(value.aliases || [], 20, 120, "Alias"), orcid_id: orcidId,
     home_unit: text(value.home_unit, 180, "Unit", true), relationship: value.relationship,
     pool_visibility: value.pool_visibility, auto_proposable: value.auto_proposable, status: value.status,

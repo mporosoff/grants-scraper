@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Propose a correction to a Funding Finder researcher profile or nominate a researcher for administrator review.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://funding-finder-researchers.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://funding-finder-researchers.urochestercheme.workers.dev https://funding-finder-award-api.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'">
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/faculty_interests.html">
   <meta property="og:site_name" content="Funding Finder">
   <meta property="og:title" content="Update researcher profile | Funding Finder">
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c">
   <link rel="stylesheet" href="./assets/faculty-interests.css?v=researcher-flow-20260903">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cd9a00eac9820fcf0e581a30e3514737859c975a45dd3dece8c9f17e3b24a951">
-  <link rel="stylesheet" href="./assets/public-tools.css?v=a9e349c61a34458de4ce7bd00558e98ed51c15b7d8eda9730eac04f4b05e9b67">
+  <link rel="stylesheet" href="./assets/public-tools.css?v=4f194cd96620ebc84822084352b9f318d7ca9ab3d16d51b37034956b5ed42657">
 </head>
 <body>
   <a class="skip-link" href="#researcher-request-form">Skip to researcher request form</a>
@@ -74,6 +74,16 @@
         <label for="home-unit">Unit or department
           <input id="home-unit" type="text" maxlength="180" autocomplete="organization">
         </label>
+        <div class="span-2 researcher-field">
+          <label for="institution-name">Institution <span class="field-note">optional</span></label>
+          <div class="researcher-combobox">
+            <input id="institution-name" type="search" maxlength="300" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="institution-options" aria-describedby="institution-status" placeholder="Search by institution name">
+            <div class="researcher-options hidden" id="institution-options" role="listbox" aria-label="Matching institutions"></div>
+          </div>
+          <input id="institution-ror-id" type="hidden" value="">
+          <span class="field-note" id="institution-status" aria-live="polite">Optional: search ROR or enter the institution’s complete name.</span>
+          <span class="field-note">Only the institution search text goes to the same public ROR lookup used by Funded Awards. Affiliation remains subject to administrator review.</span>
+        </div>
         <label for="orcid-id"><span class="field-label">ORCID <span class="field-note">optional</span></span>
           <input id="orcid-id" type="text" maxlength="19" inputmode="text" data-orcid-input placeholder="0000-0002-1825-0097">
         </label>
@@ -109,7 +119,7 @@
       <p class="duplicate-warning" id="duplicate-warning" role="status" hidden></p>
       <section class="submission-preview" aria-labelledby="submission-preview-heading">
         <h2 id="submission-preview-heading">What will be sent</h2>
-        <p>Only the fields in this form: the selected stable profile ID, name, research summary, expertise statements, ORCID, unit, relationship note, supporting links, optional contact email, and optional note. Browser-local teams, saved researchers, imported publication text, search history, uploaded files, and API keys are not sent.</p>
+        <p>Only the fields in this form: the selected stable profile ID, name, research summary, expertise statements, ORCID, unit, optional institution name and selected ROR identity, relationship note, supporting links, optional contact email, and optional note. Browser-local teams, saved researchers, imported publication text, search history, uploaded files, and API keys are not sent.</p>
       </section>
       <label class="consent"><input id="review-consent" type="checkbox" required><span>I choose to submit these fields for administrator review. I understand that approval is not guaranteed.</span></label>
       <div class="form-actions">
@@ -143,8 +153,10 @@
   <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
   <script src="./data/researcher_directory.js?v=e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12"></script>
   <script src="./assets/orcid.js?v=orcid-format-20260903"></script>
-  <script src="./assets/team-researchers.js?v=746ef7f98652fdef45d0ac346e93a706adebd7a1f772ab972aee033b5c95c774"></script>
-  <script src="./assets/researcher-intake.js?v=phase1-20260903-3"></script>
-  <script src="./assets/faculty-interests.js?v=aae06feec1c24a84ace250285bc27b49389e7ac16e28703b2a4bca6ecf065c5b"></script>
+  <script src="./assets/team-researchers.js?v=9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e"></script>
+  <script src="./assets/researcher-intake.js?v=a3b2578e3a4efa0a8b87f9521bd5ca7f474487bf2ee2488c685c540cd5a84640"></script>
+  <script src="./assets/award-api-config.js?v=dod-browser-20260902"></script>
+  <script src="./assets/institution-picker.js?v=302ab7fde3254afa1f581baca6284824bbe79c60a609438ed683cb8b143f9ddb"></script>
+  <script src="./assets/faculty-interests.js?v=d6ae480df917e9ec3a5f73a0234a5015a6486ee4b6a4777700f56f91e3f7314c"></script>
 </body>
 </html>
