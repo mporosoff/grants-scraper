@@ -33,8 +33,8 @@ The [IARPA open R&D table](https://www.iarpa.gov/engage-with-us/open-r-d-opportu
 explicitly reported no open opportunities. This is a healthy zero, not a fetch
 failure. The adapter follows only program links in that table; it requires an
 open research solicitation status, a matching solicitation-number link and a
-current proposal date. A later administrative closing date does not revive an
-expired proposal deadline. RFI, draft, event, cancelled and closed statuses are
+current recognized proposal date. An administrative closing date never replaces
+a missing, blank, renamed or expired proposal deadline. RFI, draft, event, cancelled and closed statuses are
 excluded. IARPA's old `/engage-with-us/open-baas` route returns 404 and its
 commented-out RSS links are not active discovery routes.
 
@@ -50,7 +50,11 @@ fails closed and is visible through the existing source-health reporting.
 DARPA and IARPA records use normalized sponsor plus normalized solicitation
 number in catalog identity and cross-source merge. Agency acronyms, full names
 and office-specific agency labels resolve to the same sponsor. Whitespace,
-case and punctuation do not split a number. Distinct sponsors or distinct
+case and punctuation do not split a number, including in DARPA's discovery
+inventory and exact program blocks. In-scope rows with an unrecognized number
+format are reported as source degradation rather than a healthy zero; a
+recognized umbrella-only inventory can correctly contain no individual calls.
+Distinct sponsors or distinct
 solicitations survive even if their numbers or titles match. Grants.gov wins
 when both sources identify the same call. Other adapters keep their established
 deduplication rules.

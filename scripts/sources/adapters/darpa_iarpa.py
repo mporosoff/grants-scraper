@@ -23,7 +23,9 @@ DARPA_LIST = "https://www.darpa.mil/json/opportunity.json"
 IARPA_LIST = "https://www.iarpa.gov/engage-with-us/open-r-d-opportunities"
 DARPA = "Defense Advanced Research Projects Agency (DARPA)"
 IARPA = "Intelligence Advanced Research Projects Activity (IARPA)"
-_CHILD = re.compile(r"DARPA-PA-\d{2}-\d{2}-\d{2}", re.I)
+_CHILD = re.compile(r"darpapa(\d{2})(\d{2})(\d{2})")
+_PARENT = re.compile(r"darpapa\d{4}")
+_DARPA_SCOPE = re.compile(r"Disruption Opportunit(?:y|ies)|Quantum Benchmarking Initiative|\bQBIT?\b", re.I)
 _NUMBER = re.compile(r"[A-Z][A-Z0-9]*(?:[-\s]+[A-Z0-9]+)*\d", re.I)
 _LINK = re.compile(r'<a\b[^>]*href=[\"\']([^\"\']+)[\"\'][^>]*>(.*?)</a>', re.I | re.S)
 _NON_CALL = re.compile(
@@ -83,9 +85,23 @@ def darpa_inventory(rows):
         if not isinstance(row, dict) or not required.issubset(row):
             raise ValueError("DARPA opportunity row schema changed")
         number = plain(row["field_opportunity_number"])
-        if not _CHILD.fullmatch(number):
-            continue
         key = normalized_number(number)
+        child = _CHILD.fullmatch(key)
+        if not child:
+            if _PARENT.fullmatch(key):
+                continue  # Recognized umbrellas are a legitimate non-child population.
+            text = " ".join(plain(row.get(field)) for field in (
+                "title", "field_body_with_summary", "field_body_with_summary_1"
+            ))
+            # A nonempty inventory is not sufficient proof of a healthy zero:
+            # in-scope research rows with unknown identifiers mean parser drift.
+            if (key.startswith("darpapa") or _DARPA_SCOPE.search(text)) and not (
+                _NON_CALL.search(plain(row["title"])) or _NOT_ACCEPTING.search(text)
+            ):
+                raise ValueError(f"Unrecognized DARPA research solicitation number: {number!r}")
+            continue
+        number = "DARPA-PA-" + "-".join(child.groups())
+        row = {**row, "field_opportunity_number": number}
         prior = grouped.setdefault(key, dict(row))
         for field, value in row.items():
             if field in ("field_body_with_summary", "field_body_with_summary_1"):
@@ -110,9 +126,11 @@ def darpa_program_url(row):
 def darpa_opportunity_block(html, number):
     # Scope dates and action links to the exact child, never its PA umbrella
     # or another topic on the same program page (QBI has three blocks).
-    blocks = list(re.finditer(r"<p\b[^>]*>\s*(DARPA-PA-\d{2}-\d{2}(?:-\d{2})?)\s*</p>", html, re.I))
+    blocks = [match for match in re.finditer(r"<p\b[^>]*>(.*?)</p>", html, re.I | re.S)
+              if _CHILD.fullmatch(normalized_number(plain(match.group(1))))
+              or _PARENT.fullmatch(normalized_number(plain(match.group(1))))]
     for index, match in enumerate(blocks):
-        if normalized_number(match.group(1)) == normalized_number(number):
+        if normalized_number(plain(match.group(1))) == normalized_number(number):
             end = blocks[index + 1].start() if index + 1 < len(blocks) else len(html)
             return html[match.end():end].split("</div>", 1)[0]
     raise ValueError(f"DARPA program page has no exact solicitation block for {number}")
@@ -219,7 +237,7 @@ class DarpaIarpaAdapter(SourceAdapter):
             summary = plain(row.get("field_body_with_summary") or row.get("field_body_with_summary_1"))
             text = row["title"] + " " + summary
             if (_NON_CALL.search(row["title"]) or _NOT_ACCEPTING.search(text)
-                    or not re.search(r"Disruption Opportunity|Quantum Benchmarking Initiative|\bQBIT?\b", text, re.I)
+                    or not _DARPA_SCOPE.search(text)
                     or not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I)):
                 skipped["darpa_not_actionable_research"] += 1
                 continue
@@ -280,7 +298,9 @@ class DarpaIarpaAdapter(SourceAdapter):
             fields = iarpa_fields(html)
             if not fields:
                 raise ValueError(f"IARPA solicitation date markup missing: {row['url']}")
-            date_text = fields.get("proposal due date") or fields.get("closing date")
+            # Closing Date is administrative, not evidence that submissions
+            # remain possible. Only a recognized proposal deadline can admit.
+            date_text = fields.get("proposal due date")
             close = parsed_date(date_text)
             opened = parsed_date(fields.get("release date"))
             if not current(close, opened, as_of):

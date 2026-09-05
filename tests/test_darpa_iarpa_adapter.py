@@ -2,6 +2,7 @@
 
 from datetime import date
 import json
+import re
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
@@ -97,6 +98,37 @@ class InventoryTests(unittest.TestCase):
         data["darpa"] *= 2
         self.assertEqual(records(data), records())
 
+    def test_darpa_number_formatting_is_normalized_in_inventory_and_program_blocks(self):
+        for separator in (" ", "\u2011", ""):
+            data = payload()
+            for row in data["darpa"]:
+                row["field_opportunity_number"] = row["field_opportunity_number"].lower().replace("-", separator)
+            for url, html in data["pages"].items():
+                data["pages"][url] = re.sub(r"DARPA-PA-\d{2}-\d{2}(?:-\d{2})?", lambda m: m.group().lower().replace("-", separator), html)
+            with self.subTest(separator=separator):
+                self.assertEqual(records(data), records())
+
+    def test_unrecognized_darpa_child_numbers_degrade_instead_of_healthy_zero(self):
+        data = payload()
+        for row in data["darpa"]:
+            if len(row["field_opportunity_number"].split("-")) == 5:
+                row["field_opportunity_number"] = "DARPA-PA-FY26-UNKNOWN"
+        instance = adapter()
+        with patch.object(instance, "fetch", return_value=data):
+            live, results = collect([instance])
+        self.assertEqual(live, [])
+        self.assertFalse(results[0].ok)
+        self.assertIn("Unrecognized DARPA", results[0].error)
+
+    def test_recognized_umbrella_only_inventory_is_a_healthy_zero(self):
+        data = payload()
+        data["darpa"] = [r for r in data["darpa"] if r["field_opportunity_number"] in {"DARPA-PA-26-02", "DARPA-PA-25-07"}]
+        instance = adapter()
+        with patch.object(instance, "fetch", return_value=data):
+            live, results = collect([instance])
+        self.assertEqual(live, [])
+        self.assertTrue(results[0].ok)
+
     def test_umbrella_events_rfis_and_other_darpa_topics_are_excluded(self):
         data = payload()
         seed = next(row for row in data["darpa"] if row["field_opportunity_number"] == "DARPA-PA-25-07-06" and row["field_body_with_summary"])
@@ -165,6 +197,14 @@ class IarpaTests(unittest.TestCase):
         data = with_iarpa()
         data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("October 15, 2026", "August 15, 2026")
         self.assertTrue(all(r["agency"] != IARPA for r in records(data)))
+
+    def test_missing_blank_or_renamed_proposal_date_never_uses_administrative_closing(self):
+        for label, value in [("Proposal Due Date", ""), ("Other Date", "October 15, 2026")]:
+            data = with_iarpa()
+            html = data["pages"][IARPA_PROGRAM]
+            html = html.replace('>Proposal Due Date</h3>', f'>{label}</h3>').replace("October 15, 2026", value)
+            data["pages"][IARPA_PROGRAM] = html
+            self.assertTrue(all(r["agency"] != IARPA for r in records(data)))
 
     def test_other_solicitation_link_does_not_confirm_current_row(self):
         data = with_iarpa()
