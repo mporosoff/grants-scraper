@@ -141,7 +141,7 @@ class InventoryTests(unittest.TestCase):
 
     def test_expired_and_future_open_dates_never_admit_a_call(self):
         for original, replacement in [("Nov. 30, 2026", "Aug. 30, 2026"),
-                                      ("March 9, 2026", "December 9, 2026")]:
+                                      ("March 9, 2026", "October 9, 2026")]:
             data = payload()
             data["pages"][QBI] = data["pages"][QBI].replace(original, replacement)
             self.assertNotIn("DARPA-PA-26-02-02", [r["opportunity_number"] for r in records(data)])
@@ -188,7 +188,7 @@ class IarpaTests(unittest.TestCase):
         self.assertEqual(call["source_type"], "Federal")
 
     def test_closed_draft_rfi_and_event_status_are_not_research_calls(self):
-        for status in ["CLOSED", "DRAFT OPEN", "RFI OPEN", "Proposers' Day OPEN"]:
+        for status in ["CLOSED", "DRAFT OPEN", "RFI OPEN", "Proposers' Day OPEN", "NOT OPEN", "NOT YET OPEN", "NOT CURRENTLY OPEN", "NO LONGER OPEN"]:
             data = with_iarpa()
             data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("<br>OPEN", f"<br>{status}")
             self.assertTrue(all(r["agency"] != IARPA for r in records(data)))
@@ -255,6 +255,55 @@ class ConfirmationHealthTests(unittest.TestCase):
             row["field_body_with_summary"] = ""
             row["field_body_with_summary_1"] = ""
         self.assert_degraded(data, "scope/submission evidence")
+
+    def test_inverted_windows_degrade_for_both_sponsors(self):
+        data = payload()
+        data["pages"][QBI] = data["pages"][QBI].replace("March 9, 2026", "December 9, 2026")
+        self.assert_degraded(data, "Inverted research submission window")
+        for released, deadline in [("November 1, 2026", "October 15, 2026"), ("July 20, 2026", "July 10, 2026")]:
+            data = with_iarpa()
+            data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("August 1, 2026", released).replace("October 15, 2026", deadline)
+            self.assert_degraded(data, "Inverted research submission window")
+
+    def test_iarpa_conflicting_or_invalid_exact_actions_degrade(self):
+        for href in ["https://sam.gov/opp/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/view", "https://sam.gov/search/"]:
+            data = with_iarpa()
+            data["pages"][IARPA_PROGRAM] += f'<a href="{href}">IARPA-BAA-26-01</a>'
+            self.assert_degraded(data, "exact solicitation action")
+
+    def test_duplicate_equivalent_iarpa_actions_are_not_a_conflict(self):
+        data = with_iarpa()
+        data["pages"][IARPA_PROGRAM] += '<a href="https://sam.gov/workspace/contract/opp/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/view">IARPA-BAA-26-01</a>'
+        self.assertEqual(records(data), records(with_iarpa()))
+
+    def test_conflicting_dates_and_statuses_degrade_instead_of_selecting_by_order(self):
+        for block, message in [
+            ('<h3 class="baa_content_block-label">Proposal Due Date</h3><p class="baa_content_block-content">September 1, 2026</p>', "conflicting solicitation field"),
+            ('<p class="baa_content_status">BROAD AGENCY ANNOUNCEMENT (BAA) CLOSED</p>', "conflicting research solicitation status"),
+        ]:
+            data = with_iarpa()
+            data["pages"][IARPA_PROGRAM] += block
+            self.assert_degraded(data, message)
+        data = payload()
+        data["pages"][QBI] = data["pages"][QBI].replace("Nov. 30, 2026", "Nov. 30, 2026 Deadline: December 10, 2026")
+        self.assert_degraded(data, "submission deadline")
+
+    def test_duplicate_exact_darpa_blocks_degrade(self):
+        data = payload()
+        data["pages"][QBI] += '<p>DARPA-PA-26-02-02</p><p>Deadline: December 31, 2026</p>'
+        self.assert_degraded(data, "one exact solicitation block")
+
+    def test_iarpa_open_marker_in_unknown_context_is_not_positive_status(self):
+        data = with_iarpa()
+        data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("<br>OPEN", "<br>EXPECTED TO OPEN SOON")
+        self.assert_degraded(data, "unrecognized research solicitation status")
+
+    def test_closed_loop_research_is_not_a_closure_notice(self):
+        data = payload()
+        for row in data["darpa"]:
+            if row["field_opportunity_number"] == "DARPA-PA-25-07-04":
+                row["title"] = "Closed-loop concrete research"
+        self.assertEqual(len(records(data)), 4)
 
     def test_iarpa_missing_confirmation_paths_degrade(self):
         for old, new, message in [

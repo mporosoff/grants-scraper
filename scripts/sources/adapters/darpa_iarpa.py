@@ -34,9 +34,12 @@ _NON_CALL = re.compile(
     r"draft|forecast|presolicitation|pre-solicitation|future program)\b", re.I
 )
 _NOT_ACCEPTING = re.compile(
-    r"\b(?:cancelled|canceled|withdrawn|closed|not accepting|"
+    r"\b(?:cancelled|canceled|withdrawn|not accepting|not (?:yet |currently )?open|no longer open|"
     r"not (?:a formal )?(?:request|solicitation)|"
-    r"proposals are not (?:being )?(?:requested|accepted))\b", re.I
+    r"proposals are not (?:being )?(?:requested|accepted))\b|"
+    r"\b(?:call|solicitation|opportunity|submissions?|proposals?|submission window)\s+"
+    r"(?:(?:is|are|has been|have been)\s+)?(?:now\s+)?closed\b|"
+    r"^\s*closed(?:\s*[:\u2014\u2013]|\s+-\s+|\s*$)|\(\s*closed\s*\)", re.I
 )
 
 
@@ -63,6 +66,19 @@ def notice_url(value):
     return None
 
 
+def confirmed_notice_action(links, sponsor, number, expected_url=None):
+    """Every exact action must be valid and agree on one notice identity."""
+    links = [notice_url(link) for link in links]
+    if not links or any(not link for link in links):
+        raise ValueError(f"{sponsor} exact solicitation action missing or unsupported: {number}")
+    notice_ids = {urlparse(link).path.rstrip("/").split("/")[-2].lower() for link in links}
+    if expected_url:
+        notice_ids.add(urlparse(expected_url).path.rstrip("/").split("/")[-2].lower())
+    if len(notice_ids) != 1:
+        raise ValueError(f"{sponsor} conflicting exact solicitation action: {number}")
+    return links[0]
+
+
 def parsed_date(text):
     # DARPA uses Sept./Nov.; IARPA uses full month names.
     text = re.sub(r"\bSept\.?", "Sep", plain(text), flags=re.I)
@@ -73,6 +89,8 @@ def parsed_date(text):
 def current(close, opened, as_of):
     if not close:
         raise ValueError("Missing or unparseable research submission deadline")
+    if opened and opened > close:
+        raise ValueError("Inverted research submission window")
     if (date.fromisoformat(close) - as_of).days > 366 * 6:
         raise ValueError("Implausible research submission deadline")
     return as_of.isoformat() <= close and (not opened or opened <= as_of.isoformat())
@@ -131,16 +149,24 @@ def darpa_opportunity_block(html, number):
     blocks = [match for match in re.finditer(r"<p\b[^>]*>(.*?)</p>", html, re.I | re.S)
               if _CHILD.fullmatch(normalized_number(plain(match.group(1))))
               or _PARENT.fullmatch(normalized_number(plain(match.group(1))))]
-    for index, match in enumerate(blocks):
-        if normalized_number(plain(match.group(1))) == normalized_number(number):
-            end = blocks[index + 1].start() if index + 1 < len(blocks) else len(html)
-            return html[match.end():end].split("</div>", 1)[0]
-    raise ValueError(f"DARPA program page has no exact solicitation block for {number}")
+    selected = [(index, match) for index, match in enumerate(blocks)
+                if normalized_number(plain(match.group(1))) == normalized_number(number)]
+    if len(selected) != 1:
+        raise ValueError(f"DARPA program page must have one exact solicitation block for {number}")
+    index, match = selected[0]
+    end = blocks[index + 1].start() if index + 1 < len(blocks) else len(html)
+    return html[match.end():end].split("</div>", 1)[0]
 
 
 def labelled_date(block, label):
-    found = re.search(rf"\b{label}:\s*([A-Za-z.]+ \d{{1,2}}, \d{{4}}|\d{{4}}-\d{{2}}-\d{{2}})", plain(block), re.I)
-    return parsed_date(found.group(1)) if found else None
+    text = plain(block)
+    labels = re.findall(rf"\b{label}:", text, re.I)
+    found = re.findall(rf"\b{label}:\s*([A-Za-z.]+ \d{{1,2}}, \d{{4}}|\d{{4}}-\d{{2}}-\d{{2}})", text, re.I)
+    dates = {parsed_date(value) for value in found}
+    if labels and (len(labels) != len(found) or None in dates or len(dates) != 1):
+        field = "submission deadline" if label == "Deadline" else "publication date"
+        raise ValueError(f"DARPA {field} missing, unparseable or conflicting")
+    return next(iter(dates)) if dates else None
 
 
 def darpa_description(html, fallback):
@@ -181,10 +207,16 @@ def iarpa_inventory(html):
 
 
 def iarpa_fields(html):
-    return {plain(label).casefold(): plain(value) for label, value in re.findall(
+    fields = {}
+    for label, value in re.findall(
         r'<h3\b[^>]*class="[^"]*baa_content_block-label[^"]*"[^>]*>(.*?)</h3>\s*'
         r'<p\b[^>]*class="[^"]*baa_content_block-content[^"]*"[^>]*>(.*?)</p>', html, re.S | re.I
-    )}
+    ):
+        label, value = plain(label).casefold(), plain(value)
+        if label in fields and fields[label] != value:
+            raise ValueError(f"IARPA conflicting solicitation field: {label}")
+        fields[label] = value
+    return fields
 
 
 class DarpaIarpaAdapter(SourceAdapter):
@@ -260,16 +292,10 @@ class DarpaIarpaAdapter(SourceAdapter):
             if not current(close, opened, as_of):
                 skipped["darpa_outside_submission_window"] += 1
                 continue
-            links = [notice_url(href) for href, label in _LINK.findall(block) if re.search(r"solicitation", plain(label), re.I)]
-            if not links or any(not link for link in links):
-                raise ValueError(f"DARPA exact solicitation action missing or unsupported: {number}")
+            links = [href for href, label in _LINK.findall(block) if re.search(r"solicitation", plain(label), re.I)]
             # Both sources must identify the same notice. The public and
             # workspace SAM routes are equivalent presentations of that ID.
-            notice_ids = {urlparse(link).path.rstrip("/").split("/")[-2].lower() for link in links}
-            expected_id = urlparse(row["field_external_url"]).path.rstrip("/").split("/")[-2].lower()
-            if notice_ids != {expected_id}:
-                raise ValueError(f"DARPA conflicting exact solicitation action: {number}")
-            action = links[0]
+            action = confirmed_notice_action(links, "DARPA", number, row["field_external_url"])
             if close != row["field_close_date"]:
                 date_overrides.append({"number": number, "listing_date": row["field_close_date"], "program_date": close, "source_url": url})
             description = darpa_description(pages[url], summary)
@@ -291,22 +317,24 @@ class DarpaIarpaAdapter(SourceAdapter):
             html = pages.get(row["url"])
             if html is None:
                 raise ValueError(f"IARPA detail page missing: {row['url']}")
-            status = re.search(r'<p\b[^>]*class="[^"]*baa_content_status[^"]*"[^>]*>(.*?)</p>', html, re.I | re.S)
-            if not status:
+            statuses = {plain(value).casefold() for value in re.findall(
+                r'<p\b[^>]*class="[^"]*baa_content_status[^"]*"[^>]*>(.*?)</p>', html, re.I | re.S
+            )}
+            if not statuses:
                 raise ValueError(f"IARPA solicitation status markup missing: {row['url']}")
-            status_text = plain(status.group(1)) if status else ""
-            if _NON_CALL.search(status_text) or _NOT_ACCEPTING.search(status_text):
+            if len(statuses) != 1:
+                raise ValueError(f"IARPA conflicting research solicitation status: {row['number']}")
+            status_text = next(iter(statuses))
+            if _NON_CALL.search(status_text) or _NOT_ACCEPTING.search(status_text) or re.search(r"\bclosed\b", status_text):
                 skipped["iarpa_not_open_research"] += 1
                 continue
-            if (not re.search(r"\bOPEN\b", status_text, re.I)
-                    or not re.search(r"BROAD AGENCY ANNOUNCEMENT|research solicitation|\bBAA\b", status_text, re.I)):
+            if not re.fullmatch(r"(?:broad agency announcement(?:\s*\(baa\))?|research solicitation|baa)\s*[-:\u2013\u2014]?\s*open", status_text):
                 raise ValueError(f"IARPA unrecognized research solicitation status: {row['number']}")
             # Link identity must match the listing's solicitation, not an RFI
             # or proposers' day link elsewhere on the same program page.
-            action = next((notice_url(href) for href, label in _LINK.findall(html)
-                           if normalized_number(plain(label)) == normalized_number(row["number"]) and notice_url(href)), None)
-            if not action:
-                raise ValueError(f"IARPA exact solicitation action missing or unsupported: {row['number']}")
+            links = [href for href, label in _LINK.findall(html)
+                     if normalized_number(plain(label)) == normalized_number(row["number"])]
+            action = confirmed_notice_action(links, "IARPA", row["number"])
             fields = iarpa_fields(html)
             if not fields:
                 raise ValueError(f"IARPA solicitation date markup missing: {row['url']}")

@@ -68,9 +68,13 @@ next successful source refresh.
 Required confirmation failures are distinct from exclusions. An otherwise
 actionable child with a missing or unsupported program/solicitation route,
 missing exact action link, unrecognized status, missing/unparseable submission
-date or implausible date degrades the source. DARPA also requires its program
-block and inventory to identify the same SAM notice, allowing the public and
-workspace URL forms of that notice. Explicit non-call/closed statuses and
+date, inverted date window or conflicting confirmation degrades the source.
+All exact solicitation links must identify one valid SAM notice, allowing
+equivalent public and workspace URL forms. DARPA also requires that notice to
+match its inventory and exactly one program block to match the child number.
+Conflicting date fields or status blocks cannot be resolved by page order.
+IARPA requires an explicit open research status; "not open" variants are
+excluded. Explicit non-call/closed statuses and
 verified expired or future submission windows are normal exclusions. Missing
 proof cannot silently turn a populated research inventory into a healthy zero.
 
