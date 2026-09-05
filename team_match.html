@@ -32,10 +32,10 @@
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/faculty-pairing-180.png?v=20260815" />
 <link rel="manifest" href="./assets/icons/faculty-pairing.webmanifest?v=20260815" />
 <link rel="stylesheet" href="./assets/brand.css?v=20260812" />
-<link rel="stylesheet" href="./assets/app.css?v=62b66ed72f7271268a03ddd44158438c81b59efcb4b16f0d8d58c025375e96bd" />
+<link rel="stylesheet" href="./assets/app.css?v=d386ce5443d9a02160d9201ed0fb52d07a342bf0bedb2057af74f62c457c4a69" />
 <link rel="stylesheet" href="./assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c" />
 <link rel="stylesheet" href="./assets/team-match.css?v=98d36cb84c41b9377e9165ef9bb71c42d54990d1bbb47402349a7f3cd0824563">
-  <link rel="stylesheet" href="./assets/site-shell.css?v=6b129b2ad8b3e18616e2fb78b7425118b5eec36f12d099c1c35123d02074ae2e">
+  <link rel="stylesheet" href="./assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7">
   <link rel="stylesheet" href="./assets/public-tools.css?v=bd38620a4641cb5797c6ee30ed1ad011bdd442fc411df746d654018878e17f39">
 </head>
 <body>
@@ -516,7 +516,7 @@
     var sourceAnchors = teamOfficialActions(record).match(/<a\b[\s\S]*?<\/a>/g) || [];
     var primarySource = sourceAnchors.find(function (anchor) { return anchor.indexOf('class="source-action primary"') !== -1; }) || sourceAnchors[0] || "";
     teamCardActions.set(String(d.id), sourceAnchors.filter(function (anchor) { return anchor !== primarySource; }).join("") +
-      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '">Open in Funding Finder</a>' +
+      '<a class="source-action" href="./match_explorer.html?q=' + encodeURIComponent(opportunityNumber) + '&amp;focus=' + encodeURIComponent(d.id) + '" target="_blank" rel="noopener">Open in Funding Finder</a>' +
       '<button class="source-action" type="button" data-team-calendar="' + esc(d.id) + '"' + (closeDate ? "" : " disabled") + '>Add to calendar</button>' +
       (contactEmail ? '<a class="source-action" href="mailto:' + esc(contactEmail) + '">Program contact</a>' : ""));
     return '<article class="result-card team-result-card' + (d.broad ? " broad-card" : "") + '" data-opportunity-id="' + esc(d.id) + '" tabindex="-1">' +

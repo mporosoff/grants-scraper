@@ -13,7 +13,7 @@
     "assets/opportunity-team-panel.js": "becaf61f7a0469c9981b55a7b1c47925b40d96f92eff64d69c7615a2cade5058",
     "assets/researcher-intake.js": "1056d4eb081ab4df3be40dfe7da5fceafb87462e1fcd3b954af6bce9d359ca58",
     "assets/faculty-interests.js": "aae06feec1c24a84ace250285bc27b49389e7ac16e28703b2a4bca6ecf065c5b",
-    "assets/funded-awards.js": "64f087babb3e3b90f38da1b519059871be7d0f0c82d116ab1c37647188a086f6",
+    "assets/funded-awards.js": "0614ffd7dbb31dbd408d88a4f7b289d7e6029baa162cba712d46c6cb8c77a11b",
     "assets/funded-awards-core.js": "66d9f4e5d068b7dc4c881489cdb69504982dcd3001f5bf69a7e78d1094879169",
     "assets/institutional-intelligence-core.js": "87904d3d696d915ad2b91b3efc5efd5689a08ba821a77a4e15c11ba2541afe30",
     "assets/award-links.js": "54e9d3616353f21b8c8e89aa8b204c955af9f81877f5a084e33cd072c4456d83",
@@ -55,7 +55,7 @@
       "eligibilityLabel": "030442cdf813be9daea75055b30be76d484135697f8bc463fde2a007dee308cf",
       "descriptionHtml": "4e0c2faad8ace840bf82ed5048f95c7152e345ca3245c264d6c25a7cb2af7acf",
       "teamOfficialActions": "85e7487212f77a9e7e7acbb06dd9d351eaa65c4b9bca1940a09c1be67e2581e7",
-      "opportunityCard": "f66baa8c717f1b0e863d49460713b1d854f1e6960ef8ad6335b2cf391a7d7583",
+      "opportunityCard": "42d24288803292e2ad217dfcf583abed396eb3d839cfc1a9a987a8110bdb3b51",
       "calendarText": "daac3af9e9b34ca4040143080a8df4ff9767278add159031791fb62b4e55e5e3",
       "addTeamDeadlineToCalendar": "89f1acac9de54a5358a6bcca8560c7c4aac4c3b7c0f78966c22409b16b84c96e",
       "renderThemes": "5a2ae592c1dda19c28a3cec0f57397911033cacd14a7fedef0c1476365e0a4bd",
@@ -192,7 +192,8 @@
       "startProgramOfficerSearch": "1015a0249ee9bdaba61babc19ec1d9c0b104922d0e55ececf9e724655b0423bf",
       "changeProgramOfficerYears": "2a6d7e6e21a9f9705c7bef0063ff49b2159a75ec9d94fc5617df791b07a89d3d",
       "bindEvents": "d736d9c5c07fde66bac28a5c92dd9755dc14230b4d9df5882758e7728ef0a3c5",
-      "initialize": "d40cbd74d55fd4d9f99415293e794369fcf0e2983afb19d79cb5a6f4f6d0b876"
+      "initialize": "d40cbd74d55fd4d9f99415293e794369fcf0e2983afb19d79cb5a6f4f6d0b876",
+      "awardSortDescription": "ff891dcf1e07d876efd6ff32c67f300866b773db5dc2c3294bc6aceb231d0c5d"
     }
   },
   "dom": {

@@ -406,7 +406,7 @@ test("the integrated A-C browser release uses content-addressed keys for changed
   const helpReleaseKey = createHash("sha256").update(await readFile(new URL("assets/site-help.js", root))).digest("hex");
   const dodReleaseKey = "dod-awards-20260903";
   const dodStatusReleaseKey = "dod-awards-20260904";
-  const dodBrowserReleaseKey = "dod-browser-20260904-r2";
+  const dodBrowserReleaseKey = createHash("sha256").update(await readFile(new URL("assets/funded-awards.js", root))).digest("hex");
   const fundedAwardsStylesReleaseKey = "source-pill-20260904";
   const appJsHash = createHash("sha256").update(appJs).digest("hex");
   const appCssHash = createHash("sha256").update(appCss).digest("hex");

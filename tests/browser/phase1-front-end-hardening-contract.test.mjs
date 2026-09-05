@@ -104,6 +104,7 @@ test("FF-BUG-014 investigator drill-down clears exact-opportunity state and reco
     year_end: "2026",
     offset: 0,
     snapshot_id: "",
+    sort: "newest",
     page: 1,
     page_size: 10,
     facet_type: "all",

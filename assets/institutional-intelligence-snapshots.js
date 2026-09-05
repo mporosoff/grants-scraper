@@ -9,7 +9,7 @@
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
   if (!core || !awardProduct || !api || !credentials || !$(`institutional-intelligence`)) return;
-  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=dod-browser-20260904-r2", document.baseURI).href;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=65b8850c23e5fdf1c9ef9233faf1caa3ba831bc62f27614cb9a543c6ea26a9ee", document.baseURI).href;
 
   const state = {
     selectedInstitution: null,
@@ -723,6 +723,13 @@
     };
   }
 
+  function awardSortDescription(sort) {
+    if (sort === "title") return "Awards are ordered by title (A–Z), then newest first within each title.";
+    if (sort === "agency") return "Awards are ordered by agency (A–Z), then newest first within each agency.";
+    if (sort === "oldest") return "Oldest dated awards appear first; awards without dates appear last.";
+    return "Newest awards appear first; awards without dates appear last.";
+  }
+
   function renderPage({ focus = false } = {}) {
     const payload = state.pagePayload;
     if (!payload) return;
@@ -742,9 +749,10 @@
     const totalText = payload.completeness === "complete"
       ? `${payload.exact_total.toLocaleString()} exact matching award${payload.exact_total === 1 ? "" : "s"}`
       : `at least ${payload.at_least.toLocaleString()} matching award${payload.at_least === 1 ? "" : "s"} within the disclosed source bounds`;
-    $("ii-result-scope").textContent = officer
+    const ordering = awardSortDescription(payload.sort);
+    $("ii-result-scope").textContent = (officer
       ? `Exact ${officer.source} source-listed contact: ${officer.display_name}. Requested source award years: ${requestedYears}. This immutable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}; coverage is ${payload.coverage_state}. It expires ${new Date(payload.expires_at).toLocaleString()}.`
-      : `Search years: ${requestedYears}. Results retrieved on ${payload.as_of.slice(0, 10)} include ${totalText}. Newest awards appear first; awards without dates appear last.`;
+      : `Search years: ${requestedYears}. Results retrieved on ${payload.as_of.slice(0, 10)} include ${totalText}.`) + ` ${ordering}`;
     const years = payload.aggregate.year_start
       ? payload.aggregate.year_start === payload.aggregate.year_end ? String(payload.aggregate.year_start) : `${payload.aggregate.year_start}–${payload.aggregate.year_end}`
       : "Not listed";

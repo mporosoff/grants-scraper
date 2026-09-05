@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import vm from "node:vm";
 import test from "node:test";
 import { shellDom } from "../helpers/shell-dom.mjs";
@@ -130,4 +131,25 @@ test("award evidence navigation honors sorted positions and resets canonical evi
   assert.equal(requests[1].page, 2);
   assert.equal(requests[1].sort, "newest");
   assert.equal(requests[1].facet.type, "all");
+});
+
+test("returning browsers load the current local snapshot sorting module through both award entry points", async () => {
+  const digest = source => createHash("sha256").update(source).digest("hex");
+  const snapshot = await read("workers/award-api/src/snapshot.js");
+  const module = await read("assets/dod-awards-browser.mjs");
+  assert.ok(module.includes(`../workers/award-api/src/snapshot.js?v=${digest(snapshot)}`));
+  for (const path of ["assets/funded-awards.js", "assets/institutional-intelligence-snapshots.js"]) {
+    assert.ok((await read(path)).includes(`./assets/dod-awards-browser.mjs?v=${digest(module)}`), path);
+  }
+});
+
+test("award scope descriptions explain each selected order", async () => {
+  const source = await read("assets/institutional-intelligence-snapshots.js");
+  const context = {};
+  vm.createContext(context); vm.runInContext(fn(source, "awardSortDescription"), context);
+  assert.match(context.awardSortDescription("newest"), /^Newest/);
+  assert.match(context.awardSortDescription("oldest"), /^Oldest/);
+  assert.match(context.awardSortDescription("title"), /ordered by title/);
+  assert.match(context.awardSortDescription("agency"), /ordered by agency/);
+  assert.match(fn(source, "renderPage"), /awardSortDescription\(payload.sort\)/);
 });
