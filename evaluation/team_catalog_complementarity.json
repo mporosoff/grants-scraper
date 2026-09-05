@@ -1,0 +1,319 @@
+{
+  "version": "opportunity-teams-2",
+  "model": "claude-sonnet-5",
+  "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+  "eligible_scopes": 1551,
+  "pending_scopes": 1227,
+  "source_invalidations": [],
+  "assembly_updates": [
+    {
+      "scope_id": "363538",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "342475",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356981",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "358022",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359269",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "360893",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "360894",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "361304",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "361831",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356680",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "356935",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359666",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "361520",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "360534",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "361287",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "361186",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "356903",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362954",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357137",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "363678",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359649",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356888",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "362948",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "356530",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357186",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "363210",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356802",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356953",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "359068",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357748",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356879",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "344592:ab-0032",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0029",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0013",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0015",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "344592:ab-0075",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0043",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0038",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0039",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0066",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0076",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "344592:ab-0056",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0040",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0050",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0059",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0047",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0078",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0036",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0096",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0062",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0042",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0053",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0065",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "344592:ab-0057",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0052",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0082",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0080",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0081",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "344592:ab-0054",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357334",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357337",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357340",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-001",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-020",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "345241:tdac-baa-022",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357015",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "356874",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357003",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357002",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357308",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "357346",
+      "state": "insufficient_evidence"
+    },
+    {
+      "scope_id": "357345",
+      "state": "proposed"
+    },
+    {
+      "scope_id": "360398",
+      "state": "proposed"
+    }
+  ],
+  "coverage_before": {
+    "scopes": 73,
+    "parent_calls": 44,
+    "team_combinations": 189
+  },
+  "results": [],
+  "coverage_after": {
+    "scopes": 73,
+    "parent_calls": 44,
+    "team_combinations": 189
+  },
+  "pending_after": 1227,
+  "outcomes": {}
+}

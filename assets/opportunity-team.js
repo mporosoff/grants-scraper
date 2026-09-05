@@ -493,6 +493,13 @@
       function add(ids) {
         var selected = Array.from(new Set(ids)).filter(function (id) { return !excluded.has(id) && eligibleProfile(facultyById.get(id)); });
         if (selected.length < 2 || selected.length > 4) return;
+        if (opportunity.assembly_version) {
+          var covered = opportunity.roles.filter(function (role) { return roleIsFilled(role, new Set(selected)); });
+          if (covered.length < 2 || selected.some(function (omitted) {
+            var remaining = new Set(selected.filter(function (id) { return id !== omitted; }));
+            return covered.every(function (role) { return roleIsFilled(role, remaining); });
+          })) return;
+        }
         var signature = selected.slice().sort().join("|");
         if (seen.has(signature)) return;
         seen.add(signature);

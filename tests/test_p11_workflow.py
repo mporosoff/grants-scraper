@@ -37,7 +37,7 @@ class P11WorkflowTests(unittest.TestCase):
         job_preamble = source.split("      - name:", 1)[0]
         self.assertNotIn("ANTHROPIC_API_KEY", job_preamble)
         team = next(step for step in self.steps() if "name: Generate bounded new and changed proposed teams" in step)
-        self.assertIn("--max-scopes 10 --write", team)
+        self.assertIn("--max-scopes 60 --workers 3 --write", team)
         self.assertIn("timeout-minutes: 20", team)
         self.assertIn("continue-on-error: true", team)
         self.assertIn("secrets.ANTHROPIC_API_KEY", team)

@@ -81,6 +81,41 @@ test("scope availability grows without a fixed pilot count and rejects mismatche
   assert.throws(() => api.validateData(data), /incompatible/);
 });
 
+test("every current advertised parent reaches a usable scope in the actual catalog", async () => {
+  const context = { console };
+  vm.createContext(context);
+  for (const source of [retrievalSource, indexSource, dataSource, directorySource, teamSource]) vm.runInContext(source, context);
+  vm.runInContext(await readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"), context);
+  vm.runInContext(await readFile(new URL("../../data/subtopics.js", import.meta.url), "utf8"), context);
+  context.document = { querySelector: () => ({ getAttribute: () => context.OPPORTUNITY_TEAM_INDEX.generation_id }) };
+  context.catalog = context.GRANT_CATALOG;
+  context.OPPORTUNITY_TEAM_API = context.OpportunityTeam;
+  context.RETRIEVAL_API = context.FUNDING_RETRIEVAL;
+  context.runtimeDateIso = () => new Date().toISOString().slice(0, 10);
+  vm.runInContext(appSource.match(/  const BROAD_OPPORTUNITY_RE = [^\n]+/)[0], context);
+  for (const name of ["recordId", "recordIsCurrent", "isBroadOpportunity", "opportunityTeamScopeId", "opportunityHasAvailableTeam"]) {
+    vm.runInContext(appSource.match(new RegExp(`  function ${name}\\([^]*?\\n  }`))[0], context);
+  }
+  const engine = context.OpportunityTeam.create(context.OPPORTUNITY_TEAM_DATA);
+  const childCatalog = context.FUNDING_RETRIEVAL.createChildCatalog(context.SUBTOPIC_CATALOG);
+  const parents = new Set(context.OPPORTUNITY_TEAM_INDEX.scopes.filter(scope => scope.review_state !== "needs_revalidation").map(scope => scope.parent_id));
+  for (const parentId of parents) {
+    const index = context.catalog.opportunities.findIndex(record => String(record.opportunity_id) === parentId);
+    const record = context.catalog.opportunities[index];
+    if (!record || !context.recordIsCurrent(record)) continue;
+    assert.equal(context.opportunityHasAvailableTeam({ index }), true, parentId);
+    const scopeId = context.opportunityTeamScopeId({ index }, record);
+    const options = { record, parentId, scopeId, childCatalog, isBroad: context.isBroadOpportunity(record) };
+    const resolved = engine.resolveScope(options);
+    if (scopeId) assert.equal(resolved.ok, true, `${parentId}: ${resolved.reason}`);
+    else {
+      assert.equal(resolved.reason, "specific_scope_required", parentId);
+      assert.ok(resolved.scopes.length, parentId);
+      for (const scope of resolved.scopes) assert.equal(engine.resolveScope({ ...options, scopeId: scope.id }).ok, true, scope.id);
+    }
+  }
+});
+
 test("directory search omits inactive, departed, and hidden researchers while preserving identities", () => {
   const { api, data } = loadApi();
   api.validateData(data, data.generation_id);
@@ -116,6 +151,29 @@ test("proposed variants are distinct and never reintroduce an excluded researche
   assert.ok(engine.proposalOptions(removed).every(option => !option.state.selectedIds.includes(excluded)));
 });
 
+test("generated team alternatives keep complementary contributions after exclusions", () => {
+  const { api, data } = loadApi();
+  const engine = api.create(data);
+  const scopes = data.opportunities.filter(scope => scope.assembly_version && scope.review_state !== "needs_revalidation");
+  assert.ok(scopes.length, "the published catalog must enforce the complementary-role policy");
+  for (const scope of scopes) {
+    const initial = engine.proposal(scope);
+    for (const state of [initial, ...initial.selectedIds.map(id => engine.removeMember(initial, id))]) {
+      for (const option of engine.proposalOptions(state)) {
+        const selected = option.state.selectedIds;
+        const covering = scope.roles.filter(role => role.coverage !== "gap" && role.coverage !== "adjacent"
+          && role.candidate_ids.some(id => selected.includes(id)));
+        assert.ok(covering.length >= 2, scope.id);
+        for (const omitted of selected) {
+          assert.ok(covering.some(role => !role.candidate_ids.some(id => id !== omitted && selected.includes(id))),
+            `${scope.id}: ${omitted} must add a supported contribution`);
+        }
+        assert.ok(selected.every(id => !state.excludedIds.includes(id)));
+      }
+    }
+  }
+});
+
 test("an unsupported matched child falls back to the parent's topic selector", () => {
   const source = appSource.match(/function opportunityTeamScopeId\(match, record\) \{[\s\S]*?\n  \}/)[0];
   const context = { OPPORTUNITY_TEAM_API: { hasAvailableScope: ({scopeId}) => scopeId === "parent:supported" },
@@ -124,6 +182,17 @@ test("an unsupported matched child falls back to the parent's topic selector", (
   const match = id => ({ childDroveMatch: true, bestChild: { record: { subtopic_id: id } } });
   assert.equal(context.opportunityTeamScopeId(match("parent:unsupported"), {id: "parent"}), "");
   assert.equal(context.opportunityTeamScopeId(match("parent:supported"), {id: "parent"}), "parent:supported");
+});
+
+test("published child teams stay reachable without an umbrella phrase in the parent description", () => {
+  const source = appSource.match(/function opportunityTeamScopeId\(match, record\) \{[\s\S]*?\n  \}/)[0];
+  const context = { OPPORTUNITY_TEAM_API: { hasAvailableScope: ({parentId, scopeId}) =>
+    parentId === "child-parent" ? !scopeId || scopeId === "child-parent:topic" : scopeId === "specific" },
+    recordId: record => record.id, isBroadOpportunity: () => false };
+  vm.runInNewContext(source, context);
+  assert.equal(context.opportunityTeamScopeId({}, {id: "child-parent"}), "", "browse opens the child selector");
+  assert.equal(context.opportunityTeamScopeId({}, {id: "specific"}), "specific", "specific calls keep their direct proposal");
+  assert.equal(context.opportunityTeamScopeId({childDroveMatch: true, bestChild: {record: {subtopic_id: "child-parent:topic"}}}, {id: "child-parent"}), "child-parent:topic");
 });
 
 test("equal-coverage options start with direct experience and expose method transfer", () => {
