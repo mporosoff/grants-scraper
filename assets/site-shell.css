@@ -1,4 +1,11 @@
 /* Shared native drawer and ordinary disclosure/action-list primitives. */
+/* One typography rule for the three public hero taglines. */
+:is(.funding-search .hero-copy, .public-funding-hero) > .eyebrow {
+  margin: 0 0 5px;
+  font: 850 .72rem/1.5 InterVariable, Inter, Aptos, "Segoe UI", sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
 .shell-action-list[hidden], .workspace-badge[hidden] { display: none !important; }
 .shell-action-list {
   position: fixed;
