@@ -20,6 +20,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
       get disabled() { return $(node).attr("disabled") !== undefined; }, set disabled(value) { value ? $(node).attr("disabled", "") : $(node).removeAttr("disabled"); },
       get open() { return $(node).attr("open") !== undefined; }, set open(value) { value ? $(node).attr("open", "") : $(node).removeAttr("open"); },
       get isConnected() { return $(node).parents("html").length > 0; },
+      get parentElement() { return wrap(node.parent?.type === "tag" ? node.parent : null); },
       get clientWidth() { return 320; },
       get dataset() { return new Proxy({}, { get: (_, key) => $(node).attr(`data-${key.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)}`) }); },
       classList: { add: value => $(node).addClass(value), remove: value => $(node).removeClass(value), contains: value => $(node).hasClass(value), toggle: (value, on) => $(node).toggleClass(value, on) },

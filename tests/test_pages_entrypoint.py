@@ -461,7 +461,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             r"(?s)\.results-column\s*\{[^}]*width:\s*100%",
         )
         self.assertIn('<meta name="color-scheme" content="light">', explorer_html)
-        self.assertIn('<h1 id="page-title">Find funding in a few clear steps</h1>', explorer_html)
+        self.assertIn('<h1 id="page-title">What are you looking to fund?</h1>', explorer_html)
         self.assertNotIn("@media (prefers-color-scheme: dark)", application_css)
         self.assertRegex(application_css, r"(?s):root\s*\{[^}]*color-scheme:\s*light")
         self.assertIn("@media (forced-colors: active)", application_css)

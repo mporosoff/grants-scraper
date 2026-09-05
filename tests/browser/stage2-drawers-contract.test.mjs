@@ -39,7 +39,7 @@ function appFixture() {
 
 test("AI and team dialogs live outside results with singular controls and chevrons", () => {
   const $ = load(page);
-  assert.equal($("dialog[data-shell-drawer]").length, 3);
+  assert.equal($("dialog[data-shell-drawer]").length, 4);
   assert.equal($(".workspace #result-assistant, .workspace #team-builder, .workspace .opportunity-team-panel").length, 0);
   assert.equal($("#result-assistant #chat-form").length, 1);
   for (const id of ["provider-setup", "k-provider", "k-key", "save-key", "clear-key", "saved-status"]) assert.equal($(`[id="${id}"]`).length, 1, id);
