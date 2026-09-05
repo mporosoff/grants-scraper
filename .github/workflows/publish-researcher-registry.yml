@@ -105,7 +105,7 @@ jobs:
 
       - name: Run focused registry and browser contracts
         run: |
-          python -m unittest tests.test_researcher_registry tests.test_opportunity_team_model tests.test_pages_entrypoint
+          python -m unittest tests.test_researcher_registry tests.test_researcher_publication tests.test_opportunity_team_model tests.test_pages_entrypoint
           node tools/build_search_release_package.mjs --check
           node --test \
             tests/browser/researcher-registry-contract.test.mjs \
@@ -195,7 +195,6 @@ jobs:
         run: |
           expected="$(jq -r .registry_generation data/researcher_registry_manifest.json)"
           researcher_id="$(jq -r '.changes[0].researcher_id // empty' /tmp/researcher-dependency-report.json)"
-          display_name="$(jq -r '.approved_profile.display_name' /tmp/approved-researcher-submission.json)"
           for attempt in $(seq 1 36); do
             curl --fail --silent --show-error --max-time 15 \
               "$SITE_ROOT/data/researcher_registry_manifest.json?verify=${{ steps.merge.outputs.sha }}" \
@@ -205,17 +204,9 @@ jobs:
               curl --fail --silent --show-error --max-time 15 \
                 "$SITE_ROOT/data/researcher_directory.js?verify=${{ steps.merge.outputs.sha }}" \
                 -o /tmp/live-researcher-directory.js
-              python - "$expected" "$researcher_id" "$display_name" <<'PY'
-          import json, pathlib, sys
-          source = pathlib.Path('/tmp/live-researcher-directory.js').read_text()
-          data = json.loads(source[source.index('{'):].rstrip().rstrip(';'))
-          expected, researcher_id, display_name = sys.argv[1:]
-          assert data['registry_generation'] == expected
-          matches = [row for row in data['researchers'] if row['name'] == display_name]
-          assert researcher_id
-          matches = [row for row in matches if row['id'] == researcher_id]
-          assert len(matches) == 1
-          PY
+              python -m scripts.verify_researcher_publication \
+                --live-directory /tmp/live-researcher-directory.js \
+                --generation "$expected" --researcher-id "$researcher_id"
               echo "generation=$expected" >> "$GITHUB_OUTPUT"
               echo "verified_at=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
               exit 0
@@ -280,18 +271,18 @@ jobs:
           if [ -n "$merge_sha" ]; then
             expected="$(jq -r '.registry_generation // empty' data/researcher_registry_manifest.json 2>/dev/null || true)"
             researcher_id="$(jq -r '.changes[0].researcher_id // empty' /tmp/researcher-dependency-report.json 2>/dev/null || true)"
-            display_name="$(jq -r '.approved_profile.display_name // empty' /tmp/approved-researcher-submission.json 2>/dev/null || true)"
             for attempt in $(seq 1 36); do
               curl --fail --silent --show-error --max-time 15 \
                 "$SITE_ROOT/data/researcher_registry_manifest.json?reconcile=$merge_sha" \
                 -o /tmp/live-researcher-manifest.json || true
               live="$(jq -r '.registry_generation // empty' /tmp/live-researcher-manifest.json 2>/dev/null || true)"
-              if [ -n "$expected" ] && [ "$live" = "$expected" ] && [ -n "$researcher_id" ] && [ -n "$display_name" ]; then
+              if [ -n "$expected" ] && [ "$live" = "$expected" ] && [ -n "$researcher_id" ]; then
                 if curl --fail --silent --show-error --max-time 15 \
                     "$SITE_ROOT/data/researcher_directory.js?reconcile=$merge_sha" \
                     -o /tmp/live-researcher-directory.js \
-                  && python -c 'import json,pathlib,sys; source=pathlib.Path("/tmp/live-researcher-directory.js").read_text(); data=json.loads(source[source.index("{"):].rstrip().rstrip(";")); expected,researcher_id,display_name=sys.argv[1:]; assert data["registry_generation"] == expected; assert len([row for row in data["researchers"] if row["id"] == researcher_id and row["name"] == display_name]) == 1' \
-                    "$expected" "$researcher_id" "$display_name"; then
+                  && python -m scripts.verify_researcher_publication \
+                    --live-directory /tmp/live-researcher-directory.js \
+                    --generation "$expected" --researcher-id "$researcher_id"; then
                   verified_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
                   jq -n \
                     --argjson revision "$APPROVED_REVISION" \

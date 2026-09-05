@@ -542,6 +542,10 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(workflow, /Refuse every non-allowlisted path/);
   assert.match(workflow, /config\/researcher_registry\.json/);
   assert.match(workflow, /Mark the queue record published only after live verification/);
+  assert.equal((workflow.match(/python -m scripts\.verify_researcher_publication/g) || []).length, 2);
+  assert.doesNotMatch(workflow, /approved_profile\.display_name/);
+  assert.doesNotMatch(workflow, /\$display_name/);
+  assert.match(workflow, /--generation "\$expected" --researcher-id "\$researcher_id"/);
   assert.match(workflow, /Record the recoverable publication target before merge/);
   assert.match(workflow, /\/internal\/publications\/\$SUBMISSION_ID\/target/);
   assert.match(workflow, /Reconcile a failed publication without misreporting a merged change/);
