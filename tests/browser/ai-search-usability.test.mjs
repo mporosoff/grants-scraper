@@ -76,12 +76,18 @@ test("question retrieval finds records beyond the first page without escaping th
     "Which has a deadline after January 2027?",
     "Which awards offer over $500,000 per year?",
     "Which awards offer over USD 500,000?",
+    "Which have USD budgets?",
+    "Which have EUR amounts?",
+    "Which are due in MAY?",
+    "Which have JANUARY deadlines?",
     "Which have deadlines before JANUARY 2027?",
     "Which have deadlines before MAR 2027?",
     "Are any of these eligible for early-career investigators?",
     "Does it require an industry partner?",
     "Which of those fit heterogeneous catalysis?",
     "Compare the previous opportunities by application effort.",
+    "Show the deadlines instead.",
+    "Instead, show those amounts.",
   ]) {
     const followUp = await context.retrieveChatContext(question, [...ids].reverse(), compared);
     assert.equal(followUp.mode, "connected_follow_up", question);
@@ -108,7 +114,7 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.equal(ui.retrievalQuery("Which cannot be funded?"), ui.retrievalQuery("Which can't be funded?"));
   assert.equal(ui.isResultFollowUp("Which cannot support heterogeneous catalysis?"), false, "Normalizing negation must not discard a new scientific topic");
   const ordinaryMatcher = context.computeMatches;
-  for (const topic of ["AM", "DARE", "MIN", "MAX", "CAN", "OR", "IT", "ITS"]) {
+  for (const topic of ["AM", "DARE", "MIN", "MAX", "CAN", "OR", "IT", "ITS", "USD", "MAY"]) {
     assert.equal(ui.retrievalQuery(`Which opportunities support ${topic}?`), topic, "Topic abbreviations survive filler and fact-word filtering");
     context.computeMatches = query => { assert.equal(query, topic); return { matches: [{ index: 70 }] }; };
     const changedTopic = await context.retrieveChatContext(`Which opportunities support ${topic}?`, ids, compared);
@@ -123,7 +129,12 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.equal(ui.isResultFollowUp("Find catalysis opportunities with budgets above $500,000"), false);
   assert.equal(ui.isResultFollowUp("Which one-carbon metabolism opportunities are available?"), false);
   assert.equal(ui.retrievalQuery("What's available for heterogeneous catalysis?"), "heterogeneous catalysis");
-  for (const question of ["Instead, show other opportunities", "New search: other opportunities", "Start over"]) {
+  for (const question of [
+    "Instead, show other opportunities", "Show me other opportunities instead",
+    "Look for other opportunities instead", "Find other opportunities instead", "Search for other opportunities instead",
+    "List other options instead", "Give me different calls instead", "Recommend other programs instead",
+    "New search: other opportunities", "Start over",
+  ]) {
     for (const history of [[], compared, [...compared, { role: "assistant", resultIds: [] }]]) {
       const restart = await context.retrieveChatContext(question, ids, history);
       assert.equal(restart.mode, "needs_topic", question);

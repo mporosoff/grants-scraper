@@ -271,7 +271,8 @@
     const scopedQuestion = String(question || "")
       .replace(/\bcannot\b|\b[\p{L}]+n['’]t\b/giu, "not")
       .replace(/\b([\p{L}]+)['’](?:s|re|ve|ll|d)\b/giu, "$1")
-      .replace(/^\s*(?:please\s+)?(?:(?:new|different|another|unrelated)\s+(?:topic|search)|(?:switch|change)\s+(?:the\s+)?topics?|start\s+over)\s*[:,.;-]?\s*/i, "");
+      .replace(/^\s*(?:please\s+)?(?:(?:new|different|another|unrelated)\s+(?:topic|search)|(?:switch|change)\s+(?:the\s+)?topics?|start\s+over)\s*[:,.;-]?\s*/i, "")
+      .replace(/\b(?:other|different|new|another|more|alternative)\s+(?:funding\s+)?(?:opportunit(?:y|ies)|options?|results?|programs?|calls?|grants?|funding)\b/gi, "opportunities");
     const tokens = scopedQuestion.match(/[\p{L}\p{N}]+(?:[-/][\p{L}\p{N}]+)*/gu) || [];
     const substantive = tokens.filter(word => /^[A-Z]{2,}$/.test(word) || (!filler.has(word.toLowerCase()) && !facts.has(word.toLowerCase())));
     return substantive.join(" ").slice(0, 500);
@@ -280,7 +281,9 @@
   function isResultFollowUp(question) {
     const text = String(question || "").toLowerCase();
     // An explicit change of topic takes precedence over references to the old set.
-    if (/\b(?:new|different|another|unrelated)\s+(?:topic|search)\b|\b(?:switch|change)\s+(?:the\s+)?topics?\b|\bstart\s+over\b|\binstead(?:\s+of\s+(?:those|these|them))?[,\s]+(?:find|search|look|show)\b|\b(?:find|search)\b.*\binstead\b/.test(text)) return false;
+    const otherResults = /\b(?:other|different|new|another|more|alternative)\s+(?:funding\s+)?(?:opportunit(?:y|ies)|options?|results?|programs?|calls?|grants?|funding)\b/.test(text);
+    if (/\b(?:new|different|another|unrelated)\s+(?:topic|search)\b|\b(?:switch|change)\s+(?:the\s+)?topics?\b|\bstart\s+over\b|\binstead\s+of\s+(?:those|these|them)\b/.test(text)
+      || (otherResults && /\binstead\b/.test(text))) return false;
     if (/\b(?:those|these|them|their)\b|\b(?:this|that|previous|last|same)\s+(?:opportunit(?:y|ies)|calls?|grants?|programs?|awards?|options?|results?|set|comparison|answer)\b|\b(?:mentioned|listed|shown|discussed|compared)\s+(?:above|earlier|previously)\b/.test(text)
       || /\b(?:which|this|that|either|each)\s+one\b(?!-)|\b(?:does|is|can|will|would|could|should)\s+(?:(?:either|each|any)\s+)?one\b(?!-)/.test(text)
       || /\b(?:it|its|It|Its)\b/.test(String(question || ""))) return true;
@@ -289,9 +292,10 @@
     // Date and amount qualifiers do not turn a factual comparison into a new topic.
     const qualifiers = new Set("not must shall ought dare am has have had after before since until through between during over under below above least most than greater less more fewer minimum maximum min max up next last first earliest latest soon sooner later still already remain remaining within due close closes closing start starts starting end ends ending offer offers provide provides exceed exceeds exceeding year years month months week weeks day days annually annual per total dollars usd eur gbp thousand million billion january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
     const numericUnits = new Set("usd eur gbp january february march april may june july august september october november december jan feb mar apr jun jul aug sep sept oct nov dec".split(" "));
+    const unitContext = /\d/.test(query) || /\b(?:amounts?|budgets?|costs?|dollars?|ceilings?|floors?|due|deadlines?|dates?|months?|years?|closing|windows?|submissions?|applications?)\b/.test(text);
     return query.split(/\s+/).every(word => {
       // Uppercase topical abbreviations (for example AM or DARE) are not verbs.
-      if (/^[A-Z]{2,}$/.test(word) && !(numericUnits.has(word.toLowerCase()) && /\d/.test(query))) return false;
+      if (/^[A-Z]{2,}$/.test(word) && !(numericUnits.has(word.toLowerCase()) && unitContext)) return false;
       return qualifiers.has(word.toLowerCase()) || /^\d+(?:[-/]\d+)*(?:k|m|b)?$/i.test(word);
     });
   }
