@@ -6,9 +6,22 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   mockHybrid(page);
   await page.setViewportSize({ width: 320, height: 780 });
   await openFundingFinder(page);
+  await expect(page.locator("#open-results-chat")).toBeDisabled();
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 780 });
+    const spacing = await page.locator("#browse-all").evaluate(button => {
+      const box = button.getBoundingClientRect();
+      const panel = button.closest(".results-column").getBoundingClientRect();
+      return { horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)), vertical: Math.abs((box.top - panel.top) - (panel.bottom - box.bottom)), height: box.height };
+    });
+    expect(spacing.horizontal).toBeLessThanOrEqual(1);
+    expect(spacing.vertical).toBeLessThanOrEqual(1);
+    expect(spacing.height).toBeGreaterThanOrEqual(44);
+  }
   const title = await page.locator("#page-title").textContent();
   const before = await page.locator("#funding-search").evaluate(node => getComputedStyle(node).backgroundImage);
   await runFundingSearch(page, "catalysis");
+  await expect(page.locator("#open-results-chat")).toBeEnabled();
   await expect(page.locator("#page-title")).toHaveText(title);
   await expect(page.locator(".search-introduction")).toBeVisible();
   expect(await page.locator("#funding-search").evaluate(node => getComputedStyle(node).backgroundImage)).toBe(before);

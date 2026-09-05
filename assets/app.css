@@ -3613,8 +3613,16 @@ footer p {
 }
 
 .browse-all-button {
-  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 14px;
+  text-align: center;
 }
+
+.results-toolbar.search-not-started ~ .result-list { padding-top: 0; }
 
 .evaluation-tools {
   width: min(1240px, calc(100% - 28px));
