@@ -112,6 +112,29 @@ test("the frozen NIH example opens its exact opportunity mapping", async ({ page
   expect(awardCalls[0].criteria.opportunity_number).toBe("PAR-26-114");
 });
 
+test("a scroll queued before a card menu opens cannot dismiss its exact award action", async ({ page, context }) => {
+  await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
+  await mockFrozenFundingCatalog(context);
+  mockHybrid(page);
+  await openFundingFinder(page);
+  await runFundingSearch(page, "PAR-26-114");
+  await waitForHybridSettled(page);
+  const opener = page.locator('[data-opportunity-id="361187"] [data-card-more]');
+  await opener.evaluate(button => {
+    window.scrollTo({ top: window.scrollY + button.getBoundingClientRect().top - 300, behavior: "instant" });
+    button.click();
+  });
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  await expect(page.locator("#site-action-list")).toBeVisible();
+  await expect(page.locator("#site-action-list [data-funded-awards]")).toHaveAttribute("href", /funded_awards\.html\?opportunity=361187$/);
+  const priorScroll = await page.evaluate(() => window.scrollY);
+  expect(priorScroll).toBeGreaterThan(20);
+  await page.evaluate(() => window.scrollBy({ top: -20, behavior: "instant" }));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(priorScroll - 20);
+  await expect(page.locator("#site-action-list")).toBeHidden();
+  await expect(opener).toBeFocused();
+});
+
 test("the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim", async ({ page, context }) => {
   const { awardsPage, awardCalls } = await openFrozenAwardFromFundingFinder(page, context, "361526", "DE-FOA-0003612");
   await expect(awardsPage.locator("#selected-opportunity-heading")).toContainText("The Genesis Mission");

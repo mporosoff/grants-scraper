@@ -52,7 +52,7 @@ test("without Popover support all dismissal paths hide menus and restore the app
   dom.click("more"); dom.click("more"); closed();
   dom.click("more"); dom.click("workspace"); closed();
   dom.click("close");
-  dom.click("more"); dom.dispatch("scroll", dom.document.body); closed();
+  dom.click("more"); dom.document.body.scrollTop = 1; dom.dispatch("scroll", dom.document.body); closed();
   dom.context.SiteShell.registerMenu("card", () => [{ label: "Track", html: '<button id="watch">Alert</button>' }]);
   dom.click("card"); dom.click("watch");
   assert.equal(dom.document.activeElement.id, "card");
@@ -64,6 +64,24 @@ test("without Popover support all dismissal paths hide menus and restore the app
   await new Promise(resolve => setTimeout(resolve, 0));
   assert.equal(dom.get("site-action-list").hidden, true);
   assert.equal(dom.get("watch"), null);
+});
+test("queued pre-open scroll events do not dismiss menus, but subsequent document and ancestor movement do", () => {
+  for (const popover of [true, false]) for (const origin of ["document", "ancestor"]) {
+    const dom = fixture({ popover });
+    dom.context.scrollX = 0; dom.context.scrollY = 400;
+    const ancestor = dom.get("navigation");
+    ancestor.scrollLeft = 0; ancestor.scrollTop = 200;
+    dom.click("more");
+    const target = origin === "document" ? dom.document : ancestor;
+    dom.dispatch("scroll", target);
+    assert.equal(dom.get("actions").hidden, false, `${origin}: movement before opening is already accounted for`);
+    assert.equal(dom.document.activeElement.id, "link");
+    if (origin === "document") dom.context.scrollY += 10;
+    else ancestor.scrollLeft += 10;
+    dom.dispatch("scroll", target);
+    assert.equal(dom.get("actions").hidden, true, `${origin}: actual later movement still dismisses`);
+    assert.equal(dom.document.activeElement.id, "more");
+  }
 });
 test("drawer alert route mirrors availability and returns to exact results opener, without another submission", () => {
   const dom = fixture();

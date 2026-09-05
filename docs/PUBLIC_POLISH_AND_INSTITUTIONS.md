@@ -88,3 +88,12 @@ The first complete manual E2E attempt on `77ce7a7` was interrupted after the
 systematic stale-control failures were audited. It is diagnostic evidence, not
 passing validation. The corrected candidate receives a fresh complete manual E2E
 run and protected CI; automatic refresh continues to exclude E2E.
+
+The subsequent complete remote run exposed a real scroll-event race (106 passes,
+two exact-award-link failures): an already-completed scroll could be delivered
+after the menu-opening click. The shared owner now snapshots document and opener
+ancestor scroll positions and ignores only queued events with unchanged positions.
+Actual subsequent movement, outside interaction, action, Escape and rerender still
+dismiss the menu. Contracts cover native/fallback menus, vertical document and
+horizontal ancestor movement; a real-browser regression queues scrolling and menu
+opening in the same task and verifies both retained access and later dismissal.

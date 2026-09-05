@@ -10,7 +10,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
     if (!node) return null;
     if (wrappers.has(node)) return wrappers.get(node);
     const el = {
-      node, style: {},
+      node, style: {}, scrollLeft: 0, scrollTop: 0,
       get tagName() { return node.name?.toUpperCase(); },
       get id() { return $(node).attr("id"); }, set id(value) { $(node).attr("id", value); },
       get className() { return $(node).attr("class"); }, set className(value) { $(node).attr("class", value); },
@@ -31,7 +31,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
       querySelector: selector => wrap($(node).find(selector)[0]),
       querySelectorAll: selector => $(node).find(selector).toArray().map(wrap),
       closest: selector => wrap($(node).closest(selector)[0]),
-      contains: other => node === nodeOf(other) || $(nodeOf(other)).parents().toArray().includes(node),
+      contains: other => other !== document && (node === nodeOf(other) || $(nodeOf(other)).parents().toArray().includes(node)),
       matches: selector => {
         if (selector !== ":popover-open") return $(node).is(selector);
         if (!popover) throw new SyntaxError("Unsupported pseudo-class :popover-open");
@@ -81,7 +81,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
   };
   document.activeElement = document.body;
   const context = {
-    document, Map, WeakMap, queueMicrotask, setTimeout, innerHeight: 480,
+    document, Map, WeakMap, queueMicrotask, setTimeout, innerHeight: 480, scrollX: 0, scrollY: 0,
     addEventListener: (type, callback) => windowListeners.push({ type, callback }),
     matchMedia: () => ({ addEventListener() {} }),
     MutationObserver: class { constructor(callback) { observers.push(callback); } observe() {} },
