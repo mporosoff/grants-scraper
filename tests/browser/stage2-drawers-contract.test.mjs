@@ -186,10 +186,10 @@ function requestFixture(mode) {
     currentChatIds: () => ["one"], currentDisplayMatches: () => [{ index: 0 }],
     recordId: item => item.opportunity_id, compactRecord: item => item, compactResultRecord: item => ({ id: item.opportunity_id, title: item.title }), boundRecordPayload: item => item,
     retrieveChatContext: async () => ({ ids: ["one"], query: "fixture", mode: "local_retrieval", matches: new Map() }),
-    evidenceFacts: () => [], refinementProfileContext: () => null, boundedConversationHistory: value => value.slice(-4),
+    evidenceFacts: () => [], refinementProfileContext: () => null, boundedConversationHistory: value => value.slice(-4).map(({ role, text }) => ({ role, text })),
     setAiBusy: value => { state.ai.busy = value; }, renderChat() {}, setAiStatus() {}, recordDeploymentUsage() {}, currentModel: () => "fixture",
     applyChatFocus: () => false,
-    CHAT_UI: { resolveEvidenceLinks: value => value, knownResultIds: (ids = []) => ids.filter(id => id === "one"), evidenceExcerpt: value => String(value || "") },
+    CHAT_UI: { retrievalQuery: value => value, resultContextLabel: () => "One opportunity from the current results", resolveEvidenceLinks: value => value, knownResultIds: (ids = []) => ids.filter(id => id === "one"), evidenceExcerpt: value => String(value || "") },
     FUNDING_AI: { knownEvidenceCitations: () => [] },
     providerStructured(operation, system, json) {
       if (operation === "result_chat") assert.ok(validateOperationUser(operation, json), "the actual chat payload must satisfy the hosted provider boundary");
@@ -232,6 +232,14 @@ for (const mode of ["", "uploaded-nofo"]) {
     await retry;
     assert.equal(state.ai.messages.at(-1).text, "Public evidence");
     assert.equal(state.ai.busy, false);
+    if (!mode) {
+      assert.deepEqual([...state.ai.messages.at(-1).contextIds], ["one"]);
+      const followUp = sandbox.askResults("What are its deadlines?");
+      await new Promise(resolve => setImmediate(resolve));
+      assert.ok(requests[2].payload.conversation.every(message => !Object.hasOwn(message, "contextIds")), "Local evidence scope metadata must not leak through the provider conversation boundary");
+      requests[2].resolve({ answer: "Deadline not listed", referenced_result_ids: ["one"] });
+      await followUp;
+    }
   });
 }
 

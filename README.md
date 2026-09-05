@@ -80,7 +80,7 @@ alternative, to:
    preserving every ordinary Strong and Potential result; and
 3. ask grounded follow-up questions over up to 10 question-relevant records retrieved from the active results.
 
-“Chat with your results” is enabled after narrowing to 100 or fewer results. Each question retrieves relevant evidence across that entire filtered set using local and Voyage search before selecting at most 10 records for the answer. A factual follow-up keeps the previously referenced opportunities. Single-opportunity and uploaded-notice chat remain available independently of the general result count. The mobile composer stays within the visible viewport as the keyboard opens.
+“Chat with your results” is enabled after narrowing to 100 or fewer results. Topic questions retrieve relevant evidence across that entire filtered set using local and Voyage search before selecting at most 10 records for the answer. An initial deadline, amount, or eligibility comparison uses the first 10 results in the current order (or all results when fewer); the introduction and answer disclose that scope. Factual follow-ups preserve the previous answer’s complete evidence set, including records the model did not name, while still respecting current filters. Single-opportunity and uploaded-notice chat remain available independently of the general result count. The mobile composer stays within the visible viewport as the keyboard opens.
 
 A user can also drop or choose a NOFO, FOA, or other funding-notice PDF in the
 main search box. Funding Finder extracts page-marked text in the browser, tries

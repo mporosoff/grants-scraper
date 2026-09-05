@@ -53,6 +53,20 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.equal(fallback.mode, "local_retrieval");
   const followUp = await context.retrieveChatContext("What are their deadlines?", ids, [{ role: "assistant", resultIds: ["75", "79"] }]);
   assert.deepEqual([...followUp.ids], ["75"]);
+
+  const initial = await context.retrieveChatContext("Compare the cited award amounts and project durations.", ids, []);
+  assert.equal(initial.mode, "initial_comparison");
+  assert.deepEqual([...initial.ids], ids.slice(0, 10));
+  assert.match(ui.resultScopeSummary(ids.length, 10), /General comparisons start with the first 10 results in the current order/);
+  assert.match(ui.resultContextLabel(initial.mode, initial.ids.length, ids.length), /other 68 results are outside this comparison/);
+  const compared = [{ role: "assistant", contextIds: initial.ids, resultIds: initial.ids.slice(0, 2) }];
+  const reorderedFollowUp = await context.retrieveChatContext("What are their deadlines?", [...ids].reverse(), compared);
+  assert.equal(reorderedFollowUp.mode, "connected_follow_up");
+  assert.deepEqual([...reorderedFollowUp.ids], [...initial.ids], "Follow-ups preserve every supplied record, independently of model references and result ordering");
+  const filteredFollowUp = await context.retrieveChatContext("What are their deadlines?", ids.slice(1), compared);
+  assert.deepEqual([...filteredFollowUp.ids], [...initial.ids].slice(1), "Changed eligibility still excludes records outside the current search");
+  const small = await context.retrieveChatContext("What are their deadlines?", ids.slice(0, 8), []);
+  assert.equal(ui.resultContextLabel(small.mode, small.ids.length, 8), "Comparison of all 8 current results");
 });
 
 test("broad browsing is blocked at 101 results, while bounded and uploaded contexts remain usable", () => {
@@ -126,9 +140,11 @@ test("award evidence navigation honors sorted positions and resets canonical evi
   assert.equal(requests[0].page, 3);
   assert.equal(requests[0].sort, "title");
   context.state.facet = { type: "investigator", key: "another investigator" };
+  context.state.baseAggregate = { ordered_refs: [{ evidence_id: "NSF:example", position: 47 }] };
+  context.state.sort = "oldest";
   context.state.pagePayload.aggregate.ordered_refs = [];
   await context.focusAwardEvidence("NSF:example");
-  assert.equal(requests[1].page, 2);
+  assert.equal(requests[1].page, 2, "Stale full-scope position 47 must not override canonical evidence position 12 outside the active facet");
   assert.equal(requests[1].sort, "newest");
   assert.equal(requests[1].facet.type, "all");
 });

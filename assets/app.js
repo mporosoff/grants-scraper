@@ -4766,11 +4766,11 @@
     $("chat-summary").textContent = documentChat
       ? state.ai.summary
       : state.refinement.active && !state.ai.active
-        ? `Your question searches all ${contextIds.length.toLocaleString()} active results and selects relevant evidence for the answer.`
+        ? CHAT_UI.resultScopeSummary(contextIds.length, MAX_CHAT_RESULTS)
       : state.ai.active
       ? (state.ai.summary || `${contextIds.length} opportunities are connected to this conversation.`)
       : contextIds.length
-        ? `Your question searches all ${contextIds.length.toLocaleString()} current results before selecting relevant evidence. Your filters stay in effect.`
+        ? CHAT_UI.resultScopeSummary(contextIds.length, MAX_CHAT_RESULTS)
         : "Run a search or loosen the filters before asking about results.";
     $("chat-suggestions").classList.toggle("hidden", documentChat);
     $("chat-suggestions").innerHTML = (canChat && !documentChat ? suggestions : [])
@@ -5035,10 +5035,10 @@
     const eligible = new Set(eligibleIds);
     const query = CHAT_UI.retrievalQuery(question);
     if (state.ai.mode === "foa-focus") return { ids: eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: "focused_opportunity" };
-    const previous = [...messages].reverse().find(message => message.role === "assistant" && message.resultIds?.length);
+    const previous = [...messages].reverse().find(message => message.role === "assistant" && (message.contextIds || message.resultIds)?.length);
     if (!query) {
-      const ids = CHAT_UI.knownResultIds(previous?.resultIds, eligibleIds, MAX_CHAT_RESULTS);
-      return { ids: ids.length ? ids : eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: "connected_follow_up" };
+      const ids = CHAT_UI.knownResultIds(previous?.contextIds || previous?.resultIds, eligibleIds, MAX_CHAT_RESULTS);
+      return { ids: ids.length ? ids : eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: ids.length ? "connected_follow_up" : "initial_comparison" };
     }
     // Local and semantic retrieval both search the full eligible set, independently of page/sort.
     const local = computeMatches(query, "relevance", { context: "" }).matches
@@ -5090,7 +5090,9 @@
     $("chat-input").blur();
     renderChat();
     setAiBusy(true);
-    setAiStatus(`Searching ${eligibleIds.length.toLocaleString()} eligible opportunities for your question…`);
+    setAiStatus(CHAT_UI.retrievalQuery(cleanQuestion)
+      ? `Searching ${eligibleIds.length.toLocaleString()} eligible opportunities for your question…`
+      : "Preparing the opportunity comparison…");
     try {
       const retrieval = await retrieveChatContext(cleanQuestion, eligibleIds, requestMessages);
       if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
@@ -5135,7 +5137,7 @@
           });
         }
       }
-      const contextLabel = `${records.length} question-relevant records selected from ${eligibleIds.length} eligible results`;
+      const contextLabel = CHAT_UI.resultContextLabel(retrieval.mode, records.length, eligibleIds.length);
       setAiStatus(`Reviewing evidence from ${records.length} opportunities…`);
       const answer = await providerStructured(
         "result_chat",
@@ -5150,7 +5152,7 @@
         }),
       );
       if (state.ai.messages !== requestMessages || state.ai.mode !== requestMode || state.ordinarySearchSignature !== requestSearch) return;
-      let note = `Selected ${records.length} records from ${eligibleIds.length.toLocaleString()} eligible results.${retrieval.mode === "local_retrieval" ? " Semantic retrieval was unavailable; local matching was used." : ""}`;
+      let note = `${contextLabel}.${retrieval.mode === "local_retrieval" ? " Semantic retrieval was unavailable; local matching was used." : ""}`;
       const requestedFocusIds = CHAT_UI.knownResultIds(
         answer.focus_result_ids || answer.keep_ids,
         contextIds,
@@ -5166,6 +5168,7 @@
         role: "assistant",
         text: CHAT_UI.resolveEvidenceLinks(answer.answer || "The supplied records do not establish an answer.", [...allowedCitations.values()]),
         note,
+        contextIds: [...answerContextIds],
         resultIds: CHAT_UI.knownResultIds(
           answer.referenced_result_ids,
           answerContextIds,

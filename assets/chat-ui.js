@@ -295,10 +295,27 @@
     });
   }
 
+  function resultScopeSummary(count, limit) {
+    const first = Math.min(count, limit);
+    const comparison = count > limit ? `the first ${first} results in the current order` : `all ${count} results`;
+    return `Topic questions search all ${count.toLocaleString()} results and select up to ${limit}. General comparisons start with ${comparison}; follow-ups keep the previous answer’s records.`;
+  }
+
+  function resultContextLabel(mode, count, total) {
+    if (mode === "initial_comparison") return count < total
+      ? `Comparison of the first ${count} of ${total} results in the current order; the other ${total - count} results are outside this comparison`
+      : `Comparison of all ${total} current results`;
+    if (mode === "connected_follow_up") return `Comparison of ${count} opportunities from the previous answer, within ${total} currently eligible results`;
+    if (mode === "focused_opportunity") return "Single connected opportunity";
+    return `${count} question-relevant records selected from ${total} eligible results`;
+  }
+
   globalThis.FUNDING_CHAT_UI = Object.freeze({
     retrievalQuery,
     evidenceExcerpt,
     resolveEvidenceLinks,
+    resultScopeSummary,
+    resultContextLabel,
     renderRichText,
     knownResultIds,
     focusActionLabel,
