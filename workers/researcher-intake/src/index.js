@@ -481,19 +481,17 @@ const ADMIN_HTML = `<!doctype html>
   <section id="queue-view" aria-labelledby="queue-title">
     <section class="panel" aria-labelledby="catalog-title">
       <h2 id="catalog-title">Manage researcher catalog</h2>
-      <p>Remove a retired, departed, or inactive researcher from active matching and proposed teams. Their stable identity and research history remain available.</p>
+      <p>Remove a researcher from active matching and proposed teams. Their stable identity and research history remain available.</p>
       <form id="catalog-removal">
         <label for="catalog-search">Find a researcher</label>
         <input id="catalog-search" type="search" placeholder="Search by name or department" autocomplete="off">
         <label for="catalog-researcher">Researcher</label>
         <select id="catalog-researcher" required size="6" aria-describedby="catalog-selection"><option value="">Loading catalog…</option></select>
         <p id="catalog-selection" class="muted" aria-live="polite">Choose a researcher to prepare a removal.</p>
-        <label for="catalog-action">Reason for removal</label>
-        <select id="catalog-action"><option value="retired">Retired</option><option value="departed">Left institution</option><option value="inactive">Inactive</option></select>
-        <label for="catalog-reason">Administrator note</label>
-        <input id="catalog-reason" required maxlength="440" autocomplete="off" placeholder="For example, retired at the end of the academic year">
+        <label for="catalog-reason">Administrator note (optional)</label>
+        <input id="catalog-reason" maxlength="440" autocomplete="off">
         <p>The next screen shows the change for review. Removal takes effect after the approved publication completes.</p>
-        <button id="catalog-submit" type="submit" disabled>Review removal</button>
+        <button id="catalog-submit" type="submit" disabled>Remove researcher</button>
         <p id="catalog-status" role="alert"></p>
       </form>
     </section>
@@ -601,7 +599,7 @@ const ADMIN_JS = `(() => {
     external_collaborator: "External collaborator", reference_only_researcher: "Reference-only researcher",
     department: "Department", institution: "Institution", approved_collaborator: "Approved collaborator",
     reference_only: "Reference only", hidden: "Hidden", active: "Active", inactive: "Inactive", departed: "Departed",
-    catalog_removal: "Catalog removal", retired: "Retired",
+    catalog_removal: "Catalog removal", remove_researcher: "Remove researcher",
   };
   function label(value) { return labels[value] || String(value || "").replace(/_/g, " "); }
   function formatTime(value) {
@@ -717,7 +715,7 @@ const ADMIN_JS = `(() => {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           researcher_id: catalogResearcher.value, base_registry_generation: catalog.registry_generation,
-          action: document.getElementById("catalog-action").value, reason: document.getElementById("catalog-reason").value.trim(),
+          action: "remove_researcher", reason: document.getElementById("catalog-reason").value.trim(),
           idempotency_key: catalogRequestKey,
         }),
       });
@@ -815,7 +813,7 @@ const ADMIN_JS = `(() => {
     outcome.hidden = true;
     detail.hidden = false;
     hero.hidden = true;
-    document.getElementById("detail-kicker").textContent = active.catalog_action ? "Catalog removal · " + label(active.catalog_action) : label(active.submission_type);
+    document.getElementById("detail-kicker").textContent = active.catalog_action ? "Remove researcher" : label(active.submission_type);
     document.getElementById("detail-title").textContent = active.proposed_profile.display_name;
     document.getElementById("detail-meta").textContent = "Submitted " + formatTime(active.created_at) + " · " + active.submission_id;
     const state = document.getElementById("detail-state");
@@ -1003,7 +1001,7 @@ export function createHandler({ storeFactory = env => new ResearcherSubmissionSt
         const person = directory.researchers.find(row => row.id === removal.researcher_id);
         if (!person) fail("not_found", "Researcher not found in the current catalog.", 404);
         if (person.status !== "active" && person.pool_visibility === "hidden" && !person.auto_proposable) fail("already_removed", "This researcher is already removed from the active catalog.", 409);
-        const reason = "Catalog removal (" + removal.action + "): " + removal.reason;
+        const reason = removal.reason || "Remove researcher from the active catalog.";
         const checkPending = async () => {
           if (await store.activeCatalogRemoval(person.id)) fail("catalog_removal_pending", "This researcher already has a removal request. Open it in the review queue.", 409);
         };

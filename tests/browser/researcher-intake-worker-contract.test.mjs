@@ -896,7 +896,7 @@ async function catalogHarness() {
       Origin: "https://worker.example", ...headers }, ...(body ? { body: JSON.stringify(body) } : {}),
   }), env);
   const removal = (overrides = {}) => ({ researcher_id: person.id, base_registry_generation: directory.registry_generation,
-    action: "retired", reason: "Retired this academic year", idempotency_key: crypto.randomUUID(), ...overrides });
+    action: "remove_researcher", reason: "", idempotency_key: crypto.randomUUID(), ...overrides });
   return { database, store, person, directory, dispatches, request, removal, env, fetchImpl };
 }
 
@@ -913,7 +913,7 @@ test("admin catalog removal preserves evidence, requires approval, and publishes
     assert.equal(result.state, "pending");
     const path = "/admin/api/submissions/" + result.submission_id;
     const detail = await (await h.request(path)).json();
-    assert.equal(detail.catalog_action, "retired");
+    assert.equal(detail.catalog_action, "remove_researcher");
     assert.equal(detail.approved_profile.status, "inactive");
     assert.equal(detail.approved_profile.pool_visibility, "hidden");
     assert.equal(detail.approved_profile.auto_proposable, false);
@@ -923,7 +923,7 @@ test("admin catalog removal preserves evidence, requires approval, and publishes
     assert.deepEqual(detail.material_effect.affected_matches, ["call-1"]);
     assert.equal(detail.material_effect.classification, "catalog_removal");
     assert.equal(detail.transitions[0].actor, "admin@example.edu");
-    assert.match(detail.transitions[0].reason, /retired/);
+    assert.match(detail.transitions[0].reason, /Remove researcher/);
     assert.equal(h.dispatches.length, 0);
     const premature = await h.request(path + "/action", { action: "approve", expected_revision: 1, approved_profile: detail.approved_profile });
     assert.equal(premature.status, 409);
@@ -956,7 +956,7 @@ test("admin catalog rejects unauthorized, cross-origin, stale, unknown, invalid,
     assert.equal((await h.request("/admin/api/catalog", h.removal(), { Origin: "https://evil.example" })).status, 403);
     assert.equal((await h.request("/admin/api/catalog", h.removal({ base_registry_generation: "c".repeat(64) }))).status, 409);
     assert.equal((await h.request("/admin/api/catalog", h.removal({ researcher_id: "urh-999999" }))).status, 404);
-    assert.equal((await h.request("/admin/api/catalog", h.removal({ reason: "" }))).status, 400);
+    assert.equal((await h.request("/admin/api/catalog", h.removal({ reason: "x".repeat(501) }))).status, 400);
     assert.equal((await h.request("/admin/api/catalog", h.removal({ action: "delete" }))).status, 400);
     assert.equal((await h.request("/admin/api/catalog", h.removal({ approved_profile: {} }))).status, 400);
     const body = h.removal();
@@ -964,7 +964,7 @@ test("admin catalog rejects unauthorized, cross-origin, stale, unknown, invalid,
     assert.deepEqual(responses.map(row => row.status).sort(), [200, 201]);
     const results = await Promise.all(responses.map(row => row.json()));
     assert.equal(results[0].submission_id, results[1].submission_id);
-    assert.equal((await h.request("/admin/api/catalog", { ...body, action: "departed" })).status, 409);
+    assert.equal((await h.request("/admin/api/catalog", { ...body, reason: "Different note" })).status, 409);
     assert.equal((await h.request("/admin/api/catalog", h.removal())).status, 409);
     assert.equal(h.database.prepare("SELECT COUNT(*) AS n FROM researcher_submissions").get().n, 1);
     assert.equal(h.dispatches.length, 0);
@@ -974,7 +974,7 @@ test("admin catalog rejects unauthorized, cross-origin, stale, unknown, invalid,
 test("removal intent survives a registry rebase without reviving or rewriting research claims", async () => {
   const h = await catalogHarness();
   try {
-    const created = await (await h.request("/admin/api/catalog", h.removal({ action: "departed" }))).json();
+    const created = await (await h.request("/admin/api/catalog", h.removal())).json();
     const path = "/admin/api/submissions/" + created.submission_id;
     const oldDetail = await (await h.request(path)).json();
     h.directory.registry_generation = "d".repeat(64);
@@ -985,8 +985,8 @@ test("removal intent survives a registry rebase without reviving or rewriting re
     const rebased = await h.request(path + "/action", { action: "rebase", expected_revision: 1 });
     assert.equal(rebased.status, 200);
     const detail = await (await h.request(path)).json();
-    assert.equal(detail.catalog_action, "departed");
-    assert.equal(detail.approved_profile.status, "departed");
+    assert.equal(detail.catalog_action, "remove_researcher");
+    assert.equal(detail.approved_profile.status, "inactive");
     assert.equal(detail.current_profile.claims[0].label, "Updated current research");
     assert.equal(detail.current_profile.claims[0].revision, 3);
     assert.equal(detail.material_effect.changed_claims, 0);
@@ -999,17 +999,18 @@ test("all current catalog profiles can be removed without inventing evidence or 
   const source = await readFile(new URL("data/researcher_directory.js", root), "utf8");
   const directory = JSON.parse(source.slice(source.indexOf("{")).trim().replace(/;$/, ""));
   for (const person of directory.researchers) {
-    for (const action of ["retired", "departed", "inactive"]) {
+    for (const action of ["remove_researcher"]) {
       const profile = catalogRemovalProfile(person, action);
       assert.doesNotThrow(() => validateCatalogRemovalApproval(person, action, profile), person.name);
       assert.deepEqual(Object.keys(profile).sort(), ["auto_proposable", "pool_visibility", "status"]);
-      assert.equal(profile.status, action === "departed" ? "departed" : "inactive");
+      assert.equal(profile.status, "inactive");
     }
   }
-  assert.throws(() => validateSubmission({ ...submission(), catalog_action: "retired" }), /unsupported fields/);
+  assert.throws(() => validateSubmission({ ...submission(), catalog_action: "remove_researcher" }), /unsupported fields/);
   assert.throws(() => validateCatalogRemoval(null), /invalid/);
   const dom = loadHtml(ADMIN_HTML);
   assert.equal(dom("#catalog-removal").length, 1);
-  assert.deepEqual(dom("#catalog-action option").map((_, el) => dom(el).attr("value")).get(), ["retired", "departed", "inactive"]);
-  assert.equal(dom("#catalog-submit").text(), "Review removal");
+  assert.equal(dom("#catalog-action").length, 0);
+  assert.equal(dom("#catalog-reason").attr("required"), undefined);
+  assert.equal(dom("#catalog-submit").text(), "Remove researcher");
 });

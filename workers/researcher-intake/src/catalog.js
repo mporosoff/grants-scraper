@@ -1,6 +1,6 @@
 import { fail } from "./contract.js";
 
-const REMOVAL_ACTIONS = new Set(["retired", "departed", "inactive"]);
+const REMOVAL_ACTIONS = new Set(["remove_researcher"]);
 
 export function validateCatalogRemoval(value) {
   const fields = new Set(["researcher_id", "base_registry_generation", "action", "reason", "idempotency_key"]);
@@ -11,10 +11,10 @@ export function validateCatalogRemoval(value) {
       || !/^[a-f0-9]{64}$/.test(value.base_registry_generation || "")
       || !REMOVAL_ACTIONS.has(value.action)
       || !/^[a-zA-Z0-9-]{16,80}$/.test(value.idempotency_key || "")) {
-    fail("invalid_catalog_removal", "Choose a current researcher and a valid removal reason.");
+    fail("invalid_catalog_removal", "Choose a current researcher to remove.");
   }
   const reason = typeof value.reason === "string" ? value.reason.trim() : "";
-  if (!reason || reason.length > 500) fail("reason_required", "Enter an administrator note of up to 500 characters.");
+  if (reason.length > 500) fail("invalid_note", "An optional administrator note must be no more than 500 characters.");
   return { ...value, reason };
 }
 
@@ -23,7 +23,7 @@ export function catalogRemovalProfile(current, action) {
   // Publish only eligibility fields. Public projections intentionally omit some
   // claim metadata, which must remain untouched in the canonical registry.
   return {
-    status: action === "departed" ? "departed" : "inactive",
+    status: "inactive",
     pool_visibility: "hidden",
     auto_proposable: false,
   };
