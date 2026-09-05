@@ -101,10 +101,11 @@ test("Team Match supports directory, browser-only, team-size, history, and mobil
   expect(priorScroll).toBeGreaterThan(0);
   await page.goto("/match_explorer.html?gate4-team-history=1");
   await page.goBack();
+  await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
+  await page.locator("#edit-team").click();
   await expect(page.getByRole("button", { name: `Remove ${firstLabel} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: `Remove ${second.label} from team` })).toBeVisible();
   await expect(page.getByRole("button", { name: "Remove Gate Four Researcher from team", exact: true })).toBeVisible();
-  await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 }).toBeGreaterThan(0);
   const handoffTokens = navigationUrls.map(url => new URL(url).searchParams.get("handoff")).filter(Boolean);
   expect(handoffTokens).toHaveLength(4);
   expect(handoffTokens.every(token => /^[a-f0-9]{32}$/.test(token))).toBe(true);

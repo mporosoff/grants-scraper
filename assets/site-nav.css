@@ -867,6 +867,19 @@ html.help-open {
   }
 }
 
+/* Funding Finder has a catalog indicator and Workspace in addition to Help.
+   Reserve their space at both the phone and direct-navigation breakpoints. */
+@media (max-width: 800px), (min-width: 1221px) and (max-width: 1440px) {
+  .site-header.funding-header .brand > span:last-child { display: none; }
+}
+@media (min-width: 541px) and (max-width: 700px) {
+  .funding-header .catalog-pill { min-width: 105px; max-width: 118px; padding: 7px 10px; gap: 7px; font-size: .7rem; }
+  .funding-header .catalog-pill-copy { display: grid; gap: 2px; line-height: 1.05; }
+  .funding-header .catalog-pill-copy strong { font-size: .72rem; }
+  .funding-header .catalog-pill-copy small { font-size: .61rem; }
+  .funding-header .catalog-pill-copy small::before { content: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-nav a,
   .site-nav button,

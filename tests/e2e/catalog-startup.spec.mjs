@@ -1,3 +1,4 @@
+import { openFundingRefine, closeFundingRefine } from "./public-tool-workflow.mjs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
@@ -220,10 +221,11 @@ test("two rapid searches share one catalog execution and initialization, then pr
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("carbon capture");
-  await page.locator("#profile-builder > summary").click();
+  await openFundingRefine(page, "profile-builder");
   await page.locator("#research-profile").fill("Catalysis and carbon dioxide conversion");
-  await page.locator("#filter-panel > summary").click();
+  await openFundingRefine(page, "filter-panel");
   await page.locator("#status-forecasted").uncheck();
+  await closeFundingRefine(page);
   await page.evaluate(() => {
     const form = document.querySelector("#search-form");
     form.requestSubmit();
@@ -273,6 +275,7 @@ test("two rapid searches share one catalog execution and initialization, then pr
   expect(calls.rerank).toHaveLength(1);
   expect(errors).toEqual([]);
   await page.locator("#query").fill("membrane separation");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect(page.locator("#results .result-card").first()).toBeVisible();
   await expect.poll(() => calls.embed.length).toBe(2);
@@ -308,11 +311,12 @@ test("catalog failure preserves entered and saved state and retry completes the 
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("hydrogen catalysis");
-  await page.locator("#profile-builder > summary").click();
+  await openFundingRefine(page, "profile-builder");
   await page.locator("#research-profile").fill("Electrochemical reaction engineering");
-  await page.locator("#filter-panel > summary").click();
+  await openFundingRefine(page, "filter-panel");
   await page.getByText("Deadline and award", { exact: true }).click();
   await page.locator("#deadline-from").fill("2026-09-01");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect(page.locator("#catalog-error")).toBeVisible();
   await expect(page.locator("#catalog-error")).toContainText(/could not be downloaded|could not be prepared/i);
@@ -386,11 +390,12 @@ test("timed-out catalog ownership quarantines stale execution across failed and 
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("hydrogen catalysis timeout");
-  await page.locator("#profile-builder > summary").click();
+  await openFundingRefine(page, "profile-builder");
   await page.locator("#research-profile").fill("Electrochemical reaction engineering");
-  await page.locator("#filter-panel > summary").click();
+  await openFundingRefine(page, "filter-panel");
   await page.getByText("Deadline and award", { exact: true }).click();
   await page.locator("#deadline-from").fill("2026-09-01");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect.poll(() => catalogRequests).toBe(1);
   await expect(page.locator("#search-status")).toHaveText("Preparing funding catalog…");
@@ -533,8 +538,9 @@ test("a stalled topic sidecar fails initialization cleanly and a fresh bounded r
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("carbon capture sidecar timeout");
-  await page.locator("#profile-builder > summary").click();
+  await openFundingRefine(page, "profile-builder");
   await page.locator("#research-profile").fill("Catalysis and carbon dioxide conversion");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect.poll(() => sidecarUrls.length).toBe(1);
   await expect.poll(() => (
@@ -615,6 +621,7 @@ test("a healthy catalog may complete after 15 seconds and both asset timers stil
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("membrane separation");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect.poll(() => page.evaluate(() => (
     globalThis.__FUNDING_FINDER_SCRIPT_CLOCK.pending()
@@ -677,6 +684,7 @@ test("retry refreshes stale startup metadata after a catalog generation changes"
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("carbon capture");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect(page.locator("#catalog-error")).toBeVisible();
   expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
@@ -726,6 +734,7 @@ test("catalog validation derives its release version from loaded pipeline timest
   });
   await openFundingFinderShell(page);
   await page.locator("#query").fill("membrane separation");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect(page.locator("#catalog-error")).toBeVisible();
   expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({
@@ -776,6 +785,7 @@ test("catalog validation preserves same-second pipeline timestamp precision", as
     globalThis.GRANT_CATALOG_METADATA.pipeline_generated_at
   ));
   await page.locator("#query").fill("hydrogen catalysis");
+  await closeFundingRefine(page);
   await page.locator("#find-funding").click();
   await expect(page.locator("#catalog-error")).toBeVisible();
   expect(await page.evaluate(() => globalThis.FUNDING_CATALOG_LOADER.getSnapshot())).toMatchObject({

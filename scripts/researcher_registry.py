@@ -141,6 +141,15 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
         _require_text(researcher.get("display_name"), f"{researcher_id}.display_name", 120)
         _require_text(researcher.get("sort_name"), f"{researcher_id}.sort_name", 140)
         _require_text(researcher.get("home_unit"), f"{researcher_id}.home_unit", 180)
+        if "institution" in researcher:
+            institution = researcher["institution"]
+            if not isinstance(institution, dict) or set(institution) != {"name", "ror_id"}:
+                raise ValueError(f"{researcher_id}.institution is invalid")
+            name, ror_id = institution["name"], institution["ror_id"]
+            if not isinstance(name, str) or len(name) > 300 or not isinstance(ror_id, str):
+                raise ValueError(f"{researcher_id}.institution is invalid")
+            if ror_id and (not name.strip() or not re.fullmatch(r"https://ror\.org/0[a-z0-9]{8}", ror_id)):
+                raise ValueError(f"{researcher_id}.institution ROR identity is invalid")
         summary = str(researcher.get("research_summary") or "")
         if len(summary) > 1200:
             raise ValueError(f"{researcher_id}.research_summary is too long")
@@ -274,6 +283,7 @@ def directory_projection(registry: dict) -> dict:
             "sort_name": row["sort_name"],
             "aliases": row["aliases"],
             "home_unit": row["home_unit"],
+            **({"institution": copy.deepcopy(row["institution"])} if "institution" in row else {}),
             "relationship": row["relationship"],
             "pool_visibility": row["pool_visibility"],
             "auto_proposable": row["auto_proposable"],
@@ -644,7 +654,7 @@ def apply_approved_submission(
     permitted = {
         "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
         "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
-        "source_checked_date", "claims",
+        "source_checked_date", "claims", "institution",
     }
     unexpected = set(proposed) - permitted
     if unexpected:

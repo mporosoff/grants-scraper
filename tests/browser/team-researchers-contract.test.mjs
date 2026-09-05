@@ -13,6 +13,7 @@ const [
   facultyInterestsPage,
   catalogSource,
   facultyMatchesSource,
+  teamStyles,
 ] = await Promise.all([
   readFile(new URL("../../assets/search-query.js", import.meta.url), "utf8"),
   readFile(new URL("../../assets/search-retrieval.js", import.meta.url), "utf8"),
@@ -22,6 +23,7 @@ const [
   readFile(new URL("../../faculty_interests.html", import.meta.url), "utf8"),
   readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"),
   readFile(new URL("../../data/faculty_matches.js", import.meta.url), "utf8"),
+  readFile(new URL("../../assets/team-match.css", import.meta.url), "utf8"),
 ]);
 
 function assignmentJson(source) {
@@ -244,9 +246,9 @@ test("supports repeated selection, browser removal, and the four-person maximum"
   assert.match(teamPage, /addButton\.hidden = selected\.length >= MAX/);
   assert.match(teamPage, /selected = selected\.filter\(function \(member\) \{ return member !== key; \}\)/);
   assert.match(teamPage, /TEAM_API\.save\(externalStorage, nextProfiles\)/);
-  assert.match(teamPage, /\.pi-entry\{display:inline-flex;flex:0 1 260px/);
-  assert.match(teamPage, /\.selected-terms\{display:grid;grid-template-columns:repeat\(auto-fit,minmax\(260px,1fr\)\)/);
-  assert.match(teamPage, /\.st-card\{min-width:0;max-width:100%/);
+  assert.match(teamStyles, /\.pi-entry\{display:inline-flex;flex:0 1 260px/);
+  assert.match(teamStyles, /\.selected-terms\{display:grid;grid-template-columns:repeat\(auto-fit,minmax\(260px,1fr\)\)/);
+  assert.match(teamStyles, /\.st-card\{min-width:0;max-width:100%/);
   assert.doesNotMatch(teamPage, /ORCID_API|INTAKE_API|openExternalEditor/);
 });
 
@@ -654,8 +656,8 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.match(teamPage, /new or substantively updated in the last 14 days/);
   assert.match(teamPage, /Opportunities matching the full selected team · ordered by relevance and recency/);
   assert.doesNotMatch(teamPage, /new or substantively updated in the last 14 days · ordered/);
-  assert.match(teamPage, /\.count\{[^}]*font-weight:750/);
-  assert.match(teamPage, /\.count:empty\{display:none;\}/);
+  assert.match(teamStyles, /\.count\{[^}]*font-weight:750/);
+  assert.match(teamStyles, /\.count:empty\{display:none;\}/);
   assert.match(teamPage, /&amp;focus=/);
   assert.match(teamPage, /target="_blank" rel="noopener">Open in Funding Finder/);
   assert.doesNotMatch(teamPage, /Internal tool/);

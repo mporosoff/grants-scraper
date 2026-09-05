@@ -21,8 +21,8 @@ function api() {
   return sandbox.FUNDING_RESEARCHER_INTAKE;
 }
 
-test("Configure Faculty Interests discloses separate reviewed and browser-only paths", () => {
-  assert.match(page, /Configure Faculty Interests/);
+test("Update researcher profile discloses separate reviewed and browser-only paths", () => {
+  assert.match(page, /Update researcher profile/);
   assert.match(page, /shared pool\. <strong>Submitting does not publish a change\.<\/strong> The current profile/);
   assert.doesNotMatch(page, /class="notice"/);
   assert.match(page, /Add a missing researcher/);

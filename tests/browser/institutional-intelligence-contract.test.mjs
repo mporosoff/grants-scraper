@@ -405,7 +405,7 @@ test("snapshot URLs and replacement results have one committed owner", () => {
   assert.ok(prepareIndex > -1 && commitIndex > prepareIndex);
   assert.doesNotMatch(runSearchSource, /state\.(?:submitted|snapshot|pagePayload|aggregate|residentAwards)\s*=/);
   assert.match(runSearchSource, /commitSnapshotResult\(staged, \{ historyMode, focus: false, departureHistoryState \}\)/);
-  assert.match(runSearchSource, /if \(focusResults\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
+  assert.match(runSearchSource, /if \(focusResults && !globalThis.PublicTools\?\.awardAiOpen\(\)\) requestAnimationFrame\([\s\S]*ii-output-heading[\s\S]*scrollIntoView\(\{ block: "start" \}\)/);
 
   const commitSource = appSource.slice(appSource.indexOf("function commitSnapshotResult("), appSource.indexOf("async function fetchPage("));
   for (const field of ["submitted", "snapshot", "pagePayload", "aggregate", "residentAwards", "sourceOffsets", "question"])
@@ -566,7 +566,7 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(appSource, /setSearchActivity\(true, sequence\)[\s\S]*try \{[\s\S]*setSearchActivity\(false, sequence\)[\s\S]*setBusy\(false\)/);
   assert.match(appSource, /source\.error\?\.code === "source_timeout"[\s\S]*source\.source}: timed out/);
   assert.doesNotMatch(page, /Funded Award Intelligence/);
-  assert.match(page, /aria-labelledby="ii-heading"[\s\S]*<h2 id="ii-heading">Find funded projects/);
+  assert.match(page, /aria-labelledby="ii-heading"[\s\S]*<h2 id="ii-heading">Search funded awards/);
   assert.match(page, /id="award-search-form"[^>]*hidden/);
   assert.match(page, /id="ii-program-officer"/);
   assert.doesNotMatch(page, /Structured award search and institution resolution do not require an AI key/);
@@ -587,7 +587,8 @@ test("the feature is Funded Awards-only, responsive, accessible, no-key capable,
   assert.match(page, /id="ii-card-pagination"[\s\S]*>Previous<[\s\S]*id="ii-card-page-numbers"[\s\S]*>Next</);
   assert.match(page, /id="ii-page-size"[\s\S]*value="10"[\s\S]*value="25"[\s\S]*value="50"/);
   assert.doesNotMatch(page + styles, /ii-shell-heading/);
-  assert.ok(page.indexOf('id="ii-ask"') < page.indexOf('id="ii-output"'));
+  assert.match(page, /id="open-awards-ai"[^>]*aria-controls="awards-ai"/);
+  assert.match(page, /<dialog id="awards-ai"[\s\S]*id="ii-ask"[\s\S]*id="ii-question-answer"/);
   assert.doesNotMatch(fundingPage, /id="institutional-intelligence"|assets\/institutional-intelligence-snapshots\.js/);
   assert.doesNotMatch(teamPage, /institutional-intelligence|Institutional Intelligence/);
   assert.match(styles, /@media \(max-width: 520px\)/);

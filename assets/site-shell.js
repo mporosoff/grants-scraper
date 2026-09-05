@@ -50,6 +50,9 @@
     const topEdge = viewport?.offsetTop || 0;
     const gap = 8;
     menu.style.maxWidth = `${Math.max(0, width - 2 * gap)}px`;
+    // Pinch zoom can make the visual viewport narrower than the CSS minimum.
+    // Constrain both bounds so the minimum cannot override the maximum.
+    menu.style.minWidth = `min(15rem, ${Math.max(0, width - 2 * gap)}px)`;
     menu.style.maxHeight = `${Math.max(0, height - 2 * gap)}px`;
     const anchor = opener.getBoundingClientRect();
     const box = menu.getBoundingClientRect();
@@ -95,7 +98,13 @@
     menu.hidden = false;
     menu.setAttribute("popover", "manual");
     menu.setAttribute("aria-label", opener.getAttribute("aria-label") || "More actions");
-    activeMenu = { opener, menu };
+    // A browser can deliver a scroll queued before the click after this menu
+    // opens. Only subsequent movement should dismiss the newly opened menu.
+    const scrollPositions = new Map([[document, [globalThis.scrollX, globalThis.scrollY]]]);
+    for (let node = opener.parentElement; node; node = node.parentElement) {
+      scrollPositions.set(node, [node.scrollLeft, node.scrollTop]);
+    }
+    activeMenu = { opener, menu, scrollPositions };
     opener.setAttribute("aria-expanded", "true");
     menu.showPopover?.();
     positionMenu();
@@ -200,7 +209,12 @@
   globalThis.visualViewport?.addEventListener("resize", positionMenu);
   globalThis.visualViewport?.addEventListener("scroll", positionMenu);
   document.addEventListener("scroll", event => {
-    if (activeMenu && !activeMenu.menu.contains(event.target)) closeMenu();
+    if (!activeMenu || activeMenu.menu.contains(event.target)) return;
+    const prior = activeMenu.scrollPositions.get(event.target);
+    const current = event.target === document
+      ? [globalThis.scrollX, globalThis.scrollY] : [event.target.scrollLeft, event.target.scrollTop];
+    if (prior && prior[0] === current[0] && prior[1] === current[1]) return;
+    closeMenu();
   }, true);
   const observer = new MutationObserver(() => {
     if (activeMenu && !activeMenu.opener.isConnected) closeMenu({ restoreFocus: false });

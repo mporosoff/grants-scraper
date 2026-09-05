@@ -4044,11 +4044,6 @@ footer p {
 .search-refine-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
 .search-refine-actions > button { min-height: 44px; }
 .funding-search [hidden] { display: none !important; }
-.funding-search.has-results { padding-top: 18px; padding-bottom: 16px; background: #edf2fb; color: var(--navy); }
-.funding-search.has-results::after, .funding-search.has-results .hero-copy > .eyebrow,
-.funding-search.has-results .search-introduction, .funding-search.has-results .search-guidance { display: none; }
-.funding-search.has-results h1 { margin-bottom: 10px; font-size: 1rem; letter-spacing: 0; }
-.funding-search.has-results .search-workflow { padding: 0; overflow: visible; border: 0; background: transparent; }
 .results-toolbar.results-empty .toolbar-controls { display: none; }
 .results-toolbar [hidden] { display: none !important; }
 .initial-empty-state { min-height: 0; padding: 0; border: 0; background: transparent; }
@@ -4082,9 +4077,7 @@ footer p {
   .refine-search-drawer .range-grid { grid-template-columns: minmax(0, 1fr); }
   .refine-search-drawer .panel-heading { flex-wrap: wrap; }
   .refine-search-footer .button { width: 100%; }
-  .funding-search.has-results { padding-top: 12px; padding-bottom: 12px; }
   .funding-search .search-workflow { padding: 10px; }
-  .funding-search.has-results .search-workflow { padding: 0; }
 }
 @media (forced-colors: active) {
   .funding-search.has-results, .refine-search-drawer .refine-ai { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
@@ -4126,7 +4119,10 @@ footer p {
 .document-chat .nofo-match-record { grid-template-columns: minmax(0, 1fr); }
 .document-chat .nofo-context-heading { flex-direction: column; }
 .document-chat .nofo-context-tools, .document-chat .nofo-match-actions { justify-content: flex-start; }
-.team-builder-drawer .opportunity-team-panel { margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+.team-builder-drawer .opportunity-team-panel { margin: 0; border: 0; border-radius: 0; box-shadow: none; min-width: 0; overflow-wrap: anywhere; }
+.team-builder-drawer :is(.opportunity-team-heading, .opportunity-team-member-title, .opportunity-team-role > div) > * { min-width: 0; max-width: 100%; }
+.team-builder-drawer :is(.badge, .opportunity-team-role-state) { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.team-builder-drawer .opportunity-team-heading h4:focus-visible { outline-offset: 2px; }
 .team-builder-drawer .opportunity-team-body { min-width: 0; overflow-wrap: anywhere; }
 .team-builder-drawer .opportunity-team-remove { flex-shrink: 0; }
 .team-builder-drawer .opportunity-team-replacement select { max-width: 100%; }
@@ -4145,6 +4141,7 @@ footer p {
   .result-assistant .chat-result-actions { justify-content: flex-start; }
   .result-assistant .nofo-context-heading { flex-direction: column; }
   .team-builder-drawer .opportunity-team-status { flex-wrap: wrap; }
+  .team-builder-drawer .opportunity-team-member-title { flex-wrap: wrap; }
 }
 
 

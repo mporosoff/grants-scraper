@@ -375,6 +375,7 @@
       ? "Hosted AI first receives only the question and locked public source, contact, and year scope through Funding Finder's protected Cloudflare service. Deterministic code searches the complete immutable snapshot, then may send at most 24 highest-ranked public award records or excerpts for cited synthesis. A selected personal provider receives the same bounded payload directly. Neither path receives the full snapshot, profiles, CVs, ORCID or faculty data, uploaded notices, saved notes, alerts, unrelated chat, or provider keys. Deterministic snapshot membership, totals, completeness, eligibility, ranking, and award IDs remain authoritative."
       : "Hosted AI receives the question, selected public institution, visible filters, bounded answer intent, and a bounded set of returned public award fields or abstract excerpts through Funding Finder's protected Cloudflare service. A selected personal provider receives the same bounded payload directly. Neither path receives profiles, CVs, ORCID publication text, uploaded documents, saved notes, pursuit state, alert data, unrelated chat, or provider keys. Validated NSF, NIH, DOE, and DoD award records, not model pretraining, remain authoritative.";
     refreshProvider();
+    globalThis.PublicTools?.syncAwardForm();
   }
 
   function hasSearchState(value) {
@@ -769,8 +770,9 @@
     renderPagination();
     renderSourceStatus();
     renderQuestionAnswer();
-    if (focus) requestAnimationFrame(() => {
-      const first = $("ii-awards").querySelector(".ii-award-card");
+    if (focus && !globalThis.PublicTools?.awardAiOpen()) requestAnimationFrame(() => {
+      globalThis.PublicTools?.showAwardProjects();
+      const first = $("ii-awards").querySelector(".ii-award-card") || $("ii-output-heading");
       first?.focus({ preventScroll: true });
       first?.scrollIntoView({ block: "start" });
     });
@@ -1098,7 +1100,8 @@
       setStatus(exact
         ? `${snapshot.exact_total.toLocaleString()} matching award${snapshot.exact_total === 1 ? "" : "s"} found across all selected sources.`
         : `At least ${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} found in the available source results.`);
-      if (focusResults) requestAnimationFrame(() => {
+      if (focusResults && !globalThis.PublicTools?.awardAiOpen()) requestAnimationFrame(() => {
+        globalThis.PublicTools?.showAwardProjects();
         const heading = $("ii-output-heading");
         heading?.focus({ preventScroll: true });
         heading?.scrollIntoView({ block: "start" });
@@ -1718,6 +1721,7 @@
     }
     requestAnimationFrame(() => {
       const card = $(evidenceDomId(evidenceId));
+      if (card) globalThis.PublicTools?.showAwardProjects({ closeAi: true });
       card?.focus({ preventScroll: true });
       card?.scrollIntoView({ block: "start" });
     });
@@ -1872,6 +1876,7 @@
   }
 
   function resetResultState() {
+    globalThis.PublicTools?.resetAwardViews();
     state.snapshot = null;
     state.localSnapshot = null;
     state.clientSnapshotOverlay = null;
@@ -2085,6 +2090,7 @@
     $("k-provider")?.addEventListener("change", () => setTimeout(refreshProvider, 0));
     window.addEventListener("popstate", async event => {
       const restoredViewState = latestHistoryViewState(event.state);
+      globalThis.PublicTools?.showAwardProjects({ closeAi: true });
       clearTimeout(state.historyStateTimer);
       state.historyStateTimer = 0;
       state.historyStatePending = false;
@@ -2115,7 +2121,10 @@
       } finally {
         setBusy(false);
         requestAnimationFrame(() => {
-          if (restoredViewState.focusId) $(restoredViewState.focusId)?.focus({ preventScroll: true });
+          if (restoredViewState.focusId) {
+            if (globalThis.PublicTools) globalThis.PublicTools.restoreAwardFocus(restoredViewState.focusId);
+            else $(restoredViewState.focusId)?.focus({ preventScroll: true });
+          }
           if (Number.isFinite(restoredViewState.scrollY)) window.scrollTo({ top: restoredViewState.scrollY });
           state.historyRestoreDepth = Math.max(0, state.historyRestoreDepth - 1);
           scheduleCurrentHistoryViewState();

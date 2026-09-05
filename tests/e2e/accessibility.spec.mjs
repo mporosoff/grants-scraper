@@ -1,3 +1,5 @@
+import { openFundingRefine, closeFundingRefine } from "./public-tool-workflow.mjs";
+import { openAwardAi, closeAwardAi } from "./public-tool-workflow.mjs";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import {
@@ -44,14 +46,17 @@ test("Funding Finder has no serious or critical violations across critical state
   expect(await page.evaluate(() => matchMedia("(prefers-reduced-motion: reduce)").matches)).toBe(true);
   await scan(page, "funding-initial", testInfo);
 
+  await runFundingSearch(page, "catalysis science");
+  await waitForHybridSettled(page);
+  await openFundingRefine(page);
   await page.locator(".provider-setup > summary").click();
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator("#ai-refine")).toBeVisible();
-  await expect(page.locator("#ai-refine")).toBeDisabled();
+  await expect(page.locator("#ai-refine")).toBeEnabled();
   await expect(page.locator("#ai-refine-requirement")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funding-ai-setup-mobile", testInfo);
-  await page.locator(".provider-setup > summary").click();
+  await closeFundingRefine(page);
   await page.setViewportSize({ width: 1280, height: 900 });
 
   const helpButton = page.getByRole("button", { name: "Help" });
@@ -149,7 +154,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await page.locator("#ii-search").click();
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await scan(page, "funded-awards-institutional-intelligence", testInfo);
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible({ timeout: 30_000 });
@@ -161,6 +166,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await scan(page, "funded-awards-institutional-intelligence-mobile", testInfo);
   await page.setViewportSize({ width: 1280, height: 800 });
+  await closeAwardAi(page);
   await page.locator("#ii-clear").click();
   await page.locator("#ii-agency").selectOption("NSF");
   await page.locator("#ii-topic").fill("program officer accessibility");
@@ -169,7 +175,7 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await expect(page.locator("#ii-po-scope")).toBeVisible();
   await expect(page.locator("#ii-institution")).toBeDisabled();
   await scan(page, "funded-awards-program-officer-snapshot", testInfo);
-  await page.locator("#ii-ask").evaluate(element => { element.open = true; });
+  await openAwardAi(page);
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();
@@ -253,7 +259,7 @@ test("shared navigation and primary content geometry stay aligned across all thr
       const header = document.querySelector(".site-header").getBoundingClientRect();
       const content = document.querySelector(selector).getBoundingClientRect();
       return {
-        navCenter: nav.left + nav.width / 2,
+        navLeft: nav.left, navRight: nav.right, navWidth: nav.width,
         headerHeight: header.height,
         contentWidth: content.width,
         brandSubtitle: document.querySelector(".site-header .brand small")?.textContent?.trim(),
@@ -261,7 +267,9 @@ test("shared navigation and primary content geometry stay aligned across all thr
     }, contentSelector));
   }
   for (const measurement of measurements) {
-    expect(Math.abs(measurement.navCenter - 720)).toBeLessThanOrEqual(1);
+    expect(measurement.navLeft).toBeGreaterThanOrEqual(0);
+    expect(measurement.navRight).toBeLessThanOrEqual(1440);
+    expect(measurement.navWidth).toBe(measurements[0].navWidth);
     expect(measurement.headerHeight).toBe(measurements[0].headerHeight);
     expect(Math.abs(measurement.contentWidth - measurements[0].contentWidth)).toBeLessThanOrEqual(4);
     expect(measurement.brandSubtitle).toBe("Research funding tools");

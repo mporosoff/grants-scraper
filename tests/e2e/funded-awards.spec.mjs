@@ -6,6 +6,7 @@ import {
   mockHybrid,
   openFundingFinder,
   runFundingSearch,
+  waitForHybridSettled,
 } from "./helpers.mjs";
 
 // Snapshot-native standalone coverage lives in unit-b-funded-awards.spec.mjs.
@@ -18,10 +19,12 @@ async function openFrozenAwardFromFundingFinder(page, context, opportunityId, qu
   const awardCalls = mockAwards(context);
   await openFundingFinder(page);
   await runFundingSearch(page, query);
+  await waitForHybridSettled(page);
 
   const card = page.locator(`[data-opportunity-id="${opportunityId}"]`);
   await expect(card).toBeVisible();
-  const link = card.locator("[data-funded-awards]");
+  await card.locator('[data-shell-menu="card"]').click();
+  const link = page.locator("#site-action-list [data-funded-awards]");
   await expect(link).toHaveAttribute("href", new RegExp(`funded_awards\\.html\\?opportunity=${opportunityId}$`));
   await expect(link).toHaveAttribute("target", "_blank");
   await expect(link).toHaveAttribute("rel", "noopener");
@@ -107,6 +110,29 @@ test("the frozen NIH example opens its exact opportunity mapping", async ({ page
   await expect.poll(() => awardCalls.length).toBe(1);
   expect(awardCalls[0].sources).toEqual(["NIH"]);
   expect(awardCalls[0].criteria.opportunity_number).toBe("PAR-26-114");
+});
+
+test("a scroll queued before a card menu opens cannot dismiss its exact award action", async ({ page, context }) => {
+  await page.clock.setFixedTime(new Date("2026-09-01T12:00:00Z"));
+  await mockFrozenFundingCatalog(context);
+  mockHybrid(page);
+  await openFundingFinder(page);
+  await runFundingSearch(page, "PAR-26-114");
+  await waitForHybridSettled(page);
+  const opener = page.locator('[data-opportunity-id="361187"] [data-card-more]');
+  await opener.evaluate(button => {
+    window.scrollTo({ top: window.scrollY + button.getBoundingClientRect().top - 300, behavior: "instant" });
+    button.click();
+  });
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  await expect(page.locator("#site-action-list")).toBeVisible();
+  await expect(page.locator("#site-action-list [data-funded-awards]")).toHaveAttribute("href", /funded_awards\.html\?opportunity=361187$/);
+  const priorScroll = await page.evaluate(() => window.scrollY);
+  expect(priorScroll).toBeGreaterThan(20);
+  await page.evaluate(() => window.scrollBy({ top: -20, behavior: "instant" }));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(priorScroll - 20);
+  await expect(page.locator("#site-action-list")).toBeHidden();
+  await expect(opener).toBeFocused();
 });
 
 test("the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim", async ({ page, context }) => {

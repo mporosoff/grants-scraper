@@ -93,6 +93,8 @@ html.shell-drawer-open { overflow: hidden; overscroll-behavior: none; }
   .workspace-drawer { width: 100vw; border: 0; }
   .workspace-drawer-body, .workspace-drawer-header { padding: 16px; }
   .workspace-drawer :is(input, select, textarea) { font-size: 16px; }
+}
+@media (max-width: 700px) {
   .workspace-trigger { width: 38px; min-width: 38px; padding: 0; justify-content: center; }
   .workspace-trigger-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
   .workspace-badge { position: absolute; top: -6px; right: -5px; }
