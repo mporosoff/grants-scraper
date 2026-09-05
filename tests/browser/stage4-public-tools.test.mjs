@@ -255,10 +255,26 @@ test("Advanced award filters reveal native invalid fields and restored criteria 
 
 test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owners remain byte identical", async () => {
   const boundedChanges = new Set(["assets/app.js", "assets/team-researchers.js", "assets/researcher-intake.js", "assets/faculty-interests.js"]);
-  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path)) assert.equal(hash(await readFile(new URL(`../../${path}`, import.meta.url))), expected, path);
+  // These are versioned data, not algorithm owners. Legitimate catalog refresh
+  // and reviewed registry publication must be able to replace them. Their exact
+  // current bindings are checked by the release, registry and team contracts.
+  const generatedSources = new Set([
+    "data/faculty_matches.js", "data/researcher_directory.js",
+    "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
+    "data/opportunity_teams.js", "config/researcher_registry.json",
+  ]);
+  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(await readFile(new URL(`../../${path}`, import.meta.url))), expected, path);
+});
+
+test("The release schema and model contract stay fixed while generated content identities can refresh", async () => {
   const release = JSON.parse(await read("data/search-v2-release.json"));
   delete release.source_hashes;
-  assert.deepEqual(release, baseline.searchRelease, "Search corpus, vector, generation and allowlist contracts are unchanged");
+  assert.deepEqual(Object.keys(release).sort(), Object.keys(baseline.searchRelease).sort());
+  for (const key of ["schema_version", "model", "dimension", "atomic_publication_contract"]) {
+    assert.equal(release[key], baseline.searchRelease[key], key);
+  }
+  // Content hashes, generation time and passage count must match the current
+  // package, never a historical redesign snapshot (search-release-package-contract).
 });
 
 test("All Team Match and award controller functions outside the bounded presentation hooks remain identical", () => {

@@ -18,6 +18,7 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   await page.locator("#filter-team-ready").click();
   await page.locator("[data-opportunity-team]").first().click();
   await expect(page.locator("#team-builder")).toBeVisible();
+  await expect(page.locator("#team-builder .opportunity-team-member").first()).toBeVisible({ timeout: 30_000 });
   for (const width of [320, 390]) for (const size of [16, 24]) {
     await page.setViewportSize({ width, height: 780 });
     await page.evaluate(size => document.documentElement.style.setProperty("font-size", `${size}px`, "important"), size);
