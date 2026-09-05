@@ -24,7 +24,7 @@
     "assets/site-nav.js": "6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
     "assets/site-nav.css": "c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
     "assets/public-tools.js": "1bfe9d1871a1ac91a9937a557fe6b43d1593cba74e0c09faacc712c57f8d3068",
-    "assets/public-tools.css": "60651c318daa94eee89cf6b993febe024726c6123d12cb54238813cb59a345d9",
+    "assets/public-tools.css": "7c3a9c5718cf984979cc271fed4f18c28324b4b8ee73f7be744cd19de65fbdd7",
     "assets/team-match.css": "76f0877d11cf15c13a65c499a0cd423b5ea251695b133e505b8db479d9f286db",
     "assets/catalog-loader.js": "c8054ebe60f55ac37c973073ff2d8570c9bfbc95701626586426ea2fca2b4fb8",
     "assets/result-workflow.js": "e1c58fa107457f8d8e8a4d1bcd2bc6a43e57a06b46b5d4b2806a41e08e877460",
@@ -42,7 +42,7 @@
     "data/researcher_directory.js": "3889ec91790eb3d846c6f67e51320494037c430fed61e73dc1113c7bd414ba45",
     "data/researcher_registry_manifest.json": "f723cee58659bf98483edef6cd983b928e9446add176e8ef4ac396b33b9aff31",
     "match_explorer.html": "df1a7dfde69d3dfe4f9cc5fb5542b907e87dff204c9a0ea3677f716897113786",
-    "team_match.html": "b570ea80ef699d1e05a913d7960c6795a9f9bfd609f1f291843358742979e267",
+    "team_match.html": "b0da91ef2c8e6fc1d3b5903a00d87d2a17a19411ebfeae3b2c33c5790284b803",
     "workers/search-voyage-proxy/src/index.js": "63e50c32bc23bd8c83441431c84d64d001c523c4f9c324eaee6f6de9ffb8d16d",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
