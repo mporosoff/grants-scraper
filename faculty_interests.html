@@ -7,14 +7,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://funding-finder-researchers.urochestercheme.workers.dev http://localhost:* http://127.0.0.1:*; base-uri 'none'; form-action 'none'">
   <link rel="canonical" href="https://mporosoff.github.io/grants-scraper/faculty_interests.html">
   <meta property="og:site_name" content="Funding Finder">
-  <meta property="og:title" content="Configure Faculty Interests | Funding Finder">
+  <meta property="og:title" content="Update researcher profile | Funding Finder">
   <meta property="og:description" content="Propose researcher-profile corrections and broader-pool nominations for administrator review.">
-  <title>Configure Faculty Interests | Funding Finder</title>
+  <title>Update researcher profile | Funding Finder</title>
   <link rel="icon" type="image/svg+xml" href="./assets/icons/funding-finder.svg?v=20260812">
   <link rel="stylesheet" href="./assets/brand.css?v=20260812">
   <link rel="stylesheet" href="./assets/site-nav.css?v=542297108fb69a73ecb2aab8ececb66b0347d5915936bb21e061871065ae177c">
   <link rel="stylesheet" href="./assets/faculty-interests.css?v=researcher-flow-20260903">
   <link rel="stylesheet" href="./assets/site-shell.css?v=cf5dee497c6bd7bcd414f24c5a87274726e73a6098f963b145c33aef7f5fa4dc">
+  <link rel="stylesheet" href="./assets/public-tools.css?v=a9e349c61a34458de4ce7bd00558e98ed51c15b7d8eda9730eac04f4b05e9b67">
 </head>
 <body>
   <a class="skip-link" href="#researcher-request-form">Skip to researcher request form</a>
@@ -35,16 +36,17 @@
           </div>
         </div>
       </nav>
+      <button class="site-help-button" type="button" data-help-open aria-haspopup="dialog" aria-controls="help-guide"><span aria-hidden="true">?</span><span class="site-help-label">Help</span></button>
       <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
         <span class="nav-toggle-lines" aria-hidden="true"></span>
       </button>
     </div>
   </header>
 
-  <main class="interests-main">
-    <section class="interests-hero" aria-labelledby="page-title">
+  <main class="interests-main public-main">
+    <section class="interests-hero public-page-header" aria-labelledby="page-title">
       <p class="eyebrow">Researcher directory</p>
-      <h1 id="page-title">Configure Faculty Interests</h1>
+      <h1 id="page-title">Update researcher profile</h1>
       <p>Propose a correction to a published profile or add a missing internal or external researcher to the shared pool. <strong>Submitting does not publish a change.</strong> The current profile remains active until an administrator approves the request and the validated deployment succeeds.</p>
     </section>
 
@@ -138,6 +140,7 @@
 
   <script src="./assets/site-shell.js?v=7f63f3be997b62f36042378a3e2f637a474cd50cab307d83bf5d2dc32b96ff70"></script>
   <script src="./assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
+  <script src="./assets/site-help.js?v=dod-awards-20260903"></script>
   <script src="./data/researcher_directory.js?v=e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12"></script>
   <script src="./assets/orcid.js?v=orcid-format-20260903"></script>
   <script src="./assets/team-researchers.js?v=746ef7f98652fdef45d0ac346e93a706adebd7a1f772ab972aee033b5c95c774"></script>

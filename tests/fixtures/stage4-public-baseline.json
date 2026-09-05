@@ -1,0 +1,738 @@
+{
+  "protected_main": "b9cb5b714b1ee9d5fccd83368dc8ecb8e4951177",
+  "files": {
+    "assets/app.js": "ffbedb8f27bd03e1d1c632df555288dd1d3060c713351113b6b25347fda69adc",
+    "assets/profile.js": "a6fb187e3d8d6d497c46121b365d2c6f62a7a54b3e1272de8041c55e9ee9424a",
+    "assets/chat-ui.js": "a7d24a8e92653d58632aeb9de2e2c5200997963357853d3baa33c5d2b4f4e5eb",
+    "assets/alerts.js": "2e32c8b8529be4c71cd6531ecd75265665ff0f5381fee3c633c0acff0d86bb2d",
+    "assets/review.js": "713791acd3ffc605d4fd64517ee9cb23b88cd9cac67d384d107fe7f7a8c561eb",
+    "assets/team-researchers.js": "746ef7f98652fdef45d0ac346e93a706adebd7a1f772ab972aee033b5c95c774",
+    "assets/team-matcher.js": "d0eab9f806cfb4e552e8f130f36c662d265bb1214c73d0ccb2d0a5d0e62b6efc",
+    "assets/team-hybrid.js": "e4160d2e0b4e2502e8a0ccfde009fcd27fa50047311d06c3b97926883b57610b",
+    "assets/opportunity-team.js": "292760bf31de3b556e82421ef554d15a47efeb49173ce293b86fba3f015b3bb1",
+    "assets/opportunity-team-panel.js": "ec1c1f36f615f21ed3641332a93f30d7451d2bec9d236c4ab7d3c98952f82282",
+    "assets/researcher-intake.js": "1056d4eb081ab4df3be40dfe7da5fceafb87462e1fcd3b954af6bce9d359ca58",
+    "assets/faculty-interests.js": "aae06feec1c24a84ace250285bc27b49389e7ac16e28703b2a4bca6ecf065c5b",
+    "assets/funded-awards.js": "64f087babb3e3b90f38da1b519059871be7d0f0c82d116ab1c37647188a086f6",
+    "assets/funded-awards-core.js": "66d9f4e5d068b7dc4c881489cdb69504982dcd3001f5bf69a7e78d1094879169",
+    "assets/institutional-intelligence-core.js": "98fb65a05104f94e81d0a70fd32ef4816be36ff34680a8b2920572f357ff9fba",
+    "assets/award-links.js": "54e9d3616353f21b8c8e89aa8b204c955af9f81877f5a084e33cd072c4456d83",
+    "assets/ai-provider.js": "6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+    "data/faculty_matches.js": "a2d3173f6d43b72bb091a3f71ee6a9b0ef5a7bd287a44607c4ec5e8ceede42b1",
+    "data/researcher_directory.js": "3889ec91790eb3d846c6f67e51320494037c430fed61e73dc1113c7bd414ba45",
+    "data/researcher_registry_manifest.json": "f723cee58659bf98483edef6cd983b928e9446add176e8ef4ac396b33b9aff31",
+    "data/opportunity_team_index.js": "a54f9aef5216faa1e161372593af05357f7d43372f5cec760d01e521a2d3527c",
+    "data/opportunity_teams.js": "c1565c72119be7bd2861a91168ece6fd3dfb11b1c3cf1acf0a2800a24d53331d",
+    "config/researcher_registry.json": "66788fcc053fe18801e84562a6a585beae1389687b73196abb15901f0b9d95fa"
+  },
+  "functions": {
+    "team_match.html": {
+      "idleTeamHybridState": "ca12c758c053fde8cfb6edf0173a962e313d21138575fe0d57b6930ef20a3efb",
+      "esc": "95bbc1f264af17cfbba49e27c59493c28e0f89b5b1df068e5e8e4dcd2f171890",
+      "last": "bae564e11631429e47203481a68b1ec97d147e5a695e780d166c7a21dedfcb39",
+      "foldedName": "93486d74fab7c048220d8c73bed2a7f2efd2d2a6041813a251f53d6fa3db6997",
+      "directoryFacultyKey": "cedfb9efab5a3cf6b3f889f7b9d56aff6a70bd5bc725f14c45ae486b1ecfcafc",
+      "externalKey": "549f2122b00244b6031f1fc4a8c32b94a9206aaaa5ff053e3a5092ea2d3c6f1b",
+      "isExternalKey": "3eb3a9b606b9f95b062a88da9872c6cfefb29095a43aba1459cb1aa6e63e09e8",
+      "externalId": "0e96253670889a7b945fe049f99db1bc6d11b063cbf758972a7a94ea95e53465",
+      "externalProfile": "9faf61f9acbbb3b16d4ea1e8bc1c25e9ecf6d4355bc0fb4b0c6d2d88d394744c",
+      "memberName": "8f0bc11ff470814577afc75bc8a891c74da2e81e6f6f678b1d575adeecb12f62",
+      "memberTerms": "84932b8706f3ef78031a546f6fb675cca6c79f5c8f7922c6007c9da288960b18",
+      "memberSummary": "d6fa43d4050b861f8122617ff1a4a81513112e34eb03eb79b71672cffe41b733",
+      "memberProfile": "342bce765d287ef92d15ca31dd595318b9156b0547350f65a0f3b015366b3543",
+      "memberMatches": "3a798629df40b8e9ec3dc986e3cead394e4b2e736afbbe15256df3d290906821",
+      "reasonText": "9eb06d9500a22f531893465c7c341b5acc27edb12f6f05f5fdd2367108539197",
+      "listingDateValue": "4a8cedc9af24ec706facda432717bcdc067a97e52d909d6793c71891188dc11c",
+      "listingDateText": "6473fa65503c838077437911cdcc4efbc77bdc64979d2cd97747dce0578ccbcc",
+      "balancedRanking": "73be5dbb5541162b1df79567031014ccea53f346c0a69a5b836042bae4cb24a3",
+      "teamChips": "0690576f41c7fce7d035edd84a748d444b171d330b44fa6657d0763b3243d0a1",
+      "teamTopicSummary": "cece3b4595929eb572e7a6d6871d6077d1532cade6e225bbf9fa9a7262768d69",
+      "formatDate": "343bb12724efd21d44f74574c6ac064b1a1145b4701c367f66e6cedca3ca3856",
+      "formatMoney": "4ee15b8c426ac4ebfb972a88f1042c4c5d10a35795d6e3dd3f826e57ab93d9bd",
+      "perAwardLabel": "72bacd3cbfa230dfb653e3d91b645fe74f18e24bc33f77aad94940114748fab4",
+      "displayAwardBounds": "d955e51612e268a886f06dfc6cbb6c54f2521640804bf78265732ac313a71d82",
+      "programFundingLabel": "6b53068d651fc0096ea7665c5f95054f48d736da104b0416e58521711e663ec8",
+      "eligibilityLabel": "030442cdf813be9daea75055b30be76d484135697f8bc463fde2a007dee308cf",
+      "descriptionHtml": "4e0c2faad8ace840bf82ed5048f95c7152e345ca3245c264d6c25a7cb2af7acf",
+      "teamOfficialActions": "8254f4b914935c68c16aad2a419ff2afd7fd82de56e3a8fa59b837a9086d8b64",
+      "opportunityCard": "d470ec5b676cdd8b1b0c2c5db292109d41cf63c99923f8537c29cb441a712bc9",
+      "calendarText": "daac3af9e9b34ca4040143080a8df4ff9767278add159031791fb62b4e55e5e3",
+      "addTeamDeadlineToCalendar": "89f1acac9de54a5358a6bcca8560c7c4aac4c3b7c0f78966c22409b16b84c96e",
+      "renderThemes": "5a2ae592c1dda19c28a3cec0f57397911033cacd14a7fedef0c1476365e0a4bd",
+      "liveEntry": "e9cfa26c00bbdf0ca63357d5f6860c553abc8b4bc7423c87ea5ec31578771346",
+      "buildShared": "71348d39f2e1dd0cbf850098a4fcf72d3c4dd854cc8ee77139cabe54a5a9adee",
+      "matchesQuery": "3e2f049ce46d90b7b284d924889d7a56f70e1ad91a835488f49ae1ed9192b966",
+      "renderTeamHybridStatus": "ed56af6d3b75b7ba854685c661875b48be61a5fd41f094c08cdef55085309ba4",
+      "renderSelectedResearcherCards": "2568680a2d61857908669e2312f07586a1aef0512d7633b41d41e05f46c6d89c",
+      "renderTeam": "143afe7cf4937ae33e53db436dc0a606c3dd8a1f8bc913fe22b439a48ef87574",
+      "scheduleTeamRefresh": "518337c2d4dad1ab8a59f57d774b4c015bf8f384c63a8c2443fa9c1f768cf5e2",
+      "requestTeamHybridRanking": "00be373cd49b51f90f5505d19bc443202ba060196616ce858432fb58d897dc60",
+      "refresh": "dc6d4943cf528e518eeb0d2cbd45f2e451af5a31935f335fc857b191c0224935",
+      "teamMemberIdentity": "ba689c7830736d78efb21f7b7d43c2a72f3948f88e5913e0cadc5f1668e07bc7",
+      "saveTeamHistory": "645b6fecf4dfa08f0cd5862af7d7bd2c7d85eb54a3984e46591d2ba89e356f56",
+      "teamHistoryNeedsDirectory": "f1a2ce45fd58eaab0227c5d546a3c6716d75acc6a8c2a047ae80f8d19ba1bce1",
+      "restoreTeamHistory": "90164979b81643b477d9be509123d2ece6a155417bf6dd3a4e5a3bf0b82ac2ff",
+      "restoreDeferredTeamHistory": "4220880170b2d2292bc34327dcf722ce6038fd408a3ef38c939c95dffca9695f",
+      "finishHistoryRestore": "ae8f4431ee0f5f7293faf5507ff62a54a8eea41e625ff9fedc4a33d469face51",
+      "safeStorage": "302c196afb5af921f91f2fbe01ca0356ed910329de7e8d029cf5ae9528ae07f4",
+      "safeHandoffStorage": "fec869cd21626173fd4f9ba3fd441e4cb89a3f64896e7859b3aaed6e2fd208d4",
+      "renderExternalStatus": "96fe70be3ec0d3b081cc85f1e5eed57785863c78428e6cbf07f4a60fec40ff2e",
+      "rebuildResearcherMatches": "5674f79103803c8f2cfca35cc1a64a1f889d1824e9a7027685557df33fe1e090",
+      "appendResearcherOption": "4f9df0c9101a53184d9db073c5160e31cb2ce10ea9d4979a24f04a01e85fbc79",
+      "renderResearcherPicker": "54a447778ce804d6e0deb964f4112d4635dec68f6cdf02184c742c94f1fe42f4",
+      "closeFacultySuggestions": "723498d099214159a29a8b8e18e4f566a580d11b2693d66d105a0d35f253934a",
+      "ensureTeamDirectory": "4fe801622d6531ebfa9a691e89304e0a286041ae8b59501a8d5afe36d062c8a5",
+      "facultyPoolLabel": "e438a705bbaaaedb7135ed7256098c7aa09d0f16a0f4f2abd70cc4c6d40f2ac2",
+      "setFacultyActive": "671ef153096bf187b827eba843d2f71bc1c0f720afdbdec55e6735ce53f411ed",
+      "renderFacultySuggestions": "8ae83e0a21c95ac758f9fa369f39bd5eb1f388610a24d6539e28329b33605dd0",
+      "chooseFaculty": "aab7758cd6b19676ec3c8e4bf380050dda7b2cfa42d3306d0c3a1552e9db824c",
+      "renderExternalButtons": "507929b5f205b1c7326fc6f956abb72067b44b83b657dc1ae0e555ec6dc2d92f",
+      "toggleResearcherPicker": "0eca26ef769642dc5e116b216258ba0d1805ea99291a9a0b5afb09887ff03c58",
+      "handleTeamDirectoryFailure": "ec65f6fc309bb1fd97bcc9b588c1be48c7355a05378aa848d1d5473ffae7a61f",
+      "setResearcherAddBusy": "1402ff4457435e1ec60fe57c764219abc9a0548476e34dd20c5df07db1520c26",
+      "chooseResearcher": "0b02c3a7e2d8a5b214a78b0948db5195041c73aa022a801f15dc15a95c731b72",
+      "persistExternal": "b49d7695b7f6adfdae6acb355abdc49e2ca15a77d366243d66b9d99a7da710bb",
+      "removeExternalProfile": "307ddeaa871e590d26b72a7da8f7d018a55bea8e88b383971b478d23e47bd400",
+      "removeChosenResearcher": "a870d7499eb830597890a992a40aa13e40519dd0b1bc733da90bb7d58e453e79",
+      "updateToggles": "d75c22b600a6da322ef4308f78e3e8ac94a5fcf20b8cd0d556eceb94b4777e14",
+      "handoffSelectedIdentities": "9286c6a3ea142463647bb798f3360c06dc8063b8f1da05a76f79c7491098cc6f",
+      "prepareMissingResearcherHandoff": "f97108ff5d7d80fdc37424df90b42d79835d472daa7fa4af2656028849ed8153",
+      "finishTeamHandoff": "3ff2df9c45884827776a803ca2c7cf5c8de1de0da71dd59a477fcb27553250c3",
+      "btnId": "07277b03b2eadb9d8af9a28bce8039a122588db04feb0d9bc3903e7e6cdd0aab",
+      "toggle": "dc7d9ebd016bf74ce936c98fc2e67c3dde59e67b9621d2bf79f3eff26121b7b0",
+      "applyProposedTeamFromUrl": "0d521d525eb4c7f7122bfb5a983aab4ef682ef7f7313d35154bc7ce94c3d7da8",
+      "init": "7fb03cc2149831d593bd4981b92f12e618ea030ef8cb721fde839ae5d99a37f4"
+    },
+    "assets/institutional-intelligence-snapshots.js": {
+      "dodBrowserModule": "261820498e40a7f5d24ae52fb024ee90092149b41213d85aa9d4cafb9af7df7b",
+      "clean": "43c88ead802ba5048b4a11aa08109cbd096e052c929b6cb1be710764a649f0fd",
+      "escapeHtml": "39d9b7e6e6d5b3e16a1cc201b6d87d416938ad2cce367d5c36eeb52971e65722",
+      "escapeAttribute": "0f61415953bddbb546de56157d5465f28f56b8e52e9edf31c752f50f85006ae4",
+      "safeUrl": "a47bbec40c6275289e48227af1ab78f74e6b6c064f44f2d075d0c04aabeee628",
+      "awardKey": "cc9eda4925ca3239f2d5f742d2f1b1aff5e38a09206253c0430f5385e49323fa",
+      "evidenceDomId": "f65def704b7e5f4acc97e7bef9f7303e978239d08925b7dc372615dbe88b7c43",
+      "syncResultsNote": "bf9721848af686996e0448894908a186f62e9539907037fbe74be18733ebce81",
+      "setStatus": "0960fd6238068a80782ca6863b4588e47842545d893f7226f1046cb76e3db774",
+      "setSearchActivity": "8ad55ec5abbb308a6a472cc2e074e69b5232855ec508ab0d02cffa3963382375",
+      "setBusy": "7271399345cd6bec10234b5657db88d34d89e8d635d5dffe6941a7e06f5010dd",
+      "selectedLocation": "4ebef584f62fd981ff4edb3caa4bc41968270f0825ffe1260c1e53fa198ebc69",
+      "hideRegistryOptions": "194bd8280f64d91369b64527638493c6b700ef7a472f17c2c76dce94cd27c44b",
+      "setSelectedInstitution": "848fd392fb7d59c2fc2870cceff68910159decc695a89ecfd75c61eb72cf8c83",
+      "updateActiveOption": "d0f0feb8d92f388976c2b68886d82ce62a922a2e5edc0c1ac6ca695ec06bf791",
+      "renderRegistryOptions": "8ebf681bc08245365698163550086d991e999ef5d403281ac1406cab8b488ec4",
+      "fetchRegistry": "66459b29f4e762d7b9459e21adec51b0f74d0ee610fc86dd5f33fe129f55e45c",
+      "resolveTypedInstitution": "f885a0c6a451fed227a68ce3f0ca9a38a3e9cb2ffdae44832c4024de7697daee",
+      "formState": "27a462ae93c6ca577ff72732104150203e6faecf10b13208a9cada3bde69e5c0",
+      "submittedCriteria": "21d70a2fd625e76c33bdc8519af765ba3ddf74240441f937bb493f4a046f2190",
+      "submittedFromSnapshot": "68e6f16b69f0c131274207f3acdfad3de139a573bd78030de4cfd635ef17e4e4",
+      "snapshotViewState": "32de322a9cba5c959d276e510fe23969f9def32711ef491b8235129eccc82eb3",
+      "applyFormState": "778a416f542c719341af32c3493849fc7ead14a9e6d5d44b2df3b37327d9f7ba",
+      "hasSearchState": "4c85c4396df7c41a015c58bb1c28e145d2e8664c7fcc9e8ae28671b62bf7d290",
+      "nextHistoryEntryId": "fffbee6f91826ff9981cff551d1b90091f5412d6dd0e1cab204dfab5bb8d05b6",
+      "historyViewState": "c1be8fc8145905aa30a4b80b883671e6a2cb5a677e08650c6d8ef6e3dcc65f3a",
+      "rememberHistoryViewState": "1d728b935d5a105efb3e89124527e5362d3d0262a367c7f1e4d0b7ea81b0a5dc",
+      "captureCurrentHistoryViewState": "e9e00d692c768bf2d445f624069120d9635c84679df9cc148c92c706353587a4",
+      "latestHistoryViewState": "c021f5bfeaa217aac0393eff77d0460fef4d2e20f410a3cbfa71b6c4692c5c03",
+      "serializedHistoryState": "4c4deebae1db003d87f0fd7f58838377af2f2d48c28dfcdaa12e3ef6b00ad308",
+      "replaceHistoryStateIfChanged": "9086217c8e5b8ed68481fe9e1388e8310828c977bedaade38ce39a07cd5ae9c8",
+      "recordCurrentHistoryViewState": "759a6a12c13f737c89591501b49690644cd3a13b81ec689bb534b8696066f3f6",
+      "armHistoryStateThrottle": "d2fa11b0a729190ca2332cb2773009964ef8dbb0264591deda240676a25b63c7",
+      "scheduleCurrentHistoryViewState": "471249448d0c30fa745241bf317b1ec239f314f885a3928f1b4044da00667db0",
+      "writeHistoryUrl": "9cb085dd0d341a0e54410e55ef9bbcbcd6b07e65d3c5932fcfb3deb1c737e623",
+      "syncUrl": "0a5bab74f6913c17d9047f4dc5f63adf144e7d1642a826b289fbfaa6ff7285ac",
+      "postJson": "bfae3dd19965cf70ac26c084cb1d6454c3b9286942d44e1d02f7cc5134a2eb0a",
+      "absorbAwards": "97985dbbf31887582784bde172aa706c15157c2c5576893e959357bead565370",
+      "absorbBatches": "2361b3dd756fed4be78d68f09c5d2292dbaabdc2c58ea6b6fe0d00e375f5e66f",
+      "pageAwards": "fbf4f571da089fc29dae62822dc44afdd706ca10d1cd6b3d14d584f74b670430",
+      "formatMoney": "e607dc47a80efd73498def987990cdebadc604a8d9938768d6938f323416e2d1",
+      "renderAbstract": "bf031b4605144ca09e55169fa3502f1060d8f969806cb7a17d1983a2fe641b84",
+      "contactLine": "9032777f949632952dd1ecf6d238b8d74290de513ea445596fc8f0532dd4e5d3",
+      "awardCard": "2269c569cad9cf2783ac9b1facb4ca19ebbb48aeb0eb4ab0ac0765d14e1be515",
+      "sourceStatusText": "27935f03b1402a25ce0020d54d0e618176222aa8a07eea8ff60139e15eb124d7",
+      "renderSourceStatus": "fd43704c81e4905bbe4b6410b6a36eae407a8bee4a50a9c5fdaa99f90db42073",
+      "renderFacetSelect": "0d4dfdcee06142828707a37970fe7b67310db08cd2f8addfdf0914de0d3127a1",
+      "restoreCommittedViewControls": "843f9e62a87a137c98cf0eb4bbe8b9886ad0476b33527f393b34ba4e611b7415",
+      "renderPagination": "a5ec2513ff14158418a3e2114090b6c1fbfd9318d93976d209978a343f860449",
+      "baseAggregateForPage": "552867c77977b77aac9bd1ea28b06034a4d15a9ca4f2cfe82cc76fa29dbd1a6d",
+      "renderPage": "ae305e523774497a51765ac3b43323ea88231c1e444fb9f5b67f14fe189e37ef",
+      "unavailableDodSource": "9b39d18f32dac5e848106f3426c217d7b1b260baf11362bf3e4598f019067c1d",
+      "applyClientSnapshotOverlay": "72d438a3c1b71362fc6428b5e1d2bb2202c453c26e230425f2bc30ed884e4faa",
+      "restoredClientSnapshotOverlay": "b1d27a6900e4a22f0d49689a0f56bffd88ef7dd79b0b0288e71d7d5dd81f4c91",
+      "requestSnapshotPage": "4b3987ecb93b09dd74f1a066017ce1d3c66b520e1e63c915105483a110471d82",
+      "stagedSnapshotResult": "cdd2db8daa914e091a6dda7cb1600781208b052f17c23bc35b5029d4bb1d006c",
+      "commitSnapshotResult": "746cbfcbf9c5a92b672a68247c87372e4804cfce03ebc94798b3526547e8b7e5",
+      "fetchPage": "66e19d1d6e0c0d50346da513c6d4627e3684cc7a3a93ee8abf33651e43bcf478",
+      "rebuildSubmittedSnapshotView": "7a57531e88a63860ab002919493981876a032e9e642ef7a986a258e34650314d",
+      "fetchPageWithRecovery": "3841a47503f143b20df159602b44fef510e77de318850a1a6941494a26d2171c",
+      "preparedSnapshotSearch": "ca04d674fb8ed970cd5024fbd9eda2098bb55ac34a3e5216053daaef13329a86",
+      "runSearch": "ff70f1ef9c56b77f6516db8ce136e4ecca6f14e13ce4a3045cf785d1071542dc",
+      "changeFacet": "f8a3c08d3e023eb57da3950d753b06b1a2699421fba07a625408fa0087b8d6d0",
+      "requestSourceBatch": "6e3c6a6fd8937ca30ad2803d383106b0ac10bf9cd07112f5eadba15484bfce2a",
+      "applySourceBatch": "04430f8291d5761dee9a9095cf6f00f1f81c90ea82b0536a7b0b5b7130fdac83",
+      "loadSourceBatch": "b8433123a928d4164803c62bfbcba4beb61ca28a58fa304b563a46e78e431fc6",
+      "stagedSourceRetry": "1a4cae6e308bf588d35d7072be116e34a0905347b1c98d0ac5f347a0d6788dbe",
+      "stagedHybridSourceRetry": "c7235f39ab723d4d192270857998dbd076b285834be1fb2fbd8b13cb9be46b30",
+      "retrySource": "267c5c0080392f033158378eb43cec7072ddfc27ef644f604c5c345a515cbf34",
+      "answerEvidenceSignature": "0352c2a731aed2c73a2f44fa01158baeb086a9c1e971fba70df1822b44a0c755",
+      "answerTable": "4bbc269aa950e618c478978aee6e4c3acd0f2c105259768999293feeb1fe4545",
+      "renderDirectAnswer": "28b5618b5bfd6b238e1292948e623578c1c7169aa17a416f3137cacafeba004c",
+      "renderQuestionAnswer": "47d6c317827f305ba52b21fd29780564d4cef6f2adf9fc7579e1f21d9dcb8b15",
+      "programOfficerEvidence": "9a76c82d171a36ff9b4410d5ae7b2f5f4d5c28e5d8efa71d70da0aec6b6b7de2",
+      "refreshProgramOfficerQuestionAnswer": "a189719b30ff4e02c1209f8082c9a108fa41cea6c1a9d13d60978fdbfc0a1a62",
+      "refreshQuestionAnswer": "81a006dfb77bd99b540c44cd7b8cd52dc6806f4eaba32104d6efa9e840b91c2b",
+      "focusAwardEvidence": "5eaaacbb973e699a8e30b99931de45c5797a6cb4694ad206304573d787ce9609",
+      "modelForProvider": "fb69525f5bb3eaf4d1f07b50bbcb3a7113c0f4af4f792d30d4e9c379723a8d6e",
+      "refreshProvider": "f31bc203e7a6f1bb40ad1c922eb412aaaa7b016124aab0f5e7acea6d9785713c",
+      "saveSharedKey": "2766e2401eae782bf20525592aa108b6190d1e0cc57b5082d0919280e1dc9e5c",
+      "askQuestion": "01ed9ccc91e8d3dc54ecffd064f8eefd4a5907836c1772c967832d26a793e39c",
+      "clearQuestionState": "29578901f932ee0cbc7ae402187e3f600d6abc5bcfb297fb84cc9d4eb44e377e",
+      "resetResultState": "61dc2c68885627fafe0c49f04d4877396b8ba453679913cf1f21bffd1aa4e248",
+      "clearSearch": "740670596437d842d7fa374191be65800da35d4642095496f3d97dd47678ebf1",
+      "programOfficerSearchState": "bd82ff28860d67ed3529449b8a3c42163df0c8e3138960a081b8d179d69d7e51",
+      "startProgramOfficerSearch": "1015a0249ee9bdaba61babc19ec1d9c0b104922d0e55ececf9e724655b0423bf",
+      "changeProgramOfficerYears": "2a6d7e6e21a9f9705c7bef0063ff49b2159a75ec9d94fc5617df791b07a89d3d",
+      "bindEvents": "d736d9c5c07fde66bac28a5c92dd9755dc14230b4d9df5882758e7728ef0a3c5",
+      "initialize": "6e083645d1907b6fd63649a8b845574f74c42303ea1772cbca999b698bec20a5"
+    }
+  },
+  "dom": {
+    "team_match.html": {
+      "controls": [
+        {
+          "id": "add-researcher",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "faculty-search",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "show-faculty-suggestions",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "missing-researcher",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "researcher-choice",
+          "tag": "select",
+          "options": [
+            {
+              "value": "",
+              "text": "Choose a saved researcher"
+            }
+          ]
+        },
+        {
+          "id": "choose-researcher",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "remove-saved-researcher",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "filter",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        }
+      ]
+    },
+    "funded_awards.html": {
+      "controls": [
+        {
+          "id": "watch-selected-program",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "clear-opportunity",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-year-preset",
+          "tag": "select",
+          "options": [
+            {
+              "value": "recent5",
+              "text": "Recent 5 years (recommended)"
+            },
+            {
+              "value": "all",
+              "text": "Search all available years"
+            },
+            {
+              "value": "custom",
+              "text": "Custom From/Through years"
+            }
+          ]
+        },
+        {
+          "id": "ii-institution",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "ii-agency",
+          "tag": "select",
+          "options": [
+            {
+              "value": "all",
+              "text": "NSF + NIH + DOE + DoD"
+            },
+            {
+              "value": "NSF",
+              "text": "NSF"
+            },
+            {
+              "value": "NIH",
+              "text": "NIH"
+            },
+            {
+              "value": "DOE",
+              "text": "DOE Office of Science"
+            },
+            {
+              "value": "DOD",
+              "text": "Department of Defense"
+            }
+          ]
+        },
+        {
+          "id": "ii-program",
+          "tag": "input",
+          "type": "text",
+          "options": []
+        },
+        {
+          "id": "ii-topic",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "ii-pi",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "ii-program-officer",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "ii-year-start",
+          "tag": "input",
+          "type": "number",
+          "min": "1989",
+          "max": "2100",
+          "options": []
+        },
+        {
+          "id": "ii-year-end",
+          "tag": "input",
+          "type": "number",
+          "min": "1989",
+          "max": "2100",
+          "options": []
+        },
+        {
+          "id": "ii-search",
+          "tag": "button",
+          "type": "submit",
+          "options": []
+        },
+        {
+          "id": "ii-clear",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-question",
+          "tag": "textarea",
+          "maxlength": "1000",
+          "options": []
+        },
+        {
+          "id": "ii-ask-button",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-provider",
+          "tag": "select",
+          "options": [
+            {
+              "value": "hosted",
+              "text": "Funding Finder AI (included)"
+            },
+            {
+              "value": "openai",
+              "text": "OpenAI"
+            },
+            {
+              "value": "anthropic",
+              "text": "Anthropic"
+            }
+          ]
+        },
+        {
+          "id": "ii-key",
+          "tag": "input",
+          "type": "password",
+          "options": []
+        },
+        {
+          "id": "ii-save-key",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-update-answer",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-investigators",
+          "tag": "select",
+          "options": [
+            {
+              "value": "all",
+              "text": "All investigators"
+            }
+          ]
+        },
+        {
+          "id": "ii-programs",
+          "tag": "select",
+          "options": [
+            {
+              "value": "all",
+              "text": "All programs"
+            }
+          ]
+        },
+        {
+          "id": "ii-institutions",
+          "tag": "select",
+          "options": [
+            {
+              "value": "all",
+              "text": "All recipient institutions"
+            }
+          ]
+        },
+        {
+          "id": "ii-clear-facet",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-page-size",
+          "tag": "select",
+          "options": [
+            {
+              "value": "10",
+              "text": "10"
+            },
+            {
+              "value": "25",
+              "text": "25"
+            },
+            {
+              "value": "50",
+              "text": "50"
+            }
+          ]
+        },
+        {
+          "id": "ii-card-previous",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "ii-card-next",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "award-query",
+          "tag": "input",
+          "type": "search",
+          "name": "q",
+          "maxlength": "500",
+          "options": []
+        },
+        {
+          "id": "search-mode",
+          "tag": "select",
+          "name": "mode",
+          "options": [
+            {
+              "value": "topic",
+              "text": "Research topic"
+            },
+            {
+              "value": "program",
+              "text": "Program identifier or source program name"
+            },
+            {
+              "value": "pi",
+              "text": "Principal investigator"
+            },
+            {
+              "value": "program_officer",
+              "text": "Program officer"
+            }
+          ]
+        },
+        {
+          "id": "award-agency",
+          "tag": "select",
+          "name": "agency",
+          "options": [
+            {
+              "value": "all",
+              "text": "NSF + NIH + DOE + DoD"
+            },
+            {
+              "value": "NSF",
+              "text": "NSF"
+            },
+            {
+              "value": "NIH",
+              "text": "NIH"
+            },
+            {
+              "value": "DOE",
+              "text": "DOE Office of Science"
+            },
+            {
+              "value": "DOD",
+              "text": "Department of Defense"
+            }
+          ]
+        },
+        {
+          "id": "award-institution",
+          "tag": "input",
+          "type": "text",
+          "name": "institution",
+          "maxlength": "300",
+          "options": []
+        },
+        {
+          "id": "year-start",
+          "tag": "input",
+          "type": "number",
+          "name": "year_start",
+          "min": "1989",
+          "max": "2100",
+          "options": []
+        },
+        {
+          "id": "year-end",
+          "tag": "input",
+          "type": "number",
+          "name": "year_end",
+          "min": "1989",
+          "max": "2100",
+          "options": []
+        },
+        {
+          "id": "remember-institution",
+          "tag": "input",
+          "type": "checkbox",
+          "options": []
+        },
+        {
+          "id": "search-awards",
+          "tag": "button",
+          "type": "submit",
+          "options": []
+        },
+        {
+          "id": "clear-award-search",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "award-previous",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "award-next",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        }
+      ],
+      "badge": "00cc937a4134f7e879b676e0c5d73d9ad85ed7580f0ab91887f29af51cb03be6"
+    },
+    "faculty_interests.html": {
+      "controls": [
+        {
+          "id": "researcher-search",
+          "tag": "input",
+          "type": "search",
+          "options": []
+        },
+        {
+          "id": "existing-researcher",
+          "tag": "input",
+          "type": "hidden",
+          "options": []
+        },
+        {
+          "id": "display-name",
+          "tag": "input",
+          "type": "text",
+          "maxlength": "120",
+          "required": "required",
+          "options": []
+        },
+        {
+          "id": "home-unit",
+          "tag": "input",
+          "type": "text",
+          "maxlength": "180",
+          "options": []
+        },
+        {
+          "id": "orcid-id",
+          "tag": "input",
+          "type": "text",
+          "maxlength": "19",
+          "options": []
+        },
+        {
+          "id": "relationship-note",
+          "tag": "select",
+          "options": [
+            {
+              "value": "",
+              "text": "Choose one"
+            },
+            {
+              "value": "University of Rochester faculty or staff",
+              "text": "University of Rochester faculty or staff"
+            },
+            {
+              "value": "University of Rochester affiliate",
+              "text": "University of Rochester affiliate"
+            },
+            {
+              "value": "External collaborator",
+              "text": "External collaborator"
+            },
+            {
+              "value": "Other or unsure",
+              "text": "Other or unsure"
+            }
+          ]
+        },
+        {
+          "id": "research-summary",
+          "tag": "textarea",
+          "maxlength": "1200",
+          "options": []
+        },
+        {
+          "id": "research-claims",
+          "tag": "textarea",
+          "maxlength": "2200",
+          "required": "required",
+          "options": []
+        },
+        {
+          "id": "source-urls",
+          "tag": "textarea",
+          "maxlength": "4000",
+          "options": []
+        },
+        {
+          "id": "contact-email",
+          "tag": "input",
+          "type": "email",
+          "maxlength": "254",
+          "options": []
+        },
+        {
+          "id": "submitter-note",
+          "tag": "textarea",
+          "maxlength": "1000",
+          "options": []
+        },
+        {
+          "id": "review-consent",
+          "tag": "input",
+          "type": "checkbox",
+          "required": "required",
+          "options": []
+        },
+        {
+          "id": "submit-request",
+          "tag": "button",
+          "type": "submit",
+          "options": []
+        },
+        {
+          "id": "download-request",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        },
+        {
+          "id": "add-locally",
+          "tag": "button",
+          "type": "button",
+          "options": []
+        }
+      ],
+      "form": "e62bd7fb194d8fda9e71271f3e4cc7d0d8458ca4579fd2c4bca70deb6453511e"
+    }
+  },
+  "searchRelease": {
+    "schema_version": 1,
+    "generated_at": "2026-09-04T14:25:45.348Z",
+    "current_corpus_sha256": "c1880d7d61726f0f1e652528b5ff97427cffc55665b340d5f86fcef00cea861d",
+    "previous_corpus_sha256": "d2d21e4defcf2ffede3cfa3c53ec55649ab9ab36c822e8b17265f4252c0fd94f",
+    "vector_sha256": "ca81a7b85802a2e9faff90bde38ba1407013c4c9a59519ea5a71ea58f66a88f5",
+    "model": "voyage-4-lite",
+    "dimension": 1024,
+    "model_space_fingerprint": "6bdf01ea5729f7d7a770b8ed4f357537207cc13ba3b95385c63c7a144eb437bd",
+    "passage_count": 1622,
+    "worker_allowlist_sha256": "3887102c88844581281c88e0b26e1a17ff64356cff39f28f9535ff189db89ae3",
+    "atomic_publication_contract": "catalog + startup metadata + subtopics + manifest + vectors + model-space canaries + Worker allowlist + content-identified opportunity-team and researcher-registry projections"
+  }
+}

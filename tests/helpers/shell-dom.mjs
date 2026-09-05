@@ -11,6 +11,7 @@ export function shellDom(html, { popover = true, deferredClose = false } = {}) {
     if (wrappers.has(node)) return wrappers.get(node);
     const el = {
       node, style: {},
+      get tagName() { return node.name?.toUpperCase(); },
       get id() { return $(node).attr("id"); }, set id(value) { $(node).attr("id", value); },
       get className() { return $(node).attr("class"); }, set className(value) { $(node).attr("class", value); },
       get textContent() { return $(node).text(); }, set textContent(value) { $(node).text(value); },

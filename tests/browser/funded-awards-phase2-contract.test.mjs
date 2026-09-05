@@ -208,7 +208,7 @@ test("investigator names use consistent display capitalization without changing 
 });
 
 test("the standalone product exposes the Phase 2 controls, state, provenance, and source isolation", () => {
-  assert.match(page, /<h1 id="page-title">See what NSF, NIH, DOE, and DoD have funded<\/h1>/);
+  assert.match(page, /<h1 id="page-title">Funded Awards<\/h1>/);
   for (const id of [
     "selected-opportunity", "award-search-form", "award-query", "search-mode",
     "award-institution", "award-agency", "year-start", "year-end",
