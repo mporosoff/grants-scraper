@@ -244,6 +244,11 @@ for (const mode of ["", "uploaded-nofo"]) {
       assert.match(state.ai.messages.at(-1).text, /previous answer has no opportunities available/);
       assert.equal(requests.length, 3, "An unavailable prior comparison must not send a new set to the provider");
       assert.equal(state.ai.busy, false);
+      sandbox.retrieveChatContext = async () => ({ ids: [], mode: "needs_topic", matches: new Map() });
+      await sandbox.askResults("Instead, show other opportunities");
+      assert.match(state.ai.messages.at(-1).text, /What research topic should I search for/);
+      assert.equal(requests.length, 3, "A topic-free restart must not send the previous comparison to the provider");
+      assert.equal(state.ai.busy, false);
     }
   });
 }

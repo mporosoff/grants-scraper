@@ -5036,7 +5036,9 @@
     const query = CHAT_UI.retrievalQuery(question);
     if (state.ai.mode === "foa-focus") return { ids: eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(), mode: "focused_opportunity" };
     const previous = [...messages].reverse().find(message => message.role === "assistant" && (Array.isArray(message.contextIds) || Array.isArray(message.resultIds)));
-    if (!query || (previous && CHAT_UI.isResultFollowUp(question))) {
+    const followUp = CHAT_UI.isResultFollowUp(question);
+    if (!query && !followUp) return { ids: [], query, matches: new Map(), mode: "needs_topic" };
+    if (!query || (previous && followUp)) {
       const ids = CHAT_UI.knownResultIds(previous?.contextIds || previous?.resultIds, eligibleIds, MAX_CHAT_RESULTS);
       return {
         ids: previous ? ids : eligibleIds.slice(0, MAX_CHAT_RESULTS), query, matches: new Map(),
@@ -5100,14 +5102,17 @@
       const contextIds = retrieval.ids;
       if (!contextIds.length) {
         const unavailableFollowUp = retrieval.mode === "unavailable_follow_up";
+        const needsTopic = retrieval.mode === "needs_topic";
         state.ai.messages.push({
           role: "assistant",
-          text: unavailableFollowUp
+          text: needsTopic
+            ? "What research topic should I search for? Name a topic to search the current results, or adjust your filters to start a new comparison."
+            : unavailableFollowUp
             ? "The previous answer has no opportunities available in the current results. Ask about a new topic or adjust your filters to start another comparison."
             : `I did not find supported matches for “${retrieval.query}” within the ${eligibleIds.length.toLocaleString()} eligible results.${retrieval.mode === "local_retrieval" ? " Semantic retrieval is temporarily unavailable; this used local search." : ""} Try refining the topic or broadening your search filters.`,
           resultIds: [],
         });
-        setAiStatus(unavailableFollowUp ? "The previous comparison has no currently eligible opportunities." : "No supported matches were found within the current search scope.");
+        setAiStatus(needsTopic ? "Enter a topic to start the new search." : unavailableFollowUp ? "The previous comparison has no currently eligible opportunities." : "No supported matches were found within the current search scope.");
         renderChat({ scrollToLatestAssistant: true });
         return;
       }

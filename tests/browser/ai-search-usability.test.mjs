@@ -21,6 +21,7 @@ function fn(source, name) {
 test("question retrieval keeps scientific qualifiers and recognizes factual follow-ups", () => {
   assert.equal(ui.retrievalQuery("What opportunities fit heterogeneous catalysis? Name a few options."), "heterogeneous catalysis");
   assert.equal(ui.retrievalQuery("Find funding for non-clinical ML and CO2 electroreduction"), "non-clinical ML CO2 electroreduction");
+  assert.equal(ui.retrievalQuery("Find IT research opportunities"), "IT research");
   assert.equal(ui.retrievalQuery("What are their deadlines and eligibility requirements?"), "");
   const evidence = `${"Administrative introduction. ".repeat(150)}Heterogeneous catalysis at solid catalyst interfaces. ${"Other text. ".repeat(200)}`;
   assert.match(ui.evidenceExcerpt(evidence, "heterogeneous catalysis"), /solid catalyst interfaces/);
@@ -67,6 +68,10 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.deepEqual([...filteredFollowUp.ids], [...initial.ids].slice(1), "Changed eligibility still excludes records outside the current search");
   for (const question of [
     "Which of those has a 2027 deadline?",
+    "Which one has a 2027 deadline?",
+    "What's the deadline?",
+    "Does that one require an industry partner?",
+    "Can either one support an early-career investigator?",
     "Which of those has a 2028 deadline instead?",
     "Which has a deadline after January 2027?",
     "Which awards offer over $500,000 per year?",
@@ -89,6 +94,15 @@ test("question retrieval finds records beyond the first page without escaping th
   assert.equal(ui.isResultFollowUp("What are the deadlines for homogeneous catalysis?"), false);
   assert.equal(ui.isResultFollowUp("Find IT research opportunities"), false, "The IT abbreviation must not be treated as a pronoun");
   assert.equal(ui.isResultFollowUp("Find catalysis opportunities with budgets above $500,000"), false);
+  assert.equal(ui.isResultFollowUp("Which one-carbon metabolism opportunities are available?"), false);
+  assert.equal(ui.retrievalQuery("What's available for heterogeneous catalysis?"), "heterogeneous catalysis");
+  for (const question of ["Instead, show other opportunities", "New search: other opportunities", "Start over"]) {
+    for (const history of [[], compared, [...compared, { role: "assistant", resultIds: [] }]]) {
+      const restart = await context.retrieveChatContext(question, ids, history);
+      assert.equal(restart.mode, "needs_topic", question);
+      assert.deepEqual([...restart.ids], [], "A restart without a topic must not reuse or substitute comparison records");
+    }
+  }
   for (const [eligible, history] of [[ids.slice(10), compared], [ids, [...compared, { role: "assistant", resultIds: [] }]]]) {
     const unavailable = await context.retrieveChatContext("Which of those has a 2027 deadline?", eligible, history);
     assert.equal(unavailable.mode, "unavailable_follow_up");
