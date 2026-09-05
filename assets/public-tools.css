@@ -66,12 +66,12 @@
   .team-workspace { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .team-sidebar { position: static; max-height: none; }
   .team-sheet-ready .team-sidebar { display: none; }
-  .team-sheet-ready .team-mobile-summary { position: sticky; top: var(--public-header-height, 64px); z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 14px; color: #fff; background: #001e5f; border: 1px solid #173c85; border-radius: 12px; }
+  .team-sheet-ready .team-mobile-summary { position: sticky; top: var(--public-header-height, 64px); z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 14px; color: var(--navy); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
   .team-mobile-summary > div { min-width: 0; }
   .team-mobile-summary p { max-height: 3.2em; overflow: auto; margin: 3px 0 0; font-size: .78rem; line-height: 1.5; overflow-wrap: anywhere; }
-  .team-mobile-summary button { flex: none; color: #001e5f; background: #ffd82b; border-color: #ffd82b; }
-  .team-mobile-summary button:hover { background: #ffe56b; }
-  .team-mobile-summary button:focus-visible { outline-color: #fff; }
+  .team-mobile-summary button { flex: none; color: #fff; background: var(--blue); border-color: var(--blue); }
+  .team-mobile-summary button:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+  .team-mobile-summary button:focus-visible { outline-color: var(--navy); }
   .team-editor-sheet { width: 100vw; border: 0; }
   .team-editor-sheet :is(input, select, textarea), .public-main :is(input, select, textarea) { font-size: 16px; }
   .team-results { scroll-margin-top: calc(var(--public-header-height, 64px) + var(--team-summary-height, 80px) + 16px); }
