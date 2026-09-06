@@ -255,12 +255,12 @@ class IntakeSafety(unittest.TestCase):
 
     def test_unsafe_maintained_urls_fail_even_without_dns(self):
         for url in ["file:///notice", "http://localhost/a", "http://127.0.0.1/a", "http://[::1]/", "http://169.254.169.254/latest",
-                    "http://10.1.2.3/", "https://user:secret@example.gov/a", "https://example.gov:8080/a", "https://grantforward.com/a"]:
+                    "http://10.1.2.3/", "http://100.64.0.1/", "http://224.0.0.1/", "https://user:secret@example.gov/a", "https://example.gov:8080/a", "https://grantforward.com/a"]:
             with self.subTest(url=url), self.assertRaises((ValueError, RuntimeError)):
                 intake.public_source_url(url, resolve=False)
 
     def test_shared_fetch_blocks_redirects_private_dns_and_credentials(self):
-        for address in ["127.0.0.1", "10.0.0.1", "169.254.169.254", "::1"]:
+        for address in ["127.0.0.1", "10.0.0.1", "169.254.169.254", "100.64.0.1", "224.0.0.1", "::1"]:
             with self.subTest(address=address), self.assertRaises(RuntimeError):
                 docs.validate_public_url("https://agency.example/", resolver=lambda *a: [(None, None, None, None, (address, 443))])
         response = Mock(status_code=302, headers={"Location": "http://127.0.0.1/admin"})

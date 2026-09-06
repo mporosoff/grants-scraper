@@ -40,7 +40,7 @@ def public_source_url(value, *, resolve=True):
     if (parsed.scheme not in {"https", "http"} or not host or parsed.username or parsed.password
             or parsed.port not in {None, 80, 443}
             or host.rstrip(".") == "localhost" or host.rstrip(".").endswith(".localhost")
-            or (address is not None and not address.is_global)
+            or (address is not None and (not address.is_global or address.is_multicast))
             or any(host == name or host.endswith("." + name) for name in LICENSED_HOSTS)):
         raise ValueError("source URL is not a permitted public notice")
     if resolve:

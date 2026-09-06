@@ -1354,7 +1354,7 @@ def validate_public_url(value, resolver=socket.getaddrinfo):
         raw = address[4][0]
         ip = ipaddress.ip_address(raw)
         if (
-            ip.is_private
+            not ip.is_global
             or ip.is_loopback
             or ip.is_link_local
             or ip.is_multicast
