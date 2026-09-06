@@ -189,6 +189,14 @@ def scopes(parent_path="data/opportunities.js", child_path="data/subtopics.js", 
                      "scope_label": clean(record.get("title")), "source_url": url,
                      "catalog_title": parent.get("title", ""), "agency": parent.get("agency", ""),
                      "opportunity_number": parent.get("opportunity_number", "")}
+            # Newly verified shared documents bind teams to material content,
+            # even when an amendment leaves a short extracted summary unchanged.
+            # Legacy baselines remain compatible until the shared extractor
+            # actually verifies their source with this dependency contract.
+            evidence = parent.get("document_evidence") or {}
+            if evidence.get("dependency_version") == 2:
+                scope["source_document_hash"] = (record.get("source_document_hash") if kind == "publishable_child"
+                                                  else (evidence.get("document") or {}).get("sha256"))
             scope["source_fingerprint"] = content_hash(scope)
             result.append(scope)
     return result

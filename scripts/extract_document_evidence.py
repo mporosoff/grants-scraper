@@ -27,13 +27,14 @@ import re
 import socket
 import tempfile
 import time
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 
 from pypdf import PdfReader
 import requests
 
 from scripts.build_catalog import (
     build_search_index,
+    facet_counts,
     clean_text,
     iso_utc,
     write_catalog,
@@ -43,6 +44,7 @@ from scripts import program_areas
 
 
 EVIDENCE_SCHEMA_VERSION = 1
+EXTRACTOR_IDENTITY = "official-evidence-2"
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
 DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
@@ -551,7 +553,7 @@ def extract_containers(content, content_type, name, final_url):
     if kind == "pdf":
         containers, extraction = extract_pdf_pages(content)
     elif kind == "html":
-        containers, extraction = extract_html_sections(content)
+        containers, extraction = extract_html_sections(scoped_html(content, final_url))
     elif kind == "text":
         containers = [
             {
@@ -579,6 +581,56 @@ def extract_containers(content, content_type, name, final_url):
         len(container["text"]) for container in containers
     )
     return containers, extraction
+
+
+def scoped_html(content, url):
+    """An Exchange notice fragment owns one bounded element, never sibling FOAs."""
+    parsed = urlparse(str(url or ""))
+    if parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
+        return content
+    target = unquote(parsed.fragment)
+    if not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
+        raise ValueError("Exchange evidence requires a bounded official notice fragment")
+
+    class Fragment(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=False)
+            self.depth, self.matches, self.parts = 0, 0, []
+
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if not self.depth and tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold():
+                self.matches += 1
+                self.depth = 1
+            elif self.depth and tag not in {"br", "hr", "img", "input", "link", "meta", "area", "base", "embed", "param", "source", "track", "wbr"}:
+                self.depth += 1
+            if self.depth:
+                self.parts.append(self.get_starttag_text())
+
+        def handle_startendtag(self, tag, attrs):
+            if self.depth:
+                self.parts.append(self.get_starttag_text())
+
+        def handle_endtag(self, tag):
+            if self.depth:
+                self.parts.append("</" + tag + ">")
+                self.depth -= 1
+
+        def handle_data(self, data):
+            if self.depth:
+                self.parts.append(data)
+
+        def handle_entityref(self, name):
+            self.handle_data("&" + name + ";")
+
+        def handle_charref(self, name):
+            self.handle_data("&#" + name + ";")
+
+    fragment = Fragment()
+    fragment.feed(content.decode("utf-8", errors="replace"))
+    if fragment.matches != 1 or fragment.depth or not fragment.parts:
+        raise ValueError("official Exchange notice does not expose one complete bounded fragment")
+    return "".join(fragment.parts).encode("utf-8")
 
 
 def citation_for(container, document, start, end, extracted_at):
@@ -1238,13 +1290,15 @@ def build_review_queue(record, facts, changed_since_previous, extraction):
 
 
 def source_for_record(record):
+    supplemental = bool(record.get("source") and record["source"] != "Grants.gov")
     if record.get("primary_document_url"):
         return {
             "url": record["primary_document_url"],
             "name": record.get("primary_document_name"),
-            "kind": "primary_notice",
+            # Only a Grants.gov attachment earns that ownership shortcut.
+            "kind": "agency_notice" if supplemental else "primary_notice",
         }
-    agency_url = record.get("funding_opportunity_url")
+    agency_url = record.get("funding_opportunity_url") or (record.get("detail_page") if supplemental else None)
     needs_gap_fill = (
         not record.get("close_date")
         or not (record.get("award_floor") or record.get("award_ceiling"))
@@ -1252,7 +1306,7 @@ def source_for_record(record):
         or record.get("has_preliminary_stage")
         or record.get("limited_submission")
     )
-    if agency_url and needs_gap_fill:
+    if agency_url and (needs_gap_fill or supplemental):
         return {
             "url": agency_url,
             "name": None,
@@ -1280,14 +1334,22 @@ def validate_public_url(value, resolver=socket.getaddrinfo):
         or not parsed.hostname
         or parsed.username
         or parsed.password
+        or any((parsed.hostname or "").rstrip(".").lower() == host
+               or (parsed.hostname or "").rstrip(".").lower().endswith("." + host)
+               for host in ("pivot.proquest.com", "grantforward.com", "infoedglobal.com", "researchfunding.duke.edu"))
     ):
         raise RuntimeError("Official document URL is not a valid HTTP(S) URL.")
     try:
-        addresses = resolver(parsed.hostname, parsed.port or 443)
+        port = parsed.port or (443 if parsed.scheme == "https" else 80)
+        if port not in {80, 443}:
+            raise RuntimeError("Official document URL uses an unsupported port.")
+        addresses = resolver(parsed.hostname, port)
     except OSError as exc:
         raise RuntimeError(
             f"Could not resolve official-document host {parsed.hostname}."
         ) from exc
+    if not addresses:
+        raise RuntimeError("Official document host has no public addresses.")
     for address in addresses:
         raw = address[4][0]
         ip = ipaddress.ip_address(raw)
@@ -1309,69 +1371,89 @@ def download_document(
     *,
     timeout=30,
     maximum_bytes=MAX_DOWNLOAD_BYTES,
-    session=requests,
+    session=None,
 ):
+    if session is None:
+        with requests.Session() as anonymous:
+            anonymous.trust_env = False
+            return download_document(url, headers, timeout=timeout, maximum_bytes=maximum_bytes, session=anonymous)
     current_url = url
+    timeouts = timeout if isinstance(timeout, tuple) else (timeout, timeout)
+    deadline = time.monotonic() + max(timeouts)
     request_headers = {
         "User-Agent": USER_AGENT,
         "Accept": "application/pdf,text/html,text/plain;q=0.8,*/*;q=0.5",
-        **(headers or {}),
+        **{key: value for key, value in (headers or {}).items()
+           if key.casefold() in {"accept", "user-agent", "if-none-match", "if-modified-since"}},
     }
     for _ in range(6):
         validate_public_url(current_url)
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise RuntimeError("Official document exceeded its time limit.")
         response = session.get(
             current_url,
             headers=request_headers,
-            timeout=timeout,
+            timeout=tuple(min(limit, remaining / 2) for limit in timeouts),
             stream=True,
             allow_redirects=False,
         )
         if response.status_code in {301, 302, 303, 307, 308}:
-            next_url = urljoin(current_url, response.headers.get("Location", ""))
+            location = response.headers.get("Location")
             response.close()
-            if not next_url:
+            if not location:
                 raise RuntimeError("Official document redirect was missing a location.")
+            next_url = urljoin(current_url, location)
+            # RFC 9110 redirect fragment inheritance preserves named notices
+            # on Exchange listing pages without mixing their sibling content.
+            if "#" not in location and urlparse(current_url).fragment:
+                next_url += "#" + urlparse(current_url).fragment
+            if urlparse(next_url).netloc != urlparse(current_url).netloc:
+                request_headers.pop("If-None-Match", None)
+                request_headers.pop("If-Modified-Since", None)
             current_url = next_url
             continue
-        if response.status_code == 304:
-            response.close()
-            return {
-                "status_code": 304,
-                "content": b"",
+        try:
+            if response.status_code == 304:
+                return {
+                    "status_code": 304,
+                    "content": b"",
+                    "url": current_url,
+                    "content_type": response.headers.get("Content-Type"),
+                    "etag": response.headers.get("ETag"),
+                    "last_modified": response.headers.get("Last-Modified"),
+                }
+            response.raise_for_status()
+            declared_size = int(response.headers.get("Content-Length") or 0)
+            if declared_size > maximum_bytes:
+                raise RuntimeError(
+                    f"Official document exceeds the {maximum_bytes // 1_048_576} MB limit."
+                )
+            chunks = []
+            size = 0
+            for chunk in response.iter_content(chunk_size=65_536):
+                if time.monotonic() >= deadline:
+                    raise RuntimeError("Official document exceeded its time limit.")
+                if not chunk:
+                    continue
+                size += len(chunk)
+                if size > maximum_bytes:
+                    raise RuntimeError(
+                        f"Official document exceeds the {maximum_bytes // 1_048_576} MB limit."
+                    )
+                chunks.append(chunk)
+            result = {
+                "status_code": response.status_code,
+                "content": b"".join(chunks),
                 "url": current_url,
                 "content_type": response.headers.get("Content-Type"),
                 "etag": response.headers.get("ETag"),
                 "last_modified": response.headers.get("Last-Modified"),
+                "encoding": response.encoding or "utf-8",
             }
-        response.raise_for_status()
-        declared_size = int(response.headers.get("Content-Length") or 0)
-        if declared_size > maximum_bytes:
+            return result
+        finally:
             response.close()
-            raise RuntimeError(
-                f"Official document exceeds the {maximum_bytes // 1_048_576} MB limit."
-            )
-        chunks = []
-        size = 0
-        for chunk in response.iter_content(chunk_size=65_536):
-            if not chunk:
-                continue
-            size += len(chunk)
-            if size > maximum_bytes:
-                response.close()
-                raise RuntimeError(
-                    f"Official document exceeds the {maximum_bytes // 1_048_576} MB limit."
-                )
-            chunks.append(chunk)
-        result = {
-            "status_code": response.status_code,
-            "content": b"".join(chunks),
-            "url": current_url,
-            "content_type": response.headers.get("Content-Type"),
-            "etag": response.headers.get("ETag"),
-            "last_modified": response.headers.get("Last-Modified"),
-        }
-        response.close()
-        return result
     raise RuntimeError("Official document redirected too many times.")
 
 
@@ -1587,16 +1669,22 @@ def build_document_entry(
 ):
     fetched_at = iso_utc(now)
     content = response["content"]
+    if content_kind(content, response.get("content_type"), source.get("name"), source["url"]) == "html":
+        content = scoped_html(content, source["url"])
     digest = hashlib.sha256(content).hexdigest()
     previous_document = (previous or {}).get("document") or {}
     previous_hash = previous_document.get("sha256")
     changed_since_previous = bool(previous_hash and previous_hash != digest)
 
-    if previous_hash == digest and previous:
+    same_extractor = previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+    same_route = previous_document.get("url") == (response.get("url") or source["url"])
+    if previous_hash == digest and same_extractor and same_route:
         entry = deepcopy(previous)
         entry["source_signature"] = source_signature(record, source)
         entry["checked_at"] = fetched_at
+        entry.pop("last_attempt_at", None)
         entry["last_error"] = None
+        entry["status"] = "current"
         entry["document"]["last_seen_at"] = fetched_at
         entry["document"]["etag"] = response.get("etag") or entry[
             "document"
@@ -1630,7 +1718,7 @@ def build_document_entry(
         return entry, False
 
     version_history = deepcopy((previous or {}).get("version_history") or [])
-    if previous_document.get("sha256"):
+    if changed_since_previous:
         version_history.append(
             {
                 "sha256": previous_document.get("sha256"),
@@ -1642,7 +1730,8 @@ def build_document_entry(
             }
         )
         version_history = version_history[-MAX_VERSION_HISTORY:]
-    version = int(previous_document.get("version") or 0) + 1
+    version = (int(previous_document.get("version") or 1) if previous_hash == digest
+               else int(previous_document.get("version") or 0) + 1)
     document = {
         "url": response.get("url") or source["url"],
         "name": source.get("name"),
@@ -1682,6 +1771,8 @@ def build_document_entry(
     )
     return {
         "source_signature": source_signature(record, source),
+        "source_url": source["url"],
+        "extractor_identity": EXTRACTOR_IDENTITY,
         "checked_at": fetched_at,
         "status": "current",
         "last_error": None,
@@ -1777,6 +1868,12 @@ def refresh_subtopics_without_source(
         opportunity_id = item[0]
         if opportunity_id not in store:
             continue
+        signature = source_signature(item[1], subtopic_sources.subtopic_only_primary(item[1]))
+        prior_signature = store[opportunity_id].get("source_signature")
+        if prior_signature is not None and prior_signature != signature:
+            store[opportunity_id]["status"] = "source_changed"
+            due.append(item)
+            continue
         checked_at = store[opportunity_id].get("checked_at")
         try:
             checked = datetime.fromisoformat(
@@ -1825,6 +1922,7 @@ def refresh_subtopics_without_source(
             "subtopic_method": "none",
         }
         fields["checked_at"] = fetched_at
+        fields["source_signature"] = source_signature(record, source)
         metrics["attempted"] += 1
         if fields.get("subtopics"):
             metrics["with_subtopics"] += 1
@@ -1855,12 +1953,13 @@ def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
         opportunity_id = str(opportunity_id)
         if opportunity_id not in current_parent_ids:
             continue
-        if "subtopics" not in entry:
+        invalid_evidence = entry.get("status") and entry["status"] != "current"
+        if "subtopics" not in entry and not invalid_evidence:
             continue
         subtopic_records.upsert_parent(
             cache,
             opportunity_id,
-            entry.get("subtopics") or [],
+            [] if invalid_evidence else entry.get("subtopics") or [],
             as_of=as_of,
             reason=entry.get("subtopic_reason"),
             method=entry.get("subtopic_method"),
@@ -1876,9 +1975,11 @@ def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False)
     # cached documents are never even candidates and never get subtopics.
     if needs_subtopics:
         return True
+    if entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
+        return True
     if entry.get("source_signature") != signature:
         return True
-    checked_at = entry.get("checked_at")
+    checked_at = entry.get("last_attempt_at") or entry.get("checked_at")
     if not checked_at:
         return True
     try:
@@ -1912,9 +2013,35 @@ def citation_deadline(fact):
 
 def merge_document_entry(record, entry):
     output = deepcopy(record)
+    # Remember source-owned values when a new extraction adds conservative
+    # flags. Re-enrichment can then undo only its own overrides.
+    for key, original in (output.get("document_evidence") or {}).get("source_fields", {}).items():
+        if original["present"]:
+            output[key] = original["value"]
+        else:
+            output.pop(key, None)
+    source_fields = {key: {"present": key in output, "value": deepcopy(output.get(key))}
+                     for key in ("has_preliminary_stage", "preliminary_stage_type", "limited_submission",
+                                 "status_verification_required", "actionability_status", "topic_areas")}
+    # Reapplying evidence must remove the prior derived deadlines/citations,
+    # including on amendment or failure. Source-listed facts keep authority.
+    deadlines = []
+    for deadline in output.get("deadlines") or []:
+        if deadline.get("evidence_id"):
+            continue
+        deadline = deepcopy(deadline)
+        if deadline.pop("document_evidence_id", None):
+            deadline.pop("citation", None)
+            deadline.pop("document_confidence", None)
+        deadlines.append(deadline)
+    if "deadlines" in output:
+        output["deadlines"] = deadlines
+    output.pop("document_evidence_checked_at", None)
+    output.pop("document_status_signals", None)
+    output.pop("limited_submission_review", None)
     previous_program_labels = list(output.pop("document_program_areas", None) or [])
     previous_program_topics = set(program_areas.topics_for(previous_program_labels))
-    if previous_program_topics:
+    if previous_program_topics and "topic_areas" not in (record.get("document_evidence") or {}).get("source_fields", {}):
         output["topic_areas"] = [
             topic
             for topic in (output.get("topic_areas") or [])
@@ -1956,6 +2083,10 @@ def merge_document_entry(record, entry):
         "facts": facts,
         "review_queue": deepcopy(entry.get("review_queue") or []),
     }
+    if entry.get("extractor_identity"):
+        output["document_evidence"]["dependency_version"] = 2
+        output["document_evidence"]["review_queue"] = build_review_queue(
+            record, facts, bool((entry.get("document") or {}).get("changed_since_previous")), entry.get("extraction") or {})
 
     deadlines = deepcopy(output.get("deadlines") or [])
     for fact in facts:
@@ -2063,6 +2194,11 @@ def merge_document_entry(record, entry):
     output["document_search_text"] = clean_text(
         " ".join(str(value) for value in searchable if value)
     )
+    if entry.get("extractor_identity"):
+        output["document_evidence"]["source_fields"] = {
+            key: value for key, value in source_fields.items()
+            if key == "topic_areas" or output.get(key) != value["value"] or (key in output) != value["present"]
+        }
     return output
 
 
@@ -2329,13 +2465,19 @@ def enrich_document_evidence(
             or ""
         )
         source = source_for_record(record)
+        entry = cached_records.get(opportunity_id)
+        if entry:
+            prior_url = entry.get("source_url") or str(entry.get("source_signature") or "").split("|", 1)[0]
+            if not source or (prior_url and prior_url != source["url"]):
+                entry["status"] = "source_changed"
+            elif entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
+                entry["status"] = "needs_revalidation"
         if not opportunity_id or not source:
             continue
         signature = source_signature(record, source)
-        entry = cached_records.get(opportunity_id)
         source_recheck_days = (
             recheck_days
-            if source["kind"] == "primary_notice"
+            if record.get("primary_document_url")
             else max(30, recheck_days)
         )
         backfill = needs_subtopics(entry, enable_subtopics)
@@ -2384,7 +2526,8 @@ def enrich_document_evidence(
         # §8.3 insertion 3, gate 2. A 304 returns no body, and you cannot
         # segment bytes you did not receive -- so a document needing backfill
         # asks for the whole thing.
-        if previous and not backfill and previous_document.get("url") == source["url"]:
+        if (previous and not backfill and previous.get("extractor_identity") in (None, EXTRACTOR_IDENTITY)
+                and previous_document.get("url") == source["url"]):
             if previous_document.get("etag"):
                 headers["If-None-Match"] = previous_document["etag"]
             if previous_document.get("last_modified"):
@@ -2393,8 +2536,12 @@ def enrich_document_evidence(
                 ]
         try:
             response = fetcher(source["url"], headers)
-            if response.get("status_code") == 304 and previous:
+            if response.get("status_code") == 304:
+                if not previous or not headers or response.get("url", source["url"]) != previous_document.get("url"):
+                    raise ValueError("unbound not-modified response")
                 previous["checked_at"] = iso_utc(now)
+                previous.pop("last_attempt_at", None)
+                previous["status"] = "current"
                 previous["last_error"] = None
                 previous["source_signature"] = signature
                 previous_document["last_seen_at"] = iso_utc(now)
@@ -2418,11 +2565,12 @@ def enrich_document_evidence(
             failure = {
                 "opportunity_id": opportunity_id,
                 "url": source["url"],
-                "error": str(exc)[:300],
+                "error": type(exc).__name__,
             }
             failures.append(failure)
-            if previous and previous.get("status") == "current":
-                previous["checked_at"] = iso_utc(now)
+            if previous:
+                previous["status"] = "failed"
+                previous["last_attempt_at"] = iso_utc(now)
                 previous["last_error"] = failure["error"]
             else:
                 cached_records[opportunity_id] = {
@@ -2458,6 +2606,7 @@ def enrich_document_evidence(
     output = deepcopy(catalog)
     output["opportunities"] = merged
     output["search_index"] = build_search_index(merged)
+    output["facets"] = facet_counts(merged)
     output["document_evidence_generated_at"] = iso_utc(now)
     output.setdefault("source", {})["document_evidence"] = {
         "method": (

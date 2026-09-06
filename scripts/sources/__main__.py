@@ -25,6 +25,34 @@ from pathlib import Path
 
 from .merge import DEFAULT_CACHE, DEFAULT_CATALOG, integrate
 from .registry import REGISTRY, collect
+from .intake import DEFAULT_INPUTS, accept, load_inputs, preview_url, validate_record
+
+
+def cmd_intake(args):
+    try:
+        if args.url:
+            if not args.adapter:
+                raise ValueError("supported URL intake requires --adapter")
+            entry, record = preview_url(args.url, args.adapter)
+            entries, records = [entry], [record]
+        else:
+            if args.adapter:
+                raise ValueError("--adapter applies only to URL intake")
+            entries = load_inputs(args.manifest)["entries"]
+            if not entries or any(not isinstance(e, dict) or e.get("kind") != "record" for e in entries):
+                raise ValueError("a record manifest requires at least one record entry")
+            records = [validate_record(e, resolve=True, verify_quotes=True) for e in entries]
+            from datetime import date
+            from .validate import record_is_publishable
+            for record in records:
+                ok, reason = record_is_publishable(record, date.today())
+                if not ok:
+                    raise ValueError("manifest record is not publishable: " + reason)
+        if args.accept:
+            accept(entries, args.inputs)
+        print(json.dumps({"accepted": args.accept, "input_path": str(args.inputs), "records": records}, indent=2))
+    except (ValueError, RuntimeError, OSError, KeyError, TypeError) as error:
+        raise SystemExit("Intake failed: " + str(error)) from None
 
 
 def summary_is_degraded(summary: dict, *, write_requested: bool = False) -> bool:
@@ -83,6 +111,7 @@ def cmd_merge(args):
         adapters=adapters,
         include_disabled=args.include_disabled,
         write=args.write,
+        intake_path=Path(args.inputs),
     )
     if args.summary_output:
         summary_path = Path(args.summary_output)
@@ -111,6 +140,15 @@ def main(argv=None):
 
     sub.add_parser("list", help="list registered adapters").set_defaults(func=cmd_list)
 
+    intake = sub.add_parser("intake", help="preview a supported official URL or cited manifest; --accept saves maintained inputs")
+    origin = intake.add_mutually_exclusive_group(required=True)
+    origin.add_argument("--url")
+    origin.add_argument("--manifest", type=Path)
+    intake.add_argument("--adapter", help="native source parser for URL intake")
+    intake.add_argument("--inputs", type=Path, default=DEFAULT_INPUTS)
+    intake.add_argument("--accept", action="store_true")
+    intake.set_defaults(func=cmd_intake)
+
     dry = sub.add_parser("dry-run", help="preview adapter output; no file writes")
     dry.add_argument("--adapter", help="only run this adapter slug")
     dry.add_argument("--include-disabled", action="store_true",
@@ -127,6 +165,7 @@ def main(argv=None):
     merge.add_argument("--include-disabled", action="store_true")
     merge.add_argument("--write", action="store_true",
                        help="actually rewrite the catalog (default is preview)")
+    merge.add_argument("--inputs", type=Path, default=DEFAULT_INPUTS, help="maintained developer inputs consumed by normal refresh")
     merge.add_argument(
         "--fail-on-degraded",
         action="store_true",

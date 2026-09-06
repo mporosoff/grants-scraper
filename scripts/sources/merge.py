@@ -288,6 +288,8 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "published": len(published), "healthy": healthy, "error": None,
                 "diagnostics": result.diagnostics,
                 **evidence,
+                **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}
+                   if any(r["reason"] != "expired" for r in dropped) else {}),
             })
         else:
             if result.retain_on_failure:
@@ -380,10 +382,10 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     # These research calls have an authoritative sponsor + solicitation key.
     # Titles can be shared by distinct calls, and numbers by distinct sponsors.
     unscoped = [r for r in combined if not research_solicitation_key(r)]
-    base_titles = {_norm_title(r) for r in unscoped if r.get("title")}
-    canonical_titles = {
-        _canonical_title(r) for r in unscoped if _canonical_title(r)
-    }
+    title_numbers = {}
+    for record in unscoped:
+        for title in {_norm_title(record), _canonical_title(record)} - {""}:
+            title_numbers.setdefault(title, set()).add(_norm_number(record.get("opportunity_number")))
     base_numbers = {
         _norm_number(r.get("opportunity_number"))
         for r in unscoped if r.get("opportunity_number")
@@ -399,10 +401,14 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
         title = _norm_title(record)
         canonical_title = _canonical_title(record)
         scoped = research_solicitation_key(record)
+        # A reused title cannot collapse explicitly different solicitations.
+        # Title fallback remains available when either source lacks a number.
+        title_duplicate = any(key in title_numbers and
+                              (not number or "" in title_numbers[key] or number in title_numbers[key])
+                              for key in (title, canonical_title) if key)
         if not scoped and (
             (number and number in base_numbers)
-            or title in base_titles
-            or (canonical_title and canonical_title in canonical_titles)
+            or title_duplicate
         ):
             dropped_crossdup += 1
             continue
@@ -410,10 +416,9 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
         combined.append(record)
         if number and not scoped:
             base_numbers.add(number)
-        if title and not scoped:
-            base_titles.add(title)
-        if canonical_title and not scoped:
-            canonical_titles.add(canonical_title)
+        if not scoped:
+            for key in {title, canonical_title} - {""}:
+                title_numbers.setdefault(key, set()).add(number)
         added += 1
 
     combined.sort(
@@ -486,7 +491,8 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
               adapters=None,
               include_disabled: bool = False,
               write: bool = False,
-              as_of: date | None = None) -> dict:
+              as_of: date | None = None,
+              intake_path: Path | None = None) -> dict:
     """Collect sources, apply the safe lifecycle, and merge into the catalog.
 
     With ``write=False`` (default) nothing is written; a summary is returned so
@@ -526,7 +532,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
     _, results = collect(
         adapters=selected_adapters,
         include_disabled=include_disabled,
-        context={"catalog_records": base, "as_of": as_of},
+        context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
     )
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)
@@ -564,6 +570,18 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         "discoverability_augmented": augmented,
         "validation": {"ok": validation_ok, "error": validation_error},
     }
+    selectors = [selector for result in results for selector in result.diagnostics.get("native_url_selectors", [])]
+    if selectors:
+        summary["intake"] = []
+        for selector in selectors:
+            result = next((r for r in results if r.slug == selector["adapter"]), None)
+            selected_identities = {record_identity(r) for r in (result.records if result else [])
+                                   if selector["url"] in {r.get("detail_page"), r.get("funding_opportunity_url"), r.get("primary_document_url")}}
+            matching = [r for r in combined if selector["url"] in
+                        {r.get("detail_page"), r.get("funding_opportunity_url"), r.get("primary_document_url")}
+                        or record_identity(r) in selected_identities]
+            summary["intake"].append(selector | {"state": "unavailable" if not result or not result.ok else
+                "canonical" if matching else "not_currently_listed", "opportunity_ids": [r["opportunity_id"] for r in matching]})
 
     if write and validation_ok:
         new_catalog = rebuild_catalog(catalog, combined, results, source_summaries)

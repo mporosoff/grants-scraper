@@ -141,6 +141,12 @@ def diff_catalogs(
             if (
                 old.get("last_updated") != record.get("last_updated")
                 or old.get("version") != record.get("version")
+                or (
+                    ((old.get("document_evidence") or {}).get("document") or {}).get("sha256")
+                    and ((record.get("document_evidence") or {}).get("document") or {}).get("sha256")
+                    and ((old.get("document_evidence") or {}).get("document") or {}).get("sha256")
+                    != ((record.get("document_evidence") or {}).get("document") or {}).get("sha256")
+                )
             ):
                 add("amended", record, "Official source record changed")
 
@@ -166,6 +172,21 @@ def diff_catalogs(
         current_record = after.get(ident)
         if current_record and record_is_current(current_record, as_of)[0]:
             continue
+        # A source that deliberately withholds unsafe cached records during an
+        # outage has not verified withdrawal. An independently known deadline
+        # can still close; a missing current record alone cannot.
+        if not current_record and record.get("source") not in {None, "Grants.gov"} and record_is_current(record, as_of)[0]:
+            source_state = (current.get("diagnostics") or {}).get("additional_sources") or {}
+            lifecycle = source_state.get("lifecycle") or []
+            matching = [s for s in lifecycle if s.get("source") == record.get("source")
+                        or str(record.get("opportunity_id") or "").startswith(str(s.get("slug")) + ":")]
+            if not matching or not all(s.get("status") == "refreshed" and s.get("healthy") for s in matching):
+                continue
+            if any(record.get("opportunity_id") in s.get("withheld_ids", []) for s in matching):
+                continue
+            adapters = source_state.get("adapters") or []
+            if any(a.get("source") == record.get("source") and not a.get("ok") for a in adapters):
+                continue
         if record_is_current(record, as_of - timedelta(days=1))[0]:
             add(
                 "closed_or_removed",
