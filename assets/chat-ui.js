@@ -301,12 +301,13 @@
   }
 
   function resultScopeSummary(count, limit) {
-    if (count > limit) return `Narrow to ${limit} or fewer results so every result can be included.`;
+    if (count > limit) return `AI can use the ${limit} most relevant of your ${count} current results. Ask about fit, deadlines, amounts, or eligibility. Change your search or filters to discuss other opportunities, or use a card’s More menu to ask about one opportunity.`;
     return `AI can use all ${count} current ${count === 1 ? "result" : "results"}. Ask about fit, deadlines, amounts, or eligibility. Change your search or filters to discuss other opportunities.`;
   }
 
   function resultContextLabel(mode, count) {
     if (mode === "focused_opportunity") return "Single connected opportunity";
+    if (mode === "top_results") return `Top ${count} relevant results included`;
     return `All ${count} current ${count === 1 ? "result" : "results"} included`;
   }
 

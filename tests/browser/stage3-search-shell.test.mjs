@@ -305,7 +305,7 @@ test("empty/loading/degraded states distinguish outcomes, offer one next action 
   assert.equal($("results").querySelector("button").dataset.emptyAction, "chat");
   assert.match(fn("renderChat"), /\$\("open-results-chat"\)\.hidden = !state\.searched/);
   assert.match(fn("renderChat"), /\$\("open-results-chat"\)\.disabled = !canChat/);
-  assert.match(fn("renderChat"), /contextIds\.length > MAX_CHAT_SCOPE/);
+  assert.match(fn("renderChat"), /!hasResultChatScope\(\)/);
   assert.match(css, /\.results-toolbar\.results-empty \.toolbar-controls \{ display: none; \}/);
   assert.match(fn("renderResults"), /renderHybridStatus\(\)/);
   for (const id of ["topic-layer-warning", "stale-warning", "potential-status"])

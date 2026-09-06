@@ -139,7 +139,7 @@ A user may choose OpenAI or Anthropic and enter one provider key. The same provi
 
 1. **Alternative-phrase expansion:** translate the enabled search context into 5–16 independent, concrete scientific phrases and synonyms.
 2. **Bounded additive assessment:** compare at most 32 new candidates that independently passed local Strong admission and add at most 12 without removing or reordering ordinary results.
-3. **Chat with results:** answer questions over the top 20 active ordinary or additively refined results; preserve Strong/Potential tier and AI-identification provenance; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
+3. **Chat with results:** answer questions over up to the 10 most relevant active ordinary or additively refined results after a search or non-default filter; preserve Strong/Potential tier and AI-identification provenance; connect every named opportunity back to its result card and official source; and focus the displayed list when explicitly requested.
 4. **Chat with an uploaded notice:** answer questions over a page-marked, bounded PDF extract; cite supporting page numbers; and compare against an automatically matched catalog record when available.
 
 AI settings sit inside that same workflow. “Refine these results with AI”

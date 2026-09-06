@@ -174,14 +174,16 @@ function requestFixture(mode) {
     return controls.get(id);
   };
   const state = {
-    ready: true, ordinarySearchSignature: "search-one", refinement: { active: false },
+    ready: true, searched: true, query: "catalysis", profile: { active: false }, ordinarySearchSignature: "search-one", refinement: { active: false },
     ai: { mode, active: !!mode, messages: [], busy: false },
     nofo: { fileName: "fixture.pdf", text: "[Page 1] Public fixture notice", pageCount: 1, pagesRead: 1, matchedId: "one" },
   };
   const record = { opportunity_id: "one", title: "Public fixture" };
   const requests = [];
   const sandbox = {
-    state, $, catalog: { opportunities: [record] }, MAX_AI_MESSAGE_CHARS: 3000, MAX_NOFO_AI_CHARS: 2000, MAX_CHAT_RESULTS: 10, MAX_CHAT_SCOPE: 10, PROMPT_VERSION: "fixture",
+    state, $, catalog: { opportunities: [record] }, MAX_AI_MESSAGE_CHARS: 3000, MAX_NOFO_AI_CHARS: 2000, MAX_CHAT_RESULTS: 10, PROMPT_VERSION: "fixture",
+    hasResultChatScope: () => true, APP_CONFIG: { flags: { searchV2: true } },
+    RESULT_WORKFLOW_API: { workflowTier: match => match.workflowTier || "strong" },
     hasNofoDocument: () => mode === "uploaded-nofo", providerReady: () => true,
     currentChatIds: () => ["one"], currentDisplayMatches: () => [{ index: 0 }],
     recordId: item => item.opportunity_id, compactRecord: item => item, compactResultRecord: item => ({ id: item.opportunity_id, title: item.title }), boundRecordPayload: item => item,
@@ -239,34 +241,35 @@ for (const mode of ["", "uploaded-nofo"]) {
       assert.ok(requests[2].payload.conversation.every(message => !Object.hasOwn(message, "contextIds")), "Local evidence scope metadata must not leak through the provider conversation boundary");
       requests[2].resolve({ answer: "Deadline not listed", referenced_result_ids: ["one"] });
       await followUp;
-      sandbox.currentChatIds = () => Array.from({ length: 11 }, (_, i) => String(i));
+      sandbox.hasResultChatScope = () => false;
       const before = state.ai.messages.length;
       await sandbox.askResults("Compare these opportunities");
-      assert.equal(state.ai.messages.length, before, "The broad-results guard runs before creating a chat message");
-      assert.equal(requests.length, 3, "An oversized result set must not reach the provider");
+      assert.equal(state.ai.messages.length, before, "The unfiltered-browse guard runs before creating a chat message");
+      assert.equal(requests.length, 3, "Unfiltered browsing must not reach the provider");
       assert.equal(state.ai.busy, false);
     }
   });
 }
 
-test("the actual provider request includes all ten current results and matched child evidence on every turn", async () => {
+test("the actual provider request caps a larger search at ten relevant results and includes matched child evidence on every turn", async () => {
   const { sandbox, requests } = requestFixture("");
   vm.runInContext(await read("assets/chat-ui.js"), sandbox);
   sandbox.CHAT_UI = sandbox.FUNDING_CHAT_UI;
-  vm.runInContext(fn(app, "retrieveChatContext"), sandbox);
-  const ids = ["one", ...Array.from({ length: 9 }, (_, i) => `result-${i}`)];
+  for (const name of ["compareValues", "sortMatches", "retrieveChatContext"]) vm.runInContext(fn(app, name), sandbox);
+  const ids = ["one", ...Array.from({ length: 29 }, (_, i) => `result-${i}`)];
   sandbox.catalog.opportunities = ids.map(id => ({ opportunity_id: id, title: `Program ${id}`, description: "Public research program." }));
   sandbox.currentChatIds = () => [...ids];
   sandbox.currentDisplayMatches = () => ids.map((_, index) => ({
-    index,
+    index, score: 100 - index,
     ...(index === 0 ? { bestChild: { record: { title: "Surface catalysis", description: "Heterogeneous catalysis at solid interfaces." } } } : {}),
-  }));
+  })).reverse();
   for (const question of ["Which opportunities fit heterogeneous catalysis?", "Which of those has more funding instead?"]) {
     const pending = sandbox.askResults(question);
     await new Promise(resolve => setImmediate(resolve));
     const request = requests.at(-1);
-    assert.deepEqual(request.payload.current_results.map(record => record.id), ids);
-    assert.equal(request.payload.result_context, "All 10 current results included");
+    assert.deepEqual(request.payload.current_results.map(record => record.id), ids.slice(0, 10));
+    assert.equal(request.payload.result_context, "Top 10 relevant results included");
+    assert.match(request.system, /may be a subset/);
     assert.match(request.payload.current_results[0].description, /Matching child topic: Surface catalysis/);
     assert.match(request.payload.current_results[0].description, /Heterogeneous catalysis at solid interfaces/);
     request.resolve({ answer: "Review the supplied evidence.", referenced_result_ids: ["one"] });
