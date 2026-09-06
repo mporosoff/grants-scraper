@@ -286,11 +286,12 @@ class ConfirmationHealthTests(unittest.TestCase):
         for row in data["darpa"]:
             row["field_body_with_summary"] = ""
             row["field_body_with_summary_1"] = ""
-        self.assert_degraded(data, "research submission evidence")
+        self.assert_degraded(data, "required official route")
         data = payload()
         for row in data["darpa"]:
             if row["field_opportunity_number"].startswith("DARPA-PA-"):
-                row["field_body_with_summary"] = "Disruption Opportunity: research details."
+                links = " ".join(re.findall(r'<a\b.*?</a>', row["field_body_with_summary"], re.S))
+                row["field_body_with_summary"] = "Disruption Opportunity: research details. " + links
                 row["field_body_with_summary_1"] = ""
         self.assert_degraded(data, "research submission evidence")
 
@@ -367,6 +368,39 @@ class ConfirmationHealthTests(unittest.TestCase):
             published, results = collect([instance])
         self.assertTrue(results[0].ok)
         self.assertEqual(len(published), 3)
+
+    def test_darpa_exclusions_precede_missing_admission_evidence(self):
+        for closed in [True, False]:
+            data = with_iarpa()
+            for row in data["darpa"]:
+                if row["field_opportunity_number"] == "DARPA-PA-26-02-02":
+                    row["field_body_with_summary"] = f'<p>QBI research. <a href="{QBI}">Program</a></p>'
+                    row["field_body_with_summary_1"] = ""
+                    row["field_external_url"] = ""
+            replacement = "TBD</p><p>Status: CLOSED" if closed else "Aug. 30, 2026"
+            data["pages"][QBI] = data["pages"][QBI].replace("Nov. 30, 2026", replacement)
+            instance = adapter()
+            with self.subTest(closed=closed), patch.object(instance, "fetch", return_value=data):
+                published, results = collect([instance])
+                self.assertTrue(results[0].ok)
+                self.assertEqual(len(published), 4)
+                self.assertNotIn("DARPA-PA-26-02-02", [r["opportunity_number"] for r in published])
+
+    def test_iarpa_exclusions_precede_missing_action_evidence(self):
+        for closed in [True, False]:
+            data = with_iarpa()
+            html = data["pages"][IARPA_PROGRAM].replace("https://sam.gov/opp/", "https://sam.gov/search/")
+            if closed:
+                html = html.replace("<br>OPEN", "<br>CLOSED").replace("October 15, 2026", "TBD")
+            else:
+                html = html.replace("October 15, 2026", "August 15, 2026")
+            data["pages"][IARPA_PROGRAM] = html
+            instance = adapter()
+            with self.subTest(closed=closed), patch.object(instance, "fetch", return_value=data):
+                published, results = collect([instance])
+                self.assertTrue(results[0].ok)
+                self.assertEqual(len(published), 4)
+                self.assertTrue(all(r["agency"] != IARPA for r in published))
 
     def test_page_failure_clears_entire_adapter_snapshot(self):
         instance = adapter()

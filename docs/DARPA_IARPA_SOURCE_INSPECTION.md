@@ -20,6 +20,8 @@ Child-shaped PA numbers for other programs are excluded before detail fetching;
 only established Disruption/QBI scope makes submission evidence required.
 Explicit closed status markers, including standalone HTML labels, exclude the
 corresponding child while leaving its open siblings available.
+For both sponsors, explicit closure and verified date-window exclusions precede
+positive admission requirements such as submission language and action links.
 
 | Individual call | Solicitation | Program-page submission deadline |
 |---|---|---|

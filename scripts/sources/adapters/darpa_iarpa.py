@@ -294,10 +294,8 @@ class DarpaIarpaAdapter(SourceAdapter):
         for row in rows:
             number = plain(row["field_opportunity_number"]).upper()
             summary = plain(row.get("field_body_with_summary") or row.get("field_body_with_summary_1"))
-            if not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I):
-                raise ValueError(f"DARPA child research submission evidence missing: {number}")
             url = darpa_program_url(row)
-            if not url or not notice_url(row["field_external_url"]):
+            if not url:
                 raise ValueError(f"DARPA required official route missing or unsupported: {number}")
             if url not in pages:
                 raise ValueError(f"DARPA detail page missing: {url}")
@@ -312,6 +310,12 @@ class DarpaIarpaAdapter(SourceAdapter):
             if not current(close, opened, as_of):
                 skipped["darpa_outside_submission_window"] += 1
                 continue
+            # Positive admission proof is relevant only after the exact call's
+            # explicit status and verified date window leave it actionable.
+            if not re.search(r"inviting submissions|solicit|invites? proposals", summary, re.I):
+                raise ValueError(f"DARPA child research submission evidence missing: {number}")
+            if not notice_url(row["field_external_url"]):
+                raise ValueError(f"DARPA required official route missing or unsupported: {number}")
             links = [href for href, label in _LINK.findall(block) if re.search(r"solicitation", plain(label), re.I)]
             # Both sources must identify the same notice. The public and
             # workspace SAM routes are equivalent presentations of that ID.
@@ -350,11 +354,6 @@ class DarpaIarpaAdapter(SourceAdapter):
                 continue
             if not re.fullmatch(r"(?:broad agency announcement(?:\s*\(baa\))?|research solicitation|baa)\s*[-:\u2013\u2014]?\s*open", status_text):
                 raise ValueError(f"IARPA unrecognized research solicitation status: {row['number']}")
-            # Link identity must match the listing's solicitation, not an RFI
-            # or proposers' day link elsewhere on the same program page.
-            links = [href for href, label in _LINK.findall(html)
-                     if normalized_number(plain(label)) == normalized_number(row["number"])]
-            action = confirmed_notice_action(links, "IARPA", row["number"])
             fields = iarpa_fields(html)
             if not fields:
                 raise ValueError(f"IARPA solicitation date markup missing: {row['url']}")
@@ -368,6 +367,11 @@ class DarpaIarpaAdapter(SourceAdapter):
             if not current(close, opened, as_of):
                 skipped["iarpa_outside_submission_window"] += 1
                 continue
+            # Link identity must match the listing's solicitation, not an RFI
+            # or proposers' day link elsewhere on the same program page.
+            links = [href for href, label in _LINK.findall(html)
+                     if normalized_number(plain(label)) == normalized_number(row["number"])]
+            action = confirmed_notice_action(links, "IARPA", row["number"])
             description = re.search(r'<meta\b[^>]*name="description"[^>]*content="([^"]*)"', html, re.I)
             description = plain(description.group(1)) if description else row["title"]
             key = ("iarpa", normalized_number(row["number"]))
