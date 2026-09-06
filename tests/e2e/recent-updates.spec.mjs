@@ -4,9 +4,12 @@ import {
   openFundingFinder, runFundingSearch, waitForHybridSettled,
 } from "./helpers.mjs";
 import { closeFundingRefine } from "./public-tool-workflow.mjs";
+import { installRecentUpdatesFixture } from './recent-updates-fixture.mjs';
 import {
   buildAwardSnapshot, publicSnapshot, snapshotPage, snapshotSourceBatch,
 } from "../../workers/award-api/src/snapshot.js";
+
+test.beforeEach(async ({ page }) => installRecentUpdatesFixture(page));
 
 async function closeChat(page) {
   await page.locator('#result-assistant [data-shell-drawer-close]').click();
@@ -23,7 +26,7 @@ async function sendQuestion(page, ai, question, count) {
 for (const width of [1280, 390, 320]) {
   test(`Ask AI bounds requests, keeps follow-up scope, and supports card menus at ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 844 });
-    mockHybrid(page, { maxRankings: 0 });
+    mockHybrid(page);
     const ai = await mockOpenAiBroadening(page);
     await openFundingFinder(page);
     await expect(page.locator('#open-results-chat')).toBeDisabled();
@@ -31,9 +34,9 @@ for (const width of [1280, 390, 320]) {
     await expect(page.locator('#results .result-card').first()).toBeVisible();
     await expect(page.locator('#open-results-chat')).toBeDisabled();
     await expect(page.locator('#chat-scope-hint')).toContainText('Run a search or apply a non-default filter');
-    await page.locator('#query').fill('research');
+    await page.locator('#query').fill('catalysis science');
     await expect(page.locator('#open-results-chat')).toBeDisabled();
-    await runFundingSearch(page, 'research');
+    await runFundingSearch(page, 'catalysis science');
     await waitForHybridSettled(page);
     const counts = (await page.locator('#result-tier-counts').textContent()).match(/(\d+) strong.*?(\d+) potential/);
     expect(Number(counts[1]) + Number(counts[2])).toBeGreaterThan(10);
@@ -130,15 +133,16 @@ test('saved opportunity alerts work before searching and enforce the selected pu
 test('specific team topics support alternatives, explicit replacement, and Team Match handoff', async ({ page }) => {
   mockHybrid(page);
   await openFundingFinder(page);
-  await runFundingSearch(page, 'DEVCOM');
+  await runFundingSearch(page, 'Genesis');
   await page.locator('#filter-team-ready').click();
-  await page.locator('[data-opportunity-team][data-opportunity-team-broad="true"]').first().click();
+  await page.locator('[data-opportunity-team="361526"]').click();
   const panel = page.locator('#team-builder');
   await expect(panel.getByText('Choose a specific opportunity topic', { exact: true })).toBeVisible();
   await panel.locator('[data-opportunity-team-scope]').first().click();
   await expect(panel.locator('[data-opportunity-team-remove]').first()).toBeVisible();
   const variants = panel.locator('[data-opportunity-team-variant]');
-  if (await variants.count() > 1) await variants.last().click();
+  await expect(variants).toHaveCount(2);
+  await variants.last().click();
   const remove = panel.locator('[data-opportunity-team-remove]').first();
   const memberId = await remove.getAttribute('data-opportunity-team-remove');
   await remove.click();
