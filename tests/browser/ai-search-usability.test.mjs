@@ -31,14 +31,22 @@ test("question retrieval keeps scientific qualifiers and recognizes factual foll
   assert.equal(ui.resolveEvidenceLinks("[unknown](missing)", []), "[unknown](missing)");
 });
 
-test("every bounded result is included regardless of question wording or previous references", async () => {
+test("chat uses up to ten relevant results regardless of question wording, card sort, or previous references", async () => {
+  const records = Array.from({ length: 16 }, (_, index) => ({ opportunity_id: String(index), close_date: `2027-01-${String(index + 1).padStart(2, "0")}` }));
+  const matches = records.map((_, index) => ({ index, score: 100 - index, workflowTier: index < 12 ? "strong" : "potential", evidenceTier: 1 }));
+  matches[15].score = 1000;
+  const displayed = [...matches].reverse();
   const context = {
-    CHAT_UI: ui, MAX_CHAT_RESULTS: 10, state: { ai: { mode: "results" } },
+    CHAT_UI: ui, MAX_CHAT_RESULTS: 10, state: { query: "catalysis", profile: { active: false }, ai: { mode: "results" } },
+    catalog: { opportunities: records }, APP_CONFIG: { flags: { searchV2: true } },
+    currentDisplayMatches: () => displayed, recordId: record => record.opportunity_id,
+    RESULT_WORKFLOW_API: { workflowTier: match => match.workflowTier },
     computeMatches: () => { throw new Error("Chat must use the full current set without another retrieval"); },
     hybridSearchClient: { search: () => { throw new Error("Chat must not substitute another subset"); } },
   };
-  vm.createContext(context); vm.runInContext(fn(app, "retrieveChatContext"), context);
-  const ids = [...Array.from({ length: 9 }, (_, index) => String(index)), "75"];
+  vm.createContext(context);
+  for (const name of ["compareValues", "sortMatches", "retrieveChatContext"]) vm.runInContext(fn(app, name), context);
+  const ids = records.slice(0, 10).map(record => record.opportunity_id);
   const previous = [{ role: "assistant", contextIds: ["77", "78"], resultIds: ["78"] }];
   for (const question of [
     "What opportunities fit heterogeneous catalysis?", "Which of those has more funding instead?",
@@ -52,26 +60,118 @@ test("every bounded result is included regardless of question wording or previou
     assert.deepEqual([...result.ids], ids, question);
   }
   const reordered = await context.retrieveChatContext("Compare their budgets", [...ids].reverse(), previous);
-  assert.deepEqual([...reordered.ids], [...ids].reverse());
+  assert.deepEqual([...reordered.ids], ids, "Card order must not override relevance");
   const filtered = await context.retrieveChatContext("What are their deadlines?", ids.slice(1), previous);
   assert.deepEqual([...filtered.ids], ids.slice(1), "Only the current eligible set is supplied");
-  const broad = await context.retrieveChatContext("Compare the opportunities", [...ids, "76"], previous);
-  assert.deepEqual([...broad.ids], [], "An oversized scope must never be silently truncated");
+  const broad = await context.retrieveChatContext("Compare the opportunities", records.map(record => record.opportunity_id), previous);
+  assert.deepEqual([...broad.ids], ids, "Strong matches precede Potential matches even with a higher score");
+  assert.equal(broad.mode, "top_results");
+  assert.deepEqual(displayed.map(match => match.index), [...matches].reverse().map(match => match.index), "Selecting context must not reorder the cards");
+  const potential = await context.retrieveChatContext("Compare these leads", ["12", "13", "14", "15"]);
+  assert.deepEqual([...potential.ids], ["15", "12", "13", "14"]);
+  context.state.query = "";
+  const filteredBrowse = await context.retrieveChatContext("Compare deadlines", records.map(record => record.opportunity_id));
+  assert.deepEqual([...filteredBrowse.ids], ids, "Filter-only searches use the usual deadline tie-break");
+  context.state.ai.mode = "foa-focus";
+  const single = await context.retrieveChatContext("Explain this call", ["15"]);
+  assert.deepEqual([...single.ids], ["15"]);
+  assert.equal(single.mode, "focused_opportunity");
   assert.match(ui.resultScopeSummary(10, 10), /all 10 current results/);
-  assert.match(ui.resultScopeSummary(11, 10), /Narrow to 10 or fewer/);
+  assert.match(ui.resultScopeSummary(11, 10), /10 most relevant of your 11 current results/);
   assert.equal(ui.resultContextLabel("complete_results", 10), "All 10 current results included");
+  assert.equal(ui.resultContextLabel("top_results", 10), "Top 10 relevant results included");
 });
 
-test("broad browsing is blocked at 11 results, while bounded and uploaded contexts remain usable", () => {
-  const context = { MAX_CHAT_SCOPE: 10, currentChatIds: () => Array(10).fill("a"), hasNofoDocument: () => false };
-  vm.createContext(context); vm.runInContext(fn(app, "chatHasContext"), context);
+test("unfiltered browsing stays disabled until a search or any non-default filter is applied", () => {
+  const controls = new Map();
+  const $ = id => {
+    if (!controls.has(id)) controls.set(id, { value: id === "audience-filter" ? "all" : "", checked: ["status-posted", "status-forecasted"].includes(id) });
+    return controls.get(id);
+  };
+  const state = { query: "", profile: { active: false }, ai: { active: false }, filters: { agency: new Set(), discipline: new Set() } };
+  const context = { state, $, FACETS: { agency: {}, discipline: {} }, currentChatIds: () => Array(100).fill("a"), hasNofoDocument: () => false };
+  vm.createContext(context);
+  for (const name of ["hybridFilterState", "hasResultChatScope", "chatHasContext"]) vm.runInContext(fn(app, name), context);
+  assert.equal(context.chatHasContext(), false);
+  for (const id of ["query", "sort"]) {
+    $(id).value = id === "query" ? "unsubmitted query" : "award";
+    assert.equal(context.chatHasContext(), false, "Draft queries and card sorting do not scope the results");
+  }
+  state.query = "catalysis";
   assert.equal(context.chatHasContext(), true);
-  context.currentChatIds = () => Array(11).fill("a");
+  state.query = "";
+  for (const [id, property, value] of [
+    ["status-posted", "checked", false], ["status-forecasted", "checked", false], ["status-archived", "checked", true],
+    ["deadline-from", "value", "2027-01-01"], ["deadline-to", "value", "2027-12-31"], ["award-min", "value", "100"],
+    ...["flag-evidence", "flag-preliminary", "flag-limited", "flag-early-career", "flag-no-cost-share"].map(id => [id, "checked", true]),
+    ["audience-filter", "value", "research"],
+  ]) {
+    const original = $(id)[property];
+    $(id)[property] = value;
+    assert.equal(context.chatHasContext(), true, id);
+    $(id)[property] = original;
+    assert.equal(context.chatHasContext(), false, `Restoring ${id} to default disables chat`);
+  }
+  $("award-min").value = "0";
+  assert.equal(context.chatHasContext(), false);
+  for (const values of Object.values(state.filters)) {
+    values.add("one");
+    assert.equal(context.chatHasContext(), true);
+    values.clear();
+  }
+  for (const [owner, key] of [[state.profile, "active"], [state, "teamReadyOnly"]]) {
+    owner[key] = true;
+    assert.equal(context.chatHasContext(), true);
+    owner[key] = false;
+  }
+  state.ai = { active: true, mode: "foa-focus" };
+  context.currentChatIds = () => ["one"];
+  assert.equal(context.chatHasContext(), true);
+  context.currentChatIds = () => [];
   assert.equal(context.chatHasContext(), false);
   context.hasNofoDocument = () => true;
   assert.equal(context.chatHasContext(), true);
-  assert.match(app, /const MAX_CHAT_SCOPE = MAX_CHAT_RESULTS/);
   assert.match(page, /aria-describedby="chat-scope-hint"/);
+});
+
+test("Ask AI shows its ten-opportunity limit and explains the disabled unfiltered catalog state", () => {
+  const dom = shellDom(page);
+  const $ = id => dom.document.getElementById(id);
+  const state = { searched: true, query: "", profile: { active: false }, filters: {}, refinement: { active: false }, nofo: { text: "" }, ai: { active: false, mode: "", busy: false, messages: [], suggestions: [] } };
+  let ids = Array.from({ length: 100 }, (_, i) => String(i));
+  const context = Object.assign(dom.context, {
+    $, state, FACETS: {}, CHAT_UI: ui, MAX_CHAT_RESULTS: 10, DEFAULT_CHAT_SUGGESTIONS: [],
+    currentChatIds: () => ids, providerReady: () => true, renderNofoContext() {},
+    closeExpandedChat() { $("result-assistant").open = false; },
+  });
+  $("status-posted").checked = $("status-forecasted").checked = true;
+  $("status-archived").checked = false;
+  $("audience-filter").value = "all";
+  vm.createContext(context);
+  for (const name of ["hybridFilterState", "hasNofoDocument", "hasResultChatScope", "chatHasContext", "renderChatProviderState", "renderChat"]) vm.runInContext(fn(app, name), context);
+  context.renderChat();
+  assert.equal($("open-results-chat").disabled, true);
+  assert.equal($("open-results-chat").hidden, false);
+  assert.equal($("chat-scope-hint").hidden, false);
+  assert.match($("chat-scope-hint").textContent, /Run a search or apply a non-default filter/);
+  state.query = "catalysis";
+  context.renderChat();
+  assert.equal($("open-results-chat").disabled, false);
+  assert.equal($("chat-submit").disabled, false);
+  assert.match($("chat-scope-hint").textContent, /up to the 10 most relevant opportunities/);
+  assert.doesNotMatch($("chat-scope-hint").textContent, /Run a search/);
+  assert.match($("chat-summary").textContent, /10 most relevant of your 100 current results/);
+  state.query = "";
+  $("result-assistant").open = true;
+  context.renderChat();
+  assert.equal($("open-results-chat").disabled, true);
+  assert.equal($("result-assistant").open, false);
+  ids = [];
+  state.nofo.text = "Uploaded notice";
+  state.ai.mode = "uploaded-nofo";
+  context.renderChat();
+  assert.equal($("open-results-chat").disabled, false);
+  assert.equal($("chat-scope-hint").hidden, true);
 });
 
 test("a drawer follows keyboard viewport changes and cleans up its temporary geometry", () => {
