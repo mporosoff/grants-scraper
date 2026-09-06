@@ -208,7 +208,15 @@ private Markdown, JSON, and CSV reports.
 
 The daily workflow processes the official [Grants.gov XML database extract](https://www.grants.gov/xml-extract), then merges enabled, independently validated
 public-source adapters. NSF upcoming due dates, NYSERDA, ARPA-E eXCHANGE, and
-DOE EERE Exchange are enabled. NASA NSPIRES and UR InfoReady remain disabled
+DOE EERE Exchange are enabled. One DARPA/IARPA adapter adds current individual
+DARPA Disruption Opportunity and QBI topic calls and open IARPA research
+solicitations. It verifies exact solicitation links and submission dates,
+excludes umbrella announcements, drafts, RFIs and events, and deduplicates by
+normalized sponsor and solicitation number, with Grants.gov taking precedence.
+IARPA can correctly contribute zero when its official open R&D table is empty.
+These federal records use the same search, agency/topic filters, saved results,
+comparison, CSV/calendar exports, feeds, alerts and team-matching pipeline.
+NASA NSPIRES and UR InfoReady remain disabled
 shells until stable public or permissioned routes exist. It publishes open
 posted and current forecasted records plus a compact BM25 search index to
 `data/opportunities.js`. Past deadlines are rejected for every source, and

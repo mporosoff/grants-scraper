@@ -106,6 +106,7 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 | `sample` | Works (offline) | Demo/tests only; stays disabled. |
 | `pnd-rfp` (Philanthropy News Digest / Candid) | Ready to configure | Confirm the live RSS URL and add a topic/eligibility filter (it's nonprofit-skewed) before enabling. |
 | `nsf-funding` | Enabled | Official NSF upcoming-due-dates feed; tolerant of the feed's malformed bare ampersands and protected by source health bounds. |
+| `darpa-iarpa` | Enabled | One adapter for individual DARPA Disruption/QBI topics and IARPA open research solicitations. Requires exact official solicitation links, open status and current submission dates; excludes umbrella PAs, drafts, RFIs and events. Deduplicates by normalized sponsor and solicitation number. A verified IARPA empty table is healthy; either source failing clears this adapter's snapshot. |
 | `nih-guide` | Disabled intentionally | NIH stopped publishing NOFOs in the Guide in FY2026; its feed now carries policy/informational notices while Grants.gov is the official NIH NOFO source. |
 | `nyserda` | Enabled | Verified live JSON API; publishes the next open application round and retains later application/concept-paper dates as structured deadlines. |
 | `arpa-e` | Enabled | Server-rendered ARPA-E eXCHANGE NOFO list; excludes RFIs/teaming/intent notices and retains later open submission dates. |
