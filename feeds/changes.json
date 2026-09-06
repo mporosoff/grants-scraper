@@ -1,8 +1,512 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-06T00:28:24Z",
+  "generated_at": "2026-09-06T13:45:01Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "b9a9b5e5249b9f879bff",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "360893",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "360893",
+        "opportunity_number": "RFA-AG-26-021",
+        "title": "Mechanisms Underlying Olfactory Dysfunction in Aging and Alzheimer’s Disease and Alzheimer’s Disease-Related Dementias",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-10-06",
+        "last_updated": "2025-11-20",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360893",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "a3f0af2a10e022f23f30",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "363742",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "363742",
+        "opportunity_number": "OFOP0003762",
+        "title": "Implementation of Four GCTF Classic Workshops in 2027",
+        "agency": "American Institute in Taiwan",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-28",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-08-28",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce",
+          "Manufacturing"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Nonprofits with 501(c)(3) status"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 450000,
+        "award_ceiling": 500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363742",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "95668f25e1029ad4f841",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "360910",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "360910",
+        "opportunity_number": "RFA-AG-26-022",
+        "title": "Novel Approaches to Advance Precision Aging and Cognitive Health",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-10-06",
+        "last_updated": "2025-11-24",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Biology and biotechnology",
+          "Neuroscience"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360910",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "61b97ed570929b3a7d2a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "360894",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "360894",
+        "opportunity_number": "RFA-AG-26-018",
+        "title": "Understanding Cerebellar Contributions to Cognitive and Affective Functions in Aging and Alzheimer's Disease/Alzheimer's Disease-Related Dementias",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-10-06",
+        "last_updated": "2025-11-20",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Neuroscience"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360894",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "48326c5d6a13e30b8a41",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "363725",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "363725",
+        "opportunity_number": "O-BJA-2026-172690",
+        "title": "BJA FY 2026 Byrne State Crisis Intervention Formula Program",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-27",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-08-27",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 16015504,
+        "detail_page": "https://www.grants.gov/search-results-detail/363725",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172690",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "3ffcc7af6f42a78662f9",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "363817",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "363817",
+        "opportunity_number": "W9126G262SOI0520",
+        "title": "Groundwater and Surficial Water Salinity Changes in Everglades National Park using Aerial Electromagnetic Surveys",
+        "agency": "Fort Worth District",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-09-04",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-09-04",
+        "version": "Synopsis 2",
+        "topic_areas": [],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 300000,
+        "award_ceiling": 1657690,
+        "detail_page": "https://www.grants.gov/search-results-detail/363817",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "37bc831d6fe864403b7d",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "363629",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "363629",
+        "opportunity_number": "O-BJA-2026-172697",
+        "title": "BJA FY 2026 The Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities",
+        "agency": "Bureau of Justice Assistance",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-17",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-08-17",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Environmental science"
+        ],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363629",
+        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172697",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "346e0a7ed4ba5d2dc5ea",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "363664",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "363664",
+        "opportunity_number": "O-OVW-2026-172651",
+        "title": "OVW Fiscal Year 2026 Electronic Service Protection Order Court Pilot Program",
+        "agency": "Office on Violence Against Women",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-19",
+        "close_date": "2026-10-06",
+        "last_updated": "2026-08-19",
+        "version": "Synopsis 1",
+        "topic_areas": [],
+        "disciplines": [
+          "Community and Social Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 1500000,
+        "award_ceiling": 1500000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363664",
+        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1458651/dl?inline",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "3107b2e29b0bace18944",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "360906",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "360906",
+        "opportunity_number": "RFA-AG-26-023",
+        "title": "Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-10-06",
+        "last_updated": "2025-11-21",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Artificial intelligence and machine learning",
+          "Biology and biotechnology",
+          "Infectious disease",
+          "Neuroscience"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/360906",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "1f9df9c96a45eb7bf761",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "nyserda:PON5437",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "nyserda:PON5437",
+        "opportunity_number": "PON 5437",
+        "title": "Apprenticeship and Pre-apprenticeship Clean Energy Training",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-10-06",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Education and workforce",
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000FOEyAAO",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000FOEyAAO",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
+    {
+      "id": "18c547cd2aa51bf8cf67",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-06T13:41:43.484683Z",
+      "opportunity_id": "359252",
+      "detail": "Deadline 2026-10-06",
+      "record": {
+        "opportunity_id": "359252",
+        "opportunity_number": "RFA-DK-26-315",
+        "title": "Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2025-09-17",
+        "close_date": "2026-10-06",
+        "last_updated": "2025-09-17",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Cybersecurity"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/359252",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DK-26-315.html",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-06"
+    },
     {
       "id": "ee35fe1d139fc4db8884",
       "type": "closed_or_removed",
@@ -111,97 +615,6 @@
       }
     },
     {
-      "id": "b9a9b5e5249b9f879bff",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "360893",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "360893",
-        "opportunity_number": "RFA-AG-26-021",
-        "title": "Mechanisms Underlying Olfactory Dysfunction in Aging and Alzheimer’s Disease and Alzheimer’s Disease-Related Dementias",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-06",
-        "close_date": "2026-10-06",
-        "last_updated": "2025-11-20",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Biology and biotechnology"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360893",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "a3f0af2a10e022f23f30",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "363742",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "363742",
-        "opportunity_number": "OFOP0003762",
-        "title": "Implementation of Four GCTF Classic Workshops in 2027",
-        "agency": "American Institute in Taiwan",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-28",
-        "close_date": "2026-10-06",
-        "last_updated": "2026-08-28",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Education and workforce",
-          "Manufacturing"
-        ],
-        "disciplines": [],
-        "applicant_types": [
-          "Nonprofits with 501(c)(3) status"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 450000,
-        "award_ceiling": 500000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363742",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
       "id": "9c4001d5b1fa80ccca23",
       "type": "new",
       "label": "New opportunity",
@@ -234,188 +647,6 @@
         "funding_opportunity_url": "https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "95668f25e1029ad4f841",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "360910",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "360910",
-        "opportunity_number": "RFA-AG-26-022",
-        "title": "Novel Approaches to Advance Precision Aging and Cognitive Health",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-06",
-        "close_date": "2026-10-06",
-        "last_updated": "2025-11-24",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Biology and biotechnology",
-          "Neuroscience"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360910",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "61b97ed570929b3a7d2a",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "360894",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "360894",
-        "opportunity_number": "RFA-AG-26-018",
-        "title": "Understanding Cerebellar Contributions to Cognitive and Affective Functions in Aging and Alzheimer's Disease/Alzheimer's Disease-Related Dementias",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-06",
-        "close_date": "2026-10-06",
-        "last_updated": "2025-11-20",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Neuroscience"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360894",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "48326c5d6a13e30b8a41",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "363725",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "363725",
-        "opportunity_number": "O-BJA-2026-172690",
-        "title": "BJA FY 2026 Byrne State Crisis Intervention Formula Program",
-        "agency": "Bureau of Justice Assistance",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-27",
-        "close_date": "2026-10-06",
-        "last_updated": "2026-08-27",
-        "version": "Synopsis 1",
-        "topic_areas": [],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": null,
-        "award_ceiling": 16015504,
-        "detail_page": "https://www.grants.gov/search-results-detail/363725",
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172690",
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "3ffcc7af6f42a78662f9",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "363817",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "363817",
-        "opportunity_number": "W9126G262SOI0520",
-        "title": "Groundwater and Surficial Water Salinity Changes in Everglades National Park using Aerial Electromagnetic Surveys",
-        "agency": "Fort Worth District",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-09-04",
-        "close_date": "2026-10-06",
-        "last_updated": "2026-09-04",
-        "version": "Synopsis 2",
-        "topic_areas": [],
-        "disciplines": [
-          "Engineering and Physical Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": 300000,
-        "award_ceiling": 1657690,
-        "detail_page": "https://www.grants.gov/search-results-detail/363817",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
     },
     {
       "id": "3811f833afc8e38b815b",
@@ -472,182 +703,6 @@
       }
     },
     {
-      "id": "37bc831d6fe864403b7d",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "363629",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "363629",
-        "opportunity_number": "O-BJA-2026-172697",
-        "title": "BJA FY 2026 The Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities",
-        "agency": "Bureau of Justice Assistance",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-17",
-        "close_date": "2026-10-06",
-        "last_updated": "2026-08-17",
-        "version": "Synopsis 2",
-        "topic_areas": [
-          "Environmental science"
-        ],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": 150000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363629",
-        "funding_opportunity_url": "https://bja.ojp.gov/funding/opportunities/o-bja-2026-172697",
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "346e0a7ed4ba5d2dc5ea",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "363664",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "363664",
-        "opportunity_number": "O-OVW-2026-172651",
-        "title": "OVW Fiscal Year 2026 Electronic Service Protection Order Court Pilot Program",
-        "agency": "Office on Violence Against Women",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2026-08-19",
-        "close_date": "2026-10-06",
-        "last_updated": "2026-08-19",
-        "version": "Synopsis 1",
-        "topic_areas": [],
-        "disciplines": [
-          "Community and Social Sciences"
-        ],
-        "applicant_types": [
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": 1500000,
-        "award_ceiling": 1500000,
-        "detail_page": "https://www.grants.gov/search-results-detail/363664",
-        "funding_opportunity_url": "https://www.justice.gov/ovw/media/1458651/dl?inline",
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "3107b2e29b0bace18944",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "360906",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "360906",
-        "opportunity_number": "RFA-AG-26-023",
-        "title": "Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "forecasted",
-        "posted_date": "2026-08-06",
-        "close_date": "2026-10-06",
-        "last_updated": "2025-11-21",
-        "version": "Forecast 1",
-        "topic_areas": [
-          "Artificial intelligence and machine learning",
-          "Biology and biotechnology",
-          "Infectious disease",
-          "Neuroscience"
-        ],
-        "disciplines": [
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Cooperative Agreement"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/360906",
-        "funding_opportunity_url": null,
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
-      "id": "1f9df9c96a45eb7bf761",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "nyserda:PON5437",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "nyserda:PON5437",
-        "opportunity_number": "PON 5437",
-        "title": "Apprenticeship and Pre-apprenticeship Clean Energy Training",
-        "agency": "NYSERDA",
-        "source": "NYSERDA",
-        "source_type": "State",
-        "status": "posted",
-        "posted_date": null,
-        "close_date": "2026-10-06",
-        "last_updated": null,
-        "version": null,
-        "topic_areas": [
-          "Education and workforce",
-          "Energy"
-        ],
-        "disciplines": [],
-        "applicant_types": [],
-        "funding_instruments": [],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000FOEyAAO",
-        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000FOEyAAO",
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
-    },
-    {
       "id": "1e68a007ff92e36f8e32",
       "type": "new",
       "label": "New opportunity",
@@ -678,61 +733,6 @@
         "funding_opportunity_url": "https://sam.gov/opp/f0e3e0d303254053922d9b2c7a67e878/view",
         "primary_document_url": null
       }
-    },
-    {
-      "id": "18c547cd2aa51bf8cf67",
-      "type": "closing_soon",
-      "label": "Closing soon",
-      "changed_at": "2026-09-06T00:26:24.309081Z",
-      "opportunity_id": "359252",
-      "detail": "Deadline 2026-10-06",
-      "record": {
-        "opportunity_id": "359252",
-        "opportunity_number": "RFA-DK-26-315",
-        "title": "Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)",
-        "agency": "National Institutes of Health",
-        "source": "Grants.gov",
-        "source_type": "Federal",
-        "status": "posted",
-        "posted_date": "2025-09-17",
-        "close_date": "2026-10-06",
-        "last_updated": "2025-09-17",
-        "version": "Synopsis 1",
-        "topic_areas": [
-          "Agriculture and food",
-          "Cybersecurity"
-        ],
-        "disciplines": [
-          "Environmental and Life Sciences",
-          "Medical and Health"
-        ],
-        "applicant_types": [
-          "State governments",
-          "County governments",
-          "City or township governments",
-          "Special district governments",
-          "Independent school districts",
-          "Public and state institutions of higher education",
-          "Federally recognized Native American tribal governments",
-          "Public and Indian housing authorities",
-          "Other Native American tribal organizations",
-          "Nonprofits with 501(c)(3) status",
-          "Nonprofits without 501(c)(3) status",
-          "Private institutions of higher education",
-          "For-profit organizations other than small businesses",
-          "Small businesses",
-          "Other"
-        ],
-        "funding_instruments": [
-          "Grant"
-        ],
-        "award_floor": null,
-        "award_ceiling": null,
-        "detail_page": "https://www.grants.gov/search-results-detail/359252",
-        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DK-26-315.html",
-        "primary_document_url": null
-      },
-      "deadline": "2026-10-06"
     },
     {
       "id": "f8b55e89a6c58730377a",
