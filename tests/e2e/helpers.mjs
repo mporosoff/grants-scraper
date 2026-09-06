@@ -15,34 +15,37 @@ vm.createContext(frozenCatalogContext);
 vm.runInContext(searchQuerySource, frozenCatalogContext);
 vm.runInContext(frozenFundingCatalogSource, frozenCatalogContext);
 const frozenCatalog = frozenCatalogContext.GRANT_CATALOG;
-const timestamp = String(frozenCatalog.generated_at).match(
-  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?Z$/,
-);
-if (!timestamp) throw new Error("Frozen catalog timestamp must be canonical UTC.");
-const frozenAssetVersion = `catalog-${timestamp.slice(1, 4).join("")}T${timestamp.slice(4, 7).join("")}${String(timestamp[7] || "").padEnd(6, "0").slice(0, 6)}Z`;
-const frozenStatusIdentity = Object.entries(frozenCatalog.status_counts)
-  .filter(([_status, count]) => Number(count) > 0)
-  .sort(([left], [right]) => left.localeCompare(right))
-  .map(([status, count]) => `${status}=${count}`)
-  .join(",");
-const frozenCatalogMetadataSource = `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
-  schema_version: 1,
-  catalog_schema_version: frozenCatalog.schema_version,
-  generated_at: frozenCatalog.generated_at,
-  pipeline_generated_at: frozenCatalog.generated_at,
-  record_count: frozenCatalog.record_count,
-  status_counts: frozenCatalog.status_counts,
-  asset_version: frozenAssetVersion,
-  catalog_url: `./data/opportunities.js?v=${frozenAssetVersion}`,
-  release_identity: [
-    `catalog-v${frozenCatalog.schema_version}`,
-    frozenAssetVersion,
-    `records=${frozenCatalog.record_count}`,
-    `documents=${frozenCatalog.search_index.document_count}`,
-    `terms=${Object.keys(frozenCatalog.search_index.postings).length}`,
-    `status=${frozenStatusIdentity}`,
-  ].join(":"),
-})};`;
+function catalogMetadataSource(frozenCatalog) {
+  const timestamp = String(frozenCatalog.generated_at).match(
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?Z$/,
+  );
+  if (!timestamp) throw new Error("Frozen catalog timestamp must be canonical UTC.");
+  const frozenAssetVersion = `catalog-${timestamp.slice(1, 4).join("")}T${timestamp.slice(4, 7).join("")}${String(timestamp[7] || "").padEnd(6, "0").slice(0, 6)}Z`;
+  const frozenStatusIdentity = Object.entries(frozenCatalog.status_counts)
+    .filter(([_status, count]) => Number(count) > 0)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([status, count]) => `${status}=${count}`)
+    .join(",");
+  return `globalThis.GRANT_CATALOG_METADATA=${JSON.stringify({
+    schema_version: 1,
+    catalog_schema_version: frozenCatalog.schema_version,
+    generated_at: frozenCatalog.generated_at,
+    pipeline_generated_at: frozenCatalog.generated_at,
+    record_count: frozenCatalog.record_count,
+    status_counts: frozenCatalog.status_counts,
+    asset_version: frozenAssetVersion,
+    catalog_url: `./data/opportunities.js?v=${frozenAssetVersion}`,
+    release_identity: [
+      `catalog-v${frozenCatalog.schema_version}`,
+      frozenAssetVersion,
+      `records=${frozenCatalog.record_count}`,
+      `documents=${frozenCatalog.search_index.document_count}`,
+      `terms=${Object.keys(frozenCatalog.search_index.postings).length}`,
+      `status=${frozenStatusIdentity}`,
+    ].join(":"),
+  })};`;
+}
+const frozenCatalogMetadataSource = catalogMetadataSource(frozenCatalog);
 const frozenSubtopicCatalogSource = `globalThis.SUBTOPIC_CATALOG=${JSON.stringify({
   schema_version: 1,
   generation: { as_of: "2026-09-01" },
@@ -191,21 +194,27 @@ export function mockHybrid(page, {
   return calls;
 }
 
-export async function mockFrozenFundingCatalog(target) {
+export async function mockFrozenFundingCatalog(target, { catalogSource = frozenFundingCatalogSource } = {}) {
+  let metadataSource = frozenCatalogMetadataSource;
+  if (catalogSource !== frozenFundingCatalogSource) {
+    const context = { FUNDING_SEARCH_QUERY: frozenCatalogContext.FUNDING_SEARCH_QUERY };
+    vm.runInNewContext(catalogSource, context);
+    metadataSource = catalogMetadataSource(context.GRANT_CATALOG);
+  }
   await target.route("**/data/catalog-metadata.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",
-    body: frozenCatalogMetadataSource,
+    body: metadataSource,
   }));
   await target.route("**/data/opportunities.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",
-    body: frozenFundingCatalogSource,
+    body: catalogSource,
   }));
 }
 
-export async function mockFrozenFundingSearchPackage(page) {
-  await mockFrozenFundingCatalog(page);
+export async function mockFrozenFundingSearchPackage(page, options = {}) {
+  await mockFrozenFundingCatalog(page, options);
   await page.route("**/data/subtopics.js*", route => route.fulfill({
     status: 200,
     contentType: "text/javascript",

@@ -4248,7 +4248,7 @@ footer p {
 }
 
 /* Keep the composer visible; the conversation owns its own scrolling. */
-.result-assistant.site-drawer[open] { display: flex; flex-direction: column; overflow: hidden; }
+.result-assistant.site-drawer[open] { display: flex; flex-direction: column; overflow: hidden; container: result-chat / size; }
 .result-assistant > .ai-heading { flex: none; }
 .result-assistant .chat { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; margin: 8px 0; }
 .result-assistant .messages { flex: 1 1 auto; min-height: 60px; max-height: none; overflow-y: auto; overscroll-behavior: contain; }
@@ -4272,6 +4272,20 @@ footer p {
   .result-assistant .suggestion-list { display: none; }
   .result-assistant .chat-summary { font-size: .74rem; }
   .result-assistant .chat-form .button { width: auto; min-width: 70px; }
+}
+
+/* The drawer follows the visual viewport, including a phone's open keyboard. */
+@container result-chat (max-width: 700px) and (max-height: 500px) {
+  .result-assistant > .ai-heading { flex-wrap: nowrap; gap: 8px; }
+  .result-assistant .ai-heading .eyebrow { display: none; }
+  .result-assistant .ai-heading h2 { font-size: 1rem; }
+  .result-assistant .provider-setup summary { padding: 8px; gap: 4px; }
+  .result-assistant .provider-setup summary span:first-child small { display: none; }
+  .result-assistant .chat-summary { flex: none; max-height: 3em; overflow-y: auto; }
+  .result-assistant .messages { min-height: 0; }
+  .result-assistant .chat-form textarea { min-height: 56px; height: 56px; }
+  .result-assistant .chat-form .button { margin-top: 0; }
+  .result-assistant > .chat-privacy { margin-top: 4px; padding-top: 4px; }
 }
 
 .chat-scope-hint { flex-basis: 100%; margin: 0; max-width: 420px; color: var(--muted); font-size: .76rem; line-height: 1.4; }
