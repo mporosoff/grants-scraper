@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-09-05T16:24:02Z</updated>
+  <updated>2026-09-06T00:28:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -377,6 +377,17 @@
     <summary>National Institutes of Health | Closes 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
   </entry>
   <entry>
+    <title>SHINE</title>
+    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250706</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Closes 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
+  </entry>
+  <entry>
     <title>SEFSC Bluefin Tuna Research Program</title>
     <link href="https://www.grants.gov/search-results-detail/363729"/>
     <id>urn:funding-finder:grants-gov:363729</id>
@@ -668,17 +679,5 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Closes 2026-10-09 | The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
-  </entry>
-  <entry>
-    <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
-    <link href="https://www.grants.gov/search-results-detail/363101"/>
-    <id>urn:funding-finder:grants-gov:363101</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
   </entry>
 </feed>

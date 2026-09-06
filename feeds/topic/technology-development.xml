@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-05T16:24:02Z</updated>
+  <updated>2026-09-06T00:28:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -184,16 +184,6 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Health (NIH), including all of its Institutes and Centers, plans to publish a Notice of Funding Opportunity inviting eligible colleges, universities, and nonprofit organizations to apply for the NIH Research Evaluation and Commercialization Hub (REACH) program. The REACH program helps move promising biomedical discoveries from academic research into real-world products t…</summary>
-  </entry>
-  <entry>
-    <title>Dementia CAReS Grants for American Indian and Alaska Native Communities</title>
-    <link href="https://www.grants.gov/search-results-detail/355940"/>
-    <id>urn:funding-finder:grants-gov:355940</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>Indian Health Service | Forecasted | This is only a forecast. The synopsis and application package are not yet posted, and we have not yet finalized the application due date. This opportunity will be updated when it is published in Grants.gov. We want to achieve tangible, meaningful, and measurable action in every Tribal and Urban Indian community to positively impact the lives of people at risk of and living with dementia. This fund…</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -670,5 +660,15 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
+  </entry>
+  <entry>
+    <title>GREGoRi Technology Integration Center (U01, Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359280"/>
+    <id>urn:funding-finder:grants-gov:359280</id>
+    <updated>2026-06-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Closes 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. The purpose of this Notice of Funding Opportunity is to establish the GREGo…</summary>
   </entry>
 </feed>

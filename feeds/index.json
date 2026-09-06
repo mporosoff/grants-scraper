@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-05T16:24:02Z",
+  "generated_at": "2026-09-06T00:28:17Z",
   "excluded_noncurrent": 12,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1410
+      "count": 1412
     },
     {
       "title": "Funding Finder | Federal",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml",
-      "count": 1346
+      "count": 1348
     },
     {
       "title": "Funding Finder | Internal",
@@ -80,7 +80,7 @@
     {
       "title": "Funding Finder | Education and workforce",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml",
-      "count": 502
+      "count": 500
     },
     {
       "title": "Funding Finder | Energy",
@@ -110,12 +110,12 @@
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 38
+      "count": 39
     },
     {
       "title": "Funding Finder | Neuroscience",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml",
-      "count": 87
+      "count": 88
     },
     {
       "title": "Funding Finder | Public health",
@@ -125,7 +125,7 @@
     {
       "title": "Funding Finder | Quantum science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml",
-      "count": 23
+      "count": 25
     },
     {
       "title": "Funding Finder | Separations and membranes",
@@ -135,7 +135,7 @@
     {
       "title": "Funding Finder | Social and behavioral sciences",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml",
-      "count": 133
+      "count": 134
     },
     {
       "title": "Funding Finder | Space and aeronautics",
@@ -145,7 +145,7 @@
     {
       "title": "Funding Finder | Technology development",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml",
-      "count": 163
+      "count": 164
     },
     {
       "title": "Funding Finder | Transportation",

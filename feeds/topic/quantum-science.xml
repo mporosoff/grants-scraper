@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-09-05T16:24:02Z</updated>
+  <updated>2026-09-06T00:28:17Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ONR FY27 NOFO for Young Investigator Program</title>
@@ -163,6 +163,26 @@
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <summary>Office of Science | Closes 2026-12-17 | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+  </entry>
+  <entry>
+    <title>QBIT Stage A</title>
+    <link href="https://sam.gov/opp/4a1aad28cb2a4b2ab1ee408c639202ef/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260202</id>
+    <updated>2026-03-09T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Closes 2026-11-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) to solicit innovative approaches addressing challenges related to quantum computing. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is designed to rigorously verify and validate whether…</summary>
+  </entry>
+  <entry>
+    <title>QBI Topic: Independent Verification and Validation</title>
+    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260201</id>
+    <updated>2025-11-17T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Closes 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI …</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
