@@ -12797,6 +12797,10 @@
       "state": "not_specific"
     },
     "347680": "2888ae5372aa5cb10b9af362e45b379ed10bbf5af983e97a4cd3e056296c80aa",
+    "348164": {
+      "key": "f73245200151ea06e67ee505cc52f1c84a11e548e3d08420187ac577c19ca2e8",
+      "state": "not_specific"
+    },
     "349618": {
       "key": "36dc23c728c2953bb5c1de4e25d76175116efdeda89bad7b1286abdf58449e8c",
       "state": "not_specific"
@@ -12823,6 +12827,10 @@
       "state": "not_specific"
     },
     "351715": "b2b5e68399314e7dd99b1b152cfea9c7f3ce418885417a657db0f3de695dac5d",
+    "351889": {
+      "key": "6fb4df9c0659076077c89b266595ec906883959aa95208da51099f7ebc38ac8a",
+      "state": "not_specific"
+    },
     "352270": {
       "key": "1baf983dd037903b33c291a6371f0d1f6f3a0d6fe57df51be630c0ac522bd787",
       "state": "not_specific"
@@ -12834,6 +12842,10 @@
     "352635": "5bb1775c3a105b5e062d236fdcb10779a5e1f369961cf0ff4c60a14be36784f7",
     "352636": {
       "key": "0cf5165a47f90b1a2ca8a6a6a0228ce17520d07fd447f64a3b77b138e53b3fdb",
+      "state": "not_specific"
+    },
+    "352810": {
+      "key": "5759250d68a371fda2c27b64a6aa84a4e879b95a0d09e08f3e1a658c4fa89e88",
       "state": "not_specific"
     },
     "352947": {
@@ -12860,10 +12872,26 @@
       "state": "not_specific"
     },
     "355196": "e1445b9b0904149dc1d8c2ba9173f0640aff196add97a7bdf08aaf9af87dfbf2",
+    "355439": {
+      "key": "5f3fb77e1347990958182a8f043ef73166cab183d0e501f81a897e8b85fe1bb5",
+      "state": "not_specific"
+    },
+    "355855": {
+      "key": "38dbeb9b51616ad37db2e33170332bb8e05db7a33e3bd293d2d78cdbf0143530",
+      "state": "not_specific"
+    },
+    "356018": {
+      "key": "d39ef144c49ac3cbecb00b0d8393fc7dc83d025c020ac0e5357782f18ba7c1d5",
+      "state": "insufficient_evidence"
+    },
     "356055": "284921bcedaca9f7057379ba57cb4002a3c09cffae07605ef6808b27bbab6677",
     "356205": "53edf37b08c5c8d0fc50683f4fa3f5c44220201e73bb89d1c01882eab7fe5e91",
     "356316": {
       "key": "d89fc24573e65f3bdd5ced5b400e1d9526271b630cbf1520b936917694b651f5",
+      "state": "not_specific"
+    },
+    "356370": {
+      "key": "f45527c46e15cbd024d863c2709866177c5300ef540888769d0d4fc22a96d19f",
       "state": "not_specific"
     },
     "356425": {
@@ -12993,6 +13021,14 @@
       "key": "84d0d0b6f7acc5b4fa631673a9377fbd33188fb3c3574914c2745b21fce73ddf",
       "state": "rejected_evidence"
     },
+    "357202": {
+      "key": "af741790ce1a446b2293e742b1d39a82f80079fd5f2ebf23471ee620916db544",
+      "state": "insufficient_evidence"
+    },
+    "357203": {
+      "key": "095a47b7da6784fd3a1b560b0c4c04f42e575e68133f999f6e616001d1e5cf55",
+      "state": "insufficient_evidence"
+    },
     "357206": {
       "key": "7de6393f00ccf9543d3523e5e679cc64ac575c5f7ba685cd2f0a7a6744582b76",
       "state": "not_specific"
@@ -13000,6 +13036,10 @@
     "357250": {
       "key": "f5949e24474c09605560c8feffcc801a89240ad2ef63cb8d30df6e3ec592685c",
       "state": "insufficient_evidence"
+    },
+    "357256": {
+      "key": "3a26e68fdaf4e6bb7d2e53ba4df334eb74a2e33dca187ea73923323ba9bc806f",
+      "state": "not_specific"
     },
     "357273": {
       "key": "4fb77ee85877aaff66183ded4dff808b4225e327df40be9ae692490c15cbe13a",
@@ -13066,16 +13106,36 @@
       "state": "not_specific"
     },
     "357627": "31cdbcd7210501bf75709cb5614ef3e5d005ce660b8f2b759e0f54abf5c4e2cf",
+    "357632": {
+      "key": "b7895ebdd830bff52b209784ed5da49d6122167a40f5e0a34907e59303f7bb33",
+      "state": "not_specific"
+    },
+    "357634": {
+      "key": "441d4315fb1c8fd653fc0e3b59fea32e7a12d0fe0359de29925d8253255b34a7",
+      "state": "not_specific"
+    },
     "357651": "5604c94f96050fed2127ef5e9fce16355becb360bb19f69651607bb133ae6a60",
     "357667": {
       "key": "b7346bf15de8749ce538c13169ff6cdbec0c17970eb2ed27be5980b0595f5d91",
       "state": "not_specific"
     },
+    "357710": {
+      "key": "89f8e2ace78b88974a74149b92746e7b3a8fa2fd6869aefe286a4bdc199fbce5",
+      "state": "not_specific"
+    },
     "357712": "29d8adafc64f7b7720f8c0260c8fd593fed1118c48675f3868a669b5f4b21433",
+    "357724": {
+      "key": "4d81097800849bc9f8aca2fcb249635fb6f160146b7339f410dc66a0883615ac",
+      "state": "not_specific"
+    },
     "357748": "d5fe5e5ed797cc1c4458b0f0f498e3b22650d443fad02b43f469ed4bf7989e2e",
     "357809": {
       "key": "679b63be62c4d81fce2679c8fd28daec0e67b3027db4b5d215062106fdb056a2",
       "state": "not_specific"
+    },
+    "357817": {
+      "key": "ea77291842853cd7bf287f94b3b4b07428fd24db6f3a239244c3221a067b603c",
+      "state": "insufficient_evidence"
     },
     "357826": {
       "key": "10b7b83372af41a4319630d6f7fcf846819765a0a576fa365cd29081f1f59516",
@@ -13141,6 +13201,14 @@
       "key": "82f9ce8312b56d76ed98985ec622d817e6ff7a99a60aa611d837cd62cb9ba7e8",
       "state": "not_specific"
     },
+    "359197": {
+      "key": "c31df8e8ec49fa5d504f11d3c97da196e5e4a285f5a5939b9dce035bd979275b",
+      "state": "insufficient_evidence"
+    },
+    "359199": {
+      "key": "843fb10256952c7b52efe9f5055a7f73c90eaca7964843d09885248d1a5aee8c",
+      "state": "proposed"
+    },
     "359252": {
       "key": "66ed8f4b9e0739be46cba2f791e00424a31054b2fff0a24d9593ae5e6c4549ef",
       "state": "insufficient_evidence"
@@ -13162,6 +13230,14 @@
     },
     "359648": "57b4b2f17cba83432072bb785718f4d3db5c1a0c5f883c2a46bf80219301efc1",
     "359649": "6ebe03aed8abccd632aa59f096162f6f427a8f7295878e86241942571e520089",
+    "359650": {
+      "key": "28e5ae295508f40ba8cd95b6b19d0c8871c27299e0f50facff451ebea8257840",
+      "state": "not_specific"
+    },
+    "359659": {
+      "key": "1e2c41fc42c0a8c4acc41bd1f6811a1fe635e55b0bee80900568dc737f29bab7",
+      "state": "not_specific"
+    },
     "359666": "55e140ac0aa32cdf90fe3253554d4548c4fb5d7c2a88722e1e33d22c271febf2",
     "359695": "75072a3ed35ed4dbd3a75db7a480022f968cfd3937564e0c30420ad2d1268ece",
     "359696": {
@@ -13205,7 +13281,15 @@
       "key": "554c27b8736d5f4510c595b28e0c2e5bc29e0437bcad8d0bc1334f3f4edb0997",
       "state": "not_specific"
     },
+    "360205": {
+      "key": "0ee3d99649192dc5bc828fcd47618ae342fdf857821e3e3d14889fd8c077c134",
+      "state": "not_specific"
+    },
     "360223": "458d23dc96e130c737ecfdbf6452e0d906879e0e447d3506617940f61eb237e9",
+    "360393": {
+      "key": "27db135eac0484bbe08a0fe99955ebc651adc77bd3cc0ff817a95cebbe760e99",
+      "state": "not_specific"
+    },
     "360398": {
       "key": "ae97cd6e14acda1573aa7574527422dd41403a4c8a15d119a357a1b106252793",
       "state": "proposed"
@@ -13223,6 +13307,10 @@
     "360543": "18a903aaf5e0fa999c4f091a10cff49129b33de201e55aba9b6e070183bf7284",
     "360554": {
       "key": "05e1c30de90df2018a7b9116978ecb6b83e23553292a5591e3a88d9105a7b282",
+      "state": "not_specific"
+    },
+    "360561": {
+      "key": "f8d47b72a897f79500da0f34bc30611c5a6429cdd706f35137c86f79c30e2018",
       "state": "not_specific"
     },
     "360562": {
@@ -13250,6 +13338,10 @@
       "state": "insufficient_evidence"
     },
     "360698": "b7fa8881846267d460828d21a89738de6b4cb7b96f65c88e7fd28afa92e7a28a",
+    "360875": {
+      "key": "f00ccecb483e44ca16a615004228cf54de2b30a3859092d88a0d9e9f831ef592",
+      "state": "not_specific"
+    },
     "360881": "82b5517a4d7481aead7f85bf40f34e27b11ea55534145fecf268aa5fa0fd2d90",
     "360893": {
       "key": "67c8772bd2ef1cb6a86da57194a253480a7cdfb1f41d20630c1ee2da61441bb0",
@@ -13287,6 +13379,10 @@
       "key": "98a1e6c82b7ef799c00d07c66eba4c17d39150c4f4cfe913dc553face3070e4d",
       "state": "proposed"
     },
+    "361065": {
+      "key": "e2dff0fe823a916656e5369c44cbccfd96a1167a82310d77fa7b09f565cb490c",
+      "state": "insufficient_evidence"
+    },
     "361104": {
       "key": "d7d98d22ef9240b3f2aeadd6a1937d6251b0366a368bb800ed682d5873640fdf",
       "state": "not_specific"
@@ -13294,6 +13390,10 @@
     "361186": {
       "key": "1dd42a78dd973761d73cf9a6ae3acacffa1ac6846d0b602dbca1b502c2428f07",
       "state": "insufficient_evidence"
+    },
+    "361187": {
+      "key": "2f2e1b53d0f975d9fc2d346edf60ec6dbadc42cfd422bc85d600ca121e21d259",
+      "state": "not_specific"
     },
     "361207": "8ac54fb1085a1144af05b1a44bb29d7c271a1d5af82a10abb6e974c499297d70",
     "361208": {
@@ -13311,9 +13411,21 @@
       "key": "4998fa8004bdec2f059781f3b0749bfdf7c19ff1d5b11ab486aa23762f11c16a",
       "state": "not_specific"
     },
+    "361322": {
+      "key": "bc3226507a53625a7278e8cd61fe8bf95efd9ac220f96915fa698a995857adfb",
+      "state": "not_specific"
+    },
+    "361333": {
+      "key": "58786b6e24e21b85ea169fa31fd0836787bbe62c1419f592d7b5bf0e43c37ab1",
+      "state": "not_specific"
+    },
     "361334": {
       "key": "a2ab66a3cc40f86a9ed793b6f3cc33f73e6a9ee179901d095341c6946023177d",
       "state": "insufficient_evidence"
+    },
+    "361370": {
+      "key": "8032804926a20b9f62d11f7f30605bf9fe2cf3cbb95a5c73ff8528a1a3398289",
+      "state": "not_specific"
     },
     "361380": {
       "key": "82b818b8bbbd946fe37fccf35031364f27f6cc5bed1e0309ada91d84c688d7bb",
@@ -13322,6 +13434,10 @@
     "361394": {
       "key": "c6ed1625de4c93bc102f65c191bc8ff81c8ca2602d05275fc5f6fb5612dba558",
       "state": "not_specific"
+    },
+    "361399": {
+      "key": "149412cd4dfeea8908ed7e0180512da2caa25f1badf6a924637dff1a427a3fb6",
+      "state": "proposed"
     },
     "361411": {
       "key": "31ba30fc8955dd9373ec64223077a7ec10f1bc11e7f51c0fcbf5b39ab4813d7b",
@@ -13343,6 +13459,10 @@
       "key": "882ef84957f21a54d844ccebaa3da93feeb37d9c254637b69bab5cd648b34f49",
       "state": "not_specific"
     },
+    "361451": {
+      "key": "f3b7218239438e2ddeab3a099be69e1647d94a13ea4e78de5a5786ace2166b34",
+      "state": "proposed"
+    },
     "361452": {
       "key": "b3ea79c1cffed054c4a5a8bec8a862a46600b280e0a529cb6d56774effaef63e",
       "state": "not_specific"
@@ -13358,6 +13478,10 @@
     "361526:c-2": "7211f66ae025e72a577284436640a8b93b9cac6c5acf34cede3a1e46f0174975",
     "361526:c-5": "dc192b59b58282b2ff1950df2532731a694839eb8bc08c76948456536208f64a",
     "361526:g-5": "70e8e5c5913c2f6eac4c300b8e96079d319ea3c11986ac8e5aec67e8c37c5092",
+    "361604": {
+      "key": "de80a3d7c0778b2d6389f53a4c28c9669c5d7a0dd53aba2d982ef046d70c6b4b",
+      "state": "not_specific"
+    },
     "361831": "1f9fa6b525516ed890d2c3e1ff6fc263ea2053b5da18565ba7330ad7724e3fa1",
     "361833": "0c25f063e7c17289ac56ce49df43d3f46725232b97d759bf060773a42f9e339d",
     "361952": {
@@ -13374,6 +13498,10 @@
       "key": "31cfd819fed4cb16a34b5b43d330af0b4879aa0f06c3049dc49d21885acb2853",
       "state": "not_specific"
     },
+    "362175": {
+      "key": "94001c8d9efc2e1c7c8cc5af3bc94b7e89a17ff0051d1801e027fbecc7de7a06",
+      "state": "not_specific"
+    },
     "362177": {
       "key": "c17db8fb5a4244adf74d9e3be990a980e69e1783c82eab0fc781c9f49466dd2b",
       "state": "not_specific"
@@ -13386,6 +13514,10 @@
     "362184": "b7acd5119ccf3006206f66964d467fe92f47217ef8febb8e247b427d95e69692",
     "362185": "996e992d2d2bf012c88f98233320b23f9bb1c24d084cd758450b1c707e90344a",
     "362186": "3777bbb04f2454290f4829399beb371d1a6d7c6eb725ff7121ca87927e2e7159",
+    "362190": {
+      "key": "efcd440b9f89b56ec4885364b60b94c37d9b21c2451f7af65ce72cad4c3e0ff9",
+      "state": "not_specific"
+    },
     "362191": {
       "key": "252d22fdee986fb7fe154ea650cf50dbd0136123d8a80487acf343987f93b8e1",
       "state": "not_specific"
@@ -13397,6 +13529,10 @@
     "362194": {
       "key": "764b35fead796f0f6c7241fab22c27d7720c2a787165622c1fa9ea46fa9ba0d6",
       "state": "rejected_evidence"
+    },
+    "362195": {
+      "key": "7613b8146381212f65a17ba53ddbebf800ebba44398761920582d08400d3a4e2",
+      "state": "not_specific"
     },
     "362196": {
       "key": "834dea701f8e86da064b7eb7b1942b6c6ba9f8a1a7ad72981322171a10bf103b",
@@ -13423,8 +13559,20 @@
       "key": "447e6bfb2a837a85f2a93a262a789dbac77ef9fb392e9d8d5424c8f9a32827b5",
       "state": "not_specific"
     },
+    "362224": {
+      "key": "c533866dd9d784b8edf4134fdda55f01458d76188676e84619e9063bc0a8180f",
+      "state": "not_specific"
+    },
     "362225": {
       "key": "bf40093856ed3b48a3ed527b75eebe584423f8d74adbddb4f6f238dd019d5ee3",
+      "state": "not_specific"
+    },
+    "362267": {
+      "key": "71e03c2a7871104040a32c2304fe46fe27484014dc262c75d6ae6d2eba979ef2",
+      "state": "not_specific"
+    },
+    "362268": {
+      "key": "ad9b49b32bf181f9fc105ae91ca09d286ffd2472358ceb764525926a354a3713",
       "state": "not_specific"
     },
     "362272": {
@@ -13454,6 +13602,10 @@
     "362551": "3d576ae8f229458178d7ef5ea3852cdfacd5c45697aa8d4383b6504c0d35a0ea",
     "362597": "fb9caab52fb704fa1f0a21e503f7262df06512deca8d9b1529b767462777084d",
     "362607": "d6c79853d98a4d675174287e5fedf8eb101b9415a4b7ebbcdeecb128ea27916b",
+    "362647": {
+      "key": "603a1beb2c39a10a61ea1bba27e867f781b417febb9c1e0d0a4c68ff8a12dbb0",
+      "state": "not_specific"
+    },
     "362722": "d4f8a9e416ceedde025ea6c3553224911a4f2e09936ba85a01c50d735cbeadd8",
     "362752": {
       "key": "5d5988ad369c7f94a793501867cec585ce31ffae5ebbf66ba2d509000e270474",
@@ -13483,6 +13635,14 @@
       "key": "fa34c9e3b84c39f56c86760e4b3a556ac04e5da6a24b04deaa44f6d56e98ca9c",
       "state": "not_specific"
     },
+    "362866": {
+      "key": "b52ce5fab2b2f6fe399862133d5255c3b724195d091e04f7d0d5584f0caf50a7",
+      "state": "not_specific"
+    },
+    "362868": {
+      "key": "b5ca962519e4cc22cadc7c465e8f5c23c68a589dc9535eede1b336dda4b3374e",
+      "state": "not_specific"
+    },
     "362947": "7584abbe9fed07acd74b3590433ba9beac6816208060228c8810dc9123e47359",
     "362948": {
       "key": "ddad551b1e6f9685f081ca78ff8a98bc6727f21a90cc1397bfa62f28a7b7180c",
@@ -13496,6 +13656,10 @@
     },
     "362965": {
       "key": "20022019465dc0eda3ff5c724463f79058ea23ecb8bea17fe144627d81c7a4db",
+      "state": "not_specific"
+    },
+    "362977": {
+      "key": "a65d6e42719513c11b7f89586adf490aedffc99fcdef0809002e70410b70a15c",
       "state": "not_specific"
     },
     "362996": "1d94932e917c3a0137a447288c44dff9be866387e3c5427e89f01db768477c5c",
@@ -13535,6 +13699,14 @@
       "key": "d9161029dc8c6a224c5b5ffaec7c249d46a262ffc0772e066b8e364316b9b5b5",
       "state": "not_specific"
     },
+    "363245": {
+      "key": "3455c89471335ada501ae470f095ddab286b21d751618c61f8c0955572f2ab4e",
+      "state": "not_specific"
+    },
+    "363246": {
+      "key": "196588728f7aa5ccc58a4bf5d46e9edc808539dd0d94ad52f371d97c2caf2885",
+      "state": "not_specific"
+    },
     "363250": {
       "key": "dae8d8df7dc1e997fc1a2003728d583723e0d8379aedbe0ea68c682f33a0477a",
       "state": "not_specific"
@@ -13552,6 +13724,10 @@
       "key": "53d2eebcb8b994c852af3f6df443fa2d360e1d16b9b45621003e81746d965c1b",
       "state": "not_specific"
     },
+    "363299": {
+      "key": "0143f61e0043761483b105a1a4cceabd6c20afa5f974dae1594cb92847be815a",
+      "state": "not_specific"
+    },
     "363302:a-1": {
       "key": "34bab45d68116eac77743164cb8869b5df7bf2c2cf4bc0b3f3eb9dade7b6909e",
       "state": "not_specific"
@@ -13565,6 +13741,10 @@
       "state": "not_specific"
     },
     "363455": "9a5da0e90a84e3eefcaab27ddd662d1ba66b4e2b7e59071f9c8ae999840b77f8",
+    "363474": {
+      "key": "bd0f2dc5a597d42639bcefdc83c3ded2ebdd7e895a25650731b4875d4aa155b7",
+      "state": "not_specific"
+    },
     "363538": "86eb0e3ba532d19e5f2d461e5c07e476ece78b663530eb3157d475c562d4f080",
     "363557": {
       "key": "970c25e5ebb2daf9d358d39cf5402dac5d3fe7b80f7af33eaf7cf8d78142a05e",
@@ -13588,6 +13768,10 @@
       "state": "proposed"
     },
     "363623": "7dcbdddab6e6ce632e2007d43e4bf34675a7ea23f9e90827c315d671ec829d4c",
+    "363657": {
+      "key": "968c0d883b3aaa8289303e7893e432e9944c11265349f156707edb52ad4a966a",
+      "state": "not_specific"
+    },
     "363670": {
       "key": "80bf42c7c94cce83acb0cdb8f5fee7b485f64d71a5aad666b7a2c64c3910c66a",
       "state": "not_specific"
@@ -13610,9 +13794,25 @@
       "key": "271abf51b32e363ee808d327bfd389c36984cf164ba7edf17adf06e8b3b9b6cf",
       "state": "not_specific"
     },
+    "363699": {
+      "key": "41463e93df3117dae2127916ebd6a87345eca459f4229738f9bdf2bc19ffbe3b",
+      "state": "not_specific"
+    },
+    "363714": {
+      "key": "ca58b8737809eafcc9ffff4ac24a4234f42ba5275e77a6b345a41431902cec5a",
+      "state": "not_specific"
+    },
+    "363723": {
+      "key": "697c1e38f4d39ec033f66503e9c9ea92f6c85cabf8f7ccfc70adbd2bcfbea3db",
+      "state": "not_specific"
+    },
     "363724": {
       "key": "eecc81a03bd2eac09ffeca1f6a22c24c97abe123d3d69e9fa8af3c01b2eb470d",
       "state": "not_specific"
+    },
+    "363729": {
+      "key": "7fe92da5fb8fd158d7c73725fee625be0e7f323d70f68c65ae8eb6333df983e5",
+      "state": "insufficient_evidence"
     },
     "363734": {
       "key": "85f2553a3eb58be62c9d8a2088019ef45555c936287ce9ff15a87a9965592737",
@@ -13630,6 +13830,10 @@
       "key": "f0b29cd2c74975a4655796a88ca42a0b4b39063ab481d246cbae26b4cb556536",
       "state": "not_specific"
     },
+    "363748": {
+      "key": "33368dd7915b9cd14e074fc0d6c718b741de220370f1355708b21e7eccb38140",
+      "state": "proposed"
+    },
     "363758": {
       "key": "8ace436cf4644b055f2bfdaa15a9e545e5e7ebc08fa223a38f18d2151c0c4db0",
       "state": "not_specific"
@@ -13642,11 +13846,31 @@
       "key": "dd51fc7431831622dbb0c40db51b2b9a81bcc31da81cf7e5526127d5cd835221",
       "state": "not_specific"
     },
+    "363768": {
+      "key": "0b10c050e07c7fcb2c9b4ebb05f85d9b56e26cfc60f844978007b21a5a5e5680",
+      "state": "not_specific"
+    },
+    "363769": {
+      "key": "f1c8c02127c771f4ba9cc82b2171f62b1a01146ab4acdd1f84deb17515c86eb7",
+      "state": "not_specific"
+    },
+    "363773": {
+      "key": "a3eeb0ebdde99b852b099e4d0dc8ea29f779951b0c144f0174ac2cc6af7d1eb7",
+      "state": "not_specific"
+    },
     "363776": {
       "key": "f40261056bb8f5a621c439cb8b2ec27d1c7544b808f1d579da13ba29fb783f48",
       "state": "not_specific"
     },
+    "363785": {
+      "key": "b6f6ecc00a53edf41b6013bb9a250fba537abf9d91d42b6afb6d58a63af64766",
+      "state": "not_specific"
+    },
     "363789": "34911a9dfa090675495311e8dd00cedefd8c426f0ceef559d336af2c3c45a074",
+    "363802": {
+      "key": "d71f1726121f58648f1f9e66104fbf835e6c79bfe7608d4fb39a5d810ac7b166",
+      "state": "not_specific"
+    },
     "363815": "f68c7d1b97075921540f25a7b05c84a792c6ba9307c7235138294834bce3953d",
     "363817": {
       "key": "06827884f47f9206b7f87b7ca27dbd8594d073f9dfc03a1cd692c3a60ef97360",
@@ -13690,7 +13914,7 @@
     },
     "vpr-email:infoready-2028504": "992da3f7f468a75a59a56b1e955e45aed1a7d856c23a5af5d64f91e11dc3e4e3"
   },
-  "generation_id": "1f2c5b729e97e672202f2268b01f195c120ff279eb22e38c90ff5b13b9947047",
+  "generation_id": "ce3ccb6a5ef0c149739a1869d06827cb6b6d7df8c5ded074a395163d538f1f23",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -34981,6 +35205,806 @@
         }
       ],
       "why_team": "Lisa A. DeLouise contributes pharmacology/biomarker scientist. Astrid M. Müller contributes device engineer/neuromodulation specialist."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Kidney Precision Medicine Project Tissue Interrogation Sites",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "359199",
+      "members": [
+        {
+          "claim_id": "urh-000040-c001",
+          "claim_revision": 1,
+          "contribution": "Tissue Interrogation Site",
+          "evidence_phrase": "intravital multiphoton tumor imaging",
+          "evidence_term": "High-resolution biomedical microscopy and histology imaging",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000040",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html",
+          "why_person": "Intravital multiphoton tumor imaging demonstrates high-resolution optical tissue imaging skill transferable to advanced tissue interrogation, but shows no kidney biopsy, renal tissue, or multi-omics interrogation experience."
+        },
+        {
+          "claim_id": "urh-000083-c001",
+          "claim_revision": 1,
+          "contribution": "Clinical and Data Coordinating Center",
+          "evidence_phrase": "network modeling of glymphatic transport",
+          "evidence_term": "Graph and network analytics",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000083",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+          "why_person": "Network modeling methodology applied to glymphatic transport is transferable to data integration and analytic tasks of a coordinating center, though it has not been applied to KPMP-scale clinical/molecular data coordination."
+        }
+      ],
+      "missing_skills": [
+        "Recruitment Site"
+      ],
+      "objective": "Continue the Kidney Precision Medicine Project by recruiting new participants for kidney biopsy, interrogating biopsy tissue with state-of-the-art molecular methods, and coordinating data/analysis to discover novel molecular pathways underlying CKD and AKI.",
+      "opportunity_number": "NOT-DK-26-302",
+      "parent_id": "359199",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "High-resolution biomedical microscopy and histology imaging"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000040",
+            "urh-000098",
+            "urh-000115"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000040-c001",
+              "coverage": "method_transfer",
+              "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+              "reason": "Intravital multiphoton tumor imaging demonstrates high-resolution optical tissue imaging skill transferable to advanced tissue interrogation, but shows no kidney biopsy, renal tissue, or multi-omics interrogation experience.",
+              "researcher_id": "urh-000040",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000098-c002",
+              "coverage": "method_transfer",
+              "material_hash": "98c18c7784a7f99bfacc3d700b422c783168bfa1796f18adb475afdf122fc5aa",
+              "reason": "Multiphoton surgical microscopy provides a transferable high-resolution imaging methodology relevant to tissue interrogation workflows, but lacks evidence of kidney-specific tissue analysis or the required molecular assay pipelines.",
+              "researcher_id": "urh-000098",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000115-c001",
+              "coverage": "method_transfer",
+              "material_hash": "577fabe9425db35fccac1de3ae904b02c62b54de8c5ce37123f0f10a7f1637f6",
+              "reason": "Intravital multiphoton tissue imaging expertise is methodologically transferable to advanced tissue imaging tasks, but does not demonstrate kidney biopsy processing or molecular pathway discovery experience required for this site role.",
+              "researcher_id": "urh-000115",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Tissue Interrogation Site",
+          "rationale": "Intravital multiphoton tumor imaging demonstrates high-resolution optical tissue imaging skill transferable to advanced tissue interrogation, but shows no kidney biopsy, renal tissue, or multi-omics interrogation experience. Multiphoton surgical microscopy provides a transferable high-resolution imaging methodology relevant to tissue interrogation workflows, but lacks evidence of kidney-specific tissue analysis or the required molecular assay pipelines. Intravital multiphoton tissue imaging expertise is methodologically transferable to advanced tissue imaging tasks, but does not demonstrate kidney biopsy processing or molecular pathway discovery experience required for this site role.",
+          "required": true,
+          "source_quote": "Tissue Interrogation Sites which interrogate the tissue with state-of-the-art methodologies stringent quality requirements",
+          "source_url": "https://www.grants.gov/search-results-detail/359199"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-2",
+          "label": "Recruitment Site",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "recruitment sites to support new participant recruitment, kidney biopsy, and longitudinal participant observational data collection",
+          "source_url": "https://www.grants.gov/search-results-detail/359199"
+        },
+        {
+          "accepted_terms": [
+            "Graph and network analytics"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000083"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000083-c001",
+              "coverage": "method_transfer",
+              "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d",
+              "reason": "Network modeling methodology applied to glymphatic transport is transferable to data integration and analytic tasks of a coordinating center, though it has not been applied to KPMP-scale clinical/molecular data coordination.",
+              "researcher_id": "urh-000083",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Clinical and Data Coordinating Center",
+          "rationale": "Network modeling methodology applied to glymphatic transport is transferable to data integration and analytic tasks of a coordinating center, though it has not been applied to KPMP-scale clinical/molecular data coordination.",
+          "required": true,
+          "source_quote": "This renewal includes a single U24 for clinical and data coordination, integration, analysis, and sharing",
+          "source_url": "https://www.grants.gov/search-results-detail/359199"
+        },
+        {
+          "accepted_terms": [
+            "Graph and network analytics"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000083"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000083-c001",
+              "coverage": "method_transfer",
+              "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d",
+              "reason": "Graph/network analytics expertise is transferable to collaborative analysis of molecular pathway data across sites, but the claim shows no prior kidney disease or CKD/AKI-specific data experience.",
+              "researcher_id": "urh-000083",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Collaborative Data Analysis Investigator",
+          "rationale": "Graph/network analytics expertise is transferable to collaborative analysis of molecular pathway data across sites, but the claim shows no prior kidney disease or CKD/AKI-specific data experience.",
+          "required": false,
+          "source_quote": "All components of this award work collaboratively on scientific data analysis and discovery to meet the scientific objectives of the project",
+          "source_url": "https://www.grants.gov/search-results-detail/359199"
+        }
+      ],
+      "scope_label": "Kidney Precision Medicine Project Tissue Interrogation Sites",
+      "source_fingerprint": "89b020f64485b4bd75368ffb660f09bd4d167b54834932af683ff3e946acfb0c",
+      "source_url": "https://www.grants.gov/search-results-detail/359199",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000040",
+            "urh-000083"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000083",
+            "urh-000098"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000083",
+            "urh-000115"
+          ]
+        }
+      ],
+      "why_team": "Edward Brown III contributes tissue interrogation site. Kimberly Boster contributes clinical and data coordinating center."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "pass",
+      "generator_version": "opportunity-teams-2",
+      "id": "361399",
+      "members": [
+        {
+          "claim_id": "urh-000157-c005",
+          "claim_revision": 1,
+          "contribution": "Synthetic Lethality/Targeted Therapy Pharmacologist",
+          "evidence_phrase": "biomedical transport modeling",
+          "evidence_term": "biomedical transport modeling",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000157",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/",
+          "why_person": "Biomedical transport modeling provides quantitative methods transferable to predicting drug distribution/pharmacokinetics in combination therapy design, without direct evidence of synthetic-lethality or targeted-agent development."
+        },
+        {
+          "claim_id": "urh-000036-c001",
+          "claim_revision": 1,
+          "contribution": "Radiation Biologist",
+          "evidence_phrase": "therapeutic ultrasound bioeffects",
+          "evidence_term": "Toxicology and biological-effects models",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000036",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
+          "why_person": "Experience building toxicology/bioeffects models for ultrasound provides a transferable quantitative framework for modeling dose-dependent biological effects, but does not demonstrate direct ionizing-radiation biology or RT dose/schedule work."
+        },
+        {
+          "claim_id": "urh-000116-c002",
+          "claim_revision": 1,
+          "contribution": "Translational/Precision Medicine Investigator",
+          "evidence_phrase": "optical monitoring of breast-cancer therapy",
+          "evidence_term": "Optical diagnostics and phototherapy",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000116",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
+          "why_person": "Optical monitoring methods developed for breast-cancer therapy tracking are transferable to non-invasive assessment of treatment response in a precision-medicine context, but do not directly show integration of RT-drug combination strategies into clinical practice."
+        }
+      ],
+      "missing_skills": [],
+      "objective": "Develop and preclinically/clinically validate radiation-drug combination strategies that exploit conditional, radiation-induced synthetic vulnerabilities to enhance therapeutic index in cancer treatment",
+      "opportunity_number": "PAR-26-152",
+      "parent_id": "361399",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Radiation hydrodynamics and plasma instability",
+            "Toxicology and biological-effects models"
+          ],
+          "alternative_ids": [
+            "urh-000137"
+          ],
+          "candidate_ids": [
+            "urh-000036",
+            "urh-000089"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000036-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1111090fada29b917e60adfe915054a0a2b329d060751694370a4c421eb4d1cc",
+              "reason": "Experience building toxicology/bioeffects models for ultrasound provides a transferable quantitative framework for modeling dose-dependent biological effects, but does not demonstrate direct ionizing-radiation biology or RT dose/schedule work.",
+              "researcher_id": "urh-000036",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000089-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
+              "reason": "Cutaneous barrier toxicology modeling offers methodology transferable to characterizing normal-tissue radiation toxicity, though it is not itself radiation biology or RT dose-response experience.",
+              "researcher_id": "urh-000089",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000137-c002",
+              "coverage": "adjacent",
+              "material_hash": "efb7cec9ddcb4ea8711a875dcd3093868865a9399778855932794e61e48ae126",
+              "reason": "Radiation-hydrodynamic and plasma instability modeling reflects expertise in radiation physics/modeling, but is in an astrophysical/plasma context, not biological radiotherapy dose or spatial-targeting work, so it does not cover the required radiation biology contribution.",
+              "researcher_id": "urh-000137",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Radiation Biologist",
+          "rationale": "Experience building toxicology/bioeffects models for ultrasound provides a transferable quantitative framework for modeling dose-dependent biological effects, but does not demonstrate direct ionizing-radiation biology or RT dose/schedule work. Cutaneous barrier toxicology modeling offers methodology transferable to characterizing normal-tissue radiation toxicity, though it is not itself radiation biology or RT dose-response experience. Radiation-hydrodynamic and plasma instability modeling reflects expertise in radiation physics/modeling, but is in an astrophysical/plasma context, not biological radiotherapy dose or spatial-targeting work, so it does not cover the required radiation biology contribution.",
+          "required": true,
+          "source_quote": "Radiation effects are clinically titratable through advances in delivery accuracy and flexibility, including dose, schedule, and spatial targeting",
+          "source_url": "https://www.grants.gov/search-results-detail/361399"
+        },
+        {
+          "accepted_terms": [
+            "biomedical transport modeling",
+            "controlled drug delivery"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000157",
+            "urh-000158"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000158-c005",
+              "coverage": "method_transfer",
+              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
+              "reason": "Controlled drug delivery expertise offers a transferable platform for formulating and delivering targeted agents in combination regimens, but does not itself establish synthetic-lethality pharmacology or radiation-conditioned vulnerability targeting.",
+              "researcher_id": "urh-000158",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "method_transfer",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling provides quantitative methods transferable to predicting drug distribution/pharmacokinetics in combination therapy design, without direct evidence of synthetic-lethality or targeted-agent development.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Synthetic Lethality/Targeted Therapy Pharmacologist",
+          "rationale": "Controlled drug delivery expertise offers a transferable platform for formulating and delivering targeted agents in combination regimens, but does not itself establish synthetic-lethality pharmacology or radiation-conditioned vulnerability targeting. Biomedical transport modeling provides quantitative methods transferable to predicting drug distribution/pharmacokinetics in combination therapy design, without direct evidence of synthetic-lethality or targeted-agent development.",
+          "required": true,
+          "source_quote": "actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy",
+          "source_url": "https://www.grants.gov/search-results-detail/361399"
+        },
+        {
+          "accepted_terms": [
+            "High-resolution biomedical microscopy and histology imaging",
+            "biomedical transport modeling",
+            "microfluidic cancer cell capture"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000040",
+            "urh-000157"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000040-c001",
+              "coverage": "method_transfer",
+              "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+              "reason": "Intravital multiphoton tumor imaging methodology can be transferred to visualizing adaptive tumor responses to treatment, but does not directly demonstrate genomic or mutational-landscape analysis of radiation-induced vulnerabilities.",
+              "researcher_id": "urh-000040",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c005",
+              "coverage": "adjacent",
+              "material_hash": "d7ec5f25d354ce93fdad52de78926a63736af71d0b15af7378187778b710488f",
+              "reason": "Biomedical transport modeling is tangential to tumor genomics; it may inform microenvironment dynamics but does not address mutational-landscape or vulnerability characterization directly.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000157-c003",
+              "coverage": "method_transfer",
+              "material_hash": "b6c43b3b00f513df9570488f3521938afd4c3545d622d4a4a97f759a558016bf",
+              "reason": "Microfluidic cancer cell capture techniques are transferable to isolating tumor cells for genomic/mutational profiling relevant to context-dependent vulnerabilities, though not directly tied to radiation-induced adaptive responses.",
+              "researcher_id": "urh-000157",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Tumor Biology/Genomics Specialist",
+          "rationale": "Intravital multiphoton tumor imaging methodology can be transferred to visualizing adaptive tumor responses to treatment, but does not directly demonstrate genomic or mutational-landscape analysis of radiation-induced vulnerabilities. Biomedical transport modeling is tangential to tumor genomics; it may inform microenvironment dynamics but does not address mutational-landscape or vulnerability characterization directly. Microfluidic cancer cell capture techniques are transferable to isolating tumor cells for genomic/mutational profiling relevant to context-dependent vulnerabilities, though not directly tied to radiation-induced adaptive responses.",
+          "required": true,
+          "source_quote": "context-dependent vulnerabilities arising from the intrinsic mutational landscape and adaptive tumor responses",
+          "source_url": "https://www.grants.gov/search-results-detail/361399"
+        },
+        {
+          "accepted_terms": [
+            "Biomedical optics and tissue spectroscopy",
+            "Optical diagnostics and phototherapy"
+          ],
+          "alternative_ids": [
+            "urh-000009"
+          ],
+          "candidate_ids": [
+            "urh-000116"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000116-c002",
+              "coverage": "method_transfer",
+              "material_hash": "a4f1dca86b885ed0465f4c99f61de90853c92240d9bfc2ee487b17b481fd8715",
+              "reason": "Optical monitoring methods developed for breast-cancer therapy tracking are transferable to non-invasive assessment of treatment response in a precision-medicine context, but do not directly show integration of RT-drug combination strategies into clinical practice.",
+              "researcher_id": "urh-000116",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000009-c002",
+              "coverage": "adjacent",
+              "material_hash": "d84aeeaec19da68f0c9540ca0bf58f463c8351c89718df4e58eab4b01ed70678",
+              "reason": "Diffuse tissue spectroscopy expertise pertains to optical diagnostics broadly, offering only tangential relevance to translational development of RT-synthetic combination therapies.",
+              "researcher_id": "urh-000009",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Translational/Precision Medicine Investigator",
+          "rationale": "Optical monitoring methods developed for breast-cancer therapy tracking are transferable to non-invasive assessment of treatment response in a precision-medicine context, but do not directly show integration of RT-drug combination strategies into clinical practice. Diffuse tissue spectroscopy expertise pertains to optical diagnostics broadly, offering only tangential relevance to translational development of RT-synthetic combination therapies.",
+          "required": true,
+          "source_quote": "facilitate their adoption into the precision medicine toolkit toward building new and effective anticancer treatments",
+          "source_url": "https://www.grants.gov/search-results-detail/361399"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-5",
+          "label": "Clinical Trialist (optional)",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "RP1 Clinical Trial Optional",
+          "source_url": "https://www.grants.gov/search-results-detail/361399"
+        }
+      ],
+      "scope_label": "Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)",
+      "source_fingerprint": "f3b62786ea4a692220b351e9c1a27c7e9ab6acc4e32fa5c39efcd5d8ca7693fe",
+      "source_url": "https://www.grants.gov/search-results-detail/361399",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000157",
+            "urh-000036",
+            "urh-000116"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000157",
+            "urh-000089",
+            "urh-000116"
+          ]
+        },
+        {
+          "member_ids": [
+            "urh-000036",
+            "urh-000040",
+            "urh-000116",
+            "urh-000158"
+          ]
+        }
+      ],
+      "why_team": "David G. Foster contributes synthetic lethality/targeted therapy pharmacologist. Diane Dalecki contributes radiation biologist. Regine Choe contributes translational/precision medicine investigator."
+    },
+    {
+      "agency": "National Institutes of Health",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Exposomic Contributions to ADRD Pathology and Resilience",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "361451",
+      "members": [
+        {
+          "claim_id": "urh-000007-c006",
+          "claim_revision": 1,
+          "contribution": "Molecular/Neuroimmune Pathway Specialist",
+          "evidence_phrase": "microbial systems biology",
+          "evidence_term": "microbial systems biology",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000007",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "why_person": "Microbial systems biology approaches could be methodologically transferred to study microbiome components of microbiome–brain interactions, but the claim shows no application to brain, neuroimmune, or ADRD-relevant contexts."
+        },
+        {
+          "claim_id": "urh-000041-c001",
+          "claim_revision": 1,
+          "contribution": "Human Subjects/Clinical Data Researcher",
+          "evidence_phrase": "multimodal behavioral-signal analysis",
+          "evidence_term": "Behavioral sensing and modeling",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000041",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+          "why_person": "Multimodal behavioral-signal analysis methods could transfer to processing human-subjects behavioral/physiological data (e.g., sleep, stress) in exposome-ADRD studies, though no clinical or ADRD-specific application is shown."
+        },
+        {
+          "claim_id": "urh-000089-c001",
+          "claim_revision": 1,
+          "contribution": "Exposomics/Environmental Neuroscience Investigator",
+          "evidence_phrase": "cutaneous barrier toxicology models",
+          "evidence_term": "Toxicology and biological-effects models",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000089",
+          "source_url": "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
+          "why_person": "Toxicology modeling of a biological barrier demonstrates transferable methodology for mechanistic toxin-exposure modeling, but the work targets cutaneous rather than neural tissue and does not address exposome-ADRD mechanisms directly."
+        }
+      ],
+      "missing_skills": [
+        "ADRD Mechanisms Researcher"
+      ],
+      "objective": "Investigate how specific neural exposome factors (e.g., environmental toxins, sleep/circadian rhythms, stress, and modulating conditions like light, noise, heat) act synergistically and as mixtures to mechanistically influence ADRD pathology and resilience.",
+      "opportunity_number": "RFA-NS-26-031",
+      "parent_id": "361451",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Toxicology and biological-effects models"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000089"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000089-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1748bf16d0c4e154ad7a7ca7639b0e9ffb0024b18d69dd7672fa4da1420692af",
+              "reason": "Toxicology modeling of a biological barrier demonstrates transferable methodology for mechanistic toxin-exposure modeling, but the work targets cutaneous rather than neural tissue and does not address exposome-ADRD mechanisms directly.",
+              "researcher_id": "urh-000089",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Exposomics/Environmental Neuroscience Investigator",
+          "rationale": "Toxicology modeling of a biological barrier demonstrates transferable methodology for mechanistic toxin-exposure modeling, but the work targets cutaneous rather than neural tissue and does not address exposome-ADRD mechanisms directly.",
+          "required": true,
+          "source_quote": "Investigative teams with expertise in exposomics and environmental neuroscience, community engagement, ADRD mechanisms",
+          "source_url": "https://www.grants.gov/search-results-detail/361451"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-2",
+          "label": "ADRD Mechanisms Researcher",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "link exposures to ADRD risk, progression, and resilience",
+          "source_url": "https://www.grants.gov/search-results-detail/361451"
+        },
+        {
+          "accepted_terms": [
+            "engineered microbial communities",
+            "microbial systems biology"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000007"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000007-c006",
+              "coverage": "method_transfer",
+              "material_hash": "7da5bb9b6c322594fa005093542fd91bb9fc46442963d76002496c09f95a30b1",
+              "reason": "Microbial systems biology approaches could be methodologically transferred to study microbiome components of microbiome–brain interactions, but the claim shows no application to brain, neuroimmune, or ADRD-relevant contexts.",
+              "researcher_id": "urh-000007",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000007-c005",
+              "coverage": "method_transfer",
+              "material_hash": "d354cc2245ade5b6a7086de53382e55357d55e24bd746152540f2ad61f69bc55",
+              "reason": "Experience engineering microbial communities offers transferable methods for constructing/manipulating microbiota relevant to microbiome-brain axis research, though no neural or ADRD linkage is demonstrated in the evidence.",
+              "researcher_id": "urh-000007",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-3",
+          "label": "Molecular/Neuroimmune Pathway Specialist",
+          "rationale": "Microbial systems biology approaches could be methodologically transferred to study microbiome components of microbiome–brain interactions, but the claim shows no application to brain, neuroimmune, or ADRD-relevant contexts. Experience engineering microbial communities offers transferable methods for constructing/manipulating microbiota relevant to microbiome-brain axis research, though no neural or ADRD linkage is demonstrated in the evidence.",
+          "required": true,
+          "source_quote": "microbiome–brain interactions, neuroimmune signaling, epigenetic modifications",
+          "source_url": "https://www.grants.gov/search-results-detail/361451"
+        },
+        {
+          "accepted_terms": [
+            "Behavioral sensing and modeling"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000041"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000041-c001",
+              "coverage": "method_transfer",
+              "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+              "reason": "Multimodal behavioral-signal analysis methods could transfer to processing human-subjects behavioral/physiological data (e.g., sleep, stress) in exposome-ADRD studies, though no clinical or ADRD-specific application is shown.",
+              "researcher_id": "urh-000041",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-4",
+          "label": "Human Subjects/Clinical Data Researcher",
+          "rationale": "Multimodal behavioral-signal analysis methods could transfer to processing human-subjects behavioral/physiological data (e.g., sleep, stress) in exposome-ADRD studies, though no clinical or ADRD-specific application is shown.",
+          "required": true,
+          "source_quote": "drawing on clinical data, human samples, and observational or interventional studies",
+          "source_url": "https://www.grants.gov/search-results-detail/361451"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-5",
+          "label": "Health Disparities/Community Engagement Specialist",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "non-medical factors that may lead to health disparities",
+          "source_url": "https://www.grants.gov/search-results-detail/361451"
+        }
+      ],
+      "scope_label": "Exposomic Contributions to ADRD Pathology and Resilience",
+      "source_fingerprint": "274a28d546fa007c4158dcff96d0d2afec7710535ee85718bd42bb43bf038911",
+      "source_url": "https://www.grants.gov/search-results-detail/361451",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000007",
+            "urh-000041",
+            "urh-000089"
+          ]
+        }
+      ],
+      "why_team": "Allison J. Lopatkin contributes molecular/neuroimmune pathway specialist. Ehsan Hoque contributes human subjects/clinical data researcher. Lisa A. DeLouise contributes exposomics/environmental neuroscience investigator."
+    },
+    {
+      "agency": "Centers for Disease Control-GHC",
+      "archetype": "Source-grounded research collaboration",
+      "assembly_version": "complementary-roles-1",
+      "catalog_title": "Informing global polio eradication efforts through innovative modeling approaches",
+      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "gate_label": "Proposed Team",
+      "gate_state": "conditional",
+      "generator_version": "opportunity-teams-2",
+      "id": "363748",
+      "members": [
+        {
+          "claim_id": "urh-000007-c007",
+          "claim_revision": 1,
+          "contribution": "Outbreak Response Modeler",
+          "evidence_phrase": "computational models of bacterial resistance",
+          "evidence_term": "computational models of bacterial resistance",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000007",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "why_person": "Experience building computational models of bacterial pathogen resistance demonstrates transferable skill in simulating pathogen dynamics, which can inform methodological approaches to cVDPV2 outbreak response modeling, though the pathogen system and public-health outbreak context differ."
+        },
+        {
+          "claim_id": "urh-000083-c001",
+          "claim_revision": 1,
+          "contribution": "Surveillance Systems Modeler",
+          "evidence_phrase": "network modeling of glymphatic transport",
+          "evidence_term": "Graph and network analytics",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000083",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+          "why_person": "Network modeling methods used for glymphatic transport can transfer to designing and analyzing surveillance networks for pathogen detection, though the biological system and surveillance application context are unproven in this evidence."
+        }
+      ],
+      "missing_skills": [
+        "Health Economics Modeler"
+      ],
+      "objective": "Develop statistical and mathematical disease models to inform polio eradication decision-making, including cVDPV2 outbreak response strategies, optimal surveillance design post-WPV eradication, and detection of containment breaches, while assessing economic implications and building modeling workforce capacity.",
+      "opportunity_number": "CDC-RFA-JG-27-0077",
+      "parent_id": "363748",
+      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
+      "record_type": "specific_parent",
+      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+      "review_state": "proposed",
+      "roles": [
+        {
+          "accepted_terms": [
+            "Stochastic optimization and sampling",
+            "computational models of bacterial resistance"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000007",
+            "urh-000031",
+            "urh-000071"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000007-c007",
+              "coverage": "method_transfer",
+              "material_hash": "9a1893b6f7bed305843867442316aa2b3ebd6a87449cd74d204a5e99f363eb76",
+              "reason": "Experience building computational models of bacterial pathogen resistance demonstrates transferable skill in simulating pathogen dynamics, which can inform methodological approaches to cVDPV2 outbreak response modeling, though the pathogen system and public-health outbreak context differ.",
+              "researcher_id": "urh-000007",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000031-c001",
+              "coverage": "method_transfer",
+              "material_hash": "ad080b75435521026f2feb4594f8e2f7ce80e42cc6f97ca19f305a865014ff0f",
+              "reason": "Markov-chain Monte Carlo expertise supports parameter estimation and uncertainty quantification techniques commonly used in stochastic outbreak models, transferable to cVDPV2 response modeling despite no direct polio or outbreak-response experience.",
+              "researcher_id": "urh-000031",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000071-c001",
+              "coverage": "method_transfer",
+              "material_hash": "9f6942e54a6ad7b8e8c3bfa1e869ee3f313bd51539cb73b3d6e30c2ff11ffc2f",
+              "reason": "Stochastic optimization algorithm experience can transfer to optimizing outbreak response strategies under uncertainty, though no direct application to disease outbreak modeling is evidenced.",
+              "researcher_id": "urh-000071",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-1",
+          "label": "Outbreak Response Modeler",
+          "rationale": "Experience building computational models of bacterial pathogen resistance demonstrates transferable skill in simulating pathogen dynamics, which can inform methodological approaches to cVDPV2 outbreak response modeling, though the pathogen system and public-health outbreak context differ. Markov-chain Monte Carlo expertise supports parameter estimation and uncertainty quantification techniques commonly used in stochastic outbreak models, transferable to cVDPV2 response modeling despite no direct polio or outbreak-response experience. Stochastic optimization algorithm experience can transfer to optimizing outbreak response strategies under uncertainty, though no direct application to disease outbreak modeling is evidenced.",
+          "required": true,
+          "source_quote": "critical disease modeling to inform decision making on the development of strategies for cVDPV2 outbreak response",
+          "source_url": "https://www.grants.gov/search-results-detail/363748"
+        },
+        {
+          "accepted_terms": [
+            "Graph and network analytics",
+            "Stochastic optimization and sampling"
+          ],
+          "alternative_ids": [],
+          "candidate_ids": [
+            "urh-000031",
+            "urh-000071",
+            "urh-000083"
+          ],
+          "claim_refs": [
+            {
+              "claim_id": "urh-000083-c001",
+              "coverage": "method_transfer",
+              "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d",
+              "reason": "Network modeling methods used for glymphatic transport can transfer to designing and analyzing surveillance networks for pathogen detection, though the biological system and surveillance application context are unproven in this evidence.",
+              "researcher_id": "urh-000083",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000031-c001",
+              "coverage": "method_transfer",
+              "material_hash": "ad080b75435521026f2feb4594f8e2f7ce80e42cc6f97ca19f305a865014ff0f",
+              "reason": "Markov-chain Monte Carlo sampling techniques are relevant to optimizing surveillance strategy design under uncertainty, representing a plausible methodological transfer without direct surveillance system experience.",
+              "researcher_id": "urh-000031",
+              "revision": 1
+            },
+            {
+              "claim_id": "urh-000071-c001",
+              "coverage": "method_transfer",
+              "material_hash": "9f6942e54a6ad7b8e8c3bfa1e869ee3f313bd51539cb73b3d6e30c2ff11ffc2f",
+              "reason": "Stochastic optimization methods could inform optimal surveillance system design trade-offs, though no direct evidence of surveillance modeling or containment-breach detection work is provided.",
+              "researcher_id": "urh-000071",
+              "revision": 1
+            }
+          ],
+          "coverage": "direct",
+          "id": "role-2",
+          "label": "Surveillance Systems Modeler",
+          "rationale": "Network modeling methods used for glymphatic transport can transfer to designing and analyzing surveillance networks for pathogen detection, though the biological system and surveillance application context are unproven in this evidence. Markov-chain Monte Carlo sampling techniques are relevant to optimizing surveillance strategy design under uncertainty, representing a plausible methodological transfer without direct surveillance system experience. Stochastic optimization methods could inform optimal surveillance system design trade-offs, though no direct evidence of surveillance modeling or containment-breach detection work is provided.",
+          "required": true,
+          "source_quote": "optimal surveillance upon global WPV eradication, and surveillance to detect containment breaches",
+          "source_url": "https://www.grants.gov/search-results-detail/363748"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-3",
+          "label": "Health Economics Modeler",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": true,
+          "source_quote": "models will assess economic implications of outbreak response and surveillance strategies",
+          "source_url": "https://www.grants.gov/search-results-detail/363748"
+        },
+        {
+          "accepted_terms": [],
+          "alternative_ids": [],
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
+          "id": "role-4",
+          "label": "Workforce Training Lead",
+          "rationale": "No current internal claim establishes coverage of this role.",
+          "required": false,
+          "source_quote": "build capacity for a diverse public health workforce of statistical and mathematical modelers",
+          "source_url": "https://www.grants.gov/search-results-detail/363748"
+        }
+      ],
+      "scope_label": "Informing global polio eradication efforts through innovative modeling approaches",
+      "source_fingerprint": "503b6d691fa85ffb0fbfe7d6a2917f1704d29abb6b16f1177c81693567b64eff",
+      "source_url": "https://www.grants.gov/search-results-detail/363748",
+      "variants": [
+        {
+          "member_ids": [
+            "urh-000007",
+            "urh-000083"
+          ]
+        }
+      ],
+      "why_team": "Allison J. Lopatkin contributes outbreak response modeler. Kimberly Boster contributes surveillance systems modeler."
     }
   ],
   "pool_counts": {
