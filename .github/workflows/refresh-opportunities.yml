@@ -309,7 +309,14 @@ jobs:
           import json, os
           from pathlib import Path
           report_path = Path("evaluation/opportunity_team_generation.json")
-          report = json.loads(report_path.read_text()) if report_path.exists() else {}
+          try:
+              report = json.loads(report_path.read_text())
+          except (OSError, ValueError):
+              report = {}
+          if (not isinstance(report, dict) or str(report.get("run_id")) != os.environ.get("GITHUB_RUN_ID")
+                  or str(report.get("run_attempt")) != os.environ.get("GITHUB_RUN_ATTEMPT")
+                  or report.get("generation_requested") is not True or report.get("status") != "completed"):
+              report = {"processing_failure": {"reason_code": "missing_current_run_receipt"}}
           coverage = report.get("coverage_after", {})
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
               summary.write("\n### Automatic proposed teams\n\n")
@@ -317,9 +324,12 @@ jobs:
               summary.write(f"Candidate coverage: {coverage.get('parent_calls', 'unknown')} distinct calls, "
                             f"{coverage.get('scopes', 'unknown')} bounded topics, "
                             f"{coverage.get('team_combinations', 'unknown')} stored team combinations.\n\n")
-              summary.write(f"Assessed this run: {len(report.get('results', []))}; "
+              summary.write(f"Completed assessments this run: {report.get('assessed_scopes', 'unknown')}; "
                             f"pending: {report.get('pending_after', 'unknown')}. "
                             f"Outcomes: {json.dumps(report.get('outcomes', {}), sort_keys=True)}.\n\n")
+              summary.write(f"Provider requests: {report.get('provider_requests', 'unknown')}; "
+                            f"cache/retry counters: {json.dumps(report.get('counters', {}), sort_keys=True)}.\n\n")
+              summary.write(f"Processing failures: {json.dumps(report.get('processing_failure', {}), sort_keys=True)}.\n\n")
               summary.write("Source/profile invalidation runs before provider generation. Unavailable responses remain retryable; broad or unsupported scopes do not receive teams.\n")
           PY
       - name: Rebuild every production document vector

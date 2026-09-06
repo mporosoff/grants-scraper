@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 from scripts.build_opportunity_teams import (
     assemble, diverse_queue, eligible_claims, normalized_vectors, scopes, validate_roles, validate_edges,
     source_fingerprints, invalidate_stale_sources,
-    generate_scope, coverage, attempt_completed, refresh_assemblies, ASSEMBLY_VERSION, recent_scope_ids,
+    generate_scope, coverage, attempt_completed, refresh_assemblies, ASSEMBLY_VERSION, recent_scope_ids, RESPONSE_VERSION,
 )
 
 
@@ -29,7 +29,7 @@ class ProposedTeamTests(unittest.TestCase):
             for role, claim in [("role-1", "person-1-claim"), ("role-2", "person-2-claim"), ("role-1", "person-3-claim")]]
 
     def test_broad_scopes_and_sibling_quotes_cannot_support_teams(self):
-        self.assertEqual(validate_roles(self.scope, {"specific": False}), [])
+        self.assertEqual(validate_roles(self.scope, {"specific": False, "objective": "A broad scientific program", "roles": []}), [])
         wrong = copy.deepcopy(self.decomposition)
         wrong["roles"][0]["quote"] = "A different sibling's fabrication requirement."
         with self.assertRaisesRegex(ValueError, "exact scope"):
@@ -128,7 +128,8 @@ class ProposedTeamTests(unittest.TestCase):
         for error in [json.JSONDecodeError("Incomplete JSON", "{", 1), RuntimeError("incomplete model response")]:
             provider.json.side_effect = error
             result, proposal = generate_scope(self.scope, provider, self.claims, [], "registry", float("inf"))
-            self.assertEqual(result["state"], "unavailable")
+            self.assertEqual(result["state"], "rejected_evidence" if isinstance(error, ValueError) else "unavailable")
+            self.assertTrue(result["retry_eligible"])
             self.assertIsNone(proposal)
         provider.json.side_effect = None
         provider.json.return_value = self.decomposition | {"roles": [self.roles[0] | {"quote": "Invented unsupported quote"}, self.roles[1]]}
@@ -147,12 +148,15 @@ class ProposedTeamTests(unittest.TestCase):
         stale = {"review_state": "needs_revalidation"}
         self.assertFalse(attempt_completed({"key": "same", "state": "proposed"}, "same", stale))
         self.assertFalse(attempt_completed("same", "same", stale), "legacy success must not strand a reopened call")
-        for state in ["not_specific", "unsuitable_scope", "insufficient_evidence", "rejected_evidence"]:
-            self.assertTrue(attempt_completed({"key": "same", "state": state}, "same", stale))
+        for state in ["not_specific", "unsuitable_scope", "insufficient_evidence"]:
+            self.assertFalse(attempt_completed({"key": "same", "state": state}, "same", stale))
+            self.assertTrue(attempt_completed({"key": "same", "state": state, "response_contract": RESPONSE_VERSION}, "same", stale))
             self.assertFalse(attempt_completed({"key": "old", "state": state}, "changed", stale))
         self.assertFalse(attempt_completed({"key": "same", "state": "unavailable"}, "same"))
-        self.assertTrue(attempt_completed("same", "same"))
-        self.assertTrue(attempt_completed({"key": "same", "state": "proposed"}, "same", {}))
+        self.assertFalse(attempt_completed("same", "same"))
+        self.assertTrue(attempt_completed("same", "same", {"review_state": "proposed"}))
+        self.assertFalse(attempt_completed({"key": "same", "state": "proposed"}, "same", {}))
+        self.assertFalse(attempt_completed({"key": "same", "state": "rejected_evidence", "response_contract": RESPONSE_VERSION}, "same"))
 
     def test_emerging_calls_receive_capacity_alongside_repairs_and_catalog_expansion(self):
         candidates = [{"id": str(i), "parent_id": str(i)} for i in range(12)]

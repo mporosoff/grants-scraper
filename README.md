@@ -114,9 +114,9 @@ and theme labels per unique team recomputation, but it never sends researcher
 names or publication text and cannot add an opportunity that failed local
 full-team fit.
 
-Funding Finder also has a staged opportunity-to-team pilot for ten calibrated,
-specific opportunity scopes. It proposes complementary three- or four-person
-teams from source-traceable Hajim capability evidence, explains the team and
+Funding Finder also generates opportunity-to-team proposals for supported,
+bounded opportunity scopes. It proposes complementary teams from current,
+source-traceable researcher claims, explains the team and
 each person, keeps missing roles visible, and supports remove/replacement and a
 manual-collaborator path. Broad parent programs never receive an automatic team.
 Generated team membership is rechecked against the same runtime catalog
@@ -324,7 +324,7 @@ support it.
 | `assets/vendor/` | Vendored PDF.js and Mammoth parsers and license notices |
 | `data/opportunities.js` | Generated catalog and search index |
 | `data/opportunity_team_index.js` | Tiny eager index of reviewed team-ready opportunity scopes; contains no faculty or role graph |
-| `data/opportunity_teams.js` | Compact generated faculty directory and ten-scope role/team projection |
+| `data/opportunity_teams.js` | Compact generated faculty directory and current role/team projection |
 | `config/opportunity_team_model.json` | Canonical source-traceable faculty and opportunity-role model |
 | `data/opportunity_enrichment.json` | Incremental official-detail cache |
 | `data/document_evidence.json` | Incremental document hash/version, cited-fact, and review-queue cache |
