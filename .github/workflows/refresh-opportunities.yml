@@ -543,7 +543,7 @@ jobs:
           merge_ok=false
           if [ "$MANUAL_RELEASE_VALIDATION" = "true" ]; then
             echo "Generated package awaits manual validation: ${pr_url} (${head_sha})" >> "$GITHUB_STEP_SUMMARY"
-            if python -m tools.wait_refresh_review "$pr_url" "$head_sha"; then
+            if python -m tools.wait_refresh_review "$pr_url" "$head_sha" "$built_from_sha" "$(git rev-parse 'HEAD^{tree}')"; then
               merge_ok=true
             fi
           elif gh pr merge "$pr_url" --squash --delete-branch; then

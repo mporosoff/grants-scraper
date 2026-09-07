@@ -139,6 +139,11 @@ stay within their HTML block and sentence. Non-submission dates and contradictor
 stage sequences are withheld with review disclosures. Old deadline citations are
 rechecked locally without advancing retrieval timestamps or invalidating unrelated
 evidence. Removed facts cannot leave dangling review references.
+Container ownership counts matching outer tags, allowing valid omitted list-item
+and paragraph end tags while rejecting missing/duplicate notice containers. This
+was checked against the saved official Simons HTML as well as synthetic fixtures;
+the projection retains its October 29 LOI with Eastern time and publishes warnings
+for inconsistent full-application dates, without holiday or sibling deadlines.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -159,8 +164,10 @@ contract and without dangling references to withheld facts.
 The existing refresh workflow has an optional `manual_release_validation` input.
 It creates the generated PR normally, then waits up to 30 minutes for the operator
 to review/test its exact head and merge through protection before Pages publication
-continues. The read-only checkpoint rejects head changes, closure, missing merge
-identity, and persistent API errors. It does not request reviews, set checks, or
+continues. The read-only checkpoint pins the generated head, protected main base,
+and tested tree. It rejects retargeted/advanced bases, changed heads, closure,
+missing merge identity, a different merged parent/tree, and persistent API errors.
+It does not request reviews, set checks, or
 merge; ordinary refresh behavior and automated browser-testing policy are unchanged.
 Failure rollback cannot overwrite a later protected main generation. During this
 dedicated release, Pages publication is held until the replacement has passed.

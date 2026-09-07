@@ -606,15 +606,22 @@ def scoped_html(content, url):
         def __init__(self):
             super().__init__(convert_charrefs=False)
             self.depth, self.matches, self.parts = 0, 0, []
+            self.root_tag = None
 
         def handle_starttag(self, tag, attrs):
             attrs = dict(attrs)
             selected = (tag == "article" and "o-detail" in attrs.get("class", "").split()) if article else (
                 tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold())
-            if not self.depth and selected:
+            if selected:
                 self.matches += 1
+            if not self.depth:
+                if not selected:
+                    return
+                self.root_tag = tag
                 self.depth = 1
-            elif self.depth and tag not in {"br", "hr", "img", "input", "link", "meta", "area", "base", "embed", "param", "source", "track", "wbr"}:
+            elif tag == self.root_tag:
+                # HTML permits omitted </li> and </p> tags. Only matching
+                # container tags determine the selected notice's boundary.
                 self.depth += 1
             if self.depth:
                 self.parts.append(self.get_starttag_text())
@@ -626,7 +633,8 @@ def scoped_html(content, url):
         def handle_endtag(self, tag):
             if self.depth:
                 self.parts.append("</" + tag + ">")
-                self.depth -= 1
+                if tag == self.root_tag:
+                    self.depth -= 1
 
         def handle_data(self, data):
             if self.depth:

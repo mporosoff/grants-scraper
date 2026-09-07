@@ -13,7 +13,7 @@ from scripts import build_opportunity_teams as teams
 from scripts.build_changes import diff_catalogs
 from scripts.extract_document_evidence import (
     build_document_entry, extract_containers, merge_document_entry,
-    enrich_document_evidence, empty_cache, source_for_record,
+    enrich_document_evidence, empty_cache, source_for_record, scoped_html,
 )
 from scripts.sources.registry import collect
 from scripts.sources.merge import resolve_live_records, rebuild_catalog
@@ -152,6 +152,21 @@ class DeadlineOwnership(unittest.TestCase):
             entry, datetime(2099, 9, 2, tzinfo=timezone.utc))
         self.assertTrue(extracted)
         self.assertEqual(rebuilt['source_scope_identity'], 'simons-grant-article-1')
+
+    def test_optional_html_end_tags_do_not_leak_sibling_notices(self):
+        record, _ = self.entry()
+        notice = NOTICE.replace(b'<h1>Synthetic bounded notice</h1>',
+            b'<h1>Synthetic bounded notice</h1><ul><li>First contact<li>Second contact</ul><p>Optional paragraph<div>Closed block</div>')
+        containers, _ = extract_containers(notice, 'text/html', '', record['primary_document_url'])
+        text = ' '.join(container['text'] for container in containers)
+        self.assertIn(b'Second contact', scoped_html(notice, record['primary_document_url']))
+        self.assertIn('October 29, 2099', text)
+        self.assertNotIn('Unrelated sibling', text)
+        with self.assertRaisesRegex(ValueError, 'bounded article'):
+            extract_containers(notice.replace(b'</article>', b'', 1), 'text/html', '', record['primary_document_url'])
+        with self.assertRaisesRegex(ValueError, 'bounded article'):
+            extract_containers(notice.replace(b'<h1>', b'<article class="o-detail"></article><h1>', 1),
+                               'text/html', '', record['primary_document_url'])
 
 
 class NegativeResponseDiagnostics(unittest.TestCase):
