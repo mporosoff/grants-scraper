@@ -63,22 +63,24 @@ test("Worker package contains only current and immediately previous corpus gener
   assert.deepEqual(Object.keys(allowlist).sort(), ["current", "previous", "schema_version"]);
   assert.ok(allowlist.previous);
   assert.equal(release.previous_corpus_sha256, allowlist.previous.corpus_sha256);
-  assert.notEqual(allowlist.previous.corpus_sha256, allowlist.current.corpus_sha256);
+  assert.notEqual(`${allowlist.previous.corpus_sha256}:${allowlist.previous.model_space_fingerprint}`,
+    `${allowlist.current.corpus_sha256}:${allowlist.current.model_space_fingerprint}`);
   assert.equal(allowlist.previous.passages.length, allowlist.previous.passage_count);
   assert.match(worker, /\[allowlist\?\.current, allowlist\?\.previous\]/);
   assert.doesNotMatch(worker, /passageManifest|arbitrary historic/i);
 });
 
-test("production vector builds force every current passage through one model contract", () => {
-  assert.match(vectorBuilder, /const force = process\.argv\.includes\("--force"\) \|\| production/);
-  assert.match(vectorBuilder, /build_mode: production \? "production_full_rebuild"/);
-  assert.match(vectorBuilder, /production_reused_vectors: production \? false/);
+test("production vector builds require compatibility before reuse and preserve explicit rebuild", () => {
+  assert.match(vectorBuilder, /const force = process\.argv\.includes\("--force"\);/);
+  assert.match(vectorBuilder, /reusableRows\(corpus, previous, config, canaryArtifact.reuse_space_identity, force\)/);
+  assert.match(vectorBuilder, /"forced_full_rebuild"/);
+  assert.match(vectorBuilder, /production_reused_vectors: production \? reused > 0/);
   assert.match(vectorBuilder, /model: MODEL,[\s\S]*?input_type: "document",[\s\S]*?output_dimension: DIMENSION/);
   assert.doesNotMatch(workflow, /build_search_v2_voyage_vectors\.mjs --write(?! --production)/);
   assert.match(workflow, /build_search_v2_voyage_vectors\.mjs --production --write/);
-  assert.equal(receipt.build_mode, "production_full_rebuild");
-  assert.equal(receipt.reused_passage_count, 0);
-  assert.equal(receipt.production_reused_vectors, false);
+  assert.ok(["production_full_rebuild", "compatible_incremental", "forced_full_rebuild"].includes(receipt.build_mode));
+  assert.equal(receipt.reused_passage_count + receipt.embedded_passage_count, receipt.passage_count);
+  assert.equal(receipt.production_reused_vectors, receipt.reused_passage_count > 0);
   assert.equal(receipt.production_generation_uniform.model_alias_count, 1);
   assert.equal(receipt.production_generation_uniform.response_model_count, 1);
   assert.equal(receipt.production_generation_uniform.dimension_count, 1);
@@ -98,7 +100,7 @@ test("fixed public canaries fingerprint and gate the embedding space", () => {
   assert.equal(canaries.comparison_to_prior_generation.gross_discontinuity, false);
   assert.ok(canaries.comparison_to_prior_generation.minimum_cosine >= .95);
   assert.ok(canaries.comparison_to_prior_generation.mean_cosine >= .98);
-  assert.match(vectorBuilder, /Gross embedding-space discontinuity:[\s\S]*Publication blocked after full rebuild/);
+  assert.match(vectorBuilder, /Gross embedding-space discontinuity: publication blocked; prior release retained/);
   assert.match(packageBuilder, /model_space_fingerprint/);
   assert.match(worker, /body\.model_space_fingerprint !== generation\.model_space_fingerprint/);
 });
@@ -106,7 +108,7 @@ test("fixed public canaries fingerprint and gate the embedding space", () => {
 test("scheduled publication deploys a validated compatibility Worker before one atomic commit", () => {
   const ordered = [
     "Build and validate complete public opportunity catalog",
-    "Rebuild every production document vector",
+    "Build compatible production document vectors",
     "Build the current/previous Worker compatibility package",
     "Verify the complete search package is internally consistent",
     "Run browser and search-package regression gates",
@@ -143,7 +145,7 @@ test("scheduled publication deploys a validated compatibility Worker before one 
   assert.match(workflow, /gh pr merge "\$pr_url" --squash --delete-branch/);
   assert.match(workflow, /gh workflow run pages\.yml --ref main/);
   assert.doesNotMatch(
-    workflow.slice(workflow.indexOf("Rebuild every production document vector"), workflow.indexOf("Commit refreshed catalog")),
+    workflow.slice(workflow.indexOf("Build compatible production document vectors"), workflow.indexOf("Commit refreshed catalog")),
     /continue-on-error:\s*true/,
   );
 });

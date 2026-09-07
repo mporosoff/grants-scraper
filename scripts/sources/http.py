@@ -106,6 +106,7 @@ class PoliteClient:
         self.timeout = timeout
         self.legacy_tls_ciphers = legacy_tls_ciphers
         self._session = requests.Session()
+        self._session.trust_env = False
         self._session.headers.update({"User-Agent": USER_AGENT})
         if legacy_tls_ciphers:
             self._session.mount("https://", _LegacyCipherAdapter())
@@ -121,21 +122,9 @@ class PoliteClient:
     def get_text(self, url: str, *, headers: Optional[dict] = None) -> str:
         """GET a URL and return decoded text, enforcing the size cap."""
         self._pace()
-        response = self._session.get(
-            url, headers=headers, timeout=self.timeout, stream=True
-        )
-        response.raise_for_status()
-        # Preserve the authoritative post-redirect URL for adapters whose
-        # source publishes version information in the resolved document name.
-        self.last_url = response.url
-        chunks: list[bytes] = []
-        total = 0
-        for chunk in response.iter_content(chunk_size=64 * 1024):
-            if not chunk:
-                continue
-            total += len(chunk)
-            if total > MAX_BYTES:
-                raise RuntimeError(f"Response from {url} exceeded {MAX_BYTES} bytes.")
-            chunks.append(chunk)
-        encoding = response.encoding or "utf-8"
-        return b"".join(chunks).decode(encoding, errors="replace")
+        from scripts.extract_document_evidence import download_document
+
+        response = download_document(url, headers, timeout=self.timeout,
+                                     maximum_bytes=MAX_BYTES, session=self._session)
+        self.last_url = response["url"]
+        return response["content"].decode(response.get("encoding") or "utf-8", errors="replace")

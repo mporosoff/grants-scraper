@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
+from datetime import datetime, timezone
 import itertools
 import json
 import math
@@ -20,6 +21,17 @@ import re
 import time
 import tempfile
 import threading
+import uuid
+
+EMBEDDING_CONFIG = {"provider": "https://api.voyageai.com/v1/embeddings", "model": "voyage-4-lite",
+    "dimension": 1024, "truncation": False, "output_dtype": "float",
+    "preprocessing": "exact-utf8-text-v1", "chunking": "one-input-per-item",
+    "normalization": "l2-v1", "encoding": "json-float64-v1"}
+EMBEDDING_CANARIES = [
+    "Catalytic carbon dioxide conversion and reaction engineering.",
+    "Rural maternal health outcomes and community care networks.",
+    "Quantum photonics precision measurement and navigation.",
+]
 
 import requests
 
@@ -30,6 +42,8 @@ from scripts.import_opportunity_team_model import write_outputs, update_version_
 from scripts.subtopic_cov4 import MODEL
 
 VERSION = "opportunity-teams-2"
+RESPONSE_VERSION = "team-response-1"
+COMPLETED_STATES = {"not_specific", "unsuitable_scope", "insufficient_evidence", "proposed"}
 ASSEMBLY_VERSION = "complementary-roles-1"
 BROAD = re.compile(r"broad agency announcement|\bBAA\b|omnibus|unsolicited|open.topic|office.of.science financial assistance|long.range|research interests of|research opportunities in space and earth", re.I)
 DECOMPOSE = """You identify bounded research objectives in official funding text.
@@ -84,7 +98,9 @@ def normalized_vectors(vectors, count):
         norm = math.sqrt(sum(x * x for x in vector))
         if not norm or not math.isfinite(norm):
             raise ValueError("invalid embedding magnitude")
-        output.append([x / norm for x in vector])
+        # Preserve already-normalized cached values exactly; repeated division
+        # introduces numerical drift in warm-cache rankings.
+        output.append(list(vector) if abs(norm - 1.0) <= 1e-12 else [x / norm for x in vector])
     return output
 
 
@@ -129,14 +145,21 @@ def recent_scope_ids(candidates, parents, as_of=None):
 
 
 def attempt_completed(attempt, key, existing=None):
-    """Negative assessments are memoized; a withdrawn success must be reassessed."""
+    """Only proven decisions complete work; compatible legacy teams survive migration."""
     if isinstance(attempt, dict):
-        return (attempt.get("key") == key and attempt.get("state") != "unavailable"
-                and not (attempt.get("state") == "proposed" and existing
-                         and existing.get("review_state") == "needs_revalidation"))
-    # Legacy receipts store only a key. Retained generated output identifies an
-    # earlier success; never let that key permanently suppress a returning call.
-    return attempt == key and not (existing and existing.get("review_state") == "needs_revalidation")
+        if attempt.get("key") != key or attempt.get("state") not in COMPLETED_STATES:
+            return False
+        if attempt.get("state") == "proposed":
+            return bool(existing and existing.get("review_state") != "needs_revalidation")
+        return attempt.get("response_contract") == RESPONSE_VERSION
+    return bool(attempt == key and existing and existing.get("review_state") != "needs_revalidation")
+
+
+def attempt_due(attempt, key, now=None):
+    retry_after = attempt.get("retry_after", 0) if isinstance(attempt, dict) else 0
+    return not (isinstance(attempt, dict) and attempt.get("key") == key
+                and type(retry_after) in (int, float) and math.isfinite(retry_after)
+                and retry_after > (time.time() if now is None else now))
 
 
 def load_sidecar(path):
@@ -144,18 +167,25 @@ def load_sidecar(path):
     return json.loads(text[text.index("{"):].rstrip().rstrip(";"))
 
 
-def scopes(parent_path="data/opportunities.js", child_path="data/subtopics.js"):
+def scopes(parent_path="data/opportunities.js", child_path="data/subtopics.js", diagnostics=None):
     parents = {str(row["opportunity_id"]): row for row in _load_catalog(parent_path)}
     children = load_sidecar(child_path).get("records", {})
     result = []
+    def skipped(identifier, parent_id, reason):
+        if diagnostics is not None:
+            diagnostics.append({"scope_id": identifier, "parent_id": parent_id, "stage": "source_eligibility",
+                                "state": "skipped", "reason_code": reason, "retry_eligible": True})
     for identifier, parent in parents.items():
         if not record_is_current(parent)[0]:
+            skipped(identifier, identifier, "not_current")
             continue
         published = [row for row in children.get(identifier, {}).get("subtopics", [])
                      if row.get("publication_state") == "publishable"]
         candidates = [(row, "publishable_child") for row in published]
         if not published and not BROAD.search(clean(parent.get("title")) + " " + clean(parent.get("description"))[:700]):
             candidates.append((parent, "specific_parent"))
+        if not candidates:
+            skipped(identifier, identifier, "missing_bounded_topics")
         for record, kind in candidates:
             # A child receives only its own scope, never sibling or parent prose.
             fields = [record.get("title"), record.get("summary")] if kind == "publishable_child" else [
@@ -164,12 +194,21 @@ def scopes(parent_path="data/opportunities.js", child_path="data/subtopics.js"):
             url = record.get("source_document_url") if kind == "publishable_child" else (
                 parent.get("primary_document_url") or parent.get("funding_opportunity_url") or parent.get("detail_page"))
             if len(text) < 100 or not re.match(r"https?://", str(url or "")):
+                skipped(str(record.get("subtopic_id") or identifier), identifier, "missing_source_text" if len(text) < 100 else "missing_source_url")
                 continue
             scope = {"id": str(record.get("subtopic_id") or record["opportunity_id"]),
                      "parent_id": identifier, "record_type": kind, "text": text,
                      "scope_label": clean(record.get("title")), "source_url": url,
                      "catalog_title": parent.get("title", ""), "agency": parent.get("agency", ""),
                      "opportunity_number": parent.get("opportunity_number", "")}
+            # Newly verified shared documents bind teams to material content,
+            # even when an amendment leaves a short extracted summary unchanged.
+            # Legacy baselines remain compatible until the shared extractor
+            # actually verifies their source with this dependency contract.
+            evidence = parent.get("document_evidence") or {}
+            if evidence.get("dependency_version") == 2:
+                scope["source_document_hash"] = (record.get("source_document_hash") if kind == "publishable_child"
+                                                  else (evidence.get("document") or {}).get("sha256"))
             scope["source_fingerprint"] = content_hash(scope)
             result.append(scope)
     return result
@@ -227,9 +266,16 @@ def eligible_claims(registry):
 
 
 def validate_roles(scope, value):
-    if not isinstance(value, dict):
+    if not isinstance(value, dict) or set(value) != {"specific", "objective", "roles"}:
         raise ValueError("invalid role response")
-    if value.get("specific") is not True:
+    if type(value.get("specific")) is not bool:
+        raise ValueError("specific must be a boolean")
+    if (not isinstance(value.get("objective"), str)
+            or not 10 <= len(clean(value["objective"])) <= 1600):
+        raise ValueError("invalid scientific objective")
+    if value["specific"] is False:
+        if value.get("roles") != []:
+            raise ValueError("negative decomposition must contain empty roles")
         return []
     roles = value.get("roles")
     if (not isinstance(roles, list) or not 2 <= len(roles) <= 6
@@ -237,7 +283,8 @@ def validate_roles(scope, value):
         raise ValueError("invalid role decomposition")
     seen = set()
     for role in roles:
-        if (not isinstance(role, dict) or not re.fullmatch(r"role-[1-6]", str(role.get("id", "")))
+        if (not isinstance(role, dict) or set(role) != {"id", "label", "required", "quote"}
+                or not re.fullmatch(r"role-[1-6]", str(role.get("id", "")))
                 or role["id"] in seen or not isinstance(role.get("required"), bool)
                 or not isinstance(role.get("label"), str) or not 3 <= len(clean(role["label"])) <= 180
                 or not isinstance(role.get("quote"), str)):
@@ -261,11 +308,14 @@ def validate_edges(value, roles, claims, allowed=None):
     seen = set()
     per_role = {}
     for edge in edges:
-        if not isinstance(edge, dict):
+        if not isinstance(edge, dict) or set(edge) != {"role_id", "claim_id", "coverage", "reason"}:
             raise ValueError("invalid role edge")
+        if not isinstance(edge.get("role_id"), str) or not isinstance(edge.get("claim_id"), str):
+            raise ValueError("invalid edge identity types")
         identity = (edge.get("role_id"), edge.get("claim_id"))
         if (identity in seen or identity[0] not in role_ids or identity[1] not in claims
                 or (allowed is not None and identity not in allowed)
+                or not isinstance(edge.get("coverage"), str)
                 or edge.get("coverage") not in {"direct", "method_transfer", "adjacent"}
                 or not isinstance(edge.get("reason"), str) or not 15 <= len(clean(edge["reason"])) <= 700):
             raise ValueError("invalid or unsupported claim-to-role edge")
@@ -278,6 +328,39 @@ def validate_edges(value, roles, claims, allowed=None):
                 raise ValueError("verification cannot upgrade proposed coverage")
         seen.add(identity)
     return edges
+
+
+def validate_response(prompt, data, value):
+    """Stage boundary shared by cache reads and fresh responses, including negatives."""
+    if prompt == DECOMPOSE:
+        validate_roles({"text": data["scope"]}, value)
+    elif prompt in (ADJUDICATE, VERIFY):
+        expected = {"edges", "suitable_for_team"} if prompt == VERIFY else {"edges"}
+        if not isinstance(value, dict) or set(value) != expected:
+            raise ValueError("invalid response fields")
+        allowed = None
+        if prompt == VERIFY:
+            if not isinstance(value, dict) or type(value.get("suitable_for_team")) is not bool:
+                raise ValueError("suitable_for_team must be a boolean")
+            if value["suitable_for_team"] is False and value.get("edges") != []:
+                raise ValueError("negative verification must contain empty edges")
+            allowed = {(e["role_id"], e["claim_id"]): e["coverage"] for e in data["proposed_edges"]}
+        validate_edges(value, data["roles"], {c["claim_id"]: c for c in data["claims"]}, allowed)
+    else:
+        raise ValueError("unknown response stage")
+    return value
+
+
+class ProviderUnavailable(RuntimeError):
+    pass
+
+
+class ProviderConfigurationError(ProviderUnavailable):
+    pass
+
+
+class BudgetExhausted(RuntimeError):
+    pass
 
 
 def assemble(scope, decomposition, edges, claims, registry_generation):
@@ -371,13 +454,68 @@ def refresh_assemblies(existing, candidates, claims, registry_generation):
 
 
 class Provider:
-    def __init__(self, cache):
+    def __init__(self, cache, deadline=float("inf"), max_requests=300):
         self.cache = Path(cache)
         self.cache.mkdir(parents=True, exist_ok=True)
         self.calls = 0
         self.lock = threading.Lock()
+        self.cache_lock = threading.Lock()
+        self.deadline = deadline
+        self.max_requests = max_requests
+        self.counters = {"cache_hits": 0, "cache_misses": 0, "invalid_cache_entries": 0,
+                         "retries": 0, "failed_requests": 0, "invalid_outputs": 0}
+        self.configuration_failed = False
+        self.space_identity = None
+        self.space_canaries = {}
+        self.space_lock = threading.Lock()
+
+    def count(self, name, amount=1):
+        with self.lock:
+            self.counters[name] = self.counters.get(name, 0) + amount
+
+    def check_budget(self):
+        if self.configuration_failed:
+            raise ProviderConfigurationError("provider configuration rejected")
+        if time.monotonic() >= self.deadline or self.calls >= self.max_requests:
+            raise BudgetExhausted("provider budget exhausted")
+
+    def retry(self, operation):
+        for attempt in range(3):
+            self.check_budget()
+            try:
+                return operation()
+            except (ProviderConfigurationError, BudgetExhausted):
+                raise
+            except (ValueError, KeyError, TypeError, ProviderUnavailable, requests.RequestException):
+                if attempt == 2:
+                    raise
+                delay = 2 ** attempt
+                if time.monotonic() + delay >= self.deadline:
+                    raise BudgetExhausted("retry exceeds time budget")
+                self.count("retries")
+                time.sleep(delay)
+
+    def check_deadline(self):
+        if time.monotonic() >= self.deadline:
+            raise BudgetExhausted("overall work deadline exhausted")
+
+    def read_cache(self, path, validate):
+        self.check_deadline()
+        try:
+            value = validate(json.loads(path.read_text(encoding="utf-8")))
+        except FileNotFoundError:
+            pass
+        except (ValueError, KeyError, TypeError):
+            path.unlink(missing_ok=True)
+            self.count("invalid_cache_entries")
+        else:
+            self.count("cache_hits")
+            return value
+        self.count("cache_misses")
+        return None
 
     def write_cache(self, path, value):
+        self.check_deadline()
         # Parallel scopes can share an embedding key. Readers must only see
         # complete JSON, never another worker's partially written file.
         temporary = None
@@ -385,7 +523,19 @@ class Provider:
             with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.cache, delete=False) as file:
                 temporary = Path(file.name)
                 json.dump(value, file, ensure_ascii=False)
-            os.replace(temporary, path)
+            # Windows readers can briefly hold a destination without delete
+            # sharing. Retry only that transient lock; never fall back to a
+            # non-atomic write or accept a partial cache.
+            for attempt in range(5):
+                try:
+                    with self.cache_lock:
+                        self.check_deadline()
+                        os.replace(temporary, path)
+                    break
+                except PermissionError:
+                    if attempt == 4:
+                        raise
+                    time.sleep(.01 * 2 ** attempt)
         finally:
             if temporary and temporary.exists():
                 temporary.unlink()
@@ -393,101 +543,227 @@ class Provider:
     def post(self, url, body, key_name, headers=None):
         key = os.environ.get(key_name)
         if not key:
-            raise RuntimeError(f"missing {key_name}")
+            self.configuration_failed = True
+            raise ProviderConfigurationError("missing provider credential")
         auth = {"x-api-key": key} if key_name == "ANTHROPIC_API_KEY" else {"Authorization": "Bearer " + key}
-        response = requests.post(url, json=body, headers={**auth, **(headers or {})}, timeout=(10, 55))
         with self.lock:
+            self.check_budget()
             self.calls += 1
-        if response.status_code != 200:
-            raise RuntimeError(f"provider HTTP {response.status_code}")
-        return response.json()
+            category = "canary_requests" if body.get("input") == EMBEDDING_CANARIES else "embedding_requests" if "input_type" in body else "assessment_requests"
+            self.counters[category] = self.counters.get(category, 0) + 1
+            if "input_type" in body:
+                inputs = body["input"]
+                anchors = len(EMBEDDING_CANARIES) if inputs[-len(EMBEDDING_CANARIES):] == EMBEDDING_CANARIES else 0
+                self.counters["canary_inputs"] = self.counters.get("canary_inputs", 0) + anchors
+                self.counters["embedding_inputs"] = self.counters.get("embedding_inputs", 0) + len(inputs) - anchors
+        remaining = self.deadline - time.monotonic()
+        try:
+            response = requests.post(url, json=body, headers={**auth, **(headers or {})},
+                                     timeout=(min(10, max(.01, remaining / 2)), min(55, max(.01, remaining / 2))))
+            if response.status_code in {400, 401, 403, 404, 422}:
+                self.configuration_failed = True
+                raise ProviderConfigurationError("provider configuration rejected")
+            if response.status_code != 200:
+                raise ProviderUnavailable("provider request failed")
+            return response.json()
+        except (ValueError, ProviderUnavailable, requests.RequestException):
+            self.count("failed_requests")
+            raise
 
     def json(self, prompt, data):
-        signature = content_hash([VERSION, MODEL, prompt, data])
+        signature = content_hash([RESPONSE_VERSION, MODEL, prompt, data])
         path = self.cache / (signature + ".json")
-        if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
-        result = self.post("https://api.anthropic.com/v1/messages", {
-            "model": MODEL, "max_tokens": 8000, "system": prompt,
-            "messages": [{"role": "user", "content": json.dumps(data, ensure_ascii=False)}],
-        }, "ANTHROPIC_API_KEY", {"anthropic-version": "2023-06-01"})
-        if result.get("stop_reason") != "end_turn":
-            raise RuntimeError("incomplete model response")
-        text = "".join(item.get("text", "") for item in result.get("content", []) if item.get("type") == "text")
-        text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-        parsed = json.loads(text)
-        if not isinstance(parsed, dict):
-            raise ValueError("model response must be a JSON object")
+        cached = self.read_cache(path, lambda value: validate_response(prompt, data, value))
+        if cached is not None:
+            return cached
+        def request():
+            result = self.post("https://api.anthropic.com/v1/messages", {
+                "model": MODEL, "max_tokens": 8000, "system": prompt,
+                "messages": [{"role": "user", "content": json.dumps(data, ensure_ascii=False)}],
+            }, "ANTHROPIC_API_KEY", {"anthropic-version": "2023-06-01"})
+            try:
+                if not isinstance(result, dict) or result.get("stop_reason") != "end_turn":
+                    raise ValueError("incomplete model response")
+                content = result.get("content")
+                if not isinstance(content, list) or any(not isinstance(item, dict) for item in content):
+                    raise ValueError("invalid response content")
+                text = "".join(item.get("text", "") for item in content if item.get("type") == "text")
+                text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
+                return validate_response(prompt, data, json.loads(text))
+            except (ValueError, TypeError, KeyError):
+                self.count("invalid_outputs")
+                raise
+        parsed = self.retry(request)
         self.write_cache(path, parsed)
         return parsed
 
+    def establish_embedding_space(self):
+        # Only runs when there is due work. Exact unrounded document AND query
+        # canaries establish the observed space before any cached row is read.
+        # Old caches have no such identity and are intentionally cold.
+        with self.space_lock:
+            if self.space_identity is None:
+                observed = []
+                for kind in ("document", "query"):
+                    current = self.request_vectors(EMBEDDING_CANARIES, kind, normalize=False)
+                    observed.append(current)
+                    self.space_canaries[kind] = current
+                self.space_identity = content_hash([EMBEDDING_CONFIG, EMBEDDING_CANARIES, observed])
+        return self.space_identity
+
+    def embedding_key(self, texts, kind):
+        return content_hash([EMBEDDING_CONFIG, self.establish_embedding_space(), kind, texts])
+
     def embed(self, texts, kind):
-        signature = content_hash(["voyage-4-lite", 1024, kind, texts])
+        signature = self.embedding_key(texts, kind)
         path = self.cache / (signature + ".vectors.json")
-        if path.exists():
-            return normalized_vectors(json.loads(path.read_text(encoding="utf-8")), len(texts))
-        payload = self.post("https://api.voyageai.com/v1/embeddings", {"model": "voyage-4-lite", "input": texts,
-            "input_type": kind, "output_dimension": 1024, "output_dtype": "float", "truncation": False}, "VOYAGE_API_KEY")
-        rows = payload.get("data", [])
-        if payload.get("model") != "voyage-4-lite" or len(rows) != len(texts):
-            raise ValueError("embedding identity mismatch")
-        rows = sorted(rows, key=lambda row: row["index"])
-        vectors = [row["embedding"] for row in rows]
-        if [row["index"] for row in rows] != list(range(len(texts))):
-            raise ValueError("invalid embedding indexes")
-        vectors = normalized_vectors(vectors, len(texts))
+        cached = self.read_cache(path, lambda value: normalized_vectors(value, len(texts)))
+        if cached is not None:
+            return cached
+        vectors = []
+        for start in range(0, len(texts), 128):
+            self.check_budget()
+            vectors.extend(self.request_vectors(texts[start:start + 128], kind))
         self.write_cache(path, vectors)
         return vectors
 
-    def embed_reusable(self, texts, kind):
-        # Cache each scope independently; shrinking the pending queue must not
-        # cause the entire unchanged catalog to be embedded again tomorrow.
-        paths = [self.cache / (content_hash(["scope-vector", "voyage-4-lite", 1024, kind, text]) + ".json") for text in texts]
-        result = [normalized_vectors(json.loads(path.read_text(encoding="utf-8")), 1)[0] if path.exists() else None for path in paths]
+    def request_vectors(self, texts, kind, normalize=True):
+        anchors = self.space_canaries.get(kind) if normalize else None
+        inputs = texts + EMBEDDING_CANARIES if anchors else texts
+        def request():
+            payload = self.post("https://api.voyageai.com/v1/embeddings", {"model": "voyage-4-lite", "input": inputs,
+                "input_type": kind, "output_dimension": 1024, "output_dtype": "float", "truncation": False}, "VOYAGE_API_KEY")
+            try:
+                if not isinstance(payload, dict) or payload.get("model") != "voyage-4-lite":
+                    raise ValueError("embedding identity mismatch")
+                rows = payload.get("data")
+                if (not isinstance(rows, list) or len(rows) != len(inputs)
+                        or any(not isinstance(row, dict) or type(row.get("index")) is not int for row in rows)):
+                    raise ValueError("invalid embedding rows")
+                rows = sorted(rows, key=lambda row: row["index"])
+                if [row["index"] for row in rows] != list(range(len(inputs))):
+                    raise ValueError("invalid embedding indexes")
+                vectors = [row["embedding"] for row in rows]
+                normalized = normalized_vectors(vectors, len(inputs))
+                if anchors and vectors[-len(EMBEDDING_CANARIES):] != anchors:
+                    self.configuration_failed = True
+                    raise ProviderConfigurationError("embedding space changed during run")
+                return normalized[:len(texts)] if normalize else vectors
+            except (ValueError, KeyError, TypeError):
+                self.count("invalid_outputs")
+                raise
+        return self.retry(request)
+
+    def embed_reusable(self, texts, kind, dependencies=None):
+        # Claims and scopes are both individual items. Ownership/revision metadata
+        # is included for claims; changing list membership cannot evict siblings.
+        identity = self.establish_embedding_space()
+        dependencies = dependencies if dependencies is not None else [None] * len(texts)
+        if len(dependencies) != len(texts):
+            raise ValueError("embedding dependency count mismatch")
+        paths = [self.cache / (content_hash(["item-vector-v2", EMBEDDING_CONFIG, identity, kind, text, dependency]) + ".json")
+                 for text, dependency in zip(texts, dependencies)]
+        def validate_item(value, key):
+            if (not isinstance(value, dict) or value.get("key") != key
+                    or value.get("vector_hash") != content_hash(value.get("vector"))):
+                raise ValueError("item embedding integrity mismatch")
+            return normalized_vectors([value["vector"]], 1)[0]
+        result = [self.read_cache(path, lambda value, key=path.stem: validate_item(value, key)) for path in paths]
         missing = [i for i, vector in enumerate(result) if vector is None]
-        if missing:
-            vectors = self.embed([texts[i] for i in missing], kind)
-            for index, vector in zip(missing, vectors):
+        self.count("item_vector_hits", len(texts) - len(missing))
+        self.count("item_vector_misses", len(missing))
+        for start in range(0, len(missing), 128):
+            self.check_budget()
+            batch = missing[start:start + 128]
+            vectors = self.embed([texts[i] for i in batch], kind)
+            for index, vector in zip(batch, vectors):
                 result[index] = vector
-                self.write_cache(paths[index], [vector])
+                self.write_cache(paths[index], {"key": paths[index].stem, "vector": vector, "vector_hash": content_hash(vector)})
         return result
+
+    def embed_claims(self, claims):
+        return self.embed_reusable([claim["label"] + ". " + claim["evidence"] for claim in claims], "document",
+            [{key: claim[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for claim in claims])
+
 
 
 
 def generate_scope(scope, provider, claims, vectors, registry_generation, deadline):
     """Independent scientific assessment; only the coordinator mutates the catalog."""
-    result = {"scope_id": scope["id"]}
+    result = {"scope_id": scope["id"], "parent_id": scope["parent_id"],
+              "source_fingerprint": scope.get("source_fingerprint"), "stage": "decomposition"}
     if time.monotonic() >= deadline:
-        return result | {"state": "deferred"}, None
+        return result | {"state": "deferred", "reason_code": "budget_exhausted", "retry_eligible": True}, None
     ids = list(claims)
     try:
-        decomposition = provider.json(DECOMPOSE, {"scope": scope["text"], "record_type": scope["record_type"]})
+        source = {"scope": scope["text"], "record_type": scope["record_type"]}
+        if scope.get("source_fingerprint"):
+            source["source_fingerprint"] = scope["source_fingerprint"]
+        decomposition = provider.json(DECOMPOSE, source)
         roles = validate_roles(scope, decomposition)
         if not roles:
             return result | {"state": "not_specific"}, None
+        result["stage"] = "retrieval"
         queries = [decomposition["objective"] + ". " + r["label"] + ". " + r["quote"] for r in roles]
         query_vectors = provider.embed(queries, "query")
         retrieved = set()
         for query in query_vectors:
+            if time.monotonic() >= deadline:
+                raise BudgetExhausted("ranking budget exhausted")
             ranked = sorted(range(len(ids)), key=lambda i: -sum(a*b for a,b in zip(query, vectors[i])))
             retrieved.update(ids[i] for i in ranked[:12])
         subset = {i: claims[i] for i in sorted(retrieved)}
-        payload = {"scope": scope["text"], "objective": decomposition["objective"], "roles": roles,
-                   "claims": [{key: claim[key] for key in ("claim_id", "label", "evidence")} for claim in subset.values()]}
-        edges = validate_edges(provider.json(ADJUDICATE, payload), roles, subset)
+        payload = {"scope": scope["text"], "source_fingerprint": scope.get("source_fingerprint"), "objective": decomposition["objective"], "roles": roles,
+                   "claims": [{key: claim[key] for key in ("claim_id", "revision", "material_hash", "researcher_id",
+                                                           "label", "evidence", "source_url")} for claim in subset.values()]}
+        result["stage"] = "adjudication"
+        edges = validate_response(ADJUDICATE, payload, provider.json(ADJUDICATE, payload))["edges"]
+        result["stage"] = "verification"
         verification = provider.json(VERIFY, payload | {"proposed_edges": edges})
-        if verification.get("suitable_for_team") is not True:
+        validate_response(VERIFY, payload | {"proposed_edges": edges}, verification)
+        if verification["suitable_for_team"] is False:
             return result | {"state": "unsuitable_scope"}, None
         verified = validate_edges(verification, roles, subset,
                                   {(e["role_id"], e["claim_id"]): e["coverage"] for e in edges})
+        result["stage"] = "assembly"
         proposal = assemble(scope, decomposition, verified, subset, registry_generation)
         return result | {"state": "proposed" if proposal else "insufficient_evidence"}, proposal
-    except (ValueError, RuntimeError, requests.RequestException, KeyError, TypeError) as error:
+    except BudgetExhausted:
+        return result | {"state": "deferred", "reason_code": "budget_exhausted", "retry_eligible": True}, None
+    except (ValueError, RuntimeError, requests.RequestException, KeyError, TypeError, OSError) as error:
         # Truncated or malformed provider responses are transport/output failures,
         # not permanent scientific rejections of a funding opportunity.
-        rejected = isinstance(error, (ValueError, KeyError, TypeError)) and not isinstance(error, json.JSONDecodeError)
+        rejected = isinstance(error, (ValueError, KeyError, TypeError))
         return result | {"state": "rejected_evidence" if rejected else "unavailable",
-                         "error_type": type(error).__name__, "reason": str(error)[:160]}, None
+                         "error_type": type(error).__name__, "retry_eligible": True,
+                         "reason_code": "invalid_provider_output" if rejected else "provider_unavailable"}, None
+
+
+def discovery_checkpoint(value, candidates):
+    valid = isinstance(value, dict) and type(value.get("sequence")) is int and value["sequence"] >= 0
+    if not valid or not isinstance(value.get("last_scheduled"), dict):
+        return {"sequence": 0, "last_scheduled": {}}
+    return {"sequence": value["sequence"], "last_scheduled": {key: sequence for key, sequence in value["last_scheduled"].items()
+        if key in candidates and type(sequence) is int and 0 <= sequence <= value["sequence"]}}
+
+
+def bounded_assess(executor, queue, assess, provider, workers):
+    # Never submit an entire backlog to the executor. The provider also checks
+    # the shared request/time budget atomically before every request and retry.
+    for start in range(0, len(queue), workers):
+        batch = []
+        exhausted = False
+        for scope in queue[start:start + workers]:
+            try:
+                provider.check_budget()
+            except BudgetExhausted:
+                exhausted = True
+                break
+            batch.append((scope, executor.submit(assess, scope)))
+        for scope, future in batch:
+            yield scope, future.result()
+        if exhausted:
+            raise BudgetExhausted("scheduling budget exhausted")
 
 
 def coverage(rows):
@@ -513,6 +789,13 @@ def main():
     if not 1 <= args.workers <= 4:
         parser.error("workers must be 1-4")
     started = time.monotonic()
+    report_path = Path(args.report)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    run = {"run_id": os.environ.get("GITHUB_RUN_ID") or str(uuid.uuid4()),
+           "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "1"), "generation_requested": args.generate,
+           "started_at": datetime.now(timezone.utc).isoformat(), "response_contract": RESPONSE_VERSION}
+    # A startup failure must not leave a successful report from a previous invocation.
+    report_path.write_text(json.dumps(run | {"status": "starting"}) + "\n", encoding="utf-8", newline="\n")
     registry = load_registry()
     path = Path("config/opportunity_team_model.json")
     model = json.loads(path.read_text(encoding="utf-8"))
@@ -522,12 +805,21 @@ def main():
     claims = eligible_claims(registry)
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
     pipeline_hash = content_hash([VERSION, MODEL, DECOMPOSE, ADJUDICATE, VERIFY])
-    candidates = scopes()
+    eligibility = []
+    candidates = scopes(diagnostics=eligibility)
     existing = {row["id"]: row for row in model["opportunities"]}
     affected_sources = invalidate_stale_sources(model, source_fingerprints(model, candidates))
+    affected_contracts = []
+    for row in existing.values():
+        if row.get("generator_version") and row.get("pipeline_hash") != pipeline_hash:
+            row["review_state"] = "needs_revalidation"
+            row["revalidation_reason"] = "The source assessment or verification contract changed."
+            affected_contracts.append(row["id"])
     attempts = model.setdefault("generation_attempts", {})
-    def attempt_key(scope):
-        return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation])
+    def attempt_key(scope, state=None):
+        return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation,
+            ASSEMBLY_VERSION if (state or (attempts.get(scope["id"], {}).get("state")
+                if isinstance(attempts.get(scope["id"]), dict) else None)) == "insufficient_evidence" else None])
     assembly_updates = refresh_assemblies(existing, candidates, claims, registry["registry_generation"])
     by_id = {scope["id"]: scope for scope in candidates}
     for result in assembly_updates:
@@ -535,61 +827,104 @@ def main():
             row = existing[result["scope_id"]]
             # Do not suppress generation if researcher evidence has expanded.
             if row.get("claims_generation_at_generation") == claims_generation and row.get("pipeline_hash") == pipeline_hash:
-                attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]]), "state": result["state"]}
+                attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]], result["state"]), "state": result["state"], "response_contract": RESPONSE_VERSION}
     pending = [s for s in candidates if (s["id"] not in existing or existing[s["id"]].get("review_state") == "needs_revalidation"
-               or (existing[s["id"]].get("generator_version") and (existing[s["id"]].get("claims_generation_at_generation") != claims_generation
-                   or existing[s["id"]].get("pipeline_hash") != pipeline_hash)))
+               or (existing[s["id"]].get("generator_version")
+                   and existing[s["id"]].get("pipeline_hash") != pipeline_hash))
                and not attempt_completed(attempts.get(s["id"]), attempt_key(s), existing.get(s["id"]))]
-    report = {"version": VERSION, "model": MODEL, "registry_generation": registry["registry_generation"],
-              "eligible_scopes": len(candidates), "pending_scopes": len(pending),
-              "source_invalidations": affected_sources, "assembly_updates": assembly_updates,
+    due = [s for s in pending if attempt_due(attempts.get(s["id"]), attempt_key(s))]
+    report = run | {
+              "input_generation": content_hash([claims_generation, [s["source_fingerprint"] for s in candidates]]),
+              "provider_requests": 0, "version": VERSION, "model": MODEL, "registry_generation": registry["registry_generation"],
+              "limits": {"max_scopes": args.max_scopes, "max_seconds": args.max_seconds, "max_provider_requests": 300},
+              "eligible_scopes": len(candidates), "pending_scopes": len(pending), "due_scopes": len(due),
+              "eligibility": eligibility,
+              "source_invalidations": affected_sources, "assessment_invalidations": affected_contracts,
+              "assembly_updates": assembly_updates,
               "coverage_before": coverage(existing.values()), "results": []}
-    if args.generate and claims and pending:
-        provider = Provider(args.cache)
-        ids = list(claims)
-        vectors = provider.embed([claims[i]["label"] + ". " + claims[i]["evidence"] for i in ids], "document")
-        scores = {}
-        print(json.dumps({"state": "ranking_scopes", "count": len(pending)}), flush=True)
-        for start in range(0, len(pending), 64):
-            batch = pending[start:start + 64]
-            scope_vectors = provider.embed_reusable([scope["text"][:4000] for scope in batch], "query")
-            for scope, query in zip(batch, scope_vectors):
-                people = {}
-                for identifier, vector in zip(ids, vectors):
-                    person = claims[identifier]["researcher_id"]
-                    score = sum(a * b for a, b in zip(query, vector))
-                    people[person] = max(people.get(person, -1), score)
-                # Prefer evidence involving at least two distinct people.
-                best = sorted(people.values(), reverse=True)[:2]
-                scores[scope["id"]] = sum(best) / len(best)
-        covered_parents = {row["parent_id"] for row in existing.values() if row.get("review_state") != "needs_revalidation"}
-        queue = diverse_queue(pending, scores, args.max_scopes, per_parent=1,
-                              covered_parents=covered_parents, maintenance_ids=existing,
-                              recent_ids=recent_scope_ids(pending, _load_catalog("data/opportunities.js")))
-        deadline = started + args.max_seconds
-        def assess(scope):
-            return generate_scope(scope, provider, claims, vectors, registry["registry_generation"], deadline)
-        # Consume in queue order for reproducible catalog ordering. At most four
-        # scopes call providers at once; tasks not started by the deadline defer.
-        with ThreadPoolExecutor(max_workers=args.workers) as executor:
-            for scope, (result, proposal) in zip(queue, executor.map(assess, queue)):
-                if result["state"] == "deferred":
-                    report["time_budget_exhausted"] = True
-                    continue
-                if proposal:
-                    proposal["claims_generation_at_generation"] = claims_generation
-                    proposal["pipeline_hash"] = pipeline_hash
-                    existing[scope["id"]] = proposal
-                elif result["state"] in {"not_specific", "unsuitable_scope", "insufficient_evidence"}:
-                    if scope["id"] in existing and existing[scope["id"]].get("generator_version"):
-                        existing[scope["id"]]["review_state"] = "needs_revalidation"
-                if result["state"] != "unavailable":
-                    attempts[scope["id"]] = {"key": attempt_key(scope), "state": result["state"]}
-                report["results"].append(result)
-                print(json.dumps(result), flush=True)
-        report["provider_requests"] = provider.calls
+    provider = None
+    if args.generate and claims and due:
+        # Reserve time for canonical output synchronization and checkpoint writes.
+        provider = Provider(args.cache, deadline=started + args.max_seconds - 5)
+        try:
+            ids = list(claims)
+            vectors = provider.embed_claims([claims[i] for i in ids])
+            progress = discovery_checkpoint(model.get("discovery_queue"), by_id)
+            model["discovery_queue"] = progress
+            repair_ids = {key for key, row in existing.items() if row.get("review_state") == "needs_revalidation"}
+            recent_ids = recent_scope_ids(due, _load_catalog("data/opportunities.js"))
+            # Bound ranking itself, before any scope embedding/provider discovery.
+            # Least recently scheduled items rotate through the existing checkpoint.
+            discovery = diverse_queue(due, {row["id"]: -progress["last_scheduled"].get(row["id"], 0) for row in due},
+                args.max_scopes * 2, maintenance_ids=repair_ids, recent_ids=recent_ids)
+            report["ranking_window"] = len(discovery)
+            scores = {}
+            print(json.dumps({"state": "ranking_scopes", "count": len(discovery)}), flush=True)
+            for start in range(0, len(discovery), 64):
+                provider.check_budget()
+                batch = discovery[start:start + 64]
+                scope_vectors = provider.embed_reusable([scope["text"][:4000] for scope in batch], "query")
+                for scope, query in zip(batch, scope_vectors):
+                    provider.check_budget()
+                    people = {}
+                    for index, (identifier, vector) in enumerate(zip(ids, vectors)):
+                        if index % 64 == 0:
+                            provider.check_deadline()
+                        person = claims[identifier]["researcher_id"]
+                        score = sum(a * b for a, b in zip(query, vector))
+                        people[person] = max(people.get(person, -1), score)
+                    # Prefer evidence involving at least two distinct people.
+                    best = sorted(people.values(), reverse=True)[:2]
+                    scores[scope["id"]] = sum(best) / len(best)
+            covered_parents = {row["parent_id"] for row in existing.values() if row.get("review_state") != "needs_revalidation"}
+            queue = diverse_queue(discovery, scores, args.max_scopes, per_parent=1,
+                                  covered_parents=covered_parents, maintenance_ids=repair_ids, recent_ids=recent_ids)
+            deadline = provider.deadline
+            def assess(scope):
+                return generate_scope(scope, provider, claims, vectors, registry["registry_generation"], deadline)
+            # Consume in queue order for reproducible catalog ordering. At most four
+            # scopes call providers at once; tasks not started by the deadline defer.
+            with ThreadPoolExecutor(max_workers=args.workers) as executor:
+                for scope, (result, proposal) in bounded_assess(executor, queue, assess, provider, args.workers):
+                    progress["sequence"] += 1
+                    progress["last_scheduled"][scope["id"]] = progress["sequence"]
+                    result["input_fingerprint"] = attempt_key(scope)
+                    result["reason_code"] = result.get("reason_code", result["state"])
+                    if result["state"] == "deferred":
+                        report["time_budget_exhausted"] = True
+                        report["results"].append(result)
+                        continue
+                    if proposal:
+                        proposal["claims_generation_at_generation"] = claims_generation
+                        proposal["pipeline_hash"] = pipeline_hash
+                        existing[scope["id"]] = proposal
+                    elif result["state"] in {"not_specific", "unsuitable_scope", "insufficient_evidence"}:
+                        if scope["id"] in existing and existing[scope["id"]].get("generator_version"):
+                            existing[scope["id"]]["review_state"] = "needs_revalidation"
+                    attempts[scope["id"]] = {"key": attempt_key(scope, result["state"]), "state": result["state"],
+                        "response_contract": RESPONSE_VERSION, "stage": result["stage"],
+                        "retry_after": time.time() + 3600 if result["state"] not in COMPLETED_STATES else 0}
+                    result["retry_eligible"] = result["state"] not in COMPLETED_STATES
+                    report["results"].append(result)
+                    print(json.dumps(result), flush=True)
+        except BudgetExhausted:
+            report["time_budget_exhausted"] = True
+        except (ValueError, RuntimeError, requests.RequestException, KeyError, TypeError, OSError) as error:
+            report["processing_failure"] = {"stage": "queue_retrieval", "error_type": type(error).__name__,
+                                            "reason_code": "budget_exhausted" if isinstance(error, BudgetExhausted) else
+                                                "invalid_provider_output" if isinstance(error, (ValueError, KeyError, TypeError)) else "provider_unavailable"}
+        finally:
+            report["provider_requests"] = provider.calls
+            report["counters"] = provider.counters
     report["coverage_after"] = coverage(existing.values())
     report["pending_after"] = sum(not attempt_completed(attempts.get(scope["id"]), attempt_key(scope), existing.get(scope["id"])) for scope in pending)
+    assessed = {result["scope_id"] for result in report["results"]}
+    report["deferred"] = [{"scope_id": s["id"], "parent_id": s["parent_id"], "stage": "queue",
+        "input_fingerprint": attempt_key(s), "state": "deferred", "retry_eligible": True,
+        "reason_code": "insufficient_researcher_evidence" if not claims else
+            "retry_cooldown" if not attempt_due(attempts.get(s["id"]), attempt_key(s)) else "pending_work"}
+        for s in pending if s["id"] not in assessed]
+    report["assessed_scopes"] = sum(r["state"] in COMPLETED_STATES for r in report["results"])
     report["outcomes"] = {state: sum(row["state"] == state for row in report["results"])
                           for state in sorted({row["state"] for row in report["results"]})}
     if args.write:
@@ -608,10 +943,12 @@ def main():
         write_outputs(model, path, Path("data/opportunity_teams.js"), Path("data/opportunity_team_index.js"))
         for target in ("match_explorer.html", "team_match.html"):
             update_version_target(Path(target), model["generation_id"])
-    Path(args.report).parent.mkdir(parents=True, exist_ok=True)
-    Path(args.report).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
-    print(json.dumps({key: value for key, value in report.items() if key != "results"}))
+    report["elapsed_seconds"] = round(time.monotonic() - started, 3)
+    report["status"] = "completed"
+    report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(json.dumps({key: value for key, value in report.items() if key not in {"results", "eligibility", "deferred"}}))
+    return int(bool(report.get("processing_failure")) or any(r["state"] in {"unavailable", "rejected_evidence"} for r in report["results"]))
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

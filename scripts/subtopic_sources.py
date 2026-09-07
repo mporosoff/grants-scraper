@@ -127,6 +127,9 @@ def attachment_sources(opportunity_id, *, detail_fetcher, collector):
     the pull_grants network layer at module scope, and so tests can drive it
     without a network.
     """
+    # Supplemental canonical IDs never name a Grants.gov API resource.
+    if not str(opportunity_id or "").isdigit():
+        return []
     try:
         detail = detail_fetcher(str(opportunity_id))
     except Exception:                       # noqa: BLE001 - never break the parent

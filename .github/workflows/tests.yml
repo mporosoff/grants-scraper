@@ -59,6 +59,11 @@ jobs:
       - run: node --check assets/review.js
       - run: node --check assets/ai-provider.js
       - run: node --check assets/chat-ui.js
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
       - run: node --test tests/browser/*.test.mjs
       - name: Verify retrieval has not regressed on the frozen query set
         run: node tools/query_baseline.mjs --check

@@ -89,7 +89,7 @@ def _deadlines_after_type(text: str, as_of: date):
     additional = [
         {"kind": "application", "date": d.isoformat(), "time": t,
          "timezone": "ET" if t else None, "note": None}
-        for d, t in future[1:]
+        for d, t in future
     ]
     note = (
         f"Next of {len(future)} open submission dates; later dates are in the details."

@@ -4,8 +4,11 @@ import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import process from "node:process";
+import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import vm from "node:vm";
+
+import { validateAsset } from "./embedding_contract.mjs";
 
 import { loadHarness, makeVariantHarness } from "./run_search_diagnosis.mjs";
 
@@ -108,16 +111,17 @@ function validateGeneration(generation, label) {
   });
 }
 
-function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
+export function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
+  const identity = row => `${row?.corpus_sha256}:${row?.model_space_fingerprint}`;
   const current = compactGeneration(manifest);
   let previous = null;
-  if (existing?.current?.corpus_sha256 && existing.current.corpus_sha256 !== current.corpus_sha256) {
+  if (existing?.current?.corpus_sha256 && identity(existing.current) !== identity(current)) {
     previous = existing.current;
-  } else if (existing?.previous?.corpus_sha256 && existing.previous.corpus_sha256 !== current.corpus_sha256) {
+  } else if (existing?.previous?.corpus_sha256 && identity(existing.previous) !== identity(current)) {
     previous = existing.previous;
   }
   if (!previous && bootstrapPrevious?.corpus_sha256
-    && bootstrapPrevious.corpus_sha256 !== current.corpus_sha256) {
+    && identity(bootstrapPrevious) !== identity(current)) {
     previous = compactGeneration(bootstrapPrevious);
   }
   const allowlist = {
@@ -127,13 +131,14 @@ function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
   };
   validateGeneration(allowlist.current, "current");
   if (allowlist.previous) validateGeneration(allowlist.previous, "previous");
-  if (allowlist.previous?.corpus_sha256 === allowlist.current.corpus_sha256) {
+  if (allowlist.previous && identity(allowlist.previous) === identity(allowlist.current)) {
     throw new Error("Current and previous Worker generations must be distinct.");
   }
   return allowlist;
 }
 
 async function validateCurrentPackage(manifest, vectorBuffer, canaries) {
+  validateAsset(manifest, vectorBuffer, canaries);
   if (manifest.schema_version !== 1 || manifest.model !== REQUIRED_MODEL
     || manifest.dimension !== REQUIRED_DIMENSION || manifest.dtype !== "float16-le") {
     throw new Error("The current semantic manifest uses an unsupported contract.");
@@ -276,7 +281,7 @@ async function run() {
   }, null, 2)}\n`);
 }
 
-run().catch(error => {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) run().catch(error => {
   process.stderr.write(`${error.message}\n`);
   process.exitCode = 1;
 });

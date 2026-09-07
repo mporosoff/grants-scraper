@@ -34,6 +34,12 @@ def record_is_publishable(record: dict, as_of: date) -> tuple[bool, str]:
         return False, "missing_title"
     if not _official_url(record):
         return False, "missing_official_url"
+    if record.get("source_review_after"):
+        try:
+            if date.fromisoformat(record["source_review_after"]) < as_of:
+                return False, "source_review_expired"
+        except (TypeError, ValueError):
+            return False, "invalid_source_review_date"
 
     close_date = record.get("close_date")
     if close_date:

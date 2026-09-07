@@ -181,7 +181,13 @@ class CanonicalOpportunity:
             item_date = to_iso_date(item.get("date"))
             item_kind = clean_text(item.get("kind")) or "application"
             identity = (item_kind, item_date)
-            if not item_date or identity in seen_deadlines:
+            if not item_date:
+                continue
+            if identity in seen_deadlines:
+                existing = next(d for d in deadlines if (d["kind"], d["date"]) == identity)
+                for key in ("time", "timezone", "note"):
+                    if not existing.get(key) and item.get(key):
+                        existing[key] = clean_text(item[key])
                 continue
             seen_deadlines.add(identity)
             deadlines.append(
@@ -280,8 +286,8 @@ class CanonicalOpportunity:
             "limited_submission": bool(LIMITED_SUBMISSION_RE.search(text_blob)),
             "career_stage_signal": early_career.group(1) if early_career else None,
             "description": (description or "")[:12000] or None,
-            # --- enrichment/evidence fields (defaulted; external sources do not
-            #     pass through the Grants.gov detail or document-evidence steps) ---
+            # --- shared evidence stage fills these after canonical merge;
+            #     Grants.gov-only structured detail calls remain separate ---
             "detail_enriched_at": None,
             "api_revision": None,
             "api_version": None,

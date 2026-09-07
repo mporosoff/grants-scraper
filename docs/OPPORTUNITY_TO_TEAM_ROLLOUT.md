@@ -2,53 +2,45 @@
 
 ## Decision
 
-Funding Finder may propose a three- or four-person research team only for a
-specific opportunity, a publication-eligible child topic, or a source-declared
-branch. Broad parent programs are never automatic team units.
-
-The first calibrated release contains ten opportunity scopes spanning eight
-collaboration archetypes. It is deliberately a staged evidence model: two
-teams pass the complete-internal-team gate, seven are credible internal cores
-with explicit missing skills, and one demonstrates insufficient internal role
-coverage. An incomplete proposal must remain visibly incomplete.
+Funding Finder proposes complementary research teams only for a specific
+opportunity, a publication-eligible child topic, or a reviewed source-declared
+branch. Broad parent programs are never automatic team units. Generated teams
+use two to four people, with honest gaps when the available claims do not cover
+all required roles. The original calibration batch is retained alongside
+validated automatic proposals; its historical counts do not describe the
+current catalog.
 
 ## Data boundary
 
-`config/opportunity_team_model.json` is the canonical repository model. It was
-deterministically reduced from the offline faculty-evidence expansion and the
-ten-opportunity explanation gate. Those workbooks and larger calibration JSON
-files are import artifacts and are not browser assets.
-
-The source contract is:
-
-- 156 faculty directory records;
-- 145 source-rankable and 11 source-unrankable records;
-- 118 main-pool candidates with at least two retained capabilities;
-- 35 standby records with exactly one retained capability; and
-- 3 directory-only records with no retained matching capability.
-
-Source rankability describes what the controlled workbook supported before the
-later source-evidence audit. Pool assignment describes the retained,
-source-traceable capability model after that audit, so the two classifications
-are intentionally reported separately rather than treated as the same partition.
+`config/opportunity_team_model.json` is the canonical repository model.
+`config/researcher_registry.json` supplies current researcher identities,
+publication eligibility, and versioned public claims. Current roster/pool counts
+and registry generation are in `data/researcher_registry_manifest.json`.
+Current proposal coverage and processing outcomes are recorded by
+`scripts/build_opportunity_teams.py` in
+`evaluation/opportunity_team_generation.json`; check its run ID, input
+generation, generation mode, and completion status before using a receipt.
+Counts are diagnostics, not scientific quality gates.
 
 The compact browser projection is `data/opportunity_teams.js` and remains lazy.
-The eager `data/opportunity_team_index.js` contains only the ten reviewed scope
-identifiers, their parent identifiers, and record types; it contains no faculty,
-role, or explanation graph. Both assets share an immutable generation identifier:
-the SHA-256 of the canonical model payload before the identifier is added.
-Funding Finder and Team Match declare that identity in their HTML markers and
-all changed runtime/cache references. Runtime validation rejects a mismatched
-index or projection. The search release manifest hashes both generated assets,
-both pages, and every changed runtime file, and Pages verification checks the
-published bytes against those hashes.
+The eager `data/opportunity_team_index.js` contains scope identifiers, parent
+identifiers, and record types; it contains no faculty, role, or explanation
+graph. Both assets share an immutable generation identifier: the SHA-256 of the
+canonical model payload before the identifier is added. Funding Finder and Team
+Match declare that identity in their HTML markers and runtime/cache references.
+Runtime validation rejects a mismatched index or projection. The search release
+manifest hashes both generated assets and the associated runtime files; Pages
+verification checks the published bytes against those hashes.
 
-The controlled workbook source hash is
-`4cc24fad355c5716a462b93e1f60d0c7d55d9368d7cfede330ff41daa36af130`.
+The original calibration workbooks and larger import artifacts are not browser
+assets. Provider caches remain under the ignored `.cache/opportunity-teams/`
+directory. Synthetic acceptance fixtures remain under `tests/`.
 
 ## Evidence and team contract
 
-Every supported opportunity has four required roles. A role records:
+Automatic decomposition derives two to six scientific roles from the exact
+scope before seeing researcher claims. At least one role must be required; the
+roles are planning contributions, not invented sponsor mandates. A role records:
 
 - the role label derived from an authoritative opportunity source;
 - a bounded set of accepted controlled capabilities;
@@ -119,42 +111,70 @@ retry restores the team.
 
 ## AI boundary
 
-No AI call is required for the first-stage team proposal. Deterministic catalog
-membership, role evidence, currentness, child publication eligibility, and
-completion status remain authoritative.
+Browsing a published proposal requires no provider call. The offline generator
+uses the configured Anthropic model to decompose a bounded source, Voyage to
+retrieve relevant eligible claims, and separate adjudication and independent
+verification calls to assess those exact claims. Verification cannot invent
+edges or upgrade proposed coverage. Source quotes, identities, evidence limits,
+claim revisions, and currentness remain publication requirements.
 
-A later provider-connected refinement may interpret a specific notice into a
-bounded role plan or synthesize the displayed rationale, but it may not invent
-faculty evidence, opportunity identifiers, team membership, or completed role
-coverage. That extension requires a separate calibrated test frame and is not
-part of this release.
+## Generation and failure recovery
 
-## Expansion workflow
+The coordinated refresh first invalidates source/profile dependencies, restores
+the existing public-evidence cache, then runs the bounded generator. The normal
+command remains:
 
-Each subsequent calibration batch should:
+```sh
+python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
+```
 
-1. select only current, specific parents or eligible/declarative child scopes;
-2. draft four bounded required roles from authoritative source text;
-3. audit every proposed person and every role edge against faculty sources;
-4. preserve unsupported roles as gaps instead of force-fitting a profile;
-5. run holdout removal/replacement checks and unrelated-child controls;
-6. add the accepted batch to the canonical model;
-7. regenerate the browser projection and HTML identity references together;
-8. rebuild the search release manifest; and
-9. run focused model/runtime/accessibility contracts before protected checks.
+Omit `--generate` to perform invalidation and deterministic assembly without
+provider work. Omit `--write` to avoid changing canonical team assets; a receipt
+is still written. `--report` selects its developer-only location.
 
-Coverage breadth, faculty-faculty similarity, and counts of possible three- or
-four-person permutations are diagnostics only. They do not establish team
-quality.
+Each response must satisfy its complete stage contract, including actual
+boolean decision/required flags and valid empty arrays for negative decisions.
+Malformed responses and invalid quotes/claims are processing failures, never
+scientific evidence that an opportunity is unsuitable. Cache reads are
+revalidated; invalid entries are evicted, and only validated replacements are
+atomically admitted. Transient transport errors and invalid outputs receive at
+most three attempts with bounded backoff. Authentication/configuration errors
+stop further network attempts for that provider instance. Failed calls count
+against the request and overall time budgets.
+
+The versioned attempt contract retains valid scientific decisions separately
+from retryable processing failures. Legacy negative receipts without a current
+validated decision become eligible for bounded reconsideration; compatible
+published teams are retained. Failed per-scope processing receives a one-hour
+cooldown, while changed inputs are immediately eligible. Source or researcher
+invalidation always happens before provider work, so an outage cannot republish
+unsupported teams. A failed generation exits nonzero after persisting safe
+invalidation and a sanitized receipt. Skipped source eligibility, valid broad
+scope, insufficient evidence, completed assessments, and deferred work have
+separate diagnostics. These appear in the existing generation receipt and
+Actions summary, without adding application UI.
+
+Receipts include invocation/run identity, input generation, scope/parent IDs,
+stages, reason codes, retry eligibility, cache/retry/network counters, and
+elapsed time. A starting or mismatched receipt cannot be reported as a completed
+run. Provider error bodies and private text are never copied into diagnostics.
+
+## Verification
+
+Focused contracts live in `tests/test_build_opportunity_teams.py` and
+`tests/test_team_provider_contracts.py`. Run them with the required non-E2E
+Python and Node gates during implementation. Browser-backed accessibility and
+E2E execution require the dedicated authorization described in `AGENTS.md`.
+
+Coverage breadth, faculty similarity, and counts of possible permutations are
+diagnostics only. They do not establish team quality.
 
 ## Known limitations
 
 - The directory may still omit relevant faculty, including secondary or
   cross-school collaborators.
-- Fifty faculty claims remain marked for lexical review and 54 expanded claims
-  still require specific verification if challenged.
-- Seven of ten initial proposals remain conditional and one remains a failed
-  internal-coverage example.
+- Current claim statuses and evidence limitations are recorded in the canonical
+  researcher registry; current team gaps remain explicit in each proposal.
 - Replacement alternatives with source-backed vocabulary remain visibly
   review-required unless individually audited for the opportunity role.
 - Availability, willingness, sponsor eligibility, budget, and institutional

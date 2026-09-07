@@ -1,14 +1,15 @@
 # `scripts/sources` — modular multi-source ingestion layer
 
 Add funding sources beyond Grants.gov (NYSERDA, foundations, internal portals, RSS
-feeds, …) through a final pipeline step that refreshes external records in the
+feeds, …) through the canonical merge step that refreshes external records in the
 generated catalog.
 
 ## Why it's safe to drop in
 
-- **Nothing existing changes.** It runs *after* `build_catalog.py`,
-  `enrich_catalog.py`, and `extract_document_evidence.py`, so those Grants.gov
-  steps never see external records.
+- **Shared enrichment.** Collection and canonical merge run after the Grants.gov
+  structured API step and before common official HTML/PDF extraction. Every
+  canonical source can receive evidence and eligible child topics. The common
+  writer rebuilds enriched text, indexes and facets before faculty/team projections.
 - **Safe enablement.** New adapters default to `enabled = False` until they are
   implemented and verified. Production adapters are enabled one at a time.
 - **Grants.gov always wins.** External records never override a Grants.gov
@@ -37,9 +38,10 @@ generated catalog.
 | `discoverability.py` | Evidence registry for opaque umbrella calls. Matches scoped identifiers/signals, records official source URLs, and makes injected terms reversible. |
 | `validate.py` | Currentness, official-link, date-plausibility, and source health gates. |
 | `http.py` | Polite HTTP client (UA, timeouts, size cap, pacing) for network adapters. |
+| `intake.py` | Bounded developer preview/acceptance and maintained-input adapter; uses native parsers or cited explicit facts. |
 | `adapters/` | Bundled adapters. `_template.py` to copy; `rss.py`; `sample.py` (offline demo); verified `nyserda.py`; and the disabled `ur_infoready.py` shell. |
 | `fixtures/` | Demo data for the sample adapter and tests. |
-| `__main__.py` | CLI: `list`, `dry-run`, `merge`. |
+| `__main__.py` | CLI: `list`, `dry-run`, `intake`, `merge`. |
 
 ## Try it now (no changes to your catalog)
 
@@ -66,8 +68,8 @@ python -m scripts.sources merge --adapter sample --include-disabled     # previe
 
 ## Daily refresh integration
 
-The workflow runs this step after document-evidence extraction and before the
-post-refresh regression suite:
+The workflow runs this step after Grants.gov structured-detail reconciliation
+and before shared document-evidence extraction:
 
 ```yaml
       - name: Merge additional (non-Grants.gov) sources
@@ -88,6 +90,88 @@ python -m scripts.sources merge --catalog data/opportunities.js --cache data/sou
 Because the merge step reuses `build_catalog`'s index/facet/writer functions and
 preserves every top-level catalog field, the existing "Run regression tests
 against generated asset" step still validates the result.
+
+The coordinated order is collection/normalization, Grants.gov structured details,
+canonical merge (including each adapter's structured reconciliation), shared
+document extraction and eligible topics, faculty matching, team invalidation and
+assessment, feeds/change events/link health/documentation, vectors and release
+packaging. `merge` alone creates an intermediate searchable catalog; run the
+shared extraction before building downstream projections. No consumer-specific
+opportunity IDs or direct edits to generated assets are needed.
+
+## Developer-only intake
+
+Preview a current notice selected from a supported native official listing:
+
+```powershell
+python -m scripts.sources intake --adapter arpa-e --url "OFFICIAL_NOTICE_URL"
+python -m scripts.sources intake --adapter arpa-e --url "OFFICIAL_NOTICE_URL" --accept
+```
+
+Supported URL parsers are `arpa-e`, `eere-exchange`, and `nsf-funding`. The URL must
+exactly identify one record in that parser's official listing. The parser retains
+its native ID and structured dates, including submission time/timezone. Acceptance
+records the selector in `config/source_intake.json`; normal coordinated refresh
+consumes it through the maintained adapter and the existing native adapter. The
+developer merge summary reports its canonical IDs (including a Grants.gov winner),
+unavailability or absence from the current listing. A selector cannot resurrect a
+withdrawn notice or enable a disabled adapter.
+
+For unsupported markup, supply a small source-cited JSON manifest:
+
+```powershell
+python -m scripts.sources intake --manifest path/to/notice.json
+python -m scripts.sources intake --manifest path/to/notice.json --accept
+python -m scripts.sources merge --write
+```
+
+The default is dry run: it validates and prints normalized records without writes.
+`--accept` atomically updates maintained canonical inputs, never catalog or team
+assets. Review that input diff as code. `--inputs PATH` selects an isolated input
+file for developer tests; pass the same path to `merge`. Production refresh uses
+the default maintained file. Synthetic fixtures belong only under `tests/` and
+temporary directories, never in accepted production inputs.
+
+A manifest has exactly `schema_version: 1` and `entries` (1–20 records, at most
+256 KiB). Every entry has exactly these keys:
+
+| Key | Contract |
+| --- | --- |
+| `kind` | `record` |
+| `source_name`, `source_type` | Supplemental official publisher; type is Federal, State, Foundation, International, Internal or Other. Grants.gov cannot be impersonated. |
+| `verified_on`, `review_after` | ISO dates, no future verification, review within 30 days. Expired verification withholds a record without asserting withdrawal. |
+| `opportunity` | Existing `CanonicalOpportunity` schema, without `extra` or `contacts`. Explicitly include `external_id`, `title`, `opportunity_number`, `url`, `agency`, `description`, `status`, `close_date`, `posted_date`, `award_floor`, `award_ceiling`, `total_program_funding`, `eligibility_text`. Use JSON `null` for unknown facts. |
+| `citations` | Map each supplied factual field to exactly `{ "url": ..., "quote": ... }`; quote is 15–600 characters, present in the official notice. Stable external ID and document URL/name are identity metadata. |
+
+Status is explicitly `posted` or `forecasted`; dates are ISO or null; numeric
+amounts are finite, nonnegative and ordered. Optional `additional_deadlines` name
+`kind`, `date`, `time`, `timezone` explicitly, with null unknown time/zone. Quotes
+must come from `url` or an explicitly supplied `primary_document_url`; acceptance
+fetches those public documents and verifies the quotes. It does not infer missing
+facts or assert that a quoted passage supports a developer's interpretation.
+The developer remains responsible for source-to-field accuracy. See
+`tests/fixtures/phase2_pipeline.py` for an executable synthetic schema example.
+
+Maintained record IDs bind the official host and external ID. Existing canonical
+merge rules preserve Grants.gov precedence and distinct numbered calls. A failed
+source retains only the fallback its adapter permits; expired records are always
+filtered. Supported HTML/PDF retrieval validates every redirect and public network
+address, rejects credentials, loopback/private targets and licensed source hosts,
+and bounds time and size. Anonymous retrieval does not inherit environment
+credentials or bypass access controls. Exchange page extraction is restricted to
+the exact notice fragment. Unsupported structure fails clearly.
+
+Shared evidence uses content hashes for material amendments. HTTP validators and
+freshness timestamps do not create amendments. Failed retrieval retains the last
+successful check internally, withholds stale public quotes and child topics, and
+invalidates dependent team scopes. Structured dates, amounts and eligibility retain
+authority; document conflicts stay disclosed. Inferred topics still require the
+existing publication gate, and broad parents do not automatically receive teams.
+
+Phase 2 contracts: `python -m unittest tests.test_pipeline_phase2 -q` and
+`node --test tests/browser/pipeline-phase2-contract.test.mjs`. The latter uses a
+JavaScript VM, not a browser. Both run actual pipeline commands in temporary
+directories; no live subscribers, provider calls or researcher mutations occur.
 
 ### Opaque umbrella calls
 

@@ -7,21 +7,20 @@ file.
 
 How it fits in
 --------------
-The existing daily pipeline is unchanged::
+The coordinated daily pipeline uses the existing components in this order::
 
-    build_catalog.py  ->  enrich_catalog.py  ->  extract_document_evidence.py
-        (Grants.gov)        (Grants.gov)              (Grants.gov)
+    build_catalog.py -> enrich_catalog.py -> scripts.sources merge --write
+       (Grants.gov)       (Grants.gov)        (canonical multi-source merge)
+    -> extract_document_evidence.py -> faculty/team projections -> feeds/release
+           (all canonical sources)
 
-This layer adds one final step that reads the generated
+This layer reads the generated
 ``data/opportunities.js``, refreshes records from enabled source adapters,
 re-deduplicates, rebuilds the search index and facets with Grants.gov's own
-functions, and writes the file back::
-
-        ...  ->  python -m scripts.sources merge --write
-
-Because it runs last, the Grants.gov steps never see external records. Each
-enabled source publishes an atomic snapshot and falls back to its committed
-last-known-good records when a refresh fails or looks unhealthy.
+functions, and writes the file back. Shared official-document extraction then
+finalizes evidence, eligible topics, searchable fields, indexes, and facets
+before downstream consumers run. Each enabled source retains its own failure
+policy and currentness gates. Developer-accepted inputs use the same lifecycle.
 
 Safety by default
 -----------------

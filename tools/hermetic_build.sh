@@ -79,18 +79,19 @@ python -m scripts.enrich_catalog \
   --max-updates 0 --max-agency-updates 0 --request-delay 0 \
   --now "$PIPELINE_NOW" >/dev/null
 
-# 3. Document evidence. Zero fetches; still merges and rebuilds the index.
+# 3. Canonical source merge. The sample adapter is fixture-backed and offline.
+python -m scripts.sources merge \
+  --catalog "$OUT/opportunities.js" \
+  --cache "$OUT/source_records.json" \
+  --adapter sample --include-disabled --write >/dev/null
+
+# 4. Shared document evidence after all sources, matching coordinated refresh.
+#    Zero fetches; still merges cached evidence and finalizes indexes/facets.
 python -m scripts.extract_document_evidence \
   --catalog "$OUT/opportunities.js" \
   --cache "$OUT/document_evidence.json" \
   --max-documents 0 --request-delay 0 \
   --now "$PIPELINE_NOW" >/dev/null
-
-# 4. Source merge. The sample adapter is fixture-backed and needs no network.
-python -m scripts.sources merge \
-  --catalog "$OUT/opportunities.js" \
-  --cache "$OUT/source_records.json" \
-  --adapter sample --include-disabled --write >/dev/null
 
 # 5. Link health. Zero checks; the failure threshold needs >=20 so it cannot trip.
 python -m scripts.check_links \
