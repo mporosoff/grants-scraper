@@ -229,6 +229,82 @@ class DeadlineOwnership(unittest.TestCase):
                 facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
                 self.assertEqual([f['time'] for f in facts], times)
 
+    def test_missing_times_stay_unknown_across_all_list_clause_boundaries(self):
+        record, entry = self.entry()
+        for separator in ['; ', ', ', ', and ', ' and ', ' or ', ' • ', ' | ']:
+            for labeled in [False, True]:
+                for timed_first in [False, True]:
+                    for time_before in [False, True]:
+                        with self.subTest(separator=separator, labeled=labeled,
+                                          timed_first=timed_first, time_before=time_before):
+                            items = []
+                            for index, date in enumerate(['March 1, 2027', 'April 1, 2027']):
+                                label = 'Application Deadline ' if labeled else ''
+                                timed = (index == 0) == timed_first
+                                time = '6:00 p.m. Pacific Time'
+                                items.append(label + ((f'at {time} on {date}' if time_before else f'{date} at {time}') if timed else date))
+                            text = ('' if labeled else 'Application due dates: ') + separator.join(items)
+                            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                            # An explicitly introductory time governs an unlabeled shared list.
+                            expected = ['6:00 p.m.' if (index == 0) == timed_first or
+                                        (not labeled and timed_first and time_before) else None for index in range(2)]
+                            self.assertEqual([f['time'] for f in facts], expected)
+                            self.assertEqual([f['timezone'] for f in facts], ['Pacific' if time else None for time in expected])
+                            entry['facts'] = facts
+                            entry.pop('deadline_extractor_identity', None)
+                            published = merge_document_entry(record, entry)
+                            self.assertEqual([d['time'] for d in published['deadlines'] if d.get('evidence_id')], expected)
+
+    def test_comma_attached_time_and_date_internal_comma_keep_their_owners(self):
+        record, entry = self.entry()
+        text = 'Application due dates: March 1, 2027, at 5:00 p.m. Eastern Time, April 1, 2027, May 1, 2027 at 6:00 p.m. Pacific Time'
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
+            [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', None, None), ('2027-05-01', '6:00 p.m.', 'Pacific')])
+
+    def test_pdf_field_bullets_do_not_publish_administrative_dates(self):
+        record, entry = self.entry()
+        text = ('Pre-Application Submission Deadline: 5:00 p.m. Eastern Time (ET), March 1, 2027 '
+                '• Invitation to Submit an Application: April 1, 2027 '
+                '• Application Submission Deadline: 11:59 p.m. ET, May 1, 2027 '
+                '• End of Application Verification Period: 5:00 p.m. ET, June 1, 2027')
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
+            [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-05-01', '11:59 p.m.', 'ET')])
+
+    def test_legacy_cached_time_requires_its_own_quote_support(self):
+        record, entry = self.entry()
+        text = 'Application Deadline March 1, 2027, Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time'
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        facts[0].update(time='6:00 p.m.', timezone='Pacific')
+        entry['facts'] = facts
+        entry.pop('deadline_extractor_identity')
+        stamp, digest = entry['checked_at'], entry['document']['sha256']
+        result = merge_document_entry(record, entry)
+        self.assertEqual([d['date'] for d in result['deadlines'] if d.get('evidence_id')], ['2027-04-01'])
+        self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
+        self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in result['document_evidence']['review_queue']))
+
+    def test_cached_clock_and_canonical_zone_equivalence_is_precise(self):
+        record, original = self.entry()
+        for quoted, stored, zone, kept in [
+            ('5:00 PM Eastern Time', '17:00', 'America/New_York', True),
+            ('12 a.m. Eastern Time', '00:00', 'ET', True),
+            ('12 p.m. Eastern Time', '12:00', 'Eastern', True),
+            ('5 p.m. Eastern Time', '17:00', 'Pacific', False),
+            ('5 p.m. Eastern Time', '17:00', 'East', False),
+            ('5 p.m. Eastern Time', '05:00', 'Eastern', False),
+            ('5 p.m. Eastern Time', '17:00', 'EST', False),
+        ]:
+            with self.subTest(quoted=quoted, stored=stored, zone=zone):
+                entry = copy.deepcopy(original)
+                entry['facts'] = extract_deadlines(record['opportunity_id'],
+                    [{'text': f'Applications are due March 1, 2027 at {quoted}.'}], entry['document'], entry['checked_at'])
+                entry['facts'][0].update(time=stored, timezone=zone)
+                entry.pop('deadline_extractor_identity')
+                result = merge_document_entry(record, entry)
+                self.assertEqual(any(d.get('evidence_id') for d in result['deadlines']), kept)
+
 
 class NegativeResponseDiagnostics(unittest.TestCase):
     setUp = team_fixtures.ProposedTeamTests.setUp

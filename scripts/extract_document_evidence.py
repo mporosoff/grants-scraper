@@ -751,15 +751,20 @@ def deadline_context(container, match):
             start, end = max(start, left), min(end, right)
             break
     scan_start = start
-    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|;\s*", text[scan_start:end]):
+    dates = list(DATE_RE.finditer(text))
+    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;,•|]\s*|\b(?i:and|or)\s+", text[scan_start:end]):
         position = scan_start + boundary.end()
-        if boundary.group(0).startswith(";"):
+        if any(date.start() <= scan_start + boundary.start() < date.end() for date in dates):
+            continue  # The comma inside March 1, 2027 is part of the date.
+        if boundary.group(0)[0] not in ".!?":
             following = text[position:end]
             next_date = DATE_RE.search(following)
             label = following[:next_date.start()] if next_date else ""
             # A shared list inherits its due-date cue; a new labeled clause
-            # owns its own stage/time. These are different uses of semicolons.
-            if not (DEADLINE_CUE_RE.search(label) and deadline_kind(label)):
+            # owns its own stage/time regardless of its list punctuation.
+            field_label = re.sub(r"\b(?:and|or|on|at|by)\b", "", TIME_RE.sub("", label), flags=re.I)
+            new_field = boundary.group(0)[0] in "•|" and re.search(r"[A-Za-z]", field_label)
+            if not (new_field or (DEADLINE_CUE_RE.search(label) and deadline_kind(label))):
                 continue
         if re.search(r"\b[ap]\.?m\.\s*$", text[:position], re.I):
             continue
@@ -773,9 +778,22 @@ def deadline_context(container, match):
 
 def nearest_deadline_time(context, offset, date_length):
     matches = list(TIME_RE.finditer(context))
-    left = context.rfind(";", 0, offset) + 1
-    right = context.find(";", offset + date_length)
-    right = len(context) if right < 0 else right
+    dates = list(DATE_RE.finditer(context))
+    boundaries = []
+    for previous, following in zip(dates, dates[1:]):
+        # Split only between complete dates, never at a date's internal comma.
+        # A time directly attached to the previous date belongs to that item,
+        # including "March 1, 2027, at 5 p.m., April 1, 2027".
+        after = previous.end()
+        attached = [item for item in matches if after <= item.start() < following.start()
+                    and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", context[after:item.start()], re.I)
+                    and not re.fullmatch(r"\s+on\s+", context[item.end():following.start()], re.I)]
+        if attached:
+            after = attached[0].end()
+        delimiter = re.search(r"[;,•|]|\b(?:and|or)\b", context[after:following.start()], re.I)
+        boundaries.append(after + delimiter.end() if delimiter else following.start())
+    left = max([0] + [position for position in boundaries if position <= offset])
+    right = min([len(context)] + [position for position in boundaries if position >= offset + date_length])
     local = [item for item in matches if left <= item.start() < right]
     if not local:
         # A time explicitly before the first date can govern a shared list.
@@ -796,7 +814,7 @@ def supported_submission_date(context, offset):
         return False
     # Dates for holidays, decisions, appointments and project starts are not
     # applicant submission deadlines, even beside a valid deadline field.
-    administrative = list(re.finditer(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|"
+    administrative = list(re.finditer(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|invitation\s+to\s+submit|"
                  r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I))
     if administrative:
         explicit = list(re.finditer(r"\b(?:deadlines?|due|closing\s+date|submission\s+dates?|"
@@ -831,6 +849,36 @@ def qualify_deadline_sequence(facts, review_queue=None):
     return kept
 
 
+def cached_deadline_time_supported(fact, match):
+    if not fact.get("time"):
+        return True
+    if not match:
+        return False
+
+    def clock(value):
+        value = re.sub(r"[.\s]", "", value).upper()
+        for pattern in ("%I:%M%p", "%I%p", "%H:%M"):
+            try:
+                parsed = datetime.strptime(value, pattern)
+                return parsed.hour, parsed.minute
+            except ValueError:
+                pass
+        return None
+
+    def zone(value):
+        value = str(value or "").casefold()
+        # Preserve established canonical IANA representations; do not equate
+        # seasonal abbreviations (EST/EDT), partial names, or unknown zones.
+        return {"america/new_york": "eastern", "et": "eastern",
+                "america/chicago": "central", "ct": "central",
+                "america/denver": "mountain", "mt": "mountain",
+                "america/los_angeles": "pacific", "pt": "pacific",
+                "america/anchorage": "alaska", "pacific/honolulu": "hawaii"}.get(value, value)
+
+    return (clock(fact["time"]) is not None and clock(fact["time"]) == clock(match.group(1))
+            and (not fact.get("timezone") or zone(fact["timezone"]) == zone(match.group(2))))
+
+
 def revalidate_cached_deadlines(entry):
     """Recheck old citations locally without claiming a new source retrieval."""
     if entry.get("deadline_extractor_identity") == DEADLINE_EXTRACTOR_IDENTITY:
@@ -843,7 +891,17 @@ def revalidate_cached_deadlines(entry):
             continue
         quote = (fact.get("citation") or {}).get("quote") or ""
         matches = [match for match in DATE_RE.finditer(quote) if parse_document_date(match.group(0)) == fact.get("date")]
-        if any(supported_submission_date(*deadline_context({"text": quote}, match)) for match in matches):
+        supported = False
+        for match in matches:
+            context, offset = deadline_context({"text": quote}, match)
+            if not supported_submission_date(context, offset):
+                continue
+            time_match = nearest_deadline_time(context, offset, len(match.group(0)))
+            if not cached_deadline_time_supported(fact, time_match):
+                continue
+            supported = True
+            break
+        if supported:
             kept.append(fact)
     kept = qualify_deadline_sequence(kept)
     removed = [fact["id"] for fact in prior if fact not in kept]
