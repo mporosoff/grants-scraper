@@ -91,7 +91,7 @@ DEADLINE_LABEL_RE = re.compile(
     re.I,
 )
 UNKNOWN_DEADLINE_VALUE_RE = re.compile(
-    r"\b(?:TBD|TBA|unknown|unannounced|to\s+be\s+(?:announced|determined)|not\s+yet|not\s+announced|not\s+available|pending|rolling|none|N/A)\b",
+    r"\b(?:TBD|TBA|unknown|unannounced|to\s+be\s+(?:announced|determined)|not\s+yet(?:\s+(?:announced|determined|scheduled|available))?|not\s+announced|not\s+available|pending|rolling|none|N/A)\b",
     re.I,
 )
 # Complete predicate/value grammar, shared by direct and modified replacements.
@@ -100,9 +100,8 @@ DEADLINE_COPULA = r"(?:is|are|was|were|will|shall|has|have|may|might|can|could|s
 DEADLINE_REPLACEMENT_ACTION = r"(?:(?:chang|mov|revis)(?:e|es|ed)|extend(?:ed|s)?|(?:re)?scheduled|deferred|set|fixed)"
 DEADLINE_VALUE_CONNECTOR = r"(?:due|for|on|by|at|to|until|till|through)"
 DEADLINE_VALUE_MODIFIER = r"(?:now|still|expected|anticipated|estimated|planned|intended|proposed|[a-z]+ly)"
-DEADLINE_PREDICATE_RE = re.compile(rf"(?:[:=–—-]|(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION})\b)", re.I)
-DEADLINE_VALUE_LINK_RE = re.compile(rf"(?:[:=–—-]|(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|currently|now|still)\b)\s*", re.I)
 DEADLINE_VALUE_BRIDGE_RE = re.compile(rf"\s*(?:(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|{DEADLINE_VALUE_MODIFIER})\b\s*)*", re.I)
+DEADLINE_CLOCK_BRIDGE_RE = re.compile(rf"[\s,:=(]*(?:(?:{DEADLINE_COPULA}|due|close[sd]?|closing|submitted|received|filed|at|by|no\s+later\s+than)\b\s*)*", re.I)
 SUBMISSION_GROUP_VALUE = r"(?:[IVX]+|\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
 SUBMISSION_GROUP_PATTERN = rf"(?:(?:phase|round|cycle|year)\s+{SUBMISSION_GROUP_VALUE}|FY\s*\d{{2,4}})\b"
 SUBMISSION_GROUP_PREFIX_RE = re.compile(rf"\b(?:{SUBMISSION_GROUP_PATTERN}\s*[-:–—,(\[]?\s*)+$", re.I)
@@ -774,6 +773,99 @@ def deadline_kind(context, date_offset=None):
     return kind, label
 
 
+def deadline_clock_end(text, start, end):
+    """Accept only a clock directly introduced by the owned deadline field."""
+    clock = TIME_RE.search(text, start, end)
+    if clock and DEADLINE_CLOCK_BRIDGE_RE.fullmatch(text[start:clock.start()]):
+        return clock.end()
+    return start
+
+
+def deadline_value_bridge(text, *, list_connector=False):
+    """Prove a complete linking phrase, allowing only bounded incidental asides.
+
+    The first segment must belong to the predicate; noun-bearing scope text
+    cannot disappear as an aside. A predicate/list connector must resume after
+    every incidental clause. Commas inside dates are never clause delimiters.
+    """
+    if list_connector and not re.search(r'[,;]|\b(?:and|or)\b', text, re.I):
+        return None
+    dates = list(DATE_RE.finditer(text))
+    commas = [m.start() for m in re.finditer(',', text)
+              if not any(d.start() <= m.start() < d.end() for d in dates)]
+    boundaries = [-1, *commas, len(text)]
+    parts = []
+    in_aside = False
+    for index, (left, right) in enumerate(zip(boundaries, boundaries[1:])):
+        part = text[left + 1:right]
+        semantic = part
+        if not list_connector:
+            # An explicitly changed FROM value is historical, not another live
+            # deadline. Require both the change predicate and its TO connector.
+            values = sorted([*DATE_RE.finditer(part), *UNKNOWN_DEADLINE_VALUE_RE.finditer(part)],
+                            key=lambda value: value.start())
+            for old in values:
+                from_links = list(re.finditer(r'\bfrom\b', part[:old.start()], re.I))
+                from_link = from_links[-1] if from_links else None
+                if not from_link:
+                    continue
+                before = part[:from_link.start()]
+                if (not re.search(rf'\b{DEADLINE_REPLACEMENT_ACTION}\b', before, re.I)
+                        or not DEADLINE_VALUE_BRIDGE_RE.fullmatch(TIME_RE.sub(' ', before))
+                        or not DEADLINE_VALUE_BRIDGE_RE.fullmatch(TIME_RE.sub(' ', part[from_link.end():old.start()]))):
+                    continue
+                after = part[deadline_clock_end(part, old.end(), len(part)):]
+                if re.match(r'\s*(?:to|until|till|through)\b', after, re.I):
+                    semantic = before + ' ' + after
+                    break
+        without_clocks = TIME_RE.sub(' ', semantic)
+        if list_connector:
+            linked = re.fullmatch(r'\s*(?:(?:and|or|at|by|on)\b\s*|;\s*)*', without_clocks, re.I)
+        else:
+            linked = DEADLINE_VALUE_BRIDGE_RE.fullmatch(without_clocks)
+        if index == 0 and not linked:
+            return None
+        if linked:
+            parts.append(semantic)
+            in_aside = False
+        else:
+            in_aside = True
+    return ' '.join(parts) if not in_aside else None
+
+
+def deadline_replacement_values(value):
+    """One ordered ownership sequence for dates and explicitly unknown values.
+
+    Unknown items carry list ownership without producing a dated fact. A later
+    explicit change predicate supersedes the earlier values; a plain list does
+    not. Every form, including a bare date and an abbreviated 'now', uses this
+    same proof and therefore cannot admit trailing scope dates through a bypass.
+    """
+    candidates = sorted([(match, 'date') for match in DATE_RE.finditer(value)] +
+                        [(match, 'unknown') for match in UNKNOWN_DEADLINE_VALUE_RE.finditer(value)],
+                        key=lambda item: item[0].start())
+    introduced = []
+    for candidate, kind in candidates:
+        bridge = deadline_value_bridge(value[:candidate.start()])
+        if bridge is None and introduced:
+            prior, _, prior_bridge = introduced[-1]
+            connector = value[prior.end():candidate.start()]
+            if deadline_value_bridge(connector, list_connector=True) is not None:
+                bridge = prior_bridge
+            else:
+                connector = value[deadline_clock_end(value, prior.end(), candidate.start()):candidate.start()]
+                transition = re.sub(r'^\s*[,;]?\s*(?:(?:and|but)\s+)?(?:(?:then|subsequently)\s+)?',
+                                    '', connector, flags=re.I)
+                changed = re.search(rf'\b{DEADLINE_REPLACEMENT_ACTION}\b', transition, re.I)
+                transition_bridge = deadline_value_bridge(transition) if changed else None
+                if transition_bridge is not None:
+                    bridge = transition_bridge
+                    introduced = []
+        if bridge is not None:
+            introduced.append((candidate, kind, bridge))
+    return introduced
+
+
 def deadline_context(container, match):
     """Bind a date to its own HTML block and sentence, never a nearby field."""
     text = container["text"]
@@ -815,93 +907,42 @@ def deadline_context(container, match):
         # Empty, explicitly unknown, and newly dated values cannot borrow the
         # preceding date. Scope annotations such as "for all applicants" keep
         # the explicit postfix label with its date.
-        value_link = DEADLINE_VALUE_LINK_RE.match(suffix)
-        if value_link:
-            value = suffix[value_link.end():].strip()
-            while not (DATE_RE.match(value) or UNKNOWN_DEADLINE_VALUE_RE.match(value)):
-                leading_link = re.match(r"(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+", value, re.I)
-                if not leading_link:
-                    break
-                value = value[leading_link.end():]
-            # A replacement needs a complete value-linking phrase. A date inside
-            # a scope annotation ("for applicants eligible as of April 1") is
-            # not the label's value, even after a colon or copula.
-            predicate = DEADLINE_PREDICATE_RE.match(suffix)
-            owned_value = value
-            next_label = DEADLINE_LABEL_RE.search(owned_value)
-            if next_label:
-                owned_value = owned_value[:next_label.start()]
-            for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;•|]", owned_value):
-                if not re.search(r"\b[ap]\.?m\.\s*$", owned_value[:boundary.end()], re.I):
-                    owned_value = owned_value[:boundary.start()]
-                    break
-            dated_value = DATE_RE.search(owned_value) if predicate else DATE_RE.match(value)
-            unknown_value = UNKNOWN_DEADLINE_VALUE_RE.search(owned_value) if predicate else UNKNOWN_DEADLINE_VALUE_RE.match(value)
-            if predicate:
-                def introduced_value(candidate):
-                    if not candidate:
-                        return None
-                    bridge = owned_value[:candidate.start()]
-                    # Commas inside complete dates are not aside delimiters.
-                    # Test every candidate so an incidental date inside an aside
-                    # cannot hide the actual value following that aside.
-                    bridge_dates = list(DATE_RE.finditer(bridge))
-                    commas = [m.start() for m in re.finditer(",", bridge)
-                              if not any(d.start() <= m.start() < d.end() for d in bridge_dates)]
-                    parts = []
-                    in_aside = False
-                    boundaries = [-1, *commas, len(bridge)]
-                    for index, (left, right) in enumerate(zip(boundaries, boundaries[1:])):
-                        part = bridge[left + 1:right]
-                        linked = DEADLINE_VALUE_BRIDGE_RE.fullmatch(TIME_RE.sub(" ", part))
-                        if index == 0 and not linked:
-                            return None  # A scope phrase cannot be discarded as an aside.
-                        if linked:
-                            parts.append(part)
-                            in_aside = False
-                        else:
-                            in_aside = True
-                    # The predicate must resume after an annotation; a candidate
-                    # still inside an unclosed annotation is not its value.
-                    return " ".join(parts) if not in_aside else None
-                introduced_dates = []
-                for candidate in DATE_RE.finditer(owned_value):
-                    bridge = introduced_value(candidate)
-                    if bridge is None and introduced_dates:
-                        prior, prior_bridge = introduced_dates[-1]
-                        connector = TIME_RE.sub("", owned_value[prior.end():candidate.start()])
-                        if re.fullmatch(r"\s*(?:[,;]|\b(?:and|or|at|by|on)\b)\s*(?:[,;]|\b(?:and|or|at|by|on)\b|\s)*", connector, re.I):
-                            bridge = prior_bridge
-                    if bridge is not None:
-                        introduced_dates.append((candidate, bridge))
-                dated_value = bool(introduced_dates)
-                unknown_value = any(introduced_value(candidate) is not None
-                                    for candidate in UNKNOWN_DEADLINE_VALUE_RE.finditer(owned_value))
-                if was_postfix and (dated_value or unknown_value):
-                    if match.start() == previous.start():
-                        return "", 0  # The explicitly superseded value has no current ownership.
-                    owned_start = text.find(owned_value, value_start, end)
-                    if owned_start <= match.start() < owned_start + len(owned_value):
-                        own = next(((candidate, bridge) for candidate, bridge in introduced_dates
-                                    if owned_start + candidate.start() == match.start()), None)
-                        if own is None:
-                            return "", 0  # Incidental dates inside the replacement clause.
-                        candidate, bridge = own
-                        value_end = candidate.end()
-                        clock = TIME_RE.search(owned_value, value_end)
-                        if clock and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", owned_value[value_end:clock.start()], re.I):
-                            value_end = clock.end()
-                        # Semantic context contains only the proved predicate and
-                        # owned value/clock. Citations still quote the original
-                        # source; annotation clocks and later dates stay excluded.
-                        prefix = text[label_start:value_start] + " " + bridge
-                        return prefix + owned_value[candidate.start():value_end], len(prefix)
-            if not value or dated_value or unknown_value:
-                postfix = False
-        if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):
+        # All forms share the same value sequence, including direct values and
+        # abbreviated links. Only a leading field separator is structural syntax.
+        value = re.sub(r"^[:=–—-]\s*", "", suffix)
+        owned_value = value
+        next_label = DEADLINE_LABEL_RE.search(owned_value)
+        if next_label:
+            owned_value = owned_value[:next_label.start()]
+        for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;•|]", owned_value):
+            if not re.search(r"\b[ap]\.?m\.\s*$", owned_value[:boundary.end()], re.I):
+                owned_value = owned_value[:boundary.start()]
+                break
+        owned_start = text.find(owned_value, value_start, end)
+        introduced = deadline_replacement_values(owned_value)
+        if introduced:
+            if was_postfix and match.start() == previous.start():
+                return "", 0
+            if owned_start <= match.start() < owned_start + len(owned_value):
+                own = next(((candidate, bridge) for candidate, kind, bridge in introduced
+                            if kind == 'date' and owned_start + candidate.start() == match.start()), None)
+                if own is None:
+                    return "", 0
+                candidate, bridge = own
+                value_end = deadline_clock_end(owned_value, candidate.end(), len(owned_value))
+                requirement = re.match(r"\s*[\[(]\s*(?:required|optional)\s*[\])]", owned_value[value_end:], re.I)
+                if requirement:
+                    value_end += requirement.end()
+                # Citation construction still uses the original source. Semantic
+                # context contains only the proved field, value and owned clock.
+                prefix = text[label_start:value_start] + " " + bridge
+                return prefix + owned_value[candidate.start():value_end], len(prefix)
+        if introduced or (not value and re.match(r"^[:=–—-]", suffix)):
             postfix = False
         if postfix:
             if previous.start() < match.start():
+                if owned_start <= match.start() < owned_start + len(owned_value):
+                    return "", 0  # Scope prose cannot reuse this postfix field's cue.
                 # This earlier postfix label cannot become the next date's cue.
                 start = max(start, label.end())
             elif previous.start() > match.start():
@@ -910,10 +951,7 @@ def deadline_context(container, match):
             else:
                 # A postfix annotation owns the preceding date and only a
                 # directly attached clock, never clocks inside its scope prose.
-                postfix_end = value_start
-                clock = TIME_RE.search(text, value_start, end)
-                if clock and re.fullmatch(r"[\s,:=(]*(?:(?:at|by)\s*)?", text[value_start:clock.start()], re.I):
-                    postfix_end = clock.end()
+                postfix_end = deadline_clock_end(text, value_start, end)
                 end = min(end, postfix_end)
             continue
         if label_start <= match.start():

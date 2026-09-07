@@ -191,6 +191,14 @@ modal forms, multiple incidental dates before/after the value, absent replacemen
 unknown statuses, time and zone ownership, both postfix delimiters and neighboring
 field boundaries through fresh extraction and legacy-cache publication. Local
 revalidation never advances the source-check timestamp or document hash.
+Direct, abbreviated and modal forms now use one ordered value sequence. Unknown
+items carry list ownership without producing dates; explicit subsequent revisions
+supersede earlier values. A proved `from` value is historical, and its clock cannot
+leak into the replacement. The same complete clock-cue rule handles postfix and
+replacement values, including `due at`, `closes at` and `must be received by`.
+Postfix scope prose cannot reuse a deadline's cue for incidental later dates.
+Prefix headings use the same value ownership, preserving explicit required and
+optional markers while excluding historical and incidental dates.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -231,6 +239,8 @@ Pages generation; it does not repeat provider work or rebuild the package.
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
 fact/reference cleanup, boundary-change revalidation and strict negative-output
-diagnostics. The focused source/document/provider family passed 108 tests. A
+diagnostics. The current correction passed 106 focused source/document tests,
+995 required Python tests and 713 Node contracts, with unchanged hermetic,
+frozen-query and scoring expectations and a valid release package. A
 bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
 one provider request returned a valid exact-quote decomposition with zero retries.

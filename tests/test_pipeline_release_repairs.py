@@ -570,7 +570,8 @@ class DeadlineOwnership(unittest.TestCase):
     def test_complete_replacement_predicate_and_value_matrix(self):
         predicates = ['is', ':', 'has been extended to', 'has been extended until', 'has been moved to',
                       'has been changed to', 'has been revised to', 'revised to', 'extended until',
-                      'will probably be', 'may become', 'is expected to be', 'is now scheduled for']
+                      'will probably be', 'may become', 'is expected to be', 'is now scheduled for',
+                      '', 'now', 'currently', 'scheduled for', 'set to', 'for', 'to']
         values = [('May 1, 2027', [('2027-05-01', None, None)]),
                   ('May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
                   ('5 PM Pacific on May 1, 2027', [('2027-05-01', '5 PM', 'Pacific')])]
@@ -612,6 +613,75 @@ class DeadlineOwnership(unittest.TestCase):
                         text = ('March 1, 2027' + (' at 5 PM Eastern' if timed else '') +
                                 f' {opening}Application Deadline{closing} {annotation}')
                         self.assert_replacement_projection(text, [('2027-03-01', '5 PM' if timed else None, 'Eastern' if timed else None)])
+
+    def test_unknown_and_dated_values_share_replacement_list_ownership(self):
+        for unknown in ['TBD', 'unknown', 'unannounced', 'to be announced', 'not yet announced']:
+            for values, expected in [
+                    (f'{unknown} or May 1, 2027', [('2027-05-01', None, None)]),
+                    (f'April 1, 2027, {unknown}, or May 1, 2027', [('2027-04-01', None, None), ('2027-05-01', None, None)]),
+                    (f'{unknown}, May 1, 2027 at 5 PM Eastern, or {unknown}', [('2027-05-01', '5 PM', 'Eastern')])]:
+                with self.subTest(unknown=unknown, values=values):
+                    self.assert_replacement_projection('March 1, 2027 (Application Deadline) has been extended to ' + values, expected)
+
+    def test_direct_and_abbreviated_replacements_exclude_later_scope_values(self):
+        for predicate in ['', ':', 'now', 'currently', 'scheduled for', 'for', 'to']:
+            for value, expected in [('May 1, 2027', [('2027-05-01', None, None)]),
+                                    ('May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
+                                    ('TBD', [])]:
+                with self.subTest(predicate=predicate, value=value):
+                    text = (f'March 1, 2027 [Application Deadline] {predicate} {value} '
+                            'for appointments beginning at 4 PM Pacific on June 1, 2027')
+                    self.assert_replacement_projection(text, expected)
+
+    def test_from_to_changes_and_successive_revisions_keep_only_current_values(self):
+        cases = [
+            ('has been revised from April 1, 2027 to May 1, 2027', [('2027-05-01', None, None)]),
+            ('has been revised from TBD to May 1, 2027', [('2027-05-01', None, None)]),
+            ('has been moved from April 1, 2027 at 4 PM Pacific to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
+            ('has been moved from 4 PM Pacific on April 1, 2027 to 5 PM Eastern on May 1, 2027', [('2027-05-01', '5 PM', 'Eastern')]),
+            ('was moved to April 1, 2027 and then revised to May 1, 2027', [('2027-05-01', None, None)]),
+            ('was moved to April 1, 2027 at 4 PM Pacific and then changed to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
+            ('was moved to April 1, 2027 and then revised to TBD', []),
+        ]
+        for clause, expected in cases:
+            with self.subTest(clause=clause):
+                self.assert_replacement_projection('March 1, 2027 (Application Deadline) ' + clause, expected)
+
+    def test_deadline_clock_cues_bind_to_the_owned_value_only(self):
+        for cue in ['at', 'by', 'due at', 'closes at', 'will close at', 'must be received by', 'no later than']:
+            for opening, closing in [('(', ')'), ('[', ']')]:
+                for replacement in [False, True]:
+                    with self.subTest(cue=cue, opening=opening, replacement=replacement):
+                        text = f'March 1, 2027 {opening}Application Deadline{closing}'
+                        if replacement:
+                            text += ' is moved to May 1, 2027'
+                        text += f', {cue} 5 PM Eastern for applicants assessed at 4 PM Pacific on June 1, 2027'
+                        self.assert_replacement_projection(text, [('2027-05-01' if replacement else '2027-03-01', '5 PM', 'Eastern')])
+
+    def test_postfix_scope_prose_cannot_reuse_a_clock_cue_for_its_own_dates(self):
+        for scope in ['for applications reviewed June 1, 2027',
+                      'for applications from investigators appointed June 1, 2027',
+                      'for projects with application eligibility assessed June 1, 2027']:
+            self.assert_replacement_projection('March 1, 2027 (Application Deadline), due at 5 PM Eastern ' + scope,
+                                               [('2027-03-01', '5 PM', 'Eastern')])
+        for separator in ['; ', '. ', ' • ']:
+            self.assert_replacement_projection('March 1, 2027 (Application Deadline), due at 5 PM Eastern' +
+                separator + 'Applications are due June 1, 2027 at 6 PM Pacific',
+                [('2027-03-01', '5 PM', 'Eastern'), ('2027-06-01', '6 PM', 'Pacific')])
+
+    def test_prefix_and_postfix_fields_share_replacement_and_clock_ownership(self):
+        for text, expected in [
+                ('Application Deadline: March 1, 2027 has been extended until May 1, 2027', [('2027-05-01', None, None)]),
+                ('Application Deadline: TBD or May 1, 2027', [('2027-05-01', None, None)]),
+                ('Application Deadline: May 1, 2027 for appointments beginning June 1, 2027', [('2027-05-01', None, None)]),
+                ('Application Deadline: March 1, 2027 at 4 PM Pacific is revised to May 1, 2027, due at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')])]:
+            with self.subTest(text=text):
+                self.assert_replacement_projection(text, expected)
+        record, entry = self.entry()
+        for marker, required in [('required', True), ('optional', False)]:
+            text = f'Letter of Intent Deadline: May 1, 2027 at 5 PM Eastern ({marker})'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertEqual([(f['date'], f['deadline_kind'], f['required']) for f in facts], [('2027-05-01', 'letter_of_intent', required)])
 
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
