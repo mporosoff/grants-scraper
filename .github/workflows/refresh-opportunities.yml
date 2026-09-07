@@ -333,7 +333,7 @@ jobs:
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
         run: python -m scripts.update_catalog_docs
-      - name: Rebuild every production document vector
+      - name: Build compatible production document vectors
         id: semantic-vectors
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}

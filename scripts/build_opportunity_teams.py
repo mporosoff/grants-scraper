@@ -23,6 +23,16 @@ import tempfile
 import threading
 import uuid
 
+EMBEDDING_CONFIG = {"provider": "https://api.voyageai.com/v1/embeddings", "model": "voyage-4-lite",
+    "dimension": 1024, "truncation": False, "output_dtype": "float",
+    "preprocessing": "exact-utf8-text-v1", "chunking": "one-input-per-item",
+    "normalization": "l2-v1", "encoding": "json-float64-v1"}
+EMBEDDING_CANARIES = [
+    "Catalytic carbon dioxide conversion and reaction engineering.",
+    "Rural maternal health outcomes and community care networks.",
+    "Quantum photonics precision measurement and navigation.",
+]
+
 import requests
 
 from scripts.currentness import parse_date, record_is_current
@@ -88,7 +98,9 @@ def normalized_vectors(vectors, count):
         norm = math.sqrt(sum(x * x for x in vector))
         if not norm or not math.isfinite(norm):
             raise ValueError("invalid embedding magnitude")
-        output.append([x / norm for x in vector])
+        # Preserve already-normalized cached values exactly; repeated division
+        # introduces numerical drift in warm-cache rankings.
+        output.append(list(vector) if abs(norm - 1.0) <= 1e-12 else [x / norm for x in vector])
     return output
 
 
@@ -453,6 +465,9 @@ class Provider:
         self.counters = {"cache_hits": 0, "cache_misses": 0, "invalid_cache_entries": 0,
                          "retries": 0, "failed_requests": 0, "invalid_outputs": 0}
         self.configuration_failed = False
+        self.space_identity = None
+        self.space_canaries = {}
+        self.space_lock = threading.Lock()
 
     def count(self, name, amount=1):
         with self.lock:
@@ -480,7 +495,12 @@ class Provider:
                 self.count("retries")
                 time.sleep(delay)
 
+    def check_deadline(self):
+        if time.monotonic() >= self.deadline:
+            raise BudgetExhausted("overall work deadline exhausted")
+
     def read_cache(self, path, validate):
+        self.check_deadline()
         try:
             value = validate(json.loads(path.read_text(encoding="utf-8")))
         except FileNotFoundError:
@@ -495,6 +515,7 @@ class Provider:
         return None
 
     def write_cache(self, path, value):
+        self.check_deadline()
         # Parallel scopes can share an embedding key. Readers must only see
         # complete JSON, never another worker's partially written file.
         temporary = None
@@ -508,6 +529,7 @@ class Provider:
             for attempt in range(5):
                 try:
                     with self.cache_lock:
+                        self.check_deadline()
                         os.replace(temporary, path)
                     break
                 except PermissionError:
@@ -527,6 +549,13 @@ class Provider:
         with self.lock:
             self.check_budget()
             self.calls += 1
+            category = "canary_requests" if body.get("input") == EMBEDDING_CANARIES else "embedding_requests" if "input_type" in body else "assessment_requests"
+            self.counters[category] = self.counters.get(category, 0) + 1
+            if "input_type" in body:
+                inputs = body["input"]
+                anchors = len(EMBEDDING_CANARIES) if inputs[-len(EMBEDDING_CANARIES):] == EMBEDDING_CANARIES else 0
+                self.counters["canary_inputs"] = self.counters.get("canary_inputs", 0) + anchors
+                self.counters["embedding_inputs"] = self.counters.get("embedding_inputs", 0) + len(inputs) - anchors
         remaining = self.deadline - time.monotonic()
         try:
             response = requests.post(url, json=body, headers={**auth, **(headers or {})},
@@ -568,45 +597,94 @@ class Provider:
         self.write_cache(path, parsed)
         return parsed
 
+    def establish_embedding_space(self):
+        # Only runs when there is due work. Exact unrounded document AND query
+        # canaries establish the observed space before any cached row is read.
+        # Old caches have no such identity and are intentionally cold.
+        with self.space_lock:
+            if self.space_identity is None:
+                observed = []
+                for kind in ("document", "query"):
+                    current = self.request_vectors(EMBEDDING_CANARIES, kind, normalize=False)
+                    observed.append(current)
+                    self.space_canaries[kind] = current
+                self.space_identity = content_hash([EMBEDDING_CONFIG, EMBEDDING_CANARIES, observed])
+        return self.space_identity
+
+    def embedding_key(self, texts, kind):
+        return content_hash([EMBEDDING_CONFIG, self.establish_embedding_space(), kind, texts])
+
     def embed(self, texts, kind):
-        signature = content_hash(["voyage-4-lite", 1024, kind, texts])
+        signature = self.embedding_key(texts, kind)
         path = self.cache / (signature + ".vectors.json")
         cached = self.read_cache(path, lambda value: normalized_vectors(value, len(texts)))
         if cached is not None:
             return cached
+        vectors = []
+        for start in range(0, len(texts), 128):
+            self.check_budget()
+            vectors.extend(self.request_vectors(texts[start:start + 128], kind))
+        self.write_cache(path, vectors)
+        return vectors
+
+    def request_vectors(self, texts, kind, normalize=True):
+        anchors = self.space_canaries.get(kind) if normalize else None
+        inputs = texts + EMBEDDING_CANARIES if anchors else texts
         def request():
-            payload = self.post("https://api.voyageai.com/v1/embeddings", {"model": "voyage-4-lite", "input": texts,
+            payload = self.post("https://api.voyageai.com/v1/embeddings", {"model": "voyage-4-lite", "input": inputs,
                 "input_type": kind, "output_dimension": 1024, "output_dtype": "float", "truncation": False}, "VOYAGE_API_KEY")
             try:
                 if not isinstance(payload, dict) or payload.get("model") != "voyage-4-lite":
                     raise ValueError("embedding identity mismatch")
                 rows = payload.get("data")
-                if (not isinstance(rows, list) or len(rows) != len(texts)
+                if (not isinstance(rows, list) or len(rows) != len(inputs)
                         or any(not isinstance(row, dict) or type(row.get("index")) is not int for row in rows)):
                     raise ValueError("invalid embedding rows")
                 rows = sorted(rows, key=lambda row: row["index"])
-                if [row["index"] for row in rows] != list(range(len(texts))):
+                if [row["index"] for row in rows] != list(range(len(inputs))):
                     raise ValueError("invalid embedding indexes")
-                return normalized_vectors([row["embedding"] for row in rows], len(texts))
+                vectors = [row["embedding"] for row in rows]
+                normalized = normalized_vectors(vectors, len(inputs))
+                if anchors and vectors[-len(EMBEDDING_CANARIES):] != anchors:
+                    self.configuration_failed = True
+                    raise ProviderConfigurationError("embedding space changed during run")
+                return normalized[:len(texts)] if normalize else vectors
             except (ValueError, KeyError, TypeError):
                 self.count("invalid_outputs")
                 raise
-        vectors = self.retry(request)
-        self.write_cache(path, vectors)
-        return vectors
+        return self.retry(request)
 
-    def embed_reusable(self, texts, kind):
-        # Cache each scope independently; shrinking the pending queue must not
-        # cause the entire unchanged catalog to be embedded again tomorrow.
-        paths = [self.cache / (content_hash(["scope-vector", "voyage-4-lite", 1024, kind, text]) + ".json") for text in texts]
-        result = [self.read_cache(path, lambda value: normalized_vectors(value, 1)[0]) for path in paths]
+    def embed_reusable(self, texts, kind, dependencies=None):
+        # Claims and scopes are both individual items. Ownership/revision metadata
+        # is included for claims; changing list membership cannot evict siblings.
+        identity = self.establish_embedding_space()
+        dependencies = dependencies if dependencies is not None else [None] * len(texts)
+        if len(dependencies) != len(texts):
+            raise ValueError("embedding dependency count mismatch")
+        paths = [self.cache / (content_hash(["item-vector-v2", EMBEDDING_CONFIG, identity, kind, text, dependency]) + ".json")
+                 for text, dependency in zip(texts, dependencies)]
+        def validate_item(value, key):
+            if (not isinstance(value, dict) or value.get("key") != key
+                    or value.get("vector_hash") != content_hash(value.get("vector"))):
+                raise ValueError("item embedding integrity mismatch")
+            return normalized_vectors([value["vector"]], 1)[0]
+        result = [self.read_cache(path, lambda value, key=path.stem: validate_item(value, key)) for path in paths]
         missing = [i for i, vector in enumerate(result) if vector is None]
-        if missing:
-            vectors = self.embed([texts[i] for i in missing], kind)
-            for index, vector in zip(missing, vectors):
+        self.count("item_vector_hits", len(texts) - len(missing))
+        self.count("item_vector_misses", len(missing))
+        for start in range(0, len(missing), 128):
+            self.check_budget()
+            batch = missing[start:start + 128]
+            vectors = self.embed([texts[i] for i in batch], kind)
+            for index, vector in zip(batch, vectors):
                 result[index] = vector
-                self.write_cache(paths[index], [vector])
+                self.write_cache(paths[index], {"key": paths[index].stem, "vector": vector, "vector_hash": content_hash(vector)})
         return result
+
+    def embed_claims(self, claims):
+        return self.embed_reusable([claim["label"] + ". " + claim["evidence"] for claim in claims], "document",
+            [{key: claim[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for claim in claims])
+
 
 
 
@@ -618,7 +696,10 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
         return result | {"state": "deferred", "reason_code": "budget_exhausted", "retry_eligible": True}, None
     ids = list(claims)
     try:
-        decomposition = provider.json(DECOMPOSE, {"scope": scope["text"], "record_type": scope["record_type"]})
+        source = {"scope": scope["text"], "record_type": scope["record_type"]}
+        if scope.get("source_fingerprint"):
+            source["source_fingerprint"] = scope["source_fingerprint"]
+        decomposition = provider.json(DECOMPOSE, source)
         roles = validate_roles(scope, decomposition)
         if not roles:
             return result | {"state": "not_specific"}, None
@@ -627,10 +708,12 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
         query_vectors = provider.embed(queries, "query")
         retrieved = set()
         for query in query_vectors:
+            if time.monotonic() >= deadline:
+                raise BudgetExhausted("ranking budget exhausted")
             ranked = sorted(range(len(ids)), key=lambda i: -sum(a*b for a,b in zip(query, vectors[i])))
             retrieved.update(ids[i] for i in ranked[:12])
         subset = {i: claims[i] for i in sorted(retrieved)}
-        payload = {"scope": scope["text"], "objective": decomposition["objective"], "roles": roles,
+        payload = {"scope": scope["text"], "source_fingerprint": scope.get("source_fingerprint"), "objective": decomposition["objective"], "roles": roles,
                    "claims": [{key: claim[key] for key in ("claim_id", "revision", "material_hash", "researcher_id",
                                                            "label", "evidence", "source_url")} for claim in subset.values()]}
         result["stage"] = "adjudication"
@@ -654,6 +737,33 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
         return result | {"state": "rejected_evidence" if rejected else "unavailable",
                          "error_type": type(error).__name__, "retry_eligible": True,
                          "reason_code": "invalid_provider_output" if rejected else "provider_unavailable"}, None
+
+
+def discovery_checkpoint(value, candidates):
+    valid = isinstance(value, dict) and type(value.get("sequence")) is int and value["sequence"] >= 0
+    if not valid or not isinstance(value.get("last_scheduled"), dict):
+        return {"sequence": 0, "last_scheduled": {}}
+    return {"sequence": value["sequence"], "last_scheduled": {key: sequence for key, sequence in value["last_scheduled"].items()
+        if key in candidates and type(sequence) is int and 0 <= sequence <= value["sequence"]}}
+
+
+def bounded_assess(executor, queue, assess, provider, workers):
+    # Never submit an entire backlog to the executor. The provider also checks
+    # the shared request/time budget atomically before every request and retry.
+    for start in range(0, len(queue), workers):
+        batch = []
+        exhausted = False
+        for scope in queue[start:start + workers]:
+            try:
+                provider.check_budget()
+            except BudgetExhausted:
+                exhausted = True
+                break
+            batch.append((scope, executor.submit(assess, scope)))
+        for scope, future in batch:
+            yield scope, future.result()
+        if exhausted:
+            raise BudgetExhausted("scheduling budget exhausted")
 
 
 def coverage(rows):
@@ -699,9 +809,17 @@ def main():
     candidates = scopes(diagnostics=eligibility)
     existing = {row["id"]: row for row in model["opportunities"]}
     affected_sources = invalidate_stale_sources(model, source_fingerprints(model, candidates))
+    affected_contracts = []
+    for row in existing.values():
+        if row.get("generator_version") and row.get("pipeline_hash") != pipeline_hash:
+            row["review_state"] = "needs_revalidation"
+            row["revalidation_reason"] = "The source assessment or verification contract changed."
+            affected_contracts.append(row["id"])
     attempts = model.setdefault("generation_attempts", {})
-    def attempt_key(scope):
-        return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation])
+    def attempt_key(scope, state=None):
+        return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation,
+            ASSEMBLY_VERSION if (state or (attempts.get(scope["id"], {}).get("state")
+                if isinstance(attempts.get(scope["id"]), dict) else None)) == "insufficient_evidence" else None])
     assembly_updates = refresh_assemblies(existing, candidates, claims, registry["registry_generation"])
     by_id = {scope["id"]: scope for scope in candidates}
     for result in assembly_updates:
@@ -709,10 +827,10 @@ def main():
             row = existing[result["scope_id"]]
             # Do not suppress generation if researcher evidence has expanded.
             if row.get("claims_generation_at_generation") == claims_generation and row.get("pipeline_hash") == pipeline_hash:
-                attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]]), "state": result["state"], "response_contract": RESPONSE_VERSION}
+                attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]], result["state"]), "state": result["state"], "response_contract": RESPONSE_VERSION}
     pending = [s for s in candidates if (s["id"] not in existing or existing[s["id"]].get("review_state") == "needs_revalidation"
-               or (existing[s["id"]].get("generator_version") and (existing[s["id"]].get("claims_generation_at_generation") != claims_generation
-                   or existing[s["id"]].get("pipeline_hash") != pipeline_hash)))
+               or (existing[s["id"]].get("generator_version")
+                   and existing[s["id"]].get("pipeline_hash") != pipeline_hash))
                and not attempt_completed(attempts.get(s["id"]), attempt_key(s), existing.get(s["id"]))]
     due = [s for s in pending if attempt_due(attempts.get(s["id"]), attempt_key(s))]
     report = run | {
@@ -721,23 +839,37 @@ def main():
               "limits": {"max_scopes": args.max_scopes, "max_seconds": args.max_seconds, "max_provider_requests": 300},
               "eligible_scopes": len(candidates), "pending_scopes": len(pending), "due_scopes": len(due),
               "eligibility": eligibility,
-              "source_invalidations": affected_sources, "assembly_updates": assembly_updates,
+              "source_invalidations": affected_sources, "assessment_invalidations": affected_contracts,
+              "assembly_updates": assembly_updates,
               "coverage_before": coverage(existing.values()), "results": []}
     provider = None
     if args.generate and claims and due:
-        provider = Provider(args.cache, deadline=started + args.max_seconds)
+        # Reserve time for canonical output synchronization and checkpoint writes.
+        provider = Provider(args.cache, deadline=started + args.max_seconds - 5)
         try:
             ids = list(claims)
-            vectors = provider.embed([claims[i]["label"] + ". " + claims[i]["evidence"] for i in ids], "document")
+            vectors = provider.embed_claims([claims[i] for i in ids])
+            progress = discovery_checkpoint(model.get("discovery_queue"), by_id)
+            model["discovery_queue"] = progress
+            repair_ids = {key for key, row in existing.items() if row.get("review_state") == "needs_revalidation"}
+            recent_ids = recent_scope_ids(due, _load_catalog("data/opportunities.js"))
+            # Bound ranking itself, before any scope embedding/provider discovery.
+            # Least recently scheduled items rotate through the existing checkpoint.
+            discovery = diverse_queue(due, {row["id"]: -progress["last_scheduled"].get(row["id"], 0) for row in due},
+                args.max_scopes * 2, maintenance_ids=repair_ids, recent_ids=recent_ids)
+            report["ranking_window"] = len(discovery)
             scores = {}
-            print(json.dumps({"state": "ranking_scopes", "count": len(due)}), flush=True)
-            for start in range(0, len(due), 64):
+            print(json.dumps({"state": "ranking_scopes", "count": len(discovery)}), flush=True)
+            for start in range(0, len(discovery), 64):
                 provider.check_budget()
-                batch = due[start:start + 64]
+                batch = discovery[start:start + 64]
                 scope_vectors = provider.embed_reusable([scope["text"][:4000] for scope in batch], "query")
                 for scope, query in zip(batch, scope_vectors):
+                    provider.check_budget()
                     people = {}
-                    for identifier, vector in zip(ids, vectors):
+                    for index, (identifier, vector) in enumerate(zip(ids, vectors)):
+                        if index % 64 == 0:
+                            provider.check_deadline()
                         person = claims[identifier]["researcher_id"]
                         score = sum(a * b for a, b in zip(query, vector))
                         people[person] = max(people.get(person, -1), score)
@@ -745,16 +877,17 @@ def main():
                     best = sorted(people.values(), reverse=True)[:2]
                     scores[scope["id"]] = sum(best) / len(best)
             covered_parents = {row["parent_id"] for row in existing.values() if row.get("review_state") != "needs_revalidation"}
-            queue = diverse_queue(due, scores, args.max_scopes, per_parent=1,
-                                  covered_parents=covered_parents, maintenance_ids=existing,
-                                  recent_ids=recent_scope_ids(due, _load_catalog("data/opportunities.js")))
-            deadline = started + args.max_seconds
+            queue = diverse_queue(discovery, scores, args.max_scopes, per_parent=1,
+                                  covered_parents=covered_parents, maintenance_ids=repair_ids, recent_ids=recent_ids)
+            deadline = provider.deadline
             def assess(scope):
                 return generate_scope(scope, provider, claims, vectors, registry["registry_generation"], deadline)
             # Consume in queue order for reproducible catalog ordering. At most four
             # scopes call providers at once; tasks not started by the deadline defer.
             with ThreadPoolExecutor(max_workers=args.workers) as executor:
-                for scope, (result, proposal) in zip(queue, executor.map(assess, queue)):
+                for scope, (result, proposal) in bounded_assess(executor, queue, assess, provider, args.workers):
+                    progress["sequence"] += 1
+                    progress["last_scheduled"][scope["id"]] = progress["sequence"]
                     result["input_fingerprint"] = attempt_key(scope)
                     result["reason_code"] = result.get("reason_code", result["state"])
                     if result["state"] == "deferred":
@@ -768,12 +901,14 @@ def main():
                     elif result["state"] in {"not_specific", "unsuitable_scope", "insufficient_evidence"}:
                         if scope["id"] in existing and existing[scope["id"]].get("generator_version"):
                             existing[scope["id"]]["review_state"] = "needs_revalidation"
-                    attempts[scope["id"]] = {"key": attempt_key(scope), "state": result["state"],
+                    attempts[scope["id"]] = {"key": attempt_key(scope, result["state"]), "state": result["state"],
                         "response_contract": RESPONSE_VERSION, "stage": result["stage"],
                         "retry_after": time.time() + 3600 if result["state"] not in COMPLETED_STATES else 0}
                     result["retry_eligible"] = result["state"] not in COMPLETED_STATES
                     report["results"].append(result)
                     print(json.dumps(result), flush=True)
+        except BudgetExhausted:
+            report["time_budget_exhausted"] = True
         except (ValueError, RuntimeError, requests.RequestException, KeyError, TypeError, OSError) as error:
             report["processing_failure"] = {"stage": "queue_retrieval", "error_type": type(error).__name__,
                                             "reason_code": "budget_exhausted" if isinstance(error, BudgetExhausted) else

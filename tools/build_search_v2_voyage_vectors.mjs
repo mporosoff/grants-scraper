@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { performance } from "node:perf_hooks";
 import process from "node:process";
 import vm from "node:vm";
+
+import { withBuildLock, writeCoherentFiles } from "./coherent_files.mjs";
+import { pathToFileURL } from "node:url";
+import { configuration, exactSpaceIdentity, validateAsset, validateFloatVectors, reusableRows, manifestDigest } from "./embedding_contract.mjs";
 
 import { loadHarness, makeVariantHarness } from "./run_search_diagnosis.mjs";
 
@@ -191,10 +195,11 @@ async function existingAsset() {
       readFile(new URL(VECTOR_PATH, ROOT)),
       readFile(new URL(CANARY_PATH, ROOT), "utf8").then(JSON.parse).catch(() => null),
     ]);
+    validateAsset(manifest, binary, canaries);
     const vectors = new Uint16Array(binary.buffer, binary.byteOffset, binary.byteLength / 2);
     if (manifest.model !== MODEL || manifest.dimension !== DIMENSION || manifest.dtype !== DTYPE) return null;
     if (!Array.isArray(manifest.passages) || vectors.length !== manifest.passages.length * DIMENSION) return null;
-    return { manifest, vectors, canaries };
+    return { manifest, vectors, binary, canaries };
   } catch {
     return null;
   }
@@ -224,10 +229,13 @@ async function embed(apiKey, texts, batchIndex) {
     throw new Error(`Voyage returned non-JSON with HTTP ${response.status}.`);
   }
   if (!response.ok) throw new Error(`Voyage document embedding failed with HTTP ${response.status}.`);
-  const data = (payload.data || []).slice().sort((left, right) => Number(left.index) - Number(right.index));
+  if (payload.model !== MODEL || !Array.isArray(payload.data)) throw new Error("Voyage response identity mismatch.");
+  const data = payload.data.slice().sort((left, right) => Number(left.index) - Number(right.index));
+  if (data.some((row, index) => row.index !== index)) throw new Error("Voyage response index mismatch.");
+  validateFloatVectors(data.map(row => row.embedding), texts.length);
   if (data.length !== texts.length) throw new Error(`Voyage returned ${data.length} vectors for ${texts.length} passages.`);
   const vectors = data.map(item => Float32Array.from(item.embedding || []));
-  if (vectors.some(vector => vector.length !== DIMENSION)) throw new Error("Voyage returned an unexpected embedding dimension.");
+  validateFloatVectors(vectors, texts.length);
   return {
     vectors,
     receipt: {
@@ -244,10 +252,99 @@ async function embed(apiKey, texts, batchIndex) {
   };
 }
 
+// The CLI and deterministic acceptance tests exercise this same production path.
+export async function buildGeneration({corpus, previous, config, force = false, embedBatch,
+  deadline = performance.now() + REQUEST_TIMEOUT_MS * (Math.ceil(corpus.length / BATCH_SIZE) + 1),
+  maxRequests = Math.ceil(corpus.length / BATCH_SIZE) + 1}) {
+  let requests = 0;
+  const request = async (texts, index) => {
+    if (performance.now() >= deadline || requests >= maxRequests) throw new Error("Vector work budget exhausted; prior release retained.");
+    requests += 1;
+    const response = await embedBatch(texts, index);
+    validateFloatVectors(response.vectors, texts.length);
+    if (response.receipt.model !== MODEL) throw new Error("Embedding response identity mismatch.");
+    if (performance.now() >= deadline) throw new Error("Vector work budget exhausted; prior release retained.");
+    return response;
+  };
+  // Validate the complete old package before using any of its rows. Corruption
+  // is a cold cache, never a reason to combine unchecked bytes with fresh rows.
+  try { if (previous) validateAsset(previous.manifest, previous.binary, previous.canaries); }
+  catch { previous = null; }
+  const capacity = BATCH_SIZE - MODEL_SPACE_CANARIES.length;
+  // Pack known misses into the identity request, within the existing request
+  // ceiling. This also lets a cold rebuild fit without increasing its budget.
+  // No old row is read until the canaries below establish compatibility.
+  const priorRows = new Map((previous?.manifest?.passages || []).map(row => [row.passage_id, row]));
+  const configMatches = !force && previous?.manifest?.reuse_contract
+    && previous.manifest.configuration_sha256 === sha256(JSON.stringify(config));
+  const initialMisses = corpus.map((passage, index) => ({passage, index})).filter(({passage}) => {
+    const prior = priorRows.get(passage.passage_id);
+    return !configMatches || !prior || prior.text_sha256 !== sha256(passage.text)
+      || ["parent_id", "record_id", "passage_kind"].some(key => prior[key] !== passage[key]);
+  }).slice(0, capacity);
+  const response = await request([...initialMisses.map(row => row.passage.text), ...MODEL_SPACE_CANARIES.map(row => row.text)], "model-space-canaries");
+  const canaries = MODEL_SPACE_CANARIES.map((row, index) => ({id: row.id, text_sha256: sha256(row.text),
+    embedding: roundedEmbedding(response.vectors[initialMisses.length + index]),
+    exact_embedding: Array.from(response.vectors[initialMisses.length + index])}));
+  const canaryComparison = compareCanarySpace(previous?.canaries, canaries);
+  if (canaryComparison.gross_discontinuity) throw new Error("Gross embedding-space discontinuity: publication blocked; prior release retained.");
+  const canaryArtifact = {schema_version: 1, generated_at: null, canary_set_version: CANARY_SET_VERSION,
+    model_alias: MODEL, response_model: response.receipt.model, input_type: "document", source_output_dtype: "float",
+    dimension: DIMENSION, rounding_decimals: CANARY_ROUND_DECIMALS,
+    model_space_fingerprint: exactSpaceIdentity(config, canaries, response.receipt.model),
+    rounded_fingerprint: canaryFingerprint(canaries),
+    reuse_space_identity: exactSpaceIdentity(config, canaries, response.receipt.model),
+    comparison_to_prior_generation: canaryComparison, canaries};
+  canaryComparison.drift_detected = previous?.canaries?.reuse_space_identity
+    ? previous.canaries.reuse_space_identity !== canaryArtifact.reuse_space_identity : null;
+  const indexes = reusableRows(corpus, previous, config, canaryArtifact.reuse_space_identity, force);
+  const vectorWords = new Uint16Array(corpus.length * DIMENSION);
+  const changed = [];
+  let reused = 0;
+  corpus.forEach((passage, index) => {
+    passage.text_sha256 = sha256(passage.text);
+    const prior = indexes[index];
+    if (prior === null) changed.push({passage, index});
+    else {
+      for (let column = 0; column < DIMENSION; column++) {
+        vectorWords[index * DIMENSION + column] = previous.binary.readUInt16LE((prior * DIMENSION + column) * 2);
+      }
+      reused++;
+    }
+  });
+  const receipts = [{...response.receipt, request_kind: "model_space_canaries", canary_input_count: MODEL_SPACE_CANARIES.length,
+    corpus_passage_count: initialMisses.length}];
+  const quantizationCosines = [];
+  const storeVector = (vector, index) => {
+    const half = quantize(vector);
+    if (Array.from(half).some(word => (word & 0x7c00) === 0x7c00)) throw new Error("Non-finite quantized vector.");
+    quantizationCosines.push(quantizationCosine(vector, half));
+    vectorWords.set(half, index * DIMENSION);
+  };
+  initialMisses.forEach((row, index) => storeVector(response.vectors[index], row.index));
+  const fetched = new Set(initialMisses.map(row => row.index));
+  const remaining = changed.filter(row => !fetched.has(row.index));
+  for (let offset = 0; offset < remaining.length; offset += capacity) {
+    const batch = remaining.slice(offset, offset + capacity);
+    const result = await request([...batch.map(item => item.passage.text), ...MODEL_SPACE_CANARIES.map(item => item.text)], receipts.length);
+    const anchors = canaries.map((row, index) => ({...row, exact_embedding: Array.from(result.vectors[batch.length + index])}));
+    if (exactSpaceIdentity(config, anchors, result.receipt.model) !== canaryArtifact.reuse_space_identity) {
+      throw new Error("Embedding space changed during generation; prior coherent release retained.");
+    }
+    receipts.push({...result.receipt, request_kind: "corpus_passages", corpus_passage_count: batch.length, canary_input_count: MODEL_SPACE_CANARIES.length});
+    result.vectors.slice(0, batch.length).forEach((vector, index) => {
+      storeVector(vector, batch[index].index);
+    });
+  }
+  return {config, vectorWords, changed, reused, receipts, quantizationCosines, canaryArtifact, canaryComparison,
+    reuseReason: force ? "explicit_full_rebuild" : !previous?.manifest.reuse_contract ? "unknown_or_invalid_prior_identity"
+      : indexes.some(index => index !== null) ? "exact_configuration_and_space_match" : "no_compatible_rows"};
+}
+
 async function run() {
   const write = process.argv.includes("--write");
   const production = process.argv.includes("--production");
-  const force = process.argv.includes("--force") || production;
+  const force = process.argv.includes("--force");
   if (production && !write) {
     throw new Error("--production requires --write so a complete generation is published atomically.");
   }
@@ -259,120 +356,11 @@ async function run() {
     childCatalog: harness.childCatalog,
     currentnessRejectedIndexes: currentness.currentnessRejectedIndexes,
   });
+  const built = await buildGeneration({corpus, previous, config: configuration(await sha256File(HYBRID_SOURCE_PATH)),
+    force, embedBatch: (texts, index) => embed(process.env.VOYAGE_API_KEY, texts, index)});
+  const {vectorWords, changed, reused, receipts, quantizationCosines, canaryArtifact, canaryComparison} = built;
   const corpusSha = corpusHash(corpus);
-  const priorById = new Map((previous?.manifest?.passages || []).map((item, index) => [item.passage_id, { ...item, index }]));
   const currentPassageIds = new Set(corpus.map(item => item.passage_id));
-  const vectorWords = new Uint16Array(corpus.length * DIMENSION);
-  const changed = [];
-  let reused = 0;
-  corpus.forEach((passage, index) => {
-    const textSha = sha256(passage.text);
-    passage.text_sha256 = textSha;
-    const prior = priorById.get(passage.passage_id);
-    if (!force && prior?.text_sha256 === textSha && previous) {
-      const source = previous.vectors.subarray(prior.index * DIMENSION, (prior.index + 1) * DIMENSION);
-      vectorWords.set(source, index * DIMENSION);
-      reused += 1;
-    } else {
-      changed.push({ passage, index });
-    }
-  });
-
-  if (!force && changed.length === 0 && previous?.manifest?.corpus_sha256 === corpusSha) {
-    const priorBuffer = Buffer.from(
-      previous.vectors.buffer,
-      previous.vectors.byteOffset,
-      previous.vectors.byteLength,
-    );
-    const priorVectorSha = sha256(priorBuffer);
-    if (priorVectorSha !== previous.manifest.vector_sha256) {
-      throw new Error("The existing vector asset does not match its manifest hash.");
-    }
-    if (write) {
-      let receipt = {};
-      try {
-        receipt = JSON.parse(await readFile(new URL(RECEIPT_PATH, ROOT), "utf8"));
-      } catch {
-        receipt = { schema_version: 1, status: "previous_receipt_unavailable" };
-      }
-      receipt.last_validated_at = new Date().toISOString();
-      receipt.last_validation = {
-        status: "unchanged_corpus_and_vector_reused",
-        passage_count: corpus.length,
-        corpus_sha256: corpusSha,
-        vector_sha256: priorVectorSha,
-        API_request_count: 0,
-        source_hashes: {
-          "assets/search-hybrid.js": await sha256File("assets/search-hybrid.js"),
-          "data/opportunities.js": await sha256File("data/opportunities.js"),
-          "data/subtopics.js": await sha256File("data/subtopics.js"),
-        },
-      };
-      await writeFile(new URL(RECEIPT_PATH, ROOT), `${JSON.stringify(receipt, null, 2)}\n`);
-    }
-    process.stdout.write(`${JSON.stringify({
-      write,
-      unchanged: true,
-      passage_count: corpus.length,
-      reused_passage_count: reused,
-      embedded_passage_count: 0,
-      API_request_count: 0,
-      usage_total_tokens: 0,
-      vector_bytes: priorBuffer.byteLength,
-      corpus_sha256: corpusSha,
-      vector_sha256: priorVectorSha,
-    }, null, 2)}\n`);
-    return;
-  }
-
-  if (changed.length && !process.env.VOYAGE_API_KEY) {
-    throw new Error(`VOYAGE_API_KEY is required to embed ${changed.length} changed passages.`);
-  }
-  const receipts = [];
-  const quantizationCosines = [];
-  let canaryArtifact = null;
-  let canaryComparison = null;
-  if (production) {
-    const response = await embed(
-      process.env.VOYAGE_API_KEY,
-      MODEL_SPACE_CANARIES.map(item => item.text),
-      "model-space-canaries",
-    );
-    const canaries = MODEL_SPACE_CANARIES.map((item, index) => ({
-      id: item.id,
-      text_sha256: sha256(item.text),
-      embedding: roundedEmbedding(response.vectors[index]),
-    }));
-    const fingerprint = canaryFingerprint(canaries);
-    canaryComparison = compareCanarySpace(previous?.canaries, canaries);
-    canaryArtifact = {
-      schema_version: 1,
-      generated_at: null,
-      canary_set_version: CANARY_SET_VERSION,
-      model_alias: MODEL,
-      response_model: response.receipt.model,
-      input_type: "document",
-      source_output_dtype: "float",
-      dimension: DIMENSION,
-      rounding_decimals: CANARY_ROUND_DECIMALS,
-      model_space_fingerprint: fingerprint,
-      comparison_to_prior_generation: canaryComparison,
-      canaries,
-    };
-    receipts.push({ ...response.receipt, request_kind: "model_space_canaries" });
-  }
-  for (let offset = 0; offset < changed.length; offset += BATCH_SIZE) {
-    const batch = changed.slice(offset, offset + BATCH_SIZE);
-    const response = await embed(process.env.VOYAGE_API_KEY, batch.map(item => item.passage.text), receipts.length);
-    receipts.push({ ...response.receipt, request_kind: "corpus_passages" });
-    response.vectors.forEach((vector, localIndex) => {
-      const half = quantize(vector);
-      quantizationCosines.push(quantizationCosine(vector, half));
-      vectorWords.set(half, batch[localIndex].index * DIMENSION);
-    });
-    process.stderr.write(`[document embeddings ${Math.min(offset + batch.length, changed.length)}/${changed.length}] tokens=${response.receipt.usage_total_tokens} latency_ms=${response.receipt.latency_ms}\n`);
-  }
-
   const vectorBuffer = Buffer.from(vectorWords.buffer, vectorWords.byteOffset, vectorWords.byteLength);
   const vectorSha = sha256(vectorBuffer);
   const generatedAt = new Date().toISOString();
@@ -402,9 +390,13 @@ async function run() {
     model_space: canaryArtifact ? {
       canary_set_version: CANARY_SET_VERSION,
       canary_count: MODEL_SPACE_CANARIES.length,
-      fingerprint_method: `sha256 of ${CANARY_ROUND_DECIMALS}-decimal rounded canary embeddings`,
+      fingerprint_method: "sha256 of exact unrounded canaries and complete embedding configuration",
       comparison_to_prior_generation: canaryComparison,
     } : previous?.manifest?.model_space || null,
+    reuse_contract: built.config,
+    configuration_sha256: sha256(JSON.stringify(built.config)),
+    reuse_space_identity: canaryArtifact.reuse_space_identity,
+    canary_sha256: sha256(JSON.stringify(canaryArtifact)),
     stable_passage_id_contract: "parent:<opportunity_id> or child:<subtopic_id>",
     passages: corpus.map((passage, vector_row) => ({
       passage_id: passage.passage_id,
@@ -415,12 +407,19 @@ async function run() {
       vector_row,
     })),
   };
+  manifest.integrity_sha256 = manifestDigest(manifest);
+  validateAsset(manifest, vectorBuffer, canaryArtifact, {requireReusable: true});
   const totalTokens = receipts.reduce((sum, item) => sum + item.usage_total_tokens, 0);
   const receipt = {
     schema_version: 1,
     generated_at: generatedAt,
     status: write ? "written" : "dry_run",
-    build_mode: production ? "production_full_rebuild" : (force ? "forced_full_rebuild" : "local_incremental"),
+    build_mode: force ? "forced_full_rebuild" : (reused ? "compatible_incremental" : "production_full_rebuild"),
+    reuse_reason: built.reuseReason,
+    canary_request_count: receipts.filter(row => row.request_kind === "model_space_canaries").length,
+    corpus_request_count: receipts.filter(row => row.corpus_passage_count > 0).length,
+    canary_only_request_count: receipts.filter(row => !row.corpus_passage_count).length,
+    canary_input_count: receipts.reduce((sum, row) => sum + row.canary_input_count, 0),
     model: MODEL,
     provider_revision: manifest.provider_revision,
     response_model: manifest.response_model,
@@ -457,7 +456,7 @@ async function run() {
     },
     vectors_contain_public_passages_only: true,
     vectors_persist_private_profile_or_researcher_data: false,
-    production_reused_vectors: production ? false : null,
+    production_reused_vectors: production ? reused > 0 : null,
     production_generation_uniform: production ? {
       model_alias_count: 1,
       response_model_count: responseModels.length,
@@ -470,22 +469,14 @@ async function run() {
     } : null,
   };
 
-  if (production && canaryComparison?.gross_discontinuity) {
-    throw new Error(
-      `Gross embedding-space discontinuity: minimum cosine ${canaryComparison.minimum_cosine}, mean cosine ${canaryComparison.mean_cosine}. Publication blocked after full rebuild.`,
-    );
-  }
 
   if (write) {
-    const writes = [
-      writeFile(new URL(MANIFEST_PATH, ROOT), `${JSON.stringify(manifest, null, 2)}\n`),
-      writeFile(new URL(VECTOR_PATH, ROOT), vectorBuffer),
-      writeFile(new URL(RECEIPT_PATH, ROOT), `${JSON.stringify(receipt, null, 2)}\n`),
-    ];
-    if (canaryArtifact) writes.push(
-      writeFile(new URL(CANARY_PATH, ROOT), `${JSON.stringify(canaryArtifact, null, 2)}\n`),
-    );
-    await Promise.all(writes);
+    await writeCoherentFiles([
+      [new URL(VECTOR_PATH, ROOT), vectorBuffer],
+      [new URL(CANARY_PATH, ROOT), `${JSON.stringify(canaryArtifact, null, 2)}\n`],
+      [new URL(RECEIPT_PATH, ROOT), `${JSON.stringify(receipt, null, 2)}\n`],
+      [new URL(MANIFEST_PATH, ROOT), `${JSON.stringify(manifest, null, 2)}\n`],
+    ]);
   }
   process.stdout.write(`${JSON.stringify({
     write,
@@ -503,7 +494,7 @@ async function run() {
   }, null, 2)}\n`);
 }
 
-run().catch(error => {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) withBuildLock(new URL(".cache/", ROOT), run).catch(error => {
   process.stderr.write(`${error.message}\n`);
   process.exitCode = 1;
 });

@@ -20,7 +20,7 @@ function generationHashes(allowlist) {
   const generations = new Map();
   [allowlist?.current, allowlist?.previous].filter(Boolean).forEach(generation => {
     if (!generation.corpus_sha256 || !Array.isArray(generation.passages)) return;
-    generations.set(generation.corpus_sha256, {
+    generations.set(`${generation.corpus_sha256}:${generation.model_space_fingerprint || ""}`, {
       model_space_fingerprint: generation.model_space_fingerprint || null,
       passage_hashes: new Map(
         generation.passages.map(item => [item.passage_id, item.text_sha256]),
@@ -189,7 +189,7 @@ async function voyageFetch(fetchImpl, url, apiKey, body) {
 async function validateCandidates(body, generations) {
   if (!body || typeof body !== "object" || Array.isArray(body)) return null;
   const query = cleanQuery(body.query);
-  const generation = generations.get(body.corpus_sha256);
+  const generation = generations.get(`${body.corpus_sha256}:${body.model_space_fingerprint || ""}`);
   const expectedKeys = generation?.model_space_fingerprint
     ? ["query", "corpus_sha256", "model_space_fingerprint", "candidates"]
     : ["query", "corpus_sha256", "candidates"];

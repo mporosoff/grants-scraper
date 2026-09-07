@@ -160,7 +160,7 @@ def run_pipeline(directory):
         faculty_match.main()
         stack.enter_context(patch.object(teams.Provider, "json", provider_response))
         stack.enter_context(patch.object(teams.Provider, "embed", side_effect=lambda texts, kind: [[1.0, 0.0] for _ in texts]))
-        stack.enter_context(patch.object(teams.Provider, "embed_reusable", side_effect=lambda texts, kind: [[1.0, 0.0] for _ in texts]))
+        stack.enter_context(patch.object(teams.Provider, "embed_reusable", side_effect=lambda texts, kind, dependencies=None: [[1.0, 0.0] for _ in texts]))
         with patch.object(sys, "argv", ["build_opportunity_teams", "--generate", "--write", "--workers", "1"]):
             assert teams.main() == 0
         final = documents.read_catalog("data/opportunities.js")

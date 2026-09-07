@@ -164,7 +164,9 @@ class TeamProviderContracts(unittest.TestCase):
         vector = [1.0] + [0.0] * 1023
         with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep"):
             provider = teams.Provider(directory)
-            path = provider.cache / (content_hash(["voyage-4-lite", 1024, "document", ["Synthetic claim"]]) + ".vectors.json")
+            # Space establishment is covered independently by the incremental contracts.
+            provider.space_identity = "synthetic-established-space"
+            path = provider.cache / (provider.embedding_key(["Synthetic claim"], "document") + ".vectors.json")
             path.write_text("[[false]]", encoding="utf-8")
             with patch.object(provider, "post", side_effect=[requests.Timeout(), {"model": "voyage-4-lite", "data": [{"index": 0, "embedding": vector}]}]) as post:
                 self.assertEqual(provider.embed(["Synthetic claim"], "document"), [vector])

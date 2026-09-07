@@ -80,6 +80,23 @@ function testEnv(overrides = {}) {
   };
 }
 
+test("same corpus accepts exactly the current and previous space identities", async () => {
+  const current = {...allowlist.current, model_space_fingerprint: "a".repeat(64)};
+  const previous = {...allowlist.current, model_space_fingerprint: "b".repeat(64)};
+  let calls = 0;
+  const handler = createHandler({allowlist: {current, previous}, fetchImpl: async () => {
+    calls++;
+    return new Response(JSON.stringify({model: "rerank-2.5", data: [{index: 0, relevance_score: .9}], usage: {total_tokens: 5}}));
+  }});
+  const env = testEnv();
+  for (const fingerprint of [current.model_space_fingerprint, previous.model_space_fingerprint, "c".repeat(64)]) {
+    const response = await handler(request("/rerank", {query: "research", corpus_sha256: current.corpus_sha256,
+      model_space_fingerprint: fingerprint, candidates: [{passage_id: first.passage_id, text_sha256: first.text_sha256, text: first.text}]}), env);
+    assert.equal(response.status, fingerprint[0] === "c" ? 400 : 200);
+  }
+  assert.equal(calls, 2);
+});
+
 test("proxy rejects origins, methods, malformed inputs, and non-corpus passages", async () => {
   let providerCalls = 0;
   const handler = createHandler({ fetchImpl: async () => { providerCalls += 1; return new Response("{}"); } });
@@ -137,7 +154,8 @@ test("proxy sends only bounded allowlisted public text and exposes no credential
 test("proxy accepts exactly the current and immediately previous corpus generations", async () => {
   assert.equal(allowlist.current.corpus_sha256, manifest.corpus_sha256);
   assert.ok(allowlist.previous?.corpus_sha256);
-  assert.notEqual(allowlist.previous.corpus_sha256, allowlist.current.corpus_sha256);
+  assert.notEqual(`${allowlist.previous.corpus_sha256}:${allowlist.previous.model_space_fingerprint}`,
+    `${allowlist.current.corpus_sha256}:${allowlist.current.model_space_fingerprint}`);
   const currentById = new Map(corpus.map(item => [item.passage_id, item]));
   const compatible = allowlist.previous.passages.find(item => {
     const current = currentById.get(item.passage_id);
