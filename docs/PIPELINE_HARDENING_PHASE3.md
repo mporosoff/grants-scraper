@@ -214,6 +214,9 @@ metadata through a revision. Explicit fields require a complete value predicate;
 eligibility dates cannot use an otherwise empty field's heading as their cue.
 Complete submission predicates and matching redundant timezone abbreviations
 remain supported by the common value/clock grammar.
+Bare required/optional/not-required field markers have the same ownership on
+both sides of a separator. Redundant timezone aliases must match the complete
+named generic, standard or daylight phrase; conflicting aliases are not erased.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -254,8 +257,8 @@ Pages generation; it does not repeat provider work or rebuild the package.
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
 fact/reference cleanup, boundary-change revalidation and strict negative-output
-diagnostics. The current correction passed 130 focused source/document tests,
-1006 required Python tests and 713 Node contracts, with unchanged hermetic,
+diagnostics. The current correction passed 132 focused source/document tests,
+1008 required Python tests and 713 Node contracts, with unchanged hermetic,
 frozen-query and scoring expectations and a valid release package. A
 bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
 one provider request returned a valid exact-quote decomposition with zero retries.

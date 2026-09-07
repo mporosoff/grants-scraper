@@ -103,11 +103,13 @@ DEADLINE_VALUE_MODIFIER = r"(?:now|still|expected|anticipated|estimated|planned|
 DEADLINE_VALUE_BRIDGE_RE = re.compile(rf"\s*(?:(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|{DEADLINE_VALUE_MODIFIER})\b\s*)*", re.I)
 DEADLINE_REQUIREMENT_RE = re.compile(r"\(\s*(?:required|optional)\s*\)|\[\s*(?:required|optional)\s*\]", re.I)
 DEADLINE_BARE_REQUIREMENT_RE = re.compile(r"\b(?:not\s+required|required|optional)\b", re.I)
+DEADLINE_FIELD_REQUIREMENT_RE = re.compile(
+    rf"(?:{DEADLINE_REQUIREMENT_RE.pattern}|{DEADLINE_BARE_REQUIREMENT_RE.pattern})", re.I)
 DEADLINE_FIELD_REQUIREMENT_PREFIX_RE = re.compile(
-    rf"(?:{DEADLINE_REQUIREMENT_RE.pattern}|{DEADLINE_BARE_REQUIREMENT_RE.pattern})\s*[-:–—,]?\s*$", re.I)
+    rf"{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*[-:–—,]?\s*$", re.I)
 DEADLINE_VALUE_PREFIX_RE = re.compile(
-    rf"(?:(?:{DEADLINE_REQUIREMENT_RE.pattern})\s*)*(?P<separator>[:=–—-])?\s*"
-    rf"(?:(?:{DEADLINE_REQUIREMENT_RE.pattern})\s*)*", re.I)
+    rf"\s*(?:{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*)*(?P<separator>[:=–—-])?\s*"
+    rf"(?:{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*)*", re.I)
 DEADLINE_CLOCK_BRIDGE_RE = re.compile(
     rf"[\s,:=(]*(?:(?P<subject>(?:(?:the|all)\s+)?(?:{DEADLINE_SUBMISSION_LABEL}|submissions?))\s+)?"
     rf"(?P<predicate>(?:(?:{DEADLINE_COPULA}|due|close[sd]?|closing|submitted|received|filed|at|by|on|no\s+later\s+than)\b\s*)*)", re.I)
@@ -813,6 +815,15 @@ def explicit_deadline_requirement(context):
         start = deadline_field_start(context, 0, label.start())
         markers.extend((match.start(), match.group(0).casefold() == 'required')
                        for match in DEADLINE_BARE_REQUIREMENT_RE.finditer(context, start, label.start()))
+        # A bounded postfix heading includes its closing delimiter in semantic
+        # context. Bare field markers have the same role on either side of ':'.
+        value_start = label.end()
+        closing = re.match(r'\s*[)\]]', context[value_start:])
+        if closing:
+            value_start += closing.end()
+        value_prefix = DEADLINE_VALUE_PREFIX_RE.match(context, value_start)
+        markers.extend((match.start(), match.group(0).casefold() == 'required')
+                       for match in DEADLINE_BARE_REQUIREMENT_RE.finditer(context, value_start, value_prefix.end()))
     return max(markers, key=lambda item: item[0])[1] if markers else None
 
 
@@ -840,6 +851,11 @@ def deadline_clock_token_end(text, clock):
              'alaska': 'AKT', 'hawaii': 'HST', 'atlantic': 'AT', 'utc': 'UTC', 'gmt': 'GMT'}
     zone = (clock.group(2) or '').casefold()
     expected = zones.get(zone, zone.upper())
+    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
+             'alaska': 'AK', 'hawaii': 'H', 'hawaii-aleutian': 'H', 'atlantic': 'A'}
+    if descriptor and zone in stems:
+        expected = stems[zone] + descriptor.group(1)[0].upper() + 'T'
     return clock.end() + alias.end() if alias and alias.group(1).upper() == expected else clock.end()
 
 

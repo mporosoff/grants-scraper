@@ -857,6 +857,32 @@ class DeadlineOwnership(unittest.TestCase):
             self.assert_replacement_projection(f'Application Deadline: March 1, 2027 at 4 PM {zone} Time ({alias}) (required) '
                 'has been revised to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')])
 
+    def test_bare_requirement_field_markers_share_separator_and_value_ownership(self):
+        record, entry = self.entry()
+        for marker, required in [('required', True), ('optional', False), ('not required', False)]:
+            for label in ['Letter of Intent Deadline', 'February 1, 2027 (Letter of Intent Deadline)',
+                          'February 1, 2027 [Letter of Intent Deadline]']:
+                for separator in [f': {marker}', f'{marker}:', f'= {marker}']:
+                    text = f'{label} {separator} March 1, 2027, submissions must be received by 5 PM Eastern, or May 1, 2027 (optional)'
+                    with self.subTest(marker=marker, label=label, separator=separator):
+                        self.assert_replacement_projection(text, [('2027-03-01', '5 PM', 'Eastern'), ('2027-05-01', None, None)])
+                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                        self.assertEqual([f['required'] for f in facts], [required, False])
+            for value, expected in [('TBD', []), ('for applicants eligible May 1, 2027', [])]:
+                self.assert_replacement_projection(f'Application Deadline: {marker} {value}', expected)
+
+    def test_zone_aliases_match_the_complete_named_time_phrase(self):
+        for name, stem in [('Eastern', 'E'), ('Central', 'C'), ('Mountain', 'M'), ('Pacific', 'P'), ('Alaska', 'AK')]:
+            for descriptor, abbreviation in [('Time', stem + 'T'), ('Standard Time', stem + 'ST'), ('Daylight Time', stem + 'DT')]:
+                clock = f'5 PM {name} {descriptor} ({abbreviation})'
+                for text in [f'Application Deadline: {clock}, May 1, 2027',
+                             f'Application Deadline: March 1, 2027 at {clock} (required) has been revised to May 1, 2027 at 6 PM Eastern']:
+                    with self.subTest(name=name, descriptor=descriptor, text=text):
+                        expected = [('2027-05-01', '6 PM', 'Eastern')] if 'revised' in text else [('2027-05-01', '5 PM', name)]
+                        self.assert_replacement_projection(text, expected)
+        for phrase in ['Eastern Standard Time (EDT)', 'Eastern Daylight Time (EST)', 'Pacific Standard Time (EST)']:
+            self.assert_replacement_projection(f'Application Deadline: 5 PM {phrase}, May 1, 2027', [])
+
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
         for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),
