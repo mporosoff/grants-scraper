@@ -174,6 +174,10 @@ Backward label ownership requires explicit linking syntax; an empty or TBD
 deadline field cannot borrow an earlier issue date.
 Balanced parenthesized/bracketed postfix labels are explicit links; unclosed,
 nested, unvalued, or separately dated groups cannot assign a label backward.
+Value expressions after a grouped heading are checked through the closing
+delimiter and their linking words. Explicit phase, round, cycle, year and fiscal
+year qualifiers constrain stage ordering; every applicable preliminary stage must
+precede the application, while distinct declared rounds remain independent.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and

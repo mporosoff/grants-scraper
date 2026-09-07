@@ -362,6 +362,19 @@ class DeadlineOwnership(unittest.TestCase):
                     self.assertEqual(extract_deadlines(record['opportunity_id'], [{'text': text}],
                                      entry['document'], entry['checked_at']), [])
 
+    def test_explicit_administrative_date_ownership_cannot_be_overridden_by_later_labels(self):
+        record, entry = self.entry()
+        for field in ['RFA Issue Date:', 'Publication Date:', 'Announcement Date:', 'Date Posted:',
+                      'Amendment issued on', 'Notice released on']:
+            for wording in ['estimated as TBD', 'anticipated to be announced', 'forthcoming', 'unknown', '']:
+                with self.subTest(field=field, wording=wording):
+                    text = f'{field} March 1, 2027 (Application Deadline) {wording}'
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    self.assertEqual(facts, [])
+                    text += '; Full applications are due April 1, 2027 at 5 PM Eastern.'
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-04-01', '5 PM')])
+
     def test_legacy_issue_date_with_an_unvalued_deadline_is_withheld(self):
         record, entry = self.entry()
         facts = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 17, 2027'}],
@@ -404,6 +417,8 @@ class DeadlineOwnership(unittest.TestCase):
                       'has been ', 'is currently ', 'may be ', 'was set to ', 'has not yet been announced: ']
                      for value in ['TBD', 'TBA', 'to be announced', 'pending', 'rolling', 'N/A', 'April 1, 2027']]
             cases.append((': ', ''))
+            cases.extend((linker, value) for linker in ['scheduled for ', 'currently ', 'set to ', 'now ', 'due on ']
+                         for value in ['TBD', 'April 1, 2027'])
             for separator, value in cases:
                 with self.subTest(opening=opening, value=value, separator=separator):
                     text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{closing} {separator}{value}'
@@ -441,6 +456,30 @@ class DeadlineOwnership(unittest.TestCase):
                     entry.pop('deadline_extractor_identity', None)
                     published = merge_document_entry(record, entry)
                     self.assertEqual(any(d.get('evidence_id') and d['kind'] == 'application' for d in published['deadlines']), expected)
+
+    def test_explicit_round_cycle_and_year_groups_keep_their_own_stage_order(self):
+        record, entry = self.entry()
+        for first, second in [('Phase I Round 1', 'Phase I Round 2'), ('Phase I Cycle I', 'Phase I Cycle II'),
+                              ('Phase I Year 2027', 'Phase I Year 2028'), ('FY27 Phase I', 'FY2028 Phase I')]:
+            with self.subTest(first=first, second=second):
+                texts = [f'{first} Letter of Intent Deadline: January 1, 2027',
+                         f'{first} Full Application Deadline: February 1, 2027',
+                         f'{second} Letter of Intent Deadline: March 1, 2027',
+                         f'{second} Full Application Deadline: April 1, 2027']
+                warnings = []
+                facts = extract_deadlines(record['opportunity_id'], [{'text': '; '.join(texts)}],
+                    entry['document'], entry['checked_at'], warnings)
+                self.assertEqual([f['date'] for f in facts], ['2027-01-01', '2027-02-01', '2027-03-01', '2027-04-01'])
+                self.assertEqual(warnings, [])
+                entry['facts'] = facts
+                entry.pop('deadline_extractor_identity', None)
+                result = merge_document_entry(record, entry)
+                self.assertEqual(len([d for d in result['deadlines'] if d.get('evidence_id')]), 4)
+        for first, second in [('Round I', 'Round 1'), ('Cycle Two', 'Cycle II'), ('FY27', 'FY2027')]:
+            texts = [f'Phase I {first} Letter of Intent Deadline: March 1, 2027',
+                     f'Phase I {second} Full Application Deadline: February 1, 2027']
+            facts = extract_deadlines(record['opportunity_id'], [{'text': '; '.join(texts)}], entry['document'], entry['checked_at'])
+            self.assertEqual([f['deadline_kind'] for f in facts], ['letter_of_intent'])
 
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()

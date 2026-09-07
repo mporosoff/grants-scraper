@@ -91,6 +91,11 @@ UNKNOWN_DEADLINE_VALUE_RE = re.compile(
     r"\b(?:TBD|TBA|to\s+be\s+(?:announced|determined)|not\s+yet|not\s+available|pending|rolling|none|N/A)\b",
     re.I,
 )
+SUBMISSION_GROUP_VALUE = r"(?:[IVX]+|\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
+SUBMISSION_GROUP_PATTERN = rf"(?:(?:phase|round|cycle|year)\s+{SUBMISSION_GROUP_VALUE}|FY\s*\d{{2,4}})\b"
+SUBMISSION_GROUP_PREFIX_RE = re.compile(rf"\b(?:{SUBMISSION_GROUP_PATTERN}\s*[-:–—,(\[]?\s*)+$", re.I)
+SUBMISSION_GROUP_RE = re.compile(
+    rf"\b(?:(?P<kind>phase|round|cycle|year)\s+(?P<value>{SUBMISSION_GROUP_VALUE})|FY\s*(?P<fy>\d{{2,4}}))\b", re.I)
 DEADLINE_KINDS = (
     (
         "letter_of_intent",
@@ -771,8 +776,7 @@ def deadline_context(container, match):
     dates = list(DATE_RE.finditer(text, start, end))
     for label in DEADLINE_LABEL_RE.finditer(text, start, end):
         label_start = label.start()
-        qualifier = re.search(r"\b(?:FY\d{2,4}\s+)?phase\s+(?:[IVX]+|\d+)\s*[-:–—(\[]?\s*$",
-                              text[start:label_start], re.I)
+        qualifier = SUBMISSION_GROUP_PREFIX_RE.search(text[start:label_start])
         if qualifier:
             label_start = start + qualifier.start()
         previous = next((date for date in reversed(dates) if date.end() <= label_start), None)
@@ -798,7 +802,8 @@ def deadline_context(container, match):
         # Only a complete clock-only annotation can augment a postfix date;
         # an empty/unknown/new date field cannot borrow the preceding date.
         value_link = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
-                              r"should|must|remains?|becomes?|changed?|changes|moved?|moves)\b)\s*", suffix, re.I)
+                              r"should|must|remains?|becomes?|changed?|changes|moved?|moves|"
+                              r"be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\b)\s*", suffix, re.I)
         if value_link:
             value = suffix[value_link.end():].strip()
             value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
@@ -885,6 +890,8 @@ def supported_submission_date(context, offset):
     # Dates for holidays, decisions, appointments and project starts are not
     # applicant submission deadlines, even beside a valid deadline field.
     administrative = list(re.finditer(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|invitation\s+to\s+submit|"
+                 r"(?:issue|issuance|publication|announcement|release|posted)\s+date|date\s+posted|"
+                 r"(?:issued|published|released|posted)\s+on|"
                  r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I))
     if administrative:
         explicit = list(re.finditer(r"\b(?:deadlines?|due|closing\s+date|submission\s+dates?|"
@@ -907,13 +914,25 @@ def qualify_deadline_sequence(facts, review_queue=None):
                 contexts.append(context)
         return contexts
 
-    def phase(fact):
+    def submission_group(fact):
         roman = {value: str(index) for index, value in enumerate(
             ("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"), 1)}
-        tokens = [match.group(1).upper() for context in stage_contexts(fact)
-                  for match in re.finditer(r"\bphase\s+([IVX]+|\d+)\b", context, re.I)]
-        values = {str(int(token)) if token.isdigit() else roman.get(token) for token in tokens}
-        return next(iter(values)) if len(values) == 1 else None
+        words = {value: str(index) for index, value in enumerate(
+            ("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"), 1)}
+        values = {}
+        for context in stage_contexts(fact):
+            for match in SUBMISSION_GROUP_RE.finditer(context):
+                kind = (match.group("kind") or "fiscal_year").casefold()
+                token = (match.group("value") or match.group("fy")).upper()
+                value = str(int(token)) if token.isdigit() else roman.get(token, words.get(token))
+                if kind == "fiscal_year" and len(token) == 2:
+                    value = "20" + token
+                values.setdefault(kind, set()).add(value)
+        return {kind: next(iter(items)) if len(items) == 1 else None for kind, items in values.items()}
+
+    def same_submission_group(left, right):
+        return all(not left.get(kind) or not right.get(kind) or left[kind] == right[kind]
+                   for kind in left.keys() | right.keys())
 
     preliminary = [fact for fact in facts if fact.get("type") == "deadline"
                    and fact.get("deadline_kind") != "application"]
@@ -924,9 +943,9 @@ def qualify_deadline_sequence(facts, review_queue=None):
         if fact.get("type") != "deadline" or fact.get("deadline_kind") != "application":
             kept.append(fact)
             continue
-        own_phase = phase(fact)
+        own_group = submission_group(fact)
         applicable = [item["date"] for item in preliminary
-                      if not own_phase or not phase(item) or phase(item) == own_phase]
+                      if same_submission_group(own_group, submission_group(item))]
         explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", context, re.I)
                             for context in stage_contexts(fact))
         if not applicable or (fact["date"] >= max(applicable) and
