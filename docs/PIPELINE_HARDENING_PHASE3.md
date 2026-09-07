@@ -199,6 +199,11 @@ replacement values, including `due at`, `closes at` and `must be received by`.
 Postfix scope prose cannot reuse a deadline's cue for incidental later dates.
 Prefix headings use the same value ownership, preserving explicit required and
 optional markers while excluding historical and incidental dates.
+Complete, balanced requirement markers remain attached across value lists and
+revisions, including markers before or after an owned clock. Scope annotations
+are not normalized as markers. Clock predicates may name their submission
+subject; they still require a complete due/receipt/closing predicate and cannot
+borrow a clock from a different submission stage.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -239,8 +244,8 @@ Pages generation; it does not repeat provider work or rebuild the package.
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
 fact/reference cleanup, boundary-change revalidation and strict negative-output
-diagnostics. The current correction passed 106 focused source/document tests,
-995 required Python tests and 713 Node contracts, with unchanged hermetic,
+diagnostics. The current correction passed 123 focused source/document tests,
+999 required Python tests and 713 Node contracts, with unchanged hermetic,
 frozen-query and scoring expectations and a valid release package. A
 bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
 one provider request returned a valid exact-quote decomposition with zero retries.

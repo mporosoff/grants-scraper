@@ -683,6 +683,69 @@ class DeadlineOwnership(unittest.TestCase):
             facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
             self.assertEqual([(f['date'], f['deadline_kind'], f['required']) for f in facts], [('2027-05-01', 'letter_of_intent', required)])
 
+    def test_requirement_markers_do_not_interrupt_value_transitions(self):
+        for marker in ['(required)', '[required]', '(optional)', '[optional]']:
+            for first in ['March 1, 2027 ' + marker,
+                          'March 1, 2027 at 4 PM Pacific ' + marker,
+                          'March 1, 2027 ' + marker + ' at 4 PM Pacific',
+                          'TBD ' + marker]:
+                for clause, expected in [
+                        ('has been extended until May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
+                        ('and then revised to May 1, 2027', [('2027-05-01', None, None)]),
+                        ('has been moved to TBD', [])]:
+                    with self.subTest(marker=marker, first=first, clause=clause):
+                        for prefix in ['Application Deadline: ', 'February 1, 2027 (Application Deadline) is ']:
+                            self.assert_replacement_projection(prefix + first + ' ' + clause, expected)
+            self.assert_replacement_projection('Application Deadline: ' + marker + ' May 1, 2027',
+                                               [('2027-05-01', None, None)])
+            self.assert_replacement_projection('Application Deadline: April 1, 2027 ' + marker + ', or May 1, 2027',
+                                               [('2027-04-01', None, None), ('2027-05-01', None, None)])
+            self.assert_replacement_projection('Application Deadline: has been revised from April 1, 2027 ' + marker + ' to May 1, 2027',
+                                               [('2027-05-01', None, None)])
+
+    def test_requirement_annotations_cannot_supply_a_replacement_or_cross_a_field(self):
+        for annotation in ['(required for applicants graduating June 1, 2027)',
+                           '[optional for appointments beginning June 1, 2027]',
+                           '(required] for applicants eligible June 1, 2027']:
+            self.assert_replacement_projection('Application Deadline: March 1, 2027 ' + annotation,
+                                               [('2027-03-01', None, None)])
+        for separator in ['; ', '. ', ' • ']:
+            self.assert_replacement_projection('Application Deadline: March 1, 2027 (required)' + separator +
+                'Application Deadline: May 1, 2027 [optional]',
+                [('2027-03-01', None, None), ('2027-05-01', None, None)])
+        record, entry = self.entry()
+        text = 'Letter of Intent Deadline: March 1, 2027 (required) has been extended until May 1, 2027'
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        self.assertEqual([(f['date'], f['required']) for f in facts], [('2027-05-01', True)])
+
+    def test_complete_submission_subject_clock_predicates_preserve_owned_time(self):
+        for subject in ['applications', 'proposals', 'submissions', 'the application', 'all submissions']:
+            for predicate in ['must be received by', 'are due at', 'shall be submitted by', 'close at']:
+                for field in ['Application Deadline: March 1, 2027',
+                              'March 1, 2027 (Application Deadline)',
+                              'February 1, 2027 [Application Deadline] has been extended until March 1, 2027']:
+                    with self.subTest(subject=subject, predicate=predicate, field=field):
+                        self.assert_replacement_projection(field + f', {subject} {predicate} 5 PM Eastern',
+                                                           [('2027-03-01', '5 PM', 'Eastern')])
+        for suffix in ['(required), applications must be received by 5 PM Eastern',
+                       'applications must be received by 5 PM Eastern (required)']:
+            self.assert_replacement_projection('Application Deadline: March 1, 2027 ' + suffix +
+                ' and then moved to May 1, 2027, submissions are due at 6 PM Pacific',
+                [('2027-05-01', '6 PM', 'Pacific')])
+
+    def test_clock_subjects_do_not_admit_scope_or_other_stage_predicates(self):
+        for clause in ['applications reviewed at', 'project appointments must be received by',
+                       'applications from investigators appointed at', 'applications',
+                       'applications are eligible at']:
+            self.assert_replacement_projection('Application Deadline: March 1, 2027, ' + clause + ' 5 PM Eastern',
+                                               [('2027-03-01', None, None)])
+        record, entry = self.entry()
+        for subject, expected_time in [('letters of intent', '5 PM'), ('submissions', '5 PM'), ('applications', None)]:
+            text = f'Letter of Intent Deadline: March 1, 2027, {subject} must be received by 5 PM Eastern'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertEqual([(f['date'], f['time'], f['deadline_kind']) for f in facts],
+                             [('2027-03-01', expected_time, 'letter_of_intent')])
+
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
         for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),
