@@ -453,6 +453,36 @@ class DeadlineOwnership(unittest.TestCase):
             facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
             self.assertNotIn('2027-03-01', [f['date'] for f in facts])
 
+    def test_modified_replacement_values_do_not_preserve_the_superseded_date(self):
+        record, entry = self.entry()
+        for wording in ['is expected to be', 'will probably be', 'has provisionally been moved to',
+                        'may, subject to confirmation, become', ': provisionally expected to be']:
+            for value in ['April 1, 2027', 'TBD', 'to be announced']:
+                for opening, closing in [('(', ')'), ('[', ']')]:
+                    with self.subTest(wording=wording, value=value, opening=opening):
+                        text = f'March 1, 2027 {opening}Application Deadline{closing} {wording} {value}'
+                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                        self.assertEqual([f['date'] for f in facts], ['2027-04-01'] if value.startswith('April') else [])
+                        legacy = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 1, 2027'}],
+                                                   entry['document'], entry['checked_at'])
+                        legacy[0]['citation']['quote'] = text
+                        entry['facts'] = legacy
+                        entry.pop('deadline_extractor_identity', None)
+                        stamp = entry['checked_at']
+                        published = merge_document_entry(record, entry)
+                        self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
+                        self.assertEqual(entry['checked_at'], stamp)
+
+    def test_descriptive_postfix_clauses_cannot_borrow_another_fields_value(self):
+        record, entry = self.entry()
+        for suffix in ['is applicable to all applicants. Award notification April 1, 2027',
+                       'is applicable to all applicants; award notification April 1, 2027',
+                       'for applicants pending IRB review',
+                       'is applicable to all applicants; Application Deadline April 1, 2027']:
+            text = f'March 1, 2027 (Application Deadline) {suffix}'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertIn('2027-03-01', [f['date'] for f in facts])
+
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
         for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),

@@ -809,7 +809,22 @@ def deadline_context(container, match):
             value = suffix[value_link.end():].strip()
             value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
                            "", value, flags=re.I)
-            if not value or DATE_RE.match(value) or UNKNOWN_DEADLINE_VALUE_RE.match(value):
+            # Copular/modal value clauses can contain arbitrary modifiers before
+            # their value ("is expected to be April 1"). Search the whole owned
+            # clause, but never borrow a value from another sentence or field.
+            predicate = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
+                                 r"should|must|remains?|becomes?|changed?|changes|moved?|moves)\b)", suffix, re.I)
+            owned_value = value
+            next_label = DEADLINE_LABEL_RE.search(owned_value)
+            if next_label:
+                owned_value = owned_value[:next_label.start()]
+            for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;•|]", owned_value):
+                if not re.search(r"\b[ap]\.?m\.\s*$", owned_value[:boundary.end()], re.I):
+                    owned_value = owned_value[:boundary.start()]
+                    break
+            dated_value = DATE_RE.search(owned_value) if predicate else DATE_RE.match(value)
+            unknown_value = UNKNOWN_DEADLINE_VALUE_RE.search(owned_value) if predicate else UNKNOWN_DEADLINE_VALUE_RE.match(value)
+            if not value or dated_value or unknown_value:
                 postfix = False
         if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):
             postfix = False
