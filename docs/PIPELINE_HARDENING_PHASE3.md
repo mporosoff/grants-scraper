@@ -158,6 +158,15 @@ Semicolons that introduce a separately labeled deadline instead start a new
 clause, and time expressions bind to the nearest date span. Regressions cover
 shared lists, independent stages, different timezones, and times before/after
 their dates through fresh extraction and cached catalog projection.
+Explicit deadline headings also separate adjacent PDF fields before punctuation
+is interpreted. Comma-attached times remain with their own date; unknown times
+cannot inherit another item's value. Preliminary labels exclude their embedded
+generic application/proposal word, and independently labeled phases do not impose
+one another's stage order. Cached stage/time values require support in their own
+date's quotation, allowing equivalent 12/24-hour and canonical regional timezone
+representations without accepting partial or conflicting zones. Unsupported
+legacy facts are withheld with the existing review warning and no new source-check
+timestamp. The regression matrix includes the adjacent fields reported in 361526.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and

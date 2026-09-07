@@ -271,6 +271,43 @@ class DeadlineOwnership(unittest.TestCase):
         facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
         self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
             [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-05-01', '11:59 p.m.', 'ET')])
+        self.assertEqual([f['deadline_kind'] for f in facts], ['preapplication', 'application'])
+
+    def test_adjacent_pdf_deadline_fields_keep_attached_times_and_independent_phases(self):
+        record, entry = self.entry()
+        for separator in [' ', ', ', '; ', ' • ']:
+            with self.subTest(separator=separator):
+                text = separator.join([
+                    'RFA Issue Date: March 17, 2026',
+                    'Submission Deadline for FY26 Phase I Applications: May 1, 2026, at 11:59 PM Eastern',
+                    'Submission Deadline for FY26 Phase II Letters of Intent: May 1, 2026, at 5 PM Eastern',
+                    'Submission Deadline for FY26 Phase II Applications: May 19, 2026, at 11:59 PM Eastern',
+                    'Submission Deadline for Phase II Applications resulting from FY26 Phase I Awards: December 17, 2026, at 11:59 PM Eastern'])
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts],
+                    [('2026-05-01', 'application', '11:59 PM'), ('2026-05-01', 'letter_of_intent', '5 PM'),
+                     ('2026-05-19', 'application', '11:59 PM'), ('2026-12-17', 'application', '11:59 PM')])
+                entry['facts'] = facts
+                entry.pop('deadline_extractor_identity', None)
+                published = merge_document_entry(record, entry)
+                self.assertEqual([d['time'] for d in published['deadlines'] if d.get('evidence_id')],
+                                 ['11:59 PM', '5 PM', '11:59 PM', '11:59 PM'])
+
+    def test_specific_preliminary_labels_do_not_match_embedded_generic_words(self):
+        record, entry = self.entry()
+        for label, expected in [('Pre-Application', 'preapplication'), ('Pre application', 'preapplication'),
+                                ('Pre-Proposal', 'preproposal'), ('Preliminary Proposal', 'preproposal'),
+                                ('Full Application', 'application')]:
+            with self.subTest(label=label):
+                text = f'{label} Submission Deadline: March 1, 2027, at 5 PM Eastern'
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual([(f['deadline_kind'], f['time']) for f in facts], [(expected, '5 PM')])
+
+    def test_amendment_word_is_not_an_am_time(self):
+        record, entry = self.entry()
+        facts = extract_deadlines(record['opportunity_id'],
+            [{'text': '1 Amendment: Applications are due March 1, 2027.'}], entry['document'], entry['checked_at'])
+        self.assertEqual([f['time'] for f in facts], [None])
 
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()

@@ -70,7 +70,7 @@ DATE_RE = re.compile(
     re.I,
 )
 TIME_RE = re.compile(
-    r"\b(\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?))"
+    r"\b((?:1[0-2]|0?[1-9])(?::[0-5]\d)?\s*(?:a\.?m\.?|p\.?m\.?))(?![A-Za-z])"
     r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|Alaska|Hawaii(?:-Aleutian)?|Atlantic|UTC|GMT|AK[SD]T|HST|[ECMPA][SD]?T)\b"
     r"(?:\s+(?:Time|Standard Time|Daylight Time))?)?",
     re.I,
@@ -78,6 +78,13 @@ TIME_RE = re.compile(
 DEADLINE_CUE_RE = re.compile(
     r"\b(?:deadlines?|due|submit(?:ted)?|submissions?|received|closing|will close|"
     r"no later than|must be filed|applications? by|proposals? by)\b",
+    re.I,
+)
+DEADLINE_LABEL_RE = re.compile(
+    r"\b(?:(?:(?:full|final)\s+)?(?:applications?|proposals?)|"
+    r"pre[\s-]?(?:applications?|proposals?)|preliminary\s+proposals?|"
+    r"letters?\s+of\s+(?:intent|interest)|LOIs?|concept\s+papers?|white\s+papers?)"
+    r"\s+(?:submission\s+)?deadlines?\b|\b(?:submission\s+deadlines?|deadlines?\s+for)\b",
     re.I,
 )
 DEADLINE_KINDS = (
@@ -726,8 +733,12 @@ def make_fact(
 
 def deadline_kind(context, date_offset=None):
     matches = []
+    specific = [match.span() for kind, _, pattern in DEADLINE_KINDS if kind != "application"
+                for match in pattern.finditer(context)]
     for kind, label, pattern in DEADLINE_KINDS:
         for match in pattern.finditer(context):
+            if kind == "application" and any(left <= match.start() < right for left, right in specific):
+                continue  # "Application" inside "Pre-Application" is not a full stage.
             distance = (
                 abs(((match.start() + match.end()) // 2) - date_offset)
                 if date_offset is not None
@@ -749,6 +760,15 @@ def deadline_context(container, match):
     for left, right in container.get("blocks") or []:
         if left <= match.start() < right:
             start, end = max(start, left), min(end, right)
+            break
+    # PDF fields can be adjacent without punctuation. Explicit deadline labels
+    # establish ownership before punctuation is examined, so a comma-attached
+    # time cannot be cut off merely because another label follows it later.
+    for label in DEADLINE_LABEL_RE.finditer(text, start, end):
+        if label.start() <= match.start():
+            start = label.start()
+        elif label.start() >= match.end():
+            end = label.start()
             break
     scan_start = start
     dates = list(DATE_RE.finditer(text))
@@ -825,20 +845,39 @@ def supported_submission_date(context, offset):
 
 
 def qualify_deadline_sequence(facts, review_queue=None):
-    preliminary = [fact["date"] for fact in facts if fact.get("type") == "deadline"
+    def stage_contexts(fact):
+        quote = (fact.get("citation") or {}).get("quote", "")
+        contexts = []
+        for match in DATE_RE.finditer(quote):
+            if parse_document_date(match.group(0)) != fact["date"]:
+                continue
+            context, offset = deadline_context({"text": quote}, match)
+            kind = deadline_kind(context, offset)
+            if kind and kind[0] == fact.get("deadline_kind"):
+                contexts.append(context[:offset])
+        return contexts
+
+    def phase(fact):
+        values = {match.group(1).upper() for context in stage_contexts(fact)
+                  for match in re.finditer(r"\bphase\s+([IVX]+|\d+)\b", context, re.I)}
+        return next(iter(values)) if len(values) == 1 else None
+
+    preliminary = [fact for fact in facts if fact.get("type") == "deadline"
                    and fact.get("deadline_kind") != "application"]
     if not preliminary:
         return facts
-    first = min(preliminary)
     kept = []
     for fact in facts:
         if fact.get("type") != "deadline" or fact.get("deadline_kind") != "application":
             kept.append(fact)
             continue
-        quote = (fact.get("citation") or {}).get("quote", "")
-        dates = [match for match in DATE_RE.finditer(quote) if parse_document_date(match.group(0)) == fact["date"]]
-        explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", quote[:match.start()], re.I) for match in dates)
-        if fact["date"] >= first and (fact["date"] not in preliminary or explicit_full):
+        own_phase = phase(fact)
+        applicable = [item["date"] for item in preliminary
+                      if not own_phase or not phase(item) or phase(item) == own_phase]
+        explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", context, re.I)
+                            for context in stage_contexts(fact))
+        if not applicable or (fact["date"] >= min(applicable) and
+                              (fact["date"] not in applicable or explicit_full)):
             kept.append(fact)
         elif review_queue is not None:
             review_queue.append({"type": "deadline_stage_order_conflict",
@@ -895,6 +934,8 @@ def revalidate_cached_deadlines(entry):
         for match in matches:
             context, offset = deadline_context({"text": quote}, match)
             if not supported_submission_date(context, offset):
+                continue
+            if fact.get("deadline_kind") != deadline_kind(context, offset)[0]:
                 continue
             time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             if not cached_deadline_time_supported(fact, time_match):
