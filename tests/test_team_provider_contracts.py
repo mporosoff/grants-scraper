@@ -154,11 +154,24 @@ class TeamProviderContracts(unittest.TestCase):
             values = [{"worker": i, "payload": [i] * 2000} for i in range(20)]
             def write(value):
                 provider.write_cache(path, value)
-                actual = json.loads(path.read_text(encoding="utf-8"))
+                actual = provider.read_cache(path, lambda value: value)
                 self.assertIn(actual, values)
             with ThreadPoolExecutor(max_workers=4) as executor:
                 list(executor.map(write, values))
             self.assertEqual(list(Path(directory).iterdir()), [path])
+
+    def test_temporarily_unreadable_cache_is_a_miss_and_recovers_without_deletion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            provider = teams.Provider(directory)
+            path = provider.cache / 'shared.json'
+            provider.write_cache(path, {'edges': []})
+            validate = lambda value: teams.validate_response(teams.ADJUDICATE,
+                {'roles': self.roles, 'claims': list(self.claims.values())}, value)
+            with patch.object(Path, 'read_text', side_effect=PermissionError('synthetic transient lock')):
+                self.assertIsNone(provider.read_cache(path, validate))
+            self.assertEqual(provider.counters['cache_misses'], 1)
+            self.assertEqual(provider.counters['cache_read_failures'], 1)
+            self.assertEqual(provider.read_cache(path, validate), {'edges': []})
 
     def test_embedding_cache_corruption_and_failed_calls_recover(self):
         vector = [1.0] + [0.0] * 1023
@@ -240,6 +253,11 @@ class TeamProviderContracts(unittest.TestCase):
         retained = next(r for r in healthy[1:] if r["id"] != changed["id"] and person_id not in
                         {ref["researcher_id"] for role in r["roles"] for ref in role["claim_refs"]})
         originals = {r["id"]: copy.deepcopy(r) for r in (source, changed, retained)}
+        # This contract isolates source/researcher invalidation. Its synthetic
+        # prior generation must use the current prompt contract, independent of
+        # when the checked-in production model was last assessed.
+        for row in originals.values():
+            row["pipeline_hash"] = teams.content_hash([teams.VERSION, teams.MODEL, teams.DECOMPOSE, teams.ADJUDICATE, teams.VERIFY])
         model["opportunities"] = list(originals.values())
         person = next(p for p in registry["researchers"] if p["researcher_id"] == person_id)
         person["status"] = "inactive"

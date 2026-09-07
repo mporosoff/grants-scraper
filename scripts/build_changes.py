@@ -83,6 +83,16 @@ def _snapshot(record: dict) -> dict:
     return {field: record.get(field) for field in fields}
 
 
+def independently_refreshed(record, source):
+    """A healthy partition may verify removal while an unrelated partition fails."""
+    partitions = (source.get("diagnostics") or {}).get("partitions") or []
+    if partitions:
+        matches = [part for part in partitions if isinstance(part, dict) and isinstance(part.get("id_prefix"), str) and part["id_prefix"]
+                   and str(record.get("opportunity_id") or "").startswith(part["id_prefix"])]
+        return bool(matches) and all(part.get("status") == "refreshed" and part.get("healthy") is True for part in matches)
+    return source.get("status") == "refreshed" and source.get("healthy") is True
+
+
 def diff_catalogs(
     previous: dict,
     current: dict,
@@ -180,12 +190,13 @@ def diff_catalogs(
             lifecycle = source_state.get("lifecycle") or []
             matching = [s for s in lifecycle if s.get("source") == record.get("source")
                         or str(record.get("opportunity_id") or "").startswith(str(s.get("slug")) + ":")]
-            if not matching or not all(s.get("status") == "refreshed" and s.get("healthy") for s in matching):
+            if not matching or not all(independently_refreshed(record, s) for s in matching):
                 continue
             if any(record.get("opportunity_id") in s.get("withheld_ids", []) for s in matching):
                 continue
             adapters = source_state.get("adapters") or []
-            if any(a.get("source") == record.get("source") and not a.get("ok") for a in adapters):
+            if any(a.get("source") == record.get("source") and not a.get("ok")
+                   and not independently_refreshed(record, a) for a in adapters):
                 continue
         if record_is_current(record, as_of - timedelta(days=1))[0]:
             add(

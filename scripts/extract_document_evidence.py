@@ -45,6 +45,7 @@ from scripts import program_areas
 
 EVIDENCE_SCHEMA_VERSION = 1
 EXTRACTOR_IDENTITY = "official-evidence-2"
+DEADLINE_EXTRACTOR_IDENTITY = "submission-date-3"
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
 DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
@@ -69,21 +70,36 @@ DATE_RE = re.compile(
     re.I,
 )
 TIME_RE = re.compile(
-    r"\b(\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?))"
-    r"(?:\s+([A-Z]{2,4}|Eastern|Central|Mountain|Pacific)"
+    r"\b((?:1[0-2]|0?[1-9])(?::[0-5]\d)?\s*(?:a\.?m\.?|p\.?m\.?))(?![A-Za-z])"
+    r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|Alaska|Hawaii(?:-Aleutian)?|Atlantic|UTC|GMT|AK[SD]T|HST|[ECMPA][SD]?T)\b"
     r"(?:\s+(?:Time|Standard Time|Daylight Time))?)?",
     re.I,
 )
 DEADLINE_CUE_RE = re.compile(
-    r"\b(?:deadline|due|submit(?:ted)?|submission|received|closing|"
+    r"\b(?:deadlines?|due|submit(?:ted)?|submissions?|received|closing|will close|"
     r"no later than|must be filed|applications? by|proposals? by)\b",
     re.I,
 )
+DEADLINE_SUBMISSION_LABEL = (
+    r"(?:(?:(?:full|final)\s+)?(?:applications?|proposals?)|"
+    r"pre[\s-]?(?:applications?|proposals?)|preliminary\s+proposals?|"
+    r"letters?\s+of\s+(?:intent|interest)|LOIs?|concept\s+papers?|white\s+papers?)"
+)
+DEADLINE_LABEL_RE = re.compile(
+    rf"\b{DEADLINE_SUBMISSION_LABEL}\s+(?:submission\s+)?deadlines?\b|"
+    rf"\b(?:submission\s+deadlines?|deadlines?\s+for(?:\s+{DEADLINE_SUBMISSION_LABEL})?)\b",
+    re.I,
+)
+SUBMISSION_GROUP_VALUE = r"(?:[IVX]+|\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
+SUBMISSION_GROUP_PATTERN = rf"(?:(?:phase|round|cycle|year)\s+{SUBMISSION_GROUP_VALUE}|FY\s*\d{{2,4}})\b"
+SUBMISSION_GROUP_PREFIX_RE = re.compile(rf"\b(?:{SUBMISSION_GROUP_PATTERN}\s*[-:–—,(\[]?\s*)+$", re.I)
+SUBMISSION_GROUP_RE = re.compile(
+    rf"\b(?:(?P<kind>phase|round|cycle|year)\s+(?P<value>{SUBMISSION_GROUP_VALUE})|FY\s*(?P<fy>\d{{2,4}}))\b", re.I)
 DEADLINE_KINDS = (
     (
         "letter_of_intent",
         "Letter of intent deadline",
-        re.compile(r"\b(?:letter\s+of\s+intent|LOI)\b", re.I),
+        re.compile(r"\b(?:letters?\s+of\s+(?:intent|interest)|LOIs?)\b", re.I),
     ),
     (
         "concept_paper",
@@ -513,7 +529,9 @@ def extract_html_sections(content):
             and grouped[-1]["anchor"] == block["anchor"]
             and len(grouped[-1]["text"]) + len(block["text"]) < MAX_PAGE_CHARS
         ):
+            start = len(grouped[-1]["text"]) + 1
             grouped[-1]["text"] += f"\n{block['text']}"
+            grouped[-1]["blocks"].append((start, len(grouped[-1]["text"])))
         else:
             grouped.append(
                 {
@@ -521,6 +539,7 @@ def extract_html_sections(content):
                     "section": block["section"],
                     "anchor": block["anchor"],
                     "text": block["text"],
+                    "blocks": [(0, len(block["text"]))],
                 }
             )
     return grouped, {
@@ -583,26 +602,41 @@ def extract_containers(content, content_type, name, final_url):
     return containers, extraction
 
 
-def scoped_html(content, url):
-    """An Exchange notice fragment owns one bounded element, never sibling FOAs."""
+def source_scope_identity(url):
     parsed = urlparse(str(url or ""))
-    if parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
+    return "simons-grant-article-1" if parsed.hostname in {"simonsfoundation.org", "www.simonsfoundation.org"} and parsed.path.startswith("/grant/") else None
+
+
+def scoped_html(content, url):
+    """A supported notice owns one bounded element, never linked sibling calls."""
+    parsed = urlparse(str(url or ""))
+    article = source_scope_identity(url) == "simons-grant-article-1"
+    if not article and parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
         return content
     target = unquote(parsed.fragment)
-    if not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
+    if not article and not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
         raise ValueError("Exchange evidence requires a bounded official notice fragment")
 
     class Fragment(HTMLParser):
         def __init__(self):
             super().__init__(convert_charrefs=False)
             self.depth, self.matches, self.parts = 0, 0, []
+            self.root_tag = None
 
         def handle_starttag(self, tag, attrs):
             attrs = dict(attrs)
-            if not self.depth and tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold():
+            selected = (tag == "article" and "o-detail" in attrs.get("class", "").split()) if article else (
+                tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold())
+            if selected:
                 self.matches += 1
+            if not self.depth:
+                if not selected:
+                    return
+                self.root_tag = tag
                 self.depth = 1
-            elif self.depth and tag not in {"br", "hr", "img", "input", "link", "meta", "area", "base", "embed", "param", "source", "track", "wbr"}:
+            elif tag == self.root_tag:
+                # HTML permits omitted </li> and </p> tags. Only matching
+                # container tags determine the selected notice's boundary.
                 self.depth += 1
             if self.depth:
                 self.parts.append(self.get_starttag_text())
@@ -614,7 +648,8 @@ def scoped_html(content, url):
         def handle_endtag(self, tag):
             if self.depth:
                 self.parts.append("</" + tag + ">")
-                self.depth -= 1
+                if tag == self.root_tag:
+                    self.depth -= 1
 
         def handle_data(self, data):
             if self.depth:
@@ -629,7 +664,8 @@ def scoped_html(content, url):
     fragment = Fragment()
     fragment.feed(content.decode("utf-8", errors="replace"))
     if fragment.matches != 1 or fragment.depth or not fragment.parts:
-        raise ValueError("official Exchange notice does not expose one complete bounded fragment")
+        raise ValueError("official notice does not expose one complete bounded article" if article
+                         else "official Exchange notice does not expose one complete bounded fragment")
     return "".join(fragment.parts).encode("utf-8")
 
 
@@ -705,8 +741,12 @@ def make_fact(
 
 def deadline_kind(context, date_offset=None):
     matches = []
+    specific = [match.span() for kind, _, pattern in DEADLINE_KINDS if kind != "application"
+                for match in pattern.finditer(context)]
     for kind, label, pattern in DEADLINE_KINDS:
         for match in pattern.finditer(context):
+            if kind == "application" and any(left <= match.start() < right for left, right in specific):
+                continue  # "Application" inside "Pre-Application" is not a full stage.
             distance = (
                 abs(((match.start() + match.end()) // 2) - date_offset)
                 if date_offset is not None
@@ -714,48 +754,382 @@ def deadline_kind(context, date_offset=None):
             )
             matches.append((distance, match.start(), kind, label))
     if not matches:
+        if re.search(r"\b(?:submissions?|closing\s+date|due\s+dates?|solution\s+summar(?:y|ies))\b|^deadline\b", context, re.I):
+            return "application", "Full application deadline"
         return None
     _, _, kind, label = min(matches, key=lambda item: (item[0], item[1]))
     return kind, label
 
 
-def extract_deadlines(opportunity_id, containers, document, extracted_at):
+# Deliberately bounded field grammar. This is not a general English parser:
+# unsupported lists, replacements and scope annotations lose narrative evidence.
+_SUBMISSION_SUBJECT = rf"{DEADLINE_SUBMISSION_LABEL}(?:\s*\((?:LOI|Letter of Intent|Preproposal)\))?"
+_DEADLINE_FIELD = re.compile(
+    rf"\b(?:{_SUBMISSION_SUBJECT}\s+(?:submission\s+)?(?:deadlines?|due(?:\s+dates?)?)"
+    rf"|(?:deadlines?|closing\s+date)\s+for\s+{_SUBMISSION_SUBJECT}(?:\s+submission)?"
+    rf"|{_SUBMISSION_SUBJECT}\s+(?:(?:is\s+required\s+and\s+)?(?:must|shall)\s+be\s+(?:submitted|received|filed)|(?:are|is|will\s+be)\s+due)"
+    rf"|(?:submissions?|solution\s+summar(?:y|ies))\s+(?:due|must\s+be\s+(?:submitted|received))"
+    rf"|application\s+period\s+will\s+close|closing\s+date(?:\s+for\s+this\s+opportunity)?"
+    rf"|submission\s+deadlines?|(?P<generic>deadline))\b", re.I)
+_REQUIREMENT = re.compile(r"(?<!\w)(?:\(\s*(?:required|optional)\s*\)|\[\s*(?:required|optional)\s*\]|not\s+required|required|optional)(?!\w)", re.I)
+_VALUE_LINK = re.compile(
+    r"[\s,:=–—\-()\[\]]*(?:(?:is|are|was)\s+)?"
+    r"(?:(?:(?:has\s+been|was)\s+)?(?:extended|moved|changed|revised)\s+(?:to|until)\s+)?"
+    r"(?:(?:on|by|at|of|due|no\s+later\s+than)\s*)*[\s,:=–—\-()\[\]]*", re.I)
+_CLOCK_LINK = re.compile(
+    r"[\s,:()\[\]]*(?:(?:at|by|due\s+(?:at|by))|"
+    r"(?:(?:applications?|submissions?)\s+)?(?:must\s+be\s+received|are\s+due|closes?)\s+(?:at|by))?\s*", re.I)
+
+
+def _balanced_deadline_field(text):
+    stack = []
+    for character in text:
+        if character in '([':
+            stack.append(character)
+        elif character in ')]':
+            if not stack or stack.pop() != {')': '(', ']': '['}[character]:
+                return False
+    return not stack
+
+
+def _deadline_boundaries(text, start, end):
+    for boundary in re.finditer(r'[;•|\n]|[.!?]\s+(?=[A-Z])', text[start:end]):
+        position = start + boundary.start()
+        if text[position] == '\n':
+            following = position + 1 + len(text[position + 1:]) - len(text[position + 1:].lstrip())
+            if TIME_RE.match(text, following) or DATE_RE.match(text, following):
+                continue  # A source line wrap inside a field is not a new field.
+        if not re.search(r'\b[ap]\.?m\.$', text[:position + 1], re.I):
+            yield position, start + boundary.end()
+
+
+def _clock_extent(text, clock):
+    """Return the whole clock token and whether its redundant zone agrees."""
+    alias = re.match(r'\s*\(([A-Z]{2,4})\)', text[clock.end():], re.I)
+    if not alias:
+        return clock.end(), True
+    zone = (clock.group(2) or '').casefold()
+    stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
+             'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
+    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    expected = (stems[zone] + (descriptor.group(1)[0].upper() if descriptor else '') + 'T'
+                if zone in stems else zone.upper())
+    if zone == 'hawaii' and not descriptor:
+        expected = 'HST'
+    return clock.end() + alias.end(), alias.group(1).upper() == expected
+
+
+def deadline_timezone(clock):
+    if not clock or not clock.group(2):
+        return None
+    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
+             'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
+    zone = clock.group(2)
+    if descriptor and zone.casefold() in stems:
+        return stems[zone.casefold()] + descriptor.group(1)[0].upper() + 'T'
+    return clean_text(zone)
+
+
+def _without_clocks(text):
+    parts, end = [], 0
+    for clock in TIME_RE.finditer(text):
+        parts.extend((text[end:clock.start()], ' '))
+        end, _ = _clock_extent(text, clock)
+    return ''.join(parts) + text[end:]
+
+
+def explicit_deadline_requirement(context):
+    values = {not bool(re.search(r'optional|not\s+required', match.group(0), re.I))
+              for match in _REQUIREMENT.finditer(context)}
+    if len(values) == 1:
+        return values.pop()
+    if not values and re.search(r'\b(?:must|shall)\b', context, re.I):
+        return True
+    return None
+
+
+def deadline_context(container, match):
+    """Prove one date's local field; never borrow another value or infer a list."""
+    text = container['text']
+    start, end = max(0, match.start() - 230), min(len(text), match.end() + 230)
+    block_end = len(text)
+    for left, right in container.get('blocks') or []:
+        if left <= match.start() < right:
+            start, end = max(start, left), min(end, right)
+            block_end = right
+            break
+    fields = list(_DEADLINE_FIELD.finditer(text, start, end))
+    boundaries = list(_deadline_boundaries(text, start, end))
+    for index, field in enumerate(fields):
+        field_start = field.start()
+        qualifier = SUBMISSION_GROUP_PREFIX_RE.search(text[start:field_start])
+        if qualifier:
+            field_start = start + qualifier.start()
+        left = max([start] + [after for _, after in boundaries if after <= field_start])
+        next_start = fields[index + 1].start() if index + 1 < len(fields) else end
+        next_qualifier = SUBMISSION_GROUP_PREFIX_RE.search(text[field.end():next_start])
+        if next_qualifier:
+            next_start = field.end() + next_qualifier.start()
+        right = min([end] + [before for before, _ in boundaries if before >= field.end()]
+                    + [next_start])
+        if right == end and end < block_end:
+            continue  # The bounded window cannot prove how this field ends.
+        if field.group('generic') and text[left:field_start].strip(' \t:–—-'):
+            continue  # E.g. an award/policy deadline cannot become an application.
+        value_start = field.end()
+        before = list(DATE_RE.finditer(text, left, field_start))
+        previous = before[-1] if before else None
+        gap = text[previous.end():field_start] if previous else ''
+        postfix = bool(previous and re.fullmatch(r'[\s,]*(?:at\s+|by\s+)?', _without_clocks(gap.rstrip(' ([')), re.I)
+                       and gap.rstrip().endswith(('(', '[')))
+        if postfix:
+            closing = ')' if gap.rstrip().endswith('(') else ']'
+            close = re.match(r'\s*' + re.escape(closing), text[value_start:right])
+            if not close:
+                continue
+            value_start += close.end()
+            if DATE_RE.search(text, value_start, right):
+                continue  # An old value plus a possible replacement is withheld.
+            if match.start() != previous.start():
+                continue
+            value = text[previous.start():field_start].rstrip(' ([') + ' ' + text[value_start:right]
+        else:
+            if not value_start <= match.start() < right:
+                continue
+            if index == 0 and not re.fullmatch(r'\s*(?:(?:a|the)\s+)?', text[left:field_start], re.I):
+                continue
+            value = text[value_start:right]
+        dates = list(DATE_RE.finditer(value))
+        if len(dates) != 1 or not _balanced_deadline_field(value):
+            continue
+        date = dates[0]
+        prefix = value[:date.start()]
+        if not _VALUE_LINK.fullmatch(SUBMISSION_GROUP_RE.sub(' ', _REQUIREMENT.sub(' ', _without_clocks(prefix)))):
+            continue
+        header = text[field_start:field.end()] + ' ' + ' '.join(m.group(0) for m in SUBMISSION_GROUP_RE.finditer(prefix))
+        groups = {}
+        for group in SUBMISSION_GROUP_RE.finditer(header):
+            groups.setdefault(group.group('kind') or 'fiscal_year', set()).add(
+                (group.group('value') or group.group('fy')).casefold())
+        if any(len(values) > 1 for values in groups.values()):
+            continue
+        markers = list(_REQUIREMENT.finditer(prefix))
+        clocks = list(TIME_RE.finditer(value))
+        owned_clock = None
+        tail_start = date.end()
+        if len(clocks) == 1:
+            clock = clocks[0]
+            clock_end, valid = _clock_extent(value, clock)
+            gap = _REQUIREMENT.sub(' ', value[date.end():clock.start()])
+            if valid and (clock.end() <= date.start() or _CLOCK_LINK.fullmatch(gap)):
+                owned_clock = clock
+                tail_start = max(tail_start, clock_end)
+                markers.extend(_REQUIREMENT.finditer(value, date.end(), clock.start()))
+        tail = value[tail_start:]
+        clean_tail = _REQUIREMENT.sub(' ', tail)
+        if re.fullmatch(r'[\s,.:()\[\]]*', clean_tail):
+            markers.extend(_REQUIREMENT.finditer(tail))
+        elif clocks and re.fullmatch(r'[\s,.:()\[\]]*(?:at\s+|by\s+)?[\s,.:()\[\]]*',
+                                    _without_clocks(clean_tail), re.I):
+            # A complete but contradictory clock may lose its precision while
+            # the directly owned date survives. Arbitrary trailing prose cannot.
+            owned_clock = None
+        else:
+            continue
+        flags = {not bool(re.search(r'optional|not\s+required', marker.group(0), re.I)) for marker in markers}
+        if len(flags) > 1:
+            continue  # Contradictory metadata cannot reassign a date.
+        if flags:
+            header += ' (required)' if flags.pop() else ' (optional)'
+        if clocks and owned_clock is None:
+            container['_deadline_uncertain_component'] = True
+        # This semantic slice contains only proved fields. Citations still use
+        # the original container, and local revalidation never claims a fetch.
+        header += ' '
+        context = header + date.group(0)
+        if owned_clock:
+            context += ' at ' + owned_clock.group(0)
+        return context, len(header)
+    return '', 0
+
+
+def nearest_deadline_time(context, offset, date_length):
+    clocks = list(TIME_RE.finditer(context))
+    return clocks[0] if len(clocks) == 1 else None
+
+
+def supported_submission_date(context, offset):
+    return bool(context and deadline_kind(context, offset))
+
+
+def qualify_deadline_sequence(facts, review_queue=None):
+    def stage_contexts(fact):
+        quote = (fact.get("citation") or {}).get("quote", "")
+        contexts = []
+        for match in DATE_RE.finditer(quote):
+            if parse_document_date(match.group(0)) != fact["date"]:
+                continue
+            context, offset = deadline_context({"text": quote}, match)
+            kind = deadline_kind(context, offset)
+            if kind and kind[0] == fact.get("deadline_kind"):
+                contexts.append(context)
+        return contexts
+
+    def submission_group(fact):
+        roman = {value: str(index) for index, value in enumerate(
+            ("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"), 1)}
+        words = {value: str(index) for index, value in enumerate(
+            ("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"), 1)}
+        values = {}
+        for context in stage_contexts(fact):
+            for match in SUBMISSION_GROUP_RE.finditer(context):
+                kind = (match.group("kind") or "fiscal_year").casefold()
+                token = (match.group("value") or match.group("fy")).upper()
+                value = str(int(token)) if token.isdigit() else roman.get(token, words.get(token))
+                if kind == "fiscal_year" and len(token) == 2:
+                    value = "20" + token
+                values.setdefault(kind, set()).add(value)
+        return {kind: next(iter(items)) if len(items) == 1 else None for kind, items in values.items()}
+
+    def same_submission_group(left, right):
+        return all(not left.get(kind) or not right.get(kind) or left[kind] == right[kind]
+                   for kind in left.keys() | right.keys())
+
+    preliminary = [fact for fact in facts if fact.get("type") == "deadline"
+                   and fact.get("deadline_kind") != "application"]
+    if not preliminary:
+        return facts
+    kept = []
+    for fact in facts:
+        if fact.get("type") != "deadline" or fact.get("deadline_kind") != "application":
+            kept.append(fact)
+            continue
+        own_group = submission_group(fact)
+        applicable = [item["date"] for item in preliminary
+                      if same_submission_group(own_group, submission_group(item))]
+        explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", context, re.I)
+                            for context in stage_contexts(fact))
+        if not applicable or (fact["date"] >= max(applicable) and
+                              (fact["date"] not in applicable or explicit_full)):
+            kept.append(fact)
+        elif review_queue is not None:
+            review_queue.append({"type": "deadline_stage_order_conflict",
+                "label": "Verify the current submission stages; an inconsistent or ambiguous application date was withheld",
+                "status": "needs_review",
+                "message": "An inconsistent or ambiguous application date was withheld; verify the current official submission stages.",
+                "withheld_fact_ids": [fact["id"]]})
+    return kept
+
+
+def cached_deadline_time_supported(fact, match):
+    if not fact.get("time"):
+        return not fact.get('timezone')
+    if not match:
+        return False
+
+    def clock(value):
+        value = re.sub(r"[.\s]", "", value).upper()
+        for pattern in ("%I:%M%p", "%I%p", "%H:%M"):
+            try:
+                parsed = datetime.strptime(value, pattern)
+                return parsed.hour, parsed.minute
+            except ValueError:
+                pass
+        return None
+
+    def zone(value):
+        value = str(value or "").casefold()
+        # Preserve established canonical IANA representations; do not equate
+        # seasonal abbreviations (EST/EDT), partial names, or unknown zones.
+        return {"america/new_york": "eastern", "et": "eastern",
+                "america/chicago": "central", "ct": "central",
+                "america/denver": "mountain", "mt": "mountain",
+                "america/los_angeles": "pacific", "pt": "pacific",
+                "america/anchorage": "alaska", "pacific/honolulu": "hawaii"}.get(value, value)
+
+    return (clock(fact["time"]) is not None and clock(fact["time"]) == clock(match.group(1))
+            and (not fact.get("timezone") or zone(fact["timezone"]) == zone(deadline_timezone(match))))
+
+
+def revalidate_cached_deadlines(entry):
+    """Recheck old citations locally without claiming a new source retrieval."""
+    if entry.get("deadline_extractor_identity") == DEADLINE_EXTRACTOR_IDENTITY:
+        return
+    prior = entry.get("facts") or []
+    kept = []
+    uncertain_metadata = []
+    for fact in prior:
+        if fact.get("type") != "deadline":
+            kept.append(fact)
+            continue
+        quote = (fact.get("citation") or {}).get("quote") or ""
+        matches = [match for match in DATE_RE.finditer(quote) if parse_document_date(match.group(0)) == fact.get("date")]
+        supported = False
+        for match in matches:
+            context, offset = deadline_context({"text": quote}, match)
+            if not supported_submission_date(context, offset):
+                continue
+            if fact.get("deadline_kind") != deadline_kind(context, offset)[0]:
+                continue
+            time_match = nearest_deadline_time(context, offset, len(match.group(0)))
+            if not cached_deadline_time_supported(fact, time_match):
+                continue
+            required = explicit_deadline_requirement(context)
+            if required is not None and fact.get('required') is not required:
+                continue
+            if required is None and fact.get('required') is not None:
+                fact = deepcopy(fact)
+                fact['required'] = None
+                uncertain_metadata.append(fact['id'])
+            supported = True
+            break
+        if supported:
+            kept.append(fact)
+    kept = qualify_deadline_sequence(kept)
+    kept_ids = {fact['id'] for fact in kept}
+    removed = [fact["id"] for fact in prior if fact['id'] not in kept_ids]
+    if removed or uncertain_metadata:
+        entry["facts"] = kept
+        entry["deadline_extractor_identity"] = DEADLINE_EXTRACTOR_IDENTITY
+        for item in entry.get("review_queue") or []:
+            if "evidence_ids" in item:
+                item["evidence_ids"] = [identifier for identifier in item["evidence_ids"] if identifier not in removed]
+        entry["review_queue"] = [item for item in entry.get("review_queue") or []
+                                 if item.get("type") != "deadline_conflict" or item.get("evidence_ids")]
+        entry.setdefault("review_queue", []).append({"type": "deadline_evidence_withheld",
+            "label": "Verify the current submission stages; unsupported cached submission dates were withheld",
+            "status": "needs_review",
+            "message": "Unbound or inconsistent submission dates or metadata were withheld; verify the current official submission stages.",
+            "withheld_fact_ids": removed, "withheld_metadata_fact_ids": uncertain_metadata})
+
+
+def extract_deadlines(opportunity_id, containers, document, extracted_at, review_queue=None):
     facts = []
-    seen = set()
+    seen = {}
     for container in containers:
         text = container["text"]
         for match in DATE_RE.finditer(text):
-            window_start = max(0, match.start() - 230)
-            window_end = min(len(text), match.end() + 230)
-            context = text[window_start:window_end]
-            kind_result = deadline_kind(
-                context,
-                match.start() - window_start,
-            )
-            if not kind_result or not DEADLINE_CUE_RE.search(context):
+            context, offset = deadline_context(container, match)
+            kind_result = deadline_kind(context, offset)
+            if not supported_submission_date(context, offset):
+                if DEADLINE_CUE_RE.search(text):
+                    container['_deadline_uncertain_component'] = True
                 continue
             parsed = parse_document_date(match.group(0))
             if not parsed:
                 continue
             kind, label = kind_result
             identity = (kind, parsed)
-            if identity in seen:
-                continue
-            seen.add(identity)
-            time_match = TIME_RE.search(context)
+            time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             deadline_time = clean_text(time_match.group(1)) if time_match else None
-            timezone_value = (
-                clean_text(time_match.group(2))
-                if time_match and time_match.group(2)
-                else None
-            )
-            required = bool(
-                re.search(
-                    r"\b(?:must|required|shall|due|no later than)\b",
-                    context,
-                    re.I,
-                )
-            )
+            timezone_value = deadline_timezone(time_match)
+            if identity in seen:
+                prior = facts[seen[identity]]
+                if not deadline_time or (prior.get("time") and
+                        (prior.get("timezone") or prior["time"] != deadline_time or not timezone_value)):
+                    continue
+            required = explicit_deadline_requirement(context)
             citation = citation_for(
                 container,
                 document,
@@ -768,8 +1142,7 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at):
                 display += f" · {deadline_time}"
             if timezone_value:
                 display += f" {timezone_value}"
-            facts.append(
-                make_fact(
+            fact = make_fact(
                     opportunity_id,
                     "deadline",
                     label,
@@ -782,10 +1155,22 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at):
                     timezone=timezone_value,
                     required=required,
                 )
-            )
+            if identity in seen:
+                facts[seen[identity]] = fact
+            else:
+                seen[identity] = len(facts)
+                facts.append(fact)
             if len(facts) >= 12:
-                return facts
-    return facts
+                return finish_deadlines(facts, containers, review_queue)
+    return finish_deadlines(facts, containers, review_queue)
+
+
+def finish_deadlines(facts, containers, review_queue):
+    if review_queue is not None and any(c.get('_deadline_uncertain_component') for c in containers):
+        review_queue.append({'type': 'deadline_evidence_withheld', 'status': 'needs_review',
+            'label': 'Verify official submission dates; ambiguous narrative information was withheld',
+            'message': 'Only locally owned submission dates and components are published.'})
+    return qualify_deadline_sequence(facts, review_queue)
 
 
 def extract_award_range(opportunity_id, containers, document, extracted_at):
@@ -1051,6 +1436,7 @@ def extract_document_facts(
     containers,
     document,
     extracted_at,
+    review_queue=None,
 ):
     opportunity_id = str(
         record.get("opportunity_id")
@@ -1062,6 +1448,7 @@ def extract_document_facts(
         containers,
         document,
         extracted_at,
+        review_queue,
     )
 
     award = extract_award_range(
@@ -1324,7 +1711,9 @@ def source_signature(record, source):
         record.get("api_last_updated"),
         record.get("last_updated"),
     )
-    return "|".join(str(value or "") for value in values)
+    signature = "|".join(str(value or "") for value in values)
+    identity = source_scope_identity(source.get("url")) if source else None
+    return signature + "|" + identity if identity else signature
 
 
 def validate_public_url(value, resolver=socket.getaddrinfo):
@@ -1676,7 +2065,8 @@ def build_document_entry(
     previous_hash = previous_document.get("sha256")
     changed_since_previous = bool(previous_hash and previous_hash != digest)
 
-    same_extractor = previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+    same_extractor = (previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+                      and previous.get("source_scope_identity") == source_scope_identity(source["url"]))
     same_route = previous_document.get("url") == (response.get("url") or source["url"])
     if previous_hash == digest and same_extractor and same_route:
         entry = deepcopy(previous)
@@ -1752,11 +2142,13 @@ def build_document_entry(
         source.get("name"),
         document["url"],
     )
+    deadline_review = []
     facts = extract_document_facts(
         record,
         containers,
         document,
         fetched_at,
+        deadline_review,
     )
     program_area_hits = extract_program_areas(
         containers,
@@ -1769,10 +2161,13 @@ def build_document_entry(
         changed_since_previous,
         extraction,
     )
+    review_queue.extend(deadline_review)
     return {
         "source_signature": source_signature(record, source),
         "source_url": source["url"],
         "extractor_identity": EXTRACTOR_IDENTITY,
+        **({"source_scope_identity": source_scope_identity(source["url"])} if source_scope_identity(source["url"]) else {}),
+        "deadline_extractor_identity": DEADLINE_EXTRACTOR_IDENTITY,
         "checked_at": fetched_at,
         "status": "current",
         "last_error": None,
@@ -1975,6 +2370,8 @@ def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False)
     # cached documents are never even candidates and never get subtopics.
     if needs_subtopics:
         return True
+    if entry.get("status") == "needs_revalidation":
+        return True
     if entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
         return True
     if entry.get("source_signature") != signature:
@@ -2012,6 +2409,8 @@ def citation_deadline(fact):
 
 
 def merge_document_entry(record, entry):
+    if entry:
+        revalidate_cached_deadlines(entry)
     output = deepcopy(record)
     # Remember source-owned values when a new extraction adds conservative
     # flags. Re-enrichment can then undo only its own overrides.
@@ -2087,6 +2486,12 @@ def merge_document_entry(record, entry):
         output["document_evidence"]["dependency_version"] = 2
         output["document_evidence"]["review_queue"] = build_review_queue(
             record, facts, bool((entry.get("document") or {}).get("changed_since_previous")), entry.get("extraction") or {})
+        # These explain extraction-time exclusions, which cannot be rebuilt
+        # from the remaining facts. Keep them through repeated projections.
+        output["document_evidence"]["review_queue"].extend(deepcopy([
+            item for item in entry.get("review_queue") or []
+            if item.get("type") in {"deadline_stage_order_conflict", "deadline_evidence_withheld"}
+        ]))
 
     deadlines = deepcopy(output.get("deadlines") or [])
     for fact in facts:
@@ -2472,6 +2877,8 @@ def enrich_document_evidence(
                 entry["status"] = "source_changed"
             elif entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
                 entry["status"] = "needs_revalidation"
+            elif source_scope_identity(source["url"]) != entry.get("source_scope_identity"):
+                entry["status"] = "needs_revalidation"
         if not opportunity_id or not source:
             continue
         signature = source_signature(record, source)
@@ -2527,6 +2934,7 @@ def enrich_document_evidence(
         # segment bytes you did not receive -- so a document needing backfill
         # asks for the whole thing.
         if (previous and not backfill and previous.get("extractor_identity") in (None, EXTRACTOR_IDENTITY)
+                and previous.get("source_scope_identity") == source_scope_identity(source["url"])
                 and previous_document.get("url") == source["url"]):
             if previous_document.get("etag"):
                 headers["If-None-Match"] = previous_document["etag"]

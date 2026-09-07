@@ -150,7 +150,7 @@ class InventoryTests(unittest.TestCase):
         data = payload()
         data["pages"][QBI] = data["pages"][QBI].replace("DARPA-PA-26-02-02", "DARPA-PA-26-02-99")
         with self.assertRaisesRegex(ValueError, "exact solicitation"):
-            records(data)
+            adapter().parse(data)
 
     def test_unknown_inventory_shapes_fail_closed(self):
         for html in ["<html>maintenance</html>", '<table id="rs"><th>R&amp;D #</th><tbody></tbody></table>']:
@@ -159,7 +159,7 @@ class InventoryTests(unittest.TestCase):
         data = payload()
         data["darpa"] = []
         with self.assertRaises(ValueError):
-            records(data)
+            adapter().parse(data)
 
     def test_unofficial_and_non_notice_action_links_degrade(self):
         for bad in ["https://sam.gov.evil.test/", "https://sam.gov/search/", "javascript:alert(1)"]:
@@ -167,7 +167,7 @@ class InventoryTests(unittest.TestCase):
             for row in data["darpa"]:
                 row["field_external_url"] = bad
             with self.assertRaisesRegex(ValueError, "required official route"):
-                records(data)
+                adapter().parse(data)
 
     def test_fetch_is_bounded_to_official_inventories_and_programs(self):
         data = payload()
@@ -237,13 +237,13 @@ class IarpaTests(unittest.TestCase):
             html = html.replace('>Proposal Due Date</h3>', f'>{label}</h3>').replace("October 15, 2026", value)
             data["pages"][IARPA_PROGRAM] = html
             with self.assertRaisesRegex(ValueError, "submission deadline"):
-                records(data)
+                adapter().parse(data)
 
     def test_other_solicitation_link_does_not_confirm_current_row(self):
         data = with_iarpa()
         data["pages"][IARPA_PROGRAM] = data["pages"][IARPA_PROGRAM].replace("IARPA-BAA-26-01", "IARPA-BAA-25-01")
         with self.assertRaisesRegex(ValueError, "exact solicitation action"):
-            records(data)
+            adapter().parse(data)
 
 
 class ConfirmationHealthTests(unittest.TestCase):
@@ -251,14 +251,17 @@ class ConfirmationHealthTests(unittest.TestCase):
         instance = adapter()
         with patch.object(instance, "fetch", return_value=data):
             published, results = collect([instance])
-        self.assertEqual(published, [])
         self.assertFalse(results[0].ok)
         self.assertIn(message, results[0].error)
+        failed_prefixes = [part["id_prefix"] for part in results[0].diagnostics["partitions"] if not part["healthy"]]
+        self.assertTrue(failed_prefixes)
+        self.assertFalse(any(record["opportunity_id"].startswith(prefix) for record in published for prefix in failed_prefixes))
         cache = {"sources": {instance.slug: {"records": records(), "fetched_at": "2026-09-04"}}}
         live, updated, summary = resolve_live_records(results, cache, AS_OF)
-        self.assertEqual(live, [])
-        self.assertEqual(updated["sources"][instance.slug]["records"], [])
-        self.assertEqual(summary[0]["status"], "failed_no_fallback")
+        self.assertEqual({r["opportunity_id"] for r in live}, {r["opportunity_id"] for r in published})
+        self.assertEqual(updated["sources"][instance.slug]["records"], live)
+        self.assertFalse(summary[0]["healthy"])
+        self.assertEqual(summary[0]["status"], "partial_refresh")
 
     def test_moved_darpa_program_routes_cannot_be_a_healthy_empty_refresh(self):
         data = payload()

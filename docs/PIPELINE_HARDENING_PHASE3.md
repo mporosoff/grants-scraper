@@ -92,6 +92,11 @@ Expected exhaustion records deferred work without a false provider-failure resul
 Actual provider/configuration/output failures remain visible failures, while healthy
 compatible teams survive. Diagnostics remain in the existing developer receipt and
 Actions artifacts; there is no public progress UI.
+Concurrent JSON reads share the writer's local lock. Transient cross-process
+cache read/eviction failures are counted and recover as validated cold misses;
+they never become evidence or delete a healthy entry after a failed read. The
+concurrency contract exercises the production reader and still requires complete
+values, with a separate deterministic transient-lock recovery regression.
 
 ## Validation
 
@@ -119,3 +124,126 @@ both corpus and claim embedding batches. The release was retained. The correctio
 adds the required homogeneous fallback without relaxing any cache-mixing test or
 canary threshold, and adds regressions for independent floating outputs, persisted
 non-reuse policy, mixed-generation rejection and gross-discontinuity rejection.
+
+## Refresh remediation
+
+Review of generated PR #159 found that an IARPA inventory failure suppressed
+independently healthy DARPA calls, and that a Simons page supplied holiday,
+notification, previous-cycle and related-grant dates as submission evidence.
+The combined adapter now reports sponsor partitions separately. Fresh records
+from a verified partition enter the existing canonical merge while the failed
+partition retains its established fail-closed policy. Closure events require
+the affected partition to be verified. Partial refresh remains visibly degraded
+in developer diagnostics and does not advance the whole source's last-success
+timestamp.
+
+Simons grant evidence is bounded to its one official grant article. A changed
+boundary invalidates old evidence and requires document bytes, including when
+an ETag or unchanged content hash might otherwise permit reuse. Submission dates
+stay within their HTML block and sentence. Non-submission dates and contradictory
+stage sequences are withheld with review disclosures. Old deadline citations are
+rechecked locally without advancing retrieval timestamps or invalidating unrelated
+evidence. Removed facts cannot leave dangling review references.
+Container ownership counts matching outer tags, allowing valid omitted list-item
+and paragraph end tags while rejecting missing/duplicate notice containers. This
+was checked against the saved official Simons HTML as well as synthetic fixtures;
+the projection retains its October 29 LOI with Eastern time and publishes warnings
+for inconsistent full-application dates, without holiday or sibling deadlines.
+Narrative deadlines now use a deliberately bounded local-field contract
+(`submission-date-3`). An explicit submission heading/predicate owns one date
+and only complete, adjacent clock and requirement components. Straightforward
+`Application deadline:`, `Applications due`, and `Deadline extended to/until`
+forms remain supported, as do independently labeled PDF fields, simple balanced
+postfix labels, and explicit stage/phase groups. Full application dates must
+follow every applicable preliminary stage. Standard/daylight zone qualifiers
+retain their explicit offset abbreviation; contradictory aliases lose the clock.
+
+Multi-date fields, replacement histories, unknown replacement values, scope
+asides, malformed field structure, conflicting groups and unsupported prose are
+withheld. This intentionally replaces the previous growing English-grammar
+matrix: annual inherited lists, incidental-date skipping and general replacement
+interpretation are no longer promised. Coverage loss is acceptable; a nearby
+date is never substituted. Representative supported and fail-closed regressions
+exercise fresh extraction and old-cache projection. Unproved cached requirement
+metadata becomes unknown; incompatible dates, stages and clocks are withheld.
+Local revalidation retains source hashes/check timestamps and unrelated facts,
+removes dangling references and publishes one existing verification diagnostic.
+Authoritative structured deadlines and close dates remain untouched.
+
+A read-only real-corpus audit is reproducible with:
+
+```sh
+python -m tools.audit_deadline_corpus --baseline a763d3c79b285fa45016f8b3537c295749167f78 --output .cache/deadline-corpus.json
+```
+
+It calls the normal shared enrichment entrypoint with zero source/provider
+requests. The report includes every retained/withheld cached fact, its source
+URL, quote, document hash and original check timestamp, plus before/after date
+sets for every changed current record. This is local receipt revalidation, not
+new source verification. On the 1,419-record candidate, all 912
+`official_structured` deadlines and all 1,360 source-owned deadline items remain
+unchanged (the latter also includes estimates, source-listed items and synopsis
+extraction). There are 71 retained and 2,499 withheld cached narrative facts.
+Relative to the prior verified generation, 435 current records have changed
+date sets, including removals; no retained date changes its time/timezone. No
+structured value is overridden, no source receipt is advanced, and no retained
+narrative stage ordering is impossible. No replacement date is invented.
+
+All retained quotes were inspected. Three retained historical dates are explicit
+source deadlines, not newly inferred current dates: round one on August 14, 2026
+in 362787, the first LOI on November 1, 2023 in 345738, and the first application
+on March 3, 2025 in 358024. Their historical role is stated in the stored source
+quotation; none is an unsupported policy-effective or award-period date. Removed
+facts include NIH implementation notices/review tables, DoD award-period dates,
+ambiguous multi-date fields, and Simons receipts requiring the article boundary
+upgrade. Each withdrawal is tied to its unchanged source receipt in the report.
+The corrected bounded refresh must repeat this audit on its generated package
+before publication; these in-memory projections do not edit production data.
+
+The same refresh exposed responses with empty objectives for negative decisions.
+The prompts now state the existing validator's bounds for both positive and
+negative responses. Validation and retries remain strict; diagnostics identify
+the failed contract using an allowlisted reason, without copying provider bodies.
+The outage contract's isolated prior model uses the current prompt dependency so
+it continues testing preservation of compatible teams instead of assuming that
+the committed production model was generated with the current code.
+
+The corrective change preserves PR #159's newer generated baseline. An interim
+committed rollback was rejected in review because it also restored expired calls
+and removed unrelated new records. Pages remains on its known-good deployment
+while the repaired writers and existing bounded caches produce a replacement.
+No individual opportunity fact or team membership is edited. Extraction warnings
+also survive the rebuilt catalog review queue, using the existing UI label/status
+contract and without dangling references to withheld facts.
+
+The existing refresh workflow has an optional `manual_release_validation` input.
+It creates the generated PR normally, then waits up to 30 minutes for the operator
+to review/test its exact head and merge through protection before Pages publication
+continues. The read-only checkpoint pins the generated head, protected main base,
+and tested tree. It rejects retargeted/advanced bases, changed heads, closure,
+missing merge identity, a different merged parent/tree, and persistent API errors.
+It does not request reviews, set checks, or
+merge; ordinary refresh behavior and automated browser-testing policy are unchanged.
+Failure rollback cannot overwrite a later protected main generation. With this
+input, the refresh's Pages publication follows validation and protected merge of
+the generated replacement.
+
+Package construction now captures the release actually served by Pages and
+retains that exact corpus/embedding identity from the existing validated current
+or previous compatibility history. This handles a Pages rollback that differs
+from main without importing arbitrary historical passage rows. Unknown or
+malformed published identities block publication. A second bounded fetch and
+no-write package check immediately before Worker deployment rejects a changed
+Pages generation; it does not repeat provider work or rebuild the package.
+
+`tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
+verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
+fact/reference cleanup, boundary-change revalidation and strict negative-output
+diagnostics. The bounded precision correction passes 40 focused document/repair
+tests, 967 required Python tests and 713 Node contracts. Frozen-query and scoring
+expectations and the committed release package remain unchanged. Hermetic,
+exact-head review, manual complete-suite and generated-release evidence are
+recorded separately for the exact candidate; earlier evidence does not clear
+changed code. A bounded live diagnostic previously returned four verified DARPA
+calls despite IARPA's 403; one provider request returned a valid exact-quote
+decomposition with zero retries.
