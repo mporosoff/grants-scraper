@@ -309,6 +309,47 @@ class DeadlineOwnership(unittest.TestCase):
             [{'text': '1 Amendment: Applications are due March 1, 2027.'}], entry['document'], entry['checked_at'])
         self.assertEqual([f['time'] for f in facts], [None])
 
+    def test_postfix_deadline_labels_retain_date_time_and_stage(self):
+        record, entry = self.entry()
+        for text, kind, time in [
+            ('March 1, 2027 is the deadline for applications', 'application', None),
+            ('March 1, 2027 — Application Deadline', 'application', None),
+            ('March 1, 2027 at 5 PM Eastern is the deadline for applications', 'application', '5 PM'),
+            ('March 1, 2027 — Letter of Intent Deadline', 'letter_of_intent', None),
+            ('March 1, 2027, at 5 PM Eastern — Pre-Application Deadline', 'preapplication', '5 PM'),
+        ]:
+            with self.subTest(text=text):
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts], [('2027-03-01', kind, time)])
+                entry['facts'] = facts
+                entry.pop('deadline_extractor_identity', None)
+                result = merge_document_entry(record, entry)
+                self.assertEqual([d['kind'] for d in result['deadlines'] if d.get('evidence_id')], [kind])
+
+    def test_phase_qualifiers_before_or_after_labels_preserve_independent_order(self):
+        record, entry = self.entry()
+        for first, second in [
+            ('Phase I Letter of Intent Deadline: July 1, 2027', 'Phase II Application Deadline: June 1, 2027'),
+            ('Phase I — Letter of Intent Deadline: July 1, 2027', 'Phase II — Application Deadline: June 1, 2027'),
+            ('July 1, 2027 — Phase I Letter of Intent Deadline', 'June 1, 2027 — Phase II Application Deadline'),
+        ]:
+            for separator in ['; ', ' • ', '. ']:
+                with self.subTest(first=first, separator=separator):
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': first + separator + second}], entry['document'], entry['checked_at'])
+                    self.assertEqual([(f['date'], f['deadline_kind']) for f in facts],
+                        [('2027-07-01', 'letter_of_intent'), ('2027-06-01', 'application')])
+                    entry['facts'] = facts
+                    entry.pop('deadline_extractor_identity', None)
+                    result = merge_document_entry(record, entry)
+                    self.assertEqual(len([d for d in result['deadlines'] if d.get('evidence_id')]), 2)
+
+    def test_same_phase_invalid_order_is_still_withheld(self):
+        record, entry = self.entry()
+        for phase, equivalent in [('I', 'I'), ('II', 'II'), ('1', '1'), ('2', '2'), ('I', '1'), ('02', 'II')]:
+            text = f'Phase {phase} Letter of Intent Deadline: July 1, 2027; Phase {equivalent} Application Deadline: June 1, 2027'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertEqual([f['deadline_kind'] for f in facts], ['letter_of_intent'])
+
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()
         text = 'Application Deadline March 1, 2027, Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time'

@@ -167,6 +167,9 @@ date's quotation, allowing equivalent 12/24-hour and canonical regional timezone
 representations without accepting partial or conflicting zones. Unsupported
 legacy facts are withheld with the existing review warning and no new source-check
 timestamp. The regression matrix includes the adjacent fields reported in 361526.
+Date ownership includes explicit labels after a date and phase qualifiers before
+a label. Postfix labels cannot become a later field's cue, and a phase qualifier
+stays attached for ordering checks. Same-phase contradictions remain withheld.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and

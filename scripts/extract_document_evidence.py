@@ -764,14 +764,33 @@ def deadline_context(container, match):
     # PDF fields can be adjacent without punctuation. Explicit deadline labels
     # establish ownership before punctuation is examined, so a comma-attached
     # time cannot be cut off merely because another label follows it later.
+    dates = list(DATE_RE.finditer(text, start, end))
     for label in DEADLINE_LABEL_RE.finditer(text, start, end):
-        if label.start() <= match.start():
-            start = label.start()
-        elif label.start() >= match.end():
-            end = label.start()
+        label_start = label.start()
+        qualifier = re.search(r"\b(?:FY\d{2,4}\s+)?phase\s+(?:[IVX]+|\d+)\s*[-:–—]?\s*$",
+                              text[start:label_start], re.I)
+        if qualifier:
+            label_start = start + qualifier.start()
+        previous = next((date for date in reversed(dates) if date.end() <= label_start), None)
+        following = next((date for date in dates if date.start() >= label.end()), None)
+        link = TIME_RE.sub("", text[previous.end():label_start]) if previous else ""
+        postfix = previous and (following is None or
+            re.fullmatch(r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I) or
+            re.search(r"[;•|]|[.!?]\s+(?=[A-Z])", TIME_RE.sub("", text[label.end():following.start()])))
+        if postfix:
+            if previous.start() < match.start():
+                # This earlier postfix label cannot become the next date's cue.
+                start = max(start, label.end())
+            elif previous.start() > match.start():
+                end = previous.start()
+                break
+            continue
+        if label_start <= match.start():
+            start = label_start
+        elif label_start >= match.end():
+            end = label_start
             break
     scan_start = start
-    dates = list(DATE_RE.finditer(text))
     for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;,•|]\s*|\b(?i:and|or)\s+", text[scan_start:end]):
         position = scan_start + boundary.end()
         if any(date.start() <= scan_start + boundary.start() < date.end() for date in dates):
@@ -854,12 +873,15 @@ def qualify_deadline_sequence(facts, review_queue=None):
             context, offset = deadline_context({"text": quote}, match)
             kind = deadline_kind(context, offset)
             if kind and kind[0] == fact.get("deadline_kind"):
-                contexts.append(context[:offset])
+                contexts.append(context)
         return contexts
 
     def phase(fact):
-        values = {match.group(1).upper() for context in stage_contexts(fact)
-                  for match in re.finditer(r"\bphase\s+([IVX]+|\d+)\b", context, re.I)}
+        roman = {value: str(index) for index, value in enumerate(
+            ("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"), 1)}
+        tokens = [match.group(1).upper() for context in stage_contexts(fact)
+                  for match in re.finditer(r"\bphase\s+([IVX]+|\d+)\b", context, re.I)]
+        values = {str(int(token)) if token.isdigit() else roman.get(token) for token in tokens}
         return next(iter(values)) if len(values) == 1 else None
 
     preliminary = [fact for fact in facts if fact.get("type") == "deadline"
