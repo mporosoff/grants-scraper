@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-09-06T13:44:50Z</updated>
+  <updated>2026-09-07T01:21:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -259,6 +259,18 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
+  </entry>
+  <entry>
+    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
+    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
+with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
+scale, …</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
@@ -625,15 +637,5 @@
     <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
     <category term="Transportation"/>
     <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-22 | Summary: The fiscal year 2026 (FY26) Autism Research Program (ARP) Career Development Award supports early-career, independent investigators and/or the transition of established investigators from other research fields to conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism. Distinctive Features: ﻿Applications …</summary>
-  </entry>
-  <entry>
-    <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
-    <link href="https://www.grants.gov/search-results-detail/362393"/>
-    <id>urn:funding-finder:grants-gov:362393</id>
-    <updated>2026-05-14T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <category term="Transportation"/>
-    <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
   </entry>
 </feed>
