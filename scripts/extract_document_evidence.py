@@ -809,9 +809,9 @@ def deadline_context(container, match):
             value = suffix[value_link.end():].strip()
             value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
                            "", value, flags=re.I)
-            # Copular/modal value clauses can contain arbitrary modifiers before
-            # their value ("is expected to be April 1"). Search the whole owned
-            # clause, but never borrow a value from another sentence or field.
+            # A replacement needs a complete value-linking phrase. A date inside
+            # a scope annotation ("for applicants eligible as of April 1") is
+            # not the label's value, even after a colon or copula.
             predicate = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
                                  r"should|must|remains?|becomes?|changed?|changes|moved?|moves)\b)", suffix, re.I)
             owned_value = value
@@ -824,6 +824,22 @@ def deadline_context(container, match):
                     break
             dated_value = DATE_RE.search(owned_value) if predicate else DATE_RE.match(value)
             unknown_value = UNKNOWN_DEADLINE_VALUE_RE.search(owned_value) if predicate else UNKNOWN_DEADLINE_VALUE_RE.match(value)
+            if predicate:
+                def introduced_value(candidate):
+                    if not candidate:
+                        return False
+                    bridge = owned_value[:candidate.start()]
+                    # A balanced, date-free aside may interrupt the predicate:
+                    # "may, subject to confirmation, become April 1".
+                    bridge = re.sub(r",[^,]+,", " ", bridge)
+                    return bool(re.fullmatch(
+                        r"\s*(?:(?:be|been|being|is|are|was|were|will|shall|has|have|"
+                        r"may|might|can|could|should|must|remain|remains|become|becomes|"
+                        r"changed|changes|moved|moves|set|scheduled|rescheduled|due|for|on|by|at|to|"
+                        r"now|still|expected|anticipated|estimated|planned|intended|proposed|"
+                        r"extended|deferred|fixed|[a-z]+ly)\b\s*)*", bridge, re.I))
+                dated_value = introduced_value(dated_value)
+                unknown_value = introduced_value(unknown_value)
             if not value or dated_value or unknown_value:
                 postfix = False
         if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):

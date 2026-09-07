@@ -178,6 +178,9 @@ Value expressions after a grouped heading are checked through the closing
 delimiter and their linking words. Explicit phase, round, cycle, year and fiscal
 year qualifiers constrain stage ordering; every applicable preliminary stage must
 precede the application, while distinct declared rounds remain independent.
+Replacement values require a complete linking phrase, including supported modal
+modifiers. Dates and statuses inside applicant, eligibility or project-scope
+annotations cannot replace the actual deadline or become submission evidence.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -203,8 +206,9 @@ and tested tree. It rejects retargeted/advanced bases, changed heads, closure,
 missing merge identity, a different merged parent/tree, and persistent API errors.
 It does not request reviews, set checks, or
 merge; ordinary refresh behavior and automated browser-testing policy are unchanged.
-Failure rollback cannot overwrite a later protected main generation. During this
-dedicated release, Pages publication is held until the replacement has passed.
+Failure rollback cannot overwrite a later protected main generation. With this
+input, the refresh's Pages publication follows validation and protected merge of
+the generated replacement.
 
 Package construction now captures the release actually served by Pages and
 retains that exact corpus/embedding identity from the existing validated current
