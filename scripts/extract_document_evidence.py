@@ -87,6 +87,10 @@ DEADLINE_LABEL_RE = re.compile(
     r"\s+(?:submission\s+)?deadlines?\b|\b(?:submission\s+deadlines?|deadlines?\s+for)\b",
     re.I,
 )
+UNKNOWN_DEADLINE_VALUE_RE = re.compile(
+    r"\b(?:TBD|TBA|to\s+be\s+(?:announced|determined)|not\s+yet|not\s+available|pending|rolling|none|N/A)\b",
+    re.I,
+)
 DEADLINE_KINDS = (
     (
         "letter_of_intent",
@@ -778,6 +782,7 @@ def deadline_context(container, match):
         # adjacent prefix field may be empty/TBD. Require an explicit link.
         postfix = previous and re.fullmatch(
             r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I)
+        value_start = label.end()
         opening = re.fullmatch(r"[\s,]*(\(|\[)\s*", link)
         if previous and opening:
             closing = {"(": ")", "[": "]"}[opening.group(1)]
@@ -785,9 +790,19 @@ def deadline_context(container, match):
             enclosed = text[label_start:close] if close >= 0 else ""
             postfix = (close >= 0 and not re.search(r"[()\[\]]", enclosed)
                        and not DATE_RE.search(enclosed)
-                       and not re.search(r"\b(?:TBD|to\s+be\s+(?:announced|determined)|not\s+yet|pending)\b", enclosed, re.I))
-        if re.match(r"\s*:\s*(?:TBD|to\s+be\s+(?:announced|determined)|not\s+yet|pending|$)",
-                    text[label.end():end], re.I):
+                       and not UNKNOWN_DEADLINE_VALUE_RE.search(enclosed))
+            if close >= 0:
+                value_start = close + 1
+        suffix = text[value_start:end].lstrip()
+        # A grouped heading still owns any value after its closing delimiter.
+        # Only a complete clock-only annotation can augment a postfix date;
+        # an empty/unknown/new date field cannot borrow the preceding date.
+        if suffix[:1] and suffix[0] in ":=–—-":
+            value = suffix[1:].strip()
+            clock = TIME_RE.match(value)
+            if not clock or value[clock.end():].strip(" ."):
+                postfix = False
+        if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):
             postfix = False
         if postfix:
             if previous.start() < match.start():

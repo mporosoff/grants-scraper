@@ -390,10 +390,34 @@ class DeadlineOwnership(unittest.TestCase):
                         entry.pop('deadline_extractor_identity', None)
                         published = merge_document_entry(record, entry)
                         self.assertEqual(len([d for d in published['deadlines'] if d.get('evidence_id')]), 1)
-            for suffix in ['', ': TBD' + closing, ': April 1, 2027' + closing, opening + closing]:
+            invalid_suffixes = ['', ': April 1, 2027' + closing, opening + closing]
+            invalid_suffixes.extend(': ' + value + closing for value in ['TBD', 'TBA', 'to be announced', 'N/A', 'pending', 'rolling'])
+            for suffix in invalid_suffixes:
                 text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{suffix}'
                 facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
                 self.assertNotIn('2027-03-01', [f['date'] for f in facts])
+
+    def test_values_after_closed_headings_cannot_borrow_the_prior_issue_date(self):
+        record, entry = self.entry()
+        for opening, closing in [('(', ')'), ('[', ']')]:
+            cases = [(separator, value) for separator in [': ', '= ', '— ', '']
+                     for value in ['TBD', 'TBA', 'to be announced', 'pending', 'rolling', 'N/A', 'April 1, 2027']]
+            cases.append((': ', ''))
+            for separator, value in cases:
+                with self.subTest(opening=opening, value=value, separator=separator):
+                    text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{closing} {separator}{value}'
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    self.assertNotIn('2027-03-01', [f['date'] for f in facts])
+                    legacy = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 1, 2027'}],
+                                               entry['document'], entry['checked_at'])
+                    legacy[0]['citation']['quote'] = text
+                    entry['facts'] = legacy
+                    entry.pop('deadline_extractor_identity', None)
+                    published = merge_document_entry(record, entry)
+                    self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
+            text = f'March 1, 2027 {opening}Application Deadline{closing}: 5 PM Eastern'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM')])
 
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()
