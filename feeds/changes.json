@@ -1,8 +1,385 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-06T13:45:01Z",
+  "generated_at": "2026-09-07T01:35:26Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "dcd7dc774d29dd6d77a5",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "360562",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "360562",
+        "opportunity_number": "RFA-DA-27-010",
+        "title": "Neural Ensembles & Used Substances (NExUS) Collaboratory: Building a Multimodal Inventory of Cell Ensembles Encoding the Effects of Addictive Substances",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-07-01",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-03-24",
+        "version": "Forecast 3",
+        "topic_areas": [],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": null,
+        "award_ceiling": 700000,
+        "detail_page": "https://www.grants.gov/search-results-detail/360562",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-07"
+    },
+    {
+      "id": "a27da8ebba5b3c11cc38",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "361304",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "361304",
+        "opportunity_number": "PAR-26-124",
+        "title": "HEAL Initiative Whole Joint Health Program",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "forecasted",
+        "posted_date": "2026-05-31",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-02-17",
+        "version": "Forecast 1",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Environmental science",
+          "Social and behavioral sciences"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/361304",
+        "funding_opportunity_url": null,
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-07"
+    },
+    {
+      "id": "65e0934098b07dc07355",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "362191",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "362191",
+        "opportunity_number": "HT942526PCARPTRPA",
+        "title": "DoW Pancreatic Cancer Research Program, Translational Research Partnership Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-04",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Cancer"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362191",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351702"
+      },
+      "deadline": "2026-10-07"
+    },
+    {
+      "id": "5c1a8bdef4fa860557cf",
+      "type": "new",
+      "label": "New opportunity",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "vpr-email:NSF25-544",
+      "detail": "First appeared in the public catalog",
+      "record": {
+        "opportunity_id": "vpr-email:NSF25-544",
+        "opportunity_number": "NSF25-544",
+        "title": "NSF Integrated Data Systems & Services (IDSS) | NSF 25-544",
+        "agency": "VPR funding digest (limited submissions & foundations)",
+        "source": "VPR funding digest (limited submissions & foundations)",
+        "source_type": "Internal",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2027-07-27",
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Technology development",
+          "Transportation"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services",
+        "funding_opportunity_url": "https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "4df5b8c94e8423a5f67a",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "362193",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "362193",
+        "opportunity_number": "HT942526PCARPFPTA",
+        "title": "DoW Pancreatic Cancer Research Program, Focused Pilot Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-04",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Cancer"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362193",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351703"
+      },
+      "deadline": "2026-10-07"
+    },
+    {
+      "id": "3dd9850e5f615214ae68",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "362190",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "362190",
+        "opportunity_number": "HT942526PCARPIDA",
+        "title": "DoW Pancreatic Cancer Research Program, Idea Development Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-05-04",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-05-06",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Cancer"
+        ],
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://www.grants.gov/search-results-detail/362190",
+        "funding_opportunity_url": null,
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351701"
+      },
+      "deadline": "2026-10-07"
+    },
+    {
+      "id": "2b6d7bd8614a91975e63",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "363339",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363339",
+        "opportunity_number": "OFOP0003424",
+        "title": "Building Lasting U.S.-Chad Partnerships to Promote American Excellence",
+        "agency": "U.S. Mission to Chad",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-07-28",
+        "close_date": "2026-09-06",
+        "last_updated": "2026-07-28",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Technology development"
+        ],
+        "disciplines": [],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 2500,
+        "award_ceiling": 25000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363339",
+        "funding_opportunity_url": "https://mygrants.servicenowservices.com/mygrants?id=mygrants_form&table=x_g_usd4_o_grant_funding_opportunity&sys_id=6c81f4a693524b10d114b7986cba10fa&view=Default",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0974919a26cf0aa5fdcc",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "363487",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "363487",
+        "opportunity_number": "RD-AL-RDAAL-26-001",
+        "title": "Applied Drug Policy Research Experiences",
+        "agency": "Office of National Drug Control Policy",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-06",
+        "close_date": "2026-09-06",
+        "last_updated": "2026-08-06",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Education and workforce",
+          "Public health"
+        ],
+        "disciplines": [
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "Public and state institutions of higher education",
+          "Nonprofits with 501(c)(3) status",
+          "Private institutions of higher education"
+        ],
+        "funding_instruments": [
+          "Cooperative Agreement"
+        ],
+        "award_floor": 1,
+        "award_ceiling": 100000,
+        "detail_page": "https://www.grants.gov/search-results-detail/363487",
+        "funding_opportunity_url": "https://www.grantsolutions.gov/gs/preaward/previewPublicAnnouncement.do?id=127466",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "0038b477953775223d2e",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-07T01:19:56.216585Z",
+      "opportunity_id": "363700",
+      "detail": "Deadline 2026-10-07",
+      "record": {
+        "opportunity_id": "363700",
+        "opportunity_number": "USDA-NIFA-TCEG-011837",
+        "title": "Tribal Colleges Education Equity Grants Program",
+        "agency": "National Institute of Food and Agriculture",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2026-08-24",
+        "close_date": "2026-10-07",
+        "last_updated": "2026-08-24",
+        "version": "Synopsis 1",
+        "topic_areas": [
+          "Agriculture and food",
+          "Arts and culture",
+          "Education and workforce",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ],
+        "disciplines": [
+          "Environmental and Life Sciences"
+        ],
+        "applicant_types": [
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": 228571,
+        "award_ceiling": 228571,
+        "detail_page": "https://www.grants.gov/search-results-detail/363700",
+        "funding_opportunity_url": "https://www.nifa.usda.gov/grants/funding-opportunities/tribal-colleges-education-equity-grants-tceg-program",
+        "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354779"
+      },
+      "deadline": "2026-10-07"
+    },
     {
       "id": "b9a9b5e5249b9f879bff",
       "type": "closing_soon",

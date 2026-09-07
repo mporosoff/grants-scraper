@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-06T13:44:50Z</updated>
+  <updated>2026-09-07T01:21:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -17,6 +17,15 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>Rural Utilities Service | Closes 2026-10-09 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
+  </entry>
+  <entry>
+    <title>NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A25-301</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Cybersecurity"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-05</summary>
   </entry>
   <entry>
     <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
@@ -179,18 +188,6 @@
     <category term="Transportation"/>
     <category term="Cybersecurity"/>
     <summary>DOT Federal Highway Administration | Closes 2026-09-09 | The purpose of the Bollards Competitive Grant Program is to provide funding for bollard installation projects designed to prevent pedestrian injuries and acts of terrorism in areas used by large numbers of pedestrians. Eligible applicants under the Bollards Competitive Grant Program are State Departments of Transportation (State DOTs) and local government entities such as any city, county, town, p…</summary>
-  </entry>
-  <entry>
-    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
-    <link href="https://www.grants.gov/search-results-detail/363530"/>
-    <id>urn:funding-finder:grants-gov:363530</id>
-    <updated>2026-08-10T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Education and workforce"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
   </entry>
   <entry>
     <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Research Training Programs in The Education Sciences, Assistance Listing Number (ALN) 84.305B</title>

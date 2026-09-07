@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-06T13:44:50Z</updated>
+  <updated>2026-09-07T01:21:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -286,7 +286,26 @@
     <updated>2026-08-27T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
+    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
+    <updated>2026-08-27T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
+with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
+scale, …</summary>
   </entry>
   <entry>
     <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
@@ -362,6 +381,8 @@
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
     <category term="Agriculture and food"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
@@ -389,6 +410,8 @@
     <updated>2026-08-15T00:00:00Z</updated>
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-11-10 | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
   </entry>
   <entry>
@@ -425,6 +448,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
   </entry>
   <entry>
@@ -446,6 +471,8 @@ we will not consider for support include Covid-19 relat…</summary>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
 STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
   </entry>
@@ -517,16 +544,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
-  </entry>
-  <entry>
-    <title>Building Lasting U.S.-Chad Partnerships to Promote American Excellence</title>
-    <link href="https://www.grants.gov/search-results-detail/363339"/>
-    <id>urn:funding-finder:grants-gov:363339</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Chad</name></author>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Chad | Closes 2026-09-06 | The U.S. Department of State’s Embassy N’Djamena announces an open competition to implement a program to build lasting partnerships that promote American excellence and closer U.S.-Chad Ties. Programs funded under this competition will build strong relationships between the U.S. and Chad, with targeted participants including, but not limited to, students, USG exchange program alumni, business lead…</summary>
   </entry>
   <entry>
     <title>Coordinating Agricultural Development &amp; Innovation (CADI) to enable America First Trade Wins in Europe, the South Caucasus and Central Asia</title>

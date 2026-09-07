@@ -97,6 +97,12 @@ class DeadlineOwnership(unittest.TestCase):
         self.assertEqual([(f['deadline_kind'], f['date'], f['timezone']) for f in deadlines],
                          [('letter_of_intent', '2099-10-29', 'Eastern')])
         self.assertTrue(any(q['type'] == 'deadline_stage_order_conflict' for q in entry['review_queue']))
+        published = merge_document_entry(record, entry)
+        republished = merge_document_entry(published, entry)
+        warnings = [q for q in republished['document_evidence']['review_queue'] if q['type'] == 'deadline_stage_order_conflict']
+        self.assertEqual(len(warnings), 2)
+        self.assertTrue(all(q['label'] and q['status'] == 'needs_review' for q in warnings))
+        self.assertEqual(published['document_evidence']['review_queue'], republished['document_evidence']['review_queue'])
         containers, _ = extract_containers(NOTICE, 'text/html', '', record['primary_document_url'])
         self.assertNotIn('Unrelated sibling', ' '.join(c['text'] for c in containers))
         self.assertNotIn('99 million', json.dumps(entry['facts']))
@@ -117,6 +123,7 @@ class DeadlineOwnership(unittest.TestCase):
         self.assertEqual(result['document_evidence_checked_at'], timestamp)
         self.assertNotIn('2099-12-24', [d['date'] for d in result['deadlines']])
         self.assertFalse(any(holiday['id'] in q.get('evidence_ids', []) for q in entry['review_queue']))
+        self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' and q['label'] for q in result['document_evidence']['review_queue']))
 
     def test_ambiguous_article_markup_fails_and_old_unbounded_quotes_are_withheld(self):
         record, entry = self.entry()

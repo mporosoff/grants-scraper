@@ -781,6 +781,8 @@ def qualify_deadline_sequence(facts, review_queue=None):
             kept.append(fact)
         elif review_queue is not None:
             review_queue.append({"type": "deadline_stage_order_conflict",
+                "label": "Verify the current submission stages; an inconsistent or ambiguous application date was withheld",
+                "status": "needs_review",
                 "message": "An inconsistent or ambiguous application date was withheld; verify the current official submission stages.",
                 "withheld_fact_ids": [fact["id"]]})
     return kept
@@ -811,6 +813,8 @@ def revalidate_cached_deadlines(entry):
         entry["review_queue"] = [item for item in entry.get("review_queue") or []
                                  if item.get("type") != "deadline_conflict" or item.get("evidence_ids")]
         entry.setdefault("review_queue", []).append({"type": "deadline_evidence_withheld",
+            "label": "Verify the current submission stages; unsupported cached submission dates were withheld",
+            "status": "needs_review",
             "message": "Unbound or inconsistent submission dates were withheld; verify the current official submission stages.",
             "withheld_fact_ids": removed})
 
@@ -2192,6 +2196,12 @@ def merge_document_entry(record, entry):
         output["document_evidence"]["dependency_version"] = 2
         output["document_evidence"]["review_queue"] = build_review_queue(
             record, facts, bool((entry.get("document") or {}).get("changed_since_previous")), entry.get("extraction") or {})
+        # These explain extraction-time exclusions, which cannot be rebuilt
+        # from the remaining facts. Keep them through repeated projections.
+        output["document_evidence"]["review_queue"].extend(deepcopy([
+            item for item in entry.get("review_queue") or []
+            if item.get("type") in {"deadline_stage_order_conflict", "deadline_evidence_withheld"}
+        ]))
 
     deadlines = deepcopy(output.get("deadlines") or [])
     for fact in facts:

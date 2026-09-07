@@ -34,6 +34,11 @@ on:
         required: true
         default: false
         type: boolean
+      manual_release_validation:
+        description: Hold the generated PR for operator validation and protected merge
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   actions: write
@@ -478,9 +483,11 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          MANUAL_RELEASE_VALIDATION: ${{ github.event_name == 'workflow_dispatch' && inputs.manual_release_validation }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          built_from_sha="$(git rev-parse HEAD)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # data/subtopics.js is paired with its !/data/ allowlist
@@ -533,13 +540,26 @@ jobs:
               --message "Automatic rollback after refresh pull-request creation failure"
             exit 1
           fi
-          if ! gh pr merge "$pr_url" --squash --delete-branch; then
+          merge_ok=false
+          if [ "$MANUAL_RELEASE_VALIDATION" = "true" ]; then
+            echo "Generated package awaits manual validation: ${pr_url} (${head_sha})" >> "$GITHUB_STEP_SUMMARY"
+            if python -m tools.wait_refresh_review "$pr_url" "$head_sha"; then
+              merge_ok=true
+            fi
+          elif gh pr merge "$pr_url" --squash --delete-branch; then
+            merge_ok=true
+          fi
+          if [ "$merge_ok" != "true" ]; then
             current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
             echo "Refresh merge failed; current main is ${current_main_sha:-unresolved}."
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback after refresh merge failure"
+            # If another protected merge advanced main, do not roll its Worker
+            # back merely because this invocation could not observe PR state.
+            if [ "$current_main_sha" = "$built_from_sha" ]; then
+              npx --yes wrangler@4.125.0 rollback \
+                "${{ steps.prior-worker.outputs.version_id }}" \
+                --config workers/search-voyage-proxy/wrangler.jsonc \
+                --message "Automatic rollback after refresh merge failure"
+            fi
             exit 1
           fi
           merge_sha="$(gh pr view "$pr_url" --json mergeCommit --jq '.mergeCommit.oid')"

@@ -148,11 +148,22 @@ The outage contract's isolated prior model uses the current prompt dependency so
 it continues testing preservation of compatible teams instead of assuming that
 the committed production model was generated with the current code.
 
-The corrective change restores PR #159's generated files as one coherent rollback
-to the already-live known-good package. The rejected generation and its diagnostic
-receipt remain in Git history and Actions artifacts. No individual opportunity
-fact or team membership is edited. The next protected coordinated refresh uses
-the repaired writers and existing bounded caches to produce its replacement.
+The corrective change preserves PR #159's newer generated baseline. An interim
+committed rollback was rejected in review because it also restored expired calls
+and removed unrelated new records. Pages remains on its known-good deployment
+while the repaired writers and existing bounded caches produce a replacement.
+No individual opportunity fact or team membership is edited. Extraction warnings
+also survive the rebuilt catalog review queue, using the existing UI label/status
+contract and without dangling references to withheld facts.
+
+The existing refresh workflow has an optional `manual_release_validation` input.
+It creates the generated PR normally, then waits up to 30 minutes for the operator
+to review/test its exact head and merge through protection before Pages publication
+continues. The read-only checkpoint rejects head changes, closure, missing merge
+identity, and persistent API errors. It does not request reviews, set checks, or
+merge; ordinary refresh behavior and automated browser-testing policy are unchanged.
+Failure rollback cannot overwrite a later protected main generation. During this
+dedicated release, Pages publication is held until the replacement has passed.
 
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
