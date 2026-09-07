@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 19,
- "record_count": 431,
+ "parent_count": 27,
+ "record_count": 439,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -95,6 +95,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "302270": {
@@ -129,6 +130,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "314126": {
@@ -142,6 +144,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "320087": {
@@ -18006,16 +18009,120 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359996": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={F2C85D95-15CF-AB33-C8A7-2BF14ADA5A8A}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "N/A | No Due Date [3]",
+     "native_status": "no_due_date",
+     "opportunity_id": "359996:a-4",
+     "ordinal_label": "A.4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "359996",
+     "parent_opportunity_number": "NNH25ZDA001N-RRNES",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.4",
+     "subtopic_code_norm": "a-4",
+     "subtopic_id": "359996:a-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.4: Rapid Response and Novel Research in Earth Science.",
+     "term_display": {
+      "earth": "Earth",
+      "novel": "Novel",
+      "rapid": "Rapid",
+      "response": "Response",
+      "rose": "ROSES",
+      "science": "Science"
+     },
+     "title": "Rapid Response and Novel Research in Earth Science",
+     "title_fingerprint": "3356a78a",
+     "topic_areas": []
+    }
+   ]
   },
   "360004": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={C92A28D2-9E30-4149-24B7-8A40ED4F564B}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "C",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "N/A | No Due Date [5]",
+     "native_status": "no_due_date",
+     "opportunity_id": "360004:c-2",
+     "ordinal_label": "C.2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "360004",
+     "parent_opportunity_number": "NNH25ZDA001N-SCUBED",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "C.2",
+     "subtopic_code_norm": "c-2",
+     "subtopic_id": "360004:c-2",
+     "subtopic_ordinal": 22,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element C.2: Solar System Science.",
+     "term_display": {
+      "rose": "ROSES",
+      "science": "Science",
+      "solar": "Solar",
+      "system": "System"
+     },
+     "title": "Solar System Science",
+     "title_fingerprint": "292ef8ec",
+     "topic_areas": []
+    }
+   ]
   },
   "360006": {
    "segmentation_method": null,
@@ -27567,10 +27674,60 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361234": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solId={5F466EEA-6FC5-A5A1-F556-943DE971E17B}&path=&method=init",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "B",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "05/01/2026 (Step-1) | 09/25/2026 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "361234:b-2",
+     "ordinal_label": "B.2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "361234",
+     "parent_opportunity_number": "NNH25ZDA001N-HFR",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "B.2",
+     "subtopic_code_norm": "b-2",
+     "subtopic_id": "361234:b-2",
+     "subtopic_ordinal": 16,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element B.2: Heliophysics Foundational Research.",
+     "term_display": {
+      "foundational": "Foundational",
+      "heliophysic": "Heliophysics",
+      "rose": "ROSES"
+     },
+     "title": "Heliophysics Foundational Research",
+     "title_fingerprint": "94b92fa7",
+     "topic_areas": []
+    }
+   ]
   },
   "361238": {
    "segmentation_method": null,
@@ -35575,6 +35732,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363126": {
@@ -35788,10 +35946,61 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363224": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-AES",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "N/A | 10/15/2026",
+     "native_status": "dated",
+     "opportunity_id": "363224:a-13",
+     "ordinal_label": "A.13",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363224",
+     "parent_opportunity_number": "NNH25ZDA001N-AES",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.13",
+     "subtopic_code_norm": "a-13",
+     "subtopic_id": "363224:a-13",
+     "subtopic_ordinal": 12,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.13: Accelerating Earth Solutions.",
+     "term_display": {
+      "accelerat": "Accelerating",
+      "earth": "Earth",
+      "rose": "ROSES",
+      "solution": "Solutions"
+     },
+     "title": "Accelerating Earth Solutions",
+     "title_fingerprint": "f5bfef7f",
+     "topic_areas": []
+    }
+   ]
   },
   "363225": {
    "segmentation_method": null,
@@ -35822,16 +36031,114 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363240": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-ATMOS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "08/20/2026 (Mandatory NOI) | 10/20/2026",
+     "native_status": "dated",
+     "opportunity_id": "363240:a-14",
+     "ordinal_label": "A.14",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363240",
+     "parent_opportunity_number": "NNH25ZDA001N-ATMOS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.14",
+     "subtopic_code_norm": "a-14",
+     "subtopic_id": "363240:a-14",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.14: Atmosphere.",
+     "term_display": {
+      "atmosphere": "Atmosphere",
+      "rose": "ROSES"
+     },
+     "title": "Atmosphere",
+     "title_fingerprint": "cafe3eba",
+     "topic_areas": []
+    }
+   ]
   },
   "363241": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-BIOS",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "A",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "09/04/2026 (Step-1) | 11/06/2026 (Step-2)",
+     "native_status": "dated",
+     "opportunity_id": "363241:a-15",
+     "ordinal_label": "A.15",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363241",
+     "parent_opportunity_number": "NNH25ZDA001N-BIOS",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "A.15",
+     "subtopic_code_norm": "a-15",
+     "subtopic_id": "363241:a-15",
+     "subtopic_ordinal": 14,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element A.15: Biosphere.",
+     "term_display": {
+      "biosphere": "Biosphere",
+      "rose": "ROSES"
+     },
+     "title": "Biosphere",
+     "title_fingerprint": "fc4ad2d5",
+     "topic_areas": []
+    }
+   ]
   },
   "363242": {
    "segmentation_method": null,
@@ -35890,10 +36197,62 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363258": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-PSEF",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "C",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "N/A | 11/10/2026",
+     "native_status": "dated",
+     "opportunity_id": "363258:c-4",
+     "ordinal_label": "C.4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363258",
+     "parent_opportunity_number": "NNH25ZDA001N-PSEF",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "C.4",
+     "subtopic_code_norm": "c-4",
+     "subtopic_id": "363258:c-4",
+     "subtopic_ordinal": 24,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element C.4: Planetary Science Enabling Facilities.",
+     "term_display": {
+      "enabl": "Enabling",
+      "facility": "Facilities",
+      "planetary": "Planetary",
+      "rose": "ROSES",
+      "science": "Science"
+     },
+     "title": "Planetary Science Enabling Facilities",
+     "title_fingerprint": "17b03481",
+     "topic_areas": []
+    }
+   ]
   },
   "363268": {
    "segmentation_method": null,
@@ -36452,12 +36811,14 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363322": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363323": {
@@ -36475,10 +36836,64 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363325": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
+   "segmentation_method": "nasa_roses_table",
+   "subtopic_count": 1,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
+   "subtopics": [
+    {
+     "amended": true,
+     "child_source_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-HWOPSI",
+     "child_type": "subject",
+     "confidence": "high",
+     "division": "D",
+     "evidence_anchor": null,
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-08-20",
+     "last_verified": "2026-08-20",
+     "native_deadline_text": "09/10/2026 (Mandatory NOI) | 10/26/2026",
+     "native_status": "dated",
+     "opportunity_id": "363325:d-8",
+     "ordinal_label": "D.8",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": null,
+     "page_start": null,
+     "parent_id": "363325",
+     "parent_opportunity_number": "NNH25ZDA001N-HWOPSI",
+     "pattern_family": null,
+     "program_area_labels": [],
+     "publication_reason": "high_confidence",
+     "publication_state": "publishable",
+     "record_type": "subtopic",
+     "segmentation_method": null,
+     "source_document_hash": "f4138d2edd066ccc70fa67640f77235323c6ddbffb25f987e973d15aa7061e99",
+     "source_document_url": "https://solicitation.nasaprs.com/ROSES2025table3",
+     "source_role": "authoritative_announcement",
+     "source_version": {
+      "amendment": null,
+      "year": 2025
+     },
+     "status": "posted",
+     "subtopic_code": "D.8",
+     "subtopic_code_norm": "d-8",
+     "subtopic_id": "363325:d-8",
+     "subtopic_ordinal": 46,
+     "subtopic_source": "native",
+     "summary": "NASA ROSES program element D.8: Habitable Worlds Observatory Precursor Science Investigations.",
+     "term_display": {
+      "habitable": "Habitable",
+      "investigation": "Investigations",
+      "observatory": "Observatory",
+      "precursor": "Precursor",
+      "rose": "ROSES",
+      "science": "Science",
+      "world": "Worlds"
+     },
+     "title": "Habitable Worlds Observatory Precursor Science Investigations",
+     "title_fingerprint": "062f8c08",
+     "topic_areas": []
+    }
+   ]
   },
   "363326": {
    "segmentation_method": null,
@@ -36530,6 +36945,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363335": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363339": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36750,6 +37172,7 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363407": {
@@ -36997,6 +37420,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363487": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363488": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37178,7 +37608,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p12",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-1",
      "ordinal_label": "1",
@@ -37265,7 +37695,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p13",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-2",
      "ordinal_label": "2",
@@ -37348,7 +37778,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p14",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-3",
      "ordinal_label": "3",
@@ -37434,7 +37864,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p16",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-5",
      "ordinal_label": "5",
@@ -37517,7 +37947,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p17",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-6",
      "ordinal_label": "6",
@@ -37601,7 +38031,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p18",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-7",
      "ordinal_label": "7",
@@ -37687,7 +38117,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p19",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-8",
      "ordinal_label": "8",
@@ -37776,7 +38206,7 @@ globalThis.SUBTOPIC_CATALOG={
      "cov4_ownership_basis": "grants_gov_attachment_binding",
      "evidence_anchor": "p20",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-27",
+     "first_seen": "2026-08-20",
      "last_verified": "2026-08-27",
      "opportunity_id": "363526:t-9",
      "ordinal_label": "9",
@@ -39647,299 +40077,12 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
-  },
-  "arpa-h:ascent-ibo": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "arpa-h:fastpass": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "arpa-h:rest": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "arpa-h:sbir": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "arpa-h:stream": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "arpa-h:tigar": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5367": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5437": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5859": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5862": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5899": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON5989": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON6121": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON6141": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON6161": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON6201": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:PON6220": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:RFP6224": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:RFQL4922": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:RFQL5312": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:RFQL5548": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "nyserda:RFQL5937": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:23-615": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:25-301": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:26-123": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
-   "subtopics": []
-  },
-  "vpr-email:NSF26-510": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:infoready-2024058": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:infoready-2028013": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:infoready-2028504": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-02ca89881582e10d": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-0e50b8deed73ddc7": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-0f186b990288c021": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-14d5155ffe141890": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-167136617b79dc5d": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-63cc8866673bd1a1": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-779bd2ee55b34b8e": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-93df7a9faf5e4c37": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-ca54a2886f6fb184": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-ddde5b48dc92bba2": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-e1612e2acba631d2": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-e4cc1ac2aa40787d": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
   }
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 140.04405286343612,
-  "document_count": 227,
+  "average_document_length": 135.63829787234042,
+  "document_count": 235,
   "document_lengths": [
    836,
    401,
@@ -40037,6 +40180,9 @@ globalThis.SUBTOPIC_CATALOG={
    423,
    381,
    192,
+   10,
+   8,
+   12,
    5,
    3,
    5,
@@ -40160,11 +40306,16 @@ globalThis.SUBTOPIC_CATALOG={
    8,
    9,
    8,
+   8,
+   11,
+   11,
+   9,
    6,
    5,
    5,
    5,
    5,
+   16,
    1,
    2,
    1
@@ -40176,6 +40327,26 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "0.1": [
     24,
+    1
+   ],
+   "01": [
+    98,
+    1
+   ],
+   "04": [
+    224,
+    1
+   ],
+   "05": [
+    98,
+    1
+   ],
+   "06": [
+    224,
+    1
+   ],
+   "08": [
+    223,
     1
    ],
    "09": [
@@ -40342,7 +40513,13 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     81,
-    2
+    2,
+    98,
+    1,
+    224,
+    1,
+    231,
+    1
    ],
    "0d": [
     25,
@@ -40360,7 +40537,15 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     81,
-    1
+    1,
+    222,
+    1,
+    223,
+    1,
+    225,
+    1,
+    231,
+    2
    ],
    "10-1000x": [
     58,
@@ -40414,7 +40599,11 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "11": [
     3,
-    2
+    2,
+    224,
+    1,
+    225,
+    1
    ],
    "110": [
     68,
@@ -40660,7 +40849,9 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "15": [
     5,
-    2
+    2,
+    222,
+    1
    ],
    "16": [
     5,
@@ -40700,6 +40891,8 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     2,
     95,
+    2,
+    223,
     2
    ],
    "200": [
@@ -40874,7 +41067,19 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "2026": [
     95,
-    8
+    8,
+    98,
+    2,
+    222,
+    1,
+    223,
+    2,
+    224,
+    2,
+    225,
+    1,
+    231,
+    2
    ],
    "2030": [
     95,
@@ -40912,7 +41117,9 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "25": [
     10,
-    2
+    2,
+    98,
+    1
    ],
    "25th": [
     95,
@@ -40922,6 +41129,8 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     2,
     95,
+    1,
+    231,
     1
    ],
    "27": [
@@ -41235,7 +41444,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    165,
+    168,
     1
    ],
    "40": [
@@ -41879,19 +42088,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    100,
+    103,
     1,
-    113,
+    116,
     1,
-    135,
+    138,
     1,
-    139,
-    1,
-    143,
-    1,
-    144,
-    1,
-    145,
+    142,
     1,
     146,
     1,
@@ -41901,13 +42104,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     149,
     1,
-    188,
+    150,
     1,
-    199,
+    151,
     1,
-    200,
+    152,
     1,
-    201,
+    191,
     1,
     202,
     1,
@@ -41916,6 +42119,14 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
+    1,
+    208,
+    1,
+    222,
     1
    ],
    "accelerate": [
@@ -41927,15 +42138,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    178,
+    181,
     1
    ],
    "accelerator": [
-    108,
+    111,
     1,
-    185,
+    188,
     2,
-    186,
+    189,
     1
    ],
    "accelerometer": [
@@ -42093,17 +42304,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    106,
-    1,
-    174,
-    1,
-    175,
-    1,
-    176,
+    109,
     1,
     177,
     1,
     178,
+    1,
+    179,
+    1,
+    180,
+    1,
+    181,
     1
    ],
    "achievable": [
@@ -42375,7 +42586,7 @@ globalThis.SUBTOPIC_CATALOG={
    "actuator": [
     37,
     1,
-    186,
+    189,
     1
    ],
    "acute": [
@@ -42695,7 +42906,7 @@ globalThis.SUBTOPIC_CATALOG={
    "adoption": [
     16,
     1,
-    142,
+    145,
     1
    ],
    "adsorption": [
@@ -42781,13 +42992,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
-    1,
-    117,
-    1,
-    118,
-    1,
-    119,
+    99,
     1,
     120,
     1,
@@ -42795,13 +43000,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     122,
     1,
-    145,
+    123,
     1,
-    174,
+    124,
     1,
-    216,
+    125,
     1,
-    218,
+    148,
+    1,
+    177,
+    1,
+    219,
+    1,
+    221,
     1
    ],
    "advance": [
@@ -42899,7 +43110,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    205,
+    208,
     1
    ],
    "advantage": [
@@ -42925,7 +43136,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    157,
+    160,
     1
    ],
    "advantageou": [
@@ -42961,7 +43172,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     2,
-    209,
+    212,
     1
    ],
    "adversary": [
@@ -43109,7 +43320,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     89,
     3,
-    201,
+    204,
     1
    ],
    "agent-bas": [
@@ -43117,7 +43328,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "agentic": [
-    117,
+    120,
     1
    ],
    "aggressive": [
@@ -43193,21 +43404,15 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     89,
     2,
-    102,
+    105,
     1,
-    114,
+    117,
     1,
-    142,
-    1,
-    150,
-    1,
-    151,
+    145,
     1,
     153,
     1,
     154,
-    1,
-    155,
     1,
     156,
     1,
@@ -43221,63 +43426,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     161,
     1,
-    175,
+    162,
     1,
-    188,
-    1,
-    203,
-    1,
-    205,
-    1,
-    206,
-    1,
-    207,
-    1,
-    208,
-    1,
-    209,
-    1,
-    211,
-    1,
-    212,
-    1
-   ],
-   "ai-accelerat": [
-    176,
-    1
-   ],
-   "ai-assist": [
-    137,
-    1,
-    140,
-    1,
-    141,
-    1
-   ],
-   "ai-driven": [
-    106,
-    1,
-    115,
-    1,
-    117,
-    1,
-    118,
+    163,
     1,
     164,
     1,
-    174,
-    1,
-    175,
-    1,
-    176,
-    1,
-    177,
-    1,
     178,
     1,
-    185,
+    191,
     1,
-    199,
+    206,
+    1,
+    208,
     1,
     209,
     1,
@@ -43285,23 +43446,73 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
+    212,
+    1,
+    214,
+    1,
+    215,
+    1
+   ],
+   "ai-accelerat": [
+    179,
+    1
+   ],
+   "ai-assist": [
+    140,
+    1,
+    143,
+    1,
+    144,
+    1
+   ],
+   "ai-driven": [
+    109,
+    1,
+    118,
+    1,
+    120,
+    1,
+    121,
+    1,
+    167,
+    1,
+    177,
+    1,
+    178,
+    1,
+    179,
+    1,
+    180,
+    1,
+    181,
+    1,
+    188,
+    1,
+    202,
+    1,
+    212,
+    1,
     213,
+    1,
+    214,
+    1,
+    216,
     1
    ],
    "ai-enabl": [
     82,
     10,
-    119,
+    122,
     1,
-    121,
+    124,
     1,
-    127,
+    130,
     1,
-    129,
+    132,
     1,
-    177,
+    180,
     1,
-    183,
+    186,
     1
    ],
    "ai-integration": [
@@ -43373,7 +43584,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "aiop": [
-    175,
+    178,
     1
    ],
    "air": [
@@ -43531,17 +43742,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    102,
+    105,
     1,
-    153,
-    1,
-    154,
-    1,
-    155,
-    2,
     156,
-    2,
+    1,
     157,
+    1,
+    158,
+    2,
+    159,
+    2,
+    160,
     1
    ],
    "algorithmic": [
@@ -43741,15 +43952,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "america": [
-    98,
+    101,
     1,
-    104,
-    1,
-    128,
-    1,
-    129,
-    1,
-    130,
+    107,
     1,
     131,
     1,
@@ -43759,11 +43964,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    162,
+    135,
     1,
-    163,
+    136,
     1,
-    164,
+    137,
     1,
     165,
     1,
@@ -43778,16 +43983,22 @@ globalThis.SUBTOPIC_CATALOG={
     170,
     1,
     171,
+    1,
+    172,
+    1,
+    173,
+    1,
+    174,
     1
    ],
    "american": [
-    111,
+    114,
     1,
-    193,
+    196,
     1,
-    194,
+    197,
     1,
-    195,
+    198,
     1
    ],
    "amo": [
@@ -43943,9 +44154,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     8,
-    130,
+    133,
     1,
-    193,
+    196,
     1
    ],
    "analyst": [
@@ -44053,7 +44264,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "angstrom": [
-    162,
+    165,
     1
    ],
    "animal": [
@@ -44417,7 +44628,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "application-aware": [
-    153,
+    156,
     1
    ],
    "application-specific": [
@@ -44553,7 +44764,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    145,
+    148,
     1
    ],
    "appropriate": [
@@ -44651,9 +44862,9 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    163,
+    166,
     1,
-    164,
+    167,
     1
    ],
    "arctic": [
@@ -45617,15 +45828,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    116,
+    119,
     1,
-    178,
+    181,
     1,
-    212,
+    215,
     1,
-    213,
+    216,
     1,
-    214,
+    217,
     1
    ],
    "artificially": [
@@ -45783,13 +45994,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    112,
+    115,
     1,
-    196,
+    199,
     1,
-    197,
+    200,
     1,
-    198,
+    201,
     1
    ],
    "assimilation": [
@@ -45928,6 +46139,8 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     1,
     9,
+    1,
+    223,
     1
    ],
    "atmospheric": [
@@ -45941,7 +46154,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     1,
-    190,
+    193,
     1
    ],
    "atom": [
@@ -45985,7 +46198,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    211,
+    214,
     1
    ],
    "attacker": [
@@ -46081,7 +46294,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    200,
+    203,
     1
    ],
    "automatic": [
@@ -46125,21 +46338,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    106,
+    109,
     1,
-    136,
+    139,
     1,
-    138,
-    1,
-    174,
-    1,
-    175,
-    1,
-    176,
+    141,
     1,
     177,
     1,
     178,
+    1,
+    179,
+    1,
+    180,
+    1,
+    181,
     1
    ],
    "autonomously": [
@@ -46937,7 +47150,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
+    219,
     1
    ],
    "behavioral": [
@@ -47177,7 +47390,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     67,
     1,
-    126,
+    129,
     1
    ],
    "bio-chemical": [
@@ -47295,9 +47508,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     79,
     2,
-    127,
+    130,
     1,
-    134,
+    137,
     1
    ],
    "biology": [
@@ -47343,9 +47556,9 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     6,
     1,
-    123,
+    126,
     1,
-    181,
+    184,
     1
    ],
    "biomolecule": [
@@ -47359,7 +47572,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "bioreactor": [
-    127,
+    130,
     1
    ],
    "biosens": [
@@ -47368,6 +47581,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "biosphere": [
     3,
+    1,
+    224,
     1
    ],
    "biosynthetic": [
@@ -47395,17 +47610,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    97,
-    1,
-    123,
-    1,
-    124,
-    1,
-    125,
+    100,
     1,
     126,
     1,
     127,
+    1,
+    128,
+    1,
+    129,
+    1,
+    130,
     1
    ],
    "biotronic": [
@@ -47443,7 +47658,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "blanket": [
-    147,
+    150,
     1
    ],
    "blast": [
@@ -47693,7 +47908,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "breed": [
-    147,
+    150,
     1
    ],
    "brenda": [
@@ -48269,7 +48484,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "carbon": [
-    217,
+    220,
     1
    ],
    "carbon-carbon": [
@@ -48331,9 +48546,9 @@ globalThis.SUBTOPIC_CATALOG={
    "catalyst": [
     26,
     1,
-    184,
+    187,
     1,
-    220,
+    227,
     1
    ],
    "catalytic": [
@@ -48403,11 +48618,11 @@ globalThis.SUBTOPIC_CATALOG={
    "center": [
     93,
     1,
-    105,
+    108,
     1,
-    172,
+    175,
     2,
-    173,
+    176,
     2
    ],
    "central": [
@@ -48685,9 +48900,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     86,
     1,
-    140,
+    143,
     1,
-    216,
+    219,
     1
    ],
    "characterize": [
@@ -48733,13 +48948,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cheaper": [
-    99,
-    1,
-    135,
-    1,
-    136,
-    1,
-    137,
+    102,
     1,
     138,
     1,
@@ -48750,6 +48959,12 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
+    1,
+    145,
     1
    ],
    "chemical": [
@@ -48779,9 +48994,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     1,
-    117,
+    120,
     1,
-    196,
+    199,
     1
    ],
    "chemicalthe": [
@@ -48871,9 +49086,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     1,
-    166,
+    169,
     1,
-    178,
+    181,
     1
    ],
    "circular": [
@@ -48955,7 +49170,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    142,
+    145,
     1
    ],
    "classifier": [
@@ -49035,7 +49250,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     92,
     2,
-    190,
+    193,
     1
    ],
    "cloudlet": [
@@ -49055,7 +49270,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cmm": [
-    134,
+    137,
     1
    ],
    "co-crystal": [
@@ -49087,11 +49302,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "co2": [
-    217,
+    220,
     1
    ],
    "coal": [
-    224,
+    232,
     1
    ],
    "coating": [
@@ -49109,21 +49324,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     38,
     1,
-    113,
+    116,
     1,
-    199,
-    2,
-    200,
-    1,
-    201,
-    2,
     202,
-    1,
+    2,
     203,
     1,
     204,
     2,
     205,
+    1,
+    206,
+    1,
+    207,
+    2,
+    208,
     1
    ],
    "coefficient": [
@@ -49543,9 +49758,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
-    169,
+    172,
     1,
-    171,
+    174,
     1
    ],
    "communist": [
@@ -49567,7 +49782,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    125,
+    128,
     1
    ],
    "compar": [
@@ -49919,7 +50134,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    212,
+    215,
     1
    ],
    "complexe": [
@@ -49961,7 +50176,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    189,
+    192,
     1
    ],
    "compliant": [
@@ -50017,13 +50232,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     5,
-    116,
+    119,
     1,
-    212,
+    215,
     1,
-    213,
+    216,
     1,
-    214,
+    217,
     1
    ],
    "component-level": [
@@ -50037,7 +50252,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "composable": [
-    208,
+    211,
     1
    ],
    "compose": [
@@ -50139,13 +50354,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    161,
+    164,
     1,
-    163,
+    166,
     1,
-    171,
+    174,
     1,
-    178,
+    181,
     1
    ],
    "computation": [
@@ -50173,7 +50388,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    170,
+    173,
     1
    ],
    "computational": [
@@ -50257,7 +50472,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     2,
-    154,
+    157,
     2
    ],
    "computationally": [
@@ -50277,7 +50492,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "compute-in-memory": [
-    165,
+    168,
     1
    ],
    "computer": [
@@ -50593,7 +50808,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    145,
+    148,
     1
    ],
    "confirm": [
@@ -50651,7 +50866,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    133,
+    136,
     1
    ],
    "connectivity": [
@@ -50661,7 +50876,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     75,
     1,
-    171,
+    174,
     1
    ],
    "conop": [
@@ -50835,7 +51050,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     1,
-    137,
+    140,
     1
    ],
    "consumption": [
@@ -51081,11 +51296,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    159,
+    162,
     1,
-    198,
+    201,
     1,
-    213,
+    216,
     1
    ],
    "controll": [
@@ -51185,7 +51400,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     75,
     1,
-    184,
+    187,
     1
    ],
    "convert": [
@@ -51281,7 +51496,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     42,
     1,
-    153,
+    156,
     1
    ],
    "correctness": [
@@ -51301,7 +51516,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     43,
     1,
-    176,
+    179,
     1
    ],
    "correlative": [
@@ -51323,17 +51538,17 @@ globalThis.SUBTOPIC_CATALOG={
    "cosmic": [
     49,
     1,
-    187,
+    190,
     1
    ],
    "cosmo": [
-    109,
+    112,
     1,
-    187,
+    190,
     1,
-    188,
+    191,
     1,
-    189,
+    192,
     1
    ],
    "cost": [
@@ -51645,13 +51860,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    98,
-    1,
-    128,
-    1,
-    129,
-    1,
-    130,
+    101,
     1,
     131,
     1,
@@ -51660,6 +51869,12 @@ globalThis.SUBTOPIC_CATALOG={
     133,
     1,
     134,
+    1,
+    135,
+    1,
+    136,
+    1,
+    137,
     1
    ],
    "critically": [
@@ -51747,7 +51962,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "crust": [
-    197,
+    200,
     1
    ],
    "cryptographic": [
@@ -51801,13 +52016,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "curation": [
-    113,
-    1,
-    199,
-    1,
-    200,
-    1,
-    201,
+    116,
     1,
     202,
     1,
@@ -51816,6 +52025,12 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
+    1,
+    208,
     1
    ],
    "current": [
@@ -52131,13 +52346,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cybersecurity": [
     87,
     2,
-    115,
+    118,
     1,
-    209,
+    212,
     1,
-    210,
+    213,
     1,
-    211,
+    214,
     1
    ],
    "cyberspace": [
@@ -52157,9 +52372,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    139,
+    142,
     1,
-    146,
+    149,
     1
    ],
    "damage": [
@@ -52313,17 +52528,17 @@ globalThis.SUBTOPIC_CATALOG={
     9,
     94,
     1,
-    105,
+    108,
     1,
-    172,
+    175,
     2,
-    173,
+    176,
     2,
-    204,
-    1,
     207,
     1,
     210,
+    1,
+    213,
     1
    ],
    "data-driven": [
@@ -52337,7 +52552,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    214,
+    217,
     1
    ],
    "data-feed": [
@@ -52365,7 +52580,7 @@ globalThis.SUBTOPIC_CATALOG={
    "dataset": [
     68,
     1,
-    189,
+    192,
     1
    ],
    "datatype": [
@@ -52374,6 +52589,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "date": [
     92,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "david": [
@@ -52767,13 +52986,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "deliver": [
-    99,
-    1,
-    135,
-    1,
-    136,
-    1,
-    137,
+    102,
     1,
     138,
     1,
@@ -52784,6 +52997,12 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
+    1,
+    145,
     1
    ],
    "delivery": [
@@ -52793,13 +53012,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    100,
-    1,
-    143,
-    1,
-    144,
-    1,
-    145,
+    103,
     1,
     146,
     1,
@@ -52808,6 +53021,12 @@ globalThis.SUBTOPIC_CATALOG={
     148,
     1,
     149,
+    1,
+    150,
+    1,
+    151,
+    1,
+    152,
     1
    ],
    "demand": [
@@ -53283,29 +53502,23 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    107,
+    110,
     1,
-    126,
+    129,
     1,
-    127,
+    130,
     1,
-    135,
+    138,
     1,
-    139,
+    142,
     1,
-    141,
+    144,
     1,
-    158,
+    161,
     1,
-    164,
+    167,
     1,
-    166,
-    1,
-    178,
-    1,
-    179,
-    1,
-    180,
+    169,
     1,
     181,
     1,
@@ -53315,7 +53528,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    213,
+    185,
+    1,
+    186,
+    1,
+    187,
+    1,
+    216,
     1
    ],
    "designer": [
@@ -53437,7 +53656,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    211,
+    214,
     1
    ],
    "detectivity": [
@@ -53845,31 +54064,31 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     4,
-    113,
+    116,
     1,
-    128,
+    131,
     1,
-    138,
+    141,
     1,
-    142,
+    145,
     1,
-    183,
+    186,
     1,
-    199,
-    1,
-    200,
-    1,
-    201,
-    2,
     202,
     1,
     203,
     1,
     204,
-    1,
+    2,
     205,
     1,
-    215,
+    206,
+    1,
+    207,
+    1,
+    208,
+    1,
+    218,
     1
    ],
    "developmental": [
@@ -53923,7 +54142,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     93,
     1,
-    163,
+    166,
     1
    ],
    "devis": [
@@ -53947,9 +54166,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     92,
     1,
-    177,
+    180,
     1,
-    216,
+    219,
     1
    ],
    "diamond": [
@@ -54067,11 +54286,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    186,
+    189,
     1
    ],
    "digitalization": [
-    120,
+    123,
     1
    ],
    "digitally": [
@@ -54121,7 +54340,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "dioxide": [
-    217,
+    220,
     1
    ],
    "direct": [
@@ -54489,17 +54708,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    102,
-    1,
-    153,
-    1,
-    154,
-    1,
-    155,
+    105,
     1,
     156,
     1,
     157,
+    1,
+    158,
+    1,
+    159,
+    1,
+    160,
     1
    ],
    "discovery": [
@@ -54543,37 +54762,31 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    103,
+    106,
     1,
-    108,
+    111,
     1,
-    113,
+    116,
     1,
-    129,
-    1,
-    158,
-    1,
-    159,
-    1,
-    160,
+    132,
     1,
     161,
     1,
-    183,
+    162,
     1,
-    184,
+    163,
     1,
-    185,
+    164,
     1,
     186,
     1,
+    187,
+    1,
+    188,
+    1,
     189,
     1,
-    199,
-    1,
-    200,
-    1,
-    201,
+    192,
     1,
     202,
     1,
@@ -54582,6 +54795,12 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
+    1,
+    208,
     1
    ],
    "discrete": [
@@ -54667,7 +54886,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "disposition": [
-    141,
+    144,
     1
    ],
    "disrupt": [
@@ -54866,6 +55085,24 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1,
     28,
+    1
+   ],
+   "division": [
+    96,
+    1,
+    97,
+    1,
+    98,
+    1,
+    222,
+    1,
+    223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    231,
     1
    ],
    "dmitry": [
@@ -55075,7 +55312,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    142,
+    145,
     1
    ],
    "dod": [
@@ -55151,7 +55388,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "domestic": [
-    139,
+    142,
     1
    ],
    "dominance": [
@@ -55362,10 +55599,14 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     93,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "dune": [
-    188,
+    191,
     1
    ],
    "dur": [
@@ -55389,7 +55630,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "durability": [
-    213,
+    216,
     1
    ],
    "duration": [
@@ -55479,7 +55720,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     4,
-    174,
+    177,
     1
    ],
    "dynamical": [
@@ -55596,6 +55837,10 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     80,
+    1,
+    96,
+    1,
+    222,
     1
    ],
    "ease": [
@@ -55623,17 +55868,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    130,
+    133,
     1
    ],
    "economy": [
-    111,
+    114,
     1,
-    193,
+    196,
     1,
-    194,
+    197,
     1,
-    195,
+    198,
     1
    ],
    "ecosystem": [
@@ -55881,7 +56126,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    142,
+    145,
     1
    ],
    "efficiently": [
@@ -56055,7 +56300,7 @@ globalThis.SUBTOPIC_CATALOG={
    "electrochemical": [
     10,
     6,
-    184,
+    187,
     1
    ],
    "electrochemistry": [
@@ -56241,9 +56486,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    169,
+    172,
     1,
-    170,
+    173,
     1
    ],
    "electronically": [
@@ -56331,7 +56576,7 @@ globalThis.SUBTOPIC_CATALOG={
    "em": [
     80,
     3,
-    150,
+    153,
     1
    ],
    "email": [
@@ -56357,7 +56602,7 @@ globalThis.SUBTOPIC_CATALOG={
    "embodi": [
     6,
     2,
-    178,
+    181,
     1
    ],
    "embodiment": [
@@ -56553,7 +56798,7 @@ globalThis.SUBTOPIC_CATALOG={
     6
    ],
    "emulation": [
-    166,
+    169,
     1
    ],
    "enabl": [
@@ -56594,7 +56839,9 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    2
+    2,
+    225,
+    1
    ],
    "enable": [
     0,
@@ -56753,7 +57000,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "end": [
-    141,
+    144,
     1
    ],
    "end-to-end": [
@@ -56867,25 +57114,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    99,
+    102,
     1,
-    100,
+    103,
     1,
-    110,
+    113,
     1,
-    112,
-    1,
-    116,
+    115,
     1,
     119,
     1,
     122,
     1,
-    135,
-    1,
-    136,
-    1,
-    137,
+    125,
     1,
     138,
     1,
@@ -56911,25 +57152,31 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     149,
     1,
-    184,
+    150,
     1,
-    190,
+    151,
     1,
-    191,
+    152,
+    1,
+    187,
+    1,
+    193,
+    1,
+    194,
     2,
-    192,
+    195,
     1,
-    196,
+    199,
     1,
-    197,
+    200,
     1,
-    198,
+    201,
     1,
-    212,
+    215,
     1,
-    213,
+    216,
     1,
-    214,
+    217,
     1
    ],
    "energyg": [
@@ -57029,13 +57276,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    125,
+    128,
     1,
-    127,
+    130,
     1,
-    129,
+    132,
     1,
-    148,
+    151,
     1
    ],
    "engineerable": [
@@ -57081,17 +57328,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    108,
+    111,
     1,
-    185,
+    188,
     1,
-    186,
+    189,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1,
-    219,
+    226,
     1
    ],
    "enhance": [
@@ -57133,7 +57380,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     67,
     1,
-    222,
+    229,
     1
    ],
    "enhancer": [
@@ -57379,9 +57626,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    167,
+    170,
     1,
-    174,
+    177,
     1
    ],
    "environment-task-technology": [
@@ -57551,7 +57798,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     27,
     1,
-    153,
+    156,
     1
    ],
    "error-correction": [
@@ -57561,7 +57808,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "erupt": [
-    219,
+    226,
     1
    ],
    "es": [
@@ -57855,7 +58102,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    197,
+    200,
     1
    ],
    "evolutionary": [
@@ -58187,7 +58434,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "expedit": [
-    189,
+    192,
     1
    ],
    "expeditionary": [
@@ -58571,7 +58818,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "extraction": [
-    131,
+    134,
     1
    ],
    "extraordinary": [
@@ -58641,7 +58888,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     3,
-    119,
+    122,
     1
    ],
    "extreme-scale": [
@@ -58741,9 +58988,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    139,
+    142,
     1,
-    185,
+    188,
+    1,
+    225,
     1
    ],
    "fact": [
@@ -58851,13 +59100,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    99,
-    1,
-    135,
-    1,
-    136,
-    1,
-    137,
+    102,
     1,
     138,
     1,
@@ -58868,6 +59111,12 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
+    1,
+    145,
     1
    ],
    "fate": [
@@ -58885,7 +59134,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    154,
+    157,
     1
    ],
    "favor": [
@@ -58933,7 +59182,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     2,
-    202,
+    205,
     1
    ],
    "feedback-loop": [
@@ -59059,9 +59308,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     2,
-    215,
+    218,
     1,
-    221,
+    228,
     1
    ],
    "field-generat": [
@@ -59069,7 +59318,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "field-test": [
-    218,
+    221,
     1
    ],
    "fight": [
@@ -59111,7 +59360,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "finder": [
-    132,
+    135,
     1
    ],
    "finite": [
@@ -59197,7 +59446,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    172,
+    175,
     1
    ],
    "flexible": [
@@ -59249,13 +59498,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     51,
     1,
-    116,
+    119,
     1,
-    212,
+    215,
     2,
-    213,
+    216,
     1,
-    214,
+    217,
     1
    ],
    "fluctuat": [
@@ -59285,13 +59534,13 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     38,
     1,
-    116,
+    119,
     1,
-    212,
+    215,
     1,
-    213,
+    216,
     1,
-    214,
+    217,
     1
    ],
    "fluorine-contain": [
@@ -59697,11 +59946,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    151,
+    154,
     1,
-    187,
+    190,
     1,
-    208,
+    211,
     1
    ],
    "foundational": [
@@ -59896,7 +60145,9 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     95,
-    3
+    3,
+    98,
+    1
    ],
    "four": [
     72,
@@ -59913,11 +60164,11 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "fracture": [
-    197,
+    200,
     1,
-    198,
+    201,
     1,
-    216,
+    219,
     1
    ],
    "fragment": [
@@ -60053,9 +60304,9 @@ globalThis.SUBTOPIC_CATALOG={
    "fuel": [
     59,
     1,
-    139,
+    142,
     2,
-    146,
+    149,
     1
    ],
    "fulda": [
@@ -60079,7 +60330,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
-    221,
+    228,
     1
    ],
    "fully": [
@@ -60147,7 +60398,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    179,
+    182,
     1
    ],
    "functionality": [
@@ -60163,19 +60414,19 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    107,
-    1,
-    179,
-    1,
-    180,
-    1,
-    181,
+    110,
     1,
     182,
     1,
     183,
     1,
     184,
+    1,
+    185,
+    1,
+    186,
+    1,
+    187,
     1
    ],
    "functionalization": [
@@ -60329,23 +60580,23 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    100,
-    1,
-    143,
-    1,
-    144,
-    1,
-    145,
+    103,
     1,
     146,
     1,
     147,
     1,
     148,
-    2,
+    1,
     149,
     1,
-    186,
+    150,
+    1,
+    151,
+    2,
+    152,
+    1,
+    189,
     1
    ],
    "future": [
@@ -60531,11 +60782,11 @@ globalThis.SUBTOPIC_CATALOG={
    "gas": [
     1,
     2,
-    215,
+    218,
     1,
-    217,
+    220,
     1,
-    225,
+    233,
     1
    ],
    "gase": [
@@ -60899,9 +61150,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    200,
+    203,
     1,
-    207,
+    210,
     1
    ],
    "generic": [
@@ -60923,7 +61174,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "genotype": [
-    124,
+    127,
     1
    ],
    "geo-physical": [
@@ -60937,7 +61188,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geological": [
-    132,
+    135,
     1
    ],
    "geometric": [
@@ -60989,7 +61240,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geothermal": [
-    226,
+    234,
     1
    ],
    "gerde": [
@@ -61261,13 +61512,13 @@ globalThis.SUBTOPIC_CATALOG={
    "grid": [
     49,
     1,
-    111,
+    114,
     1,
-    193,
+    196,
     2,
-    194,
+    197,
     2,
-    195,
+    198,
     1
    ],
    "ground": [
@@ -61408,8 +61659,12 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1
    ],
+   "habitable": [
+    231,
+    1
+   ],
    "hadronic": [
-    157,
+    160,
     1
    ],
    "half-live": [
@@ -61431,7 +61686,7 @@ globalThis.SUBTOPIC_CATALOG={
    "handl": [
     15,
     1,
-    177,
+    180,
     1
    ],
    "handle": [
@@ -61479,7 +61734,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    171,
+    174,
     1
    ],
    "harikumar": [
@@ -61499,7 +61754,7 @@ globalThis.SUBTOPIC_CATALOG={
    "harsh": [
     35,
     1,
-    167,
+    170,
     1
    ],
    "harvest": [
@@ -61560,6 +61815,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "heavy": [
     37,
+    1
+   ],
+   "heliophysic": [
+    98,
     1
    ],
    "help": [
@@ -61741,7 +62000,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    189,
+    192,
     1
    ],
    "high-altitude": [
@@ -61959,7 +62218,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hits": [
-    223,
+    230,
     1
    ],
    "hoc": [
@@ -62085,13 +62344,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hpc": [
-    113,
-    1,
-    199,
-    1,
-    200,
-    1,
-    201,
+    116,
     1,
     202,
     1,
@@ -62100,6 +62353,12 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
+    1,
+    208,
     2
    ],
    "hsi": [
@@ -62345,7 +62604,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     73,
     1,
-    155,
+    158,
     1
    ],
    "hybridiz": [
@@ -62357,11 +62616,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hydrocarbon": [
-    223,
+    230,
     1
    ],
    "hydrologic": [
-    196,
+    199,
     1
    ],
    "hydrophobicity": [
@@ -62387,7 +62646,7 @@ globalThis.SUBTOPIC_CATALOG={
    "hypothesi": [
     4,
     1,
-    207,
+    210,
     1
    ],
    "hysteresi": [
@@ -62877,7 +63136,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    160,
+    163,
     1
    ],
    "image": [
@@ -63005,7 +63264,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    150,
+    153,
     1
    ],
    "implication": [
@@ -63685,19 +63944,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
-    1,
-    117,
-    1,
-    118,
-    1,
-    119,
+    99,
     1,
     120,
-    2,
+    1,
     121,
     1,
     122,
+    1,
+    123,
+    2,
+    124,
+    1,
+    125,
     1
    ],
    "industry": [
@@ -63705,7 +63964,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    142,
+    145,
     1
    ],
    "inelastic": [
@@ -64013,9 +64272,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     34,
     1,
-    222,
+    229,
     1,
-    223,
+    230,
     1
    ],
    "infrastructure-less": [
@@ -64363,15 +64622,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    127,
+    130,
     1,
-    148,
+    151,
     1,
-    171,
+    174,
     1,
-    186,
+    189,
     1,
-    204,
+    207,
     1
    ],
    "integrative": [
@@ -64389,7 +64648,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     74,
     1,
-    210,
+    213,
     1
    ],
    "intelligence": [
@@ -64443,17 +64702,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     2,
-    116,
+    119,
     1,
-    178,
+    181,
     1,
-    204,
+    207,
     1,
-    212,
+    215,
     1,
-    213,
+    216,
     1,
-    214,
+    217,
     2
    ],
    "intelligent": [
@@ -64657,7 +64916,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     4,
-    187,
+    190,
     1
    ],
    "interactional": [
@@ -65190,6 +65449,8 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1,
     87,
+    1,
+    231,
     1
    ],
    "invincible": [
@@ -65271,7 +65532,7 @@ globalThis.SUBTOPIC_CATALOG={
    "isolation": [
     93,
     1,
-    133,
+    136,
     1
    ],
    "isomer": [
@@ -65549,7 +65810,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "keeper": [
-    132,
+    135,
     1
    ],
    "key": [
@@ -65889,19 +66150,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     2,
-    106,
-    1,
-    174,
-    2,
-    175,
-    1,
-    176,
+    109,
     1,
     177,
-    1,
+    2,
     178,
     1,
-    220,
+    179,
+    1,
+    180,
+    1,
+    181,
+    1,
+    227,
     1
    ],
    "lack": [
@@ -66133,11 +66394,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     29,
     1,
-    105,
+    108,
     1,
-    172,
+    175,
     1,
-    173,
+    176,
     1
    ],
    "leap": [
@@ -66259,7 +66520,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "legacy": [
-    142,
+    145,
     1
    ],
    "length": [
@@ -66465,9 +66726,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "licens": [
-    135,
+    138,
     1,
-    139,
+    142,
     1
    ],
    "lidar": [
@@ -66807,7 +67068,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    172,
+    175,
     1
    ],
    "local": [
@@ -66973,7 +67234,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    202,
+    205,
     1
    ],
    "loosely": [
@@ -67067,7 +67328,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "low-temperature": [
-    170,
+    173,
     1
    ],
    "lower": [
@@ -67485,13 +67746,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    173,
+    176,
     1
    ],
    "manager": [
     9,
     1,
     93,
+    1
+   ],
+   "mandatory": [
+    223,
+    1,
+    231,
     1
    ],
    "maneuver": [
@@ -67637,25 +67904,25 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    96,
+    99,
     1,
-    117,
-    2,
-    118,
-    1,
-    119,
-    2,
     120,
-    1,
-    121,
     2,
+    121,
+    1,
     122,
     2,
-    137,
+    123,
     1,
-    162,
+    124,
+    2,
+    125,
+    2,
+    140,
     1,
-    168,
+    165,
+    1,
+    171,
     1
    ],
    "manufacture": [
@@ -67695,7 +67962,7 @@ globalThis.SUBTOPIC_CATALOG={
     7
    ],
    "mapp": [
-    128,
+    131,
     1
    ],
    "maps": [
@@ -67739,7 +68006,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "market": [
-    130,
+    133,
     1
    ],
    "markovian": [
@@ -67893,31 +68160,31 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    107,
+    110,
     1,
-    118,
+    121,
     1,
-    122,
+    125,
     1,
-    129,
+    132,
     1,
-    143,
+    146,
     1,
-    144,
+    147,
     1,
-    163,
+    166,
     1,
-    179,
-    2,
-    180,
-    2,
-    181,
-    2,
     182,
     2,
     183,
     2,
     184,
+    2,
+    185,
+    2,
+    186,
+    2,
+    187,
     1
    ],
    "materials-by-design": [
@@ -67999,7 +68266,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     83,
     2,
-    206,
+    209,
     1
    ],
    "mathematically": [
@@ -68745,7 +69012,7 @@ globalThis.SUBTOPIC_CATALOG={
    "microbial": [
     19,
     9,
-    125,
+    128,
     1
    ],
    "microbiological": [
@@ -68765,27 +69032,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "microelectronic": [
-    104,
-    1,
-    162,
-    2,
-    163,
-    1,
-    164,
+    107,
     1,
     165,
-    1,
+    2,
     166,
     1,
     167,
-    2,
+    1,
     168,
-    2,
+    1,
     169,
     1,
     170,
-    1,
+    2,
     171,
+    2,
+    172,
+    1,
+    173,
+    1,
+    174,
     1
    ],
    "microenvironment": [
@@ -68803,7 +69070,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "microphysic": [
-    190,
+    193,
     1
    ],
    "microscale": [
@@ -68955,13 +69222,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     1,
-    98,
-    1,
-    128,
-    1,
-    129,
-    1,
-    130,
+    101,
     1,
     131,
     1,
@@ -68970,6 +69231,12 @@ globalThis.SUBTOPIC_CATALOG={
     133,
     1,
     134,
+    1,
+    135,
+    1,
+    136,
+    1,
+    137,
     1
    ],
    "minima": [
@@ -69149,7 +69416,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    211,
+    214,
     1
    ],
    "mitochondria": [
@@ -69223,7 +69490,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    142,
+    145,
     1
    ],
    "ml-bas": [
@@ -69421,19 +69688,19 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     5,
-    130,
+    133,
     1,
-    151,
+    154,
     1,
-    187,
+    190,
     1,
-    193,
-    1,
-    208,
+    196,
     1,
     211,
     1,
-    212,
+    214,
+    1,
+    215,
     1
    ],
    "model-bas": [
@@ -69679,7 +69946,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "modular": [
-    208,
+    211,
     1
    ],
    "modularity": [
@@ -70053,9 +70320,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    204,
-    1,
     207,
+    1,
+    210,
     1
    ],
    "multi-particle": [
@@ -70081,7 +70348,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     63,
     1,
-    218,
+    221,
     1
    ],
    "multi-specy": [
@@ -70711,11 +70978,11 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     89,
     7,
-    161,
+    164,
     1,
-    169,
+    172,
     1,
-    175,
+    178,
     1
    ],
    "network-bas": [
@@ -70727,7 +70994,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "neuman": [
-    163,
+    166,
     1
    ],
    "neumann": [
@@ -70773,7 +71040,7 @@ globalThis.SUBTOPIC_CATALOG={
    "neuro-symbolic": [
     40,
     1,
-    201,
+    204,
     1
    ],
    "neuro-synaptic": [
@@ -70807,9 +71074,9 @@ globalThis.SUBTOPIC_CATALOG={
    "neuromorphic": [
     24,
     1,
-    171,
+    174,
     1,
-    178,
+    181,
     1
    ],
    "neuron": [
@@ -71006,6 +71273,10 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     88,
+    1,
+    96,
+    1,
+    97,
     1
    ],
    "node": [
@@ -71018,6 +71289,12 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     80,
+    1
+   ],
+   "noi": [
+    223,
+    1,
+    231,
     1
    ],
    "noise": [
@@ -71161,13 +71438,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "non-volatile": [
-    165,
+    168,
     1
    ],
    "non-von": [
     68,
     1,
-    163,
+    166,
     1
    ],
    "non-von-neumann": [
@@ -71219,7 +71496,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     4,
-    156,
+    159,
     1
    ],
    "nonlinearity": [
@@ -71394,6 +71671,8 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
+    1,
+    96,
     1
    ],
    "novelty": [
@@ -71419,18 +71698,12 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     93,
     3,
-    99,
+    102,
     1,
-    101,
-    1,
-    135,
-    2,
-    136,
-    1,
-    137,
+    104,
     1,
     138,
-    1,
+    2,
     139,
     1,
     140,
@@ -71438,14 +71711,20 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
+    1,
+    145,
     2,
-    150,
+    153,
     1,
-    151,
+    154,
     1,
-    152,
+    155,
     1,
-    157,
+    160,
     1
    ],
    "nuclear-scale": [
@@ -71610,6 +71889,10 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     20,
+    1
+   ],
+   "observatory": [
+    231,
     1
    ],
    "obstacle": [
@@ -71907,11 +72190,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "oil": [
-    215,
+    218,
     1,
-    217,
+    220,
     1,
-    225,
+    233,
     1
    ],
    "oleophobicity": [
@@ -72157,13 +72440,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    136,
+    139,
     1,
-    175,
+    178,
     1,
-    194,
+    197,
     1,
-    220,
+    227,
     1
    ],
    "operational": [
@@ -72201,7 +72484,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    214,
+    217,
     1
    ],
    "operationally": [
@@ -72329,13 +72612,13 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     2,
-    152,
-    1,
     155,
     1,
-    194,
+    158,
     1,
-    199,
+    197,
+    1,
+    202,
     1
    ],
    "optimize": [
@@ -72849,13 +73132,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    108,
+    111,
     1,
-    185,
+    188,
     1,
-    186,
+    189,
     1,
-    187,
+    190,
     1
    ],
    "particular": [
@@ -72933,7 +73216,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "partnership": [
-    205,
+    208,
     1
    ],
    "paskova": [
@@ -72995,7 +73278,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    134,
+    137,
     1
    ],
    "pattern": [
@@ -73251,9 +73534,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     6,
-    202,
+    205,
     1,
-    213,
+    216,
     1
    ],
    "performance-driven": [
@@ -73343,7 +73626,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "petabyte-scale": [
-    189,
+    192,
     1
    ],
    "pfas": [
@@ -73539,7 +73822,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "phenotype": [
-    124,
+    127,
     1
    ],
    "photoacoustic": [
@@ -73691,15 +73974,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    109,
+    112,
     1,
-    156,
+    159,
     1,
-    187,
+    190,
     2,
-    188,
+    191,
     1,
-    189,
+    192,
     1
    ],
    "physical": [
@@ -73755,7 +74038,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     93,
     4,
-    178,
+    181,
     1
    ],
    "physically": [
@@ -73769,11 +74052,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     45,
     1,
-    166,
+    169,
     1
    ],
    "physics-inform": [
-    212,
+    215,
     1
    ],
    "physiological": [
@@ -73842,6 +74125,10 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1
    ],
+   "planetary": [
+    225,
+    1
+   ],
    "planktonic": [
     19,
     1
@@ -73871,11 +74158,11 @@ globalThis.SUBTOPIC_CATALOG={
    "plant": [
     3,
     1,
-    135,
+    138,
     1,
-    136,
+    139,
     1,
-    148,
+    151,
     1
    ],
    "plasma": [
@@ -73885,19 +74172,19 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     33,
     1,
-    149,
+    152,
     1,
-    156,
+    159,
     1
    ],
    "plasma-enabl": [
-    168,
+    171,
     1
    ],
    "plasma-fac": [
-    144,
+    147,
     1,
-    182,
+    185,
     1
    ],
    "plasmonic": [
@@ -74121,7 +74408,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "port": [
-    199,
+    202,
     1
    ],
    "portable": [
@@ -74353,19 +74640,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    111,
+    114,
     1,
-    135,
+    138,
     1,
-    136,
+    139,
     1,
-    169,
+    172,
     1,
-    193,
+    196,
     1,
-    194,
+    197,
     1,
-    195,
+    198,
     1
    ],
    "powertrain": [
@@ -74444,6 +74731,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "precursor": [
     33,
+    1,
+    231,
     1
    ],
    "predicability": [
@@ -74483,29 +74772,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     2,
-    110,
+    113,
     1,
-    190,
+    193,
     1,
-    191,
+    194,
     1,
-    192,
+    195,
     1
    ],
    "predictable": [
-    107,
-    1,
-    179,
-    1,
-    180,
-    1,
-    181,
+    110,
     1,
     182,
     1,
     183,
     1,
     184,
+    1,
+    185,
+    1,
+    186,
+    1,
+    187,
     1
    ],
    "predictably": [
@@ -74547,9 +74836,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    192,
+    195,
     1,
-    202,
+    205,
     1
    ],
    "predictive": [
@@ -74569,7 +74858,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     11,
-    125,
+    128,
     1
    ],
    "predominately": [
@@ -74719,7 +75008,7 @@ globalThis.SUBTOPIC_CATALOG={
    "primitive": [
     0,
     3,
-    178,
+    181,
     1
    ],
    "principle": [
@@ -75045,7 +75334,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "problem-to-code": [
-    200,
+    203,
     1
    ],
    "procedural": [
@@ -75159,15 +75448,15 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    118,
+    121,
     1,
-    127,
+    130,
     1,
-    131,
+    134,
     1,
-    146,
+    149,
     1,
-    152,
+    155,
     1
    ],
    "process-property": [
@@ -75219,9 +75508,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    120,
+    123,
     1,
-    218,
+    221,
     1
    ],
    "processing-microstructure-property": [
@@ -75243,7 +75532,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     41,
     1,
-    218,
+    221,
     1
    ],
    "produce": [
@@ -75269,23 +75558,23 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     61,
     1,
-    219,
+    226,
     1
    ],
    "productivity": [
-    96,
-    1,
-    117,
-    1,
-    118,
-    1,
-    119,
+    99,
     1,
     120,
     1,
     121,
     1,
     122,
+    1,
+    123,
+    1,
+    124,
+    1,
+    125,
     1
    ],
    "profile": [
@@ -75379,7 +75668,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     81,
     1,
-    216,
+    219,
     1
    ],
    "propellant": [
@@ -75463,7 +75752,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "proppant": [
-    216,
+    219,
     1
    ],
    "propulsion": [
@@ -75547,7 +75836,7 @@ globalThis.SUBTOPIC_CATALOG={
    "prototyp": [
     36,
     1,
-    178,
+    181,
     1
    ],
    "prototype": [
@@ -75559,7 +75848,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    221,
+    228,
     1
    ],
    "protrusion": [
@@ -75585,7 +75874,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    210,
+    213,
     1
    ],
    "provid": [
@@ -75859,7 +76148,7 @@ globalThis.SUBTOPIC_CATALOG={
    "qualification": [
     36,
     1,
-    183,
+    186,
     1
    ],
    "qualitative": [
@@ -75899,7 +76188,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1,
-    195,
+    198,
     1
    ],
    "quantify": [
@@ -75993,29 +76282,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     21,
-    102,
+    105,
     1,
-    103,
-    1,
-    153,
-    1,
-    154,
-    2,
-    155,
+    106,
     1,
     156,
-    2,
+    1,
     157,
     2,
     158,
-    2,
+    1,
     159,
     2,
     160,
     2,
     161,
     2,
-    179,
+    162,
+    2,
+    163,
+    2,
+    164,
+    2,
+    182,
     1
    ],
    "quantum-bas": [
@@ -76023,7 +76312,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quantum-classical": [
-    155,
+    158,
     1
    ],
    "quantum-to-classical": [
@@ -76031,13 +76320,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quark": [
-    109,
+    112,
     1,
-    187,
+    190,
     1,
-    188,
+    191,
     1,
-    189,
+    192,
     1
    ],
    "quasi-static": [
@@ -76298,6 +76587,8 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     82,
+    1,
+    96,
     1
    ],
    "rapidly": [
@@ -76425,7 +76716,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     4,
-    127,
+    130,
     1
    ],
    "reaction-diffusion": [
@@ -76513,7 +76804,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    211,
+    214,
     1
    ],
    "real-world": [
@@ -76543,15 +76834,15 @@ globalThis.SUBTOPIC_CATALOG={
    "realiz": [
     85,
     1,
-    103,
-    1,
-    158,
-    1,
-    159,
-    1,
-    160,
+    106,
     1,
     161,
+    1,
+    162,
+    1,
+    163,
+    1,
+    164,
     1
    ],
    "realizable": [
@@ -76589,13 +76880,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     16,
     8,
-    114,
+    117,
     1,
-    206,
+    209,
     2,
-    207,
+    210,
     1,
-    208,
+    211,
     1
    ],
    "reasonable": [
@@ -76631,13 +76922,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "recenter": [
-    104,
-    1,
-    162,
-    1,
-    163,
-    1,
-    164,
+    107,
     1,
     165,
     1,
@@ -76652,6 +76937,12 @@ globalThis.SUBTOPIC_CATALOG={
     170,
     1,
     171,
+    1,
+    172,
+    1,
+    173,
+    1,
+    174,
     1
    ],
    "recently": [
@@ -76747,9 +77038,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "recurrence": [
@@ -76843,19 +77134,19 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "reenvision": [
-    96,
-    1,
-    117,
-    1,
-    118,
-    1,
-    119,
+    99,
     1,
     120,
     1,
     121,
     1,
     122,
+    1,
+    123,
+    1,
+    124,
+    1,
+    125,
     1
    ],
    "refer": [
@@ -77079,7 +77370,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     2,
-    142,
+    145,
     1
    ],
    "relevance": [
@@ -77207,7 +77498,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     3,
-    177,
+    180,
     1
    ],
    "remotely": [
@@ -77455,9 +77746,9 @@ globalThis.SUBTOPIC_CATALOG={
    "reservoir": [
     3,
     2,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "resilience": [
@@ -77483,9 +77774,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    209,
+    212,
     1,
-    214,
+    217,
     1
    ],
    "resiliency": [
@@ -77501,7 +77792,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    222,
+    229,
     1
    ],
    "resistant": [
@@ -77553,9 +77844,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     68,
     1,
-    128,
+    131,
     1,
-    219,
+    226,
     1
    ],
    "resource-efficient": [
@@ -77610,7 +77901,9 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     2,
     86,
-    2
+    2,
+    96,
+    1
    ],
    "responsible": [
     25,
@@ -77629,13 +77922,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "restoration": [
-    101,
+    104,
     1,
-    150,
+    153,
     1,
-    151,
+    154,
     1,
-    152,
+    155,
     1
    ],
    "restrict": [
@@ -77709,7 +78002,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    142,
+    145,
     1
    ],
    "revis": [
@@ -77717,27 +78010,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "revitalization": [
-    101,
+    104,
     1,
-    150,
+    153,
     1,
-    151,
+    154,
     1,
-    152,
+    155,
     1
    ],
    "revolution": [
-    97,
-    1,
-    123,
-    1,
-    124,
-    1,
-    125,
+    100,
     1,
     126,
     1,
     127,
+    1,
+    128,
+    1,
+    129,
+    1,
+    130,
     1
    ],
    "revolutionary": [
@@ -77869,7 +78162,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rite": [
-    222,
+    229,
     1
    ],
    "rl": [
@@ -77877,7 +78170,7 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "roadmap": [
-    150,
+    153,
     1
    ],
    "robb": [
@@ -77971,9 +78264,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    174,
+    177,
     1,
-    178,
+    181,
     1
    ],
    "robust": [
@@ -78021,7 +78314,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     57,
     1,
-    209,
+    212,
     1
    ],
    "rock": [
@@ -78046,6 +78339,24 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     53,
+    1
+   ],
+   "rose": [
+    96,
+    1,
+    97,
+    1,
+    98,
+    1,
+    222,
+    1,
+    223,
+    1,
+    224,
+    1,
+    225,
+    1,
+    231,
     1
    ],
    "rotary-w": [
@@ -78143,13 +78454,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "safer": [
-    99,
-    1,
-    135,
-    1,
-    136,
-    1,
-    137,
+    102,
     1,
     138,
     1,
@@ -78160,6 +78465,12 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
+    1,
+    143,
+    1,
+    144,
+    1,
+    145,
     1
    ],
    "safety": [
@@ -78251,25 +78562,25 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    97,
+    100,
     1,
-    111,
-    1,
-    123,
-    1,
-    124,
-    1,
-    125,
+    114,
     1,
     126,
     1,
     127,
     1,
-    193,
+    128,
     1,
-    194,
+    129,
     1,
-    195,
+    130,
+    1,
+    196,
+    1,
+    197,
+    1,
+    198,
     1
    ],
    "scalability": [
@@ -78339,15 +78650,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     71,
     1,
-    162,
+    165,
     1,
-    184,
+    187,
     1
    ],
    "scale-bridg": [
     46,
     1,
-    151,
+    154,
     1
    ],
    "scale-resolv": [
@@ -78359,7 +78670,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    127,
+    130,
     1
    ],
    "scatter": [
@@ -78599,23 +78910,31 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    115,
+    96,
     1,
-    123,
+    97,
     1,
-    149,
+    118,
     1,
-    154,
+    126,
     1,
-    176,
+    152,
     1,
-    188,
+    157,
     1,
-    209,
+    179,
     1,
-    210,
+    191,
     1,
-    211,
+    212,
+    1,
+    213,
+    1,
+    214,
+    1,
+    225,
+    1,
+    231,
     1
    ],
    "scientific": [
@@ -78659,15 +78978,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     2,
-    113,
+    116,
     1,
-    114,
-    1,
-    199,
-    1,
-    200,
-    2,
-    201,
+    117,
     1,
     202,
     1,
@@ -78678,10 +78991,16 @@ globalThis.SUBTOPIC_CATALOG={
     205,
     1,
     206,
-    1,
+    2,
     207,
     1,
     208,
+    1,
+    209,
+    1,
+    210,
+    1,
+    211,
     1
    ],
    "scientifically": [
@@ -78769,15 +79088,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "secur": [
-    98,
+    101,
     1,
-    105,
-    1,
-    128,
-    1,
-    129,
-    1,
-    130,
+    108,
     1,
     131,
     1,
@@ -78787,9 +79100,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    172,
+    135,
     1,
-    173,
+    136,
+    1,
+    137,
+    1,
+    175,
+    1,
+    176,
     1
    ],
    "secure": [
@@ -78803,7 +79122,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    139,
+    142,
     1
    ],
    "security": [
@@ -79131,7 +79450,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    160,
+    163,
     1
    ],
    "sense": [
@@ -79215,7 +79534,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    170,
+    173,
     1
    ],
    "sensor-selection": [
@@ -79681,7 +80000,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     2,
-    166,
+    169,
     1
    ],
    "simulator": [
@@ -79737,11 +80056,11 @@ globalThis.SUBTOPIC_CATALOG={
    "site": [
     92,
     1,
-    140,
+    143,
     1,
-    215,
+    218,
     1,
-    223,
+    230,
     1
    ],
    "situation": [
@@ -79885,7 +80204,7 @@ globalThis.SUBTOPIC_CATALOG={
    "smart": [
     17,
     1,
-    121,
+    124,
     1
    ],
    "smoothness": [
@@ -80001,7 +80320,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    203,
+    206,
     1
    ],
    "soil": [
@@ -80009,6 +80328,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     9,
     2
+   ],
+   "solar": [
+    97,
+    1
    ],
    "soldier": [
     2,
@@ -80142,7 +80465,9 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    3
+    3,
+    222,
+    1
    ],
    "solv": [
     0,
@@ -80934,6 +81259,18 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1
    ],
+   "step-1": [
+    98,
+    1,
+    224,
+    1
+   ],
+   "step-2": [
+    98,
+    1,
+    224,
+    1
+   ],
    "stephanie": [
     2,
     1
@@ -81081,13 +81418,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    112,
+    115,
     1,
-    196,
+    199,
     1,
-    197,
+    200,
     1,
-    198,
+    201,
     1
    ],
    "strategically": [
@@ -81263,9 +81600,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     86,
     1,
-    143,
+    146,
     1,
-    180,
+    183,
     1
    ],
    "structure": [
@@ -81419,7 +81756,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sub-1-nm": [
-    162,
+    165,
     1
    ],
    "sub-10-micrometer": [
@@ -81517,13 +81854,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "subsurface": [
-    112,
+    115,
     1,
-    196,
+    199,
     2,
-    197,
+    200,
     1,
-    198,
+    201,
     2
    ],
    "subsystem": [
@@ -81833,13 +82170,7 @@ globalThis.SUBTOPIC_CATALOG={
    "supply": [
     91,
     3,
-    98,
-    1,
-    128,
-    1,
-    129,
-    1,
-    130,
+    101,
     1,
     131,
     1,
@@ -81849,7 +82180,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    139,
+    135,
+    1,
+    136,
+    1,
+    137,
+    1,
+    142,
     1
    ],
    "supportive": [
@@ -82049,7 +82386,7 @@ globalThis.SUBTOPIC_CATALOG={
    "symbolic": [
     15,
     1,
-    206,
+    209,
     1
    ],
    "symmetry": [
@@ -82303,29 +82640,31 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     9,
-    103,
+    97,
     1,
-    119,
+    106,
     1,
-    148,
+    122,
     1,
-    157,
+    151,
     1,
-    158,
-    2,
-    159,
-    2,
     160,
     1,
     161,
+    2,
+    162,
+    2,
+    163,
     1,
-    171,
+    164,
     1,
-    186,
+    174,
     1,
-    214,
+    189,
     1,
-    221,
+    217,
+    1,
+    228,
     1
    ],
    "system-level": [
@@ -82935,27 +83274,27 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    116,
+    119,
     1,
-    131,
+    134,
     1,
-    149,
+    152,
     1,
-    165,
-    1,
-    212,
-    1,
-    213,
-    1,
-    214,
+    168,
     1,
     215,
     1,
+    216,
+    1,
+    217,
+    1,
     218,
     1,
-    219,
+    221,
     1,
-    222,
+    226,
+    1,
+    229,
     1
    ],
    "technology-enhanc": [
@@ -83119,9 +83458,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
+    218,
     1,
-    223,
+    230,
     1
    ],
    "testbed": [
@@ -83377,7 +83716,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    173,
+    176,
     1
    ],
    "thermoconductive": [
@@ -83817,7 +84156,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tolerant": [
-    154,
+    157,
     1
    ],
    "tomography": [
@@ -83873,9 +84212,9 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     94,
     1,
-    142,
+    145,
     1,
-    154,
+    157,
     1
    ],
    "toopology": [
@@ -84537,15 +84876,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     74,
     1,
-    101,
+    104,
     1,
-    150,
+    153,
     1,
-    151,
+    154,
     1,
-    152,
+    155,
     1,
-    171,
+    174,
     1
    ],
    "transformation": [
@@ -84637,13 +84976,7 @@ globalThis.SUBTOPIC_CATALOG={
    "translation": [
     23,
     1,
-    113,
-    1,
-    199,
-    1,
-    200,
-    1,
-    201,
+    116,
     1,
     202,
     1,
@@ -84652,6 +84985,12 @@ globalThis.SUBTOPIC_CATALOG={
     204,
     1,
     205,
+    1,
+    206,
+    1,
+    207,
+    1,
+    208,
     1
    ],
    "transmission": [
@@ -84697,7 +85036,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     54,
     1,
-    196,
+    199,
     1
    ],
    "trapp": [
@@ -84725,9 +85064,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    152,
+    155,
     1,
-    218,
+    221,
     1
    ],
    "tremendou": [
@@ -84747,9 +85086,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tritium": [
-    146,
+    149,
     1,
-    147,
+    150,
     1
    ],
    "trivial": [
@@ -84779,9 +85118,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     14,
     2,
-    203,
-    1,
     206,
+    1,
+    209,
     1
    ],
    "try": [
@@ -84823,7 +85162,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    190,
+    193,
     1
    ],
    "turbulent": [
@@ -84841,7 +85180,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     36,
     1,
-    186,
+    189,
     1
    ],
    "twist": [
@@ -84955,19 +85294,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    105,
+    108,
     1,
-    110,
+    113,
     1,
-    172,
+    175,
     1,
-    173,
+    176,
     1,
-    190,
+    193,
     1,
-    191,
+    194,
     1,
-    192,
+    195,
     1
    ],
    "uas": [
@@ -85115,7 +85454,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    195,
+    198,
     1
    ],
    "uncertainty-aware": [
@@ -85135,9 +85474,9 @@ globalThis.SUBTOPIC_CATALOG={
    "unconventional": [
     68,
     1,
-    215,
+    218,
     1,
-    217,
+    220,
     1
    ],
    "uncover": [
@@ -85315,7 +85654,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     5,
-    176,
+    179,
     1
    ],
    "understandable": [
@@ -85385,13 +85724,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     1,
-    109,
+    112,
     1,
-    187,
+    190,
     1,
-    188,
+    191,
     1,
-    189,
+    192,
     1
    ],
    "unintentional": [
@@ -85453,7 +85792,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    220,
+    227,
     1
    ],
    "universal": [
@@ -85485,13 +85824,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unleash": [
-    112,
+    115,
     1,
-    196,
+    199,
     1,
-    197,
+    200,
     1,
-    198,
+    201,
     1
    ],
    "unless": [
@@ -85591,7 +85930,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    184,
+    187,
     1
    ],
    "updat": [
@@ -85615,7 +85954,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "upper": [
-    197,
+    200,
     1
    ],
    "uq": [
@@ -85779,9 +86118,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    142,
+    145,
     1,
-    219,
+    226,
     1
    ],
    "utilize": [
@@ -85843,9 +86182,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    220,
+    227,
     1,
-    221,
+    228,
     1
    ],
    "validity": [
@@ -86087,7 +86426,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    210,
+    213,
     1
    ],
    "versa": [
@@ -86603,15 +86942,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     1,
-    110,
+    113,
     1,
-    190,
+    193,
     1,
-    191,
+    194,
     2,
-    192,
+    195,
     1,
-    218,
+    221,
     1
    ],
    "wave": [
@@ -86761,7 +87100,7 @@ globalThis.SUBTOPIC_CATALOG={
    "week": [
     49,
     1,
-    192,
+    195,
     1
    ],
    "weight": [
@@ -86871,7 +87210,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    216,
+    219,
     1
    ],
    "well-be": [
@@ -87333,13 +87672,13 @@ globalThis.SUBTOPIC_CATALOG={
    "workflow": [
     88,
     4,
-    115,
+    118,
     1,
-    209,
+    212,
     1,
-    210,
+    213,
     1,
-    211,
+    214,
     1
    ],
    "workforce": [
@@ -87364,6 +87703,8 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     58,
+    1,
+    231,
     1
    ],
    "worst": [
@@ -87415,7 +87756,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    192,
+    195,
     1
    ],
    "yet": [
@@ -87556,6 +87897,9 @@ globalThis.SUBTOPIC_CATALOG={
    "345241:tdac-baa-022",
    "345241:tdac-baa-024",
    "345241:tdac-baa-026",
+   "359996:a-4",
+   "360004:c-2",
+   "361234:b-2",
    "361526:challenge-1",
    "361526:challenge-2",
    "361526:challenge-3",
@@ -87679,15 +88023,20 @@ globalThis.SUBTOPIC_CATALOG={
    "363065:b-1",
    "363065:c-1",
    "363065:2",
+   "363224:a-13",
+   "363240:a-14",
+   "363241:a-15",
+   "363258:c-4",
    "363302:1",
    "363302:a-1",
    "363302:b-1",
    "363302:2",
    "363302:3",
+   "363325:d-8",
    "363594:a-1",
    "363594:b-1",
    "363594:c-1"
   ]
  },
- "searchable_record_count": 227
+ "searchable_record_count": 235
 };

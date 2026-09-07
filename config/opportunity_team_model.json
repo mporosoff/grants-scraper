@@ -1,69 +1,4 @@
 {
-  "discovery_queue": {
-    "last_scheduled": {
-      "103313": 29,
-      "112354": 40,
-      "243973": 54,
-      "254073": 50,
-      "275109": 30,
-      "278447": 33,
-      "295449": 27,
-      "302270": 49,
-      "302271": 38,
-      "302273": 26,
-      "308873": 28,
-      "320098": 32,
-      "324369": 47,
-      "325500": 42,
-      "327047": 35,
-      "329432": 46,
-      "329436": 56,
-      "330296": 37,
-      "332012": 58,
-      "339728": 43,
-      "340544": 48,
-      "340545": 57,
-      "340828": 41,
-      "341086": 53,
-      "341997": 34,
-      "343875": 39,
-      "343980": 36,
-      "344592:ab-0015": 10,
-      "344715": 55,
-      "345083": 51,
-      "345938": 59,
-      "347026": 45,
-      "347679": 44,
-      "347680": 31,
-      "347990": 60,
-      "348164": 52,
-      "356680": 8,
-      "356879": 2,
-      "357186": 7,
-      "357346": 3,
-      "359269": 5,
-      "359740": 17,
-      "359940": 15,
-      "360006": 9,
-      "360393": 24,
-      "360554": 20,
-      "360574": 12,
-      "360894": 4,
-      "360909": 18,
-      "360947": 13,
-      "361002": 21,
-      "361065": 19,
-      "361186": 1,
-      "361187": 25,
-      "361518": 23,
-      "361833": 11,
-      "362454": 22,
-      "362752": 16,
-      "362948": 6,
-      "363244": 14
-    },
-    "sequence": 60
-  },
   "faculty": [
     {
       "auto_proposable": true,
@@ -12663,215 +12598,93 @@
     }
   ],
   "generation_attempts": {
-    "103313": {
-      "key": "90b82f4fcb36141239a7bf72b2e14252d2b506f263e83143e2884cc51622ce29",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748439.934057,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "103313": "e7d8d727243bd682e704aacce8631678d297adb0f22721d1aef7183667ac2643",
     "112354": {
-      "key": "411ab67a0d8f2a045731563e379e48e222afbe6b11676146cc55d0cf2f4af9c0",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748468.9978323,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "fe1b339021c8ab8a2df34c3bb52066cec52a897e6ea791d48edeeccce32f3f48",
+      "state": "not_specific"
     },
-    "243973": {
-      "key": "7f0a68a0472ef08e7590cf29515209291af94defb432dc6ea3586aa0f985763f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748506.1564045,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "243973": "7b367099a6aa7e68c12e0df6f3df74d418f1d6b176151ad28d4af2f626db34dc",
     "254073": {
-      "key": "16495290610a4900aa2530c3650c946bc007868665acbc544cc2af148cf45aa0",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748498.6248648,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "21d3abb6ad41b427655cd799cd1b10f05fc2f1e2b109befdff9daa59c34d70b6",
+      "state": "not_specific"
     },
-    "275109": {
-      "key": "286f0952bfe32d0dad18716a0e2d5c210c30bdd1acde2ad59d01e577476a94be",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748439.934112,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "275109": "758dbba09ba1eb3097ab0c33e80e1b53cce3e48392e30d91dd75c4fbb5a4b109",
     "278447": {
-      "key": "19b032153f2a8bcdd8e7d62ffc2bb488ea769896de9ea472fad9495b577b298f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748447.0575976,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "7add852bae0d5286aa0f51976518934811b375c74691aed9039afd406b27297d",
+      "state": "not_specific"
     },
     "279638": "5439504c7d696cc6d7008be3c3f2f27c24d32dd7a17a561cb9ac917d60238d95",
     "290351": "16adbe98cfa7ee01765e3f4be3765c7b80bb9e27310fbbe623abe5c899b9aa02",
-    "295449": {
-      "key": "d284205adbbe61542a1f60eeaf15fb969646b7a4b994b8f5eb30c9a5959ecd10",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748432.4726937,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "295449": "f068fbb69d1058e6b8159754316d7c3e0877f758dbfb404761678e352bbf3e2a",
     "300997": "f2a9e7f1b7899d37780c636a6e33cb5f13736d683294fc0d0d706f5cb242ce25",
     "302270": {
-      "key": "40bbe652f29a50ea2aff963439f58fd4549d827b7f2e25b78344203be13e468f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748498.6247988,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "8efa721bbbe4be4d6a56a51da9e1aee046c5ff99ece7e4d2f73c3e250945a3b4",
+      "state": "not_specific"
     },
     "302271": {
-      "key": "199bdca77107c7750e393b7e24cb72e045d435802aae824360f107fabfb6d393",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748461.415157,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "b558506319a1f6abdc4d1f25936196a94a01ab0a232f53f4c74bb8723706c54d",
+      "state": "not_specific"
     },
-    "302273": {
-      "key": "c6839afa688263b8f0fcc101d078eab354570cbaac67a7d9e9a72ee1e2ff9fde",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748432.4726357,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
-    "308873": {
-      "key": "da6da9e2be24c2a8482566daaed53c3ad65bf83ba4226169cbb47af1b0faddf5",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748439.5646272,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "302273": "1a9c5ccccb1ab7e60140ba05483b478316527cdb9fb15db04b3c29c6f52d346e",
+    "308873": "71f78a140c378f45932f510a79995c0bbff35731a3ae165ca9d284562b66cdd5",
     "310029": "7dddb7b46bb04cb7360250a1e45673ab90d33b2138b84458b171ec6745954a02",
     "314126": "db09654a0055e7ad51f329bcef7c34a3a4773b8a743b97dadb5f3f7f6524abee",
     "318918": "e3053a6fef5b862e4a38f7a5bf64de83c715c6942b4802cd1aa50bb1937012cc",
     "320087": "92992d0df17dc3041b06e89d0fee9e21258cf43cbee0a253fb8339492c0756a5",
-    "320098": {
-      "key": "31d042ee85d9d092befc0f6d1838a059a2d356b73e8acf97e24755165fcb69d4",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748446.9141436,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "320098": "2050e1b4fe765bbbc82a0ff19d2271f9bea99d3b503095bff3da3fd17098e508",
     "324369": {
-      "key": "c5fca8f65222b507b677cdf99b9299d5c97ae0d7f5a3ec8c36dec9b1b418c5c1",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748491.167653,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "ca7e7bdb7ae198731a397b4654da34672ad221bfaf3abad72dd70cad7d6ba265",
+      "state": "not_specific"
     },
     "325500": {
-      "key": "75cccab275fbde99ef8df2973a0da783e5c164c53e8e1804de98d3e338951257",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748468.9979374,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "ddade3273b86b9a4173cd69f29802f95a48130dc3f97e80e86cb96bca807859d",
+      "state": "not_specific"
     },
     "325599": "1176ed908ea9d8d161569b0f5bff736154d73d282290bd57cd37a947fdc593f2",
     "326733": "e0630a8a4265d4e5b9a50b358dc9d8bbb2dce2a5b1b73ca278d624877d3bbb09",
     "327047": {
-      "key": "a1cbaa9f5d3ed0b95da1768ecdcc45aa248594bb6f6b1abadf6247836c0eec13",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748454.307874,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "94b2ef94e38f95e978fcb4af747783a2993711f4a1fb768511f74b79cbabda55",
+      "state": "not_specific"
     },
     "328573": "516bcd47b303874edb13fe66b125b570928da0995d533e69b4e8dcf20f104a33",
     "328902": "be090e7e22fecc7fd1e3b55338bb19519c31478af0e2c4e02329c81bb24e0d47",
     "329325": "8a988d450c714d309b461d8511c745471eff6d26e26a14d2da0df54d0f9a8655",
-    "329432": {
-      "key": "80e156777678a3680e228d0ab36aceb917ad1125c6dcd3d7fa110ffc891598ff",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748491.087438,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
-    "329436": {
-      "key": "7704778e9e953f075e7ae729bfa2436777c88913cd7b2442abc23c1947da477c",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748513.3779342,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "329432": "4171a32e43997d528a7ffb4ce7ddfc62498e84ca6d059e16f3a957364cdfcc9b",
+    "329436": "662c2db4e4083afc9c08b0a06ee513fb2b0a30671afe91f94215b8357eef75d9",
     "330296": {
-      "key": "0a2a545b9e7292ad48c57465f2e5960821306d410d925d188d0ffb006e73decf",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748461.415111,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "5c7e9b0df3b1faf0d81b1fbb979cc190701ef65953c17ff565114e9b39dcecd6",
+      "state": "not_specific"
     },
     "331306": "3065c9ddb8756ee4e32120dc2f349dac220bf4c6370aeae0c5dab738bdc1b506",
-    "332012": {
-      "key": "dce429eee446ccfa39a619ed148f6700723ca79aa76a97ac023982dfb808af18",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748520.2911954,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "332012": "762b4eaa1332d3544b3ca5a9b8ada23c418bd1dbebcdc0c3efce53e14d4df845",
     "332052": "34d6d67e300c9cd65a09e219ffdb3edf1124add36796c24c0b3cb6a523af2618",
     "332125": "812b46e6b5e46169f6a6fdbffca9e4e404dcb051b5282ea684015c2307b15bb3",
     "332126": "d56660cf68ca24d4ed784a87ca3fa2ff2655425ddc1d4a2b0cd24a46ce0814ce",
     "332894": "92b9fd183def0337b491ccdb6a8b25ddf7955965d71cba54c4eeabdf8e7f67cf",
     "339728": {
-      "key": "979c13e1145cc10e418d172901f5bfd50adfd8d13e089b98d31dfb0f5dec0d09",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748484.2050643,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "8198bc1b459de7128d8b2230587506c3449c4d034e6d2dc5e2b6127a8002d961",
+      "state": "not_specific"
     },
     "340544": {
-      "key": "0c5683a0cebb5a1d28aa14e28652cde0a53a8f47cb5a8fdb33f85038ea5d08b6",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748491.1688013,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
-    "340545": {
-      "key": "e38792e8757fb39f74e661abd774748011ca44ac24f22a55cd9c0a566271cbce",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748513.3779747,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "0a74b52cd684831e81454f95d2689eac4998d7c85c46de1c0528e32f60dcb4a3",
+      "state": "not_specific"
     },
     "340828": {
-      "key": "b19dd61744778edbf6efe26aed23fba4778f91f76e65a77381763f76dc0089aa",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748468.9978948,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "b107a026606635ea3f7ca239bb523f6b084e2402ca65f094ea40347532e120be",
+      "state": "not_specific"
     },
-    "341086": {
-      "key": "04e590b8c7f6d28628afbacf033d974dee283c9875d433e51e8299df8426221f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748506.15636,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
-    "341997": {
-      "key": "5347cbb9b0cc5df4847f8484f79f9e42ab93df84f387fe78cd49329747f16084",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748454.026717,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "341997": "d2981355d2c8343b687b2c17906082850686b86b3aceddd17d23123ab69bd076",
     "342475": {
       "key": "316ff970286d7da0cb46beaee233cfcdcca9d9420d2a181cf0fcbb7696e2bad9",
       "state": "proposed"
     },
     "343875": {
-      "key": "5a1c93f3489b97ebd6f47209e4670b4f6c664f92eb9da07837d19cf27a25d9ff",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748461.5864213,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "d30fe4326d374e786829e5f65088668e3cf0777435fdf424ad160bad4279d230",
+      "state": "not_specific"
     },
     "343980": {
-      "key": "bdba74cc6292388cab502ef82a0fff2fd8e907c5f336faa8667c359c13ffbf9f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748454.307933,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "12fe5b3ebca5cc971aea50cc2431c2d7fab9eef8a6302053e1e49b2107948893",
+      "state": "not_specific"
     },
     "344592:ab-0001": "e9c4e3fb13a299355c9b6965f07ba77358d7792b2764b76b89f31de5b55d0905",
     "344592:ab-0002": "c483186e368187bf2b783edbb7e0445983e04fd963e797c9f04a4251add98fe1",
@@ -12886,11 +12699,8 @@
     "344592:ab-0012": "021c878a89c5246e81ea490b9ac8c1ac54ec8ab500aeaf6cf18a19ce9f0e305a",
     "344592:ab-0013": "b8c120b87c8c0d317b2d541824c3ece6273080be23e4b7ef3c25a205d87d389a",
     "344592:ab-0015": {
-      "key": "5c3819ff79a1f36b44286df3f22b64f2352f3eb055fbc8680b712f82953c943b",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
-      "state": "proposed"
+      "key": "36b63d0b730f18758af63a6323e05fbe073482c30b8b052c6652911d14dd8b3a",
+      "state": "insufficient_evidence"
     },
     "344592:ab-0016": "421d096a7544e46ce5fa6b6d75366d38b264410ab4166d3d26a16ee13b978d58",
     "344592:ab-0017": "da6dc9b4a1bb3ca6ad74145d1b078fee3220d17bdf71fe5a5c76d367bf6f137e",
@@ -12961,19 +12771,9 @@
     "344592:ab-0100": "5d272f04ca3afb8596fd5248f05e144a956a1583a5ea7b3570137a1d02fbb7c2",
     "344592:ab-0101": "9d234c226238cd129509a369d57891f5ee7f83ef1b0d82444e3839d596c334a8",
     "344592:ab-0102": "a68973ecb9622c6b6f34da6e37414d764b39890c93c13d32812143f8d98687c7",
-    "344715": {
-      "key": "04ea7d0830b4fdd1a5712b27430050ccaf7ad8646d273646677a8aa067d8b267",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748513.20665,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
     "345083": {
-      "key": "6041b5998b4dbb748e43cf9d7e6a1bfa10e754c64c8fc0d961c104d855d4d077",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748498.6249092,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "8bcfcc7389e3996eb63886411be6a798dd56f99c7f546393622949f62a0ae1e4",
+      "state": "not_specific"
     },
     "345241:tdac-baa-001": "9d1ac5eccbf4eb1bf33aeceade07a8ca0ff3f5c2da25b0db994c06b4f3e11769",
     "345241:tdac-baa-002": "3bf37e9dac298079f0d59d5dce14946a051ddfb434a5907a092ff3e19724ca41",
@@ -12988,47 +12788,18 @@
     "345241:tdac-baa-020": "81bf25fbbe0f58a8613cc47b60f4a023914e4a17390d8767f831a708cc9715f4",
     "345241:tdac-baa-022": "0ae72f45587a3072c7ffa4e1f29b7ea9fc6a81899ec17ef8113b7f589c1e38f7",
     "345241:tdac-baa-026": "2e1e94d93869bad0d63a0e1eb17d16a313444207bd39b3e4885cd160b6fbd0f9",
-    "345938": {
-      "key": "a275ef3c49b4f023317a8aaefc1d03bdb146dbc124d90988cf0fcbfaa89472d1",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748520.3879704,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
     "347026": {
-      "key": "7cc6eab8a8490d2232c0075113f62480f1a4c8c7fead0e85acb86b4de072a1b4",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748484.2051768,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "f09c08970fa2e77dd184ecda28dd5deecd01125d9ec722f012f752356a97913b",
+      "state": "not_specific"
     },
     "347679": {
-      "key": "d4f18f7125577fb3743f19329165e140cb4ef8edcdbe0ffdc04015a64a7a13a2",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748484.2051327,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "259d7a3c2be6788d867d4912f94b0ccae482a515f4beecbf50215da619cedb6a",
+      "state": "not_specific"
     },
-    "347680": {
-      "key": "a731f68b3e2ca1d1131ac100ad1671b3a24b7b7653331ff2ce0054c8a724a0ec",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748446.9140866,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
-    "347990": {
-      "key": "9192250dd0fc5c24992a6e59f0685c24848c50aafa92be9738dcdcaa4901c189",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748525.074347,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "347680": "2888ae5372aa5cb10b9af362e45b379ed10bbf5af983e97a4cd3e056296c80aa",
     "348164": {
-      "key": "081f2c8eca6b9c918975997e144174ae88951dacb63bf91b651806bb4586daa2",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748505.6041937,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "f73245200151ea06e67ee505cc52f1c84a11e548e3d08420187ac577c19ca2e8",
+      "state": "not_specific"
     },
     "349618": {
       "key": "36dc23c728c2953bb5c1de4e25d76175116efdeda89bad7b1286abdf58449e8c",
@@ -13141,10 +12912,7 @@
     },
     "356637": "b9a7923022ad73638711127133517ea53c069b055d03a86c7ad3c209a3f9432e",
     "356680": {
-      "key": "fb219911a38b320e8d6a0f0117ad816d9d1e40cb98aa4603f269f280b0206aa3",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "317e072ce1e4292d49159ebe33fe843b540750a4857db20dd0bacafe827f31ec",
       "state": "insufficient_evidence"
     },
     "356718": {
@@ -13164,10 +12932,7 @@
       "state": "proposed"
     },
     "356879": {
-      "key": "f99d9be82c5ce695d4080a5e28bc0b406686d747d19feda60307f52359ea8ef1",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "9298488eef29cf1883e58cc972a8ac55477bb1ae4eab484ea7a9d2a499674dff",
       "state": "insufficient_evidence"
     },
     "356888": "c1f4207e1458aeaa4616deb40472f2bf6f5881dafb5aaa3f77d510052702560e",
@@ -13241,10 +13006,7 @@
     },
     "357182": "eb9fc08e7c01b211ea475a4510822a21ae51d65a568793d7de3962d516184e65",
     "357186": {
-      "key": "1f6ed9a9adf30b769cbe14208af4e790aa62c7fa8a46a43d6ff0dd9b1862894a",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "3cdfcea441618ed105ecd00394421f3738ca20e9ade281de2f806e6ab17655d2",
       "state": "insufficient_evidence"
     },
     "357187": {
@@ -13301,10 +13063,7 @@
       "state": "proposed"
     },
     "357346": {
-      "key": "badc78487954d3582daeb5078bc56d0b281f832e91984b15ca1d81590013913d",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "2199745310373059ce7a45ccba9203e70eacdb80ec475d2ce9e2f0779fb950ce",
       "state": "insufficient_evidence"
     },
     "357377": "519d864679e372d8f73b216a12e6262f1d15d0f27d44539977a0faf6114828cf",
@@ -13459,10 +13218,7 @@
       "state": "not_specific"
     },
     "359269": {
-      "key": "218c76514e852c53a9ac46d30b9fdbe5dd27826cc7d0b0d32590b40e47614c4a",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "4a16c21ba978dda349cc98840666da05b46f68bc133c8b9211eb9482593c70b5",
       "state": "insufficient_evidence"
     },
     "359270": "71aa5c522666cd9a5606f14908bae957498a73cc815c8ae41a0d7fbd252bcd45",
@@ -13494,10 +13250,7 @@
       "state": "not_specific"
     },
     "359740": {
-      "key": "3f0aa8cad0f4c25d8438a10022bd9a38f1d624f26a029aa2b97697c5ef92512b",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "1d864b4ca7f3b4b1e7e4b371577bdf53b4e57c48f4a147070684d71d28b7d9dd",
       "state": "insufficient_evidence"
     },
     "359855": {
@@ -13505,11 +13258,8 @@
       "state": "not_specific"
     },
     "359940": {
-      "key": "6eb2e49e97c96269174c79429908f675840e6835c1ffcea29550858cabb83698",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748137.0138414,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "4908d475344f24dc8b6767011487ec4b5822b8fec82e0d74654cb2b2f2224479",
+      "state": "not_specific"
     },
     "359942": {
       "key": "7a6f69f58ab131f995066caa717822164ae18bd4e31e8508b5bb7b3a780b8d47",
@@ -13524,10 +13274,7 @@
       "state": "not_specific"
     },
     "360006": {
-      "key": "3a8c1c388a7f54693c71781c622349e960341cd3ab9ee0411ca4d4ebd6b7d1a0",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "verification",
+      "key": "ac01710e56601a27b32c8e81764f543d6c0be54f5f1609266934582ea5fa8bc8",
       "state": "unsuitable_scope"
     },
     "360149": {
@@ -13540,11 +13287,8 @@
     },
     "360223": "458d23dc96e130c737ecfdbf6452e0d906879e0e447d3506617940f61eb237e9",
     "360393": {
-      "key": "b0378c0844f5118574dce5c2f742d8f42038502a8c4e7cb268372eed6b822c8d",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748419.7754834,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "27db135eac0484bbe08a0fe99955ebc651adc77bd3cc0ff817a95cebbe760e99",
+      "state": "not_specific"
     },
     "360398": {
       "key": "ae97cd6e14acda1573aa7574527422dd41403a4c8a15d119a357a1b106252793",
@@ -13562,11 +13306,8 @@
     },
     "360543": "18a903aaf5e0fa999c4f091a10cff49129b33de201e55aba9b6e070183bf7284",
     "360554": {
-      "key": "79f9e59632df4416e862f24ca465fbdc4e7e73ece785ffe69c68015398d993d6",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748318.315041,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "05e1c30de90df2018a7b9116978ecb6b83e23553292a5591e3a88d9105a7b282",
+      "state": "not_specific"
     },
     "360561": {
       "key": "f8d47b72a897f79500da0f34bc30611c5a6429cdd706f35137c86f79c30e2018",
@@ -13577,11 +13318,8 @@
       "state": "not_specific"
     },
     "360574": {
-      "key": "9caa295214deacb465796c2d4f2f5be371be55cb955530598cfa25d8d1e6db4c",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748127.1744008,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "fc825e8e155096300172876f974e8df2fdc6e80718b39d3ef23f93d991bbb90f",
+      "state": "not_specific"
     },
     "360593": {
       "key": "cb4881714e9b4a16e55d0fb17188e3fbb52200092d36b253a3aa481ede1e2969",
@@ -13610,10 +13348,7 @@
       "state": "proposed"
     },
     "360894": {
-      "key": "3fc7f0a79ccfd4e805390deba00a9b463100a67ef5b6bd10a7ac12de5ec9db23",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "0a0ffa1952fd97fcdc2c37cc48097d5a01b3a7cd14a0ea3cee7f1438d256f109",
       "state": "insufficient_evidence"
     },
     "360906": {
@@ -13621,43 +13356,31 @@
       "state": "not_specific"
     },
     "360909": {
-      "key": "e23a46bf1434667b897887b0a52c4dd24dc752921ea7af2fb9b6e4387d2b1a42",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748206.7896793,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "8a91849940eabda6c6edf821850d1baaea7dd1bf2eee4686b47c16da46973d79",
+      "state": "not_specific"
     },
     "360910": {
       "key": "a27bcab4f08e64e21c84c54b9927a1dc0dfb0f70ab391f20c6aa79feb0c740fe",
       "state": "not_specific"
     },
     "360947": {
-      "key": "df02bf704c2d1c4b3b4aea542d083e2856dc73f1cedbd188e0968a51ef1ce55f",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748137.0137672,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "4a8a546a282a417bd7318ec20953a1cf9213010d7bbef3592f920ea285e58a3a",
+      "state": "not_specific"
     },
     "360954": {
       "key": "0993d905cbb2c3651ea4232794bb199e5f7a48e797857b81abe561da3b1e5c10",
       "state": "not_specific"
     },
     "361002": {
-      "key": "d8e4ae86cc6447f1d6e015166cb7d2a04d5dba9d67a8894cb4df4ef52bbd6ea9",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "verification",
-      "state": "unsuitable_scope"
+      "key": "52d74a72bee66745ea06214063cf95565190d60673b691708468639024c71910",
+      "state": "not_specific"
     },
     "361008": {
       "key": "98a1e6c82b7ef799c00d07c66eba4c17d39150c4f4cfe913dc553face3070e4d",
       "state": "proposed"
     },
     "361065": {
-      "key": "dca88fe5f994209a2a0efbb2c10299fe86361d37c19262433739deff18b32272",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "e2dff0fe823a916656e5369c44cbccfd96a1167a82310d77fa7b09f565cb490c",
       "state": "insufficient_evidence"
     },
     "361104": {
@@ -13665,18 +13388,12 @@
       "state": "not_specific"
     },
     "361186": {
-      "key": "2e6668fbf7bef492d7aae5085d76f1ca7e3e119996ee3cdd97e0978337ede97a",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
-      "state": "proposed"
+      "key": "1dd42a78dd973761d73cf9a6ae3acacffa1ac6846d0b602dbca1b502c2428f07",
+      "state": "insufficient_evidence"
     },
     "361187": {
-      "key": "c9e2a784d8646c755bbe15ca33d9cd4f59a5476dea1497552fa145113d99cfd5",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748426.6962206,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "2f2e1b53d0f975d9fc2d346edf60ec6dbadc42cfd422bc85d600ca121e21d259",
+      "state": "not_specific"
     },
     "361207": "8ac54fb1085a1144af05b1a44bb29d7c271a1d5af82a10abb6e974c499297d70",
     "361208": {
@@ -13751,11 +13468,8 @@
       "state": "not_specific"
     },
     "361518": {
-      "key": "f0ae19b4ec64388504ce8e762440b73c62daf01ffb5dc1afc13c4b52491ebf7f",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
-      "state": "insufficient_evidence"
+      "key": "7c23a1f9402527928b133d59ba62679100540e16a568b406938ee0e7e2d84f94",
+      "state": "not_specific"
     },
     "361520": "f9216bdd50eb6aad69d325dad0ee5fd1acf390681bf3186199c42335db614c25",
     "361526:a-21": "3ccba5420159651a0929a19e3105ff9dbc14b0accf035eee8ee8351b8eca678a",
@@ -13769,13 +13483,7 @@
       "state": "not_specific"
     },
     "361831": "1f9fa6b525516ed890d2c3e1ff6fc263ea2053b5da18565ba7330ad7724e3fa1",
-    "361833": {
-      "key": "3c926f1f8b0cd44cd61fcd69610d0b032f4a78a67ce57f6a1769e5ba663f546d",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748127.1743479,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
-    },
+    "361833": "0c25f063e7c17289ac56ce49df43d3f46725232b97d759bf060773a42f9e339d",
     "361952": {
       "key": "efc811b20b0aee4e521535472d413eb8bb4beefb805b31d5612251035e801391",
       "state": "not_specific"
@@ -13889,13 +13597,6 @@
       "key": "5c2ffe34c18ba576d79c4c2fa546b2dde42063a02375c305bb3a2ef34622d7e0",
       "state": "not_specific"
     },
-    "362454": {
-      "key": "7ea4bb9640ae402e2e2c41ca64be94b77522cbc8a6e91be31396b79fc4b684df",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
-      "state": "proposed"
-    },
     "362520": "50e8c24c5ceefa924ca8c183da7a8febc6cbe1fa2baca87a7b62652293e21c70",
     "362524": "69746ccb80bb49250c57382c0394b04dcb74955a5f3c51cf4703c76ee493c915",
     "362551": "3d576ae8f229458178d7ef5ea3852cdfacd5c45697aa8d4383b6504c0d35a0ea",
@@ -13907,11 +13608,8 @@
     },
     "362722": "d4f8a9e416ceedde025ea6c3553224911a4f2e09936ba85a01c50d735cbeadd8",
     "362752": {
-      "key": "911b353c661ca49619e2c538ccfa1b74e43509caccb2ea0be1578ed3dfaf2aac",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748144.0148542,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "5d5988ad369c7f94a793501867cec585ce31ffae5ebbf66ba2d509000e270474",
+      "state": "not_specific"
     },
     "362847": {
       "key": "90ff721e1a530c050697c059dd6bd98beba26b7dd52470906352ff8e47bedebe",
@@ -13947,10 +13645,7 @@
     },
     "362947": "7584abbe9fed07acd74b3590433ba9beac6816208060228c8810dc9123e47359",
     "362948": {
-      "key": "c87d969458f406ad8c9fc453b7ce5ad52b33235cd91d25ec90980e278d07e228",
-      "response_contract": "team-response-1",
-      "retry_after": 0,
-      "stage": "assembly",
+      "key": "ddad551b1e6f9685f081ca78ff8a98bc6727f21a90cc1397bfa62f28a7b7180c",
       "state": "insufficient_evidence"
     },
     "362952": "880cecee18ca84d635cb49706590139b94e99c9acf511bf7e10f9575c4a6cf17",
@@ -14001,11 +13696,8 @@
       "state": "not_specific"
     },
     "363244": {
-      "key": "92a440461e2866589bedb5003a6545197b2bdb4737a521d29b332ab0e0c8f6f1",
-      "response_contract": "team-response-1",
-      "retry_after": 1788748137.0138142,
-      "stage": "decomposition",
-      "state": "rejected_evidence"
+      "key": "d9161029dc8c6a224c5b5ffaec7c249d46a262ffc0772e066b8e364316b9b5b5",
+      "state": "not_specific"
     },
     "363245": {
       "key": "3455c89471335ada501ae470f095ddab286b21d751618c61f8c0955572f2ab4e",
@@ -14222,7 +13914,7 @@
     },
     "vpr-email:infoready-2028504": "992da3f7f468a75a59a56b1e955e45aed1a7d856c23a5af5d64f91e11dc3e4e3"
   },
-  "generation_id": "597a1d429186a55cb592a59795992deb9febfbd7f82089a3d27d7e8af806f8ec",
+  "generation_id": "ce3ccb6a5ef0c149739a1869d06827cb6b6d7df8c5ded074a395163d538f1f23",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -15833,7 +15525,6 @@
       "parent_id": "360006",
       "record_type": "specific_parent",
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "The source assessment or verification contract changed.",
       "review_state": "needs_revalidation",
       "roles": [
         {
@@ -15954,145 +15645,108 @@
     {
       "agency": "Dept of the Army -- Materiel Command",
       "archetype": "Source-grounded research collaboration",
-      "assembly_version": "complementary-roles-1",
       "catalog_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "gate_label": "Proposed Team",
-      "gate_state": "pass",
+      "gate_state": "conditional",
       "generator_version": "opportunity-teams-2",
       "id": "344592:ab-0015",
       "members": [
         {
           "claim_id": "urh-000050-c001",
           "claim_revision": 1,
-          "contribution": "Multi-hop Wireless Network Algorithms Researcher",
+          "contribution": "Network Science Analyst (Social/Information Networks)",
           "evidence_phrase": "graph signal processing",
           "evidence_term": "Graph and network analytics",
           "evidence_tier": "method_transfer",
           "faculty_id": "urh-000050",
           "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
-          "why_person": "Graph signal processing methods provide analytical tools that could be adapted to model topology and information flow in multi-hop wireless networks, though the work is not itself wireless network algorithm design."
+          "why_person": "Graph signal processing methods provide transferable analytical tools for studying network structure and interaction, though not applied to social/communications-network contexts here."
         },
         {
-          "claim_id": "urh-000057-c001",
+          "claim_id": "urh-000051-c001",
           "claim_revision": 1,
-          "contribution": "Spectrum/RF Interference Analyst",
-          "evidence_phrase": "ultra-wideband transceivers",
-          "evidence_term": "RF and microwave electronics",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000057",
-          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
-          "why_person": "Expertise in ultra-wideband transceiver design provides RF signal understanding that could inform spectrum congestion analysis, though the evidence concerns hardware design rather than interference/spectrum analytics."
+          "contribution": "Network Science Analyst (Social/Information Networks)",
+          "evidence_phrase": "complex-network statistical physics",
+          "evidence_term": "Graph and network analytics",
+          "evidence_tier": "direct",
+          "faculty_id": "urh-000051",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/ghoshal_gourab/index.html",
+          "why_person": "Complex-network statistical physics expertise directly supports analysis of network structure and dynamics central to network science objectives."
         }
       ],
-      "missing_skills": [],
-      "objective": "Advance network science for infrastructure-less, multi-hop wireless communication networks operating in congested and contested spectrum environments relevant to DoD/Army tactical operations, including analysis of interactions between communications, social, and information networks.",
+      "missing_skills": [
+        "Multi-hop Wireless Network Researcher",
+        "Spectrum/RF Interference Specialist"
+      ],
+      "objective": "Advance network science for infrastructure-less multi-hop wireless tactical networks operating in congested and contested spectrum, including analysis of interactions among communications, social, and information networks",
       "opportunity_number": "W911NF-23-S-0001",
       "parent_id": "344592",
       "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
       "record_type": "publishable_child",
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "review_state": "proposed",
+      "revalidation_reason": "Current evidence does not support complementary team contributions.",
+      "review_state": "needs_revalidation",
       "roles": [
         {
-          "accepted_terms": [
-            "Algorithmic game theory",
-            "Graph and network analytics"
-          ],
+          "accepted_terms": [],
           "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000050",
-            "urh-000051",
-            "urh-000071"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000050-c001",
-              "coverage": "method_transfer",
-              "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b",
-              "reason": "Graph signal processing methods provide analytical tools that could be adapted to model topology and information flow in multi-hop wireless networks, though the work is not itself wireless network algorithm design.",
-              "researcher_id": "urh-000050",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000051-c001",
-              "coverage": "method_transfer",
-              "material_hash": "be7ce5366bb191494c94af882cb86479195e4d0a9016d8dc726fcd8c77071bf6",
-              "reason": "Statistical-physics approaches to complex networks offer structural analysis techniques transferable to multi-hop network topology studies, but no direct wireless networking work is evidenced.",
-              "researcher_id": "urh-000051",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000071-c002",
-              "coverage": "method_transfer",
-              "material_hash": "4c6ff03c9dd508b281337ccfd101605c1029708764f2280297c56837fdc2e37a",
-              "reason": "Game-theoretic optimization techniques are commonly used for distributed resource allocation and could inform multi-hop network algorithm design, though the claim shows no direct application to wireless networks.",
-              "researcher_id": "urh-000071",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
           "id": "role-1",
-          "label": "Multi-hop Wireless Network Algorithms Researcher",
-          "rationale": "Graph signal processing methods provide analytical tools that could be adapted to model topology and information flow in multi-hop wireless networks, though the work is not itself wireless network algorithm design. Statistical-physics approaches to complex networks offer structural analysis techniques transferable to multi-hop network topology studies, but no direct wireless networking work is evidenced. Game-theoretic optimization techniques are commonly used for distributed resource allocation and could inform multi-hop network algorithm design, though the claim shows no direct application to wireless networks.",
+          "label": "Multi-hop Wireless Network Researcher",
+          "rationale": "No current internal claim establishes coverage of this role.",
           "required": true,
-          "source_quote": "infrastructure-less multi-hop wireless networks operating in congested and contested spectrum",
+          "source_quote": "research applicable to infrastructure-less multi-hop wireless networks operating in congested and contested spectrum",
           "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967"
         },
         {
           "accepted_terms": [
-            "RF and microwave electronics",
-            "Radar and synthetic-aperture imaging"
+            "RF and microwave electronics"
           ],
           "alternative_ids": [
-            "urh-000104"
-          ],
-          "candidate_ids": [
             "urh-000057",
+            "urh-000091",
             "urh-000144"
           ],
+          "candidate_ids": [],
           "claim_refs": [
             {
               "claim_id": "urh-000057-c001",
-              "coverage": "method_transfer",
+              "coverage": "adjacent",
               "material_hash": "3c9c410ff0ca69e30d8b25ed0f6efb986469c88211d5cca0b20b48a6c0bb13d6",
-              "reason": "Expertise in ultra-wideband transceiver design provides RF signal understanding that could inform spectrum congestion analysis, though the evidence concerns hardware design rather than interference/spectrum analytics.",
               "researcher_id": "urh-000057",
               "revision": 1
             },
             {
               "claim_id": "urh-000144-c001",
-              "coverage": "method_transfer",
+              "coverage": "adjacent",
               "material_hash": "6521705cca71d5fbd38ac38dcada05bbe23b5d08fb62ac3cce42c8329c99c758",
-              "reason": "Microwave-photonic signal processing techniques are relevant to RF signal manipulation and could transfer to spectrum analysis methods, but the work is focused on photonic devices, not contested-spectrum interference studies.",
               "researcher_id": "urh-000144",
               "revision": 1
             },
             {
-              "claim_id": "urh-000104-c003",
+              "claim_id": "urh-000091-c001",
               "coverage": "adjacent",
-              "material_hash": "cd193313ed209fdf2a40c487845a68815b29c981ee633d7176abe25e7cd5d298",
-              "reason": "Radar and synthetic-aperture imaging involves RF signal processing but targets imaging applications rather than communications spectrum congestion or interference analysis.",
-              "researcher_id": "urh-000104",
+              "material_hash": "7e55dd2c0a2faa843d113d90be05d3bef1dd87afd7b67879ade0fb501d643365",
+              "researcher_id": "urh-000091",
               "revision": 1
             }
           ],
-          "coverage": "direct",
+          "coverage": "adjacent",
           "id": "role-2",
-          "label": "Spectrum/RF Interference Analyst",
-          "rationale": "Expertise in ultra-wideband transceiver design provides RF signal understanding that could inform spectrum congestion analysis, though the evidence concerns hardware design rather than interference/spectrum analytics. Microwave-photonic signal processing techniques are relevant to RF signal manipulation and could transfer to spectrum analysis methods, but the work is focused on photonic devices, not contested-spectrum interference studies. Radar and synthetic-aperture imaging involves RF signal processing but targets imaging applications rather than communications spectrum congestion or interference analysis.",
+          "label": "Spectrum/RF Interference Specialist",
+          "rationale": "Demonstrates RF/microwave transceiver design skill, but the work is generic UWB hardware development with no evidence of addressing spectrum congestion, contention, or interference mitigation. Optomechanical microwave-photonic signal processing shows RF signal-processing hardware expertise, but no demonstrated link to congested/contested spectrum management or interference issues. Microwave circuit skills are present, but the work targets quantum simulation rather than spectrum congestion or interference mitigation.",
           "required": true,
           "source_quote": "operating in congested and contested spectrum",
           "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967"
         },
         {
           "accepted_terms": [
-            "Algorithmic game theory",
             "Graph and network analytics"
           ],
-          "alternative_ids": [
-            "urh-000013"
-          ],
+          "alternative_ids": [],
           "candidate_ids": [
             "urh-000050",
             "urh-000051",
@@ -16101,9 +15755,8 @@
           "claim_refs": [
             {
               "claim_id": "urh-000051-c001",
-              "coverage": "method_transfer",
+              "coverage": "direct",
               "material_hash": "be7ce5366bb191494c94af882cb86479195e4d0a9016d8dc726fcd8c77071bf6",
-              "reason": "Statistical-physics methods for complex networks offer generic network-science tools potentially transferable to studying cross-network interactions, but the evidence does not show direct work on communications/social/information network coupling.",
               "researcher_id": "urh-000051",
               "revision": 1
             },
@@ -16111,46 +15764,23 @@
               "claim_id": "urh-000050-c001",
               "coverage": "method_transfer",
               "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b",
-              "reason": "Graph signal processing techniques provide analytical methods that could be applied to studying interactions among communications, social, and information networks, though not evidenced as such directly.",
               "researcher_id": "urh-000050",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000013-c001",
-              "coverage": "adjacent",
-              "material_hash": "c34a593c5b690792f62a00168b0e0a179bf6a287382edd9b719e2ad8877f48dd",
-              "reason": "Algorithmic game theory addresses strategic interactions among agents but is not shown to be applied to cross-network (comms/social/information) analysis.",
-              "researcher_id": "urh-000013",
               "revision": 1
             },
             {
               "claim_id": "urh-000083-c001",
               "coverage": "method_transfer",
               "material_hash": "bd7db634f23093e9219543b3e1c660d55250457236953fc62999bd10db585f4d",
-              "reason": "Network modeling methodology from glymphatic transport research demonstrates transferable graph-based modeling skills applicable to studying network interactions, though the domain (biological transport) differs substantially from communications networks.",
               "researcher_id": "urh-000083",
               "revision": 1
             }
           ],
           "coverage": "direct",
           "id": "role-3",
-          "label": "Network Science Theorist (Cross-Network Interaction)",
-          "rationale": "Statistical-physics methods for complex networks offer generic network-science tools potentially transferable to studying cross-network interactions, but the evidence does not show direct work on communications/social/information network coupling. Graph signal processing techniques provide analytical methods that could be applied to studying interactions among communications, social, and information networks, though not evidenced as such directly. Algorithmic game theory addresses strategic interactions among agents but is not shown to be applied to cross-network (comms/social/information) analysis. Network modeling methodology from glymphatic transport research demonstrates transferable graph-based modeling skills applicable to studying network interactions, though the domain (biological transport) differs substantially from communications networks.",
+          "label": "Network Science Analyst (Social/Information Networks)",
+          "rationale": "Complex-network statistical physics expertise directly supports analysis of network structure and dynamics central to network science objectives. Graph signal processing methods provide transferable analytical tools for studying network structure and interaction, though not applied to social/communications-network contexts here. Network modeling techniques from glymphatic transport research are methodologically transferable to abstract network analysis, though the domain (biological transport) is unrelated to communications/social networks.",
           "required": true,
           "source_quote": "analysis of mutual interaction among the communications, social, and information networks",
-          "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967"
-        },
-        {
-          "accepted_terms": [],
-          "alternative_ids": [],
-          "candidate_ids": [],
-          "claim_refs": [],
-          "coverage": "gap",
-          "id": "role-4",
-          "label": "Tactical Network Systems Engineer",
-          "rationale": "No current internal claim establishes coverage of this role.",
-          "required": false,
-          "source_quote": "focusing on DoD and Army unique problems",
           "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967"
         }
       ],
@@ -16161,23 +15791,23 @@
         {
           "member_ids": [
             "urh-000050",
-            "urh-000057"
+            "urh-000051"
           ]
         },
         {
           "member_ids": [
             "urh-000050",
-            "urh-000144"
+            "urh-000083"
           ]
         },
         {
           "member_ids": [
             "urh-000051",
-            "urh-000057"
+            "urh-000083"
           ]
         }
       ],
-      "why_team": "Gonzalo Mateos contributes multi-hop wireless network algorithms researcher. Hui Wu contributes spectrum/rf interference analyst."
+      "why_team": "Gonzalo Mateos contributes network science analyst (social/information networks). Gourab Ghoshal contributes network science analyst (social/information networks)."
     },
     {
       "agency": "Dept of the Army -- Materiel Command",
@@ -24051,7 +23681,6 @@
     {
       "agency": "National Institutes of Health",
       "archetype": "Source-grounded research collaboration",
-      "assembly_version": "complementary-roles-1",
       "catalog_title": "Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0",
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "gate_label": "Proposed Team",
@@ -24060,72 +23689,52 @@
       "id": "361186",
       "members": [
         {
-          "claim_id": "urh-000011-c001",
+          "claim_id": "urh-000086-c001",
           "claim_revision": 1,
-          "contribution": "Neuroanatomy/Innervation Mapping Investigator",
-          "evidence_phrase": "peripheral auditory neurobiology",
-          "evidence_term": "Auditory neuroscience and hearing technology",
+          "contribution": "Peri-articular Tissue Specialist",
+          "evidence_phrase": "musculoskeletal soft-tissue mechanics",
+          "evidence_term": "Tissue biomechanics",
           "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000011",
-          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/luebke_anne/index.html",
-          "why_person": "Expertise in peripheral auditory neurobiology demonstrates skill in characterizing peripheral sensory neuron anatomy and function, a methodology transferable to mapping sensory innervation of joint tissues, though not itself joint-focused."
-        },
-        {
-          "claim_id": "urh-000093-c001",
-          "claim_revision": 1,
-          "contribution": "Preclinical/NAMs Modeling Scientist",
-          "evidence_phrase": "mechanochemical control of morphogenesis",
-          "evidence_term": "Mechanobiology and mechanotransduction",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000093",
-          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/herrera-perez_marisol/index.html",
-          "why_person": "Mechanochemical morphogenesis expertise provides modeling approaches (e.g., organoid/tissue-level dynamics) that could be adapted to New Approach Methodologies for joint disease, though not originally applied to joints."
+          "faculty_id": "urh-000086",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
+          "why_person": "Musculoskeletal soft-tissue mechanics expertise is methodologically transferable to characterizing peri-articular structures such as myofascial or ligamentous tissue, though not demonstrated specifically in the context of joint pain or innervation."
         },
         {
           "claim_id": "urh-000095-c001",
           "claim_revision": 1,
-          "contribution": "Peri-articular Tissue Biologist",
+          "contribution": "Peri-articular Tissue Specialist",
           "evidence_phrase": "surgical soft-tissue biomechanics",
           "evidence_term": "Tissue biomechanics",
           "evidence_tier": "method_transfer",
           "faculty_id": "urh-000095",
           "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
-          "why_person": "Surgical soft-tissue biomechanics experience offers applicable techniques for assessing peri-articular tissue mechanical properties, without direct evidence of joint-pain-specific application."
+          "why_person": "Surgical soft-tissue biomechanics experience offers transferable methodology for characterizing peri-articular tissue mechanics, without direct evidence of work on joint pain-associated peri-articular structures."
         }
       ],
       "missing_skills": [
-        "Clinical Pain Phenotyping Specialist"
+        "Neuroanatomical Mapping Investigator",
+        "Clinical Pain Phenotyping Investigator",
+        "Preclinical Model Investigator (NAMs)",
+        "Data Integration/Atlas Scientist"
       ],
-      "objective": "Refine and map the innervation of articular and peri-articular joint tissues (bone, cartilage, synovium, joint capsule, ligament, tendon, fascia, muscle) by sensory neurons mediating pain, integrating clinical phenotyping, preclinical modeling, and data/atlas development to advance joint pain therapeutics.",
+      "objective": "Refine and map the sensory innervation of articular and peri-articular joint tissues underlying pain, integrating clinical phenotyping, preclinical models, and data atlases within the RE-JOIN Consortium framework",
       "opportunity_number": "RFA-AR-26-006",
       "parent_id": "361186",
       "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
       "record_type": "specific_parent",
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "review_state": "proposed",
+      "revalidation_reason": "Current evidence does not support complementary team contributions.",
+      "review_state": "needs_revalidation",
       "roles": [
         {
-          "accepted_terms": [
-            "Auditory neuroscience and hearing technology"
-          ],
+          "accepted_terms": [],
           "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000011"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000011-c001",
-              "coverage": "method_transfer",
-              "material_hash": "11c257c97eb7f447b9b639ab83d350138480291fda5d37b95e50582d217051d3",
-              "reason": "Expertise in peripheral auditory neurobiology demonstrates skill in characterizing peripheral sensory neuron anatomy and function, a methodology transferable to mapping sensory innervation of joint tissues, though not itself joint-focused.",
-              "researcher_id": "urh-000011",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
           "id": "role-1",
-          "label": "Neuroanatomy/Innervation Mapping Investigator",
-          "rationale": "Expertise in peripheral auditory neurobiology demonstrates skill in characterizing peripheral sensory neuron anatomy and function, a methodology transferable to mapping sensory innervation of joint tissues, though not itself joint-focused.",
+          "label": "Neuroanatomical Mapping Investigator",
+          "rationale": "No current internal claim establishes coverage of this role.",
           "required": true,
           "source_quote": "refine and map the innervation of the different articular and peri-articular tissues that collectively form the joint",
           "source_url": "https://www.grants.gov/search-results-detail/361186"
@@ -24137,63 +23746,21 @@
           "claim_refs": [],
           "coverage": "gap",
           "id": "role-2",
-          "label": "Clinical Pain Phenotyping Specialist",
+          "label": "Clinical Pain Phenotyping Investigator",
           "rationale": "No current internal claim establishes coverage of this role.",
           "required": true,
           "source_quote": "Enhancing clinical pain phenotyping with multimodal profiling of new and expanded patient samples across life span and disease conditions",
           "source_url": "https://www.grants.gov/search-results-detail/361186"
         },
         {
-          "accepted_terms": [
-            "Mechanobiology and mechanotransduction",
-            "Musculoskeletal biomechanics and rehabilitation",
-            "Regenerative medicine and tissue engineering",
-            "Tissue biomechanics"
-          ],
+          "accepted_terms": [],
           "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000093",
-            "urh-000115",
-            "urh-000143"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000093-c001",
-              "coverage": "method_transfer",
-              "material_hash": "45a5837c687a860a7d270c5c7b1189089ab952c2802daa0e1f43fa7af7ff44bb",
-              "reason": "Mechanochemical morphogenesis expertise provides modeling approaches (e.g., organoid/tissue-level dynamics) that could be adapted to New Approach Methodologies for joint disease, though not originally applied to joints.",
-              "researcher_id": "urh-000093",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000115-c002",
-              "coverage": "method_transfer",
-              "material_hash": "c2d6da631ca1a0f939515e337855ae1d6c3ef0c5617ac12ee5e871943dd42197",
-              "reason": "Experience developing regenerative soft-tissue therapies offers a translatable approach for preclinical modeling of joint tissue repair, though not demonstrated specifically in joint disease models.",
-              "researcher_id": "urh-000115",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000143-c002",
-              "coverage": "method_transfer",
-              "material_hash": "b2c926b5aba7f9bda673383d1d8f8df0d9d41ef8e9e44afb9bc55bcd4c803c09",
-              "reason": "Chondrocyte and cartilage mechanics work provides tissue-level modeling expertise relevant to preclinical joint disease modeling, though not explicitly framed as NAMs or joint-pain-focused.",
-              "researcher_id": "urh-000143",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000143-c003",
-              "coverage": "method_transfer",
-              "material_hash": "50127da673798ad37c074c713ebe1ecab9c9cbc583e174862d161557588c0d9b",
-              "reason": "Study of mechanosensitive ion channels in musculoskeletal cells offers mechanistic insight transferable to modeling joint tissue responses in preclinical systems, without direct evidence of joint disease modeling.",
-              "researcher_id": "urh-000143",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
           "id": "role-3",
-          "label": "Preclinical/NAMs Modeling Scientist",
-          "rationale": "Mechanochemical morphogenesis expertise provides modeling approaches (e.g., organoid/tissue-level dynamics) that could be adapted to New Approach Methodologies for joint disease, though not originally applied to joints. Experience developing regenerative soft-tissue therapies offers a translatable approach for preclinical modeling of joint tissue repair, though not demonstrated specifically in joint disease models. Chondrocyte and cartilage mechanics work provides tissue-level modeling expertise relevant to preclinical joint disease modeling, though not explicitly framed as NAMs or joint-pain-focused. Study of mechanosensitive ion channels in musculoskeletal cells offers mechanistic insight transferable to modeling joint tissue responses in preclinical systems, without direct evidence of joint disease modeling.",
+          "label": "Preclinical Model Investigator (NAMs)",
+          "rationale": "No current internal claim establishes coverage of this role.",
           "required": true,
           "source_quote": "Expanding to new preclinical and New Approach Methodologies (NAMs) in modeling joint disease",
           "source_url": "https://www.grants.gov/search-results-detail/361186"
@@ -24207,23 +23774,14 @@
           "candidate_ids": [
             "urh-000086",
             "urh-000095",
-            "urh-000115",
-            "urh-000143"
+            "urh-000115"
           ],
           "claim_refs": [
-            {
-              "claim_id": "urh-000143-c001",
-              "coverage": "direct",
-              "material_hash": "a12f0cde6291a11e27ac570f9fcad9d82489e1377bba8672b15f6caa2860a9f3",
-              "reason": "Research on cellular force sensing specifically in joint tissues directly supports characterization of peri-articular tissue biomechanics relevant to this role.",
-              "researcher_id": "urh-000143",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000086-c001",
               "coverage": "method_transfer",
               "material_hash": "f6eb9e4cc2665e1a83c09c138d2f75317f3f6885a738d262314ee7c2f34ebf92",
-              "reason": "Musculoskeletal soft-tissue mechanics expertise provides transferable methods for characterizing peri-articular tissues such as tendon, ligament, and fascia, though not explicitly tied to joint pain context.",
+              "reason": "Musculoskeletal soft-tissue mechanics expertise is methodologically transferable to characterizing peri-articular structures such as myofascial or ligamentous tissue, though not demonstrated specifically in the context of joint pain or innervation.",
               "researcher_id": "urh-000086",
               "revision": 1
             },
@@ -24231,7 +23789,7 @@
               "claim_id": "urh-000095-c001",
               "coverage": "method_transfer",
               "material_hash": "822b95b94bd54b1823cd2674406d3a39fde57581d2cbb4007d3877cc93edf06e",
-              "reason": "Surgical soft-tissue biomechanics experience offers applicable techniques for assessing peri-articular tissue mechanical properties, without direct evidence of joint-pain-specific application.",
+              "reason": "Surgical soft-tissue biomechanics experience offers transferable methodology for characterizing peri-articular tissue mechanics, without direct evidence of work on joint pain-associated peri-articular structures.",
               "researcher_id": "urh-000095",
               "revision": 1
             },
@@ -24239,41 +23797,28 @@
               "claim_id": "urh-000115-c003",
               "coverage": "method_transfer",
               "material_hash": "ed3451122d4c77488e33c9398ff1993396cc944e3619b40f8f3bffb6453947b6",
-              "reason": "Soft-tissue mechanobiology background supplies methodology relevant to studying peri-articular tissue behavior, though not explicitly demonstrated on joint-associated tissues.",
+              "reason": "Soft-tissue mechanobiology expertise provides methodological grounding relevant to peri-articular tissue mechanics, though not shown in a joint pain or innervation context.",
               "researcher_id": "urh-000115",
               "revision": 1
             }
           ],
           "coverage": "direct",
           "id": "role-4",
-          "label": "Peri-articular Tissue Biologist",
-          "rationale": "Research on cellular force sensing specifically in joint tissues directly supports characterization of peri-articular tissue biomechanics relevant to this role. Musculoskeletal soft-tissue mechanics expertise provides transferable methods for characterizing peri-articular tissues such as tendon, ligament, and fascia, though not explicitly tied to joint pain context. Surgical soft-tissue biomechanics experience offers applicable techniques for assessing peri-articular tissue mechanical properties, without direct evidence of joint-pain-specific application. Soft-tissue mechanobiology background supplies methodology relevant to studying peri-articular tissue behavior, though not explicitly demonstrated on joint-associated tissues.",
+          "label": "Peri-articular Tissue Specialist",
+          "rationale": "Musculoskeletal soft-tissue mechanics expertise is methodologically transferable to characterizing peri-articular structures such as myofascial or ligamentous tissue, though not demonstrated specifically in the context of joint pain or innervation. Surgical soft-tissue biomechanics experience offers transferable methodology for characterizing peri-articular tissue mechanics, without direct evidence of work on joint pain-associated peri-articular structures. Soft-tissue mechanobiology expertise provides methodological grounding relevant to peri-articular tissue mechanics, though not shown in a joint pain or innervation context.",
           "required": false,
           "source_quote": "Focusing on peri-articular tissues in joint pain, such as vasculature, synovium, adipose, myofascial tissue, etc.",
           "source_url": "https://www.grants.gov/search-results-detail/361186"
         },
         {
-          "accepted_terms": [
-            "Musculoskeletal biomechanics and rehabilitation"
-          ],
+          "accepted_terms": [],
           "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000095"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000095-c002",
-              "coverage": "method_transfer",
-              "material_hash": "51e5b9700832746d7c3849536749ec123ea3d517d140cbf1737462d60d2988a6",
-              "reason": "Mechanical-property imaging of musculoskeletal tissue provides an imaging-based data modality that could feed into joint atlas integration, though no direct atlas-building experience is shown.",
-              "researcher_id": "urh-000095",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
+          "candidate_ids": [],
+          "claim_refs": [],
+          "coverage": "gap",
           "id": "role-5",
-          "label": "Data Integration/Atlas Developer",
-          "rationale": "Mechanical-property imaging of musculoskeletal tissue provides an imaging-based data modality that could feed into joint atlas integration, though no direct atlas-building experience is shown.",
+          "label": "Data Integration/Atlas Scientist",
+          "rationale": "No current internal claim establishes coverage of this role.",
           "required": true,
           "source_quote": "developing/enhancing joint atlases that will enable integration of imaging and molecular datasets",
           "source_url": "https://www.grants.gov/search-results-detail/361186"
@@ -24285,27 +23830,24 @@
       "variants": [
         {
           "member_ids": [
-            "urh-000011",
-            "urh-000093",
+            "urh-000086",
             "urh-000095"
           ]
         },
         {
           "member_ids": [
-            "urh-000011",
-            "urh-000095",
+            "urh-000086",
             "urh-000115"
           ]
         },
         {
           "member_ids": [
-            "urh-000011",
             "urh-000095",
-            "urh-000143"
+            "urh-000115"
           ]
         }
       ],
-      "why_team": "Anne E. Luebke contributes neuroanatomy/innervation mapping investigator. Marisol Herrera-Perez contributes preclinical/nams modeling scientist. Mark Buckley contributes peri-articular tissue biologist."
+      "why_team": "Laura Slane contributes peri-articular tissue specialist. Mark Buckley contributes peri-articular tissue specialist."
     },
     {
       "agency": "National Institutes of Health",
@@ -33958,8 +33500,7 @@
       "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
       "record_type": "specific_parent",
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "The official opportunity scope changed or is no longer eligible.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
@@ -36464,242 +36005,6 @@
         }
       ],
       "why_team": "Allison J. Lopatkin contributes outbreak response modeler. Kimberly Boster contributes surveillance systems modeler."
-    },
-    {
-      "agency": "National Institutes of Health",
-      "archetype": "Source-grounded research collaboration",
-      "assembly_version": "complementary-roles-1",
-      "catalog_title": "The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)",
-      "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
-      "gate_label": "Proposed Team",
-      "gate_state": "conditional",
-      "generator_version": "opportunity-teams-2",
-      "id": "362454",
-      "members": [
-        {
-          "claim_id": "urh-000045-c001",
-          "claim_revision": 1,
-          "contribution": "Data Curation & Harmonization Specialist",
-          "evidence_phrase": "automated data-discovery systems",
-          "evidence_term": "Search and information retrieval",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000045",
-          "source_url": "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html",
-          "why_person": "Automated data-discovery systems expertise (search/information retrieval) can inform methods for locating and ingesting heterogeneous datasets, but no direct experience with genomic data curation or harmonization is evidenced."
-        },
-        {
-          "claim_id": "urh-000050-c001",
-          "claim_revision": 1,
-          "contribution": "Bioinformatics/AI Analysis & Visualization Developer",
-          "evidence_phrase": "graph signal processing",
-          "evidence_term": "Graph and network analytics",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000050",
-          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
-          "why_person": "Graph signal processing methods offer a credible technique transfer to network-based analysis and visualization of genomic data, but no direct application to AD/ADRD genetics or AI-ready cloud workspaces is shown."
-        },
-        {
-          "claim_id": "urh-000073-c001",
-          "claim_revision": 1,
-          "contribution": "Data Security & Compliance Officer",
-          "evidence_phrase": "compiler-enforced systems security",
-          "evidence_term": "Compilers and runtime systems",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000073",
-          "source_url": "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html",
-          "why_person": "Compiler-enforced systems security research provides transferable techniques for hardening data-handling software, but no direct evidence of implementing federal compliance or data-sharing policy frameworks."
-        }
-      ],
-      "missing_skills": [
-        "Data Infrastructure & Cloud Platform Engineer"
-      ],
-      "objective": "Develop, operate, and sustain a secure, scalable, cloud-based data storage and computing platform (NIAGADS) for ingesting, curating, harmonizing, analyzing, and distributing multi-ancestry, large-scale AD/ADRD human genetic and genomic data to the research community.",
-      "opportunity_number": "RFA-AG-27-005",
-      "parent_id": "362454",
-      "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
-      "record_type": "specific_parent",
-      "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "review_state": "proposed",
-      "roles": [
-        {
-          "accepted_terms": [],
-          "alternative_ids": [],
-          "candidate_ids": [],
-          "claim_refs": [],
-          "coverage": "gap",
-          "id": "role-1",
-          "label": "Data Infrastructure & Cloud Platform Engineer",
-          "rationale": "No current internal claim establishes coverage of this role.",
-          "required": true,
-          "source_quote": "develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        },
-        {
-          "accepted_terms": [
-            "Search and information retrieval"
-          ],
-          "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000045"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000045-c001",
-              "coverage": "method_transfer",
-              "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
-              "reason": "Automated data-discovery systems expertise (search/information retrieval) can inform methods for locating and ingesting heterogeneous datasets, but no direct experience with genomic data curation or harmonization is evidenced.",
-              "researcher_id": "urh-000045",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
-          "id": "role-2",
-          "label": "Data Curation & Harmonization Specialist",
-          "rationale": "Automated data-discovery systems expertise (search/information retrieval) can inform methods for locating and ingesting heterogeneous datasets, but no direct experience with genomic data curation or harmonization is evidenced.",
-          "required": true,
-          "source_quote": "Enable efficient ingestion, curation, harmonization, and analysis of multi-ancestry, large population-scale datasets",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        },
-        {
-          "accepted_terms": [
-            "Graph and network analytics"
-          ],
-          "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000050"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000050-c001",
-              "coverage": "method_transfer",
-              "material_hash": "90f62f61a8b21af1b185c41ad03e50667260bddf3495556676f34869ab40c73b",
-              "reason": "Graph signal processing methods offer a credible technique transfer to network-based analysis and visualization of genomic data, but no direct application to AD/ADRD genetics or AI-ready cloud workspaces is shown.",
-              "researcher_id": "urh-000050",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
-          "id": "role-3",
-          "label": "Bioinformatics/AI Analysis & Visualization Developer",
-          "rationale": "Graph signal processing methods offer a credible technique transfer to network-based analysis and visualization of genomic data, but no direct application to AD/ADRD genetics or AI-ready cloud workspaces is shown.",
-          "required": true,
-          "source_quote": "Provide robust analysis, visualization, and artificial intelligence -ready resources within secure cloud workspaces",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        },
-        {
-          "accepted_terms": [
-            "Compilers and runtime systems",
-            "GPU and heterogeneous accelerators",
-            "Hardware security",
-            "Memory systems and data locality"
-          ],
-          "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000073",
-            "urh-000149"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000073-c001",
-              "coverage": "method_transfer",
-              "material_hash": "1ca4684a8c9bc2ba7008218d5932f1f779f897933a9d8df7b5eaa4b8ac6f1d08",
-              "reason": "Compiler-enforced systems security research provides transferable techniques for hardening data-handling software, but no direct evidence of implementing federal compliance or data-sharing policy frameworks.",
-              "researcher_id": "urh-000073",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000149-c001",
-              "coverage": "method_transfer",
-              "material_hash": "e3e2fe8cf7415330cfc0849c23bc59327d0a9bcaeaa76835984346276498f1ae",
-              "reason": "GPU security architecture expertise offers transferable hardware-level security methodology relevant to protecting compute infrastructure, but no direct evidence of federal security/compliance policy work.",
-              "researcher_id": "urh-000149",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000149-c002",
-              "coverage": "method_transfer",
-              "material_hash": "d3ba8a72af4cb6fcc4f6224137f9349a40371ad957ed959b1df648dde208e773",
-              "reason": "Memory-system security research is methodologically transferable to protecting storage components of a data platform, though no direct compliance or data-sharing policy experience is evidenced.",
-              "researcher_id": "urh-000149",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000149-c003",
-              "coverage": "method_transfer",
-              "material_hash": "d28058946a5496879e5a0873b7a3213c5f357354ec710d60e158dbf705e38783",
-              "reason": "Research on software-hardware security boundaries provides transferable security design insight, but no direct federal data-sharing compliance experience is shown.",
-              "researcher_id": "urh-000149",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
-          "id": "role-4",
-          "label": "Data Security & Compliance Officer",
-          "rationale": "Compiler-enforced systems security research provides transferable techniques for hardening data-handling software, but no direct evidence of implementing federal compliance or data-sharing policy frameworks. GPU security architecture expertise offers transferable hardware-level security methodology relevant to protecting compute infrastructure, but no direct evidence of federal security/compliance policy work. Memory-system security research is methodologically transferable to protecting storage components of a data platform, though no direct compliance or data-sharing policy experience is evidenced. Research on software-hardware security boundaries provides transferable security design insight, but no direct federal data-sharing compliance experience is shown.",
-          "required": true,
-          "source_quote": "Ensure compliance with federal security and data-sharing policies",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        },
-        {
-          "accepted_terms": [
-            "Search and information retrieval"
-          ],
-          "alternative_ids": [],
-          "candidate_ids": [
-            "urh-000045"
-          ],
-          "claim_refs": [
-            {
-              "claim_id": "urh-000045-c001",
-              "coverage": "method_transfer",
-              "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
-              "reason": "Automated data-discovery system methods could support cross-repository data linkage relevant to interoperability efforts, but no direct experience coordinating with NIH/NIA repositories is evidenced.",
-              "researcher_id": "urh-000045",
-              "revision": 1
-            }
-          ],
-          "coverage": "direct",
-          "id": "role-5",
-          "label": "Interoperability & Repository Coordination Lead",
-          "rationale": "Automated data-discovery system methods could support cross-repository data linkage relevant to interoperability efforts, but no direct experience coordinating with NIH/NIA repositories is evidenced.",
-          "required": true,
-          "source_quote": "Promote interoperability with other NIH- and NIA-supported repositories",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        },
-        {
-          "accepted_terms": [],
-          "alternative_ids": [],
-          "candidate_ids": [],
-          "claim_refs": [],
-          "coverage": "gap",
-          "id": "role-6",
-          "label": "User Support & Community Engagement Coordinator",
-          "rationale": "No current internal claim establishes coverage of this role.",
-          "required": false,
-          "source_quote": "Provide user support, training, and community engagement",
-          "source_url": "https://www.grants.gov/search-results-detail/362454"
-        }
-      ],
-      "scope_label": "The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)",
-      "source_fingerprint": "c7a2517f4b5ac8217af222211cef8a1578cf21c5f0582af8b3e8827d58629762",
-      "source_url": "https://www.grants.gov/search-results-detail/362454",
-      "variants": [
-        {
-          "member_ids": [
-            "urh-000045",
-            "urh-000050",
-            "urh-000073"
-          ]
-        },
-        {
-          "member_ids": [
-            "urh-000045",
-            "urh-000050",
-            "urh-000149"
-          ]
-        }
-      ],
-      "why_team": "Fatemeh Nargesian contributes data curation & harmonization specialist. Gonzalo Mateos contributes bioinformatics/ai analysis & visualization developer. John Criswell contributes data security & compliance officer."
     }
   ],
   "pool_counts": {

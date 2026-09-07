@@ -281,13 +281,14 @@ self-service account, personalized RSS, and email-service architecture.
 
 <!-- catalog-stats:start -->
 This replaces the former 48-record Chemical and Sustainability Engineering feed. The
-September 7, 2026 build contains 1,407 current funding opportunities (1,081 posted and
-326 forecasted) from ARPA-H (10), DOE EERE Exchange (1), Grants.gov (1,327), NASA ROSES
-(3), NYSERDA (37), U.S. National Science Foundation (1), VPR funding digest (limited
-submissions & foundations) (28), with no deadline before the catalog date. It provides a
-direct official announcement for 290 records, an official source-page route for another
-616, and the official Grants.gov record for the remaining 501. Across all route types,
-715 records also contain an official source URL.
+September 6, 2026 build contains 1,412 current funding opportunities (1,086 posted and
+326 forecasted) from ARPA-H (10), DARPA / IARPA research solicitations (4), DOE EERE
+Exchange (1), Grants.gov (1,329), NASA ROSES (3), NYSERDA (37), U.S. National Science
+Foundation (1), VPR funding digest (limited submissions & foundations) (27), with no
+deadline before the catalog date. It provides a direct official announcement for 290
+records, an official source-page route for another 621, and the official Grants.gov
+record for the remaining 501. Across all route types, 720 records also contain an
+official source URL.
 <!-- catalog-stats:end -->
 
 Funding values are intentionally not conflated: award floor/ceiling drive

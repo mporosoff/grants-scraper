@@ -4,48 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
-    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-779bd2ee55b34b8e</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
-  </entry>
-  <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
-  </entry>
   <entry>
     <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
     <link href="https://www.grants.gov/search-results-detail/363616"/>
@@ -76,39 +36,30 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
-    <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
+    <link href="https://www.grants.gov/search-results-detail/363530"/>
+    <id>urn:funding-finder:grants-gov:363530</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+    <category term="Cybersecurity"/>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Capacity Building opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), and admini…</summary>
   </entry>
   <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363526"/>
+    <id>urn:funding-finder:grants-gov:363526</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
-    <category term="Energy"/>
+    <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Doctoral New Investigator (DNI) Grants</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e1612e2acba631d2</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>American Chemical Society Petroleum Research Fund</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <summary>American Chemical Society Petroleum Research Fund | Posted</summary>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
@@ -170,8 +121,8 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
     <category term="Quantum science"/>
+    <category term="Data science"/>
     <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
@@ -108,22 +108,6 @@
     <summary>NASA Headquarters | Closes 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: Amended August 31, 2026. This amendment releases the final text for this program element, which was previously TBD. Mandatory NOIs are due October 15, 2026, and proposals are due December 3, 2026. There are several major changes since the pr…</summary>
   </entry>
   <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
     <title>U.S. Mission to Australia 2026 Annual Program Statement</title>
     <link href="https://www.grants.gov/search-results-detail/363708"/>
     <id>urn:funding-finder:grants-gov:363708</id>
@@ -143,18 +127,6 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>Fish and Wildlife Service | Closes 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
@@ -354,19 +326,6 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <summary>Bureau of Land Management | Closes 2026-09-11 | The BLM Threatened and Endangered Species Program (T&amp;E) focuses on conservation and recovery of endangered, threatened and BLM Sensitive Species (collectively referred to as BLM Special Status Species) and their habitats to help inform a balance of multiple uses of BLM-managed lands, including the Nation"s need for domestic sources of energy, minerals, timber, grazing, recreation, and fish and wil…</summary>
-  </entry>
-  <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
   </entry>
   <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
@@ -678,5 +637,44 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Closes 2026-10-20 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.15 Biosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363241"/>
+    <id>urn:funding-finder:grants-gov:363241</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-11-06 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in t…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.13 Accelerating Earth Solutions</title>
+    <link href="https://www.grants.gov/search-results-detail/363224"/>
+    <id>urn:funding-finder:grants-gov:363224</id>
+    <updated>2026-07-17T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
+  </entry>
+  <entry>
+    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
+    <link href="https://www.grants.gov/search-results-detail/363065"/>
+    <id>urn:funding-finder:grants-gov:363065</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>National Energy Technology Laboratory</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
 </feed>

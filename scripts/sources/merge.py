@@ -128,7 +128,7 @@ def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
 
 def _last_successful_refresh_at(sources: dict, slug: str) -> str | None:
     source = sources.get(slug) or {}
-    stamp = source.get("last_successful_refresh_at") or source.get("fetched_at")
+    stamp = source.get("last_successful_refresh_at") if "last_successful_refresh_at" in source else source.get("fetched_at")
     return str(stamp) if stamp else None
 
 
@@ -138,7 +138,7 @@ def _classify_failure(result: AdapterResult) -> str:
         return str(explicit)
     message = str(result.error or "").casefold()
     if any(token in message for token in (
-        "http error", "http ", "timeout", "timed out", "connection",
+        "http error", "httperror", "http ", "timeout", "timed out", "connection",
         "network", "ssl", "tls", "dns",
     )):
         return "request_network"
@@ -171,10 +171,7 @@ def _source_evidence(
 def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
     """Remove an unsafe snapshot while retaining failure diagnostics."""
     previous = sources.get(result.slug) or {}
-    last_successful_refresh_at = (
-        previous.get("last_successful_refresh_at")
-        or previous.get("fetched_at")
-    )
+    last_successful_refresh_at = _last_successful_refresh_at(sources, result.slug)
     last_successful_record_count = previous.get("last_successful_record_count")
     if last_successful_record_count is None and last_successful_refresh_at:
         last_successful_record_count = previous.get("record_count")
@@ -209,13 +206,21 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
 
     for result in results:
         slug = result.slug
-        if result.ok:
+        partitions = (result.diagnostics or {}).get("partitions") or []
+        verified_prefixes = [part.get("id_prefix") for part in partitions
+            if isinstance(part, dict) and part.get("healthy") is True and part.get("status") == "refreshed"
+            and isinstance(part.get("id_prefix"), str) and part["id_prefix"].startswith(slug + ":")]
+        partial = bool((result.diagnostics or {}).get("partial_failure") and verified_prefixes
+            and all(any(str(record.get("opportunity_id") or "").startswith(prefix) for prefix in verified_prefixes)
+                    for record in result.records))
+        if result.ok or partial:
             kept, dropped = filter_publishable(result.records, as_of)
             healthy = within_health_bounds(
                 len(kept), result.min_records, result.max_records
             )
             if healthy:
                 previous_snapshot = sources.get(slug) or {}
+                previous_success = _last_successful_refresh_at(sources, slug)
                 previous_records = {
                     record_identity(record): record
                     for record in (previous_snapshot.get("records") or [])
@@ -260,6 +265,14 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     if source_snapshot_at
                     else 0
                 )
+                if partial:
+                    sources[slug]["last_successful_refresh_at"] = previous_success
+                    sources[slug]["last_successful_record_count"] = previous_snapshot.get(
+                        "last_successful_record_count", previous_snapshot.get("record_count"))
+                    healthy = False
+                    status = "partial_refresh"
+                    publication_decision = "published_independently_verified_records"
+                    failure_class = _classify_failure(result)
             else:
                 if result.retain_on_failure:
                     published = _cached_publishable(sources, slug, as_of)
@@ -285,7 +298,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
             summaries.append({
                 "slug": slug, "source": result.display_name, "status": status,
                 "fetched": len(result.records), "dropped_invalid": len(dropped),
-                "published": len(published), "healthy": healthy, "error": None,
+                "published": len(published), "healthy": healthy, "error": result.error if partial else None,
                 "diagnostics": result.diagnostics,
                 **evidence,
                 **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}

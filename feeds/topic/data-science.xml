@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -119,28 +119,6 @@
     <category term="Data science"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
-    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-779bd2ee55b34b8e</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
-  </entry>
-  <entry>
-    <title>NSF Research in the Formation of Engineers program</title>
-    <link href="https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -312,22 +290,6 @@
     <summary>Air Force Office of Scientific Research | Closes 2029-08-31 | The Air Force Office of Scientific Research manages the basic research investment for the Department of the Air Force. Conferences and workshops constitute key forums for research and technology interchange. We provide partial support for conferences and workshops as defined in the DoW Joint Travel Regulations in special areas of science that bring experts together to discuss recent research or ed…</summary>
   </entry>
   <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
     <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
     <link href="https://www.grants.gov/search-results-detail/363724"/>
     <id>urn:funding-finder:grants-gov:363724</id>
@@ -338,18 +300,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
@@ -375,18 +325,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
@@ -588,41 +526,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
-    <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-11-10 | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
-  </entry>
-  <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
     <title>Annual Recurring University Training and Research</title>
     <link href="https://www.grants.gov/search-results-detail/363594"/>
     <id>urn:funding-finder:grants-gov:363594</id>
@@ -634,18 +537,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>National Energy Technology Laboratory | Closes 2026-10-16 | Annual Recurring University Training and ResearchThe purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communiti…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
     <title>National Resource Centers</title>
@@ -680,39 +571,18 @@
     <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular FOA.</summary>
   </entry>
   <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363526"/>
+    <id>urn:funding-finder:grants-gov:363526</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
-    <category term="Energy"/>
+    <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
-STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
-  </entry>
-  <entry>
-    <title>NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals</title>
-    <link href="https://new.nsf.gov/policies/pappg/24-1"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0f186b990288c021</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
   </entry>
   <entry>
     <title>Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
@@ -737,5 +607,137 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>Department of Education | Closes 2026-10-01 | NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
+    <link href="https://www.grants.gov/search-results-detail/363468"/>
+    <id>urn:funding-finder:grants-gov:363468</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education | Closes 2026-10-01 | The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research. Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gu…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Using Longitudinal Data to Support State Education Policymaking, Assistance Listing Number (ALN) 84.305S</title>
+    <link href="https://www.grants.gov/search-results-detail/363469"/>
+    <id>urn:funding-finder:grants-gov:363469</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education | Closes 2026-10-01 | Through this grant program, IES supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies regarding increasing learners’ access to high-quality education and increased academic achievement. Assistance Listing Number (ALN) 84.305S.</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Research Training Programs in Special Education, Assistance Listing Number (ALN) 84.324B</title>
+    <link href="https://www.grants.gov/search-results-detail/363467"/>
+    <id>urn:funding-finder:grants-gov:363467</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education | Closes 2026-10-01 | NCSER training programs prepare individuals to conduct special education and early intervention research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCSER will consider only applications that address one of the following topics: (1) Early Career Development and Mentoring or (2) Methods Training for Spe…</summary>
+  </entry>
+  <entry>
+    <title>Institute of Education Sciences (IES): National Center for Special Education Research (NCSER): Using Longitudinal Data to Support State Education Policymaking in Special Education, Assistance Listing Number (ALN) 84.324S</title>
+    <link href="https://www.grants.gov/search-results-detail/363471"/>
+    <id>urn:funding-finder:grants-gov:363471</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>Department of Education</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Department of Education | Closes 2026-10-01 | Through this grant program, NCSER supports state agencies’ use of their statewide longitudinal data systems (SLDSs) to provide evidence for their own program and policy decisions, and those of their local education agencies pertaining to learners with or at risk for disabilitiesAssistance Listing Number: 84.324S.</summary>
+  </entry>
+  <entry>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Closes 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>National Highway Traffic Safety Administration | Closes 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361449"/>
+    <id>urn:funding-finder:grants-gov:361449</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/360622"/>
+    <id>urn:funding-finder:grants-gov:360622</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/360621"/>
+    <id>urn:funding-finder:grants-gov:360621</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
+  </entry>
+  <entry>
+    <title>Desalination and Water Purification Research Program: Research Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/363375"/>
+    <id>urn:funding-finder:grants-gov:363375</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Bureau of Reclamation</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Separations and membranes"/>
+    <category term="Technology development"/>
+    <category term="Water"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363379"/>
+    <id>urn:funding-finder:grants-gov:363379</id>
+    <updated>2026-07-29T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Dept of the Army -- Materiel Command | Closes 2026-11-06 | Department of Army: The Department of War (DoW) announces the Fiscal Year 2027 Defense University Research Instrumentation Program (DURIP). DURIP is designed to improve the capabilities of accredited United States (U.S.) institutions of higher education to conduct research and to educate scientists and engineers in areas important to national defense, by providing funds for the acquisition of rese…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -50,22 +50,6 @@
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <summary>American Institute in Taiwan | Closes 2026-10-06 | The American Institute in Taiwan Public Diplomacy Section announces an open competition for one cooperative agreement to support the implementation of four Global Cooperation and Training Framework Classic workshops in Taiwan during calendar year 2027. The GCTF is a capacity building platform that brings together government officials, industry experts, academics, and civil society representatives …</summary>
-  </entry>
-  <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
   </entry>
   <entry>
     <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
@@ -505,8 +489,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
     <category term="Quantum science"/>
+    <category term="Data science"/>
     <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
@@ -784,5 +768,14 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <summary>Dept of the Army -- Materiel Command | Posted | **PLEASE REVIEW FULL SPECIAL NOTICE** Funding Opportunity Title: Low-Cost Chip-Scale Atomic Clock (LC CSAC) Funding Instrument Type: Technology investment agreement The aim of this Special Notice under the ARL BAA (W911NF-17-S-0003), under Grants.gov Opportunity W911NF-17-S-0003-SPECIALNOTICE-LC-CSAC, is to fund a team or multiple teams to design, manufacture, and deliver a battery-powered atomic …</summary>
+  </entry>
+  <entry>
+    <title>State Veterans Home Construction Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/58617"/>
+    <id>urn:funding-finder:grants-gov:58617</id>
+    <updated>2010-11-01T00:00:00Z</updated>
+    <author><name>Construction of State Home Facilities</name></author>
+    <category term="Manufacturing"/>
+    <summary>Construction of State Home Facilities | Posted | Improving Oversight of Federal GrantmakingVA is required to ensure compliance with all applicable statutes, regulations, and Executive Orders when evaluating and awarding grants. In accordance with Executive Order 14332, Improving Oversight of Federal Grantmaking, aside from the evaluation criteria published in this announcement, VA has discretion to remove from consideration any applicant VA deem…</summary>
   </entry>
 </feed>

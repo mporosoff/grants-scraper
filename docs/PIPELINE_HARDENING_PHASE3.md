@@ -119,3 +119,44 @@ both corpus and claim embedding batches. The release was retained. The correctio
 adds the required homogeneous fallback without relaxing any cache-mixing test or
 canary threshold, and adds regressions for independent floating outputs, persisted
 non-reuse policy, mixed-generation rejection and gross-discontinuity rejection.
+
+## Refresh remediation
+
+Review of generated PR #159 found that an IARPA inventory failure suppressed
+independently healthy DARPA calls, and that a Simons page supplied holiday,
+notification, previous-cycle and related-grant dates as submission evidence.
+The combined adapter now reports sponsor partitions separately. Fresh records
+from a verified partition enter the existing canonical merge while the failed
+partition retains its established fail-closed policy. Closure events require
+the affected partition to be verified. Partial refresh remains visibly degraded
+in developer diagnostics and does not advance the whole source's last-success
+timestamp.
+
+Simons grant evidence is bounded to its one official grant article. A changed
+boundary invalidates old evidence and requires document bytes, including when
+an ETag or unchanged content hash might otherwise permit reuse. Submission dates
+stay within their HTML block and sentence. Non-submission dates and contradictory
+stage sequences are withheld with review disclosures. Old deadline citations are
+rechecked locally without advancing retrieval timestamps or invalidating unrelated
+evidence. Removed facts cannot leave dangling review references.
+
+The same refresh exposed responses with empty objectives for negative decisions.
+The prompts now state the existing validator's bounds for both positive and
+negative responses. Validation and retries remain strict; diagnostics identify
+the failed contract using an allowlisted reason, without copying provider bodies.
+The outage contract's isolated prior model uses the current prompt dependency so
+it continues testing preservation of compatible teams instead of assuming that
+the committed production model was generated with the current code.
+
+The corrective change restores PR #159's generated files as one coherent rollback
+to the already-live known-good package. The rejected generation and its diagnostic
+receipt remain in Git history and Actions artifacts. No individual opportunity
+fact or team membership is edited. The next protected coordinated refresh uses
+the repaired writers and existing bounded caches to produce its replacement.
+
+`tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
+verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
+fact/reference cleanup, boundary-change revalidation and strict negative-output
+diagnostics. The focused source/document/provider family passed 108 tests. A
+bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
+one provider request returned a valid exact-quote decomposition with zero retries.

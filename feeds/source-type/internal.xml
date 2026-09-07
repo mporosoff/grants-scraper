@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
@@ -12,7 +12,6 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A25-301</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Cybersecurity"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-05</summary>
   </entry>
   <entry>
@@ -29,10 +28,6 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-779bd2ee55b34b8e</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
   </entry>
   <entry>
@@ -57,8 +52,6 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
@@ -68,13 +61,6 @@
     <updated>2026-08-27T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
   </entry>
   <entry>
@@ -83,10 +69,6 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
     <updated>2026-08-27T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
@@ -98,27 +80,11 @@
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-30</summary>
   </entry>
   <entry>
-    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
-    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
-with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
-scale, …</summary>
-  </entry>
-  <entry>
     <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
     <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
     <updated>2026-08-23T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
@@ -168,10 +134,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
@@ -188,7 +150,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-167136617b79dc5d</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>American Chemical Society Petroleum Research Fund</name></author>
-    <category term="Materials science"/>
     <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
   </entry>
   <entry>
@@ -205,11 +166,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
   </entry>
   <entry>
@@ -236,8 +192,6 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
 STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
   </entry>
@@ -268,8 +222,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e1612e2acba631d2</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>American Chemical Society Petroleum Research Fund</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
     <summary>American Chemical Society Petroleum Research Fund | Posted</summary>
   </entry>
   <entry>
@@ -286,8 +238,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0f186b990288c021</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
 </feed>

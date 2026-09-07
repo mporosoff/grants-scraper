@@ -240,6 +240,11 @@ class TeamProviderContracts(unittest.TestCase):
         retained = next(r for r in healthy[1:] if r["id"] != changed["id"] and person_id not in
                         {ref["researcher_id"] for role in r["roles"] for ref in role["claim_refs"]})
         originals = {r["id"]: copy.deepcopy(r) for r in (source, changed, retained)}
+        # This contract isolates source/researcher invalidation. Its synthetic
+        # prior generation must use the current prompt contract, independent of
+        # when the checked-in production model was last assessed.
+        for row in originals.values():
+            row["pipeline_hash"] = teams.content_hash([teams.VERSION, teams.MODEL, teams.DECOMPOSE, teams.ADJUDICATE, teams.VERIFY])
         model["opportunities"] = list(originals.values())
         person = next(p for p in registry["researchers"] if p["researcher_id"] == person_id)
         person["status"] = "inactive"

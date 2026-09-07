@@ -259,18 +259,25 @@ class DarpaIarpaAdapter(SourceAdapter):
 
     def fetch(self):
         self.diagnostics = {}
-        rows = json.loads(self._client.get_text(DARPA_LIST))
-        iarpa_html = self._html(IARPA_LIST)
-        urls = set()
-        for row in darpa_inventory(rows):
-            url = darpa_program_url(row)
-            if url:
-                urls.add(url)
-        urls.update(row["url"] for row in iarpa_inventory(iarpa_html))
-        if len(urls) > self.max_records:
-            raise ValueError("Research detail inventory exceeds fetch bound")
-        return {"darpa": rows, "iarpa": iarpa_html,
-                "pages": {url: self._html(url) for url in sorted(urls)}}
+        payload = {"darpa": None, "iarpa": None, "pages": {}, "partition_errors": {}}
+        # These are independent official inventories. An outage in one must not
+        # discard freshly verified calls from the other or certify withdrawal.
+        for partition in ("darpa", "iarpa"):
+            try:
+                if partition == "darpa":
+                    raw = json.loads(self._client.get_text(DARPA_LIST))
+                    urls = {darpa_program_url(row) for row in darpa_inventory(raw)} - {None}
+                else:
+                    raw = self._html(IARPA_LIST)
+                    urls = {row["url"] for row in iarpa_inventory(raw)}
+                if len(urls) + len(payload["pages"]) > self.max_records:
+                    raise ValueError("Research detail inventory exceeds fetch bound")
+                pages = {url: self._html(url) for url in sorted(urls)}
+                payload[partition] = raw
+                payload["pages"].update(pages)
+            except Exception as error:  # Same per-source isolation as the registry.
+                payload["partition_errors"][partition] = f"{type(error).__name__}: {error}"
+        return payload
 
     def _html(self, url):
         html = self._client.get_text(url)
@@ -284,8 +291,8 @@ class DarpaIarpaAdapter(SourceAdapter):
 
     def parse(self, payload):
         as_of = self.context.get("as_of") or date.today()
-        rows = darpa_inventory(payload["darpa"])
-        iarpa_rows = iarpa_inventory(payload["iarpa"])
+        rows = darpa_inventory(payload["darpa"]) if payload["darpa"] is not None else []
+        iarpa_rows = iarpa_inventory(payload["iarpa"]) if payload["iarpa"] is not None else []
         pages = payload["pages"]
         skipped = Counter()
         opportunities = {}
@@ -395,8 +402,37 @@ class DarpaIarpaAdapter(SourceAdapter):
         return list(opportunities.values())
 
     def collect(self):
+        payload = self.fetch()
+        opportunities = []
+        partitions = []
+        combined = {"darpa_individual_topics": 0, "iarpa_open_rows": 0, "sponsor_counts": {},
+                    "skipped": {}, "program_date_overrides": [], "iarpa_explicit_empty": False}
+        for partition in ("darpa", "iarpa"):
+            state = {"id_prefix": f"{self.slug}:{partition}-", "source": partition.upper(),
+                     "status": "refreshed", "healthy": True}
+            try:
+                if payload.get(partition) is None:
+                    raise RuntimeError(payload.get("partition_errors", {}).get(partition, "Official inventory unavailable"))
+                part = {"darpa": None, "iarpa": None, "pages": payload["pages"], partition: payload[partition]}
+                opportunities.extend(self.parse(part))
+                diagnostics = self.diagnostics
+                for key in ("darpa_individual_topics", "iarpa_open_rows"):
+                    combined[key] += diagnostics[key]
+                for key in ("sponsor_counts", "skipped"):
+                    combined[key] = dict(Counter(combined[key]) + Counter(diagnostics[key]))
+                combined["program_date_overrides"].extend(diagnostics["program_date_overrides"])
+                combined["iarpa_explicit_empty"] |= diagnostics["iarpa_explicit_empty"]
+            except Exception as error:  # A parser failure also stays within its sponsor.
+                state.update(status="failed", healthy=False, error=f"{type(error).__name__}: {error}")
+            partitions.append(state)
+        self.diagnostics = combined | {"partitions": partitions}
+        if not all(part["healthy"] for part in partitions):
+            self.diagnostics.update(partial_failure=True, failure_class="upstream_partition_failure",
+                failure_reason="; ".join(part["error"] for part in partitions if not part["healthy"]))
+        if not any(part["healthy"] for part in partitions):
+            raise RuntimeError("All official source partitions unavailable")
         records = []
-        for opportunity in self.parse(self.fetch()):
+        for opportunity in opportunities:
             record = opportunity.to_record(slug=self.slug, source=self.display_name, source_type=self.source_type)
             for deadline in record["deadlines"]:
                 deadline["source_url"] = opportunity.extra["deadline_page"]

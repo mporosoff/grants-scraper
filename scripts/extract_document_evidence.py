@@ -45,6 +45,7 @@ from scripts import program_areas
 
 EVIDENCE_SCHEMA_VERSION = 1
 EXTRACTOR_IDENTITY = "official-evidence-2"
+DEADLINE_EXTRACTOR_IDENTITY = "submission-date-2"
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
 DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
@@ -70,7 +71,7 @@ DATE_RE = re.compile(
 )
 TIME_RE = re.compile(
     r"\b(\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?))"
-    r"(?:\s+([A-Z]{2,4}|Eastern|Central|Mountain|Pacific)"
+    r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|UTC|GMT|[ECMP][SD]?T)\b"
     r"(?:\s+(?:Time|Standard Time|Daylight Time))?)?",
     re.I,
 )
@@ -513,7 +514,9 @@ def extract_html_sections(content):
             and grouped[-1]["anchor"] == block["anchor"]
             and len(grouped[-1]["text"]) + len(block["text"]) < MAX_PAGE_CHARS
         ):
+            start = len(grouped[-1]["text"]) + 1
             grouped[-1]["text"] += f"\n{block['text']}"
+            grouped[-1]["blocks"].append((start, len(grouped[-1]["text"])))
         else:
             grouped.append(
                 {
@@ -521,6 +524,7 @@ def extract_html_sections(content):
                     "section": block["section"],
                     "anchor": block["anchor"],
                     "text": block["text"],
+                    "blocks": [(0, len(block["text"]))],
                 }
             )
     return grouped, {
@@ -583,13 +587,19 @@ def extract_containers(content, content_type, name, final_url):
     return containers, extraction
 
 
-def scoped_html(content, url):
-    """An Exchange notice fragment owns one bounded element, never sibling FOAs."""
+def source_scope_identity(url):
     parsed = urlparse(str(url or ""))
-    if parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
+    return "simons-grant-article-1" if parsed.hostname in {"simonsfoundation.org", "www.simonsfoundation.org"} and parsed.path.startswith("/grant/") else None
+
+
+def scoped_html(content, url):
+    """A supported notice owns one bounded element, never linked sibling calls."""
+    parsed = urlparse(str(url or ""))
+    article = source_scope_identity(url) == "simons-grant-article-1"
+    if not article and parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
         return content
     target = unquote(parsed.fragment)
-    if not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
+    if not article and not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
         raise ValueError("Exchange evidence requires a bounded official notice fragment")
 
     class Fragment(HTMLParser):
@@ -599,7 +609,9 @@ def scoped_html(content, url):
 
         def handle_starttag(self, tag, attrs):
             attrs = dict(attrs)
-            if not self.depth and tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold():
+            selected = (tag == "article" and "o-detail" in attrs.get("class", "").split()) if article else (
+                tag in {"div", "section", "article"} and str(attrs.get("id", "")).casefold() == target.casefold())
+            if not self.depth and selected:
                 self.matches += 1
                 self.depth = 1
             elif self.depth and tag not in {"br", "hr", "img", "input", "link", "meta", "area", "base", "embed", "param", "source", "track", "wbr"}:
@@ -629,7 +641,8 @@ def scoped_html(content, url):
     fragment = Fragment()
     fragment.feed(content.decode("utf-8", errors="replace"))
     if fragment.matches != 1 or fragment.depth or not fragment.parts:
-        raise ValueError("official Exchange notice does not expose one complete bounded fragment")
+        raise ValueError("official notice does not expose one complete bounded article" if article
+                         else "official Exchange notice does not expose one complete bounded fragment")
     return "".join(fragment.parts).encode("utf-8")
 
 
@@ -719,20 +732,98 @@ def deadline_kind(context, date_offset=None):
     return kind, label
 
 
-def extract_deadlines(opportunity_id, containers, document, extracted_at):
+def deadline_context(container, match):
+    """Bind a date to its own HTML block and sentence, never a nearby field."""
+    text = container["text"]
+    start, end = max(0, match.start() - 230), min(len(text), match.end() + 230)
+    for left, right in container.get("blocks") or []:
+        if left <= match.start() < right:
+            start, end = max(start, left), min(end, right)
+            break
+    scan_start = start
+    for boundary in re.finditer(r"[.!?;]\s+(?=[A-Z])", text[scan_start:end]):
+        position = scan_start + boundary.end()
+        if re.search(r"\b[ap]\.?m\.\s*$", text[:position], re.I):
+            continue
+        if position <= match.start():
+            start = position
+        elif scan_start + boundary.start() >= match.end():
+            end = scan_start + boundary.start() + 1
+            break
+    return text[start:end], match.start() - start
+
+
+def supported_submission_date(context, offset):
+    prefix = context[:offset]
+    # Dates for holidays, decisions, appointments and project starts are not
+    # applicant submission deadlines, even beside a valid deadline field.
+    if re.search(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|"
+                 r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I):
+        return False
+    return bool(DEADLINE_CUE_RE.search(context) and deadline_kind(context, offset))
+
+
+def qualify_deadline_sequence(facts, review_queue=None):
+    preliminary = [fact["date"] for fact in facts if fact.get("type") == "deadline"
+                   and fact.get("deadline_kind") != "application"]
+    if not preliminary:
+        return facts
+    first = min(preliminary)
+    kept = []
+    for fact in facts:
+        if fact.get("type") != "deadline" or fact.get("deadline_kind") != "application":
+            kept.append(fact)
+            continue
+        quote = (fact.get("citation") or {}).get("quote", "")
+        dates = [match for match in DATE_RE.finditer(quote) if parse_document_date(match.group(0)) == fact["date"]]
+        explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", quote[:match.start()], re.I) for match in dates)
+        if fact["date"] >= first and (fact["date"] not in preliminary or explicit_full):
+            kept.append(fact)
+        elif review_queue is not None:
+            review_queue.append({"type": "deadline_stage_order_conflict",
+                "message": "An inconsistent or ambiguous application date was withheld; verify the current official submission stages.",
+                "withheld_fact_ids": [fact["id"]]})
+    return kept
+
+
+def revalidate_cached_deadlines(entry):
+    """Recheck old citations locally without claiming a new source retrieval."""
+    if entry.get("deadline_extractor_identity") == DEADLINE_EXTRACTOR_IDENTITY:
+        return
+    prior = entry.get("facts") or []
+    kept = []
+    for fact in prior:
+        if fact.get("type") != "deadline":
+            kept.append(fact)
+            continue
+        quote = (fact.get("citation") or {}).get("quote") or ""
+        matches = [match for match in DATE_RE.finditer(quote) if parse_document_date(match.group(0)) == fact.get("date")]
+        if any(supported_submission_date(*deadline_context({"text": quote}, match)) for match in matches):
+            kept.append(fact)
+    kept = qualify_deadline_sequence(kept)
+    removed = [fact["id"] for fact in prior if fact not in kept]
+    if removed:
+        entry["facts"] = kept
+        entry["deadline_extractor_identity"] = DEADLINE_EXTRACTOR_IDENTITY
+        for item in entry.get("review_queue") or []:
+            if "evidence_ids" in item:
+                item["evidence_ids"] = [identifier for identifier in item["evidence_ids"] if identifier not in removed]
+        entry["review_queue"] = [item for item in entry.get("review_queue") or []
+                                 if item.get("type") != "deadline_conflict" or item.get("evidence_ids")]
+        entry.setdefault("review_queue", []).append({"type": "deadline_evidence_withheld",
+            "message": "Unbound or inconsistent submission dates were withheld; verify the current official submission stages.",
+            "withheld_fact_ids": removed})
+
+
+def extract_deadlines(opportunity_id, containers, document, extracted_at, review_queue=None):
     facts = []
     seen = set()
     for container in containers:
         text = container["text"]
         for match in DATE_RE.finditer(text):
-            window_start = max(0, match.start() - 230)
-            window_end = min(len(text), match.end() + 230)
-            context = text[window_start:window_end]
-            kind_result = deadline_kind(
-                context,
-                match.start() - window_start,
-            )
-            if not kind_result or not DEADLINE_CUE_RE.search(context):
+            context, offset = deadline_context(container, match)
+            kind_result = deadline_kind(context, offset)
+            if not supported_submission_date(context, offset):
                 continue
             parsed = parse_document_date(match.group(0))
             if not parsed:
@@ -784,8 +875,8 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at):
                 )
             )
             if len(facts) >= 12:
-                return facts
-    return facts
+                return qualify_deadline_sequence(facts, review_queue)
+    return qualify_deadline_sequence(facts, review_queue)
 
 
 def extract_award_range(opportunity_id, containers, document, extracted_at):
@@ -1051,6 +1142,7 @@ def extract_document_facts(
     containers,
     document,
     extracted_at,
+    review_queue=None,
 ):
     opportunity_id = str(
         record.get("opportunity_id")
@@ -1062,6 +1154,7 @@ def extract_document_facts(
         containers,
         document,
         extracted_at,
+        review_queue,
     )
 
     award = extract_award_range(
@@ -1324,7 +1417,9 @@ def source_signature(record, source):
         record.get("api_last_updated"),
         record.get("last_updated"),
     )
-    return "|".join(str(value or "") for value in values)
+    signature = "|".join(str(value or "") for value in values)
+    identity = source_scope_identity(source.get("url")) if source else None
+    return signature + "|" + identity if identity else signature
 
 
 def validate_public_url(value, resolver=socket.getaddrinfo):
@@ -1676,7 +1771,8 @@ def build_document_entry(
     previous_hash = previous_document.get("sha256")
     changed_since_previous = bool(previous_hash and previous_hash != digest)
 
-    same_extractor = previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+    same_extractor = (previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+                      and previous.get("source_scope_identity") == source_scope_identity(source["url"]))
     same_route = previous_document.get("url") == (response.get("url") or source["url"])
     if previous_hash == digest and same_extractor and same_route:
         entry = deepcopy(previous)
@@ -1752,11 +1848,13 @@ def build_document_entry(
         source.get("name"),
         document["url"],
     )
+    deadline_review = []
     facts = extract_document_facts(
         record,
         containers,
         document,
         fetched_at,
+        deadline_review,
     )
     program_area_hits = extract_program_areas(
         containers,
@@ -1769,10 +1867,13 @@ def build_document_entry(
         changed_since_previous,
         extraction,
     )
+    review_queue.extend(deadline_review)
     return {
         "source_signature": source_signature(record, source),
         "source_url": source["url"],
         "extractor_identity": EXTRACTOR_IDENTITY,
+        **({"source_scope_identity": source_scope_identity(source["url"])} if source_scope_identity(source["url"]) else {}),
+        "deadline_extractor_identity": DEADLINE_EXTRACTOR_IDENTITY,
         "checked_at": fetched_at,
         "status": "current",
         "last_error": None,
@@ -1975,6 +2076,8 @@ def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False)
     # cached documents are never even candidates and never get subtopics.
     if needs_subtopics:
         return True
+    if entry.get("status") == "needs_revalidation":
+        return True
     if entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
         return True
     if entry.get("source_signature") != signature:
@@ -2012,6 +2115,8 @@ def citation_deadline(fact):
 
 
 def merge_document_entry(record, entry):
+    if entry:
+        revalidate_cached_deadlines(entry)
     output = deepcopy(record)
     # Remember source-owned values when a new extraction adds conservative
     # flags. Re-enrichment can then undo only its own overrides.
@@ -2472,6 +2577,8 @@ def enrich_document_evidence(
                 entry["status"] = "source_changed"
             elif entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
                 entry["status"] = "needs_revalidation"
+            elif source_scope_identity(source["url"]) != entry.get("source_scope_identity"):
+                entry["status"] = "needs_revalidation"
         if not opportunity_id or not source:
             continue
         signature = source_signature(record, source)
@@ -2527,6 +2634,7 @@ def enrich_document_evidence(
         # segment bytes you did not receive -- so a document needing backfill
         # asks for the whole thing.
         if (previous and not backfill and previous.get("extractor_identity") in (None, EXTRACTOR_IDENTITY)
+                and previous.get("source_scope_identity") == source_scope_identity(source["url"])
                 and previous_document.get("url") == source["url"]):
             if previous_document.get("etag"):
                 headers["If-None-Match"] = previous_document["etag"]

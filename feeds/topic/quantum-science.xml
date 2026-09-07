@@ -4,20 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-06T13:44:50Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
   <entry>
     <title>ONR FY27 NOFO for Young Investigator Program</title>
     <link href="https://www.grants.gov/search-results-detail/363632"/>
@@ -100,6 +88,20 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
+    <title>FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363526"/>
+    <id>urn:funding-finder:grants-gov:363526</id>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Air Force Office of Scientific Research | Closes 2027-04-05 | The Department of Defense (DoD) announces the fiscal year 2026 (FY26) Defense Established Program to Stimulate Competitive Research (DEPSCoR) - Research Collaboration (RC) opportunity. The program is sponsored and managed by the Basic Research Office, Office of the Under Secretary of Defense for Research and Engineering (OUSD [R&amp;E]), awarded by the Air Force Office of Scientific Research (AFOSR), …</summary>
+  </entry>
+  <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
     <link href="https://www.grants.gov/search-results-detail/362681"/>
     <id>urn:funding-finder:grants-gov:362681</id>
@@ -163,6 +165,26 @@
     <summary>Office of Science | Closes 2026-12-17 | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
+    <title>QBIT Stage A</title>
+    <link href="https://sam.gov/opp/4a1aad28cb2a4b2ab1ee408c639202ef/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260202</id>
+    <updated>2026-03-09T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Closes 2026-11-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) to solicit innovative approaches addressing challenges related to quantum computing. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is designed to rigorously verify and validate whether…</summary>
+  </entry>
+  <entry>
+    <title>QBI Topic: Independent Verification and Validation</title>
+    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260201</id>
+    <updated>2025-11-17T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Closes 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI …</summary>
+  </entry>
+  <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
     <link href="https://www.grants.gov/search-results-detail/360678"/>
     <id>urn:funding-finder:grants-gov:360678</id>
@@ -174,8 +196,8 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
     <category term="Quantum science"/>
+    <category term="Data science"/>
     <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
