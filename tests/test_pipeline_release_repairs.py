@@ -400,7 +400,8 @@ class DeadlineOwnership(unittest.TestCase):
     def test_values_after_closed_headings_cannot_borrow_the_prior_issue_date(self):
         record, entry = self.entry()
         for opening, closing in [('(', ')'), ('[', ']')]:
-            cases = [(separator, value) for separator in [': ', '= ', '— ', '']
+            cases = [(separator, value) for separator in [': ', '= ', '— ', '', 'is ', 'will be ',
+                      'has been ', 'is currently ', 'may be ', 'was set to ', 'has not yet been announced: ']
                      for value in ['TBD', 'TBA', 'to be announced', 'pending', 'rolling', 'N/A', 'April 1, 2027']]
             cases.append((': ', ''))
             for separator, value in cases:
@@ -418,6 +419,28 @@ class DeadlineOwnership(unittest.TestCase):
             text = f'March 1, 2027 {opening}Application Deadline{closing}: 5 PM Eastern'
             facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
             self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM')])
+
+    def test_application_must_follow_every_applicable_preliminary_stage(self):
+        record, entry = self.entry()
+        for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),
+                                                         ('April 1', 'II', True)]:
+            for order in [(0, 1, 2), (2, 1, 0), (1, 0, 2)]:
+                with self.subTest(application_date=application_date, other_phase=other_phase, order=order):
+                    texts = ['Phase I Letter of Intent Deadline: March 1, 2027',
+                             f'Phase I Full Application Deadline: {application_date}, 2027',
+                             f'Phase {other_phase} Pre-Application Deadline: May 1, 2027']
+                    warnings = []
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': texts[i]} for i in order],
+                        entry['document'], entry['checked_at'], warnings)
+                    self.assertEqual(any(f['deadline_kind'] == 'application' for f in facts), expected)
+                    self.assertEqual(any(q['type'] == 'deadline_stage_order_conflict' for q in warnings), not expected)
+                    # Revalidate a legacy receipt that admitted all three facts.
+                    legacy = [f for text in texts for f in extract_deadlines(record['opportunity_id'],
+                        [{'text': text}], entry['document'], entry['checked_at'])]
+                    entry['facts'] = legacy
+                    entry.pop('deadline_extractor_identity', None)
+                    published = merge_document_entry(record, entry)
+                    self.assertEqual(any(d.get('evidence_id') and d['kind'] == 'application' for d in published['deadlines']), expected)
 
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()

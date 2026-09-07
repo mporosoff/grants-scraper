@@ -797,8 +797,12 @@ def deadline_context(container, match):
         # A grouped heading still owns any value after its closing delimiter.
         # Only a complete clock-only annotation can augment a postfix date;
         # an empty/unknown/new date field cannot borrow the preceding date.
-        if suffix[:1] and suffix[0] in ":=–—-":
-            value = suffix[1:].strip()
+        value_link = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
+                              r"should|must|remains?|becomes?|changed?|changes|moved?|moves)\b)\s*", suffix, re.I)
+        if value_link:
+            value = suffix[value_link.end():].strip()
+            value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
+                           "", value, flags=re.I)
             clock = TIME_RE.match(value)
             if not clock or value[clock.end():].strip(" ."):
                 postfix = False
@@ -925,7 +929,7 @@ def qualify_deadline_sequence(facts, review_queue=None):
                       if not own_phase or not phase(item) or phase(item) == own_phase]
         explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", context, re.I)
                             for context in stage_contexts(fact))
-        if not applicable or (fact["date"] >= min(applicable) and
+        if not applicable or (fact["date"] >= max(applicable) and
                               (fact["date"] not in applicable or explicit_full)):
             kept.append(fact)
         elif review_queue is not None:
