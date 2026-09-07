@@ -25,6 +25,7 @@ async function build(corpus, previous = null, overrides = {}) {
   const manifest = {schema_version: 1, model: config.model, dimension: 1024, dtype: "float16-le", byte_order: "little-endian",
     input_type: "document", source_output_dtype: "float", generated_at: "2099-01-01T00:00:00Z",
     passage_count: corpus.length, vector_bytes: binary.length, vector_sha256: digest(binary), corpus_sha256: digest(JSON.stringify(corpus)),
+    reuse_permitted: result.canaryArtifact.reuse_permitted,
     reuse_contract: result.config, configuration_sha256: digest(JSON.stringify(result.config)),
     model_space_fingerprint: result.canaryArtifact.model_space_fingerprint, response_model: config.model,
     reuse_space_identity: result.canaryArtifact.reuse_space_identity, canary_sha256: digest(JSON.stringify(result.canaryArtifact)),
@@ -114,6 +115,30 @@ test("identity drift inside a fresh batch cannot mix with reused rows", async ()
   await assert.rejects(build([...inputs, ...Array.from({length: 251}, (_, i) => passage(`new-${i}`))], cold, {
     embedBatch: texts => provider(calls++ ? 0.000001 : 0)(texts),
   }), /space changed during generation/);
+});
+
+test("unrounded variation permits only homogeneous fresh builds and never certifies later reuse", async () => {
+  const corpus = Array.from({length: 256}, (_, i) => passage(`fresh-${i}`));
+  let calls = 0;
+  const cold = await build(corpus, null, {embedBatch: texts => provider(calls++ * 0.000001)(texts)});
+  assert.equal(cold.result.reused, 0);
+  assert.equal(cold.result.changed.length, 256);
+  assert.equal(cold.manifest.reuse_permitted, false);
+  assert.equal(cold.result.reuseReason, "homogeneous_unstable_identity");
+  assert.equal(cold.result.receipts.length, 2, "the previous full-build request ceiling is unchanged");
+  assert.equal((await build(corpus, cold)).result.reused, 0, "even a repeated preflight cannot certify this prior generation");
+  const invalid = structuredClone({manifest: cold.manifest, canaries: cold.canaries});
+  invalid.manifest.reuse_permitted = invalid.canaries.reuse_permitted = true;
+  invalid.manifest.canary_sha256 = digest(JSON.stringify(invalid.canaries));
+  invalid.manifest.integrity_sha256 = manifestDigest(invalid.manifest);
+  assert.throws(() => validateAsset(invalid.manifest, cold.binary, invalid.canaries), /reuse manifest integrity/,
+    "a homogeneous fallback cannot be certified for reuse even with recomputed file hashes");
+  calls = 0;
+  await assert.rejects(build(corpus, null, {embedBatch: async texts => {
+    const result = await provider()(texts);
+    if (calls++) result.vectors = result.vectors.map(vector => Float32Array.from(vector, x => -x));
+    return result;
+  }}), /space changed during generation/, "gross discontinuity still blocks every build");
 });
 
 test("coherent writes roll back failures and exclude concurrent builders", async () => {

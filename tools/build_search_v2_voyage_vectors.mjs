@@ -275,7 +275,7 @@ export async function buildGeneration({corpus, previous, config, force = false, 
   // ceiling. This also lets a cold rebuild fit without increasing its budget.
   // No old row is read until the canaries below establish compatibility.
   const priorRows = new Map((previous?.manifest?.passages || []).map(row => [row.passage_id, row]));
-  const configMatches = !force && previous?.manifest?.reuse_contract
+  const configMatches = !force && previous?.manifest?.reuse_permitted === true && previous?.manifest?.reuse_contract
     && previous.manifest.configuration_sha256 === sha256(JSON.stringify(config));
   const initialMisses = corpus.map((passage, index) => ({passage, index})).filter(({passage}) => {
     const prior = priorRows.get(passage.passage_id);
@@ -294,6 +294,8 @@ export async function buildGeneration({corpus, previous, config, force = false, 
     model_space_fingerprint: exactSpaceIdentity(config, canaries, response.receipt.model),
     rounded_fingerprint: canaryFingerprint(canaries),
     reuse_space_identity: exactSpaceIdentity(config, canaries, response.receipt.model),
+    reuse_permitted: true,
+    batch_space_checks: [],
     comparison_to_prior_generation: canaryComparison, canaries};
   canaryComparison.drift_detected = previous?.canaries?.reuse_space_identity
     ? previous.canaries.reuse_space_identity !== canaryArtifact.reuse_space_identity : null;
@@ -328,16 +330,24 @@ export async function buildGeneration({corpus, previous, config, force = false, 
     const batch = remaining.slice(offset, offset + capacity);
     const result = await request([...batch.map(item => item.passage.text), ...MODEL_SPACE_CANARIES.map(item => item.text)], receipts.length);
     const anchors = canaries.map((row, index) => ({...row, exact_embedding: Array.from(result.vectors[batch.length + index])}));
-    if (exactSpaceIdentity(config, anchors, result.receipt.model) !== canaryArtifact.reuse_space_identity) {
+    const exactMatch = exactSpaceIdentity(config, anchors, result.receipt.model) === canaryArtifact.reuse_space_identity;
+    const comparison = compareCanarySpace(canaryArtifact, anchors.map(row => ({...row, embedding: roundedEmbedding(row.exact_embedding)})));
+    canaryArtifact.batch_space_checks.push({exact_match: exactMatch, minimum_cosine: comparison.minimum_cosine,
+      mean_cosine: comparison.mean_cosine, gross_discontinuity: comparison.gross_discontinuity});
+    if (comparison.gross_discontinuity || (!exactMatch && reused > 0)) {
       throw new Error("Embedding space changed during generation; prior coherent release retained.");
     }
+    // Independent floating outputs need not be bit-identical for a fresh,
+    // homogeneous generation. Such a build NEVER certifies reusable rows.
+    // Coarse canary gates only guard fresh builds; they never authorize mixing.
+    if (!exactMatch) canaryArtifact.reuse_permitted = false;
     receipts.push({...result.receipt, request_kind: "corpus_passages", corpus_passage_count: batch.length, canary_input_count: MODEL_SPACE_CANARIES.length});
     result.vectors.slice(0, batch.length).forEach((vector, index) => {
       storeVector(vector, batch[index].index);
     });
   }
   return {config, vectorWords, changed, reused, receipts, quantizationCosines, canaryArtifact, canaryComparison,
-    reuseReason: force ? "explicit_full_rebuild" : !previous?.manifest.reuse_contract ? "unknown_or_invalid_prior_identity"
+    reuseReason: !canaryArtifact.reuse_permitted ? "homogeneous_unstable_identity" : force ? "explicit_full_rebuild" : !previous?.manifest.reuse_contract ? "unknown_or_invalid_prior_identity"
       : indexes.some(index => index !== null) ? "exact_configuration_and_space_match" : "no_compatible_rows"};
 }
 
@@ -393,6 +403,7 @@ async function run() {
       fingerprint_method: "sha256 of exact unrounded canaries and complete embedding configuration",
       comparison_to_prior_generation: canaryComparison,
     } : previous?.manifest?.model_space || null,
+    reuse_permitted: canaryArtifact.reuse_permitted,
     reuse_contract: built.config,
     configuration_sha256: sha256(JSON.stringify(built.config)),
     reuse_space_identity: canaryArtifact.reuse_space_identity,
@@ -416,6 +427,8 @@ async function run() {
     status: write ? "written" : "dry_run",
     build_mode: force ? "forced_full_rebuild" : (reused ? "compatible_incremental" : "production_full_rebuild"),
     reuse_reason: built.reuseReason,
+    reuse_permitted: canaryArtifact.reuse_permitted,
+    batch_space_checks: canaryArtifact.batch_space_checks,
     canary_request_count: receipts.filter(row => row.request_kind === "model_space_canaries").length,
     corpus_request_count: receipts.filter(row => row.corpus_passage_count > 0).length,
     canary_only_request_count: receipts.filter(row => !row.corpus_passage_count).length,

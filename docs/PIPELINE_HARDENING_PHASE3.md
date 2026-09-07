@@ -22,8 +22,11 @@ The builder therefore records an **observed embedding-space identity**, using al
 unrounded values of the six established public canaries and the complete
 configuration. Matching an alias or passing the existing cosine gates alone never
 authorizes reuse. Fresh batches include the same anchors and must match exactly
-before their rows can be combined. Small drift forces a homogeneous rebuild;
-drift during that rebuild or a gross discontinuity blocks publication. The
+before their rows can be combined with prior cached rows. Small drift forces a
+homogeneous rebuild. Independent floating outputs in an entirely fresh build may
+vary within the unchanged gross-discontinuity gates, but that generation is marked
+`reuse_permitted: false` and can never supply reusable rows. A mixed-generation
+identity failure or a gross discontinuity blocks publication. The
 existing minimum/mean cosine gates remain 0.95/0.98.
 
 Legacy packages remain readable and deployable, but lack the new reuse proof and
@@ -64,7 +67,13 @@ Claims and scope vectors use individual cache entries with configuration/space
 identity and validated value hashes. Claim entries additionally bind ownership,
 revision, and material hash. Document and query canaries establish a fresh exact
 identity only when work is due; subsequent batches carry anchors. A changed space
-cannot combine cached and new vectors. Reads validate shape, finiteness and
+cannot combine cached and new vectors. If a completely fresh run encounters
+unrounded variation within the gross-discontinuity gates, it proceeds homogeneously
+and writes a configuration-specific cache policy that disables persistent vector
+reuse. Subsequent due work remains homogeneous; source/assessment JSON caches are
+still independent and reusable. Cache eviction or an explicit configuration change
+requires establishing compatibility again. If cached vectors were already admitted,
+variation stops that run and the next invocation uses the homogeneous policy. Reads validate shape, finiteness and
 magnitude; writes remain atomic. Already normalized values are preserved to avoid
 warm-cache numerical drift. A genuinely empty due queue makes zero provider calls;
 pending work still needs identity checks even when all vectors are cached.
@@ -104,3 +113,9 @@ Phase 2's cross-language acceptance fixture invokes the Python pipeline. This
 does not enable browser automation. Repository-wide E2E policy is unchanged:
 complete manual Playwright/accessibility validation belongs to the explicitly
 authorized final release convergence after implementation and non-E2E acceptance.
+
+The first live refresh (`34070203169`) exposed nonidentical unrounded anchors in
+both corpus and claim embedding batches. The release was retained. The correction
+adds the required homogeneous fallback without relaxing any cache-mixing test or
+canary threshold, and adds regressions for independent floating outputs, persisted
+non-reuse policy, mixed-generation rejection and gross-discontinuity rejection.
