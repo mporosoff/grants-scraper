@@ -172,6 +172,8 @@ a label. Postfix labels cannot become a later field's cue, and a phase qualifier
 stays attached for ordering checks. Same-phase contradictions remain withheld.
 Backward label ownership requires explicit linking syntax; an empty or TBD
 deadline field cannot borrow an earlier issue date.
+Balanced parenthesized/bracketed postfix labels are explicit links; unclosed,
+nested, unvalued, or separately dated groups cannot assign a label backward.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and

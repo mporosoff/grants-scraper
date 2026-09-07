@@ -331,6 +331,7 @@ class DeadlineOwnership(unittest.TestCase):
         for first, second in [
             ('Phase I Letter of Intent Deadline: July 1, 2027', 'Phase II Application Deadline: June 1, 2027'),
             ('Phase I — Letter of Intent Deadline: July 1, 2027', 'Phase II — Application Deadline: June 1, 2027'),
+            ('Phase I (Letter of Intent Deadline): July 1, 2027', 'Phase II (Application Deadline): June 1, 2027'),
             ('July 1, 2027 — Phase I Letter of Intent Deadline', 'June 1, 2027 — Phase II Application Deadline'),
         ]:
             for separator in ['; ', ' • ', '. ']:
@@ -373,6 +374,26 @@ class DeadlineOwnership(unittest.TestCase):
         self.assertFalse(any(d.get('evidence_id') for d in result['deadlines']))
         self.assertEqual(entry['checked_at'], stamp)
         self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in result['document_evidence']['review_queue']))
+
+    def test_balanced_postfix_labels_are_explicit_but_unclosed_or_unvalued_fields_are_not(self):
+        record, entry = self.entry()
+        for opening, closing in [('(', ')'), ('[', ']')]:
+            for label, kind in [('Application Deadline', 'application'), ('Deadline for Applications', 'application'),
+                                ('Phase II Letter of Intent Deadline', 'letter_of_intent')]:
+                for timed in ['', ' at 5 PM Eastern']:
+                    with self.subTest(opening=opening, label=label, timed=timed):
+                        text = f'March 1, 2027{timed} {opening}{label}{closing}'
+                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                        self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts],
+                            [('2027-03-01', kind, '5 PM' if timed else None)])
+                        entry['facts'] = facts
+                        entry.pop('deadline_extractor_identity', None)
+                        published = merge_document_entry(record, entry)
+                        self.assertEqual(len([d for d in published['deadlines'] if d.get('evidence_id')]), 1)
+            for suffix in ['', ': TBD' + closing, ': April 1, 2027' + closing, opening + closing]:
+                text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{suffix}'
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertNotIn('2027-03-01', [f['date'] for f in facts])
 
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()

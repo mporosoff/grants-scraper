@@ -767,7 +767,7 @@ def deadline_context(container, match):
     dates = list(DATE_RE.finditer(text, start, end))
     for label in DEADLINE_LABEL_RE.finditer(text, start, end):
         label_start = label.start()
-        qualifier = re.search(r"\b(?:FY\d{2,4}\s+)?phase\s+(?:[IVX]+|\d+)\s*[-:–—]?\s*$",
+        qualifier = re.search(r"\b(?:FY\d{2,4}\s+)?phase\s+(?:[IVX]+|\d+)\s*[-:–—(\[]?\s*$",
                               text[start:label_start], re.I)
         if qualifier:
             label_start = start + qualifier.start()
@@ -778,6 +778,14 @@ def deadline_context(container, match):
         # adjacent prefix field may be empty/TBD. Require an explicit link.
         postfix = previous and re.fullmatch(
             r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I)
+        opening = re.fullmatch(r"[\s,]*(\(|\[)\s*", link)
+        if previous and opening:
+            closing = {"(": ")", "[": "]"}[opening.group(1)]
+            close = text.find(closing, label.end(), end)
+            enclosed = text[label_start:close] if close >= 0 else ""
+            postfix = (close >= 0 and not re.search(r"[()\[\]]", enclosed)
+                       and not DATE_RE.search(enclosed)
+                       and not re.search(r"\b(?:TBD|to\s+be\s+(?:announced|determined)|not\s+yet|pending)\b", enclosed, re.I))
         if re.match(r"\s*:\s*(?:TBD|to\s+be\s+(?:announced|determined)|not\s+yet|pending|$)",
                     text[label.end():end], re.I):
             postfix = False
