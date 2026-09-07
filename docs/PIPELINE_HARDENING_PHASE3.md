@@ -92,6 +92,11 @@ Expected exhaustion records deferred work without a false provider-failure resul
 Actual provider/configuration/output failures remain visible failures, while healthy
 compatible teams survive. Diagnostics remain in the existing developer receipt and
 Actions artifacts; there is no public progress UI.
+Concurrent JSON reads share the writer's local lock. Transient cross-process
+cache read/eviction failures are counted and recover as validated cold misses;
+they never become evidence or delete a healthy entry after a failed read. The
+concurrency contract exercises the production reader and still requires complete
+values, with a separate deterministic transient-lock recovery regression.
 
 ## Validation
 
@@ -144,6 +149,11 @@ and paragraph end tags while rejecting missing/duplicate notice containers. This
 was checked against the saved official Simons HTML as well as synthetic fixtures;
 the projection retains its October 29 LOI with Eastern time and publishes warnings
 for inconsistent full-application dates, without holiday or sibling deadlines.
+Shared submission cues survive semicolon-separated annual date lists. Project
+start dates do not become deadlines, and a later precise repetition can supply
+the same deadline's time/timezone when its first listing omitted them. The
+reported NOAA multi-year schedule has a fresh-extraction and cached-projection
+regression; Alaska time and every submission year remain supported.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -171,6 +181,14 @@ It does not request reviews, set checks, or
 merge; ordinary refresh behavior and automated browser-testing policy are unchanged.
 Failure rollback cannot overwrite a later protected main generation. During this
 dedicated release, Pages publication is held until the replacement has passed.
+
+Package construction now captures the release actually served by Pages and
+retains that exact corpus/embedding identity from the existing validated current
+or previous compatibility history. This handles a Pages rollback that differs
+from main without importing arbitrary historical passage rows. Unknown or
+malformed published identities block publication. A second bounded fetch and
+no-write package check immediately before Worker deployment rejects a changed
+Pages generation; it does not repeat provider work or rebuild the package.
 
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached

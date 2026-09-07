@@ -111,7 +111,7 @@ function validateGeneration(generation, label) {
   });
 }
 
-export function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
+export function buildAllowlist(manifest, existing, bootstrapPrevious = null, publishedRelease = undefined) {
   const identity = row => `${row?.corpus_sha256}:${row?.model_space_fingerprint}`;
   const current = compactGeneration(manifest);
   let previous = null;
@@ -123,6 +123,23 @@ export function buildAllowlist(manifest, existing, bootstrapPrevious = null) {
   if (!previous && bootstrapPrevious?.corpus_sha256
     && identity(bootstrapPrevious) !== identity(current)) {
     previous = compactGeneration(bootstrapPrevious);
+  }
+  if (publishedRelease !== undefined) {
+    assertHex(publishedRelease?.current_corpus_sha256, "published corpus_sha256");
+    assertHex(publishedRelease?.model_space_fingerprint, "published model_space_fingerprint");
+    if (publishedRelease.schema_version !== 1 || publishedRelease.model !== REQUIRED_MODEL
+        || publishedRelease.dimension !== REQUIRED_DIMENSION) {
+      throw new Error("The published release uses an incompatible embedding contract.");
+    }
+    const publishedIdentity = `${publishedRelease.current_corpus_sha256}:${publishedRelease.model_space_fingerprint}`;
+    if (identity(current) !== publishedIdentity) {
+      // Pages may have been rolled back independently of main. Retain only
+      // its exact, already known generation, never arbitrary supplied rows.
+      previous = [existing?.current, existing?.previous,
+        bootstrapPrevious ? compactGeneration(bootstrapPrevious) : null]
+        .find(row => row && identity(row) === publishedIdentity);
+      if (!previous) throw new Error("Published Pages identity is absent from validated compatibility history.");
+    }
   }
   const allowlist = {
     schema_version: 1,
@@ -192,19 +209,23 @@ async function run() {
   const bootstrapIndex = process.argv.indexOf("--bootstrap-previous");
   const bootstrapRevision = bootstrapIndex >= 0 ? process.argv[bootstrapIndex + 1] : "";
   if (bootstrapIndex >= 0 && !bootstrapRevision) throw new Error("--bootstrap-previous requires a Git revision.");
+  const publishedIndex = process.argv.indexOf("--published-release");
+  const publishedPath = publishedIndex >= 0 ? process.argv[publishedIndex + 1] : "";
+  if (publishedIndex >= 0 && !publishedPath) throw new Error("--published-release requires a captured release file.");
   const bootstrapPromise = bootstrapRevision
     ? execFileAsync("git", ["show", `${bootstrapRevision}:${MANIFEST_PATH}`], { cwd: new URL(".", ROOT) })
       .then(({ stdout }) => JSON.parse(stdout))
     : Promise.resolve(null);
-  const [manifest, vectorBuffer, canaries, existing, bootstrapPrevious] = await Promise.all([
+  const [manifest, vectorBuffer, canaries, existing, bootstrapPrevious, publishedRelease] = await Promise.all([
     readJson(MANIFEST_PATH),
     read(VECTOR_PATH),
     readJson(CANARY_PATH),
     readJson(ALLOWLIST_PATH, {}),
     bootstrapPromise,
+    publishedPath ? readFile(publishedPath, "utf8").then(JSON.parse) : Promise.resolve(undefined),
   ]);
   await validateCurrentPackage(manifest, vectorBuffer, canaries);
-  const allowlist = buildAllowlist(manifest, existing, bootstrapPrevious);
+  const allowlist = buildAllowlist(manifest, existing, bootstrapPrevious, publishedRelease);
   const allowlistBytes = jsonBytes(allowlist);
   const sourceHashes = {};
   for (const path of [

@@ -345,7 +345,13 @@ jobs:
         run: node tools/build_search_v2_voyage_vectors.mjs --production --write
       - name: Build the current/previous Worker compatibility package
         id: search-package
-        run: node tools/build_search_release_package.mjs --write
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
+            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o "${RUNNER_TEMP}/published-search-release.json"
+          node tools/build_search_release_package.mjs --write \
+            --published-release "${RUNNER_TEMP}/published-search-release.json"
       - name: Verify the complete search package is internally consistent
         id: package-integrity
         run: node tools/build_search_release_package.mjs --check
@@ -393,6 +399,14 @@ jobs:
           ' <<<"$deployments")"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
           echo "Captured the active Worker version for rollback."
+      - name: Recheck compatibility with the package actually served by Pages
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
+            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?predeploy=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o "${RUNNER_TEMP}/published-search-release.json"
+          node tools/build_search_release_package.mjs --check \
+            --published-release "${RUNNER_TEMP}/published-search-release.json"
       - name: Deploy the compatibility Worker before publishing Pages assets
         id: worker-deploy
         env:

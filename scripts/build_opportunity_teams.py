@@ -532,11 +532,19 @@ class Provider:
     def read_cache(self, path, validate):
         self.check_deadline()
         try:
-            value = validate(json.loads(path.read_text(encoding="utf-8")))
+            with self.cache_lock:
+                value = validate(json.loads(path.read_text(encoding="utf-8")))
         except FileNotFoundError:
             pass
+        except OSError:
+            # Cross-process Windows replacement or cache eviction can make a
+            # complete file briefly unreadable. Never turn that into evidence.
+            self.count("cache_read_failures")
         except (ValueError, KeyError, TypeError):
-            path.unlink(missing_ok=True)
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                self.count("cache_eviction_failures")
             self.count("invalid_cache_entries")
         else:
             self.count("cache_hits")

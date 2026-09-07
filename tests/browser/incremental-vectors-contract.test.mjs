@@ -123,6 +123,30 @@ test("same corpus with a new space retains the immediately prior Worker identity
   assert.notEqual(allowlist.current.model_space_fingerprint, allowlist.previous.model_space_fingerprint);
 });
 
+test("a rolled-back Pages generation remains compatible during its replacement", async () => {
+  const old = await build(inputs);
+  const newer = await build([...inputs, passage("newer")]);
+  const next = await build([...inputs, passage("next")]);
+  const history = buildAllowlist(newer.manifest, buildAllowlist(old.manifest, null));
+  const published = {schema_version: 1, current_corpus_sha256: old.manifest.corpus_sha256,
+    model_space_fingerprint: old.manifest.model_space_fingerprint, model: config.model, dimension: 1024};
+  const replacement = buildAllowlist(next.manifest, history, null, published);
+  assert.deepEqual(replacement.previous, history.previous);
+  assert.equal(replacement.current.corpus_sha256, next.manifest.corpus_sha256);
+  assert.deepEqual(buildAllowlist(next.manifest, replacement), replacement, "ordinary integrity checks preserve the chosen fallback");
+  assert.deepEqual(buildAllowlist(next.manifest, replacement, null, published), replacement);
+  assert.deepEqual(buildAllowlist(next.manifest, history, null, {...published,
+    current_corpus_sha256: newer.manifest.corpus_sha256}).previous, history.current);
+  assert.throws(() => buildAllowlist(next.manifest, history, null, null), /published/);
+  for (const change of [{current_corpus_sha256: "f".repeat(64)}, {model_space_fingerprint: "f".repeat(64)},
+    {model: "unknown"}, {dimension: 512}, {current_corpus_sha256: "bad"}]) {
+    assert.throws(() => buildAllowlist(next.manifest, history, null, {...published, ...change}), /published|Published/);
+  }
+  assert.throws(() => buildAllowlist(next.manifest, replacement, null, {...published,
+    current_corpus_sha256: newer.manifest.corpus_sha256}), /Published Pages identity/,
+  "a Pages change after package construction must block the pre-deployment check");
+});
+
 test("identity drift inside a fresh batch cannot mix with reused rows", async () => {
   const cold = await build(inputs);
   let calls = 0;

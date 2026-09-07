@@ -13,7 +13,7 @@ from scripts import build_opportunity_teams as teams
 from scripts.build_changes import diff_catalogs
 from scripts.extract_document_evidence import (
     build_document_entry, extract_containers, merge_document_entry,
-    enrich_document_evidence, empty_cache, source_for_record, scoped_html,
+    enrich_document_evidence, empty_cache, source_for_record, scoped_html, extract_deadlines,
 )
 from scripts.sources.registry import collect
 from scripts.sources.merge import resolve_live_records, rebuild_catalog
@@ -167,6 +167,37 @@ class DeadlineOwnership(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'bounded article'):
             extract_containers(notice.replace(b'<h1>', b'<article class="o-detail"></article><h1>', 1),
                                'text/html', '', record['primary_document_url'])
+
+    def test_shared_due_dates_survive_semicolons_and_keep_later_precise_times(self):
+        record, entry = self.entry()
+        text = ('Applications have annual due dates of June 22, 2026; May 3, 2027; and May 1, 2028. '
+                'Applications for projects starting no earlier than September 1, 2026, must be received '
+                'by 7:59 p.m. Alaska Standard Time on June 22, 2026. '
+                'Applications must be received by 7:59 p.m. AKST on May 3, 2027, for projects starting '
+                'no earlier than September 1, 2027, and May 1, 2028, for projects starting no earlier than September 1, 2028.')
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        self.assertEqual([f['date'] for f in facts], ['2026-06-22', '2027-05-03', '2028-05-01'])
+        self.assertTrue(all(f['time'] == '7:59 p.m.' for f in facts))
+        self.assertEqual([f['timezone'] for f in facts], ['Alaska', 'AKST', 'AKST'])
+        entry['facts'] = facts
+        entry.pop('deadline_extractor_identity')
+        result = merge_document_entry(record, entry)
+        self.assertTrue({'2026-06-22', '2027-05-03', '2028-05-01'} <= {d['date'] for d in result['deadlines']})
+
+    def test_explicit_submission_labels_survive_local_context_validation(self):
+        record, entry = self.entry()
+        for text, kind in [
+            ('Application Deadlines: May 11, 2026, and December 15, 2026.', 'application'),
+            ('Submissions must be submitted by December 15, 2026 (11:59 pm ET).', 'application'),
+            ('Solution Summary Due: December 15, 2026 (4:00PM ET).', 'application'),
+            ('The application period will close December 15, 2026.', 'application'),
+            ('Closing Date for this opportunity is December 15, 2026.', 'application'),
+            ('Following notification of funding amount: Full proposals will be submitted. Submission Dates and Times Closing Date for Applications: December 15, 2026.', 'application'),
+            ('Letters of Interest must be submitted by December 15, 2026.', 'letter_of_intent'),
+        ]:
+            with self.subTest(text=text):
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertIn(('2026-12-15', kind), [(f['date'], f['deadline_kind']) for f in facts])
 
 
 class NegativeResponseDiagnostics(unittest.TestCase):

@@ -71,12 +71,12 @@ DATE_RE = re.compile(
 )
 TIME_RE = re.compile(
     r"\b(\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?))"
-    r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|UTC|GMT|[ECMP][SD]?T)\b"
+    r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|Alaska|Hawaii(?:-Aleutian)?|Atlantic|UTC|GMT|AK[SD]T|HST|[ECMPA][SD]?T)\b"
     r"(?:\s+(?:Time|Standard Time|Daylight Time))?)?",
     re.I,
 )
 DEADLINE_CUE_RE = re.compile(
-    r"\b(?:deadline|due|submit(?:ted)?|submission|received|closing|"
+    r"\b(?:deadlines?|due|submit(?:ted)?|submissions?|received|closing|will close|"
     r"no later than|must be filed|applications? by|proposals? by)\b",
     re.I,
 )
@@ -84,7 +84,7 @@ DEADLINE_KINDS = (
     (
         "letter_of_intent",
         "Letter of intent deadline",
-        re.compile(r"\b(?:letter\s+of\s+intent|LOI)\b", re.I),
+        re.compile(r"\b(?:letters?\s+of\s+(?:intent|interest)|LOIs?)\b", re.I),
     ),
     (
         "concept_paper",
@@ -735,6 +735,8 @@ def deadline_kind(context, date_offset=None):
             )
             matches.append((distance, match.start(), kind, label))
     if not matches:
+        if re.search(r"\b(?:submissions?|closing\s+date|due\s+dates?|solution\s+summar(?:y|ies))\b", context, re.I):
+            return "application", "Full application deadline"
         return None
     _, _, kind, label = min(matches, key=lambda item: (item[0], item[1]))
     return kind, label
@@ -749,7 +751,7 @@ def deadline_context(container, match):
             start, end = max(start, left), min(end, right)
             break
     scan_start = start
-    for boundary in re.finditer(r"[.!?;]\s+(?=[A-Z])", text[scan_start:end]):
+    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])", text[scan_start:end]):
         position = scan_start + boundary.end()
         if re.search(r"\b[ap]\.?m\.\s*$", text[:position], re.I):
             continue
@@ -763,11 +765,17 @@ def deadline_context(container, match):
 
 def supported_submission_date(context, offset):
     prefix = context[:offset]
+    if re.search(r"\bprojects?\s+(?:starting|beginning)(?:\s+no earlier than)?\s*$", prefix, re.I):
+        return False
     # Dates for holidays, decisions, appointments and project starts are not
     # applicant submission deadlines, even beside a valid deadline field.
-    if re.search(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|"
-                 r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I):
-        return False
+    administrative = list(re.finditer(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|"
+                 r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I))
+    if administrative:
+        explicit = list(re.finditer(r"\b(?:deadlines?|due|closing\s+date|submission\s+dates?|"
+                                     r"must\s+be\s+(?:submitted|received)|received\s+by)\b", prefix, re.I))
+        if not explicit or administrative[-1].start() > explicit[-1].start():
+            return False
     return bool(DEADLINE_CUE_RE.search(context) and deadline_kind(context, offset))
 
 
@@ -829,7 +837,7 @@ def revalidate_cached_deadlines(entry):
 
 def extract_deadlines(opportunity_id, containers, document, extracted_at, review_queue=None):
     facts = []
-    seen = set()
+    seen = {}
     for container in containers:
         text = container["text"]
         for match in DATE_RE.finditer(text):
@@ -842,9 +850,6 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 continue
             kind, label = kind_result
             identity = (kind, parsed)
-            if identity in seen:
-                continue
-            seen.add(identity)
             time_match = TIME_RE.search(context)
             deadline_time = clean_text(time_match.group(1)) if time_match else None
             timezone_value = (
@@ -852,6 +857,11 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 if time_match and time_match.group(2)
                 else None
             )
+            if identity in seen:
+                prior = facts[seen[identity]]
+                if not deadline_time or (prior.get("time") and
+                        (prior.get("timezone") or prior["time"] != deadline_time or not timezone_value)):
+                    continue
             required = bool(
                 re.search(
                     r"\b(?:must|required|shall|due|no later than)\b",
@@ -871,8 +881,7 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 display += f" · {deadline_time}"
             if timezone_value:
                 display += f" {timezone_value}"
-            facts.append(
-                make_fact(
+            fact = make_fact(
                     opportunity_id,
                     "deadline",
                     label,
@@ -885,7 +894,11 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                     timezone=timezone_value,
                     required=required,
                 )
-            )
+            if identity in seen:
+                facts[seen[identity]] = fact
+            else:
+                seen[identity] = len(facts)
+                facts.append(fact)
             if len(facts) >= 12:
                 return qualify_deadline_sequence(facts, review_queue)
     return qualify_deadline_sequence(facts, review_queue)
