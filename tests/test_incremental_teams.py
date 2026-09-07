@@ -261,6 +261,60 @@ class IncrementalTeams(unittest.TestCase):
                 self.assertEqual(changed.embed_claims(claims), cold)
                 self.assertEqual(changed.counters["item_vector_misses"], 2)
 
+    def test_nonidentical_live_style_vectors_use_only_a_homogeneous_fresh_run(self):
+        def variable(url, json, **kwargs):
+            response = provider_response(url, json, **kwargs)
+            payload = response.json()
+            if "input" in json and json["input"] != teams.EMBEDDING_CANARIES:
+                for row in payload["data"]:
+                    row["embedding"] = [value + 0.000001 for value in row["embedding"]]
+            return Mock(status_code=200, json=lambda: payload)
+        code, report, model, _ = self.run_main(response=variable)
+        self.assertEqual(code, 0)
+        self.assertFalse(report["embedding_reuse_permitted"])
+        self.assertEqual(report["counters"]["reused_vector_rows"], 0)
+        self.assertEqual(report["counters"]["homogeneous_fallbacks"], 1)
+        self.assertEqual(len(model["opportunities"]), 1)
+        # New due work sees the persisted policy and cannot reuse that uncertain
+        # space, even if the next provider preflight happens to repeat exactly.
+        self.add_call()
+        code, again, _, _ = self.run_main(response=variable)
+        self.assertEqual(code, 0)
+        self.assertFalse(again["embedding_reuse_permitted"])
+        self.assertEqual(again["counters"]["reused_vector_rows"], 0)
+        self.assertEqual(again["counters"]["homogeneous_policy_runs"], 1)
+        self.assertGreater(again["counters"]["item_vector_misses"], 0)
+
+    def test_variable_space_still_rejects_cache_mixing_and_gross_discontinuity(self):
+        claims = list(teams.eligible_claims(fixture.fixture_registry()).values())
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {"VOYAGE_API_KEY": "synthetic"}):
+            with patch.object(teams.requests, "post", side_effect=provider_response):
+                teams.Provider(directory).embed_claims(claims)
+            current = teams.Provider(directory)
+            with patch.object(teams.requests, "post", side_effect=provider_response):
+                current.embed_claims(claims)
+            self.assertGreater(current.reused_vector_rows, 0)
+            def varied(url, json, **kwargs):
+                response = provider_response(url, json, **kwargs)
+                payload = response.json()
+                for row in payload["data"]:
+                    row["embedding"] = [value + .000001 for value in row["embedding"]]
+                return Mock(status_code=200, json=lambda: payload)
+            with patch.object(teams.requests, "post", side_effect=varied), self.assertRaises(teams.ProviderConfigurationError):
+                current.embed(["a new uncached scope"], "query")
+            self.assertTrue(current.space_policy_path.exists())
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {"VOYAGE_API_KEY": "synthetic"}):
+            provider = teams.Provider(directory)
+            with patch.object(teams.requests, "post", side_effect=provider_response):
+                provider.establish_embedding_space()
+            def reversed_space(url, json, **kwargs):
+                payload = provider_response(url, json, **kwargs).json()
+                for row in payload["data"]:
+                    row["embedding"] = [-value for value in row["embedding"]]
+                return Mock(status_code=200, json=lambda: payload)
+            with patch.object(teams.requests, "post", side_effect=reversed_space), self.assertRaises(teams.ProviderConfigurationError):
+                provider.embed_claims(claims)
+
 
 if __name__ == "__main__":
     unittest.main()

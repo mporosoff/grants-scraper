@@ -468,6 +468,10 @@ class Provider:
         self.space_identity = None
         self.space_canaries = {}
         self.space_lock = threading.Lock()
+        self.vector_lock = threading.Lock()
+        self.vector_reuse_allowed = True
+        self.reused_vector_rows = 0
+        self.space_policy_path = self.cache / (content_hash(EMBEDDING_CONFIG) + ".space-policy.json")
 
     def count(self, name, amount=1):
         with self.lock:
@@ -603,6 +607,11 @@ class Provider:
         # Old caches have no such identity and are intentionally cold.
         with self.space_lock:
             if self.space_identity is None:
+                # A previously observed unstable identity cannot certify cached
+                # vectors on a later run, even if a canary happens to repeat.
+                if self.space_policy_path.exists():
+                    self.vector_reuse_allowed = False
+                    self.count("homogeneous_policy_runs")
                 observed = []
                 for kind in ("document", "query"):
                     current = self.request_vectors(EMBEDDING_CANARIES, kind, normalize=False)
@@ -617,14 +626,18 @@ class Provider:
     def embed(self, texts, kind):
         signature = self.embedding_key(texts, kind)
         path = self.cache / (signature + ".vectors.json")
-        cached = self.read_cache(path, lambda value: normalized_vectors(value, len(texts)))
-        if cached is not None:
-            return cached
+        with self.vector_lock:
+            cached = self.read_cache(path, lambda value: normalized_vectors(value, len(texts))) if self.vector_reuse_allowed else None
+            if cached is not None:
+                self.count("reused_vector_rows", len(texts))
+                self.reused_vector_rows += len(texts)
+                return cached
         vectors = []
         for start in range(0, len(texts), 128):
             self.check_budget()
             vectors.extend(self.request_vectors(texts[start:start + 128], kind))
-        self.write_cache(path, vectors)
+        if self.vector_reuse_allowed:
+            self.write_cache(path, vectors)
         return vectors
 
     def request_vectors(self, texts, kind, normalize=True):
@@ -646,8 +659,24 @@ class Provider:
                 vectors = [row["embedding"] for row in rows]
                 normalized = normalized_vectors(vectors, len(inputs))
                 if anchors and vectors[-len(EMBEDDING_CANARIES):] != anchors:
-                    self.configuration_failed = True
-                    raise ProviderConfigurationError("embedding space changed during run")
+                    normalized_anchors = normalized_vectors(anchors, len(anchors))
+                    similarities = [sum(a*b for a,b in zip(left, right)) for left, right in
+                        zip(normalized_anchors, normalized[-len(anchors):])]
+                    minimum, mean = min(similarities), sum(similarities) / len(similarities)
+                    with self.lock:
+                        self.counters["minimum_canary_cosine"] = min(self.counters.get("minimum_canary_cosine", 1), minimum)
+                    # Same safeguards as the homogeneous corpus builder. Never
+                    # use these coarse gates to authorize old/new cache mixing.
+                    self.write_cache(self.space_policy_path, {"reuse_permitted": False,
+                        "reason": "unrounded_anchor_variation", "minimum_cosine": minimum, "mean_cosine": mean})
+                    with self.vector_lock:
+                        reuse_was_allowed = self.vector_reuse_allowed
+                        self.vector_reuse_allowed = False
+                        if self.reused_vector_rows or minimum < .95 or mean < .98:
+                            self.configuration_failed = True
+                            raise ProviderConfigurationError("embedding space changed; homogeneous retry required")
+                        if reuse_was_allowed:
+                            self.count("homogeneous_fallbacks")
                 return normalized[:len(texts)] if normalize else vectors
             except (ValueError, KeyError, TypeError):
                 self.count("invalid_outputs")
@@ -668,7 +697,11 @@ class Provider:
                     or value.get("vector_hash") != content_hash(value.get("vector"))):
                 raise ValueError("item embedding integrity mismatch")
             return normalized_vectors([value["vector"]], 1)[0]
-        result = [self.read_cache(path, lambda value, key=path.stem: validate_item(value, key)) for path in paths]
+        with self.vector_lock:
+            result = [self.read_cache(path, lambda value, key=path.stem: validate_item(value, key)) for path in paths] if self.vector_reuse_allowed else [None] * len(paths)
+            hits = sum(value is not None for value in result)
+            self.reused_vector_rows += hits
+            self.count("reused_vector_rows", hits)
         missing = [i for i, vector in enumerate(result) if vector is None]
         self.count("item_vector_hits", len(texts) - len(missing))
         self.count("item_vector_misses", len(missing))
@@ -678,7 +711,8 @@ class Provider:
             vectors = self.embed([texts[i] for i in batch], kind)
             for index, vector in zip(batch, vectors):
                 result[index] = vector
-                self.write_cache(paths[index], {"key": paths[index].stem, "vector": vector, "vector_hash": content_hash(vector)})
+                if self.vector_reuse_allowed:
+                    self.write_cache(paths[index], {"key": paths[index].stem, "vector": vector, "vector_hash": content_hash(vector)})
         return result
 
     def embed_claims(self, claims):
@@ -916,6 +950,7 @@ def main():
         finally:
             report["provider_requests"] = provider.calls
             report["counters"] = provider.counters
+            report["embedding_reuse_permitted"] = provider.vector_reuse_allowed
     report["coverage_after"] = coverage(existing.values())
     report["pending_after"] = sum(not attempt_completed(attempts.get(scope["id"]), attempt_key(scope), existing.get(scope["id"])) for scope in pending)
     assessed = {result["scope_id"] for result in report["results"]}
